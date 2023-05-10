@@ -4,6 +4,7 @@ using Content.Shared.CCVar;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MySqlConnector;
+using Robust.Server.Player;
 using Robust.Shared.Configuration;
 
 namespace Content.Server.SS220.Discord;
@@ -44,11 +45,11 @@ public sealed class DiscordPlayerManager
     /// Если валидация пройдена, то вернется пустая строка
     /// Если валидации не было, то вернется сгенерированный ключ
     /// </summary>
-    /// <param name="ckey"></param>
+    /// <param name="playerData"></param>
     /// <returns></returns>
-    public async Task<string> CheckAndGenerateKey(string ckey)
+    public async Task<string> CheckAndGenerateKey(IPlayerData playerData)
     {
-        var (validate, discordPlayer) = await _dbImpl.IsValidateDiscord(ckey);
+        var (validate, discordPlayer) = await _dbImpl.IsValidateDiscord(playerData.UserId);
         if (!validate)
         {
             if (discordPlayer != null)
@@ -56,7 +57,8 @@ public sealed class DiscordPlayerManager
 
             discordPlayer = new DiscordDbImpl.DiscordPlayer()
             {
-                CKey = ckey,
+                CKey = playerData.UserName,
+                SS14Id = playerData.UserId,
                 HashKey = CreateSecureRandomString()
             };
             await _dbImpl.InsertDiscord(discordPlayer);
@@ -86,13 +88,13 @@ internal sealed class DiscordDbImpl
     /// Уже прошел проверку или нет
     /// </summary>
     /// <param name="ckey"></param>
-    public async Task<(bool, DiscordPlayer?)> IsValidateDiscord(string ckey)
+    public async Task<(bool, DiscordPlayer?)> IsValidateDiscord(Guid playerId)
     {
         try
         {
             await using var db = await GetDb();
 
-            var discordPlayer = await db.PgDbContext.DiscordPlayers.SingleOrDefaultAsync(p => p.CKey == ckey);
+            var discordPlayer = await db.PgDbContext.DiscordPlayers.SingleOrDefaultAsync(p => p.SS14Id == playerId);
 
             if (discordPlayer == null)
                 return (false, null);
@@ -146,6 +148,8 @@ internal sealed class DiscordDbImpl
             modelBuilder.Entity<DiscordPlayer>(entity =>
             {
                 entity.HasIndex(p => p.Id).IsUnique();
+                entity.HasAlternateKey(p => p.SS14Id);
+                entity.Property(p => p.SS14Id).IsUnicode();
                 entity.HasIndex(p => new { p.CKey, p.DiscordId });
                 entity.Property(p => p.Id).ValueGeneratedOnAdd();
             });
@@ -187,6 +191,7 @@ internal sealed class DiscordDbImpl
     public record DiscordPlayer
     {
         public Guid Id { get; set; }
+        public Guid SS14Id { get; set; }
         public string HashKey { get; set; } = null!;
         public string CKey { get; set; } = null!;
         public string? DiscordId { get; set; }

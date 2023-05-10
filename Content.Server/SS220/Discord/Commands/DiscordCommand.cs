@@ -26,7 +26,7 @@ public sealed class DiscordCommand : IConsoleCommand
             return;
         try
         {
-            var key = await _discordPlayerManager.CheckAndGenerateKey(player.Data.UserName);
+            var key = await _discordPlayerManager.CheckAndGenerateKey(player.Data);
             var sb = new StringBuilder();
 
             if (!string.IsNullOrEmpty(key))
