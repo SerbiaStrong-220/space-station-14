@@ -1,7 +1,10 @@
 ﻿using System.Text;
+using Content.Server.Chat.Managers;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Robust.Server.Player;
 using Robust.Shared.Console;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Discord.Commands;
 
@@ -38,11 +41,13 @@ public sealed class DiscordCommand : IConsoleCommand
                 sb.Append($"Вы уже привязали свой дискорд к игре");
             }
 
-            shell.WriteLine(sb.ToString());
+            var message = sb.ToString();
+            IoCManager.Resolve<IChatManager>().ChatMessageToOne(ChatChannel.Server, message, message, default, false, player.ConnectedClient);
         }
         catch (Exception e)
         {
             shell.WriteLine("Произошла ошибка. Свяжитесь с администрацией");
+            shell.WriteLine(e.ToStringBetter());
         }
     }
 }
