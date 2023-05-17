@@ -24,10 +24,12 @@ public sealed partial class TTSSystem : EntitySystem
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
+    private string _voiceId = "Announcer";
 
     public override void Initialize()
     {
         _cfg.OnValueChanged(CCCVars.TTSEnabled, v => _isEnabled = v, true);
+        _cfg.OnValueChanged(CCCVars.TTSAnnounceVoiceId, v => _voiceId = v, true);
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
@@ -39,14 +41,13 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
     {
-        var voiceId = "TrainingRobot";
-        if(!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
+        if(!_prototypeManager.TryIndex<TTSVoicePrototype>(_voiceId, out var protoVoice))
             return;
 
         var soundData = await GenerateTTS(args.Message, protoVoice.Speaker);
         if (soundData is null) return;
 
-        RaiseNetworkEvent(new AnnounceTTSEvent(soundData.GetHashCode(), soundData), args.Source);
+        RaiseNetworkEvent(new AnnounceTTSEvent(soundData.GetHashCode(), soundData, args.DelayMs), args.Source);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)

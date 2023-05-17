@@ -251,12 +251,16 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
+        const int delayMsForSound = 5500;
         if (playSound)
         {
-            if (sender == Loc.GetString("admin-announce-announcer-default")) announcementSound = new SoundPathSpecifier(CentComAnnouncementSound); // Corvax-Announcements: Support custom alert sound from admin panel
+            if (sender == Loc.GetString("admin-announce-announcer-default"))
+            {
+                announcementSound = new SoundPathSpecifier(CentComAnnouncementSound); // Corvax-Announcements: Support custom alert sound from admin panel
+            }
             SoundSystem.Play(announcementSound?.GetSound() ?? DefaultAnnouncementSound, Filter.Broadcast(), announcementSound?.Params ?? AudioParams.Default.WithVolume(-2f));
         }
-        var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), message);
+        var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), message, delayMsForSound);
         RaiseLocalEvent(announcementEv);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
@@ -287,12 +291,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 
+        const int delayMsForSound = 5500;
         if (playDefaultSound)
         {
             SoundSystem.Play(announcementSound?.GetSound() ?? DefaultAnnouncementSound, filter, AudioParams.Default.WithVolume(-2f));
         }
 
-        var announcementEv = new AnnouncementSpokeEvent(filter, message);
+        var announcementEv = new AnnouncementSpokeEvent(filter, message, delayMsForSound);
         RaiseLocalEvent(announcementEv);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
@@ -808,10 +813,12 @@ public sealed class AnnouncementSpokeEvent : EntityEventArgs
 {
     public readonly Filter Source;
     public readonly string Message;
+    public readonly int DelayMs;
 
-    public AnnouncementSpokeEvent(Filter source, string message)
+    public AnnouncementSpokeEvent(Filter source, string message, int delayMs = 0)
     {
         Source = source;
         Message = message;
+        DelayMs = delayMs;
     }
 }

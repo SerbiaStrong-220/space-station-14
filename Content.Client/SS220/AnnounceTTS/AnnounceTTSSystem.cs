@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.AnnounceTTS;
 using Robust.Client.Graphics;
@@ -60,7 +61,7 @@ public sealed class AnnounceTTSSystem : EntitySystem
         if (!TryCreateAudioSource(ev.Data, volume, out var source))
             return;
 
-        var stream = new AudioStream(ev.Id, source);
+        var stream = new AudioStream(ev.Id, source, ev.DelayMs);
         AddEntityStreamToQueue(stream);
     }
 
@@ -115,11 +116,14 @@ public sealed class AnnounceTTSSystem : EntitySystem
         return source != null;
     }
 
-    private void PlayEntity(AudioStream stream)
+    private async void PlayEntity(AudioStream stream)
     {
-        if(!stream.Source.SetPosition(_eye.CurrentEye.Position.Position))
-            return;
+        if (stream.DelayMs != 0)
+        {
+            await Task.Delay(stream.DelayMs);
+        }
 
+        stream.Source.SetPosition(_eye.CurrentEye.Position.Position);
         stream.Source.StartPlaying();
         _currentStreams.Add(stream);
     }
@@ -147,10 +151,13 @@ public sealed class AnnounceTTSSystem : EntitySystem
         public int Id { get; }
         public IClydeAudioSource Source { get; }
 
-        public AudioStream(int id, IClydeAudioSource source)
+        public int DelayMs { get; } = 0;
+
+        public AudioStream(int id, IClydeAudioSource source, int delayMs = 0)
         {
             Id = id;
             Source = source;
+            DelayMs = delayMs;
         }
     }
 }
