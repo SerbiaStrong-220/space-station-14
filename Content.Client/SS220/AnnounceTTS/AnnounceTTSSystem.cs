@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.AnnounceTTS;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Shared.Configuration;
+using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.AnnounceTTS;
 
@@ -14,13 +16,15 @@ public sealed class AnnounceTTSSystem : EntitySystem
 {
     [Dependency] private readonly IClydeAudio _clyde = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private ISawmill _sawmill = default!;
     private float _volume = 0.0f;
 
+    private  AudioStream? _currentlyPlaying = null;
     private readonly HashSet<AudioStream> _currentStreams = new();
     private readonly Dictionary<int, Queue<AudioStream>> _entityQueues = new();
+    private readonly Queue<AudioStream> _queuedStreams = new();
 
     /// <inheritdoc />
     public override void Initialize()
@@ -33,19 +37,8 @@ public sealed class AnnounceTTSSystem : EntitySystem
     /// <inheritdoc />
     public override void FrameUpdate(float frameTime)
     {
-        var streamToRemove = new HashSet<AudioStream>();
-
-        foreach (var stream in _currentStreams.Where(stream => !stream.Source.IsPlaying))
-        {
-            stream.Source.Dispose();
-            streamToRemove.Add(stream);
-        }
-
-        foreach (var audioStream in streamToRemove)
-        {
-            _currentStreams.Remove(audioStream);
-            ProcessEntityQueue(audioStream.Id);
-        }
+        if (_queuedStreams.Count != 0 && (_currentlyPlaying == null || !_currentlyPlaying.Source.IsPlaying))
+            ProcessEntityQueue();
     }
 
     /// <inheritdoc />
@@ -58,50 +51,27 @@ public sealed class AnnounceTTSSystem : EntitySystem
     private void OnAnnounceTTSPlay(AnnounceTTSEvent ev)
     {
         var volume = _volume;
-        if (!TryCreateAudioSource(ev.Data, volume, out var source))
+        if (!_resourceCache.TryGetResource<AudioResource>(new ResPath(ev.AnnouncementSound), out var audio))
+        {
+            _sawmill.Error($"Server tried to play audio file {ev.AnnouncementSound} which does not exist.");
             return;
+        }
 
-        var stream = new AudioStream(ev.Id, source, ev.DelayMs);
-        AddEntityStreamToQueue(stream);
+        if (TryCreateAudioSource(audio, ev.AnnouncementParams.Volume, out var sourceAnnounce))
+            AddEntityStreamToQueue(new AudioStream(sourceAnnounce));
+        if (ev.Data.Length > 0 && TryCreateAudioSource(ev.Data, volume, out var source))
+            AddEntityStreamToQueue(new AudioStream(source, (int)audio.AudioStream.Length.TotalMilliseconds));
     }
 
     private void AddEntityStreamToQueue(AudioStream stream)
     {
-        if (_entityQueues.TryGetValue(stream.Id, out var queue))
-        {
-            queue.Enqueue(stream);
-        }
-        else
-        {
-            _entityQueues.Add(stream.Id, new Queue<AudioStream>(new[] { stream }));
-
-            if (!IsEntityCurrentlyPlayStream(stream.Id))
-                ProcessEntityQueue(stream.Id);
-        }
+        _queuedStreams.Enqueue(stream);
     }
 
-    private bool IsEntityCurrentlyPlayStream(int id)
+    private void ProcessEntityQueue()
     {
-        return _currentStreams.Any(s => s.Id == id);
-    }
-
-    private void ProcessEntityQueue(int id)
-    {
-        if (TryTakeEntityStreamFromQueue(id, out var stream))
-            PlayEntity(stream);
-    }
-    private bool TryTakeEntityStreamFromQueue(int id, [NotNullWhen(true)] out AudioStream? stream)
-    {
-        if (_entityQueues.TryGetValue(id, out var queue))
-        {
-            stream = queue.Dequeue();
-            if (queue.Count == 0)
-                _entityQueues.Remove(id);
-            return true;
-        }
-
-        stream = null;
-        return false;
+        if(_queuedStreams.TryDequeue(out _currentlyPlaying))
+            PlayEntity(_currentlyPlaying);
     }
 
     private bool TryCreateAudioSource(byte[] data, float volume, [NotNullWhen(true)] out IClydeAudioSource? source)
@@ -116,16 +86,20 @@ public sealed class AnnounceTTSSystem : EntitySystem
         return source != null;
     }
 
-    private async void PlayEntity(AudioStream stream)
+    private bool TryCreateAudioSource(AudioResource audio, float volume, [NotNullWhen(true)] out IClydeAudioSource? source)
     {
-        if (stream.DelayMs != 0)
-        {
-            await Task.Delay(stream.DelayMs);
-        }
+        source = _clyde.CreateAudioSource(audio);
+        source?.SetMaxDistance(float.MaxValue);
+        source?.SetReferenceDistance(1f);
+        source?.SetRolloffFactor(1f);
+        source?.SetVolume(volume);
+        return source != null;
+    }
 
-        stream.Source.SetPosition(_eye.CurrentEye.Position.Position);
+    private void PlayEntity(AudioStream stream)
+    {
+        stream.Source.SetGlobal();
         stream.Source.StartPlaying();
-        _currentStreams.Add(stream);
     }
 
     private void OnTtsVolumeChanged(float volume)
@@ -135,27 +109,24 @@ public sealed class AnnounceTTSSystem : EntitySystem
 
     private void EndStreams()
     {
-        foreach (var stream in _currentStreams)
+        foreach (var stream in _queuedStreams)
         {
             stream.Source.StopPlaying();
             stream.Source.Dispose();
         }
 
-        _currentStreams.Clear();
-        _entityQueues.Clear();
+        _queuedStreams.Clear();
     }
 
     // ReSharper disable once InconsistentNaming
     private sealed class AudioStream
     {
-        public int Id { get; }
         public IClydeAudioSource Source { get; }
 
-        public int DelayMs { get; } = 0;
+        public int DelayMs { get; }
 
-        public AudioStream(int id, IClydeAudioSource source, int delayMs = 0)
+        public AudioStream(IClydeAudioSource source, int delayMs = 0)
         {
-            Id = id;
             Source = source;
             DelayMs = delayMs;
         }

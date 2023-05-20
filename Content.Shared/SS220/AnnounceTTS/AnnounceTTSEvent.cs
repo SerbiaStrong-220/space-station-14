@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.AnnounceTTS;
 
@@ -6,17 +7,13 @@ namespace Content.Shared.SS220.AnnounceTTS;
 // ReSharper disable once InconsistentNaming
 public sealed class AnnounceTTSEvent : EntityEventArgs
 {
-    public AnnounceTTSEvent(int id, byte[] data, int delayMs)
+    public AnnounceTTSEvent(byte[] data, string announcementSound, AudioParams announcementParams)
     {
-        Id = id;
         Data = data;
-        DelayMs = delayMs;
+        AnnouncementSound = announcementSound;
+        AnnouncementParams = announcementParams;
     }
-
-    public int Id { get; }
     public byte[] Data { get; }
-    /// <summary>
-    /// Delay in microseconds
-    /// </summary>
-    public int DelayMs { get; } = 0;
+    public string AnnouncementSound { get; }
+    public AudioParams AnnouncementParams{ get; }
 }

@@ -41,13 +41,17 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
     {
-        if(!_prototypeManager.TryIndex<TTSVoicePrototype>(_voiceId, out var protoVoice))
+        if (!_isEnabled ||
+            args.Message.Length > MaxMessageChars * 2 ||
+            !_prototypeManager.TryIndex<TTSVoicePrototype>(_voiceId, out var protoVoice))
+        {
+            RaiseNetworkEvent(new AnnounceTTSEvent(new byte[]{}, args.AnnouncementSound, args.AnnouncementSoundParams), args.Source);
             return;
+        }
 
         var soundData = await GenerateTTS(args.Message, protoVoice.Speaker);
-        if (soundData is null) return;
-
-        RaiseNetworkEvent(new AnnounceTTSEvent(soundData.GetHashCode(), soundData, args.DelayMs), args.Source);
+        soundData ??= new byte[] { };
+        RaiseNetworkEvent(new AnnounceTTSEvent(soundData, args.AnnouncementSound, args.AnnouncementSoundParams), args.Source);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
