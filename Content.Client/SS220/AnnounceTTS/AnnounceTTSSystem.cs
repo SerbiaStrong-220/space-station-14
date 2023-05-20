@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.AnnounceTTS;
@@ -21,30 +22,34 @@ public sealed class AnnounceTTSSystem : EntitySystem
     private ISawmill _sawmill = default!;
     private float _volume = 0.0f;
 
-    private  AudioStream? _currentlyPlaying = null;
-    private readonly HashSet<AudioStream> _currentStreams = new();
-    private readonly Dictionary<int, Queue<AudioStream>> _entityQueues = new();
+    private readonly SemaphoreSlim _semaphoreSlim = new(1, 1);
+    private AudioStream? _currentlyPlaying;
     private readonly Queue<AudioStream> _queuedStreams = new();
 
     /// <inheritdoc />
     public override void Initialize()
     {
         _sawmill = Logger.GetSawmill("AnnounceTTSSystem");
-        _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
+        _cfg.OnValueChanged(CCCVars.TTSAnnounceVolume, OnTtsVolumeChanged, true);
         SubscribeNetworkEvent<AnnounceTTSEvent>(OnAnnounceTTSPlay);
     }
 
     /// <inheritdoc />
     public override void FrameUpdate(float frameTime)
     {
-        if (_queuedStreams.Count != 0 && (_currentlyPlaying == null || !_currentlyPlaying.Source.IsPlaying))
+        if (_queuedStreams.Count == 0)
+            return;
+
+        _semaphoreSlim.Wait();
+        if (_currentlyPlaying == null || !_currentlyPlaying.Source.IsPlaying)
             ProcessEntityQueue();
+        _semaphoreSlim.Release();
     }
 
     /// <inheritdoc />
     public override void Shutdown()
     {
-        _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
+        _cfg.UnsubValueChanged(CCCVars.TTSAnnounceVolume, OnTtsVolumeChanged);
         EndStreams();
     }
 
