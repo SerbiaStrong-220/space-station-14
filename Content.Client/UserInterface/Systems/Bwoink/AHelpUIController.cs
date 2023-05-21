@@ -123,13 +123,15 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
         {
             return;
         }
-        if (localPlayer.UserId != message.TrueSender)
+        EnsureUIHelper();
+
+        if ((localPlayer.UserId != message.TrueSender) && 
+            (UIHelper!.IsAdmin || !(UIHelper as UserAHelpUIHandler)!.IsDialogStarted)) // SS220
         {
             SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local());
             _clyde.RequestWindowAttention();
         }
-
-        EnsureUIHelper();
+        
         if (!UIHelper!.IsOpen)
         {
             AhelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
@@ -393,6 +395,7 @@ public sealed class AdminAHelpUIHandler : IAHelpUIHandler
 public sealed class UserAHelpUIHandler : IAHelpUIHandler
 {
     private readonly NetUserId _ownerId;
+    public bool IsDialogStarted = false; // SS220, True after first admin response
     public UserAHelpUIHandler(NetUserId owner)
     {
         _ownerId = owner;
@@ -408,6 +411,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         DebugTools.Assert(message.UserId == _ownerId);
         EnsureInit(_discordRelayActive);
         _chatPanel!.ReceiveLine(message);
+        IsDialogStarted = true; // SS220
         _window!.OpenCentered();
     }
 
