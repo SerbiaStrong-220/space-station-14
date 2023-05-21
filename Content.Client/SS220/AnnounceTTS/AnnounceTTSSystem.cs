@@ -1,8 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.AnnounceTTS;
 using Robust.Client.Graphics;
@@ -22,7 +19,6 @@ public sealed class AnnounceTTSSystem : EntitySystem
     private ISawmill _sawmill = default!;
     private float _volume = 0.0f;
 
-    private readonly SemaphoreSlim _semaphoreSlim = new(1, 1);
     private AudioStream? _currentlyPlaying;
     private readonly Queue<AudioStream> _queuedStreams = new();
 
@@ -40,10 +36,8 @@ public sealed class AnnounceTTSSystem : EntitySystem
         if (_queuedStreams.Count == 0)
             return;
 
-        _semaphoreSlim.Wait();
         if (_currentlyPlaying == null || !_currentlyPlaying.Source.IsPlaying)
             ProcessEntityQueue();
-        _semaphoreSlim.Release();
     }
 
     /// <inheritdoc />
