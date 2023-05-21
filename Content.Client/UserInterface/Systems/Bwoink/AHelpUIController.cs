@@ -123,13 +123,19 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
         {
             return;
         }
-        if (localPlayer.UserId != message.TrueSender)
+        EnsureUIHelper();
+
+        var isSenderAdmin = message.Text.Contains("[color=purple]") || message.Text.Contains("[color=red]"); // SS220
+        
+        if ((localPlayer.UserId != message.TrueSender) &&
+            ((localPlayer.UserId == message.UserId) // SS220
+             || (UIHelper!.IsAdmin && !isSenderAdmin) // SS220
+             || (!UIHelper!.IsAdmin))) // SS220
         {
             SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local());
             _clyde.RequestWindowAttention();
         }
-
-        EnsureUIHelper();
+        
         if (!UIHelper!.IsOpen)
         {
             AhelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
