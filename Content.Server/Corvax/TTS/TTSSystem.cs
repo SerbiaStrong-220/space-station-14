@@ -59,6 +59,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         HandleRadio(uid, args.Message, protoVoice.Speaker);
     }
+
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
     {
         if (!_isEnabled ||
