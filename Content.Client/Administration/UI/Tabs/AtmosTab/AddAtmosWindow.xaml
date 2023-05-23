@@ -1,5 +1,5 @@
 ﻿<DefaultWindow
-    xmlns="https://spacestation14.io" Title="{Loc Add Atmos}">
+    xmlns="https://spacestation14.io" Title="{Loc admin-atmos-actions-window-add-atmos}">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc admin-add-atmos-window-grid}" MinSize="100 0" />
