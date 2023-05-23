@@ -365,7 +365,7 @@ public sealed class MobThresholdSystem : EntitySystem
         {
             args.State = MobState.Dead;
             //hardcoded popup on dead Event
-            _popupSystem.PopupEntity(Loc.GetString("entity-event-death", ("Entity", IdentityManagement.Identity.Entity(args.Target, EntityManager))), target, PopupType.LargeCaution);
+            _popupSystem.PopupEntity(Loc.GetString("entity-event-death", ("Entity", IdentityManagement.Identity.Entity(args.Target, EntityManager))), target, PopupType.SmallCaution);
         }
         else if (component.CurrentThresholdState != MobState.Invalid)
         {
