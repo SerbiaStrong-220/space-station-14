@@ -5,6 +5,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared.VendingMachines
 {
@@ -173,6 +174,9 @@ namespace Content.Shared.VendingMachines
         /// </summary>
         [DataField("loopDeny")]
         public bool LoopDenyAnimation = true;
+
+        [DataField("whitelist")]
+        public EntityWhitelist? Whitelist;
         #endregion
     }
 
