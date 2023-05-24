@@ -80,9 +80,12 @@ public class IdentitySystem : SharedIdentitySystem
         var representation = GetIdentityRepresentation(uid);
         var name = GetIdentityName(uid, representation);
 
-        if (HasComp<ZombieComponent>(uid) && !name.Contains(Loc.GetString("zombie-generic")))
+        //Display Zombie status if mask equip
+        var zombieName = Loc.GetString("zombie-generic");
+        
+        if (HasComp<ZombieComponent>(uid) && !name.Contains(zombieName))
         {
-            name = GetIdentityName(uid, representation) + " (" + Loc.GetString("zombie-generic") + ")";
+            name = $"({zombieName}) " + name;
         }
 
         // Clone the old entity's grammar to the identity entity, for loc purposes.
