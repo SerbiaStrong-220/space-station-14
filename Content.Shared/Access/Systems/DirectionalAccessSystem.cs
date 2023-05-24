@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Text;
 using Content.Shared.Access.Components;
 
 namespace Content.Shared.Access.Systems;
@@ -16,22 +15,13 @@ public sealed class DirectionalAccessSystem : EntitySystem
     /// <param name="reader">A reader from a targeted entity</param>
     public bool IsDirectionAllowed(EntityUid targetUid, EntityUid requesterUid, DirectionalAccessComponent reader)
     {
-        var accessDirections = new List<Components.Directions>();
-        TryComp<TransformComponent>(targetUid, out var targetTransformComponent);
-        TryComp<TransformComponent>(requesterUid, out var requesterTransformComponent);
 
-        if (targetTransformComponent == null || requesterTransformComponent == null)
+        if (!TryComp<TransformComponent>(targetUid, out var targetTransformComponent) || !TryComp<TransformComponent>(requesterUid, out var requesterTransformComponent))
             return false;
 
-        // target.X > requester.X means that a requester positioned to the west (left by default) to a target
-        accessDirections.Add(targetTransformComponent!.Coordinates.X > requesterTransformComponent!.Coordinates.X
-            ? Components.Directions.West
-            : Components.Directions.East);
-        // target.Y > requester.Y means that a requester positioned to the south (below by default) to a target
-        accessDirections.Add(targetTransformComponent!.Coordinates.Y > requesterTransformComponent!.Coordinates.Y
-            ? Components.Directions.South
-            : Components.Directions.North);
+        var distanceVector = requesterTransformComponent.Coordinates.Position - targetTransformComponent.Coordinates.Position;
+        var accessDirection = distanceVector.GetDir();
 
-       return reader.DirectionsList.Any(x => accessDirections.Any(y => y == x));
+        return reader.DirectionsList.Any(x => accessDirection.ToString().Contains(x.ToString()));
     }
 }

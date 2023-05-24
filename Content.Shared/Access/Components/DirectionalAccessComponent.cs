@@ -22,13 +22,13 @@ public sealed class DirectionalAccessComponent : Component
     /// </summary>
     /// Possibly List of strings, datatype is too much
     [DataField("allowedDirections")]
-    public List<Directions> DirectionsList = new();
+    public List<CardinalDirections> DirectionsList = new();
 }
 
 /// <summary>
 /// Cardinal direction (N, E, S, W) enum for possible directions
 /// </summary>
-public enum Directions
+public enum CardinalDirections
 {
     North,
     East,
