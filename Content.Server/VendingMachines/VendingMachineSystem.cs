@@ -17,11 +17,14 @@ using Content.Shared.Emp;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Shared.VendingMachines;
+using Content.Server.Storage.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Interaction;
+using System;
 
 namespace Content.Server.VendingMachines
 {
@@ -59,6 +62,8 @@ namespace Content.Server.VendingMachines
             SubscribeLocalEvent<VendingMachineComponent, RestockDoAfterEvent>(OnDoAfter);
 
             SubscribeLocalEvent<VendingMachineRestockComponent, PriceCalculationEvent>(OnPriceCalculation);
+
+            SubscribeLocalEvent<VendingMachineComponent, InteractUsingEvent>(OnInteractUsing);
         }
 
         private void OnVendingPrice(EntityUid uid, VendingMachineComponent component, ref PriceCalculationEvent args)
@@ -77,6 +82,79 @@ namespace Content.Server.VendingMachines
             }
 
             args.Price += price;
+        }
+
+        private void OnInteractUsing(EntityUid uid, VendingMachineComponent component, InteractUsingEvent args)
+        {
+            if (TryComp<ServerStorageComponent>(args.Used, out ServerStorageComponent? storageComponent))
+            {
+                TryInsertFromStorage(uid, storageComponent, component);
+            }
+            else
+            {
+                TryInsertVendorItem(uid, args.Used, component);
+            }
+        }
+
+        public void TryInsertFromStorage(EntityUid uid, ServerStorageComponent storageComponent, VendingMachineComponent component)
+        {
+            if (storageComponent.StoredEntities == null)
+                return;
+
+            var storagedEnts = storageComponent.StoredEntities.ToArray();
+            uint addedCount = 0;
+            foreach (var ent in storagedEnts)
+            {
+                bool insertSuccess = TryInsertVendorItem(uid, ent, component);
+                if (insertSuccess)
+                    addedCount++;
+            }
+            // if (addedCount > 0)
+            // {
+            //     _popupSystem.PopupEntity(Loc.GetString("component-storage-insert-success", ("count", addedCount)), uid, Filter.Pvs(uid));
+            // }
+        }
+
+        public bool TryInsertVendorItem(EntityUid uid, EntityUid itemUid, VendingMachineComponent component)
+        {
+            if (component.Inventory == null)
+                return false;
+
+            if (component.Whitelist == null)
+                return false;
+
+            if (component.Whitelist != null && !component.Whitelist.IsValid(itemUid))
+                return false;
+
+        //     // if (!TryComp<SharedItemComponent>(itemUid, out SharedItemComponent? item))
+        //     //     return false;
+        //
+
+            TryComp<MetaDataComponent>(itemUid, out MetaDataComponent? metaData);
+            string name = metaData == null? "Unknown" : metaData.EntityName;
+            if (metaData == null || metaData.EntityPrototype == null)
+                return false;
+            string Id = metaData.EntityPrototype.ID;
+
+            // Console.WriteLine("itemUid = {0}, name={1}, Id={2}, comp={3}", itemUid, name, Id, component.PackPrototypeId);
+            bool matchedEntry = false;
+            foreach (var inventoryItem in component.Inventory)
+            {
+                // Console.WriteLine("inventory.Key = {0}, inventory.Value.ID={1}", inventoryItem.Key, inventoryItem.Value.ID);
+                if (Id == inventoryItem.Value.ID)
+                {
+                    matchedEntry = true;
+                    inventoryItem.Value.Amount++;
+                }
+            }
+
+            if (!matchedEntry)
+            {
+                VendingMachineInventoryEntry newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, Id, 1);
+                component.Inventory.Add(Id, newEntry);
+            }
+
+            return true;
         }
 
         protected override void OnComponentInit(EntityUid uid, VendingMachineComponent component, ComponentInit args)
