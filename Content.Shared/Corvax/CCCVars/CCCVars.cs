@@ -59,19 +59,19 @@ public sealed class CCCVars
     /// URL of the TTS server API.
     /// </summary>
     public static readonly CVarDef<bool> TTSEnabled =
-        CVarDef.Create("tts.enabled", false, CVar.SERVERONLY);
+        CVarDef.Create("tts.enabled", true, CVar.SERVERONLY);
 
     /// <summary>
     /// URL of the TTS server API.
     /// </summary>
     public static readonly CVarDef<string> TTSApiUrl =
-        CVarDef.Create("tts.api_url", "", CVar.SERVERONLY);
+        CVarDef.Create("tts.api_url", "https://api.silero.ai/voice", CVar.SERVERONLY);
 
     /// <summary>
     /// Auth token of the TTS server API.
     /// </summary>
     public static readonly CVarDef<string> TTSApiToken =
-        CVarDef.Create("tts.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+        CVarDef.Create("tts.api_token", "2337345c7fd4f656f85fbcb7d0975f26bc47b218", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     /// Default volume setting of TTS sound

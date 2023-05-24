@@ -1,3 +1,4 @@
+using System.Text;
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
@@ -7,6 +8,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Zombies;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
 
@@ -78,6 +80,13 @@ public class IdentitySystem : SharedIdentitySystem
 
         var representation = GetIdentityRepresentation(uid);
         var name = GetIdentityName(uid, representation);
+
+        //Display Zombie status if mask equip
+        var zombieName = Loc.GetString("zombie-generic");
+        if (HasComp<ZombieComponent>(uid) && !name.Contains(zombieName))
+        {
+            name = $"({zombieName}) " + name;
+        }
 
         // Clone the old entity's grammar to the identity entity, for loc purposes.
         if (TryComp<GrammarComponent>(uid, out var grammar))
