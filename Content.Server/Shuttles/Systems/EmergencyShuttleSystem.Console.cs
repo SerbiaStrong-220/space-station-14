@@ -209,8 +209,8 @@ public sealed partial class EmergencyShuttleSystem
             if (!TryComp<StationCentcommComponent>(stationUid, out var centcomm) ||
                 Deleted(centcomm.Entity) || pod.LaunchTime == null || pod.LaunchTime < _timing.CurTime)
             {
-            if (CentCom == null || pod.LaunchTime == null || pod.LaunchTime < _timing.CurTime)
-                continue;
+                if (centcomm == null || pod.LaunchTime == null || pod.LaunchTime < _timing.CurTime)
+                    continue;
             }
 
             // Don't dock them. If you do end up doing this then stagger launch.
