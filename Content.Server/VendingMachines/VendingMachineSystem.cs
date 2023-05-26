@@ -90,8 +90,7 @@ namespace Content.Server.VendingMachines
             if (args.Handled)
                 return;
 
-            // How can we insert tools in vending machines?
-            if (TryComp(args.Used, out ToolComponent? tool) || TryComp(args.Used, out VendingMachineRestockComponent? restock) || component.Broken || !this.IsPowered(uid, EntityManager))
+            if (component.Broken || !this.IsPowered(uid, EntityManager))
             {
                 return;
             }
@@ -105,12 +104,13 @@ namespace Content.Server.VendingMachines
             if (TryComp<ServerStorageComponent>(args.Used, out ServerStorageComponent? storageComponent))
             {
                 TryInsertFromStorage(uid, storageComponent, component);
+                args.Handled = true;
             }
             else
             {
-                TryInsertVendorItem(uid, args.Used, component);
+                if (TryInsertVendorItem(uid, args.Used, component))
+                    args.Handled = true;
             }
-            args.Handled = true;
         }
 
         public void TryInsertFromStorage(EntityUid uid, ServerStorageComponent storageComponent, VendingMachineComponent component)
