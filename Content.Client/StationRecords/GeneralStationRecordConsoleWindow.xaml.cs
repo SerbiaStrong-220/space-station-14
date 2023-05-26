@@ -160,24 +160,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     {
         RecordContainer.DisposeAllChildren();
         RecordContainer.RemoveAllChildren();
-        
-        IEntityManager entityManager = IoCManager.Resolve<IEntityManager>();
-        IPrototypeManager prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-        HumanoidAppearanceSystem appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
-        
-        entityManager.DeleteEntity(_previewDummy);
-        
-        var profile = record.Profile ?? new HumanoidCharacterProfile();
-        _previewDummy = entityManager.SpawnEntity(prototypeManager.Index<SpeciesPrototype>(profile.Species).DollPrototype, MapCoordinates.Nullspace);
-        appearanceSystem.LoadProfile(_previewDummy, profile);
-        GiveDummyJobClothes(_previewDummy, record.JobPrototype, profile);
 
-        var spriteViewBox = new BoxContainer();
-        var sprite = entityManager.GetComponent<SpriteComponent>(_previewDummy);
-        
-        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = (5, 5)});
-        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = (5, 5), OverrideDirection = Direction.East});
-        
         var recordControls = new Control[]
         {
             new Label()
@@ -185,7 +168,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
                 Text = record.Name,
                 StyleClasses = { "LabelBig" }
             },
-            spriteViewBox,
+            SetupCharacterSpriteView(record),
             new Label()
             {
                 Text = Loc.GetString("general-station-record-console-record-age", ("age", record.Age.ToString()))
@@ -219,6 +202,27 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         }
     }
 
+    private BoxContainer SetupCharacterSpriteView(GeneralStationRecord record)
+    {
+        IEntityManager entityManager = IoCManager.Resolve<IEntityManager>();
+        IPrototypeManager prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        HumanoidAppearanceSystem appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
+        
+        entityManager.DeleteEntity(_previewDummy);
+        
+        var profile = record.Profile ?? new HumanoidCharacterProfile();
+        _previewDummy = entityManager.SpawnEntity(prototypeManager.Index<SpeciesPrototype>(profile.Species).DollPrototype, MapCoordinates.Nullspace);
+        appearanceSystem.LoadProfile(_previewDummy, profile);
+        GiveDummyJobClothes(_previewDummy, record.JobPrototype, profile);
+
+        var spriteViewBox = new BoxContainer();
+        var sprite = entityManager.GetComponent<SpriteComponent>(_previewDummy);
+        
+        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = (5, 5)});
+        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = (5, 5), OverrideDirection = Direction.East});
+
+        return spriteViewBox;
+    }
     private void GiveDummyJobClothes(EntityUid dummy, string jobPrototype, HumanoidCharacterProfile profile)
     {
         IEntityManager entityManager = IoCManager.Resolve<IEntityManager>();
