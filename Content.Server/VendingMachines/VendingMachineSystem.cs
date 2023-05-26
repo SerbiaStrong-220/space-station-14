@@ -25,6 +25,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Interaction;
 using System;
+using Content.Shared.Tools.Components;
 
 namespace Content.Server.VendingMachines
 {
@@ -86,6 +87,21 @@ namespace Content.Server.VendingMachines
 
         private void OnInteractUsing(EntityUid uid, VendingMachineComponent component, InteractUsingEvent args)
         {
+            if (args.Handled)
+                return;
+
+            // How can we insert tools in vending machines?
+            if (TryComp(args.Used, out ToolComponent? tool) || TryComp(args.Used, out VendingMachineRestockComponent? restock) || component.Broken || !this.IsPowered(uid, EntityManager))
+            {
+                return;
+            }
+
+            if (!IsAuthorized(uid, args.User, component))
+            {
+                Deny(uid, component);
+                return;
+            }
+
             if (TryComp<ServerStorageComponent>(args.Used, out ServerStorageComponent? storageComponent))
             {
                 TryInsertFromStorage(uid, storageComponent, component);
@@ -94,6 +110,7 @@ namespace Content.Server.VendingMachines
             {
                 TryInsertVendorItem(uid, args.Used, component);
             }
+            args.Handled = true;
         }
 
         public void TryInsertFromStorage(EntityUid uid, ServerStorageComponent storageComponent, VendingMachineComponent component)
@@ -109,10 +126,15 @@ namespace Content.Server.VendingMachines
                 if (insertSuccess)
                     addedCount++;
             }
-            // if (addedCount > 0)
-            // {
+            if (addedCount > 0)
+            {
+                Popup.PopupEntity(Loc.GetString("vending-machine-insert-fromStorage-success", ("this", uid),
+                    ("count", addedCount)),
+                uid,
+                PopupType.Small);
+
             //     _popupSystem.PopupEntity(Loc.GetString("component-storage-insert-success", ("count", addedCount)), uid, Filter.Pvs(uid));
-            // }
+            }
         }
 
         public bool TryInsertVendorItem(EntityUid uid, EntityUid itemUid, VendingMachineComponent component)
@@ -125,10 +147,6 @@ namespace Content.Server.VendingMachines
 
             if (component.Whitelist != null && !component.Whitelist.IsValid(itemUid))
                 return false;
-
-        //     // if (!TryComp<SharedItemComponent>(itemUid, out SharedItemComponent? item))
-        //     //     return false;
-        //
 
             TryComp<MetaDataComponent>(itemUid, out MetaDataComponent? metaData);
             string name = metaData == null? "Unknown" : metaData.EntityName;
@@ -153,6 +171,12 @@ namespace Content.Server.VendingMachines
                 VendingMachineInventoryEntry newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, Id, 1);
                 component.Inventory.Add(Id, newEntry);
             }
+            // Popup.PopupEntity(Loc.GetString("vending-machine-insert-item-success", ("this", uid),
+            //         ("item", name)),
+            //     uid,
+            //     PopupType.Small);
+
+            Del(itemUid);
 
             return true;
         }
