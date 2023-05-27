@@ -85,15 +85,20 @@ namespace Content.Server.VendingMachines
             args.Price += price;
         }
 
+        /// <summary>
+        /// Inserts items listed in 'whitelist' from player on interact
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="component"></param>
+        /// <param name="args"></param>
+        ///
         private void OnInteractUsing(EntityUid uid, VendingMachineComponent component, InteractUsingEvent args)
         {
             if (args.Handled)
                 return;
 
             if (component.Broken || !this.IsPowered(uid, EntityManager))
-            {
                 return;
-            }
 
             if (!IsAuthorized(uid, args.User, component))
             {
@@ -101,7 +106,7 @@ namespace Content.Server.VendingMachines
                 return;
             }
 
-            if (TryComp<ServerStorageComponent>(args.Used, out ServerStorageComponent? storageComponent))
+            if (TryComp<ServerStorageComponent>(args.Used, out var storageComponent))
             {
                 TryInsertFromStorage(uid, storageComponent, component);
                 args.Handled = true;
@@ -113,14 +118,21 @@ namespace Content.Server.VendingMachines
             }
         }
 
-        public void TryInsertFromStorage(EntityUid uid, ServerStorageComponent storageComponent, VendingMachineComponent component)
+        /// <summary>
+        /// Inserts items from storage
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="storageComponent">Storage which holds insertable items</param>
+        /// <param name="component"></param>
+        ///
+        private void TryInsertFromStorage(EntityUid uid, ServerStorageComponent storageComponent, VendingMachineComponent component)
         {
             if (storageComponent.StoredEntities == null)
                 return;
 
-            var storagedEnts = storageComponent.StoredEntities.ToArray();
-            uint addedCount = 0;
-            foreach (var ent in storagedEnts)
+            var storedEnts = storageComponent.StoredEntities.ToArray();
+            var addedCount = 0;
+            foreach (var ent in storedEnts)
             {
                 bool insertSuccess = TryInsertVendorItem(uid, ent, component);
                 if (insertSuccess)
@@ -132,34 +144,35 @@ namespace Content.Server.VendingMachines
                     ("count", addedCount)),
                 uid,
                 PopupType.Small);
-
-            //     _popupSystem.PopupEntity(Loc.GetString("component-storage-insert-success", ("count", addedCount)), uid, Filter.Pvs(uid));
             }
         }
 
-        public bool TryInsertVendorItem(EntityUid uid, EntityUid itemUid, VendingMachineComponent component)
+        /// <summary>
+        /// Inserts items from hand
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="itemUid">Item to insert. Needs to be listed in 'whitelist'</param>
+        /// <param name="component"></param>
+        ///
+        private bool TryInsertVendorItem(EntityUid uid, EntityUid itemUid, VendingMachineComponent component)
         {
-            if (component.Inventory == null)
-                return false;
-
             if (component.Whitelist == null)
                 return false;
 
-            if (component.Whitelist != null && !component.Whitelist.IsValid(itemUid))
+            if (!component.Whitelist.IsValid(itemUid))
                 return false;
 
-            TryComp<MetaDataComponent>(itemUid, out MetaDataComponent? metaData);
-            string name = metaData == null? "Unknown" : metaData.EntityName;
-            if (metaData == null || metaData.EntityPrototype == null)
+            if (!TryComp<MetaDataComponent>(itemUid, out var metaData))
                 return false;
-            string Id = metaData.EntityPrototype.ID;
 
-            // Console.WriteLine("itemUid = {0}, name={1}, Id={2}, comp={3}", itemUid, name, Id, component.PackPrototypeId);
+            if (metaData.EntityPrototype == null)
+                return false;
+
+            string id = metaData.EntityPrototype.ID;
             bool matchedEntry = false;
             foreach (var inventoryItem in component.Inventory)
             {
-                // Console.WriteLine("inventory.Key = {0}, inventory.Value.ID={1}", inventoryItem.Key, inventoryItem.Value.ID);
-                if (Id == inventoryItem.Value.ID)
+                if (id == inventoryItem.Value.ID)
                 {
                     matchedEntry = true;
                     inventoryItem.Value.Amount++;
@@ -168,14 +181,9 @@ namespace Content.Server.VendingMachines
 
             if (!matchedEntry)
             {
-                VendingMachineInventoryEntry newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, Id, 1);
-                component.Inventory.Add(Id, newEntry);
+                VendingMachineInventoryEntry newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, id, 1);
+                component.Inventory.Add(id, newEntry);
             }
-            // Popup.PopupEntity(Loc.GetString("vending-machine-insert-item-success", ("this", uid),
-            //         ("item", name)),
-            //     uid,
-            //     PopupType.Small);
-
             Del(itemUid);
 
             return true;
