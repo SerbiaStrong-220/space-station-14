@@ -24,7 +24,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Interaction;
-using System;
 using Content.Shared.Tools.Components;
 
 namespace Content.Server.VendingMachines
