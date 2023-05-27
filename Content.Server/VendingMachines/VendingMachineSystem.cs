@@ -180,7 +180,7 @@ namespace Content.Server.VendingMachines
 
             if (!matchedEntry)
             {
-                VendingMachineInventoryEntry newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, id, 1);
+                var newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, id, 1);
                 component.Inventory.Add(id, newEntry);
             }
             Del(itemUid);
