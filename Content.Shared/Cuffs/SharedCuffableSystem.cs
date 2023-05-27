@@ -256,7 +256,7 @@ namespace Content.Shared.Cuffs
             }
 
             TryCuffing(args.User, target, uid, component);
-            args.Handled = true;
+            args.Handled = false;
         }
 
         private void OnCuffMeleeHit(EntityUid uid, HandcuffComponent component, MeleeHitEvent args)
