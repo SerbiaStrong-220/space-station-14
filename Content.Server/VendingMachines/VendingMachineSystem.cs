@@ -112,7 +112,7 @@ namespace Content.Server.VendingMachines
             }
             else
             {
-                if (TryInsertVendorItem(uid, args.Used, component))
+                if (TryInsertVendorItem(args.Used, component))
                     args.Handled = true;
             }
         }
@@ -129,31 +129,21 @@ namespace Content.Server.VendingMachines
             if (storageComponent.StoredEntities == null)
                 return;
 
-            var storedEnts = storageComponent.StoredEntities.ToArray();
-            var addedCount = 0;
-            foreach (var ent in storedEnts)
-            {
-                bool insertSuccess = TryInsertVendorItem(uid, ent, component);
-                if (insertSuccess)
-                    addedCount++;
-            }
+            var storedEntities = storageComponent.StoredEntities.ToArray();
+            var addedCount = storedEntities.Select(ent => TryInsertVendorItem(ent, component)).Count(insertSuccess => insertSuccess);
             if (addedCount > 0)
             {
-                Popup.PopupEntity(Loc.GetString("vending-machine-insert-fromStorage-success", ("this", uid),
-                    ("count", addedCount)),
-                uid,
-                PopupType.Small);
+                Popup.PopupEntity(Loc.GetString("vending-machine-insert-fromStorage-success", ("this", uid), ("count", addedCount)), uid);
             }
         }
 
         /// <summary>
         /// Inserts items from hand
         /// </summary>
-        /// <param name="uid"></param>
         /// <param name="itemUid">Item to insert. Needs to be listed in 'whitelist'</param>
         /// <param name="component"></param>
         ///
-        private bool TryInsertVendorItem(EntityUid uid, EntityUid itemUid, VendingMachineComponent component)
+        private bool TryInsertVendorItem(EntityUid itemUid, VendingMachineComponent component)
         {
             if (component.Whitelist == null)
                 return false;
@@ -167,22 +157,19 @@ namespace Content.Server.VendingMachines
             if (metaData.EntityPrototype == null)
                 return false;
 
-            string id = metaData.EntityPrototype.ID;
-            bool matchedEntry = false;
-            foreach (var inventoryItem in component.Inventory)
-            {
-                if (id == inventoryItem.Value.ID)
-                {
-                    matchedEntry = true;
-                    inventoryItem.Value.Amount++;
-                }
-            }
+            var id = metaData.EntityPrototype.ID;
 
-            if (!matchedEntry)
+            var inventoryItem = component.Inventory.GetValueOrDefault(id);
+            if (inventoryItem == null)
             {
                 var newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, id, 1);
                 component.Inventory.Add(id, newEntry);
             }
+            else
+            {
+                inventoryItem.Amount++;
+            }
+
             Del(itemUid);
 
             return true;
