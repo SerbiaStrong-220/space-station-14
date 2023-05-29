@@ -1,0 +1,72 @@
+﻿- type: guideEntry
+  id: SpaceLaw
+  name: guide-entry-space-law
+  text: "/ServerInfo/Guidebook/Law/SL.xml"
+  children:
+  - Jurisdiction
+  - Trials
+  - Charges
+
+- type: guideEntry
+  id: Jurisdiction
+  name: guide-entry-jurisdiction
+  text: "/ServerInfo/Guidebook/Law/Juris.xml"
+
+- type: guideEntry
+  id: Trials
+  name: guide-entry-trial-prodedure
+  text: "/ServerInfo/Guidebook/Law/Trials.xml"
+
+- type: guideEntry
+  id: Charges
+  name: guide-entry-charges-and-times
+  text: "/ServerInfo/Guidebook/Law/Charges.xml"
+  children:
+  - х00
+  - х01
+  - х02
+  - х03
+  - х04
+  - х05
+  - х06
+  - х07
+
+- type: guideEntry
+  id: х00
+  name: guide-entry-x00
+  text: "/ServerInfo/Guidebook/Law/X00.xml"
+
+- type: guideEntry
+  id: х01
+  name: guide-entry-x01
+  text: "/ServerInfo/Guidebook/Law/X01.xml"
+
+- type: guideEntry
+  id: х02
+  name: guide-entry-x02
+  text: "/ServerInfo/Guidebook/Law/X02.xml"
+
+- type: guideEntry
+  id: х03
+  name: guide-entry-x03
+  text: "/ServerInfo/Guidebook/Law/X03.xml"
+
+- type: guideEntry
+  id: х04
+  name: guide-entry-x04
+  text: "/ServerInfo/Guidebook/Law/X04.xml"
+
+- type: guideEntry
+  id: х05
+  name: guide-entry-x05
+  text: "/ServerInfo/Guidebook/Law/X05.xml"
+
+- type: guideEntry
+  id: х06
+  name: guide-entry-x06
+  text: "/ServerInfo/Guidebook/Law/X06.xml"
+
+- type: guideEntry
+  id: х07
+  name: guide-entry-x07
+  text: "/ServerInfo/Guidebook/Law/X07.xml"

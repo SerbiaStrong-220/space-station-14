@@ -27,3 +27,17 @@ guide-entry-ss14 = Космическая станция 14
 guide-entry-robotics = Робототехника
 guide-entry-security = Безопасность станции
 guide-entry-dna = ДНК
+
+guide-entry-space-law = Корпоративный Закон
+guide-entry-jurisdiction = Основные Права Разумных Существ
+guide-entry-trial-prodedure = Судебные процедуры
+guide-entry-charges-and-times = Справочник статей
+
+guide-entry-x00 = х00 статья
+guide-entry-x01 = х01 статья
+guide-entry-x02 = х02 статья
+guide-entry-x03 = х03 статья
+guide-entry-x04 = х04 статья
+guide-entry-x05 = х05 статья
+guide-entry-x06 = х06 статья
+guide-entry-x07 = х07 статья
