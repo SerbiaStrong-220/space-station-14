@@ -669,6 +669,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             var observer = ghosts.HasComponent(playerEntity);
 
+            // admin ghosts should hear whispers on any range
+            if (observer && _adminManager.IsAdmin((IPlayerSession) player))
+            {
+                recipients.Add(player, new ICChatRecipientData(-1, true));
+                continue;
+            }
+
             // even if they are an observer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceRange)
             {
@@ -676,8 +683,8 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue;
             }
 
-            if (observer)
-                recipients.Add(player, new ICChatRecipientData(-1, true));
+            //if (observer)
+            //    recipients.Add(player, new ICChatRecipientData(-1, true));
         }
 
         RaiseLocalEvent(new ExpandICChatRecipientstEvent(source, voiceRange, recipients));
