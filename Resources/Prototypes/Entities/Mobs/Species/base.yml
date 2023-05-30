@@ -84,7 +84,8 @@
       - TemporaryBlindness
       - Pacified
   - type: Blindable
-  # Other
+  # Other 
+  - type: Hudable
   - type: Inventory
   - type: InventorySlots
   - type: Clickable

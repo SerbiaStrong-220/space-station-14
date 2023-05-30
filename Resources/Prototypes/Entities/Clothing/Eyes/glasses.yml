@@ -113,6 +113,7 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
+  
 
 - type: entity
   parent: ClothingEyesBase
@@ -125,6 +126,7 @@
   - type: Clothing
     sprite: Clothing/Eyes/Glasses/secglasses.rsi
   - type: FlashImmunity
+  - type: SecurityHud
   - type: EyeProtection
     protectionTime: 5
 
