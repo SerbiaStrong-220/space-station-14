@@ -684,7 +684,6 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance))
             {
                 recipients.Add(player, new ICChatRecipientData(distance, observer));
-                continue;
             }
         }
 
