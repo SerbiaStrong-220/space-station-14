@@ -406,7 +406,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            if (data.Range <= WhisperRange)
+            if (data.Range <= WhisperRange || data.Observer)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.ConnectedClient);
             else
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.ConnectedClient);
@@ -557,6 +557,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
+            if (data.Range > VoiceRange && channel == ChatChannel.Emotes)
+                continue;
+            if (data.Range > VoiceRange && channel == ChatChannel.LOOC)
+                continue;
             if (entRange == MessageRangeCheckResult.Disallowed)
                 continue;
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
@@ -677,14 +681,11 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
 
             // even if they are an observer, in some situations we still need the range
-            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceRange)
+            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance))
             {
                 recipients.Add(player, new ICChatRecipientData(distance, observer));
                 continue;
             }
-
-            //if (observer)
-            //    recipients.Add(player, new ICChatRecipientData(-1, true));
         }
 
         RaiseLocalEvent(new ExpandICChatRecipientstEvent(source, voiceRange, recipients));
