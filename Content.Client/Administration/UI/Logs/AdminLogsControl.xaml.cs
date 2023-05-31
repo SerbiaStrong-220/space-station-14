@@ -50,6 +50,8 @@ public sealed partial class AdminLogsControl : Control
 
     private int CurrentRound { get; set; }
 
+    public DateTime? From => FromDateTime.TryGetDateTime();
+    public DateTime? To => ToDateTime.TryGetDateTime();
     public int SelectedRoundId => RoundSpinBox.Value;
     public string Search => LogSearch.Text;
     private int ShownLogs { get; set; }

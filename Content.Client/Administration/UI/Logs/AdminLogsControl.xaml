@@ -30,6 +30,9 @@
                     </BoxContainer>
                     <aui:VSeparator/>
                     <BoxContainer Orientation="Vertical" MinWidth="200">
+                        <aui:DateTimeEdit Name="FromDateTime" PlaceHolder="{Loc admin-logs-search-datetime-from-placeholder}"/>
+                        <aui:DateTimeEdit Name="ToDateTime" PlaceHolder="{Loc admin-logs-search-datetime-to-placeholder}"/>
+                        <aui:HSeparator/>
                         <LineEdit Name="PlayerSearch" Access="Public" StyleClasses="actionSearchBox"
                                   HorizontalExpand="true" PlaceHolder="{Loc admin-logs-search-players-placeholder}"/>
                         <Button Name="IncludeNonPlayersButton" Text="{Loc admin-logs-include-non-player}"

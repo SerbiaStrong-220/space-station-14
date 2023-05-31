@@ -9,6 +9,9 @@ admin-logs-reset-with-id = Сбросить раунд (#{ $id })
 admin-logs-search-types-placeholder = Поиск типа... (ИЛИ)
 admin-logs-select-all = Все
 admin-logs-select-none = Никакие
+# Date Time
+admin-logs-search-datetime-from-placeholder = От
+admin-logs-search-datetime-to-placeholder = До
 # Players
 admin-logs-search-players-placeholder = Поиск игрока... (ИЛИ)
 admin-logs-select-none = Никакие

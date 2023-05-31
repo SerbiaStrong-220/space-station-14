@@ -12,6 +12,10 @@ admin-logs-search-types-placeholder = Search Types (OR)
 admin-logs-select-all = All
 admin-logs-select-none = None
 
+# Date Time
+admin-logs-search-datetime-from-placeholder = From
+admin-logs-search-datetime-to-placeholder = To
+
 # Players
 admin-logs-search-players-placeholder = Search Players (OR)
 admin-logs-select-none = None
