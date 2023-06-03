@@ -557,10 +557,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
-            if (data.Range > VoiceRange && channel == ChatChannel.Emotes)
-                continue;
-            if (data.Range > VoiceRange && channel == ChatChannel.LOOC)
-                continue;
             if (entRange == MessageRangeCheckResult.Disallowed)
                 continue;
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
@@ -681,7 +677,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
 
             // even if they are an observer, in some situations we still need the range
-            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance))
+            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance)
+                && (observer || distance < voiceRange))
             {
                 recipients.Add(player, new ICChatRecipientData(distance, observer));
             }
