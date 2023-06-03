@@ -67,6 +67,7 @@
     time: 3
   - type: Airlock
     openUnlitVisible: true # Corvax-Resprite-Airlocks
+  - type: DoorBolt
   - type: Appearance
   - type: WiresVisuals
   - type: ApcPowerReceiver
@@ -95,6 +96,8 @@
   - type: DeviceLinkSource
     ports:
       - DoorStatus
+  - type: SoundOnOverload
+  - type: SpawnOnOverload
   - type: UserInterface
     interfaces:
     - key: enum.WiresUiKey.Key
