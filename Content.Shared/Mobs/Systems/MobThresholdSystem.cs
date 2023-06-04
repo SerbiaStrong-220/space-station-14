@@ -4,6 +4,8 @@ using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
+using Robust.Shared.GameStates;
+using Content.Shared.Popups;
 
 namespace Content.Shared.Mobs.Systems;
 
@@ -12,12 +14,39 @@ public sealed class MobThresholdSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
 
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     public override void Initialize()
     {
+        SubscribeLocalEvent<MobThresholdsComponent, ComponentGetState>(OnGetState);
+        SubscribeLocalEvent<MobThresholdsComponent, ComponentHandleState>(OnHandleState);
+
         SubscribeLocalEvent<MobThresholdsComponent, ComponentShutdown>(MobThresholdShutdown);
         SubscribeLocalEvent<MobThresholdsComponent, ComponentStartup>(MobThresholdStartup);
         SubscribeLocalEvent<MobThresholdsComponent, DamageChangedEvent>(OnDamaged);
         SubscribeLocalEvent<MobThresholdsComponent, UpdateMobStateEvent>(OnUpdateMobState);
+    }
+
+    private void OnGetState(EntityUid uid, MobThresholdsComponent component, ref ComponentGetState args)
+    {
+        var thresholds = new Dictionary<FixedPoint2, MobState>();
+        foreach (var (key, value) in component.Thresholds)
+        {
+            thresholds.Add(key, value);
+        }
+        args.State = new MobThresholdsComponentState(thresholds,
+            component.TriggersAlerts,
+            component.CurrentThresholdState,
+            component.AllowRevives);
+    }
+
+    private void OnHandleState(EntityUid uid, MobThresholdsComponent component, ref ComponentHandleState args)
+    {
+        if (args.Current is not MobThresholdsComponentState state)
+            return;
+        component.Thresholds = new SortedDictionary<FixedPoint2, MobState>(state.UnsortedThresholds);
+        component.TriggersAlerts = state.TriggersAlerts;
+        component.CurrentThresholdState = state.CurrentThresholdState;
+        component.AllowRevives = state.AllowRevives;
     }
 
     #region Public API
@@ -222,7 +251,16 @@ public sealed class MobThresholdSystem : EntitySystem
         if (!Resolve(target, ref threshold))
             return;
 
+        // create a duplicate dictionary so we don't modify while enumerating.
+        var thresholds = new Dictionary<FixedPoint2, MobState>(threshold.Thresholds);
+        foreach (var (damageThreshold, state) in thresholds)
+        {
+            if (state != mobState)
+                continue;
+            threshold.Thresholds.Remove(damageThreshold);
+        }
         threshold.Thresholds[damage] = mobState;
+        Dirty(threshold);
         VerifyThresholds(target, threshold);
     }
 
@@ -362,6 +400,8 @@ public sealed class MobThresholdSystem : EntitySystem
         if (!component.AllowRevives && component.CurrentThresholdState == MobState.Dead)
         {
             args.State = MobState.Dead;
+            //hardcoded popup on dead Event
+            _popupSystem.PopupEntity(Loc.GetString("entity-event-death", ("Entity", IdentityManagement.Identity.Entity(args.Target, EntityManager))), target, PopupType.SmallCaution);
         }
         else if (component.CurrentThresholdState != MobState.Invalid)
         {

@@ -5,6 +5,7 @@ salvage-expedition-structure-remaining =
         [few] цели.
        *[other] целей.
     }
+salvage-expedition-megafauna-remaining = { $count } megafauna remaining.
 salvage-expedition-window-title = Утилизаторские экспедиции
 salvage-expedition-window-difficulty = Сложность:
 salvage-expedition-window-details = Подробности:
@@ -19,17 +20,19 @@ salvage-expedition-window-claim = Принять
 salvage-expedition-window-next = Следующее предложение
 # Expedition descriptions
 salvage-expedition-desc-mining = Добывайте ресурсы внутри зоны экспедиции.
-#  С вас удержат налог в размере {$tax}% от добытых ресурсов.
+#  С вас удержат налог в размере { $tax }% от добытых ресурсов.
 salvage-expedition-desc-structure = Уничтожьте { $count } ед. { $structure } внутри зоны экспедиции.
+salvage-expedition-desc-elimination = Kill a large and dangerous creature inside the area.
 salvage-expedition-type-Mining = Добыча
 salvage-expedition-type-Destruction = Уничтожение
+salvage-expedition-type-Elimination = Elimination
 salvage-expedition-difficulty-Minimal = Минимальная
 salvage-expedition-difficulty-Minor = Невысокая
 salvage-expedition-difficulty-Moderate = Умеренная
 salvage-expedition-difficulty-Hazardous = Высокая
 salvage-expedition-difficulty-Extreme = Экстремальная
 # Runner
-salvage-expedition-not-all-present = Not all salvagers are aboard the shuttle!
+salvage-expedition-not-all-present = Не все утилизаторы вернулись на борт шаттла!
 # Runner
 salvage-expedition-announcement-countdown-minutes =
     До окончания экспедиции осталась { $duration } { $duration ->

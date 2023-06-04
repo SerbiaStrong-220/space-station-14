@@ -12,7 +12,8 @@ ui-options-default = По-умолчанию
 ## Audio menu
 
 ui-options-master-volume = Основная громкость:
-ui-options-midi-volume = MIDI (Инструменты) громкость:
+ui-options-midi-volume = Громкость MIDI (Муз. инструменты):
+ui-options-ambient-music-volume = Ambient music volume:
 ui-options-ambience-volume = Громкость окружения:
 ui-options-lobby-volume = Громкость лобби и окончания раунда:
 ui-options-ambience-max-sounds = Кол-во одновременных звуков окружения:
@@ -20,8 +21,6 @@ ui-options-lobby-music = Музыка в лобби
 ui-options-restart-sounds = Звуки перезапуска раунда
 ui-options-event-music = Музыка событий
 ui-options-admin-sounds = Музыка админов
-ui-options-station-ambience = Эмбиент станции
-ui-options-space-ambience = Эмбиент космоса
 ui-options-volume-label = Громкость
 ui-options-volume-percent = { TOSTRING($volume, "P0") }
 
@@ -145,7 +144,7 @@ ui-options-function-editor-cancel-place = Отменить размещение
 ui-options-function-editor-grid-place = Размещать в сетке
 ui-options-function-editor-line-place = Размещать в линию
 ui-options-function-editor-rotate-object = Повернуть
-ui-options-function-editor-flip-object = Flip
+ui-options-function-editor-flip-object = Перевернуть
 ui-options-function-editor-copy-object = Копировать
 ui-options-function-open-abilities-menu = Открыть меню действий
 ui-options-function-show-debug-console = Открыть консоль

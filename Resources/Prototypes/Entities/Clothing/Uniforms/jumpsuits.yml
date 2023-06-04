@@ -127,8 +127,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitCentcomOfficial
-  name: CentCom officer's suit # Corvax-Resprite
-  description: It's a suit worn by CentCom's highest-tier Commanders. # Corvax-Resprite
+  name: CentCom official's jumpsuit
+  description: It's a jumpsuit worn by CentCom's officials.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/centcom_official.rsi
@@ -888,6 +888,17 @@
     sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
 
 - type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformJumpsuitMercenary
+  name: mercenary jumpsuit
+  description: Clothing for real mercenaries who have gone through fire, water and the jungle of planets flooded with dangerous monsters or targets for which a reward has been assigned.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/mercenary.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/mercenary.rsi
+
+- type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitAtmos
   name: atmospheric technician jumpsuit
@@ -1148,3 +1159,30 @@
     sprite: Clothing/Uniforms/Jumpsuit/hawaiyellow.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/hawaiyellow.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitFlannel
+  name: flannel jumpsuit
+  description: Smells like someones been grillin'.
+  components:
+    - type: Sprite
+      sprite: Clothing/Uniforms/Jumpsuit/flannel.rsi
+    - type: Clothing
+      sprite: Clothing/Uniforms/Jumpsuit/flannel.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShield
+  name: blueshield's uniform
+  description: A short-sleeved black uniform, paired with grey digital-camo cargo pants, all made out of a sturdy material. Blueshield standard issue.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
