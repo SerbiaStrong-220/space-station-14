@@ -301,7 +301,6 @@
   - type: Sprite
     layers:
       - state: green
-      - state: hop
 
 # Engineering
 

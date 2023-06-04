@@ -9,11 +9,10 @@
     time: 72000 # Corvax-RoleTime
   startingGear: BlueShieldGear
   icon: "BlueShield"
-  supervisors: job-supervisors-captain
+  supervisors: job-supervisors-centcom
   canBeAntag: false
   access:
   - Command
-  - HeadOfPersonnel
   - Bar
   - Service
   - Maintenance
@@ -25,7 +24,6 @@
   - External
   - Chemistry
   - Engineering
-  - Quartermaster
   - Research
   - Detective
   - Salvage
@@ -48,7 +46,7 @@
     id: BlueShieldPDA
     ears: ClothingHeadsetAltCommand
     pocket1: WeaponHKPhalanx
-    pocket2: ForensicScanner
+    pocket2: HandheldCrewMonitor
     belt: ClothingBeltSecurityFilled
   satchel: ClothingBackpackSatchelFilled
   duffelbag: ClothingBackpackDuffelFilled
