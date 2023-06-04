@@ -2,7 +2,7 @@
 # Straight in-game baby
 lobbyenabled = true
 # Dev map for faster loading & convenience
-map = "Box"
+map = "Dev"
 role_timers = false
 
 [physics]
