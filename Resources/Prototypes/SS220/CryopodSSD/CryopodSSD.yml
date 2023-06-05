@@ -1,0 +1,18 @@
+﻿- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: CryopodSSD
+  name: cryopodSSD
+  description:
+  components:
+    - type: Sprite
+      sprite: SS220\Structures\Machines\cryopodSSD.rsi
+      layers:
+        - map: [ "computerLayerBody" ]
+          state: cryopodSSD
+    - type: Transform
+      anchored: true
+    - type: Pullable
+    - type: CryopodSSD
+    - type: StaticPrice
+      price: 800
+    - type: Climbable
