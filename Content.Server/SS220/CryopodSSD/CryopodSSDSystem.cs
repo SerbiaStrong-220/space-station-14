@@ -4,7 +4,11 @@ using Content.Server.Chat.Systems;
 using Content.Server.Climbing;
 using Content.Server.Forensics;
 using Content.Server.GameTicking;
+using Content.Server.Mind;
 using Content.Server.Mind.Components;
+using Content.Server.Objectives;
+using Content.Server.Objectives.Conditions;
+using Content.Server.Objectives.Interfaces;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Inventory;
@@ -26,12 +30,13 @@ namespace Content.Server.SS220.CryopodSSD;
 public sealed class CryopodSSDSystem : EntitySystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
+    [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
+    [Dependency] private readonly MindTrackerSystem _mindTrackerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     
@@ -103,6 +108,44 @@ public sealed class CryopodSSDSystem : EntitySystem
         _sawmill.Info($"{ToPrettyString(args.Instigator)} put {ToPrettyString(args.Climber)} in cryo");
         
         _entityManager.QueueDeleteEntity(args.Climber);
+        
+        ReplaceKillEntityObjectives(args.Climber);
+    }
+
+    private void ReplaceKillEntityObjectives(EntityUid uid)
+    {
+        var objectiveToReplace = new List<Objective>();
+        foreach (var mind in _mindTrackerSystem.AllMinds)
+        {
+            if (mind.OwnedEntity is null)
+            {
+                continue;
+            }
+            
+            objectiveToReplace.Clear();
+            
+            foreach (var objective in mind.AllObjectives)
+            {
+                if (objective.Conditions.Any(condition => (condition as KillPersonCondition)?.IsTarget(uid) ?? false))
+                {
+                    objectiveToReplace.Add(objective);
+                }
+            }
+
+            foreach (var objective in objectiveToReplace)
+            {
+                mind.TryRemoveObjective(objective);
+                var newObjective = _objectivesManager.GetRandomObjective(mind, "TraitorObjectiveGroups");
+                if (newObjective is null || !mind.TryAddObjective(newObjective))
+                {
+                    _sawmill.Error($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he lost his objective and didn't get a new one");
+                    continue;
+                }
+                    
+                _sawmill.Error($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
+            }
+        }
+
     }
 
     private void UndressEntity(EntityUid uid)
@@ -137,8 +180,6 @@ public sealed class CryopodSSDSystem : EntitySystem
         job = stationRecord.Value.Item2.JobTitle;
 
         _stationRecordsSystem.RemoveRecord(station, stationRecord.Value.Item1);
-
-        return;
     }
     
     private (StationRecordKey, GeneralStationRecord)? FindEntityStationRecordKey(EntityUid station, EntityUid uid)
