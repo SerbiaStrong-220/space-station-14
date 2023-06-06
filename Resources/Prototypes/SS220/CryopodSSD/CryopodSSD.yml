@@ -5,10 +5,13 @@
   description:
   components:
     - type: Sprite
-      sprite: SS220\Structures\Machines\cryopodSSD.rsi
+      sprite: SS220/Structures/Machines/cryopodSSD.rsi
       layers:
-        - map: [ "computerLayerBody" ]
-          state: cryopodSSD
+      - map: ["cryopodLayerBodyOpen"]
+        state: cryopodSSD
+    - type: Icon
+      sprite: SS220/Structures/Machines/cryopodSSD.rsi
+      state: icon
     - type: Transform
       anchored: true
     - type: Pullable
@@ -21,3 +24,4 @@
       interfaces:
       - key: enum.CryopodSSDKey.Key
         type: CryopodSSDBoundUserInterface
+      
