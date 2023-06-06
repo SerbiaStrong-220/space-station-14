@@ -13,7 +13,11 @@
       anchored: true
     - type: Pullable
     - type: CryopodSSD
-    - type: StaticPrice
-      price: 800
     - type: Climbable
       delay: 6
+    - type: ActivatableUI
+      key: enum.CryopodSSDKey.Key
+    - type: UserInterface
+      interfaces:
+      - key: enum.CryopodSSDKey.Key
+        type: CryopodSSDBoundUserInterface
