@@ -142,7 +142,7 @@ public sealed class CryopodSSDSystem : EntitySystem
                     continue;
                 }
                     
-                _sawmill.Error($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
+                _sawmill.Info($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
             }
         }
 
