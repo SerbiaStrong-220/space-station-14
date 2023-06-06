@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Globalization;
 using Content.Server.Chat.Systems;
+using Content.Server.Climbing;
 using Content.Server.Forensics;
 using Content.Server.Power.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
-using Content.Shared.DragDrop;
 using Content.Shared.Inventory;
 using Content.Shared.StationRecords;
 using Robust.Shared.Prototypes;
@@ -28,30 +28,30 @@ public sealed class CryopodSSDSystem : EntitySystem
         
         SubscribeLocalEvent<CryopodSSDComponent, PowerChangedEvent>(OnPowerChanged);
         
-        SubscribeLocalEvent<CryopodSSDComponent, DragDropTargetEvent>(OnDragDropTarget);
+        SubscribeLocalEvent<CryopodSSDComponent, ClimbedOnEvent>(OnClimbedOn);
     }
 
-    private void OnDragDropTarget(EntityUid uid, CryopodSSDComponent component, ref DragDropTargetEvent args)
+    private void OnClimbedOn(EntityUid uid, CryopodSSDComponent component, ClimbedOnEvent args)
     {
         
         var station = _stationSystem.GetOwningStation(uid);
 
         if (station is not null)
         {
-            DeleteEntityRecord(args.Dragged, station.Value, out var job);
+            DeleteEntityRecord(args.Climber, station.Value, out var job);
             _chatSystem.DispatchStationAnnouncement(station.Value, 
                 Loc.GetString(
                     "cryopodSSD-entered-cryo",
-                    ("character", MetaData(args.Dragged).EntityName),
+                    ("character", MetaData(args.Climber).EntityName),
                     ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(job))),
                 Loc.GetString("cryopodSSD-sender"));
         }
         
         
 
-        UndressEntity(args.Dragged);
+        UndressEntity(args.Climber);
         
-        _entityManager.DeleteEntity(args.Dragged);
+        _entityManager.QueueDeleteEntity(args.Climber);
     }
 
     private void UndressEntity(EntityUid uid)
