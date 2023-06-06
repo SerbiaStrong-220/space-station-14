@@ -3,7 +3,7 @@ using System.Globalization;
 using Content.Server.Chat.Systems;
 using Content.Server.Climbing;
 using Content.Server.Forensics;
-using Content.Server.Power.Components;
+using Content.Server.Mind.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Inventory;
@@ -17,23 +17,30 @@ public sealed class CryopodSSDSystem : EntitySystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    
+    private ISawmill _sawmill = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        
-        SubscribeLocalEvent<CryopodSSDComponent, PowerChangedEvent>(OnPowerChanged);
-        
+
+        _sawmill = Logger.GetSawmill("cryopodSSD");
+
         SubscribeLocalEvent<CryopodSSDComponent, ClimbedOnEvent>(OnClimbedOn);
     }
 
     private void OnClimbedOn(EntityUid uid, CryopodSSDComponent component, ClimbedOnEvent args)
     {
-        
+        if (!TryComp(args.Climber, out MindComponent? mind) || !mind.HasMind)
+        {
+            _sawmill.Error($"{ToPrettyString(args.Instigator)} tries to put in cryo non-playable entity {ToPrettyString(args.Climber)}");
+            return;
+        }
+
         var station = _stationSystem.GetOwningStation(uid);
 
         if (station is not null)
@@ -50,6 +57,8 @@ public sealed class CryopodSSDSystem : EntitySystem
         
 
         UndressEntity(args.Climber);
+        
+        _sawmill.Info($"{ToPrettyString(args.Instigator)} put {ToPrettyString(args.Climber)} in cryo");
         
         _entityManager.QueueDeleteEntity(args.Climber);
     }
@@ -103,11 +112,5 @@ public sealed class CryopodSSDSystem : EntitySystem
         }
 
         return null;
-    }
-
-
-    private void OnPowerChanged(EntityUid uid, CryopodSSDComponent component, ref PowerChangedEvent args)
-    {
-        
     }
 }
