@@ -18,15 +18,19 @@ public sealed class CryopodSSDComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public List<string> StoredEntities = new List<string>();
 
+    /// <summary>
+    /// Delay before climbing in cryopod
+    /// </summary>
     [DataField("entryDelay")] public float EntryDelay = 6f;
-
+    
+    /// <summary>
+    /// Time to afk before automatic cryostorage transfer
+    /// </summary>
     [DataField("autoTransferToCryoDelay")] public float AutoTransferDelay = 900f;
 
     [ViewVariables(VVAccess.ReadWrite)] public TimeSpan CurrentEntityLyingInCryopodTime;
 
     [ViewVariables(VVAccess.ReadWrite)] public ContainerSlot BodyContainer = default!;
-
-    [ViewVariables(VVAccess.ReadWrite)] public ContainerSlot ItemsContainer = default!;
 
     [Serializable, NetSerializable]
     public enum CryopodSSDVisuals : byte

@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using System.Globalization;
-using Content.Server.Actions;
-using Content.Shared.Actions;
 using Content.Server.Chat.Systems;
-using Content.Server.Climbing;
 using Content.Server.Forensics;
+using Content.Server.Inventory;
 using Content.Server.Mind;
 using Content.Server.Mind.Components;
 using Content.Server.Objectives;
@@ -12,15 +10,17 @@ using Content.Server.Objectives.Conditions;
 using Content.Server.Objectives.Interfaces;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
-using Content.Shared.Actions.ActionTypes;
+using Content.Server.Storage.Components;
+using Content.Shared.Access.Systems;
+using static Content.Shared.Storage.SharedStorageComponent;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Inventory;
-using Content.Shared.Medical.Cryogenics;
 using Content.Shared.SS220.CryopodSSD;
 using Content.Shared.StationRecords;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -36,15 +36,15 @@ namespace Content.Server.SS220.CryopodSSD;
 public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
+    [Dependency] private readonly ServerInventorySystem _inventorySystem = default!;
+    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
     [Dependency] private readonly MindTrackerSystem _mindTrackerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly ActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     
@@ -57,12 +57,13 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         _sawmill = Logger.GetSawmill("cryopodSSD");
 
         SubscribeLocalEvent<CryopodSSDComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<CryopodSSDComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
-        SubscribeLocalEvent<CryopodSSDComponent, BoundUIOpenedEvent>(UpdateUserInterface);
-        SubscribeLocalEvent<CryopodSSDComponent, GetItemActionsEvent>(OnGetActions);
-        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDDragFinished>(OnDragFinished);
-        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDLeaveActionEvent>(OnCryopodSSDLeaveAction);
         
+        SubscribeLocalEvent<CryopodSSDComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
+        SubscribeLocalEvent<CryopodSSDComponent, EntRemovedFromContainerMessage>(OnStorageItemRemoved);
+        SubscribeLocalEvent<CryopodSSDComponent, BoundUIOpenedEvent>(UpdateUserInterface);
+
+        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDLeaveActionEvent>(OnCryopodSSDLeaveAction);
+        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDDragFinished>(OnDragFinished);
         SubscribeLocalEvent<CryopodSSDComponent, DragDropTargetEvent>(HandleDragDropOn);
     }
 
@@ -86,25 +87,43 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         }
     }
     
-    private void OnGetActions(EntityUid uid, CryopodSSDComponent component, GetItemActionsEvent args)
+    private void OnStorageItemRemoved(EntityUid uid, CryopodSSDComponent storageComp, EntRemovedFromContainerMessage args)
     {
-        //args.Actions.Add(component.)
+        
+        UpdateUserInterface(uid, storageComp, args.Entity, true);
     }
 
-    private void UpdateUserInterface<T>(EntityUid uid, CryopodSSDComponent component, T ev)
+    private void UpdateUserInterface(EntityUid uid, CryopodSSDComponent component, BoundUIOpenedEvent args)
     {
-        UpdateUserInterface(uid, component);
+        if (args.Session.AttachedEntity is null)
+        {
+            return;
+        }
+        UpdateUserInterface(uid, component, args.Session.AttachedEntity.Value);
     }
 
-    private void UpdateUserInterface(EntityUid uid, CryopodSSDComponent? component)
+    private void UpdateUserInterface(EntityUid uid, CryopodSSDComponent? component, EntityUid user,
+        bool forseAccess = false)
     {
         if (!Resolve(uid, ref component))
         {
             return;
         }
-
-        var state = new CryopodSSDState(component.StoredEntities);
-        SetStateForInterface(uid, state);
+        
+        if (TryComp<ServerStorageComponent>(uid, out var storageComponent) && storageComponent.StoredEntities is not null)
+        {
+            var hasAccess = _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
+            var storageState = hasAccess ?  
+                new StorageBoundUserInterfaceState((List<EntityUid>) storageComponent.StoredEntities, 
+                    storageComponent.StorageUsed, 
+                    storageComponent.StorageCapacityMax)
+              : new StorageBoundUserInterfaceState(new List<EntityUid>(),
+                    0,
+                    storageComponent.StorageCapacityMax);
+            
+            var state = new CryopodSSDState(hasAccess, component.StoredEntities, storageState);
+            SetStateForInterface(uid, state);
+        }
     }
 
     public override EntityUid? EjectBody(EntityUid uid, CryopodSSDComponent? cryopodSsdComponent)
@@ -158,12 +177,12 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
             
             component.StoredEntities.Add($"{MetaData(entityToTransfer).EntityName} - [{job}] - {_gameTiming.RealTime}");
         }
-        
-        
 
-        UndressEntity(entityToTransfer);
+        UndressEntity(uid, component, entityToTransfer);
 
         _entityManager.QueueDeleteEntity(entityToTransfer);
+        
+        UpdateAppearance(uid, component);
         
         ReplaceKillEntityObjectives(entityToTransfer);
     }
@@ -204,25 +223,37 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 
     }
 
-    private void UndressEntity(EntityUid uid)
+    private void UndressEntity(EntityUid uid, CryopodSSDComponent component, EntityUid target)
     {
-        if (!TryComp<InventoryComponent>(uid, out var inventoryComponent))
+        if (!TryComp<InventoryComponent>(target, out var inventoryComponent))
         {
             return;
         }
 
-        if (!_prototypeManager.TryIndex(inventoryComponent.TemplateId,
+        if (!TryComp<ServerStorageComponent>(uid, out var storageComponent) || storageComponent.Storage is null)
+        {
+            return;
+        }
+
+        if (_prototypeManager.TryIndex(inventoryComponent.TemplateId,
                 out InventoryTemplatePrototype? inventoryTemplate))
         {
-            return;
-        }
+            List<EntityUid> itemsToTransfer = new();
+            foreach (var slot in inventoryTemplate.Slots)
+            {
+                if (_inventorySystem.TryGetSlotContainer(target, slot.Name, out var containerSlot, out _) && containerSlot.ContainedEntity is not null)
+                {
+                    itemsToTransfer.Add(containerSlot.ContainedEntity.Value);
+                }
+            }
 
-        foreach (var slot in inventoryTemplate.Slots)
-        {
-            _inventorySystem.TryUnequip(uid, slot.Name);
+            foreach (var item in itemsToTransfer)
+            {
+                storageComponent.Storage.Insert(item);
+            }
         }
     }
-
+    
     private void DeleteEntityRecord(EntityUid uid, EntityUid station, out string job)
     {
         job = string.Empty;

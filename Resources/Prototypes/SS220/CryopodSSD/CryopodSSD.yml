@@ -4,6 +4,8 @@
   name: cryopodSSD
   description:
   components:
+    - type: AccessReader
+      access: [ [ "Command" ] ]
     - type: Appearance
     - type: Sprite
       sprite: SS220/Structures/Machines/cryopodSSD.rsi
@@ -17,7 +19,10 @@
       anchored: true
     - type: Pullable
     - type: CryopodSSD
-      autoTransferToCryoDelay: 5
+      autoTransferToCryoDelay: 900
+    - type: Storage
+      capacity: 2000000000
+      clickInsert: false
     - type: ActivatableUI
       key: enum.CryopodSSDKey.Key
     - type: UserInterface

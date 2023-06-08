@@ -26,6 +26,7 @@ namespace Content.Shared.SS220.CryopodSSD
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+        [Dependency] private readonly EntityManager _entityManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
 
 
@@ -66,7 +67,7 @@ namespace Content.Shared.SS220.CryopodSSD
             }
 
             _appearanceSystem.SetData(uid, CryopodSSDComponent.CryopodSSDVisuals.ContainsEntity,
-                cryopodSSD.BodyContainer.ContainedEntity == null, appearance);
+                cryopodSSD.BodyContainer.ContainedEntity is null || _entityManager.IsQueuedForDeletion(cryopodSSD.BodyContainer.ContainedEntity.Value), appearance);
         }
 
         public bool InsertBody(EntityUid uid, EntityUid target, CryopodSSDComponent cryopodSsdComponent)
