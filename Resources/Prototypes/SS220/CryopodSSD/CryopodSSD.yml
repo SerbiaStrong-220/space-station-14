@@ -4,11 +4,12 @@
   name: cryopodSSD
   description:
   components:
+    - type: Appearance
     - type: Sprite
       sprite: SS220/Structures/Machines/cryopodSSD.rsi
       layers:
-      - map: ["cryopodLayerBodyOpen"]
-        state: cryopodSSD
+      - state: cryopodSSD-open
+        map: [ "enum.CryopodSSDVisualLayers.Cover" ]
     - type: Icon
       sprite: SS220/Structures/Machines/cryopodSSD.rsi
       state: icon
@@ -16,8 +17,7 @@
       anchored: true
     - type: Pullable
     - type: CryopodSSD
-    - type: Climbable
-      delay: 6
+      autoTransferToCryoDelay: 5
     - type: ActivatableUI
       key: enum.CryopodSSDKey.Key
     - type: UserInterface

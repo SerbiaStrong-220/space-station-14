@@ -11,8 +11,38 @@
       "name": "icon"
     },
     {
-      "name": "cryopodSSD",
+      "name": "cryopodSSD-open",
       "directions": 4
+    },
+    {
+      "name": "cryopodSSD-closed",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
     }
   ]
 }

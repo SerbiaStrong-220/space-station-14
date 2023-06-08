@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Globalization;
+using Content.Server.Actions;
+using Content.Shared.Actions;
 using Content.Server.Chat.Systems;
 using Content.Server.Climbing;
 using Content.Server.Forensics;
-using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Mind.Components;
 using Content.Server.Objectives;
@@ -11,9 +12,14 @@ using Content.Server.Objectives.Conditions;
 using Content.Server.Objectives.Interfaces;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
+using Content.Shared.Actions.ActionTypes;
+using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Inventory;
+using Content.Shared.Medical.Cryogenics;
 using Content.Shared.SS220.CryopodSSD;
 using Content.Shared.StationRecords;
+using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -27,16 +33,18 @@ namespace Content.Server.SS220.CryopodSSD;
 /// Implemented leaving from game via climbing in cryopod
 /// <seealso cref="CryopodSSDComponent"/>
 /// </summary>
-public sealed class CryopodSSDSystem : EntitySystem
+public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
     [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
     [Dependency] private readonly MindTrackerSystem _mindTrackerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly ActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     
@@ -48,8 +56,39 @@ public sealed class CryopodSSDSystem : EntitySystem
 
         _sawmill = Logger.GetSawmill("cryopodSSD");
 
-        SubscribeLocalEvent<CryopodSSDComponent, ClimbedOnEvent>(OnClimbedOn);
+        SubscribeLocalEvent<CryopodSSDComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<CryopodSSDComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
         SubscribeLocalEvent<CryopodSSDComponent, BoundUIOpenedEvent>(UpdateUserInterface);
+        SubscribeLocalEvent<CryopodSSDComponent, GetItemActionsEvent>(OnGetActions);
+        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDDragFinished>(OnDragFinished);
+        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDLeaveActionEvent>(OnCryopodSSDLeaveAction);
+        
+        SubscribeLocalEvent<CryopodSSDComponent, DragDropTargetEvent>(HandleDragDropOn);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var currTime = _gameTiming.CurTime;
+
+        var entityEnumerator = EntityQueryEnumerator<CryopodSSDComponent>();
+        
+        while (entityEnumerator.MoveNext(out var uid, out var cryopodSSDComp))
+        {
+            if (cryopodSSDComp.BodyContainer.ContainedEntity is null ||
+                currTime < cryopodSSDComp.CurrentEntityLyingInCryopodTime + TimeSpan.FromSeconds(cryopodSSDComp.AutoTransferDelay))
+            {
+                continue;
+            }
+            
+            TransferToCryoStorage(uid, cryopodSSDComp);
+        }
+    }
+    
+    private void OnGetActions(EntityUid uid, CryopodSSDComponent component, GetItemActionsEvent args)
+    {
+        //args.Actions.Add(component.)
     }
 
     private void UpdateUserInterface<T>(EntityUid uid, CryopodSSDComponent component, T ev)
@@ -68,6 +107,22 @@ public sealed class CryopodSSDSystem : EntitySystem
         SetStateForInterface(uid, state);
     }
 
+    public override EntityUid? EjectBody(EntityUid uid, CryopodSSDComponent? cryopodSsdComponent)
+    {
+        if (!Resolve(uid, ref cryopodSsdComponent))
+        {
+            return null;
+        }
+
+        if (cryopodSsdComponent.BodyContainer.ContainedEntity is not { Valid: true } contained)
+        {
+            return null;
+        }
+
+        base.EjectBody(uid, cryopodSsdComponent);
+        return contained;
+    }
+
     private void SetStateForInterface(EntityUid uid, CryopodSSDState state)
     {
         var ui = _userInterface.GetUiOrNull(uid, CryopodSSDKey.Key);
@@ -77,39 +132,40 @@ public sealed class CryopodSSDSystem : EntitySystem
         }
     }
 
-    private void OnClimbedOn(EntityUid uid, CryopodSSDComponent component, ClimbedOnEvent args)
+    private void TransferToCryoStorage(EntityUid uid, CryopodSSDComponent component)
     {
-        if (!TryComp(args.Climber, out MindComponent? mind) || !mind.HasMind)
+        if (component.BodyContainer.ContainedEntity is null)
         {
-            _sawmill.Error($"{ToPrettyString(args.Instigator)} tries to put in cryo non-playable entity {ToPrettyString(args.Climber)}");
             return;
         }
+        
+        var entityToTransfer = component.BodyContainer.ContainedEntity.Value;
+        
+        _sawmill.Info($"{ToPrettyString(entityToTransfer)} moved to cryo storage");
 
         var station = _stationSystem.GetOwningStation(uid);
 
         if (station is not null)
         {
-            DeleteEntityRecord(args.Climber, station.Value, out var job);
+            DeleteEntityRecord(entityToTransfer, station.Value, out var job);
             
             _chatSystem.DispatchStationAnnouncement(station.Value, 
                 Loc.GetString(
                     "cryopodSSD-entered-cryo",
-                    ("character", MetaData(args.Climber).EntityName),
+                    ("character", MetaData(entityToTransfer).EntityName),
                     ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(job))),
                 Loc.GetString("cryopodSSD-sender"));
             
-            component.StoredEntities.Add($"{MetaData(args.Climber).EntityName} - [{job}] - {_gameTiming.RealTime}");
+            component.StoredEntities.Add($"{MetaData(entityToTransfer).EntityName} - [{job}] - {_gameTiming.RealTime}");
         }
         
         
 
-        UndressEntity(args.Climber);
+        UndressEntity(entityToTransfer);
+
+        _entityManager.QueueDeleteEntity(entityToTransfer);
         
-        _sawmill.Info($"{ToPrettyString(args.Instigator)} put {ToPrettyString(args.Climber)} in cryo");
-        
-        _entityManager.QueueDeleteEntity(args.Climber);
-        
-        ReplaceKillEntityObjectives(args.Climber);
+        ReplaceKillEntityObjectives(entityToTransfer);
     }
 
     private void ReplaceKillEntityObjectives(EntityUid uid)
@@ -195,5 +251,55 @@ public sealed class CryopodSSDSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private void HandleDragDropOn(EntityUid uid, CryopodSSDComponent cryopodSsdComponent, ref DragDropTargetEvent args)
+    {
+        if (cryopodSsdComponent.BodyContainer.ContainedEntity != null)
+        {
+            return;
+        }
+        
+        if (!TryComp(args.Dragged, out MindComponent? mind) || !mind.HasMind)
+        {
+            _sawmill.Error($"{ToPrettyString(args.User)} tries to put non-playable entity into SSD cryopod {ToPrettyString(args.Dragged)}");
+            return;
+        }
+
+        var doAfterArgs = new DoAfterArgs(args.User, cryopodSsdComponent.EntryDelay, new CryopodSSDDragFinished(), uid,
+            target: args.Dragged, used: uid)
+        {
+            BreakOnDamage = true,
+            BreakOnTargetMove = true,
+            BreakOnUserMove = true,
+            NeedHand = false,
+        };
+        _doAfterSystem.TryStartDoAfter(doAfterArgs);
+        args.Handled = true;
+    }
+
+    private void OnDragFinished(EntityUid uid, CryopodSSDComponent component, CryopodSSDDragFinished args)
+    {
+        if (args.Cancelled || args.Handled || args.Args.Target is null)
+        {
+            return;
+        }
+
+        if (InsertBody(uid, args.Args.Target.Value, component))
+        {
+            _sawmill.Info($"{ToPrettyString(args.Args.User)} put {ToPrettyString(args.Args.Target.Value)} inside cryopod.");
+        }
+
+        args.Handled = true;
+    }
+    
+    private void OnCryopodSSDLeaveAction(EntityUid uid, CryopodSSDComponent component, CryopodSSDLeaveActionEvent args)
+    {
+        if (component.BodyContainer.ContainedEntity is null)
+        {
+            _sawmill.Error("This action cannot be called if no one is in the cryopod.");
+            return;
+        }
+        TransferToCryoStorage(uid, component);
     }
 }

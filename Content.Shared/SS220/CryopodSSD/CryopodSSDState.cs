@@ -12,7 +12,7 @@ public enum CryopodSSDKey : byte
 [Serializable, NetSerializable]
 public sealed class CryopodSSDState : BoundUserInterfaceState
 {
-    public List<string>? CryopodSSDRecords { get; }
+    public List<string> CryopodSSDRecords { get; }
 
     public CryopodSSDState(List<string> cryopodSSDRecords)
     {
