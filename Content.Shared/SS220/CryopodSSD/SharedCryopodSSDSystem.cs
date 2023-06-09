@@ -130,11 +130,8 @@ namespace Content.Shared.SS220.CryopodSSD
             {
                 _standingStateSystem.Stand(contained);
             }
-            
-            if (_prototypeManager.TryIndex<InstantActionPrototype>("CryopodSSDLeave", out var leaveAction))
-            {
-                _actionsSystem.RemoveAction(contained, new InstantAction(leaveAction));
-            }
+
+            _actionsSystem.RemoveProvidedActions(contained, uid);
 
             UpdateAppearance(uid, cryopodSsdComponent);
             return contained;
