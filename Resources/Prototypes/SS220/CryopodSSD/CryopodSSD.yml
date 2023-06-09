@@ -23,6 +23,9 @@
     - type: Storage
       capacity: 2000000000
       clickInsert: false
+      whitelist: 
+        tags:
+        - HighRiskItem
     - type: ActivatableUI
       key: enum.CryopodSSDKey.Key
     - type: UserInterface

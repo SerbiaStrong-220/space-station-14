@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Actions.ActionTypes;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -27,6 +28,13 @@ public sealed class CryopodSSDComponent : Component
     /// Time to afk before automatic cryostorage transfer
     /// </summary>
     [DataField("autoTransferToCryoDelay")] public float AutoTransferDelay = 900f;
+    
+    /// <summary>
+    /// All items that are not whitelisted will be
+    /// irretrievably lost after the essence is transferred to cryostorage.
+    /// </summary>
+    [DataField("whitelist"), ViewVariables(VVAccess.ReadWrite)]
+    public EntityWhitelist? Whitelist = null;
 
     [ViewVariables(VVAccess.ReadWrite)] public TimeSpan CurrentEntityLyingInCryopodTime;
 

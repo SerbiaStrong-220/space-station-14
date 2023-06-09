@@ -22,6 +22,7 @@ using Content.Shared.Inventory;
 using Content.Shared.SS220.CryopodSSD;
 using Content.Shared.StationRecords;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -272,7 +273,8 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
             return;
         }
 
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComponent) || storageComponent.Storage is null)
+        if (!TryComp<ServerStorageComponent>(uid, out var storageComponent)
+            || storageComponent.Storage is null)
         {
             return;
         }
@@ -280,26 +282,61 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         if (_prototypeManager.TryIndex(inventoryComponent.TemplateId,
                 out InventoryTemplatePrototype? inventoryTemplate))
         {
+            /*
+            * It would be great if we could instantly delete items when we know they are not whitelisted.
+            * However, this could lead to a situation where we accidentally delete the uniform,
+            * resulting in all items inside the pockets being dropped before we add them to the itemsToTransfer list.
+            * So we should have itemsToDelete list.
+            */
+
             List<EntityUid> itemsToTransfer = new();
+            List<EntityUid> itemsToDelete = new();
+
+            var whiteList = storageComponent.Whitelist;
+            
             foreach (var slot in inventoryTemplate.Slots)
             {
-                if (_inventorySystem.TryGetSlotContainer(target, slot.Name, out var containerSlot, out _) && containerSlot.ContainedEntity is not null)
+                if (!_inventorySystem.TryGetSlotContainer(target, slot.Name, out var containerSlot, out _)
+                    || containerSlot.ContainedEntity is null)
+                {
+                    continue;
+                }
+
+                if (whiteList is null || whiteList.IsValid(containerSlot.ContainedEntity.Value))
                 {
                     itemsToTransfer.Add(containerSlot.ContainedEntity.Value);
+                }
+                else
+                {
+                    itemsToDelete.Add(containerSlot.ContainedEntity.Value);
                 }
             }
 
             foreach (var hand in _sharedHandsSystem.EnumerateHands(target))
             {
-                if (hand.HeldEntity is not null)
+                if (hand.HeldEntity is null)
+                {
+                    continue;
+                }
+                
+                if (whiteList is null || whiteList.IsValid(hand.HeldEntity.Value))
                 {
                     itemsToTransfer.Add(hand.HeldEntity.Value);
+                }
+                else
+                {
+                    itemsToDelete.Add(hand.HeldEntity.Value);
                 }
             }
 
             foreach (var item in itemsToTransfer)
             {
                 storageComponent.Storage.Insert(item);
+            }
+
+            foreach (var item in itemsToDelete)
+            {
+                _entityManager.DeleteEntity(item);
             }
         }
     }
