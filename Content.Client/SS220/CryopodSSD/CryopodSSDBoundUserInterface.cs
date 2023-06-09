@@ -9,7 +9,7 @@ using Content.Shared.SS220.CryopodSSD;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
-using static Content.Shared.Storage.SharedStorageComponent;
+using static Content.Shared.SS220.CryopodSSD.SharedCryopodSSDSystem;
 
 namespace Content.Client.SS220.CryopodSSD;
 
@@ -56,7 +56,7 @@ public sealed class CryopodSSDBoundUserInterface : BoundUserInterface
         
         if (args.Event.Function == EngineKeyFunctions.UIClick)
         {
-            SendMessage(new StorageInteractWithItemEvent(entity));
+            SendMessage(new CryopodSSDStorageInteractWithItemEvent(entity));
         }
         else if (IoCManager.Resolve<IEntityManager>().EntityExists(entity))
         {
@@ -67,25 +67,11 @@ public sealed class CryopodSSDBoundUserInterface : BoundUserInterface
     private void OnButtonPressed(GUIBoundKeyEventArgs args, EntityUid entity)
     {
         var entitySys = IoCManager.Resolve<IEntitySystemManager>();
-        var entities = IoCManager.Resolve<IEntityManager>();
 
         if (args.Function == ContentKeyFunctions.ExamineEntity)
         {
             entitySys.GetEntitySystem<ExamineSystem>()
                 .DoExamine(entity);
-        }
-        else if (args.Function == EngineKeyFunctions.UseSecondary)
-        {
-            IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(entity);
-        }
-        else if (args.Function == ContentKeyFunctions.ActivateItemInWorld)
-        {
-            entities.EntityNetManager?.SendSystemNetworkMessage(
-                new InteractInventorySlotEvent(entity, altInteract: false));
-        }
-        else if (args.Function == ContentKeyFunctions.AltActivateItemInWorld)
-        {
-            entities.RaisePredictiveEvent(new InteractInventorySlotEvent(entity, altInteract: true));
         }
         else
         {

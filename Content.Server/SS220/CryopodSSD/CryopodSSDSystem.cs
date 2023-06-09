@@ -12,9 +12,12 @@ using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
 using Content.Server.Storage.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.ActionBlocker;
 using static Content.Shared.Storage.SharedStorageComponent;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.CryopodSSD;
 using Content.Shared.StationRecords;
@@ -36,6 +39,7 @@ namespace Content.Server.SS220.CryopodSSD;
 public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly ServerInventorySystem _inventorySystem = default!;
     [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
@@ -43,6 +47,7 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -58,6 +63,7 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 
         SubscribeLocalEvent<CryopodSSDComponent, ComponentInit>(OnComponentInit);
         
+        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDStorageInteractWithItemEvent>(OnInteractWithItem);
         SubscribeLocalEvent<CryopodSSDComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
         SubscribeLocalEvent<CryopodSSDComponent, EntRemovedFromContainerMessage>(OnStorageItemRemoved);
         SubscribeLocalEvent<CryopodSSDComponent, BoundUIOpenedEvent>(UpdateUserInterface);
@@ -65,6 +71,42 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDLeaveActionEvent>(OnCryopodSSDLeaveAction);
         SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDDragFinished>(OnDragFinished);
         SubscribeLocalEvent<CryopodSSDComponent, DragDropTargetEvent>(HandleDragDropOn);
+    }
+
+    private void OnInteractWithItem(EntityUid uid, CryopodSSDComponent component, CryopodSSDStorageInteractWithItemEvent args)
+    {
+        if (args.Session.AttachedEntity is not EntityUid player)
+            return;
+
+        if (!Exists(args.InteractedItemUID))
+        {
+            _sawmill.Error($"Player {args.Session} interacted with non-existent item {args.InteractedItemUID} stored in {ToPrettyString(uid)}");
+            return;
+        }
+
+        if (!TryComp<ServerStorageComponent>(uid, out var storageComp))
+        {
+            return;
+        }
+        
+        if (!_actionBlockerSystem.CanInteract(player, args.InteractedItemUID) || storageComp.Storage == null || !storageComp.Storage.Contains(args.InteractedItemUID))
+            return;
+        
+        if (!TryComp(player, out HandsComponent? hands) || hands.Count == 0)
+            return;
+
+        if (!_accessReaderSystem.IsAllowed(player, uid))
+        {
+            _sawmill.Info($"Player {ToPrettyString(player)} possibly exploits UI, trying to take item from {ToPrettyString(uid)} without access");
+            return;
+        }
+        
+        if (hands.ActiveHandEntity == null)
+        {
+            if (_sharedHandsSystem.TryPickupAnyHand(player, args.InteractedItemUID, handsComp: hands)
+                && storageComp.StorageRemoveSound != null)
+                _sawmill.Info($"{ToPrettyString(player)} takes {ToPrettyString(args.InteractedItemUID)} from {ToPrettyString(uid)}");
+        }
     }
 
     public override void Update(float frameTime)
@@ -244,6 +286,14 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
                 if (_inventorySystem.TryGetSlotContainer(target, slot.Name, out var containerSlot, out _) && containerSlot.ContainedEntity is not null)
                 {
                     itemsToTransfer.Add(containerSlot.ContainedEntity.Value);
+                }
+            }
+
+            foreach (var hand in _sharedHandsSystem.EnumerateHands(target))
+            {
+                if (hand.HeldEntity is not null)
+                {
+                    itemsToTransfer.Add(hand.HeldEntity.Value);
                 }
             }
 

@@ -164,6 +164,16 @@ namespace Content.Shared.SS220.CryopodSSD
         public sealed class CryopodSSDDragFinished : SimpleDoAfterEvent
         {
         }
+
+        [Serializable, NetSerializable]
+        public sealed class CryopodSSDStorageInteractWithItemEvent : BoundUserInterfaceMessage
+        {
+            public readonly EntityUid InteractedItemUID;
+            public CryopodSSDStorageInteractWithItemEvent(EntityUid interactedItemUID)
+            {
+                InteractedItemUID = interactedItemUID;
+            }
+        }
     }
 }
 
