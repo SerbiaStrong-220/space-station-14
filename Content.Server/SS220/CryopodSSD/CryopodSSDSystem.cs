@@ -2,7 +2,6 @@
 using System.Globalization;
 using Content.Server.Chat.Systems;
 using Content.Server.Forensics;
-using Content.Server.Inventory;
 using Content.Server.Mind;
 using Content.Server.Mind.Components;
 using Content.Server.Objectives;
@@ -18,14 +17,13 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.SS220.CryopodSSD;
 using Content.Shared.StationRecords;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -41,11 +39,9 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly ServerInventorySystem _inventorySystem = default!;
     [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
     [Dependency] private readonly MindTrackerSystem _mindTrackerSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
@@ -268,75 +264,59 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 
     private void UndressEntity(EntityUid uid, CryopodSSDComponent component, EntityUid target)
     {
-        if (!TryComp<InventoryComponent>(target, out var inventoryComponent))
-        {
-            return;
-        }
-
         if (!TryComp<ServerStorageComponent>(uid, out var storageComponent)
             || storageComponent.Storage is null)
         {
             return;
         }
+        
+        /*
+        * It would be great if we could instantly delete items when we know they are not whitelisted.
+        * However, this could lead to a situation where we accidentally delete the uniform,
+        * resulting in all items inside the pockets being dropped before we add them to the itemsToTransfer list.
+        * So we should have itemsToDelete list.
+        */
 
-        if (_prototypeManager.TryIndex(inventoryComponent.TemplateId,
-                out InventoryTemplatePrototype? inventoryTemplate))
+        List<EntityUid> itemsToTransfer = new();
+        List<EntityUid> itemsToDelete = new();
+
+        // Looking through all 
+        SortContainedItems(in target,ref itemsToTransfer,ref itemsToDelete, in storageComponent.Whitelist);
+
+        foreach (var item in itemsToTransfer)
         {
-            /*
-            * It would be great if we could instantly delete items when we know they are not whitelisted.
-            * However, this could lead to a situation where we accidentally delete the uniform,
-            * resulting in all items inside the pockets being dropped before we add them to the itemsToTransfer list.
-            * So we should have itemsToDelete list.
-            */
+            storageComponent.Storage.Insert(item);
+        }
 
-            List<EntityUid> itemsToTransfer = new();
-            List<EntityUid> itemsToDelete = new();
+        foreach (var item in itemsToDelete)
+        {
+            _entityManager.DeleteEntity(item);
+        }
+    }
 
-            var whiteList = storageComponent.Whitelist;
-            
-            foreach (var slot in inventoryTemplate.Slots)
+    private void SortContainedItems(in EntityUid storageToLook, ref List<EntityUid> whitelistedItems,
+        ref List<EntityUid> itemsToDelete, in EntityWhitelist? whitelist)
+    {
+        if (TryComp<TransformComponent>(storageToLook, out var transformComponent))
+        {
+            foreach (var childUid in transformComponent.ChildEntities)
             {
-                if (!_inventorySystem.TryGetSlotContainer(target, slot.Name, out var containerSlot, out _)
-                    || containerSlot.ContainedEntity is null)
+                if (!HasComp<ItemComponent>(childUid))
                 {
                     continue;
                 }
 
-                if (whiteList is null || whiteList.IsValid(containerSlot.ContainedEntity.Value))
+                if (whitelist is null || whitelist.IsValid(childUid))
                 {
-                    itemsToTransfer.Add(containerSlot.ContainedEntity.Value);
+                    whitelistedItems.Add(childUid);
                 }
                 else
                 {
-                    itemsToDelete.Add(containerSlot.ContainedEntity.Value);
+                    itemsToDelete.Add(childUid);
                 }
-            }
 
-            foreach (var hand in _sharedHandsSystem.EnumerateHands(target))
-            {
-                if (hand.HeldEntity is null)
-                {
-                    continue;
-                }
-                
-                if (whiteList is null || whiteList.IsValid(hand.HeldEntity.Value))
-                {
-                    itemsToTransfer.Add(hand.HeldEntity.Value);
-                }
-                else
-                {
-                    itemsToDelete.Add(hand.HeldEntity.Value);
-                }
-            }
-
-            foreach (var item in itemsToTransfer)
-            {
-                storageComponent.Storage.Insert(item);
-            }
-
-            foreach (var item in itemsToDelete)
-            {
-                _entityManager.DeleteEntity(item);
+                // As far as I know, ChildEntities cannot be recursive 
+                SortContainedItems(childUid, ref whitelistedItems, ref itemsToDelete, whitelist);
             }
         }
     }
