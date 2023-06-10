@@ -56,6 +56,12 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         }
     }
 
+    /// <summary>
+    /// Ejects body from cryopod
+    /// </summary>
+    /// <param name="uid"> EntityUid of the cryopod</param>
+    /// <param name="cryopodSsdComponent"></param>
+    /// <returns> EntityUid of the ejected body if it succeeded, otherwise returns null</returns>
     public override EntityUid? EjectBody(EntityUid uid, CryopodSSDComponent? cryopodSsdComponent)
     {
         if (!Resolve(uid, ref cryopodSsdComponent))

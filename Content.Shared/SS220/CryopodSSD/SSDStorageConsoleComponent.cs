@@ -24,7 +24,7 @@ public sealed class SSDStorageConsoleComponent : Component
     /// of the cryopods
     /// </summary>
     [DataField("radiusToConnect"), ViewVariables(VVAccess.ReadWrite)]
-    public float RadiusToConnect = 50f;
+    public float RadiusToConnect = 100f;
 
     /// <summary>
     /// We want the cryopod to have ConsoleComponent for

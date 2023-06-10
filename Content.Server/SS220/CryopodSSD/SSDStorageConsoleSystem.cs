@@ -25,6 +25,12 @@ using static Content.Shared.Storage.SharedStorageComponent;
 
 namespace Content.Server.SS220.CryopodSSD;
 
+/// <summary>
+///             SS220
+/// <seealso cref="SharedCryopodSSDSystem"/>
+/// <seealso cref="CryopodSSDSystem"/>
+/// <seealso cref="SSDStorageConsoleComponent"/>
+/// </summary>
 public sealed class SSDStorageConsoleSystem : EntitySystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
@@ -55,9 +61,16 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         SubscribeLocalEvent<TransferredToCryoStorageEvent>(OnTransferredToCryo);
     }
     
-    public void TransferToCryoStorage(EntityUid uid, EntityUid target)
+    
+    /// <summary>
+    /// Method for transferring entity to cryo storage
+    /// </summary>
+    /// <param name="uid"> Entity that haves SSDStorageConsoleComponent</param>
+    /// <param name="target"> Entity to transfer</param>
+    /// <param name="cryopodConsoleComp"> component</param>
+    public void TransferToCryoStorage(EntityUid uid, EntityUid target, SSDStorageConsoleComponent? cryopodConsoleComp = null)
     {
-        if (TryComp<SSDStorageConsoleComponent>(uid, out var cryopodConsoleComp))
+        if (Resolve(uid, ref cryopodConsoleComp))
         {
             TransferToCryoStorage(uid, cryopodConsoleComp, target);
         }
@@ -99,6 +112,12 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// System reacts to broadcast event
+    /// first suitable CryoStorageConsole component will handle it
+    /// </summary>
+    /// <param name="args"> Event contains information about the cryopod and the entity,
+    /// which we must transfer to the cryo storage</param>
     private void OnTransferredToCryo(TransferredToCryoStorageEvent args)
     {
         if (args.Handled)
@@ -154,9 +173,14 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         ReplaceKillEntityObjectives(entityToTransfer);
     }
 
+    /// <summary>
+    /// Looks through all objectives in game,
+    /// All KillPersonObjective where target equals to uid
+    /// would be replaced with new random objective 
+    /// </summary>
+    /// <param name="uid"> target uid</param>
     private void ReplaceKillEntityObjectives(EntityUid uid)
     {
-        var objectiveToReplace = new List<Objective>();
         foreach (var mind in _mindTrackerSystem.AllMinds)
         {
             if (mind.OwnedEntity is null)
@@ -164,15 +188,8 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
                 continue;
             }
             
-            objectiveToReplace.Clear();
-            
-            foreach (var objective in mind.AllObjectives)
-            {
-                if (objective.Conditions.Any(condition => (condition as KillPersonCondition)?.IsTarget(uid) ?? false))
-                {
-                    objectiveToReplace.Add(objective);
-                }
-            }
+            IEnumerable<Objective> objectiveToReplace = mind.AllObjectives.Where(objective =>
+                objective.Conditions.Any(condition => (condition as KillPersonCondition)?.IsTarget(uid) ?? false));
 
             foreach (var objective in objectiveToReplace)
             {
@@ -187,8 +204,16 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
                 _sawmill.Info($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
             }
         }
-
     }
+    
+    /// <summary>
+    /// Looking through all Entity's items,
+    /// and if item is not in SSD storage whitelist - deletes it,
+    /// otherwise transfers it to ssd storage
+    /// </summary>
+    /// <param name="uid"> EntityUid of our ssd storage</param>
+    /// <param name="component"></param>
+    /// <param name="target"> Entity to undress</param>
 
     private void UndressEntity(EntityUid uid, SSDStorageConsoleComponent component, EntityUid target)
     {
@@ -222,6 +247,15 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Recursively goes through all child entities of our entity
+    /// and if entity is item - adds it to whiteListedItems,
+    /// otherwise adds it to itemsToDelete 
+    /// </summary>
+    /// <param name="storageToLook"></param>
+    /// <param name="whitelistedItems"></param>
+    /// <param name="itemsToDelete"></param>
+    /// <param name="whitelist"></param>
     private void SortContainedItems(in EntityUid storageToLook, ref List<EntityUid> whitelistedItems,
         ref List<EntityUid> itemsToDelete, in EntityWhitelist? whitelist)
     {
@@ -249,6 +283,13 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         }
     }
     
+    /// <summary>
+    /// Delete entity records from station general records
+    /// using DNA to match record
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="station"></param>
+    /// <param name="job"> returns job of entity </param>
     private void DeleteEntityRecord(EntityUid uid, EntityUid station, out string job)
     {
         job = string.Empty;

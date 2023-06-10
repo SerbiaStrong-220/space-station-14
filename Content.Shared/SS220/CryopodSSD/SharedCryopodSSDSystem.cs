@@ -35,39 +35,14 @@ namespace Content.Shared.SS220.CryopodSSD
 
             SubscribeLocalEvent<CryopodSSDComponent, CanDropTargetEvent>(OnCryopodSSDCanDropTarget);
         }
-
-        private void OnCryopodSSDCanDropTarget(EntityUid uid, CryopodSSDComponent component,
-            ref CanDropTargetEvent args)
-        {
-            if (args.Handled)
-                return;
-
-            args.CanDrop = HasComp<BodyComponent>(args.Dragged);
-            args.Handled = true;
-        }
-
-        protected void OnComponentInit(EntityUid uid, CryopodSSDComponent cryopodSSDComponent, ComponentInit args)
-        {
-            cryopodSSDComponent.BodyContainer = _containerSystem.EnsureContainer<ContainerSlot>(uid, "pod-body");
-        }
-
-        protected void UpdateAppearance(EntityUid uid, CryopodSSDComponent? cryopodSSD = null,
-            AppearanceComponent? appearance = null)
-        {
-            if (!Resolve(uid, ref cryopodSSD))
-            {
-                return;
-            }
-
-            if (!Resolve(uid, ref appearance))
-            {
-                return;
-            }
-
-            _appearanceSystem.SetData(uid, CryopodSSDComponent.CryopodSSDVisuals.ContainsEntity,
-                cryopodSSD.BodyContainer.ContainedEntity is null || _entityManager.IsQueuedForDeletion(cryopodSSD.BodyContainer.ContainedEntity.Value), appearance);
-        }
-
+        
+        /// <summary>
+        /// Inserts target inside cryopod
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="target"></param>
+        /// <param name="cryopodSsdComponent"></param>
+        /// <returns> true if we successfully inserted target inside cryopod, otherwise returns false</returns>
         public bool InsertBody(EntityUid uid, EntityUid target, CryopodSSDComponent cryopodSsdComponent)
         {
             if (cryopodSsdComponent.BodyContainer.ContainedEntity != null)
@@ -133,6 +108,38 @@ namespace Content.Shared.SS220.CryopodSSD
 
             UpdateAppearance(uid, cryopodSsdComponent);
             return contained;
+        }
+
+        private void OnCryopodSSDCanDropTarget(EntityUid uid, CryopodSSDComponent component,
+            ref CanDropTargetEvent args)
+        {
+            if (args.Handled)
+                return;
+
+            args.CanDrop = HasComp<BodyComponent>(args.Dragged);
+            args.Handled = true;
+        }
+
+        protected void OnComponentInit(EntityUid uid, CryopodSSDComponent cryopodSSDComponent, ComponentInit args)
+        {
+            cryopodSSDComponent.BodyContainer = _containerSystem.EnsureContainer<ContainerSlot>(uid, "pod-body");
+        }
+
+        protected void UpdateAppearance(EntityUid uid, CryopodSSDComponent? cryopodSSD = null,
+            AppearanceComponent? appearance = null)
+        {
+            if (!Resolve(uid, ref cryopodSSD))
+            {
+                return;
+            }
+
+            if (!Resolve(uid, ref appearance))
+            {
+                return;
+            }
+
+            _appearanceSystem.SetData(uid, CryopodSSDComponent.CryopodSSDVisuals.ContainsEntity,
+                cryopodSSD.BodyContainer.ContainedEntity is null || _entityManager.IsQueuedForDeletion(cryopodSSD.BodyContainer.ContainedEntity.Value), appearance);
         }
 
         protected void AddAlternativeVerbs(EntityUid uid, CryopodSSDComponent cryopodSSDComponent,
