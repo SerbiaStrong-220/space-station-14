@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseStructure ]
   id: SSDStorageConsole
   name: Консоль крио хранилища
   description:
@@ -29,6 +29,9 @@
       whitelist:
         tags:
           - HighRiskItem
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
 
 - type: entity
   parent: [ SSDStorageConsole ]
@@ -48,3 +51,9 @@
       autoTransferToCryoDelay: 900
     - type: SSDStorageConsole
       isItReallyCryopod: true
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+        pod-body:
+          !type:ContainerSlot
+          showEnts: false
