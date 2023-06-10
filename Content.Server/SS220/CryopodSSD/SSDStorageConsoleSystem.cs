@@ -12,6 +12,8 @@ using Content.Server.StationRecords.Systems;
 using Content.Server.Storage.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Emag.Components;
+using Content.Shared.Emag.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Item;
 using Content.Shared.SS220.CryopodSSD;
@@ -59,9 +61,16 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         SubscribeLocalEvent<SSDStorageConsoleComponent, BoundUIOpenedEvent>(UpdateUserInterface);
         
         SubscribeLocalEvent<TransferredToCryoStorageEvent>(OnTransferredToCryo);
+        
+        SubscribeLocalEvent<SSDStorageConsoleComponent, GotEmaggedEvent>(OnEmagAct);
     }
-    
-    
+
+    private void OnEmagAct(EntityUid uid, SSDStorageConsoleComponent component, ref GotEmaggedEvent args)
+    {
+        args.Handled = true;
+    }
+
+
     /// <summary>
     /// Method for transferring entity to cryo storage
     /// </summary>
@@ -345,7 +354,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         
         if (TryComp<ServerStorageComponent>(uid, out var storageComponent) && storageComponent.StoredEntities is not null)
         {
-            var hasAccess = _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
+            var hasAccess = HasComp<EmaggedComponent>(uid) || _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
             var storageState = hasAccess ?  
                 new StorageBoundUserInterfaceState((List<EntityUid>) storageComponent.StoredEntities, 
                     storageComponent.StorageUsed, 
