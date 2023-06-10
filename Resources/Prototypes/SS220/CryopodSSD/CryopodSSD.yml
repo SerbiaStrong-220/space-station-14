@@ -10,7 +10,7 @@
     - type: Sprite
       sprite: SS220/Structures/Machines/ssdStorageConsole.rsi
       layers:
-        - state: icon
+        - state: ssdStorageConsole
     - type: Icon
       sprite: SS220/Structures/Machines/ssdStorageConsole.rsi
       state: icon
