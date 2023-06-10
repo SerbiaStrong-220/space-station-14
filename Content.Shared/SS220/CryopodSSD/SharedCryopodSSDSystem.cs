@@ -28,9 +28,7 @@ namespace Content.Shared.SS220.CryopodSSD
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
         [Dependency] private readonly EntityManager _entityManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
-
-
-
+        
         public override void Initialize()
         {
             base.Initialize();
@@ -160,16 +158,6 @@ namespace Content.Shared.SS220.CryopodSSD
         [Serializable, NetSerializable]
         public sealed class CryopodSSDDragFinished : SimpleDoAfterEvent
         {
-        }
-
-        [Serializable, NetSerializable]
-        public sealed class CryopodSSDStorageInteractWithItemEvent : BoundUserInterfaceMessage
-        {
-            public readonly EntityUid InteractedItemUID;
-            public CryopodSSDStorageInteractWithItemEvent(EntityUid interactedItemUID)
-            {
-                InteractedItemUID = interactedItemUID;
-            }
         }
     }
 }

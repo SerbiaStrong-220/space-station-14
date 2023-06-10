@@ -1,31 +1,9 @@
-﻿using System.Linq;
-using System.Globalization;
-using Content.Server.Chat.Systems;
-using Content.Server.Forensics;
-using Content.Server.Mind;
-using Content.Server.Mind.Components;
-using Content.Server.Objectives;
-using Content.Server.Objectives.Conditions;
-using Content.Server.Objectives.Interfaces;
-using Content.Server.Station.Systems;
-using Content.Server.StationRecords.Systems;
-using Content.Server.Storage.Components;
-using Content.Shared.Access.Systems;
-using Content.Shared.ActionBlocker;
-using static Content.Shared.Storage.SharedStorageComponent;
+﻿using Content.Server.Mind.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
-using Content.Shared.Hands.Components;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Item;
 using Content.Shared.SS220.CryopodSSD;
-using Content.Shared.StationRecords;
 using Content.Shared.Verbs;
-using Content.Shared.Whitelist;
-using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CryopodSSD;
 
@@ -37,19 +15,9 @@ namespace Content.Server.SS220.CryopodSSD;
 /// </summary>
 public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
-    [Dependency] private readonly MindTrackerSystem _mindTrackerSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly SSDStorageConsoleSystem _SSDStorageConsoleSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    
     private ISawmill _sawmill = default!;
 
     public override void Initialize()
@@ -60,50 +28,11 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 
         SubscribeLocalEvent<CryopodSSDComponent, ComponentInit>(OnComponentInit);
         
-        SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDStorageInteractWithItemEvent>(OnInteractWithItem);
         SubscribeLocalEvent<CryopodSSDComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
-        SubscribeLocalEvent<CryopodSSDComponent, EntRemovedFromContainerMessage>(OnStorageItemRemoved);
-        SubscribeLocalEvent<CryopodSSDComponent, BoundUIOpenedEvent>(UpdateUserInterface);
-
         SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDLeaveActionEvent>(OnCryopodSSDLeaveAction);
+        
         SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDDragFinished>(OnDragFinished);
         SubscribeLocalEvent<CryopodSSDComponent, DragDropTargetEvent>(HandleDragDropOn);
-    }
-
-    private void OnInteractWithItem(EntityUid uid, CryopodSSDComponent component, CryopodSSDStorageInteractWithItemEvent args)
-    {
-        if (args.Session.AttachedEntity is not EntityUid player)
-            return;
-
-        if (!Exists(args.InteractedItemUID))
-        {
-            _sawmill.Error($"Player {args.Session} interacted with non-existent item {args.InteractedItemUID} stored in {ToPrettyString(uid)}");
-            return;
-        }
-
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComp))
-        {
-            return;
-        }
-        
-        if (!_actionBlockerSystem.CanInteract(player, args.InteractedItemUID) || storageComp.Storage == null || !storageComp.Storage.Contains(args.InteractedItemUID))
-            return;
-        
-        if (!TryComp(player, out HandsComponent? hands) || hands.Count == 0)
-            return;
-
-        if (!_accessReaderSystem.IsAllowed(player, uid))
-        {
-            _sawmill.Info($"Player {ToPrettyString(player)} possibly exploits UI, trying to take item from {ToPrettyString(uid)} without access");
-            return;
-        }
-        
-        if (hands.ActiveHandEntity == null)
-        {
-            if (_sharedHandsSystem.TryPickupAnyHand(player, args.InteractedItemUID, handsComp: hands)
-                && storageComp.StorageRemoveSound != null)
-                _sawmill.Info($"{ToPrettyString(player)} takes {ToPrettyString(args.InteractedItemUID)} from {ToPrettyString(uid)}");
-        }
     }
 
     public override void Update(float frameTime)
@@ -113,55 +42,17 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         var currTime = _gameTiming.CurTime;
 
         var entityEnumerator = EntityQueryEnumerator<CryopodSSDComponent>();
-        
+
         while (entityEnumerator.MoveNext(out var uid, out var cryopodSSDComp))
         {
             if (cryopodSSDComp.BodyContainer.ContainedEntity is null ||
-                currTime < cryopodSSDComp.CurrentEntityLyingInCryopodTime + TimeSpan.FromSeconds(cryopodSSDComp.AutoTransferDelay))
+                currTime < cryopodSSDComp.CurrentEntityLyingInCryopodTime +
+                TimeSpan.FromSeconds(cryopodSSDComp.AutoTransferDelay))
             {
                 continue;
             }
-            
-            TransferToCryoStorage(uid, cryopodSSDComp);
-        }
-    }
-    
-    private void OnStorageItemRemoved(EntityUid uid, CryopodSSDComponent storageComp, EntRemovedFromContainerMessage args)
-    {
-        
-        UpdateUserInterface(uid, storageComp, args.Entity, true);
-    }
 
-    private void UpdateUserInterface(EntityUid uid, CryopodSSDComponent component, BoundUIOpenedEvent args)
-    {
-        if (args.Session.AttachedEntity is null)
-        {
-            return;
-        }
-        UpdateUserInterface(uid, component, args.Session.AttachedEntity.Value);
-    }
-
-    private void UpdateUserInterface(EntityUid uid, CryopodSSDComponent? component, EntityUid user,
-        bool forseAccess = false)
-    {
-        if (!Resolve(uid, ref component))
-        {
-            return;
-        }
-        
-        if (TryComp<ServerStorageComponent>(uid, out var storageComponent) && storageComponent.StoredEntities is not null)
-        {
-            var hasAccess = _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
-            var storageState = hasAccess ?  
-                new StorageBoundUserInterfaceState((List<EntityUid>) storageComponent.StoredEntities, 
-                    storageComponent.StorageUsed, 
-                    storageComponent.StorageCapacityMax)
-              : new StorageBoundUserInterfaceState(new List<EntityUid>(),
-                    0,
-                    storageComponent.StorageCapacityMax);
-            
-            var state = new CryopodSSDState(hasAccess, component.StoredEntities, storageState);
-            SetStateForInterface(uid, state);
+            TransferToCryoStorage(uid, cryopodSSDComp);           
         }
     }
 
@@ -179,176 +70,6 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 
         base.EjectBody(uid, cryopodSsdComponent);
         return contained;
-    }
-
-    private void SetStateForInterface(EntityUid uid, CryopodSSDState state)
-    {
-        var ui = _userInterface.GetUiOrNull(uid, CryopodSSDKey.Key);
-        if (ui is not null)
-        {
-            _userInterface.SetUiState(ui, state);
-        }
-    }
-
-    private void TransferToCryoStorage(EntityUid uid, CryopodSSDComponent component)
-    {
-        if (component.BodyContainer.ContainedEntity is null)
-        {
-            return;
-        }
-        
-        var entityToTransfer = component.BodyContainer.ContainedEntity.Value;
-        
-        _sawmill.Info($"{ToPrettyString(entityToTransfer)} moved to cryo storage");
-
-        var station = _stationSystem.GetOwningStation(uid);
-
-        if (station is not null)
-        {
-            DeleteEntityRecord(entityToTransfer, station.Value, out var job);
-            
-            _chatSystem.DispatchStationAnnouncement(station.Value, 
-                Loc.GetString(
-                    "cryopodSSD-entered-cryo",
-                    ("character", MetaData(entityToTransfer).EntityName),
-                    ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(job))),
-                Loc.GetString("cryopodSSD-sender"));
-            
-            component.StoredEntities.Add($"{MetaData(entityToTransfer).EntityName} - [{job}] - {_gameTiming.RealTime}");
-        }
-
-        UndressEntity(uid, component, entityToTransfer);
-
-        _entityManager.QueueDeleteEntity(entityToTransfer);
-        
-        UpdateAppearance(uid, component);
-        
-        ReplaceKillEntityObjectives(entityToTransfer);
-    }
-
-    private void ReplaceKillEntityObjectives(EntityUid uid)
-    {
-        var objectiveToReplace = new List<Objective>();
-        foreach (var mind in _mindTrackerSystem.AllMinds)
-        {
-            if (mind.OwnedEntity is null)
-            {
-                continue;
-            }
-            
-            objectiveToReplace.Clear();
-            
-            foreach (var objective in mind.AllObjectives)
-            {
-                if (objective.Conditions.Any(condition => (condition as KillPersonCondition)?.IsTarget(uid) ?? false))
-                {
-                    objectiveToReplace.Add(objective);
-                }
-            }
-
-            foreach (var objective in objectiveToReplace)
-            {
-                mind.TryRemoveObjective(objective);
-                var newObjective = _objectivesManager.GetRandomObjective(mind, "TraitorObjectiveGroups");
-                if (newObjective is null || !mind.TryAddObjective(newObjective))
-                {
-                    _sawmill.Error($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he lost his objective and didn't get a new one");
-                    continue;
-                }
-                    
-                _sawmill.Info($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
-            }
-        }
-
-    }
-
-    private void UndressEntity(EntityUid uid, CryopodSSDComponent component, EntityUid target)
-    {
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComponent)
-            || storageComponent.Storage is null)
-        {
-            return;
-        }
-        
-        /*
-        * It would be great if we could instantly delete items when we know they are not whitelisted.
-        * However, this could lead to a situation where we accidentally delete the uniform,
-        * resulting in all items inside the pockets being dropped before we add them to the itemsToTransfer list.
-        * So we should have itemsToDelete list.
-        */
-
-        List<EntityUid> itemsToTransfer = new();
-        List<EntityUid> itemsToDelete = new();
-
-        // Looking through all 
-        SortContainedItems(in target,ref itemsToTransfer,ref itemsToDelete, in storageComponent.Whitelist);
-
-        foreach (var item in itemsToTransfer)
-        {
-            storageComponent.Storage.Insert(item);
-        }
-
-        foreach (var item in itemsToDelete)
-        {
-            _entityManager.DeleteEntity(item);
-        }
-    }
-
-    private void SortContainedItems(in EntityUid storageToLook, ref List<EntityUid> whitelistedItems,
-        ref List<EntityUid> itemsToDelete, in EntityWhitelist? whitelist)
-    {
-        if (TryComp<TransformComponent>(storageToLook, out var transformComponent))
-        {
-            foreach (var childUid in transformComponent.ChildEntities)
-            {
-                if (!HasComp<ItemComponent>(childUid))
-                {
-                    continue;
-                }
-
-                if (whitelist is null || whitelist.IsValid(childUid))
-                {
-                    whitelistedItems.Add(childUid);
-                }
-                else
-                {
-                    itemsToDelete.Add(childUid);
-                }
-
-                // As far as I know, ChildEntities cannot be recursive 
-                SortContainedItems(childUid, ref whitelistedItems, ref itemsToDelete, whitelist);
-            }
-        }
-    }
-    
-    private void DeleteEntityRecord(EntityUid uid, EntityUid station, out string job)
-    {
-        job = string.Empty;
-        var stationRecord = FindEntityStationRecordKey(station, uid);
-
-        if (stationRecord is null)
-        {
-            return;
-        }
-
-        job = stationRecord.Value.Item2.JobTitle;
-
-        _stationRecordsSystem.RemoveRecord(station, stationRecord.Value.Item1);
-    }
-    
-    private (StationRecordKey, GeneralStationRecord)? FindEntityStationRecordKey(EntityUid station, EntityUid uid)
-    {
-        if (TryComp<DnaComponent>(uid, out var dnaComponent))
-        {
-            var stationRecords = _stationRecordsSystem.GetRecordsOfType<GeneralStationRecord>(station);
-            var result = stationRecords.FirstOrNull(records => records.Item2.DNA == dnaComponent.DNA);
-            if (result is not null)
-            {
-                return result.Value;
-            }
-        }
-
-        return null;
     }
 
     private void HandleDragDropOn(EntityUid uid, CryopodSSDComponent cryopodSsdComponent, ref DragDropTargetEvent args)
@@ -399,5 +120,26 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
             return;
         }
         TransferToCryoStorage(uid, component);
+    }
+
+    private void TransferToCryoStorage(EntityUid uid, CryopodSSDComponent? component)
+    {
+        if (!Resolve(uid, ref component) || component.BodyContainer.ContainedEntity is null)
+        {
+            return;
+        }
+        
+        var ev = new TransferredToCryoStorageEvent(uid, component.BodyContainer.ContainedEntity.Value);
+
+        ev.Handled = false;
+
+        RaiseLocalEvent(uid, ev, true);
+            
+        if (!ev.Handled)
+        {
+            _SSDStorageConsoleSystem.TransferToCryoStorage(uid, component.BodyContainer.ContainedEntity.Value);
+            ev.Handled = true;
+        }
+        UpdateAppearance(uid, component);
     }
 }

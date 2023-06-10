@@ -1,6 +1,4 @@
-﻿using Content.Shared.Actions.ActionTypes;
-using Content.Shared.Whitelist;
-using Robust.Shared.Containers;
+﻿using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -14,12 +12,6 @@ namespace Content.Shared.SS220.CryopodSSD;
 public sealed class CryopodSSDComponent : Component
 {
     /// <summary>
-    /// List for IC knowing who went in cryo
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public List<string> StoredEntities = new List<string>();
-
-    /// <summary>
     /// Delay before climbing in cryopod
     /// </summary>
     [DataField("entryDelay")] public float EntryDelay = 6f;
@@ -28,13 +20,6 @@ public sealed class CryopodSSDComponent : Component
     /// Time to afk before automatic cryostorage transfer
     /// </summary>
     [DataField("autoTransferToCryoDelay")] public float AutoTransferDelay = 900f;
-    
-    /// <summary>
-    /// All items that are not whitelisted will be
-    /// irretrievably lost after the essence is transferred to cryostorage.
-    /// </summary>
-    [DataField("whitelist"), ViewVariables(VVAccess.ReadWrite)]
-    public EntityWhitelist? Whitelist = null;
 
     [ViewVariables(VVAccess.ReadWrite)] public TimeSpan CurrentEntityLyingInCryopodTime;
 
@@ -44,5 +29,20 @@ public sealed class CryopodSSDComponent : Component
     public enum CryopodSSDVisuals : byte
     {
         ContainsEntity
+    }
+}
+
+/// <summary>
+/// Raises when somebody transfers to cryo storage 
+/// </summary>
+public sealed class TransferredToCryoStorageEvent : HandledEntityEventArgs
+{
+    public EntityUid CryopodSSD { get; }
+    public EntityUid EntityToTransfer { get; }
+
+    public TransferredToCryoStorageEvent(EntityUid cryopodSsd, EntityUid entityToTransfer)
+    {
+        CryopodSSD = cryopodSsd;
+        EntityToTransfer = entityToTransfer;
     }
 }

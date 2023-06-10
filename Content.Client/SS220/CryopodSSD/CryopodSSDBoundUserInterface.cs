@@ -1,15 +1,12 @@
 ﻿using Content.Client.Examine;
 using Content.Client.Storage.UI;
 using Content.Client.UserInterface.Controls;
-using Content.Client.Verbs.UI;
 using Content.Shared.Input;
-using Content.Shared.Interaction;
 using Robust.Client.GameObjects;
 using Content.Shared.SS220.CryopodSSD;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
-using static Content.Shared.SS220.CryopodSSD.SharedCryopodSSDSystem;
 
 namespace Content.Client.SS220.CryopodSSD;
 
@@ -85,7 +82,7 @@ public sealed class CryopodSSDBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not CryopodSSDState castedState)
+        if (state is not SSDStorageConsoleState castedState)
         {
             return;
         }
