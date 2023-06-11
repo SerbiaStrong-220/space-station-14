@@ -62,7 +62,7 @@ namespace Content.Shared.SS220.CryopodSSD
 
             _standingStateSystem.Stand(target, force: true);
 
-            cryopodSsdComponent.CurrentEntityLyingInCryopodTime = _gameTiming.CurTime;
+            cryopodSsdComponent.EntityLiedInCryopodTime = _gameTiming.CurTime;
 
             UpdateAppearance(uid, cryopodSsdComponent);
             return true;

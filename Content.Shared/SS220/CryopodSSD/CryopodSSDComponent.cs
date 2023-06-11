@@ -15,13 +15,8 @@ public sealed class CryopodSSDComponent : Component
     /// Delay before climbing in cryopod
     /// </summary>
     [DataField("entryDelay")] public float EntryDelay = 6f;
-    
-    /// <summary>
-    /// Time to afk before automatic cryostorage transfer
-    /// </summary>
-    [DataField("autoTransferToCryoDelay")] public float AutoTransferDelay = 900f;
 
-    [ViewVariables(VVAccess.ReadWrite)] public TimeSpan CurrentEntityLyingInCryopodTime;
+    [ViewVariables(VVAccess.ReadWrite)] public TimeSpan EntityLiedInCryopodTime;
 
     [ViewVariables(VVAccess.ReadWrite)] public ContainerSlot BodyContainer = default!;
 
