@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Globalization;
 using Content.Server.Chat.Systems;
