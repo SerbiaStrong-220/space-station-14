@@ -10,9 +10,6 @@
 - type: playTimeTracker
   id: JobBartender
 
-  - type: playTimeTracker
-  id: JobBrigmedic
-
 - type: playTimeTracker
   id: JobBotanist
 
@@ -66,6 +63,9 @@
 
 - type: playTimeTracker
   id: JobHeadOfSecurity
+
+- type: playTimeTracker
+  id: JobBrigmedic
 
 - type: playTimeTracker
   id: JobJanitor
