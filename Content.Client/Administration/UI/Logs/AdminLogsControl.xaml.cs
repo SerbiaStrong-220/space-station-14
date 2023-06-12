@@ -16,12 +16,14 @@ namespace Content.Client.Administration.UI.Logs;
 public sealed partial class AdminLogsControl : Control
 {
     private readonly Comparer<AdminLogTypeButton> _adminLogTypeButtonComparer =
-        Comparer<AdminLogTypeButton>.Create((a, b) =>
-            string.Compare(a.Type.ToString(), b.Type.ToString(), StringComparison.Ordinal));
+        Comparer<AdminLogTypeButton>.Create(
+            (a, b) => string.Compare(a.Type.ToString(), b.Type.ToString(), StringComparison.Ordinal)
+        );
 
     private readonly Comparer<AdminLogPlayerButton> _adminLogPlayerButtonComparer =
-        Comparer<AdminLogPlayerButton>.Create((a, b) =>
-            string.Compare(a.Text, b.Text, StringComparison.Ordinal));
+        Comparer<AdminLogPlayerButton>.Create(
+            (a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal)
+        );
 
     public AdminLogsControl()
     {
@@ -44,6 +46,8 @@ public sealed partial class AdminLogsControl : Control
 
         ResetRoundButton.OnPressed += ResetRoundPressed;
 
+        RecievedLogs = new List<SharedAdminLog>();
+
         SetImpacts(Enum.GetValues<LogImpact>().OrderBy(impact => impact).ToArray());
         SetTypes(Enum.GetValues<LogType>());
     }
@@ -55,6 +59,7 @@ public sealed partial class AdminLogsControl : Control
     private int ShownLogs { get; set; }
     private int TotalLogs { get; set; }
     private int RoundLogs { get; set; }
+    private List<SharedAdminLog> RecievedLogs { get; set; }
     public bool IncludeNonPlayerLogs { get; set; }
 
     public HashSet<LogType> SelectedTypes { get; } = new();
@@ -239,22 +244,27 @@ public sealed partial class AdminLogsControl : Control
     private void UpdateLogs()
     {
         ShownLogs = 0;
+        var logsText = "";
 
-        foreach (var child in LogsContainer.Children)
+        for (int i = RecievedLogs.Count - 1; i >= 0; i--)
         {
-            if (child is not AdminLogLabel log)
-            {
-                continue;
-            }
-
-            child.Visible = ShouldShowLog(log);
-            if (child.Visible)
+            var log = RecievedLogs[i];
+            if (ShouldShowLog(log))
             {
                 ShownLogs++;
+                logsText += string.Format(
+                    "{0:HH:mm:ss} - {1}\n{2}\n\n",
+                    log.Date,
+                    log.Type,
+                    log.Message
+                );
             }
         }
 
-        UpdateCount();
+        AdminLogsTextEdit.TextRope = new Robust.Shared.Utility.Rope.Leaf(logsText);
+        AdminLogsScrollContainer.SetScrollValue(default);
+
+        UpdateCount(ShownLogs, RecievedLogs.Count);
     }
 
     private bool ShouldShowType(AdminLogTypeButton button)
@@ -269,30 +279,30 @@ public sealed partial class AdminLogsControl : Control
                button.Text.Contains(PlayerSearch.Text, StringComparison.OrdinalIgnoreCase);
     }
 
-    private bool LogMatchesPlayerFilter(AdminLogLabel label)
+    private bool LogMatchesPlayerFilter(SharedAdminLog log)
     {
-        if (label.Log.Players.Length == 0)
+        if (log.Players.Length == 0)
             return SelectedPlayers.Count == 0 || IncludeNonPlayerLogs;
 
-        return SelectedPlayers.Overlaps(label.Log.Players);
+        return SelectedPlayers.Overlaps(log.Players);
     }
 
-    private bool ShouldShowLog(AdminLogLabel label)
+    private bool ShouldShowLog(SharedAdminLog log)
     {
         // Check log type
-        if (!SelectedTypes.Contains(label.Log.Type))
+        if (!SelectedTypes.Contains(log.Type))
             return false;
 
         // Check players
-        if (!LogMatchesPlayerFilter(label))
+        if (!LogMatchesPlayerFilter(log))
             return false;
 
         // Check impact
-        if (!SelectedImpacts.Contains(label.Log.Impact))
+        if (!SelectedImpacts.Contains(log.Impact))
             return false;
 
         // Check search
-        if (!label.Log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
+        if (!log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
             return false;
 
         return true;
@@ -458,32 +468,14 @@ public sealed partial class AdminLogsControl : Control
 
     public void AddLogs(List<SharedAdminLog> logs)
     {
-        var span = CollectionsMarshal.AsSpan(logs);
-        for (var i = 0; i < span.Length; i++)
-        {
-            ref var log = ref span[i];
-            var separator = new HSeparator();
-            var label = new AdminLogLabel(ref log, separator);
-            label.Visible = ShouldShowLog(label);
-
-            TotalLogs++;
-            if (label.Visible)
-            {
-                ShownLogs++;
-            }
-
-            LogsContainer.AddChild(label);
-            LogsContainer.AddChild(separator);
-        }
-
-        UpdateCount();
+        RecievedLogs.AddRange(logs);
+        UpdateLogs();
     }
 
     public void SetLogs(List<SharedAdminLog> logs)
     {
-        LogsContainer.RemoveAllChildren();
-        UpdateCount(0, 0);
-        AddLogs(logs);
+        RecievedLogs = logs;
+        UpdateLogs();
     }
 
     public void UpdateCount(int? shown = null, int? total = null, int? round = null)
