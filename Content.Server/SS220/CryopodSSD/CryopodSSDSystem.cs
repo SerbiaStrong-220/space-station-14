@@ -3,6 +3,7 @@ using Content.Server.Mind.Components;
 using Content.Shared.CCVar;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.CryopodSSD;
 using Content.Shared.Verbs;
 using Robust.Shared.Configuration;
@@ -20,6 +21,7 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 {
     [Dependency] private readonly SSDStorageConsoleSystem _SSDStorageConsoleSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     private ISawmill _sawmill = default!;
@@ -103,7 +105,13 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         
         if (!TryComp(args.Dragged, out MindComponent? mind) || !mind.HasMind)
         {
-            _sawmill.Error($"{ToPrettyString(args.User)} tries to put non-playable entity into SSD cryopod {ToPrettyString(args.Dragged)}");
+            _sawmill.Info($"{ToPrettyString(args.User)} tries to put non-playable entity into SSD cryopod {ToPrettyString(args.Dragged)}");
+            return;
+        }
+
+        if (_mobStateSystem.IsDead(args.Dragged))
+        {
+            _sawmill.Log(LogLevel.Warning,$"{ToPrettyString(args.User)} tries to put dead entity(passing client check) {ToPrettyString(args.Dragged)} into SSD cryopod, potentially client exploit");
             return;
         }
 

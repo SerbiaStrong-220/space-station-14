@@ -118,7 +118,7 @@ namespace Content.Shared.SS220.CryopodSSD
             if (args.Handled)
                 return;
 
-            args.CanDrop = HasComp<BodyComponent>(args.Dragged);
+            args.CanDrop = HasComp<BodyComponent>(args.Dragged) && _mobStateSystem.IsAlive(args.Dragged);
             args.Handled = true;
         }
 
