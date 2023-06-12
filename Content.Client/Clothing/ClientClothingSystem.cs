@@ -214,8 +214,10 @@ public sealed class ClientClothingSystem : ClothingSystem
             return;
         }
 
-        if (slot == "jumpsuit")
+        if (slot == "jumpsuit" && sprite.LayerMapTryGet(HumanoidVisualLayers.StencilMask, out var suitLayer))
         {
+            sprite.LayerSetVisible(suitLayer, true);
+
             if (!TryComp(equipee, out HumanoidAppearanceComponent? humanoid))
                 return;
 
