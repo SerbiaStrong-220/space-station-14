@@ -62,6 +62,13 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
             TransferToCryoStorage(uid, cryopodSSDComp);           
         }
     }
+    
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        
+        _cfg.UnsubValueChanged(CCVars.AutoTransferToCryoDelay, SetAutoTransferDelay);
+    }
 
     /// <summary>
     /// Ejects body from cryopod

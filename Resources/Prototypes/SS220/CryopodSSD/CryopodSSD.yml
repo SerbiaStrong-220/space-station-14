@@ -64,7 +64,6 @@
       sprite: SS220/Structures/Machines/cryopodSSD.rsi
       state: icon
     - type: CryopodSSD
-      autoTransferToCryoDelay: 900
     - type: SSDStorageConsole
       isItReallyCryopod: true
     - type: ContainerContainer
