@@ -8,14 +8,14 @@ using Content.Server.Traitor.Uplink;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
-using Content.Server.PDA.Ringer;
-using Content.Server.Players;
-using Content.Server.Traitor;
 using Content.Shared.Roles;
-using Robust.Shared.Utility;
 using System.Linq;
 using Robust.Shared.Prototypes;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Timing;
+using Content.Server.Database;
+using Content.Server.Mind;
+using System;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -27,6 +27,7 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
@@ -38,6 +39,8 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         base.Initialize();
 
         SubscribeLocalEvent<DamageChangedEvent>(OnHealthChanged);
+        SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnPlayersSpawned);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(HandleLatejoin);
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
@@ -50,7 +53,6 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     protected override void Started(EntityUid uid, DeathMatchRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         _chatManager.DispatchServerAnnouncement(Loc.GetString("rule-death-match-added-announcement"));
-
     }
 
     protected override void Ended(EntityUid uid, DeathMatchRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
@@ -59,7 +61,6 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
 
         component.DeadCheckTimer = null;
         component.RestartTimer = null;
-
     }
 
     private void OnHealthChanged(DamageChangedEvent _)
@@ -91,9 +92,12 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
 
-        foreach (var playerSession in _playerManager.ServerSessions)
+        if (component.SelectionStatus == DeathMatchRuleComponent.SelectionState.ReadyToSelect)
         {
-            AddUplink(playerSession);
+            foreach (var playerSession in _playerManager.ServerSessions)
+                AddUplink(playerSession);
+
+            component.SelectionStatus = DeathMatchRuleComponent.SelectionState.SelectionMade;
         }
 
         // If the restart timer is active, that means the round is ending soon, no need to check for winners.
@@ -146,18 +150,43 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         component.RestartTimer = component.RestartDelay;
     }
 
+    private void OnPlayersSpawned(RulePlayerJobsAssignedEvent ev)
+    {
+        var query = EntityQueryEnumerator<DeathMatchRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var uid, out var dmPlayer, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(uid, gameRule))
+                continue;
+
+            var delay = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.TraitorStartDelay));
+
+            dmPlayer.AnnounceAt = _gameTiming.CurTime + delay;
+
+            dmPlayer.SelectionStatus = DeathMatchRuleComponent.SelectionState.ReadyToSelect;
+        }
+    }
+
+    private void HandleLatejoin(PlayerSpawnCompleteEvent ev)
+    {
+        var query = EntityQueryEnumerator<DeathMatchRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var uid, out var dmPlayer, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(uid, gameRule))
+                continue;
+
+            if (ev.LateJoin)
+                AddUplink(ev.Player);
+        }
+    }
+
     public void AddUplink(IPlayerSession session)
     {
         if (session?.AttachedEntity is not { } user) { return; }
-        //Get target item
-        EntityUid? uplinkEntity = null;
         var entityManager = IoCManager.Resolve<IEntityManager>();
-        //Get TC count
         var configManager = IoCManager.Resolve<IConfigurationManager>();
-        var tcCount = configManager.GetCVar(CCVars.TraitorStartingBalance);
+        var tcCount = configManager.GetCVar(CCVars.TraitorDeathMatchStartingBalance);
         Logger.Debug(entityManager.ToPrettyString(user));
-        //Finally add uplink
         var uplinkSys = entityManager.EntitySysManager.GetEntitySystem<UplinkSystem>();
-        if (!uplinkSys.AddUplink(user, FixedPoint2.New(tcCount), uplinkEntity: uplinkEntity)) { }
+        if (!uplinkSys.AddUplink(user, tcCount)) { }
     }
 }
