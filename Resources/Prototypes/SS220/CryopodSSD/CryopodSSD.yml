@@ -32,6 +32,8 @@
           type: CryopodSSDBoundUserInterface
     - type: SSDStorageConsole
       whitelist:
+        components:
+          - Stamp
         tags:
           - HighRiskItem
     - type: ContainerContainer
