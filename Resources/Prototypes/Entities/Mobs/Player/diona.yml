@@ -31,3 +31,6 @@
       factions:
         - NanoTrasen
     - type: Pacifist # Corvax-DionaPacifist
+    - type: Tag
+      tags:
+        - ZombifyableByMelee

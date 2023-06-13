@@ -16,6 +16,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
@@ -40,6 +41,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private readonly TagSystem _tag = default!;
 
         public override void Initialize()
         {
@@ -250,6 +252,9 @@ namespace Content.Server.Zombies
                     continue;
 
                 if (!TryComp<MobStateComponent>(entity, out var mobState) || HasComp<DroneComponent>(entity))
+                    continue;
+
+                if(!_tag.HasTag(entity, "ZombifyableByMelee"))
                     continue;
 
                 if (HasComp<ZombieComponent>(entity))
