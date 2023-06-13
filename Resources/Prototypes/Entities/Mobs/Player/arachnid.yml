@@ -33,6 +33,3 @@
   - type: Faction
     factions:
     - NanoTrasen
-  - type: Tag
-    tags:
-      - ZombifyableByMelee

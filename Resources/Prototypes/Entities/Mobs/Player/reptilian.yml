@@ -32,6 +32,3 @@
         types:
           Asphyxiation: -1.0
 #Weh
-    - type: Tag
-      tags:
-        - ZombifyableByMelee

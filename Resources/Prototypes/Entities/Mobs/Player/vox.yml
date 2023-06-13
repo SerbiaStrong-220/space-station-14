@@ -31,7 +31,4 @@
       damageRecovery:
         types:
           Asphyxiation: -1.0
-    - type: Tag
-      tags:
-        - ZombifyableByMelee
 
