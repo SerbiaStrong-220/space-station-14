@@ -1,5 +1,7 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Mind.Components;
+using Content.Server.Station.Systems;
+using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -22,6 +24,8 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
     [Dependency] private readonly SSDStorageConsoleSystem _SSDStorageConsoleSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     private ISawmill _sawmill = default!;
@@ -37,10 +41,11 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
         _cfg.OnValueChanged(CCVars.AutoTransferToCryoDelay, SetAutoTransferDelay, true);
 
         SubscribeLocalEvent<CryopodSSDComponent, ComponentInit>(OnComponentInit);
-        
+
         SubscribeLocalEvent<CryopodSSDComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
         SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDLeaveActionEvent>(OnCryopodSSDLeaveAction);
         
+        SubscribeLocalEvent<CryopodSSDComponent, TeleportToCryoFinished>(OnTeleportFinished);
         SubscribeLocalEvent<CryopodSSDComponent, CryopodSSDDragFinished>(OnDragFinished);
         SubscribeLocalEvent<CryopodSSDComponent, DragDropTargetEvent>(HandleDragDropOn);
     }
@@ -92,6 +97,73 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
 
         base.EjectBody(uid, cryopodSsdComponent);
         return contained;
+    }
+    
+    
+    /// <summary>
+    /// Tries to teleport target inside cryopod, if any available
+    /// </summary>
+    /// <param name="target"> Target to teleport in first matching cryopod</param>
+    /// <returns> true if player successfully transferred to cryo storage, otherwise returns false</returns>
+    public bool TeleportEntityToCryoStorageWithDelay(EntityUid target)
+    {
+        var station = _stationSystem.GetOwningStation(target);
+
+        if (station is null)
+        {
+            return false;
+        }
+
+        foreach (var comp in EntityQuery<CryopodSSDComponent>())
+        {
+            if (comp.BodyContainer.ContainedEntity == target)
+            {
+                return true;
+            }
+        }
+        
+        var cryopodSSDComponents = EntityQueryEnumerator<CryopodSSDComponent>();
+
+        while (cryopodSSDComponents
+               .MoveNext(out var cryopodSSDUid, out var cryopodSSDComp))
+        {
+            if (cryopodSSDComp.BodyContainer.ContainedEntity is null
+                && _stationSystem.GetOwningStation(cryopodSSDUid) == station)
+            {
+                var portal = Spawn("CryoStoragePortal", Transform(target).Coordinates);
+                
+                if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
+                {
+                    _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
+                }
+                
+                var doAfterArgs = new DoAfterArgs(target, cryopodSSDComp.EntryDelay, new TeleportToCryoFinished(portal), cryopodSSDUid)
+                {
+                    BreakOnDamage = false,
+                    BreakOnTargetMove = false,
+                    BreakOnUserMove = true,
+                    NeedHand = false,
+                };
+
+                _doAfterSystem.TryStartDoAfter(doAfterArgs);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void OnTeleportFinished(EntityUid uid, CryopodSSDComponent component, TeleportToCryoFinished args)
+    {
+        InsertBody(uid, args.User, component);
+        TransferToCryoStorage(uid, component);
+
+        if (TryComp<AmbientSoundComponent>(args.PortalId, out var ambientSoundComponent))
+        {
+            _audioSystem.PlayPvs(ambientSoundComponent.Sound, args.PortalId);
+        }
+
+        EntityManager.DeleteEntity(args.PortalId);
     }
 
     private void SetAutoTransferDelay(float value) => _autoTransferDelay = value;
