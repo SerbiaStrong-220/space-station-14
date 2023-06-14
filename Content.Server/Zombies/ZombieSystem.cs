@@ -43,6 +43,8 @@ namespace Content.Server.Zombies
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly TagSystem _tag = default!;
 
+        private const string ZombifyableTag = "ZombifyableByMelee";
+
         public override void Initialize()
         {
             base.Initialize();
@@ -254,7 +256,7 @@ namespace Content.Server.Zombies
                 if (!TryComp<MobStateComponent>(entity, out var mobState) || HasComp<DroneComponent>(entity))
                     continue;
 
-                if(!_tag.HasTag(entity, "ZombifyableByMelee"))
+                if(!_tag.HasTag(entity, ZombifyableTag))
                     continue;
 
                 if (HasComp<ZombieComponent>(entity))
