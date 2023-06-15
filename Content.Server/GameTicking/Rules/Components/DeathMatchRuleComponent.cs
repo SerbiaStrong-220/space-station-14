@@ -39,5 +39,4 @@ public sealed class DeathMatchRuleComponent : Component
     }
 
     public SelectionState SelectionStatus = SelectionState.WaitingForSpawn;
-    public TimeSpan AnnounceAt = TimeSpan.Zero;
 }

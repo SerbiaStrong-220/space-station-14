@@ -8,14 +8,6 @@ using Content.Server.Traitor.Uplink;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
-using Content.Shared.Roles;
-using System.Linq;
-using Robust.Shared.Prototypes;
-using Content.Shared.FixedPoint;
-using Robust.Shared.Timing;
-using Content.Server.Database;
-using Content.Server.Mind;
-using System;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -24,15 +16,16 @@ namespace Content.Server.GameTicking.Rules;
 /// </summary>
 public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
 
     private ISawmill _sawmill = default!;
+    int _deathMatchStartingBalance;
+    bool _gameLobbyEnableWin;
 
     public override void Initialize()
     {
@@ -41,12 +34,20 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         SubscribeLocalEvent<DamageChangedEvent>(OnHealthChanged);
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnPlayersSpawned);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(HandleLatejoin);
+        _cfg.OnValueChanged(CCVars.GameLobbyEnableWin, SetGameLobbyEnableWin, true);
+        _cfg.OnValueChanged(CCVars.TraitorDeathMatchStartingBalance, SetDeathMatchStartingBalance, true);
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
+
+    private void SetGameLobbyEnableWin(bool value) => _gameLobbyEnableWin = value;
+
+    private void SetDeathMatchStartingBalance(int value) => _deathMatchStartingBalance = value;
 
     public override void Shutdown()
     {
         base.Shutdown();
+        _cfg.UnsubValueChanged(CCVars.GameLobbyEnableWin, SetGameLobbyEnableWin);
+        _cfg.UnsubValueChanged(CCVars.TraitorDeathMatchStartingBalance, SetDeathMatchStartingBalance);
         _playerManager.PlayerStatusChanged -= OnPlayerStatusChanged;
     }
 
@@ -114,7 +115,7 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
             return;
         }
 
-        if (!_cfg.GetCVar(CCVars.GameLobbyEnableWin) || component.DeadCheckTimer == null)
+        if (!_gameLobbyEnableWin || component.DeadCheckTimer == null)
             return;
 
         component.DeadCheckTimer -= frameTime;
@@ -158,10 +159,6 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
 
-            var delay = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.TraitorStartDelay));
-
-            dmPlayer.AnnounceAt = _gameTiming.CurTime + delay;
-
             dmPlayer.SelectionStatus = DeathMatchRuleComponent.SelectionState.ReadyToSelect;
         }
     }
@@ -169,11 +166,12 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     private void HandleLatejoin(PlayerSpawnCompleteEvent ev)
     {
         var query = EntityQueryEnumerator<DeathMatchRuleComponent, GameRuleComponent>();
+
+        // checking the component so as not to issue uplinks in other modes
         while (query.MoveNext(out var uid, out var dmPlayer, out var gameRule))
         {
-            if (!GameTicker.IsGameRuleAdded(uid, gameRule))
-                continue;
-
+            // since the DM mode allows players to join after the start of the round,
+            // they also need to be given funds to fight
             if (ev.LateJoin)
                 AddUplink(ev.Player);
         }
@@ -182,11 +180,7 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     public void AddUplink(IPlayerSession session)
     {
         if (session?.AttachedEntity is not { } user) { return; }
-        var entityManager = IoCManager.Resolve<IEntityManager>();
-        var configManager = IoCManager.Resolve<IConfigurationManager>();
-        var tcCount = configManager.GetCVar(CCVars.TraitorDeathMatchStartingBalance);
-        Logger.Debug(entityManager.ToPrettyString(user));
-        var uplinkSys = entityManager.EntitySysManager.GetEntitySystem<UplinkSystem>();
-        if (!uplinkSys.AddUplink(user, tcCount)) { }
+        Logger.Debug(_entityManager.ToPrettyString(user));
+        if (!_uplink.AddUplink(user, _deathMatchStartingBalance)) { }
     }
 }
