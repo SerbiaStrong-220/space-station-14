@@ -21,25 +21,30 @@ public sealed class AfkSSDSystem : EntitySystem
 {
     [Dependency] private readonly CryopodSSDSystem _cryopodSSDSystem = default!;
     [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IAfkManager _afkManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    
+
+    private float _afkTeleportTocryo;
+
     private readonly Dictionary<(EntityUid, NetUserId), (TimeSpan, bool)> _entityEnteredSSDTimes = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _cfg.OnValueChanged(CCVars.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
         _playerManager.PlayerStatusChanged += OnPlayerChange;
     }
+
+    private void SetAfkTeleportToCryo(float value)
+        => _afkTeleportTocryo = value;
 
     public override void Shutdown()
     {
         base.Shutdown();
 
+        _cfg.UnsubValueChanged(CCVars.AfkTeleportToCryo, SetAfkTeleportToCryo);
         _playerManager.PlayerStatusChanged -= OnPlayerChange;
     }
 
@@ -58,7 +63,7 @@ public sealed class AfkSSDSystem : EntitySystem
     
     private bool IsTeleportAfkToCryoTime(TimeSpan time)
     {
-        var timeOut = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.AfkTeleportToCryo));
+        var timeOut = TimeSpan.FromSeconds(_afkTeleportTocryo);
         return _gameTiming.CurTime - time > timeOut;
     }
 
