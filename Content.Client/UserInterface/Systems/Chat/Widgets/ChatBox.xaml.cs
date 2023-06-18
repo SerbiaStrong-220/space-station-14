@@ -71,15 +71,23 @@ public partial class ChatBox : UIWidget
             ? msg.MessageColorOverride.Value
             : msg.Channel.TextColor();
 
-        if (_entityManager.HasComponent<GhostComponent>(_playerManager?.LocalPlayer?.ControlledEntity)
-            && (msg.Channel & ChatChannel.IC) != ChatChannel.None
-            && msg.SenderEntity != _playerManager?.LocalPlayer?.ControlledEntity)
+        var wrappedMessage = msg.WrappedMessage;
+        if (IsOrbit(msg.SenderEntity, msg.Channel))
         {
-            msg.WrappedMessage += $"[cmdlink=\"({Loc.GetString("orbit-chat-click")})\" command=\"orbit {msg.SenderEntity}\"/]";
+            var orbitButtonText = Loc.GetString("orbit-chat-click");
+            wrappedMessage += $"\n[cmdlink=\"({orbitButtonText})\" command=\"orbit {msg.SenderEntity}\"][/cmdlink]"; 
         }
 
-        AddLine(msg.WrappedMessage, color);
+        AddLine(wrappedMessage, color);
     }
+
+    private bool IsOrbit(EntityUid senderEntity, ChatChannel channel)
+    {
+        return (_entityManager.HasComponent<GhostComponent>(_playerManager.LocalPlayer?.ControlledEntity)
+                && (channel & (ChatChannel.IC ^ ChatChannel.Radio)) != ChatChannel.None
+                && senderEntity != _playerManager.LocalPlayer?.ControlledEntity);
+    }
+    
 
     private void OnChannelSelect(ChatSelectChannel channel)
     {
@@ -113,7 +121,7 @@ public partial class ChatBox : UIWidget
 
     public void AddLine(string message, Color color)
     {
-        var formatted = new FormattedMessage(3);
+        var formatted = new FormattedMessage(4);
         formatted.PushColor(color);
         formatted.AddMarkup(message);
         formatted.Pop();

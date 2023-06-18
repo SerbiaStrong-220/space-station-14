@@ -1,1 +1,1 @@
-﻿orbit-chat-click = Наблюдать
+﻿orbit-chat-click = Нажмите что бы наблюдать

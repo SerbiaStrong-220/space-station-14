@@ -1,6 +1,7 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Ghost.Components;
+using Content.Server.Mind.Components;
 using Content.Shared.Administration;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
@@ -55,7 +56,7 @@ public sealed class OrbitCommand : IConsoleCommand
             return;
         }
 
-        if (!_entityManager.HasComponent<FollowerComponent>(entityToFollow))
+        if (!_entityManager.HasComponent<MindComponent>(entityToFollow))
         {
             shell.WriteLine("You can't follow this entity");
             return;
