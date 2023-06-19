@@ -41,6 +41,12 @@ public sealed partial class GameTicker
             string.Empty,
             "cleargamerules",
             ClearGameRulesCommand);
+
+        // Show active game rules command.
+        _consoleHost.RegisterCommand("showactivegamerules",
+            string.Empty,
+            "showactivegamerules",
+            ShowActiveGameRulesCommand);
     }
 
     private void ShutdownGameRules()
@@ -48,6 +54,7 @@ public sealed partial class GameTicker
         _consoleHost.UnregisterCommand("addgamerule");
         _consoleHost.UnregisterCommand("endgamerule");
         _consoleHost.UnregisterCommand("cleargamerules");
+        _consoleHost.UnregisterCommand("showactivegamerules");
     }
 
     /// <summary>
@@ -174,6 +181,15 @@ public sealed partial class GameTicker
         }
     }
 
+    public void ShowActiveGameRules()
+    {
+        var tt = "";
+        foreach (var rule in GetAddedGameRules())
+        {
+            //tt += rule.
+        }
+    }
+
     /// <summary>
     /// Gets all the gamerule entities which are currently active.
     /// </summary>
@@ -263,6 +279,12 @@ public sealed partial class GameTicker
     private void ClearGameRulesCommand(IConsoleShell shell, string argstr, string[] args)
     {
         ClearGameRules();
+    }
+
+    [AdminCommand(AdminFlags.Fun)]
+    private void ShowActiveGameRulesCommand(IConsoleShell shell, string argstr, string[] args)
+    {
+        ShowActiveGameRules();
     }
 
     #endregion
