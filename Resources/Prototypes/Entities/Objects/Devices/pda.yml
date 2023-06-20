@@ -64,10 +64,10 @@
     softness: 5
     autoRot: true
   - type: Ringer
+  - type: StationLimitedNetwork
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: PDA
-    transmitFrequencyId: PDA
     prefix: device-address-prefix-console
   - type: WirelessNetworkConnection
     range: 500
@@ -75,7 +75,7 @@
     uiKey: enum.PDAUiKey.Key
     preinstalled:
       - NotekeeperCartridge
-      - MessengerCartridge
+      - MessengerCartridgeClient
     cartridgeSlot:
       priority: -1
       name: Cartridge

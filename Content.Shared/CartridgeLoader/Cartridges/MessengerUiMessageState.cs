@@ -1,65 +1,110 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Messenger;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CartridgeLoader.Cartridges;
 
 [Serializable, NetSerializable]
-public sealed class MessengerMainMenuUiState : BoundUserInterfaceState
-{
-    public Dictionary<EntityUid, MessengerMessage> LastMessage;
 
-    public MessengerMainMenuUiState(Dictionary<EntityUid, MessengerMessage> lastMessage)
+public sealed class MessengerUiState: BoundUserInterfaceState
+{
+    public MessengerContact ClientContact = new ();
+    public Dictionary<uint, MessengerChatUiState> Chats= new ();
+    public Dictionary<uint, MessengerMessage> Messages = new();
+    public Dictionary<uint, MessengerContact> Contacts = new();
+
+}
+
+[Serializable, NetSerializable]
+public sealed class MessengerChatUiState
+{
+    public uint Id;
+    public string Name;
+    public MessengerChatKind Kind;
+    public HashSet<uint> Members;
+    public HashSet<uint> Messages;
+    public uint? LastMessage;
+    public int SortNumber;
+    public bool NewMessages;
+    public bool ForceUpdate;
+
+    public MessengerChatUiState(uint id,string? name, MessengerChatKind kind, HashSet<uint> members, HashSet<uint> messages, uint? lastMessage, int sortNumber)
     {
+        Id = id;
+        Name = name ?? "unknown";
+        Kind = kind;
+        Members = members;
+        Messages = messages;
         LastMessage = lastMessage;
+        SortNumber = sortNumber;
+        NewMessages = true;
     }
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerHistoryUiState : BoundUserInterfaceState
+public sealed class MessengerClientContactUiState: BoundUserInterfaceState
 {
-    public EntityUid Receiver;
-    public List<MessengerHistoryMessage> History;
+    public MessengerContact ClientContact;
 
-    public MessengerHistoryUiState(EntityUid receiver, List<MessengerHistoryMessage> history)
+    public MessengerClientContactUiState(MessengerContact clientContact)
     {
-        Receiver = receiver;
-        History = history;
+        ClientContact = clientContact;
     }
 }
 
-[Serializable, NetSerializable, DataRecord]
-public sealed class MessengerMessage
+[Serializable, NetSerializable]
+public sealed class MessengerContactUiState: BoundUserInterfaceState
 {
-    public string? Name;
-    public readonly TimeSpan Time;
-    public readonly string Text;
+    public List<MessengerContact> Contacts;
 
-    public MessengerMessage(TimeSpan time, string text)
+    public MessengerContactUiState(List<MessengerContact> contacts)
     {
-        Name = "unknown";
-        Time = time;
+        Contacts = contacts;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MessengerMessagesUiState: BoundUserInterfaceState
+{
+    // uint - chatId
+    public List<MessengerMessage> Messages;
+
+    public MessengerMessagesUiState( List<MessengerMessage> messages)
+    {
+        Messages = messages;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MessengerChatUpdateUiState: BoundUserInterfaceState
+{
+    public List<MessengerChat> Chats;
+
+    public MessengerChatUpdateUiState(List<MessengerChat> chats)
+    {
+        Chats = chats;
+    }
+}
+[Serializable, NetSerializable]
+public sealed class MessengerErrorUiState : BoundUserInterfaceState
+{
+    public string Text;
+
+    public MessengerErrorUiState(string text)
+    {
         Text = text;
     }
 }
 
-[Serializable, NetSerializable, DataRecord]
-public sealed class MessengerHistoryMessage
+[Serializable, NetSerializable]
+public sealed class MessengerNewChatMessageUiState: BoundUserInterfaceState
 {
-    public readonly EntityUid From;
-    public readonly EntityUid To;
-    public readonly string? ToName;
-    public readonly TimeSpan Time;
-    public readonly string Text;
+    public uint ChatId;
+    public MessengerMessage Message;
 
-    public MessengerHistoryMessage(EntityUid from, EntityUid to, string? toName, TimeSpan time, string text)
+    public MessengerNewChatMessageUiState(uint chatId, MessengerMessage message)
     {
-        From = from;
-        To = to;
-        ToName = toName;
-        if (string.IsNullOrEmpty(ToName))
-        {
-            ToName = "unknown";
-        }
-        Time = time;
-        Text = text;
+        ChatId = chatId;
+        Message = message;
     }
 }

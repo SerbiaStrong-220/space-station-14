@@ -2,18 +2,13 @@
                                xmlns="https://spacestation14.io" Margin="1 0 2 0">
     <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-       <BoxContainer HorizontalExpand="True">
-           <Label Name="ChatName" Access="Public" Text="" HorizontalExpand="True"/>
-           <Label Name="LastMessage" Access="Public" Text="" HorizontalExpand="True"/>
-           <Button
-               Name="OpenChatHistoryButton"
-               Access="Public"
-               HorizontalExpand="True"
-               Text="Open chat"
-               TextAlign="Right"
-               Mode="Press"
-               SizeFlagsStretchRatio="1">
-           </Button>
-       </BoxContainer>
+        <PanelContainer Margin="2 5 2 5" StyleClasses="Inset" VerticalAlignment="Center" VerticalExpand="True" HorizontalExpand="True">
+            <Button Name="OpenChatHistoryButton" Access="Public" HorizontalExpand="True" Mode="Press" SizeFlagsStretchRatio="1">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                    <Label Name="ChatName" Access="Public" Text="" HorizontalAlignment="Left" HorizontalExpand="True" MinHeight="25"/>
+                    <Label Name="LastMessage" Access="Public" Text="" HorizontalAlignment="Left" HorizontalExpand="False" MaxWidth="200" MinHeight="25"/>
+                </BoxContainer>
+            </Button>
+        </PanelContainer>
     </BoxContainer>
 </messenger:MessengerUiChatItem>
