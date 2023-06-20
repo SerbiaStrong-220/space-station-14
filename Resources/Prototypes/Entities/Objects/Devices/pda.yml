@@ -8,7 +8,6 @@
   - type: Appearance
   - type: Sprite
     sprite: Objects/Devices/pda.rsi
-    netsync: false
     layers:
     - map: [ "enum.PDAVisualLayers.Base" ]
     - state: "light_overlay"
@@ -134,6 +133,18 @@
 
 - type: entity
   parent: BasePDA
+  id: BlueShieldPDA
+  name: blue shield PDA
+  description: average style.
+  components:
+  - type: PDA
+    id: BlueShieldIDCard
+    state: pda-bs
+  - type: Icon
+    state: pda-bs
+
+- type: entity
+  parent: BasePDA
   id: MedicalInternPDA
   name: medical intern PDA
   description: Why isn't it white? Has a built-in health analyzer.
@@ -147,6 +158,9 @@
     scanDelay: 1.4
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
 
 - type: entity
   parent: BasePDA
@@ -476,6 +490,9 @@
     scanDelay: 1.2
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
 
 - type: entity
   parent: BasePDA

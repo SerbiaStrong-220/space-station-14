@@ -30,17 +30,17 @@
   rules:
     - Secret
 
-- type: gamePreset
-  id: Sandbox
-  alias:
-    - sandbox
-  name: sandbox-title
-  description: sandbox-description
-  showInVote: true
-  maxPlayers: 5
-  rules:
-    - Sandbox
-
+#- type: gamePreset
+#  id: Sandbox
+#  alias:
+#    - sandbox
+#  name: sandbox-title
+#  description: sandbox-description
+#  showInVote: true
+#  maxPlayers: 5
+#  rules:
+#    - Sandbox
+#
 - type: gamePreset
   id: Traitor
   alias:
@@ -76,17 +76,17 @@
 - type: gamePreset
   id: Zombie
   alias:
-    - zombie
-    - zombies
-#    - Zombies
-    - zz14
-    - zomber
+  - zombie
+  - zombies
+  - Zombies
+  - zz14
+  - zomber
   name: zombie-title
   description: zombie-description
   showInVote: false
   rules:
-    - Zombie
-    - BasicStationEventScheduler
+  - Zombie
+  - BasicStationEventScheduler
 
 - type: gamePreset
   id: Pirates

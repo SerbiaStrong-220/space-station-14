@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
+using Content.Server.Corvax.TTS;
 using Content.Server.Radio.Components;
 using Content.Server.VoiceMask;
 using Content.Server.Popups;
@@ -76,7 +77,7 @@ public sealed class RadioSystem : EntitySystem
             Loc.GetString("chat-radio-message-wrap", ("color", channel.Color), ("channel", $"\\[{channel.LocalizedName}\\]"), ("name", name), ("message", FormattedMessage.EscapeText(message))),
             EntityUid.Invalid);
         var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, chatMsg);
+        var ev = new RadioReceiveEvent(message, messageSource, channel, chatMsg, new());
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -114,6 +115,10 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref ev);
             sentAtLeastOnce = true;
         }
+
+        // Dispatch TTS radio speech event for every receiver
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, ev.Receivers.ToArray()));
+
         if (!sentAtLeastOnce)
             _popup.PopupEntity(Loc.GetString("failed-to-send-message"), messageSource, messageSource, PopupType.MediumCaution);
 

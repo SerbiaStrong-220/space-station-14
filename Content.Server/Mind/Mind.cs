@@ -259,9 +259,7 @@ namespace Content.Server.Mind
 
         public bool HasRole<T>() where T : Role
         {
-            var t = typeof(T);
-
-            return _roles.Any(role => role.GetType() == t);
+            return _roles.Any(role => role is T);
         }
 
         /// <summary>
@@ -303,6 +301,11 @@ namespace Content.Server.Mind
 
             _objectives.Remove(objective);
             return true;
+        }
+
+        public bool TryRemoveObjective(Objective objective)
+        {
+            return TryRemoveObjective(_objectives.IndexOf(objective));
         }
 
         /// <summary>
