@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -15,6 +15,11 @@ namespace Content.Client.Administration.UI.Logs;
 [GenerateTypedNameReferences]
 public sealed partial class AdminLogsControl : Control
 {
+    /// <summary>
+    /// <para>List of used tags can be found here: Robust.Client/UserInterface/RichText/MarkupTagManager.cs</para>
+    /// <para>Pattern test online: https://regex101.com/r/3krK2I/2</para>
+    /// </summary>
+    private const string BBCodeRegexPattern = "((\\[|\\[/)(color|cmdlink|font|bold|italic)=?\\w*\\])";
     private readonly Comparer<AdminLogTypeButton> _adminLogTypeButtonComparer =
         Comparer<AdminLogTypeButton>.Create(
             (a, b) => string.Compare(a.Type.ToString(), b.Type.ToString(), StringComparison.Ordinal)
@@ -59,7 +64,12 @@ public sealed partial class AdminLogsControl : Control
     private int ShownLogs { get; set; }
     private int TotalLogs { get; set; }
     private int RoundLogs { get; set; }
+
+    /// <summary>
+    /// Storage of recieved logs
+    /// </summary>
     private List<SharedAdminLog> RecievedLogs { get; set; }
+
     public bool IncludeNonPlayerLogs { get; set; }
 
     public HashSet<LogType> SelectedTypes { get; } = new();
@@ -246,7 +256,8 @@ public sealed partial class AdminLogsControl : Control
         ShownLogs = 0;
         var logsText = "";
 
-        for (int i = RecievedLogs.Count - 1; i >= 0; i--)
+        // build logs string
+        for (var i = RecievedLogs.Count - 1; i >= 0; i--)
         {
             var log = RecievedLogs[i];
             if (ShouldShowLog(log))
@@ -260,11 +271,30 @@ public sealed partial class AdminLogsControl : Control
                 );
             }
         }
-
-        AdminLogsTextEdit.TextRope = new Robust.Shared.Utility.Rope.Leaf(logsText);
-        AdminLogsScrollContainer.SetScrollValue(default);
-
+        // set new text in TextEdit and clear BB tags only in result log string to
+        // preserve original log messages for posible future use
+        AdminLogsTextEdit.TextRope = new Robust.Shared.Utility.Rope.Leaf(
+                Regex.Replace(logsText, BBCodeRegexPattern, "")
+            );
         UpdateCount(ShownLogs, RecievedLogs.Count);
+        ScrollLogsToBottom();
+    }
+
+    /// <summary>
+    /// Try to scroll AdminLogsTextEdit to the end
+    /// </summary>
+    private void ScrollLogsToBottom()
+    {
+        // find scrollbar in TextEdit's children
+        // it must be at index 1, but may be changed in future
+        for (var i = 0; i < AdminLogsTextEdit.ChildCount; i++)
+        {
+            if (AdminLogsTextEdit.GetChild(i) is VScrollBar scrollbar)
+            {
+                scrollbar.ValueTarget = float.PositiveInfinity;
+                break;
+            }
+        }
     }
 
     private bool ShouldShowType(AdminLogTypeButton button)
