@@ -302,7 +302,7 @@ namespace Content.Server.VendingMachines
             if (vendComponent.Inventory.ContainsKey(itemCode))
                 return true;
 
-            return vendComponent.Whitelist != null && !vendComponent.Whitelist.IsValid(item);
+            return vendComponent.Whitelist != null && vendComponent.Whitelist.IsValid(item);
         }
 
         private bool TryGetItemCode(EntityUid entityUid, out string code)
