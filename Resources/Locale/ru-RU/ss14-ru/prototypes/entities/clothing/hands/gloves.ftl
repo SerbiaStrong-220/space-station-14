@@ -8,6 +8,7 @@ ent-ClothingHandsGlovesBoxingYellow = жёлтые боксёрские перч
     .desc = Жёлтые перчатки для соревновательного бокса.
 ent-ClothingHandsGlovesBoxingRigged = синие боксёрские перчатки
     .desc = Синие перчатки для соревновательного бокса. Кажется, что они тяжелее чем обычно...
+    .suffix = Нечестные
 ent-ClothingHandsGlovesCaptain = капитанские перчатки
     .desc = Королевские синие перчатки с золотой отделкой. Шикарны.
 ent-ClothingHandsGlovesIhscombat = боевые перчатки IHS
