@@ -1,0 +1,42 @@
+- type: entity
+  id: DirectionalSignalSwitch
+  parent: SignalSwitch
+  name: signal switch
+  description: It's a switch for toggling power to things.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: WallMount
+    arc: 180 #overwrite parent
+
+- type: entity
+  id: Lightswitch
+  parent: DirectionalSignalSwitch
+  name: signal switch
+  description: It's a switch for toggling lights. Has a glowing indicator so it can be better seen in the dark.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: SignalSwitch
+    state: true
+  - type: Sprite
+    sprite: Structures/Wallmounts/switch.rsi
+    layers:
+    - state: off
+      map: [ "indicator" ]
+
+- type: entity
+  id: DirectionalSignalButton
+  name: signal button
+  description: It's a button for activating something.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: WallMount
+    arc: 180 #overwrite parent
