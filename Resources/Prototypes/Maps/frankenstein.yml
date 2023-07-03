@@ -10,8 +10,8 @@
         - type: StationNameSetup
           mapNameTemplate: '{0} Frankenstein {1}'
           nameGenerator:
-            #!type:NanotrasenNameGenerator
-            prefixCreator: 'SS220'
+            !type:NanotrasenNameGenerator
+            prefixCreator: ' SS220'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
         - type: StationJobs
