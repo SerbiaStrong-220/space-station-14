@@ -4,7 +4,7 @@
     "x": 32,
     "y": 32
   },
-  "copyright": "Taken from tgstation, brigmedic locker is a resprited CMO locker by PuroSlavKing (Github)",
+  "copyright": "Taken from tgstation, brigmedic locker is a resprited CMO locker by PuroSlavKing (Github), blueshield locker is a resprited captain's locker by TheArturZh",
   "license": "CC-BY-SA-3.0",
   "states": [
     {
@@ -96,6 +96,15 @@
     },
     {
       "name": "blue_door"
+    },
+	{
+      "name": "blueshield"
+    },
+    {
+      "name": "blueshield_door"
+    },
+    {
+      "name": "blueshield_open"
     },
     {
       "name": "bomb"

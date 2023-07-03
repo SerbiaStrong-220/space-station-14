@@ -1,0 +1,10 @@
+- type: entity
+  parent: PaperNtForm
+  id: BlueshieldBriefing
+  name: blueshield briefing
+  components:
+    - type: Paper
+      content: blueshield-briefing-text
+      stampState: paper_stamp-cent
+      stampedBy:
+        - Центком

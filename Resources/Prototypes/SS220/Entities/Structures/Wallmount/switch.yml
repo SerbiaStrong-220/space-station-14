@@ -24,13 +24,16 @@
   - type: SignalSwitch
     state: true
   - type: Sprite
-    sprite: Structures/Wallmounts/switch.rsi
+    sprite: SS220/Structures/Wallmounts/lightswitch.rsi
     layers:
+    - state: base
     - state: off
+      shader: unshaded
       map: [ "indicator" ]
 
 - type: entity
   id: DirectionalSignalButton
+  parent: SignalButton
   name: signal button
   description: It's a button for activating something.
   placement:
