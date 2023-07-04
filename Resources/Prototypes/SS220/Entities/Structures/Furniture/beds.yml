@@ -1,0 +1,12 @@
+- type: entity
+  parent: Bed
+  id: PsychBed
+  name: bed
+  description: A bed for therapist's patients.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/bed.rsi
+    state: psych-bed
+  - type: Construction
+    graph: bed
+    node: psych_bed

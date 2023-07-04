@@ -1,0 +1,43 @@
+- type: entity
+  name: bench
+  id: BenchBase
+  parent: SeatBase
+  abstract: true
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/bench.rsi
+    noRot: false
+
+- type: entity
+  name: bench
+  suffix: DONT_USE, Left
+  id: BenchLeft
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/bench.rsi
+    state: left
+
+- type: entity
+  name: bench
+  suffix: DONT_USE, Right
+  id: BenchRight
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/bench.rsi
+    state: right
+
+- type: entity
+  name: bench
+  suffix: DONT_USE, Middle
+  id: BenchMiddle
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/bench.rsi
+    state: middle
