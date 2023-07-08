@@ -1,25 +1,33 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                xmlns:viewport="clr-namespace:Content.Client.Viewport"
+               xmlns:ui="clr-namespace:Content.Client.Pinpointer.UI"
                Title="{Loc 'surveillance-camera-monitor-ui-window'}">
     <BoxContainer Orientation="Horizontal">
-        <BoxContainer Orientation="Vertical" MinWidth="350" VerticalExpand="True">
-            <!-- lazy -->
-            <OptionButton Name="SubnetSelector" />
-            <Button Name="SubnetRefreshButton" Text="{Loc 'surveillance-camera-monitor-ui-refresh-subnets'}" />
-            <ScrollContainer VerticalExpand="True">
-                <ItemList Name="SubnetList" />
-            </ScrollContainer>
-            <Button Name="CameraRefreshButton" Text="{Loc 'surveillance-camera-monitor-ui-refresh-cameras'}" />
-            <Button Name="CameraDisconnectButton" Text="{Loc 'surveillance-camera-monitor-ui-disconnect'}" />
-            <Label Name="CameraStatus" />
-        </BoxContainer>
+
+        <TabContainer Name="Tabs" Margin="5 5 50 5">
+            <BoxContainer Name="ListSelector" Orientation="Vertical" MinWidth="650" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="10">
+                <!-- lazy -->
+                <OptionButton Name="SubnetSelector" />
+                <Button Name="SubnetRefreshButton" Text="{Loc 'surveillance-camera-monitor-ui-refresh-subnets'}" />
+                <ScrollContainer VerticalExpand="True">
+                    <ItemList Name="SubnetList" />
+                </ScrollContainer>
+                <Button Name="CameraRefreshButton" Text="{Loc 'surveillance-camera-monitor-ui-refresh-cameras'}" />
+                <Button Name="CameraDisconnectButton" Text="{Loc 'surveillance-camera-monitor-ui-disconnect'}" />
+                <Label Name="CameraStatus" />
+            </BoxContainer>
+            <BoxContainer Name="MapSelector" Orientation="Vertical" MinWidth="650" MinHeight="650" HorizontalExpand="True" SeparationOverride="10">
+                <ui:NavMapControl Name="NavMap" Margin="15 15" MaxWidth="650" MaxHeight="650" />
+            </BoxContainer>
+        </TabContainer>
         <Control VerticalExpand="True" HorizontalExpand="True" Margin="5 5 5 5" Name="CameraViewBox">
             <viewport:ScalingViewport Name="CameraView"
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
                                       MinSize="500 500"
                                       MouseFilter="Ignore" />
-            <TextureRect VerticalExpand="True" HorizontalExpand="True" MinSize="500 500" Name="CameraViewBackground" />
+            <TextureRect VerticalExpand="True" HorizontalExpand="True" MinSize="500 500"
+                         Name="CameraViewBackground" />
         </Control>
     </BoxContainer>
 </DefaultWindow>

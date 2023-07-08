@@ -1,4 +1,6 @@
 surveillance-camera-monitor-ui-window = Монитор камер
+surveillance-camera-monitor-ui-list-tab = Список
+surveillance-camera-monitor-ui-map-tab = Карта
 surveillance-camera-monitor-ui-refresh-cameras = Обновить список камер
 surveillance-camera-monitor-ui-refresh-subnets = Обновить список подсетей
 surveillance-camera-monitor-ui-disconnect = Отключиться

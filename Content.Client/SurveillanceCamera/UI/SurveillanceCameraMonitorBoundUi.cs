@@ -12,19 +12,27 @@ public sealed class SurveillanceCameraMonitorBoundUserInterface : BoundUserInter
 
     private SurveillanceCameraMonitorWindow? _window;
     private EntityUid? _currentCamera;
+    private readonly IEntityManager _entManager;
 
     public SurveillanceCameraMonitorBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
         _eyeLerpingSystem = _entityManager.EntitySysManager.GetEntitySystem<EyeLerpingSystem>();
         _surveillanceCameraMonitorSystem = _entityManager.EntitySysManager.GetEntitySystem<SurveillanceCameraMonitorSystem>();
+        _entManager = IoCManager.Resolve<IEntityManager>();
     }
 
     protected override void Open()
     {
         base.Open();
+        EntityUid? gridUid = null;
 
-        _window = new SurveillanceCameraMonitorWindow();
+        if (_entManager.TryGetComponent<TransformComponent>(Owner.Owner, out var xform))
+        {
+            gridUid = xform.GridUid;
+        }
+
+        _window = new SurveillanceCameraMonitorWindow(gridUid);
 
         if (State != null)
         {

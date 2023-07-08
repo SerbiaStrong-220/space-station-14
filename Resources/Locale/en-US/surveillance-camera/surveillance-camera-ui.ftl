@@ -1,4 +1,6 @@
 surveillance-camera-monitor-ui-window = Camera monitor
+surveillance-camera-monitor-ui-list-tab = List
+surveillance-camera-monitor-ui-map-tab = Map
 surveillance-camera-monitor-ui-refresh-cameras = Refresh cameras
 surveillance-camera-monitor-ui-refresh-subnets = Refresh subnets
 surveillance-camera-monitor-ui-disconnect = Disconnect
