@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Original is taken from CEV-Eris at commit 7c7358df0347984994c1e6c643b61b8802cd7da7",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "clocks",
+      "delays": [
+        [
+          1.6, 1.1,
+		  1.6, 1.1
+        ]
+      ]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: gameMap
   id: Frankenstein
   mapName: 'NSS Frankenstein'
@@ -11,7 +13,7 @@
           mapNameTemplate: '{0} Frankenstein {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: ' SS220'
+            prefixCreator: '-SS220'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
         - type: StationJobs
@@ -55,3 +57,4 @@
             Paramedic: [ 1, 1 ]
             BlueShield: [1, 1]
             Brigmedic: [ 1, 1 ]
+            Psychologist: [ 1, 1 ]

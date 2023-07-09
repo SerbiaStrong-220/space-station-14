@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   name: bench
   id: BenchBase
@@ -12,6 +14,7 @@
     sprite: SS220/Structures/Furniture/bench.rsi
     noRot: false
 
+#Bench
 - type: entity
   name: bench
   suffix: DONT_USE, Left
@@ -40,4 +43,76 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Furniture/bench.rsi
+    state: middle
+
+#Sofa
+- type: entity
+  name: sofa
+  suffix: DONT_USE, Left
+  id: SofaLeft
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/sofa.rsi
+    state: left
+
+- type: entity
+  name: sofa
+  suffix: DONT_USE, Right
+  id: SofaRight
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/sofa.rsi
+    state: right
+
+- type: entity
+  name: sofa
+  suffix: DONT_USE, Middle
+  id: SofaMiddle
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/sofa.rsi
+    state: middle
+
+- type: entity
+  name: sofa
+  suffix: DONT_USE, Corner
+  id: SofaCorner
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/sofa.rsi
+    state: corner
+
+#Pew
+- type: entity
+  name: pew
+  suffix: DONT_USE, Left
+  id: PewLeft
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/pew.rsi
+    state: left
+
+- type: entity
+  name: pew
+  suffix: DONT_USE, Right
+  id: PewRight
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/pew.rsi
+    state: right
+
+- type: entity
+  name: pew
+  suffix: DONT_USE, Middle
+  id: PewMiddle
+  parent: BenchBase
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/pew.rsi
     state: middle
