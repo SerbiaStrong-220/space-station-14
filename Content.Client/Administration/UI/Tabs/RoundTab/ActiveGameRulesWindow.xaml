@@ -3,10 +3,10 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     Title="{Loc administration-ui-round-tab-active-gamerules}" MinSize="425 272">
     <BoxContainer Orientation="Vertical">
-        <!--<cc:GamerulesListControl Name="GamerulesList" VerticalExpand="True" />-->
+        <cc:GameRulesListControl Name="GameRulesList" VerticalExpand="True" />
         <BoxContainer Orientation="Horizontal">
             <Button Name="SubmitEndGameruleButton" Text="{Loc administration-ui-active-gamerules-end}" Disabled="True"/>
-            <Button Name="SubmitClearGamerulesButton" Text="{Loc administration-ui-active-gamerules-clear}" Disabled="True"/>
+            <Button Name="SubmitClearGamerulesButton" Text="{Loc administration-ui-active-gamerules-clear}" Disabled="False"/>
         </BoxContainer>
     </BoxContainer>
 </DefaultWindow>
