@@ -11,7 +11,7 @@ namespace Content.Server.Cargo.Commands
     [AdminCommand(AdminFlags.Admin)]
     public sealed class CargoMoneyCommand : IConsoleCommand
     {
-        [Dependency] private readonly CargoSystem _cargoSystem = default!;
+        [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
 
         public string Command => "cargomoney";
@@ -51,14 +51,15 @@ namespace Content.Server.Cargo.Commands
 
         private void ProccessMoney(IConsoleShell shell, int money, bool bSet)
         {
+            var cargoSystem = _entitySystemManager.GetEntitySystem<CargoSystem>();
             var components = _entityManager.EntityQuery<StationBankAccountComponent>();
             var bankComponent = components.GetEnumerator().Current;
             var owner = bankComponent.Owner;
 
             int currentMoney = bankComponent.Balance;
 
-            _cargoSystem.UpdateBankAccount(owner, bankComponent, -currentMoney);
-            _cargoSystem.UpdateBankAccount(owner, bankComponent, bSet ? currentMoney : currentMoney + money);
+            cargoSystem.UpdateBankAccount(owner, bankComponent, -currentMoney);
+            cargoSystem.UpdateBankAccount(owner, bankComponent, bSet ? currentMoney : currentMoney + money);
 
             shell.WriteLine($"Successfully changed cargo's money to {bankComponent.Balance}");
         }
