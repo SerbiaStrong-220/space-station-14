@@ -60,7 +60,7 @@ namespace Content.Server.Cargo.Commands
             _cargoSystem.UpdateBankAccount(owner, bankComponent, -currentMoney);
             _cargoSystem.UpdateBankAccount(owner, bankComponent, bSet ? currentMoney : currentMoney + money);
 
-            shell.WriteLine($"Successfully changed cargo's money to {money}");
+            shell.WriteLine($"Successfully changed cargo's money to {bankComponent.Balanc}");
         }
     }
 }
