@@ -1,10 +1,9 @@
 using Content.Server.Administration;
-using Content.Server.Ghost.Roles.Components;
-using Content.Server.Mind.Components;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Content.Server.Cargo.Systems;
 using Content.Server.Cargo.Components;
+using System.Linq;
 
 namespace Content.Server.Cargo.Commands
 {
@@ -15,20 +14,18 @@ namespace Content.Server.Cargo.Commands
         [Dependency] private readonly IEntityManager _entityManager = default!;
 
         public string Command => "cargomoney";
-        public string Description => "Turns an entity into a ghost role.";
+        public string Description => "Grant access to manipulate cargo's money.";
         public string Help => $"Usage: {Command} <set || add || rem> <amount>";
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if (args.Length == 3)
+            if (args.Length == 2)
             {
                 bool bSet = false;
 
-                int.TryParse(args[2], out var toAdd);
-
-                if (toAdd > 0)
+                if (int.TryParse(args[1], out var toAdd))
                 {
-                    switch(args[1])
+                    switch(args[0])
                     {
                         case "set":
                             bSet = true;
@@ -43,23 +40,41 @@ namespace Content.Server.Cargo.Commands
                     }
 
                     ProccessMoney(shell, toAdd, bSet);
+                    return;
                 }
             }
         invalidArgs:
             shell.WriteLine("Expected invalid arguments!");
         }
 
+        public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+        {
+            CompletionResult res = CompletionResult.Empty;
+            switch (args.Length)
+            {
+                case 1:
+                    res = CompletionResult.FromHint("set || add || rem");
+                    break;
+                case 2:
+                    res = CompletionResult.FromHint("amount");
+                    break;
+            }
+
+            return res;
+        }
+
         private void ProccessMoney(IConsoleShell shell, int money, bool bSet)
         {
             var cargoSystem = _entitySystemManager.GetEntitySystem<CargoSystem>();
             var components = _entityManager.EntityQuery<StationBankAccountComponent>();
-            var bankComponent = components.GetEnumerator().Current;
+
+            var bankComponent = components.First();
             var owner = bankComponent.Owner;
 
             int currentMoney = bankComponent.Balance;
 
             cargoSystem.UpdateBankAccount(owner, bankComponent, -currentMoney);
-            cargoSystem.UpdateBankAccount(owner, bankComponent, bSet ? currentMoney : currentMoney + money);
+            cargoSystem.UpdateBankAccount(owner, bankComponent, bSet ? money : currentMoney + money);
 
             shell.WriteLine($"Successfully changed cargo's money to {bankComponent.Balance}");
         }
