@@ -552,6 +552,8 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<bool> RestartSoundsEnabled =
             CVarDef.Create("ambience.restart_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+        public static readonly CVarDef<bool> AhelpSoundEnabled =
+            CVarDef.Create("audio.ahelp_sound_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
         /*
          * Admin sounds
@@ -1647,9 +1649,9 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<bool> ReplayRecordAdminChat =
             CVarDef.Create("replay.record_admin_chat", false, CVar.SERVERONLY);
-        
+
         /*
-         * Cryopod SSD 
+         * Cryopod SSD
          */
 
         /// <summary>
