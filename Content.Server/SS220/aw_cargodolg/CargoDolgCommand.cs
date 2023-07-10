@@ -35,7 +35,7 @@ namespace Content.Server.Cargo.Commands
                         case "rem":
                             toAdd = -toAdd;
                             break;
-                        case null:
+                        default:
                             goto invalidArgs;
                     }
 
