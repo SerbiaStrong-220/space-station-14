@@ -1,0 +1,95 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BlindsBase
+  parent: BaseStructure
+  name: Жалюзи
+  abstract: true
+  description: Могут полностью блокировать обзор когда требуется.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/blinds.rsi
+    drawdepth: WallTops
+    noRot: true
+    layers:
+      - state: solo
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+  - type: Blinds
+  - type: WallMount
+    arc: 180
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0"
+        density: 100
+        layer:
+        - Opaque
+  - type: Occluder
+    enabled: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BlindsVisualState.State:
+        indicator:
+          True: {state: solo}
+          False: {state: solo_closed}
+
+- type: entity
+  id: BlindsSolo
+  parent: BlindsBase
+  name: Жалюзи (одиночные)
+  suffix: DONT_USE
+
+- type: entity
+  id: BlindsLeft
+  parent: BlindsBase
+  name: Жалюзи (левые)
+  suffix: DONT_USE
+  components:
+  - type: Sprite
+    layers:
+      - state: left
+  - type: GenericVisualizer
+    visuals:
+      enum.BlindsVisualState.State:
+        indicator:
+          True: {state: left}
+          False: {state: left_closed}
+
+- type: entity
+  id: BlindsMiddle
+  parent: BlindsBase
+  name: Жалюзи (середина)
+  suffix: DONT_USE
+  components:
+  - type: Sprite
+    layers:
+      - state: right
+  - type: GenericVisualizer
+    visuals:
+      enum.BlindsVisualState.State:
+        indicator:
+          True: {state: middle}
+          False: {state: middle_closed}
+
+- type: entity
+  id: BlindsRight
+  parent: BlindsBase
+  name: Жалюзи (правые)
+  suffix: DONT_USE
+  components:
+  - type: Sprite
+    layers:
+      - state: right
+  - type: GenericVisualizer
+    visuals:
+      enum.BlindsVisualState.State:
+        indicator:
+          True: {state: right}
+          False: {state: right_closed}
