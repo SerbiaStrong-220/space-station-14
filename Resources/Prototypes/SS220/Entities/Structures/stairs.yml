@@ -6,6 +6,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Construction
+    graph: Stairs
   - type: Clickable
   - type: Sprite
     sprite: SS220/Structures/Floor/stairs.rsi
@@ -49,6 +51,8 @@
   name: ступеньки
   suffix: Одиночные
   components:
+  - type: Construction
+    node: StairsSolo
   - type: Sprite
     state: solo
 
@@ -58,6 +62,8 @@
   name: ступеньки
   suffix: Левые
   components:
+  - type: Construction
+    node: StairsLeft
   - type: Sprite
     state: left
 
@@ -67,6 +73,8 @@
   name: ступеньки
   suffix: По середине
   components:
+  - type: Construction
+    node: StairsMiddle
   - type: Sprite
     state: middle
 
@@ -76,5 +84,7 @@
   name: ступеньки
   suffix: Правые
   components:
+  - type: Construction
+    node: StairsRight
   - type: Sprite
     state: right
