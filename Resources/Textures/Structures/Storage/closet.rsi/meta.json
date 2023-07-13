@@ -410,6 +410,12 @@
     {
       "name": "paramed_open"
     },
+	{
+      "name": "psych_secure"
+    },
+    {
+      "name": "psych_secure_door"
+    },
     {
       "name": "pink_door"
     },

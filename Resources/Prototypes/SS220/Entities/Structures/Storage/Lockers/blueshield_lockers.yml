@@ -23,3 +23,16 @@
     - id: WeaponDisabler
     - id: MedkitAdvancedFilled
   
+- type: entity
+  parent: GunSafe
+  id: GunSafeBlueshield
+  name: blue shield's gun safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponDisabler
+      amount: 1
+    - id: WeaponSubMachineGunDrozd
+      amount: 1
+    - id: MagazinePistolSubMachineGun
+      amount: 2
