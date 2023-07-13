@@ -49,7 +49,7 @@
   id: StairsSolo
   parent: StairsBase
   name: ступеньки
-  suffix: Одиночные
+  suffix: Одиночные, НЕ ИСПОЛЬЗОВАТЬ (ПОД ЗАМЕНУ)
   components:
   - type: Construction
     node: StairsSolo
@@ -60,7 +60,7 @@
   id: StairsLeft
   parent: StairsBase
   name: ступеньки
-  suffix: Левые
+  suffix: Левые, НЕ ИСПОЛЬЗОВАТЬ (ПОД ЗАМЕНУ)
   components:
   - type: Construction
     node: StairsLeft
@@ -71,7 +71,7 @@
   id: StairsMiddle
   parent: StairsBase
   name: ступеньки
-  suffix: По середине
+  suffix: По середине, НЕ ИСПОЛЬЗОВАТЬ (ПОД ЗАМЕНУ)
   components:
   - type: Construction
     node: StairsMiddle
@@ -82,7 +82,7 @@
   id: StairsRight
   parent: StairsBase
   name: ступеньки
-  suffix: Правые
+  suffix: Правые, НЕ ИСПОЛЬЗОВАТЬ (ПОД ЗАМЕНУ)
   components:
   - type: Construction
     node: StairsRight
