@@ -43,7 +43,7 @@ public sealed class BlindsSystem : EntitySystem
 
     public void TrySetOpenAllConnected(EntityUid uid, bool state, HashSet<EntityUid>? processedEntities = null)
     {
-        if(!TryComp<BlindsComponent>(uid, out var component))
+        if (!TryComp<BlindsComponent>(uid, out var component))
             return;
 
         SetOpen(uid, component, state);
@@ -52,7 +52,7 @@ public sealed class BlindsSystem : EntitySystem
         processedEntities.Add(uid);
 
         // Make connected blinds change their state as well
-        if(!TryComp<TransformComponent>(uid, out var transform))
+        if (!TryComp<TransformComponent>(uid, out var transform))
             return;
 
         if (transform.Anchored && _mapManager.TryGetGrid(transform.GridUid, out var grid))

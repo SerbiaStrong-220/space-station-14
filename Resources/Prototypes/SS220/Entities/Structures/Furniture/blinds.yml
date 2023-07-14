@@ -2,17 +2,23 @@
 
 - type: entity
   id: BlindsBase
-  parent: BaseStructure
   name: Жалюзи
   abstract: true
   description: Могут полностью блокировать обзор когда требуется.
+  placement:
+    mode: SnapgridCenter
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: SS220/Structures/Furniture/blinds.rsi
-    drawdepth: WallTops
+    drawdepth: Overdoors
     noRot: true
     layers:
       - state: solo
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
@@ -21,18 +27,11 @@
   - type: Blinds
   - type: WallMount
     arc: 180
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0"
-        density: 100
-        layer:
-        - Opaque
   - type: Occluder
     enabled: false
   - type: Appearance
+  - type: InteractionRange
+    range: 2
   - type: GenericVisualizer
     visuals:
       enum.BlindsVisualState.State:
