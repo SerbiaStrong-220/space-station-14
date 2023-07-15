@@ -85,7 +85,7 @@ public sealed class BlindsSystem : EntitySystem
 
         TrySetOpenAllConnected(uid, !component.IsOpen);
         var soundToPlay = component.IsOpen ? component.OpenSound : component.CloseSound;
-        _audio.PlayPvs(soundToPlay, uid);
+        _audio.PlayPvs(soundToPlay, args.User);
 
         args.Handled = true;
     }

@@ -13,7 +13,7 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/blinds.rsi
     drawdepth: Overdoors
-    noRot: true
+    noRot: false
     layers:
       - state: solo
   - type: Clickable
