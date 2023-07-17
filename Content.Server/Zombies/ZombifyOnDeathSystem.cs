@@ -13,6 +13,7 @@ using Content.Server.Mind.Commands;
 using Content.Server.Mind.Components;
 using Content.Server.Nutrition.Components;
 using Content.Server.Popups;
+using Content.Server.Roles;
 using Content.Server.Speech.Components;
 using Content.Server.Temperature.Components;
 using Content.Server.Traitor;
@@ -22,6 +23,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Server.Traits.Assorted;
 using Content.Shared.CombatMode.Pacification;
+using Content.Server.Mind;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -60,6 +62,8 @@ namespace Content.Server.Zombies
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+        [Dependency] private readonly MindSystem _mindSystem = default!;
+        [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
 
         public override void Initialize()
         {
@@ -149,6 +153,8 @@ namespace Content.Server.Zombies
                 //store some values before changing them in case the humanoid get cloned later
                 zombiecomp.BeforeZombifiedSkinColor = huApComp.SkinColor;
                 zombiecomp.BeforeZombifiedCustomBaseLayers = new(huApComp.CustomBaseLayers);
+                if (TryComp<BloodstreamComponent>(target, out var stream))
+                    zombiecomp.BeforeZombifiedBloodReagent = stream.BloodReagent;
 
                 _sharedHuApp.SetSkinColor(target, zombiecomp.SkinColor, verify: false, humanoid: huApComp);
                 _sharedHuApp.SetBaseLayerColor(target, HumanoidVisualLayers.Eyes, zombiecomp.EyeColor, humanoid: huApComp);
@@ -174,6 +180,8 @@ namespace Content.Server.Zombies
             //This makes it so the zombie doesn't take bloodloss damage.
             //NOTE: they are supposed to bleed, just not take damage
             _bloodstream.SetBloodLossThreshold(target, 0f);
+            //Give them zombie blood
+            _bloodstream.ChangeBloodReagent(target, zombiecomp.NewBloodReagent);
 
             //This is specifically here to combat insuls, because frying zombies on grilles is funny as shit.
             _serverInventory.TryUnequip(target, "gloves", true, true);
@@ -210,16 +218,20 @@ namespace Content.Server.Zombies
             _identity.QueueIdentityUpdate(target);
 
             //He's gotta have a mind
-            var mindcomp = EnsureComp<MindComponent>(target);
-            if (mindcomp.Mind != null && mindcomp.Mind.TryGetSession(out var session))
+            var mindComp = EnsureComp<MindContainerComponent>(target);
+            if (_mindSystem.TryGetMind(target, out var mind, mindComp) && _mindSystem.TryGetSession(mind, out var session))
             {
                 //Zombie role for player manifest
-                mindcomp.Mind.AddRole(new TraitorRole(mindcomp.Mind, _proto.Index<AntagPrototype>(zombiecomp.ZombieRoleId)));
+                _mindSystem.AddRole(mind, new ZombieRole(mind, _proto.Index<AntagPrototype>(zombiecomp.ZombieRoleId)));
+
                 //Greeting message for new bebe zombers
                 _chatMan.DispatchServerMessage(session, Loc.GetString("zombie-infection-greeting"));
+
+                // Notificate player about new role assignment
+                _audioSystem.PlayGlobal(zombiecomp.GreetSoundNotification, session);
             }
 
-            if (!HasComp<GhostRoleMobSpawnerComponent>(target) && !mindcomp.HasMind) //this specific component gives build test trouble so pop off, ig
+            if (!HasComp<GhostRoleMobSpawnerComponent>(target) && !mindComp.HasMind) //this specific component gives build test trouble so pop off, ig
             {
                 //yet more hardcoding. Visit zombie.ftl for more information.
                 var ghostRole = EnsureComp<GhostRoleComponent>(target);

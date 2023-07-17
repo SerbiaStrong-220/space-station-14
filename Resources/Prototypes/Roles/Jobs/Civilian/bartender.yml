@@ -4,9 +4,8 @@
   description: job-description-bartender
   playTimeTracker: JobBartender
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Civilian
-      time: 3600 # Corvax-RoleTime
+    - !type:OverallPlaytimeRequirement
+      time: 3600 # SS220-RoleTime
   startingGear: BartenderGear
   icon: "Bartender"
   supervisors: job-supervisors-hop
@@ -23,7 +22,7 @@
   equipment:
     head: ClothingHeadHatTophat
     jumpsuit: ClothingUniformJumpsuitBartender
-    outerClothing: ClothingOuterVestKevlar
+    outerClothing: ClothingOuterVest
     back: ClothingBackpackFilled
     shoes: ClothingShoesColorBlack
     id: BartenderPDA

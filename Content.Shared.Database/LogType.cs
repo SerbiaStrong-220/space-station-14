@@ -60,7 +60,7 @@ public enum LogType
     AtmosVolumeChanged = 56,
     AtmosFilterChanged = 57,
     AtmosRatioChanged = 58,
-    Emitter = 59,
+    FieldGeneration = 59,
     GhostRoleTaken = 60,
     Chat = 61,
     Action = 62,
@@ -87,4 +87,5 @@ public enum LogType
     EntityDelete = 82,
     Vote = 83,
     ItemConfigure = 84,
+    DeviceLinking = 85,
 }

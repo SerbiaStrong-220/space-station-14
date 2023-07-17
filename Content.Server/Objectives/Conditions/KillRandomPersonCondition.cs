@@ -13,11 +13,14 @@ namespace Content.Server.Objectives.Conditions
     {
         public override IObjectiveCondition GetAssigned(Mind.Mind mind)
         {
-            var allHumans = EntityManager.EntityQuery<MindComponent>(true).Where(mc =>
+            var allHumans = EntityManager.EntityQuery<MindContainerComponent>(true).Where(mc =>
             {
                 var entity = mc.Mind?.OwnedEntity;
-
+                
                 if (entity == default)
+                    return false;
+
+                if (EntityManager.IsQueuedForDeletion(entity!.Value))
                     return false;
 
                 return EntityManager.TryGetComponent(entity, out MobStateComponent? mobState) &&

@@ -6,11 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 36000 # Corvax-RoleTime
+      time: 18000 # SS220-RoleTime
   startingGear: AtmosphericTechnicianGear
   icon: "AtmosphericTechnician"
   supervisors: job-supervisors-ce
-  canBeAntag: false
+  antagAdvantage: 10
   access:
   - Maintenance
   - Engineering
@@ -25,7 +25,7 @@
     shoes: ClothingShoesColorWhite
     eyes: ClothingEyesGlassesMeson
     id: AtmosPDA
-    belt: ClothingBeltUtilityFilled
+    belt: ClothingBeltUtilityEngineering
     ears: ClothingHeadsetEngineering
   innerclothingskirt: ClothingUniformJumpskirtAtmos
   satchel: ClothingBackpackSatchelEngineeringFilled

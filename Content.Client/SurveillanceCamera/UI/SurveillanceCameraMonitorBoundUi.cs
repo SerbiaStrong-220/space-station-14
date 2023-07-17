@@ -6,15 +6,17 @@ namespace Content.Client.SurveillanceCamera.UI;
 
 public sealed class SurveillanceCameraMonitorBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     private readonly EyeLerpingSystem _eyeLerpingSystem;
     private readonly SurveillanceCameraMonitorSystem _surveillanceCameraMonitorSystem;
 
+    [ViewVariables]
     private SurveillanceCameraMonitorWindow? _window;
+
+    [ViewVariables]
     private EntityUid? _currentCamera;
     private readonly IEntityManager _entManager;
 
-    public SurveillanceCameraMonitorBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public SurveillanceCameraMonitorBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
         _eyeLerpingSystem = _entityManager.EntitySysManager.GetEntitySystem<EyeLerpingSystem>();
@@ -62,7 +64,7 @@ public sealed class SurveillanceCameraMonitorBoundUserInterface : BoundUserInter
 
     private void OnCameraSwitchTimer()
     {
-        _surveillanceCameraMonitorSystem.AddTimer(Owner.Owner, _window!.OnSwitchTimerComplete);
+        _surveillanceCameraMonitorSystem.AddTimer(Owner, _window!.OnSwitchTimerComplete);
     }
 
     private void OnCameraRefresh()
@@ -93,7 +95,7 @@ public sealed class SurveillanceCameraMonitorBoundUserInterface : BoundUserInter
 
             if (_currentCamera != null)
             {
-                _surveillanceCameraMonitorSystem.RemoveTimer(Owner.Owner);
+                _surveillanceCameraMonitorSystem.RemoveTimer(Owner);
                 _eyeLerpingSystem.RemoveEye(_currentCamera.Value);
                 _currentCamera = null;
             }
@@ -112,7 +114,7 @@ public sealed class SurveillanceCameraMonitorBoundUserInterface : BoundUserInter
                 _currentCamera = cast.ActiveCamera;
             }
 
-            if (_entityManager.TryGetComponent(cast.ActiveCamera, out EyeComponent? eye))
+            if (EntMan.TryGetComponent<EyeComponent>(cast.ActiveCamera, out var eye))
             {
                 _window.UpdateState(eye.Eye, cast.Subnets, cast.ActiveAddress, cast.ActiveSubnet, cast.Cameras);
             }

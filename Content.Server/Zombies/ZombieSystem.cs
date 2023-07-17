@@ -16,6 +16,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
@@ -40,6 +41,9 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private readonly TagSystem _tag = default!;
+
+        private const string ZombifyableTag = "ZombifyableByMelee";
 
         public override void Initialize()
         {
@@ -252,13 +256,16 @@ namespace Content.Server.Zombies
                 if (!TryComp<MobStateComponent>(entity, out var mobState) || HasComp<DroneComponent>(entity))
                     continue;
 
+                if(!_tag.HasTag(entity, ZombifyableTag))
+                    continue;
+
                 if (HasComp<ZombieComponent>(entity))
                 {
                     args.BonusDamage = -args.BaseDamage * zombieComp.OtherZombieDamageCoefficient;
                 }
                 else
                 {
-                    if (_random.Prob(GetZombieInfectionChance(entity, component)))
+                    if (!HasComp<ZombieImmuneComponent>(entity) && _random.Prob(GetZombieInfectionChance(entity, component)))
                     {
                         var pending = EnsureComp<PendingZombieComponent>(entity);
                         pending.MaxInfectionLength = _random.NextFloat(0.25f, 1.0f) * component.ZombieInfectionTurnTime;
@@ -301,6 +308,7 @@ namespace Content.Server.Zombies
                 _humanoidSystem.SetBaseLayerId(target, layer, info.ID);
             }
             _humanoidSystem.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor);
+            _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
 
             MetaData(target).EntityName = zombiecomp.BeforeZombifiedEntityName;
             return true;

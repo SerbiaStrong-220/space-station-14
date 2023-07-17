@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Content.Shared.Corvax.CCCVars;
@@ -25,8 +25,10 @@ public sealed class TTSSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _broadPhase = default!;
     
     private ISawmill _sawmill = default!;
+
     private float _volume = 0.0f;
-    
+    private float _radioVolume = 0.0f;
+
     private readonly HashSet<AudioStream> _currentStreams = new();
     private readonly Dictionary<EntityUid, Queue<AudioStream>> _entityQueues = new();
 
@@ -34,6 +36,7 @@ public sealed class TTSSystem : EntitySystem
     {
         _sawmill = Logger.GetSawmill("tts");
         _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
+        _cfg.OnValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
     }
 
@@ -41,6 +44,7 @@ public sealed class TTSSystem : EntitySystem
     {
         base.Shutdown();
         _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
+        _cfg.UnsubValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged);
         EndStreams();
     }
 
@@ -77,11 +81,11 @@ public sealed class TTSSystem : EntitySystem
                 var collisionMask = (int) CollisionGroup.Impassable;
                 var sourceRelative = ourPos - mapPos.Position;
                 var occlusion = 0f;
-                if (sourceRelative.Length > 0)
+                if (sourceRelative.Length() > 0)
                 {
                     occlusion = _broadPhase.IntersectRayPenetration(mapPos.MapId,
-                        new CollisionRay(mapPos.Position, sourceRelative.Normalized, collisionMask),
-                        sourceRelative.Length, stream.Uid);
+                        new CollisionRay(mapPos.Position, sourceRelative.Normalized(), collisionMask),
+                        sourceRelative.Length(), stream.Uid);
                 }
                 stream.Source.SetOcclusion(occlusion);
             }
@@ -99,11 +103,14 @@ public sealed class TTSSystem : EntitySystem
         _volume = volume;
     }
 
+    private void OnTtsRadioVolumeChanged(float volume)
+    {
+        _radioVolume = volume;
+    }
+
     private void OnPlayTTS(PlayTTSEvent ev)
     {
-        var volume = _volume;
-        if (ev.IsWhisper)
-            volume -= 4;
+        var volume = (ev.IsRadio ? _radioVolume : _volume) * ev.VolumeModifier;
 
         if (!TryCreateAudioSource(ev.Data, volume, out var source))
             return;
