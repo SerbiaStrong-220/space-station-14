@@ -9,8 +9,6 @@
     layers:
     - state: telescope_off
       map: [ "enum.ToggleVisuals.Layer" ]
-    - state: telescope_on
-      map: [ "enum.ToggleVisuals.Layer" ]
   - type: MeleeWeapon
     damage:
       types:
