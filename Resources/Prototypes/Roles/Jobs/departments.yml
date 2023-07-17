@@ -47,6 +47,7 @@
   - HeadOfSecurity
   - ResearchDirector
   - Quartermaster
+  - BlueShield
 
 - type: department
   id: Engineering
@@ -80,10 +81,11 @@
   - SecurityOfficer
   - Detective
   - Warden
+  - Brigmedic
 
 - type: department
   id: Science
-  description: department-Command-description
+  description: department-Science-description
   color: "#D381C9"
   roles:
   - ResearchDirector
