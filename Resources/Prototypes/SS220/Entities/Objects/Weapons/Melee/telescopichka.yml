@@ -1,0 +1,42 @@
+- type: entity
+  name: telescopichka
+  parent: BaseItem
+  id: Telescopichka
+  description: Very loud and very dangerous energy sword that can reflect shots. Can be stored in pockets when turned off.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/telescopichka.rsi
+    layers:
+    - state: telescope_off
+      map: [ "enum.ToggleVisuals.Layer" ]
+    - state: telescope_on
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 7
+      attackRate: 1
+      soundHit:
+        path: /Audio/Weapons/eblade1.ogg
+  - type: Item
+    size: 5
+    sprite: SS220/Objects/Weapons/Melee/telescopichka.rsi
+  - type: UseDelay
+    delay: 1.0
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: white
+    netsync: false
+  - type: DisarmMalus
+    malus: 0
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+     enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: telescope_on}
+          False: {state: telescope_off}
+  - type: Reflect
+    enabled: false
