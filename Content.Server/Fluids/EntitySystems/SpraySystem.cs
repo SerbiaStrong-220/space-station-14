@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Cooldown;
@@ -5,8 +6,10 @@ using Content.Server.Extinguisher;
 using Content.Server.Fluids.Components;
 using Content.Server.Popups;
 using Content.Shared.Cooldown;
+using Content.Shared.Disposal.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Placeable;
 using Content.Shared.Vapor;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -36,6 +39,13 @@ public sealed class SpraySystem : EntitySystem
     {
         if (args.Handled)
             return;
+
+        //do not spray on table and disposal unit
+        if (HasComp<PlaceableSurfaceComponent>(args.Target)
+            || HasComp<SharedDisposalUnitComponent>(args.Target))
+        {
+            return;
+        }
 
         args.Handled = true;
 
@@ -68,11 +78,11 @@ public sealed class SpraySystem : EntitySystem
         var clickMapPos = args.ClickLocation.ToMap(EntityManager, _transform);
 
         var diffPos = clickMapPos.Position - userMapPos.Position;
-        if (diffPos == Vector2.Zero || diffPos == Vector2.NaN)
+        if (diffPos == Vector2.Zero || diffPos == Vector2Helpers.NaN)
             return;
 
-        var diffNorm = diffPos.Normalized;
-        var diffLength = diffPos.Length;
+        var diffNorm = diffPos.Normalized();
+        var diffLength = diffPos.Length();
 
         if (diffLength > component.SprayDistance)
         {
@@ -97,9 +107,9 @@ public sealed class SpraySystem : EntitySystem
 
             // Calculate the destination for the vapor cloud. Limit to the maximum spray distance.
             var target = userMapPos
-                .Offset((diffNorm + rotation.ToVec()).Normalized * diffLength + quarter);
+                .Offset((diffNorm + rotation.ToVec()).Normalized() * diffLength + quarter);
 
-            var distance = (target.Position - userMapPos.Position).Length;
+            var distance = (target.Position - userMapPos.Position).Length();
             if (distance > component.SprayDistance)
                 target = userMapPos.Offset(diffNorm * component.SprayDistance);
 
