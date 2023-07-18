@@ -96,6 +96,9 @@ public sealed partial class AdminLogsControl : Control
 
         ResetRoundButton.OnPressed += ResetRoundPressed;
 
+        _adminLogsTextEditScrollBar.OnValueChanged += SyncAdminLogsScrollContainerScrollValue;
+        AdminLogsScrollContainer.OnScrolled += SyncLogsTextEditScrollValue;
+
         RecievedLogs = new List<SharedAdminLog>();
 
         SwitchModeButton.OnPressed += SwitchViewMode;
@@ -311,6 +314,18 @@ public sealed partial class AdminLogsControl : Control
         }
     }
 
+    private void SyncLogsTextEditScrollValue()
+    {
+        _adminLogsTextEditScrollBar.ValueTarget = AdminLogsScrollContainer.GetScrollValue().Y * 1.25f;
+    }
+
+    private void SyncAdminLogsScrollContainerScrollValue(Robust.Client.UserInterface.Controls.Range value)
+    {
+        AdminLogsScrollContainer.SetScrollValue(
+            new Vector2(0, _adminLogsTextEditScrollBar.Value * 0.8f)
+        );
+    }
+
     private void SwitchViewMode(ButtonEventArgs args)
     {
         IsInCopyMode = !IsInCopyMode;
@@ -319,17 +334,13 @@ public sealed partial class AdminLogsControl : Control
         {
             SwitchModeButton.Text = Loc.GetString("admin-logs-view-mode");
             AdminLogsTextEdit.Visible = true;
-            AdminLogsRichTextLabel.Visible = false;
-            _adminLogsTextEditScrollBar.ValueTarget = AdminLogsScrollContainer.GetScrollValue().Y;
+            AdminLogsScrollContainer.Visible = false;
         }
         else
         {
             SwitchModeButton.Text = Loc.GetString("admin-logs-copy-mode");
             AdminLogsTextEdit.Visible = false;
-            AdminLogsRichTextLabel.Visible = true;
-            AdminLogsScrollContainer.SetScrollValue(
-                new Vector2(0, _adminLogsTextEditScrollBar.Value)
-            );
+            AdminLogsScrollContainer.Visible = true;
         }
     }
 
@@ -387,10 +398,10 @@ public sealed partial class AdminLogsControl : Control
         AdminLogsRichTextLabel.SetMessage(FormattedMessage.FromMarkup(logsText));
 
         UpdateCount(ShownLogs, RecievedLogs.Count);
-        // Try to scroll AdminLogsTextEdit to the end
-        _adminLogsTextEditScrollBar.ValueTarget = float.PositiveInfinity;
+        // Try to scroll logs to the end
+        _adminLogsTextEditScrollBar.MoveToEnd();
         AdminLogsScrollContainer.SetScrollValue(
-            new Vector2(0, float.PositiveInfinity)
+            new Vector2(0, float.NegativeInfinity)
         );
     }
 
@@ -649,5 +660,8 @@ public sealed partial class AdminLogsControl : Control
         ResetRoundButton.OnPressed -= ResetRoundPressed;
 
         SwitchModeButton.OnPressed -= SwitchViewMode;
+
+        _adminLogsTextEditScrollBar.OnValueChanged -= SyncAdminLogsScrollContainerScrollValue;
+        AdminLogsScrollContainer.OnScrolled -= SyncLogsTextEditScrollValue;
     }
 }
