@@ -9,24 +9,31 @@
     layers:
     - state: telescope_off
       map: [ "enum.ToggleVisuals.Layer" ]
+  - type: SwitchableWeapon
+    openSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
+    closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
+    bonkSound: "/Audio/SS220/Weapons/telescopichka/bonk-sound-effect.ogg"
+    damageOpen:
+      types:
+        Blunt: 1
+    damageFolded:
+      types:
+        Blunt: 0
+    staminaDamageFolded: 0
+    staminaDamageOpen: 28
+    sizeOpened: 15
+    sizeClosed: 5
+  - type: StaminaDamageOnHit
+    damage: 0
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 7
-      attackRate: 1
-      soundHit:
-        path: /Audio/Weapons/eblade1.ogg
+        Blunt: 0
   - type: Item
     size: 5
     sprite: SS220/Objects/Weapons/Melee/telescopichka.rsi
   - type: UseDelay
     delay: 1.0
-  - type: PointLight
-    enabled: false
-    radius: 2
-    energy: 2
-    color: white
-    netsync: false
   - type: DisarmMalus
     malus: 0
   - type: Appearance
@@ -36,5 +43,3 @@
         enum.ToggleVisuals.Layer:
           True: {state: telescope_on}
           False: {state: telescope_off}
-  - type: Reflect
-    enabled: false

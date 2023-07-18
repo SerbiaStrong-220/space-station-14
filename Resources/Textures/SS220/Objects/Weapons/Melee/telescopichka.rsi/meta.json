@@ -13,12 +13,20 @@
     {
       "name": "telescope_off"
     },
-    {
-      "name": "open-inhand-left",
+	{
+      "name": "off-inhand-left",
       "directions": 4
     },
     {
-      "name": "open-inhand-right",
+      "name": "off-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "on-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "on-inhand-right",
       "directions": 4
     }
   ]
