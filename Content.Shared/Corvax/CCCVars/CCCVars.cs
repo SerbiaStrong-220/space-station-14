@@ -80,10 +80,22 @@ public sealed class CCCVars
         CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Default volume setting of TTS Radio sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.radio_volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Count of in-memory cached tts voice lines.
     /// </summary>
     public static readonly CVarDef<int> TTSMaxCache =
         CVarDef.Create("tts.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// TTS request timeout in seconds.
+    /// </summary>
+    public static readonly CVarDef<float> TTSRequestTimeout =
+        CVarDef.Create("tts.timeout", 5f, CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// VoiceId for Announcement TTS

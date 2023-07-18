@@ -5,5 +5,16 @@
   components:
     - type: StorageFill
       contents:
+        - id: Telescopichka
         - id: BoxSurvival
         - id: BriefcaseIAAFilled
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackMedical
+  id: ClothingBackpackPsychologistFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
+        - id: RubberStampPsychologist

@@ -1,4 +1,4 @@
-﻿using Content.Client.CharacterInfo;
+using Content.Client.CharacterInfo;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Character.Controls;
@@ -30,9 +30,10 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
         DebugTools.Assert(_window == null);
 
         _window = UIManager.CreateWindow<CharacterWindow>();
+        _window.OnClose += DeactivateButton;
+        _window.OnOpen += ActivateButton;
+
         LayoutContainer.SetAnchorPreset(_window, LayoutContainer.LayoutPreset.CenterTop);
-
-
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenCharacterMenu,
@@ -81,14 +82,6 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
         }
 
         CharacterButton.OnPressed += CharacterButtonPressed;
-
-        if (_window == null)
-        {
-            return;
-        }
-
-        _window.OnClose += DeactivateButton;
-        _window.OnOpen += ActivateButton;
     }
 
     private void DeactivateButton() => CharacterButton!.Pressed = false;
@@ -125,9 +118,13 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
                 var conditionControl = new ObjectiveConditionsControl();
                 conditionControl.ProgressTexture.Texture = condition.SpriteSpecifier.Frame0();
                 conditionControl.ProgressTexture.Progress = condition.Progress;
+                var titleMessage = new FormattedMessage();
+                var descriptionMessage = new FormattedMessage();
+                titleMessage.AddText(condition.Title);
+                descriptionMessage.AddText(condition.Description);
 
-                conditionControl.Title.Text = condition.Title;
-                conditionControl.Description.Text = condition.Description;
+                conditionControl.Title.SetMessage(titleMessage);
+                conditionControl.Description.SetMessage(descriptionMessage);
 
                 objectiveControl.AddChild(conditionControl);
             }

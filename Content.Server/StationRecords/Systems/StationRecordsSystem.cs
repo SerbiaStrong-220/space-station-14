@@ -128,7 +128,8 @@ public sealed class StationRecordsSystem : EntitySystem
             Gender = gender,
             DisplayPriority = jobPrototype.Weight,
             Fingerprint = mobFingerprint,
-            DNA = dna
+            DNA = dna,
+            Profile = profile
         };
 
         var key = AddRecord(station, records);
@@ -137,7 +138,7 @@ public sealed class StationRecordsSystem : EntitySystem
         if (idUid != null)
         {
             var keyStorageEntity = idUid;
-            if (TryComp(idUid, out PDAComponent? pdaComponent) && pdaComponent.ContainedID != null)
+            if (TryComp(idUid, out PdaComponent? pdaComponent) && pdaComponent.ContainedId != null)
             {
                 keyStorageEntity = pdaComponent.IdSlot.Item;
             }

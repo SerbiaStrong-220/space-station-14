@@ -86,6 +86,10 @@
   - type: Clothing
     sprite: Clothing/Eyes/Glasses/glasses.rsi
   - type: VisionCorrection
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingEyesBase
@@ -113,6 +117,10 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingEyesBase
@@ -127,6 +135,10 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingEyesBase
@@ -158,3 +170,17 @@
       coefficients:
         Heat: 0.95
   - type: GroupExamine
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesBlueShield
+  name: blue shield sunglasses
+  description: Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5

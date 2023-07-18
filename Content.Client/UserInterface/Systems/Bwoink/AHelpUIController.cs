@@ -1,11 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Client.Administration.Systems;
 using Content.Client.Administration.UI.Bwoink;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Content.Shared.Input;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
@@ -15,6 +17,7 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -29,6 +32,7 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private BwoinkSystem? _bwoinkSystem;
     private MenuButton? AhelpButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.AHelpButton;
@@ -130,10 +134,14 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
              || (UIHelper!.IsAdmin && !message.IsSenderAdmin) // SS220
              || (!UIHelper!.IsAdmin))) // SS220
         {
-            SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local());
+            if (_cfg.GetCVar(CCVars.AhelpSoundEnabled))
+            {
+                SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local());
+            }
+
             _clyde.RequestWindowAttention();
         }
-        
+
         if (!UIHelper!.IsOpen)
         {
             AhelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
@@ -469,7 +477,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
             TitleClass="windowTitleAlert",
             HeaderClass="windowHeaderAlert",
             Title=Loc.GetString("bwoink-user-title"),
-            MinSize=(500, 200),
+            MinSize = new Vector2(500, 200),
         };
         _window.OnClose += () => { OnClose?.Invoke(); };
         _window.OnOpen += () => { OnOpen?.Invoke(); };
