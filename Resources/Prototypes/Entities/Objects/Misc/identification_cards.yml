@@ -432,6 +432,8 @@
     layers:
     - state: default
     - state: idbrigmedic
+  - type: PresetIdCard
+    job: Brigmedic
 
 - type: entity
   parent: IDCardStandard
@@ -475,8 +477,8 @@
   - type: IdCard
     jobTitle: Central Commander
   - type: Access
-    tags:
-    - Maintenance
+    groups:
+    - AllAccess
 
 - type: entity
   parent: IDCardStandard
@@ -511,6 +513,7 @@
   - type: AgentIDCard
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
+    inHandsOnly: true
   - type: UserInterface
     interfaces:
       - key: enum.AgentIDCardUiKey.Key

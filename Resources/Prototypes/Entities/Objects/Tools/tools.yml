@@ -13,7 +13,6 @@
     - Wirecutter
   - type: Sprite
     sprite: Objects/Tools/wirecutters.rsi
-    netsync: false
     layers:
     - state: cutters
       map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -58,7 +57,6 @@
     - Screwdriver
   - type: Sprite
     sprite: Objects/Tools/screwdriver.rsi
-    netsync: false
     layers:
       - state: screwdriver
         map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -94,6 +92,7 @@
   id: Wrench
   description: 'A common tool for assembly and disassembly. Remember: righty tighty, lefty loosey.'
   components:
+  - type: UnPlaceable
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wrench_drop.ogg
@@ -103,7 +102,6 @@
   - type: Sprite
     sprite: Objects/Tools/wrench.rsi
     state: icon
-    netsync: false
   - type: Item
     sprite: Objects/Tools/wrench.rsi
   - type: ItemCooldown
@@ -138,7 +136,6 @@
   - type: Sprite
     sprite: Objects/Tools/crowbar.rsi
     state: icon
-    netsync: false
   - type: Item
     sprite: Objects/Tools/crowbar.rsi
     size: 10
@@ -146,7 +143,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 6
+        Blunt: 8
         Structural: 3
   - type: Tool
     qualities:
@@ -161,26 +158,18 @@
     price: 22
 
 - type: entity
-  name: emergency crowbar
   parent: Crowbar
   id: CrowbarRed
+  name: emergency crowbar
   components:
   - type: Tag
     tags:
     - Crowbar
     - CrowbarRed
   - type: Sprite
-    sprite: Objects/Tools/crowbar.rsi
     state: red-icon
   - type: Item
-    sprite: Objects/Tools/crowbar.rsi
-    size: 10
     heldPrefix: red
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 8 #free man
-        Structural: 3
 
 - type: entity
   name: multitool

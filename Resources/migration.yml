@@ -13,24 +13,24 @@ DrinkKvassGlass: null
 KvassTank: null
 
 # 2023-05-03
-SpawnPointBrigmedic: null
-ClothingHeadsetBrigmedic: null
-ClothingHeadHatBeretBrigmedic: null
-ClothingHeadHelmetHardsuitBrigmedic: null
-ClothingOuterHardsuitBrigmedic: null
-ClothingOuterCoatAMG: null
-ClothingBackpackBrigmedic: null
-ClothingBackpackBrigmedicFilled: null
-ClothingBackpackSatchelBrigmedic: null
-ClothingBackpackSatchelBrigmedicFilled: null
-ClothingBackpackDuffelBrigmedic: null
-ClothingBackpackDuffelBrigmedicFilled: null
-BrigmedicIDCard: null
-BrigmedicPDA: null
-BoxSurvivalBrigmedic: null
-LockerBrigmedic: null
-LockerBrigmedicFilled: null
-BedsheetBrigmedic: null
+# SpawnPointBrigmedic: null
+# ClothingHeadsetBrigmedic: null
+# ClothingHeadHatBeretBrigmedic: null
+# ClothingHeadHelmetHardsuitBrigmedic: null
+# ClothingOuterHardsuitBrigmedic: null
+# ClothingOuterCoatAMG: null
+# ClothingBackpackBrigmedic: null
+# ClothingBackpackBrigmedicFilled: null
+# ClothingBackpackSatchelBrigmedic: null
+# ClothingBackpackSatchelBrigmedicFilled: null
+# ClothingBackpackDuffelBrigmedic: null
+# ClothingBackpackDuffelBrigmedicFilled: null
+# BrigmedicIDCard: null
+# BrigmedicPDA: null
+# BoxSurvivalBrigmedic: null
+# LockerBrigmedic: null
+# LockerBrigmedicFilled: null
+# BedsheetBrigmedic: null
 
 # 2023-05-04
 BoxMagazineMagnumSubMachineGun: BoxMagazinePistolSubMachineGun
@@ -53,6 +53,12 @@ FoodCondimentBottleSmallHotsauce: FoodCondimentBottleHotsauce
 FoodBakedCookieFortune: FoodSnackCookieFortune
 GunSafeSubMachineGunVector: GunSafeSubMachineGunDrozd
 
+# 2023-05-24
+AMEController: AmeController
+AMEJar: AmeJar
+AMEPart: AmePart
+AMEShielding: AmeShielding
+
 # 2023-05-29
 OrGate: null
 
@@ -74,3 +80,25 @@ ParticleAcceleratorEmitterLeft: ParticleAcceleratorEmitterStarboard
 ParticleAcceleratorEmitterLeftUnfinished: ParticleAcceleratorEmitterStarboardUnfinished
 ParticleAcceleratorEmitterRight: ParticleAcceleratorEmitterPort
 ParticleAcceleratorEmitterRightUnfinished: ParticleAcceleratorEmitterPortUnfinished
+
+# 2023-06-21
+WindoorArmoryLocked: WindoorSecureArmoryLocked
+WindoorBrigLocked: WindoorSecureBrigLocked
+WindoorChemistryLocked: WindoorSecureChemistryLocked
+WindoorCommandLocked: WindoorSecureCommandLocked
+WindoorEngineeringLocked: WindoorSecureEngineeringLocked
+WindoorExternalLocked: WindoorSecureExternalLocked
+WindoorMedicalLocked: WindoorSecureMedicalLocked
+WindoorSecurityLocked: WindoorSecureSecurityLocked
+WindoorScienceLocked: WindoorSecureScienceLocked
+WindoorHeadOfPersonnelLocked: WindoorSecureHeadOfPersonnelLocked
+WindoorAtmosphericsLocked: WindoorSecureAtmosphericsLocked
+WindoorParamedicLocked: WindoorSecureParamedicLocked
+
+# 2023-07-03
+ClothingHeadHelmetBasic: ClothingHeadHelmetBasic
+ClothingHeadHelmetBasicOld: ClothingHeadHelmetBasic
+
+# 2023-07-04
+# Bulletproof armor is almost statistically identical to kevlar, however, before this kevlar armor was the closest thing there was to "basic" armor. It makes the most sense to replace it with this.
+ClothingOuterArmorBasic: ClothingOuterArmorBasic
