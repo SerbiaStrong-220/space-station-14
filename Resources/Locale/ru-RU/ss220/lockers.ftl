@@ -12,3 +12,15 @@ ent-LockerPsychologistFilled = { ent-LockerPsychologist }
 
 ent-GunSafeBlueshield = сейф Синего Щита
     .desc = { ent-GunSafe.desc }
+
+ent-LockerClown = шкаф клоуна
+    .desc = Исключительно для Их Величества!
+ent-LockerClownFilled = { ent-LockerClown }
+    .suffix = Заполненный
+    .desc = { ent-LockerClown.desc }
+
+ent-LockerMime = шкаф мима
+    .desc = Самое тихое место на станции.
+ent-LockerMimeFilled = { ent-LockerMime }
+    .suffix = Заполненный
+    .desc = { ent-LockerMime.desc }
