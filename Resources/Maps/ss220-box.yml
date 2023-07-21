@@ -12630,7 +12630,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -321179.4
+    - SecondsUntilStateChange: -321279.1
       changeAirtight: False
       state: Opening
       type: Door
@@ -12672,7 +12672,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -321179.4
+    - SecondsUntilStateChange: -321279.1
       changeAirtight: False
       state: Opening
       type: Door
@@ -16484,6 +16484,13 @@ entities:
   - uid: 26174
     components:
     - pos: 18.5,45.5
+      parent: 8364
+      type: Transform
+- proto: BarMiniSign
+  entities:
+  - uid: 28801
+    components:
+    - pos: 21.5,7.5
       parent: 8364
       type: Transform
 - proto: Barricade
