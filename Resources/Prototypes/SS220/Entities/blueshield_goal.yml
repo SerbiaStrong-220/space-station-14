@@ -1,10 +1,10 @@
 - type: entity
-  parent: PaperNtForm
+  parent: PaperNtFormCc
   id: BlueshieldBriefing
   name: blueshield briefing
   components:
     - type: Paper
       content: blueshield-briefing-text
-      stampState: paper_stamp-cent
+      stampState: paper_stamp-centcom
       stampedBy:
         - Центком
