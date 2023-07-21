@@ -28,8 +28,6 @@ namespace Content.Server.Radio.EntitySystems;
 /// </summary>
 public sealed class RadioSystem : EntitySystem
 {
-    private const string NoIdJobName = "No id";
-
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
@@ -154,7 +152,7 @@ public sealed class RadioSystem : EntitySystem
 
     private string GetIdCardName(EntityUid senderUid)
     {
-        var idCardTitle = NoIdJobName;
+        var idCardTitle = Loc.GetString("chat-radio-no-id");
 
         if (_inventorySystem.TryGetSlotEntity(senderUid, "id", out var idUid))
         {
