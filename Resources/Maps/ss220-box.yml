@@ -12630,7 +12630,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -321136.84
+    - SecondsUntilStateChange: -321179.4
       changeAirtight: False
       state: Opening
       type: Door
@@ -12672,7 +12672,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -321136.84
+    - SecondsUntilStateChange: -321179.4
       changeAirtight: False
       state: Opening
       type: Door
@@ -166295,6 +166295,13 @@ entities:
   - uid: 22969
     components:
     - pos: 14.5,-42.5
+      parent: 8364
+      type: Transform
+- proto: StudioSign
+  entities:
+  - uid: 28800
+    components:
+    - pos: 3.5,10.5
       parent: 8364
       type: Transform
 - proto: SubstationBasic
