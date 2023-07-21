@@ -10,7 +10,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardsuits/blueshield.rsi
   - type: PointLight
-    color: "#ffeead"
+    color: "#adeeff"
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 10000
