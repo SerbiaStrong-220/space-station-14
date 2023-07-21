@@ -20,6 +20,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using System.Globalization;
+using System.Linq;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -28,6 +29,18 @@ namespace Content.Server.Radio.EntitySystems;
 /// </summary>
 public sealed class RadioSystem : EntitySystem
 {
+    private static readonly string[] JobsWithBoldMessages =
+    {
+        "job-name-hos", "job-name-rd", "job-name-cmo",
+        "job-name-hop", "job-name-captain", "job-name-centcomoff",
+        "job-name-ce", "job-name-qm", "job-name-ertleader"
+    };
+
+    private static readonly string[] JobsWithBoldWithoutLoc =
+    {
+        "Central Commander", "Centcom Agent"
+    };
+
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
@@ -76,10 +89,13 @@ public sealed class RadioSystem : EntitySystem
 
         name = FormattedMessage.EscapeText(name);
 
+        var idCardName = string.Empty;
         var formattedName = name;
+
         if (TryComp<HumanoidAppearanceComponent>(messageSource, out var humanoidComp))
         {
-            formattedName = $"[color={humanoidComp.SpeakerColor.ToHex()}]{GetIdCardName(messageSource)}{name}[/color]";
+            idCardName = GetIdCardName(messageSource);
+            formattedName = $"[color={humanoidComp.SpeakerColor.ToHex()}]{FormatIdCardName(idCardName)}{name}[/color]";
         }
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
@@ -91,7 +107,7 @@ public sealed class RadioSystem : EntitySystem
                 ("color", channel.Color),
                 ("channel", $"\\[{channel.LocalizedName}\\]"),
                 ("name", formattedName),
-                ("message", FormattedMessage.EscapeText(message))
+                ("message", GetFormattedMessage(message, idCardName))
             ),
             EntityUid.Invalid);
 
@@ -168,10 +184,37 @@ public sealed class RadioSystem : EntitySystem
             }
         }
 
-        var textInfo = CultureInfo.CurrentCulture.TextInfo;
-        idCardTitle = textInfo.ToTitleCase(idCardTitle);
+        return idCardTitle;
+    }
 
-        return $"\\[{idCardTitle}\\] ";
+    private string FormatIdCardName(string idCardName)
+    {
+        var textInfo = CultureInfo.CurrentCulture.TextInfo;
+        idCardName = textInfo.ToTitleCase(idCardName);
+
+        return $"\\[{idCardName}\\] ";
+    }
+
+    private string GetFormattedMessage(string message, string idCardName)
+    {
+        var formattedMessage = FormattedMessage.EscapeText(message);
+
+        if (string.IsNullOrEmpty(idCardName))
+        {
+            return formattedMessage;
+        }
+
+        if (JobsWithBoldMessages.Any(jobCode => Loc.GetString(jobCode) == idCardName))
+        {
+            return $"[bold]{formattedMessage}[/bold]";
+        }
+
+        if (JobsWithBoldWithoutLoc.Any(job => job == idCardName))
+        {
+            return $"[bold]{formattedMessage}[/bold]";
+        }
+
+        return formattedMessage;
     }
 
     /// <inheritdoc cref="TelecomServerComponent"/>
