@@ -28,6 +28,8 @@
   id: GunSafeBlueshield
   name: blue shield's gun safe
   components:
+  - type: AccessReader
+    access: [ [ "Blueshield" ] ]
   - type: StorageFill
     contents:
     - id: WeaponDisabler
