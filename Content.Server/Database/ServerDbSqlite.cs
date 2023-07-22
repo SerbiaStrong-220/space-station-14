@@ -383,6 +383,8 @@ namespace Content.Server.Database
                 ban.ExpirationTime == null ? null : DateTime.SpecifyKind(ban.ExpirationTime.Value, DateTimeKind.Utc),
                 ban.Reason,
                 aUid,
+                ban.BanningAdminName,
+                ban.Round,
                 unban);
         }
 

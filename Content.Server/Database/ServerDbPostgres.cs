@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Data;
 using System.Linq;
 using System.Net;
@@ -191,6 +191,8 @@ namespace Content.Server.Database
                 ban.ExpirationTime,
                 ban.Reason,
                 aUid,
+                ban.BanningAdminName,
+                ban.Round,
                 unbanDef);
         }
 
