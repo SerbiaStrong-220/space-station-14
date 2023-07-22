@@ -23,3 +23,7 @@
         amount: 2
       - id: ClothingHandsGlovesLatex
       - id: BoxZiptie
+      - id: ClothingOuterStraightjacket
+        amount: 2
+      - id: TherapeuticPai
+        amount: 2

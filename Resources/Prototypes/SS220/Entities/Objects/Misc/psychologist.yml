@@ -20,3 +20,9 @@
     contents:
       - id: PillPlacebo
         amount: 9
+
+- type: entity
+  parent: PersonalAI
+  id: TherapeuticPai
+  name: терапевтический ПИИ
+  description: "Для тех кому нужно с кем-нибудь поговорить. Внимание: производитель не несёт ответсвенность за потенциальную зависимость от продукта."
