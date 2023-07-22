@@ -12630,7 +12630,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -321279.1
+    - SecondsUntilStateChange: -321712.94
       changeAirtight: False
       state: Opening
       type: Door
@@ -12672,7 +12672,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -321279.1
+    - SecondsUntilStateChange: -321712.94
       changeAirtight: False
       state: Opening
       type: Door
@@ -19140,7 +19140,8 @@ entities:
       type: Transform
   - uid: 11618
     components:
-    - pos: 17.038202,29.558767
+    - rot: -0.17453292519943295 rad
+      pos: 17.038202,29.558767
       parent: 8364
       type: Transform
   - uid: 20894
@@ -145287,12 +145288,14 @@ entities:
       type: Transform
   - uid: 7792
     components:
-    - pos: 9.007783,20.108465
+    - rot: 1.5184364492350666 rad
+      pos: 9.007783,20.258465
       parent: 8364
       type: Transform
   - uid: 7801
     components:
-    - pos: 8.125072,20.360777
+    - rot: 0.2094395102393196 rad
+      pos: 8.125072,20.360777
       parent: 8364
       type: Transform
   - uid: 7941
@@ -192047,16 +192050,26 @@ entities:
   entities:
   - uid: 28778
     components:
-    - rot: 1.5707963267948966 rad
-      pos: 1.5,44.5
+    - pos: 4.5,47.5
       parent: 8364
       type: Transform
+    - canCollide: False
+      type: Physics
+    - fixtures: {}
+      type: Fixtures
+    - range: 2.5
+      type: InteractionRange
   - uid: 28779
     components:
-    - rot: 1.5707963267948966 rad
-      pos: 1.5,46.5
+    - pos: 5.5,47.5
       parent: 8364
       type: Transform
+    - canCollide: False
+      type: Physics
+    - fixtures: {}
+      type: Fixtures
+    - range: 2.5
+      type: InteractionRange
 - proto: WardrobeAtmospherics
   entities:
   - uid: 10313
