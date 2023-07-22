@@ -2,12 +2,14 @@
 
 # Clown
 - type: entity
-  parent: Airlock
+  parent: AirlockGlass
   id: AirlockClown
   suffix: Clown
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/clown.rsi
+  - type: PaintableAirlock
+    group: Glass
 
 - type: entity
   parent: AirlockClown
