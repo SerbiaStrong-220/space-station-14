@@ -9,7 +9,7 @@ using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using System.Collections.Generic;
-
+using Content.Server.Players;
 
 namespace Content.Server.Administration.Commands
 {
@@ -105,10 +105,11 @@ namespace Content.Server.Administration.Commands
                 addrRange = (targetAddr, cidr);
             }
 
-            var adminName = player != null ? player.Data.UserName : null;
+            var adminName = player != null ? player.ConnectedClient.UserData.UserName : null;
 
-            if (adminName != null)
-                adminName = adminName.Substring(adminName.IndexOf('@'), adminName.Length - 1);
+            /*if (adminName != null)
+                adminName = player.ConnectedClient.UserData.UserName;*/
+            /*adminName = adminName.Substring(adminName.IndexOf('@'), adminName.Length - 1);*/
 
             var banDef = new ServerBanDef(
                 null,
