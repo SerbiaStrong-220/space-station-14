@@ -163,7 +163,9 @@ namespace Content.Server.Database
                 HWId = serverBan.HWId?.ToArray(),
                 BanTime = serverBan.BanTime.UtcDateTime,
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
-                UserId = serverBan.UserId?.UserId
+                UserId = serverBan.UserId?.UserId,
+                Round = serverBan.Round,
+                BanningAdminName = serverBan.BanningAdminName
             });
 
             await db.SqliteDbContext.SaveChangesAsync();

@@ -227,7 +227,9 @@ namespace Content.Server.Database
                 BanningAdmin = serverBan.BanningAdmin?.UserId,
                 BanTime = serverBan.BanTime.UtcDateTime,
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
-                UserId = serverBan.UserId?.UserId
+                UserId = serverBan.UserId?.UserId,
+                Round = serverBan.Round,
+                BanningAdminName = serverBan.BanningAdminName
             });
 
             await db.PgDbContext.SaveChangesAsync();
