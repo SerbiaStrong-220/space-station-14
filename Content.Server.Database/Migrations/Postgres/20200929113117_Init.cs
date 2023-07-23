@@ -83,9 +83,7 @@ namespace Content.Server.Database.Migrations.Postgres
                     ban_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     expiration_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     reason = table.Column<string>(nullable: false),
-                    banning_admin = table.Column<Guid>(nullable: true),
-                    banning_admin_name = table.Column<string>(nullable: true),
-                    round = table.Column<int>(nullable: false)
+                    banning_admin = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

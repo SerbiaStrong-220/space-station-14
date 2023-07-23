@@ -105,7 +105,7 @@ namespace Content.Server.Administration.Commands
                 addrRange = (targetAddr, cidr);
             }
 
-            var adminName = player != null ? player.ConnectedClient.UserData.UserName : null;
+            var adminName = player != null ? player.Name : null;
 
             /*if (adminName != null)
                 adminName = player.ConnectedClient.UserData.UserName;*/
