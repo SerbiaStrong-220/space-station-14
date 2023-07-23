@@ -107,6 +107,9 @@ namespace Content.Server.Administration.Commands
 
             var adminName = player != null ? player.Data.UserName : null;
 
+            if (adminName != null)
+                adminName = adminName.Substring(adminName.IndexOf('@'), adminName.Length - 1);
+
             var banDef = new ServerBanDef(
                 null,
                 targetUid,
