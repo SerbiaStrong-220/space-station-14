@@ -1,8 +1,6 @@
 ﻿#!/usr/bin/env pwsh
 
-$name = "UpdateBans"
-
-# param([String]$name)
+param([String]$name)
 
 if ($name -eq "")
 {
