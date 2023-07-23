@@ -85,7 +85,7 @@ namespace Content.Server.Database.Migrations.Postgres
                     reason = table.Column<string>(nullable: false),
                     banning_admin = table.Column<Guid>(nullable: true),
                     banning_admin_name = table.Column<string>(nullable: true),
-                    round = table.Column<int>(nullable: true)
+                    round = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
