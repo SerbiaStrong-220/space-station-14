@@ -1,0 +1,16 @@
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SWRLCircuitboard
+  name: S.W.R.L. machine board
+  description: A machine printed circuit board for an S.W.R.L..
+  components:
+    - type: Sprite
+      state: science
+    - type: MachineBoard
+      prototype: MichineSWRL
+      requirements:
+        Capacitor: 4
+      materialRequirements:
+        Cable: 2
+        Steel: 4
+        Glass: 1
