@@ -21,3 +21,55 @@
 - type: stationGoal
   id: StationGoalZoo
   text: station-goal-zoo
+
+- type: stationGoal
+  id: StationGoalMilitia
+  text: station-goal-militia
+
+- type: stationGoal
+  id: StationGoalPartyPreps
+  text: station-goal-party-preps
+
+- type: stationGoal
+  id: StationGoalFullDiscovery
+  text: station-goal-full-discovery
+
+- type: stationGoal
+  id: StationGoalCargoProfit
+  text: station-goal-cargo-profit
+
+- type: stationGoal
+  id: StationGoalShipyard
+  text: station-goal-shipyard
+
+- type: stationGoal
+  id: StationGoalChemicalCombat
+  text: station-goal-chemical-combat
+
+- type: stationGoal
+  id: StationGoalHallwayRemoval
+  text: station-goal-hallway-removal
+
+- type: stationGoal
+  id: StationGoalSecurityShuttle
+  text: station-goal-security-shuttle
+
+- type: stationGoal
+  id: StationGoalBotanyRise
+  text: station-goal-botany-rise
+
+- type: stationGoal
+  id: StationGoalRenovationProgram
+  text: station-goal-renovation-program
+
+- type: stationGoal
+  id: StationGoalAnomalyHeaven
+  text: station-goal-anomaly-heaven
+
+- type: stationGoal
+  id: StationGoalMachineEfficiency
+  text: station-goal-machine-efficiency
+
+- type: stationGoal
+  id: StationGoalFoodPrep
+  text: station-goal-food-prep
