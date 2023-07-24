@@ -114,7 +114,7 @@ namespace Content.Server.Administration.Commands
                 expires,
                 reason,
                 player?.UserId,
-                player?.Name;,
+                player?.Name,
                 round,
                 null);
 
