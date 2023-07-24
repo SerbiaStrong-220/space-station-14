@@ -105,12 +105,6 @@ namespace Content.Server.Administration.Commands
                 addrRange = (targetAddr, cidr);
             }
 
-            var adminName = player != null ? player.Name : null;
-
-            /*if (adminName != null)
-                adminName = player.ConnectedClient.UserData.UserName;*/
-            /*adminName = adminName.Substring(adminName.IndexOf('@'), adminName.Length - 1);*/
-
             var banDef = new ServerBanDef(
                 null,
                 targetUid,
@@ -120,7 +114,7 @@ namespace Content.Server.Administration.Commands
                 expires,
                 reason,
                 player?.UserId,
-                adminName,
+                player?.Name;,
                 round,
                 null);
 
