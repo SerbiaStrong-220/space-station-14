@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: Structures/Machines/Anomaly/ape.rsi
+    sprite: SS220/Structures/Machines/swrl.rsi
     layers:
     - state: base
     - state: unshaded
@@ -46,11 +46,11 @@
   - type: Emitter
     onState: firing
     powerUseActive: 50
-    boltType: BulletWeakRocket
+    boltType: BulletSpaceRocket
   - type: ApcPowerReceiver
     powerLoad: 150
   - type: Gun
-    fireRate: 1 #just has to be fast enough to keep up with upgrades
+    fireRate: 2 #just has to be fast enough to keep up with upgrades
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -72,10 +72,9 @@
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
   - type: WirelessNetworkConnection
-    range: 200
+    range: 500
   - type: DeviceLinkSink
     ports:
       - On
       - Off
       - Toggle
-
