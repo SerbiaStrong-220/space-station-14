@@ -504,10 +504,10 @@ entities:
             color: '#DE3A3A93'
             id: BotGreyscale
           decals:
-            3425: -11,45
-            3426: -8,42
-            3427: -9,42
-            3428: -10,42
+            3422: -11,45
+            3423: -8,42
+            3424: -9,42
+            3425: -10,42
         - node:
             color: '#DE3A3A96'
             id: BotGreyscale
@@ -565,37 +565,37 @@ entities:
             color: '#FFFFFFFF'
             id: BrickTileDarkCornerNe
           decals:
-            3606: 20,-5
+            3603: 20,-5
         - node:
             color: '#FFFFFFFF'
             id: BrickTileDarkCornerNw
           decals:
-            3607: 18,-5
+            3604: 18,-5
         - node:
             color: '#FFFFFFFF'
             id: BrickTileDarkCornerSe
           decals:
-            3608: 20,-7
+            3605: 20,-7
         - node:
             color: '#FFFFFFFF'
             id: BrickTileDarkCornerSw
           decals:
-            3609: 18,-7
+            3606: 18,-7
         - node:
             color: '#FFFFFFFF'
             id: BrickTileDarkLineE
           decals:
-            3610: 20,-6
+            3607: 20,-6
         - node:
             color: '#FFFFFFFF'
             id: BrickTileDarkLineN
           decals:
-            3611: 19,-5
+            3608: 19,-5
         - node:
             color: '#FFFFFFFF'
             id: BrickTileDarkLineS
           decals:
-            3613: 19,-7
+            3610: 19,-7
         - node:
             color: '#8CC8FFCE'
             id: BrickTileDarkLineW
@@ -605,7 +605,7 @@ entities:
             color: '#FFFFFFFF'
             id: BrickTileDarkLineW
           decals:
-            3612: 18,-6
+            3609: 18,-6
         - node:
             color: '#D381C996'
             id: BrickTileSteelCornerNe
@@ -740,7 +740,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteCornerNe
           decals:
-            3447: 4,53
+            3444: 4,53
         - node:
             color: '#9FED5896'
             id: BrickTileWhiteCornerNe
@@ -769,23 +769,19 @@ entities:
             color: '#DE3A3A96'
             id: BrickTileWhiteCornerNe
           decals:
-            3628: -5,53
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteCornerNe
-          decals:
             2173: -15,-57
             2973: 0,34
             3103: 12,33
             3301: 10,46
             3311: 0,46
             3330: 17,47
+            3623: -5,53
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteCornerNe
           decals:
-            3518: -12,49
+            3515: -12,49
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteCornerNe
@@ -814,7 +810,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteCornerNw
           decals:
-            3448: 2,53
+            3445: 2,53
         - node:
             color: '#9FED5896'
             id: BrickTileWhiteCornerNw
@@ -844,18 +840,14 @@ entities:
             3302: 2,46
             3310: -3,46
             3331: 13,47
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteCornerNw
-          decals:
-            3629: -7,53
+            3624: -7,53
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteCornerNw
           decals:
-            3517: -13,49
-            3535: -32,45
+            3514: -13,49
+            3532: -32,45
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteCornerNw
@@ -877,7 +869,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteCornerSe
           decals:
-            3449: 4,51
+            3446: 4,51
         - node:
             color: '#9FED5896'
             id: BrickTileWhiteCornerSe
@@ -911,13 +903,13 @@ entities:
             3285: 10,44
             3312: 0,43
             3332: 17,42
-            3383: -5,39
+            3382: -5,39
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteCornerSe
           decals:
-            3522: -12,43
+            3519: -12,43
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteCornerSe
@@ -938,7 +930,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteCornerSw
           decals:
-            3450: 2,51
+            3447: 2,51
         - node:
             color: '#9FED5896'
             id: BrickTileWhiteCornerSw
@@ -971,18 +963,14 @@ entities:
             3303: 2,44
             3313: -3,43
             3329: 13,42
-            3382: -6,39
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteCornerSw
-          decals:
-            3636: -13,51
+            3381: -6,39
+            3630: -13,51
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteCornerSw
           decals:
-            3534: -32,43
+            3531: -32,43
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteCornerSw
@@ -1009,23 +997,19 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteInnerNw
           decals:
-            3453: 2,52
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteInnerNw
-          decals:
-            3643: -7,52
+            3450: 2,52
         - node:
             color: '#DE3A3A96'
             id: BrickTileWhiteInnerNw
           decals:
             3309: 7,46
+            3637: -7,52
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteInnerNw
           decals:
-            3568: -13,45
+            3565: -13,45
         - node:
             color: '#334E6DC8'
             id: BrickTileWhiteInnerSe
@@ -1036,7 +1020,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteInnerSe
           decals:
-            3455: 3,51
+            3452: 3,51
         - node:
             color: '#334E6DC8'
             id: BrickTileWhiteInnerSw
@@ -1047,8 +1031,8 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteInnerSw
           decals:
-            3454: 2,52
-            3456: 3,51
+            3451: 2,52
+            3453: 3,51
         - node:
             color: '#334E6DC8'
             id: BrickTileWhiteLineE
@@ -1068,7 +1052,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteLineE
           decals:
-            3452: 4,52
+            3449: 4,52
         - node:
             color: '#9FED5896'
             id: BrickTileWhiteLineE
@@ -1107,14 +1091,6 @@ entities:
             color: '#DE3A3A96'
             id: BrickTileWhiteLineE
           decals:
-            3618: -5,48
-            3619: -5,49
-            3626: -5,51
-            3627: -5,52
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteLineE
-          decals:
             1560: -11,4
             1755: 46,-25
             1756: 46,-24
@@ -1131,22 +1107,26 @@ entities:
             3334: 17,44
             3335: 17,45
             3336: 17,46
-            3367: -5,47
-            3368: -5,46
-            3369: -5,45
-            3370: -5,44
-            3371: -5,43
-            3372: -5,42
-            3373: -5,41
-            3374: -5,40
+            3366: -5,47
+            3367: -5,46
+            3368: -5,45
+            3369: -5,44
+            3370: -5,43
+            3371: -5,42
+            3372: -5,41
+            3373: -5,40
+            3613: -5,48
+            3614: -5,49
+            3621: -5,51
+            3622: -5,52
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteLineE
           decals:
-            3519: -12,47
-            3520: -12,46
-            3521: -12,45
+            3516: -12,47
+            3517: -12,46
+            3518: -12,45
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteLineE
@@ -1179,7 +1159,7 @@ entities:
             color: '#6092CD93'
             id: BrickTileWhiteLineN
           decals:
-            3451: 3,53
+            3448: 3,53
         - node:
             color: '#9FED5896'
             id: BrickTileWhiteLineN
@@ -1221,14 +1201,6 @@ entities:
             color: '#DE3A3A96'
             id: BrickTileWhiteLineN
           decals:
-            3630: -8,52
-            3631: -10,52
-            3632: -11,52
-            3633: -12,52
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteLineN
-          decals:
             1759: 46,-23
             2972: -1,34
             3304: 4,46
@@ -1237,24 +1209,28 @@ entities:
             3337: 16,47
             3338: 15,47
             3339: 14,47
+            3625: -8,52
+            3626: -10,52
+            3627: -11,52
+            3628: -12,52
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteLineN
           decals:
-            3536: -29,45
-            3537: -26,45
-            3538: -23,45
-            3539: -22,45
-            3540: -20,45
-            3541: -19,45
-            3542: -18,45
-            3543: -17,45
-            3544: -15,45
-            3545: -14,45
-            3562: -31,45
-            3563: -28,45
-            3567: -25,45
+            3533: -29,45
+            3534: -26,45
+            3535: -23,45
+            3536: -22,45
+            3537: -20,45
+            3538: -19,45
+            3539: -18,45
+            3540: -17,45
+            3541: -15,45
+            3542: -14,45
+            3559: -31,45
+            3560: -28,45
+            3564: -25,45
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteLineN
@@ -1326,34 +1302,30 @@ entities:
             3340: 16,42
             3341: 15,42
             3342: 14,42
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteLineS
-          decals:
-            3637: -12,51
-            3638: -11,51
-            3639: -10,51
-            3640: -9,51
-            3641: -8,51
-            3642: -7,51
+            3631: -12,51
+            3632: -11,51
+            3633: -10,51
+            3634: -9,51
+            3635: -8,51
+            3636: -7,51
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteLineS
           decals:
-            3523: -13,43
-            3524: -17,43
-            3525: -18,43
-            3526: -19,43
-            3527: -20,43
-            3528: -21,43
-            3529: -22,43
-            3530: -23,43
-            3531: -25,43
-            3532: -26,43
-            3533: -29,43
-            3564: -27,43
-            3565: -30,43
+            3520: -13,43
+            3521: -17,43
+            3522: -18,43
+            3523: -19,43
+            3524: -20,43
+            3525: -21,43
+            3526: -22,43
+            3527: -23,43
+            3528: -25,43
+            3529: -26,43
+            3530: -29,43
+            3561: -27,43
+            3562: -30,43
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteLineS
@@ -1407,12 +1379,6 @@ entities:
             color: '#DE3A3A96'
             id: BrickTileWhiteLineW
           decals:
-            3623: -6,49
-            3634: -13,52
-        - node:
-            color: '#DE3A3A96'
-            id: BrickTileWhiteLineW
-          decals:
             1757: 44,-25
             2970: -2,33
             3110: 11,25
@@ -1427,22 +1393,24 @@ entities:
             3344: 13,44
             3345: 13,45
             3346: 13,46
-            3375: -6,40
-            3376: -6,41
-            3377: -6,42
-            3378: -6,43
-            3379: -6,45
-            3380: -6,46
-            3381: -6,47
+            3374: -6,40
+            3375: -6,41
+            3376: -6,42
+            3377: -6,43
+            3378: -6,45
+            3379: -6,46
+            3380: -6,47
+            3618: -6,49
+            3629: -13,52
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: BrickTileWhiteLineW
           decals:
-            3546: -13,48
-            3547: -13,47
-            3548: -13,46
-            3561: -32,44
+            3543: -13,48
+            3544: -13,47
+            3545: -13,46
+            3558: -32,44
         - node:
             color: '#EFB34196'
             id: BrickTileWhiteLineW
@@ -1507,8 +1475,8 @@ entities:
             color: '#FFFFFFFF'
             id: CautionGreyscale
           decals:
-            3647: -9,52
-            3648: -13,52
+            3641: -9,52
+            3642: -13,52
         - node:
             color: '#52B4E996'
             id: CheckerNESW
@@ -1990,9 +1958,9 @@ entities:
             2669: 16,-8
             2670: 14,-8
             2743: 12,-11
-            3387: 4,50
-            3388: 4,49
-            3389: 4,48
+            3384: 4,50
+            3385: 4,49
+            3386: 4,48
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -2052,10 +2020,10 @@ entities:
             color: '#FFFFFF63'
             id: Dirt
           decals:
-            3464: -24,48
-            3465: -25,47
-            3466: -25,49
-            3467: -24,46
+            3461: -24,48
+            3462: -25,47
+            3463: -25,49
+            3464: -24,46
         - node:
             color: '#FFFFFFFF'
             id: Dirt
@@ -2068,10 +2036,10 @@ entities:
             id: Dirt
           decals:
             3270: 36,-1
-            3579: -18,39
-            3580: -18,41
-            3581: -23,34
-            3582: -22,35
+            3576: -18,39
+            3577: -18,41
+            3578: -23,34
+            3579: -22,35
         - node:
             color: '#FFFFFFFF'
             id: DirtHeavy
@@ -2101,12 +2069,12 @@ entities:
             3134: 4,29
             3160: 24,33
             3267: 8,42
-            3457: -24,47
-            3463: -24,49
-            3503: -20,34
-            3516: -12,40
-            3569: -15,38
-            3570: -16,39
+            3454: -24,47
+            3460: -24,49
+            3500: -20,34
+            3513: -12,40
+            3566: -15,38
+            3567: -16,39
         - node:
             cleanable: True
             color: '#474F52FF'
@@ -2288,36 +2256,36 @@ entities:
             3273: 36,0
             3274: 32,-2
             3275: 30,-1
-            3460: -25,49
-            3461: -25,48
-            3462: -25,47
-            3493: -1,44
-            3494: -3,39
-            3495: -5,40
-            3496: -6,43
-            3497: -6,46
-            3498: -9,44
-            3499: -8,48
-            3500: -10,47
-            3501: -12,45
-            3502: -16,43
-            3504: -13,34
-            3505: -12,38
-            3506: -13,40
-            3507: -17,39
-            3508: -21,38
-            3509: -24,40
-            3510: -21,43
-            3511: -33,44
-            3515: -16,40
-            3573: -10,37
-            3574: -10,37
-            3575: -10,39
-            3576: -12,40
-            3577: -12,40
-            3578: -13,42
-            3614: 9,39
-            3615: 4,37
+            3457: -25,49
+            3458: -25,48
+            3459: -25,47
+            3490: -1,44
+            3491: -3,39
+            3492: -5,40
+            3493: -6,43
+            3494: -6,46
+            3495: -9,44
+            3496: -8,48
+            3497: -10,47
+            3498: -12,45
+            3499: -16,43
+            3501: -13,34
+            3502: -12,38
+            3503: -13,40
+            3504: -17,39
+            3505: -21,38
+            3506: -24,40
+            3507: -21,43
+            3508: -33,44
+            3512: -16,40
+            3570: -10,37
+            3571: -10,37
+            3572: -10,39
+            3573: -12,40
+            3574: -12,40
+            3575: -13,42
+            3611: 9,39
+            3612: 4,37
         - node:
             cleanable: True
             zIndex: 1
@@ -2371,15 +2339,15 @@ entities:
             3157: 21,36
             3159: 26,28
             3271: 41,-1
-            3458: -25,49
-            3459: -25,49
-            3492: -3,41
-            3512: -28,43
-            3513: -10,34
-            3514: -17,35
-            3571: -15,41
-            3572: -19,35
-            3583: -25,35
+            3455: -25,49
+            3456: -25,49
+            3489: -3,41
+            3509: -28,43
+            3510: -10,34
+            3511: -17,35
+            3568: -15,41
+            3569: -19,35
+            3580: -25,35
         - node:
             color: '#FFFFFFFF'
             id: FlowersBROne
@@ -2574,30 +2542,30 @@ entities:
             id: Grassa1
           decals:
             2740: 9,-24
-            3470: -20,40
+            3467: -20,40
         - node:
             color: '#FFFFFFFF'
             id: Grassa2
           decals:
-            3471: -20,41
+            3468: -20,41
         - node:
             color: '#FFFFFFFF'
             id: Grassa3
           decals:
-            3472: -22,41
-            3476: -25,41
+            3469: -22,41
+            3473: -25,41
         - node:
             color: '#FFFFFFFF'
             id: Grassa4
           decals:
             2816: 39,-1
-            3473: -22,40
-            3477: -25,40
+            3470: -22,40
+            3474: -25,40
         - node:
             color: '#FFFFFFFF'
             id: Grassa5
           decals:
-            3475: -23,41
+            3472: -23,41
         - node:
             color: '#FFFFFFFF'
             id: Grassb1
@@ -2613,7 +2581,7 @@ entities:
             color: '#FFFFFFFF'
             id: Grassb4
           decals:
-            3474: -23,40
+            3471: -23,40
         - node:
             color: '#FFFFFFFF'
             id: Grassb5
@@ -2803,9 +2771,9 @@ entities:
             3139: 15,39
             3140: 16,39
             3141: 17,39
-            3432: -8,45
-            3433: -9,45
-            3434: -10,45
+            3429: -8,45
+            3430: -9,45
+            3431: -10,45
         - node:
             color: '#DE3A3A96'
             id: HalfTileOverlayGreyscale
@@ -2877,10 +2845,10 @@ entities:
             color: '#44FF8F56'
             id: HalfTileOverlayGreyscale180
           decals:
-            3481: -21,37
-            3482: -22,37
-            3483: -23,37
-            3484: -24,37
+            3478: -21,37
+            3479: -22,37
+            3480: -23,37
+            3481: -24,37
         - node:
             color: '#52B4E996'
             id: HalfTileOverlayGreyscale180
@@ -2968,9 +2936,9 @@ entities:
             3146: 17,36
             3147: 16,36
             3148: 15,36
-            3429: -8,43
-            3430: -9,43
-            3431: -10,43
+            3426: -8,43
+            3427: -9,43
+            3428: -10,43
         - node:
             color: '#DE3A3A96'
             id: HalfTileOverlayGreyscale180
@@ -3024,7 +2992,7 @@ entities:
             color: '#44FF8F56'
             id: HalfTileOverlayGreyscale270
           decals:
-            3485: -25,38
+            3482: -25,38
         - node:
             color: '#52B4E996'
             id: HalfTileOverlayGreyscale270
@@ -4651,32 +4619,32 @@ entities:
             color: '#DE3A3A96'
             id: TemplateNumber1
           decals:
-            3584: 3,31
+            3581: 3,31
         - node:
             color: '#DE3A3A96'
             id: TemplateNumber2
           decals:
-            3585: 5,31
+            3582: 5,31
         - node:
             color: '#DE3A3A96'
             id: TemplateNumber3
           decals:
-            3586: 8,31
+            3583: 8,31
         - node:
             color: '#DE3A3A96'
             id: TemplateNumber4
           decals:
-            3587: 3,28
+            3584: 3,28
         - node:
             color: '#DE3A3A96'
             id: TemplateNumber5
           decals:
-            3588: 5,28
+            3585: 5,28
         - node:
             color: '#DE3A3A96'
             id: TemplateNumber6
           decals:
-            3589: 8,28
+            3586: 8,28
         - node:
             color: '#334E6DFF'
             id: ThreeQuarterTileOverlayGreyscale
@@ -4686,7 +4654,7 @@ entities:
             color: '#44FF8F56'
             id: ThreeQuarterTileOverlayGreyscale
           decals:
-            3478: -25,39
+            3475: -25,39
         - node:
             color: '#52B4E993'
             id: ThreeQuarterTileOverlayGreyscale
@@ -4745,7 +4713,7 @@ entities:
             color: '#44FF8F56'
             id: ThreeQuarterTileOverlayGreyscale180
           decals:
-            3479: -20,37
+            3476: -20,37
         - node:
             color: '#52B4E996'
             id: ThreeQuarterTileOverlayGreyscale180
@@ -4794,7 +4762,7 @@ entities:
             color: '#44FF8F56'
             id: ThreeQuarterTileOverlayGreyscale270
           decals:
-            3480: -25,37
+            3477: -25,37
         - node:
             color: '#52B4E996'
             id: ThreeQuarterTileOverlayGreyscale270
@@ -4976,20 +4944,20 @@ entities:
             color: '#FFFFFFFF'
             id: WarnCornerNE
           decals:
-            3441: -33,45
+            3438: -33,45
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerNW
           decals:
             2914: 3,5
             3166: 20,51
-            3404: -2,50
+            3401: -2,50
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnCornerNW
           decals:
-            3440: -34,45
+            3437: -34,45
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerSE
@@ -5000,7 +4968,7 @@ entities:
             color: '#FFFFFFFF'
             id: WarnCornerSE
           decals:
-            3439: -33,43
+            3436: -33,43
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerSW
@@ -5011,7 +4979,7 @@ entities:
             color: '#FFFFFFFF'
             id: WarnCornerSW
           decals:
-            3438: -34,43
+            3435: -34,43
         - node:
             color: '#334E6DE0'
             id: WarnCornerSmallGreyscaleNE
@@ -5076,14 +5044,14 @@ entities:
             1729: 51,-21
             2230: -73,-4
             2380: -22,-79
-            3406: -1,50
-            3417: -1,49
+            3403: -1,50
+            3414: -1,49
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnCornerSmallNE
           decals:
-            3444: 1,50
+            3441: 1,50
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerSmallNW
@@ -5096,8 +5064,8 @@ entities:
             2228: -69,-4
             2229: -76,-4
             2381: -20,-79
-            3405: -1,50
-            3418: 3,49
+            3402: -1,50
+            3415: 3,49
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerSmallSE
@@ -5107,8 +5075,8 @@ entities:
             1727: 51,-17
             2100: 22,-90
             2233: -73,8
-            3399: -1,52
-            3419: -1,49
+            3396: -1,52
+            3416: -1,49
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerSmallSW
@@ -5123,8 +5091,8 @@ entities:
             2206: -79,-4
             2231: -69,8
             2232: -76,8
-            3400: -1,52
-            3420: 2,49
+            3397: -1,52
+            3417: 2,49
         - node:
             color: '#FFFFFFFF'
             id: WarnEndN
@@ -5134,7 +5102,7 @@ entities:
             color: '#FFFFFFFF'
             id: WarnEndW
           decals:
-            3398: -3,52
+            3395: -3,52
         - node:
             color: '#FFFFFFFF'
             id: WarnLineE
@@ -5175,20 +5143,20 @@ entities:
             3171: 24,46
             3182: 22,46
             3183: 22,47
-            3390: 3,50
-            3401: -1,51
-            3414: -1,50
-            3415: -1,48
-            3421: 3,49
-            3422: 3,48
+            3387: 3,50
+            3398: -1,51
+            3411: -1,50
+            3412: -1,48
+            3418: 3,49
+            3419: 3,48
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnLineE
           decals:
-            3436: -33,44
-            3443: 1,51
-            3446: 1,53
+            3433: -33,44
+            3440: 1,51
+            3443: 1,53
         - node:
             color: '#334E6DC8'
             id: WarnLineGreyscaleE
@@ -5224,8 +5192,8 @@ entities:
             color: '#DE3A3A96'
             id: WarnLineGreyscaleE
           decals:
-            3549: -12,44
-            3550: -12,48
+            3546: -12,44
+            3547: -12,48
         - node:
             color: '#FFFFFFFF'
             id: WarnLineGreyscaleE
@@ -5276,31 +5244,27 @@ entities:
             3288: 8,53
             3307: 3,46
             3318: -1,46
-            3590: 3,28
-            3591: 5,28
-            3592: 8,28
-            3596: 3,31
-            3597: 5,31
-            3598: 8,31
-        - node:
-            color: '#DE3A3A96'
-            id: WarnLineGreyscaleN
-          decals:
-            3621: -5,49
-            3622: -6,49
-            3644: -6,53
-            3645: -9,52
-            3646: -13,52
+            3587: 3,28
+            3588: 5,28
+            3589: 8,28
+            3593: 3,31
+            3594: 5,31
+            3595: 8,31
+            3616: -5,49
+            3617: -6,49
+            3638: -6,53
+            3639: -9,52
+            3640: -13,52
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: WarnLineGreyscaleN
           decals:
-            3551: -16,45
-            3552: -21,45
-            3553: -24,45
-            3560: -30,45
-            3566: -27,45
+            3548: -16,45
+            3549: -21,45
+            3550: -24,45
+            3557: -30,45
+            3563: -27,45
         - node:
             color: '#F5DB9E96'
             id: WarnLineGreyscaleN
@@ -5354,30 +5318,26 @@ entities:
             3096: 17,23
             3209: 17,26
             3319: -1,43
-            3593: 8,31
-            3594: 5,31
-            3595: 3,31
-            3599: 8,28
-            3600: 5,28
-            3601: 3,28
-            3602: -2,43
-        - node:
-            color: '#DE3A3A96'
-            id: WarnLineGreyscaleS
-          decals:
-            3624: -5,51
-            3625: -6,51
+            3590: 8,31
+            3591: 5,31
+            3592: 3,31
+            3596: 8,28
+            3597: 5,28
+            3598: 3,28
+            3599: -2,43
+            3619: -5,51
+            3620: -6,51
         - node:
             cleanable: True
             color: '#DE3A3A96'
             id: WarnLineGreyscaleS
           decals:
-            3554: -24,43
-            3555: -16,43
-            3556: -15,43
-            3557: -14,43
-            3558: -28,43
-            3559: -31,43
+            3551: -24,43
+            3552: -16,43
+            3553: -15,43
+            3554: -14,43
+            3555: -28,43
+            3556: -31,43
         - node:
             color: '#EFB34196'
             id: WarnLineGreyscaleS
@@ -5412,12 +5372,8 @@ entities:
             3216: 7,50
             3217: 7,49
             3223: 7,47
-            3386: -6,44
-        - node:
-            color: '#DE3A3A96'
-            id: WarnLineGreyscaleW
-          decals:
-            3620: -6,48
+            3383: -6,44
+            3615: -6,48
         - node:
             color: '#EFB34196'
             id: WarnLineGreyscaleW
@@ -5506,13 +5462,13 @@ entities:
             2376: -21,-77
             2377: -22,-77
             2378: -23,-77
-            3391: 1,52
-            3392: 0,52
-            3393: -2,52
-            3409: 1,49
-            3410: 0,49
-            3423: -1,48
-            3424: 2,48
+            3388: 1,52
+            3389: 0,52
+            3390: -2,52
+            3406: 1,49
+            3407: 0,49
+            3420: -1,48
+            3421: 2,48
         - node:
             color: '#FFFFFFFF'
             id: WarnLineS
@@ -5569,17 +5525,17 @@ entities:
             3176: 20,47
             3180: 22,46
             3181: 22,47
-            3402: -1,51
-            3403: -2,49
-            3407: 3,50
-            3408: -2,48
-            3416: 2,48
+            3399: -1,51
+            3400: -2,49
+            3404: 3,50
+            3405: -2,48
+            3413: 2,48
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnLineS
           decals:
-            3437: -34,44
+            3434: -34,44
         - node:
             color: '#FFFFFFFF'
             id: WarnLineW
@@ -5641,20 +5597,20 @@ entities:
             3177: 23,51
             3178: 22,51
             3179: 21,51
-            3394: -2,52
-            3395: -1,52
-            3396: 0,52
-            3397: 1,52
-            3411: 2,49
-            3412: 1,49
-            3413: 0,49
+            3391: -2,52
+            3392: -1,52
+            3393: 0,52
+            3394: 1,52
+            3408: 2,49
+            3409: 1,49
+            3410: 0,49
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnLineW
           decals:
-            3442: 2,50
-            3445: 4,50
+            3439: 2,50
+            3442: 4,50
         - node:
             color: '#FFFFFFFF'
             id: WoodTrimThinBox
@@ -5771,8 +5727,8 @@ entities:
             2866: 27,-4
             2867: 20,-3
             2921: 20,-1
-            3469: -19,48
-            3491: -19,50
+            3466: -19,48
+            3488: -19,50
         - node:
             color: '#FFFFFFFF'
             id: WoodTrimThinInnerNw
@@ -5836,11 +5792,11 @@ entities:
             2936: 9,22
             3352: 16,52
             3353: 16,53
-            3468: -19,51
-            3490: -19,51
-            3603: 30,5
-            3604: 30,6
-            3605: 30,7
+            3465: -19,51
+            3487: -19,51
+            3600: 30,5
+            3601: 30,6
+            3602: 30,7
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -5903,10 +5859,10 @@ entities:
             3354: 15,54
             3355: 14,54
             3356: 13,54
-            3486: -15,50
-            3487: -16,50
-            3488: -17,50
-            3489: -18,50
+            3483: -15,50
+            3484: -16,50
+            3485: -17,50
+            3486: -18,50
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -6042,7 +5998,7 @@ entities:
             color: '#00000093'
             id: splatter
           decals:
-            3435: -26,51
+            3432: -26,51
         - node:
             cleanable: True
             color: '#6E0505A5'
@@ -8633,14 +8589,17 @@ entities:
             0: 65535
           -4,13:
             0: 32767
+            3: 32768
           -4,14:
             0: 3916
           -3,13:
             0: 4095
+            3: 53248
           -3,14:
             0: 3855
           -2,13:
             0: 61439
+            3: 4096
           -2,14:
             0: 18415
           -1,14:
@@ -12721,7 +12680,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -327224.5
+    - SecondsUntilStateChange: -327702.75
       changeAirtight: False
       state: Opening
       type: Door
@@ -12763,7 +12722,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -327224.5
+    - SecondsUntilStateChange: -327702.75
       changeAirtight: False
       state: Opening
       type: Door
@@ -17492,11 +17451,6 @@ entities:
     - links:
       - 23348
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 3568
     components:
     - name: Incinerator Vent
@@ -17523,25 +17477,17 @@ entities:
     - pos: 82.5,-26.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 5370
-      type: SignalReceiver
+    - links:
+      - 5370
+      type: DeviceLinkSink
   - uid: 13910
     components:
     - pos: -61.5,-21.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 2638
-      type: SignalReceiver
+    - links:
+      - 2638
+      type: DeviceLinkSink
   - uid: 17145
     components:
     - name: Хранилище
@@ -17552,13 +17498,6 @@ entities:
     - links:
       - 17146
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 17146
-      type: SignalReceiver
   - uid: 17147
     components:
     - name: Хранилище
@@ -17569,37 +17508,22 @@ entities:
     - links:
       - 17146
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 17146
-      type: SignalReceiver
   - uid: 18326
     components:
     - pos: -44.5,-27.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 17791
-      type: SignalReceiver
+    - links:
+      - 17791
+      type: DeviceLinkSink
   - uid: 18327
     components:
     - pos: -44.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 17791
-      type: SignalReceiver
+    - links:
+      - 17791
+      type: DeviceLinkSink
   - uid: 19994
     components:
     - pos: 93.5,-25.5
@@ -17615,37 +17539,25 @@ entities:
     - pos: 70.5,-39.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 19856
-      type: SignalReceiver
+    - links:
+      - 19856
+      type: DeviceLinkSink
   - uid: 20181
     components:
     - pos: 70.5,-40.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 19856
-      type: SignalReceiver
+    - links:
+      - 19856
+      type: DeviceLinkSink
   - uid: 20182
     components:
     - pos: 70.5,-41.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 19856
-      type: SignalReceiver
+    - links:
+      - 19856
+      type: DeviceLinkSink
   - uid: 20518
     components:
     - pos: 87.5,-38.5
@@ -17656,13 +17568,9 @@ entities:
     - pos: 53.5,-52.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 20866
-      type: SignalReceiver
+    - links:
+      - 20866
+      type: DeviceLinkSink
   - uid: 25771
     components:
     - pos: 3.5,47.5
@@ -19570,11 +19478,6 @@ entities:
         7850:
         - Timer: Open
         - Start: Close
-      registeredSinks:
-        Timer:
-        - 7850
-        Start:
-        - 7850
       type: DeviceLinkSource
   - uid: 7704
     components:
@@ -19585,11 +19488,6 @@ entities:
         7965:
         - Timer: Open
         - Start: Close
-      registeredSinks:
-        Timer:
-        - 7965
-        Start:
-        - 7965
       type: DeviceLinkSource
   - uid: 8513
     components:
@@ -19601,11 +19499,6 @@ entities:
         7849:
         - Timer: Open
         - Start: Close
-      registeredSinks:
-        Timer:
-        - 7849
-        Start:
-        - 7849
       type: DeviceLinkSource
   - uid: 8514
     components:
@@ -19617,11 +19510,6 @@ entities:
         7851:
         - Timer: Open
         - Start: Close
-      registeredSinks:
-        Timer:
-        - 7851
-        Start:
-        - 7851
       type: DeviceLinkSource
   - uid: 8515
     components:
@@ -19633,11 +19521,6 @@ entities:
         8844:
         - Timer: Open
         - Start: Close
-      registeredSinks:
-        Timer:
-        - 8844
-        Start:
-        - 8844
       type: DeviceLinkSource
   - uid: 8516
     components:
@@ -19648,11 +19531,6 @@ entities:
         8696:
         - Timer: Open
         - Start: Close
-      registeredSinks:
-        Timer:
-        - 8696
-        Start:
-        - 8696
       type: DeviceLinkSource
 - proto: Bucket
   entities:
@@ -82969,11 +82847,6 @@ entities:
     - pos: 71.5,-43.5
       parent: 8364
       type: Transform
-    - outputs:
-        ArtifactAnalyzerSender:
-        - port: ArtifactAnalyzerReceiver
-          uid: 21199
-      type: SignalTransmitter
 - proto: computerBodyScanner
   entities:
   - uid: 19054
@@ -83546,250 +83419,130 @@ entities:
       pos: -41.5,-27.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 20027
-        Forward:
-        - port: Left
-          uid: 20027
-        Off:
-        - port: Middle
-          uid: 20027
-      type: SignalReceiver
+    - links:
+      - 20027
+      type: DeviceLinkSink
   - uid: 6226
     components:
     - rot: 1.5707963267948966 rad
       pos: -60.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6227
     components:
     - rot: 1.5707963267948966 rad
       pos: -59.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6228
     components:
     - rot: -1.5707963267948966 rad
       pos: -60.5,-16.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6229
     components:
     - rot: -1.5707963267948966 rad
       pos: -59.5,-16.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6230
     components:
     - rot: -1.5707963267948966 rad
       pos: -58.5,-16.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6231
     components:
     - rot: -1.5707963267948966 rad
       pos: -57.5,-16.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6232
     components:
     - pos: -57.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6233
     components:
     - pos: -61.5,-16.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6234
     components:
     - pos: -61.5,-17.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6235
     components:
     - pos: -61.5,-18.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 6236
     components:
     - pos: -61.5,-19.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 7162
     components:
     - rot: -1.5707963267948966 rad
       pos: -43.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 7213
     components:
     - rot: -1.5707963267948966 rad
       pos: -44.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 7307
     components:
     - rot: -1.5707963267948966 rad
       pos: -41.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 7622
     components:
     - rot: 3.141592653589793 rad
@@ -83814,17 +83567,9 @@ entities:
       pos: -42.5,-27.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 20027
-        Forward:
-        - port: Left
-          uid: 20027
-        Off:
-        - port: Middle
-          uid: 20027
-      type: SignalReceiver
+    - links:
+      - 20027
+      type: DeviceLinkSink
   - uid: 9794
     components:
     - rot: 3.141592653589793 rad
@@ -83840,135 +83585,71 @@ entities:
       pos: -42.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 10535
     components:
     - rot: -1.5707963267948966 rad
       pos: -40.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 10536
     components:
     - rot: -1.5707963267948966 rad
       pos: -39.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 10804
     components:
     - rot: -1.5707963267948966 rad
       pos: -37.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 11321
     components:
     - rot: 1.5707963267948966 rad
       pos: -44.5,-27.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 20027
-        Forward:
-        - port: Left
-          uid: 20027
-        Off:
-        - port: Middle
-          uid: 20027
-      type: SignalReceiver
+    - links:
+      - 20027
+      type: DeviceLinkSink
   - uid: 11325
     components:
     - rot: -1.5707963267948966 rad
       pos: -38.5,-31.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 11322
-        Forward:
-        - port: Left
-          uid: 11322
-        Off:
-        - port: Middle
-          uid: 11322
-      type: SignalReceiver
+    - links:
+      - 11322
+      type: DeviceLinkSink
   - uid: 13812
     components:
     - pos: -61.5,-20.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 17202
     components:
     - rot: 1.5707963267948966 rad
       pos: -43.5,-27.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 20027
-        Forward:
-        - port: Left
-          uid: 20027
-        Off:
-        - port: Middle
-          uid: 20027
-      type: SignalReceiver
+    - links:
+      - 20027
+      type: DeviceLinkSink
   - uid: 20048
     components:
     - pos: 90.5,-26.5
@@ -84004,33 +83685,17 @@ entities:
       pos: -61.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
   - uid: 26054
     components:
     - pos: -61.5,-21.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
 - proto: ConveyorBeltAssembly
   entities:
   - uid: 20040
@@ -85576,28 +85241,6 @@ entities:
         - Pressed: Toggle
         27581:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 24136
-        - 8390
-        - 8814
-        - 10356
-        - 24192
-        - 10391
-        - 24200
-        - 10393
-        - 24201
-        - 6247
-        - 6220
-        - 6071
-        - 7065
-        - 27704
-        - 27705
-        - 27707
-        - 27706
-        - 27643
-        - 27594
-        - 27581
       type: DeviceLinkSource
   - uid: 6091
     components:
@@ -85614,11 +85257,6 @@ entities:
         - Pressed: Toggle
         8080:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 6188
-        - 6189
-        - 8080
       type: DeviceLinkSource
   - uid: 6571
     components:
@@ -85632,10 +85270,6 @@ entities:
         - Pressed: Toggle
         5449:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 10132
-        - 5449
       type: DeviceLinkSource
   - uid: 6664
     components:
@@ -85649,10 +85283,6 @@ entities:
         - Pressed: Toggle
         21521:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 6917
-        - 21521
       type: DeviceLinkSource
   - uid: 6941
     components:
@@ -85675,14 +85305,6 @@ entities:
         - Pressed: Toggle
         10617:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 22645
-        - 7233
-        - 7529
-        - 10425
-        - 10352
-        - 10617
       type: DeviceLinkSource
   - uid: 10373
     components:
@@ -85730,28 +85352,6 @@ entities:
         - Pressed: Toggle
         27581:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 24136
-        - 6247
-        - 6220
-        - 6071
-        - 24201
-        - 10393
-        - 24200
-        - 10391
-        - 24192
-        - 8390
-        - 8814
-        - 10356
-        - 27706
-        - 27707
-        - 27705
-        - 27704
-        - 7065
-        - 27643
-        - 27594
-        - 27581
       type: DeviceLinkSource
   - uid: 10419
     components:
@@ -85763,9 +85363,6 @@ entities:
     - linkedPorts:
         6360:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 6360
       type: DeviceLinkSource
   - uid: 10422
     components:
@@ -85778,9 +85375,6 @@ entities:
     - linkedPorts:
         7272:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 7272
       type: DeviceLinkSource
   - uid: 10808
     components:
@@ -85797,11 +85391,6 @@ entities:
         - Pressed: Toggle
         5590:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 5591
-        - 5592
-        - 5590
       type: DeviceLinkSource
   - uid: 11602
     components:
@@ -85818,11 +85407,6 @@ entities:
         - Pressed: Toggle
         24202:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 24204
-        - 24203
-        - 24202
       type: DeviceLinkSource
   - uid: 14513
     components:
@@ -85837,10 +85421,6 @@ entities:
         - Pressed: Toggle
         24209:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 24208
-        - 24209
       type: DeviceLinkSource
   - uid: 15275
     components:
@@ -85855,10 +85435,6 @@ entities:
         - Pressed: Toggle
         24210:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 24211
-        - 24210
       type: DeviceLinkSource
   - uid: 21237
     components:
@@ -85875,11 +85451,6 @@ entities:
         - Pressed: Toggle
         20841:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 20840
-        - 20842
-        - 20841
       type: DeviceLinkSource
   - uid: 22444
     components:
@@ -85901,15 +85472,6 @@ entities:
         - Pressed: Toggle
         17583:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 17577
-        - 17578
-        - 17579
-        - 17580
-        - 17581
-        - 17582
-        - 17583
       type: DeviceLinkSource
   - uid: 23347
     components:
@@ -85928,12 +85490,6 @@ entities:
         - Pressed: Toggle
         7058:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 10454
-        - 10455
-        - 10456
-        - 7058
       type: DeviceLinkSource
   - uid: 23348
     components:
@@ -85945,9 +85501,6 @@ entities:
     - linkedPorts:
         3535:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 3535
       type: DeviceLinkSource
   - uid: 24074
     components:
@@ -85957,9 +85510,6 @@ entities:
     - linkedPorts:
         14185:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 14185
       type: DeviceLinkSource
   - uid: 24075
     components:
@@ -85969,9 +85519,6 @@ entities:
     - linkedPorts:
         14186:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 14186
       type: DeviceLinkSource
   - uid: 24076
     components:
@@ -85981,9 +85528,6 @@ entities:
     - linkedPorts:
         14187:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 14187
       type: DeviceLinkSource
   - uid: 24077
     components:
@@ -85993,9 +85537,6 @@ entities:
     - linkedPorts:
         14188:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 14188
       type: DeviceLinkSource
   - uid: 24132
     components:
@@ -86008,9 +85549,6 @@ entities:
     - linkedPorts:
         27227:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 27227
       type: DeviceLinkSource
   - uid: 24133
     components:
@@ -86023,9 +85561,6 @@ entities:
     - linkedPorts:
         26735:
         - Pressed: DoorBolt
-      registeredSinks:
-        Pressed:
-        - 26735
       type: DeviceLinkSource
   - uid: 24510
     components:
@@ -86046,13 +85581,6 @@ entities:
         - Pressed: Toggle
         23925:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 10351
-        - 24494
-        - 21945
-        - 6493
-        - 23925
       type: DeviceLinkSource
   - uid: 26181
     components:
@@ -86077,15 +85605,6 @@ entities:
         - Pressed: Toggle
         26180:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 26173
-        - 26175
-        - 26176
-        - 26177
-        - 26178
-        - 26179
-        - 26180
       type: DeviceLinkSource
   - uid: 27283
     components:
@@ -86130,25 +85649,6 @@ entities:
         - Pressed: Toggle
         25737:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 7308
-        - 7306
-        - 7305
-        - 25745
-        - 25746
-        - 25747
-        - 25748
-        - 25749
-        - 7857
-        - 25743
-        - 25744
-        - 25740
-        - 25742
-        - 25741
-        - 25739
-        - 25738
-        - 25737
       type: DeviceLinkSource
     - range: 2
       type: InteractionRange
@@ -86163,10 +85663,6 @@ entities:
         - Pressed: Toggle
         9639:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 9421
-        - 9639
       type: DeviceLinkSource
   - uid: 27495
     components:
@@ -86199,19 +85695,6 @@ entities:
         - Pressed: Toggle
         5510:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 5498
-        - 5340
-        - 26794
-        - 6394
-        - 26791
-        - 26790
-        - 26789
-        - 7974
-        - 8077
-        - 5531
-        - 5510
       type: DeviceLinkSource
     - range: 2
       type: InteractionRange
@@ -86246,19 +85729,6 @@ entities:
         - Pressed: Toggle
         5340:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 5531
-        - 5510
-        - 8077
-        - 7974
-        - 26789
-        - 26790
-        - 26791
-        - 6394
-        - 26794
-        - 5498
-        - 5340
       type: DeviceLinkSource
     - range: 2
       type: InteractionRange
@@ -141749,11 +141219,6 @@ entities:
         14565:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 14565
-        Off:
-        - 14565
       type: DeviceLinkSource
   - uid: 5719
     components:
@@ -141765,11 +141230,6 @@ entities:
         5644:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 5644
-        Off:
-        - 5644
       type: DeviceLinkSource
   - uid: 6409
     components:
@@ -141784,13 +141244,6 @@ entities:
         27864:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 27861
-        - 27864
-        Off:
-        - 27861
-        - 27864
       type: DeviceLinkSource
   - uid: 7350
     components:
@@ -141817,21 +141270,6 @@ entities:
         25621:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 24444
-        - 6984
-        - 7468
-        - 2855
-        - 27232
-        - 25621
-        Off:
-        - 24444
-        - 6984
-        - 7468
-        - 2855
-        - 27232
-        - 25621
       type: DeviceLinkSource
   - uid: 7541
     components:
@@ -141846,13 +141284,6 @@ entities:
         24458:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 24207
-        - 24458
-        Off:
-        - 24207
-        - 24458
       type: DeviceLinkSource
   - uid: 7579
     components:
@@ -141863,11 +141294,6 @@ entities:
         9780:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 9780
-        Off:
-        - 9780
       type: DeviceLinkSource
   - uid: 8254
     components:
@@ -141881,13 +141307,6 @@ entities:
         24233:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 17999
-        - 24233
-        Off:
-        - 17999
-        - 24233
       type: DeviceLinkSource
   - uid: 8800
     components:
@@ -141905,15 +141324,6 @@ entities:
         7821:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 8788
-        - 8900
-        - 7821
-        Off:
-        - 8788
-        - 8900
-        - 7821
       type: DeviceLinkSource
   - uid: 10292
     components:
@@ -141931,15 +141341,6 @@ entities:
         10459:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 2848
-        - 7132
-        - 10459
-        Off:
-        - 2848
-        - 7132
-        - 10459
       type: DeviceLinkSource
   - uid: 10317
     components:
@@ -141950,11 +141351,6 @@ entities:
         9907:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 9907
-        Off:
-        - 9907
       type: DeviceLinkSource
   - uid: 11600
     components:
@@ -141969,13 +141365,6 @@ entities:
         9391:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 9389
-        - 9391
-        Off:
-        - 9389
-        - 9391
       type: DeviceLinkSource
   - uid: 11638
     components:
@@ -141996,17 +141385,6 @@ entities:
         26647:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 23257
-        - 10407
-        - 8190
-        - 26647
-        Off:
-        - 23257
-        - 10407
-        - 8190
-        - 26647
       type: DeviceLinkSource
   - uid: 16892
     components:
@@ -142024,15 +141402,6 @@ entities:
         24130:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 24128
-        - 24129
-        - 24130
-        Off:
-        - 24128
-        - 24129
-        - 24130
       type: DeviceLinkSource
   - uid: 17554
     components:
@@ -142043,11 +141412,6 @@ entities:
         8110:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 8110
-        Off:
-        - 8110
       type: DeviceLinkSource
   - uid: 22020
     components:
@@ -142060,11 +141424,6 @@ entities:
         9868:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 9868
-        Off:
-        - 9868
       type: DeviceLinkSource
   - uid: 22422
     components:
@@ -142076,11 +141435,6 @@ entities:
         17525:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 17525
-        Off:
-        - 17525
       type: DeviceLinkSource
   - uid: 23945
     components:
@@ -142106,21 +141460,6 @@ entities:
         24284:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 11047
-        - 11046
-        - 11045
-        - 25815
-        - 11043
-        - 24284
-        Off:
-        - 11047
-        - 11046
-        - 11045
-        - 25815
-        - 11043
-        - 24284
       type: DeviceLinkSource
   - uid: 24080
     components:
@@ -142131,11 +141470,6 @@ entities:
         15450:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 15450
-        Off:
-        - 15450
       type: DeviceLinkSource
   - uid: 24083
     components:
@@ -142152,15 +141486,6 @@ entities:
         12320:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 12322
-        - 12321
-        - 12320
-        Off:
-        - 12322
-        - 12321
-        - 12320
       type: DeviceLinkSource
   - uid: 24288
     components:
@@ -142180,17 +141505,6 @@ entities:
         14243:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 14240
-        - 14241
-        - 14242
-        - 14243
-        Off:
-        - 14240
-        - 14241
-        - 14242
-        - 14243
       type: DeviceLinkSource
   - uid: 24292
     components:
@@ -142201,11 +141515,6 @@ entities:
         14569:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 14569
-        Off:
-        - 14569
       type: DeviceLinkSource
   - uid: 25557
     components:
@@ -142222,15 +141531,6 @@ entities:
         28799:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 25556
-        - 26112
-        - 28799
-        Off:
-        - 25556
-        - 26112
-        - 28799
       type: DeviceLinkSource
     - range: 2.25
       type: InteractionRange
@@ -142249,15 +141549,6 @@ entities:
         9932:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 7479
-        - 24079
-        - 9932
-        Off:
-        - 7479
-        - 24079
-        - 9932
       type: DeviceLinkSource
   - uid: 26279
     components:
@@ -142272,13 +141563,6 @@ entities:
         25995:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 25996
-        - 25995
-        Off:
-        - 25996
-        - 25995
       type: DeviceLinkSource
     - range: 2
       type: InteractionRange
@@ -142292,11 +141576,6 @@ entities:
         26325:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26325
-        Off:
-        - 26325
       type: DeviceLinkSource
   - uid: 26595
     components:
@@ -142311,13 +141590,6 @@ entities:
         11038:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 11037
-        - 11038
-        Off:
-        - 11037
-        - 11038
       type: DeviceLinkSource
   - uid: 26606
     components:
@@ -142328,11 +141600,6 @@ entities:
         11048:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 11048
-        Off:
-        - 11048
       type: DeviceLinkSource
   - uid: 26607
     components:
@@ -142353,17 +141620,6 @@ entities:
         11041:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26883
-        - 11039
-        - 11040
-        - 11041
-        Off:
-        - 26883
-        - 11039
-        - 11040
-        - 11041
       type: DeviceLinkSource
   - uid: 26609
     components:
@@ -142377,13 +141633,6 @@ entities:
         11035:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26893
-        - 11035
-        Off:
-        - 26893
-        - 11035
       type: DeviceLinkSource
   - uid: 26610
     components:
@@ -142395,11 +141644,6 @@ entities:
         26862:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26862
-        Off:
-        - 26862
       type: DeviceLinkSource
   - uid: 26611
     components:
@@ -142414,13 +141658,6 @@ entities:
         2385:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26861
-        - 2385
-        Off:
-        - 26861
-        - 2385
       type: DeviceLinkSource
   - uid: 26612
     components:
@@ -142431,11 +141668,6 @@ entities:
         18396:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 18396
-        Off:
-        - 18396
       type: DeviceLinkSource
   - uid: 26613
     components:
@@ -142450,13 +141682,6 @@ entities:
         18398:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 18399
-        - 18398
-        Off:
-        - 18399
-        - 18398
       type: DeviceLinkSource
   - uid: 26614
     components:
@@ -142474,15 +141699,6 @@ entities:
         18392:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 18394
-        - 18391
-        - 18392
-        Off:
-        - 18394
-        - 18391
-        - 18392
       type: DeviceLinkSource
   - uid: 26615
     components:
@@ -142494,11 +141710,6 @@ entities:
         18390:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 18390
-        Off:
-        - 18390
       type: DeviceLinkSource
   - uid: 26616
     components:
@@ -142510,11 +141721,6 @@ entities:
         18397:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 18397
-        Off:
-        - 18397
       type: DeviceLinkSource
   - uid: 26617
     components:
@@ -142525,11 +141731,6 @@ entities:
         18395:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 18395
-        Off:
-        - 18395
       type: DeviceLinkSource
   - uid: 26618
     components:
@@ -142541,11 +141742,6 @@ entities:
         20826:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 20826
-        Off:
-        - 20826
       type: DeviceLinkSource
   - uid: 26677
     components:
@@ -142557,11 +141753,6 @@ entities:
         26078:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26078
-        Off:
-        - 26078
       type: DeviceLinkSource
   - uid: 27467
     components:
@@ -142573,11 +141764,6 @@ entities:
         26736:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26736
-        Off:
-        - 26736
       type: DeviceLinkSource
   - uid: 27593
     components:
@@ -142591,13 +141777,6 @@ entities:
         16411:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 16412
-        - 16411
-        Off:
-        - 16412
-        - 16411
       type: DeviceLinkSource
   - uid: 27677
     components:
@@ -142612,13 +141791,6 @@ entities:
         26786:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 26751
-        - 26786
-        Off:
-        - 26751
-        - 26786
       type: DeviceLinkSource
   - uid: 27786
     components:
@@ -142630,11 +141802,6 @@ entities:
         4177:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 4177
-        Off:
-        - 4177
       type: DeviceLinkSource
   - uid: 27906
     components:
@@ -142648,13 +141815,6 @@ entities:
         27863:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 27862
-        - 27863
-        Off:
-        - 27862
-        - 27863
       type: DeviceLinkSource
   - uid: 27984
     components:
@@ -142668,13 +141828,6 @@ entities:
         27927:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 24282
-        - 27927
-        Off:
-        - 24282
-        - 27927
       type: DeviceLinkSource
   - uid: 28759
     components:
@@ -142692,15 +141845,6 @@ entities:
         28449:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 28448
-        - 28519
-        - 28449
-        Off:
-        - 28448
-        - 28519
-        - 28449
       type: DeviceLinkSource
   - uid: 28761
     components:
@@ -142712,11 +141856,6 @@ entities:
         14456:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 14456
-        Off:
-        - 14456
       type: DeviceLinkSource
   - uid: 28763
     components:
@@ -142730,13 +141869,6 @@ entities:
         14082:
         - On: On
         - Off: Off
-      registeredSinks:
-        On:
-        - 25575
-        - 14082
-        Off:
-        - 25575
-        - 14082
       type: DeviceLinkSource
 - proto: LockerAtmosphericsFilled
   entities:
@@ -144169,11 +143301,6 @@ entities:
     - pos: 71.5,-40.5
       parent: 8364
       type: Transform
-    - inputs:
-        ArtifactAnalyzerReceiver:
-        - port: ArtifactAnalyzerSender
-          uid: 17552
-      type: SignalReceiver
 - proto: MachineFrame
   entities:
   - uid: 17860
@@ -155500,17 +154627,9 @@ entities:
       pos: -58.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Reverse:
-        - port: Right
-          uid: 13893
-        Forward:
-        - port: Left
-          uid: 13893
-        Off:
-        - port: Middle
-          uid: 13893
-      type: SignalReceiver
+    - links:
+      - 13893
+      type: DeviceLinkSink
 - proto: ReinforcedPlasmaWindow
   entities:
   - uid: 2277
@@ -161416,25 +160535,17 @@ entities:
     - pos: 20.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 14147
-      type: SignalReceiver
+    - links:
+      - 14147
+      type: DeviceLinkSink
   - uid: 3001
     components:
     - pos: 19.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 14147
-      type: SignalReceiver
+    - links:
+      - 14147
+      type: DeviceLinkSink
   - uid: 5340
     components:
     - pos: 6.5,-5.5
@@ -161479,11 +160590,6 @@ entities:
     - links:
       - 10808
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 5591
     components:
     - pos: -12.5,-23.5
@@ -161492,11 +160598,6 @@ entities:
     - links:
       - 10808
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 5592
     components:
     - pos: -12.5,-22.5
@@ -161505,11 +160606,6 @@ entities:
     - links:
       - 10808
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 6188
     components:
     - pos: 10.5,-23.5
@@ -161684,13 +160780,9 @@ entities:
     - pos: 21.5,-15.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 14147
-      type: SignalReceiver
+    - links:
+      - 14147
+      type: DeviceLinkSink
   - uid: 16553
     components:
     - pos: 2.5,-45.5
@@ -161699,13 +160791,6 @@ entities:
     - links:
       - 4878
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 4878
-      type: SignalReceiver
   - uid: 16554
     components:
     - pos: 2.5,-44.5
@@ -161714,13 +160799,6 @@ entities:
     - links:
       - 4878
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 4878
-      type: SignalReceiver
   - uid: 16555
     components:
     - pos: 2.5,-43.5
@@ -161729,43 +160807,21 @@ entities:
     - links:
       - 4878
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 4878
-      type: SignalReceiver
   - uid: 17173
     components:
     - pos: 9.5,-62.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17174
     components:
     - pos: 7.5,-62.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17175
     components:
     - pos: 8.5,-62.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17577
     components:
     - pos: 3.5,-58.5
@@ -161774,11 +160830,6 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17578
     components:
     - pos: 4.5,-58.5
@@ -161787,11 +160838,6 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17579
     components:
     - pos: 5.5,-58.5
@@ -161800,11 +160846,6 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17580
     components:
     - pos: 6.5,-60.5
@@ -161813,11 +160854,6 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17581
     components:
     - pos: 6.5,-61.5
@@ -161826,11 +160862,6 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17582
     components:
     - pos: 4.5,-64.5
@@ -161839,11 +160870,6 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 17583
     components:
     - pos: 3.5,-64.5
@@ -161852,47 +160878,30 @@ entities:
     - links:
       - 22444
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 19022
     components:
     - pos: 23.5,-17.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 14147
-      type: SignalReceiver
+    - links:
+      - 14147
+      type: DeviceLinkSink
   - uid: 19023
     components:
     - pos: 23.5,-18.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 14147
-      type: SignalReceiver
+    - links:
+      - 14147
+      type: DeviceLinkSink
   - uid: 19024
     components:
     - pos: 23.5,-19.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle:
-        - port: Pressed
-          uid: 14147
-      type: SignalReceiver
+    - links:
+      - 14147
+      type: DeviceLinkSink
   - uid: 21945
     components:
     - rot: -1.5707963267948966 rad
@@ -162141,11 +161150,6 @@ entities:
       - 27496
       - 27495
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 26790
     components:
     - pos: -0.5,-3.5
@@ -162156,11 +161160,6 @@ entities:
       - 27496
       - 27495
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 26791
     components:
     - pos: 0.5,-3.5
@@ -162171,11 +161170,6 @@ entities:
       - 27496
       - 27495
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 26794
     components:
     - pos: 3.5,-3.5
@@ -162186,11 +161180,6 @@ entities:
       - 27496
       - 27495
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 27581
     components:
     - rot: -1.5707963267948966 rad
@@ -162278,11 +161267,6 @@ entities:
     - links:
       - 23347
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 10455
     components:
     - pos: 36.5,-10.5
@@ -162291,11 +161275,6 @@ entities:
     - links:
       - 23347
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 10456
     components:
     - pos: 37.5,-10.5
@@ -162304,11 +161283,6 @@ entities:
     - links:
       - 23347
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20837
     components:
     - pos: 61.5,-16.5
@@ -162332,11 +161306,6 @@ entities:
     - links:
       - 21237
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20841
     components:
     - pos: 70.5,-16.5
@@ -162345,11 +161314,6 @@ entities:
     - links:
       - 21237
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20842
     components:
     - pos: 71.5,-16.5
@@ -162358,41 +161322,21 @@ entities:
     - links:
       - 21237
       type: DeviceLinkSink
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20843
     components:
     - pos: 68.5,-22.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20844
     components:
     - pos: 68.5,-23.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20845
     components:
     - pos: 68.5,-24.5
       parent: 8364
       type: Transform
-    - inputs:
-        Open: []
-        Close: []
-        Toggle: []
-      type: SignalReceiver
   - uid: 20849
     components:
     - pos: 64.5,-22.5
@@ -162487,11 +161431,10 @@ entities:
     - pos: -60.5,-19.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 13910
-      type: SignalTransmitter
+    - linkedPorts:
+        13910:
+        - Pressed: Toggle
+      type: DeviceLinkSource
   - uid: 4878
     components:
     - name: переключатель створок
@@ -162506,31 +161449,16 @@ entities:
         - Pressed: Toggle
         16555:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 16553
-        - 16554
-        - 16555
       type: DeviceLinkSource
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 16553
-        - port: Toggle
-          uid: 16554
-        - port: Toggle
-          uid: 16555
-      type: SignalTransmitter
   - uid: 5370
     components:
     - pos: 81.5,-26.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 5373
-      type: SignalTransmitter
+    - linkedPorts:
+        5373:
+        - Pressed: Toggle
+      type: DeviceLinkSource
   - uid: 7875
     components:
     - name: левая гермодверь
@@ -162541,9 +161469,6 @@ entities:
     - linkedPorts:
         25773:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 25773
       type: DeviceLinkSource
     - range: 2.25
       type: InteractionRange
@@ -162552,21 +161477,20 @@ entities:
     - pos: 23.5,-21.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 19024
-        - port: Toggle
-          uid: 19023
-        - port: Toggle
-          uid: 19022
-        - port: Toggle
-          uid: 14148
-        - port: Toggle
-          uid: 2941
-        - port: Toggle
-          uid: 3001
-      type: SignalTransmitter
+    - linkedPorts:
+        19024:
+        - Pressed: Toggle
+        19023:
+        - Pressed: Toggle
+        19022:
+        - Pressed: Toggle
+        14148:
+        - Pressed: Toggle
+        2941:
+        - Pressed: Toggle
+        3001:
+        - Pressed: Toggle
+      type: DeviceLinkSource
   - uid: 17146
     components:
     - pos: -10.5,-64.5
@@ -162577,62 +161501,45 @@ entities:
         - Pressed: Toggle
         17145:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 17147
-        - 17145
       type: DeviceLinkSource
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 17147
-        - port: Toggle
-          uid: 17145
-      type: SignalTransmitter
   - uid: 17791
     components:
     - pos: -42.5,-29.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 18327
-        - port: Toggle
-          uid: 18326
-      type: SignalTransmitter
+    - linkedPorts:
+        18327:
+        - Pressed: Toggle
+        18326:
+        - Pressed: Toggle
+      type: DeviceLinkSource
   - uid: 19294
     components:
     - pos: 45.5,-46.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed: []
-      type: SignalTransmitter
   - uid: 19856
     components:
     - pos: 75.5,-41.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 20182
-        - port: Toggle
-          uid: 20181
-        - port: Toggle
-          uid: 20180
-      type: SignalTransmitter
+    - linkedPorts:
+        20182:
+        - Pressed: Toggle
+        20181:
+        - Pressed: Toggle
+        20180:
+        - Pressed: Toggle
+      type: DeviceLinkSource
   - uid: 20866
     components:
     - pos: 56.5,-47.5
       parent: 8364
       type: Transform
-    - outputs:
-        Pressed:
-        - port: Toggle
-          uid: 20667
-      type: SignalTransmitter
+    - linkedPorts:
+        20667:
+        - Pressed: Toggle
+      type: DeviceLinkSource
   - uid: 21764
     components:
     - name: переключатель створки склада
@@ -162643,9 +161550,6 @@ entities:
     - linkedPorts:
         1416:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 1416
       type: DeviceLinkSource
   - uid: 25806
     components:
@@ -162657,9 +161561,6 @@ entities:
     - linkedPorts:
         25771:
         - Pressed: Toggle
-      registeredSinks:
-        Pressed:
-        - 25771
       type: DeviceLinkSource
     - range: 2.25
       type: InteractionRange
@@ -172076,212 +170977,136 @@ entities:
         - Left: Forward
         - Right: Reverse
         - Middle: Off
-      registeredSinks:
-        Left:
-        - 7873
-        - 9794
-        - 7622
-        Right:
-        - 7873
-        - 9794
-        - 7622
-        Middle:
-        - 7873
-        - 9794
-        - 7622
       type: DeviceLinkSource
   - uid: 11322
     components:
     - pos: -40.5,-30.5
       parent: 8364
       type: Transform
-    - outputs:
-        Left:
-        - port: Forward
-          uid: 7213
-        - port: Forward
-          uid: 7162
-        - port: Forward
-          uid: 9935
-        - port: Forward
-          uid: 7307
-        - port: Forward
-          uid: 10535
-        - port: Forward
-          uid: 10536
-        - port: Forward
-          uid: 11325
-        - port: Forward
-          uid: 10804
-        Right:
-        - port: Reverse
-          uid: 7213
-        - port: Reverse
-          uid: 7162
-        - port: Reverse
-          uid: 9935
-        - port: Reverse
-          uid: 7307
-        - port: Reverse
-          uid: 10535
-        - port: Reverse
-          uid: 10536
-        - port: Reverse
-          uid: 11325
-        - port: Reverse
-          uid: 10804
-        Middle:
-        - port: Off
-          uid: 7213
-        - port: Off
-          uid: 7162
-        - port: Off
-          uid: 9935
-        - port: Off
-          uid: 7307
-        - port: Off
-          uid: 10535
-        - port: Off
-          uid: 10536
-        - port: Off
-          uid: 11325
-        - port: Off
-          uid: 10804
-      type: SignalTransmitter
+    - linkedPorts:
+        7213:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        7162:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        9935:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        7307:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        10535:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        10536:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        11325:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        10804:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+      type: DeviceLinkSource
   - uid: 13893
     components:
     - pos: -59.5,-18.5
       parent: 8364
       type: Transform
-    - outputs:
-        Left:
-        - port: Forward
-          uid: 6232
-        - port: Forward
-          uid: 6231
-        - port: Forward
-          uid: 6230
-        - port: Forward
-          uid: 6229
-        - port: Forward
-          uid: 6228
-        - port: Forward
-          uid: 6225
-        - port: Forward
-          uid: 6227
-        - port: Forward
-          uid: 6226
-        - port: Forward
-          uid: 6233
-        - port: Forward
-          uid: 6234
-        - port: Forward
-          uid: 6235
-        - port: Forward
-          uid: 6236
-        - port: Forward
-          uid: 13812
-        - port: Forward
-          uid: 26045
-        - port: Forward
-          uid: 26054
-        Right:
-        - port: Reverse
-          uid: 6232
-        - port: Reverse
-          uid: 6231
-        - port: Reverse
-          uid: 6230
-        - port: Reverse
-          uid: 6229
-        - port: Reverse
-          uid: 6228
-        - port: Reverse
-          uid: 6225
-        - port: Reverse
-          uid: 6227
-        - port: Reverse
-          uid: 6226
-        - port: Reverse
-          uid: 6233
-        - port: Reverse
-          uid: 6234
-        - port: Reverse
-          uid: 6235
-        - port: Reverse
-          uid: 6236
-        - port: Reverse
-          uid: 13812
-        - port: Reverse
-          uid: 26045
-        - port: Reverse
-          uid: 26054
-        Middle:
-        - port: Off
-          uid: 6232
-        - port: Off
-          uid: 6231
-        - port: Off
-          uid: 6230
-        - port: Off
-          uid: 6229
-        - port: Off
-          uid: 6228
-        - port: Off
-          uid: 6225
-        - port: Off
-          uid: 6227
-        - port: Off
-          uid: 6226
-        - port: Off
-          uid: 6233
-        - port: Off
-          uid: 6234
-        - port: Off
-          uid: 6235
-        - port: Off
-          uid: 6236
-        - port: Off
-          uid: 13812
-        - port: Off
-          uid: 26045
-        - port: Off
-          uid: 26054
-      type: SignalTransmitter
+    - linkedPorts:
+        6232:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6231:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6230:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6229:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6228:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6225:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6227:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6226:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6233:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6234:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6235:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        6236:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        13812:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        26045:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        26054:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+      type: DeviceLinkSource
   - uid: 20027
     components:
     - pos: -41.5,-26.5
       parent: 8364
       type: Transform
-    - outputs:
-        Left:
-        - port: Forward
-          uid: 11321
-        - port: Forward
-          uid: 17202
-        - port: Forward
-          uid: 8017
-        - port: Forward
-          uid: 3062
-        Right:
-        - port: Reverse
-          uid: 11321
-        - port: Reverse
-          uid: 17202
-        - port: Reverse
-          uid: 8017
-        - port: Reverse
-          uid: 3062
-        Middle:
-        - port: Off
-          uid: 11321
-        - port: Off
-          uid: 17202
-        - port: Off
-          uid: 8017
-        - port: Off
-          uid: 3062
-      type: SignalTransmitter
+    - linkedPorts:
+        11321:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        17202:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        8017:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+        3062:
+        - Left: Forward
+        - Right: Reverse
+        - Middle: Off
+      type: DeviceLinkSource
   - uid: 20049
     components:
     - pos: 88.5,-25.5
