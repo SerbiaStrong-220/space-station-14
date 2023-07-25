@@ -1,0 +1,17 @@
+- type: construction
+  name: gun button
+  id: GunButtonRecipe
+  graph: GunlButtonGraph
+  startNode: start
+  targetNode: GunButtonNode
+  category: construction-category-machines
+  description: It's a button for activating something gun.
+  icon:
+    sprite: Structures/Wallmounts/switch.rsi
+    state: on
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition
