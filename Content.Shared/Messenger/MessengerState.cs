@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Messenger;
@@ -8,15 +9,15 @@ public sealed class MessengerChat
 {
     public uint Id;
     public string? Name;
-    public HashSet<uint> Members = new();
-    public HashSet<uint> Messages = new();
+    public HashSet<uint> MembersId = new();
+    public HashSet<uint> MessagesId = new();
     public MessengerChatKind Kind;
-    public uint? LastMessage;
+    public uint? LastMessageId;
 
-    public MessengerChat(string? name, MessengerChatKind kind, HashSet<uint> members)
+    public MessengerChat(string? name, MessengerChatKind kind, HashSet<uint> membersId)
     {
         Name = name ?? "unknown";
-        Members = members;
+        MembersId = membersId;
         Kind = kind;
     }
 
@@ -24,9 +25,10 @@ public sealed class MessengerChat
     {
         Name = "";
         Kind = MessengerChatKind.Contact;
-        Members = new();
+        MembersId = new();
     }
 }
+
 [Serializable, NetSerializable]
 public enum MessengerChatKind
 {
@@ -35,6 +37,7 @@ public enum MessengerChatKind
     Channel,
     Bot,
 }
+
 [Serializable, NetSerializable]
 public sealed class MessengerContact
 {
@@ -59,23 +62,22 @@ public sealed class MessengerMessage
 {
     public uint Id;
     public uint ChatId;
-    public uint From;
+    public uint FromContactId;
     public TimeSpan Time;
     public string Text;
 
-    public MessengerMessage(uint chatId, uint from, TimeSpan time, string text)
+    public MessengerMessage(uint chatId, uint fromContactId, TimeSpan time, string text)
     {
         ChatId = chatId;
-        From = from;
+        FromContactId = fromContactId;
         Time = time;
         Text = text;
     }
 
     public MessengerMessage()
     {
-        From = 0;
+        FromContactId = 0;
         Time = new TimeSpan();
         Text = "";
     }
 }
-

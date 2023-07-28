@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Messenger;
@@ -46,7 +47,8 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
         if (SearchString != null)
         {
-            chatsSorted = chatsSorted.Where(messengerChatUiState => messengerChatUiState.Name.ToLower().Contains(SearchString)).ToList();
+            chatsSorted = chatsSorted
+                .Where(messengerChatUiState => messengerChatUiState.Name.ToLower().Contains(SearchString)).ToList();
         }
 
         foreach (var chat in chatsSorted)
@@ -65,7 +67,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
             {
                 CurrentChat = chat.Id;
                 OnHistoryViewPressed?.Invoke(chat.Id);
-            },chat.NewMessages));
+            }, chat.NewMessages));
         }
 
         ChatNameLabel.Visible = false;
@@ -112,7 +114,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
                 if (SearchString != null && !message.Text.ToLower().Contains(SearchString))
                     continue;
 
-                if (message.From == messengerUiState.ClientContact.Id)
+                if (message.FromContactId == messengerUiState.ClientContact.Id)
                 {
                     var messageItem = new MessengerUiMessageItem($"{message.Text}", message.Time,
                         Label.AlignMode.Right, HAlignment.Right);

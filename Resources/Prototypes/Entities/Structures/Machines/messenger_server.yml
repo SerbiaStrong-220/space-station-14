@@ -59,7 +59,7 @@
   description: Receives and store messages.
   components:
     - type: Machine
-      board: MessengerServerMachineCircuitboard
+      board: PDANanotrasenMessengerServerCircuitboard
     - type: StationLimitedNetwork
     - type: DeviceNetwork
       deviceNetId: Wireless

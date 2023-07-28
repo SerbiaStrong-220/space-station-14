@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Messenger;
@@ -16,22 +17,24 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
     [Dependency] private readonly DeviceNetworkSystem? _deviceNetworkSystem = default!;
     [Dependency] private readonly MessengerServerSystem _messengerServerSystem = default!;
 
+    public enum NetworkCommand
+    {
+        CheckServer,
+        StateUpdate,
+        MessageSend,
+    }
 
-    public const string MessengerClientCommand = "messenger_command";
-    public const string MessengerClientDevice = "messenger_command_loader";
+    public enum NetworkKey
+    {
+        Command,
+        DeviceUid,
+        ChatId,
+        MessageText,
+        CurrentChatIds,
+        ContactsIds,
+        MessagesIds,
+    }
 
-    public const string MessengerClientCommandCheckServer = "messenger_command_check_server";
-
-    public const string MessengerClientCommandStateUpdate = "messenger_command_state_update";
-
-    public const string MessengerClientCommandMessageSend = "messenger_command_message_send";
-
-    public const string MessengerClientChatId = "messenger_client_chat_id";
-    public const string MessengerClientMessage = "messenger_client_message";
-
-    public const string MessengerClientCurrentChatIds = "messenger_client_current_chat_ids";
-    public const string MessengerClientContactsIds = "messenger_client_contacts_ids";
-    public const string MessengerClientMessagesIds = "messenger_client_messages_ids";
 
     // queue for ui states, if sent too often, then some states are lost,
     // send one state per update
@@ -80,7 +83,8 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
     private void OnNetworkPacket(EntityUid uid, MessengerClientCartridgeComponent? component,
         DeviceNetworkPacketEvent args)
     {
-        if (!args.Data.TryGetValue(MessengerServerSystem.MessengerServerCommand, out string? command))
+        if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Command.ToString(),
+                out MessengerServerSystem.NetworkCommand? command))
             return;
 
         if (!Resolve(uid, ref component))
@@ -89,11 +93,12 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
         switch (command)
         {
             // when receive msg about server info add this server to servers list, and if received add server name
-            case MessengerServerSystem.MessengerServerCommandInfo:
+            case MessengerServerSystem.NetworkCommand.Info:
             {
                 var serverInfo = new ServerInfo();
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerServerName, out string? serverName))
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ServerName.ToString(),
+                        out string? serverName))
                     serverInfo.Name = serverName;
 
                 serverInfo.Address = args.SenderAddress;
@@ -110,25 +115,27 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
                 break;
             }
             // receive client contact info
-            case MessengerServerSystem.MessengerServerCommandClientContact:
+            case MessengerServerSystem.NetworkCommand.ClientContact:
             {
-                if (!args.Data.TryGetValue(MessengerServerSystem.MessengerContact, out MessengerContact? contact))
+                if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Contact.ToString(),
+                        out MessengerContact? contact))
                     break;
 
                 UpdateMessengerUiState(component.Loader, new MessengerClientContactUiState(contact));
                 break;
             }
             // receive contact info
-            case MessengerServerSystem.MessengerServerCommandContact:
+            case MessengerServerSystem.NetworkCommand.Contact:
             {
                 var contactsUpdate = new List<MessengerContact>();
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerContact, out MessengerContact? contact))
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Contact.ToString(),
+                        out MessengerContact? contact))
                 {
                     contactsUpdate.Add(contact);
                 }
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerContactList,
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ContactList.ToString(),
                         out List<MessengerContact>? contacts))
                 {
                     contactsUpdate.AddRange(contacts);
@@ -139,16 +146,17 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
                 break;
             }
             // receive chat info
-            case MessengerServerSystem.MessengerServerCommandChat:
+            case MessengerServerSystem.NetworkCommand.Chat:
             {
                 var updateChats = new List<MessengerChat>();
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerChat, out MessengerChat? chat))
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Chat.ToString(), out MessengerChat? chat))
                 {
                     updateChats.Add(chat);
                 }
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerChatList, out List<MessengerChat>? chats))
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ChatList.ToString(),
+                        out List<MessengerChat>? chats))
                 {
                     updateChats.AddRange(chats);
                 }
@@ -158,17 +166,17 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
                 break;
             }
             // receive message info
-            case MessengerServerSystem.MessengerServerCommandMessages:
+            case MessengerServerSystem.NetworkCommand.Messages:
             {
                 var updateMessages = new List<MessengerMessage>();
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerMessage,
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Message.ToString(),
                         out MessengerMessage? message))
                 {
                     updateMessages.Add(message);
                 }
 
-                if (args.Data.TryGetValue(MessengerServerSystem.MessengerMessageList,
+                if (args.Data.TryGetValue(MessengerServerSystem.NetworkKey.MessageList.ToString(),
                         out List<MessengerMessage>? messages))
                 {
                     updateMessages.AddRange(messages);
@@ -180,11 +188,12 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
                 break;
             }
             // receive new chat message
-            case MessengerServerSystem.MessengerServerCommandNewMessage:
+            case MessengerServerSystem.NetworkCommand.NewMessage:
             {
-                if (!args.Data.TryGetValue(MessengerServerSystem.MessengerMessage, out MessengerMessage? message))
+                if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.Message.ToString(),
+                        out MessengerMessage? message))
                     break;
-                if (!args.Data.TryGetValue(MessengerServerSystem.MessengerChatId, out uint? chatId))
+                if (!args.Data.TryGetValue(MessengerServerSystem.NetworkKey.ChatId.ToString(), out uint? chatId))
                     break;
 
                 RaiseLocalEvent(component.Loader, new RingerPlayRingtoneMessage());
@@ -204,10 +213,10 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
 
         component.IsInstalled = true;
 
-        BroadcastCommand(uid, args.Loader, MessengerClientCommandCheckServer);
+        BroadcastCommand(uid, args.Loader, NetworkCommand.CheckServer);
     }
 
-    private void BroadcastCommand(EntityUid senderUid, EntityUid loaderUid, string command)
+    private void BroadcastCommand(EntityUid senderUid, EntityUid loaderUid, NetworkCommand command)
     {
         var deviceMapId = Transform(loaderUid).MapID;
         var activeServersFrequency = _messengerServerSystem.ActiveServersFrequency(deviceMapId);
@@ -216,8 +225,8 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
         {
             _deviceNetworkSystem?.QueuePacket(senderUid, null, new NetworkPayload
             {
-                [MessengerClientCommand] = command,
-                [MessengerClientDevice] = loaderUid
+                [NetworkKey.Command.ToString()] = command,
+                [NetworkKey.DeviceUid.ToString()] = loaderUid
             }, frequency: frequency);
         }
     }
@@ -227,7 +236,7 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
         if (component.ActiveServer != null)
             return;
 
-        BroadcastCommand(uid, args.Loader, MessengerClientCommandCheckServer);
+        BroadcastCommand(uid, args.Loader, NetworkCommand.CheckServer);
         UpdateMessengerUiState(args.Loader,
             new MessengerErrorUiState(Loc.GetString("messenger-error-server-not-found")));
     }
@@ -254,18 +263,18 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
 
                 var payload = new NetworkPayload
                 {
-                    [MessengerClientCommand] = MessengerClientCommandStateUpdate,
-                    [MessengerClientDevice] = args.LoaderUid,
+                    [NetworkKey.Command.ToString()] = NetworkCommand.StateUpdate,
+                    [NetworkKey.DeviceUid.ToString()] = args.LoaderUid,
                 };
 
                 if (e.CurrentContacts is { Count: > 0 })
-                    payload[MessengerClientContactsIds] = e.CurrentContacts;
+                    payload[NetworkKey.ContactsIds.ToString()] = e.CurrentContacts;
 
                 if (e.CurrentMessages is { Count: > 0 })
-                    payload[MessengerClientMessagesIds] = e.CurrentMessages;
+                    payload[NetworkKey.MessagesIds.ToString()] = e.CurrentMessages;
 
                 if (e.CurrentChats is { Count: > 0 })
-                    payload[MessengerClientCurrentChatIds] = e.CurrentChats;
+                    payload[NetworkKey.CurrentChatIds.ToString()] = e.CurrentChats;
 
                 _deviceNetworkSystem?.QueuePacket(uid, serverAddress, payload);
 
@@ -278,10 +287,10 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
 
                 _deviceNetworkSystem?.QueuePacket(uid, serverAddress, new NetworkPayload
                 {
-                    [MessengerClientCommand] = MessengerClientCommandMessageSend,
-                    [MessengerClientDevice] = args.LoaderUid,
-                    [MessengerClientChatId] = e.ChatId,
-                    [MessengerClientMessage] = e.MessageText,
+                    [NetworkKey.Command.ToString()] = NetworkCommand.MessageSend,
+                    [NetworkKey.DeviceUid.ToString()] = args.LoaderUid,
+                    [NetworkKey.ChatId.ToString()] = e.ChatId,
+                    [NetworkKey.MessageText.ToString()] = e.MessageText,
                 });
                 break;
             }

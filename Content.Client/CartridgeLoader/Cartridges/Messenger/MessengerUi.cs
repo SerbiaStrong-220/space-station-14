@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader;
@@ -20,6 +21,7 @@ public sealed class MessengerUi : UIFragment
     private int _currentView;
 
     private MessengerUiFragment? _fragment;
+
     public override Control GetUIFragmentRoot()
     {
         return _fragment!;
@@ -156,21 +158,23 @@ public sealed class MessengerUi : UIFragment
                     if (_messengerUiState.Chats.TryGetValue(messengerChat.Id, out var chatUi))
                     {
                         chatUi.Name = messengerChat.Name ?? chatUi.Name;
-                        chatUi.Members.UnionWith(messengerChat.Members);
-                        chatUi.LastMessage = messengerChat.LastMessage ?? chatUi.LastMessage;
-                        chatUi.Messages.UnionWith(messengerChat.Messages);
+                        chatUi.Members.UnionWith(messengerChat.MembersId);
+                        chatUi.LastMessage = messengerChat.LastMessageId ?? chatUi.LastMessage;
+                        chatUi.Messages.UnionWith(messengerChat.MessagesId);
                         chatUi.NewMessages = true;
                         break;
                     }
 
-                    _messengerUiState.Chats.Add(messengerChat.Id,new MessengerChatUiState(messengerChat.Id, messengerChat.Name,messengerChat.Kind, messengerChat.Members, messengerChat.Messages, messengerChat.LastMessage, _messengerUiState.Chats.Count));
+                    _messengerUiState.Chats.Add(messengerChat.Id,
+                        new MessengerChatUiState(messengerChat.Id, messengerChat.Name, messengerChat.Kind,
+                            messengerChat.MembersId, messengerChat.MessagesId, messengerChat.LastMessageId,
+                            _messengerUiState.Chats.Count));
                 }
 
                 break;
             }
             case MessengerErrorUiState errorUiState:
             {
-
                 _errorText = errorUiState.Text;
                 break;
             }
@@ -226,12 +230,13 @@ public sealed class MessengerUi : UIFragment
             receivedContacts.Add(contactId);
         }
 
-        foreach (var (messageId,_) in _messengerUiState.Messages)
+        foreach (var (messageId, _) in _messengerUiState.Messages)
         {
             receivedMessages.Add(messageId);
         }
 
-        userInterface.SendMessage(new CartridgeUiMessage(new MessengerUpdateStateUiEvent(receivedContacts, receivedMessages, receivedChats)));
+        userInterface.SendMessage(
+            new CartridgeUiMessage(new MessengerUpdateStateUiEvent(receivedContacts, receivedMessages, receivedChats)));
     }
 
     private void UpdateUiState()

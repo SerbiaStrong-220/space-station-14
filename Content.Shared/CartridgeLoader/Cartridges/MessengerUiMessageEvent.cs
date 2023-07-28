@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CartridgeLoader.Cartridges;
@@ -24,20 +25,22 @@ public sealed class MessengerUpdateStateUiEvent : CartridgeMessageEvent
     public readonly HashSet<uint>? CurrentChats;
 
     public readonly bool IsFullState;
+
     public MessengerUpdateStateUiEvent(bool isFullState)
     {
         IsFullState = isFullState;
     }
 
-    public MessengerUpdateStateUiEvent(HashSet<uint>? currentContacts, HashSet<uint>? currentMessages, HashSet<uint>? currentChats)
+    public MessengerUpdateStateUiEvent(HashSet<uint>? currentContacts, HashSet<uint>? currentMessages,
+        HashSet<uint>? currentChats)
     {
-        if (currentContacts is { Count: > 0 } )
+        if (currentContacts is { Count: > 0 })
             CurrentContacts = currentContacts;
 
-        if (currentMessages is { Count: > 0 } )
+        if (currentMessages is { Count: > 0 })
             CurrentMessages = currentMessages;
 
-        if (currentChats is { Count: > 0 } )
+        if (currentChats is { Count: > 0 })
             CurrentChats = currentChats;
 
         IsFullState = false;

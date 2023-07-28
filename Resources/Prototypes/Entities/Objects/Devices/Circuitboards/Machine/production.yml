@@ -881,13 +881,13 @@
         Cable: 2
 
 - type: entity
-  id: MessengerServerMachineCircuitboard
+  id: PDANanotrasenMessengerServerCircuitboard
   parent: BaseMachineCircuitboard
-  name: messenger server machine board
+  name: Nanotrasen crew pda messenger server machine board
   description: A machine printed circuit board for a messenger server.
   components:
     - type: MachineBoard
-      prototype: CrewMonitoringServer
+      prototype: PDANanotrasenMessengerServer
       materialRequirements:
         Steel: 1
         Cable: 2

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Messenger;
@@ -12,21 +13,25 @@ public sealed class MessengerServerComponent : Component
 
     // store EntityUid as authentication entity to contactKey
     private readonly Dictionary<EntityUid, ContactKey> _clientToContact = new();
+
     // store contact info by contactKey
     private readonly SequenceDataStore<ContactKey, MessengerContact> _contactsStore = new();
+
     // store chat info by chat key
     private readonly SequenceDataStore<ChatKey, MessengerChat> _chatsStore = new();
+
     // store message info by message key
     private readonly SequenceDataStore<MessageKey, MessengerMessage> _messagesStore = new();
 
     // store chats which can find any contact connected to server
     private readonly HashSet<ChatKey> _publicChats = new();
+
     // store chats which can find only invited contact, like private chats
     private readonly SequenceDataStore<ContactKey, HashSet<ChatKey>> _privateChats = new();
 
-    public IEnumerable<KeyValuePair<EntityUid, ContactKey>> GetClientToContact()
+    public List<KeyValuePair<EntityUid, ContactKey>> GetClientToContact()
     {
-        return _clientToContact.AsEnumerable();
+        return new List<KeyValuePair<EntityUid, ContactKey>>(_clientToContact);
     }
 
     public bool GetContactKey(EntityUid client, [NotNullWhen(true)] out ContactKey? key)
@@ -43,16 +48,21 @@ public sealed class MessengerServerComponent : Component
 
     public MessengerContact GetContact(ContactKey key)
     {
-        if (!_contactsStore.Get(key, out var messengerContact))
+        var messengerContact = _contactsStore.Get(key);
+        if (messengerContact == null)
             return new();
-
         messengerContact.Id = key.Id;
         return messengerContact;
     }
 
     public HashSet<ChatKey> GetPrivateChats(ContactKey key)
     {
-        return _privateChats.Get(key, out var chats) ? new HashSet<ChatKey>(chats) : new();
+        var chats = _privateChats.Get(key);
+
+        if (chats == null)
+            return new();
+
+        return new HashSet<ChatKey>(chats);
     }
 
     public HashSet<ChatKey> GetPublicChats()
@@ -76,40 +86,42 @@ public sealed class MessengerServerComponent : Component
         if (name == null)
             return;
 
-        if (!_contactsStore.Get(key, out var contact))
+        var contact = _contactsStore.Get(key);
+
+        if (contact == null)
             return;
 
         if (contact.Name == name)
             return;
 
         contact.Name = name;
-        _contactsStore.Set(key, contact);
     }
 
-    public ChatKey AddChat( MessengerChat chat)
+    public ChatKey AddChat(MessengerChat chat)
     {
         return _chatsStore.Add(chat);
     }
 
-    public MessengerChat GetChat(   ChatKey key)
+    public MessengerChat GetChat(ChatKey key)
     {
-        if (!_chatsStore.Get(key, out var chat))
+        var chat = _chatsStore.Get(key);
+        if (chat == null)
             return new();
         chat.Id = key.Id;
         return chat;
     }
 
-    public MessageKey AddMessage( MessengerMessage message)
+    public MessageKey AddMessage(MessengerMessage message)
     {
         return _messagesStore.Add(message);
     }
 
-    public MessengerMessage GetMessage(  MessageKey key)
+    public MessengerMessage GetMessage(MessageKey key)
     {
-        if (!_messagesStore.Get(key, out var message))
+        var message = _messagesStore.Get(key);
+        if (message == null)
             return new();
         message.Id = key.Id;
-
         return message;
     }
 
@@ -118,111 +130,61 @@ public sealed class MessengerServerComponent : Component
         _publicChats.Add(chatKey);
     }
 
-    public void AddPrivateChats(ContactKey contact, IEnumerable<ChatKey> chats)
+    public void AddPrivateChats(ContactKey contact, List<ChatKey> chats)
     {
         AddKeyToHasSet(_privateChats, contact, chats);
     }
 
     public void AddPrivateChats(ContactKey contact, ChatKey chat)
     {
-        AddKeyToHasSet(_privateChats, contact, chat);
+        AddPrivateChats(contact, new List<ChatKey> { chat });
     }
 
-    private void AddKeyToHasSet<TKey, TValue>(SequenceDataStore<TKey, HashSet<TValue>> storage, TKey key, IEnumerable<TValue> list) where TKey : IId, new()
+    private void AddKeyToHasSet<TKey, TValue>(SequenceDataStore<TKey, HashSet<TValue>> storage, TKey key,
+        List<TValue> list) where TKey : IId, new()
     {
-        if (!storage.Get(key, out var existList))
+        var existList = storage.Get(key);
+
+        if (existList == null)
         {
             storage.Set(key, new HashSet<TValue>(list));
             return;
         }
 
-        foreach (var value in list)
-        {
-            existList.Add(value);
-        }
-
-        storage.Set(key, existList);
-    }
-
-    private void AddKeyToHasSet<TKey, TValue>(SequenceDataStore<TKey, HashSet<TValue>> storage, TKey key, TValue val) where TKey : IId, new()
-    {
-        if (!storage.Get(key, out var existList))
-        {
-            storage.Set(key,new HashSet<TValue>{val});
-            return;
-        }
-
-        existList.Add(val);
+        existList.UnionWith(list);
 
         storage.Set(key, existList);
     }
 }
 
-public sealed class ContactKey : IId
+public sealed class ContactKey : Key
 {
-    public uint Id { get; init;}
-
-    public ContactKey()
-    {
-        Id = 0;
-    }
-    public ContactKey(uint id)
-    {
-        Id = id;
-    }
-
-    public override int GetHashCode()
-    {
-        return (int) Id;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        return obj is ChatKey && Equals((ChatKey) obj);
-    }
-
-    private bool Equals(ChatKey p)
-    {
-        return Id == p.Id;
-    }
+    public ContactKey() { }
+    public ContactKey(uint id) : base(id) { }
 }
 
-public sealed class MessageKey : IId
+public sealed class MessageKey : Key
 {
-    public uint Id { get; init;}
-    public MessageKey()
-    {
-        Id = 0;
-    }
-    public MessageKey(uint id)
-    {
-        Id = id;
-    }
-
-    public override int GetHashCode()
-    {
-        return (int) Id;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        return obj is ChatKey && Equals((ChatKey) obj);
-    }
-
-    public bool Equals(ChatKey p)
-    {
-        return Id == p.Id;
-    }
+    public MessageKey() { }
+    public MessageKey(uint id) : base(id) { }
 }
 
-public sealed class ChatKey : IId
+public sealed class ChatKey : Key
+{
+    public ChatKey() { }
+    public ChatKey(uint id) : base(id) { }
+}
+
+public abstract class Key : IId
 {
     public uint Id { get; init; }
-    public ChatKey()
+
+    protected Key()
     {
         Id = 0;
     }
-    public ChatKey(uint id)
+
+    protected Key(uint id)
     {
         Id = id;
     }
@@ -234,10 +196,10 @@ public sealed class ChatKey : IId
 
     public override bool Equals(object? obj)
     {
-        return obj is ChatKey && Equals((ChatKey) obj);
+        return obj is Key && Equals((Key) obj);
     }
 
-    private bool Equals(ChatKey p)
+    private bool Equals(Key p)
     {
         return Id == p.Id;
     }
@@ -270,15 +232,12 @@ public sealed class SequenceDataStore<TKey, TValue> where TKey : IId, new() wher
         _storage[key.Id] = value;
     }
 
-    public bool Get(TKey key, [NotNullWhen(true)] out TValue? value)
+    public TValue? Get(TKey key)
     {
-        value = default;
-
         if (!_storage.ContainsKey(key.Id))
-            return false;
+            return default;
 
-        value = _storage[key.Id];
-        return true;
+        return _storage[key.Id];
     }
 
     public bool Delete(TKey key)

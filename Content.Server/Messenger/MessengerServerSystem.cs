@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.CartridgeLoader.Cartridges;
@@ -25,28 +26,28 @@ public sealed class MessengerServerSystem : EntitySystem
     [Dependency] private readonly AccessReaderSystem _accessSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
-    public const string MessengerServerCommand = "messenger_command";
-    public const string MessengerServerCommandInfo = "messenger_command_info";
-    public const string MessengerServerCommandContact = "messenger_command_contact";
-    public const string MessengerServerCommandClientContact = "messenger_command_client_contact";
+    public enum NetworkCommand
+    {
+        Info,
+        Contact,
+        ClientContact,
+        Chat,
+        Messages,
+        NewMessage,
+    }
 
-    public const string MessengerServerCommandChat = "messenger_command_chat";
-
-    public const string MessengerServerCommandMessages = "messenger_command_messages";
-    public const string MessengerServerCommandNewMessage = "messenger_command_new_message";
-
-    public const string MessengerServerName = "messenger_server_name";
-
-    public const string MessengerChat = "messenger_chat";
-    public const string MessengerChatList = "messenger_chat_list";
-
-    public const string MessengerMessage = "messenger_message";
-    public const string MessengerMessageList = "messenger_message_list";
-
-    public const string MessengerContact = "messenger_contact_info";
-    public const string MessengerContactList = "messenger_contact_info_list";
-
-    public const string MessengerChatId = "messenger_chat_id";
+    public enum NetworkKey
+    {
+        Command,
+        ServerName,
+        Chat,
+        ChatList,
+        Message,
+        MessageList,
+        Contact,
+        ContactList,
+        ChatId,
+    }
 
     private TimeSpan _nexUpdate;
 
@@ -81,12 +82,13 @@ public sealed class MessengerServerSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (!args.Data.TryGetValue(MessengerClientCartridgeSystem.MessengerClientCommand, out string? msg))
+        if (!args.Data.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.Command.ToString(),
+                out MessengerClientCartridgeSystem.NetworkCommand? msg))
             return;
 
         switch (msg)
         {
-            case MessengerClientCartridgeSystem.MessengerClientCommandCheckServer:
+            case MessengerClientCartridgeSystem.NetworkCommand.CheckServer:
             {
                 // check authorization to server before registration
                 if (!AccessCheck(uid, args.Data))
@@ -97,12 +99,12 @@ public sealed class MessengerServerSystem : EntitySystem
 
                 SendResponse(uid, args, new NetworkPayload
                 {
-                    [MessengerServerCommand] = MessengerServerCommandInfo,
-                    [MessengerServerName] = component.Name,
+                    [NetworkKey.Command.ToString()] = NetworkCommand.Info,
+                    [NetworkKey.ServerName.ToString()] = component.Name,
                 });
                 break;
             }
-            case MessengerClientCartridgeSystem.MessengerClientCommandStateUpdate:
+            case MessengerClientCartridgeSystem.NetworkCommand.StateUpdate:
             {
                 if (!AuthByIdCard(ref component, args.Data, out var contactKey))
                     break;
@@ -113,7 +115,7 @@ public sealed class MessengerServerSystem : EntitySystem
                 var chatsList = accessedChats.Select(component.GetChat).ToList();
 
                 /*contacts*/
-                if (!ParseIdHashSet(MessengerClientCartridgeSystem.MessengerClientContactsIds, args.Data,
+                if (!ParseIdHashSet(MessengerClientCartridgeSystem.NetworkKey.ContactsIds.ToString(), args.Data,
                         out var contacts))
                     contacts = new HashSet<uint>();
 
@@ -121,7 +123,7 @@ public sealed class MessengerServerSystem : EntitySystem
 
                 foreach (var messengerChat in chatsList)
                 {
-                    membersContactKeys.UnionWith(messengerChat.Members);
+                    membersContactKeys.UnionWith(messengerChat.MembersId);
                 }
 
                 membersContactKeys.ExceptWith(contacts);
@@ -132,22 +134,22 @@ public sealed class MessengerServerSystem : EntitySystem
                 {
                     SendResponse(uid, args, new NetworkPayload
                     {
-                        [MessengerServerCommand] = MessengerServerCommandContact,
-                        [MessengerContactList] = contactsInfo,
+                        [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
+                        [NetworkKey.ContactList.ToString()] = contactsInfo,
                     });
                 }
                 /*contacts*/
 
                 /*messages*/
-                if (!ParseIdHashSet(MessengerClientCartridgeSystem.MessengerClientMessagesIds, args.Data,
-                            out var messages))
+                if (!ParseIdHashSet(MessengerClientCartridgeSystem.NetworkKey.MessagesIds.ToString(), args.Data,
+                        out var messages))
                     messages = new HashSet<uint>();
 
                 var messagesKeys = new HashSet<uint>();
 
                 foreach (var chat in chatsList)
                 {
-                    messagesKeys.UnionWith(chat.Messages);
+                    messagesKeys.UnionWith(chat.MessagesId);
                 }
 
                 messagesKeys.ExceptWith(messages);
@@ -159,14 +161,14 @@ public sealed class MessengerServerSystem : EntitySystem
                 {
                     SendResponse(uid, args, new NetworkPayload
                     {
-                        [MessengerServerCommand] = MessengerServerCommandMessages,
-                        [MessengerMessageList] = messagesList,
+                        [NetworkKey.Command.ToString()] = NetworkCommand.Messages,
+                        [NetworkKey.MessageList.ToString()] = messagesList,
                     });
                 }
                 /*messages*/
 
                 /*chats*/
-                if (!ParseIdHashSet(MessengerClientCartridgeSystem.MessengerClientCurrentChatIds, args.Data,
+                if (!ParseIdHashSet(MessengerClientCartridgeSystem.NetworkKey.CurrentChatIds.ToString(), args.Data,
                         out var chats))
                     chats = new HashSet<uint>();
 
@@ -186,8 +188,8 @@ public sealed class MessengerServerSystem : EntitySystem
                 {
                     SendResponse(uid, args, new NetworkPayload
                     {
-                        [MessengerServerCommand] = MessengerServerCommandChat,
-                        [MessengerChatList] = updateChatsList,
+                        [NetworkKey.Command.ToString()] = NetworkCommand.Chat,
+                        [NetworkKey.ChatList.ToString()] = updateChatsList,
                     });
                 }
                 /*chats*/
@@ -195,15 +197,15 @@ public sealed class MessengerServerSystem : EntitySystem
                 break;
             }
 
-            case MessengerClientCartridgeSystem.MessengerClientCommandMessageSend:
+            case MessengerClientCartridgeSystem.NetworkCommand.MessageSend:
             {
                 if (!AuthByIdCard(ref component, args.Data, out var contactKey))
                     break; // can not authenticate
 
-                if (!ParseId(MessengerClientCartridgeSystem.MessengerClientChatId, args.Data, out var chatId))
+                if (!ParseId(MessengerClientCartridgeSystem.NetworkKey.ChatId.ToString(), args.Data, out var chatId))
                     break; // no chat id received
 
-                if (!ParseMessageText(MessengerClientCartridgeSystem.MessengerClientMessage, args.Data,
+                if (!ParseMessageText(MessengerClientCartridgeSystem.NetworkKey.MessageText.ToString(), args.Data,
                         out var messageText))
                     break; // no message received
 
@@ -223,18 +225,18 @@ public sealed class MessengerServerSystem : EntitySystem
 
                 // assign new message to chat index
                 var chat = component.GetChat(chatKey);
-                chat.LastMessage = messageKey.Id;
-                chat.Messages.Add(messageKey.Id);
+                chat.LastMessageId = messageKey.Id;
+                chat.MessagesId.Add(messageKey.Id);
 
-                foreach (var chatMember in chat.Members)
+                foreach (var chatMember in chat.MembersId)
                 {
                     foreach (var activeAddress in component.GetContact(new ContactKey(chatMember)).ActiveAddresses)
                     {
                         _deviceNetworkSystem?.QueuePacket(uid, activeAddress, new NetworkPayload
                         {
-                            [MessengerServerCommand] = MessengerServerCommandNewMessage,
-                            [MessengerChatId] = chatKey.Id,
-                            [MessengerMessage] = message,
+                            [NetworkKey.Command.ToString()] = NetworkCommand.NewMessage,
+                            [NetworkKey.ChatId.ToString()] = chatKey.Id,
+                            [NetworkKey.Message.ToString()] = message,
                         });
                     }
                 }
@@ -294,12 +296,13 @@ public sealed class MessengerServerSystem : EntitySystem
         return true;
     }
 
-    private bool GetIdCardComponent(NetworkPayload payload, [NotNullWhen(true)] out EntityUid? idCardUid, [NotNullWhen(true)] out IdCardComponent? idCardComponent)
+    private bool GetIdCardComponent(NetworkPayload payload, [NotNullWhen(true)] out EntityUid? idCardUid,
+        [NotNullWhen(true)] out IdCardComponent? idCardComponent)
     {
         idCardUid = null;
         idCardComponent = null;
 
-        if (!payload.TryGetValue(MessengerClientCartridgeSystem.MessengerClientDevice, out EntityUid? loader))
+        if (!payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
             return false;
 
         return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
@@ -406,7 +409,8 @@ public sealed class MessengerServerSystem : EntitySystem
     /// <param name="component">MessengerServerComponent</param>
     /// <param name="newContactKey">out newContactKey of client</param>
     /// <returns>Returns true when the component was successfully received.</returns>
-    private void RegisterAndInitNewClient(EntityUid serverUid, EntityUid clientEntityUid, string fullName, string netAddress,
+    private void RegisterAndInitNewClient(EntityUid serverUid, EntityUid clientEntityUid, string fullName,
+        string netAddress,
         ref MessengerServerComponent component, out ContactKey newContactKey)
     {
         newContactKey = component.AddEntityContact(clientEntityUid, fullName, netAddress);
@@ -442,8 +446,8 @@ public sealed class MessengerServerSystem : EntitySystem
             {
                 _deviceNetworkSystem?.QueuePacket(serverUid, activeAddress, new NetworkPayload
                 {
-                    [MessengerServerCommand] = MessengerServerCommandChat,
-                    [MessengerChat] = component.GetChat(chatKey),
+                    [NetworkKey.Command.ToString()] = NetworkCommand.Chat,
+                    [NetworkKey.Chat.ToString()] = component.GetChat(chatKey),
                 });
             }
 
@@ -452,8 +456,8 @@ public sealed class MessengerServerSystem : EntitySystem
             {
                 _deviceNetworkSystem?.QueuePacket(serverUid, activeAddress, new NetworkPayload
                 {
-                    [MessengerServerCommand] = MessengerServerCommandContact,
-                    [MessengerContact] = component.GetContact(newContactKey),
+                    [NetworkKey.Command.ToString()] = NetworkCommand.Contact,
+                    [NetworkKey.Contact.ToString()] = component.GetContact(newContactKey),
                 });
             }
         }
@@ -503,10 +507,10 @@ public sealed class MessengerServerSystem : EntitySystem
 
         foreach (var messengerChat in chatsList)
         {
-            if (messengerChat.LastMessage != null)
-                lastMessages.Add(component.GetMessage(new MessageKey(messengerChat.LastMessage.Value)));
+            if (messengerChat.LastMessageId != null)
+                lastMessages.Add(component.GetMessage(new MessageKey(messengerChat.LastMessageId.Value)));
 
-            membersContactKeys.UnionWith(messengerChat.Members);
+            membersContactKeys.UnionWith(messengerChat.MembersId);
         }
 
         // select contacts by contactKeys
@@ -527,8 +531,8 @@ public sealed class MessengerServerSystem : EntitySystem
         for (var i = 0; i < chatsList.Count; i++)
         {
             messengerUi.Chats.Add(chatsList[i].Id,
-                new MessengerChatUiState(chatsList[i].Id, chatsList[i].Name, chatsList[i].Kind, chatsList[i].Members,
-                    chatsList[i].Messages, chatsList[i].LastMessage, i));
+                new MessengerChatUiState(chatsList[i].Id, chatsList[i].Name, chatsList[i].Kind, chatsList[i].MembersId,
+                    chatsList[i].MessagesId, chatsList[i].LastMessageId, i));
         }
 
         // add last messages to messages state store
