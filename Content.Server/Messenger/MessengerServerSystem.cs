@@ -356,7 +356,7 @@ public sealed class MessengerServerSystem : EntitySystem
         if (loaderUid == null)
             return false;
 
-        if (!_containerSystem.TryGetContainer(loaderUid.Value, PDAComponent.PDAIdSlotId, out var container))
+        if (!_containerSystem.TryGetContainer(loaderUid.Value, PdaComponent.PdaIdSlotId, out var container))
             return false;
 
         foreach (var idCard in container.ContainedEntities)
