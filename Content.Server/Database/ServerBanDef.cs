@@ -1,6 +1,7 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Net;
 using Content.Shared.CCVar;
+using Content.Shared.Database;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
@@ -16,9 +17,14 @@ namespace Content.Server.Database
 
         public DateTimeOffset BanTime { get; }
         public DateTimeOffset? ExpirationTime { get; }
+        public int? RoundId { get; }
+        public TimeSpan PlaytimeAtNote { get; }
         public string Reason { get; }
+        public NoteSeverity Severity { get; set; }
         public NetUserId? BanningAdmin { get; }
         public ServerUnbanDef? Unban { get; }
+        public string? BanningAdminName { get; }
+        public int StatedRound { get; }
 
         public ServerBanDef(
             int? id,
@@ -27,8 +33,13 @@ namespace Content.Server.Database
             ImmutableArray<byte>? hwId,
             DateTimeOffset banTime,
             DateTimeOffset? expirationTime,
+            int? roundId,
+            TimeSpan playtimeAtNote,
             string reason,
+            NoteSeverity severity,
             NetUserId? banningAdmin,
+            string? banningAdminName,
+            int round,
             ServerUnbanDef? unban)
         {
             if (userId == null && address == null && hwId ==  null)
@@ -49,8 +60,13 @@ namespace Content.Server.Database
             HWId = hwId;
             BanTime = banTime;
             ExpirationTime = expirationTime;
+            RoundId = roundId;
+            PlaytimeAtNote = playtimeAtNote;
             Reason = reason;
+            Severity = severity;
             BanningAdmin = banningAdmin;
+            BanningAdminName = banningAdminName;
+            StatedRound = round;
             Unban = unban;
         }
 
@@ -65,15 +81,13 @@ namespace Content.Server.Database
             }
             else
             {
-                var appeal = cfg.GetCVar(CCVars.InfoLinksAppeal);
-                if (!string.IsNullOrWhiteSpace(appeal))
-                    expires = loc.GetString("ban-banned-permanent-appeal", ("link", appeal));
-                else
-                    expires = loc.GetString("ban-banned-permanent");
+                expires = loc.GetString("ban-banned-permanent");
             }
 
             return $"""
                    {loc.GetString("ban-banned-1")}
+                   {loc.GetString("ban-banned-4", ("admin", BanningAdminName ?? "Console"))}
+                   {loc.GetString("ban-banned-6", ("round", StatedRound != 0 ? StatedRound : loc.GetString("ban-banned-7")))}
                    {loc.GetString("ban-banned-2", ("reason", Reason))}
                    {expires}
                    {loc.GetString("ban-banned-3")}

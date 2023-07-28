@@ -1,3 +1,4 @@
+using Content.Shared.Lathe;
 using Content.Shared.Research.Prototypes;
 using Content.Shared.Research.Systems;
 using Robust.Shared.GameStates;
@@ -6,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Shared.Research.Components;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedResearchSystem)), AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedResearchSystem), typeof(SharedLatheSystem)), AutoGenerateComponentState]
 public sealed partial class TechnologyDatabaseComponent : Component
 {
     /// <summary>
@@ -26,6 +27,9 @@ public sealed partial class TechnologyDatabaseComponent : Component
     [AutoNetworkedField(true)]
     [DataField("supportedDisciplines", customTypeSerializer: typeof(PrototypeIdListSerializer<TechDisciplinePrototype>))]
     public List<string> SupportedDisciplines = new();
+
+    [DataField("allowUnlimitedTechnoligies"), ViewVariables(VVAccess.ReadWrite)]
+    public bool AllowUnlimitedTechnoligies = true;
 
     /// <summary>
     /// The ids of all the technologies which have been unlocked.

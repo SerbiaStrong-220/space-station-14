@@ -92,6 +92,11 @@
     price: 100
   - type: Appearance
   - type: WiresVisuals
+  - type: ContainerContainer
+    containers:
+      VendingMachine: !type:Container
+        ents: []
+      
 
 - type: entity
   parent: VendingMachine
@@ -851,6 +856,18 @@
     denyState: deny-unshaded
     screenState: normal-unshaded
     loopDeny: false
+    whitelist:
+      components:
+        - Pill
+        - Seed
+        - Produce
+      tags:
+        - Bottle
+        - Ointment
+        - Bloodpack
+        - Brutepack
+        - GlassBeaker
+        - PillCanister
   - type: Advertise
     pack: SmartFridgeAds
   - type: Speech
@@ -1710,6 +1727,32 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Research"]]
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineSyndieDrobe
+  name: SyndieDrobe
+  description: Wardrobe machine encoded by the syndicate, contains elite outfits for various operations.
+  components:
+  - type: VendingMachine
+    pack: SyndieDrobeInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Advertise
+    pack: SyndieDrobeAds
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/syndiedrobe.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["NuclearOperative"]]
 
 - type: entity
   parent: VendingMachine

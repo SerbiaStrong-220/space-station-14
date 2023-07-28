@@ -9,7 +9,7 @@
       interactSuccessString: hugging-success-generic
       interactSuccessSound: /Audio/Effects/thudswoosh.ogg
       messagePerceivedByOthers: hugging-success-generic-others
-    - type: Mind
+    - type: MindContainer
       showExamineInfo: true
     - type: Input
       context: "human"
@@ -27,7 +27,7 @@
     - type: CameraRecoil
     - type: Examiner
     - type: CanHostGuardian
-    - type: Faction
+    - type: NpcFactionMember
       factions:
         - NanoTrasen
-    - type: Pacifist # Corvax-DionaPacifist
+    # - type: Pacifist # Corvax-DionaPacifist

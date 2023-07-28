@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Storage.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -61,6 +62,9 @@ namespace Content.Shared.Placeable
             // 99% of the time they want to dump the stuff inside on the table, they can manually place with q if they really need to.
             // Just causes prediction CBT otherwise.
             if (HasComp<DumpableComponent>(args.Used))
+                return;
+
+            if (HasComp<UnPlaceableComponent>(args.Used))
                 return;
 
             if (!_handsSystem.TryDrop(args.User, args.Used))

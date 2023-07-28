@@ -7,11 +7,12 @@
   - CorvaxDelta
   - Box
 #  - Cluster
+#  - Core
 #  - Fland
 #  - Kettle
 #  - Marathon
 #  - Meta
-#  - Moose
 #  - Omega
   - Origin
-#  - Saltern
+  # - Saltern
+  # - Packed
