@@ -3409,28 +3409,6 @@ entities:
     - links:
       - 1385
       type: DeviceLinkSink
-- proto: BodyBag_Folded
-  entities:
-  - uid: 612
-    components:
-    - pos: 11.6927,28.76316
-      parent: 2
-      type: Transform
-  - uid: 4425
-    components:
-    - pos: 11.58159,28.77705
-      parent: 2
-      type: Transform
-  - uid: 4426
-    components:
-    - pos: 11.664924,28.76316
-      parent: 2
-      type: Transform
-  - uid: 4427
-    components:
-    - pos: 11.526034,28.76316
-      parent: 2
-      type: Transform
 - proto: BoozeDispenser
   entities:
   - uid: 3439
@@ -12521,9 +12499,40 @@ entities:
       type: Transform
 - proto: CryopodSSD
   entities:
+  - uid: 677
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 9.5,26.5
+      parent: 2
+      type: Transform
+  - uid: 678
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 9.5,27.5
+      parent: 2
+      type: Transform
+  - uid: 679
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 9.5,28.5
+      parent: 2
+      type: Transform
+  - uid: 680
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 11.5,28.5
+      parent: 2
+      type: Transform
+  - uid: 681
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 11.5,27.5
+      parent: 2
+      type: Transform
   - uid: 3404
     components:
-    - pos: 13.5,28.5
+    - rot: -1.5707963267948966 rad
+      pos: 11.5,26.5
       parent: 2
       type: Transform
 - proto: DefibrillatorCabinetFilled
@@ -20202,6 +20211,12 @@ entities:
       pos: 21.5,-3.5
       parent: 2
       type: Transform
+  - uid: 612
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 11.5,25.5
+      parent: 2
+      type: Transform
   - uid: 690
     components:
     - rot: -1.5707963267948966 rad
@@ -20248,6 +20263,12 @@ entities:
     components:
     - rot: 3.141592653589793 rad
       pos: -17.5,25.5
+      parent: 2
+      type: Transform
+  - uid: 2291
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 9.5,25.5
       parent: 2
       type: Transform
   - uid: 2292
@@ -21689,38 +21710,6 @@ entities:
       pos: -17.595392,-14.320746
       parent: 2
       type: Transform
-- proto: Morgue
-  entities:
-  - uid: 678
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: 9.5,28.5
-      parent: 2
-      type: Transform
-  - uid: 679
-    components:
-    - rot: -1.5707963267948966 rad
-      pos: 11.5,26.5
-      parent: 2
-      type: Transform
-  - uid: 680
-    components:
-    - rot: -1.5707963267948966 rad
-      pos: 11.5,27.5
-      parent: 2
-      type: Transform
-  - uid: 3405
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: 9.5,26.5
-      parent: 2
-      type: Transform
-  - uid: 4126
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: 9.5,27.5
-      parent: 2
-      type: Transform
 - proto: MouseTimedSpawner
   entities:
   - uid: 4300
@@ -22005,6 +21994,11 @@ entities:
   - uid: 4100
     components:
     - pos: 11.5,21.5
+      parent: 2
+      type: Transform
+  - uid: 4126
+    components:
+    - pos: 13.5,28.5
       parent: 2
       type: Transform
 - proto: PowerCellRecharger
@@ -23542,6 +23536,12 @@ entities:
       pos: 17.5,-16.5
       parent: 2
       type: Transform
+  - uid: 1347
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 11.5,25.5
+      parent: 2
+      type: Transform
   - uid: 1356
     components:
     - rot: -1.5707963267948966 rad
@@ -23713,6 +23713,12 @@ entities:
     components:
     - rot: -1.5707963267948966 rad
       pos: 11.5,15.5
+      parent: 2
+      type: Transform
+  - uid: 3405
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 9.5,25.5
       parent: 2
       type: Transform
   - uid: 3409
@@ -24632,13 +24638,6 @@ entities:
   - uid: 3417
     components:
     - pos: 17.5,25.5
-      parent: 2
-      type: Transform
-- proto: SignMorgue
-  entities:
-  - uid: 677
-    components:
-    - pos: 9.5,25.5
       parent: 2
       type: Transform
 - proto: SignNosmoking
@@ -25956,11 +25955,6 @@ entities:
       type: Transform
 - proto: TableGlass
   entities:
-  - uid: 681
-    components:
-    - pos: 11.5,28.5
-      parent: 2
-      type: Transform
   - uid: 3086
     components:
     - pos: 11.5,4.5
@@ -29695,11 +29689,6 @@ entities:
       pos: -0.5,19.5
       parent: 2
       type: Transform
-  - uid: 1347
-    components:
-    - pos: 9.5,25.5
-      parent: 2
-      type: Transform
   - uid: 1349
     components:
     - rot: -1.5707963267948966 rad
@@ -29737,11 +29726,6 @@ entities:
   - uid: 2290
     components:
     - pos: -0.5,18.5
-      parent: 2
-      type: Transform
-  - uid: 2291
-    components:
-    - pos: 11.5,25.5
       parent: 2
       type: Transform
   - uid: 2294
