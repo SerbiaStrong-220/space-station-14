@@ -8,6 +8,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Construction
+    graph: Blinds
   - type: UseDelay #No lagging the server
     delay: 0.35
   - type: Transform
@@ -46,6 +48,9 @@
   parent: BlindsBase
   name: Жалюзи (одиночные)
   suffix: DONT_USE
+  components:
+  - type: Construction
+    node: BlindsSolo
 
 - type: entity
   id: BlindsLeft
@@ -53,6 +58,8 @@
   name: Жалюзи (левые)
   suffix: DONT_USE
   components:
+  - type: Construction
+    node: BlindsLeft
   - type: Sprite
     layers:
       - state: left
@@ -69,6 +76,8 @@
   name: Жалюзи (середина)
   suffix: DONT_USE
   components:
+  - type: Construction
+    node: BlindsMiddle
   - type: Sprite
     layers:
       - state: right
@@ -85,6 +94,8 @@
   name: Жалюзи (правые)
   suffix: DONT_USE
   components:
+  - type: Construction
+    node: BlindsRight
   - type: Sprite
     layers:
       - state: right
