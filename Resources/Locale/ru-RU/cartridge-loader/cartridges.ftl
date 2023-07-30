@@ -1,5 +1,6 @@
 default-program-name = Программа
 notekeeper-program-name = Заметки
+news-read-program-name = Новости станции
 messenger-program-name = Месенджер
 
 net-probe-program-name = NetProbe
