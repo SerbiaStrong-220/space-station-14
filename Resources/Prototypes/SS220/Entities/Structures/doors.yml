@@ -18,3 +18,20 @@
   components:
   - type: AccessReader
     access: [["Theatre"]]
+
+# External access
+- type: entity
+  parent: AirlockExternalGlass
+  id: AirlockExternalSecGlass
+  suffix: Security, Glass, External, Locked
+  components:
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  parent: AirlockExternalGlass
+  id: AirlockExternalEngGlass
+  suffix: Engineering, Glass, External, Locked
+  components:
+  - type: AccessReader
+    access: [["Engineering"]]
