@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: Bed
   id: PsychBed
@@ -8,5 +10,5 @@
     sprite: SS220/Structures/Furniture/bed.rsi
     state: psych-bed
   - type: Construction
-    graph: bed
-    node: psych_bed
+    graph: bed220
+    node: psychBed
