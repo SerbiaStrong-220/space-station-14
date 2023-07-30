@@ -52,10 +52,9 @@ namespace Content.Shared.Speech
             }
 
             var currentTime = _gameTiming.CurTime;
-            var cooldown = TimeSpan.FromSeconds(speech.SpeechCooldownTime);
 
             // Ensure more than the cooldown time has passed since last speaking
-            if (currentTime - speech.LastTimeSpoke < cooldown)
+            if (currentTime - speech.LastTimeSpoke < speech.SpeechCooldownTime)
             {
                 args.Cancel();
                 return;

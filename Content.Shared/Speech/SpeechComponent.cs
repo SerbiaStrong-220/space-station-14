@@ -31,7 +31,7 @@ namespace Content.Shared.Speech
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("speechCooldownTime")]
-        public float SpeechCooldownTime { get; set; } = 0.5f;
+        public TimeSpan SpeechCooldownTime { get; set; } = TimeSpan.FromSeconds(0.5f);
 
         public TimeSpan LastTimeSpoke = TimeSpan.Zero;
     }
