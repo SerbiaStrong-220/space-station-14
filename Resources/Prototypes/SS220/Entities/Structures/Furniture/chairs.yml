@@ -6,6 +6,8 @@
   parent: SeatBase
   abstract: true
   components:
+  - type: Construction
+    graph: Bench
   - type: Transform
     anchored: true
   - type: Physics
@@ -21,8 +23,9 @@
   id: BenchLeft
   parent: BenchBase
   components:
+  - type: Construction
+    node: BenchLeft
   - type: Sprite
-    sprite: SS220/Structures/Furniture/bench.rsi
     state: left
 
 - type: entity
@@ -31,8 +34,9 @@
   id: BenchRight
   parent: BenchBase
   components:
+  - type: Construction
+    node: BenchRight
   - type: Sprite
-    sprite: SS220/Structures/Furniture/bench.rsi
     state: right
 
 - type: entity
@@ -41,109 +45,168 @@
   id: BenchMiddle
   parent: BenchBase
   components:
+  - type: Construction
+    node: BenchMiddle
   - type: Sprite
-    sprite: SS220/Structures/Furniture/bench.rsi
     state: middle
 
 #Sofa
 - type: entity
   name: sofa
-  suffix: DONT_USE, Left
-  id: SofaLeft
-  parent: BenchBase
+  id: SofaBase
+  parent: SeatBase
+  abstract: true
   components:
+  - type: Construction
+    graph: Sofa
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: SS220/Structures/Furniture/sofa.rsi
+    noRot: false
+
+- type: entity
+  name: sofa
+  suffix: DONT_USE, Left
+  id: SofaLeft
+  parent: SofaBase
+  components:
+  - type: Construction
+    node: SofaLeft
+  - type: Sprite
     state: left
 
 - type: entity
   name: sofa
   suffix: DONT_USE, Right
   id: SofaRight
-  parent: BenchBase
+  parent: SofaBase
   components:
+  - type: Construction
+    node: SofaRight
   - type: Sprite
-    sprite: SS220/Structures/Furniture/sofa.rsi
     state: right
 
 - type: entity
   name: sofa
   suffix: DONT_USE, Middle
   id: SofaMiddle
-  parent: BenchBase
+  parent: SofaBase
   components:
+  - type: Construction
+    node: SofaMiddle
   - type: Sprite
-    sprite: SS220/Structures/Furniture/sofa.rsi
     state: middle
 
 - type: entity
   name: sofa
   suffix: DONT_USE, Corner
   id: SofaCorner
-  parent: BenchBase
+  parent: SofaBase
   components:
+  - type: Construction
+    node: SofaCorner
   - type: Sprite
-    sprite: SS220/Structures/Furniture/sofa.rsi
     state: corner
 
 #Dinner Sofa
 - type: entity
   name: sofa
-  suffix: DONT_USE, Left
-  id: DinnerSofaLeft
-  parent: BenchBase
+  id: DinnerSofaBase
+  parent: SeatBase
+  abstract: true
   components:
+  - type: Construction
+    graph: DinnerSofa
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: SS220/Structures/Furniture/dinner_sofa.rsi
+    noRot: false
+
+- type: entity
+  name: sofa
+  suffix: DONT_USE, Left
+  id: DinnerSofaLeft
+  parent: DinnerSofaBase
+  components:
+  - type: Construction
+    node: DinnerSofaLeft
+  - type: Sprite
     state: left
 
 - type: entity
   name: sofa
   suffix: DONT_USE, Right
   id: DinnerSofaRight
-  parent: BenchBase
+  parent: DinnerSofaBase
   components:
+  - type: Construction
+    node: DinnerSofaRight
   - type: Sprite
-    sprite: SS220/Structures/Furniture/dinner_sofa.rsi
     state: right
 
 - type: entity
   name: sofa
   suffix: DONT_USE, Middle
   id: DinnerSofaMiddle
-  parent: BenchBase
+  parent: DinnerSofaBase
   components:
+  - type: Construction
+    node: DinnerSofaMiddle
   - type: Sprite
-    sprite: SS220/Structures/Furniture/dinner_sofa.rsi
     state: middle
 
 #Pew
 - type: entity
   name: pew
-  suffix: DONT_USE, Left
-  id: PewLeft
-  parent: BenchBase
+  id: PewBase
+  parent: SeatBase
+  abstract: true
   components:
+  - type: Construction
+    graph: Pew
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: SS220/Structures/Furniture/pew.rsi
+    noRot: false
+
+- type: entity
+  name: pew
+  suffix: DONT_USE, Left
+  id: PewLeft
+  parent: PewBase
+  components:
+  - type: Construction
+    node: PewLeft
+  - type: Sprite
     state: left
 
 - type: entity
   name: pew
   suffix: DONT_USE, Right
   id: PewRight
-  parent: BenchBase
+  parent: PewBase
   components:
+  - type: Construction
+    node: PewRight
   - type: Sprite
-    sprite: SS220/Structures/Furniture/pew.rsi
     state: right
 
 - type: entity
   name: pew
   suffix: DONT_USE, Middle
   id: PewMiddle
-  parent: BenchBase
+  parent: PewBase
   components:
+  - type: Construction
+    node: PewMiddle
   - type: Sprite
-    sprite: SS220/Structures/Furniture/pew.rsi
     state: middle

@@ -16,16 +16,16 @@ ent-SofaMiddle = диван (середина)
 ent-SofaCorner = диван (угол)
     .desc = { ent-SeatBase.desc }
 
-ent-DinnerSofaLeft = диван (лево)
+ent-DinnerSofaLeft = ресторанный диван (лево)
     .desc = { ent-SeatBase.desc }
-ent-DinnerSofaRight = диван (право)
+ent-DinnerSofaRight = ресторанный диван (право)
     .desc = { ent-SeatBase.desc }
-ent-DinnerSofaMiddle = диван (середина)
+ent-DinnerSofaMiddle = ресторанный диван (середина)
     .desc = { ent-SeatBase.desc }
 
-ent-PewLeft = скамейка (лево)
+ent-PewLeft = церковная скамья (лево)
     .desc = { ent-SeatBase.desc }
-ent-PewMiddle = скамейка (середина)
+ent-PewMiddle = церковная скамья (середина)
     .desc = { ent-SeatBase.desc }
-ent-PewRight = скамейка (право)
+ent-PewRight = церковная скамья (право)
     .desc = { ent-SeatBase.desc }

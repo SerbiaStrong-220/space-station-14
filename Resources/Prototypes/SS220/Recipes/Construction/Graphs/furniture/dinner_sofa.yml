@@ -1,88 +1,68 @@
 ﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: constructionGraph
-  id: Blinds
+  id: DinnerSofa
   start: start
   graph:
     - node: start
       edges:
-        - to: BlindsSolo
+        - to: DinnerSofaLeft
           completed:
             - !type:SnapToGrid
               southRotation: true
           steps:
-            - material: Steel
-              amount: 2
+            - material: WoodPlank
+              amount: 3
               doAfter: 1
-        - to: BlindsLeft
+        - to: DinnerSofaRight
           completed:
             - !type:SnapToGrid
               southRotation: true
           steps:
-            - material: Steel
-              amount: 2
+            - material: WoodPlank
+              amount: 3
               doAfter: 1
-        - to: BlindsRight
+        - to: DinnerSofaMiddle
           completed:
             - !type:SnapToGrid
               southRotation: true
           steps:
-            - material: Steel
-              amount: 2
-              doAfter: 1
-        - to: BlindsMiddle
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          steps:
-            - material: Steel
-              amount: 2
+            - material: WoodPlank
+              amount: 3
               doAfter: 1
 
-    - node: BlindsSolo
-      entity: BlindsSolo
+    - node: DinnerSofaLeft
+      entity: DinnerSofaLeft
       edges:
         - to: start
           completed:
           - !type:SpawnPrototype
-                prototype: SheetSteel1
-                amount: 2
+                prototype: MaterialWoodPlank1
+                amount: 3
           - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
-    - node: BlindsLeft
-      entity: BlindsLeft
+    - node: DinnerSofaMiddle
+      entity: DinnerSofaMiddle
       edges:
         - to: start
           completed:
           - !type:SpawnPrototype
-                prototype: SheetSteel1
-                amount: 2
+                prototype: MaterialWoodPlank1
+                amount: 3
           - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
-    - node: BlindsMiddle
-      entity: BlindsMiddle
+    - node: DinnerSofaRight
+      entity: DinnerSofaRight
       edges:
         - to: start
           completed:
           - !type:SpawnPrototype
-                prototype: SheetSteel1
-                amount: 2
-          - !type:DeleteEntity {}
-          steps:
-            - tool: Anchoring
-              doAfter: 1
-    - node: BlindsRight
-      entity: BlindsRight
-      edges:
-        - to: start
-          completed:
-          - !type:SpawnPrototype
-                prototype: SheetSteel1
-                amount: 2
+                prototype: MaterialWoodPlank1
+                amount: 3
           - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
