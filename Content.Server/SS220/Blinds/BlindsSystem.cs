@@ -15,6 +15,8 @@ public sealed class BlindsSystem : EntitySystem
     [Dependency] private readonly OccluderSystem _occluder = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
 
+    private const int MaxConnectedBlinds = 64;
+
     // <inheritdoc/>
     public override void Initialize()
     {
@@ -43,6 +45,10 @@ public sealed class BlindsSystem : EntitySystem
 
     public void TrySetOpenAllConnected(EntityUid uid, bool state, HashSet<EntityUid>? processedEntities = null)
     {
+        // No lagging the server with a shitton of connected blinds
+        if (processedEntities is not null && processedEntities.Count >= MaxConnectedBlinds)
+            return;
+
         if (!TryComp<BlindsComponent>(uid, out var component))
             return;
 

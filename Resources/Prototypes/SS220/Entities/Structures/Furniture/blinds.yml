@@ -8,6 +8,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: UseDelay #No lagging the server
+    delay: 0.35
   - type: Transform
     anchored: true
   - type: Sprite
