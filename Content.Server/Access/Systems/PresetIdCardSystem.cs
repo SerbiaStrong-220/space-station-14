@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Access.Components;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
@@ -69,6 +70,26 @@ namespace Content.Server.Access.Systems
 
             // and also change job title on a card id
             _cardSystem.TryChangeJobTitle(uid, job.LocalizedName);
+
+            _cardSystem.TryChangeJobColor(uid, GetJobColor(job));
+        }
+
+        private string GetJobColor(IPrototype job)
+        {
+            var jobCode = job.ID;
+
+            var departments = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
+            departments.Sort((a, b) => a.Sort.CompareTo(b.Sort));
+
+            foreach (var department in from department in departments
+                     from jobId in department.Roles
+                     where jobId == jobCode
+                     select department)
+            {
+                return department.Color.ToHex();
+            }
+
+            return string.Empty;
         }
     }
 }
