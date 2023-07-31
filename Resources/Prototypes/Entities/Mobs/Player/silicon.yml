@@ -81,6 +81,7 @@
   - type: InventorySlots
   - type: Strippable
   - type: UserInterface
+  - type: InputMover
     interfaces:
     - key: enum.StrippingUiKey.Key
       type: StrippableBoundUserInterface
