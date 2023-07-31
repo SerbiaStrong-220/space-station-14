@@ -8,17 +8,10 @@
   "copyright": "TheArturZh (Artur Zhidkov) & SS220 Team",
   "states": [
 	  {
-		"name": "base"
+		"name": "off"
 	  },
 	  {
-		"name": "on",
-		"delays": [
-		  [
-		    0.5, 0.5,
-		    0.5, 0.5,
-		    0.5, 0.5
-		  ]
-		]
+		"name": "on"
 	  }
   ]
 }
