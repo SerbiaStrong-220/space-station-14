@@ -17,15 +17,25 @@ namespace Content.Server.Objectives.Conditions
         public override IObjectiveCondition GetAssigned(Mind.Mind mind)
         {
 
-            var allTargets = EntityManager.EntityQuery<TraitorTargetComponent>(true).Where(tc => { if (tc.Owner == null) return false; return true; }).Select(
+            var allTargets = EntityManager.EntityQuery<TraitorTargetComponent>(true).Where(tc => {
+
+                if (tc.Owner == default)
+                    return false;
+
+                if (EntityManager.IsQueuedForDeletion(tc.Owner))
+                    return false;
+
+                if (EntityManager.TryGetComponent<MindContainerComponent>(tc.Owner, out var mc))
+                    if (mc.Mind == mind || mc.Mind == null)
+                        return false;
+
+                return EntityManager.TryGetComponent(tc.Owner, out MobStateComponent? mobState) &&
+                    MobStateSystem.IsAlive(tc.Owner, mobState);
+            }).Select(
                 tc => {
-                    if(EntityManager.TryGetComponent<MindContainerComponent>(tc.Owner, out var mc))
-                    {
-                        if(mind != mc.Mind)
-                            return mc.Mind;
-                    }
-                    return null;
-                }).ToList();
+                    EntityManager.TryGetComponent<MindContainerComponent>(tc.Owner, out var mc);
+                    return mc?.Mind;
+            }).ToList();
 
             // Проверка на кол-во найденных игроков на задачу убийства
             if (allTargets.Count == 0)
