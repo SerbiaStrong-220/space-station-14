@@ -41,8 +41,6 @@ namespace Content.Server.Mind
         [ViewVariables, Access(typeof(MindSystem))]
         public NetUserId? UserId { get; set; }
 
-        [ViewVariables(VVAccess.ReadWrite)]
-        public bool MainPlayer { get; set; } = default!;
         /// <summary>
         ///     The session ID of the original owner, if any.
         ///     May end up used for round-end information (as the owner may have abandoned Mind since)

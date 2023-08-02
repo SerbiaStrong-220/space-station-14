@@ -20,6 +20,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Server.SS220.TraitorComponentTarget;
 
 namespace Content.Server.Mind;
 
@@ -296,7 +297,8 @@ public sealed class MindSystem : EntitySystem
         mind.Session?.AttachToEntity(entity);
         mind.VisitingEntity = entity;
 
-        mind.MainPlayer = false;
+        if (EntityManager.TryGetComponent(entity, out TraitorTargetComponent? tc))
+            EntityManager.RemoveComponent<TraitorTargetComponent>(entity);
 
         // EnsureComp instead of AddComp to deal with deferred deletions.
         var comp = EnsureComp<VisitingMindComponent>(entity);
