@@ -296,6 +296,8 @@ public sealed class MindSystem : EntitySystem
         mind.Session?.AttachToEntity(entity);
         mind.VisitingEntity = entity;
 
+        mind.MainPlayer = false;
+
         // EnsureComp instead of AddComp to deal with deferred deletions.
         var comp = EnsureComp<VisitingMindComponent>(entity);
         comp.Mind = mind;
@@ -448,6 +450,7 @@ public sealed class MindSystem : EntitySystem
         if (!objectivePrototype.CanBeAssigned(mind))
             return false;
         var objective = objectivePrototype.GetObjective(mind);
+        
         if (mind.Objectives.Contains(objective))
             return false;
 

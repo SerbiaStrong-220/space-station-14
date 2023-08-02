@@ -3,14 +3,16 @@ using Content.Server.Mind.Components;
 using Content.Server.Objectives.Interfaces;
 using Content.Shared.Mobs.Components;
 using JetBrains.Annotations;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Objectives.Conditions
 {
     [UsedImplicitly]
     [DataDefinition]
-    public sealed class KillRandomPersonCondition : KillPersonCondition
+    public sealed class KillRandomPersonCondition : KillPersonCondition 
     {
+        // функция выбора задачи убийства со списка всех игорьков
         public override IObjectiveCondition GetAssigned(Mind.Mind mind)
         {
             var allHumans = EntityManager.EntityQuery<MindContainerComponent>(true).Where(mc =>
@@ -20,14 +22,20 @@ namespace Content.Server.Objectives.Conditions
                 if (entity == default)
                     return false;
 
+                // проверка на первостепенного персонажа
+                if (mc.Mind?.MainPlayer == false)
+                    return false;
+
                 if (EntityManager.IsQueuedForDeletion(entity!.Value))
                     return false;
+
 
                 return EntityManager.TryGetComponent(entity, out MobStateComponent? mobState) &&
                       MobStateSystem.IsAlive(entity.Value, mobState) &&
                        mc.Mind != mind;
             }).Select(mc => mc.Mind).ToList();
 
+            // Проверка на кол-во найденных игроков на задачу убийства
             if (allHumans.Count == 0)
                 return new DieCondition(); // I guess I'll die
 

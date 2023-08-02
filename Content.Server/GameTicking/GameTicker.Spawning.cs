@@ -187,6 +187,8 @@ namespace Content.Server.GameTicking
             DebugTools.AssertNotNull(mobMaybe);
             var mob = mobMaybe!.Value;
 
+            newMind.MainPlayer = true;
+
             _mind.TransferTo(newMind, mob);
 
             if (lateJoin)

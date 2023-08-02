@@ -257,6 +257,11 @@ namespace Content.Server.Ghost.Roles
             if (!TryComp(uid, out GhostRoleComponent? ghostRole))
                 return;
 
+            if (EntityManager.TryGetComponent(uid, out MindContainerComponent? mc))
+                if(mc.Mind != null)
+                    mc.Mind.MainPlayer = false;
+            
+
             ghostRole.Taken = true;
             UnregisterGhostRole(ghostRole);
         }
