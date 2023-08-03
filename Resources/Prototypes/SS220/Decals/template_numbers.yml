@@ -1,6 +1,13 @@
 ﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: decal
+  id: TemplateNumber0
+  tags: ["number"]
+  sprite:
+    sprite: SS220/Decals/template_numbers.rsi
+    state: "0"
+
+- type: decal
   id: TemplateNumber1
   tags: ["number"]
   sprite:
