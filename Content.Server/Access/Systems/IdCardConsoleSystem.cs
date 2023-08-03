@@ -129,6 +129,15 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
+        if (_prototype.TryIndex<JobPrototype>(newJobProto, out var jobPrototype))
+        {
+            _idCard.TryChangeJobColor(
+                targetId,
+                PresetIdCardSystem.GetJobColor(_prototype, jobPrototype),
+                jobPrototype.RadioIsBold
+            );
+        }
+
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
             _sawmill.Warning($"User {ToPrettyString(uid)} tried to write unknown access tag.");

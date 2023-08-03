@@ -71,14 +71,14 @@ namespace Content.Server.Access.Systems
             // and also change job title on a card id
             _cardSystem.TryChangeJobTitle(uid, job.LocalizedName);
 
-            _cardSystem.TryChangeJobColor(uid, GetJobColor(job));
+            _cardSystem.TryChangeJobColor(uid, GetJobColor(_prototypeManager, job), job.RadioIsBold);
         }
 
-        private string GetJobColor(IPrototype job)
+        public static string GetJobColor(IPrototypeManager prototypeManager, IPrototype job)
         {
             var jobCode = job.ID;
 
-            var departments = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
+            var departments = prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
             departments.Sort((a, b) => a.Sort.CompareTo(b.Sort));
 
             foreach (var department in from department in departments
