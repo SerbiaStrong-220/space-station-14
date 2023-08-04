@@ -538,7 +538,7 @@ entities:
             2890: 8,15
             3238: -2,47
             3241: 2,45
-            3714: 86,-20
+            3783: 86,-20
         - node:
             color: '#FFFFFFFF'
             id: BotLeft
@@ -757,7 +757,7 @@ entities:
             color: '#D58C18FF'
             id: BrickTileWhiteCornerNe
           decals:
-            3730: 89,2
+            3729: 89,2
         - node:
             color: '#DE3A3A94'
             id: BrickTileWhiteCornerNe
@@ -828,7 +828,7 @@ entities:
             color: '#D58C18FF'
             id: BrickTileWhiteCornerNw
           decals:
-            3732: 87,2
+            3731: 87,2
         - node:
             color: '#DE3A3A94'
             id: BrickTileWhiteCornerNw
@@ -898,7 +898,7 @@ entities:
             color: '#D58C18FF'
             id: BrickTileWhiteCornerSe
           decals:
-            3731: 89,1
+            3730: 89,1
         - node:
             color: '#DE3A3A94'
             id: BrickTileWhiteCornerSe
@@ -964,7 +964,7 @@ entities:
             color: '#D58C18FF'
             id: BrickTileWhiteCornerSw
           decals:
-            3733: 87,1
+            3732: 87,1
         - node:
             color: '#DE3A3A94'
             id: BrickTileWhiteCornerSw
@@ -1239,7 +1239,7 @@ entities:
             color: '#D58C18FF'
             id: BrickTileWhiteLineN
           decals:
-            3734: 88,2
+            3733: 88,2
         - node:
             color: '#DE3A3A96'
             id: BrickTileWhiteLineN
@@ -2129,6 +2129,7 @@ entities:
             3529: -16,39
             3704: 84,-22
             3705: 84,-23
+            3735: 35,5
         - node:
             cleanable: True
             color: '#474F52FF'
@@ -2186,7 +2187,6 @@ entities:
             2762: 14,6
             2763: 16,2
             2765: 19,4
-            2766: 20,6
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -2344,6 +2344,22 @@ entities:
             3711: 86,-22
             3712: 84,-21
             3713: 84,-21
+            3736: 35,6
+            3737: 41,2
+            3738: 38,2
+            3739: 46,4
+            3743: 55,7
+            3744: 57,16
+            3748: 67,14
+            3749: 69,10
+            3750: 72,8
+            3751: 75,8
+            3752: 67,10
+            3755: 86,-10
+            3760: 77,-9
+            3761: 81,-19
+            3768: 84,-5
+            3782: 85,-20
         - node:
             cleanable: True
             zIndex: 1
@@ -2368,7 +2384,6 @@ entities:
             522: -27,-35
             536: -32,-24
             2764: 14,2
-            2767: 19,5
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -2410,6 +2425,12 @@ entities:
             3706: 86,-24
             3707: 86,-23
             3708: 86,-25
+            3740: 45,2
+            3741: 35,2
+            3742: 46,9
+            3747: 55,12
+            3753: 60,4
+            3759: 87,-20
         - node:
             color: '#FFFFFFFF'
             id: FlowersBROne
@@ -4694,6 +4715,11 @@ entities:
             2262: -32,-38
             3239: -2,47
         - node:
+            color: '#FFFFFFFF'
+            id: StandClearGreyscale
+          decals:
+            3784: 86,-20
+        - node:
             color: '#DE3A3A96'
             id: TemplateNumber1
           decals:
@@ -5119,11 +5145,6 @@ entities:
           decals:
             2636: 14,-10
         - node:
-            color: '#FFD200FF'
-            id: WarnCornerSmallGreyscaleSW
-          decals:
-            3665: 87,-20
-        - node:
             color: '#FFFFFFFF'
             id: WarnCornerSmallNE
           decals:
@@ -5415,7 +5436,7 @@ entities:
             color: '#D58C18FF'
             id: WarnLineGreyscaleS
           decals:
-            3736: 88,1
+            3734: 88,1
         - node:
             color: '#DE3A3A96'
             id: WarnLineGreyscaleS
@@ -5455,8 +5476,12 @@ entities:
             color: '#FFD200FF'
             id: WarnLineGreyscaleS
           decals:
-            3662: 85,-20
             3663: 84,-20
+        - node:
+            color: '#FFD300FF'
+            id: WarnLineGreyscaleS
+          decals:
+            3781: 85,-20
         - node:
             color: '#FFFFFFFF'
             id: WarnLineGreyscaleS
@@ -13145,7 +13170,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -352313.47
+    - SecondsUntilStateChange: -353559.9
       changeAirtight: False
       state: Opening
       type: Door
@@ -13163,7 +13188,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -352313.47
+    - SecondsUntilStateChange: -353559.9
       changeAirtight: False
       state: Opening
       type: Door
@@ -28773,13 +28798,6 @@ entities:
     - pos: -76.5,-13.5
       parent: 8364
       type: Transform
-  - uid: 12716
-    components:
-    - pos: -12.5,54.5
-      parent: 8364
-      type: Transform
-    - enabled: True
-      type: AmbientSound
   - uid: 12717
     components:
     - pos: -47.5,-1.5
@@ -48857,16 +48875,6 @@ entities:
     - pos: -18.5,34.5
       parent: 8364
       type: Transform
-  - uid: 28697
-    components:
-    - pos: -12.5,51.5
-      parent: 8364
-      type: Transform
-  - uid: 28762
-    components:
-    - pos: -12.5,52.5
-      parent: 8364
-      type: Transform
   - uid: 28780
     components:
     - pos: 15.5,37.5
@@ -48877,13 +48885,6 @@ entities:
     - pos: 15.5,29.5
       parent: 8364
       type: Transform
-  - uid: 28791
-    components:
-    - pos: -12.5,53.5
-      parent: 8364
-      type: Transform
-    - enabled: True
-      type: AmbientSound
   - uid: 28813
     components:
     - pos: -7.5,52.5
@@ -49308,6 +49309,11 @@ entities:
       type: Transform
     - enabled: True
       type: AmbientSound
+  - uid: 29246
+    components:
+    - pos: -11.5,52.5
+      parent: 8364
+      type: Transform
 - proto: CableApcStack
   entities:
   - uid: 3283
@@ -100708,6 +100714,20 @@ entities:
       type: Transform
     - fixtures: {}
       type: Fixtures
+  - uid: 29243
+    components:
+    - pos: 14.5,3.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29244
+    components:
+    - pos: -45.5,-10.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
 - proto: FloorTileItemArcadeBlue2
   entities:
   - uid: 917
@@ -101268,6 +101288,33 @@ entities:
   - uid: 13770
     components:
     - pos: -54.5,3.5
+      parent: 8364
+      type: Transform
+- proto: FoodSpaceshroom
+  entities:
+  - uid: 12716
+    components:
+    - pos: 34.53426,-60.499763
+      parent: 8364
+      type: Transform
+  - uid: 28697
+    components:
+    - pos: 84.400406,-55.44182
+      parent: 8364
+      type: Transform
+  - uid: 28762
+    components:
+    - pos: 58.49848,18.596012
+      parent: 8364
+      type: Transform
+  - uid: 28791
+    components:
+    - pos: 27.54041,28.633532
+      parent: 8364
+      type: Transform
+  - uid: 29242
+    components:
+    - pos: -18.487722,2.5802407
       parent: 8364
       type: Transform
 - proto: FoodTinMRE
@@ -142981,7 +143028,7 @@ entities:
     - pos: 63.685905,-29.24602
       parent: 8364
       type: Transform
-- proto: lantern
+- proto: Lantern
   entities:
   - uid: 8804
     components:
@@ -147963,6 +148010,11 @@ entities:
   - uid: 11109
     components:
     - pos: 16.220592,4.487276
+      parent: 8364
+      type: Transform
+  - uid: 29241
+    components:
+    - pos: -49.17293,-5.483318
       parent: 8364
       type: Transform
 - proto: PlushieCarp
@@ -163875,6 +163927,11 @@ entities:
   - uid: 4991
     components:
     - pos: -13.5,0.5
+      parent: 8364
+      type: Transform
+  - uid: 29245
+    components:
+    - pos: 3.5,54.5
       parent: 8364
       type: Transform
 - proto: SignExamroom
