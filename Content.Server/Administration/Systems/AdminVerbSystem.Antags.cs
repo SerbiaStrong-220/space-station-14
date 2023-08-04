@@ -12,6 +12,7 @@ namespace Content.Server.Administration.Systems;
 public sealed partial class AdminVerbSystem
 {
     [Dependency] private readonly ZombieSystem _zombie = default!;
+    [Dependency] private readonly KontrRazvedhikRuleSystem _kontrrazvedhikRule = default!;
     [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
     [Dependency] private readonly NukeopsRuleSystem _nukeopsRule = default!;
     [Dependency] private readonly PiratesRuleSystem _piratesRule = default!;
@@ -30,6 +31,23 @@ public sealed partial class AdminVerbSystem
         var targetHasMind = TryComp(args.Target, out MindContainerComponent? targetMindComp);
         if (!targetHasMind || targetMindComp == null)
             return;
+
+        Verb kontrrazvedchik = new()
+        {
+            Text = "Make KontrRazvedchik",
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Structures/Wallmounts/posters.rsi"), "poster51_contraband"),
+            Act = () =>
+            {
+                if (targetMindComp.Mind == null || targetMindComp.Mind.Session == null)
+                    return;
+
+                _kontrrazvedhikRule.MakeKontrrazvedchik(targetMindComp.Mind.Session);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-kontrrazvedchik"),
+        };
+        args.Verbs.Add(kontrrazvedchik);
 
         Verb traitor = new()
         {
