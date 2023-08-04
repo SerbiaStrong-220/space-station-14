@@ -1,0 +1,224 @@
+#Leader
+- type: entity
+  parent: LockerCaptain
+  id: LockerEbentIronSquadLeader
+  name: "шкаф командира Железного Отряда"
+  suffix: Filled, Shitspawn, Ebent
+  components:
+  - type: StorageFill
+    contents:
+    - id: EnergySword
+    - id: ClothingHeadHatChameleon
+    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
+    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
+    - id: ClothingUniformJumpskirtSyndicateFormalDress
+    - id: ClothingUniformJumpsuitSyndicateFormal
+    - id: ClothingOuterCoatSyndieCap
+    - id: ClothingHeadHatSyndie
+    - id: ClothingMaskNeckGaiter
+    - id: ClothingUniformJumpskirtOperative
+
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackSupaSyndicate
+  id: ClothingBackpackSupaSyndicateLeader
+  suffix: Shitspawn, Ebent
+    components:
+    - type: StorageFill
+      contents:
+      - id: Crowbar
+      - id: RubberStampSyndicate
+      - id: CigPackSyndicate
+        amount: 2
+      - id: Lighter
+      - id: FlashlightSecliteSyndicate
+      - id: Stimpack
+      - id: PowerCellHyper
+      - id: SpeedLoaderMagnumHighVelocity
+        amount: 2
+      - id: WeaponSubMachineGunC20r
+      - id: PistolSubMachineGunHighVelocity
+        amount: 2
+      - id: CombatMedipen
+      - id: EnergySwordDouble
+
+- type: startingGear
+  id: EbentIronSquadLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackSupaSyndicateLeader
+    shoes: ClothingShoesBootsMagSyndie
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieElite
+    suitstorage: YellowOxygenTankFilled
+    id: SyndiPDAAgent
+    ears: ClothingHeadsetAltSyndicateEbent
+    belt: ClothingBeltSyndieHolsterPython
+    pocket1: FreedomImplanter
+    pocket2: StorageImplanter
+
+- type: entity
+  id: RandomHumanoidSpawnerEbentIronSquadLeader
+  name: Iron Squad Leader Spawner
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertleader
+    - type: RandomMetadata
+      nameSegments:
+      - SyndicateNamesPrefix
+      - SyndicateNamesNormal
+    - type: RandomHumanoidSpawner
+      settings: EbentIronSquadLeader
+
+- type: randomHumanoidSettings
+  id: EbentIronSquadLeader
+  randomizeName: false
+  components:
+    - type: Loadout
+      prototypes: [ EbentIronSquadLeaderGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - SyndicateNamesPrefix
+      - SyndicateNamesNormal
+
+#Engineer
+- type: entity
+  parent: LockerChiefEngineer
+  id: LockerEbentIronSquadEngineer
+  name: "шкаф инженера Железного Отряда"
+  suffix: Filled, Shitspawn, Ebent
+  components:
+  - type: StorageFill
+    contents:
+    - id: EnergySword
+    - id: ClothingHeadHatChameleon
+    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
+    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
+    - id: ClothingUniformJumpskirtSyndicateFormalDress
+    - id: ClothingUniformJumpsuitSyndicateFormal
+    - id: ClothingOuterCoatSyndieCap
+    - id: ClothingHeadHatSyndie
+    - id: ClothingMaskNeckGaiter
+    - id: ClothingUniformJumpskirtOperative
+    - id: ClothingUniformJumpsuitOperative
+
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackSupaSyndicate
+  id: ClothingBackpackSupaSyndicateEngineer
+  suffix: Shitspawn, Ebent
+    components:
+    - type: StorageFill
+      contents:
+      - id: Crowbar
+      - id: CigPackSyndicate
+        amount: 2
+      - id: Lighter
+      - id: FlashlightSecliteSyndicate
+      - id: Stimpack
+      - id: PowerCellHyper
+      - id: SpeedLoaderMagnumHighVelocity
+        amount: 2
+      - id: WeaponSubMachineGunC20r
+      - id: PistolSubMachineGunHighVelocity
+        amount: 2
+      - id: CombatMedipen
+      - id: EnergySwordDouble
+      - id: RCD
+      - id: RCDAmmo
+
+- type: startingGear
+  id: EbentIronSquadEngineerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerSyndie
+    back: ClothingBackpackSupaSyndicateEngineer
+    shoes: ClothingShoesBootsMagSyndie
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieElite
+    suitstorage: YellowOxygenTankFilled
+    id: SyndiPDAAgent
+    ears: ClothingHeadsetAltSyndicateEbent
+    belt: ClothingBeltSyndieHolsterPython
+    pocket1: FreedomImplanter
+    pocket2: StorageImplanter
+
+- type: entity
+  id: RandomHumanoidSpawnerEbentIronSquadEngineer
+  name: Iron Squad Enginner Spawner
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertleader
+    - type: RandomMetadata
+      nameSegments:
+      - SyndicateNamesPrefix
+      - SyndicateNamesNormal
+    - type: RandomHumanoidSpawner
+      settings: EbentIronSquadEngineer
+
+- type: randomHumanoidSettings
+  id: EbentIronSquadEngineer
+  randomizeName: false
+  components:
+    - type: Loadout
+      prototypes: [ EbentIronSquadEngineerGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - SyndicateNamesPrefix
+      - SyndicateNamesNormal
+
+#Corpsman
+- type: startingGear
+  id: EbentIronSquadCorpsman
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerSyndie
+    back: ClothingBackpackSupaSyndicateEngineer
+    shoes: ClothingShoesBootsMagSyndie
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieElite
+    suitstorage: YellowOxygenTankFilled
+    id: MedicalPDAAgent
+    ears: ClothingHeadsetAltSyndicateEbent
+    belt: ClothingBeltSyndieHolsterPython
+    pocket1: FreedomImplanter
+    pocket2: StorageImplanter
+
+#CMO
+- type: startingGear
+  id: EbentIronSquadCMO
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerSyndie
+    back: ClothingBackpackSupaSyndicateEngineer
+    shoes: ClothingShoesBootsMagSyndie
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieElite
+    suitstorage: YellowOxygenTankFilled
+    id: MedicalPDAAgent
+    ears: ClothingHeadsetAltSyndicateEbent
+    belt: ClothingBeltSyndieHolsterPython
+    pocket1: FreedomImplanter
+    pocket2: StorageImplanter
+
+# Trooper
+- type: startingGear
+  id: EbentIronSquadTrooper
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerSyndie
+    back: ClothingBackpackSupaSyndicateEngineer
+    shoes: ClothingShoesBootsMagSyndie
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieElite
+    suitstorage: YellowOxygenTankFilled
+    id: SyndiPDAAgent
+    ears: ClothingHeadsetAltSyndicateEbent
+    belt: ClothingBeltSyndieHolsterPython
+    pocket1: FreedomImplanter
+    pocket2: StorageImplanter

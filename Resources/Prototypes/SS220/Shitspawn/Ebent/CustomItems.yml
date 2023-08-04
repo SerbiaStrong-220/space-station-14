@@ -1,7 +1,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmd
-  suffix: Агент, Щитспавн
+  suffix: Агент, Щитспавн, Ebent
   name: ID карта пассажира
   components:
   - type: Access
@@ -17,7 +17,7 @@
   id: SyndiPDAAgent
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  suffix: Агент, Щитспавн
+  suffix: Агент, Щитспавн, Ebent
   components:
   - type: Pda
     id: AgentIDCardCmd
@@ -27,7 +27,7 @@
   id: MedicalPDAAgent
   name: "КПК врача синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  suffix: Агент, Щитспавн
+  suffix: Агент, Щитспавн, Ebent
   components:
   - type: Pda
     id: AgentIDCardCmd
@@ -43,3 +43,27 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackSupaSyndicate
+  suffix: Shitspawn, Ebent
+
+- type: entity
+  parent: ClothingHeadsetAltSyndicate
+  id: ClothingHeadsetAltSyndicateEbent
+  suffix: Shitspawn, Ebent
+  name: полноразмерная кроваво-красная гарнитура
+  description: Модифицированный модульный интерком синдиката, надеваемый на голову, и содержащий ключ шифрования. Имеет 5 ячеек для ключей шифрования.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeySyndie
+      - EncryptionKeyCommon
+
+- type: entity
+  parent: ClothingBeltSyndieHolster
+  id: ClothingBeltSyndieHolsterPython
+  suffix: Shitspawn
+  name: плечевая кобура синдиката
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverPython
