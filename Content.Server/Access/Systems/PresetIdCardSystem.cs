@@ -5,6 +5,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Roles;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Access.Systems
@@ -68,10 +69,14 @@ namespace Content.Server.Access.Systems
 
             _accessSystem.SetAccessToJob(uid, job, extended);
 
-            // and also change job title on a card id
             _cardSystem.TryChangeJobTitle(uid, job.LocalizedName);
 
             _cardSystem.TryChangeJobColor(uid, GetJobColor(_prototypeManager, job), job.RadioIsBold);
+
+            if (_prototypeManager.TryIndex<StatusIconPrototype>(job.Icon, out var jobIcon))
+            {
+                _cardSystem.TryChangeJobIcon(uid, jobIcon);
+            }
         }
 
         public static string GetJobColor(IPrototypeManager prototypeManager, IPrototype job)
