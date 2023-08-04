@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.StationEvents.Components;
 using Content.Shared.CCVar;
@@ -51,6 +51,14 @@ public sealed class EventManagerSystem : EntitySystem
     /// </summary>
     public string RunRandomEvent()
     {
+        // Проверка на расширенный мод для проведения ивентов с отключенными случайными событиями
+        if (GameTicker.CurrentPreset != null && GameTicker.CurrentPreset.DisableRandomEvents)
+        {
+            var errStr = Loc.GetString("station-event-system-run-random-event-extented");
+            _sawmill.Error(errStr);
+            return errStr;
+        }
+
         var randomEvent = PickRandomEvent();
 
         if (randomEvent == null)
@@ -87,6 +95,7 @@ public sealed class EventManagerSystem : EntitySystem
             _sawmill.Warning("No events were available to run!");
             return null;
         }
+
 
         var sumOfWeights = 0;
 
