@@ -51,11 +51,11 @@ public sealed class EventManagerSystem : EntitySystem
     /// </summary>
     public string RunRandomEvent()
     {
-        // Проверка на расширенный мод для проведения ивентов с отключенными случайными событиями
+        // Проверка на отключенные случаные события в текущем пресете
         if (GameTicker.CurrentPreset != null && GameTicker.CurrentPreset.DisableRandomEvents)
         {
-            var errStr = Loc.GetString("station-event-system-run-random-event-extented");
-            _sawmill.Error(errStr);
+            var errStr = Loc.GetString("station-event-system-run-random-event-disablerandevents");
+            _sawmill.Info(errStr);
             return errStr;
         }
 
