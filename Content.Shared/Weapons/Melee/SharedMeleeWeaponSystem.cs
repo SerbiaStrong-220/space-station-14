@@ -590,16 +590,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             // is when a melee weapon is examined. Misses are inferred from an
             // empty HitEntities.
             // TODO: This needs fixing
-            if (meleeUid == user)
-            {
-                AdminLogger.Add(LogType.MeleeHit, LogImpact.Low,
-                    $"{ToPrettyString(user):actor} melee attacked (light) using their hands and missed");
-            }
-            else
-            {
-                AdminLogger.Add(LogType.MeleeHit, LogImpact.Low,
-                    $"{ToPrettyString(user):actor} melee attacked (light) using {ToPrettyString(meleeUid):tool} and missed");
-            }
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage);
             RaiseLocalEvent(meleeUid, missEvent);
             Audio.PlayPredicted(component.SwingSound, meleeUid, user);
@@ -644,12 +634,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (meleeUid == user)
             {
-                AdminLogger.Add(LogType.MeleeHit, LogImpact.Medium,
-                    $"{ToPrettyString(user):actor} melee attacked (light) {ToPrettyString(ev.Target.Value):subject} using their hands and dealt {damageResult.Total:damage} damage");
+                AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
+                    $"{ToPrettyString(user):user} melee attacked {ToPrettyString(ev.Target.Value):target} using their hands and dealt {damageResult.Total:damage} damage");
             }
             else
             {
-                AdminLogger.Add(LogType.MeleeHit,
+                AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
                     $"{ToPrettyString(user):user} melee attacked {ToPrettyString(ev.Target.Value):target} using {ToPrettyString(meleeUid):used} and dealt {damageResult.Total:damage} damage");
             }
 
@@ -699,16 +689,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (entities.Count == 0)
         {
-            if (meleeUid == user)
-            {
-                AdminLogger.Add(LogType.MeleeHit, LogImpact.Low,
-                    $"{ToPrettyString(user):actor} melee attacked (heavy) using their hands and missed");
-            }
-            else
-            {
-                AdminLogger.Add(LogType.MeleeHit, LogImpact.Low,
-                    $"{ToPrettyString(user):actor} melee attacked (heavy) using {ToPrettyString(meleeUid):tool} and missed");
-            }
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage);
             RaiseLocalEvent(meleeUid, missEvent);
 
@@ -784,12 +764,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
                 if (meleeUid == user)
                 {
-                    AdminLogger.Add(LogType.MeleeHit,
+                    AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
                         $"{ToPrettyString(user):user} melee attacked {ToPrettyString(entity):target} using their hands and dealt {damageResult.Total:damage} damage");
                 }
                 else
                 {
-                    AdminLogger.Add(LogType.MeleeHit,
+                    AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
                         $"{ToPrettyString(user):user} melee attacked {ToPrettyString(entity):target} using {ToPrettyString(meleeUid):used} and dealt {damageResult.Total:damage} damage");
                 }
             }

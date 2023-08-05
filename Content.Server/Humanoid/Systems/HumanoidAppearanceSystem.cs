@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 using System.Linq;
 using Content.Shared.Decals;
+=======
+>>>>>>> off/master
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -35,6 +38,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         args.PushText(Loc.GetString("humanoid-appearance-component-examine", ("user", identity), ("age", age), ("species", species)));
     }
 
+<<<<<<< HEAD
     /// <summary>
     ///     Loads a humanoid character profile directly onto this humanoid mob.
     /// </summary>
@@ -126,6 +130,8 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         Dirty(humanoid);
     }
 
+=======
+>>>>>>> off/master
     // this was done enough times that it only made sense to do it here
 
     /// <summary>
