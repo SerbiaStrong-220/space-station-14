@@ -3059,3 +3059,144 @@ Entries:
       brute-force attacks on their uplinks unfeasible.', type: Fix}
   id: 4420
   time: '2023-08-03T11:13:17.0000000+00:00'
+- author: fedKotikeD & crazybrain
+  changes:
+  - {message: Added Syndicate pAI., type: Add}
+  - {message: Syndicate pAI's can be found on the Nukie planet., type: Tweak}
+  id: 4421
+  time: '2023-08-03T20:48:40.0000000+00:00'
+- author: EmoGarbage404
+  changes:
+  - {message: NT has issued a unique anti-balloon weapon to security personnel. Use
+      it to destroy syndicate balloons and crush their morale!, type: Add}
+  id: 4422
+  time: '2023-08-04T01:53:06.0000000+00:00'
+- author: Interrobang01
+  changes:
+  - {message: 'A few changes to some chemical recipes, namely Dexalin, Lexorin, Ultravasculine,
+      Ammonia, Acetone, Sodium Carbonate, and Sigynate, have been reverted. They are
+      now like what they used to be.', type: Tweak}
+  - {message: Sigynate heals 3 Caustic per unit again., type: Tweak}
+  id: 4423
+  time: '2023-08-04T02:30:37.0000000+00:00'
+- author: liltenhead
+  changes:
+  - {message: Fixed the incorrect ammo count in the China Lake bundle's description.,
+    type: Fix}
+  id: 4424
+  time: '2023-08-04T02:57:02.0000000+00:00'
+- author: Lank
+  changes:
+  - {message: 'Added Moth People as a playable race. These friends can move around
+      in zero gravity easily and love the cold, but are significantly weaker against
+      high temperatures and won''t be caught eating anything not made of cloth.',
+    type: Add}
+  id: 4425
+  time: '2023-08-04T05:21:28.0000000+00:00'
+- author: FillerVK
+  changes:
+  - {message: Added insulated gloves to emaged youtool, type: Add}
+  id: 4426
+  time: '2023-08-04T08:39:34.0000000+00:00'
+- author: Flareguy
+  changes:
+  - {message: Updated dirty steel & plastic floor tiles to match the new style., type: Tweak}
+  id: 4427
+  time: '2023-08-04T08:55:08.0000000+00:00'
+- author: metalgearsloth
+  changes:
+  - {message: Spears can now embed into things and require removing., type: Add}
+  id: 4428
+  time: '2023-08-04T08:56:39.0000000+00:00'
+- author: Flareguy
+  changes:
+  - {message: The smartfridge now uses its old sprites., type: Tweak}
+  id: 4429
+  time: '2023-08-04T18:29:43.0000000+00:00'
+- author: MilenVolf
+  changes:
+  - {message: Moths now have proper creampied texture! Honk!, type: Tweak}
+  id: 4430
+  time: '2023-08-04T18:31:39.0000000+00:00'
+- author: metalgearsloth
+  changes:
+  - {message: Fix spear wielding., type: Fix}
+  id: 4431
+  time: '2023-08-04T18:37:17.0000000+00:00'
+- author: Aleksh
+  changes:
+  - {message: Added laser raptors., type: Add}
+  id: 4432
+  time: '2023-08-04T18:38:11.0000000+00:00'
+- author: Unbelievable-Salmon
+  changes:
+  - {message: The Syndicate gas mask now protects your eyes from welders., type: Tweak}
+  id: 4433
+  time: '2023-08-04T18:43:25.0000000+00:00'
+- author: metalgearsloth
+  changes:
+  - {message: Allow pulling while buckled, type: Add}
+  id: 4434
+  time: '2023-08-04T18:47:52.0000000+00:00'
+- author: astriloqua
+  changes:
+  - {message: People wont hear buckling and unbuckling sounds twice anymore., type: Fix}
+  id: 4435
+  time: '2023-08-04T22:24:21.0000000+00:00'
+- author: Errant
+  changes:
+  - {message: Gas tanks and jetpacks have reduced capacity and now need to be refilled
+      more regularly., type: Tweak}
+  - {message: Jetpacks now start fully filled., type: Tweak}
+  id: 4436
+  time: '2023-08-04T22:40:42.0000000+00:00'
+- author: Potato1234_x
+  changes:
+  - {message: Added the Dr. Gibb Vendor, type: Add}
+  id: 4437
+  time: '2023-08-05T02:07:41.0000000+00:00'
+- author: liltenhead
+  changes:
+  - {message: Changed the swat crate to only contain non-lethal shells; now it comes
+      with shields., type: Tweak}
+  id: 4438
+  time: '2023-08-05T03:47:32.0000000+00:00'
+- author: crazybrain
+  changes:
+  - {message: Uplinks can now purchase a Syndicate pAI., type: Add}
+  id: 4439
+  time: '2023-08-05T04:26:26.0000000+00:00'
+- author: mhamster
+  changes:
+  - {message: 'Added new chemical reaction between iron, aluminium and uranium that
+      will cause electromagnetic pulse.', type: Add}
+  id: 4440
+  time: '2023-08-05T04:31:14.0000000+00:00'
+- author: Interrobang01
+  changes:
+  - {message: 'The Syndicate Disposable Turret is now approved for use by all syndicate
+      agents (with the exception of nuclear operatives), instead of those from a select
+      few jobs.', type: Tweak}
+  id: 4441
+  time: '2023-08-05T04:32:25.0000000+00:00'
+- author: Jesse
+  changes:
+  - {message: New chainsaw sprites, type: Add}
+  - {message: New chainsaw sounds. It goes vroom., type: Add}
+  id: 4442
+  time: '2023-08-05T04:49:56.0000000+00:00'
+- author: deltanedas
+  changes:
+  - {message: Dragons on expeditions do less damage now., type: Tweak}
+  id: 4443
+  time: '2023-08-05T07:02:07.0000000+00:00'
+- author: Phill101
+  changes:
+  - {message: The crew manifest is now a PDA cartridge program., type: Tweak}
+  id: 4444
+  time: '2023-08-05T08:37:08.0000000+00:00'
+- author: Slava0135
+  changes:
+  - {message: Splash spill now has a visual effect., type: Add}
+  id: 4445
+  time: '2023-08-05T11:44:19.0000000+00:00'

@@ -1,7 +1,7 @@
 - type: entity
   save: false
   name: Urist McPlants
-  parent: BaseMobDiona
+  parent: [BaseMobDiona, BaseMob]
   id: MobDiona
   components:
     - type: InteractionPopup
