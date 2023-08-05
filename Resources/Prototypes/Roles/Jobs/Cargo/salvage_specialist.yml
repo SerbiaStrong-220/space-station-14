@@ -6,13 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Cargo
-<<<<<<< HEAD
       time: 10800 # SS220-RoleTime
-=======
-      time: 10800 # 3 hrs
-#    - !type:OverallPlaytimeRequirement
-#      time: 36000 #10 hrs
->>>>>>> syndie/master
   icon: "JobIconShaftMiner"
   startingGear: SalvageSpecialistGear
   supervisors: job-supervisors-qm

@@ -20,22 +20,14 @@
           availableJobs:
             #service
             Captain: [ 1, 1 ]
-            IAA: [ 1, 1 ] # Corvax-IAA
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
             Botanist: [ 3, 3 ]
             Chef: [ 2, 2 ]
-<<<<<<< HEAD
             Janitor: [ 3, 3 ]
             Chaplain: [ 2, 2 ]
             Librarian: [ 2, 2 ]
             ServiceWorker: [ 4, 4 ]
-=======
-            Janitor: [ 2, 2 ]
-            Chaplain: [ 1, 1 ]
-            Librarian: [ 1, 1 ]
-            ServiceWorker: [ 2, 2 ]
->>>>>>> syndie/master
             #engineering
             ChiefEngineer: [ 1, 1 ]
             SeniorEngineer: [ 1, 1 ]

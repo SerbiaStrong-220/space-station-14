@@ -2853,10 +2853,7 @@ entities:
     - inletTwoConcentration: 0.78
       inletOneConcentration: 0.22
       targetPressure: 300
-<<<<<<< HEAD
       enabled: True
-=======
->>>>>>> syndie/master
       type: GasMixer
 - proto: GasPassiveVent
   entities:
@@ -2866,11 +2863,6 @@ entities:
       pos: 10.5,-24.5
       parent: 1
       type: Transform
-<<<<<<< HEAD
-    - nextSound: 33.6389337
-      type: EmitSoundOnCollide
-=======
->>>>>>> syndie/master
 - proto: GasPipeBend
   entities:
   - uid: 385

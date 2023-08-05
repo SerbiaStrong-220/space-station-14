@@ -159,11 +159,7 @@
        - id: ClothingBackpackSecurity
        - id: ClothingShoesBootsJack
        - id: ClothingEyesGlassesSecurity
-<<<<<<< HEAD
        - id: ClothingHeadHelmetBasic  # Corvax-Resprite
-=======
-       - id: ClothingHeadHelmetBasic
->>>>>>> syndie/master
        - id: ClothingOuterArmorBasic
        - id: ClothingUniformJumpskirtSec
 

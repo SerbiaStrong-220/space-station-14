@@ -55,7 +55,6 @@
   - type: TemperatureProtection
     coefficient: 0.005
 
-<<<<<<< HEAD
 - type: entity
   parent: ClothingHeadHardsuitBase
   id: ClothingHeadHelmetHardsuitCap
@@ -88,9 +87,6 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
 
-=======
-#Engineering Hardsuit
->>>>>>> syndie/master
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitEngineering
@@ -301,45 +297,6 @@
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitWizard
-  noSpawn: true
-  name: wizard hardsuit helmet
-  description: A bizarre gem-encrusted helmet that radiates magical energies.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/wizard.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/wizard.rsi
-  - type: PointLight
-    color: "#ffadfb"
-  - type: PressureProtection
-    highPressureMultiplier: 0.60
-    lowPressureMultiplier: 1000
-
-- type: entity
-  parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHelmetHardsuitLing
-  noSpawn: true
-  name: organic space helmet
-  description: A spaceworthy biomass of pressure and temperature resistant tissue.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/lingspacehelmet.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/lingspacehelmet.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.45
-    lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitSpatio
   noSpawn: true
   name: spationaut hardsuit helmet
@@ -389,30 +346,6 @@
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
 
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitSyndieCommander
-  noSpawn: true
-  name: syndicate commander helmet
-  description: A syndicate hardsuit helmet custom designed for commanders of syndicate operative squads.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
-  - type: PointLight
-    color: green
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.6
-        Heat: 0.8
-        Radiation: 0.5
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -441,8 +374,6 @@
         Heat: 0.2
         Radiation: 0.5
 
-<<<<<<< HEAD
-=======
 #Syndicate Commander Hardsuit
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -543,29 +474,6 @@
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
 
-#CENTCOMM / ERT HARDSUITS
-#ERT Leader Hardsuit
-- type: entity
-  parent: ClothingHeadHelmetHardsuitSyndieCommander
-  id: ClothingHeadHelmetHardsuitERTLeader
-  noSpawn: true
-  name: ERT leader hardsuit helmet
-  description: A special hardsuit helmet worn by members of an emergency response team.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertleader.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertleader.rsi
-  - type: PointLight # Corvax-Resprite
-    color: cyan
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-
 #ERT Engineer Hardsuit
 - type: entity
   parent: ClothingHeadHelmetHardsuitSyndie
@@ -637,7 +545,6 @@
     color: "#cbadff"
 
 #CBURN Hardsuit
->>>>>>> syndie/master
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetCBURN
@@ -679,50 +586,6 @@
         Cold: 0.2
         Radiation: 0.2
 
-- type: entity
-<<<<<<< HEAD
-  parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHelmetHardsuitPirateCap
-=======
-  parent: ClothingHeadHardsuitWithLightBase # Corvax-Resprite
-  id: ClothingHeadHelmetHardsuitDeathsquad
->>>>>>> syndie/master
-  noSpawn: true
-  name: ancient hardsuit helmet
-  suffix: Pirate
-  description: Special hardsuit helmet, made for the captain of a pirate ship.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-  - type: Clothing
-<<<<<<< HEAD
-    sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-=======
-    sprite: Clothing/Head/Hardsuits/deathsquad.rsi
-  - type: PointLight # Corvax-Resprite
-    color: cyan
->>>>>>> syndie/master
-  - type: PressureProtection
-    highPressureMultiplier: 0.225
-    lowPressureMultiplier: 1000
-
-<<<<<<< HEAD
-- type: entity
-  parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHelmetHardsuitPirateEVA
-  noSpawn: true
-  name: deep space EVA helmet
-  suffix: Pirate
-  description: A deep space EVA helmet, very heavy but provides good protection.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.3
-    lowPressureMultiplier: 1000
-
 #ERT
 - type: entity
   parent: ClothingHeadHelmetHardsuitSyndieCommander
@@ -738,62 +601,6 @@
   - type: PointLight # Corvax-Resprite
     color: cyan
 
-- type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
-  id: ClothingHeadHelmetHardsuitERTEngineer
-  noSpawn: true
-  name: ERT engineer hardsuit helmet
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertengineer.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertengineer.rsi
-  - type: PointLight
-    color: "#f4ffad"
-
-- type: entity
-  parent: ClothingHeadHelmetHardsuitSyndieElite
-  id: ClothingHeadHelmetHardsuitERTMedical
-  noSpawn: true
-  name: ERT medic hardsuit helmet
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
-  - type: PointLight
-    color: "#adffec"
-
-- type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
-  id: ClothingHeadHelmetHardsuitERTSecurity
-  noSpawn: true
-  name: ERT security hardsuit helmet
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi
-  - type: PointLight
-    color: "#ffadc6"
-
-- type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
-  id: ClothingHeadHelmetHardsuitERTJanitor
-  noSpawn: true
-  name: ERT janitor hardsuit helmet
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
-  - type: PointLight
-    color: "#cbadff"
-
-=======
-#MISC. HARDSUITS
-#Clown Hardsuit
->>>>>>> syndie/master
 - type: entity
   parent: ClothingHeadHelmetHardsuitSecurity
   id: ClothingHeadHelmetHardsuitClown
