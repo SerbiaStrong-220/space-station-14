@@ -19,13 +19,22 @@
     sprite: Clothing/Shoes/Boots/jackboots.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/jackboots.rsi
+<<<<<<< HEAD
+=======
+  - type: FootstepModifier # Corvax-Sounds
+    footstepSoundCollection:
+      collection: FootstepBoots
+>>>>>>> syndie/master
   - type: Storage
     whitelist:
       tags:
         - Knife
+<<<<<<< HEAD
   - type: FootstepModifier # Corvax-Sounds
     footstepSoundCollection:
       collection: FootstepBoots
+=======
+>>>>>>> syndie/master
 
 - type: entity
   parent: ClothingShoesBaseButcherable

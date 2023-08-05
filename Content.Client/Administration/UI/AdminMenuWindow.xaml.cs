@@ -12,7 +12,7 @@ namespace Content.Client.Administration.UI
 
         public AdminMenuWindow()
         {
-            MinSize = new Vector2(600, 250);
+            MinSize = new Vector2(600, 250); // Corvax-Resize
             Title = Loc.GetString("admin-menu-title");
             RobustXamlLoader.Load(this);
             MasterTabContainer.SetTabTitle(0, Loc.GetString("admin-menu-admin-tab"));

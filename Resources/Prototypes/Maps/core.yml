@@ -25,6 +25,7 @@
             Chef: [ 1, 2 ]
             Janitor: [ 2, 2 ]
             Captain: [ 1, 1 ]
+            IAA: [ 2, 2 ] # Corvax-IAA
             HeadOfPersonnel: [ 1, 1 ]
             Chaplain: [ 1, 1 ]
             Librarian: [ 1, 1 ]
@@ -51,7 +52,11 @@
             HeadOfSecurity: [ 1, 1 ]
             SecurityOfficer: [ 4, 4 ]
             Warden: [ 1, 1 ]
+<<<<<<< HEAD
             IAA: [ 1, 1 ]
+=======
+            #Lawyer: [ 2, 2 ] # Corvax-IAA
+>>>>>>> syndie/master
             SecurityCadet: [ 2, 2 ]
             Detective: [ 1, 1 ]
             SeniorOfficer: [ 1, 1 ]

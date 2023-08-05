@@ -23,7 +23,7 @@ public sealed partial class PowerMonitoringWindow : DefaultWindow, IComputerWind
     {
         RobustXamlLoader.Load(this);
         SetSize = new Vector2(500, 450); // Corvax-Resize
-		MinSize = new Vector2(300, 450); // Corvax-Resize
+        MinSize = new Vector2(300, 450); // Corvax-Resize
         IoCManager.InjectDependencies(this);
         _spriteSystem = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
         MasterTabContainer.SetTabTitle(0, Loc.GetString("power-monitoring-window-tab-sources"));

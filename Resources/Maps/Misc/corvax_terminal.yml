@@ -6148,33 +6148,45 @@ entities:
       pos: -14.5,-24.5
       parent: 2
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1831
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 1752
     components:
     - pos: -13.5,-24.5
       parent: 2
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1831
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 1753
     components:
     - pos: -13.5,-26.5
       parent: 2
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1831
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 1754
     components:
     - pos: -13.5,-27.5
       parent: 2
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1831
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: CrateCommandSecure
   entities:
   - uid: 1849
@@ -8720,9 +8732,12 @@ entities:
     - pos: -13.5,-25.5
       parent: 2
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1831
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: ReinforcedWindow
   entities:
   - uid: 109
@@ -10043,6 +10058,7 @@ entities:
     - pos: -14.5,-25.5
       parent: 2
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         1748:
         - Left: Forward
@@ -10065,6 +10081,8 @@ entities:
         - Right: Reverse
         - Middle: Off
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
 - proto: VendingMachineBooze
   entities:
   - uid: 305

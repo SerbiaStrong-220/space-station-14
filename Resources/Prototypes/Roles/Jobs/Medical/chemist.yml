@@ -6,7 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
+<<<<<<< HEAD
       time: 10800 # SS220-RoleTime
+=======
+      time: 18000 #5 hrs # Corvax-RoleTime
+>>>>>>> syndie/master
   startingGear: ChemistGear
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo

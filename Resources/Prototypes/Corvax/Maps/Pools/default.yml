@@ -3,15 +3,24 @@
   maps:
   - CorvaxDelta
   - CorvaxBox
-#  - CorvaxIshimura
+  - CorvaxIshimura
   - CorvaxAvrite
+  - Aspid
   - Bagel
+  - Barratry
+  - Box
   - Cluster
+  - Core
+  - Fland
   - Kettle
   - Marathon
+<<<<<<< HEAD
   - Omega
   - Origin
+=======
+>>>>>>> syndie/master
   - Meta
-  - Barratry
-  - Aspid
-  - Fland  
+  - Omega
+  - Origin
+  - Saltern
+  - Packed

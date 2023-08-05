@@ -42,3 +42,7 @@ ent-FoodBakedPretzel = poppy pretzel
     .desc = It's all twisted up!
 ent-FoodBakedCannoli = cannoli
     .desc = A Sicilian treat that makes you into a wise guy.
+ent-FoodBakedDumplings = dumplings
+    .desc = Average recipe for meat in doughs.
+ent-FoodBakedChevreChaud = chèvre chaud
+    .desc = A disk of slightly melted chèvre flopped on top of a crostini, and toasted all-round.

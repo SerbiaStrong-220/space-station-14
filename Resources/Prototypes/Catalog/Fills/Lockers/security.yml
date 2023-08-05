@@ -69,10 +69,17 @@
       - id: ClothingHeadsetSecurity
       - id: ClothingHandsGlovesColorBlack
       - id: ClothingShoesBootsJack
+<<<<<<< HEAD
       - id: ClothingOuterCoatSecurityOvercoat # Corvax-SecFashion
         prob: 0.2
       - id: WeaponMeleeNeedle
         prob: 0.1
+=======
+      - id: WeaponMeleeNeedle
+        prob: 0.1
+      - id: ClothingOuterCoatSecurityOvercoat # Corvax-SecFashion
+        prob: 0.2
+>>>>>>> syndie/master
 
 - type: entity
   id: LockerBrigmedicFilled

@@ -1,21 +1,18 @@
-﻿-create-3rd-person =
+-create-3rd-person =
     { $chance ->
         [1] Создаёт
        *[other] создают
     }
-
 -cause-3rd-person =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     }
-
 -satiate-3rd-person =
     { $chance ->
         [1] Насыщает
        *[other] насыщают
     }
-
 reagent-effect-guidebook-create-entity-reaction-effect =
     { $chance ->
         [1] Создаёт
@@ -24,7 +21,6 @@ reagent-effect-guidebook-create-entity-reaction-effect =
         [1] { INDEFINITE($entname) }
        *[other] { $amount } { $entname }
     }
-
 reagent-effect-guidebook-explosion-reaction-effect =
     { $chance ->
         [1] Вызывает
@@ -48,7 +44,6 @@ reagent-effect-guidebook-satiate-thirst =
         [1] жажду средне
        *[other] жажду на { NATURALFIXED($relative, 3) }x от обычного
     }
-
 reagent-effect-guidebook-satiate-hunger =
     { $chance ->
         [1] Насыщает
@@ -57,7 +52,6 @@ reagent-effect-guidebook-satiate-hunger =
         [1] голод средне
        *[other] голод на { NATURALFIXED($relative, 3) }x от обычного
     }
-
 reagent-effect-guidebook-health-change =
     { $chance ->
         [1]
@@ -73,7 +67,6 @@ reagent-effect-guidebook-health-change =
                *[both] изменяют здоровье на
             }
     } { $changes }
-
 reagent-effect-guidebook-status-effect =
     { $type ->
         [add]
@@ -92,7 +85,6 @@ reagent-effect-guidebook-status-effect =
                *[other] удаляют
             } { NATURALFIXED($time, 3) } от { LOC($key) }
     }
-
 reagent-effect-guidebook-activate-artifact =
     { $chance ->
         [1] Пытается
@@ -110,7 +102,7 @@ reagent-effect-guidebook-adjust-solution-temperature-effect =
                 [1] Добавляет
                *[-1] Удаляет
             }
-        *[other]
+       *[other]
             { $deltasign ->
                 [1] добавляют
                *[-1] удаляют
@@ -126,7 +118,7 @@ reagent-effect-guidebook-adjust-reagent-reagent =
                 [1] Добавляют
                *[-1] Удаляет
             }
-        *[other]
+       *[other]
             { $deltasign ->
                 [1] добавляют
                *[-1] удаляют
@@ -142,7 +134,7 @@ reagent-effect-guidebook-adjust-reagent-group =
                 [1] Добавляет
                *[-1] Удаляет
             }
-        *[other]
+       *[other]
             { $deltasign ->
                 [1] добавляют
                *[-1] удаляют
@@ -158,7 +150,7 @@ reagent-effect-guidebook-adjust-temperature =
                 [1] Добавляют
                *[-1] Удаляют
             }
-        *[other]
+       *[other]
             { $deltasign ->
                 [1] добавляют
                *[-1] удаляют
@@ -196,13 +188,13 @@ reagent-effect-guidebook-cure-eye-damage =
     { $chance ->
         [1]
             { $deltasign ->
-                [1] Излечивает
-               *[-1] Наносит
+                [1] Наносит
+               *[-1] Излечивает
             }
-        *[other]
+       *[other]
             { $deltasign ->
-                [1] излечивают
-               *[-1] наносят
+                [1] наносят
+               *[-1] излечивают
             }
     } повреждения глаз
 reagent-effect-guidebook-chem-vomit =

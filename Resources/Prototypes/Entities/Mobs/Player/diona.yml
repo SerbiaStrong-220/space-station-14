@@ -4,6 +4,7 @@
   parent: [BaseMobDiona, BaseMob]
   id: MobDiona
   components:
+<<<<<<< HEAD
     - type: InteractionPopup
       successChance: 1
       interactSuccessString: hugging-success-generic
@@ -13,6 +14,8 @@
       showExamineInfo: true
     - type: Input
       context: "human"
+=======
+>>>>>>> syndie/master
     - type: Respirator
       damage:
         types:
@@ -20,6 +23,7 @@
       damageRecovery:
         types:
           Asphyxiation: -1.0
+<<<<<<< HEAD
     - type: MobMover
     - type: InputMover
     - type: Alerts
@@ -31,3 +35,6 @@
       factions:
         - NanoTrasen
     # - type: Pacifist # Corvax-DionaPacifist
+=======
+    - type: Pacifist # Corvax-DionaPacifist
+>>>>>>> syndie/master

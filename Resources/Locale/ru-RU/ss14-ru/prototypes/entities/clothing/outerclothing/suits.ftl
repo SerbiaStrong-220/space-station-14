@@ -1,7 +1,5 @@
 ent-ClothingOuterSuitBomb = сапёрный костюм
     .desc = Тяжелый костюм, предназначенный для защиты от осколков и давления, создаваемого взрывом.
-ent-ClothingOuterSuitEmergency = аварийный костюм
-    .desc = Аварийный костюм на случай... аварии.
 ent-ClothingOuterSuitFire = пожарный костюм
     .desc = Костюм, обеспечивающий защиту от опасных температур.
 ent-ClothingOuterSuitAtmosFire = атмос-пожарный костюм

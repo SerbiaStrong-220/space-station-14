@@ -8,6 +8,10 @@
     BackgammonBoard: 1
     ParchisBoard: 1
     CheckerBoard: 1
+<<<<<<< HEAD
+=======
+    BookStationsAndAgents: 4 # Corvax-Tabletop
+>>>>>>> syndie/master
     ShipBattlemap: 1
     SnowBattlemap: 1
     SandBattlemap: 1
@@ -15,5 +19,8 @@
     GrassBattlemap: 1
     PaperCNCSheet: 6
     MysteryFigureBox: 2
+<<<<<<< HEAD
     BookStationsAndAgents: 4 # Corvax-Tabletop
+=======
+>>>>>>> syndie/master
     BooksBag: 3

@@ -9658,33 +9658,45 @@ entities:
     - pos: 23.5,14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 17017
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 11218
     components:
     - pos: 17.5,14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14903
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 14932
     components:
     - pos: 17.5,15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14903
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 14961
     components:
     - pos: 23.5,15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 17017
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 16075
     components:
     - rot: 1.5707963267948966 rad
@@ -9720,17 +9732,23 @@ entities:
     - pos: 20.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 15269
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 15206
     components:
     - pos: 28.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 15271
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: AirlockMedicalLocked
   entities:
   - uid: 1657
@@ -9739,18 +9757,24 @@ entities:
       pos: -8.5,7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14728
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 1658
     components:
     - rot: 1.5707963267948966 rad
       pos: -8.5,8.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14728
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 1839
     components:
     - rot: 3.141592653589793 rad
@@ -12082,44 +12106,59 @@ entities:
       pos: 1.5,-42.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 5413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 254
     components:
     - pos: -6.5,-46.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 259
       - 1284
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 260
     components:
     - pos: 1.5,-46.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1283
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 2200
     components:
     - pos: 30.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 2238
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 2295
     components:
     - rot: -1.5707963267948966 rad
       pos: -82.5,-24.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 2626
       - 2627
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4720
     components:
     - pos: -63.5,-21.5
@@ -12128,25 +12167,34 @@ entities:
     - SecondsUntilStateChange: -155482.06
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 4798
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4735
     components:
     - pos: -56.5,-18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6145
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4736
     components:
     - pos: -55.5,-18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6145
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4794
     components:
     - pos: -63.5,-18.5
@@ -12155,9 +12203,12 @@ entities:
     - SecondsUntilStateChange: -155482.06
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 4798
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4795
     components:
     - pos: -59.5,-18.5
@@ -12166,9 +12217,12 @@ entities:
     - SecondsUntilStateChange: -155470.48
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 4799
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4797
     components:
     - pos: -59.5,-21.5
@@ -12177,34 +12231,46 @@ entities:
     - SecondsUntilStateChange: -155470.48
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 4799
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4856
     components:
     - pos: -54.5,-18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6145
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 5430
     components:
     - rot: 3.141592653589793 rad
       pos: -6.5,-42.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 16804
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 6306
     components:
     - pos: 25.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 2238
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7670
     components:
     - pos: -101.5,29.5
@@ -12213,9 +12279,12 @@ entities:
     - SecondsUntilStateChange: -142215.27
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 7694
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7679
     components:
     - pos: -99.5,29.5
@@ -12224,41 +12293,56 @@ entities:
     - SecondsUntilStateChange: -142213.86
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 7695
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 8821
     components:
     - pos: -120.5,-8.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8816
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 8822
     components:
     - pos: -120.5,-7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8816
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 8823
     components:
     - pos: -120.5,-6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8816
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 8825
     components:
     - pos: -120.5,-5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8816
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: BlastDoorOpen
   entities:
   - uid: 8506
@@ -51355,89 +51439,122 @@ entities:
       pos: -95.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4822
     components:
     - pos: -63.5,-17.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4823
     components:
     - pos: -63.5,-18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4824
     components:
     - pos: -63.5,-19.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4825
     components:
     - pos: -63.5,-20.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4826
     components:
     - pos: -63.5,-21.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4827
     components:
     - pos: -59.5,-17.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4828
     components:
     - pos: -59.5,-18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4829
     components:
     - pos: -59.5,-19.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4830
     components:
     - pos: -59.5,-20.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4831
     components:
     - pos: -59.5,-21.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4841
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 5103
     components:
     - pos: -66.5,-4.5
@@ -51479,99 +51596,132 @@ entities:
       pos: -95.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7662
     components:
     - rot: -1.5707963267948966 rad
       pos: -98.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7663
     components:
     - rot: -1.5707963267948966 rad
       pos: -99.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7664
     components:
     - rot: -1.5707963267948966 rad
       pos: -97.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7665
     components:
     - rot: -1.5707963267948966 rad
       pos: -96.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7666
     components:
     - rot: 3.141592653589793 rad
       pos: -95.5,28.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7671
     components:
     - rot: -1.5707963267948966 rad
       pos: -102.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7672
     components:
     - rot: -1.5707963267948966 rad
       pos: -101.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7673
     components:
     - rot: -1.5707963267948966 rad
       pos: -100.5,29.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7675
     components:
     - rot: 1.5707963267948966 rad
       pos: -96.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7676
     components:
     - rot: 1.5707963267948966 rad
       pos: -97.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: CornSeeds
   entities:
   - uid: 17192
@@ -103053,9 +103203,12 @@ entities:
       type: Transform
     - powerLoad: 0
       type: ApcPowerReceiver
+<<<<<<< HEAD
     - links:
       - 10507
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 6005
     components:
     - pos: -73.5,-12.5
@@ -105709,9 +105862,12 @@ entities:
       pos: -96.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 7667
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: ReinforcedPlasmaWindow
   entities:
   - uid: 970
@@ -108387,9 +108543,12 @@ entities:
     - SecondsUntilStateChange: -143389.22
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 7394
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7386
     components:
     - rot: -1.5707963267948966 rad
@@ -108399,9 +108558,12 @@ entities:
     - SecondsUntilStateChange: -143389.22
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 7394
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 7387
     components:
     - rot: -1.5707963267948966 rad
@@ -108411,33 +108573,45 @@ entities:
     - SecondsUntilStateChange: -143389.22
       state: Opening
       type: Door
+<<<<<<< HEAD
     - links:
       - 7394
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10763
     components:
     - pos: -20.5,-14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 295
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10764
     components:
     - pos: -19.5,-14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 295
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10765
     components:
     - pos: -18.5,-14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 295
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: ShuttersNormalOpen
   entities:
   - uid: 2
@@ -108445,539 +108619,740 @@ entities:
     - pos: -56.5,19.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8358
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 5
     components:
     - pos: -57.5,19.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8358
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 275
     components:
     - pos: -56.5,23.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1175
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 282
     components:
     - pos: -57.5,23.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1175
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 1574
     components:
     - pos: -55.5,19.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 8358
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4449
     components:
     - rot: -1.5707963267948966 rad
       pos: -16.5,-4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4451
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4450
     components:
     - rot: -1.5707963267948966 rad
       pos: -16.5,-2.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4451
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 6078
     components:
     - pos: -46.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6096
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 6079
     components:
     - pos: -45.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6096
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 6080
     components:
     - pos: -44.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6096
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 6081
     components:
     - pos: -43.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6096
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 8357
     components:
     - pos: -55.5,23.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1175
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9372
     components:
     - pos: -105.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9369
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9373
     components:
     - pos: -104.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9369
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9374
     components:
     - pos: -103.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9369
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9376
     components:
     - pos: -106.5,7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9369
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9377
     components:
     - pos: -106.5,8.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9369
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9378
     components:
     - pos: -106.5,9.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9369
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9380
     components:
     - pos: -88.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9381
     components:
     - pos: -87.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9382
     components:
     - pos: -86.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9383
     components:
     - pos: -85.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9384
     components:
     - pos: -83.5,7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9385
     components:
     - pos: -83.5,8.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9386
     components:
     - pos: -83.5,9.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9387
     components:
     - pos: -83.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 6554
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9388
     components:
     - pos: -70.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9389
     components:
     - pos: -70.5,9.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9390
     components:
     - pos: -66.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9391
     components:
     - pos: -65.5,6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9396
     components:
     - pos: -47.5,3.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9401
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9397
     components:
     - pos: -47.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9401
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9398
     components:
     - pos: -47.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9401
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9399
     components:
     - pos: -65.5,14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9400
     components:
     - pos: -65.5,13.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9413
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9416
     components:
     - pos: -42.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9401
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9417
     components:
     - pos: -42.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9401
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9418
     components:
     - pos: -42.5,3.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9401
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9422
     components:
     - pos: -21.5,3.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9420
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9423
     components:
     - pos: -21.5,2.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9420
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9424
     components:
     - pos: -21.5,1.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9420
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9425
     components:
     - pos: -12.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9421
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9426
     components:
     - pos: -11.5,5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9421
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 9427
     components:
     - pos: -14.5,13.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 9421
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10554
     components:
     - pos: -82.5,18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10560
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10555
     components:
     - pos: -81.5,18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10560
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10556
     components:
     - pos: -80.5,18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10560
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10557
     components:
     - pos: -80.5,14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10564
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10558
     components:
     - pos: -82.5,14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10564
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10767
     components:
     - pos: 4.5,-32.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11036
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10770
     components:
     - pos: 1.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11669
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10778
     components:
     - pos: 3.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11669
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10905
     components:
     - pos: -10.5,-15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10934
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10906
     components:
     - pos: -11.5,-15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10934
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10907
     components:
     - pos: -9.5,-15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10934
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10909
     components:
     - pos: -8.5,-15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10934
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 11070
     components:
     - pos: 1.5,-32.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11036
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 11330
     components:
     - pos: 2.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11669
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 12630
     components:
     - pos: 11.5,15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1723
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 12633
     components:
     - pos: 6.5,15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1723
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 12635
     components:
     - pos: 10.5,15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1723
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 12637
     components:
     - pos: 5.5,15.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 1723
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 14789
     components:
     - pos: 3.5,-32.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11036
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 15196
     components:
     - pos: 18.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14809
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 15754
     components:
     - pos: 2.5,-32.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11036
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 16769
     components:
     - pos: 20.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14809
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 17011
     components:
     - pos: 17.5,4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14809
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: ShuttersRadiationOpen
   entities:
   - uid: 20095
@@ -108985,41 +109360,56 @@ entities:
     - pos: -136.5,-5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 20104
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 20096
     components:
     - pos: -136.5,-6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 20104
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 20097
     components:
     - pos: -136.5,-7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 20104
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 20098
     components:
     - pos: -136.5,-8.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 20104
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 20099
     components:
     - pos: -136.5,-9.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 20104
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: ShuttersWindow
   entities:
   - uid: 15207
@@ -109028,43 +109418,58 @@ entities:
       pos: 22.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 14971
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 15208
     components:
     - rot: -1.5707963267948966 rad
       pos: 26.5,27.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 15270
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 15365
     components:
     - rot: 1.5707963267948966 rad
       pos: 12.5,24.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 15476
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 15441
     components:
     - pos: 10.5,33.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11210
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 16504
     components:
     - pos: 9.5,33.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 11210
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: ShuttersWindowOpen
   entities:
   - uid: 4446
@@ -109073,35 +109478,47 @@ entities:
       pos: -16.5,-1.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4451
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4447
     components:
     - rot: -1.5707963267948966 rad
       pos: -16.5,-3.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4451
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 4448
     components:
     - rot: -1.5707963267948966 rad
       pos: -16.5,-5.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 4451
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
   - uid: 10559
     components:
     - pos: -81.5,14.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - links:
       - 10564
       type: DeviceLinkSink
+=======
+>>>>>>> syndie/master
 - proto: SignAi
   entities:
   - uid: 945
@@ -109116,15 +109533,19 @@ entities:
     - pos: -8.5,-42.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         254:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 295
     components:
     - pos: -21.492493,-14.729652
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         10763:
         - Pressed: Toggle
@@ -109133,11 +109554,14 @@ entities:
         10765:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 1175
     components:
     - pos: -60.283222,21.970642
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         282:
         - Pressed: Toggle
@@ -109146,6 +109570,8 @@ entities:
         8357:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 1283
     components:
     - desc: Эта кнопка активирует внешний гермозатвор.
@@ -109155,10 +109581,13 @@ entities:
       pos: -0.696833,-42.499794
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         260:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 1284
     components:
     - desc: Эта кнопка активирует внешний гермозатвор.
@@ -109168,15 +109597,19 @@ entities:
       pos: -4.298002,-42.499794
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         254:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 1723
     components:
     - pos: 7.4637437,19.26007
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         12633:
         - Pressed: Toggle
@@ -109187,43 +109620,55 @@ entities:
         12630:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 2238
     components:
     - pos: 29.5,7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         2200:
         - Pressed: Toggle
         6306:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 2626
     components:
     - rot: 3.141592653589793 rad
       pos: -83.5,-20.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         2295:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 2627
     components:
     - rot: -1.5707963267948966 rad
       pos: -82.5,-23.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         2295:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 4451
     components:
     - rot: 3.141592653589793 rad
       pos: -14.5,-6.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         4448:
         - Pressed: Toggle
@@ -109236,17 +109681,22 @@ entities:
         4446:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 4798
     components:
     - pos: -64.5,-18.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         4794:
         - Pressed: Toggle
         4720:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 4799
     components:
@@ -109255,12 +109705,15 @@ entities:
       type: Transform
     - state: True
       type: SignalSwitch
+<<<<<<< HEAD
     - linkedPorts:
         4795:
         - Pressed: Toggle
         4797:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 5413
     components:
@@ -109271,15 +109724,19 @@ entities:
       pos: -0.5,-42.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         246:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 6096
     components:
     - pos: -43.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         6081:
         - Pressed: Toggle
@@ -109290,11 +109747,14 @@ entities:
         6078:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 6145
     components:
     - pos: -53.797592,-12.679656
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         4856:
         - Pressed: Toggle
@@ -109303,11 +109763,14 @@ entities:
         4735:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 6554
     components:
     - pos: -86.19522,13.859062
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         9387:
         - Pressed: Toggle
@@ -109326,6 +109789,8 @@ entities:
         9380:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 7394
     components:
     - pos: 46.5,9.5
@@ -109333,6 +109798,7 @@ entities:
       type: Transform
     - state: True
       type: SignalSwitch
+<<<<<<< HEAD
     - linkedPorts:
         7387:
         - Pressed: Toggle
@@ -109341,32 +109807,41 @@ entities:
         7386:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 7694
     components:
     - pos: -99.74609,28.376194
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         7670:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 7695
     components:
     - pos: -99.43359,28.376194
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         7679:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 8358
     components:
     - pos: -60.533222,21.970642
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         5:
         - Pressed: Toggle
@@ -109375,12 +109850,15 @@ entities:
         1574:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 8816
     components:
     - rot: -1.5707963267948966 rad
       pos: -120.5,-4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         8825:
         - Pressed: Toggle
@@ -109391,11 +109869,14 @@ entities:
         8821:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 9369
     components:
     - pos: -101.5,11.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         9374:
         - Pressed: Toggle
@@ -109410,11 +109891,14 @@ entities:
         9378:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 9401
     components:
     - pos: -44.991,1.7379127
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         9418:
         - Pressed: Toggle
@@ -109429,6 +109913,8 @@ entities:
         9398:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 9413
     components:
     - name: локдаун
@@ -109436,6 +109922,7 @@ entities:
     - pos: -59.027164,8.84472
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         9391:
         - Pressed: Toggle
@@ -109450,11 +109937,14 @@ entities:
         9399:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 9420
     components:
     - pos: -19.140633,6.0269427
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         9422:
         - Pressed: Toggle
@@ -109463,11 +109953,14 @@ entities:
         9424:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 9421
     components:
     - pos: -16.984383,8.214443
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         9426:
         - Pressed: Toggle
@@ -109476,20 +109969,26 @@ entities:
         9425:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 10507
     components:
     - pos: 6.246395,-3.1596317
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         5119:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 10560
     components:
     - pos: -84.20563,16.929585
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         10554:
         - Pressed: Toggle
@@ -109498,6 +109997,8 @@ entities:
         10556:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 10564
     components:
     - pos: -84.42946,16.934818
@@ -109505,6 +110006,7 @@ entities:
       type: Transform
     - state: True
       type: SignalSwitch
+<<<<<<< HEAD
     - linkedPorts:
         10558:
         - Pressed: Toggle
@@ -109513,12 +110015,15 @@ entities:
         10557:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 10934
     components:
     - pos: -7.57625,-15.701462
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         10909:
         - Pressed: Toggle
@@ -109529,12 +110034,15 @@ entities:
         10906:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 11036
     components:
     - pos: 0.7500007,-28.502241
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         11070:
         - Pressed: Toggle
@@ -109545,23 +110053,29 @@ entities:
         10767:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 14728
     components:
     - rot: 1.5707963267948966 rad
       pos: -12.5,13.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         1657:
         - Pressed: Toggle
         1658:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 14809
     components:
     - pos: 22.036852,7.3139024
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         16769:
         - Pressed: Toggle
@@ -109570,17 +110084,22 @@ entities:
         17011:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 14903
     components:
     - pos: 17.5,12.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         11218:
         - Pressed: Toggle
         14932:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 16804
     components:
     - desc: Эта кнопка активирует внутренний гермозатвор.
@@ -109590,26 +110109,33 @@ entities:
       pos: -4.5,-42.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         5430:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 17017
     components:
     - pos: 25.5,10.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         14961:
         - Pressed: Toggle
         11217:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 20104
     components:
     - pos: -134.5,-4.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         20095:
         - Pressed: Toggle
@@ -109622,6 +110148,8 @@ entities:
         20099:
         - Pressed: Toggle
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
 - proto: SignalSwitch
   entities:
   - uid: 11210
@@ -109630,6 +110158,7 @@ entities:
       pos: 8.5,30.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         15441:
         - On: Open
@@ -109638,12 +110167,15 @@ entities:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 11669
     components:
     - rot: -1.5707963267948966 rad
       pos: 4.5,7.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         10778:
         - On: Open
@@ -109655,6 +110187,8 @@ entities:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 14971
     components:
     - name: переключатель задвижки
@@ -109663,11 +110197,14 @@ entities:
       pos: 22.5,25.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         15207:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 15269
     components:
     - name: переключатель шлюза
@@ -109676,11 +110213,14 @@ entities:
       pos: 22.5,25.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         15205:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 15270
     components:
     - name: переключатель задвижки
@@ -109689,11 +110229,14 @@ entities:
       pos: 26.5,25.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         15208:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 15271
     components:
     - name: переключатель шлюза
@@ -109702,22 +110245,28 @@ entities:
       pos: 26.5,25.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         15206:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
   - uid: 15476
     components:
     - rot: 1.5707963267948966 rad
       pos: 12.5,25.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         15365:
         - On: Open
         - Off: Close
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
 - proto: SignAnomaly
   entities:
   - uid: 8409
@@ -116374,6 +116923,7 @@ entities:
     - pos: -61.5,-17.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         4822:
         - Left: Forward
@@ -116416,6 +116966,8 @@ entities:
         - Right: Reverse
         - Middle: Off
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
   - uid: 5122
     components:
@@ -116432,6 +116984,7 @@ entities:
     - pos: -96.5,26.5
       parent: 89
       type: Transform
+<<<<<<< HEAD
     - linkedPorts:
         7676:
         - Left: Forward
@@ -116486,6 +117039,8 @@ entities:
         - Right: Reverse
         - Middle: Off
       type: DeviceLinkSource
+=======
+>>>>>>> syndie/master
     - type: ItemCooldown
 - proto: UniformPrinter
   entities:

@@ -6,7 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
+<<<<<<< HEAD
       time: 18000 # SS220-RoleTime
+=======
+      time: 36000 #10 hrs # Corvax-RoleTime
+>>>>>>> syndie/master
   startingGear: AtmosphericTechnicianGear
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce

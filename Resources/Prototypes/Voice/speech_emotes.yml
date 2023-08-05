@@ -111,7 +111,7 @@
 - type: emote
   id: Whistle
   category: Vocal
-  chatMessages: [whistle]
+  chatMessages: [свистит]
   chatTriggers:
     - whistle
     - whistle.
@@ -122,11 +122,19 @@
     - whistleblowing
     - whistleblowing.
     - whistleblowing!
+    # Corvax-Localization-Start
+    - свистит
+    - свистит.
+    - свистит!
+    - свистнул
+    - свистнул.
+    - свистнул!
+    # Corvax-Localization-End
 
 - type: emote
   id: Crying
   category: Vocal
-  chatMessages: [crying]
+  chatMessages: [плачет] # Corvax-Localization
   chatTriggers:
     - cry
     - cry.
@@ -137,11 +145,19 @@
     - cries
     - cries.
     - cries!
+    # Corvax-Localization-Start
+    - плачет
+    - плачет.
+    - плачет!
+    - рыдает
+    - рыдает.
+    - рыдает!
+    # Corvax-Localization-End
 
 - type: emote
   id: Squish
   category: Vocal
-  chatMessages: [squishing]
+  chatMessages: [хлюпает] # Corvax-Localization
   chatTriggers:
     - squish
     - squish.
@@ -152,6 +168,11 @@
     - squishes
     - squishes.
     - squishes!
+    # Corvax-Localization-Start
+    - хлюпает
+    - хлюпает.
+    - хлюпает!
+    # Corvax-Localization-End
 
 - type: emote
   id: Chitter
@@ -240,7 +261,7 @@
 - type: emote
   id: Salute
   category: Hands
-  chatMessages: [Salute]
+  chatMessages: [салютует] # Corvax-Localization
   chatTriggers:
     - salute
     - salute.

@@ -1,12 +1,28 @@
-- type: job
+﻿- type: job
   id: Captain
   name: job-name-captain
   description: job-description-captain
   playTimeTracker: JobCaptain
   requirements:
     - !type:DepartmentTimeRequirement
+<<<<<<< HEAD
       department: Command
       time: 54000 # SS220-RoleTime
+=======
+      department: Engineering
+      time: 72000 #20 hrs # Corvax-RoleTime
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 72000 #20 hrs # Corvax-RoleTime
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 72000 #20 hrs # Corvax-RoleTime
+#    - !type:DepartmentTimeRequirement
+#      department: Command
+#      time: 54000 # 15 hours
+    - !type:OverallPlaytimeRequirement
+      time: 504000 #140 hrs # Corvax-RoleTime
+>>>>>>> syndie/master
   weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"

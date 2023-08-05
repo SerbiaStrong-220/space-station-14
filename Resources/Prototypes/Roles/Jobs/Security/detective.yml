@@ -6,7 +6,11 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security
+<<<<<<< HEAD
     time: 30000 # Corvax-RoleTime
+=======
+    time: 72000 #20 hrs # Corvax-RoleTime
+>>>>>>> syndie/master
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
@@ -23,7 +27,11 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitDetective
     back: ClothingBackpackSecurityFilled
+<<<<<<< HEAD
     shoes: ClothingShoesBootsCombatFilled
+=======
+    shoes: ClothingShoesBootsJackSec # Corvax-Resprite
+>>>>>>> syndie/master
     eyes: ClothingEyesGlassesSunglasses
     head: ClothingHeadHatFedoraBrown
     outerClothing: ClothingOuterVestDetective

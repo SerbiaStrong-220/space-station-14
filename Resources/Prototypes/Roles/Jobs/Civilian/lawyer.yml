@@ -7,7 +7,11 @@
     - !type:OverallPlaytimeRequirement
       time: 36000 # 10 hrs
   startingGear: LawyerGear
+<<<<<<< HEAD
   setPreference: false
+=======
+  setPreference: false # Corvax-IAA
+>>>>>>> syndie/master
   icon: "JobIconLawyer"
   supervisors: job-supervisors-hop
   access:
