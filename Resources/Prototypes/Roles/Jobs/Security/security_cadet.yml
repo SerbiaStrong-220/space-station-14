@@ -5,15 +5,7 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-<<<<<<< HEAD
       time: 15000 # SS220-RoleTime
-=======
-      time: 36000 #10 hrs # Corvax-RoleTime
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 72000 #20 hrs # Corvax-RoleTime
-      inverted: true # stop playing intern if you're good at security!
->>>>>>> syndie/master
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
@@ -28,11 +20,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitSecGrey # Corvax-Resprite
     back: ClothingBackpackSecurityFilled
-<<<<<<< HEAD
     shoes: ClothingShoesBootsCombatFilled
-=======
-    shoes: ClothingShoesBootsJackSec # Corvax-Resprite
->>>>>>> syndie/master
     outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
     ears: ClothingHeadsetSecurity

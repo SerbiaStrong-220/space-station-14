@@ -28,6 +28,7 @@ public sealed class TTSSystem : EntitySystem
     private ISawmill _sawmill = default!;
 
     private float _volume = 0.0f;
+    private float _radioVolume = 0.0f;
 
     private readonly HashSet<AudioStream> _currentStreams = new();
     private readonly Dictionary<EntityUid, Queue<AudioStream>> _entityQueues = new();

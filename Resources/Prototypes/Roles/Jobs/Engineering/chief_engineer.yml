@@ -4,23 +4,9 @@
   description: job-description-ce
   playTimeTracker: JobChiefEngineer
   requirements:
-<<<<<<< HEAD:Resources/Prototypes/Corvax/Roles/Jobs/Engineering/chief_engineer.yml
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 54000 # SS220-RoleTime
-=======
-    - !type:RoleTimeRequirement
-      role: JobAtmosphericTechnician
-      time: 36000 #10 hrs # Corvax-RoleTime
-#    - !type:RoleTimeRequirement
-#      role: JobStationEngineer
-#      time: 21600 #6 hrs
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 54000 #15 hrs # Corvax-RoleTime
-#    - !type:OverallPlaytimeRequirement
-#      time: 144000 #40 hrs
->>>>>>> syndie/master:Resources/Prototypes/Roles/Jobs/Engineering/chief_engineer.yml
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"

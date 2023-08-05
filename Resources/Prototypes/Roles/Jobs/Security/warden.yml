@@ -6,11 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-<<<<<<< HEAD
       time: 36000 # Corvax-RoleTime
-=======
-      time: 108000 #50 hrs # Corvax-RoleTime
->>>>>>> syndie/master
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos

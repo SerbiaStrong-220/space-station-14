@@ -6,13 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-<<<<<<< HEAD
       time: 54000 # SS220-RoleTime
-=======
-      time: 54000 #15 hrs # Corvax-RoleTime
-#    - !type:OverallPlaytimeRequirement
-#      time: 144000 #40 hrs
->>>>>>> syndie/master
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"

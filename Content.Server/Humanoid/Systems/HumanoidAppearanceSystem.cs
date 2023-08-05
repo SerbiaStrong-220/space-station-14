@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-using System.Linq;
-using Content.Shared.Decals;
-=======
->>>>>>> off/master
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -38,100 +33,6 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         args.PushText(Loc.GetString("humanoid-appearance-component-examine", ("user", identity), ("age", age), ("species", species)));
     }
 
-<<<<<<< HEAD
-    /// <summary>
-    ///     Loads a humanoid character profile directly onto this humanoid mob.
-    /// </summary>
-    /// <param name="uid">The mob's entity UID.</param>
-    /// <param name="profile">The character profile to load.</param>
-    /// <param name="humanoid">Humanoid component of the entity</param>
-    public void LoadProfile(EntityUid uid, HumanoidCharacterProfile profile, HumanoidAppearanceComponent? humanoid = null)
-    {
-        if (!Resolve(uid, ref humanoid))
-        {
-            return;
-        }
-
-        SetSpecies(uid, profile.Species, false, humanoid);
-        SetSex(uid, profile.Sex, false, humanoid);
-        humanoid.EyeColor = profile.Appearance.EyeColor;
-
-        SetSkinColor(uid, profile.Appearance.SkinColor, false);
-
-        humanoid.MarkingSet.Clear();
-
-        // Add markings that doesn't need coloring. We store them until we add all other markings that doesn't need it.
-        var markingFColored = new Dictionary<Marking, MarkingPrototype>();
-        foreach (var marking in profile.Appearance.Markings)
-        {
-            if (_markingManager.TryGetMarking(marking, out var prototype))
-            {
-                if (!prototype.ForcedColoring)
-                {
-                    AddMarking(uid, marking.MarkingId, marking.MarkingColors, false);
-                }
-                else
-                {
-                    markingFColored.Add(marking, prototype);
-                }
-            }
-        }
-
-        // Hair/facial hair - this may eventually be deprecated.
-        // We need to ensure hair before applying it or coloring can try depend on markings that can be invalid
-        var hairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager)
-            ? profile.Appearance.SkinColor.WithAlpha(hairAlpha) : profile.Appearance.HairColor;
-        var facialHairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _prototypeManager)
-            ? profile.Appearance.SkinColor.WithAlpha(facialHairAlpha) : profile.Appearance.FacialHairColor;
-        
-        if (_markingManager.Markings.TryGetValue(profile.Appearance.HairStyleId, out var hairPrototype) &&
-            _markingManager.CanBeApplied(profile.Species, hairPrototype, _prototypeManager))
-        {
-            AddMarking(uid, profile.Appearance.HairStyleId, hairColor, false);
-        }
-        
-        if (_markingManager.Markings.TryGetValue(profile.Appearance.FacialHairStyleId, out var facialHairPrototype) &&
-            _markingManager.CanBeApplied(profile.Species, facialHairPrototype, _prototypeManager))
-        {
-            AddMarking(uid, profile.Appearance.FacialHairStyleId, facialHairColor, false); 
-        }
-
-        humanoid.MarkingSet.EnsureSpecies(profile.Species, profile.Appearance.SkinColor, _markingManager, _prototypeManager);
-
-        // Finally adding marking with forced colors
-        foreach (var (marking, prototype) in markingFColored)
-        {
-            var markingColors = MarkingColoring.GetMarkingLayerColors(
-                prototype,
-                profile.Appearance.SkinColor,
-                profile.Appearance.EyeColor,
-                humanoid.MarkingSet
-            );
-            AddMarking(uid, marking.MarkingId, markingColors, false);
-        }
-        
-        EnsureDefaultMarkings(uid, humanoid);
-        SetTTSVoice(uid, profile.Voice, humanoid); // Corvax-TTS
-
-        humanoid.Gender = profile.Gender;
-        if (TryComp<GrammarComponent>(uid, out var grammar))
-        {
-            grammar.Gender = profile.Gender;
-        }
-
-        humanoid.Age = profile.Age;
-        // Corvax-SpeakerColor-Start
-        const string paletteId = "Material";
-        var colors = _prototypeManager.Index<ColorPalettePrototype>(paletteId).Colors.Values.ToArray();
-        var colorIdx = Math.Abs(profile.Name.GetHashCode() % colors.Length);
-        humanoid.SpeakerColor = colors[colorIdx];
-        // Corvax-SpeakerColor-End
-
-        Dirty(humanoid);
-    }
-
-=======
->>>>>>> off/master
     // this was done enough times that it only made sense to do it here
 
     /// <summary>

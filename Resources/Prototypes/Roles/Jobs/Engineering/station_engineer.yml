@@ -6,11 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-<<<<<<< HEAD
       time: 18000 # SS220-RoleTime
-=======
-      time: 18000 #5 hrs # Corvax-RoleTime
->>>>>>> syndie/master
   startingGear: StationEngineerGear
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce
