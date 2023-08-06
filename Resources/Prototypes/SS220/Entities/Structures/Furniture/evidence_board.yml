@@ -20,7 +20,7 @@
   - type: Clickable
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Wooden
+    damageModifierSet: Wood
   - type: Destructible
     thresholds:
     - trigger:
