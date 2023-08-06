@@ -13170,7 +13170,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -353718.78
+    - SecondsUntilStateChange: -353771.4
       changeAirtight: False
       state: Opening
       type: Door
@@ -13188,7 +13188,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -353718.78
+    - SecondsUntilStateChange: -353771.4
       changeAirtight: False
       state: Opening
       type: Door
@@ -147284,6 +147284,13 @@ entities:
   - uid: 26818
     components:
     - pos: -9.532342,9.557216
+      parent: 8364
+      type: Transform
+- proto: PDANanotrasenMessengerServer
+  entities:
+  - uid: 10482
+    components:
+    - pos: -15.5,-53.5
       parent: 8364
       type: Transform
 - proto: Pen
