@@ -150,6 +150,7 @@
               path: /Audio/Effects/metalbreak.ogg
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: ItemSlots
     slots:
       charger_slot:
