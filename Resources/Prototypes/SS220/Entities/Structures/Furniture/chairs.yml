@@ -66,6 +66,8 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/sofa.rsi
     noRot: false
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: sofa
@@ -127,6 +129,8 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/dinner_sofa.rsi
     noRot: false
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: sofa
