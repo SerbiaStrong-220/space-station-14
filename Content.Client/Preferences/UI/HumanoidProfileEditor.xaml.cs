@@ -80,6 +80,7 @@ namespace Content.Client.Preferences.UI
         private TabContainer _tabContainer => CTabContainer;
         private BoxContainer _jobList => CJobList;
         private BoxContainer _antagList => CAntagList;
+        private BoxContainer _protoList => CProtosList;
         private BoxContainer _traitsList => CTraitsList;
         private readonly List<JobPrioritySelector> _jobPriorities;
         private OptionButton _preferenceUnavailableButton => CPreferenceUnavailableButton;
@@ -87,6 +88,7 @@ namespace Content.Client.Preferences.UI
         // Mildly hacky, as I don't trust prototype order to stay consistent and don't want the UI to break should a new one get added mid-edit. --moony
         private readonly List<SpeciesPrototype> _speciesList;
         private readonly List<AntagPreferenceSelector> _antagPreferences;
+        private readonly List<ProtogPreferenceSelector> _protoPreferences;
         private readonly List<TraitPreferenceSelector> _traitPreferences;
 
         private Control _previewSpriteControl => CSpriteViewFront;
@@ -424,11 +426,37 @@ namespace Content.Client.Preferences.UI
 
             #endregion Antags
 
+            #region Protogonists
+
+            _tabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-protogonists-tab"));
+
+            _protoPreferences = new List<ProtogPreferenceSelector>();
+
+            foreach (var proto in prototypeManager.EnumeratePrototypes<ProtogonistPrototype>().OrderBy(a => Loc.GetString(a.Name)))
+            {
+                if (!proto.SetPreference)
+                {
+                    continue;
+                }
+
+                var selector = new ProtogPreferenceSelector(proto);
+                _protoList.AddChild(selector);
+                _protoPreferences.Add(selector);
+
+                selector.PreferenceChanged += preference =>
+                {
+                    Profile = Profile?.WithProtoPreference(proto.ID, preference);
+                    IsDirty = true;
+                };
+            }
+
+            #endregion Protogonists
+
             #region Traits
 
             var traits = prototypeManager.EnumeratePrototypes<TraitPrototype>().OrderBy(t => Loc.GetString(t.Name)).ToList();
             _traitPreferences = new List<TraitPreferenceSelector>();
-            _tabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-traits-tab"));
+            _tabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-traits-tab"));
 
             if (traits.Count > 0)
             {
@@ -1380,6 +1408,47 @@ namespace Content.Client.Preferences.UI
                 if (antag.Description != null)
                 {
                     _checkBox.ToolTip = Loc.GetString(antag.Description);
+                    _checkBox.TooltipDelay = 0.2f;
+                }
+
+                AddChild(new BoxContainer
+                {
+                    Orientation = LayoutOrientation.Horizontal,
+                    Children =
+                    {
+                        _checkBox
+                    }
+                });
+            }
+
+            private void OnCheckBoxToggled(BaseButton.ButtonToggledEventArgs args)
+            {
+                PreferenceChanged?.Invoke(Preference);
+            }
+        }
+        private sealed class ProtogPreferenceSelector : Control
+        {
+            public ProtogonistPrototype Proto { get; }
+            private readonly CheckBox _checkBox;
+
+            public bool Preference
+            {
+                get => _checkBox.Pressed;
+                set => _checkBox.Pressed = value;
+            }
+
+            public event Action<bool>? PreferenceChanged;
+
+            public ProtogPreferenceSelector(ProtogonistPrototype proto)
+            {
+                Proto = proto;
+
+                _checkBox = new CheckBox { Text = Loc.GetString(proto.Name) };
+                _checkBox.OnToggled += OnCheckBoxToggled;
+
+                if (proto.Description != null)
+                {
+                    _checkBox.ToolTip = Loc.GetString(proto.Description);
                     _checkBox.TooltipDelay = 0.2f;
                 }
 

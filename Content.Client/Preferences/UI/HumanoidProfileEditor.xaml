@@ -147,6 +147,12 @@
                     </ScrollContainer>
                 </BoxContainer>
                 <BoxContainer Orientation="Vertical" Margin="10">
+                    <!-- Antags -->
+                    <ScrollContainer VerticalExpand="True">
+                        <BoxContainer Name="CProtosList" Orientation="Vertical" />
+                    </ScrollContainer>
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" Margin="10">
                     <!-- Traits -->
                     <ScrollContainer VerticalExpand="True">
                         <BoxContainer Name="CTraitsList" Orientation="Vertical" />

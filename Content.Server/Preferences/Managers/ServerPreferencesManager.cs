@@ -311,6 +311,9 @@ namespace Content.Server.Preferences.Managers
                             .WithAntagPreferences(
                                 hp.AntagPreferences.Where(antag =>
                                     _protos.HasIndex<AntagPrototype>(antag)))
+                            .WithProtoPreferences(
+                                hp.ProtoPreferences.Where(proto =>
+                                    _protos.HasIndex<ProtogonistPrototype>(proto)))
                             .WithSpecies(selectedSpecies);
                         break;
                     }

@@ -180,7 +180,7 @@ public sealed class KontrRazvedchikRuleSystem : GameRuleSystem<KontrRazvedchikRu
         }
         if (prefList.Count == 0)
         {
-            _sawmill.Info("Insufficient preferred traitors, picking at random.");
+            _sawmill.Info("Insufficient preferred kontras, picking at random.");
             prefList = list;
         }
         return prefList;
@@ -253,7 +253,7 @@ public sealed class KontrRazvedchikRuleSystem : GameRuleSystem<KontrRazvedchikRu
 
         // Assign traitor roles
         _mindSystem.AddRole(mind, kontrRole);
-        SendTraitorBriefing(mind, KontraRule.Codewords, code);
+        SendKontrasBriefing(mind, KontraRule.Codewords, code);
         KontraRule.Kontrs.Add(kontrRole);
 
         if (_mindSystem.TryGetSession(mind, out var session))
@@ -285,7 +285,7 @@ public sealed class KontrRazvedchikRuleSystem : GameRuleSystem<KontrRazvedchikRu
     /// <param name="mind">A mind (player)</param>
     /// <param name="codewords">Codewords</param>
     /// <param name="code">Uplink codes</param>
-    private void SendTraitorBriefing(Mind.Mind mind, string[] codewords, Note[] code)
+    private void SendKontrasBriefing(Mind.Mind mind, string[] codewords, Note[] code)
     {
         if (_mindSystem.TryGetSession(mind, out var session))
         {

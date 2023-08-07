@@ -162,6 +162,7 @@ namespace Content.Server.Database
         {
             var jobs = profile.Jobs.ToDictionary(j => j.JobName, j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => a.AntagName);
+            var protos = profile.Protogonists.Select(a => a.ProtoName);
             var traits = profile.Traits.Select(t => t.TraitName);
 
             var sex = Sex.Male;
@@ -225,6 +226,7 @@ namespace Content.Server.Database
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToList(),
+                protos.ToList(),
                 traits.ToList()
             );
         }
