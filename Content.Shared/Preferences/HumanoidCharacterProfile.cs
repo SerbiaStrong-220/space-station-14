@@ -30,7 +30,6 @@ namespace Content.Shared.Preferences
 
         private readonly Dictionary<string, JobPriority> _jobPriorities;
         private readonly List<string> _antagPreferences;
-        private readonly List<string> _protoPreferences;
         private readonly List<string> _traitPreferences;
 
         private HumanoidCharacterProfile(
@@ -47,7 +46,6 @@ namespace Content.Shared.Preferences
             Dictionary<string, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
             List<string> antagPreferences,
-            List<string> protoPreferences,
             List<string> traitPreferences,
             bool teleportAfkToCryoStorage = true)
         {
@@ -64,7 +62,6 @@ namespace Content.Shared.Preferences
             _jobPriorities = jobPriorities;
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
-            _protoPreferences = protoPreferences;
             _traitPreferences = traitPreferences;
             TeleportAfkToCryoStorage = teleportAfkToCryoStorage;
         }
@@ -74,16 +71,15 @@ namespace Content.Shared.Preferences
             HumanoidCharacterProfile other,
             Dictionary<string, JobPriority> jobPriorities,
             List<string> antagPreferences,
-            List<string> protoPreferences,
             List<string> traitPreferences)
             : this(other.Name, other.FlavorText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, protoPreferences, traitPreferences, other.TeleportAfkToCryoStorage)
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, other.TeleportAfkToCryoStorage)
         {
         }
 
         /// <summary>Copy constructor</summary>
         private HumanoidCharacterProfile(HumanoidCharacterProfile other)
-            : this(other, new Dictionary<string, JobPriority>(other.JobPriorities), new List<string>(other.AntagPreferences), new List<string>(other.ProtoPreferences), new List<string>(other.TraitPreferences))
+            : this(other, new Dictionary<string, JobPriority>(other.JobPriorities), new List<string>(other.AntagPreferences), new List<string>(other.TraitPreferences))
         {
         }
 
@@ -101,10 +97,9 @@ namespace Content.Shared.Preferences
             IReadOnlyDictionary<string, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
             IReadOnlyList<string> antagPreferences,
-            IReadOnlyList<string> protoPreferences,
             IReadOnlyList<string> traitPreferences)
             : this(name, flavortext, species, voice, age, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
-                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(protoPreferences), new List<string>(traitPreferences))
+                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences))
         {
         }
 
@@ -129,7 +124,6 @@ namespace Content.Shared.Preferences
                 {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
             },
             PreferenceUnavailableMode.SpawnAsOverflow,
-            new List<string>(),
             new List<string>(),
             new List<string>())
         {
@@ -158,7 +152,6 @@ namespace Content.Shared.Preferences
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
                 },
                 PreferenceUnavailableMode.SpawnAsOverflow,
-                new List<string>(),
                 new List<string>(),
                 new List<string>());
         }
@@ -206,7 +199,7 @@ namespace Content.Shared.Preferences
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
-                }, PreferenceUnavailableMode.StayInLobby, new List<string>(), new List<string>(), new List<string>());
+                }, PreferenceUnavailableMode.StayInLobby, new List<string>(), new List<string>());
         }
 
         public string Name { get; private set; }
@@ -231,7 +224,6 @@ namespace Content.Shared.Preferences
         public BackpackPreference Backpack { get; private set; }
         public IReadOnlyDictionary<string, JobPriority> JobPriorities => _jobPriorities;
         public IReadOnlyList<string> AntagPreferences => _antagPreferences;
-        public IReadOnlyList<string> ProtoPreferences => _protoPreferences;
         public IReadOnlyList<string> TraitPreferences => _traitPreferences;
         public PreferenceUnavailableMode PreferenceUnavailable { get; private set; }
         public bool TeleportAfkToCryoStorage { get; private set; } = true;
@@ -288,7 +280,7 @@ namespace Content.Shared.Preferences
         }
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<string, JobPriority>> jobPriorities)
         {
-            return new(this, new Dictionary<string, JobPriority>(jobPriorities), _antagPreferences, _protoPreferences, _traitPreferences);
+            return new(this, new Dictionary<string, JobPriority>(jobPriorities), _antagPreferences, _traitPreferences);
         }
 
         public HumanoidCharacterProfile WithJobPriority(string jobId, JobPriority priority)
@@ -302,7 +294,7 @@ namespace Content.Shared.Preferences
             {
                 dictionary[jobId] = priority;
             }
-            return new(this, dictionary, _antagPreferences, _protoPreferences, _traitPreferences);
+            return new(this, dictionary, _antagPreferences, _traitPreferences);
         }
 
         public HumanoidCharacterProfile WithPreferenceUnavailable(PreferenceUnavailableMode mode)
@@ -312,7 +304,7 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithAntagPreferences(IEnumerable<string> antagPreferences)
         {
-            return new(this, _jobPriorities, new List<string>(antagPreferences), _protoPreferences, _traitPreferences);
+            return new(this, _jobPriorities, new List<string>(antagPreferences), _traitPreferences);
         }
 
         public HumanoidCharacterProfile WithAntagPreference(string antagId, bool pref)
@@ -332,7 +324,7 @@ namespace Content.Shared.Preferences
                     list.Remove(antagId);
                 }
             }
-            return new(this, _jobPriorities, list, _protoPreferences, _traitPreferences);
+            return new(this, _jobPriorities, list, _traitPreferences);
         }
 
         public HumanoidCharacterProfile WithTraitPreference(string traitId, bool pref)
@@ -354,7 +346,7 @@ namespace Content.Shared.Preferences
                     list.Remove(traitId);
                 }
             }
-            return new(this, _jobPriorities, _antagPreferences, _protoPreferences,list);
+            return new(this, _jobPriorities, _antagPreferences, list);
         }
 
         public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool teleportAfkToCryoStorage)
@@ -380,7 +372,6 @@ namespace Content.Shared.Preferences
             if (Backpack != other.Backpack) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
-            if (!_protoPreferences.SequenceEqual(other._protoPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
@@ -506,10 +497,6 @@ namespace Content.Shared.Preferences
                 .Where(prototypeManager.HasIndex<AntagPrototype>)
                 .ToList();
 
-            var protos = ProtoPreferences
-                .Where(prototypeManager.HasIndex<ProtogonistPrototype>)
-                .ToList();
-
             var traits = TraitPreferences
                          .Where(prototypeManager.HasIndex<TraitPrototype>)
                          .ToList();
@@ -534,9 +521,6 @@ namespace Content.Shared.Preferences
 
             _antagPreferences.Clear();
             _antagPreferences.AddRange(antags);
-
-            _protoPreferences.Clear();
-            _protoPreferences.AddRange(protos);
 
             _traitPreferences.Clear();
             _traitPreferences.AddRange(traits);
@@ -585,7 +569,6 @@ namespace Content.Shared.Preferences
                 PreferenceUnavailable,
                 _jobPriorities,
                 _antagPreferences,
-                _protoPreferences,
                 _traitPreferences
             );
         }

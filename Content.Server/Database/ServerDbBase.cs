@@ -28,7 +28,6 @@ namespace Content.Server.Database
                 .Preference
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
-                .Include(p => p.Profiles).ThenInclude(h => h.Protogonists)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
                 .AsSingleQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId);
@@ -77,7 +76,6 @@ namespace Content.Server.Database
                 .Where(p => p.Preference.UserId == userId.UserId)
                 .Include(p => p.Jobs)
                 .Include(p => p.Antags)
-                .Include(p => p.Protogonists)
                 .Include(p => p.Traits)
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
@@ -164,7 +162,6 @@ namespace Content.Server.Database
         {
             var jobs = profile.Jobs.ToDictionary(j => j.JobName, j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => a.AntagName);
-            var protos = profile.Protogonists.Select(a => a.ProtoName);
             var traits = profile.Traits.Select(t => t.TraitName);
 
             var sex = Sex.Male;
@@ -228,7 +225,6 @@ namespace Content.Server.Database
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToList(),
-                protos.ToList(),
                 traits.ToList()
             );
         }
@@ -273,19 +269,13 @@ namespace Content.Server.Database
             profile.Antags.Clear();
             profile.Antags.AddRange(
                 humanoid.AntagPreferences
-                    .Select(a => new Antag {AntagName = a})
-            );
-
-            profile.Protogonists.Clear();
-            profile.Protogonists.AddRange(
-                humanoid.ProtoPreferences
-                    .Select(a => new Protogonist { ProtoName = a })
+                    .Select(a => new Antag { AntagName = a })
             );
 
             profile.Traits.Clear();
             profile.Traits.AddRange(
                 humanoid.TraitPreferences
-                        .Select(t => new Trait {TraitName = t})
+                        .Select(t => new Trait { TraitName = t })
             );
 
             return profile;

@@ -242,8 +242,8 @@ public sealed class KontrRazvedchikRuleSystem : GameRuleSystem<KontrRazvedchikRu
         var code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
 
         // Prepare antagonist role
-        var antagPrototype = _prototypeManager.Index<AntagPrototype>(KontraRule.KontraPrototypeId);
-        var kontrRole = new KontrrazvedchikRole(mind, antagPrototype);
+        var protoPrototype = _prototypeManager.Index<ProtogonistPrototype>(KontraRule.KontraPrototypeId);
+        var kontrRole = new KontrrazvedchikRole(mind, protoPrototype);
 
         // Give traitors their codewords and uplink code to keep in their character info menu
         kontrRole.Mind.Briefing = string.Format(

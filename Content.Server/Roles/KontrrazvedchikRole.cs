@@ -4,8 +4,8 @@ using Content.Shared.Roles;
 
 namespace Content.Server.Roles;
 
-public sealed class KontrrazvedchikRole : AntagonistRole
+public sealed class KontrrazvedchikRole : ProtogonistRole
 {
-    public KontrrazvedchikRole(Mind.Mind mind, AntagPrototype antagPrototype) : base(mind, antagPrototype) { }
+    public KontrrazvedchikRole(Mind.Mind mind, ProtogonistPrototype protoPrototype) : base(mind, protoPrototype) { }
 }
 
