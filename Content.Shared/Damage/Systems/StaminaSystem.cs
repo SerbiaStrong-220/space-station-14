@@ -201,7 +201,10 @@ public sealed class StaminaSystem : EntitySystem
         {
             var oldDamage = comp.StaminaDamage;
             TakeStaminaDamage(ent, damage / toHit.Count, comp, source:args.User, with:args.Weapon);
-
+            if (comp.StaminaDamage.Equals(oldDamage))
+            {
+                _popup.PopupClient(Loc.GetString("stamina-resist"), ent, args.User);// PopupClient Сообщение о том что человек уже в крите по стамине, нужно его перести в  TakeStaminaDamage 242
+            }
         }
     }
 
@@ -236,10 +239,7 @@ public sealed class StaminaSystem : EntitySystem
 
         // Have we already reached the point of max stamina damage?
         if (component.Critical)
-        {
-            _popup.PopupClient(Loc.GetString("stamina-resist"), ent, args.User);
             return;
-        }
 
         var oldDamage = component.StaminaDamage;
         component.StaminaDamage = MathF.Max(0f, component.StaminaDamage + value);
