@@ -42,4 +42,17 @@
     RandomTraitorAliveObjective: 1
     RandomTraitorProgressObjective: 1
 
+# Kontrrazvedchik
+
+- type: weightedRandom
+  id: KontraObjectiveGroups
+  weights:
+    KontraObjectiveGroupState: 1
+
+- type: weightedRandom
+  id: KontraObjectiveGroupState
+  weights:
+    KontraEscapeShuttleObjective: 1
+  
+
 #Changeling, crew, wizard, when you code it...

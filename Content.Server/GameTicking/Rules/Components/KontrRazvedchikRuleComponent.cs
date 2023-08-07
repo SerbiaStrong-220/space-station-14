@@ -7,15 +7,15 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Server.GameTicking.Rules.Components;
 
-[RegisterComponent, Access(typeof(KontrRazvedhikRuleSystem))]
+[RegisterComponent, Access(typeof(KontrRazvedchikRuleSystem))]
 public sealed class KontrRazvedchikRuleComponent : Component
 {
-    public List<TraitorRole> Kontrs = new();
+    public List<KontrrazvedchikRole> Kontrs = new();
 
-    [DataField("traitorPrototypeId", customTypeSerializer: typeof(PrototypeIdSerializer<AntagPrototype>))]
-    public string TraitorPrototypeId = "Kontra";
+    [DataField("kontraPrototypeId", customTypeSerializer: typeof(PrototypeIdSerializer<AntagPrototype>))]
+    public string KontraPrototypeId = "Kontrrazvedka";
 
-    public int TotalTraitors => Kontrs.Count;
+    public int TotalKontras => Kontrs.Count;
     public string[] Codewords = new string[3];
 
     public enum SelectionState
@@ -33,5 +33,5 @@ public sealed class KontrRazvedchikRuleComponent : Component
     ///     Path to antagonist alert sound.
     /// </summary>
     [DataField("greetSoundNotification")]
-    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
+    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg"); // Заменить на свой стартовый звук контрразведчика
 }

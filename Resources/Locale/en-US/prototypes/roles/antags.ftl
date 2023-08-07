@@ -1,6 +1,7 @@
 ﻿roles-antag-syndicate-agent-name = Syndicate agent
+roles-antag-nanotrazen-agent-name = Nanotrazen agent
 roles-antag-syndicate-agent-objective = Complete your objectives without being caught.
-
+roles-antag-nanostrazen-agent-objective = Complete your objectives without being caught.
 roles-antag-initial-infected-name = Initial Infected
 roles-antag-initial-infected-objective = Once you turn, infect as many other crew members as possible.
 

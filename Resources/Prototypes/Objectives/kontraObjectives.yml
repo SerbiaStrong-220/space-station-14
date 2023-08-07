@@ -1,0 +1,9 @@
+﻿- type: objective
+  id: KontraEscapeShuttleObjective
+  issuer: nanotrasen
+  requirements:
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:EscapeShuttleCondition {}

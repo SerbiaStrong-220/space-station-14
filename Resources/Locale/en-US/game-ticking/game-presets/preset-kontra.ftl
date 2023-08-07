@@ -1,61 +1,61 @@
 ## Kontra
 
-# Shown at the end of a round of Traitor
-traitor-round-end-result = {$traitorCount ->
-    [one] There was one traitor.
-    *[other] There were {$traitorCount} traitors.
+# Shown at the end of a round of kontrrazvedchik
+kontra-round-end-result = {$kontraCount ->
+    [one] There was one kontra.
+    *[other] There were {$kontraCount} kontras.
 }
 
-traitor-round-end-codewords = The codewords were: [color=White]{$codewords}[/color]
+kontra-round-end-codewords = The codewords were: [color=White]{$codewords}[/color]
 
-# Shown at the end of a round of Traitor
-traitor-user-was-a-traitor = [color=gray]{$user}[/color] was a traitor.
-traitor-user-was-a-traitor-named = [color=White]{$name}[/color] ([color=gray]{$user}[/color]) was a traitor.
-traitor-was-a-traitor-named = [color=White]{$name}[/color] was a traitor.
+# Shown at the end of a round of kontra
+kontra-user-was-a-kontra = [color=gray]{$user}[/color] was a kontrrazvedchik.
+kontra-user-was-a-kontra-named = [color=White]{$name}[/color] ([color=gray]{$user}[/color]) was a kontrrazvedchik.
+kontra-was-a-kontra-named = [color=White]{$name}[/color] was a kontrrazvedchik.
 
-traitor-user-was-a-traitor-with-objectives = [color=gray]{$user}[/color] was a traitor who had the following objectives:
-traitor-user-was-a-traitor-with-objectives-named = [color=White]{$name}[/color] ([color=gray]{$user}[/color]) was a traitor who had the following objectives:
-traitor-was-a-traitor-with-objectives-named = [color=White]{$name}[/color] was a traitor who had the following objectives:
+kontra-user-was-a-kontra-with-objectives = [color=gray]{$user}[/color] was a kontra who had the following objectives:
+kontra-user-was-a-kontra-with-objectives-named = [color=White]{$name}[/color] ([color=gray]{$user}[/color]) was a kontra who had the following objectives:
+kontra-was-a-kontra-with-objectives-named = [color=White]{$name}[/color] was a kontra who had the following objectives:
 
-preset-traitor-objective-issuer-syndicate = [color=#87cefa]The Syndicate[/color]
+preset-kontra-objective-issuer-syndicate = [color=#87cefa]The Syndicate[/color]
 
-# Shown at the end of a round of Traitor
-traitor-objective-condition-success = {$condition} | [color={$markupColor}]Success![/color]
+# Shown at the end of a round of kontra
+kontra-objective-condition-success = {$condition} | [color={$markupColor}]Success![/color]
 
-# Shown at the end of a round of Traitor
-traitor-objective-condition-fail = {$condition} | [color={$markupColor}]Failure![/color] ({$progress}%)
+# Shown at the end of a round of kontra
+kontra-objective-condition-fail = {$condition} | [color={$markupColor}]Failure![/color] ({$progress}%)
 
-traitor-title = Traitor
-traitor-description = There are traitors among us...
-traitor-not-enough-ready-players = Not enough players readied up for the game! There were {$readyPlayersCount} players readied up out of {$minimumPlayers} needed. Can't start Traitor.
-traitor-no-one-ready = No players readied up! Can't start Traitor.
+kontra-title = kontra
+kontra-description = There are kontras among us...
+kontra-not-enough-ready-players = Not enough players readied up for the game! There were {$readyPlayersCount} players readied up out of {$minimumPlayers} needed. Can't start kontra.
+kontra-no-one-ready = No players readied up! Can't start kontra.
 
-## TraitorDeathMatch
-traitor-death-match-title = Traitor Deathmatch
-traitor-death-match-description = Everyone's a traitor. Everyone wants each other dead.
-traitor-death-match-station-is-too-unsafe-announcement = The station is too unsafe to continue. You have one minute.
-traitor-death-match-end-round-description-first-line = The PDAs recovered afterwards...
-traitor-death-match-end-round-description-entry = {$originalName}'s PDA, with {$tcBalance} TC
+## kontraDeathMatch
+kontra-death-match-title = kontra Deathmatch
+kontra-death-match-description = Everyone's a kontra. Everyone wants each other dead.
+kontra-death-match-station-is-too-unsafe-announcement = The station is too unsafe to continue. You have one minute.
+kontra-death-match-end-round-description-first-line = The PDAs recovered afterwards...
+kontra-death-match-end-round-description-entry = {$originalName}'s PDA, with {$tcBalance} TC
 
-## TraitorRole
+## kontraRole
 
-# TraitorRole
-traitor-role-greeting =
+# kontraRole
+kontra-role-greeting =
     You are a syndicate agent.
     Your objectives and codewords are listed in the character menu.
     Use the uplink loaded into your PDA to buy the tools you'll need for this mission.
     Death to Nanotrasen!
-traitor-role-codewords =
+kontra-role-codewords =
     The codewords are:
     {$codewords}.
     Codewords can be used in regular conversation to identify yourself discretely to other syndicate agents.
     Listen for them, and keep them secret.
-traitor-role-uplink-code =
+kontra-role-uplink-code =
     Set your ringtone to the notes {$code} to lock or unlock your uplink.
     Remember to lock it after, or the stations crew will easily open it too!
 
 # don't need all the flavour text for character menu
-traitor-role-codewords-short =
+kontra-role-codewords-short =
     The codewords are:
     {$codewords}.
-traitor-role-uplink-code-short = Your uplink code is {$code}.
+kontra-role-uplink-code-short = Your uplink code is {$code}.

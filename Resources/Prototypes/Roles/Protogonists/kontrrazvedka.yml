@@ -1,0 +1,6 @@
+- type: protogonist
+  id: Kontrrazvedka
+  name: roles-antag-nanotrazen-agent-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-nanostrazen-agent-objective

@@ -330,6 +330,7 @@ namespace Content.Server.Database
         public string Backpack { get; set; } = null!;
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
+        public List<Protogonist> Protogonists { get; } = new();
         public List<Trait> Traits { get; } = new();
 
         [Column("pref_unavailable")] public DbPreferenceUnavailableMode PreferenceUnavailable { get; set; }
@@ -365,7 +366,14 @@ namespace Content.Server.Database
 
         public string AntagName { get; set; } = null!;
     }
+    public class Protogonist
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
 
+        public string ProtoName { get; set; } = null!;
+    }
     public class Trait
     {
         public int Id { get; set; }

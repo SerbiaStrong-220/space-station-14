@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRuleComponent>
+public sealed class KontrRazvedchikRuleSystem : GameRuleSystem<KontrRazvedchikRuleComponent>
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -40,7 +40,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
     private ISawmill _sawmill = default!;
 
     private int PlayersPerKontra => _cfg.GetCVar(CCVars.KontraPlayersPerKontra);
-    private int MaxTraitors => _cfg.GetCVar(CCVars.KontraMaxTraitors);
+    private int MaxKontras => _cfg.GetCVar(CCVars.KontraMaxKontras);
 
     public override void Initialize()
     {
@@ -59,7 +59,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         base.ActiveTick(uid, component, gameRule, frameTime);
 
         if (component.SelectionStatus == KontrRazvedchikRuleComponent.SelectionState.ReadyToSelect && _gameTiming.CurTime > component.AnnounceAt)
-            DoTraitorStart(component);
+            DoKontraStart(component);
     }
 
     private void OnStartAttempt(RoundStartAttemptEvent ev)
@@ -75,7 +75,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
             var minPlayers = _cfg.GetCVar(CCVars.KontraMinPlayers);
             if (!ev.Forced && ev.Players.Length < minPlayers)
             {
-                _chatManager.SendAdminAnnouncement(Loc.GetString("traitor-not-enough-ready-players",
+                _chatManager.SendAdminAnnouncement(Loc.GetString("kontra-not-enough-ready-players",
                     ("readyPlayersCount", ev.Players.Length), ("minimumPlayers", minPlayers)));
                 ev.Cancel();
                 continue;
@@ -83,7 +83,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
 
             if (ev.Players.Length == 0)
             {
-                _chatManager.DispatchServerAnnouncement(Loc.GetString("traitor-no-one-ready"));
+                _chatManager.DispatchServerAnnouncement(Loc.GetString("kontra-no-one-ready"));
                 ev.Cancel();
             }
         }
@@ -103,21 +103,21 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         }
     }
 
-    private void DoTraitorStart(KontrRazvedchikRuleComponent component)
+    private void DoKontraStart(KontrRazvedchikRuleComponent component)
     {
         if (!component.StartCandidates.Any())
         {
-            _sawmill.Error("Tried to start Traitor mode without any candidates.");
+            _sawmill.Error("Tried to start Kontra mode without any candidates.");
             return;
         }
 
-        var numTraitors = MathHelper.Clamp(component.StartCandidates.Count / PlayersPerKontra, 1, MaxTraitors);
-        var traitorPool = FindPotentialTraitors(component.StartCandidates, component);
-        var selectedTraitors = PickTraitors(numTraitors, traitorPool);
+        var numKontras = MathHelper.Clamp(component.StartCandidates.Count / PlayersPerKontra, 1, MaxKontras);
+        var kontraPool = FindPotentialKontras(component.StartCandidates, component);
+        var selectedKontras = PickKontras(numKontras, kontraPool);
 
-        foreach (var traitor in selectedTraitors)
+        foreach (var kontra in selectedKontras)
         {
-            MakeKontrrazvedchik(traitor);
+            MakeKontrrazvedchik(kontra);
         }
 
         component.SelectionStatus = KontrRazvedchikRuleComponent.SelectionState.SelectionMade;
@@ -148,7 +148,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         }
     }
 
-    private List<IPlayerSession> FindPotentialTraitors(in Dictionary<IPlayerSession, HumanoidCharacterProfile> candidates, KontrRazvedchikRuleComponent component)
+    private List<IPlayerSession> FindPotentialKontras(in Dictionary<IPlayerSession, HumanoidCharacterProfile> candidates, KontrRazvedchikRuleComponent component)
     {
         var list = new List<IPlayerSession>();
         var pendingQuery = GetEntityQuery<PendingClockInComponent>();
@@ -173,7 +173,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         foreach (var player in list)
         {
             var profile = candidates[player];
-            if (profile.AntagPreferences.Contains(component.TraitorPrototypeId))
+            if (profile.AntagPreferences.Contains(component.KontraPrototypeId))
             {
                 prefList.Add(player);
             }
@@ -186,36 +186,36 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         return prefList;
     }
 
-    private List<IPlayerSession> PickTraitors(int traitorCount, List<IPlayerSession> prefList)
+    private List<IPlayerSession> PickKontras(int kontraCount, List<IPlayerSession> prefList)
     {
-        var results = new List<IPlayerSession>(traitorCount);
+        var results = new List<IPlayerSession>(kontraCount);
         if (prefList.Count == 0)
         {
-            _sawmill.Info("Insufficient ready players to fill up with traitors, stopping the selection.");
+            _sawmill.Info("Insufficient ready players to fill up with kontras, stopping the selection.");
             return results;
         }
 
-        for (var i = 0; i < traitorCount; i++)
+        for (var i = 0; i < kontraCount; i++)
         {
             results.Add(_random.PickAndTake(prefList));
-            _sawmill.Info("Selected a preferred traitor.");
+            _sawmill.Info("Selected a preferred kontra.");
         }
         return results;
     }
 
-    public bool MakeKontrrazvedchik(IPlayerSession traitor)
+    public bool MakeKontrrazvedchik(IPlayerSession kontra)
     {
-        var traitorRule = EntityQuery<KontrRazvedchikRuleComponent>().FirstOrDefault();
-        if (traitorRule == null)
+        var KontraRule = EntityQuery<KontrRazvedchikRuleComponent>().FirstOrDefault();
+        if (KontraRule == null)
         {
             //todo fuck me this shit is awful
             //no i wont fuck you, erp is against rules
-            GameTicker.StartGameRule("Traitor", out var ruleEntity);
-            traitorRule = Comp<KontrRazvedchikRuleComponent>(ruleEntity);
-            MakeCodewords(traitorRule);
+            GameTicker.StartGameRule("Kontrrazvedka", out var ruleEntity);
+            KontraRule = Comp<KontrRazvedchikRuleComponent>(ruleEntity);
+            MakeCodewords(KontraRule);
         }
 
-        var mind = traitor.Data.ContentData()?.Mind;
+        var mind = kontra.Data.ContentData()?.Mind;
         if (mind == null)
         {
             _sawmill.Info("Failed getting mind for picked traitor.");
@@ -242,29 +242,25 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         var code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
 
         // Prepare antagonist role
-        var antagPrototype = _prototypeManager.Index<AntagPrototype>(traitorRule.TraitorPrototypeId);
-        var traitorRole = new TraitorRole(mind, antagPrototype);
+        var antagPrototype = _prototypeManager.Index<AntagPrototype>(KontraRule.KontraPrototypeId);
+        var kontrRole = new KontrrazvedchikRole(mind, antagPrototype);
 
         // Give traitors their codewords and uplink code to keep in their character info menu
-        traitorRole.Mind.Briefing = string.Format(
+        kontrRole.Mind.Briefing = string.Format(
             "{0}\n{1}",
-            Loc.GetString("traitor-role-codewords-short", ("codewords", string.Join(", ", traitorRule.Codewords))),
-            Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+            Loc.GetString("kontra-role-codewords-short", ("codewords", string.Join(", ", KontraRule.Codewords))),
+            Loc.GetString("kontra-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
 
         // Assign traitor roles
-        _mindSystem.AddRole(mind, traitorRole);
-        SendTraitorBriefing(mind, traitorRule.Codewords, code);
-        traitorRule.Traitors.Add(traitorRole);
+        _mindSystem.AddRole(mind, kontrRole);
+        SendTraitorBriefing(mind, KontraRule.Codewords, code);
+        KontraRule.Kontrs.Add(kontrRole);
 
         if (_mindSystem.TryGetSession(mind, out var session))
         {
             // Notificate player about new role assignment
-            _audioSystem.PlayGlobal(traitorRule.GreetSoundNotification, session);
+            _audioSystem.PlayGlobal(KontraRule.GreetSoundNotification, session);
         }
-
-        // Change the faction
-        _npcFaction.RemoveFaction(entity, "NanoTrasen", false);
-        _npcFaction.AddFaction(entity, "Syndicate");
 
         // Give traitors their objectives
         var maxDifficulty = _cfg.GetCVar(CCVars.TraitorMaxDifficulty);
@@ -272,11 +268,11 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         var difficulty = 0f;
         for (var pick = 0; pick < maxPicks && maxDifficulty > difficulty; pick++)
         {
-            var objective = _objectivesManager.GetRandomObjective(traitorRole.Mind, "TraitorObjectiveGroups");
+            var objective = _objectivesManager.GetRandomObjective(kontrRole.Mind, "KontraObjectiveGroups");
 
             if (objective == null)
                 continue;
-            if (_mindSystem.TryAddObjective(traitorRole.Mind, objective))
+            if (_mindSystem.TryAddObjective(kontrRole.Mind, objective))
                 difficulty += objective.Difficulty;
         }
 
@@ -293,25 +289,25 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
     {
         if (_mindSystem.TryGetSession(mind, out var session))
         {
-            _chatManager.DispatchServerMessage(session, Loc.GetString("traitor-role-greeting"));
-            _chatManager.DispatchServerMessage(session, Loc.GetString("traitor-role-codewords", ("codewords", string.Join(", ", codewords))));
-            _chatManager.DispatchServerMessage(session, Loc.GetString("traitor-role-uplink-code", ("code", string.Join("-", code).Replace("sharp", "#"))));
+            _chatManager.DispatchServerMessage(session, Loc.GetString("kontra-role-greeting"));
+            _chatManager.DispatchServerMessage(session, Loc.GetString("kontra-role-codewords", ("codewords", string.Join(", ", codewords))));
+            _chatManager.DispatchServerMessage(session, Loc.GetString("kontra-role-uplink-code", ("code", string.Join("-", code).Replace("sharp", "#"))));
         }
     }
 
     private void HandleLatejoin(PlayerSpawnCompleteEvent ev)
     {
         var query = EntityQueryEnumerator<KontrRazvedchikRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var traitor, out var gameRule))
+        while (query.MoveNext(out var uid, out var kontra, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
 
-            if (traitor.TotalTraitors >= MaxTraitors)
+            if (kontra.TotalKontras >= MaxKontras)
                 continue;
             if (!ev.LateJoin)
                 continue;
-            if (!ev.Profile.AntagPreferences.Contains(traitor.TraitorPrototypeId))
+            if (!ev.Profile.AntagPreferences.Contains(kontra.KontraPrototypeId))
                 continue;
 
             if (ev.JobId == null || !_prototypeManager.TryIndex<JobPrototype>(ev.JobId, out var job))
@@ -321,14 +317,14 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
                 continue;
 
             // Before the announcement is made, late-joiners are considered the same as players who readied.
-            if (traitor.SelectionStatus < KontrRazvedchikRuleComponent.SelectionState.SelectionMade)
+            if (kontra.SelectionStatus < KontrRazvedchikRuleComponent.SelectionState.SelectionMade)
             {
-                traitor.StartCandidates[ev.Player] = ev.Profile;
+                kontra.StartCandidates[ev.Player] = ev.Profile;
                 continue;
             }
 
             // the nth player we adjust our probabilities around
-            var target = PlayersPerKontra * traitor.TotalTraitors + 1;
+            var target = PlayersPerKontra * kontra.TotalKontras + 1;
 
             var chance = 1f / PlayersPerKontra;
 
@@ -357,17 +353,17 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
     private void OnRoundEndText(RoundEndTextAppendEvent ev)
     {
         var query = EntityQueryEnumerator<KontrRazvedchikRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var traitor, out var gameRule))
+        while (query.MoveNext(out var uid, out var kontra, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
 
-            var result = Loc.GetString("traitor-round-end-result", ("traitorCount", traitor.Traitors.Count));
+            var result = Loc.GetString("kontra-round-end-result", ("kontraCount", kontra.Kontrs.Count));
 
-            result += "\n" + Loc.GetString("traitor-round-end-codewords", ("codewords", string.Join(", ", traitor.Codewords))) +
+            result += "\n" + Loc.GetString("kontra-round-end-codewords", ("codewords", string.Join(", ", kontra.Codewords))) +
                       "\n";
 
-            foreach (var t in traitor.Traitors)
+            foreach (var t in kontra.Kontrs)
             {
                 var name = t.Mind.CharacterName;
                 _mindSystem.TryGetSession(t.Mind, out var session);
@@ -379,13 +375,13 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
                     if (username != null)
                     {
                         if (name == null)
-                            result += "\n" + Loc.GetString("traitor-user-was-a-traitor", ("user", username));
+                            result += "\n" + Loc.GetString("kontra-user-was-a-kontra", ("user", username));
                         else
-                            result += "\n" + Loc.GetString("traitor-user-was-a-traitor-named", ("user", username),
+                            result += "\n" + Loc.GetString("kontra-user-was-a-kontra-named", ("user", username),
                                 ("name", name));
                     }
                     else if (name != null)
-                        result += "\n" + Loc.GetString("traitor-was-a-traitor-named", ("name", name));
+                        result += "\n" + Loc.GetString("kontra-was-a-kontra-named", ("name", name));
 
                     continue;
                 }
@@ -393,18 +389,18 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
                 if (username != null)
                 {
                     if (name == null)
-                        result += "\n" + Loc.GetString("traitor-user-was-a-traitor-with-objectives",
+                        result += "\n" + Loc.GetString("kontra-user-was-a-kontra-with-objectives",
                             ("user", username));
                     else
-                        result += "\n" + Loc.GetString("traitor-user-was-a-traitor-with-objectives-named",
+                        result += "\n" + Loc.GetString("kontra-user-was-a-kontra-with-objectives-named",
                             ("user", username), ("name", name));
                 }
                 else if (name != null)
-                    result += "\n" + Loc.GetString("traitor-was-a-traitor-with-objectives-named", ("name", name));
+                    result += "\n" + Loc.GetString("kontra-was-a-kontra-with-objectives-named", ("name", name));
 
                 foreach (var objectiveGroup in objectives.GroupBy(o => o.Prototype.Issuer))
                 {
-                    result += "\n" + Loc.GetString($"preset-traitor-objective-issuer-{objectiveGroup.Key}");
+                    result += "\n" + Loc.GetString($"preset-kontra-objective-issuer-{objectiveGroup.Key}");
 
                     foreach (var objective in objectiveGroup)
                     {
@@ -414,7 +410,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
                             if (progress > 0.99f)
                             {
                                 result += "\n- " + Loc.GetString(
-                                    "traitor-objective-condition-success",
+                                    "kontra-objective-condition-success",
                                     ("condition", condition.Title),
                                     ("markupColor", "green")
                                 );
@@ -422,7 +418,7 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
                             else
                             {
                                 result += "\n- " + Loc.GetString(
-                                    "traitor-objective-condition-fail",
+                                    "kontra-objective-condition-fail",
                                     ("condition", condition.Title),
                                     ("progress", (int) (progress * 100)),
                                     ("markupColor", "red")
@@ -437,24 +433,24 @@ public sealed class KontrRazvedhikRuleSystem : GameRuleSystem<KontrRazvedchikRul
         }
     }
 
-    public List<TraitorRole> GetOtherTraitorsAliveAndConnected(Mind.Mind ourMind)
+    public List<KontrrazvedchikRole> GetOtherKontrasAliveAndConnected(Mind.Mind ourMind)
     {
-        List<TraitorRole> allTraitors = new();
-        foreach (var traitor in EntityQuery<KontrRazvedchikRuleComponent>())
+        List<KontrrazvedchikRole> allKontras = new();
+        foreach (var kontra in EntityQuery<KontrRazvedchikRuleComponent>())
         {
-            foreach (var role in GetOtherTraitorsAliveAndConnected(ourMind, traitor))
+            foreach (var role in GetOtherKontrasAliveAndConnected(ourMind, kontra))
             {
-                if (!allTraitors.Contains(role))
-                    allTraitors.Add(role);
+                if (!allKontras.Contains(role))
+                    allKontras.Add(role);
             }
         }
 
-        return allTraitors;
+        return allKontras;
     }
 
-    private List<TraitorRole> GetOtherTraitorsAliveAndConnected(Mind.Mind ourMind, KontrRazvedchikRuleComponent component)
+    private List<KontrrazvedchikRole> GetOtherKontrasAliveAndConnected(Mind.Mind ourMind, KontrRazvedchikRuleComponent component)
     {
-        return component.Traitors // don't want
+        return component.Kontrs // don't want
             .Where(t => t.Mind.OwnedEntity is not null) // no entity
             .Where(t => t.Mind.Session is not null) // player disconnected
             .Where(t => t.Mind != ourMind) // ourselves

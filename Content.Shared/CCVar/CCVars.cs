@@ -367,37 +367,6 @@ namespace Content.Shared.CCVar
             CVarDef.Create("suspicion.max_time_seconds", 300);
 
         /*
-         * Kontrrazvedchik
-         */
-
-        public static readonly CVarDef<int> KontraMinPlayers =
-            CVarDef.Create("kontra.min_players", 5);
-
-        public static readonly CVarDef<int> KontraMaxTraitors =
-            CVarDef.Create("kontra.max_traitors", 12);
-
-        public static readonly CVarDef<int> KontraPlayersPerKontra =
-            CVarDef.Create("kontra.players_per_traitor", 10);
-
-        public static readonly CVarDef<int> KontraCodewordCount =
-            CVarDef.Create("kontra.codeword_count", 4);
-
-        public static readonly CVarDef<int> KontraStartingBalance =
-            CVarDef.Create("kontra.starting_balance", 20);
-
-        public static readonly CVarDef<int> KontraMaxDifficulty =
-            CVarDef.Create("kontra.max_difficulty", 5);
-
-        public static readonly CVarDef<int> KontraMaxPicks =
-            CVarDef.Create("kontra.max_picks", 20);
-
-        public static readonly CVarDef<float> KontraStartDelay =
-            CVarDef.Create("kontra.start_delay", 4f * 60f);
-
-        public static readonly CVarDef<float> KontraStartDelayVariance =
-            CVarDef.Create("kontra.start_delay_variance", 3f * 60f);
-
-        /*
          * Traitor
          */
 
@@ -427,6 +396,37 @@ namespace Content.Shared.CCVar
 
         public static readonly CVarDef<float> TraitorStartDelayVariance =
             CVarDef.Create("traitor.start_delay_variance", 3f * 60f);
+
+        /*
+         * Kontrrazvedchik
+         */
+
+        public static readonly CVarDef<int> KontraMinPlayers =
+            CVarDef.Create("kontra.min_players", 50);
+
+        public static readonly CVarDef<int> KontraMaxKontras =
+            CVarDef.Create("kontra.max_kontras", 12);
+
+        public static readonly CVarDef<int> KontraPlayersPerKontra =
+            CVarDef.Create("kontra.players_per_kontra", 10);
+
+        public static readonly CVarDef<int> KontraCodewordCount =
+            CVarDef.Create("kontra.codeword_count", 4);
+
+        public static readonly CVarDef<int> KontraStartingBalance =
+            CVarDef.Create("kontra.starting_balance", 20);
+
+        public static readonly CVarDef<int> KontraMaxDifficulty =
+            CVarDef.Create("kontra.max_difficulty", 5);
+
+        public static readonly CVarDef<int> KontraMaxPicks =
+            CVarDef.Create("kontra.max_picks", 20);
+
+        public static readonly CVarDef<float> KontraStartDelay =
+            CVarDef.Create("kontra.start_delay", 4f * 60f);
+
+        public static readonly CVarDef<float> KontraStartDelayVariance =
+            CVarDef.Create("kontra.start_delay_variance", 3f * 60f);
 
         /*
          * TraitorDeathMatch

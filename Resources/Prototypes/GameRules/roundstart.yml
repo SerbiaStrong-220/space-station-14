@@ -52,6 +52,13 @@
   components:
   - type: TraitorRule
 
+- type: entity
+  id: Kontrrazvedka
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: KontrRazvedchikRule
+
 #- type: entity
 #  id: Sandbox
 #  parent: BaseGameRule
