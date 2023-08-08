@@ -262,8 +262,8 @@ namespace Content.Server.Ghost.Roles
 
 
             if (EntityManager.TryGetComponent(uid, out TraitorTargetComponent? tc))
-                EntityManager.RemoveComponent<TraitorTargetComponent>(uid);
-            
+                tc.CanBeTarget = false;
+
 
             ghostRole.Taken = true;
             UnregisterGhostRole(ghostRole);

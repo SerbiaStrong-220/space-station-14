@@ -6,13 +6,12 @@ using Content.Shared.Mobs.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using TerraFX.Interop.Windows;
 
 namespace Content.Server.Objectives.Conditions
 {
     [UsedImplicitly]
     [DataDefinition]
-    public sealed class KillRandomPersonCondition : KillPersonCondition 
+    public sealed class SaveRandomTargetCondition : SavePersonCondition
     {
         // функция выбора задачи убийства со списка всех игорьков
         public override IObjectiveCondition GetAssigned(Mind.Mind mind)
@@ -30,7 +29,7 @@ namespace Content.Server.Objectives.Conditions
                     if (mc.Mind == mind || mc.Mind == null)
                         return false;
 
-                if (tc.IsTarget || !tc.CanBeTarget)
+                if (!tc.IsTarget)
                     return false;
 
                 if (!EntityManager.TryGetComponent(tc.Owner, out MobStateComponent? mobState) && !MobStateSystem.IsAlive(tc.Owner, mobState))
@@ -38,22 +37,16 @@ namespace Content.Server.Objectives.Conditions
 
                 return true;
             }).Select(
-                tc => tc.Owner).ToList();
+                tc => {
+                    EntityManager.TryGetComponent<MindContainerComponent>(tc.Owner, out var mc);
+                    return mc?.Mind;
+                }).ToList();
 
-            // Проверка на кол-во найденных целей на задачу убийства
+            // Проверка на кол-во найденных игроков на задачу спасения
             if (allTargets.Count == 0)
                 return new DieCondition(); // I guess I'll die
 
-            // Выбор случаного UID
-            var randUID = IoCManager.Resolve<IRobustRandom>().Pick(allTargets);
-            EntityManager.TryGetComponent<MindContainerComponent>(randUID, out var mc);
-            if (EntityManager.TryGetComponent<TraitorTargetComponent>(randUID, out var tc))
-            {
-                tc.IsTarget = true;
-                tc.Killer = mind;
-            }
-
-            return new KillRandomPersonCondition { Target = mc?.Mind };
+            return new SaveRandomTargetCondition { Target = IoCManager.Resolve<IRobustRandom>().Pick(allTargets) };
         }
     }
 }

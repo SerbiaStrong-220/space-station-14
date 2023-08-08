@@ -2,8 +2,21 @@
   id: KontraEscapeShuttleObjective
   issuer: nanotrasen
   requirements:
+    - !type:ProtogonistRequirement {}
     - !type:IncompatibleConditionsRequirement
-      conditions:
-        - DieCondition
+        conditions:
+          - DieCondition
   conditions:
     - !type:EscapeShuttleCondition {}
+
+- type: objective
+  id: KontraLifeSaveObjective
+  issuer: nanotrasen
+  requirements:
+    - !type:ProtogonistRequirement {}
+    - !type:IncompatibleConditionsRequirement
+        conditions:
+          - RandomKontraAliveCondition
+  conditions:
+    - !type:SaveRandomTargetCondition {}
+  canBeDuplicate: true
