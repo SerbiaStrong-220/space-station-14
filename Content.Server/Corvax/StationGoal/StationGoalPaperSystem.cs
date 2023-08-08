@@ -35,25 +35,13 @@ namespace Content.Server.Corvax.StationGoal
             var goal = _random.Pick(availableGoals);
             return SendStationGoal(goal);
         }
-        public string Random_planet_name()
+        public static string Random_planet_name()
         {
             var rand = new Random();
-            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string name = "";
+            string name = $"{(char)rand.Next(65, 90)}-";
 
-            for (var i = 0; i < 6; i++)
-            {
-                if (i == 0) // Первый символ всегда буквенный
-                {
-                    name += alphabet[rand.Next(0, alphabet.Length)].ToString().ToUpper() + "-";
-                    continue;
-                }
-
-                name += rand.Next(0, 9).ToString();
-
-                if (i != 5)
-                    name += "-";
-            }
+            for (var i = 1; i <= 5; i++)
+                name += $"{rand.Next(0, 9)}{(i != 5 ? "-" : "")}";
 
             return name;
         }
