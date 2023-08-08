@@ -916,7 +916,7 @@
       damage:
         types:
           Blunt: 0
-          Stamina: 55
+          Stamina: 8
 
 - type: entity
   parent: BaseItem
