@@ -38,21 +38,21 @@ namespace Content.Server.Corvax.StationGoal
         public string Random_planet_name()
         {
             var rand = new Random();
-
+            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string name = "";
 
             for (var i = 0; i < 6; i++)
             {
                 if (i == 0) // Первый символ всегда буквенный
                 {
-                    name += Convert.ToChar(rand.Next(0, 255)).ToString().ToUpper();
+                    name += alphabet[rand.Next(0, alphabet.Length)].ToString().ToUpper() + "-";
                     continue;
                 }
 
-                if (Convert.ToBoolean(rand.Next(0, 1)))
-                    name += Convert.ToChar(rand.Next(0, 255)).ToString().ToUpper();
-                else
-                    name += rand.Next(0, 9).ToString();
+                name += rand.Next(0, 9).ToString();
+
+                if (i != 5)
+                    name += "-";
             }
 
             return name;

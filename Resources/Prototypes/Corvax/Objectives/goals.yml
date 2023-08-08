@@ -1,4 +1,16 @@
 - type: stationGoal
+  id: StationGoalSaveplanet
+  text: station-goal-saveplanet
+
+- type: stationGoal
+  id: StationGoalExpedition
+  text: station-goal-expedition
+
+- type: stationGoal
+  id: StationGoalGuests
+  text: station-goal-guests
+
+- type: stationGoal
   id: StationGoalShuttle
   text: station-goal-shuttle
 
