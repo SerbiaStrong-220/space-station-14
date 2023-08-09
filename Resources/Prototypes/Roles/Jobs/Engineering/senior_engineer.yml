@@ -3,6 +3,7 @@
   name: job-name-senior-engineer
   description: job-description-senior-engineer
   playTimeTracker: JobSeniorEngineer
+  radioBold: true
   requirements:
     - !type:RoleTimeRequirement
       role: JobAtmosphericTechnician
@@ -14,7 +15,7 @@
       department: Engineering
       time: 216000 # 60 hrs
   startingGear: SeniorEngineerGear
-  icon: "SeniorEngineer"
+  icon: "JobIconSeniorEngineer"
   supervisors: job-supervisors-ce
   access:
   - Maintenance

@@ -7,6 +7,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
+using Content.Shared.StatusIcon;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -129,6 +130,18 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
+        if (_prototype.TryIndex<JobPrototype>(newJobProto, out var job)
+            && _prototype.TryIndex<StatusIconPrototype>(job.Icon, out var jobIcon))
+        {
+            _idCard.TryChangeJobIcon(targetId, jobIcon, player: player);
+
+            _idCard.TryChangeJobColor(
+                targetId,
+                PresetIdCardSystem.GetJobColor(_prototype, job),
+                job.RadioIsBold
+            );
+        }
+
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
             _sawmill.Warning($"User {ToPrettyString(uid)} tried to write unknown access tag.");
@@ -145,7 +158,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
         // I hate that C# doesn't have an option for this and don't desire to write this out the hard way.
         // var difference = newAccessList.Difference(oldTags);
-        var difference = (newAccessList.Union(oldTags)).Except(newAccessList.Intersect(oldTags)).ToHashSet();
+        var difference = newAccessList.Union(oldTags).Except(newAccessList.Intersect(oldTags)).ToHashSet();
         // NULL SAFETY: PrivilegedIdIsAuthorized checked this earlier.
         var privilegedPerms = _accessReader.FindAccessTags(privilegedId!.Value).ToHashSet();
         if (!difference.IsSubsetOf(privilegedPerms))
@@ -163,7 +176,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         _adminLogger.Add(LogType.Action, LogImpact.Medium,
             $"{ToPrettyString(player):player} has modified {ToPrettyString(targetId):entity} with the following accesses: [{string.Join(", ", addedTags.Union(removedTags))}] [{string.Join(", ", newAccessList)}]");
 
-        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto);
+        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, job);
     }
 
     /// <summary>
@@ -184,7 +197,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, reader);
     }
 
-    private void UpdateStationRecord(EntityUid uid, EntityUid targetId, string newFullName, string newJobTitle, string newJobProto)
+    private void UpdateStationRecord(EntityUid uid, EntityUid targetId, string newFullName, string newJobTitle, JobPrototype? newJobProto)
     {
         if (_station.GetOwningStation(uid) is not { } station
             || !EntityManager.TryGetComponent<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
@@ -197,10 +210,10 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         record.Name = newFullName;
         record.JobTitle = newJobTitle;
 
-        if (_prototype.TryIndex<JobPrototype>(newJobProto, out var job))
+        if (newJobProto != null)
         {
-            record.JobPrototype = newJobProto;
-            record.JobIcon = job.Icon;
+            record.JobPrototype = newJobProto.ID;
+            record.JobIcon = newJobProto.Icon;
         }
 
         _record.Synchronize(station);

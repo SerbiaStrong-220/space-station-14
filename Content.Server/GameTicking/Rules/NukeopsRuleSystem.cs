@@ -97,7 +97,6 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             if (session != null)
                 nukeops.OperativePlayers.Add(name, session);
             // Corvax-DionaPacifist-Start: Allow dionas nukes to harm
-            RemComp<PacifistComponent>(uid);
             RemComp<PacifiedComponent>(uid);
             // Corvax-DionaPacifist-End
         }
@@ -465,7 +464,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 }
             }
 
-            var numNukies = MathHelper.Clamp(ev.PlayerPool.Count / playersPerOperative, 1, maxOperatives);
+            var numNukies = MathHelper.Clamp(_playerSystem.PlayerCount / playersPerOperative, 1, maxOperatives);
 
             for (var i = 0; i < numNukies; i++)
             {
@@ -580,6 +579,15 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         // todo: this is kinda awful for multi-nukies
         foreach (var nukeops in EntityQuery<NukeopsRuleComponent>())
         {
+            if (nukeOpSpawner.OperativeName == null
+                || nukeOpSpawner.OperativeStartingGear == null
+                || nukeOpSpawner.OperativeRolePrototype == null)
+            {
+                // I have no idea what is going on with nuke ops code, but I'm pretty sure this shouldn't be possible.
+                Log.Error($"Invalid nuke op spawner: {ToPrettyString(spawner)}");
+                continue;
+            }
+
             SetupOperativeEntity(uid, nukeOpSpawner.OperativeName, nukeOpSpawner.OperativeStartingGear, profile, nukeops);
 
             nukeops.OperativeMindPendingData.Add(uid, nukeOpSpawner.OperativeRolePrototype);
@@ -775,7 +783,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 var newMind = _mindSystem.CreateMind(session.UserId, spawnDetails.Name);
                 _mindSystem.SetUserId(newMind, session.UserId);
                 _mindSystem.AddRole(newMind, new NukeopsRole(newMind, nukeOpsAntag));
-                
+
                 _mindSystem.TransferTo(newMind, mob);
             }
             else if (addSpawnPoints)

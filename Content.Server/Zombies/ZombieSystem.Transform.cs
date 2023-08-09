@@ -115,7 +115,6 @@ namespace Content.Server.Zombies
             _combat.SetInCombatMode(target, true, combat);
 
             // Corvax-DionaPacifist-Start: Allow dionas zombies to harm
-            RemComp<PacifistComponent>(target);
             RemComp<PacifiedComponent>(target);
             // Corvax-DionaPacifist-End
 
@@ -239,7 +238,7 @@ namespace Content.Server.Zombies
             else
             {
                 var htn = EnsureComp<HTNComponent>(target);
-                htn.RootTask = "SimpleHostileCompound";
+                htn.RootTask = new HTNCompoundTask() {Task = "SimpleHostileCompound"};
                 htn.Blackboard.SetValue(NPCBlackboard.Owner, target);
                 _npc.WakeNPC(target, htn);
             }

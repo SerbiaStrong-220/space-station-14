@@ -17,10 +17,11 @@
       time: 54000 # SS220-RoleTime
   weight: 10
   startingGear: CMOGear
-  icon: "ChiefMedicalOfficer"
+  icon: "JobIconChiefMedicalOfficer"
   requireAdminNotify: true
   supervisors: job-supervisors-captain
   canBeAntag: false
+  radioBold: true
   access:
   - Medical
   - Command
