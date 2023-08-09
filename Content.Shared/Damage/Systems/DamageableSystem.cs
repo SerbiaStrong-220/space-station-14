@@ -199,9 +199,7 @@ namespace Content.Shared.Damage
             delta.TrimZeros();
 
             if (!delta.Empty)
-            {
                 DamageChanged(uid.Value, damageable, delta, interruptsDoAfters, origin);
-            }
 
             if (damage.DamageDict.TryGetValue("Stamina", out var staminavalue))
                 _stamina.TakeStaminaDamage(uid.Value, staminavalue.Float());
