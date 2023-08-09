@@ -20,7 +20,7 @@ namespace Content.Shared.Damage
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly INetManager _netMan = default!;
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-        [Dependency] private readonly StaminaSystem _staminaSystem = default!;
+        [Dependency] private readonly StaminaSystem _stamina = default!;
 
         public override void Initialize()
         {
@@ -204,7 +204,7 @@ namespace Content.Shared.Damage
             }
 
             if (damage.DamageDict.TryGetValue("Stamina", out var staminavalue))
-                _staminaSystem.TakeStaminaDamage(uid.Value, staminavalue.Float());
+                _stamina.TakeStaminaDamage(uid.Value, staminavalue.Float());
 
             return delta;
         }
