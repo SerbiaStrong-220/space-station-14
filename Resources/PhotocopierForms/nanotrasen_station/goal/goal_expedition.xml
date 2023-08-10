@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Form>
-  <FormId>sup_goal_expedition</FormId>
-  <PrototypeId>PaperNtFormCargo</PrototypeId>
+  <FormId>goal_expedition</FormId>
+  <PrototypeId>PaperNtFormGoal</PrototypeId>
   <EntityName>форма НТ-СНБ-ОТЧ-Э</EntityName>
   <PhotocopierTitle>Отчёт об экспедиции</PhotocopierTitle>
   <Content><![CDATA[Форма НТ-СНБ-ОТЧ-Э

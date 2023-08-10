@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Form>
-  <FormId>cmd_cc_goal_capsule</FormId>
-  <PrototypeId>PaperNtFormCmd</PrototypeId>
+  <FormId>goal_capsule</FormId>
+  <PrototypeId>PaperNtFormGoal</PrototypeId>
   <EntityName>форма НТ-КМД-ОПС-ЭП</EntityName>
   <PhotocopierTitle>Опись отправляемой экстренной помощи</PhotocopierTitle>
   <Content><![CDATA[Форма НТ-КМД-ОПС-ЭП

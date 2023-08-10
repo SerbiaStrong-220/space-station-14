@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Form>
-  <FormId>cmd_cc_goal_guests</FormId>
-  <PrototypeId>PaperNtFormCmd</PrototypeId>
+  <FormId>goal_guests</FormId>
+  <PrototypeId>PaperNtFormGoal</PrototypeId>
   <EntityName>форма НТ-СРВ-ОТЧ-МСО</EntityName>
   <PhotocopierTitle>Отчёт о модификации сервисного отдела</PhotocopierTitle>
   <Content><![CDATA[Форма НТ-СРВ-ОТЧ-МСО
