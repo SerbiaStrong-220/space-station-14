@@ -2,8 +2,9 @@
 # The most hackiest proto of 2023
 
 - type: entity
-  id: SS220OpenSign
-  name: open sign
+  id: SS220OnAirSign
+  name: знак "в эфире"
+  description: Вывеска, присущая любой студии. На обратной стороне есть выключатель.
   placement:
     mode: SnapgridCenter
     snap:
@@ -25,12 +26,13 @@
     state: true
   - type: Sprite
     drawdepth: Objects
-    sprite: SS220/Structures/Wallmounts/open_sign.rsi
+    sprite: SS220/Structures/Wallmounts/onair_sign.rsi
     layers:
-    - state: off
     - state: on
+      map: [ "base" ]
+    - state: glow
       shader: unshaded
-      map: [ "indicator" ]
+      map: [ "glow" ]
     - state: off
       map: [ "power" ]
   - type: DeviceLinkSource
@@ -55,7 +57,10 @@
   - type: GenericVisualizer
     visuals:
       enum.SignalSwitchVisuals.State:
-        indicator:
+        base:
+          True: { state: on }
+          False: { state: off }
+        glow:
           True: { visible: true }
           False: { visible: false }
       enum.PowerDeviceVisuals.Powered:
