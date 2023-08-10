@@ -157,6 +157,100 @@
 
 - type: entity
   parent: BasePlushie
+  id: PlushieAlinaKotova
+  name: plushie Alina Kotova
+  description: A cute toy with some secrets~ Back label - Specially for Alina Kotova
+  components:
+  - type: Sprite
+    state: PlushAlina
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Animals/cat_meow.ogg
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieAlinaKotovaWedding
+  name: plushie wedding Alina Kotova
+  description: A cute toy dressed in a white wedding dress. It looks like a pillow. - Specially for Alina Kotova
+  components:
+  - type: Sprite
+    state: PlushAlinaWedding
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Animals/cat_meow.ogg
+
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieAlinaKotovaSyndi
+  name: plushie Alina Kotova Syndicate
+  description: A cute toy dressed in the black and red shade of the syndicate uniform. - Specially for Alina Kotova
+  components:
+  - type: Sprite
+    state: PlushAlinaSyndi
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Animals/cat_meow.ogg
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieLiaNiko
+  name: plushie Lia Niko
+  description: A cute toy, it's better not to know what she was doing... - Specially for Lia Niko
+  components:
+  - type: Sprite
+    state: PlushLiaNiko
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Animals/cat_meow.ogg
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieMarkValentinov
+  name: plushie Mark Valentinov
+  description: A cute toy, very slimy and sticky to the touch, suspicious. - Specially for Mark Valentinov
+  components:
+  - type: Sprite
+    state: PlushMark
+
+- type: entity
+  parent: BasePlushie
   id: PlushieLamp
   name: lamp plushie
   description: A light emitting friend!
@@ -167,6 +261,7 @@
     radius: 1.5
     energy: 2
     netsync: false
+
 - type: entity
   parent: BasePlushie
   id: PlushieLizard #Weh!
