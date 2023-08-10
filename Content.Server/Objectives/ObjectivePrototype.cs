@@ -1,6 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Objectives.Interfaces;
 using Robust.Shared.Prototypes;
+using TerraFX.Interop.Windows;
 
 namespace Content.Server.Objectives
 {
@@ -46,6 +47,8 @@ namespace Content.Server.Objectives
                 foreach (var objective in mind.AllObjectives)
                 {
                     if (objective.Prototype.ID == ID) return false;
+                    if (mind.CurrentJob != null)
+                        if (mind.CurrentJob.Prototype.impossibleGoals.Any(x => x == objective.Prototype.ID)) return false;
                 }
             }
 

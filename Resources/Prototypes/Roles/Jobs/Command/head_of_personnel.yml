@@ -12,7 +12,6 @@
   icon: "JobIconHeadOfPersonnel"
   requireAdminNotify: true
   supervisors: job-supervisors-captain
-  canBeAntag: false
   radioBold: true
   access:
   - Command
@@ -39,6 +38,8 @@
   - Cargo
   - Atmospherics
   - Medical
+  impossibleGoals:
+  - CorgiMeatStealObjective
 
 - type: startingGear
   id: HoPGear

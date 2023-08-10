@@ -101,5 +101,8 @@ namespace Content.Shared.Roles
 
         [DataField("extendedAccessGroups", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessGroupPrototype>))]
         public IReadOnlyCollection<string> ExtendedAccessGroups { get; } = Array.Empty<string>();
+
+        [DataField("impossibleGoals", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessGroupPrototype>))]
+        public IReadOnlyCollection<string> impossibleGoals { get; } = Array.Empty<string>();
     }
 }
