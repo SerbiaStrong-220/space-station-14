@@ -582,6 +582,9 @@
     radius: 1.5
     energy: 1.6
     color: "#f71713"
+  - type: ConsoleNuke
+
+
 
 - type: entity
   parent: BaseComputer
