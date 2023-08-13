@@ -112,6 +112,7 @@
     color: "#c94242"
   - type: Computer
     board: SyndicateShuttleConsoleCircuitboard
+  - type: ConsoleNuke
 
 - type: entity
   parent: BaseComputerShuttle

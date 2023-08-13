@@ -89,4 +89,5 @@ public enum LogType
     ItemConfigure = 84,
     DeviceLinking = 85,
     Tile = 86,
+    WarReceiveTC,
 }
