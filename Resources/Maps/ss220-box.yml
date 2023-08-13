@@ -61,6 +61,8 @@ entities:
     - type: LoadedMap
     - type: GridTree
     - type: MovedGrids
+    - type: Parallax
+      parallax: DeltaStation
   - uid: 5691
     components:
     - type: MetaData
