@@ -1,24 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using Npgsql.Internal.TypeHandlers.DateTimeHandlers;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
-using Robust.Shared.Log;
 using Robust.Shared.Configuration;
 using Robust.Shared;
-using Serilog.Sinks.Http;
-using System.Net.Http.Headers;
-using Content.Shared.Random;
 using Robust.Shared.Console;
-using static Robust.Shared.Console.ConsoleHost;
-using TerraFX.Interop.Windows;
 using Robust.Server.Console;
 using Robust.Shared.Utility;
+using Content.Server.SS220.BackendApi;
+using Robust.Server.Player;
 
 namespace Content.Server.SS220.BackEndApi
 {
@@ -27,13 +18,18 @@ namespace Content.Server.SS220.BackEndApi
         [Dependency] private readonly IStatusHost _statusHost = default!;
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
-        [Dependency] private readonly IConsoleHost _conHost = default!;
-        [Dependency] private readonly IServerConsoleHost _clientConsoleHost = default!;
+        [Dependency] private readonly IServerConsoleHost _serverConsoleHost = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
 
         private string? _watchdogToken;
         private string? _watchdogKey;
 
         private ISawmill _sawmill = default!;
+
+        private static string ConsoleCommand => "/console-command";
+        private static string PlayersCountCommand => "/players";
+
+        private readonly HashSet<string> _serverCommands = new() { ConsoleCommand, PlayersCountCommand };
 
         public void Initialize()
         {
@@ -45,63 +41,126 @@ namespace Content.Server.SS220.BackEndApi
 
         public void PostInitialize()
         {
-            _sawmill = Logger.GetSawmill("watchdogApi");
+            _sawmill = Logger.GetSawmill("serverController");
             _statusHost.AddHandler(BackRequestHandler);
         }
 
         private async Task<bool> BackRequestHandler(IStatusHandlerContext context)
         {
-            if (context.RequestMethod != HttpMethod.Post || context.Url!.AbsolutePath != "/console-command")
+            if (context.RequestMethod != HttpMethod.Post || !_serverCommands.Contains(context.Url!.AbsolutePath))
             {
                 return false;
             }
 
-            var auth = context.RequestHeaders["WatchdogToken"];
-
-            if (auth != _watchdogToken)
+            try
             {
-                // Holy shit nobody read these logs please.
-                _sawmill.Info(@"Failed auth: ""{0}"" vs ""{1}""", auth, _watchdogToken);
-                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
-                return true;
+                if (context.Url!.AbsolutePath == ConsoleCommand)
+                {
+                    await ConsoleCommandHandler(context);
+                }
+                else if (context.Url!.AbsolutePath == PlayersCountCommand)
+                {
+                    await PlayersCountHandler(context);
+                }
             }
-
-            var command = context.RequestHeaders["command"];
-
-            if (string.IsNullOrWhiteSpace(command))
+            catch (Exception exc)
             {
-                await context.RespondErrorAsync(HttpStatusCode.BadRequest);
+                _sawmill.Error(exc.Message);
 
-                return true;
+                await context.RespondAsync(exc.Message, HttpStatusCode.InternalServerError);
             }
-
-            _taskManager.RunOnMainThread(() => RunConsoleCommand(command));
-
-            await context.RespondAsync("Success", HttpStatusCode.OK);
 
             return true;
         }
 
-        private void RunConsoleCommand(string command)
+        private async Task PlayersCountHandler(IStatusHandlerContext context)
         {
+            if (!await TryAuth(context))
+            {
+                return;
+            }
+
+            await context.RespondAsync(_playerManager.PlayerCount.ToString(), HttpStatusCode.OK);
+        }
+
+        private async Task<bool> TryAuth(IStatusHandlerContext context)
+        {
+            var auth = context.RequestHeaders["WatchdogToken"];
+
+            if (auth != _watchdogToken)
+            {
+                _sawmill.Info(@"Failed auth: ""{0}"" vs ""{1}""", auth, _watchdogToken);
+                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task ConsoleCommandHandler(IStatusHandlerContext context)
+        {
+            if (!await TryAuth(context))
+            {
+                return;
+            }
+
+            if (!context.RequestHeaders.TryGetValue("command", out var val))
+            {
+                await context.RespondAsync("No command in header", HttpStatusCode.BadRequest);
+
+                return;
+            }
+
+            var command = val.ToString();
+
+            if (string.IsNullOrWhiteSpace(command))
+            {
+                await context.RespondAsync("Command can't be empty", HttpStatusCode.BadRequest);
+
+                return;
+            }
+
             var args = new List<string>();
 
             CommandParsing.ParseArguments(command, args);
 
             var commandName = args[0];
 
-            if (_clientConsoleHost.AvailableCommands.TryGetValue(commandName, out var conCmd)) // command registered
+            if (!_serverConsoleHost.AvailableCommands.TryGetValue(commandName, out var conCmd))
             {
-                args.RemoveAt(0);
-                var cmdArgs = args.ToArray();
-                if (!ShellCanExecute(shell, cmdName))
-                {
-                    shell.WriteError($"Unknown command: '{cmdName}'");
-                    return;
-                }
+                await context.RespondAsync($"Unknown command '{commandName}'", HttpStatusCode.BadRequest);
 
-                AnyCommandExecuted?.Invoke(shell, cmdName, command, cmdArgs);
-                conCmd.Execute(shell, command, cmdArgs);
+                return;
+            }
+
+            args.RemoveAt(0);
+            var cmdArgs = args.ToArray();
+
+            _taskManager.RunOnMainThread(async () => await RunConsoleCommand(conCmd, command, cmdArgs, context));
+        }
+
+        private async Task RunConsoleCommand(IConsoleCommand conCmd, string command, string[] cmdArgs, IStatusHandlerContext context)
+        {
+            try
+            {
+                var shell = new ConsoleShell(_serverConsoleHost, session: null, isLocal: true);
+
+                var controllerConsole = new ControllerConsole(shell);
+
+                conCmd.Execute(controllerConsole, command, cmdArgs);
+
+                if (!string.IsNullOrWhiteSpace(controllerConsole.ErrorMsg))
+                {
+                    await context.RespondAsync(controllerConsole.ErrorMsg, HttpStatusCode.InternalServerError);
+                }
+                else
+                {
+                    await context.RespondAsync(controllerConsole.ResultMsg, HttpStatusCode.OK);
+                }
+            }
+            catch (Exception exc)
+            {
+                _sawmill.Error(exc.Message);
             }
         }
 
@@ -109,22 +168,9 @@ namespace Content.Server.SS220.BackEndApi
         {
             var tok = _configurationManager.GetCVar(CVars.WatchdogToken);
             var key = _configurationManager.GetCVar(CVars.WatchdogKey);
-            var baseUrl = _configurationManager.GetCVar(CVars.WatchdogBaseUrl);
+
             _watchdogToken = string.IsNullOrEmpty(tok) ? null : tok;
             _watchdogKey = string.IsNullOrEmpty(key) ? null : key;
-            // _baseUri = string.IsNullOrEmpty(baseUrl) ? null : new Uri(baseUrl);
-
-            //if (_watchdogKey != null && _watchdogToken != null)
-            //{
-            //    var paramStr = $"{_watchdogKey}:{_watchdogToken}";
-            //    var param = Convert.ToBase64String(Encoding.UTF8.GetBytes(paramStr));
-
-            //    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", param);
-            //}
-            //else
-            //{
-            //    _httpClient.DefaultRequestHeaders.Authorization = null;
-            //}
         }
     }
 }
