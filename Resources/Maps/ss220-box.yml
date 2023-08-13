@@ -61,8 +61,8 @@ entities:
     - type: LoadedMap
     - type: GridTree
     - type: MovedGrids
-    - type: Parallax
-      parallax: DeltaStation
+    - parallax: DeltaStation
+      type: Parallax
   - uid: 5691
     components:
     - type: MetaData
@@ -13709,7 +13709,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -406364.3
+    - SecondsUntilStateChange: -406465.94
       changeAirtight: False
       state: Opening
       type: Door
@@ -13727,7 +13727,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -406364.3
+    - SecondsUntilStateChange: -406465.94
       changeAirtight: False
       state: Opening
       type: Door
@@ -17891,11 +17891,6 @@ entities:
   - uid: 8737
     components:
     - pos: 2.5,25.5
-      parent: 8364
-      type: Transform
-  - uid: 12167
-    components:
-    - pos: 15.5,39.5
       parent: 8364
       type: Transform
   - uid: 12168
@@ -147300,6 +147295,11 @@ entities:
   - uid: 5473
     components:
     - pos: 37.5,-51.5
+      parent: 8364
+      type: Transform
+  - uid: 12167
+    components:
+    - pos: 15.5,39.5
       parent: 8364
       type: Transform
   - uid: 18648
