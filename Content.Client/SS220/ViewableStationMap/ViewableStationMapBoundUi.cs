@@ -1,12 +1,40 @@
 using Robust.Client.GameObjects;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
+using Content.Client.SS220.ViewableStationMap.UI;
+using Content.Shared.SS220.ViewableStationMap;
+using JetBrains.Annotations;
 
 namespace Content.Client.SS220.ViewableStationMap;
 
-public sealed class ViewableStationMapBoundUserInterface : BoundUserInterface
+[UsedImplicitly]
+public sealed class StationViewableMapBoundUserInterface : BoundUserInterface
 {
-    public ViewableStationMapBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    [Dependency] private readonly IEntityManager _entMan = default!;
+
+    private ViewableStationMapWindow? _window;
+
+    public StationViewableMapBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 
+    /// <inheritdoc/>
+    protected override void Open()
+    {
+        base.Open();
 
+        _window = new ViewableStationMapWindow();
+        _window.OpenCentered();
+
+        _window.OnClose += Close;
+
+        if (_entMan.TryGetComponent(Owner, out ViewableStationMapComponent? comp))
+            _window.ViewedMap = SpriteSpecifierSerializer.TextureRoot/comp.MapTexture;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (disposing)
+            _window?.Dispose();
+    }
 }

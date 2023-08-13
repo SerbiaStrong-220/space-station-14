@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.ViewableStationMap;
@@ -7,9 +9,10 @@ public sealed class ViewableStationMapComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
     [DataField("mapTexture")]
-    public SpriteSpecifier? MapTexture;
+    public string MapTexture = string.Empty;
 }
 
+[Serializable, NetSerializable, UsedImplicitly]
 public enum ViewableStationMapUiKey
 {
     Key,

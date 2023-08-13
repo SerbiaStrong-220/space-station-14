@@ -9,7 +9,10 @@
   - type: Sprite
     state: metamap64x
     sprite: Structures/Wallmounts/metamap.rsi
+  - type: ActivatableUI
+    key: enum.ViewableStationMapUiKey.Key
+  - type: ActivatableUIRequiresVision
   - type: UserInterface
     interfaces:
     - key: enum.ViewableStationMapUiKey.Key
-      type: ViewableStationMapBoundUserInterface
+      type: StationViewableMapBoundUserInterface
