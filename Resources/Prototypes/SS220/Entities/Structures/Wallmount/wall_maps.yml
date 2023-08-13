@@ -9,6 +9,7 @@
   - type: Sprite
     state: metamap64x
     sprite: Structures/Wallmounts/metamap.rsi
+    snapCardinals: false
   - type: ActivatableUI
     key: enum.ViewableStationMapUiKey.Key
   - type: ActivatableUIRequiresVision
