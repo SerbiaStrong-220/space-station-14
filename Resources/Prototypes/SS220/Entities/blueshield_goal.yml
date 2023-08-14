@@ -7,4 +7,5 @@
       content: blueshield-briefing-text
       stampState: paper_stamp-centcom
       stampedBy:
-        - Центком
+      - stampedName: Центком
+        stampedColor: "#006000"
