@@ -3,21 +3,19 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Managers;
 using Content.Server.Ghost;
-using Content.Server.Mind.Components;
 using Content.Server.Players;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
-using Content.Server.SS220.TraitorComponentTarget;
 using Content.Server.Station.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
-using Content.Shared.GameTicking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Job = Content.Server.Roles.Job;
@@ -28,6 +26,7 @@ namespace Content.Server.GameTicking
     {
         [Dependency] private readonly IAdminManager _adminManager = default!;
 
+        [ValidatePrototypeId<EntityPrototype>]
         private const string ObserverPrototypeName = "MobObserver";
 
         /// <summary>
@@ -196,8 +195,6 @@ namespace Content.Server.GameTicking
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, job, character);
             DebugTools.AssertNotNull(mobMaybe);
             var mob = mobMaybe!.Value;
-
-            EntityManager.AddComponent<TraitorTargetComponent>(mob);
 
             _mind.TransferTo(newMind, mob);
 

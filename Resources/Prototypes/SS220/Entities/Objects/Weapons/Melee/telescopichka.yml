@@ -14,21 +14,21 @@
   - type: SwitchableWeapon
     openSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
     closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
-    bonkSound: !type:SoundCollectionSpecifier
-      collection: BatonHit
     damageOpen:
       types:
         Blunt: 1
+        Stamina: 28
     damageFolded:
       types:
         Blunt: 0
-    staminaDamageFolded: 0
-    staminaDamageOpen: 28
+        Stamina: 0
     sizeOpened: 15
     sizeClosed: 5
   - type: StaminaDamageOnHit
     damage: 0
   - type: MeleeWeapon
+    soundHit: !type:SoundCollectionSpecifier
+      collection: BatonHit
     damage:
       types:
         Blunt: 0

@@ -24,12 +24,6 @@ public sealed class SwitchableWeaponComponent : Component
         }
     };
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("staminaDamageFolded")]
-    public float StaminaDamageFolded = 0;
-
-    [ViewVariables(VVAccess.ReadWrite)][DataField("staminaDamageOpen")]
-    public float StaminaDamageOpen = 28;
-
     [ViewVariables(VVAccess.ReadWrite)][DataField("isOpen")]
     public bool IsOpen = false;
 
@@ -38,9 +32,6 @@ public sealed class SwitchableWeaponComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)][DataField("closeSound")]
     public SoundSpecifier? CloseSound;
-
-    [ViewVariables(VVAccess.ReadWrite)][DataField("bonkSound")]
-    public SoundSpecifier? BonkSound;
 
     [ViewVariables(VVAccess.ReadWrite)][DataField("sizeOpened")]
     public int SizeOpened = 15;

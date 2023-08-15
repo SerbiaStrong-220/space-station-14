@@ -1,0 +1,25 @@
+﻿- type: entity
+  name: Gorilla Largo Spawner
+  id: SpawnMobGorillaLargo
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ai
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGorillaLargo
+
+- type: entity
+  name: Gorilla Anatoly Spawner
+  id: SpawnMobGorillaAnatoly
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ai
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGorillaAnatoly

@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 #Leader
 - type: entity
   parent: LockerCaptain
@@ -37,10 +39,10 @@
       - id: FlashlightSecliteSyndicate
       - id: Stimpack
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnumHighVelocity
+      - id: SpeedLoaderMagnum
         amount: 2
       - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGunHighVelocity
+      - id: MagazinePistolSubMachineGun
         amount: 2
       - id: CombatMedipen
       - id: EnergySwordDouble
@@ -63,7 +65,8 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadLeader
-  name: Iron Squad Leader Spawner
+  name: Спавнер лидера Железного Отряда
+  suffix: Ebent
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -74,11 +77,8 @@
 - type: randomHumanoidSettings
   id: EbentIronSquadLeader
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
-    - type: GhostRole
-      name: job-name-iron-squad-leader
-    - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ EbentIronSquadLeaderGear ]
 
@@ -159,10 +159,10 @@
       - id: FlashlightSecliteSyndicate
       - id: Stimpack
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnumHighVelocity
+      - id: SpeedLoaderMagnum
         amount: 2
       - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGunHighVelocity
+      - id: MagazinePistolSubMachineGun
         amount: 2
       - id: CombatMedipen
       - id: EnergySwordDouble
@@ -188,7 +188,8 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadEngineer
-  name: Iron Squad Enginner Spawner
+  name: Спавнер инженера Железного Отряда
+  suffix: Ebent
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -199,11 +200,8 @@
 - type: randomHumanoidSettings
   id: EbentIronSquadEngineer
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
-    - type: GhostRole
-      name: job-name-iron-squad-engineer
-    - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ EbentIronSquadEngineerGear ]
 
@@ -278,7 +276,7 @@
       - id: Lighter
       - id: FlashlightSecliteSyndicate
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnumHighVelocity
+      - id: SpeedLoaderMagnum
         amount: 2
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
@@ -304,7 +302,8 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCorpsman
-  name: Iron Squad Corpsman Spawner
+  name: Спавнер полевого медика Железного Отряда
+  suffix: Ebent
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -315,7 +314,7 @@
 - type: randomHumanoidSettings
   id: EbentIronSquadCorpsman
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
     - type: GhostRole
       name: job-name-iron-squad-corpsman
@@ -402,10 +401,10 @@
       - id: FlashlightSecliteSyndicate
       - id: Stimpack
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnumHighVelocity
+      - id: SpeedLoaderMagnum
         amount: 2
       - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGunHighVelocity
+      - id: MagazinePistolSubMachineGun
         amount: 2
       - id: CombatMedipen
       - id: EnergySwordDouble
@@ -430,7 +429,8 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCMO
-  name: Iron Squad CMO Spawner
+  name: Спавнер главврача Железного Отряда
+  suffix: Ebent
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -441,11 +441,8 @@
 - type: randomHumanoidSettings
   id: EbentIronSquadCMO
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
-    - type: GhostRole
-      name: job-name-iron-squad-cmo
-    - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ EbentIronSquadCMOGear ]
 
@@ -519,10 +516,10 @@
       - id: Lighter
       - id: FlashlightSecliteSyndicate
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnumHighVelocity
+      - id: SpeedLoaderMagnum
         amount: 2
       - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGunHighVelocity
+      - id: MagazinePistolSubMachineGun
         amount: 2
       - id: EnergySword
 
@@ -544,7 +541,8 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadTrooper
-  name: Iron Squad Trooper Spawner
+  name: Спавнер бойца Железного Отряда
+  suffix: Ebent
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -555,7 +553,7 @@
 - type: randomHumanoidSettings
   id: EbentIronSquadTrooper
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
     - type: GhostRole
       name: job-name-iron-squad-fighter

@@ -227,7 +227,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             Logger.ErrorS("preset", "Mind picked for traitor did not have an attached entity.");
             return false;
         }
-        
+
         // Calculate the amount of currency on the uplink.
         var startingBalance = _cfg.GetCVar(CCVars.TraitorStartingBalance);
         if (mind.CurrentJob != null)

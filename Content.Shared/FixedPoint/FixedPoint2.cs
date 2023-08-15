@@ -248,7 +248,12 @@ namespace Content.Shared.FixedPoint
 
         public void Deserialize(string value)
         {
-            Value = FromFloat(FloatFromString(value));
+            // TODO implement "lossless" serializer.
+            // I.e., dont use floats.
+            if (value == "MaxValue")
+                Value = int.MaxValue;
+            else
+                Value = FromFloat(FloatFromString(value));
         }
 
         public override readonly string ToString() => $"{ShiftDown().ToString(CultureInfo.InvariantCulture)}";
@@ -260,6 +265,11 @@ namespace Content.Shared.FixedPoint
 
         public readonly string Serialize()
         {
+            // TODO implement "lossless" serializer.
+            // I.e., dont use floats.
+            if (Value == int.MaxValue)
+                return "MaxValue";
+
             return ToString();
         }
 
@@ -281,6 +291,10 @@ namespace Content.Shared.FixedPoint
             return 0;
         }
 
+        internal void Deconstruct(out object key, out object value)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class FixedPointEnumerableExt

@@ -1,5 +1,7 @@
-﻿- type: gameMap
-  id: SS220Delta
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: gameMap
+  id: 220Delta
   mapName: 'SS220 Delta Station'
   mapPath: /Maps/220_delta.yml
   minPlayers: 0 # для ротации
@@ -47,7 +49,6 @@
             SalvageSpecialist: [ 3, 3 ]
             Musician: [ 2, 2 ]
             AtmosphericTechnician: [ 2, 3 ]
-            TechnicalAssistant: [ 3, 3 ]
             ResearchAssistant: [ 3, 3 ]
             Reporter: [ 2, 2 ]
             MedicalIntern: [ 3, 3 ]

@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
@@ -19,6 +20,7 @@ namespace Content.Shared.Damage
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly INetManager _netMan = default!;
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+        [Dependency] private readonly StaminaSystem _stamina = default!;
 
         public override void Initialize()
         {
@@ -27,34 +29,6 @@ namespace Content.Shared.Damage
             SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
             SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
             SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
-        }
-
-        /// <summary>
-        /// Retrieves the damage examine values.
-        /// </summary>
-        public FormattedMessage GetDamageExamine(DamageSpecifier damageSpecifier, string? type = null)
-        {
-            var msg = new FormattedMessage();
-
-            if (string.IsNullOrEmpty(type))
-            {
-                msg.AddMarkup(Loc.GetString("damage-examine"));
-            }
-            else
-            {
-                msg.AddMarkup(Loc.GetString("damage-examine-type", ("type", type)));
-            }
-
-            foreach (var damage in damageSpecifier.DamageDict)
-            {
-                if (damage.Value != FixedPoint2.Zero)
-                {
-                    msg.PushNewline();
-                    msg.AddMarkup(Loc.GetString("damage-value", ("type", damage.Key), ("amount", damage.Value)));
-                }
-            }
-
-            return msg;
         }
 
         /// <summary>
@@ -197,9 +171,10 @@ namespace Content.Shared.Damage
             delta.TrimZeros();
 
             if (!delta.Empty)
-            {
                 DamageChanged(uid.Value, damageable, delta, interruptsDoAfters, origin);
-            }
+
+            if (damage.DamageDict.TryGetValue("Stamina", out var staminavalue))
+                _stamina.TakeStaminaDamage(uid.Value, staminavalue.Float());
 
             return delta;
         }

@@ -153,6 +153,7 @@
   - type: Tag
     tags:
     - HidesHair
+    - WhitelistChameleon
 
 #Space Ninja Helmet
 - type: entity
@@ -169,6 +170,7 @@
   - type: Tag
     tags:
     - HidesHair
+    - WhitelistChameleon
   - type: IdentityBlocker
 
 #Templar Helmet
@@ -216,7 +218,7 @@
   parent: ClothingHeadLightBase
   id: ClothingHeadHelmetFire
   name: fire helmet
-  description: An atmos techs best friend. Provides some heat resistance and looks cool.
+  description: An atmos tech's best friend. Provides some heat resistance and looks cool.
   components:
   - type: Sprite
     sprite: Clothing/Head/Helmets/firehelmet.rsi
