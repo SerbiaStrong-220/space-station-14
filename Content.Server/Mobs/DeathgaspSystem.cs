@@ -1,6 +1,7 @@
 ﻿using Content.Server.Chat.Systems;
 using Content.Shared.Mobs;
 using Robust.Shared.Prototypes;
+using Content.Shared.Popups;
 
 namespace Content.Server.Mobs;
 
@@ -29,7 +30,10 @@ public sealed class DeathgaspSystem: EntitySystem
     ///     Causes an entity to perform their deathgasp emote, if they have one.
     /// </summary>
     public bool Deathgasp(EntityUid uid, DeathgaspComponent? component = null)
-    {
+    {    
+        
+        _popupSystem.PopupCoordinates(Loc.GetString("blink-artifact-popup"), uid, uid, PopupType type = PopupType.Small);
+        
         if (!Resolve(uid, ref component, false))
             return false;
 
