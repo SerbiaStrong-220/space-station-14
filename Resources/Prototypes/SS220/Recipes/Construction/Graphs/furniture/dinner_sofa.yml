@@ -5,6 +5,8 @@
   start: start
   graph:
     - node: start
+      actions:
+        - !type:DestroyEntity {}
       edges:
         - to: DinnerSofaLeft
           completed:
@@ -39,7 +41,6 @@
           - !type:SpawnPrototype
                 prototype: MaterialWoodPlank1
                 amount: 3
-          - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
@@ -51,7 +52,6 @@
           - !type:SpawnPrototype
                 prototype: MaterialWoodPlank1
                 amount: 3
-          - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
@@ -63,7 +63,6 @@
           - !type:SpawnPrototype
                 prototype: MaterialWoodPlank1
                 amount: 3
-          - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1

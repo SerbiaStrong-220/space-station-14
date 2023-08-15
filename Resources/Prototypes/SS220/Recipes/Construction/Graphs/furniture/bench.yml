@@ -5,6 +5,8 @@
   start: start
   graph:
     - node: start
+      actions:
+        - !type:DestroyEntity {}
       edges:
         - to: BenchLeft
           completed:
@@ -39,7 +41,6 @@
           - !type:SpawnPrototype
                 prototype: SheetSteel1
                 amount: 1
-          - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
@@ -51,7 +52,6 @@
           - !type:SpawnPrototype
                 prototype: SheetSteel1
                 amount: 1
-          - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
@@ -63,7 +63,6 @@
           - !type:SpawnPrototype
                 prototype: SheetSteel1
                 amount: 1
-          - !type:DeleteEntity {}
           steps:
             - tool: Anchoring
               doAfter: 1
