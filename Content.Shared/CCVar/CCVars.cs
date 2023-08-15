@@ -1815,5 +1815,11 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<int> OperativeTC =
             CVarDef.Create("nuke.operative_tc", 240, CVar.SERVERONLY);
+
+        public static readonly CVarDef<int> OperativeDefaultTime =
+            CVarDef.Create("nuke.operative_defaulttime", 5, CVar.SERVERONLY);
+
+        public static readonly CVarDef<int> OperativeAdditionalTime =
+            CVarDef.Create("nuke.operative_additionaltime", 20, CVar.SERVERONLY);
     }
 }

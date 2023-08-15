@@ -35,6 +35,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Stacks;
 using Content.Server.Stack;
 using Content.Server.GameTicking;
+using Content.Server.Shuttles.Events;
 
 namespace Content.Server.ConsoleNuke
 {
@@ -47,23 +48,32 @@ namespace Content.Server.ConsoleNuke
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
         private bool _isWarStarted = false;
-        public int WhenAbleToMove { get; private set; } = 5;
+        public int WhenAbleToMove { get; private set; }
 
         public override void Initialize()
         {
             SubscribeLocalEvent<ConsoleNukeComponent, CommunicationConsoleUsed>(OnAnnounceMessage);
+            SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnConsoleFTLAttempt);
+
+            WhenAbleToMove = _cfg.GetCVar<int>("nuke.operative_defaulttime");
+        }
+
+        private void OnConsoleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
+        {
+            if (_entityManager.TryGetComponent<ConsoleNukeComponent>(ev.Shuttle, out var comp))
+            {
+                var curTime = GetTime();
+                if (WhenAbleToMove > curTime)
+                {
+                    ev.Reason = Loc.GetString("nuke-console-shuttle", ("time", WhenAbleToMove - curTime));
+                    ev.Cancelled = true;
+                }
+            }
         }
 
         private int GetTime()
         {
             return (int) _gameTicker.RoundDuration().TotalMinutes;
-        }
-
-        public bool CanNukeIFF(EntityUid console)
-        {
-            if (_entityManager.HasComponent<ConsoleNukeComponent>(console))
-                return GetTime() >= WhenAbleToMove;
-            return true;
         }
 
         private void OnAnnounceMessage(EntityUid uid, ConsoleNukeComponent comp,
@@ -72,7 +82,7 @@ namespace Content.Server.ConsoleNuke
             if (_isWarStarted)
                 return;
 
-            if (GetTime() <= 5)
+            if (GetTime() <= _cfg.GetCVar<int>("nuke.operative_defaulttime"))
             {
                 if (message.Session.AttachedEntity is { Valid: true } player)
                 {
@@ -100,7 +110,7 @@ namespace Content.Server.ConsoleNuke
                     _entityManager.DeleteEntity(tc); // We should delete entity if something gone wrong
                 }
             end:
-                WhenAbleToMove += 20;
+                WhenAbleToMove += _cfg.GetCVar<int>("nuke.operative_additionaltime"); ;
                 _isWarStarted = true;
             }
         }
