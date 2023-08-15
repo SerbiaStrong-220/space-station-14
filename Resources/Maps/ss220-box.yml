@@ -148234,8 +148234,7 @@ entities:
   entities:
   - uid: 8963
     components:
-    - rot: 3.141592653589793 rad
-      pos: 12.5,19.5
+    - pos: 12.5,19.5
       parent: 8364
       type: Transform
   - uid: 19052
