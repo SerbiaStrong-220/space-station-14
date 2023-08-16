@@ -89,5 +89,5 @@ public enum LogType
     ItemConfigure = 84,
     DeviceLinking = 85,
     Tile = 86,
-    WarReceiveTC,
+    WarReceiveTC = 87, // SS220 Nukie-Declare-War
 }

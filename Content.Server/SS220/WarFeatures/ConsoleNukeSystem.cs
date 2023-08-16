@@ -1,41 +1,15 @@
-using System.Globalization;
-using System.Linq;
-using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
-using Content.Server.AlertLevel;
-using Content.Server.Chat;
-using Content.Server.Chat.Systems;
-using Content.Server.Interaction;
-using Content.Server.Popups;
-using Content.Server.RoundEnd;
-using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Systems;
-using Content.Shared.Access.Components;
-using Content.Shared.Access.Systems;
-using Content.Shared.CCVar;
-using Content.Shared.Communications;
 using Content.Shared.Database;
-using Content.Shared.Emag.Components;
-using Content.Shared.Examine;
-using Content.Shared.Popups;
-using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
-using Robust.Shared.Player;
-using Content.Shared.GameTicking;
-using Content.Server.Communications;
-using Content.Server.ConsoleNuke;
-using Content.Server.Store.Components;
-using Content.Server.Store.Systems;
-using Content.Server.PDA.Ringer;
-using Content.Server.Traitor.Uplink;
-using Content.Shared.Hands.Components;
 using Content.Server.Hands.Systems;
-using Content.Server.NukeOperative;
-using Content.Shared.FixedPoint;
 using Content.Shared.Stacks;
 using Content.Server.Stack;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Events;
+using Content.Server.GameTicking.Rules.Components;
+using Content.Shared.ConsoleNuke;
+using Content.Shared.NukeOperative;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.ConsoleNuke
 {
@@ -47,25 +21,24 @@ namespace Content.Server.ConsoleNuke
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
-        private bool _isWarStarted = false;
-        public int WhenAbleToMove { get; private set; }
-
         public override void Initialize()
         {
             SubscribeLocalEvent<ConsoleNukeComponent, CommunicationConsoleUsed>(OnAnnounceMessage);
             SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnConsoleFTLAttempt);
-
-            WhenAbleToMove = _cfg.GetCVar<int>("nuke.operative_defaulttime");
         }
 
         private void OnConsoleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
         {
-            if (_entityManager.TryGetComponent<ConsoleNukeComponent>(ev.Shuttle, out var comp))
+            var nukeRule = GetNukeOpsRuleFromGrid(ev.Shuttle);
+            if (nukeRule is null)
+                return; //Well whatever its probably ebent then, allow.
+
+            if (_entityManager.TryGetComponent<ConsoleNukeComponent>(ev.Shuttle, out _))
             {
                 var curTime = GetTime();
-                if (WhenAbleToMove > curTime)
+                if (nukeRule.WhenAbleToMove > curTime)
                 {
-                    ev.Reason = Loc.GetString("nuke-console-shuttle", ("time", WhenAbleToMove - curTime));
+                    ev.Reason = Loc.GetString("nuke-console-shuttle", ("time", nukeRule.WhenAbleToMove - curTime));
                     ev.Cancelled = true;
                 }
             }
@@ -76,42 +49,88 @@ namespace Content.Server.ConsoleNuke
             return (int) _gameTicker.RoundDuration().TotalMinutes;
         }
 
+        private bool TryGetParentGrid(EntityUid entity, [NotNullWhen(true)] out EntityUid? gridUid)
+        {
+            if (!TryComp<TransformComponent>(entity, out var xform))
+            {
+                gridUid = null;
+                return false;
+            }
+
+            gridUid = xform.ParentUid;
+            return true;
+        }
+
+        private NukeopsRuleComponent? GetNukeOpsRuleFromGrid(EntityUid gridId)
+        {
+            var query = EntityQueryEnumerator<NukeopsRuleComponent, GameRuleComponent>();
+            while (query.MoveNext(out var ruleEnt, out var nukeops, out var gameRule))
+            {
+                if (gridId == nukeops.NukieShuttle || gridId == nukeops.NukieOutpost)
+                {
+                    return nukeops;
+                }
+            }
+
+            return null;
+        }
+
+        private NukeopsRuleComponent? GetAssociatedNukeopsRuleComponent(EntityUid consoleUid)
+        {
+            if (!TryGetParentGrid(consoleUid, out var grid))
+                return null;
+
+            return GetNukeOpsRuleFromGrid(grid.Value);
+        }
+
+        private bool TryGiveTcTo(EntityUid player)
+        {
+            var tc = _entityManager.CreateEntityUninitialized("Telecrystal");
+
+            if (_entityManager.TryGetComponent<StackComponent>(tc, out var component))
+            {
+                var stackSystem = _entitySystemManager.GetEntitySystem<StackSystem>();
+
+                var countTC = _entityManager.HasComponent<LoneNukeOperativeComponent>(player)
+                    ? _cfg.GetCVar<int>("nuke.loneoperative_tc")
+                    : _cfg.GetCVar<int>("nuke.operative_tc");
+
+                stackSystem.SetCount(tc, countTC, component);
+
+                var handSystem = _entitySystemManager.GetEntitySystem<HandsSystem>();
+
+                _entityManager.InitializeAndStartEntity(tc);
+                handSystem.TryForcePickupAnyHand(player, tc);
+
+                _adminLogger.Add(LogType.WarReceiveTC, LogImpact.Medium, $"{ToPrettyString(player):player} has received {countTC} TC for declaration of war.");
+
+                return true;
+            }
+
+            _entityManager.DeleteEntity(tc); // We should delete entity if something gone wrong
+            return false;
+        }
+
         private void OnAnnounceMessage(EntityUid uid, ConsoleNukeComponent comp,
             CommunicationConsoleUsed message)
         {
-            if (_isWarStarted)
+            var nukeRule = GetAssociatedNukeopsRuleComponent(uid);
+            if (nukeRule is null)
                 return;
 
-            if (GetTime() <= _cfg.GetCVar<int>("nuke.operative_defaulttime"))
+            if (nukeRule.IsWarDeclated)
+                return;
+
+            if (GetTime() <= nukeRule.WhenAbleToMove)
             {
                 if (message.Session.AttachedEntity is { Valid: true } player)
                 {
-                    var tc = _entityManager.CreateEntityUninitialized("Telecrystal");
-
-                    if (_entityManager.TryGetComponent<StackComponent>(tc, out var component))
-                    {
-                        var stackSystem = _entitySystemManager.GetEntitySystem<StackSystem>();
-
-                        int countTC = _entityManager.HasComponent<LoneNukeOperativeComponent>(player)
-                            ? _cfg.GetCVar<int>("nuke.loneoperative_tc")
-                            : _cfg.GetCVar<int>("nuke.operative_tc");
-
-                        stackSystem.SetCount(component.Owner, countTC);
-
-                        var handSystem = _entitySystemManager.GetEntitySystem<HandsSystem>();
-
-                        _entityManager.InitializeAndStartEntity(tc);
-                        handSystem.TryForcePickupAnyHand(player, tc);
-
-                        _adminLogger.Add(LogType.WarReceiveTC, LogImpact.Medium, $"{ToPrettyString(player):player} has received {countTC} TC for declaration of war.");
-
-                        goto end;
-                    }
-                    _entityManager.DeleteEntity(tc); // We should delete entity if something gone wrong
+                    if (!TryGiveTcTo(player))
+                        return; //no scamming
                 }
-            end:
-                WhenAbleToMove += _cfg.GetCVar<int>("nuke.operative_additionaltime"); ;
-                _isWarStarted = true;
+
+                nukeRule.WhenAbleToMove += _cfg.GetCVar<int>("nuke.operative_additionaltime");
+                nukeRule.IsWarDeclated = true;
             }
         }
     }

@@ -1811,7 +1811,7 @@ namespace Content.Shared.CCVar
             CVarDef.Create("nuke.loneoperative_tc", 100, CVar.SERVERONLY);
 
         /// <summary>
-        /// TC for nuke operatives
+        /// SS220 TC for nuke operatives on war declaration
         /// </summary>
         public static readonly CVarDef<int> OperativeTC =
             CVarDef.Create("nuke.operative_tc", 240, CVar.SERVERONLY);
