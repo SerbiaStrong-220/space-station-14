@@ -294,7 +294,7 @@ entities:
           tiles: GgAAABoAAAAaAAAAGgAAAGgAAABoAAAAaAAAAGcAAABnAAAAZwAAAGcAAABnAAAAZwAAAGcAAABnAAAAZwAAABoAAABoAAAAGgAAABoAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAaAAAAaAAAABoAAAAaAAAAaAAAAGgAAABoAAAAGgAAABoAAAIaAAADGgAAAxoAAAEaAAAAGgAAABoAAAEaAAAAGgAAAGgAAAAaAAAAGgAAAGgAAABoAAAAaAAAABoAAAIaAAACGgAAAhoAAAAaAAACGgAAAhoAAAAaAAAAGgAAAhoAAABoAAAAGgAAABoAAABoAAAAGgAAAWgAAAAaAAADaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAaAAAAaAAAABoAAAAaAAAAaAAAABoAAAFoAAAAGgAAATkAAABoAAAAGgAAAxoAAAMaAAABaAAAAGgAAABoAAAAGgAAAGgAAAAaAAAAGgAAAGgAAAAaAAADaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAABoAAAAaAAAAGgAAABoAAABoAAAAGgAAA2gAAABoAAAAGgAAA2gAAAAaAAACGgAAARoAAANoAAAAGgAAAhoAAANoAAAAOQAAAGgAAABoAAAAaAAAABoAAAFoAAAAaAAAABoAAAFoAAAAGgAAARoAAAAaAAADaAAAABoAAAEaAAABSwAAAEsAAABLAAAASwAAA2gAAABoAAAAOQAAAGgAAABoAAAAaAAAABoAAAAaAAAAGgAAAGgAAAAaAAAAGgAAA0sAAABLAAAASwAAAUsAAABLAAABSwAAAEsAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABLAAABSwAAAksAAAFLAAABSwAAAksAAANLAAAASwAAA2gAAABoAAAAaAAAAGgAAABoAAAAaAAAADkAAABoAAAASwAAA2gAAABoAAAAaAAAAGgAAABoAAAASwAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAQAAAAEAAAABAAAAAaAAAAEsAAAJLAAABSwAAAksAAAFLAAAASwAAAEsAAANLAAAASwAAA0sAAANoAAAAaAAAAEAAAABAAAAAQAAAAGgAAABoAAAAaAAAAGgAAABLAAACaAAAAGgAAABoAAAAaAAAAGgAAAAaAAAAaAAAAGgAAABAAAAAQAAAAEAAAABoAAAASwAAA0sAAABLAAAASwAAAEsAAABoAAAANwAAADcAAAA3AAAAGgAAAA==
         -2,-5:
           ind: -2,-5
-          tiles: AAAAAAAAAABnAAAAZwAAAGcAAAAAAAAAZwAAAGcAAABoAAAAaAAAAFcAAABXAAAAVwAAAGgAAABoAAAAGgAAAAAAAABnAAAAZwAAAGcAAABnAAAAAAAAAGcAAABnAAAAaAAAACMAAAAjAAAAIwAAACMAAAAjAAAAaAAAABoAAABnAAAAZwAAAGcAAABnAAAAZwAAAAAAAABnAAAAZwAAAGgAAABoAAAAaAAAAFcAAABoAAAAaAAAAGgAAAAaAAAAZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZwAAAGcAAABoAAAASwAAAEsAAABLAAAASwAAAEsAAABoAAAAGgAAAGgAAABoAAAAaAAAAGcAAAAAAAAAAAAAAGcAAABnAAAAaAAAAEsAAABLAAAAaAAAAEsAAABLAAAAaAAAABoAAAAPAAAADwAAAmgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAASwAAAGgAAABLAAAASwAAAGgAAAAaAAAAaAAAAA8AAABoAAAAZwAAAGcAAABnAAAAZwAAAGcAAABnAAAAaAAAAEsAAABLAAAASwAAAEsAAABoAAAAGgAAAGgAAAAPAAACaAAAAGcAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAASwAAAGgAAABoAAAAaAAAABoAAABoAAAAaAAAAGgAAABnAAAAaAAAAEsAAANLAAAASwAAAksAAABLAAABaAAAAEsAAABLAAAASwAAAGgAAABoAAAAaAAAAGgAAAAAAAAAZwAAAGgAAABLAAAASwAAAksAAAJLAAADSwAAAmgAAABLAAAASwAAAEsAAABoAAAASwAAAGgAAABoAAAAZwAAAGcAAABoAAAASwAAA0sAAAFLAAAASwAAA0sAAAIaAAACSwAAAEsAAABLAAADSwAAAEsAAAJoAAAAaAAAAAAAAABnAAAAaAAAABoAAAMaAAADGgAAARoAAAMaAAAAaAAAAEsAAABLAAAASwAAAGgAAABLAAACaAAAAGgAAAAAAAAAZwAAAGgAAAAaAAABGgAAABoAAAEaAAADGgAAAWgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAGgAAAhoAAAEaAAACGgAAAxoAAAJoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAABoAAAIaAAAAGgAAAhoAAAMaAAAAaAAAAGgAAABoAAAAVwAAAGgAAABXAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAaAAABGgAAARoAAAEaAAADGgAAA2gAAAAAAAAAaAAAAFcAAABoAAAAaAAAAA==
+          tiles: AAAAAAAAAABnAAAAZwAAAGcAAAAAAAAAZwAAAGcAAABoAAAAaAAAAFcAAABXAAAAVwAAAGgAAABoAAAAGgAAAAAAAABnAAAAZwAAAGcAAABnAAAAAAAAAGcAAABnAAAAaAAAAGgAAABoAAAAIwAAAGgAAABoAAAAaAAAABoAAABnAAAAZwAAAGcAAABnAAAAZwAAAAAAAABnAAAAZwAAAGgAAABoAAAAaAAAAFcAAABoAAAAaAAAAGgAAAAaAAAAZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZwAAAGcAAABoAAAASwAAAEsAAABLAAAASwAAAEsAAABoAAAAGgAAAGgAAABoAAAAaAAAAGcAAAAAAAAAAAAAAGcAAABnAAAAaAAAAEsAAABLAAAAaAAAAEsAAABLAAAAaAAAABoAAAAPAAAADwAAAmgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAASwAAAGgAAABLAAAASwAAAGgAAAAaAAAAaAAAAA8AAABoAAAAZwAAAGcAAABnAAAAZwAAAGcAAABnAAAAaAAAAEsAAABLAAAASwAAAEsAAABoAAAAGgAAAGgAAAAPAAACaAAAAGcAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAASwAAAGgAAABoAAAAaAAAABoAAABoAAAAaAAAAGgAAABnAAAAaAAAAEsAAANLAAAASwAAAksAAABLAAABaAAAAEsAAABLAAAASwAAAGgAAABoAAAAaAAAAGgAAAAAAAAAZwAAAGgAAABLAAAASwAAAksAAAJLAAADSwAAAmgAAABLAAAASwAAAEsAAABoAAAASwAAAGgAAABoAAAAZwAAAGcAAABoAAAASwAAA0sAAAFLAAAASwAAA0sAAAIaAAACSwAAAEsAAABLAAADSwAAAEsAAAJoAAAAaAAAAAAAAABnAAAAaAAAABoAAAMaAAADGgAAARoAAAMaAAAAaAAAAEsAAABLAAAASwAAAGgAAABLAAACaAAAAGgAAAAAAAAAZwAAAGgAAAAaAAABGgAAABoAAAEaAAADGgAAAWgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAGgAAAhoAAAEaAAACGgAAAxoAAAJoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAABoAAAIaAAAAGgAAAhoAAAMaAAAAaAAAAGgAAABoAAAAVwAAAGgAAABXAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAaAAABGgAAARoAAAEaAAADGgAAA2gAAAAAAAAAaAAAAFcAAABoAAAAaAAAAA==
         -3,-4:
           ind: -3,-4
           tiles: AAAAAGgAAABnAAAAaAAAAAAAAABnAAAAAAAAAAAAAABoAAAAaAAAAGgAAABoAAAAaAAAAFcAAABXAAAAVwAAAAAAAAAAAAAAZwAAAAAAAAAAAAAAZwAAAGgAAABoAAAAaAAAAFcAAABoAAAAaAAAAGgAAABXAAAAVwAAAFcAAABnAAAAZwAAAGcAAABnAAAAZwAAAGcAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAAAAAAAAAAABnAAAAAAAAAAAAAABnAAAAaAAAAGgAAABoAAAAVwAAAFcAAABXAAAAaAAAAFcAAABXAAAAVwAAAAAAAABoAAAAZwAAAGgAAAAAAAAAZwAAAAAAAAAAAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAAAAAAaAAAAGcAAABoAAAAZwAAAGcAAAAAAAAAAAAAAGgAAABoAAAAaAAAAGgAAABoAAAAVwAAAFcAAABoAAAAZwAAAGgAAABnAAAAaAAAAAAAAABnAAAAZwAAAGcAAABoAAAAaAAAAGgAAABoAAAAaAAAAFcAAABXAAAAVwAAAAAAAABoAAAAZwAAAGgAAABnAAAAZwAAAAAAAAAAAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAAAAAAaAAAAGcAAABoAAAAAAAAAGcAAAAAAAAAAAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAAAAAAGcAAAAAAAAAZwAAAAAAAABnAAAAZwAAAGcAAABoAAAAaAAAAGgAAABoAAAAaAAAADkAAABoAAAAaAAAAGcAAABnAAAAZwAAAGcAAABnAAAAZwAAAAAAAAAAAAAAaAAAAGgAAABoAAAAaAAAAGgAAAA5AAAAOQAAADkAAABnAAAAZwAAAAAAAABnAAAAZwAAAGcAAABnAAAAZwAAAGcAAABnAAAAZwAAAGgAAABoAAAAaAAAAGgAAABoAAAAAAAAAGcAAABnAAAAZwAAAGcAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGcAAABnAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAA==
@@ -13709,7 +13709,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -406465.94
+    - SecondsUntilStateChange: -408634.53
       changeAirtight: False
       state: Opening
       type: Door
@@ -13727,7 +13727,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -406465.94
+    - SecondsUntilStateChange: -408634.53
       changeAirtight: False
       state: Opening
       type: Door
@@ -22424,6 +22424,8 @@ entities:
     - pos: -18.5,-78.5
       parent: 8364
       type: Transform
+    - enabled: True
+      type: AmbientSound
   - uid: 5336
     components:
     - pos: -18.5,-79.5
@@ -22505,6 +22507,8 @@ entities:
     - pos: -22.5,-78.5
       parent: 8364
       type: Transform
+    - enabled: True
+      type: AmbientSound
   - uid: 5522
     components:
     - pos: -20.5,-78.5
@@ -73699,6 +73703,11 @@ entities:
       pos: -8.5,11.5
       parent: 8364
       type: Transform
+  - uid: 8788
+    components:
+    - pos: -22.5,-78.5
+      parent: 8364
+      type: Transform
   - uid: 9166
     components:
     - rot: -1.5707963267948966 rad
@@ -77501,6 +77510,21 @@ entities:
   - uid: 29172
     components:
     - pos: 85.5,-27.5
+      parent: 8364
+      type: Transform
+  - uid: 29697
+    components:
+    - pos: -21.5,-78.5
+      parent: 8364
+      type: Transform
+  - uid: 29700
+    components:
+    - pos: -19.5,-78.5
+      parent: 8364
+      type: Transform
+  - uid: 29701
+    components:
+    - pos: -18.5,-78.5
       parent: 8364
       type: Transform
 - proto: Cautery
@@ -86389,578 +86413,6 @@ entities:
       pos: 18.5,-10.5
       parent: 8364
       type: Transform
-- proto: DirectionalSignalButton
-  entities:
-  - uid: 5623
-    components:
-    - pos: -4.5,-11.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        24136:
-        - Pressed: Toggle
-        8390:
-        - Pressed: Toggle
-        8814:
-        - Pressed: Toggle
-        10356:
-        - Pressed: Toggle
-        24192:
-        - Pressed: Toggle
-        10391:
-        - Pressed: Toggle
-        24200:
-        - Pressed: Toggle
-        10393:
-        - Pressed: Toggle
-        24201:
-        - Pressed: Toggle
-        6247:
-        - Pressed: Toggle
-        6220:
-        - Pressed: Toggle
-        6071:
-        - Pressed: Toggle
-        7065:
-        - Pressed: Toggle
-        27704:
-        - Pressed: Toggle
-        27705:
-        - Pressed: Toggle
-        27707:
-        - Pressed: Toggle
-        27706:
-        - Pressed: Toggle
-        27643:
-        - Pressed: Toggle
-        27594:
-        - Pressed: Toggle
-        27581:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 6091
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: 11.35,-22.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        6188:
-        - Pressed: Toggle
-        6189:
-        - Pressed: Toggle
-        8080:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 6571
-    components:
-    - name: окна палаты
-      type: MetaData
-    - pos: 14.75,-35.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        10132:
-        - Pressed: Toggle
-        5449:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 6664
-    components:
-    - name: окна палаты
-      type: MetaData
-    - pos: 14.25,-35.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        6917:
-        - Pressed: Toggle
-        21521:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 6941
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: 21.65,0.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        22645:
-        - Pressed: Toggle
-        7233:
-        - Pressed: Toggle
-        7529:
-        - Pressed: Toggle
-        10425:
-        - Pressed: Toggle
-        10352:
-        - Pressed: Toggle
-        10617:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 10373
-    components:
-    - pos: 3.5,-11.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        24136:
-        - Pressed: Toggle
-        6247:
-        - Pressed: Toggle
-        6220:
-        - Pressed: Toggle
-        6071:
-        - Pressed: Toggle
-        24201:
-        - Pressed: Toggle
-        10393:
-        - Pressed: Toggle
-        24200:
-        - Pressed: Toggle
-        10391:
-        - Pressed: Toggle
-        24192:
-        - Pressed: Toggle
-        8390:
-        - Pressed: Toggle
-        8814:
-        - Pressed: Toggle
-        10356:
-        - Pressed: Toggle
-        27706:
-        - Pressed: Toggle
-        27707:
-        - Pressed: Toggle
-        27705:
-        - Pressed: Toggle
-        27704:
-        - Pressed: Toggle
-        7065:
-        - Pressed: Toggle
-        27643:
-        - Pressed: Toggle
-        27594:
-        - Pressed: Toggle
-        27581:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 10419
-    components:
-    - name: замок туалета
-      type: MetaData
-    - pos: 16.5,5.25
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        6360:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 10422
-    components:
-    - name: замок туалета
-      type: MetaData
-    - rot: 3.141592653589793 rad
-      pos: 16.5,5.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        7272:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 10808
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: -12.25,-21.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        5591:
-        - Pressed: Toggle
-        5592:
-        - Pressed: Toggle
-        5590:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 11602
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: 2.75,-20.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        24204:
-        - Pressed: Toggle
-        24203:
-        - Pressed: Toggle
-        24202:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 14513
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: -6.75,-25.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        24208:
-        - Pressed: Toggle
-        24209:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 15275
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 3.141592653589793 rad
-      pos: 6.5,-28.25
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        24211:
-        - Pressed: Toggle
-        24210:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 15534
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: -3.25,-59.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        29287:
-        - Pressed: Toggle
-        29286:
-        - Pressed: Toggle
-        29285:
-        - Pressed: Toggle
-        29284:
-        - Pressed: Toggle
-        29281:
-        - Pressed: Toggle
-        29282:
-        - Pressed: Toggle
-        29283:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 21237
-    components:
-    - name: переключатель ставень
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: 68.75,-17.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        20840:
-        - Pressed: Toggle
-        20842:
-        - Pressed: Toggle
-        20841:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 22928
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 19.5,-82.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        25719:
-        - Pressed: Toggle
-        22853:
-        - Pressed: Toggle
-        25720:
-        - Pressed: Toggle
-        26103:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 23347
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 3.141592653589793 rad
-      pos: 34.5,-10.25
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        10454:
-        - Pressed: Toggle
-        10455:
-        - Pressed: Toggle
-        10456:
-        - Pressed: Toggle
-        7058:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 23348
-    components:
-    - name: Сброс бака атмосферных отходов
-      type: MetaData
-    - pos: 22.5,-39.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        3535:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 24074
-    components:
-    - pos: -48.5,-9.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        14185:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 24075
-    components:
-    - pos: -48.5,-11.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        14186:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 24076
-    components:
-    - pos: -48.5,-13.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        14187:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 24077
-    components:
-    - pos: -48.5,-15.75
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        14188:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 24132
-    components:
-    - name: замок
-      type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: 9.25,-6.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        27227:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 24133
-    components:
-    - name: замок
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: 9.75,-6.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        26735:
-        - Pressed: DoorBolt
-      type: DeviceLinkSource
-  - uid: 24443
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: 30.65,-4.25
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        25860:
-        - Pressed: Toggle
-        7004:
-        - Pressed: Toggle
-        25815:
-        - Pressed: Toggle
-        21945:
-        - Pressed: Toggle
-        21948:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 26181
-    components:
-    - name: переключатель ставен
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: -14.35,16.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        26173:
-        - Pressed: Toggle
-        26175:
-        - Pressed: Toggle
-        26176:
-        - Pressed: Toggle
-        26177:
-        - Pressed: Toggle
-        26178:
-        - Pressed: Toggle
-        26179:
-        - Pressed: Toggle
-        26180:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 27283
-    components:
-    - name: внешние створки брига
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: -3.35,43.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        7308:
-        - Pressed: Toggle
-        7306:
-        - Pressed: Toggle
-        7305:
-        - Pressed: Toggle
-        25745:
-        - Pressed: Toggle
-        25746:
-        - Pressed: Toggle
-        25747:
-        - Pressed: Toggle
-        25748:
-        - Pressed: Toggle
-        25749:
-        - Pressed: Toggle
-        7857:
-        - Pressed: Toggle
-        25743:
-        - Pressed: Toggle
-        25744:
-        - Pressed: Toggle
-        25740:
-        - Pressed: Toggle
-        25742:
-        - Pressed: Toggle
-        25741:
-        - Pressed: Toggle
-        25739:
-        - Pressed: Toggle
-        25738:
-        - Pressed: Toggle
-        25737:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-    - range: 2
-      type: InteractionRange
-  - uid: 27468
-    components:
-    - rot: 3.141592653589793 rad
-      pos: -19.5,-11.25
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        17777:
-        - Pressed: Toggle
-        17778:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-  - uid: 27495
-    components:
-    - name: блокировка мостика
-      type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: 4.15,-5.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        5498:
-        - Pressed: Toggle
-        5340:
-        - Pressed: Toggle
-        26794:
-        - Pressed: Toggle
-        6394:
-        - Pressed: Toggle
-        26791:
-        - Pressed: Toggle
-        26790:
-        - Pressed: Toggle
-        26789:
-        - Pressed: Toggle
-        7974:
-        - Pressed: Toggle
-        8077:
-        - Pressed: Toggle
-        5531:
-        - Pressed: Toggle
-        5510:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-    - range: 2
-      type: InteractionRange
-  - uid: 27496
-    components:
-    - name: блокировка мостика
-      type: MetaData
-    - rot: 1.5707963267948966 rad
-      pos: -5.15,-5.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        5531:
-        - Pressed: Toggle
-        5510:
-        - Pressed: Toggle
-        8077:
-        - Pressed: Toggle
-        7974:
-        - Pressed: Toggle
-        26789:
-        - Pressed: Toggle
-        26790:
-        - Pressed: Toggle
-        26791:
-        - Pressed: Toggle
-        6394:
-        - Pressed: Toggle
-        26794:
-        - Pressed: Toggle
-        5498:
-        - Pressed: Toggle
-        5340:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-    - range: 2
-      type: InteractionRange
-  - uid: 28886
-    components:
-    - rot: -1.5707963267948966 rad
-      pos: 64.25,-17.5
-      parent: 8364
-      type: Transform
-    - linkedPorts:
-        20839:
-        - Pressed: Toggle
-        20837:
-        - Pressed: Toggle
-        20838:
-        - Pressed: Toggle
-      type: DeviceLinkSource
-    - range: 2.25
-      type: InteractionRange
 - proto: DiseaseDiagnoser
   entities:
   - uid: 18698
@@ -102354,6 +101806,8 @@ entities:
       type: Transform
     - color: '#0335FCFF'
       type: AtmosPipeColor
+    - enabled: True
+      type: AmbientSound
   - uid: 5560
     components:
     - pos: -18.5,-78.5
@@ -102361,6 +101815,8 @@ entities:
       type: Transform
     - color: '#FF1212FF'
       type: AtmosPipeColor
+    - enabled: True
+      type: AmbientSound
   - uid: 5561
     components:
     - rot: 3.141592653589793 rad
@@ -102369,6 +101825,8 @@ entities:
       type: Transform
     - color: '#FF1212FF'
       type: AtmosPipeColor
+    - enabled: True
+      type: AmbientSound
   - uid: 5713
     components:
     - rot: -1.5707963267948966 rad
@@ -105755,6 +105213,8 @@ entities:
       type: Transform
     - color: '#0335FCFF'
       type: AtmosPipeColor
+    - enabled: True
+      type: AmbientSound
   - uid: 5608
     components:
     - rot: -1.5707963267948966 rad
@@ -145156,7 +144616,7 @@ entities:
   - uid: 5719
     components:
     - rot: -1.5707963267948966 rad
-      pos: -6.75,-21.5
+      pos: -6.5,-21.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145167,7 +144627,7 @@ entities:
   - uid: 6409
     components:
     - rot: 1.5707963267948966 rad
-      pos: 28.65,7.75
+      pos: 28.5,7.75
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145207,7 +144667,7 @@ entities:
   - uid: 7541
     components:
     - rot: 3.141592653589793 rad
-      pos: 24.25,2.65
+      pos: 24.25,2.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145220,7 +144680,7 @@ entities:
       type: DeviceLinkSource
   - uid: 7579
     components:
-    - pos: 12.25,16.35
+    - pos: 12.25,16.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145248,19 +144708,27 @@ entities:
       parent: 8364
       type: Transform
     - linkedPorts:
-        8788:
-        - On: On
-        - Off: Off
-        8900:
+        7825:
         - On: On
         - Off: Off
         7821:
         - On: On
         - Off: Off
       type: DeviceLinkSource
+  - uid: 8900
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 31.5,-2.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        7206:
+        - On: On
+        - Off: Off
+      type: DeviceLinkSource
   - uid: 10317
     components:
-    - pos: 16.25,16.35
+    - pos: 16.25,16.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145271,7 +144739,7 @@ entities:
   - uid: 11600
     components:
     - rot: 1.5707963267948966 rad
-      pos: -8.35,21.5
+      pos: -8.5,21.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145305,7 +144773,7 @@ entities:
   - uid: 16313
     components:
     - rot: 1.5707963267948966 rad
-      pos: -3.25,-60.1
+      pos: -3.5,-60.1
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145319,7 +144787,7 @@ entities:
   - uid: 16892
     components:
     - rot: 1.5707963267948966 rad
-      pos: 7.75,-9.5
+      pos: 7.5,-9.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145335,7 +144803,7 @@ entities:
       type: DeviceLinkSource
   - uid: 17554
     components:
-    - pos: 10.5,-20.75
+    - pos: 10.5,-20.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145347,9 +144815,11 @@ entities:
     components:
     - name: выключатель света склада
       type: MetaData
-    - pos: -30.5,-17.5
+    - pos: -30.5,-17.25
       parent: 8364
       type: Transform
+    - arc: 6.283185307179586 rad
+      type: WallMount
     - linkedPorts:
         9868:
         - On: On
@@ -145357,7 +144827,7 @@ entities:
       type: DeviceLinkSource
   - uid: 23945
     components:
-    - pos: 63.5,-4.65
+    - pos: 63.5,-4.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145379,7 +144849,7 @@ entities:
       type: DeviceLinkSource
   - uid: 24080
     components:
-    - pos: -33.5,-28.75
+    - pos: -33.5,-28.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145389,7 +144859,7 @@ entities:
       type: DeviceLinkSource
   - uid: 24083
     components:
-    - pos: -40.5,6.25
+    - pos: -40.5,6.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145405,7 +144875,7 @@ entities:
       type: DeviceLinkSource
   - uid: 24288
     components:
-    - pos: -46.5,-3.65
+    - pos: -46.5,-3.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145424,7 +144894,7 @@ entities:
       type: DeviceLinkSource
   - uid: 24292
     components:
-    - pos: -46.5,-9.65
+    - pos: -46.5,-9.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145435,7 +144905,7 @@ entities:
   - uid: 24510
     components:
     - rot: 1.5707963267948966 rad
-      pos: 30.65,-4.65
+      pos: 30.5,-4.65
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145451,7 +144921,7 @@ entities:
       type: DeviceLinkSource
   - uid: 25557
     components:
-    - pos: 16.65,49.35
+    - pos: 16.65,49.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145469,7 +144939,7 @@ entities:
       type: InteractionRange
   - uid: 25964
     components:
-    - pos: 15.5,3.4
+    - pos: 15.5,3.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145502,7 +144972,7 @@ entities:
   - uid: 26326
     components:
     - rot: 3.141592653589793 rad
-      pos: 16.25,49.65
+      pos: 16.25,49.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145513,7 +144983,7 @@ entities:
   - uid: 26595
     components:
     - rot: 3.141592653589793 rad
-      pos: 64.5,-1.25
+      pos: 64.5,-1.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145537,7 +145007,7 @@ entities:
   - uid: 26607
     components:
     - rot: 1.5707963267948966 rad
-      pos: 64.75,-4.5
+      pos: 64.5,-4.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145581,7 +145051,7 @@ entities:
   - uid: 26611
     components:
     - rot: 3.141592653589793 rad
-      pos: 55.5,-38.25
+      pos: 55.5,-38.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145594,7 +145064,7 @@ entities:
       type: DeviceLinkSource
   - uid: 26612
     components:
-    - pos: 34.75,-44.75
+    - pos: 34.75,-44.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145605,7 +145075,7 @@ entities:
   - uid: 26613
     components:
     - rot: 3.141592653589793 rad
-      pos: 36.5,-44.25
+      pos: 36.5,-44.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145636,7 +145106,7 @@ entities:
   - uid: 26615
     components:
     - rot: -1.5707963267948966 rad
-      pos: 38.25,-51.5
+      pos: 38.5,-51.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145647,7 +145117,7 @@ entities:
   - uid: 26616
     components:
     - rot: 3.141592653589793 rad
-      pos: 45.5,-48.25
+      pos: 45.5,-48.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145660,7 +145130,7 @@ entities:
       type: DeviceLinkSource
   - uid: 26617
     components:
-    - pos: 34.75,-47.75
+    - pos: 34.75,-47.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145671,7 +145141,7 @@ entities:
   - uid: 26618
     components:
     - rot: 3.141592653589793 rad
-      pos: 70.5,-38.25
+      pos: 70.5,-38.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145682,7 +145152,7 @@ entities:
   - uid: 26677
     components:
     - rot: 3.141592653589793 rad
-      pos: -11.5,-20.25
+      pos: -11.5,-20.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145693,7 +145163,7 @@ entities:
   - uid: 27467
     components:
     - rot: 3.141592653589793 rad
-      pos: -20.5,-15.25
+      pos: -20.5,-15.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145717,7 +145187,7 @@ entities:
   - uid: 27677
     components:
     - rot: 3.141592653589793 rad
-      pos: -9.5,-11.25
+      pos: -9.5,-11.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145731,7 +145201,7 @@ entities:
   - uid: 27786
     components:
     - rot: 1.5707963267948966 rad
-      pos: 21.65,19.3
+      pos: 21.5,19.3
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145741,7 +145211,7 @@ entities:
       type: DeviceLinkSource
   - uid: 27906
     components:
-    - pos: 34.25,12.35
+    - pos: 34.25,12.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145754,7 +145224,7 @@ entities:
       type: DeviceLinkSource
   - uid: 27984
     components:
-    - pos: 6.5,16.25
+    - pos: 6.5,16.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -145797,7 +145267,7 @@ entities:
       type: DeviceLinkSource
   - uid: 28763
     components:
-    - pos: 18.25,40.4
+    - pos: 18.25,40.5
       parent: 8364
       type: Transform
     - linkedPorts:
@@ -151259,12 +150729,15 @@ entities:
       type: AmbientSound
   - uid: 7825
     components:
-    - rot: -1.5707963267948966 rad
-      pos: 0.5,24.5
+    - rot: 3.141592653589793 rad
+      pos: 8.5,19.5
       parent: 8364
       type: Transform
     - enabled: False
       type: AmbientSound
+    - links:
+      - 8800
+      type: DeviceLinkSink
   - uid: 7860
     components:
     - rot: 1.5707963267948966 rad
@@ -151381,17 +150854,6 @@ entities:
       type: Transform
     - enabled: False
       type: AmbientSound
-  - uid: 8788
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: 4.5,23.5
-      parent: 8364
-      type: Transform
-    - enabled: False
-      type: AmbientSound
-    - links:
-      - 8800
-      type: DeviceLinkSink
   - uid: 8851
     components:
     - pos: -9.5,20.5
@@ -151399,17 +150861,6 @@ entities:
       type: Transform
     - enabled: False
       type: AmbientSound
-  - uid: 8900
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 5.5,19.5
-      parent: 8364
-      type: Transform
-    - enabled: False
-      type: AmbientSound
-    - links:
-      - 8800
-      type: DeviceLinkSink
   - uid: 9389
     components:
     - pos: -7.5,25.5
@@ -154352,6 +153803,14 @@ entities:
       type: Transform
     - enabled: False
       type: AmbientSound
+  - uid: 29699
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 2.5,23.5
+      parent: 8364
+      type: Transform
+    - enabled: False
+      type: AmbientSound
 - proto: PoweredlightExterior
   entities:
   - uid: 18
@@ -154845,6 +154304,9 @@ entities:
       pos: 31.5,-1.5
       parent: 8364
       type: Transform
+    - links:
+      - 8900
+      type: DeviceLinkSink
   - uid: 7479
     components:
     - pos: 12.5,6.5
@@ -155585,11 +155047,10 @@ entities:
       type: DeviceLinkSink
   - uid: 15682
     components:
-    - pos: -24.5,-49.5
+    - rot: 1.5707963267948966 rad
+      pos: -30.5,-56.5
       parent: 8364
       type: Transform
-    - powerLoad: 0
-      type: ApcPowerReceiver
   - uid: 15685
     components:
     - rot: -1.5707963267948966 rad
@@ -156272,6 +155733,11 @@ entities:
     components:
     - rot: -1.5707963267948966 rad
       pos: -18.5,-70.5
+      parent: 8364
+      type: Transform
+  - uid: 29698
+    components:
+    - pos: -27.5,-49.5
       parent: 8364
       type: Transform
 - proto: PoweredSmallLightEmpty
@@ -165884,6 +165350,588 @@ entities:
       type: Transform
     - linkedPorts:
         25771:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+    - range: 2.25
+      type: InteractionRange
+- proto: SignalButtonDirectional
+  entities:
+  - uid: 5623
+    components:
+    - pos: -4.5,-11.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        24136:
+        - Pressed: Toggle
+        8390:
+        - Pressed: Toggle
+        8814:
+        - Pressed: Toggle
+        10356:
+        - Pressed: Toggle
+        24192:
+        - Pressed: Toggle
+        10391:
+        - Pressed: Toggle
+        24200:
+        - Pressed: Toggle
+        10393:
+        - Pressed: Toggle
+        24201:
+        - Pressed: Toggle
+        6247:
+        - Pressed: Toggle
+        6220:
+        - Pressed: Toggle
+        6071:
+        - Pressed: Toggle
+        7065:
+        - Pressed: Toggle
+        27704:
+        - Pressed: Toggle
+        27705:
+        - Pressed: Toggle
+        27707:
+        - Pressed: Toggle
+        27706:
+        - Pressed: Toggle
+        27643:
+        - Pressed: Toggle
+        27594:
+        - Pressed: Toggle
+        27581:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 6091
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: -1.5707963267948966 rad
+      pos: 11.35,-22.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        6188:
+        - Pressed: Toggle
+        6189:
+        - Pressed: Toggle
+        8080:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 6571
+    components:
+    - name: окна палаты
+      type: MetaData
+    - pos: 14.75,-35.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        10132:
+        - Pressed: Toggle
+        5449:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 6664
+    components:
+    - name: окна палаты
+      type: MetaData
+    - pos: 14.25,-35.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        6917:
+        - Pressed: Toggle
+        21521:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 6941
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: 21.65,0.75
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        22645:
+        - Pressed: Toggle
+        7233:
+        - Pressed: Toggle
+        7529:
+        - Pressed: Toggle
+        10425:
+        - Pressed: Toggle
+        10352:
+        - Pressed: Toggle
+        10617:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 10373
+    components:
+    - pos: 3.5,-11.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        24136:
+        - Pressed: Toggle
+        6247:
+        - Pressed: Toggle
+        6220:
+        - Pressed: Toggle
+        6071:
+        - Pressed: Toggle
+        24201:
+        - Pressed: Toggle
+        10393:
+        - Pressed: Toggle
+        24200:
+        - Pressed: Toggle
+        10391:
+        - Pressed: Toggle
+        24192:
+        - Pressed: Toggle
+        8390:
+        - Pressed: Toggle
+        8814:
+        - Pressed: Toggle
+        10356:
+        - Pressed: Toggle
+        27706:
+        - Pressed: Toggle
+        27707:
+        - Pressed: Toggle
+        27705:
+        - Pressed: Toggle
+        27704:
+        - Pressed: Toggle
+        7065:
+        - Pressed: Toggle
+        27643:
+        - Pressed: Toggle
+        27594:
+        - Pressed: Toggle
+        27581:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 10419
+    components:
+    - name: замок туалета
+      type: MetaData
+    - pos: 16.5,5.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        6360:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 10422
+    components:
+    - name: замок туалета
+      type: MetaData
+    - rot: 3.141592653589793 rad
+      pos: 16.5,5.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        7272:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 10808
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: -12.25,-21.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        5591:
+        - Pressed: Toggle
+        5592:
+        - Pressed: Toggle
+        5590:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 11602
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: 2.75,-20.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        24204:
+        - Pressed: Toggle
+        24203:
+        - Pressed: Toggle
+        24202:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 14513
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: -1.5707963267948966 rad
+      pos: -6.5,-25.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        24208:
+        - Pressed: Toggle
+        24209:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 15275
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 3.141592653589793 rad
+      pos: 6.5,-28.45
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        24211:
+        - Pressed: Toggle
+        24210:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 15534
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: -3.5,-59.75
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        29287:
+        - Pressed: Toggle
+        29286:
+        - Pressed: Toggle
+        29285:
+        - Pressed: Toggle
+        29284:
+        - Pressed: Toggle
+        29281:
+        - Pressed: Toggle
+        29282:
+        - Pressed: Toggle
+        29283:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 21237
+    components:
+    - name: переключатель ставень
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: 68.5,-17.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        20840:
+        - Pressed: Toggle
+        20842:
+        - Pressed: Toggle
+        20841:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+    - range: 2.75
+      type: InteractionRange
+  - uid: 22928
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 19.5,-82.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        25719:
+        - Pressed: Toggle
+        22853:
+        - Pressed: Toggle
+        25720:
+        - Pressed: Toggle
+        26103:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 23347
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 3.141592653589793 rad
+      pos: 34.5,-10.25
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        10454:
+        - Pressed: Toggle
+        10455:
+        - Pressed: Toggle
+        10456:
+        - Pressed: Toggle
+        7058:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 23348
+    components:
+    - name: Сброс бака атмосферных отходов
+      type: MetaData
+    - pos: 22.5,-39.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        3535:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 24074
+    components:
+    - name: замок
+      type: MetaData
+    - pos: -48.5,-9.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        14185:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 24075
+    components:
+    - name: замок
+      type: MetaData
+    - pos: -48.5,-11.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        14186:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 24076
+    components:
+    - name: замок
+      type: MetaData
+    - pos: -48.5,-13.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        14187:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 24077
+    components:
+    - name: замок
+      type: MetaData
+    - pos: -48.5,-15.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        14188:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 24132
+    components:
+    - name: замок
+      type: MetaData
+    - rot: -1.5707963267948966 rad
+      pos: 9.5,-6.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        27227:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 24133
+    components:
+    - name: замок
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: 9.5,-6.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        26735:
+        - Pressed: DoorBolt
+      type: DeviceLinkSource
+  - uid: 24443
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 30.5,-4.25
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        25860:
+        - Pressed: Toggle
+        7004:
+        - Pressed: Toggle
+        25815:
+        - Pressed: Toggle
+        21945:
+        - Pressed: Toggle
+        21948:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 26181
+    components:
+    - name: переключатель ставен
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: -14.5,16.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        26173:
+        - Pressed: Toggle
+        26175:
+        - Pressed: Toggle
+        26176:
+        - Pressed: Toggle
+        26177:
+        - Pressed: Toggle
+        26178:
+        - Pressed: Toggle
+        26179:
+        - Pressed: Toggle
+        26180:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 27283
+    components:
+    - name: внешние створки брига
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: -3.5,43.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        7308:
+        - Pressed: Toggle
+        7306:
+        - Pressed: Toggle
+        7305:
+        - Pressed: Toggle
+        25745:
+        - Pressed: Toggle
+        25746:
+        - Pressed: Toggle
+        25747:
+        - Pressed: Toggle
+        25748:
+        - Pressed: Toggle
+        25749:
+        - Pressed: Toggle
+        7857:
+        - Pressed: Toggle
+        25743:
+        - Pressed: Toggle
+        25744:
+        - Pressed: Toggle
+        25740:
+        - Pressed: Toggle
+        25742:
+        - Pressed: Toggle
+        25741:
+        - Pressed: Toggle
+        25739:
+        - Pressed: Toggle
+        25738:
+        - Pressed: Toggle
+        25737:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+    - range: 2
+      type: InteractionRange
+  - uid: 27468
+    components:
+    - rot: 3.141592653589793 rad
+      pos: -19.5,-11.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        17777:
+        - Pressed: Toggle
+        17778:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+  - uid: 27495
+    components:
+    - name: блокировка мостика
+      type: MetaData
+    - rot: -1.5707963267948966 rad
+      pos: 4.45,-5.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        5498:
+        - Pressed: Toggle
+        5340:
+        - Pressed: Toggle
+        26794:
+        - Pressed: Toggle
+        6394:
+        - Pressed: Toggle
+        26791:
+        - Pressed: Toggle
+        26790:
+        - Pressed: Toggle
+        26789:
+        - Pressed: Toggle
+        7974:
+        - Pressed: Toggle
+        8077:
+        - Pressed: Toggle
+        5531:
+        - Pressed: Toggle
+        5510:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+    - range: 2
+      type: InteractionRange
+  - uid: 27496
+    components:
+    - name: блокировка мостика
+      type: MetaData
+    - rot: 1.5707963267948966 rad
+      pos: -5.45,-5.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        5531:
+        - Pressed: Toggle
+        5510:
+        - Pressed: Toggle
+        8077:
+        - Pressed: Toggle
+        7974:
+        - Pressed: Toggle
+        26789:
+        - Pressed: Toggle
+        26790:
+        - Pressed: Toggle
+        26791:
+        - Pressed: Toggle
+        6394:
+        - Pressed: Toggle
+        26794:
+        - Pressed: Toggle
+        5498:
+        - Pressed: Toggle
+        5340:
+        - Pressed: Toggle
+      type: DeviceLinkSource
+    - range: 2
+      type: InteractionRange
+  - uid: 28886
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: 64.25,-17.5
+      parent: 8364
+      type: Transform
+    - linkedPorts:
+        20839:
+        - Pressed: Toggle
+        20837:
+        - Pressed: Toggle
+        20838:
         - Pressed: Toggle
       type: DeviceLinkSource
     - range: 2.25
