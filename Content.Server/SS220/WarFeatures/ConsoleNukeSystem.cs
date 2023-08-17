@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
 using Robust.Shared.Configuration;
+using Robust.Server.Player;
 using Content.Server.Hands.Systems;
 using Content.Shared.Stacks;
 using Content.Server.Stack;
@@ -20,6 +21,7 @@ namespace Content.Server.ConsoleNuke
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+        [Dependency] private readonly IPlayerManager _playerSystem = default!;
 
         public override void Initialize()
         {
@@ -94,6 +96,9 @@ namespace Content.Server.ConsoleNuke
                 var countTC = _entityManager.HasComponent<LoneNukeOperativeComponent>(player)
                     ? _cfg.GetCVar<int>("nuke.loneoperative_tc")
                     : _cfg.GetCVar<int>("nuke.operative_tc");
+
+                // If player count is less than 40, TC bonus downscales with playercount linearly down to 25% min.
+                countTC = (int) (countTC * float.Clamp(_playerSystem.PlayerCount / 40.0f, 0.25f, 1f));
 
                 stackSystem.SetCount(tc, countTC, component);
 
