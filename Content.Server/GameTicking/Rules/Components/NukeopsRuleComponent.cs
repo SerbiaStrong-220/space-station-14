@@ -98,7 +98,6 @@ public sealed class NukeopsRuleComponent : Component
     // SS220 Nukie-Declare-War-Begin
     [DataField("isWarDeclared")]
     public bool IsWarDeclated;
-    [DataField("whenAbleToMove")]
     public int WhenAbleToMove;
     // SS220 Nukie-Declare-War-End
 
