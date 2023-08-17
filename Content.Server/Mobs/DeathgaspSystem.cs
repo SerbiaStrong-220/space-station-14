@@ -21,7 +21,8 @@ public sealed class DeathgaspSystem: EntitySystem
     
     private void OnMobStateChanged(EntityUid uid, DeathgaspComponent component, MobStateChangedEvent args)
     {
-        _popupSystem.PopupEntity(Loc.GetString("death-reminder"), uid, uid, PopupType.LargeCaution);
+        if (args.NewMobState == MobState.Dead)
+            _popupSystem.PopupEntity(Loc.GetString("death-reminder"), uid, uid, PopupType.LargeCaution);
         
         // don't deathgasp if they arent going straight from crit to dead
         if (args.NewMobState != MobState.Dead || args.OldMobState != MobState.Critical)
@@ -33,7 +34,6 @@ public sealed class DeathgaspSystem: EntitySystem
     /// <summary>
     ///     Causes an entity to perform their deathgasp emote, if they have one.
     /// </summary>
-
     public bool Deathgasp(EntityUid uid, DeathgaspComponent? component = null)
     {
         if (!Resolve(uid, ref component, false))
