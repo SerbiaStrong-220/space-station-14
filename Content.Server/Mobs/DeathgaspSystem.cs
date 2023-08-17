@@ -35,7 +35,7 @@ public sealed class DeathgaspSystem: EntitySystem
     public bool Deathgasp(EntityUid uid, DeathgaspComponent? component = null)
     {
 
-        _popupSystem.PopupEntity(Loc.GetString("blink-artifact-popup"), uid, uid, PopupType.Medium);
+        _popupSystem.PopupEntity(Loc.GetString("death-reminder"), uid, uid, PopupType.LargeCaution);
 
         if (!Resolve(uid, ref component, false))
             return false;
