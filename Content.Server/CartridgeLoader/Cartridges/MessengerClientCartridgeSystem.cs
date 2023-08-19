@@ -1,10 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Administration.Logs;
 using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Messenger;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.CartridgeLoader.Cartridges;
+using Content.Shared.Database;
 using Content.Shared.Messenger;
 using Content.Shared.PDA.Ringer;
 
@@ -16,6 +18,7 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
     [Dependency] private readonly CartridgeLoaderSystem? _cartridgeLoaderSystem = default!;
     [Dependency] private readonly DeviceNetworkSystem? _deviceNetworkSystem = default!;
     [Dependency] private readonly MessengerServerSystem _messengerServerSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     public enum NetworkCommand
     {
@@ -292,6 +295,10 @@ public sealed class MessengerClientCartridgeSystem : EntitySystem
                     [NetworkKey.ChatId.ToString()] = e.ChatId,
                     [NetworkKey.MessageText.ToString()] = e.MessageText,
                 });
+
+                _adminLogger.Add(LogType.MessengerClientCartridge, LogImpact.Low,
+                    $"Send: sender entity: {uid}, device entity: {args.LoaderUid}, chatID: {e.ChatId}, msg: {e.MessageText}");
+
                 break;
             }
         }
