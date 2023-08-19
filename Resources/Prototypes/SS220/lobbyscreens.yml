@@ -3,9 +3,5 @@
   background: /Textures/SS220/LobbyScreens/deep-in-spiders.png
 
 - type: lobbyBackground
-  id: EngineersChill
-  background: /Textures/SS220/LobbyScreens/engineers-chill.png
-
-- type: lobbyBackground
   id: NudeHopla
   background: /Textures/SS220/LobbyScreens/nude-hopla.jpg
