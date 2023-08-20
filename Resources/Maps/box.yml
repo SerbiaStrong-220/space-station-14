@@ -10524,7 +10524,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -52356.656
+    - SecondsUntilStateChange: -53042.137
       changeAirtight: False
       state: Opening
       type: Door
@@ -10572,7 +10572,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -52356.656
+    - SecondsUntilStateChange: -53042.137
       changeAirtight: False
       state: Opening
       type: Door
@@ -43156,7 +43156,7 @@ entities:
       type: AmbientSound
   - uid: 3797
     components:
-    - pos: -1.5,-68.5
+    - pos: 8.5,-73.5
       parent: 8364
       type: Transform
   - uid: 3798
@@ -43187,7 +43187,7 @@ entities:
       type: AmbientSound
   - uid: 3812
     components:
-    - pos: -20.5,-69.5
+    - pos: -19.5,-68.5
       parent: 8364
       type: Transform
   - uid: 3828
@@ -43199,7 +43199,7 @@ entities:
       type: AmbientSound
   - uid: 3829
     components:
-    - pos: 0.5,-68.5
+    - pos: -19.5,-69.5
       parent: 8364
       type: Transform
   - uid: 3830
@@ -49198,6 +49198,13 @@ entities:
     - pos: -6.5,-50.5
       parent: 8364
       type: Transform
+  - uid: 15813
+    components:
+    - pos: -19.5,-67.5
+      parent: 8364
+      type: Transform
+    - enabled: True
+      type: AmbientSound
   - uid: 15815
     components:
     - pos: -54.5,-57.5
@@ -49546,6 +49553,13 @@ entities:
       type: Transform
     - enabled: True
       type: AmbientSound
+  - uid: 16131
+    components:
+    - pos: -19.5,-66.5
+      parent: 8364
+      type: Transform
+    - enabled: True
+      type: AmbientSound
   - uid: 16135
     components:
     - pos: -20.5,-66.5
@@ -49556,13 +49570,6 @@ entities:
   - uid: 16139
     components:
     - pos: -48.5,17.5
-      parent: 8364
-      type: Transform
-    - enabled: True
-      type: AmbientSound
-  - uid: 16154
-    components:
-    - pos: -20.5,-67.5
       parent: 8364
       type: Transform
     - enabled: True
@@ -49776,11 +49783,6 @@ entities:
   - uid: 17165
     components:
     - pos: -23.5,-68.5
-      parent: 8364
-      type: Transform
-  - uid: 17169
-    components:
-    - pos: -20.5,-68.5
       parent: 8364
       type: Transform
   - uid: 17342
@@ -63232,6 +63234,12 @@ entities:
       pos: 47.5,20.5
       parent: 8364
       type: Transform
+  - uid: 15981
+    components:
+    - rot: 3.141592653589793 rad
+      pos: -19.5,-67.5
+      parent: 8364
+      type: Transform
   - uid: 16502
     components:
     - rot: 3.141592653589793 rad
@@ -74316,6 +74324,11 @@ entities:
           occludes: True
           ent: null
       type: ContainerContainer
+  - uid: 15531
+    components:
+    - pos: -17.5,-66.5
+      parent: 8364
+      type: Transform
   - uid: 15587
     components:
     - pos: -36.5,-46.5
@@ -74390,29 +74403,6 @@ entities:
           occludes: True
           ent: null
       type: ContainerContainer
-  - uid: 15813
-    components:
-    - pos: -18.5,-66.5
-      parent: 8364
-      type: Transform
-    - air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-        - 5.001885
-        - 18.816614
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-      type: EntityStorage
   - uid: 15935
     components:
     - pos: -29.5,-43.5
@@ -131996,11 +131986,6 @@ entities:
     - pos: 62.5,19.5
       parent: 8364
       type: Transform
-  - uid: 17553
-    components:
-    - pos: -18.5,-65.5
-      parent: 8364
-      type: Transform
   - uid: 17694
     components:
     - pos: -43.5,-10.5
@@ -132043,6 +132028,11 @@ entities:
   - uid: 14239
     components:
     - pos: 15.5,-34.5
+      parent: 8364
+      type: Transform
+  - uid: 15534
+    components:
+    - pos: -17.5,-65.5
       parent: 8364
       type: Transform
   - uid: 15811
@@ -139239,6 +139229,12 @@ entities:
       type: Transform
     - powerLoad: 0
       type: ApcPowerReceiver
+  - uid: 16137
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: -20.5,-68.5
+      parent: 8364
+      type: Transform
   - uid: 16391
     components:
     - rot: -1.5707963267948966 rad
@@ -139331,13 +139327,6 @@ entities:
     components:
     - rot: -1.5707963267948966 rad
       pos: 9.5,-61.5
-      parent: 8364
-      type: Transform
-    - powerLoad: 0
-      type: ApcPowerReceiver
-  - uid: 17536
-    components:
-    - pos: -19.5,-68.5
       parent: 8364
       type: Transform
     - powerLoad: 0
@@ -140212,6 +140201,11 @@ entities:
     - pos: -21.5,-36.5
       parent: 8364
       type: Transform
+  - uid: 14929
+    components:
+    - pos: -17.5,-65.5
+      parent: 8364
+      type: Transform
   - uid: 15049
     components:
     - pos: -21.5,-40.5
@@ -140245,11 +140239,6 @@ entities:
   - uid: 15980
     components:
     - pos: -34.5,-60.5
-      parent: 8364
-      type: Transform
-  - uid: 15981
-    components:
-    - pos: -18.5,-65.5
       parent: 8364
       type: Transform
   - uid: 15985
@@ -149587,6 +149576,11 @@ entities:
     - pos: -50.5,23.5
       parent: 8364
       type: Transform
+  - uid: 15535
+    components:
+    - pos: -19.5,-66.5
+      parent: 8364
+      type: Transform
   - uid: 15809
     components:
     - pos: -6.5,-49.5
@@ -152369,10 +152363,8 @@ entities:
       currentSupply: 19.980549
       supplyRampPosition: 19.980549
       type: PowerNetworkBattery
-  - uid: 16137
+  - uid: 15533
     components:
-    - name: Engineering Substation
-      type: MetaData
     - pos: -20.5,-66.5
       parent: 8364
       type: Transform
@@ -162462,11 +162454,6 @@ entities:
     - pos: -18.5,-67.5
       parent: 8364
       type: Transform
-  - uid: 3437
-    components:
-    - pos: -19.5,-67.5
-      parent: 8364
-      type: Transform
   - uid: 3439
     components:
     - pos: -16.5,-67.5
@@ -167946,9 +167933,9 @@ entities:
     - pos: -35.5,-28.5
       parent: 8364
       type: Transform
-  - uid: 14929
+  - uid: 15140
     components:
-    - pos: -19.5,-66.5
+    - pos: -18.5,-65.5
       parent: 8364
       type: Transform
   - uid: 15298
@@ -167964,6 +167951,11 @@ entities:
   - uid: 15311
     components:
     - pos: -40.5,-47.5
+      parent: 8364
+      type: Transform
+  - uid: 15532
+    components:
+    - pos: -18.5,-66.5
       parent: 8364
       type: Transform
   - uid: 15593
@@ -179911,6 +179903,11 @@ entities:
   - uid: 3018
     components:
     - pos: 35.5,-68.5
+      parent: 8364
+      type: Transform
+  - uid: 3437
+    components:
+    - pos: -19.5,-67.5
       parent: 8364
       type: Transform
   - uid: 3536
