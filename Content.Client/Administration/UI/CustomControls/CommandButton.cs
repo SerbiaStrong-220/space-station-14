@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Client.Administration.UI.Logs;
 using Content.Client.Guidebook.Richtext;
 using Robust.Client.Console;
 using Robust.Client.UserInterface;
@@ -81,7 +80,7 @@ namespace Content.Client.Administration.UI.CustomControls
                     return true;
             }
 
-            var dialogWindow = new DefaultWindow{Title = Text};
+            var dialogWindow = new DefaultWindow { Title = Text };
 
             var menuContainer = new BoxContainer
             {
@@ -92,7 +91,7 @@ namespace Content.Client.Administration.UI.CustomControls
                 Margin = new Thickness(30, 50, 30, 10)
             };
 
-            var ok = new Button { Text = "Ok",  Margin = new Thickness(10)  };
+            var ok = new Button { Text = "Ok", Margin = new Thickness(10) };
             ok.OnPressed += _ =>
             {
                 _dialogResult = DialogResultEnum.Ok;
