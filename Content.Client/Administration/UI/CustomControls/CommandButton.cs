@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Client.Administration.UI.Logs;
 using Content.Client.Guidebook.Richtext;
 using Robust.Client.Console;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Client.UserInterface.CustomControls;
 
 namespace Content.Client.Administration.UI.CustomControls
 {
@@ -10,6 +12,14 @@ namespace Content.Client.Administration.UI.CustomControls
     public class CommandButton : Button, IDocumentTag
     {
         public string? Command { get; set; }
+        public bool WithDialog { get; set; }
+
+        private DialogResultEnum? _dialogResult;
+
+        private enum DialogResultEnum : byte
+        {
+            Ok = 0
+        }
 
         public CommandButton()
         {
@@ -32,6 +42,14 @@ namespace Content.Client.Administration.UI.CustomControls
 
         protected virtual void Execute(ButtonEventArgs obj)
         {
+            if (WithDialog)
+            {
+                if (!OpenDialog(obj))
+                {
+                    return;
+                }
+            }
+
             // Default is to execute command
             if (!string.IsNullOrEmpty(Command))
                 IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand(Command);
@@ -50,6 +68,49 @@ namespace Content.Client.Administration.UI.CustomControls
             Text = Loc.GetString(text);
             control = this;
             return true;
+        }
+
+        private bool OpenDialog(ButtonEventArgs obj)
+        {
+            switch (_dialogResult)
+            {
+                case null:
+                    break;
+                case DialogResultEnum.Ok:
+                    _dialogResult = null;
+                    return true;
+            }
+
+            var dialogWindow = new DefaultWindow{Title = Text};
+
+            var menuContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Center,
+                Visible = true,
+                Margin = new Thickness(30, 50, 30, 10)
+            };
+
+            var ok = new Button { Text = "Ok",  Margin = new Thickness(10)  };
+            ok.OnPressed += _ =>
+            {
+                _dialogResult = DialogResultEnum.Ok;
+                Execute(obj);
+                dialogWindow.Close();
+            };
+
+            var cancel = new Button { Text = "Cancel", Margin = new Thickness(10) };
+            cancel.OnPressed += _ => dialogWindow.Close();
+
+            menuContainer.AddChild(ok);
+            menuContainer.AddChild(cancel);
+
+            dialogWindow.AddChild(menuContainer);
+
+            dialogWindow.OpenCentered();
+
+            return false;
         }
     }
 }
