@@ -11,6 +11,7 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Content.Shared.Spawners.Components;
+using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -20,6 +21,9 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+
+using Content.Server.Destructible;
+using Content.Server.Destructible.Thresholds.Behaviors;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -453,7 +457,7 @@ public sealed partial class ExplosionSystem : EntitySystem
     }
 
     /// <summary>
-    ///     This function do damage on every damageble object. May be adjusted with damage decreasing coefficient.
+    ///     This function allows you to damage an object in storage.
     /// </summary>
     private void InStorageDamage(EntityUid uid, ContainerManagerComponent container, DamageSpecifier? damage, EntityQuery<DamageableComponent> damageQuery)
     {
@@ -461,9 +465,15 @@ public sealed partial class ExplosionSystem : EntitySystem
         {
             foreach (EntityUid storagedEntity in storage.ContainedEntities)
             {
-                if (damage != null && damageQuery.TryGetComponent(storagedEntity, out var damageableInStorage))
+                var destructibleQuery = EntityManager.GetEntityQuery<ExplosiveComponent>();//plug until inside storage Destructible SpawnEntitiesBehavior will be created
+                if (damage != null && damageQuery.TryGetComponent(storagedEntity, out var damageableInStorage) && (destructibleQuery.TryGetComponent(storagedEntity, out ExplosiveComponent? explosiveComponent)))
                 {
+
+                    //    TO DO add damage decreasing coefficient depending on deepness inside storages and maybe even material of storage
                     _damageableSystem.TryChangeDamage(storagedEntity, damage, ignoreResistances: true, damageable: damageableInStorage);
+                    var damageStr = string.Join(", ", damage.DamageDict.Select(entry => $"{entry.Key}: {entry.Value}"));
+                    _adminLogger.Add(LogType.Explosion, LogImpact.Medium,
+                        $"Explosion caused [{damageStr}] to {ToPrettyString(uid):target} at {Transform(uid).Coordinates}");
                 }
                 //if we met another storage inside this storage
                 if (_entityManager.TryGetComponent<ContainerManagerComponent>(storagedEntity, out var innerContainer))
