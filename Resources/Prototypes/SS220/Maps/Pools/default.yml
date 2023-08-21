@@ -3,5 +3,5 @@
 - type: gameMapPool
   id: SS220MapPool
   maps:
-  - Frankenstein
+  - Box
   - 220Delta
