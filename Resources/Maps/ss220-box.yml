@@ -2101,12 +2101,24 @@ entities:
             3879: -39,-31
             3880: -40,-31
             3927: 15,-74
+            3932: -13,53
+            3933: -9,53
+            3934: -9,55
+            3935: -13,55
+            3936: -24,20
+            3937: -22,20
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: Delivery
           decals:
             2408: -62,-16
+        - node:
+            color: '#FFFFFFFF'
+            id: DeliveryGreyscale
+          decals:
+            3930: -6,50
+            3931: -5,50
         - node:
             cleanable: True
             color: '#474F52FF'
@@ -13841,7 +13853,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -418450.78
+    - SecondsUntilStateChange: -418597.22
       changeAirtight: False
       state: Opening
       type: Door
@@ -13859,7 +13871,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -418450.78
+    - SecondsUntilStateChange: -418597.22
       changeAirtight: False
       state: Opening
       type: Door
@@ -196403,6 +196415,38 @@ entities:
       type: Fixtures
     - range: 2.5
       type: InteractionRange
+- proto: WarderobePrisonSecureFilled
+  entities:
+  - uid: 7765
+    components:
+    - pos: 6.5,32.5
+      parent: 8364
+      type: Transform
+  - uid: 7766
+    components:
+    - pos: 6.5,27.5
+      parent: 8364
+      type: Transform
+  - uid: 7904
+    components:
+    - pos: 9.5,27.5
+      parent: 8364
+      type: Transform
+  - uid: 7910
+    components:
+    - pos: 9.5,32.5
+      parent: 8364
+      type: Transform
+  - uid: 7964
+    components:
+    - pos: 2.5,27.5
+      parent: 8364
+      type: Transform
+  - uid: 8778
+    components:
+    - pos: 2.5,32.5
+      parent: 8364
+      type: Transform
 - proto: WardrobeAtmospherics
   entities:
   - uid: 10313
@@ -196598,36 +196642,6 @@ entities:
       type: Transform
 - proto: WardrobePrisonFilled
   entities:
-  - uid: 7765
-    components:
-    - pos: 9.5,32.5
-      parent: 8364
-      type: Transform
-  - uid: 7766
-    components:
-    - pos: 2.5,27.5
-      parent: 8364
-      type: Transform
-  - uid: 7904
-    components:
-    - pos: 6.5,27.5
-      parent: 8364
-      type: Transform
-  - uid: 7910
-    components:
-    - pos: 6.5,32.5
-      parent: 8364
-      type: Transform
-  - uid: 7964
-    components:
-    - pos: 2.5,32.5
-      parent: 8364
-      type: Transform
-  - uid: 8778
-    components:
-    - pos: 9.5,27.5
-      parent: 8364
-      type: Transform
   - uid: 27286
     components:
     - pos: -8.5,42.5
