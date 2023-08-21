@@ -12066,6 +12066,13 @@ entities:
       type: Transform
 - proto: AirlockBrigGlassLocked
   entities:
+  - uid: 371
+    components:
+    - name: Зал суда
+      type: MetaData
+    - pos: -10.5,25.5
+      parent: 8364
+      type: Transform
   - uid: 3898
     components:
     - name: Бриг
@@ -12101,6 +12108,13 @@ entities:
     - allowedDirections:
       - East
       type: DirectionalAccess
+  - uid: 7818
+    components:
+    - name: Зал суда
+      type: MetaData
+    - pos: -11.5,25.5
+      parent: 8364
+      type: Transform
   - uid: 8638
     components:
     - name: Бриг
@@ -12123,6 +12137,13 @@ entities:
     - pos: -4.5,35.5
       parent: 8364
       type: Transform
+  - uid: 9422
+    components:
+    - name: Пустой офис магистрата
+      type: MetaData
+    - pos: -9.5,23.5
+      parent: 8364
+      type: Transform
 - proto: AirlockBrigLocked
   entities:
   - uid: 7691
@@ -12137,6 +12158,20 @@ entities:
     - name: Тюремные камеры
       type: MetaData
     - pos: 10.5,30.5
+      parent: 8364
+      type: Transform
+  - uid: 9425
+    components:
+    - name: Хранилище улик
+      type: MetaData
+    - pos: 15.5,28.5
+      parent: 8364
+      type: Transform
+  - uid: 9931
+    components:
+    - name: Пустой офис магистрата
+      type: MetaData
+    - pos: -5.5,20.5
       parent: 8364
       type: Transform
 - proto: AirlockCaptainGlassLocked
@@ -13806,7 +13841,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -416694.84
+    - SecondsUntilStateChange: -418450.78
       changeAirtight: False
       state: Opening
       type: Door
@@ -13824,7 +13859,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -416694.84
+    - SecondsUntilStateChange: -418450.78
       changeAirtight: False
       state: Opening
       type: Door
@@ -14049,13 +14084,6 @@ entities:
     - pos: 61.5,15.5
       parent: 8364
       type: Transform
-  - uid: 11913
-    components:
-    - name: Технический тоннель EVA
-      type: MetaData
-    - pos: -15.5,8.5
-      parent: 8364
-      type: Transform
   - uid: 15308
     components:
     - name: Технический тоннель машинного отделения
@@ -14102,6 +14130,16 @@ entities:
     - name: Церковь Грейтайда
       type: MetaData
     - pos: 43.5,-69.5
+      parent: 8364
+      type: Transform
+- proto: AirlockMaintHOPLocked
+  entities:
+  - uid: 8969
+    components:
+    - name: технические тоннели EVA
+      type: MetaData
+    - rot: 3.141592653589793 rad
+      pos: -15.5,8.5
       parent: 8364
       type: Transform
 - proto: AirlockMaintHydroLocked
@@ -15022,40 +15060,51 @@ entities:
       type: Transform
   - uid: 9456
     components:
-    - name: Зал суда
+    - name: Допросная
       type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: -11.5,25.5
+    - pos: 19.5,30.5
       parent: 8364
       type: Transform
   - uid: 9459
     components:
-    - name: Зал суда
+    - name: Бриг
       type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: -10.5,25.5
+    - pos: 11.5,35.5
       parent: 8364
       type: Transform
   - uid: 9460
     components:
-    - name: Пустой офис магистрата
+    - name: Бриг
       type: MetaData
-    - rot: -1.5707963267948966 rad
-      pos: -9.5,23.5
+    - pos: 12.5,35.5
+      parent: 8364
+      type: Transform
+  - uid: 9928
+    components:
+    - name: Бриг
+      type: MetaData
+    - pos: 1.5,36.5
+      parent: 8364
+      type: Transform
+  - uid: 9929
+    components:
+    - name: Бриг
+      type: MetaData
+    - pos: 1.5,37.5
       parent: 8364
       type: Transform
   - uid: 10111
     components:
     - name: Допросная
       type: MetaData
-    - pos: 19.5,32.5
+    - pos: 13.5,29.5
       parent: 8364
       type: Transform
   - uid: 10112
     components:
     - name: Допросная
       type: MetaData
-    - pos: 19.5,30.5
+    - pos: 13.5,30.5
       parent: 8364
       type: Transform
   - uid: 11619
@@ -15074,35 +15123,14 @@ entities:
       type: Transform
   - uid: 11623
     components:
-    - name: Фойе брига
+    - name: Допросная
       type: MetaData
-    - pos: 12.5,35.5
-      parent: 8364
-      type: Transform
-  - uid: 11965
-    components:
-    - name: Фойе брига
-      type: MetaData
-    - pos: 11.5,35.5
-      parent: 8364
-      type: Transform
-  - uid: 11999
-    components:
-    - name: Фойе брига
-      type: MetaData
-    - pos: 1.5,36.5
+    - pos: 19.5,32.5
       parent: 8364
       type: Transform
   - uid: 12027
     components:
     - pos: -9.5,4.5
-      parent: 8364
-      type: Transform
-  - uid: 12166
-    components:
-    - name: Фойе брига
-      type: MetaData
-    - pos: 1.5,37.5
       parent: 8364
       type: Transform
   - uid: 12329
@@ -15199,13 +15227,6 @@ entities:
       type: Transform
 - proto: AirlockSecurityLocked
   entities:
-  - uid: 371
-    components:
-    - name: Пустой офис магистрата
-      type: MetaData
-    - pos: -5.5,20.5
-      parent: 8364
-      type: Transform
   - uid: 1822
     components:
     - pos: 45.5,-21.5
@@ -15214,27 +15235,6 @@ entities:
   - uid: 9463
     components:
     - pos: -12.5,23.5
-      parent: 8364
-      type: Transform
-  - uid: 9928
-    components:
-    - name: Допросная
-      type: MetaData
-    - pos: 13.5,29.5
-      parent: 8364
-      type: Transform
-  - uid: 9929
-    components:
-    - name: Допросная
-      type: MetaData
-    - pos: 13.5,30.5
-      parent: 8364
-      type: Transform
-  - uid: 9931
-    components:
-    - name: Хранилище улик
-      type: MetaData
-    - pos: 15.5,28.5
       parent: 8364
       type: Transform
   - uid: 11621
@@ -38202,6 +38202,21 @@ entities:
       type: Transform
     - enabled: True
       type: AmbientSound
+  - uid: 17167
+    components:
+    - pos: -38.5,-25.5
+      parent: 8364
+      type: Transform
+  - uid: 17168
+    components:
+    - pos: -38.5,-24.5
+      parent: 8364
+      type: Transform
+  - uid: 17169
+    components:
+    - pos: -38.5,-23.5
+      parent: 8364
+      type: Transform
   - uid: 17186
     components:
     - pos: 22.5,-22.5
@@ -38868,6 +38883,11 @@ entities:
   - uid: 17536
     components:
     - pos: 6.5,-21.5
+      parent: 8364
+      type: Transform
+  - uid: 17553
+    components:
+    - pos: -38.5,-22.5
       parent: 8364
       type: Transform
   - uid: 17560
@@ -84424,11 +84444,19 @@ entities:
       pos: 79.5,-26.5
       parent: 8364
       type: Transform
+    - linkedPorts:
+        20207:
+        - ArtifactAnalyzerSender: ArtifactAnalyzerReceiver
+      type: DeviceLinkSource
   - uid: 17552
     components:
     - pos: 71.5,-43.5
       parent: 8364
       type: Transform
+    - linkedPorts:
+        21199:
+        - ArtifactAnalyzerSender: ArtifactAnalyzerReceiver
+      type: DeviceLinkSource
 - proto: computerBodyScanner
   entities:
   - uid: 19054
@@ -84579,11 +84607,6 @@ entities:
       pos: -5.5,32.5
       parent: 8364
       type: Transform
-  - uid: 8969
-    components:
-    - pos: 5.5,23.5
-      parent: 8364
-      type: Transform
   - uid: 14307
     components:
     - pos: -57.5,5.5
@@ -84593,23 +84616,6 @@ entities:
     components:
     - rot: -1.5707963267948966 rad
       pos: -19.5,-30.5
-      parent: 8364
-      type: Transform
-  - uid: 25595
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 10.5,36.5
-      parent: 8364
-      type: Transform
-  - uid: 25784
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: -1.5,39.5
-      parent: 8364
-      type: Transform
-  - uid: 26317
-    components:
-    - pos: 13.5,54.5
       parent: 8364
       type: Transform
 - proto: ComputerFrame
@@ -84839,6 +84845,28 @@ entities:
   - uid: 7450
     components:
     - pos: -10.5,-6.5
+      parent: 8364
+      type: Transform
+  - uid: 10792
+    components:
+    - pos: 5.5,23.5
+      parent: 8364
+      type: Transform
+  - uid: 11913
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 10.5,36.5
+      parent: 8364
+      type: Transform
+  - uid: 12681
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: -1.5,39.5
+      parent: 8364
+      type: Transform
+  - uid: 16154
+    components:
+    - pos: 13.5,54.5
       parent: 8364
       type: Transform
 - proto: ComputerSurveillanceCameraMonitor
@@ -104626,6 +104654,8 @@ entities:
       pos: 11.5,-41.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
   - uid: 29676
     components:
     - pos: 17.5,-84.5
@@ -104784,6 +104814,13 @@ entities:
       parent: 8364
       type: Transform
     - color: '#0335FCFF'
+      type: AtmosPipeColor
+  - uid: 11965
+    components:
+    - pos: -4.5,17.5
+      parent: 8364
+      type: Transform
+    - color: '#FF1212FF'
       type: AtmosPipeColor
   - uid: 12762
     components:
@@ -111330,6 +111367,8 @@ entities:
       pos: 12.5,-44.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
   - uid: 19876
     components:
     - pos: 1.5,-22.5
@@ -127327,6 +127366,8 @@ entities:
       pos: 12.5,-42.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
 - proto: GasPipeTJunction
   entities:
   - uid: 750
@@ -127660,13 +127701,6 @@ entities:
   - uid: 7710
     components:
     - pos: -3.5,36.5
-      parent: 8364
-      type: Transform
-    - color: '#FF1212FF'
-      type: AtmosPipeColor
-  - uid: 7818
-    components:
-    - pos: -4.5,17.5
       parent: 8364
       type: Transform
     - color: '#FF1212FF'
@@ -130317,12 +130351,16 @@ entities:
       pos: 12.5,-41.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
   - uid: 29674
     components:
     - rot: 1.5707963267948966 rad
       pos: 12.5,-43.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
   - uid: 29677
     components:
     - rot: 3.141592653589793 rad
@@ -130618,11 +130656,15 @@ entities:
     - pos: 12.5,-40.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
   - uid: 29534
     components:
     - pos: 11.5,-40.5
       parent: 8364
       type: Transform
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
   - uid: 29553
     components:
     - rot: 3.141592653589793 rad
@@ -135777,6 +135819,8 @@ entities:
       type: DeviceNetwork
     - enabled: False
       type: AmbientSound
+    - color: '#FF1212FF'
+      type: AtmosPipeColor
 - proto: GasVolumePump
   entities:
   - uid: 29452
@@ -146953,11 +146997,17 @@ entities:
     - pos: 79.5,-29.5
       parent: 8364
       type: Transform
+    - links:
+      - 13678
+      type: DeviceLinkSink
   - uid: 21199
     components:
     - pos: 71.5,-40.5
       parent: 8364
       type: Transform
+    - links:
+      - 17552
+      type: DeviceLinkSink
 - proto: MachineFrame
   entities:
   - uid: 17860
@@ -147707,33 +147757,10 @@ entities:
         - 0
         - 0
       type: EntityStorage
-  - uid: 10792
+  - uid: 17164
     components:
-    - rot: 1.5707963267948966 rad
-      pos: 64.5,18.5
-      parent: 8364
-      type: Transform
-    - air:
-        volume: 200
-        immutable: False
-        temperature: 293.14954
-        moles:
-        - 4.3997126
-        - 16.5513
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-      type: EntityStorage
-  - uid: 12681
-    components:
-    - pos: 14.5,36.5
+    - rot: 3.141592653589793 rad
+      pos: 14.5,36.5
       parent: 8364
       type: Transform
   - uid: 18623
@@ -158082,7 +158109,8 @@ entities:
       type: Transform
   - uid: 22324
     components:
-    - pos: 53.5,11.5
+    - rot: 3.141592653589793 rad
+      pos: 53.5,12.5
       parent: 8364
       type: Transform
   - uid: 22325
@@ -197922,6 +197950,18 @@ entities:
       type: DeviceLinkSink
     - bumpOpen: False
       type: Door
+  - uid: 11999
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: -8.5,17.5
+      parent: 8364
+      type: Transform
+  - uid: 12166
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: -8.5,15.5
+      parent: 8364
+      type: Transform
 - proto: WindoorSecureCaptainLocked
   entities:
   - uid: 5707
@@ -198163,18 +198203,6 @@ entities:
       type: Transform
 - proto: WindoorSecureSecurityLocked
   entities:
-  - uid: 9422
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: -8.5,17.5
-      parent: 8364
-      type: Transform
-  - uid: 9425
-    components:
-    - rot: 1.5707963267948966 rad
-      pos: -8.5,15.5
-      parent: 8364
-      type: Transform
   - uid: 9485
     components:
     - rot: 1.5707963267948966 rad
