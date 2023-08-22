@@ -13854,7 +13854,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -423340.6
+    - SecondsUntilStateChange: -423419.3
       changeAirtight: False
       state: Opening
       type: Door
@@ -13872,7 +13872,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -423340.6
+    - SecondsUntilStateChange: -423419.3
       changeAirtight: False
       state: Opening
       type: Door
@@ -147378,26 +147378,26 @@ entities:
     - pos: -52.5,5.5
       parent: 8364
       type: Transform
-- proto: MagazinePistolHighCapacity
+- proto: MagazinePistol
   entities:
   - uid: 26579
     components:
-    - pos: -2.7534065,49.49981
+    - pos: -2.3107386,49.54476
       parent: 8364
       type: Transform
   - uid: 26589
     components:
-    - pos: -2.6596565,49.515434
+    - pos: -2.4357386,49.54476
       parent: 8364
       type: Transform
   - uid: 26599
     components:
-    - pos: -2.5659065,49.515434
+    - pos: -2.7326136,49.54476
       parent: 8364
       type: Transform
   - uid: 26601
     components:
-    - pos: -2.3471565,49.546684
+    - pos: -2.5763636,49.54476
       parent: 8364
       type: Transform
 - proto: MagazineRifle
