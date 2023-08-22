@@ -50,6 +50,7 @@
     - state: open-lock-overlay
       map: ["openIndicator"]
       visible: false
+      shader: unshaded
     - state: lock-closed
       map: ["enum.StorageVisualLayers.Lock"]
       shader: unshaded
@@ -63,6 +64,9 @@
         openIndicator:
           Open: { visible: true }
           Closed: { visible: false }
+        enum.StorageVisualLayers.Lock:
+          Open: { visible: false }
+          Closed: { visible: true }
   - type: EntityStorageVisuals
     stateLocked: lock-closed
     stateUnlocked: lock-open
