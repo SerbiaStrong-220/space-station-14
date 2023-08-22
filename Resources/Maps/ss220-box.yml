@@ -13854,7 +13854,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -423419.3
+    - SecondsUntilStateChange: -423530.9
       changeAirtight: False
       state: Opening
       type: Door
@@ -13872,7 +13872,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -423419.3
+    - SecondsUntilStateChange: -423530.9
       changeAirtight: False
       state: Opening
       type: Door
@@ -148799,13 +148799,6 @@ entities:
     - pos: -3.5,-10.5
       parent: 8364
       type: Transform
-- proto: PaintingTheGreatWave
-  entities:
-  - uid: 28885
-    components:
-    - pos: 2.5,-10.5
-      parent: 8364
-      type: Transform
 - proto: PaintingTheScream
   entities:
   - uid: 15309
@@ -150065,6 +150058,13 @@ entities:
   - uid: 22516
     components:
     - pos: 52.54258,-74.65333
+      parent: 8364
+      type: Transform
+- proto: PictureBobRoss
+  entities:
+  - uid: 25770
+    components:
+    - pos: 2.5,-10.5
       parent: 8364
       type: Transform
 - proto: PinpointerNuclear
@@ -167114,12 +167114,11 @@ entities:
     - pos: 68.5,-48.5
       parent: 8364
       type: Transform
-- proto: SignArmory
+- proto: SignArmoryFrank
   entities:
-  - uid: 25770
+  - uid: 28885
     components:
-    - rot: 1.5707963267948966 rad
-      pos: 2.5,47.5
+    - pos: 2.5,47.5
       parent: 8364
       type: Transform
 - proto: SignAtmos
