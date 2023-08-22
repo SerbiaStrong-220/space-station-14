@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseSign
+  id: SignSecurityFrank
+  suffix: Frank
+  name: знак "СБ"
+  description: Знак, означающий что где-то вблизи живут герои этой станции.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Wallmounts/department_signs.rsi
+    state: sec
