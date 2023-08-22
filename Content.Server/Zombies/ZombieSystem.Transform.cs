@@ -258,13 +258,8 @@ namespace Content.Server.Zombies
                 RemComp(target, handsComp);
             }
 
-            //ignores handcuffs for zombie
-            //because zombies should bite even with them
             if (TryComp<CuffableComponent>(target, out CuffableComponent? cuffableComp))
-            {
-                cuffableComp.CanStillInteract = true;
-                Dirty(cuffableComp);
-            }
+                RemComp(target, cuffableComp);
 
             // No longer waiting to become a zombie:
             // Requires deferral because this is (probably) the event which called ZombifyEntity in the first place.
