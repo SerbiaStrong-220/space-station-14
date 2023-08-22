@@ -13852,7 +13852,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -421041.75
+    - SecondsUntilStateChange: -422674.25
       changeAirtight: False
       state: Opening
       type: Door
@@ -13870,7 +13870,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -421041.75
+    - SecondsUntilStateChange: -422674.25
       changeAirtight: False
       state: Opening
       type: Door
@@ -13998,6 +13998,8 @@ entities:
     - pos: 13.5,-10.5
       parent: 8364
       type: Transform
+    - type: AccessReader
+      access: [["Maintenance"],["Command"]]
   - uid: 28187
     components:
     - pos: -21.5,52.5
@@ -14090,6 +14092,13 @@ entities:
       type: Transform
 - proto: AirlockMaintEngiLocked
   entities:
+  - uid: 5095
+    components:
+    - name: Инженерный склад
+      type: MetaData
+    - pos: -9.5,-46.5
+      parent: 8364
+      type: Transform
   - uid: 11650
     components:
     - pos: 61.5,15.5
@@ -14419,13 +14428,6 @@ entities:
     components:
     - rot: -1.5707963267948966 rad
       pos: -4.5,-58.5
-      parent: 8364
-      type: Transform
-  - uid: 24091
-    components:
-    - name: Инженерный склад
-      type: MetaData
-    - pos: -9.5,-46.5
       parent: 8364
       type: Transform
   - uid: 25969
@@ -83422,9 +83424,9 @@ entities:
       type: Transform
 - proto: ClothingNeckMantleCE
   entities:
-  - uid: 7618
+  - uid: 29834
     components:
-    - pos: -1.370117,-59.311813
+    - pos: -1.3765825,-59.52243
       parent: 8364
       type: Transform
 - proto: ClothingNeckMantleHOP
@@ -83436,9 +83438,9 @@ entities:
       type: Transform
 - proto: ClothingNeckMantleHOS
   entities:
-  - uid: 26289
+  - uid: 26287
     components:
-    - pos: 16.533733,54.396873
+    - pos: 12.35581,53.921173
       parent: 8364
       type: Transform
 - proto: ClothingNeckMantleRD
@@ -87838,6 +87840,12 @@ entities:
   - uid: 7433
     components:
     - pos: 0.5,9.5
+      parent: 8364
+      type: Transform
+  - uid: 8266
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 77.5,-37.5
       parent: 8364
       type: Transform
   - uid: 8702
@@ -93156,7 +93164,8 @@ entities:
       type: Transform
   - uid: 21055
     components:
-    - pos: 77.5,-37.5
+    - rot: -1.5707963267948966 rad
+      pos: 42.5,-45.5
       parent: 8364
       type: Transform
   - uid: 21056
@@ -95397,6 +95406,24 @@ entities:
     - pos: 76.5,-8.5
       parent: 8364
       type: Transform
+  - uid: 29830
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 74.5,-37.5
+      parent: 8364
+      type: Transform
+  - uid: 29831
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 75.5,-37.5
+      parent: 8364
+      type: Transform
+  - uid: 29832
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 76.5,-37.5
+      parent: 8364
+      type: Transform
 - proto: DisposalRouter
   entities:
   - uid: 22062
@@ -95809,6 +95836,12 @@ entities:
     components:
     - rot: 1.5707963267948966 rad
       pos: -2.5,41.5
+      parent: 8364
+      type: Transform
+  - uid: 26286
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 73.5,-37.5
       parent: 8364
       type: Transform
   - uid: 27559
@@ -96339,6 +96372,11 @@ entities:
       type: Transform
 - proto: DrinkMugBlack
   entities:
+  - uid: 7353
+    components:
+    - pos: -0.99274945,-59.52243
+      parent: 8364
+      type: Transform
   - uid: 18382
     components:
     - pos: 53.98643,-33.364586
@@ -96367,7 +96405,7 @@ entities:
   entities:
   - uid: 29753
     components:
-    - pos: 12.487907,54.031906
+    - pos: 12.746435,53.9993
       parent: 8364
       type: Transform
 - proto: DrinkShaker
@@ -98539,18 +98577,16 @@ entities:
       - 29719
       - 29720
       type: DeviceList
-- proto: FireAxeCabinet
-  entities:
-  - uid: 8266
-    components:
-    - pos: 1.5,-10.5
-      parent: 8364
-      type: Transform
 - proto: FireAxeCabinetFilled
   entities:
   - uid: 16508
     components:
     - pos: 6.5,-45.5
+      parent: 8364
+      type: Transform
+  - uid: 24091
+    components:
+    - pos: 1.5,-10.5
       parent: 8364
       type: Transform
 - proto: FireExtinguisher
@@ -144859,14 +144895,19 @@ entities:
     - pos: -10.400204,7.4809055
       parent: 8364
       type: Transform
-  - uid: 26847
-    components:
-    - pos: -10.088213,9.755057
-      parent: 8364
-      type: Transform
   - uid: 26848
     components:
     - pos: -12.493954,3.065948
+      parent: 8364
+      type: Transform
+  - uid: 29828
+    components:
+    - pos: -7.430661,-64.49338
+      parent: 8364
+      type: Transform
+  - uid: 29829
+    components:
+    - pos: -7.540036,-64.30588
       parent: 8364
       type: Transform
 - proto: KitchenKnife
@@ -146129,6 +146170,13 @@ entities:
         - On: On
         - Off: Off
       type: DeviceLinkSource
+- proto: LockedUnicaBox
+  entities:
+  - uid: 26288
+    components:
+    - pos: 16.5,54.5
+      parent: 8364
+      type: Transform
 - proto: LockerAtmosphericsFilled
   entities:
   - uid: 16556
@@ -147308,18 +147356,6 @@ entities:
   - uid: 26601
     components:
     - pos: -2.3471565,49.546684
-      parent: 8364
-      type: Transform
-- proto: MagazinePistolSubMachineGunTopMounted
-  entities:
-  - uid: 26287
-    components:
-    - pos: 16.408733,54.63125
-      parent: 8364
-      type: Transform
-  - uid: 26288
-    components:
-    - pos: 16.361858,54.521873
       parent: 8364
       type: Transform
 - proto: MagazineRifle
@@ -148534,6 +148570,11 @@ entities:
   - uid: 5181
     components:
     - pos: -29.5,-35.5
+      parent: 8364
+      type: Transform
+  - uid: 7618
+    components:
+    - pos: -5.5,-62.5
       parent: 8364
       type: Transform
   - uid: 11706
@@ -150635,6 +150676,13 @@ entities:
       pos: 20.5,40.5
       parent: 8364
       type: Transform
+- proto: PosterLegitSafetyInternals
+  entities:
+  - uid: 29835
+    components:
+    - pos: -7.5,-60.5
+      parent: 8364
+      type: Transform
 - proto: PosterLegitSafetyMothEpi
   entities:
   - uid: 29646
@@ -150647,6 +150695,11 @@ entities:
   - uid: 17772
     components:
     - pos: 3.5,-58.5
+      parent: 8364
+      type: Transform
+  - uid: 29836
+    components:
+    - pos: 10.5,-59.5
       parent: 8364
       type: Transform
 - proto: PosterLegitSafetyMothPiping
@@ -157282,6 +157335,11 @@ entities:
   - uid: 29262
     components:
     - pos: -5.5,-43.5
+      parent: 8364
+      type: Transform
+  - uid: 29827
+    components:
+    - pos: -7.5,-64.5
       parent: 8364
       type: Transform
 - proto: RadiationCollector
@@ -167927,16 +167985,16 @@ entities:
     - pos: -74.5,12.5
       parent: 8364
       type: Transform
-- proto: SignSecurity
+- proto: SignSecurityFrank
   entities:
-  - uid: 5095
-    components:
-    - pos: 1.5,24.5
-      parent: 8364
-      type: Transform
-  - uid: 7353
+  - uid: 26289
     components:
     - pos: -2.5,31.5
+      parent: 8364
+      type: Transform
+  - uid: 26847
+    components:
+    - pos: 1.5,24.5
       parent: 8364
       type: Transform
 - proto: SignShipDock
@@ -177739,6 +177797,11 @@ entities:
   - uid: 29694
     components:
     - pos: 10.5,-28.5
+      parent: 8364
+      type: Transform
+  - uid: 29833
+    components:
+    - pos: -8,0.5
       parent: 8364
       type: Transform
 - proto: WallmountTelescreen
@@ -197618,13 +197681,6 @@ entities:
   - uid: 28640
     components:
     - pos: -2.3774498,51.28
-      parent: 8364
-      type: Transform
-- proto: WeaponSubMachineGunWt550
-  entities:
-  - uid: 26286
-    components:
-    - pos: 16.48465,54.646225
       parent: 8364
       type: Transform
 - proto: WeaponTurretSyndicateBroken
