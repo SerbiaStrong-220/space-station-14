@@ -36,6 +36,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
 using System.Linq;
+using Content.Shared.Cuffs.Components;
 
 namespace Content.Server.Zombies
 {
@@ -255,6 +256,14 @@ namespace Content.Server.Zombies
             {
                 _hands.RemoveHands(target);
                 RemComp(target, handsComp);
+            }
+
+            //ignores handcuffs for zombie
+            //because zombies should bite even with them
+            if (TryComp<CuffableComponent>(target, out CuffableComponent? cuffableComp))
+            {
+                cuffableComp.CanStillInteract = true;
+                Dirty(cuffableComp);
             }
 
             // No longer waiting to become a zombie:
