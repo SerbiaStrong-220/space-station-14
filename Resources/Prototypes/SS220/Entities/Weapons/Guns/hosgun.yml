@@ -1,0 +1,22 @@
+- type: entity
+  name: Уника
+  parent: BaseWeaponRevolver
+  id: WeaponRevolverMatebaSouvenir
+  description: Сувенирная версия авторевольвера Матеба с золотым покрытием. Из-за других материалов обладает конструктивно уменьшенной скорострельностью. Использует патроны калибра .45 магнум.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/hosgun.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/hosgun.rsi
+  - type: RevolverAmmoProvider
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+  - type: Gun
+    fireRate: 2.1
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
+      params:
+        volume: 0.8
+  - type: StaticPrice
+    price: 5000
