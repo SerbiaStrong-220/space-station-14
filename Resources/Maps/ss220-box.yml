@@ -12393,12 +12393,18 @@ entities:
       type: Transform
   - uid: 5707
     components:
-    - name: Мостик
+    - name: Командная рубка
       type: MetaData
     - rot: 3.141592653589793 rad
       pos: -0.5,-10.5
       parent: 8364
       type: Transform
+    - access:
+      - - Captain
+      - - HeadOfPersonnel
+      - - Blueshield
+      - - HeadOfSecurity
+      type: AccessReader
   - uid: 6040
     components:
     - name: Мостик
@@ -13848,7 +13854,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -423132.66
+    - SecondsUntilStateChange: -423340.6
       changeAirtight: False
       state: Opening
       type: Door
@@ -13866,7 +13872,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -423132.66
+    - SecondsUntilStateChange: -423340.6
       changeAirtight: False
       state: Opening
       type: Door
@@ -85996,6 +86002,8 @@ entities:
     - pos: -4.5,-17.5
       parent: 8364
       type: Transform
+    - locked: False
+      type: Lock
 - proto: CrateTrashCart
   entities:
   - uid: 29746
@@ -101057,6 +101065,57 @@ entities:
   - uid: 29244
     components:
     - pos: -45.5,-10.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+- proto: FloorDrainSmall
+  entities:
+  - uid: 27230
+    components:
+    - pos: 11.5,6.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29837
+    components:
+    - pos: 11.5,5.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29838
+    components:
+    - pos: 11.5,4.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29839
+    components:
+    - pos: -22.5,33.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29840
+    components:
+    - pos: -21.5,33.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29841
+    components:
+    - pos: 10.5,-10.5
+      parent: 8364
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 29842
+    components:
+    - pos: 10.5,-9.5
       parent: 8364
       type: Transform
     - fixtures: {}
@@ -198322,10 +198381,18 @@ entities:
       type: Transform
   - uid: 26118
     components:
+    - name: Командная рубка
+      type: MetaData
     - rot: 3.141592653589793 rad
       pos: -1.5,-7.5
       parent: 8364
       type: Transform
+    - access:
+      - - Captain
+      - - HeadOfPersonnel
+      - - Blueshield
+      - - HeadOfSecurity
+      type: AccessReader
   - uid: 27433
     components:
     - rot: -1.5707963267948966 rad
