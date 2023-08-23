@@ -33,7 +33,7 @@ namespace Content.Server.SS220.BackEndApi
 
         private readonly HashSet<string> _serverCommands = new() { ConsoleCommand, PlayersCountCommand };
 
-        public void PostInject()
+        public void Initialize()
         {
             _configurationManager.OnValueChanged(CVars.WatchdogToken, _ => UpdateToken());
             _configurationManager.OnValueChanged(CVars.WatchdogKey, _ => UpdateToken());
@@ -41,7 +41,7 @@ namespace Content.Server.SS220.BackEndApi
             UpdateToken();
         }
 
-        public void PostInitialize()
+        public void PostInject()
         {
             _sawmill = Logger.GetSawmill("serverController");
             _statusHost.AddHandler(BackRequestHandler);
