@@ -87,7 +87,12 @@ namespace Content.Server.SS220.BackEndApi
 
         private async Task<bool> TryAuth(IStatusHandlerContext context)
         {
-            var auth = context.RequestHeaders["WatchdogToken"];
+            if (!context.RequestHeaders.TryGetValue("WatchdogToken", out var auth))
+            {
+                _sawmill.Info(@"Failed auth: no auth info");
+                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
+                return false;
+            }
 
             if (auth != _watchdogToken)
             {
