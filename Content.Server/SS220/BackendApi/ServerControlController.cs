@@ -15,7 +15,7 @@ using Robust.Server.Player;
 
 namespace Content.Server.SS220.BackEndApi
 {
-    public sealed partial class ServerControlController
+    public sealed partial class ServerControlController : IPostInjectInit
     {
         [Dependency] private readonly IStatusHost _statusHost = default!;
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
@@ -33,7 +33,7 @@ namespace Content.Server.SS220.BackEndApi
 
         private readonly HashSet<string> _serverCommands = new() { ConsoleCommand, PlayersCountCommand };
 
-        public void Initialize()
+        public void PostInject()
         {
             _configurationManager.OnValueChanged(CVars.WatchdogToken, _ => UpdateToken());
             _configurationManager.OnValueChanged(CVars.WatchdogKey, _ => UpdateToken());

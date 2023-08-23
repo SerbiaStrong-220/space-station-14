@@ -161,8 +161,6 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<GameTicker>().PostInitialize();
                 IoCManager.Resolve<IBanManager>().Initialize();
             }
-
-            _controlController?.PostInitialize();
         }
 
         public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
