@@ -13854,7 +13854,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -424939.47
+    - SecondsUntilStateChange: -425011.94
       changeAirtight: False
       state: Opening
       type: Door
@@ -13872,7 +13872,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -424939.47
+    - SecondsUntilStateChange: -425011.94
       changeAirtight: False
       state: Opening
       type: Door
@@ -96242,7 +96242,7 @@ entities:
       type: Transform
   - uid: 25809
     components:
-    - pos: -2.5,45.5
+    - pos: -0.5,46.5
       parent: 8364
       type: Transform
   - uid: 25867
@@ -170153,9 +170153,9 @@ entities:
       type: Transform
 - proto: SpawnMobMcGriffGhostRole
   entities:
-  - uid: 10719
+  - uid: 29848
     components:
-    - pos: -2.5,45.5
+    - pos: -0.5,46.5
       parent: 8364
       type: Transform
 - proto: SpawnMobMedibot
@@ -196811,6 +196811,13 @@ entities:
       type: Fixtures
     - range: 2.5
       type: InteractionRange
+- proto: WardenGasLocker
+  entities:
+  - uid: 10719
+    components:
+    - pos: -2.5,45.5
+      parent: 8364
+      type: Transform
 - proto: WarderobePrisonSecureFilled
   entities:
   - uid: 7765
