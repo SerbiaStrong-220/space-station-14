@@ -12,6 +12,7 @@ using Robust.Server.Console;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackendApi;
 using Robust.Server.Player;
+using Content.Server.SS220.BackendApi.RequestModels;
 
 namespace Content.Server.SS220.BackEndApi
 {
@@ -54,20 +55,6 @@ namespace Content.Server.SS220.BackEndApi
                 return false;
             }
 
-            if (!context.RequestHeaders.TryGetValue("WatchdogToken", out var auth))
-            {
-                _sawmill.Info(@"Failed auth: no auth info");
-                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
-                return true;
-            }
-
-            if (auth != _watchdogToken)
-            {
-                _sawmill.Info(@"Failed auth: ""{0}"" vs ""{1}""", auth, _watchdogToken);
-                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
-                return true;
-            }
-
             try
             {
                 if (context.Url!.AbsolutePath == ConsoleCommand)
@@ -91,21 +78,39 @@ namespace Content.Server.SS220.BackEndApi
 
         private async Task PlayersCountHandler(IStatusHandlerContext context)
         {
+            IBasicRequestModel request;
+
+            try
+            {
+                request = await context.RequestBodyJsonAsync<IBasicRequestModel>() ?? throw new ArgumentNullException("body", "Parse result is null");
+            }
+            catch (Exception exc)
+            {
+                await context.RespondAsync($"Error on comand parameters parse. {Environment.NewLine}{exc.Message}", HttpStatusCode.BadRequest);
+
+                return;
+            }
+
+            if (!await TryAuth(context, request))
+            {
+                return;
+            }
+
             await context.RespondAsync(_playerManager.PlayerCount.ToString(), HttpStatusCode.OK);
         }
 
-        private async Task<bool> TryAuth(IStatusHandlerContext context)
+        private async Task<bool> TryAuth(IStatusHandlerContext context, IBasicRequestModel requestModel)
         {
-            if (!context.RequestHeaders.TryGetValue("WatchdogToken", out var auth))
+            if (string.IsNullOrWhiteSpace(requestModel.WatchDogToken))
             {
                 _sawmill.Info(@"Failed auth: no auth info");
                 await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
                 return false;
             }
 
-            if (auth != _watchdogToken)
+            if (requestModel.WatchDogToken != _watchdogToken)
             {
-                _sawmill.Info(@"Failed auth: ""{0}"" vs ""{1}""", auth, _watchdogToken);
+                _sawmill.Info(@"Failed auth: ""{0}"" vs ""{1}""", requestModel.WatchDogToken, _watchdogToken);
                 await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
                 return false;
             }
@@ -115,18 +120,25 @@ namespace Content.Server.SS220.BackEndApi
 
         private async Task ConsoleCommandHandler(IStatusHandlerContext context)
         {
-            var command = string.Empty;
+            ConsoleCommandRequestModel request;
 
             try
             {
-                command = await context.RequestBodyJsonAsync<string>();
+                request = await context.RequestBodyJsonAsync<ConsoleCommandRequestModel>() ?? throw new ArgumentNullException("body", "Parse result is null");
             }
             catch (Exception exc)
             {
-                await context.RespondAsync($"Error on comand parse. {Environment.NewLine}{exc.Message}", HttpStatusCode.BadRequest);
+                await context.RespondAsync($"Error on comand parameters parse. {Environment.NewLine}{exc.Message}", HttpStatusCode.BadRequest);
 
                 return;
             }
+
+            if (!await TryAuth(context, request))
+            {
+                return;
+            }
+
+            var command = request.Command;
 
             if (string.IsNullOrWhiteSpace(command))
             {
