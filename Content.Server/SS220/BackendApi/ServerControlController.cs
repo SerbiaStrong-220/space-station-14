@@ -54,25 +54,36 @@ namespace Content.Server.SS220.BackEndApi
                 return false;
             }
 
-            if (await TryAuth(context))
+            if (!context.RequestHeaders.TryGetValue("WatchdogToken", out var auth))
             {
-                try
-                {
-                    if (context.Url!.AbsolutePath == ConsoleCommand)
-                    {
-                        await ConsoleCommandHandler(context);
-                    }
-                    else if (context.Url!.AbsolutePath == PlayersCountCommand)
-                    {
-                        await PlayersCountHandler(context);
-                    }
-                }
-                catch (Exception exc)
-                {
-                    _sawmill.Error(exc.Message);
+                _sawmill.Info(@"Failed auth: no auth info");
+                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
+                return true;
+            }
 
-                    await context.RespondAsync(exc.Message, HttpStatusCode.InternalServerError);
+            if (auth != _watchdogToken)
+            {
+                _sawmill.Info(@"Failed auth: ""{0}"" vs ""{1}""", auth, _watchdogToken);
+                await context.RespondErrorAsync(HttpStatusCode.Unauthorized);
+                return true;
+            }
+
+            try
+            {
+                if (context.Url!.AbsolutePath == ConsoleCommand)
+                {
+                    await ConsoleCommandHandler(context);
                 }
+                else if (context.Url!.AbsolutePath == PlayersCountCommand)
+                {
+                    await PlayersCountHandler(context);
+                }
+            }
+            catch (Exception exc)
+            {
+                _sawmill.Error(exc.Message);
+
+                await context.RespondAsync(exc.Message, HttpStatusCode.InternalServerError);
             }
 
             return true;
