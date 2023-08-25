@@ -78,11 +78,11 @@ namespace Content.Server.SS220.BackEndApi
 
         private async Task PlayersCountHandler(IStatusHandlerContext context)
         {
-            IBasicRequestModel request;
+            PlayersCountRequestModel request;
 
             try
             {
-                request = await context.RequestBodyJsonAsync<IBasicRequestModel>() ?? throw new ArgumentNullException("body", "Parse result is null");
+                request = await context.RequestBodyJsonAsync<PlayersCountRequestModel>() ?? throw new ArgumentNullException("body", "Parse result is null");
             }
             catch (Exception exc)
             {
