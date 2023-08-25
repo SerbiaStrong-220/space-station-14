@@ -54,22 +54,25 @@ namespace Content.Server.SS220.BackEndApi
                 return false;
             }
 
-            try
+            if (await TryAuth(context))
             {
-                if (context.Url!.AbsolutePath == ConsoleCommand)
+                try
                 {
-                    await ConsoleCommandHandler(context);
+                    if (context.Url!.AbsolutePath == ConsoleCommand)
+                    {
+                        await ConsoleCommandHandler(context);
+                    }
+                    else if (context.Url!.AbsolutePath == PlayersCountCommand)
+                    {
+                        await PlayersCountHandler(context);
+                    }
                 }
-                else if (context.Url!.AbsolutePath == PlayersCountCommand)
+                catch (Exception exc)
                 {
-                    await PlayersCountHandler(context);
-                }
-            }
-            catch (Exception exc)
-            {
-                _sawmill.Error(exc.Message);
+                    _sawmill.Error(exc.Message);
 
-                await context.RespondAsync(exc.Message, HttpStatusCode.InternalServerError);
+                    await context.RespondAsync(exc.Message, HttpStatusCode.InternalServerError);
+                }
             }
 
             return true;
@@ -77,11 +80,6 @@ namespace Content.Server.SS220.BackEndApi
 
         private async Task PlayersCountHandler(IStatusHandlerContext context)
         {
-            if (!await TryAuth(context))
-            {
-                return;
-            }
-
             await context.RespondAsync(_playerManager.PlayerCount.ToString(), HttpStatusCode.OK);
         }
 
@@ -106,11 +104,6 @@ namespace Content.Server.SS220.BackEndApi
 
         private async Task ConsoleCommandHandler(IStatusHandlerContext context)
         {
-            if (!await TryAuth(context))
-            {
-                return;
-            }
-
             var command = string.Empty;
 
             try
