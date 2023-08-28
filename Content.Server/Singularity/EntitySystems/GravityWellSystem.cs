@@ -119,6 +119,7 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
             EntityManager.HasComponent<GravityWellComponent>(entity)
         ) return false;
 
+        // Can't be affected if you're fully buckled up
         if (TryComp<BuckleComponent>(entity, out var buckleComp))
             return !_buckle.IsFastenedSeatbelt(entity, buckleComp);
 
