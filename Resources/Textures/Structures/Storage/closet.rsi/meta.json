@@ -546,6 +546,15 @@
     },
     {
       "name": "yellow_door"
+    },
+	{
+      "name": "ussp"
+    },
+    {
+      "name": "ussp_door"
+    },
+    {
+      "name": "ussp_open"
     }
   ]
 }

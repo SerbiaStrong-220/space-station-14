@@ -1,0 +1,10 @@
+- type: entity
+  id: UsspCloset
+  parent: ClosetBase
+  name: шкаф СССП
+  description: Стандартное хранилище СССП для различных вещей.
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: ussp
+    stateDoorOpen: ussp_open
+    stateDoorClosed: ussp_door
