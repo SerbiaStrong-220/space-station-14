@@ -8,9 +8,9 @@
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]
-      state: computer
+      state: ussp_computer
     - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
+      state: ussp_generic_keyboard
     - map: ["computerLayerScreen"]
       state: comm_syndie
     - map: ["computerLayerKeys"]
