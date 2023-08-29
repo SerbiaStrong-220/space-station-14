@@ -10,6 +10,8 @@ using Content.Server.Singularity.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Buckle;
+using Content.Shared.Cuffs.Components;
+using Content.Shared.Cuffs;
 
 namespace Content.Server.Singularity.EntitySystems;
 
@@ -27,6 +29,7 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private readonly SharedCuffableSystem _cuffable = default!;
 #endregion Dependencies
 
     /// <summary>
@@ -120,8 +123,16 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
         ) return false;
 
         // Can't be affected if you're fully buckled up
-        if (TryComp<BuckleComponent>(entity, out var buckleComp))
-            return !_buckle.IsFastenedSeatbelt(entity, buckleComp);
+        // btw looks ugly to me, but it'll work for now
+        if (TryComp<BuckleComponent>(entity, out var buckleComp) &&
+            _buckle.IsBuckled(entity, buckleComp))
+        {
+            if (_buckle.IsFastenedSeatbelt(entity, buckleComp))
+                return false;
+            // Can't be affected if you're handcuffed (like, you're cuffed to the chair???)
+            if (TryComp<CuffableComponent>(entity, out var cuffableComp))
+                return cuffableComp.CanStillInteract;
+        }
 
         return true;
     }
