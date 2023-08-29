@@ -11,7 +11,6 @@ using Content.Shared.Ghost;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Buckle;
 using Content.Shared.Cuffs.Components;
-using Content.Shared.Cuffs;
 
 namespace Content.Server.Singularity.EntitySystems;
 
@@ -29,7 +28,6 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffable = default!;
 #endregion Dependencies
 
     /// <summary>
