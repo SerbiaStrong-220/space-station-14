@@ -8,6 +8,7 @@
     sprite: Clothing/Shoes/Boots/workboots.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/workboots.rsi
+  - type: Matchbox
 
 - type: entity
   parent: ClothingShoesStorageBase
@@ -26,6 +27,7 @@
   - type: FootstepModifier # Corvax-Sounds
     footstepSoundCollection:
       collection: FootstepBoots
+    - type: Matchbox
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -37,6 +39,7 @@
     sprite: Clothing/Shoes/Boots/explorer.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/explorer.rsi
+  - type: Matchbox
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -63,6 +66,7 @@
     whitelist:
       tags:
         - Knife
+  - type: Matchbox
 
 - type: entity
   parent: ClothingShoesStorageBase
@@ -78,6 +82,7 @@
     whitelist:
       tags:
         - Knife
+  - type: Matchbox
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -89,3 +94,4 @@
     sprite: Clothing/Shoes/Boots/laceups.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/laceups.rsi
+  - type: Matchbox
