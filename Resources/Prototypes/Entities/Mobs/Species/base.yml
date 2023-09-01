@@ -16,6 +16,7 @@
       Heat:
         collection:
           MeatLaserImpact
+  - type: Operapable
   - type: Tag
     tags:
     - CanPilot

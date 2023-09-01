@@ -83,5 +83,8 @@ namespace Content.Shared.Verbs
         public static readonly VerbCategory Lever = new("verb-categories-lever", null);
 
         public static readonly VerbCategory SelectType = new("verb-categories-select-type", null);
+
+        public static readonly VerbCategory BodyPartList = new ("Выбрать часть тела", null);
+        public static readonly VerbCategory SurgeyOperations = new("Выбрать операцию", null);
     }
 }
