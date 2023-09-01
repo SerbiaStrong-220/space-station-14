@@ -92,6 +92,7 @@
     sprite: Clothing/Shoes/Specific/swat.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Specific/swat.rsi
+  - type: Matchbox
 
 - type: entity
   parent: ClothingShoesBaseButcherable
