@@ -108,6 +108,9 @@ public abstract partial class SharedToolSystem : EntitySystem
         if (!CanStartToolUse(tool, user, target, toolQualitiesNeeded, toolComponent))
             return false;
 
+        if (!CanUseToolOnTarget(tool, user, target))
+            return false;
+
         var toolEvent = new ToolDoAfterEvent(doAfterEv, target);
         var doAfterArgs = new DoAfterArgs(user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
         {
@@ -192,6 +195,17 @@ public abstract partial class SharedToolSystem : EntitySystem
         RaiseLocalEvent(tool, beforeAttempt, false);
 
         return !beforeAttempt.Cancelled;
+    }
+
+    private bool CanUseToolOnTarget(EntityUid tool, EntityUid user, EntityUid? target)
+    {
+        if (target == null)
+            return true;
+
+        var targetAttempt = new InteractedWithToolAttemptEvent(user, target, tool);
+        RaiseLocalEvent((EntityUid) target, targetAttempt, false);
+
+        return !targetAttempt.Cancelled;
     }
 
     #region DoAfterEvents
