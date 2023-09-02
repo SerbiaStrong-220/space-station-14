@@ -230,7 +230,7 @@
   components:
   - type: NukeCodePaper
     allNukesAvailable: false
-  - type: Papere
+  - type: Paper
 
 - type: entity
   name: pen
