@@ -82,7 +82,7 @@ public sealed partial class NukeopsRuleComponent : Component
     ///     Minimal operatives count for war declaration
     /// </summary>
     [DataField("warDeclarationMinOps")]
-    public int WarDeclarationMinOps = 4;
+    public int WarDeclarationMinOps = 1;
 
     [DataField("spawnPointProto", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string SpawnPointPrototype = "SpawnPointNukies";
