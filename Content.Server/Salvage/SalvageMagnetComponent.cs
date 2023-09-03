@@ -33,7 +33,7 @@ namespace Content.Server.Salvage
         /// transform component is already empty.
         /// </summary>
         [ViewVariables(VVAccess.ReadOnly)]
-        public EntityUid? GridUid;
+        public EntityUid? GridUid; // SS220-Magnet-Disassembly-Fix
 
         /// <summary>
         /// Current state of this magnet

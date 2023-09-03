@@ -154,6 +154,7 @@ namespace Content.Server.Salvage
             }
         }
 
+        // SS220-Magnet-Disassembly-Fix
         private void OnMagnetStartup(EntityUid uid, SalvageMagnetComponent component, ComponentStartup args)
         {
             var magnetTransform = Transform(uid);
@@ -165,6 +166,7 @@ namespace Content.Server.Salvage
             if (component.MagnetState.StateType == MagnetStateType.Inactive)
                 return;
 
+            // SS220-Magnet-Disassembly-Fix
             if (component.GridUid is not { } gridId || !_salvageGridStates.TryGetValue(gridId, out var salvageGridState))
                 return;
 
@@ -182,9 +184,10 @@ namespace Content.Server.Salvage
             }
 
             component.MagnetState = MagnetState.Inactive;
-            component.GridUid = null;
+            component.GridUid = null; // SS220-Magnet-Disassembly-Fix
         }
 
+        // SS220-Magnet-Disassembly-Fix
         private void OnToolUsed(EntityUid uid, SalvageMagnetComponent component, InteractedWithToolAttemptEvent args)
         {
             if (component.MagnetState.StateType != MagnetStateType.CoolingDown &&

@@ -34,6 +34,7 @@ namespace Content.Shared.Tools.Components
         }
     }
 
+    // SS220-Magnet-Disassembly-Fix begin
     /// <summary>
     ///     Attempt event called *before* any do afters to see if the tool is allowed to perform interaction
     ///     on a target entity.
@@ -53,6 +54,7 @@ namespace Content.Shared.Tools.Components
             Tool = tool;
         }
     }
+    // SS220-Magnet-Disassembly-Fix end
 
     /// <summary>
     /// Event raised on the user of a tool to see if they can actually use it.
