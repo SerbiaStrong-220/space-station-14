@@ -1057,8 +1057,6 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         var loneOpsQuery = EntityQueryEnumerator<LoneOpsSpawnRuleComponent, GameRuleComponent>();
         while (loneOpsQuery.MoveNext(out var ruleUid, out var loneops, out var gameRule))
         {
-            Logger.DebugS("TEST", "FTL: IS LONE OPS!");
-
             var nukeopsRuleEnt = loneops.AdditionalRule;
             if (!TryComp<NukeopsRuleComponent>(nukeopsRuleEnt, out var nukeopsComp))
                 continue;
