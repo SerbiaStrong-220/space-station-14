@@ -1,5 +1,6 @@
 using Content.Server.Body.Systems;
 using Content.Server.Construction;
+using Content.Server.Construction.Components;
 using Content.Server.Popups;
 using Content.Server.SS220.Surgery.Components;
 using Content.Server.SS220.Surgery.Components.Instruments;
@@ -15,6 +16,7 @@ namespace Content.Server.SS220.Surgery.Systems
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly BodySystem _bodySystem = default!;
         [Dependency] private readonly ConstructionSystem _constructionSystem = default!;
+
         public enum OperationsList : byte
         {
             OrganManipulation,
@@ -75,7 +77,7 @@ namespace Content.Server.SS220.Surgery.Systems
                 Text = "Голова",
                 Act = () =>
                 {
-
+                    comp.CurrentOperatedBodyPart = BodyPartType.Head;
                 },
                 Category = VerbCategory.BodyPartList
             };
@@ -87,7 +89,7 @@ namespace Content.Server.SS220.Surgery.Systems
                 Text = "Туловище",
                 Act = () =>
                 {
-
+                    comp.CurrentOperatedBodyPart = BodyPartType.Torso;
                 },
                 Category = VerbCategory.BodyPartList
             };
@@ -160,6 +162,11 @@ namespace Content.Server.SS220.Surgery.Systems
                 }
             };
             args.Verbs.Add(operationVerb);
+        }
+
+        public void StartSurgicalSteps(EntityUid uid, BodyPartType bodyPart, byte operationType)
+        {
+
         }
 
     }

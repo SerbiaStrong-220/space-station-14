@@ -4,6 +4,7 @@
   name: Urist McHands
   id: BaseMobOrganic
   noSpawn: true
+  abstract: true
   components:
   - type: FloorOcclusion
   - type: LagCompensation
@@ -17,6 +18,9 @@
         collection:
           MeatLaserImpact
   - type: Operapable
+  - type: Construction
+    graph: StartOperation
+    node: start
   - type: Tag
     tags:
     - CanPilot

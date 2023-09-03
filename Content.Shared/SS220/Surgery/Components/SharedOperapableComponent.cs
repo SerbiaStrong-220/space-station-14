@@ -1,3 +1,4 @@
+using Content.Shared.Body.Part;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Surgery.Components
@@ -9,7 +10,7 @@ namespace Content.Shared.SS220.Surgery.Components
 
         public byte? CurrentOperation;
 
-        public string CurrentOperatedBodyPart;
+        public BodyPartType CurrentOperatedBodyPart;
 
     }
 }

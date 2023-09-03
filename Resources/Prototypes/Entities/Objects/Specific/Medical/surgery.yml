@@ -30,6 +30,9 @@
     soundHit:
       path: /Audio/Effects/lightburn.ogg
   - type: SurgicalCauterization
+  - type: Tool
+    qualities:
+      - Cauterization
 # Drill
 
 - type: entity
@@ -76,6 +79,9 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: SurgicalIncision
+  - type: Tool
+    qualities:
+      - Incision
 - type: entity
   name: shiv
   id: ScalpelShiv
@@ -102,6 +108,9 @@
       types:
         Slash: 12
   - type: SurgicalIncision
+  - type: Tool
+    qualities:
+      - Incision
 - type: entity
   name: laser scalpel
   id: ScalpelLaser
@@ -113,6 +122,9 @@
   - type: Item
     heldPrefix: laser
   - type: SurgicalIncision
+  - type: Tool
+    qualities:
+      - Incision
 # Scissors
 
 - type: entity
@@ -128,6 +140,9 @@
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
   - type: ItemCooldown
   - type: SurgicalSeparate
+  - type: Tool
+    qualities:
+      - Separate
 - type: entity
   name: hemostat
   id: Hemostat
@@ -139,6 +154,9 @@
   - type: Item
     heldPrefix: hemostat
   - type: SurgicalClamp
+  - type: Tool
+    qualities:
+      - Clamp
   # - type: entity
   #   name: bone setter
   #   id: BoneSetter
