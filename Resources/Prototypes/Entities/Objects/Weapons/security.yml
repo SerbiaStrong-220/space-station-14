@@ -29,9 +29,6 @@
     sound: /Audio/Weapons/egloves.ogg
   - type: ThrowingAngle
     angle: 225
-  - type: Tag
-    tags:
-    - Spear
   - type: Fixtures
     fixtures:
       fix1:
