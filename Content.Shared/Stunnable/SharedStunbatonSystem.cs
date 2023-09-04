@@ -15,10 +15,10 @@ public abstract class SharedStunbatonSystem : EntitySystem
 
     private void OnGetMeleeDamage(EntityUid uid, StunbatonComponent component, ref GetMeleeDamageEvent args)
     {
-        if (!component.Activated)
-            return;
+            if (!component.Activated)
+                args.Damage.DamageDict.Remove("Stamina");
+            else
+                args.Damage.DamageDict.Remove("Blunt");
 
-        // Don't apply damage if it's activated; just do stamina damage.
-        args.Damage = new DamageSpecifier();
     }
 }
