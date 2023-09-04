@@ -7,7 +7,7 @@ namespace Content.Server.SS220.Surgery.Components.Instruments
     /// </summary>
 
     [RegisterComponent]
-    public sealed partial class SurgicalSeparateComponent : SharedSurgicalInstrumentComponent
+    public sealed partial class SurgicalRetractionComponent : SharedSurgicalInstrumentComponent
     {
 
     }

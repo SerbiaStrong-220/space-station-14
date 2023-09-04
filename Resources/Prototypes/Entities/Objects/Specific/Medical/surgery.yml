@@ -54,6 +54,9 @@
     soundHit:
       path: /Audio/Items/drill_hit.ogg
   - type: SurgicalDrilling
+  - type: Tool
+    qualities:
+      - Drilling
 # Scalpel
 
 - type: entity
@@ -81,7 +84,8 @@
   - type: SurgicalIncision
   - type: Tool
     qualities:
-      - Incision
+      - Incising
+
 - type: entity
   name: shiv
   id: ScalpelShiv
@@ -110,7 +114,8 @@
   - type: SurgicalIncision
   - type: Tool
     qualities:
-      - Incision
+      - Incising
+
 - type: entity
   name: laser scalpel
   id: ScalpelLaser
@@ -124,7 +129,8 @@
   - type: SurgicalIncision
   - type: Tool
     qualities:
-      - Incision
+      - Incising
+
 # Scissors
 
 - type: entity
@@ -139,10 +145,11 @@
   - type: Item
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
   - type: ItemCooldown
-  - type: SurgicalSeparate
+  - type: SurgicalRetraction
   - type: Tool
     qualities:
-      - Separate
+      - Retraction
+
 - type: entity
   name: hemostat
   id: Hemostat
@@ -156,7 +163,8 @@
   - type: SurgicalClamp
   - type: Tool
     qualities:
-      - Clamp
+      - Clamping
+
   # - type: entity
   #   name: bone setter
   #   id: BoneSetter

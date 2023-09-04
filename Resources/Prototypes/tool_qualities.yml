@@ -1,9 +1,16 @@
 - type: tool
-  id: Incision
+  id: Incising
   name: Уву
   toolName: Scalpel
   spawn: Scalpel
   icon: { sprite: Objects/Tools/wrench.rsi, state: icon }
+
+- type: tool
+  id: Drilling
+  name: Уву
+  toolName: Drill
+  spawn: Drill
+  icon: { sprite: Objects/Specific/Medical/Surgery/drill.rsi, state: icon}
 
 - type: tool
   id: Cauterization
@@ -13,14 +20,14 @@
   icon: { sprite: Objects/Specific/Medical/Surgery/cautery.rsi, state: icon }
   
 - type: tool
-  id: Clamp
+  id: Clamping
   name: Уву
   toolName: Hemostat
   spawn: Hemostat
   icon: { sprite: Objects/Specific/Medical/Surgery/scissors.rsi, state: icon }
 
 - type: tool
-  id: Separate
+  id: Retraction
   name: Уву
   toolName: Retractor
   spawn: Retractor

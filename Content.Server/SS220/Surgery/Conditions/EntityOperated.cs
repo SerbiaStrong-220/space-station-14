@@ -11,6 +11,7 @@ public sealed partial class EntityOperated : IGraphCondition
     public bool Condition(EntityUid uid, IEntityManager entityManager)
     {
         var aboba = entityManager.GetComponent<OperapableComponent>(uid);
+
         return aboba.IsOperated;
     }
 

@@ -1,12 +1,14 @@
 using Content.Server.Body.Systems;
-using Content.Server.Construction;
-using Content.Server.Construction.Components;
+using Content.Server.Buckle.Systems;
+using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.SS220.Surgery.Components;
 using Content.Server.SS220.Surgery.Components.Instruments;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
+using Content.Shared.SS220.Surgery;
 using Content.Shared.Verbs;
 
 namespace Content.Server.SS220.Surgery.Systems
@@ -15,21 +17,26 @@ namespace Content.Server.SS220.Surgery.Systems
     {
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly BodySystem _bodySystem = default!;
-        [Dependency] private readonly ConstructionSystem _constructionSystem = default!;
+        [Dependency] private readonly DoAfterSystem _doAfter = default!;
+        [Dependency] private readonly BuckleSystem _buckleSystem = default!;
 
         public enum OperationsList : byte
         {
             OrganManipulation,
             LimbManipulation, // Amputation, Attachment etc. -> Не используется пока оффы не родят нормальную систему повреждений
-            PlasticSurgery
+            PlasticSurgery,
+            ImplantManipulation
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            SubscribeLocalEvent<BodyComponent, GetVerbsEvent<EquipmentVerb>>(AddStartOperationVerb);
+            SubscribeLocalEvent<BodyComponent, GetVerbsEvent<EquipmentVerb>>(SurgeryManipulationVerb);
             SubscribeLocalEvent<BodyComponent, GetVerbsEvent<Verb>>(AddBodyPartManipulationVerb);
             SubscribeLocalEvent<SurgicalIncisionComponent, GetVerbsEvent<EquipmentVerb>>(AddOperationsListVerb);
+
+            SubscribeLocalEvent<BodyComponent, PullOutOrganDoAfterEvent>(OnPullOutDoAfter);
+            SubscribeLocalEvent<HandsComponent, PullInOrganDoAfterEvent>(OnPullInDoAfter);
         }
 
         /// <summary>
@@ -128,6 +135,18 @@ namespace Content.Server.SS220.Surgery.Systems
                 Category = VerbCategory.SurgeyOperations
             };
             args.Verbs.Add(plasticSurgeryVerb);
+
+            EquipmentVerb implantManipulationVerb = new()
+            {
+                Text = "Манипуляция с имплантами",
+                Act = () =>
+                {
+                    component.SelectedOperationMode = (byte) OperationsList.ImplantManipulation;
+                    _popupSystem.PopupEntity("Выбрана операция 'Манипуляция с имплантами'", uid);
+                },
+                Category = VerbCategory.SurgeyOperations
+            };
+            args.Verbs.Add(implantManipulationVerb);
         }
 
         /// <summary>
@@ -136,7 +155,7 @@ namespace Content.Server.SS220.Surgery.Systems
         /// С днём выбегающих из операционной челиков со вспоротым брюхом/лицом roflanebalomoment 
         /// </summary>
 
-        public void AddStartOperationVerb(EntityUid uid, BodyComponent component, GetVerbsEvent<EquipmentVerb> args)
+        public void SurgeryManipulationVerb(EntityUid uid, BodyComponent component, GetVerbsEvent<EquipmentVerb> args)
         {
             if (args.Target == args.User || !args.CanInteract || !args.CanAccess)
                 return;
@@ -149,25 +168,62 @@ namespace Content.Server.SS220.Surgery.Systems
             if (!TryComp<OperapableComponent>(args.Target, out var operapable))
                 return;
 
-            if (!TryComp<SurgicalIncisionComponent>(hands.ActiveHandEntity, out var instrument))
+            if (TryComp<SurgicalIncisionComponent>(hands.ActiveHandEntity, out var scalpel))
+            {
+                EquipmentVerb operationVerb = new()
+                {
+                    Text = !operapable.IsOperated ? "Начать операцию" : "Прекратить операцию",
+                    Act = () =>
+                    {
+                        operapable.IsOperated ^= true;
+                        operapable.CurrentOperation = operapable.IsOperated ? scalpel.SelectedOperationMode : null;
+                        _popupSystem.PopupEntity("Вы приступили к оперированию", args.User);
+                    }
+                };
+                args.Verbs.Add(operationVerb);
+            };
+
+            if (TryComp<SurgicalClampComponent>(hands.ActiveHandEntity, out var clamp) && operapable.IsOpened)
+            {
+                var organs = _bodySystem.GetBodyOrgans(args.Target, component);
+                foreach (var organ in organs)
+                {
+                    EquipmentVerb verb = new()
+                    {
+                        Text = Name(organ.Id),
+                        Act = () =>
+                        {
+                            clamp.SelectedOrgan = organ.Id;
+                            var doAfter = new DoAfterArgs(args.User, 3, new PullOutOrganDoAfterEvent(), args.Target, target: args.Target, used: hands.ActiveHandEntity)
+                            {
+                                BreakOnTargetMove = true,
+                                BreakOnUserMove = true,
+                                BreakOnDamage = true,
+                                NeedHand = true
+                            };
+
+                            _doAfter.TryStartDoAfter(doAfter);
+                        },
+                        Category = VerbCategory.OrganList
+                    };
+                    args.Verbs.Add(verb);
+                };
+            }
+        }
+        public void OnPullOutDoAfter(EntityUid uid, BodyComponent component, DoAfterEvent args)
+        {
+            if (args.Handled || args.Cancelled)
+                return;
+            if(!TryComp<SurgicalClampComponent>(args.Used, out var clamp))
                 return;
 
-            EquipmentVerb operationVerb = new()
-            {
-                Text = !operapable.IsOperated ? "Начать операцию" : "Прекратить операцию",
-                Act = () =>
-                {
-                    operapable.IsOperated ^= true;
-                    operapable.CurrentOperation = operapable.IsOperated ? instrument.SelectedOperationMode : null;
-                }
-            };
-            args.Verbs.Add(operationVerb);
+            _bodySystem.DropOrgan(clamp.SelectedOrgan);
         }
 
-        public void StartSurgicalSteps(EntityUid uid, BodyPartType bodyPart, byte operationType)
+        public void OnPullInDoAfter(EntityUid uid, HandsComponent component, DoAfterEvent args)
         {
-
+            if (args.Handled || args.Cancelled)
+                return;
         }
-
-    }
+    };
 }

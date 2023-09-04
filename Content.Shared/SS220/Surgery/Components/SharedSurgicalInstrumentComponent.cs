@@ -21,5 +21,7 @@ namespace Content.Shared.SS220.Surgery
 
         public bool IsInfected = false;
 
+        public EntityUid SelectedOrgan { get; set; }
+
     }
 }

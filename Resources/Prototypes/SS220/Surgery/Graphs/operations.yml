@@ -1,0 +1,50 @@
+- type: constructionGraph
+  id: StartOperation
+  start: start
+  graph:
+  - node: start
+    entity: BaseMobOrganic
+    edges:
+    - to: clamp bleeds
+      conditions:
+        - !type:EntityOperated
+      steps:
+      - tool: Incising
+        doAfter: 2
+  - node: clamp bleeds
+    edges:
+    - to: retract skin
+      steps:
+      - tool: Clamping
+        doAfter: 2
+  - node: retract skin
+    edges:
+    - to: cut bone
+      steps:
+      - tool: Retraction
+        doAfter: 2
+  - node: cut bone
+    edges:
+    - to: retract bone
+      completed:
+        - !type:SetOperapableState
+      steps:
+      - tool: Sawing
+        doAfter: 2
+  - node: retract bone
+    edges:
+    - to: end operation
+      steps:
+      - tool: Retraction
+        doAfter: 2
+
+  - node: end operation
+    edges:
+    - to: start
+      completed:
+        - !type:SetOperapableState
+      steps:
+      - tool: Retraction
+        doAfter: 2
+      - tool: Cauterization
+        doAfter: 2
