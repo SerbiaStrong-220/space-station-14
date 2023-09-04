@@ -27,6 +27,7 @@
   - type: StaminaDamageOnCollide
     damage: 0
     sound: /Audio/Weapons/egloves.ogg
+    # SS220-Stunbaton-rework throwing angles
   - type: ThrowingAngle
     angle: 225
   - type: Fixtures

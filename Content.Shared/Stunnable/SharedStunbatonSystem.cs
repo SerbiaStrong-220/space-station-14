@@ -13,19 +13,19 @@ public abstract class SharedStunbatonSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StunbatonComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
+        // SS220-Stunbaton-rework begin
         SubscribeLocalEvent<StunbatonComponent, GetDamageOtherOnHitEvent>(OnGetDamageOnHit);
         SubscribeLocalEvent<StunbatonComponent, MeleeHitEvent>(OnGetMeeleHit);
+        // SS220-Stunbaton-rework end
     }
 
+    // SS220-Stunbaton-rework begin
     private void OnGetDamageOnHit(EntityUid uid, StunbatonComponent component, GetDamageOtherOnHitEvent args)
     {
         if (!component.Activated)
-        {
             args.Damage.DamageDict.Remove("Stamina");
-            return;
-        }
-
-        args.Damage.DamageDict.Remove("Blunt");
+        else
+            args.Damage.DamageDict.Remove("Blunt");
     }
 
     private void OnGetMeeleHit(EntityUid uid, StunbatonComponent component, MeleeHitEvent args)
@@ -38,13 +38,16 @@ public abstract class SharedStunbatonSystem : EntitySystem
 
         args.HitSoundOverride = meeleComp.HitSound;
     }
+    // SS220-Stunbaton-rework end
 
     private void OnGetMeleeDamage(EntityUid uid, StunbatonComponent component, ref GetMeleeDamageEvent args)
     {
-            if (!component.Activated)
-                args.Damage.DamageDict.Remove("Stamina");
-            else
-                args.Damage.DamageDict.Remove("Blunt");
+        // SS220-Stunbaton-rework begin
+        if (!component.Activated)
+            args.Damage.DamageDict.Remove("Stamina");
+        else
+            args.Damage.DamageDict.Remove("Blunt");
+        // SS220-Stunbaton-rework end
 
     }
 }
