@@ -33,12 +33,12 @@ namespace Content.Server.Stunnable.Systems
             SubscribeLocalEvent<StunbatonComponent, GetHeavyDamageModifierEvent>(MeleeAttackRateEvent);
         }
 
-         private void MeleeAttackRateEvent(EntityUid uid, StunbatonComponent component, ref GetHeavyDamageModifierEvent args)
+        private void MeleeAttackRateEvent(EntityUid uid, StunbatonComponent component, ref GetHeavyDamageModifierEvent args)
         {
             args.DamageModifier=1;
 
-           if (!component.Activated ||
-                !TryComp<BatteryComponent>(uid, out var battery) || !battery.TryUseCharge(component.EnergyPerUse))
+            if (!component.Activated ||
+                 !TryComp<BatteryComponent>(uid, out var battery) || !battery.TryUseCharge(component.EnergyPerUse))
             {
                 return;
             }
