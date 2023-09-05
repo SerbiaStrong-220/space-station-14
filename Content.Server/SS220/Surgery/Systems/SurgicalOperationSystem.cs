@@ -5,11 +5,15 @@ using Content.Server.Popups;
 using Content.Server.SS220.Surgery.Components;
 using Content.Server.SS220.Surgery.Components.Instruments;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.SS220.Surgery;
+using Content.Shared.SS220.Surgery.Systems;
 using Content.Shared.Verbs;
+
+/*
+ * Помогите этому коду, ему хуёво
+ */
 
 namespace Content.Server.SS220.Surgery.Systems
 {
@@ -19,14 +23,9 @@ namespace Content.Server.SS220.Surgery.Systems
         [Dependency] private readonly BodySystem _bodySystem = default!;
         [Dependency] private readonly DoAfterSystem _doAfter = default!;
         [Dependency] private readonly BuckleSystem _buckleSystem = default!;
+        [Dependency] private readonly IEntityManager _entitySystem = default!;
 
-        public enum OperationsList : byte
-        {
-            OrganManipulation,
-            LimbManipulation, // Amputation, Attachment etc. -> Не используется пока оффы не родят нормальную систему повреждений
-            PlasticSurgery,
-            ImplantManipulation
-        }
+        [Dependency] private readonly SurgicalOrganManipulationSystem _organManipulation = default!;
 
         public override void Initialize()
         {
@@ -35,8 +34,6 @@ namespace Content.Server.SS220.Surgery.Systems
             SubscribeLocalEvent<BodyComponent, GetVerbsEvent<Verb>>(AddBodyPartManipulationVerb);
             SubscribeLocalEvent<SurgicalIncisionComponent, GetVerbsEvent<EquipmentVerb>>(AddOperationsListVerb);
 
-            SubscribeLocalEvent<BodyComponent, PullOutOrganDoAfterEvent>(OnPullOutDoAfter);
-            SubscribeLocalEvent<HandsComponent, PullInOrganDoAfterEvent>(OnPullInDoAfter);
         }
 
         /// <summary>
@@ -60,10 +57,10 @@ namespace Content.Server.SS220.Surgery.Systems
 
             switch (instrument.SelectedOperationMode)
             {
-                case (byte) OperationsList.OrganManipulation:
-                    ToggleOrganManipulationMode(args.Target, operapable, args);
+                case (byte) SharedSurgeyOperationSystem.OperationsList.OrganManipulation:
+                    _organManipulation.ToggleOrganManipulationMode(args.Target, operapable, args);
                     break;
-                case (byte) OperationsList.PlasticSurgery:
+                case (byte) SharedSurgeyOperationSystem.OperationsList.PlasticSurgery:
                     TogglePlasticSurgeryMode(args.Target, operapable, args);
                     break;
             };
@@ -71,36 +68,6 @@ namespace Content.Server.SS220.Surgery.Systems
 
         public void TogglePlasticSurgeryMode(EntityUid target, OperapableComponent comp, GetVerbsEvent<Verb> args)
         {
-
-        }
-
-        public void ToggleOrganManipulationMode(EntityUid target, OperapableComponent comp, GetVerbsEvent<Verb> args)
-        {
-            if (!TryComp<BodyComponent>(target, out var bodyComp))
-                return;
-
-            Verb head = new()
-            {
-                Text = "Голова",
-                Act = () =>
-                {
-                    comp.CurrentOperatedBodyPart = BodyPartType.Head;
-                },
-                Category = VerbCategory.BodyPartList
-            };
-
-            args.Verbs.Add(head);
-
-            Verb body = new()
-            {
-                Text = "Туловище",
-                Act = () =>
-                {
-                    comp.CurrentOperatedBodyPart = BodyPartType.Torso;
-                },
-                Category = VerbCategory.BodyPartList
-            };
-            args.Verbs.Add(body);
 
         }
 
@@ -117,7 +84,7 @@ namespace Content.Server.SS220.Surgery.Systems
                 Text = "Манипуляция с органами",
                 Act = () =>
                 {
-                    component.SelectedOperationMode = (byte) OperationsList.OrganManipulation;
+                    component.SelectedOperationMode = (byte) SharedSurgeyOperationSystem.OperationsList.OrganManipulation;
                     _popupSystem.PopupEntity("Выбрана операция 'Манипуляция с органами'", uid);
                 },
                 Category = VerbCategory.SurgeyOperations
@@ -129,7 +96,7 @@ namespace Content.Server.SS220.Surgery.Systems
                 Text = "Пластическая хирургия",
                 Act = () =>
                 {
-                    component.SelectedOperationMode = (byte) OperationsList.PlasticSurgery;
+                    component.SelectedOperationMode = (byte) SharedSurgeyOperationSystem.OperationsList.PlasticSurgery;
                     _popupSystem.PopupEntity("Выбрана операция 'Пластическая хирургия'", uid);
                 },
                 Category = VerbCategory.SurgeyOperations
@@ -141,7 +108,7 @@ namespace Content.Server.SS220.Surgery.Systems
                 Text = "Манипуляция с имплантами",
                 Act = () =>
                 {
-                    component.SelectedOperationMode = (byte) OperationsList.ImplantManipulation;
+                    component.SelectedOperationMode = (byte) SharedSurgeyOperationSystem.OperationsList.ImplantatManipulation;
                     _popupSystem.PopupEntity("Выбрана операция 'Манипуляция с имплантами'", uid);
                 },
                 Category = VerbCategory.SurgeyOperations
@@ -157,9 +124,8 @@ namespace Content.Server.SS220.Surgery.Systems
 
         public void SurgeryManipulationVerb(EntityUid uid, BodyComponent component, GetVerbsEvent<EquipmentVerb> args)
         {
-            if (args.Target == args.User || !args.CanInteract || !args.CanAccess)
+            if (args.Target == args.User || !args.CanInteract || !args.CanAccess || !_buckleSystem.IsBuckled(args.Target))
                 return;
-
             if (!TryComp<BodyComponent>(args.Target, out var body))
                 return;
             if (!TryComp<HandsComponent>(args.User, out var hands))
@@ -168,7 +134,7 @@ namespace Content.Server.SS220.Surgery.Systems
             if (!TryComp<OperapableComponent>(args.Target, out var operapable))
                 return;
 
-            if (TryComp<SurgicalIncisionComponent>(hands.ActiveHandEntity, out var scalpel))
+            if (TryComp<SurgicalIncisionComponent>(hands.ActiveHandEntity, out var scalpel)) // -> Вынести в TryStartOperation
             {
                 EquipmentVerb operationVerb = new()
                 {
@@ -177,13 +143,13 @@ namespace Content.Server.SS220.Surgery.Systems
                     {
                         operapable.IsOperated ^= true;
                         operapable.CurrentOperation = operapable.IsOperated ? scalpel.SelectedOperationMode : null;
-                        _popupSystem.PopupEntity("Вы приступили к оперированию", args.User);
+                        _popupSystem.PopupEntity(operapable.IsOperated ? "Вы приступили к оперированию" : "Вы прекратили операцию", args.User);
                     }
                 };
                 args.Verbs.Add(operationVerb);
             };
 
-            if (TryComp<SurgicalClampComponent>(hands.ActiveHandEntity, out var clamp) && operapable.IsOpened)
+            if (TryComp<SurgicalClampComponent>(hands.ActiveHandEntity, out var clamp) && operapable.IsOpened) // -> Вынести в OrganManipulation.TryPullOutOrgan
             {
                 var organs = _bodySystem.GetBodyOrgans(args.Target, component);
                 foreach (var organ in organs)
@@ -210,20 +176,11 @@ namespace Content.Server.SS220.Surgery.Systems
                 };
             }
         }
-        public void OnPullOutDoAfter(EntityUid uid, BodyComponent component, DoAfterEvent args)
-        {
-            if (args.Handled || args.Cancelled)
-                return;
-            if(!TryComp<SurgicalClampComponent>(args.Used, out var clamp))
-                return;
 
-            _bodySystem.DropOrgan(clamp.SelectedOrgan);
+        public bool TryStartOperation()
+        {
+            return false;
         }
 
-        public void OnPullInDoAfter(EntityUid uid, HandsComponent component, DoAfterEvent args)
-        {
-            if (args.Handled || args.Cancelled)
-                return;
-        }
     };
 }

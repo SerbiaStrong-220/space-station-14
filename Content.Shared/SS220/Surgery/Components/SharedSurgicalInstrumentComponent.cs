@@ -21,6 +21,12 @@ namespace Content.Shared.SS220.Surgery
 
         public bool IsInfected = false;
 
+        // Я хер его знает как щас сделать StepTime и InstrumentEfficiencyCoeff полезными, ибо doAfter-ы реализованы в прототипах рецептов
+
+        public float StepTime { get; set; } // Время проведения шага
+
+        [DataField("instrumentEfficiencyCoeff")]
+        public float InstrumentEfficiencyCoeff { get; set; } // Отвечает за скорость работы инструмента >1 -> быстрее; <1 -> медленнее
         public EntityUid SelectedOrgan { get; set; }
 
     }

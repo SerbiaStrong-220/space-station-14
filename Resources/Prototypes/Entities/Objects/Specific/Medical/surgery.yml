@@ -30,6 +30,7 @@
     soundHit:
       path: /Audio/Effects/lightburn.ogg
   - type: SurgicalCauterization
+    instrumentEfficiencyCoeff: 1
   - type: Tool
     qualities:
       - Cauterization
@@ -54,6 +55,7 @@
     soundHit:
       path: /Audio/Items/drill_hit.ogg
   - type: SurgicalDrilling
+    instrumentEfficiencyCoeff: 1
   - type: Tool
     qualities:
       - Drilling
@@ -82,6 +84,7 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: SurgicalIncision
+    instrumentEfficiencyCoeff: 1
   - type: Tool
     qualities:
       - Incising
@@ -112,6 +115,7 @@
       types:
         Slash: 12
   - type: SurgicalIncision
+    instrumentEfficiencyCoeff: 1.5
   - type: Tool
     qualities:
       - Incising
@@ -127,6 +131,7 @@
   - type: Item
     heldPrefix: laser
   - type: SurgicalIncision
+    instrumentEfficiencyCoeff: 0.5
   - type: Tool
     qualities:
       - Incising
@@ -146,6 +151,7 @@
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
   - type: ItemCooldown
   - type: SurgicalRetraction
+    instrumentEfficiencyCoeff: 1
   - type: Tool
     qualities:
       - Retraction
@@ -161,6 +167,7 @@
   - type: Item
     heldPrefix: hemostat
   - type: SurgicalClamp
+    instrumentEfficiencyCoeff: 1
   - type: Tool
     qualities:
       - Clamping
