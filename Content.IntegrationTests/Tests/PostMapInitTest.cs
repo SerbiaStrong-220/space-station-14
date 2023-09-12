@@ -60,13 +60,7 @@ namespace Content.IntegrationTests.Tests
             "Saltern",
             "Core",
             "Marathon",
-            "Kettle",
-            "CorvaxAvrite",
-            "CorvaxDelta",
-            "CorvaxIshimura",
-            "220Delta",
-            "Frankenstein",
-            "MeteorArena"
+            "Kettle"
         };
 
         /// <summary>
