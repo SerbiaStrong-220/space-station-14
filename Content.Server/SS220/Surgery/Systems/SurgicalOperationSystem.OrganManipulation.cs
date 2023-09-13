@@ -1,4 +1,5 @@
 using Content.Server.Body.Systems;
+using Content.Server.Popups;
 using Content.Server.SS220.Surgery.Components;
 using Content.Server.SS220.Surgery.Components.Instruments;
 using Content.Shared.Body.Components;
@@ -16,6 +17,7 @@ namespace Content.Server.SS220.Surgery.Systems;
 public sealed partial class SurgicalOrganManipulationSystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {
@@ -23,7 +25,6 @@ public sealed partial class SurgicalOrganManipulationSystem : EntitySystem
 
         SubscribeLocalEvent<OrganComponent, AfterInteractEvent>(PullInAfterInteract);
         SubscribeLocalEvent<BodyComponent, PullOutOrganDoAfterEvent>(OnPullOutDoAfter);
-
     }
 
 
@@ -37,6 +38,7 @@ public sealed partial class SurgicalOrganManipulationSystem : EntitySystem
             Text = "Голова",
             Act = () =>
             {
+                _popupSystem.PopupEntity("Вы выбрали голову", args.User);
                 comp.CurrentOperatedBodyPart = BodyPartType.Head;
             },
             Category = VerbCategory.BodyPartList
@@ -49,6 +51,7 @@ public sealed partial class SurgicalOrganManipulationSystem : EntitySystem
             Text = "Туловище",
             Act = () =>
             {
+                _popupSystem.PopupEntity("Вы выбрали торс", args.User);
                 comp.CurrentOperatedBodyPart = BodyPartType.Torso;
             },
             Category = VerbCategory.BodyPartList

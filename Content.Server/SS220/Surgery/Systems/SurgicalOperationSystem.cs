@@ -5,6 +5,8 @@ using Content.Server.Popups;
 using Content.Server.SS220.Surgery.Components;
 using Content.Server.SS220.Surgery.Components.Instruments;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Organ;
+using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.SS220.Surgery;
@@ -148,10 +150,9 @@ namespace Content.Server.SS220.Surgery.Systems
                 };
                 args.Verbs.Add(operationVerb);
             };
-
             if (TryComp<SurgicalClampComponent>(hands.ActiveHandEntity, out var clamp) && operapable.IsOpened) // -> Вынести в OrganManipulation.TryPullOutOrgan
             {
-                var organs = _bodySystem.GetBodyOrgans(args.Target, component);
+                var organs = _bodySystem.GetBodyOrgans(args.Target);
                 foreach (var organ in organs)
                 {
                     EquipmentVerb verb = new()
@@ -174,7 +175,7 @@ namespace Content.Server.SS220.Surgery.Systems
                     };
                     args.Verbs.Add(verb);
                 };
-            }
+            };
         }
 
         public bool TryStartOperation()

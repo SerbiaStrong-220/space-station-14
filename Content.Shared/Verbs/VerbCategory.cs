@@ -87,5 +87,8 @@ namespace Content.Shared.Verbs
         public static readonly VerbCategory BodyPartList = new ("Выбрать часть тела", null);
         public static readonly VerbCategory SurgeyOperations = new("Выбрать операцию", null);
         public static readonly VerbCategory OrganList = new("Выбрать орган", null);
+
+        public static readonly VerbCategory TorsoOrgans = new("Органы торса", null);
+        public static readonly VerbCategory HeadOrgans = new("Органы головы", null);
     }
 }
