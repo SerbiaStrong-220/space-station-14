@@ -16,7 +16,6 @@
     context: "aghost"
   - type: Ghost
     canInteract: true
-  - type: GhostRoleCast
   - type: Hands
   - type: Puller
   - type: DoAfter
