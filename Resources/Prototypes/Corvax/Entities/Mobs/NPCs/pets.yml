@@ -4,9 +4,6 @@
   id: MobGorillaLargo
   description: Cargo's pet gorilla. He seems to have an 'I love Mom' tattoo.
   components:
-    - type: Inventory
-      speciesId: gorilla
-      templateId: gorillaLargo
     - type: InventorySlots
     - type: Strippable
     - type: UserInterface

@@ -1735,8 +1735,6 @@
   - type: Grammar
     attributes:
       gender: epicene
-  - type: ReplacementAccent
-    accent: possum
   - type: Tag
     tags:
     - VimPilot
@@ -1793,8 +1791,6 @@
   - type: Grammar
     attributes:
       gender: epicene
-  - type: ReplacementAccent
-    accent: raccoon
   - type: Tag
     tags:
     - VimPilot
@@ -2184,8 +2180,6 @@
   - type: Grammar
     attributes:
       gender: epicene
-  - type: ReplacementAccent
-    accent: sloth
   - type: Tag
     tags:
     - VimPilot
@@ -2243,8 +2237,6 @@
   - type: Grammar
     attributes:
       gender: epicene
-  - type: ReplacementAccent
-    accent: ferret
   - type: Tag
     tags:
     - VimPilot
