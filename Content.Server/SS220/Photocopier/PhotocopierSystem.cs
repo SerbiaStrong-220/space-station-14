@@ -15,7 +15,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ButtScan;
-using Content.Shared.SS220.ShapeCollisionTracker;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -51,7 +50,6 @@ public sealed partial class PhotocopierSystem : EntitySystem
         SubscribeLocalEvent<PhotocopierComponent, EntInsertedIntoContainerMessage>(OnItemSlotChanged);
         SubscribeLocalEvent<PhotocopierComponent, EntRemovedFromContainerMessage>(OnItemSlotChanged);
         SubscribeLocalEvent<PhotocopierComponent, PowerChangedEvent>(OnPowerChanged);
-        SubscribeLocalEvent<PhotocopierComponent, ShapeCollisionTrackerUpdatedEvent>(OnCollisionChanged);
         SubscribeLocalEvent<PhotocopierComponent, ComponentShutdown>(OnShutdown);
 
         // UI
@@ -112,35 +110,6 @@ public sealed partial class PhotocopierSystem : EntitySystem
         component.EntityOnTop = null;
         component.HumanoidAppearanceOnTop = null;
         component.PrintAudioStream = null;
-    }
-
-    private void OnCollisionChanged(
-        EntityUid uid,
-        PhotocopierComponent component,
-        ShapeCollisionTrackerUpdatedEvent args)
-    {
-        if (component.EntityOnTop is { } currentEntity &&
-            component.HumanoidAppearanceOnTop is not null &&
-            args.Colliding.Contains(currentEntity) &&
-            !Deleted(currentEntity))
-        {
-            return;
-        }
-
-        component.EntityOnTop = null;
-        component.HumanoidAppearanceOnTop = null;
-
-        foreach (var otherEntity in args.Colliding)
-        {
-            if (!TryComp<HumanoidAppearanceComponent>(otherEntity, out var humanoidAppearance))
-                continue;
-
-            component.HumanoidAppearanceOnTop = humanoidAppearance;
-            component.EntityOnTop = otherEntity;
-            break;
-        }
-
-        UpdateUserInterface(uid, component);
     }
 
     private void OnToggleInterface(EntityUid uid, PhotocopierComponent component, AfterActivatableUIOpenEvent args)
