@@ -128,6 +128,8 @@ entities:
       fixedRotation: False
       bodyType: Dynamic
       type: Physics
+    - fixtures: {}
+      type: Fixtures
     - id: centcomm
       type: BecomesStation
     - gravityShakeSound: !type:SoundPathSpecifier
@@ -21958,9 +21960,9 @@ entities:
       type: Transform
 - proto: FaxMachineCentcom
   entities:
-  - uid: 647
+  - uid: 76
     components:
-    - pos: -3.5,-2.5
+    - pos: -2.5,-2.5
       parent: 1668
       type: Transform
     - name: CentComm
@@ -22361,16 +22363,22 @@ entities:
     - pos: -20.5,15.5
       parent: 1668
       type: Transform
+    - fixtures: {}
+      type: Fixtures
   - uid: 6622
     components:
     - pos: 12.5,-16.5
       parent: 1668
       type: Transform
+    - fixtures: {}
+      type: Fixtures
   - uid: 6623
     components:
     - pos: -16.5,-33.5
       parent: 1668
       type: Transform
+    - fixtures: {}
+      type: Fixtures
   - uid: 6718
     components:
     - pos: -8.5,-22.5
@@ -29230,7 +29238,7 @@ entities:
   entities:
   - uid: 6630
     components:
-    - pos: -1.5,0.5
+    - pos: -3.5,-2.5
       parent: 1668
       type: Transform
 - proto: ParchisBoard
@@ -29279,13 +29287,6 @@ entities:
   - uid: 3876
     components:
     - pos: -26.67884,-3.3787808
-      parent: 1668
-      type: Transform
-- proto: PhotocopierCentralCommand
-  entities:
-  - uid: 10000
-    components:
-    - pos: -2.5,-2.5
       parent: 1668
       type: Transform
 - proto: PianoInstrument
@@ -35840,6 +35841,11 @@ entities:
   - uid: 646
     components:
     - pos: 1.5,-2.5
+      parent: 1668
+      type: Transform
+  - uid: 647
+    components:
+    - pos: -2.5,-2.5
       parent: 1668
       type: Transform
   - uid: 648
