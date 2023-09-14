@@ -56,8 +56,6 @@
             Detective: [ 1, 1 ]
             SecurityCadet: [ 8, 8 ]
             IAA: [ 1, 1 ] # Corvax-IAA
-            BlueShield: [ 1, 1 ]
-            Brigmedic: [ 1, 1 ]
             #supply
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
