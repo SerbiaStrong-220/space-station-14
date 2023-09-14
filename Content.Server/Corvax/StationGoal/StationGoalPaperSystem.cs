@@ -75,7 +75,7 @@ namespace Content.Server.Corvax.StationGoal
                 var metaData = new PhotocopyableMetaData()
                 {
                     EntityName = Loc.GetString("station-goal-fax-paper-name"),
-                    PrototypeId = "PaperNtFormCc"
+                    PrototypeId = "Paper"
                 };
 
                 var printout = new FaxPrintout(dataToCopy, metaData);

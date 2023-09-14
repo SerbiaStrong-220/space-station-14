@@ -124,7 +124,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: ClothingEyesHudSecurity
         prob: 0.3
       - id: ClothingHeadHatFedoraBrown
@@ -136,7 +135,6 @@
       - id: BoxForensicPad
       - id: DrinkDetFlask
       - id: ClothingHandsGlovesForensic
-      - id: RubberStampDetective
       - id: BookBusido # Corvax-Books
 
 - type: entity

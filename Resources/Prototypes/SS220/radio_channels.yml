@@ -1,9 +1,0 @@
-# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
-- type: radioChannel
-  id: USSPChannel
-  name: chat-radio-ussp
-  keycode: 'х' #Замена ради замены чтобы работало, потом замените на то что нра
-  frequency: 1984
-  color: "#dd3535"
-  longRange: true

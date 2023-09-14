@@ -5,7 +5,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: ClothingNeckCloakQm
       - id: ClothingHeadsetCargo
       - id: ClothingUniformJumpsuitQMTurtleneck
@@ -144,7 +143,6 @@
       - id: BoxID
       - id: BoxHeadset
       - id: IDComputerCircuitboard
-      - id: Telescopichka
       - id: ClothingOuterWinterHoP
       - id: CigarGoldCase
         prob: 0.25
@@ -167,7 +165,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: ClothingOuterHardsuitEngineeringWhite
       - id: ClothingMaskBreath
       - id: ClothingUniformJumpsuitChiefEngineerTurtle
@@ -196,7 +193,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: ClothingNeckCloakCe
       - id: ClothingEyesGlassesMeson
       - id: ClothingBeltChiefEngineerFilled
@@ -219,7 +215,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: MedkitFilled
       - id: ClothingHandsGlovesNitrile
       #- name: ClothingEyesHudMedical #Removed until working properly
@@ -244,7 +239,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: MedkitFilled
       - id: ClothingHandsGlovesNitrile
       #- name: ClothingEyesHudMedical #Removed until working properly
@@ -268,7 +262,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: ResearchComputerCircuitboard
       - id: ProtolatheMachineCircuitboard
       - id: CircuitImprinterMachineCircuitboard
@@ -291,7 +284,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka
       - id: ResearchComputerCircuitboard
       - id: ProtolatheMachineCircuitboard
       - id: CircuitImprinterMachineCircuitboard
