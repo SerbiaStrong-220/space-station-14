@@ -1,6 +1,5 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Paper;
-using Content.Shared.SS220.Photocopier;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -90,7 +89,7 @@ public sealed partial class FaxMachineComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("printingQueue")]
-    public Queue<FaxPrintout> PrintingQueue { get; private set; } = new();
+    public Queue<string> PrintingQueue { get; private set; } = new();
 
     /// <summary>
     /// Message sending timeout
@@ -129,24 +128,4 @@ public sealed partial class FaxMachineComponent : Component
     /// </summary>
     [ViewVariables]
     public float PrintingTime = 2.3f;
-}
-
-[DataDefinition]
-public sealed partial class FaxPrintout
-{
-    [DataField("dataToCopy")]
-    public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy { get; private set; }
-
-    [DataField("metaData")]
-    public PhotocopyableMetaData? MetaData { get; private set; }
-
-    private FaxPrintout()
-    {
-    }
-
-    public FaxPrintout(Dictionary<Type, IPhotocopiedComponentData>? dataToCopy, PhotocopyableMetaData? metaData)
-    {
-        DataToCopy = dataToCopy;
-        MetaData = metaData;
-    }
 }

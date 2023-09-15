@@ -4,7 +4,6 @@ using Content.Server.Paper;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Content.Shared.Random.Helpers;
-using Content.Shared.SS220.Photocopier;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -56,31 +55,6 @@ namespace Content.Server.Corvax.StationGoal
             var wasSent = false;
             foreach (var fax in faxes)
             {
-                if (!fax.ReceiveStationGoal) continue;
-
-                var dataToCopy = new Dictionary<Type, IPhotocopiedComponentData>();
-                var paperDataToCopy = new PaperPhotocopiedData()
-                {
-                    Content = Loc.GetString(goal.Text, ("rand_planet_name", Random_planet_name())),
-                    StampState = "paper_stamp-centcom",
-                    StampedBy = new List<StampDisplayInfo>{
-                        new(){
-                            StampedName = Loc.GetString("stamp-component-stamped-name-centcom"),
-                            StampedColor = Color.FromHex("#006600")
-                        }
-                    }
-                };
-                dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);
-
-                var metaData = new PhotocopyableMetaData()
-                {
-                    EntityName = Loc.GetString("station-goal-fax-paper-name"),
-                    PrototypeId = "Paper"
-                };
-
-                var printout = new FaxPrintout(dataToCopy, metaData);
-                _faxSystem.Receive(fax.Owner, printout, null, fax);
-
                 wasSent = true;
             }
 

@@ -6,7 +6,6 @@ using Content.Server.Paper;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Paper;
-using Content.Shared.SS220.Photocopier;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -54,46 +53,7 @@ namespace Content.Server.Nuke
                 return false;
             }
 
-            var faxes = EntityQueryEnumerator<FaxMachineComponent>();
-            var wasSent = false;
-            while (faxes.MoveNext(out var faxEnt, out var fax))
-            {
-                if (!fax.ReceiveNukeCodes || !TryGetRelativeNukeCode(faxEnt, out var paperContent, station))
-                {
-                    continue;
-                }
-
-                var dataToCopy = new Dictionary<Type, IPhotocopiedComponentData>();
-                var paperDataToCopy = new PaperPhotocopiedData()
-                {
-                    Content = paperContent,
-                    StampState = "paper_stamp-centcom",
-                    StampedBy = new List<StampDisplayInfo>
-                    {
-                        new StampDisplayInfo { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#006600") },
-                    }
-                };
-                dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);
-
-                var metaData = new PhotocopyableMetaData()
-                {
-                    EntityName = Loc.GetString("nuke-codes-fax-paper-name"),
-                    PrototypeId = "PaperNtFormCcSecure"
-                };
-
-                var printout = new FaxPrintout(dataToCopy, metaData);
-                _faxSystem.Receive(faxEnt, printout, null, fax);
-
-                wasSent = true;
-            }
-
-            if (wasSent)
-            {
-                var msg = Loc.GetString("nuke-component-announcement-send-codes");
-                _chatSystem.DispatchStationAnnouncement(station, msg, colorOverride: Color.Red);
-            }
-
-            return wasSent;
+            return true;
         }
 
         private bool TryGetRelativeNukeCode(
