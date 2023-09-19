@@ -1,7 +1,7 @@
 - type: gameMap
   id: Ishimura220
-  mapName: 'Ishimura SS220'
-  mapPath: /Maps/ishimura220.yml
+  mapName: '220Ishimura'
+  mapPath: /Maps/220ishimura.yml
   minPlayers: 0
   stations:
     Ishimura:
