@@ -5,6 +5,6 @@
   description: Одеяло для коллективных народных снов
   components:
   - type: Sprite
-    state: sheetussp
+    state: sheetUSSP
   - type: Clothing
     sprite: SS220/Clothing/Neck/Bedsheets/USSP.rsi
