@@ -1,7 +1,7 @@
 - type: gameMap
   id: FlandSS220
   mapName: 'Fland SS220'
-  mapPath: /Maps/flandup.yml
+  mapPath: /Maps/fland220.yml
   minPlayers: 70
   stations:
     Fland:
