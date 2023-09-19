@@ -1,7 +1,7 @@
 - type: gameMap
-  id: Bagelfix
-  mapName: 'Bagel SS220'
-  mapPath: /Maps/bagel220.yml
+  id: 220Bagel
+  mapName: '220Bagel'
+  mapPath: /Maps/220bagel.yml
   minPlayers: 40
   maxPlayers: 76
   stations:
