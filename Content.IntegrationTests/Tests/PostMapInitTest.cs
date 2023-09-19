@@ -69,7 +69,7 @@ namespace Content.IntegrationTests.Tests
             "Frankenstein",
             "MeteorArena",
             "220Bagel",
-            "220Flang",
+            "220Fland",
             "220Ishimura"
         };
 
