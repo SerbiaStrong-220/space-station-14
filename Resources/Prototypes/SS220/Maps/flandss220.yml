@@ -1,8 +1,8 @@
 - type: gameMap
-  id: FlandSS220
-  mapName: 'Fland SS220'
-  mapPath: /Maps/fland220.yml
-  minPlayers: 70
+  id: 220Fland
+  mapName: '220Fland'
+  mapPath: /Maps/220fland.yml
+  minPlayers: 0
   stations:
     Fland:
       stationProto: StandardNanotrasenStation
