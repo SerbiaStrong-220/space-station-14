@@ -1,7 +1,7 @@
 - type: gameMap
   id: 220Bagel
   mapName: '220Bagel'
-  mapPath: /Maps/220bagel.yml
+  mapPath: /Maps/bagel220.yml
   minPlayers: 0
   maxPlayers: 0
   stations:
