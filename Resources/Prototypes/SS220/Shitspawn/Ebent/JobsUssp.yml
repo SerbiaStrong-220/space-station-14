@@ -53,7 +53,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorRed
     back: ClothingBackpackUSSPFilled
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
@@ -138,7 +138,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorRed
     back: ClothingBackpackUSSPFilled
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
@@ -223,7 +223,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorRed
     back: ClothingBackpackUSSPFilled
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
@@ -308,7 +308,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorRed
     back: ClothingBackpackUSSPFilled
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
@@ -393,7 +393,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorRed
     back: ClothingBackpackUSSPFilled
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
