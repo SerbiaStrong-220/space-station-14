@@ -1,7 +1,7 @@
 - type: entity
   id: BedsheetUSSP
   parent: BedsheetBase
-  name: Коммунистическое одеяло
+  name: коммунистическое одеяло
   description: Одеяло для коллективных народных снов
   components:
   - type: Sprite
