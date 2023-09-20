@@ -1,0 +1,52 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
+
+    Title="{Loc 'criminal-records-ui-window'}"
+    Resizable="True"
+    MinSize="850 600">
+
+    <BoxContainer Orientation="Vertical">
+        <!-- Main -->
+        <BoxContainer Orientation="Horizontal" Margin="10 10" VerticalExpand="true">
+            <!-- Left listing -->
+            <BoxContainer Orientation="Vertical" Margin="0 0 5 0" HorizontalExpand="true">
+                <LineEdit
+                    Name="RecordSearch"
+                    PlaceHolder="{Loc 'criminal-records-ui-window-search-placeholder'}"
+                    HorizontalExpand="True"
+                    Margin="0 0 0 10"/>
+                <ScrollContainer VerticalExpand="True">
+                    <ItemList Name="RecordListing" />
+                </ScrollContainer>
+            </BoxContainer>
+            <!-- Right panel -->
+            <BoxContainer Name="PanelRight" Orientation="Vertical" Margin="5 0 0 0" HorizontalExpand="true" Visible="False">
+                <!-- Character Name -->
+                <Label Name="CharacterName" Text="Имя Фамилия" StyleClasses="LabelBig" SetHeight="25"/>
+                <!-- Details widget -->
+                <ui:RecordDetails Name="Details" HorizontalExpand="true"/>
+                <!-- Records history -->
+            </BoxContainer>
+            <PanelContainer Name="PanelRightPlaceholder" HorizontalExpand="true" Visible="True">
+                <Label Text="Выберите запись слева" StyleClasses="LabelBig" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </PanelContainer>
+        </BoxContainer>
+
+        <!-- Footer -->
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer StyleClasses="LowDivider" />
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <BoxContainer Orientation="Vertical">
+                    <Label Text="{Loc 'criminal-records-ui-flavor-right'}" Align="Right" StyleClasses="WindowFooterText"/>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+
+</controls:FancyWindow>
