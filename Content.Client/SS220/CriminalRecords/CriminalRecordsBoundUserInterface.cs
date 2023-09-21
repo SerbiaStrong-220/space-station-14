@@ -22,6 +22,8 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
         _window.OnKeySelected += OnKeySelected;
 
         _window.OpenCentered();
+        if (EntMan.TryGetComponent<MetaDataComponent>(Owner, out var metaData))
+            _window.Title = metaData.EntityName;
     }
 
     private void OnKeySelected((NetEntity, uint)? key)

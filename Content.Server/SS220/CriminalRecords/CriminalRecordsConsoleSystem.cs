@@ -66,7 +66,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         foreach (var (key, record) in consoleRecords)
         {
-            var shortRecord = new CriminalRecordShort(record.Name);
+            var shortRecord = new CriminalRecordShort(record);
             listing.Add(_stationRecordsSystem.Convert(key), shortRecord);
         }
 
@@ -95,6 +95,11 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
     private void SetStateForInterface(EntityUid uid, CriminalRecordConsoleState newState)
     {
+        if (newState.SelectedRecord != null)
+            Logger.DebugS("TEST","FINAL SERVER CHECK ========== SUCCESS!");
+        else
+            Logger.DebugS("TEST","FINAL SERVER CHECK ========== FAIL!");
+
         _userInterface.TrySetUiState(uid, CriminalRecordsUiKey.Key, newState);
     }
 

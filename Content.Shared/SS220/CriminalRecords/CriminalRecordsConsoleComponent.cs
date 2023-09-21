@@ -41,6 +41,14 @@ public sealed partial class CriminalRecordShort
     {
         Name = name;
     }
+
+    public CriminalRecordShort(GeneralStationRecord record)
+    {
+        Name = record.Name;
+        JobPrototype = record.JobPrototype;
+        DNA = record.DNA ?? "";
+        Fingerprints = record.Fingerprint ?? "";
+    }
 }
 
 [Serializable, NetSerializable]

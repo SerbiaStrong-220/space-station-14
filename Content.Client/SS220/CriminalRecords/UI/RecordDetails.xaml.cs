@@ -58,7 +58,9 @@ public sealed partial class RecordDetails : Control
         if (string.IsNullOrEmpty(jobColor))
             jobColor = Color.White.ToHexNoAlpha();
 
-        var finalJobTitle = string.IsNullOrEmpty(jobTitle) ? "Неизвестная должность" : CapitalizeFirstLetter(jobTitle);
+        var finalJobTitle = string.IsNullOrEmpty(jobTitle)
+        ? Loc.GetString("criminal-records-ui-unknown-job")
+        : CapitalizeFirstLetter(jobTitle);
         JobName.SetMarkup($"[color={jobColor}]{finalJobTitle}[/color]");
 
         var genderString = record.Gender switch
@@ -70,7 +72,7 @@ public sealed partial class RecordDetails : Control
 
         string species;
         if (string.IsNullOrEmpty(record.Species))
-            species = "Неизвестно";
+            species = Loc.GetString("criminal-records-ui-unknown");
         else
             species = Loc.GetString(record.Species);
 
@@ -82,8 +84,8 @@ public sealed partial class RecordDetails : Control
 
         DetailsLabel.SetMarkup($"Возраст: {record.Age}   Раса: {species}   Пол: {genderString}");
 
-        DnaLabel.Text = $"ДНК: {(string.IsNullOrEmpty(record.DNA) ? "Неизвестно" : record.DNA)}";
-        FingerprintsLabel.Text = $"Отпечатки: {(string.IsNullOrEmpty(record.Fingerprint) ? "Неизвестно" : record.Fingerprint)}";
+        DnaLabel.Text = $"ДНК: {(string.IsNullOrEmpty(record.DNA) ? Loc.GetString("criminal-records-ui-unknown") : record.DNA)}";
+        FingerprintsLabel.Text = $"Отпечатки: {(string.IsNullOrEmpty(record.Fingerprint) ? Loc.GetString("criminal-records-ui-unknown") : record.Fingerprint)}";
 
         if (record.Profile != null && !string.IsNullOrEmpty(record.JobPrototype))
             CharVis.SetupCharacterSpriteView(record.Profile, record.JobPrototype);
@@ -111,6 +113,6 @@ public sealed partial class RecordDetails : Control
             return color.ToHex();
         }
 
-        return string.Empty;
+        return Color.White.ToHex();
     }
 }

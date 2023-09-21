@@ -6,6 +6,7 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
 
     Title="{Loc 'criminal-records-ui-window'}"
     Resizable="True"
@@ -15,16 +16,22 @@
         <!-- Main -->
         <BoxContainer Orientation="Horizontal" Margin="10 10" VerticalExpand="true">
             <!-- Left listing -->
-            <BoxContainer Orientation="Vertical" Margin="0 0 5 0" HorizontalExpand="true">
-                <LineEdit
-                    Name="RecordSearch"
-                    PlaceHolder="{Loc 'criminal-records-ui-window-search-placeholder'}"
-                    HorizontalExpand="True"
-                    Margin="0 0 0 10"/>
-                <ScrollContainer VerticalExpand="True">
-                    <ItemList Name="RecordListing" />
-                </ScrollContainer>
-            </BoxContainer>
+            <PanelContainer Margin="0 0 5 0" HorizontalExpand="true">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#1C1C21FF"/>
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer Orientation="Vertical">
+                    <LineEdit
+                        Name="RecordSearch"
+                        PlaceHolder="{Loc 'criminal-records-ui-window-search-placeholder'}"
+                        HorizontalExpand="True"
+                        Margin="0 0"/>
+                    <ScrollContainer VerticalExpand="True">
+                        <ui:RecordList Name="RecordListing" />
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
             <!-- Right panel -->
             <BoxContainer Name="PanelRight" Orientation="Vertical" Margin="5 0 0 0" HorizontalExpand="true" Visible="False">
                 <!-- Character Name -->
