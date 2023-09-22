@@ -1,9 +1,12 @@
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
+using Content.Shared.Roles;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
+using FastAccessors;
 using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Server.SS220.CriminalRecords;
@@ -64,10 +67,31 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         var listing = new Dictionary<(NetEntity, uint), CriminalRecordShort>();
 
+        var testRecordsAdded = true;
         foreach (var (key, record) in consoleRecords)
         {
             var shortRecord = new CriminalRecordShort(record);
-            listing.Add(_stationRecordsSystem.Convert(key), shortRecord);
+            var deconstructed_key = _stationRecordsSystem.Convert(key);
+            listing.Add(deconstructed_key, shortRecord);
+
+            //Add test trash records
+            if (!testRecordsAdded)
+            {
+                testRecordsAdded = true;
+                var prototypeMan = IoCManager.Resolve<IPrototypeManager>();
+                var jobs = prototypeMan.EnumeratePrototypes<JobPrototype>().ToList();
+                var rand = new Random();
+                for (var i = 0; i < 100; i++)
+                {
+                    var altkey = (deconstructed_key.Item1, (uint) (deconstructed_key.Item2 + 100 + i));
+                    var altRecord = new CriminalRecordShort(record);
+                    var jobIndex = rand.Next(jobs.Count);
+                    altRecord.JobPrototype = jobs[jobIndex].ID;
+                    altRecord.DNA = Guid.NewGuid().ToString();
+                    altRecord.Fingerprints = Guid.NewGuid().ToString();
+                    listing.Add(altkey, altRecord);
+                }
+            }
         }
 
         if (listing.Count == 0)
