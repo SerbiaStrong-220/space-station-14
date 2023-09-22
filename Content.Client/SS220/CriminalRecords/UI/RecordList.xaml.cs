@@ -5,44 +5,111 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class RecordList : ScrollContainer
 {
+    private const int INITIAL_ITEM_POOL_SIZE = 80;
+    private int _active_pool = 0;
+
+    public string Filter = "";
+    public List<string> ExtraFilters = new();
+
     private readonly IEntitySystemManager _sysMan;
     private readonly IPrototypeManager _prototype;
     private readonly SpriteSystem _sprite;
 
-    private List<RecordListEntry> _items;
+    private Dictionary<(NetEntity, uint), CriminalRecordShort> _records = new();
+    private Dictionary<(NetEntity, uint), RecordListEntry> _items = new();
+    private List<RecordListEntry> _itemPool = new();
     private RecordListEntry? _selected;
 
     public event Action<ItemEventArgs>? OnItemSelected;
     public event Action<ItemEventArgs>? OnItemDeselected;
+    public bool IsPopulating { get; private set; } = false;
     //public event Action<ItemEventArgs>? OnItemHover;
 
     public RecordList()
     {
-
         RobustXamlLoader.Load(this);
 
         _sysMan = IoCManager.Resolve<IEntitySystemManager>();
         _prototype = IoCManager.Resolve<IPrototypeManager>();
         _sprite = _sysMan.GetEntitySystem<SpriteSystem>();
 
-        _items = new();
+        EnsurePoolSize(INITIAL_ITEM_POOL_SIZE);
+    }
+
+    public void EnsurePoolSize(int count)
+    {
+        //Logger.DebugS("TEST", "ENSURING " + count + " ENTRIES!");
+        var toAdd = count - _itemPool.Count;
+        var antiRetardCounter = 0;
+        for (int i = 0; i < toAdd; i++)
+        {
+            var entry = new RecordListEntry(_prototype, _sprite, this);
+            _itemPool.Add(entry);
+            entry.Pressed += OnItemPressed;
+            antiRetardCounter++;
+        }
+        Logger.DebugS("TEST", "SUCCESSFULLY ADDED " + antiRetardCounter + " ENTRIES!");
+    }
+
+    public void SetActivePool(int count)
+    {
+        if (_active_pool == count)
+            return;
+
+        if (count > _itemPool.Count)
+            EnsurePoolSize(count);
+
+        for (int i = 0; i < _itemPool.Count; i++)
+        {
+            if (i <= _active_pool - 1 && i <= count - 1)
+                continue;
+
+            if (!_itemPool.TryGetValue(i, out var item))
+                continue;
+
+            if (i <= count - 1)
+            {
+                if (item.Parent == null)
+                    OptionContainer.AddChild(item);
+                continue;
+            }
+
+            if (i <= _active_pool - 1)
+            {
+                if (item.Parent == OptionContainer)
+                    OptionContainer.RemoveChild(item);
+            }
+        }
+
+        _active_pool = count;
     }
 
     public void TryDeselect(RecordListEntry item)
     {
+        Logger.DebugS("TEST", "TRYING TO DESELECT!");
+
         if (item != _selected)
             return;
 
         _selected = null;
         item.SetSelectionVisuals(false);
 
-        var args = new ItemEventArgs(item);
+        Logger.DebugS("TEST", "DESELECT SUCCESSFULL!");
+
+        if (IsPopulating)
+            return;
+
+        if (item.Metadata is not RecordMetadata cast)
+            return;
+
+        var args = new ItemEventArgs(cast);
         OnItemDeselected?.Invoke(args);
     }
 
@@ -52,14 +119,20 @@ public sealed partial class RecordList : ScrollContainer
             return;
 
         if (_selected != null)
-            TryDeselect(item);
+            TryDeselect(_selected);
 
         _selected = item;
         item.SetSelectionVisuals(true);
 
         Logger.DebugS("TEST", "SELECTED");
 
-        var args = new ItemEventArgs(item);
+        if (IsPopulating)
+            return;
+
+        if (item.Metadata is not RecordMetadata cast)
+            return;
+
+        var args = new ItemEventArgs(cast);
         OnItemSelected?.Invoke(args);
     }
 
@@ -69,37 +142,75 @@ public sealed partial class RecordList : ScrollContainer
             TryDeselect(_selected);
     }
 
-    public void Remove(RecordListEntry item)
+    private bool DoesRecordPassFilter(CriminalRecordShort record, string filter)
     {
-        _items.Remove(item);
-        if (item == _selected)
-            ClearSelected();
-        OptionContainer.RemoveChild(item);
-        item.Dispose();
+        if (string.IsNullOrWhiteSpace(filter))
+            return true;
+
+        if (record.DNA.Contains(filter))
+            return true;
+
+        if (record.Fingerprints.Contains(filter))
+            return true;
+
+        if (record.Name.Contains(filter))
+            return true;
+
+        return false;
     }
 
-    public void Clear()
+    public void SetItems(Dictionary<(NetEntity, uint), CriminalRecordShort>? listing, (NetEntity, uint)? selected)
     {
-        foreach (var item in _items.ToArray())
+        _records = listing ?? new();
+        EnsurePoolSize(_records.Count);
+        RebuildList(selected);
+    }
+
+    public void RebuildList()
+    {
+        (NetEntity, uint)? selectionKey;
+        if (_selected != null && _selected.Metadata is RecordMetadata cast)
+            selectionKey = cast.Key;
+        else
+            selectionKey = null;
+
+        RebuildList(selectionKey);
+    }
+
+    public void RebuildList((NetEntity, uint)? newSelection)
+    {
+        IsPopulating = true;
+
+        (NetEntity, uint)? selectionKey = newSelection;
+        if (selectionKey == null && _selected != null)
+            TryDeselect(_selected);
+
+        var usedItems = 0;
+        foreach (var (key, record) in _records)
         {
-            Remove(item);
-        }
-    }
+            if (!DoesRecordPassFilter(record, Filter))
+                continue;
 
-    public RecordListEntry AddItem(CriminalRecordShort record)
-    {
-        Logger.DebugS("TEST", "ADDING ENTRY!");
-        var entry = new RecordListEntry(_prototype, _sprite, this);
-        entry.SetupEntry(record);
-        OptionContainer.AddChild(entry);
-        _items.Add(entry);
-        entry.Pressed += OnItemPressed;
-        return entry;
+            if (!_itemPool.TryGetValue(usedItems, out var entry))
+                continue;
+
+            entry.SetupEntry(record);
+            entry.Metadata = new RecordMetadata(key, record);
+            usedItems++;
+
+            if (selectionKey != null && selectionKey.Equals(key))
+            {
+                Select(entry);
+            }
+        }
+
+        SetActivePool(usedItems);
+
+        IsPopulating = false;
     }
 
     public void OnItemPressed(GUIBoundKeyEventArgs args, RecordListEntry item)
     {
-        Logger.DebugS("PRESSED", "ITEM WAS PRESSED!");
         if (_selected != item)
             Select(item);
         else
@@ -108,11 +219,23 @@ public sealed partial class RecordList : ScrollContainer
 
     public sealed class ItemEventArgs
     {
-        public RecordListEntry Item;
+        public RecordMetadata Metadata;
 
-        public ItemEventArgs(RecordListEntry item)
+        public ItemEventArgs(RecordMetadata metadata)
         {
-            Item = item;
+            Metadata = metadata;
+        }
+    }
+
+    public struct RecordMetadata
+    {
+        public (NetEntity, uint) Key;
+        public CriminalRecordShort Record;
+
+        public RecordMetadata((NetEntity, uint) key, CriminalRecordShort record)
+        {
+            Key = key;
+            Record = record;
         }
     }
 }

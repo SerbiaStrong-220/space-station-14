@@ -12,40 +12,35 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 {
     public Action<(NetEntity, uint)?>? OnKeySelected;
     private bool _isPopulating = false;
-    public string Filter = "";
-    public List<string> ExtraFilters = new();
-
-    private (NetEntity, uint)? _cachedSelected;
-    private Dictionary<(NetEntity, uint), CriminalRecordShort>? _cachedListing;
 
     public CriminalRecordsWindow()
     {
         RobustXamlLoader.Load(this);
 
-        Logger.DebugS("TEST", "==CREATING WINDOW!==");
+        //Logger.DebugS("TEST", "==CREATING WINDOW!==");
 
         RecordListing.OnItemSelected += args =>
         {
-            if (_isPopulating || args.Item.Metadata is not RecordMetadata cast)
+            if (_isPopulating)
             {
-                Logger.DebugS("TEST","REEEEEEEETURN" + (_isPopulating ? ": POPULATING" : ""));
+                //Logger.DebugS("TEST","REEEEEEEETURN" + (_isPopulating ? ": POPULATING" : ""));
                 return;
             }
 
-            Logger.DebugS("SENT KEY!", "=====SENT KEY!");
-            OnKeySelected?.Invoke(cast.Key);
+            //Logger.DebugS("SENT KEY!", "=====SENT KEY!");
+            OnKeySelected?.Invoke(args.Metadata.Key);
         };
 
         RecordListing.OnItemDeselected += _ =>
         {
             if (!_isPopulating)
             {
-                Logger.DebugS("SENT KEY!", "=====UNSELECTED!");
+                //Logger.DebugS("SENT KEY!", "=====UNSELECTED!");
                 OnKeySelected?.Invoke(null);
             }
             else
             {
-                Logger.DebugS("SENT KEY!", "=====TRIED UNSELECTED BUT POPULATING!");
+                //Logger.DebugS("SENT KEY!", "=====TRIED UNSELECTED BUT POPULATING!");
             }
         };
 
@@ -54,19 +49,19 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 
     private void OnSearchChanged(LineEdit.LineEditEventArgs args)
     {
-        Filter = args.Text;
-        PopulateRecordListing(_cachedListing, _cachedSelected);
+        RecordListing.Filter = args.Text;
+        RecordListing.RebuildList();
     }
 
     public void UpdateState(CriminalRecordConsoleState state)
     {
-        Logger.DebugS("TEST", "WINDOW GOT STATE!");
+        // Logger.DebugS("TEST", "WINDOW GOT STATE!");
         if (state.RecordListing != null)
             PopulateRecordListing(state.RecordListing, state.SelectedKey);
 
         if (state.SelectedRecord != null)
         {
-            Logger.DebugS("STATUS", "=====SELECTED!");
+            //Logger.DebugS("STATUS", "=====SELECTED!");
             CharacterName.Text = state.SelectedRecord.Name;
             Details.LoadRecordDetails(state.SelectedRecord);
             PanelRightPlaceholder.Visible = false;
@@ -74,76 +69,26 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         }
         else
         {
-            Logger.DebugS("STATUS", "=====NO SELECTED!");
+            //Logger.DebugS("STATUS", "=====NO SELECTED!");
             CharacterName.Text = "Не выбрана запись";
             PanelRightPlaceholder.Visible = true;
             PanelRight.Visible = false;
         }
     }
 
-    private bool DoesRecordPassFilter(CriminalRecordShort record, string filter)
-    {
-        if (string.IsNullOrWhiteSpace(filter))
-            return true;
-
-        if (record.DNA.Contains(filter))
-            return true;
-
-        if (record.Fingerprints.Contains(filter))
-            return true;
-
-        if (record.Name.Contains(filter))
-            return true;
-
-        return false;
-    }
-
     private void PopulateRecordListing(Dictionary<(NetEntity, uint), CriminalRecordShort>? listing, (NetEntity, uint)? selected)
     {
-        _cachedSelected = selected;
-        _cachedListing = listing;
-
         if (_isPopulating)
             return;
 
-        Logger.DebugS("TEST", "POPULATING LIST!");
+        //Logger.DebugS("TEST", "POPULATING LIST!");
 
         _isPopulating = true;
 
-        RecordListing.Clear();
-        RecordListing.ClearSelected();
-
-        if (listing != null)
-        {
-            foreach (var (key, shortRecord) in listing)
-            {
-                if (!DoesRecordPassFilter(shortRecord, Filter))
-                    continue;
-
-                Logger.DebugS("TEST", "FILLING: " + shortRecord.Name);
-                var item = RecordListing.AddItem(shortRecord);
-                item.Metadata = new RecordMetadata(key, shortRecord);
-                if (selected != null && key.Item1 == selected.Value.Item1 && key.Item2 == selected.Value.Item2)
-                {
-                    RecordListing.Select(item);
-                }
-            }
-        }
+        RecordListing.SetItems(listing, selected);
 
         _isPopulating = false;
 
         //RecordListing.SortItemsByText();
-    }
-
-    struct RecordMetadata
-    {
-        public (NetEntity, uint) Key;
-        public CriminalRecordShort Record;
-
-        public RecordMetadata((NetEntity, uint) key, CriminalRecordShort record)
-        {
-            Key = key;
-            Record = record;
-        }
     }
 }
