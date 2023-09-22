@@ -8,7 +8,7 @@
       shuttleTime: 1200
     blue:
       announcement: alert-level-blue-announcement
-      sound: /Audio/Misc/bluealert.ogg
+      sound: /Audio/SS220/Misc/blue.ogg
       color: DodgerBlue
       shuttleTime: 600
     violet:
@@ -25,7 +25,7 @@
       shuttleTime: 600
     red:
       announcement: alert-level-red-announcement
-      sound: /Audio/Misc/redalert.ogg
+      sound: /Audio/SS220/Misc/red.ogg
       color: Red
       shuttleTime: 600 #No reduction in time as we don't have swiping for red alert like in /tg/. Shuttle times are intended to create friction, so having a way to brainlessly bypass that would be dumb.
     gamma:
@@ -43,9 +43,9 @@
       announcement: alert-level-delta-announcement
       selectable: false
       sound:
-        path: /Audio/Misc/delta.ogg
+        path: /Audio/SS220/Misc/delta.ogg
         params:
-          volume: -6 # Corvax: Reduce sound volume
+          volume: -4 # SS220: Reduce sound volume
       disableSelection: true
       color: DarkRed
       emergencyLightColor: Orange
@@ -55,7 +55,7 @@
       announcement: alert-level-epsilon-announcement
       selectable: false
       sound:
-        path: /Audio/Misc/epsilon.ogg
+        path: /Audio/SS220/Misc/epsilon.ogg
         params:
           volume: -2
       disableSelection: true
