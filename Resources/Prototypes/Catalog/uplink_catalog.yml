@@ -100,6 +100,7 @@
       blacklist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink
 
 - type: listing
   id: UplinkDisposableTurret
@@ -115,6 +116,7 @@
       blacklist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink
 
 # Explosives
 
@@ -239,6 +241,16 @@
   categories:
   - UplinkExplosives
 
+- type: listing
+  id: UplinkSyndicateBomb
+  name: uplink-exploding-syndicate-bomb-name
+  description: uplink-exploding-syndicate-bomb-desc
+  productEntity: SyndicateBomb
+  cost:
+    Telecrystal: 11
+  categories:
+    - UplinkExplosives
+
 # Ammo
 
 - type: listing
@@ -332,6 +344,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink
 
 - type: listing
   id: UplinkHolster
@@ -388,6 +401,7 @@
       blacklist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateNukeops # Version for Nukeops that spawns an agent with the NukeOperative component.
@@ -404,6 +418,9 @@
       whitelist:
         tags:
           - NukeOpsUplink
+      blacklist:
+        tags:
+          - LoneOpsUplink
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateMonkey
@@ -415,6 +432,11 @@
     Telecrystal: 8
   categories:
   - UplinkUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - LoneOpsUplink
 
 - type: listing
   id: UplinkStealthBox
@@ -433,7 +455,7 @@
   description: uplink-headset-desc
   productEntity: ClothingHeadsetAltSyndicate
   cost:
-    Telecrystal: 4
+    Telecrystal: 1
   categories:
   - UplinkUtility
 
@@ -445,6 +467,17 @@
   productEntity: BoxEncryptionKeySyndie # Two for the price of one
   cost:
     Telecrystal: 2
+  categories:
+  - UplinkUtility
+
+- type: listing
+  id: UplinkBinaryTranslatorKey
+  name: uplink-binary-translator-key-name
+  description: uplink-binary-translator-key-desc
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: rd_label }
+  productEntity: EncryptionKeyBinary
+  cost:
+    Telecrystal: 4
   categories:
   - UplinkUtility
 
@@ -465,7 +498,7 @@
   description: uplink-voice-mask-desc
   productEntity: ClothingMaskGasVoiceChameleon
   cost:
-    Telecrystal: 6
+    Telecrystal: 2
   categories:
   - UplinkUtility
 
@@ -475,7 +508,7 @@
   description: uplink-radio-jammer-desc
   productEntity: RadioJammer
   cost:
-    Telecrystal: 5
+    Telecrystal: 4
   categories:
   - UplinkUtility
 
@@ -488,7 +521,7 @@
   icon: { sprite: /Textures/Clothing/Back/Backpacks/backpack.rsi, state: icon }
   productEntity: StorageImplanter
   cost:
-    Telecrystal: 12
+    Telecrystal: 8
   categories:
     - UplinkImplants
   conditions:
@@ -496,6 +529,7 @@
       blacklist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink
 
 - type: listing
   id: UplinkFreedomImplanter
@@ -507,26 +541,6 @@
     Telecrystal: 5
   categories:
     - UplinkImplants
-
-- type: listing
-  id: UplinkMicroBombImplanter
-  name: uplink-micro-bomb-implanter-name
-  description: uplink-micro-bomb-implanter-desc
-  icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
-  productEntity: MicroBombImplanter
-  cost:
-    Telecrystal: 2
-  categories:
-    - UplinkImplants
-  conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
 
 - type: listing
   id: UplinkDnaScramblerImplant
@@ -585,6 +599,7 @@
       blacklist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink
 
 - type: listing
   id: UplinkDeathRattle
@@ -744,6 +759,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -763,6 +779,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -829,6 +846,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink
 
 # Job Specific
 
@@ -1025,7 +1043,7 @@
   productEntity: ClothingBackpackChameleonFill
   icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   cost:
-    Telecrystal: 6
+    Telecrystal: 4
   categories:
     - UplinkArmor
 
@@ -1318,7 +1336,7 @@
   description: uplink-costume-clown-desc
   productEntity: ClothingBackpackDuffelSyndicateCostumeClown
   cost:
-    Telecrystal: 4
+    Telecrystal: 2
   categories:
   - UplinkPointless
 

@@ -1,16 +1,16 @@
 using Content.Shared.Actions;
-using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.VendingMachines
 {
-    [RegisterComponent, NetworkedComponent]
+    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
     public sealed partial class VendingMachineComponent : Component
     {
         public const string ContainerId = "VendingMachine";
@@ -113,8 +113,13 @@ namespace Content.Shared.VendingMachines
         /// <summary>
         ///     The action available to the player controlling the vending machine
         /// </summary>
-        [DataField("action", customTypeSerializer: typeof(PrototypeIdSerializer<InstantActionPrototype>))]
-        public string? Action = "VendingThrow";
+        [DataField("action", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [AutoNetworkedField]
+        public string? Action = "ActionVendingThrow";
+
+        [DataField("actionEntity")]
+        [AutoNetworkedField]
+        public EntityUid? ActionEntity;
 
         public float NonLimitedEjectForce = 7.5f;
 
@@ -199,7 +204,7 @@ namespace Content.Shared.VendingMachines
         [ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
         [ViewVariables(VVAccess.ReadWrite)]
-        public List<EntityUid> EntityUids = new();
+        public List<NetEntity> EntityUids = new();
         public VendingMachineInventoryEntry(InventoryType type, string id, uint amount)
         {
             Type = type;
@@ -207,10 +212,10 @@ namespace Content.Shared.VendingMachines
             Amount = amount;
         }
 
-        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, EntityUid firstUid)
+        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, NetEntity firstUid)
             : this(type, id, amount)
         {
-            EntityUids = new List<EntityUid> { firstUid };
+            EntityUids = new List<NetEntity> { firstUid };
         }
     }
 

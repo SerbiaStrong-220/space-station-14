@@ -40,6 +40,8 @@ uplink-emp-grenade-name = { ent-EmpGrenade }
 uplink-emp-grenade-desc = Граната, предназначенная для выведения из строя электроники. Пригодится для нарушения коммуникаций, отключения энергетического оружия охраны и ЛКП, если вы оказались в стесненных обстоятельствах.
 uplink-exploding-pen-name = Взрывающаяся ручка
 uplink-exploding-pen-desc = Взрывное устройство класса IV, помещённое в стандартную ручку. Снабжено 4-секундным таймером.
+uplink-exploding-syndicate-bomb-name = Бомба синдиката
+uplink-exploding-syndicate-bomb-desc = Надёжная бомба, которая может проделать большую дыру в станции. Полезно для отвлечения внимания.
 # Ammo
 uplink-pistol-magazine-name = Пистолетный магазин (.35 авто)
 uplink-pistol-magazine-desc = Пистолетный магазин на 10 патронов. Совместим с "Гадюкой".
@@ -218,6 +220,8 @@ uplink-costume-pyjama-name = { ent-ClothingBackpackDuffelSyndicatePyjamaBundle }
 uplink-costume-pyjama-desc = { ent-ClothingBackpackDuffelSyndicatePyjamaBundle.desc }
 uplink-costume-clown-name = Вещмешок с костюмом клоуна
 uplink-costume-clown-desc = Содержит полный комплект клоунского костюма. Включает КПК и гарнитуру сервисного отдела.
+uplink-carp-suit-bundle-name = Вещмешок с костюмом карпа
+uplink-carp-suit-bundle-desc = Содержит костюм карпа и нескольких друзей для игр.
 uplink-operative-suit-name = { ent-ClothingUniformJumpsuitOperative }
 uplink-operative-suit-desc = Комбинезон из отборной ткани, выдаваемый нашим ядерным оперативникам, гарантирует, что вы будете выделяться, и не имеет никаких других преимуществ, кроме крутого внешнего вида.
 uplink-operative-skirt-name = { ent-ClothingUniformJumpskirtOperative }

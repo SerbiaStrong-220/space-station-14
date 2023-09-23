@@ -1,17 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Globalization;
 using Content.Server.Chat.Systems;
 using Content.Server.Forensics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Objectives;
-using Content.Server.Objectives.Conditions;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
-using Content.Server.Storage.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Emag.Components;
@@ -25,9 +22,9 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using static Content.Shared.Storage.SharedStorageComponent;
 using Content.Shared.Mind;
-using Content.Shared.Objectives;
+using Content.Shared.Storage;
+using Content.Server.Objectives.Components;
 
 namespace Content.Server.SS220.CryopodSSD;
 
@@ -95,18 +92,20 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         if (args.Session.AttachedEntity is not EntityUid player)
             return;
 
-        if (!Exists(args.InteractedItemUid))
+        var entInteractedItemUid = GetEntity(args.InteractedItemUid);
+
+        if (!Exists(entInteractedItemUid))
         {
-            _sawmill.Error($"Player {args.Session} interacted with non-existent item {args.InteractedItemUid} stored in {ToPrettyString(uid)}");
+            _sawmill.Error($"Player {args.Session} interacted with non-existent item {entInteractedItemUid} stored in {ToPrettyString(uid)}");
             return;
         }
 
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComp))
+        if (!TryComp<StorageComponent>(uid, out var storageComp))
         {
             return;
         }
 
-        if (!_actionBlockerSystem.CanInteract(player, args.InteractedItemUid) || storageComp.Storage == null || !storageComp.Storage.Contains(args.InteractedItemUid))
+        if (!_actionBlockerSystem.CanInteract(player, entInteractedItemUid) || storageComp.Container == null || !storageComp.Container.Contains(entInteractedItemUid))
             return;
 
         if (!TryComp(player, out HandsComponent? hands) || hands.Count == 0)
@@ -120,9 +119,9 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
         if (hands.ActiveHandEntity == null)
         {
-            if (_handsSystem.TryPickupAnyHand(player, args.InteractedItemUid, handsComp: hands)
+            if (_handsSystem.TryPickupAnyHand(player, entInteractedItemUid, handsComp: hands)
                 && storageComp.StorageRemoveSound != null)
-                _sawmill.Info($"{ToPrettyString(player)} takes {ToPrettyString(args.InteractedItemUid)} from {ToPrettyString(uid)}");
+                _sawmill.Info($"{ToPrettyString(player)} takes {ToPrettyString(entInteractedItemUid)} from {ToPrettyString(uid)}");
         }
     }
 
@@ -148,8 +147,9 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
                 continue;
             }
 
+            var cryopodSSDEntity = args.CryopodSSD;
             var consoleCoord = Transform(uid).Coordinates;
-            var cryopodCoord = Transform(args.CryopodSSD).Coordinates;
+            var cryopodCoord = Transform(cryopodSSDEntity).Coordinates;
 
             if (consoleCoord.InRange(_entityManager, _transformSystem, cryopodCoord, ssdStorageConsoleComp.RadiusToConnect))
             {
@@ -208,21 +208,29 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
                 continue;
             }
 
-            IEnumerable<Objective> objectiveToReplace = mind.AllObjectives
-                .Where(objective =>
-                    objective.Conditions.Any(condition => (condition as KillPersonCondition)?.IsTarget(uid) ?? false))
-                .ToArray();
+            List<EntityUid> objectiveToReplace = new();
+            foreach (var objective in mind.AllObjectives)
+            {
+                if (!TryComp<TargetObjectiveComponent>(objective, out var target))
+                    continue;
+
+                if (target.Target != uid)
+                    continue;
+
+                objectiveToReplace.Add(objective);
+            }
 
             foreach (var objective in objectiveToReplace)
             {
-                _mindSystem.TryRemoveObjective(mind, objective);
+                _mindSystem.TryRemoveObjective(mindId, mind, objective);
                 var newObjective = _objectives.GetRandomObjective(mindId, mind, "TraitorObjectiveGroups");
-                if (newObjective is null || !_mindSystem.TryAddObjective(mindId, mind, newObjective))
+                if (newObjective is null)
                 {
                     _sawmill.Error($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he lost his objective and didn't get a new one");
                     continue;
                 }
 
+                _mindSystem.AddObjective(mindId, mind, newObjective.Value);
                 _sawmill.Info($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
             }
         }
@@ -239,8 +247,8 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
     private void UndressEntity(EntityUid uid, SSDStorageConsoleComponent component, EntityUid target)
     {
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComponent)
-            || storageComponent.Storage is null)
+        if (!TryComp<StorageComponent>(uid, out var storageComponent)
+            || storageComponent.Container is null)
         {
             return;
         }
@@ -256,11 +264,11 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         List<EntityUid> itemsToDelete = new();
 
         // Looking through all
-        SortContainedItems(in target,ref itemsToTransfer,ref itemsToDelete, in component.Whitelist);
+        SortContainedItems(in target, ref itemsToTransfer, ref itemsToDelete, in component.Whitelist);
 
         foreach (var item in itemsToTransfer)
         {
-            storageComponent.Storage.Insert(item);
+            storageComponent.Container.Insert(item);
         }
 
         foreach (var item in itemsToDelete)
@@ -368,20 +376,10 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
             return;
         }
 
-        if (TryComp<ServerStorageComponent>(uid, out var storageComponent) && storageComponent.StoredEntities != null)
-        {
-            var hasAccess = HasComp<EmaggedComponent>(uid) || _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
-            var storageState = hasAccess ?
-                new StorageBoundUserInterfaceState((List<EntityUid>) storageComponent.StoredEntities,
-                    storageComponent.StorageUsed,
-                    storageComponent.StorageCapacityMax)
-                : new StorageBoundUserInterfaceState(new List<EntityUid>(),
-                    0,
-                    storageComponent.StorageCapacityMax);
+        var hasAccess = HasComp<EmaggedComponent>(uid) || _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
 
-            var state = new SSDStorageConsoleState(hasAccess, component.StoredEntities, storageState);
-            SetStateForInterface(uid, state);
-        }
+        var state = new SSDStorageConsoleState(hasAccess, component.StoredEntities);
+        SetStateForInterface(uid, state);
     }
 
     private void SetStateForInterface(EntityUid uid, SSDStorageConsoleState storageConsoleState)
