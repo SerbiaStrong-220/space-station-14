@@ -60,7 +60,7 @@
                             <graphics:StyleBoxFlat BackgroundColor="#1C1C21FF"/>
                         </PanelContainer.PanelOverride>
 
-                        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <ScrollContainer Name="RecordHistoryScroll" VerticalExpand="True" ReserveScrollbarSpace="False" HScrollEnabled="False">
                             <BoxContainer Name="CriminalRecordContainer" Orientation="Vertical"/>
                         </ScrollContainer>
                     </PanelContainer>

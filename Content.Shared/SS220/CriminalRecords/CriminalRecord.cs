@@ -15,6 +15,17 @@ public sealed class CriminalRecordCatalog
 
     [DataField]
     public int? LastRecordTime;
+
+    public CriminalRecord? GetLastRecord()
+    {
+        if (!LastRecordTime.HasValue)
+            return null;
+
+        if (Records.TryGetValue(LastRecordTime.Value, out var record))
+            return record;
+
+        return null;
+    }
 }
 
 [Serializable, NetSerializable]

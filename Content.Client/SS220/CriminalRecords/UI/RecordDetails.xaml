@@ -19,7 +19,7 @@
             <ui:CharacterVisualisation Margin="10 10" Name="CharVis" HorizontalExpand="True" VerticalExpand="True" HorizontalAlignment="Center"/>
 
             <!-- Criminal status -->
-            <PanelContainer HorizontalExpand="True" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <PanelContainer Name="CriminalStatusContainer" HorizontalExpand="True" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BackgroundColor="#00000055"/>
                 </PanelContainer.PanelOverride>

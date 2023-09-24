@@ -28,8 +28,6 @@ public sealed partial class RecordDetails : Control
         _prototype = IoCManager.Resolve<IPrototypeManager>();
         _sysMan = IoCManager.Resolve<IEntitySystemManager>();
         _sprite = _sysMan.GetEntitySystem<SpriteSystem>();
-
-        StatusLabel.SetMarkup("[color=red][bold]В РОЗЫСКЕ[/bold][/color]");
     }
 
     private string CapitalizeFirstLetter(string input)
@@ -42,8 +40,9 @@ public sealed partial class RecordDetails : Control
             return char.ToUpper(input[0]) + input.Substring(1);
     }
 
-    public void LoadRecordDetails(GeneralStationRecord record)
+    public void LoadRecordDetails(GeneralStationRecord record, bool loadSecurity = true)
     {
+        // Setup job field
         string jobTitle = record.JobTitle;
         string? jobColor = null;
         if (!string.IsNullOrEmpty(record.JobPrototype))
@@ -64,6 +63,7 @@ public sealed partial class RecordDetails : Control
         : CapitalizeFirstLetter(jobTitle);
         JobName.SetMarkup($"[color={jobColor}]{finalJobTitle}[/color]");
 
+        // Setup gender, age and race fields (single label)
         var genderString = record.Gender switch
         {
             Gender.Female => Loc.GetString("identity-gender-feminine"),
@@ -85,13 +85,41 @@ public sealed partial class RecordDetails : Control
 
         DetailsLabel.SetMarkup($"Возраст: {record.Age}   Раса: {species}   Пол: {genderString}");
 
+        // DNA and fingerprint fields
         DnaLabel.Text = $"ДНК: {(string.IsNullOrEmpty(record.DNA) ? Loc.GetString("criminal-records-ui-unknown") : record.DNA)}";
         FingerprintsLabel.Text = $"Отпечатки: {(string.IsNullOrEmpty(record.Fingerprint) ? Loc.GetString("criminal-records-ui-unknown") : record.Fingerprint)}";
 
+        // Characher photo in job uniform
         if (record.Profile != null && !string.IsNullOrEmpty(record.JobPrototype))
             CharVis.SetupCharacterSpriteView(record.Profile, record.JobPrototype);
         else
             CharVis.ResetCharacterSpriteView();
+
+        // Criminal status over photo
+        if (loadSecurity)
+        {
+            if (record.CriminalRecords?.GetLastRecord() is { } criminalRecord)
+            {
+                CriminalStatusContainer.Visible = criminalRecord.RecordType.HasValue;
+                if (criminalRecord.RecordType.HasValue)
+                {
+                    StatusLabel.Visible = true;
+                    var recordType = _prototype.Index(criminalRecord.RecordType.Value);
+                    StatusLabel.SetMarkup($"[color={recordType.Color.ToHex()}][bold]{recordType.Name}[/bold][/color]");
+
+                    CriminalStatusIcon.Visible = recordType.StatusIcon.HasValue;
+                    if (recordType.StatusIcon.HasValue)
+                    {
+                        var iconProto = _prototype.Index<StatusIconPrototype>(recordType.StatusIcon);
+                        CriminalStatusIcon.Texture = _sprite.Frame0(iconProto.Icon);
+                    }
+                }
+            }
+        }
+        else
+        {
+            CriminalStatusContainer.Visible = false;
+        }
     }
 
     const float ADDITIONAL_COLOR_CHANNEL_VALUE = 0.25f;

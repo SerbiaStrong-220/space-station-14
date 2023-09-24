@@ -24,13 +24,13 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
     private readonly SpriteSystem _sprite;
 
     private bool _isPopulating = false;
+    private bool _creationMode = false;
 
-    private readonly Color _altEntryColor = Color.FromHex("#151519");
+    private bool _securityMode = true;
+    public int MaxEntryMessageLength = 200;
+
     private readonly Color _defaultLineColor = Color.FromHex("#808080");
     private readonly StyleBoxFlat _indicatorOverride;
-    private bool _securityMode = true;
-    private bool _creationMode = false;
-    public int MaxEntryMessageLength = 200;
 
     public Action<(string, ProtoId<CriminalStatusPrototype>?)>? OnCriminalStatusChange;
     public Action<int>? OnCriminalStatusDelete;
@@ -107,6 +107,10 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         //MessageInput.OnKeyBindDown += _ => MessageInputChanged(); // Doesn't work 24.09.2023 textedit is broken
 
         SetupStatusTypeSelector();
+
+        // 24.09.2023 TheArturZh
+        // Hack to fix RichTextLabel line wrapping, remove when fixed properly in the engine
+        SetSize = Size + new System.Numerics.Vector2(1, 1);
     }
 
     // public void MessageInputChanged()
@@ -179,7 +183,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         {
             //Logger.DebugS("STATUS", "=====SELECTED!");
             CharacterName.Text = state.SelectedRecord.Name;
-            Details.LoadRecordDetails(state.SelectedRecord);
+            Details.LoadRecordDetails(state.SelectedRecord, _securityMode);
             PopulateRecords(state.SelectedRecord);
             PanelRightPlaceholder.Visible = false;
             PanelRight.Visible = true;
@@ -224,21 +228,30 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
             var time = keyList[i];
             CriminalRecord entry = catalog.Records[time];
             var entryDisplay = new CriminalRecordDisplay();
+            var isLast = time == catalog.LastRecordTime;
 
             Texture? iconTexture = null;
+            CriminalStatusPrototype? statusProto = null;
             if (entry.RecordType != null &&
-            _prototype.TryIndex<CriminalStatusPrototype>(entry.RecordType, out var statusProto))
+            _prototype.TryIndex(entry.RecordType, out statusProto))
             {
                 if (statusProto.StatusIcon != null &&
                 _prototype.TryIndex<StatusIconPrototype>(statusProto.StatusIcon, out var statusIconProto))
                 {
                     iconTexture = _sprite.Frame0(statusIconProto.Icon);
                 }
+
+                if (isLast)
+                    _indicatorOverride.BackgroundColor = statusProto != null ? statusProto.Color : _defaultLineColor;
+            }
+            else if (isLast)
+            {
+                _indicatorOverride.BackgroundColor = _defaultLineColor;
             }
 
-            entryDisplay.Setup(iconTexture, entry.Message, time, time == catalog.LastRecordTime, this);
             CriminalRecordContainer.AddChild(entryDisplay);
             entryDisplay.SetPositionFirst();
+            entryDisplay.Setup(iconTexture, statusProto, entry.Message, time, isLast, this);
 
             if (i % 2 == 0)
                 ((StyleBoxFlat) entryDisplay.PanelOverride!).BackgroundColor = Color.Transparent;
