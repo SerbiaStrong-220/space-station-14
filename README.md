@@ -1,8 +1,15 @@
-<p align="center"> <img alt="Space Station 14" width="880" height="300" src="https://raw.githubusercontent.com/space-wizards/asset-dump/de329a7898bb716b9d5ba9a0cd07f38e61f1ed05/github-logo.svg" /></p>
+<p align="center"> <img alt="Space Station 14" width="350" height="350" src="https://raw.githubusercontent.com/TheArturZh/space-station-14/newreadme/logo.png" /></p>
+
+<p align="center">
+<img alt="forthebadge | It works. Why?" src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/it-works-why.svg" />
+<img alt="forthebadge | Fuck it. Ship it." src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/fuck-it-ship-it.svg" />
+<img alt="forthebadge | Not a bug. A feature." src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/not-a-bug-a-feature.svg" />
+<img alt="forthebadge | Gluten free." src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/gluten-free.svg" />
+</p>
 
 Space Station 14 это ремейк SS13, который работает на собственном движке [Robust Toolbox](https://github.com/space-wizards/RobustToolbox), написанном на C#.
 
-Это репозиторий исходного кода билда русскоязычного сервера SS220, основанном на билде [проекта Corvax](https://github.com/space-syndicate/space-station-14). Данный репозиторий позволяет игрокам проекта оказывать помощь в тестировании и разработки билда. **Наши изменения в коде распространяются под CLA, ограничивающим хостинг.**
+Это репозиторий исходного кода билда русскоязычного сервера **SS220**, основанном на билде [проекта Corvax](https://github.com/space-syndicate/space-station-14). Данный репозиторий позволяет игрокам проекта оказывать помощь в тестировании и разработки билда. **Наши изменения в коде распространяются под CLA, ограничивающим хостинг.**
 
 ## Ссылки
 
