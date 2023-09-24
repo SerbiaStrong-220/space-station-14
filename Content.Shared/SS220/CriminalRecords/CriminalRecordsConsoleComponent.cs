@@ -41,10 +41,6 @@ public sealed partial class CriminalRecordShort
     [DataField]
     public ProtoId<JobPrototype>? JobPrototype;
 
-    [DataField]
-    public ProtoId<CriminalStatusPrototype>? CriminalStatusType;
-    public string CriminalStatusNote = "";
-
     [DataField("dna")]
     public string DNA = "";
 

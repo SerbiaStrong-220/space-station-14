@@ -5,6 +5,7 @@ criminal-records-ui-no-department = Без отдела
 criminal-records-ui-flavor-right = Конфиденциальные данные. Только для уполномоченных лиц.
 criminal-records-ui-message-placeholder = Дополнительная информация (макс. 200 символов)
 criminal-records-ui-no-status = Без статуса
+criminal-records-ui-cryo-group = Ушли в крио
 criminal-status-wanted = В розыске
 criminal-status-search = Обыскать
 criminal-status-monitor = Следить

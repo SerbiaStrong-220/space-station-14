@@ -10,6 +10,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
@@ -83,7 +84,7 @@ public sealed partial class RecordListEntry : PanelContainer
             UpdateVisuals();
         };
 
-        CriminalStatusNote.SetMarkup("[color=red]В РОЗЫСКЕ:[/color] 104, 206, 309 напал на капитана");
+        //CriminalStatusNote.SetMarkup("[color=red]В РОЗЫСКЕ:[/color] 104, 206, 309 напал на капитана");
     }
 
     public void UpdateVisuals()
@@ -106,10 +107,11 @@ public sealed partial class RecordListEntry : PanelContainer
         UpdateVisuals();
     }
 
-    public void SetupEntry(CriminalRecordShort record)
+    public void SetupEntry(CriminalRecordShort record, RecordList.FilterMatchType matchType)
     {
         NameLabel.Text = record.Name;
 
+        // Setup job title
         if (record.JobPrototype != null)
         {
             var jobProto = _prototype.Index<JobPrototype>(record.JobPrototype);
@@ -120,6 +122,38 @@ public sealed partial class RecordListEntry : PanelContainer
             JobIcon.Texture = _sprite.Frame0(iconProto.Icon);
         }
 
+        // Setup bottom string
+        var msg = new FormattedMessage();
+        if (matchType == RecordList.FilterMatchType.Default)
+        {
+            if (record.LastCriminalRecord != null && record.LastCriminalRecord.RecordType != null)
+            {
+                var statusType = _prototype.Index<CriminalStatusPrototype>(record.LastCriminalRecord.RecordType);
+                msg.AddMarkup($"[color={statusType.Color.ToHex()}][bold]{statusType.Name}[/bold][/color]: ");
+                msg.AddText(record.LastCriminalRecord.Message);
+                CriminalStatusNote.Visible = true;
+            }
+            else
+            {
+                CriminalStatusNote.Visible = false;
+            }
+        }
+        else if (matchType == RecordList.FilterMatchType.DNA)
+        {
+            msg.PushColor(Color.White);
+            msg.AddText("ДНК: " + record.DNA);
+            msg.Pop();
+            CriminalStatusNote.Visible = true;
+        }
+        else if (matchType == RecordList.FilterMatchType.Fingerprint)
+        {
+            msg.PushColor(Color.White);
+            msg.AddText("Отпечаток: " + record.Fingerprints);
+            msg.Pop();
+            CriminalStatusNote.Visible = true;
+        }
+
+        CriminalStatusNote.SetMessage(msg);
     }
 
     const float ADDITIONAL_COLOR_CHANNEL_VALUE = 0.25f;

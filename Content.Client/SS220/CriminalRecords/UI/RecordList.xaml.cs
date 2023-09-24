@@ -42,6 +42,13 @@ public sealed partial class RecordList : ScrollContainer
 
     private Dictionary<string, DepartmentPrototype> _jobIdToDepartment = new();
     private const string NoDeraptmentGroupId = "NoDepartment";
+    private const string CryodGroupId = "Cryod";
+    private const string CriminalGroupId = "Criminal";
+
+    private static readonly HashSet<string> DepartmentBlacklist = new()
+    {
+        "Specific",
+    };
 
     public RecordList()
     {
@@ -63,6 +70,9 @@ public sealed partial class RecordList : ScrollContainer
 
         foreach (var department in departments)
         {
+            if (DepartmentBlacklist.Contains(department.ID))
+                continue;
+
             foreach (var roleId in department.Roles)
             {
                 if (_jobIdToDepartment.ContainsKey(roleId))
@@ -76,7 +86,15 @@ public sealed partial class RecordList : ScrollContainer
     private void ParseDepartmentGroups()
     {
         var departments = _prototype.EnumeratePrototypes<DepartmentPrototype>().ToList();
-        departments.Sort((a, b) => a.Sort.CompareTo(b.Sort));
+        departments.Sort((a, b) => a.ID.CompareTo(b.ID));
+
+        // Group for people with criminal status
+        var criminalGroup = new RecordListGroupCriminal();
+        criminalGroup.Setup("", Color.White);
+        OptionContainer.AddChild(criminalGroup);
+        criminalGroup.Visible = false;
+        RecordListGroups.Add(CriminalGroupId, criminalGroup);
+        Logger.DebugS("TEST", "Creted group with ID: " + CriminalGroupId);
 
         foreach (var department in departments)
         {
@@ -86,7 +104,7 @@ public sealed partial class RecordList : ScrollContainer
             color = color.WithGreen(MathF.Min(color.G + ADDITIONAL_COLOR_CHANNEL_VALUE, 1));
             color = color.WithBlue(MathF.Min(color.B + ADDITIONAL_COLOR_CHANNEL_VALUE, 1));
 
-            var group = new RecordListGroup();
+            var group = new RecordListGroupBasic();
             group.Setup(Loc.GetString("department-" + department.ID), color);
             OptionContainer.AddChild(group);
             group.Visible = false;
@@ -94,28 +112,32 @@ public sealed partial class RecordList : ScrollContainer
             Logger.DebugS("TEST", "Creted group with ID: " + department.ID);
         }
 
-        // Group for jons without department
-        var noDepGroup = new RecordListGroup();
-        noDepGroup.Setup(Loc.GetString("criminal-records-ui-no-department"), Color.LightGray);
+        // Group for jobs without department
+        var noDepGroup = new RecordListGroupBasic();
+        noDepGroup.Setup(Loc.GetString("criminal-records-ui-no-department"), Color.White);
         OptionContainer.AddChild(noDepGroup);
         noDepGroup.Visible = false;
         RecordListGroups.Add(NoDeraptmentGroupId, noDepGroup);
         Logger.DebugS("TEST", "Creted group with ID: " + NoDeraptmentGroupId);
+
+        // Group those who went to cryo
+        var cryoGroup = new RecordListGroupBasic();
+        cryoGroup.Setup(Loc.GetString("criminal-records-ui-cryo-group"), Color.LightGreen);
+        OptionContainer.AddChild(cryoGroup);
+        cryoGroup.Visible = false;
+        RecordListGroups.Add(CryodGroupId, cryoGroup);
+        Logger.DebugS("TEST", "Creted group with ID: " + CryodGroupId);
     }
 
     public void EnsurePoolSize(int count)
     {
-        //Logger.DebugS("TEST", "ENSURING " + count + " ENTRIES!");
         var toAdd = count - _itemPool.Count;
-        var antiRetardCounter = 0;
         for (int i = 0; i < toAdd; i++)
         {
             var entry = new RecordListEntry(_prototype, _sprite, this);
             _itemPool.Add(entry);
             entry.Pressed += OnItemPressed;
-            antiRetardCounter++;
         }
-        Logger.DebugS("TEST", "SUCCESSFULLY ADDED " + antiRetardCounter + " ENTRIES!");
     }
 
     public void SetActivePool(int count)
@@ -202,16 +224,23 @@ public sealed partial class RecordList : ScrollContainer
             TryDeselect(_selected);
     }
 
-    private bool DoesRecordPassFilter(CriminalRecordShort record, string filter)
+    private bool DoesRecordPassFilter(CriminalRecordShort record, string filter, out FilterMatchType match)
     {
+        match = FilterMatchType.Default;
         if (string.IsNullOrWhiteSpace(filter))
             return true;
 
         if (record.DNA.Contains(filter))
+        {
+            match = FilterMatchType.DNA;
             return true;
+        }
 
         if (record.Fingerprints.Contains(filter))
+        {
+            match = FilterMatchType.Fingerprint;
             return true;
+        }
 
         if (record.Name.Contains(filter))
             return true;
@@ -239,6 +268,9 @@ public sealed partial class RecordList : ScrollContainer
 
     public string DicideGroup(CriminalRecordShort record)
     {
+        if (record.LastCriminalRecord != null && record.LastCriminalRecord.RecordType.HasValue)
+            return CriminalGroupId;
+
         if (string.IsNullOrEmpty(record.JobPrototype))
             return NoDeraptmentGroupId;
 
@@ -264,7 +296,7 @@ public sealed partial class RecordList : ScrollContainer
         var usedItems = 0;
         foreach (var (key, record) in _records)
         {
-            if (!DoesRecordPassFilter(record, Filter))
+            if (!DoesRecordPassFilter(record, Filter, out var matchType))
                 continue;
 
             if (!_itemPool.TryGetValue(usedItems, out var entry))
@@ -274,7 +306,7 @@ public sealed partial class RecordList : ScrollContainer
             if (!RecordListGroups.TryGetValue(groupId, out var group))
                 continue;
 
-            entry.SetupEntry(record);
+            entry.SetupEntry(record, matchType);
             entry.Metadata = new RecordMetadata(key, record);
             if (entry.Parent != group.RecordContainer)
             {
@@ -344,5 +376,12 @@ public sealed partial class RecordList : ScrollContainer
             Key = key;
             Record = record;
         }
+    }
+
+    public enum FilterMatchType
+    {
+        Default,
+        DNA,
+        Fingerprint,
     }
 }

@@ -223,6 +223,8 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         var keyList = catalog.Records.Keys.ToList();
         keyList.Sort();
 
+        _indicatorOverride.BackgroundColor = _defaultLineColor;
+
         for (var i = 0; i < keyList.Count; i++)
         {
             var time = keyList[i];

@@ -96,23 +96,20 @@ public sealed partial class RecordDetails : Control
             CharVis.ResetCharacterSpriteView();
 
         // Criminal status over photo
-        if (loadSecurity)
+        if (loadSecurity && record.CriminalRecords?.GetLastRecord() is { } criminalRecord)
         {
-            if (record.CriminalRecords?.GetLastRecord() is { } criminalRecord)
+            CriminalStatusContainer.Visible = criminalRecord.RecordType.HasValue;
+            if (criminalRecord.RecordType.HasValue)
             {
-                CriminalStatusContainer.Visible = criminalRecord.RecordType.HasValue;
-                if (criminalRecord.RecordType.HasValue)
-                {
-                    StatusLabel.Visible = true;
-                    var recordType = _prototype.Index(criminalRecord.RecordType.Value);
-                    StatusLabel.SetMarkup($"[color={recordType.Color.ToHex()}][bold]{recordType.Name}[/bold][/color]");
+                StatusLabel.Visible = true;
+                var recordType = _prototype.Index(criminalRecord.RecordType.Value);
+                StatusLabel.SetMarkup($"[color={recordType.Color.ToHex()}][bold]{recordType.Name}[/bold][/color]");
 
-                    CriminalStatusIcon.Visible = recordType.StatusIcon.HasValue;
-                    if (recordType.StatusIcon.HasValue)
-                    {
-                        var iconProto = _prototype.Index<StatusIconPrototype>(recordType.StatusIcon);
-                        CriminalStatusIcon.Texture = _sprite.Frame0(iconProto.Icon);
-                    }
+                CriminalStatusIcon.Visible = recordType.StatusIcon.HasValue;
+                if (recordType.StatusIcon.HasValue)
+                {
+                    var iconProto = _prototype.Index<StatusIconPrototype>(recordType.StatusIcon);
+                    CriminalStatusIcon.Texture = _sprite.Frame0(iconProto.Icon);
                 }
             }
         }

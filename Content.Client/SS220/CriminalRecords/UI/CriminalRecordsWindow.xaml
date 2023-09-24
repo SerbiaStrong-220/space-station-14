@@ -10,7 +10,7 @@
     xmlns:phui="clr-namespace:Content.Client.SS220.Photocopier.UI"
 
     Title="{Loc 'criminal-records-ui-window'}"
-    Resizable="True"
+    Resizable="False"
     MinSize="850 600">
 
     <BoxContainer Orientation="Vertical">
