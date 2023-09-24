@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -10,6 +11,19 @@ namespace Content.Shared.SS220.CriminalRecords;
 public sealed partial class CriminalRecordsConsoleComponent : Component
 {
     public (NetEntity, uint)? ActiveKey { get; set; }
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool IsSecurity = true;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public int MaxMessageLength = 200;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan EditCooldown = TimeSpan.FromSeconds(5);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan? LastEditTime;
+
 }
 
 [Serializable, NetSerializable]
@@ -37,17 +51,30 @@ public sealed partial class CriminalRecordShort
     [DataField]
     public string Fingerprints = "";
 
+    [DataField]
+    public CriminalRecord? LastCriminalRecord;
+
     public CriminalRecordShort(string name)
     {
         Name = name;
     }
 
-    public CriminalRecordShort(GeneralStationRecord record)
+    public CriminalRecordShort(GeneralStationRecord record, bool includeCriminalRecords = true)
     {
         Name = record.Name;
         JobPrototype = record.JobPrototype;
         DNA = record.DNA ?? "";
         Fingerprints = record.Fingerprint ?? "";
+        LastCriminalRecord = null;
+
+        if (!includeCriminalRecords)
+            return;
+
+        if (record.CriminalRecords is not null && record.CriminalRecords.LastRecordTime.HasValue)
+        {
+            if (record.CriminalRecords.Records.TryGetValue(record.CriminalRecords.LastRecordTime.Value, out var criminalRecord))
+                LastCriminalRecord = criminalRecord;
+        }
     }
 }
 
@@ -72,4 +99,28 @@ public sealed class CriminalRecordConsoleState : BoundUserInterfaceState
 
     public bool IsEmpty() => SelectedKey == null
         && SelectedRecord == null && RecordListing == null;
+}
+
+[Serializable, NetSerializable]
+public sealed class UpdateCriminalRecordStatus : BoundUserInterfaceMessage
+{
+    public readonly ProtoId<CriminalStatusPrototype>? StatusTypeId;
+    public readonly string Message;
+
+    public UpdateCriminalRecordStatus(string message, ProtoId<CriminalStatusPrototype>? statusTypeId)
+    {
+        Message = message;
+        StatusTypeId = statusTypeId;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class DeleteCriminalRecordStatus : BoundUserInterfaceMessage
+{
+    public readonly int Time;
+
+    public DeleteCriminalRecordStatus(int time)
+    {
+        Time = time;
+    }
 }

@@ -1,5 +1,13 @@
-criminal-records-ui-window = Консоль криминальных записей
 criminal-records-ui-window-search-placeholder = Поиск...
 criminal-records-ui-unknown = Неизвестно
 criminal-records-ui-unknown-job = Должность неизвестна
 criminal-records-ui-no-department = Без отдела
+criminal-records-ui-flavor-right = Конфиденциальные данные. Только для уполномоченных лиц.
+criminal-records-ui-message-placeholder = Дополнительная информация (макс. 200 символов)
+criminal-records-ui-no-status = Без статуса
+criminal-status-wanted = В розыске
+criminal-status-search = Обыскать
+criminal-status-monitor = Следить
+criminal-status-execute = Казнить
+criminal-status-cooldown-popup = Вы пытаетесь добавлять записи слишком часто.
+criminal-records-ui-delete-dialog = Удалить эту запись?

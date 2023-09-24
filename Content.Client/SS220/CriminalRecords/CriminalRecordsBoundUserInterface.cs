@@ -2,6 +2,7 @@
 using Content.Client.SS220.CriminalRecords.UI;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CriminalRecords;
 
@@ -20,6 +21,14 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
         _window = new();
         _window.OnClose += Close;
         _window.OnKeySelected += OnKeySelected;
+        _window.OnCriminalStatusChange += OnStatusUpdated;
+        _window.OnCriminalStatusDelete += OnStatusDeleted;
+
+        if (EntMan.TryGetComponent<CriminalRecordsConsoleComponent>(Owner, out var comp))
+        {
+            _window.SetSecurityMode(comp.IsSecurity);
+            _window.MaxEntryMessageLength = comp.MaxMessageLength;
+        }
 
         _window.OpenCentered();
         if (EntMan.TryGetComponent<MetaDataComponent>(Owner, out var metaData))
@@ -30,6 +39,17 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
     {
         Logger.DebugS("TEST","BOUND UI SENT KEY!");
         SendMessage(new SelectGeneralStationRecord(key));
+    }
+
+    private void OnStatusUpdated((string, ProtoId<CriminalStatusPrototype>?) statusUpdate)
+    {
+        Logger.DebugS("TEST","BOUND UI SENT NEW STATUS!");
+        SendMessage(new UpdateCriminalRecordStatus(statusUpdate.Item1, statusUpdate.Item2));
+    }
+    private void OnStatusDeleted(int time)
+    {
+        Logger.DebugS("TEST","BOUND UI SENT DELETION!");
+        SendMessage(new DeleteCriminalRecordStatus(time));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

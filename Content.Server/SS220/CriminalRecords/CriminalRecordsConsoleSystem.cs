@@ -1,10 +1,12 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.GameTicking;
+using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Roles;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
-using FastAccessors;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Linq;
@@ -13,23 +15,43 @@ namespace Content.Server.SS220.CriminalRecords;
 
 public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 {
+    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
+    [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecordsSystem = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<CriminalRecordsConsoleComponent, BoundUIOpenedEvent>(UpdateUserInterface);
         SubscribeLocalEvent<CriminalRecordsConsoleComponent, SelectGeneralStationRecord>(OnKeySelected);
-        //SubscribeLocalEvent<GeneralStationRecordConsoleComponent, GeneralStationRecordsFilterMsg>(OnFiltersChanged);
-        SubscribeLocalEvent<CriminalRecordsConsoleComponent, RecordModifiedEvent>(UpdateUserInterface);
-        SubscribeLocalEvent<CriminalRecordsConsoleComponent, AfterGeneralRecordCreatedEvent>(GigaTest);
+        SubscribeLocalEvent<CriminalRecordsConsoleComponent, UpdateCriminalRecordStatus>(OnCriminalStatusUpdate);
+        SubscribeLocalEvent<CriminalRecordsConsoleComponent, DeleteCriminalRecordStatus>(OnCriminalStatusDelete);
+        SubscribeLocalEvent<RecordModifiedEvent>(OnRecordModified);
+        SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(OnRecordCreated);
     }
 
-    private void GigaTest(EntityUid uid, CriminalRecordsConsoleComponent component, AfterGeneralRecordCreatedEvent ev)
+    private void OnRecordCreated(AfterGeneralRecordCreatedEvent args)
     {
-        Logger.DebugS("TEST","NEW RECORD CREATED - UPDATING");
-        UpdateUserInterface(uid, component, ev);
+        var query = EntityManager.EntityQueryEnumerator<CriminalRecordsConsoleComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_stationSystem.GetOwningStation(uid) == args.Station)
+                UpdateUserInterface(uid, comp);
+        }
+    }
+
+    private void OnRecordModified(RecordModifiedEvent args)
+    {
+        var query = EntityManager.EntityQueryEnumerator<CriminalRecordsConsoleComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_stationSystem.GetOwningStation(uid) == args.Station)
+                UpdateUserInterface(uid, comp);
+        }
     }
 
     private void UpdateUserInterface<T>(EntityUid uid, CriminalRecordsConsoleComponent component, T ev)
@@ -43,6 +65,45 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         Logger.DebugS("TEST","REVEIVED KEY FROM CLIENT!");
         component.ActiveKey = msg.SelectedKey;
         UpdateUserInterface(uid, component);
+    }
+
+    private void OnCriminalStatusUpdate(EntityUid uid, CriminalRecordsConsoleComponent component, UpdateCriminalRecordStatus args)
+    {
+        if (!component.IsSecurity)
+            return;
+
+        if (!component.ActiveKey.HasValue)
+            return;
+
+        var currentTime = _gameTicker.RoundDuration();
+        if (component.LastEditTime != null && component.LastEditTime + component.EditCooldown > currentTime)
+        {
+            _popup.PopupEntity(Loc.GetString("criminal-status-cooldown-popup"), uid, args.Session);
+            return;
+        }
+
+        var messageCut = args.Message;
+        if (messageCut.Length > component.MaxMessageLength)
+            messageCut = messageCut.Substring(0, component.MaxMessageLength);
+
+        if (!_criminalRecord.AddCriminalRecordStatus(component.ActiveKey.Value, messageCut, args.StatusTypeId))
+            return;
+
+        component.LastEditTime = currentTime;
+    }
+
+    private void OnCriminalStatusDelete(EntityUid uid, CriminalRecordsConsoleComponent component, DeleteCriminalRecordStatus args)
+    {
+        if (!component.IsSecurity)
+            return;
+
+        if (!component.ActiveKey.HasValue)
+            return;
+
+        Logger.DebugS("TEST","DELETING!");
+
+        if (!_criminalRecord.RemoveCriminalRecordStatus(component.ActiveKey.Value, args.Time))
+            return;
     }
 
     private void UpdateUserInterface(EntityUid uid,
@@ -63,15 +124,15 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         }
 
         var consoleRecords =
-            _stationRecordsSystem.GetRecordsOfType<GeneralStationRecord>(owningStation.Value, stationRecordsComponent);
+            _stationRecords.GetRecordsOfType<GeneralStationRecord>(owningStation.Value, stationRecordsComponent);
 
         var listing = new Dictionary<(NetEntity, uint), CriminalRecordShort>();
 
         var testRecordsAdded = true;
         foreach (var (key, record) in consoleRecords)
         {
-            var shortRecord = new CriminalRecordShort(record);
-            var deconstructed_key = _stationRecordsSystem.Convert(key);
+            var shortRecord = new CriminalRecordShort(record, console.IsSecurity);
+            var deconstructed_key = _stationRecords.Convert(key);
             listing.Add(deconstructed_key, shortRecord);
 
             //Add test trash records
@@ -103,9 +164,9 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (console.ActiveKey != null)
         {
             Logger.DebugS("TEST","HAVE KEY!");
-            if(_stationRecordsSystem.TryGetRecord(
+            if (_stationRecords.TryGetRecord(
                 owningStation.Value,
-                _stationRecordsSystem.Convert(console.ActiveKey.Value),
+                _stationRecords.Convert(console.ActiveKey.Value),
                 out selectedRecord,
                 stationRecordsComponent))
             {
@@ -120,37 +181,10 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     private void SetStateForInterface(EntityUid uid, CriminalRecordConsoleState newState)
     {
         if (newState.SelectedRecord != null)
-            Logger.DebugS("TEST","FINAL SERVER CHECK ========== SUCCESS!");
+            Logger.DebugS("TEST", "FINAL SERVER CHECK ========== SUCCESS!");
         else
-            Logger.DebugS("TEST","FINAL SERVER CHECK ========== FAIL!");
+            Logger.DebugS("TEST", "FINAL SERVER CHECK ========== FAIL!");
 
         _userInterface.TrySetUiState(uid, CriminalRecordsUiKey.Key, newState);
-    }
-
-    private bool IsSkippedRecord(GeneralStationRecordsFilter filter,
-        GeneralStationRecord someRecord)
-    {
-        bool isFilter = filter.Value.Length > 0;
-        string filterLowerCaseValue = "";
-
-        if (!isFilter)
-            return false;
-
-        filterLowerCaseValue = filter.Value.ToLower();
-
-        return filter.Type switch
-        {
-            GeneralStationRecordFilterType.Name =>
-                !someRecord.Name.ToLower().Contains(filterLowerCaseValue),
-            GeneralStationRecordFilterType.Prints => someRecord.Fingerprint != null
-                && IsFilterWithSomeCodeValue(someRecord.Fingerprint, filterLowerCaseValue),
-            GeneralStationRecordFilterType.DNA => someRecord.DNA != null
-                && IsFilterWithSomeCodeValue(someRecord.DNA, filterLowerCaseValue),
-        };
-    }
-
-    private bool IsFilterWithSomeCodeValue(string value, string filter)
-    {
-        return !value.ToLower().StartsWith(filter);
     }
 }

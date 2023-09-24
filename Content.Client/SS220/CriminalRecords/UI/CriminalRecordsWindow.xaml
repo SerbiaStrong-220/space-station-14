@@ -7,6 +7,7 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:phui="clr-namespace:Content.Client.SS220.Photocopier.UI"
 
     Title="{Loc 'criminal-records-ui-window'}"
     Resizable="True"
@@ -38,7 +39,52 @@
                 <Label Name="CharacterName" Text="Имя Фамилия" StyleClasses="LabelBig" SetHeight="25"/>
                 <!-- Details widget -->
                 <ui:RecordDetails Name="Details" HorizontalExpand="true"/>
+
                 <!-- Records history -->
+                <BoxContainer Name="RecordHistoryPanel" Orientation="Vertical" Margin="0 5 0 0" VerticalExpand="True">
+                    <BoxContainer Orientation="Horizontal">
+                        <phui:IconButton Name="ExpandButton"
+                            Margin="0 0 5 0"
+                            IconTexture="/Textures/SS220/Interface/Misc/up.png"
+                            SetWidth="40"
+                            StyleClasses="OpenLeft"/>
+                        <Label Text="Криминальные записи:"/>
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <Button Name="ChangeStatusButton" Text="Сменить статус" HorizontalAlignment="Right"/>
+                        </BoxContainer>
+                    </BoxContainer>
+
+                    <PanelContainer Name="StatusColorIndicator" Margin="0 5 0 0" HorizontalExpand="true" SetHeight="10"/>
+                    <PanelContainer Margin="0 0" VerticalExpand="true">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="#1C1C21FF"/>
+                        </PanelContainer.PanelOverride>
+
+                        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                            <BoxContainer Name="CriminalRecordContainer" Orientation="Vertical"/>
+                        </ScrollContainer>
+                    </PanelContainer>
+                </BoxContainer>
+
+                <BoxContainer Name="RecordCreationPanel" Orientation="Vertical" Margin="0 5 0 0" VerticalExpand="True" Visible="False">
+                    <BoxContainer Orientation="Horizontal">
+                        <phui:IconButton Name="CreationExpandButton"
+                            Margin="0 0 5 0"
+                            IconTexture="/Textures/SS220/Interface/Misc/up.png"
+                            SetWidth="40"
+                            StyleClasses="OpenLeft"/>
+                        <Label Text="Создание записи:"/>
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right">
+                                <Button Name="SaveRecordCreationButton" Text="Сохранить" Margin="0 0 1 0" StyleClasses="OpenRight"/>
+                                <Button Name="CancelRecordCreationButton" Text="Отмена"/>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                    <OptionButton Name="StatusTypeSelector" StyleClasses="OpenRight"/>
+                    <TextEdit Name="MessageInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0" MinHeight="100"/>
+                </BoxContainer>
+
             </BoxContainer>
             <PanelContainer Name="PanelRightPlaceholder" HorizontalExpand="true" Visible="True">
                 <Label Text="Выберите запись слева" StyleClasses="LabelBig" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -50,7 +96,7 @@
             <PanelContainer StyleClasses="LowDivider" />
             <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
                 <BoxContainer Orientation="Vertical">
-                    <Label Text="{Loc 'criminal-records-ui-flavor-right'}" Align="Right" StyleClasses="WindowFooterText"/>
+                    <Label Text="{Loc 'criminal-records-ui-flavor-right'}" Align="Right" StyleClasses="WindowFooterText" HorizontalAlignment="Right"/>
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>

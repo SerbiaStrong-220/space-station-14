@@ -19,8 +19,8 @@ public sealed partial class RecordList : ScrollContainer
     const float ADDITIONAL_COLOR_CHANNEL_VALUE = 0.25f;
     private int _active_pool = 0;
 
-    private Color _defaultEntryColor = Color.FromHex("#1C1C21");
-    private Color _altEntryColor = Color.FromHex("#151519");
+    private readonly Color _defaultEntryColor = Color.FromHex("#1C1C21");
+    private readonly Color _altEntryColor = Color.FromHex("#151519");
 
     public string Filter = "";
     public List<string> ExtraFilters = new();
