@@ -2,11 +2,21 @@
 
 Space Station 14 это ремейк SS13, который работает на собственном движке [Robust Toolbox](https://github.com/space-wizards/RobustToolbox), написанном на C#.
 
-Это репозиторий первого русскоязычного сервера по Space Station 14, целью которого является полный перевод игры на русский язык, поддержка актуальных изменений из основного репозитория, а так же добавление собственных изменений по необходимости.
+Это репозиторий исходного кода билда русскоязычного сервера SS220, основанном на билде [проекта Corvax](https://github.com/space-syndicate/space-station-14). Данный репозиторий позволяет игрокам проекта оказывать помощь в тестировании и разработки билда. **Наши изменения в коде распространяются под CLA, ограничивающим хостинг.**
 
 ## Ссылки
 
 [Наш Discord](https://discord.gg/ss220) | [Наша Вики](https://wiki.station14.ru) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Клиент без Steam](https://spacestation14.io/about/nightlies/) | [Основной репозиторий](https://github.com/space-wizards/space-station-14)
+
+## Лицензия
+
+Код репозитория лицензирован как под [MIT](https://github.com/space-syndicate/space-station-14/blob/master/LICENSE.TXT) - это касается кода Space Wizards Federation и кода проекта Corvax, так и под [CLA](https://github.com/SerbiaStrong-220/space-station-14/blob/master/CLA.txt) - это касается наших изменений, определение которых дано в лицензии. Мы не стремимя к полному разграничению нашего кода и кода выше указанных проектов, поэтому во избежание инцидентов рекомендуется брать их код из их репозиториев.
+
+Мы в полной мере используем наше право на сублицензирование.
+
+Большинство ассетов лицензированы под [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), если не указано иное. Ассеты имеют свою лицензию и авторские права в файле метаданных. [Пример](https://github.com/space-syndicate/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json). 
+
+Обратите внимание, что некоторые ассеты лицензированы на некоммерческой основе [CC-BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) или аналогичной некоммерческой лицензией, и их необходимо удалить, если вы хотите использовать этот проект в коммерческих целях.
 
 ## Документация
 
@@ -14,7 +24,7 @@ Space Station 14 это ремейк SS13, который работает на 
 
 ## Контрибьют
 
-В случае если вы хотите добавить новый контент будет лучше, если сначала вы предложите его в [основной репозиторий](https://github.com/space-wizards/space-station-14) или обсудите его необходимость на нашем сервере [Discord](https://discord.station14.ru).
+В случае если вы хотите добавить новый контент будет лучше, если сначала вы предложите его в [основной репозиторий](https://github.com/space-wizards/space-station-14) или обсудите его необходимость на нашем сервере [Discord](https://discord.gg/ss220).
 
 ## Сборка
 
@@ -23,11 +33,3 @@ Space Station 14 это ремейк SS13, который работает на 
 3. Скомпилируйте проект.
 
 [Более подробная инструкция по запуску проекта.](https://docs.spacestation14.io/getting-started/dev-setup)
-
-## Лицензия
-
-Весь код репозитория лицензирован под [MIT](https://github.com/space-syndicate/space-station-14/blob/master/LICENSE.TXT) с [CLA](https://github.com/SerbiaStrong-220/space-station-14/blob/master/CLA.txt).
-
-Большинство ассетов лицензированы под [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), если не указано иное. Ассеты имеют свою лицензию и авторские права в файле метаданных. [Пример](https://github.com/space-syndicate/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json). 
-
-Обратите внимание, что некоторые ассеты лицензированы на некоммерческой основе [CC-BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) или аналогичной некоммерческой лицензией, и их необходимо удалить, если вы хотите использовать этот проект в коммерческих целях.
