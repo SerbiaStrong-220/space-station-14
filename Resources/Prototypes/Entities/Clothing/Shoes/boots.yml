@@ -27,7 +27,7 @@
   - type: FootstepModifier # Corvax-Sounds
     footstepSoundCollection:
       collection: FootstepBoots
-    - type: Matchbox
+  - type: Matchbox
 
 - type: entity
   parent: ClothingShoesBaseButcherable
