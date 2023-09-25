@@ -22,8 +22,9 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
 
@@ -78,6 +79,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         SelectGeneralStationRecord msg)
     {
         component.ActiveKey = msg.SelectedKey;
+        _audio.PlayPvs(component.KeySwitchSound, uid);
         UpdateUserInterface(uid, component);
     }
 
@@ -113,6 +115,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
             return;
 
         component.LastEditTime = currentTime;
+        _audio.PlayPvs(component.DatabaseActionSound, uid);
     }
 
     private void OnCriminalStatusDelete(EntityUid uid, CriminalRecordsConsoleComponent component, DeleteCriminalRecordStatus args)
@@ -134,6 +137,8 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         if (!_criminalRecord.RemoveCriminalRecordStatus(component.ActiveKey.Value, args.Time, args.Session))
             return;
+
+        _audio.PlayPvs(component.DatabaseActionSound, uid);
     }
 
     private void UpdateUserInterface(EntityUid uid,

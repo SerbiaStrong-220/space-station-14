@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
-using Robust.Shared.GameStates;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -24,6 +24,17 @@ public sealed partial class CriminalRecordsConsoleComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan? LastEditTime;
 
+    [DataField]
+    public SoundSpecifier DatabaseActionSound = new SoundPathSpecifier(
+        "/Audio/SS220/Consoles/SecurityConsoleAction.ogg",
+        new()
+        {
+            Variation = 0.125f
+        }
+    );
+
+    [DataField]
+    public SoundSpecifier KeySwitchSound = new SoundCollectionSpecifier("Keyboard");
 }
 
 [Serializable, NetSerializable]
