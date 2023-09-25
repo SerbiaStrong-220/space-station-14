@@ -5,9 +5,9 @@
   description: For the best cleaner in his room!
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/chocolate.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/chocolate.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/chocolate.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/chocolate.rsi
   - type: Food
     requiresSpecialDigestion: false
   - type: Tag
@@ -35,9 +35,9 @@
   description: No way to recognise it.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/broken.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/broken.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/broken.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/broken.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -46,9 +46,9 @@
   description: It has three heads.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/hydra.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/hydra.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/hydra.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/hydra.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -57,9 +57,9 @@
   description: Made of plastic it's fantastic.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/plastic.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/plastic.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/plastic.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/plastic.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -68,9 +68,9 @@
   description: It looks suspicious.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/PlasticSpecial.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PlasticSpecial.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/PlasticSpecial.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PlasticSpecial.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -79,9 +79,9 @@
   description:
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/PolarI.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarI.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/PolarI.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarI.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -90,9 +90,9 @@
   description:
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/PolarII.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarII.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/PolarII.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarII.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -101,9 +101,9 @@
   description:
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/PolarIII.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarIII.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/PolarIII.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarIII.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -112,9 +112,9 @@
   description:
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/SSSP.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/SSSP.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/SSSP.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/SSSP.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -123,6 +123,6 @@
   description:
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/Medalpack1/Syndie.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Syndie.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Medals/Medalpack1/Syndie.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Syndie.rsi
