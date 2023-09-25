@@ -1,9 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Components;
+using Content.Shared.Database;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
+using Robust.Shared.Players;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CriminalRecords;
@@ -11,6 +14,7 @@ public sealed class CriminalRecordSystem : EntitySystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IAdminLogManager _logManager = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("CriminalRecords");
@@ -72,7 +76,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
     }
 
-    public bool RemoveCriminalRecordStatus((NetEntity, uint) key, int time)
+    public bool RemoveCriminalRecordStatus((NetEntity, uint) key, int time, ICommonSession? sender = null)
     {
         var station = GetEntity(key.Item1);
 
@@ -94,10 +98,19 @@ public sealed class CriminalRecordSystem : EntitySystem
         _stationRecords.Synchronize(station);
         UpdateIdCards(key, selectedRecord);
 
+        if (sender != null)
+        {
+            _logManager.Add(
+                LogType.SecutiyRecords,
+                LogImpact.High,
+                $"{ToPrettyString(sender.AttachedEntity):user} DELETED a criminal record for {selectedRecord.Name} with ID {time}"
+            );
+        }
+
         return true;
     }
 
-    public bool AddCriminalRecordStatus((NetEntity, uint) key, string message, string? statusPrototypeId)
+    public bool AddCriminalRecordStatus((NetEntity, uint) key, string message, string? statusPrototypeId, ICommonSession? sender = null)
     {
         var station = GetEntity(key.Item1);
 
@@ -142,6 +155,16 @@ public sealed class CriminalRecordSystem : EntitySystem
         _stationRecords.Synchronize(station);
         UpdateIdCards(key, selectedRecord);
         _sawmill.Debug("Added new criminal record, synchonizing");
+
+        if (sender != null)
+        {
+            _logManager.Add(
+                LogType.SecutiyRecords,
+                statusPrototypeId == "execute" ? LogImpact.Extreme : LogImpact.High,
+                $"{ToPrettyString(sender.AttachedEntity):user} sent a new criminal record for {selectedRecord.Name} with ID {currentRoundTime} with type '{statusPrototypeId ?? "none"}' with message: {message}"
+            );
+        }
+
         return true;
     }
 }

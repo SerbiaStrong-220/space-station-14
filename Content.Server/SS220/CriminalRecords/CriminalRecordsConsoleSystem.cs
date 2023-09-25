@@ -19,8 +19,8 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
 
@@ -88,7 +88,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (messageCut.Length > component.MaxMessageLength)
             messageCut = messageCut.Substring(0, component.MaxMessageLength);
 
-        if (!_criminalRecord.AddCriminalRecordStatus(component.ActiveKey.Value, messageCut, args.StatusTypeId))
+        if (!_criminalRecord.AddCriminalRecordStatus(component.ActiveKey.Value, messageCut, args.StatusTypeId, args.Session))
             return;
 
         component.LastEditTime = currentTime;
