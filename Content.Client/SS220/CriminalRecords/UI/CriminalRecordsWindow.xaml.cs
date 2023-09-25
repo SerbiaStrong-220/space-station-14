@@ -10,9 +10,11 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
@@ -21,13 +23,16 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 {
     private readonly IEntitySystemManager _sysMan;
     private readonly IPrototypeManager _prototype;
+    private readonly IGameTiming _gameTiming;
     private readonly SpriteSystem _sprite;
 
     private bool _isPopulating = false;
     private bool _creationMode = false;
+    private TimeSpan? _lastTimeEdited;
 
     private bool _securityMode = true;
     public int MaxEntryMessageLength = 200;
+    public int EditCooldown = 5;
 
     private readonly Color _defaultLineColor = Color.FromHex("#808080");
     private readonly StyleBoxFlat _indicatorOverride;
@@ -35,11 +40,13 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
     public Action<(string, ProtoId<CriminalStatusPrototype>?)>? OnCriminalStatusChange;
     public Action<int>? OnCriminalStatusDelete;
     public Action<(NetEntity, uint)?>? OnKeySelected;
+    private readonly CancellationTokenSource _timerCancelTokenSource = new();
 
     public CriminalRecordsWindow()
     {
         RobustXamlLoader.Load(this);
 
+        _gameTiming = IoCManager.Resolve<IGameTiming>();
         _prototype = IoCManager.Resolve<IPrototypeManager>();
         _sysMan = IoCManager.Resolve<IEntitySystemManager>();
         _sprite = _sysMan.GetEntitySystem<SpriteSystem>();
@@ -85,6 +92,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
                 statusTypeId = new(cast);
 
             OnCriminalStatusChange?.Invoke((text, statusTypeId));
+            _lastTimeEdited = _gameTiming.CurTime;
             ToggleCreation();
         };
 
@@ -111,6 +119,9 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         // 24.09.2023 TheArturZh
         // Hack to fix RichTextLabel line wrapping, remove when fixed properly in the engine
         SetSize = Size + new System.Numerics.Vector2(1, 1);
+
+        UpdateCountdown();
+        Timer.SpawnRepeating(500, UpdateCountdown, _timerCancelTokenSource.Token);
     }
 
     // public void MessageInputChanged()
@@ -197,6 +208,33 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         }
     }
 
+    public void UpdateCountdown()
+    {
+        bool onCooldown = false;
+
+        TimeSpan? cooldownRemaining = null;
+        if (_lastTimeEdited.HasValue)
+        {
+            cooldownRemaining = _lastTimeEdited.Value + TimeSpan.FromSeconds(EditCooldown) - _gameTiming.CurTime;
+            onCooldown = cooldownRemaining > TimeSpan.Zero;
+        }
+
+        SaveRecordCreationButton.Disabled = onCooldown;
+        ChangeStatusButton.Disabled = onCooldown;
+
+        if (onCooldown)
+        {
+            var time = (int) MathF.Ceiling((float) cooldownRemaining!.Value.TotalSeconds);
+            ChangeStatusButton.Text = $"Сменить статус ({time})";
+            SaveRecordCreationButton.Text = $"Сохранить ({time})";
+        }
+        else
+        {
+            ChangeStatusButton.Text = "Сменить статус";
+            SaveRecordCreationButton.Text = "Сохранить";
+        }
+    }
+
     private void PopulateRecordListing(Dictionary<(NetEntity, uint), CriminalRecordShort>? listing, (NetEntity, uint)? selected)
     {
         if (_isPopulating)
@@ -263,5 +301,19 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
     public void DeleteRecord(int time)
     {
         OnCriminalStatusDelete?.Invoke(time);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        _timerCancelTokenSource.Cancel();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _timerCancelTokenSource.Cancel();
     }
 }

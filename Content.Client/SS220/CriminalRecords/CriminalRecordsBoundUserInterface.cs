@@ -28,6 +28,7 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
         {
             _window.SetSecurityMode(comp.IsSecurity);
             _window.MaxEntryMessageLength = comp.MaxMessageLength;
+            _window.EditCooldown = (int) comp.EditCooldown.TotalSeconds;
         }
 
         _window.OpenCentered();

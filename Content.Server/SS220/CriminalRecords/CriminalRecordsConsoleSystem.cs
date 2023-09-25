@@ -22,6 +22,8 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
 
+    private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
+
     public override void Initialize()
     {
         SubscribeLocalEvent<CriminalRecordsConsoleComponent, BoundUIOpenedEvent>(UpdateUserInterface);
@@ -76,7 +78,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
             return;
 
         var currentTime = _gameTicker.RoundDuration();
-        if (component.LastEditTime != null && component.LastEditTime + component.EditCooldown > currentTime)
+        if (component.LastEditTime != null && component.LastEditTime + component.EditCooldown - CooldownLagTolerance > currentTime)
         {
             _popup.PopupEntity(Loc.GetString("criminal-status-cooldown-popup"), uid, args.Session);
             return;
