@@ -50,6 +50,9 @@ public sealed partial class CriminalRecordShort
     [DataField]
     public CriminalRecord? LastCriminalRecord;
 
+    [DataField]
+    public bool IsInCryo;
+
     public CriminalRecordShort(string name)
     {
         Name = name;
@@ -62,6 +65,7 @@ public sealed partial class CriminalRecordShort
         DNA = record.DNA ?? "";
         Fingerprints = record.Fingerprint ?? "";
         LastCriminalRecord = null;
+        IsInCryo = record.IsInCryo;
 
         if (!includeCriminalRecords)
             return;

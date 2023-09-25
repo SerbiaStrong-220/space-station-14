@@ -76,5 +76,11 @@ public sealed class GeneralStationRecord
     /// </sumary>
     [ViewVariables] public HumanoidCharacterProfile? Profile;
 
-    [ViewVariables] public CriminalRecordCatalog? CriminalRecords;
+    //SS220 Criminal-Records begin
+    [ViewVariables]
+    public CriminalRecordCatalog? CriminalRecords;
+
+    [ViewVariables]
+    public bool IsInCryo = false;
+    //SS220 Criminal-Records end
 }

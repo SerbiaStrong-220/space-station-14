@@ -4,6 +4,8 @@ using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
+using Content.Server.UserInterface;
+using Content.Shared.Access.Systems;
 using Content.Shared.Roles;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
@@ -18,6 +20,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
@@ -32,6 +35,16 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         SubscribeLocalEvent<CriminalRecordsConsoleComponent, DeleteCriminalRecordStatus>(OnCriminalStatusDelete);
         SubscribeLocalEvent<RecordModifiedEvent>(OnRecordModified);
         SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(OnRecordCreated);
+        SubscribeLocalEvent<GeneralStationRecordConsoleComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenUI);
+    }
+
+    private void OnAttemptOpenUI(EntityUid uid, GeneralStationRecordConsoleComponent comp, ActivatableUIOpenAttemptEvent args)
+    {
+        if (!_accessReader.IsAllowed(args.User, uid))
+        {
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: args.User);
+            args.Cancel();
+        }
     }
 
     private void OnRecordCreated(AfterGeneralRecordCreatedEvent args)
@@ -64,7 +77,6 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     private void OnKeySelected(EntityUid uid, CriminalRecordsConsoleComponent component,
         SelectGeneralStationRecord msg)
     {
-        Logger.DebugS("TEST","REVEIVED KEY FROM CLIENT!");
         component.ActiveKey = msg.SelectedKey;
         UpdateUserInterface(uid, component);
     }
@@ -76,6 +88,15 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         if (!component.ActiveKey.HasValue)
             return;
+
+        if (args.Session.AttachedEntity is not { } user)
+            return;
+
+        if (!_accessReader.IsAllowed(user, uid))
+        {
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: user);
+            return;
+        }
 
         var currentTime = _gameTicker.RoundDuration();
         if (component.LastEditTime != null && component.LastEditTime + component.EditCooldown - CooldownLagTolerance > currentTime)
@@ -102,7 +123,14 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (!component.ActiveKey.HasValue)
             return;
 
-        Logger.DebugS("TEST","DELETING!");
+        if (args.Session.AttachedEntity is not { } user)
+            return;
+
+        if (!_accessReader.IsAllowed(user, uid))
+        {
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: user);
+            return;
+        }
 
         if (!_criminalRecord.RemoveCriminalRecordStatus(component.ActiveKey.Value, args.Time, args.Session))
             return;
@@ -165,15 +193,11 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         GeneralStationRecord? selectedRecord = null;
         if (console.ActiveKey != null)
         {
-            Logger.DebugS("TEST","HAVE KEY!");
-            if (_stationRecords.TryGetRecord(
+            _stationRecords.TryGetRecord(
                 owningStation.Value,
                 _stationRecords.Convert(console.ActiveKey.Value),
                 out selectedRecord,
-                stationRecordsComponent))
-            {
-                Logger.DebugS("TEST","SUCCESS!");
-            }
+                stationRecordsComponent);
         }
 
         CriminalRecordConsoleState newState = new(console.ActiveKey, selectedRecord, listing);
@@ -182,11 +206,6 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
     private void SetStateForInterface(EntityUid uid, CriminalRecordConsoleState newState)
     {
-        if (newState.SelectedRecord != null)
-            Logger.DebugS("TEST", "FINAL SERVER CHECK ========== SUCCESS!");
-        else
-            Logger.DebugS("TEST", "FINAL SERVER CHECK ========== FAIL!");
-
         _userInterface.TrySetUiState(uid, CriminalRecordsUiKey.Key, newState);
     }
 }

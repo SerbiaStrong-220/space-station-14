@@ -6,9 +6,12 @@ criminal-records-ui-flavor-right = Конфиденциальные данные
 criminal-records-ui-message-placeholder = Дополнительная информация (макс. 200 символов)
 criminal-records-ui-no-status = Без статуса
 criminal-records-ui-cryo-group = Ушли в крио
+criminal-records-ui-delete-dialog = Удалить эту запись?
+criminal-records-ui-no-access = Отказано в доступе.
+
 criminal-status-wanted = В розыске
 criminal-status-search = Обыскать
 criminal-status-monitor = Следить
 criminal-status-execute = Казнить
+
 criminal-status-cooldown-popup = Вы пытаетесь добавлять записи слишком часто.
-criminal-records-ui-delete-dialog = Удалить эту запись?

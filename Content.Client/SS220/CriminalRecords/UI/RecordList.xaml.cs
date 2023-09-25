@@ -94,7 +94,6 @@ public sealed partial class RecordList : ScrollContainer
         OptionContainer.AddChild(criminalGroup);
         criminalGroup.Visible = false;
         RecordListGroups.Add(CriminalGroupId, criminalGroup);
-        Logger.DebugS("TEST", "Creted group with ID: " + CriminalGroupId);
 
         foreach (var department in departments)
         {
@@ -109,7 +108,6 @@ public sealed partial class RecordList : ScrollContainer
             OptionContainer.AddChild(group);
             group.Visible = false;
             RecordListGroups.Add(department.ID, group);
-            Logger.DebugS("TEST", "Creted group with ID: " + department.ID);
         }
 
         // Group for jobs without department
@@ -118,7 +116,6 @@ public sealed partial class RecordList : ScrollContainer
         OptionContainer.AddChild(noDepGroup);
         noDepGroup.Visible = false;
         RecordListGroups.Add(NoDeraptmentGroupId, noDepGroup);
-        Logger.DebugS("TEST", "Creted group with ID: " + NoDeraptmentGroupId);
 
         // Group those who went to cryo
         var cryoGroup = new RecordListGroupBasic();
@@ -126,7 +123,6 @@ public sealed partial class RecordList : ScrollContainer
         OptionContainer.AddChild(cryoGroup);
         cryoGroup.Visible = false;
         RecordListGroups.Add(CryodGroupId, cryoGroup);
-        Logger.DebugS("TEST", "Creted group with ID: " + CryodGroupId);
     }
 
     public void EnsurePoolSize(int count)
@@ -175,15 +171,11 @@ public sealed partial class RecordList : ScrollContainer
 
     public void TryDeselect(RecordListEntry item)
     {
-        Logger.DebugS("TEST", "TRYING TO DESELECT!");
-
         if (item != _selected)
             return;
 
         _selected = null;
         item.SetSelectionVisuals(false);
-
-        Logger.DebugS("TEST", "DESELECT SUCCESSFULL!");
 
         if (IsPopulating)
             return;
@@ -205,8 +197,6 @@ public sealed partial class RecordList : ScrollContainer
 
         _selected = item;
         item.SetSelectionVisuals(true);
-
-        Logger.DebugS("TEST", "SELECTED");
 
         if (IsPopulating)
             return;
@@ -268,6 +258,9 @@ public sealed partial class RecordList : ScrollContainer
 
     public string DicideGroup(CriminalRecordShort record)
     {
+        if (record.IsInCryo)
+            return CryodGroupId;
+
         if (record.LastCriminalRecord != null && record.LastCriminalRecord.RecordType.HasValue)
             return CriminalGroupId;
 
@@ -337,7 +330,6 @@ public sealed partial class RecordList : ScrollContainer
             }
         }
 
-        Logger.DebugS("TEST", "DISPLATED GROUPS: " + usedGroups.Count + " ITEMS: " + usedItems);
         foreach (var group in RecordListGroups.Values)
         {
             group.Visible = usedGroups.ContainsKey(group);

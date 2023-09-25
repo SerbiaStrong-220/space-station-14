@@ -38,24 +38,20 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
 
     private void OnKeySelected((NetEntity, uint)? key)
     {
-        Logger.DebugS("TEST","BOUND UI SENT KEY!");
         SendMessage(new SelectGeneralStationRecord(key));
     }
 
     private void OnStatusUpdated((string, ProtoId<CriminalStatusPrototype>?) statusUpdate)
     {
-        Logger.DebugS("TEST","BOUND UI SENT NEW STATUS!");
         SendMessage(new UpdateCriminalRecordStatus(statusUpdate.Item1, statusUpdate.Item2));
     }
     private void OnStatusDeleted(int time)
     {
-        Logger.DebugS("TEST","BOUND UI SENT DELETION!");
         SendMessage(new DeleteCriminalRecordStatus(time));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        Logger.DebugS("TEST", "BOUND UI GOT STATE!");
         base.UpdateState(state);
 
         if (state is not CriminalRecordConsoleState cast)
