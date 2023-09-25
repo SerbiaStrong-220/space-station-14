@@ -3,11 +3,18 @@ using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
 using Content.Shared.Database;
+using Content.Shared.Examine;
+using Content.Shared.Inventory;
+using Content.Shared.Overlays;
+using Content.Shared.PDA;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
+using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Players;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CriminalRecords;
 public sealed class CriminalRecordSystem : EntitySystem
@@ -15,13 +22,86 @@ public sealed class CriminalRecordSystem : EntitySystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IAdminLogManager _logManager = default!;
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("CriminalRecords");
 
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<StatusIconComponent, ExaminedEvent>(OnStatusExamine);
+    }
+
+    // TheArturZh 25.09.2023 22:15
+    // TODO: bad code. make it use InventoryRelayedEvent. Create separate components for examining and for examined subscription.
+    // no pohuy prosto zaebalsya(
+    private void OnStatusExamine(EntityUid uid, StatusIconComponent comp, ExaminedEvent args)
+    {
+        var scannerOn = false;
+        if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out var ent))
+        {
+            if (HasComp<ShowSecurityIconsComponent>(ent))
+            {
+                scannerOn = true;
+            }
+        }
+
+        if (!scannerOn)
+            return;
+
+        CriminalRecord? record = null;
+
+        if (_accessReader.FindAccessItemsInventory(uid, out var items))
+        {
+            foreach (var item in items)
+            {
+                // ID Card
+                if (TryComp(item, out IdCardComponent? id))
+                {
+                    if (id.CurrentSecurityRecord != null)
+                    {
+                        record = id.CurrentSecurityRecord;
+                        break;
+                    }
+                }
+
+                // PDA
+                if (TryComp(item, out PdaComponent? pda)
+                    && pda.ContainedId != null
+                    && TryComp(pda.ContainedId, out id))
+                {
+                    if (id.CurrentSecurityRecord != null)
+                    {
+                        record = id.CurrentSecurityRecord;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //SS220 Criminal-Records begin
+        if (record != null)
+        {
+            var msg = new FormattedMessage();
+
+            if (record.RecordType == null)
+            {
+                msg.AddMarkup("[bold]Без статуса: [/bold]");
+            }
+            else
+            {
+                if (_prototype.TryIndex<CriminalStatusPrototype>(record.RecordType, out var statusType))
+                {
+                    msg.AddMarkup($"[color={statusType.Color.ToHex()}][bold]{statusType.Name}:[/bold][/color] ");
+                }
+            }
+
+            msg.AddText(record.Message);
+            args.PushMessage(msg);
+        }
     }
 
     public CriminalRecordCatalog EnsureRecordCatalog(GeneralStationRecord record)
