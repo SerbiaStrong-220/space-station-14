@@ -104,7 +104,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         Logger.DebugS("TEST","DELETING!");
 
-        if (!_criminalRecord.RemoveCriminalRecordStatus(component.ActiveKey.Value, args.Time))
+        if (!_criminalRecord.RemoveCriminalRecordStatus(component.ActiveKey.Value, args.Time, args.Session))
             return;
     }
 
