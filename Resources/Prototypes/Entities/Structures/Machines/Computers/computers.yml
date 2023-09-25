@@ -298,7 +298,6 @@
   #SS220 Criminal-Records begin
   - type: AccessReader
     access: [ [ "Brig" ] ]
-  - type: GeneralStationRecordConsole
   - type: CriminalRecordsConsole
   - type: UserInterface
     interfaces:
@@ -306,6 +305,9 @@
         type: CriminalRecordsBoundUserInterface
   - type: ActivatableUI
     key: enum.CriminalRecordsUiKey.Key
+  - type: GuideHelp
+    guides:
+    - DNA
   #SS220 Criminal-Records end
   - type: Computer
     board: CriminalRecordsComputerCircuitboard
@@ -316,13 +318,23 @@
   name: station records computer
   description: This can be used to check station records.
   components:
-  - type: GeneralStationRecordConsole
+  #SS220 Criminal-Records begin
+  # - type: GeneralStationRecordConsole
+  - type: CriminalRecordsConsole
+    isSecurity: false
   - type: UserInterface
     interfaces:
-      - key: enum.GeneralStationRecordConsoleKey.Key
-        type: GeneralStationRecordConsoleBoundUserInterface
+      - key: enum.CriminalRecordsUiKey.Key
+        type: CriminalRecordsBoundUserInterface
   - type: ActivatableUI
-    key: enum.GeneralStationRecordConsoleKey.Key
+    key: enum.CriminalRecordsUiKey.Key
+  # - type: UserInterface
+  #   interfaces:
+  #     - key: enum.GeneralStationRecordConsoleKey.Key
+  #       type: GeneralStationRecordConsoleBoundUserInterface
+  # - type: ActivatableUI
+  #   key: enum.GeneralStationRecordConsoleKey.Key
+  #SS220 Criminal-Records end
   - type: PointLight
     radius: 1.5
     energy: 1.6
