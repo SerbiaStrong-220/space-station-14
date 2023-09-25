@@ -120,6 +120,8 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         // Hack to fix RichTextLabel line wrapping, remove when fixed properly in the engine
         SetSize = Size + new System.Numerics.Vector2(1, 1);
 
+        RecordIdLabel.FontColorOverride = Color.LightGray;
+
         UpdateCountdown();
         Timer.SpawnRepeating(500, UpdateCountdown, _timerCancelTokenSource.Token);
     }
@@ -189,6 +191,11 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         // Logger.DebugS("TEST", "WINDOW GOT STATE!");
         if (state.RecordListing != null)
             PopulateRecordListing(state.RecordListing, state.SelectedKey);
+
+        if (state.SelectedKey is { } key)
+        {
+            RecordIdLabel.Text = $"ID: НТ-{key.Item1}-{key.Item2}";
+        }
 
         if (state.SelectedRecord != null)
         {

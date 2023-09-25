@@ -36,7 +36,10 @@
             <!-- Right panel -->
             <BoxContainer Name="PanelRight" Orientation="Vertical" Margin="5 0 0 0" HorizontalExpand="true" Visible="False">
                 <!-- Character Name -->
-                <Label Name="CharacterName" Text="Имя Фамилия" StyleClasses="LabelBig" SetHeight="25"/>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Name="CharacterName" Text="Имя Фамилия" StyleClasses="LabelBig" SetHeight="25" HorizontalExpand="True"/>
+                    <Label Name="RecordIdLabel" HorizontalAlignment="Right" SetHeight="25" StyleClasses="LabelBig"/>
+                </BoxContainer>
                 <!-- Details widget -->
                 <ui:RecordDetails Name="Details" HorizontalExpand="true"/>
 
