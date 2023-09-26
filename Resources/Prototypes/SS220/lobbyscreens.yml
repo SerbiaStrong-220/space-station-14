@@ -13,3 +13,7 @@
 - type: lobbyBackground
   id: NukeArt
   background: /Textures/SS220/LobbyScreens/nukeart.png
+
+- type: lobbyBackground
+  id: Mabynoerp
+  background: /Textures/SS220/LobbyScreens/mabynoerp.png
