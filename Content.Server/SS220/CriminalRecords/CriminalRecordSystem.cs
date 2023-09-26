@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.StationRecords.Systems;
@@ -158,10 +159,11 @@ public sealed class CriminalRecordSystem : EntitySystem
 
     public bool RemoveCriminalRecordStatus((NetEntity, uint) key, int time, ICommonSession? sender = null)
     {
-        var station = GetEntity(key.Item1);
+        if (!TryGetEntity(key.Item1, out var station))
+            return false;
 
         if (!_stationRecords.TryGetRecord(
-            station,
+            station.Value,
             _stationRecords.Convert(key),
             out GeneralStationRecord? selectedRecord))
         {
@@ -175,7 +177,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             return false;
 
         UpdateLastRecordTime(catalog);
-        _stationRecords.Synchronize(station);
+        _stationRecords.Synchronize(station.Value);
         UpdateIdCards(key, selectedRecord);
 
         if (sender != null)
@@ -190,18 +192,47 @@ public sealed class CriminalRecordSystem : EntitySystem
         return true;
     }
 
-    public bool AddCriminalRecordStatus((NetEntity, uint) key, string message, string? statusPrototypeId, ICommonSession? sender = null)
+    public bool TryGetLastRecord(
+        (NetEntity, uint) key,
+        [NotNullWhen(true)] out GeneralStationRecord? stationRecord,
+        [NotNullWhen(true)] out CriminalRecord? criminalRecord)
     {
-        var station = GetEntity(key.Item1);
+        stationRecord = null;
+        criminalRecord = null;
+
+        if (!TryGetEntity(key.Item1, out var station))
+            return false;
 
         if (!_stationRecords.TryGetRecord(
-            station,
+            station.Value,
+            _stationRecords.Convert(key),
+            out stationRecord))
+        {
+            return false;
+        }
+
+        if (stationRecord.CriminalRecords is not CriminalRecordCatalog catalog)
+            return false;
+
+        criminalRecord = catalog.GetLastRecord();
+        return criminalRecord != null;
+    }
+
+    public bool AddCriminalRecordStatus((NetEntity, uint) key, string message, string? statusPrototypeId, ICommonSession? sender = null)
+    {
+        if (!TryGetEntity(key.Item1, out var station))
+            return false;
+
+        if (!_stationRecords.TryGetRecord(
+            station.Value,
             _stationRecords.Convert(key),
             out GeneralStationRecord? selectedRecord))
         {
             _sawmill.Warning("Tried to add a criminal record but can't get a general record.");
             return false;
         }
+
+        var catalog = EnsureRecordCatalog(selectedRecord);
 
         ProtoId<CriminalStatusPrototype>? validatedRecordType = null;
         if (statusPrototypeId != null)
@@ -211,7 +242,6 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
 
         // If it is the same status with the same message - drop it to prevent spam
-        var catalog = EnsureRecordCatalog(selectedRecord);
         if (catalog.LastRecordTime.HasValue)
         {
             if (catalog.Records.TryGetValue(catalog.LastRecordTime.Value, out var lastRecord))
@@ -232,7 +262,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             return false;
 
         catalog.LastRecordTime = currentRoundTime;
-        _stationRecords.Synchronize(station);
+        _stationRecords.Synchronize(station.Value);
         UpdateIdCards(key, selectedRecord);
         _sawmill.Debug("Added new criminal record, synchonizing");
 

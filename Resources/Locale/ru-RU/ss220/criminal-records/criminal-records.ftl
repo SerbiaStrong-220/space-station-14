@@ -14,4 +14,7 @@ criminal-status-search = Обыскать
 criminal-status-monitor = Следить
 criminal-status-execute = Казнить
 
+criminal-status-wanted-report = {$target} был объявлен в розыск! Причина: {$reason}
+criminal-status-execute-report = {$target} был приговорён к казни! Причина: {$reason}
+
 criminal-status-cooldown-popup = Вы пытаетесь добавлять записи слишком часто.

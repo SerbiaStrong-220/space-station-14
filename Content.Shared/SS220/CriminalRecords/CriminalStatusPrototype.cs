@@ -12,8 +12,10 @@ public sealed class CriminalStatusPrototype : IPrototype
 
     [DataField("name")]
     private string _name = string.Empty;
-
     public string Name => Loc.GetString(_name);
+
+    [DataField("radioReportMessage")]
+    public string? RadioReportMessage;
 
     /// <summary>
     /// Color of the criminal status when displayed in UIs

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
 using Robust.Shared.Audio;
@@ -35,6 +36,9 @@ public sealed partial class CriminalRecordsConsoleComponent : Component
 
     [DataField]
     public SoundSpecifier KeySwitchSound = new SoundCollectionSpecifier("Keyboard");
+
+    [DataField]
+    public ProtoId<RadioChannelPrototype> ReportRadioChannel = "Security";
 }
 
 [Serializable, NetSerializable]

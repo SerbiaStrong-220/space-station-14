@@ -297,7 +297,7 @@
     color: "#1f8c28"
   #SS220 Criminal-Records begin
   - type: AccessReader
-    access: [ [ "Brig" ] ]
+    access: [ [ "Brig" ] ] #So IAA can have access too
   - type: CriminalRecordsConsole
   - type: UserInterface
     interfaces:

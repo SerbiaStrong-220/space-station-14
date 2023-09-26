@@ -1,11 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.GameTicking;
 using Content.Server.Popups;
+using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
 using Content.Server.UserInterface;
 using Content.Shared.Access.Systems;
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
@@ -21,8 +23,10 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
 
@@ -83,6 +87,15 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         UpdateUserInterface(uid, component);
     }
 
+    private void SendRadioMessage(EntityUid sender, string message, string channel)
+    {
+        _radio.SendRadioMessage(
+            sender,
+            message,
+            _prototype.Index<RadioChannelPrototype>(channel),
+            sender);
+    }
+
     private void OnCriminalStatusUpdate(EntityUid uid, CriminalRecordsConsoleComponent component, UpdateCriminalRecordStatus args)
     {
         if (!component.IsSecurity)
@@ -111,8 +124,29 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (messageCut.Length > component.MaxMessageLength)
             messageCut = messageCut.Substring(0, component.MaxMessageLength);
 
+        // get previous record so we can compare criminal status later
+        _criminalRecord.TryGetLastRecord(component.ActiveKey.Value, out var generalRecord, out var prevRecord);
+
         if (!_criminalRecord.AddCriminalRecordStatus(component.ActiveKey.Value, messageCut, args.StatusTypeId, args.Session))
             return;
+
+        // compare criminal state and report on radio that it was changed
+        if (generalRecord != null && args.StatusTypeId.HasValue)
+        {
+            if (prevRecord == null || prevRecord.RecordType != args.StatusTypeId)
+            {
+                if (_prototype.TryIndex(args.StatusTypeId.Value, out var status))
+                {
+                    if (!string.IsNullOrWhiteSpace(status.RadioReportMessage))
+                    {
+                        SendRadioMessage(
+                            uid,
+                            Loc.GetString(status.RadioReportMessage, ("target", generalRecord.Name), ("reason", messageCut)),
+                            component.ReportRadioChannel);
+                    }
+                }
+            }
+        }
 
         component.LastEditTime = currentTime;
         _audio.PlayPvs(component.DatabaseActionSound, uid);

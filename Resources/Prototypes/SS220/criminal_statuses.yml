@@ -3,6 +3,7 @@
   name: criminal-status-wanted
   color: "#FF0000FF"
   statusIcon: SecWantedIcon
+  radioReportMessage: criminal-status-wanted-report
 
 - type: criminalStatus
   id: search
@@ -21,3 +22,4 @@
   name: criminal-status-execute
   color: "#CC0000FF"
   statusIcon: SecExecuteIcon
+  radioReportMessage: criminal-status-execute-report
