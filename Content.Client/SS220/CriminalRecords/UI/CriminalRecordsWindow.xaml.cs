@@ -51,31 +51,18 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         _sysMan = IoCManager.Resolve<IEntitySystemManager>();
         _sprite = _sysMan.GetEntitySystem<SpriteSystem>();
 
-        //Logger.DebugS("TEST", "==CREATING WINDOW!==");
-
         RecordListing.OnItemSelected += args =>
         {
             if (_isPopulating)
-            {
-                //Logger.DebugS("TEST","REEEEEEEETURN" + (_isPopulating ? ": POPULATING" : ""));
                 return;
-            }
 
-            //Logger.DebugS("SENT KEY!", "=====SENT KEY!");
             OnKeySelected?.Invoke(args.Metadata.Key);
         };
 
         RecordListing.OnItemDeselected += _ =>
         {
             if (!_isPopulating)
-            {
-                //Logger.DebugS("SENT KEY!", "=====UNSELECTED!");
                 OnKeySelected?.Invoke(null);
-            }
-            else
-            {
-                //Logger.DebugS("SENT KEY!", "=====TRIED UNSELECTED BUT POPULATING!");
-            }
         };
 
         ExpandButton.OnPressed += ToggleExpand;
@@ -188,7 +175,6 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 
     public void UpdateState(CriminalRecordConsoleState state)
     {
-        // Logger.DebugS("TEST", "WINDOW GOT STATE!");
         if (state.RecordListing != null)
             PopulateRecordListing(state.RecordListing, state.SelectedKey);
 
@@ -199,7 +185,6 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 
         if (state.SelectedRecord != null)
         {
-            //Logger.DebugS("STATUS", "=====SELECTED!");
             CharacterName.Text = state.SelectedRecord.Name;
             Details.LoadRecordDetails(state.SelectedRecord, _securityMode);
             PopulateRecords(state.SelectedRecord);
@@ -208,7 +193,6 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         }
         else
         {
-            //Logger.DebugS("STATUS", "=====NO SELECTED!");
             CharacterName.Text = "Не выбрана запись";
             PanelRightPlaceholder.Visible = true;
             PanelRight.Visible = false;
@@ -247,15 +231,9 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         if (_isPopulating)
             return;
 
-        //Logger.DebugS("TEST", "POPULATING LIST!");
-
         _isPopulating = true;
-
         RecordListing.SetItems(listing, selected);
-
         _isPopulating = false;
-
-        //RecordListing.SortItemsByText();
     }
 
     private void PopulateRecords(GeneralStationRecord record)

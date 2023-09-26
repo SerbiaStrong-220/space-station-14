@@ -83,8 +83,6 @@ public sealed partial class RecordListEntry : PanelContainer
             MouseIsHovering = false;
             UpdateVisuals();
         };
-
-        //CriminalStatusNote.SetMarkup("[color=red]В РОЗЫСКЕ:[/color] 104, 206, 309 напал на капитана");
     }
 
     public void UpdateVisuals()
