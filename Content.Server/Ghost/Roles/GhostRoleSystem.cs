@@ -1,10 +1,13 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Ghost.Roles.UI;
 using Content.Server.Mind.Commands;
 using Content.Server.Players;
+using Content.Server.Players.PlayTimeTracking;
+using Content.Server.SS220.Ghost.Roles.Components;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Follower;
@@ -37,6 +40,8 @@ namespace Content.Server.Ghost.Roles
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly SharedMindSystem _mindSystem = default!;
         [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
+        [Dependency] private readonly PlayTimeTrackingManager _playTimeTrackingManager = default!;
+        [Dependency] private readonly IChatManager _chat = default!;
 
         private uint _nextRoleIdentifier;
         private bool _needsUpdateGhostRoleCount = true;
@@ -375,6 +380,24 @@ namespace Content.Server.Ghost.Roles
             {
                 args.TookRole = false;
                 return;
+            }
+
+            if (HasComp<GhostPlayTimeRestrictComponent>(uid))
+            {
+                if (!_playerManager.TryGetSessionById(args.Player.UserId, out var session))
+                {
+                    return;
+                }
+
+                var averAll = _playTimeTrackingManager.GetOverallPlaytime(session);
+
+                if (averAll < TimeSpan.FromHours(10))
+                {
+                    _chat.SendAdminAlert("Для игры на данной роли вам необходимо отыграть 10 часов на сервере.");
+
+                    args.TookRole = false;
+                    return;
+                }
             }
 
             ghostRole.Taken = true;
