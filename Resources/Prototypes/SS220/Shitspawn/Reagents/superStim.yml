@@ -25,7 +25,6 @@
             Brute: -20
             Toxin: -20
             Airloss: -20
-            Radiation: -20
       - !type:GenericStatusEffect
         key: Stutter
         component: ScrambledAccent
