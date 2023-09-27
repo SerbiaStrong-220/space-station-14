@@ -23,12 +23,10 @@
       ballistic-ammo: !type:Container
         ents: []
   - type: BallisticAmmoProvider
-    autoCycle: false
-    quickEquip: false
     capacity: 1000
     whitelist:
        tags:
-       - FoodPieBananaCream
+       - CreamPie
     proto: FoodPieBananaCream
   - type: Gun
     fireRate: 1.5
