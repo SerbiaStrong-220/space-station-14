@@ -1,12 +1,11 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Speech.Muting;
 using Content.Shared.Mobs;
-using Robust.Shared.Prototypes;
 using Content.Server.EUI;
-using Content.Server.Mind;
-using Content.Server.Mind.Components;
 using Robust.Server.Player;
 using Content.Server.SS220.DeathReminder.DeathReminderEui;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mind;
 
 
 namespace Content.Server.Mobs;
@@ -36,9 +35,12 @@ public sealed class DeathgaspSystem: EntitySystem
             {
                 if (mindContainer.Mind is { } mind)
                 {
-                    if (mind.UserId != null && _playerManager.TryGetSessionById(mind.UserId.Value, out var client))
+                    if (TryComp<MindComponent>(mind, out var mindComp))
                     {
-                        _euiManager.OpenEui(new DeathReminderEui(), client);
+                        if (mindComp.UserId != null && _playerManager.TryGetSessionById(mindComp.UserId.Value, out var client))
+                        {
+                            _euiManager.OpenEui(new DeathReminderEui(), client);
+                        }
                     }
                 }
             }
