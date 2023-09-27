@@ -389,11 +389,14 @@ namespace Content.Server.Ghost.Roles
                     return;
                 }
 
-                var averAll = _playTimeTrackingManager.GetOverallPlaytime(session);
+                var overAll = _playTimeTrackingManager.GetOverallPlaytime(session);
 
-                if (averAll < TimeSpan.FromHours(10))
+                if (overAll < TimeSpan.FromHours(10))
                 {
-                    _chat.SendAdminAlert("Для игры на данной роли вам необходимо отыграть 10 часов на сервере.");
+                    if (args.Player.AttachedEntity.HasValue)
+                    {
+                        _chat.SendAdminAlert(args.Player.AttachedEntity.Value, "Для игры на данной роли вам необходимо отыграть 10 часов на сервере.");
+                    }
 
                     args.TookRole = false;
                     return;
