@@ -25,7 +25,7 @@
   - type: BallisticAmmoProvider
     capacity: 1000
     whitelist:
-       tags:
+       components:
        - CreamPie
     proto: FoodPieBananaCream
   - type: Gun
