@@ -39,6 +39,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
 
 - type: emoteSounds
   id: FemaleHuman
@@ -80,6 +82,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
 
 - type: emoteSounds
   id: UnisexReptilian
@@ -103,6 +107,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
 
 - type: emoteSounds
   id: MaleSlime
@@ -144,6 +150,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
   params:
     variation: 0.125
 
@@ -187,6 +195,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
   params:
     variation: 0.125
 
@@ -196,6 +206,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
   sound:
     path: /Audio/Voice/Vox/shriek1.ogg
     params:
@@ -226,6 +238,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
 
 - type: emoteSounds
   id: UnisexDwarf
@@ -265,6 +279,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
   params:
     variation: 0.125
     pitchscale: 0.75
@@ -320,6 +336,8 @@
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
+    Gasp:
+      collection: Gasp
 
 # body emotes
 - type: emoteSounds

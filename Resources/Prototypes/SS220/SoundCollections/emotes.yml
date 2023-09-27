@@ -8,3 +8,8 @@
   files:
     - /Audio/SS220/Emotes/deathgasp/deathgasp1.ogg
     - /Audio/SS220/Emotes/deathgasp/deathgasp2.ogg
+
+- type: soundCollection
+  id: Gasp
+  files:
+    - /Audio/SS220/Emotes/gasp.ogg
