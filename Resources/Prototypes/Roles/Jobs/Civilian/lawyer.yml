@@ -5,7 +5,7 @@
   playTimeTracker: JobLawyer
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Security
+      department: Civilian
       time: 72000 # SS220-RoleTime
   startingGear: LawyerGear
   setPreference: true # SS220 return-of-the-lawyer

@@ -5,7 +5,7 @@
   playTimeTracker: JobBartender
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Service
+      department: Civilian
       time: 18000 # SS220-RoleTime
   startingGear: BartenderGear
   icon: "JobIconBartender"
