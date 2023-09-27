@@ -1,0 +1,22 @@
+- type: entity
+  parent: AgentIDCard
+  id: UsspIDCard
+  suffix: СССП
+  name: ID карта СССП
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+  - type: IdCard
+    jobTitle: СССП
+  - type: Sprite
+    layers:
+    - state: ussp
+  - type: AgentIDCard
+  - type: ActivatableUI
+    key: enum.AgentIDCardUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      - key: enum.AgentIDCardUiKey.Key
+        type: AgentIDCardBoundUserInterface
+  - type: PresetIdCard
+    job: null

@@ -31,7 +31,7 @@
         acts: ["Destruction"]
   - type: WiresPanel
   - type: Wires
-    BoardName: "Autolathe"
+    BoardName: wires-board-name-autolathe
     LayoutId: Autolathe
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -99,6 +99,8 @@
       - TRayScanner
       - GasAnalyzer
       - UtilityBelt
+      - Fulton
+      - FultonBeacon
       - Pickaxe
       - ModularReceiver
       - AppraisalTool
@@ -108,6 +110,10 @@
       - LightTube
       - LightBulb
       - Bucket
+      - FoodPlate
+      - FoodPlateSmall
+      - FoodPlatePlastic
+      - FoodPlateSmallPlastic
       - SprayBottle
       - PowerCellSmall
       - MicroManipulatorStockPart
@@ -183,7 +189,7 @@
   - type: Machine
     board: ProtolatheMachineCircuitboard
   - type: Wires
-    BoardName: "Protolathe"
+    BoardName: wires-board-name-protolathe
     LayoutId: Protolathe
   - type: MaterialStorage
     whitelist:
@@ -241,9 +247,6 @@
       - PowerCellMedium
       - PowerCellHigh
       - WeaponPistolCHIMP
-      - CartridgeAnomalousParticleDelta
-      - CartridgeAnomalousParticleEpsilon
-      - CartridgeAnomalousParticleZeta
       - SynthesizerInstrument
       - RPED
       - ClothingShoesBootsMag
@@ -280,6 +283,7 @@
   components:
   - type: Sprite
     sprite: Structures/Machines/circuit_imprinter.rsi
+    snapCardinals: true
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
@@ -341,8 +345,9 @@
       - HonkerTargetingElectronics
       - HamtrCentralElectronics
       - HamtrPeripheralsElectronics
-      - GeneratorPlasmaMachineCircuitboard
-      - GeneratorUraniumMachineCircuitboard
+      - PortableGeneratorPacmanMachineCircuitboard
+      - PortableGeneratorSuperPacmanMachineCircuitboard
+      - PortableGeneratorJrPacmanMachineCircuitboard
       - WallmountGeneratorElectronics
       - WallmountGeneratorAPUElectronics
       - WallmountSubstationElectronics
@@ -399,6 +404,7 @@
     - BorgModuleRadiationDetection
     - BorgModuleTool
     - BorgModuleAppraisal
+    - BorgModuleConstruction
     - CyborgEndoskeleton
     - LeftArmBorg
     - RightArmBorg
@@ -447,6 +453,7 @@
     - BorgModuleArtifact
     - BorgModuleAnomaly
     - BorgModuleGardening
+    - BorgModuleHarvesting
     - BorgModuleMusique
     - BorgModuleLiteracy
     - BorgModuleClowning
@@ -514,17 +521,19 @@
       - ForensicPad
       - ClothingEyesGlassesSecurity
       - RiotShield
-      - CartridgePistol
-      - CartridgeMagnum
       - ShellShotgun
       - ShellShotgunFlare
       - ShellTranquilizer
-      - CartridgeLightRifle
-      - CartridgeRifle
+      - MagazinePistol
+      - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGunTopMounted
+      - MagazineRifle
+      - MagazineLightRifle
       - MagazineBoxPistol
       - MagazineBoxMagnum
       - MagazineBoxRifle
       - MagazineBoxLightRifle
+      - SpeedLoaderMagnum
       - TargetHuman
       - TargetSyndicate
       - TargetClown
@@ -552,6 +561,8 @@
       - VoiceTrigger
       - TimerTrigger
       - Truncheon
+      - TelescopicShield
+      - HoloprojectorSecurity
       - FlashPayload
       - ExplosivePayload
       - WeaponLaserCarbine
@@ -701,6 +712,8 @@
       - ClothingUniformJumpsuitSalvageSpecialist
       - ClothingUniformJumpsuitChiefEngineer
       - ClothingUniformJumpskirtChiefEngineer
+      - ClothingUniformJumpsuitChiefEngineerTurtle
+      - ClothingUniformJumpskirtChiefEngineerTurtle
       - ClothingUniformJumpsuitChaplain
       - ClothingUniformJumpskirtChaplain
       - ClothingUniformJumpsuitChef
@@ -821,17 +834,20 @@
     - type: Lathe
       idleState: icon
       runningState: building
+      canEjectStoredMaterials: false
+      partRatingMaterialUseMultiplier: 0.5
       staticRecipes:
         - SheetSteel30
+        - SheetPlasteel10
         - SheetGlass30
         - SheetRGlass30
         - SheetPlasma30
         - SheetPGlass30
         - SheetRPGlass30
-        - SheetUranium1
-        - IngotGold1
-        - IngotSilver1
-        - MaterialBananium1
+        - SheetUranium30
+        - IngotGold30
+        - IngotSilver30
+        - MaterialBananium10
 
 - type: entity
   parent: BaseLathe
@@ -858,5 +874,6 @@
   - type: Lathe
     idleState: base_machine
     runningState: base_machine_processing
+    canEjectStoredMaterials: false
     staticRecipes:
     - MaterialSheetMeat

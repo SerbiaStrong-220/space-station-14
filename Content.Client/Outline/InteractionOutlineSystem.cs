@@ -4,7 +4,7 @@ using Content.Client.Interactable.Components;
 using Content.Client.Viewport;
 using Content.Shared.CCVar;
 using Content.Shared.Interaction;
-using Robust.Client.GameObjects;
+using Content.Shared.SS220.Interaction;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
@@ -42,7 +42,7 @@ public sealed class InteractionOutlineSystem : EntitySystem
         base.Initialize();
 
         _configManager.OnValueChanged(CCVars.OutlineEnabled, SetCvarEnabled);
-        UpdatesAfter.Add(typeof(EyeUpdateSystem));
+        UpdatesAfter.Add(typeof(SharedEyeSystem));
     }
 
     public override void Shutdown()
@@ -138,7 +138,12 @@ public sealed class InteractionOutlineSystem : EntitySystem
         var inRange = false;
         if (localPlayer.ControlledEntity != null && !Deleted(entityToClick))
         {
-            inRange = _interactionSystem.InRangeUnobstructed(localPlayer.ControlledEntity.Value, entityToClick.Value);
+            var range = SharedInteractionSystem.InteractionRange;
+
+            if (TryComp<InteractionRangeComponent>(entityToClick.Value, out var rangeComp))
+                range = rangeComp.Range;
+
+            inRange = _interactionSystem.InRangeUnobstructed(localPlayer.ControlledEntity.Value, entityToClick.Value, range: range);
         }
 
         InteractionOutlineComponent? outline;

@@ -1,4 +1,5 @@
 using Content.Server.Chat.Systems;
+using Content.Server.Speech.Muting;
 using Content.Shared.Mobs;
 using Robust.Shared.Prototypes;
 using Content.Server.EUI;
@@ -56,6 +57,9 @@ public sealed class DeathgaspSystem: EntitySystem
     public bool Deathgasp(EntityUid uid, DeathgaspComponent? component = null)
     {
         if (!Resolve(uid, ref component, false))
+            return false;
+
+        if (HasComp<MutedComponent>(uid))
             return false;
 
         _chat.TryEmoteWithChat(uid, component.Prototype, ignoreActionBlocker: true);

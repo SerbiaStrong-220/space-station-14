@@ -13,7 +13,7 @@ namespace Content.Server.Anomaly.Components;
 /// the anomaly's stability and severity.
 /// </summary>
 [RegisterComponent, Access(typeof(SharedAnomalySystem))]
-public sealed class AnomalyVesselComponent : Component
+public sealed partial class AnomalyVesselComponent : Component
 {
     /// <summary>
     /// The anomaly that the vessel is storing.
@@ -39,7 +39,7 @@ public sealed class AnomalyVesselComponent : Component
     /// with the corresponding part rating.
     /// </summary>
     [DataField("partRatingPointModifier")]
-    public float PartRatingPointModifier = 1.25f;
+    public float PartRatingPointModifier = 2f;
 
     /// <summary>
     /// The maximum time between each beep

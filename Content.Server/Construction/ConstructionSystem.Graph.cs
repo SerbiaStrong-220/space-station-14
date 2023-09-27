@@ -324,11 +324,17 @@ namespace Content.Server.Construction
                 }
             }
 
-            // We set the graph and node accordingly.
-            ChangeGraph(newUid, userUid, construction.Graph, construction.Node, false, newConstruction);
+            // If the new entity has the *same* construction graph, stay on the same node.
+            // If not, we effectively restart the construction graph, so the new entity can be completed.
+            if (construction.Graph == newConstruction.Graph)
+            {
+                ChangeNode(newUid, userUid, construction.Node, false, newConstruction);
 
-            if (construction.TargetNode is {} targetNode)
-                SetPathfindingTarget(newUid, targetNode, newConstruction);
+                // Retain the target node if an entity change happens in response to deconstruction;
+                // in that case, we must continue to move towards the start node.
+                if (construction.TargetNode is {} targetNode)
+                    SetPathfindingTarget(newUid, targetNode, newConstruction);
+            }
 
             // Transfer all pending interaction events too.
             while (construction.InteractionQueue.TryDequeue(out var ev))
@@ -355,9 +361,6 @@ namespace Content.Server.Construction
                 foreach (var container in construction.Containers)
                 {
                     if (!_container.TryGetContainer(uid, container, out var ourContainer, containerManager))
-                        continue;
-                    // затычка для клонерки, clonepod-bodyContainer это ContainerSlot, перенос контента осуществляется в OnComponentInit клонерки
-                    if (container == "clonepod-bodyContainer")
                         continue;
 
                     if (!_container.TryGetContainer(newUid, container, out var otherContainer, newContainerManager))

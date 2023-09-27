@@ -6,9 +6,11 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 using Content.Shared.Singularity.EntitySystems;
-
-using Content.Server.Ghost.Components;
 using Content.Server.Singularity.Components;
+using Content.Shared.Ghost;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Buckle;
+using Content.Shared.Cuffs.Components;
 
 namespace Content.Server.Singularity.EntitySystems;
 
@@ -25,6 +27,7 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
 #endregion Dependencies
 
     /// <summary>
@@ -110,12 +113,26 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
     /// <param name="entity">The entity to check.</param>
     private bool CanGravPulseAffect(EntityUid entity)
     {
-        return !(
+        if (
             EntityManager.HasComponent<GhostComponent>(entity) ||
             EntityManager.HasComponent<MapGridComponent>(entity) ||
             EntityManager.HasComponent<MapComponent>(entity) ||
             EntityManager.HasComponent<GravityWellComponent>(entity)
-        );
+        ) return false;
+
+        // Can't be affected if you're fully buckled up
+        // btw looks ugly to me, but it'll work for now
+        if (TryComp<BuckleComponent>(entity, out var buckleComp) &&
+            _buckle.IsBuckled(entity, buckleComp))
+        {
+            if (_buckle.IsFastenedSeatbelt(entity, buckleComp))
+                return false;
+            // Can't be affected if you're handcuffed (like, you're cuffed to the chair???)
+            if (TryComp<CuffableComponent>(entity, out var cuffableComp))
+                return cuffableComp.CanStillInteract;
+        }
+
+        return true;
     }
 
     /// <summary>

@@ -74,6 +74,8 @@
       charger_slot: !type:ContainerSlot
       machine_board: !type:Container
       machine_parts: !type:Container
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: recharger
@@ -95,6 +97,8 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: wall recharger
@@ -103,9 +107,10 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Power/wall_recharger.rsi
+    sprite: SS220/Structures/Wallmounts/wall_recharger.rsi # SS220/Directionl wall charger
     drawdepth: SmallObjects
-    snapCardinals: true
+    snapCardinals: false # SS220/Directionl wall charger
+    noRot: true # SS220/Directionl wall charger
     layers:
     - map: ["enum.PowerChargerVisualLayers.Base"]
       state: "empty"
@@ -149,15 +154,7 @@
               path: /Audio/Effects/metalbreak.ogg
   - type: Physics
     bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.10,-0.10,0.10,0.10"
-        density: 500
-        mask:
-          - TabletopMachineMask
+    canCollide: false
   - type: ItemSlots
     slots:
       charger_slot:
@@ -200,6 +197,9 @@
   - type: Charger
     baseChargeRate: 30
     slotId: entity_storage
+    whitelist:
+      components:
+      - BorgChassis
   - type: Construction
     containers:
     - machine_parts
@@ -269,3 +269,5 @@
       entity_storage: !type:Container
       machine_board: !type:Container
       machine_parts: !type:Container
+  - type: StaticPrice
+    price: 15

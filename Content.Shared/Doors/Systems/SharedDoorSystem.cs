@@ -11,6 +11,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -19,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Doors.Systems;
 
-public abstract class SharedDoorSystem : EntitySystem
+public abstract partial class SharedDoorSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming GameTiming = default!;
     [Dependency] protected readonly SharedPhysicsSystem PhysicsSystem = default!;
@@ -102,7 +103,7 @@ public abstract class SharedDoorSystem : EntitySystem
     #region StateManagement
     private void OnGetState(EntityUid uid, DoorComponent door, ref ComponentGetState args)
     {
-        args.State = new DoorComponentState(door);
+        args.State = new DoorComponentState(door, GetNetEntitySet(door.CurrentlyCrushing));
     }
 
     private void OnHandleState(EntityUid uid, DoorComponent door, ref ComponentHandleState args)
@@ -110,11 +111,8 @@ public abstract class SharedDoorSystem : EntitySystem
         if (args.Current is not DoorComponentState state)
             return;
 
-        if (!door.CurrentlyCrushing.SetEquals(state.CurrentlyCrushing))
-        {
-            door.CurrentlyCrushing.Clear();
-            door.CurrentlyCrushing.UnionWith(state.CurrentlyCrushing);
-        }
+        door.CurrentlyCrushing.Clear();
+        door.CurrentlyCrushing.UnionWith(EnsureEntitySet<DoorComponent>(state.CurrentlyCrushing, uid));
 
         door.State = state.DoorState;
         door.NextStateChange = state.NextStateChange;
@@ -412,7 +410,7 @@ public abstract class SharedDoorSystem : EntitySystem
 
         // Find entities and apply curshing effects
         var stunTime = door.DoorStunTime + door.OpenTimeOne;
-        foreach (var entity in GetColliding(uid, physics))
+        foreach (var entity in GetColliding(uid, physics, !door.CrushStaticEntities))
         {
             door.CurrentlyCrushing.Add(entity);
             if (door.CrushDamage != null)
@@ -432,7 +430,7 @@ public abstract class SharedDoorSystem : EntitySystem
     /// <summary>
     ///     Get all entities that collide with this door by more than <see cref="IntersectPercentage"/> percent.\
     /// </summary>
-    public IEnumerable<EntityUid> GetColliding(EntityUid uid, PhysicsComponent? physics = null)
+    public IEnumerable<EntityUid> GetColliding(EntityUid uid, PhysicsComponent? physics = null, bool ignoreStaticObjects = false)
     {
         if (!Resolve(uid, ref physics))
             yield break;
@@ -444,6 +442,9 @@ public abstract class SharedDoorSystem : EntitySystem
         foreach (var otherPhysics in PhysicsSystem.GetCollidingEntities(Transform(uid).MapID, doorAABB))
         {
             if (otherPhysics == physics)
+                continue;
+
+            if (ignoreStaticObjects && otherPhysics.BodyType == BodyType.Static)
                 continue;
 
             //TODO: Make only shutters ignore these objects upon colliding instead of all airlocks
@@ -515,9 +516,9 @@ public abstract class SharedDoorSystem : EntitySystem
         return AccessType switch
         {
             // Some game modes modify access rules.
-            AccessTypes.AllowAllIdExternal => !isExternal || _accessReaderSystem.IsAllowed(user.Value, access),
+            AccessTypes.AllowAllIdExternal => !isExternal || _accessReaderSystem.IsAllowed(user.Value, uid, access),
             AccessTypes.AllowAllNoExternal => !isExternal,
-            _ => _accessReaderSystem.IsAllowed(user.Value, access)
+            _ => _accessReaderSystem.IsAllowed(user.Value, uid, access)
         };
     }
 
@@ -670,7 +671,7 @@ public abstract class SharedDoorSystem : EntitySystem
     protected abstract void PlaySound(EntityUid uid, SoundSpecifier soundSpecifier, AudioParams audioParams, EntityUid? predictingPlayer, bool predicted);
 
     [Serializable, NetSerializable]
-    protected sealed class DoorPryDoAfterEvent : SimpleDoAfterEvent
+    protected sealed partial class DoorPryDoAfterEvent : SimpleDoAfterEvent
     {
     }
 }

@@ -1,20 +1,20 @@
-using System.Globalization;
 using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.IdentityManagement;
-using Content.Server.Players;
-using Content.Server.Roles;
+using Content.Server.Mind;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Events;
 using Content.Shared.GameTicking;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Objectives;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Server.Administration.Systems
 {
@@ -23,6 +23,9 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
+        [Dependency] private readonly SharedJobSystem _jobs = default!;
+        [Dependency] private readonly MindSystem _minds = default!;
+        [Dependency] private readonly SharedRoleSystem _role = default!;
 
         private readonly Dictionary<NetUserId, PlayerInfo> _playerList = new();
 
@@ -33,7 +36,7 @@ namespace Content.Server.Administration.Systems
 
         private readonly HashSet<NetUserId> _roundActivePlayers = new();
 
-        private List<GameRuleInfo> _gameRulesList = new();
+        private List<GameRuleInfo> _gameRulesList = new(); // SS220-View-active-gamerules
 
         public override void Initialize()
         {
@@ -47,29 +50,9 @@ namespace Content.Server.Administration.Systems
             SubscribeLocalEvent<RoleAddedEvent>(OnRoleEvent);
             SubscribeLocalEvent<RoleRemovedEvent>(OnRoleEvent);
             SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-            SubscribeLocalEvent<RequestObjectivesEvent>(OnRequestObjectivesEvent);
             SubscribeLocalEvent<GameRuleAddedEvent>(OnGameRuleAdded);
             SubscribeLocalEvent<GameRuleStartedEvent>(OnGameRuleStarted);
             SubscribeLocalEvent<GameRuleEndedEvent>(OnGameRuleEnded);
-        }
-
-        private void OnRequestObjectivesEvent(RequestObjectivesEvent ev)
-        {
-            if (!_playerManager.TryGetPlayerData(ev.NetUserId, out var playerData))
-                return;
-
-            _playerManager.TryGetSessionById(ev.NetUserId, out var session);
-            _playerList[ev.NetUserId] = GetPlayerInfo(playerData, session);
-
-            var playerInfoChangedEvent = new PlayerInfoChangedEvent
-            {
-                PlayerInfo = _playerList[ev.NetUserId]
-            };
-
-            foreach (var admin in _adminManager.ActiveAdmins)
-            {
-                RaiseNetworkEvent(playerInfoChangedEvent, admin.ConnectedClient);
-            }
         }
 
         private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -130,10 +113,11 @@ namespace Content.Server.Administration.Systems
 
         private void OnRoleEvent(RoleEvent ev)
         {
-            if (!ev.Role.Antagonist || ev.Role.Mind.Session == null)
+            var session = _minds.GetSession(ev.Mind);
+            if (!ev.Antagonist || session == null)
                 return;
 
-            UpdatePlayerList(ev.Role.Mind.Session);
+            UpdatePlayerList(session);
         }
 
         private void OnAdminPermsChanged(AdminPermsChangedEventArgs obj)
@@ -202,12 +186,13 @@ namespace Content.Server.Administration.Systems
             RaiseNetworkEvent(ev, playerSession.ConnectedClient);
         }
 
+        // SS220-View-active-gamerules
         private void SendGameRulesList()
         {
             var ev = new GameRulesListEvent();
 
             _gameRulesList = _gameTicker.GetAddedGameRules()
-                .Select(gr => new GameRuleInfo(gr, MetaData(gr).EntityPrototype?.ID ?? string.Empty)).ToList();
+                .Select(gr => new GameRuleInfo(GetNetEntity(gr), MetaData(gr).EntityPrototype?.ID ?? string.Empty)).ToList();
 
             ev.ActiveGameRules = _gameRulesList;
 
@@ -226,33 +211,17 @@ namespace Content.Server.Administration.Systems
                 identityName = Identity.Name(session.AttachedEntity.Value, EntityManager);
             }
 
-            var mind = data.ContentData()?.Mind;
-
-            var job = mind?.AllRoles.FirstOrDefault(role => role is Job);
-            var startingRole = job != null ? CultureInfo.CurrentCulture.TextInfo.ToTitleCase(job.Name) : string.Empty;
-
-            var antag = mind?.AllRoles.Any(r => r.Antagonist) ?? false;
-
-            var objectives = new Dictionary<string, List<ConditionInfo>>();
-
-            if (mind != null)
+            var antag = false;
+            var startingRole = string.Empty;
+            if (_minds.TryGetMind(session, out var mindId, out _))
             {
-                // Get objectives
-                foreach (var objective in mind.AllObjectives)
-                {
-                    if (!objectives.ContainsKey(objective.Prototype.Issuer))
-                        objectives[objective.Prototype.Issuer] = new List<ConditionInfo>();
-                    foreach (var condition in objective.Conditions)
-                    {
-                        objectives[objective.Prototype.Issuer].Add(new ConditionInfo(condition.Title,
-                            condition.Description, condition.Icon, condition.Progress));
-                    }
-                }
+                antag = _role.MindIsAntagonist(mindId);
+                startingRole = _jobs.MindTryGetJobName(mindId);
             }
 
             var connected = session != null && session.Status is SessionStatus.Connected or SessionStatus.InGame;
 
-            return new PlayerInfo(name, entityName, identityName, startingRole, antag, objectives, session?.AttachedEntity, data.UserId,
+            return new PlayerInfo(name, entityName, identityName, startingRole, antag, GetNetEntity(session?.AttachedEntity), data.UserId,
                 connected, _roundActivePlayers.Contains(data.UserId));
         }
     }

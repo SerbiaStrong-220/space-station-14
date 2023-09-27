@@ -1,22 +1,23 @@
 using System.Numerics;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Vehicle.Components;
 using Content.Shared.Actions;
-using Content.Shared.Buckle.Components;
-using Content.Shared.Item;
-using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Systems;
-using Robust.Shared.Serialization;
-using Robust.Shared.Containers;
-using Content.Shared.Tag;
 using Content.Shared.Audio;
 using Content.Shared.Buckle;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Hands;
-using Content.Shared.Light.Component;
+using Content.Shared.Item;
+using Content.Shared.Light.Components;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
+using Content.Shared.Vehicle.Components;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Vehicle;
 
@@ -28,6 +29,7 @@ namespace Content.Shared.Vehicle;
 public abstract partial class SharedVehicleSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] protected readonly IGameTiming GameTiming = default!;
 
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
@@ -134,12 +136,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
             if (TryComp<ActionsComponent>(args.BuckledEntity, out var actions) && TryComp<UnpoweredFlashlightComponent>(uid, out var flashlight))
             {
-                _actionsSystem.AddAction(args.BuckledEntity, flashlight.ToggleAction, uid, actions);
+                _actionsSystem.AddAction(args.BuckledEntity, ref flashlight.ToggleActionEntity, flashlight.ToggleAction, uid, actions);
             }
 
             if (component.HornSound != null)
             {
-                _actionsSystem.AddAction(args.BuckledEntity, component.HornAction, uid, actions);
+                _actionsSystem.AddAction(args.BuckledEntity, ref component.HornActionEntity, component.HornAction, uid, actions);
             }
 
             _joints.ClearJoints(args.BuckledEntity);
@@ -297,6 +299,14 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     /// </summary>
     private void UpdateBuckleOffset(EntityUid uid, TransformComponent xform, VehicleComponent component)
     {
+        // So before this check this method tried to
+        // change offset of the rider whether the state
+        // was applying. This caused an issue with destroying
+        // the vehicle while someone was riding it. The rider
+        // was teleported to the local pos of offset on the client.
+        if (GameTiming.ApplyingState)
+            return;
+
         if (!TryComp<StrapComponent>(uid, out var strap))
             return;
 
@@ -370,6 +380,6 @@ public enum VehicleVisuals : byte
 /// <summary>
 /// Raised when someone honks a vehicle horn
 /// </summary>
-public sealed class HonkActionEvent : InstantActionEvent
+public sealed partial class HonkActionEvent : InstantActionEvent
 {
 }

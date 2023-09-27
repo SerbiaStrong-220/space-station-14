@@ -12,14 +12,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardsuits/sssp.rsi
   - type: PointLight
+    radius: 5
+    energy: 3.5
     color: orange
   - type: PressureProtection
-    highPressureMultiplier: 0.12
-    lowPressureMultiplier: 10000
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    coefficient: 0.005
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.8
-        Heat: 0.8
+        Heat: 0.2
+        Radiation: 0.5

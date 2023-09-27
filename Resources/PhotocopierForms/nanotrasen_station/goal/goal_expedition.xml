@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>goal_expedition</FormId>
+  <PrototypeId>PaperNtFormGoal</PrototypeId>
+  <EntityName>форма НТ-СНБ-ОТЧ-Э</EntityName>
+  <PhotocopierTitle>Отчёт об экспедиции</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-СНБ-ОТЧ-Э[/bold]
+[head=2]Отчёт об экспедиции[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+[bold]Текущий квартирмейстер:[/bold] (ПОЛНОЕ ИМЯ/ОТСУТСТВУЕТ)
+
+[bold]Заполняющий отчет:[/bold] (ПОЛНОЕ ИМЯ И ДОЛЖНОСТЬ)
+
+[bold]Состояние атмосферы:[/bold]
+(ПРИГОДНОСТЬ ИЛИ ЗАГРЯЗНЕНИЕ)
+
+[bold]Состояние аванпоста:[/bold]
+(СТЕПЕНЬ РАЗРУШЕННОСТИ И НАЛИЧИЕ/ОТСУТСТВИЕ СВЕТА)
+
+[bold]Враждебная фауна:[/bold]
+(ТИП И КОЛИЧЕСТВО/ОТСУТСТВУЕТ)
+
+[bold]Погибшие при исследовании:[/bold]
+(ИМЕНА И ДОЛЖНОСТИ)
+
+[bold]Стоимость эвакуированного оборудования:[/bold] (ЦЕНА В КРЕДИТАХ)
+
+[italic]Место для печатей – Квартирмейстер[/italic]]]></Content>
+</Form>

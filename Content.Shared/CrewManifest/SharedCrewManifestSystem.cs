@@ -11,9 +11,9 @@ namespace Content.Shared.CrewManifest;
 [Serializable, NetSerializable]
 public sealed class RequestCrewManifestMessage : EntityEventArgs
 {
-    public EntityUid Id { get; }
+    public NetEntity Id { get; }
 
-    public RequestCrewManifestMessage(EntityUid id)
+    public RequestCrewManifestMessage(NetEntity id)
     {
         Id = id;
     }
@@ -53,12 +53,15 @@ public sealed class CrewManifestEntry
 
     public string JobPrototype { get; }
 
-    public CrewManifestEntry(string name, string jobTitle, string jobIcon, string jobPrototype)
+    public bool IsInCryo { get; }
+
+    public CrewManifestEntry(string name, string jobTitle, string jobIcon, string jobPrototype, bool isInCryo)
     {
         Name = name;
         JobTitle = jobTitle;
         JobIcon = jobIcon;
         JobPrototype = jobPrototype;
+        IsInCryo = isInCryo;
     }
 }
 

@@ -47,7 +47,7 @@
   - type: MeleeWeapon
     hidden: true
     soundHit:
-        path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
     angle: 0
     animation: WeaponArcClaw
     damage:
@@ -55,6 +55,9 @@
         Slash: 6
   - type: ReplacementAccent
     accent: genericAggressive
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Zombie
 
 - type: entity
   parent: BaseMobFlesh

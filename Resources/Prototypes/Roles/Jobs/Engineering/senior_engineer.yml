@@ -4,17 +4,16 @@
   description: job-description-senior-engineer
   playTimeTracker: JobSeniorEngineer
   radioBold: true
-  setPreference: false #SS220 No senior job
   requirements:
     - !type:RoleTimeRequirement
       role: JobAtmosphericTechnician
-      time: 21600 #6 hrs
+      time: 72000 # SS220-RoleTime
     - !type:RoleTimeRequirement
       role: JobStationEngineer
-      time: 21600 #6 hrs
+      time: 72000 # SS220-RoleTime
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 216000 # 60 hrs
+      time: 180000 # SS220-RoleTime
   startingGear: SeniorEngineerGear
   icon: "JobIconSeniorEngineer"
   supervisors: job-supervisors-ce

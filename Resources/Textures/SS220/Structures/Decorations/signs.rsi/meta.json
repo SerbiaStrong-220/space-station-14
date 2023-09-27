@@ -1,0 +1,26 @@
+{
+    "version":1,
+    "size":{
+        "x":32,
+        "y":32
+    },
+    "license":"CC-BY-SA-3.0",
+    "copyright":"court.png is modified by TheArturZh for SS220. Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/tree/724d11274bf173044330ddc5f230c3abd80df8d2",
+    "states":[
+        {
+            "name":"court"
+        },
+		{
+            "name":"rest"
+        },
+		{
+            "name":"psych"
+        },
+		{
+            "name":"ntflag"
+        },
+		{
+            "name":"bobross"
+        }
+    ]
+}

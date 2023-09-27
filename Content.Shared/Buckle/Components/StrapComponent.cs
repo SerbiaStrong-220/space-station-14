@@ -10,7 +10,7 @@ namespace Content.Shared.Buckle.Components;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedBuckleSystem), typeof(SharedVehicleSystem))]
-public sealed class StrapComponent : Component
+public sealed partial class StrapComponent : Component
 {
     /// <summary>
     /// The entities that are currently buckled
@@ -79,6 +79,14 @@ public sealed class StrapComponent : Component
     public int Size = 100;
 
     /// <summary>
+    /// Whether or not the object has an actual strap.
+    /// This will prevent buckled entities from being pulled by gravity (i.e. by grav. anomaly).
+    /// </summary>
+    [DataField("hasSeatbelt")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool HasSeatbelt = false;
+
+    /// <summary>
     /// If disabled, nothing can be buckled on this object, and it will unbuckle anything that's already buckled
     /// </summary>
     [ViewVariables]
@@ -125,15 +133,17 @@ public sealed class StrapComponentState : ComponentState
     public readonly StrapPosition Position;
     public readonly float MaxBuckleDistance;
     public readonly Vector2 BuckleOffsetClamped;
-    public readonly HashSet<EntityUid> BuckledEntities;
+    public readonly HashSet<NetEntity> BuckledEntities;
+    public readonly bool HasSeatbelt; //SS220-Gravpull-straps-bugfix
     public readonly int OccupiedSize;
 
-    public StrapComponentState(StrapPosition position, Vector2 offset, HashSet<EntityUid> buckled,
-        float maxBuckleDistance, int occupiedSize)
+    public StrapComponentState(StrapPosition position, Vector2 offset, HashSet<NetEntity> buckled,
+        bool hasSeatbelt, float maxBuckleDistance, int occupiedSize)
     {
         Position = position;
         BuckleOffsetClamped = offset;
         BuckledEntities = buckled;
+        HasSeatbelt = hasSeatbelt;  //SS220-Gravpull-straps-bugfix
         MaxBuckleDistance = maxBuckleDistance;
         OccupiedSize = occupiedSize;
     }

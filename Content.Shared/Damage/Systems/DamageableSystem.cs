@@ -125,18 +125,12 @@ namespace Content.Shared.Damage
                 return null;
             }
 
-            if (damage == null)
-            {
-                Log.Error("Null DamageSpecifier. Probably because a required yaml field was not given.");
-                return null;
-            }
-
             if (damage.Empty)
             {
                 return damage;
             }
 
-            var before = new BeforeDamageChangedEvent(damage);
+            var before = new BeforeDamageChangedEvent(damage, origin);
             RaiseLocalEvent(uid.Value, ref before);
 
             if (before.Cancelled)
@@ -151,7 +145,7 @@ namespace Content.Shared.Damage
                     damage = DamageSpecifier.ApplyModifierSet(damage, modifierSet);
                 }
 
-                var ev = new DamageModifyEvent(damage);
+                var ev = new DamageModifyEvent(damage, origin);
                 RaiseLocalEvent(uid.Value, ev);
                 damage = ev.Damage;
 
@@ -274,7 +268,7 @@ namespace Content.Shared.Damage
     ///     Raised before damage is done, so stuff can cancel it if necessary.
     /// </summary>
     [ByRefEvent]
-    public record struct BeforeDamageChangedEvent(DamageSpecifier Delta, bool Cancelled=false);
+    public record struct BeforeDamageChangedEvent(DamageSpecifier Delta, EntityUid? Origin = null, bool Cancelled = false);
 
     /// <summary>
     ///     Raised on an entity when damage is about to be dealt,
@@ -290,11 +284,13 @@ namespace Content.Shared.Damage
 
         public readonly DamageSpecifier OriginalDamage;
         public DamageSpecifier Damage;
+        public EntityUid? Origin;
 
-        public DamageModifyEvent(DamageSpecifier damage)
+        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null)
         {
             OriginalDamage = damage;
             Damage = damage;
+            Origin = origin;
         }
     }
 

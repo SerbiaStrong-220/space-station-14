@@ -11,8 +11,6 @@
       - id: ClothingUniformJumpsuitQMTurtleneck
       - id: ClothingUniformJumpskirtQMTurtleneck
       - id: ClothingHandsGlovesColorBrown
-      - id: ClothingShoesColorBrown
-      - id: ClothingHeadHatQMsoft
       - id: CargoRequestComputerCircuitboard
       - id: CargoShuttleComputerCircuitboard
       - id: CargoShuttleConsoleCircuitboard
@@ -57,6 +55,7 @@
       - id: WeaponAntiqueLaser
       - id: JetpackCaptainFilled
       - id: MedalCase
+      - id: ClothingHeadHatCapcap
 
 - type: entity
   id: LockerCaptainFilled
@@ -96,6 +95,42 @@
       # Corvax-Resprite-End
 
 - type: entity
+  id: LockerCaptainFilledNoLaser
+  suffix: Filled
+  parent: LockerCaptain
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingOuterArmorCaptainCarapace
+      - id: NukeDisk
+      - id: PinpointerNuclear
+      - id: ClothingHeadHatCaptain
+      - id: ClothingNeckCloakCap
+      - id: ClothingHandsGlovesCaptain
+      - id: WeaponDisabler
+      - id: CommsComputerCircuitboard
+      - id: ClothingHeadsetAltCommand
+      - id: SpaceCash1000
+      - id: PlushieNuke
+        prob: 0.1
+      - id: CigarGoldCase
+        prob: 0.25
+      - id: ClothingBeltSheathFilled
+      - id: DoorRemoteCommand
+      - id: ClothingNeckCloakCapFormal
+      - id: ClothingUniformJumpsuitCapFormal
+      - id: ClothingUniformJumpskirtCapFormalDress
+      - id: RubberStampCaptain
+      - id: JetpackCaptainFilled
+      - id: MedalCase
+      #- id: ClothingHeadHatCapcap # SS220 - removed duplicate cap from locker
+      # Corvax-Resprite-Start
+      - id: ClothingHeadCaptainHat
+      - id: ClothingHeadCaptainCap
+      - id: ClothingOuterCoatCaptain
+      # Corvax-Resprite-End
+
+- type: entity
   id: LockerHeadOfPersonnelFilled
   suffix: Filled
   parent: LockerHeadOfPersonnel
@@ -111,7 +146,7 @@
       - id: BoxHeadset
       - id: IDComputerCircuitboard
       - id: Telescopichka
-      - id: ClothingShoesColorBlack
+      - id: ClothingOuterWinterHoP
       - id: CigarGoldCase
         prob: 0.25
         # Fuck the HoP they don't deserve fucking cigars.
@@ -136,6 +171,8 @@
       - id: Telescopichka
       - id: ClothingOuterHardsuitEngineeringWhite
       - id: ClothingMaskBreath
+      - id: ClothingUniformJumpsuitChiefEngineerTurtle
+      - id: ClothingUniformJumpskirtChiefEngineerTurtle
       - id: OxygenTankFilled
       - id: NitrogenTankFilled
       - id: ClothingNeckCloakCe
@@ -166,6 +203,8 @@
       - id: ClothingBeltChiefEngineerFilled
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingHandsGlovesColorYellow
+      - id: ClothingUniformJumpsuitChiefEngineerTurtle
+      - id: ClothingUniformJumpskirtChiefEngineerTurtle
       - id: CigarCase
         prob: 0.15
       - id: DoorRemoteEngineering
@@ -192,15 +231,11 @@
       - id: ClothingMaskSterile
       - id: ClothingHeadHatBeretCmo
       - id: ClothingOuterHardsuitMedical
-      - id: DiagnoserMachineCircuitboard
-      - id: VaccinatorMachineCircuitboard
       - id: Hypospray
       - id: HandheldCrewMonitor
       - id: DoorRemoteMedical
       - id: RubberStampCMO
       - id: MedicalTechFabCircuitboard
-      - id: MaterialBiomass
-        amount: 3
       - id: BoxEncryptionKeyMedical
 
 - type: entity
@@ -220,15 +255,11 @@
       - id: ClothingOuterCoatLabCmo
       - id: ClothingMaskSterile
       - id: ClothingHeadHatBeretCmo
-      - id: DiagnoserMachineCircuitboard
-      - id: VaccinatorMachineCircuitboard
       - id: Hypospray
       - id: HandheldCrewMonitor
       - id: DoorRemoteMedical
       - id: RubberStampCMO
       - id: MedicalTechFabCircuitboard
-      - id: MaterialBiomass
-        amount: 3
       - id: BoxEncryptionKeyMedical
 
 - type: entity
@@ -248,10 +279,11 @@
       - id: HandTeleporter
       - id: DoorRemoteResearch
       - id: ClothingHeadHatBeretRND
+      - id: ClothingHandsGlovesColorPurple
+      - id: ClothingBeltUtilityFilled
       - id: RubberStampRd
       - id: ClothingHeadsetAltScience
       - id: BoxEncryptionKeyScience
-      - id: BoxEncryptionKeyRobo
 
 - type: entity
   id: LockerResearchDirectorFilled
@@ -269,10 +301,11 @@
       - id: HandTeleporter
       - id: DoorRemoteResearch
       - id: ClothingHeadHatBeretRND
+      - id: ClothingHandsGlovesColorPurple
+      - id: ClothingBeltUtilityFilled
       - id: RubberStampRd
       - id: ClothingHeadsetAltScience
       - id: BoxEncryptionKeyScience
-      - id: BoxEncryptionKeyRobo
 
 - type: entity
   id: LockerHeadOfSecurityFilledHardsuit
@@ -309,6 +342,7 @@
       - id: BoxEncryptionKeySecurity
       - id: HoloprojectorSecurity
       - id: BookSecretDocuments
+      - id: BookBusido # Corvax-Books
 
 - type: entity
   id: LockerHeadOfSecurityFilled

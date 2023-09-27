@@ -3,5 +3,9 @@
 - type: gameMapPool
   id: SS220MapPool
   maps:
-  - Box
+  - Frankenstein
+  - 220Gate
   - 220Delta
+  - 220Bagel
+  - 220Fland
+  - 220Ishimura

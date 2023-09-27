@@ -6,7 +6,7 @@ namespace Content.Shared.Buckle.Components;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedBuckleSystem))]
-public sealed class BuckleComponent : Component
+public sealed partial class BuckleComponent : Component
 {
     /// <summary>
     /// The range from which this entity can buckle to a <see cref="StrapComponent"/>.
@@ -22,6 +22,13 @@ public sealed class BuckleComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Buckled;
+
+    /// <summary>
+    /// True if the object we are buckled to has a seatbelt, false otherwise.
+    /// This prevents us from being pulled by gravity (i.e. grav. anomaly).
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool FastenedSeatbelt;
 
     [ViewVariables]
     public EntityUid? LastEntityBuckledTo;
@@ -39,6 +46,15 @@ public sealed class BuckleComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("pullStrap")]
     public bool PullStrap;
+
+    //SS220-Vehicle-doafter-fix begin
+    /// <summary>
+    /// Time required for others to unbuckle us from a vehicle
+    /// </summary>
+    [DataField("vehicleUnbuckleTime")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float VehicleUnbuckleTime = .75f;
+    //SS220-Vehicle-doafter-fix end
 
     /// <summary>
     /// The amount of time that must pass for this entity to
@@ -78,18 +94,22 @@ public sealed class BuckleComponent : Component
 [Serializable, NetSerializable]
 public sealed class BuckleComponentState : ComponentState
 {
-    public BuckleComponentState(bool buckled, EntityUid? buckledTo, EntityUid? lastEntityBuckledTo,
+    public BuckleComponentState(bool buckled, bool fastenedSeatbelt, float vehicleUnbuckleTime, NetEntity? buckledTo, NetEntity? lastEntityBuckledTo,
         bool dontCollide)
     {
         Buckled = buckled;
+        FastenedSeatbelt = fastenedSeatbelt; //SS220-Gravpull-seatbelt-fix
+        VehicleUnbuckleTime = vehicleUnbuckleTime; //SS220-Vehicle-doafter-fix
         BuckledTo = buckledTo;
         LastEntityBuckledTo = lastEntityBuckledTo;
         DontCollide = dontCollide;
     }
 
     public readonly bool Buckled;
-    public readonly EntityUid? BuckledTo;
-    public  readonly EntityUid? LastEntityBuckledTo;
+    public readonly bool FastenedSeatbelt; //SS220-Gravpull-seatbelt-fix
+    public readonly float VehicleUnbuckleTime; //SS220-Vehicle-doafter-fix
+    public readonly NetEntity? BuckledTo;
+    public readonly NetEntity? LastEntityBuckledTo;
     public readonly bool DontCollide;
 }
 

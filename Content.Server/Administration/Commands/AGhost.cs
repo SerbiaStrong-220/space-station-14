@@ -1,11 +1,9 @@
 ﻿using Content.Server.GameTicking;
-using Content.Server.Ghost.Components;
-using Content.Server.Mind;
 using Content.Server.Hands.Systems;
-using Content.Server.Players;
 using Content.Shared.Administration;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
+using Content.Shared.Mind;
 using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
@@ -30,19 +28,18 @@ namespace Content.Server.Administration.Commands
                 return;
             }
 
-            var mind = player.ContentData()?.Mind;
-
-            if (mind == null)
+            var mindSystem = _entities.System<SharedMindSystem>();
+            if (!mindSystem.TryGetMind(player, out var mindId, out var mind))
             {
                 shell.WriteLine("You can't ghost here! Could not find 'mind'");
                 return;
             }
-            
-            var mindSystem = _entities.System<MindSystem>();
+
+            var metaDataSystem = _entities.System<MetaDataSystem>();
 
             if (mind.VisitingEntity != default && _entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent))
             {
-                mindSystem.UnVisit(mind);
+                mindSystem.UnVisit(mindId, mind);
                 // If already an admin ghost, then return to body.
                 if (oldGhostComponent.CanGhostInteract)
                     return;
@@ -52,7 +49,7 @@ namespace Content.Server.Administration.Commands
                             && !_entities.HasComponent<GhostComponent>(mind.CurrentEntity);
             var coordinates = player.AttachedEntity != null
                 ? _entities.GetComponent<TransformComponent>(player.AttachedEntity.Value).Coordinates
-                : _entities.System<GameTicker>().GetObserverSpawnPoint();
+                : EntitySystem.Get<GameTicker>().GetObserverSpawnPoint();
             var ghost = SpawnGhost(coordinates, player, canReturn);
             _entities.GetComponent<TransformComponent>(ghost).AttachToGridOrMap();
 
@@ -60,16 +57,16 @@ namespace Content.Server.Administration.Commands
             {
                 // TODO: Remove duplication between all this and "GamePreset.OnGhostAttempt()"...
                 if (!string.IsNullOrWhiteSpace(mind.CharacterName))
-                    _entities.GetComponent<MetaDataComponent>(ghost).EntityName = mind.CharacterName;
+                    metaDataSystem.SetEntityName(ghost, mind.CharacterName);
                 else if (!string.IsNullOrWhiteSpace(mind.Session?.Name))
-                    _entities.GetComponent<MetaDataComponent>(ghost).EntityName = mind.Session.Name;
+                    metaDataSystem.SetEntityName(ghost, mind.Session.Name);
 
-                mindSystem.Visit(mind, ghost);
+                mindSystem.Visit(mindId, ghost, mind);
             }
             else
             {
-                _entities.GetComponent<MetaDataComponent>(ghost).EntityName = player.Name;
-                mindSystem.TransferTo(mind, ghost);
+                metaDataSystem.SetEntityName(ghost, player.Name);
+                mindSystem.TransferTo(mindId, ghost, mind: mind);
             }
 
             var comp = _entities.GetComponent<GhostComponent>(ghost);
