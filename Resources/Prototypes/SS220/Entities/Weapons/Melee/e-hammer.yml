@@ -3,6 +3,7 @@
   parent: BaseItem
   id: EnergyHammer
   description: Новейшая разработка пытливых, совецкцих умов. Незаменимая вещь как в хозяйстве так и на войне.
+  suffix: Ebent
   components:
   - type: EnergySword
     litDamageBonus:
