@@ -5,9 +5,9 @@
   description: For the best cleaner in his room!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/chocolate.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Chocolate.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/chocolate.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Chocolate.rsi
   - type: Food
     requiresSpecialDigestion: false
   - type: Tag
@@ -35,9 +35,9 @@
   description: No way to recognise it.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/broken.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Broken.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/broken.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Broken.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -46,9 +46,9 @@
   description: It has three heads.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/hydra.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Hydra.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/hydra.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Hydra.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -57,9 +57,9 @@
   description: Made of plastic it's fantastic.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/plastic.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Plastic.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Medals/Medalpack1/plastic.rsi
+    sprite: SS220/Clothing/Neck/Medals/Medalpack1/Plastic.rsi
 
 - type: entity
   parent: ClothingNeckBase
