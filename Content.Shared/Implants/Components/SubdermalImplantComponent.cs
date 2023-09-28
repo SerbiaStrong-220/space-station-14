@@ -34,6 +34,11 @@ public sealed partial class SubdermalImplantComponent : Component
     public bool Permanent = false;
 }
 
+public sealed partial class UseReagentCapsuleImplantEvent : InstantActionEvent
+{
+
+}
+
 /// <summary>
 /// Used for opening the storage implant via action.
 /// </summary>

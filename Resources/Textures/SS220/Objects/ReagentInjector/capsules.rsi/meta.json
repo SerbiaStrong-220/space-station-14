@@ -1,0 +1,39 @@
+{
+    "version": 1.0,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Meower for SS220 EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "adrenaline"
+      },
+      {
+        "name": "capsule"
+      },
+      {
+        "name": "capsule_mask"
+      },
+      {
+        "name": "capsule_used"
+      },
+      {
+        "name": "combat"
+      },
+      {
+        "name": "dab"
+      },
+      {
+        "name": "dead"
+      },
+      {
+        "name": "nanite"
+      },
+      {
+        "name": "reanim"
+      }
+    ]
+  }
+  
