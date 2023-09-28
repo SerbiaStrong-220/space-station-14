@@ -86,11 +86,13 @@
     interfaces:
     - key: enum.DisposalUnitUiKey.Key
       type: DisposalUnitBoundUserInterface
+  - type: RatKingRummageable
 
+# SS220 rnd-transport
 - type: entity
   id: DisposalUnitRnd
   parent: DisposalUnitBase
-  name: утилизационный блок РнД
+  name: транспортный блок РнД
   components:
   - type: Sprite
     layers:
