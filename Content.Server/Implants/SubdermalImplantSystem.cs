@@ -41,13 +41,13 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     private void OnReagentCapsuleImplant(EntityUid uid, SubdermalImplantComponent component, UseReagentCapsuleImplantEvent args)
     {
         if (!TryComp<SolutionContainerManagerComponent>(args.Performer, out var ownerSolutionContainerComp)
-            || !TryComp<ReagentCapsuleComponent>(uid, out var reagentCapsule))
+            || !TryComp<ReagentCapsuleComponent>(uid, out var reagentCapsule)
+            || !TryComp<SolutionContainerManagerComponent>(uid, out var capsuleContainer))
             return;
         if (args.Handled || reagentCapsule.IsUsed)
             return;
-        var reagents = Comp<SolutionContainerManagerComponent>(uid);
-        var userSolutions = _entityManager.GetComponent<SolutionContainerManagerComponent>(args.Performer);
-        _solutionContainer.TryTransferSolution(args.Performer, userSolutions.Solutions["chemicals"], reagents.Solutions["beaker"], reagents.Solutions["beaker"].Volume);
+  
+        _solutionContainer.TryTransferSolution(args.Performer, ownerSolutionContainerComp.Solutions["chemicals"], capsuleContainer.Solutions["beaker"], capsuleContainer.Solutions["beaker"].Volume);
         reagentCapsule.IsUsed = true;
         args.Handled = true;
 
