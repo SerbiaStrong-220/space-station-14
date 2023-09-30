@@ -27,7 +27,16 @@ public sealed partial class PictureViewer : Control
             _viewedPicture = value;
             Picture.TexturePath = value.ToString();
             NoImageLabel.Visible = false;
+            UpdateZoom();
+            UpdateOffset();
         }
+    }
+
+    public PictureViewer()
+    {
+        RobustXamlLoader.Load(this);
+        UpdateZoom();
+        UpdateOffset();
     }
 
     private void UpdateZoom()
@@ -42,6 +51,13 @@ public sealed partial class PictureViewer : Control
         var position = _offset;
         var rect = UIBox2.FromDimensions(position, this.Size);
         Picture.Arrange(rect);
+    }
+
+    protected override Vector2 ArrangeOverride(Vector2 finalSize)
+    {
+        UpdateOffset();
+
+        return finalSize;
     }
 
     protected override void MouseWheel(GUIMouseWheelEventArgs args)
@@ -98,10 +114,5 @@ public sealed partial class PictureViewer : Control
             _recenter.Disabled = true;
         }
         */
-    }
-
-    public PictureViewer()
-    {
-        RobustXamlLoader.Load(this);
     }
 }
