@@ -5,6 +5,7 @@
   id: ClothingOuterHardsuitUSSP
   name: Battle USSP hardsuit
   description: This hardsuit is famous for its simplicity, lightness, reliability and decent life support system.
+  suffix: Ebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp.rsi
@@ -38,6 +39,7 @@
   id: ClothingOuterHardsuitUSSPEng
   name: тяжёлый боевой скафандр Заслуженного Инженера СССП
   description: Отечественный инженерный скафандр - это настоящий металлургический чудо-труд. Классический советский дизайн, в котором каждая ручка, каждый шов и каждая кнопочка задуманы для максимального удобства и эффективности. 
+  suffix: Ebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_eng.rsi
@@ -70,7 +72,8 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitUSSPMed
   name: тяжёлый боевой скафандр Народного Врача СССП
-  description: В нём врач будет выглядеть так элегантно, что пациенты будут лечиться сами от одного его вида. Защищает от экстремального давления, температур, а так же капиталистических идей. 
+  description: В нём врач будет выглядеть так элегантно, что пациенты будут лечиться сами от одного его вида. Защищает от экстремального давления, температур, а так же капиталистических идей.
+  suffix: Ebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_med.rsi
