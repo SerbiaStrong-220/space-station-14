@@ -98,9 +98,9 @@
   description: Тяжёлый, с маленьким углом обзора, но очень надёжный и прочный.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_eng.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_eng.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
   - type: PointLight
     radius: 5
     energy: 3.5
