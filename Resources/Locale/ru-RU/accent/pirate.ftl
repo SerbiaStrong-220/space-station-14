@@ -345,3 +345,12 @@ accent-pirate-replacement-115 = недоумков палубных
 
 accent-pirate-replaced-116 = срочником
 accent-pirate-replacement-116 = недоумком палубным
+
+accent-pirate-replaced-117 = казнил
+accent-pirate-replacement-117 = вздернул на рее
+
+accent-pirate-replaced-118 = казнила
+accent-pirate-replacement-118 = вздернула на рее
+
+accent-pirate-replaced-119 = казнили
+accent-pirate-replacement-119 = вздернули на рее
