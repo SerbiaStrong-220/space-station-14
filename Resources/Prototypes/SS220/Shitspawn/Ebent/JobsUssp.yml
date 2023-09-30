@@ -58,7 +58,7 @@
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
-    outerClothing: ClothingOuterHardsuitUSSP
+    outerClothing: ClothingOuterHardsuitUSSPCmd
     suitstorage: YellowOxygenTankFilled
     id: UsspPDALeader
     ears: ClothingHeadsetUSSP
