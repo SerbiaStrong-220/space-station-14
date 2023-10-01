@@ -12,8 +12,8 @@ public sealed partial class PictureViewer : Control
 {
     private ResPath _viewedPicture;
 
-    private const float ScrollSensitivity = 0.1f;
-    private const float MaxZoom = 10f;
+    private const float ScrollSensitivity = 0.05f;
+    private const float MaxZoom = 5f;
 
     private float _zoom = 1f;
     private bool _draggin = false;
@@ -27,16 +27,12 @@ public sealed partial class PictureViewer : Control
             _viewedPicture = value;
             Picture.TexturePath = value.ToString();
             NoImageLabel.Visible = false;
-            UpdateZoom();
-            UpdateOffset();
         }
     }
 
     public PictureViewer()
     {
         RobustXamlLoader.Load(this);
-        UpdateZoom();
-        UpdateOffset();
     }
 
     private void UpdateZoom()
@@ -45,17 +41,17 @@ public sealed partial class PictureViewer : Control
         Picture.TextureScale = new Vector2(invZoom, invZoom);
     }
 
-    private void UpdateOffset()
+    private void UpdateOffset(Vector2? finalSize = null)
     {
         //Picture.Margin = new Thickness(_offset.X, _offset.Y);
         var position = _offset;
-        var rect = UIBox2.FromDimensions(position, this.Size);
+        var rect = UIBox2.FromDimensions(position, finalSize ?? this.Size);
         Picture.Arrange(rect);
     }
 
     protected override Vector2 ArrangeOverride(Vector2 finalSize)
     {
-        UpdateOffset();
+        UpdateOffset(finalSize);
 
         return finalSize;
     }
