@@ -58,7 +58,7 @@
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
-    outerClothing: ClothingOuterHardsuitUSSP
+    outerClothing: ClothingOuterHardsuitUSSPCmd
     suitstorage: YellowOxygenTankFilled
     id: UsspPDALeader
     ears: ClothingHeadsetUSSP
@@ -143,7 +143,7 @@
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
-    outerClothing: ClothingOuterHardsuitUSSP
+    outerClothing: ClothingOuterHardsuitUSSPEng
     suitstorage: YellowOxygenTankFilled
     id: UsspPDAEngineer
     ears: ClothingHeadsetUSSP
@@ -254,6 +254,10 @@
   components:
     - type: Loadout
       prototypes: [ EbentUSSPCorpsmanGear ]
+    - type: GhostRole
+      makeSentient: true
+      name: Полевой медик СССП
+    - type: GhostTakeoverAvailable
 
 - type: job
   id: USSPCorpsman
@@ -313,7 +317,7 @@
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
-    outerClothing: ClothingOuterHardsuitUSSP
+    outerClothing: ClothingOuterHardsuitUSSPMed
     suitstorage: YellowOxygenTankFilled
     id: UsspPDACMO
     ears: ClothingHeadsetUSSP
@@ -424,6 +428,10 @@
   components:
     - type: Loadout
       prototypes: [ EbentUSSPTrooperGear ]
+    - type: GhostRole
+      makeSentient: true
+      name: Красноармеец
+    - type: GhostTakeoverAvailable
 
 - type: job
   id: USSPFighter
