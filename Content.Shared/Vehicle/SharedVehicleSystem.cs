@@ -18,6 +18,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Serialization;
+using Content.Shared.Verbs;
+using Content.Shared.Pulling.Components;
+using Content.Shared.SS220.Cart.Components;
+using Content.Shared.SS220.Cart;
 
 namespace Content.Shared.Vehicle;
 
@@ -44,6 +48,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     [Dependency] private readonly SharedJointSystem _joints = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly CartSystem _cart = default!;
 
     private const string KeySlot = "key_slot";
 
@@ -61,6 +66,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
         SubscribeLocalEvent<VehicleComponent, MoveEvent>(OnMoveEvent);
         SubscribeLocalEvent<VehicleComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
+        SubscribeLocalEvent<VehicleComponent, GetVerbsEvent<Verb>>(AddCartVerbs); //SS220-Cart-system
 
         SubscribeLocalEvent<InVehicleComponent, GettingPickedUpAttemptEvent>(OnGettingPickedUpAttempt);
     }
@@ -358,6 +364,64 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     {
         Appearance.SetData(uid, VehicleVisuals.AutoAnimate, autoAnimate);
     }
+
+    //SS220-Cart-system begin
+    private void AddCartVerbs(EntityUid uid, VehicleComponent component, GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        if (component.AttachedCart.HasValue)
+        {
+            // If vehicle already have an attached cart - add verb to deattach it
+            if (!TryComp<CartComponent>(component.AttachedCart, out var attachedCart))
+                return;
+
+            Verb deattachVerb = new()
+            {
+                Text = Loc.GetString("cart-verb-deattach"),
+                Act = () => DeattachCart(component, uid, attachedCart, args.User),
+                DoContactInteraction = false
+            };
+            args.Verbs.Add(deattachVerb);
+            return;
+        }
+
+        if (!TryComp<SharedPullerComponent>(args.User, out var userPullerComp))
+            return;
+
+        // If not pulling entity with cart component - return
+        var cart = userPullerComp.Pulling;
+        if (!TryComp<CartComponent>(cart, out var cartComp))
+            return;
+
+        Verb verb = new()
+        {
+            Text = Loc.GetString("cart-verb-attach"),
+            Act = () => AttachCart(component, uid, cartComp, args.User),
+            DoContactInteraction = false
+        };
+        args.Verbs.Add(verb);
+    }
+
+    private void DeattachCart(VehicleComponent component, EntityUid vehicle, CartComponent attachedCart, EntityUid user)
+    {
+        if (!_cart.TryDeattachCart(vehicle, attachedCart, user))
+            return;
+
+        component.AttachedCart = null;
+        Dirty(component);
+    }
+
+    private void AttachCart(VehicleComponent component, EntityUid vehicle, CartComponent cart, EntityUid user)
+    {
+        if (!_cart.TryAttachCart(vehicle, cart, user))
+            return;
+
+        component.AttachedCart = cart.Owner;
+        Dirty(component);
+    }
+    //SS220-Cart-system end
 }
 
 /// <summary>
