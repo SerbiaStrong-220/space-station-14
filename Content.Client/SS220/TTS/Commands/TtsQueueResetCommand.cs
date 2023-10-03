@@ -2,7 +2,7 @@
 
 using Robust.Shared.Console;
 
-namespace Content.Client.Corvax.TTS.Commands;
+namespace Content.Client.SS220.TTS.Commands;
 
 public sealed class TtsQueueResetCommand : IConsoleCommand
 {

@@ -1,6 +1,6 @@
 using Content.Shared.Corvax.CCCVars;
-using Content.Shared.Corvax.TTS;
-using Content.Shared.Corvax.TTS.Commands;
+using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Commands;
 using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Audio;
@@ -9,7 +9,7 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
-namespace Content.Client.Corvax.TTS;
+namespace Content.Client.SS220.TTS;
 
 /// <summary>
 /// Plays TTS audio in world
@@ -31,8 +31,11 @@ public sealed class TTSSystem : EntitySystem
     private int _fileIdx = 0;
 
     private const int MaxQueuedPerEntity = 20;
+    private const int MaxEntitiesQueued = 30;
     private readonly Dictionary<EntityUid, Queue<PlayRequest>> _playQueues = new();
     private readonly Dictionary<EntityUid, AudioSystem.PlayingStream> _playingStreams = new();
+
+    private EntityUid _fakeRecipient = new();
 
     public override void Initialize()
     {
@@ -89,7 +92,7 @@ public sealed class TTSSystem : EntitySystem
     // Process sound queues on frame update
     public override void FrameUpdate(float frameTime)
     {
-        var streamsToRemove = new HashSet<EntityUid>();
+        var streamsToRemove = new List<EntityUid>();
 
         foreach (var (uid, stream) in _playingStreams)
         {
@@ -102,6 +105,8 @@ public sealed class TTSSystem : EntitySystem
             _playingStreams.Remove(uid);
         }
 
+        var queueUidsToRemove = new List<EntityUid>();
+
         foreach (var (uid, queue) in _playQueues)
         {
             if (_playingStreams.ContainsKey(uid))
@@ -110,24 +115,39 @@ public sealed class TTSSystem : EntitySystem
             if (!queue.TryDequeue(out var request))
                 continue;
 
+            if (queue.Count == 0)
+                queueUidsToRemove.Add(uid);
+
             var filePath = new ResPath($"{request.FileIdx}.ogg");
             var soundPath = new SoundPathSpecifier(Prefix / filePath, request.Params);
-            var stream = _audio.PlayEntity(soundPath, new EntityUid(), uid);
+
+            IPlayingAudioStream? stream;
+            if (request.PlayGlobal)
+                stream = _audio.PlayGlobal(soundPath, Filter.Local(), false);
+            else
+                stream = _audio.PlayEntity(soundPath, _fakeRecipient, uid);
+
             if (stream is AudioSystem.PlayingStream playingStream)
-            {
                 _playingStreams.Add(uid, playingStream);
-            }
 
             _contentRoot.RemoveFile(filePath);
         }
+
+        foreach (var queueUid in queueUidsToRemove)
+        {
+            _playQueues.Remove(queueUid);
+        }
     }
 
-    public void TryQueuePlay(EntityUid entity, int fileIdx, AudioParams audioParams)
+    public void TryQueuePlay(EntityUid entity, int fileIdx, AudioParams audioParams, bool globally = false)
     {
-        var request = new PlayRequest(fileIdx, audioParams);
+        var request = new PlayRequest(fileIdx, audioParams, globally);
 
         if (!_playQueues.TryGetValue(entity, out var queue))
         {
+            if (_playQueues.Count >= MaxEntitiesQueued)
+                return;
+
             queue = new();
             _playQueues.Add(entity, queue);
         }
@@ -138,40 +158,49 @@ public sealed class TTSSystem : EntitySystem
         queue.Enqueue(request);
     }
 
-    private void OnPlayTTS(PlayTTSEvent ev)
+    private void PlayTTS(byte[] data, NetEntity? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
     {
-        _sawmill.Debug($"Play TTS audio {ev.Data.Length} bytes from {ev.SourceUid} entity");
-
-        var volume = (ev.IsRadio ? _radioVolume : _volume) * ev.VolumeModifier;
+        var finalParams = audioParams ?? AudioParams.Default;
 
         var filePath = new ResPath($"{_fileIdx}.ogg");
-        _contentRoot.AddOrUpdateFile(filePath, ev.Data);
+        _contentRoot.AddOrUpdateFile(filePath, data);
 
-        var audioParams = AudioParams.Default.WithVolume(volume);
-        var soundPath = new SoundPathSpecifier(Prefix / filePath, audioParams);
-        if (ev.SourceUid == null)
+        if (sourceUid == null)
         {
+            var soundPath = new SoundPathSpecifier(Prefix / filePath, finalParams);
             _audio.PlayGlobal(soundPath, Filter.Local(), false);
             _contentRoot.RemoveFile(filePath);
         }
         else
         {
-            var entity = GetEntity(ev.SourceUid);
+            var entity = GetEntity(sourceUid);
             if (entity.HasValue && entity.Value.IsValid())
-                TryQueuePlay(entity.Value, _fileIdx, audioParams);
+                TryQueuePlay(entity.Value, _fileIdx, finalParams, globally);
         }
 
         _fileIdx++;
+    }
+
+    private void OnPlayTTS(PlayTTSEvent ev)
+    {
+        _sawmill.Debug($"Play TTS audio {ev.Data.Length} bytes from {ev.SourceUid} entity");
+
+        var volume = (ev.IsRadio ? _radioVolume : _volume) * ev.VolumeModifier;
+        var audioParams = AudioParams.Default.WithVolume(volume);
+
+        PlayTTS(ev.Data, ev.SourceUid, audioParams);
     }
 
     public sealed class PlayRequest
     {
         public readonly AudioParams Params = AudioParams.Default;
         public readonly int FileIdx = 0;
+        public readonly bool PlayGlobal = false;
 
-        public PlayRequest(int fileIdx, AudioParams? audioParams = null)
+        public PlayRequest(int fileIdx, AudioParams? audioParams = null, bool playGlobal = false)
         {
             FileIdx = fileIdx;
+            PlayGlobal = playGlobal;
             if (audioParams.HasValue)
                 Params = audioParams.Value;
         }
