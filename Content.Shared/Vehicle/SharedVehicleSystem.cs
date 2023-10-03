@@ -22,6 +22,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.SS220.Cart;
+using Content.Shared.DragDrop;
 
 namespace Content.Shared.Vehicle;
 
@@ -67,6 +68,11 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleComponent, MoveEvent>(OnMoveEvent);
         SubscribeLocalEvent<VehicleComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
         SubscribeLocalEvent<VehicleComponent, GetVerbsEvent<Verb>>(AddCartVerbs); //SS220-Cart-system
+        SubscribeLocalEvent<VehicleComponent, CanDropTargetEvent>(OnCanDrop); //SS220-Cart-system
+        SubscribeLocalEvent<VehicleComponent, DragDropTargetEvent>(OnDragDropTarget); //SS220-Cart-system
+        SubscribeLocalEvent<VehicleComponent, ComponentShutdown>(OnShutdown); //SS220-Cart-system
+        SubscribeLocalEvent<VehicleComponent, CartAttachEvent>(OnAttachCart); //SS220-Cart-system
+        SubscribeLocalEvent<VehicleComponent, CartDeattachEvent>(OnDeattachCart); //SS220-Cart-system
 
         SubscribeLocalEvent<InVehicleComponent, GettingPickedUpAttemptEvent>(OnGettingPickedUpAttempt);
     }
@@ -366,6 +372,33 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     }
 
     //SS220-Cart-system begin
+    private void OnShutdown(EntityUid uid, VehicleComponent component, ComponentShutdown args)
+    {
+        if (!component.AttachedCart.HasValue)
+            return;
+
+        if (!TryComp<CartComponent>(component.AttachedCart, out var cartComp))
+            return;
+
+        _cart.TryDeattachCart(uid, cartComp, null);
+    }
+
+    private void OnCanDrop(EntityUid uid, VehicleComponent component, ref CanDropTargetEvent args)
+    {
+        if (!component.AttachedCart.HasValue)
+            args.Handled = true;
+    }
+
+    private void OnDragDropTarget(EntityUid uid, VehicleComponent component, ref DragDropTargetEvent args)
+    {
+        // Cart drag-drop attaching
+        if (!TryComp<CartComponent>(args.Dragged, out var cartComp))
+            return;
+
+        _cart.TryAttachCart(uid, cartComp, args.User);
+        args.Handled = true;
+    }
+
     private void AddCartVerbs(EntityUid uid, VehicleComponent component, GetVerbsEvent<Verb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
@@ -380,7 +413,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Verb deattachVerb = new()
             {
                 Text = Loc.GetString("cart-verb-deattach"),
-                Act = () => DeattachCart(component, uid, attachedCart, args.User),
+                Act = () => _cart.TryDeattachCart(attachedCart, args.User),
                 DoContactInteraction = false
             };
             args.Verbs.Add(deattachVerb);
@@ -398,27 +431,21 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         Verb verb = new()
         {
             Text = Loc.GetString("cart-verb-attach"),
-            Act = () => AttachCart(component, uid, cartComp, args.User),
+            Act = () => _cart.TryAttachCart(uid, cartComp, args.User),
             DoContactInteraction = false
         };
         args.Verbs.Add(verb);
     }
 
-    private void DeattachCart(VehicleComponent component, EntityUid vehicle, CartComponent attachedCart, EntityUid user)
+    private void OnDeattachCart(EntityUid uid, VehicleComponent component, ref CartDeattachEvent args)
     {
-        if (!_cart.TryDeattachCart(vehicle, attachedCart, user))
-            return;
-
         component.AttachedCart = null;
         Dirty(component);
     }
 
-    private void AttachCart(VehicleComponent component, EntityUid vehicle, CartComponent cart, EntityUid user)
+    private void OnAttachCart(EntityUid uid, VehicleComponent component, ref CartAttachEvent args)
     {
-        if (!_cart.TryAttachCart(vehicle, cart, user))
-            return;
-
-        component.AttachedCart = cart.Owner;
+        component.AttachedCart = args.Attaching;
         Dirty(component);
     }
     //SS220-Cart-system end
