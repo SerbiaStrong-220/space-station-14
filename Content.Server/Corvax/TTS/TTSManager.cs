@@ -58,7 +58,7 @@ public sealed class TTSManager
     private readonly HashSet<string> _cacheRadioKeysSeq = new();
 
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> Locks = new();
-    private double _timeout = 1;
+    private double _timeout = 35;
 
     private int _maxCachedCount = 200;
     private string _apiUrl = string.Empty;

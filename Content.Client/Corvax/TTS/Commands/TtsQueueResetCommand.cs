@@ -14,7 +14,7 @@ public sealed class TtsQueueResetCommand : IConsoleCommand
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var ttsSys = _entitySystemManager.GetEntitySystem<TTSSystem>();
-        //ttsSys.EndStreams();
+        ttsSys.ResetQueuesAndEndStreams();
 
         shell.WriteLine("Local TTS queue has been reset.");
     }
