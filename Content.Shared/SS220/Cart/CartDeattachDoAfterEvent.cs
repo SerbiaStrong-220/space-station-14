@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Cart;
 public sealed partial class CartDeattachDoAfterEvent : SimpleDoAfterEvent
 {
     /// <summary>
-    /// Vehicle to deattach from
+    /// Cart puller to deattach from
     /// </summary>
     [NonSerialized]
     [DataField("target", required: true)]

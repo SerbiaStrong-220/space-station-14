@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Cart;
 public sealed partial class CartAttachDoAfterEvent : SimpleDoAfterEvent
 {
     /// <summary>
-    /// Vehicle to attach to
+    /// Cart puller to attach to
     /// </summary>
     [NonSerialized]
     [DataField("target", required: true)]

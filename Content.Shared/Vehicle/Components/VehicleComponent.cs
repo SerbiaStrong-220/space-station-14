@@ -28,15 +28,6 @@ public sealed partial class VehicleComponent : Component
     [AutoNetworkedField]
     public EntityUid? LastRider;
 
-    //SS220-Cart-system begin
-    /// <summary>
-    /// The currently attached cart
-    /// </summary>
-    [ViewVariables]
-    [AutoNetworkedField]
-    public EntityUid? AttachedCart;
-    //SS220-Cart-system end
-
     /// <summary>
     /// The base offset for the vehicle (when facing east)
     /// </summary>

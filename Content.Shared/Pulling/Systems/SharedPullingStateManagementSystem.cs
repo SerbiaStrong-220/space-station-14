@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling.Components;
+using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Vehicle.Components;
 using JetBrains.Annotations;
 using Robust.Shared.GameStates;
@@ -40,9 +41,9 @@ namespace Content.Shared.Pulling
             // Soooooooooo this is fucking dumb
             // but I WILL NOT rewrite the whole component to be
             // networked for the space wizards to do it themselves
-            // right after me, so this will work for now and I don't really core
+            // right after me, so this will work for now and I don't really care
             // COPIUM
-            if (!TryComp<VehicleComponent>(uid, out var vehicle))
+            if (!TryComp<CartPullerComponent>(uid, out var cartPuller))
                 return;
 
             component.NeedsHands = false;

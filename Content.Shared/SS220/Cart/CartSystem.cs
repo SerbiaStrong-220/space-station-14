@@ -6,7 +6,6 @@ using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
-using Content.Shared.Vehicle.Components;
 using Content.Shared.Verbs;
 
 namespace Content.Shared.SS220.Cart;
@@ -38,7 +37,7 @@ public sealed class CartSystem : EntitySystem
 
     private void OnCanDropDragged(EntityUid uid, CartComponent component, ref CanDropDraggedEvent args)
     {
-        if (TryComp<VehicleComponent>(args.Target, out var vehicleComp))
+        if (TryComp<CartPullerComponent>(args.Target, out var cartPullerComp))
             args.Handled = true;
     }
 
@@ -62,19 +61,20 @@ public sealed class CartSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-        if (!TryComp<VehicleComponent>(args.AttachTarget, out var vehicle))
+        if (!TryComp<CartPullerComponent>(args.AttachTarget, out var cartPuller))
             return;
 
         if (!TryComp<SharedPullableComponent>(uid, out var pullable))
             return;
 
-        // So here we are adding the puller component to the vehicle
+        // So here we are adding the puller component to the cart puller
         // in order to pull the cart with it.
-        // We are later removing this component from vehicle.
+        // We are later removing this component from cart puller.
         // This was made just because I wanted to reuse pulling system for this task.
-        var puller = EnsureComp<SharedPullerComponent>(args.AttachTarget);
+        EnsureComp<SharedPullerComponent>(args.AttachTarget);
         _pulling.TryStopPull(pullable);
-        _pulling.TryStartPull(args.AttachTarget, uid);
+        if (!_pulling.TryStartPull(args.AttachTarget, uid))
+            return;
 
         var ev = new CartAttachEvent(args.AttachTarget, uid);
         RaiseLocalEvent(args.AttachTarget, ref ev);
@@ -90,7 +90,7 @@ public sealed class CartSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-        if (!TryComp<VehicleComponent>(args.DeattachTarget, out var vehicle))
+        if (!TryComp<CartPullerComponent>(args.DeattachTarget, out var cartPuller))
             return;
 
         if (!TryComp<SharedPullableComponent>(uid, out var pullable))
@@ -130,10 +130,13 @@ public sealed class CartSystem : EntitySystem
         if (cartComp.IsAttached)
             return false;
 
-        if (!TryComp<VehicleComponent>(target, out var vehicle))
+        if (target == cartComp.Owner)
             return false;
 
-        if (vehicle.AttachedCart.HasValue)
+        if (!TryComp<CartPullerComponent>(target, out var cartPuller))
+            return false;
+
+        if (cartPuller.AttachedCart.HasValue)
             return false;
 
         if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))
@@ -168,7 +171,7 @@ public sealed class CartSystem : EntitySystem
         if (!cartComp.IsAttached)
             return false;
 
-        if (!TryComp<VehicleComponent>(target, out var vehicle))
+        if (!TryComp<CartPullerComponent>(target, out var cartPuller))
             return false;
 
         if (!TryComp<SharedPullerComponent>(target, out var puller))
@@ -198,7 +201,7 @@ public sealed class CartSystem : EntitySystem
 
     private void ForceDeattach(EntityUid target, CartComponent cartComp)
     {
-        if (!TryComp<VehicleComponent>(target, out var vehicle))
+        if (!TryComp<CartPullerComponent>(target, out var CartPuller))
             return;
 
         if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))
