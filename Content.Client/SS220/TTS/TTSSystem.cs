@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
@@ -15,7 +17,7 @@ namespace Content.Client.SS220.TTS;
 /// Plays TTS audio in world
 /// </summary>
 // ReSharper disable once InconsistentNaming
-public sealed class TTSSystem : EntitySystem
+public sealed partial class TTSSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
@@ -47,6 +49,8 @@ public sealed class TTSSystem : EntitySystem
 
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
         SubscribeNetworkEvent<TtsQueueResetMessage>(OnQueueResetRequest);
+
+        InitializeAnnounces();
     }
 
     public override void Shutdown()
@@ -54,7 +58,11 @@ public sealed class TTSSystem : EntitySystem
         base.Shutdown();
         _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
         _cfg.UnsubValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged);
+        _cfg.UnsubValueChanged(CCCVars.TTSAnnounceVolume, OnTtsVolumeChanged);
         _contentRoot.Dispose();
+
+        ShutdownAnnounces();
+        ResetQueuesAndEndStreams();
     }
 
     public void RequestGlobalTTS(string text, string voiceId)
@@ -118,8 +126,19 @@ public sealed class TTSSystem : EntitySystem
             if (queue.Count == 0)
                 queueUidsToRemove.Add(uid);
 
-            var filePath = new ResPath($"{request.FileIdx}.ogg");
-            var soundPath = new SoundPathSpecifier(Prefix / filePath, request.Params);
+            ResPath? tempFilePath = null;
+            SoundPathSpecifier soundPath;
+            if (request is PlayRequestById requestById)
+            {
+                tempFilePath = new ResPath($"{requestById.FileIdx}.ogg");
+                soundPath = new SoundPathSpecifier(Prefix / tempFilePath.Value, requestById.Params);
+            }
+            else if (request is PlayRequestByPath requestByPath)
+            {
+                soundPath = new SoundPathSpecifier(requestByPath.Path, requestByPath.Params);
+            }
+            else
+                continue;
 
             IPlayingAudioStream? stream;
             if (request.PlayGlobal)
@@ -130,7 +149,8 @@ public sealed class TTSSystem : EntitySystem
             if (stream is AudioSystem.PlayingStream playingStream)
                 _playingStreams.Add(uid, playingStream);
 
-            _contentRoot.RemoveFile(filePath);
+            if (tempFilePath.HasValue)
+                _contentRoot.RemoveFile(tempFilePath.Value);
         }
 
         foreach (var queueUid in queueUidsToRemove)
@@ -139,10 +159,8 @@ public sealed class TTSSystem : EntitySystem
         }
     }
 
-    public void TryQueuePlay(EntityUid entity, int fileIdx, AudioParams audioParams, bool globally = false)
+    public void TryQueueRequest(EntityUid entity, PlayRequest request)
     {
-        var request = new PlayRequest(fileIdx, audioParams, globally);
-
         if (!_playQueues.TryGetValue(entity, out var queue))
         {
             if (_playQueues.Count >= MaxEntitiesQueued)
@@ -158,8 +176,22 @@ public sealed class TTSSystem : EntitySystem
         queue.Enqueue(request);
     }
 
-    private void PlayTTS(byte[] data, NetEntity? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
+    public void TryQueuePlayById(EntityUid entity, int fileIdx, AudioParams audioParams, bool globally = false)
     {
+        var request = new PlayRequestById(fileIdx, audioParams, globally);
+        TryQueueRequest(entity, request);
+    }
+
+    private void PlaySoundQueued(EntityUid entity, ResPath sound, AudioParams? audioParams = null, bool globally = false)
+    {
+        var request = new PlayRequestByPath(sound, audioParams, globally);
+        TryQueueRequest(entity, request);
+    }
+
+    private void PlayTTSBytes(byte[] data, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
+    {
+        _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity");
+
         var finalParams = audioParams ?? AudioParams.Default;
 
         var filePath = new ResPath($"{_fileIdx}.ogg");
@@ -173,9 +205,8 @@ public sealed class TTSSystem : EntitySystem
         }
         else
         {
-            var entity = GetEntity(sourceUid);
-            if (entity.HasValue && entity.Value.IsValid())
-                TryQueuePlay(entity.Value, _fileIdx, finalParams, globally);
+            if (sourceUid.HasValue && sourceUid.Value.IsValid())
+                TryQueuePlayById(sourceUid.Value, _fileIdx, finalParams, globally);
         }
 
         _fileIdx++;
@@ -183,26 +214,43 @@ public sealed class TTSSystem : EntitySystem
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
-        _sawmill.Debug($"Play TTS audio {ev.Data.Length} bytes from {ev.SourceUid} entity");
-
         var volume = (ev.IsRadio ? _radioVolume : _volume) * ev.VolumeModifier;
         var audioParams = AudioParams.Default.WithVolume(volume);
 
-        PlayTTS(ev.Data, ev.SourceUid, audioParams);
+        PlayTTSBytes(ev.Data, GetEntity(ev.SourceUid), audioParams);
     }
 
-    public sealed class PlayRequest
+    // Play requests //
+    public abstract class PlayRequest
     {
         public readonly AudioParams Params = AudioParams.Default;
-        public readonly int FileIdx = 0;
         public readonly bool PlayGlobal = false;
 
-        public PlayRequest(int fileIdx, AudioParams? audioParams = null, bool playGlobal = false)
+        public PlayRequest(AudioParams? audioParams = null, bool playGlobal = false)
         {
-            FileIdx = fileIdx;
             PlayGlobal = playGlobal;
             if (audioParams.HasValue)
                 Params = audioParams.Value;
+        }
+    }
+
+    public sealed class PlayRequestByPath : PlayRequest
+    {
+        public readonly ResPath Path;
+
+        public PlayRequestByPath(ResPath path, AudioParams? audioParams = null, bool playGlobal = false) : base(audioParams, playGlobal)
+        {
+            Path = path;
+        }
+    }
+
+    public sealed class PlayRequestById : PlayRequest
+    {
+        public readonly int FileIdx = 0;
+
+        public PlayRequestById(int fileIdx, AudioParams? audioParams = null, bool playGlobal = false) : base(audioParams, playGlobal)
+        {
+            FileIdx = fileIdx;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Linq;
 using Content.Client.Corvax.Sponsors;
 using Content.Client.SS220.TTS;
 using Content.Shared.SS220.TTS;
@@ -78,6 +80,7 @@ public sealed partial class HumanoidProfileEditor
         if (_previewDummy is null || Profile is null)
             return;
 
+        _ttsSys.ResetQueuesAndEndStreams();
         _ttsSys.RequestGlobalTTS(_random.Pick(_sampleText), Profile.Voice);
     }
 }
