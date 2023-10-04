@@ -63,7 +63,7 @@ public sealed partial class CartPullerSystem : EntitySystem
 
             Verb deattachVerb = new()
             {
-                Text = Loc.GetString("cart-verb-deattach"),
+                Text = Loc.GetString("cart-verb-deattach-attached-cart"),
                 Act = () => _cart.TryDeattachCart(attachedCart, args.User),
                 DoContactInteraction = false
             };

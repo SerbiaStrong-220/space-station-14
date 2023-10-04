@@ -7,6 +7,7 @@ using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Verbs;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Content.Shared.SS220.Cart;
 
@@ -43,9 +44,16 @@ public sealed class CartSystem : EntitySystem
 
     private void OnPullAttempt(EntityUid uid, CartComponent component, PullAttemptEvent args)
     {
-        // Have to additionaly do it to make it prettier
-        if (component.IsAttached)
-            args.Cancelled = true;
+        // Here I'm trying to make that you possibly could make a
+        // infinite "snake" of cart pullers if the entity has
+        // both a CartComponent and a CartPullerComponent.
+        if (args.Puller.Owner == uid)
+            return;
+
+        if (!component.IsAttached)
+            return;
+
+        args.Cancelled = true;
     }
 
     private void OnStopPull(EntityUid uid, CartComponent component, StopPullingEvent args)
@@ -118,7 +126,7 @@ public sealed class CartSystem : EntitySystem
 
         Verb verb = new()
         {
-            Text = Loc.GetString("cart-verb-deattach"),
+            Text = Loc.GetString("cart-verb-deattach-this-cart"),
             Act = () => TryDeattachCart(component, args.User),
             DoContactInteraction = false
         };
