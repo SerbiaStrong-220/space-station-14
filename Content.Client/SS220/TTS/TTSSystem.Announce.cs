@@ -41,6 +41,6 @@ public sealed partial class TTSSystem : EntitySystem
 
     private void OnTtsAnnounceVolumeChanged(float volume)
     {
-        _volume = volume;
+        VolumeAnnounce = volume;
     }
 }

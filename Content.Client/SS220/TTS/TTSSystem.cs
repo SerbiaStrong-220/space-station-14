@@ -58,7 +58,6 @@ public sealed partial class TTSSystem : EntitySystem
         base.Shutdown();
         _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
         _cfg.UnsubValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged);
-        _cfg.UnsubValueChanged(CCCVars.TTSAnnounceVolume, OnTtsVolumeChanged);
         _contentRoot.Dispose();
 
         ShutdownAnnounces();
