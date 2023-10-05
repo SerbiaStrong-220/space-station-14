@@ -5,7 +5,6 @@ using Content.Client.Clickable;
 using Content.Client.Corvax.DiscordAuth;
 using Content.Client.Corvax.JoinQueue;
 using Content.Client.Corvax.Sponsors;
-using Content.Client.Corvax.TTS;
 using Content.Client.Options;
 using Content.Client.Eui;
 using Content.Client.GhostKick;
@@ -53,7 +52,6 @@ namespace Content.Client.IoC
             IoCManager.Register<JobRequirementsManager>();
             IoCManager.Register<SponsorsManager>(); // Corvax-Sponsors
             IoCManager.Register<JoinQueueManager>(); // Corvax-Queue
-            IoCManager.Register<TTSManager>(); // Corvax-TTS
             IoCManager.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             IoCManager.Register<DocumentParsingManager>();
             IoCManager.Register<ContentReplayPlaybackManager, ContentReplayPlaybackManager>();
