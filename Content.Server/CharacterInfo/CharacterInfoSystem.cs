@@ -61,16 +61,16 @@ public sealed class CharacterInfoSystem : EntitySystem
 
     private void OnRequestAntagonistInfoEvent(RequestAntagonistInfoEvent msg, EntitySessionEventArgs args)
     {
-        if (!args.SenderSession.AttachedEntity.HasValue
-            || args.SenderSession.AttachedEntity != msg.EntityUid)
+        if (!args.SenderSession.AttachedEntity.HasValue)
             return;
 
-        var entity = args.SenderSession.AttachedEntity.Value;
+        var receiver = args.SenderSession.AttachedEntity.Value;
+        var antagonist = msg.EntityUid;
 
         var conditions = new Dictionary<string, List<ConditionInfo>>();
         var jobTitle = "No Profession";
         var briefing = "!!ERROR: No Briefing!!"; //should never show on the UI unless there's a bug
-        if (EntityManager.TryGetComponent(entity, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
+        if (EntityManager.TryGetComponent(antagonist, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
         {
             var mind = mindContainerComponent.Mind;
 
@@ -99,6 +99,6 @@ public sealed class CharacterInfoSystem : EntitySystem
             briefing = mind.Briefing;
         }
 
-        RaiseNetworkEvent(new AntagonistInfoEvent(entity, jobTitle, conditions, briefing), args.SenderSession);
+        RaiseNetworkEvent(new AntagonistInfoEvent(receiver, antagonist, jobTitle, conditions, briefing), args.SenderSession);
     }
 }

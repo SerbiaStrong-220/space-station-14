@@ -63,8 +63,8 @@ public sealed class CharacterInfoSystem : EntitySystem
 
     private void OnAntagonistInfoEvent(AntagonistInfoEvent msg, EntitySessionEventArgs args)
     {
-        var sprite = CompOrNull<SpriteComponent>(msg.EntityUid);
-        var data = new CharacterData(msg.JobTitle, msg.Objectives, msg.Briefing, sprite, Name(msg.EntityUid));
+        var sprite = CompOrNull<SpriteComponent>(msg.AntagonistEntityUid);
+        var data = new CharacterData(msg.JobTitle, msg.Objectives, msg.Briefing, sprite, Name(msg.AntagonistEntityUid));
 
         OnAntagonistUpdate?.Invoke(data);
     }

@@ -17,7 +17,7 @@ using static Content.Client.CharacterInfo.CharacterInfoSystem;
 namespace Content.Client.UserInterface.Systems.Admin
 {
     [UsedImplicitly]
-    public sealed class ObjectivesUIController : UIController, IOnSystemChanged<AdminSystem>
+    public sealed class ObjectivesUIController : UIController, IOnSystemChanged<AdminSystem>, IOnSystemChanged<CharacterInfoSystem>
     {
         private AdminSystem? _adminSystem;
         [UISystemDependency] private readonly CharacterInfoSystem _characterInfo = default!;
@@ -46,19 +46,9 @@ namespace Content.Client.UserInterface.Systems.Admin
             _window.Open();
         }
 
-        public void OnSystemLoaded(CharacterInfoSystem system)
-        {
-            system.OnCharacterUpdate += CharacterUpdated;
-            system.OnCharacterDetached += CharacterDetached;
-        }
+        
 
-        public void OnSystemUnloaded(CharacterInfoSystem system)
-        {
-            system.OnCharacterUpdate -= CharacterUpdated;
-            system.OnCharacterDetached -= CharacterDetached;
-        }
-
-        private void CharacterUpdated(CharacterData data)
+        private void AntagonistUpdated(CharacterData data)
         {
             if (_window == null)
             {
@@ -72,9 +62,10 @@ namespace Content.Client.UserInterface.Systems.Admin
                 return;
             }
 
+            _window.SubText.Text = job;
             _window.Objectives.RemoveAllChildren();
 
-            //_window.Title = $"{Loc.GetString("character-info-objectives-label")} {selectedAntagonist.CharacterName}";
+            _window.Title = $"{Loc.GetString("character-info-objectives-label")} {entityName}";
 
             foreach (var (groupId, conditions) in objectives)
             {
@@ -107,18 +98,29 @@ namespace Content.Client.UserInterface.Systems.Admin
                 }
 
                 var briefingControl = new ObjectiveBriefingControl();
+                briefingControl.Label.Text = briefing;
 
                 objectiveControl.AddChild(briefingControl);
                 _window.Objectives.AddChild(objectiveControl);
             }
+
+            _window.SpriteView.Sprite = sprite;
+            _window.NameLabel.Text = entityName;
         }
 
-        private void CharacterDetached()
+
+
+
+
+        public void OnSystemLoaded(CharacterInfoSystem system)
         {
-            //CloseWindow();
+            system.OnAntagonistUpdate += AntagonistUpdated;
         }
 
-
+        public void OnSystemUnloaded(CharacterInfoSystem system)
+        {
+            system.OnAntagonistUpdate -= AntagonistUpdated;
+        }
 
         public void OnSystemLoaded(AdminSystem system)
         {

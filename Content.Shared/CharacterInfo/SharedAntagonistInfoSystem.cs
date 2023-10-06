@@ -18,13 +18,15 @@ public sealed class RequestAntagonistInfoEvent : EntityEventArgs
 public sealed class AntagonistInfoEvent : EntityEventArgs
 {
     public readonly EntityUid EntityUid;
+    public readonly EntityUid AntagonistEntityUid;
     public readonly string JobTitle;
     public readonly Dictionary<string, List<ConditionInfo>> Objectives;
     public readonly string Briefing;
 
-    public AntagonistInfoEvent(EntityUid entityUid, string jobTitle, Dictionary<string, List<ConditionInfo>> objectives, string briefing)
+    public AntagonistInfoEvent(EntityUid entityUid, EntityUid antagonistEntityUid, string jobTitle, Dictionary<string, List<ConditionInfo>> objectives, string briefing)
     {
         EntityUid = entityUid;
+        AntagonistEntityUid = antagonistEntityUid;
         JobTitle = jobTitle;
         Objectives = objectives;
         Briefing = briefing;
