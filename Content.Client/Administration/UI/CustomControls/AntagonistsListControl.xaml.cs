@@ -27,7 +27,6 @@ namespace Content.Client.Administration.UI.CustomControls
         public AntagonistsListControl()
         {
             _adminSystem = EntitySystem.Get<AdminSystem>();
-            IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
             // Fill the Option data
             AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;

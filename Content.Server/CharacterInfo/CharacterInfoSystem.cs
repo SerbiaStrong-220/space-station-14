@@ -1,4 +1,4 @@
-﻿using Content.Server.Mind.Components;
+using Content.Server.Mind.Components;
 using Content.Server.Roles;
 using Content.Shared.CharacterInfo;
 using Content.Shared.Objectives;
@@ -13,6 +13,7 @@ public sealed class CharacterInfoSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<RequestCharacterInfoEvent>(OnRequestCharacterInfoEvent);
+        SubscribeNetworkEvent<RequestAntagonistInfoEvent>(OnRequestAntagonistInfoEvent);
     }
 
     private void OnRequestCharacterInfoEvent(RequestCharacterInfoEvent msg, EntitySessionEventArgs args)
@@ -56,5 +57,48 @@ public sealed class CharacterInfoSystem : EntitySystem
         }
 
         RaiseNetworkEvent(new CharacterInfoEvent(entity, jobTitle, conditions, briefing), args.SenderSession);
+    }
+
+    private void OnRequestAntagonistInfoEvent(RequestAntagonistInfoEvent msg, EntitySessionEventArgs args)
+    {
+        if (!args.SenderSession.AttachedEntity.HasValue
+            || args.SenderSession.AttachedEntity != msg.EntityUid)
+            return;
+
+        var entity = args.SenderSession.AttachedEntity.Value;
+
+        var conditions = new Dictionary<string, List<ConditionInfo>>();
+        var jobTitle = "No Profession";
+        var briefing = "!!ERROR: No Briefing!!"; //should never show on the UI unless there's a bug
+        if (EntityManager.TryGetComponent(entity, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
+        {
+            var mind = mindContainerComponent.Mind;
+
+            // Get objectives
+            foreach (var objective in mind.AllObjectives)
+            {
+                if (!conditions.ContainsKey(objective.Prototype.Issuer))
+                    conditions[objective.Prototype.Issuer] = new List<ConditionInfo>();
+                foreach (var condition in objective.Conditions)
+                {
+                    conditions[objective.Prototype.Issuer].Add(new ConditionInfo(condition.Title,
+                        condition.Description, condition.Icon, condition.Progress));
+                }
+            }
+
+            // Get job title
+            foreach (var role in mind.AllRoles)
+            {
+                if (role.GetType() != typeof(Job)) continue;
+
+                jobTitle = role.Name;
+                break;
+            }
+
+            // Get briefing
+            briefing = mind.Briefing;
+        }
+
+        RaiseNetworkEvent(new AntagonistInfoEvent(entity, jobTitle, conditions, briefing), args.SenderSession);
     }
 }

@@ -1,14 +1,18 @@
 using Content.Client.Administration.Systems;
+using Content.Client.CharacterInfo;
 using Content.Client.Players.PlayerInfo;
 using Content.Client.UserInterface.Systems.Character.Controls;
 using Content.Client.UserInterface.Systems.Objectives.Controls;
+using Content.Shared.CharacterInfo;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.Utility;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 using System.Linq;
+using static Content.Client.CharacterInfo.CharacterInfoSystem;
 
 namespace Content.Client.UserInterface.Systems.Admin
 {
@@ -16,6 +20,7 @@ namespace Content.Client.UserInterface.Systems.Admin
     public sealed class ObjectivesUIController : UIController, IOnSystemChanged<AdminSystem>
     {
         private AdminSystem? _adminSystem;
+        [UISystemDependency] private readonly CharacterInfoSystem _characterInfo = default!;
 
         private ObjectivesWindow? _window = default!;
 
@@ -37,18 +42,41 @@ namespace Content.Client.UserInterface.Systems.Admin
                 return;
             }
 
-            var selectedAntagonist = _adminSystem.PlayerList.Where(x => x.SessionId == sessionId).FirstOrDefault();
+            _characterInfo.RequestAntagonistInfo(_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).Select(s =>s.EntityUid).FirstOrDefault());//_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).FirstOrDefault();
+            _window.Open();
+        }
 
-            if (selectedAntagonist?.Objectives == null)
+        public void OnSystemLoaded(CharacterInfoSystem system)
+        {
+            system.OnCharacterUpdate += CharacterUpdated;
+            system.OnCharacterDetached += CharacterDetached;
+        }
+
+        public void OnSystemUnloaded(CharacterInfoSystem system)
+        {
+            system.OnCharacterUpdate -= CharacterUpdated;
+            system.OnCharacterDetached -= CharacterDetached;
+        }
+
+        private void CharacterUpdated(CharacterData data)
+        {
+            if (_window == null)
+            {
+                return;
+            }
+
+            var (job, objectives, briefing, sprite, entityName) = data;
+
+            if (objectives == null)
             {
                 return;
             }
 
             _window.Objectives.RemoveAllChildren();
 
-            _window.Title = $"{Loc.GetString("character-info-objectives-label")} {selectedAntagonist.CharacterName}";
+            //_window.Title = $"{Loc.GetString("character-info-objectives-label")} {selectedAntagonist.CharacterName}";
 
-            foreach (var (groupId, conditions) in selectedAntagonist.Objectives)
+            foreach (var (groupId, conditions) in objectives)
             {
                 var objectiveControl = new CharacterObjectiveControl
                 {
@@ -83,9 +111,14 @@ namespace Content.Client.UserInterface.Systems.Admin
                 objectiveControl.AddChild(briefingControl);
                 _window.Objectives.AddChild(objectiveControl);
             }
-
-            _window.Open();
         }
+
+        private void CharacterDetached()
+        {
+            //CloseWindow();
+        }
+
+
 
         public void OnSystemLoaded(AdminSystem system)
         {

@@ -1,19 +1,19 @@
-using Content.Shared.Objectives;
+//using Content.Shared.Objectives;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Administration
 {
-    [Serializable, NetSerializable]
-    public sealed class RequestObjectivesEvent : EntityEventArgs
-    {
-        public readonly NetUserId NetUserId;
+    //[Serializable, NetSerializable]
+    //public sealed class RequestObjectivesEvent : EntityEventArgs
+    //{
+    //    public readonly NetUserId NetUserId;
 
-        public RequestObjectivesEvent(NetUserId netUserId)
-        {
-            NetUserId = netUserId;
-        }
-    }
+    //    public RequestObjectivesEvent(NetUserId netUserId)
+    //    {
+    //        NetUserId = netUserId;
+    //    }
+    //}
 
     [Serializable, NetSerializable]
     public record PlayerInfo(
@@ -22,7 +22,7 @@ namespace Content.Shared.Administration
         string IdentityName,
         string StartingJob,
         bool Antag,
-        Dictionary<string, List<ConditionInfo>> Objectives,
+        //Dictionary<string, List<ConditionInfo>> Objectives,
         EntityUid? EntityUid,
         NetUserId SessionId,
         bool Connected,

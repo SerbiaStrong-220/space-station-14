@@ -281,7 +281,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
                 difficulty += objective.Difficulty;
         }
 
-        RaiseLocalEvent(new RequestObjectivesEvent(traitor.UserId));
+        //RaiseLocalEvent(new RequestObjectivesEvent(traitor.UserId));
 
         return true;
     }
