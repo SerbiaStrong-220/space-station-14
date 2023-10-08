@@ -2,6 +2,7 @@
 
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Foldable;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
@@ -24,8 +25,17 @@ public sealed class CartSystem : EntitySystem
         SubscribeLocalEvent<CartComponent, CartDeattachDoAfterEvent>(OnDeattachDoAfter);
         SubscribeLocalEvent<CartComponent, StopPullingEvent>(OnStopPull);
         SubscribeLocalEvent<CartComponent, PullAttemptEvent>(OnPullAttempt);
+        SubscribeLocalEvent<CartComponent, FoldAttemptEvent>(OnFoldAttempt);
         //SubscribeLocalEvent<CartComponent, CanDragEvent>(OnCanDrag);
         //SubscribeLocalEvent<CartComponent, CanDropDraggedEvent>(OnCanDropDragged);
+    }
+
+    private void OnFoldAttempt(EntityUid uid, CartComponent component, ref FoldAttemptEvent args)
+    {
+        if (!component.IsAttached)
+            return;
+
+        args.Cancelled = true;
     }
 
     //private void OnCanDrag(EntityUid uid, CartComponent component, ref CanDragEvent args)
@@ -152,6 +162,10 @@ public sealed class CartSystem : EntitySystem
         if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))
             return false;
 
+        // Prevent folded entities from attaching
+        if (TryComp<FoldableComponent>(cartComp.Owner, out var foldable) && foldable.IsFolded)
+            return false;
+
         var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cartComp.AttachToggleTime, new CartAttachDoAfterEvent(target),
             cartComp.Owner, target: cartComp.Owner)
         {
@@ -164,7 +178,7 @@ public sealed class CartSystem : EntitySystem
         return true;
     }
 
-    public bool TryDeattachCart(CartComponent cartComp, EntityUid user)
+    public bool TryDeattachCart(CartComponent cartComp, EntityUid? user)
     {
         if (!cartComp.IsAttached)
             return false;

@@ -5,6 +5,7 @@ using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
+using Content.Shared.Foldable;
 
 namespace Content.Shared.SS220.Cart;
 
@@ -105,8 +106,11 @@ public sealed partial class CartPullerSystem : EntitySystem
         if (cart == uid)
             return;
 
-        // If not pulling entity with cart component - return
         if (!TryComp<CartComponent>(cart, out var cartComp))
+            return;
+
+        // Prevent folded entities from attaching
+        if (TryComp<FoldableComponent>(cart, out var foldableComp) && foldableComp.IsFolded)
             return;
 
         Verb verb = new()
