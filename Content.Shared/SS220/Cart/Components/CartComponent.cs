@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.GameStates;
+using Content.Shared.Interaction;
 
 namespace Content.Shared.SS220.Cart.Components;
 
@@ -30,4 +31,11 @@ public sealed partial class CartComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
     public float AttachToggleTime = .3f;
+
+    /// <summary>
+    /// The range from which this cart can be attached to a <see cref="CartPullerComponent"/>
+    /// </summary
+    [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
+    public float AttachRange = SharedInteractionSystem.InteractionRange / 1.4f; // Also stolen from BuckleComponent
 }

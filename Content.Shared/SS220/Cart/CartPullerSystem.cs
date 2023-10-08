@@ -4,20 +4,22 @@ using Content.Shared.Verbs;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.DragDrop;
+using Content.Shared.Interaction;
 
 namespace Content.Shared.SS220.Cart;
 
 public sealed partial class CartPullerSystem : EntitySystem
 {
     [Dependency] private readonly CartSystem _cart = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<CartPullerComponent, GetVerbsEvent<Verb>>(AddCartVerbs);
-        SubscribeLocalEvent<CartPullerComponent, CanDropTargetEvent>(OnCanDrop);
-        SubscribeLocalEvent<CartPullerComponent, DragDropTargetEvent>(OnDragDropTarget);
+        //SubscribeLocalEvent<CartPullerComponent, CanDropTargetEvent>(OnCanDrop);
+        //SubscribeLocalEvent<CartPullerComponent, DragDropTargetEvent>(OnDragDropTarget);
         SubscribeLocalEvent<CartPullerComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CartPullerComponent, CartAttachEvent>(OnAttachCart);
         SubscribeLocalEvent<CartPullerComponent, CartDeattachEvent>(OnDeattachCart);
@@ -34,21 +36,45 @@ public sealed partial class CartPullerSystem : EntitySystem
         _cart.TryDeattachCart(uid, cartComp, null);
     }
 
-    private void OnCanDrop(EntityUid uid, CartPullerComponent component, ref CanDropTargetEvent args)
-    {
-        if (!component.AttachedCart.HasValue)
-            args.Handled = true;
-    }
+    //private void OnCanDrop(EntityUid uid, CartPullerComponent component, ref CanDropTargetEvent args)
+    //{
+    //    args.CanDrop = CartCanDragDropOn(uid, args.User, uid, args.Dragged, component);
+    //    args.Handled = true;
+    //}
 
-    private void OnDragDropTarget(EntityUid uid, CartPullerComponent component, ref DragDropTargetEvent args)
-    {
-        // Cart drag-drop attaching
-        if (!TryComp<CartComponent>(args.Dragged, out var cartComp))
-            return;
+    //private void OnDragDropTarget(EntityUid uid, CartPullerComponent component, ref DragDropTargetEvent args)
+    //{
+    //    // Cart drag-drop attaching
+    //    if (!CartCanDragDropOn(uid, args.User, uid, args.Dragged, component))
+    //        return;
 
-        _cart.TryAttachCart(uid, cartComp, args.User);
-        args.Handled = true;
-    }
+    //    if (!TryComp<CartComponent>(args.Dragged, out var cartComp))
+    //        return;
+
+    //    args.Handled = _cart.TryAttachCart(uid, cartComp, args.User);
+    //}
+
+    //// Successfully stolen from BuckleSystem lmao
+    //private bool CartCanDragDropOn(
+    //    EntityUid cartPuller,
+    //    EntityUid user,
+    //    EntityUid target,
+    //    EntityUid cart,
+    //    CartPullerComponent? cartPullerComp = null,
+    //    CartComponent? cartComp = null)
+    //{
+
+    //    if (!Resolve(cartPuller, ref cartPullerComp, false) ||
+    //        !Resolve(cart, ref cartComp, false))
+    //        return false;
+
+    //    if (cartPullerComp.AttachedCart.HasValue)
+    //        return false;
+
+    //    bool Ignored(EntityUid entity) => entity == user || entity == cart || entity == target;
+
+    //    return _interaction.InRangeUnobstructed(target, cart, cartComp.AttachRange, predicate: Ignored);
+    //}
 
     private void AddCartVerbs(EntityUid uid, CartPullerComponent component, GetVerbsEvent<Verb> args)
     {

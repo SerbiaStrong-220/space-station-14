@@ -7,7 +7,6 @@ using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Verbs;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Content.Shared.SS220.Cart;
 
@@ -25,22 +24,25 @@ public sealed class CartSystem : EntitySystem
         SubscribeLocalEvent<CartComponent, CartDeattachDoAfterEvent>(OnDeattachDoAfter);
         SubscribeLocalEvent<CartComponent, StopPullingEvent>(OnStopPull);
         SubscribeLocalEvent<CartComponent, PullAttemptEvent>(OnPullAttempt);
-        SubscribeLocalEvent<CartComponent, CanDragEvent>(OnCanDrag);
-        SubscribeLocalEvent<CartComponent, CanDropDraggedEvent>(OnCanDropDragged);
+        //SubscribeLocalEvent<CartComponent, CanDragEvent>(OnCanDrag);
+        //SubscribeLocalEvent<CartComponent, CanDropDraggedEvent>(OnCanDropDragged);
     }
 
-    private void OnCanDrag(EntityUid uid, CartComponent component, ref CanDragEvent args)
-    {
-        // Can't drag cart if it's already attached
-        if (!component.IsAttached)
-            args.Handled = true;
-    }
+    //private void OnCanDrag(EntityUid uid, CartComponent component, ref CanDragEvent args)
+    //{
+    //    // Can't drag cart if it's already attached
+    //    if (!component.IsAttached)
+    //        args.Handled = true;
+    //}
 
-    private void OnCanDropDragged(EntityUid uid, CartComponent component, ref CanDropDraggedEvent args)
-    {
-        if (TryComp<CartPullerComponent>(args.Target, out var cartPullerComp))
-            args.Handled = true;
-    }
+    //private void OnCanDropDragged(EntityUid uid, CartComponent component, ref CanDropDraggedEvent args)
+    //{
+    //    if (!HasComp<CartPullerComponent>(args.Target))
+    //        return;
+
+    //    args.CanDrop = true;
+    //    args.Handled = true;
+    //}
 
     private void OnPullAttempt(EntityUid uid, CartComponent component, PullAttemptEvent args)
     {
