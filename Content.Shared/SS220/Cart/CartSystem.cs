@@ -81,9 +81,6 @@ public sealed class CartSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-        if (!TryComp<CartPullerComponent>(args.AttachTarget, out var cartPuller))
-            return;
-
         if (!TryComp<SharedPullableComponent>(uid, out var pullable))
             return;
 
@@ -108,9 +105,6 @@ public sealed class CartSystem : EntitySystem
     private void OnDeattachDoAfter(EntityUid uid, CartComponent component, CartDeattachDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
-            return;
-
-        if (!TryComp<CartPullerComponent>(args.DeattachTarget, out var cartPuller))
             return;
 
         if (!TryComp<SharedPullableComponent>(uid, out var pullable))
@@ -147,23 +141,7 @@ public sealed class CartSystem : EntitySystem
 
     public bool TryAttachCart(EntityUid target, CartComponent cartComp, EntityUid user)
     {
-        if (cartComp.IsAttached)
-            return false;
-
-        if (target == cartComp.Owner)
-            return false;
-
-        if (!TryComp<CartPullerComponent>(target, out var cartPuller))
-            return false;
-
-        if (cartPuller.AttachedCart.HasValue)
-            return false;
-
-        if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))
-            return false;
-
-        // Prevent folded entities from attaching
-        if (TryComp<FoldableComponent>(cartComp.Owner, out var foldable) && foldable.IsFolded)
+        if (!IsAttachable(target, cartComp.Owner))
             return false;
 
         var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cartComp.AttachToggleTime, new CartAttachDoAfterEvent(target),
@@ -240,5 +218,37 @@ public sealed class CartSystem : EntitySystem
         cartComp.Puller = null;
         cartComp.IsAttached = false;
         Dirty(cartComp);
+    }
+
+    /// <summary>
+    /// Returns true if the cart attachable to the target
+    /// </summary>
+    /// <param name="target">Target for the cart to attach to</param>
+    /// <param name="cart"></param>
+    /// <returns></returns>
+    public bool IsAttachable(EntityUid target, EntityUid cart)
+    {
+        // God have mercy on me for all of this
+        // Return if trying to attach to themselves
+        if (target == cart)
+            return false;
+
+        if (!TryComp<CartComponent>(cart, out var cartComp) || !TryComp<CartPullerComponent>(target, out var cartPullerComp))
+            return false;
+
+        if (cartComp.IsAttached)
+            return false;
+
+        if (cartPullerComp.AttachedCart.HasValue)
+            return false;
+
+        if (!HasComp<SharedPullableComponent>(cart))
+            return false;
+
+        // Prevent folded entities from attaching
+        if (TryComp<FoldableComponent>(cart, out var foldableComp) && foldableComp.IsFolded)
+            return false;
+
+        return true;
     }
 }

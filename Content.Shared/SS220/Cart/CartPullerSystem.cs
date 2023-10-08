@@ -12,7 +12,7 @@ namespace Content.Shared.SS220.Cart;
 public sealed partial class CartPullerSystem : EntitySystem
 {
     [Dependency] private readonly CartSystem _cart = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    //[Dependency] private readonly SharedInteractionSystem _interaction = default!; Used for drag&drop
 
     public override void Initialize()
     {
@@ -102,15 +102,10 @@ public sealed partial class CartPullerSystem : EntitySystem
             return;
 
         var cart = userPullerComp.Pulling;
-        // If trying to attach themselves - return
-        if (cart == uid)
-            return;
-
         if (!TryComp<CartComponent>(cart, out var cartComp))
             return;
 
-        // Prevent folded entities from attaching
-        if (TryComp<FoldableComponent>(cart, out var foldableComp) && foldableComp.IsFolded)
+        if (!_cart.IsAttachable(uid, (EntityUid) cart))
             return;
 
         Verb verb = new()
