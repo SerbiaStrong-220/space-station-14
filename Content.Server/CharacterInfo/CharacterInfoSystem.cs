@@ -1,8 +1,8 @@
 using Content.Server.Mind.Components;
+using Content.Server.Objectives;
 using Content.Server.Roles;
 using Content.Shared.CharacterInfo;
 using Content.Shared.Objectives;
-using Robust.Shared.Player;
 
 namespace Content.Server.CharacterInfo;
 
@@ -18,39 +18,22 @@ public sealed class CharacterInfoSystem : EntitySystem
 
     private void OnRequestCharacterInfoEvent(RequestCharacterInfoEvent msg, EntitySessionEventArgs args)
     {
-        if (!args.SenderSession.AttachedEntity.HasValue
-            || args.SenderSession.AttachedEntity != msg.EntityUid)
+        if (!args.SenderSession.AttachedEntity.HasValue || args.SenderSession.AttachedEntity != msg.EntityUid)
             return;
 
         var entity = args.SenderSession.AttachedEntity.Value;
 
-        var conditions = new Dictionary<string, List<ConditionInfo>>();
         var jobTitle = "No Profession";
+        var conditions = new Dictionary<string, List<ConditionInfo>>();
         var briefing = "!!ERROR: No Briefing!!"; //should never show on the UI unless there's a bug
+
         if (EntityManager.TryGetComponent(entity, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
         {
             var mind = mindContainerComponent.Mind;
 
-            // Get objectives
-            foreach (var objective in mind.AllObjectives)
-            {
-                if (!conditions.ContainsKey(objective.Prototype.Issuer))
-                    conditions[objective.Prototype.Issuer] = new List<ConditionInfo>();
-                foreach (var condition in objective.Conditions)
-                {
-                    conditions[objective.Prototype.Issuer].Add(new ConditionInfo(condition.Title,
-                        condition.Description, condition.Icon, condition.Progress));
-                }
-            }
+            GetJobTitle(jobTitle, mind.AllRoles);
 
-            // Get job title
-            foreach (var role in mind.AllRoles)
-            {
-                if (role.GetType() != typeof(Job)) continue;
-
-                jobTitle = role.Name;
-                break;
-            }
+            GetConditions(conditions, mind.AllObjectives);
 
             // Get briefing
             briefing = mind.Briefing;
@@ -67,38 +50,45 @@ public sealed class CharacterInfoSystem : EntitySystem
         var receiver = args.SenderSession.AttachedEntity.Value;
         var antagonist = msg.EntityUid;
 
-        var conditions = new Dictionary<string, List<ConditionInfo>>();
         var jobTitle = "No Profession";
-        var briefing = "!!ERROR: No Briefing!!"; //should never show on the UI unless there's a bug
+        var conditions = new Dictionary<string, List<ConditionInfo>>();
+
         if (EntityManager.TryGetComponent(antagonist, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
         {
             var mind = mindContainerComponent.Mind;
 
-            // Get objectives
-            foreach (var objective in mind.AllObjectives)
-            {
-                if (!conditions.ContainsKey(objective.Prototype.Issuer))
-                    conditions[objective.Prototype.Issuer] = new List<ConditionInfo>();
-                foreach (var condition in objective.Conditions)
-                {
-                    conditions[objective.Prototype.Issuer].Add(new ConditionInfo(condition.Title,
-                        condition.Description, condition.Icon, condition.Progress));
-                }
-            }
+            GetJobTitle(jobTitle, mind.AllRoles);
 
-            // Get job title
-            foreach (var role in mind.AllRoles)
-            {
-                if (role.GetType() != typeof(Job)) continue;
-
-                jobTitle = role.Name;
-                break;
-            }
-
-            // Get briefing
-            briefing = mind.Briefing;
+            GetConditions(conditions, mind.AllObjectives);
         }
 
-        RaiseNetworkEvent(new AntagonistInfoEvent(receiver, antagonist, jobTitle, conditions, briefing), args.SenderSession);
+        RaiseNetworkEvent(new AntagonistInfoEvent(receiver, antagonist, jobTitle, conditions), args.SenderSession);
+    }
+
+    private void GetJobTitle(string jobTitle, IEnumerable<Role> roles)
+    {
+        // Get job title
+        foreach (var role in roles)
+        {
+            if (role.GetType() != typeof(Job)) continue;
+
+            jobTitle = role.Name;
+            break;
+        }
+    }
+
+    private void GetConditions(Dictionary<string, List<ConditionInfo>> conditions, IEnumerable<Objective> objectives)
+    {
+        // Get objectives
+        foreach (var objective in objectives)
+        {
+            if (!conditions.ContainsKey(objective.Prototype.Issuer))
+                conditions[objective.Prototype.Issuer] = new List<ConditionInfo>();
+            foreach (var condition in objective.Conditions)
+            {
+                conditions[objective.Prototype.Issuer].Add(new ConditionInfo(condition.Title,
+                    condition.Description, condition.Icon, condition.Progress));
+            }
+        }
     }
 }

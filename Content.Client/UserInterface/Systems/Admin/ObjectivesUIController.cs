@@ -3,7 +3,6 @@ using Content.Client.CharacterInfo;
 using Content.Client.Players.PlayerInfo;
 using Content.Client.UserInterface.Systems.Character.Controls;
 using Content.Client.UserInterface.Systems.Objectives.Controls;
-using Content.Shared.CharacterInfo;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -17,10 +16,10 @@ using static Content.Client.CharacterInfo.CharacterInfoSystem;
 namespace Content.Client.UserInterface.Systems.Admin
 {
     [UsedImplicitly]
-    public sealed class ObjectivesUIController : UIController, IOnSystemChanged<AdminSystem>, IOnSystemChanged<CharacterInfoSystem>
+    public sealed class ObjectivesUIController : UIController, IOnSystemChanged<AdminSystem>, IOnSystemChanged<AntagonistInfoSystem>
     {
         private AdminSystem? _adminSystem;
-        [UISystemDependency] private readonly CharacterInfoSystem _characterInfo = default!;
+        [UISystemDependency] private readonly AntagonistInfoSystem _antagonistInfo = default!;
 
         private ObjectivesWindow? _window = default!;
 
@@ -42,11 +41,9 @@ namespace Content.Client.UserInterface.Systems.Admin
                 return;
             }
 
-            _characterInfo.RequestAntagonistInfo(_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).Select(s =>s.EntityUid).FirstOrDefault());//_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).FirstOrDefault();
+            _antagonistInfo.RequestAntagonistInfo(_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).Select(s => s.EntityUid).FirstOrDefault());
             _window.Open();
         }
-
-        
 
         private void AntagonistUpdated(CharacterData data)
         {
@@ -97,29 +94,11 @@ namespace Content.Client.UserInterface.Systems.Admin
                     objectiveControl.AddChild(conditionControl);
                 }
 
-                var briefingControl = new ObjectiveBriefingControl();
-                briefingControl.Label.Text = briefing;
-
-                objectiveControl.AddChild(briefingControl);
                 _window.Objectives.AddChild(objectiveControl);
             }
 
             _window.SpriteView.Sprite = sprite;
             _window.NameLabel.Text = entityName;
-        }
-
-
-
-
-
-        public void OnSystemLoaded(CharacterInfoSystem system)
-        {
-            system.OnAntagonistUpdate += AntagonistUpdated;
-        }
-
-        public void OnSystemUnloaded(CharacterInfoSystem system)
-        {
-            system.OnAntagonistUpdate -= AntagonistUpdated;
         }
 
         public void OnSystemLoaded(AdminSystem system)
@@ -130,6 +109,16 @@ namespace Content.Client.UserInterface.Systems.Admin
         public void OnSystemUnloaded(AdminSystem system)
         {
             _adminSystem = system;
+        }
+
+        public void OnSystemLoaded(AntagonistInfoSystem system)
+        {
+            system.OnAntagonistUpdate += AntagonistUpdated;
+        }
+
+        public void OnSystemUnloaded(AntagonistInfoSystem system)
+        {
+            system.OnAntagonistUpdate -= AntagonistUpdated;
         }
     }
 }
