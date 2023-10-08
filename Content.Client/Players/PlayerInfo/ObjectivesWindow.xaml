@@ -1,5 +1,6 @@
 <windows:ObjectivesWindow
     xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:windows="clr-namespace:Content.Client.Players.PlayerInfo"
     Title="{Loc 'character-info-objectives-label'}"
     MinWidth="400"
@@ -13,8 +14,9 @@
                     <Label Name="SubText" VerticalAlignment="Top" StyleClasses="LabelSubText" Access="Public"/>
                 </BoxContainer>
             </BoxContainer>
-            <Label Text="{Loc 'character-info-objectives-label'}" HorizontalAlignment="Center"/>
+            <Label Name="ObjectivesLabel" Access="Public" Text="{Loc 'character-info-objectives-label'}" HorizontalAlignment="Center"/>
             <BoxContainer Orientation="Vertical" Name="Objectives" Access="Public"/>
+            <cc:Placeholder Name="RolePlaceholder" Access="Public" PlaceholderText="{Loc 'character-info-roles-antagonist-text'}"/>
         </BoxContainer>
     </ScrollContainer>
 </windows:ObjectivesWindow>

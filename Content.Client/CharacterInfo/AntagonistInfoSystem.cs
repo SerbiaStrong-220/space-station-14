@@ -36,7 +36,7 @@ public sealed class AntagonistInfoSystem : EntitySystem
     public List<Control> GetCharacterInfoControls(EntityUid uid)
     {
         var ev = new GetCharacterInfoControlsEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
+        RaiseLocalEvent(uid, ref ev);
         return ev.Controls;
     }
 }

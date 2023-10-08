@@ -16,6 +16,7 @@ namespace Content.Client.Administration.UI.CustomControls
     public sealed partial class AntagonistsListControl : BoxContainer
     {
         private readonly AdminSystem _adminSystem;
+        private readonly IEntityManager _entityManager;
 
         private List<PlayerInfo> _antagonistsList = new();
 
@@ -27,6 +28,7 @@ namespace Content.Client.Administration.UI.CustomControls
         public AntagonistsListControl()
         {
             _adminSystem = EntitySystem.Get<AdminSystem>();
+            _entityManager = IoCManager.Resolve<IEntityManager>();
             RobustXamlLoader.Load(this);
             // Fill the Option data
             AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
@@ -49,9 +51,11 @@ namespace Content.Client.Administration.UI.CustomControls
                 if (OverrideText != null && args.Button.Children.FirstOrDefault()?.Children?.FirstOrDefault() is Label label)
                     label.Text = GetText(selectedAntagonist);
             }
-            else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedAntagonist.EntityUid != null)
+            else if (args.Event.Function == EngineKeyFunctions.UseSecondary && selectedAntagonist.NetEntity != null)
             {
-                IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(selectedAntagonist.EntityUid.Value);
+                var entity = _entityManager.GetEntity(selectedAntagonist.NetEntity.Value);
+                if (_entityManager.EntityExists(entity))
+                    IoCManager.Resolve<IUserInterfaceManager>().GetUIController<VerbMenuUIController>().OpenVerbMenu(entity);
             }
         }
 

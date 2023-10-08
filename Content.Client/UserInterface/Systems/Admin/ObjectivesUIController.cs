@@ -4,6 +4,7 @@ using Content.Client.Players.PlayerInfo;
 using Content.Client.UserInterface.Systems.Character.Controls;
 using Content.Client.UserInterface.Systems.Objectives.Controls;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
@@ -19,7 +20,9 @@ namespace Content.Client.UserInterface.Systems.Admin
     public sealed class ObjectivesUIController : UIController, IOnSystemChanged<AdminSystem>, IOnSystemChanged<AntagonistInfoSystem>
     {
         private AdminSystem? _adminSystem;
+        private IEntityManager? _entityManager;
         [UISystemDependency] private readonly AntagonistInfoSystem _antagonistInfo = default!;
+        [UISystemDependency] private readonly SpriteSystem _sprite = default!;
 
         private ObjectivesWindow? _window = default!;
 
@@ -41,28 +44,88 @@ namespace Content.Client.UserInterface.Systems.Admin
                 return;
             }
 
-            _antagonistInfo.RequestAntagonistInfo(_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).Select(s => s.EntityUid).FirstOrDefault());
+            var entity = _entityManager?.GetEntity(_adminSystem.PlayerList.Where(x => x.SessionId == sessionId).Select(s => s.NetEntity).FirstOrDefault());
+            if (entity != null)
+                _antagonistInfo.RequestAntagonistInfo(entity);
+
             _window.Open();
         }
 
         private void AntagonistUpdated(CharacterData data)
         {
+            //if (_window == null)
+            //{
+            //    return;
+            //}
+
+            //var (job, objectives, briefing, sprite, entityName) = data;
+
+            //if (objectives == null)
+            //{
+            //    return;
+            //}
+
+            //_window.SubText.Text = job;
+            //_window.Objectives.RemoveAllChildren();
+
+            //_window.Title = $"{Loc.GetString("character-info-objectives-label")} {entityName}";
+
+            //foreach (var (groupId, conditions) in objectives)
+            //{
+            //    var objectiveControl = new CharacterObjectiveControl
+            //    {
+            //        Orientation = BoxContainer.LayoutOrientation.Vertical,
+            //        Modulate = Color.Gray
+            //    };
+
+            //    objectiveControl.AddChild(new Label
+            //    {
+            //        Text = groupId,
+            //        Modulate = Color.LightSkyBlue
+            //    });
+
+            //    foreach (var condition in conditions)
+            //    {
+            //        var conditionControl = new ObjectiveConditionsControl();
+            //        conditionControl.ProgressTexture.Texture = condition.SpriteSpecifier.Frame0();
+            //        conditionControl.ProgressTexture.Progress = condition.Progress;
+            //        var titleMessage = new FormattedMessage();
+            //        var descriptionMessage = new FormattedMessage();
+            //        titleMessage.AddText(condition.Title);
+            //        descriptionMessage.AddText(condition.Description);
+
+            //        conditionControl.Title.SetMessage(titleMessage);
+            //        conditionControl.Description.SetMessage(descriptionMessage);
+
+            //        objectiveControl.AddChild(conditionControl);
+            //    }
+
+            //    _window.Objectives.AddChild(objectiveControl);
+            //}
+
+            //_window.SpriteView.Sprite = sprite;
+            //_window.NameLabel.Text = entityName;
+
+
+
+
+
+
+
+
             if (_window == null)
             {
                 return;
             }
 
-            var (job, objectives, briefing, sprite, entityName) = data;
-
-            if (objectives == null)
-            {
-                return;
-            }
-
-            _window.SubText.Text = job;
-            _window.Objectives.RemoveAllChildren();
+            var (entity, job, objectives, briefing, entityName) = data;
 
             _window.Title = $"{Loc.GetString("character-info-objectives-label")} {entityName}";
+            _window.SpriteView.SetEntity(entity);
+            _window.NameLabel.Text = entityName;
+            _window.SubText.Text = job;
+            _window.Objectives.RemoveAllChildren();
+            _window.ObjectivesLabel.Visible = objectives.Any();
 
             foreach (var (groupId, conditions) in objectives)
             {
@@ -81,7 +144,7 @@ namespace Content.Client.UserInterface.Systems.Admin
                 foreach (var condition in conditions)
                 {
                     var conditionControl = new ObjectiveConditionsControl();
-                    conditionControl.ProgressTexture.Texture = condition.SpriteSpecifier.Frame0();
+                    conditionControl.ProgressTexture.Texture = _sprite.Frame0(condition.Icon);
                     conditionControl.ProgressTexture.Progress = condition.Progress;
                     var titleMessage = new FormattedMessage();
                     var descriptionMessage = new FormattedMessage();
@@ -97,18 +160,25 @@ namespace Content.Client.UserInterface.Systems.Admin
                 _window.Objectives.AddChild(objectiveControl);
             }
 
-            _window.SpriteView.Sprite = sprite;
-            _window.NameLabel.Text = entityName;
+            var controls = _antagonistInfo.GetCharacterInfoControls(entity);
+            foreach (var control in controls)
+            {
+                _window.Objectives.AddChild(control);
+            }
+
+            _window.RolePlaceholder.Visible = briefing == null && !controls.Any() && !objectives.Any();
         }
 
         public void OnSystemLoaded(AdminSystem system)
         {
             _adminSystem = system;
+            _entityManager = IoCManager.Resolve<IEntityManager>();
         }
 
         public void OnSystemUnloaded(AdminSystem system)
         {
             _adminSystem = system;
+            _entityManager = IoCManager.Resolve<IEntityManager>();
         }
 
         public void OnSystemLoaded(AntagonistInfoSystem system)
