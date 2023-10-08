@@ -185,13 +185,13 @@ public sealed class CartSystem : EntitySystem
         if (!cartComp.IsAttached)
             return false;
 
-        if (!TryComp<CartPullerComponent>(target, out var cartPuller))
+        if (!HasComp<CartPullerComponent>(target))
             return false;
 
-        if (!TryComp<SharedPullerComponent>(target, out var puller))
+        if (!HasComp<SharedPullerComponent>(target))
             return false;
 
-        if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))
+        if (!HasComp<SharedPullableComponent>(cartComp.Owner))
             return false;
 
         if (user == null)
@@ -215,7 +215,7 @@ public sealed class CartSystem : EntitySystem
 
     private void ForceDeattach(EntityUid target, CartComponent cartComp)
     {
-        if (!TryComp<CartPullerComponent>(target, out var CartPuller))
+        if (!HasComp<CartPullerComponent>(target))
             return;
 
         if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))

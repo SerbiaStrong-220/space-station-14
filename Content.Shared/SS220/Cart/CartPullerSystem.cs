@@ -5,7 +5,6 @@ using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
-using Content.Shared.Foldable;
 
 namespace Content.Shared.SS220.Cart;
 

@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
-using Content.Shared.Vehicle.Components;
 using JetBrains.Annotations;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -43,7 +42,7 @@ namespace Content.Shared.Pulling
             // networked for the space wizards to do it themselves
             // right after me, so this will work for now and I don't really care
             // COPIUM
-            if (!TryComp<CartPullerComponent>(uid, out var cartPuller))
+            if (!HasComp<CartPullerComponent>(uid))
                 return;
 
             component.NeedsHands = false;
