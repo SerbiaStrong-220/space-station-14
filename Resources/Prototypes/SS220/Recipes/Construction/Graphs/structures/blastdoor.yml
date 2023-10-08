@@ -9,7 +9,7 @@
             - !type:SnapToGrid { }
           steps:
             - material: Plasteel
-              amount: 16
+              amount: 8
               doAfter: 2
 
 
