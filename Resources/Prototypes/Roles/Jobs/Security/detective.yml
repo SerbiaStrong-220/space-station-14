@@ -6,7 +6,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 30000 # Corvax-RoleTime
+    time: 72000 # SS220-RoleTime
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
@@ -17,21 +17,22 @@
   - Maintenance
   - Service
   - Detective
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
 
 - type: startingGear
   id: DetectiveGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitDetective
-    back: ClothingBackpackSecurityFilled
+    back: ClothingBackpackSecurityFilledDetective
     shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesSunglasses
     head: ClothingHeadHatFedoraBrown
     outerClothing: ClothingOuterVestDetective
     id: DetectivePDA
     ears: ClothingHeadsetSecurity
-    pocket1: ForensicPad
-    pocket2: ForensicScanner
-    belt: ClothingBeltHolster
+    belt: ClothingBeltHolsterFilled
   innerclothingskirt: ClothingUniformJumpskirtDetective
-  satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled
+  satchel: ClothingBackpackSatchelSecurityFilledDetective
+  duffelbag: ClothingBackpackDuffelSecurityFilledDetective

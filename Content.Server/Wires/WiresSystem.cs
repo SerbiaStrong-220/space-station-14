@@ -2,6 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using Content.Server.Administration.Logs;
+using Content.Server.Construction;
+using Content.Server.Construction.Components;
 using Content.Server.Power.Components;
 using Content.Server.UserInterface;
 using Content.Shared.Database;
@@ -24,6 +26,7 @@ public sealed class WiresSystem : SharedWiresSystem
 {
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly ActivatableUISystem _activatableUI = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -32,7 +35,7 @@ public sealed class WiresSystem : SharedWiresSystem
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly WiresSystem _wiresSystem = default!;
+    [Dependency] private readonly ConstructionSystem _construction = default!;
 
     // This is where all the wire layouts are stored.
     [ViewVariables] private readonly Dictionary<string, WireLayout> _layouts = new();
@@ -58,8 +61,8 @@ public sealed class WiresSystem : SharedWiresSystem
         SubscribeLocalEvent<WiresComponent, WireDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<ActivatableUIRequiresPanelComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenActivatableUI);
         SubscribeLocalEvent<ActivatableUIRequiresPanelComponent, PanelChangedEvent>(OnActivatableUIPanelChanged);
+        SubscribeLocalEvent<WiresPanelSecurityComponent, WiresPanelSecurityEvent>(SetWiresPanelSecurity);
     }
-
     private void SetOrCreateWireLayout(EntityUid uid, WiresComponent? wires = null)
     {
         if (!Resolve(uid, ref wires))
@@ -459,7 +462,9 @@ public sealed class WiresSystem : SharedWiresSystem
         if (!TryComp<ToolComponent>(args.Used, out var tool) || !TryComp<WiresPanelComponent>(uid, out var panel))
             return;
 
-        if (panel.Open && panel.WiresAccessible &&
+        if (panel.Open &&
+            TryComp<WiresPanelSecurityComponent>(uid, out var wiresPanelSecurity) &&
+            wiresPanelSecurity.WiresAccessible &&
             (_toolSystem.HasQuality(args.Used, "Cutting", tool) ||
             _toolSystem.HasQuality(args.Used, "Pulsing", tool)))
         {
@@ -511,10 +516,7 @@ public sealed class WiresSystem : SharedWiresSystem
         if (args.Open == component.RequireOpen)
             return;
 
-        if (!TryComp<ActivatableUIComponent>(uid, out var ui) || ui.Key == null)
-            return;
-
-        _uiSystem.TryCloseAll(uid, ui.Key);
+        _activatableUI.CloseAll(uid);
     }
 
     private void OnMapInit(EntityUid uid, WiresComponent component, MapInitEvent args)
@@ -527,6 +529,14 @@ public sealed class WiresSystem : SharedWiresSystem
 
         if (component.WireSeed == 0)
             component.WireSeed = _random.Next(1, int.MaxValue);
+
+        // Update the construction graph to make sure that it starts on the node specified by WiresPanelSecurityComponent
+        if (TryComp<WiresPanelSecurityComponent>(uid, out var wiresPanelSecurity) &&
+            !string.IsNullOrEmpty(wiresPanelSecurity.SecurityLevel) &&
+            TryComp<ConstructionComponent>(uid, out var construction))
+        {
+            _construction.ChangeNode(uid, null, wiresPanelSecurity.SecurityLevel, true, construction);
+        }
 
         UpdateUserInterface(uid);
     }
@@ -568,7 +578,7 @@ public sealed class WiresSystem : SharedWiresSystem
         UpdateUserInterface(uid);
     }
 
-    private void UpdateUserInterface(EntityUid uid, WiresComponent? wires = null, ServerUserInterfaceComponent? ui = null)
+    private void UpdateUserInterface(EntityUid uid, WiresComponent? wires = null, UserInterfaceComponent? ui = null)
     {
         if (!Resolve(uid, ref wires, ref ui, false)) // logging this means that we get a bunch of errors
             return;
@@ -598,7 +608,7 @@ public sealed class WiresSystem : SharedWiresSystem
         _uiSystem.TrySetUiState(uid, WiresUiKey.Key, new WiresBoundUserInterfaceState(
             clientList.ToArray(),
             statuses.Select(p => new StatusEntry(p.key, p.value)).ToArray(),
-            wires.BoardName,
+            Loc.GetString(wires.BoardName),
             wires.SerialNumber,
             wires.WireSeed), ui: ui);
     }
@@ -645,31 +655,27 @@ public sealed class WiresSystem : SharedWiresSystem
     {
         component.Visible = visible;
         UpdateAppearance(uid, component);
-        Dirty(component);
+        Dirty(uid, component);
     }
 
     public void TogglePanel(EntityUid uid, WiresPanelComponent component, bool open)
     {
         component.Open = open;
         UpdateAppearance(uid, component);
-        Dirty(component);
+        Dirty(uid, component);
 
         var ev = new PanelChangedEvent(component.Open);
         RaiseLocalEvent(uid, ref ev);
     }
 
-    public void SetWiresPanelSecurityData(EntityUid uid, WiresPanelComponent component, string wiresPanelSecurityLevelID)
+    public void SetWiresPanelSecurity(EntityUid uid, WiresPanelSecurityComponent component, WiresPanelSecurityEvent args)
     {
-        var wiresPanelSecurityLevelPrototype = _protoMan.Index<WiresPanelSecurityLevelPrototype>(wiresPanelSecurityLevelID);
+        component.Examine = args.Examine;
+        component.WiresAccessible = args.WiresAccessible;
 
-        if (wiresPanelSecurityLevelPrototype == null)
-            return;
+        Dirty(uid, component);
 
-        component.WiresAccessible = wiresPanelSecurityLevelPrototype.WiresAccessible;
-        component.WiresPanelSecurityExamination = wiresPanelSecurityLevelPrototype.Examine;
-        Dirty(component);
-
-        if (wiresPanelSecurityLevelPrototype?.WiresAccessible == false)
+        if (!args.WiresAccessible)
         {
             _uiSystem.TryCloseAll(uid, WiresUiKey.Key);
         }
@@ -745,7 +751,7 @@ public sealed class WiresSystem : SharedWiresSystem
 
         if (_toolTime > 0f)
         {
-            var args = new DoAfterArgs(user, _toolTime, new WireDoAfterEvent(action, id), target, target: target, used: toolEntity)
+            var args = new DoAfterArgs(EntityManager, user, _toolTime, new WireDoAfterEvent(action, id), target, target: target, used: toolEntity)
             {
                 NeedHand = true,
                 BreakOnDamage = true,

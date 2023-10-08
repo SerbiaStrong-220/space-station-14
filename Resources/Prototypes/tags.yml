@@ -5,6 +5,9 @@
   id: AirAlarmElectronics
 
 - type: Tag
+  id: Airlock
+
+- type: Tag
   id: AirSensor
 
 - type: Tag
@@ -17,6 +20,9 @@
   id: ArtifactFragment
 
 - type: Tag
+  id: Arrow
+
+- type: Tag
   id: ATVKeys
 
 - type: Tag
@@ -27,6 +33,9 @@
 
 - type: Tag
   id: BaseballBat
+
+- type: Tag
+  id: BBQsauce
 
 - type: Tag
   id: Bee
@@ -306,6 +315,9 @@
   id: Corn
 
 - type: Tag
+  id: Coldsauce
+
+- type: Tag
   id: Cow
 
 - type: Tag
@@ -480,6 +492,9 @@
   id: GeigerCounter
 
 - type: Tag
+  id: GlassAirlock
+
+- type: Tag
   id: GlassBeaker
 
 - type: Tag
@@ -493,7 +508,6 @@
 
 - type: Tag
   id: GuideEmbeded
-
 
 - type: Tag
   id: Hamster
@@ -525,7 +539,6 @@
 - type: Tag
   id: HappyHonk
 
-
 - type: Tag
   id: Hardsuit # Prevent melee injectors that can't penetrate hardsuits from injecting the wearer (nettles)
 
@@ -539,10 +552,16 @@
   id: HideContextMenu
 
 - type: Tag
+  id: HideCorgi # corgi hide for crafting, not for making corgis invisible
+
+- type: Tag
   id: HidesHair # for headwear.
 
 - type: Tag
   id: HighRiskItem
+
+- type: Tag
+  id: HighSecDoor
 
 - type: Tag
   id: Hoe
@@ -574,6 +593,9 @@
 - type: Tag
   id: HonkerRArm
 
+- type: Tag
+  id: Hotsauce
+
 - type: Tag #Drop this innate tool instead of deleting it.
   id: InnateDontDelete
 
@@ -598,6 +620,8 @@
 - type: Tag
   id: Kangaroo
 
+- type: Tag
+  id: Ketchup
 
 - type: Tag
   id: KeyedInstrument
@@ -707,6 +731,12 @@
   id: Mop
 
 - type: Tag
+  id: MopAdv
+
+- type: Tag
+  id: MopBasic
+
+- type: Tag
   id: Mouse
 
 - type: Tag
@@ -721,6 +751,9 @@
 
 - type: Tag
   id: NukeOpsUplink
+
+- type: Tag
+  id: LoneOpsUplink
 
 - type: Tag
   id: Ointment
@@ -742,6 +775,9 @@
 
 - type: Tag
   id: PetWearable
+
+- type: Tag
+  id: MonkeyWearable
 
 - type: Tag
   id: Pickaxe
@@ -782,6 +818,14 @@
 - type: Tag
   id: PlushieGhost
 
+- type: Tag
+  id: PlushieSharkBlue
+
+- type: Tag
+  id: PlushieSharkPink
+
+- type: Tag
+  id: PlushieSharkGrey
 
 - type: Tag
   id: PowerCellSmall
@@ -861,6 +905,9 @@
 
 - type: Tag
   id: Shovel
+
+- type: Tag
+  id: Sidearm
 
 - type: Tag
   id: SkeletonMotorcycleKeys
@@ -989,6 +1036,9 @@
   id: WallmountSubstationElectronics
 
 - type: Tag
+  id: WeaponPistolCHIMPUpgradeKit
+
+- type: Tag
   id: Window
 
 - type: Tag
@@ -1023,3 +1073,6 @@
 
 - type: Tag
   id: ZombifyableByMelee
+
+- type: Tag
+  id: MindShield

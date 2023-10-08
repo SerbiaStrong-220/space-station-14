@@ -9,6 +9,7 @@ using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
+using Content.Shared.SS220.Damage;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -23,7 +24,6 @@ namespace Content.Server.Damage.Systems
         [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
         [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
         [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
         [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
 
         public override void Initialize()
@@ -34,7 +34,15 @@ namespace Content.Server.Damage.Systems
 
         private void OnDoHit(EntityUid uid, DamageOtherOnHitComponent component, ThrowDoHitEvent args)
         {
+            // SS220-Stunbaton-rework begin
+            var hitEv = new GetDamageOtherOnHitEvent(GetNetEntity(uid), GetNetEntity(args.Target), component.Damage, component.IgnoreResistances);
+            RaiseLocalEvent(uid, hitEv);
+
+            if (hitEv.Handled)
+                return;
+
             var dmg = _damageable.TryChangeDamage(args.Target, component.Damage, component.IgnoreResistances, origin: args.Component.Thrower);
+            // SS220-Stunbaton-rework end
 
             // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
             if (dmg != null && HasComp<MobStateComponent>(args.Target))
@@ -48,10 +56,10 @@ namespace Content.Server.Damage.Systems
                 _sharedCameraRecoil.KickCamera(args.Target, direction);
             }
 
+            // TODO: If more stuff touches this then handle it after.
             if (TryComp<PhysicsComponent>(uid, out var physics))
             {
                 _thrownItem.LandComponent(args.Thrown, args.Component, physics, false);
-                _physics.ResetDynamics(physics);
             }
         }
 

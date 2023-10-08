@@ -8,7 +8,7 @@ using Content.Server.Connection;
 using Content.Server.Corvax.DiscordAuth;
 using Content.Server.Corvax.JoinQueue;
 using Content.Server.Corvax.Sponsors;
-using Content.Server.Corvax.TTS;
+using Content.Server.SS220.TTS;
 using Content.Server.Database;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
@@ -50,8 +50,6 @@ namespace Content.Server.Entry
         private PlayTimeTrackingManager? _playTimeTracking;
         private IEntitySystemManager? _sysMan;
         private IServerDbManager? _dbManager;
-
-        private ServerControlController? _controlController;
 
         /// <inheritdoc />
         public override void Init()
@@ -120,8 +118,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
                 IoCManager.Resolve<Primelist>().Initialize();
                 IoCManager.Resolve<DiscordPlayerManager>().Initialize();
-                _controlController = IoCManager.Resolve<ServerControlController>();
-                _controlController.Initialize();
+                IoCManager.Resolve<ServerControlController>().Initialize();
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();
@@ -161,8 +158,6 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<GameTicker>().PostInitialize();
                 IoCManager.Resolve<IBanManager>().Initialize();
             }
-
-            _controlController?.PostInitialize();
         }
 
         public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)

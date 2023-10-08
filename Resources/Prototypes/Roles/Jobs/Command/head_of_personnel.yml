@@ -4,15 +4,13 @@
   description: job-description-hop
   playTimeTracker: JobHeadOfPersonnel
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Command
-      time: 36000 # SS220-RoleTime
+    - !type:OverallPlaytimeRequirement
+      time: 180000 # SS220-RoleTime
   weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   requireAdminNotify: true
   supervisors: job-supervisors-captain
-  canBeAntag: false
   radioBold: true
   access:
   - Command
@@ -39,6 +37,12 @@
   - Cargo
   - Atmospherics
   - Medical
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
 
 - type: startingGear
   id: HoPGear
@@ -49,6 +53,7 @@
     head: ClothingHeadHatHopcap
     id: HoPPDA
     ears: ClothingHeadsetAltCommand
+    belt: BoxFolderClipboard
   innerclothingskirt: ClothingUniformJumpskirtHoP
   satchel: ClothingBackpackSatchelHOPFilled
   duffelbag: ClothingBackpackDuffelHOPFilled

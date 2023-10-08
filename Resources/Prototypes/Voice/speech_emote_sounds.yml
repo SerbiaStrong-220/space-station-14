@@ -32,6 +32,18 @@
       collection: MaleCry
     Whistle:
       collection: Whistles
+    Fart: #SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds begin
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
 
 - type: emoteSounds
   id: FemaleHuman
@@ -66,6 +78,18 @@
       collection: FemaleCry
     Whistle:
       collection: Whistles
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+    #SS220 emote sounds end
 
 - type: emoteSounds
   id: UnisexReptilian
@@ -82,6 +106,18 @@
       collection: Whistles
     Crying:
       collection: MaleCry
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
 
 - type: emoteSounds
   id: MaleSlime
@@ -116,6 +152,18 @@
       collection: MaleCry
     Whistle:
       collection: Whistles
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
   params:
     variation: 0.125
 
@@ -152,11 +200,32 @@
       collection: FemaleCry
     Whistle:
       collection: Whistles
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+    #SS220 emote sounds end
   params:
     variation: 0.125
 
 - type: emoteSounds
   id: UnisexVox
+  sounds:
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
   sound:
     path: /Audio/Voice/Vox/shriek1.ogg
     params:
@@ -184,6 +253,14 @@
       path: /Audio/Voice/Arachnid/arachnid_scream.ogg
     Laugh:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
 
 - type: emoteSounds
   id: UnisexDwarf
@@ -216,6 +293,18 @@
       collection: MaleCry
     Whistle:
       collection: Whistles
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds begin
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
   params:
     variation: 0.125
     pitchscale: 0.75
@@ -251,6 +340,9 @@
       collection: FemaleCry
     Whistle:
       collection: Whistles
+    CritGasp:
+      collection: FemaleCritGasp
+    #SS220 emote sounds end
   params:
     variation: 0.125
     pitchscale: 0.75
@@ -268,6 +360,14 @@
       path: /Audio/Voice/Moth/moth_chitter.ogg
     Squeak:
       path: /Audio/Voice/Moth/moth_squeak.ogg
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    #SS220 emote sounds end
 
 # body emotes
 - type: emoteSounds

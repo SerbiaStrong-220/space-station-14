@@ -4,6 +4,7 @@ using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -12,14 +13,14 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Components;
-using Content.Shared.Pulling.Events;
+using Content.Shared.SS220.Buckle;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Verbs;
-using Robust.Shared.GameStates;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Utility;
 
@@ -31,7 +32,6 @@ public abstract partial class SharedBuckleSystem
     {
         SubscribeLocalEvent<BuckleComponent, ComponentStartup>(OnBuckleComponentStartup);
         SubscribeLocalEvent<BuckleComponent, ComponentShutdown>(OnBuckleComponentShutdown);
-        SubscribeLocalEvent<BuckleComponent, ComponentGetState>(OnBuckleComponentGetState);
         SubscribeLocalEvent<BuckleComponent, MoveEvent>(OnBuckleMove);
         SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand);
         SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<InteractionVerb>>(AddUnbuckleVerb);
@@ -43,6 +43,7 @@ public abstract partial class SharedBuckleSystem
         SubscribeLocalEvent<BuckleComponent, ThrowPushbackAttemptEvent>(OnBuckleThrowPushbackAttempt);
         SubscribeLocalEvent<BuckleComponent, UpdateCanMoveEvent>(OnBuckleUpdateCanMove);
         SubscribeLocalEvent<BuckleComponent, ChangeDirectionAttemptEvent>(OnBuckleChangeDirectionAttempt);
+        SubscribeLocalEvent<BuckleComponent, UnbuckleDoAfterEvent>(OnUnbuckleDoAfter);
     }
 
     private void OnBuckleComponentStartup(EntityUid uid, BuckleComponent component, ComponentStartup args)
@@ -57,10 +58,16 @@ public abstract partial class SharedBuckleSystem
         component.BuckleTime = default;
     }
 
-    private void OnBuckleComponentGetState(EntityUid uid, BuckleComponent component, ref ComponentGetState args)
+    //SS220-Vehicle-doafter-fix begin
+    private void OnUnbuckleDoAfter(EntityUid uid, BuckleComponent component, UnbuckleDoAfterEvent args)
     {
-        args.State = new BuckleComponentState(component.Buckled, component.BuckledTo, component.LastEntityBuckledTo, component.DontCollide);
+        if (args.Handled || args.Cancelled)
+            return;
+
+        TryUnbuckle(uid, uid, false, component);
+        args.Handled = true;
     }
+    //SS220-Vehicle-doafter-fix end
 
     private void OnBuckleMove(EntityUid uid, BuckleComponent component, ref MoveEvent ev)
     {
@@ -71,7 +78,7 @@ public abstract partial class SharedBuckleSystem
             return;
 
         var strapPosition = Transform(strapUid).Coordinates;
-        if (ev.NewPosition.InRange(EntityManager, _transformSystem, strapPosition, strapComp.MaxBuckleDistance))
+        if (ev.NewPosition.InRange(EntityManager, _transform, strapPosition, strapComp.MaxBuckleDistance))
             return;
 
         TryUnbuckle(uid, uid, true, component);
@@ -172,6 +179,11 @@ public abstract partial class SharedBuckleSystem
         return Resolve(uid, ref component, false) && component.Buckled;
     }
 
+    public bool IsFastenedSeatbelt(EntityUid uid, BuckleComponent? component = null)
+    {
+        return Resolve(uid, ref component, false) && component.FastenedSeatbelt;
+    }
+
     /// <summary>
     /// Shows or hides the buckled status effect depending on if the
     /// entity is buckled or not.
@@ -181,18 +193,18 @@ public abstract partial class SharedBuckleSystem
     /// <param name="strapComp"> strap component of the thing we are strapping to </param>
     private void UpdateBuckleStatus(EntityUid uid, BuckleComponent buckleComp, StrapComponent? strapComp = null)
     {
-        AppearanceSystem.SetData(uid, StrapVisuals.State, buckleComp.Buckled);
+        Appearance.SetData(uid, StrapVisuals.State, buckleComp.Buckled);
         if (buckleComp.BuckledTo != null)
         {
             if (!Resolve(buckleComp.BuckledTo.Value, ref strapComp))
                 return;
 
             var alertType = strapComp.BuckledAlertType;
-            _alertsSystem.ShowAlert(uid, alertType);
+            _alerts.ShowAlert(uid, alertType);
         }
         else
         {
-            _alertsSystem.ClearAlertCategory(uid, AlertCategory.Buckled);
+            _alerts.ClearAlertCategory(uid, AlertCategory.Buckled);
         }
     }
 
@@ -203,20 +215,23 @@ public abstract partial class SharedBuckleSystem
     private void SetBuckledTo(EntityUid buckleUid, EntityUid? strapUid, StrapComponent? strapComp, BuckleComponent buckleComp)
     {
         buckleComp.BuckledTo = strapUid;
+        var strapHasSeatbelt = strapComp?.HasSeatbelt;
 
         if (strapUid == null)
         {
             buckleComp.Buckled = false;
+            buckleComp.FastenedSeatbelt = false;
         }
         else
         {
             buckleComp.LastEntityBuckledTo = strapUid;
             buckleComp.DontCollide = true;
             buckleComp.Buckled = true;
+            buckleComp.FastenedSeatbelt = strapHasSeatbelt ?? false;
             buckleComp.BuckleTime = _gameTiming.CurTime;
         }
 
-        ActionBlockerSystem.UpdateCanMove(buckleUid);
+        ActionBlocker.UpdateCanMove(buckleUid);
         UpdateBuckleStatus(buckleUid, buckleComp, strapComp);
         Dirty(buckleComp);
     }
@@ -252,24 +267,24 @@ public abstract partial class SharedBuckleSystem
             !strapComp.AllowedEntities.IsValid(userUid, EntityManager))
         {
             if (_netManager.IsServer)
-                _popupSystem.PopupEntity(Loc.GetString("buckle-component-cannot-fit-message"), userUid, buckleUid, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("buckle-component-cannot-fit-message"), userUid, buckleUid, PopupType.Medium);
             return false;
         }
 
         // Is it within range
         bool Ignored(EntityUid entity) => entity == buckleUid || entity == userUid || entity == strapUid;
 
-        if (!_interactionSystem.InRangeUnobstructed(buckleUid, strapUid, buckleComp.Range, predicate: Ignored,
+        if (!_interaction.InRangeUnobstructed(buckleUid, strapUid, buckleComp.Range, predicate: Ignored,
                 popup: true))
         {
             return false;
         }
 
         // If in a container
-        if (_containerSystem.TryGetContainingContainer(buckleUid, out var ownerContainer))
+        if (_container.TryGetContainingContainer(buckleUid, out var ownerContainer))
         {
             // And not in the same container as the strap
-            if (!_containerSystem.TryGetContainingContainer(strapUid, out var strapContainer) ||
+            if (!_container.TryGetContainingContainer(strapUid, out var strapContainer) ||
                 ownerContainer != strapContainer)
             {
                 return false;
@@ -280,7 +295,7 @@ public abstract partial class SharedBuckleSystem
         {
             // PopupPredicted when
             if (_netManager.IsServer)
-                _popupSystem.PopupEntity(Loc.GetString("buckle-component-no-hands-message"), userUid, userUid);
+                _popup.PopupEntity(Loc.GetString("buckle-component-no-hands-message"), userUid, userUid);
             return false;
         }
 
@@ -291,7 +306,7 @@ public abstract partial class SharedBuckleSystem
                     : "buckle-component-other-already-buckled-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
             if (_netManager.IsServer)
-                _popupSystem.PopupEntity(message, userUid, userUid);
+                _popup.PopupEntity(message, userUid, userUid);
 
             return false;
         }
@@ -305,7 +320,7 @@ public abstract partial class SharedBuckleSystem
                     ? "buckle-component-cannot-buckle-message"
                     : "buckle-component-other-cannot-buckle-message", ("owner", Identity.Entity(buckleUid, EntityManager)));
                 if (_netManager.IsServer)
-                    _popupSystem.PopupEntity(message, userUid, userUid);
+                    _popup.PopupEntity(message, userUid, userUid);
 
                 return false;
             }
@@ -319,7 +334,7 @@ public abstract partial class SharedBuckleSystem
                 ? "buckle-component-cannot-fit-message"
                 : "buckle-component-other-cannot-fit-message", ("owner", Identity.Entity(buckleUid, EntityManager)));
             if (_netManager.IsServer)
-                _popupSystem.PopupEntity(message, userUid, userUid);
+                _popup.PopupEntity(message, userUid, userUid);
 
             return false;
         }
@@ -345,59 +360,64 @@ public abstract partial class SharedBuckleSystem
     /// <param name="strapUid"> Uid of the owner of strap component </param>
     public bool TryBuckle(EntityUid buckleUid, EntityUid userUid, EntityUid strapUid, BuckleComponent? buckleComp = null)
     {
-       if (!Resolve(buckleUid, ref buckleComp, false))
+        if (!Resolve(buckleUid, ref buckleComp, false))
             return false;
 
-       if (!CanBuckle(buckleUid, userUid, strapUid, out var strapComp, buckleComp))
-           return false;
+        if (!CanBuckle(buckleUid, userUid, strapUid, out var strapComp, buckleComp))
+            return false;
 
-       if (!StrapTryAdd(strapUid, buckleUid, buckleComp, false, strapComp))
-       {
-           var message = Loc.GetString(buckleUid == userUid
-               ? "buckle-component-cannot-buckle-message"
-               : "buckle-component-other-cannot-buckle-message", ("owner", Identity.Entity(buckleUid, EntityManager)));
+        if (!StrapTryAdd(strapUid, buckleUid, buckleComp, false, strapComp))
+        {
+            var message = Loc.GetString(buckleUid == userUid
+                ? "buckle-component-cannot-buckle-message"
+                : "buckle-component-other-cannot-buckle-message", ("owner", Identity.Entity(buckleUid, EntityManager)));
             if (_netManager.IsServer)
-               _popupSystem.PopupEntity(message, userUid, userUid);
-           return false;
-       }
+                _popup.PopupEntity(message, userUid, userUid);
+            return false;
+        }
 
-       if (TryComp<AppearanceComponent>(buckleUid, out var appearance))
-           AppearanceSystem.SetData(buckleUid, BuckleVisuals.Buckled, true, appearance);
+        if (TryComp<AppearanceComponent>(buckleUid, out var appearance))
+            Appearance.SetData(buckleUid, BuckleVisuals.Buckled, true, appearance);
 
-       ReAttach(buckleUid, strapUid, buckleComp, strapComp);
-       SetBuckledTo(buckleUid,strapUid, strapComp, buckleComp);
-       // TODO user is currently set to null because if it isn't the sound fails to play in some situations, fix that
-       var audioSourceUid = userUid == buckleUid ? userUid : strapUid;
-       _audioSystem.PlayPredicted(strapComp.BuckleSound, strapUid, audioSourceUid);
+        ReAttach(buckleUid, strapUid, buckleComp, strapComp);
+        SetBuckledTo(buckleUid, strapUid, strapComp, buckleComp);
+        // TODO user is currently set to null because if it isn't the sound fails to play in some situations, fix that
+        var audioSourceUid = userUid == buckleUid ? userUid : strapUid;
+        _audio.PlayPredicted(strapComp.BuckleSound, strapUid, audioSourceUid);
 
-       var ev = new BuckleChangeEvent(strapUid, buckleUid, true);
-       RaiseLocalEvent(ev.BuckledEntity, ref ev);
-       RaiseLocalEvent(ev.StrapEntity, ref ev);
+        var ev = new BuckleChangeEvent(strapUid, buckleUid, true);
+        RaiseLocalEvent(ev.BuckledEntity, ref ev);
+        RaiseLocalEvent(ev.StrapEntity, ref ev);
 
-       if (TryComp<SharedPullableComponent>(buckleUid, out var ownerPullable))
-       {
-           if (ownerPullable.Puller != null)
-           {
-               _pullingSystem.TryStopPull(ownerPullable);
-           }
-       }
+        if (TryComp<SharedPullableComponent>(buckleUid, out var ownerPullable))
+        {
+            if (ownerPullable.Puller != null)
+            {
+                _pulling.TryStopPull(ownerPullable);
+            }
+        }
 
-       if (!buckleComp.PullStrap && TryComp<SharedPullableComponent>(strapUid, out var toPullable))
-       {
-           if (toPullable.Puller == buckleUid)
-           {
-               // can't pull it and buckle to it at the same time
-               _pullingSystem.TryStopPull(toPullable);
-           }
-       }
+        if (TryComp<PhysicsComponent>(buckleUid, out var physics))
+        {
+            _physics.ResetDynamics(physics);
+        }
 
-       // Logging
-       if (userUid != buckleUid)
-           _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(userUid):player} buckled {ToPrettyString(buckleUid)} to {ToPrettyString(strapUid)}");
-       else
-           _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(userUid):player} buckled themselves to {ToPrettyString(strapUid)}");
+        if (!buckleComp.PullStrap && TryComp<SharedPullableComponent>(strapUid, out var toPullable))
+        {
+            if (toPullable.Puller == buckleUid)
+            {
+                // can't pull it and buckle to it at the same time
+                _pulling.TryStopPull(toPullable);
+            }
+        }
 
-       return true;
+        // Logging
+        if (userUid != buckleUid)
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(userUid):player} buckled {ToPrettyString(buckleUid)} to {ToPrettyString(strapUid)}");
+        else
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(userUid):player} buckled themselves to {ToPrettyString(strapUid)}");
+
+        return true;
     }
 
     /// <summary>
@@ -428,19 +448,35 @@ public abstract partial class SharedBuckleSystem
             if (attemptEvent.Cancelled)
                 return false;
 
-            if (_gameTiming.CurTime < buckleComp.BuckleTime + buckleComp.UnbuckleDelay)
+            if (_gameTiming.CurTime < buckleComp.BuckleTime + buckleComp.Delay)
                 return false;
 
-            if (!_interactionSystem.InRangeUnobstructed(userUid, strapUid, buckleComp.Range, popup: true))
+            if (!_interaction.InRangeUnobstructed(userUid, strapUid, buckleComp.Range, popup: true))
                 return false;
 
             if (HasComp<SleepingComponent>(buckleUid) && buckleUid == userUid)
                 return false;
 
-            // If the strap is a vehicle and the rider is not the person unbuckling, return.
             if (TryComp<VehicleComponent>(strapUid, out var vehicle) &&
                 vehicle.Rider != userUid)
+            {
+                //SS220-Vehicle-doafter-fix begin
+                //So here if the one to unbuckle isn't one riding the vehicle,
+                //we are raising DoAfter event, so you need some time to
+                //unbuckle someone from a vehicle.
+                var doAfterEventArgs = new DoAfterArgs(EntityManager, userUid, buckleComp.VehicleUnbuckleTime, new UnbuckleDoAfterEvent(),
+                    vehicle.Rider, target: vehicle.Rider)
+                {
+                    BreakOnTargetMove = true,
+                    BreakOnUserMove = true,
+                    BreakOnDamage = true,
+                    NeedHand = true
+                };
+
+                _doAfter.TryStartDoAfter(doAfterEventArgs);
+                //SS220-Vehicle-doafter-fix end
                 return false;
+            }
         }
 
         // Logging
@@ -459,32 +495,32 @@ public abstract partial class SharedBuckleSystem
 
         if (buckleXform.ParentUid == strapUid && !Terminating(buckleXform.ParentUid))
         {
-            _containerSystem.AttachParentToContainerOrGrid(buckleXform);
+            _container.AttachParentToContainerOrGrid(buckleXform);
 
-            var oldBuckledToWorldRot = _transformSystem.GetWorldRotation(strapUid);
-            _transformSystem.SetWorldRotation(buckleXform, oldBuckledToWorldRot);
+            var oldBuckledToWorldRot = _transform.GetWorldRotation(strapUid);
+            _transform.SetWorldRotation(buckleXform, oldBuckledToWorldRot);
 
             if (strapComp.UnbuckleOffset != Vector2.Zero)
                 buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(strapComp.UnbuckleOffset);
         }
 
         if (TryComp(buckleUid, out AppearanceComponent? appearance))
-            AppearanceSystem.SetData(buckleUid, BuckleVisuals.Buckled, false, appearance);
+            Appearance.SetData(buckleUid, BuckleVisuals.Buckled, false, appearance);
 
         if (TryComp<MobStateComponent>(buckleUid, out var mobState)
-            && _mobStateSystem.IsIncapacitated(buckleUid, mobState)
+            && _mobState.IsIncapacitated(buckleUid, mobState)
             || HasComp<KnockedDownComponent>(buckleUid))
         {
-            _standingSystem.Down(buckleUid);
+            _standing.Down(buckleUid);
         }
         else
         {
-            _standingSystem.Stand(buckleUid);
+            _standing.Stand(buckleUid);
         }
 
-        if (_mobStateSystem.IsIncapacitated(buckleUid, mobState))
+        if (_mobState.IsIncapacitated(buckleUid, mobState))
         {
-            _standingSystem.Down(buckleUid);
+            _standing.Down(buckleUid);
         }
         if (strapComp.BuckledEntities.Remove(buckleUid))
         {
@@ -493,9 +529,10 @@ public abstract partial class SharedBuckleSystem
             Dirty(strapComp);
         }
 
-        AppearanceSystem.SetData(strapUid, StrapVisuals.State, strapComp.BuckledEntities.Count != 0);
+        _joints.RefreshRelay(buckleUid);
+        Appearance.SetData(strapUid, StrapVisuals.State, strapComp.BuckledEntities.Count != 0);
         var audioSourceUid = userUid != buckleUid ? userUid : strapUid;
-        _audioSystem.PlayPredicted(strapComp.UnbuckleSound, strapUid, audioSourceUid);
+        _audio.PlayPredicted(strapComp.UnbuckleSound, strapUid, audioSourceUid);
 
         var ev = new BuckleChangeEvent(strapUid, buckleUid, false);
         RaiseLocalEvent(buckleUid, ref ev);

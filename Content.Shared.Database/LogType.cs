@@ -88,4 +88,9 @@ public enum LogType
     Vote = 83,
     ItemConfigure = 84,
     DeviceLinking = 85,
+    Tile = 86,
+    //WarReceiveTC = 87, // SS220 Nukie-Declare-War // TODO: replace log
+    MessengerServer = 88, // SS220 MessengerServer
+    MessengerClientCartridge = 89,  // SS220 MessengerClientCartridge
+    SecutiyRecords, // SS220 Criminal-Records
 }

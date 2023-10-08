@@ -1,0 +1,11 @@
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformJumpsuitUssp
+  name: униформа СССП
+  description: Форма, пропитанная кровью, потом и ненавистью к капитализму.
+  suffix: Ebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi

@@ -1,5 +1,5 @@
 using Content.Shared.CharacterInfo;
-using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
 using static Content.Client.CharacterInfo.CharacterInfoSystem;
 
 namespace Content.Client.CharacterInfo;
@@ -27,9 +27,16 @@ public sealed class AntagonistInfoSystem : EntitySystem
 
     private void OnAntagonistInfoEvent(AntagonistInfoEvent msg, EntitySessionEventArgs args)
     {
-        var sprite = CompOrNull<SpriteComponent>(msg.AntagonistEntityUid);
-        var data = new CharacterData(msg.JobTitle, msg.Objectives, string.Empty, sprite, Name(msg.AntagonistEntityUid));
+        var entity = GetEntity(msg.AntagonistEntityUid);
+        var data = new CharacterData(entity, msg.JobTitle, msg.Objectives, null, Name(entity));
 
         OnAntagonistUpdate?.Invoke(data);
+    }
+
+    public List<Control> GetCharacterInfoControls(EntityUid uid)
+    {
+        var ev = new GetCharacterInfoControlsEvent(uid);
+        RaiseLocalEvent(uid, ref ev, true);
+        return ev.Controls;
     }
 }

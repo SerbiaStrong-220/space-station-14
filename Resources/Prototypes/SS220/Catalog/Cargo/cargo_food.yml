@@ -1,0 +1,10 @@
+- type: cargoProduct
+  id: FoodCrateBarrelBeer
+  icon:
+    sprite: SS220/Structures/Storage/Tanks/barrel.rsi
+    state: barrel
+  product: BarrelBeerFull
+  cost: 4000
+  category: Food
+  group: market
+

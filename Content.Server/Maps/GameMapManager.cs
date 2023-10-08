@@ -85,7 +85,7 @@ public sealed class GameMapManager : IGameMapManager
         var poolPrototype = _entityManager.System<GameTicker>().Preset?.MapPool ??
                    _configurationManager.GetCVar(CCVars.GameMapPool);
 
-        if (_prototypeManager.TryIndex<GameMapPoolPrototype>(_configurationManager.GetCVar(CCVars.GameMapPool), out var pool))
+        if (_prototypeManager.TryIndex<GameMapPoolPrototype>(poolPrototype, out var pool))
         {
             foreach (var map in pool.Maps)
             {
@@ -174,7 +174,8 @@ public sealed class GameMapManager : IGameMapManager
         return map.MaxPlayers >= _playerManager.PlayerCount &&
                map.MinPlayers <= _playerManager.PlayerCount &&
                map.Conditions.All(x => x.Check(map)) &&
-               _entityManager.System<GameTicker>().IsMapEligible(map);
+               _entityManager.System<GameTicker>().IsMapEligible(map) &&
+               (!_previousMaps.Contains(map.ID) || !_mapRotationEnabled);
     }
 
     private bool TryLookupMap(string gameMap, [NotNullWhen(true)] out GameMapPrototype? map)
@@ -214,7 +215,7 @@ public sealed class GameMapManager : IGameMapManager
             .proto;
     }
 
-    private void EnqueueMap(string mapProtoName)
+    public void EnqueueMap(string mapProtoName)
     {
         _previousMaps.Enqueue(mapProtoName);
         while (_previousMaps.Count > _mapQueueDepth)

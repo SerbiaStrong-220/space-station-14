@@ -1,17 +1,18 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Explosion.Components;
-using Content.Server.Mind.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Explosion;
-using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
+using Content.Shared.Mind.Components;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
-using Content.Shared.Spawners.Components;
+using Content.Shared.SS220.Photocopier.Forms;
+using Robust.Shared.Spawners;
 using Content.Shared.Tag;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
@@ -19,11 +20,16 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+
+using Content.Server.Destructible;
+using Content.Server.Destructible.Thresholds.Behaviors;
 
 namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem : EntitySystem
 {
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     /// <summary>
     ///     Used to limit explosion processing time. See <see cref="MaxProcessingTime"/>.
     /// </summary>
@@ -90,7 +96,7 @@ public sealed partial class ExplosionSystem : EntitySystem
             {
                 // EXPLOSION TODO allow explosion spawning to be interrupted by time limit. In the meantime, ensure that
                 // there is at-least 1ms of time left before creating a new explosion
-                if (MathF.Max(MaxProcessingTime - 1, 0.1f)  < Stopwatch.Elapsed.TotalMilliseconds)
+                if (MathF.Max(MaxProcessingTime - 1, 0.1f) < Stopwatch.Elapsed.TotalMilliseconds)
                     break;
 
                 if (!_explosionQueue.TryDequeue(out var spawnNextExplosion))
@@ -125,11 +131,11 @@ public sealed partial class ExplosionSystem : EntitySystem
             try
             {
 #endif
-                var processed = _activeExplosion.Process(tilesRemaining);
-                tilesRemaining -= processed;
+            var processed = _activeExplosion.Process(tilesRemaining);
+            tilesRemaining -= processed;
 
-                // has the explosion finished processing?
-                if (_activeExplosion.FinishedProcessing)
+            // has the explosion finished processing?
+            if (_activeExplosion.FinishedProcessing)
             {
                 var comp = EnsureComp<TimedDespawnComponent>(_activeExplosion.VisualEnt);
                 comp.Lifetime = _cfg.GetCVar(CCVars.ExplosionPersistence);
@@ -391,7 +397,7 @@ public sealed partial class ExplosionSystem : EntitySystem
         if (damage != null && damageQuery.TryGetComponent(uid, out var damageable))
         {
             var ev = new GetExplosionResistanceEvent(id);
-            RaiseLocalEvent(uid, ev, false);
+            RaiseLocalEvent(uid, ref ev, false);
 
             ev.DamageCoefficient = Math.Max(0, ev.DamageCoefficient);
 
@@ -438,9 +444,44 @@ public sealed partial class ExplosionSystem : EntitySystem
                 throwForce);
         }
 
+        //If damageble object inside storage
+        if (_entityManager.TryGetComponent<ContainerManagerComponent>(uid, out var container))
+        {
+            InStorageDamage(uid, container, damage, damageQuery);
+        }
+
+
         // TODO EXPLOSION puddle / flammable ignite?
 
         // TODO EXPLOSION deaf/ear damage? other explosion effects?
+    }
+
+    /// <summary>
+    ///     This function allows you to damage an object in storage.
+    /// </summary>
+    private void InStorageDamage(EntityUid uid, ContainerManagerComponent container, DamageSpecifier? damage, EntityQuery<DamageableComponent> damageQuery)
+    {
+        if (container.TryGetContainer("storagebase", out var storage))
+        {
+            foreach (EntityUid storagedEntity in storage.ContainedEntities)
+            {
+                var destructibleQuery = EntityManager.GetEntityQuery<ExplosiveComponent>();//plug until inside storage Destructible SpawnEntitiesBehavior will be created
+                if (damage != null && damageQuery.TryGetComponent(storagedEntity, out var damageableInStorage) && (destructibleQuery.TryGetComponent(storagedEntity, out ExplosiveComponent? explosiveComponent)))
+                {
+
+                    //    TO DO add damage decreasing coefficient depending on deepness inside storages and maybe even material of storage
+                    _damageableSystem.TryChangeDamage(storagedEntity, damage, ignoreResistances: true, damageable: damageableInStorage);
+                    var damageStr = string.Join(", ", damage.DamageDict.Select(entry => $"{entry.Key}: {entry.Value}"));
+                    _adminLogger.Add(LogType.Explosion, LogImpact.Medium,
+                        $"Explosion caused [{damageStr}] to {ToPrettyString(uid):target} at {Transform(uid).Coordinates}");
+                }
+                //if we met another storage inside this storage
+                if (_entityManager.TryGetComponent<ContainerManagerComponent>(storagedEntity, out var innerContainer))
+                {
+                    InStorageDamage(storagedEntity, innerContainer, damage, damageQuery);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -837,4 +878,3 @@ sealed class Explosion
         _tileUpdateDict.Clear();
     }
 }
-

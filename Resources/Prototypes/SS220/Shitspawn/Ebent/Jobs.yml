@@ -316,11 +316,12 @@
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
-    - type: GhostRole
-      name: job-name-iron-squad-corpsman
-    - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ EbentIronSquadCorpsmanGear ]
+    - type: GhostRole
+      makeSentient: true
+      name: Полевой медик Железного Отряда
+    - type: GhostTakeoverAvailable
 
 - type: job
   id: IronSquadCorpsman
@@ -555,11 +556,12 @@
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth ]
   components:
-    - type: GhostRole
-      name: job-name-iron-squad-fighter
-    - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ EbentIronSquadTrooperGear ]
+    - type: GhostRole
+      makeSentient: true
+      name: Боец Железного Отряда
+    - type: GhostTakeoverAvailable
 
 - type: job
   id: IronSquadFighter

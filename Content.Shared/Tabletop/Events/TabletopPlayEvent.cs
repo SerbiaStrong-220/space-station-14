@@ -8,17 +8,19 @@ namespace Content.Shared.Tabletop.Events
     [Serializable, NetSerializable]
     public sealed class TabletopPlayEvent : EntityEventArgs
     {
-        public EntityUid TableUid;
-        public EntityUid CameraUid;
+        public NetEntity TableUid;
+        public NetEntity CameraUid;
         public string Title;
         public Vector2i Size;
+        public Vector2i WindowSize; //SS220-initial-tabletop-window-size
 
-        public TabletopPlayEvent(EntityUid tableUid, EntityUid cameraUid, string title, Vector2i size)
+        public TabletopPlayEvent(NetEntity tableUid, NetEntity cameraUid, string title, Vector2i size, Vector2i windowSize)
         {
             TableUid = tableUid;
             CameraUid = cameraUid;
             Title = title;
             Size = size;
+            WindowSize = windowSize;
         }
     }
 }

@@ -2,7 +2,9 @@
 
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.SS220.CryopodSSD;
 
@@ -11,7 +13,7 @@ namespace Content.Shared.SS220.CryopodSSD;
 /// Component for In-game leaving or AFK
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed class CryopodSSDComponent : Component
+public sealed partial class CryopodSSDComponent : Component
 {
     /// <summary>
     /// Delay before climbing in cryopod
@@ -22,6 +24,12 @@ public sealed class CryopodSSDComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)] public ContainerSlot BodyContainer = default!;
 
+    [DataField("leaveAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
+    public string? LeaveAction;
+
+    [DataField("leaveActionEntity")]
+    public EntityUid? LeaveActionEntity;
+
     [Serializable, NetSerializable]
     public enum CryopodSSDVisuals : byte
     {
@@ -30,7 +38,7 @@ public sealed class CryopodSSDComponent : Component
 }
 
 /// <summary>
-/// Raises when somebody transfers to cryo storage 
+/// Raises when somebody transfers to cryo storage
 /// </summary>
 public sealed class TransferredToCryoStorageEvent : HandledEntityEventArgs
 {

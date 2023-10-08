@@ -34,6 +34,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     private FormManager? _specificFormManager;
     private readonly ISawmill _sawmill = Logger.GetSawmill("photocopier");
@@ -449,6 +450,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             {
                 // If there is no butt or someones else butt is in the way - stop copying.
                 if (component.HumanoidAppearanceOnTop is not { } humanoid
+                    || component.ButtSpecies is null
                     || component.ButtSpecies != humanoid.Species)
                 {
                     StopPrinting(uid, component);

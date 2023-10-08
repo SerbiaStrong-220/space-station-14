@@ -17,12 +17,12 @@ public sealed class RequestAntagonistInfoEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed class AntagonistInfoEvent : EntityEventArgs
 {
-    public readonly EntityUid EntityUid;
-    public readonly EntityUid AntagonistEntityUid;
+    public readonly NetEntity EntityUid;
+    public readonly NetEntity AntagonistEntityUid;
     public readonly string JobTitle;
-    public readonly Dictionary<string, List<ConditionInfo>> Objectives;
+    public readonly Dictionary<string, List<ObjectiveInfo>> Objectives;
 
-    public AntagonistInfoEvent(EntityUid entityUid, EntityUid antagonistEntityUid, string jobTitle, Dictionary<string, List<ConditionInfo>> objectives)
+    public AntagonistInfoEvent(NetEntity entityUid, NetEntity antagonistEntityUid, string jobTitle, Dictionary<string, List<ObjectiveInfo>> objectives)
     {
         EntityUid = entityUid;
         AntagonistEntityUid = antagonistEntityUid;

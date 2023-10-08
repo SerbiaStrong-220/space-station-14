@@ -1,0 +1,13 @@
+- type: entity
+  parent: ClothingMaskGasExplorer
+  id: ClothingMaskGasUssp
+  name: противогаз
+  description: Стандартный противогаз СССП с защитой от вспышек.
+  suffix: СССП, Ebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+  - type: FlashImmunity
+  - type: EyeProtection

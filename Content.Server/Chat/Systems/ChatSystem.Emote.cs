@@ -1,4 +1,5 @@
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Emoting;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -66,7 +67,7 @@ public partial class ChatSystem
     {
         if (!_prototypeManager.TryIndex<EmotePrototype>(emoteId, out var proto))
             return;
-        TryEmoteWithChat(source, proto, range, hideLog, nameOverride, ignoreActionBlocker);
+        TryEmoteWithChat(source, proto, range, hideLog: hideLog, nameOverride, ignoreActionBlocker: ignoreActionBlocker);
     }
 
     /// <summary>
@@ -92,7 +93,7 @@ public partial class ChatSystem
         {
             // not all emotes are loc'd, but for the ones that are we pass in entity
             var action = Loc.GetString(_random.Pick(emote.ChatMessages), ("entity", source));
-            SendEntityEmote(source, action, range, nameOverride, false, hideLog, ignoreActionBlocker);
+            SendEntityEmote(source, action, range, nameOverride, hideLog: hideLog, checkEmote: false, ignoreActionBlocker: ignoreActionBlocker);
         }
 
         // do the rest of emote event logic here
@@ -154,11 +155,26 @@ public partial class ChatSystem
         return true;
     }
 
-    private void TryEmoteChatInput(EntityUid uid, string textInput)
+    private void TryEmoteChatInput(EntityUid uid, string textInput, out bool consumed)
     {
+        consumed = false;
         var actionLower = textInput.ToLower();
         if (!_wordEmoteDict.TryGetValue(actionLower, out var emote))
             return;
+
+        // SS220 Chat-Emote-Cooldown begin
+        if (TryComp<EmotingComponent>(uid, out var comp))
+        {
+            var currentTime = _gameTiming.CurTime;
+            if (currentTime - comp.LastChatEmoteTime < comp.ChatEmoteCooldown)
+            {
+                consumed = true;
+                return;
+            }
+
+            comp.LastChatEmoteTime = currentTime;
+        }
+        // SS220 Chat-Emote-Cooldown end
 
         InvokeEmoteEvent(uid, emote);
     }

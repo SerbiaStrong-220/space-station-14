@@ -1,13 +1,22 @@
-using Content.Server.Mind.Components;
-using Content.Server.Objectives;
+using Content.Server.Mind;
 using Content.Server.Roles;
+using Content.Server.Roles.Jobs;
 using Content.Shared.CharacterInfo;
+using Content.Shared.Mind;
 using Content.Shared.Objectives;
+using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.CharacterInfo;
 
 public sealed class CharacterInfoSystem : EntitySystem
 {
+    [Dependency] private readonly JobSystem _jobs = default!;
+    [Dependency] private readonly MindSystem _minds = default!;
+    [Dependency] private readonly RoleSystem _roles = default!;
+    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -18,28 +27,26 @@ public sealed class CharacterInfoSystem : EntitySystem
 
     private void OnRequestCharacterInfoEvent(RequestCharacterInfoEvent msg, EntitySessionEventArgs args)
     {
-        if (!args.SenderSession.AttachedEntity.HasValue || args.SenderSession.AttachedEntity != msg.EntityUid)
+        if (!args.SenderSession.AttachedEntity.HasValue || args.SenderSession.AttachedEntity != GetEntity(msg.NetEntity))
             return;
 
         var entity = args.SenderSession.AttachedEntity.Value;
-
         var jobTitle = "No Profession";
-        var conditions = new Dictionary<string, List<ConditionInfo>>();
-        var briefing = "!!ERROR: No Briefing!!"; //should never show on the UI unless there's a bug
+        var objectives = new Dictionary<string, List<ObjectiveInfo>>();
+        string? briefing = null;
 
-        if (EntityManager.TryGetComponent(entity, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
+        if (_minds.TryGetMind(entity, out var mindId, out var mind))
         {
-            var mind = mindContainerComponent.Mind;
+            if (_jobs.MindTryGetJobName(mindId, out var jobName))
+                jobTitle = jobName;
 
-            GetJobTitle(jobTitle, mind.AllRoles);
-
-            GetConditions(conditions, mind.AllObjectives);
+            GetObjectives(mindId, mind, objectives);
 
             // Get briefing
-            briefing = mind.Briefing;
+            briefing = _roles.MindGetBriefing(mindId);
         }
 
-        RaiseNetworkEvent(new CharacterInfoEvent(entity, jobTitle, conditions, briefing), args.SenderSession);
+        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing), args.SenderSession);
     }
 
     private void OnRequestAntagonistInfoEvent(RequestAntagonistInfoEvent msg, EntitySessionEventArgs args)
@@ -49,46 +56,33 @@ public sealed class CharacterInfoSystem : EntitySystem
 
         var receiver = args.SenderSession.AttachedEntity.Value;
         var antagonist = msg.EntityUid;
-
         var jobTitle = "No Profession";
-        var conditions = new Dictionary<string, List<ConditionInfo>>();
+        var objectives = new Dictionary<string, List<ObjectiveInfo>>();
 
-        if (EntityManager.TryGetComponent(antagonist, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
+        if (_minds.TryGetMind(antagonist, out var mindId, out var mind))
         {
-            var mind = mindContainerComponent.Mind;
+            if (_jobs.MindTryGetJobName(mindId, out var jobName))
+                jobTitle = jobName;
 
-            GetJobTitle(jobTitle, mind.AllRoles);
-
-            GetConditions(conditions, mind.AllObjectives);
+            GetObjectives(mindId, mind, objectives);
         }
 
-        RaiseNetworkEvent(new AntagonistInfoEvent(receiver, antagonist, jobTitle, conditions), args.SenderSession);
+        RaiseNetworkEvent(new AntagonistInfoEvent(GetNetEntity(receiver), GetNetEntity(antagonist), jobTitle, objectives), args.SenderSession);
     }
 
-    private void GetJobTitle(string jobTitle, IEnumerable<Role> roles)
+    private void GetObjectives([NotNullWhen(true)] EntityUid mindId, [NotNullWhen(true)] MindComponent mind, Dictionary<string, List<ObjectiveInfo>> objectives)
     {
-        // Get job title
-        foreach (var role in roles)
+        foreach (var objective in mind.AllObjectives)
         {
-            if (role.GetType() != typeof(Job)) continue;
+            var info = _objectives.GetInfo(objective, mindId, mind);
+            if (info == null)
+                continue;
 
-            jobTitle = role.Name;
-            break;
-        }
-    }
-
-    private void GetConditions(Dictionary<string, List<ConditionInfo>> conditions, IEnumerable<Objective> objectives)
-    {
-        // Get objectives
-        foreach (var objective in objectives)
-        {
-            if (!conditions.ContainsKey(objective.Prototype.Issuer))
-                conditions[objective.Prototype.Issuer] = new List<ConditionInfo>();
-            foreach (var condition in objective.Conditions)
-            {
-                conditions[objective.Prototype.Issuer].Add(new ConditionInfo(condition.Title,
-                    condition.Description, condition.Icon, condition.Progress));
-            }
+            // group objectives by their issuer
+            var issuer = Comp<ObjectiveComponent>(objective).Issuer;
+            if (!objectives.ContainsKey(issuer))
+                objectives[issuer] = new List<ObjectiveInfo>();
+            objectives[issuer].Add(info.Value);
         }
     }
 }

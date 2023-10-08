@@ -1,11 +1,8 @@
 ## Traitor
 
 # Shown at the end of a round of Traitor
-traitor-round-end-result =
-    { $traitorCount ->
-        [one] Был один предатель.
-       *[other] Было { $traitorCount } предателей.
-    }
+traitor-round-end-agent-name = предатель
+objective-issuer-syndicate = [color=#87cefa]Синдикат[/color]
 traitor-round-end-codewords = Кодовыми словами были: [color=White]{ $codewords }[/color].
 # Shown at the end of a round of Traitor
 traitor-user-was-a-traitor = [color=gray]{ $user }[/color] был(а) предателем.
@@ -21,8 +18,8 @@ traitor-objective-condition-success = { $condition } | [color={ $markupColor }]�
 traitor-objective-condition-fail = { $condition } | [color={ $markupColor }]Провал![/color] ({ $progress }%)
 traitor-title = Предатели
 traitor-description = Среди нас есть предатели...
-traitor-not-enough-ready-players = Недостаточно игроков готовы к игре! Из { $minimumPlayers } необходимых игроков готовы { $readyPlayersCount }. Не удалось начать режим Предателя.
-traitor-no-one-ready = Нет готовых игроков! Не удалось начать режим Предателя.
+traitor-not-enough-ready-players = Недостаточно игроков готовы к игре! Из { $minimumPlayers } необходимых игроков готовы { $readyPlayersCount }. Нельзя запустить пресет Предатели.
+traitor-no-one-ready = Нет готовых игроков! Нельзя запустить пресет Предатели.
 
 ## TraitorDeathMatch
 

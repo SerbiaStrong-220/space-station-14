@@ -7,7 +7,7 @@ namespace Content.Server.Zombies;
 /// Temporary because diseases suck.
 /// </summary>
 [RegisterComponent]
-public sealed class PendingZombieComponent : Component
+public sealed partial class PendingZombieComponent : Component
 {
     /// <summary>
     /// Damage dealt every second to infected individuals.
@@ -16,8 +16,7 @@ public sealed class PendingZombieComponent : Component
     {
         DamageDict = new ()
         {
-            { "Blunt", 0.25 },
-            { "Poison", 0.1 },
+            { "Cellular", 0.33 },
         }
     };
 
@@ -51,4 +50,6 @@ public sealed class PendingZombieComponent : Component
         "zombie-infection-warning",
         "zombie-infection-underway"
     };
+
+    [DataField] public EntityUid? Action;
 }

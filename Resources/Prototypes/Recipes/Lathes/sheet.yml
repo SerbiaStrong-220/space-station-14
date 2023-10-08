@@ -14,6 +14,14 @@
     Steel: 3000
 
 - type: latheRecipe
+  id: SheetPlasteel10
+  result: SheetPlasteel
+  completetime: 2
+  materials:
+    Steel: 3000
+    Plasma: 1500
+
+- type: latheRecipe
   id: SheetGlass1
   result: SheetGlass1
   applyMaterialDiscount: false
@@ -68,6 +76,34 @@
   completetime: 2
   materials:
     Plasma: 3000
+
+- type: latheRecipe
+  id: SheetUranium30
+  result: SheetUranium
+  completetime: 2
+  materials:
+    Uranium: 3000
+
+- type: latheRecipe
+  id: IngotGold30
+  result: IngotGold
+  completetime: 2
+  materials:
+    Gold: 3000
+
+- type: latheRecipe
+  id: IngotSilver30
+  result: IngotSilver
+  completetime: 2
+  materials:
+    Silver: 3000
+
+- type: latheRecipe
+  id: MaterialBananium10
+  result: MaterialBananium
+  completetime: 2
+  materials:
+    Bananium: 3000
 
 - type: latheRecipe
   id: SheetUranium1

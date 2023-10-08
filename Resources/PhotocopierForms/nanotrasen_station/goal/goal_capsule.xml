@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>goal_capsule</FormId>
+  <PrototypeId>PaperNtFormGoal</PrototypeId>
+  <EntityName>форма НТ-КМД-ОПС-ЭП</EntityName>
+  <PhotocopierTitle>Опись отправляемой экстренной помощи</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-КМД-ОПС-ЭП[/bold]
+[head=2]Опись отправляемой экстренной помощи[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+[bold]Ответственный(-ые) за наполнение капсулы:[/bold] (ИМЯ ФАМИЛИЯ/ИМЕНА ФАМИЛИЯ ДОЛЖНОСТЬ/ДОЛЖНОСТИ)
+
+[bold]Опись содержимого в капсуле:[/bold]
+(НАЗВАНИЯ ПРЕДМЕТОВ И ИХ КОЛИЧЕСТВО)
+
+[bold]Дополнительные замечания:[/bold]
+(ОСТАВИТЬ ЗДЕСЬ)
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

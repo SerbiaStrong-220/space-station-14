@@ -3,8 +3,12 @@
   name: job-name-iaa
   playTimeTracker: JobIAA
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # SS220-RoleTime
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 72000 # SS220-RoleTime
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 72000 # SS220-RoleTime
   startingGear: IAAGear
   icon: "JobIconIAA"
   supervisors: job-supervisors-centcom
@@ -15,6 +19,9 @@
     - Maintenance
     - Command
     - External
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
 
 - type: startingGear
   id: IAAGear
@@ -27,5 +34,7 @@
     ears: ClothingHeadsetIAA
     neck: ClothingNeckLawyerbadge
   innerclothingskirt: ClothingUniformJumpskirtLawyerBlack
+  inhand:
+    right hand: BriefcaseIAAFilled
   satchel: ClothingBackpackSatchelIAAFilled
   duffelbag: ClothingBackpackDuffelIAAFilled

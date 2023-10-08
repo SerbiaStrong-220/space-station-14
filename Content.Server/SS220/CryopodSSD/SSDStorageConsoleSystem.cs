@@ -1,18 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Globalization;
 using Content.Server.Chat.Systems;
 using Content.Server.Forensics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Objectives;
-using Content.Server.Objectives.Conditions;
-using Content.Server.Objectives.Interfaces;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Systems;
-using Content.Server.Storage.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Emag.Components;
@@ -26,7 +22,9 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using static Content.Shared.Storage.SharedStorageComponent;
+using Content.Shared.Mind;
+using Content.Shared.Storage;
+using Content.Server.Objectives.Components;
 
 namespace Content.Server.SS220.CryopodSSD;
 
@@ -42,8 +40,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IObjectivesManager _objectivesManager = default!;
-    [Dependency] private readonly MindTrackerSystem _mindTrackerSystem = default!;
+    [Dependency] private readonly ObjectivesSystem _objectives = default!;
     [Dependency] private readonly StationJobsSystem _stationJobsSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
@@ -52,21 +49,21 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
-    
+
     private ISawmill _sawmill = default!;
-    
+
     public override void Initialize()
     {
         base.Initialize();
-        
+
         _sawmill = Logger.GetSawmill("SSDStorageConsole");
-        
+
         SubscribeLocalEvent<SSDStorageConsoleComponent, CryopodSSDStorageInteractWithItemEvent>(OnInteractWithItem);
         SubscribeLocalEvent<SSDStorageConsoleComponent, EntRemovedFromContainerMessage>(OnStorageItemRemoved);
         SubscribeLocalEvent<SSDStorageConsoleComponent, BoundUIOpenedEvent>(UpdateUserInterface);
-        
+
         SubscribeLocalEvent<TransferredToCryoStorageEvent>(OnTransferredToCryo);
-        
+
         SubscribeLocalEvent<SSDStorageConsoleComponent, GotEmaggedEvent>(OnEmagAct);
     }
 
@@ -89,26 +86,28 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
             TransferToCryoStorage(uid, cryopodConsoleComp, target);
         }
     }
-    
+
     private void OnInteractWithItem(EntityUid uid, SSDStorageConsoleComponent component, CryopodSSDStorageInteractWithItemEvent args)
     {
         if (args.Session.AttachedEntity is not EntityUid player)
             return;
 
-        if (!Exists(args.InteractedItemUid))
+        var entInteractedItemUid = GetEntity(args.InteractedItemUid);
+
+        if (!Exists(entInteractedItemUid))
         {
-            _sawmill.Error($"Player {args.Session} interacted with non-existent item {args.InteractedItemUid} stored in {ToPrettyString(uid)}");
+            _sawmill.Error($"Player {args.Session} interacted with non-existent item {entInteractedItemUid} stored in {ToPrettyString(uid)}");
             return;
         }
 
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComp))
+        if (!TryComp<StorageComponent>(uid, out var storageComp))
         {
             return;
         }
-        
-        if (!_actionBlockerSystem.CanInteract(player, args.InteractedItemUid) || storageComp.Storage == null || !storageComp.Storage.Contains(args.InteractedItemUid))
+
+        if (!_actionBlockerSystem.CanInteract(player, entInteractedItemUid) || storageComp.Container == null || !storageComp.Container.Contains(entInteractedItemUid))
             return;
-        
+
         if (!TryComp(player, out HandsComponent? hands) || hands.Count == 0)
             return;
 
@@ -117,12 +116,12 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
             _sawmill.Info($"Player {ToPrettyString(player)} possibly exploits UI, trying to take item from {ToPrettyString(uid)} without access");
             return;
         }
-        
+
         if (hands.ActiveHandEntity == null)
         {
-            if (_handsSystem.TryPickupAnyHand(player, args.InteractedItemUid, handsComp: hands)
+            if (_handsSystem.TryPickupAnyHand(player, entInteractedItemUid, handsComp: hands)
                 && storageComp.StorageRemoveSound != null)
-                _sawmill.Info($"{ToPrettyString(player)} takes {ToPrettyString(args.InteractedItemUid)} from {ToPrettyString(uid)}");
+                _sawmill.Info($"{ToPrettyString(player)} takes {ToPrettyString(entInteractedItemUid)} from {ToPrettyString(uid)}");
         }
     }
 
@@ -147,9 +146,10 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
             {
                 continue;
             }
-            
+
+            var cryopodSSDEntity = args.CryopodSSD;
             var consoleCoord = Transform(uid).Coordinates;
-            var cryopodCoord = Transform(args.CryopodSSD).Coordinates;
+            var cryopodCoord = Transform(cryopodSSDEntity).Coordinates;
 
             if (consoleCoord.InRange(_entityManager, _transformSystem, cryopodCoord, ssdStorageConsoleComp.RadiusToConnect))
             {
@@ -159,29 +159,33 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
             }
         }
     }
-    
+
     private void TransferToCryoStorage(EntityUid uid, SSDStorageConsoleComponent component, EntityUid entityToTransfer)
     {
         _sawmill.Info($"{ToPrettyString(entityToTransfer)} moved to cryo storage");
 
         var station = _stationSystem.GetOwningStation(uid);
 
-        if (station is not null)
+        if (station.HasValue)
         {
-            if (DeleteEntityRecord(entityToTransfer, station.Value, out var deletedRecord))
+            var recordPairTry = FindEntityStationRecordKey(station.Value, entityToTransfer);
+            if (recordPairTry is { } recordPair)
             {
                 _chatSystem.DispatchStationAnnouncement(station.Value,
                     Loc.GetString(
                         "cryopodSSD-entered-cryo",
                         ("character", MetaData(entityToTransfer).EntityName),
-                        ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(deletedRecord.JobTitle))),
+                        ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(recordPair.Item2.JobTitle))),
                     Loc.GetString("cryopodSSD-sender"),
                     playSound: false);
 
                 component.StoredEntities.Add(
-                    $"{MetaData(entityToTransfer).EntityName} - [{deletedRecord.JobTitle}] - {_gameTiming.RealTime}");
+                    $"{MetaData(entityToTransfer).EntityName} - [{recordPair.Item2.JobTitle}] - {_gameTiming.RealTime}");
 
-                _stationJobsSystem.TryAdjustJobSlot(station.Value, deletedRecord.JobPrototype, 1);
+                _stationJobsSystem.TryAdjustJobSlot(station.Value, recordPair.Item2.JobPrototype, 1);
+
+                recordPair.Item2.IsInCryo = true;
+                _stationRecordsSystem.Synchronize(station.Value);
             }
         }
 
@@ -195,36 +199,47 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     /// <summary>
     /// Looks through all objectives in game,
     /// All KillPersonObjective where target equals to uid
-    /// would be replaced with new random objective 
+    /// would be replaced with new random objective
     /// </summary>
     /// <param name="uid"> target uid</param>
     private void ReplaceKillEntityObjectives(EntityUid uid)
     {
-        foreach (var mind in _mindTrackerSystem.AllMinds)
+        var allMinds = EntityQueryEnumerator<MindComponent>();
+        while (allMinds.MoveNext(out var mindId, out var mind))
         {
             if (mind.OwnedEntity is null)
             {
                 continue;
             }
-            
-            IEnumerable<Objective> objectiveToReplace = mind.AllObjectives.Where(objective =>
-                objective.Conditions.Any(condition => (condition as KillPersonCondition)?.IsTarget(uid) ?? false));
+
+            List<EntityUid> objectiveToReplace = new();
+            foreach (var objective in mind.AllObjectives)
+            {
+                if (!TryComp<TargetObjectiveComponent>(objective, out var target))
+                    continue;
+
+                if (target.Target != uid)
+                    continue;
+
+                objectiveToReplace.Add(objective);
+            }
 
             foreach (var objective in objectiveToReplace)
             {
-                _mindSystem.TryRemoveObjective(mind, objective);
-                var newObjective = _objectivesManager.GetRandomObjective(mind, "TraitorObjectiveGroups");
-                if (newObjective is null || !_mindSystem.TryAddObjective(mind,newObjective))
+                _mindSystem.TryRemoveObjective(mindId, mind, objective);
+                var newObjective = _objectives.GetRandomObjective(mindId, mind, "TraitorObjectiveGroups");
+                if (newObjective is null)
                 {
                     _sawmill.Error($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he lost his objective and didn't get a new one");
                     continue;
                 }
-                    
+
+                _mindSystem.AddObjective(mindId, mind, newObjective.Value);
                 _sawmill.Info($"{ToPrettyString(mind.OwnedEntity.Value)}'s target get in cryo, so he get a new one");
             }
         }
     }
-    
+
     /// <summary>
     /// Looking through all Entity's items,
     /// and if item is not in SSD storage whitelist - deletes it,
@@ -236,12 +251,12 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
     private void UndressEntity(EntityUid uid, SSDStorageConsoleComponent component, EntityUid target)
     {
-        if (!TryComp<ServerStorageComponent>(uid, out var storageComponent)
-            || storageComponent.Storage is null)
+        if (!TryComp<StorageComponent>(uid, out var storageComponent)
+            || storageComponent.Container is null)
         {
             return;
         }
-        
+
         /*
         * It would be great if we could instantly delete items when we know they are not whitelisted.
         * However, this could lead to a situation where we accidentally delete the uniform,
@@ -252,12 +267,12 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         List<EntityUid> itemsToTransfer = new();
         List<EntityUid> itemsToDelete = new();
 
-        // Looking through all 
-        SortContainedItems(in target,ref itemsToTransfer,ref itemsToDelete, in component.Whitelist);
+        // Looking through all
+        SortContainedItems(in target, ref itemsToTransfer, ref itemsToDelete, in component.Whitelist);
 
         foreach (var item in itemsToTransfer)
         {
-            storageComponent.Storage.Insert(item);
+            storageComponent.Container.Insert(item);
         }
 
         foreach (var item in itemsToDelete)
@@ -269,7 +284,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     /// <summary>
     /// Recursively goes through all child entities of our entity
     /// and if entity is item - adds it to whiteListedItems,
-    /// otherwise adds it to itemsToDelete 
+    /// otherwise adds it to itemsToDelete
     /// </summary>
     /// <param name="storageToLook"></param>
     /// <param name="whitelistedItems"></param>
@@ -296,12 +311,12 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
                     itemsToDelete.Add(childUid);
                 }
 
-                // As far as I know, ChildEntities cannot be recursive 
+                // As far as I know, ChildEntities cannot be recursive
                 SortContainedItems(in childUid, ref whitelistedItems, ref itemsToDelete, in whitelist);
             }
         }
     }
-    
+
     /// <summary>
     /// Delete entity records from station general records
     /// using DNA to match record
@@ -310,12 +325,12 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     /// <param name="station"></param>
     /// <param name="deletedRecord"> returns copy of deleted generalRecord </param>
     /// <returns> True if we successfully deleted record of entity, otherwise returns false</returns>
-    private bool DeleteEntityRecord(EntityUid uid, EntityUid station,[NotNullWhen(true)] out GeneralStationRecord? deletedRecord)
+    private bool DeleteEntityRecord(EntityUid uid, EntityUid station, [NotNullWhen(true)] out GeneralStationRecord? deletedRecord)
     {
         var stationRecord = FindEntityStationRecordKey(station, uid);
 
         deletedRecord = null;
-        
+
         if (stationRecord is null)
         {
             return false;
@@ -324,10 +339,10 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         deletedRecord = stationRecord.Value.Item2;
 
         _stationRecordsSystem.RemoveRecord(station, stationRecord.Value.Item1);
-        
+
         return true;
     }
-    
+
     private (StationRecordKey, GeneralStationRecord)? FindEntityStationRecordKey(EntityUid station, EntityUid uid)
     {
         if (TryComp<DnaComponent>(uid, out var dnaComponent))
@@ -342,10 +357,9 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
         return null;
     }
-    
+
     private void OnStorageItemRemoved(EntityUid uid, SSDStorageConsoleComponent storageComp, EntRemovedFromContainerMessage args)
     {
-        
         UpdateUserInterface(uid, storageComp, args.Entity, true);
     }
 
@@ -365,23 +379,13 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
         {
             return;
         }
-        
-        if (TryComp<ServerStorageComponent>(uid, out var storageComponent) && storageComponent.StoredEntities != null)
-        {
-            var hasAccess = HasComp<EmaggedComponent>(uid) || _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
-            var storageState = hasAccess ?  
-                new StorageBoundUserInterfaceState((List<EntityUid>) storageComponent.StoredEntities, 
-                    storageComponent.StorageUsed, 
-                    storageComponent.StorageCapacityMax)
-                : new StorageBoundUserInterfaceState(new List<EntityUid>(),
-                    0,
-                    storageComponent.StorageCapacityMax);
-            
-            var state = new SSDStorageConsoleState(hasAccess, component.StoredEntities, storageState);
-            SetStateForInterface(uid, state);
-        }
+
+        var hasAccess = HasComp<EmaggedComponent>(uid) || _accessReaderSystem.IsAllowed(user, uid) || forseAccess;
+
+        var state = new SSDStorageConsoleState(hasAccess, component.StoredEntities);
+        SetStateForInterface(uid, state);
     }
-    
+
     private void SetStateForInterface(EntityUid uid, SSDStorageConsoleState storageConsoleState)
     {
         _userInterface.TrySetUiState(uid, SSDStorageConsoleKey.Key, storageConsoleState);

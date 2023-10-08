@@ -1,8 +1,10 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server.Administration.Logs;
 using Content.Server.IP;
 using Content.Server.Preferences.Managers;
 using Content.Shared.CCVar;
@@ -247,11 +249,11 @@ namespace Content.Server.Database
             return hwId is { Length: > 0 } hwIdVar && hwIdVar.AsSpan().SequenceEqual(ban.HWId);
         }
 
-        public override async Task AddServerRoleBanAsync(ServerRoleBanDef serverBan)
+        public override async Task<ServerRoleBanDef> AddServerRoleBanAsync(ServerRoleBanDef serverBan)
         {
             await using var db = await GetDbImpl();
 
-            db.SqliteDbContext.RoleBan.Add(new ServerRoleBan
+            var ban = new ServerRoleBan
             {
                 Address = serverBan.Address,
                 Reason = serverBan.Reason,
@@ -264,9 +266,11 @@ namespace Content.Server.Database
                 PlaytimeAtNote = serverBan.PlaytimeAtNote,
                 PlayerUserId = serverBan.UserId?.UserId,
                 RoleId = serverBan.Role,
-            });
+            };
+            db.SqliteDbContext.RoleBan.Add(ban);
 
             await db.SqliteDbContext.SaveChangesAsync();
+            return ConvertRoleBan(ban);
         }
 
         public override async Task AddServerRoleUnbanAsync(ServerRoleUnbanDef serverUnban)
@@ -283,6 +287,7 @@ namespace Content.Server.Database
             await db.SqliteDbContext.SaveChangesAsync();
         }
 
+        [return: NotNullIfNotNull(nameof(ban))]
         private static ServerRoleBanDef? ConvertRoleBan(ServerRoleBan? ban)
         {
             if (ban == null)
@@ -480,6 +485,15 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
 
             return round.Id;
+        }
+
+        protected override IQueryable<AdminLog> StartAdminLogsQuery(ServerDbContext db, LogFilter? filter = null)
+        {
+            IQueryable<AdminLog> query = db.AdminLog;
+            if (filter?.Search != null)
+                query = query.Where(log => EF.Functions.Like(log.Message, $"%{filter.Search}%"));
+
+            return query;
         }
 
         public override async Task<int> AddAdminNote(AdminNote note)

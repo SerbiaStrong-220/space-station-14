@@ -56,3 +56,19 @@
   id: Honk
   category: Vocal
   chatMessages: [хонкает] # Corvax-Localization
+
+# SS220 emotes begin
+- type: emote
+  id: Gasp
+  category: Vocal
+  chatMessages: [задыхается]
+  chatTriggers:
+    - задыхается
+    - задыхается.
+    - задыхается!
+
+- type: emote
+  id: CritGasp
+  category: Vocal
+  chatMessages: [задыхается]
+# SS220 emotes end
