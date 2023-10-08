@@ -32,6 +32,8 @@
     node: Blastdoor
     containers:
     - board
+  - type: StaticPrice
+    price: 250
 
 - type: entity
   id: BlastDoorOpen
