@@ -8,11 +8,10 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.Utility;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 using System.Linq;
-using static Content.Client.CharacterInfo.CharacterInfoSystem;
+using static Content.Client.CharacterInfo.AntagonistInfoSystem;
 
 namespace Content.Client.UserInterface.Systems.Admin
 {
@@ -51,74 +50,14 @@ namespace Content.Client.UserInterface.Systems.Admin
             _window.Open();
         }
 
-        private void AntagonistUpdated(CharacterData data)
+        private void AntagonistUpdated(AntagonistData data)
         {
-            //if (_window == null)
-            //{
-            //    return;
-            //}
-
-            //var (job, objectives, briefing, sprite, entityName) = data;
-
-            //if (objectives == null)
-            //{
-            //    return;
-            //}
-
-            //_window.SubText.Text = job;
-            //_window.Objectives.RemoveAllChildren();
-
-            //_window.Title = $"{Loc.GetString("character-info-objectives-label")} {entityName}";
-
-            //foreach (var (groupId, conditions) in objectives)
-            //{
-            //    var objectiveControl = new CharacterObjectiveControl
-            //    {
-            //        Orientation = BoxContainer.LayoutOrientation.Vertical,
-            //        Modulate = Color.Gray
-            //    };
-
-            //    objectiveControl.AddChild(new Label
-            //    {
-            //        Text = groupId,
-            //        Modulate = Color.LightSkyBlue
-            //    });
-
-            //    foreach (var condition in conditions)
-            //    {
-            //        var conditionControl = new ObjectiveConditionsControl();
-            //        conditionControl.ProgressTexture.Texture = condition.SpriteSpecifier.Frame0();
-            //        conditionControl.ProgressTexture.Progress = condition.Progress;
-            //        var titleMessage = new FormattedMessage();
-            //        var descriptionMessage = new FormattedMessage();
-            //        titleMessage.AddText(condition.Title);
-            //        descriptionMessage.AddText(condition.Description);
-
-            //        conditionControl.Title.SetMessage(titleMessage);
-            //        conditionControl.Description.SetMessage(descriptionMessage);
-
-            //        objectiveControl.AddChild(conditionControl);
-            //    }
-
-            //    _window.Objectives.AddChild(objectiveControl);
-            //}
-
-            //_window.SpriteView.Sprite = sprite;
-            //_window.NameLabel.Text = entityName;
-
-
-
-
-
-
-
-
             if (_window == null)
             {
                 return;
             }
 
-            var (entity, job, objectives, briefing, entityName) = data;
+            var (entity, job, objectives, entityName) = data;
 
             _window.Title = $"{Loc.GetString("character-info-objectives-label")} {entityName}";
             _window.SpriteView.SetEntity(entity);
@@ -160,13 +99,13 @@ namespace Content.Client.UserInterface.Systems.Admin
                 _window.Objectives.AddChild(objectiveControl);
             }
 
-            var controls = _antagonistInfo.GetCharacterInfoControls(entity);
+            var controls = _antagonistInfo.GetAntagonistInfoControls(entity);
             foreach (var control in controls)
             {
                 _window.Objectives.AddChild(control);
             }
 
-            _window.RolePlaceholder.Visible = briefing == null && !controls.Any() && !objectives.Any();
+            _window.RolePlaceholder.Visible = !controls.Any() && !objectives.Any();
         }
 
         public void OnSystemLoaded(AdminSystem system)

@@ -6,26 +6,26 @@ namespace Content.Shared.CharacterInfo;
 [Serializable, NetSerializable]
 public sealed class RequestAntagonistInfoEvent : EntityEventArgs
 {
-    public readonly EntityUid EntityUid;
+    public readonly NetEntity NetEntity;
 
-    public RequestAntagonistInfoEvent(EntityUid entityUid)
+    public RequestAntagonistInfoEvent(NetEntity netEntity)
     {
-        EntityUid = entityUid;
+        NetEntity = netEntity;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class AntagonistInfoEvent : EntityEventArgs
 {
-    public readonly NetEntity EntityUid;
-    public readonly NetEntity AntagonistEntityUid;
+    public readonly NetEntity NetEntity;
+    public readonly NetEntity AntagonistNetEntity;
     public readonly string JobTitle;
     public readonly Dictionary<string, List<ObjectiveInfo>> Objectives;
 
-    public AntagonistInfoEvent(NetEntity entityUid, NetEntity antagonistEntityUid, string jobTitle, Dictionary<string, List<ObjectiveInfo>> objectives)
+    public AntagonistInfoEvent(NetEntity netEntity, NetEntity antagonistNetEntity, string jobTitle, Dictionary<string, List<ObjectiveInfo>> objectives)
     {
-        EntityUid = entityUid;
-        AntagonistEntityUid = antagonistEntityUid;
+        NetEntity = netEntity;
+        AntagonistNetEntity = antagonistNetEntity;
         JobTitle = jobTitle;
         Objectives = objectives;
     }

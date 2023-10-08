@@ -55,11 +55,11 @@ public sealed class CharacterInfoSystem : EntitySystem
             return;
 
         var receiver = args.SenderSession.AttachedEntity.Value;
-        var antagonist = msg.EntityUid;
+        var antagonist = msg.NetEntity;
         var jobTitle = "No Profession";
         var objectives = new Dictionary<string, List<ObjectiveInfo>>();
 
-        if (_minds.TryGetMind(antagonist, out var mindId, out var mind))
+        if (_minds.TryGetMind(GetEntity(antagonist), out var mindId, out var mind))
         {
             if (_jobs.MindTryGetJobName(mindId, out var jobName))
                 jobTitle = jobName;
@@ -67,7 +67,7 @@ public sealed class CharacterInfoSystem : EntitySystem
             GetObjectives(mindId, mind, objectives);
         }
 
-        RaiseNetworkEvent(new AntagonistInfoEvent(GetNetEntity(receiver), GetNetEntity(antagonist), jobTitle, objectives), args.SenderSession);
+        RaiseNetworkEvent(new AntagonistInfoEvent(GetNetEntity(receiver), antagonist, jobTitle, objectives), args.SenderSession);
     }
 
     private void GetObjectives([NotNullWhen(true)] EntityUid mindId, [NotNullWhen(true)] MindComponent mind, Dictionary<string, List<ObjectiveInfo>> objectives)
