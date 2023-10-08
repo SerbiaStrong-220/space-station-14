@@ -144,8 +144,11 @@ public sealed class CartSystem : EntitySystem
 
         Verb verb = new()
         {
-            Text = Loc.GetString("cart-verb-deattach-this-cart"),
+            Text = MetaData(uid).EntityName,
             Act = () => TryDeattachCart(component, args.User),
+            Category = VerbCategory.DeattachCart,
+            // Prioritize deattaching itself
+            Priority = 1,
             DoContactInteraction = false
         };
         args.Verbs.Add(verb);

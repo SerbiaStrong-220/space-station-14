@@ -89,8 +89,9 @@ public sealed partial class CartPullerSystem : EntitySystem
 
             Verb deattachVerb = new()
             {
-                Text = Loc.GetString("cart-verb-deattach-attached-cart"),
+                Text = MetaData(attachedCart.Owner).EntityName,
                 Act = () => _cart.TryDeattachCart(attachedCart, args.User),
+                Category = VerbCategory.DeattachCart,
                 DoContactInteraction = false
             };
             args.Verbs.Add(deattachVerb);
@@ -109,9 +110,10 @@ public sealed partial class CartPullerSystem : EntitySystem
 
         Verb verb = new()
         {
-            Text = Loc.GetString("cart-verb-attach"),
+            Text = MetaData((EntityUid) cart).EntityName,
             Act = () => _cart.TryAttachCart(uid, cartComp, args.User),
-            DoContactInteraction = false
+            Category = VerbCategory.AttachCart,
+            DoContactInteraction = false,
         };
         args.Verbs.Add(verb);
     }
