@@ -26,8 +26,17 @@ public sealed class CartSystem : EntitySystem
         SubscribeLocalEvent<CartComponent, StopPullingEvent>(OnStopPull);
         SubscribeLocalEvent<CartComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<CartComponent, FoldAttemptEvent>(OnFoldAttempt);
+        SubscribeLocalEvent<CartComponent, ComponentShutdown>(OnShutdown);
         //SubscribeLocalEvent<CartComponent, CanDragEvent>(OnCanDrag);
         //SubscribeLocalEvent<CartComponent, CanDropDraggedEvent>(OnCanDropDragged);
+    }
+
+    private void OnShutdown(EntityUid uid, CartComponent component, ComponentShutdown args)
+    {
+        if (!component.IsAttached)
+            return;
+
+        TryDeattachCart(component, null);
     }
 
     private void OnFoldAttempt(EntityUid uid, CartComponent component, ref FoldAttemptEvent args)
@@ -81,12 +90,15 @@ public sealed class CartSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
+        if (!HasComp<CartPullerComponent>(args.AttachTarget))
+            return;
+
         if (!TryComp<SharedPullableComponent>(uid, out var pullable))
             return;
 
         // So here we are adding the puller component to the cart puller
         // in order to pull the cart with it.
-        // We are later removing this component from cart puller.
+        // We are later removing this component from the cart puller.
         // This was made just because I wanted to reuse pulling system for this task.
         EnsureComp<SharedPullerComponent>(args.AttachTarget);
         _pulling.TryStopPull(pullable);
