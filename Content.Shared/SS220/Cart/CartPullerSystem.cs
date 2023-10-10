@@ -17,7 +17,7 @@ public sealed partial class CartPullerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CartPullerComponent, GetVerbsEvent<Verb>>(AddCartVerbs);
+        SubscribeLocalEvent<CartPullerComponent, GetVerbsEvent<InteractionVerb>>(AddCartVerbs);
         //SubscribeLocalEvent<CartPullerComponent, CanDropTargetEvent>(OnCanDrop);
         //SubscribeLocalEvent<CartPullerComponent, DragDropTargetEvent>(OnDragDropTarget);
         SubscribeLocalEvent<CartPullerComponent, ComponentShutdown>(OnShutdown);
@@ -76,7 +76,7 @@ public sealed partial class CartPullerSystem : EntitySystem
     //    return _interaction.InRangeUnobstructed(target, cart, cartComp.AttachRange, predicate: Ignored);
     //}
 
-    private void AddCartVerbs(EntityUid uid, CartPullerComponent component, GetVerbsEvent<Verb> args)
+    private void AddCartVerbs(EntityUid uid, CartPullerComponent component, GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
@@ -87,12 +87,11 @@ public sealed partial class CartPullerSystem : EntitySystem
             if (!TryComp<CartComponent>(component.AttachedCart, out var attachedCart))
                 return;
 
-            Verb deattachVerb = new()
+            InteractionVerb deattachVerb = new()
             {
-                Text = MetaData(attachedCart.Owner).EntityName,
+                Text = Name(attachedCart.Owner),
                 Act = () => _cart.TryDeattachCart(attachedCart, args.User),
-                Category = VerbCategory.DeattachCart,
-                DoContactInteraction = false
+                Category = VerbCategory.DeattachCart
             };
             args.Verbs.Add(deattachVerb);
             return;
@@ -105,15 +104,14 @@ public sealed partial class CartPullerSystem : EntitySystem
         if (!TryComp<CartComponent>(cart, out var cartComp))
             return;
 
-        if (!_cart.IsAttachable(uid, (EntityUid) cart))
+        if (!_cart.IsAttachable(uid, cart.Value))
             return;
 
-        Verb verb = new()
+        InteractionVerb verb = new()
         {
-            Text = MetaData((EntityUid) cart).EntityName,
+            Text = Name(cart.Value),
             Act = () => _cart.TryAttachCart(uid, cartComp, args.User),
-            Category = VerbCategory.AttachCart,
-            DoContactInteraction = false,
+            Category = VerbCategory.AttachCart
         };
         args.Verbs.Add(verb);
     }

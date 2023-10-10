@@ -20,7 +20,7 @@ public sealed class CartSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CartComponent, GetVerbsEvent<Verb>>(AddCartVerbs);
+        SubscribeLocalEvent<CartComponent, GetVerbsEvent<InteractionVerb>>(AddCartVerbs);
         SubscribeLocalEvent<CartComponent, CartAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<CartComponent, CartDeattachDoAfterEvent>(OnDeattachDoAfter);
         SubscribeLocalEvent<CartComponent, StopPullingEvent>(OnStopPull);
@@ -134,7 +134,7 @@ public sealed class CartSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void AddCartVerbs(EntityUid uid, CartComponent component, GetVerbsEvent<Verb> args)
+    private void AddCartVerbs(EntityUid uid, CartComponent component, GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
@@ -142,14 +142,13 @@ public sealed class CartSystem : EntitySystem
         if (!component.IsAttached)
             return;
 
-        Verb verb = new()
+        InteractionVerb verb = new()
         {
-            Text = MetaData(uid).EntityName,
+            Text = Name(uid),
             Act = () => TryDeattachCart(component, args.User),
             Category = VerbCategory.DeattachCart,
             // Prioritize deattaching itself
-            Priority = 1,
-            DoContactInteraction = false
+            Priority = 1
         };
         args.Verbs.Add(verb);
     }
