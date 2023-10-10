@@ -99,6 +99,9 @@
         probability: 0.66
   - type: GhostTakeoverAvailable
   - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
     name: Помидор-убийца
     description: Защищайте матушку-природу!
   - type: Butcherable
@@ -106,8 +109,6 @@
     spawned:
     - id: FoodMeatTomato
       amount: 3
-  - type: Speech
-    emoteSounds: TomatoKiller
   - type: NoSlip
   - type: Puller
     needsHands: true
@@ -123,11 +124,9 @@
         - ReagentId: JuiceTomato
           Quantity: 30
   - type: Udder
-    reagentId: UnstableMutagen
-    targetSolution: chemicals
+    reagentId: JuiceTomato
+    targetSolution: udder
     quantity: 25
     updateRate: 30
-  - type: Produce
-    seedId: killerTomato
   - type: TTS 
     voice: Flark
