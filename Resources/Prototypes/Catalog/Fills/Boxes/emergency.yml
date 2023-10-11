@@ -54,7 +54,6 @@
       - id: Brutepack1
       - id: Brutepack1
       - id: Brutepack1
-      - id: Brutepack1
   - type: Sprite
     layers:
       - state: internals
