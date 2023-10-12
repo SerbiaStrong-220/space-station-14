@@ -5,3 +5,10 @@
   components:
     - type: LightweightDrunk
       boozeStrengthMultiplier: 2
+
+- type: trait
+  id: TouretteSyndrome
+  name: trait-tourette-name
+  description: trait-tourette-desc
+  components:
+    - type: TouretteAccent
