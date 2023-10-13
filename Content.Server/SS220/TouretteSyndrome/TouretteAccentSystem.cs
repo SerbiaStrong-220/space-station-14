@@ -45,7 +45,7 @@ public sealed class TouretteAccentSystem : EntitySystem
             return msg;
 
         if (string.IsEmpty(msg))
-            return msg
+            return msg;
 
         var pick = _random.Pick(component.TouretteWords);
         msg = msg[0].ToString().ToLower() + msg.Remove(0, 1);
