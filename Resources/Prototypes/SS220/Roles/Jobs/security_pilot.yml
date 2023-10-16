@@ -25,8 +25,8 @@
   id: SecurityPilotGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
-    back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsJackSec
+    back: ClothingBackpackSecurityPilotFilled
+    shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesSecurity
     head: ClothingHeadHatBeretSecurity # Corvax-Resprite
     outerClothing: ClothingOuterHardsuitSecurity
