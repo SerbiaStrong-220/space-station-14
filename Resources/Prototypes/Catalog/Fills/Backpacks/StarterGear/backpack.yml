@@ -31,6 +31,8 @@
       - id: MagazinePistolRubber
       - id: MagazinePistolRubber
       - id: FlashlightSeclite
+      - id: DrinkRelaxingPeachCan
+      - id: CombatKnife
       
 - type: entity
   noSpawn: true
@@ -45,6 +47,8 @@
       - id: ForensicPad
       - id: ForensicScanner
       - id: FlashlightSeclite
+      - id: DrinkRelaxingPeachCan
+      - id: CombatKnife
 
 - type: entity
   noSpawn: true
@@ -143,6 +147,8 @@
       - id: Flash
       - id: MagazinePistol
       - id: MagazinePistol
+      - id: DrinkRelaxingPeachCan
+      - id: CombatKnife
 
 - type: entity
   noSpawn: true
