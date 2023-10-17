@@ -56,6 +56,25 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-traitor"),
         };
         args.Verbs.Add(traitor);
+		
+		Verb EvilTwin = new()
+        {
+            Text = "Make EvilTwin",
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi((new ResPath("/Textures/Structures/Wallmounts/posters.rsi")),
+                "poster3_legit"),
+            Act = () =>
+            {
+                if (!_minds.TryGetSession(targetMindComp.Mind, out var session))
+                    return;
+
+                EntityManager.System<Content.Server.SS220.EvilTwin.EvilTwinSystem>()
+                    .MakeTwin(out _, session.AttachedEntity);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-eviltwin"),
+        };
+        args.Verbs.Add(EvilTwin);
 
         Verb zombie = new()
         {
