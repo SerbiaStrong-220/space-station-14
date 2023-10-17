@@ -530,6 +530,8 @@ public sealed class EvilTwinSystem : EntitySystem
 
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
+#endregion.
+
     [Dependency] private readonly TagSystem _tagSystem = default!;
 
     [Dependency] private readonly MindSystem _mindSystem = default!;
