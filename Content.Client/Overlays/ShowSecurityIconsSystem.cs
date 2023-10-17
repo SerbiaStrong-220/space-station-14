@@ -1,10 +1,14 @@
+using Content.Client.Ninja.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Ninja.Components;
 using Content.Shared.Overlays;
 using Content.Shared.PDA;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
+using Content.Shared.Stealth.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.Overlays;
@@ -43,6 +47,7 @@ public sealed class ShowSecurityIconsSystem : EquipmentHudSystem<ShowSecurityIco
         string? securityRecordType = null; //SS220 Criminal-Records
         if (_accessReader.FindAccessItemsInventory(uid, out var items))
         {
+
             foreach (var item in items)
             {
                 // ID Card
@@ -62,10 +67,11 @@ public sealed class ShowSecurityIconsSystem : EquipmentHudSystem<ShowSecurityIco
                     securityRecordType = id.CurrentSecurityRecord?.RecordType; //SS220 Criminal-Records
                     break;
                 }
+
             }
         }
 
-        if (_prototypeMan.TryIndex<StatusIconPrototype>(jobIconToGet, out var jobIcon))
+        if (_prototypeMan.TryIndex<StatusIconPrototype>(jobIconToGet, out var jobIcon) && !(HasComp<SpaceNinjaComponent>(uid) && TryComp(uid, out StealthComponent? stealthComponent) && stealthComponent.Enabled == true))
             result.Add(jobIcon);
         else
             Log.Error($"Invalid job icon prototype: {jobIcon}");
@@ -77,7 +83,7 @@ public sealed class ShowSecurityIconsSystem : EquipmentHudSystem<ShowSecurityIco
             {
                 if (criminalStatus.StatusIcon.HasValue)
                 {
-                    if (_prototypeMan.TryIndex<StatusIconPrototype>(criminalStatus.StatusIcon, out var secIcon))
+                    if (_prototypeMan.TryIndex<StatusIconPrototype>(criminalStatus.StatusIcon, out var secIcon) && !(HasComp<SpaceNinjaComponent>(uid) && TryComp(uid, out StealthComponent? stealth) && stealth.Enabled == true))
                         result.Add(secIcon);
                     else
                         Log.Error($"Invalid security status icon prototype: {secIcon}");
