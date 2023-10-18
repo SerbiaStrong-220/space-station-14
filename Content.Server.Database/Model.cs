@@ -288,7 +288,7 @@ namespace Content.Server.Database
                 entity.HasIndex(p => p.Id).IsUnique();
                 entity.HasAlternateKey(p => p.SS14Id);
                 entity.Property(p => p.SS14Id).IsUnicode();
-                entity.HasIndex(p => new { p.CKey, p.DiscordId });
+                entity.HasIndex(p => p.DiscordId).IsUnique();
                 entity.Property(p => p.Id).ValueGeneratedOnAdd();
             });
         }

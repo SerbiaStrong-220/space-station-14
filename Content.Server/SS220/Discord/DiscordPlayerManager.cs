@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -38,7 +38,6 @@ public sealed class DiscordPlayerManager
 
                 discordPlayer = new DiscordPlayer()
                 {
-                    CKey = playerData.UserName,
                     SS14Id = playerData.UserId,
                     HashKey = CreateSecureRandomString(8)
                 };

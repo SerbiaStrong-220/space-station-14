@@ -1396,7 +1396,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             if (discordPlayer == null)
                 return (false, null);
-            if (!string.IsNullOrEmpty(discordPlayer.DiscordId))
+            if (discordPlayer.DiscordId is null)
                 return (true, null);
 
             return (false, discordPlayer);
