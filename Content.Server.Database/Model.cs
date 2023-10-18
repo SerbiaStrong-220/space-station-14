@@ -986,8 +986,6 @@ namespace Content.Server.Database
         public Guid Id { get; set; }
         public Guid SS14Id { get; set; }
         public string HashKey { get; set; } = null!;
-        public string CKey { get; set; } = null!;
-        public string? DiscordId { get; set; }
-        public string? DiscordName { get; set; }
+        public ulong? DiscordId { get; set; }
     }
 }
