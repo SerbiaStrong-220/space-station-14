@@ -23,12 +23,12 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitSecGrey # Corvax-Resprite
     back: ClothingBackpackSecurityFilled
-    shoes: ClothingShoesBootsJackSec
+    shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
     ears: ClothingHeadsetSecurity
     head: ClothingHeadHelmetBasic
     pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSecGrey # Corvax-Resprite
+  innerclothingskirt: ClothingUniformJumpskirtSecGrey # Corvax-Resprite
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
