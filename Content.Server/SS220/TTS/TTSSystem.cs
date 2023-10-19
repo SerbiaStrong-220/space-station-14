@@ -98,7 +98,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         if (!_isEnabled ||
             ev.Text.Length > MaxMessageChars ||
-            !GetVoicePrototype(_voiceId, out var protoVoice))
+            !GetVoicePrototype(ev.VoiceId, out var protoVoice))
             return;
 
         var soundData = await GenerateTTS(ev.Text, protoVoice.Speaker);
