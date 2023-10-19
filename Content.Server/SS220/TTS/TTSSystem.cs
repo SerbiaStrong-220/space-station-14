@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.TTS;
@@ -183,11 +183,12 @@ public sealed partial class TTSSystem : EntitySystem
             var ssmlTraits = SoundTraits.RateFast;
             if (isWhisper)
                 ssmlTraits |= SoundTraits.PitchVerylow;
+
             var textSsml = ToSsmlText(textSanitized, ssmlTraits);
 
             return isRadio
-                ? await _ttsManager.ConvertTextToSpeechRadio(speaker, textSsml)
-                : await _ttsManager.ConvertTextToSpeech(speaker, textSsml);
+                ? await _ttsManager.ConvertTextToSpeechRadio(speaker, textSanitized)
+                : await _ttsManager.ConvertTextToSpeech(speaker, textSanitized);
         }
         catch (Exception e)
         {

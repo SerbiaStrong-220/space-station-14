@@ -172,12 +172,12 @@ public sealed class TTSManager
         });
     }
 
-    private string ToQueryString(NameValueCollection nvc)
+    private static string ToQueryString(NameValueCollection nvc)
     {
         var array = (
             from key in nvc.AllKeys
             from value in nvc.GetValues(key) ?? Array.Empty<string>()
-            select $"{key}={value}"
+            select $"{key}={HttpUtility.UrlEncode(value)}"
             ).ToArray();
 
         return "?" + string.Join("&", array);
