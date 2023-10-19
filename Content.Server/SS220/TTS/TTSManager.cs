@@ -80,8 +80,6 @@ public sealed class TTSManager
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
             _apiToken = v;
-
-            _sawmill.Debug("Api token set");
         },
         true);
     }
@@ -123,8 +121,6 @@ public sealed class TTSManager
                     { "speaker", speaker },
                     { "text", text },
                     { "ext", "ogg" }});
-
-                _sawmill.Debug(requestUrl);
 
                 var response = await _httpClient.GetAsync(requestUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
