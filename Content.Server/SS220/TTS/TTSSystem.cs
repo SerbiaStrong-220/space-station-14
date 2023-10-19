@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Shared.Corvax.CCCVars;
@@ -55,17 +56,29 @@ public sealed partial class TTSSystem : EntitySystem
         RaiseLocalEvent(args.Source, voiceEv);
         voiceId = voiceEv.VoiceId;
 
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
+        {
             return;
+        }
 
         HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
+    }
+
+    private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
+    {
+        if (!_prototypeManager.TryIndex(_voiceId, out voicePrototype))
+        {
+            return _prototypeManager.TryIndex("father_grigori", out voicePrototype);
+        }
+
+        return true;
     }
 
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
     {
         if (!_isEnabled ||
             args.Message.Length > MaxMessageChars * 2 ||
-            !_prototypeManager.TryIndex<TTSVoicePrototype>(_voiceId, out var protoVoice))
+            !GetVoicePrototype(_voiceId, out var protoVoice))
         {
             RaiseNetworkEvent(new AnnounceTTSEvent(new byte[] { }, args.AnnouncementSound, args.AnnouncementSoundParams), args.Source);
             return;
@@ -85,7 +98,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         if (!_isEnabled ||
             ev.Text.Length > MaxMessageChars ||
-            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            !GetVoicePrototype(_voiceId, out var protoVoice))
             return;
 
         var soundData = await GenerateTTS(ev.Text, protoVoice.Speaker);
@@ -107,12 +120,9 @@ public sealed partial class TTSSystem : EntitySystem
         RaiseLocalEvent(uid, voiceEv);
         voiceId = voiceEv.VoiceId;
 
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
         {
-            if (!_prototypeManager.TryIndex<TTSVoicePrototype>("father_grigori", out protoVoice))
-            {
-                return;
-            }
+            return;
         }
 
         if (args.ObfuscatedMessage != null)
