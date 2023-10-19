@@ -123,7 +123,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         var soundData = await GenerateTTS(message, speaker);
         if (soundData is null) return;
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), Filter.Pvs(uid));
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid), volumeModifier: 5), Filter.Pvs(uid));
     }
 
     private async void HandleWhisper(EntityUid uid, string message, string speaker, bool isRadio)
