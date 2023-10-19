@@ -66,7 +66,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
     {
-        if (!_prototypeManager.TryIndex(_voiceId, out voicePrototype))
+        if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
         {
             return _prototypeManager.TryIndex("father_grigori", out voicePrototype);
         }
