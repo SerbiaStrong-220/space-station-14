@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -16,6 +16,8 @@ using FFMpegCore.Pipes;
 using Prometheus;
 using Robust.Shared.Configuration;
 using System.ComponentModel;
+using System.Collections.Specialized;
+using System.Web;
 
 namespace Content.Server.SS220.TTS;
 
@@ -74,7 +76,11 @@ public sealed class TTSManager
         }, true);
         _cfg.OnValueChanged(CCCVars.TTSRequestTimeout, val => _timeout = val, true);
         _cfg.OnValueChanged(CCCVars.TTSApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(CCCVars.TTSApiToken, v => _apiToken = v, true);
+        _cfg.OnValueChanged(CCCVars.TTSApiToken, v =>
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
+            _apiToken = v; },
+            true);
     }
 
     /// <summary>
@@ -101,7 +107,6 @@ public sealed class TTSManager
 
             var body = new GenerateVoiceRequest
             {
-                ApiToken = _apiToken,
                 Text = text,
                 Speaker = speaker,
             };
@@ -110,7 +115,13 @@ public sealed class TTSManager
             try
             {
                 var cts = new CancellationTokenSource(TimeSpan.FromSeconds(_timeout));
-                var response = await _httpClient.PostAsJsonAsync(_apiUrl, body, cts.Token);
+
+                var requestUrl = $"{_apiUrl}" + ToQueryString(new NameValueCollection() {
+                    { "speaker", speaker },
+                    { "text", text },
+                    { "ext", "ogg" }});
+
+                var response = await _httpClient.GetAsync(_apiUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == HttpStatusCode.TooManyRequests)
@@ -156,6 +167,24 @@ public sealed class TTSManager
                 return null;
             }
         });
+    }
+
+    private string ToQueryString(NameValueCollection nvc)
+    {
+        if (nvc is null)
+        {
+            throw new ArgumentNullException(nameof(nvc);
+        }
+
+        var array = (
+            from key in nvc.AllKeys
+            from value in nvc.GetValues(key)
+            select string.Format(
+            "{0}={1}",
+            HttpUtility.UrlEncode(key),
+            HttpUtility.UrlEncode(value))
+            ).ToArray();
+        return "?" + string.Join("&", array);
     }
 
     public async Task<byte[]?> ConvertTextToSpeechRadio(string speaker, string text)
@@ -302,34 +331,14 @@ public sealed class TTSManager
         {
         }
 
-        [JsonPropertyName("api_token")]
-        public string ApiToken { get; set; } = "";
+        [JsonPropertyName("speaker")]
+        public string Speaker { get; set; } = "";
 
         [JsonPropertyName("text")]
         public string Text { get; set; } = "";
 
-        [JsonPropertyName("speaker")]
-        public string Speaker { get; set; } = "";
-
-        [JsonPropertyName("ssml")]
-        // ReSharper disable once InconsistentNaming
-        public bool SSML { get; private set; } = true;
-
-        [JsonPropertyName("word_ts")]
-        // ReSharper disable once InconsistentNaming
-        public bool WordTS { get; private set; } = false;
-
-        [JsonPropertyName("put_accent")]
-        public bool PutAccent { get; private set; } = true;
-
-        [JsonPropertyName("put_yo")]
-        public bool PutYo { get; private set; } = false;
-
-        [JsonPropertyName("sample_rate")]
-        public int SampleRate { get; private set; } = 24000;
-
-        [JsonPropertyName("format")]
-        public string Format { get; private set; } = "ogg";
+        [JsonPropertyName("ext")]
+        public string Extension { get; } = "ogg";
     }
 
     private struct GenerateVoiceResponse
