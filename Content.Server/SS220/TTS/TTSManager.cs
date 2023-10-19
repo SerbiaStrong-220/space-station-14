@@ -126,7 +126,7 @@ public sealed class TTSManager
 
                 _sawmill.Debug(requestUrl);
 
-                var response = await _httpClient.GetAsync(_apiUrl, cts.Token);
+                var response = await _httpClient.GetAsync(requestUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == HttpStatusCode.TooManyRequests)
