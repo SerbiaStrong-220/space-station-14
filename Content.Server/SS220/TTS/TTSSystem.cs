@@ -108,7 +108,12 @@ public sealed partial class TTSSystem : EntitySystem
         voiceId = voiceEv.VoiceId;
 
         if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
-            return;
+        {
+            if (!_prototypeManager.TryIndex<TTSVoicePrototype>("father_grigori", out protoVoice))
+            {
+                return;
+            }
+        }
 
         if (args.ObfuscatedMessage != null)
         {
@@ -123,7 +128,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         var soundData = await GenerateTTS(message, speaker);
         if (soundData is null) return;
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid), volumeModifier: 5), Filter.Pvs(uid));
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), Filter.Pvs(uid));
     }
 
     private async void HandleWhisper(EntityUid uid, string message, string speaker, bool isRadio)
