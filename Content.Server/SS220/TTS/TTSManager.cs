@@ -139,9 +139,7 @@ public sealed class TTSManager
                     return null;
                 }
 
-                var json =
-                    await response.Content.ReadFromJsonAsync<GenerateVoiceResponse>(cancellationToken: cts.Token);
-                var soundData = Convert.FromBase64String(json.Results.First().Audio);
+                var soundData = await response.Content.ReadAsByteArrayAsync();
 
                 _cache.AddOrUpdate(cacheKey, soundData, (_, __) => soundData);
                 _cacheKeysSeq.Add(cacheKey);
@@ -179,11 +177,9 @@ public sealed class TTSManager
         var array = (
             from key in nvc.AllKeys
             from value in nvc.GetValues(key) ?? Array.Empty<string>()
-            select string.Format(
-            "{0}={1}",
-            HttpUtility.UrlEncode(key),
-            HttpUtility.UrlEncode(value))
+            select $"{key}={value}"
             ).ToArray();
+
         return "?" + string.Join("&", array);
     }
 
