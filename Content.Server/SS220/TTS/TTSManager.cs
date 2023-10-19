@@ -174,14 +174,9 @@ public sealed class TTSManager
 
     private string ToQueryString(NameValueCollection nvc)
     {
-        if (nvc is null)
-        {
-            throw new ArgumentNullException(nameof(nvc);
-        }
-
         var array = (
             from key in nvc.AllKeys
-            from value in nvc.GetValues(key)
+            from value in nvc.GetValues(key) ?? Array.Empty<string>()
             select string.Format(
             "{0}={1}",
             HttpUtility.UrlEncode(key),
