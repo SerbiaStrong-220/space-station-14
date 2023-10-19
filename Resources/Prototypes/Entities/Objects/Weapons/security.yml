@@ -10,8 +10,9 @@
     - state: stunbaton_off
       map: [ "enum.ToggleVisuals.Layer" ]
   - type: Stunbaton
-    energyPerUse: 100
+    energyPerUse: 50
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     damage:
       types:
         Blunt: 7
@@ -99,6 +100,7 @@
     sprite: Objects/Weapons/Melee/truncheon.rsi
     state: icon
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     damage:
       types:
         Blunt: 20
@@ -139,6 +141,7 @@
       maxCharges: 5
       charges: 5
     - type: MeleeWeapon
+      wideAnimationRotation: 180
       damage:
         types:
           Blunt: 0 # melee weapon to allow flashing individual targets
@@ -162,6 +165,15 @@
     - type: GuideHelp
       guides:
       - Security
+
+- type: entity
+  name: flash
+  parent: Flash
+  id: SciFlash
+  components:
+    - type: LimitedCharges
+      maxCharges: 2
+      charges: 2
 
 - type: entity
   name: portable flasher
