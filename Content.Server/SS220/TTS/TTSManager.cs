@@ -124,6 +124,8 @@ public sealed class TTSManager
                     { "text", text },
                     { "ext", "ogg" }});
 
+                _sawmill.Debug(requestUrl);
+
                 var response = await _httpClient.GetAsync(_apiUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
                 {
