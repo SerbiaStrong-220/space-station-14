@@ -79,8 +79,11 @@ public sealed class TTSManager
         _cfg.OnValueChanged(CCCVars.TTSApiToken, v =>
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
-            _apiToken = v; },
-            true);
+            _apiToken = v;
+
+            _sawmill.Debug("Api token set");
+        },
+        true);
     }
 
     /// <summary>
