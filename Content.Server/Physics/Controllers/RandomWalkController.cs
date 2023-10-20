@@ -8,6 +8,9 @@ using Content.Server.Physics.Components;
 using Content.Shared.Follower.Components;
 using Content.Shared.Throwing;
 
+using Content.Shared.Anomaly.Components;
+using Content.Shared.Anomaly.Effects.Components;
+
 namespace Content.Server.Physics.Controllers;
 
 /// <summary>
@@ -27,6 +30,7 @@ internal sealed class RandomWalkController : VirtualController
         base.Initialize();
 
         SubscribeLocalEvent<RandomWalkComponent, ComponentStartup>(OnRandomWalkStartup);
+        SubscribeLocalEvent<RandomWalkComponent, AnomalyPulseEvent>(OnPulse);
     }
 
     /// <summary>
@@ -73,6 +77,15 @@ internal sealed class RandomWalkController : VirtualController
 
         _physics.SetLinearVelocity(uid, physics.LinearVelocity * randomWalk.AccumulatorRatio, body: physics);
         _physics.ApplyLinearImpulse(uid, pushAngle.ToVec() * (pushStrength * physics.Mass), body: physics);
+
+        randomWalk.MinSpeed=randomWalk.MinSpeed*randomWalk.Сhange;
+        randomWalk.MaxSpeed=randomWalk.MaxSpeed*randomWalk.Сhange;
+        if (randomWalk.MaxSpeed < 0.1)
+        {
+           randomWalk.MinSpeed=randomWalk.MinSpeed=0;
+           randomWalk.MaxSpeed=randomWalk.MaxSpeed=0;
+           randomWalk.Сhange=randomWalk.Сhange=1;
+        }
     }
 
     /// <summary>
@@ -87,5 +100,17 @@ internal sealed class RandomWalkController : VirtualController
             Update(uid, comp);
         else
             comp.NextStepTime = _timing.CurTime + TimeSpan.FromSeconds(_random.NextDouble(comp.MinStepCooldown.TotalSeconds, comp.MaxStepCooldown.TotalSeconds));
+    }
+
+    private void OnPulse(EntityUid uid, RandomWalkComponent? randomWalk, ref AnomalyPulseEvent args)
+    {
+        if (randomWalk != null)
+        {
+            randomWalk.MinStepCooldown=TimeSpan.FromSeconds(1.0);
+            randomWalk.MaxStepCooldown=TimeSpan.FromSeconds(1.0);
+            randomWalk.MinSpeed=randomWalk.MinSpeed=10;
+            randomWalk.MaxSpeed=randomWalk.MaxSpeed=15;
+            randomWalk.Сhange=randomWalk.Сhange=0.8f;
+        }
     }
 }

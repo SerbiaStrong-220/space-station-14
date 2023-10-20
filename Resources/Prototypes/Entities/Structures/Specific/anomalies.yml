@@ -20,7 +20,7 @@
   - type: Transform
     anchored: false
   - type: Physics
-    bodyType: Static
+    bodyType: KinematicController
   - type: Fixtures
     fixtures:
       fix1:
@@ -50,6 +50,9 @@
   - type: RadiationSource
     intensity: 4
     slope: 0.7
+  - type: RandomWalk
+    minSpeed: 0
+    maxSpeed: 0
 
 - type: entity
   id: AnomalyPyroclastic
@@ -295,7 +298,7 @@
       types:
         Slash: 1
   - type: EntitySpawnAnomaly
-    superCriticalSpawns: 
+    superCriticalSpawns:
     - ReagentSlimeSpawner
     spawns:
       - PuddleSparkle
