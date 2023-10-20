@@ -9,6 +9,7 @@
     northOver: true
     northOverride: -0.1
     southOverride: 0.1
+    hornSound: /Audio/SS220/Paramedic-atv/weeoo1.ogg
   - type: Sprite
     sprite: SS220/Objects/Vehicles/paramedic_atv.rsi
     layers:
