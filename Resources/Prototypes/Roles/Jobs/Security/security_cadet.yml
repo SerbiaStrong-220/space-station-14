@@ -29,6 +29,6 @@
     ears: ClothingHeadsetSecurity
     head: ClothingHeadHelmetBasic
     pocket1: WeaponPistolMk58Nonlethal
-  innerClothingSkirt: ClothingUniformJumpskirtSecGrey # Corvax-Resprite
+  innerclothingskirt: ClothingUniformJumpskirtSecGrey # Corvax-Resprite
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled
