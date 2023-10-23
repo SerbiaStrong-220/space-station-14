@@ -126,8 +126,10 @@ public sealed class JobRequirementsManager
         reason = null;
         ReasonList reasons = new();
 
-        if (CheckSpeciesRestrict(job, (_preferencesManager.Preferences!.SelectedCharacter as HumanoidCharacterProfile)!, reasons)
-            && CheckRoleTime(job.Requirements, reasons))
+        var bCheckSpecies = CheckSpeciesRestrict(job, (_preferencesManager.Preferences!.SelectedCharacter as HumanoidCharacterProfile)!, reasons);
+        var bCheckRoleTime = CheckRoleTime(job.Requirements, reasons);
+
+        if (bCheckSpecies && bCheckRoleTime)
         {
             return true;
         }
