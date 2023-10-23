@@ -82,9 +82,9 @@ internal sealed class RandomWalkController : VirtualController
         randomWalk.MaxSpeed*=randomWalk.Сhange;
         if (randomWalk.MaxSpeed < 0.1)
         {
-           randomWalk.MinSpeed=randomWalk.MinSpeed=0;
-           randomWalk.MaxSpeed=randomWalk.MaxSpeed=0;
-           randomWalk.Сhange=randomWalk.Сhange=1;
+           randomWalk.MinSpeed=0;
+           randomWalk.MaxSpeed=0;
+           randomWalk.Сhange=1;
         }
     }
 
