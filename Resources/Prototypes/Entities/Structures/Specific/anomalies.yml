@@ -12,6 +12,7 @@
     anomalyContactDamage:
       types:
         Radiation: 10
+    pulseRun: True
   - type: AmbientSound
     range: 5
     volume: -5
