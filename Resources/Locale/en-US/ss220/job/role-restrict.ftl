@@ -1,0 +1,1 @@
+role-restrict-specie = That job doesn't allowed for current species

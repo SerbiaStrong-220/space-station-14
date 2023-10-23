@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Server.Administration.Managers;
 using Content.Server.Ghost;
 using Content.Server.Players;
+using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
@@ -19,6 +20,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Server.SS220.RoleSpeciesRestrict;
 
 namespace Content.Server.GameTicking
 {
@@ -26,6 +28,7 @@ namespace Content.Server.GameTicking
     {
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly SharedJobSystem _jobs = default!;
+        [Dependency] private readonly RoleSpeciesRestrictSystem _roleSpeciesRestrictSystem = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         private const string ObserverPrototypeName = "MobObserver";
@@ -114,6 +117,10 @@ namespace Content.Server.GameTicking
 
             if (jobId != null && !_playTimeTrackings.IsAllowed(player, jobId))
                 return;
+
+            if (jobId != null && !_roleSpeciesRestrictSystem.IsAllowed(player, jobId))
+                return;
+
             SpawnPlayer(player, character, station, jobId, lateJoin, silent);
         }
 
