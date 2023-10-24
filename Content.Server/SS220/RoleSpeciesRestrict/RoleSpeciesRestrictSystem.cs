@@ -1,5 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-// Created special for SS200 with love by Alan Wake (https://github.com/aw-c)
+// Created specially for SS200 with love by Alan Wake (https://github.com/aw-c)
 using Content.Shared.Roles;
 using Robust.Server.Player;
 using Robust.Shared.Prototypes;
