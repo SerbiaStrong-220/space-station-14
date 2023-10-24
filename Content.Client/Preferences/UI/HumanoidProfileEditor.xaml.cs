@@ -1151,6 +1151,7 @@ namespace Content.Client.Preferences.UI
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
+            UpdateRoleRequirements(); //SS220 Species-Job-Requirement
 
             _preferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
         }
