@@ -93,7 +93,7 @@ public sealed class JobRequirementsManager
         return _adminManager.IsActive();
     }
 
-    public bool IsAllowed(JobPrototype job, [NotNullWhen(false)] out FormattedMessage? reason)
+    public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
 
@@ -113,7 +113,7 @@ public sealed class JobRequirementsManager
         if (player == null)
             return true;
 
-        return CheckAllowed(job, out reason);
+        return CheckAllowed(job, profile, out reason);
     }
 
     public void BuildReason(ReasonList reasons, out FormattedMessage reason)
@@ -121,12 +121,12 @@ public sealed class JobRequirementsManager
         reason = FormattedMessage.FromMarkup(string.Join('\n', reasons));
     }
 
-    public bool CheckAllowed(JobPrototype job, [NotNullWhen(false)] out FormattedMessage? reason)
+    public bool CheckAllowed(JobPrototype job, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
         ReasonList reasons = new();
 
-        var bCheckSpecies = CheckSpeciesRestrict(job, (_preferencesManager.Preferences!.SelectedCharacter as HumanoidCharacterProfile)!, reasons);
+        var bCheckSpecies = CheckSpeciesRestrict(job, profile, reasons);
         var bCheckRoleTime = CheckRoleTime(job.Requirements, reasons);
 
         if (bCheckSpecies && bCheckRoleTime)
