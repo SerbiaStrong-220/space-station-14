@@ -797,6 +797,7 @@ namespace Content.Client.Preferences.UI
             RebuildSpriteView(); // they might have different inv so we need a new dummy
             IsDirty = true;
             _needUpdatePreview = true;
+            UpdateRoleRequirements();
         }
 
         private void SetName(string newName)
