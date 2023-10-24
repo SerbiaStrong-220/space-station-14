@@ -72,6 +72,7 @@ namespace Content.Shared.Roles
 
     public static class JobRequirements
     {
+        //SS220 Species-Job-Requirement begin
         public static bool TryRequirementsSpeciesMet(
             JobPrototype job,
             SpeciesPrototype species,
@@ -87,6 +88,8 @@ namespace Content.Shared.Roles
             }
             return true;
         }
+        //SS220 Species-Job-Requirement end
+
         public static bool TryRequirementsMet(
             JobPrototype job,
             Dictionary<string, TimeSpan> playTimes,

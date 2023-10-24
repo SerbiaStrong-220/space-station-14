@@ -118,6 +118,7 @@ namespace Content.Server.GameTicking
             if (jobId != null && !_playTimeTrackings.IsAllowed(player, jobId))
                 return;
 
+            //SS220 Species-Job-Requirement
             if (jobId != null && !_roleSpeciesRestrictSystem.IsAllowed(player, jobId))
                 return;
 

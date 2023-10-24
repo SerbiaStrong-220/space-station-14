@@ -116,6 +116,7 @@ public sealed class JobRequirementsManager
         return CheckAllowed(job, profile, out reason);
     }
 
+    //SS220 Species-Job-Requirement begin
     public void BuildReason(ReasonList reasons, out FormattedMessage reason)
     {
         reason = FormattedMessage.FromMarkup(string.Join('\n', reasons));
@@ -167,6 +168,7 @@ public sealed class JobRequirementsManager
         }
         return true;
     }
+    //SS220 Species-Job-Requirement end
 
     public bool CheckRoleTime(HashSet<JobRequirement>? requirements, ReasonList reasons)
     {
@@ -185,6 +187,6 @@ public sealed class JobRequirementsManager
             reasons.Add(jobReason.ToMarkup());
         }
 
-        return reasons.Count == 0;
+        return reasons.Count == 0; //SS220 Species-Job-Requirement
     }
 }

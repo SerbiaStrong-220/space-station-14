@@ -797,7 +797,7 @@ namespace Content.Client.Preferences.UI
             RebuildSpriteView(); // they might have different inv so we need a new dummy
             IsDirty = true;
             _needUpdatePreview = true;
-            UpdateRoleRequirements();
+            UpdateRoleRequirements(); //SS220 Species-Job-Requirement
         }
 
         private void SetName(string newName)
@@ -833,7 +833,7 @@ namespace Content.Client.Preferences.UI
                 _preferencesManager.UpdateCharacter(Profile, CharacterSlot);
                 OnProfileChanged?.Invoke(Profile, CharacterSlot);
                 _needUpdatePreview = true;
-                UpdateRoleRequirements();
+                UpdateRoleRequirements(); //SS220 Species-Job-Requirement
             }
         }
 

@@ -134,6 +134,7 @@ public sealed class SpeciesPrototype : IPrototype
     [DataField("buttScanTexture")]
     public string ButtScanTexture = "/Textures/SS220/Interface/Butts/human.png";
 
+    //SS220 Species-Job-Requirement
     [DataField("blockedJobs", required: false, customTypeSerializer: typeof(PrototypeIdListSerializer<JobPrototype>))]
     public List<string> BlockedJobs { get; } = default!;
 }
