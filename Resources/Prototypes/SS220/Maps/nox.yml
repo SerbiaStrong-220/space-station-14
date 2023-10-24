@@ -4,7 +4,7 @@
   id: Nox
   mapName: 'NSS Nox'
   mapPath: /Maps/nox.yml
-  minPlayers: 0
+  minPlayers: 30
   stations:
     Nox:
       stationProto: NoxNanotrasenStation
