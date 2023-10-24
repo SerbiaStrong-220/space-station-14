@@ -3,6 +3,7 @@
   mapName: '220Ishimura'
   mapPath: /Maps/ishimura220.yml
   minPlayers: 0
+  maxPlayers: 45
   stations:
     Ishimura:
       stationProto: IshimuraNanotrasenStation
