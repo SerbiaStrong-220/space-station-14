@@ -1,1 +1,1 @@
-role-restrict-specie = That job doesn't allowed for current species
+role-restrict-specie = This job is not allowed for selected species
