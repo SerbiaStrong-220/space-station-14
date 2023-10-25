@@ -52,6 +52,30 @@
       - id: ClothingEyesHudSecurity
 
 - type: entity
+  id: LockerPilotFilled
+  suffix: Filled
+  parent: LockerPilot
+  components:
+  - type: StorageFill
+    contents:
+      - id: FlashlightSeclite
+      - id: WeaponDisabler
+        prob: 0.3
+      - id: ClothingOuterArmorBobmer
+      - id: ClothingHeadHatPilotBeret
+      - id: ClothingBeltSecurityFilled
+      - id: Flash
+      - id: ClothingEyesGlassesSecurity
+      - id: ClothingHandsGlovesCombat
+      - id: ClothingShoesBootsJack
+      - id: ClothingEyesHudSecurity
+      - id: ClothingOuterHardsuitSecurity
+      - id: HandheldGPSBasic
+      - id: PilotBriefing
+      - id: YellowOxygenTankFilled
+      - id: NitrogenTankFilled
+      
+- type: entity
   id: LockerSecurityFilled
   suffix: Filled
   parent: LockerSecurity
