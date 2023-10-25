@@ -136,7 +136,7 @@ public sealed class SpeciesPrototype : IPrototype
 
     //SS220 Species-Job-Requirement
     [DataField("blockedJobs", required: false, customTypeSerializer: typeof(PrototypeIdListSerializer<JobPrototype>))]
-    public List<string> BlockedJobs { get; } = default!;
+    public List<string> BlockedJobs { get; } = new();
 }
 
 public enum SpeciesNaming : byte
