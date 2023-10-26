@@ -23,6 +23,7 @@ public sealed class TTSVoicePrototype : IPrototype
     [DataField("speaker", required: true)]
     public string Speaker { get; } = string.Empty;
 
+    [DataField("description")]
     public string Description { get; } = string.Empty;
 
     /// <summary>
