@@ -1,63 +1,63 @@
 ﻿- type: ttsVoice
   name: Папич
   description: Голос популярного стримера Папича
-  sex: Unsexed
+  sex: Male
   speaker: papich
   id: papich
 
 - type: ttsVoice
   name: Бэбэй
   description: Голос популярного стримера Бэбэя
-  sex: Unsexed
+  sex: Male
   speaker: bebey
   id: bebey
 
 - type: ttsVoice
   name: Шарлотта
   description: Голос виртуального ютубера Charlotte Ch
-  sex: Unsexed
+  sex: Female
   speaker: charlotte
   id: charlotte
 
 - type: ttsVoice
   name: Планя
   description: Голос виртуального ютубера Planya Ch
-  sex: Unsexed
+  sex: Female
   speaker: planya
   id: planya
 
 - type: ttsVoice
   name: Мана
   description: Голос виртуального ютубера Mana Renewal
-  sex: Unsexed
+  sex: Female
   speaker: mana
   id: mana
 
 - type: ttsVoice
   name: Амина
   description: Голос виртуального ютубера St. Anime Renewal
-  sex: Unsexed
+  sex: Female
   speaker: amina
   id: amina
 
 - type: ttsVoice
   name: Джо Байден
   description: Голос американского президента Джо Байдена
-  sex: Unsexed
+  sex: Male
   speaker: biden
   id: biden
 
 - type: ttsVoice
   name: Барак Обама
   description: Голос американского президента Барака Обамы
-  sex: Unsexed
+  sex: Male
   speaker: obama
   id: obama
 
 - type: ttsVoice
   name: Дональд Трамп
   description: Голос американского президента Дональда Трампа
-  sex: Unsexed
+  sex: Male
   speaker: trump
   id: trump
 
@@ -70,7 +70,7 @@
 
 - type: ttsVoice
   name: Хреноид
-  sex: Unsexed
+  sex: Male
   description: ''
   speaker: xrenoid
   id: xrenoid
@@ -85,119 +85,119 @@
 - type: ttsVoice
   name: Уоллес Брин
   description: Голос персонажа Уоллес Брин из игры Half-Life 2
-  sex: Unsexed
+  sex: Male
   speaker: briman
   id: briman
 
 - type: ttsVoice
   name: Отец Григорий
   description: Голос персонажа Отец Григорий из игры Half-Life 2
-  sex: Unsexed
+  sex: Male
   speaker: father_grigori
   id: father_grigori
 
 - type: ttsVoice
   name: Доктор Кляйнер
   description: Голос персонажа Доктор Кляйнер из игры Half-Life 2
-  sex: Unsexed
+  sex: Male
   speaker: kleiner
   id: kleiner
 
 - type: ttsVoice
   name: Джудит Моссман
   description: Голос персонажа Джудит Моссман из игры Half-Life 2
-  sex: Unsexed
+  sex: Female
   speaker: mossman
   id: mossman
 
 - type: ttsVoice
   name: Илай Вэнс
   description: Голос персонажа Илай Вэнс из игры Half-Life 2
-  sex: Unsexed
+  sex: Male
   speaker: vance
   id: vance
 
 - type: ttsVoice
   name: Аликс Вэнс
   description: Голос персонажа Аликс Вэнс из игры Half-Life 2
-  sex: Unsexed
+  sex: Female
   speaker: alyx
   id: alyx
 
 - type: ttsVoice
   name: G-Man
   description: Голос персонажа G-Man из игры Half-Life 2
-  sex: Unsexed
+  sex: Male
   speaker: gman
   id: gman
 
 - type: ttsVoice
   name: Барни Калхун
   description: Голос персонажа Барни Калхун из игры Half-Life 2
-  sex: Unsexed
+  sex: Male
   speaker: barni
   id: barni
 
 - type: ttsVoice
   name: Неко-Арк
   description: Голос персонажа Неко-Арк из Fate
-  sex: Unsexed
+  sex: Female
   speaker: neco
   id: neco
 
 - type: ttsVoice
   name: Солдат
   description: Голос персонажа Солдат из Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: soldier
   id: soldier
 
 - type: ttsVoice
   name: SentryBot
   description: Голос персонажа SentryBot из Fallout 3
-  sex: Unsexed
+  sex: Male
   speaker: sentrybot
   id: sentrybot
 
 - type: ttsVoice
   name: Полина
   description: Голос персонажа Полина из игры Tiny Bunny
-  sex: Unsexed
+  sex: Female
   speaker: polina
   id: polina
 
 - type: ttsVoice
   name: Цицерон
   description: Голос персонажа Цицерон из игры TES 5 Skyrim
-  sex: Unsexed
+  sex: Male
   speaker: cicero
   id: cicero
 
 - type: ttsVoice
   name: Шеогорат
   description: Голос персонажа Шеогорат из игры TES 5 Skyrim
-  sex: Unsexed
+  sex: Male
   speaker: sheogorath
   id: sheogorath
 
 - type: ttsVoice
   name: Кодлак Белая Грива
   description: Голос персонажа Кодлак Белая Грива из игры TES 5 Skyrim
-  sex: Unsexed
+  sex: Male
   speaker: kodlakwhitemane
   id: kodlakwhitemane
 
 - type: ttsVoice
   name: GLaDOS
   description: Голос персонажа GLaDOS из игры Portal 2
-  sex: Unsexed
+  sex: Female
   speaker: glados
   id: glados
 
 - type: ttsVoice
   name: Модуль Приключений
   description: Голос персонажа Модуль Приключений из игры Portal 2
-  sex: Unsexed
+  sex: Male
   speaker: adventure_core
   id: adventure_core
 
@@ -218,56 +218,56 @@
 - type: ttsVoice
   name: Турель
   description: Голос персонажа Турель из игры Portal 2
-  sex: Unsexed
+  sex: Female
   speaker: turret_floor
   id: turret_floor
 
 - type: ttsVoice
   name: Геральт из Ривии
   description: Голос персонажа Геральт из Ривии из игры Ведьмак 3
-  sex: Unsexed
+  sex: Male
   speaker: geralt
   id: geralt
 
 - type: ttsVoice
   name: Цирилла
   description: Голос персонажа Цирилла из игры Ведьмак 3
-  sex: Unsexed
+  sex: Female
   speaker: cirilla
   id: cirilla
 
 - type: ttsVoice
   name: Ламберт
   description: Голос персонажа Ламберт из игры Ведьмак 3
-  sex: Unsexed
+  sex: Male
   speaker: lambert
   id: lambert
 
 - type: ttsVoice
   name: Трисс
   description: Голос персонажа Трисс из игры Ведьмак 3
-  sex: Unsexed
+  sex: Female
   speaker: triss
   id: triss
 
 - type: ttsVoice
   name: Азир
   description: Голос персонажа Азир из игры League of Legends
-  sex: Unsexed
+  sex: Male
   speaker: azir
   id: azir
 
 - type: ttsVoice
   name: Экко
   description: Голос персонажа Экко из игры League of Legends
-  sex: Unsexed
+  sex: Male
   speaker: ekko
   id: ekko
 
 - type: ttsVoice
   name: Твич
   description: Голос персонажа Твич из игры League of Legends
-  sex: Unsexed
+  sex: Male
   speaker: twitch
   id: twitch
 
@@ -281,111 +281,111 @@
 - type: ttsVoice
   name: Кэйтлин
   description: Голос персонажа Кэйтлин из игры League of Legends
-  sex: Unsexed
+  sex: Female
   speaker: caitlyn
   id: caitlyn
 
 - type: ttsVoice
   name: Артас Менетил
   description: Голос персонажа Артас Менетил из игры Warcraft 3
-  sex: Unsexed
+  sex: Male
   speaker: arthas
   id: arthas
 
 - type: ttsVoice
   name: Иллидан Ярость Бури
   description: Голос персонажа Иллидан Ярость Бури из игры Warcraft 3
-  sex: Unsexed
+  sex: Male
   speaker: illidan
   id: illidan
 
 - type: ttsVoice
   name: Рексар
   description: Голос персонажа Рексар из игры Warcraft 3
-  sex: Unsexed
+  sex: Male
   speaker: rexxar
   id: rexxar
 
 - type: ttsVoice
   name: Вол'джин
   description: Голос персонажа Вол'джин из игры Warcraft 3
-  sex: Unsexed
+  sex: Male
   speaker: voljin
   id: voljin
 
 - type: ttsVoice
   name: Бандит
   description: Голос персонажа Бандита из игры S.T.A.L.K.E.R.
-  sex: Unsexed
+  sex: Male
   speaker: bandit
   id: bandit
 
 - type: ttsVoice
   name: Лесник
   description: Голос персонажа Лесник из игры S.T.A.L.K.E.R
-  sex: Unsexed
+  sex: Male
   speaker: forester
   id: forester
 
 - type: ttsVoice
   name: Сидорович
   description: Голос персонажа Сидорович из игры S.T.A.L.K.E.R
-  sex: Unsexed
+  sex: Male
   speaker: sidorovich
   id: sidorovich
 
 - type: ttsVoice
   name: Стрелок
   description: Голос персонажа Стрелок из игры S.T.A.L.K.E.R
-  sex: Unsexed
+  sex: Male
   speaker: strelok
   id: strelok
 
 - type: ttsVoice
   name: Трэйсер
   description: Голос персонажа Трэйсер из игры Overwatch
-  sex: Unsexed
+  sex: Female
   speaker: tracer
   id: tracer
 
 - type: ttsVoice
   name: Инженер
   description: Голос персонажа Инженер из игры Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: engineer
   id: engineer
 
 - type: ttsVoice
   name: Хэви
   description: Голос персонажа Хэви из игры Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: heavy
   id: heavy
 
 - type: ttsVoice
   name: Медик
   description: Голос персонажа Медик из игры Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: medic
   id: medic
 
 - type: ttsVoice
   name: Подрывник
   description: Голос персонажа Подрывник из игры Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: demoman
   id: demoman
 
 - type: ttsVoice
   name: Снайпер
   description: Голос персонажа Снайпер из игры Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: sniper
   id: sniper
 
 - type: ttsVoice
   name: Шпион
   description: Голос персонажа Шпион из игры Team Fortress 2
-  sex: Unsexed
+  sex: Male
   speaker: spy
   id: spy
