@@ -13,3 +13,15 @@
 - type: lobbyBackground
   id: NukeArt
   background: /Textures/SS220/LobbyScreens/nukeart.png
+
+- type: lobbyBackground
+  id: MedERP
+  background: /Textures/SS220/LobbyScreens/mederp.png
+
+- type: lobbyBackground
+  id: NekoAndHoS
+  background: /Textures/SS220/LobbyScreens/nekoandhos.png
+
+- type: lobbyBackground
+  id: Slime
+  background: /Textures/SS220/LobbyScreens/slime.png
