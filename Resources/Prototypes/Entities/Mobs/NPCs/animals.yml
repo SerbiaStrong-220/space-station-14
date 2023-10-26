@@ -1322,7 +1322,7 @@
   - type: Bloodstream
     bloodMaxVolume: 50
   - type: TTS # Corvax-TTS
-    voice: Alchemist
+    voice: Зиггс
 
 - type: entity
   name: penguin
