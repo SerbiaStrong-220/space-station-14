@@ -14,7 +14,7 @@
   parent: ClothingOuterBase
   id: ClothingOuterArmorBobmer
   name: бронированный бомбер
-  description: Настоящие лётчики носят и бронежилеты, и модные куртки
+  description: Настоящие лётчики носят и бронежилеты, и модные куртки.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Armor/secbomber.rsi #WMT
