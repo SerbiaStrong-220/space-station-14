@@ -1,2 +1,2 @@
 @set PDIR=%~dp0
-@call lua file %PDIR%Tools\awc\%*
+@call lua file %PDIR%Tools\awc\%*.lua
