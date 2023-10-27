@@ -4,7 +4,7 @@
   id: ExpensiveLighter
   description: "Expensive metal lighter. She looks too brutal for you. Put it back."
   components:
-  - type: RandomSprite 
+  - type: RandomSprite
     available:
       - enum.WelderLayers.Base:
           zippo_icon_base-1: ""
@@ -37,6 +37,17 @@
         - ReagentId: WeldingFuel
           Quantity: 16
         maxVol: 16
+  - type: Welder
+    fuelConsumption: 0.01
+    fuelLitCost: 0.1
+    litMeleeDamageBonus:
+      types:
+        Heat: 3
+    tankSafe: true
+    welderOnSounds:
+      collection: zippoOnSound
+    welderOffSounds:
+      collection: zippoOffSound
 
 - type: entity
   parent: ExpensiveLighter
@@ -44,7 +55,7 @@
   name: expensive lighter
   description: "A lighter that gets only the best in their field in the ranks of Nanotrasen. On the back side, on the metal, the inscription is engraved: For 10 shifts without incident."
   components:
-  - type: RandomSprite 
+  - type: RandomSprite
     available:
       - enum.WelderLayers.Base:
           zippo_icon_nanotrasen: ""
@@ -64,7 +75,7 @@
   id: ExpensiveLighterShield
   description: "The lighter is a bright blue color - the same color as its owner is currently in the bar. The lighter depicts a white shield going into the sunset - just like the career of the owner of the lighter."
   components:
-  - type: RandomSprite 
+  - type: RandomSprite
     available:
       - enum.WelderLayers.Base:
           zippo_icon_shield: ""
@@ -84,7 +95,7 @@
   id: ExpensiveLighterDetective
   description: "The lighter reeks of whiskey. Oil fingerprints are clearly visible on the olive cover, and the wooden bottom and top of the lighter are badly worn."
   components:
-  - type: RandomSprite 
+  - type: RandomSprite
     available:
       - enum.WelderLayers.Base:
           zippo_icon_detective: ""
@@ -104,7 +115,7 @@
   id: ExpensiveLighterSyndicate
   description: "Used by hardened syndicate agents. Show your style and hatred of NanoTrasen with this lighter!"
   components:
-  - type: RandomSprite 
+  - type: RandomSprite
     available:
       - enum.WelderLayers.Base:
           zippo_icon_syndicate: ""
