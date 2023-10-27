@@ -50,7 +50,7 @@
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity
       - id: ClothingEyesHudSecurity
-
+#SS220-Pilot
 - type: entity
   id: LockerPilotFilled
   suffix: Filled
