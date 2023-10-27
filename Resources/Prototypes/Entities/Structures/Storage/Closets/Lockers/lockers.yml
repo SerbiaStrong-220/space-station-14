@@ -374,7 +374,7 @@
   id: LockerPilot
   parent: LockerSecurity
   name: шкаф пилота СБ
-  description: Место для хранение пожитков славных лётчиков Корпорации
+  description: Место для хранение пожитков славных лётчиков Корпорации.
   components:
   - type: Appearance
   - type: EntityStorageVisuals
