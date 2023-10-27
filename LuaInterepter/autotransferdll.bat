@@ -1,0 +1,1 @@
+XCOPY "lua54.dll" "../x64/Release" /Y
