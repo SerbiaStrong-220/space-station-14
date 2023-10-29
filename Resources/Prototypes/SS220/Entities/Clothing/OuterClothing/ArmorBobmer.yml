@@ -8,6 +8,7 @@
     sprite: SS220/Clothing/OuterClothing/Armor/secbomber.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Armor/secbomber.rsi
+  - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.80
