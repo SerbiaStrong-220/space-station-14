@@ -17,6 +17,8 @@
   parent: BaseToolSurgery
   description: A surgical tool used to cauterize open wounds.
   components:
+  - type: SurgicalInstrument
+    cauter: true
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/cautery.rsi
     state: cautery
@@ -38,6 +40,8 @@
   parent: BaseToolSurgery
   description: A surgical drill for making holes into hard material.
   components:
+  - type: SurgicalInstrument
+    drill: true
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/drill.rsi
     state: drill
@@ -59,8 +63,9 @@
   parent: BaseToolSurgery
   description: A surgical tool used to make incisions into flesh.
   components:
-  - type: Sharp
-    butcherDelayModifier: 1.5 # Butchering with a scalpel, regardless of the type, will take 50% longer
+  - type: SurgicalInstrument
+    incision: true
+    debridement: true
   - type: Utensil
     types:
       - Knife
@@ -123,6 +128,8 @@
   parent: BaseToolSurgery
   description: A surgical tool used to hold open incisions.
   components:
+  - type: SurgicalInstrument
+    retractor: true
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
     state: retractor
@@ -136,6 +143,8 @@
   parent: Retractor
   description: A surgical tool used to compress blood vessels to prevent bleeding.
   components:
+  - type: SurgicalInstrument
+    clamp: true
   - type: Sprite
     state: hemostat
   - type: Item
@@ -155,7 +164,9 @@
   parent: BaseToolSurgery
   description: For cutting wood and other objects to pieces. Or sawing bones, in case of emergency.
   components:
-  - type: Sharp
+  - type: SurgicalInstrument
+    saw: true
+    amputation: true
   - type: Utensil
     types:
       - Knife
