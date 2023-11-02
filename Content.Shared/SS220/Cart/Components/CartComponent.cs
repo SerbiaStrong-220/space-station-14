@@ -38,4 +38,13 @@ public sealed partial class CartComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
     public float AttachRange = SharedInteractionSystem.InteractionRange / 1.4f; // Also stolen from BuckleComponent
+
+    /// <summary>
+    /// Friction modifier applied to the cart after attaching. It's used for increasing pulling speed, so they are not pointless...
+    /// TODO: write a normal way to modify pulling speed or wait for the space wizards to do it themselves.
+    /// </summary>
+    [DataField("frictionModifier")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
+    public float FrictionModifier = .15f;
 }

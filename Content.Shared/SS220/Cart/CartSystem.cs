@@ -3,6 +3,7 @@
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Foldable;
+using Content.Shared.Friction;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
@@ -15,6 +16,7 @@ public sealed class CartSystem : EntitySystem
 {
     [Dependency] private readonly SharedPullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly TileFrictionController _tileFriction = default!;
 
     public override void Initialize()
     {
@@ -105,6 +107,10 @@ public sealed class CartSystem : EntitySystem
         if (!_pulling.TryStartPull(args.AttachTarget, uid))
             return;
 
+        // This is the simpliest way to change pulling speed I could've imagined.
+        var frictionModifierComp = EnsureComp<TileFrictionModifierComponent>(uid);
+        _tileFriction.SetModifier(uid, component.FrictionModifier, frictionModifierComp);
+
         var ev = new CartAttachEvent(args.AttachTarget, uid);
         RaiseLocalEvent(args.AttachTarget, ref ev);
 
@@ -124,6 +130,7 @@ public sealed class CartSystem : EntitySystem
 
         _pulling.TryStopPull(pullable);
         RemComp<SharedPullerComponent>(args.DeattachTarget);
+        RemComp<TileFrictionModifierComponent>(uid);
 
         var ev = new CartDeattachEvent(args.DeattachTarget, uid);
         RaiseLocalEvent(args.DeattachTarget, ref ev);
