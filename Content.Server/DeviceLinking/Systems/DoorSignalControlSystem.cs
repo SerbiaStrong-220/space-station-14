@@ -37,7 +37,7 @@ namespace Content.Server.DeviceLinking.Systems
                 return;
 
             //SS220-doors-logic-signals-fix
-            if (!TryComp<ApcPowerReceiverComponent>(uid, out var receiverComp) || !receiverComp.Powered)
+            if (TryComp<ApcPowerReceiverComponent>(uid, out var receiverComp) && !receiverComp.Powered)
                 return;
 
             var state = SignalState.Momentary;
@@ -91,7 +91,7 @@ namespace Content.Server.DeviceLinking.Systems
         private void OnStateChanged(EntityUid uid, DoorSignalControlComponent door, DoorStateChangedEvent args)
         {
             //SS220-doors-logic-signals-fix
-            if (!TryComp<ApcPowerReceiverComponent>(uid, out var receiverComp) || !receiverComp.Powered)
+            if (TryComp<ApcPowerReceiverComponent>(uid, out var receiverComp) && !receiverComp.Powered)
                 return;
 
             var data = new NetworkPayload()
