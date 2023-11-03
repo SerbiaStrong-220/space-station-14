@@ -5,6 +5,12 @@ namespace Content.Server.SS220.Surgery.Components
     [RegisterComponent]
     public sealed partial class SurgicalInstrumentComponent : Component
     {
+        [ViewVariables(VVAccess.ReadOnly)]
+        public EntityUid Target { get; set; }
+
+        [ViewVariables(VVAccess.ReadOnly)]
+        public SurgicalInstrumentMode Mode = SurgicalInstrumentMode.SELECTOR;
+
         /// <summary>
         /// Tool qualification
         /// </summary>
@@ -48,5 +54,11 @@ namespace Content.Server.SS220.Surgery.Components
         [ViewVariables(VVAccess.ReadWrite)]
         public float UsageTime = 1.5f;
 
+    }
+
+    public enum SurgicalInstrumentMode
+    {
+        OPERATION,
+        SELECTOR
     }
 }

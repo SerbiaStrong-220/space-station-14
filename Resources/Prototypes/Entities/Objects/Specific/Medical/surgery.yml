@@ -5,6 +5,10 @@
   id: BaseToolSurgery
   abstract: true
   components:
+  - type: UserInterface
+    interfaces:
+    - key: enum.LimbSelectorUiKey.Key
+      type: LimbSelectorBoundUserInterface
   - type: Sprite
   - type: StaticPrice
     price: 60
