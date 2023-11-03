@@ -406,21 +406,21 @@
 
 - type: ttsVoice
   name: Джонни Сильверхенд
-  description: Голос персонажа Джонни Сильверхенд из игры Cypherpunk 2077
+  description: Голос персонажа Джонни Сильверхенд из игры Cyberpunk 2077
   sex: Male
   speaker: johnny
   id: johnny
 
 - type: ttsVoice
   name: Панам Палмер
-  description: Голос персонажа Панам Палмер из игры Cypherpunk 2077
+  description: Голос персонажа Панам Палмер из игры Cyberpunk 2077
   sex: Female
   speaker: panam
   id: panam
 
 - type: ttsVoice
   name: Ви
-  description: Голос персонажа Ви из игры Cypherpunk 2077
+  description: Голос персонажа Ви из игры Cyberpunk 2077
   sex: Female
   speaker: v_female
   id: v_female
