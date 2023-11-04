@@ -646,6 +646,20 @@
 
 - type: entity
   parent: BasePDA
+  id: SecurityPilotPDA
+  name: КПК пилота СБ
+  description: Красный, чтобы скрыть пятна крови ассистента.
+  components:
+  - type: Pda
+    id: SecurityPilotIDCard
+    state: pda-security
+  - type: PdaBorderColor
+    borderColor: "#DC143C"
+  - type: Icon
+    state: pda-security
+
+- type: entity
+  parent: BasePDA
   id: CentcomPDA
   name: CentCom PDA
   description: Light green sign of walking bureaucracy.
@@ -674,7 +688,7 @@
 - type: entity
   parent: CentcomPDA
   id: DeathsquadPDA
-  suffix: Deathsquad
+  suffix: Death Squad
   components:
   - type: Pda
     id: CentcomIDCardDeathsquad

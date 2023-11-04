@@ -22,7 +22,8 @@
     contents:
     - id: WeaponDisabler
     - id: MedkitAdvancedFilled
-  
+    - id: ExpensiveLighterShield #SS220-Zippo
+
 - type: entity
   parent: GunSafe
   id: GunSafeBlueshield

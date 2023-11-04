@@ -65,7 +65,7 @@ public sealed partial class MeleeWeaponComponent : Component
     /// </summary>
     [DataField(required:true)]
     [ViewVariables(VVAccess.ReadWrite)]
-    public DamageSpecifier Damage = default!;
+    public DamageSpecifier Damage = new(); //SS220 Remove-Cancer
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
@@ -96,12 +96,23 @@ public sealed partial class MeleeWeaponComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public EntProtoId WideAnimation = "WeaponArcSlash";
 
+    /// <summary>
+    /// Rotation of the animation.
+    /// 0 degrees means the top faces the attacker.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public Angle WideAnimationRotation = Angle.Zero;
+
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public bool SwingLeft;
+
+
     // Sounds
 
     /// <summary>
     /// This gets played whenever a melee attack is done. This is predicted by the client.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField] // SS220 Networked-Sounds
     [DataField("soundSwing")]
     public SoundSpecifier SwingSound { get; set; } = new SoundPathSpecifier("/Audio/Weapons/punchmiss.ogg")
     {
@@ -112,14 +123,14 @@ public sealed partial class MeleeWeaponComponent : Component
     // then a player may doubt if the target actually took damage or not.
     // If overwatch and apex do this then we probably should too.
 
-    [ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField] // SS220 Networked-Sounds
     [DataField("soundHit")]
     public SoundSpecifier? HitSound;
 
     /// <summary>
     /// Plays if no damage is done to the target entity.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField] // SS220 Networked-Sounds
     [DataField("soundNoDamage")]
     public SoundSpecifier NoDamageSound { get; set; } = new SoundPathSpecifier("/Audio/Weapons/tap.ogg");
 }

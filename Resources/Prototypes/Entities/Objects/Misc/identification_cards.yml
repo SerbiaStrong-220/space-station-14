@@ -139,6 +139,18 @@
 
 - type: entity
   parent: IDCardStandard
+  id: SecurityPilotIDCard
+  name: ID карта (пилот СБ)
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idsecurityofficer
+  - type: PresetIdCard
+    job: SecurityPilot
+
+- type: entity
+  parent: IDCardStandard
   id: WardenIDCard
   name: warden ID card
   components:
@@ -461,6 +473,7 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: Central Commander
+    jobIcon: JobIconNanotrasen
   - type: Access
     groups:
     - AllAccess
@@ -510,7 +523,7 @@
 - type: entity
   parent: CentcomIDCard
   id: CentcomIDCardDeathsquad
-  name: deathsquad ID card
+  name: death squad ID card
   components:
   - type: Sprite
     layers:

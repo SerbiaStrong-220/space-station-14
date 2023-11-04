@@ -1,0 +1,20 @@
+#Midround DarkReaper
+- type: entity
+  parent: BaseGameRule
+  id: DarkReaperSpawn
+  noSpawn: true
+  components:
+  - type: StationEvent
+    weight: 7.5
+    duration: 1
+    earliestStart: 45
+    minimumPlayers: 30
+  - type: RandomSpawnRule
+    prototype: DarkReaperRune
+
+- type: entity
+  parent: BaseGameRule
+  id: DarkReaperSpawnMajor
+  noSpawn: true
+  components:
+  - type: DarkReaperMajorRule
