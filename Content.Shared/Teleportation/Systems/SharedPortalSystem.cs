@@ -210,8 +210,8 @@ public abstract class SharedPortalSystem : EntitySystem
 
         _transform.SetCoordinates(subject, target);
 
-        TryComp<AnomalyComponent>(subject, out var anomaly);
-        if(anomaly != null)
+        //SS220-rnd-reb
+        if (HasComp<AnomalyComponent>(subject))
            _anomalySystem.DoAnomalySupercriticalEvent(subject);
 
         if (!playSound)
