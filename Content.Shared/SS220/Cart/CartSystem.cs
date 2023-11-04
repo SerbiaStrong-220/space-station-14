@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Foldable;
 using Content.Shared.Friction;
+using Content.Shared.Item;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
@@ -108,8 +109,12 @@ public sealed class CartSystem : EntitySystem
             return;
 
         // This is the simpliest way to change pulling speed I could've imagined.
+        // So, if the cart has a ItemComponent we just take it's size and divide it by 166, if not - take the default 0.15 value.
         var frictionModifierComp = EnsureComp<TileFrictionModifierComponent>(uid);
-        _tileFriction.SetModifier(uid, component.FrictionModifier, frictionModifierComp);
+        float frictionModifier = .15f;
+        if (TryComp<ItemComponent>(uid, out var itemComp))
+            frictionModifier = itemComp.Size / 166f;
+        _tileFriction.SetModifier(uid, frictionModifier, frictionModifierComp);
 
         var ev = new CartAttachEvent(args.AttachTarget, uid);
         RaiseLocalEvent(args.AttachTarget, ref ev);
