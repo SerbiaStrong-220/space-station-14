@@ -119,6 +119,9 @@
   parent: Scalpel
   description: A scalpel which uses a directed laser to slice instead of a blade, for more precise surgery while also cauterizing as it cuts.
   components:
+  - type: SurgicalInstrument
+    incision: true
+    debridement: true
   - type: Sprite
     state: laser
   - type: Item

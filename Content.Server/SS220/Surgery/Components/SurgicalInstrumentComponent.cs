@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Content.Server.SS220.Surgery.Components
 {
@@ -6,7 +7,7 @@ namespace Content.Server.SS220.Surgery.Components
     public sealed partial class SurgicalInstrumentComponent : Component
     {
         [ViewVariables(VVAccess.ReadOnly)]
-        public EntityUid Target { get; set; }
+        public EntityUid? Target { get; set; }
 
         [ViewVariables(VVAccess.ReadOnly)]
         public SurgicalInstrumentMode Mode = SurgicalInstrumentMode.SELECTOR;
