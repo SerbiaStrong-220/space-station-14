@@ -5,10 +5,6 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Ghost.Roles.UI;
 using Content.Server.Mind.Commands;
-using Content.Server.Players;
-using Content.Server.Players.PlayTimeTracking;
-using Content.Server.SS220.Ghost.Roles.Components;
-using Content.Shared.Administration;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Follower;
@@ -18,16 +14,18 @@ using Content.Shared.Ghost.Roles;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Shared.Players;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
-using Robust.Shared.Players;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.Administration.Managers;
+using Content.Shared.Administration;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -43,7 +41,6 @@ namespace Content.Server.Ghost.Roles
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly SharedMindSystem _mindSystem = default!;
         [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-        [Dependency] private readonly PlayTimeTrackingManager _playTimeTrackingManager = default!;
         [Dependency] private readonly IChatManager _chat = default!;
 
         private uint _nextRoleIdentifier;
@@ -105,7 +102,7 @@ namespace Content.Server.Ghost.Roles
             return unchecked(_nextRoleIdentifier++);
         }
 
-        public void OpenEui(IPlayerSession session)
+        public void OpenEui(ICommonSession session)
         {
             if (session.AttachedEntity is not {Valid: true} attached ||
                 !EntityManager.HasComponent<GhostComponent>(attached))
@@ -119,7 +116,7 @@ namespace Content.Server.Ghost.Roles
             eui.StateDirty();
         }
 
-        public void OpenMakeGhostRoleEui(IPlayerSession session, EntityUid uid)
+        public void OpenMakeGhostRoleEui(ICommonSession session, EntityUid uid)
         {
             if (session.AttachedEntity == null)
                 return;
@@ -412,32 +409,10 @@ namespace Content.Server.Ghost.Roles
                 var msg = Loc.GetString("ghost-role-banned");
                 var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
 
-                _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.ConnectedClient, Color.Red);
+                _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.Channel, Color.Red);
 
                 args.TookRole = false;
                 return;
-            }
-
-                if (HasComp<GhostPlayTimeRestrictComponent>(uid))
-            {
-                if (!_playerManager.TryGetSessionById(userId, out var session))
-                {
-                    args.TookRole = false;
-                    return;
-                }
-
-                var overAll = _playTimeTrackingManager.GetOverallPlaytime(session);
-
-                if (overAll < TimeSpan.FromHours(10))
-                {
-                    var msg = Loc.GetString("ghost-role-time-restrict");
-                    var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
-
-                    _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.ConnectedClient, Color.Red);
-
-                    args.TookRole = false;
-                    return;
-                }
             }
 
             ghostRole.Taken = true;
@@ -469,7 +444,7 @@ namespace Content.Server.Ghost.Roles
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             if(shell.Player != null)
-                EntitySystem.Get<GhostRoleSystem>().OpenEui((IPlayerSession)shell.Player);
+                EntitySystem.Get<GhostRoleSystem>().OpenEui(shell.Player);
             else
                 shell.WriteLine("You can only open the ghost roles UI on a client.");
         }
