@@ -52,7 +52,6 @@
     priority: Low
   - type: Actions
   - type: Appearance
-  - type: WiresVisuals
   - type: Storage
     capacity: 300
   - type: ContainerContainer
@@ -75,8 +74,6 @@
     - state: off
       map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
       shader: unshaded
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: PointLight
     radius: 1.5
     energy: 1.6
