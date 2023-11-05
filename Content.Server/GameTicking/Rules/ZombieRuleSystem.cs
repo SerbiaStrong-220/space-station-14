@@ -271,16 +271,14 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         var prefList = new List<ICommonSession>();
         foreach (var player in allPlayers)
         {
+            if (player.AttachedEntity == null || !HasComp<HumanoidAppearanceComponent>(player.AttachedEntity) || HasComp<ZombieImmuneComponent>(player.AttachedEntity))
+                continue;
 
-            // canBeZombie: false
-            // Role prevents antag.
-            //if (!_jobs.CanBeAntag(player))
+            // Role prevents being a zombie.
             if (!_jobs.CanBeZombie(player))
             {
                 continue;
             }
-            if (player.AttachedEntity == null || !HasComp<HumanoidAppearanceComponent>(player.AttachedEntity) || HasComp<ZombieImmuneComponent>(player.AttachedEntity))
-                continue;
 
             // Role prevents antag.
             if (!_jobs.CanBeAntag(player))
