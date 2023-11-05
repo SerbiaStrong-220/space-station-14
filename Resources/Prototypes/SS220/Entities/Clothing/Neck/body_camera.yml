@@ -1,0 +1,70 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: SurveillanceCameraRouterBase
+  id: SurveillanceCameraRouterSecurityBodyCam
+  suffix: SecurityBodyCam
+  components:
+    - type: SurveillanceCameraRouter
+      subnetFrequency: SurveillanceCameraSecurityBodyCam
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BodyCameraBase
+  name: body camera
+  description: A body camera.
+  components:
+  - type: Item
+    size: 10
+  - type: Sprite
+    state: icon
+    sprite: SS220/Clothing/Neck/Bodycamera/BodyCam.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: SS220/Clothing/Neck/Bodycamera/BodyCam.rsi
+    slots:
+    - neck
+  - type: Eye
+  - type: WirelessNetworkConnection
+  - type: UserInterface
+    interfaces:
+      - key: enum.SurveillanceCameraSetupUiKey.Camera
+        type: SurveillanceCameraSetupBoundUi
+      - key: enum.WiresUiKey.Key
+        type: WiresBoundUserInterface
+  - type: StaticPrice
+    price: 100
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: SurveillanceCameraSecurityBodyCam
+    transmitFrequencyId: SurveillanceCamera
+  - type: SurveillanceCamera
+    setupAvailableNetworks:
+      - SurveillanceCameraSecurity
+    isOffable: true
+    isOffableVisuals: true
+  - type: BodycamVisuals
+    sprites:
+      On: icon_on
+      Off: icon
+  - type: SurveillanceCameraMicrophone
+    blacklist:
+      components:
+        - SurveillanceCamera
+        - SurveillanceCameraMonitor
+        - RadioSpeaker
+        - BodyCameraBase
+  - type: ActiveListener
+    range: 10
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: BodyCameraBase
+  id: BodyCameraSecurity
+  name: camera
+  suffix: SecurityBodyCam
+  components:
+  - type: SurveillanceCamera
+    networkSet: true

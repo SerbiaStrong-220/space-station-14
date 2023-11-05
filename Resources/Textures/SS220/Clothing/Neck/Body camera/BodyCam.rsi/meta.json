@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Cthulhu for ss220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-NECK",
+      "directions": 4
+    },
+    {
+     "name": "icon_on",
+     "delays": [
+       [
+         0.5,
+         0.8
+       ]
+     ]
+    },
+    {
+     "name": "equipped-NECK_on",
+     "directions": 4,
+     "delays": [
+       [
+         0.5,
+         0.8
+       ]
+     ]
+    }
+  ]
+}

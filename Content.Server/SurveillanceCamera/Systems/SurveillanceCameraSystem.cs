@@ -6,6 +6,7 @@ using Content.Server.Power.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.SurveillanceCamera;
+using Content.Shared.Bodycam;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -63,6 +64,8 @@ public sealed class SurveillanceCameraSystem : EntitySystem
 
         SubscribeLocalEvent<SurveillanceCameraComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<SurveillanceCameraComponent, EmpDisabledRemoved>(OnEmpDisabledRemoved);
+
+        SubscribeLocalEvent<SurveillanceCameraComponent, GetVerbsEvent<InteractionVerb>>(AddInteractionVerbs);
     }
 
     private void OnPacketReceived(EntityUid uid, SurveillanceCameraComponent component, DeviceNetworkPacketEvent args)
@@ -149,6 +152,71 @@ public sealed class SurveillanceCameraSystem : EntitySystem
         verbs.Verbs.Add(verb);
     }
 
+    //ss220-bodycam begin
+
+    private void AddInteractionVerbs(EntityUid uid, SurveillanceCameraComponent component, GetVerbsEvent<InteractionVerb> verbs)
+    {
+        if (!component.IsOffable)
+        {
+            return;
+        }
+
+        if (!verbs.CanInteract || !verbs.CanAccess)
+        {
+            return;
+        }
+
+        if (!_actionBlocker.CanInteract(verbs.User, uid))
+        {
+            return;
+        }
+
+        if (!TryComp<DeviceNetworkComponent>(uid, out var deviceNetworkComponent))
+        {
+            return;
+        }
+
+        var isActive = _deviceNetworkSystem.IsDeviceConnected(uid, deviceNetworkComponent);
+        InteractionVerb verb = new();
+        verb.Text = Loc.GetString(isActive == true ? "surveillance-camera-turn-off" : "surveillance-camera-turn-on");
+        verb.Act = () => CameraVerbTurnPower(uid, isActive, deviceNetworkComponent, component);
+        verbs.Verbs.Add(verb);
+    }
+
+    private void CameraVerbTurnPower(EntityUid uid, bool isActive, DeviceNetworkComponent deviceNetworkComponent, SurveillanceCameraComponent component, AppearanceComponent? appearance = null)
+    {
+
+        if (isActive)
+        {
+            Deactivate(uid, component);
+            _deviceNetworkSystem.DisconnectDevice(uid, deviceNetworkComponent);
+            return;
+        }
+
+        SetActive(uid, true, component);
+        _deviceNetworkSystem.ConnectDevice(uid, deviceNetworkComponent);
+    }
+
+    private void UpdateVisualsOffable(EntityUid uid, SurveillanceCameraComponent component, AppearanceComponent? appearance = null)
+    {
+        // Don't log missing, because otherwise tests fail.
+        if (!Resolve(uid, ref component!, ref appearance, false))
+        {
+            return;
+        }
+
+        var key = SurveillanceCameraVisuals.Disabled;
+
+        if (component.Active)
+        {
+            key = SurveillanceCameraVisuals.Active;
+        }
+
+        _appearance.SetData(uid, SurveillanceCameraVisualsKey.Key, key, appearance);
+    }
+
+
+    //ss220-bodycam end
 
 
     private void OnPowerChanged(EntityUid camera, SurveillanceCameraComponent component, ref PowerChangedEvent args)
@@ -384,9 +452,16 @@ public sealed class SurveillanceCameraSystem : EntitySystem
 
     private void UpdateVisuals(EntityUid uid, SurveillanceCameraComponent? component = null, AppearanceComponent? appearance = null)
     {
+
         // Don't log missing, because otherwise tests fail.
         if (!Resolve(uid, ref component, ref appearance, false))
         {
+            return;
+        }
+
+        if (component.IsOffableVisuals)
+        {
+            UpdateVisualsOffable(uid, component);
             return;
         }
 

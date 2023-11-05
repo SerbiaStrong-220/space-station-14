@@ -45,4 +45,16 @@ public sealed partial class SurveillanceCameraComponent : Component
     // This has to be device network frequency prototypes.
     [DataField("setupAvailableNetworks", customTypeSerializer:typeof(PrototypeIdListSerializer<DeviceFrequencyPrototype>))]
     public List<string> AvailableNetworks { get; private set; } = new();
+
+    // SS220–bodycam begin
+    // Сan be turned off and on via verb
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("isOffable")]
+    public bool IsOffable { get; set; }
+
+    // Has different sprites while on and off
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("isOffableVisuals")]
+    public bool IsOffableVisuals { get; set; }
+    // SS220–bodycam end
 }
