@@ -280,12 +280,6 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
                 continue;
             }
 
-            // Role prevents antag.
-            if (!_jobs.CanBeAntag(player))
-            {
-                continue;
-            }
-
             playerList.Add(player);
 
             var pref = (HumanoidCharacterProfile) _prefs.GetPreferences(player.UserId).SelectedCharacter;
