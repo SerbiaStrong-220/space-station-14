@@ -27,21 +27,6 @@
     sprite: Clothing/Mask/gassecurity.rsi
   - type: Clothing
     sprite: Clothing/Mask/gassecurity.rsi
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    maxIntensity: 10
-    intensitySlope: 3
-    totalIntensity: 500 # about a ~4 tile radius
-    canCreateVacuum: false
-  - type: OnUseTimerTrigger
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
-    initialBeepDelay: 0
-    delay: 3.5
-    beepInterval: 2 # 2 beeps total (at 0 and 2)
 
 - type: entity
   parent: ClothingMaskGas
