@@ -1,2 +1,2 @@
 surveillance-camera-turn-off = выключить
-surveillance-camera-turn-off = включить
+surveillance-camera-turn-on = включить
