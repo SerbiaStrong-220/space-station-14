@@ -27,6 +27,13 @@ cmd-playtime_getoverall-success = Overall time for {$username} is {TOSTRING($tim
 cmd-playtime_getoverall-arg-user = <user name>
 cmd-playtime_getoverall-error-args = Expected exactly one argument
 
+# - SS220 playtime_getaghost
+cmd-playtime_getaghost-desc = Gets the specified hours for a player's admin-ghost playtime
+cmd-playtime_getaghost-help = Usage: { $command } <user name>
+cmd-playtime_getaghost-success = Admin-ghost playtime for { $username } is { $time } hours.
+cmd-playtime_getaghost-arg-user = <user name>
+cmd-playtime_getaghost-error-args = Expected exactly one argument
+
 # - GetRoleTimer
 cmd-playtime_getrole-desc = Gets all or one role timers from a player
 cmd-playtime_getrole-help = Usage: {$command} <user name> [role]

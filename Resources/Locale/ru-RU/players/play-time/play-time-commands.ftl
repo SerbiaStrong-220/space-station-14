@@ -24,6 +24,12 @@ cmd-playtime_getoverall-help = Использование: { $command } <user na
 cmd-playtime_getoverall-success = Общее игровое время { $username } составляет { TOSTRING($time, "dddd\\:hh\\:mm") }.
 cmd-playtime_getoverall-arg-user = <user name>
 cmd-playtime_getoverall-error-args = Ожидается ровно один аргумент
+# - SS220 playtime_getaghost
+cmd-playtime_getaghost-desc = Получить количество часов, проведенное игроком в админ-госте
+cmd-playtime_getaghost-help = Использование: { $command } <user name>
+cmd-playtime_getaghost-success = Проведенное время на админ-госте { $username } составляет { $time } часов.
+cmd-playtime_getaghost-arg-user = <user name>
+cmd-playtime_getaghost-error-args = Ожидается ровно один аргумент
 # - GetRoleTimer
 cmd-playtime_getrole-desc = Получает все или один таймер роли от игрока
 cmd-playtime_getrole-help = Использование: { $command } <user name> [role]

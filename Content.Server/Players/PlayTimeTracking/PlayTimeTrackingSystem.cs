@@ -35,6 +35,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
 
     private string AdminTrackerTime => "AdminTime";
+    private const string AGhostTrackerTime = "AGhostTime"; //SS220-aghost-playtime
 
     public override void Initialize()
     {
@@ -80,6 +81,9 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         if (_adminManager.IsAdmin(player, includeDeAdmin: false))
         {
             trackers.Add(AdminTrackerTime);
+            //SS220-aghost-playtime
+            if (player.AttachedEntity is { } attachedEntity && Comp<MetaDataComponent>(attachedEntity).EntityPrototype?.ID == "AdminObserver")
+                trackers.Add(AGhostTrackerTime);
         }
 
         if (!IsPlayerAlive(player))
