@@ -6,6 +6,12 @@ namespace Content.Server.SS220.Surgery.Components
     [RegisterComponent]
     public sealed partial class SurgicalInstrumentComponent : Component
     {
+        /// <summary>
+        /// Surgical instruments are used in surgical operations (including ghetto surgery)
+        /// It is assumed that the tool has only one specialization, 
+        /// but if we are going to create tools like "Incision Management System", then we will be able to assign several specializations at once
+        /// </summary>
+
         [ViewVariables(VVAccess.ReadOnly)]
         public EntityUid? Target { get; set; }
 
@@ -13,39 +19,67 @@ namespace Content.Server.SS220.Surgery.Components
         public SurgicalInstrumentMode Mode = SurgicalInstrumentMode.SELECTOR;
 
         /// <summary>
-        /// Tool qualification
+        /// Scalpels, knifes and etc
         /// </summary>
-
-        [DataField("incision")] // scalpels, knifes etc
+        [DataField("incision")]
         public bool Incision { get; set; }
 
-        [DataField("amputation")] // saws, amputation knife
+        /// <summary>
+        /// Saws, amputation knifes and etc
+        /// </summary>
+        [DataField("amputation")]
         public bool Amputation { get; set; }
 
-        [DataField("extraction")] // tweezers etc
+        /// <summary>
+        /// Tweezers...
+        /// </summary>
+
+        [DataField("extraction")]
         public bool Exctraction { get; set; }
 
-        [DataField("clamp")] // hemostat etc
+        /// <summary>
+        /// Hemostats
+        /// </summary>
+
+        [DataField("clamp")]
         public bool Clamp { get; set; }
 
-        [DataField("retractor")] // retractor etc
+        /// <summary>
+        /// Retractors
+        /// </summary>
+
+        [DataField("retractor")]
         public bool Retractor { get; set; }
 
-        [DataField("drill")] // drill
+        /// <summary>
+        ///  ????
+        /// </summary>
+
+        [DataField("drill")]
         public bool Drill { get; set; }
 
-        [DataField("saw")] // saw, chainsaw (lol) etc
+        /// <summary>
+        /// Including chainsaw (lol)
+        /// </summary>
+
+        [DataField("saw")]
         public bool Saw { get; set; }
 
-        [DataField("cauter")] // caouter, sigar etc
+        /// <summary>
+        /// Cauter, sigar
+        /// </summary>
+
+        [DataField("cauter")]
         public bool Cauter { get; set; }
 
-        [DataField("debridement")] // Read as "Used in surgical clearing"
+        /// <summary>
+        /// Read as "Used in surgical clearing"
+        /// </summary>
+
+        [DataField("debridement")]
         public bool Debridement { get; set; }
 
-        /// <summary>
-        /// Properties
-        /// </summary>
+
 
         [DataField("succesfullStepChance")]
         [ViewVariables(VVAccess.ReadWrite)]
@@ -54,7 +88,6 @@ namespace Content.Server.SS220.Surgery.Components
         [DataField("usageTime")] // For DoAfter
         [ViewVariables(VVAccess.ReadWrite)]
         public float UsageTime = 1.5f;
-
     }
 
     public enum SurgicalInstrumentMode
