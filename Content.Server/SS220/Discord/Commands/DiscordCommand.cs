@@ -1,7 +1,8 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Text;
 using Content.Server.Chat.Managers;
+using Content.Server.EUI;
 using Content.Shared.Administration;
 using Content.Shared.Chat;
 using Robust.Shared.Console;
@@ -12,6 +13,8 @@ namespace Content.Server.SS220.Discord.Commands;
 [AnyCommand]
 public sealed class DiscordCommand : IConsoleCommand
 {
+    [Dependency] private readonly EuiManager _eui = default!;
+
     /// <inheritdoc />
     public string Command => "discordlink";
 
@@ -42,8 +45,12 @@ public sealed class DiscordCommand : IConsoleCommand
                 sb.Append(Loc.GetString("discord-command-already"));
             }
 
+            var ui = new DiscordLinkEui();
+            _eui.OpenEui(ui, player);
+
             var message = sb.ToString();
-            IoCManager.Resolve<IChatManager>().ChatMessageToOne(ChatChannel.Server, message, message, default, false, player.ConnectedClient);
+
+            IoCManager.Resolve<IChatManager>().ChatMessageToOne(ChatChannel.Server, message, message, default, false, player.Channel);
         }
         catch (Exception e)
         {

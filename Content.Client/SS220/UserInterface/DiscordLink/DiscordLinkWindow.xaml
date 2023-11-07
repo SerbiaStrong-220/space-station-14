@@ -1,0 +1,9 @@
+<ui:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Content.Client.SS220.UserInterface.DiscordLink.DiscordLinkWindow"
+    SetSize="400 400">
+    <TabContainer Name="TabContainer">
+    </TabContainer>
+</ui:FancyWindow>

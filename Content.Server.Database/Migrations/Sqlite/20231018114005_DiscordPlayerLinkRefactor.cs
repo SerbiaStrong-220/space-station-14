@@ -23,7 +23,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                 table: "discord_players");
 
             migrationBuilder.DropColumn(
-                name: "discord_name",
+                name: "discord_id",
                 table: "discord_players");
 
             migrationBuilder.AddColumn<ulong>(
