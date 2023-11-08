@@ -1,6 +1,6 @@
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingCloakBlueShield2
+  id: ClothingCloakBlueShield
   name: Плащ Синего Щита
   description: Используется офицером «Синего щита», который верно защищает своих глав.
   components:
