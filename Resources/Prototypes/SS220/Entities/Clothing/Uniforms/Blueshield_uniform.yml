@@ -2,7 +2,7 @@
   parent: UnsensoredClothingUniformBase
   id: ClothingUniformJumpsuitBlueShield2
   name: униформа Синего Щита
-  description: Модная форма Синего Щита, как же она хороша.
+  description: Модная форма Синего Щита - как же она хороша!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Blueshield_uniform.rsi
