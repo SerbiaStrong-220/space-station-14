@@ -5,8 +5,8 @@
   description: Капюшон.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Cloaks.rsi
+    sprite: SS220/Clothing/hoods.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Cloaks.rsi
+    sprite: SS220/Clothing/hoods.rsi
     tags:
     - HidesHair
