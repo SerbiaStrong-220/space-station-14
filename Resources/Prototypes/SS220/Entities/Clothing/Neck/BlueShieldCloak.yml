@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingCloakBlueShield2
+  name: Плащ Синего Щита
+  description: Используется офицером «Синего щита», который верно защищает своих глав.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Cloaks/Blueshield.rsi

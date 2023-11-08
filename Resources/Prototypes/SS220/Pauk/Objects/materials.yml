@@ -1,0 +1,13 @@
+- type: material
+  id: EssenceFirst
+  stackEntity: PaukEssenceFirst1
+  name: materials-PaukEssence1
+  icon: { sprite: /Textures/SS220/Objects/Sheets/PaukEssence.rsi, state: Essence1_1 }
+  price: 0.05
+
+- type: material
+  id: EssenceSecond
+  stackEntity: PaukEssenceSecond1
+  name: materials-PaukEssence1
+  icon: { sprite: /Textures/SS220/Objects/Sheets/PaukEssence.rsi, state: Essence2_1 }
+  price: 0.05

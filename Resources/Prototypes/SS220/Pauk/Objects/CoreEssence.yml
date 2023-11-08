@@ -1,0 +1,123 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: PaukEssenceBase
+  description: blalblbalal.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sheets/PaukEssence.rsi
+  - type: Item
+    sprite: SS220/Objects/Sheets/PaukEssence.rsi
+    size: 50
+  - type: StaticPrice
+    price: 0
+  - type: Tag
+    tags:
+    - Essence 
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: PaukEssenceBase
+  id: PaukEssenceFirst
+  name: Spider Essence
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      EssenceFirst: 100
+  - type: Stack
+    stackType: PaukEssenceFirst
+    baseLayer: base
+    layerStates:
+    - Essence1_1 
+    - Essence1_2
+    - Essence1_2 
+  - type: Sprite
+    state: Essence1_1 
+    layers:
+    - state: Essence1_1 
+      map: ["base"]
+  - type: Item
+  - type: Appearance
+
+- type: entity
+  parent: PaukEssenceFirst
+  id: PaukEssenceFirst1
+  name: Spider essence
+  suffix: 1
+  components:
+  - type: Item
+    size: 5
+  - type: Sprite
+    state: Essence1_1 
+  - type: Stack
+    stackType: PaukEssenceFirst
+    count: 1
+
+- type: entity
+  parent: PaukEssenceBase
+  id: PaukEssenceSecond
+  name: Fertilized essence
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      EssenceSecond: 100
+  - type: Stack
+    stackType: PaukEssenceSecond
+    baseLayer: base
+    layerStates:
+    - Essence2_1 
+    - Essence2_2
+    - Essence2_2 
+  - type: Sprite
+    state: Essence2_1 
+    layers:
+    - state: Essence2_1 
+      map: ["base"]
+  - type: Item
+  - type: Appearance
+
+- type: entity
+  parent: PaukEssenceSecond
+  id: PaukEssenceSecond1
+  name: Fertilized essence
+  suffix: 1
+  components:
+  - type: Item
+    size: 5
+  - type: Sprite
+    state: Essence2_1 
+  - type: Stack
+    stackType: PaukEssenceSecond
+    count: 1
+
+#- type: entity
+#  parent: PaukEssenceBase
+#  id: PaukEssence2
+#  name: Fertilized essence
+#  suffix: 1
+#  components:
+#  - type: Item
+#    size: 5
+#  - type: Sprite
+#    state: Essence2_1 
+#  - type: Stack
+#    stackType: PaukEssence2 
+#    count: 1
+#  - type: Material
+#  - type: PhysicalComposition
+#    materialComposition:
+#      Steel: 100 #т2 

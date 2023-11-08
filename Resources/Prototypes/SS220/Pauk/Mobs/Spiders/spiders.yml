@@ -1,0 +1,228 @@
+- type: entity
+  name: tarantula
+  parent: MobGiantSpider
+  id: PaukGiantSpider
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Xeno
+    - type: InputMover
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: SimpleHostileCompound
+
+- type: entity
+  name: tarantula1
+  parent: PaukGiantSpider
+  id: PaukSpiderT1
+  suffix: Angry
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Xeno
+    - type: InputMover
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: SimpleHostileCompound
+    - type: DamageStateVisuals
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        100: Dead
+    - type: Spider
+    - type: Tag
+      tags:
+      - DoorBumpOpener
+    - type: MeleeChemicalInjector
+      transferAmount: 0.5
+
+- type: entity
+  name: space spider
+  id: PaukSpiderSpace
+  parent: MobSpaceBasic
+  description: It's so glowing, it looks dangerous.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Animals/spacespider.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spacespider
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      135: Dead
+  - type: Stamina
+    critThreshold: 150
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: spacespider
+        BaseUnshaded: glow
+      Dead:
+        Base: spacespider_dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatSpider
+      amount: 2
+    - id: EggSpider
+      amount: 1
+      prob: 0.5
+  - type: Bloodstream
+    bloodMaxVolume: 250
+    bloodReagent: Cryoxadone
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 6
+        Poison: 2
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        reagents:
+        - ReagentId: ChloralHydrate
+          Quantity: 60
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 3
+  - type: ReplacementAccent
+    accent: xeno
+  - type: InteractionPopup
+    successChance: 0.20
+    interactSuccessString: petting-success-tarantula
+    interactFailureString: petting-failure-generic
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#4faffb"
+  - type: NoSlip
+  - type: IgnoreSpiderWeb
+  - type: Speech
+    speechVerb: Arachnid
+
+- type: entity
+  name: tarantula2
+  parent: PaukOxygenSpider
+  id: PaukSpiderT2
+  suffix: Angry
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Xeno
+    - type: InputMover
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: SimpleHostileCompound
+    - type: DamageStateVisuals
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        250: Dead
+    - type: Spider
+    - type: Tag
+      tags:
+      - DoorBumpOpener
+    - type: IgnoreSpiderWeb
+    - type: GhostRole
+      prob: 0.50
+      name: ghost-role-information-salvage-spider-name
+      description: ghost-role-information-salvage-spider-description
+    - type: GhostTakeoverAvailable
+    - type: Speech
+      speechVerb: Arachnid
+    - type: MeleeChemicalInjector
+      transferAmount: 1.25
+    - type: MovementSpeedModifier
+      baseWalkSpeed : 4.25
+      baseSprintSpeed : 4.25
+
+- type: entity
+  name: tarantula3
+  parent: PaukOxygenMobGiantSpider
+  id: PaukSpiderT3
+  suffix: Angry
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Xeno
+    - type: InputMover
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: SimpleHostileCompound
+    - type: DamageStateVisuals
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        350: Dead
+#    - type: Stamina
+#      critThreshold: 300
+    - type: Spider
+    - type: Tag
+      tags:
+      - DoorBumpOpener
+    - type: IgnoreSpiderWeb
+    - type: GhostRole
+      prob: 1
+      name: ghost-role-information-salvage-spider-name #поменять
+      description: ghost-role-information-salvage-spider-description #поменять
+    - type: GhostTakeoverAvailable
+    - type: Speech
+      speechVerb: Arachnid
+    - type: MeleeChemicalInjector
+      transferAmount: 1.75
+    - type: MovementSpeedModifier
+      baseWalkSpeed : 3.75
+      baseSprintSpeed : 3.75
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 0.15
+    - type: BasicEntityAmmoProvider
+      proto: PaukBulletAcid
+      capacity: 1
+      count: 1
+    - type: Gun
+      fireRate: 0.45
+      useKey: false
+      selectedMode: FullAuto
+      availableModes:
+       - FullAuto
+      soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg #cвой звук
+    - type: InnateTool
+      tools:
+       - id: EnergyShield
+    - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.
+      allowedStates:
+       - Alive
+      damageCap: 75
+      damage:
+       types:
+         Heat: -1.5
+       groups:
+         Brute: -1.5
+    - type: Reflect
+      enabled: true 
+      reflectProb: 0.95
+      reflects:
+        - Energy
+    
