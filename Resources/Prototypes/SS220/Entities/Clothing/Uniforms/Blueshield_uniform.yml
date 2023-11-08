@@ -1,7 +1,7 @@
 - type: entity
   parent: UnsensoredClothingUniformBase
   id: ClothingUniformJumpsuitBlueShield2
-  name: Униформа Синего Щита
+  name: униформа Синего Щита
   description: Модная форма Синего Щита, как же она хороша.
   components:
   - type: Sprite
