@@ -2,7 +2,7 @@
   parent: ClothingNeckBase
   id: ClothingNeckCloakFloppa
   name: шкура Шлёпы
-  description: Это - не то, что вы думаете.
+  description: Это - не то, что вы думаете
   suffix: Sponsor
   components:
   - type: Sprite
