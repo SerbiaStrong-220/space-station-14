@@ -168,55 +168,6 @@ public sealed class PlayTimeGetOverallCommand : IConsoleCommand
     }
 }
 
-//SS220-aghost-playtime begin
-[AdminCommand(AdminFlags.Admin)]
-public sealed class PlayTimeGetAGhost : IConsoleCommand
-{
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
-
-    public string Command => "playtime_getaghost";
-    public string Description => Loc.GetString("cmd-playtime_getaghost-desc");
-    public string Help => Loc.GetString("cmd-playtime_getaghost-help", ("command", Command));
-
-    public async void Execute(IConsoleShell shell, string argStr, string[] args)
-    {
-        if (args.Length != 1)
-        {
-            shell.WriteError(Loc.GetString("cmd-playtime_getaghost-error-args"));
-            return;
-        }
-
-        var userName = args[0];
-        if (!_playerManager.TryGetSessionByUsername(userName, out var player))
-        {
-            shell.WriteError(Loc.GetString("parse-session-fail", ("username", userName)));
-            return;
-        }
-
-        // I thought that displaying total hours will be more practical than displaying days:hours:minutes.
-        double value = _playTimeTracking.GetAGhostPlaytime(player).TotalHours;
-        value = Math.Round(value, 2); //Round to the second digit, i. e. 3,14 hours of aghost playtime
-        shell.WriteLine(Loc.GetString(
-            "cmd-playtime_getaghost-success",
-            ("username", userName),
-            ("time", value)));
-    }
-
-    public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
-    {
-        if (args.Length == 1)
-        {
-            return CompletionResult.FromHintOptions(
-                CompletionHelper.SessionNames(players: _playerManager),
-                Loc.GetString("cmd-playtime_getaghost-arg-user"));
-        }
-
-        return CompletionResult.Empty;
-    }
-}
-//SS220-aghost-playtime end
-
 [AdminCommand(AdminFlags.Admin)]
 public sealed class PlayTimeGetRoleCommand : IConsoleCommand
 {

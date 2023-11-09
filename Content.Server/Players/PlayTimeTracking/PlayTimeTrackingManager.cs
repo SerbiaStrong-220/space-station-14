@@ -351,13 +351,6 @@ public sealed class PlayTimeTrackingManager
         return GetPlayTimeForTracker(id, PlayTimeTrackingShared.TrackerOverall);
     }
 
-    //SS220-aghost-playtime begin
-    public TimeSpan GetAGhostPlaytime(ICommonSession id)
-    {
-        return GetPlayTimeForTracker(id, PlayTimeTrackingShared.TrackerAGhost);
-    }
-    //SS220-aghost-playtime end
-
     public bool TryGetTrackerTimes(ICommonSession id, [NotNullWhen(true)] out Dictionary<string, TimeSpan>? time)
     {
         time = null;

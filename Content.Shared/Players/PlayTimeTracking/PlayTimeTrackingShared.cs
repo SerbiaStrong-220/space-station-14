@@ -9,8 +9,18 @@ public static class PlayTimeTrackingShared
 
     //SS220-aghost-playtime begin
     /// <summary>
+    /// The prototype ID of the play time tracker that represents overall time with admin priveleges.
+    /// </summary>
+    public const string TrackerAdmin = "AdminTime";
+
+    /// <summary>
     /// The prototype ID of the play time tracker that represents admin ghost playtime.
     /// </summary>
     public const string TrackerAGhost = "AGhostTime";
+
+    /// <summary>
+    /// The prototype ID of the play time tracker that represents overall time in ghost.
+    /// </summary>
+    public const string TrackerObserver = "ObserverTime";
     //SS220-aghost-playtime end
 }

@@ -27,13 +27,6 @@ cmd-playtime_getoverall-success = Overall time for {$username} is {TOSTRING($tim
 cmd-playtime_getoverall-arg-user = <user name>
 cmd-playtime_getoverall-error-args = Expected exactly one argument
 
-# - SS220 playtime_getaghost
-cmd-playtime_getaghost-desc = Gets the specified hours for a player's admin-ghost playtime
-cmd-playtime_getaghost-help = Usage: { $command } <user name>
-cmd-playtime_getaghost-success = Admin-ghost playtime for { $username } is { $time } hours.
-cmd-playtime_getaghost-arg-user = <user name>
-cmd-playtime_getaghost-error-args = Expected exactly one argument
-
 # - GetRoleTimer
 cmd-playtime_getrole-desc = Gets all or one role timers from a player
 cmd-playtime_getrole-help = Usage: {$command} <user name> [role]
@@ -42,7 +35,8 @@ cmd-playtime_getrole-role = Role: {$role}, Playtime: {$time}
 cmd-playtime_getrole-overall = Overall playtime is {$time}
 cmd-playtime_getrole-succeed = Playtime for {$username} is: {TOSTRING($time, "dddd\\:hh\\:mm")}.
 cmd-playtime_getrole-arg-user = <user name>
-cmd-playtime_getrole-arg-role = <role|'Overall'>
+#SS220-aghost-playtime
+cmd-playtime_getrole-arg-role = <role|'Overall'|'AdminTime'|'AGhostTime'|'ObserverTime'>
 cmd-playtime_getrole-error-args = Expected exactly one or two arguments
 
 # - playtime_save
