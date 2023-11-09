@@ -1,8 +1,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakFloppa
-  name: Шкура Шлёпы.
-  description: Это не то что вы думаете.
+  name: шкура Шлёпы.
+  description: Это - не то, что вы думаете.
   suffix: Sponsor
   components:
   - type: Sprite
