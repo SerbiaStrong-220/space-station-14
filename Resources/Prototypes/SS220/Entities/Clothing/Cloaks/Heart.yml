@@ -2,7 +2,7 @@
   parent: ClothingNeckBase
   id: ClothingNeckCloakAlisa
   name: Сердце Алисы.
-  description: Огромное доброе сердце запечатанное в куске ткани.
+  description: Огромное доброе сердце, запечатанное в куске ткани.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Cloaks.rsi
