@@ -8,7 +8,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
+using Robust.Shared.Player;
 
 namespace Content.Server.UserInterface;
 
@@ -66,7 +66,8 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (!args.CanAccess)
             return;
 
-        if (component.RequireHands && args.Hands == null)
+        //SS220-Ghosts-paper-reading
+        if (component.RequireHands && (args.Hands == null && !HasComp<GhostComponent>(args.User)))
             return;
 
         if (component.InHandsOnly && args.Using != uid)
@@ -125,7 +126,8 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (!_blockerSystem.CanInteract(user, uiEntity) && (!aui.AllowSpectator || !HasComp<GhostComponent>(user)))
             return false;
 
-        if (aui.RequireHands && !HasComp<HandsComponent>(user))
+        //SS220-Ghosts-paper-reading
+        if (aui.RequireHands && (!HasComp<HandsComponent>(user) && !HasComp<GhostComponent>(user)))
             return false;
 
         if (!EntityManager.TryGetComponent(user, out ActorComponent? actor))
@@ -173,7 +175,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         return true;
     }
 
-    public void SetCurrentSingleUser(EntityUid uid, IPlayerSession? v, ActivatableUIComponent? aui = null)
+    public void SetCurrentSingleUser(EntityUid uid, ICommonSession? v, ActivatableUIComponent? aui = null)
     {
         if (!Resolve(uid, ref aui))
             return;
@@ -231,9 +233,9 @@ public sealed class UserOpenActivatableUIAttemptEvent : CancellableEntityEventAr
 public sealed class AfterActivatableUIOpenEvent : EntityEventArgs
 {
     public EntityUid User { get; }
-    public readonly IPlayerSession Session;
+    public readonly ICommonSession Session;
 
-    public AfterActivatableUIOpenEvent(EntityUid who, IPlayerSession session)
+    public AfterActivatableUIOpenEvent(EntityUid who, ICommonSession session)
     {
         User = who;
         Session = session;
