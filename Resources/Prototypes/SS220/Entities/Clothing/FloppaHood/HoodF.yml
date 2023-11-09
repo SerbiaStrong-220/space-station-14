@@ -2,7 +2,7 @@
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatFloppa
   name: шлёпафон
-  description: Шлёпашон.
+  description: Шлёпашон
   components:
   - type: Sprite
     sprite: SS220\Clothing\HoodF.rsi
