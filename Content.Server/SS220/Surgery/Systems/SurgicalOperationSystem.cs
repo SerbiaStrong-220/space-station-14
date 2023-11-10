@@ -13,12 +13,17 @@ namespace Content.Server.SS220.Surgery.Systems
         [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SurgicalInstrumentSystem _surgicalInstrumentSystem = default!;
+
+        private readonly Dictionary<SurgicalInstrumentsSpecialization, Action<EntityUid, EntityUid>> surgicalActions = new Dictionary<SurgicalInstrumentsSpecialization, Action<EntityUid, EntityUid>>();
+
         public override void Initialize()
         {
             base.Initialize();
 
             SubscribeLocalEvent<SurgicalInstrumentComponent, AfterInteractEvent>(OnAfterInteractEvent);
             SubscribeLocalEvent<SurgicalInstrumentComponent, SurgeryInstrumentDoAfterEvent>(OnDoAfter);
+
+            //surgicalActions.Add(SurgicalInstrumentsSpecialization.Incision, _surgicalInstrumentSystem.TryMakeIncision);
         }
 
         public void OnAfterInteractEvent(EntityUid uid, SurgicalInstrumentComponent component, AfterInteractEvent args)
@@ -60,17 +65,7 @@ namespace Content.Server.SS220.Surgery.Systems
             if (args.Cancelled)
                 return;
 
-            switch (true)
-            {
-                case var value when component.Incision:
-                    _surgicalInstrumentSystem.TryMakeIncision(component.Target!.Value, args.User);
-                    break;
-                case var value when component.Clamp:
-                    _surgicalInstrumentSystem.TryMakeClamp(component.Target!.Value, args.User);
-                    break;
-                case var value when component.Retractor:
-                    break;
-            }
+            
         }
 
     }

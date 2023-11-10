@@ -22,7 +22,8 @@
   description: A surgical tool used to cauterize open wounds.
   components:
   - type: SurgicalInstrument
-    cauter: true
+    specialization:
+        - Incision
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/cautery.rsi
     state: cautery

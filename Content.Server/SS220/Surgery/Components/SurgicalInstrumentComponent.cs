@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Content.Server.SS220.Surgery.Systems;
 
 namespace Content.Server.SS220.Surgery.Components
 {
@@ -18,68 +19,9 @@ namespace Content.Server.SS220.Surgery.Components
         [ViewVariables(VVAccess.ReadOnly)]
         public SurgicalInstrumentMode Mode = SurgicalInstrumentMode.SELECTOR;
 
-        /// <summary>
-        /// Scalpels, knifes and etc
-        /// </summary>
-        [DataField("incision")]
-        public bool Incision { get; set; }
-
-        /// <summary>
-        /// Saws, amputation knifes and etc
-        /// </summary>
-        [DataField("amputation")]
-        public bool Amputation { get; set; }
-
-        /// <summary>
-        /// Tweezers...
-        /// </summary>
-
-        [DataField("extraction")]
-        public bool Exctraction { get; set; }
-
-        /// <summary>
-        /// Hemostats
-        /// </summary>
-
-        [DataField("clamp")]
-        public bool Clamp { get; set; }
-
-        /// <summary>
-        /// Retractors
-        /// </summary>
-
-        [DataField("retractor")]
-        public bool Retractor { get; set; }
-
-        /// <summary>
-        ///  ????
-        /// </summary>
-
-        [DataField("drill")]
-        public bool Drill { get; set; }
-
-        /// <summary>
-        /// Including chainsaw (lol)
-        /// </summary>
-
-        [DataField("saw")]
-        public bool Saw { get; set; }
-
-        /// <summary>
-        /// Cauter, sigar
-        /// </summary>
-
-        [DataField("cauter")]
-        public bool Cauter { get; set; }
-
-        /// <summary>
-        /// Read as "Used in surgical clearing"
-        /// </summary>
-
-        [DataField("debridement")]
-        public bool Debridement { get; set; }
-
-
+        [ViewVariables(VVAccess.ReadOnly)]
+        [DataField("specialization")]
+        public List<SurgicalInstrumentsSpecialization> Specialization { get; set; }
 
         [DataField("succesfullStepChance")]
         [ViewVariables(VVAccess.ReadWrite)]
