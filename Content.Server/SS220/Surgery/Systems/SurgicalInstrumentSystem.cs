@@ -47,19 +47,19 @@ namespace Content.Server.SS220.Surgery.Systems
         }
 
         // Tool methods
-        public bool TryMakeIncision(EntityUid limb, EntityUid user)
+        public bool TryMakeIncision(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
         {
             _popup.PopupEntity($"ЫААААААААААААААААААААААААА {Name(limb)} фулл разнос", user);
             return true;
         }
 
-        public bool TryMakeClamp(EntityUid limb, EntityUid user)
+        public bool TryMakeClamp(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
         {
             _popup.PopupEntity($"ЫААААААААААААААААААААААААА {Name(limb)} фулл перекрут", user);
             return true;
         }
 
-        public bool TryMakeRetract(EntityUid limb, SurgicalInstrumentComponent comp)
+        public bool TryMakeRetract(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
         {
             return true;
         }

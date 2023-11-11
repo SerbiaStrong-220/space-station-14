@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using Content.Server.SS220.Surgery.Systems;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Content.Shared.SS220.Surgery.Prototypes;
 
 namespace Content.Server.SS220.Surgery.Components
 {
@@ -20,8 +22,8 @@ namespace Content.Server.SS220.Surgery.Components
         public SurgicalInstrumentMode Mode = SurgicalInstrumentMode.SELECTOR;
 
         [ViewVariables(VVAccess.ReadOnly)]
-        [DataField("specialization")]
-        public List<SurgicalInstrumentsSpecialization> Specialization { get; set; }
+        [DataField("specialization", customTypeSerializer: typeof(PrototypeIdListSerializer<SurgicalInstrumentSpecializationTypePrototype>))]
+        public List<string> Specialization { get; set; }
 
         [DataField("succesfullStepChance")]
         [ViewVariables(VVAccess.ReadWrite)]

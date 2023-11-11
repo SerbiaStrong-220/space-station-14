@@ -3,8 +3,9 @@ using Content.Server.SS220.Surgery.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Surgery.Prototypes;
 using Content.Shared.SS220.Surgery.Systems;
-using FastAccessors;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Surgery.Systems
 {
@@ -13,8 +14,19 @@ namespace Content.Server.SS220.Surgery.Systems
         [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SurgicalInstrumentSystem _surgicalInstrumentSystem = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-        private readonly Dictionary<SurgicalInstrumentsSpecialization, Action<EntityUid, EntityUid>> surgicalActions = new Dictionary<SurgicalInstrumentsSpecialization, Action<EntityUid, EntityUid>>();
+        private delegate bool OperationAction(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component);
+
+        private readonly Dictionary<SurgicalInstrumentSpecializationTypePrototype, OperationAction> SurgicalActions;
+
+        public SurgicalOperationSystem()
+        {
+            SurgicalActions = new()
+            {
+
+            };
+        }
 
         public override void Initialize()
         {
@@ -22,8 +34,6 @@ namespace Content.Server.SS220.Surgery.Systems
 
             SubscribeLocalEvent<SurgicalInstrumentComponent, AfterInteractEvent>(OnAfterInteractEvent);
             SubscribeLocalEvent<SurgicalInstrumentComponent, SurgeryInstrumentDoAfterEvent>(OnDoAfter);
-
-            //surgicalActions.Add(SurgicalInstrumentsSpecialization.Incision, _surgicalInstrumentSystem.TryMakeIncision);
         }
 
         public void OnAfterInteractEvent(EntityUid uid, SurgicalInstrumentComponent component, AfterInteractEvent args)
