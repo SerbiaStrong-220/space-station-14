@@ -2,23 +2,97 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Storage;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Content.Shared.Hands;
+using Content.Client.Animations;
+using Robust.Shared.Map;
+using Robust.Shared.Timing;
+
+using Content.Shared.VendingMachines;
+
+
 
 namespace Content.Client.SS220.MachineStorage.SmartFridge;
 
-public sealed class SmartFridgeSystem
+public sealed class SmartFridgeSystem : SharedStorageSystem
 {
-    /*
-    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityPickupAnimationSystem _entityPickupAnimation = default!;
+
+    public event Action<EntityUid, StorageComponent>? StorageUpdated;
+
+    //[Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
+    //[Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeNetworkEvent<PickupAnimationEvent>(HandlePickupAnimation);
+        //SubscribeNetworkEvent<AnimateInsertingEntitiesEvent>(HandleAnimatingInsertingEntities);
+
         //SubscribeLocalEvent<VendingMachineComponent, AppearanceChangeEvent>(OnAppearanceChange);
-       //SubscribeLocalEvent<VendingMachineComponent, AnimationCompletedEvent>(OnAnimationCompleted);
+        //SubscribeLocalEvent<VendingMachineComponent, AnimationCompletedEvent>(OnAnimationCompleted);
     }
 
+    //перевод storage контейнера в List<VendingMachineInventoryEntry>
+    public List<VendingMachineInventoryEntry> GetAllInventory(EntityUid uid, StorageComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return new();
+
+        //var inventory = new List<VendingMachineInventoryEntry>(component.Inventory.Values);
+
+        var inventory = new List<VendingMachineInventoryEntry>();
+        foreach (var item in component.Container.ContainedEntities)
+        {
+            //inventory.Add(new EntityListData(item));
+            if (!TryGetItemCode(item, out var itemId))
+                continue;
+            inventory.Add(new VendingMachineInventoryEntry(InventoryType.Regular, itemId, 1));
+        }
+
+        return inventory;
+    }
+
+    private bool TryGetItemCode(EntityUid entityUid, out string code)
+    {
+        var metadata = IoCManager.Resolve<IEntityManager>().GetComponentOrNull<MetaDataComponent>(entityUid);
+        code = metadata?.EntityPrototype?.ID ?? "";
+        return !string.IsNullOrEmpty(code);
+    }
+
+    private void HandlePickupAnimation(PickupAnimationEvent msg)
+    {
+        PickupAnimation(GetEntity(msg.ItemUid), GetCoordinates(msg.InitialPosition), GetCoordinates(msg.FinalPosition), msg.InitialAngle);
+    }
+
+    public override void PlayPickupAnimation(EntityUid uid, EntityCoordinates initialCoordinates, EntityCoordinates finalCoordinates,
+Angle initialRotation, EntityUid? user = null)// скопировано из Storage
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        PickupAnimation(uid, initialCoordinates, finalCoordinates, initialRotation);
+    }
+
+    public void PickupAnimation(EntityUid item, EntityCoordinates initialCoords, EntityCoordinates finalCoords, Angle initialAngle)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        if (finalCoords.InRange(EntityManager, _transform, initialCoords, 0.1f) ||
+            !Exists(initialCoords.EntityId) || !Exists(finalCoords.EntityId))
+        {
+            return;
+        }
+
+        var finalMapPos = finalCoords.ToMapPos(EntityManager, _transform);
+        var finalPos = _transform.GetInvWorldMatrix(initialCoords.EntityId).Transform(finalMapPos);
+
+        _entityPickupAnimation.AnimateEntityPickup(item, initialCoords, finalPos, initialAngle);
+    }
+
+    /*
     private void OnAnimationCompleted(EntityUid uid, VendingMachineComponent component, AnimationCompletedEvent args)
     {
         /*
@@ -33,15 +107,6 @@ public sealed class SmartFridgeSystem
 
         UpdateAppearance(uid, visualState, component, sprite);
         
-    }
-
-    public override void PlayPickupAnimation(EntityUid uid, EntityCoordinates initialCoordinates, EntityCoordinates finalCoordinates,
-    Angle initialRotation, EntityUid? user = null)// скопировано из Storage
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        PickupAnimation(uid, initialCoordinates, finalCoordinates, initialRotation);
     }
 
     private void OnAppearanceChange(EntityUid uid, VendingMachineComponent component, ref AppearanceChangeEvent args)

@@ -1,14 +1,15 @@
+using Content.Client.SS220.MachineStorage.SmartFridge.UI;
 using Content.Client.VendingMachines.UI;
 using Content.Shared.VendingMachines;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
 
-namespace Content.Client.VendingMachines
+namespace Content.Client.SS220.MachineStorage.SmartFridge
 {
-    public sealed class VendingMachineBoundUserInterface : BoundUserInterface
+    public sealed class SmartFridgeBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private VendingMachineMenu? _menu;
+        private SmartFridgeMenu? _menu;
 
         [ViewVariables]
         private List<VendingMachineInventoryEntry> _cachedInventory = new();
@@ -16,7 +17,7 @@ namespace Content.Client.VendingMachines
         [ViewVariables]
         private List<int> _cachedFilteredIndex = new();
 
-        public VendingMachineBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+        public SmartFridgeBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
         }
 
@@ -24,11 +25,11 @@ namespace Content.Client.VendingMachines
         {
             base.Open();
 
-            var vendingMachineSys = EntMan.System<VendingMachineSystem>();
+            var SmartFridgeSys = EntMan.System<SmartFridgeSystem>();
 
-            _cachedInventory = vendingMachineSys.GetAllInventory(Owner);
+            _cachedInventory = SmartFridgeSys.GetAllInventory(Owner);
 
-            _menu = new VendingMachineMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
+            _menu = new SmartFridgeMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
 
             _menu.OnClose += Close;
             _menu.OnItemSelected += OnItemSelected;
@@ -42,11 +43,11 @@ namespace Content.Client.VendingMachines
         protected override void UpdateState(BoundUserInterfaceState state)
         {
             base.UpdateState(state);
+            //разобраться, что это?
+            //if (state is not SmartFridgeInterfaceState newState)
+            //    return;
 
-            if (state is not VendingMachineInterfaceState newState)
-                return;
-
-            _cachedInventory = newState.Inventory;
+            //_cachedInventory = newState.Inventory;
 
             _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, _menu.SearchBar.Text);
         }

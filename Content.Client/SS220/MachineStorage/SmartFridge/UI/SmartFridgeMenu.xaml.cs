@@ -30,7 +30,7 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge.UI
                 OnSearchChanged?.Invoke(SearchBar.Text);
             };
 
-            VendingContents.OnItemSelected += args =>
+            VendingContents.OnItemSelected += args =>//надо будет переписать
             {
                 OnItemSelected?.Invoke(args);
             };
@@ -42,6 +42,7 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge.UI
         /// </summary>
         public void Populate(List<VendingMachineInventoryEntry> inventory, out List<int> filteredInventory,  string? filter = null)
         {
+
             filteredInventory = new();
 
             if (inventory.Count == 0)
