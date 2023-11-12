@@ -2,7 +2,7 @@
   id: Ammonitor
   name: Блиц-Аммонитор
   icon: SS220\Objects\Specific\Ammonitor.rsi
-  spawn: Velicrystal1
+  spawn: Ammonitor1
   itemSize: 1
   
 - type: entity
@@ -37,13 +37,23 @@
 
 - type: entity
   parent: Ammonitor
-  id: Velicrystal1
+  id: Ammonitor1
   suffix: 1
   components:
   - type: Stack
     count: 1
   - type: Item
     size: 1
+    
+- type: entity
+  parent: Ammonitor
+  id: Ammonitor4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+  - type: Item
+    size: 4
 
 - type: entity
   parent: Ammonitor
