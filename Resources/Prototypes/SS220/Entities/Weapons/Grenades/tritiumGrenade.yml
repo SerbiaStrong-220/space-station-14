@@ -1,0 +1,29 @@
+- type: entity
+  name: Дейтерий-Тритиевый Обнулительный Термоядерный снаряд
+  description: Снаряд, используемый в БС-артиллериях первого поколения. Лучше его не ронять...
+  parent: GrenadeBase
+  id: TritiumGrenade
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Grenades/tritiumGrenade.rsi
+  - type: OnUseTimerTrigger
+    delay: 5
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 20000 # ~15 tile radius.
+    intensitySlope: 5
+    maxIntensity: 50
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/countdown.ogg
