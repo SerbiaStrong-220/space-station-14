@@ -11,7 +11,7 @@ namespace Content.Shared.Roles
     ///     Describes information for a single job on the station.
     /// </summary>
     [Prototype("job")]
-    public sealed class JobPrototype : IPrototype
+    public sealed partial class JobPrototype : IPrototype
     {
         [ViewVariables]
         [IdDataField]
@@ -55,6 +55,9 @@ namespace Content.Shared.Roles
 
         [DataField("canBeAntag")]
         public bool CanBeAntag { get; private set; } = true;
+
+        [DataField("canBeZombie")]
+        public bool CanBeZombie { get; private set; } = true;
 
         [DataField("radioBold")]
         public bool RadioIsBold { get; } = false;
