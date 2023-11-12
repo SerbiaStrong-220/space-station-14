@@ -1,9 +1,11 @@
 <ui:FancyWindow
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    x:Class="Content.Client.SS220.UserInterface.DiscordLink.DiscordLinkWindow"
-    SetSize="400 400">
-    <TabContainer Name="TabContainer">
-    </TabContainer>
+    Title="Привязка аккаунта"
+    MinWidth="400"
+    MinHeight="545">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="2">
+        <RichTextLabel Name="LinkArea" Access="Public" />
+        <Button Visible="True" Name="CopyLink" Access="Public" Text="Скопировать" HorizontalAlignment="Center" />
+    </BoxContainer>
 </ui:FancyWindow>

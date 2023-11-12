@@ -14,6 +14,9 @@ namespace Content.Server.SS220.Discord.Commands;
 public sealed class DiscordCommand : IConsoleCommand
 {
     [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private readonly ILogManager _logManager = default!;
+
+    public const string SawmillTitle = "discordLinkCommand";
 
     /// <inheritdoc />
     public string Command => "discordlink";
@@ -45,8 +48,10 @@ public sealed class DiscordCommand : IConsoleCommand
                 sb.Append(Loc.GetString("discord-command-already"));
             }
 
-            var ui = new DiscordLinkEui();
-            _eui.OpenEui(ui, player);
+            var linkEui = new DiscordLinkEui();
+            _eui.OpenEui(linkEui, player);
+
+            linkEui.SetLinkKey(key);
 
             var message = sb.ToString();
 
@@ -54,6 +59,8 @@ public sealed class DiscordCommand : IConsoleCommand
         }
         catch (Exception e)
         {
+            _logManager.GetSawmill(SawmillTitle).Error("Error on discord link create {error}", e);
+
             shell.WriteLine("Произошла ошибка. Свяжитесь с администрацией");
         }
     }
