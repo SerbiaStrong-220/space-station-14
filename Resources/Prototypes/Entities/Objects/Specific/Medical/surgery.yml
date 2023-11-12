@@ -21,9 +21,9 @@
   parent: BaseToolSurgery
   description: A surgical tool used to cauterize open wounds.
   components:
-  - type: SurgicalInstrument
+  - type: SurgicalInstrument #SS220-surgery
     specialization:
-        - Incision
+      - Cauter
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/cautery.rsi
     state: cautery
@@ -45,8 +45,9 @@
   parent: BaseToolSurgery
   description: A surgical drill for making holes into hard material.
   components:
-  - type: SurgicalInstrument
-    drill: true
+  - type: SurgicalInstrument #SS220-surgery
+    specialization:
+      - Drill
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/drill.rsi
     state: drill
@@ -68,9 +69,10 @@
   parent: BaseToolSurgery
   description: A surgical tool used to make incisions into flesh.
   components:
-  - type: SurgicalInstrument
-    incision: true
-    debridement: true
+  - type: SurgicalInstrument #SS220-surgery
+    specialization:
+      - Incision
+      - Debridement
   - type: Utensil
     types:
       - Knife
@@ -120,9 +122,10 @@
   parent: Scalpel
   description: A scalpel which uses a directed laser to slice instead of a blade, for more precise surgery while also cauterizing as it cuts.
   components:
-  - type: SurgicalInstrument
-    incision: true
-    debridement: true
+  - type: SurgicalInstrument #SS220-surgery
+    specialization:
+      - Incision
+      - Debridement
   - type: Sprite
     state: laser
   - type: Item
@@ -136,8 +139,9 @@
   parent: BaseToolSurgery
   description: A surgical tool used to hold open incisions.
   components:
-  - type: SurgicalInstrument
-    retractor: true
+  - type: SurgicalInstrument #SS220-surgery
+    specialization:
+      - Retract
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
     state: retractor
@@ -151,8 +155,9 @@
   parent: Retractor
   description: A surgical tool used to compress blood vessels to prevent bleeding.
   components:
-  - type: SurgicalInstrument
-    clamp: true
+  - type: SurgicalInstrument #SS220-surgery
+    specialization:
+      - Clamp
   - type: Sprite
     state: hemostat
   - type: Item
@@ -172,9 +177,10 @@
   parent: BaseToolSurgery
   description: For cutting wood and other objects to pieces. Or sawing bones, in case of emergency.
   components:
-  - type: SurgicalInstrument
-    saw: true
-    amputation: true
+  - type: SurgicalInstrument #SS220-surgery
+    specialization:
+      - Saw
+      - Amputation
   - type: Utensil
     types:
       - Knife

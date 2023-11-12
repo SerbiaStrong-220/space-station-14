@@ -63,5 +63,30 @@ namespace Content.Server.SS220.Surgery.Systems
         {
             return true;
         }
+
+        public bool TryMakeCauter(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
+        {
+            return true;
+        }
+
+        public bool TryMakeDrill(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
+        {
+            return true;
+        }
+
+        public bool TryMakeDebridement(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
+        {
+            return true;
+        }
+
+        public bool TryMakeSaw(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
+        {
+            return true;
+        }
+
+        public bool TryMakeAmputation(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
+        {
+            return true;
+        }
     }
 }

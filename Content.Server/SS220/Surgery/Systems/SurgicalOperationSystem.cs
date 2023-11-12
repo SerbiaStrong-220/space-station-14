@@ -18,15 +18,7 @@ namespace Content.Server.SS220.Surgery.Systems
 
         private delegate bool OperationAction(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component);
 
-        private readonly Dictionary<SurgicalInstrumentSpecializationTypePrototype, OperationAction> SurgicalActions;
-
-        public SurgicalOperationSystem()
-        {
-            SurgicalActions = new()
-            {
-
-            };
-        }
+        private Dictionary<SurgicalInstrumentSpecializationTypePrototype, OperationAction> SurgicalProcedures = new();
 
         public override void Initialize()
         {
@@ -34,6 +26,18 @@ namespace Content.Server.SS220.Surgery.Systems
 
             SubscribeLocalEvent<SurgicalInstrumentComponent, AfterInteractEvent>(OnAfterInteractEvent);
             SubscribeLocalEvent<SurgicalInstrumentComponent, SurgeryInstrumentDoAfterEvent>(OnDoAfter);
+
+            SurgicalProcedures = new Dictionary<SurgicalInstrumentSpecializationTypePrototype, OperationAction>()
+            {
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Incision"), _surgicalInstrumentSystem.TryMakeIncision },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Clamp"), _surgicalInstrumentSystem.TryMakeClamp },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Retract"), _surgicalInstrumentSystem.TryMakeRetract },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Cauter"), _surgicalInstrumentSystem.TryMakeCauter },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Drill"), _surgicalInstrumentSystem.TryMakeDrill },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Debridement"), _surgicalInstrumentSystem.TryMakeDebridement },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Saw"), _surgicalInstrumentSystem.TryMakeSaw },
+                { _prototypeManager.Index<SurgicalInstrumentSpecializationTypePrototype>("Amputation"), _surgicalInstrumentSystem.TryMakeAmputation },
+            };
         }
 
         public void OnAfterInteractEvent(EntityUid uid, SurgicalInstrumentComponent component, AfterInteractEvent args)
@@ -75,7 +79,27 @@ namespace Content.Server.SS220.Surgery.Systems
             if (args.Cancelled)
                 return;
 
-            
+            if (args.Target is null || args.Used is null)
+                return;
+
+            foreach (var specialization in component.Specialization)
+            {
+                if (!_prototypeManager.TryIndex<SurgicalInstrumentSpecializationTypePrototype>(specialization, out var prototype))
+                    continue;
+
+                if (!SurgicalProcedures.ContainsKey(prototype))
+                    continue;
+
+                try
+                {
+                    SurgicalProcedures[prototype].Invoke(args.Target.Value, args.Used.Value, component);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"Can't execute given SurgicalProcedure! Aborting execution! {e.Message}");
+                    break;
+                }
+            }
         }
 
     }

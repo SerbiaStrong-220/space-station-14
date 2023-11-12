@@ -1,2 +1,23 @@
 - type: surgicalInstrumentSpecializationType
   id: Incision
+  
+- type: surgicalInstrumentSpecializationType
+  id: Clamp
+  
+- type: surgicalInstrumentSpecializationType
+  id: Retract
+  
+- type: surgicalInstrumentSpecializationType
+  id: Cauter
+  
+- type: surgicalInstrumentSpecializationType
+  id: Drill
+  
+- type: surgicalInstrumentSpecializationType
+  id: Debridement
+  
+- type: surgicalInstrumentSpecializationType
+  id: Saw
+  
+- type: surgicalInstrumentSpecializationType
+  id: Amputation
