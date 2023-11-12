@@ -1,0 +1,54 @@
+- type: entity
+  id: SyndiTechFab
+  parent: BaseLathe
+  name: ЗлоФаб
+  description: ЗлоФаб удовлетворит ваши нужды для прекрасного, злого дня.
+  components:
+  - type: Sprite
+    sprite: SS220\Structures\Machines\techFabSyndi.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: ProtolatheMachineCircuitboard
+  - type: Wires
+    boardName: wires-board-name-protolathe
+    layoutId: Protolathe
+  - type: MaterialStorage
+    whitelist:
+    tags:
+    - Ammonitor
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    staticRecipes:
+      - SyndMagazineShotgun
+      - SyndLethalshot
+      - SyndMagazineShotgunIncendiary
+      - SyndBoxShotgunIncendiary
+      - SyndMagazineLightRifleBox
+      - SyndMagazineBoxLightRifleBig
+      - SyndSpeedLoaderMagnum
+      - SyndMagazineBoxMagnum
+      - SyndMagazineBoxAntiMateriel
+      - SyndBoxMagazinePistolCaselessRifle
+      - SyndMagazinePistolCaselessRifle
+      - SyndMagazineBoxCaselessRifle
+      - SyndBoxMagazinePistolSubMachineGun
+      - SyndBoxMagazinePistol
+      - SyndMagazinePistolSubMachineGun
+      - SyndMagazinePistol
+      - SyndMagazineBoxPistol
+  - type: EmagLatheRecipes
+    emagStaticRecipes:
+      - SyndGrenadeFrag
+      - SyndGrenadeBlast
+      - SyndSpeedLoaderMagnumAP
