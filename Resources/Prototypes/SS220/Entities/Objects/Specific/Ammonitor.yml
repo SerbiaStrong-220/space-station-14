@@ -1,0 +1,66 @@
+- type: stack
+  id: Ammonitor
+  name: Блиц-Аммонитор
+  icon: SS220\Objects\Specific\Ammonitor.rsi
+  spawn: Velicrystal1
+  itemSize: 1
+  
+- type: entity
+  name: Блиц-Аммонитор
+  parent: BaseItem
+  id: Ammonitor
+  description: Этот телекристалл, вставленный в аппарат "ЗлоФаб", позволяет моментально телепортировать предметы прямо со складов из других звёздых систем.
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Ammonitor: 100
+  - type: Tag
+    tags:
+    - Ammonitor
+  - type: Sprite
+    sprite: SS220\Objects\Specific\Ammonitor.rsi
+    state: Ammonitor
+  - type: Item
+    sprite: SS220\Objects\Specific\Ammonitor.rsi
+    size: 1
+  - type: Stack
+    count: 1
+    stackType: Ammonitor
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 200
+  - type: Currency
+    price:
+      Ammonitor: 1
+
+- type: entity
+  parent: Ammonitor
+  id: Velicrystal1
+  suffix: 1
+  components:
+  - type: Stack
+    count: 1
+  - type: Item
+    size: 1
+
+- type: entity
+  parent: Ammonitor
+  id: Ammonitor5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+  - type: Item
+    size: 5
+
+- type: entity
+  parent: Ammonitor
+  id: Ammonitor10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+  - type: Item
+    size: 10
