@@ -1,0 +1,129 @@
+- type: entity
+  id: PresentBaseID
+  name: кейс со случайной id картой
+  description: В нём может находится очень редкая карта! Испытай свою удачу!
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220\Objects\Misc\idcase.rsi
+    state: idcase
+
+- type: entity
+  id: PresentID
+  parent: [PresentBaseID, BaseStorageItem]
+  suffix: Empty
+  components:
+  - type: Item
+    size: 30
+  - type: Storage
+    capacity: 30
+
+- type: entity
+  id: RandomID
+  parent: [PresentBaseID, BaseItem]
+  name: кейс со случайной id картой
+  description: В нём может находится очень редкая карта! Испытай свою удачу!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+      - id: ChaplainIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: PunPunIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: TechnicalAssistantIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ReporterIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: AtmosIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: PsychologistIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ResearchAssistantIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: BartenderIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ParamedicIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ServiceWorkerIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: LibrarianIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: MusicianIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: MedicalIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: BoxerIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: MimeIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ClownIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: BotanistIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ZookeeperIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: EngineeringIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: SeniorPhysicianIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: CargoIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: MedicalInternIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: SeniorEngineerIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: SeniorResearcherIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: JanitorIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ChefIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: SalvageIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ResearchIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: ChemistIDCard
+        orGroup: IDPool
+        prob: 2.8
+      - id: LawyerIDCard
+        prob: 10
+        orGroup: IDPool
+      - id: BrigmedicIDCard
+        prob: 5
+        orGroup: IDPool
+      - id: CEIDCard
+        prob: 3
+        orGroup: IDPool
+      - id: CaptainIDCard
+        prob: 1
+        orGroup: IDPool
+    sound:
+      path: /Audio/Effects/unwrap.ogg
