@@ -1,0 +1,26 @@
+- type: entity
+  parent: ClothingShoesBootsMag
+  id: ClothingShoesBootsMagNuclear
+  name: продвинутые магнитные ботинки синдиката
+  description: Новейшая разработка синдиката предвидет траекторию движения владельца и ускоряет движение.
+  components:
+  - type: Sprite
+    sprite: SS220\Clothing\Shoes\Boots\magboots-nuclear.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220\Clothing\Shoes\Boots\magboots-nuclear.rsi
+  - type: Magboots
+    toggleAction: ActionToggleMagbootsNuclear
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+    enabled: false
+  - type: NoSlip
+- type: entity
+  id: ActionToggleMagbootsNuclear
+  parent: ActionBaseToggleMagboots
+  noSpawn: true
+  components:
+  - type: InstantAction
+    icon: { sprite: /Textures/SS220/Clothing/Shoes/Boots/magboots-nuclear.rsi, state: icon }
+    iconOn: /Textures/SS220/Clothing/Shoes/Boots/magboots-nuclear.rsi/icon-on.png 
