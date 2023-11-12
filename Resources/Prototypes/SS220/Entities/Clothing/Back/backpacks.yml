@@ -10,4 +10,15 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/ussp.rsi
   - type: Storage
-    maxTotalWeight: 60
+    capacity: 250
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackNuclear
+  name: продвинутый рюкзак оперативника
+  description: Больше места, больше пуль, больше убийств во славу горлакса!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/nuclear_Backpack.rsi
+  - type: Storage
+    capacity: 150
