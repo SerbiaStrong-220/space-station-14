@@ -92,7 +92,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword_double.rsi, state: icon }
   productEntity: EnergySwordDouble
   cost:
-    Telecrystal: 30
+    Telecrystal: 40
   categories:
   - UplinkWeapons
   conditions:
@@ -303,23 +303,12 @@
     Telecrystal: 1
   categories:
   - UplinkAmmo
-
-# For the C20R
-- type: listing
-  id: UplinkMagazinePistolSubMachineGun
-  name: uplink-pistol-magazine-c20r-name
-  description: uplink-pistol-magazine-c20r-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
-  productEntity: MagazinePistolSubMachineGun
-  cost:
-    Telecrystal: 3
-  categories:
-  - UplinkAmmo
   conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
 
 # For the Cobra
 - type: listing
@@ -332,6 +321,12 @@
     Telecrystal: 1
   categories:
   - UplinkAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
 
 # For the Python
 - type: listing
@@ -344,6 +339,12 @@
     Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
 
 # For the mosin
 - type: listing
@@ -355,6 +356,12 @@
     Telecrystal: 1
   categories:
   - UplinkAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
 
 # for the hristov
 - type: listing
@@ -366,6 +373,12 @@
     Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
 
 #Utility
 
@@ -1157,7 +1170,7 @@
   description: uplink-clothing-shoes-boots-mag-syndie-desc
   productEntity: ClothingShoesBootsMagSyndie
   cost:
-    Telecrystal: 4
+    Telecrystal: 2
   categories:
   - UplinkArmor
 
