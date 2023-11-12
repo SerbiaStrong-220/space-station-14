@@ -91,6 +91,16 @@
   - UplinkMisc
   
 - type: listing
+  id: UplinkAmmonitor
+  name: Блиц-Аммонитор
+  description: Этот телекристалл, вставленный в аппарат "ЗлоФаб", позволяет моментально телепортировать предметы прямо со складов из других звёздых систем.
+  productEntity: Ammonitor4
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkMisc
+  
+- type: listing
   id: UplinkClothingBackpackNuclear
   name: продвинутый рюкзак оперативника
   description: Больше места, больше пуль, больше убийств во славу горлакса!
