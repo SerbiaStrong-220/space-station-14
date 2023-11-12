@@ -1,0 +1,120 @@
+- type: latheRecipe
+  id: SyndMagazineShotgun
+  result: MagazineShotgun
+  completetime: 2
+  materials:
+    Ammonitor: 250
+- type: latheRecipe
+  id: SyndBoxLethalshot
+  result: BoxLethalshot
+  completetime: 2
+  materials:
+    Ammonitor: 300
+- type: latheRecipe
+  id: SyndMagazineShotgunIncendiary
+  result: MagazineShotgunIncendiary
+  completetime: 2
+  materials:
+    Ammonitor: 325
+- type: latheRecipe
+  id: SyndBoxShotgunIncendiary
+  result: BoxShotgunIncendiary
+  completetime: 2
+  materials:
+   Ammonitor: 375
+- type: latheRecipe
+  id: SyndMagazineLightRifleBox
+  result: MagazineLightRifleBox
+  completetime: 2
+  materials:
+    Ammonitor: 500
+- type: latheRecipe
+  id: SyndMagazineBoxLightRifleBig
+  result: MagazineBoxLightRifleBig
+  completetime: 2
+  materials:
+    Ammonitor: 750
+- type: latheRecipe
+  id: SyndGrenadeFrag
+  result: GrenadeFrag
+  completetime: 2
+  materials:
+    Ammonitor: 200
+- type: latheRecipe
+  id: SyndGrenadeBlast
+  result: GrenadeBlast
+  completetime: 2
+  materials:
+    Ammonitor: 200
+- type: latheRecipe
+  id: SyndSpeedLoaderMagnum
+  result: SpeedLoaderMagnum
+  completetime: 2
+  materials:
+    Ammonitor: 100
+- type: latheRecipe
+  id: SyndSpeedLoaderMagnumAP
+  result: SpeedLoaderMagnumAP
+  completetime: 2
+  materials:
+    Ammonitor: 250
+- type: latheRecipe
+  id: SyndMagazineBoxMagnum
+  result: MagazineBoxMagnum
+  completetime: 2
+  materials:
+    Ammonitor: 700
+- type: latheRecipe
+  id: SyndMagazineBoxAntiMateriel
+  result: MagazineBoxAntiMateriel
+  completetime: 2
+  materials:
+    Ammonitor: 250
+- type: latheRecipe
+  id: SyndBoxMagazinePistolCaselessRifle
+  result: BoxMagazinePistolCaselessRifle
+  completetime: 4
+  materials:
+    Ammonitor: 500
+- type: latheRecipe
+  id: SyndMagazinePistolCaselessRifle
+  result: MagazinePistolCaselessRifle
+  completetime: 2
+  materials:
+    Ammonitor: 110
+- type: latheRecipe
+  id: SyndMagazineBoxCaselessRifle
+  result: MagazineBoxCaselessRifle
+  completetime: 2
+  materials:
+    Ammonitor: 375
+- type: latheRecipe
+  id: SyndBoxMagazinePistolSubMachineGun
+  result: BoxMagazinePistolSubMachineGun
+  completetime: 4
+  materials:
+    Ammonitor: 675
+- type: latheRecipe
+  id: SyndBoxMagazinePistol
+  result: BoxMagazinePistol
+  completetime: 4
+  materials:
+    Ammonitor: 450
+- type: latheRecipe
+  id: SyndMagazinePistolSubMachineGun
+  result: MagazinePistolSubMachineGun
+  completetime: 2
+  materials:
+    Ammonitor: 300
+- type: latheRecipe
+  id: SyndMagazinePistol
+  result: MagazinePistol
+  completetime: 2
+  materials:
+    Ammonitor: 100
+- type: latheRecipe
+  id: SyndMagazineBoxPistol
+  result: MagazineBoxPistol
+  completetime: 2
+  materials:
+    Ammonitor: 300
