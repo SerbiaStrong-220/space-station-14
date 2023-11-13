@@ -90,6 +90,7 @@
     contents:
       - id: BoxSurvival
       - id: Flash
+      - id: ExpensiveLighterNanotrasen #SS220-Zippo
       #- name: StationCharter
       #- name: TelescopicBaton
 
@@ -250,6 +251,7 @@
       - id: CigPackBlack
       - id: BoxForensicPad
       - id: HandLabeler
+      - id: ExpensiveLighterDetective #SS220-Zippo
 
 - type: entity
   noSpawn: true
