@@ -2,7 +2,7 @@
 
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Surgery.Prototypes;
+namespace Content.Shared.SS220.Medicine.Surgery.Prototypes;
 
 [Prototype("surgicalInstrumentSpecializationType")]
 public sealed class SurgicalInstrumentSpecializationTypePrototype : IPrototype
