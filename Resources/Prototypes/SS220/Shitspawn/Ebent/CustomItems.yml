@@ -82,7 +82,7 @@
     sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
     
 - type: entity
-  name: Энергетическая сабля 
+  name: энергетическая сабля 
   parent: BaseItem
   id: EnergySaberNT
   description: Передовое оружие NanoTrasen для ведения ближнего боя. 
