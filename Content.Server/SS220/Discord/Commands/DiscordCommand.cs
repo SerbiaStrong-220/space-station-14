@@ -1,10 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Text;
-using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Shared.Administration;
-using Content.Shared.Chat;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
 
@@ -15,6 +12,7 @@ public sealed class DiscordCommand : IConsoleCommand
 {
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!;
 
     public const string SawmillTitle = "discordLinkCommand";
 
@@ -27,35 +25,22 @@ public sealed class DiscordCommand : IConsoleCommand
     /// <inheritdoc />
     public string Help => Loc.GetString("discord-command-help");
 
-    [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!;
-
     /// <inheritdoc />
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (shell.Player is not ICommonSession player)
+        {
             return;
+        }
+
         try
         {
             var key = await _discordPlayerManager.CheckAndGenerateKey(player.Data);
-            var sb = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(key))
-            {
-                sb.Append(Loc.GetString("discord-command-key-link", ("key", key)));
-            }
-            else
-            {
-                sb.Append(Loc.GetString("discord-command-already"));
-            }
 
             var linkEui = new DiscordLinkEui();
             _eui.OpenEui(linkEui, player);
 
             linkEui.SetLinkKey(key);
-
-            var message = sb.ToString();
-
-            IoCManager.Resolve<IChatManager>().ChatMessageToOne(ChatChannel.Server, message, message, default, false, player.Channel);
         }
         catch (Exception e)
         {
