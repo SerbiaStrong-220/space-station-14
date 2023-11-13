@@ -28,7 +28,7 @@
 - type: listing
   id: UplinkClothingShoesBootsMagNuclear
   name: продвинутые магнитные ботинки синдиката 
-  description: Новейшая разработка синдиката предугадывает траекторию движения владельца и ускоряет движение.
+  description: Новейшая разработка синдиката, которая предсказывает траекторию движения владельца и ускоряет его движение.
   productEntity: ClothingShoesBootsMagNuclear
   cost:
     Telecrystal: 4
