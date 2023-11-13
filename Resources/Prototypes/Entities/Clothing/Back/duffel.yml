@@ -162,7 +162,6 @@
   description: A large duffel bag for holding various traitor goods.
   components:
   - type: Storage
-    maxItemSize: Huge
     maxTotalWeight: 44
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
