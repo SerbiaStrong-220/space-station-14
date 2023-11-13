@@ -2,7 +2,7 @@
   parent: ClothingBackpackDuffel
   id: ClothingDuffelNuclear
   name: продвинутая сумка оперативника
-  description: Огромная сумка, замедляет перемещение, но зато впещает в себя целый арсенал!
+  description: Огромная сумка, замедляет перемещение, но зато вмещает в себя целый арсенал!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Duffels/nuclear_duffel.rsi
