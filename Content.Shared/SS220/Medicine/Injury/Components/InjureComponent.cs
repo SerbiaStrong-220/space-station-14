@@ -3,10 +3,10 @@
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
-namespace Content.Shared.SS220.Medicine.Injure.Components;
+namespace Content.Shared.SS220.Medicine.Injury.Components;
 
 [RegisterComponent]
-public sealed partial class InjureComponent : Component
+public sealed partial class InjuryComponent : Component
 {
     /// <summary>
     /// List of damage specifiers. Deals passive damage.
@@ -16,23 +16,23 @@ public sealed partial class InjureComponent : Component
     public List<string> DamageSpecifiers = new();
 
     /// <summary>
-    /// For aghhhhhhh????????? Bone break = slowly moves???
+    /// For aghhhhhhh????????? Break bone = slowly moves???
     /// </summary>
 
-    [DataField("consiquences")]
-    public bool Consiquences { get; set; }
+    [DataField("consequences")]
+    public bool Consequences { get; set; }
 
     /// <summary>
     /// Can we perform surgery on limb without incision
     /// </summary>
-    [DataField("intervenableStage")]
-    public InjureStages IntervenableStage { get; set; }
+    [DataField("severity")]
+    public InjuryStages Severity { get; set; }
     public bool IsBleeding { get; set; }
 
-    [DataField("isInnerWound")]
-    public bool IsInnerWound { get; set; }
+    [DataField("isInnerInjury")]
+    public bool IsInnerInjury { get; set; }
 }
-public enum InjureStages
+public enum InjuryStages
 {
     LIGHT, // Needed make incision, retraction, clamping and etc for entry into a limb
     MEDIUM, // Need make retraction for entry into a limb

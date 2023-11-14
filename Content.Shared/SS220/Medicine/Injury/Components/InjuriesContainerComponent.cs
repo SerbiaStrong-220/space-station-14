@@ -3,17 +3,17 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
-namespace Content.Shared.SS220.Medicine.Injure.Components;
+namespace Content.Shared.SS220.Medicine.Injury.Components;
 
 /// <summary>
 /// 
 /// </summary>
 
 [RegisterComponent]
-public sealed partial class InjuredComponent : Component
+public sealed partial class InjuriesContainerComponent : Component
 {
-    [DataField("innerInjuers")]
-    public List<EntityUid> InnerInjures = new();
-    [DataField("outterInjures")]
-    public List<EntityUid> OutterInjures = new();
+    [DataField("innerInjuries")]
+    public List<EntityUid> InnerInjuries = new();
+    [DataField("outerInjuries")]
+    public List<EntityUid> OuterInjuries = new();
 }

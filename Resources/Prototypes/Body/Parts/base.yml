@@ -6,7 +6,7 @@
   name: "body part"
   abstract: true
   components:
-  - type: Injured # SS220 - surgery
+  - type: InjuriesContainer # SS220 - surgery
   - type: Damageable
     damageContainer: Biological
   - type: BodyPart

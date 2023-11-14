@@ -1,13 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Popups;
-using Content.Server.SS220.Medicine.Injure.Systems;
 using Content.Server.SS220.Medicine.Surgery.Components;
-using Content.Shared.Body.Components;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Spawning;
-using Content.Shared.SS220.Medicine.Injure.Components;
-using Content.Shared.SS220.Medicine.Injure.Systems;
+using Content.Shared.SS220.Medicine.Injury.Components;
+using Content.Shared.SS220.Medicine.Injury.Systems;
 using Content.Shared.SS220.Medicine.Surgery;
 using Content.Shared.SS220.Medicine.Surgery.Systems;
 using Robust.Server.GameObjects;
@@ -20,7 +17,7 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedInjureSystem _injureSystem = default!;
+    [Dependency] private readonly SharedInjurySystem _injureSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -56,10 +53,10 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
     // Tool methods
     public bool TryMakeIncision(EntityUid target, EntityUid user, SurgicalInstrumentComponent component)
     {
-        if (component.Target == null || !TryComp<InjuredComponent>(component.Target, out var injured))
+        if (component.Target == null || !TryComp<InjuriesContainerComponent>(component.Target, out var injured))
             return false;
 
-        var wound = _injureSystem.AddInjure(component.Target!.Value, injured, "CutWound");
+        var wound = _injureSystem.AddInjure(component.Target!.Value, injured, InjuryStages.MEDIUM, "CutWound");
         _popup.PopupEntity($"{Name(component.Target!.Value)} была прооперирована, оставив {Name(wound)}!", user);
         return true;
     }
