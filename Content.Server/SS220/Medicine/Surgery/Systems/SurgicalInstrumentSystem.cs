@@ -1,19 +1,25 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Popups;
+using Content.Server.SS220.Medicine.Injure.Systems;
 using Content.Server.SS220.Medicine.Surgery.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Spawning;
+using Content.Shared.SS220.Medicine.Injure.Components;
 using Content.Shared.SS220.Medicine.Surgery;
 using Content.Shared.SS220.Medicine.Surgery.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Medicine.Surgery.Systems;
 public sealed partial class SurgicalInstrumentSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly InjureSystem _injureSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -47,12 +53,15 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
     }
 
     // Tool methods
-    public bool TryMakeIncision(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
+    public bool TryMakeIncision(EntityUid target, EntityUid user, SurgicalInstrumentComponent component)
     {
-        _popup.PopupEntity($"ЫААААААААААААААААААААААААА {Name(limb)} фулл разнос", user);
+        if (component.Target == null || !TryComp<InjuredComponent>(component.Target, out var injured))
+            return false;
+
+        var wound = _injureSystem.TryMakeInjure(component.Target!.Value, injured, "CutWound");
+        _popup.PopupEntity($"Вы прооперировали {Name(component.Target!.Value)}, оставив {Name(wound)}!", user);
         return true;
     }
-
     public bool TryMakeClamp(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
     {
         _popup.PopupEntity($"ЫААААААААААААААААААААААААА {Name(limb)} фулл перекрут", user);

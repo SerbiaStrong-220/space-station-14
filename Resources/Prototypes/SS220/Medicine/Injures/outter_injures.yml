@@ -1,0 +1,27 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BaseInjure
+  name: injure
+  parent: BaseItem
+  abstract: true
+  components:
+    - type: Injure
+
+- type: entity
+  id: BruiseWound
+  name: bruise
+  parent: BaseInjure
+  components:
+    - type: Injure
+      damageSpecifiers:
+        - Blunt
+
+- type: entity
+  id: CutWound
+  name: cut wound
+  parent: BaseInjure
+  components:
+    - type: Injure
+      damageSpecifiers:
+        - Blunt
