@@ -13,7 +13,13 @@ public sealed partial class InjureSystem : EntitySystem
         SubscribeLocalEvent<InjuriesContainerComponent, InjuryAddedEvent>(OnInjureAdded);
         SubscribeLocalEvent<InjuriesContainerComponent, InjuryRemovedEvent>(OnInjureRemoved);
     }
-
+    
+    /*
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+    }
+    */
     public void OnInjureAdded(EntityUid uid, InjuriesContainerComponent component, InjuryAddedEvent ev)
     {
     }
