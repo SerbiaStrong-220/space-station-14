@@ -19,8 +19,8 @@ public sealed partial class InjureComponent : Component
     /// For aghhhhhhh????????? Bone break = slowly moves???
     /// </summary>
 
-    [DataField("symptomes")]
-    public bool Symptomes { get; set; }
+    [DataField("consiquences")]
+    public bool Consiquences { get; set; }
 
     /// <summary>
     /// Can we perform surgery on limb without incision
@@ -37,5 +37,4 @@ public enum InjureStages
     LIGHT, // Needed make incision, retraction, clamping and etc for entry into a limb
     MEDIUM, // Need make retraction for entry into a limb
     SEVERE, // You don't need anything, just safe him!
-    SURGICAL // Needs?
 }

@@ -1,26 +1,24 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Medicine.Injure;
 using Content.Shared.SS220.Medicine.Injure.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Medicine.Injure.Systems;
 
 public sealed partial class InjureSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<InjuredComponent, InjureAddedEvent>(OnInjureAdded);
+        SubscribeLocalEvent<InjuredComponent, InjureRemovedEvent>(OnInjureRemoved);
     }
-    public EntityUid TryMakeInjure(EntityUid target, InjuredComponent component, string injureId)
-    {
-        var injureEnt = Spawn(injureId);
-        _transform.SetParent(injureEnt, target);
 
-        if (Comp<InjureComponent>(injureEnt).IsInnerWound)
-            component.InnerInjures.Add(injureEnt);
-        component.OutterInjures.Add(injureEnt);
-        return injureEnt;
+    public void OnInjureAdded(EntityUid uid, InjuredComponent component, InjureAddedEvent ev)
+    {
+    }
+    public void OnInjureRemoved(EntityUid uid, InjuredComponent component, InjureRemovedEvent ev)
+    {
     }
 
 }

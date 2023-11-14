@@ -7,6 +7,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Spawning;
 using Content.Shared.SS220.Medicine.Injure.Components;
+using Content.Shared.SS220.Medicine.Injure.Systems;
 using Content.Shared.SS220.Medicine.Surgery;
 using Content.Shared.SS220.Medicine.Surgery.Systems;
 using Robust.Server.GameObjects;
@@ -19,7 +20,7 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly InjureSystem _injureSystem = default!;
+    [Dependency] private readonly SharedInjureSystem _injureSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -58,13 +59,12 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
         if (component.Target == null || !TryComp<InjuredComponent>(component.Target, out var injured))
             return false;
 
-        var wound = _injureSystem.TryMakeInjure(component.Target!.Value, injured, "CutWound");
-        _popup.PopupEntity($"Вы прооперировали {Name(component.Target!.Value)}, оставив {Name(wound)}!", user);
+        var wound = _injureSystem.AddInjure(component.Target!.Value, injured, "CutWound");
+        _popup.PopupEntity($"{Name(component.Target!.Value)} была прооперирована, оставив {Name(wound)}!", user);
         return true;
     }
     public bool TryMakeClamp(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
     {
-        _popup.PopupEntity($"ЫААААААААААААААААААААААААА {Name(limb)} фулл перекрут", user);
         return true;
     }
 
