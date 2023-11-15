@@ -56,7 +56,7 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
         if (component.Target == null || !TryComp<InjuriesContainerComponent>(component.Target, out var injured))
             return false;
 
-        var wound = _injureSystem.AddInjure(component.Target!.Value, injured, InjuryStages.MEDIUM, "CutWound");
+        var wound = _injureSystem.AddInjure(component.Target!.Value, injured, InjuryStages.MEDIUM, "IncisedWound");
         _popup.PopupEntity($"{Name(component.Target!.Value)} была прооперирована, оставив {Name(wound)}!", user);
         return true;
     }

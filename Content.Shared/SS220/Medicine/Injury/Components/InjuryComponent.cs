@@ -29,12 +29,28 @@ public sealed partial class InjuryComponent : Component
     public InjuryStages Severity { get; set; }
     public bool IsBleeding { get; set; }
 
-    [DataField("isInnerInjury")]
-    public bool IsInnerInjury { get; set; }
+    [DataField("isGaping")]
+    public bool IsGaping { get; set; }
+
+    [DataField("isInfected")]
+    public bool IsInfected { get; set; }
+
+    /// <summary>
+    /// Where the wound is: inner or outer
+    /// </summary>
+
+    [DataField("localization")]
+    public InjuryLocalization Localization { get; set; }
 }
 public enum InjuryStages
 {
     LIGHT, // Needed make incision, retraction, clamping and etc for entry into a limb
     MEDIUM, // Need make retraction for entry into a limb
     SEVERE, // You don't need anything, just safe him!
+}
+
+public enum InjuryLocalization
+{
+    Inner,
+    Outer,
 }

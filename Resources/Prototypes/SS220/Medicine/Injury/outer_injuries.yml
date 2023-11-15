@@ -1,0 +1,92 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BaseInjury
+  name: base injury
+  parent: BaseItem
+  abstract: true
+  components:
+    - type: Injury
+  
+- type: entity
+  id: BaseOuterInjury
+  name: base outer injury
+  parent: BaseInjury
+  abstract: true
+  components:
+    - type: Injury
+      localization: outer
+
+- type: entity
+  id: IncisedWound
+  name: incised wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Slash
+
+- type: entity
+  id: PunctureWound
+  name: puncture wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Piercing
+
+- type: entity
+  id: ChoppedWound
+  name: chopped wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Slash
+        - Blunt
+
+- type: entity
+  id: BruisedWound
+  name: bruised wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Blunt
+
+- type: entity
+  id: Laceration # рваная рана
+  name: laceration
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Piercing
+        - Blunt
+
+- type: entity
+  id: CrushedWound
+  name: crushed wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Blunt
+
+- type: entity
+  id: BiteWound
+  name: bite wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Piercing
+
+- type: entity
+  id: GunshotWound
+  name: gunshot wound
+  parent: BaseOuterInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Blunt

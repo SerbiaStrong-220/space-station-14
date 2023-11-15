@@ -29,7 +29,7 @@ public sealed partial class SharedInjurySystem : EntitySystem
         injuryComp.Severity = severity;
         _transform.SetParent(injuryEnt, target);
 
-        if (injuryComp.IsInnerInjury)
+        if (injuryComp.Localization == InjuryLocalization.Inner)
             component.InnerInjuries.Add(injuryEnt);
         else
             component.OuterInjuries.Add(injuryEnt);
@@ -41,7 +41,7 @@ public sealed partial class SharedInjurySystem : EntitySystem
     public void RemoveInjury(EntityUid injury, EntityUid user, InjuriesContainerComponent component)
     {
         var injuryComp = Comp<InjuryComponent>(injury);
-        if (injuryComp.IsInnerInjury)
+        if (injuryComp.Localization == InjuryLocalization.Inner)
             component.InnerInjuries.Remove(injury);
         else
             component.OuterInjuries.Remove(injury);
