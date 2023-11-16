@@ -12,8 +12,6 @@ namespace Content.Shared.SS220.Medicine.Injury.Components;
 [RegisterComponent]
 public sealed partial class InjuriesContainerComponent : Component
 {
-    [DataField("innerInjuries")]
-    public List<EntityUid> InnerInjuries = new();
-    [DataField("outerInjuries")]
-    public List<EntityUid> OuterInjuries = new();
+    [DataField("injuries")]
+    public List<EntityUid> Injuries = new();
 }

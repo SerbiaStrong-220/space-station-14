@@ -25,19 +25,6 @@ public sealed partial class InjurySystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var injuriesContainer))
         {
-            foreach (var innerInjuries in injuriesContainer.InnerInjuries)
-            {
-                var injuryComp = Comp<InjuryComponent>(innerInjuries);
-                foreach (var damageSpecifier in injuryComp.DamageSpecifiers)
-                {
-                    // _damageable.TryChangeDamage(uid, damageSpecifier, true);
-                }
-            }
-
-            foreach (var outerInjuries in injuriesContainer.OuterInjuries)
-            {
-
-            }
         }
     }
 

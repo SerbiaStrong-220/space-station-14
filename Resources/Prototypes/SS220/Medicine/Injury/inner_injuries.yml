@@ -1,0 +1,19 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BaseInnerInjury
+  name: base inner injury
+  parent: BaseInjury
+  abstract: true
+  components:
+    - type: Injury
+      location: Inner
+
+- type: entity
+  id: InternalBleeding
+  name: internal bleeding
+  parent: BaseInnerInjury
+  components:
+    - type: Injury
+      damageSpecifiers:
+        - Bloodloss

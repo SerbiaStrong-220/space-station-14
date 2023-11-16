@@ -56,8 +56,10 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
         if (component.Target == null || !TryComp<InjuriesContainerComponent>(component.Target, out var injured))
             return false;
 
-        var wound = _injureSystem.AddInjure(component.Target!.Value, injured, InjuryStages.MEDIUM, "IncisedWound");
-        _popup.PopupEntity($"{Name(component.Target!.Value)} была прооперирована, оставив {Name(wound)}!", user);
+        var incisedWound = _injureSystem.AddInjure(component.Target!.Value, injured, InjurySeverityStages.MEDIUM, "IncisedWound");
+        var bloodLossInjury = _injureSystem.AddInjure(component.Target!.Value, injured, InjurySeverityStages.LIGHT, "InternalBleeding");
+
+        _popup.PopupEntity($"{Name(component.Target!.Value)} была прооперирована, оставив {Name(incisedWound)}!", user);
         return true;
     }
     public bool TryMakeClamp(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)

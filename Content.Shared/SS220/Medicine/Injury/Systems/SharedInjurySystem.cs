@@ -22,17 +22,15 @@ public sealed partial class SharedInjurySystem : EntitySystem
     /// <param name="component"></param>
     /// <param name="injuryId"> Injure prototype's name </param>
     /// <returns> Injure EntityUid </returns>
-    public EntityUid AddInjure(EntityUid target, InjuriesContainerComponent component, InjuryStages severity, string injuryId)
+    public EntityUid AddInjure(EntityUid target, InjuriesContainerComponent component, InjurySeverityStages severity, string injuryId)
     {
         var injuryEnt = Spawn(injuryId);
         var injuryComp = Comp<InjuryComponent>(injuryEnt);
         injuryComp.Severity = severity;
         _transform.SetParent(injuryEnt, target);
 
-        if (injuryComp.Localization == InjuryLocalization.Inner)
-            component.InnerInjuries.Add(injuryEnt);
-        else
-            component.OuterInjuries.Add(injuryEnt);
+        component.Injuries.Add(injuryEnt);
+
         var ev = new InjuryAddedEvent(injuryEnt, injuryComp, component);
         RaiseLocalEvent(target, ref ev);
         return injuryEnt;
@@ -41,11 +39,21 @@ public sealed partial class SharedInjurySystem : EntitySystem
     public void RemoveInjury(EntityUid injury, EntityUid user, InjuriesContainerComponent component)
     {
         var injuryComp = Comp<InjuryComponent>(injury);
-        if (injuryComp.Localization == InjuryLocalization.Inner)
-            component.InnerInjuries.Remove(injury);
-        else
-            component.OuterInjuries.Remove(injury);
+
+        component.Injuries.Remove(injury);
+
         var ev = new InjuryRemovedEvent(injury, injuryComp, component);
         RaiseLocalEvent(user, ref ev);
+    }
+
+    public void IncreaseInjureSeverity(EntityUid injury, InjurySeverityStages newSeverity)
+    {
+        var injuryComp = Comp<InjuryComponent>(injury);
+
+        var ev = new InjurySeverityStageChangedEvent(injury, injuryComp, injuryComp.Severity, newSeverity);
+
+        injuryComp.Severity = newSeverity;
+
+        RaiseLocalEvent(injury, ref ev);
     }
 }

@@ -11,4 +11,4 @@ public record struct InjuryAddedEvent(EntityUid injuryEntity, InjuryComponent in
 public record struct InjuryRemovedEvent(EntityUid injuryEntity, InjuryComponent injuryComponent, InjuriesContainerComponent injuriesContainerComponent);
 
 [ByRefEvent]
-public record struct InjuryStageChangedEvent(EntityUid injuryEntity, InjuryComponent injuryComponent, InjuriesContainerComponent injuriesContainerComponent, InjuryStages OldInjuryStage, InjuryStages NewInjuryStage);
+public record struct InjurySeverityStageChangedEvent(EntityUid injuryEntity, InjuryComponent injuryComponent, InjurySeverityStages OldInjuryStage, InjurySeverityStages newInjuryStage);

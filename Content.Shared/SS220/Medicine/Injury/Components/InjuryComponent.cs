@@ -26,7 +26,7 @@ public sealed partial class InjuryComponent : Component
     /// Can we perform surgery on limb without incision
     /// </summary>
     [DataField("severity")]
-    public InjuryStages Severity { get; set; }
+    public InjurySeverityStages Severity { get; set; }
     public bool IsBleeding { get; set; }
 
     [DataField("isGaping")]
@@ -39,17 +39,17 @@ public sealed partial class InjuryComponent : Component
     /// Where the wound is: inner or outer
     /// </summary>
 
-    [DataField("localization")]
-    public InjuryLocalization Localization { get; set; }
+    [DataField("location")]
+    public InjuryLocation Location { get; set; }
 }
-public enum InjuryStages
+public enum InjurySeverityStages
 {
     LIGHT, // Needed make incision, retraction, clamping and etc for entry into a limb
     MEDIUM, // Need make retraction for entry into a limb
     SEVERE, // You don't need anything, just safe him!
 }
 
-public enum InjuryLocalization
+public enum InjuryLocation
 {
     Inner,
     Outer,
