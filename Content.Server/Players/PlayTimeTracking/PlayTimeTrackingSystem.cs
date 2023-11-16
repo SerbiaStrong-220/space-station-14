@@ -84,10 +84,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             trackers.Add(PlayTimeTrackingShared.TrackerAdmin);
             if (player.AttachedEntity is { } attachedEntity &&
                 Comp<MetaDataComponent>(attachedEntity).EntityPrototype?.ID == AGhostPrototypeID)
-            {
                 trackers.Add(PlayTimeTrackingShared.TrackerAGhost);
-                return;
-            }
         }
 
         if (!IsPlayerAlive(player))
