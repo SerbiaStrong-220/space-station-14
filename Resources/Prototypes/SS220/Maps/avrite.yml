@@ -2,7 +2,7 @@
   id: SS220Avrite
   mapName: 'Avrite Station'
   mapPath: /Maps/ss220_avrit.yml
-  minPlayers: 40
+  minPlayers: 0
   stations:
     Avrit:
       stationProto: AvriteNanotrasenStation
