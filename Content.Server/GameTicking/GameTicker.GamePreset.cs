@@ -7,11 +7,12 @@ using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using JetBrains.Annotations;
-using Robust.Server.Player;
+using Robust.Shared.Player;
 
 namespace Content.Server.GameTicking
 {
@@ -29,7 +30,7 @@ namespace Content.Server.GameTicking
         /// </summary>
         public GamePresetPrototype? CurrentPreset { get; private set; }
 
-        private bool StartPreset(IPlayerSession[] origReadyPlayers, bool force)
+        private bool StartPreset(ICommonSession[] origReadyPlayers, bool force)
         {
             var startAttempt = new RoundStartAttemptEvent(origReadyPlayers, force);
             RaiseLocalEvent(startAttempt);
@@ -198,6 +199,15 @@ namespace Content.Server.GameTicking
             if (!Resolve(mindId, ref mind))
                 return false;
 
+            //SS220-lobby-ghost-bug begin
+            var player = mind.Session;
+            if (player is null)
+                return false;
+
+            if (!PlayerGameStatuses.TryGetValue(player.UserId, out var status) || status is not PlayerGameStatus.JoinedGame)
+                return false;
+            //SS220-lobby-ghost-bug end
+
             var playerEntity = mind.CurrentEntity;
 
             if (playerEntity != null && viaCommand)
@@ -214,7 +224,7 @@ namespace Content.Server.GameTicking
             {
                 if (mind.Session != null) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
                 {
-                    _chatManager.DispatchServerMessage((IPlayerSession) mind.Session, Loc.GetString("comp-mind-ghosting-prevented"),
+                    _chatManager.DispatchServerMessage(mind.Session, Loc.GetString("comp-mind-ghosting-prevented"),
                         true);
                 }
 

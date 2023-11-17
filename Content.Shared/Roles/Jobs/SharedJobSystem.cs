@@ -1,8 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
-using Robust.Shared.Players;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -134,5 +134,16 @@ public abstract class SharedJobSystem : EntitySystem
             return true;
 
         return prototype.CanBeAntag;
+    }
+
+    public bool CanBeZombie(ICommonSession player)
+    {
+        if (_playerSystem.ContentData(player) is not { Mind: { } mindId })
+            return false;
+
+        if (!MindTryGetJob(mindId, out _, out var prototype))
+            return true;
+
+        return prototype.CanBeZombie;
     }
 }

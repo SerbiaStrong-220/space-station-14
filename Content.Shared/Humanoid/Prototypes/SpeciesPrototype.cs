@@ -1,10 +1,12 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Content.Shared.Roles;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
 [Prototype("species")]
-public sealed class SpeciesPrototype : IPrototype
+public sealed partial class SpeciesPrototype : IPrototype
 {
     /// <summary>
     /// Prototype ID of the species.
@@ -131,6 +133,10 @@ public sealed class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField("buttScanTexture")]
     public string ButtScanTexture = "/Textures/SS220/Interface/Butts/human.png";
+
+    //SS220 Species-Job-Requirement
+    [DataField("blockedJobs", required: false, customTypeSerializer: typeof(PrototypeIdListSerializer<JobPrototype>))]
+    public List<string> BlockedJobs { get; } = new();
 }
 
 public enum SpeciesNaming : byte

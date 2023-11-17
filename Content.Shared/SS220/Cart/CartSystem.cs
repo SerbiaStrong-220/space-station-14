@@ -3,11 +3,14 @@
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Foldable;
+using Content.Shared.Friction;
+using Content.Shared.Item;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Cart;
 
@@ -15,6 +18,8 @@ public sealed class CartSystem : EntitySystem
 {
     [Dependency] private readonly SharedPullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly TileFrictionController _tileFriction = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -105,12 +110,25 @@ public sealed class CartSystem : EntitySystem
         if (!_pulling.TryStartPull(args.AttachTarget, uid))
             return;
 
+        // This is the simpliest way to change pulling speed I could've imagined.
+        // So, if the cart has a ItemComponent we just take it's size and divide it by 166, if not - take the default 0.15 value.
+        var frictionModifierComp = EnsureComp<TileFrictionModifierComponent>(uid);
+        float frictionModifier = .15f;
+        if (TryComp<ItemComponent>(uid, out var itemComp))
+        {
+            if (_prototype.TryIndex(itemComp.Size, out var itemSize))
+            {
+                frictionModifier = itemSize.Weight / 26.6f;
+            }
+        }
+        _tileFriction.SetModifier(uid, frictionModifier, frictionModifierComp);
+
         var ev = new CartAttachEvent(args.AttachTarget, uid);
         RaiseLocalEvent(args.AttachTarget, ref ev);
 
         component.Puller = args.AttachTarget;
         component.IsAttached = true;
-        Dirty(component);
+        Dirty(uid, component);
         args.Handled = true;
     }
 
@@ -124,13 +142,14 @@ public sealed class CartSystem : EntitySystem
 
         _pulling.TryStopPull(pullable);
         RemComp<SharedPullerComponent>(args.DeattachTarget);
+        RemComp<TileFrictionModifierComponent>(uid);
 
         var ev = new CartDeattachEvent(args.DeattachTarget, uid);
         RaiseLocalEvent(args.DeattachTarget, ref ev);
 
         component.Puller = null;
         component.IsAttached = false;
-        Dirty(component);
+        Dirty(uid, component);
         args.Handled = true;
     }
 

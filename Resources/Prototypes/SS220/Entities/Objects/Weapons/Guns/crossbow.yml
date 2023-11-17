@@ -2,7 +2,7 @@
 - type: entity
   name: crossbow
   parent: BaseItem
-  id: BaseWeaponCrossbow 
+  id: BaseWeaponCrossbow
   abstract: true
   description: Energy crossbow.
   components:
@@ -19,7 +19,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: Item
-    size: 10
+    size: Large
 
 - type: entity
   name: mini energy crossbow
@@ -45,13 +45,14 @@
     sprite: SS220/Objects/Weapons/Guns/Crossbow/crossbow.rsi
     state: icon
   - type: Item
-    size: 30
+    size: Huge
   - type: BasicEntityAmmoProvider
     proto: BulletEnergyCrossbow
     capacity: 1
     count: 1
   - type: Wieldable
-    wieldTime: 0.5
     wieldSound:
       path: /Audio/Items/bow_pull.ogg
   - type: GunRequiresWield
+  - type: UseDelay
+    delay: 0.5

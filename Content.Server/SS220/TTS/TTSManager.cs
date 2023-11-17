@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -16,6 +16,8 @@ using FFMpegCore.Pipes;
 using Prometheus;
 using Robust.Shared.Configuration;
 using System.ComponentModel;
+using System.Collections.Specialized;
+using System.Web;
 
 namespace Content.Server.SS220.TTS;
 
@@ -74,7 +76,12 @@ public sealed class TTSManager
         }, true);
         _cfg.OnValueChanged(CCCVars.TTSRequestTimeout, val => _timeout = val, true);
         _cfg.OnValueChanged(CCCVars.TTSApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(CCCVars.TTSApiToken, v => _apiToken = v, true);
+        _cfg.OnValueChanged(CCCVars.TTSApiToken, v =>
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", v);
+            _apiToken = v;
+        },
+        true);
     }
 
     /// <summary>
@@ -82,7 +89,7 @@ public sealed class TTSManager
     /// </summary>
     /// <param name="speaker">Identifier of speaker</param>
     /// <param name="text">SSML formatted text</param>
-    /// <returns>OGG audio bytes or null if failed</returns>
+    /// <returns>WAV audio bytes or null if failed</returns>
     public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text)
     {
         WantedCount.Inc();
@@ -98,19 +105,17 @@ public sealed class TTSManager
             }
 
             _sawmill.Debug($"Generate new audio for '{text}' speech by '{speaker}' speaker");
-
-            var body = new GenerateVoiceRequest
-            {
-                ApiToken = _apiToken,
-                Text = text,
-                Speaker = speaker,
-            };
-
             var reqTime = DateTime.UtcNow;
             try
             {
                 var cts = new CancellationTokenSource(TimeSpan.FromSeconds(_timeout));
-                var response = await _httpClient.PostAsJsonAsync(_apiUrl, body, cts.Token);
+
+                var requestUrl = $"{_apiUrl}" + ToQueryString(new NameValueCollection() {
+                    { "speaker", speaker },
+                    { "text", text },
+                    { "ext", "wav" }});
+
+                var response = await _httpClient.GetAsync(requestUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == HttpStatusCode.TooManyRequests)
@@ -123,9 +128,7 @@ public sealed class TTSManager
                     return null;
                 }
 
-                var json =
-                    await response.Content.ReadFromJsonAsync<GenerateVoiceResponse>(cancellationToken: cts.Token);
-                var soundData = Convert.FromBase64String(json.Results.First().Audio);
+                var soundData = await response.Content.ReadAsByteArrayAsync();
 
                 _cache.AddOrUpdate(cacheKey, soundData, (_, __) => soundData);
                 _cacheKeysSeq.Add(cacheKey);
@@ -158,6 +161,17 @@ public sealed class TTSManager
         });
     }
 
+    private static string ToQueryString(NameValueCollection nvc)
+    {
+        var array = (
+            from key in nvc.AllKeys
+            from value in nvc.GetValues(key) ?? Array.Empty<string>()
+            select $"{key}={HttpUtility.UrlEncode(value)}"
+            ).ToArray();
+
+        return "?" + string.Join("&", array);
+    }
+
     public async Task<byte[]?> ConvertTextToSpeechRadio(string speaker, string text)
     {
         WantedRadioCount.Inc();
@@ -179,7 +193,7 @@ public sealed class TTSManager
             var reqTime = DateTime.UtcNow;
             try
             {
-                var outputFilename = Path.GetTempPath() + Guid.NewGuid() + ".ogg";
+                var outputFilename = Path.GetTempPath() + Guid.NewGuid() + ".wav";
                 await FFMpegArguments
                     .FromPipeInput(new StreamPipeSource(new MemoryStream(soundData)))
                     .OutputToFile(outputFilename, true, options =>
@@ -294,59 +308,5 @@ public sealed class TTSManager
         public string Key => "acrusher";
 
         public string Value => string.Join(":", _arguments.Select<KeyValuePair<string, string>, string>(pair => pair.Key + "=" + pair.Value));
-    }
-
-    private struct GenerateVoiceRequest
-    {
-        public GenerateVoiceRequest()
-        {
-        }
-
-        [JsonPropertyName("api_token")]
-        public string ApiToken { get; set; } = "";
-
-        [JsonPropertyName("text")]
-        public string Text { get; set; } = "";
-
-        [JsonPropertyName("speaker")]
-        public string Speaker { get; set; } = "";
-
-        [JsonPropertyName("ssml")]
-        // ReSharper disable once InconsistentNaming
-        public bool SSML { get; private set; } = true;
-
-        [JsonPropertyName("word_ts")]
-        // ReSharper disable once InconsistentNaming
-        public bool WordTS { get; private set; } = false;
-
-        [JsonPropertyName("put_accent")]
-        public bool PutAccent { get; private set; } = true;
-
-        [JsonPropertyName("put_yo")]
-        public bool PutYo { get; private set; } = false;
-
-        [JsonPropertyName("sample_rate")]
-        public int SampleRate { get; private set; } = 24000;
-
-        [JsonPropertyName("format")]
-        public string Format { get; private set; } = "ogg";
-    }
-
-    private struct GenerateVoiceResponse
-    {
-        [JsonPropertyName("results")]
-        // ReSharper disable once CollectionNeverUpdated.Local
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        public List<VoiceResult> Results { get; set; }
-
-        [JsonPropertyName("original_sha1")]
-        public string Hash { get; set; }
-    }
-
-    private struct VoiceResult
-    {
-        [JsonPropertyName("audio")]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        public string Audio { get; set; }
     }
 }

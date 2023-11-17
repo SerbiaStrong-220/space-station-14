@@ -1,12 +1,13 @@
-﻿using Content.Server.GameTicking;
+using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Shared.Administration;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Mind;
-using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 
 namespace Content.Server.Administration.Commands
 {
@@ -21,7 +22,7 @@ namespace Content.Server.Administration.Commands
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            var player = shell.Player as IPlayerSession;
+            var player = shell.Player;
             if (player == null)
             {
                 shell.WriteLine($"Nah: could not find player's session, skipping command {Command}");
@@ -34,6 +35,15 @@ namespace Content.Server.Administration.Commands
                 shell.WriteLine("You can't ghost here! Could not find 'mind'");
                 return;
             }
+
+            //SS220-lobby-ghost-bug begin
+            var gameTicker = _entities.System<GameTicker>();
+            if (!gameTicker.PlayerGameStatuses.TryGetValue(player.UserId, out var status) || status is not PlayerGameStatus.JoinedGame)
+            {
+                shell.WriteLine("You can't ghost right now. You're not in game!");
+                return;
+            }
+            //SS220-lobby-ghost-bug end
 
             var metaDataSystem = _entities.System<MetaDataSystem>();
 
@@ -79,7 +89,7 @@ namespace Content.Server.Administration.Commands
          * - else if player is aghost -> ghost
          * - else -> aghost
          */
-        private EntityUid SpawnGhost(EntityCoordinates coordinates, IPlayerSession player, bool canReturn)
+        private EntityUid SpawnGhost(EntityCoordinates coordinates, ICommonSession player, bool canReturn)
         {
             if (canReturn)
             {
