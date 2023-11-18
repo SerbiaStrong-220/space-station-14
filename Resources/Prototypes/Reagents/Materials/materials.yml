@@ -107,3 +107,12 @@
   icon: { sprite: Objects/Materials/materials.rsi, state: bones }
   color: "#896f5e"
   price: 0
+
+- type: material
+  id: Ammonitor
+  stackEntity: MaterialAmmonitor1
+  name: materials-Ammonitor
+  unit: materials-unit-piece
+  icon: { sprite: /SS220/Objects/Specific/Ammonitor.rsi, state: cube }
+  color: "#8A9A5B"
+  price: 0.5
