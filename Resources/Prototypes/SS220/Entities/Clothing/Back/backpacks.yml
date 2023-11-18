@@ -10,7 +10,8 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/ussp.rsi
   - type: Storage
-    capacity: 250
+    maxItemSize: Huge
+    maxTotalWeight: 100
 
 - type: entity
   parent: ClothingBackpack
@@ -21,4 +22,5 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/nuclear_backpack.rsi
   - type: Storage
-    capacity: 150
+    maxItemSize: Huge
+    maxTotalWeight: 42
