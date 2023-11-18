@@ -113,6 +113,6 @@
   stackEntity: MaterialAmmonitor1
   name: materials-Ammonitor
   unit: materials-unit-piece
-  icon: { sprite: /SS220/Objects/Specific/Ammonitor.rsi, state: cube }
+  icon: { sprite: /SS220/Objects/Specific/Ammonitor.rsi, state: Ammonitor }
   color: "#8A9A5B"
   price: 0.5
