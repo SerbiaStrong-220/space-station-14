@@ -1,7 +1,7 @@
 - type: stack
   id: Ammonitor
   name: Блиц-Аммонитор
-  icon: SS220\Objects\Specific\Ammonitor.rsi
+  icon: SS220/Objects/Specific/Ammonitor.rsi
   spawn: Ammonitor1
   itemSize: 1
   
@@ -19,10 +19,10 @@
     tags:
     - Ammonitor
   - type: Sprite
-    sprite: SS220\Objects\Specific\Ammonitor.rsi
+    sprite: SS220/Objects/Specific/Ammonitor.rsi
     state: Ammonitor
   - type: Item
-    sprite: SS220\Objects\Specific\Ammonitor.rsi
+    sprite: SS220/Objects/Specific/Ammonitor.rsi
     size: 1
   - type: Stack
     count: 1
