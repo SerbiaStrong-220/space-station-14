@@ -21,9 +21,6 @@
   - type: Sprite
     sprite: SS220/Objects/Specific/Ammonitor.rsi
     state: Ammonitor
-  - type: Item
-    sprite: SS220/Objects/Specific/Ammonitor.rsi
-    itemSize: 1
   - type: Stack
     count: 1
     stackType: Ammonitor
