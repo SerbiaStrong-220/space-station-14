@@ -6,6 +6,13 @@
   canWithdraw: true
 
 - type: currency
+  id: Ammonitor
+  displayName: store-currency-display-Ammonitor
+  cash: 
+    1: Ammonitor1
+  canWithdraw: true
+
+- type: currency
   id: StolenEssence
   displayName: store-currency-display-stolen-essence
   canWithdraw: false
