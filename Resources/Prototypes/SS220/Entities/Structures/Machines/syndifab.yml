@@ -22,10 +22,10 @@
   - type: Wires
     boardName: wires-board-name-protolathe
     layoutId: Protolathe
-  conditions:
-  - !type:StoreWhitelistCondition
+  - type: MaterialStorage
     whitelist:
-    - Ammonitor
+      tags:
+      - Ammonitor
   - type: Lathe
     idleState: icon
     runningState: building
