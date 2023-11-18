@@ -19,6 +19,6 @@
   description: Больше места, больше пуль, больше убийств во славу горлакса!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/nuclear_Backpack.rsi
+    sprite: SS220/Clothing/Back/Backpacks/nuclear_backpack.rsi
   - type: Storage
     capacity: 150
