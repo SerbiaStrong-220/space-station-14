@@ -14,9 +14,10 @@
   suffix: Empty
   components:
   - type: Item
-    size: 30
+    itemSize: 30
   - type: Storage
-    capacity: 30
+    maxItemSize: Huge
+    maxTotalWeight: 28
 
 - type: entity
   id: RandomID
