@@ -5,7 +5,7 @@
   description: ЗлоФаб удовлетворит ваши нужды для прекрасного, злого дня.
   components:
   - type: Sprite
-    sprite: SS220\Structures\Machines\techFabSyndi.rsi
+    sprite: SS220/Structures/Machines/techFabSyndi.rsi
     snapCardinals: true
     layers:
     - state: icon
