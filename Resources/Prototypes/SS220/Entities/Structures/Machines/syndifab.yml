@@ -24,7 +24,6 @@
     layoutId: Protolathe
   - type: MaterialStorage
     whitelist:
-    tags:
     - Ammonitor
   - type: Lathe
     idleState: icon
