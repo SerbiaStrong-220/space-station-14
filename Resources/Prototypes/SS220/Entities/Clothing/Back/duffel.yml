@@ -7,4 +7,5 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Duffels/nuclear_duffel.rsi
   - type: Storage
-    capacity: 200
+    maxItemSize: Huge
+    maxTotalWeight: 60
