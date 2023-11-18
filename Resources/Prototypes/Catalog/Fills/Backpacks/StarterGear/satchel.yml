@@ -38,7 +38,6 @@
   components:
   - type: StorageFill
     contents:
-    contents:
       - id: BoxSurvivalSecurity
       - id: Flash
       - id: MagazinePistolRubber
@@ -158,10 +157,27 @@
     contents:
       - id: BoxSurvivalSecurity
       - id: Flash
+      - id: FlashlightSeclite
       - id: MagazinePistolRubber
       - id: MagazinePistolRubber
       - id: DrinkRelaxingPeachCan
       - id: PilotBriefing
+      
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackSatchelSecurity
+  id: ClothingBackpackSatchelSecurityPilotFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: Flash
+      - id: MagazinePistolRubber
+      - id: MagazinePistolRubber
+      - id: FlashlightSeclite
+      - id: DrinkRelaxingPeachCan
+      - id: PilotBriefing
+
 - type: entity
   noSpawn: true
   parent: ClothingBackpackSatchelEngineering
