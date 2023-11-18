@@ -31,7 +31,7 @@
     runningState: building
     staticRecipes:
       - SyndMagazineShotgun
-      - SyndLethalshot
+      - SyndBoxLethalshot
       - SyndMagazineShotgunIncendiary
       - SyndBoxShotgunIncendiary
       - SyndMagazineLightRifleBox
