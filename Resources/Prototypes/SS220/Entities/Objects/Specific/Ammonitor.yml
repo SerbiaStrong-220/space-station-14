@@ -23,7 +23,7 @@
     state: Ammonitor
   - type: Item
     sprite: SS220/Objects/Specific/Ammonitor.rsi
-    size: 1
+    itemSize: 1
   - type: Stack
     count: 1
     stackType: Ammonitor
@@ -43,7 +43,7 @@
   - type: Stack
     count: 1
   - type: Item
-    size: 1
+    itemSize: 1
     
 - type: entity
   parent: Ammonitor
@@ -53,7 +53,7 @@
   - type: Stack
     count: 4
   - type: Item
-    size: 4
+    itemSize: 4
 
 - type: entity
   parent: Ammonitor
@@ -63,7 +63,7 @@
   - type: Stack
     count: 5
   - type: Item
-    size: 5
+    itemSize: 5
 
 - type: entity
   parent: Ammonitor
@@ -73,4 +73,4 @@
   - type: Stack
     count: 10
   - type: Item
-    size: 10
+    itemSize: 10
