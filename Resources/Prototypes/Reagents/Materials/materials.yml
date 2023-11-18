@@ -110,7 +110,7 @@
 
 - type: material
   id: Ammonitor
-  stackEntity: MaterialAmmonitor1
+  stackEntity: Ammonitor1
   name: materials-Ammonitor
   unit: materials-unit-piece
   icon: { sprite: /SS220/Objects/Specific/Ammonitor.rsi, state: Ammonitor }
