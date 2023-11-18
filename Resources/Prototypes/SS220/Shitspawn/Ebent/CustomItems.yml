@@ -114,7 +114,7 @@
       types:
         Blunt: 4.5
   - type: Item
-    size: 5
+    itemSize: 5
     sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
   - type: UseDelay
     delay: 1.0
