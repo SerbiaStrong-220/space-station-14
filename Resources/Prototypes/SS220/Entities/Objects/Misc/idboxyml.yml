@@ -5,7 +5,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220\Objects\Misc\idcase.rsi
+    sprite: SS220/Objects/Misc/idcase.rsi
     state: idcase
 
 - type: entity
