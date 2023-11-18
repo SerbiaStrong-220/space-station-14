@@ -13,8 +13,6 @@
   parent: [PresentBaseID, BaseStorageItem]
   suffix: Empty
   components:
-  - type: Item
-    itemSize: 30
   - type: Storage
     maxItemSize: Huge
     maxTotalWeight: 28
