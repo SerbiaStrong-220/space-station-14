@@ -39,8 +39,6 @@
   components:
   - type: Stack
     count: 1
-  - type: Item
-    itemSize: 1
     
 - type: entity
   parent: Ammonitor
@@ -49,8 +47,6 @@
   components:
   - type: Stack
     count: 4
-  - type: Item
-    itemSize: 4
 
 - type: entity
   parent: Ammonitor
@@ -59,8 +55,6 @@
   components:
   - type: Stack
     count: 5
-  - type: Item
-    itemSize: 5
 
 - type: entity
   parent: Ammonitor
@@ -69,5 +63,3 @@
   components:
   - type: Stack
     count: 10
-  - type: Item
-    itemSize: 10
