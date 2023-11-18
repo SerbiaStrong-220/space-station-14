@@ -23,8 +23,9 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Slash
+      damage:
+        types:
+          Slash: 0.33
 
 - type: entity
   id: PunctureWound
@@ -32,8 +33,9 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Piercing
+      damage:
+        types:
+          Piercing: 0.33
 
 - type: entity
   id: ChoppedWound
@@ -41,9 +43,10 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Slash
-        - Blunt
+      damage:
+        types:
+          Slash: 0.33
+          Blunt: 0.33
 
 - type: entity
   id: BruisedWound
@@ -51,8 +54,9 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Blunt
+      damage:
+        types:
+          Blunt: 0.33
 
 - type: entity
   id: Laceration # рваная рана
@@ -60,9 +64,10 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Piercing
-        - Blunt
+      damage:
+        types:
+          Piercing: 0.33
+          Blunt: 0.33
 
 - type: entity
   id: CrushedWound
@@ -70,8 +75,9 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Blunt
+      damage:
+        types:
+          Blunt: 0.33
 
 - type: entity
   id: BiteWound
@@ -79,8 +85,9 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Piercing
+      damage:
+        types:
+          Piercing: 0.33
 
 - type: entity
   id: GunshotWound
@@ -88,5 +95,6 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Blunt
+      damage:
+        types:
+          Blunt: 0.33

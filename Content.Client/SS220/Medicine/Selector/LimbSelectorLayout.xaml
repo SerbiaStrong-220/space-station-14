@@ -1,9 +1,10 @@
-﻿<DefaultWindow xmlns="https://spacestation14.io"
-    SetSize="250 100">
+﻿<DefaultWindow 
+    xmlns="https://spacestation14.io"
+    Resizable="False">
     <BoxContainer
         Name="RootContainer"
         Orientation="Vertical">
-        <GridContainer Name="LimbList" Access="Public" Columns="4">
-        </GridContainer>
+        <BoxContainer Name="LimbList" Orientation="Vertical" MinWidth="150" SeparationOverride="4" Access="Public">
+        </BoxContainer>
     </BoxContainer>
 </DefaultWindow>

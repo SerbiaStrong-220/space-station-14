@@ -18,9 +18,9 @@ public sealed partial class InstrumentUsedAfterInteractEvent : BoundUserInterfac
 [Serializable, NetSerializable]
 public sealed partial class SelectorButtonPressed : BoundUserInterfaceMessage
 {
-    public NetEntity LimbId { get; set; }
-    public SelectorButtonPressed(NetEntity limbid)
+    public NetEntity TargetId { get; set; }
+    public SelectorButtonPressed(NetEntity targetid)
     {
-        LimbId = limbid;
+        TargetId = targetid;
     }
 }

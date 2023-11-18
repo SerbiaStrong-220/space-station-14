@@ -2,6 +2,8 @@
 
 using Content.Server.Popups;
 using Content.Server.SS220.Medicine.Surgery.Components;
+using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
 using Content.Shared.SS220.Medicine.Injury.Components;
 using Content.Shared.SS220.Medicine.Injury.Systems;
@@ -18,6 +20,8 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedInjurySystem _injureSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -47,7 +51,7 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
 
     public void UpdateTarget(EntityUid uid, SurgicalInstrumentComponent component, SelectorButtonPressed msg)
     {
-        component.Target = GetEntity(msg.LimbId);
+        component.Target = GetEntity(msg.TargetId);
     }
 
     // Tool methods
@@ -56,14 +60,16 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
         if (component.Target == null || !TryComp<InjuriesContainerComponent>(component.Target, out var injured))
             return false;
 
-        var incisedWound = _injureSystem.AddInjure(component.Target!.Value, injured, InjurySeverityStages.MEDIUM, "IncisedWound");
-        var bloodLossInjury = _injureSystem.AddInjure(component.Target!.Value, injured, InjurySeverityStages.LIGHT, "InternalBleeding");
+        var incisedWound = _injureSystem.AddInjure(component.Target!.Value, injured, InjurySeverityStages.LIGHT, "IncisedWound");
+        var bloodLoss = _injureSystem.AddInjure(component.Target!.Value, injured, InjurySeverityStages.LIGHT, "InternalBleeding");
 
         _popup.PopupEntity($"{Name(component.Target!.Value)} была прооперирована, оставив {Name(incisedWound)}!", user);
         return true;
     }
     public bool TryMakeClamp(EntityUid limb, EntityUid user, SurgicalInstrumentComponent component)
     {
+        if (component.Target == null || !TryComp<InjuriesContainerComponent>(component.Target, out var injured))
+            return false;
         return true;
     }
 

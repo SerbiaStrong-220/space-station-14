@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
@@ -12,11 +13,11 @@ public sealed partial class InjuryComponent : Component
     /// List of damage specifiers. Deals passive damage.
     /// </summary>
 
-    [DataField("damageSpecifiers", customTypeSerializer: typeof(PrototypeIdListSerializer<DamageTypePrototype>))]
-    public List<string> DamageSpecifiers = new();
+    [DataField("damage")]
+    public DamageSpecifier Damage = new();
 
     /// <summary>
-    /// For aghhhhhhh????????? Break bone = slowly moves???
+    /// For aghhhhhhh????????? Broken bones = slowly moves???
     /// </summary>
 
     [DataField("consequences")]
@@ -27,7 +28,6 @@ public sealed partial class InjuryComponent : Component
     /// </summary>
     [DataField("severity")]
     public InjurySeverityStages Severity { get; set; }
-    public bool IsBleeding { get; set; }
 
     [DataField("isGaping")]
     public bool IsGaping { get; set; }

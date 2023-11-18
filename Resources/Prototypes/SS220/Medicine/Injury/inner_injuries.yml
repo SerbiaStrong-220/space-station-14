@@ -15,5 +15,6 @@
   parent: BaseInnerInjury
   components:
     - type: Injury
-      damageSpecifiers:
-        - Bloodloss
+      damage:
+        types:
+          Bloodloss: 0.33
