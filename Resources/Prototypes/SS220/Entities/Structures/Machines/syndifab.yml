@@ -22,7 +22,8 @@
   - type: Wires
     boardName: wires-board-name-protolathe
     layoutId: Protolathe
-  - type: MaterialStorage
+  conditions:
+  - !type:StoreWhitelistCondition
     whitelist:
     - Ammonitor
   - type: Lathe
