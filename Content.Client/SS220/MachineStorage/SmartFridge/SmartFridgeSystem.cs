@@ -8,17 +8,17 @@ using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
 using Content.Shared.VendingMachines;
-
-
+using Robust.Shared.GameObjects;
 
 namespace Content.Client.SS220.MachineStorage.SmartFridge;
 
-public sealed class SmartFridgeSystem : SharedStorageSystem
+public sealed class SmartFridgeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityPickupAnimationSystem _entityPickupAnimation = default!;
+    //[Dependency] private readonly IGameTiming _timing = default!;
+    //[Dependency] private readonly EntityPickupAnimationSystem _entityPickupAnimation = default!;
 
     public event Action<EntityUid, StorageComponent>? StorageUpdated;
+
 
     //[Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
     //[Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
@@ -27,7 +27,7 @@ public sealed class SmartFridgeSystem : SharedStorageSystem
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<PickupAnimationEvent>(HandlePickupAnimation);
+        //SubscribeNetworkEvent<PickupAnimationEvent>(HandlePickupAnimation);
         //SubscribeNetworkEvent<AnimateInsertingEntitiesEvent>(HandleAnimatingInsertingEntities);
 
         //SubscribeLocalEvent<VendingMachineComponent, AppearanceChangeEvent>(OnAppearanceChange);
@@ -40,18 +40,40 @@ public sealed class SmartFridgeSystem : SharedStorageSystem
         if (!Resolve(uid, ref component))
             return new();
 
-        //var inventory = new List<VendingMachineInventoryEntry>(component.Inventory.Values);
+        //VendingMachineComponent vendComponent;
 
-        var inventory = new List<VendingMachineInventoryEntry>();
+        Dictionary<string, VendingMachineInventoryEntry> sortedInventory = new();
+
         foreach (var item in component.Container.ContainedEntities)
         {
-            //inventory.Add(new EntityListData(item));
-            if (!TryGetItemCode(item, out var itemId))
+            if (!TryInsertItem(item, sortedInventory))
                 continue;
-            inventory.Add(new VendingMachineInventoryEntry(InventoryType.Regular, itemId, 1));
         }
 
+        //заполнение, через заполненный 
+        var inventory = new List<VendingMachineInventoryEntry>(sortedInventory.Values);
+
         return inventory;
+    }
+
+    private bool TryInsertItem(EntityUid entityUid, Dictionary<string, VendingMachineInventoryEntry> sortedInventory)
+    {
+        if (!TryGetItemCode(entityUid, out var itemId))
+            return false;
+
+        if (sortedInventory.ContainsKey(itemId) &&
+            sortedInventory.TryGetValue(itemId, out var entry))
+        {
+            entry.Amount++;
+            entry.EntityUids.Add(GetNetEntity(entityUid));
+            return true;
+        }
+
+        sortedInventory.Add(itemId,
+            new VendingMachineInventoryEntry(InventoryType.Regular, itemId, 1, GetNetEntity(entityUid))
+        );
+
+        return true;
     }
 
     private bool TryGetItemCode(EntityUid entityUid, out string code)
@@ -60,159 +82,4 @@ public sealed class SmartFridgeSystem : SharedStorageSystem
         code = metadata?.EntityPrototype?.ID ?? "";
         return !string.IsNullOrEmpty(code);
     }
-
-    private void HandlePickupAnimation(PickupAnimationEvent msg)
-    {
-        PickupAnimation(GetEntity(msg.ItemUid), GetCoordinates(msg.InitialPosition), GetCoordinates(msg.FinalPosition), msg.InitialAngle);
-    }
-
-    public override void PlayPickupAnimation(EntityUid uid, EntityCoordinates initialCoordinates, EntityCoordinates finalCoordinates,
-Angle initialRotation, EntityUid? user = null)// скопировано из Storage
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        PickupAnimation(uid, initialCoordinates, finalCoordinates, initialRotation);
-    }
-
-    public void PickupAnimation(EntityUid item, EntityCoordinates initialCoords, EntityCoordinates finalCoords, Angle initialAngle)
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        if (finalCoords.InRange(EntityManager, _transform, initialCoords, 0.1f) ||
-            !Exists(initialCoords.EntityId) || !Exists(finalCoords.EntityId))
-        {
-            return;
-        }
-
-        var finalMapPos = finalCoords.ToMapPos(EntityManager, _transform);
-        var finalPos = _transform.GetInvWorldMatrix(initialCoords.EntityId).Transform(finalMapPos);
-
-        _entityPickupAnimation.AnimateEntityPickup(item, initialCoords, finalPos, initialAngle);
-    }
-
-    /*
-    private void OnAnimationCompleted(EntityUid uid, VendingMachineComponent component, AnimationCompletedEvent args)
-    {
-        /*
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
-            return;
-
-        if (!TryComp<AppearanceComponent>(uid, out var appearance) ||
-            !_appearanceSystem.TryGetData<VendingMachineVisualState>(uid, VendingMachineVisuals.VisualState, out var visualState, appearance))
-        {
-            visualState = VendingMachineVisualState.Normal;
-        }
-
-        UpdateAppearance(uid, visualState, component, sprite);
-        
-    }
-
-    private void OnAppearanceChange(EntityUid uid, VendingMachineComponent component, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite == null)
-            return;
-
-        if (!args.AppearanceData.TryGetValue(VendingMachineVisuals.VisualState, out var visualStateObject) ||
-            visualStateObject is not VendingMachineVisualState visualState)
-        {
-            visualState = VendingMachineVisualState.Normal;
-        }
-
-        UpdateAppearance(uid, visualState, component, args.Sprite);
-    }
-
-    private void UpdateAppearance(EntityUid uid, VendingMachineVisualState visualState, VendingMachineComponent component, SpriteComponent sprite)
-    {
-        SetLayerState(VendingMachineVisualLayers.Base, component.OffState, sprite);
-
-        switch (visualState)
-        {
-            case VendingMachineVisualState.Normal:
-                SetLayerState(VendingMachineVisualLayers.BaseUnshaded, component.NormalState, sprite);
-                SetLayerState(VendingMachineVisualLayers.Screen, component.ScreenState, sprite);
-                break;
-
-            case VendingMachineVisualState.Deny:
-                if (component.LoopDenyAnimation)
-                    SetLayerState(VendingMachineVisualLayers.BaseUnshaded, component.DenyState, sprite);
-                else
-                    PlayAnimation(uid, VendingMachineVisualLayers.BaseUnshaded, component.DenyState, component.DenyDelay, sprite);
-
-                SetLayerState(VendingMachineVisualLayers.Screen, component.ScreenState, sprite);
-                break;
-
-            case VendingMachineVisualState.Eject:
-                PlayAnimation(uid, VendingMachineVisualLayers.BaseUnshaded, component.EjectState, component.EjectDelay, sprite);
-                SetLayerState(VendingMachineVisualLayers.Screen, component.ScreenState, sprite);
-                break;
-
-            case VendingMachineVisualState.Broken:
-                HideLayers(sprite);
-                SetLayerState(VendingMachineVisualLayers.Base, component.BrokenState, sprite);
-                break;
-
-            case VendingMachineVisualState.Off:
-                HideLayers(sprite);
-                break;
-        }
-    }
-
-    private static void SetLayerState(VendingMachineVisualLayers layer, string? state, SpriteComponent sprite)
-    {
-        if (string.IsNullOrEmpty(state))
-            return;
-
-        sprite.LayerSetVisible(layer, true);
-        sprite.LayerSetAutoAnimated(layer, true);
-        sprite.LayerSetState(layer, state);
-    }
-
-    private void PlayAnimation(EntityUid uid, VendingMachineVisualLayers layer, string? state, float animationTime, SpriteComponent sprite)
-    {
-        if (string.IsNullOrEmpty(state))
-            return;
-
-        if (!_animationPlayer.HasRunningAnimation(uid, state))
-        {
-            var animation = GetAnimation(layer, state, animationTime);
-            sprite.LayerSetVisible(layer, true);
-            _animationPlayer.Play(uid, animation, state);
-        }
-    }
-
-    private static Animation GetAnimation(VendingMachineVisualLayers layer, string state, float animationTime)
-    {
-        return new Animation
-        {
-            Length = TimeSpan.FromSeconds(animationTime),
-            AnimationTracks =
-                {
-                    new AnimationTrackSpriteFlick
-                    {
-                        LayerKey = layer,
-                        KeyFrames =
-                        {
-                            new AnimationTrackSpriteFlick.KeyFrame(state, 0f)
-                        }
-                    }
-                }
-        };
-    }
-
-    private static void HideLayers(SpriteComponent sprite)
-    {
-        HideLayer(VendingMachineVisualLayers.BaseUnshaded, sprite);
-        HideLayer(VendingMachineVisualLayers.Screen, sprite);
-    }
-
-    private static void HideLayer(VendingMachineVisualLayers layer, SpriteComponent sprite)
-    {
-        if (!sprite.LayerMapTryGet(layer, out var actualLayer))
-            return;
-
-        sprite.LayerSetVisible(actualLayer, false);
-    }
-*/
 }

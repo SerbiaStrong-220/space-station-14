@@ -1,7 +1,11 @@
 using Content.Client.SS220.MachineStorage.SmartFridge.UI;
 using Content.Client.VendingMachines.UI;
+using Content.Shared.Storage;
+using Robust.Shared.GameObjects;
 using Content.Shared.VendingMachines;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.GameObjects;
 using System.Linq;
 
 namespace Content.Client.SS220.MachineStorage.SmartFridge
@@ -17,6 +21,8 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
         [ViewVariables]
         private List<int> _cachedFilteredIndex = new();
 
+        [Dependency] private readonly IEntityManager _entManager = default!;
+
         public SmartFridgeBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
         }
@@ -25,9 +31,9 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
         {
             base.Open();
 
-            var SmartFridgeSys = EntMan.System<SmartFridgeSystem>();
+            var smartFridgeSys = EntMan.System<SmartFridgeSystem>();
 
-            _cachedInventory = SmartFridgeSys.GetAllInventory(Owner);
+            _cachedInventory = smartFridgeSys.GetAllInventory(Owner);
 
             _menu = new SmartFridgeMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
 
@@ -36,6 +42,7 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             _menu.OnSearchChanged += OnSearchChanged;
 
             _menu.Populate(_cachedInventory, out _cachedFilteredIndex);
+
 
             _menu.OpenCentered();
         }
@@ -47,7 +54,10 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             //if (state is not SmartFridgeInterfaceState newState)
             //    return;
 
-            //_cachedInventory = newState.Inventory;
+            if (state is not VendingMachineInterfaceState newState)
+                return;
+
+            _cachedInventory = newState.Inventory;
 
             _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, _menu.SearchBar.Text);
         }
@@ -62,7 +72,11 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             if (selectedItem == null)
                 return;
 
-            SendMessage(new VendingMachineEjectMessage(selectedItem.Type, selectedItem.ID));
+            //SendMessage(new VendingMachineEjectMessage(selectedItem.Type, selectedItem.ID));
+            if (!EntityUid.TryParse(selectedItem.ID, out EntityUid entity))
+                return;
+
+            SendPredictedMessage(new StorageInteractWithItemEvent(_entManager.GetNetEntity(entity)));
         }
 
         protected override void Dispose(bool disposing)
@@ -84,4 +98,5 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, filter);
         }
     }
+
 }

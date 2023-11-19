@@ -36,7 +36,7 @@
   - type: UserInterface
     interfaces:
     - key: enum.StorageUiKey.Key
-      type: StorageBoundUserInterface
+      type: SmartFridgeBoundUserInterface
   - type: Anchorable
   - type: DoAfter
   - type: Electrified
