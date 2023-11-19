@@ -82,7 +82,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         if (_adminManager.IsAdmin(player, includeDeAdmin: false))
         {
             trackers.Add(PlayTimeTrackingShared.TrackerAdmin);
-            if (player.AttachedEntity is { } attachedEntity &&
+            if (player.AttachedEntity is { Valid: true } attachedEntity &&
                 Comp<MetaDataComponent>(attachedEntity).EntityPrototype?.ID == AGhostPrototypeID)
                 trackers.Add(PlayTimeTrackingShared.TrackerAGhost);
         }
