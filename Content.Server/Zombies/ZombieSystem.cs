@@ -175,6 +175,7 @@ namespace Content.Server.Zombies
             if (!TryComp<InventoryComponent>(uid, out var inventoryComponent))
                 return baseChance;
 
+            //SS220-zomb_reb
             DamageSpecifier ratingArmor = new()
             {
                 DamageDict = new()
@@ -195,6 +196,7 @@ namespace Content.Server.Zombies
             if(chance < min)
                 return min;
             return chance;
+            //SS220-zomb_reb
         }
 
         private void OnMeleeHit(EntityUid uid, ZombieComponent component, MeleeHitEvent args)

@@ -19,17 +19,17 @@ public sealed partial class ZombieComponent : Component
     /// The baseline infection chance you have if you are completely nude
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float MaxZombieInfectionChance = 0.80f;
+    public float MaxZombieInfectionChance = 0.80f; //SS220-zomb_reb
 
     /// <summary>
     /// The minimum infection chance possible. This is simply to prevent
     /// being invincible by bundling up.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float MinZombieInfectionChance = 0.05f;
+    public float MinZombieInfectionChance = 0.05f; //SS220-zomb_reb
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float ZombieMovementSpeedDebuff = 0.85f;
+    public float ZombieMovementSpeedDebuff = 0.85f; //SS220-zomb_reb
 
     /// <summary>
     /// The skin color of the zombie
@@ -103,12 +103,14 @@ public sealed partial class ZombieComponent : Component
     public DamageSpecifier PassiveHealing = new()
     {
         DamageDict = new ()
+        //SS220-zomb_reb
         {
             { "Blunt", -1 },
             { "Slash", -1 },
             { "Piercing", -1 },
             { "Heat", -0.5 }
         }
+        //SS220-zomb_reb
     };
 
     /// <summary>
@@ -124,6 +126,7 @@ public sealed partial class ZombieComponent : Component
     public DamageSpecifier HealingOnBite = new()
     {
         DamageDict = new()
+        //SS220-zomb_reb
         {
             { "Blunt", -10 },
             { "Slash", -10 },
@@ -131,6 +134,7 @@ public sealed partial class ZombieComponent : Component
             { "Heat", -10 },
             { "Stamina", -25 }
         }
+        //SS220-zomb_reb
     };
 
     /// <summary>
