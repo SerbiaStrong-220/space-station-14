@@ -42,7 +42,7 @@ public sealed partial class LimbSelectorLayout : FancyWindow
             {
                 var netinjuryid = _entMan.GetNetEntity(injury);
                 var injurybtn = new ContainedEntityCardControl(_entMan.GetEntityData(netinjuryid).Item2.EntityName);
-                AvailableOrgansContainer.AddChild(injurybtn);
+                InjuriesContainer.AddChild(injurybtn);
             }
         }
     }
