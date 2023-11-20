@@ -1,4 +1,5 @@
-﻿<DefaultWindow 
+﻿<!--
+<DefaultWindow 
     xmlns="https://spacestation14.io"
     Resizable="False">
     <BoxContainer
@@ -8,3 +9,98 @@
         </BoxContainer>
     </BoxContainer>
 </DefaultWindow>
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                      Title="Режим оперирования"
+                      MinSize="625 400"
+                      SetSize="760 550"> <!-- Corvax-Localization -->
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal"
+                      HorizontalExpand="True"
+                      VerticalExpand="False"
+                      MinHeight="85"
+                      Margin="10">
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal"
+                      HorizontalExpand="True"
+                      VerticalExpand="True">
+            <BoxContainer Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          SizeFlagsStretchRatio="2"
+                          Margin="10 0 10 10"
+                          MinWidth="175">
+                <Label Text="Конечности" HorizontalAlignment="Center"/>
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        VerticalExpand="True">
+                        <BoxContainer
+                            Name="AvailableLimbsContainer"
+                            Orientation="Vertical"
+                            VerticalExpand="True"
+                            Access = "Public">
+                        </BoxContainer>
+                    </ScrollContainer>
+                </PanelContainer>
+                <Control MinHeight="10"/>
+                <Label Text="Органы" HorizontalAlignment="Center"/>
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        VerticalExpand="True">
+                        <BoxContainer
+                            Name="AvailableOrgansContainer"
+                            Orientation="Vertical"
+                            VerticalExpand="True"
+                            Access = "Public">
+                        </BoxContainer>
+                    </ScrollContainer>
+                </PanelContainer>
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          SizeFlagsStretchRatio="3"
+                          Margin="0 0 10 10">
+                <Label Text="Травмы" HorizontalAlignment="Center"/>
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+                <PanelContainer VerticalExpand="True" MinSize="0 200">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        SizeFlagsStretchRatio="2"
+                        VerticalExpand="True">
+                        <BoxContainer
+                            Name="InjuriesContainer"
+                            MinSize="100 256"
+                            Orientation="Vertical"
+                            SizeFlagsStretchRatio="2"
+                            VerticalExpand="True"
+                            Access = "Public">
+                        </BoxContainer>
+                    </ScrollContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

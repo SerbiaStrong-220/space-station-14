@@ -41,7 +41,6 @@ public sealed partial class InjurySystem : EntitySystem
             foreach (var injury in comp.Injuries)
             {
                 _damageable.TryChangeDamage(bodyComp.Body!.Value, Comp<InjuryComponent>(injury).Damage, true, false);
-                _bloodstream.TryModifyBloodLevel(bodyComp.Body!.Value, -1f);
             }
 
         }

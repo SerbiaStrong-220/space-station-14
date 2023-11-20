@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Content.Server.SS220.Medicine.Surgery.Systems;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Content.Shared.SS220.Medicine.Surgery.Prototypes;
+using Robust.Shared.Audio;
 
 namespace Content.Server.SS220.Medicine.Surgery.Components;
 

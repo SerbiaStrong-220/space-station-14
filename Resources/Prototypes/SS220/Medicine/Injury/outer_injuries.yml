@@ -19,7 +19,7 @@
 
 - type: entity
   id: IncisedWound
-  name: incised wound
+  name: резаная рана
   parent: BaseOuterInjury
   components:
     - type: Injury
