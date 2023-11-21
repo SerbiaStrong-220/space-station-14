@@ -15,6 +15,13 @@ public sealed partial class SharedInjurySystem : EntitySystem
         base.Initialize();
     }
 
+    public List<EntityUid>? GetEntityInjuries(EntityUid uid, InjuriesContainerComponent? component = null)
+    {
+        if (!Resolve(uid, ref component, false))
+            return null;
+        return component.Injuries;
+    }
+
     /// <summary>
     /// Add injure to target
     /// </summary>
