@@ -141,7 +141,7 @@
   components:
   - type: InstantAction
     icon: { sprite: Clothing/Shoes/Boots/magboots-advanced.rsi, state: icon }
-    iconOn: { sprite: Clothing/Shoes/Boots/magboots-advanced.rsi, state: icon }
+    iconOn: { sprite: Clothing/Shoes/Boots/magboots-advanced.rsi, state: icon } #SS220-syndifix
 
 - type: entity
   id: ActionToggleMagbootsSyndie
