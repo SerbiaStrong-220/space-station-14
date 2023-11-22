@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Medicine.Injury.Components;
 /// Simple container for injuries 
 /// </summary>
 
-[RegisterComponent, NetworkedComponent()]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class InjuriesContainerComponent : Component
 {
     [DataField("injuries")]

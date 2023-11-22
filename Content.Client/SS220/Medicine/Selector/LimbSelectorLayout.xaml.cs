@@ -39,7 +39,7 @@ public sealed partial class LimbSelectorLayout : FancyWindow
 
             // Не видит список повреждений на конечности
             var sharedInjury = _sysMan.GetEntitySystem<SharedInjurySystem>();
-            var injuries = _entMan.GetComponent<InjuriesContainerComponent>(limb.Id).Injuries;
+            var injuries = sharedInjury.GetEntityInjuries(limb.Id);
 
             if (injuries != null)
             {
