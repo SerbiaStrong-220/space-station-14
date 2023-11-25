@@ -1,0 +1,12 @@
+# !!! DELETE THIS FILE AFTER GATE MAP FIX !!!
+# SS220 gate-fix
+
+- type: entity
+  parent: DrinkHotCoffee
+  id: GatewayDestination
+  name: placeholder
+  description: Hmmmm. Something went wrong.
+  suffix: DO NOT MAP
+  components:
+  - type: GatewayDestination
+    name: Unknown
