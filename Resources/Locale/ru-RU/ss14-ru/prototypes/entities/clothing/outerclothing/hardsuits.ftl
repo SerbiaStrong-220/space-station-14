@@ -15,6 +15,7 @@ ent-IHSVoidsuit = пустотный скафандр IHS
 ent-ClothingOuterHardsuitEVA = скафандр EVA
     .desc = Легкий космический скафандр, способный защитить владельца от космического вакуума во время аварийной ситуации.
 ent-ClothingOuterHardsuitSyndicate = алый скафандр EVA
+    .suffix = скафандр EVA Синдиката
     .desc = { ent-ClothingOuterHardsuitEVA.desc } На бирке написано 'Совершенно не собственность вражеской корпорации, честно!'.
 ent-ClothingOuterHardsuitEVAPrisoner = тюремный скафандр EVA
     .desc = Легкий космический скафандр, способный защитить заключённого от космического вакуума во время аварийной ситуации.
