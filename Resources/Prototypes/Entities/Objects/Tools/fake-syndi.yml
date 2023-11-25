@@ -1,0 +1,12 @@
+- type: entity
+  parent: BaseItem
+  id: FakeEmag
+  name: модифицированная ID карта
+  description: Зачем кому-то портить ID карту? Она вообще работает? Кажется, в ней провода замыкаются... лучше её не трогать.
+  suffix: fake, фейк
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/emag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/emag.rsi
