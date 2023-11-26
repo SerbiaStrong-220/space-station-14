@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Medicine.Injury;
 using Content.Shared.SS220.Medicine.Injury.Components;
 using Robust.Shared.Prototypes;
@@ -18,6 +19,20 @@ public sealed partial class SharedInjurySystem : EntitySystem
     public List<EntityUid> GetEntityInjuries(EntityUid uid)
     {
         return Comp<InjuriesContainerComponent>(uid).Injuries;
+    }
+
+    public FixedPoint2 ModifyBloodLossDamage(InjurySeverityStages injuryStage)
+    {
+        switch(injuryStage)
+        {
+            case InjurySeverityStages.LIGHT:
+                return -1f;
+            case InjurySeverityStages.MEDIUM:
+                return -2f;
+            case InjurySeverityStages.SEVERE:
+                return -3f;
+        }
+        return 0f;
     }
 
     /// <summary>

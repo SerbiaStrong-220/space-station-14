@@ -29,12 +29,15 @@ public sealed partial class InjuryComponent : Component
     [DataField("severity")]
     public InjurySeverityStages Severity { get; set; }
 
-    [DataField("isGaping")]
-    public bool IsGaping { get; set; }
+    [DataField("isGapes")]
+    public bool IsGapes { get; set; }
 
     [DataField("isInfected")]
     public bool IsInfected { get; set; }
 
+    [DataField("isBleeeding")]
+    public bool IsBleeding { get; set; }
+    
     /// <summary>
     /// Where the wound is: inner or outer
     /// </summary>

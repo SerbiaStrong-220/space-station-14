@@ -2,6 +2,7 @@
 
 using Content.Server.Popups;
 using Content.Server.SS220.Medicine.Surgery.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
@@ -21,6 +22,7 @@ public sealed partial class SurgicalInstrumentSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedInjurySystem _injureSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedBodySystem _sharedBody = default!;
 
     public override void Initialize()
     {

@@ -3,6 +3,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Damage;
 using Content.Shared.Inventory.Events;
 
 namespace Content.Server.Body.Systems;
@@ -12,6 +13,7 @@ public sealed class LungSystem : EntitySystem
     [Dependency] private readonly InternalsSystem _internals = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public static string LungSolutionName = "Lung";
 
@@ -21,6 +23,10 @@ public sealed class LungSystem : EntitySystem
         SubscribeLocalEvent<LungComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<BreathToolComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<BreathToolComponent, GotUnequippedEvent>(OnGotUnequipped);
+    }
+
+    private void UpdateLungDamage(EntityUid uid, LungComponent component, string reagentid)
+    {
     }
 
     private void OnGotUnequipped(EntityUid uid, BreathToolComponent component, GotUnequippedEvent args)

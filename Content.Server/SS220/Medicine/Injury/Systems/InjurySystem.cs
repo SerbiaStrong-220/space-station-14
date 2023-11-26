@@ -5,6 +5,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.Damage;
 using Content.Shared.SS220.Medicine.Injury;
 using Content.Shared.SS220.Medicine.Injury.Components;
+using Content.Shared.SS220.Medicine.Injury.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -16,6 +17,8 @@ public sealed partial class InjurySystem : EntitySystem
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    [Dependency] private readonly SharedInjurySystem _sharedInjury = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -31,7 +34,7 @@ public sealed partial class InjurySystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.Injuries.Count == 0 )
+            if (comp.Injuries.Count == 0)
                 continue;
             if (comp.NextTick > _timing.CurTime)
                 continue;
@@ -40,7 +43,10 @@ public sealed partial class InjurySystem : EntitySystem
             var bodyComp = Comp<BodyPartComponent>(uid);
             foreach (var injury in comp.Injuries)
             {
-                _damageable.TryChangeDamage(bodyComp.Body!.Value, Comp<InjuryComponent>(injury).Damage, true, false);
+                var injuryComp = Comp<InjuryComponent>(injury);
+                _damageable.TryChangeDamage(bodyComp.Body!.Value, injuryComp.Damage, true, false);
+                if (injuryComp.IsBleeding)
+                    _bloodstream.TryModifyBloodLevel(bodyComp.Body!.Value, _sharedInjury.ModifyBloodLossDamage(injuryComp.Severity));
             }
 
         }

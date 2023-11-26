@@ -3,6 +3,7 @@
   parent: BaseItem
   abstract: true
   components:
+  - type: InjuriesContainer
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
   - type: Organ
@@ -175,6 +176,7 @@
   name: liver
   description: "Pairing suggestion: chianti and fava beans."
   components:
+  - type: Liver
   - type: Sprite
     state: liver
   - type: Metabolizer # The liver metabolizes certain chemicals only, like alcohol.
@@ -190,6 +192,7 @@
   name: kidneys
   description: "Filters toxins from the bloodstream."
   components:
+  - type: Kidneys
   - type: Sprite
     layers:
       - state: kidney-l

@@ -23,6 +23,7 @@
   parent: BaseOuterInjury
   components:
     - type: Injury
+      isBleeeding: true
       damage:
         types:
           Slash: 0.33
