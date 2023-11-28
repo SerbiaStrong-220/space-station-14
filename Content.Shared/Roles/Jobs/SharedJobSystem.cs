@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
@@ -83,7 +83,7 @@ public abstract class SharedJobSystem : EntitySystem
 
     public bool MindHasJobWithId(EntityUid? mindId, string prototypeId)
     {
-        return CompOrNull<JobComponent>(mindId)?.PrototypeId == prototypeId;
+        return CompOrNull<JobComponent>(mindId)?.Prototype == prototypeId;
     }
 
     public bool MindTryGetJob(
@@ -95,8 +95,8 @@ public abstract class SharedJobSystem : EntitySystem
         prototype = null;
 
         return TryComp(mindId, out comp) &&
-               comp.PrototypeId != null &&
-               _prototypes.TryIndex(comp.PrototypeId, out prototype);
+               comp.Prototype != null &&
+               _prototypes.TryIndex(comp.Prototype, out prototype);
     }
 
     /// <summary>
@@ -134,5 +134,16 @@ public abstract class SharedJobSystem : EntitySystem
             return true;
 
         return prototype.CanBeAntag;
+    }
+
+    public bool CanBeZombie(ICommonSession player)
+    {
+        if (_playerSystem.ContentData(player) is not { Mind: { } mindId })
+            return false;
+
+        if (!MindTryGetJob(mindId, out _, out var prototype))
+            return true;
+
+        return prototype.CanBeZombie;
     }
 }

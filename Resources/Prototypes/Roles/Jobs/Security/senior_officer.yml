@@ -20,6 +20,7 @@
   icon: "JobIconSeniorOfficer"
   supervisors: job-supervisors-hos
   canBeAntag: false
+  canBeZombie: false
   access:
   - Security
   - Brig
@@ -37,7 +38,7 @@
     back: ClothingBackpackSecurityFilled
     shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesSecurity
-    head: ClothingHeadHatBeret
+    head: ClothingHeadHatBeretSecurity
     outerClothing: ClothingOuterArmorBasic
     id: SeniorOfficerPDA
     ears: ClothingHeadsetSecurity

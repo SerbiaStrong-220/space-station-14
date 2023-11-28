@@ -26,8 +26,11 @@
     contents:
       - id: BoxSurvivalSecurity
       - id: Flash
-      - id: MagazinePistol
-      
+      - id: MagazinePistolRubber
+      - id: MagazinePistolRubber
+      - id: FlashlightSeclite
+      - id: DrinkRelaxingPeachCan
+
 - type: entity
   noSpawn: true
   parent: ClothingBackpackDuffelSecurity
@@ -37,8 +40,11 @@
     contents:
       - id: BoxSurvivalSecurity
       - id: Flash
+      - id: Flash
       - id: ForensicPad
       - id: ForensicScanner
+      - id: FlashlightSeclite
+      - id: DrinkRelaxingPeachCan
       - id: ExpensiveLighterDetective #SS220-Zippo
 
 - type: entity
@@ -48,7 +54,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: BoxSurvivalBrigmedic
       - id: Flash
 
 - type: entity
@@ -137,7 +142,26 @@
     contents:
       - id: BoxSurvivalSecurity
       - id: Flash
-      - id: MagazinePistol
+      - id: FlashlightSeclite
+      - id: MagazinePistolRubber
+      - id: MagazinePistolRubber
+      - id: DrinkRelaxingPeachCan
+      - id: PilotBriefing
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackDuffelSecurity
+  id: ClothingBackpackDuffelSecurityPilotFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: Flash
+      - id: MagazinePistolRubber
+      - id: MagazinePistolRubber
+      - id: FlashlightSeclite
+      - id: DrinkRelaxingPeachCan
+      - id: PilotBriefing
 
 - type: entity
   noSpawn: true
