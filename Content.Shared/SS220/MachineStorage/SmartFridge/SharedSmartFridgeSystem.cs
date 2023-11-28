@@ -74,8 +74,12 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
                 return;
             }
         }
+        else
+        {
+            storageComp.Container.Remove(entity);//такой дроп не работает
+        }
 
         // Else, interact using the held item
-        _interactionSystem.InteractUsing(player, hands.ActiveHandEntity.Value, entity, Transform(entity).Coordinates, checkCanInteract: false);
+       //_interactionSystem.InteractUsing(player, hands.ActiveHandEntity.Value, entity, Transform(entity).Coordinates, checkCanInteract: false);
     }
 }

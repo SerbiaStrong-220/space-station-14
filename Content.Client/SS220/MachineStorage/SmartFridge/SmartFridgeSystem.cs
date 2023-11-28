@@ -57,23 +57,6 @@ public sealed class SmartFridgeSystem : EntitySystem
         return inventory;
     }
 
-    /*private bool AddInList(EntityUid entityUid, Dictionary<string, List<EntityUid>> sortedInventory)
-    {
-        if (!TryGetItemCode(entityUid, out var itemId))
-            return false;
-
-        if (sortedInventory.ContainsKey(itemId) &&
-            sortedInventory.TryGetValue(itemId, out var entry))
-        {
-            entry.Add(entityUid);
-            return true;
-        }
-
-        sortedInventory.Add(itemId, (entityUid)));
-
-        return true;
-    }*/
-
     private bool TryInsertItem(EntityUid entityUid, Dictionary<string, VendingMachineInventoryEntry> sortedInventory)
     {
         if (!TryGetItemCode(entityUid, out var itemId))

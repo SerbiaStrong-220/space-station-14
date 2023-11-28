@@ -31,11 +31,11 @@
         - MachineLayer
         density: 200
   - type: ActivatableUI
-    key: enum.VendingMachineUiKey.Key
+    key: enum.SmartFridgeUiKey.Key
   - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
-    - key: enum.StorageUiKey.Key
+    - key: enum.SmartFridgeUiKey.Key
       type: SmartFridgeBoundUserInterface
   - type: Anchorable
   - type: DoAfter
@@ -53,7 +53,8 @@
   - type: Actions
   - type: Appearance
   - type: Storage
-    capacity: 300
+    maxItemSize: Huge
+    maxTotalWeight: 300
   - type: ContainerContainer
     containers:
       storagebase: !type:Container

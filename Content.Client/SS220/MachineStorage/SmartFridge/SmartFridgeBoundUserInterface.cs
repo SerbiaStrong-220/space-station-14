@@ -9,6 +9,7 @@ using Robust.Shared.GameObjects;
 using System.Linq;
 using Content.Shared.Actions;
 using Content.Client.SS220.MachineStorage.SmartFridge;
+using Content.Shared.SS220.MachineStorage.SmartFridge;
 
 namespace Content.Client.SS220.MachineStorage.SmartFridge
 {
@@ -77,6 +78,7 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             if (selectedItem == null)
                 return;
 
+            SendPredictedMessage(new SmartFridgeInteractWithItemEvent(selectedItem.EntityUids[0]));
             SendPredictedMessage(new StorageInteractWithItemEvent(selectedItem.EntityUids[0]));
         }
 
