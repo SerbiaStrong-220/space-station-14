@@ -61,9 +61,14 @@ namespace Content.IntegrationTests.Tests
             "Core",
             "Marathon",
             "Kettle",
+            "Atlas",
+
+            // Corvax Maps
             "CorvaxAvrite",
             "CorvaxDelta",
             "CorvaxIshimura",
+
+            // SS220 Maps
             "220Delta",
             "Frankenstein",
             "MeteorArena",
@@ -71,7 +76,8 @@ namespace Content.IntegrationTests.Tests
             "220Fland",
             "220Ishimura",
             "220Gate",
-            "Nox"
+            "Nox",
+            "Snout",
         };
 
         /// <summary>

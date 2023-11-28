@@ -7,6 +7,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
@@ -262,7 +263,7 @@ namespace Content.Server.GameTicking
             var xformQuery = GetEntityQuery<TransformComponent>();
             var coords = _transform.GetMoverCoordinates(position, xformQuery);
 
-            var ghost = Spawn("MobObserver", coords);
+            var ghost = Spawn(ObserverPrototypeName, coords);
 
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
