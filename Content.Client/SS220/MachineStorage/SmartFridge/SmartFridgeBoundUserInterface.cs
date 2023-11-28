@@ -7,6 +7,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
 using System.Linq;
+using Content.Shared.Actions;
+using Content.Client.SS220.MachineStorage.SmartFridge;
 
 namespace Content.Client.SS220.MachineStorage.SmartFridge
 {
@@ -64,6 +66,9 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
 
         private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
         {
+
+            var smartFridgeSys = EntMan.System<SmartFridgeSystem>();
+
             if (_cachedInventory.Count == 0)
                 return;
 
@@ -72,11 +77,7 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             if (selectedItem == null)
                 return;
 
-            //SendMessage(new VendingMachineEjectMessage(selectedItem.Type, selectedItem.ID));
-            if (!EntityUid.TryParse(selectedItem.ID, out EntityUid entity))
-                return;
-
-            SendPredictedMessage(new StorageInteractWithItemEvent(_entManager.GetNetEntity(entity)));
+            SendPredictedMessage(new StorageInteractWithItemEvent(selectedItem.EntityUids[0]));
         }
 
         protected override void Dispose(bool disposing)
