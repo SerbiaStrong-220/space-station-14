@@ -176,6 +176,13 @@ namespace Content.Server.Body.Systems
 
             _alertsSystem.ClearAlert(uid, AlertType.LowOxygen);
 
+            TryComp<DamageableComponent>(uid,  out var damageable);
+            if (damageable != null) {
+                damageable.DamagePerGroup.TryGetValue("Airloss", out var airloss);
+                if (airloss == 0)
+                    return;
+            }
+
             _damageableSys.TryChangeDamage(uid, respirator.DamageRecovery);
         }
 
