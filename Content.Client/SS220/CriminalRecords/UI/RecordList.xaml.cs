@@ -223,13 +223,13 @@ public sealed partial class RecordList : ScrollContainer
         if (string.IsNullOrWhiteSpace(filter))
             return true;
 
-        if (record.DNA.Contains(filter))
+        if (record.DNA.Contains(filter, StringComparison.OrdinalIgnoreCase))
         {
             match = FilterMatchType.DNA;
             return true;
         }
 
-        if (record.Fingerprints.Contains(filter))
+        if (record.Fingerprints.Contains(filter, StringComparison.OrdinalIgnoreCase))
         {
             match = FilterMatchType.Fingerprint;
             return true;
