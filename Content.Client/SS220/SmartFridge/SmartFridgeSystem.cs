@@ -1,34 +1,26 @@
-using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Storage;
-using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Content.Shared.VendingMachines;
+using Robust.Shared.GameObjects;
+using Robust.Client.Player;
 using Content.Shared.Hands;
 using Content.Client.Animations;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
+using Robust.Client.Animations;
+using Content.Shared.Storage.EntitySystems;
 
-using Content.Shared.VendingMachines;
-using Robust.Shared.GameObjects;
-
-namespace Content.Client.SS220.MachineStorage.SmartFridge;
+namespace Content.Client.SS220.SmartFridge;
 
 public sealed class SmartFridgeSystem : EntitySystem
 {
-    //[Dependency] private readonly IGameTiming _timing = default!;
-    //[Dependency] private readonly EntityPickupAnimationSystem _entityPickupAnimation = default!;
-
-    public event Action<EntityUid, StorageComponent>? StorageUpdated;
-
-
     //[Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
     //[Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        //SubscribeNetworkEvent<PickupAnimationEvent>(HandlePickupAnimation);
-        //SubscribeNetworkEvent<AnimateInsertingEntitiesEvent>(HandleAnimatingInsertingEntities);
 
         //SubscribeLocalEvent<VendingMachineComponent, AppearanceChangeEvent>(OnAppearanceChange);
         //SubscribeLocalEvent<VendingMachineComponent, AnimationCompletedEvent>(OnAnimationCompleted);
@@ -41,7 +33,7 @@ public sealed class SmartFridgeSystem : EntitySystem
             return new();
 
         //VendingMachineComponent vendComponent;
-        Dictionary<string, List<EntityUid>> sortedInventory2 = new();
+        //Dictionary<string, List<EntityUid>> sortedInventory2 = new();
 
         Dictionary<string, VendingMachineInventoryEntry> sortedInventory = new();
 
@@ -51,7 +43,6 @@ public sealed class SmartFridgeSystem : EntitySystem
                 continue;
         }
 
-        //заполнение, через заполненный 
         var inventory = new List<VendingMachineInventoryEntry>(sortedInventory.Values);
 
         return inventory;
@@ -59,28 +50,22 @@ public sealed class SmartFridgeSystem : EntitySystem
 
     private bool TryInsertItem(EntityUid entityUid, Dictionary<string, VendingMachineInventoryEntry> sortedInventory)
     {
-        if (!TryGetItemCode(entityUid, out var itemId))
+        if (!_entity.TryGetComponent<MetaDataComponent>(entityUid, out var metadata))
             return false;
 
-        if (sortedInventory.ContainsKey(itemId) &&
-            sortedInventory.TryGetValue(itemId, out var entry))
+        if (sortedInventory.ContainsKey(metadata.EntityName) &&
+            sortedInventory.TryGetValue(metadata.EntityName, out var entry))
         {
             entry.Amount++;
             entry.EntityUids.Add(GetNetEntity(entityUid));
             return true;
         }
 
-        sortedInventory.Add(itemId,
-            new VendingMachineInventoryEntry(InventoryType.Regular, itemId, 1, GetNetEntity(entityUid))
+
+        sortedInventory.Add(metadata.EntityName,
+            new VendingMachineInventoryEntry(InventoryType.Regular, metadata.EntityName, 1, GetNetEntity(entityUid))
         );
 
         return true;
-    }
-
-    private bool TryGetItemCode(EntityUid entityUid, out string code)
-    {
-        var metadata = IoCManager.Resolve<IEntityManager>().GetComponentOrNull<MetaDataComponent>(entityUid);
-        code = metadata?.EntityPrototype?.ID ?? "";
-        return !string.IsNullOrEmpty(code);
     }
 }

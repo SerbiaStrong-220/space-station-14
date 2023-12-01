@@ -2,7 +2,7 @@
   id: MachineStorage
   parent: BaseMachinePowered
   name: machine storage
-  description: its just a backpack, but too heavy, and with addirional features
+  description: its just a backpack, but too heavy, and with additional features
   abstract: true
   components:
   - type: AmbientOnPowered
@@ -52,9 +52,6 @@
     priority: Low
   - type: Actions
   - type: Appearance
-  - type: Storage
-    maxItemSize: Huge
-    maxTotalWeight: 300
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -63,8 +60,8 @@
 
 - type: entity
   parent: MachineStorage
-  id: MachineStorageSmartFridgeSS220
-  name: SmartFridgeSS220
+  id: MachineStorageSmartFridge
+  name: SmartFridge [SS220]
   description: A refrigerated storage unit for keeping items cold and fresh.
   components:
   - type: Sprite
@@ -79,3 +76,18 @@
     radius: 1.5
     energy: 1.6
     color: "#9dc5c9"
+  - type: Storage
+    maxItemSize: Huge
+    maxTotalWeight: 300
+    whitelist:
+      components:
+        - Pill
+        - Seed
+        - Produce
+      tags:
+        - Bottle
+        - Ointment
+        - Bloodpack
+        - Brutepack
+        - GlassBeaker
+        - PillCanister

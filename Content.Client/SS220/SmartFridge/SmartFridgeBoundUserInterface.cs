@@ -1,17 +1,15 @@
-using Content.Client.SS220.MachineStorage.SmartFridge.UI;
-using Content.Client.VendingMachines.UI;
+using Content.Client.SS220.SmartFridge.UI;
 using Content.Shared.Storage;
-using Robust.Shared.GameObjects;
 using Content.Shared.VendingMachines;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.GameObjects;
 using System.Linq;
 using Content.Shared.Actions;
-using Content.Client.SS220.MachineStorage.SmartFridge;
-using Content.Shared.SS220.MachineStorage.SmartFridge;
+using Robust.Shared.GameObjects;
+using Content.Client.SS220.SmartFridge;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Robust.Shared.GameObjects;
 
-namespace Content.Client.SS220.MachineStorage.SmartFridge
+namespace Content.Client.SS220.SmartFridge
 {
     public sealed class SmartFridgeBoundUserInterface : BoundUserInterface
     {
@@ -50,21 +48,6 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             _menu.OpenCentered();
         }
 
-        protected override void UpdateState(BoundUserInterfaceState state)
-        {
-            base.UpdateState(state);
-            //разобраться, что это?
-            //if (state is not SmartFridgeInterfaceState newState)
-            //    return;
-
-            if (state is not VendingMachineInterfaceState newState)
-                return;
-
-            _cachedInventory = newState.Inventory;
-
-            _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, _menu.SearchBar.Text);
-        }
-
         private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
         {
 
@@ -78,8 +61,11 @@ namespace Content.Client.SS220.MachineStorage.SmartFridge
             if (selectedItem == null)
                 return;
 
-            SendPredictedMessage(new SmartFridgeInteractWithItemEvent(selectedItem.EntityUids[0]));
+            //SendPredictedMessage(new SmartFridgeInteractWithItemEvent(selectedItem.EntityUids[0]));
             SendPredictedMessage(new StorageInteractWithItemEvent(selectedItem.EntityUids[0]));
+
+            _cachedInventory = smartFridgeSys.GetAllInventory(Owner);
+            _menu?.Populate(_cachedInventory, out _cachedFilteredIndex);
         }
 
         protected override void Dispose(bool disposing)
