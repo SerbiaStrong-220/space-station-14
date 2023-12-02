@@ -14,7 +14,6 @@
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/empty.rsi
-    snapCardinals: true
   - type: Physics
     bodyType: Static
   - type: Transform
@@ -69,9 +68,13 @@
     layers:
     - state: off
       map: ["enum.VendingMachineVisualLayers.Base"]
-    - state: off
-      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
       shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        base:
+          True: { state: on }
+          False: { state: off }
   - type: PointLight
     radius: 1.5
     energy: 1.6

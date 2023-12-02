@@ -3,11 +3,6 @@ using Content.Shared.Storage;
 using Content.Shared.VendingMachines;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
-using Content.Shared.Actions;
-using Robust.Shared.GameObjects;
-using Content.Client.SS220.SmartFridge;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Robust.Shared.GameObjects;
 
 namespace Content.Client.SS220.SmartFridge
 {

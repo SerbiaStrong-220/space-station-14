@@ -30,7 +30,7 @@ namespace Content.Client.SS220.SmartFridge.UI
                 OnSearchChanged?.Invoke(SearchBar.Text);
             };
 
-            SmartFridgeContents.OnItemSelected += args =>//надо будет переписать
+            SmartFridgeContents.OnItemSelected += args =>
             {
                 OnItemSelected?.Invoke(args);
             };
