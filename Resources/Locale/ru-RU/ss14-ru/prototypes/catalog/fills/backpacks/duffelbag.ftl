@@ -60,3 +60,6 @@ ent-ClothingBackpackDuffelSyndicateOperativeMedic = вещмешок опера�
 ent-ClothingBackpackDuffelSyndicateMedicalBundleFilled = { ent-ClothingBackpackDuffelSyndicateMedical }
     .suffix = набор медикаментов Синдиката, Заполненный
     .desc = { ent-ClothingBackpackDuffelSyndicateMedical.desc }
+ent-ClothingBackpackDuffelSyndicateOperativeLone = { ent-ClothingBackpackDuffelSyndicate }
+    .suffix = набор "C-20r", Заполненный, С-20, С20
+    .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
