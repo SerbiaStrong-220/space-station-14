@@ -43,7 +43,7 @@
 - type: entity
   parent: ClothingBeltSyndieHolster
   id: ClothingBeltSyndieHolsterPython
-  suffix: Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Python
   name: плечевая кобура синдиката
   components:
   - type: StorageFill
