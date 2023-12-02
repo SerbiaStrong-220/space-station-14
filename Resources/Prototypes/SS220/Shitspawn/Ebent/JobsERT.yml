@@ -3,7 +3,7 @@
 - type: entity
   parent: ClothingBeltMilitaryWebbing
   id: ClothingBeltWebbingSpecOpsFilled
-  suffix: Shitspawn, Ebent, СпецОпер
+  suffix: Ebent, СпецОпер
   name: армейская РПС
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
   components:
@@ -18,7 +18,7 @@
 - type: entity
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackSpecOpsFilled
-  suffix: Shitspawn, Ebent, СпецОпер
+  suffix: Ebent, СпецОпер
   name: рюкзак офицера безопасности ОБР
   description: Вместительный рюкзак с множеством карманов, который носят офицеры безопасности отряда быстрого реагирования.
   components:
@@ -41,7 +41,7 @@
   id: LockerEbentSpecOps
   name: "шкаф отряда специальных операций"
   description: Стандартное хранилище NanoTrasen.
-  suffix: Ebent, Shitspawn, СпецОпер
+  suffix: Ebent, СпецОпер
   components:
   - type: AccessReader
     access: [[ Command ]]
@@ -60,19 +60,19 @@
 - type: startingGear
   id: EbentSpecOpsLeaderGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMag
+    shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitERTSecurity
+    outerClothing: ClothingOuterHardsuitERTMedical
     suitstorage: YellowOxygenTankFilled
     id: SpecOpsPDALeader
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckard
-    pocket2: CombatKnife
+    pocket2: EnergySaberNT
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsLeader
@@ -121,8 +121,8 @@
 
 - type: entity
   parent: ERTLeaderPDA
-  name: КПК ОБР
-  description: Красный значит мощный.
+  name: КПК Офицера Специальных Операций
+  description: Строгий и стильный КПК.
   id: SpecOpsPDALeader
   suffix: СпецОпер, Щитспавн, Ebent
   components:
@@ -133,19 +133,19 @@
 - type: startingGear
   id: EbentSpecOpsEngineerGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    jumpsuit: ClothingUniformJumpsuitERTEngineer
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMag
+    shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitERTSecurity
+    outerClothing: ClothingOuterHardsuitERTEngineer
     suitstorage: YellowOxygenTankFilled
     id: SpecOpsPDAEngineer
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckard
-    pocket2: CombatKnife
+    pocket2: EnergySaberNT
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsEngineer
@@ -194,8 +194,8 @@
 
 - type: entity
   parent: ERTLeaderPDA
-  name: КПК ОБР
-  description: Красный значит мощный.
+  name: КПК Старшего Инженера Специальных Операций
+  description: Стандартный КПК отрядов быстрого реагирования.
   id: SpecOpsPDAEngineer
   suffix: СпецОпер, Щитспавн, Ebent
   components:
@@ -206,19 +206,19 @@
 - type: startingGear
   id: EbentSpecOpsCorpsmanGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMag
+    shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitERTSecurity
+    outerClothing: ClothingOuterHardsuitERTMedical
     suitstorage: YellowOxygenTankFilled
     id: SpecOpsPDACorpsman
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckard
-    pocket2: CombatKnife
+    pocket2: EnergySaberNT
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCorpsman
@@ -271,31 +271,35 @@
 
 - type: entity
   parent: ERTLeaderPDA
-  name: КПК ОБР
-  description: Красный значит мощный.
+  name: КПК Парамедика Специальных Операций
+  description: И хотя опытный врач определяет повреждения на взгляд, КПК имеет встроенный анализатор здоровья.
   id: SpecOpsPDACorpsman
   suffix: СпецОпер, Щитспавн, Ebent
   components:
   - type: Pda
     id: IDCardSpecOpsCorpsman
+  - type: HealthAnalyzer
+    scanDelay: 1
+    scanningEndSound:
+      path: "/Audio/Items/Medical/healthscanner.ogg"
 
 #CMO
 - type: startingGear
   id: EbentSpecOpsCMOGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMag
+    shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitERTSecurity
+    outerClothing: ClothingOuterHardsuitERTMedical
     suitstorage: YellowOxygenTankFilled
     id: SpecOpsPDACMO
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckard
-    pocket2: CombatKnife
+    pocket2: EnergySaberNT
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCMO
@@ -344,21 +348,25 @@
 
 - type: entity
   parent: ERTLeaderPDA
-  name: КПК ОБР
-  description: Красный значит мощный.
+  name: КПК Главного Врача Специальных Операций
+  description: Имеет встроенный анализатор здоровья. 
   id: SpecOpsPDACMO
   suffix: СпецОпер, Щитспавн, Ebent
   components:
   - type: Pda
     id: IDCardSpecOpsCMO
+  - type: HealthAnalyzer
+    scanDelay: 1
+    scanningEndSound:
+      path: "/Audio/Items/Medical/healthscanner.ogg"
 
-# Trooper
+# TrooperS
 - type: startingGear
   id: EbentSpecOpsTrooperGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMag
+    shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
@@ -368,7 +376,7 @@
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckard
-    pocket2: CombatKnife
+    pocket2: EnergySaberNT
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsTrooper
@@ -421,7 +429,7 @@
 
 - type: entity
   parent: ERTLeaderPDA
-  name: КПК ОБР
+  name: КПК Рядового Специальных Операций
   description: Красный значит мощный.
   id: SpecOpsPDAFigher
   suffix: СпецОпер, Щитспавн, Ebent

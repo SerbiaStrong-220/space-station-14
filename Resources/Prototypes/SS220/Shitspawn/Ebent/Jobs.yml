@@ -5,7 +5,7 @@
   parent: LockerCaptain
   id: LockerEbentIronSquadLeader
   name: "шкаф командира Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Filled, Ebent
   components:
   - type: AccessReader
     access: []
@@ -27,7 +27,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateLeader
-  suffix: Shitspawn, Ebent, Leader
+  suffix: Ebent, Leader
   components:
     - type: StorageFill
       contents:
@@ -52,10 +52,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackSupaSyndicateLeader
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitSyndieElite
+    outerClothing: ClothingOuterHardsuitSyndieEliteEbent
     suitstorage: YellowOxygenTankFilled
     id: SyndiPDAAgentLeader
     ears: ClothingHeadsetAltSyndicateEbent
@@ -128,7 +128,7 @@
   parent: LockerChiefEngineer
   id: LockerEbentIronSquadEngineer
   name: "шкаф инженера Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Filled, Ebent
   components:
   - type: AccessReader
     access: []
@@ -151,7 +151,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateEngineer
-  suffix: Shitspawn, Ebent, Engineer
+  suffix: Ebent, Engineer
   components:
     - type: StorageFill
       contents:
@@ -168,8 +168,9 @@
       - id: MagazinePistolSubMachineGun
         amount: 2
       - id: CombatMedipen
-      - id: EnergySwordDouble
+      - id: EnergySword
       - id: RCD
+      - id: EnergyShield
       - id: RCDAmmo
         amount: 3
 
@@ -178,10 +179,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitChiefEngineerSyndie
     back: ClothingBackpackSupaSyndicateEngineer
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitSyndieElite
+    outerClothing: ClothingOuterHardsuitSyndieEliteEbent
     suitstorage: YellowOxygenTankFilled
     id: SyndiPDAAgentEngineer
     ears: ClothingHeadsetAltSyndicateEbent
@@ -254,7 +255,7 @@
   parent: LockerMedical
   id: LockerEbentIronSquadCorpsman
   name: "шкаф медика Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Filled, , Ebent
   components:
   - type: AccessReader
     access: []
@@ -272,7 +273,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateCorpsman
-  suffix: Shitspawn, Ebent, Medic
+  suffix: Ebent, Medic
   components:
     - type: StorageFill
       contents:
@@ -295,10 +296,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitParamedicSyndie
     back: ClothingBackpackSupaSyndicateCorpsman
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsGlovesNitrile
-    outerClothing: ClothingOuterHardsuitSyndieElite
+    outerClothing: ClothingOuterHardsuitSyndieEliteEbent
     suitstorage: YellowOxygenTankFilled
     id: SyndiPDAAgentCorpsman
     ears: ClothingHeadsetAltSyndicateEbent
@@ -375,7 +376,7 @@
   parent: LockerChiefMedicalOfficer
   id: LockerEbentIronSquadCMO
   name: "шкаф главврача Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Filled, , Ebent
   components:
   - type: AccessReader
     access: []
@@ -400,7 +401,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateCMO
-  suffix: Shitspawn, Ebent, CMO
+  suffix: Ebent, CMO
   components:
     - type: StorageFill
       contents:
@@ -417,19 +418,20 @@
       - id: MagazinePistolSubMachineGun
         amount: 2
       - id: CombatMedipen
-      - id: EnergySwordDouble
+      - id: EnergySword
       - id: BoxDeathRattleImplants
       - id: SyndiHypo
+      - id: EnergyShield
 
 - type: startingGear
   id: EbentIronSquadCMOGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackSupaSyndicateCMO
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsGlovesNitrile
-    outerClothing: ClothingOuterHardsuitSyndieElite
+    outerClothing: ClothingOuterHardsuitSyndieEliteEbent
     suitstorage: YellowOxygenTankFilled
     id: SyndiPDAAgentCMO
     ears: ClothingHeadsetAltSyndicateEbent
@@ -502,7 +504,7 @@
   parent: LockerSyndicatePersonal
   id: LockerEbentIronSquadTrooper
   name: "шкаф бойца Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Filled, Ebent
   components:
   - type: AccessReader
     access: []
@@ -519,7 +521,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateTrooper
-  suffix: Shitspawn, Ebent, Trooper
+  suffix: Ebent, Trooper
   components:
     - type: StorageFill
       contents:
@@ -541,10 +543,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackSupaSyndicateTrooper
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitSyndieElite
+    outerClothing: ClothingOuterHardsuitSyndieEliteEbent
     suitstorage: YellowOxygenTankFilled
     id: SyndiPDAAgent
     ears: ClothingHeadsetAltSyndicateEbent

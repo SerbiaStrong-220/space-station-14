@@ -21,7 +21,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackSupaSyndicate
-  suffix: Shitspawn, Ebent
+  suffix: Ebent
   components:
   - type: Storage
     maxTotalWeight: 60
@@ -29,7 +29,7 @@
 - type: entity
   parent: ClothingHeadsetAltSyndicate
   id: ClothingHeadsetAltSyndicateEbent
-  suffix: Shitspawn, Ebent
+  suffix: Ebent
   name: полноразмерная кроваво-красная гарнитура
   description: Модифицированный модульный интерком синдиката, надеваемый на голову, и содержащий ключ шифрования. Имеет 5 ячеек для ключей шифрования.
   components:
@@ -42,7 +42,7 @@
 - type: entity
   parent: ClothingBeltSyndieHolster
   id: ClothingBeltSyndieHolsterPython
-  suffix: Shitspawn
+  suffix: Ebent
   name: плечевая кобура синдиката
   components:
   - type: StorageFill
@@ -80,6 +80,10 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+    enabled: false
     
 - type: entity
   name: энергетическая сабля 
@@ -137,3 +141,32 @@
     malus: 0
   - type: Reflect
     enabled: false
+
+- type: entity
+  parent: ClothingShoesBootsMagSyndie
+  id: ClothingShoesBootsMagSyndieEbent
+  name: кроваво-красные магнитные сапоги
+  description: Созданные по технологии реверс-инжиниринга магнитные ботинки с встроенными ускорителями.
+  suffix: Ebent
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+    enabled: false
+
+- type: entity
+  parent: ClothingOuterHardsuitSyndieElite
+  id: ClothingOuterHardsuitSyndieEliteEbent
+  name: элитный скафандр Синдиката
+  description: Элитная версия кроваво-красного скафандра, отличающаяся повышенным бронированием и огнеупорностью. Собственность Мародёров Горлекса.
+  suffix: Ebent
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.4
+        Radiation: 0.25
+        Caustic: 0.5
+        Stamina: 0.1
