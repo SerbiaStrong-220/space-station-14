@@ -5,7 +5,7 @@
   parent: LockerCaptain
   id: LockerEbentIronSquadLeader
   name: "шкаф командира Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Filled
   components:
   - type: AccessReader
     access: []
@@ -27,7 +27,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateLeader
-  suffix: Leader, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Leader
   components:
     - type: StorageFill
       contents:
@@ -66,7 +66,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadLeader
   name: Спавнер лидера Железного Отряда
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -118,7 +118,7 @@
   id: SyndiPDAAgentLeader
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   components:
   - type: Pda
     id: AgentIDCardCmdLeader
@@ -128,7 +128,7 @@
   parent: LockerChiefEngineer
   id: LockerEbentIronSquadEngineer
   name: "шкаф инженера Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Filled
   components:
   - type: AccessReader
     access: []
@@ -151,7 +151,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateEngineer
-  suffix: Shitspawn, Engineer, Ebent
+  suffix: Shitspawn, Ebent, Engineer
   components:
     - type: StorageFill
       contents:
@@ -193,7 +193,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadEngineer
   name: Спавнер инженера Железного Отряда
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -245,7 +245,7 @@
   id: SyndiPDAAgentEngineer
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   components:
   - type: Pda
     id: AgentIDCardCmdEngineer
@@ -255,7 +255,7 @@
   parent: LockerMedical
   id: LockerEbentIronSquadCorpsman
   name: "шкаф медика Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Filled
   components:
   - type: AccessReader
     access: []
@@ -273,7 +273,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateCorpsman
-  suffix: Medic, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Medic
   components:
     - type: StorageFill
       contents:
@@ -310,7 +310,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCorpsman
   name: Спавнер полевого медика Железного Отряда
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -355,7 +355,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmdCorpsman
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -376,7 +376,7 @@
   parent: LockerChiefMedicalOfficer
   id: LockerEbentIronSquadCMO
   name: "шкаф главврача Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Filled
   components:
   - type: AccessReader
     access: []
@@ -401,7 +401,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateCMO
-  suffix: CMO, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, CMO
   components:
     - type: StorageFill
       contents:
@@ -442,7 +442,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCMO
   name: Спавнер главврача Железного Отряда
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -483,7 +483,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmdCMO
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -494,7 +494,7 @@
   id: SyndiPDAAgentCMO
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   components:
   - type: Pda
     id: AgentIDCardCmdCMO
@@ -504,7 +504,7 @@
   parent: LockerSyndicatePersonal
   id: LockerEbentIronSquadTrooper
   name: "шкаф бойца Железного Отряда"
-  suffix: Filled, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Filled
   components:
   - type: AccessReader
     access: []
@@ -521,7 +521,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateTrooper
-  suffix: Trooper, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, Trooper
   components:
     - type: StorageFill
       contents:
@@ -557,7 +557,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadTrooper
   name: Спавнер бойца Железного Отряда
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -602,7 +602,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmd
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -613,7 +613,7 @@
   id: SyndiPDAAgent
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  suffix: Агент, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, Агент
   components:
   - type: Pda
     id: AgentIDCardCmd
