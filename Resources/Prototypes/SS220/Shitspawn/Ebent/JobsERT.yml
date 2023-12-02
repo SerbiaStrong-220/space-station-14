@@ -3,7 +3,7 @@
 - type: entity
   parent: ClothingBeltMilitaryWebbing
   id: ClothingBeltWebbingSpecOpsFilled
-  suffix: СпецОпер, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   name: армейская РПС
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
   components:
@@ -18,7 +18,7 @@
 - type: entity
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackSpecOpsFilled
-  suffix: СпецОпер, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   name: рюкзак офицера безопасности ОБР
   description: Вместительный рюкзак с множеством карманов, который носят офицеры безопасности отряда быстрого реагирования.
   components:
@@ -41,7 +41,7 @@
   id: LockerEbentSpecOps
   name: "шкаф отряда специальных операций"
   description: Стандартное хранилище NanoTrasen.
-  suffix: СпецОпер, Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: AccessReader
     access: [[ Command ]]
@@ -77,7 +77,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsLeader
   name: Спавнер Офицера Специальных Операций
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -114,7 +114,7 @@
   id: IDCardSpecOpsLeader
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: PresetIdCard
     job: SpecOpsLeader
@@ -124,7 +124,7 @@
   name: КПК Офицера Специальных Операций
   description: Строгий и стильный КПК.
   id: SpecOpsPDALeader
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: Pda
     id: IDCardSpecOpsLeader
@@ -150,7 +150,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsEngineer
   name: Спавнер Старшего Инженера Специальных Операций
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -187,7 +187,7 @@
   id: IDCardSpecOpsEngineer
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: PresetIdCard
     job: SpecOpsEngineer
@@ -197,7 +197,7 @@
   name: КПК Старшего Инженера Специальных Операций
   description: Стандартный КПК отрядов быстрого реагирования.
   id: SpecOpsPDAEngineer
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: Pda
     id: IDCardSpecOpsEngineer
@@ -223,7 +223,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCorpsman
   name: Спавнер Парамедика Специальных Операций
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -264,7 +264,7 @@
   id: IDCardSpecOpsCorpsman
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: PresetIdCard
     job: SpecOpsCorpsman
@@ -274,7 +274,7 @@
   name: КПК Парамедика Специальных Операций
   description: И хотя опытный врач определяет повреждения на взгляд, КПК имеет встроенный анализатор здоровья.
   id: SpecOpsPDACorpsman
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: Pda
     id: IDCardSpecOpsCorpsman
@@ -304,7 +304,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCMO
   name: Спавнер Главного Врача Специальных Операций
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -341,7 +341,7 @@
   id: IDCardSpecOpsCMO
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: PresetIdCard
     job: SpecOpsCMO
@@ -351,7 +351,7 @@
   name: КПК Главного Врача Специальных Операций
   description: Имеет встроенный анализатор здоровья. 
   id: SpecOpsPDACMO
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: Pda
     id: IDCardSpecOpsCMO
@@ -381,7 +381,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsTrooper
   name: Спавнер Рядового Специальных Операций
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, ЕСквад
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -422,7 +422,7 @@
   id: IDCardSpecOpsFighter
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: PresetIdCard
     job: SpecOpsFighter
@@ -432,7 +432,7 @@
   name: КПК Рядового Специальных Операций
   description: Красный значит мощный.
   id: SpecOpsPDAFigher
-  suffix: СпецОпер, Щитспавн, Ebent
+  suffix: Shitspawn, Ebent, СпецОпер
   components:
   - type: Pda
     id: IDCardSpecOpsFighter
