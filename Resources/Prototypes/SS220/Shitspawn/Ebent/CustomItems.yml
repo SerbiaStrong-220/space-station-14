@@ -4,7 +4,7 @@
   parent: MedicalPDA
   id: MedicalPDAAgent
   name: "КПК врача синдиката"
-  description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
+  description: Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!
   suffix: Shitspawn, Ebent, Агент
   components:
   - type: Pda
