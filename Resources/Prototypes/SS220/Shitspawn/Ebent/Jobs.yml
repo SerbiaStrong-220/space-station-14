@@ -5,7 +5,7 @@
   parent: LockerCaptain
   id: LockerEbentIronSquadLeader
   name: "шкаф командира Железного Отряда"
-  suffix: Filled, Ebent
+  suffix: Filled, Shitspawn, Ebent
   components:
   - type: AccessReader
     access: []
@@ -27,7 +27,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateLeader
-  suffix: Ebent, Leader
+  suffix: Leader, Shitspawn, Ebent
   components:
     - type: StorageFill
       contents:
@@ -128,7 +128,7 @@
   parent: LockerChiefEngineer
   id: LockerEbentIronSquadEngineer
   name: "шкаф инженера Железного Отряда"
-  suffix: Filled, Ebent
+  suffix: Filled, Shitspawn, Ebent
   components:
   - type: AccessReader
     access: []
@@ -151,7 +151,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateEngineer
-  suffix: Ebent, Engineer
+  suffix: Shitspawn, Engineer, Ebent
   components:
     - type: StorageFill
       contents:
@@ -255,7 +255,7 @@
   parent: LockerMedical
   id: LockerEbentIronSquadCorpsman
   name: "шкаф медика Железного Отряда"
-  suffix: Filled, , Ebent
+  suffix: Filled, Shitspawn, Ebent
   components:
   - type: AccessReader
     access: []
@@ -273,7 +273,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateCorpsman
-  suffix: Ebent, Medic
+  suffix: Medic, Shitspawn, Ebent
   components:
     - type: StorageFill
       contents:
@@ -376,7 +376,7 @@
   parent: LockerChiefMedicalOfficer
   id: LockerEbentIronSquadCMO
   name: "шкаф главврача Железного Отряда"
-  suffix: Filled, , Ebent
+  suffix: Filled, Shitspawn, Ebent
   components:
   - type: AccessReader
     access: []
@@ -401,7 +401,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateCMO
-  suffix: Ebent, CMO
+  suffix: CMO, Shitspawn, Ebent
   components:
     - type: StorageFill
       contents:
@@ -504,7 +504,7 @@
   parent: LockerSyndicatePersonal
   id: LockerEbentIronSquadTrooper
   name: "шкаф бойца Железного Отряда"
-  suffix: Filled, Ebent
+  suffix: Filled, Shitspawn, Ebent
   components:
   - type: AccessReader
     access: []
@@ -521,7 +521,7 @@
   description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
   parent: ClothingBackpackSupaSyndicate
   id: ClothingBackpackSupaSyndicateTrooper
-  suffix: Ebent, Trooper
+  suffix: Trooper, Shitspawn, Ebent
   components:
     - type: StorageFill
       contents:
