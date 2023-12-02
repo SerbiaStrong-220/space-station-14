@@ -16,7 +16,7 @@
 
 - type: entity
   name: рюкзак СССП
-  description: "Стандартный рюкзак Красной Армии СССП."
+  description: Стандартный рюкзак Красной Армии СССП.
   parent: ClothingBackpackUSSP
   id: ClothingBackpackUSSPFilled
   suffix: Shitspawn, Ebent, СССП, Filled
