@@ -15,7 +15,7 @@
     - id: Stimpack
 
 - type: entity
-  name: "рюкзак СССП"
+  name: рюкзак СССП
   description: "Стандартный рюкзак Красной Армии СССП."
   parent: ClothingBackpackUSSP
   id: ClothingBackpackUSSPFilled
