@@ -59,8 +59,8 @@
 
 - type: entity
   parent: MachineStorage
-  id: MachineStorageSmartFridge
-  name: SmartFridge [SS220]
+  id: StorageSmartFridge
+  name: SmartFridge
   description: A refrigerated storage unit for keeping items cold and fresh.
   components:
   - type: Sprite
