@@ -36,7 +36,7 @@
   components:
   - type: GhostRole
     name: ghost-role-information-syndie-reinforcement-monkey-name
-    description: ghost-role-information-syndie-reinfosment-monkey- description
+    description: ghost-role-information-syndie-reinforcement-monkey-description
     rules: ghost-role-information-syndie-reinforcement-monkey-rules
   - type: GhostRoleMobSpawner
     prototype: MobMonkeySyndicateAgent
