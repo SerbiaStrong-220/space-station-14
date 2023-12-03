@@ -181,7 +181,8 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: TTS
+  - type: TTS # Corvax-TTS
+    voice: mana
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
