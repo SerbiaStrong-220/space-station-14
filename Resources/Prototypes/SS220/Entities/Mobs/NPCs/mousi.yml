@@ -181,6 +181,7 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
+  - type: TTS
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
