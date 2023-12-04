@@ -38,6 +38,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -51,6 +52,10 @@
       sprite: Clothing/Head/Hats/casa.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/casa.rsi
+    - type: Tag
+      tags:
+      - Ian
+
 
 - type: entity
   parent: ClothingHeadBase
@@ -65,6 +70,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -81,6 +87,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -97,6 +104,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -110,6 +118,9 @@
     sprite: Clothing/Head/Hats/beret_warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_warden.rsi
+  - type: Tag
+    tags:
+    - Ian
 
 - type: entity
   parent: ClothingHeadBase
@@ -157,6 +168,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -185,6 +197,9 @@
     sprite: Clothing/Head/Hats/centcom.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/centcom.rsi
+  - type: Tag
+    tags:
+    - Ian
 
 - type: entity
   parent: ClothingHeadBase
@@ -262,6 +277,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -278,6 +294,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -437,6 +454,9 @@
     sprite: Clothing/Head/Hats/ushanka.rsi
   - type: AddAccentClothing
     accent: RussianAccent
+  - type: Tag
+    tags:
+    - Ian
 
 - type: entity
   parent: ClothingHeadBase
@@ -659,6 +679,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
 
@@ -789,6 +810,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+    - Ian
     - HamsterWearable
 
 - type: entity
@@ -805,6 +827,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+    - Ian
     - HamsterWearable
 
 - type: entity
