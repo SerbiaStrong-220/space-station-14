@@ -87,12 +87,6 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: GenericVisualizer
-    visuals:
-      enum.PowerDeviceVisuals.Powered:
-        base:
-          True: { state: on }
-          False: { state: off }
   - type: PointLight
     radius: 1.5
     energy: 1.6

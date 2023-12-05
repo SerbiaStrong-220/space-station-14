@@ -7,7 +7,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 
 using System.Linq;
-using Content.Server.Administration.Logs;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
 using Content.Server.Emp;
@@ -45,17 +44,6 @@ namespace Content.Server.SS220.SmartFridge
     {
         [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
 
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-        [Dependency] private readonly SharedActionsSystem _action = default!;
-        [Dependency] private readonly PricingSystem _pricing = default!;
-        [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-
         private ISawmill _sawmill = default!;
 
         public override void Initialize()
@@ -92,7 +80,7 @@ namespace Content.Server.SS220.SmartFridge
                 return;
 
             сomponent.Denying = true;
-            Audio.PlayPvs(сomponent.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));
+            //Audio.PlayPvs(сomponent.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));//////////////
             TryUpdateVisualState(uid, сomponent);
         }
 
@@ -119,36 +107,6 @@ namespace Content.Server.SS220.SmartFridge
             }
 
             _appearanceSystem.SetData(uid, SmartFridgeVisuals.VisualState, finalState);
-        }
-        public override void Update(float frameTime)
-        {
-            base.Update(frameTime);
-
-            var query = EntityQueryEnumerator<SmartFridgeComponent>();
-            while (query.MoveNext(out var uid, out var comp))
-            {
-                if (comp.Denying)
-                {
-                    comp.DenyAccumulator += frameTime;
-                    if (comp.DenyAccumulator >= comp.DenyDelay)
-                    {
-                        comp.DenyAccumulator = 0f;
-                        comp.Denying = false;
-
-                        TryUpdateVisualState(uid, comp);
-                    }
-                }
-
-                if (comp.DispenseOnHitCoolingDown)
-                {
-                    comp.DispenseOnHitAccumulator += frameTime;
-                    if (comp.DispenseOnHitAccumulator >= comp.DispenseOnHitCooldown)
-                    {
-                        comp.DispenseOnHitAccumulator = 0f;
-                        comp.DispenseOnHitCoolingDown = false;
-                    }
-                }
-            }
         }
     }
 }
