@@ -2,7 +2,7 @@ using Content.Shared.Storage;
 using Content.Shared.VendingMachines;
 
 namespace Content.Shared.SS220.SmartFridge;
-public sealed class SharedSmartFridgeSystem : EntitySystem
+public abstract class SharedSmartFridgeSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entity = default!;
     public override void Initialize()

@@ -14,6 +14,7 @@
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/empty.rsi
+    snapCardinals: true
   - type: Physics
     bodyType: Static
   - type: Transform
@@ -36,6 +37,12 @@
     interfaces:
     - key: enum.SmartFridgeUiKey.Key
       type: SmartFridgeBoundUserInterface
+    - key: enum.WiresUiKey.Key
+      type: WiresBoundUserInterface
+  - type: WiresPanel
+  - type: Wires
+    boardName: wires-board-name-vendingmachine
+    layoutId: Vending
   - type: Anchorable
   - type: DoAfter
   - type: Electrified
@@ -51,6 +58,7 @@
     priority: Low
   - type: Actions
   - type: Appearance
+  - type: WiresVisuals
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -63,12 +71,22 @@
   name: SmartFridge
   description: A refrigerated storage unit for keeping items cold and fresh.
   components:
+  - type: SmartFridge
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+    loopDeny: false
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/smartfridge.rsi
     layers:
     - state: off
-      map: ["enum.VendingMachineVisualLayers.Base"]
+      map: ["enum.SmartFridgeVisualLayers.Base"]
+    - state: off
+      map: ["enum.SmartFridgeVisualLayers.BaseUnshaded"]
       shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
