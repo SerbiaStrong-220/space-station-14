@@ -82,17 +82,22 @@
     layers:
     - state: off
       map: ["enum.SmartFridgeVisualLayers.Base"]
+    - state: fill-0
+    - map: ["enum.StorageFillLayers.Fill"]
     - state: off
       map: ["enum.SmartFridgeVisualLayers.BaseUnshaded"]
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: StorageFillVisualizer
+    maxFillLevels: 4
+    fillBaseName: fill
   - type: PointLight
     radius: 1.5
     energy: 1.6
     color: "#9dc5c9"
   - type: Storage
-    maxSlots: 100
+    maxSlots: 8
     maxItemSize: Huge
     whitelist:
       components:
