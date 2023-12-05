@@ -1,17 +1,17 @@
 - type: gameMap
-  id: SS220Avrite
+  id: 220Avrite
   mapName: 'Avrite Station'
   mapPath: /Maps/ss220_avrit.yml
   minPlayers: 0
   stations:
     Avrit:
-      stationProto: AvriteNanotrasenStation
+      stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
           mapNameTemplate: '{0} Avrite {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: '-SS220'
+            prefixCreator: 'TG'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/emergency_ss220avrit.yml
         - type: StationJobs
@@ -62,15 +62,5 @@
             SeniorEngineer: [ 1, 1 ]
             BlueShield: [ 1, 1 ] #SS220-BS
             Brigmedic: [ 1, 1 ] # SS220-BM
-            SecurityPilot: [ 1, 1 ] #SS220-SP
-            
-- type: entity
-  id: AvriteNanotrasenStation
-  parent: StandardNanotrasenStation
-  noSpawn: true
-  components:
-    - type: StationMinimap
-      minimapData: !type:StationMinimapData
-        mapTexture: SS220/ViewableMaps/Avrit.png
-        originOffset: -44, -407
-        mapScale: 6.4
+            Borg: [ 2, 2 ]
+            SecurityPilot: [ 1, 1 ]
