@@ -1,5 +1,6 @@
 using Content.Client.SS220.SmartFridge.UI;
 using Content.Shared.Storage;
+using Content.Shared.SS220.SmartFridge;
 using Content.Shared.VendingMachines;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
@@ -27,26 +28,19 @@ namespace Content.Client.SS220.SmartFridge
         {
             base.Open();
 
-            var smartFridgeSys = EntMan.System<SmartFridgeSystem>();
-
-            _cachedInventory = smartFridgeSys.GetAllInventory(Owner);
-
             _menu = new SmartFridgeMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
 
             _menu.OnClose += Close;
             _menu.OnItemSelected += OnItemSelected;
             _menu.OnSearchChanged += OnSearchChanged;
 
-            _menu.Populate(_cachedInventory, out _cachedFilteredIndex);
-
+            UpdateUI();
 
             _menu.OpenCentered();
         }
 
         private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
         {
-
-            var smartFridgeSys = EntMan.System<SmartFridgeSystem>();
 
             if (_cachedInventory.Count == 0)
                 return;
@@ -59,6 +53,12 @@ namespace Content.Client.SS220.SmartFridge
             //SendPredictedMessage(new SmartFridgeInteractWithItemEvent(selectedItem.EntityUids[0]));
             SendPredictedMessage(new StorageInteractWithItemEvent(selectedItem.EntityUids[0]));
 
+            UpdateUI();
+        }
+
+        public void UpdateUI()
+        {
+            var smartFridgeSys = EntMan.System<SharedSmartFridgeSystem>();
             _cachedInventory = smartFridgeSys.GetAllInventory(Owner);
             _menu?.Populate(_cachedInventory, out _cachedFilteredIndex);
         }
