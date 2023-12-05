@@ -1,0 +1,51 @@
+- type: entity
+  id: CQCBlowback
+  name: action-cqc-blowback
+  description: action-cqc-blowback-desc
+  noSpawn: true
+  components:
+  - type: EntityTargetAction
+    icon: SS220/Interface/actions/GhostRoleCast.png
+    event: !type:CQCBlowbackEvent
+    useDelay: 12
+    checkCanInteract: false
+    priority: -3
+
+- type: entity
+  id: CQCPunch
+  name: action-cqc-punch
+  description: action-cqc-punch-desc
+  noSpawn: true
+  components:
+  - type: EntityTargetAction
+    icon: SS220/Interface/actions/GhostRoleCast.png
+    event: !type:CQCPunchEvent
+    useDelay: 4
+    checkCanInteract: false
+    priority: -3
+
+- type: entity
+  id: CQCDisarm
+  name: action-cqc-disarm
+  description: action-cqc-disarm-desc
+  noSpawn: true
+  components:
+  - type: EntityTargetAction
+    icon: SS220/Interface/actions/GhostRoleCast.png
+    event: !type:CQCDisarmEvent
+    useDelay: 8
+    checkCanInteract: false
+    priority: -3
+
+- type: entity
+  id: CQCLongSleep
+  name: action-cqc-longsleep
+  description: action-cqc-longsleep-desc
+  noSpawn: true
+  components:
+  - type: InstantAction
+    icon: SS220/Interface/actions/GhostRoleCast.png
+    event: !type:CQCLongSleepEvent
+    useDelay: 35
+    checkCanInteract: false
+    priority: -3

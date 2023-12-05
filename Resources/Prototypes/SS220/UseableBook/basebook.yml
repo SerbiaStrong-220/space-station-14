@@ -1,0 +1,24 @@
+- type: entity
+  id: basebook
+  parent: BaseItem
+  name: Base book
+  description: Essential to become robust.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: book7
+  - type: Tag
+    tags:
+    - Book
+  - type: UseableBook
+    readTime: 3
+    leftUses: 1
+    canUseOneTime: false
+    componentsOnRead:
+    - type: CQCCombat
+      availableSpells:
+      - NonLethalBlowback
+      - NonLethalPunch
+      - NonLethalDisarm
+      - NonLethalLongSleep
