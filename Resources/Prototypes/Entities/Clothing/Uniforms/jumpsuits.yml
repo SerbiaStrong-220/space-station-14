@@ -805,6 +805,10 @@
     sprite: Clothing/Uniforms/Jumpsuit/lawyerblack.rsi
 
 - type: entity
+  parent: ClothingUniformJumpsuitLawyerBlack
+  id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
+
+- type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitLawyerPurple
   name: purple lawyer suit

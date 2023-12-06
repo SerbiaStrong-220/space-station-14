@@ -36,5 +36,6 @@
   - type: StorageFill
     contents:
       - id: ClothingEyesGlassesSunglasses
-      - id: SpaceCash1000
-        amount: 5
+      - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
+      - id: ClothingShoesBootsLaceup
+      - id: SpaceCashFake50000
