@@ -20,5 +20,5 @@ ent-ClothingEyesHudMultiversal = multiversal hud
     .desc = Filler
 ent-ClothingEyesHudOmni = omni hud
     .desc = Filler
-ent-ClothingEyesHudSyndicate = визор Синдиката
-    .desc = Профессиональный дисплей Синдиката, одевающийся на голову, предназначен для лучшего обнаружения гуманоидных целей и их последующего уничтожения.
+ent-ClothingEyesHudSyndicate = визор оперативника
+    .desc = Профессиональный визор со встроенной индикацией "свой-чужой", предназначен для обнаружения и индификации гуманоидных целей для их последующего уничтожения.
