@@ -477,6 +477,14 @@ public abstract partial class SharedBuckleSystem
                 //SS220-Vehicle-doafter-fix end
                 return false;
             }
+
+            // If the strap is a vehicle and the rider is not the person unbuckling, return. Unless the rider is crit or dead.
+            //if (TryComp<VehicleComponent>(strapUid, out var vehicle) && vehicle.Rider != userUid && !_mobState.IsIncapacitated(buckleUid))
+            //    return false;
+
+            // If the person is crit or dead in any kind of strap, return. This prevents people from unbuckling themselves while incapacitated.
+            if (_mobState.IsIncapacitated(buckleUid) && userUid == buckleUid)
+                return false;
         }
 
         // Logging
@@ -531,8 +539,10 @@ public abstract partial class SharedBuckleSystem
 
         _joints.RefreshRelay(buckleUid);
         Appearance.SetData(strapUid, StrapVisuals.State, strapComp.BuckledEntities.Count != 0);
-        var audioSourceUid = userUid != buckleUid ? userUid : strapUid;
-        _audio.PlayPredicted(strapComp.UnbuckleSound, strapUid, audioSourceUid);
+
+        // TODO: Buckle listening to moveevents is sussy anyway.
+        if (!TerminatingOrDeleted(strapUid))
+            _audio.PlayPredicted(strapComp.UnbuckleSound, strapUid, userUid);
 
         var ev = new BuckleChangeEvent(strapUid, buckleUid, false);
         RaiseLocalEvent(buckleUid, ref ev);

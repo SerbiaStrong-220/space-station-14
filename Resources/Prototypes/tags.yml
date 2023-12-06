@@ -648,6 +648,9 @@
   id: Lemon
 
 - type: Tag
+  id: LightReplacer
+
+- type: Tag
   id: Lime
 
 - type: Tag
@@ -974,6 +977,9 @@
 
 - type: Tag
   id: SpeedLoaderRifle
+
+- type: Tag
+  id: SpiderCraft
 
 - type: Tag
   id: SpreaderIgnore

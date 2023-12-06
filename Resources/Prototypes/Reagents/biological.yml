@@ -5,6 +5,9 @@
   desc: reagent-desc-blood
   flavor: metallic
   color: "#800000"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/bloodglass.rsi
+    state: icon
   recognizable: true
   physicalDesc: reagent-physical-desc-ferrous
   slippery: false
@@ -31,6 +34,16 @@
         - !type:AdjustReagent
           reagent: UncookedAnimalProteins
           amount: 0.5
+    Medicine:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Bloodsucker
+        damage:
+          groups:
+            Brute: -4
+            Burn: -2
   plantMetabolism:
     - !type:PlantAdjustWater
       amount: 0.5

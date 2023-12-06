@@ -1,3 +1,4 @@
+# When adding new food also add to random spawner located in Resources\Prototypes\Entities\Markers\Spawners\Random\Food_Drinks\food_produce.yml
 # For produce that can't be immediately eaten
 
 - type: entity
@@ -186,7 +187,7 @@
   - type: MeleeChemicalInjector
     transferAmount: 6
     solution: food
-    pierceArmor: true # We do a little trolling
+    pierceArmor: false
   - type: Extractable
     grindableSolutionName: food
 
@@ -303,6 +304,28 @@
   - type: Extractable
     grindableSolutionName: food
   - type: SpaceGarbage
+
+- type: entity
+  name: baked banana peel
+  parent: TrashBananaPeel
+  id: TrashBakedBananaPeel
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/banana.rsi
+    state: baked-peel
+  - type: Item
+    sprite: Objects/Specific/Hydroponics/banana.rsi
+    heldPrefix: baked-peel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: PulpedBananaPeel
+          Quantity: 1
+        - ReagentId: Bananadine
+          Quantity: 1
+        - ReagentId: Carbon
+          Quantity: 2
 
 - type: entity
   name: mimana peel
@@ -446,6 +469,37 @@
   - type: Tag
     tags:
     - Lemon
+    - Fruit
+
+- type: entity
+  name: lemoon
+  parent: FoodProduceBase
+  id: FoodLemoon
+  description: People says Moon is made out of cheese, but Moon is actually made out of milk and laurel!
+  components:
+  - type: FlavorProfile
+    flavors:
+      - lemoon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 18
+        reagents:
+        - ReagentId: Vitamin
+          Quantity: 4
+        - ReagentId: Milk
+          Quantity: 16
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/lemoon.rsi
+  - type: Produce
+    seedId: lemoon
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Sake #the best drink while watching moon
+        Quantity: 10
+  - type: Tag
+    tags:
     - Fruit
 
 - type: entity
@@ -1636,3 +1690,31 @@
   - type: Tag
     tags:
     - Fruit
+
+- type: entity
+  name: cotton bol
+  description: Moth people's favorite snack, and just as fluffy as them.
+  id: CottonBol
+  parent: FoodProduceBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/cotton.rsi
+  - type: FlavorProfile
+    flavors:
+      - cotton
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Log
+    spawnedPrototype: MaterialCotton1
+    spawnCount: 2
+  - type: Produce
+    seedId: cotton
+  - type: Tag
+    tags:
+    - ClothMade

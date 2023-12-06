@@ -63,6 +63,13 @@
   - type: Construction
     graph: WindowDirectional
     node: plasmaWindowDirectional
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 12
+    trackAllDamage: true
+    damageOverlay:
+      sprite: Structures/Windows/cracks_directional.rsi
   - type: Destructible
     thresholds:
     - trigger:
@@ -100,7 +107,7 @@
     state: state0
   - type: IconSmooth
     mode: Diagonal
-    key: windows
+    key: walls  # Corvax-Resprite
     base: state
   - type: Icon
     sprite: Structures/Windows/plasma_diagonal.rsi
