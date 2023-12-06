@@ -47,9 +47,10 @@ namespace Content.Client.Administration.UI.Tabs.AdminTab
         //SS220-antag-add-objective begin
         private void AddTargetButtonOnWindowCreated(DefaultWindow window)
         {
-            var addObjectiveWindow = (AddObjectiveWindow) window;
+            // This is dumb.
             if (_selectedAntagonist is null)
                 return;
+            var addObjectiveWindow = (AddObjectiveWindow) window;
             var antagSession = IoCManager.Resolve<IPlayerManager>().GetSessionById(_selectedAntagonist.SessionId);
             addObjectiveWindow.SetAntagonist(antagSession);
         }
