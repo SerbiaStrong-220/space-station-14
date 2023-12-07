@@ -76,8 +76,10 @@ public sealed partial class AnomalySystem
     {
         if (args.Target is not { } target)
             return;
+        /*
         if (!HasComp<AnomalyComponent>(target))
             return;
+        */
         if (!args.CanReach)
             return;
 
@@ -116,7 +118,8 @@ public sealed partial class AnomalySystem
 
     public void UpdateScannerWithNewAnomaly(EntityUid scanner, EntityUid anomaly, AnomalyScannerComponent? scannerComp = null, AnomalyComponent? anomalyComp = null)
     {
-        if (!Resolve(scanner, ref scannerComp) || !Resolve(anomaly, ref anomalyComp))
+        // SS220 change to be able to scan anything with scaner
+        if (!Resolve(scanner, ref scannerComp)/* || !Resolve(anomaly, ref anomalyComp)*/)
             return;
 
         scannerComp.ScannedAnomaly = anomaly;
@@ -126,9 +129,15 @@ public sealed partial class AnomalySystem
     public FormattedMessage GetScannerMessage(AnomalyScannerComponent component)
     {
         var msg = new FormattedMessage();
-        if (component.ScannedAnomaly is not { } anomaly || !TryComp<AnomalyComponent>(anomaly, out var anomalyComp))
+        // SS220 change to be able to scan anomalies
+        if (component.ScannedAnomaly is not { } anomaly)
         {
             msg.AddMarkup(Loc.GetString("anomaly-scanner-no-anomaly"));
+            return msg;
+        }
+        if (!TryComp<AnomalyComponent>(anomaly, out var anomalyComp))
+        {
+            msg.AddMarkup(Loc.GetString("anomaly-scanner-isnt-anomaly"));
             return msg;
         }
 

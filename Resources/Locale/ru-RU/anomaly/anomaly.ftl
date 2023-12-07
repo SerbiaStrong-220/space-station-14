@@ -10,6 +10,7 @@ anomaly-particles-omega = Омега-частицы
 anomaly-scanner-component-scan-complete = Сканирование завершено!
 anomaly-scanner-ui-title = сканер аномалий
 anomaly-scanner-no-anomaly = Нет просканированной аномалии.
+anomaly-scanner-isnt-anomaly = [bold][color = red]ОШИБКА:[/color][/bold] ОБЪЕКТ НЕ ЯВЛЯЕТСЯ АНОМАЛИЕЙ!
 anomaly-scanner-severity-percentage = Текущая опасность: [color=gray]{ $percent }[/color]
 anomaly-scanner-stability-low = Текущее состояние аномалии: [color=gold]Распад[/color]
 anomaly-scanner-stability-medium = Текущее состояние аномалии: [color=forestgreen]Стабильное[/color]
