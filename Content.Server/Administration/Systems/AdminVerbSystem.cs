@@ -238,7 +238,11 @@ namespace Content.Server.Administration.Systems
                         {
                             var ui = new AdminLogsEui();
                             _eui.OpenEui(ui, player);
-                            ui.SetLogFilter(search:args.Target.GetHashCode().ToString());
+                            // ui.SetLogFilter(search:args.Target.GetHashCode().ToString());
+                            // SS220 log filter fix.
+                            // Logs try to filtered by HasCode, but there is no HasCode in logs.
+                            // That's why logs not filtered. Add old filter by Id, that represented in logs.
+                            ui.SetLogFilter(search: args.Target.Id.ToString());
                         },
                         Impact = LogImpact.Low
                     };
