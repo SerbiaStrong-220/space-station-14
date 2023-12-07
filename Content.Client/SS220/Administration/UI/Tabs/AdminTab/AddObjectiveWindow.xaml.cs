@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Player;
 
-namespace Content.Client.SS220.Administration;
+namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
 
 [GenerateTypedNameReferences]
 public partial class AddObjectiveWindow : DefaultWindow
