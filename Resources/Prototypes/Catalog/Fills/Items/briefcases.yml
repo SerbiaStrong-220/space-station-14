@@ -36,6 +36,8 @@
   - type: StorageFill
     contents:
       - id: ClothingEyesGlassesSunglasses
+      # SS220-lobbying-bundle-fake-money begin
       - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
       - id: ClothingShoesBootsLaceup
       - id: SpaceCashFake50000
+      # SS220-lobbying-bundle-fake-money end
