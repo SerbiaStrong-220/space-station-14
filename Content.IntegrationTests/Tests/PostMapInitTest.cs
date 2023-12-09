@@ -62,8 +62,8 @@ namespace Content.IntegrationTests.Tests
             "Marathon",
             "Kettle",
             "Gemini",
-			      "MeteorArena",
-			      "Atlas",
+			"MeteorArena",
+			"Atlas",
 
             // Corvax Maps
             "CorvaxAvrite",
