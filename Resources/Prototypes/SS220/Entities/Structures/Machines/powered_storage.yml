@@ -91,7 +91,7 @@
     energy: 1.6
     color: "#9dc5c9"
   - type: Storage
-    maxSlots: 150
+    maxTotalWeight: 400
     maxItemSize: Huge
     whitelist:
       components:
