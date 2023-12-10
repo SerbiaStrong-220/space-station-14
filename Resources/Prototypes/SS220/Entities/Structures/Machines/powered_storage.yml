@@ -91,7 +91,8 @@
     energy: 1.6
     color: "#9dc5c9"
   - type: Storage
-    maxTotalWeight: 400
+    grid:
+    - 0,0,20,20
     maxItemSize: Huge
     whitelist:
       components:
