@@ -1,7 +1,7 @@
 - type: entity
   id: MachineStorage
   parent: BaseMachinePowered
-  name: machine storage
+  name: MachineStorage
   description: its just a backpack, but too heavy, and with additional features
   abstract: true
   components:
@@ -37,12 +37,6 @@
     interfaces:
     - key: enum.SmartFridgeUiKey.Key
       type: SmartFridgeBoundUserInterface
-    - key: enum.WiresUiKey.Key
-      type: WiresBoundUserInterface
-  - type: WiresPanel
-  - type: Wires
-    boardName: wires-board-name-vendingmachine
-    layoutId: Vending
   - type: Anchorable
   - type: DoAfter
   - type: Electrified
@@ -58,7 +52,6 @@
     priority: Low
   - type: Actions
   - type: Appearance
-  - type: WiresVisuals
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -85,15 +78,13 @@
     - state: off
       map: ["enum.SmartFridgeVisualLayers.BaseUnshaded"]
       shader: unshaded
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-    - state: fill-2
+    - state: fill-3
       map: ["enum.PowerDeviceVisuals.Powered"]
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
         base:
-          True: { state: fill-2 }
+          True: { state: fill-3 }
           False: { state: off }
   - type: PointLight
     radius: 1.5

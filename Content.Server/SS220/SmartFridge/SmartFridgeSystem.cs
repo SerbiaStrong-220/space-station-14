@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.SmartFridge;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -5,38 +7,6 @@ using Content.Server.UserInterface;
 using Content.Shared.Destructible;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-
-using System.Linq;
-using System.Numerics;
-using Content.Server.Cargo.Systems;
-using Content.Server.Emp;
-using Content.Server.Power.Components;
-using Content.Server.Power.EntitySystems;
-using Content.Server.UserInterface;
-using Content.Shared.Access.Components;
-using Content.Shared.Access.Systems;
-using Content.Shared.Actions;
-using Content.Shared.Damage;
-using Content.Shared.Database;
-using Content.Shared.Destructible;
-using Content.Shared.DoAfter;
-using Content.Shared.Emag.Components;
-using Content.Shared.Emag.Systems;
-using Content.Shared.Emp;
-using Content.Shared.Hands.Components;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction;
-using Content.Shared.Popups;
-using Content.Shared.Throwing;
-using Content.Shared.VendingMachines;
-using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
-using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
-
-
 
 namespace Content.Server.SS220.SmartFridge
 {
@@ -80,7 +50,7 @@ namespace Content.Server.SS220.SmartFridge
                 return;
 
             сomponent.Denying = true;
-            //Audio.PlayPvs(сomponent.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));//////////////
+            Audio.PlayPvs(сomponent.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));
             TryUpdateVisualState(uid, сomponent);
         }
 

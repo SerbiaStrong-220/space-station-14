@@ -1,5 +1,6 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.SmartFridge.UI;
-using Content.Shared.Storage;
 using Content.Shared.SS220.SmartFridge;
 using Content.Shared.VendingMachines;
 using Robust.Client.UserInterface.Controls;
@@ -17,8 +18,6 @@ namespace Content.Client.SS220.SmartFridge
 
         [ViewVariables]
         private List<int> _cachedFilteredIndex = new();
-
-        [Dependency] private readonly IEntityManager _entManager = default!;
 
         public SmartFridgeBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
@@ -50,8 +49,7 @@ namespace Content.Client.SS220.SmartFridge
             if (selectedItem == null)
                 return;
 
-            //SendPredictedMessage(new SmartFridgeInteractWithItemEvent(selectedItem.EntityUids[0]));
-            SendPredictedMessage(new StorageInteractWithItemEvent(selectedItem.EntityUids[0]));
+            SendPredictedMessage(new SmartFridgeInteractWithItemEvent(selectedItem.EntityUids[0]));
 
             UpdateUI();
         }
