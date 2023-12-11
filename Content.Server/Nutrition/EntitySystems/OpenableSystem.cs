@@ -1,6 +1,7 @@
 using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Nutrition.Components;
+using Content.Server.SS220.BottleOpener;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -32,12 +33,23 @@ public sealed class OpenableSystem : EntitySystem
         SubscribeLocalEvent<OpenableComponent, SolutionTransferAttemptEvent>(OnTransferAttempt);
         SubscribeLocalEvent<OpenableComponent, MeleeHitEvent>(HandleIfClosed);
         SubscribeLocalEvent<OpenableComponent, AfterInteractEvent>(HandleIfClosed);
+        SubscribeLocalEvent<OpenableComponent, InteractUsingEvent>(OnInteractUsing); // SS220 Bottle Opener
     }
 
     private void OnInit(EntityUid uid, OpenableComponent comp, ComponentInit args)
     {
         UpdateAppearance(uid, comp);
     }
+
+    // SS220 Bottle Opener begin
+    private void OnInteractUsing(EntityUid uid, OpenableComponent comp, InteractUsingEvent args)
+    {
+        if (comp.OpenableByHand || !HasComp<BottleOpenerComponent>(args.Used) || comp.Opened)
+            return;
+
+        TryOpen(uid, comp);
+    }
+    // SS220 Bottle Opener end
 
     private void OnUse(EntityUid uid, OpenableComponent comp, UseInHandEvent args)
     {
