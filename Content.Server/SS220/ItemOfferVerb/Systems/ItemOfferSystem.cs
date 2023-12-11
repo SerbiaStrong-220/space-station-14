@@ -5,7 +5,6 @@ using Content.Server.Popups;
 using Content.Server.SS220.ItemOfferVerb.Components;
 using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
-using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
@@ -17,16 +16,15 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
 {
     public sealed class ItemOfferSystem : EntitySystem
     {
-        [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
         [Dependency] private readonly EntityManager _entMan = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly HandsSystem _hands = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
         public override void Initialize()
         {
             base.Initialize();
             SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
+            SubscribeLocalEvent<ItemReceiverComponent, MoveEvent>(CancelOffer);
         }
 
         private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
@@ -40,20 +38,11 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 Text = "Передать предмет",
                 Act = () =>
                 {
-                    // This is bullshit-code.
-                    if (!TryComp<ItemReceiverComponent>(uid, out var itemReceiverComponent))
-                    {
-                        _alerts.ShowAlert(uid, AlertType.ItemOffer);
-                        _popupSystem.PopupEntity($"{Name(args.User)} протягивает {Name(args.Hands.ActiveHandEntity!.Value)} {Name(uid)}", args.User, PopupType.Small);
-                        var newcomp = _entMan.AddComponent<ItemReceiverComponent>(uid);
-                        newcomp.Giver = args.User;
-                        newcomp.Item = args.Hands.ActiveHandEntity;
-                    }
-                    else
-                    {
-                        itemReceiverComponent.Giver = args.User;
-                        itemReceiverComponent.Item = args.Hands.ActiveHandEntity;
-                    };
+                    var itemReceiver = EnsureComp<ItemReceiverComponent>(uid);
+                    itemReceiver.Giver = args.User;
+                    itemReceiver.Item = args.Hands.ActiveHandEntity;
+                    _alerts.ShowAlert(uid, AlertType.ItemOffer);
+                    _popupSystem.PopupEntity($"{Name(args.User)} протягивает {Name(args.Hands.ActiveHandEntity!.Value)} {Name(uid)}", args.User, PopupType.Small);
                 },
             };
 
@@ -70,6 +59,16 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 _alerts.ClearAlert(receiver, AlertType.ItemOffer);
                 _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
             };
+        }
+
+        private void CancelOffer(EntityUid uid, ItemReceiverComponent comp, MoveEvent ev)
+        {
+            var pos = Transform(comp.Giver).Coordinates;
+            if(!ev.NewPosition.InRange(EntityManager, pos, comp.ReceiveRange))
+            {
+                _alerts.ClearAlert(comp.Owner, AlertType.ItemOffer);
+                _entMan.RemoveComponent<ItemReceiverComponent>(comp.Owner);
+            }
         }
 
         private bool FindFreeHand(HandsComponent component, [NotNullWhen(true)] out string? freeHand)
