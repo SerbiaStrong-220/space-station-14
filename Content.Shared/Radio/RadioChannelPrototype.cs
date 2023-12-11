@@ -40,7 +40,7 @@ public sealed partial class RadioChannelPrototype : IPrototype
     /// <summary>
     ///     Determines the visibility of the key during inspection
     /// </summary>
-    [DataField("visibilityChannel")]
-    public bool? VisibilityChannel = true;
+    [DataField("stealthChannel")]
+    public bool? StealthChannel = true;
     //SS220-synd_key_stalth
 }

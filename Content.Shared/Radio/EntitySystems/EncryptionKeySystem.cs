@@ -217,7 +217,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             proto = _protoManager.Index<RadioChannelPrototype>(id);
 
             //SS220-synd_key_stalth
-            if (id != defaultChannel && proto.VisibilityChannel == false)
+            if (id != defaultChannel && proto.StealthChannel == true)
                 return;
             //SS220-synd_key_stalth
 
