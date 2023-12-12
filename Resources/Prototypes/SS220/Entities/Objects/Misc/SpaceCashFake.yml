@@ -1,6 +1,4 @@
-# ss220
-# Needed for Syndie Lobbying Bundle
-# BriefcaseSyndieLobbyingBundleFilled
+# Needed for Syndie Lobbying Bundle | BriefcaseSyndieLobbyingBundleFilled
 - type: entity
   parent: BaseItem
   id: SpaceCashFake
@@ -50,7 +48,7 @@
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
   spawn: SpaceCashFake
 
-# ss220 for BriefcaseSyndieLobbyingBundleFilled
+# material for SpaceCashFake and fackeCash price
 - type: material
   id: FakeCredit
   name: speso
@@ -59,6 +57,7 @@
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
   price: 0.2
 
+# for shitspawn
 - type: entity
   parent: SpaceCashFake
   id: SpaceCashFake50000
