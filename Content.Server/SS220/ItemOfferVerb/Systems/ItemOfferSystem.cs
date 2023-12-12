@@ -7,8 +7,6 @@ using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.Player;
-using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -20,6 +18,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly HandsSystem _hands = default!;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -64,11 +63,10 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         private void CancelOffer(EntityUid uid, ItemReceiverComponent comp, MoveEvent ev)
         {
             var pos = Transform(comp.Giver).Coordinates;
-            if(!ev.NewPosition.InRange(EntityManager, pos, comp.ReceiveRange))
-            {
-                _alerts.ClearAlert(comp.Owner, AlertType.ItemOffer);
-                _entMan.RemoveComponent<ItemReceiverComponent>(comp.Owner);
-            }
+            if (ev.NewPosition.InRange(EntityManager, pos, comp.ReceiveRange))
+                return;
+            _alerts.ClearAlert(uid, AlertType.ItemOffer);
+            _entMan.RemoveComponent<ItemReceiverComponent>(uid);
         }
 
         private bool FindFreeHand(HandsComponent component, [NotNullWhen(true)] out string? freeHand)
