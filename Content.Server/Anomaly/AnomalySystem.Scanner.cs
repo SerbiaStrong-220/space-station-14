@@ -76,10 +76,12 @@ public sealed partial class AnomalySystem
     {
         if (args.Target is not { } target)
             return;
+        // BEGIN SS220 removed to be able to scan anything with scanner
         /*
         if (!HasComp<AnomalyComponent>(target))
             return;
         */
+        // END SS220 removed to be able to scan anything with scanner
         if (!args.CanReach)
             return;
 
@@ -118,10 +120,10 @@ public sealed partial class AnomalySystem
 
     public void UpdateScannerWithNewAnomaly(EntityUid scanner, EntityUid anomaly, AnomalyScannerComponent? scannerComp = null, AnomalyComponent? anomalyComp = null)
     {
-        // SS220 change to be able to scan anything with scaner
+        // BEGIN SS220 change to be able to scan anything with scanner
         if (!Resolve(scanner, ref scannerComp)/* || !Resolve(anomaly, ref anomalyComp)*/)
             return;
-
+        // END SS220 change to be able to scan anything with scanner
         scannerComp.ScannedAnomaly = anomaly;
         UpdateScannerUi(scanner, scannerComp);
     }
@@ -129,7 +131,7 @@ public sealed partial class AnomalySystem
     public FormattedMessage GetScannerMessage(AnomalyScannerComponent component)
     {
         var msg = new FormattedMessage();
-        // SS220 change to be able to scan anomalies
+        // BEGIN SS220 change to be able to scan anomalies (message on the scanner)
         if (component.ScannedAnomaly is not { } anomaly)
         {
             msg.AddMarkup(Loc.GetString("anomaly-scanner-no-anomaly"));
@@ -140,7 +142,7 @@ public sealed partial class AnomalySystem
             msg.AddMarkup(Loc.GetString("anomaly-scanner-isnt-anomaly"));
             return msg;
         }
-
+        // END SS220 change to be able to scan anomalies (message on the scanner)
         msg.AddMarkup(Loc.GetString("anomaly-scanner-severity-percentage", ("percent", anomalyComp.Severity.ToString("P"))));
         msg.PushNewline();
         string stateLoc;
