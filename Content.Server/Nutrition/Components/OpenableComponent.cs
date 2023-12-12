@@ -43,4 +43,15 @@ public sealed partial class OpenableComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("canOpenSounds");
+
+    // SS220 BottleClose begin
+    [DataField("bottleCapPrototypeID")]
+    public string? BottleCapPrototypeID;
+
+    [DataField("sealOpened"), ViewVariables(VVAccess.ReadWrite)]
+    public bool SealOpened = true;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool HasPlayedSound;
+
 }

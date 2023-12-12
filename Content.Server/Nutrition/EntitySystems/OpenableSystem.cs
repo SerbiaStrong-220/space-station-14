@@ -44,7 +44,7 @@ public sealed class OpenableSystem : EntitySystem
     // SS220 Bottle Opener begin
     private void OnInteractUsing(EntityUid uid, OpenableComponent comp, InteractUsingEvent args)
     {
-        if (comp.OpenableByHand || !HasComp<BottleOpenerComponent>(args.Used) || comp.Opened)
+        if (comp.SealOpened || comp.Opened || !HasComp<BottleOpenerComponent>(args.Used))
             return;
 
         TryOpen(uid, comp);
@@ -53,7 +53,7 @@ public sealed class OpenableSystem : EntitySystem
 
     private void OnUse(EntityUid uid, OpenableComponent comp, UseInHandEvent args)
     {
-        if (args.Handled || !comp.OpenableByHand)
+        if (args.Handled || !comp.OpenableByHand || !comp.SealOpened)
             return;
 
         args.Handled = TryOpen(uid, comp);
@@ -148,7 +148,14 @@ public sealed class OpenableSystem : EntitySystem
             return false;
 
         SetOpen(uid, true, comp);
-        _audio.PlayPvs(comp.Sound, uid);
+        if (!comp.SealOpened) // SS220 Bottle close
+            comp.SealOpened = true;
+
+        if (!comp.HasPlayedSound)
+        {
+            _audio.PlayPvs(comp.Sound, uid);
+            comp.HasPlayedSound = true;
+        }
         return true;
     }
 }

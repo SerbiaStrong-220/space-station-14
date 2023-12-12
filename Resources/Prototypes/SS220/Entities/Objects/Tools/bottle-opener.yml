@@ -1,0 +1,14 @@
+- type: entity
+  name: bottle opener
+  parent: BaseItem
+  id: BottleOpener
+  description: "Этим предметом бармен может выдавить себе глаз или открыть вам бутылочку пенного."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/bottle-opener.rsi
+    state: icon
+  - type: Item
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 0
