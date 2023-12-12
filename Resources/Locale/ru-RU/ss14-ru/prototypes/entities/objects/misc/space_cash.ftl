@@ -15,13 +15,11 @@ ent-SpaceCash1000 = кредитов
 ent-SpaceCash1000000 = кредитов
     .suffix = 1000000
     .desc = { ent-SpaceCash.desc }
-ent-SpaceCashFake = кредитов
+# SS220 Lobbying-Bundle fake credits
+ent-SpaceCashFake = кредиты
     .suffix = fake, фейк
     .desc = ДЕНЬГИ! ДЕНЬГИ! ДЕНЬГИ! Я ЛЮБЛЮ ДЕНЬГИ!
-# SS220 Lobbying-Bundle fake credits
 ent-SpaceCashFake50000 = { ent-SpaceCashFake }
     .suffix = 50000,fake,фейк,набор лоббиста
     .desc = { ent-SpaceCashFake.desc }
-ent-FakeCredit = кредитов
-    .name = кредитов
-    .desc = { ent-SpaceCashFake.desc }
+
