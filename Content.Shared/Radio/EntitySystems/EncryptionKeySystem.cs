@@ -216,10 +216,10 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         {
             proto = _protoManager.Index<RadioChannelPrototype>(id);
 
-            //SS220-synd_key_stalth
+            //SS220-synd_key_stealth begin
             if (id != defaultChannel && proto.StealthChannel == true)
                 return;
-            //SS220-synd_key_stalth
+            //SS220-synd_key_stealth end
 
             var key = id == SharedChatSystem.CommonChannel
                 ? SharedChatSystem.RadioCommonPrefix.ToString()
