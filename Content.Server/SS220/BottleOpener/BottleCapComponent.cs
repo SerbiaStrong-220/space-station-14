@@ -8,5 +8,5 @@ namespace Content.Server.SS220.BottleOpener;
 public sealed partial class BottleCapComponent : Component
 {
     [DataField("bottleProtoypeID")]
-    public string BottlePrototypeID;
+    public string? BottlePrototypeID;
 }

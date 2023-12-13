@@ -1,5 +1,5 @@
 - type: entity
-  name: bottle opener
+  name: Открывашка
   parent: BaseItem
   id: BottleOpener
   description: "Этим предметом бармен может выдавить себе глаз или открыть вам бутылочку пенного."
@@ -12,3 +12,4 @@
     damage:
       types:
         Blunt: 0
+  - type: BottleOpener

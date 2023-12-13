@@ -1,0 +1,14 @@
+- type: entity
+  name: Крышечка
+  parent: BaseItem
+  id: BottleCap
+  description: "Прекрасная металлическая крышечка от не менее прекрасного напитка. Думаю, ей найдется применение, когда я утолю жажду."
+  components:
+# Add RandomSprite component
+  - type: Sprite
+    sprite: SS220/Objects/Misc/cap.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+  - type: BottleCap
+

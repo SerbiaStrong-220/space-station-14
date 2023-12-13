@@ -5,6 +5,7 @@
   abstract: true
   components:
   - type: Openable
+    sealOpened: false
     sound:
       collection: bottleOpenSounds
   - type: SolutionContainerManager
@@ -239,6 +240,8 @@
   name: warlock's velvet bottle
   description: What a delightful packaging for a surely high quality wine! The vintage must be amazing!
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -254,6 +257,8 @@
   name: captain pete's Cuban spiced rum
   description: This isn't just rum, oh no. It's practically GRIFF in a bottle.
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -301,6 +306,8 @@
   name: caccavo guaranteed quality tequila bottle
   description: Made from premium petroleum distillates, pure thalidomide and other fine quality ingredients!
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -316,6 +323,8 @@
   name: goldeneye vermouth bottle
   description: Sweet, sweet dryness!
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -331,6 +340,8 @@
   name: vodka bottle
   description: Aah, vodka. Prime choice of drink AND fuel by Russians worldwide.
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -346,6 +357,8 @@
   name: uncle git's special reserve
   description: A premium single-malt whiskey, gently matured inside the tunnels of a nuclear shelter. TUNNEL WHISKEY RULES.
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -361,6 +374,8 @@
   name: doublebearded bearded special wine bottle
   description: A faint aura of unease and asspainery surrounds the bottle.
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -410,6 +425,8 @@
   name: water bottle
   description: Simple clean water of unknown origin. You think that maybe you dont want to know it.
   components:
+  - type: Openable
+    sealOpened: true
   - type: SolutionContainerManager
     solutions:
       drink:

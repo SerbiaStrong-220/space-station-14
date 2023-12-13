@@ -1,13 +1,18 @@
+using System.Linq;
 using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
+using Content.Server.Hands.Systems;
 using Content.Server.Nutrition.Components;
 using Content.Server.SS220.BottleOpener;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
@@ -22,6 +27,10 @@ public sealed class OpenableSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly HandsSystem _hands = default!; // SS220 Bottle Opener
+    [Dependency] private readonly TransformSystem _transform = default!; // SS220 Bottle Opener
+
+    private const string BottleCapProtoypeID = "BottleCap"; // SS220 Bottle Opener
 
     public override void Initialize()
     {
@@ -45,10 +54,27 @@ public sealed class OpenableSystem : EntitySystem
     private void OnInteractUsing(EntityUid uid, OpenableComponent comp, InteractUsingEvent args)
     {
         if (comp.SealOpened || comp.Opened || !HasComp<BottleOpenerComponent>(args.Used))
+        {
+            TryClose(uid, comp, args.Used);
             return;
+        }
 
-        TryOpen(uid, comp);
+        TryOpen(uid, comp, args.User);
     }
+
+    public bool TryClose(EntityUid uid, OpenableComponent? comp, EntityUid usedUid)
+    {
+        if (!Resolve(uid, ref comp))
+            return false;
+
+        if (!comp.Opened || !HasComp<BottleCapComponent>(usedUid))
+            return false;
+
+        SetOpen(uid, false, comp);
+        EntityManager.DeleteEntity(usedUid);
+        return true;
+    }
+
     // SS220 Bottle Opener end
 
     private void OnUse(EntityUid uid, OpenableComponent comp, UseInHandEvent args)
@@ -56,7 +82,7 @@ public sealed class OpenableSystem : EntitySystem
         if (args.Handled || !comp.OpenableByHand || !comp.SealOpened)
             return;
 
-        args.Handled = TryOpen(uid, comp);
+        args.Handled = TryOpen(uid, comp, args.User); //SS220 Bottle Opener
     }
 
     private void OnExamined(EntityUid uid, OpenableComponent comp, ExaminedEvent args)
@@ -142,13 +168,15 @@ public sealed class OpenableSystem : EntitySystem
     /// If closed, opens it and plays the sound.
     /// </summary>
     /// <returns>Whether it got opened</returns>
-    public bool TryOpen(EntityUid uid, OpenableComponent? comp = null)
+    public bool TryOpen(EntityUid uid, OpenableComponent? comp = null, EntityUid? user = null)
     {
         if (!Resolve(uid, ref comp) || comp.Opened)
             return false;
 
         SetOpen(uid, true, comp);
-        if (!comp.SealOpened) // SS220 Bottle close
+        // SS220 Bottle Opener begin
+        SpawnBottleCap(uid, user);
+        if (!comp.SealOpened)
             comp.SealOpened = true;
 
         if (!comp.HasPlayedSound)
@@ -156,6 +184,16 @@ public sealed class OpenableSystem : EntitySystem
             _audio.PlayPvs(comp.Sound, uid);
             comp.HasPlayedSound = true;
         }
+        // SS220 Bottle Opener end
         return true;
     }
+
+    // SS220 Bottle Opener begin
+    private void SpawnBottleCap(EntityUid openable, EntityUid? user)
+    {
+        var bottleCap = EntityManager.SpawnEntity(BottleCapProtoypeID, _transform.GetMapCoordinates(openable));
+        if (user is not null && TryComp<HandsComponent>(user, out var hands))
+            _hands.TryPickupAnyHand(user.Value, bottleCap, true, false, false, hands);
+    }
+    // SS220 Bottle Opener end
 }
