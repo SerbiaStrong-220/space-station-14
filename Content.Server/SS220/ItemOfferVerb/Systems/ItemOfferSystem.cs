@@ -7,6 +7,7 @@ using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Server.GameObjects;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -18,12 +19,22 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly HandsSystem _hands = default!;
-
         public override void Initialize()
         {
             base.Initialize();
             SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
             SubscribeLocalEvent<ItemReceiverComponent, MoveEvent>(CancelOffer);
+        }
+
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+
+            var enumerator = EntityQueryEnumerator<ItemReceiverComponent, TransformComponent>();
+            while (enumerator.MoveNext(out var uid, out var comp, out var transform))
+            {
+                
+            }
         }
 
         private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
