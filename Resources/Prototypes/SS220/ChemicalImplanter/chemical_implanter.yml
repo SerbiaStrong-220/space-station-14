@@ -20,6 +20,7 @@
         whitelist:
           tags:
             - SubdermalImplant
+            - ChemicalImplant
     - type: Sprite
       sprite: SS220/Objects/ReagentInjector/injector.rsi
       state: injector
@@ -30,8 +31,6 @@
           whitelist:
             tags:
               - SubdermalImplant
-              - ChemicalImplant
-
     - type: Item
       sprite: SS220/Objects/ReagentInjector/injector.rsi
       heldPrefix: 0
@@ -39,8 +38,6 @@
 
 - type: entity
   id: ReagentsCapsuleInjector
-  name: reagent-injector-name
-  description: reagent-injector-desc
   parent: BaseReagentsCapsuleImplanter
   components:
     - type: Implanter

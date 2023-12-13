@@ -1,6 +1,6 @@
 store-category-chemical-implants = Химические импланты
 
-ent-UplinkChemicalImplanter = Химический имплантер
+ent-ReagentsCapsuleInjector = Химический имплантер
     .desc = Необычное устройство с иглой и съёмным контейнером
 
 reagent-injector-action-name = Вскрыть
