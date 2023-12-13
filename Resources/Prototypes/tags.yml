@@ -1121,3 +1121,6 @@
 
 - type: Tag
   id: MindShield
+
+- type: Tag # SS220 - Chemical implants/implanters
+  id: ChemicalImplant
