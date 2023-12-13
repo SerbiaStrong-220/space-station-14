@@ -23,7 +23,6 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         {
             base.Initialize();
             SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
-            SubscribeLocalEvent<ItemReceiverComponent, MoveEvent>(CancelOffer);
         }
 
         public override void Update(float frameTime)
@@ -33,7 +32,22 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
             var enumerator = EntityQueryEnumerator<ItemReceiverComponent, TransformComponent>();
             while (enumerator.MoveNext(out var uid, out var comp, out var transform))
             {
-                
+                var receiverPos = Transform(comp.Giver).Coordinates;
+                var giverPos = Transform(uid).Coordinates;
+                receiverPos.TryDistance(EntityManager, giverPos, out var distance);
+                var giverHands = Comp<HandsComponent>(comp.Giver);
+                if (distance > comp.ReceiveRange)
+                {
+                    _alerts.ClearAlert(uid, AlertType.ItemOffer);
+                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+                }
+                foreach (var hand in giverHands.Hands)
+                {
+                    if (hand.Value.Container!.Contains(comp.Item!.Value))
+                        break;
+                    _alerts.ClearAlert(uid, AlertType.ItemOffer);
+                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+                }
             }
         }
 
@@ -70,16 +84,6 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
             };
         }
-
-        private void CancelOffer(EntityUid uid, ItemReceiverComponent comp, MoveEvent ev)
-        {
-            var pos = Transform(comp.Giver).Coordinates;
-            if (ev.NewPosition.InRange(EntityManager, pos, comp.ReceiveRange))
-                return;
-            _alerts.ClearAlert(uid, AlertType.ItemOffer);
-            _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-        }
-
         private bool FindFreeHand(HandsComponent component, [NotNullWhen(true)] out string? freeHand)
         {
             return (freeHand = component.GetFreeHandNames().Any() ? component.GetFreeHandNames().First() : null) != null;
