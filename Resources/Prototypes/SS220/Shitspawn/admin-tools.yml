@@ -14,182 +14,143 @@
 
 - type: entity
   name: Asphyxiation 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeAsphyxiation
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Asphyxiation: 100
 
 - type: entity
   name: Bloodloss 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeBloodloss
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Bloodloss: 100
 
 - type: entity
   name: Blunt 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeBlunt
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Blunt: 100
 
 - type: entity
   name: Cellular 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeCellular
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Cellular: 100
 
 - type: entity
   name: Caustic 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeCaustic
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Caustic: 100
 
 - type: entity
   name: Cold 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeCold
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Cold: 100
 
 - type: entity
   name: Piercing 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifePiercing
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Piercing: 100
 
 - type: entity
   name: Poison 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifePoison
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Poison: 100
 
 - type: entity
   name: Radiation 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeRadiation
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Radiation: 100
 
 - type: entity
   name: Shock 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeShock
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Shock: 100
 
 - type: entity
   name: Slash 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeSlash
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Slash: 100
 
 - type: entity
   name: Structural 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeStructural
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Structural: 100
 
 - type: entity
   name: Stamina 100
-  parent: CombatKnife
+  parent: KnifeHeat
   id: KnifeStamina
   suffix: debug
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Stamina: 100
