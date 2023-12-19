@@ -8,13 +8,13 @@
     },
     "states": [
       {
-        "name": "injector"
+        "name": "implanter"
       },
       {
-        "name": "injector_full"
+        "name": "implanter_full"
       },
       {
-        "name": "injector_full_mask"
+        "name": "implanter_full_mask"
       },
       {
         "name": "icon_empty"

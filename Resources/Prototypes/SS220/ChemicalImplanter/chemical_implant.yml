@@ -8,10 +8,10 @@
     - type: SubdermalImplant
       implantAction: ActionUseChemicalImplant
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
-      state: capsule
+      sprite: SS220/Objects/ReagentInjector/implant.rsi
+      state: implant
     - type: Item
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
+      sprite: SS220/Objects/ReagentInjector/implant.rsi
       size: Small
     - type: SolutionContainerManager
       solutions:
@@ -32,22 +32,22 @@
         - SubdermalImplant
         - ChemicalImplant
 
-# implanters
+# implants
 - type: entity
   parent: BaseChemicalImplant
   id: EmptyChemicalImplant
-  name: empty-reagent-capsule-name
-  description: empty-reagent-capsule-desk
+  name: empty-capsule-name
+  description: empty-capsule-desk
 
 - type: entity
   parent: BaseChemicalImplant
   id: CombatChemicalImplant
-  name: combat-reagent-capsule-name
-  description: combat-reagent-capsule-desk
+  name: combat-capsule-name
+  description: combat-capsule-desc
   components:
     - type: Appearance
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
+      sprite: SS220/Objects/ChemicalImplants/implant.rsi
       layers:
       - state: combat
         map: ["enum.SolutionContainerLayers.Fill"]
@@ -60,70 +60,3 @@
             Quantity: 25
           - ReagentId: TranexamicAcid
             Quantity: 5
-
-- type: entity
-  parent: BaseChemicalImplant
-  id: DABChemicalImplant
-  name: dab-reagent-capsule-name
-  description: dab-reagent-capsule-desc
-  components:
-    - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
-      layers:
-        - state: dab
-          map: ["enum.SolutionContainerLayers.Fill"]
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          maxVol: 30
-          reagents:
-          - ReagentId: Dylovene
-            Quantity: 10
-          - ReagentId: Arithrazine
-            Quantity: 10
-          - ReagentId: Bicaridine
-            Quantity: 10
-
-- type: entity
-  parent: BaseChemicalImplant
-  id: ExperementalReanimatorChemicalImplant
-  name: unstable-reanimator-reagent-capsule-name
-  description: unstable-reanimator-reagent-capsule-desc
-  components:
-    - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
-      layers:
-        - state: reanim
-          map: ["enum.SolutionContainerLayers.Fill"]
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          maxVol: 35
-          reagents:
-          - ReagentId: TranexamicAcid
-            Quantity: 5
-          - ReagentId: UnstableReanimator
-            Quantity: 20
-          - ReagentId: Epinephrine
-            Quantity: 10
-
-- type: entity
-  parent: BaseChemicalImplant
-  id: SuicideImplant
-  name: suicide-reagent-capsule-name
-  description: suicide-reagent-capsule-desc
-  components:
-    - type: SubdermalImplant
-      permanent: false
-    - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
-      layers:
-        - state: dead
-          map: ["enum.SolutionContainerLayers.Fill"]
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          maxVol: 10
-          reagents:
-          - ReagentId: Amatoxin
-            Quantity: 10

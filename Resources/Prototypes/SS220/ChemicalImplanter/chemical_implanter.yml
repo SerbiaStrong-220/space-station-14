@@ -1,7 +1,7 @@
 # Base
 - type: entity
-  name: Reagents Capsule Implanter
-  id: BaseReagentsCapsuleImplanter
+  name: Chemical implanter
+  id: BaseChemicalImplanter
   parent: BaseItem
   abstract: true
   noSpawn: true
@@ -22,31 +22,31 @@
             - SubdermalImplant
             - ChemicalImplant
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ChemicalImplants/implanter.rsi
       state: injector
     - type: ItemMapper
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ChemicalImplants/implanter.rsi
       mapLayers:
         injector_full:
           whitelist:
             tags:
               - SubdermalImplant
     - type: Item
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ChemicalImplants/implanter.rsi
       heldPrefix: 0
     - type: Appearance
 
 - type: entity
-  id: ReagentsCapsuleInjector
-  parent: BaseReagentsCapsuleImplanter
+  id: ChemicalImplanter
+  parent: BaseChemicalImplanter
   components:
     - type: Implanter
       implant: EmptyChemicalImplant
 
 - type: entity
   id: ActionUseChemicalImplant
-  name: reagent-injector-action-name
-  description: reagent-injector-action-desc
+  name: chemical-implanter-action-name
+  description: chemical-implanter-action-desc
   noSpawn: true
   components:
   - type: InstantAction
@@ -55,6 +55,6 @@
     itemIconStyle: BigAction
     priority: -20
     icon:
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ReagentInjector/implanter.rsi
       state: icon_empty
     event: !type:UseChemicalImplantEvent
