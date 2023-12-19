@@ -1,0 +1,64 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Base
+- type: entity
+  name: base chemical implanter
+  id: BaseChemicalImplanter
+  parent: BaseItem
+  abstract: true
+  noSpawn: true
+  components:
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot { }
+    - type: Implanter
+      currentMode: Inject
+      implantOnly: true
+      implanterSlot:
+        name: Implant
+        locked: False
+        priority: 0
+        whitelist:
+          tags:
+            - SubdermalImplant
+            - ChemicalImplant
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implanter.rsi
+      state: implanter
+    - type: ItemMapper
+      sprite: SS220/Objects/ChemicalImplants/implanter.rsi
+      mapLayers:
+        injector_full:
+          whitelist:
+            tags:
+              - SubdermalImplant
+    - type: Item
+      sprite: SS220/Objects/ChemicalImplants/implanter.rsi
+      heldPrefix: 0
+    - type: Appearance
+
+- type: entity
+  id: ChemicalImplanter
+  name: chemical implanter
+  description: '..........'
+  parent: BaseChemicalImplanter
+  components:
+    - type: Implanter
+      implant: EmptyChemicalCapsule
+
+- type: entity
+  id: ActionOpenCapsule
+  name: open
+  description: '...........'
+  noSpawn: true
+  components:
+  - type: InstantAction
+    charges: 1
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      state: icon_empty
+    event: !type:UseChemicalImplantEvent

@@ -1,0 +1,74 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Base
+- type: entity
+  parent: BaseSubdermalImplant
+  id: BaseChemicalImplant
+  name: base chemical implant
+  components:
+    - type: ChemicalImplanter
+    - type: SubdermalImplant
+      permanent: true
+      implantAction: ActionOpenCapsule
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      state: implant
+    - type: Item
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      size: Small
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          canMix: false
+          canReact: false
+    - type: RefillableSolution
+      solution: beaker
+    - type: ExaminableSolution
+      solution: beaker
+    - type: Appearance
+    - type: SolutionContainerVisuals
+      maxFillLevels: 1
+      changeColor: false
+      emptySpriteName: capsule_used
+    - type: Tag
+      tags:
+        - SubdermalImplant
+        - ChemicalImplant
+
+# Implants
+- type: entity
+  parent: BaseChemicalImplant
+  id: EmptyChemicalCapsule
+  name: empty-reagent-capsule-name
+  description: empty-reagent-capsule-desc
+  components:
+    - type: SubdermalImplant
+      permanent: false
+    - type: Appearance
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+
+- type: entity
+  parent: BaseChemicalImplant
+  id: CombatChemicalImplant
+  name: combat-chemical-implant-name
+  description: combat-chemical-implant-desc
+  components:
+    - type: Appearance
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      layers:
+      - state: combat
+        map: ["enum.SolutionContainerLayers.Fill"]
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          reagents:
+          - ReagentId: Omnizine
+            Quantity: 25
+          - ReagentId: TranexamicAcid
+            Quantity: 5

@@ -1127,3 +1127,6 @@
 
 - type: Tag
   id:  boots
+
+- type: Tag # SS220 - Chemical implants/implanters
+  id: ChemicalImplant

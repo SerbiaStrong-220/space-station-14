@@ -1,0 +1,38 @@
+
+- type: listing
+  id: UplinkChemicalImplanter
+  name: chemical implanter
+  description: '......'
+  icon: { sprite: SS220/Objects/ChemicalImplants/implanter.rsi, state: implanter }
+  productEntity: ChemicalImplanter
+  cost:
+    Telecrystal: 2
+  categories:
+    - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkEmptyChemicalCapsule
+  name: empty capsule
+  description: '............'
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: implant }
+  productEntity: EmptyChemicalCapsule
+  cost:
+    Telecrystal: 1
+  categories:
+    - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkCombatChemicalImplant
+  name: combat chemical implant
+  description: '............'
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: combat }
+  productEntity: CombatChemicalImplant
+  cost:
+    Telecrystal: 4
+  categories:
+    - UplinkChemicalImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink

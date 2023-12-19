@@ -11,13 +11,13 @@
         "name": "adrenaline"
       },
       {
-        "name": "capsule"
+        "name": "implant"
       },
       {
-        "name": "capsule_mask"
+        "name": "implant_mask"
       },
       {
-        "name": "capsule_used"
+        "name": "implant_used"
       },
       {
         "name": "combat"
