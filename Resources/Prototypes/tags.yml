@@ -1084,6 +1084,9 @@
   id: WeaponPistolCHIMPUpgradeKit
 
 - type: Tag
+  id: WeaponShotgunKammerer
+
+- type: Tag
   id: Window
 
 - type: Tag
@@ -1122,5 +1125,10 @@
 - type: Tag
   id: MindShield
 
+<<<<<<< HEAD
 - type: Tag # SS220 - Chemical implants/implanters
   id: ChemicalImplant
+=======
+- type: Tag
+  id:  boots
+>>>>>>> 4fe8d3d509a8c8daa91d14569e5ef5b0d856a261
