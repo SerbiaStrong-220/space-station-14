@@ -825,6 +825,12 @@
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/lawyerblack.rsi
 
+# SS220-lobbying-bundle-fake-money begin
+- type: entity
+  parent: ClothingUniformJumpsuitLawyerBlack
+  id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
+# SS220-lobbying-bundle-fake-money end
+
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitLawyerPurple
@@ -1443,3 +1449,14 @@
       - state: equipped-INNERCLOTHING-jumpsuit
       - state: equipped-INNERCLOTHING-shirt
         color: "#b30000"
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitFamilyGuy
+  name: familiar garbs
+  description: Makes you remember the time you did something funny.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi

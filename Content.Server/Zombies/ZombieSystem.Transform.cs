@@ -27,6 +27,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Nutrition.AnimalHusbandry;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
@@ -37,6 +38,7 @@ using Robust.Shared.Audio;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Prying.Components;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Clothing;
 
 namespace Content.Server.Zombies
 {
@@ -99,14 +101,20 @@ namespace Content.Server.Zombies
             var zombiecomp = AddComp<ZombieComponent>(target);
 
             //we need to basically remove all of these because zombies shouldn't
-            //get diseases, breath, be thirst, be hungry, or die in space
+            //get diseases, breath, be thirst, be hungry, die in space or have offspring
             RemComp<RespiratorComponent>(target);
             RemComp<BarotraumaComponent>(target);
             RemComp<HungerComponent>(target);
             RemComp<ThirstComponent>(target);
+            RemComp<ReproductiveComponent>(target); 
+            RemComp<ReproductivePartnerComponent>(target);
 
             //funny voice
-            EnsureComp<ReplacementAccentComponent>(target).Accent = "zombie";
+            var accentType = "zombie";
+            if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
+                accentType = accent.Accent;
+
+            EnsureComp<ReplacementAccentComponent>(target).Accent = accentType;
 
             //This is needed for stupid entities that fuck up combat mode component
             //in an attempt to make an entity not attack. This is the easiest way to do it.
@@ -195,6 +203,11 @@ namespace Content.Server.Zombies
             _inventory.TryUnequip(target, "gloves", true, true);
             //Should prevent instances of zombies using comms for information they shouldnt be able to have.
             _inventory.TryUnequip(target, "ears", true, true);
+
+            //SS220-zombie-skates-fix begin
+            if (_inventory.TryGetSlotEntity(target, "shoes", out var shoes) && HasComp<SkatesComponent>(shoes))
+                _inventory.TryUnequip(target, "shoes", true, true);
+            //SS220-zombie-skates-fix end
 
             //popup
             _popup.PopupEntity(Loc.GetString("zombie-transform", ("target", target)), target, PopupType.LargeCaution);
