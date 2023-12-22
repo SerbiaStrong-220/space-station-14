@@ -66,6 +66,8 @@
   - type: Tool
     qualities:
       - Prying
+  - type: TilePrying
+    advanced: false
     speed: 3.0
   - type: MultipleTool
     entries:
