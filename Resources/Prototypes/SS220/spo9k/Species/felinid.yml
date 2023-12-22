@@ -11,25 +11,6 @@
   oldAge: 40
   maxAge: 40
   blockedJobs:
-    - Captain
-    - BlueShield
-    - HeadOfPersonnel
-    - Quartermaster
-    - ChiefEngineer
-    - AtmosphericTechnician
-    - StationEngineer
-    - Chemist
-    - ChiefMedicalOfficer
-    - MedicalDoctor
-    - Paramedic
-    - ResearchDirector
-    - Scientist
-    - Brigmedic
-    - Detective
-    - HeadOfSecurity
-    - SecurityCadet
-    - SecurityOfficer
-    - Warden
     - Boxer
 - type: markingPoints
   id: MobFelinidMarkingLimits
