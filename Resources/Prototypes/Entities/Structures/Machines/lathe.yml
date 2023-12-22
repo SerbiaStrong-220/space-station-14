@@ -285,6 +285,7 @@
       - WeaponLaserCannon
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
+      - WeaponTaser #SS220 taserback
 
 - type: entity
   id: CircuitImprinter
@@ -540,7 +541,6 @@
       - RiotShield
       - ShellShotgun
       - ShellShotgunFlare
-      - ShellTranquilizer
       - MagazinePistol
       - MagazinePistolSubMachineGun
       - MagazinePistolSubMachineGunTopMounted
@@ -594,6 +594,7 @@
       - WeaponLaserCarbinePractice
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
+      - WeaponTaser #SS220 taserback
   - type: MaterialStorage
     whitelist:
       tags:
@@ -630,7 +631,6 @@
         - CartridgeMagnum
         - ShellShotgun
         - ShellShotgunFlare
-        - ShellTranquilizer
         - CartridgeLightRifle
         - CartridgeRifle
         - MagazineBoxPistol
