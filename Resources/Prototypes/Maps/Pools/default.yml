@@ -5,7 +5,6 @@
   - Atlas
   - Bagel
   - Barratry
-  - CorvaxDelta
   - Box
 #  - Cluster
 #  - Core
@@ -15,5 +14,6 @@
 #  - Meta
 #  - Omega
   - Origin
-  # - Saltern
-  # - Packed
+  - Saltern
+  - Packed
+  - Reach

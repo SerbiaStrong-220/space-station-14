@@ -20,7 +20,7 @@
       types:
         Blunt: 5
   - type: Item
-    size: Normal
+    size: Large
     sprite: Objects/Specific/Janitorial/mop.rsi
   - type: Absorbent
   - type: SolutionContainerManager
@@ -59,7 +59,7 @@
         types:
           Blunt: 5
     - type: Item
-      size: Normal
+      size: Large
       sprite: Objects/Specific/Janitorial/advmop.rsi
     - type: Absorbent
       pickupAmount: 100
@@ -612,3 +612,6 @@
       tags:
         - DroneUsable
         - Mop
+        - CleansForensics
+    - type: Fiber
+      fiberColor: fibers-white
