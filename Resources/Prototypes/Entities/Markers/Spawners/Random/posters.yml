@@ -11,6 +11,7 @@
   - type: RandomSpawner
     offset: 0
     prototypes:
+      - RandomPosterYabloko
       - RandomPosterContraband
       - RandomPosterLegit
     chance: 0.95

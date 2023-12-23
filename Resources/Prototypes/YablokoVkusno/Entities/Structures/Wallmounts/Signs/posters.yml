@@ -1,0 +1,35 @@
+- type: entity
+  parent: PosterBase
+  id: PosterBaseYabloko
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: YablokoVkusno/Structures/Wallmounts/posters.rsi
+
+# Яблоки яблоки яблоки
+- type: entity
+  parent: PosterBaseYabloko
+  id: PosterYablokoBoykisser_1
+  name: "Boykisser"
+  description: ":3"
+  components:
+  - type: Sprite
+    state: poster1_yabloko
+
+- type: entity
+  parent: PosterBaseYabloko
+  id: PosterYablokoBoykisser_2
+  name: "Boykisser"
+  description: "You like kissing boys don't you?"
+  components:
+  - type: Sprite
+    state: poster2_yabloko
+
+- type: entity
+  parent: PosterBaseYabloko
+  id: PosterYablokoNecoarc_1
+  name: "Neco arc"
+  description: "NyanyanyanyanyaNyanyanyanyanyaNyanyanyanyanyaNyanyanyanyanyaNyanyanyanyanyaNyanyanyanyanyaNyanyanyanyanya"
+  components:
+  - type: Sprite
+    state: poster3_yabloko

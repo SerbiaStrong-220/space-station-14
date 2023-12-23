@@ -1,0 +1,17 @@
+- type: entity
+  parent: MarkerBase
+  id: RandomPosterYabloko
+  name: random apple poster spawner
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Wallmounts/posters.rsi
+        state: random_legit
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+      - PosterYablokoBoykisser_1
+      - PosterYablokoBoykisser_2
+      - PosterYablokoNecoarc_1
+    chance: 1

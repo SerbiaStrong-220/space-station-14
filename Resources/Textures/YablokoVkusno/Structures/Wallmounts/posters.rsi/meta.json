@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "OOOooh you like kissing boys don't you",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        { "name": "poster1_yabloko" },
+        { "name": "poster2_yabloko" },
+        { "name": "poster3_yabloko" }
+    ]
+}
