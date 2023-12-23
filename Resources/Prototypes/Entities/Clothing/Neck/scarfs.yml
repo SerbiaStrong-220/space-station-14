@@ -10,7 +10,7 @@
     sprite: Clothing/Neck/Scarfs/red.rsi
   - type: Tag
     tags:
-      - Ian
+      - Ian # SS220 Shapochki
 
 
 - type: entity
@@ -25,7 +25,7 @@
     sprite: Clothing/Neck/Scarfs/blue.rsi
   - type: Tag
     tags:
-      - Ian
+      - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -39,7 +39,7 @@
     sprite: Clothing/Neck/Scarfs/green.rsi
   - type: Tag
     tags:
-      - Ian
+      - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -53,7 +53,7 @@
       sprite: Clothing/Neck/Scarfs/black.rsi
     - type: Tag
       tags:
-        - Ian
+        - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -67,7 +67,7 @@
       sprite: Clothing/Neck/Scarfs/brown.rsi
     - type: Tag
       tags:
-        - Ian
+        - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -92,7 +92,7 @@
       sprite: Clothing/Neck/Scarfs/orange.rsi
     - type: Tag
       tags:
-       - Ian
+       - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -106,7 +106,7 @@
       sprite: Clothing/Neck/Scarfs/purple.rsi
     - type: Tag
       tags:
-        - Ian
+        - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -120,7 +120,7 @@
       sprite: Clothing/Neck/Scarfs/syndiegreen.rsi
     - type: Tag
       tags:
-        - Ian
+        - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -145,7 +145,7 @@
       sprite: Clothing/Neck/Scarfs/centcom.rsi
     - type: Tag
       tags:
-       - Ian
+       - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingNeckBase
@@ -159,4 +159,4 @@
     sprite: Clothing/Neck/Scarfs/zebra.rsi
   - type: Tag
     tags:
-       - Ian
+       - Ian # SS220 Shapochki

@@ -38,7 +38,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -54,7 +54,7 @@
       sprite: Clothing/Head/Hats/casa.rsi
     - type: Tag
       tags:
-      - Ian
+      - Ian # SS220 Shapochki
 
 
 - type: entity
@@ -70,7 +70,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -87,7 +87,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -104,7 +104,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -120,7 +120,7 @@
     sprite: Clothing/Head/Hats/beret_warden.rsi
   - type: Tag
     tags:
-    - Ian
+    - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingHeadBase
@@ -168,7 +168,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -199,7 +199,7 @@
     sprite: Clothing/Head/Hats/centcom.rsi
   - type: Tag
     tags:
-    - Ian
+    - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingHeadBase
@@ -277,7 +277,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -294,7 +294,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -456,7 +456,7 @@
     accent: RussianAccent
   - type: Tag
     tags:
-    - Ian
+    - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingHeadBase
@@ -679,7 +679,7 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -810,7 +810,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
 
 - type: entity
@@ -827,7 +827,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-    - Ian
+    - Ian # SS220 Shapochki
     - HamsterWearable
 
 - type: entity
