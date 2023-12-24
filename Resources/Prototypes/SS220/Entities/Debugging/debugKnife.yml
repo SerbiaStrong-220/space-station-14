@@ -172,7 +172,7 @@
   id: ClothingBackpackDebugKnifeFilled
   suffix: debug
   name: debug knife 100
-  description: Зачем ты это читаешь?
+  description: Сумка, наполненная ножами на 100 урона каждого типа. Предназначена для отладки и тестирования урона.
   components:
     - type: StorageFill
       contents:
