@@ -19,9 +19,6 @@
   noSpawn: true
   components:
   - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 3
-    range: 10.0
     damage:
       types:
         Heat: 100
