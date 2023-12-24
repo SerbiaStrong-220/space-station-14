@@ -21,6 +21,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Weapons.Reflect; //ss220-revorkblock
 
 namespace Content.Shared.Blocking;
 
@@ -149,6 +150,17 @@ public sealed partial class BlockingSystem : EntitySystem
         if (component.IsBlocking)
             return false;
 
+        //ss220-revorkblock
+        //A temporary crutch, I'll fix it after the New Year's.
+        TryComp(item, out ReflectComponent? useDelay);
+
+        if (useDelay != null)
+        {
+            if (useDelay.Enabled == false)
+                return false;
+
+        }
+        //ss220-revorkblock end
         var xform = Transform(user);
 
         var shieldName = Name(item);
