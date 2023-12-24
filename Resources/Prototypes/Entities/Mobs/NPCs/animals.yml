@@ -2164,7 +2164,7 @@
         - MobLayer
   - type: Inventory
     speciesId: dog
-    templateId: ian
+    templateId: ian # SS220 Shapochki
   - type: InventorySlots
   - type: Strippable
   - type: UserInterface
