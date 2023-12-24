@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -21,7 +21,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Weapons.Reflect; //ss220-revorkblock
+using Content.Shared.Weapons.Reflect;
 
 namespace Content.Shared.Blocking;
 
