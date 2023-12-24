@@ -22,7 +22,6 @@
     whitelist:
       components:
         - GasTank
-        - Smokable
 
   - name: head
     slotTexture: head
