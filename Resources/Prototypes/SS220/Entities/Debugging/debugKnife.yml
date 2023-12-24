@@ -160,7 +160,6 @@
   parent: KnifeDebug
   id: KnifeStamina
   noSpawn: true
-  bool: noSpawn
   components:
   - type: MeleeWeapon
     damage:
