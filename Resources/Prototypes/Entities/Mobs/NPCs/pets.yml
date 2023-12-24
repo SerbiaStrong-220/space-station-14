@@ -783,3 +783,31 @@
     attributes:
       proper: true
       gender: male
+
+# SS220 AVD pet begin
+
+- type: entity
+  name: Rocket
+  id: MobSpaceCatPet
+  parent: MobCatSpace
+  description: He never falled in void. Don`t try to bring him in it.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 40
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Grammar
+    attributes:
+      gender: male
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - VimPilot
+# SS220 AVD pet end

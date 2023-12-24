@@ -38,3 +38,5 @@ ent-MobSlimesPet = Smile
     .desc = This masterpiece has gone through thousands of experiments. But it is the sweetest creature in the world. Smile Slime!
 ent-MobMonkeyPunpun = Pun Pun
     .desc = A prominent representative of monkeys with unlimited access to alcohol.
+ent-MobSpaceCatPet = Rocket
+    .desc = He never falled in void. Don`t bring him in it.
