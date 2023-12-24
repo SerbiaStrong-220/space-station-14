@@ -152,13 +152,10 @@ public sealed partial class BlockingSystem : EntitySystem
 
         //ss220-revorkblock
         //A temporary crutch, I'll fix it after the New Year's.
-        TryComp(item, out ReflectComponent? useDelay);
-
-        if (useDelay != null)
+        if (TryComp(item, out ReflectComponent? useDelay);)
         {
-            if (useDelay.Enabled == false)
+            if (!useDelay.Enabled)
                 return false;
-
         }
         //ss220-revorkblock end
         var xform = Transform(user);
