@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -152,12 +152,13 @@ public sealed partial class BlockingSystem : EntitySystem
 
         //ss220-revorkblock
         //A temporary crutch, I'll fix it after the New Year's.
-        if (TryComp(item, out ReflectComponent? useDelay);)
+        if (TryComp(item, out ReflectComponent? useDelay))
         {
             if (!useDelay.Enabled)
                 return false;
         }
         //ss220-revorkblock end
+
         var xform = Transform(user);
 
         var shieldName = Name(item);
