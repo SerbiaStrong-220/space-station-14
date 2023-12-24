@@ -32,7 +32,7 @@
   parent: MobHuman
   id: MobHuman1000
   name: MobHuman1000
- suffix: debug
+  suffix: debug
   components:
   - type: MobThresholds
     thresholds:
