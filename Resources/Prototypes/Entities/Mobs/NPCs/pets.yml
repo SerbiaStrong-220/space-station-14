@@ -787,8 +787,8 @@
 # SS220 AVD pet begin
 - type: entity
   name: Rocket
-  id: MobSpaceCatPet
   parent: MobCatSpace
+  id: MobSpaceCatPet
   description: He never falled in void. Don`t try to bring him in it.
   components:
   - type: Fixtures
