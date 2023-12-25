@@ -9,7 +9,6 @@ namespace Content.Server.Administration.Commands
     public sealed partial class GarbageClearUpCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entMan = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
         public string Command => "garbage_clear_up";
         public string Description => "Removes all objects with a tag 'trash' from the map";
@@ -17,14 +16,13 @@ namespace Content.Server.Administration.Commands
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
+            var _containerSystem = _entMan.System<SharedContainerSystem>();
             int cnt = 0;
             foreach (var ent in _entMan.GetEntities())
             {
                 if (!_entMan.TryGetComponent<TagComponent>(ent, out var component))
                     continue;
-                if (!component.Tags.Contains("Trash"))
-                    continue;
-                if (_containerSystem.IsEntityOrParentInContainer(ent))
+                if (!component.Tags.Contains("Trash") || _containerSystem.IsEntityOrParentInContainer(ent))
                     continue;
 
                 _entMan.DeleteEntity(ent);
