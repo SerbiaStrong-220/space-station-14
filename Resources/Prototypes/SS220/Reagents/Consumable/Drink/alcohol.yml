@@ -3,7 +3,7 @@
   id: Glintwine
   name: глинтвейн
   parent: BaseAlcohol
-  desc: Глядя на этот напиток вы чувствует наступление Рождества.
+  desc: Глядя на этот напиток, вы чувствуете наступление Рождества.
   physicalDesc: пряное
   flavor: fruity
   color: "#821f1d"
