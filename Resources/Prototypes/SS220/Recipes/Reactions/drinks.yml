@@ -1,0 +1,14 @@
+#EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: reaction
+  id: Glintwine
+  reactants:
+    Wine:
+      amount: 1
+    Sugar:
+      amount: 1
+    JuiceOrange:
+      amount: 1
+    Enzyme:
+      amount: 1
+  products:
+    Glintwine: 4
