@@ -10,7 +10,7 @@ namespace Content.Server.Administration.Commands
     {
         [Dependency] private readonly IEntityManager _entMan = default!;
 
-        public string Command => "garbage_clear_up";
+        public string Command => "ClearUpGarbage";
         public string Description => "Removes all objects with a tag 'trash' from the map";
         public string Help => "Surgery tommorow";
 
