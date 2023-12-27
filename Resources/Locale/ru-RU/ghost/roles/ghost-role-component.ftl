@@ -138,4 +138,4 @@ ghost-role-information-Cak-name = Корт
 ghost-role-information-Cak-description = Вы - любимое дитя шеф-повара. Вы - живой торт-кот.
 ghost-role-information-Cak-rules = Вы - живой съедобный сладкий кот. Ваша задача - найти своё место в этом мире, где всё хочет вас съесть.
 ghost-role-information-spacecat-name = Ракета
-ghost-role-information-spacecat-description = Любимый питомец Агента Внутренних Дел. Он никогда не падал в пустоту. Не пытайся толкнуть его в неё.
+ghost-role-information-spacecat-description = Этот кот полноценная копия своего хозяина. Такой же невозмутимый и подготовленный к худшему.

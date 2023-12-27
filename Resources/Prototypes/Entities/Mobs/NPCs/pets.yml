@@ -789,7 +789,7 @@
   name: Rocket
   parent: MobCatSpace
   id: MobSpaceCatPet
-  description: He never falled in void. Don`t try to bring him in it.
+  description: Feline pet, prepared for the worst.
   components:
   - type: Fixtures
     fixtures:

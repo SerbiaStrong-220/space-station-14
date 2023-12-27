@@ -82,7 +82,7 @@ ent-SpawnMobSlimesPetGhostRole = Спавнер { ent-MobSlimesPet }
 ghost-role-information-pet-slime-name = { ent-MobSlimesPet }
 ghost-role-information-pet-slime-description = { ent-MobSlimesPet.desc }
 
-ent-MobSpaceCatGhostRole = { ent-MobSpaceCatPet }
+ent-MobSpaceCatPetGhostRole = { ent-MobSpaceCatPet }
     .desc = { ent-MobSpaceCatPet.desc }
 ent-SpawnMobSpaceCatPetGhostRole = Спавнер { ent-MobSpaceCatPet }
 ghost-role-information-pet-spacecat-name = { ent-MobSpaceCatPet }
