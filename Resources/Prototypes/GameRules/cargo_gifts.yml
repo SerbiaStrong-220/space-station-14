@@ -215,9 +215,9 @@
   noSpawn: true
   components:
     - type: CargoGiftsRule
-      description: военное снаряжение
+      description: cargo-gift-dest-gamma
       sender: cargo-gift-default-sender
-      dest: экипажу
+      dest: cargo-gift-dest-all
       gifts:
         SecurityArmor: 2
         SecurityHelmet: 2
