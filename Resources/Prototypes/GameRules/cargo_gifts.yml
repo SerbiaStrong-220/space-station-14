@@ -208,6 +208,7 @@
         SecurityRestraints: 2
         SecurityNonLethal: 2
 
+#ss220-gamma
 - type: entity
   id: GiftsGamma
   parent: BaseGameRule
@@ -222,3 +223,4 @@
         SecurityHelmet: 2
         ArmorySmg: 3
         ArmoryShotgun: 3
+#ss220-gammaend
