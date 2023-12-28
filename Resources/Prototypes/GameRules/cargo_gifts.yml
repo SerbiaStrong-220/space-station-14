@@ -207,3 +207,18 @@
         SecurityRiot: 2
         SecurityRestraints: 2
         SecurityNonLethal: 2
+
+- type: entity
+  id: GiftsGamma
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: CargoGiftsRule
+      description: военное снаряжение
+      sender: cargo-gift-default-sender
+      dest: экипажу станции
+      gifts:
+        SecurityArmor: 2
+        SecurityHelmet: 2
+        ArmorySmg: 3
+        ArmoryShotgun: 3
