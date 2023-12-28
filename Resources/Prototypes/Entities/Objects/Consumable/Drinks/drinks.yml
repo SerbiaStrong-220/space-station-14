@@ -2208,3 +2208,21 @@
               Quantity: 30
     - type: Sprite
       sprite: Objects/Consumable/Drinks/bloodglass.rsi
+
+#SS220 Glintwine begin
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkGlintwineGlass
+  name: Стакан глинтвейна
+  description: Глядя на этот напиток, вы чувствуете наступление Рождества.
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        drink:
+          maxVol: 30
+          reagents:
+            - ReagentId: Glintwine
+              Quantity: 30
+    - type: Sprite
+      sprite: Objects/Consumable/Drinks/glintveinglass.rsi
+#SS220 Glintwine end
