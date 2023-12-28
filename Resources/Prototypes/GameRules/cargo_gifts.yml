@@ -216,7 +216,7 @@
     - type: CargoGiftsRule
       description: военное снаряжение
       sender: cargo-gift-default-sender
-      dest: экипажу станции
+      dest: экипажу
       gifts:
         SecurityArmor: 2
         SecurityHelmet: 2
