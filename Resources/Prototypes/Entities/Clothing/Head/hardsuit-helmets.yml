@@ -442,7 +442,7 @@
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.8
-        Heat: 0.2
+        Heat: 0.8 #ss220-helmetFix
         Radiation: 0.5
 
 #Cybersun Juggernaut Hardsuit
@@ -664,3 +664,20 @@
         Blunt: 0.95
         Slash: 0.95
         Piercing: 0.95
+
+#Santas Hardsuit
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitSanta
+  name: Santa's hardsuit helmet
+  description: A festive-looking hardsuit helmet that provides the jolly gift-giver protection from low-pressure environments.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/santahelm.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/santahelm.rsi
+  - type: PointLight
+    color: "#f4ffad"
+    radius: 5
+    energy: 2
