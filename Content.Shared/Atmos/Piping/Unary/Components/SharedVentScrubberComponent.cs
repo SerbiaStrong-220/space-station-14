@@ -17,6 +17,28 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public static HashSet<Gas> DefaultFilterGases = new()
         {
             Gas.CarbonDioxide,
+        };
+
+        public static HashSet<Gas> DefaultWideFilterGases = new()
+        {
+            Gas.CarbonDioxide,
+            Gas.Plasma,
+            Gas.Tritium,
+            Gas.WaterVapor,
+            Gas.Ammonia,
+            Gas.NitrousOxide,
+            Gas.Frezon
+        };
+
+        public static HashSet<Gas> DefaultFullFilterGases = new()
+        {
+        };
+
+        public static HashSet<Gas> DefaultPanicFilterGases = new()
+        {
+            Gas.Oxygen,
+            Gas.Nitrogen,
+            Gas.CarbonDioxide,
             Gas.Plasma,
             Gas.Tritium,
             Gas.WaterVapor,
@@ -39,7 +61,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public static GasVentScrubberData WideFilterModePreset = new GasVentScrubberData
         {
             Enabled = true,
-            FilterGases = new(GasVentScrubberData.DefaultFilterGases),
+            FilterGases = new(GasVentScrubberData.DefaultWideFilterGases),
             PumpDirection = ScrubberPumpDirection.Scrubbing,
             VolumeRate = 200f,
             WideNet = true
@@ -49,7 +71,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         {
             Enabled = false,
             Dirty = true,
-            FilterGases = new(GasVentScrubberData.DefaultFilterGases),
+            FilterGases = new(GasVentScrubberData.DefaultFullFilterGases),
             PumpDirection = ScrubberPumpDirection.Scrubbing,
             VolumeRate = 200f,
             WideNet = false
@@ -59,10 +81,10 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         {
             Enabled = true,
             Dirty = true,
-            FilterGases = new(GasVentScrubberData.DefaultFilterGases),
+            FilterGases = new(GasVentScrubberData.DefaultPanicFilterGases),
             PumpDirection = ScrubberPumpDirection.Siphoning,
             VolumeRate = 200f,
-            WideNet = false
+            WideNet = true
         };
 
         public static GasVentScrubberData ReplaceModePreset = new GasVentScrubberData
