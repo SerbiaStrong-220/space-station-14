@@ -10,7 +10,7 @@
   color: "#821f1d"
   recognizable: true
   metamorphicSprite:
-    sprite: Objects/Consumable/Drinks/glintveinglass.rsi
+    sprite: SS220/Objects/Consumable/Drinks/glintveinglass.rsi
     state: icon
   metabolisms:
     Drink:
