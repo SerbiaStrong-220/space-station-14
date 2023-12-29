@@ -205,6 +205,6 @@
     state: icon
   #SS220 fix_cargo end
   product: CrateCargoGambling
-  cost: 20000
+  cost: 20000 #SS220 fix_cargo
   category: Fun
   group: market
