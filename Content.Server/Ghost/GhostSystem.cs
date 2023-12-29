@@ -21,6 +21,7 @@ using Robust.Server.Player;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Ghost
@@ -41,6 +42,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
+        private static readonly Random rand = new Random();
 
         public override void Initialize()
         {
@@ -147,6 +149,18 @@ namespace Content.Server.Ghost
             component.TimeOfDeath = time;
         }
 
+        // SS220 - Start of ghost color randomizer submodule
+        private void SetRandomGhostColor(GhostComponent component)
+        {
+            component.color.R = rand.Next(0, 255);
+            component.color.G = rand.Next(0, 255);
+            component.color.B = rand.Next(0, 255);
+            
+            var ev = new AfterAutoHandleStateEvent();
+            RaiseLocalEvent(component.Owner, ref ev);
+        }
+        // SS220 - End of ghost color randomizer submodule
+
         private void OnGhostShutdown(EntityUid uid, GhostComponent component, ComponentShutdown args)
         {
             // Perf: If the entity is deleting itself, no reason to change these back.
@@ -191,6 +205,8 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
+            
+            SetRandomGhostColor(component); // SS220 - Ghost color randomizer
         }
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
