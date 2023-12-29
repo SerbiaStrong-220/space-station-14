@@ -201,7 +201,7 @@
 - type: cargoProduct
   id: FunCrateGambling
   icon: #SS220 fix_cargo begin
-    sprite: Structures\Storage\Crates\privatecrate_secure.rsi
+    sprite: Structures/Storage/Crates/privatecrate_secure.rsi
     state: icon
   #SS220 fix_cargo end
   product: CrateCargoGambling
