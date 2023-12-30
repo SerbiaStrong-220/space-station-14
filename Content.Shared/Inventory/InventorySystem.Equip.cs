@@ -103,6 +103,14 @@ public abstract partial class InventorySystem
 
         var gotEquippedEvent = new GotEquippedEvent(uid, args.Entity, slotDef);
         RaiseLocalEvent(args.Entity, gotEquippedEvent, true);
+
+        /*
+        if ()
+        {
+            var AddSpecialSoundEvent = new AddSpecialSoundEvent(uid, args.Entity, slotDef);
+            RaiseLocalEvent(args.Entity, AddSpecialSoundEvent, true);
+        }
+        */
     }
 
     /// <summary>

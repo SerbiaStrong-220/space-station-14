@@ -34,6 +34,7 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
+        //SubscribeLocalEvent<VocalComponent, AddSpecialSoundEvent>(AddSpecialSound);
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -43,7 +44,6 @@ public sealed class VocalSystem : EntitySystem
         LoadSounds(uid, component);
         LoadSpecialSounds(uid, component);
     }
-
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
     {
         // remove scream action when component removed
@@ -51,6 +51,11 @@ public sealed class VocalSystem : EntitySystem
         {
             _actions.RemoveAction(uid, component.ScreamActionEntity);
         }
+    }
+
+    private void AddSpecialSound(EntityUid uid, VocalComponent component, AddSpecialSound args)
+    {
+
     }
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
@@ -75,9 +80,12 @@ public sealed class VocalSystem : EntitySystem
             return;
 
         var mindId = mindContainer.Mind.Value;
-
         var roles = _entities.System<SharedRoleSystem>();
         var rolesAll = roles.MindGetAllRoles(mindId);
+
+        if (!_job.MindTryGetJobName(mindContainer.Mind.Value, out var jobName))
+            ;
+        //     return;
 
         if (_chat.TryPlayEmoteSound(uid, component.SpecialEmoteSounds, args.Emote))
         {
@@ -130,9 +138,6 @@ public sealed class VocalSystem : EntitySystem
 
 
         var jobName = "Hop";//заглушка
-
-       // if (!_job.MindTryGetJobName(uid, out jobName))
-       //     return;
 
         sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
 
