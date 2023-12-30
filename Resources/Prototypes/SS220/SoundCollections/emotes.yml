@@ -41,3 +41,10 @@
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_2.ogg
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_3.ogg
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
+
+- type: soundCollection
+  id: HopLaugh
+  files:
+    - /Audio/SS220/Voice/Hop/hoplaugh1.ogg
+    - /Audio/SS220/Voice/Hop/hoplaugh2.ogg
+    - /Audio/SS220/Voice/Hop/hoplaugh3.ogg

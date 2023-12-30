@@ -43,4 +43,8 @@ public sealed partial class VocalComponent : Component
     /// </summary>
     [ViewVariables]
     public EmoteSoundsPrototype? EmoteSounds = null;
+
+    //Special sounds for entity
+    //Null if no valid prototype for entity sex was found.
+    public EmoteSoundsPrototype? SpecialEmoteSounds = null;
 }

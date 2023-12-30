@@ -8,6 +8,10 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.Roles.Jobs;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Content.Shared.Roles;
+using Content.Shared.Mind.Components;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -18,6 +22,8 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly IEntityManager _entities = default!;
 
     public override void Initialize()
     {
@@ -35,6 +41,7 @@ public sealed class VocalSystem : EntitySystem
         // try to add scream action when vocal comp added
         _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
         LoadSounds(uid, component);
+        LoadSpecialSounds(uid, component);
     }
 
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
@@ -62,6 +69,22 @@ public sealed class VocalSystem : EntitySystem
             args.Handled = TryPlayScreamSound(uid, component);
             return;
         }
+
+        // SS220 Chat-Special-Emote begin
+        if (!TryComp<MindContainerComponent>(uid, out var mindContainer) || mindContainer.Mind == null)
+            return;
+
+        var mindId = mindContainer.Mind.Value;
+
+        var roles = _entities.System<SharedRoleSystem>();
+        var rolesAll = roles.MindGetAllRoles(mindId);
+
+        if (_chat.TryPlayEmoteSound(uid, component.SpecialEmoteSounds, args.Emote))
+        {
+            args.Handled = true;
+            return;
+        }
+        // SS220 Chat-Special-Emote end
 
         // just play regular sound based on emote proto
         args.Handled = _chat.TryPlayEmoteSound(uid, component.EmoteSounds, args.Emote);
@@ -98,4 +121,25 @@ public sealed class VocalSystem : EntitySystem
             return;
         _proto.TryIndex(protoId, out component.EmoteSounds);
     }
+
+    // SS220 Chat-Special-Emote begin
+    private void LoadSpecialSounds(EntityUid uid, VocalComponent component, Sex? sex = null)
+    {
+        if (component.Sounds == null)
+            return;
+
+
+        var jobName = "Hop";//заглушка
+
+       // if (!_job.MindTryGetJobName(uid, out jobName))
+       //     return;
+
+        sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
+
+        if (!component.Sounds.TryGetValue(sex.Value, out var protoId))
+            return;
+
+        _proto.TryIndex(protoId + jobName, out component.SpecialEmoteSounds);
+    }
+    // SS220 Chat-Special-Emote end
 }
