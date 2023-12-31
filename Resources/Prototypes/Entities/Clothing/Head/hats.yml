@@ -375,6 +375,13 @@
     sprite: Clothing/Head/Hats/santahat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/santahat.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleSanta
+  #ss220 special_sounds end
+
 
 - type: entity
   parent: ClothingHeadBase

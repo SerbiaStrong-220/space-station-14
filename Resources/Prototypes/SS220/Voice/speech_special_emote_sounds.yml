@@ -1,4 +1,4 @@
-# jobs
+# hats
 - type: emoteSounds
   id: MaleHop
   params:
@@ -6,3 +6,12 @@
   sounds:
     Laugh:
       collection: HopLaugh
+
+- type: emoteSounds
+  id: MaleSanta
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: SantaLaugh
+
