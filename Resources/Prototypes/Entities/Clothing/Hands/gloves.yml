@@ -426,3 +426,16 @@
     fiberMaterial: fibers-rubber
     fiberColor: fibers-yellow
   - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesYsatyu
+  name: ysatyu gloves
+  description: Not a single glass of moonshine will slip out of your hands.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/ysatyu.rsi
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/ysatyu.rsi
+  - type: Fiber
+    fiberColor: fibers-red

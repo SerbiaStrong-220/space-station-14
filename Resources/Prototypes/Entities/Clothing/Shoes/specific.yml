@@ -235,3 +235,14 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepSkates
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingShoesYsatyu
+  name: ysatyu boots
+  description: Will pave the way to the nearest moonshine deposits.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/ysatyu.rsi
+  - type: Clothing
+    sprite: Clothing/Shoes/Specific/ysatyu.rsi

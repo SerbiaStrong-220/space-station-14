@@ -1471,3 +1471,17 @@
     sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitYsatyu
+  name: ysatyu suit
+  description: It smells like moonshine
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/ysatyu.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/ysatyu.rsi
+  - type: Tag
+    tags:
+    - ClownSuit
