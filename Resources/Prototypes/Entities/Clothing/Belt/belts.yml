@@ -386,6 +386,11 @@
         - Packet
         - Skewer
         - MonkeyCube
+        #ss220 chiefs belt start
+        - WaterBottle
+        - Vinegar
+        - OilOlive
+        #ss220 chiefs belt end
       components:
         - Mousetrap
         - Smokable
