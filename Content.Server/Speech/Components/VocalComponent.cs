@@ -44,7 +44,9 @@ public sealed partial class VocalComponent : Component
     [ViewVariables]
     public EmoteSoundsPrototype? EmoteSounds = null;
 
+    // SS220 Chat-Special-Emote start
     //Special sounds for entity
-    //Null if no valid prototype for entity sex was found.
+    //Null if no valid prototype for entity sex was found or item were removed.
     public EmoteSoundsPrototype? SpecialEmoteSounds = null;
+    // SS220 Chat-Special-Emote end
 }

@@ -8,9 +8,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.Roles.Jobs;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Content.Shared.SS220.Speech;
+using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -21,7 +19,7 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IEntityManager _entities = default!;// SS220 Chat-Special-Emote
 
     public override void Initialize()
     {
@@ -32,10 +30,8 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        // SS220 Chat-Special-Emote begin
-        SubscribeLocalEvent<VocalComponent, HasSpecialSoundsEvent>(HasSpecialSounds);
-        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);
-        // SS220 Chat-Special-Emote end
+        SubscribeLocalEvent<VocalComponent, HasSpecialSoundsEvent>(HasSpecialSounds);// SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);// SS220 Chat-Special-Emote
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -44,6 +40,7 @@ public sealed class VocalSystem : EntitySystem
         _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
         LoadSounds(uid, component);
     }
+
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
     {
         // remove scream action when component removed
@@ -71,13 +68,13 @@ public sealed class VocalSystem : EntitySystem
         }
 
         // SS220 Chat-Special-Emote begin
+        //Will play special emote if it exists
         if (_chat.TryPlayEmoteSound(uid, component.SpecialEmoteSounds, args.Emote))
         {
             args.Handled = true;
             return;
         }
         // SS220 Chat-Special-Emote end
-
         // just play regular sound based on emote proto
         args.Handled = _chat.TryPlayEmoteSound(uid, component.EmoteSounds, args.Emote);
     }

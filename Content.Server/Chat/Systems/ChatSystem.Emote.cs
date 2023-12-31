@@ -3,7 +3,6 @@ using Content.Shared.Chat.Prototypes;
 using Content.Shared.Emoting;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using System;
 
 namespace Content.Server.Chat.Systems;
 
@@ -11,7 +10,6 @@ namespace Content.Server.Chat.Systems;
 public partial class ChatSystem
 {
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
-
 
     protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
@@ -62,7 +60,6 @@ public partial class ChatSystem
     {
         if (!_prototypeManager.TryIndex<EmotePrototype>(emoteId, out var proto))
             return;
-
         TryEmoteWithChat(source, proto, range, hideLog: hideLog, nameOverride, ignoreActionBlocker: ignoreActionBlocker);
     }
 
@@ -144,7 +141,6 @@ public partial class ChatSystem
             if (sound == null)
                 return false;
         }
-
 
         // if general params for all sounds set - use them
         var param = proto.GeneralParams ?? sound.Params;
