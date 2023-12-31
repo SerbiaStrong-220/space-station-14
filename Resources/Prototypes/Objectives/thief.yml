@@ -205,7 +205,7 @@
   id: ExpensiveLighterShieldStealObjective
   components:
   - type: NotJobRequirement
-    job: Blueshield
+    job: BlueShield
   - type: StealCondition
     stealGroup: ExpensiveLighterShield
   - type: Objective
