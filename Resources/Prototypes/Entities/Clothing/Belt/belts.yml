@@ -390,6 +390,7 @@
         - WaterBottle
         - Vinegar
         - OilOlive
+        - GlassBeaker
         #ss220 chiefs belt end
       components:
         - Mousetrap
