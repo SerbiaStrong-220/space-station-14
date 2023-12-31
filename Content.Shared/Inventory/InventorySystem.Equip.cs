@@ -18,6 +18,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.SS220.Speech;
 
 namespace Content.Shared.Inventory;
 
@@ -33,6 +34,7 @@ public abstract partial class InventorySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IEntityManager _entManager = default!;
 
     [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";
@@ -91,6 +93,13 @@ public abstract partial class InventorySystem
 
         var gotUnequippedEvent = new GotUnequippedEvent(uid, args.Entity, slotDef);
         RaiseLocalEvent(args.Entity, gotUnequippedEvent, true);
+
+        // SS220 Chat-Special-Emote begin
+        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var xform))
+        {
+            RaiseLocalEvent(uid, new UnloadSpecialSoundsEvent());
+        }
+        // SS220 Chat-Special-Emote end
     }
 
     private void OnEntInserted(EntityUid uid, InventoryComponent component, EntInsertedIntoContainerMessage args)
@@ -104,13 +113,12 @@ public abstract partial class InventorySystem
         var gotEquippedEvent = new GotEquippedEvent(uid, args.Entity, slotDef);
         RaiseLocalEvent(args.Entity, gotEquippedEvent, true);
 
-        /*
-        if ()
+        // SS220 Chat-Special-Emote begin
+        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var xform))
         {
-            var AddSpecialSoundEvent = new AddSpecialSoundEvent(uid, args.Entity, slotDef);
-            RaiseLocalEvent(args.Entity, AddSpecialSoundEvent, true);
+            RaiseLocalEvent(uid, new HasSpecialSoundsEvent(args.Entity));
         }
-        */
+        // SS220 Chat-Special-Emote end
     }
 
     /// <summary>

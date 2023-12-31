@@ -10,8 +10,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Roles.Jobs;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Content.Shared.Roles;
-using Content.Shared.Mind.Components;
+using Content.Shared.SS220.Speech;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -22,7 +21,6 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
 
     public override void Initialize()
@@ -34,7 +32,10 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        //SubscribeLocalEvent<VocalComponent, AddSpecialSoundEvent>(AddSpecialSound);
+        // SS220 Chat-Special-Emote begin
+        SubscribeLocalEvent<VocalComponent, HasSpecialSoundsEvent>(HasSpecialSounds);
+        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);
+        // SS220 Chat-Special-Emote end
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -42,7 +43,6 @@ public sealed class VocalSystem : EntitySystem
         // try to add scream action when vocal comp added
         _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
         LoadSounds(uid, component);
-        LoadSpecialSounds(uid, component);
     }
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
     {
@@ -51,11 +51,6 @@ public sealed class VocalSystem : EntitySystem
         {
             _actions.RemoveAction(uid, component.ScreamActionEntity);
         }
-    }
-
-    private void AddSpecialSound(EntityUid uid, VocalComponent component, AddSpecialSound args)
-    {
-
     }
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
@@ -76,17 +71,6 @@ public sealed class VocalSystem : EntitySystem
         }
 
         // SS220 Chat-Special-Emote begin
-        if (!TryComp<MindContainerComponent>(uid, out var mindContainer) || mindContainer.Mind == null)
-            return;
-
-        var mindId = mindContainer.Mind.Value;
-        var roles = _entities.System<SharedRoleSystem>();
-        var rolesAll = roles.MindGetAllRoles(mindId);
-
-        if (!_job.MindTryGetJobName(mindContainer.Mind.Value, out var jobName))
-            ;
-        //     return;
-
         if (_chat.TryPlayEmoteSound(uid, component.SpecialEmoteSounds, args.Emote))
         {
             args.Handled = true;
@@ -131,20 +115,35 @@ public sealed class VocalSystem : EntitySystem
     }
 
     // SS220 Chat-Special-Emote begin
-    private void LoadSpecialSounds(EntityUid uid, VocalComponent component, Sex? sex = null)
+    private void LoadSpecialSounds(EntityUid uid, VocalComponent component, VocalComponent itemComponent, Sex? sex = null)
     {
         if (component.Sounds == null)
             return;
 
-
-        var jobName = "Hop";//заглушка
+        if (itemComponent.Sounds == null)
+            return;
 
         sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
 
-        if (!component.Sounds.TryGetValue(sex.Value, out var protoId))
+        if (!itemComponent.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
 
-        _proto.TryIndex(protoId + jobName, out component.SpecialEmoteSounds);
+        _proto.TryIndex(protoId, out itemComponent.SpecialEmoteSounds);
+
+        component.SpecialEmoteSounds = itemComponent.SpecialEmoteSounds;
+    }
+    private void HasSpecialSounds(EntityUid uid, VocalComponent component, HasSpecialSoundsEvent args)
+    {
+        _entities.TryGetComponent<VocalComponent>(args.Item, out var itemComponent);
+
+        if (itemComponent == null)
+            return;
+
+        LoadSpecialSounds(uid, component, itemComponent);
+    }
+    private void UnloadSpecialSounds(EntityUid uid, VocalComponent component, UnloadSpecialSoundsEvent args)
+    {
+        component.SpecialEmoteSounds = null;
     }
     // SS220 Chat-Special-Emote end
 }
