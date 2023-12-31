@@ -1,10 +1,8 @@
 # jobs
 - type: emoteSounds
-  id: MaleHumanHop
+  id: MaleHop
   params:
     variation: 0.125
   sounds:
     Laugh:
-      collection: HopLaugh
-    Giggle:
       collection: HopLaugh
