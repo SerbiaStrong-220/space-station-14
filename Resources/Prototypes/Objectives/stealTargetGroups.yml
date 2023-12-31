@@ -172,7 +172,6 @@
     sprite: SS220/Objects/Tools/lighters.rsi
     state: zippo_syndi_icon_base #SS220-Zippo-Steal-End
 
-
 - type: stealTargetGroup
   id: ForensicScanner
   name: forensic scanner

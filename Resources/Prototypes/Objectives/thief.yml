@@ -193,7 +193,7 @@
   id: ExpensiveLighterNanotrasenStealObjective
   components:
   - type: NotJobRequirement
-    job: Captain, IAA
+    job: Captain
   - type: StealCondition
     stealGroup: ExpensiveLighterNanotrasen
   - type: Objective
