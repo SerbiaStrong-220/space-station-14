@@ -168,6 +168,6 @@
   description: Long and narrow for convenient drinking of moonshine.
   components:
     - type: Sprite
-      sprite: Clothing/Neck/Scarfs/syndiered.rsi
+      sprite: Clothing/Neck/Scarfs/ysatyu.rsi
     - type: Clothing
-      sprite: Clothing/Neck/Scarfs/syndiered.rsi
+      sprite: Clothing/Neck/Scarfs/ysatyu.rsi

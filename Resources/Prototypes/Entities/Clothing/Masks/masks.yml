@@ -552,8 +552,7 @@
 
 - type: entity
   parent: ClothingMaskBase
-  id: ClothingMaskYsatyuBase
-  abstract: true
+  id: ClothingMaskYsatyu
   name: ysatyu mask
   description: There is no better pastime than drinking moonshine with comrades.
   components:
@@ -563,6 +562,3 @@
     sprite: Clothing/Mask/ysatyu.rsi
   - type: BreathMask
   - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - ClownMask

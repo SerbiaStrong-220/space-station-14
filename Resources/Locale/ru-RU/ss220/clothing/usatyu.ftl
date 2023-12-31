@@ -1,7 +1,7 @@
 ent-ClothingUniformJumpsuitYsatyu = одежда Мужика
     .desc = Пахнет самогоном.
-ent-ClothingMaskYsatyuBase = маска Мужика
-    .desc = Нет лучшего времяпрепровождения, чем распивать самогон с товарищами.
+ent-ClothingMaskYsatyu = маска Мужика
+    .desc = Нет лучше времяпрепровождения, чем распивать самогон с товарищами.
 ent-ClothingHeadYsatyu = фуражка Мужика
     .desc = Фуражка самогонных дел мастера.
 ent-ClothingShoesYsatyu = ботинки Мужика
