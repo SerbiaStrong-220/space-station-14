@@ -17,9 +17,10 @@
     quickEquip: false
     slots:
       - Belt
-    #SS220 JOL TilePrying
+    #SS220 JOL TilePrying begin
   - type: TilePrying
     advanced: true
+    #SS220 JOL TilePrying end
   - type: LatticeCutting
   - type: Tool
     qualities:
