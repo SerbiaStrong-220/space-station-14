@@ -222,12 +222,6 @@
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
-  #ss220 special_sounds start
-  - type: SpecialSounds
-  - type: Vocal
-    sounds:
-      Male: KEKW
-  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadBase

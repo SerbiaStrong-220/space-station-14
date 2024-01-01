@@ -48,7 +48,6 @@ public sealed class VocalSystem : EntitySystem
         {
             _actions.RemoveAction(uid, component.ScreamActionEntity);
         }
-        component.SpecialEmoteSounds = null;// SS220 Chat-Special-Emote
     }
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
