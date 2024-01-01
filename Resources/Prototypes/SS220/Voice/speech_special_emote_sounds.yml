@@ -1,11 +1,11 @@
-# hats
+# special emotes pack
 - type: emoteSounds
-  id: MaleHop
+  id: MaleBoss
   params:
     variation: 0.125
   sounds:
     Laugh:
-      collection: HopLaugh
+      collection: MaleBossLaugh
 
 - type: emoteSounds
   id: MaleSanta
@@ -13,5 +13,5 @@
     variation: 0.125
   sounds:
     Laugh:
-      collection: SantaLaugh
+      collection: MaleSantaLaugh
 

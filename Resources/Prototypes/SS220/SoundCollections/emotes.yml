@@ -43,15 +43,15 @@
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
 
 - type: soundCollection
-  id: HopLaugh
+  id: MaleBossLaugh
   files:
-    - /Audio/SS220/Voice/Hop/hop_laugh_1.ogg
-    - /Audio/SS220/Voice/Hop/hop_laugh_2.ogg
-    - /Audio/SS220/Voice/Hop/hop_laugh_3.ogg
+    - /Audio/SS220/Voice/Hop/male_boss_laugh_1.ogg
+    - /Audio/SS220/Voice/Hop/male_boss_laugh_2.ogg
+    - /Audio/SS220/Voice/Hop/male_boss_laugh_3.ogg
 
 - type: soundCollection
-  id: SantaLaugh
+  id: MaleSantaLaugh
   files:
-    - /Audio/SS220/Voice/Santa/santa_laugh_1.ogg
-    - /Audio/SS220/Voice/Santa/santa_laugh_2.ogg
-    - /Audio/SS220/Voice/Santa/santa_laugh_3.ogg
+    - /Audio/SS220/Voice/Santa/male_santa_laugh_1.ogg
+    - /Audio/SS220/Voice/Santa/male_santa_laugh_2.ogg
+    - /Audio/SS220/Voice/Santa/male_santa_laugh_3.ogg

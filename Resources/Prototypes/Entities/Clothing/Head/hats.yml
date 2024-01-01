@@ -280,7 +280,7 @@
   - type: SpecialSounds
   - type: Vocal
     sounds:
-      Male: MaleHop
+      Male: MaleBoss
   #ss220 special_sounds end
 
 - type: entity
