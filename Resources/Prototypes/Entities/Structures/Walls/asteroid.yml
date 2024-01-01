@@ -1,5 +1,7 @@
-#Asteroid rocks
-#These can probably be merged with the rock types below these now, but I'm not going to mess with it since I don't want to risk altering any behavior.
+#TODO: Someone should probably move the ore vein prototypes into their own file, or otherwise split this up in some way. This should not be 1.5k lines long.
+
+
+#Asteroid rock
 - type: entity
   id: AsteroidRock
   parent: BaseStructure
@@ -7,6 +9,7 @@
   suffix: Low Ore Yield
   description: A rocky asteroid.
   components:
+  - type: FoVOverlay # SS220 perspective-wall-fov
   - type: PlacementReplacement
     key: walls
   - type: SoundOnGather
@@ -152,6 +155,7 @@
   id: WallRock
   parent: BaseStructure
   name: rock
+  suffix: planetmap
   components:
     - type: PlacementReplacement
       key: walls
