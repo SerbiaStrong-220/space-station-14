@@ -46,7 +46,8 @@ public sealed partial class VocalComponent : Component
 
     // SS220 Chat-Special-Emote start
     //Special sounds for entity
-    //Null if no valid prototype for entity sex was found or item were removed.
-    public EmoteSoundsPrototype? SpecialEmoteSounds = null;
+    //Made it dictionaty so that user could load several packs of emotions from several items
+    //Null if no valid prototype were loaded
+    public Dictionary<EntityUid, EmoteSoundsPrototype>? SpecialEmoteSounds = null;
     // SS220 Chat-Special-Emote end
 }

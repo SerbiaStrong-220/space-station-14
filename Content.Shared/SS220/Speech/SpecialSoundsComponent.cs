@@ -23,8 +23,9 @@ public sealed class HasSpecialSoundsEvent : EntityEventArgs
 
 public sealed class UnloadSpecialSoundsEvent : EntityEventArgs
 {
-    public UnloadSpecialSoundsEvent()
+    public EntityUid Item;
+    public UnloadSpecialSoundsEvent(EntityUid item)
     {
-
+        Item = item;
     }
 }

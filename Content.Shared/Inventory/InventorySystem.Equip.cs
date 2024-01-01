@@ -95,9 +95,9 @@ public abstract partial class InventorySystem
         RaiseLocalEvent(args.Entity, gotUnequippedEvent, true);
 
         // SS220 Chat-Special-Emote begin
-        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var xform))
+        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp))
         {
-            RaiseLocalEvent(uid, new UnloadSpecialSoundsEvent());
+            RaiseLocalEvent(uid, new UnloadSpecialSoundsEvent(args.Entity));
         }
         // SS220 Chat-Special-Emote end
     }
@@ -114,7 +114,7 @@ public abstract partial class InventorySystem
         RaiseLocalEvent(args.Entity, gotEquippedEvent, true);
 
         // SS220 Chat-Special-Emote begin
-        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var xform))
+        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp))
         {
             RaiseLocalEvent(uid, new HasSpecialSoundsEvent(args.Entity));
         }

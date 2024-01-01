@@ -48,6 +48,7 @@ public sealed class VocalSystem : EntitySystem
         {
             _actions.RemoveAction(uid, component.ScreamActionEntity);
         }
+        component.SpecialEmoteSounds = null;// SS220 Chat-Special-Emote
     }
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
@@ -69,7 +70,7 @@ public sealed class VocalSystem : EntitySystem
 
         // SS220 Chat-Special-Emote begin
         //Will play special emote if it exists
-        if (_chat.TryPlayEmoteSound(uid, component.SpecialEmoteSounds, args.Emote))
+        if(CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
@@ -112,7 +113,18 @@ public sealed class VocalSystem : EntitySystem
     }
 
     // SS220 Chat-Special-Emote begin
-    private void LoadSpecialSounds(EntityUid uid, VocalComponent component, VocalComponent itemComponent, Sex? sex = null)
+    private bool CheckSpecialSounds(EntityUid uid, VocalComponent component, EmotePrototype emote)
+    {
+        if (component.SpecialEmoteSounds == null)
+            return false;
+
+        foreach (var specEmote in component.SpecialEmoteSounds)
+            if (_chat.TryPlayEmoteSound(uid, specEmote.Value, emote))
+                return true;
+
+        return false;
+    }
+    private void LoadSpecialSounds(EntityUid uid, VocalComponent component, EntityUid itemUid, VocalComponent itemComponent, Sex? sex = null)
     {
         if (component.Sounds == null)
             return;
@@ -120,14 +132,20 @@ public sealed class VocalSystem : EntitySystem
         if (itemComponent.Sounds == null)
             return;
 
+        if (component.SpecialEmoteSounds == null)
+            component.SpecialEmoteSounds = new();
+
         sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
 
         if (!itemComponent.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
 
-        _proto.TryIndex(protoId, out itemComponent.SpecialEmoteSounds);
+        _proto.TryIndex(protoId, out itemComponent.EmoteSounds);
 
-        component.SpecialEmoteSounds = itemComponent.SpecialEmoteSounds;
+        if (itemComponent.EmoteSounds == null)
+            return;
+
+        component.SpecialEmoteSounds.Add(itemUid, itemComponent.EmoteSounds);
     }
     private void HasSpecialSounds(EntityUid uid, VocalComponent component, HasSpecialSoundsEvent args)
     {
@@ -136,11 +154,20 @@ public sealed class VocalSystem : EntitySystem
         if (itemComponent == null)
             return;
 
-        LoadSpecialSounds(uid, component, itemComponent);
+        if ((component.SpecialEmoteSounds!=null) && (component.SpecialEmoteSounds.ContainsKey(args.Item)))
+            return;
+
+        LoadSpecialSounds(uid, component, args.Item, itemComponent);
     }
     private void UnloadSpecialSounds(EntityUid uid, VocalComponent component, UnloadSpecialSoundsEvent args)
     {
-        component.SpecialEmoteSounds = null;
+        if (component.SpecialEmoteSounds == null)
+            return;
+
+        component.SpecialEmoteSounds.Remove(args.Item);
+
+        if (component.SpecialEmoteSounds.Count < 1)
+            component.SpecialEmoteSounds = null;
     }
     // SS220 Chat-Special-Emote end
 }
