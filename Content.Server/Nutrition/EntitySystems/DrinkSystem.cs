@@ -58,6 +58,7 @@ public sealed class DrinkSystem : EntitySystem
     [Dependency] private readonly StomachSystem _stomach = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly ForensicsSystem _forensics = default!;
 
     public override void Initialize()
     {
@@ -115,7 +116,7 @@ public sealed class DrinkSystem : EntitySystem
             if (reagent.Metabolisms == null)
                 continue;
 
-            foreach ((var _, var entry) in reagent.Metabolisms)
+            foreach (var entry in reagent.Metabolisms.Values)
             {
                 foreach (var effect in entry.Effects)
                 {
@@ -417,9 +418,7 @@ public sealed class DrinkSystem : EntitySystem
         //TODO: Grab the stomach UIDs somehow without using Owner
         _stomach.TryTransferSolution(firstStomach.Value.Comp.Owner, drained, firstStomach.Value.Comp);
 
-        var comp = EnsureComp<ForensicsComponent>(uid);
-        if (TryComp<DnaComponent>(args.Target, out var dna))
-            comp.DNAs.Add(dna.DNA);
+        _forensics.TransferDna(uid, args.Target.Value);
 
         if (!forceDrink && solution.Volume > 0)
             args.Repeat = true;
