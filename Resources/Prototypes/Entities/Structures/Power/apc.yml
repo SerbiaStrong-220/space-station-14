@@ -65,6 +65,13 @@
       output:
         !type:CableDeviceNode
         nodeGroupID: Apc
+  - type: PowerMonitoringDevice
+    group: APC
+    sourceNode: input
+    loadNode: output
+    collectionName: apc
+    sprite: Structures/Power/apc.rsi
+    state: static
   - type: BatteryCharger
     voltage: Medium
   - type: PowerProvider
@@ -126,6 +133,8 @@
     lowVoltageNode: output
   - type: StaticPrice
     price: 500
+  - type: NameIdentifier #SS220 PowerId
+    group: PowerId
 
 # APC under construction
 - type: entity
