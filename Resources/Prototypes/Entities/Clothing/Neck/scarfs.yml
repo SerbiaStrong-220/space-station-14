@@ -160,14 +160,3 @@
   - type: Tag
     tags:
        - Ian # SS220 Shapochki
-
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckScarfYsatyu
-  name: ysatyu scarf
-  description: Long and narrow for convenient drinking of moonshine.
-  components:
-    - type: Sprite
-      sprite: Clothing/Neck/Scarfs/ysatyu.rsi
-    - type: Clothing
-      sprite: Clothing/Neck/Scarfs/ysatyu.rsi
