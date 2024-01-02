@@ -1,0 +1,16 @@
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.csproj.AssemblyReference.cache
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.AssemblyInfoInputs.cache
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.AssemblyInfo.cs
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.csproj.CoreCompileInputs.cache
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.sourcelink.json
+C:\popa\bin\Content.Server.Database\Content.Server.Database.deps.json
+C:\popa\bin\Content.Server.Database\Content.Server.Database.runtimeconfig.json
+C:\popa\bin\Content.Server.Database\Content.Server.Database.dll
+C:\popa\bin\Content.Server.Database\Content.Server.Database.pdb
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.csproj.CopyComplete
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.dll
+C:\popa\Content.Server.Database\obj\Debug\refint\Content.Server.Database.dll
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.pdb
+C:\popa\Content.Server.Database\obj\Debug\Content.Server.Database.genruntimeconfig.cache
+C:\popa\Content.Server.Database\obj\Debug\ref\Content.Server.Database.dll

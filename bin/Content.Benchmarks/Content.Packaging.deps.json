@@ -1,0 +1,651 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Content.Packaging/1.0.0": {
+        "dependencies": {
+          "NVorbis": "0.10.5",
+          "Robust.Packaging": "195.0.1",
+          "Robust.NetSerializer.Reference": "4.1.1.0",
+          "SpaceWizards.Lidgren.Network.Reference": "0.0.0.0"
+        },
+        "runtime": {
+          "Content.Packaging.dll": {}
+        }
+      },
+      "libsodium/1.0.18.2": {
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libsodium.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libsodium.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libsodium.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libsodium.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-arm64/native/libsodium.dylib": {
+            "rid": "osx-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libsodium.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libsodium.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.0.18.0"
+          },
+          "runtimes/win-x86/native/libsodium.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.0.18.0"
+          }
+        }
+      },
+      "Linguini.Bundle/0.1.3": {
+        "dependencies": {
+          "Linguini.Shared": "0.1.3",
+          "Linguini.Syntax": "0.1.3"
+        },
+        "runtime": {
+          "lib/net5.0/Linguini.Bundle.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Linguini.Shared/0.1.3": {
+        "runtime": {
+          "lib/netstandard2.1/Linguini.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Linguini.Syntax/0.1.3": {
+        "dependencies": {
+          "Linguini.Shared": "0.1.3"
+        },
+        "runtime": {
+          "lib/net5.0/Linguini.Syntax.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.ObjectPool/6.0.2": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.ObjectPool.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.6412"
+          }
+        }
+      },
+      "Microsoft.ILVerification/6.0.0": {
+        "dependencies": {
+          "System.Reflection.Metadata": "1.8.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ILVerification.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/2.3.2": {
+        "runtime": {
+          "lib/net5.0/Microsoft.IO.RecyclableMemoryStream.dll": {
+            "assemblyVersion": "2.3.2.0",
+            "fileVersion": "2.3.2.0"
+          }
+        }
+      },
+      "Microsoft.NETCore.Platforms/5.0.0": {},
+      "Microsoft.Win32.Registry/5.0.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
+        }
+      },
+      "Nett/0.15.0": {
+        "runtime": {
+          "lib/netstandard2.0/Nett.dll": {
+            "assemblyVersion": "0.15.0.0",
+            "fileVersion": "0.15.0.0"
+          }
+        }
+      },
+      "NVorbis/0.10.5": {
+        "dependencies": {
+          "System.Memory": "4.5.4",
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NVorbis.dll": {
+            "assemblyVersion": "0.10.5.0",
+            "fileVersion": "0.10.5.0"
+          }
+        }
+      },
+      "Pidgin/2.5.0": {
+        "dependencies": {
+          "System.Buffers": "4.4.0",
+          "System.Collections.Immutable": "1.4.0",
+          "System.Memory": "4.5.4",
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Pidgin.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.0.0"
+          }
+        }
+      },
+      "prometheus-net/4.1.1": {
+        "runtime": {
+          "lib/netcoreapp2.1/Prometheus.NetCore.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.1.1.0"
+          },
+          "lib/netcoreapp2.1/Prometheus.NetStandard.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.1.1.0"
+          }
+        }
+      },
+      "Robust.Shared.AuthLib/0.1.2": {
+        "runtime": {
+          "lib/netstandard2.1/Robust.Shared.AuthLib.dll": {
+            "assemblyVersion": "0.1.2.0",
+            "fileVersion": "0.1.2.0"
+          }
+        }
+      },
+      "Serilog/2.10.0": {
+        "runtime": {
+          "lib/netstandard2.1/Serilog.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.10.0.0"
+          }
+        }
+      },
+      "SharpZstd.Interop/1.5.2-beta2": {
+        "dependencies": {
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SharpZstd.Interop.dll": {
+            "assemblyVersion": "1.5.2.0",
+            "fileVersion": "1.5.2.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/zstd.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/zstd.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/zstd.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.5.2.0"
+          },
+          "runtimes/win-x64/native/zstd.pdb": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/zstd.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.5.2.0"
+          },
+          "runtimes/win-x86/native/zstd.pdb": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/2.1.3": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
+          "System.Text.Encoding.CodePages": "5.0.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.3.0"
+          }
+        }
+      },
+      "SpaceWizards.Sodium/0.2.1": {
+        "dependencies": {
+          "SpaceWizards.Sodium.Interop": "1.0.18-beta4"
+        },
+        "runtime": {
+          "lib/net6.0/SpaceWizards.Sodium.dll": {
+            "assemblyVersion": "0.2.1.0",
+            "fileVersion": "0.2.1.0"
+          }
+        }
+      },
+      "SpaceWizards.Sodium.Interop/1.0.18-beta4": {
+        "dependencies": {
+          "libsodium": "1.0.18.2"
+        },
+        "runtime": {
+          "lib/net6.0/SpaceWizards.Sodium.Interop.dll": {
+            "assemblyVersion": "1.0.18.0",
+            "fileVersion": "1.0.18.0"
+          }
+        }
+      },
+      "System.Buffers/4.4.0": {},
+      "System.Collections.Immutable/1.4.0": {},
+      "System.Memory/4.5.4": {},
+      "System.Reflection.Metadata/1.8.1": {},
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {},
+      "System.Security.AccessControl/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
+        }
+      },
+      "System.Security.Principal.Windows/5.0.0": {},
+      "System.Text.Encoding.CodePages/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0"
+        }
+      },
+      "System.ValueTuple/4.5.0": {},
+      "TerraFX.Interop.Windows/10.0.20348-rc2": {
+        "runtime": {
+          "lib/net6.0/TerraFX.Interop.Windows.dll": {
+            "assemblyVersion": "10.0.20348.0",
+            "fileVersion": "10.0.20348.0"
+          }
+        }
+      },
+      "VorbisPizza/1.3.0": {
+        "runtime": {
+          "lib/net6.0/VorbisPizza.dll": {
+            "assemblyVersion": "1.3.0.0",
+            "fileVersion": "1.3.0.0"
+          }
+        }
+      },
+      "YamlDotNet/12.0.0": {
+        "runtime": {
+          "lib/net6.0/YamlDotNet.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.0.0"
+          }
+        }
+      },
+      "Robust.NetSerializer/4.1.1": {
+        "runtime": {
+          "Robust.NetSerializer.dll": {}
+        }
+      },
+      "Robust.Packaging/195.0.1": {
+        "dependencies": {
+          "NVorbis": "0.10.5",
+          "Robust.Shared": "195.0.1"
+        },
+        "runtime": {
+          "Robust.Packaging.dll": {}
+        }
+      },
+      "Robust.Physics/195.0.1": {
+        "dependencies": {
+          "Robust.Shared.Maths": "195.0.1"
+        },
+        "runtime": {
+          "Robust.Physics.dll": {}
+        }
+      },
+      "Robust.Shared/195.0.1": {
+        "dependencies": {
+          "Linguini.Bundle": "0.1.3",
+          "Microsoft.Extensions.ObjectPool": "6.0.2",
+          "Microsoft.ILVerification": "6.0.0",
+          "Microsoft.IO.RecyclableMemoryStream": "2.3.2",
+          "Microsoft.Win32.Registry": "5.0.0",
+          "Nett": "0.15.0",
+          "Pidgin": "2.5.0",
+          "Robust.NetSerializer": "4.1.1",
+          "Robust.Physics": "195.0.1",
+          "Robust.Shared.AuthLib": "0.1.2",
+          "Robust.Shared.Maths": "195.0.1",
+          "Serilog": "2.10.0",
+          "SharpZstd.Interop": "1.5.2-beta2",
+          "SixLabors.ImageSharp": "2.1.3",
+          "SpaceWizards.Lidgren.Network": "1.0.0",
+          "SpaceWizards.Sodium": "0.2.1",
+          "TerraFX.Interop.Windows": "10.0.20348-rc2",
+          "VorbisPizza": "1.3.0",
+          "YamlDotNet": "12.0.0",
+          "prometheus-net": "4.1.1"
+        },
+        "runtime": {
+          "Robust.Shared.dll": {}
+        }
+      },
+      "Robust.Shared.Maths/195.0.1": {
+        "runtime": {
+          "Robust.Shared.Maths.dll": {}
+        }
+      },
+      "SpaceWizards.Lidgren.Network/1.0.0": {
+        "runtime": {
+          "SpaceWizards.Lidgren.Network.dll": {}
+        }
+      },
+      "Robust.NetSerializer.Reference/4.1.1.0": {
+        "runtime": {
+          "Robust.NetSerializer.dll": {
+            "assemblyVersion": "4.1.1.0",
+            "fileVersion": "4.1.1.0"
+          }
+        }
+      },
+      "SpaceWizards.Lidgren.Network.Reference/0.0.0.0": {
+        "runtime": {
+          "SpaceWizards.Lidgren.Network.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Content.Packaging/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "libsodium/1.0.18.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-flArHoVdscSzyV8ZdPV+bqqY2TTFlaN+xZf/vIqsmHI51KVcD/mOdUPaK3n/k/wGKz8dppiktXUqSmf3AXFgig==",
+      "path": "libsodium/1.0.18.2",
+      "hashPath": "libsodium.1.0.18.2.nupkg.sha512"
+    },
+    "Linguini.Bundle/0.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Bi4Y4yNe2qKoAsrsJvii9XSUMwfdCr8lbWGGgr4Nb6R5URR90kG4hgT0oMv1O2wr9eXpW10yXVP3a6Xb09rOPg==",
+      "path": "linguini.bundle/0.1.3",
+      "hashPath": "linguini.bundle.0.1.3.nupkg.sha512"
+    },
+    "Linguini.Shared/0.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YPbFDfp8/9VbUgZgemJ4ZcWxZscxqFg0IXea9mKDPV0dspoTWgg3rjec9vcb/L6cJVoNXZAV+DJ65YmsT31lNg==",
+      "path": "linguini.shared/0.1.3",
+      "hashPath": "linguini.shared.0.1.3.nupkg.sha512"
+    },
+    "Linguini.Syntax/0.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ATQZZ+MtYa5jMhjDZpPSQOu5WjDjPjl/6P+R7lZe32tOpmBxrmZZfuQjxcgDPp4kmh8jBlAda1EoPNS9TZx9lA==",
+      "path": "linguini.syntax/0.1.3",
+      "hashPath": "linguini.syntax.0.1.3.nupkg.sha512"
+    },
+    "Microsoft.Extensions.ObjectPool/6.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uRBxPREumk1IavvLAeyatS34lJfuQQxwzJiwr4YNQSFyYkEpkaSRc5UB7fZud9F3ghAcBuD6tuw+mAllZHURJA==",
+      "path": "microsoft.extensions.objectpool/6.0.2",
+      "hashPath": "microsoft.extensions.objectpool.6.0.2.nupkg.sha512"
+    },
+    "Microsoft.ILVerification/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qmqJN91+GJT3TJ0Z3RbVMTdf/GPqwQ3GHN8Fk041tBCYHyTWm23I2HlX8WwHetl+ip7tK35cK5NjorCELrF6rQ==",
+      "path": "microsoft.ilverification/6.0.0",
+      "hashPath": "microsoft.ilverification.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.IO.RecyclableMemoryStream/2.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Oh1qXXFdJFcHozvb4H6XYLf2W0meZFuG0A+TfapFPj9z5fd4vxiARGEhAaLj/6XWQaMYIv4SH/9Q6H78Hw0E2Q==",
+      "path": "microsoft.io.recyclablememorystream/2.3.2",
+      "hashPath": "microsoft.io.recyclablememorystream.2.3.2.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+      "path": "microsoft.netcore.platforms/5.0.0",
+      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.Registry/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dDoKi0PnDz31yAyETfRntsLArTlVAVzUzCIvvEDsDsucrl33Dl8pIJG06ePTJTI3tGpeyHS9Cq7Foc/s4EeKcg==",
+      "path": "microsoft.win32.registry/5.0.0",
+      "hashPath": "microsoft.win32.registry.5.0.0.nupkg.sha512"
+    },
+    "Nett/0.15.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/0SoN9ugPKfmLndtKy3gaRxOlzji94/yrNgQLe45/1ZgExj0BaVozbXD+oWD8E6MCLvTs+YWzmn315mQOXGCcw==",
+      "path": "nett/0.15.0",
+      "hashPath": "nett.0.15.0.nupkg.sha512"
+    },
+    "NVorbis/0.10.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-o+IptCG4Avze39HrGeztC+xIp6fOOwGVAwkoa1J++4Ji1WmZ+KIKlFl5wsgxsXqBkmdpfs/vFSUproiLKYa2bw==",
+      "path": "nvorbis/0.10.5",
+      "hashPath": "nvorbis.0.10.5.nupkg.sha512"
+    },
+    "Pidgin/2.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aCgOXmdgVpvyukdLMLU1mcRqV8wVFZ2Y/GoFtTEyRJygChNO70ZejheO19SkVnKhTD1u9LBNfVkYgEwpW4rRuw==",
+      "path": "pidgin/2.5.0",
+      "hashPath": "pidgin.2.5.0.nupkg.sha512"
+    },
+    "prometheus-net/4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A+z2qxPv+tJOl78yUaQEzyDMap0sjjKL+WVUa+JzXyRQ1ZPtNeDf6qXD+w7tYkVd88GQtnoJ7xDaxluiOM6S8Q==",
+      "path": "prometheus-net/4.1.1",
+      "hashPath": "prometheus-net.4.1.1.nupkg.sha512"
+    },
+    "Robust.Shared.AuthLib/0.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EGDIoqT4NmFu0zSEajFZBmPVoIX82wE1ZMWG+9HGo+WSVmFxZoGz0HN9DdgNK9PPaUJJNpbEHHyd5gvXgMB73g==",
+      "path": "robust.shared.authlib/0.1.2",
+      "hashPath": "robust.shared.authlib.0.1.2.nupkg.sha512"
+    },
+    "Serilog/2.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+QX0hmf37a0/OZLxM3wL7V6/ADvC1XihXN4Kq/p6d8lCPfgkRdiuhbWlMaFjR9Av0dy5F0+MBeDmDdRZN/YwQA==",
+      "path": "serilog/2.10.0",
+      "hashPath": "serilog.2.10.0.nupkg.sha512"
+    },
+    "SharpZstd.Interop/1.5.2-beta2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-woJJXU8x1lIT1dVS+fSKVyk1xOTerB0KyGdpYiu4cjR5ugtAdYWau30uv9H4RSbYFTqKKeQAzAaxV33frqgc4w==",
+      "path": "sharpzstd.interop/1.5.2-beta2",
+      "hashPath": "sharpzstd.interop.1.5.2-beta2.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/2.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8yonNRWX3vUE9k29ta0Hbfa0AEc0hbDjSH/nZ3vOTJEXmY6hLnGsjDKoz96Z+AgOsrdkAu6PdL/Ebaf70aitzw==",
+      "path": "sixlabors.imagesharp/2.1.3",
+      "hashPath": "sixlabors.imagesharp.2.1.3.nupkg.sha512"
+    },
+    "SpaceWizards.Sodium/0.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UvQ3lOAFS/zwnxOSRyQ6Tijru0c/0tR/8IkdH5sBFd6ghqpd8q1/IW4CS53S7pg50AHUfuRjRQZHo3zKejsCtg==",
+      "path": "spacewizards.sodium/0.2.1",
+      "hashPath": "spacewizards.sodium.0.2.1.nupkg.sha512"
+    },
+    "SpaceWizards.Sodium.Interop/1.0.18-beta4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v9Dyvut9cfbnhkMLFkaWDcGkX7bbpdYirtS0mFG+u8CFlFpM9DlJdJ0CziG0WsWMmswDiRc0G1cFJJCCrkPM7g==",
+      "path": "spacewizards.sodium.interop/1.0.18-beta4",
+      "hashPath": "spacewizards.sodium.interop.1.0.18-beta4.nupkg.sha512"
+    },
+    "System.Buffers/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AwarXzzoDwX6BgrhjoJsk6tUezZEozOT5Y9QKF94Gl4JK91I4PIIBkBco9068Y9/Dra8Dkbie99kXB8+1BaYKw==",
+      "path": "system.buffers/4.4.0",
+      "hashPath": "system.buffers.4.4.0.nupkg.sha512"
+    },
+    "System.Collections.Immutable/1.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-71hw5RUJRu5+q/geUY69gpXD8Upd12cH+F3MwpXV2zle7Bqqkrmc1JblOTuvUcgmdnUtQvBlV5e1d6RH+H2lvA==",
+      "path": "system.collections.immutable/1.4.0",
+      "hashPath": "system.collections.immutable.1.4.0.nupkg.sha512"
+    },
+    "System.Memory/4.5.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
+      "path": "system.memory/4.5.4",
+      "hashPath": "system.memory.4.5.4.nupkg.sha512"
+    },
+    "System.Reflection.Metadata/1.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1wrPLtYQFUGTsl9OqPzdzmMRdQvo3PRK38y+4rCHG0f6iyvSYwNXVr0orMvsu2orOIiVbk6MMckINI1g54ZvfA==",
+      "path": "system.reflection.metadata/1.8.1",
+      "hashPath": "system.reflection.metadata.1.8.1.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+    },
+    "System.Security.AccessControl/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dagJ1mHZO3Ani8GH0PHpPEe/oYO+rVdbQjvjJkBRNQkX4t0r1iaeGn8+/ybkSLEan3/slM0t59SVdHzuHf2jmw==",
+      "path": "system.security.accesscontrol/5.0.0",
+      "hashPath": "system.security.accesscontrol.5.0.0.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t0MGLukB5WAVU9bO3MGzvlGnyJPgUlcwerXn1kzBRjwLKixT96XV0Uza41W49gVd8zEMFu9vQEFlv0IOrytICA==",
+      "path": "system.security.principal.windows/5.0.0",
+      "hashPath": "system.security.principal.windows.5.0.0.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NyscU59xX6Uo91qvhOs2Ccho3AR2TnZPomo1Z0K6YpyztBPM/A5VbkzOO19sy3A3i1TtEnTxA7bCe3Us+r5MWg==",
+      "path": "system.text.encoding.codepages/5.0.0",
+      "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
+    },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
+    "TerraFX.Interop.Windows/10.0.20348-rc2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-V+wd9EBSYS5K9Na5RgTTSrbFJKUgabWHBMxHVWPq2Icpo24QuMrDBUiDGMgxxJ+5VeKqPpWE8ZQVjMBA9NM6Ag==",
+      "path": "terrafx.interop.windows/10.0.20348-rc2",
+      "hashPath": "terrafx.interop.windows.10.0.20348-rc2.nupkg.sha512"
+    },
+    "VorbisPizza/1.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JD9w4ge4Xm0+/bvmvDpOKcOl/nZPFLLdaxIAxtxwl6ih3Wqof1nK3oEJnhuEys9m2c/0J6gzj1OZKjtQdAaaTA==",
+      "path": "vorbispizza/1.3.0",
+      "hashPath": "vorbispizza.1.3.0.nupkg.sha512"
+    },
+    "YamlDotNet/12.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sMp20zI63j7xVoor98vGeDxteLeyuAlM330L7XbXxMMPjLdP1mwoK/5Nn/8Vldc9hUMN5otkg88bVLEtQnPdaw==",
+      "path": "yamldotnet/12.0.0",
+      "hashPath": "yamldotnet.12.0.0.nupkg.sha512"
+    },
+    "Robust.NetSerializer/4.1.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Robust.Packaging/195.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Robust.Physics/195.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Robust.Shared/195.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Robust.Shared.Maths/195.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SpaceWizards.Lidgren.Network/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Robust.NetSerializer.Reference/4.1.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SpaceWizards.Lidgren.Network.Reference/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,1112 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\popa\\Content.Replay\\Content.Replay.csproj": {}
+  },
+  "projects": {
+    "C:\\popa\\Content.Client\\Content.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\Content.Client\\Content.Client.csproj",
+        "projectName": "Content.Client",
+        "projectPath": "C:\\popa\\Content.Client\\Content.Client.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\Content.Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\Content.Shared\\Content.Shared.csproj": {
+                "projectPath": "C:\\popa\\Content.Shared\\Content.Shared.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2022.1.0, )"
+            },
+            "Nett": {
+              "target": "Package",
+              "version": "[0.15.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\Content.Replay\\Content.Replay.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\Content.Replay\\Content.Replay.csproj",
+        "projectName": "Content.Replay",
+        "projectPath": "C:\\popa\\Content.Replay\\Content.Replay.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\Content.Replay\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\Content.Client\\Content.Client.csproj": {
+                "projectPath": "C:\\popa\\Content.Client\\Content.Client.csproj"
+              },
+              "C:\\popa\\Content.Shared\\Content.Shared.csproj": {
+                "projectPath": "C:\\popa\\Content.Shared\\Content.Shared.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2020.1.0, )"
+            },
+            "Nett": {
+              "target": "Package",
+              "version": "[0.15.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\Content.Shared.Database\\Content.Shared.Database.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\Content.Shared.Database\\Content.Shared.Database.csproj",
+        "projectName": "Content.Shared.Database",
+        "projectPath": "C:\\popa\\Content.Shared.Database\\Content.Shared.Database.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\Content.Shared.Database\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\Content.Shared\\Content.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\Content.Shared\\Content.Shared.csproj",
+        "projectName": "Content.Shared",
+        "projectPath": "C:\\popa\\Content.Shared\\Content.Shared.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\Content.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\Content.Shared.Database\\Content.Shared.Database.csproj": {
+                "projectPath": "C:\\popa\\Content.Shared.Database\\Content.Shared.Database.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2022.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Avalonia.Base\\Avalonia.Base.csproj": {
+      "version": "195.0.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Avalonia.Base\\Avalonia.Base.csproj",
+        "projectName": "Avalonia.Base",
+        "projectPath": "C:\\popa\\RobustToolbox\\Avalonia.Base\\Avalonia.Base.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Avalonia.Base\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj",
+        "projectName": "SpaceWizards.Lidgren.Network",
+        "projectPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\NetSerializer\\NetSerializer\\NetSerializer.csproj": {
+      "version": "4.1.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\NetSerializer\\NetSerializer\\NetSerializer.csproj",
+        "projectName": "Robust.NetSerializer",
+        "projectPath": "C:\\popa\\RobustToolbox\\NetSerializer\\NetSerializer\\NetSerializer.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\NetSerializer\\NetSerializer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.25, 6.0.25]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.25, 6.0.25]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.25, 6.0.25]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\OpenToolkit.GraphicsLibraryFramework\\OpenToolkit.GraphicsLibraryFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\OpenToolkit.GraphicsLibraryFramework\\OpenToolkit.GraphicsLibraryFramework.csproj",
+        "projectName": "OpenToolkit.GraphicsLibraryFramework",
+        "projectPath": "C:\\popa\\RobustToolbox\\OpenToolkit.GraphicsLibraryFramework\\OpenToolkit.GraphicsLibraryFramework.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\OpenToolkit.GraphicsLibraryFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj": {
+      "version": "195.0.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj",
+        "projectName": "Robust.Client",
+        "projectPath": "C:\\popa\\RobustToolbox\\Robust.Client\\Robust.Client.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Robust.Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\RobustToolbox\\Avalonia.Base\\Avalonia.Base.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Avalonia.Base\\Avalonia.Base.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\OpenToolkit.GraphicsLibraryFramework\\OpenToolkit.GraphicsLibraryFramework.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\OpenToolkit.GraphicsLibraryFramework\\OpenToolkit.GraphicsLibraryFramework.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.LoaderApi\\Robust.LoaderApi\\Robust.LoaderApi.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.LoaderApi\\Robust.LoaderApi\\Robust.LoaderApi.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Scripting\\Robust.Shared.Scripting.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Scripting\\Robust.Shared.Scripting.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "DiscordRichPresence": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[1.0.175, )"
+            },
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2021.3.0, )"
+            },
+            "JetBrains.Profiler.Api": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Features": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Scripting": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Microsoft.Data.Sqlite.Core": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.NET.ILLink.Tasks": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "OpenTK.OpenAL": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[4.7.5, )"
+            },
+            "OpenToolkit.Graphics": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[4.0.0-pre9.1, )"
+            },
+            "Robust.Natives": {
+              "target": "Package",
+              "version": "[0.1.1, )"
+            },
+            "SQLitePCLRaw.bundle_e_sqlite3": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[2.1.3, )"
+            },
+            "SpaceWizards.NFluidsynth": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[0.1.1, )"
+            },
+            "SpaceWizards.SharpFont": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "SpaceWizards.Sodium": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[0.2.1, )"
+            },
+            "System.Numerics.Vectors": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "TerraFX.Interop.Windows": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[10.0.20348-rc2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Robust.LoaderApi\\Robust.LoaderApi\\Robust.LoaderApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Robust.LoaderApi\\Robust.LoaderApi\\Robust.LoaderApi.csproj",
+        "projectName": "Robust.LoaderApi",
+        "projectPath": "C:\\popa\\RobustToolbox\\Robust.LoaderApi\\Robust.LoaderApi\\Robust.LoaderApi.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Robust.LoaderApi\\Robust.LoaderApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.25, 6.0.25]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.25, 6.0.25]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.25, 6.0.25]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj": {
+      "version": "195.0.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj",
+        "projectName": "Robust.Physics",
+        "projectPath": "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Robust.Physics\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+      "version": "195.0.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj",
+        "projectName": "Robust.Shared.Maths",
+        "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2021.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Robust.Shared.Scripting\\Robust.Shared.Scripting.csproj": {
+      "version": "195.0.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Robust.Shared.Scripting\\Robust.Shared.Scripting.csproj",
+        "projectName": "Robust.Shared.Scripting",
+        "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Scripting\\Robust.Shared.Scripting.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Scripting\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "ILReader.Core": {
+              "target": "Package",
+              "version": "[1.0.0.4, )"
+            },
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2021.3.0, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Features": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Scripting": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj": {
+      "version": "195.0.1",
+      "restore": {
+        "projectUniqueName": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj",
+        "projectName": "Robust.Shared",
+        "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\Robust.Shared.csproj",
+        "packagesPath": "C:\\Users\\79505\\.nuget\\packages\\",
+        "outputPath": "C:\\popa\\RobustToolbox\\Robust.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\popa\\RobustToolbox\\NuGet.Config",
+          "C:\\popa\\NuGet.Config",
+          "C:\\Users\\79505\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Lidgren.Network\\Lidgren.Network.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\NetSerializer\\NetSerializer\\NetSerializer.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\NetSerializer\\NetSerializer\\NetSerializer.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Physics\\Robust.Physics.csproj"
+              },
+              "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj": {
+                "projectPath": "C:\\popa\\RobustToolbox\\Robust.Shared.Maths\\Robust.Shared.Maths.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2021.3.0, )"
+            },
+            "Linguini.Bundle": {
+              "target": "Package",
+              "version": "[0.1.3, )"
+            },
+            "Microsoft.Extensions.ObjectPool": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "Microsoft.ILVerification": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.IO.RecyclableMemoryStream": {
+              "target": "Package",
+              "version": "[2.3.2, )"
+            },
+            "Microsoft.Win32.Registry": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Nett": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[0.15.0, )"
+            },
+            "Pidgin": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "Robust.Shared.AuthLib": {
+              "target": "Package",
+              "version": "[0.1.2, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.10.0, )"
+            },
+            "SharpZstd.Interop": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[1.5.2-beta2, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[2.1.3, )"
+            },
+            "SpaceWizards.Sodium": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[0.2.1, )"
+            },
+            "TerraFX.Interop.Windows": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[10.0.20348-rc2, )"
+            },
+            "VorbisPizza": {
+              "suppressParent": "Compile",
+              "target": "Package",
+              "version": "[1.3.0, )"
+            },
+            "YamlDotNet": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "prometheus-net": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

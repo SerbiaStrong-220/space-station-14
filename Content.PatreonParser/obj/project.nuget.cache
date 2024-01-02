@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "ost5fdihXZ2WPwxzAPn2AnT3rk8jrozob0Tn/rf/TTITTqRNE6eCsT8T71NiWsbQ6oKzHQWmIj6zz2q+Uab7Dw==",
+  "success": true,
+  "projectFilePath": "C:\\popa\\Content.PatreonParser\\Content.PatreonParser.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\79505\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
+    "C:\\Users\\79505\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\79505\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\79505\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\79505\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,12 @@
+C:\popa\Content.Shared.Database\bin\Debug\net8.0\Content.Shared.Database.deps.json
+C:\popa\Content.Shared.Database\bin\Debug\net8.0\Content.Shared.Database.dll
+C:\popa\Content.Shared.Database\bin\Debug\net8.0\Content.Shared.Database.pdb
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.AssemblyInfoInputs.cache
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.AssemblyInfo.cs
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.csproj.CoreCompileInputs.cache
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.sourcelink.json
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.dll
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\refint\Content.Shared.Database.dll
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\Content.Shared.Database.pdb
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\ref\Content.Shared.Database.dll

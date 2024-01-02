@@ -1,0 +1,209 @@
+C:\popa\RobustToolbox\Avalonia.Base\obj\Debug\net8.0\ref\Avalonia.Base.dll
+C:\popa\Content.Client\obj\Debug\ref\Content.Client.dll
+C:\popa\Content.Shared.Database\obj\Debug\net8.0\ref\Content.Shared.Database.dll
+C:\popa\Content.Shared\obj\Debug\ref\Content.Shared.dll
+C:\Users\79505\.nuget\packages\fastaccessors\1.0.0.1\lib\net6.0\FastAccessors.dll
+C:\Users\79505\.nuget\packages\ilreader.core\1.0.0.4\lib\net6.0\ILReader.Core.dll
+C:\Users\79505\.nuget\packages\jetbrains.annotations\2020.1.0\lib\netstandard2.0\JetBrains.Annotations.dll
+C:\Users\79505\.nuget\packages\linguini.bundle\0.1.3\lib\net5.0\Linguini.Bundle.dll
+C:\Users\79505\.nuget\packages\linguini.shared\0.1.3\lib\netstandard2.1\Linguini.Shared.dll
+C:\Users\79505\.nuget\packages\linguini.syntax\0.1.3\lib\net5.0\Linguini.Syntax.dll
+C:\Users\79505\.nuget\packages\microsoft.bcl.asyncinterfaces\5.0.0\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.analyzerutilities\3.3.0\lib\netstandard2.0\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.csharp\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.csharp.features\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Features.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.csharp.scripting\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.csharp.workspaces\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.common\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.features\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.Features.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.scripting.common\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\79505\.nuget\packages\microsoft.codeanalysis.workspaces.common\4.0.1\lib\netcoreapp3.1\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\Microsoft.CSharp.dll
+C:\Users\79505\.nuget\packages\microsoft.diasymreader\1.3.0\lib\netstandard1.1\Microsoft.DiaSymReader.dll
+C:\Users\79505\.nuget\packages\microsoft.extensions.objectpool\6.0.2\lib\net6.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\79505\.nuget\packages\microsoft.io.recyclablememorystream\2.3.2\lib\net5.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\Microsoft.VisualBasic.Core.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\Microsoft.VisualBasic.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\Microsoft.Win32.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\Microsoft.Win32.Registry.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\mscorlib.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\netstandard.dll
+C:\Users\79505\.nuget\packages\nett\0.15.0\lib\netstandard2.0\Nett.dll
+C:\popa\RobustToolbox\OpenToolkit.GraphicsLibraryFramework\obj\Debug\net8.0\ref\OpenToolkit.GraphicsLibraryFramework.dll
+C:\Users\79505\.nuget\packages\pidgin\2.5.0\lib\netcoreapp3.0\Pidgin.dll
+C:\Users\79505\.nuget\packages\prometheus-net\4.1.1\lib\netcoreapp2.1\Prometheus.NetCore.dll
+C:\Users\79505\.nuget\packages\prometheus-net\4.1.1\lib\netcoreapp2.1\Prometheus.NetStandard.dll
+C:\popa\RobustToolbox\Robust.Client\obj\Debug\ref\Robust.Client.dll
+C:\popa\RobustToolbox\Robust.LoaderApi\Robust.LoaderApi\obj\Debug\net6.0\ref\Robust.LoaderApi.dll
+C:\popa\RobustToolbox\NetSerializer\NetSerializer\obj\Debug\net6.0\ref\Robust.NetSerializer.dll
+C:\popa\RobustToolbox\Robust.Physics\obj\Debug\net8.0\ref\Robust.Physics.dll
+C:\Users\79505\.nuget\packages\robust.shared.authlib\0.1.2\lib\netstandard2.1\Robust.Shared.AuthLib.dll
+C:\popa\RobustToolbox\Robust.Shared\obj\Debug\ref\Robust.Shared.dll
+C:\popa\RobustToolbox\Robust.Shared.Maths\obj\Debug\ref\Robust.Shared.Maths.dll
+C:\popa\RobustToolbox\Robust.Shared.Scripting\obj\Debug\ref\Robust.Shared.Scripting.dll
+C:\Users\79505\.nuget\packages\serilog\2.10.0\lib\netstandard2.1\Serilog.dll
+C:\Users\79505\.nuget\packages\sixlabors.imagesharp\2.1.3\lib\netcoreapp3.1\SixLabors.ImageSharp.dll
+C:\popa\RobustToolbox\Lidgren.Network\obj\Debug\net8.0\ref\SpaceWizards.Lidgren.Network.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.AppContext.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Buffers.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Collections.Concurrent.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Collections.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Collections.Immutable.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Collections.NonGeneric.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Collections.Specialized.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ComponentModel.Annotations.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ComponentModel.DataAnnotations.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ComponentModel.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ComponentModel.EventBasedAsync.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ComponentModel.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ComponentModel.TypeConverter.dll
+C:\Users\79505\.nuget\packages\system.composition.attributedmodel\1.0.31\lib\netstandard1.0\System.Composition.AttributedModel.dll
+C:\Users\79505\.nuget\packages\system.composition.convention\1.0.31\lib\netstandard1.0\System.Composition.Convention.dll
+C:\Users\79505\.nuget\packages\system.composition.hosting\1.0.31\lib\netstandard1.0\System.Composition.Hosting.dll
+C:\Users\79505\.nuget\packages\system.composition.runtime\1.0.31\lib\netstandard1.0\System.Composition.Runtime.dll
+C:\Users\79505\.nuget\packages\system.composition.typedparts\1.0.31\lib\netstandard1.0\System.Composition.TypedParts.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Configuration.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Console.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Core.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Data.Common.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Data.DataSetExtensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Data.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.Contracts.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.Debug.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.FileVersionInfo.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.Process.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.StackTrace.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.TextWriterTraceListener.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.Tools.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.TraceSource.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Diagnostics.Tracing.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Drawing.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Drawing.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Dynamic.Runtime.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Formats.Asn1.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Formats.Tar.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Globalization.Calendars.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Globalization.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Globalization.Extensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.Compression.Brotli.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.Compression.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.Compression.FileSystem.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.Compression.ZipFile.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.FileSystem.AccessControl.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.FileSystem.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.FileSystem.DriveInfo.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.FileSystem.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.FileSystem.Watcher.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.IsolatedStorage.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.MemoryMappedFiles.dll
+C:\Users\79505\.nuget\packages\system.io.pipelines\5.0.1\ref\netcoreapp2.0\System.IO.Pipelines.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.Pipes.AccessControl.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.Pipes.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.IO.UnmanagedMemoryStream.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Linq.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Linq.Expressions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Linq.Parallel.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Linq.Queryable.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Memory.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Http.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Http.Json.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.HttpListener.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Mail.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.NameResolution.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.NetworkInformation.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Ping.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Quic.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Requests.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Security.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.ServicePoint.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.Sockets.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.WebClient.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.WebHeaderCollection.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.WebProxy.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.WebSockets.Client.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Net.WebSockets.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Numerics.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Numerics.Vectors.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ObjectModel.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.DispatchProxy.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.Emit.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.Emit.ILGeneration.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.Emit.Lightweight.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.Extensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.Metadata.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Reflection.TypeExtensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Resources.Reader.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Resources.ResourceManager.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Resources.Writer.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.CompilerServices.VisualC.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Extensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Handles.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.InteropServices.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.InteropServices.JavaScript.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Intrinsics.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Loader.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Numerics.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Serialization.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Serialization.Formatters.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Serialization.Json.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Serialization.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Runtime.Serialization.Xml.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.AccessControl.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Claims.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.Algorithms.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.Cng.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.Csp.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.Encoding.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.OpenSsl.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.Primitives.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Cryptography.X509Certificates.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Principal.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.Principal.Windows.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Security.SecureString.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ServiceModel.Web.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ServiceProcess.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Text.Encoding.CodePages.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Text.Encoding.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Text.Encoding.Extensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Text.Encodings.Web.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Text.Json.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Text.RegularExpressions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Channels.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Overlapped.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Tasks.Dataflow.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Tasks.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Tasks.Extensions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Tasks.Parallel.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Thread.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.ThreadPool.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Threading.Timer.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Transactions.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Transactions.Local.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.ValueTuple.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Web.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Web.HttpUtility.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Windows.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.Linq.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.ReaderWriter.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.Serialization.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.XDocument.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.XmlDocument.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.XmlSerializer.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.XPath.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\System.Xml.XPath.XDocument.dll
+C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.0\ref\net8.0\WindowsBase.dll
+C:\Users\79505\.nuget\packages\yamldotnet\12.0.0\lib\net6.0\YamlDotNet.dll

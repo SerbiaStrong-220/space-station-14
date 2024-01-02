@@ -1,0 +1,28 @@
+[INFO] root: Server -> Starting
+[INFO] cfg: Configuration loaded from file
+[DEBG] root: Runtime: .NET 8.0.0 win-x64
+[DEBG] root: OS: Microsoft Windows 10.0.19045 X64
+[INFO] srv: Name: MyServer
+[INFO] srv: TickRate: 60(16,67ms)
+[INFO] srv: Max players: 256
+[DEBG] auth: Public key is K9RScyaANjTU2zJN+j/aCyFf7lX9WqkUxojry2Smn3I=
+[DEBG] res.mod: DISABLING assembly load context
+[DEBG] res.mod: DISABLING sandboxing
+[DEBG] res.mod: Found module '/Assemblies/Content.Packaging.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Server.Database.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Server.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Shared.Database.dll'
+[DEBG] res.mod: Found module '/Assemblies/Content.Shared.dll'
+[DEBG] res.mod: LOADING modules
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Packaging.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Shared.Database.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Server.Database.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Shared.dll'
+[DEBG] res.mod: Loading module: '/Assemblies/Content.Server.dll'
+[DEBG] res.mod: DONE loading modules: 00:00:00.2119118
+[INFO] szr: Serializer Types Hash: CD8B96F47D2E24CC481AC9E68FDA13131C4FBBCDE8A5B4BCE37E18EC21493A2B
+[INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/development.toml"
+[INFO] configpreset: Loaded config preset: "/ConfigPresets/Build/debug.toml"
+[DEBG] admin.logs: Admin log converters found: EntityCoordinatesConverter EntityStringRepresentationConverter EntityUidConverter FixedPoint2Converter GasMixtureStringRepresentationConverter PlayerSessionConverter
+[DEBG] db.manager: Using SQLite DB "C:\popa\bin\Content.Server\data\preferences.db"
+[DEBG] primelist: Using MySQL ":3306/"
