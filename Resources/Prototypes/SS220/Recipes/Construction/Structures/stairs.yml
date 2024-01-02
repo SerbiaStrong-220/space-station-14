@@ -15,7 +15,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/steel.rsi
     state: solo
   objectType: Structure
   placementMode: SnapgridCenter
@@ -37,7 +37,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/steel.rsi
     state: left
   objectType: Structure
   placementMode: SnapgridCenter
@@ -59,7 +59,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/steel.rsi
     state: middle
   objectType: Structure
   placementMode: SnapgridCenter
@@ -81,7 +81,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/steel.rsi
     state: right
   objectType: Structure
   placementMode: SnapgridCenter
@@ -104,7 +104,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/wood.rsi
+    sprite: SS220/Structures/Floor/Stairs/wood.rsi
     state: solo
   objectType: Structure
   placementMode: SnapgridCenter
@@ -126,7 +126,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/wood.rsi
+    sprite: SS220/Structures/Floor/Stairs/wood.rsi
     state: left
   objectType: Structure
   placementMode: SnapgridCenter
@@ -148,7 +148,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/wood.rsi
+    sprite: SS220/Structures/Floor/Stairs/wood.rsi
     state: middle
   objectType: Structure
   placementMode: SnapgridCenter
@@ -170,7 +170,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/wood.rsi
+    sprite: SS220/Structures/Floor/Stairs/wood.rsi
     state: right
   objectType: Structure
   placementMode: SnapgridCenter
@@ -193,7 +193,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/dark_steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/dark_steel.rsi
     state: solo
   objectType: Structure
   placementMode: SnapgridCenter
@@ -215,7 +215,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/dark_steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/dark_steel.rsi
     state: left
   objectType: Structure
   placementMode: SnapgridCenter
@@ -237,7 +237,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/dark_steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/dark_steel.rsi
     state: middle
   objectType: Structure
   placementMode: SnapgridCenter
@@ -259,7 +259,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/Floor/stairs/dark_steel.rsi
+    sprite: SS220/Structures/Floor/Stairs/dark_steel.rsi
     state: right
   objectType: Structure
   placementMode: SnapgridCenter
