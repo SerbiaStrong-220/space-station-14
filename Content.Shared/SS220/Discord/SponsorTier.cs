@@ -1,11 +1,16 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Robust.Shared.Serialization;
+
 namespace Content.Shared.SS220.Discord;
 
+[Serializable, NetSerializable]
 public enum SponsorTier
 {
-    None = 0,
-    FirstTier = 1,
-    SecondTier = 2,
-    ThirdTier = 3,
-    FourthTier = 4,
-    FifthTier = 5
+    None,
+    Shlopa,
+    BigShlopa,
+    HugeShlopa,
+    GoldenShlopa,
+    CriticalMassShlopa
 }

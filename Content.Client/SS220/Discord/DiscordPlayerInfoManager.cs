@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Discord;
 using Robust.Shared.Network;
 
@@ -23,9 +25,9 @@ namespace Content.Client.SS220.Discord
             SponsorStatusChanged?.Invoke();
         }
 
-        public SponsorTier GetSponsorTier()
+        public SponsorTier[] GetSponsorTier()
         {
-            return _info?.Tier ?? SponsorTier.None;
+            return _info?.Tiers ?? Array.Empty<SponsorTier>();
         }
     }
 }

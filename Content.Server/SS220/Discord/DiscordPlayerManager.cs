@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Cryptography;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared.Corvax.CCCVars;
@@ -78,27 +80,43 @@ public sealed class DiscordPlayerManager : IPostInjectInit
             return null;
         }
 
-        var url = $"{_apiUrl}/sponsors/{userId}";
-        var response = await _httpClient.GetAsync(url);
-
-        if (response.StatusCode == HttpStatusCode.NotFound)
+        try
         {
-            return null;
+            var url = $"{_apiUrl}/userinfo/{userId.UserId}";
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+
+                _sawmill.Error(
+                    "Failed to get player sponsor info: [{StatusCode}] {Response}",
+                    response.StatusCode,
+                    errorText);
+
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<DiscordSponsorInfo>(GetJsonSerializerOptions());
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error(exc.Message);
         }
 
-        if (response.StatusCode != HttpStatusCode.OK)
+        return null;
+    }
+
+    private static JsonSerializerOptions GetJsonSerializerOptions()
+    {
+        var opt = new JsonSerializerOptions
         {
-            var errorText = await response.Content.ReadAsStringAsync();
+            PropertyNameCaseInsensitive = true
+        };
 
-            _sawmill.Error(
-                "Failed to get player sponsor info: [{StatusCode}] {Response}",
-                response.StatusCode,
-                errorText);
+        opt.Converters.Add(new JsonStringEnumConverter());
 
-            return null;
-        }
-
-        return await response.Content.ReadFromJsonAsync<DiscordSponsorInfo>();
+        return opt;
     }
 
     /// <summary>
