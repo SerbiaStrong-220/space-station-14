@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
   "copyright": "Made by TTTomaTTT for SS220",
   "size": {
     "x": 32,
@@ -11,7 +11,7 @@
       "name": "icon"
     },
     {
-      "name": "equipped-FEET",
+      "name": "equipped-HELMET",
       "directions": 4
     },
     {
