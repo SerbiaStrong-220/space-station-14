@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from goonstation at commit https://github.com/goonstation/goonstation/tree/0120c2dd406c2c07d953833fe9f0237ec5801384",
+  "copyright": "Taken from TauCeti https://github.com/TauCetiStation/TauCetiClassic/blob/b002a84896ae8c0aeb4f456429ef84e67f28791a/icons/turf/floors.dmi, recolored by Kit0vras (Github)",
   "size": {
     "x": 32,
     "y": 32
@@ -10,13 +10,13 @@
     {
       "name": "left"
     },
-	{
+    {
       "name": "middle"
     },
-	{
+    {
       "name": "right"
     },
-	{
+    {
       "name": "solo"
     }
   ]
