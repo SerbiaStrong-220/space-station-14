@@ -125,9 +125,6 @@ public sealed class VocalSystem : EntitySystem
     }
     private void LoadSpecialSounds(EntityUid uid, VocalComponent component, EntityUid itemUid, VocalComponent itemComponent, Sex? sex = null)
     {
-        if (component.Sounds == null)
-            return;
-
         if (itemComponent.Sounds == null)
             return;
 
@@ -139,9 +136,7 @@ public sealed class VocalSystem : EntitySystem
         if (!itemComponent.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
 
-        _proto.TryIndex(protoId, out itemComponent.EmoteSounds);
-
-        if (itemComponent.EmoteSounds == null)
+        if (!_proto.TryIndex(protoId, out itemComponent.EmoteSounds))
             return;
 
         component.SpecialEmoteSounds.Add(itemUid, itemComponent.EmoteSounds);
@@ -153,7 +148,7 @@ public sealed class VocalSystem : EntitySystem
         if (itemComponent == null)
             return;
 
-        if ((component.SpecialEmoteSounds!=null) && (component.SpecialEmoteSounds.ContainsKey(args.Item)))
+        if (component.SpecialEmoteSounds != null && component.SpecialEmoteSounds.ContainsKey(args.Item))
             return;
 
         LoadSpecialSounds(uid, component, args.Item, itemComponent);
