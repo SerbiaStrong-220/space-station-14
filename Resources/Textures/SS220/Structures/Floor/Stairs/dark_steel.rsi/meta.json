@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from TauCeti https://github.com/TauCetiStation/TauCetiClassic/blob/b002a84896ae8c0aeb4f456429ef84e67f28791a/icons/turf/floors.dmi",
+  "copyright": "Taken from GoonStation at https://github.com/goonstation/goonstation/blob/7bbddd189a3a82a09c87d43420b515db268e5c81/icons/turf/floors.dmi",
   "size": {
     "x": 32,
     "y": 32
