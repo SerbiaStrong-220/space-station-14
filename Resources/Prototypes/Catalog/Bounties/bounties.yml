@@ -11,7 +11,7 @@
 
 - type: cargoBounty
   id: BountyBaseballBat
-  reward: 8000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-baseball-bat
   entries:
   - name: bounty-item-baseball-bat
@@ -22,7 +22,7 @@
 
 - type: cargoBounty
   id: BountyBoxHug
-  reward: 6000
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-box-hugs
   entries:
   - name: bounty-item-box-hugs
@@ -33,8 +33,8 @@
 
 - type: cargoBounty
   id: BountyBrain
-  reward: 25000
-  description: bounty-description-brain
+  reward: 5000 #ss220 Rebalance
+  description: bounty-description-brain  
   entries:
   - name: bounty-item-brain
     amount: 1
@@ -44,30 +44,30 @@
 
 - type: cargoBounty
   id: BountyBread
-  reward: 4000
+  reward: 1500 #ss220 Rebalance
   description: bounty-description-bread
   entries:
   - name: bounty-item-bread
-    amount: 1
+    amount: 2
     whitelist:
       tags:
       - Bread
 
-- type: cargoBounty
-  id: BountyBriefcase
-  reward: 15000
-  description: bounty-description-briefcase
-  entries:
-  - name: bounty-item-briefcase
-    amount: 5
-    whitelist:
-      tags:
-      - Briefcase
+#- type: cargoBounty
+#  id: BountyBriefcase
+#  reward: 15000
+#  description: bounty-description-briefcase #impossible ss220 Rebalance
+#  entries:
+#  - name: bounty-item-briefcase
+#    amount: 5
+#    whitelist:
+#      tags:
+#      - Briefcase
 
 - type: cargoBounty
   id: BountyCarrot
-  reward: 15000
-  description: bounty-description-carrot
+  reward: 3000 #ss220 Rebalance
+  description: bounty-description-carrot 
   entries:
   - name: bounty-item-carrot
     amount: 10
@@ -77,8 +77,8 @@
 
 - type: cargoBounty
   id: BountyCarrotFries
-  reward: 14000
-  description: bounty-description-carrot-fries
+  reward: 4500 #ss220 Rebalance
+  description: bounty-description-carrot-fries 
   entries:
   - name: bounty-item-carrot-fries
     amount: 3
@@ -99,7 +99,7 @@
 
 - type: cargoBounty
   id: BountyClownCostume
-  reward: 1700
+  reward: 8500 #ss220 Rebalance
   description: bounty-description-clown-costume
   entries:
   - name: bounty-item-clown-mask
@@ -115,7 +115,7 @@
 
 - type: cargoBounty
   id: BountyCorn
-  reward: 20000
+  reward: 3500 #ss220 Rebalance
   description: bounty-description-corn
   entries:
   - name: bounty-item-corn
@@ -126,7 +126,7 @@
 
 - type: cargoBounty
   id: BountyCrayon
-  reward: 8000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-crayon
   entries:
   - name: bounty-item-crayon
@@ -137,7 +137,7 @@
 
 - type: cargoBounty
   id: BountyCubanCarp
-  reward: 32000
+  reward: 12000 #ss220 Rebalance
   description: bounty-description-cuban-carp
   entries:
   - name: bounty-item-cuban-carp
@@ -148,7 +148,7 @@
 
 - type: cargoBounty
   id: BountyDonkPocket
-  reward: 12000
+  reward: 8000 #ss220 Rebalance
   description: bounty-description-donk-pocket
   entries:
   - name: bounty-item-donk-pocket
@@ -159,7 +159,7 @@
 
 - type: cargoBounty
   id: BountyDonut
-  reward: 12000
+  reward: 6000 #ss220 Rebalance
   description: bounty-description-donut
   entries:
   - name: bounty-item-donut
@@ -170,7 +170,7 @@
 
 - type: cargoBounty
   id: BountyFigurine
-  reward: 16000
+  reward: 4500 #ss220 Rebalance
   description: bounty-description-figurine
   entries:
   - name: bounty-item-figurine
@@ -181,7 +181,7 @@
 
 - type: cargoBounty
   id: BountyFleshMonster
-  reward: 30000
+  reward: 14000 #ss220 Rebalance
   description: bounty-description-flesh-monster
   entries:
   - name: bounty-item-flesh-monster
@@ -192,8 +192,8 @@
 
 - type: cargoBounty
   id: BountyFlower
-  reward: 4000
-  description: bounty-description-flower
+  reward: 4000 #ss220 Rebalance
+  description: bounty-description-flower 
   entries:
   - name: bounty-item-flower
     amount: 3
@@ -203,7 +203,7 @@
 
 - type: cargoBounty
   id: BountyGalaxyThistle
-  reward: 24000
+  reward: 4500 #ss220 Rebalance
   description: bounty-description-galaxythistle
   entries:
   - name: bounty-item-galaxythistle
@@ -214,7 +214,7 @@
 
 - type: cargoBounty
   id: BountyHandcuffs
-  reward: 4000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-handcuffs
   entries:
   - name: bounty-item-handcuffs
@@ -236,7 +236,7 @@
 
 - type: cargoBounty
   id: BountyKnife
-  reward: 12000
+  reward: 3500 #ss220 Rebalance
   description: bounty-description-knife
   entries:
   - name: bounty-item-knife
@@ -247,7 +247,7 @@
 
 - type: cargoBounty
   id: BountyLemon
-  reward: 20000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-lemon
   entries:
   - name: bounty-item-lemon
@@ -258,7 +258,7 @@
 
 - type: cargoBounty
   id: BountyLime
-  reward: 20000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-lime
   entries:
   - name: bounty-item-lime
@@ -269,8 +269,8 @@
 
 - type: cargoBounty
   id: BountyLung
-  reward: 35000
-  description: bounty-description-lung
+  reward: 8000 #ss220 Rebalance
+  description: bounty-description-lung 
   entries:
   - name: bounty-item-lung
     amount: 3
@@ -280,7 +280,7 @@
 
 - type: cargoBounty
   id: BountyMonkeyCube
-  reward: 8000
+  reward: 7000 #ss220 Rebalance
   description: bounty-description-monkey-cube
   entries:
   - name: bounty-item-monkey-cube
@@ -291,7 +291,7 @@
 
 - type: cargoBounty
   id: BountyMouse
-  reward: 2400
+  reward: 3400 #ss220 Rebalance
   description: bounty-description-mouse
   entries:
   - name: bounty-item-mouse
@@ -302,7 +302,7 @@
 
 - type: cargoBounty
   id: BountyPancake
-  reward: 20000
+  reward: 4500 #ss220 Rebalance
   description: bounty-description-pancake
   entries:
   - name: bounty-item-pancake
@@ -313,7 +313,7 @@
 
 - type: cargoBounty
   id: BountyPen
-  reward: 8000
+  reward: 3500 #ss220 Rebalance
   description: bounty-description-pen
   entries:
   - name: bounty-item-pen
@@ -324,7 +324,7 @@
 
 - type: cargoBounty
   id: BountyPercussion
-  reward: 25000
+  reward: 8000 #ss220 Rebalance
   description: bounty-description-percussion
   entries:
   - name: bounty-item-percussion
@@ -335,18 +335,18 @@
 
 - type: cargoBounty
   id: BountyPie
-  reward: 31415
+  reward: 5000 #ss220 Rebalance
   description: bounty-description-pie
   entries:
   - name: bounty-item-pie
-    amount: 1
+    amount: 4
     whitelist:
       tags:
       - Pie
 
 - type: cargoBounty
   id: BountyPrisonUniform
-  reward: 8000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-prison-uniform
   entries:
   - name: bounty-item-prison-uniform
@@ -357,7 +357,7 @@
 
 - type: cargoBounty
   id: BountyRadio
-  reward: 10000
+  reward: 6000 #ss220 Rebalance
   description: bounty-description-radio
   entries:
   - name: bounty-item-radio
@@ -371,7 +371,7 @@
 
 - type: cargoBounty
   id: BountyResearchDisk
-  reward: 12000
+  reward: 6500 #ss220 Rebalance
   description: bounty-description-research-disk
   entries:
   - name: bounty-item-research-disk
@@ -382,7 +382,7 @@
 
 - type: cargoBounty
   id: BountyShiv
-  reward: 8000
+  reward: 3500 #ss220 Rebalance
   description: bounty-description-shiv
   entries:
   - name: bounty-item-shiv
@@ -393,7 +393,7 @@
 
 - type: cargoBounty
   id: BountySoap
-  reward: 8000
+  reward: 2000 #ss220 Rebalance
   description: bounty-description-soap
   entries:
   - name: bounty-item-soap
@@ -404,7 +404,7 @@
 
 - type: cargoBounty
   id: BountySoup
-  reward: 12000
+  reward: 3500 #ss220 Rebalance
   description: bounty-description-soup
   entries:
   - name: bounty-item-soup
@@ -415,7 +415,7 @@
 
 - type: cargoBounty
   id: BountySpear
-  reward: 8000
+  reward: 3500 #ss220 Rebalance
   description: bounty-description-spear
   entries:
   - name: bounty-item-spear
@@ -426,7 +426,7 @@
 
 - type: cargoBounty
   id: BountySyringe
-  reward: 10000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-syringe
   entries:
   - name: bounty-item-syringe
@@ -437,7 +437,7 @@
 
 - type: cargoBounty
   id: BountyTechDisk
-  reward: 25000
+  reward: 5500 #ss220 Rebalance
   description: bounty-description-tech-disk
   entries:
   - name: bounty-item-tech-disk
@@ -448,11 +448,11 @@
 
 - type: cargoBounty
   id: BountyToolbox
-  reward: 8000
+  reward: 4000 #ss220 Rebalance
   description: bounty-description-toolbox
   entries:
   - name: bounty-item-toolbox
-    amount: 6
+    amount: 4 #ss220 Rebalance
     whitelist:
       tags:
       - Toolbox
@@ -470,7 +470,7 @@
 
 - type: cargoBounty
   id: BountyAnomalyCore
-  reward: 10000
+  reward: 5000 #ss220 Rebalance
   description: bounty-description-anomaly-core
   entries:
   - name: bounty-item-anomaly-core
@@ -492,11 +492,11 @@
 
 - type: cargoBounty
   id: BountyArtifactFragment
-  reward: 32500
+  reward: 12000 #ss220 Rebalance
   description: bounty-description-artifact-fragment
   entries:
   - name: bounty-item-artifact-fragment
-    amount: 7
+    amount: 5
     whitelist:
       tags:
       - ArtifactFragment
@@ -514,7 +514,7 @@
 
 - type: cargoBounty
   id: BountyLabeler
-  reward: 6660
+  reward: 5660 #ss220 Rebalance
   description: bounty-description-labeler
   entries:
   - name: bounty-item-labeler
@@ -525,7 +525,7 @@
       
 - type: cargoBounty
   id: BountyWarmCloth
-  reward: 6000
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-warm-cloth
   entries:
   - name: bounty-item-warm-cloth
@@ -536,7 +536,7 @@
       
 - type: cargoBounty
   id: BountyBattery
-  reward: 24500
+  reward: 4000 #ss220 Rebalance
   description: bounty-description-battery
   entries:
   - name: bounty-item-battery
@@ -547,7 +547,7 @@
 
 - type: cargoBounty
   id: BountyLaserGun
-  reward: 28500
+  reward: 12000 #ss220 Rebalance
   description: bounty-description-lasergun
   entries:
   - name: bounty-lasergun
@@ -566,3 +566,37 @@
     whitelist:
       tags:
       - Meat
+### - ss220 new Bounty
+
+- type: cargoBounty
+  id: BountyNattle
+  reward: 9500
+  description: Химики НаноТрейзен, обнаружили мощный химикат в растениях вида Смертокрапива. Данный яд используется для бесопасности при изучении опасной фауны.
+  entries:
+  - name: bounty-Nattle
+    amount: 12
+    whitelist:
+      tags:
+      - DeathNettle    
+
+- type: cargoBounty
+  id: BountyDeus
+  reward: 9500
+  description: Медики НаноТрейзен, обнаружили новый способ добычи Омнизина. Происходит массовая закупка данного вида для синтеза мощных медикоментов.
+  entries:
+  - name: bounty-Deus
+    amount: 12
+    whitelist:
+      tags:
+      - DeusAmbrosia     
+
+- type: cargoBounty
+  id: BountyMeatSlime
+  reward: 7500
+  description: Сумашедшие повара придумали новый деликатес с участием ШАРА СЛИЗИ! Им срочно нужны новые постащики. Фу...Какая мерзость.
+  entries:
+  - name: bounty-MeatSlime
+    amount: 3
+    whitelist:
+      tags:
+      - MeatSlime             

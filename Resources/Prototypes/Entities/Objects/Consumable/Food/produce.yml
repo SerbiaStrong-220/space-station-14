@@ -192,6 +192,10 @@
     pierceArmor: false
   - type: Extractable
     grindableSolutionName: food
+  - type: Tag
+    tags:
+    - DeathNettle #ss220 for bounties
+
 
 - type: entity
   name: banana
@@ -1268,6 +1272,7 @@
   - type: Tag
     tags:
     - Ambrosia
+    - DeusAmbrosia #ss220 for bounties
 
 - type: entity
   name: galaxythistle

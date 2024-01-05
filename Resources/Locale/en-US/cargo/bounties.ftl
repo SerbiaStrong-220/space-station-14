@@ -50,6 +50,9 @@ bounty-item-warm-cloth = Warm clothes
 bounty-item-battery = Battery
 bounty-lasergun = Laser gun
 bounty-food = Meat food
+bounty-Nattle = Смертокрапива
+bounty-Deus = Амброзия Деус
+bounty-MeatSlime = Шар слизи
 
 bounty-description-artifact = NanoTrasen is in some hot water for stealing artifacts from non-spacefaring planets. Return one and we'll compensate you for it.
 bounty-description-baseball-bat = Baseball fever is going on at CentCom! Be a dear and ship them some baseball bats, so that management can live out their childhood dream.
