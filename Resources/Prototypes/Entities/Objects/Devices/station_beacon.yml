@@ -24,7 +24,7 @@
   - type: NavMapBeacon
     text: general
     color: "#D4D4D496"
-#  - type: WarpPoint #SS220-No-Double-WarpPoints
+  - type: WarpPoint
   - type: ActivatableUI
     key: enum.NavMapBeaconUiKey.Key
     singleUser: true
