@@ -21229,7 +21229,7 @@ entities:
       type: Occluder
     - fixtures: {}
       type: Fixtures
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 1904
     components:
     - rot: 1.5707963267948966 rad
@@ -21504,7 +21504,7 @@ entities:
       type: Transform
     - fixtures: {}
       type: Fixtures
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 29276
     components:
     - pos: -0.5,-58.5
