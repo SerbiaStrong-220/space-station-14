@@ -23,6 +23,7 @@
   id: SecurityCadetGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSecGrey # Corvax-Resprite
+    eyes: ClothingEyesHudSecurity #ss-220-GlassesSecurity
     back: ClothingBackpackSecurityFilled
     shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterArmorBasic
