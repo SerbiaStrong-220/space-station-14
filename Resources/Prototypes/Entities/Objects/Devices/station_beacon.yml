@@ -24,7 +24,7 @@
   - type: NavMapBeacon
     text: general
     color: "#D4D4D496"
-  - type: WarpPoint
+#  - type: WarpPoint #SS220-No-Double-WarpPoints
   - type: ActivatableUI
     key: enum.NavMapBeaconUiKey.Key
     singleUser: true
@@ -118,7 +118,7 @@
   suffix: Command
   components:
   - type: NavMapBeacon
-    text: Command
+    text: Командование #SS220-Beacon-Translate
     color: "#FFFF00"
 
 - type: entity
@@ -127,7 +127,7 @@
   suffix: Bridge
   components:
   - type: NavMapBeacon
-    text: Bridge
+    text: Мостик #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconCommand
@@ -135,7 +135,7 @@
   suffix: Vault
   components:
   - type: NavMapBeacon
-    text: Vault
+    text: Хранилище #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconCommand
@@ -143,7 +143,7 @@
   suffix: Captain's Quarters
   components:
   - type: NavMapBeacon
-    text: Captain
+    text: Капитан #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconCommand
@@ -151,7 +151,7 @@
   suffix: HOP's Office
   components:
   - type: NavMapBeacon
-    text: HOP
+    text: ГП #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -159,7 +159,7 @@
   suffix: Security
   components:
   - type: NavMapBeacon
-    text: Security
+    text: Охрана #SS220-Beacon-Translate
     color: "#DE3A3A"
 
 - type: entity
@@ -168,7 +168,7 @@
   suffix: Brig
   components:
   - type: NavMapBeacon
-    text: Brig
+    text: Бриг #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -176,7 +176,7 @@
   suffix: Warden's Office
   components:
   - type: NavMapBeacon
-    text: Warden
+    text: Смотритель #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -184,7 +184,7 @@
   suffix: HOS’s Room
   components:
   - type: NavMapBeacon
-    text: HOS
+    text: ГСБ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -192,7 +192,7 @@
   suffix: Armory
   components:
   - type: NavMapBeacon
-    text: Armory
+    text: Оружейная #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -200,7 +200,7 @@
   suffix: Perma Brig
   components:
   - type: NavMapBeacon
-    text: Perma
+    text: Пермабриг #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -208,7 +208,7 @@
   suffix: Detective's Room
   components:
   - type: NavMapBeacon
-    text: Detective
+    text: Детектив #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -216,7 +216,7 @@
   suffix: Courtroom
   components:
   - type: NavMapBeacon
-    text: Courtroom
+    text: Суд #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -224,7 +224,7 @@
   suffix: Law Office
   components:
   - type: NavMapBeacon
-    text: Law Office
+    text: Адвокат #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSecurity
@@ -232,7 +232,7 @@
   suffix: Sec Checkpoint
   components:
   - type: NavMapBeacon
-    text: Checkpoint
+    text: Аванпост #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -240,7 +240,7 @@
   suffix: Medical
   components:
   - type: NavMapBeacon
-    text: Medical
+    text: Мед помощь #SS220-Beacon-Translate
     color: "#52B4E9"
 
 - type: entity
@@ -249,7 +249,7 @@
   suffix: Medbay
   components:
   - type: NavMapBeacon
-    text: Medbay
+    text: Медблок #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconMedical
@@ -257,7 +257,7 @@
   suffix: Chemistry
   components:
   - type: NavMapBeacon
-    text: Chem
+    text: Химия #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconMedical
@@ -265,7 +265,7 @@
   suffix: Cryonics
   components:
   - type: NavMapBeacon
-    text: Cryo
+    text: Крионика #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconMedical
@@ -273,7 +273,7 @@
   suffix: CMO's room
   components:
   - type: NavMapBeacon
-    text: CMO
+    text: ГВ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconMedical
@@ -281,7 +281,7 @@
   suffix: Morgue
   components:
   - type: NavMapBeacon
-    text: Morgue
+    text: Морг #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconMedical
@@ -289,7 +289,7 @@
   suffix: Surgery
   components:
   - type: NavMapBeacon
-    text: Surgery
+    text: Хирургия #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -297,7 +297,7 @@
   suffix: Science
   components:
   - type: NavMapBeacon
-    text: Science
+    text: Наука #SS220-Beacon-Translate
     color: "#D381C9"
 
 - type: entity
@@ -306,7 +306,7 @@
   suffix: Research and Development
   components:
   - type: NavMapBeacon
-    text: Research
+    text: РнД #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconScience
@@ -314,7 +314,7 @@
   suffix: Research Server Room
   components:
   - type: NavMapBeacon
-    text: Server
+    text: Серверная #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconScience
@@ -322,7 +322,7 @@
   suffix: RD's Room
   components:
   - type: NavMapBeacon
-    text: RD
+    text: НР #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconScience
@@ -330,7 +330,7 @@
   suffix: Robotics
   components:
   - type: NavMapBeacon
-    text: Robotics
+    text: Робототехника #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconScience
@@ -338,7 +338,7 @@
   suffix: Artifact Lab
   components:
   - type: NavMapBeacon
-    text: Artifact
+    text: Ксеноарх #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconScience
@@ -346,7 +346,7 @@
   suffix: Anomaly Generator
   components:
   - type: NavMapBeacon
-    text: Anomaly
+    text: Аномалистика #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -354,7 +354,7 @@
   suffix: Supply
   components:
   - type: NavMapBeacon
-    text: Supply
+    text: Поставки #SS220-Beacon-Translate
     color: "#A46106"
 
 - type: entity
@@ -363,7 +363,7 @@
   suffix: Cargo Reception
   components:
   - type: NavMapBeacon
-    text: Cargo
+    text: Снабжение #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSupply
@@ -371,7 +371,7 @@
   suffix: Cargo Bay
   components:
   - type: NavMapBeacon
-    text: Cargo Bay
+    text: Склад снабжения #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSupply
@@ -379,7 +379,7 @@
   suffix: QM's Room
   components:
   - type: NavMapBeacon
-    text: QM
+    text: КМ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconSupply
@@ -387,7 +387,7 @@
   suffix: Salvage
   components:
   - type: NavMapBeacon
-    text: Salvage
+    text: Утилизаторы #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -395,7 +395,7 @@
   suffix: Engineering
   components:
   - type: NavMapBeacon
-    text: Engineering
+    text: Инженерная #SS220-Beacon-Translate
     color: "#EFB341"
 
 - type: entity
@@ -404,7 +404,7 @@
   suffix: CE's Room
   components:
   - type: NavMapBeacon
-    text: CE
+    text: СИ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -412,7 +412,7 @@
   suffix: AME
   components:
   - type: NavMapBeacon
-    text: AME
+    text: ДАМ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -420,7 +420,7 @@
   suffix: Solars
   components:
   - type: NavMapBeacon
-    text: Solars
+    text: Панели #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -428,7 +428,7 @@
   suffix: Grav Gen
   components:
   - type: NavMapBeacon
-    text: Grav
+    text: Гравитация #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -436,7 +436,7 @@
   suffix: PA Control
   components:
   - type: NavMapBeacon
-    text: PA Control
+    text: Управление PA #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -444,7 +444,7 @@
   suffix: SMES Power Bank
   components:
   - type: NavMapBeacon
-    text: SMES
+    text: СМЭС #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -452,7 +452,7 @@
   suffix: Telecoms
   components:
   - type: NavMapBeacon
-    text: Telecoms
+    text: Телекомы #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -460,7 +460,7 @@
   suffix: Atmospherics
   components:
   - type: NavMapBeacon
-    text: Atmos
+    text: Атмос #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -468,7 +468,7 @@
   suffix: TEG
   components:
   - type: NavMapBeacon
-    text: TEG
+    text: ТЭГ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -476,7 +476,7 @@
   suffix: Tesla Engine (Do Not Map - use PA Control instead)
   components:
   - type: NavMapBeacon
-    text: Tesla
+    text: Тесла #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
@@ -484,7 +484,7 @@
   suffix: Tech Vault
   components:
   - type: NavMapBeacon
-    text: Tech Vault
+    text: Тех хранилище #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -492,7 +492,7 @@
   suffix: Service
   components:
   - type: NavMapBeacon
-    text: Service
+    text: Сервис #SS220-Beacon-Translate
     color: "#9FED58"
 
 - type: entity
@@ -501,7 +501,7 @@
   suffix: Kitchen
   components:
   - type: NavMapBeacon
-    text: Kitchen
+    text: Кухня #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconService
@@ -509,7 +509,7 @@
   suffix: Bar
   components:
   - type: NavMapBeacon
-    text: Bar
+    text: Бар #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconService
@@ -517,7 +517,7 @@
   suffix: Botany
   components:
   - type: NavMapBeacon
-    text: Botany
+    text: Ботаника #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconService
@@ -525,7 +525,7 @@
   suffix: Janitor's Closet
   components:
   - type: NavMapBeacon
-    text: Janitor
+    text: Уборщик #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -533,7 +533,7 @@
   suffix: AI
   components:
   - type: NavMapBeacon
-    text: AI
+    text: ИИ #SS220-Beacon-Translate
     color: "#2ed2fd"
 
 - type: entity
@@ -542,7 +542,7 @@
   suffix: AI Satellite
   components:
   - type: NavMapBeacon
-    text: AI Sat
+    text: Спутник ИИ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconAI
@@ -550,7 +550,7 @@
   suffix: AI Core
   components:
   - type: NavMapBeacon
-    text: AI Core
+    text: Ядро ИИ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -558,7 +558,7 @@
   suffix: Arrivals
   components:
   - type: NavMapBeacon
-    text: Arrivals
+    text: Прибытие #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -566,7 +566,7 @@
   suffix: Evac
   components:
   - type: NavMapBeacon
-    text: Evac
+    text: Отбытие #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -574,7 +574,7 @@
   suffix: EVA Storage
   components:
   - type: NavMapBeacon
-    text: EVA Storage
+    text: EVA #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -582,7 +582,7 @@
   suffix: Chapel
   components:
   - type: NavMapBeacon
-    text: Chapel
+    text: Церковь #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -590,7 +590,7 @@
   suffix: Library
   components:
   - type: NavMapBeacon
-    text: Library
+    text: Библиотека #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -598,7 +598,7 @@
   suffix: Theater
   components:
   - type: NavMapBeacon
-    text: Theater
+    text: Театр #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -606,7 +606,7 @@
   suffix: Dorms
   components:
   - type: NavMapBeacon
-    text: Dorms
+    text: Дормы #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -614,7 +614,7 @@
   suffix: Tool Room
   components:
   - type: NavMapBeacon
-    text: Tools
+    text: Инструменты #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeacon
@@ -622,5 +622,5 @@
   suffix: Disposals
   components:
   - type: NavMapBeacon
-    text: Disposals
+    text: Мусоросброс #SS220-Beacon-Translate
 
