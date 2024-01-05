@@ -17,17 +17,17 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public static HashSet<Gas> DefaultFilterGases = new()
         {
             Gas.CarbonDioxide,
-        };
-
-        public static HashSet<Gas> DefaultWideFilterGases = new()
-        {
-            Gas.CarbonDioxide,
             Gas.Plasma,
             Gas.Tritium,
             Gas.WaterVapor,
             Gas.Ammonia,
             Gas.NitrousOxide,
-            Gas.Frezon
+            Gas.Frezon,
+        };
+
+        public static HashSet<Gas> DefaultBasaFilterGases = new()
+        {
+            Gas.CarbonDioxide,
         };
 
         public static HashSet<Gas> DefaultFullFilterGases = new()
@@ -52,7 +52,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public static GasVentScrubberData FilterModePreset = new GasVentScrubberData
         {
             Enabled = true,
-            FilterGases = new(GasVentScrubberData.DefaultFilterGases),
+            FilterGases = new(GasVentScrubberData.DefaultBasaFilterGases),
             PumpDirection = ScrubberPumpDirection.Scrubbing,
             VolumeRate = 200f,
             WideNet = false
@@ -61,7 +61,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public static GasVentScrubberData WideFilterModePreset = new GasVentScrubberData
         {
             Enabled = true,
-            FilterGases = new(GasVentScrubberData.DefaultWideFilterGases),
+            FilterGases = new(GasVentScrubberData.DefaultFilterGases),
             PumpDirection = ScrubberPumpDirection.Scrubbing,
             VolumeRate = 200f,
             WideNet = true
