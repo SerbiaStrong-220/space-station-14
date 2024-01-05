@@ -436,7 +436,7 @@
   suffix: PA Control
   components:
   - type: NavMapBeacon
-    text: Управление PA #SS220-Beacon-Translate
+    text: Управление УЧ #SS220-Beacon-Translate
 
 - type: entity
   parent: DefaultStationBeaconEngineering
