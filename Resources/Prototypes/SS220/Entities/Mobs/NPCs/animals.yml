@@ -9,7 +9,7 @@
     allowSpeech: true
     allowMovement: true
     name: "собака Службы Безопасности"
-    description: "Помогите команде безопасности, кусая злодеев и лая на все, что движется."
+    description: "Помогите отделу охраны, кусая злодеев и лая на все, что движется."
   - type: GhostTakeoverAvailable
   - type: CombatMode
   - type: MovementSpeedModifier
