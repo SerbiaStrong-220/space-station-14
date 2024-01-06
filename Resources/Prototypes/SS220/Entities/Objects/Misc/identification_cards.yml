@@ -20,3 +20,16 @@
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null
+
+- type: entity # SS220 - Security dog Roxi ID card
+  parent: IDCardStandard
+  id: SecDogIDCard
+  name: Security Dog ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: idsecurityofficer
+    - type: PresetIdCard
+      job: SecurityOfficer
+      name: Рокси
