@@ -1,0 +1,12 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformNanoTrasenNavyOfficer
+  name: униформа офицера NanoTrasen
+  description: На этой униформе изображено звание «лейтенант-коммандер». Носят исключительно офицеры Нанотрейзен. Для защиты используются экзотические материалы.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/nt_NO_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/nt_NO_uniform.rsi

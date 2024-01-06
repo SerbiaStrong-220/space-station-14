@@ -1,0 +1,31 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomFieldOfficerPDA
+  name: ПДА Дипломата ЦК
+  description: ПДА Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри него.
+  components:
+    - type: Pda
+    id: FieldOfficerIDCard
+    state: pda-centcom
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomNavyOfficerPDA
+  name: ПДА Полевого Офицера ЦК
+  description: ПДА Полевого Офицера Центрального Комадования. Несмотря на идеально выполненный дизайн, это ПДА было заляпано кровью не один десяток раз.
+  components:
+    - type: Pda
+    id: NavyOfficerIDCard
+    state: pda-centcom
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomOfficerPDA
+  name: ПДА Офицера ЦК
+  description: ПДА Офицера Центрального Командования. Красиво выполненный дизайн позволяет Офицерам находить, чем заняться во время ожидания ответа от станции.
+  components:
+    - type: Pda
+    id: OfficerCentCommIDCard
+    state: pda-centcom
