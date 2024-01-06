@@ -1,0 +1,24 @@
+# special emotes pack
+- type: emoteSounds
+  id: MaleBoss
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleBossLaugh
+
+- type: emoteSounds
+  id: MaleSanta
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleSantaLaugh
+
+- type: emoteSounds
+  id: MaleEvil
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleEvilLaugh
