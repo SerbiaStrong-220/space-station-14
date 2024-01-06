@@ -2,7 +2,7 @@
   name: Рокси
   parent: MobSecDog
   id: MobSecDogRoxi
-  description: Охраная собака — помощница офицеров, по поимки злодеев. Больно кусается, лучший офицер станции.
+  description: Не стоит шутить с ней - в списке её наград есть медаль за отвагу.
   components:
   - type: GhostRole
     makeSentient: true
