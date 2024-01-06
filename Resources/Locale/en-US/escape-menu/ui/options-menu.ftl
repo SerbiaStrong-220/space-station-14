@@ -14,10 +14,12 @@ ui-options-default = Default
 # Misc/General menu
 
 ui-options-discordrich = Enable Discord Rich Presence
+ui-options-general-ui-style = UI Style
 ui-options-general-discord = Discord
 ui-options-general-cursor = Cursor
 ui-options-general-speech = Speech
 ui-options-general-storage = Storage
+ui-options-general-accessibility = Accessibility
 
 ## Audio menu
 
@@ -27,6 +29,7 @@ ui-options-ambient-music-volume = Ambient music volume:
 ui-options-ambience-volume = Ambience volume:
 ui-options-lobby-volume = Lobby & Round-end volume:
 ui-options-ahelp-volume = AHelp volume:
+ui-options-interface-volume = Interface volume:
 ui-options-ambience-max-sounds = Ambience simultaneous sounds:
 ui-options-lobby-music = Lobby & Round-end Music
 ui-options-restart-sounds = Round Restart Sounds
@@ -40,10 +43,11 @@ ui-options-volume-percent = { TOSTRING($volume, "P0") }
 
 ui-options-show-held-item = Show held item next to cursor
 ui-options-show-combat-mode-indicators = Show combat mode indicators with cursor
-ui-options-opaque-storage-window = Enable opaque storage window
+ui-options-opaque-storage-window = Opaque storage window
 ui-options-show-looc-on-head = Show LOOC chat above characters head
 ui-options-fancy-speech = Show names in speech bubbles
 ui-options-fancy-name-background = Add background to speech bubble names
+ui-options-reduced-motion = Reduce motion of visual effects
 ui-options-vsync = VSync
 ui-options-fullscreen = Fullscreen
 ui-options-lighting-label = Lighting Quality:
@@ -79,7 +83,7 @@ ui-options-scale-185 = 185%
 ui-options-scale-190 = 190%
 ui-options-scale-195 = 195%
 ui-options-scale-200 = 200%
-ui-options-hud-theme = HUD Theme:
+ui-options-hud-theme = HUD theme:
 ui-options-hud-theme-default = Default
 ui-options-hud-theme-plasmafire = Plasmafire
 ui-options-hud-theme-slimecore = Slimecore
@@ -149,7 +153,7 @@ ui-options-function-examine-entity = Examine
 ui-options-function-swap-hands = Swap hands
 ui-options-function-move-stored-item = Move stored item
 ui-options-function-rotate-stored-item = Rotate stored item
-ui-options-static-storage-ui = Static storage UI
+ui-options-static-storage-ui = Lock storage window to hotbar
 
 ui-options-function-smart-equip-backpack = Smart-equip to backpack
 ui-options-function-smart-equip-belt = Smart-equip to belt

@@ -31,6 +31,7 @@ using Content.Shared.Nutrition.AnimalHusbandry;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
+using Content.Shared.Pulling.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Zombies;
@@ -106,7 +107,7 @@ namespace Content.Server.Zombies
             RemComp<BarotraumaComponent>(target);
             RemComp<HungerComponent>(target);
             RemComp<ThirstComponent>(target);
-            RemComp<ReproductiveComponent>(target); 
+            RemComp<ReproductiveComponent>(target);
             RemComp<ReproductivePartnerComponent>(target);
 
             //funny voice
@@ -275,8 +276,10 @@ namespace Content.Server.Zombies
                 RemComp(target, handsComp);
             }
 
-            if (TryComp<CuffableComponent>(target, out CuffableComponent? cuffableComp))
-                RemComp(target, cuffableComp);
+            if (TryComp<CuffableComponent>(target, out CuffableComponent? cuffableComp)) // SS220 No-handcuffed-zombies
+                RemComp(target, cuffableComp); // SS22o No-handcuffed-zombies
+
+            RemComp<SharedPullerComponent>(target);
 
             // No longer waiting to become a zombie:
             // Requires deferral because this is (probably) the event which called ZombifyEntity in the first place.

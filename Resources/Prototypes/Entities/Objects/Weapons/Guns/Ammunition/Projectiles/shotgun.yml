@@ -39,7 +39,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 12
+        Piercing: 10
 
 - type: entity
   id: PelletShotgunIncendiary
@@ -53,8 +53,10 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 1
+        Blunt: 3
         Heat: 7
+  - type: IgnitionSource
+    ignited: true
 
 - type: entity
   id: PelletShotgunPractice
@@ -141,6 +143,7 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot-flare
   - type: IgnitionSource
+    ignited: true
     temperature: 1000
   - type: TimedDespawn
     lifetime: 240
@@ -159,3 +162,18 @@
     color: "#FF8080"
     radius: 15.0
     energy: 9.0
+
+- type: entity
+  id: PelletShotgunUranium
+  name: pellet (.50 uranium)
+  noSpawn: true
+  parent: BaseBullet
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: depleted-uranium
+  - type: Projectile
+    damage:
+      types:
+        Radiation: 5
+        Piercing: 5
