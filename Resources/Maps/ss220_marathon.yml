@@ -10601,23 +10601,29 @@ entities:
       parent: 30
 - proto: AirlockExternalGlassShuttleEscape
   entities:
+  - uid: 583
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -59.5,-10.5
+      parent: 30
   - uid: 1083
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -52.5,-10.5
       parent: 30
+  - uid: 2010
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -85.5,-60.5
+      parent: 30
   - uid: 3701
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 25.5,43.5
-      parent: 30
-  - uid: 9041
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -59.5,-10.5
       parent: 30
 - proto: AirlockExternalGlassShuttleLocked
   entities:
@@ -10711,16 +10717,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -78.5,-60.5
-      parent: 30
-- proto: AirlockExternalShuttleLocked
-  entities:
-  - uid: 6606
-    components:
-    - type: MetaData
-      flags: PvsPriority
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -85.5,-60.5
       parent: 30
 - proto: AirlockFreezerKitchenHydroLocked
   entities:
@@ -62778,6 +62774,13 @@ entities:
     - type: Transform
       pos: 29.5,15.5
       parent: 30
+- proto: DresserWardenFilled
+  entities:
+  - uid: 20574
+    components:
+    - type: Transform
+      pos: -44.5,49.5
+      parent: 30
 - proto: DrinkChangelingStingCan
   entities:
   - uid: 4400
@@ -63552,6 +63555,12 @@ entities:
     - type: Transform
       pos: 20.5,29.5
       parent: 30
+  - uid: 6606
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-44.5
+      parent: 30
   - uid: 6784
     components:
     - type: Transform
@@ -63593,6 +63602,12 @@ entities:
     - type: Transform
       pos: -12.5,-18.5
       parent: 30
+  - uid: 9041
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 22.5,-9.5
+      parent: 30
   - uid: 9076
     components:
     - type: Transform
@@ -63613,11 +63628,6 @@ entities:
     - type: Transform
       pos: -14.5,-35.5
       parent: 30
-  - uid: 10013
-    components:
-    - type: Transform
-      pos: -0.5,-44.5
-      parent: 30
   - uid: 12809
     components:
     - type: Transform
@@ -63637,11 +63647,6 @@ entities:
     components:
     - type: Transform
       pos: -51.5,22.5
-      parent: 30
-  - uid: 21381
-    components:
-    - type: Transform
-      pos: 22.5,-9.5
       parent: 30
 - proto: FaxMachineBase
   entities:
@@ -103859,29 +103864,11 @@ entities:
         - 0
 - proto: LockerWardenFilled
   entities:
-  - uid: 2010
+  - uid: 10013
     components:
     - type: Transform
-      pos: -44.5,49.5
+      pos: -44.5,48.5
       parent: 30
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-        - 3.4430928
-        - 12.952587
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
 - proto: LockerWeldingSuppliesFilled
   entities:
   - uid: 4773
@@ -117891,7 +117878,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 581
     components:
     - type: Transform
@@ -117900,7 +117887,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 582
     components:
     - type: Transform
@@ -117909,7 +117896,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 899
     components:
     - type: Transform
@@ -117990,7 +117977,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 4361
     components:
     - type: Transform
@@ -117999,7 +117986,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 4376
     components:
     - type: Transform
@@ -118008,7 +117995,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 4378
     components:
     - type: Transform
@@ -118017,7 +118004,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 4438
     components:
     - type: Transform
@@ -118035,7 +118022,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 5698
     components:
     - type: Transform
@@ -118062,7 +118049,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 5738
     components:
     - type: Transform
@@ -118098,7 +118085,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 6945
     components:
     - type: Transform
@@ -118107,7 +118094,7 @@ entities:
       parent: 30
     - type: DeviceLinkSink
       links:
-      - 583
+      - 20545
   - uid: 7414
     components:
     - type: Transform
@@ -118525,35 +118512,6 @@ entities:
         - Pressed: Toggle
         543:
         - Pressed: Toggle
-  - uid: 583
-    components:
-    - type: Transform
-      pos: -4.5,5.5
-      parent: 30
-    - type: DeviceLinkSource
-      linkedPorts:
-        580:
-        - Pressed: Toggle
-        581:
-        - Pressed: Toggle
-        582:
-        - Pressed: Toggle
-        5733:
-        - Pressed: Toggle
-        6945:
-        - Pressed: Toggle
-        4378:
-        - Pressed: Toggle
-        4915:
-        - Pressed: Toggle
-        6929:
-        - Pressed: Toggle
-        4361:
-        - Pressed: Toggle
-        4376:
-        - Pressed: Toggle
-        3405:
-        - Pressed: Toggle
   - uid: 723
     components:
     - type: Transform
@@ -118839,6 +118797,36 @@ entities:
         20448:
         - Pressed: Toggle
         20447:
+        - Pressed: Toggle
+  - uid: 20545
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,5.5
+      parent: 30
+    - type: DeviceLinkSource
+      linkedPorts:
+        6945:
+        - Pressed: Toggle
+        5733:
+        - Pressed: Toggle
+        580:
+        - Pressed: Toggle
+        581:
+        - Pressed: Toggle
+        582:
+        - Pressed: Toggle
+        4378:
+        - Pressed: Toggle
+        4915:
+        - Pressed: Toggle
+        6929:
+        - Pressed: Toggle
+        4361:
+        - Pressed: Toggle
+        4376:
+        - Pressed: Toggle
+        3405:
         - Pressed: Toggle
   - uid: 21721
     components:
