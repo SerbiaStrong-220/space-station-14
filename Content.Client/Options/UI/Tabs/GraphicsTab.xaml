@@ -10,15 +10,11 @@
                 <Control MinSize="4 0" />
                 <OptionButton Name="LightingPresetOption" MinSize="100 0" />
             </BoxContainer>
+            <CheckBox Name="BloomLightingCheckBox" Text="{Loc 'ui-options-bloom-lighting'}"/> <!-- SS220 Grafon-lighting -->
             <BoxContainer Orientation="Horizontal">
                 <Label Text="{Loc 'ui-options-scale-label'}" />
                 <Control MinSize="4 0" />
                 <OptionButton Name="UIScaleOption" />
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
-                <Label Text="{Loc 'ui-options-hud-theme'}" />
-                <Control MinSize="4 0" />
-                <OptionButton Name="HudThemeOption" />
             </BoxContainer>
             <BoxContainer Orientation="Horizontal">
                 <CheckBox Name="ViewportStretchCheckBox" Text="{Loc 'ui-options-vp-stretch'}" />
@@ -37,11 +33,6 @@
                 <Slider Name="ViewportWidthSlider"
                         Rounded="True"
                         MinWidth="200" />
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
-                <Label Text="{Loc 'ui-options-hud-layout'}" />
-                <Control MinSize="4 0" />
-                <OptionButton Name="HudLayoutOption" />
             </BoxContainer>
             <CheckBox Name="IntegerScalingCheckBox"
                       Text="{Loc 'ui-options-vp-integer-scaling'}"

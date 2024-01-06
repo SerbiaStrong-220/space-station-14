@@ -187,7 +187,7 @@
   cost: 4000
   category: Fun
   group: market
-  
+
 - type: cargoProduct
   id: FunDartsSet
   icon:
@@ -195,5 +195,16 @@
     state: icon
   product: CrateFunDartsSet
   cost: 900
+  category: Fun
+  group: market
+
+- type: cargoProduct
+  id: FunCrateGambling
+  icon: #SS220 fix_cargo begin
+    sprite: Structures/Storage/Crates/privatecrate_secure.rsi
+    state: icon
+  #SS220 fix_cargo end
+  product: CrateCargoGambling
+  cost: 20000 #SS220 fix_cargo
   category: Fun
   group: market

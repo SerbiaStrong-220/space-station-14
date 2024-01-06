@@ -183,6 +183,32 @@
     sprite: Clothing/Head/Hats/catears.rsi
   - type: AddAccentClothing
     accent: OwOAccent
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    wilhelm: "/Audio/Voice/Felinid/cat_wilhelm.ogg"
+    sounds:
+      Male: MaleFelinid
+      Female: FemaleFelinid
+      Unsexed: MaleFelinid
+  #ss220 special_sounds end
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatDogEars
+  name: doggy ears
+  description: Only for good boys.
+  suffix: DO NOT MAP
+  components:
+  - type: Tag
+    tags:
+      - DroneUsable
+  - type: Sprite
+    sprite: Clothing/Head/Hats/dogears.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/dogears.rsi
+  - type: AddAccentClothing
+    accent: BarkAccent
 
 - type: entity
   parent: ClothingHeadBase

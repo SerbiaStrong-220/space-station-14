@@ -29,6 +29,12 @@
     tags:
     - SuitEVA
     - WhitelistChameleon
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+  #ss220 special_sounds end
 
 #Emergency EVA
 - type: entity
@@ -42,8 +48,8 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/eva_emergency.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.5
-    sprintModifier: 0.5
+    walkModifier: 0.7
+    sprintModifier: 0.7
   - type: HeldSpeedModifier
   - type: TemperatureProtection
     coefficient: 0.5
@@ -116,3 +122,5 @@
         Caustic: 0.5
         Stamina: 0.8
   - type: GroupExamine
+  - type: StealTarget
+    stealGroup: ClothingOuterHardsuitVoidParamed
