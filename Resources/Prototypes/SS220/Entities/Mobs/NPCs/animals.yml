@@ -96,7 +96,7 @@
     attributes:
       gender: epicene
   - type: Bloodstream
-    bloodMaxVolume: 300 # :3
+    bloodMaxVolume: 200 # :3
   - type: Puller
     needsHands: false
   - type: MobPrice
