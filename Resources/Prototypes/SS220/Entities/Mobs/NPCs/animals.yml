@@ -1,5 +1,5 @@
 - type: entity
-  name: Охранная собака
+  name: охранная собака
   parent: SimpleMobBase
   id: MobSecDog
   description: Как ни странно, эта свинья на самом деле собака.
