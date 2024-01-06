@@ -1,0 +1,16 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterSRTCoat
+  name: плащ ГСН
+  description: Бронекостюм тёмно-синего цвета. Отличная защита от большинства видов урона.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+  - type: TemperatureProtection
+    coefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.90

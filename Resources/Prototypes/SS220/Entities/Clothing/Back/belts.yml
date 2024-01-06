@@ -1,0 +1,36 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  noSpawn: false
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltWebbingSRT
+  name: Пояс ГСН
+  description: Данный пояс позволяет хранить всё необходимое в удобном и быстродоступном месте, а материал, из которого он выполнен, позволяет выглядеть ещё более стильнно.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/assault.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/assault.rsi
+  - type: Storage
+
+- type: entity
+  noSpawn: false
+  parent: ClothingBeltWebbingSRT
+  id: ClothingBeltWebbingSRTFilled
+  name: Пояс ГСН
+  description: Данный пояс позволяет хранить всё необходимое в удобном и быстродоступном месте, а материал, из которого он выполнен, позволяет выглядеть ещё более стильнно.
+  suffix: Заполненный
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/assault.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/assault.rsi
+  - type: Storage
+  - type: StorageFill
+    contents:
+      - id: FlashlightSeclite
+      - id: CombatKnife
+      - id: Handcuffs
+      - id: Handcuffs
+      - id: GrenadeFlashBang
+      - id: GrenadeFlashBang

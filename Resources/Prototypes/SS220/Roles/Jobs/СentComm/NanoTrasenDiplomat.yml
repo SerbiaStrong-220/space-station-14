@@ -1,0 +1,49 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: Дипломат NanoTrasen
+  id: NanoTrasenCentCommDiplomat
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: centcommdiplomat
+    - type: RandomHumanoidSpawner
+      settings: NanoTrasenCentCommDiplomat
+
+- type: randomHumanoidSettings
+  id: NanoTrasenCentCommDiplomat
+  components:
+    - type: GhostRole
+      name: ghost-role-information-centcom-official-name
+      description: ghost-role-information-centcom-official-description
+    - type: GhostTakeoverAvailable
+    - type: Loadout
+      prototypes: [ NanoTrasenCentCommDiplomatGear ]
+
+- type: job
+  id: NanoTrasenCentCommDiplomat
+  name: job-name-centcomoff
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: NanoTrasenCentCommDiplomatGear
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-hos
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: NanoTrasenCentCommDiplomatGear
+  equipment:
+    jumpsuit: ClothingUniformNanoTrasenNavyOfficer
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatBeretNanoTrasenOfficer
+    eyes: ClothingEyesGlassesSecurity
+    gloves: ClothingHandsGlovesLatex
+    id: CentcomFieldOfficerPDA
+    ears: ClothingHeadsetAltCentCom
+    pocket1: BoxFolderBlack
+    pocket2: NTbaton
+    belt: WeaponPulsePistol
+

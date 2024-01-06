@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: AgentIDCard
   id: UsspIDCard
@@ -20,3 +22,19 @@
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null
+
+- type: entity
+  parent: CentcomIDCard
+  id: FieldOfficerIDCard
+  name: ID карта Дипломата ЦК
+
+- type: entity
+  parent: CentcomIDCard
+  id: FieldOfficerIDCard
+  name: ID карта Полевого Офицера ЦК
+
+- type: entity
+  parent: CentcomIDCard
+  id: OfficerCentCommIDCard
+  name: ID карта Офицера ЦК
+

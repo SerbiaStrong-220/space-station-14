@@ -1,0 +1,27 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackSatchelSRT
+  name: сумка ГСН
+  description: Прочная сумка спецназа NanoTrasen
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Satchel/SRTSatchel.rsi
+  - type: Storage
+    capacity: 100
+
+- type: entity
+  noSpawn: false
+  parent: ClothingBackSatchelSRT
+  id: ClothingBackSatchelSRTFilled
+  suffix: Заполненный
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: WeaponAdvancedRevolver
+      - id: WeaponSubMachineGunAtreides
+      - id: MagazinePistolSubMachineGun
+      - id: MagazinePistolSubMachineGun
+      - id: TelescopicShield
