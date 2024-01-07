@@ -1,0 +1,11 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+
+- type: entity
+  name: Ручка Центрального Командования
+  parent: Pen
+  id: CentCommNewPen
+  components:
+  - type: Sprite
+    sprite: Textures/SS220/Objects/Tools/pen.rsi
+    state: centcommnew_pen

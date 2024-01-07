@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centnavyofficer
+      state: centofficer
     - type: RandomHumanoidSpawner
       settings: NanoTrasenCentCommOfficer
 
