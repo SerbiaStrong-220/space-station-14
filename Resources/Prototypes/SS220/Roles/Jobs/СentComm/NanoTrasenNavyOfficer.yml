@@ -18,7 +18,7 @@
       description: ghost-role-information-centcom-official-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ NanoTrasenNavyOfficer ]
+      prototypes: [ NanoTrasenNavyOfficerGear ]
 
 - type: playTimeTracker
   id: JobCentcommNavyOfficer
@@ -27,7 +27,6 @@
   id: NanoTrasenNavyOfficer
   name: job-name-centcomoff
   description: job-description-centcomoff
-  playTimeTracker: JobSRT
   setPreference: false
   startingGear: NanoTrasenNavyOfficerGear
   playTimeTracker: JobCentcommNavyOfficer
