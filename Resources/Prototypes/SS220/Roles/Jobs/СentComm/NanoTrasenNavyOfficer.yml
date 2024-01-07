@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: nanotrasennavyofficer
+      state: centnnavyofficer
     - type: RandomHumanoidSpawner
       settings: NanoTrasenNavyOfficer
 
@@ -20,6 +20,9 @@
     - type: Loadout
       prototypes: [ NanoTrasenNavyOfficer ]
 
+- type: playTimeTracker
+  id: JobCentcommNavyOfficer
+
 - type: job
   id: NanoTrasenNavyOfficer
   name: job-name-centcomoff
@@ -27,8 +30,9 @@
   playTimeTracker: JobSRT
   setPreference: false
   startingGear: NanoTrasenNavyOfficerGear
+  playTimeTracker: JobCentcommNavyOfficer
   icon: "JobIconNanotrasen"
-  supervisors: job-supervisors-hos
+  supervisors: job-supervisors-centcom
   canBeAntag: false
   radioBold: true
   accessGroups:
@@ -43,7 +47,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterSRTCoat
-    id: CentcomFieldOfficerPDA
+    id: CentcomNavyOfficerPDA
     ears: ClothingHeadsetAltCentCom
     pocket1: MagazinePistolSubMachineGun
     pocket2: MagazinePistolSubMachineGun

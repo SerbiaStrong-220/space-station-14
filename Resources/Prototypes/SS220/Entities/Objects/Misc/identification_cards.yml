@@ -37,7 +37,7 @@
       name: Рокси
 - type: entity
   parent: CentcomIDCard
-  id: FieldOfficerIDCard
+  id: CentcomDiplomatIDCard
   name: ID карта Дипломата ЦК
 
 - type: entity

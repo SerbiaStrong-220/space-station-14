@@ -3,9 +3,10 @@
 
 - type: entity
   name: Ручка Центрального Командования
+  description: Утонченный стиль, неповторимая эргономичность, цвет чернил, - всё это - достоинства этой ручки. Она предназначена для лучших и создана лучшими.
   parent: Pen
   id: CentCommNewPen
   components:
   - type: Sprite
-    sprite: Textures/SS220/Objects/Tools/pen.rsi
+    sprite: SS220/Objects/Tools/pen.rsi
     state: centcommnew_pen
