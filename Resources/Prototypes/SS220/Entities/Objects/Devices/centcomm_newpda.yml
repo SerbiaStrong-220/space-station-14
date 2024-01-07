@@ -8,16 +8,19 @@
   components:
     - type: Pda
       id: CentcomDiplomatIDCard
-      state: centcommnew_pda
       penSlot:
-        startingItem: CentCommnew_pen
+        startingItem: CentCommNewPen
         whitelist:
           tags:
           - Write
+    - type: Sprite
+      sprite: SS220/Objects/Devices/centcomm_pda.rsi
+      state: centcommnew_pda
     - type: PdaBorderColor
       borderColor: "#00842e"
     - type: Icon
-    state: centcommnew_pda
+      sprite: SS220/Objects/Devices/centcomm_pda.rsi
+      state: centcommnew_pda
 
 - type: entity
   parent: CentcomDiplomatPDA
@@ -26,7 +29,7 @@
   description: КПК Полевого Офицера Центрального Командования. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
-      id: NavyOfficerIDCard
+      id: FieldOfficerIDCard
 
 
 - type: entity
