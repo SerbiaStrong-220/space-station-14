@@ -5,7 +5,7 @@
   id: NanoTrasenCentCommDiplomat
   components:
     - type: Sprite
-      sprite: Markers/jobs.rsi
+      sprite: SS220/Markers/jobs.rsi
       state: centcommdiplomat
     - type: RandomHumanoidSpawner
       settings: NanoTrasenCentCommDiplomat

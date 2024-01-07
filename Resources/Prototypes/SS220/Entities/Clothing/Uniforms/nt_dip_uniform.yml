@@ -4,7 +4,7 @@
   parent: UnsensoredClothingUniformBase
   id: ClothingUniformNanotrasenDiplomat
   name: дипломатическая форма NanoTrasen
-  description: Очень яркая и официальная униформа дипломатического корпуса НаноТрейзен.
+  description: Очень яркая и официальная униформа дипломатического корпуса NanoTrasen.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/NanotrasenDiplomat.rsi

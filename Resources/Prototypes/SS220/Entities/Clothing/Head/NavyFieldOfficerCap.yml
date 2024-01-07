@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatNavyFieldOfficerCap
-  name: фуражка полевого офицера
-  description: Если видите её на станции, прячьте колени
+  name: фуражка полевого Офицера
+  description: Если видите её владельца на станции, прячьте колени.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/NavyFieldOfficerCap.rsi
