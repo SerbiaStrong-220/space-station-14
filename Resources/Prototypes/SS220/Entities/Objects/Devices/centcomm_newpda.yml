@@ -1,24 +1,30 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: CentcomPDA
   id: CentcomFieldOfficerPDA
   name: КПК Дипломата ЦК
   description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
   components:
     - type: Pda
     id: FieldOfficerIDCard
-    state: pda-centcom
+    state: centcommnew_pda
+     penSlot:
+      startingItem: CentCommnew_pen
+      whitelist:
+        tags:
+        - Write
+    - type: Icon
+    state: centcommnew_pda
 
 - type: entity
-  parent: CentcomPDA
+  parent: CentcomFieldOfficerPDA
   id: CentcomNavyOfficerPDA
   name: КПК Полевого Офицера ЦК
   description: КПК Полевого Офицера Центрального Командования. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
     id: NavyOfficerIDCard
-    state: pda-centcom
+    state: centcommnew_pda
 
 - type: entity
   parent: CentcomPDA
@@ -28,4 +34,4 @@
   components:
     - type: Pda
     id: OfficerCentCommIDCard
-    state: pda-centcom
+    state: centcommnew_pda
