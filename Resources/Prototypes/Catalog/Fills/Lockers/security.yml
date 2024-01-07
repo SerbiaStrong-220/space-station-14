@@ -8,8 +8,6 @@
       - id: FlashlightSeclite
       - id: WeaponDisabler
         prob: 0.3
-      - id: ClothingHeadHatWarden
-      - id: ClothingHeadHatBeretWarden
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSunglasses
@@ -34,9 +32,6 @@
       - id: FlashlightSeclite
       - id: WeaponDisabler
         prob: 0.3
-      - id: ClothingHeadHatWarden
-      - id: ClothingHeadHatBeretWarden
-      - id: ClothingHeadHatCapWardenAlt # Corvax-SecFashion
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSunglasses
@@ -74,7 +69,7 @@
       - id: PilotBriefing
       - id: YellowOxygenTankFilled
       - id: NitrogenTankFilled
-      
+
 - type: entity
   id: LockerSecurityFilled
   suffix: Filled

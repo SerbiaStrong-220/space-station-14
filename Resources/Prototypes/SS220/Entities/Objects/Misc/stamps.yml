@@ -8,5 +8,4 @@
     stampedColor: "#5b0000"
     stampState: "paper_stamp-detective"
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
     state: stamp-detective
