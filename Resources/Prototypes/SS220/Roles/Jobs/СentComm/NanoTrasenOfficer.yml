@@ -5,7 +5,7 @@
   id: NanoTrasenCentCommOfficer
   components:
     - type: Sprite
-      sprite: Markers/jobs.rsi
+      sprite: SS220/Markers/jobs.rsi
       state: centnavyofficer
     - type: RandomHumanoidSpawner
       settings: NanoTrasenCentCommOfficer

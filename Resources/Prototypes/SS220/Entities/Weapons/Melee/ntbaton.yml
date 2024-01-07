@@ -4,7 +4,7 @@
   name: телескопическая бита НТ
   parent: BaseItem
   id: NTbaton
-  description: А вы знали, что офицеры ЦК любят играть в бейсбол головами некомпитентного руководства своих активов?
+  description: А вы знали, что Офицеры ЦК любят играть в бейсбол головами некомпетентного руководства своих активов?
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi

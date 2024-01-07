@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretNanoTrasenOfficer
-  name: Берет Офицера NanoTrasen
-  description: Чёрный офицерский берет с выгравированным щитом и мечом, объявляющий миру, что его владелец является защитником NanoTrasen
+  name: берет Офицера NanoTrasen
+  description: Чёрный офицерский берет с выгравированным щитом и мечом, объявляющий миру, что его владелец является защитником NanoTrasen.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/BeretNanoTrasenOfficer.rsi

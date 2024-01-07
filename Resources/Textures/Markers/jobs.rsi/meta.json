@@ -201,15 +201,6 @@
     },
     {
       "name": "zookeeper"
-    },
-    {
-      "name": "nanotrasennavyofficer"
-    },
-    {
-      "name": "centnavyofficer"
-    },
-    {
-      "name": "centcommdiplomat"
     }
   ]
 }
