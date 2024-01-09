@@ -15,8 +15,8 @@
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
     - type: GhostRole
-      name: ghost-role-information-centcom-official-name
-      description: ghost-role-information-centcom-official-description
+      name: ghost-role-information-nanotrasen-Diplomat-name
+      description: ghost-role-information-nanotrasen-Diplomat-description
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ NanoTrasenCentCommDiplomatGear ]
