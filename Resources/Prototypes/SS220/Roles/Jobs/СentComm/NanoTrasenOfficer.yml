@@ -12,6 +12,7 @@
 
 - type: randomHumanoidSettings
   id: NanoTrasenCentCommOfficer
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
