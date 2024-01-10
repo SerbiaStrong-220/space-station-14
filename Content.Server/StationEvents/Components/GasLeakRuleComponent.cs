@@ -33,6 +33,7 @@ public sealed partial class GasLeakRuleComponent : Component
     public bool FoundTile;
     public Gas LeakGas;
     public float MolesPerSecond;
+    //SS220-AirAlarm
     public readonly int MinimumMolesPerSecond = 50;
 
     /// <summary>
@@ -42,5 +43,6 @@ public sealed partial class GasLeakRuleComponent : Component
 
     public int MinimumGas = 500;
     public int MaximumGas = 5000;
+    //SS220-AirAlarm end
     public float SparkChance = 0.05f;
 }
