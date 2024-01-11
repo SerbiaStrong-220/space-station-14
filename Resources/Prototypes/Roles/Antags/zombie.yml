@@ -6,7 +6,7 @@
   objective: roles-antag-initial-infected-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 90000 # 25h SS220 time
+    time: 108000 # 30h SS220 time
 
 - type: antag
   id: Zombie
