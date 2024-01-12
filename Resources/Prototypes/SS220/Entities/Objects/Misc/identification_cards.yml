@@ -38,3 +38,8 @@
   id: OfficerCentCommIDCard
   name: ID карта Офицера ЦК
 
+- type: entity
+  parent: CentcomIDCard
+  id: OperativeSRTIDCard
+  name: ID карта Оперативника ГСН
+

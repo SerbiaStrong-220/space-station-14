@@ -1,36 +1,36 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Полевой Офицер ЦК
-  id: NanoTrasenNavyOfficer
+  name: Оперативник Группы Специального Назначения
+  id: CentCommOperativeSRT
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centnnavyofficer
+      state: centcommoperativesrt
     - type: RandomHumanoidSpawner
-      settings: NanoTrasenNavyOfficer
+      settings: CentCommOperativeSRT
 
 - type: randomHumanoidSettings
-  id: NanoTrasenNavyOfficer
+  id: CentCommOperativeSRT
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
     - type: GhostRole
-      name: ghost-role-information-centcom-NavyOfficier-name
-      description: ghost-role-information-centcom-NavyOfficier-description
+      name: ghost-role-information-centcom-SRT-name
+      description: ghost-role-information-centcom-SRT-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ NanoTrasenNavyOfficerGear ]
+      prototypes: [ CentcomOperativeSRTGear ]
 
 - type: playTimeTracker
-  id: JobCentcommNavyOfficer
+  id: JobCentcommOperativeSRT
 
 - type: job
-  id: NanoTrasenNavyOfficer
+  id: CentcomOperativeSRT
   name: job-name-centcomoff
   description: job-description-centcomoff
   setPreference: false
-  startingGear: NanoTrasenNavyOfficerGear
-  playTimeTracker: JobCentcommNavyOfficer
+  startingGear: CentcomOperativeSRTGear
+  playTimeTracker: JobCentcommOperativeSRT
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -39,7 +39,7 @@
   - AllAccess
 
 - type: startingGear
-  id: NanoTrasenNavyOfficerGear
+  id: CentcomOperativeSRTGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield2
     shoes: ClothingShoesSwat
@@ -47,7 +47,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterSRTCoat
-    id: CentcomNavyOfficerPDA
+    id: CentcomOperativeSRTPDA
     ears: ClothingHeadsetAltCentCom
     pocket1: MagazinePistolSubMachineGun
     pocket2: MagazinePistolSubMachineGun
