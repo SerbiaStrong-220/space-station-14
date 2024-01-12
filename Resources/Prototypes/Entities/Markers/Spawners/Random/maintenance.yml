@@ -190,7 +190,7 @@
         - HandLabeler
         - GlowstickBase
         - Bucket
-        - RadioHandheld
+        - HandheldRadio
         - GeigerCounter
         - Beaker
         - ClothingMaskGas
