@@ -26,10 +26,19 @@
   parent: CentcomDiplomatPDA
   id: CentcomNavyOfficerPDA
   name: КПК Полевого Офицера ЦК
-  description: КПК Полевого Офицера Центрального Командования. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  description: КПК Полевого Офицера Центрального Командования - главный помощник полевой бюрократической машины
   components:
     - type: Pda
       id: FieldOfficerIDCard
+
+- type: entity
+  parent: CentcomDiplomatPDA
+  id: CentcomOperativeSRTPDA
+  name: КПК Оперативника ГСН
+  description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  components:
+    - type: Pda
+      id: OperativeSRTIDCard
 
 
 - type: entity
