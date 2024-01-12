@@ -1,7 +1,8 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
-
-namespace Content.Shared.Radio.Components;
+using Content.Shared.SS220.Radio;
+using Content.Shared.Radio;
+namespace Content.Shared.SS220.Radio.Components;
 
 /// <summary>
 /// Handles handheld radio ui and is authoritative on the channels a radio can access.

@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Radio;
+namespace Content.Shared.SS220.Radio;
 
 [Serializable, NetSerializable]
 public enum HandheldRadioUiKey

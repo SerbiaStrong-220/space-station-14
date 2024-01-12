@@ -1,8 +1,8 @@
-using Content.Shared.Radio;
+using Content.Shared.SS220.Radio;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 
-namespace Content.Client.Radio.Ui;
+namespace Content.Client.SS220.Radio.Ui;
 
 [UsedImplicitly]
 public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
