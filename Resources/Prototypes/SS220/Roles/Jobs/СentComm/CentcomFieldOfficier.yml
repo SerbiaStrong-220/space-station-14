@@ -15,8 +15,8 @@
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
     - type: GhostRole
-      name: ghost-role-information-centcom-SRT-name
-      description: ghost-role-information-centcom-SRT-description
+      name: ghost-role-information-centcom-NavyOfficier-name
+      description: ghost-role-information-centcom-NavyOfficier-description
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ CentcomFieldOfficerGear ]
