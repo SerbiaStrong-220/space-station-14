@@ -48,7 +48,7 @@
   description: bounty-description-bread
   entries:
   - name: bounty-item-bread
-    amount: 2
+    amount: 2 #ss220 Rebalance
     whitelist:
       tags:
       - Bread
@@ -77,7 +77,7 @@
 
 - type: cargoBounty
   id: BountyCarrotFries
-  reward: 4500 #ss220 Rebalance
+  reward: 4000 #ss220 Rebalance
   description: bounty-description-carrot-fries 
   entries:
   - name: bounty-item-carrot-fries
@@ -88,7 +88,7 @@
 
 - type: cargoBounty
   id: BountyCarp
-  reward: 25000
+  reward: 10000 #ss220 Rebalance
   description: bounty-description-carp
   entries:
   - name: bounty-item-carp
@@ -115,7 +115,7 @@
 
 - type: cargoBounty
   id: BountyCorn
-  reward: 3500 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-corn
   entries:
   - name: bounty-item-corn
@@ -146,20 +146,20 @@
       tags:
       - CubanCarp
 
-- type: cargoBounty
-  id: BountyDonkPocket
-  reward: 8000 #ss220 Rebalance
-  description: bounty-description-donk-pocket
-  entries:
-  - name: bounty-item-donk-pocket
-    amount: 12
-    whitelist:
-      tags:
-      - DonkPocket
+#- type: cargoBounty
+#  id: BountyDonkPocket
+#  reward: 8000 #ss220 Rebalance
+#  description: bounty-description-donk-pocket #ss220 rebalance impossible
+#  entries:
+#  - name: bounty-item-donk-pocket
+#    amount: 12
+#    whitelist:
+#      tags:
+#      - DonkPocket
 
 - type: cargoBounty
   id: BountyDonut
-  reward: 6000 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-donut
   entries:
   - name: bounty-item-donut
@@ -192,7 +192,7 @@
 
 - type: cargoBounty
   id: BountyFlower
-  reward: 4000 #ss220 Rebalance
+  reward: 4000 
   description: bounty-description-flower 
   entries:
   - name: bounty-item-flower
@@ -203,7 +203,7 @@
 
 - type: cargoBounty
   id: BountyGalaxyThistle
-  reward: 4500 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-galaxythistle
   entries:
   - name: bounty-item-galaxythistle
@@ -247,7 +247,7 @@
 
 - type: cargoBounty
   id: BountyLemon
-  reward: 2500 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-lemon
   entries:
   - name: bounty-item-lemon
@@ -258,7 +258,7 @@
 
 - type: cargoBounty
   id: BountyLime
-  reward: 2500 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-lime
   entries:
   - name: bounty-item-lime
@@ -339,7 +339,7 @@
   description: bounty-description-pie
   entries:
   - name: bounty-item-pie
-    amount: 4
+    amount: 4 #ss220 Rebalance
     whitelist:
       tags:
       - Pie
@@ -380,16 +380,16 @@
       components:
       - ResearchDisk
 
-- type: cargoBounty
-  id: BountyShiv
-  reward: 3500 #ss220 Rebalance
-  description: bounty-description-shiv
-  entries:
-  - name: bounty-item-shiv
-    amount: 5
-    whitelist:
-      tags:
-      - Shiv
+#- type: cargoBounty
+#  id: BountyShiv
+#  reward: 3500 #ss220 Rebalance
+#  description: bounty-description-shiv №ss220 rebalance
+#  entries:
+#  - name: bounty-item-shiv
+#    amount: 5
+#    whitelist:
+#      tags:
+#      - Shiv
 
 - type: cargoBounty
   id: BountySoap
@@ -404,7 +404,7 @@
 
 - type: cargoBounty
   id: BountySoup
-  reward: 3500 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-soup
   entries:
   - name: bounty-item-soup
@@ -547,7 +547,7 @@
 
 - type: cargoBounty
   id: BountyLaserGun
-  reward: 12000 #ss220 Rebalance
+  reward: 16000 #ss220 Rebalance
   description: bounty-description-lasergun
   entries:
   - name: bounty-lasergun
@@ -571,7 +571,7 @@
 - type: cargoBounty
   id: BountyNattle
   reward: 9500
-  description: Химики НаноТрейзен, обнаружили мощный химикат в растениях вида Смертокрапива. Данный яд используется для бесопасности при изучении опасной фауны.
+  description: Химики NanoTrasen обнаружили мощный химикат в растениях вида Смертокрапива. Данный яд используется для сдерживания опасной фауны при её изучении. Постарайтесь добыть её.
   entries:
   - name: bounty-Nattle
     amount: 12
@@ -582,7 +582,7 @@
 - type: cargoBounty
   id: BountyDeus
   reward: 9500
-  description: Медики НаноТрейзен, обнаружили новый способ добычи Омнизина. Происходит массовая закупка данного вида для синтеза мощных медикоментов.
+  description: Лучшие умы компании обнаружили новый трудозатратный способ синтеза секретного препарата. Спасите несколько жизней, отправив нам Амброзию Деус.
   entries:
   - name: bounty-Deus
     amount: 12
@@ -593,8 +593,8 @@
 - type: cargoBounty
   id: BountyMeatSlime
   reward: 7500
-  description: Сумашедшие повара придумали новый деликатес с участием ШАРА СЛИЗИ! Им срочно нужны новые постащики. Фу...Какая мерзость.
-  entries:
+  description: Невероятные повара придумали новый деликатес из ШАРА СЛИЗИ! Им срочно нужны новые поставщики. Удовлетворите вкус этих гурманов, отправив несколько шаров слизи.
+  entries: 
   - name: bounty-MeatSlime
     amount: 3
     whitelist:
