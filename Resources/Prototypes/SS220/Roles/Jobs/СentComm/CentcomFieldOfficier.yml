@@ -1,17 +1,17 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Оперативник Группы Специального Назначения
-  id: CentCommOperativeSRT
+  name: Полевой Офицер Центрального Комадования
+  id: CentcomFieldOfficer
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centcommoperativesrt
+      state: centofficer # Надо поменять, когда альпака докинет спрайт
     - type: RandomHumanoidSpawner
-      settings: CentCommOperativeSRT
+      settings: CentcomFieldOfficer
 
 - type: randomHumanoidSettings
-  id: CentCommOperativeSRT
+  id: CentcomFieldOfficer
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
     - type: GhostRole
@@ -19,18 +19,18 @@
       description: ghost-role-information-centcom-SRT-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ CentcomOperativeSRTGear ]
+      prototypes: [ CentcomFieldOfficerGear ]
 
 - type: playTimeTracker
-  id: JobCentcommOperativeSRT
+  id: JobCentcomFieldOfficer
 
 - type: job
-  id: CentcomOperativeSRT
+  id: CentcomFieldOfficer
   name: job-name-centcomoff
   description: job-description-centcomoff
   setPreference: false
-  startingGear: CentcomOperativeSRTGear
-  playTimeTracker: JobCentcommOperativeSRT
+  startingGear: CentcomFieldOfficerGear
+  playTimeTracker: JobCentcomFieldOfficer
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -39,7 +39,7 @@
   - AllAccess
 
 - type: startingGear
-  id: CentcomOperativeSRTGear
+  id: CentcomFieldOfficerGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield2
     shoes: ClothingShoesSwat
@@ -47,7 +47,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterSRTCoat
-    id: CentcomOperativeSRTPDA
+    id: CentcomFieldOfficerPDA
     ears: ClothingHeadsetAltCentCom
     pocket1: MagazinePistolSubMachineGun
     pocket2: MagazinePistolSubMachineGun
