@@ -26,20 +26,36 @@
 - type: entity
   parent: CentcomIDCard
   id: CentcomDiplomatIDCard
-  name: ID карта Дипломата ЦК
+  name: ID карта Дипломата NanoTrasen
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Дипломат NanoTrasen
 
 - type: entity
   parent: CentcomIDCard
   id: FieldOfficerIDCard
   name: ID карта Полевого Офицера ЦК
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Полевой Офицер ЦК
 
 - type: entity
   parent: CentcomIDCard
   id: OfficerCentCommIDCard
   name: ID карта Офицера ЦК
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Офицер ЦК
 
 - type: entity
   parent: CentcomIDCard
   id: OperativeSRTIDCard
   name: ID карта Оперативника ГСН
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Оперативник ГСН
 

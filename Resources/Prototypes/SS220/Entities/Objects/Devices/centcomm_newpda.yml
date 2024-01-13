@@ -2,9 +2,9 @@
 
 - type: entity
   parent: BasePDA
-  id: CentcomDiplomatPDA
-  name: КПК Дипломата ЦК
-  description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
+  id: CentcomNewPDA
+  name: КПК ЦК нового образца
+  description: КПК ЦК нового образца задают качественно новый взгляд на изысканность и утонченность граней и линий. Хотя многие говорят, что он им что-то напоминает..
   components:
     - type: Pda
       id: CentcomDiplomatIDCard
@@ -18,8 +18,14 @@
       state: pda-centcomnew
 
 - type: entity
-  parent: CentcomDiplomatPDA
-  id: CentcomNavyOfficerPDA
+  parent: CentcomNewPDA
+  id: CentcomDiplomatPDA
+  name: КПК Дипломата ЦК
+  description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomFieldOfficerPDA
   name: КПК Полевого Офицера ЦК
   description: КПК Полевого Офицера Центрального Командования - главный помощник полевой бюрократической машины
   components:
@@ -27,7 +33,7 @@
       id: FieldOfficerIDCard
 
 - type: entity
-  parent: CentcomDiplomatPDA
+  parent: CentcomNewPDA
   id: CentcomOperativeSRTPDA
   name: КПК Оперативника ГСН
   description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
@@ -37,7 +43,7 @@
 
 
 - type: entity
-  parent: CentcomDiplomatPDA
+  parent: CentcomNewPDA
   id: CentcomOfficerPDA
   name: КПК Офицера ЦК
   description: КПК Офицера Центрального Командования. Красиво выполненный дизайн позволяет Офицерам находить, чем заняться во время ожидания ответа от станции.
