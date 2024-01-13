@@ -48,7 +48,7 @@
   description: bounty-description-bread
   entries:
   - name: bounty-item-bread
-    amount: 2
+    amount: 2 #ss220 Rebalance
     whitelist:
       tags:
       - Bread
