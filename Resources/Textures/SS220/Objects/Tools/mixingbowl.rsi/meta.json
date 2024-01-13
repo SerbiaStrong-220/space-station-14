@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora Station at commit https://github.com/Aurorastation/Aurora.3/commit/4b642571d4804bf15e39d4ac5dfd29e647dfab3b",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mixingbowl"
+    },
+	{
+      "name": "mixingbowl_filling"
+    }
+  ]
+}

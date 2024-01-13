@@ -29,6 +29,8 @@ using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Kitchen;
+using Content.Shared.SS220.SupaKitchen;
+
 
 namespace Content.Server.IoC
 {
@@ -42,6 +44,7 @@ namespace Content.Server.IoC
             IoCManager.Register<IServerPreferencesManager, ServerPreferencesManager>();
             IoCManager.Register<IServerDbManager, ServerDbManager>();
             IoCManager.Register<RecipeManager, RecipeManager>();
+            IoCManager.Register<SupaRecipeManager, SupaRecipeManager>(); // SS220 Supa Kitchen
             IoCManager.Register<INodeGroupFactory, NodeGroupFactory>();
             IoCManager.Register<IConnectionManager, ConnectionManager>();
             IoCManager.Register<ServerUpdateManager>();

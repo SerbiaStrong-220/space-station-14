@@ -46,6 +46,11 @@ namespace Content.Server.UserInterface
         [DataField]
         public bool rightClickOnly = false;
 
+        // SS220 Alternative-open-verb
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
+        public bool AltentativeOnly = false;
+
         /// <summary>
         ///     Whether spectators (non-admin ghosts) should be allowed to view this UI.
         /// </summary>

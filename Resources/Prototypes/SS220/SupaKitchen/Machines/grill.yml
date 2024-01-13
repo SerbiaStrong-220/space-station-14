@@ -1,0 +1,83 @@
+- type: entity
+  id: KitchenGrill
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: grill
+  description: It's magic.
+  components:
+  - type: CookingInstrument
+    instrumentType: grill
+  - type: CookingMachine
+    heatPerSecond: 1500 #Should be strong enough to cook meat in 10s
+    beginCookingSound: /Audio/Effects/lightburn.ogg
+    loopingSound: /Audio/SS220/SupaKitchen/grillsizzle.ogg
+    foodDoneSound: /Audio/SS220/SupaKitchen/ring.ogg
+  - type: ActivatableUI
+    key: enum.CookingMachineUiKey.Key
+  - type: UserInterface
+    interfaces:
+    - key: enum.CookingMachineUiKey.Key
+      type: CookingMachineBoundUserInterface
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.VisualState:
+        enum.CookingMachineVisualizerLayers.Base:
+          Idle: { state: "grill_idle" }
+          Broken: { state: "grill_idle" }
+          Cooking: { state: "grill_cooking" }
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: Sprite
+    sprite: SS220/Structures/Machines/grill.rsi
+    snapCardinals: true
+    layers:
+    - state: grill_idle
+      map: ["enum.CookingMachineVisualizerLayers.Base"]
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+  - type: ApcPowerReceiver
+    powerLoad: 400
+  - type: Machine
+    board: GrillMachineCircuitboard
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - cooking_machine_entity_container
+  - type: ContainerContainer
+    containers:
+      cooking_machine_entity_container: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: GuideHelp
+    guides:
+    - Chef
+
+- type: entity
+  id: GrillMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: grill machine board
+  components:
+    - type: Sprite
+      state: service
+    - type: MachineBoard
+      prototype: KitchenGrill
+      requirements:
+        Capacitor: 1
+      materialRequirements:
+        Glass: 2
+        Cable: 2

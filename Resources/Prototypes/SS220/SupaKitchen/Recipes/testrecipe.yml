@@ -1,0 +1,8 @@
+- type: cookingRecipe
+  id: RecipeBunTest
+  name: bun recipe
+  result: FoodBreadBun
+  time: 0
+  solids:
+    FoodDough: 1
+    FoodApple: 1

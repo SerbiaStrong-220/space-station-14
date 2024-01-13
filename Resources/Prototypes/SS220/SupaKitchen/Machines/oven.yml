@@ -1,0 +1,125 @@
+- type: entity
+  id: KitchenOven
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: oven
+  description: It's magic.
+  components:
+  - type: Transform
+    noRot: true
+
+  # Make it behave like a closet
+  - type: EntityStorage
+  - type: EntityStorageVisuals
+    #stateBaseClosed: generic
+    stateDoorOpen: oven_door_open
+    stateDoorClosed: oven_door_closed
+  - type: PlaceableSurface
+    placeCentered: true
+    isPlaceable: false
+
+  - type: CookingInstrument
+    instrumentType: oven
+  - type: CookingMachine
+    beginCookingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_start.ogg"
+    loopingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_mid.ogg"
+    foodDoneSound: "/Audio/SS220/SupaKitchen/ring.ogg"
+    useEntityStorage: true
+    cookItemsIndividually: true
+  - type: ActivatableUI
+    key: enum.CookingMachineUiKey.Key
+    altentativeOnly: true
+  - type: UserInterface
+    interfaces:
+    - key: enum.CookingMachineUiKey.Key
+      type: CookingMachineBoundUserInterface
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.VisualState:
+        enum.CookingMachineVisualizerLayers.Base:
+          Idle: { state: "oven_base" }
+          Broken: { state: "oven_damaged" }
+          Cooking: { state: "oven_base" }
+        enum.StorageVisualLayers.Door:
+          Idle: { visible: true }
+          Broken: { visible: false }
+          Cooking: { visible: true }
+        oven_toggle:
+          Idle: { state: "oven_off" }
+          Broken: { state: "oven_off" }
+          Cooking: { state: "oven_on" }
+        oven_toggle_unshaded:
+          Idle: { visible: false }
+          Broken: { visible: false }
+          Cooking: { visible: true }
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: Sprite
+    sprite: SS220/Structures/Machines/oven.rsi
+    offset: 0,-0.5
+    snapCardinals: true
+    layers:
+    - state: oven_base
+      map: ["enum.CookingMachineVisualizerLayers.Base"]
+    - state: oven_door_closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: oven_off
+      map: ["oven_toggle"]
+    - state: oven_on_unshaded
+      map: ["oven_toggle_unshaded"]
+      shader: unshaded
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+  - type: ApcPowerReceiver
+    powerLoad: 400
+  - type: Machine
+    board: OvenMachineCircuitboard
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - entity_storage
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      entity_storage: !type:Container
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+    - entity_storage
+  - type: GuideHelp
+    guides:
+    - Chef
+
+- type: entity
+  id: OvenMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: oven machine board
+  components:
+    - type: Sprite
+      state: service
+    - type: MachineBoard
+      prototype: KitchenOven
+      requirements:
+        Capacitor: 1
+      materialRequirements:
+        Glass: 2
+        Cable: 2

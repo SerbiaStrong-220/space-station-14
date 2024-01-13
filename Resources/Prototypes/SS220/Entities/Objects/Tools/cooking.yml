@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseItem
+  id: MixingBowl
+  name: миска для смешивания
+  description: Нужна повару для смешивания салатов.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/mixingbowl.rsi
+    layers:
+    - state: mixingbowl
+    - state: mixingbowl_filling
+      map: ["filling"]
+  # - type: GenericVisualizer
+    # visuals:
+      # enum.ToggleVisuals.Toggled:
+        # lighter_flame:
+          # True: { visible: true }
+          # False: { visible: false }
+
+- type: entity
+  parent: BaseItem
+  id: CookingPot
+  name: кастрюля
+  description: Объёмная кастрюля, хорошо подходящая для приготовления супов.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/cooking_pot.rsi
+    layers:
+    - state: pot
+    - state: pot_filling
+      map: ["filling"]
+  # - type: GenericVisualizer
+    # visuals:
+      # enum.ToggleVisuals.Toggled:
+        # lighter_flame:
+          # True: { visible: true }
+          # False: { visible: false }
