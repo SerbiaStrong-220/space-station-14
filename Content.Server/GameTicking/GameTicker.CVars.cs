@@ -19,16 +19,7 @@ namespace Content.Server.GameTicking
         public bool DisallowLateJoin { get; private set; } = false;
 
         [ViewVariables]
-        public bool StationOffset { get; private set; } = false;
-
-        [ViewVariables]
-        public bool StationRotation { get; private set; } = false;
-
-        [ViewVariables]
-        public float MaxStationOffset { get; private set; } = 0f;
-
-        [ViewVariables]
-        public bool AutoMapVote { get; private set; } = false;
+        public bool AutoMapVote { get; private set; } = false; // SS220 Auto-Map-Vote
 
         [ViewVariables]
         public string? ServerName { get; private set; }
@@ -60,10 +51,7 @@ namespace Content.Server.GameTicking
             _configurationManager.OnValueChanged(CCVars.GameLobbyDuration, value => LobbyDuration = TimeSpan.FromSeconds(value), true);
             _configurationManager.OnValueChanged(CCVars.GameDisallowLateJoins,
                 value => { DisallowLateJoin = value; UpdateLateJoinStatus(); }, true);
-            _configurationManager.OnValueChanged(CCVars.StationOffset, value => StationOffset = value, true);
-            _configurationManager.OnValueChanged(CCVars.StationRotation, value => StationRotation = value, true);
-            _configurationManager.OnValueChanged(CCVars.MaxStationOffset, value => MaxStationOffset = value, true);
-            _configurationManager.OnValueChanged(CCVars.AutoMapVote, value => AutoMapVote = value, true);
+            _configurationManager.OnValueChanged(CCVars.AutoMapVote, value => AutoMapVote = value, true); // SS220 Auto-Map-Vote
             _configurationManager.OnValueChanged(CCVars.AdminLogsServerName, value =>
             {
                 // TODO why tf is the server name on admin logs
