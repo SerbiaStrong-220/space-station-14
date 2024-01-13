@@ -1,26 +1,21 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  id: CentcomDiplomatPDA
   parent: BasePDA
+  id: CentcomDiplomatPDA
   name: КПК Дипломата ЦК
   description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
   components:
     - type: Pda
       id: CentcomDiplomatIDCard
+      state: pda-centcomnew
       penSlot:
         startingItem: CentCommNewPen
         whitelist:
           tags:
           - Write
-    - type: Sprite
-      sprite: SS220/Objects/Devices/centcomm_pda.rsi
-      state: centcommnew_pda
-    - type: PdaBorderColor
-      borderColor: "#00842e"
     - type: Icon
-      sprite: SS220/Objects/Devices/centcomm_pda.rsi
-      state: centcommnew_pda
+      state: pda-centcomnew
 
 - type: entity
   parent: CentcomDiplomatPDA
