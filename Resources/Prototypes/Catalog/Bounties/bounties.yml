@@ -496,7 +496,7 @@
   description: bounty-description-artifact-fragment
   entries:
   - name: bounty-item-artifact-fragment
-    amount: 5
+    amount: 5 #ss220 Rebalance
     whitelist:
       tags:
       - ArtifactFragment
