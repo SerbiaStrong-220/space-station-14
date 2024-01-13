@@ -19,7 +19,7 @@
       description: ghost-role-information-centcom-Officier-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ CentcommNavyOfficerGear ]
+      prototypes: [ CentCommOfficerGear ]
 
 - type: playTimeTracker
   id: JobCentcommOfficer
