@@ -496,7 +496,7 @@
   description: bounty-description-artifact-fragment
   entries:
   - name: bounty-item-artifact-fragment
-    amount: 5
+    amount: 5 #ss220 Rebalance
     whitelist:
       tags:
       - ArtifactFragment
@@ -566,37 +566,4 @@
     whitelist:
       tags:
       - Meat
-### - ss220 new Bounty
-
-- type: cargoBounty
-  id: BountyNattle
-  reward: 9500
-  description: Химики NanoTrasen обнаружили мощный химикат в растениях вида Смертокрапива. Данный яд используется для сдерживания опасной фауны при её изучении. Постарайтесь добыть её.
-  entries:
-  - name: bounty-Nattle
-    amount: 12
-    whitelist:
-      tags:
-      - DeathNettle    
-
-- type: cargoBounty
-  id: BountyDeus
-  reward: 9500
-  description: Лучшие умы компании обнаружили новый трудозатратный способ синтеза секретного препарата. Спасите несколько жизней, отправив нам Амброзию Деус.
-  entries:
-  - name: bounty-Deus
-    amount: 12
-    whitelist:
-      tags:
-      - DeusAmbrosia     
-
-- type: cargoBounty
-  id: BountyMeatSlime
-  reward: 7500
-  description: Невероятные повара придумали новый деликатес из ШАРА СЛИЗИ! Им срочно нужны новые поставщики. Удовлетворите вкус этих гурманов, отправив несколько шаров слизи.
-  entries: 
-  - name: bounty-MeatSlime
-    amount: 3
-    whitelist:
-      tags:
-      - MeatSlime             
+         
