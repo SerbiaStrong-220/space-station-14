@@ -44,6 +44,7 @@
         - WallLayer
         density: 1000
   - type: Occluder
+  - type: FoVOverlay # SS220 perspective-wall-fov
   - type: Airtight
   - type: StaticPrice
     price: 75
@@ -1152,7 +1153,7 @@
 
 - type: entity
   id: WallForce
-  name: Force Wall
+  name: force wall
   components:
     - type: TimedDespawn
       lifetime: 20

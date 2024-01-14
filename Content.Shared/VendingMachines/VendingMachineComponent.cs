@@ -59,6 +59,8 @@ namespace Content.Shared.VendingMachines
 
         public bool Broken;
 
+        public bool ShouldSayThankYou;
+
         /// <summary>
         /// When true, will forcefully throw any object it dispenses
         /// </summary>

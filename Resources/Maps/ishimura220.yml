@@ -12624,7 +12624,7 @@ entities:
       type: Transform
     - fixtures: {}
       type: Fixtures
-    - type: ItemCooldown
+    - type: UseDelay
 - proto: BlockGameArcade
   entities:
   - uid: 14907
@@ -89042,7 +89042,7 @@ entities:
       type: Transform
     - assignedLabel: Успокоительное
       type: HandLabeler
-    - type: ItemCooldown
+    - type: UseDelay
 - proto: HarpInstrument
   entities:
   - uid: 4078
@@ -93115,7 +93115,7 @@ entities:
         Я Мики *неразобрать фамилию*
 
 
-        Хотелось бы поделиться с вами информацией о моей недавней смене на этой станции. Во время моей работы, я имел возможность встретиться с некоторыми пациентами, которые требуют особого внимания и заботы. Поэтому я думаю вам это пригодится что я оставил вам на другом столе, а именно 3 шприца успокоительного, 2 шприца имлпант Трекер. Надеюсь они вам не нужны будут. 
+        Хотелось бы поделиться с вами информацией о моей недавней смене на этой станции. Во время моей работы, я имел возможность встретиться с некоторыми пациентами, которые требуют особого внимания и заботы. Поэтому я думаю вам это пригодится что я оставил вам на другом столе, а именно 3 шприца успокоительного, 2 шприца имлпант Трекер. Надеюсь они вам не нужны будут.
 
         Подпись: *неразборчиво*
 
@@ -104144,7 +104144,7 @@ entities:
         4720:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 4799
     components:
     - pos: -58.5,-18.5
@@ -104158,7 +104158,7 @@ entities:
         4797:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 5413
     components:
     - desc: Эта кнопка активирует внутренний гермозатвор.
@@ -104238,7 +104238,7 @@ entities:
         7386:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 7694
     components:
     - pos: -99.74609,28.376194
@@ -104248,7 +104248,7 @@ entities:
         7670:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 7695
     components:
     - pos: -99.43359,28.376194
@@ -104258,7 +104258,7 @@ entities:
         7679:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 8358
     components:
     - pos: -60.533222,21.970642
@@ -104410,7 +104410,7 @@ entities:
         10557:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 10934
     components:
     - pos: -7.57625,-15.701462
@@ -104426,7 +104426,7 @@ entities:
         10906:
         - Pressed: Toggle
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 11036
     components:
     - pos: 0.7500007,-28.502241
@@ -111303,7 +111303,7 @@ entities:
           volume: 0
         path: /Audio/Weapons/eblade1.ogg
       type: MeleeWeapon
-    - type: ItemCooldown
+    - type: UseDelay
 - proto: TrackingImplanter
   entities:
   - uid: 15885
@@ -111431,7 +111431,7 @@ entities:
         - Right: Reverse
         - Middle: Off
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
   - uid: 5122
     components:
     - pos: -65.5,-4.5
@@ -111501,7 +111501,7 @@ entities:
         - Right: Reverse
         - Middle: Off
       type: DeviceLinkSource
-    - type: ItemCooldown
+    - type: UseDelay
 - proto: UniformPrinter
   entities:
   - uid: 3346

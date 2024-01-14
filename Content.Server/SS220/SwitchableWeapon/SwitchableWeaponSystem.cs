@@ -59,7 +59,7 @@ public sealed class SwitchableWeaponSystem : EntitySystem
         if (TryComp<ItemComponent>(uid, out var item))
         {
             _item.SetSize(uid, comp.IsOpen ? comp.SizeOpened : comp.SizeClosed, item);
-            _item.SetHeldPrefix(uid, comp.IsOpen ? "on" : "off", item);
+            _item.SetHeldPrefix(uid, comp.IsOpen ? "on" : "off", component: item);
         }
 
         if (TryComp<AppearanceComponent>(uid, out var appearance))
