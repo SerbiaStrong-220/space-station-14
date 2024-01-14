@@ -14,6 +14,7 @@
   id: NanoTrasenCentCommDiplomat
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
+    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-nanotrasen-Diplomat-name
       description: ghost-role-information-nanotrasen-Diplomat-description
