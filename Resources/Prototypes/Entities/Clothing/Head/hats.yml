@@ -292,6 +292,12 @@
     - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleBoss
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadBase
@@ -386,6 +392,13 @@
     sprite: Clothing/Head/Hats/santahat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/santahat.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleSanta
+  #ss220 special_sounds end
+
 
 - type: entity
   parent: ClothingHeadBase
@@ -491,6 +504,8 @@
     sprite: Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/warden.rsi
+  - type: StealTarget
+    stealGroup: ClothingHeadHatWarden
 
 - type: entity
   parent: ClothingHeadBase
@@ -757,7 +772,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatHetmanHat
-  name: Hetman hat
+  name: hetman hat
   description: From the Zaporozhian Sich with love.
   components:
   - type: Sprite
@@ -846,7 +861,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatGladiator
-  name: Gladiator helmet
+  name: gladiator helmet
   description: Protects the head from harsh ash winds and toy spears.
   components:
   - type: Sprite

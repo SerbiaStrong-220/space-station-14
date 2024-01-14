@@ -167,6 +167,12 @@
   id: BorgModuleService
 
 - type: Tag
+  id: BorgModuleSyndicate
+
+- type: Tag
+  id: BorgModuleSyndicateAssault
+
+- type: Tag
   id: BorgServiceHead
 
 - type: Tag
@@ -219,6 +225,9 @@
 
 - type: Tag
   id: BulletFoam
+
+- type: Tag
+  id: BypassDropChecks
 
 - type: Tag
   id: BypassInteractionRangeChecks
@@ -289,6 +298,9 @@
 # Allows you to walk over tile entities such as lava without steptrigger
 - type: Tag
   id: Catwalk
+
+- type: Tag
+  id: CentrifugeCompatible
 
 - type: Tag
   id: Chicken
@@ -486,9 +498,6 @@
   id: Flesh
 
 - type: Tag
-  id: WhitelistChameleon
-
-- type: Tag
   id: FirelockElectronics
 
 - type: Tag
@@ -547,6 +556,9 @@
 
 - type: Tag
   id: Goat
+
+- type: Tag
+  id: GPS
 
 - type: Tag
   id: Grenade
@@ -786,7 +798,13 @@
   id: MicrowaveSelfUnsafe
 
 - type: Tag
+  id: MindShield
+
+- type: Tag
   id: MindTransferTarget
+
+- type: Tag
+  id: ModularReceiver
 
 - type: Tag
   id: MonkeyCube
@@ -805,7 +823,6 @@
 
 - type: Tag
   id: Multitool
-
 
 - type: Tag
   id: NoBlockAnchoring
@@ -836,6 +853,9 @@
 
 - type: Tag
   id: Pancake
+
+- type: Tag
+  id: Pen
 
 - type: Tag
   id: PepperShaker
@@ -922,6 +942,9 @@
   id: ProximitySensor
 
 - type: Tag
+  id: QuantumSpinInverter
+
+- type: Tag
   id: Radio
 
 - type: Tag
@@ -936,6 +959,9 @@
 
 - type: Tag
   id: ReinforcedGlassShard
+
+- type: Tag
+  id: RifleStock
 
 - type: Tag
   id: RipleyCentralControlModule
@@ -1017,9 +1043,6 @@
 
 - type: Tag
   id: Soap
-
-- type: Tag
-  id: SolarAssemblyPart
 
 - type: Tag
   id: SolarTrackerElectronics
@@ -1127,9 +1150,6 @@
   id: Wall
 
 - type: Tag
-  id: WetFloorSign
-
-- type: Tag
   id: WallmountGeneratorAPUElectronics
 
 - type: Tag
@@ -1143,6 +1163,12 @@
 
 - type: Tag
   id: WeaponShotgunKammerer
+
+- type: Tag
+  id: WetFloorSign
+
+- type: Tag
+  id: WhitelistChameleon
 
 - type: Tag
   id: Window
@@ -1175,16 +1201,21 @@
   id: WriteIgnoreStamps
 
 - type: Tag
-  id: RifleStock
+  id:  boots
 
-- type: Tag
-  id: ModularReceiver
-
+# SS220 no-animal-zombs
 - type: Tag
   id: ZombifyableByMelee
 
+# SS220 chiefs-belt start
 - type: Tag
-  id: MindShield
+  id:  WaterBottle
 
 - type: Tag
-  id:  boots
+  id:  Vinegar
+
+- type: Tag
+  id:  OilOlive
+# SS220 chiefs-belt end
+
+# PUT YOUR TAGS IN ALPHABETICAL ORDER

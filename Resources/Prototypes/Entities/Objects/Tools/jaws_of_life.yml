@@ -17,13 +17,15 @@
     quickEquip: false
     slots:
       - Belt
+    #SS220 JOL TilePrying begin
   - type: TilePrying
     advanced: true
+    #SS220 JOL TilePrying end
   - type: LatticeCutting
   - type: Tool
     qualities:
       - Prying
-    speed: 1.5
+    speed: 3 #SS220 JOL TilePrying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
     pryPowered: true
@@ -60,12 +62,10 @@
     state: syn_jaws_pry
   - type: Item
     size: Normal
-  - type: TilePrying
-    advanced: false
   - type: Tool
     qualities:
       - Prying
-    speed: 3.0
+    speed: 1 #SS220 JOL TilePrying
   - type: MultipleTool
     entries:
       - behavior: Prying

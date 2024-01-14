@@ -1,0 +1,107 @@
+- type: entity
+  name: охранная собака
+  parent: SimpleMobBase
+  id: MobSecDog
+  description: Как ни странно, эта свинья на самом деле собака.
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: "собака Службы Безопасности"
+    description: "Помогите отделу охраны, кусая злодеев и лая на все, что движется."
+  - type: GhostTakeoverAvailable
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3.5
+    baseSprintSpeed : 5.0
+  - type: NpcFactionMember
+    factions:
+      - PetsNT
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Animals/Roxi.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: secdog
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Physics
+  - type: Speech
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120 # BIG DOG :3
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds: # BIG DOG. STRONG DOG
+      0: Alive
+      100: Critical
+      300: Dead
+  - type: StaminaDamageOnHit
+    damage: 22
+  - type: MeleeWeapon
+    hidden: true
+    altDisarm: false
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    attackRate: 1
+    damage:
+      types:
+        Slash: 10
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      40: 0.70
+      80: 0.30
+  - type: Appearance
+  - type: Inventory
+    speciesId: secdog
+    templateId: secdog
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+    - key: enum.StrippingUiKey.Key
+      type: StrippableBoundUserInterface
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: secdog
+      Critical:
+        Base: secdog_crit
+      Dead:
+        Base: secdog_dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 2
+  - type: ReplacementAccent
+    accent: dog
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-dog
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/SS220/Voice/Roxi/dog_bark2.ogg
+  - type: Grammar
+    attributes:
+      gender: epicene
+  - type: Bloodstream
+    bloodMaxVolume: 200 # :3
+  - type: Puller
+    needsHands: false
+  - type: MobPrice
+    price: 400
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - VimPilot

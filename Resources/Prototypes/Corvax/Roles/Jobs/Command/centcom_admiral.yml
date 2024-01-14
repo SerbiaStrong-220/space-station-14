@@ -6,7 +6,7 @@
     jumpsuit: ClothingUniformJumpsuitCentcomAdmiral
     shoes: ClothingShoesBootsJack
     head: ClothingHeadCapCentcomNaval
-    eyes: ClothingEyesGlassesSunglasses
+    eyes: ClothingEyesGlassesSecurity #ss-220-GlassesSecurity
     gloves: ClothingHandsGlovesCentcomNaval
     outerClothing: ClothingOuterArmorCentcomCarapace
     neck: ClothingNeckCloakCentcomAdmiral
