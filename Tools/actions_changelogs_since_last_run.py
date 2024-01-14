@@ -41,14 +41,17 @@ def main():
 
     most_recent = get_most_recent_workflow(session)
     last_sha = most_recent['head_commit']['id']
-    print(f"Last successsful publish job was {most_recent['id']}: {last_sha}")
-    
+    print(f"Last successful publish job was {most_recent['id']}: {last_sha}")
+    last_changelog = yaml.safe_load(get_last_changelog(session, last_sha))
+    with open(CHANGELOG_FILE, "r") as f:
+        cur_changelog = yaml.safe_load(f)
+
     # Corvax-MultiChangelog-Start
     for changelog_file in CHANGELOG_FILES:
         last_changelog = yaml.safe_load(get_last_changelog(session, last_sha, changelog_file))
         with open(changelog_file, "r") as f:
             cur_changelog = yaml.safe_load(f)
-    
+
         diff = diff_changelog(last_changelog, cur_changelog)
         send_to_discord(diff)
     # Corvax-MultiChangelog-End
@@ -110,9 +113,12 @@ def diff_changelog(old: dict[str, Any], cur: dict[str, Any]) -> Iterable[Changel
 
 def send_to_discord(entries: Iterable[ChangelogEntry]) -> None:
     if not DISCORD_WEBHOOK_URL:
+        print(f"No discord webhook URL found, skipping discord send")
         return
 
     content = io.StringIO()
+    count: int = 0
+
     for name, group in itertools.groupby(entries, lambda x: x["author"]):
         content.write(f"**{name}** обновил(а):\n")
         for entry in group:
@@ -129,8 +135,19 @@ def send_to_discord(entries: Iterable[ChangelogEntry]) -> None:
                     })
                     message = resp.json()['data']
                 # Corvax-Localization-End
-                content.write(f"{emoji} {message}\n")
+                url = entry.get("url")
+                count += 1
+                if url and url.strip():
+                    content.write(f"{emoji} [-]({url}) {message}\n")
+                else:
+                    content.write(f"{emoji} - {message}\n")
         content.write(f"\n") # Corvax: Better formatting
+
+    if count == 0:
+        print("Skipping discord push as no changelog entries found")
+        return
+
+    print(f"Posting {count} changelog entries to discord webhook")
 
     content.seek(0) # Corvax
     for chunk in iter(lambda: content.read(2000), ''): # Corvax: Split big changelogs messages
@@ -145,6 +162,5 @@ def send_to_discord(entries: Iterable[ChangelogEntry]) -> None:
         }
 
         requests.post(DISCORD_WEBHOOK_URL, json=body)
-
 
 main()

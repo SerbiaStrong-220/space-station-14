@@ -2,6 +2,7 @@ using Content.Server.Administration;
 using Content.Server.Power.Components;
 using Content.Shared.Administration;
 using Content.Shared.Construction;
+using Content.Shared.Doors.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Console;
 using Robust.Shared.Map.Components;
@@ -64,7 +65,9 @@ namespace Content.Server.Construction.Commands
             var changed = 0;
             var tagSystem = _entManager.EntitySysManager.GetEntitySystem<TagSystem>();
 
-            foreach (var child in xformQuery.GetComponent(gridId.Value).ChildEntities)
+
+            var enumerator = xformQuery.GetComponent(gridId.Value).ChildEnumerator;
+            while (enumerator.MoveNext(out var child))
             {
                 if (!_entManager.EntityExists(child))
                 {
@@ -87,6 +90,7 @@ namespace Content.Server.Construction.Commands
                 valid |= tagSystem.HasTag(child, "ForceFixRotations");
                 // override
                 valid &= !tagSystem.HasTag(child, "ForceNoFixRotations");
+                valid &= !_entManager.HasComponent<AirlockComponent>(child); //SS220 airlock-resprite
 
                 if (!valid)
                     continue;

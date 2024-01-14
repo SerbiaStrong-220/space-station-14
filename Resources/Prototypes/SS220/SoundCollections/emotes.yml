@@ -41,3 +41,24 @@
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_2.ogg
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_3.ogg
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
+
+- type: soundCollection
+  id: MaleBossLaugh
+  files:
+    - /Audio/SS220/Voice/Boss/male_boss_laugh_1.ogg
+    - /Audio/SS220/Voice/Boss/male_boss_laugh_2.ogg
+    - /Audio/SS220/Voice/Boss/male_boss_laugh_3.ogg
+
+- type: soundCollection
+  id: MaleSantaLaugh
+  files:
+    - /Audio/SS220/Voice/Santa/male_santa_laugh_1.ogg
+    - /Audio/SS220/Voice/Santa/male_santa_laugh_2.ogg
+    - /Audio/SS220/Voice/Santa/male_santa_laugh_3.ogg
+
+- type: soundCollection
+  id: MaleEvilLaugh
+  files:
+    - /Audio/SS220/Voice/Evil/male_evil_laugh_1.ogg
+    - /Audio/SS220/Voice/Evil/male_evil_laugh_2.ogg
+    - /Audio/SS220/Voice/Evil/male_evil_laugh_3.ogg

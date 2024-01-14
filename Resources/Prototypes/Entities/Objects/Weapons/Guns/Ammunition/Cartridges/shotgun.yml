@@ -125,9 +125,9 @@
       ammo:
         reagents:
         - ReagentId: ChloralHydrate
-          Quantity: 7
+          Quantity: 4 #ss220-rebalance
   - type: SolutionTransfer
-    maxTransferAmount: 7
+    maxTransferAmount: 4 #ss220-rebalance
   - type: SpentAmmoVisuals
     state: "practice"
 
@@ -149,3 +149,20 @@
     proto: PelletShotgunImprovised
   - type: SpentAmmoVisuals
     state: "improvised"
+
+- type: entity
+  id: ShellShotgunUranium
+  name: uranium shotgun shell
+  parent: BaseShellShotgun
+  components:
+  - type: Sprite
+    layers:
+      - state: depleted-uranium
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    count: 5
+    spread: 6
+    proto: PelletShotgunUranium
+  - type: SpentAmmoVisuals
+    state: "depleted-uranium"
+

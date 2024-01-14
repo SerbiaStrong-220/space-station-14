@@ -38,6 +38,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -51,6 +52,10 @@
       sprite: Clothing/Head/Hats/casa.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/casa.rsi
+    - type: Tag
+      tags:
+      - Ian # SS220 Shapochki
+
 
 - type: entity
   parent: ClothingHeadBase
@@ -65,6 +70,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -81,6 +87,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -97,6 +104,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -110,6 +118,9 @@
     sprite: Clothing/Head/Hats/beret_warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_warden.rsi
+  - type: Tag
+    tags:
+    - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingHeadBase
@@ -168,6 +179,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -196,6 +208,9 @@
     sprite: Clothing/Head/Hats/centcom.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/centcom.rsi
+  - type: Tag
+    tags:
+    - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingHeadBase
@@ -274,8 +289,15 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleBoss
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadBase
@@ -290,6 +312,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -369,6 +392,13 @@
     sprite: Clothing/Head/Hats/santahat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/santahat.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleSanta
+  #ss220 special_sounds end
+
 
 - type: entity
   parent: ClothingHeadBase
@@ -449,6 +479,9 @@
     sprite: Clothing/Head/Hats/ushanka.rsi
   - type: AddAccentClothing
     accent: RussianAccent
+  - type: Tag
+    tags:
+    - Ian # SS220 Shapochki
 
 - type: entity
   parent: ClothingHeadBase
@@ -471,6 +504,8 @@
     sprite: Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/warden.rsi
+  - type: StealTarget
+    stealGroup: ClothingHeadHatWarden
 
 - type: entity
   parent: ClothingHeadBase
@@ -671,6 +706,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
 
@@ -736,7 +772,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatHetmanHat
-  name: Hetman hat
+  name: hetman hat
   description: From the Zaporozhian Sich with love.
   components:
   - type: Sprite
@@ -802,6 +838,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+    - Ian # SS220 Shapochki
     - HamsterWearable
 
 - type: entity
@@ -818,15 +855,62 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+    - Ian # SS220 Shapochki
     - HamsterWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatGladiator
-  name: Gladiator helmet
+  name: gladiator helmet
   description: Protects the head from harsh ash winds and toy spears.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/gladiator.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/gladiator.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPartyRed
+  name: red party hat
+  description: Spread a joy!
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/party_red.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/party_red.rsi
+  - type: Tag
+    tags:
+      - DroneUsable
+      - WhitelistChameleon
+      - HamsterWearable
+
+- type: entity
+  parent: ClothingHeadHatPartyRed
+  id: ClothingHeadHatPartyYellow
+  name: yellow party hat
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/party_yellow.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/party_yellow.rsi
+
+- type: entity
+  parent: ClothingHeadHatPartyRed
+  id: ClothingHeadHatPartyGreen
+  name: green party hat
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/party_green.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/party_green.rsi
+
+- type: entity
+  parent: ClothingHeadHatPartyRed
+  id: ClothingHeadHatPartyBlue
+  name: blue party hat
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/party_blue.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/party_blue.rsi

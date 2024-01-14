@@ -8,11 +8,9 @@
       - id: FlashlightSeclite
       - id: WeaponDisabler
         prob: 0.3
-      - id: ClothingHeadHatWarden
-      - id: ClothingHeadHatBeretWarden
       - id: ClothingBeltSecurityFilled
       - id: Flash
-      - id: ClothingEyesGlassesSecurity
+      - id: ClothingEyesGlassesSunglasses
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -34,12 +32,9 @@
       - id: FlashlightSeclite
       - id: WeaponDisabler
         prob: 0.3
-      - id: ClothingHeadHatWarden
-      - id: ClothingHeadHatBeretWarden
-      - id: ClothingHeadHatCapWardenAlt # Corvax-SecFashion
       - id: ClothingBeltSecurityFilled
       - id: Flash
-      - id: ClothingEyesGlassesSecurity
+      - id: ClothingEyesGlassesSunglasses
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -74,7 +69,7 @@
       - id: PilotBriefing
       - id: YellowOxygenTankFilled
       - id: NitrogenTankFilled
-      
+
 - type: entity
   id: LockerSecurityFilled
   suffix: Filled
@@ -91,7 +86,7 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
         prob: 0.5
-      - id: ClothingEyesGlassesSecurity
+      - id: ClothingEyesGlassesSunglasses
       - id: ClothingHeadsetSecurity
       - id: ClothingHandsGlovesColorBlack
       - id: ClothingShoesBootsJack
@@ -157,6 +152,7 @@
       - id: ClothingOuterCoatDetective
       - id: FlashlightSeclite
       - id: ForensicScanner
+      - id: LogProbeCartridge
       - id: BoxForensicPad
       - id: DrinkDetFlask
       - id: ClothingHandsGlovesForensic

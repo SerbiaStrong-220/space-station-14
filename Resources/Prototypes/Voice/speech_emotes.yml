@@ -250,6 +250,18 @@
    - скрипит!
    #220-Localization-End
 
+- type: emote
+  id: Click
+  category: Vocal
+  chatMessages: [click.]
+  chatTriggers:
+   - click
+   - click.
+   - click!
+   - clicks
+   - clicks.
+   - clicks!
+
 # hand emotes
 - type: emote
   id: Clap

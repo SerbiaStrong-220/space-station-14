@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Commands;
+using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
@@ -29,6 +30,7 @@ using Content.Server.Traits.Assorted;
 using Content.Shared.CombatMode.Pacification;
 using Content.Server.Store.Components;
 using Content.Server.Store.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -55,6 +57,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.StationEvents.Components;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -83,6 +86,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly WarDeclaratorSystem _warDeclarator = default!;
 
 
@@ -439,7 +444,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 continue;
 
             // UH OH
-            if (centcomms.Contains(nukeTransform.MapID))
+            if (nukeTransform.MapUid != null && centcomms.Contains(nukeTransform.MapUid.Value))
             {
                 component.WinConditions.Add(WinCondition.NukeActiveAtCentCom);
                 SetWinType(uid, WinType.OpsMajor, component);
@@ -503,8 +508,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
         while (diskQuery.MoveNext(out _, out var transform))
         {
-            var diskMapId = transform.MapID;
-            diskAtCentCom = centcomms.Contains(diskMapId);
+            diskAtCentCom = transform.MapUid != null && centcomms.Contains(transform.MapUid.Value);
 
             // TODO: The target station should be stored, and the nuke disk should store its original station.
             // This is fine for now, because we can assume a single station in base SS14.
@@ -770,6 +774,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                     {
                         nukeOp = _random.PickAndTake(medPrefList);
                         everyone.Remove(nukeOp);
+                        prefList.Remove(nukeOp);
                         Logger.InfoS("preset", "Insufficient preferred nukeop commanders, picking an agent");
                     }
 
@@ -1018,6 +1023,10 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 _mind.SetUserId(newMind, session.UserId);
                 _roles.MindAddRole(newMind, new NukeopsRoleComponent { PrototypeId = spawnDetails.Role });
 
+                // Automatically de-admin players who are being made nukeops
+                if (_cfg.GetCVar(CCVars.AdminDeadminOnJoin) && _adminManager.IsAdmin(session))
+                    _adminManager.DeAdmin(session);
+
                 _mind.TransferTo(newMind, mob);
             }
             else if (addSpawnPoints)
@@ -1080,9 +1089,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         _roles.MindAddRole(mindId, new NukeopsRoleComponent { PrototypeId = NukeopsId }, mind);
         if (mind.CurrentEntity != null)
         {
-            foreach (var (nukeops, gameRule) in EntityQuery<NukeopsRuleComponent, GameRuleComponent>())
+            foreach (var (nukeops, _) in EntityQuery<NukeopsRuleComponent, GameRuleComponent>())
             {
-                nukeops.OperativePlayers.Add(mind.CharacterName!, mind.CurrentEntity.GetValueOrDefault());
+                nukeops.OperativePlayers.Add(mind.CharacterName!, mindId);
             }
         }
 
