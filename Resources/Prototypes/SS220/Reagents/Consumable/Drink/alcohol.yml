@@ -2,10 +2,10 @@
 
 - type: reagent
   id: Glintwine
-  name: глинтвейн
+  name: reagent-name-glintwine 
   parent: BaseAlcohol
-  desc: Глядя на этот напиток, вы чувствуете наступление Рождества.
-  physicalDesc: пряное
+  desc: reagent-desc-glintwine
+  physicalDesc: reagent-physical-desc-piquant
   flavor: fruity
   color: "#821f1d"
   recognizable: true

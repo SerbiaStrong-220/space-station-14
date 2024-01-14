@@ -4,7 +4,7 @@
   parent: DrinkGlassBase
   id: DrinkGlintwineGlass
   name: Стакан глинтвейна
-  description: Глядя на этот напиток, вы чувствуете наступление Рождества.
+  description: Горячий алкогольный напиток на основе вина, родом из Нюрнберга.
   components:
     - type: SolutionContainerManager
       solutions:
