@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centofficer # Надо поменять, когда альпака докинет спрайт
+      state: centcommfieldofficer
     - type: RandomHumanoidSpawner
       settings: CentcomFieldOfficer
 
@@ -42,15 +42,12 @@
 - type: startingGear
   id: CentcomFieldOfficerGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShield2
-    shoes: ClothingShoesSwat
-    head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesSecurity
-    gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterSRTCoat
+    jumpsuit: ClothingUniformCentCommOfficer
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatNavyFieldOfficerCap
+    eyes: ClothingEyesGlassesBlueShield
+    gloves: ClothingHandsGlovesLatex
     id: CentcomFieldOfficerPDA
     ears: ClothingHeadsetAltCentComm
-    pocket1: MagazinePistolSubMachineGun
-    pocket2: MagazinePistolSubMachineGun
-    belt: ClothingBeltWebbingSRTFilled
-    back: ClothingBackSatchelSRTFilled
+    belt: WeaponPulsePistol
+    back: ClothingBackpackCentCommFilled

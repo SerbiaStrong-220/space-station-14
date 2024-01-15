@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centcommdiplomat
+      state: centcommfieldofficer # Надо будет поменять, когда альпака докинет спрайт
     - type: RandomHumanoidSpawner
       settings: CentCommNanoTrasenDiplomat
 
@@ -42,14 +42,13 @@
 - type: startingGear
   id: CentCommNanoTrasenDiplomatGear
   equipment:
-    jumpsuit: ClothingUniformNanoTrasenNavyOfficer
+    jumpsuit: ClothingUniformNanotrasenDiplomat
     shoes: ClothingShoesBootsLaceup
     head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesSecurity
+    eyes: ClothingEyesGlassesBlueShield
     gloves: ClothingHandsGlovesLatex
     id: CentcomDiplomatPDA
     ears: ClothingHeadsetAltCentComm
-    pocket1: BoxFolderBlack
-    pocket2: NTbaton
     belt: WeaponPulsePistol
+    back: ClothingBackpackCentCommFilled
 
