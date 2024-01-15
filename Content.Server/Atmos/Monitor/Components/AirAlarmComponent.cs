@@ -12,7 +12,7 @@ namespace Content.Server.Atmos.Monitor.Components;
 public sealed partial class AirAlarmComponent : Component
 {
     [ViewVariables] public AirAlarmMode CurrentMode { get; set; } = AirAlarmMode.Filtering;
-    [ViewVariables] public bool AutoMode { get; set; } = true;
+    [ViewVariables] public bool AutoMode { get; set; } = false; //SS220-AirAlarm
 
     // Remember to null this afterwards.
     [ViewVariables] public IAirAlarmModeUpdate? CurrentModeUpdater { get; set; }

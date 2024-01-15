@@ -1,0 +1,50 @@
+- type: entity
+  name: clown target 100k
+  id: 100kTargetClown
+  suffix: debug
+  parent: TargetClown
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100000
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+
+- type: entity
+  name: Urist Spawner 1000
+  id: SpawnMobHuman1000
+  parent: MarkerBase
+  suffix: debug
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - MobHuman1000
+
+- type: entity
+  parent: MobHuman
+  id: MobHuman1000
+  name: MobHuman1000
+  suffix: debug
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      900: Critical
+      1000: Dead
+  - type: RandomHumanoidAppearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 1500
+      behaviors:
+      - !type:GibBehavior { }

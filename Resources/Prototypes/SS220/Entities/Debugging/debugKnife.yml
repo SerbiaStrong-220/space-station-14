@@ -1,0 +1,191 @@
+- type: entity
+  name: Knife Debug
+  parent: CombatKnife
+  id: KnifeDebug
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 3
+    range: 10.0
+    damage:
+      types:
+        Slash: 0
+
+- type: entity
+  name: heat 100
+  parent: KnifeDebug
+  id: KnifeHeat
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 100
+
+- type: entity
+  name: Asphyxiation 100
+  parent: KnifeDebug
+  id: KnifeAsphyxiation
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Asphyxiation: 100
+
+- type: entity
+  name: Bloodloss 100
+  parent: KnifeDebug
+  id: KnifeBloodloss
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Bloodloss: 100
+
+- type: entity
+  name: Blunt 100
+  parent: KnifeDebug
+  id: KnifeBlunt
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 100
+
+- type: entity
+  name: Cellular 100
+  parent: KnifeDebug
+  id: KnifeCellular
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Cellular: 100
+
+- type: entity
+  name: Caustic 100
+  parent: KnifeDebug
+  id: KnifeCaustic
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Caustic: 100
+
+- type: entity
+  name: Cold 100
+  parent: KnifeDebug
+  id: KnifeCold
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Cold: 100
+
+- type: entity
+  name: Piercing 100
+  parent: KnifeDebug
+  id: KnifePiercing
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 100
+
+- type: entity
+  name: Poison 100
+  parent: KnifeDebug
+  id: KnifePoison
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Poison: 100
+
+- type: entity
+  name: Radiation 100
+  parent: KnifeDebug
+  id: KnifeRadiation
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Radiation: 100
+
+- type: entity
+  name: Shock 100
+  parent: KnifeDebug
+  id: KnifeShock
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Shock: 100
+
+- type: entity
+  name: Slash 100
+  parent: KnifeDebug
+  id: KnifeSlash
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 100
+
+- type: entity
+  name: Structural 100
+  parent: KnifeDebug
+  id: KnifeStructural
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Structural: 100
+
+- type: entity
+  name: Stamina 100
+  parent: KnifeDebug
+  id: KnifeStamina
+  noSpawn: true
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Stamina: 100
+
+- type: entity
+  parent: ClothingBackpackERTSecurity
+  id: ClothingBackpackDebugKnifeFilled
+  suffix: debug
+  name: debug knife 100
+  description: Сумка, наполненная ножами на 100 урона каждого типа. Предназначена для отладки и тестирования урона.
+  components:
+    - type: StorageFill
+      contents:
+      - id: KnifeStamina
+      - id: KnifeStructural
+      - id: KnifeSlash
+      - id: KnifeShock
+      - id: KnifeRadiation
+      - id: KnifePoison
+      - id: KnifePiercing
+      - id: KnifeCold
+      - id: KnifeCaustic
+      - id: KnifeCellular
+      - id: KnifeBlunt
+      - id: KnifeBloodloss
+      - id: KnifeAsphyxiation
+      - id: KnifeHeat
