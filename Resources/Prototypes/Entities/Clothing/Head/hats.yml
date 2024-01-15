@@ -244,6 +244,7 @@
   id: ClothingHeadHatCentcom
   name: CentCom brand hat
   description: "It's good to be the emperor."
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/centcom.rsi
@@ -913,6 +914,7 @@
   id: ClothingHeadHatCentcomcap
   name: CentCom cap
   description: An extravagant, fancy Central Commander cap.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/comcap.rsi

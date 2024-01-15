@@ -1038,9 +1038,7 @@
       - CarpetCyan
       - CarpetWhite
   - type: EmagLatheRecipes
-    emagStaticRecipes:
-      - ClothingHeadHatCentcomcap
-      - ClothingHeadHatCentcom
+    emagStaticRecipes: #SS220 TODO: Rework recipes what are there after EMAG
       - ClothingUniformJumpsuitCentcomAgent
       - ClothingUniformJumpsuitCentcomFormal
       - ClothingUniformJumpskirtCentcomFormalDress
