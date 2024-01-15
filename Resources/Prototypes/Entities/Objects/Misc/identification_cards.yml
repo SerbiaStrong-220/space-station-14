@@ -473,6 +473,7 @@
   parent: IDCardStandard
   id: CentcomIDCard
   name: command officer ID card
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     layers:
@@ -569,6 +570,7 @@
   parent: IDCardStandard
   id: CentcomIDCardSyndie
   name: command officer ID card
+  noSpawn: true #SS220 New CentCom
   suffix: Fake
   components:
   - type: Sprite
@@ -599,6 +601,7 @@
   parent: CentcomIDCard
   id: CentcomIDCardDeathsquad
   name: death squad ID card
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     layers:
@@ -802,6 +805,7 @@
   parent: CentcomIDCard
   id: CBURNIDcard
   name: CBURN ID card
+  noSpawn: true #SS220 New CentCom
   suffix: CBURN
   components:
   - type: Sprite

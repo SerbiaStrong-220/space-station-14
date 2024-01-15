@@ -664,6 +664,7 @@
   id: CentcomPDA
   name: CentCom PDA
   description: Light green sign of walking bureaucracy.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Pda
     id: CentcomIDCard
@@ -681,6 +682,7 @@
 - type: entity
   parent: CentcomPDA
   id: CentcomPDAFake
+  noSpawn: true #SS220 New CentCom
   suffix: Fake
   components:
   - type: Pda

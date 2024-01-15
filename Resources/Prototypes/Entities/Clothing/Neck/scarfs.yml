@@ -138,6 +138,7 @@
   id: ClothingNeckScarfStripedCentcom
   name: striped CentCom scarf
   description: A stylish striped centcom colored scarf. The perfect winter accessory for those with a keen fashion sense, and those who need to do paperwork in the cold.
+  noSpawn: true #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Clothing/Neck/Scarfs/centcom.rsi

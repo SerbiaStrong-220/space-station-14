@@ -81,6 +81,7 @@
   id: ClothingHeadHelmetAncient
   name: NTSRA void helmet
   description: An ancient space helmet, designed by the NTSRA branch of CentCom.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: BreathMask
   - type: Sprite

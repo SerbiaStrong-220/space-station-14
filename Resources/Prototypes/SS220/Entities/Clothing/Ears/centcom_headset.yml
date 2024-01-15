@@ -1,0 +1,16 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltCentComm
+  name: Гарнитура Центрального Командования
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCentCom
+      - EncryptionKeyStationMaster
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/centcom.rsi

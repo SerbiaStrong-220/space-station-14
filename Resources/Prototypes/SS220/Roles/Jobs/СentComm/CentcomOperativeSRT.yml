@@ -49,7 +49,7 @@
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterSRTCoat
     id: CentcomOperativeSRTPDA
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     pocket1: MagazinePistolSubMachineGun
     pocket2: MagazinePistolSubMachineGun
     belt: ClothingBeltWebbingSRTFilled

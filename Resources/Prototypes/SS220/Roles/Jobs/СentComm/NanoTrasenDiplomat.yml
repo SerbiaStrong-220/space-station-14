@@ -2,16 +2,16 @@
 
 - type: entity
   name: Дипломат NanoTrasen
-  id: NanoTrasenCentCommDiplomat
+  id: CentCommNanoTrasenDiplomat
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
       state: centcommdiplomat
     - type: RandomHumanoidSpawner
-      settings: NanoTrasenCentCommDiplomat
+      settings: CentCommNanoTrasenDiplomat
 
 - type: randomHumanoidSettings
-  id: NanoTrasenCentCommDiplomat
+  id: CentCommNanoTrasenDiplomat
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
     - type: MindShield
@@ -20,17 +20,17 @@
       description: ghost-role-information-nanotrasen-Diplomat-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ NanoTrasenCentCommDiplomatGear ]
+      prototypes: [ CentCommNanoTrasenDiplomatGear ]
 
 - type: playTimeTracker
   id: JobCentcommDiplomat
 
 - type: job
-  id: NanoTrasenCentCommDiplomat
+  id: CentCommNanoTrasenDiplomat
   name: job-name-centcomoff
   description: job-description-centcomoff
   setPreference: false
-  startingGear: NanoTrasenCentCommDiplomatGear
+  startingGear: CentCommNanoTrasenDiplomatGear
   icon: "JobIconNanotrasen"
   playTimeTracker: JobCentcommDiplomat
   supervisors: job-supervisors-centcom
@@ -40,7 +40,7 @@
   - AllAccess
 
 - type: startingGear
-  id: NanoTrasenCentCommDiplomatGear
+  id: CentCommNanoTrasenDiplomatGear
   equipment:
     jumpsuit: ClothingUniformNanoTrasenNavyOfficer
     shoes: ClothingShoesBootsLaceup
@@ -48,7 +48,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesLatex
     id: CentcomDiplomatPDA
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     pocket1: BoxFolderBlack
     pocket2: NTbaton
     belt: WeaponPulsePistol

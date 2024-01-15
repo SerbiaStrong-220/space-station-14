@@ -252,6 +252,7 @@
   noSpawn: true
   name: Centcom winter coat hood
   description: A hood for keeping the central comander's head warm.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hoods/Coat/hoodcentcom.rsi

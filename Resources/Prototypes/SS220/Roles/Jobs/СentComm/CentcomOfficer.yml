@@ -48,7 +48,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesLatex
     id: CentcomOfficerPDA
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     pocket1: BoxFolderBlack
     pocket2: NTbaton
     belt: WeaponPulsePistol

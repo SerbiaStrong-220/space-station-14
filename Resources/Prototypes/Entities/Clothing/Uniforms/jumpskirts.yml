@@ -588,6 +588,7 @@
   id: ClothingUniformJumpskirtCentcomFormalDress
   name: central command formal dress
   description: A dress for special occasions
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/centcomformaldress.rsi

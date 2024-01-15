@@ -413,6 +413,7 @@
 - type: entity
   name: CentCom official
   id: RandomHumanoidSpawnerCentcomOfficial
+  noSpawn: true #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi

@@ -861,7 +861,7 @@
       - ClothingOuterWinterRobo
       - ClothingOuterWinterSec
   - type: EmagLatheRecipes
-    emagStaticRecipes:
+    emagStaticRecipes: #SS220 TODO: Rework recipes what are there after EMAG
       - ClothingUniformJumpsuitCentcomAgent
       - ClothingUniformJumpsuitCentcomFormal
       - ClothingUniformJumpskirtCentcomFormalDress

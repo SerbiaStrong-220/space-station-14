@@ -323,6 +323,7 @@
   parent: CyberPen
   id: PenCentcom
   description: In an attempt to keep up with the "power" of the cybersun bureaucracy, NT made a replica of cyber pen, in their corporate style.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi
@@ -487,6 +488,7 @@
   parent: BoxFolderBase
   suffix: DO NOT MAP
   description: CentCom's miserable little pile of secrets!
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi
@@ -557,7 +559,8 @@
   id: BoxFolderCentComClipboard
   parent: BoxFolderClipboard
   name: centcom clipboard
-  description: A luxurious clipboard upholstered with green velvet. Often seen carried by CentCom officials, seldom seen actually used. 
+  description: A luxurious clipboard upholstered with green velvet. Often seen carried by CentCom officials, seldom seen actually used.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Objects/Misc/cc-clipboard.rsi

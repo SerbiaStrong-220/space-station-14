@@ -76,6 +76,7 @@
   id: ClothingOuterHardsuitAncientEVA
   name: NTSRA voidsuit #Nanotrasen Space Research Association
   description: An ancient space suit, designed by the NTSRA branch of CentCom. It is very finely crafted, allowing for greater mobility than most modern space suits.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/ancient_voidsuit.rsi
