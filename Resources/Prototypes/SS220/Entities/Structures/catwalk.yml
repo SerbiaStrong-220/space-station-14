@@ -62,7 +62,7 @@
   - type: Sprite
     state: catwalk_white
   - type: Construction
-    graph: WhiteCatwalk
+    graph: SteelCatwalk
     node: WhiteCatwalk
 
 - type: entity
@@ -72,5 +72,5 @@
   - type: Sprite
     state: catwalk_black
   - type: Construction
-    graph: DarkCatwalk
+    graph: SteelCatwalk
     node: DarkCatwalk
