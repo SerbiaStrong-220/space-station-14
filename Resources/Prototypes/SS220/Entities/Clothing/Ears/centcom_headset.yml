@@ -3,7 +3,8 @@
 - type: entity
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetAltCentComm
-  name: Гарнитура Центрального Командования
+  name: Полноразмерная гарнитура Центрального Командования
+  description: Количеству радиосообщений, проходящих через динамики этих наушников позавидовал бы каждый состоятельный космопорт.
   components:
   - type: ContainerFill
     containers:
