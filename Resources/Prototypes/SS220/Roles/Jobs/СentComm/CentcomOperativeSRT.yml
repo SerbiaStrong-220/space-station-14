@@ -45,7 +45,7 @@
     jumpsuit: ClothingUniformJumpsuitBlueShield2
     shoes: ClothingShoesSwat
     head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesSecurity
+    eyes: ClothingEyesGlassesBlueShield
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterSRTCoat
     id: CentcomOperativeSRTPDA

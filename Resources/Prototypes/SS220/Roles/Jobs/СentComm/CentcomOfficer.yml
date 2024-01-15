@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centofficer
+      state: centcommofficer
     - type: RandomHumanoidSpawner
       settings: CentCommOfficer
 
@@ -42,14 +42,12 @@
 - type: startingGear
   id: CentCommOfficerGear
   equipment:
-    jumpsuit: ClothingUniformNanoTrasenNavyOfficer
+    jumpsuit: ClothingUniformCentCommOfficer
     shoes: ClothingShoesBootsLaceup
     head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesSecurity
+    eyes: ClothingEyesGlassesBlueShield
     gloves: ClothingHandsGlovesLatex
     id: CentcomOfficerPDA
     ears: ClothingHeadsetAltCentComm
-    pocket1: BoxFolderBlack
-    pocket2: NTbaton
     belt: WeaponPulsePistol
-  satchel: ClothingBackpackSatchelLeather
+    back: ClothingBackpackCentCommFilled

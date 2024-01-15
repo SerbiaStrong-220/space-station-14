@@ -2,7 +2,7 @@
 
 - type: entity
   parent: UnsensoredClothingUniformBase
-  id: ClothingUniformNanoTrasenNavyOfficer
+  id: ClothingUniformCentCommOfficer
   name: униформа Офицера NanoTrasen
   description: На этой униформе изображено звание «лейтенант-коммандер». Её носят исключительно офицеры NanoTrasen. Защитные свойства форме придают экзотические материалы.
   components:

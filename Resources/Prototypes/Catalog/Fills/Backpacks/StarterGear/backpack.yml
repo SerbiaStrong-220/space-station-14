@@ -413,3 +413,23 @@
         - id: Cutlass
         - id: WeaponRevolverPirate
         - id: ClothingEyesEyepatch
+
+#SS220 New CentComm begin
+- type: entity
+  parent: ClothingBackpackSatchelLeather
+  id: ClothingBackpackCentCommFilled
+  name: Кожаная сумка
+  description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
+  noSpawn: True
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: NTbaton
+        - id: RubberStampCentcom
+        - id: Flash
+        - id: CigarGoldCase
+        - id: ExpensiveLighterNanotrasen
+        - id: BoxFolderBlack
+        - id: BoxFolderBlue
+#SS220 New Centcom end
