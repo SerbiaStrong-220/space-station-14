@@ -16,9 +16,9 @@
   copyright: "Modified by github user @Flareguy from plating.png, using damaged plating sprites from /tg/station at commit https://github.com/tgstation/tgstation/blob/6665eec76c98a4f3f89bebcd10b34b47dcc0b8ae/icons/turf/floors.dmi"
   source: "https://github.com/space-wizards/space-station-14/pull/21711"
 
-- files: [ "asteroid_red.png", "asteroid_tile.png", "elevator_shaft.png", "freezer.png", "green_circuit.png", "lino.png", "rock_vault.png", "showroom.png"]
+- files: [ "asteroid_red.png", "elevator_shaft.png", "freezer.png", "green_circuit.png", "lino.png", "rock_vault.png", "showroom.png"]
   license: "CC-BY-SA-3.0"
-  copyright: "vgstation13 at roughly commit e4d3ea7f69d21c3667be12b114fa935c4640cb05, asteroid_red and asteroid_tile taken from commit /vg/station at commit 02b9f6894af4419c9f7e699a22c402b086d8067e."
+  copyright: "vgstation13 at roughly commit e4d3ea7f69d21c3667be12b114fa935c4640cb05, asteroid_red taken from commit /vg/station at commit 02b9f6894af4419c9f7e699a22c402b086d8067e."
   source: "https://github.com/vgstation-coders/vgstation13"
 
 - files: [ "asteroid.png", "asteroid_dug.png", "asteroid0.png"]
@@ -36,7 +36,7 @@
   copyright: "taken from tgstation at https://github.com/tgstation/tgstation/blob/72d13059ab98e65d42b1d56269a62b3144d25f6a/icons/turf/floors.dmi"
   source: "https://github.com/tgstation/tgstation/"
 
-- files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png"]
+- files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png", "asteroid_tile.png"]
   license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
