@@ -1,0 +1,5 @@
+- type: startingGear
+  id: MobSecDogRoxiGear
+  equipment:
+    eyes: ClothingEyesGlassesSecurity
+    id: SecDogIDCard

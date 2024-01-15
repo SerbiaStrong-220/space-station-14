@@ -96,7 +96,7 @@
           True: {state: stunbaton_on}
           False: {state: stunbaton_off}
   - type: StaticPrice
-    price: 100
+    price: 80
   - type: Riggable
   - type: SolutionContainerManager
     solutions:
@@ -140,7 +140,7 @@
     malus: 0.225
   - type: Appearance
   - type: StaticPrice
-    price: 100
+    price: 80
   - type: GuideHelp
     guides:
     - Security
