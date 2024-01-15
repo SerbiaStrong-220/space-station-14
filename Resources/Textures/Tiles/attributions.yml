@@ -36,12 +36,12 @@
   copyright: "taken from tgstation at https://github.com/tgstation/tgstation/blob/72d13059ab98e65d42b1d56269a62b3144d25f6a/icons/turf/floors.dmi"
   source: "https://github.com/tgstation/tgstation/"
 
-- files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png", "asteroid_tile.png"]
+- files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png", "asteroid_tile.png", "gold.png", "silver.png"]
   license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
-- files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "gold.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "silver.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png"]
+- files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png"]
   license: "CC-BY-SA-3.0"
   copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, cropped_parallax modified from parallax. Wood tiles are new tg tiles, repaletted by TheArturZh using colors of old wood tiles."
   source: "https://github.com/tgstation/tgstation/"
