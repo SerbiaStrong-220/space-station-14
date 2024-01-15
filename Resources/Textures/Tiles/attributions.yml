@@ -1,11 +1,6 @@
 # Attempted to keep the files in alphabetical order so its easier to audit.
 # Finding individual authors is an unfeasible task. If you can reference the author please do so.
 
-- files: ["plating.png"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from CEV-Eris commit 8e74e4370f4d5885f15c3f834973b1223ddb8b1b, modified by github user @Flareguy"
-  source: "https://github.com/discordia-space/CEV-Eris/"
-
 - files: [ "asteroid_red.png", "elevator_shaft.png", "green_circuit.png", "lino.png", "rock_vault.png"]
   license: "CC-BY-SA-3.0"
   copyright: "vgstation13 at roughly commit e4d3ea7f69d21c3667be12b114fa935c4640cb05, asteroid_red taken from commit /vg/station at commit 02b9f6894af4419c9f7e699a22c402b086d8067e."
@@ -23,22 +18,22 @@
 
 - files: ["plating_damaged.png", "plating_burnt.png"]
   license: "CC-BY-SA-3.0"
-  copyright: "Modified by github user @Kit0vras from plating.png, using damaged plating sprites from /tg/station at commit https://github.com/tgstation/tgstation/blob/6665eec76c98a4f3f89bebcd10b34b47dcc0b8ae/icons/turf/floors.dmi"
+  copyright: "Modified by github user @Kit0vras from plating.png, using damaged plating sprites from /tg/station at commit https://github.com/tgstation/tgstation/blob/6665eec76c98a4f3f89bebcd10b34b47dcc0b8ae/icons/turf/floors.dmi" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: ["reinforced.png"]
   license: "CC-BY-SA-3.0"
-  copyright: "taken from tgstation at https://github.com/tgstation/tgstation/blob/72d13059ab98e65d42b1d56269a62b3144d25f6a/icons/turf/floors.dmi"
+  copyright: "taken from tgstation at https://github.com/tgstation/tgstation/blob/72d13059ab98e65d42b1d56269a62b3144d25f6a/icons/turf/floors.dmi" #SS220-Tile-Resprite
   source: "https://github.com/tgstation/tgstation/"
 
 - files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png", "asteroid_tile.png", "gold.png", "silver.png", "showroom.png", "freezer.png", "lime.png", "steel_maint.png", "grating_maint.png", "tech_maint.png"]
-  license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
-  copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: [ "steel_diagonal.png", "steel_mini.png", "steel_offset.png", "steel_pavement.png", "white_diagonal.png", "white_mini.png", "white_offset.png", "white_pavement.png", "white_plastic.png", "dark_diagonal.png", "dark_mini.png", "dark_offset.png", "dark_pavement.png", "dark_plastic.png"]
-  license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
-  copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: ["asteroid_plating.png, snow_plating.png"]
