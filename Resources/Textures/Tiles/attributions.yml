@@ -34,7 +34,7 @@
 - files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png"]
   license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
-  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/&&&" #пулл сюда
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "gold.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "silver.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png"]
   license: "CC-BY-SA-3.0"
@@ -64,12 +64,12 @@
 - files: [ "steel_diagonal.png", "steel_mini.png", "steel_offset.png", "steel_pavement.png", "white_diagonal.png", "white_mini.png", "white_offset.png", "white_pavement.png", "white_plastic.png", "dark_diagonal.png", "dark_mini.png", "dark_offset.png", "dark_pavement.png", "dark_plastic.png" ]
   license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
-  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/&&&" #пулл сюда
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: [ "lime.png" ]
   license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
-  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/&&&" #пулл сюда
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: ["arcadeblue.png", "arcadered.png"]
   license: "CC-BY-SA-3.0"
