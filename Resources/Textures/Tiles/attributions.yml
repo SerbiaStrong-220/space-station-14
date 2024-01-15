@@ -16,7 +16,7 @@
   copyright: "Modified by github user @Flareguy from plating.png, using damaged plating sprites from /tg/station at commit https://github.com/tgstation/tgstation/blob/6665eec76c98a4f3f89bebcd10b34b47dcc0b8ae/icons/turf/floors.dmi"
   source: "https://github.com/space-wizards/space-station-14/pull/21711"
 
-- files: [ "asteroid_red.png", "elevator_shaft.png", "freezer.png", "green_circuit.png", "lino.png", "rock_vault.png", "showroom.png"]
+- files: [ "asteroid_red.png", "elevator_shaft.png", "green_circuit.png", "lino.png", "rock_vault.png"]
   license: "CC-BY-SA-3.0"
   copyright: "vgstation13 at roughly commit e4d3ea7f69d21c3667be12b114fa935c4640cb05, asteroid_red taken from commit /vg/station at commit 02b9f6894af4419c9f7e699a22c402b086d8067e."
   source: "https://github.com/vgstation-coders/vgstation13"
@@ -36,9 +36,19 @@
   copyright: "taken from tgstation at https://github.com/tgstation/tgstation/blob/72d13059ab98e65d42b1d56269a62b3144d25f6a/icons/turf/floors.dmi"
   source: "https://github.com/tgstation/tgstation/"
 
-- files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png", "asteroid_tile.png", "gold.png", "silver.png"]
+- files: ["steel.png", "dark.png", "hydro.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "mono.png", "clown.png", "kitchen.png", "asteroid_tile.png", "gold.png", "silver.png", "showroom.png", "freezer.png", "lime.png"]
   license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
+
+- files: [ "steel_diagonal.png", "steel_mini.png", "steel_offset.png", "steel_pavement.png", "white_diagonal.png", "white_mini.png", "white_offset.png", "white_pavement.png", "white_plastic.png", "dark_diagonal.png", "dark_mini.png", "dark_offset.png", "dark_pavement.png", "dark_plastic.png"]
+  license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
+
+- files: ["asteroid_plating.png, snow_plating.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Modified from plating.png by github user @Kit0vras" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png"]
@@ -51,11 +61,6 @@
   copyright: "Modified from reinforced.png by github user @Flareguy"
   source: "https://github.com/space-wizards/space-station-14/pull/18676"
 
-- files: ["asteroid_plating.png, snow_plating.png"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Modified from plating.png by github user @Kit0vras" #SS220-Tile-Resprite
-  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
-
 - files: ["rglass.png"]
   license: "CC-BY-SA-3.0"
   copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, rglass modified by github user @notquitehadouken."
@@ -65,16 +70,6 @@
   license: "CC0-1.0"
   copyright: "Created by github user @notquitehadouken."
   source: "https://github.com/space-wizards/space-station-14/pull/17948"
-
-- files: [ "steel_diagonal.png", "steel_mini.png", "steel_offset.png", "steel_pavement.png", "white_diagonal.png", "white_mini.png", "white_offset.png", "white_pavement.png", "white_plastic.png", "dark_diagonal.png", "dark_mini.png", "dark_offset.png", "dark_pavement.png", "dark_plastic.png" ]
-  license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
-  copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
-  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
-
-- files: [ "lime.png" ]
-  license: "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
-  copyright: "Created by github user @Kit0vras" #SS220-Tile-Resprite
-  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
 - files: ["arcadeblue.png", "arcadered.png"]
   license: "CC-BY-SA-3.0"
