@@ -43,6 +43,13 @@
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
 
 - type: soundCollection
+  id: LizardGrowl
+  files:
+    - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_1.ogg
+    - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_2.ogg
+
+
+- type: soundCollection
   id: MaleBossLaugh
   files:
     - /Audio/SS220/Voice/Boss/male_boss_laugh_1.ogg
