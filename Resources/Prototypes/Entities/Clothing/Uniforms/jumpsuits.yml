@@ -514,6 +514,12 @@
     sprite: Clothing/Uniforms/Jumpsuit/scientist.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/scientist.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleScientist
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingUniformBase
@@ -525,6 +531,12 @@
     sprite: Clothing/Uniforms/Jumpsuit/scientist_formal.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/scientist_formal.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleScientist
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingUniformBase
@@ -1295,6 +1307,12 @@
     sprite: Clothing/Uniforms/Jumpsuit/senior_researcher.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/senior_researcher.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleScientist
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingUniformBase

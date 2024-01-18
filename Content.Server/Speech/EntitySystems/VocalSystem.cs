@@ -60,6 +60,15 @@ public sealed class VocalSystem : EntitySystem
         if (args.Handled || !args.Emote.Category.HasFlag(EmoteCategory.Vocal))
             return;
 
+        // SS220 Chat-Special-Emote begin
+        //Will play special emote if it exists
+        if (CheckSpecialSounds(uid, component, args.Emote))
+        {
+            args.Handled = true;
+            return;
+        }
+        // SS220 Chat-Special-Emote end
+
         // snowflake case for wilhelm scream easter egg
         if (args.Emote.ID == component.ScreamId)
         {
@@ -67,14 +76,6 @@ public sealed class VocalSystem : EntitySystem
             return;
         }
 
-        // SS220 Chat-Special-Emote begin
-        //Will play special emote if it exists
-        if(CheckSpecialSounds(uid, component, args.Emote))
-        {
-            args.Handled = true;
-            return;
-        }
-        // SS220 Chat-Special-Emote end
         // just play regular sound based on emote proto
         args.Handled = _chat.TryPlayEmoteSound(uid, component.EmoteSounds, args.Emote);
     }

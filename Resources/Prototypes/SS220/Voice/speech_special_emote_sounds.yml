@@ -22,3 +22,14 @@
   sounds:
     Laugh:
       collection: MaleEvilLaugh
+
+- type: emoteSounds
+  id: MaleScientist
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: MaleScientistScream
+    CritGasp:
+      collection: MaleScientistChoke
+
