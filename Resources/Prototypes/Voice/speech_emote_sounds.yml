@@ -175,6 +175,8 @@
       collection: Gasp
     CritGasp:
       collection: MaleCritGasp
+    Bubbles:
+      collection: SlimeBubbles
     #SS220 emote sounds end
   params:
     variation: 0.125
@@ -223,6 +225,8 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
+    Bubbles:
+      collection: SlimeBubbles
     #SS220 emote sounds end
   params:
     variation: 0.125

@@ -48,6 +48,12 @@
     - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_1.ogg
     - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_2.ogg
 
+- type: soundCollection
+  id: SlimeBubbles
+  files:
+    - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_1.ogg
+    - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_2.ogg
+
 
 - type: soundCollection
   id: MaleBossLaugh
