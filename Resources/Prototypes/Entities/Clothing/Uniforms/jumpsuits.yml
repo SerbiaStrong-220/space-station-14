@@ -519,6 +519,7 @@
   - type: Vocal
     sounds:
       Male: MaleScientist
+      Unsexed: MaleScientist
   #ss220 special_sounds end
 
 - type: entity
@@ -536,6 +537,7 @@
   - type: Vocal
     sounds:
       Male: MaleScientist
+      Unsexed: MaleScientist
   #ss220 special_sounds end
 
 - type: entity
@@ -1312,6 +1314,7 @@
   - type: Vocal
     sounds:
       Male: MaleScientist
+      Unsexed: MaleScientist
   #ss220 special_sounds end
 
 - type: entity

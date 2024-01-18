@@ -489,6 +489,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 # Syndicate Medic Hardsuit
@@ -562,6 +563,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 #Syndicate Commander Hardsuit
@@ -601,6 +603,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 #Cybersun Juggernaut Hardsuit
@@ -640,6 +643,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 #Wizard Hardsuit
