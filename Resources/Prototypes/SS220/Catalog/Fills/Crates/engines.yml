@@ -2,7 +2,7 @@
   id: CrateEngineeringTEG
   parent: CrateEngineeringSecure
   name: Ящик с двигателем ТЭГ
-  description: Упакован БС технологией, не открывать
+  description: Упакован с помощью блюспейс технологии. Не открывать!
   components:
   - type: StorageFill
     contents:
