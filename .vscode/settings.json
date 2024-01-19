@@ -9,5 +9,4 @@
         "string": "cpp"
     },
     "dotnet.defaultSolution": "SpaceStation14.sln",
-    "dotnet.preferCSharpExtension": true
 }
