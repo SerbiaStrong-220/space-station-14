@@ -420,6 +420,8 @@
   components:
     - type: Vehicle
       northOver: true
+      westOver: true # SS220-wheelchair-fix
+      eastOver: true # SS220-wheelchair-fix
       hasKey: true
       northOverride: 0
       southOverride: 0

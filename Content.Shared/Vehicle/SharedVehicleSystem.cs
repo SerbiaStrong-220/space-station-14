@@ -283,10 +283,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Direction.South => component.SouthOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
-            Direction.West => component.WestOver
+            // SS220-vehicle-fix
+            Direction.West or Direction.SouthWest or Direction.NorthWest => component.WestOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
-            Direction.East => component.EastOver
+            // SS220-vehicle-fix
+            Direction.East or Direction.SouthEast or Direction.NorthEast => component.EastOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
             _ => (int) DrawDepth.DrawDepth.WallMountedItems
