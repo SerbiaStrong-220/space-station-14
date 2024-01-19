@@ -59,10 +59,10 @@ public sealed class VocalSystem : EntitySystem
     {
         if (args.Handled || !args.Emote.Category.HasFlag(EmoteCategory.Vocal))
             return;
-
+            
         // SS220 Chat-Special-Emote begin
         //Will play special emote if it exists
-        if (CheckSpecialSounds(uid, component, args.Emote))
+        if(CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
