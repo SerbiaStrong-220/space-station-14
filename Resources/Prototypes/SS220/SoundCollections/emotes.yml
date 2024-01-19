@@ -94,3 +94,10 @@
     - /Audio/SS220/Voice/Scientist/male_scientist_scream_7.ogg
     - /Audio/SS220/Voice/Scientist/male_scientist_scream_8.ogg
 
+- type: soundCollection
+  id: MaleDoctorLaugh
+  files:
+    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_1.ogg
+    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_2.ogg
+    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_3.ogg
+

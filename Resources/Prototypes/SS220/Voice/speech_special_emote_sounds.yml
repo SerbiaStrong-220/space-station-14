@@ -33,3 +33,12 @@
     CritGasp:
       collection: MaleScientistChoke
 
+- type: emoteSounds
+  id: MaleDoctor
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleDoctorLaugh
+
+
