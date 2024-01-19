@@ -1,7 +1,7 @@
 - type: cargoBounty
   id: BountyNattle
   reward: 9500
-  description: Химики NanoTrasen обнаружили мощный химикат в растениях вида Смертокрапива. Данный яд используется для сдерживания опасной фауны при её изучении. Постарайтесь добыть её.
+  description: bounty-description-Nattle
   entries:
   - name: bounty-Nattle
     amount: 12
@@ -12,9 +12,9 @@
 - type: cargoBounty
   id: BountyDeus
   reward: 9500
-  description: Лучшие умы компании обнаружили новый трудозатратный способ синтеза секретного препарата. Спасите несколько жизней, отправив нам Амброзию Деус.
+  description: bounty-description-Deus 
   entries:
-  - name: bounty-Deus
+  - name: bounty-Deus 
     amount: 12
     whitelist:
       tags:
@@ -23,9 +23,9 @@
 - type: cargoBounty
   id: BountyMeatSlime
   reward: 7500
-  description: Невероятные повара придумали новый деликатес из ШАРА СЛИЗИ! Им срочно нужны новые поставщики. Удовлетворите вкус этих гурманов, отправив несколько шаров слизи.
+  description: bounty-description-MeatSlime
   entries: 
-  - name: bounty-MeatSlime
+  - name: bounty-MeatSlime 
     amount: 3
     whitelist:
       tags:
