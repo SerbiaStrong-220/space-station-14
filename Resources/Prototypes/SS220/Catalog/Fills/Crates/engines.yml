@@ -1,0 +1,11 @@
+- type: entity
+  id: CrateEngineeringTEG
+  parent: CrateEngineeringSecure
+  name: Ящик с двигателем ТЭГ
+  description: Упакован БС технологией, не открывать
+  components:
+  - type: StorageFill
+    contents:
+      - id: TegCenter
+      - id: TegCirculator
+        amount: 2

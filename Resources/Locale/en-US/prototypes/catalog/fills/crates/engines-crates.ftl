@@ -1,5 +1,5 @@
 ent-CrateEngineeringAMEShielding = Packaged antimatter reactor crate
-    .desc = 9 parts for the main body of an antimatter reactor, or for expanding an existing one.
+    .desc = 12 parts for the main body of an antimatter reactor, or for expanding an existing one.
 
 ent-CrateEngineeringAMEJar = Antimatter containment jar crate
     .desc = 3 antimatter jars, for fuelling an antimatter reactor.
