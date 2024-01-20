@@ -13,7 +13,7 @@
       - id: ClothingBeltUtilityFilled
       - id: SurvivalKnife
       - id: HandheldGPSBasic
-      - id: RadioHandheld
+      - id: HandheldRadio #SS220 Radio
       - id: SeismicCharge
         amount: 2
       - id: OreBag
@@ -37,7 +37,7 @@
       - id: ClothingBeltUtilityFilled
       - id: SurvivalKnife
       - id: HandheldGPSBasic
-      - id: RadioHandheld
+      - id: HandheldRadio #SS220 Radio
       - id: SeismicCharge
         amount: 2
       - id: OreBag

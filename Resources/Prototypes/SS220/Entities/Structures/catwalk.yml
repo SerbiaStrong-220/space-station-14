@@ -1,0 +1,76 @@
+# TODO move this to tiles once tile smoothing is supported
+- type: entity
+  id: CatwalkSteelBase
+  abstract: true
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: SS220/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    noRot: true
+  - type: Transform
+    anchored: true
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCatwalk
+      params:
+        volume: 8
+  - type: Tag
+    tags:
+      - Catwalk
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: CatwalkSteel
+  parent: CatwalkSteelBase
+  components:
+  - type: Sprite
+    state: catwalk
+  - type: Construction
+    graph: SteelCatwalk
+    node: SteelCatwalk
+
+- type: entity
+  id: CatwalkWhiteSteel
+  parent: CatwalkSteelBase
+  components:
+  - type: Sprite
+    state: catwalk_white
+  - type: Construction
+    graph: SteelCatwalk
+    node: WhiteCatwalk
+
+- type: entity
+  id: CatwalkBlackSteel
+  parent: CatwalkSteelBase
+  components:
+  - type: Sprite
+    state: catwalk_black
+  - type: Construction
+    graph: SteelCatwalk
+    node: DarkCatwalk

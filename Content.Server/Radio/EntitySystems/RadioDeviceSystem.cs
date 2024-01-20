@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Popups;
@@ -11,7 +12,9 @@ using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Radio;
+using Content.Shared.SS220.Radio;
 using Content.Shared.Radio.Components;
+using Content.Shared.SS220.Radio.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -51,6 +54,13 @@ public sealed class RadioDeviceSystem : EntitySystem
         SubscribeLocalEvent<IntercomComponent, ToggleIntercomMicMessage>(OnToggleIntercomMic);
         SubscribeLocalEvent<IntercomComponent, ToggleIntercomSpeakerMessage>(OnToggleIntercomSpeaker);
         SubscribeLocalEvent<IntercomComponent, SelectIntercomChannelMessage>(OnSelectIntercomChannel);
+
+        // SS220 HandheldRadio start
+        SubscribeLocalEvent<HandheldRadioComponent, BeforeActivatableUIOpenEvent>(OnBeforeHandheldRadioUiOpen);
+        SubscribeLocalEvent<HandheldRadioComponent, ToggleHandheldRadioMicMessage>(OnToggleHandheldRadioMic);
+        SubscribeLocalEvent<HandheldRadioComponent, ToggleHandheldRadioSpeakerMessage>(OnToggleHandheldRadioSpeaker);
+        SubscribeLocalEvent<HandheldRadioComponent, SelectHandheldRadioChannelMessage>(OnSelectHandheldRadioChannel);
+        // SS220 HandheldRadio end
     }
 
     public override void Update(float frameTime)
@@ -172,11 +182,10 @@ public sealed class RadioDeviceSystem : EntitySystem
             return;
 
         var proto = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel);
-
         using (args.PushGroup(nameof(RadioMicrophoneComponent)))
         {
             args.PushMarkup(Loc.GetString("handheld-radio-component-on-examine", ("frequency", proto.Frequency)));
-            args.PushMarkup(Loc.GetString("handheld-radio-component-chennel-examine",
+            args.PushMarkup(Loc.GetString("handheld-radio-component-channel-examine", //SS220 HandheldRadio
                 ("channel", proto.LocalizedName)));
         }
     }
@@ -241,7 +250,13 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         if (!_protoMan.TryIndex<RadioChannelPrototype>(args.Channel, out _) || !component.SupportedChannels.Contains(args.Channel))
             return;
-
+        // SS220 HandheldRadio start
+        if (TryComp<ActiveRadioComponent>(uid, out var activeRadioComp))
+            {// To prevent speaking to previous channel instead of selected one
+                activeRadioComp.Channels.Clear();
+                activeRadioComp.Channels = new(){ args.Channel };
+            }
+        // SS220 HandheldRadio end
         if (TryComp<RadioMicrophoneComponent>(uid, out var mic))
             mic.BroadcastChannel = args.Channel;
         if (TryComp<RadioSpeakerComponent>(uid, out var speaker))
@@ -261,4 +276,62 @@ public sealed class RadioDeviceSystem : EntitySystem
         var state = new IntercomBoundUIState(micEnabled, speakerEnabled, availableChannels, selectedChannel);
         _ui.TrySetUiState(uid, IntercomUiKey.Key, state);
     }
+    // SS220 HandheldRadio start
+    private void OnBeforeHandheldRadioUiOpen(EntityUid uid, HandheldRadioComponent component, BeforeActivatableUIOpenEvent args)
+    {
+        UpdateHandheldRadioUi(uid, component);
+    }
+
+    private void OnToggleHandheldRadioMic(EntityUid uid, HandheldRadioComponent component, ToggleHandheldRadioMicMessage args)
+    {
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { } user)
+            return;
+
+        SetMicrophoneEnabled(uid, user, args.Enabled, true);
+        UpdateHandheldRadioUi(uid, component);
+    }
+
+    private void OnToggleHandheldRadioSpeaker(EntityUid uid, HandheldRadioComponent component, ToggleHandheldRadioSpeakerMessage args)
+    {
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { } user)
+            return;
+
+        SetSpeakerEnabled(uid, user, args.Enabled, true);
+        UpdateHandheldRadioUi(uid, component);
+    }
+
+    private void OnSelectHandheldRadioChannel(EntityUid uid, HandheldRadioComponent component, SelectHandheldRadioChannelMessage args)
+    {
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { })
+            return;
+
+        if(!_protoMan.TryIndex<RadioChannelPrototype>(args.Channel,out _))
+            return;
+        if (TryComp<RadioMicrophoneComponent>(uid, out var mic))
+            mic.BroadcastChannel = args.Channel;
+        if (TryComp<RadioSpeakerComponent>(uid, out var speaker))
+            speaker.Channels = new(){ args.Channel };
+        if (TryComp<ActiveRadioComponent>(uid, out var speakerComp))
+            {
+                speakerComp.Channels.Clear();
+                speakerComp.Channels = new(){ args.Channel };
+            }
+
+        UpdateHandheldRadioUi(uid, component);
+
+    }
+
+    private void UpdateHandheldRadioUi(EntityUid uid, HandheldRadioComponent component)
+    {
+        var micComp = CompOrNull<RadioMicrophoneComponent>(uid);
+        var speakerComp = CompOrNull<RadioSpeakerComponent>(uid);
+
+        var micEnabled = micComp?.Enabled ?? false;
+        var speakerEnabled = speakerComp?.Enabled ?? false;
+        var availableChannels = component.SupportedChannels;
+        var selectedChannel = micComp?.BroadcastChannel ?? SharedChatSystem.CommonChannel;
+        var state = new HandheldRadioBoundUIState(micEnabled, speakerEnabled, availableChannels, selectedChannel);
+        _ui.TrySetUiState(uid, HandheldRadioUiKey.Key, state);
+    }
+    // SS220 HandheldRadio end
 }

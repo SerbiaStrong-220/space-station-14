@@ -6,7 +6,7 @@
   description: A chessboard. Pieces included!
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/chessboard.rsi
+    sprite: SS220/Objects/Fun/Tabletop/chessboard.rsi #SS220-Tabletop-Resprite
     state: chessboard
   - type: TabletopGame
     boardName: tabletop-chess-board-name
@@ -23,7 +23,7 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/chessboard_tabletop.rsi
+    sprite: SS220/Objects/Fun/Tabletop/chessboard_tabletop.rsi #SS220-Tabletop-Resprite
     state: chessboard_tabletop
 
 # White pieces
@@ -33,7 +33,7 @@
   parent: BaseTabletopPiece
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+    sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
     state: w_king
 
 - type: entity
@@ -42,7 +42,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: w_queen
 
 - type: entity
@@ -51,7 +51,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: w_rook
 
 - type: entity
@@ -60,7 +60,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: w_bishop
 
 - type: entity
@@ -69,7 +69,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: w_knight
 
 - type: entity
@@ -78,7 +78,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: w_pawn
 
 # Black pieces
@@ -88,7 +88,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: b_king
 
 - type: entity
@@ -97,7 +97,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: b_queen
 
 - type: entity
@@ -106,7 +106,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: b_rook
 
 - type: entity
@@ -115,7 +115,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: b_bishop
 
 - type: entity
@@ -124,7 +124,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: b_knight
 
 - type: entity
@@ -133,5 +133,5 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/chess_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/chess_pieces.rsi #SS220-Tabletop-Resprite
       state: b_pawn

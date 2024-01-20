@@ -8,7 +8,7 @@
     FlashlightLantern: 2
     Floodlight: 2
     HandheldGPSBasic: 2
-    RadioHandheld: 2
+    HandheldRadio: 2 #SS220 Radio
     WeaponProtoKineticAccelerator: 4
     SeismicCharge: 2
     FultonBeacon: 1
