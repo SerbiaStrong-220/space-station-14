@@ -45,7 +45,7 @@ public static class ServerPackaging
         "Npgsql",
         "Microsoft",
 
-        // SS220 extra assemblies start
+        // SS220 extra assemblies begin
         "FFMpegCore",
         "MySqlConnector",
         "Pomelo.EntityFrameworkCore.MySql"
