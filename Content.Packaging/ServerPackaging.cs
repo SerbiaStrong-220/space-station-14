@@ -44,6 +44,12 @@ public static class ServerPackaging
         // Python script had Npgsql. though we want Npgsql.dll as well soooo
         "Npgsql",
         "Microsoft",
+
+        // SS220 extra assemblies start
+        "FFMpegCore",
+        "MySqlConnector",
+        "Pomelo.EntityFrameworkCore.MySql"
+        // SS220 extra assemblies end
     };
 
     private static readonly List<string> ServerNotExtraAssemblies = new()
