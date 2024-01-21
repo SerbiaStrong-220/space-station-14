@@ -279,7 +279,7 @@
 
 - type: cargoBounty
   id: BountyMonkeyCube
-  reward: 3000 #ss220 Rebalance
+  reward: 2000 #ss220 Rebalance
   description: bounty-description-monkey-cube
   idPrefix: CC
   entries:
