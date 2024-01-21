@@ -103,7 +103,7 @@
 
 - type: cargoBounty
   id: BountyClownCostume
-  reward: 1800 #ss220 Rebalance
+  reward: 1800 
   description: bounty-description-clown-costume
   entries:
   - name: bounty-item-clown-mask
@@ -211,7 +211,7 @@
 
 - type: cargoBounty
   id: BountyHandcuffs
-  reward: 2500 #ss220 Rebalance
+  reward: 1000 
   description: bounty-description-handcuffs
   idPrefix: CC
   entries:
@@ -268,7 +268,7 @@
 
 - type: cargoBounty
   id: BountyLung
-  reward: 2000 #ss220 Rebalance
+  reward: 2000 
   description: bounty-description-lung
   entries:
   - name: bounty-item-lung
@@ -520,7 +520,7 @@
 
 - type: cargoBounty
   id: BountyWarmCloth
-  reward: 2500 #ss220 Rebalance
+  reward: 2000 
   description: bounty-description-warm-cloth
   idPrefix: UNTH
   entries:
