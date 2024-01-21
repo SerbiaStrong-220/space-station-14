@@ -279,7 +279,7 @@
 
 - type: cargoBounty
   id: BountyMonkeyCube
-  reward: 7000 #ss220 Rebalance
+  reward: 3000 #ss220 Rebalance
   description: bounty-description-monkey-cube
   idPrefix: CC
   entries:
@@ -509,7 +509,7 @@
 
 - type: cargoBounty
   id: BountyLabeler
-  reward: 5660 #ss220 Rebalance
+  reward: 2500 #ss220 Rebalance
   description: bounty-description-labeler
   entries:
   - name: bounty-item-labeler
