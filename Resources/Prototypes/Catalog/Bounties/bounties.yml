@@ -268,7 +268,7 @@
 
 - type: cargoBounty
   id: BountyLung
-  reward: 8000 #ss220 Rebalance
+  reward: 2000 #ss220 Rebalance
   description: bounty-description-lung
   entries:
   - name: bounty-item-lung
