@@ -103,7 +103,7 @@
 
 - type: cargoBounty
   id: BountyClownCostume
-  reward: 8500 #ss220 Rebalance
+  reward: 1800 #ss220 Rebalance
   description: bounty-description-clown-costume
   entries:
   - name: bounty-item-clown-mask
