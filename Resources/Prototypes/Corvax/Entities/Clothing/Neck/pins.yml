@@ -125,6 +125,13 @@
     clothingVisuals:
       neck:
       - state: sind-equipped
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingNeckPinBase

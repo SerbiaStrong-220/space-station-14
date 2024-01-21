@@ -8,6 +8,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -18,6 +19,7 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly IEntityManager _entities = default!;// SS220 Chat-Special-Emote
 
     public override void Initialize()
     {
@@ -28,6 +30,8 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
+        SubscribeLocalEvent<VocalComponent, HasSpecialSoundsEvent>(HasSpecialSounds);// SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);// SS220 Chat-Special-Emote
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -55,6 +59,15 @@ public sealed class VocalSystem : EntitySystem
     {
         if (args.Handled || !args.Emote.Category.HasFlag(EmoteCategory.Vocal))
             return;
+            
+        // SS220 Chat-Special-Emote begin
+        //Will play special emote if it exists
+        if(CheckSpecialSounds(uid, component, args.Emote))
+        {
+            args.Handled = true;
+            return;
+        }
+        // SS220 Chat-Special-Emote end
 
         // snowflake case for wilhelm scream easter egg
         if (args.Emote.ID == component.ScreamId)
@@ -98,4 +111,58 @@ public sealed class VocalSystem : EntitySystem
             return;
         _proto.TryIndex(protoId, out component.EmoteSounds);
     }
+
+    // SS220 Chat-Special-Emote begin
+    private bool CheckSpecialSounds(EntityUid uid, VocalComponent component, EmotePrototype emote)
+    {
+        if (component.SpecialEmoteSounds == null)
+            return false;
+
+        foreach (var specEmote in component.SpecialEmoteSounds)
+            if (_chat.TryPlayEmoteSound(uid, specEmote.Value, emote))
+                return true;
+
+        return false;
+    }
+    private void LoadSpecialSounds(EntityUid uid, VocalComponent component, EntityUid itemUid, VocalComponent itemComponent, Sex? sex = null)
+    {
+        if (itemComponent.Sounds == null)
+            return;
+
+        if (component.SpecialEmoteSounds == null)
+            component.SpecialEmoteSounds = new();
+
+        sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
+
+        if (!itemComponent.Sounds.TryGetValue(sex.Value, out var protoId))
+            return;
+
+        if (!_proto.TryIndex(protoId, out itemComponent.EmoteSounds))
+            return;
+
+        component.SpecialEmoteSounds.Add(itemUid, itemComponent.EmoteSounds);
+    }
+    private void HasSpecialSounds(EntityUid uid, VocalComponent component, HasSpecialSoundsEvent args)
+    {
+        _entities.TryGetComponent<VocalComponent>(args.Item, out var itemComponent);
+
+        if (itemComponent == null)
+            return;
+
+        if (component.SpecialEmoteSounds != null && component.SpecialEmoteSounds.ContainsKey(args.Item))
+            return;
+
+        LoadSpecialSounds(uid, component, args.Item, itemComponent);
+    }
+    private void UnloadSpecialSounds(EntityUid uid, VocalComponent component, UnloadSpecialSoundsEvent args)
+    {
+        if (component.SpecialEmoteSounds == null)
+            return;
+
+        component.SpecialEmoteSounds.Remove(args.Item);
+
+        if (component.SpecialEmoteSounds.Count < 1)
+            component.SpecialEmoteSounds = null;
+    }
+    // SS220 Chat-Special-Emote end
 }

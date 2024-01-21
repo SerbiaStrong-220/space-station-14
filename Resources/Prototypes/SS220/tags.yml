@@ -2,7 +2,10 @@
   id: DeathNettle
 
 - type: Tag
-  id: DeusAmbrosia 
+  id: DeusAmbrosia
 
 - type: Tag
   id: MeatSlime
+
+- type: Tag
+  id: SecDogWearable

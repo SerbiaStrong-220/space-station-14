@@ -3,11 +3,15 @@
   name: thermo-electric generator
   description: A high efficiency generator that uses energy transfer between hot and cold gases to produce electricity.
   parent: BaseMachinePowered
+  suffix: Unanchored
   placement:
     mode: SnapgridCenter
   components:
+    - type: Physics
+      bodyType: Dynamic
     - type: Transform
       noRot: false
+      anchored: false
     - type: Sprite
       sprite: Structures/Power/Generation/teg.rsi
       layers:
@@ -106,11 +110,15 @@
   name: circulator
   description: Passes gas through the thermo-electric generator to exchange heat. Has an inlet and outlet port.
   parent: BaseMachine
+  suffix: Unanchored
   placement:
     mode: SnapgridCenter
   components:
+    - type: Physics
+      bodyType: Dynamic
     - type: Transform
       noRot: false
+      anchored: false
 
     # visuals
     - type: Sprite

@@ -148,6 +148,8 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
             _joints.ClearJoints(args.BuckledEntity);
 
+            _tagSystem.AddTag(uid, "DoorBumpOpener");
+
             return;
         }
 
@@ -163,6 +165,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         // Entity is no longer riding
         RemComp<RiderComponent>(args.BuckledEntity);
         RemComp<RelayInputMoverComponent>(args.BuckledEntity);
+        _tagSystem.RemoveTag(uid, "DoorBumpOpener");
 
         Appearance.SetData(uid, VehicleVisuals.HideRider, false);
         // Reset component
@@ -207,7 +210,6 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         // Audiovisual feedback
         _ambientSound.SetAmbience(uid, true);
-        _tagSystem.AddTag(uid, "DoorBumpOpener");
         _modifier.RefreshMovementSpeedModifiers(uid);
     }
 
@@ -222,7 +224,6 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         // Disable vehicle
         component.HasKey = false;
         _ambientSound.SetAmbience(uid, false);
-        _tagSystem.RemoveTag(uid, "DoorBumpOpener");
         _modifier.RefreshMovementSpeedModifiers(uid);
     }
 
@@ -282,10 +283,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Direction.South => component.SouthOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
-            Direction.West => component.WestOver
+            // SS220-vehicle-fix
+            Direction.West or Direction.SouthWest or Direction.NorthWest => component.WestOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
-            Direction.East => component.EastOver
+            // SS220-vehicle-fix
+            Direction.East or Direction.SouthEast or Direction.NorthEast => component.EastOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
             _ => (int) DrawDepth.DrawDepth.WallMountedItems

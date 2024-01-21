@@ -127,6 +127,8 @@
         volume: 2
     Hiss:
       collection: LizardHiss
+    Growl:
+      collection: LizardGrowl
     #SS220 emote sounds end
 
 - type: emoteSounds
@@ -173,6 +175,8 @@
       collection: Gasp
     CritGasp:
       collection: MaleCritGasp
+    Bubbles:
+      collection: SlimeBubbles
     #SS220 emote sounds end
   params:
     variation: 0.125
@@ -221,6 +225,8 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
+    Bubbles:
+      collection: SlimeBubbles
     #SS220 emote sounds end
   params:
     variation: 0.125
@@ -263,6 +269,10 @@
       path: /Audio/Voice/Arachnid/arachnid_scream.ogg
     Laugh:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
+    Click:
+      path: /Audio/Voice/Arachnid/arachnid_click.ogg
     #SS220 emote sounds
     DefaultDeathgasp:
       collection: Deathgasp
@@ -270,6 +280,8 @@
       collection: Gasp
     CritGasp:
       collection: MaleCritGasp
+    Hiss:
+      collection: ArachnidHiss
     #SS220 emote sounds end
 
 - type: emoteSounds

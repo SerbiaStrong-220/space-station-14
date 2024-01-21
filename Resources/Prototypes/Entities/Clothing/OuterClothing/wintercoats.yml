@@ -380,6 +380,13 @@
         Caustic: 0.9
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterSci
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleScientist
+      Unsexed: MaleScientist
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingOuterWinterCoatToggleable

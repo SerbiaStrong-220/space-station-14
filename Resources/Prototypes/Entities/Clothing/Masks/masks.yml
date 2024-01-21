@@ -56,6 +56,13 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingMaskGas
