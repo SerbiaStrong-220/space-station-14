@@ -1,0 +1,14 @@
+#SS220 Bubbles for slimes
+- type: emote
+  id: Bubbles
+  category: Vocal
+  chatMessages: [бурлит]
+  chatTriggers:
+    - bubbles
+    - bubbles.
+    - bubbles!
+    - bubbling
+    - bubbled
+    - бурлит
+    - бурлит.
+    - бурлит!

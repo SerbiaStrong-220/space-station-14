@@ -7,7 +7,7 @@
   - type: StorageFill
     contents:
       - id: AmePart
-        amount: 9
+        amount: 12
 
 - type: entity
   id: CrateEngineeringAMEJar
@@ -132,7 +132,7 @@
   - type: StorageFill
     contents:
       - id: TeslaCoil
-      
+
 - type: entity
   id: CrateEngineeringTeslaGroundingRod
   parent: CrateEngineeringSecure

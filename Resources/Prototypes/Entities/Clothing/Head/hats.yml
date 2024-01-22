@@ -709,6 +709,13 @@
     - Ian # SS220 Shapochki
     - HamsterWearable
     - WhitelistChameleon
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleDoctor
+      Unsexed: MaleDoctor
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadBase

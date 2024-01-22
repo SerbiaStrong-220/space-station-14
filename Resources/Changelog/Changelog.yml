@@ -1,77 +1,4 @@
 Entries:
-- author: themias
-  changes:
-  - message: Science built cyborgs can now emote
-    type: Fix
-  id: 5171
-  time: '2023-11-14T23:27:27.0000000+00:00'
-- author: Sirionaut
-  changes:
-  - message: cloth can be crafted from cotton (made from cotton bols)
-    type: Add
-  id: 5172
-  time: '2023-11-14T23:27:56.0000000+00:00'
-- author: deltanedas
-  changes:
-  - message: Added the disposal signal router which is controlled by signals instead
-      of tags.
-    type: Add
-  id: 5173
-  time: '2023-11-14T23:30:43.0000000+00:00'
-- author: Slava0135
-  changes:
-  - message: Traversing through disposal system now deals some blunt damage on every
-      turn. Be advised!
-    type: Tweak
-  - message: Fixed clang sound not playing when traversing through disposal system.
-    type: Fix
-  id: 5174
-  time: '2023-11-15T00:52:43.0000000+00:00'
-- author: EmoGarbage404
-  changes:
-  - message: Artifacts now have a chance to spit out both medicinal and poisonous
-      foam.
-    type: Add
-  id: 5175
-  time: '2023-11-15T01:34:43.0000000+00:00'
-- author: EmoGarbage404
-  changes:
-  - message: Fixed actions sometimes gaining phantom cooldown graphics.
-    type: Fix
-  - message: Fixed an issue where clicking an action would interrupt hovering, making
-      it awkward to click multiple times.
-    type: Fix
-  id: 5176
-  time: '2023-11-15T01:35:43.0000000+00:00'
-- author: metalgearsloth
-  changes:
-  - message: Added 5 minute initial timer to gateway + bump new portal generation
-      from 45 minutes to 75 minutes.
-    type: Tweak
-  id: 5177
-  time: '2023-11-15T06:23:53.0000000+00:00'
-- author: liltenhead
-  changes:
-  - message: Removed the ability to link IEDs to a remote signal.
-    type: Remove
-  id: 5178
-  time: '2023-11-15T10:02:37.0000000+00:00'
-- author: TsjipTsjip
-  changes:
-  - message: Kettle's exterior airlocks are now far less likely to end up bolted,
-      but must be configured manually now.
-    type: Tweak
-  id: 5179
-  time: '2023-11-15T20:56:13.0000000+00:00'
-- author: Vasilis
-  changes:
-  - message: Made it so you can unbuckle players from Vehicles IF they are in incapacitated
-      (crit or dead).
-    type: Tweak
-  - message: You can no longer unbuckle yourself while you are incapacitated.
-    type: Fix
-  id: 5180
-  time: '2023-11-16T02:39:04.0000000+00:00'
 - author: EmoGarbage404
   changes:
   - message: Clicking actions in the HUD no longer triggers them multiple times.
@@ -3815,4 +3742,163 @@ Entries:
     type: Add
   id: 5662
   time: '2024-01-19T21:48:45.0000000+00:00'
+  url: null
+- author: spo9k
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043A\u0430\u0440\u0442\
+      \u0430 \u0410\u0432\u0440\u0438\u0442."
+    type: Tweak
+  id: 5663
+  time: '2024-01-21T02:48:10.0000000+00:00'
+  url: null
+- author: spo9k
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043A\u0430\u0440\u0442\
+      \u0430 Marathon"
+    type: Tweak
+  id: 5664
+  time: '2024-01-21T02:47:50.0000000+00:00'
+  url: null
+- author: Kit0vras
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u0441\u043E\u043B\u043D\u0435\u0447\u043D\u044B\u0445 \u043F\
+      \u0430\u043D\u0435\u043B\u0435\u0439 \u0438 \u0442\u0440\u0435\u043A\u0435\u0440\
+      \u0430."
+    type: Tweak
+  id: 5665
+  time: '2024-01-21T02:47:26.0000000+00:00'
+  url: null
+- author: ZoNeSRuS
+  changes:
+  - message: "\u0422\u042D\u0413 \u043C\u043E\u0436\u043D\u043E \u043A\u0443\u043F\
+      \u0438\u0442\u044C \u0432 \u043A\u0430\u0440\u0433\u043E \u0437\u0430 2\u043A\
+      ."
+    type: Add
+  - message: "\u0422\u042D\u0413 \u0443\u0434\u0430\u043B\u0435\u043D \u0441\u043E\
+      \ \u0432\u0441\u0435\u0445 \u043A\u0430\u0440\u0442."
+    type: Remove
+  - message: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0434\u0435\
+      \u0442\u0430\u043B\u0435\u0439 \u0432 \u0414\u0410\u041C\u0435 9>12"
+    type: Tweak
+  id: 5666
+  time: '2024-01-21T02:46:34.0000000+00:00'
+  url: null
+- author: Skriler
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043E\u0442\
+      \u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0442\u0440\u0430\u043D\
+      \u0441\u043F\u043E\u0440\u0442\u043D\u044B\u0445 \u0441\u0440\u0435\u0434\u0441\
+      \u0442\u0432."
+    type: Fix
+  id: 5667
+  time: '2024-01-21T02:44:56.0000000+00:00'
+  url: null
+- author: SkaldetSkaeg
+  changes:
+  - message: "\u0421\u043B\u0435\u0433\u043A\u0430 \u0438\u0437\u043C\u0435\u043D\u0438\
+      \u043B \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\
+      \u0438\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u0438\u043C\u0435\u043D\
+      \u044F\u043B\u0438\u0441\u044C \u043A\u0440\u0438\u043A\u0438 \u043F\u0440\u0435\
+      \u0434\u043C\u0435\u0442\u0430, \u0435\u0441\u043B\u0438 \u0442\u0430\u043A\u0438\
+      \u0435 \u0435\u0441\u0442\u044C"
+    type: Tweak
+  - message: "\u0421\u043C\u0435\u0445 \u042F\u041E \u0442\u0435\u043F\u0435\u0440\
+      \u044C \u0438\u043C\u0435\u0435\u0442 \u0438 \u043D\u0435 \u0433\u0435\u043D\
+      \u0434\u0435\u0440\u043D\u0443\u044E \u043F\u0440\u0438\u0432\u044F\u0437\u043A\
+      \u0443"
+    type: Tweak
+  - message: "\u0423\u0431\u0440\u0430\u043D \u0431\u0430\u0441\u0431\u0443\u0441\u0442\
+      \u044F\u0449\u0438\u0439 \u0441\u043C\u0435\u0445 \u0441 \u0448\u0430\u043F\u043A\
+      \u0438 \u0421\u0430\u043D\u0442\u044B"
+    type: Tweak
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0441\u043F\u0435\
+      \u0446 \u043A\u0440\u0438\u043A\u0438 \u0438 \u043F\u0440\u0435\u0434\u0441\u043C\
+      \u0435\u0440\u0442\u043D\u044B\u0435 \u0432\u0437\u0434\u043E\u0445\u0438 \u043E\
+      \u0434\u0435\u0436\u0434\u0435 \u0443\u0447\u0435\u043D\u043E\u0433\u043E"
+    type: Add
+  - message: "\u0423\u043D\u0430\u0442\u0445\u0430\u043C \u0434\u043E\u0431\u0430\u0432\
+      \u043B\u0435\u043D\u0430 \u044D\u043C\u043E\u0446\u0438\u044F \u0440\u044B\u0447\
+      \u0430\u043D\u0438\u044F"
+    type: Add
+  - message: "\u0421\u043B\u0430\u0439\u043C\u043E\u043B\u044E\u0434\u0430\u043C \u0434\
+      \u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u044D\u043C\u043E\u0446\u0438\
+      \u044F \u0431\u0443\u0440\u043B\u0435\u043D\u0438\u044F"
+    type: Add
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u044D\u043C\u043E\
+      \u0446\u0438\u044F \u0448\u0438\u043F\u0435\u043D\u0438\u044F \u0430\u0440\u0430\
+      \u0445\u043D\u0438\u0434\u0430\u043C"
+    type: Add
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0441\u043F\u0435\u0446\
+      \ \u0441\u043C\u0435\u0445 \u0434\u043B\u044F \u0431\u0435\u0440\u0435\u0442\
+      \u0430 \u0413\u0412"
+    type: Add
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\u0441\
+      \u0435\u043B\u044C\u0435!"
+    type: Add
+  - message: "\u0423\u0431\u0440\u0430\u043D\u043E \u0432\u0435\u0441\u0435\u043B\u044C\
+      \u0435!"
+    type: Remove
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0432\u0435\u0441\u0435\
+      \u043B\u044C\u0435!"
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\
+      \u0441\u0435\u043B\u044C\u0435!"
+    type: Fix
+  id: 5668
+  time: '2024-01-21T02:45:39.0000000+00:00'
+  url: null
+- author: spo9k
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043D\u043E\u0432\
+      \u0430\u044F \u043A\u0430\u0440\u0442\u0430 The Hive"
+    type: Add
+  - message: "\u0423\u0431\u0440\u0430\u043D\u0430 \u043A\u0430\u0440\u0442\u0430\
+      \ Gate Stations"
+    type: Remove
+  id: 5669
+  time: '2024-01-21T13:23:13.0000000+00:00'
+  url: null
+- author: TheArturZh
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0428\u043B\u0451\u043F\
+      '\u041E'\u0412\u0435\u043D\u0434"
+    type: Add
+  id: 5670
+  time: '2024-01-21T14:29:58.0000000+00:00'
+  url: null
+- author: SkaldetSkaeg
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0433\u0440\u043E\u043C\
+      \u043A\u043E\u0441\u0442\u044C \u0432 \u043F\u0440\u0435\u0434\u043C\u0435\u0442\
+      \u0430\u0445 \u0443\u0447\u0435\u043D\u044B\u0445."
+    type: Tweak
+  - message: "\u0417\u0432\u0443\u043A\u0438 \u0443\u0447\u0435\u043D\u043E\u0433\u043E\
+      \ \u043E\u0441\u0442\u0430\u043B\u0438\u0441\u044C \u0442\u043E\u043B\u044C\u043A\
+      \u043E \u0443 \u0433\u0430\u043B\u0441\u0442\u0443\u043A\u0430 \u0443\u0447\u0435\
+      \u043D\u043E\u0433\u043E \u0438 \u043F\u0430\u0440\u0430\u0434\u043D\u043E\u0439\
+      \ \u0444\u043E\u0440\u043C\u044B \u0443\u0447\u0435\u043D\u043E\u0433\u043E"
+    type: Tweak
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\u0441\
+      \u0435\u043B\u044C\u0435!"
+    type: Add
+  - message: "\u0423\u0431\u0440\u0430\u043D\u043E \u0432\u0435\u0441\u0435\u043B\u044C\
+      \u0435!"
+    type: Remove
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0432\u0435\u0441\u0435\
+      \u043B\u044C\u0435!"
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\
+      \u0441\u0435\u043B\u044C\u0435!"
+    type: Fix
+  id: 5671
+  time: '2024-01-22T00:08:15.0000000+00:00'
+  url: null
+- author: 21Melkuu
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0446\u0435\u043D\
+      \ \u0431\u0430\u0443\u043D\u0442\u0438 \u043A\u0430\u0440\u0433\u043E"
+    type: Tweak
+  id: 5672
+  time: '2024-01-22T00:07:52.0000000+00:00'
   url: null
