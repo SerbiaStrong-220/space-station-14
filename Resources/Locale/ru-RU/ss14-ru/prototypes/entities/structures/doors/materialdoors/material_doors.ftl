@@ -1,7 +1,7 @@
 ent-BaseMaterialDoor = дверь
     .desc = Дверь, куда она ведет?
 ent-MetalDoor = металлическая дверь
-    .desc = { ent-BaseMaterialDoor.desc }
+    .desc = { ent-BaseMaterialDoorNavMap.desc }
 ent-WoodDoor = деревянная дверь
     .desc = Дверь, куда она ведет?
 ent-PaperDoor = бумажная дверь

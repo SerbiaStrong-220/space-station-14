@@ -33,6 +33,7 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
+  - type: NavMapDoor
   - type: Door
     openDrawDepth: BlastDoors
     closedDrawDepth: BlastDoors
