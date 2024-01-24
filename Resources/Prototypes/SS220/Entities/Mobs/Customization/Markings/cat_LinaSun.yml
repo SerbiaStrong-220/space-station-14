@@ -118,7 +118,7 @@
 # Felinid Tails
 
 - type: marking
-  id: FelinidTailBasic
+  id: FelinidTails [6]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -131,7 +131,7 @@
     state: felinid_tail_D
 
 - type: marking
-  id: FelinidTailBasicWithBow
+  id: FelinidTails [5]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -146,7 +146,7 @@
     state: felinid_tail_C
 
 - type: marking
-  id: FelinidTailBasicWithBell
+  id: FelinidTails [4]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -161,7 +161,7 @@
     state: felinid_tail_B
 
 - type: marking
-  id: FelinidTailBasicWithBowAndBell
+  id: FelinidTails [3]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
