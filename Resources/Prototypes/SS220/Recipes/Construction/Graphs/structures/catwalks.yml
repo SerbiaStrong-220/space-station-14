@@ -1,0 +1,67 @@
+﻿- type: constructionGraph
+  id: SteelCatwalk
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: SteelCatwalk
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: WhiteCatwalk
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: DarkCatwalk
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+
+    - node: SteelCatwalk
+      entity: CatwalkSteel
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: WhiteCatwalk
+      entity: CatwalkWhiteSteel
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: DarkCatwalk
+      entity: CatwalkBlackSteel
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5

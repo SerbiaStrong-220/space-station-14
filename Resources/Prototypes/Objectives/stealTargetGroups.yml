@@ -441,3 +441,10 @@
   sprite:
     sprite: Mobs/Animals/monkey.rsi
     state: monkey
+
+- type: stealTargetGroup
+  id: AnimalTropico
+  name: Tropico
+  sprite:
+    sprite: Mobs/Animals/crab.rsi
+    state: crab

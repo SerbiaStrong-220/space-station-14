@@ -1,6 +1,8 @@
 - type: entity
   id: CrateCargoLuxuryHardsuit
   parent: CratePirate
+  name: luxury mining hardsuit crate
+  description: Finally, a hardsuit Quartermasters could call their own. Centcomm has heard you, now stop asking.
   components:
   - type: StorageFill
     contents:

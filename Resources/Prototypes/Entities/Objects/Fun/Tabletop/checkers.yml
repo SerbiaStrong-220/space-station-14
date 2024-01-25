@@ -6,7 +6,7 @@
   description: A checkerboard. Pieces included!
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/chessboard.rsi
+    sprite: SS220/Objects/Fun/Tabletop/chessboard.rsi #SS220-Tabletop-Resprite
     state: chessboard
   - type: TabletopGame
     boardName: tabletop-checkers-board-name
@@ -27,7 +27,7 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/chessboard_tabletop.rsi
+    sprite: SS220/Objects/Fun/Tabletop/chessboard_tabletop.rsi #SS220-Tabletop-Resprite
     state: chessboard_tabletop
 
 # The pieces
@@ -37,7 +37,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/checker_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
       state: w_checker_piece
 
 - type: entity
@@ -46,7 +46,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/checker_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
       state: w_checker_crown
 
 - type: entity
@@ -55,7 +55,7 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/checker_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
       state: b_checker_piece
 
 - type: entity
@@ -64,5 +64,5 @@
   parent: BaseTabletopPiece
   components:
     - type: Sprite
-      sprite: Objects/Fun/Tabletop/checker_pieces.rsi
+      sprite: SS220/Objects/Fun/Tabletop/checker_pieces.rsi #SS220-Tabletop-Resprite
       state: b_checker_crown

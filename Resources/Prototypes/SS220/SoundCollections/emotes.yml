@@ -43,6 +43,25 @@
     - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
 
 - type: soundCollection
+  id: LizardGrowl
+  files:
+    - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_1.ogg
+    - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_2.ogg
+
+- type: soundCollection
+  id: SlimeBubbles
+  files:
+    - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_1.ogg
+    - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_2.ogg
+
+- type: soundCollection
+  id: ArachnidHiss
+  files:
+    - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_1.ogg
+    - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_2.ogg
+    - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_3.ogg
+
+- type: soundCollection
   id: MaleBossLaugh
   files:
     - /Audio/SS220/Voice/Boss/male_boss_laugh_1.ogg
@@ -54,7 +73,6 @@
   files:
     - /Audio/SS220/Voice/Santa/male_santa_laugh_1.ogg
     - /Audio/SS220/Voice/Santa/male_santa_laugh_2.ogg
-    - /Audio/SS220/Voice/Santa/male_santa_laugh_3.ogg
 
 - type: soundCollection
   id: MaleEvilLaugh
@@ -62,3 +80,29 @@
     - /Audio/SS220/Voice/Evil/male_evil_laugh_1.ogg
     - /Audio/SS220/Voice/Evil/male_evil_laugh_2.ogg
     - /Audio/SS220/Voice/Evil/male_evil_laugh_3.ogg
+
+- type: soundCollection
+  id: MaleScientistChoke
+  files:
+    - /Audio/SS220/Voice/Scientist/male_scientist_choke_1.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_choke_2.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_choke_3.ogg
+
+- type: soundCollection
+  id: MaleScientistScream
+  files:
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_1.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_2.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_3.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_4.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_5.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_6.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_7.ogg
+    - /Audio/SS220/Voice/Scientist/male_scientist_scream_8.ogg
+
+- type: soundCollection
+  id: MaleDoctorLaugh
+  files:
+    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_1.ogg
+    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_2.ogg
+    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_3.ogg

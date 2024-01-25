@@ -67,6 +67,7 @@
       - id: ClothingUniformJumpsuitHosFormal
       - id: ClothingHeadHatCapHoS # Corvax-SecFashion
       - id: ClothingOuterCoatHoSGreatcoat # Corvax-Resprite
+      - id: ClothingMaskNeckGaiter
 
 - type: entity
   id: DresserQuarterMasterFilled

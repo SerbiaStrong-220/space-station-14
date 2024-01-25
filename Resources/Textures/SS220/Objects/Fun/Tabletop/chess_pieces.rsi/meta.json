@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by TTTomaTTT for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "w_pawn"
+        },
+        {
+            "name": "w_rook"
+        },
+        {
+            "name": "w_knight"
+        },
+        {
+            "name": "w_bishop"
+        },
+        {
+            "name": "w_king"
+        },
+        {
+            "name": "w_queen"
+        },
+        {
+            "name": "b_pawn"
+        },
+        {
+            "name": "b_rook"
+        },
+        {
+            "name": "b_knight"
+        },
+        {
+            "name": "b_bishop"
+        },
+        {
+            "name": "b_king"
+        },
+        {
+            "name": "b_queen"
+        }
+    ]
+}

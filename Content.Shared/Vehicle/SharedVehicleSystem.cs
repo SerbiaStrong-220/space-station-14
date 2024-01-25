@@ -5,6 +5,7 @@ using Content.Shared.Audio;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Hands;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.Movement.Components;
@@ -39,7 +40,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandVirtualItemSystem _virtualItemSystem = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtualItemSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
@@ -283,10 +284,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Direction.South => component.SouthOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
-            Direction.West => component.WestOver
+            // SS220-vehicle-fix
+            Direction.West or Direction.SouthWest or Direction.NorthWest => component.WestOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
-            Direction.East => component.EastOver
+            // SS220-vehicle-fix
+            Direction.East or Direction.SouthEast or Direction.NorthEast => component.EastOver
                 ? (int) DrawDepth.DrawDepth.Doors
                 : (int) DrawDepth.DrawDepth.WallMountedItems,
             _ => (int) DrawDepth.DrawDepth.WallMountedItems

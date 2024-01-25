@@ -1,0 +1,40 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+
+                      Title="{Loc 'shlepovend-ui-window'}"
+                      Resizable="False"
+                      MinSize="810 750"
+                      SetSize="810 750">
+
+<BoxContainer Orientation="Vertical" Margin="5 5">
+    <!-- Top Bar (Highest role, available tokens) -->
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <Label Text="subscription level placeholder" Name="SubscriptionLabel" VerticalAlignment="Top" HorizontalExpand="True"/>
+        <TextureRect
+            TexturePath="/Textures/SS220/Interface/Misc/sponsor_cash.rsi/icon.png"
+            VerticalAlignment="Center"
+            Stretch="KeepAspectCentered"
+            VerticalExpand="True"/>
+        <Label Text="tokens left placeholder" Name = "TokensLabel" VerticalAlignment="Top" HorizontalExpand="True"/>
+    </BoxContainer>
+
+    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" VScrollEnabled="True">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Name="RewardGroupList"/>
+    </ScrollContainer>
+
+    <!-- Footer (DS status, boosty link) -->
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SetHeight="40" Align="End">
+        <Label Text="{Loc 'shlepovend-discord-not-linked'}" Modulate="#ff0000" Name="NotLinkedLabel"/>
+        <Button Name="DiscordButton"
+            Text="{Loc 'shlepovend-go-to-discord'}"
+            HorizontalExpand="False"/>
+        <Button Name="BoostyButton"
+            Text="{Loc 'shlepovend-go-to-boosty'}"
+            HorizontalExpand="False"/>
+    </BoxContainer>
+</BoxContainer>
+
+</controls:FancyWindow>

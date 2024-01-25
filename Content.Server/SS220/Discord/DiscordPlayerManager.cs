@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.Players;
 using Content.Shared.SS220.Discord;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -48,12 +49,12 @@ public sealed class DiscordPlayerManager : IPostInjectInit
 
     void IPostInjectInit.PostInject()
     {
-        _playerManager.PlayerStatusChanged += PlayerManager_PlayerStatusChanged; ;
+        _playerManager.PlayerStatusChanged += PlayerManager_PlayerStatusChanged;
     }
 
     private async void PlayerManager_PlayerStatusChanged(object? sender, SessionStatusEventArgs e)
     {
-        if (e.NewStatus == SessionStatus.Connected)
+        if (e.NewStatus == SessionStatus.InGame)
         {
             await UpdateUserDiscordRolesStatus(e);
         }
@@ -70,6 +71,13 @@ public sealed class DiscordPlayerManager : IPostInjectInit
                 Info = info
             },
             e.Session.Channel);
+
+            // Cache info in content data
+            var contentPlayerData = e.Session.ContentData();
+            if (contentPlayerData == null)
+                return;
+
+            contentPlayerData.SponsorInfo = info;
         }
     }
 

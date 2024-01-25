@@ -1,0 +1,11 @@
+- type: entity
+  id: CrateEngineeringTEG
+  parent: CrateEngineeringSecure
+  name: ящик с двигателем ТЭГ
+  description: Упакован с помощью блюспейс технологии. Не открывать!
+  components:
+  - type: StorageFill
+    contents:
+      - id: TegCenter
+      - id: TegCirculator
+        amount: 2
