@@ -60,7 +60,8 @@ public sealed partial class ShlepovendItemButton : ContainerButton
         {
             _itemInstance = _entMan.SpawnEntity(protoId, MapCoordinates.Nullspace);
             ItemView.SetEntity(_itemInstance);
-            ItemNameLabel.Text = _entMan.GetComponent<MetaDataComponent>(_itemInstance.Value).EntityName;
+            var meta = _entMan.GetComponent<MetaDataComponent>(_itemInstance.Value);
+            ToolTip = meta.EntityName + Environment.NewLine + meta.EntityDescription;
         }
     }
 

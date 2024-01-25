@@ -5,12 +5,12 @@
 
                  SetSize="150 150"
                  Margin="5 5"
-                 RectClipContent="True">
+                 RectClipContent="True"
+                 TooltipDelay="0">
     <PanelContainer Name="Panel"/>
     <BoxContainer Orientation="Vertical" Name="Root">
-        <Label Text="Group Name" Name="ItemNameLabel"/>
-        <Label Text="0 токенов" Name="PriceLabel"/>
-        <SpriteView Scale="2 2" Name="ItemView"/>
+        <Label Text="0 токенов" Name="PriceLabel" Align="Center"/>
+        <SpriteView Scale="3 3" Name="ItemView"/>
         <Label Text="Недоступно" Name="AvailableLabel" Modulate="#ff0000" Align="Center" Access="Public"/>
     </BoxContainer>
 </ContainerButton>
