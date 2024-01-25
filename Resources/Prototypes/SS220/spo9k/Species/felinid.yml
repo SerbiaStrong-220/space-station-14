@@ -16,14 +16,10 @@
     - HeadOfPersonnel
     - Quartermaster
     - ChiefEngineer
-    - AtmosphericTechnician
-    - StationEngineer
     - Chemist
     - ChiefMedicalOfficer
-    - MedicalDoctor
     - Paramedic
     - ResearchDirector
-    - Scientist
     - Brigmedic
     - Detective
     - HeadOfSecurity
@@ -43,11 +39,11 @@
     Tail:
       points: 1
       required: true
-      defaultMarkings: [ CatTail ]
+      defaultMarkings: [ FelinidTails ]
     HeadTop:
       points: 1
       required: true
-      defaultMarkings: [ CatEars ]
+      defaultMarkings: [ FelinidEars ]
     Chest:
       points: 1
       required: false
