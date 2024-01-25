@@ -14,14 +14,14 @@
 
 - type: ttsVoice
   name: Дмитрий Пучков
-  description: ''
+  description: ""
   sex: Male
   speaker: puchkow
   id: puchkow
 
 - type: ttsVoice
   name: Мориарти
-  description: ''
+  description: ""
   sex: Male
   speaker: moriarti
   id: moriarti
@@ -684,3 +684,79 @@
   speaker: horner
   id: horner
 
+- type: ttsVoice
+  name: Амит Таккар
+  description: Голос персонажа Амит Таккар из игры Hogwarts Legacy
+  sex: Male
+  speaker: amitkakkar
+  id: amitkakkar
+
+- type: ttsVoice
+  name: Элеазар Фиг
+  description: Голос персонажа Элеазар Фиг из игры Hogwarts Legacy
+  sex: Male
+  speaker: eleazarfig
+  id: eleazarfig
+
+- type: ttsVoice
+  name: Эрни Ларк
+  description: Голос персонажа Эрни Ларк из игры Hogwarts Legacy
+  sex: Male
+  speaker: ernielark
+  id: ernielark
+
+- type: ttsVoice
+  name: Игнатия Уайлдсмит
+  description: Голос персонажа Игнатия Уайлдсмит из игры Hogwarts Legacy
+  sex: Female
+  speaker: ignatiaflootravel
+  id: ignatiaflootravel
+
+- type: ttsVoice
+  name: Лодгок
+  description: Голос персонажа Лодгок из игры Hogwarts Legacy
+  sex: Male
+  speaker: lodgok
+  id: lodgok
+
+- type: ttsVoice
+  name: Финеас Найджелус Блэк
+  description: Голос персонажа Финеас Найджелус Блэк из игры Hogwarts Legacy
+  sex: Male
+  speaker: phineasblack
+  id: phineasblack
+
+- type: ttsVoice
+  name: Ранрок
+  description: Голос персонажа Ранрок из игры Hogwarts Legacy
+  sex: Male
+  speaker: ranrak
+  id: ranrak
+
+- type: ttsVoice
+  name: Виктор Руквуд
+  description: Голос персонажа Виктор Руквуд из игры Hogwarts Legacy
+  sex: Male
+  speaker: victorrookwood
+  id: victorrookwood
+
+- type: ttsVoice
+  name: Зенобия Ноук
+  description: Голос персонажа Зенобия Ноук из игры Hogwarts Legacy
+  sex: Female
+  speaker: zenobianoke
+  id: zenobianoke
+
+- type: ttsVoice
+  name: Глэдвин Мун
+  description: Голос персонажа Глэдвин Мун из игры Hogwarts Legacy
+  sex: Male
+  speaker: gladwinmoon
+  id: gladwinmoon
+
+- type: ttsVoice
+  name: Матильда Уизли
+  description: Голос персонажа Матильда Уизли из игры Hogwarts Legacy
+  sex: Female
+  speaker: matildaweasley
+  id: matildaweasley
