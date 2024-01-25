@@ -1,4 +1,4 @@
-﻿reagent-effect-condition-guidebook-total-damage =
+reagent-effect-condition-guidebook-total-damage =
     { $max ->
         [2147483648] тело имеет по крайней мере { NATURALFIXED($min, 2) } общего урона
        *[other]
@@ -7,7 +7,6 @@
                *[other] имеет между { NATURALFIXED($min, 2) } и { NATURALFIXED($max, 2) } общего урона
             }
     }
-
 reagent-effect-condition-guidebook-reagent-threshold =
     { $max ->
         [2147483648] в кровеносной системе имеется по крайней мере { NATURALFIXED($min, 2) }ед. { $reagent }
@@ -27,7 +26,6 @@ reagent-effect-condition-guidebook-solution-temperature =
                *[other] между { NATURALFIXED($min, 2) }k и { NATURALFIXED($max, 2) }k
             }
     }
-
 reagent-effect-condition-guidebook-body-temperature =
     температура тела составляет { $max ->
         [2147483648] не менее { NATURALFIXED($min, 2) }k
@@ -37,12 +35,11 @@ reagent-effect-condition-guidebook-body-temperature =
                *[other] между { NATURALFIXED($min, 2) }k и { NATURALFIXED($max, 2) }k
             }
     }
-
 reagent-effect-condition-guidebook-organ-type =
     метаболизирующий орган { $shouldhave ->
         [true] это
        *[false] это не
-    } { INDEFINITE($name) } { $name } орган
+    } { $name } орган
 reagent-effect-condition-guidebook-has-tag =
     цель { $invert ->
         [true] не имеет

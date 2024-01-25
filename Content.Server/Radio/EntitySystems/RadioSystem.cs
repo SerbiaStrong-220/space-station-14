@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
@@ -6,7 +7,9 @@ using Content.Server.VoiceMask;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
+using Content.Shared.SS220.Radio;
 using Content.Shared.Radio.Components;
+using Content.Shared.SS220.Radio.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;

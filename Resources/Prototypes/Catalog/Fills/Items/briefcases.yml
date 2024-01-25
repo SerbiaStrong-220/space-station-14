@@ -42,4 +42,22 @@
       - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
       - id: ClothingShoesBootsLaceup
       - id: SpaceCashFake50000
+      - id: RubberStampTrader
       # SS220-lobbying-bundle-fake-money end
+
+- type: entity
+  id: BriefcaseThiefBribingBundleFilled
+  name: brown briefcase
+  parent: BriefcaseSyndie
+  suffix: Thief, Spesos
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingEyesGlassesSunglasses
+      - id: SpaceCash20000
+        amount: 1
+      - id: ClothingUniformJumpsuitTacticool
+      - id: ClothingOuterCoatJensen
+      - id: ClothingHandsGlovesCombat
+      - id: ClothingMaskNeckGaiter
+      - id: ToyFigurineThief

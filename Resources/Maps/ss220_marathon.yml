@@ -7669,13 +7669,6 @@ entities:
       parent: 6999
     - type: InstantAction
       container: 6999
-- proto: AdvancedCapacitorStockPart
-  entities:
-  - uid: 20974
-    components:
-    - type: Transform
-      pos: 2.2878256,21.230333
-      parent: 30
 - proto: AirAlarm
   entities:
   - uid: 6224
@@ -11867,6 +11860,23 @@ entities:
       parent: 30
 - proto: AirlockMedicalGlassLocked
   entities:
+  - uid: 693
+    components:
+    - type: Transform
+      pos: -12.5,-7.5
+      parent: 30
+  - uid: 801
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -20.5,-8.5
+      parent: 30
+  - uid: 5351
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -20.5,-9.5
+      parent: 30
   - uid: 6780
     components:
     - type: Transform
@@ -11876,8 +11886,8 @@ entities:
   - uid: 6798
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -12.5,-7.5
+      rot: -1.5707963267948966 rad
+      pos: -26.5,-8.5
       parent: 30
   - uid: 6799
     components:
@@ -11914,6 +11924,12 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -30.5,-6.5
+      parent: 30
+  - uid: 9696
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -26.5,-9.5
       parent: 30
   - uid: 10025
     components:
@@ -12936,13 +12952,6 @@ entities:
     components:
     - type: Transform
       pos: -17.6043,-32.2784
-      parent: 30
-- proto: AmplifierSubspaceStockPart
-  entities:
-  - uid: 801
-    components:
-    - type: Transform
-      pos: 2.874536,20.634825
       parent: 30
 - proto: AnomalyScanner
   entities:
@@ -44505,6 +44514,11 @@ entities:
     - type: Transform
       pos: 2.4657774,20.884964
       parent: 30
+  - uid: 20974
+    components:
+    - type: Transform
+      pos: 2.2878256,21.230333
+      parent: 30
   - uid: 20982
     components:
     - type: Transform
@@ -62765,6 +62779,13 @@ entities:
     - type: Transform
       pos: -40.5,-22.5
       parent: 30
+- proto: DrinkGildlagerBottleFull
+  entities:
+  - uid: 22265
+    components:
+    - type: Transform
+      pos: 7.564439,42.814713
+      parent: 30
 - proto: DrinkGlass
   entities:
   - uid: 703
@@ -62803,13 +62824,6 @@ entities:
     components:
     - type: Transform
       pos: 7.5231714,44.698692
-      parent: 30
-- proto: DrinkGoldschlagerBottleFull
-  entities:
-  - uid: 22265
-    components:
-    - type: Transform
-      pos: 7.564439,42.814713
       parent: 30
 - proto: DrinkGrapeCan
   entities:
@@ -66556,11 +66570,6 @@ entities:
     - type: Transform
       pos: -39.56788,9.504957
       parent: 30
-  - uid: 22221
-    components:
-    - type: Transform
-      pos: -16.60056,20.490124
-      parent: 30
   - uid: 22222
     components:
     - type: Transform
@@ -66942,6 +66951,13 @@ entities:
     components:
     - type: Transform
       pos: -57.492546,-42.414898
+      parent: 30
+- proto: FoodBurgerRat
+  entities:
+  - uid: 20581
+    components:
+    - type: Transform
+      pos: -16.585304,20.429144
       parent: 30
 - proto: FoodCakeBirthdaySlice
   entities:
@@ -92809,11 +92825,6 @@ entities:
     - type: Transform
       pos: 2.5,18.5
       parent: 30
-  - uid: 694
-    components:
-    - type: Transform
-      pos: -18.5,20.5
-      parent: 30
   - uid: 6379
     components:
     - type: Transform
@@ -104435,6 +104446,18 @@ entities:
     - type: Transform
       pos: -22.465681,-16.499807
       parent: 30
+- proto: MicroManipulatorStockPart
+  entities:
+  - uid: 20970
+    components:
+    - type: Transform
+      pos: 2.559926,21.402208
+      parent: 30
+  - uid: 22099
+    components:
+    - type: Transform
+      pos: 2.731801,21.495958
+      parent: 30
 - proto: MicrophoneInstrument
   entities:
   - uid: 8320
@@ -104848,18 +104871,6 @@ entities:
     components:
     - type: Transform
       pos: -75.24839,-66.594925
-      parent: 30
-- proto: NanoManipulatorStockPart
-  entities:
-  - uid: 20970
-    components:
-    - type: Transform
-      pos: 2.559926,21.402208
-      parent: 30
-  - uid: 22099
-    components:
-    - type: Transform
-      pos: 2.731801,21.495958
       parent: 30
 - proto: NitrogenCanister
   entities:
@@ -105978,20 +105989,6 @@ entities:
       parent: 30
 - proto: PlasmaCanister
   entities:
-  - uid: 5351
-    components:
-    - type: Transform
-      pos: 18.5,-14.5
-      parent: 30
-    - type: AtmosDevice
-      joinedGrid: 30
-  - uid: 9696
-    components:
-    - type: Transform
-      pos: 18.5,-13.5
-      parent: 30
-    - type: AtmosDevice
-      joinedGrid: 30
   - uid: 10510
     components:
     - type: Transform
@@ -112151,11 +112148,6 @@ entities:
       parent: 30
 - proto: Rack
   entities:
-  - uid: 693
-    components:
-    - type: Transform
-      pos: -16.5,20.5
-      parent: 30
   - uid: 789
     components:
     - type: Transform
@@ -122041,6 +122033,13 @@ entities:
     - type: Transform
       pos: 26.5,1.5
       parent: 30
+- proto: SpawnMobSecDogRoxi
+  entities:
+  - uid: 694
+    components:
+    - type: Transform
+      pos: -31.5,52.5
+      parent: 30
 - proto: SpawnMobShiva
   entities:
   - uid: 4405
@@ -127779,13 +127778,6 @@ entities:
     - type: Transform
       pos: 13.5,6.5
       parent: 30
-- proto: TransmitterSubspaceStockPart
-  entities:
-  - uid: 20979
-    components:
-    - type: Transform
-      pos: 3.468286,20.58795
-      parent: 30
 - proto: TrashBag
   entities:
   - uid: 16169
@@ -127816,13 +127808,6 @@ entities:
     components:
     - type: Transform
       pos: 6.5776615,21.697325
-      parent: 30
-- proto: TreatmentSubspaceStockPart
-  entities:
-  - uid: 21164
-    components:
-    - type: Transform
-      pos: 3.483911,20.71295
       parent: 30
 - proto: TwoWayLever
   entities:
@@ -149662,6 +149647,13 @@ entities:
       parent: 30
     - type: WarpPoint
       location: Атмос
+  - uid: 20620
+    components:
+    - type: Transform
+      pos: -40.5,26.5
+      parent: 30
+    - type: WarpPoint
+      location: Криоподы
 - proto: WarpPointBombing
   entities:
   - uid: 234

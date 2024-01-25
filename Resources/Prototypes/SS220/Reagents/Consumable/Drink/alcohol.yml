@@ -1,0 +1,22 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: reagent
+  id: Glintwine
+  name: reagent-name-glintwine 
+  parent: BaseAlcohol
+  desc: reagent-desc-glintwine
+  physicalDesc: reagent-physical-desc-piquant
+  flavor: fruity
+  color: "#821f1d"
+  recognizable: true
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glintveinglass.rsi
+    state: icon
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15

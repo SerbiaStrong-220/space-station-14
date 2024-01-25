@@ -1,2 +1,11 @@
 - type: Tag
+  id: DeathNettle
+
+- type: Tag
+  id: DeusAmbrosia
+
+- type: Tag
+  id: MeatSlime
+
+- type: Tag
   id: SecDogWearable

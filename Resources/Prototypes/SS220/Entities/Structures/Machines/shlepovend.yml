@@ -1,0 +1,24 @@
+- type: entity
+  id: Shlepovend
+  parent: BaseStructure
+  name: Шлёп'О'Венд
+  description: Богатый ассортимент одежды и аксессуаров от межзвёздной компании "Шлёпа и Ко". Только по ежемесячной подписке!
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/sponsor_machine.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal-unshaded"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+  - type: InteractionOutline
+  - type: Shlepovend
+  - type: ActivatableUI
+    key: enum.ShlepovendUiKey.Key
+  - type: UserInterface
+    interfaces:
+      - key: enum.ShlepovendUiKey.Key
+        type: ShlepovendBoundUserInterface

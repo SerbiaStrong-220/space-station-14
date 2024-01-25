@@ -1,4 +1,4 @@
-# Accents that work off of word replacements.
+﻿# Accents that work off of word replacements.
 
 # this is kind of dumb but localization demands it.
 # i guess you could just specify the prefix ('mobster') and count and let the system fill it
@@ -895,7 +895,6 @@
     accent-slavic-replaced-280: accent-slavic-replacement-280
     accent-slavic-replaced-281: accent-slavic-replacement-281
     accent-slavic-replaced-282: accent-slavic-replacement-282
-
 
 # For the chat sanitization system
 - type: accent

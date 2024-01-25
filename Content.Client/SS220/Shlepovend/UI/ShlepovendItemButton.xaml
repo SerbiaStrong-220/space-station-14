@@ -1,0 +1,16 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<ContainerButton xmlns="https://spacestation14.io"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+                 SetSize="150 150"
+                 Margin="5 5"
+                 RectClipContent="True"
+                 TooltipDelay="0">
+    <PanelContainer Name="Panel"/>
+    <BoxContainer Orientation="Vertical" Name="Root">
+        <Label Text="0 токенов" Name="PriceLabel" Align="Center"/>
+        <SpriteView Scale="3 3" Name="ItemView"/>
+        <Label Text="Недоступно" Name="AvailableLabel" Modulate="#ff0000" Align="Center" Access="Public"/>
+    </BoxContainer>
+</ContainerButton>

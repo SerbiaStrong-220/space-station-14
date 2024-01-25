@@ -23,7 +23,9 @@ namespace Content.Shared.Speech
             if (component.Enabled == value)
                 return;
 
-            Dirty(component);
+            component.Enabled = value;
+
+            Dirty(uid, component);
         }
 
         private void OnSpeakAttempt(SpeakAttemptEvent args)

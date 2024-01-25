@@ -198,7 +198,7 @@
         - HandLabeler
         - GlowstickBase
         - Bucket
-        - RadioHandheld
+        - HandheldRadio #SS220 Radio
         - GeigerCounter
         - Beaker
         - ClothingMaskGas
