@@ -13086,42 +13086,10 @@ entities:
       parent: 30
 - proto: AmeController
   entities:
-  - uid: 9476
-    components:
-    - type: Transform
-      pos: -11.5,-27.5
-      parent: 30
-- proto: AmePart
-  entities:
   - uid: 841
     components:
     - type: Transform
-      pos: -17.338675,-32.512775
-      parent: 30
-  - uid: 842
-    components:
-    - type: Transform
-      pos: -17.44805,-32.356525
-      parent: 30
-  - uid: 865
-    components:
-    - type: Transform
-      pos: -17.6043,-32.2784
-      parent: 30
-  - uid: 20752
-    components:
-    - type: Transform
-      pos: -17.29358,-32.30184
-      parent: 30
-  - uid: 20753
-    components:
-    - type: Transform
-      pos: -17.621704,-32.473717
-      parent: 30
-  - uid: 20754
-    components:
-    - type: Transform
-      pos: -17.51206,-32.418644
+      pos: -17.5,-32.5
       parent: 30
 - proto: AnomalyScanner
   entities:
@@ -16407,35 +16375,16 @@ entities:
       parent: 30
 - proto: BoxFolderBlack
   entities:
-  - uid: 1510
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 1509
-    - type: Physics
-      canCollide: False
   - uid: 5050
     components:
     - type: Transform
       pos: -22.461006,35.471382
       parent: 30
-  - uid: 6708
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 6707
-    - type: Physics
-      canCollide: False
   - uid: 7488
     components:
-    - type: MetaData
-      flags: InContainer
     - type: Transform
-      parent: 7428
-    - type: Physics
-      canCollide: False
+      pos: -57.58087,30.465866
+      parent: 30
   - uid: 9318
     components:
     - type: Transform
@@ -16458,35 +16407,11 @@ entities:
       parent: 30
 - proto: BoxFolderBlue
   entities:
-  - uid: 1514
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 1509
-    - type: Physics
-      canCollide: False
   - uid: 5350
     components:
     - type: Transform
       pos: -52.361404,33.068413
       parent: 30
-  - uid: 6729
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 6707
-    - type: Physics
-      canCollide: False
-  - uid: 7535
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 7428
-    - type: Physics
-      canCollide: False
   - uid: 20692
     components:
     - type: Transform
@@ -16497,32 +16422,6 @@ entities:
     - type: Transform
       pos: 41.545937,38.59172
       parent: 30
-- proto: BoxFolderGreen
-  entities:
-  - uid: 1511
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 1509
-    - type: Physics
-      canCollide: False
-  - uid: 6712
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 6707
-    - type: Physics
-      canCollide: False
-  - uid: 7534
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 7428
-    - type: Physics
-      canCollide: False
 - proto: BoxFolderGrey
   entities:
   - uid: 1403
@@ -16530,14 +16429,6 @@ entities:
     - type: Transform
       pos: -43.46808,-5.445975
       parent: 30
-  - uid: 1513
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 1509
-    - type: Physics
-      canCollide: False
   - uid: 4206
     components:
     - type: Transform
@@ -16548,22 +16439,11 @@ entities:
     - type: Transform
       pos: -11.490971,34.71304
       parent: 30
-  - uid: 6732
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 6707
-    - type: Physics
-      canCollide: False
   - uid: 7543
     components:
-    - type: MetaData
-      flags: InContainer
     - type: Transform
-      parent: 7428
-    - type: Physics
-      canCollide: False
+      pos: -57.51837,30.840866
+      parent: 30
   - uid: 12865
     components:
     - type: Transform
@@ -16576,14 +16456,6 @@ entities:
     - type: Transform
       pos: -30.44667,51.581604
       parent: 30
-  - uid: 1515
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 1509
-    - type: Physics
-      canCollide: False
   - uid: 2157
     components:
     - type: Transform
@@ -16599,22 +16471,6 @@ entities:
     - type: Transform
       pos: -13.521015,42.764824
       parent: 30
-  - uid: 6731
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 6707
-    - type: Physics
-      canCollide: False
-  - uid: 7455
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 7428
-    - type: Physics
-      canCollide: False
   - uid: 9591
     components:
     - type: Transform
@@ -16664,14 +16520,6 @@ entities:
       parent: 30
 - proto: BoxFolderYellow
   entities:
-  - uid: 1512
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 1509
-    - type: Physics
-      canCollide: False
   - uid: 4481
     components:
     - type: Transform
@@ -16682,22 +16530,6 @@ entities:
     - type: Transform
       pos: -7.4440956,34.21304
       parent: 30
-  - uid: 6725
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 6707
-    - type: Physics
-      canCollide: False
-  - uid: 7536
-    components:
-    - type: MetaData
-      flags: InContainer
-    - type: Transform
-      parent: 7428
-    - type: Physics
-      canCollide: False
   - uid: 9616
     components:
     - type: Transform
@@ -64455,112 +64287,16 @@ entities:
     - type: Transform
       pos: -48.5,29.5
       parent: 30
-    - type: Storage
-      storedItems:
-        1510:
-          position: 0,0
-          _rotation: South
-        1511:
-          position: 1,0
-          _rotation: South
-        1512:
-          position: 2,0
-          _rotation: South
-        1513:
-          position: 3,0
-          _rotation: South
-        1514:
-          position: 4,0
-          _rotation: South
-        1515:
-          position: 5,0
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1510
-          - 1511
-          - 1512
-          - 1513
-          - 1514
-          - 1515
   - uid: 6707
     components:
     - type: Transform
       pos: -51.5,33.5
       parent: 30
-    - type: Storage
-      storedItems:
-        6708:
-          position: 0,0
-          _rotation: South
-        6712:
-          position: 1,0
-          _rotation: South
-        6725:
-          position: 2,0
-          _rotation: South
-        6729:
-          position: 3,0
-          _rotation: South
-        6731:
-          position: 4,0
-          _rotation: South
-        6732:
-          position: 5,0
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 6708
-          - 6712
-          - 6725
-          - 6729
-          - 6731
-          - 6732
   - uid: 7428
     components:
     - type: Transform
       pos: -55.5,32.5
       parent: 30
-    - type: Storage
-      storedItems:
-        7455:
-          position: 0,0
-          _rotation: South
-        7488:
-          position: 1,0
-          _rotation: South
-        7534:
-          position: 2,0
-          _rotation: South
-        7535:
-          position: 3,0
-          _rotation: South
-        7536:
-          position: 4,0
-          _rotation: South
-        7543:
-          position: 5,0
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 7455
-          - 7488
-          - 7534
-          - 7535
-          - 7536
-          - 7543
   - uid: 7924
     components:
     - type: Transform
@@ -113093,11 +112829,6 @@ entities:
     components:
     - type: Transform
       pos: -3.5,22.5
-      parent: 30
-  - uid: 905
-    components:
-    - type: Transform
-      pos: -17.5,-32.5
       parent: 30
   - uid: 1623
     components:
