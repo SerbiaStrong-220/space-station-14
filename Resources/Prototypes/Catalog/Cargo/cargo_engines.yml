@@ -76,7 +76,7 @@
     sprite: Structures/Power/Generation/Tesla/generator.rsi
     state: icon
   product: CrateEngineeringTeslaGenerator
-  cost: 4000
+  cost: 8000 #ss220 rebalance
   category: Engineering
   group: market
 
