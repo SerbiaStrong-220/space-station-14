@@ -2,7 +2,7 @@
   id: Thermoelectricgenerator
   parent: BaseMachineCircuitboard
   name: термоэлектрический генератор (машинная плата)
-  description: Печатная плата для термоэлектрического генератора
+  description: Печатная плата для термоэлектрического генератора.
   components:
   - type: Sprite
     state: engineering
