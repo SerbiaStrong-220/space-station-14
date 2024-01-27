@@ -421,6 +421,8 @@
       - ThrusterMachineCircuitboard
       - GyroscopeMachineCircuitboard
       - MiniGravityGeneratorCircuitboard
+      - Thermoelectricgenerator #ss220 thermoelectric generator board
+      - ThermoelectricgeneratorTurbine #ss220 thermoelectric generator board
       - GasRecyclerMachineCircuitboard
       - SeedExtractorMachineCircuitboard
       - AnalysisComputerCircuitboard

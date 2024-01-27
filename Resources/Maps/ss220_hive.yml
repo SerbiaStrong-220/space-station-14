@@ -78998,7 +78998,7 @@ entities:
       parent: 1
     - type: AtmosDevice
       joinedGrid: 1
-- proto: GasMinerNitrogenStationLarge
+- proto: GasMinerNitrogenStation
   entities:
   - uid: 1908
     components:
@@ -79007,7 +79007,7 @@ entities:
       parent: 1
     - type: AtmosDevice
       joinedGrid: 1
-- proto: GasMinerOxygenStationLarge
+- proto: GasMinerOxygenStation
   entities:
   - uid: 1909
     components:
