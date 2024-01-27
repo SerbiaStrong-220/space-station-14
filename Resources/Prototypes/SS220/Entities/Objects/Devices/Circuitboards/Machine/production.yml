@@ -17,7 +17,7 @@
   id: ThermoelectricgeneratorTurbine
   parent: BaseMachineCircuitboard
   name: циркуляционный насос (машинная плата)
-  description: Печатная плата для термоэлектрического генератора циркуляционного насоса
+  description: Печатная плата для циркуляционного насоса термоэлектрического генератора.
   components:
   - type: Sprite
     state: engineering
