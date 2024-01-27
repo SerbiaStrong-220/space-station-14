@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: marking
-  id: Фелинидские уши с пирсингом
+  id: FelinidEears [2]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -18,13 +18,13 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   sprites:
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_pirsing_outer
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_pirsing_inner  
     
 - type: marking
-  id: Большие фелинидские ушы
+  id: FelinidEears [3]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -41,13 +41,13 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   sprites:
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_big_outer
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_big_inner
     
 - type: marking
-  id: Фелинидские уши
+  id: FelinidEears [4]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -64,13 +64,13 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   sprites:
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_nyshka_outer
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_nyshka_inner  
     
 - type: marking
-  id: Фелинидские уши [2]
+  id: FelinidEears [5]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -87,13 +87,13 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   sprites:
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_food_outer
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_food_inner
     
 - type: marking
-  id: Фелинидские уши вины
+  id: FelinidEars
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -110,7 +110,89 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   sprites:
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_vini_outer
-  - sprite: SS220/Mobs/Customization/felinid_parts.rsi
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_vini_inner
+    
+# Felinid Tails
+
+- type: marking
+  id: FelinidTails [6]
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_A
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_E
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_D
+
+- type: marking
+  id: FelinidTails [5]
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_A
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_E
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_D
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_C
+
+- type: marking
+  id: FelinidTails [4]
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_A
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_E
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_D
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_B
+
+- type: marking
+  id: FelinidTails [3]
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_A
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_E
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_D
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_C
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_B
+    
+- type: marking
+  id: FelinidTails [2]
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_prosto
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail
+
+- type: marking
+  id: FelinidTails
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
+    state: felinid_tail_prosto

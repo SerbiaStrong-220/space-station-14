@@ -8,32 +8,16 @@ primary_speaker = 'aidar'
 host = "127.0.0.1"
 port = 5000
 
-#Packaging response into Silero API-like format
-def build_response(audio):
-   results = [{'chunk_len' : 0, 'chunk_text' : "string", "audio" : audio, "world_align" : [None]}]
-   original_sha1 = "string"
-   remote_id = "string"
-   timings = {}
-   payload = {
-      'results': results,
-      'original_sha1': original_sha1,
-      'remode_id': remote_id,
-      'timings': timings
-   }
-   return payload
-
 #Get request, consume text, make tts, build response, return to sender.
-@api.route('/tts/', methods=['POST'])
+@api.route('/tts/', methods=['GET'])
 def process_tts():
-   request_data = request.get_json()
-   text = request_data['text']
-   original_speaker = request_data['speaker']
+   text = request.args.get('text')
+   original_speaker = request.args.get('speaker')
    print(f'Got request with text "{text}" and speaker: "{original_speaker}"') #Strictly debugging thing, uncomment if uncomfortable.
-   sample_rate = request_data['sample_rate']
    speaker = primary_speaker
    tts_module = tts_creator()
-   payload = build_response(tts_module.make_ogg_base64(text=text, speaker=speaker, sample_rate=sample_rate))
-   return json.dumps(payload)
+   payload = tts_module.make_wav(text=text, speaker=speaker, sample_rate=24000)
+   return payload
 
 if __name__ == '__main__':
     #Note: if you don't change host and port, default setting to import to sensitive.dm will be "http://127.0.0.1:5000/tts/"

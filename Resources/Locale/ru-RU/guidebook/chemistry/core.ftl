@@ -23,8 +23,8 @@ guidebook-reagent-recipes-mix-info =
             }
        *[other]
             { CAPITALIZE($verb) } { $hasMax ->
-                [true] между { NATURALFIXED($minTemp, 2) }K и { NATURALFIXED($maxTemp, 2) }K
-               *[false] выше { NATURALFIXED($minTemp, 2) }K
+                [true] между { $minTemp }K и { $maxTemp }K
+               *[false] выше { $minTemp }K
             }
     }
 guidebook-reagent-physical-description = [italic]На вид вещество { $description }.[/italic].

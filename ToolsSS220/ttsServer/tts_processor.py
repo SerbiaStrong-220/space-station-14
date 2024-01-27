@@ -15,13 +15,11 @@ class tts_creator:
                                    self.local_file)
 
         self.model = torch.package.PackageImporter(self.local_file).load_pickle("tts_models", "model")
-        self.model.to(self.device)  
+        self.model.to(self.device)
 
-    def make_ogg_base64(self, text, speaker, sample_rate):
+    def make_wav(self, text, speaker, sample_rate):
         audio_paths = self.model.save_wav(text=text,
                              speaker=speaker,
                              sample_rate=sample_rate)
-        AudioSegment.from_wav(audio_paths).export('result.ogg', format='ogg')
-        with open("result.ogg", 'rb') as f:
-            return base64.b64encode(f.read()).decode()
-    
+        with open(audio_paths, 'rb') as f:
+            return f.read()

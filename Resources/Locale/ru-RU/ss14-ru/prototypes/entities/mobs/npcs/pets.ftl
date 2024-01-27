@@ -42,3 +42,5 @@ ent-MobMonkeyPunpun = Пун Пун
     .desc = Видный представитель обезьян с неограниченным доступом к алкоголю.
 ent-MobSpaceCatPet = Ракета
     .desc = { ent-MobCatSpace.desc }
+ent-MobCrabAtmos = Тропико
+    .desc = Благородный и непоколебимый защитник Атмосии. Viva!

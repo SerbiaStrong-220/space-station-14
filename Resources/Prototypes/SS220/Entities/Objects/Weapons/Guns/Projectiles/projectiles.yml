@@ -35,8 +35,8 @@
       types:
         Poison: 15
     soundHit:
-      path: "/Audio/Weapons/tap.ogg"
-    soundForce: true
+      collection: WeakHit
+    forceSound: true
   - type: StunOnCollide
     stunAmount: 1
     knockdownAmount: 1

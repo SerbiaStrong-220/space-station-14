@@ -11,13 +11,13 @@
 
 <BoxContainer Orientation="Vertical" Margin="5 5">
     <!-- Top Bar (Highest role, available tokens) -->
-    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SetHeight="40">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
         <Label Text="subscription level placeholder" Name="SubscriptionLabel" VerticalAlignment="Top" HorizontalExpand="True"/>
         <TextureRect
             TexturePath="/Textures/SS220/Interface/Misc/sponsor_cash.rsi/icon.png"
             VerticalAlignment="Center"
             Stretch="KeepAspectCentered"
-            SetSize="40 40"/>
+            VerticalExpand="True"/>
         <Label Text="tokens left placeholder" Name = "TokensLabel" VerticalAlignment="Top" HorizontalExpand="True"/>
     </BoxContainer>
 

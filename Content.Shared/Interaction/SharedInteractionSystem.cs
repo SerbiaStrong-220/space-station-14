@@ -67,10 +67,7 @@ namespace Content.Shared.Interaction
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tagSystem = default!;
 
-		//SS220 Unremoveable-No-Hands
-		[Dependency] private readonly SharedHandsSystem _hands = default!;
-
-		private const CollisionGroup InRangeUnobstructedMask = CollisionGroup.Impassable | CollisionGroup.InteractImpassable;
+        private const CollisionGroup InRangeUnobstructedMask = CollisionGroup.Impassable | CollisionGroup.InteractImpassable;
 
         public const float InteractionRange = 1.5f;
         public const float InteractionRangeSquared = InteractionRange * InteractionRange;
@@ -984,7 +981,13 @@ namespace Content.Shared.Interaction
             if (Deleted(uid))
                 return false;
 
-            InteractionActivate(user.Value, uid, checkAccess: ShouldCheckAccess(user.Value));
+            // SS220 Ghost-UI-Activation-On-Use begin
+            if (!InteractionActivate(user.Value, uid, checkAccess: ShouldCheckAccess(user.Value)))
+            {
+                var ev = new GhostInterationUiBypassEvent(user.Value, uid);
+                RaiseLocalEvent(uid, ev);
+            }
+            // SS220 Ghost-UI-Activation-On-Use end
             return false;
         }
 
@@ -1236,6 +1239,20 @@ namespace Content.Shared.Interaction
             AltInteract = altInteract;
         }
     }
+
+    // SS220 Ghost-UI-Activation-On-Use begin
+    public sealed class GhostInterationUiBypassEvent : HandledEntityEventArgs, ITargetedInteractEventArgs
+    {
+        public EntityUid User { get; }
+        public EntityUid Target { get; }
+
+        public GhostInterationUiBypassEvent(EntityUid user, EntityUid target)
+        {
+            User = user;
+            Target = target;
+        }
+    }
+    // SS220 Ghost-UI-Activation-On-Use end
 
     /// <summary>
     ///     Raised directed by-ref on an item to determine if hand interactions should go through.

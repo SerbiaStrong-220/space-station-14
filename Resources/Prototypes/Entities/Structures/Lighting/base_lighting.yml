@@ -20,8 +20,7 @@
   - type: MeleeSound
     soundGroups:
       Brute:
-        path:
-          "/Audio/Effects/glass_hit.ogg"
+        collection: GlassSmash
   - type: Transform
     anchored: true
   - type: Clickable
@@ -40,8 +39,9 @@
       shader: unshaded
     state: base
   - type: PointLight
-    radius: 10
+    color: "#FFE4CE" # 5000K color temp
     energy: 0.8
+    radius: 10
     softness: 1
     offset: "0, -0.5"
   - type: Damageable
@@ -55,6 +55,9 @@
       behaviors: #excess damage, don't spawn entities.
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
     - trigger:
         !type:DamageTrigger
         damage: 50
@@ -67,6 +70,9 @@
             max: 2
       - !type:DoActsBehavior
         acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
   placement:
     mode: SnapgridCenter
     snap:
