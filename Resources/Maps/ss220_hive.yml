@@ -78989,15 +78989,6 @@ entities:
       joinedGrid: 1
     - type: AtmosPipeColor
       color: '#B266FFFF'
-- proto: GasMinerCarbonDioxide
-  entities:
-  - uid: 2494
-    components:
-    - type: Transform
-      pos: -43.5,31.5
-      parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
 - proto: GasMinerNitrogenStation
   entities:
   - uid: 1908
