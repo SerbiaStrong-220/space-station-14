@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: EmoGarbage404
-  changes:
-  - message: Hovering over an item in storage now shows a tooltip with the name.
-    type: Add
-  id: 5286
-  time: '2023-12-08T02:38:07.0000000+00:00'
-- author: Nimfar11
-  changes:
-  - message: Adds a bed for the psychologist's office.
-    type: Add
-  id: 5287
-  time: '2023-12-08T05:24:35.0000000+00:00'
 - author: Emisse
   changes:
   - message: Chemical explosions are powerful again.
@@ -3986,4 +3974,26 @@
     type: Tweak
   id: 5769
   time: '2024-01-25T13:40:01.0000000+00:00'
+  url: null
+- author: TheArturZh
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\
+      \u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043E\u0442\u043A\u0440\u044B\
+      \u0432\u0430\u0442\u044C UI \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0448\
+      \u0443 E \u0437\u0430 \u0433\u043E\u0441\u0442\u0430"
+    type: Add
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043E\u0442\
+      \u043A\u0440\u044B\u0442\u0438\u0435 UI \u0437\u0430 \u0433\u043E\u0441\u0442\
+      \u0430"
+    type: Fix
+  id: 5770
+  time: '2024-01-25T21:12:17.0000000+00:00'
+  url: null
+- author: spo9k
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043A\u0430\u0440\u0442\
+      \u0430 Avrite"
+    type: Tweak
+  id: 5771
+  time: '2024-01-26T06:31:51.0000000+00:00'
   url: null
