@@ -27,6 +27,8 @@
         showEnts: false
         occludes: true
   - type: AntiRottingContainer
+  - type: RadiationBlockingContainer
+    resistance: 5
 
   # Visuals and appearance
   - type: Sprite

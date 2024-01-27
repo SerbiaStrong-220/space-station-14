@@ -393,6 +393,7 @@
         - OilOlive
         - GlassBeaker
         #ss220 chiefs belt end
+        - Mayo
       components:
         - Mousetrap
         - Smokable
@@ -461,6 +462,7 @@
         - Radio
         - Sidearm
         - MagazinePistol
+        - MagazineMagnum
       components:
         - Stunbaton
         - FlashOnTrigger

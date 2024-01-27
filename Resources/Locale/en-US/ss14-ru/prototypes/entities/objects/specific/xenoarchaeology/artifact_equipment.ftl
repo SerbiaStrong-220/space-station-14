@@ -1,2 +1,2 @@
-ent-CrateArtifactContainer = { ent-BaseStructureDynamic }
-    .desc = { ent-BaseStructureDynamic.desc }
+ent-CrateArtifactContainer = контейнер для артефактов
+    .desc = Используется для безопасного хранения и перемещения артефактов.

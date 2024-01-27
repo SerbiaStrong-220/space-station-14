@@ -4,6 +4,7 @@ using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
+using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using System.Linq;
@@ -34,7 +35,8 @@ public sealed partial class CleanTileReaction : ITileReaction
     FixedPoint2 ITileReaction.TileReact(TileRef tile, ReagentPrototype reagent, FixedPoint2 reactVolume)
     {
         var entMan = IoCManager.Resolve<IEntityManager>();
-        var entities = entMan.System<EntityLookupSystem>().GetEntitiesIntersecting(tile, 0f).ToArray();
+        var entities = entMan.System<EntityLookupSystem>().GetLocalEntitiesIntersecting(tile, 0f).ToArray();
+        var tags = entMan.System<TagSystem>();
         var puddleQuery = entMan.GetEntityQuery<PuddleComponent>();
         var solutionContainerSystem = entMan.System<SolutionContainerSystem>();
         // Multiply as the amount we can actually purge is higher than the react amount.
@@ -42,6 +44,12 @@ public sealed partial class CleanTileReaction : ITileReaction
 
         foreach (var entity in entities)
         {
+            if (tags.HasTag(entity, "ReactionCleanable"))
+            {
+                entMan.QueueDeleteEntity(entity);
+                continue;
+            }
+
             if (!puddleQuery.TryGetComponent(entity, out var puddle) ||
                 !solutionContainerSystem.TryGetSolution(entity, puddle.SolutionName, out var puddleSolution, out _))
             {

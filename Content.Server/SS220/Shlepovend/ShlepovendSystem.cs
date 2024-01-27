@@ -1,10 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.GameTicking.Events;
 using Content.Server.UserInterface;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Players;
 using Content.Shared.SS220.Discord;
 using Content.Shared.SS220.Shlepovend;
 using Robust.Server.Audio;
+using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -12,6 +14,7 @@ namespace Content.Server.SS220.Shlepovend;
 
 public sealed class ShlepovendSystem : SharedShlepovendSystem
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -23,6 +26,7 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
         // UI
         SubscribeLocalEvent<ShlepovendComponent, AfterActivatableUIOpenEvent>(OnToggleInterface);
         SubscribeLocalEvent<ShlepovendComponent, ShlepovendPurchaseMsg>(OnPurchaseAttempt);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
     }
 
     public bool TryGetInitialTokenValue(ICommonSession player, [NotNullWhen(true)] out int? initialTokens)
@@ -56,6 +60,19 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
         }
 
         RaiseNetworkEvent(new ShlepovendTokenAmountMsg() { Tokens = contentPlayerData.ShlepovendTokens.Value }, player);
+    }
+
+    // Reset token count on round restart
+    public void OnRoundStart(RoundStartingEvent args)
+    {
+        foreach (var playerData in _player.GetAllPlayerData())
+        {
+            var contentData = playerData.ContentData();
+            if (contentData is null)
+                continue;
+
+            contentData.ShlepovendTokens = null;
+        }
     }
 
     public void OnToggleInterface(Entity<ShlepovendComponent> entity, ref AfterActivatableUIOpenEvent args)
