@@ -37,7 +37,7 @@
   description: A machine printed circuit board for a protolathe.
   components:
     - type: MachineBoard
-      prototype: Protolathe
+      prototype: ThermoelectricgeneratorTurbine
       requirements:
         MatterBin: 2
         Manipulator: 2

@@ -11,7 +11,7 @@
     requirements:
      Capacitor: 4
     materialRequirements:
-      Steel: 5
+     Steel: 5
 
 - type: entity
   id: ThermoelectricgeneratorTurbine
@@ -27,5 +27,5 @@
      Capacitor: 4
      Manipulator: 1     
     materialRequirements:
-      Steel: 5
-      Gold: 1
+     Steel: 5
+     Gold: 1

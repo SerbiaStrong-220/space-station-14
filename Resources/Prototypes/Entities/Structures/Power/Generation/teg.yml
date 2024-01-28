@@ -23,6 +23,8 @@
           shader: unshaded
           visible: false
           map: [ "enum.TegVisualLayers.PowerOutput" ]
+    - type: MachineBoard    
+      board: Thermoelectricgenerator
     - type: GenericVisualizer
       visuals:
         enum.PowerDeviceVisuals.Powered:
@@ -43,7 +45,7 @@
             9: { visible: true, state: teg-op9 }
             10: { visible: true, state: teg-op10 }
             11: { visible: true, state: teg-op11 }
-
+    
     - type: Anchorable
     - type: Pullable
     - type: NodeContainer
@@ -119,6 +121,8 @@
     - type: Transform
       noRot: false
       anchored: false
+    - type: MachineBoard    
+      board: Thermoelectricgenerator
 
     # visuals
     - type: Sprite
