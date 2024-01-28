@@ -23,8 +23,6 @@
           shader: unshaded
           visible: false
           map: [ "enum.TegVisualLayers.PowerOutput" ]
-    - type: MachineBoard #ss220 building TAG through a board
-      board: Thermoelectricgenerator #ss220 building TAG through a board
     - type: GenericVisualizer 
       visuals:
         enum.PowerDeviceVisuals.Powered:
