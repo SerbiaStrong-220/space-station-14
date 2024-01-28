@@ -241,7 +241,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: Machine
-    board: ProtolatheMachineCircuitboard
+    board: Protolathe
   - type: Wires
     boardName: wires-board-name-protolathe
     layoutId: Protolathe
