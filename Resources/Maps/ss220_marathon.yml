@@ -105507,7 +105507,7 @@ entities:
     - type: Transform
       pos: -10.592361,-38.446224
       parent: 30
-- proto: NitrousOxideCanister
+- proto: CarbonDioxideCanister
   entities:
   - uid: 7289
     components:
