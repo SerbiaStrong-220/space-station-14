@@ -284,19 +284,28 @@ namespace Content.Server.Voting.Managers
         private void SendUpdateCanCallVote(ICommonSession player)
         {
             var msg = new MsgVoteCanCall();
-            msg.CanCall = CanCallVote(player, null, out var isAdmin, out var timeSpan);
+            msg.CanCall = CanCallVote(player, null, out var isAdmin, out var timeSpan, out var hasExtraPermissions);
             msg.WhenCanCallVote = timeSpan;
 
             if (isAdmin)
             {
-                msg.VotesUnavailable = Array.Empty<(StandardVoteType, TimeSpan)>();
+                // SS220 Game rule vote required extended rights begin
+                if (hasExtraPermissions)
+                {
+                    msg.VotesUnavailable = Array.Empty<(StandardVoteType, TimeSpan)>();
+                }
+                else
+                {
+                    msg.VotesUnavailable = new[] { (StandardVoteType.Preset, TimeSpan.Zero) };
+                }
+                // SS220 Game rule vote required extended rights end
             }
             else
             {
                 var votesUnavailable = new List<(StandardVoteType, TimeSpan)>();
                 foreach (var v in _standardVoteTypeValues)
                 {
-                    if (CanCallVote(player, v, out _, out var typeTimeSpan))
+                    if (CanCallVote(player, v, out _, out var typeTimeSpan, out _))
                         continue;
                     votesUnavailable.Add((v, typeTimeSpan));
                 }
@@ -310,15 +319,20 @@ namespace Content.Server.Voting.Managers
             ICommonSession initiator,
             StandardVoteType? voteType,
             out bool isAdmin,
-            out TimeSpan timeSpan)
+            out TimeSpan timeSpan,
+            out bool hasExtraPermissions)
         {
             isAdmin = false;
+            hasExtraPermissions = false;
             timeSpan = default;
 
             // Admins can always call votes.
             if (_adminMgr.HasAdminFlag(initiator, AdminFlags.Admin))
             {
                 isAdmin = true;
+                // SS220 некоторые режимы голосования требуют дополнительных прав.
+                // Чтобы не вводит дополнительный флаг опираемся на прав редактировать роли. Оно есть у банды, хэдов и хостов.
+                hasExtraPermissions = _adminMgr.HasAdminFlag(initiator, AdminFlags.Permissions);
                 return true;
             }
 
@@ -352,7 +366,7 @@ namespace Content.Server.Voting.Managers
 
         public bool CanCallVote(ICommonSession initiator, StandardVoteType? voteType = null)
         {
-            return CanCallVote(initiator, voteType, out _, out _);
+            return CanCallVote(initiator, voteType, out _, out _, out _);
         }
 
         private void EndVote(VoteReg v)
