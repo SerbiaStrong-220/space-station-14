@@ -179,6 +179,23 @@
     - JawsOfLife
     - BorgModuleAdvancedTool
     - BorgModuleRCD
+# ss220 start thermoelectric generator 
+
+- type: technology
+  id: RenewablePower
+  name: research-technology-renewable-power
+  icon:
+    sprite: Structures/Power/Generation/teg.rsi
+    state: teg
+  discipline: Industrial
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - Thermoelectricgenerator
+  - ThermoelectricgeneratorTurbine
+  technologyPrerequisites:
+  - PowerGeneration
+# ss220 end thermoelectric generator 
 
 # Tier 3
 

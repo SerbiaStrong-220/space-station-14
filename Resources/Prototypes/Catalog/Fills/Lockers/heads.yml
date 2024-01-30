@@ -29,7 +29,7 @@
       - id: ClothingOuterArmorCaptainCarapace
       - id: NukeDisk
       - id: PinpointerNuclear
-      - id: CaptainIDCard
+#      - id: CaptainIDCard SS-220capCardFix
       - id: ClothingOuterHardsuitCap
       - id: ClothingMaskGasCaptain
       - id: WeaponDisabler
@@ -57,7 +57,7 @@
       - id: ClothingOuterArmorCaptainCarapace
       - id: NukeDisk
       - id: PinpointerNuclear
-      - id: CaptainIDCard
+#      - id: CaptainIDCard SS-220capCardFix
       - id: WeaponDisabler
       - id: CommsComputerCircuitboard
       - id: ClothingHeadsetAltCommand
@@ -83,7 +83,7 @@
       - id: ClothingOuterArmorCaptainCarapace
       - id: NukeDisk
       - id: PinpointerNuclear
-      - id: CaptainIDCard
+#      - id: CaptainIDCard SS-220capCardFix
       - id: WeaponDisabler
       - id: CommsComputerCircuitboard
       - id: ClothingHeadsetAltCommand
