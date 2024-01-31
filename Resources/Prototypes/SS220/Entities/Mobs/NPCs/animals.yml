@@ -29,6 +29,8 @@
       task: SimpleHostileCompound
   - type: Physics
   - type: Speech
+    speechSounds: Roxi
+    speechVerb: RoxiMob
   - type: Fixtures
     fixtures:
       fix1:
