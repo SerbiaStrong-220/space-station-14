@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Rat king and his servants properly heal from miasma.
-    type: Fix
-  - message: Rat king no longer rummages from an infinite distance.
-    type: Fix
-  - message: Rat king generates more miasma to fill larger rooms.
-    type: Tweak
-  id: 5291
-  time: '2023-12-08T18:46:28.0000000+00:00'
 - author: Emisse
   changes:
   - message: Command staff has brig access.
@@ -4030,4 +4020,13 @@
     type: Fix
   id: 5774
   time: '2024-01-29T16:32:13.0000000+00:00'
+  url: null
+- author: MIXnikita
+  changes:
+  - message: "\u0417\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u0437\u0432\u0443\u043A\
+      \u0438 \u0434\u043B\u044F \u043F\u0443\u0448\u0435\u043A \u0448\u0430\u0442\u0442\
+      \u043B\u043E\u0432"
+    type: Add
+  id: 5775
+  time: '2024-01-30T11:51:26.0000000+00:00'
   url: null
