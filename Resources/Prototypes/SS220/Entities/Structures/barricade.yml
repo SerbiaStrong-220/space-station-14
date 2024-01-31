@@ -71,7 +71,7 @@
 - type: entity
   id: BarricadeWooden
   description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
-  parent: EstBaseBarricade
+  parent: BaseBarricade220
   name: деревянная уплотненная баррикада
   placement:
     mode: SnapgridCenter
