@@ -191,7 +191,7 @@
   id: BarricadeWoodenDirectional
   description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
   parent: EstBaseBarricadeDirectional
-  name: деревянная уплотнённая баррикада
+  name: уплотнённая деревянная баррикада
   placement:
     mode: SnapgridCenter
   components:
