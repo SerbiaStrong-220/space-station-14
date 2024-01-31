@@ -2,7 +2,7 @@
 
 # Абстрактная базы
 - type: entity
-  id: EstBaseBarricade
+  id: BaseBarricade220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
   parent: BaseStructure
   name: barricade
@@ -26,9 +26,9 @@
         - WallLayer
   
 - type: entity
-  id: EstBaseBarricadeDirectional
+  id: BaseBarricadeDirectional220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
-  parent: EstBaseBarricade
+  parent: BaseBarricade220
   name: barricadedirectional
   abstract: true
   components: 
@@ -44,7 +44,7 @@
         - WallLayer
         
 - type: entity
-  id: EstBaseBarrucadeFloor
+  id: BaseBarricadeFloor220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
   parent: BaseStructure
   name: barricade
@@ -71,7 +71,7 @@
 - type: entity
   id: BarricadeWooden
   description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
-  parent: EstBaseBarricade
+  parent: BaseBarricade220
   name: деревянная уплотненная баррикада
   placement:
     mode: SnapgridCenter
@@ -191,7 +191,7 @@
   id: BarricadeWoodenDirectional
   description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
   parent: EstBaseBarricadeDirectional
-  name: деревянная уплотнённая баррикада
+  name: уплотнённая деревянная баррикада
   placement:
     mode: SnapgridCenter
   components:
@@ -310,7 +310,7 @@
   id: BarricadeWoodenFloor
   description: Баррикада небольшой высоты из деревяннах досок. Есть шанс защитить от шальной пули.
   parent: EstBaseBarrucadeFloor
-  name: Напольная деревянная баррикада
+  name: напольная деревянная баррикада
   placement:
     mode: SnapgridCenter
   components:
@@ -353,7 +353,7 @@
   id: BarricadeSteelFloor
   description: Баррикада небольшой высоты из листов стали. Есть шанс защитить от шальной пули.
   parent: EstBaseBarrucadeFloor
-  name: Напольная стальная баррикада
+  name: напольная стальная баррикада
   placement:
     mode: SnapgridCenter
   components:
@@ -388,7 +388,7 @@
   id: BarricadePlasteelFloor
   description: Баррикада небольшой высоты из листов пластали. Есть шанс защитить от шальной пули.
   parent: EstBaseBarrucadeFloor
-  name: Напольная укрепленная баррикада
+  name: напольная укрепленная баррикада
   placement:
     mode: SnapgridCenter
   components:
