@@ -8,10 +8,9 @@
   name: barricade
   abstract: true
   components:
-  - type: Sprite
-    sprite: SS220/Structures/barricades.rsi
   - type: InteractionOutline
   - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
     drawdepth: BlastDoors
     noRot: false
   - type: Occluder
@@ -52,10 +51,9 @@
   name: barricade
   abstract: true
   components: 
-  - type: Sprite
-    sprite: SS220/Structures/barricades.rsi
   - type: InteractionOutline
   - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
     drawdepth: BlastDoors
     noRot: false
   - type: Appearance
@@ -82,7 +80,6 @@
   components:
   - type: Sprite
     state: barricade_wooden
-    noRot: false 
   - type: Construction
     graph: BarricadeWooden
     node: barricadefull
@@ -124,7 +121,6 @@
   components:
   - type: Sprite
     state: barricade_steel
-    noRot: false 
   - type: Construction
     graph: BarricadeSteel
     node: barricadefull
@@ -158,7 +154,6 @@
   components:
   - type: Sprite
     state: barricade_plasteel
-    noRot: false 
   - type: Construction
     graph: BarricadePlasteel
     node: barricadefull
@@ -198,7 +193,6 @@
   components:
   - type: Sprite
     state: barricade_wooden_directional
-    noRot: false 
   - type: Construction
     graph: BarricadeWoodenDirectional
     node: barricadefull
@@ -240,7 +234,6 @@
   components:
   - type: Sprite
     state: barricade_steel_directional
-    noRot: false 
   - type: Construction
     graph: BarricadeSteelDirectional
     node: barricadefull
@@ -274,7 +267,6 @@
   components:
   - type: Sprite
     state: barricade_plasteel_directional
-    noRot: false 
   - type: Construction
     graph: BarricadePlasteelDirectional
     node: barricadefull
@@ -314,7 +306,6 @@
   components:
   - type: Sprite
     state: barricade_wooden_floor
-    noRot: false 
   - type: Construction
     graph: BarricadeWoodenFloor
     node: barricadefull
@@ -356,7 +347,6 @@
   components:
   - type: Sprite
     state: barricade_steel_floor
-    noRot: false 
   - type: Construction
     graph: BarricadeSteelFloor
     node: barricadefull
@@ -390,7 +380,6 @@
   components:
   - type: Sprite
     state: barricade_plasteel_floor
-    noRot: false 
   - type: Construction
     graph: BarricadePlasteelFloor
     node: barricadefull
