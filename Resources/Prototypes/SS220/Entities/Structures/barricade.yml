@@ -233,7 +233,7 @@
 - type: entity
   id: BarricadeSteelDirectional
   description: Баррикада из стальных листов. Защищает вас от чужих глаз. Способен выдержать пулю.
-  parent: EstBaseBarricadeDirectional
+  parent: BaseBarricadeDirectional220
   name: стальная баррикада
   placement:
     mode: SnapgridCenter
