@@ -339,6 +339,8 @@
   parent: AlwaysPoweredWallLight
   suffix: ""
   components:
+  - type: BloomLightMask # SS220 Grafon-Light
+    enabled: false
   - type: PointLight
     enabled: false
     radius: 5

@@ -68,7 +68,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitaryLeader
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVA
@@ -128,7 +128,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTJanitor
 
@@ -147,7 +147,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
 
@@ -189,7 +189,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTEngineer
 
@@ -208,7 +208,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
 
@@ -250,7 +250,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTSecurity
 
@@ -269,7 +269,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
 
@@ -331,7 +331,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTMedical
 
@@ -350,7 +350,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
 
@@ -407,7 +407,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
 ## Central Command
 
 - type: entity

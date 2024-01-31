@@ -48,7 +48,8 @@ public static class ServerPackaging
         // SS220 extra assemblies begin
         "FFMpegCore",
         "MySqlConnector",
-        "Pomelo.EntityFrameworkCore.MySql"
+        "Pomelo.EntityFrameworkCore.MySql",
+        "Instances"
         // SS220 extra assemblies end
     };
 

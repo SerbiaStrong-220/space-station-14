@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Audio;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
@@ -96,18 +96,28 @@ public sealed class GeneratorSystem : SharedGeneratorSystem
             return;
 
         var totalAvailableReagents = solution.GetTotalPrototypeQuantity(entity.Comp.Reagents.Keys.Select(p => p.Id).ToArray()).Value;
+
         foreach (var (reagentId, multiplier) in entity.Comp.Reagents)
         {
-            var availableReagent = solution.GetTotalPrototypeQuantity(reagentId).Value;
-            var removalPercentage = availableReagent / totalAvailableReagents;
-            var fractionalReagent = entity.Comp.FractionalReagents.GetValueOrDefault(reagentId);
-            var toRemove = RemoveFractionalFuel(
-                ref fractionalReagent,
-                args.FuelUsed * removalPercentage,
-                multiplier * FixedPoint2.Epsilon.Float(),
-                availableReagent);
+            var toRemove = 1;
+            if (totalAvailableReagents != 0)
+            {
+                var availableReagent = solution.GetTotalPrototypeQuantity(reagentId).Value;
+                var removalPercentage = availableReagent / totalAvailableReagents;
+                var fractionalReagent = entity.Comp.FractionalReagents.GetValueOrDefault(reagentId);
+                toRemove = RemoveFractionalFuel(
+                    ref fractionalReagent,
+                    args.FuelUsed * removalPercentage,
+                    multiplier * FixedPoint2.Epsilon.Float(),
+                    availableReagent);
 
-            entity.Comp.FractionalReagents[reagentId] = fractionalReagent;
+                entity.Comp.FractionalReagents[reagentId] = fractionalReagent;
+            }
+            else
+            {
+                entity.Comp.FractionalReagents[reagentId] = 0;
+            }
+
             _solutionContainer.RemoveReagent(entity.Comp.Solution.Value, reagentId, FixedPoint2.FromCents(toRemove));
         }
     }

@@ -86,7 +86,7 @@
     availableModes:
       - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      path: /Audio/SS220/Weapons/Guns/Gunshots/svalin_laser.ogg # SS220 Shuttle-Gun-Sounds
       params:
         variation: 0.05
   - type: MagazineVisuals
@@ -142,7 +142,7 @@
     availableModes:
       - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon2.ogg
+      path: /Audio/SS220/Weapons/Guns/Gunshots/perforator_laser.ogg # SS220 Shuttle-Gun-Sounds
       params:
         variation: 0.05
   - type: MagazineVisuals
@@ -203,7 +203,7 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/Items/Mining/fultext_launch.ogg
+      path: /Audio/SS220/Weapons/Guns/Gunshots/drujba.ogg # SS220 Shuttle-Gun-Sounds
       params:
         pitch: 0.8
     soundEmpty:
@@ -256,7 +256,7 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/Items/Mining/fultext_launch.ogg
+      path: /Audio/SS220/Weapons/Guns/Gunshots/big_cannon.ogg # SS220 Shuttle-Gun-Sounds
       params:
         variation: 0.05
         pitch: 0.8

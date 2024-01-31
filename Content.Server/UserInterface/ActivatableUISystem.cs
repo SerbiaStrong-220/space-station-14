@@ -25,6 +25,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ActivatableUIComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<ActivatableUIComponent, GhostInterationUiBypassEvent>(OnGhostUiActivation); // SS220 Ghost-UI-Activation-On-Use
         SubscribeLocalEvent<ActivatableUIComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<ActivatableUIComponent, HandDeselectedEvent>(OnHandDeselected);
         SubscribeLocalEvent<ActivatableUIComponent, GotUnequippedHandEvent>((uid, aui, _) => CloseAll(uid, aui));
@@ -39,6 +40,21 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
         InitializePower();
     }
+
+    // SS220 Ghost-UI-Activation-On-Use begin
+    private void OnGhostUiActivation(Entity<ActivatableUIComponent> entity, ref GhostInterationUiBypassEvent args)
+    {
+        if (args.Handled)
+            return;
+        // rest of args has already been validated in SharedInteractionSystem.HandleActivateItemInWorld
+
+        var comp = entity.Comp;
+        if (!Resolve(args.Target, ref comp))
+            return;
+
+        args.Handled = InteractUI(args.User, args.Target, comp);
+    }
+    // SS220 Ghost-UI-Activation-On-Use end
 
     private void OnBoundInterfaceInteractAttempt(BoundUserInterfaceMessageAttempt ev)
     {
@@ -128,10 +144,6 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (!TryComp(user, out ActorComponent? actor))
             return false;
 
-        //SS220-Ghosts-paper-reading
-        if (aui.RequireHands && (!HasComp<HandsComponent>(user) && !HasComp<GhostComponent>(user)))
-            return false;
-
         if (aui.Key == null)
             return false;
 
@@ -147,7 +159,8 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (!_blockerSystem.CanInteract(user, uiEntity) && (!aui.AllowSpectator || !HasComp<GhostComponent>(user)))
             return false;
 
-        if (aui.RequireHands && !HasComp<HandsComponent>(user))
+        //SS220-Ghosts-paper-reading
+        if (aui.RequireHands && (!HasComp<HandsComponent>(user) && !HasComp<GhostComponent>(user)))
             return false;
 
         if (aui.AdminOnly && !_adminManager.IsAdmin(actor.PlayerSession))
