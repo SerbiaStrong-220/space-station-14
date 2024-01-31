@@ -268,7 +268,7 @@
 - type: entity
   id: BarricadePlasteelDirectional
   description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способен выдержать взрыв C4.
-  parent: EstBaseBarricadeDirectional
+  parent: BaseBarricadeDirectional220
   name: укрепленная баррикада
   placement:
     mode: SnapgridCenter
