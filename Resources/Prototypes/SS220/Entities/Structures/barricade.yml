@@ -309,7 +309,7 @@
 - type: entity
   id: BarricadeWoodenFloor
   description: Баррикада небольшой высоты из деревяннах досок. Есть шанс защитить от шальной пули.
-  parent: EstBaseBarrucadeFloor
+  parent: BaseBarricadeFloor220
   name: напольная деревянная баррикада
   placement:
     mode: SnapgridCenter
