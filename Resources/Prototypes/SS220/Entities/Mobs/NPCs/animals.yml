@@ -58,7 +58,7 @@
     attackRate: 1
     damage:
       types:
-        Slash: 10
+        Slash: 7
   - type: SlowOnDamage
     speedModifierThresholds:
       40: 0.70
