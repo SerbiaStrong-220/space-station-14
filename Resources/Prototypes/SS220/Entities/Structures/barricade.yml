@@ -352,7 +352,7 @@
 - type: entity
   id: BarricadeSteelFloor
   description: Баррикада небольшой высоты из листов стали. Есть шанс защитить от шальной пули.
-  parent: EstBaseBarrucadeFloor
+  parent: BaseBarricadeFloor220
   name: напольная стальная баррикада
   placement:
     mode: SnapgridCenter
