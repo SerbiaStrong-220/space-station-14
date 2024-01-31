@@ -310,7 +310,7 @@
   id: BarricadeWoodenFloor
   description: Баррикада небольшой высоты из деревяннах досок. Есть шанс защитить от шальной пули.
   parent: EstBaseBarrucadeFloor
-  name: Напольная деревянная баррикада
+  name: напольная деревянная баррикада
   placement:
     mode: SnapgridCenter
   components:
