@@ -1,0 +1,423 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Абстрактная базы
+- type: entity
+  id: EstBaseBarricade
+  description: A barricade made out of wood planks. It looks like it can take a few solid hits.
+  parent: BaseStructure
+  name: barricade
+  abstract: true
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: BlastDoors
+    noRot: false
+  - type: Occluder
+  - type: Appearance
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  
+- type: entity
+  id: EstBaseBarricadeDirectional
+  description: A barricade made out of wood planks. It looks like it can take a few solid hits.
+  parent: EstBaseBarricade
+  name: barricadedirectional
+  abstract: true
+  components: 
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.36"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        
+- type: entity
+  id: EstBaseBarrucadeFloor
+  description: A barricade made out of wood planks. It looks like it can take a few solid hits.
+  parent: BaseStructure
+  name: barricade
+  abstract: true
+  components: 
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: BlastDoors
+    noRot: false
+  - type: Appearance
+  - type: AtmosExposed
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.39,-0.36"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+ #Баррикады       
+- type: entity
+  id: BarricadeWooden
+  description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
+  parent: EstBaseBarricade
+  name: деревянная уплотненная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_wooden
+    noRot: false 
+  - type: Construction
+    graph: BarricadeWooden
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 2 
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 90
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 3
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+        
+- type: entity
+  id: BarricadeSteel
+  description: Баррикада из стальных листов. Защищает вас от чужих глаз. Способен выдержать пулю.
+  parent: EstBaseBarricade
+  name: стальная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_steel
+    noRot: false 
+  - type: Construction
+    graph: BarricadeSteel
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Steel
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 180
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 3
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+        
+- type: entity
+  id: BarricadePlasteel
+  description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способен выдержать взрыв C4.
+  parent: EstBaseBarricade
+  name: укрепленная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_plasteel
+    noRot: false 
+  - type: Construction
+    graph: BarricadePlasteel
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Plasteel
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 440
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 2
+          SheetPlasteel1:
+            min: 2
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+        
+        
+#Направленные баррикады
+
+- type: entity
+  id: BarricadeWoodenDirectional
+  description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
+  parent: EstBaseBarricadeDirectional
+  name: деревянная уплотнённая баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_wooden_directional
+    noRot: false 
+  - type: Construction
+    graph: BarricadeWoodenDirectional
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 2 
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 2
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+       
+- type: entity
+  id: BarricadeSteelDirectional
+  description: Баррикада из стальных листов. Защищает вас от чужих глаз. Способен выдержать пулю.
+  parent: EstBaseBarricadeDirectional
+  name: стальная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_steel_directional
+    noRot: false 
+  - type: Construction
+    graph: BarricadeSteelDirectional
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Steel
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 120
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+        
+- type: entity
+  id: BarricadePlasteelDirectional
+  description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способен выдержать взрыв C4.
+  parent: EstBaseBarricadeDirectional
+  name: укрепленная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_plasteel_directional
+    noRot: false 
+  - type: Construction
+    graph: BarricadePlasteelDirectional
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Plasteel
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 360
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+          SheetPlasteel1:
+            min: 2
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+        
+        
+#Напольные баррикады
+
+- type: entity
+  id: BarricadeWoodenFloor
+  description: Баррикада небольшой высоты из деревяннах досок. Есть шанс защитить от шальной пули.
+  parent: EstBaseBarrucadeFloor
+  name: Напольная деревянная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_wooden_floor
+    noRot: false 
+  - type: Construction
+    graph: BarricadeWoodenFloor
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 2 
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1 
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+       
+- type: entity
+  id: BarricadeSteelFloor
+  description: Баррикада небольшой высоты из листов стали. Есть шанс защитить от шальной пули.
+  parent: EstBaseBarrucadeFloor
+  name: Напольная стальная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_steel_floor
+    noRot: false 
+  - type: Construction
+    graph: BarricadeSteelFloor
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Steel
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn: 
+          SheetSteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+        
+- type: entity
+  id: BarricadePlasteelFloor
+  description: Баррикада небольшой высоты из листов пластали. Есть шанс защитить от шальной пули.
+  parent: EstBaseBarrucadeFloor
+  name: Напольная укрепленная баррикада
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/barricades.rsi
+    state: barricade_plasteel_floor
+    noRot: false 
+  - type: Construction
+    graph: BarricadePlasteelFloor
+    node: barricadefull
+  - type: Tag
+    tags:
+    - Plastel
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 220
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+          SheetPlasteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
