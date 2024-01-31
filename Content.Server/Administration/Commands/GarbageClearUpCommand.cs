@@ -2,6 +2,7 @@
 
 using Content.Shared.Administration;
 using Content.Shared.Tag;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Containers;
 
@@ -24,13 +25,14 @@ namespace Content.Server.Administration.Commands
             {
                 if (!_entMan.TryGetComponent<TagComponent>(ent, out var component))
                     continue;
+                if (_entMan.TryGetComponent<CartridgeAmmoComponent>(ent, out var ammo) && !ammo.Spent)
+                    continue;
                 if (!component.Tags.Contains("Trash") || _containerSystem.IsEntityOrParentInContainer(ent))
                     continue;
-
                 _entMan.DeleteEntity(ent);
                 cnt++;
             }
-            shell.WriteLine($"Карта очищена от {cnt} объектов мусора!");
+            shell.WriteLine($"Карта очищена от {cnt} единиц мусора!");
         }
     }
 }
