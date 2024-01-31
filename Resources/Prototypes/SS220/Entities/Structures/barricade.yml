@@ -28,7 +28,7 @@
 - type: entity
   id: EstBaseBarricadeDirectional
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
-  parent: EstBaseBarricade
+  parent: BaseBarricade220
   name: barricadedirectional
   abstract: true
   components: 
