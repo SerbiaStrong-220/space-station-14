@@ -1,139 +1,280 @@
 #© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-# Баррикада
-- type: construction
-  name: баррикада из дерева
+#Баррикады
+- type: constructionGraph
   id: BarricadeWooden
-  graph: BarricadeWooden
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из деревянных досок. Неплохое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_wooden
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-- type: construction
-  name: баррикада из стали 
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: WoodPlank
+              amount: 3
+              doAfter: 2
+    - node: barricadefull
+      entity: BarricadeWooden
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: MaterialWoodPlank1
+              amount: 2
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+              
+- type: constructionGraph
   id: BarricadeSteel
-  graph: BarricadeSteel
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из листов стали. Хорошое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_steel
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-- type: construction
-  name: баррикада из пластали
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 2
+    - node: barricadefull
+      entity: BarricadeSteel
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 3
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+              
+- type: constructionGraph
   id: BarricadePlasteel
-  graph: BarricadePlasteel
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из листов пластали. Отличное средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_plasteel
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-# Баррикада направленная
-- type: construction
-  name: баррикада из дерева
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: Steel
+              amount: 2
+              doAfter: 1
+            - material: Plasteel
+              amount: 2
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadePlasteel
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 2
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Welding
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 1
+            - tool: Prying
+              doAfter: 5
+            - tool: Welding
+              doAfter: 2
+              
+#Направленные
+- type: constructionGraph
   id: BarricadeWoodenDirectional
-  graph: BarricadeWoodenDirectional
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из деревянных досок. Неплохое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_wooden_directional
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-- type: construction
-  name: баррикада из стали 
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: WoodPlank
+              amount: 2
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadeWoodenDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: MaterialWoodPlank1
+              amount: 1
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+              
+- type: constructionGraph
   id: BarricadeSteelDirectional
-  graph: BarricadeSteelDirectional
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из листов стали. Хорошое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_steel_directional
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-- type: construction
-  name: баррикада из пластали
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: Steel
+              amount: 2
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadeSteelDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 2
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+              
+- type: constructionGraph
   id: BarricadePlasteelDirectional
-  graph: BarricadePlasteelDirectional
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из листов пластали. Отличное средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_plasteel_directional
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-# Баррикада напольная
-- type: construction
-  name: баррикада из дерева
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1
+            - material: Plasteel
+              amount: 2
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadePlasteelDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 1
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Welding
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 1
+            - tool: Prying
+              doAfter: 3
+            - tool: Welding
+              doAfter: 2
+              
+#Напольные
+- type: constructionGraph
   id: BarricadeWoodenFloor
-  graph: BarricadeWoodenFloor
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из деревянных досок. Неплохое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_wooden_floor
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-- type: construction
-  name: баррикада из стали 
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: WoodPlank
+              amount: 1
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadeWoodenFloor
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: MaterialWoodPlank1
+              amount: 1
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+              
+- type: constructionGraph
   id: BarricadeSteelFloor
-  graph: BarricadeSteelFloor
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из листов стали. Хорошое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_steel_floor
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
-  
-- type: construction
-  name: баррикада из пластали
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadeSteelFloor
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 1
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+              
+- type: constructionGraph
   id: BarricadePlasteelFloor
-  graph: BarricadePlasteelFloor
-  startNode: start 
-  targetNode: barricadefull 
-  category: construction-category-structures 
-  description: Баррикады из листов пластали. Отличное средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_plasteel_floor
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: true
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadefull
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1
+            - material: Plasteel
+              amount: 1
+              doAfter: 1
+    - node: barricadefull
+      entity: BarricadePlasteelFloor
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 1
+              prototype: SheetPlasteel1
+              amount: 1
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Welding
+              doAfter: 2
+            - tool: Screwing
+              doAfter: 1
+            - tool: Prying
+              doAfter: 3
+            - tool: Welding
+              doAfter: 1
