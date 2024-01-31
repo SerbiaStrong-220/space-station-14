@@ -4,9 +4,9 @@
 - type: construction
   name: баррикада из дерева
   id: BarricadeWooden
-  graph: BarricadeWooden
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadewood
   category: construction-category-structures 
   description: Баррикады из деревянных досок. Неплохое средство защиты.
   icon:
@@ -19,9 +19,9 @@
 - type: construction
   name: баррикада из стали 
   id: BarricadeSteel
-  graph: BarricadeSteel
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadesteel
   category: construction-category-structures 
   description: Баррикады из листов стали. Хорошое средство защиты.
   icon:
@@ -34,9 +34,9 @@
 - type: construction
   name: баррикада из пластали
   id: BarricadePlasteel
-  graph: BarricadePlasteel
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadeplasteel
   category: construction-category-structures 
   description: Баррикады из листов пластали. Отличное средство защиты.
   icon:
@@ -50,9 +50,9 @@
 - type: construction
   name: баррикада из дерева
   id: BarricadeWoodenDirectional
-  graph: BarricadeWoodenDirectional
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadewooddirectional
   category: construction-category-structures 
   description: Баррикады из деревянных досок. Неплохое средство защиты.
   icon:
@@ -67,7 +67,7 @@
   id: BarricadeSteelDirectional
   graph: BarricadeSteelDirectional
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadesteeldirectional
   category: construction-category-structures 
   description: Баррикады из листов стали. Хорошое средство защиты.
   icon:
@@ -80,9 +80,9 @@
 - type: construction
   name: баррикада из пластали
   id: BarricadePlasteelDirectional
-  graph: BarricadePlasteelDirectional
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadeplasteeldirectional 
   category: construction-category-structures 
   description: Баррикады из листов пластали. Отличное средство защиты.
   icon:
@@ -96,9 +96,9 @@
 - type: construction
   name: баррикада из дерева
   id: BarricadeWoodenFloor
-  graph: BarricadeWoodenFloor
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadewoodfloor 
   category: construction-category-structures 
   description: Баррикады из деревянных досок. Неплохое средство защиты.
   icon:
@@ -111,9 +111,9 @@
 - type: construction
   name: баррикада из стали 
   id: BarricadeSteelFloor
-  graph: BarricadeSteelFloor
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadesteelfloor 
   category: construction-category-structures 
   description: Баррикады из листов стали. Хорошое средство защиты.
   icon:
@@ -126,9 +126,9 @@
 - type: construction
   name: баррикада из пластали
   id: BarricadePlasteelFloor
-  graph: BarricadePlasteelFloor
+  graph: Barricade220
   startNode: start 
-  targetNode: barricadefull 
+  targetNode: barricadeplasteelfloor 
   category: construction-category-structures 
   description: Баррикады из листов пластали. Отличное средство защиты.
   icon:

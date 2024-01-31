@@ -81,8 +81,8 @@
   - type: Sprite
     state: barricade_wooden
   - type: Construction
-    graph: BarricadeWooden
-    node: barricadefull
+    graph: Barricade220
+    node: barricadewood
   - type: Tag
     tags:
     - Wooden
@@ -122,8 +122,8 @@
   - type: Sprite
     state: barricade_steel
   - type: Construction
-    graph: BarricadeSteel
-    node: barricadefull
+    graph: Barricade220
+    node: barricadesteel
   - type: Tag
     tags:
     - Steel
@@ -155,7 +155,7 @@
   - type: Sprite
     state: barricade_plasteel
   - type: Construction
-    graph: BarricadePlasteel
+    graph: Barricade220
     node: barricadefull
   - type: Tag
     tags:
@@ -194,8 +194,8 @@
   - type: Sprite
     state: barricade_wooden_directional
   - type: Construction
-    graph: BarricadeWoodenDirectional
-    node: barricadefull
+    graph: Barricade220
+    node: barricadewooddirectional
   - type: Tag
     tags:
     - Wooden
@@ -235,8 +235,8 @@
   - type: Sprite
     state: barricade_steel_directional
   - type: Construction
-    graph: BarricadeSteelDirectional
-    node: barricadefull
+    graph: Barricade220
+    node: barricadesteeldirectional
   - type: Tag
     tags:
     - Steel
@@ -268,8 +268,8 @@
   - type: Sprite
     state: barricade_plasteel_directional
   - type: Construction
-    graph: BarricadePlasteelDirectional
-    node: barricadefull
+    graph: Barricade220
+    node: barricadeplasteeldirectional
   - type: Tag
     tags:
     - Plasteel
@@ -307,8 +307,8 @@
   - type: Sprite
     state: barricade_wooden_floor
   - type: Construction
-    graph: BarricadeWoodenFloor
-    node: barricadefull
+    graph: Barricade220
+    node: barricadewoodfloor
   - type: Tag
     tags:
     - Wooden
@@ -348,8 +348,8 @@
   - type: Sprite
     state: barricade_steel_floor
   - type: Construction
-    graph: BarricadeSteelFloor
-    node: barricadefull
+    graph: Barricade220
+    node: barricadesteelfloor
   - type: Tag
     tags:
     - Steel
@@ -381,8 +381,8 @@
   - type: Sprite
     state: barricade_plasteel_floor
   - type: Construction
-    graph: BarricadePlasteelFloor
-    node: barricadefull
+    graph: Barricade220
+    node: barricadeplasteelfloor
   - type: Tag
     tags:
     - Plastel
