@@ -388,7 +388,7 @@
   id: BarricadePlasteelFloor
   description: Баррикада небольшой высоты из листов пластали. Есть шанс защитить от шальной пули.
   parent: EstBaseBarrucadeFloor
-  name: Напольная укрепленная баррикада
+  name: напольная укрепленная баррикада
   placement:
     mode: SnapgridCenter
   components:
