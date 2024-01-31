@@ -44,7 +44,7 @@
         - WallLayer
         
 - type: entity
-  id: EstBaseBarrucadeFloor
+  id: BaseBarricadeFloor220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
   parent: BaseStructure
   name: barricade
