@@ -44,7 +44,7 @@
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity
-#      - id: ClothingEyesHudSecurity | MinorTweaks 698 Не нужен
+#      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
 #SS220-Pilot
 - type: entity
   id: LockerPilotFilled
