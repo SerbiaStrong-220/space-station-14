@@ -10,17 +10,17 @@
         prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
-      - id: ClothingEyesGlassesSunglasses
+#      - id: ClothingEyesGlassesSunglasses | MinorTweaks 698
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
-      - id: ClothingOuterCoatWarden
-      - id: ClothingOuterWinterWarden
+#      - id: ClothingOuterCoatWarden | MinorTweaks 698
+#      - id: ClothingOuterWinterWarden | MinorTweaks 698
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
-      - id: ClothingEyesHudSecurity
+#      - id: ClothingEyesHudSecurity | MinorTweaks 698 Не нужен
 
 - type: entity
   id: LockerWardenFilled
@@ -34,17 +34,17 @@
         prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
-      - id: ClothingEyesGlassesSunglasses
+#      - id: ClothingEyesGlassesSunglasses | MinorTweaks 698
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
-      - id: ClothingOuterCoatWarden
-      - id: ClothingOuterWinterWarden
-      - id: ClothingOuterCoatWardenAlt # Corvax-SecFashion
+#      - id: ClothingOuterCoatWarden | MinorTweaks 698
+#      - id: ClothingOuterWinterWarden | MinorTweaks 698
+#      - id: ClothingOuterCoatWardenAlt # Corvax-SecFashion | MinorTweaks 698
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity
-      - id: ClothingEyesHudSecurity
+#      - id: ClothingEyesHudSecurity | MinorTweaks 698 Не нужен
 #SS220-Pilot
 - type: entity
   id: LockerPilotFilled

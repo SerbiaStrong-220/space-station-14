@@ -48,7 +48,8 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
     back: ClothingBackpackFilled
-    shoes: ClothingShoesBootsJack
+#    shoes: ClothingShoesBootsJack | MinorTweaks 687
+    shoes: ClothingShoesBootsCombatFilled 
     eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretNavyBlue
     outerClothing: ClothingOuterArmorBulletproof

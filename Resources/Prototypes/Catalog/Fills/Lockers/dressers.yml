@@ -104,3 +104,7 @@
       - id: ClothingHeadHatWarden
       - id: ClothingHeadHatBeretWarden
       - id: ClothingHeadHatCapWardenAlt # Corvax-SecFashion
+      - id: ClothingOuterCoatWarden #MinorTweaks 698
+      - id: ClothingOuterCoatWardenAlt #MinorTweaks 698
+      - id: ClothingOuterWinterWarden #MinorTweaks 698
+      - id: ClothingEyesGlassesSunglasses #MinorTweaks 698
