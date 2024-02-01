@@ -34,7 +34,7 @@
         prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
-#      - id: ClothingEyesGlassesSunglasses | MinorTweaks 698
+#      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
