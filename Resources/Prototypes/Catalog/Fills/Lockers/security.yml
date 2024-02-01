@@ -20,7 +20,7 @@
       - id: DoorRemoteArmory
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
-#      - id: ClothingEyesHudSecurity | MinorTweaks 698 Не нужен
+#      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
 
 - type: entity
   id: LockerWardenFilled
