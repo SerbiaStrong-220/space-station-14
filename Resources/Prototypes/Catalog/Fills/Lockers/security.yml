@@ -15,7 +15,7 @@
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
 #      - id: ClothingOuterCoatWarden #SS220-MinorTweaks
-#      - id: ClothingOuterWinterWarden | MinorTweaks 698
+#      - id: ClothingOuterWinterWarden #SS220-MinorTweaks
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: ClothingOuterHardsuitWarden
