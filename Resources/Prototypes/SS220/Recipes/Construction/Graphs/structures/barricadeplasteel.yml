@@ -37,8 +37,6 @@
             - !type:SpawnPrototype 
               prototype: SheetSteel1   
               amount: 2
-              prototype: SheetPlasteel1
-              amount: 2
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored
@@ -60,8 +58,6 @@
             - !type:SpawnPrototype 
               prototype: SheetSteel1   
               amount: 2
-              prototype: SheetPlasteel1
-              amount: 1
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored
@@ -82,8 +78,6 @@
           completed:
             - !type:SpawnPrototype 
               prototype: SheetSteel1   
-              amount: 1
-              prototype: SheetPlasteel1
               amount: 1
             - !type:DeleteEntity {}
           conditions:
