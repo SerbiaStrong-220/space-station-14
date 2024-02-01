@@ -1,6 +1,6 @@
 #© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-# Абстрактные базы
+#Абстрактные базы
 - type: entity
   id: BaseBarricade220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
@@ -32,7 +32,7 @@
   parent: BaseBarricade220
   name: barricadedirectional
   abstract: true
-  components: 
+  components:
   - type: Fixtures
     fixtures:
       fix1:
@@ -50,7 +50,7 @@
   parent: BaseStructure
   name: barricade
   abstract: true
-  components: 
+  components:
   - type: InteractionOutline
   - type: Sprite
     sprite: SS220/Structures/barricades.rsi
@@ -69,10 +69,10 @@
         - FullTileMask
         layer:
         - WallLayer
- #Баррикады       
+#Баррикады
 - type: entity
   id: BarricadeWooden
-  description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
+  description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз.
   parent: BaseBarricade220
   name: деревянная уплотненная баррикада
   placement:
@@ -90,7 +90,7 @@
     fireSpread: true
     damage:
       types:
-        Heat: 2 
+        Heat: 2
   - type: FireVisuals
     sprite: Effects/fire.rsi
     normalState: 1
@@ -101,7 +101,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 90
+        damage: 60
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -134,7 +134,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 180
+        damage: 120
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -167,7 +167,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 440
+        damage: 260
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -214,7 +214,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 60
+        damage: 45
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -247,7 +247,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 120
+        damage: 80
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -280,7 +280,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 360
+        damage: 200
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -327,7 +327,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 40
+        damage: 30
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -360,7 +360,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
+        damage: 50
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn: 
@@ -393,7 +393,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 220
+        damage: 90
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
