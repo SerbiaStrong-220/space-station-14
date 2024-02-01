@@ -81,7 +81,7 @@
   - type: Sprite
     state: barricade_wooden
   - type: Construction
-    graph: Barricade220
+    graph: BarricadeWooden220
     node: barricadewood
   - type: Tag
     tags:
@@ -122,7 +122,7 @@
   - type: Sprite
     state: barricade_steel
   - type: Construction
-    graph: Barricade220
+    graph: BarricadeSteel220
     node: barricadesteel
   - type: Tag
     tags:
@@ -155,7 +155,7 @@
   - type: Sprite
     state: barricade_plasteel
   - type: Construction
-    graph: Barricade220
+    graph: BarricadePlasteel220
     node: barricadefull
   - type: Tag
     tags:
@@ -194,7 +194,7 @@
   - type: Sprite
     state: barricade_wooden_directional
   - type: Construction
-    graph: Barricade220
+    graph: BarricadeWooden220
     node: barricadewooddirectional
   - type: Tag
     tags:
@@ -235,7 +235,7 @@
   - type: Sprite
     state: barricade_steel_directional
   - type: Construction
-    graph: Barricade220
+    graph: BarricadeSteel220
     node: barricadesteeldirectional
   - type: Tag
     tags:
@@ -268,7 +268,7 @@
   - type: Sprite
     state: barricade_plasteel_directional
   - type: Construction
-    graph: Barricade220
+    graph: BarricadePlasteel220
     node: barricadeplasteeldirectional
   - type: Tag
     tags:
@@ -307,7 +307,7 @@
   - type: Sprite
     state: barricade_wooden_floor
   - type: Construction
-    graph: Barricade220
+    graph: BarricadeWooden220
     node: barricadewoodfloor
   - type: Tag
     tags:
@@ -348,7 +348,7 @@
   - type: Sprite
     state: barricade_steel_floor
   - type: Construction
-    graph: Barricade220
+    graph: BarricadeSteel220
     node: barricadesteelfloor
   - type: Tag
     tags:
@@ -381,7 +381,7 @@
   - type: Sprite
     state: barricade_plasteel_floor
   - type: Construction
-    graph: Barricade220
+    graph: BarricadePlasteel220
     node: barricadeplasteelfloor
   - type: Tag
     tags:

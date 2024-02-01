@@ -4,7 +4,7 @@
 - type: construction
   name: баррикада из дерева
   id: BarricadeWooden
-  graph: Barricade220
+  graph: BarricadeWooden220
   startNode: start 
   targetNode: barricadewood
   category: construction-category-structures 
@@ -19,7 +19,7 @@
 - type: construction
   name: баррикада из стали 
   id: BarricadeSteel
-  graph: Barricade220
+  graph: BarricadeSteel220
   startNode: start 
   targetNode: barricadesteel
   category: construction-category-structures 
@@ -34,7 +34,7 @@
 - type: construction
   name: баррикада из пластали
   id: BarricadePlasteel
-  graph: Barricade220
+  graph: BarricadePlasteel220
   startNode: start 
   targetNode: barricadeplasteel
   category: construction-category-structures 
@@ -50,7 +50,7 @@
 - type: construction
   name: баррикада из дерева
   id: BarricadeWoodenDirectional
-  graph: Barricade220
+  graph: BarricadeWooden220
   startNode: start 
   targetNode: barricadewooddirectional
   category: construction-category-structures 
@@ -65,7 +65,7 @@
 - type: construction
   name: баррикада из стали 
   id: BarricadeSteelDirectional
-  graph: BarricadeSteelDirectional
+  graph: BarricadeSteel220
   startNode: start 
   targetNode: barricadesteeldirectional
   category: construction-category-structures 
@@ -80,7 +80,7 @@
 - type: construction
   name: баррикада из пластали
   id: BarricadePlasteelDirectional
-  graph: Barricade220
+  graph: BarricadePlasteel220
   startNode: start 
   targetNode: barricadeplasteeldirectional 
   category: construction-category-structures 
@@ -96,7 +96,7 @@
 - type: construction
   name: баррикада из дерева
   id: BarricadeWoodenFloor
-  graph: Barricade220
+  graph: BarricadeWooden220
   startNode: start 
   targetNode: barricadewoodfloor 
   category: construction-category-structures 
@@ -111,7 +111,7 @@
 - type: construction
   name: баррикада из стали 
   id: BarricadeSteelFloor
-  graph: Barricade220
+  graph: BarricadeSteel220
   startNode: start 
   targetNode: barricadesteelfloor 
   category: construction-category-structures 
@@ -126,7 +126,7 @@
 - type: construction
   name: баррикада из пластали
   id: BarricadePlasteelFloor
-  graph: Barricade220
+  graph: BarricadePlasteel220
   startNode: start 
   targetNode: barricadeplasteelfloor 
   category: construction-category-structures 
