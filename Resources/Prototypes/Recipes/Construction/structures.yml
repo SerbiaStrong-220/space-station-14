@@ -786,7 +786,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  #conditions: | NewBarricade #696 
+  #conditions: #SS220-Barricade
     #- !type:TileNotBlocked | NewBarricade #696 
 
 - type: construction
