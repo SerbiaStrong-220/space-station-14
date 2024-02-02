@@ -143,7 +143,7 @@
         
 - type: entity
   id: BarricadePlasteel
-  description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способен выдержать взрыв C4.
+  description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способна выдержать взрыв C4.
   parent: BaseBarricade220
   name: укрепленная баррикада
   placement:
