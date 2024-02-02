@@ -124,9 +124,6 @@
   - type: Construction
     graph: BarricadeSteel220
     node: barricadesteel
-  - type: Tag
-    tags:
-    - Steel
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
@@ -157,9 +154,6 @@
   - type: Construction
     graph: BarricadePlasteel220
     node: barricadefull
-  - type: Tag
-    tags:
-    - Plasteel
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
@@ -237,9 +231,6 @@
   - type: Construction
     graph: BarricadeSteel220
     node: barricadesteeldirectional
-  - type: Tag
-    tags:
-    - Steel
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
@@ -270,9 +261,6 @@
   - type: Construction
     graph: BarricadePlasteel220
     node: barricadeplasteeldirectional
-  - type: Tag
-    tags:
-    - Plasteel
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
@@ -350,9 +338,6 @@
   - type: Construction
     graph: BarricadeSteel220
     node: barricadesteelfloor
-  - type: Tag
-    tags:
-    - Steel
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
@@ -383,9 +368,6 @@
   - type: Construction
     graph: BarricadePlasteel220
     node: barricadeplasteelfloor
-  - type: Tag
-    tags:
-    - Plastel
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
