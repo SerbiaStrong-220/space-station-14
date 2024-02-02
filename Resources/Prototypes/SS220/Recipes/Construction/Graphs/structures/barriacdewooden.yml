@@ -27,7 +27,7 @@
           completed:
             - !type:SpawnPrototype 
               prototype: MaterialWoodPlank1
-              amount: 5
+              amount: 3
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored
@@ -42,7 +42,7 @@
           completed:
             - !type:SpawnPrototype 
               prototype: MaterialWoodPlank1
-              amount: 3
+              amount: 2
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored
@@ -55,9 +55,6 @@
       edges:
         - to: start
           completed:
-            - !type:SpawnPrototype 
-              prototype: MaterialWoodPlank1
-              amount: 1
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored

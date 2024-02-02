@@ -169,8 +169,8 @@
             min: 2
             max: 2
           SheetPlasteel1:
-            min: 2
-            max: 2
+            min: 1
+            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
         
@@ -271,8 +271,8 @@
             min: 1
             max: 1
           SheetPlasteel1:
-            min: 2
-            max: 2
+            min: 1
+            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
         
@@ -312,11 +312,6 @@
         !type:DamageTrigger
         damage: 30
       behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
        
@@ -367,13 +362,5 @@
         !type:DamageTrigger
         damage: 90
       behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          SheetSteel1:
-            min: 1
-            max: 1
-          SheetPlasteel1:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]

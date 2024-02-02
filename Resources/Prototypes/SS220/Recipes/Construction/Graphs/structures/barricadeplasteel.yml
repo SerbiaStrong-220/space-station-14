@@ -57,7 +57,7 @@
           completed:
             - !type:SpawnPrototype 
               prototype: SheetSteel1   
-              amount: 2
+              amount: 1
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored
@@ -76,9 +76,6 @@
       edges:
         - to: start
           completed:
-            - !type:SpawnPrototype 
-              prototype: SheetSteel1   
-              amount: 1
             - !type:DeleteEntity {}
           conditions:
             - !type:EntityAnchored
