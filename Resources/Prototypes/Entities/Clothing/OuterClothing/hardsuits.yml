@@ -242,7 +242,7 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.85 #0.8 #SS220-MinorTweaks start
+        Blunt: 0.85 #SS220-MinorTweaks start
         Slash: 0.85 #0.8
         Piercing: 0.80 #0.7
         Radiation: 0.7
