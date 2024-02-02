@@ -804,7 +804,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   #conditions: #SS220-Barricade
-    #- !type:TileNotBlocked | NewBarricade #696
+    #- !type:TileNotBlocked #SS220-Barricade
 
 - type: construction
   name: railing
