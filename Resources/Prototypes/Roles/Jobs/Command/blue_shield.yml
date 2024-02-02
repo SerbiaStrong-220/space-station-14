@@ -48,7 +48,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
     back: ClothingBackpackFilled
-#    shoes: ClothingShoesBootsJack | MinorTweaks 687
+#    shoes: ClothingShoesBootsJack #SS220-MinorTweaks
     shoes: ClothingShoesBootsCombatFilled 
     eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretNavyBlue

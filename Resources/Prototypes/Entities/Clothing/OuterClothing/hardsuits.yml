@@ -237,20 +237,20 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
-  - type: ExplosionResistance #MinorTweaks 698
+  - type: ExplosionResistance #SS220-MinorTweaks
     damageCoefficient: 0.7
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.85 #0.8 | MinorTweaks 698
-        Slash: 0.85 #0.8 | MinorTweaks 698
-        Piercing: 0.80 #0.7 | MinorTweaks 698
-        Radiation: 0.7  #MinorTweaks 698
-        Caustic: 0.8  #MinorTweaks 698
+        Blunt: 0.85 #0.8 #SS220-MinorTweaks start
+        Slash: 0.85 #0.8
+        Piercing: 0.80 #0.7
+        Radiation: 0.7
+        Caustic: 0.8  #SS220-MinorTweaks end
         Stamina: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.90 #0.65 | MinorTweaks 698
-    sprintModifier: 0.90 #0.65 | MinorTweaks 698
+    walkModifier: 0.90 #0.65 SS220-MinorTweaks
+    sprintModifier: 0.90 #0.65 SS220-MinorTweaks
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBrigmedic
