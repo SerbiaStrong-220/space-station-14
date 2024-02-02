@@ -250,7 +250,7 @@
         Stamina: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.90 #0.65 SS220-MinorTweaks
-    sprintModifier: 0.90 #0.65 SS220-MinorTweaks
+    sprintModifier: 0.90 #SS220-MinorTweaks
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBrigmedic
