@@ -74,7 +74,7 @@
   id: BarricadeWooden
   description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз.
   parent: BaseBarricade220
-  name: деревянная уплотненная баррикада
+  name: уплотнённая деревянная баррикада
   placement:
     mode: SnapgridCenter
   components:
