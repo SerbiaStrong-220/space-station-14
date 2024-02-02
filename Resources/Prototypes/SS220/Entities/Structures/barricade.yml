@@ -145,7 +145,7 @@
   id: BarricadePlasteel
   description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способна выдержать взрыв C4.
   parent: BaseBarricade220
-  name: укрепленная баррикада
+  name: укреплённая баррикада
   placement:
     mode: SnapgridCenter
   components:
