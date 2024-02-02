@@ -244,7 +244,7 @@
       coefficients:
         Blunt: 0.85 #SS220-MinorTweaks start
         Slash: 0.85
-        Piercing: 0.80 #0.7
+        Piercing: 0.80
         Radiation: 0.7
         Caustic: 0.8  #SS220-MinorTweaks end
         Stamina: 0.8
