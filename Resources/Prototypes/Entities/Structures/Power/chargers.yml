@@ -107,7 +107,7 @@
         blacklist:
           tags:
           - PotatoBattery
-          
+
 - type: entity
   parent: [ BaseItemRecharger, ConstructibleMachine ]
   id: PowerCageRecharger
@@ -211,6 +211,8 @@
       state: "light-off"
       shader: "unshaded"
   - type: WallMount
+  - type: Fixtures
+    fixtures: {} # SS220/Directionl wall charger
   - type: Charger
     chargeRate: 25
   - type: Physics

@@ -5,9 +5,9 @@
   suffix: Диагональ, Красный
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: Structures/Walls/shuttle_red_diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: Structures/Walls/shuttle_red_diagonal.rsi
 
 - type: entity
   parent: WallShuttleDiagonal

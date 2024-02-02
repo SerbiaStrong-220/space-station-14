@@ -4,6 +4,8 @@ using Content.Server.Station.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using System.Text;
+using Content.Server.Administration.Managers;
+using Content.Shared.Administration;
 
 namespace Content.Server.GameTicking
 {
@@ -30,6 +32,8 @@ namespace Content.Server.GameTicking
         [ViewVariables]
         private bool _roundStartCountdownHasNotStartedYetDueToNoPlayers;
 
+        [Dependency] private readonly IAdminManager _adminMgr = default!;
+
         /// <summary>
         /// The game status of a players user Id. May contain disconnected players
         /// </summary>
@@ -37,10 +41,14 @@ namespace Content.Server.GameTicking
 
         public void UpdateInfoText()
         {
-            RaiseNetworkEvent(GetInfoMsg(), Filter.Empty().AddPlayers(_playerManager.NetworkedSessions));
+            foreach (var session in _playerManager.NetworkedSessions)
+            {
+                RaiseNetworkEvent(GetInfoMsg(session), session.Channel);
+            }
+            // RaiseNetworkEvent(GetInfoMsg(), Filter.Empty().AddPlayers(_playerManager.NetworkedSessions));
         }
 
-        private string GetInfoText()
+        private string GetInfoText(ICommonSession session)
         {
             var preset = CurrentPreset ?? Preset;
             if (preset == null)
@@ -72,8 +80,17 @@ namespace Content.Server.GameTicking
                                     Loc.GetString("game-ticker-no-map-selected"));
             }
 
-            var gmTitle = Loc.GetString(preset.ModeTitle);
-            var desc = Loc.GetString(preset.Description);
+            // SS220 Ограничение информации для пользователей о текущем режиме игры.
+            // Для не администрации текущий режим всегда отображается как секрет.
+            var isAdmin = _adminMgr.HasAdminFlag(session, AdminFlags.Admin);
+
+            var gmTitle = isAdmin
+                ? Loc.GetString(preset.ModeTitle)
+                : Loc.GetString("secret-title");
+            var desc = isAdmin
+                ? Loc.GetString(preset.Description)
+                : Loc.GetString("secret-description");
+
             return Loc.GetString(
                 RunLevel == GameRunLevel.PreRoundLobby
                     ? "game-ticker-get-info-preround-text"
@@ -105,9 +122,9 @@ namespace Content.Server.GameTicking
             }
         }
 
-        private TickerLobbyInfoEvent GetInfoMsg()
+        private TickerLobbyInfoEvent GetInfoMsg(ICommonSession session)
         {
-            return new (GetInfoText());
+            return new (GetInfoText(session));
         }
 
         private void UpdateLateJoinStatus()
