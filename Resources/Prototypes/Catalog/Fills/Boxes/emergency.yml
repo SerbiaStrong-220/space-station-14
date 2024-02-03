@@ -68,7 +68,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingMaskBreathMedical
+      - id: ClothingMaskBreathMedicalSecurity
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
