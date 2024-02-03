@@ -5,7 +5,7 @@
     ReagentContainerCornmeal: 2
     ReagentContainerSugar: 2
     ReagentContainerRice: 2
-    FoodCondimentPacketSalt: 4
+    FoodShakerSalt: 2 # SS220 SaltRiot
     FoodCondimentBottleEnzyme: 2
     FoodCondimentBottleHotsauce: 1
     FoodCondimentBottleKetchup: 1
@@ -20,4 +20,4 @@
     FoodButter: 4
     FoodCheese: 1
     FoodMeat: 6
-    
+
