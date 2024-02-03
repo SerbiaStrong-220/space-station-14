@@ -292,16 +292,16 @@
     emptySpriteName: hypovolemic_empty
   - type: Hypospray
     solutionName: pen
-    transferAmount: 30
+    transferAmount: 20 # SS220 Revert deleted medipen
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 30
+        maxVol: 20 # SS220 Revert deleted medipen
         reagents:
           - ReagentId: Leporazine
-            Quantity: 10
+            Quantity: 10 # SS220 Revert deleted medipen
           - ReagentId: Barozine
-            Quantity: 20
+            Quantity: 10 # SS220 Revert deleted medipen
   - type: Tag
     tags: []
 
