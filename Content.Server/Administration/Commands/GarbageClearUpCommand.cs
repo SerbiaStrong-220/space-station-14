@@ -13,26 +13,25 @@ namespace Content.Server.Administration.Commands
     {
         [Dependency] private readonly IEntityManager _entMan = default!;
 
-        public string Command => "ClearUpGarbage";
-        public string Description => "Removes all objects with a tag 'trash' from the map";
-        public string Help => "Surgery tommorow";
+        public string Command => "clearupgarbage";
+        public string Description => "Удаляет весь мусор с карты (применимо к объектам с тегом 'trash')";
+        public string Help => $"Usage: {Command} ... surgery tommorow";
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             var _containerSystem = _entMan.System<SharedContainerSystem>();
-            int cnt = 0;
+            int processed = 0;
             foreach (var ent in _entMan.GetEntities())
             {
                 if (!_entMan.TryGetComponent<TagComponent>(ent, out var component))
                     continue;
-                if (_entMan.TryGetComponent<CartridgeAmmoComponent>(ent, out var ammo) && !ammo.Spent)
-                    continue;
                 if (!component.Tags.Contains("Trash") || _containerSystem.IsEntityOrParentInContainer(ent))
                     continue;
+
                 _entMan.DeleteEntity(ent);
-                cnt++;
+                processed++;
             }
-            shell.WriteLine($"Карта очищена от {cnt} единиц мусора!");
+            shell.WriteLine($"Удалено {processed} энтити.");
         }
     }
 }
