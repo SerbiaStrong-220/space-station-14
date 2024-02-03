@@ -296,7 +296,7 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 20
+        maxVol: 20 # SS220 Revert deleted medipen
         reagents:
           - ReagentId: Leporazine
             Quantity: 10 # SS220 Revert deleted medipen
