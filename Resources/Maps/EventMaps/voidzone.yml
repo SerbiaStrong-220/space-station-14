@@ -3545,6 +3545,14 @@ entities:
           referenceAngle: 3.1415927
           damping: 647.17926
           stiffness: 5809.068
+        docking53834: !type:WeldJoint
+          bodyB: 5
+          bodyA: 1667
+          id: docking53834
+          localAnchorB: -10,-6.5
+          localAnchorA: 27,-4.5
+          damping: 5030.3706
+          stiffness: 45152.5
         docking53850: !type:WeldJoint
           bodyB: 10886
           bodyA: 1667
@@ -3554,14 +3562,6 @@ entities:
           referenceAngle: 1.5707964
           damping: 1958.2252
           stiffness: 17576.988
-        docking53834: !type:WeldJoint
-          bodyB: 5
-          bodyA: 1667
-          id: docking53834
-          localAnchorB: -10,-6.5
-          localAnchorA: 27,-4.5
-          damping: 5030.3706
-          stiffness: 45152.5
   - uid: 9384
     components:
     - type: MetaData
@@ -4826,6 +4826,15 @@ entities:
       color: '#5555FFFF'
     - type: Joint
       joints:
+        docking53848: !type:WeldJoint
+          bodyB: 10886
+          bodyA: 1667
+          id: docking53848
+          localAnchorB: 1.5,-10
+          localAnchorA: -24,13.5
+          referenceAngle: 1.5707964
+          damping: 1958.2252
+          stiffness: 17576.988
         docking53850: !type:WeldJoint
           bodyB: 10886
           bodyA: 1667
@@ -4841,15 +4850,6 @@ entities:
           id: docking53849
           localAnchorB: 0.49999997,-10
           localAnchorA: -24,12.5
-          referenceAngle: 1.5707964
-          damping: 1958.2252
-          stiffness: 17576.988
-        docking53848: !type:WeldJoint
-          bodyB: 10886
-          bodyA: 1667
-          id: docking53848
-          localAnchorB: 1.5,-10
-          localAnchorA: -24,13.5
           referenceAngle: 1.5707964
           damping: 1958.2252
           stiffness: 17576.988
@@ -8764,7 +8764,7 @@ entities:
       dockJointId: docking53831
       dockedWith: 9590
     - type: Door
-      secondsUntilStateChange: -801.3636
+      secondsUntilStateChange: -841.4149
       state: Opening
   - uid: 1768
     components:
@@ -8775,7 +8775,7 @@ entities:
       dockJointId: docking53832
       dockedWith: 9388
     - type: Door
-      secondsUntilStateChange: -829.5473
+      secondsUntilStateChange: -869.59863
       state: Opening
   - uid: 1769
     components:
@@ -8793,7 +8793,7 @@ entities:
       dockJointId: docking53834
       dockedWith: 45
     - type: Door
-      secondsUntilStateChange: -745.4282
+      secondsUntilStateChange: -785.47955
       state: Opening
   - uid: 1771
     components:
@@ -8829,7 +8829,7 @@ entities:
       dockJointId: docking53839
       dockedWith: 10004
     - type: Door
-      secondsUntilStateChange: -728.5278
+      secondsUntilStateChange: -768.5791
       state: Opening
   - uid: 1776
     components:
@@ -8859,7 +8859,7 @@ entities:
       dockJointId: docking53843
       dockedWith: 9792
     - type: Door
-      secondsUntilStateChange: -857.88055
+      secondsUntilStateChange: -897.9319
       state: Opening
   - uid: 1780
     components:
@@ -8883,7 +8883,7 @@ entities:
       dockJointId: docking53846
       dockedWith: 10473
     - type: Door
-      secondsUntilStateChange: -903.297
+      secondsUntilStateChange: -943.3483
       state: Opening
   - uid: 1783
     components:
@@ -8901,7 +8901,7 @@ entities:
       dockJointId: docking53848
       dockedWith: 10893
     - type: Door
-      secondsUntilStateChange: -960.2631
+      secondsUntilStateChange: -1000.31445
       state: Opening
   - uid: 1785
     components:
@@ -8913,7 +8913,7 @@ entities:
       dockJointId: docking53849
       dockedWith: 10894
     - type: Door
-      secondsUntilStateChange: -962.3129
+      secondsUntilStateChange: -1002.36426
       state: Opening
   - uid: 1786
     components:
@@ -8925,7 +8925,7 @@ entities:
       dockJointId: docking53850
       dockedWith: 10895
     - type: Door
-      secondsUntilStateChange: -962.546
+      secondsUntilStateChange: -1002.59735
       state: Opening
 - proto: AirlockExternalGlassSyndicateLocked
   entities:
@@ -9612,7 +9612,7 @@ entities:
       dockJointId: docking53834
       dockedWith: 1770
     - type: Door
-      secondsUntilStateChange: -745.64764
+      secondsUntilStateChange: -785.699
       state: Opening
   - uid: 9388
     components:
@@ -9625,7 +9625,7 @@ entities:
       dockJointId: docking53832
       dockedWith: 1768
     - type: Door
-      secondsUntilStateChange: -829.8635
+      secondsUntilStateChange: -869.91486
       state: Opening
   - uid: 9590
     components:
@@ -9638,7 +9638,7 @@ entities:
       dockJointId: docking53831
       dockedWith: 1767
     - type: Door
-      secondsUntilStateChange: -801.5637
+      secondsUntilStateChange: -841.61505
       state: Opening
   - uid: 9792
     components:
@@ -9651,7 +9651,7 @@ entities:
       dockJointId: docking53843
       dockedWith: 1779
     - type: Door
-      secondsUntilStateChange: -858.1139
+      secondsUntilStateChange: -898.1652
       state: Opening
   - uid: 10003
     components:
@@ -9675,7 +9675,7 @@ entities:
       dockJointId: docking53839
       dockedWith: 1775
     - type: Door
-      secondsUntilStateChange: -727.7311
+      secondsUntilStateChange: -767.7824
       state: Opening
   - uid: 10473
     components:
@@ -9690,7 +9690,7 @@ entities:
       dockJointId: docking53846
       dockedWith: 1782
     - type: Door
-      secondsUntilStateChange: -903.747
+      secondsUntilStateChange: -943.79834
       state: Opening
   - uid: 10474
     components:
@@ -9712,7 +9712,7 @@ entities:
       dockJointId: docking53848
       dockedWith: 1784
     - type: Door
-      secondsUntilStateChange: -960.6605
+      secondsUntilStateChange: -1000.71185
       state: Opening
   - uid: 10894
     components:
@@ -9725,7 +9725,7 @@ entities:
       dockJointId: docking53849
       dockedWith: 1785
     - type: Door
-      secondsUntilStateChange: -961.61346
+      secondsUntilStateChange: -1001.6648
       state: Opening
   - uid: 10895
     components:
@@ -9738,7 +9738,7 @@ entities:
       dockJointId: docking53850
       dockedWith: 1786
     - type: Door
-      secondsUntilStateChange: -1021.34656
+      secondsUntilStateChange: -1061.398
       state: Opening
 - proto: AirlockSyndicateGlass
   entities:
@@ -99524,35 +99524,6 @@ entities:
     - type: Transform
       pos: -12.41176,17.124445
       parent: 11405
-- proto: LockedUnicaBox
-  entities:
-  - uid: 7188
-    components:
-    - type: Transform
-      pos: -6.501597,29.707779
-      parent: 1667
-    - type: Storage
-      storedItems:
-        7191:
-          position: 0,0
-          _rotation: South
-        7189:
-          position: 2,0
-          _rotation: South
-        7190:
-          position: 3,0
-          _rotation: South
-    - type: Lock
-      locked: False
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 7191
-          - 7189
-          - 7190
 - proto: LockerBoozeFilled
   entities:
   - uid: 7192
@@ -117941,20 +117912,14 @@ entities:
   entities:
   - uid: 7189
     components:
-    - type: MetaData
-      flags: InContainer
     - type: Transform
-      parent: 7188
-    - type: Physics
-      canCollide: False
+      pos: -6.6623306,29.790955
+      parent: 1667
   - uid: 7190
     components:
-    - type: MetaData
-      flags: InContainer
     - type: Transform
-      parent: 7188
-    - type: Physics
-      canCollide: False
+      pos: -6.4435806,29.728455
+      parent: 1667
 - proto: SpeedLoaderMagnumAP
   entities:
   - uid: 8001
@@ -140580,13 +140545,11 @@ entities:
   - uid: 7191
     components:
     - type: MetaData
-      flags: InContainer
       desc: Интересный тип револьвера, подаренный самим председателем совета директоров NanoTrasen. Имеет позолоченную гравировку. Использует патроны калибра .45 магнум.
       name: Веллес
     - type: Transform
-      parent: 7188
-    - type: Physics
-      canCollide: False
+      pos: -6.6154556,29.822205
+      parent: 1667
 - proto: WeaponRifleAk
   entities:
   - uid: 9313
