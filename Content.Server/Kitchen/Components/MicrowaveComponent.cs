@@ -73,7 +73,7 @@ namespace Content.Server.Kitchen.Components
         public Container Storage = default!;
 
         [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public int Capacity = 10; // SS220 - microwave fix 10 -> 15
+        public int Capacity = 15; // SS220 - microwave fix 10 -> 15
 
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public ProtoId<ItemSizePrototype> MaxItemSize = "Normal";
