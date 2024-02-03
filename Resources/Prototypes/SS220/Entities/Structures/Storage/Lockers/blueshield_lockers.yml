@@ -35,9 +35,11 @@
     access: [ [ "Blueshield" ] ]
   - type: StorageFill
     contents:
-    - id: WeaponDisabler
-      amount: 1
-    - id: WeaponSubMachineGunDrozd
+#    - id: WeaponDisabler #SS220-MinorTweaks
+#      amount: 1 #SS220-MinorTweaks
+    - id: WeaponSubMachineGunDrozdRubber #SS220-MinorTweaks(#Rubber)
       amount: 1
     - id: MagazinePistolSubMachineGun
+      amount: 2
+    - id: MagazinePistolSubMachineGunRubber #SS220-MinorTweaks
       amount: 2
