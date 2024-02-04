@@ -61,7 +61,7 @@
     - DoorStatus
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Glass
+    damageModifierSet: RGlass # SS220 Fix Hand Broke Windoor
   - type: ExaminableDamage
     messages: WindowMessages
   - type: Destructible
