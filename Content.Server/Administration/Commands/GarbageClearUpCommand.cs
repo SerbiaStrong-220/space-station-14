@@ -2,7 +2,6 @@
 
 using Content.Shared.Administration;
 using Content.Shared.Tag;
-using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Containers;
 
@@ -13,6 +12,7 @@ namespace Content.Server.Administration.Commands
     {
         [Dependency] private readonly IEntityManager _entMan = default!;
 
+        //SS220-clearupgarbage
         public string Command => "clearupgarbage";
         public string Description => "Удаляет весь мусор с карты (применимо к объектам с тегом 'trash')";
         public string Help => $"Usage: {Command} ... surgery tommorow";
