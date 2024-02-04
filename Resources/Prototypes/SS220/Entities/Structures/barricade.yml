@@ -54,21 +54,21 @@
   - type: InteractionOutline
   - type: Sprite
     sprite: SS220/Structures/barricades.rsi
-    drawdepth: BlastDoors
     noRot: false
   - type: Appearance
   - type: AtmosExposed
+  - type: Climbable
   - type: Physics
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.39,-0.36"
+          bounds: "-0.5,-0.5,0.39,-0.25"
         mask:
-        - FullTileMask
+        - TableMask
         layer:
-        - WallLayer
+        - TableLayer
 #Баррикады
 - type: entity
   id: BarricadeWooden
@@ -101,7 +101,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 60
+        damage: 120
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -131,7 +131,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 120
+        damage: 240
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -161,7 +161,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 260
+        damage: 360
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -208,7 +208,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 45
+        damage: 90
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -238,7 +238,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
+        damage: 160
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -263,7 +263,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 280
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -310,7 +310,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 30
+        damage: 40
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -335,7 +335,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 80
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -360,7 +360,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 90
+        damage: 160
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
