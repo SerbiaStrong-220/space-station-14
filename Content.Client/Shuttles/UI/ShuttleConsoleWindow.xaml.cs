@@ -328,13 +328,13 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         // Get the positive reduced angle.
         var displayRot = -worldRot.Reduced();
 
-        GridPosition.Text = $"{worldPos.X:0.0}, {worldPos.Y:0.0}";
+        GridPosition.Text = $"{Math.Round(worldPos.X):0.0}, {Math.Round(worldPos.Y):0.0}";
         GridOrientation.Text = $"{displayRot.Degrees:0.0}";
 
         var gridVelocity = gridBody.LinearVelocity;
         gridVelocity = displayRot.RotateVec(gridVelocity);
         // Get linear velocity relative to the console entity
-        GridLinearVelocity.Text = $"{gridVelocity.X:0.0}, {gridVelocity.Y:0.0}";
-        GridAngularVelocity.Text = $"{-gridBody.AngularVelocity:0.0}";
+        GridLinearVelocity.Text = $"{Math.Round(gridVelocity.X):0.0}, {Math.Round(gridVelocity.Y):0.0}";
+        GridAngularVelocity.Text = $"{Math.Round(gridBody.AngularVelocity):0.0}";
     }
 }
