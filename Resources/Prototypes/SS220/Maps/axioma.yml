@@ -10,7 +10,7 @@
       stationProto: AxiomaNanotrasenStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
+          emergencyShuttlePath: /Maps/Shuttles/emergency_axioma.yml
         - type: StationNameSetup
           mapNameTemplate: '{0} Axioma {1}'
           nameGenerator:
