@@ -72,5 +72,5 @@
     - type: StationMinimap
       minimapData: !type:StationMinimapData
         mapTexture: SS220/ViewableMaps/Axioma.png
-        originOffset: -0, -0
+        originOffset: -85, 110
         mapScale: 6.4
