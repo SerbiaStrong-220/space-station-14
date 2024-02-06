@@ -1,0 +1,129 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: forcefield220
+  name: силовое поле
+  description: Продвинутая технология в действии. Способно спасти вас от баллистического снаряда, но абсолютно бесполезно против лазерного оружия.
+  noSpawn: true
+  save: false
+  components:
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: ForcefieldSS220
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,-0.25,1.5,0.25"
+        density: 100
+        mask:
+        - None
+        layer:
+        - BulletImpassable
+
+- type: entity
+  parent: BaseStructure
+  id: forcefieldGenerator220
+  name: генератор силового поля
+  description: Генерирует направленное силовое поле, которое препятствует прониканию баллистических снарядов, но не способно сдерживать лазерное оружие.
+  components:
+  - type: ForcefieldGeneratorSS220
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 190
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - Toggle
+  - type: InteractionOutline
+  - type: Anchorable
+  - type: Sprite
+    sprite: SS220/Structures/Machines/EShieldSuttle.rsi
+    state: base
+    noRot: true
+    layers:
+      - state: base
+      - state: power_1
+        map: ["powerLight"]
+        shader: unshaded
+      - state: light_on
+        map: ["activeLight"]
+        visible: false
+        shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.ForcefieldGeneratorVisual.Active:
+        activeLight:
+          True: {visible: true}
+          False: {visible: false}
+      enum.ForcefieldGeneratorVisual.Power_1:
+        powerLight:
+          True: {state: power_1}
+      enum.ForcefieldGeneratorVisual.Power_2:
+        powerLight:
+          True: {state: power_2}
+      enum.ForcefieldGeneratorVisual.Power_3:
+        powerLight:
+          True: {state: power_3}
+      enum.ForcefieldGeneratorVisual.Power_4:
+        powerLight:
+          True: {state: power_4}
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StrongMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: PointLight
+    enabled: false
+    color: "#4080FF"
+    radius: 1.3
+    energy: 4.0
+    softness: 8.0
+  - type: Appearance
+  - type: Battery
+    startingCharge: 0
+    maxCharge: 5000
+  - type: ExaminableBattery
+  - type: BatteryCharger
+    voltage: Medium
+    node: input
+  - type: PowerNetworkBattery
+    canSupply: false
+    maxSupply: 0
+    maxChargeRate: 100
+    supplyRampTolerance: 5000
+    supplyRampRate: 1000
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      input:
+        !type:CableDeviceNode
+        nodeGroupID: MVPower
+  - type: AmbientSound
+    volume: 0
+    range: 6
+    enabled: false
+    sound:
+      path: /Audio/SS220/Effects/shield/eshild_loop.ogg

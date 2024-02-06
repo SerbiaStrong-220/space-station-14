@@ -41,7 +41,8 @@
         amount: 2
       - id: ReagentContainerSugar
       - id: FoodCondimentPacketSalt
-        amount: 3
+        amount: 1 # SS220 SaltRiot
+      - id: FoodShakerSalt # SS220 SaltRiot
       - id: FoodCondimentPacketPepper
         amount: 3
       - id: FoodCondimentBottleEnzyme

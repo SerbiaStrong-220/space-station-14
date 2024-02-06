@@ -86,7 +86,7 @@
   molarMass: 44
   color: 2887E8
   reagent: NitrousOxide
-  pricePerMole: 8 #ss220 Rebalance
+  pricePerMole: 1 #ss220 Rebalance
 
 - type: gas
   id: 8
@@ -99,4 +99,4 @@
   gasMolesVisible: 0.6
   color: 3a758c
   reagent: Frezon
-  pricePerMole: 13 #ss220 Rebalance
+  pricePerMole: 2.5 #ss220 Rebalance

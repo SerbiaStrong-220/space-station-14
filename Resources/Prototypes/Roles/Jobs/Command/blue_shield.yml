@@ -48,7 +48,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
     back: ClothingBackpackFilled
-    shoes: ClothingShoesBootsJack
+    shoes: ClothingShoesBootsCombatFilled 
     eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretNavyBlue
     outerClothing: ClothingOuterArmorBulletproof

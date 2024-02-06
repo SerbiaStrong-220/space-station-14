@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by EstKemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "barricade_plasteel_directional",
+      "directions": 4
+    },
+    {
+      "name": "barricade_plasteel_floor",
+      "directions": 4
+    },
+    {
+      "name": "barricade_steel",
+      "directions": 4
+    },
+    {
+      "name": "barricade_steel_directional",
+      "directions": 4
+    },
+    {
+      "name": "barricade_steel_floor",
+      "directions": 4
+    },
+    {
+      "name": "barricade_wooden",
+      "directions": 4
+    },
+    {
+      "name": "barricade_wooden_directional",
+      "directions": 4
+    },
+    {
+      "name": "barricade_wooden_floor",
+      "directions": 4
+    },
+    {
+      "name": "barricade_plasteel",
+      "directions": 4
+    }
+  ]
+}

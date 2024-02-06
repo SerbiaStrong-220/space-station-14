@@ -9,6 +9,7 @@
       - id: ClothingMaskBreath
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -28,6 +29,7 @@
       - id: ClothingMaskBreath
       - id: ExtendedEmergencyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -48,6 +50,7 @@
       - id: ClothingMaskGasSecurity
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -67,9 +70,9 @@
     contents:
       - id: ClothingMaskBreathMedicalSecurity
       - id: EmergencyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
-      - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
+      - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
   - type: Sprite
@@ -89,6 +92,7 @@
       - id: ClothingMaskBreathMedical
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -114,6 +118,7 @@
       - id: ClothingMaskBreath
       - id: EmergencyFunnyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -132,6 +137,7 @@
       - id: ClothingMaskGasSyndicate
       - id: ExtendedEmergencyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
