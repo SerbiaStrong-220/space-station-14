@@ -71,6 +71,6 @@
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData
-        mapTexture: SS220/ViewableMaps/Nox.png
-        originOffset: -44, -407
+        mapTexture: SS220/ViewableMaps/Axioma.png
+        originOffset: -0, -0
         mapScale: 6.4
