@@ -76,7 +76,8 @@ namespace Content.IntegrationTests.Tests
             "220Avrite",
             "220Marathon",
             "220Hive",
-            "VoidZone"
+            "VoidZone",
+            "NTvsSSSP"
         };
 
         /// <summary>
