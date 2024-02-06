@@ -54,3 +54,6 @@
 
 - files: ["nox.yml"]
   authors: Kit0vras, Glek3197
+
+- files: ["axioma.yml"]
+  authors: Vnoeg, Kit0vras, Surani
