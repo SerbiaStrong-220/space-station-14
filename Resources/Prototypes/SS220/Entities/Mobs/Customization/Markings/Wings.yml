@@ -2,7 +2,7 @@
   id: MothWingsStripedAnimated
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Moth]
+  speciesRestriction: []
   sprites:
   - sprite: SS220/Mobs/Customization/moth-anim.rsi
     state: tail_striped_wagging
