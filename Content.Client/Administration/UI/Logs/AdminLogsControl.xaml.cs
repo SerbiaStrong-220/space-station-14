@@ -55,15 +55,15 @@ public sealed partial class AdminLogsControl : Control
 
         SetImpacts(Enum.GetValues<LogImpact>().OrderBy(impact => impact).ToArray());
         SetTypes(Enum.GetValues<LogType>());
-        //SS220
-        LowerBoundEditHours.OnTextChanged += e => OnLowerBoundHoursChange(e.Text);
-        LowerBoundEditMinutes.OnTextChanged += e => OnLowerBoundMinutesChange(e.Text);
-        LowerBoundEditSeconds.OnTextChanged += e => OnLowerBoundSecondsChange(e.Text);
+        //SS220 admin_logs_time_filter end
+        EarlyBorderEditHours.OnTextChanged += e => OnEarlyBorderHoursChange(e.Text);
+        EarlyBorderEditMinutes.OnTextChanged += e => OnEarlyBorderMinutesChange(e.Text);
+        EarlyBorderEditSeconds.OnTextChanged += e => OnEarlyBorderSecondsChange(e.Text);
 
-        UpperBoundEditHours.OnTextChanged += e => OnUpperBoundHoursChange(e.Text);
-        UpperBoundEditMinutes.OnTextChanged += e => OnUpperBoundMinutesChange(e.Text);
-        UpperBoundEditSeconds.OnTextChanged += e => OnUpperBoundSecondsChange(e.Text);
-        //SS220
+        LateBorderEditHours.OnTextChanged += e => OnLateBorderHoursChange(e.Text);
+        LateBorderEditMinutes.OnTextChanged += e => OnLateBorderMinutesChange(e.Text);
+        LateBorderEditSeconds.OnTextChanged += e => OnLateBorderSecondsChange(e.Text);
+        //SS220 admin_logs_time_filter end
     }
 
     private int CurrentRound { get; set; }
@@ -265,9 +265,7 @@ public sealed partial class AdminLogsControl : Control
         ShownLogs = 0;
         var logsText = "";
 
-        //SS220
-        MidnightCheck(RecievedLogs);
-        //SS220
+        MidnightCheck(RecievedLogs); //SS220 admin_logs_time_filter
 
         // build logs string
         for (var i = RecievedLogs.Count - 1; i >= 0; i--)
@@ -347,13 +345,13 @@ public sealed partial class AdminLogsControl : Control
         // Check search
         if (!log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
             return false;
-        //SS220
-        if (!CheckLowerTimeFilter(log))
+        //SS220 admin_logs_time_filter start
+        if (!CheckEarlyTimeFilter(log))
             return false;
 
-        if (!CheckUpperTimeFilter(log))
+        if (!CheckLateTimeFilter(log))
             return false;
-        //SS220
+        //SS220 admin_logs_time_filter end
 
         return true;
     }
@@ -580,45 +578,46 @@ public sealed partial class AdminLogsControl : Control
 
     //SS220 admin_logs_time_filter start
 
-    public event Action<string>? OnLowerBoundHoursChanged;
-    public event Action<string>? OnLowerBoundMinutesChanged;
-    public event Action<string>? OnLowerBoundSecondsChanged;
+    public event Action<string>? OnEarlyBorderHoursChanged;
+    public event Action<string>? OnEarlyBorderMinutesChanged;
+    public event Action<string>? OnEarlyBorderSecondsChanged;
 
-    public event Action<string>? OnUpperBoundHoursChanged;
-    public event Action<string>? OnUpperBoundMinutesChanged;
-    public event Action<string>? OnUpperBoundSecondsChanged;
+    public event Action<string>? OnLateBorderHoursChanged;
+    public event Action<string>? OnLateBorderMinutesChanged;
+    public event Action<string>? OnLateBorderSecondsChanged;
 
-    public int firstLogDate = 0;//Date of the lowest date
+    private DateTime _earlyBorder;
+    private DateTime _lateBorder;
 
-    public void OnLowerBoundHoursChange(string text)
+    public void OnEarlyBorderHoursChange(string text)
     {
-        AdjustTextForTimer(LowerBoundEditHours, text, true);
-        OnLowerBoundHoursChanged?.Invoke(LowerBoundEditHours.Text);
+        AdjustTextForTimer(EarlyBorderEditHours, text, true);
+        OnEarlyBorderHoursChanged?.Invoke(EarlyBorderEditHours.Text);
     }
-    public void OnLowerBoundMinutesChange(string text)
+    public void OnEarlyBorderMinutesChange(string text)
     {
-        AdjustTextForTimer(LowerBoundEditMinutes, text);
-        OnLowerBoundMinutesChanged?.Invoke(LowerBoundEditMinutes.Text);
+        AdjustTextForTimer(EarlyBorderEditMinutes, text);
+        OnEarlyBorderMinutesChanged?.Invoke(EarlyBorderEditMinutes.Text);
     }
-    public void OnLowerBoundSecondsChange(string text)
+    public void OnEarlyBorderSecondsChange(string text)
     {
-        AdjustTextForTimer(LowerBoundEditSeconds, text);
-        OnLowerBoundSecondsChanged?.Invoke(LowerBoundEditSeconds.Text);
+        AdjustTextForTimer(EarlyBorderEditSeconds, text);
+        OnEarlyBorderSecondsChanged?.Invoke(EarlyBorderEditSeconds.Text);
     }
-    public void OnUpperBoundHoursChange(string text)
+    public void OnLateBorderHoursChange(string text)
     {
-        AdjustTextForTimer(UpperBoundEditHours, text, true);
-        OnUpperBoundHoursChanged?.Invoke(UpperBoundEditHours.Text);
+        AdjustTextForTimer(LateBorderEditHours, text, true);
+        OnLateBorderHoursChanged?.Invoke(LateBorderEditHours.Text);
     }
-    public void OnUpperBoundMinutesChange(string text)
+    public void OnLateBorderMinutesChange(string text)
     {
-        AdjustTextForTimer(UpperBoundEditMinutes, text);
-        OnUpperBoundMinutesChanged?.Invoke(UpperBoundEditMinutes.Text);
+        AdjustTextForTimer(LateBorderEditMinutes, text);
+        OnLateBorderMinutesChanged?.Invoke(LateBorderEditMinutes.Text);
     }
-    public void OnUpperBoundSecondsChange(string text)
+    public void OnLateBorderSecondsChange(string text)
     {
-        AdjustTextForTimer(UpperBoundEditSeconds, text);
-        OnUpperBoundSecondsChanged?.Invoke(UpperBoundEditSeconds.Text);
+        AdjustTextForTimer(LateBorderEditSeconds, text);
+        OnLateBorderSecondsChanged?.Invoke(LateBorderEditSeconds.Text);
     }
     public bool AdjustTextForTimer(LineEdit line, string text, bool isHour = false)
     {
@@ -659,83 +658,17 @@ public sealed partial class AdminLogsControl : Control
 
         return true;
     }
-    private bool CheckLowerTimeFilter(SharedAdminLog log)
+    private bool CheckEarlyTimeFilter(SharedAdminLog log)
     {
-        if (LowerBoundEditHours.Text == "")
-            return true;
-
-        if (!int.TryParse(LowerBoundEditHours.Text, out var hour))
+        if (log.Date < _earlyBorder)
             return false;
-
-        if (log.Date.Hour < hour && firstLogDate == 0)//if date isn't same firstLogDate !=0
-            return false;
-
-        if (firstLogDate != 0 && log.Date.Day != firstLogDate)
-            return true;
-
-        if (log.Date.Hour == hour)
-        {
-            if (LowerBoundEditMinutes.Text == "")
-                return true;
-
-            if (!int.TryParse(LowerBoundEditMinutes.Text, out var minute))
-                return false;
-
-            if (log.Date.Minute < minute)
-                return false;
-
-            if (log.Date.Minute == minute)
-            {
-                if (LowerBoundEditSeconds.Text == "")
-                    return true;
-
-                if (!int.TryParse(LowerBoundEditSeconds.Text, out var second))
-                    return false;
-
-                if (log.Date.Second < second)
-                    return false;
-            }
-        }
 
         return true;
     }
-    private bool CheckUpperTimeFilter(SharedAdminLog log)
+    private bool CheckLateTimeFilter(SharedAdminLog log)
     {
-        if (UpperBoundEditHours.Text == "")
-            return true;
-
-        if (!int.TryParse(UpperBoundEditHours.Text, out var hour))
+        if (log.Date > _lateBorder)
             return false;
-
-        if (log.Date.Hour > hour && firstLogDate == 0)//if date isn't same firstLogDate !=0
-            return false;
-
-        if (firstLogDate != 0 && log.Date.Day == firstLogDate)
-            return true;
-
-        if (log.Date.Hour == hour)
-        {
-            if (UpperBoundEditMinutes.Text == "")
-                return true;
-
-            if (!int.TryParse(UpperBoundEditMinutes.Text, out var minute))
-                return false;
-
-            if (log.Date.Minute > minute)
-                return false;
-
-            if (log.Date.Minute == minute)
-            {
-                if (UpperBoundEditSeconds.Text == "")
-                    return true;
-
-                if (!int.TryParse(UpperBoundEditSeconds.Text, out var second))
-                    return false;
-
-                if (log.Date.Second > second)
-                    return false;
-            }
-        }
 
         return true;
     }
@@ -745,11 +678,28 @@ public sealed partial class AdminLogsControl : Control
         if (recievedLogs.Count == 0)
             return;
 
-        if (recievedLogs[0].Date.Day != recievedLogs[recievedLogs.Count - 1].Date.Day)
-        {
-            firstLogDate = recievedLogs[0].Date.Day;
-        }
+        if (!int.TryParse(EarlyBorderEditHours.Text, out var earlyHour))
+            earlyHour = 0;
+
+        if (!int.TryParse(EarlyBorderEditMinutes.Text, out var earlyMinute))
+            earlyMinute = 0;
+
+        if (!int.TryParse(EarlyBorderEditSeconds.Text, out var earlySecond))
+            earlySecond = 0;
+
+        if (!int.TryParse(LateBorderEditHours.Text, out var lateHour))
+            lateHour = 23;
+
+        if (!int.TryParse(LateBorderEditMinutes.Text, out var lateMinute))
+            lateMinute = 59;
+
+        if (!int.TryParse(LateBorderEditSeconds.Text, out var lateSecond))
+            lateSecond = 59;
+
+        _earlyBorder = new DateTime(recievedLogs[0].Date.Year, recievedLogs[0].Date.Month, recievedLogs[0].Date.Day, earlyHour, earlyMinute, earlySecond);
+
+        _lateBorder = new DateTime(recievedLogs[recievedLogs.Count - 1].Date.Year, recievedLogs[recievedLogs.Count - 1].Date.Month, recievedLogs[recievedLogs.Count - 1].Date.Day, lateHour, lateMinute, lateSecond);
     }
 
-    //SS220 admin_logs_time_filter start
+    //SS220 admin_logs_time_filter end
 }

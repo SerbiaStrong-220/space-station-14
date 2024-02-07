@@ -67,28 +67,27 @@
                                     <Label Text="До: " />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
-                                    <LineEdit Name="LowerBoundEditHours" MinWidth="32" />
-                                    <LineEdit Name="UpperBoundEditHours" MinWidth="32" />
+                                    <LineEdit Name="EarlyBorderEditHours" MinWidth="32" />
+                                    <LineEdit Name="LateBorderEditHours" MinWidth="32" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
                                     <Label Text=":" />
                                     <Label Text=":" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
-                                    <LineEdit Name="LowerBoundEditMinutes" MinWidth="32" />
-                                    <LineEdit Name="UpperBoundEditMinutes" MinWidth="32" />
+                                    <LineEdit Name="EarlyBorderEditMinutes" MinWidth="32" />
+                                    <LineEdit Name="LateBorderEditMinutes" MinWidth="32" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
                                     <Label Text=":" />
                                     <Label Text=":" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
-                                    <LineEdit Name="LowerBoundEditSeconds" MinWidth="32" />
-                                    <LineEdit Name="UpperBoundEditSeconds" MinWidth="32" />
+                                    <LineEdit Name="EarlyBorderEditSeconds" MinWidth="32" />
+                                    <LineEdit Name="LateBorderEditSeconds" MinWidth="32" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
                                     <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
-                                    <Label Name="SubInfo" Text="*- поля можно оставить пустым, если не нужна проверка" />
                                 </BoxContainer>
                             </BoxContainer>
                         </CollapsibleBody>
