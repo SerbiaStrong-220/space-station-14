@@ -57,22 +57,31 @@
                     <Button Name="RefreshButton" Access="Public" Text="{Loc admin-logs-refresh}" StyleClasses="ButtonSquare"/>
                     <Button Name="NextButton" Access="Public" Text="{Loc admin-logs-next}" StyleClasses="OpenLeft"/>
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="От:" />
-                    <LineEdit Name="LowerBoundEditHours" MinWidth="32" />
-                    <Label Text=":" />
-                    <LineEdit Name="LowerBoundEditMinutes" MinWidth="32" />
-                    <Label Text=":" />
-                    <LineEdit Name="LowerBoundEditSeconds" MinWidth="32" />
-                    <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="До:" />
-                    <LineEdit Name="UpperBoundEditHours" MinWidth="32" />
-                    <Label Text=":" />
-                    <LineEdit Name="UpperBoundEditMinutes" MinWidth="32" />
-                    <Label Text=":" />
-                    <LineEdit Name="UpperBoundEditSeconds" MinWidth="32" />
+                <BoxContainer Name="EffectsContainer" HorizontalExpand="True">
+                    <Collapsible Orientation="Vertical">
+                        <CollapsibleHeading Title="Временной фильтр"/>
+                        <CollapsibleBody>
+                            <BoxContainer Orientation="Vertical">
+                                <BoxContainer Orientation="Horizontal">
+                                    <Label Text="От: " />
+                                    <LineEdit Name="LowerBoundEditHours" MinWidth="32" />
+                                    <Label Text=":" />
+                                    <LineEdit Name="LowerBoundEditMinutes" MinWidth="32" />
+                                    <Label Text=":" />
+                                    <LineEdit Name="LowerBoundEditSeconds" MinWidth="32" />
+                                    <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Horizontal">
+                                    <Label Text="До: " />
+                                    <LineEdit Name="UpperBoundEditHours" MinWidth="32" />
+                                    <Label Text=":" />
+                                    <LineEdit Name="UpperBoundEditMinutes" MinWidth="32" />
+                                    <Label Text=":" />
+                                    <LineEdit Name="UpperBoundEditSeconds" MinWidth="32" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </CollapsibleBody>
+                    </Collapsible>
                 </BoxContainer>
                 <ScrollContainer Name="AdminLogsScrollContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
                     <TextEdit Name="AdminLogsTextEdit" Access="Public" VerticalExpand="True"/>
