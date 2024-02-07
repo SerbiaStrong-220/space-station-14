@@ -56,9 +56,13 @@ public sealed partial class AdminLogsControl : Control
         SetImpacts(Enum.GetValues<LogImpact>().OrderBy(impact => impact).ToArray());
         SetTypes(Enum.GetValues<LogType>());
         //SS220
-        CurrentDelayEditHours.OnTextChanged += e => OnCurrentDelayHoursChange(e.Text);
-        CurrentDelayEditMinutes.OnTextChanged += e => OnCurrentDelayMinutesChange(e.Text);
-        CurrentDelayEditSeconds.OnTextChanged += e => OnCurrentDelaySecondsChange(e.Text);
+        LowerBoundEditHours.OnTextChanged += e => OnLowerBoundHoursChange(e.Text);
+        LowerBoundEditMinutes.OnTextChanged += e => OnLowerBoundMinutesChange(e.Text);
+        LowerBoundEditSeconds.OnTextChanged += e => OnLowerBoundSecondsChange(e.Text);
+
+        UpperBoundEditHours.OnTextChanged += e => OnUpperBoundHoursChange(e.Text);
+        UpperBoundEditMinutes.OnTextChanged += e => OnUpperBoundMinutesChange(e.Text);
+        UpperBoundEditSeconds.OnTextChanged += e => OnUpperBoundSecondsChange(e.Text);
         //SS220
     }
 
@@ -339,6 +343,13 @@ public sealed partial class AdminLogsControl : Control
         // Check search
         if (!log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
             return false;
+        //SS220
+        if (!CheckLowerTimeZone(log))
+            return false;
+
+        if (!CheckUpperTimeZone(log))
+            return false;
+        //SS220
 
         return true;
     }
@@ -459,7 +470,7 @@ public sealed partial class AdminLogsControl : Control
             TypesContainer.AddChild(type);
         }
 
-        UpdateLogs();
+        UpdateLogs();////////////////////////////////////
     }
 
     public void SetPlayers(Dictionary<Guid, string> players)
@@ -563,33 +574,54 @@ public sealed partial class AdminLogsControl : Control
         ResetRoundButton.OnPressed -= ResetRoundPressed;
         //SS220
         /*
-        CurrentDelayEditHours.OnTextChanged -= OnCurrentDelayHoursChange;
-        CurrentDelayEditMinutes.OnTextChanged -= OnCurrentDelayMinutesChange;
-        CurrentDelayEditSeconds.OnTextChanged -= OnCurrentDelaySecondsChange;
+        LowerBoundEditHours.OnTextChanged -= OnLowerBoundHoursChange;
+        LowerBoundEditMinutes.OnTextChanged -= OnLowerBoundMinutesChange;
+        LowerBoundEditSeconds.OnTextChanged -= OnLowerBoundSecondsChange;
         */
         //SS220
     }
 
     //SS220 admin logs timer start
 
-    public event Action<string>? OnCurrentDelayHoursChanged;
-    public event Action<string>? OnCurrentDelayMinutesChanged;
-    public event Action<string>? OnCurrentDelaySecondsChanged;
+    public event Action<string>? OnLowerBoundHoursChanged;
+    public event Action<string>? OnLowerBoundMinutesChanged;
+    public event Action<string>? OnLowerBoundSecondsChanged;
 
-    public void OnCurrentDelayHoursChange(string text)
+    public event Action<string>? OnUpperBoundHoursChanged;
+    public event Action<string>? OnUpperBoundMinutesChanged;
+    public event Action<string>? OnUpperBoundSecondsChanged;
+
+    private bool midnightCheck = false;//checks if logs pass the midnight mark
+
+    public void OnLowerBoundHoursChange(string text)
     {
-        AdjustTextForTimer(CurrentDelayEditHours, text);
-        OnCurrentDelaySecondsChanged?.Invoke(CurrentDelayEditSeconds.Text);
+        AdjustTextForTimer(LowerBoundEditHours, text);
+        OnLowerBoundHoursChanged?.Invoke(LowerBoundEditHours.Text);
     }
-    public void OnCurrentDelayMinutesChange(string text)
+    public void OnLowerBoundMinutesChange(string text)
     {
-        AdjustTextForTimer(CurrentDelayEditMinutes, text);
-        OnCurrentDelayMinutesChanged?.Invoke(CurrentDelayEditMinutes.Text);
+        AdjustTextForTimer(LowerBoundEditMinutes, text);
+        OnLowerBoundMinutesChanged?.Invoke(LowerBoundEditMinutes.Text);
     }
-    public void OnCurrentDelaySecondsChange(string text)
+    public void OnLowerBoundSecondsChange(string text)
     {
-        AdjustTextForTimer(CurrentDelayEditSeconds, text);
-        OnCurrentDelaySecondsChanged?.Invoke(CurrentDelayEditSeconds.Text);
+        AdjustTextForTimer(LowerBoundEditSeconds, text);
+        OnLowerBoundSecondsChanged?.Invoke(LowerBoundEditSeconds.Text);
+    }
+    public void OnUpperBoundHoursChange(string text)
+    {
+        AdjustTextForTimer(UpperBoundEditHours, text);
+        OnUpperBoundHoursChanged?.Invoke(UpperBoundEditHours.Text);
+    }
+    public void OnUpperBoundMinutesChange(string text)
+    {
+        AdjustTextForTimer(UpperBoundEditMinutes, text);
+        OnUpperBoundMinutesChanged?.Invoke(UpperBoundEditMinutes.Text);
+    }
+    public void OnUpperBoundSecondsChange(string text)
+    {
+        AdjustTextForTimer(UpperBoundEditSeconds, text);
+        OnUpperBoundSecondsChanged?.Invoke(UpperBoundEditSeconds.Text);
     }
     public bool AdjustTextForTimer(LineEdit line, string text)
     {
@@ -620,5 +652,80 @@ public sealed partial class AdminLogsControl : Control
         }
         return true;
     }
+    private bool CheckLowerTimeZone(SharedAdminLog log)
+    {
+        if (LowerBoundEditHours.Text == "")
+            return true;
+
+        if (!int.TryParse(LowerBoundEditHours.Text, out var hour))
+            return false;
+
+        if (log.Date.Hour < hour)
+            return false;
+
+        if (log.Date.Hour == hour)
+        {
+            if (LowerBoundEditMinutes.Text == "")
+                return true;
+
+            if (!int.TryParse(LowerBoundEditMinutes.Text, out var minute))
+                return false;
+
+            if (log.Date.Minute < minute)
+                return false;
+
+            if (log.Date.Minute == minute)
+            {
+                if (LowerBoundEditSeconds.Text == "")
+                    return true;
+
+                if (!int.TryParse(LowerBoundEditSeconds.Text, out var second))
+                    return false;
+
+                if (log.Date.Second < second)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+    private bool CheckUpperTimeZone(SharedAdminLog log)
+    {
+        if (UpperBoundEditHours.Text == "")
+            return true;
+
+        if (!int.TryParse(UpperBoundEditHours.Text, out var hour))
+            return false;
+
+        if (log.Date.Hour > hour)
+            return false;
+
+        if (log.Date.Hour == hour)
+        {
+            if (UpperBoundEditMinutes.Text == "")
+                return true;
+
+            if (!int.TryParse(UpperBoundEditMinutes.Text, out var minute))
+                return false;
+
+            if (log.Date.Minute > minute)
+                return false;
+
+            if (log.Date.Minute == minute)
+            {
+                if (UpperBoundEditSeconds.Text == "")
+                    return true;
+
+                if (!int.TryParse(UpperBoundEditSeconds.Text, out var second))
+                    return false;
+
+                if (log.Date.Second > second)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
     //SS220 admin logs timer end
 }

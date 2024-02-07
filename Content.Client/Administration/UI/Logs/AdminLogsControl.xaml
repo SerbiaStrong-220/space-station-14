@@ -58,12 +58,21 @@
                     <Button Name="NextButton" Access="Public" Text="{Loc admin-logs-next}" StyleClasses="OpenLeft"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal">
-                    <LineEdit Name="CurrentDelayEditHours" MinWidth="32" />
-                    <Label Name="Colon1" Text=":" />
-                    <LineEdit Name="CurrentDelayEditMinutes" MinWidth="32" />
-                    <Label Name="Colon2" Text=":" />
-                    <LineEdit Name="CurrentDelayEditSeconds" MinWidth="32" />
+                    <Label Text="От:" />
+                    <LineEdit Name="LowerBoundEditHours" MinWidth="32" />
+                    <Label Text=":" />
+                    <LineEdit Name="LowerBoundEditMinutes" MinWidth="32" />
+                    <Label Text=":" />
+                    <LineEdit Name="LowerBoundEditSeconds" MinWidth="32" />
                     <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="До:" />
+                    <LineEdit Name="UpperBoundEditHours" MinWidth="32" />
+                    <Label Text=":" />
+                    <LineEdit Name="UpperBoundEditMinutes" MinWidth="32" />
+                    <Label Text=":" />
+                    <LineEdit Name="UpperBoundEditSeconds" MinWidth="32" />
                 </BoxContainer>
                 <ScrollContainer Name="AdminLogsScrollContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
                     <TextEdit Name="AdminLogsTextEdit" Access="Public" VerticalExpand="True"/>
