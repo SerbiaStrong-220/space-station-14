@@ -341,3 +341,16 @@
       itemIconStyle: NoItem
       useDelay: 1 # emote spam
       event: !type:ToggleActionEvent
+      
+- type: entity
+  id: ActionToggleWaving
+  name: action-name-toggle-waving
+  description: action-description-toggle-waving
+  noSpawn: true
+  components:
+    - type: InstantAction
+      icon: { sprite: Mobs/Customization/Moth/moth_wings.rsi, state: default }
+      iconOn: { sprite: Mobs/Customization/Moth/moth_wings.rsi, state: default }
+      itemIconStyle: NoItem
+      useDelay: 3 # emote spam
+      event: !type:ToggleActionEvent

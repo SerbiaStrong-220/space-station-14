@@ -12,3 +12,18 @@
     - wag tail.
     - wags tail
     - wags tail.
+    
+- type: emote
+  id: WavTail
+  chatMessages: [wavs tail]
+  chatTriggers:
+    - wav
+    - wav.
+    - wavs
+    - wavs.
+    - waving
+    - waving.
+    - wav tail
+    - wav tail.
+    - wavs tail
+    - wavs tail.
