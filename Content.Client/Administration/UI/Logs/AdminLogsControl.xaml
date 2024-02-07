@@ -59,12 +59,12 @@
                 </BoxContainer>
                 <BoxContainer Name="EffectsContainer" HorizontalExpand="True">
                     <Collapsible Orientation="Vertical">
-                        <CollapsibleHeading Title="Временной фильтр"/>
+                        <CollapsibleHeading Title="{Loc admin-logs-time-filter-title}"/>
                         <CollapsibleBody>
                             <BoxContainer Orientation="Horizontal">
                                 <BoxContainer Orientation="Vertical">
-                                    <Label Text="От: " />
-                                    <Label Text="До: " />
+                                    <Label Text="{Loc admin-logs-from}" />
+                                    <Label Text="{Loc admin-logs-to}" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
                                     <LineEdit Name="EarlyBorderEditHours" MinWidth="32" />
@@ -87,7 +87,7 @@
                                     <LineEdit Name="LateBorderEditSeconds" MinWidth="32" />
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical">
-                                    <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
+                                    <Label Name="SampleInfo" Text="{Loc admin-logs-sample-info}" />
                                 </BoxContainer>
                             </BoxContainer>
                         </CollapsibleBody>
