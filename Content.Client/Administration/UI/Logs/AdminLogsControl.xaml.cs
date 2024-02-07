@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared.Administration.Logs;
@@ -55,6 +55,11 @@ public sealed partial class AdminLogsControl : Control
 
         SetImpacts(Enum.GetValues<LogImpact>().OrderBy(impact => impact).ToArray());
         SetTypes(Enum.GetValues<LogType>());
+        //SS220
+        CurrentDelayEditHours.OnTextChanged += e => OnCurrentDelayHoursChange(e.Text);
+        CurrentDelayEditMinutes.OnTextChanged += e => OnCurrentDelayMinutesChange(e.Text);
+        CurrentDelayEditSeconds.OnTextChanged += e => OnCurrentDelaySecondsChange(e.Text);
+        //SS220
     }
 
     private int CurrentRound { get; set; }
@@ -556,5 +561,64 @@ public sealed partial class AdminLogsControl : Control
         RoundSpinBox.ValueChanged -= RoundSpinBoxChanged;
 
         ResetRoundButton.OnPressed -= ResetRoundPressed;
+        //SS220
+        /*
+        CurrentDelayEditHours.OnTextChanged -= OnCurrentDelayHoursChange;
+        CurrentDelayEditMinutes.OnTextChanged -= OnCurrentDelayMinutesChange;
+        CurrentDelayEditSeconds.OnTextChanged -= OnCurrentDelaySecondsChange;
+        */
+        //SS220
     }
+
+    //SS220 admin logs timer start
+
+    public event Action<string>? OnCurrentDelayHoursChanged;
+    public event Action<string>? OnCurrentDelayMinutesChanged;
+    public event Action<string>? OnCurrentDelaySecondsChanged;
+
+    public void OnCurrentDelayHoursChange(string text)
+    {
+        AdjustTextForTimer(CurrentDelayEditHours, text);
+        OnCurrentDelaySecondsChanged?.Invoke(CurrentDelayEditSeconds.Text);
+    }
+    public void OnCurrentDelayMinutesChange(string text)
+    {
+        AdjustTextForTimer(CurrentDelayEditMinutes, text);
+        OnCurrentDelayMinutesChanged?.Invoke(CurrentDelayEditMinutes.Text);
+    }
+    public void OnCurrentDelaySecondsChange(string text)
+    {
+        AdjustTextForTimer(CurrentDelayEditSeconds, text);
+        OnCurrentDelaySecondsChanged?.Invoke(CurrentDelayEditSeconds.Text);
+    }
+    public bool AdjustTextForTimer(LineEdit line, string text)
+    {
+        List<char> toRemove = new();
+
+        foreach (var a in text)
+        {
+            if (!char.IsDigit(a))
+                toRemove.Add(a);
+        }
+
+        foreach (var a in toRemove)
+        {
+            line.Text = text.Replace(a.ToString(), "");
+        }
+
+        if (line.Text == "")
+            return false;
+
+        while (line.Text[0] == '0' && line.Text.Length > 2)
+        {
+            line.Text =line.Text.Remove(0, 1);
+        }
+
+        if (line.Text.Length > 2)
+        {
+            line.Text = line.Text.Remove(2);
+        }
+        return true;
+    }
+    //SS220 admin logs timer end
 }
