@@ -348,10 +348,10 @@ public sealed partial class AdminLogsControl : Control
         if (!log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
             return false;
         //SS220
-        if (!CheckLowerTimeZone(log))
+        if (!CheckLowerTimeFilter(log))
             return false;
 
-        if (!CheckUpperTimeZone(log))
+        if (!CheckUpperTimeFilter(log))
             return false;
         //SS220
 
@@ -576,16 +576,9 @@ public sealed partial class AdminLogsControl : Control
         RoundSpinBox.ValueChanged -= RoundSpinBoxChanged;
 
         ResetRoundButton.OnPressed -= ResetRoundPressed;
-        //SS220
-        /*
-        LowerBoundEditHours.OnTextChanged -= OnLowerBoundHoursChange;
-        LowerBoundEditMinutes.OnTextChanged -= OnLowerBoundMinutesChange;
-        LowerBoundEditSeconds.OnTextChanged -= OnLowerBoundSecondsChange;
-        */
-        //SS220
     }
 
-    //SS220 admin logs timer start
+    //SS220 admin_logs_time_filter start
 
     public event Action<string>? OnLowerBoundHoursChanged;
     public event Action<string>? OnLowerBoundMinutesChanged;
@@ -595,12 +588,11 @@ public sealed partial class AdminLogsControl : Control
     public event Action<string>? OnUpperBoundMinutesChanged;
     public event Action<string>? OnUpperBoundSecondsChanged;
 
-    //private bool midnightCheck = false;//checks if logs pass the midnight mark
-    public int firstDate = 0;//Date of the lowest date
+    public int firstLogDate = 0;//Date of the lowest date
 
     public void OnLowerBoundHoursChange(string text)
     {
-        AdjustTextForTimer(LowerBoundEditHours, text);
+        AdjustTextForTimer(LowerBoundEditHours, text, true);
         OnLowerBoundHoursChanged?.Invoke(LowerBoundEditHours.Text);
     }
     public void OnLowerBoundMinutesChange(string text)
@@ -615,7 +607,7 @@ public sealed partial class AdminLogsControl : Control
     }
     public void OnUpperBoundHoursChange(string text)
     {
-        AdjustTextForTimer(UpperBoundEditHours, text);
+        AdjustTextForTimer(UpperBoundEditHours, text, true);
         OnUpperBoundHoursChanged?.Invoke(UpperBoundEditHours.Text);
     }
     public void OnUpperBoundMinutesChange(string text)
@@ -628,7 +620,7 @@ public sealed partial class AdminLogsControl : Control
         AdjustTextForTimer(UpperBoundEditSeconds, text);
         OnUpperBoundSecondsChanged?.Invoke(UpperBoundEditSeconds.Text);
     }
-    public bool AdjustTextForTimer(LineEdit line, string text)
+    public bool AdjustTextForTimer(LineEdit line, string text, bool isHour = false)
     {
         List<char> toRemove = new();
 
@@ -648,16 +640,26 @@ public sealed partial class AdminLogsControl : Control
 
         while (line.Text[0] == '0' && line.Text.Length > 2)
         {
-            line.Text =line.Text.Remove(0, 1);
+            line.Text = line.Text.Remove(0, 1);
         }
 
         if (line.Text.Length > 2)
         {
             line.Text = line.Text.Remove(2);
         }
+
+        if (!int.TryParse(line.Text, out var timeInt))
+            return false;
+
+        if (isHour && timeInt > 23)
+            line.Text = "23";
+
+        if (!isHour && timeInt > 59)
+            line.Text = "59";
+
         return true;
     }
-    private bool CheckLowerTimeZone(SharedAdminLog log)
+    private bool CheckLowerTimeFilter(SharedAdminLog log)
     {
         if (LowerBoundEditHours.Text == "")
             return true;
@@ -665,10 +667,10 @@ public sealed partial class AdminLogsControl : Control
         if (!int.TryParse(LowerBoundEditHours.Text, out var hour))
             return false;
 
-        if (log.Date.Hour < hour && firstDate == 0)//if date isn't same firstDate !=0
+        if (log.Date.Hour < hour && firstLogDate == 0)//if date isn't same firstLogDate !=0
             return false;
 
-        if (firstDate != 0 && log.Date.Day != firstDate)
+        if (firstLogDate != 0 && log.Date.Day != firstLogDate)
             return true;
 
         if (log.Date.Hour == hour)
@@ -697,7 +699,7 @@ public sealed partial class AdminLogsControl : Control
 
         return true;
     }
-    private bool CheckUpperTimeZone(SharedAdminLog log)
+    private bool CheckUpperTimeFilter(SharedAdminLog log)
     {
         if (UpperBoundEditHours.Text == "")
             return true;
@@ -705,10 +707,10 @@ public sealed partial class AdminLogsControl : Control
         if (!int.TryParse(UpperBoundEditHours.Text, out var hour))
             return false;
 
-        if (log.Date.Hour > hour && firstDate == 0)//if date isn't same firstDate !=0
+        if (log.Date.Hour > hour && firstLogDate == 0)//if date isn't same firstLogDate !=0
             return false;
 
-        if (firstDate != 0 && log.Date.Day == firstDate)
+        if (firstLogDate != 0 && log.Date.Day == firstLogDate)
             return true;
 
         if (log.Date.Hour == hour)
@@ -745,9 +747,9 @@ public sealed partial class AdminLogsControl : Control
 
         if (recievedLogs[0].Date.Day != recievedLogs[recievedLogs.Count - 1].Date.Day)
         {
-            firstDate = recievedLogs[0].Date.Day;
+            firstLogDate = recievedLogs[0].Date.Day;
         }
     }
 
-    //SS220 admin logs timer end
+    //SS220 admin_logs_time_filter start
 }

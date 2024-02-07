@@ -61,23 +61,33 @@
                     <Collapsible Orientation="Vertical">
                         <CollapsibleHeading Title="Временной фильтр"/>
                         <CollapsibleBody>
-                            <BoxContainer Orientation="Vertical">
-                                <BoxContainer Orientation="Horizontal">
+                            <BoxContainer Orientation="Horizontal">
+                                <BoxContainer Orientation="Vertical">
                                     <Label Text="От: " />
-                                    <LineEdit Name="LowerBoundEditHours" MinWidth="32" />
-                                    <Label Text=":" />
-                                    <LineEdit Name="LowerBoundEditMinutes" MinWidth="32" />
-                                    <Label Text=":" />
-                                    <LineEdit Name="LowerBoundEditSeconds" MinWidth="32" />
-                                    <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Horizontal">
                                     <Label Text="До: " />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <LineEdit Name="LowerBoundEditHours" MinWidth="32" />
                                     <LineEdit Name="UpperBoundEditHours" MinWidth="32" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
                                     <Label Text=":" />
+                                    <Label Text=":" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <LineEdit Name="LowerBoundEditMinutes" MinWidth="32" />
                                     <LineEdit Name="UpperBoundEditMinutes" MinWidth="32" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
                                     <Label Text=":" />
+                                    <Label Text=":" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <LineEdit Name="LowerBoundEditSeconds" MinWidth="32" />
                                     <LineEdit Name="UpperBoundEditSeconds" MinWidth="32" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <Label Name="DelayInfo" Text=" (hh:mm:ss)" />
                                     <Label Name="SubInfo" Text="*- поля можно оставить пустым, если не нужна проверка" />
                                 </BoxContainer>
                             </BoxContainer>
