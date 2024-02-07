@@ -33,7 +33,7 @@
 - type: entity
   parent: BaseComputer
   id: ComputerCluwneComms
-  name: communications computer for jokes
+  name: cluwne communications computer
   description: Used to create memed announces
   components:
   - type: Sprite
@@ -47,9 +47,9 @@
     - map: ["computerLayerKeys"]
       state: generic_keys
   - type: AccessReader
-    access: [[ "service" ]]
+    access: [[ "Theatre" ]]
   - type: CommunicationsConsole
-    title: comms-console-announcement-title-station
+    title: cluwne-comms-console-announcement-title-station
     sound: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/announce.ogg
       params:
