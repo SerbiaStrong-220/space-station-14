@@ -265,6 +265,10 @@ public sealed partial class AdminLogsControl : Control
         ShownLogs = 0;
         var logsText = "";
 
+        //SS220
+        MidnightCheck(RecievedLogs);
+        //SS220
+
         // build logs string
         for (var i = RecievedLogs.Count - 1; i >= 0; i--)
         {
@@ -470,7 +474,7 @@ public sealed partial class AdminLogsControl : Control
             TypesContainer.AddChild(type);
         }
 
-        UpdateLogs();////////////////////////////////////
+        UpdateLogs();
     }
 
     public void SetPlayers(Dictionary<Guid, string> players)
@@ -591,7 +595,8 @@ public sealed partial class AdminLogsControl : Control
     public event Action<string>? OnUpperBoundMinutesChanged;
     public event Action<string>? OnUpperBoundSecondsChanged;
 
-    private bool midnightCheck = false;//checks if logs pass the midnight mark
+    //private bool midnightCheck = false;//checks if logs pass the midnight mark
+    public int firstDate = 0;//Date of the lowest date
 
     public void OnLowerBoundHoursChange(string text)
     {
@@ -660,8 +665,11 @@ public sealed partial class AdminLogsControl : Control
         if (!int.TryParse(LowerBoundEditHours.Text, out var hour))
             return false;
 
-        if (log.Date.Hour < hour)
+        if (log.Date.Hour < hour && firstDate == 0)//if date isn't same firstDate !=0
             return false;
+
+        if (firstDate != 0 && log.Date.Day != firstDate)
+            return true;
 
         if (log.Date.Hour == hour)
         {
@@ -697,8 +705,11 @@ public sealed partial class AdminLogsControl : Control
         if (!int.TryParse(UpperBoundEditHours.Text, out var hour))
             return false;
 
-        if (log.Date.Hour > hour)
+        if (log.Date.Hour > hour && firstDate == 0)//if date isn't same firstDate !=0
             return false;
+
+        if (firstDate != 0 && log.Date.Day == firstDate)
+            return true;
 
         if (log.Date.Hour == hour)
         {
@@ -725,6 +736,17 @@ public sealed partial class AdminLogsControl : Control
         }
 
         return true;
+    }
+
+    private void MidnightCheck(List<SharedAdminLog> recievedLogs)
+    {
+        if (recievedLogs.Count == 0)
+            return;
+
+        if (recievedLogs[0].Date.Day != recievedLogs[recievedLogs.Count - 1].Date.Day)
+        {
+            firstDate = recievedLogs[0].Date.Day;
+        }
     }
 
     //SS220 admin logs timer end

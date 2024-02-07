@@ -78,6 +78,7 @@
                                     <LineEdit Name="UpperBoundEditMinutes" MinWidth="32" />
                                     <Label Text=":" />
                                     <LineEdit Name="UpperBoundEditSeconds" MinWidth="32" />
+                                    <Label Name="SubInfo" Text="*- поля можно оставить пустым, если не нужна проверка" />
                                 </BoxContainer>
                             </BoxContainer>
                         </CollapsibleBody>
