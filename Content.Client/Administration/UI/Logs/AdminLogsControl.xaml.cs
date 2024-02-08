@@ -265,7 +265,7 @@ public sealed partial class AdminLogsControl : Control
         ShownLogs = 0;
         var logsText = "";
 
-        MidnightCheck(RecievedLogs); //SS220 admin_logs_time_filter
+        FormBordersDateTime(RecievedLogs); //SS220 admin_logs_time_filter
 
         // build logs string
         for (var i = RecievedLogs.Count - 1; i >= 0; i--)
@@ -673,7 +673,7 @@ public sealed partial class AdminLogsControl : Control
         return true;
     }
 
-    private void MidnightCheck(List<SharedAdminLog> recievedLogs)
+    private void FormBordersDateTime(List<SharedAdminLog> recievedLogs)
     {
         if (recievedLogs.Count == 0)
             return;
