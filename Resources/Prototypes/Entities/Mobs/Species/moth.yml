@@ -119,7 +119,11 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_moth"
         visible: false
-  - type: Waving
+  - type: Wagging #SS220-Nian-waving
+    action: ActionToggleWaving
+    emoteId: WavTail
+    emoteStartLoc: waving-emote-start
+    emoteStopLoc: waving-emote-stop
 - type: entity
   parent: BaseSpeciesDummy
   id: MobMothDummy

@@ -1,4 +1,4 @@
-﻿using Content.Server.Actions;
+using Content.Server.Actions;
 using Content.Server.Chat.Systems;
 using Content.Server.Humanoid;
 using Content.Shared.Humanoid;
@@ -102,7 +102,8 @@ public sealed class WaggingSystem : EntitySystem
                 humanoid: humanoid);
         }
 
-        var emoteText = Loc.GetString(wagging.Wagging ? "wagging-emote-start" : "wagging-emote-stop", ("ent", uid));
+        //SS220-Nian-waving
+        var emoteText = Loc.GetString(wagging.Wagging ? wagging.EmoteStartLoc : wagging.EmoteStopLoc, ("ent", uid));
         _chat.TrySendInGameICMessage(uid, emoteText, InGameICChatType.Emote, ChatTransmitRange.Normal); // Ok while emotes dont have radial menu
 
         return true;

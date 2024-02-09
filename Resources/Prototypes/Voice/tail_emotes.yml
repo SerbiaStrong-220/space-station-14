@@ -13,6 +13,7 @@
     - wags tail
     - wags tail.
     
+#SS220-Nian-waving begin
 - type: emote
   id: WavTail
   chatMessages: [wavs tail]
@@ -27,3 +28,4 @@
     - wav tail.
     - wavs tail
     - wavs tail.
+#SS220-Nian-waving end

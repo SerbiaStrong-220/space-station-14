@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -19,6 +19,14 @@ public sealed partial class WaggingComponent : Component
 
     [DataField]
     public ProtoId<EmotePrototype> EmoteId = "WagTail";
+
+    //SS220-Nian-waving begin
+    [DataField]
+    public string EmoteStartLoc = "wagging-emote-start";
+
+    [DataField]
+    public string EmoteStopLoc = "wagging-emote-stop";
+    //SS220-Nian-waving end
 
     /// <summary>
     /// Suffix to add to get the animated marking.
