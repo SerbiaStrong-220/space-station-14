@@ -57,7 +57,7 @@
                     <Button Name="RefreshButton" Access="Public" Text="{Loc admin-logs-refresh}" StyleClasses="ButtonSquare"/>
                     <Button Name="NextButton" Access="Public" Text="{Loc admin-logs-next}" StyleClasses="OpenLeft"/>
                 </BoxContainer>
-                <BoxContainer Name="EffectsContainer" HorizontalExpand="True">
+                <BoxContainer Name="TimeFilterContainer" HorizontalExpand="True">
                     <Collapsible Orientation="Vertical">
                         <CollapsibleHeading Title="{Loc admin-logs-time-filter-title}"/>
                         <CollapsibleBody>
