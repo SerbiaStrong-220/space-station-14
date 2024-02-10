@@ -93,6 +93,7 @@
                         </CollapsibleBody>
                     </Collapsible>
                 </BoxContainer>
+                <aui:VSeparator/>
                 <ScrollContainer Name="AdminLogsScrollContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
                     <TextEdit Name="AdminLogsTextEdit" Access="Public" VerticalExpand="True"/>
                 </ScrollContainer>
