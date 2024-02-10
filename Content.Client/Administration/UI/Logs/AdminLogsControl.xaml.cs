@@ -696,9 +696,9 @@ public sealed partial class AdminLogsControl : Control
         if (!int.TryParse(LateBorderEditSeconds.Text, out var lateSecond))
             lateSecond = 59;
 
-        _earlyBorder = new DateTime(recievedLogs[0].Date.Year, recievedLogs[0].Date.Month, recievedLogs[0].Date.Day, earlyHour, earlyMinute, earlySecond);
+        _earlyBorder = new DateTime(recievedLogs[0].Date.Year, recievedLogs[0].Date.Month, recievedLogs[0].Date.Day, earlyHour, earlyMinute, earlySecond, 0, 0);
 
-        _lateBorder = new DateTime(recievedLogs[recievedLogs.Count - 1].Date.Year, recievedLogs[recievedLogs.Count - 1].Date.Month, recievedLogs[recievedLogs.Count - 1].Date.Day, lateHour, lateMinute, lateSecond);
+        _lateBorder = new DateTime(recievedLogs[recievedLogs.Count - 1].Date.Year, recievedLogs[recievedLogs.Count - 1].Date.Month, recievedLogs[recievedLogs.Count - 1].Date.Day, lateHour, lateMinute, lateSecond, 999, 999);
     }
 
     //SS220 admin_logs_time_filter end
