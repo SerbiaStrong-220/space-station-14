@@ -1,7 +1,7 @@
 # Base
 - type: entity
-  name: Reagents Capsule Implanter
-  id: BaseReagentsCapsuleImplanter
+  name: Chemical Implanter
+  id: BaseChemicalImplanter
   parent: BaseItem
   abstract: true
   noSpawn: true
@@ -34,18 +34,22 @@
       sprite: SS220/Objects/ReagentInjector/injector.rsi
       heldPrefix: 0
     - type: Appearance
+    - type: Tag
+      tags:
+        - SubdermalImplant
+        - ChemicalImplant
 
 - type: entity
-  id: ReagentsCapsuleInjector
+  id: ChemicalImplanter
   name: reagent-injector-name
   description: reagent-injector-desc
-  parent: BaseReagentsCapsuleImplanter
+  parent: BaseChemicalImplanter
   components:
     - type: Implanter
-      implant: EmptyCapsule
+      implant: EmptyChemicalImplant
 
 - type: entity
-  id: ActionOpenReagentsCapsule
+  id: ActionUseChemicalImplant
   name: reagent-injector-action-name
   description: reagent-injector-action-desc
   noSpawn: true
@@ -58,16 +62,4 @@
     icon:
       sprite: SS220/Objects/ReagentInjector/injector.rsi
       state: icon_empty
-    event: !type:UseReagentCapsuleImplantEvent
-
-# Other
-- type: listing
-  id: UplinkReagentsCapsuleInjector
-  name: reagent-injector-name
-  description: uplink-reagent-injector-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/injector.rsi, state: injector }
-  productEntity: ReagentsCapsuleInjector
-  cost:
-    Telecrystal: 6
-  categories:
-    - UplinkInjectors
+    event: !type:UseChemicalImplantEvent

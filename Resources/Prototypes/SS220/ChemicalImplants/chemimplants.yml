@@ -1,10 +1,10 @@
 # Base
 - type: entity
   parent: BaseSubdermalImplant
-  id: BaseReagentsCapsule
-  name: reagents capsule
+  id: BaseChemicalImplant
+  name: chemical capsule
   components:
-    - type: ReagentCapsule
+    - type: ChemicalImplant
     - type: SubdermalImplant
       permanent: true
       implantAction: ActionOpenReagentsCapsule
@@ -24,6 +24,7 @@
       solution: beaker
     - type: ExaminableSolution
       solution: beaker
+    - type: InteractionOutline
     - type: Appearance
     - type: SolutionContainerVisuals
       maxFillLevels: 1
@@ -32,26 +33,24 @@
 
 # capsules
 - type: entity
-  parent: BaseReagentsCapsule
-  id: EmptyCapsule
+  parent: BaseChemicalImplant
+  id: EmptyChemicalImplant
   name: empty-reagent-capsule-name
   description: empty-reagent-capsule-desk
   components:
     - type: SubdermalImplant
       permanent: false
-    - type: Appearance
     - type: SolutionContainerManager
       solutions:
         beaker:
           maxVol: 30
 
 - type: entity
-  parent: BaseReagentsCapsule
-  id: CombatCapsule
+  parent: BaseChemicalImplant
+  id: CombatChemicalImplant
   name: combat-reagent-capsule-name
   description: combat-reagent-capsule-desk
   components:
-    - type: Appearance
     - type: Sprite
       sprite: SS220/Objects/ReagentInjector/capsules.rsi
       layers:
@@ -68,8 +67,8 @@
             Quantity: 5
 
 - type: entity
-  parent: BaseReagentsCapsule
-  id: DABCapsule
+  parent: BaseChemicalImplant
+  id: DABChemicalImplant
   name: dab-reagent-capsule-name
   description: dab-reagent-capsule-desc
   components:
@@ -91,8 +90,8 @@
             Quantity: 10
 
 - type: entity
-  parent: BaseReagentsCapsule
-  id: ExperementalReanimatorCapsule
+  parent: BaseChemicalImplant
+  id: ExpReanimatorChemicalImplant
   name: unstable-reanimator-reagent-capsule-name
   description: unstable-reanimator-reagent-capsule-desc
   components:
@@ -114,8 +113,8 @@
             Quantity: 10
 
 - type: entity
-  parent: BaseReagentsCapsule
-  id: SuicideCapsule
+  parent: BaseChemicalImplant
+  id: SuicideChemicalImplant
   name: suicide-reagent-capsule-name
   description: suicide-reagent-capsule-desc
   components:
@@ -133,73 +132,3 @@
           reagents:
           - ReagentId: Amatoxin
             Quantity: 10
-# Uplink
-- type: listing
-  id: UplinkEmptyCapsule
-  name: uplink-empty-reagent-capsule-name
-  description: uplink-empty-reagent-capsule-desk
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: capsule }
-  productEntity: EmptyCapsule
-  cost:
-    Telecrystal: 1
-  categories:
-    - UplinkInjectors
-
-- type: listing
-  id: UplinkCombatCapsule
-  name: uplink-combat-reagent-capsule-name
-  description: uplink-combat-reagent-capsule-desk
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: combat }
-  productEntity: CombatCapsule
-  cost:
-    Telecrystal: 4
-  categories:
-    - UplinkInjectors
-  conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-
-- type: listing
-  id: UplinkDABCapsule
-  name: uplink-dab-reagent-capsule-name
-  description: uplink-dab-reagent-capsule-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dab }
-  productEntity: DABCapsule
-  cost:
-    Telecrystal: 2
-  categories:
-    - UplinkInjectors
-
-- type: listing
-  id: UplinkExperementalReanimatorCapsule
-  name: uplink-expadrenaline-reagent-capsule-name
-  description: uplink-expadrenaline-reagent-capsule-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: reanim }
-  productEntity: ExperementalReanimatorCapsule
-  cost:
-    Telecrystal: 4
-  categories:
-    - UplinkInjectors
-  conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-
-- type: listing
-  id: UplinkSuicideCapsule
-  name: uplink-suicide-reagent-capsule-name
-  description: uplink-suicide-reagent-capsule-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dead }
-  productEntity: SuicideCapsule
-  cost:
-    Telecrystal: 2
-  categories:
-    - UplinkInjectors
-  conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink

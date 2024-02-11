@@ -1,0 +1,83 @@
+# Implanters
+
+- type: listing
+  id: UplinkChemicalImplanter
+  name: reagent-injector-name
+  description: uplink-reagent-injector-desc
+  icon: { sprite: SS220/Objects/ReagentInjector/injector.rsi, state: injector }
+  productEntity: ChemicalImplanter
+  cost:
+    Telecrystal: 6
+  categories:
+    - UplinkChemicalImplants
+
+# Implants
+- type: listing
+  id: UplinkEmptyChemicalImplant
+  name: uplink-empty-reagent-capsule-name
+  description: uplink-empty-reagent-capsule-desk
+  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: capsule }
+  productEntity: EmptyChemicalImplant
+  cost:
+    Telecrystal: 1
+  categories:
+    - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkCombatChemicalImplant
+  name: uplink-combat-reagent-capsule-name
+  description: uplink-combat-reagent-capsule-desk
+  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: combat }
+  productEntity: CombatChemicalImplant
+  cost:
+    Telecrystal: 4
+  categories:
+    - UplinkChemicalImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink
+
+- type: listing
+  id: UplinkDABChemicalImplant
+  name: uplink-dab-reagent-capsule-name
+  description: uplink-dab-reagent-capsule-desc
+  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dab }
+  productEntity: DABChemicalImplant
+  cost:
+    Telecrystal: 2
+  categories:
+    - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkExpReanimatorChemicalImplant
+  name: uplink-expadrenaline-reagent-capsule-name
+  description: uplink-expadrenaline-reagent-capsule-desc
+  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: reanim }
+  productEntity: ExpReanimatorChemicalImplant
+  cost:
+    Telecrystal: 4
+  categories:
+    - UplinkChemicalImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink
+
+- type: listing
+  id: UplinkSuicideChemicalImplant
+  name: uplink-suicide-reagent-capsule-name
+  description: uplink-suicide-reagent-capsule-desc
+  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dead }
+  productEntity: SuicideChemicalImplant
+  cost:
+    Telecrystal: 2
+  categories:
+    - UplinkChemicalImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink

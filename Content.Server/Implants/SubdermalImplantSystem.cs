@@ -21,7 +21,8 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using System.Numerics;
-using Content.Shared.SS220.ReagentImplanter;
+using Content.Shared.SS220.ChemicalImplant;
+using FastAccessors;
 
 namespace Content.Server.Implants;
 
@@ -47,7 +48,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
-        SubscribeLocalEvent<SubdermalImplantComponent, UseReagentCapsuleImplantEvent>(OnReagentCapsuleImplant);
+        SubscribeLocalEvent<SubdermalImplantComponent, UseChemicalImplantEvent>(OnChemicaImplant); // SS220 - chemical-implants start
         SubscribeLocalEvent<SubdermalImplantComponent, UseFreedomImplantEvent>(OnFreedomImplant);
         SubscribeLocalEvent<StoreComponent, ImplantRelayEvent<AfterInteractUsingEvent>>(OnStoreRelay);
         SubscribeLocalEvent<SubdermalImplantComponent, ActivateImplantEvent>(OnActivateImplantEvent);
@@ -56,27 +57,24 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
     }
 
-    private void OnReagentCapsuleImplant(EntityUid uid, SubdermalImplantComponent component, UseReagentCapsuleImplantEvent args)
+    // SS220 - chemical-implants start
+    private void OnChemicaImplant(EntityUid uid, SubdermalImplantComponent component, UseChemicalImplantEvent args)
     {
-        if (!TryComp<SolutionContainerManagerComponent>(args.Performer, out var ownerSolutionContainerComp)
-            || !TryComp<ReagentCapsuleComponent>(uid, out var reagentCapsule)
-            || !TryComp<SolutionContainerManagerComponent>(uid, out var capsuleContainer))
+        if (component.ImplantedEntity is not { } ent
+            ||!TryComp<SolutionContainerManagerComponent>(args.Performer, out var performerSolution)
+            || !TryComp<SolutionContainerManagerComponent>(uid, out var implantSolution))
             return;
 
-        if (args.Handled || reagentCapsule.IsUsed)
+        if (args.Handled)
             return;
 
-        if (!_solutionContainer.TryGetSolution(new(args.Performer, ownerSolutionContainerComp), "chemicals", out var chemicals))
-            return;
-
-        if (!_solutionContainer.TryGetSolution(new(uid, capsuleContainer), "beaker", out var beaker))
-            return;
-
-        _solutionContainer.TryTransferSolution(chemicals.Value, beaker.Value.Comp.Solution, beaker.Value.Comp.Solution.Volume);
-        reagentCapsule.IsUsed = true;
         args.Handled = true;
 
+        QueueDel(uid);
+
     }
+
+    // SS220 - chemical-implants end
 
     private void OnStoreRelay(EntityUid uid, StoreComponent store, ImplantRelayEvent<AfterInteractUsingEvent> implantRelay)
     {
