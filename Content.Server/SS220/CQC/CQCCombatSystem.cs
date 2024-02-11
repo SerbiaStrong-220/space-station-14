@@ -3,6 +3,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
 using Content.Shared.SS220.CQCCombat;
+using Content.Shared.SS220.UseableBook;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage;
 using Content.Server.Hands.Systems;
@@ -31,11 +32,25 @@ public sealed class CQCCombatSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<CQCCanReadBook>(CanReadCQCBook);
         SubscribeLocalEvent<CQCCombatComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<CQCCombatComponent, CQCBlowbackEvent>(BaseAction);
         SubscribeLocalEvent<CQCCombatComponent, CQCPunchEvent>(BaseAction);
         SubscribeLocalEvent<CQCCombatComponent, CQCDisarmEvent>(BaseAction);
         SubscribeLocalEvent<CQCCombatComponent, CQCLongSleepEvent>(BaseAction);
+    }
+
+    private void CanReadCQCBook(CQCCanReadBook args)
+    {
+        args.Handled = true;
+        if (HasComp<CQCCombatComponent>(args.Interactor))
+        {
+            args.Can = false;
+            args.Cancelled = true;
+            args.Reason = Loc.GetString("cqc-cannotlearn");
+            return;
+        }
+        args.Can = true;
     }
 
     private void OnComponentInit(EntityUid uid, CQCCombatComponent component, ComponentInit args)

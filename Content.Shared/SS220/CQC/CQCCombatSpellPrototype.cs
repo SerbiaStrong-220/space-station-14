@@ -12,8 +12,8 @@ public sealed class CQCCombatSpellPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField("entity", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string Entity = default!;
-    [DataField("damage")]
+    [DataField()]
     public readonly DamageSpecifier? Damage = default!;
 }

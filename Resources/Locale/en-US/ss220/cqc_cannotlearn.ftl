@@ -1,0 +1,1 @@
+cqc-cannotlearn = You're already learn CQC spells!

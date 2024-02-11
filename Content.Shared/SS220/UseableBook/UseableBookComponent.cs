@@ -1,9 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.UseableBook;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class UseableBookComponent : Component
 {
     [DataField()]
@@ -21,26 +23,19 @@ public sealed partial class UseableBookComponent : Component
     [DataField(required: true)]
     [ViewVariables(VVAccess.ReadWrite)]
     public ComponentRegistry ComponentsOnRead { get; private set; } = new();
+    [DataField]
+    [NonSerialized]
+    public UseableBookCanReadEvent? CustomCanRead;
 }
 
-public partial class UseableBookEventArgs : HandledEntityEventArgs 
+[Serializable, NetSerializable]
+public abstract partial class UseableBookEventArgs : HandledEntityEventArgs
 {
-    public EntityUid Interactor { get; }
-    public UseableBookComponent BookComp { get; }
+    public EntityUid Interactor { get; set; }
+    public UseableBookComponent BookComp { get; set; } = default!;
     public string? Reason;
     public bool Can = false;
     public bool Cancelled = false;
-    public UseableBookEventArgs(EntityUid interactor, UseableBookComponent book)
-    {
-        Interactor = interactor;
-        BookComp = book;
-    }
 };
-public sealed partial class UseableBookCanReadEvent : UseableBookEventArgs
-{
-    public UseableBookCanReadEvent(EntityUid interactor, UseableBookComponent book) : base(interactor, book) { }
-};
-public sealed partial class UseableBookOnReadEvent : UseableBookEventArgs
-{
-    public UseableBookOnReadEvent(EntityUid interactor, UseableBookComponent book) : base(interactor, book) { }
-};
+public abstract partial class UseableBookCanReadEvent : UseableBookEventArgs { };
+public sealed partial class UseableBookOnReadEvent : UseableBookEventArgs { };

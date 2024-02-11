@@ -2,6 +2,7 @@
 
 using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.UseableBook;
 
 namespace Content.Shared.SS220.CQCCombat;
 
@@ -21,3 +22,4 @@ public sealed partial class CQCBlowbackEvent : EntityTargetActionEvent { };
 public sealed partial class CQCPunchEvent : EntityTargetActionEvent { };
 public sealed partial class CQCDisarmEvent : EntityTargetActionEvent { };
 public sealed partial class CQCLongSleepEvent : InstantActionEvent { };
+public sealed partial class CQCCanReadBook : UseableBookCanReadEvent { };

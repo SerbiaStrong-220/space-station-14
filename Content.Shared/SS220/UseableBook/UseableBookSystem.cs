@@ -22,41 +22,44 @@ public sealed class UseableBookSystem : EntitySystem
 
         SubscribeLocalEvent<UseableBookComponent, UseInHandEvent>(OnBookUse);
         SubscribeLocalEvent<UseableBookComponent, UseableBookReadDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<UseableBookCanReadEvent>(CanReadBook);
     }
-    public void CanReadBook(UseableBookCanReadEvent args)
+    public bool CanUseBook(EntityUid entity, UseableBookComponent comp, EntityUid user, [NotNullWhen(false)] out string? reason)
     {
-        if (args.Cancelled)
-            return;
-        args.Handled = true;
-        var book = args.BookComp;
-        if (book.CanUseOneTime && book.Used)
+        reason = null;
+        bool bCan = false;
+
+        if (comp.CustomCanRead is not null)
         {
-            args.Reason = Loc.GetString("useable-book-used-onetime"); // данную книгу можно было изучить только один раз
-            goto failed;
-        }
-        if (book.LeftUses > 0)
-        {
-            args.Can = true;
-            return;
+            var customCanRead = comp.CustomCanRead;
+            customCanRead.Interactor = user;
+            customCanRead.BookComp = comp;
+            RaiseLocalEvent(entity, customCanRead);
+
+            if (customCanRead.Handled)
+            {
+                reason = customCanRead.Reason;
+                bCan = customCanRead.Can;
+
+                if (!customCanRead.Can)
+                    goto retn;
+            }
         }
 
-        args.Reason = Loc.GetString("useable-book-used"); // потрачены все использования
-        failed:
-        args.Cancelled = true;
-    }
-    public bool CanUseBook(UseableBookComponent comp, EntityUid user, [NotNullWhen(false)] out string? reason)
-    {
-        var args = new UseableBookCanReadEvent(user, comp);
-        RaiseLocalEvent(args);
-        reason = args.Reason;
+        if (comp.CanUseOneTime && comp.Used)
+            reason = Loc.GetString("useable-book-used-onetime"); // данную книгу можно было изучить только один раз
+        if (comp.LeftUses > 0)
+            bCan = true;
 
-        return args.Can && args.Handled;
+        if (!bCan)
+            reason = Loc.GetString("useable-book-used"); // потрачены все использования
+
+        retn:
+        return bCan;
     }
 
     private void OnBookUse(EntityUid entity, UseableBookComponent comp, UseInHandEvent args)
     {
-        if (CanUseBook(comp, args.User, out var reason))
+        if (CanUseBook(entity, comp, args.User, out var reason))
         {
             var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(comp.ReadTime), new UseableBookReadDoAfterEvent(),
             entity, target: entity)
@@ -77,7 +80,7 @@ public sealed class UseableBookSystem : EntitySystem
     {
         if (args.Handled || args.Cancelled)
             return;
-        if (args.Target is not {} target)
+        if (args.Target is not { } target)
             return;
         
         comp.Used = true;
@@ -91,6 +94,9 @@ public sealed class UseableBookSystem : EntitySystem
         }
 
         Dirty(comp);
-        RaiseLocalEvent(new UseableBookOnReadEvent(args.User, comp));
+        var useableArgs = new UseableBookOnReadEvent();
+        useableArgs.Interactor = args.User;
+        useableArgs.BookComp = comp;
+        RaiseLocalEvent(useableArgs);
     }
 }

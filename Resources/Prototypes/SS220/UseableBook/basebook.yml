@@ -1,5 +1,5 @@
 - type: entity
-  id: basebook
+  id: cqc_nonlethal
   parent: BaseItem
   name: Base book
   description: Essential to become robust.
@@ -15,6 +15,7 @@
     readTime: 3
     leftUses: 1
     canUseOneTime: false
+    customCanRead: !type:CQCCanReadBook
     componentsOnRead:
     - type: CQCCombat
       availableSpells:
@@ -22,3 +23,29 @@
       - NonLethalPunch
       - NonLethalDisarm
       - NonLethalLongSleep
+
+- type: entity
+  id: cqc_lethal
+  parent: BaseItem
+  name: Base book
+  description: Essential to become robust.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: book7
+  - type: Tag
+    tags:
+    - Book
+  - type: UseableBook
+    readTime: 3
+    leftUses: 1
+    canUseOneTime: false
+    customCanRead: !type:CQCCanReadBook
+    componentsOnRead:
+    - type: CQCCombat
+      availableSpells:
+      - LethalBlowback
+      - LethalPunch
+      - LethalDisarm
+      - LethalLongSleep
