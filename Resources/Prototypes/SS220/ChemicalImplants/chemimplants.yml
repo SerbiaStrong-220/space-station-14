@@ -1,13 +1,13 @@
-# Base
+# capsules
 - type: entity
-  parent: BaseSubdermalImplant
-  id: BaseChemicalImplant
-  name: chemical capsule
+  id: EmptyChemicalImplant
+  name: empty-reagent-capsule-name
+  description: empty-reagent-capsule-desk
   components:
     - type: ChemicalImplant
     - type: SubdermalImplant
       permanent: true
-      implantAction: ActionOpenReagentsCapsule
+      implantAction: ActionUseChemicalImplant
     - type: Sprite
       sprite: SS220/Objects/ReagentInjector/capsules.rsi
       state: capsule
@@ -25,28 +25,18 @@
     - type: ExaminableSolution
       solution: beaker
     - type: InteractionOutline
+    - type: Clickable
     - type: Appearance
     - type: SolutionContainerVisuals
       maxFillLevels: 1
       changeColor: false
       emptySpriteName: capsule_used
-
-# capsules
-- type: entity
-  parent: BaseChemicalImplant
-  id: EmptyChemicalImplant
-  name: empty-reagent-capsule-name
-  description: empty-reagent-capsule-desk
-  components:
-    - type: SubdermalImplant
-      permanent: false
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          maxVol: 30
+    - type: Tag
+      tags:
+        - ChemicalImplant
 
 - type: entity
-  parent: BaseChemicalImplant
+  parent: EmptyChemicalImplant
   id: CombatChemicalImplant
   name: combat-reagent-capsule-name
   description: combat-reagent-capsule-desk
@@ -67,7 +57,7 @@
             Quantity: 5
 
 - type: entity
-  parent: BaseChemicalImplant
+  parent: EmptyChemicalImplant
   id: DABChemicalImplant
   name: dab-reagent-capsule-name
   description: dab-reagent-capsule-desc
@@ -90,7 +80,7 @@
             Quantity: 10
 
 - type: entity
-  parent: BaseChemicalImplant
+  parent: EmptyChemicalImplant
   id: ExpReanimatorChemicalImplant
   name: unstable-reanimator-reagent-capsule-name
   description: unstable-reanimator-reagent-capsule-desc
@@ -113,7 +103,7 @@
             Quantity: 10
 
 - type: entity
-  parent: BaseChemicalImplant
+  parent: EmptyChemicalImplant
   id: SuicideChemicalImplant
   name: suicide-reagent-capsule-name
   description: suicide-reagent-capsule-desc

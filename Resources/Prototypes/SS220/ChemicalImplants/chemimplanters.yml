@@ -19,7 +19,7 @@
         priority: 0
         whitelist:
           tags:
-            - SubdermalImplant
+            - ChemicalImplant
     - type: Sprite
       sprite: SS220/Objects/ReagentInjector/injector.rsi
       state: injector
@@ -29,14 +29,13 @@
         injector_full:
           whitelist:
             tags:
-              - SubdermalImplant
+              - ChemicalImplant
     - type: Item
       sprite: SS220/Objects/ReagentInjector/injector.rsi
       heldPrefix: 0
     - type: Appearance
     - type: Tag
       tags:
-        - SubdermalImplant
         - ChemicalImplant
 
 - type: entity
