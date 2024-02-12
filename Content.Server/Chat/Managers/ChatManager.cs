@@ -240,11 +240,10 @@ namespace Content.Server.Chat.Managers
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
 
-            var _shlepovendSystem = _entityManager.System<SharedShlepovendSystem>();
             var SponsorInfo = player.ContentData()?.SponsorInfo;
             if (SponsorInfo is not null)
             {
-                if (_shlepovendSystem.GetHighestTier(SponsorInfo.Tiers) is not null && SponsorInfo.Tiers.Length > 1 || true)
+                if (SponsorInfo.Tiers.Length > 1)
                 {
                     wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffe77a"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
                 }
