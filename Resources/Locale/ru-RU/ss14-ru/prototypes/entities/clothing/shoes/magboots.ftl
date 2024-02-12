@@ -14,3 +14,5 @@ ent-ActionToggleMagbootsAdvanced = { ent-ActionBaseToggleMagboots }
     .desc = { ent-ActionBaseToggleMagboots.desc }
 ent-ActionToggleMagbootsSyndie = { ent-ActionBaseToggleMagboots }
     .desc = { ent-ActionBaseToggleMagboots.desc }
+ent-ActionToggleMagSyndieEbent = { ent-ActionBaseToggleMagboots }
+    .desc = { ent-ActionBaseToggleMagboots.desc }

@@ -33,7 +33,7 @@ public sealed partial class RecordList : ScrollContainer
     private readonly IPrototypeManager _prototype;
     private readonly SpriteSystem _sprite;
 
-    private Dictionary<(NetEntity, uint), CriminalRecordShort> _records = new();
+    private Dictionary<uint, CriminalRecordShort> _records = new();
     private List<RecordListEntry> _itemPool = new();
     private RecordListEntry? _selected;
 
@@ -246,7 +246,7 @@ public sealed partial class RecordList : ScrollContainer
         return false;
     }
 
-    public void SetItems(Dictionary<(NetEntity, uint), CriminalRecordShort>? listing, (NetEntity, uint)? selected)
+    public void SetItems(Dictionary<uint, CriminalRecordShort>? listing, uint? selected)
     {
         _records = listing ?? new();
         EnsurePoolSize(_records.Count);
@@ -255,7 +255,7 @@ public sealed partial class RecordList : ScrollContainer
 
     public void RebuildList()
     {
-        (NetEntity, uint)? selectionKey;
+        uint? selectionKey;
         if (_selected != null && _selected.Metadata is RecordMetadata cast)
             selectionKey = cast.Key;
         else
@@ -284,11 +284,10 @@ public sealed partial class RecordList : ScrollContainer
         return department.ID;
     }
 
-    public void RebuildList((NetEntity, uint)? newSelection)
+    public void RebuildList(uint? selectionKey)
     {
         IsPopulating = true;
 
-        (NetEntity, uint)? selectionKey = newSelection;
         if (selectionKey == null && _selected != null)
             TryDeselect(_selected);
 
@@ -368,10 +367,10 @@ public sealed partial class RecordList : ScrollContainer
 
     public struct RecordMetadata
     {
-        public (NetEntity, uint) Key;
+        public uint Key;
         public CriminalRecordShort Record;
 
-        public RecordMetadata((NetEntity, uint) key, CriminalRecordShort record)
+        public RecordMetadata(uint key, CriminalRecordShort record)
         {
             Key = key;
             Record = record;

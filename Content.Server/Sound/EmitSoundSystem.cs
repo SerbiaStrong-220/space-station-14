@@ -1,7 +1,7 @@
-﻿using Content.Server.Explosion.EntitySystems;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Sound.Components;
-using Content.Server.UserInterface;
 using Content.Shared.Ghost;
+using Content.Shared.UserInterface;
 using Content.Shared.Sound;
 using Robust.Shared.Random;
 

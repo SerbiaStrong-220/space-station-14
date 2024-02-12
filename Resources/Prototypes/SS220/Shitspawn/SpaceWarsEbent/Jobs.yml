@@ -1,0 +1,342 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#### AGENT START ####
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackDuffelSyndicate
+  id: ClothingBackpackDuffelSyndicateSWAgent
+  suffix: Shitspawn, Ebent, Space Wars, Agent
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalSyndicate
+    - id: CrowbarRed
+    - id: HandheldGPSBasic
+    - id: MagazinePistolSubMachineGun
+      amount: 2
+    - id: MedicatedSuture
+    - id: RegenerativeMesh
+
+- type: startingGear
+  id: EbentSpaceWarsAgentGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackDuffelSyndicateSWAgent
+    shoes: ClothingShoesChameleonNoSlips
+    eyes: ClothingEyesHudSyndicate
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndie
+    suitstorage: WeaponSubMachineGunC20r
+    ears: ClothingHeadsetAltSyndicate
+    belt: ClothingBeltMilitaryWebbing
+    pocket1: DoubleEmergencyOxygenTankFilled
+
+- type: entity
+  id: RandomHumanoidSpawnerSpaceWarsAgent
+  name: Спавнер Агента
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpaceWarsAgent
+
+- type: randomHumanoidSettings
+  id: EbentSpaceWarsAgent
+  randomizeName: true
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+  - type: Loadout
+    prototypes: [ EbentSpaceWarsAgentGear ]
+  - type: RandomMetadata
+    nameSegments: [ "Агент", SyndicateNamesNormal ]
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: GhostRole
+    name: (Ивент) Агент Синдиката
+  - type: GhostTakeoverAvailable
+#### AGENT END ####
+
+#### LEADER START ####
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackDuffelSyndicate
+  id: ClothingBackpackDuffelSyndicateSWLeader
+  suffix: Shitspawn, Ebent, Space Wars, Leader
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalSyndicate
+    - id: CrowbarRed
+    - id: HandheldGPSBasic
+    - id: MedicatedSuture
+    - id: RegenerativeMesh
+    - id: WeaponPistolViper
+    - id: MagazinePistol
+      amount: 3
+    - id: ExpensiveLighterSyndicate
+    - id: Stimpack
+      amount: 2
+    - id: CombatMedipen
+    - id: DoubleEmergencyOxygenTankFilled
+
+- type: startingGear
+  id: EbentSpaceWarsLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackDuffelSyndicateSWLeader
+    shoes: ClothingShoesChameleonNoSlips
+    eyes: ClothingEyesHudSyndicate
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieCommander
+    ears: ClothingHeadsetAltSyndicate
+    belt: ClothingBeltMilitaryWebbing
+    pocket1: FlashlightSecliteSyndicate
+    pocket2: EnergySword
+
+- type: entity
+  id: RandomHumanoidSpawnerSpaceWarsLeader
+  name: Спавнер Командира
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpaceWarsLeader
+
+- type: randomHumanoidSettings
+  id: EbentSpaceWarsLeader
+  randomizeName: true
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+  - type: Loadout
+    prototypes: [ EbentSpaceWarsLeaderGear ]
+  - type: RandomMetadata
+    nameSegments: [ "Командир", SyndicateNamesElite ]
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: GhostRole
+    name: (Ивент) Командир Синдиката
+  - type: GhostTakeoverAvailable
+#### LEADER END ####
+
+#### OPERATIVE START ####
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackDuffelSyndicate
+  id: ClothingBackpackDuffelSyndicateSWOperative
+  suffix: Shitspawn, Ebent, Space Wars, Operative
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalSyndicate
+    - id: CrowbarRed
+    - id: HandheldGPSBasic
+    - id: MagazinePistolSubMachineGun
+      amount: 2
+    - id: MedicatedSuture
+    - id: RegenerativeMesh
+    - id: Stimpack
+      amount: 3
+    - id: CombatMedipen
+    - id: DeathRattleImplanter
+
+- type: startingGear
+  id: EbentSpaceWarsOperativeGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackDuffelSyndicateSWOperative
+    shoes: ClothingShoesBootsMagSyndie
+    eyes: ClothingEyesHudSyndicate
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndie
+    suitstorage: WeaponSubMachineGunC20r
+    ears: ClothingHeadsetAltSyndicate
+    belt: ClothingBeltMilitaryWebbing
+    pocket1: DoubleEmergencyOxygenTankFilled
+    pocket2: FlashlightSecliteSyndicate
+
+- type: entity
+  id: RandomHumanoidSpawnerSpaceWarsOperative
+  name: Спавнер Оперативника
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpaceWarsOperative
+
+- type: randomHumanoidSettings
+  id: EbentSpaceWarsOperative
+  randomizeName: true
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+  - type: Loadout
+    prototypes: [ EbentSpaceWarsOperativeGear ]
+  - type: RandomMetadata
+    nameSegments: [ "Оперативник", SyndicateNamesElite ]
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: GhostRole
+    name: (Ивент) Штурмовик Синдиката
+  - type: GhostTakeoverAvailable
+#### OPERATIVE END ####
+
+#### ENGINEER START ####
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackDuffelSyndicate
+  id: ClothingBackpackDuffelSyndicateSWEngineer
+  suffix: Shitspawn, Ebent, Space Wars, Engineer
+  components:
+  - type: Storage
+    grid:
+    - 0,0,8,4
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalSyndicate
+    - id: HandheldGPSBasic
+    - id: MagazinePistol
+      amount: 2
+    - id: CableApcStack
+    - id: CableMVStack
+    - id: CableHVStack
+    - id: SheetGlass
+    - id: SheetPlasteel
+    - id: SheetSteel
+
+- type: entity
+  name: армейская РПС
+  description: Ременно-поясная система тактических ремней, которую носят абордажные группы Синдиката.
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltMilitaryWebbingSWEngineer
+  suffix: Shitspawn, Ebent, Space Wars, Engineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: HolofanProjector
+    - id: GasAnalyzer
+    - id: trayScanner
+    - id: WelderExperimental
+    - id: PowerDrill
+    - id: Multitool
+    - id: SyndicateJawsOfLife
+
+- type: startingGear
+  id: EbentSpaceWarsEngineerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackDuffelSyndicateSWEngineer
+    shoes: ClothingShoesChameleonNoSlips
+    eyes: ClothingEyesHudSyndicate
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieElite
+    ears: ClothingHeadsetAltSyndicate
+    belt: ClothingBeltMilitaryWebbingSWEngineer
+    pocket1: FlashlightSecliteSyndicate
+    pocket2: WeaponPistolViper
+
+- type: entity
+  id: RandomHumanoidSpawnerSpaceWarsEngineer
+  name: Спавнер Техника
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpaceWarsEngineer
+
+- type: randomHumanoidSettings
+  id: EbentSpaceWarsEngineer
+  randomizeName: true
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+  - type: Loadout
+    prototypes: [ EbentSpaceWarsEngineerGear ]
+  - type: RandomMetadata
+    nameSegments: [ "Техник", SyndicateNamesNormal ]
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: GhostRole
+    name: (Ивент) Техник Синдиката
+  - type: GhostTakeoverAvailable
+#### ENGINEER END ####
+
+#### MEIDC START ####
+- type: entity
+  name: "рюкзак синдиката"
+  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
+  parent: ClothingBackpackDuffelSyndicateMedical
+  id: ClothingBackpackDuffelSyndicateSWMedic
+  suffix: Shitspawn, Ebent, Space Wars, Engineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalSyndicate
+    - id: CrowbarRed
+    - id: HandheldGPSBasic
+    - id: DoubleEmergencyOxygenTankFilled
+    - id: MedkitAdvancedFilled
+    - id: SyndiHypo
+    - id: EpinephrineChemistryBottle
+      amount: 2
+    - id: OmnizineChemistryBottle
+
+- type: startingGear
+  id: EbentSpaceWarsMedicGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackDuffelSyndicateSWMedic
+    shoes: ClothingShoesChameleonNoSlips
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskGasSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndieMedic
+    ears: ClothingHeadsetAltSyndicate
+    belt: ClothingBeltMedicalFilled
+    pocket1: FlashlightSecliteSyndicate
+    pocket2: HandheldHealthAnalyzer
+
+- type: entity
+  id: RandomHumanoidSpawnerSpaceWarsMedic
+  name: Спавнер Медика
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentSpaceWarsMedic
+
+- type: randomHumanoidSettings
+  id: EbentSpaceWarsMedic
+  randomizeName: true
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+  - type: Loadout
+    prototypes: [ EbentSpaceWarsMedicGear ]
+  - type: RandomMetadata
+    nameSegments: [ "Санитар", SyndicateNamesNormal ]
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: GhostRole
+    name: (Ивент) Медик Синдиката
+  - type: GhostTakeoverAvailable
+#### MEDIC END ####

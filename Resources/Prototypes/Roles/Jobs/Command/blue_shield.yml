@@ -48,14 +48,13 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
     back: ClothingBackpackFilled
-    shoes: ClothingShoesBootsJack
+    shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretNavyBlue
     outerClothing: ClothingOuterArmorBulletproof
     id: BlueShieldPDA
     ears: ClothingHeadsetAltCommand
     pocket1: WeaponAdvancedRevolver
-    pocket2: HandheldCrewMonitor
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat
   satchel: ClothingBackpackSatchelFilled

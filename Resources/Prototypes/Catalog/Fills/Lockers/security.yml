@@ -10,17 +10,17 @@
         prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
-      - id: ClothingEyesGlassesSunglasses
+#      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
-      - id: ClothingOuterCoatWarden
-      - id: ClothingOuterWinterWarden
+#      - id: ClothingOuterCoatWarden #SS220-MinorTweaks
+#      - id: ClothingOuterWinterWarden #SS220-MinorTweaks
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
-      - id: ClothingEyesHudSecurity
+#      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
 
 - type: entity
   id: LockerWardenFilled
@@ -34,17 +34,17 @@
         prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
-      - id: ClothingEyesGlassesSunglasses
+#      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
-      - id: ClothingOuterCoatWarden
-      - id: ClothingOuterWinterWarden
-      - id: ClothingOuterCoatWardenAlt # Corvax-SecFashion
+#      - id: ClothingOuterCoatWarden SS220-MinorTweaks start
+#      - id: ClothingOuterWinterWarden
+#      - id: ClothingOuterCoatWardenAlt # Corvax-SecFashion #SS220-MinorTweaks end
       - id: RubberStampWarden
       - id: DoorRemoteArmory
-      - id: HoloprojectorSecurity
-      - id: ClothingEyesHudSecurity
+      - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
+#      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
 #SS220-Pilot
 - type: entity
   id: LockerPilotFilled
@@ -67,7 +67,7 @@
       - id: ClothingOuterHardsuitSecurity
       - id: HandheldGPSBasic
       - id: PilotBriefing
-      - id: YellowOxygenTankFilled
+      - id: OxygenTankFilled
       - id: NitrogenTankFilled
 
 - type: entity
@@ -95,6 +95,8 @@
       - id: WeaponMeleeNeedle
         prob: 0.1
       - id: ClothingEyesHudSecurity
+      - id: HoloprojectorSecurity
+        #prob: 0.6 # SS220 guranteed-holo-projector
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -158,6 +160,7 @@
       - id: ClothingHandsGlovesForensic
       - id: RubberStampDetective
       - id: BookBusido # Corvax-Books
+      - id: HoloprojectorSecurity
 
 - type: entity
   id: ClosetBombFilled

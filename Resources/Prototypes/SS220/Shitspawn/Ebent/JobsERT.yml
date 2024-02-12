@@ -3,7 +3,7 @@
 - type: entity
   parent: ClothingBeltMilitaryWebbing
   id: ClothingBeltWebbingSpecOpsFilled
-  suffix: Shitspawn, Ebent, СпецОпер
+  suffix: Shitspawn, Ebent, FractWar
   name: армейская РПС
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
   components:
@@ -14,11 +14,12 @@
     - id: MagazinePistolSubMachineGun
       amount: 2
     - id: CombatMedipen
+    - id: DnaScramblerImplanter
 
 - type: entity
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackSpecOpsFilled
-  suffix: Shitspawn, Ebent, СпецОпер
+  suffix: Shitspawn, Ebent, FractWar
   name: рюкзак офицера безопасности ОБР
   description: Вместительный рюкзак с множеством карманов, который носят офицеры безопасности отряда быстрого реагирования.
   components:
@@ -39,7 +40,7 @@
   id: LockerEbentSpecOps
   name: "шкаф отряда специальных операций"
   description: Стандартное хранилище NanoTrasen.
-  suffix: Shitspawn, Ebent, СпецОпер
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
     access: [[ Command ]]
@@ -65,7 +66,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMedical
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SpecOpsPDALeader
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
@@ -75,7 +76,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsLeader
   name: Спавнер Офицера Специальных Операций
-  suffix: Shitspawn, Ebent, ЕСквад
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -112,7 +113,7 @@
   id: IDCardSpecOpsLeader
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: PresetIdCard
     job: SpecOpsLeader
@@ -122,7 +123,7 @@
   name: КПК Офицера Специальных Операций
   description: Строгий и стильный КПК.
   id: SpecOpsPDALeader
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: Pda
     id: IDCardSpecOpsLeader
@@ -138,7 +139,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTEngineer
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SpecOpsPDAEngineer
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
@@ -148,7 +149,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsEngineer
   name: Спавнер Старшего Инженера Специальных Операций
-  suffix: Shitspawn, Ebent, ЕСквад
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -185,7 +186,7 @@
   id: IDCardSpecOpsEngineer
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: PresetIdCard
     job: SpecOpsEngineer
@@ -195,7 +196,7 @@
   name: КПК Старшего Инженера Специальных Операций
   description: Стандартный КПК отрядов быстрого реагирования.
   id: SpecOpsPDAEngineer
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: Pda
     id: IDCardSpecOpsEngineer
@@ -211,7 +212,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMedical
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SpecOpsPDACorpsman
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
@@ -221,7 +222,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCorpsman
   name: Спавнер Парамедика Специальных Операций
-  suffix: Shitspawn, Ebent, ЕСквад
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -262,7 +263,7 @@
   id: IDCardSpecOpsCorpsman
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: PresetIdCard
     job: SpecOpsCorpsman
@@ -272,7 +273,7 @@
   name: КПК Парамедика Специальных Операций
   description: И хотя опытный врач определяет повреждения на взгляд, КПК имеет встроенный анализатор здоровья.
   id: SpecOpsPDACorpsman
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: Pda
     id: IDCardSpecOpsCorpsman
@@ -292,7 +293,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMedical
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SpecOpsPDACMO
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
@@ -302,7 +303,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCMO
   name: Спавнер Главного Врача Специальных Операций
-  suffix: Shitspawn, Ebent, ЕСквад
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -339,7 +340,7 @@
   id: IDCardSpecOpsCMO
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: PresetIdCard
     job: SpecOpsCMO
@@ -349,7 +350,7 @@
   name: КПК Главного Врача Специальных Операций
   description: Имеет встроенный анализатор здоровья.
   id: SpecOpsPDACMO
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: Pda
     id: IDCardSpecOpsCMO
@@ -369,7 +370,7 @@
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTSecurity
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SpecOpsPDAFigher
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
@@ -379,7 +380,7 @@
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsTrooper
   name: Спавнер Рядового Специальных Операций
-  suffix: Shitspawn, Ebent, ЕСквад
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
@@ -420,7 +421,7 @@
   id: IDCardSpecOpsFighter
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: PresetIdCard
     job: SpecOpsFighter
@@ -430,7 +431,7 @@
   name: КПК Рядового Специальных Операций
   description: Красный значит мощный.
   id: SpecOpsPDAFigher
-  suffix: Shitspawn, Ebent, СпецОпер
+  noSpawn: true
   components:
   - type: Pda
     id: IDCardSpecOpsFighter

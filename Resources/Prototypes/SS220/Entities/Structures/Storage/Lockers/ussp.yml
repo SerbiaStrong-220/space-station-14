@@ -2,7 +2,7 @@
   id: UsspCloset
   parent: ClosetBase
   name: шкаф СССП
-  suffix: СССП
+  noSpawn: true
   description: Стандартное хранилище СССП для различных вещей.
   components:
   - type: EntityStorageVisuals

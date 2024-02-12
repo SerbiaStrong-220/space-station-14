@@ -9,9 +9,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.CriminalRecords;
 
 [RegisterComponent]
-public sealed partial class CriminalRecordsConsoleComponent : Component
+public sealed partial class CriminalRecordsConsole220Component : Component
 {
-    public (NetEntity, uint)? ActiveKey { get; set; }
+    public uint? ActiveKey { get; set; }
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool IsSecurity = true;
@@ -99,13 +99,13 @@ public sealed class CriminalRecordConsoleState : BoundUserInterfaceState
     /// <summary>
     ///     Current selected key.
     /// </summary>
-    public (NetEntity, uint)? SelectedKey { get; }
+    public uint? SelectedKey { get; }
     public GeneralStationRecord? SelectedRecord { get; }
-    public Dictionary<(NetEntity, uint), CriminalRecordShort>? RecordListing { get; }
+    public Dictionary<uint, CriminalRecordShort>? RecordListing { get; }
     public CriminalRecordConsoleState(
-        (NetEntity, uint)? key,
+        uint? key,
         GeneralStationRecord? record,
-        Dictionary<(NetEntity, uint), CriminalRecordShort>? recordListing)
+        Dictionary<uint, CriminalRecordShort>? recordListing)
     {
         SelectedKey = key;
         SelectedRecord = record;

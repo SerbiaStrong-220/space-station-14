@@ -3,7 +3,7 @@
   id: ClothingMaskGasUssp
   name: противогаз
   description: Стандартный противогаз СССП с защитой от вспышек.
-  suffix: СССП, Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi

@@ -786,8 +786,8 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+  #conditions: #SS220-Barricade
+    #- !type:TileNotBlocked #SS220-Barricade
 
 - type: construction
   name: wooden barricade
@@ -803,8 +803,8 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+  #conditions: #SS220-Barricade
+    #- !type:TileNotBlocked #SS220-Barricade
 
 - type: construction
   name: railing

@@ -1,0 +1,67 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: constructionGraph
+  id: BarricadeSteel220
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadesteel
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 2
+        - to: barricadesteeldirectional
+          steps:
+            - material: Steel
+              amount: 2
+              doAfter: 1
+        - to: barricadesteelfloor
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1
+    - node: barricadesteel
+      entity: BarricadeSteel
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: SheetSteel1   
+              amount: 3
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Welding
+              doAfter: 3
+            - tool: Prying
+              doAfter: 5
+    - node: barricadesteeldirectional
+      entity: BarricadeSteelDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Welding
+              doAfter: 3
+            - tool: Prying
+              doAfter: 5
+    - node: barricadesteelfloor
+      entity: BarricadeSteelFloor
+      edges:
+        - to: start
+          completed:
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Welding
+              doAfter: 3
+            - tool: Prying
+              doAfter: 5

@@ -1,10 +1,10 @@
 <p align="center"> <img alt="Space Station 14" width="350" height="350" src="https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/logo.png" /></p>
 
 <p align="center">
-<img alt="forthebadge | It works. Why?" src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/it-works-why.svg" />
-<img alt="forthebadge | Fuck it. Ship it." src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/fuck-it-ship-it.svg" />
-<img alt="forthebadge | Not a bug. A feature." src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/not-a-bug-a-feature.svg" />
-<img alt="forthebadge | Gluten free." src="https://raw.githubusercontent.com/BraveUX/for-the-badge/master/src/images/badges/gluten-free.svg" />
+<img alt="forthebadge | It works. Why?" src="https://raw.githubusercontent.com/SerbiaStrong-220/ss220-docs/master/res/ftb/it-works-why.svg" />
+<img alt="forthebadge | Fuck it. Ship it." src="https://raw.githubusercontent.com/SerbiaStrong-220/ss220-docs/master/res/ftb/fuck-it-ship-it.svg" />
+<img alt="forthebadge | Not a bug. A feature." src="https://raw.githubusercontent.com/SerbiaStrong-220/ss220-docs/master/res/ftb/not-a-bug-a-feature.svg" />
+<img alt="forthebadge | Gluten free." src="https://raw.githubusercontent.com/SerbiaStrong-220/ss220-docs/master/res/ftb/gluten-free.svg" />
 </p>
 
 Space Station 14 это ремейк SS13, который работает на собственном движке [Robust Toolbox](https://github.com/space-wizards/RobustToolbox), написанном на C#.

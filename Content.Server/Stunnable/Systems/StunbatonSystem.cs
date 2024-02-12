@@ -31,6 +31,7 @@ namespace Content.Server.Stunnable.Systems
             SubscribeLocalEvent<StunbatonComponent, GetHeavyDamageModifierEvent>(MeleeAttackRateEvent);
             SubscribeLocalEvent<StunbatonComponent, ItemToggleActivateAttemptEvent>(TryTurnOn);
             SubscribeLocalEvent<StunbatonComponent, ItemToggledEvent>(ToggleDone);
+            SubscribeLocalEvent<StunbatonComponent, ChargeChangedEvent>(OnChargeChanged);
         }
 
         // SS220-Stunbaton-rework begin
@@ -43,13 +44,8 @@ namespace Content.Server.Stunnable.Systems
             {
                 return;
             }
-        // SS220-Stunbaton-rework end
-
-            if (battery.CurrentCharge < entity.Comp.EnergyPerUse)
-            {
-                _itemToggle.Toggle(entity.Owner, predicted: false);
-            }
         }
+        // SS220-Stunbaton-rework end
 
         private void OnExamined(Entity<StunbatonComponent> entity, ref ExaminedEvent args)
         {
@@ -104,6 +100,15 @@ namespace Content.Server.Stunnable.Systems
                 Used = used,
                 User = user
             });
+        }
+
+        private void OnChargeChanged(Entity<StunbatonComponent> entity, ref ChargeChangedEvent args)
+        {
+            if (TryComp<BatteryComponent>(entity.Owner, out var battery) &&
+                battery.CurrentCharge < entity.Comp.EnergyPerUse)
+            {
+                _itemToggle.TryDeactivate(entity.Owner, predicted: false);
+            }
         }
     }
 }

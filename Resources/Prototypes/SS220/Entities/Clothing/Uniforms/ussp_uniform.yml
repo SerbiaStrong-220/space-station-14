@@ -3,7 +3,7 @@
   id: ClothingUniformJumpsuitUssp
   name: униформа СССП
   description: Форма, пропитанная кровью, потом и ненавистью к капитализму.
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi

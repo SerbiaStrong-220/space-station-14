@@ -2,8 +2,8 @@
   parent: ClothingNeckBase
   id: ClothingCloakIronSquadCMO
   name: плащ Главного Врача Железного отряда
-  description: Этот плащ не только нарушает любые санитарные нормы, но и наделяет таким авторитетом надевшего его, что о первом никто не смеет упомянуть.
-  suffix: Ebent
+  description: Этот плащ не только нарушает любые санитарные нормы, но и наделяет владельца таким авторитетом, что его никто не посмеет обсуждать за спиной.
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/s_cmo.rsi
@@ -13,7 +13,7 @@
   id: ClothingCloakIronSquadCmd
   name: плащ Командира Железного отряда
   description: Надев его, чувствуешь настоящую силу, власть и коварство.
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/s_command.rsi
@@ -22,8 +22,8 @@
   parent: ClothingNeckBase
   id: ClothingCloakIronSquadEng
   name: плащ Инженера Железного отряда
-  description: Снаружи жесткая ткань с отчётливо видными следами тления, а внутри слышится стойкий аромат машинного масла.
-  suffix: Ebent
+  description: Снаружи жёсткая ткань с отчётливо видными следами тления, а внутри слышится стойкий аромат машинного масла.
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/s_eng.rsi
@@ -33,7 +33,7 @@
   id: ClothingCloakIronSquadMed
   name: плащ Полевого медика Железного отряда
   description: Говорят, если на светлом плаще будут видны пятна крови - то врачу понадобится врач.
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/s_med.rsi

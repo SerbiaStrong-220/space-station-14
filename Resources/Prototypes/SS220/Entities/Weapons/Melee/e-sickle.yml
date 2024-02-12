@@ -1,16 +1,16 @@
 - type: entity
   name: Энергетический серп
-  parent: BaseItem
+  parent: EnergySword
   id: EnergySickle
   description: Новейшая разработка пытливых советских умов. Незаменимая вещь как в хозяйстве, так и на войне.
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
-  - type: EnergySword
-    litDamageBonus:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
       types:
         Slash: 30
-        Blunt: -4.5
-    litDisarmMalus: 0.6
+        Heat: 6
+  - type: EnergySword
     colorOptions:
     - "#ffcc00"
   - type: Sprite
@@ -32,38 +32,3 @@
   - type: Item
     size: Normal
     sprite: SS220/Objects/Weapons/Melee/e_sickle.rsi
-  - type: UseDelay
-    delay: 1.0
-  - type: PointLight
-    enabled: false
-    radius: 2
-    energy: 2
-    color: white
-    netsync: false
-  - type: Appearance
-  - type: ToggleableLightVisuals
-    spriteLayer: blade
-    inhandVisuals:
-      left:
-      - state: inhand-left-blade
-        shader: unshaded
-      right:
-      - state: inhand-right-blade
-        shader: unshaded
-  - type: DisarmMalus
-    malus: 0
-  - type: Reflect
-    enabled: false
-  - type: ItemToggleMeleeWeapon
-    activatedSoundOnHit:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-    activatedSoundOnHitNoDamage:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-    activatedSoundOnSwing:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        variation: 0.125
