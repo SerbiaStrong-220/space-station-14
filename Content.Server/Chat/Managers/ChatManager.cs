@@ -246,7 +246,7 @@ namespace Content.Server.Chat.Managers
             {
                 if (_shlepovendSystem.GetHighestTier(SponsorInfo.Tiers) is not null && SponsorInfo.Tiers.Length > 1 || true)
                 {
-                    wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffffff"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                    wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffe77a"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
                 }
             }
 
