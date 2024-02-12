@@ -2,8 +2,8 @@
 
 - type: listing
   id: UplinkChemicalImplanter
-  name: reagent-injector-name
-  description: uplink-reagent-injector-desc
+  name: ent-ChemicalImplanter
+  description: uplink-chemical-implanter-desc
   icon: { sprite: SS220/Objects/ReagentInjector/injector.rsi, state: injector }
   productEntity: ChemicalImplanter
   cost:
@@ -14,8 +14,8 @@
 # Implants
 - type: listing
   id: UplinkEmptyChemicalImplant
-  name: uplink-empty-reagent-capsule-name
-  description: uplink-empty-reagent-capsule-desk
+  name: ent-EmptyChemicalImplant
+  description: uplink-empty-chemical-implant-desc
   icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: capsule }
   productEntity: EmptyChemicalImplant
   cost:
@@ -25,8 +25,8 @@
 
 - type: listing
   id: UplinkCombatChemicalImplant
-  name: uplink-combat-reagent-capsule-name
-  description: uplink-combat-reagent-capsule-desk
+  name: ent-CombatChemicalImplant
+  description: uplink-combat-chemical-implant-desc
   icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: combat }
   productEntity: CombatChemicalImplant
   cost:
@@ -41,8 +41,8 @@
 
 - type: listing
   id: UplinkDABChemicalImplant
-  name: uplink-dab-reagent-capsule-name
-  description: uplink-dab-reagent-capsule-desc
+  name: ent-DABChemicalImplant
+  description: uplink-dab-chemical-implant-desc
   icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dab }
   productEntity: DABChemicalImplant
   cost:
@@ -51,25 +51,9 @@
     - UplinkChemicalImplants
 
 - type: listing
-  id: UplinkExpReanimatorChemicalImplant
-  name: uplink-expadrenaline-reagent-capsule-name
-  description: uplink-expadrenaline-reagent-capsule-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: reanim }
-  productEntity: ExpReanimatorChemicalImplant
-  cost:
-    Telecrystal: 4
-  categories:
-    - UplinkChemicalImplants
-  conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-
-- type: listing
   id: UplinkSuicideChemicalImplant
-  name: uplink-suicide-reagent-capsule-name
-  description: uplink-suicide-reagent-capsule-desc
+  name: ent-SuicideChemicalImplant
+  description: uplink-suicide-chemical-implant-desc
   icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dead }
   productEntity: SuicideChemicalImplant
   cost:

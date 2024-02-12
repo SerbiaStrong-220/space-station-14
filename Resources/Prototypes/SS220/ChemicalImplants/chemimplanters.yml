@@ -40,8 +40,8 @@
 
 - type: entity
   id: ChemicalImplanter
-  name: reagent-injector-name
-  description: reagent-injector-desc
+  name: chemical implanter
+  description: chemical-implanter-desc
   parent: BaseChemicalImplanter
   components:
     - type: Implanter
@@ -49,8 +49,8 @@
 
 - type: entity
   id: ActionUseChemicalImplant
-  name: reagent-injector-action-name
-  description: reagent-injector-action-desc
+  name: chemical-implant-action-name
+  description: chemical-implant-action-desc
   noSpawn: true
   components:
   - type: InstantAction

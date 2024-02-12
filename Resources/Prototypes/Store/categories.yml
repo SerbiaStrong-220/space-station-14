@@ -51,7 +51,7 @@
 # SS220 - chemical-implants start
 - type: storeCategory
   id: UplinkChemicalImplants
-  name: store-category-injectors
+  name: store-category-chemical-implants
   priority: 8
 # SS220 - chemical-implants end
 

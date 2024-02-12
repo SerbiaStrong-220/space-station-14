@@ -23,6 +23,7 @@ using Robust.Shared.Random;
 using System.Numerics;
 using Content.Shared.SS220.ChemicalImplant;
 using FastAccessors;
+using Content.Shared.Chemistry.Components;
 
 namespace Content.Server.Implants;
 
@@ -60,20 +61,24 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     // SS220 - chemical-implants start
     private void OnChemicaImplant(EntityUid uid, SubdermalImplantComponent component, UseChemicalImplantEvent args)
     {
-        if (component.ImplantedEntity is not { } ent
-            ||!TryComp<SolutionContainerManagerComponent>(args.Performer, out var performerSolution)
-            || !TryComp<SolutionContainerManagerComponent>(uid, out var implantSolution))
+        if (component.ImplantedEntity is not { } ent)
+            return;
+
+        if (!TryComp<SolutionComponent>(uid, out var implantSolution))
+            return;
+        if (!_solutionContainer.TryGetSolution(args.Performer, "chemicals", out var performerSolution))
             return;
 
         if (args.Handled)
             return;
+
+        _solutionContainer.TryTransferSolution(performerSolution.Value, implantSolution.Solution, implantSolution.Solution.Volume);
 
         args.Handled = true;
 
         QueueDel(uid);
 
     }
-
     // SS220 - chemical-implants end
 
     private void OnStoreRelay(EntityUid uid, StoreComponent store, ImplantRelayEvent<AfterInteractUsingEvent> implantRelay)
