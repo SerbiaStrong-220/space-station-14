@@ -1,0 +1,9 @@
+- type: microwaveMealRecipe
+  id: RecipeCheburekCook
+  name: beef taco recipe
+  result: FoodCheburek
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeatCutlet: 1
+    FoodOnionSlice: 1
