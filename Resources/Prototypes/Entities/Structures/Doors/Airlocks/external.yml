@@ -18,7 +18,8 @@
     sprite: Structures/Doors/Airlocks/Standard/external.rsi
   - type: PaintableAirlock
     group: External
-  - type: PointLight
+    department: null
+  - type: PointLight #SS220 Aesthetics-Rework
     radius: 1.5
     energy: 1.6
     color: "#FFAF38"

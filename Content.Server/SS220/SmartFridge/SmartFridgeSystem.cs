@@ -3,7 +3,7 @@
 using Content.Shared.SS220.SmartFridge;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
-using Content.Server.UserInterface;
+using Content.Shared.UserInterface;
 using Content.Shared.Destructible;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;

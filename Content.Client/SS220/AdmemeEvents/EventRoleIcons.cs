@@ -1,8 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.Antag;
+using Content.Shared.Antag;
 using Content.Shared.Ghost;
 using Content.Shared.SS220.AdmemeEvents;
-using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
@@ -12,7 +13,7 @@ namespace Content.Client.SS220.AdmemeEvents;
 /// <summary>
 /// Used for the client to get status icons from other event roles.
 /// </summary>
-public sealed class EventRoleIconsSystem : AntagStatusIconSystem<EventRoleComponent>
+public sealed class EventRoleIconsSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -21,29 +22,22 @@ public sealed class EventRoleIconsSystem : AntagStatusIconSystem<EventRoleCompon
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EventRoleComponent, GetStatusIconsEvent>(GetRoleIcon);
+        SubscribeLocalEvent<EventRoleComponent, CanDisplayStatusIconsEvent>(OnCanShowRevIcon);
     }
 
-    /// <summary>
-    /// Obtains a status icon from proto id mentioned in component
-    /// </summary>
-    private void GetRoleIcon(EntityUid uid, EventRoleComponent comp, ref GetStatusIconsEvent args)
+    private void OnCanShowRevIcon(EntityUid uid, IAntagStatusIconComponent component, ref CanDisplayStatusIconsEvent args)
     {
-        GetStatusIcon(comp, ref args);
+        args.Cancelled = !CanDisplayIcon(args.User, component.IconVisibleToGhost);
     }
 
-    private void GetStatusIcon(EventRoleComponent targetRoleComp, ref GetStatusIconsEvent args)
+    private bool CanDisplayIcon(EntityUid? ent, bool visibleToGhost)
     {
-        var ent = _player.LocalPlayer?.ControlledEntity;
+        if (HasComp<GhostComponent>(ent) && visibleToGhost)
+            return true;
 
-        if (!HasComp<GhostComponent>(ent))
-        {
-            if (!TryComp<EventRoleComponent>(ent, out var playerRoleComp))
-                return;
-            else if (targetRoleComp.RoleGroupKey != playerRoleComp.RoleGroupKey)
-                return;
-        }
+        if (!HasComp<EventRoleComponent>(ent))
+            return false;
 
-        args.StatusIcons.Add(_prototype.Index(targetRoleComp.StatusIcon));
+        return true;
     }
 }
