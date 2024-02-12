@@ -1,9 +1,23 @@
 - type: microwaveMealRecipe
-  id: RecipeCheburekCook
-  name: beef taco recipe
+  id: RecipeCheburek
+  name: Cheburek recipe
   result: FoodCheburek
   time: 15
   solids:
     FoodDough: 1
     FoodMeatCutlet: 1
     FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeShawarma
+  name: Shawarma recipe
+  result: FoodShawarma
+  time: 15
+  reagents:
+    Mayo: 5  
+  solids:
+    FoodDough: 1
+    FoodMeatChicken: 1
+    FoodCabbage: 1
+    FoodTomato: 1
+    FoodCheeseSlice: 1

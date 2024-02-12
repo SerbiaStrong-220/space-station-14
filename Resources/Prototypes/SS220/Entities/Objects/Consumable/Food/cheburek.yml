@@ -26,7 +26,7 @@
       - Meat
 
 - type: entity
-  name: Чебурек
+  name: чебурек
   parent: FoodCheburekBase
   id: FoodCheburek
   description: Хрустящее и сочное мясо в тонком тесте - настоящий восточный вкус.
