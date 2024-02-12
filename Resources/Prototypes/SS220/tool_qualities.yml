@@ -1,0 +1,7 @@
+# JOL TilePrying
+- type: tool
+  id: PlatingCutting
+  name: tool-quality-plating-cutting-name
+  toolName: tool-quality-plating-cutting-tool-name
+  spawn: JawsOfLife
+  icon: { sprite: Objects/Tools/jaws_of_life.rsi, state: jaws_pry }

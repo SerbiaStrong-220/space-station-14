@@ -1,0 +1,6 @@
+- type: stealTargetGroup
+  id: VehicleSecway
+  name: secway
+  sprite:
+    sprite: Objects/Vehicles/secway.rsi
+    state: icon

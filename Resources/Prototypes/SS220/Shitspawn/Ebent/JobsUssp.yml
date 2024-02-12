@@ -62,7 +62,7 @@
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSPCmd
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: UsspPDALeader
     ears: ClothingHeadsetUSSP
     belt: ClothingBeltUsspWebbingFilled
@@ -150,7 +150,7 @@
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSPEng
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: UsspPDAEngineer
     ears: ClothingHeadsetUSSP
     belt: ClothingBeltUsspWebbingFilled
@@ -238,7 +238,7 @@
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: UsspPDACorpsman
     ears: ClothingHeadsetUSSP
     belt: ClothingBeltUsspWebbingFilled
@@ -333,7 +333,7 @@
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSPMed
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: UsspPDACMO
     ears: ClothingHeadsetUSSP
     belt: ClothingBeltUsspWebbingFilled
@@ -424,7 +424,7 @@
     mask: ClothingMaskGasUssp
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSP
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: UsspPDAFighter
     ears: ClothingHeadsetUSSP
     belt: ClothingBeltUsspWebbingFilled

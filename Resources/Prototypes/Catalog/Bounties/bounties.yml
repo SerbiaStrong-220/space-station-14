@@ -54,18 +54,6 @@
       tags:
       - Bread
 
-#- type: cargoBounty
-#  id: BountyBriefcase
-#  reward: 15000
-#  description: bounty-description-briefcase #impossible ss220 Rebalance
-#  idPrefix: CC
-#  entries:
-#  - name: bounty-item-briefcase
-#    amount: 5
-#    whitelist:
-#      tags:
-#      - Briefcase
-
 - type: cargoBounty
   id: BountyCarrot
   reward: 3000 #ss220 Rebalance
@@ -103,7 +91,7 @@
 
 - type: cargoBounty
   id: BountyClownCostume
-  reward: 1800 
+  reward: 1800
   description: bounty-description-clown-costume
   entries:
   - name: bounty-item-clown-mask
@@ -211,7 +199,7 @@
 
 - type: cargoBounty
   id: BountyHandcuffs
-  reward: 1000 
+  reward: 1000
   description: bounty-description-handcuffs
   idPrefix: CC
   entries:
@@ -268,7 +256,7 @@
 
 - type: cargoBounty
   id: BountyLung
-  reward: 2000 
+  reward: 2000
   description: bounty-description-lung
   entries:
   - name: bounty-item-lung
@@ -520,7 +508,7 @@
 
 - type: cargoBounty
   id: BountyWarmCloth
-  reward: 2000 
+  reward: 2000
   description: bounty-description-warm-cloth
   idPrefix: UNTH
   entries:

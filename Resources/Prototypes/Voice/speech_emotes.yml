@@ -60,6 +60,15 @@
     - chuckles!
     - chuckled
     - chuckling
+    - chortle
+    - chortle.
+    - chortle!
+    - chortles
+    - chortles.
+    - chortles!
+    - chortling
+    - chortling.
+    - chortling!
     # Corvax-Localization-Start
     - смех
     - смеется
@@ -151,6 +160,14 @@
     - cries
     - cries.
     - cries!
+    - sob
+    - sob.
+    - sobs
+    - sobs.
+    - sobs!
+    - sobbing
+    - sobbing.
+    - sobbing!
     #220-Localization-Start
     - плач
     - плач.
@@ -167,6 +184,12 @@
     - заплакала
     - заплакала.
     - заплакала!
+    - хныкает
+    - хныкает.
+    - хныкает!
+    - хнычет
+    - хнычет.
+    - хнычет!
     #220-Localization-End
 
 - type: emote
@@ -447,3 +470,21 @@
   - hiss!
   - hiss.
   - hissing
+
+- type: emote
+  id: Buzz
+  category: Vocal
+  chatMessages: [buzz!]
+  chatTriggers:
+    - buzzing
+    - buzzing!
+    - buzzing.
+    - buzz
+    - buzz.
+    - buzz!
+    - buzzed
+    - buzzed.
+    - buzzed!
+    - buzzes
+    - buzzes.
+    - buzzes!
