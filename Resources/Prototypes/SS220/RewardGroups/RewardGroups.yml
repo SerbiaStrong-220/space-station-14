@@ -4,11 +4,11 @@
   roundstartTokens: 5
   requiredRole: enum.SponsorTier.Shlopa
   rewards:
-    MedicalInternPDA: 2
-    Screwdriver: 3
-    Wrench: 1
-    Wirecutter: 5
-    Crowbar: 2
+    ClothingSponsorMothBoots: 5
+    ClothingSponsorDante: 5
+    ClothingSponsorTylerRedGlasses: 5
+    ClothingSponsorDallas: 5
+    SponsorBoxStorageCandy: 3
 
 - type: ShlepaRewardGroup
   id: BigShlopa
@@ -16,12 +16,10 @@
   roundstartTokens: 8
   requiredRole: enum.SponsorTier.BigShlopa
   rewards:
-    Welder: 3
-    MedicalInternPDA: 2
-    Screwdriver: 3
-    Wrench: 1
-    Wirecutter: 5
-    Crowbar: 2
+    SponsorCigPack: 2
+    ClothingSponsorWhiteCoat: 5
+    ClothingSponsorBlackCoat: 5
+    SponsorBoxMaid: 8
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
@@ -29,7 +27,11 @@
   roundstartTokens: 12
   requiredRole: enum.SponsorTier.HugeShlopa
   rewards:
-    Welder: 3
+    SponsorBoxWaltuh: 10
+    SponsorBoxTyler: 10
+    SponsorBoxMafia: 10
+    SponsorBoxBlackMafia: 10
+    SponsorCigCarton: 8
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa
@@ -37,7 +39,7 @@
   roundstartTokens: 16
   requiredRole: enum.SponsorTier.GoldenShlopa
   rewards:
-    Welder: 3
+    SponsorBoxGoldClown: 10
 
 - type: ShlepaRewardGroup
   id: CriticalMassShlopa
@@ -45,4 +47,4 @@
   roundstartTokens: 25
   requiredRole: enum.SponsorTier.CriticalMassShlopa
   rewards:
-    Welder: 3
+    SponsorBoxGoldClown: 15

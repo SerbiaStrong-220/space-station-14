@@ -39,7 +39,7 @@
 
 # Fezory
 - type: entity
-  parent: ClothingMaskBase
+  parent: ClothingSponsorMaskBase
   id: ClothingMaskSkull
   name: skull mask
   description: Spooky skull mask.

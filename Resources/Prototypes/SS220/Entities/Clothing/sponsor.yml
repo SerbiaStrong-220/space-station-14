@@ -1,0 +1,756 @@
+# Рут
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: ClothingSponsor
+  suffix: Шлёпа
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+  - type: StaticPrice
+    price: 15
+
+# База
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorMaskBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots: [mask]
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorHeadBase
+  components:
+  - type: Clothing
+    slots:
+    - HEAD
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+    storedRotation: -90
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorEyesBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Clothing
+    slots: [eyes]
+  - type: Item
+    size: Small
+    storedRotation: -90
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorShoesBase
+  components:
+  - type: Clothing
+    slots:
+    - FEET
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: UnsensoredClothingSponsorUniformBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Clothing
+    slots: [innerclothing]
+    equipSound:
+      path: /Audio/Items/jumpsuit_equip.ogg
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 3
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 30
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorOuterBase
+  components:
+  - type: Clothing
+    slots:
+    - outerClothing
+  - type: Sprite
+    state: icon
+
+# Ветви
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsorOuterBase
+  id: ClothingSponsorOuterStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 0,0,2,1
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
+  - type: StaticPrice
+    price: 80
+
+- type: entity
+  abstract: true
+  parent: UnsensoredClothingSponsorUniformBase
+  id: ClothingSponsorUniformBase
+  components:
+  - type: SuitSensor
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: SuitSensor
+  - type: WirelessNetworkConnection
+    range: 1200
+  - type: StationLimitedNetwork
+
+- type: entity
+  abstract: true
+  parent: [ClothingSponsorShoesBase, ClothingSlotBase]
+  id: ClothingSponsorShoesMilitaryBase
+  components:
+  - type: Matchbox
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-military-boots-sidearm
+        whitelist:
+          tags:
+          - Knife
+          - Sidearm
+
+
+
+
+
+# Одежда
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorWhiteCoat
+  name: фирменная белая куртка
+  description: Молотки больше не используются на станциях NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/whitecoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/whitecoat.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorBlackCoat
+  name: чёрное пальто
+  description: Тепло.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/blackcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/blackcoat.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorTylerRedCoat
+  name: плотная красная куртка
+  description: Отдаёт химией.
+  components:
+  - type: StorageFill
+    contents:
+    - id: SponsorCig
+      amount: 10
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/tyler/redcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/tyler/redcoat.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorTylerUnder
+  name: мозаичный комбинезон
+  description: Выглядит сложно.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/tyler/under.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/tyler/under.rsi
+
+- type: entity
+  parent: ClothingSponsorShoesMilitaryBase
+  id: ClothingSponsorMothBoots
+  name: твёрдые моле-ботинки
+  description: Сэр, чистка прошла успешно, сэр!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mothboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mothboots.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBoots
+
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorTylerRedGlasses
+  name: очки Tyler.Co
+  description: Серебряные очки авиаторы с встроенным светофильтром.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/tyler/redglasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/tyler/redglasses.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorWaltuhHat
+  name: глубокая шляпа-котелок
+  description: Синий или голубой?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/waltuh/hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/waltuh/hat.rsi
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorWaltuhBeard
+  name: накладная бородка
+  description: ...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/waltuh/beard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/waltuh/beard.rsi
+  - type: Item
+    storedRotation: -90
+
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorWaltuhGlasses
+  name: прозрачные авиаторы
+  description: Простые дешёвые очки с корректирующими линзами
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/waltuh/glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/waltuh/glasses.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorWaltuhInnerShirt
+  name: бледная рубашка
+  description: Вы - самый обычный семьянин
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/waltuh/innershirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/waltuh/innershirt.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorWaltuhOuterShirt
+  name: плотная чёрная рубашка
+  description: Отдаёт химией.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/waltuh/outershirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/waltuh/outershirt.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorGoldClownSuit
+  name: золотой костюм клоуна
+  description: Ууу, блестяшка!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/goldclown/goldclownsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/goldclown/goldclownsuit.rsi
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorGoldClownShoes
+  name: золотые клоунские туфли
+  description: Шааааайни!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/goldclown/goldclownboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/goldclown/goldclownboots.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorGoldClownMask
+  name: золотая маска клоуна
+  description: Выглядит очень тяжелой
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/goldclown/goldclownmask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/goldclown/goldclownmask.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorDante
+  name: вишнёвый плащ
+  description: Але?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/dante.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/dante.rsi
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorDallas
+  name: демократическая маска
+  description: Вошли и вышли, дело пяти минут.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/dallas/mask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/dallas/mask.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorMafiaHat
+  name: розовая шляпа
+  description: Я - Зубен...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mafia/hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mafia/hat.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorMafiaSuit
+  name: костюм прекрасного человека
+  description: Розово и стильно.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mafia/suit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mafia/suit.rsi
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorMafiaBoots
+  name: ботинки прекрасного человека
+  description: Цок-цок.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mafia/boots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mafia/boots.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorMafiaBlackHat
+  name: чёрная шляпа
+  description: Меня зовут...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mafia/black/hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mafia/black/hat.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorMafiaBlackSuit
+  name: тёмный костюм прекрасного человека
+  description: Темно и стильно.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mafia/black/suit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mafia/black/suit.rsi
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorMafiaBlackBoots
+  name: тёмные ботинки прекрасного человека
+  description: Цок-цок.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/mafia/black/boots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/mafia/black/boots.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorMaidSuit
+  name: чёрный костюм горничной
+  description: Почти не пачкается.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/maid/suit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/maid/suit.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorMaidHat
+  name: гребень горничной
+  description: Самое мужское одеяние
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/maid/head.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/maid/head.rsi
+
+
+# Предметы
+
+- type: entity
+  parent: BaseCigar
+  id: SponsorCig
+  suffix: Шлёпа
+  name: чёрная сигарета
+  description: Выглядит элитно.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/cigarette.rsi
+    state: unlit-icon
+  - type: Tag
+    tags:
+      - Cigarette
+  - type: Clothing
+    sprite: SS220/Objects/Sponsor/cigs/cigarette.rsi
+    slots: [ mask ]
+    equippedPrefix: unlit
+  - type: Item
+    size: Tiny
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 40
+
+- type: entity
+  parent: CigPackBase
+  id: SponsorCigPack
+  suffix: Шлёпа
+  name: пачка сигарет Shlep'a
+  description: Медленная и дорогая смерть.
+  components:
+  - type: StorageFill
+    contents:
+    - id: SponsorCig
+      amount: 10
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+
+- type: entity
+  id: SponsorCigCarton
+  suffix: Шлёпа
+  parent: [ BoxCardboard, BaseBagOpenClose ]
+  name: блок сигарет Shlep'a
+  description: Картонная коробка, покрытая металлической плёнкой. Содержит 5 пачек.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/carton.rsi
+    layers:
+      - state: closed
+      - state: open
+        map: ["openLayer"]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/carton.rsi
+    size: Normal
+  - type: Storage
+    grid:
+    - 0,0,5,1
+  - type: StorageFill
+    contents:
+      - id: CigPackGreen
+        amount: 5
+      - id: Lighter
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+
+- type: entity
+  parent: FoodSnackBase
+  id: SponsorFoodCandy
+  suffix: Шлёпа
+  name: конфетка
+  description: Разве она не должна быть чёрной?
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/candy/base.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  parent: BaseItem
+  id: SponsorFoodPackage
+  suffix: Шлёпа
+  name: конфетка
+  description: Что же там внутри?
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/candy/package.rsi
+    state: icon
+  - type: Item
+    heldPrefix: chocolatebar
+    size: Tiny
+  - type: SpawnItemsOnUse
+    items:
+      - id: SponsorFoodCandy
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+
+
+
+
+# Наборы
+
+- type: entity
+  parent: BaseItem
+  id: SponsorBoxBase
+  suffix: Шлёпа
+  name: подарочная коробка
+  abstract: true
+  description: Внутри... пусто?
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/sponsorbox.rsi
+    state: icon
+
+- type: entity
+  parent: BaseItem
+  id: SponsorBoxStorageBase
+  suffix: Шлёпа
+  name: продвинутая подарочная коробка
+  abstract: true
+  description: Внутри... пусто?
+  components:
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+    - key: enum.StorageUiKey.Key
+      type: StorageBoundUserInterface
+  - type: Item
+    size: Huge
+  - type: UseDelay
+    delay: 0.5
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,2,2
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/sponsorbox.rsi
+    state: icon
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxGoldClown
+  name: золотой костюм клоуна # Золотой клуня, очевидно
+  description: Содержит в себе золотой костюм клоуна. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingSponsorGoldClownSuit
+    - id: ClothingSponsorGoldClownShoes
+    - id: ClothingSponsorGoldClownMask
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxWaltuh
+  name: костюм химика # Waltuh
+  description: Содержит в себе одежду сами знаете кого. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingSponsorWaltuhOuterShirt
+    - id: ClothingSponsorWaltuhInnerShirt
+    - id: ClothingSponsorWaltuhGlasses
+    - id: ClothingSponsorWaltuhBeard
+    - id: ClothingSponsorWaltuhHat
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxTyler
+  name: костюм мыловара # Вы знаете, что смешав семя с апельсиновым соком, то вы будете выглядеть как еблан?
+  description: Первое правило клуба... Содержит в себе костюм, пачку сигарет и мыло. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingSponsorTylerRedCoat
+    - id: ClothingSponsorTylerRedGlasses
+    - id: ClothingSponsorTylerUnder
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxMafia
+  name: розовый костюм мафии
+  description: Содержит в себе розовый костюм мафии. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingSponsorMafiaHat
+    - id: ClothingSponsorMafiaSuit
+    - id: ClothingSponsorMafiaBoots
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxBlackMafia
+  name: чёрный костюм мафии
+  description: Содержит в себе чёрный костюм мафии. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingSponsorMafiaBlackHat
+    - id: ClothingSponsorMafiaBlackSuit
+    - id: ClothingSponsorMafiaBlackBoots
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: SponsorBoxStorageBase
+  id: SponsorBoxStorageCandy
+  name: коробка конфет
+  description: Содержит в себе десяток конфет. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: StorageFill
+    contents:
+    - id: SponsorFoodPackage
+      amount: 9
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxMaid
+  name: костюм горничной
+  description: Содержит в себе чёрный костюм горничной. Осторожно! Ваших рук не хватит для предметов в наборе!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingSponsorMaidSuit
+    - id: ClothingSponsorMaidHat
+    sound:
+      path: /Audio/Effects/unwrap.ogg

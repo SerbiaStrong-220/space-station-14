@@ -7,6 +7,7 @@ using Content.Server.Administration.Systems;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.MoMMI;
 using Content.Server.Preferences.Managers;
+using Content.Shared.Players;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -19,6 +20,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.SS220.Discord;
+using Content.Shared.SS220.Shlepovend;
 
 namespace Content.Server.Chat.Managers
 {
@@ -236,6 +239,16 @@ namespace Content.Server.Chat.Managers
                      PatronOocColors.TryGetValue(patron, out var patronColor))
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+            }
+
+            var _shlepovendSystem = _entityManager.System<SharedShlepovendSystem>();
+            var SponsorInfo = player.ContentData()?.SponsorInfo;
+            if (SponsorInfo is not null)
+            {
+                if (_shlepovendSystem.GetHighestTier(SponsorInfo.Tiers) is not null && SponsorInfo.Tiers.Length > 1 || true)
+                {
+                    wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffffff"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                }
             }
 
             // Corvax-Sponsors-Start
