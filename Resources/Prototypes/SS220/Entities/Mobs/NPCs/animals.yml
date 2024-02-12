@@ -29,6 +29,8 @@
       task: SimpleHostileCompound
   - type: Physics
   - type: Speech
+    speechSounds: Roxi
+    speechVerb: RoxiMob
   - type: Fixtures
     fixtures:
       fix1:
@@ -56,7 +58,7 @@
     attackRate: 1
     damage:
       types:
-        Slash: 10
+        Slash: 7
   - type: SlowOnDamage
     speedModifierThresholds:
       40: 0.70

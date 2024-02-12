@@ -128,7 +128,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         catalog.LastRecordTime = biggest == -1 ? null : biggest;
     }
 
-    public void UpdateIdCards((NetEntity, uint) key, GeneralStationRecord generalRecord)
+    public void UpdateIdCards(StationRecordKey key, GeneralStationRecord generalRecord)
     {
         CriminalRecord? criminalRecord = null;
         if (generalRecord.CriminalRecords != null)
@@ -139,7 +139,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             }
         }
 
-        var stationUid = GetEntity(key.Item1);
+        var stationUid = key.OriginStation;
         var query = EntityQueryEnumerator<IdCardComponent, StationRecordKeyStorageComponent>();
 
         while (query.MoveNext(out var uid, out var idCard, out var keyStorage))
@@ -147,7 +147,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             if (!keyStorage.Key.HasValue)
                 continue;
 
-            if (keyStorage.Key.Value.Id != key.Item2 || keyStorage.Key.Value.OriginStation != stationUid)
+            if (keyStorage.Key.Value.Id != key.Id || keyStorage.Key.Value.OriginStation != stationUid)
             {
                 continue;
             }
@@ -157,15 +157,9 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
     }
 
-    public bool RemoveCriminalRecordStatus((NetEntity, uint) key, int time, ICommonSession? sender = null)
+    public bool RemoveCriminalRecordStatus(StationRecordKey key, int time, ICommonSession? sender = null)
     {
-        if (!TryGetEntity(key.Item1, out var station))
-            return false;
-
-        if (!_stationRecords.TryGetRecord(
-            station.Value,
-            _stationRecords.Convert(key),
-            out GeneralStationRecord? selectedRecord))
+        if (!_stationRecords.TryGetRecord(key, out GeneralStationRecord? selectedRecord))
         {
             _sawmill.Warning("Tried to add a criminal record but can't get a general record.");
             return false;
@@ -177,7 +171,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             return false;
 
         UpdateLastRecordTime(catalog);
-        _stationRecords.Synchronize(station.Value);
+        _stationRecords.Synchronize(key.OriginStation);
         UpdateIdCards(key, selectedRecord);
 
         if (sender != null)
@@ -193,23 +187,14 @@ public sealed class CriminalRecordSystem : EntitySystem
     }
 
     public bool TryGetLastRecord(
-        (NetEntity, uint) key,
+        StationRecordKey key,
         [NotNullWhen(true)] out GeneralStationRecord? stationRecord,
         [NotNullWhen(true)] out CriminalRecord? criminalRecord)
     {
-        stationRecord = null;
         criminalRecord = null;
 
-        if (!TryGetEntity(key.Item1, out var station))
+        if (!_stationRecords.TryGetRecord(key, out stationRecord))
             return false;
-
-        if (!_stationRecords.TryGetRecord(
-            station.Value,
-            _stationRecords.Convert(key),
-            out stationRecord))
-        {
-            return false;
-        }
 
         if (stationRecord.CriminalRecords is not CriminalRecordCatalog catalog)
             return false;
@@ -218,15 +203,9 @@ public sealed class CriminalRecordSystem : EntitySystem
         return criminalRecord != null;
     }
 
-    public bool AddCriminalRecordStatus((NetEntity, uint) key, string message, string? statusPrototypeId, ICommonSession? sender = null)
+    public bool AddCriminalRecordStatus(StationRecordKey key, string message, string? statusPrototypeId, ICommonSession? sender = null)
     {
-        if (!TryGetEntity(key.Item1, out var station))
-            return false;
-
-        if (!_stationRecords.TryGetRecord(
-            station.Value,
-            _stationRecords.Convert(key),
-            out GeneralStationRecord? selectedRecord))
+        if (!_stationRecords.TryGetRecord(key, out GeneralStationRecord? selectedRecord))
         {
             _sawmill.Warning("Tried to add a criminal record but can't get a general record.");
             return false;
@@ -262,7 +241,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             return false;
 
         catalog.LastRecordTime = currentRoundTime;
-        _stationRecords.Synchronize(station.Value);
+        _stationRecords.Synchronize(key.OriginStation);
         UpdateIdCards(key, selectedRecord);
         _sawmill.Debug("Added new criminal record, synchonizing");
 

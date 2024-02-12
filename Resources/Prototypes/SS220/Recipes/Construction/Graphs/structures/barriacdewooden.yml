@@ -1,0 +1,64 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: constructionGraph
+  id: BarricadeWooden220
+  start: start 
+  graph:
+    - node: start 
+      edges:
+        - to: barricadewood
+          steps:
+            - material: WoodPlank
+              amount: 6
+              doAfter: 4
+        - to: barricadewooddirectional
+          steps:
+            - material: WoodPlank
+              amount: 4
+              doAfter: 3
+        - to: barricadewoodfloor
+          steps:
+            - material: WoodPlank
+              amount: 2
+              doAfter: 1
+    - node: barricadewood
+      entity: BarricadeWooden
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: MaterialWoodPlank1
+              amount: 3
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+    - node: barricadewooddirectional
+      entity: BarricadeWoodenDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype 
+              prototype: MaterialWoodPlank1
+              amount: 2
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5
+    - node: barricadewoodfloor
+      entity: BarricadeWoodenFloor
+      edges:
+        - to: start
+          completed:
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: true 
+          steps:
+            - tool: Prying
+              doAfter: 5

@@ -5,7 +5,7 @@
   description: Взрывное устройство, производимое СССП, используемое, чтобы сеять хаос и разрушения.
   parent: SyndieMiniBomb
   id: UsspMiniBomb
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Grenades/usspnade.rsi

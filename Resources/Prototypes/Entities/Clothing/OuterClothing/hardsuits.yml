@@ -237,16 +237,20 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+  - type: ExplosionResistance #SS220-MinorTweaks
+    damageCoefficient: 0.7
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.7
+        Blunt: 0.85 #SS220-MinorTweaks start
+        Slash: 0.85
+        Piercing: 0.80
+        Radiation: 0.7
+        Caustic: 0.8  #SS220-MinorTweaks end
         Stamina: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.65
-    sprintModifier: 0.65
+    walkModifier: 0.90 #SS220-MinorTweaks
+    sprintModifier: 0.90 #SS220-MinorTweaks
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBrigmedic
@@ -520,6 +524,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 # Syndicate Medic Hardsuit
@@ -593,6 +598,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 #Syndicate Commander Hardsuit
@@ -632,6 +638,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 #Cybersun Juggernaut Hardsuit
@@ -671,6 +678,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Unsexed: MaleEvil
   #ss220 special_sounds end
 
 #Wizard Hardsuit
@@ -981,6 +989,23 @@
     node: clownHardsuit
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitClown
+
+#Mime Hardsuit
+- type: entity
+  parent: ClothingOuterHardsuitClown
+  id: ClothingOuterHardsuitMime
+  name: mime hardsuit
+  description: A custom-made mime hardsuit.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/mime.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/mime.rsi
+  - type: Construction
+    graph: MimeHardsuit
+    node: mimeHardsuit
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitMime
 
 #Santa's Hardsuit
 - type: entity

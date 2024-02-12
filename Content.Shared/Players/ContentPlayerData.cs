@@ -1,5 +1,6 @@
 ﻿using Content.Shared.GameTicking;
 using Content.Shared.Mind;
+using Content.Shared.SS220.Discord;
 using Robust.Shared.Network;
 
 namespace Content.Shared.Players;
@@ -36,6 +37,14 @@ public sealed class ContentPlayerData
     ///     so they should not regain admin if they reconnect.
     /// </summary>
     public bool ExplicitlyDeadminned { get; set; }
+
+    //SS220 Shlepovend begin
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int? ShlepovendTokens { get; set; } = null;
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public DiscordSponsorInfo? SponsorInfo = null;
+    //SS220 Shlepovend end
 
     public ContentPlayerData(NetUserId userId, string name)
     {

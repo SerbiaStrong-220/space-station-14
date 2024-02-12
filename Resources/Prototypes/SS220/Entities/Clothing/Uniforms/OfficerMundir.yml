@@ -3,7 +3,7 @@
   id: ClothingUniformOfficerMundir
   name: офицерский мундир
   description: Строгий и авторитетный наряд военного.
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi

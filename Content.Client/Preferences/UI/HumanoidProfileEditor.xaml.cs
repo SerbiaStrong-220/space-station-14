@@ -75,6 +75,7 @@ namespace Content.Client.Preferences.UI
         private Slider _skinColor => CSkin;
         private OptionButton _clothingButton => CClothingButton;
         private OptionButton _backpackButton => CBackpackButton;
+        private OptionButton _spawnPriorityButton => CSpawnPriorityButton;
         private SingleMarkingPicker _hairPicker => CHairStylePicker;
         private SingleMarkingPicker _facialHairPicker => CFacialHairPicker;
         private EyeColorPicker _eyesPicker => CEyeColorPicker;
@@ -354,6 +355,21 @@ namespace Content.Client.Preferences.UI
 
             #endregion Backpack
 
+            #region SpawnPriority
+
+            foreach (var value in Enum.GetValues<SpawnPriorityPreference>())
+            {
+                _spawnPriorityButton.AddItem(Loc.GetString($"humanoid-profile-editor-preference-spawn-priority-{value.ToString().ToLower()}"), (int) value);
+            }
+
+            _spawnPriorityButton.OnItemSelected += args =>
+            {
+                _spawnPriorityButton.SelectId(args.Id);
+                SetSpawnPriority((SpawnPriorityPreference) args.Id);
+            };
+
+            #endregion SpawnPriority
+
             #region Eyes
 
             _eyesPicker.OnEyeColorPicked += newColor =>
@@ -545,7 +561,12 @@ namespace Content.Client.Preferences.UI
             _jobCategories.Clear();
             var firstCategory = true;
 
-            foreach (var department in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
+            var departments = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
+                .OrderByDescending(department => department.Weight)
+                .ThenBy(department => Loc.GetString($"department-{department.ID}"))
+                .ToList();
+
+            foreach (var department in departments)
             {
                 var departmentName = Loc.GetString($"department-{department.ID}");
 
@@ -589,8 +610,11 @@ namespace Content.Client.Preferences.UI
                     _jobList.AddChild(category);
                 }
 
-                var jobs = department.Roles.Select(o => _prototypeManager.Index<JobPrototype>(o)).Where(o => o.SetPreference).ToList();
-                jobs.Sort((x, y) => -string.Compare(x.LocalizedName, y.LocalizedName, StringComparison.CurrentCultureIgnoreCase));
+                var jobs = department.Roles.Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
+                    .Where(job => job.SetPreference)
+                    .OrderByDescending(job => job.Weight)
+                    .ThenBy(job => job.LocalizedName)
+                    .ToList();
 
                 foreach (var job in jobs)
                 {
@@ -626,6 +650,11 @@ namespace Content.Client.Preferences.UI
                     };
 
                 }
+            }
+
+            if (Profile is not null)
+            {
+                UpdateJobPriorities();
             }
         }
 
@@ -821,6 +850,11 @@ namespace Content.Client.Preferences.UI
         private void SetTeleportAfkToCryoStorage(bool newTeleportAfkToCryoStorage)
         {
             Profile = Profile?.WithTeleportAfkToCryoStorage(newTeleportAfkToCryoStorage);
+        }
+
+        private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
+        {
+            Profile = Profile?.WithSpawnPriorityPreference(newSpawnPriority);
             IsDirty = true;
         }
 
@@ -1001,6 +1035,16 @@ namespace Content.Client.Preferences.UI
             _backpackButton.SelectId((int) Profile.Backpack);
         }
 
+        private void UpdateSpawnPriorityControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            _spawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
         private void UpdateHairPickers()
         {
             if (Profile == null)
@@ -1140,6 +1184,7 @@ namespace Content.Client.Preferences.UI
             UpdateSpecies();
             UpdateClothingControls();
             UpdateBackpackControls();
+            UpdateSpawnPriorityControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();

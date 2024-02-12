@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by TTTomaTTT for SS220",
+    "size": {
+        "x": 24,
+        "y": 24
+    },
+    "states": [
+        {
+            "name": "w_checker_piece"
+        },
+        {
+            "name": "w_checker_crown"
+        },
+        {
+            "name": "b_checker_piece"
+        },
+        {
+            "name": "b_checker_crown"
+        }
+    ]
+}

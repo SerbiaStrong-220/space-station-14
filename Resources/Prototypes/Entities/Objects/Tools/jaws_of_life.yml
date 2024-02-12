@@ -17,14 +17,11 @@
     quickEquip: false
     slots:
       - Belt
-    #SS220 JOL TilePrying begin
-  - type: TilePrying
-    advanced: true
-    #SS220 JOL TilePrying end
-  - type: LatticeCutting
+  - type: ToolTileCompatible
   - type: Tool
     qualities:
       - Prying
+      - PlatingCutting #SS220 JOL TilePrying
     speed: 3 #SS220 JOL TilePrying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
@@ -34,7 +31,7 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Prying
+      - behavior: [Prying, PlatingCutting] #SS220 JOL TilePrying
         sprite:
           sprite: Objects/Tools/jaws_of_life.rsi
           state: jaws_pry
@@ -61,14 +58,20 @@
     sprite: Objects/Tools/jaws_of_life.rsi
     state: syn_jaws_pry
   - type: Item
+    inhandVisuals:
+      left:
+      - state: syn_inhand-left
+      right:
+      - state: syn_inhand-right
     size: Normal
   - type: Tool
     qualities:
       - Prying
+      - PlatingCutting #SS220 JOL TilePryingng
     speed: 1 #SS220 JOL TilePrying
   - type: MultipleTool
     entries:
-      - behavior: Prying
+      - behavior: [Prying, PlatingCutting] #SS220 JOL TilePryingng
         sprite:
           sprite: Objects/Tools/jaws_of_life.rsi
           state: syn_jaws_pry

@@ -1,0 +1,31 @@
+- type: entity
+  id: Thermoelectricgenerator
+  parent: BaseMachineCircuitboard
+  name: термоэлектрический генератор (машинная плата)
+  description: Печатная плата для термоэлектрического генератора.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: TegCenter
+    requirements:
+     Capacitor: 4
+    materialRequirements:
+      Steel: 5
+
+- type: entity
+  id: ThermoelectricgeneratorTurbine
+  parent: BaseMachineCircuitboard
+  name: циркуляционный насос (машинная плата)
+  description: Печатная плата для циркуляционного насоса термоэлектрического генератора.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: TegCirculator
+    requirements:
+     Capacitor: 4
+     Manipulator: 1     
+    materialRequirements:
+      Steel: 5
+      Gold: 1

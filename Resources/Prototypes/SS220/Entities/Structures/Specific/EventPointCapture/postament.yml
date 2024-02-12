@@ -1,8 +1,8 @@
 - type: entity
   id: EventCapturablePostament
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   name: постамент
-  description: Постамент для флага. Для захвата установите сюда флаг вашей фракции.
+  description: Постамент для флага. Для захвата установите здесь флаг вашей фракции.  
   placement:
     mode: SnapgridCenter
   components:

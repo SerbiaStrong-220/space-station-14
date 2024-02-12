@@ -1,0 +1,65 @@
+- type: construction
+  name: steel catwalk
+  id: SteelCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: SteelCatwalk
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/catwalk.rsi
+    state: catwalk
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: white catwalk
+  id: WhiteCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: WhiteCatwalk
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/catwalk.rsi
+    state: catwalk_white
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: dark catwalk
+  id: DarkCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: DarkCatwalk
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/catwalk.rsi
+    state: catwalk_black
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

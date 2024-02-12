@@ -4,7 +4,7 @@
   name: Спавнер сегвей синдиката
   id: SpawnVehicleSyndicateSegway
   parent: MarkerBase
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     layers:

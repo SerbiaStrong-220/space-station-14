@@ -153,6 +153,7 @@ DrinkGoldschlagerBottleFull: DrinkGildlagerBottleFull
 DrinkGoldschlagerGlass: DrinkGildlagerGlass
 
 # 2024-01-07
+ClosetBase: ClosetSteelBase
 MonkeyCubeBox: VariantCubeBox
 
 # 2024-01-08
@@ -179,3 +180,68 @@ TransmitterSubspaceStockPart: null
 
 # 2024-01-10
 ClothingHeadHatHoodRad: null
+
+# 2024-01-12 - SS220 Handheld Radio
+RadioHandheld: HandheldRadio
+
+# 2024-01-20 - ss220 engineering rebalance
+TegCenter: null
+TegCirculator: null
+
+# 2024-01-12
+SpaceMedipen: null
+
+# 2024-01-18
+ClothingHeadHelmetVoidParamed: null
+
+# 2024-01-19
+DefaultStationBeaconTeslaEngine: null
+
+# 2024-02-06
+AsteroidRockCrab1: AsteroidRock # SS220 asteroid-migration
+
+# 2024-01-28
+FoodBoxDonkpocketGondola: FoodBoxDonkpocketPizza
+
+# 2024-01-31
+HandheldCrewMonitorEmpty: null
+HandheldCrewMonitor: null
+SpyCrewMonitor: null
+SpyCrewMonitorEmpty: null
+SyndiCrewMonitor: null
+SyndiCrewMonitorEmpty: null
+
+# SS220 Readd-Vehicles begin (commented out upstream)
+# SpawnVehicleWheelchair: null
+# SpawnVehicleWheelchairFolded: null
+# VehicleWheelchair: null
+# VehicleWheelchairFolded: null
+# VehicleSecwayStealObjective: null
+# VehicleKeyJanicart: null
+# VehicleKeySecway: null
+# VehicleKeyATV: null
+# VehicleKeySkeleton: null
+# VehicleKeySyndicateSegway: null
+# VehicleKeySkeletonMotorcycle: null
+# VehicleSecway: null
+# VehicleATV: null
+# VehicleSyndicateSegway: null
+# VehicleSkeletonMotorcycle: null
+# VehicleUnicycle: null
+# VehicleUnicycleFolded: null
+# ActionVehicleHorn: null
+# CrateFunATV: null
+# CrateFunSyndicateSegway: null
+# MobTaxiBot: null
+# MobSupplyBot: null
+# SpawnVehicleMotobike: null
+# SpawnVehicleATV: null
+# SpawnVehicleSecway: null
+# SpawnVehicleJanicart: null
+# VehicleJanicart: null
+# VehicleJanicartDestroyed: null
+# SS220 Readd-Vehicles end
+
+# 2024-02-01
+YellowOxygenTank: OxygenTank
+YellowOxygenTankFilled: OxygenTankFilled

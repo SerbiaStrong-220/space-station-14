@@ -8,8 +8,8 @@
     contents:
       - id: ClothingMaskBreath
       - id: EmergencyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -28,8 +28,8 @@
     contents:
       - id: ClothingMaskBreath
       - id: ExtendedEmergencyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -48,9 +48,9 @@
   - type: StorageFill
     contents:
       - id: ClothingMaskGasSecurity
-      - id: ExtendedEmergencyOxygenTankFilled
-      - id: SpaceMedipen
+      - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -70,9 +70,9 @@
     contents:
       - id: ClothingMaskBreathMedicalSecurity
       - id: EmergencyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
-      - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
+      - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
   - type: Sprite
@@ -91,8 +91,8 @@
     contents:
       - id: ClothingMaskBreathMedical
       - id: EmergencyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -117,8 +117,8 @@
     contents:
       - id: ClothingMaskBreath
       - id: EmergencyFunnyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
@@ -136,8 +136,8 @@
     contents:
       - id: ClothingMaskGasSyndicate
       - id: ExtendedEmergencyOxygenTankFilled
-      - id: SpaceMedipen
       - id: EmergencyMedipen
+      - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull

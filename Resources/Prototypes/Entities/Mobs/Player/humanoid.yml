@@ -16,6 +16,7 @@
         - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: DeathSquad
+    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: DeathSquad
@@ -32,6 +33,7 @@
       nameSegments:
         - NamesFirstMilitaryLeader
         - NamesLastMilitary
+    - type: InitialInfectedExempt
 
 
 ## ERT Leader
@@ -50,6 +52,7 @@
       - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTLeader
+    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeader
@@ -68,7 +71,8 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitaryLeader
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVA
@@ -81,6 +85,7 @@
       state: ertleadereva
     - type: RandomHumanoidSpawner
       settings: ERTLeaderEVA
+    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
@@ -93,6 +98,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTLeaderGearEVA ]
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVALecter
@@ -101,6 +107,7 @@
   components:
     - type: RandomHumanoidSpawner
       settings: ERTLeaderEVALecter
+    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
@@ -113,6 +120,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTLeaderGearEVALecter ]
+    - type: InitialInfectedExempt
 
 ## ERT Janitor
 
@@ -128,7 +136,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTJanitor
 
@@ -147,9 +155,10 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTJanitorEVA
@@ -174,6 +183,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTJanitorGearEVA ]
+    - type: InitialInfectedExempt
 
 ## ERT Engineer
 
@@ -189,7 +199,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTEngineer
 
@@ -208,9 +218,10 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTEngineerEVA
@@ -235,6 +246,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTEngineerGearEVA ]
+    - type: InitialInfectedExempt
 
 ## ERT Security
 
@@ -250,7 +262,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTSecurity
 
@@ -269,9 +281,10 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVA
@@ -296,6 +309,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTSecurityGearEVA ]
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVALecter
@@ -316,6 +330,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTSecurityGearEVALecter ]
+    - type: InitialInfectedExempt
 
 ## ERT Medic
 
@@ -331,7 +346,7 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTMedical
 
@@ -350,9 +365,10 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
+    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTMedicalEVA
@@ -377,6 +393,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ ERTMedicalGearEVA ]
+    - type: InitialInfectedExempt
 
 ## CBURN
 
@@ -390,6 +407,7 @@
       state: cburn
     - type: RandomHumanoidSpawner
       settings: CBURNAgent
+    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: CBURNAgent
@@ -407,7 +425,8 @@
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
-      - NamesLastERTCallsign # Corvax-Localization
+      - NamesLastMilitary
+    - type: InitialInfectedExempt
 ## Central Command
 
 - type: entity
@@ -419,6 +438,7 @@
       state: centcom
     - type: RandomHumanoidSpawner
       settings: CentcomOfficial
+    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
@@ -430,6 +450,7 @@
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ CentcomGear ]
+    - type: InitialInfectedExempt
 
 ## Syndicate
 

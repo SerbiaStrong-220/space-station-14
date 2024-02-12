@@ -5,7 +5,7 @@
   id: MedicalPDAAgent
   name: "КПК врача синдиката"
   description: Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!
-  suffix: Shitspawn, Ebent, Агент
+  noSpawn: true
   components:
   - type: Pda
     id: AgentIDCardCmd
@@ -15,25 +15,14 @@
   description: "Надежный фонарь, используемый синдикатом."
   parent: FlashlightSeclite
   id: FlashlightSecliteSyndicate
-  suffix: Shitspawn, Ebent
-
-- type: entity
-  name: "рюкзак синдиката"
-  description: "Вместительный рюкзак с множеством карманов, который носят члены синдиката."
-  parent: ClothingBackpackERTSecurity
-  id: ClothingBackpackSupaSyndicate
-  suffix: Shitspawn, Ebent
-  components:
-  - type: Storage
-    grid:
-    - 0,0,12,3
+  noSpawn: true
 
 - type: entity
   parent: ClothingHeadsetAltSyndicate
   id: ClothingHeadsetAltSyndicateEbent
-  suffix: Shitspawn, Ebent
+  noSpawn: true
   name: полноразмерная кроваво-красная гарнитура
-  description: Модифицированный модульный интерком синдиката, надеваемый на голову, и содержащий ключ шифрования. Имеет 5 ячеек для ключей шифрования.
+  description: Модифицированный модульный интерком синдиката, надеваемый на голову и содержащий ключ шифрования. Имеет 5 ячеек для ключей шифрования.
   components:
   - type: ContainerFill
     containers:
@@ -44,7 +33,7 @@
 - type: entity
   parent: ClothingBeltSyndieHolster
   id: ClothingBeltSyndieHolsterPython
-  suffix: Shitspawn, Ebent, Python
+  suffix: Shitspawn, Ebent, FractWar
   name: плечевая кобура синдиката
   components:
   - type: StorageFill
@@ -55,13 +44,13 @@
 - type: entity
   name: "фонарик СССП"
   description: "Надежный фонарь, используемый СССП."
-  suffix: Shitspawn, Ebent
+  noSpawn: true
   parent: FlashlightSeclite
   id: FlashlightSecliteUssp
 
 - type: entity
   name: табельный револьвер СССП
-  suffix: Shitspawn, Ebent
+  noSpawn: true
   parent: WeaponRevolverInspector
   id: WeaponRevolverInspectorUssp
   description: Стандартый револьвер армии СССП. Его предком является наган, но за годы он был доработан настолько, что от оригинала мало что осталось.
@@ -70,7 +59,7 @@
   parent: ClothingBeltMercWebbing
   id: ClothingBeltUsspWebbing
   name: РПС СССП
-  suffix: Shitspawn, Ebent
+  noSpawn: true
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
 
 - type: entity
@@ -78,7 +67,7 @@
   id: ClothingShoesBootsMagUssp
   name: магнитные ботинки СССП
   description: Созданные по технологии реверс-инжиниринга магнитные ботинки. Собственность СССП.
-  suffix: Shitspawn, Ebent
+  noSpawn: true
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
@@ -89,18 +78,20 @@
 
 - type: entity
   name: энергетическая сабля
-  parent: BaseItem
+  parent: EnergySword
   id: EnergySaberNT
   description: Передовое оружие NanoTrasen для ведения ближнего боя.
-  suffix: Shitspawn, Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
-  - type: EnergySword
-    litDamageBonus:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
       types:
-        Slash: 25
-        Blunt: -4.5
+        Slash: 19
+        Heat: 6
         Structural: 15
-    litDisarmMalus: 0.6
+  - type: DisarmMalus
+    malus: 0.6
+  - type: EnergySword
     colorOptions:
     - "#ffcc00"
   - type: Sprite
@@ -121,67 +112,3 @@
         Blunt: 4.5
   - type: Item
     sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
-  - type: UseDelay
-    delay: 1.0
-  - type: PointLight
-    enabled: false
-    radius: 2
-    energy: 2
-    color: white
-    netsync: false
-  - type: Appearance
-  - type: ItemToggleMeleeWeapon
-    activatedSoundOnHit:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-    activatedSoundOnHitNoDamage:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-    activatedSoundOnSwing:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        variation: 0.125
-  - type: ToggleableLightVisuals
-    spriteLayer: blade
-    inhandVisuals:
-      left:
-      - state: inhand-left-blade
-        shader: unshaded
-      right:
-      - state: inhand-right-blade
-        shader: unshaded
-  - type: DisarmMalus
-    malus: 0
-  - type: Reflect
-    enabled: false
-
-- type: entity
-  parent: ClothingShoesBootsMagSyndie
-  id: ClothingShoesBootsMagSyndieEbent
-  name: кроваво-красные магнитные сапоги
-  description: Созданные по технологии реверс-инжиниринга магнитные ботинки с встроенными ускорителями.
-  suffix: Shitspawn, Ebent
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 1
-    enabled: false
-
-- type: entity
-  parent: ClothingOuterHardsuitSyndieElite
-  id: ClothingOuterHardsuitSyndieEliteEbent
-  name: элитный скафандр Синдиката
-  description: Элитная версия кроваво-красного скафандра, отличающаяся повышенным бронированием и огнеупорностью. Собственность Мародёров Горлекса.
-  suffix: Shitspawn, Ebent
-  components:
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.4
-        Radiation: 0.25
-        Caustic: 0.5
-        Stamina: 0.1

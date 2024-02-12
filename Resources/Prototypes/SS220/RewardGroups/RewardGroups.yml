@@ -1,0 +1,48 @@
+- type: ShlepaRewardGroup
+  id: Shlopa
+  name: Шлёпстер
+  roundstartTokens: 5
+  requiredRole: enum.SponsorTier.Shlopa
+  rewards:
+    MedicalInternPDA: 2
+    Screwdriver: 3
+    Wrench: 1
+    Wirecutter: 5
+    Crowbar: 2
+
+- type: ShlepaRewardGroup
+  id: BigShlopa
+  name: Большой Шлёпа
+  roundstartTokens: 8
+  requiredRole: enum.SponsorTier.BigShlopa
+  rewards:
+    Welder: 3
+    MedicalInternPDA: 2
+    Screwdriver: 3
+    Wrench: 1
+    Wirecutter: 5
+    Crowbar: 2
+
+- type: ShlepaRewardGroup
+  id: HugeShlopa
+  name: Огромный Шлёпа
+  roundstartTokens: 12
+  requiredRole: enum.SponsorTier.HugeShlopa
+  rewards:
+    Welder: 3
+
+- type: ShlepaRewardGroup
+  id: GoldenShlopa
+  name: Золотой Шлёпа
+  roundstartTokens: 16
+  requiredRole: enum.SponsorTier.GoldenShlopa
+  rewards:
+    Welder: 3
+
+- type: ShlepaRewardGroup
+  id: CriticalMassShlopa
+  name: Шлёпа Критической Массы
+  roundstartTokens: 25
+  requiredRole: enum.SponsorTier.CriticalMassShlopa
+  rewards:
+    Welder: 3

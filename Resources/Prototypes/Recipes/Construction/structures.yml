@@ -214,7 +214,6 @@
   conditions:
     - !type:TileNotBlocked
 
-
 - type: construction
   name: diagonal shuttle wall
   id: DiagonalShuttleWall
@@ -716,6 +715,21 @@
   canBuildInImpassable: true
 
 - type: construction
+  name: blast door
+  id: BlastDoor
+  graph: BlastDoor
+  startNode: start
+  targetNode: blastdoor
+  category: construction-category-structures
+  description: This one says 'BLAST DONGER'.
+  icon:
+    sprite: Structures/Doors/Shutters/blastdoor.rsi
+    state: closed
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
   name: catwalk
   id: Catwalk
   graph: Catwalk
@@ -772,8 +786,8 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+  #conditions: #SS220-Barricade
+    #- !type:TileNotBlocked #SS220-Barricade
 
 - type: construction
   name: wooden barricade
@@ -789,8 +803,8 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+  #conditions: #SS220-Barricade
+    #- !type:TileNotBlocked #SS220-Barricade
 
 - type: construction
   name: railing

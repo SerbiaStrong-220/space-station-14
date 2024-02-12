@@ -24,7 +24,7 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
         _window.OnCriminalStatusChange += OnStatusUpdated;
         _window.OnCriminalStatusDelete += OnStatusDeleted;
 
-        if (EntMan.TryGetComponent<CriminalRecordsConsoleComponent>(Owner, out var comp))
+        if (EntMan.TryGetComponent<CriminalRecordsConsole220Component>(Owner, out var comp))
         {
             _window.SetSecurityMode(comp.IsSecurity);
             _window.MaxEntryMessageLength = comp.MaxMessageLength;
@@ -36,9 +36,9 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
             _window.Title = metaData.EntityName;
     }
 
-    private void OnKeySelected((NetEntity, uint)? key)
+    private void OnKeySelected(uint? key)
     {
-        SendMessage(new SelectGeneralStationRecord(key));
+        SendMessage(new SelectStationRecord(key));
     }
 
     private void OnStatusUpdated((string, ProtoId<CriminalStatusPrototype>?) statusUpdate)

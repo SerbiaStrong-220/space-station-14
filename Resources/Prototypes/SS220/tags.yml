@@ -1,2 +1,22 @@
 - type: Tag
+  id: DeathNettle
+
+- type: Tag
+  id: DeusAmbrosia
+
+- type: Tag
+  id: MeatSlime
+
+- type: Tag
   id: SecDogWearable
+
+- type: Tag
+  id: ReactionCleanable
+
+# READD-VEHICLES
+- type: Tag
+  id: JanicartKeys
+
+- type: Tag
+  id: VehicleKey
+######

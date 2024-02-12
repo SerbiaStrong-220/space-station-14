@@ -12,7 +12,7 @@
   id: Civilian
   description: department-Civilian-description
   color: "#9FED58"
-  sort: 2
+  weight: -10
   roles:
   - Bartender
   - Borg
@@ -29,6 +29,7 @@
   - Musician
   - Passenger
   - Reporter
+  - Visitor
   - Zookeeper
   - ServiceWorker
 
@@ -48,6 +49,8 @@
   - ResearchDirector
   - Quartermaster
   - BlueShield
+  primary: false
+  weight: 100
 
 - type: department
   id: Engineering
@@ -78,6 +81,7 @@
   sort: 0
   description: department-Security-description
   color: "#DE3A3A"
+  weight: 20
   roles:
   - HeadOfSecurity
   - SecurityCadet
@@ -102,11 +106,13 @@
   sort: 0
   description: department-Specific-description
   color: "#9FED58"
+  weight: 10
   roles:
   - Boxer
   - Reporter
   - Zookeeper
   - Psychologist
+  primary: false
 
 - type: department
   id: GhostRoles
@@ -115,3 +121,5 @@
   color: "#A9A9A9"
   roles:
   - GhostRole
+  primary: false
+  weight: -100

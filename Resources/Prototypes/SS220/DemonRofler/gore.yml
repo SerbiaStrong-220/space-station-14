@@ -1,0 +1,22 @@
+- type: entity
+  id: SS220Gore
+  name: кровавые ошмётки
+  description: Страшно даже подумать о том, что стало с их бывшим владельцем.
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Sprite
+    drawdepth: DeadMobs
+    sprite: SS220/DemonRofler/dark_reaper.rsi
+    state: "randomgibs"
+    noRot: true
+  - type: Tag
+    tags:
+    - ReactionCleanable

@@ -5,7 +5,6 @@ using Content.Server.Extinguisher;
 using Content.Server.Fluids.Components;
 using Content.Server.Gravity;
 using Content.Server.Popups;
-using Content.Shared.Disposal.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Timing;
@@ -16,6 +15,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using System.Numerics;
+using Content.Server.Disposal.Unit.Components;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -44,12 +44,14 @@ public sealed class SpraySystem : EntitySystem
         if (args.Handled)
             return;
 
+        // SS220 Placeable-Spray begin
         //do not spray on table and disposal unit
         if (HasComp<PlaceableSurfaceComponent>(args.Target)
-            || HasComp<SharedDisposalUnitComponent>(args.Target))
+            || HasComp<DisposalUnitComponent>(args.Target))
         {
             return;
         }
+        // SS220 Placeable-Spray end
 
         args.Handled = true;
 

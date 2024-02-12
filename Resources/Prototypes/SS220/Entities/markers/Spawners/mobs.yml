@@ -1,5 +1,5 @@
 - type: entity
-  name: Спавнер Охрайной Рокси
+  name: спавнер Рокси
   id: SpawnMobSecDogRoxi
   parent: MarkerBase
   components:
