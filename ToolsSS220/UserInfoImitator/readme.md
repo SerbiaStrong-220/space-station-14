@@ -4,7 +4,7 @@
 
 В файл конфигурации сервера `bin\Content.Server\server_config.toml` добавить следующую секцию
 
-```yml
+```toml
 [discord_auth]
 api_url = "http://localhost:5080"
 ```
