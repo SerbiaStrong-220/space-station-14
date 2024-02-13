@@ -13,7 +13,6 @@
     layers:
     - state: bowl
     - state: borsch
-      color: red
   - type: SolutionContainerManager
     solutions:
       food:
@@ -39,7 +38,6 @@
     layers:
     - state: bowl
     - state: shchi
-      color: green
   - type: SolutionContainerManager
     solutions:
       food:
