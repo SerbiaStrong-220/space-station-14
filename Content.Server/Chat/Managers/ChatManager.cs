@@ -240,12 +240,9 @@ namespace Content.Server.Chat.Managers
             }
 
             var SponsorInfo = player.ContentData()?.SponsorInfo;
-            if (SponsorInfo is not null)
+            if (SponsorInfo is not null && SponsorInfo.Tiers.Any(x => x is not Shared.SS220.Discord.SponsorTier.None))
             {
-                if (SponsorInfo.Tiers.Length > 1)
-                {
-                    wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffe77a"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
-                }
+                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffe77a"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
 
             // Corvax-Sponsors-Start
