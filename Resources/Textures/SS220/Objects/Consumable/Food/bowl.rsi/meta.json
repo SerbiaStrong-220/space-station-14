@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "?",
+  "copyright": "Added by gabova(discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "borsch"
+    },
+    {
+      "name": "shchi"
+    },
+    {
+      "name": "cheburek"
+    },
+    {
+      "name": "okroshka"
+    },
+    {
+      "name": "okroshkaKvass"
+    },
+    {
+      "name": "vinaigrette"
+    },
+    {
+      "name": "bowl"
+    }
+  ]
+}
