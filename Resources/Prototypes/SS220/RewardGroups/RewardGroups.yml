@@ -4,11 +4,13 @@
   roundstartTokens: 5
   requiredRole: enum.SponsorTier.Shlopa
   rewards:
+    SponsorCigPack: 2
     ClothingSponsorMothBoots: 5
     ClothingSponsorDante: 5
     ClothingSponsorTylerRedGlasses: 5
     ClothingSponsorDallas: 5
     SponsorBoxStorageCandy: 3
+    ClothingSponsorStudentSuit: 5
 
 - type: ShlepaRewardGroup
   id: BigShlopa
@@ -16,7 +18,6 @@
   roundstartTokens: 8
   requiredRole: enum.SponsorTier.BigShlopa
   rewards:
-    SponsorCigPack: 2
     ClothingSponsorWhiteCoat: 5
     ClothingSponsorBlackCoat: 5
     SponsorBoxMaid: 8
@@ -47,4 +48,4 @@
   roundstartTokens: 25
   requiredRole: enum.SponsorTier.CriticalMassShlopa
   rewards:
-    SponsorBoxGoldClown: 15
+    SponsorElWycco: 1

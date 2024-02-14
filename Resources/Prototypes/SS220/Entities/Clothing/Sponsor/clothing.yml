@@ -48,7 +48,7 @@
 
 - type: entity
   parent: ClothingSponsorShoesBase
-  id: ClothingSponsorShoesMoth
+  id: ClothingSponsorMothBoots
   name: твёрдые моле-ботинки
   description: Сэр, чистка прошла успешно, сэр!
   components:
@@ -279,3 +279,14 @@
     sprite: SS220/Clothing/Sponsor/maid/head.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/maid/head.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorStudentSuit
+  name: форма студентки
+  description: Чисто.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/student/suit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/student/suit.rsi
