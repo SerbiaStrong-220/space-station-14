@@ -1,0 +1,8 @@
+- type: reagent
+  id: JuiceBeet
+  name: свекольный сок
+  parent: BaseJuice
+  desc: Сок свеклы
+  physicalDesc: reagent-physical-desc-thick
+  flavor: potatoes
+  color: "#300010"

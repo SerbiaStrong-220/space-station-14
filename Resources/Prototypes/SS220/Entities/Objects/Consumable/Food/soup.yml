@@ -1,5 +1,5 @@
 - type: entity
-  name: Борщ
+  name: борщ
   parent: FoodBowlBase
   id: FoodSoupBorsch
   description: Красный суп.
@@ -24,10 +24,10 @@
           Quantity: 5
 
 - type: entity
-  name: Щи
+  name: щи
   parent: FoodBowlBase
   id: FoodSoupShchi
-  description: Борщ с капусткой, но не красный
+  description: Борщ с капусткой, но не красный.
   components:
   - type: FlavorProfile
     flavors:
@@ -47,3 +47,78 @@
           Quantity: 10
         - ReagentId: Vitamin
           Quantity: 5
+
+- type: entity
+  name: окрошка
+  parent: FoodBowlBase
+  id: FoodSoupOkroshka
+  description: Холодный суп.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - creamy
+      - peas
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: okroshka
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5
+
+- type: entity
+  name: окрошка на квасе
+  parent: FoodBowlBase
+  id: FoodSoupOkroshkaKvass
+  description: По-настоящему освежающий салат.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - creamy
+      - peas
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: okroshkaKvass
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5          
+
+- type: entity
+  name: винегрет
+  parent: FoodBowlBase
+  id: FoodSoupVinaigrette
+  description: Кладезь витаминов и микроэлементов. А почему тут нет вина? 
+  components:
+  - type: FlavorProfile
+    flavors:
+      - creamy
+      - peas
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: vinaigrette
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5          
