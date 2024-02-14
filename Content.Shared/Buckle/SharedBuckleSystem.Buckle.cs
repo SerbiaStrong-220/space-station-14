@@ -14,11 +14,11 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Buckle;
+using Content.Shared.SS220.Vehicle.Components;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
-using Content.Shared.Vehicle.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -132,12 +132,7 @@ public abstract partial class SharedBuckleSystem
 
     private void OnBuckleDownAttempt(EntityUid uid, BuckleComponent component, DownAttemptEvent args)
     {
-        if (component.Buckled)
-            args.Cancel();
-    }
-
-    private void OnBuckleStandAttempt(EntityUid uid, BuckleComponent component, StandAttemptEvent args)
-    {
+        // SS220 Readd-Vehicles begin
         //Let entities stand back up while on vehicles so that they can be knocked down when slept/stunned
         //This prevents an exploit that allowed people to become partially invulnerable to stuns
         //while on vehicles
@@ -148,6 +143,14 @@ public abstract partial class SharedBuckleSystem
             if (TryComp<VehicleComponent>(buckle, out _))
                 return;
         }
+        // SS220 Readd-Vehicles end
+
+        if (component.Buckled)
+            args.Cancel();
+    }
+
+    private void OnBuckleStandAttempt(EntityUid uid, BuckleComponent component, StandAttemptEvent args)
+    {
         if (component.Buckled)
             args.Cancel();
     }
@@ -164,7 +167,7 @@ public abstract partial class SharedBuckleSystem
             return;
 
         if (component.Buckled &&
-            !HasComp<VehicleComponent>(component.BuckledTo)) // buckle+vehicle shitcode
+            !HasComp<VehicleComponent>(component.BuckledTo)) // buckle+vehicle shitcode //SS220 Readd-Vehicles
             args.Cancel();
     }
 
@@ -379,7 +382,7 @@ public abstract partial class SharedBuckleSystem
         if (TryComp<AppearanceComponent>(buckleUid, out var appearance))
             Appearance.SetData(buckleUid, BuckleVisuals.Buckled, true, appearance);
 
-        _rotationVisuals.SetHorizontalAngle(buckleUid,  strapComp.Rotation);
+        _rotationVisuals.SetHorizontalAngle(buckleUid, strapComp.Rotation);
 
         ReAttach(buckleUid, strapUid, buckleComp, strapComp);
         SetBuckledTo(buckleUid, strapUid, strapComp, buckleComp);
@@ -458,6 +461,7 @@ public abstract partial class SharedBuckleSystem
             if (HasComp<SleepingComponent>(buckleUid) && buckleUid == userUid)
                 return false;
 
+            // SS220 Readd-Vehicles begin
             if (TryComp<VehicleComponent>(strapUid, out var vehicle) &&
                 vehicle.Rider != userUid)
             {
@@ -478,6 +482,7 @@ public abstract partial class SharedBuckleSystem
                 //SS220-Vehicle-doafter-fix end
                 return false;
             }
+            // SS220 Readd-Vehicles end
 
             // If the strap is a vehicle and the rider is not the person unbuckling, return. Unless the rider is crit or dead.
             //if (TryComp<VehicleComponent>(strapUid, out var vehicle) && vehicle.Rider != userUid && !_mobState.IsIncapacitated(buckleUid))

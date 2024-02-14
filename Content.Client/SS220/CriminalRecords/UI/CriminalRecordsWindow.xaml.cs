@@ -39,7 +39,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 
     public Action<(string, ProtoId<CriminalStatusPrototype>?)>? OnCriminalStatusChange;
     public Action<int>? OnCriminalStatusDelete;
-    public Action<(NetEntity, uint)?>? OnKeySelected;
+    public Action<uint?>? OnKeySelected;
     private readonly CancellationTokenSource _timerCancelTokenSource = new();
 
     public CriminalRecordsWindow()
@@ -180,7 +180,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 
         if (state.SelectedKey is { } key)
         {
-            RecordIdLabel.Text = $"ID: НТ-{key.Item1}-{key.Item2}";
+            RecordIdLabel.Text = $"ID: НТ-{key}";
         }
 
         if (state.SelectedRecord != null)
@@ -226,7 +226,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         }
     }
 
-    private void PopulateRecordListing(Dictionary<(NetEntity, uint), CriminalRecordShort>? listing, (NetEntity, uint)? selected)
+    private void PopulateRecordListing(Dictionary<uint, CriminalRecordShort>? listing, uint? selected)
     {
         if (_isPopulating)
             return;

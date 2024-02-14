@@ -338,7 +338,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
         deletedRecord = stationRecord.Value.Item2;
 
-        _stationRecordsSystem.RemoveRecord(station, stationRecord.Value.Item1);
+        _stationRecordsSystem.RemoveRecord(stationRecord.Value.Item1);
 
         return true;
     }
@@ -351,7 +351,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
             var result = stationRecords.FirstOrNull(records => records.Item2.DNA == dnaComponent.DNA);
             if (result is not null)
             {
-                return result.Value;
+                return (new(result.Value.Item1, station), result.Value.Item2);
             }
         }
 

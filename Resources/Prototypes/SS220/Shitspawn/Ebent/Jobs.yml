@@ -54,7 +54,7 @@
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitAdmiral
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SyndiPDAAgentLeader
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltSyndieHolsterPython
@@ -174,7 +174,7 @@
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitCE
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SyndiPDAAgentEngineer
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltSyndieHolsterPython
@@ -290,7 +290,7 @@
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesNitrile
     outerClothing: ClothingOuterHardsuitIronMed
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SyndiPDAAgentCorpsman
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltSyndieHolsterPython
@@ -418,7 +418,7 @@
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesNitrile
     outerClothing: ClothingOuterHardsuitIroncmo
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SyndiPDAAgentCMO
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltSyndieHolsterPython
@@ -534,7 +534,7 @@
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronSoldier
-    suitstorage: YellowOxygenTankFilled
+    suitstorage: OxygenTankFilled
     id: SyndiPDAAgent
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltSyndieHolsterPython

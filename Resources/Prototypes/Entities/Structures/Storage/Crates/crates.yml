@@ -60,6 +60,8 @@
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
   - type: AntiRottingContainer
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
 
 - type: entity
   parent: CratePlastic

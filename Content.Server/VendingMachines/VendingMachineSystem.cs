@@ -23,6 +23,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
+using Content.Shared.UserInterface;
 using Content.Shared.VendingMachines;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
@@ -179,7 +180,7 @@ namespace Content.Server.VendingMachines
                 component.DispenseOnHitChance == null || args.DamageDelta == null)
                 return;
 
-            if (args.DamageIncreased && args.DamageDelta.Total >= component.DispenseOnHitThreshold &&
+            if (args.DamageIncreased && args.DamageDelta.GetTotal() >= component.DispenseOnHitThreshold &&
                 _random.Prob(component.DispenseOnHitChance.Value))
             {
                 if (component.DispenseOnHitCooldown > 0f)

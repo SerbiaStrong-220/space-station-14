@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.GameTicking.Events;
-using Content.Server.UserInterface;
+using Content.Shared.UserInterface;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Players;
 using Content.Shared.SS220.Discord;
