@@ -76,3 +76,12 @@
   id: 7
   time: '2024-02-12T15:15:16.0000000+00:00'
   url: https://api.github.com/repos/SerbiaStrong-220/space-station-14/pulls/725
+- author: Ady4
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043D\u043E\u0432\
+      \u0430\u044F \u043C\u0443\u0437\u044B\u043A\u0430 \u044F\u0434\u0435\u0440\u043D\
+      \u043E\u0439 \u0431\u043E\u0435\u0433\u043E\u043B\u043E\u0432\u043A\u0438."
+    type: Add
+  id: 8
+  time: '2024-02-13T16:49:39.0000000+00:00'
+  url: https://api.github.com/repos/SerbiaStrong-220/space-station-14/pulls/733
