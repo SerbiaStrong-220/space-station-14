@@ -1,3 +1,4 @@
+using Content.Server.Actions;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Cuffs;
 using Content.Server.Forensics;
@@ -35,7 +36,6 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly ForensicsSystem _forensicsSystem = default!;
-
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
