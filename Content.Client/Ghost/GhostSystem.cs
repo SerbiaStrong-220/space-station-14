@@ -3,9 +3,9 @@ using Content.Shared.Actions;
 using Content.Shared.Ghost;
 using Robust.Client.Console;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 
 namespace Content.Client.Ghost
 {
@@ -131,8 +131,12 @@ namespace Content.Client.Ghost
 
         private void OnGhostState(EntityUid uid, GhostComponent component, ref AfterAutoHandleStateEvent args)
         {
+            // при прямом указаний цвета в sprite.LayerSetColor цвет назначается, если это делать через рандомизацию (даже если цвет успешно сгенерирован и это видно в дебагере)...
+            // ...тогда стандартный гост, увы
+            var _random = new Random();
+            var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
             if (TryComp<SpriteComponent>(uid, out var sprite))
-                sprite.LayerSetColor(0, component.color);
+                sprite.LayerSetColor(0, color);
 
             if (uid != _playerManager.LocalEntity)
                 return;
