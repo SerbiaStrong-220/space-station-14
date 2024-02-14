@@ -21,17 +21,17 @@
           tags:
             - ChemicalImplant
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
-      state: injector
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
+      state: implanter
     - type: ItemMapper
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       mapLayers:
-        injector_full:
+        implanter_full:
           whitelist:
             tags:
               - ChemicalImplant
     - type: Item
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       heldPrefix: 0
     - type: Appearance
     - type: Tag
@@ -59,6 +59,6 @@
     itemIconStyle: BigAction
     priority: -20
     icon:
-      sprite: SS220/Objects/ReagentInjector/injector.rsi
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       state: icon_empty
     event: !type:UseChemicalImplantEvent

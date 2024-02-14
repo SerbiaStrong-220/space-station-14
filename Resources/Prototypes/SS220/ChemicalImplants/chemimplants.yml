@@ -9,10 +9,10 @@
       permanent: true
       implantAction: ActionUseChemicalImplant
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
-      state: capsule
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      state: implant
     - type: Item
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
       size: Small
     - type: SolutionContainerManager
       solutions:
@@ -30,7 +30,7 @@
     - type: SolutionContainerVisuals
       maxFillLevels: 1
       changeColor: false
-      emptySpriteName: capsule_used
+      emptySpriteName: implant_used
     - type: Tag
       tags:
         - ChemicalImplant
@@ -42,7 +42,7 @@
   description: combat-chemical-implant-desc
   components:
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
       layers:
       - state: combat
         map: ["enum.SolutionContainerLayers.Fill"]
@@ -63,7 +63,7 @@
   description: dab-chemical-implant-desc
   components:
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
       layers:
         - state: dab
           map: ["enum.SolutionContainerLayers.Fill"]
@@ -88,7 +88,7 @@
     - type: SubdermalImplant
       permanent: false
     - type: Sprite
-      sprite: SS220/Objects/ReagentInjector/capsules.rsi
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
       layers:
         - state: dead
           map: ["enum.SolutionContainerLayers.Fill"]

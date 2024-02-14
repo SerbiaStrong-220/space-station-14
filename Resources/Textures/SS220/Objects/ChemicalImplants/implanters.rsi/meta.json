@@ -8,32 +8,19 @@
     },
     "states": [
       {
-        "name": "adrenaline"
+        "name": "implanter"
       },
       {
-        "name": "capsule"
+        "name": "implanter_full"
       },
       {
-        "name": "capsule_mask"
+        "name": "implanter_full_mask"
       },
       {
-        "name": "capsule_used"
+        "name": "icon_empty"
       },
       {
-        "name": "combat"
-      },
-      {
-        "name": "dab"
-      },
-      {
-        "name": "dead"
-      },
-      {
-        "name": "nanite"
-      },
-      {
-        "name": "reanim"
+        "name": "icon_death"
       }
     ]
   }
-  

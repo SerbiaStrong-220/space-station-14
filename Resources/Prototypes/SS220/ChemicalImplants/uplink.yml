@@ -4,7 +4,7 @@
   id: UplinkChemicalImplanter
   name: ent-ChemicalImplanter
   description: uplink-chemical-implanter-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/injector.rsi, state: injector }
+  icon: { sprite: SS220/Objects/ChemicalImplants/implanters.rsi, state: implanter }
   productEntity: ChemicalImplanter
   cost:
     Telecrystal: 6
@@ -16,7 +16,7 @@
   id: UplinkEmptyChemicalImplant
   name: ent-EmptyChemicalImplant
   description: uplink-empty-chemical-implant-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: capsule }
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: implant }
   productEntity: EmptyChemicalImplant
   cost:
     Telecrystal: 1
@@ -27,7 +27,7 @@
   id: UplinkCombatChemicalImplant
   name: ent-CombatChemicalImplant
   description: uplink-combat-chemical-implant-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: combat }
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: combat }
   productEntity: CombatChemicalImplant
   cost:
     Telecrystal: 4
@@ -43,7 +43,7 @@
   id: UplinkDABChemicalImplant
   name: ent-DABChemicalImplant
   description: uplink-dab-chemical-implant-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dab }
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: dab }
   productEntity: DABChemicalImplant
   cost:
     Telecrystal: 2
@@ -54,7 +54,7 @@
   id: UplinkSuicideChemicalImplant
   name: ent-SuicideChemicalImplant
   description: uplink-suicide-chemical-implant-desc
-  icon: { sprite: SS220/Objects/ReagentInjector/capsules.rsi, state: dead }
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: dead }
   productEntity: SuicideChemicalImplant
   cost:
     Telecrystal: 2

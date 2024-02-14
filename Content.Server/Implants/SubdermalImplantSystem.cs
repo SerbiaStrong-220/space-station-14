@@ -16,14 +16,9 @@ using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
-using System.Numerics;
-using Content.Shared.SS220.ChemicalImplant;
-using FastAccessors;
-using Content.Shared.Chemistry.Components;
 
 namespace Content.Server.Implants;
 
@@ -63,16 +58,17 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     {
         if (component.ImplantedEntity is not { } ent)
             return;
-
-        if (!TryComp<SolutionComponent>(uid, out var implantSolution)) // Это не работает
-            return;
-        if (!_solutionContainer.TryGetSolution(args.Performer, "chemicals", out var performerSolution))
+        if (!TryComp<SolutionContainerManagerComponent>(args.Performer, out var _performerSolutionComp)
+            || !TryComp<SolutionContainerManagerComponent>(uid, out var _implantSolutionComp))
             return;
 
-        if (args.Handled)
+        if (!_solutionContainer.TryGetSolution(new(args.Performer, _performerSolutionComp), "chemicals", out var chemicalSolution))
             return;
 
-        _solutionContainer.TryTransferSolution(performerSolution.Value, implantSolution.Solution, implantSolution.Solution.Volume);
+        if (!_solutionContainer.TryGetSolution(new(uid, _implantSolutionComp), "beaker", out var beakerSolution))
+            return;
+
+        _solutionContainer.TryTransferSolution(chemicalSolution.Value, beakerSolution.Value.Comp.Solution, beakerSolution.Value.Comp.Solution.Volume);
 
         args.Handled = true;
 

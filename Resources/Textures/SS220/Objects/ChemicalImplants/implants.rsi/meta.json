@@ -8,20 +8,31 @@
     },
     "states": [
       {
-        "name": "injector"
+        "name": "adrenaline"
       },
       {
-        "name": "injector_full"
+        "name": "implant"
       },
       {
-        "name": "injector_full_mask"
+        "name": "implant_mask"
       },
       {
-        "name": "icon_empty"
+        "name": "implant_used"
       },
       {
-        "name": "icon_death"
+        "name": "combat"
+      },
+      {
+        "name": "dab"
+      },
+      {
+        "name": "dead"
+      },
+      {
+        "name": "nanite"
+      },
+      {
+        "name": "reanim"
       }
     ]
   }
-  
