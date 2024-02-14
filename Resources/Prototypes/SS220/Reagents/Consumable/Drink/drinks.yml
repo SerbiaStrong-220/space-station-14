@@ -1,0 +1,23 @@
+- type: reagent
+  id: AppleCompote
+  name: яблочный компот
+  parent: BaseDrink
+  desc: Изготовлен из свежих яблок.
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: icedtea
+  color: "#ffb51c"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
+    state: icon
+
+- type: reagent
+  id: BerryСompote
+  name: ягодный компот
+  parent: BaseDrink
+  desc: Изготовлен из свежих ягод.
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: icedtea
+  color: "#f04737"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
+    state: icon   

@@ -1,0 +1,33 @@
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkAppleCompote
+  name: яблочный компот
+  description: Изготовлен из свежих яблок.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: AppleCompote
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
+
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkBerryСompote
+  name: ягодный компот
+  description: Изготовлен из свежих ягод.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: BerryСompote
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi 
