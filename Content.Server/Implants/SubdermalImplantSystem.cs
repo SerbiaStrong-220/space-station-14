@@ -64,7 +64,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (component.ImplantedEntity is not { } ent)
             return;
 
-        if (!TryComp<SolutionComponent>(uid, out var implantSolution))
+        if (!TryComp<SolutionComponent>(uid, out var implantSolution)) // Это не работает
             return;
         if (!_solutionContainer.TryGetSolution(args.Performer, "chemicals", out var performerSolution))
             return;
