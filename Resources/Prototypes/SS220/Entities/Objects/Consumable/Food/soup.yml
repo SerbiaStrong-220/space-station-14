@@ -6,8 +6,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - peas
+      - borsch
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:
@@ -31,8 +30,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - peas
+      - shchi
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:
@@ -56,8 +54,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - peas
+      - okroshka
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:
@@ -81,8 +78,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - peas
+      - okroshkaKvass
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:
@@ -106,8 +102,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - peas
+      - vinaigrette
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:

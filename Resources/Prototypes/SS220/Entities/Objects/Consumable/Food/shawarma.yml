@@ -5,7 +5,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - meaty
+      - shawarma
   - type: Food
     transferAmount: 3
   - type: Sprite

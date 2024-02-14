@@ -2,11 +2,11 @@
   name: свекла
   parent: FoodProduceBase
   id: Foodbeet
-  description: Сочная и полезная свекла - отличный выбор для салатов и гарниров
+  description: Сочная и полезная свекла - отличный выбор для салатов и гарниров.
   components:
   - type: FlavorProfile
     flavors:
-      - potatoes
+      - beets
   - type: SolutionContainerManager
     solutions:
       food:

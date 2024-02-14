@@ -4,7 +4,7 @@
   parent: BaseDrink
   desc: Изготовлен из свежих яблок.
   physicalDesc: reagent-physical-desc-sweet
-  flavor: icedtea
+  flavor: juice
   color: "#ffb51c"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
@@ -16,7 +16,7 @@
   parent: BaseDrink
   desc: Изготовлен из свежих ягод.
   physicalDesc: reagent-physical-desc-sweet
-  flavor: icedtea
+  flavor: juice
   color: "#f04737"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi

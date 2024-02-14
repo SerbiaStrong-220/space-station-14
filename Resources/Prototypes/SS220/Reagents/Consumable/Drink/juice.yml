@@ -4,5 +4,5 @@
   parent: BaseJuice
   desc: Сок свеклы
   physicalDesc: reagent-physical-desc-thick
-  flavor: potatoes
+  flavor: beets
   color: "#300010"
