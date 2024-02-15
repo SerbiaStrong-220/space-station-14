@@ -1,8 +1,8 @@
 - type: reagent
   id: AppleCompote
-  name: яблочный компот
+  name: reagent-name-apple-compote
   parent: BaseDrink
-  desc: Изготовлен из свежих яблок.
+  desc: reagent-desc-apple-compote
   physicalDesc: reagent-physical-desc-sweet
   flavor: juice
   color: "#ffb51c"
@@ -12,9 +12,9 @@
 
 - type: reagent
   id: BerryСompote
-  name: ягодный компот
+  name: reagent-name-berry-compote
   parent: BaseDrink
-  desc: Изготовлен из свежих ягод.
+  desc: reagent-desc-berry-compote
   physicalDesc: reagent-physical-desc-sweet
   flavor: juice
   color: "#f04737"
