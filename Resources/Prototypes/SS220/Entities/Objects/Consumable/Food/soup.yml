@@ -74,7 +74,7 @@
   name: окрошка на квасе
   parent: FoodBowlBase
   id: FoodSoupOkroshkaKvass
-  description: По-настоящему освежающий салат.
+  description: Культурное наследие, которое прекрасно охладит вас в жаркий летний день.
   components:
   - type: FlavorProfile
     flavors:
