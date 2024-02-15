@@ -9,7 +9,7 @@
   - type: Food
     transferAmount: 3
   - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/Shawarma.rsi
+    sprite: SS220/Objects/Consumable/Food/shawarma.rsi
   - type: SolutionContainerManager
     solutions:
       food:
@@ -20,7 +20,7 @@
         - ReagentId: Vitamin
           Quantity: 4
   - type: Item
-    sprite: SS220/Objects/Consumable/Food/Shawarma.rsi
+    sprite: SS220/Objects/Consumable/Food/shawarma.rsi
   - type: Tag
     tags:
       - Meat
