@@ -8,6 +8,15 @@
 # WallSolid: Window
 # Table: null
 
+# 2024-02-15 - SS220
+BaseReagentsCapsule: null
+BaseReagentsCapsuleImplanter: BaseChemicalImplanter
+ReagentsCapsuleInjector: ChemicalImplanter
+EmptyCapsule: EmptyChemicalImplant
+CombatCapsule: CombatChemicalImplant
+DABCapsule: DABChemicalImplant
+SuicideCapsule: SuicideChemicalImplant
+
 # 2023-07-03
 ClothingHeadHelmetBasic: ClothingHeadHelmetBasic
 ClothingHeadHelmetBasicOld: ClothingHeadHelmetBasic

@@ -1,9 +1,0 @@
-[DEBG] root: OS: Microsoft Windows 10.0.18363 X64
-[DEBG] root: .NET Runtime: .NET 8.0.0 win-x64
-[DEBG] root: Server GC: False
-[DEBG] root: Processor: 8x       Intel(R) Core(TM) i7-3612QM CPU @ 2.10GHz
-[DEBG] root: Architecture: X64
-[DEBG] root: Robust Version: 207.1.0.0
-[DEBG] root: Compile Options: DEVELOPMENT;TOOLS;DEBUG;CLIENT_SCRIPTING
-[DEBG] root: Intrinsics: X86Aes;Avx;Pclmulqdq;Popcnt;Sse;Sse2;Sse3;Ssse3;Sse41;Sse42;X86Base
-[INFO] cfg: Configuration loaded from file
