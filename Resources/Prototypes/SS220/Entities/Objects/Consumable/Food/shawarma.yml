@@ -29,7 +29,7 @@
   name: шаурма
   parent: FoodShawarmaBase
   id: FoodShawarma
-  description: Аппетитная начинка, завернутая в лаваш - шаурма, которая всегда поднимает настроение.
+  description: Аппетитная начинка, завернутая в лаваш - блюдо, которое всегда поднимает настроение.
   components:
   - type: Food
   - type: Sprite
@@ -39,7 +39,7 @@
   name: шаурма на гриле
   parent: FoodShawarmaBase
   id: FoodShawarmaOnGrill
-  description: Шаурма, которая поднимает настроение, но только круче!
+  description: То же блюдо, поднимающее вам настроение, но только круче!
   components:
   - type: Food
   - type: Sprite
