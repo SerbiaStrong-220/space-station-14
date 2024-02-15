@@ -3,6 +3,8 @@
   name: Cheburek recipe
   result: FoodCheburek
   time: 15
+  reagents:
+    TableSalt: 5  
   solids:
     FoodDough: 1
     FoodMeatCutlet: 1
