@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SMES;
 
@@ -21,13 +21,20 @@ public sealed class SmesState : BoundUserInterfaceState
 {
     public string EntityName { get; }
     public string DeviceNetworkAddress { get; }
+    public int BatteryCurrentCharge { get; }
+    public int BatteryMaxCharge { get; }
     public int BatteryChargePercentRounded { get; }
 
-
-    public SmesState(string entityName, string deviceNetworkAddress, int batteryChargePercentRounded)
+    public SmesState(string entityName,
+        string deviceNetworkAddress,
+        int batteryCurrentCharge,
+        int batteryMaxCharge,
+        int batteryChargePercentRounded)
     {
         EntityName = entityName;
         DeviceNetworkAddress = deviceNetworkAddress;
+        BatteryCurrentCharge = batteryCurrentCharge;
+        BatteryMaxCharge = batteryMaxCharge;
         BatteryChargePercentRounded = batteryChargePercentRounded;
     }
 }

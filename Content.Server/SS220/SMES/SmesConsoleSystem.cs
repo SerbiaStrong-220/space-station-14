@@ -41,6 +41,8 @@ public sealed class SmesConsoleSystem : EntitySystem
         var state = new SmesState(
             metaDataComponent.EntityName,
             deviceNetworkComp.Address,
+            (int) batteryComponent.CurrentCharge / 1000,
+            (int) batteryComponent.MaxCharge / 1000,
             _batterySystem.GetChargePercentRounded(batteryComponent)
             );
         _userInterface.TrySetUiState(uid, SmesUiKey.Key, state);
