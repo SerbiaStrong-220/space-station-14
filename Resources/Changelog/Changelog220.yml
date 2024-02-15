@@ -85,3 +85,12 @@
   id: 8
   time: '2024-02-13T16:49:39.0000000+00:00'
   url: https://api.github.com/repos/SerbiaStrong-220/space-station-14/pulls/733
+- author: Dexler
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\
+      \u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0441\u043F\u0430\u0442\u044C\
+      \ \u043D\u0430 \u0441\u0442\u0443\u043B\u044C\u044F\u0445."
+    type: Add
+  id: 9
+  time: '2024-02-15T00:43:28.0000000+00:00'
+  url: https://api.github.com/repos/SerbiaStrong-220/space-station-14/pulls/735
