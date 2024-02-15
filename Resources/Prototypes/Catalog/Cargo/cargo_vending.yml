@@ -162,7 +162,7 @@
     sprite: Objects/Specific/Service/vending_machine_restock.rsi
     state: base
   product: CrateVendingMachineRestockSeedsFilled
-  cost: 3375
+  cost: 3450
   category: Hydroponics
   group: market
 
