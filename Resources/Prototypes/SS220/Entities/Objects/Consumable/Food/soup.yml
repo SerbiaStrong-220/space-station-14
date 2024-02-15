@@ -97,7 +97,7 @@
 - type: entity
   name: винегрет
   parent: FoodBowlBase
-  id: FoodSoupVinaigrette
+  id: FoodSaladVinaigrette
   description: Кладезь витаминов и микроэлементов. А почему тут нет вина? 
   components:
   - type: FlavorProfile
