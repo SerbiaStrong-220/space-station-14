@@ -50,7 +50,7 @@
   name: окрошка
   parent: FoodBowlBase
   id: FoodSoupOkroshka
-  description: Холодный суп.
+  description: Суп, который можно есть ложкой или пить из бокала в зависимости от настроения.
   components:
   - type: FlavorProfile
     flavors:
