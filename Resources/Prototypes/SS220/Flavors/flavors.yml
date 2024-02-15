@@ -1,34 +1,34 @@
 - type: flavor
   id: shawarma
   flavorType: Complex
-  description: Ням. На вкус как мясо со свежими овощами в лаваше.
+  description: мясо со свежими овощами в лаваше.
 
 - type: flavor
   id: borsch
   flavorType: Complex
-  description: Ням. На вкус мясной бульон с овощами.
+  description: мясной бульон с овощами.
 
 - type: flavor
   id: shchi
   flavorType: Complex
-  description: Ням. На вкус кислый бульон с овощами. 
+  description: кислый бульон с овощами. 
 
 - type: flavor
   id: okroshka
   flavorType: Complex
-  description: Ням. Освежающий вкус мяса и овощей. 
+  description: освежающие овощи и мясо. 
 
 - type: flavor
   id: okroshkaKvass
   flavorType: Complex
-  description: Ням. Освежающий вкус мяса и овощей с кислинкой.
+  description: освежающие овощи и мясо с кислинкой.
 
 - type: flavor
   id: vinaigrette
   flavorType: Complex
-  description: Ням. На вкус соленые вареные овощи.
+  description: соленые вареные овощи.
 
 - type: flavor
   id: beets
   flavorType: Complex
-  description: Ням. На как свекла. 
+  description: как свекла. 
