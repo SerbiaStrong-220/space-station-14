@@ -1,6 +1,6 @@
 - type: technology
   id: CloningPodMachine
-  name: research-technology-сloning-technology
+  name: research-technology-cloning-technology
   icon:
     sprite: Structures/Machines/scanner.rsi
     state: open

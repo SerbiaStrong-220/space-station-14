@@ -77,4 +77,4 @@ research-technology-honk-mech = Мех Х.О.Н.К.
 research-technology-advanced-spray = Продвинутые спреи
 research-technology-quantum-fiber-weaving = Плетение квантового волокна
 research-technology-bluespace-cargo-transport = Блюспейс-транспортировка грузов
-research-technology-сloning-technology = Технология клонирования
+research-technology-cloning-technology = Технология клонирования
