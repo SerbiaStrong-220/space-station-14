@@ -72,7 +72,7 @@
   - type: MobStateActions
     actions:
       Critical:
-#      - ActionCritSuccumb ss-220
+#      - ActionCritSuccumb ss-220 noDeath
       - ActionCritFakeDeath
       - ActionCritLastWords
   - type: Deathgasp

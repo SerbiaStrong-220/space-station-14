@@ -211,7 +211,7 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
-            // SS-220
+            //SS-220 noDeath
             if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
                 && actResp.UseDelay != null)
             {
@@ -219,7 +219,7 @@ namespace Content.Server.Ghost
                 var end = start + actResp.UseDelay.Value;
                 _actions.SetCooldown(component.RespawnActionEntity.Value, start, end);
             }
-            // SS-220 end
+            //SS-220 end noDeath
         }
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
