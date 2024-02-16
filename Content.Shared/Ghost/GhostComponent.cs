@@ -110,4 +110,4 @@ public sealed partial class ToggleGhostHearingActionEvent : InstantActionEvent {
 
 public sealed partial class BooActionEvent : InstantActionEvent { }
 
-public sealed partial class RespawnActionEvent : InstantActionEvent { }
+public sealed partial class RespawnActionEvent : InstantActionEvent { } //SS-220
