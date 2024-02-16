@@ -118,6 +118,7 @@ namespace Content.Server.Ghost
             args.Handled = true;
         }
 
+        //SS-220
         private void OnActionRespanw(EntityUid uid, GhostComponent component, RespawnActionEvent args)
         {
             if (!TryComp<ActorComponent>(uid, out var actor))
@@ -125,7 +126,7 @@ namespace Content.Server.Ghost
 
             _host.ExecuteCommand(actor.PlayerSession, "respawn");
         }
-
+        //SS-220 end
         private void OnRelayMoveInput(EntityUid uid, GhostOnMoveComponent component, ref MoveInputEvent args)
         {
             // If they haven't actually moved then ignore it.
@@ -283,7 +284,7 @@ namespace Content.Server.Ghost
             }
 
             var response = new GhostWarpsResponseEvent(GetPlayerWarps(entity).Concat(GetLocationWarps()).ToList());
-            RaiseNetworkEvent(response, args.SenderSession.Channel);
+            RaiseNetworkEvent(response, args.SenderSession.ConnectedClient);
         }
 
         private void OnGhostWarpToTargetRequest(GhostWarpToTargetRequestEvent msg, EntitySessionEventArgs args)
