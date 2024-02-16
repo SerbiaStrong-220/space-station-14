@@ -18,34 +18,3 @@
      Glass: 900
      Silver: 100
      Gold: 100
-
-
-- type: latheRecipe
-  id: MedicalScannerMachineCircuitboard
-  result: MedicalScannerMachineCircuitboard
-  category: Circuitry
-  completetime: 4
-  materials:
-    Steel: 150
-    Glass: 900
-    Gold: 50
-
-- type: latheRecipe
-  id: CloningConsoleComputerCircuitboard
-  result: CloningConsoleComputerCircuitboard
-  category: Circuitry
-  completetime: 4
-  materials:
-    Steel: 150
-    Glass: 900
-    Gold: 50
-
-- type: latheRecipe
-  id: CloningPodMachineCircuitboard
-  result: CloningPodMachineCircuitboard
-  category: Circuitry
-  completetime: 4
-  materials:
-    Steel: 150
-    Glass: 900
-    Gold: 50
