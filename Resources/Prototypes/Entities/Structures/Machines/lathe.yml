@@ -454,9 +454,6 @@
       - ArtifactCrusherMachineCircuitboard
       - TelecomServerCircuitboard
       - MassMediaCircuitboard
-      - MedicalScannerMachineCircuitboard #SS-220
-      - CloningPodMachineCircuitboard #SS-220
-      - CloningConsoleComputerCircuitboard #SS-220
 
   - type: MaterialStorage
     whitelist:
