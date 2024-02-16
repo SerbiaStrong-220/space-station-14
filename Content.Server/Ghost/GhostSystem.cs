@@ -118,7 +118,7 @@ namespace Content.Server.Ghost
             args.Handled = true;
         }
 
-        //SS-220
+        //SS-220 noDeath
         private void OnActionRespanw(EntityUid uid, GhostComponent component, RespawnActionEvent args)
         {
             if (!TryComp<ActorComponent>(uid, out var actor))
@@ -126,7 +126,7 @@ namespace Content.Server.Ghost
 
             _host.ExecuteCommand(actor.PlayerSession, "respawn");
         }
-        //SS-220 end
+        //SS-220 end noDeath
         private void OnRelayMoveInput(EntityUid uid, GhostOnMoveComponent component, ref MoveInputEvent args)
         {
             // If they haven't actually moved then ignore it.
