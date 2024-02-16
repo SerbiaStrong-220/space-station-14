@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared.Administration.Logs;
@@ -55,6 +55,15 @@ public sealed partial class AdminLogsControl : Control
 
         SetImpacts(Enum.GetValues<LogImpact>().OrderBy(impact => impact).ToArray());
         SetTypes(Enum.GetValues<LogType>());
+        //SS220 admin_logs_time_filter end
+        EarlyBorderEditHours.OnTextChanged += e => OnEarlyBorderHoursChange(e.Text);
+        EarlyBorderEditMinutes.OnTextChanged += e => OnEarlyBorderMinutesChange(e.Text);
+        EarlyBorderEditSeconds.OnTextChanged += e => OnEarlyBorderSecondsChange(e.Text);
+
+        LateBorderEditHours.OnTextChanged += e => OnLateBorderHoursChange(e.Text);
+        LateBorderEditMinutes.OnTextChanged += e => OnLateBorderMinutesChange(e.Text);
+        LateBorderEditSeconds.OnTextChanged += e => OnLateBorderSecondsChange(e.Text);
+        //SS220 admin_logs_time_filter end
     }
 
     private int CurrentRound { get; set; }
@@ -256,6 +265,8 @@ public sealed partial class AdminLogsControl : Control
         ShownLogs = 0;
         var logsText = "";
 
+        FormBordersDateTime(RecievedLogs); //SS220 admin_logs_time_filter
+
         // build logs string
         for (var i = RecievedLogs.Count - 1; i >= 0; i--)
         {
@@ -334,6 +345,13 @@ public sealed partial class AdminLogsControl : Control
         // Check search
         if (!log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
             return false;
+        //SS220 admin_logs_time_filter start
+        if (!CheckEarlyTimeFilter(log))
+            return false;
+
+        if (!CheckLateTimeFilter(log))
+            return false;
+        //SS220 admin_logs_time_filter end
 
         return true;
     }
@@ -557,4 +575,131 @@ public sealed partial class AdminLogsControl : Control
 
         ResetRoundButton.OnPressed -= ResetRoundPressed;
     }
+
+    //SS220 admin_logs_time_filter start
+
+    public event Action<string>? OnEarlyBorderHoursChanged;
+    public event Action<string>? OnEarlyBorderMinutesChanged;
+    public event Action<string>? OnEarlyBorderSecondsChanged;
+
+    public event Action<string>? OnLateBorderHoursChanged;
+    public event Action<string>? OnLateBorderMinutesChanged;
+    public event Action<string>? OnLateBorderSecondsChanged;
+
+    private DateTime _earlyBorder;
+    private DateTime _lateBorder;
+
+    public void OnEarlyBorderHoursChange(string text)
+    {
+        AdjustTextForTimer(EarlyBorderEditHours, text, true);
+        OnEarlyBorderHoursChanged?.Invoke(EarlyBorderEditHours.Text);
+    }
+    public void OnEarlyBorderMinutesChange(string text)
+    {
+        AdjustTextForTimer(EarlyBorderEditMinutes, text);
+        OnEarlyBorderMinutesChanged?.Invoke(EarlyBorderEditMinutes.Text);
+    }
+    public void OnEarlyBorderSecondsChange(string text)
+    {
+        AdjustTextForTimer(EarlyBorderEditSeconds, text);
+        OnEarlyBorderSecondsChanged?.Invoke(EarlyBorderEditSeconds.Text);
+    }
+    public void OnLateBorderHoursChange(string text)
+    {
+        AdjustTextForTimer(LateBorderEditHours, text, true);
+        OnLateBorderHoursChanged?.Invoke(LateBorderEditHours.Text);
+    }
+    public void OnLateBorderMinutesChange(string text)
+    {
+        AdjustTextForTimer(LateBorderEditMinutes, text);
+        OnLateBorderMinutesChanged?.Invoke(LateBorderEditMinutes.Text);
+    }
+    public void OnLateBorderSecondsChange(string text)
+    {
+        AdjustTextForTimer(LateBorderEditSeconds, text);
+        OnLateBorderSecondsChanged?.Invoke(LateBorderEditSeconds.Text);
+    }
+    public bool AdjustTextForTimer(LineEdit line, string text, bool isHour = false)
+    {
+        List<char> toRemove = new();
+
+        foreach (var a in text)
+        {
+            if (!char.IsDigit(a))
+                toRemove.Add(a);
+        }
+
+        foreach (var a in toRemove)
+        {
+            line.Text = text.Replace(a.ToString(), "");
+        }
+
+        if (line.Text == "")
+            return false;
+
+        while (line.Text[0] == '0' && line.Text.Length > 2)
+        {
+            line.Text = line.Text.Remove(0, 1);
+        }
+
+        if (line.Text.Length > 2)
+        {
+            line.Text = line.Text.Remove(2);
+        }
+
+        if (!int.TryParse(line.Text, out var timeInt))
+            return false;
+
+        if (isHour && timeInt > 23)
+            line.Text = "23";
+
+        if (!isHour && timeInt > 59)
+            line.Text = "59";
+
+        return true;
+    }
+    private bool CheckEarlyTimeFilter(SharedAdminLog log)
+    {
+        if (log.Date < _earlyBorder)
+            return false;
+
+        return true;
+    }
+    private bool CheckLateTimeFilter(SharedAdminLog log)
+    {
+        if (log.Date > _lateBorder)
+            return false;
+
+        return true;
+    }
+
+    private void FormBordersDateTime(List<SharedAdminLog> recievedLogs)
+    {
+        if (recievedLogs.Count == 0)
+            return;
+
+        if (!int.TryParse(EarlyBorderEditHours.Text, out var earlyHour))
+            earlyHour = 0;
+
+        if (!int.TryParse(EarlyBorderEditMinutes.Text, out var earlyMinute))
+            earlyMinute = 0;
+
+        if (!int.TryParse(EarlyBorderEditSeconds.Text, out var earlySecond))
+            earlySecond = 0;
+
+        if (!int.TryParse(LateBorderEditHours.Text, out var lateHour))
+            lateHour = 23;
+
+        if (!int.TryParse(LateBorderEditMinutes.Text, out var lateMinute))
+            lateMinute = 59;
+
+        if (!int.TryParse(LateBorderEditSeconds.Text, out var lateSecond))
+            lateSecond = 59;
+
+        _earlyBorder = new DateTime(recievedLogs[0].Date.Year, recievedLogs[0].Date.Month, recievedLogs[0].Date.Day, earlyHour, earlyMinute, earlySecond, 0, 0);
+
+        _lateBorder = new DateTime(recievedLogs[recievedLogs.Count - 1].Date.Year, recievedLogs[recievedLogs.Count - 1].Date.Month, recievedLogs[recievedLogs.Count - 1].Date.Day, lateHour, lateMinute, lateSecond, 999, 999);
+    }
+
+    //SS220 admin_logs_time_filter end
 }

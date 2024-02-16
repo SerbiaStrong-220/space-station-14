@@ -48,6 +48,7 @@
           collection: MetalBreak
   - type: StaticPrice
     price: 10
+  - type: AddSleepAction #SS220-chair-sleep
 
 - type: entity
   name: chair

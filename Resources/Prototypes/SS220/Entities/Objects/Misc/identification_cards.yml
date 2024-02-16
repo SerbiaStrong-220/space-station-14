@@ -1,7 +1,7 @@
 - type: entity
-  parent: AgentIDCard
+  parent: IDCardStandard
   id: UsspIDCard
-  suffix: СССП
+  suffix: Shitspawn, Ebent, FractWar
   name: ID карта СССП
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:

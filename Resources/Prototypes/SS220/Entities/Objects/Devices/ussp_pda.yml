@@ -3,7 +3,7 @@
   id: UsspPDA
   name: ПДА СССП
   description: Стандартный ПДА СССП.
-  suffix: СССП
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Pda
     id: UsspIDCard
@@ -30,7 +30,7 @@
   id: UsspMedicalPDA
   name: ПДА врача СССП
   description: Стандартный ПДА врача СССП. Имеет встроенный анализатор здоровья.
-  suffix: СССП
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Pda
     id: UsspIDCard

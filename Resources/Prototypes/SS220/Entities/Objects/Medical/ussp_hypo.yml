@@ -3,7 +3,7 @@
   parent: BaseItem
   description: С помощью реверс-инжиниринга технологии NT, СССП выпускает их в ограниченном количестве для нужд армии.
   id: UsspHypo
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     sprite: SS220/Objects/Medical/USSRhypo.rsi

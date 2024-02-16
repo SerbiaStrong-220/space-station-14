@@ -1,6 +1,6 @@
 - type: entity
   id: EventCaptureFlagBase
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   name: флаг фракции
   description: Флаг вашей фракции для захвата постаментов.
   abstract: true
@@ -49,7 +49,7 @@
 
 - type: entity
   id: EventCaptureFlagNT
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   name: флаг НаноТрейзен
   description: Флаг вашей фракции для захвата постаментов.
   parent: EventCaptureFlagBase
@@ -69,7 +69,7 @@
 
 - type: entity
   id: EventCaptureFlagSynd
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   name: флаг Синдиката
   description: Флаг вашей фракции для захвата постаментов.
   parent: EventCaptureFlagBase
@@ -89,7 +89,7 @@
 
 - type: entity
   id: EventCaptureFlagUssp
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   name: флаг СССП
   description: Флаг вашей фракции для захвата постаментов.
   parent: EventCaptureFlagBase

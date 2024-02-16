@@ -1,0 +1,65 @@
+- type: entity
+  parent: WallShuttleDiagonal
+  id: WallShuttleRedDiagonal
+  name: стена шаттла
+  suffix: Диагональ, Красный
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttle_red_diagonal.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttle_red_diagonal.rsi
+
+- type: entity
+  parent: WallShuttleDiagonal
+  id: WallShuttleBlueDiagonal
+  name: стена шаттла
+  suffix: Диагональ, Синий
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttle_blue_diagonal.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttle_blue_diagonal.rsi
+
+- type: entity
+  parent: WallShuttleDiagonal
+  id: WallShuttleDarkDiagonal
+  name: стена шаттла
+  suffix: Диагональ, Тёмный
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttle_dark_diagonal.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttle_dark_diagonal.rsi
+
+- type: entity
+  parent: WallShuttle
+  id: WallShuttleRed
+  name: стена шаттла
+  suffix: Красный
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttle_red.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttle_red.rsi
+
+- type: entity
+  parent: WallShuttle
+  id: WallShuttleBlue
+  name: стена шаттла
+  suffix: Синий
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttle_blue.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttle_blue.rsi
+
+- type: entity
+  parent: WallShuttle
+  id: WallShuttleDark
+  name: стена шаттла
+  suffix: Тёмный
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/shuttle_dark.rsi
+  - type: Icon
+    sprite: Structures/Walls/shuttle_dark.rsi

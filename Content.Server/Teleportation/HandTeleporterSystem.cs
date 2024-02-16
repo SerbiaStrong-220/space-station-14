@@ -6,6 +6,7 @@ using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Content.Server.Popups;
 
 namespace Content.Server.Teleportation;
 
@@ -18,6 +19,7 @@ public sealed class HandTeleporterSystem : EntitySystem
     [Dependency] private readonly LinkedEntitySystem _link = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -55,6 +57,18 @@ public sealed class HandTeleporterSystem : EntitySystem
             if (xform.ParentUid != xform.GridUid)
                 return;
 
+            //SS220 teleport_grid_resrtictions start
+            if (component.FirstPortalsGrid == null)
+                component.FirstPortalsGrid = xform.GridUid;
+            /*
+            if (component.FirstPortalsGrid != xform.GridUid)
+            {
+                HandlePortalUpdating(uid, component, args.User);
+                return;
+            }
+            */
+            //SS220 teleport_grid_resrtictions end
+
             var doafterArgs = new DoAfterArgs(EntityManager, args.User, component.PortalCreationDelay, new TeleporterDoAfterEvent(), uid, used: uid)
             {
                 BreakOnDamage = true,
@@ -90,6 +104,25 @@ public sealed class HandTeleporterSystem : EntitySystem
             _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(user):player} opened {ToPrettyString(component.FirstPortal.Value)} at {Transform(component.FirstPortal.Value).Coordinates} using {ToPrettyString(uid)}");
             _audio.PlayPvs(component.NewPortalSound, uid);
         }
+        //SS220 teleport_grid_resrtictions start
+        else if (component.FirstPortalsGrid != xform.GridUid)
+        {
+            // Logging
+            var portalStrings = "";
+            portalStrings += ToPrettyString(component.FirstPortal!.Value);
+            if (portalStrings != "")
+                _adminLogger.Add(LogType.EntityDelete, LogImpact.Low, $"{ToPrettyString(user):player} closed {portalStrings} with {ToPrettyString(uid)}, not the same grid");
+
+            // Clear first portal
+            QueueDel(component.FirstPortal!.Value);
+
+            _popupSystem.PopupEntity(Loc.GetString("hand-teleporter-component-not-the-same-grid-message"), uid, Shared.Popups.PopupType.Medium);
+
+            component.FirstPortalsGrid = null;
+            component.FirstPortal = null;
+            _audio.PlayPvs(component.ClearPortalsSound, uid);
+        }
+        //SS220 teleport_grid_resrtictions end
         else if (Deleted(component.SecondPortal))
         {
             var timeout = EnsureComp<PortalTimeoutComponent>(user);
@@ -113,6 +146,8 @@ public sealed class HandTeleporterSystem : EntitySystem
             // Clear both portals
             QueueDel(component.FirstPortal!.Value);
             QueueDel(component.SecondPortal!.Value);
+
+            component.FirstPortalsGrid = null;//SS220 teleport_grid_resrtictions
 
             component.FirstPortal = null;
             component.SecondPortal = null;

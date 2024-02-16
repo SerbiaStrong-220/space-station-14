@@ -1,4 +1,4 @@
-﻿<Control xmlns="https://spacestation14.io"
+<Control xmlns="https://spacestation14.io"
          xmlns:aui="clr-namespace:Content.Client.Administration.UI.CustomControls">
     <PanelContainer StyleClasses="BackgroundDark">
         <BoxContainer Orientation="Horizontal">
@@ -57,6 +57,43 @@
                     <Button Name="RefreshButton" Access="Public" Text="{Loc admin-logs-refresh}" StyleClasses="ButtonSquare"/>
                     <Button Name="NextButton" Access="Public" Text="{Loc admin-logs-next}" StyleClasses="OpenLeft"/>
                 </BoxContainer>
+                <BoxContainer Name="TimeFilterContainer" HorizontalExpand="True">
+                    <Collapsible Orientation="Vertical">
+                        <CollapsibleHeading Title="{Loc admin-logs-time-filter-title}"/>
+                        <CollapsibleBody>
+                            <BoxContainer Orientation="Horizontal">
+                                <BoxContainer Orientation="Vertical">
+                                    <Label Text="{Loc admin-logs-from}" />
+                                    <Label Text="{Loc admin-logs-to}" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <LineEdit Name="EarlyBorderEditHours" MinWidth="32" />
+                                    <LineEdit Name="LateBorderEditHours" MinWidth="32" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <Label Text=":" />
+                                    <Label Text=":" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <LineEdit Name="EarlyBorderEditMinutes" MinWidth="32" />
+                                    <LineEdit Name="LateBorderEditMinutes" MinWidth="32" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <Label Text=":" />
+                                    <Label Text=":" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <LineEdit Name="EarlyBorderEditSeconds" MinWidth="32" />
+                                    <LineEdit Name="LateBorderEditSeconds" MinWidth="32" />
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical">
+                                    <Label Name="SampleInfo" Text="{Loc admin-logs-sample-info}" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </CollapsibleBody>
+                    </Collapsible>
+                </BoxContainer>
+                <aui:VSeparator/>
                 <ScrollContainer Name="AdminLogsScrollContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
                     <TextEdit Name="AdminLogsTextEdit" Access="Public" VerticalExpand="True"/>
                 </ScrollContainer>

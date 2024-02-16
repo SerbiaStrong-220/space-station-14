@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Shiptest at https://github.com/shiptest-ss13/Shiptest/commit/0116c3dc37bece6ed865daf22bb7be4ac630d081, sprites in hand by PuroSlavKing (Github) and RudeyCoolLeet#3875",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Kit0vras (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32

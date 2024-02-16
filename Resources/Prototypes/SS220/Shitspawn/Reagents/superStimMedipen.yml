@@ -2,7 +2,7 @@
   name: секретный боевой медипен
   parent: ChemicalMedipen
   id: EbentMedipen
-  suffix: Ebent
+  suffix: Shitspawn
   description: Одноразовый медипен, содержащий химические вещества, восстанавливающие большинство видов повреждений.
   components:
   - type: Sprite

@@ -263,8 +263,11 @@
       "name": "blue-inhand-right",
       "directions": 4
     },
-	{
+    {
       "name": "ussp"
+    },
+	{
+      "name": "ussp_med"
     }
   ]
 }

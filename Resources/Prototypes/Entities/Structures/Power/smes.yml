@@ -29,15 +29,10 @@
           state: "smes-op1"
           shader: unshaded
     - type: Smes
-    - type: UpgradeBattery
-      maxChargeMultiplier: 2
-      baseMaxCharge: 8000000
-    - type: UpgradePowerSupplyRamping
-      scaling: Linear
-      supplyRampingMultiplier: 1
     - type: Appearance
     - type: Battery
       startingCharge: 0
+      maxCharge: 8000000
     - type: ExaminableBattery
     - type: NodeContainer
       examinable: true
@@ -99,6 +94,12 @@
     - type: WiredNetworkConnection
     - type: NameIdentifier #SS220 PowerId
       group: PowerId
+    - type: ActivatableUI #SS220 smes-ui-fix
+      key: enum.SmesUiKey.Key
+    - type: UserInterface #SS220 smes-ui-fix
+      interfaces:
+        - key: enum.SmesUiKey.Key
+          type: SmesBoundUserInterface
 
 # SMES' in use
 

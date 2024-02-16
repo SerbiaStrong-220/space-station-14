@@ -382,3 +382,9 @@
     sprite: Interface/Misc/job_icons.rsi
     state: IAA
 
+- type: statusIcon
+  parent: JobIcon
+  id: JobIconVisitor
+  icon:
+    sprite: Interface/Misc/job_icons.rsi
+    state: Visitor

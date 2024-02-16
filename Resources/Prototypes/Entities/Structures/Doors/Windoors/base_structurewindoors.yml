@@ -61,7 +61,7 @@
     - DoorStatus
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Glass
+    damageModifierSet: Glass # SS220 Fix Hand Broke Windoor
   - type: ExaminableDamage
     messages: WindowMessages
   - type: Destructible
@@ -165,6 +165,9 @@
     - state: panel_open
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: RGlass # SS220 Fix Hand Broke Windoor
   - type: Destructible
     thresholds:
     - trigger:
