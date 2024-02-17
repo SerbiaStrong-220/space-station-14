@@ -454,7 +454,6 @@
       - ArtifactCrusherMachineCircuitboard
       - TelecomServerCircuitboard
       - MassMediaCircuitboard
-
   - type: MaterialStorage
     whitelist:
       tags:
