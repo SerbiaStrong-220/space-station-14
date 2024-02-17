@@ -4,7 +4,6 @@
   id: BaseChemicalImplanter
   parent: BaseItem
   abstract: true
-  noSpawn: true
   components:
     - type: ItemSlots
     - type: ContainerContainer
