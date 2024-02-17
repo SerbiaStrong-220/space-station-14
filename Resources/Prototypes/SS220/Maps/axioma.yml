@@ -35,21 +35,24 @@
             Brigmedic: [ 1, 1 ]
             #Engineering
             ChiefEngineer: [ 1, 1 ]
-            StationEngineer: [ 10, 10 ]
+            StationEngineer: [ 8, 8 ]
             AtmosphericTechnician: [ 3, 3 ]
+            TechnicalAssistant: [ 3, 3 ]
             #Cargo
             Quartermaster: [ 1, 1 ]
             CargoTechnician: [ 6, 6 ]
             SalvageSpecialist: [ 3, 3 ]
             #Medical
             ChiefMedicalOfficer: [ 1, 1 ]
-            MedicalDoctor: [ 12, 12 ]
+            MedicalDoctor: [ 7, 7 ]
             Chemist: [ 2, 2 ]
             Psychologist: [ 1, 1 ]
+            MedicalIntern: [ 5, 5 ]
             Paramedic: [ 1, 1 ]
             #Science
             ResearchDirector: [ 1, 1 ]
-            Scientist: [ 10, 10 ]
+            Scientist: [ 8, 8 ]
+            ResearchAssistant: [ 3, 3 ]
             Borg: [ 2, 2 ]
             #Service
             Bartender: [ 2, 2 ]
@@ -62,6 +65,7 @@
             Librarian: [ 1, 1 ]
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
+            ServiceWorker: [ 2, 2 ]
             Lawyer: [ 2, 2 ]
 
 - type: entity
