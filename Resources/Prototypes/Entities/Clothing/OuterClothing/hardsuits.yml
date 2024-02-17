@@ -403,7 +403,7 @@
         Caustic: 0.2
         Stamina: 0.8
   - type: ExplosionResistance
-    damageCoefficient: 0
+    damageCoefficient: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
