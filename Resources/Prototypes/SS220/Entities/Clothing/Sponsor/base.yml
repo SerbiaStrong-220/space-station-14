@@ -163,3 +163,17 @@
           tags:
           - Knife
           - Sidearm
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorNeckBase
+  components:
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: true
+    slots:
+    - neck
+  - type: Sprite
+    state: icon

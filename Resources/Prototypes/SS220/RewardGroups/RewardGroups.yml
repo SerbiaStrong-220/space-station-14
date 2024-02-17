@@ -11,6 +11,8 @@
     ClothingSponsorDallas: 5
     SponsorBoxStorageCandy: 3
     ClothingSponsorStudentSuit: 5
+    ClothingSponsorNeckWreath: 3
+    ClothingSponsorWreath: 3
 
 - type: ShlepaRewardGroup
   id: BigShlopa
