@@ -136,6 +136,8 @@
   - type: Armor
     modifiers:
       coefficients:
+        Piercing: 0.95
+        Slash: 0.95
         Heat: 0.95
         Radiation: 0.65
   - type: BreathMask
