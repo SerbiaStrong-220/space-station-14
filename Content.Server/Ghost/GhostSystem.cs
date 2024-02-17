@@ -43,7 +43,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
-         [Dependency] private readonly IServerConsoleHost _host = default!;
+        [Dependency] private readonly IServerConsoleHost _host = default!;
 
         public override void Initialize()
         {
