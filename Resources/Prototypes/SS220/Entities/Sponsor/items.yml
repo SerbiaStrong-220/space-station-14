@@ -264,7 +264,7 @@
   parent: SponsorBoxBase
   id: SponsorBoxGoldClown
   name: золотой костюм клоуна # Золотой клуня, очевидно
-  description: Содержит в себе золотой костюм клоуна. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Содержит в себе золотой костюм клоуна. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: SpawnItemsOnUse
     items:
@@ -278,7 +278,7 @@
   parent: SponsorBoxBase
   id: SponsorBoxWaltuh
   name: костюм химика # Waltuh
-  description: Содержит в себе одежду сами знаете кого. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Содержит в себе одежду сами знаете кого. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: SpawnItemsOnUse
     items:
@@ -294,13 +294,14 @@
   parent: SponsorBoxBase
   id: SponsorBoxTyler
   name: костюм мыловара # Вы знаете, что смешав семя с апельсиновым соком, то вы будете выглядеть как еблан?
-  description: Первое правило клуба... Содержит в себе костюм и пачку сигарет. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Первое правило клуба... Содержит в себе костюм и пачку сигарет. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: SpawnItemsOnUse
     items:
     - id: ClothingSponsorTylerRedCoat
     - id: ClothingSponsorTylerRedGlasses
     - id: ClothingSponsorTylerUnder
+    - id: SponsorCigPack
     sound:
       path: /Audio/Effects/unwrap.ogg
 
@@ -308,7 +309,7 @@
   parent: SponsorBoxBase
   id: SponsorBoxMafia
   name: розовый костюм мафии
-  description: Содержит в себе розовый костюм мафии. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Содержит в себе розовый костюм мафии. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: SpawnItemsOnUse
     items:
@@ -322,7 +323,7 @@
   parent: SponsorBoxBase
   id: SponsorBoxBlackMafia
   name: чёрный костюм мафии
-  description: Содержит в себе чёрный костюм мафии. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Содержит в себе чёрный костюм мафии. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: SpawnItemsOnUse
     items:
@@ -336,7 +337,7 @@
   parent: SponsorBoxStorageBase
   id: SponsorBoxStorageCandy
   name: коробка конфет
-  description: Содержит в себе десяток конфет. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Содержит в себе десяток конфет. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: StorageFill
     contents:
@@ -347,7 +348,7 @@
   parent: SponsorBoxBase
   id: SponsorBoxMaid
   name: костюм горничной
-  description: Содержит в себе чёрный костюм горничной. Осторожно! Ваших рук не хватит для предметов в наборе!
+  description: Содержит в себе чёрный костюм горничной. Осторожно! Набор предметов не поместится в ваших руках!
   components:
   - type: SpawnItemsOnUse
     items:
