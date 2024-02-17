@@ -106,3 +106,10 @@
     - /Audio/SS220/Voice/Doctor/male_doctor_laugh_1.ogg
     - /Audio/SS220/Voice/Doctor/male_doctor_laugh_2.ogg
     - /Audio/SS220/Voice/Doctor/male_doctor_laugh_3.ogg
+
+- type: soundCollection
+  id: MaleBanditLaugh
+  files:
+    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_1.ogg
+    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_2.ogg
+    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_3.ogg
