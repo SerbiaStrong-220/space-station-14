@@ -10,9 +10,9 @@
     ClothingSponsorTylerRedGlasses: 5
     ClothingSponsorDallas: 5
     SponsorBoxStorageCandy: 3
-    ClothingSponsorStudentSuit: 5
     ClothingSponsorNeckWreath: 3
     ClothingSponsorWreath: 3
+    ClothingSponsorScarfTube: 3
 
 - type: ShlepaRewardGroup
   id: BigShlopa
@@ -23,6 +23,8 @@
     ClothingSponsorWhiteCoat: 5
     ClothingSponsorBlackCoat: 5
     SponsorBoxMaid: 8
+    ClothingSponsorStudentSuit: 5
+    ClothingSponsorStudentSuitBlack: 5
 
 - type: ShlepaRewardGroup
   id: HugeShlopa

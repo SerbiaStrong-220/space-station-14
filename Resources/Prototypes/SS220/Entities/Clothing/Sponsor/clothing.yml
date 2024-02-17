@@ -323,3 +323,16 @@
     sprite: SS220/Clothing/Sponsor/neck-wreath.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/neck-wreath.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorScarfTube
+  name: шарф трубой
+  description: Тепло внутри, холодно снаружи.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/scarf-tube.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/scarf-tube.rsi
+  - type: Item
+    storedRotation: -90
