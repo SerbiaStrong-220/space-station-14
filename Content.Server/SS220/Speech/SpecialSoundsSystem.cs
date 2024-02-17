@@ -13,38 +13,11 @@ public sealed class SpecialSoundsSystem : EntitySystem
     {
         base.Initialize();
 
-        //SubscribeLocalEvent<SpecialSoundsComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpecialSoundsComponent, GetVerbsEvent<Verb>>(OnVerb);
     }
-    /*
-    private void OnExamine(EntityUid uid, SpecialSoundsComponent component, ExaminedEvent args)
-    {
-        if (!args.IsInDetailsRange)
-            return;
-
-        string msg;
-        switch (component.Mode)
-        {
-            case SpecialSoundMode.SpecialSoundOff:
-                msg = "suit-sensor-examine-off";
-                break;
-            case SpecialSoundMode.SpecialSoundOn:
-                msg = "suit-sensor-examine-binary";
-                break;
-            default:
-                return;
-        }
-
-        args.PushMarkup(Loc.GetString(msg));
-    }
-    */
 
     private void OnVerb(EntityUid uid, SpecialSoundsComponent component, GetVerbsEvent<Verb> args)
     {
-        // check if user can change sensor
-        //if (component.ControlsLocked)
-        //    return;
-
         // standard interaction checks
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
