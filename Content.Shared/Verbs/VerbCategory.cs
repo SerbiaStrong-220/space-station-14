@@ -89,5 +89,9 @@ namespace Content.Shared.Verbs
 
         public static readonly VerbCategory DeattachCart = new("verb-categories-deattach-cart", null);
         //SS220-Cart-system end
+
+        //SS220-SpecialSound-system start
+        public static readonly VerbCategory SetSoundMode = new("verb-categories-special-sounds", null);
+        //SS220-SpecialSound-system  end
     }
 }
