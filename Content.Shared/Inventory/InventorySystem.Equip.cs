@@ -77,7 +77,7 @@ public abstract partial class InventorySystem
         // SS220 Chat-Special-Emote begin
         if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp) && (soundcomp.Mode == SpecialSoundMode.SpecialSoundOn))
         {
-            RaiseLocalEvent(uid, new HasSpecialSoundsEvent(args.Entity));
+            RaiseLocalEvent(uid, new InitSpecialSoundsEvent(args.Entity));
         }
         // SS220 Chat-Special-Emote end
     }

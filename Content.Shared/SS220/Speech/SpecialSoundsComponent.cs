@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Speech;
 public sealed partial class SpecialSoundsComponent : Component
 {
     [ByRefEvent]
-    public readonly record struct HasSpecialSoundsEvent();
+    public readonly record struct InitSpecialSoundsEvent();
 
     [ByRefEvent]
     public readonly record struct UnloadSpecialSoundsEvent();
@@ -22,11 +22,11 @@ public sealed partial class SpecialSoundsComponent : Component
     public SpecialSoundMode Mode = SpecialSoundMode.SpecialSoundOn;
 }
 
-public sealed class HasSpecialSoundsEvent : EntityEventArgs
+public sealed class InitSpecialSoundsEvent : EntityEventArgs
 {
     public EntityUid Item;
 
-    public HasSpecialSoundsEvent(EntityUid item)
+    public InitSpecialSoundsEvent(EntityUid item)
     {
         Item = item;
     }

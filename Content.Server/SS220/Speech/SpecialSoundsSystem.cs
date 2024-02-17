@@ -76,7 +76,7 @@ public sealed class SpecialSoundsSystem : EntitySystem
                     RaiseLocalEvent((EntityUid) userUid, new UnloadSpecialSoundsEvent(uid));
                     break;
                 case SpecialSoundMode.SpecialSoundOn:
-                    RaiseLocalEvent((EntityUid) userUid, new HasSpecialSoundsEvent(uid));
+                    RaiseLocalEvent((EntityUid) userUid, new InitSpecialSoundsEvent(uid));
                     break;
                 default:
                     return;

@@ -91,7 +91,7 @@ namespace Content.Shared.Verbs
         //SS220-Cart-system end
 
         //SS220-SpecialSound-system start
-        public static readonly VerbCategory SetSoundMode = new("verb-categories-special-sounds", "/Textures/SS220/Interface/VerbIcons/special_emote.png.png");
+        public static readonly VerbCategory SetSoundMode = new("verb-categories-special-sounds", "/Textures/SS220/Interface/VerbIcons/special_emote.svg.192dpi.png");
         //SS220-SpecialSound-system  end
     }
 }
