@@ -41,4 +41,10 @@
     Laugh:
       collection: MaleDoctorLaugh
 
-
+- type: emoteSounds
+  id: MaleBandit
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleBanditLaugh
