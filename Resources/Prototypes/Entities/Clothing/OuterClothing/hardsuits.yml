@@ -514,8 +514,8 @@
         Caustic: 0.5
         Stamina: 0.3
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 1
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndie
@@ -554,8 +554,8 @@
         Caustic: 0.5
         Stamina: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieMedic
 
@@ -588,8 +588,8 @@
         Caustic: 0.5
         Stamina: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieElite
@@ -628,8 +628,8 @@
         Caustic: 0.4
         Stamina: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommander
