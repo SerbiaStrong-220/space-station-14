@@ -62,7 +62,7 @@ public sealed class VocalSystem : EntitySystem
 
         // SS220 Chat-Special-Emote begin
         //Will play special emote if it exists
-        if(CheckSpecialSounds(uid, component, args.Emote))
+        if (CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
