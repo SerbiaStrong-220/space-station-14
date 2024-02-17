@@ -100,7 +100,7 @@
   parent: ClothingSponsorEyesBase
   id: ClothingSponsorWaltuhGlasses
   name: прозрачные авиаторы
-  description: Простые дешёвые очки с корректирующими линзами
+  description: Простые дешёвые очки с корректирующими линзами.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/waltuh/glasses.rsi
@@ -112,7 +112,7 @@
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorWaltuhInnerShirt
   name: бледная рубашка
-  description: Вы - самый обычный семьянин
+  description: Вы - самый обычный семьянин.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/waltuh/innershirt.rsi
@@ -159,7 +159,7 @@
   parent: ClothingSponsorMaskBase
   id: ClothingSponsorGoldClownMask
   name: золотая маска клоуна
-  description: Выглядит очень тяжелой
+  description: Выглядит очень тяжёлой.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/goldclown/goldclownmask.rsi
@@ -196,7 +196,7 @@
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorMafiaHat
   name: розовая шляпа
-  description: Я - Зубен...
+  description: Я - Мафиозник!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/mafia/hat.rsi
@@ -273,7 +273,7 @@
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorMaidHat
   name: гребень горничной
-  description: Самое мужское одеяние
+  description: Самое мужественное одеяние.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/maid/head.rsi
