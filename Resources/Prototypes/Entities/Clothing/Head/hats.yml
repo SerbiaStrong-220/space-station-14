@@ -802,6 +802,7 @@
   - type: Vocal
     sounds:
       Male: MaleBandit
+      Unsexed: MaleBandit
   #ss220 special_sounds end
 
 - type: entity
