@@ -1,0 +1,11 @@
+- type: entity
+  id: ActionRespawn
+  name: Возродиться
+  description: Возвращение в лобби. Вы обязаны выбрать другого персонажа и "забыть" все, что видели, согласно правилам сервера.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    icon: SS220/Interface/actions/respawn.png
+    checkCanInteract: false
+    event: !type:RespawnActionEvent
+    useDelay: 1200

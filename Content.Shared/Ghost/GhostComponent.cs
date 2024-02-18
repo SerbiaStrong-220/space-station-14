@@ -39,6 +39,13 @@ public sealed partial class GhostComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? BooActionEntity;
 
+    //SS-220 noDeath
+    [DataField]
+    public EntProtoId RespawnAction = "ActionRespawn";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? RespawnActionEntity;
+    //SS-220 end noDeath
     // End actions
 
     [ViewVariables(VVAccess.ReadWrite), DataField]
@@ -102,3 +109,5 @@ public sealed partial class ToggleLightingActionEvent : InstantActionEvent { }
 public sealed partial class ToggleGhostHearingActionEvent : InstantActionEvent { }
 
 public sealed partial class BooActionEvent : InstantActionEvent { }
+
+public sealed partial class RespawnActionEvent : InstantActionEvent { } //SS-220 noDeath

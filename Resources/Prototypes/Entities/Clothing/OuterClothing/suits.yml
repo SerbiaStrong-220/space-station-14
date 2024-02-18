@@ -109,8 +109,11 @@
   - type: Armor
     modifiers:
       coefficients:
-        Heat: 0.90
-        Radiation: 0.001
+        Blunt: 0.9 #ss-220 armReb
+        Heat: 0.9 #ss-220 armReb
+        Slash: 0.9  #ss-220 armReb
+        Piercing: 0.9 #ss-220 armReb
+        Radiation: 0.15 #ss-220 armReb
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine
@@ -120,7 +123,7 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
-      
+
 - type: entity
   parent: ClothingOuterBaseLarge
   id: ClothingOuterSuitSpaceNinja
