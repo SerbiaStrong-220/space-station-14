@@ -24,6 +24,14 @@
       collection: MaleEvilLaugh
 
 - type: emoteSounds
+  id: FemaleEvil
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleEvilLaugh
+
+- type: emoteSounds
   id: MaleScientist
   params:
     variation: 0.125
