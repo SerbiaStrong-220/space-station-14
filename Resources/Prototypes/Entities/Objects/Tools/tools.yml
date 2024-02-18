@@ -37,7 +37,7 @@
   - type: Item
     sprite: Objects/Tools/wirecutters.rsi
     storedRotation: -90
-  - type: ToolTileCompatible
+#  - type: ToolTileCompatible SS220-tools-tile-prying-fix
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
