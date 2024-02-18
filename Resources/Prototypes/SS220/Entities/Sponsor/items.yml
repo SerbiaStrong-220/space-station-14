@@ -173,7 +173,7 @@
   - type: ItemSlots
     slots:
       item:
-        name: clothing-military-boots-sidearm
+        name: Топорик
         whitelist:
           tags:
           - ElWyccoAxe
