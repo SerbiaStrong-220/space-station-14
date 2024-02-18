@@ -28,8 +28,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: SponsorCig
-      amount: 10
+    - id: SponsorCigPack
+      amount: 1
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/tyler/redcoat.rsi
   - type: Clothing
