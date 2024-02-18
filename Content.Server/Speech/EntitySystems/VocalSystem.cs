@@ -30,7 +30,7 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        SubscribeLocalEvent<VocalComponent, InitSpecialSoundsEvent>(InitSpecialSounds);// SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, HasSpecialSoundsEvent>(HasSpecialSounds);// SS220 Chat-Special-Emote
         SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);// SS220 Chat-Special-Emote
     }
 
@@ -62,7 +62,7 @@ public sealed class VocalSystem : EntitySystem
 
         // SS220 Chat-Special-Emote begin
         //Will play special emote if it exists
-        if (CheckSpecialSounds(uid, component, args.Emote))
+        if(CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
@@ -142,7 +142,7 @@ public sealed class VocalSystem : EntitySystem
 
         component.SpecialEmoteSounds.Add(itemUid, itemComponent.EmoteSounds);
     }
-    private void InitSpecialSounds(EntityUid uid, VocalComponent component, InitSpecialSoundsEvent args)
+    private void HasSpecialSounds(EntityUid uid, VocalComponent component, HasSpecialSoundsEvent args)
     {
         _entities.TryGetComponent<VocalComponent>(args.Item, out var itemComponent);
 
