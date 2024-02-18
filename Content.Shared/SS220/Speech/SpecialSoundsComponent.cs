@@ -2,11 +2,11 @@
 using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Speech;
 
-    /// <summary>
-    /// Marks, that this item has the VocalComponent
-    /// </summary>
+/// <summary>
+/// Marks, if this item has the VocalComponent
+/// </summary>
 
-    [RegisterComponent]
+[RegisterComponent]
 public sealed partial class SpecialSoundsComponent : Component
 {
     [ByRefEvent]
