@@ -159,7 +159,7 @@
   - type: MeleeWeapon
     wideAnimationRotation: 180
     soundHit:
-    path: /Audio/Items/Toys/weh.ogg
+      path: /Audio/Items/Toys/weh.ogg
     damage:
       types:
         Blunt: 0
