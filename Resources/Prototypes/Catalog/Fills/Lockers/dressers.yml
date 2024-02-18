@@ -73,6 +73,7 @@
       - id: ClothingHeadHatCapHoS # Corvax-SecFashion
       - id: ClothingOuterCoatHoSGreatcoat # Corvax-Resprite
       - id: ClothingMaskNeckGaiter
+      - id: ClothingHeadHatBeretHoS # SS220 NewHatForHoS
 
 - type: entity
   id: DresserQuarterMasterFilled
