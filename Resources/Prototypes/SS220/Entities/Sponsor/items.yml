@@ -170,6 +170,9 @@
     - state: axe
       map: ["axe"]
       sprite: SS220/Objects/Sponsor/elwycco.rsi
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
   - type: ItemSlots
     slots:
       item:
