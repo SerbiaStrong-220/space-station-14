@@ -797,6 +797,12 @@
     sprite: Clothing/Head/Hats/syndiecap.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/syndiecap.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleBandit
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadBase
