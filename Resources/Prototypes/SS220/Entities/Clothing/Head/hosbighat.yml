@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: ClothingHeadBase
   id: ClothingHeadBigCapHoS
-  name: Фуражка главы службы безопасности
+  name: фуражка главы службы безопасности
   description: Дайте капитану новую голубую фуражку, ведь старая почернела во время стирки.
   components:
     - type: Sprite
