@@ -48,3 +48,14 @@
   sounds:
     Laugh:
       collection: MaleBanditLaugh
+
+- type: emoteSounds
+  id: FemaleDoctor
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleWhitemaneLaugh
+    Giggle:
+      collection: FemaleWhitemaneGiggle
+

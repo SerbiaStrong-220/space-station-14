@@ -730,6 +730,7 @@
   - type: Vocal
     sounds:
       Male: MaleDoctor
+      Female: FemaleDoctor
       Unsexed: MaleDoctor
   #ss220 special_sounds end
 

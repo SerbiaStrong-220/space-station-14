@@ -113,3 +113,17 @@
     - /Audio/SS220/Voice/Bandit/male_bandit_laugh_1.ogg
     - /Audio/SS220/Voice/Bandit/male_bandit_laugh_2.ogg
     - /Audio/SS220/Voice/Bandit/male_bandit_laugh_3.ogg
+
+- type: soundCollection
+  id: FemaleWhitemaneLaugh
+  files:
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_1.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_2.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_3.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_4.ogg
+
+- type: soundCollection
+  id: FemaleWhitemaneGiggle
+  files:
+    - /Audio/SS220/Voice/Whitemane/whitemane_giggle_1.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_giggle_2.ogg
