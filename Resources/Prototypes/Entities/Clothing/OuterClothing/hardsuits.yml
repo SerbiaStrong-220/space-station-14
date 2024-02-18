@@ -658,7 +658,7 @@
   - type: TemperatureProtection #ss-220 armReb
     coefficient: 0.001  #ss-220 armReb
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.2  #ss-220 armReb
   - type: Armor
     modifiers:
       coefficients:
