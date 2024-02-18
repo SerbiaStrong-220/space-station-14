@@ -239,11 +239,13 @@ namespace Content.Server.Chat.Managers
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
 
+            //SS220-shlepi begin
             var SponsorInfo = player.ContentData()?.SponsorInfo;
             if (SponsorInfo is not null && SponsorInfo.Tiers.Any(x => x is not Shared.SS220.Discord.SponsorTier.None))
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#ffe77a"), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
+            //SS220-shlepi end
 
             // Corvax-Sponsors-Start
             if (_sponsorsManager.TryGetInfo(player.UserId, out var sponsorData) && sponsorData.OOCColor != null)
