@@ -15,14 +15,24 @@ builder.Host.ConfigureServices((_, service) =>
 			config.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 			config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 		});
+
+    service.AddSwaggerGen();
 });
 
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseEndpoints(config =>
+{
+    config.MapControllers();
+});
 
 app.Run();
