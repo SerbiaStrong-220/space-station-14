@@ -254,3 +254,8 @@ SyndiCrewMonitorEmpty: null
 # 2024-02-01
 YellowOxygenTank: OxygenTank
 YellowOxygenTankFilled: OxygenTankFilled
+
+#2024-02-16 ss-220 noDeath
+MedicalScannerMachineCircuitboard: null
+CloningPodMachineCircuitboard: null
+CloningConsoleComputerCircuitboard: null

@@ -1060,6 +1060,9 @@
   id: Soup
 
 - type: Tag
+  id: SpookyFog
+
+- type: Tag
   id: Spray
 
 - type: Tag

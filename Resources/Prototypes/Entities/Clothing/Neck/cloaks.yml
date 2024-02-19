@@ -63,6 +63,14 @@
     sprite: Clothing/Neck/Cloaks/rd.rsi
   - type: StealTarget
     stealGroup: HeadCloak
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleScientist
+      Unsexed: MaleScientist
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingNeckBase
@@ -188,6 +196,14 @@
       toggleable-clothing: !type:ContainerSlot {}
   - type: TypingIndicatorClothing
     proto: moth
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: UnisexMoth
+      Female: UnisexMoth
+      Unsexed: UnisexMoth
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingNeckBase

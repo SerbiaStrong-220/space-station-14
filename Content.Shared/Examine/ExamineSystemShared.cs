@@ -17,6 +17,7 @@ namespace Content.Shared.Examine
 {
     public abstract partial class ExamineSystemShared : EntitySystem
     {
+        [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
         [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
@@ -63,7 +64,7 @@ namespace Content.Shared.Examine
             if (MobStateSystem.IsIncapacitated(examiner))
                 return false;
 
-            if (!_interactionSystem.InRangeUnobstructed(examiner, entity, ExamineDetailsRange))
+            if (!InRangeUnOccluded(examiner, entity, ExamineDetailsRange))
                 return false;
 
             // Is the target hidden in a opaque locker or something? Currently this check allows players to examine
@@ -83,10 +84,10 @@ namespace Content.Shared.Examine
             if (IsClientSide(examined))
                 return true;
 
-            TryComp<ExaminerComponent>(examiner, out var examinerComp);
+            TryComp<ExaminerComponent>(examiner, out var examinerComp); // SS220 ghost-examine-previlege
 
-            return !Deleted(examined) && CanExamine(examiner, EntityManager.GetComponent<TransformComponent>(examined).MapPosition,
-                entity => entity == examiner || entity == examined, examined, examinerComp);
+            return !Deleted(examined) && CanExamine(examiner, _transform.GetMapCoordinates(examined),
+                entity => entity == examiner || entity == examined, examined, examinerComp); // SS220 ghost-examine-previlege
         }
 
         [Pure]
@@ -117,7 +118,7 @@ namespace Content.Shared.Examine
                 return false;
 
             return InRangeUnOccluded(
-                EntityManager.GetComponent<TransformComponent>(examiner).MapPosition,
+                _transform.GetMapCoordinates(examiner),
                 target,
                 GetExaminerRange(examiner),
                 predicate: predicate,

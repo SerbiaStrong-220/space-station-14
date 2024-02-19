@@ -130,6 +130,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
 
