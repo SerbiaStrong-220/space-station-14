@@ -7,6 +7,7 @@ using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -25,53 +26,52 @@ namespace Content.Server.Stunnable.Systems
         {
             base.Initialize();
 
-            SubscribeLocalEvent<BatteryComponent, ExaminedEvent>(OnExamined);
-            SubscribeLocalEvent<StunbatonComponent, SolutionChangedEvent>(OnSolutionChange);
+            SubscribeLocalEvent<StunbatonComponent, ExaminedEvent>(OnExamined);
+            SubscribeLocalEvent<StunbatonComponent, SolutionContainerChangedEvent>(OnSolutionChange);
             SubscribeLocalEvent<StunbatonComponent, GetHeavyDamageModifierEvent>(MeleeAttackRateEvent);
             SubscribeLocalEvent<StunbatonComponent, ItemToggleActivateAttemptEvent>(TryTurnOn);
-            SubscribeLocalEvent<StunbatonComponent, ItemToggleDoneEvent>(ToggleDone);
+            SubscribeLocalEvent<StunbatonComponent, ItemToggledEvent>(ToggleDone);
+            SubscribeLocalEvent<StunbatonComponent, ChargeChangedEvent>(OnChargeChanged);
         }
 
         // SS220-Stunbaton-rework begin
-        private void MeleeAttackRateEvent(EntityUid uid, StunbatonComponent component, ref GetHeavyDamageModifierEvent args)
+        private void MeleeAttackRateEvent(Entity<StunbatonComponent> entity, ref GetHeavyDamageModifierEvent args)
         {
             args.DamageModifier = 1;
 
-            if (!_itemToggle.IsActivated(uid) ||
-            !TryComp<BatteryComponent>(uid, out var battery) || !_battery.TryUseCharge(uid, component.EnergyPerUse, battery))
+            if (!_itemToggle.IsActivated(entity.Owner) ||
+            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, battery))
             {
                 return;
             }
+        }
         // SS220-Stunbaton-rework end
 
-            if (battery.CurrentCharge < component.EnergyPerUse)
-            {
-                _itemToggle.Toggle(uid, predicted: false);
-            }
-        }
-
-        private void OnExamined(EntityUid uid, BatteryComponent battery, ExaminedEvent args)
+        private void OnExamined(Entity<StunbatonComponent> entity, ref ExaminedEvent args)
         {
-            var onMsg = _itemToggle.IsActivated(uid)
+            var onMsg = _itemToggle.IsActivated(entity.Owner)
             ? Loc.GetString("comp-stunbaton-examined-on")
             : Loc.GetString("comp-stunbaton-examined-off");
             args.PushMarkup(onMsg);
 
-            var chargeMessage = Loc.GetString("stunbaton-component-on-examine-charge",
-                ("charge", (int) (battery.CurrentCharge / battery.MaxCharge * 100)));
-            args.PushMarkup(chargeMessage);
+            if (TryComp<BatteryComponent>(entity.Owner, out var battery))
+            {
+                var count = (int) (battery.CurrentCharge / entity.Comp.EnergyPerUse);
+                args.PushMarkup(Loc.GetString("melee-battery-examine", ("color", "yellow"), ("count", count)));
+            }
         }
 
-        private void ToggleDone(EntityUid uid, StunbatonComponent comp, ref ItemToggleDoneEvent args)
+        private void ToggleDone(Entity<StunbatonComponent> entity, ref ItemToggledEvent args)
         {
-            if (!TryComp<ItemComponent>(uid, out var item))
+            if (!TryComp<ItemComponent>(entity, out var item))
                 return;
-            _item.SetHeldPrefix(uid, args.Activated ? "on" : "off", item);
+
+            _item.SetHeldPrefix(entity.Owner, args.Activated ? "on" : "off", component: item);
         }
 
-        private void TryTurnOn(EntityUid uid, StunbatonComponent comp, ref ItemToggleActivateAttemptEvent args)
+        private void TryTurnOn(Entity<StunbatonComponent> entity, ref ItemToggleActivateAttemptEvent args)
         {
-            if (!TryComp<BatteryComponent>(uid, out var battery) || battery.CurrentCharge < comp.EnergyPerUse)
+            if (!TryComp<BatteryComponent>(entity, out var battery) || battery.CurrentCharge < entity.Comp.EnergyPerUse)
             {
                 args.Cancelled = true;
                 if (args.User != null)
@@ -81,22 +81,22 @@ namespace Content.Server.Stunnable.Systems
                 return;
             }
 
-            if (TryComp<RiggableComponent>(uid, out var rig) && rig.IsRigged)
+            if (TryComp<RiggableComponent>(entity, out var rig) && rig.IsRigged)
             {
-                _riggableSystem.Explode(uid, battery, args.User);
+                _riggableSystem.Explode(entity.Owner, battery, args.User);
             }
         }
 
         // https://github.com/space-wizards/space-station-14/pull/17288#discussion_r1241213341
-        private void OnSolutionChange(EntityUid uid, StunbatonComponent component, SolutionChangedEvent args)
+        private void OnSolutionChange(Entity<StunbatonComponent> entity, ref SolutionContainerChangedEvent args)
         {
             // Explode if baton is activated and rigged.
-            if (!TryComp<RiggableComponent>(uid, out var riggable) ||
-                !TryComp<BatteryComponent>(uid, out var battery))
+            if (!TryComp<RiggableComponent>(entity, out var riggable) ||
+                !TryComp<BatteryComponent>(entity, out var battery))
                 return;
 
-            if (_itemToggle.IsActivated(uid) && riggable.IsRigged)
-                _riggableSystem.Explode(uid, battery);
+            if (_itemToggle.IsActivated(entity.Owner) && riggable.IsRigged)
+                _riggableSystem.Explode(entity.Owner, battery);
         }
 
         private void SendPowerPulse(EntityUid target, EntityUid? user, EntityUid used)
@@ -106,6 +106,15 @@ namespace Content.Server.Stunnable.Systems
                 Used = used,
                 User = user
             });
+        }
+
+        private void OnChargeChanged(Entity<StunbatonComponent> entity, ref ChargeChangedEvent args)
+        {
+            if (TryComp<BatteryComponent>(entity.Owner, out var battery) &&
+                battery.CurrentCharge < entity.Comp.EnergyPerUse)
+            {
+                _itemToggle.TryDeactivate(entity.Owner, predicted: false);
+            }
         }
     }
 }

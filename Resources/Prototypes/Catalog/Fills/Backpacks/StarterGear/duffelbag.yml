@@ -40,7 +40,6 @@
     contents:
       - id: BoxSurvivalSecurity
       - id: Flash
-      - id: Flash
       - id: ForensicPad
       - id: ForensicScanner
       - id: FlashlightSeclite

@@ -1,7 +1,7 @@
 {
 	"version":1,
-	"license":"CC-BY-SA-3.0",
-	"copyright":"Taken from https://github.com/discordia-space/CEV-Eris/blob/d1e0161af146835f4fb79d21a6200caa9cc842d0/icons/obj/power.dmi and modified.",
+	"license":"EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+	"copyright":"Made by Kit0vras (Github) for SS220",
 	"size":{"x":32,"y":32},
 	"states":
 	[

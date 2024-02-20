@@ -11,12 +11,12 @@
 - Тесто = 15 муки, 10 воды
 - Кукурузное тесто = 1 яйцо (6 ед.), 10 молока, 15 кукурузной муки
 - Tortila Dough = 15 Cornmeal, 10 Water
-- Тофу = 5 универсального фермента, 30 соевого молока
+- Тофу = 5 универсального фермента (Catalyst), 30 соевого молока
 - Тесто для пирога = 2 яйца (12 ед.), 15 муки, 5 столовой соли
 - Тесто для торта = 2 яйца(12 ед.), 15 муки, 5 сахара
 - Веганское тесто для торта = 15 соевого молока, 15 муки, 5 сахара
-- Масло = 30 молока, 5 столовой соли
-- Головка сыра = 5 универсального фермента, 40 молока
+- Масло = 30 молока, 5 столовой соли (Catalyst)
+- Головка сыра = 5 универсального фермента (Catalyst), 40 молока
 - Chèvre Log = 5 Enzyme (Catalyst), 10 Goat Milk
 - Фрикаделька = 1 яйцо (6 ед.), 5 муки, 5 непрожаренные животные протеины
 - Chocolate = 6 Cocoa Powder, 2 Milk, 2 Sugar
@@ -61,6 +61,10 @@
 - Торт: 1 тесто для торта в микроволновку на 15 секунд
 - Яблочный пирог: 1 тесто для пирога, 3 яблока и 1 формочку для пирога на 15 секунд
 - Beef Taco: Microwave 1 Taco Shell, 1 Raw Meat Cutlet, 1 Cheese Wedge for 10 Seconds
+- Cuban Carp : Microwave 1 Dough, 1 Cheese Wedge, 1 Chili, 1 Carp Meat for 15 Seconds
+- Banana Cream Pie : Microwave 1 Pie Dough, 3 Bananas, and 1 Pie Tin for 15 Seconds
+- Carrot Fries : Microwave 1 Carrot, 15u Salt for 15 Seconds
+- Pancake : Microwave 5u Flour, 5u Milk, 1 Egg (6u) for 5 Seconds
 
 <Box>
 <GuideEntityEmbed Entity="FoodBreadPlain"/>
@@ -73,6 +77,12 @@
 <GuideEntityEmbed Entity="FoodCakePlain"/>
 <GuideEntityEmbed Entity="FoodPieApple"/>
 <GuideEntityEmbed Entity="FoodTacoBeef"/>
+</Box>
+<Box>
+<GuideEntityEmbed Entity="FoodMealCubancarp"/>
+<GuideEntityEmbed Entity="FoodPieBananaCream"/>
+<GuideEntityEmbed Entity="FoodMealFriesCarrot"/>
+<GuideEntityEmbed Entity="FoodBakedPancake"/>
 </Box>
 
 </Document>

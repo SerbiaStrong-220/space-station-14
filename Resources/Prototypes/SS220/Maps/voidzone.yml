@@ -1,0 +1,26 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: gameMap
+  id: VoidZone
+  mapName: 'NN-271XX Зона пустоты'
+  mapPath: /Maps/EventMaps/voidzone.yml
+  minPlayers: 0
+  stations:
+    VoidZone:
+      stationProto: StandardVoidZoneStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'NN-271XX Зона пустоты'
+
+- type: entity
+  id: StandardVoidZoneStation
+  parent:
+    - BaseStation
+    - BaseStationCargo
+    - BaseStationJobsSpawning
+    - BaseStationRecords
+    - BaseStationAlertLevels
+    - BaseStationSiliconLawCrewsimov
+    - BaseStationNanotrasen
+  noSpawn: true
+  components:
+    - type: Transform

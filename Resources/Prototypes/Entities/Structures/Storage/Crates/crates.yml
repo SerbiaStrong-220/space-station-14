@@ -60,6 +60,8 @@
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
   - type: AntiRottingContainer
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
 
 - type: entity
   parent: CratePlastic
@@ -130,7 +132,7 @@
 #SS220 Crate-tg-resprite end
 
 - type: entity
-  parent: CratePlastic
+  parent: CrateGenericSteel
   id: CrateElectrical
   name: electrical crate
   components:
@@ -208,7 +210,7 @@
         acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWebSilk:
@@ -375,7 +377,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroyHeavy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWoodPlank1:
@@ -426,7 +428,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: MetalGlassBreak
       - !type:SpawnEntitiesBehavior
         spawn:
           SheetPlastic:
@@ -523,7 +525,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWoodPlank1:
@@ -558,11 +560,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 15
+        damage: 200 # discourage just beating the grave to break it open
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWoodPlank1:
@@ -572,6 +574,15 @@
         acts: [ "Destruction" ]
   - type: Physics
     bodyType: Static
+  - type: Grave
+  - type: ProRottingContainer
+  - type: EntityStorage
+    airtight: true
+    isCollidableWhenOpen: false
+    closeSound:
+      path: /Audio/Items/shovel_dig.ogg
+    openSound:
+      path: /Audio/Items/shovel_dig.ogg
 
 - type: entity
   parent: CrateWoodenGrave
@@ -593,6 +604,8 @@
 - type: entity
   parent: CrateGenericSteel
   id: CrateSyndicate
+  name: Syndicate crate
+  description: A dark steel crate with red bands and a letter S embossed on the front.
   components:
   - type: Icon
     sprite: Structures/Storage/Crates/syndicate.rsi
@@ -640,7 +653,7 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
     - state: locked
-      map: ["enum.StorageVisualLayers.Lock"]
+      map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
 #SS220 Crate-tg-resprite end
   - type: AccessReader

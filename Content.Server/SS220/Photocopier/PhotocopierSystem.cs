@@ -5,7 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Shared.SS220.Photocopier;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
-using Content.Server.UserInterface;
+using Content.Shared.UserInterface;
 using Content.Server.Power.Components;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;

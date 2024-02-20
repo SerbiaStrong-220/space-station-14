@@ -16,4 +16,10 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<bool> MigrationAlignDoors =
         CVarDef.Create("map_migration.align_doors", false, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Boosty link, used by Slepavend UI
+    /// </summary>
+    public static readonly CVarDef<string> InfoLinksBoosty =
+        CVarDef.Create("infolinks.boosty", "", CVar.SERVER | CVar.REPLICATED);
 }

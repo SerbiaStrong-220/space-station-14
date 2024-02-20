@@ -1,0 +1,12 @@
+- type: entity
+  name: спавнер Рокси
+  id: SpawnMobSecDogRoxi
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+      - MobSecDogRoxi

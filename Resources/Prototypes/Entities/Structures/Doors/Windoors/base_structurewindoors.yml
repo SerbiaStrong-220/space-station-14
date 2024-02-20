@@ -8,8 +8,7 @@
   - type: MeleeSound
     soundGroups:
       Brute:
-        path:
-          "/Audio/Effects/glass_hit.ogg"
+        collection: GlassSmash
   - type: InteractionOutline
   - type: Physics
   - type: Fixtures
@@ -60,9 +59,11 @@
   - type: DeviceLinkSource
     ports:
     - DoorStatus
+    lastSignals:
+      DoorStatus: false
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Glass
+    damageModifierSet: Glass # SS220 Fix Hand Broke Windoor
   - type: ExaminableDamage
     messages: WindowMessages
   - type: Destructible
@@ -112,6 +113,7 @@
     openUnlitVisible: true
     # needed so that windoors will close regardless of whether there are people in it; it doesn't crush after all
     safety: false
+  - type: NavMapDoor
   - type: DoorBolt
   - type: Electrified
     enabled: false
@@ -165,6 +167,9 @@
     - state: panel_open
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: RGlass # SS220 Fix Hand Broke Windoor
   - type: Destructible
     thresholds:
     - trigger:
@@ -190,3 +195,5 @@
   - type: Construction
     graph: Windoor
     node: windoorSecure
+  - type: StaticPrice
+    price: 200

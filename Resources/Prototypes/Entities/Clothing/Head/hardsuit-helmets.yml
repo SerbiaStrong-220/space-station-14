@@ -110,6 +110,30 @@
     energy: 3
 
 - type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ClothingHeadHelmetHardsuitMaxim
+  noSpawn: true
+  name: salvager maxim helmet
+  description: A predication of decay washes over your mind.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/maxim.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/maxim.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+
+#Security Hardsuit
+- type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitSecurity
   name: security hardsuit helmet
@@ -280,6 +304,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.60
     lowPressureMultiplier: 1000
+  - type: ExplosionResistance #ss-220 armReb
+    damageCoefficient: 0  #ss-220 armReb
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -393,6 +419,7 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
 
+
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitSyndieCommander
@@ -417,6 +444,7 @@
         Piercing: 0.6
         Heat: 0.8
         Radiation: 0.5
+
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -444,6 +472,7 @@
         Piercing: 0.8
         Heat: 0.8 #ss220-helmetFix
         Radiation: 0.5
+
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -664,6 +693,19 @@
         Blunt: 0.95
         Slash: 0.95
         Piercing: 0.95
+
+#Mime Hardsuit
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSecurity
+  id: ClothingHeadHelmetHardsuitMime
+  name: mime hardsuit helmet
+  description: A mime hardsuit helmet.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/mime.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/mime.rsi
 
 #Santas Hardsuit
 - type: entity

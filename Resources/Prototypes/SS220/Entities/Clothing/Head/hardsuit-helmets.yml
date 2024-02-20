@@ -23,11 +23,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Radiation: 0.5
-        Stamina: 0.3
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+        Heat: 1
+        Radiation: 1
+        Caustic: 1
+        Stamina: 1
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -52,11 +54,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Radiation: 0.5
-        Stamina: 0.3
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+        Heat: 1
+        Radiation: 1
+        Caustic: 1
+        Stamina: 1
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -81,12 +85,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Heat: 0.8
-        Radiation: 0.5
-        Stamina: 0.3
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+        Heat: 1
+        Radiation: 1
+        Caustic: 1
+        Stamina: 1
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -111,12 +116,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Heat: 0.8
-        Radiation: 0.5
-        Stamina: 0.3
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+        Heat: 1
+        Radiation: 1
+        Caustic: 1
+        Stamina: 1
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -141,10 +147,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Heat: 0.8
-        Radiation: 0.4
-        Caustic: 0.5
-        Stamina: 0.3
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+        Heat: 1
+        Radiation: 1
+        Caustic: 1
+        Stamina: 1

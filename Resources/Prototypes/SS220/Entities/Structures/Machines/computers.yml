@@ -3,7 +3,7 @@
   id: UsspComputerComms
   name: консоль связи СССП
   description: Для трансляции коммунизма во все уголки звёздной системы.
-  suffix: СССП
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     layers:

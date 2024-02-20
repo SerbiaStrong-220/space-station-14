@@ -1,14 +1,21 @@
+using System.IO;
+using System.Threading.Tasks;
 using Content.Shared.Fax;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
 
 namespace Content.Client.Fax.UI;
 
 [UsedImplicitly]
 public sealed class FaxBoundUi : BoundUserInterface
 {
+    [Dependency] private readonly IFileDialogManager _fileDialogManager = default!;
+
     [ViewVariables]
     private FaxWindow? _window;
+
+    private bool _dialogIsOpen = false;
 
     public FaxBoundUi(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {

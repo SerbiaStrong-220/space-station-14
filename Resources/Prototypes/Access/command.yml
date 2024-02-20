@@ -9,7 +9,7 @@
 - type: accessLevel
   id: HeadOfPersonnel
   name: id-card-access-level-head-of-personnel
-  
+
 - type: accessLevel
   id: Blueshield
   name: id-card-access-level-blueshield
@@ -21,6 +21,11 @@
   - Captain
   - HeadOfPersonnel
   - Blueshield
+  - Cryogenics
 
 - type: accessLevel
   id: EmergencyShuttleRepealAll
+
+- type: accessLevel
+  id: Cryogenics
+  name: id-card-access-level-cryogenics

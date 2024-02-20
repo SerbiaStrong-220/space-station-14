@@ -3,7 +3,7 @@
   id: ClothingOuterCoatUssp
   name: пальто НКВД
   description: Качественное и дорогое пальто. Защитит от самых суровых морозов в самых дальних уголках Сибири.
-  suffix: Ebent
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi

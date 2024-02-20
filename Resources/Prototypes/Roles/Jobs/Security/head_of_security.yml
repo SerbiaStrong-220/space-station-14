@@ -39,8 +39,8 @@
     back: ClothingBackpackHOSFilled
     shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterCoatHoSTrench
-    eyes: ClothingEyesGlassesSunglasses
-    head: ClothingHeadHatBeretHoS
+    eyes: ClothingEyesGlassesSecurity #ss-220-GlassesSecurity
+    head: ClothingHeadBigCapHoS # SS220 NewHatForHoS
     id: HoSPDA
     gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity

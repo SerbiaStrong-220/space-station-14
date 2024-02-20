@@ -45,9 +45,10 @@
         acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/metalbreak.ogg
+          collection: MetalBreak
   - type: StaticPrice
     price: 10
+  - type: AddSleepAction #SS220-chair-sleep
 
 - type: entity
   name: chair
@@ -82,6 +83,7 @@
   description: Apply butt.
   components:
   - type: Anchorable
+  - type: Rotatable
   - type: Sprite
     state: stool
   - type: Construction
@@ -111,6 +113,7 @@
   id: ChairOfficeLight
   parent: SeatBase
   components:
+  - type: Anchorable
   - type: Rotatable
     rotateWhileAnchored: true
   - type: Sprite
@@ -193,7 +196,7 @@
         acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWoodPlank:
@@ -208,11 +211,9 @@
 - type: entity
   name: ritual chair
   id: ChairRitual
-  parent: SeatBase
+  parent: ChairWood
   description: Looks uncomfortable.
   components:
-  - type: Anchorable
-  - type: Rotatable
   - type: Sprite
     state: ritual
   - type: Construction
@@ -225,7 +226,6 @@
   name: meat chair
   description: Uncomfortably sweaty.
   components:
-  - type: Anchorable
   - type: Rotatable
   - type: Sprite
     state: meat
@@ -236,11 +236,9 @@
 - type: entity
   name: cursed chair
   id: ChairCursed
-  parent: SeatBase
+  parent: ChairWood
   description: It's staring back.
   components:
-  - type: Anchorable
-  - type: Rotatable
   - type: Sprite
     state: cursed
   - type: Strap
@@ -257,6 +255,11 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Voice/Human/womanlaugh.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 1
     graph: RitualSeat
     node: chairCursed
 
@@ -270,7 +273,6 @@
     anchored: true
   - type: Physics
     bodyType: Static
-  - type: Anchorable
   - type: Rotatable
   - type: Sprite
     sprite: Structures/Web/chair.rsi
@@ -292,7 +294,7 @@
         acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWebSilk:
@@ -352,4 +354,7 @@
   - type: Rotatable
   - type: Sprite
     state: steel-bench
+  - type: Construction
+    graph: Seat
+    node: chairSteelBench
 

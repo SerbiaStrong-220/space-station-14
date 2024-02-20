@@ -1,0 +1,20 @@
+- type: latheRecipe
+  id: Thermoelectricgenerator
+  result: Thermoelectricgenerator
+  category: Circuitry
+  completetime: 6
+  materials:
+     Steel: 100
+     Glass: 900
+     Silver: 100
+
+- type: latheRecipe
+  id: ThermoelectricgeneratorTurbine
+  result: ThermoelectricgeneratorTurbine
+  category: Circuitry
+  completetime: 6
+  materials:
+     Steel: 100
+     Glass: 900
+     Silver: 100
+     Gold: 100    

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Antag;
 using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -11,11 +12,14 @@ namespace Content.Shared.SS220.AdmemeEvents;
 /// Используется чтобы ивентовые рольки видели друг-друга.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class EventRoleComponent : Component
+public sealed partial class EventRoleComponent : Component, IAntagStatusIconComponent
 {
     [DataField(required: true), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public ProtoId<StatusIconPrototype> StatusIcon;
+    public ProtoId<StatusIconPrototype> StatusIcon { get; set; }
 
     [DataField(required: true), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public string RoleGroupKey;
+
+    [DataField]
+    public bool IconVisibleToGhost { get; set; } = true;
 }

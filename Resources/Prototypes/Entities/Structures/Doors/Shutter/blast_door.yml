@@ -27,13 +27,16 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StrongMetallic
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
   - type: Construction
-    graph: BlastDoorG
-    node: Blastdoor
+    graph: BlastDoor
+    node: blastdoor
     containers:
     - board
   - type: StaticPrice
-    price: 250
+    price: 280
 
 - type: entity
   id: BlastDoorOpen
@@ -54,8 +57,8 @@
 - type: entity
   id: BlastDoorFrame
   parent: BaseStructureDynamic
-  name: каркас гермозатвора
-  description: Имеется надпись "ОПАСНОСТЬ ВЗРЫВА".
+  name: blast door frame
+  description: This one says 'BLAST DONGER'.
   components:
   - type: Sprite
     sprite: Structures/Doors/Shutters/blastdoor.rsi
@@ -68,12 +71,12 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 300
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -89,7 +92,7 @@
   - type: Transform
     noRot: true
   - type: Construction
-    graph: BlastDoorG
+    graph: BlastDoor
     node: frame1
-    containers:
-    - board
+  placement:
+    mode: SnapgridCenter

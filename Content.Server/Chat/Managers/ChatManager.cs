@@ -7,6 +7,7 @@ using Content.Server.Administration.Systems;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.MoMMI;
 using Content.Server.Preferences.Managers;
+using Content.Shared.Players;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -19,6 +20,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.SS220.Discord;
 
 namespace Content.Server.Chat.Managers
 {
@@ -34,6 +36,17 @@ namespace Content.Server.Chat.Managers
             { "syndicate_agent", "#aa00ff" },
             { "revolutionary", "#aa00ff" }
         };
+
+        // ss220 sponsor-chat-colors start
+        private static readonly Dictionary<SponsorTier, string> BoostyOocColors = new()
+        {
+            { SponsorTier.Shlopa, "#1f8b4c" },
+            { SponsorTier.BigShlopa, "#d877cf" },
+            { SponsorTier.HugeShlopa, "#ad1457" },
+            { SponsorTier.GoldenShlopa, "#ffd700" },
+            { SponsorTier.CriticalMassShlopa, "#74e7cd" }
+        };
+        // ss220 sponsor-chat-colors end
 
         [Dependency] private readonly IReplayRecordingManager _replay = default!;
         [Dependency] private readonly IServerNetManager _netManager = default!;
@@ -121,7 +134,7 @@ namespace Content.Server.Chat.Managers
         public void DispatchServerMessage(ICommonSession player, string message, bool suppressLog = false)
         {
             var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message)));
-            ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, player.ConnectedClient);
+            ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, player.Channel);
 
             if (!suppressLog)
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server message to {player:Player}: {message}");
@@ -129,7 +142,7 @@ namespace Content.Server.Chat.Managers
 
         public void SendAdminAnnouncement(string message)
         {
-            var clients = _adminManager.ActiveAdmins.Select(p => p.ConnectedClient);
+            var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
 
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
                 ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
@@ -140,7 +153,7 @@ namespace Content.Server.Chat.Managers
 
         public void SendAdminAlert(string message)
         {
-            var clients = _adminManager.ActiveAdmins.Select(p => p.ConnectedClient);
+            var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
 
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
                 ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
@@ -232,11 +245,25 @@ namespace Content.Server.Chat.Managers
                 var prefs = _preferencesManager.GetPreferences(player.UserId);
                 colorOverride = prefs.AdminOOCColor;
             }
-            if (player.ConnectedClient.UserData.PatronTier is { } patron &&
+            if (player.Channel.UserData.PatronTier is { } patron &&
                      PatronOocColors.TryGetValue(patron, out var patronColor))
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
+
+            //SS220-shlepi begin
+            var SponsorInfo = player.ContentData()?.SponsorInfo;
+            if (SponsorInfo is not null && !_adminManager.HasAdminFlag(player, AdminFlags.Admin) && SponsorInfo.Tiers.Any(x => x is not Shared.SS220.Discord.SponsorTier.None))
+            {
+                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", BoostyOocColors[SponsorInfo.Tiers.Last()]), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                switch (SponsorInfo.Tiers.Last()) // Add your own unique tiers using switch-case construction. CriticalMassShlopa as example.
+                {
+                    case SponsorTier.CriticalMassShlopa:
+                        wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", BoostyOocColors[SponsorInfo.Tiers.Last()]), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                        break;
+                }
+            }
+            //SS220-shlepi end
 
             // Corvax-Sponsors-Start
             if (_sponsorsManager.TryGetInfo(player.UserId, out var sponsorData) && sponsorData.OOCColor != null)
@@ -259,14 +286,14 @@ namespace Content.Server.Chat.Managers
                 return;
             }
 
-            var clients = _adminManager.ActiveAdmins.Select(p => p.ConnectedClient);
+            var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                             ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
             foreach (var client in clients)
             {
-                var isSource = client != player.ConnectedClient;
+                var isSource = client != player.Channel;
                 ChatMessageToOne(ChatChannel.AdminChat,
                     message,
                     wrappedMessage,
@@ -335,7 +362,7 @@ namespace Content.Server.Chat.Managers
             var clients = new List<INetChannel>();
             foreach (var recipient in filter.Recipients)
             {
-                clients.Add(recipient.ConnectedClient);
+                clients.Add(recipient.Channel);
             }
 
             ChatMessageToMany(channel, message, wrappedMessage, source, hideChat, recordReplay, clients, colorOverride, audioPath, audioVolume);

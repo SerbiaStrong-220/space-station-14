@@ -34,7 +34,7 @@ public sealed partial class AccessReaderComponent : Component
     public List<HashSet<string>> AccessLists = new();
 
     /// <summary>
-    /// A list of <see cref="StationRecordKey"/>s that grant access. Only a single matching key is required tp gaim
+    /// A list of <see cref="StationRecordKey"/>s that grant access. Only a single matching key is required to gain
     /// access.
     /// </summary>
     [DataField]
@@ -63,10 +63,25 @@ public sealed partial class AccessReaderComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public int AccessLogLimit = 20;
+
+    /// <summary>
+    /// Whether or not emag interactions have an effect on this.
+    /// </summary>
+    [DataField]
+    public bool BreakOnEmag = true;
 }
 
-[Serializable, NetSerializable]
-public record struct AccessRecord(TimeSpan AccessTime, string Accessor);
+[DataDefinition, Serializable, NetSerializable]
+public readonly partial record struct AccessRecord(
+    [property: DataField, ViewVariables(VVAccess.ReadWrite)]
+    TimeSpan AccessTime,
+    [property: DataField, ViewVariables(VVAccess.ReadWrite)]
+    string Accessor)
+{
+    public AccessRecord() : this(TimeSpan.Zero, string.Empty)
+    {
+    }
+}
 
 [Serializable, NetSerializable]
 public sealed class AccessReaderComponentState : ComponentState

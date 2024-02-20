@@ -23,6 +23,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Server.Console;
 
 namespace Content.Server.Ghost
 {
@@ -42,6 +43,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
+        [Dependency] private readonly IServerConsoleHost _host = default!;
 
         public override void Initialize()
         {
@@ -66,6 +68,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
+            SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespanw);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
         }
@@ -115,6 +118,15 @@ namespace Content.Server.Ghost
             args.Handled = true;
         }
 
+        //SS-220 noDeath
+        private void OnActionRespanw(EntityUid uid, GhostComponent component, RespawnActionEvent args)
+        {
+            if (!TryComp<ActorComponent>(uid, out var actor))
+                return;
+
+            _host.ExecuteCommand(actor.PlayerSession, "respawn");
+        }
+        //SS-220 end noDeath
         private void OnRelayMoveInput(EntityUid uid, GhostOnMoveComponent component, ref MoveInputEvent args)
         {
             // If they haven't actually moved then ignore it.
@@ -199,6 +211,15 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
+            //SS-220 noDeath
+            if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
+                && actResp.UseDelay != null)
+            {
+                var start = _gameTiming.CurTime;
+                var end = start + actResp.UseDelay.Value;
+                _actions.SetCooldown(component.RespawnActionEntity.Value, start, end);
+            }
+            //SS-220 end noDeath
         }
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
@@ -264,7 +285,7 @@ namespace Content.Server.Ghost
             }
 
             var response = new GhostWarpsResponseEvent(GetPlayerWarps(entity).Concat(GetLocationWarps()).ToList());
-            RaiseNetworkEvent(response, args.SenderSession.ConnectedClient);
+            RaiseNetworkEvent(response, args.SenderSession.Channel);
         }
 
         private void OnGhostWarpToTargetRequest(GhostWarpToTargetRequestEvent msg, EntitySessionEventArgs args)

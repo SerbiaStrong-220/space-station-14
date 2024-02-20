@@ -26,7 +26,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/Effects/woodhit.ogg
+          collection: WoodDestroyHeavy
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWoodPlank:
@@ -48,7 +48,7 @@
   - type: Occluder
   - type: Storage
     grid:
-    - 0,0,15,3
+    - 0,0,16,3 # SS220 larger-bookshelf (busido book)
     maxItemSize: Normal
     whitelist:
       tags:

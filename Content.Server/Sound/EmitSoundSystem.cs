@@ -1,6 +1,7 @@
-﻿using Content.Server.Explosion.EntitySystems;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Sound.Components;
-using Content.Server.UserInterface;
+using Content.Shared.Ghost;
+using Content.Shared.UserInterface;
 using Content.Shared.Sound;
 using Robust.Shared.Random;
 
@@ -29,7 +30,7 @@ public sealed class EmitSoundSystem : SharedEmitSoundSystem
             {
                 if (soundSpammer.PopUp != null)
                     Popup.PopupEntity(Loc.GetString(soundSpammer.PopUp), uid);
-                TryEmitSound(uid, soundSpammer);
+                TryEmitSound(uid, soundSpammer, predict: false);
             }
         }
     }
@@ -44,12 +45,17 @@ public sealed class EmitSoundSystem : SharedEmitSoundSystem
 
     private void HandleEmitSoundOnUIOpen(EntityUid uid, EmitSoundOnUIOpenComponent component, AfterActivatableUIOpenEvent args)
     {
-        TryEmitSound(uid, component, args.User);
+        // Ghost-UI-Activation-On-Use begin
+        if (HasComp<GhostComponent>(args.User))
+            return;
+        // Ghost-UI-Activation-On-Use end
+
+        TryEmitSound(uid, component, args.User, false);
     }
 
     private void HandleEmitSoundOnTrigger(EntityUid uid, EmitSoundOnTriggerComponent component, TriggerEvent args)
     {
-        TryEmitSound(uid, component);
+        TryEmitSound(uid, component, args.User, false);
         args.Handled = true;
     }
 }

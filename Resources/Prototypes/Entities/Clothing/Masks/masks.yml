@@ -56,6 +56,14 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingMaskGas
@@ -263,6 +271,8 @@
   - type: IngestionBlocker
   - type: Item
     storedRotation: -90
+  - type: IdentityBlocker
+    coverage: MOUTH
 
 - type: entity
   parent: ClothingMaskBase
@@ -324,6 +334,9 @@
     sprite: Clothing/Mask/swat.rsi
   - type: Clothing
     sprite: Clothing/Mask/swat.rsi
+  - type: Tag
+    tags:
+    - HidesHair
 
 - type: entity
   parent: ClothingMaskGasExplorer
@@ -346,6 +359,9 @@
     sprite: Clothing/Mask/ert.rsi
   - type: Clothing
     sprite: Clothing/Mask/ert.rsi
+  - type: Tag
+    tags:
+    - HidesHair
 
 - type: entity
   parent: ClothingMaskGasERT
@@ -471,6 +487,7 @@
   - type: Clothing
     sprite: Clothing/Mask/neckgaiter.rsi
   - type: IdentityBlocker
+    coverage: MOUTH
   - type: Tag
     tags:
     - WhitelistChameleon

@@ -12,14 +12,15 @@ namespace Content.Server.Administration.Commands
     {
         [Dependency] private readonly IEntityManager _entMan = default!;
 
-        public string Command => "ClearUpGarbage";
-        public string Description => "Removes all objects with a tag 'trash' from the map";
-        public string Help => "Surgery tommorow";
+        //SS220-clearupgarbage
+        public string Command => "clearupgarbage";
+        public string Description => "Удаляет весь мусор с карты (применимо к объектам с тегом 'trash')";
+        public string Help => $"Usage: {Command} ... surgery tommorow";
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             var _containerSystem = _entMan.System<SharedContainerSystem>();
-            int cnt = 0;
+            int processed = 0;
             foreach (var ent in _entMan.GetEntities())
             {
                 if (!_entMan.TryGetComponent<TagComponent>(ent, out var component))
@@ -28,9 +29,9 @@ namespace Content.Server.Administration.Commands
                     continue;
 
                 _entMan.DeleteEntity(ent);
-                cnt++;
+                processed++;
             }
-            shell.WriteLine($"Карта очищена от {cnt} объектов мусора!");
+            shell.WriteLine($"Удалено {processed} энтити.");
         }
     }
 }

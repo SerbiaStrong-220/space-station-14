@@ -22,15 +22,16 @@
 - type: statusIcon
   id: MindShieldIcon
   priority: 2
-  locationPreference: Left # Corvax-TypingIndicator
+  locationPreference: Right
+  layer: Mod
   icon:
     sprite: Interface/Misc/job_icons.rsi
     state: MindShield
-    
+
 - type: statusIcon
   id: SyndicateFaction
   priority: 0
-  locationPreference: Left 
+  locationPreference: Left
   icon:
     sprite: Interface/Misc/job_icons.rsi
     state: Syndicate

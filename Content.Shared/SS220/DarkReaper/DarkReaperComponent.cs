@@ -20,19 +20,28 @@ public sealed partial class DarkReaperComponent : Component
     /// <summary>
     /// Wheter the Dark Reaper is currently in physical form or not.
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
     public bool PhysicalForm = false;
 
     /// <summary>
     /// Max progression stage
     /// </summary>
-    [ViewVariables, DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly), DataField, AutoNetworkedField]
     public int MaxStage = 3;
+
+    /// <summary>
+    /// Stage at which station receives alert
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    public int AlertStage = 3;
+
+    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    public string AlertLevelOnAlertStage = "delta";
 
     /// <summary>
     /// Progression stage
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
     public int CurrentStage = 1;
 
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
@@ -175,8 +184,22 @@ public sealed partial class DarkReaperComponent : Component
         MaxDistance = 8
     });
 
-    [ViewVariables, DataField]
+    [ViewVariables(VVAccess.ReadOnly), DataField]
     public DamageSpecifier HealPerConsume = new();
+
+    /// <summary>
+    /// Entity that spawns when dark reaper consumes people.
+    /// Intended to be a replacement for giblets, as dark reaper no longer gibs people.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public EntProtoId EntityToSpawnAfterConsuming = "SS220Gore";
+
+    /// <summary>
+    /// Probability than item in inventory slot gets dropped when target is consumed.
+    /// Rolls for each inventory slot.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    public float InventoryDropProbabilityOnConsumed = 0.5f;
 
     /// STAGE PROGRESSION
 

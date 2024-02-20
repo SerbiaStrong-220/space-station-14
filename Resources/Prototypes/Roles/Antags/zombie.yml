@@ -4,6 +4,9 @@
   antagonist: true
   setPreference: true
   objective: roles-antag-initial-infected-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 108000 # 30h SS220 time
 
 - type: antag
   id: Zombie

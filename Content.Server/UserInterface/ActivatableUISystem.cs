@@ -25,6 +25,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ActivatableUIComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<ActivatableUIComponent, GhostInterationUiBypassEvent>(OnGhostUiActivation); // SS220 Ghost-UI-Activation-On-Use
         SubscribeLocalEvent<ActivatableUIComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<ActivatableUIComponent, HandDeselectedEvent>(OnHandDeselected);
         SubscribeLocalEvent<ActivatableUIComponent, GotUnequippedHandEvent>((uid, aui, _) => CloseAll(uid, aui));
@@ -39,6 +40,21 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
         InitializePower();
     }
+
+    // SS220 Ghost-UI-Activation-On-Use begin
+    private void OnGhostUiActivation(Entity<ActivatableUIComponent> entity, ref GhostInterationUiBypassEvent args)
+    {
+        if (args.Handled)
+            return;
+        // rest of args has already been validated in SharedInteractionSystem.HandleActivateItemInWorld
+
+        var comp = entity.Comp;
+        if (!Resolve(args.Target, ref comp))
+            return;
+
+        args.Handled = InteractUI(args.User, args.Target, comp);
+    }
+    // SS220 Ghost-UI-Activation-On-Use end
 
     private void OnBoundInterfaceInteractAttempt(BoundUserInterfaceMessageAttempt ev)
     {
@@ -125,6 +141,21 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
     private bool InteractUI(EntityUid user, EntityUid uiEntity, ActivatableUIComponent aui)
     {
+        if (!TryComp(user, out ActorComponent? actor))
+            return false;
+
+        if (aui.Key == null)
+            return false;
+
+        if (!_uiSystem.TryGetUi(uiEntity, aui.Key, out var ui))
+            return false;
+
+        if (ui.SubscribedSessions.Contains(actor.PlayerSession))
+        {
+            _uiSystem.CloseUi(ui, actor.PlayerSession);
+            return true;
+        }
+
         if (!_blockerSystem.CanInteract(user, uiEntity) && (!aui.AllowSpectator || !HasComp<GhostComponent>(user)))
             return false;
 
@@ -132,16 +163,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (aui.RequireHands && (!HasComp<HandsComponent>(user) && !HasComp<GhostComponent>(user)))
             return false;
 
-        if (!EntityManager.TryGetComponent(user, out ActorComponent? actor))
-            return false;
-
         if (aui.AdminOnly && !_adminManager.IsAdmin(actor.PlayerSession))
-            return false;
-
-        if (aui.Key == null)
-            return false;
-
-        if (!_uiSystem.TryGetUi(uiEntity, aui.Key, out var ui))
             return false;
 
         if (aui.SingleUser && (aui.CurrentSingleUser != null) && (actor.PlayerSession != aui.CurrentSingleUser))
@@ -171,7 +193,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         RaiseLocalEvent(uiEntity, bae);
 
         SetCurrentSingleUser(uiEntity, actor.PlayerSession, aui);
-        _uiSystem.ToggleUi(ui, actor.PlayerSession);
+        _uiSystem.OpenUi(ui, actor.PlayerSession);
 
         //Let the component know a user opened it so it can do whatever it needs to do
         var aae = new AfterActivatableUIOpenEvent(user, actor.PlayerSession);
@@ -213,54 +235,4 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
         CloseAll(uid, aui);
     }
-}
-
-public sealed class ActivatableUIOpenAttemptEvent : CancellableEntityEventArgs
-{
-    public EntityUid User { get; }
-    public ActivatableUIOpenAttemptEvent(EntityUid who)
-    {
-        User = who;
-    }
-}
-
-public sealed class UserOpenActivatableUIAttemptEvent : CancellableEntityEventArgs //have to one-up the already stroke-inducing name
-{
-    public EntityUid User { get; }
-    public EntityUid Target { get; }
-    public UserOpenActivatableUIAttemptEvent(EntityUid who, EntityUid target)
-    {
-        User = who;
-        Target = target;
-    }
-}
-
-public sealed class AfterActivatableUIOpenEvent : EntityEventArgs
-{
-    public EntityUid User { get; }
-    public readonly ICommonSession Session;
-
-    public AfterActivatableUIOpenEvent(EntityUid who, ICommonSession session)
-    {
-        User = who;
-        Session = session;
-    }
-}
-
-/// <summary>
-/// This is after it's decided the user can open the UI,
-/// but before the UI actually opens.
-/// Use this if you need to prepare the UI itself
-/// </summary>
-public sealed class BeforeActivatableUIOpenEvent : EntityEventArgs
-{
-    public EntityUid User { get; }
-    public BeforeActivatableUIOpenEvent(EntityUid who)
-    {
-        User = who;
-    }
-}
-
-public sealed class ActivatableUIPlayerChangedEvent : EntityEventArgs
-{
 }

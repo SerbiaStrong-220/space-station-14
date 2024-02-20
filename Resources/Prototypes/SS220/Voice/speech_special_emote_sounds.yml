@@ -1,0 +1,69 @@
+# special emotes pack
+- type: emoteSounds
+  id: MaleBoss
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleBossLaugh
+
+- type: emoteSounds
+  id: MaleSanta
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleSantaLaugh
+
+- type: emoteSounds
+  id: MaleEvil
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleEvilLaugh
+
+- type: emoteSounds
+  id: FemaleEvil
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleEvilLaugh
+
+- type: emoteSounds
+  id: MaleScientist
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: MaleScientistScream
+    CritGasp:
+      collection: MaleScientistChoke
+
+- type: emoteSounds
+  id: MaleDoctor
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleDoctorLaugh
+
+- type: emoteSounds
+  id: MaleBandit
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleBanditLaugh
+
+- type: emoteSounds
+  id: FemaleDoctor
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleWhitemaneLaugh
+    Giggle:
+      collection: FemaleWhitemaneGiggle
+

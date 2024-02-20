@@ -4,6 +4,7 @@
   parent: ClothingHeadset
   id: ClothingHeadsetUSSP
   name: ussp headset
+  suffix: Shitspawn, Ebent, FractWar
   description: You can hear the spirit of communism in them.
   components:
   - type: ContainerFill

@@ -1,9 +1,9 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: AgentIDCard
+  parent: IDCardStandard
   id: UsspIDCard
-  suffix: СССП
+  suffix: Shitspawn, Ebent, FractWar
   name: ID карта СССП
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
@@ -59,3 +59,15 @@
     - type: IdCard
       jobTitle: Оперативник ГСН
 
+- type: entity # SS220 - Security dog Roxi ID card
+  parent: IDCardStandard
+  id: SecDogIDCard
+  name: Security Dog ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: idsecurityofficer
+    - type: PresetIdCard
+      job: SecurityOfficer
+      name: Рокси

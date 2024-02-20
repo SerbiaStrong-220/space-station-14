@@ -91,6 +91,7 @@ namespace Content.Server.Construction.Commands
                 // override
                 valid &= !tagSystem.HasTag(child, "ForceNoFixRotations");
                 valid &= !_entManager.HasComponent<AirlockComponent>(child); //SS220 airlock-resprite
+                valid &= !_entManager.HasComponent<DoorComponent>(child); //SS220 airlock-resprite
 
                 if (!valid)
                     continue;

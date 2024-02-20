@@ -56,7 +56,11 @@ public sealed partial class TTSSystem
             {"гсб", "Гэ Эс Бэ"},
             {"гв", "Гэ Вэ"},
             {"нр", "Эн Эр"},
+            {"нра", "Эн Эра"},
+            {"нру", "Эн Эру"},
             {"км", "Кэ Эм"},
+            {"кма", "Кэ Эма"},
+            {"кму", "Кэ Эму"},
             {"си", "Эс И"},
             {"срп", "Эс Эр Пэ"},
             {"пцк", "Пэ Цэ Каа"},
@@ -121,6 +125,9 @@ public sealed partial class TTSSystem
             {"рхбз", "Эр Хэ Бэ Зэ"},
             {"рхбзз", "Эр Хэ Бэ Зэ Зэ"},
             {"днк", "Дэ Эн Ка"},
+            {"с4", "Си 4"}, // cyrillic
+            {"c4", "Си 4"}, // latinic
+            {"бсс", "Бэ Эс Эс"},
         };
 
     private static readonly IReadOnlyDictionary<string, string> ReverseTranslit =
