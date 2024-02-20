@@ -21,7 +21,6 @@ using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.SS220.Discord;
-using Content.Shared.SS220.Shlepovend;
 
 namespace Content.Server.Chat.Managers
 {
