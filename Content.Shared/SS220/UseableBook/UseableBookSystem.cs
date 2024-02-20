@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Popups;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Network;
+using Content.Shared.Communications;
 
 namespace Content.Shared.SS220.UseableBook;
 
@@ -28,12 +29,14 @@ public sealed class UseableBookSystem : EntitySystem
         reason = null;
         bool bCan = false;
 
+        if (comp.CanUseOneTime && comp.Used)
+            reason = Loc.GetString("useable-book-used-onetime"); // данную книгу можно было изучить только один раз
         if (comp.CustomCanRead is not null)
         {
             var customCanRead = comp.CustomCanRead;
             customCanRead.Interactor = user;
             customCanRead.BookComp = comp;
-            RaiseLocalEvent(entity, customCanRead);
+            RaiseLocalEvent(entity, (object)customCanRead, broadcast:true);
 
             if (customCanRead.Handled)
             {
@@ -44,9 +47,6 @@ public sealed class UseableBookSystem : EntitySystem
                     goto retn;
             }
         }
-
-        if (comp.CanUseOneTime && comp.Used)
-            reason = Loc.GetString("useable-book-used-onetime"); // данную книгу можно было изучить только один раз
         if (comp.LeftUses > 0)
             bCan = true;
 
@@ -72,7 +72,7 @@ public sealed class UseableBookSystem : EntitySystem
 
             return;
         }
-        if (_net.IsClient)
+        if (_net.IsServer)
             _popupSystem.PopupEntity(reason, entity, type: PopupType.Medium);
     }
 

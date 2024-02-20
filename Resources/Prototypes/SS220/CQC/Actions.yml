@@ -5,11 +5,11 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleCast.png
+    icon: SS220\Interface\actions\CQCCombat\blowback.png
     event: !type:CQCBlowbackEvent
-    useDelay: 12
+    useDelay: 2
     checkCanInteract: false
-    priority: -3
+    priority: -10
 
 - type: entity
   id: CQCPunch
@@ -18,11 +18,11 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleCast.png
+    icon: SS220\Interface\actions\CQCCombat\punch.png
     event: !type:CQCPunchEvent
     useDelay: 4
     checkCanInteract: false
-    priority: -3
+    priority: -10
 
 - type: entity
   id: CQCDisarm
@@ -31,11 +31,11 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleCast.png
+    icon: SS220\Interface\actions\CQCCombat\disarm.png
     event: !type:CQCDisarmEvent
-    useDelay: 8
+    useDelay: 4
     checkCanInteract: false
-    priority: -3
+    priority: -10
 
 - type: entity
   id: CQCLongSleep
@@ -44,8 +44,8 @@
   noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/GhostRoleCast.png
+    icon: SS220\Interface\actions\CQCCombat\longsleep.png
     event: !type:CQCLongSleepEvent
-    useDelay: 35
+    useDelay: 60
     checkCanInteract: false
-    priority: -3
+    priority: -10

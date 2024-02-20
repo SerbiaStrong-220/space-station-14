@@ -7,7 +7,7 @@
   entity: CQCBlowback
   damage:
     types:
-      Blunt: 10
+      Blunt: 30
 
 - type: CQCCombatSpell
   id: NonLethalPunch

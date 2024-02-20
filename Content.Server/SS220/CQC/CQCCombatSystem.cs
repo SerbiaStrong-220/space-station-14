@@ -13,10 +13,13 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Stunnable;
 using Content.Shared.Humanoid;
+using Robust.Shared.Random;
+using Content.Shared.Popups;
+using Content.Shared.Zombies;
 
 namespace Content.Server.SS220.CQCCombat;
 
-public sealed class CQCCombatSystem : EntitySystem
+public sealed class CQCCombatSystem : CQCCombatSharedSystem
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
@@ -27,11 +30,9 @@ public sealed class CQCCombatSystem : EntitySystem
     [Dependency] private readonly HandsSystem _hands = default!;
     private const string StatusEffectKey = "ForcedSleep"; // Same one used by N2O and other sleep chems.
     private const double SleepCooldown = 120;
-    private const double BlowbackParalyze = 6;
+    private const double BlowbackParalyze = 4;
     public override void Initialize()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<CQCCanReadBook>(CanReadCQCBook);
         SubscribeLocalEvent<CQCCombatComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<CQCCombatComponent, CQCBlowbackEvent>(BaseAction);
@@ -39,7 +40,6 @@ public sealed class CQCCombatSystem : EntitySystem
         SubscribeLocalEvent<CQCCombatComponent, CQCDisarmEvent>(BaseAction);
         SubscribeLocalEvent<CQCCombatComponent, CQCLongSleepEvent>(BaseAction);
     }
-
     private void CanReadCQCBook(CQCCanReadBook args)
     {
         args.Handled = true;
@@ -56,14 +56,18 @@ public sealed class CQCCombatSystem : EntitySystem
     private void OnComponentInit(EntityUid uid, CQCCombatComponent component, ComponentInit args)
     {
         foreach (var proto in component.AvailableSpells)
-            _actions.AddAction(uid, _prototypeManager.Index<CQCCombatSpellPrototype>(proto.Id).Entity);
+        {
+            var action = _actions.AddAction(uid, _prototypeManager.Index<CQCCombatSpellPrototype>(proto.Id).Entity);
+            var infosComponent = new CQCCombatInfosComponent(proto.Id);
+            AddComp(uid, infosComponent);
+        }
     }
 
     private EntityUid? GetTarget(EntityUid inflictor, BaseActionEvent args)
     {
         if (args is EntityTargetActionEvent actionEvent)
-            return actionEvent.Target;
-        if (args is InstantActionEvent instaAction)
+            return HasComp<CQCCombatComponent>(actionEvent.Target) ? actionEvent.Target : null;
+        if (args is InstantActionEvent)
         {
             if (TryComp<SharedPullerComponent>(inflictor, out var puller))
                 return puller.Pulling;
@@ -71,17 +75,26 @@ public sealed class CQCCombatSystem : EntitySystem
         return null;
     }
 
-    private CQCCombatSpellPrototype? GetSpell(EntityUid action)
+    private CQCCombatSpellPrototype? GetSpell(EntityUid? action)
     {
+        if (action is null)
+            return null;
+        if (!TryComp<CQCCombatInfosComponent>(action, out var infosComponent))
+            return null;
+
         foreach (var spell in _prototypeManager.EnumeratePrototypes<CQCCombatSpellPrototype>())
-            if (TryComp<MetaDataComponent>(action, out var metaDataComponent))
-                if (spell.Entity == metaDataComponent.EntityPrototype?.ID)
-                    return spell;
+            if (infosComponent.Prototype == spell.ID)
+                return spell;
         return null;
     }
 
     private void BaseAction(EntityUid inflictor, CQCCombatComponent comp, BaseActionEvent args)
     {
+        if (HasComp<ZombieComponent>(inflictor))
+        {
+            args.Handled = true;
+            return;
+        }
         if (GetTarget(args.Performer, args) is { } target)
         {
             if (!HasComp<HumanoidAppearanceComponent>(target))
@@ -97,13 +110,11 @@ public sealed class CQCCombatSystem : EntitySystem
                 case CQCLongSleepEvent:
                     OnLongSleep(args.Performer, target);
                     break;
-                default:
-                    return;
             }
 
             args.Handled = true;
-            ApplyDamage(target, GetSpell(inflictor)?.Damage);
-            
+            ApplyDamage(target, GetSpell(args.ActionId)?.Damage);
+
             return;
         }
 

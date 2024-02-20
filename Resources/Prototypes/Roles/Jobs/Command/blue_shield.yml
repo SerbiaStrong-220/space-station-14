@@ -42,6 +42,15 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CQCCombat
+        availableSpells:
+        - NonLethalBlowback
+        - NonLethalPunch
+        - NonLethalDisarm
+        - NonLethalLongSleep
+      - type: Missable
 
 - type: startingGear
   id: BlueShieldGear

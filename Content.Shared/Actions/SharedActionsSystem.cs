@@ -506,6 +506,10 @@ public abstract class SharedActionsSystem : EntitySystem
             if (!action.RaiseOnUser && action.Container != null && !HasComp<MindComponent>(action.Container))
                 target = action.Container.Value;
 
+
+            //SS220 ActionId start
+            actionEvent.ActionId = actionId;
+            //SS220 ActionId end
             RaiseLocalEvent(target, (object) actionEvent, broadcast: true);
             handled = actionEvent.Handled;
         }

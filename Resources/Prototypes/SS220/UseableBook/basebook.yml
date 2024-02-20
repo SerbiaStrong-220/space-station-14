@@ -1,13 +1,13 @@
 - type: entity
   id: cqc_nonlethal
   parent: BaseItem
-  name: Base book
-  description: Essential to become robust.
+  name: ent-cqc-nonlethal-name
+  description: ent-cqc-nonlethal-desc
   components:
   - type: Sprite
-    sprite: Objects/Misc/books.rsi
+    sprite: SS220/Objects/Misc/books.rsi
     layers:
-    - state: book7
+    - state: cqc
   - type: Tag
     tags:
     - Book
@@ -23,22 +23,23 @@
       - NonLethalPunch
       - NonLethalDisarm
       - NonLethalLongSleep
+    - type: Missable
 
 - type: entity
   id: cqc_lethal
   parent: BaseItem
-  name: Base book
-  description: Essential to become robust.
+  name: ent-cqc-name
+  description: ent-cqc-desc
   components:
   - type: Sprite
-    sprite: Objects/Misc/books.rsi
+    sprite: SS220/Objects/Misc/books.rsi
     layers:
-    - state: book7
+    - state: cqc
   - type: Tag
     tags:
     - Book
   - type: UseableBook
-    readTime: 3
+    readTime: 60
     leftUses: 1
     canUseOneTime: false
     customCanRead: !type:CQCCanReadBook
@@ -49,3 +50,4 @@
       - LethalPunch
       - LethalDisarm
       - LethalLongSleep
+    - type: Missable

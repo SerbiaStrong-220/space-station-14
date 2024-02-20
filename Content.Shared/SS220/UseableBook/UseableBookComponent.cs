@@ -28,7 +28,7 @@ public sealed partial class UseableBookComponent : Component
     public UseableBookCanReadEvent? CustomCanRead;
 }
 
-[Serializable, NetSerializable]
+[ImplicitDataDefinitionForInheritors]
 public abstract partial class UseableBookEventArgs : HandledEntityEventArgs
 {
     public EntityUid Interactor { get; set; }

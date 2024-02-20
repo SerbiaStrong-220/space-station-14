@@ -7,7 +7,7 @@
   icon: { sprite: /Textures/SS220/Objects/Weapons/Guns/Crossbow/minicrossbow.rsi, state: icon }
   productEntity: WeaponMiniEnergyCrossbow
   cost:
-    Telecrystal: 10
+    Telecrystal: 4
   categories:
   - UplinkWeapons
 
@@ -40,3 +40,13 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkCQC
+  name: ent-cqc-name
+  description: ent-cqc-desc
+  productEntity: cqc_lethal
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkMisc
