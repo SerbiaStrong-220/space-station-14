@@ -39,7 +39,7 @@
     tags:
     - Book
   - type: UseableBook
-    readTime: 60
+    readTime: 3
     leftUses: 1
     canUseOneTime: false
     customCanRead: !type:CQCCanReadBook

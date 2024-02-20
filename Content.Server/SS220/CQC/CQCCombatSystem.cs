@@ -58,15 +58,18 @@ public sealed class CQCCombatSystem : CQCCombatSharedSystem
         foreach (var proto in component.AvailableSpells)
         {
             var action = _actions.AddAction(uid, _prototypeManager.Index<CQCCombatSpellPrototype>(proto.Id).Entity);
-            var infosComponent = new CQCCombatInfosComponent(proto.Id);
-            AddComp(uid, infosComponent);
+            if (action is not null)
+            {
+                var comp = AddComp<CQCCombatInfosComponent>(action.Value);
+                comp.Prototype = proto.Id;
+            }
         }
     }
 
     private EntityUid? GetTarget(EntityUid inflictor, BaseActionEvent args)
     {
         if (args is EntityTargetActionEvent actionEvent)
-            return HasComp<CQCCombatComponent>(actionEvent.Target) ? actionEvent.Target : null;
+            return actionEvent.Target;
         if (args is InstantActionEvent)
         {
             if (TryComp<SharedPullerComponent>(inflictor, out var puller))
@@ -95,7 +98,7 @@ public sealed class CQCCombatSystem : CQCCombatSharedSystem
             args.Handled = true;
             return;
         }
-        if (GetTarget(args.Performer, args) is { } target)
+        if ((GetTarget(args.Performer, args) is { } target) && !HasComp<CQCCombatComponent>(target))
         {
             if (!HasComp<HumanoidAppearanceComponent>(target))
                 return;
