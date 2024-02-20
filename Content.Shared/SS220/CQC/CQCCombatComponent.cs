@@ -15,7 +15,7 @@ public sealed partial class CQCCombatComponent : Component
 
     [DataField(required: true)]
     [ViewVariables(VVAccess.ReadWrite)]
-    public List<ProtoId<CQCCombatSpellPrototype>> AvailableSpells { get; private set; } = default!;
+    public List<ProtoId<CQCCombatSpellPrototype>> AvailableSpells { get; private set; } = new();
 }
 
 public sealed partial class CQCBlowbackEvent : EntityTargetActionEvent { };
