@@ -30,6 +30,7 @@
     - /PhotocopierForms/nanotrasen_station/goal/goal_guests.xml
     - /PhotocopierForms/nanotrasen_station/goal/goal_capsule.xml
     - /PhotocopierForms/nanotrasen_station/goal/goal_expedition.xml
+    - /PhotocopierForms/nanotrasen_station/goal/goal_robotisation.xml
   - Id: command
     Name: Командование
     Color: "#5555FFFF"
