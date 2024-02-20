@@ -40,11 +40,11 @@ namespace Content.Server.Chat.Managers
         // ss220 sponsor-chat-colors start
         private static readonly Dictionary<SponsorTier, string> BoostyOocColors = new()
         {
-            { SponsorTier.Shlopa, "#ffdf9b" },
-            { SponsorTier.BigShlopa, "#e9c067" },
-            { SponsorTier.HugeShlopa, "#dbad4c" },
-            { SponsorTier.GoldenShlopa, "#ffff00" },
-            { SponsorTier.CriticalMassShlopa, "#8289f5" }
+            { SponsorTier.Shlopa, "#1f8b4c" },
+            { SponsorTier.BigShlopa, "#d877cf" },
+            { SponsorTier.HugeShlopa, "#ad1457" },
+            { SponsorTier.GoldenShlopa, "#ffd700" },
+            { SponsorTier.CriticalMassShlopa, "#74e7cd" }
         };
         // ss220 sponsor-chat-colors end
 
