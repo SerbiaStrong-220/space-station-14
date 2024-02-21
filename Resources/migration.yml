@@ -10,7 +10,6 @@
 
 # 2024-02-15 - SS220
 BaseReagentsCapsule: null
-BaseReagentsCapsuleImplanter: BaseChemicalImplanter
 ReagentsCapsuleInjector: ChemicalImplanter
 EmptyCapsule: EmptyChemicalImplant
 CombatCapsule: CombatChemicalImplant
