@@ -6,6 +6,7 @@
   - type: WallMount
     arc: 360
   - type: Sprite
+    snapCardinals: false # SS220 Resprite
     drawdepth: WallTops
     sprite: Structures/Wallmounts/flags.rsi
 
