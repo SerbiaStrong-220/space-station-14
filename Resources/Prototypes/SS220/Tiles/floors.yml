@@ -98,7 +98,7 @@
 - type: tile
   id: FloorDutchHorizontal
   name: керамическая горизонтальная плитка
-  sprite: /Textures/Tiles/dutch_horizontal.png
+  sprite: /Textures/SS220/Tiles/dutch_horizontal.png
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -110,7 +110,7 @@
 - type: tile
   id: FloorDutchMini
   name: керамическая мини-плитка
-  sprite: /Textures/Tiles/dutch_mini.png
+  sprite: /Textures/SS220/Tiles/dutch_mini.png
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -120,9 +120,9 @@
   heatCapacity: 10000
 
 - type: tile
-  id: FloorDutchMini
+  id: FloorDutchMiniHorizontal
   name: керамическая горизонтальная мини-плитка
-  sprite: /Textures/Tiles/dutch_mini.png
+  sprite: /Textures/SS220/Tiles/dutch_horizontal_mini.png
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
