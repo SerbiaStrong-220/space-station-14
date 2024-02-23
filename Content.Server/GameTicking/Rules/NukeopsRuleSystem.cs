@@ -89,6 +89,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly WarDeclaratorSystem _warDeclarator = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
 
     [ValidatePrototypeId<CurrencyPrototype>]
@@ -687,16 +688,18 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                     continue;
                 }
 
+                var jobBans = _banManager.GetRoleBans(player.UserId) ?? new HashSet<string>();
+
                 var profile = ev.Profiles[player.UserId];
-                if (profile.AntagPreferences.Contains(nukeops.OperativeRoleProto.Id))
+                if (profile.AntagPreferences.Contains(nukeops.OperativeRoleProto.Id) && !jobBans.Contains(nukeops.OperativeRoleProto.Id))
                 {
                     prefList.Add(player);
                 }
-                if (profile.AntagPreferences.Contains(nukeops.MedicRoleProto.Id))
+                if (profile.AntagPreferences.Contains(nukeops.MedicRoleProto.Id) && !jobBans.Contains(nukeops.MedicRoleProto.Id))
 	            {
 	                medPrefList.Add(player);
 	            }
-                if (profile.AntagPreferences.Contains(nukeops.CommanderRoleProto.Id))
+                if (profile.AntagPreferences.Contains(nukeops.CommanderRoleProto.Id) && !jobBans.Contains(nukeops.CommanderRoleProto.Id))
                 {
                     cmdrPrefList.Add(player);
                 }

@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using Content.Server.Actions;
+using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking.Rules.Components;
@@ -21,9 +22,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Zombies;
-using Robust.Server.GameObjects;
 using Robust.Server.Player;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -51,6 +50,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
     public override void Initialize()
     {
@@ -283,6 +283,11 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
                 continue;
             }
             // SS220 No-Zombie-Roles end
+
+            if (_banManager.GetRoleBans(player.UserId) is { } roleBans && roleBans.Contains("InitialInfected"))
+            {
+                continue;
+            }
 
             if (HasComp<InitialInfectedExemptComponent>(player.AttachedEntity))
                 continue; // used (for example) on ERT

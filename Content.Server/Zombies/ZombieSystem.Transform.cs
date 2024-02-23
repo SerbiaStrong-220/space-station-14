@@ -39,6 +39,7 @@ using Content.Shared.Prying.Components;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
+using Content.Server.Administration.Managers;
 
 namespace Content.Server.Zombies
 {
@@ -63,6 +64,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly SharedRoleSystem _roles = default!;
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
         /// <summary>
         /// Handles an entity turning into a zombie when they die or go into crit
@@ -241,6 +243,12 @@ namespace Content.Server.Zombies
 
             //He's gotta have a mind
             var hasMind = _mind.TryGetMind(target, out var mindId, out _);
+
+            //if (hasMind && _banManager.GetJobBans(GetNe(target)) is { } roleBans && roleBans.Contains("Zombie"))
+            //{
+
+            //}
+
             if (hasMind && _mind.TryGetSession(mindId, out var session))
             {
                 //Zombie role for player manifest

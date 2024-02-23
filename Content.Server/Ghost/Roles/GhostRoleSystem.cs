@@ -26,6 +26,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -42,6 +43,7 @@ namespace Content.Server.Ghost.Roles
         [Dependency] private readonly SharedMindSystem _mindSystem = default!;
         [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
         [Dependency] private readonly IChatManager _chat = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
         private uint _nextRoleIdentifier;
         private bool _needsUpdateGhostRoleCount = true;
@@ -352,6 +354,23 @@ namespace Content.Server.Ghost.Roles
 
             if (string.IsNullOrEmpty(component.Prototype))
                 throw new NullReferenceException("Prototype string cannot be null or empty!");
+
+            if (component.Prototype == "MobHumanLoneNuclearOperative" && _banManager.GetJobBans(args.Player.UserId) is { } bans && bans.Contains("Nukeops"))
+            {
+                if (!_playerManager.TryGetSessionById(args.Player.UserId, out var session))
+                {
+                    args.TookRole = false;
+                    return;
+                }
+
+                var msg = Loc.GetString("ghost-role-banned");
+                var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", "Вам запрещено играть на ядерных оперативниках"));
+
+                _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.Channel, Color.Red);
+
+                args.TookRole = false;
+                return;
+            }
 
             var mob = Spawn(component.Prototype, Transform(uid).Coordinates);
             _transform.AttachToGridOrMap(mob);
