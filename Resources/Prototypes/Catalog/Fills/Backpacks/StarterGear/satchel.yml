@@ -299,15 +299,6 @@
 
 - type: entity
   noSpawn: true
-  parent: ClothingBackpackSatchel
-  id: ClothingBackpackSatchelDrone
-  components:
-  - type: Tag
-    tags:
-    - InnateDontDelete
-
-- type: entity
-  noSpawn: true
   parent: ClothingBackpackSatchelMime
   id: ClothingBackpackSatchelMimeFilled
   components:
@@ -323,7 +314,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: AdminPDA
     - id: GasAnalyzer
     - id: trayScanner
   - type: Unremoveable

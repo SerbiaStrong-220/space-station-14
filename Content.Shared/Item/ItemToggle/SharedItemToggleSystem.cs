@@ -3,6 +3,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Temperature;
 using Content.Shared.Toggleable;
 using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -20,6 +21,7 @@ public abstract class SharedItemToggleSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly WieldableSystem _wieldable = default!;//SS220 double_esword-fix
 
     public override void Initialize()
     {
@@ -72,6 +74,11 @@ public abstract class SharedItemToggleSystem : EntitySystem
 
         if (itemToggle.Activated)
             return true;
+
+        //SS220 double_esword-fix start
+        if (user != null && EntityManager.TryGetComponent<WieldableComponent>(uid, out var wiledable) && !_wieldable.CanWield(uid, wiledable, (EntityUid) user))
+            return false;
+        //SS220 double_esword-fix end
 
         var attempt = new ItemToggleActivateAttemptEvent(user);
         RaiseLocalEvent(uid, ref attempt);

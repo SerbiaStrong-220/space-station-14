@@ -224,6 +224,7 @@
         - JanicartKeys # SS220 Readd-Vehicles
       components:
         - LightReplacer
+    maxItemSize: Large
   - type: ItemMapper
     mapLayers:
       bottle:

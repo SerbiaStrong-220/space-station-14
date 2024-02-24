@@ -1,0 +1,67 @@
+# Implanters
+
+- type: listing
+  id: UplinkChemicalImplanter
+  name: ent-ChemicalImplanter
+  description: uplink-chemical-implanter-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implanters.rsi, state: implanter }
+  productEntity: ChemicalImplanter
+  cost:
+    Telecrystal: 6
+  categories:
+    - UplinkChemicalImplants
+
+# Implants
+- type: listing
+  id: UplinkEmptyChemicalImplant
+  name: ent-EmptyChemicalImplant
+  description: uplink-empty-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: implant }
+  productEntity: EmptyChemicalImplant
+  cost:
+    Telecrystal: 1
+  categories:
+    - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkCombatChemicalImplant
+  name: ent-CombatChemicalImplant
+  description: uplink-combat-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: combat }
+  productEntity: CombatChemicalImplant
+  cost:
+    Telecrystal: 4
+  categories:
+    - UplinkChemicalImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink
+
+- type: listing
+  id: UplinkDABChemicalImplant
+  name: ent-DABChemicalImplant
+  description: uplink-dab-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: dab }
+  productEntity: DABChemicalImplant
+  cost:
+    Telecrystal: 2
+  categories:
+    - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkSuicideChemicalImplant
+  name: ent-SuicideChemicalImplant
+  description: uplink-suicide-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: dead }
+  productEntity: SuicideChemicalImplant
+  cost:
+    Telecrystal: 2
+  categories:
+    - UplinkChemicalImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink

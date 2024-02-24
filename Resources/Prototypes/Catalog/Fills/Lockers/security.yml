@@ -161,6 +161,7 @@
       - id: RubberStampDetective
       - id: BookBusido # Corvax-Books
       - id: HoloprojectorSecurity
+      - id: BoxEvidenceMarkers
 
 - type: entity
   id: ClosetBombFilled

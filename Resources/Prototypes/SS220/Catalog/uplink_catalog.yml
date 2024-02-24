@@ -40,3 +40,13 @@
     blacklist:
       components:
       - SurplusBundle
+
+#- type: listing
+#  id: UplinkCQC
+#  name: ent-cqc-name
+#  description: ent-cqc-desc
+#  productEntity: cqc_lethal
+#  cost:
+#    Telecrystal: 4
+#  categories:
+#  - UplinkMisc

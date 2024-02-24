@@ -12,6 +12,7 @@ using Content.Shared.CCVar;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
@@ -352,17 +353,6 @@ namespace Content.Server.Database
         }
         #endregion
 
-        protected override PlayerRecord MakePlayerRecord(Player record)
-        {
-            return new PlayerRecord(
-                new NetUserId(record.UserId),
-                new DateTimeOffset(record.FirstSeenTime, TimeSpan.Zero),
-                record.LastSeenUserName,
-                new DateTimeOffset(record.LastSeenTime, TimeSpan.Zero),
-                record.LastSeenAddress,
-                record.LastSeenHWId?.ToImmutableArray());
-        }
-
         private static ServerBanDef? ConvertBan(ServerBan? ban)
         {
             if (ban == null)
@@ -548,6 +538,12 @@ namespace Content.Server.Database
             }
 
             return await base.AddAdminMessage(message);
+        }
+
+        protected override DateTime NormalizeDatabaseTime(DateTime time)
+        {
+            DebugTools.Assert(time.Kind == DateTimeKind.Unspecified);
+            return DateTime.SpecifyKind(time, DateTimeKind.Utc);
         }
 
         private async Task<DbGuardImpl> GetDbImpl([CallerMemberName] string? name = null)

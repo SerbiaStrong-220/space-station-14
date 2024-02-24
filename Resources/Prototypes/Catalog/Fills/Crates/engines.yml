@@ -8,8 +8,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: AmePart
-        amount: 12
+      - id: AmePartFlatpack
+        amount: 12 #SS220 Engineering Rebalance
 
 - type: entity
   id: CrateEngineeringAMEJar
@@ -123,7 +123,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: SolarAssemblyPart
+      - id: SolarAssemblyFlatpack
         amount: 6
 
 - type: entity

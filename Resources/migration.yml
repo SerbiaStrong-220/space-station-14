@@ -8,6 +8,14 @@
 # WallSolid: Window
 # Table: null
 
+# 2024-02-15 - SS220
+BaseReagentsCapsule: null
+ReagentsCapsuleInjector: ChemicalImplanter
+EmptyCapsule: EmptyChemicalImplant
+CombatCapsule: CombatChemicalImplant
+DABCapsule: DABChemicalImplant
+SuicideCapsule: SuicideChemicalImplant
+
 # 2023-07-03
 ClothingHeadHelmetBasic: ClothingHeadHelmetBasic
 ClothingHeadHelmetBasicOld: ClothingHeadHelmetBasic
@@ -204,8 +212,6 @@ AsteroidRockCrab1: AsteroidRock # SS220 asteroid-migration
 FoodBoxDonkpocketGondola: FoodBoxDonkpocketPizza
 
 # 2024-01-31
-HandheldCrewMonitorEmpty: null
-HandheldCrewMonitor: null
 SpyCrewMonitor: null
 SpyCrewMonitorEmpty: null
 SyndiCrewMonitor: null
@@ -250,3 +256,14 @@ YellowOxygenTankFilled: OxygenTankFilled
 MedicalScannerMachineCircuitboard: null
 CloningPodMachineCircuitboard: null
 CloningConsoleComputerCircuitboard: null
+
+# 2024-02-19
+Drone: null
+SpawnMobDrone: null
+Onestar: null # I dont think this is even mapped, but just in case
+
+# 2024-02-22
+SolarAssemblyPart: SolarAssemblyFlatpack
+AmePart: AmePartFlatpack
+AmePartStealObjective: AmePartFlatpackStealObjective
+Observationskit: null

@@ -48,10 +48,12 @@
   name: store-category-implants
   priority: 7
 
+# SS220 - chemical-implants start
 - type: storeCategory
-  id: UplinkInjectors
-  name: store-category-injectors
+  id: UplinkChemicalImplants
+  name: store-category-chemical-implants
   priority: 8
+# SS220 - chemical-implants end
 
 - type: storeCategory
   id: UplinkJob

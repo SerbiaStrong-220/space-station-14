@@ -1,0 +1,63 @@
+# Base
+- type: entity
+  name: Chemical Implanter
+  id: BaseChemicalImplanter
+  parent: BaseItem
+  abstract: true
+  components:
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        implanter_slot: !type:ContainerSlot { }
+    - type: Implanter
+      currentMode: Inject
+      implantOnly: true
+      implanterSlot:
+        name: Implant
+        locked: False
+        priority: 0
+        whitelist:
+          tags:
+            - ChemicalImplant
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
+      state: implanter
+    - type: ItemMapper
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
+      mapLayers:
+        implanter_full:
+          whitelist:
+            tags:
+              - ChemicalImplant
+    - type: Item
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
+      heldPrefix: 0
+    - type: Appearance
+    - type: Tag
+      tags:
+        - ChemicalImplant
+
+- type: entity
+  id: ChemicalImplanter
+  name: chemical implanter
+  description: chemical-implanter-desc
+  parent: BaseChemicalImplanter
+  components:
+    - type: Implanter
+      implant: EmptyChemicalImplant
+
+- type: entity
+  id: ActionUseChemicalImplant
+  name: chemical-implant-action-name
+  description: chemical-implant-action-desc
+  noSpawn: true
+  components:
+  - type: InstantAction
+    charges: 1
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: SS220/Objects/ChemicalImplants/implanters.rsi
+      state: icon_empty
+    event: !type:UseChemicalImplantEvent

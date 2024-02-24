@@ -1,0 +1,48 @@
+- type: CQCCombatSpell
+  id: NonLethalBlowback
+  entity: CQCBlowback
+
+- type: CQCCombatSpell
+  id: LethalBlowback
+  entity: CQCBlowback
+  damage:
+    types:
+      Blunt: 10
+
+- type: CQCCombatSpell
+  id: NonLethalPunch
+  entity: CQCPunch
+  damage:
+    types:
+      Stamina: 80
+
+- type: CQCCombatSpell
+  id: LethalPunch
+  entity: CQCPunch
+  damage:
+    types:
+      Blunt: 30
+      Stamina: 80
+
+- type: CQCCombatSpell
+  id: NonLethalDisarm
+  entity: CQCDisarm
+  damage:
+    types:
+      Stamina: 20
+
+- type: CQCCombatSpell
+  id: LethalDisarm
+  entity: CQCDisarm
+  damage:
+    types:
+      Blunt: 20
+      Stamina: 20
+
+- type: CQCCombatSpell
+  id: NonLethalLongSleep
+  entity: CQCLongSleep
+
+- type: CQCCombatSpell
+  id: LethalLongSleep
+  entity: CQCLongSleep

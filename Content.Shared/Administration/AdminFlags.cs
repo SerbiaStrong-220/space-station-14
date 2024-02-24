@@ -89,7 +89,12 @@
         /// </summary>
         EditNotes = 1 << 14,
 
-        AdminChat = 1 << 15,
+        AdminChat = 1 << 15, // SS220 AdminChat for mentors
+
+        /// <summary>
+        ///     Lets you Massban, on SS14.Admin
+        /// </summary>
+        MassBan = 1 << 16, // SS220 Enum-bit-shift PepeHands
 
         /// <summary>
         ///     Dangerous host permissions like scsi.

@@ -6,7 +6,8 @@ using Robust.Server.Player;
 using Content.Server.SS220.DeathReminder.DeathReminderEui;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mind;
-
+using Content.Shared.Speech.Muting;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Mobs;
 

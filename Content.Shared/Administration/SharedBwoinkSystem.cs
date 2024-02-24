@@ -36,16 +36,19 @@ namespace Content.Shared.Administration
             // It's checked by the client when receiving a message from the server for bwoink noises.
             // This could be a boolean "Incoming", but that would require making a second instance.
             public NetUserId TrueSender { get; }
-            public bool IsSenderAdmin { get; }
+            public bool IsSenderAdmin { get; } // SS220
             public string Text { get; }
 
-            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default, bool isSenderAdmin = false)
+            public bool PlaySound { get; }
+
+            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default, bool isSenderAdmin = false, bool playSound = true)
             {
                 SentAt = sentAt ?? DateTime.Now;
                 UserId = userId;
                 TrueSender = trueSender;
-                IsSenderAdmin = isSenderAdmin;
+                IsSenderAdmin = isSenderAdmin; // SS220
                 Text = text;
+                PlaySound = playSound;
             }
         }
     }

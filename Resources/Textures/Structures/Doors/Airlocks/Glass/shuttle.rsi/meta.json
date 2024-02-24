@@ -7,9 +7,9 @@
     "y": 32
   },
   "states": [
-    {
-        "name": "assembly"
-    },
+	{
+		"name": "assembly"
+	},
     {
         "name": "bolted_unlit",
         "directions": 4

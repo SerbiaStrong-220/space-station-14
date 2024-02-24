@@ -41,7 +41,7 @@
   copyright: "Modified from plating.png by github user @Kit0vras" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
-- files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png"]
+- files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png", "wood_large.png"]
   license: "CC-BY-SA-3.0"
   copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, cropped_parallax modified from parallax. Wood tiles are new tg tiles, repaletted by TheArturZh using colors of old wood tiles."
   source: "https://github.com/tgstation/tgstation/"
@@ -110,3 +110,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "taken at https://github.com/ParadiseSS13/Paradise/commit/43889a89d5a9378fd120d627f74613edb1841a66"
   source: "https://github.com/ParadiseSS13/Paradise"
+
+- files: ["latticeTrain.png"]
+  license: "CC0-1.0"
+  copyright: "Created by TheShuEd (github) for space-station-14."
+  source: "https://github.com/space-wizards/space-station-14/pull/ED_INSERT_PR_CODE_HERE!"
