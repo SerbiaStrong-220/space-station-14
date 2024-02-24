@@ -5,7 +5,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileMetalDiamond
@@ -13,7 +13,7 @@
   category: TileTech
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileWood
@@ -21,7 +21,7 @@
   category: Wood
   completetime: 1
   materials:
-    Wood: 100
+    Wood: 50
 
 - type: latheRecipe
   id: TileWhite
@@ -29,7 +29,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileDark
@@ -37,7 +37,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileTechmaint
@@ -45,7 +45,7 @@
   category: TileTech
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileMono
@@ -53,7 +53,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileLino
@@ -61,8 +61,8 @@
   category: Carpet
   completetime: 1
   materials:
-    Plastic: 50
-    Cloth: 50
+    Plastic: 25
+    Cloth: 25
 
 - type: latheRecipe
   id: TileElevatorShaft
@@ -70,7 +70,7 @@
   category: TileTech
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileRockVault
@@ -78,7 +78,7 @@
   category: TileTech
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileBlue
@@ -86,8 +86,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileLime
@@ -95,8 +95,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileMining
@@ -104,7 +104,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileMiningDark
@@ -112,7 +112,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileMiningLight
@@ -120,7 +120,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileFreezer
@@ -128,7 +128,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileShowroom
@@ -136,7 +136,7 @@
   category: Steel
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileHydro
@@ -144,8 +144,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileBar
@@ -153,8 +153,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileClown
@@ -162,8 +162,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileMime
@@ -171,8 +171,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileKitchen
@@ -180,8 +180,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileLaundry
@@ -189,8 +189,8 @@
   category: Plastic
   completetime: 1
   materials:
-    Steel: 50
-    Plastic: 50
+    Steel: 25
+    Plastic: 25
 
 - type: latheRecipe
   id: TileConcrete
@@ -198,7 +198,7 @@
   category: Concrete
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileGrayConcrete
@@ -206,7 +206,7 @@
   category: Concrete
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileOldConcrete
@@ -214,7 +214,7 @@
   category: Concrete
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileArcadeBlue
@@ -222,7 +222,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileArcadeBlue2
@@ -230,7 +230,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileArcadeRed
@@ -238,7 +238,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileEighties
@@ -246,7 +246,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileCarpetClown
@@ -254,7 +254,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileCarpetOffice
@@ -262,7 +262,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileBoxing
@@ -270,7 +270,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileGym
@@ -278,7 +278,7 @@
   category: Carpet
   completetime: 1
   materials:
-    Cloth: 100
+    Cloth: 50
 
 - type: latheRecipe
   id: TileShuttleWhite
@@ -286,7 +286,7 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileShuttleBlue
@@ -294,7 +294,7 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileShuttleOrange
@@ -302,7 +302,7 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileShuttlePurple
@@ -310,7 +310,7 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileShuttleRed
@@ -318,7 +318,7 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileShuttleGrey
@@ -326,7 +326,7 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileShuttleBlack
@@ -334,21 +334,21 @@
   category: Shuttle
   completetime: 1
   materials:
-    Plasteel: 100
+    Plasteel: 50
 
 - type: latheRecipe
   id: TileGold
   result: FloorTileItemGold
   completetime: 1
   materials:
-    Gold: 100
+    Gold: 50
 
 - type: latheRecipe
   id: TileSilver
   result: FloorTileItemSilver
   completetime: 1
   materials:
-    Silver: 100
+    Silver: 50
 
 - type: latheRecipe
   id: TileGreenCircuit
@@ -378,14 +378,14 @@
   category: Wood
   completetime: 1
   materials:
-    Wood: 100
+    Wood: 50
 
 - type: latheRecipe
   id: TileFlesh
   result: FloorTileItemFlesh
   completetime: 1
   materials:
-    Meaterial: 100
+    Meaterial: 50
 
 - type: latheRecipe
   id: TileSteelMaint
@@ -393,7 +393,7 @@
   category: TileTech
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileGratingMaint
@@ -401,7 +401,7 @@
   category: TileTech
   completetime: 1
   materials:
-    Steel: 100
+    Steel: 50
 
 - type: latheRecipe
   id: TileWoodLarge
@@ -409,4 +409,44 @@
   category: Wood
   completetime: 1
   materials:
-    Wood: 100
+    Wood: 50
+
+- type: latheRecipe
+  id: TileSteelReinforced
+  result: FloorTileItemSteelReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileWhiteReinforced
+  result: FloorTileItemWhiteReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileDarkReinforced
+  result: FloorTileItemDarkReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileDutch
+  result: FloorTileItemDutch
+  category: Plastic
+  completetime: 1
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: TileDutchMini
+  result: FloorTileItemDutchMini
+  category: Plastic
+  completetime: 1
+  materials:
+    Plastic: 50

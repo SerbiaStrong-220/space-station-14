@@ -1192,4 +1192,9 @@
     - TileSteelMaint
     - TileGratingMaint
     - TileWoodLarge
+    - TileSteelReinforced
+    - TileWhiteReinforced
+    - TileDarkReinforced
+    - TileDutch
+    - TileDutchMini
 #SS220-Sheetifier-rework-end
