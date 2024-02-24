@@ -70,11 +70,11 @@ namespace Content.Client.Ghost
 
             SubscribeNetworkEvent<GhostWarpsResponseEvent>(OnGhostWarpsResponse);
             SubscribeNetworkEvent<GhostUpdateGhostRoleCountEvent>(OnUpdateGhostRoleCount);
+            SubscribeNetworkEvent<AGhostToggleBodyVisualsEvent>(OnToggleBodyVisuals);
 
             SubscribeLocalEvent<EyeComponent, ToggleLightingActionEvent>(OnToggleLighting);
             SubscribeLocalEvent<EyeComponent, ToggleFoVActionEvent>(OnToggleFoV);
             SubscribeLocalEvent<GhostComponent, ToggleGhostsActionEvent>(OnToggleGhosts);
-            SubscribeLocalEvent<GhostComponent, ToggleAGhostBodyVisualsActionEvent>(OnToggleBodyVisuals);
         }
 
         private void OnStartup(EntityUid uid, GhostComponent component, ComponentStartup args)
@@ -117,15 +117,27 @@ namespace Content.Client.Ghost
         }
 
         //SS220-ghost-hats begin
-        private void OnToggleBodyVisuals(EntityUid uid, GhostComponent component, ToggleAGhostBodyVisualsActionEvent args)
+        private void OnToggleBodyVisuals(AGhostToggleBodyVisualsEvent ev, EntitySessionEventArgs args)
         {
-            if (args.Handled)
+            if (!TryGetEntity(ev.SenderUid, out var senderEntity))
                 return;
 
-            if (!GhostVisibility)
+            var query = AllEntityQuery<GhostComponent, SpriteComponent>();
+            while (query.MoveNext(out var uid, out var ghost, out var sprite))
+            {
+                if (uid != senderEntity)
+                    continue;
+
+                SetBodyVisuals(uid, sprite, !ev.Visible);
+            }
+        }
+
+        private void SetBodyVisuals(EntityUid uid, SpriteComponent? sprite, bool visible)
+        {
+            if (!Resolve(uid, ref sprite))
                 return;
 
-            if (!TryComp<SpriteComponent>(uid, out var sprite))
+            if (!HasComp<GhostComponent>(uid))
                 return;
 
             var typingIndicatorStates = new string[0];
@@ -140,11 +152,8 @@ namespace Content.Client.Ghost
                     typingIndicatorStates.Contains(layer.RsiState.ToString()))
                     continue;
 
-                layer.Visible = !layer.Visible;
+                layer.Visible = visible;
             }
-
-            Dirty(sprite);
-            args.Handled = true;
         }
         //SS220-ghost-hats end
 
@@ -167,6 +176,21 @@ namespace Content.Client.Ghost
         private void OnGhostPlayerAttach(EntityUid uid, GhostComponent component, LocalPlayerAttachedEvent localPlayerAttachedEvent)
         {
             GhostVisibility = true;
+
+            //SS220-ghost-hats begin
+            // This also feels very horrible.
+            // Have to do this because new ghosts will not see updated body visuals.
+            var query = AllEntityQuery<GhostComponent, SpriteComponent>();
+            while (query.MoveNext(out var queryUid, out var queryGhost, out var querySprite))
+            {
+                // It's true by default, so why process every single one?...
+                if (queryGhost.BodyVisible)
+                    continue;
+
+                SetBodyVisuals(queryUid, querySprite, false);
+            }
+            //SS220-ghost-hats end
+
             PlayerAttached?.Invoke(component);
         }
 

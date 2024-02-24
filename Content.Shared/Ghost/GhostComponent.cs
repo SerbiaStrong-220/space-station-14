@@ -65,6 +65,14 @@ public sealed partial class GhostComponent : Component
     [DataField("booMaxTargets"), ViewVariables(VVAccess.ReadWrite)]
     public int BooMaxTargets = 3;
 
+    //SS220-ghost-hats begin
+    /// <summary>
+    /// Whether the ghost's body is visible.
+    /// </summary>
+    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
+    public bool BodyVisible = true;
+    //SS220-ghost-hats end
+
     // TODO: instead of this funny stuff just give it access and update in system dirtying when needed
     [ViewVariables(VVAccess.ReadWrite)]
     public bool CanGhostInteract

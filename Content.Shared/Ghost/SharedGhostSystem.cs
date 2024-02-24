@@ -146,4 +146,29 @@ namespace Content.Shared.Ghost
             AvailableGhostRoles = availableGhostRoleCount;
         }
     }
+
+    //SS220-ghost-hats begin
+    /// <summary>
+    /// A server to client update on AdminGhost changing body visuals.
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class AGhostToggleBodyVisualsEvent : EntityEventArgs
+    {
+        /// <summary>
+        /// Entity which raised the action.
+        /// </summary>
+        public NetEntity SenderUid { get; }
+
+        /// <summary>
+        /// Whether the sender is currently visible.
+        /// </summary>
+        public bool Visible { get; }
+
+        public AGhostToggleBodyVisualsEvent(NetEntity senderUid, bool visible)
+        {
+            SenderUid = senderUid;
+            Visible = visible;
+        }
+    }
+    //SS220-ghost-hats end
 }

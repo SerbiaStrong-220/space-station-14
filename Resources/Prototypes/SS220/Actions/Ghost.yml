@@ -17,6 +17,6 @@
   noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/respawn.png
+    icon: { sprite: Mobs/Ghosts/ghost_human.rsi, state: icon }
     checkCanInteract: false
     event: !type:ToggleAGhostBodyVisualsActionEvent

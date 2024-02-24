@@ -69,6 +69,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespanw);
+            SubscribeLocalEvent<GhostComponent, ToggleAGhostBodyVisualsActionEvent>(OnToggleBodyVisualsAction);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
         }
@@ -117,6 +118,22 @@ namespace Content.Server.Ghost
 
             args.Handled = true;
         }
+
+        //SS220-ghost-hats begin
+        private void OnToggleBodyVisualsAction(EntityUid uid, GhostComponent component, ToggleAGhostBodyVisualsActionEvent args)
+        {
+            if (args.Handled)
+                return;
+
+            // Sooooo, I've done this because GhostComponent's BodyVisible field is changed faster, than it is handled on client.
+            // I've just decided to create a new argument to the event and pass correct value into it.
+            RaiseNetworkEvent(new AGhostToggleBodyVisualsEvent(GetNetEntity(uid), component.BodyVisible));
+            component.BodyVisible = !component.BodyVisible;
+            Dirty(uid, component);
+
+            args.Handled = true;
+        }
+        //SS220-ghost-hats end
 
         //SS-220 noDeath
         private void OnActionRespanw(EntityUid uid, GhostComponent component, RespawnActionEvent args)
