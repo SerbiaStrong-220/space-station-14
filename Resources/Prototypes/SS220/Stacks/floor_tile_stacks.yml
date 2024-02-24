@@ -1,0 +1,35 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: stack
+  id: FloorTileSteelReinforced
+  name: стальная шестиугольная плитка
+  spawn: FloorTileItemSteelReinforced
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileWhiteReinforced
+  name: белая шестиугольная плитка
+  spawn: FloorTileItemWhiteReinforced
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileDarkReinforced
+  name: тёмная шестиугольная плитка
+  spawn: FloorTileItemDarkReinforced
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileDutch
+  name: керамическая плитка
+  spawn: FloorTileItemDutch
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileDutchMini
+  name: керамическая мини-плитка
+  spawn: FloorTileItemDutchMini
+  maxCount: 30
+  itemSize: 5
