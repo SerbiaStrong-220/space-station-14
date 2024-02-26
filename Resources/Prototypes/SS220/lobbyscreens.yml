@@ -15,5 +15,5 @@
   background: /Textures/SS220/LobbyScreens/default-RND-shift.png
 
 - type: lobbyBackground
-  id: WyccLobbyScreen
+  id: SpaceFather
   background: /Textures/SS220/LobbyScreens/SpaceFather.jpeg
