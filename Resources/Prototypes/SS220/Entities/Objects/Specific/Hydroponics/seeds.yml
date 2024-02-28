@@ -1,6 +1,6 @@
 - type: entity
   parent: SeedBase
-  name: пакет семян (свекла)
+  name: пакет семян (свёкла)
   id: BeetSeeds
   components:
     - type: Seed
