@@ -1,5 +1,5 @@
 - type: entity
-  name: свекла
+  name: свёкла
   parent: FoodProduceBase
   id: Foodbeet
   description: Сочная и полезная свекла - отличный выбор для салатов и гарниров.
