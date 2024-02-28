@@ -2,7 +2,7 @@
   name: борщ
   parent: FoodBowlBase
   id: FoodSoupBorsch
-  description: Красный суп.
+  description: Принесите мне кто-нибудь квас и хлеб!
   components:
   - type: FlavorProfile
     flavors:
