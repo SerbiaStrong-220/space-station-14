@@ -19,7 +19,7 @@
   parent: DrinkGlassBase
   id: DrinkBerryСompote
   name: ягодный компот
-  description: Изготовлен из свежих ягод.
+  description: Аромат ягод напоминает вам сказку о Красной Шапочке.
   components:
   - type: SolutionContainerManager
     solutions:
