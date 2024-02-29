@@ -60,13 +60,6 @@ public sealed class HandTeleporterSystem : EntitySystem
             //SS220 teleport_grid_resrtictions start
             if (component.FirstPortalsGrid == null)
                 component.FirstPortalsGrid = xform.GridUid;
-            /*
-            if (component.FirstPortalsGrid != xform.GridUid)
-            {
-                HandlePortalUpdating(uid, component, args.User);
-                return;
-            }
-            */
             //SS220 teleport_grid_resrtictions end
 
             var doafterArgs = new DoAfterArgs(EntityManager, args.User, component.PortalCreationDelay, new TeleporterDoAfterEvent(), uid, used: uid)
@@ -105,7 +98,7 @@ public sealed class HandTeleporterSystem : EntitySystem
             _audio.PlayPvs(component.NewPortalSound, uid);
         }
         //SS220 teleport_grid_resrtictions start
-        else if (component.FirstPortalsGrid != xform.GridUid)
+        else if (component.GridRestricted && component.FirstPortalsGrid != xform.GridUid)
         {
             // Logging
             var portalStrings = "";
