@@ -1,8 +1,8 @@
 - type: seed
   id: beet
-  name: пакет семян (свекла)
+  name: пакет семян (свёкла)
   noun: seeds-noun-seeds
-  displayName: свекла
+  displayName: свёкла
   plantRsi: SS220/Objects/Specific/Hydroponics/beet.rsi
   packetPrototype: BeetSeeds
   productPrototypes:

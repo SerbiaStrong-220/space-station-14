@@ -2,7 +2,7 @@
   parent: DrinkGlassBase
   id: DrinkAppleCompote
   name: яблочный компот
-  description: Изготовлен из свежих яблок.
+  description: Его сладковатый аромат напоминает вам сказки о былой жизни на Земле.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -19,7 +19,7 @@
   parent: DrinkGlassBase
   id: DrinkBerryСompote
   name: ягодный компот
-  description: Изготовлен из свежих ягод.
+  description: Аромат ягод напоминает вам сказку о Красной Шапочке.
   components:
   - type: SolutionContainerManager
     solutions:
