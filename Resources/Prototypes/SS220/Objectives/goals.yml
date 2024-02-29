@@ -9,3 +9,19 @@
 - type: stationGoal
   id: StationGoalGuests
   text: station-goal-guests
+
+- type: stationGoal
+  id: StationGoalPneumaticTubes
+  text: station-goal-pneumatictubes
+
+- type: stationGoal
+  id: StationGoalRobotisation
+  text: station-goal-robotisation
+
+- type: stationGoal
+  id: StationGoalHomekeepers
+  text: station-goal-homekeepers
+
+- type: stationGoal
+  id: StationGoalComplexPVO
+  text: station-goal-complexPVO

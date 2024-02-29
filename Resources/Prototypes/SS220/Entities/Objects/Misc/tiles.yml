@@ -1,0 +1,82 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  name: стальная шестиугольная плитка
+  parent: FloorTileItemBase
+  id: FloorTileItemSteelReinforced
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile.rsi
+    state: steelreinf
+  - type: Item
+    sprite: SS220/Objects/Tiles/tile.rsi
+    heldPrefix: steelreinf
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelReinforced
+  - type: Stack
+    stackType: FloorTileSteelReinforced
+
+- type: entity
+  name: белая шестиугольная плитка
+  parent: FloorTileItemSteelReinforced
+  id: FloorTileItemWhiteReinforced
+  components:
+  - type: Sprite
+    state: whitereinf
+  - type: Item
+    heldPrefix: whitereinf
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteReinforced
+  - type: Stack
+    stackType: FloorTileWhiteReinforced
+
+- type: entity
+  name: тёмная шестиугольная плитка
+  parent: FloorTileItemSteelReinforced
+  id: FloorTileItemDarkReinforced
+  components:
+  - type: Sprite
+    state: darkreinf
+  - type: Item
+    heldPrefix: darkreinf
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkReinforced
+  - type: Stack
+    stackType: FloorTileDarkReinforced
+
+- type: entity
+  name: керамическая плитка
+  parent: FloorTileItemBase
+  id: FloorTileItemDutch
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile.rsi
+    state: dutch
+  - type: Item
+    sprite: SS220/Objects/Tiles/tile.rsi
+    heldPrefix: dutch
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDutch
+  - type: Stack
+    stackType: FloorTileDutch
+
+- type: entity
+  name: керамическая мини-плитка
+  parent: FloorTileItemDutch
+  id: FloorTileItemDutchMini
+  components:
+  - type: Sprite
+    state: dutchmini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDutchMini
+  - type: Stack
+    stackType: FloorTileDutchMini

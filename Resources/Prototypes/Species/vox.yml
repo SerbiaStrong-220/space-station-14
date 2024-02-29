@@ -1,6 +1,6 @@
 - type: species
   id: Vox
-  name: Vox
+  name: species-name-vox
   roundStart: false # sad...
   prototype: MobVox
   sprites: MobVoxSprites
@@ -8,6 +8,12 @@
   dollPrototype: MobVoxDummy
   skinColoration: Hues
   buttScanTexture: /Textures/SS220/Interface/Butts/vox.png
+  maleFirstNames: names_vox
+  femaleFirstNames: names_vox
+  naming: First
+  sexes:
+    - Unsexed
+
 
 - type: speciesBaseSprites
   id: MobVoxSprites

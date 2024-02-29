@@ -51,7 +51,7 @@ public sealed partial class SubdermalImplantComponent : Component
     public EntityWhitelist? Blacklist;
 }
 
-public sealed partial class UseReagentCapsuleImplantEvent : InstantActionEvent
+public sealed partial class UseChemicalImplantEvent : InstantActionEvent
 {
 
 }

@@ -425,6 +425,9 @@
     - type: Clothing
       sprite: Objects/Weapons/Guns/Battery/disabler.rsi
       quickEquip: false
+      slots:
+        - suitStorage
+        - Belt
     - type: Gun
       fireRate: 2
       soundGunshot:

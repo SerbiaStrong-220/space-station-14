@@ -24,6 +24,14 @@
       collection: MaleEvilLaugh
 
 - type: emoteSounds
+  id: FemaleEvil
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleEvilLaugh
+
+- type: emoteSounds
   id: MaleScientist
   params:
     variation: 0.125
@@ -41,4 +49,21 @@
     Laugh:
       collection: MaleDoctorLaugh
 
+- type: emoteSounds
+  id: MaleBandit
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleBanditLaugh
+
+- type: emoteSounds
+  id: FemaleDoctor
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleWhitemaneLaugh
+    Giggle:
+      collection: FemaleWhitemaneGiggle
 

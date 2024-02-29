@@ -3,9 +3,17 @@
   background: /Textures/SS220/LobbyScreens/deep-in-spiders.png
 
 - type: lobbyBackground
-  id: Pizdec
-  background: /Textures/SS220/LobbyScreens/pizdec.png
+  id: TiredShift
+  background: /Textures/SS220/LobbyScreens/tired-shift.png
 
 - type: lobbyBackground
   id: NukeArt
   background: /Textures/SS220/LobbyScreens/nukeart.png
+
+- type: lobbyBackground
+  id: DefaultRNDshift
+  background: /Textures/SS220/LobbyScreens/default-RND-shift.png
+
+- type: lobbyBackground
+  id: SpaceFather
+  background: /Textures/SS220/LobbyScreens/SpaceFather.jpeg

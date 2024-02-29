@@ -82,6 +82,13 @@
     - /Audio/SS220/Voice/Evil/male_evil_laugh_3.ogg
 
 - type: soundCollection
+  id: FemaleEvilLaugh
+  files:
+    - /Audio/SS220/Voice/Evil/female_evil_laugh_1.ogg
+    - /Audio/SS220/Voice/Evil/female_evil_laugh_2.ogg
+    - /Audio/SS220/Voice/Evil/female_evil_laugh_3.ogg
+
+- type: soundCollection
   id: MaleScientistChoke
   files:
     - /Audio/SS220/Voice/Scientist/male_scientist_choke_1.ogg
@@ -106,3 +113,24 @@
     - /Audio/SS220/Voice/Doctor/male_doctor_laugh_1.ogg
     - /Audio/SS220/Voice/Doctor/male_doctor_laugh_2.ogg
     - /Audio/SS220/Voice/Doctor/male_doctor_laugh_3.ogg
+
+- type: soundCollection
+  id: MaleBanditLaugh
+  files:
+    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_1.ogg
+    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_2.ogg
+    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_3.ogg
+
+- type: soundCollection
+  id: FemaleWhitemaneLaugh
+  files:
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_1.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_2.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_3.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_4.ogg
+
+- type: soundCollection
+  id: FemaleWhitemaneGiggle
+  files:
+    - /Audio/SS220/Voice/Whitemane/whitemane_giggle_1.ogg
+    - /Audio/SS220/Voice/Whitemane/whitemane_giggle_2.ogg

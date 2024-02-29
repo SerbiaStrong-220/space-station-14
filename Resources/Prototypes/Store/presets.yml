@@ -10,7 +10,7 @@
   - UplinkTools
   - UplinkUtility
   - UplinkImplants
-  - UplinkInjectors
+  - UplinkChemicalImplants # SS220 - chemical-implants
   - UplinkJob
   - UplinkArmor
   - UplinkPointless
