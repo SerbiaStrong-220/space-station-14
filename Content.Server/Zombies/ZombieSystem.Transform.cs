@@ -20,8 +20,6 @@ using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Server.Traits.Assorted;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -40,6 +38,7 @@ using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
 using Content.Server.Administration.Managers;
+using Robust.Server.Player;
 
 namespace Content.Server.Zombies
 {
@@ -242,12 +241,7 @@ namespace Content.Server.Zombies
             _identity.QueueIdentityUpdate(target);
 
             //He's gotta have a mind
-            var hasMind = _mind.TryGetMind(target, out var mindId, out _);
-
-            //if (hasMind && _banManager.GetJobBans(GetNe(target)) is { } roleBans && roleBans.Contains("Zombie"))
-            //{
-
-            //}
+            var hasMind = _mind.TryGetMind(target, out var mindId, out var mind);
 
             if (hasMind && _mind.TryGetSession(mindId, out var session))
             {
@@ -259,6 +253,16 @@ namespace Content.Server.Zombies
 
                 // Notificate player about new role assignment
                 _audio.PlayGlobal(zombiecomp.GreetSoundNotification, session);
+
+                // SS220 role ban restrict
+                if (_banManager.GetJobBans(session.UserId) is { } roleBans && roleBans.Contains("Zombie"))
+                {
+                    // If user has zombie role ban - kick him out of new zombie.
+                    _mind.TransferTo(mindId, null, mind: mind);
+
+                    // Remove flag to make his body as ghost role.
+                    hasMind = false;
+                }
             }
             else
             {

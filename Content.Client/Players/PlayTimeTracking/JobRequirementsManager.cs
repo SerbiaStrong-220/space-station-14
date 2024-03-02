@@ -92,6 +92,19 @@ public sealed class JobRequirementsManager
         return _adminManager.IsActive();
     }
 
+    public bool IsAntagAllowed(AntagPrototype antag, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
+    {
+        reason = null;
+
+        if (_roleBans.Contains($"Job:{antag.ID}"))
+        {
+            reason = FormattedMessage.FromUnformatted("Этот антагонист для вас заблокирован");
+            return false;
+        }
+
+        return true;
+    }
+
     public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;

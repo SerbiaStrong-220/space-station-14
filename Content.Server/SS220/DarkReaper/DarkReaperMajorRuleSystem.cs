@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -8,7 +9,6 @@ using Content.Server.Respawn;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Mind;
-using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using System.Linq;
@@ -22,6 +22,7 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IBanManager _banManager = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaperMajorRule");
 
@@ -101,7 +102,8 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
                     continue;
 
                 var profile = ev.Profiles[player.UserId];
-                if (profile.AntagPreferences.Contains(comp.RoleProtoId.Id))
+
+                if (profile.AntagPreferences.Contains(comp.RoleProtoId.Id) && !(_banManager.GetJobBans(player.UserId) is { } roleBans && roleBans.Contains("DarkReaper")))
                 {
                     prefList.Add(player);
                 }
