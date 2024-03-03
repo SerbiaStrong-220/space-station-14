@@ -4,7 +4,7 @@ using Content.Shared.Communications;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 
-namespace Content.Client.SS220.Communications.UI
+namespace Content.Client.SS220.CluwneCommunications.UI
 {
     public sealed class CluwneCommunicationsConsoleBoundUserInterface : BoundUserInterface
     {
@@ -56,29 +56,11 @@ namespace Content.Client.SS220.Communications.UI
             }
         }
 
-        public void EmergencyShuttleButtonPressed()
-        {
-            if (CountdownStarted)
-                RecallShuttle();
-            else
-                CallShuttle();
-        }
-
         public void AnnounceButtonPressed(string message)
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
             SendMessage(new CommunicationsConsoleAnnounceMessage(msg));
-        }
-
-        public void CallShuttle()
-        {
-            SendMessage(new CommunicationsConsoleCallEmergencyShuttleMessage());
-        }
-
-        public void RecallShuttle()
-        {
-            SendMessage(new CommunicationsConsoleRecallEmergencyShuttleMessage());
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)

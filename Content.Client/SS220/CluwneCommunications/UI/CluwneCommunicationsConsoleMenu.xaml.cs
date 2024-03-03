@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
 
-namespace Content.Client.SS220.Communications.UI
+namespace Content.Client.SS220.CluwneCommunications.UI
 {
     [GenerateTypedNameReferences]
     public sealed partial class CluwneCommunicationsConsoleMenu : FancyWindow
@@ -21,7 +21,10 @@ namespace Content.Client.SS220.Communications.UI
             Owner = owner;
 
             var loc = IoCManager.Resolve<ILocalizationManager>();
-            MessageInput.Placeholder = new Rope.Leaf(loc.GetString("comms-console-menu-announcement-placeholder"));
+            MessageInput.Placeholder = new Rope.Leaf(loc.GetString("cluwne-comms-console-menu-announcement-placeholder"));
+            CodeInput.Placeholder = new Rope.Leaf(loc.GetString("cluwne-comms-console-menu-code-placeholder"));
+            InstructionInput.Placeholder = new Rope.Leaf(loc.GetString("cluwne-comms-console-menu-instruction-placeholder"));
+
 
             AnnounceButton.OnPressed += (_) => Owner.AnnounceButtonPressed(Rope.Collapse(MessageInput.TextRope));
             AnnounceButton.Disabled = !owner.CanAnnounce;
@@ -36,8 +39,7 @@ namespace Content.Client.SS220.Communications.UI
             };
             AlertLevelButton.Disabled = !owner.AlertLevelSelectable;
 
-            EmergencyShuttleButton.OnPressed += (_) => Owner.EmergencyShuttleButtonPressed();
-            EmergencyShuttleButton.Disabled = !owner.CanCall;
+            //EmergencyShuttleButton.OnPressed += (_) => Owner.EmergencyShuttleButtonPressed(); // сделать взрыв
 
             UpdateCountdown();
             Timer.SpawnRepeating(1000, UpdateCountdown, _timerCancelTokenSource.Token);

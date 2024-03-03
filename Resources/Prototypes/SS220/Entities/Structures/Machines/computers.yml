@@ -37,13 +37,14 @@
   description: Used to create memed announces
   components:
   - type: Sprite
+    sprite: SS220/Structures/Machines/cluwneComms.rsi
     layers:
     - map: ["computerLayerBody"]
       state: computer
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      state: comm
+      state: generic
     - map: ["computerLayerKeys"]
       state: generic_keys
   - type: AccessReader
@@ -61,7 +62,7 @@
     - key: enum.CommunicationsConsoleUiKey.Key
       type: CommunicationsConsoleBoundUserInterface
   - type: Computer
-    board: CommsComputerCircuitboard
+    board: CluwneCommsComputerCircuitboard
   - type: PointLight
     radius: 1.5
     energy: 1.6
