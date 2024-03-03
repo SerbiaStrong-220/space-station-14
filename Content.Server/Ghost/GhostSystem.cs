@@ -23,6 +23,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Network;
 
 namespace Content.Server.Ghost
 {
@@ -66,6 +67,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
+            SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespanw);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
         }
@@ -115,6 +117,23 @@ namespace Content.Server.Ghost
             args.Handled = true;
         }
 
+        //SS-220 noDeath
+        private void OnActionRespanw(EntityUid uid, GhostComponent component, RespawnActionEvent args)
+        {
+            if (!TryComp<ActorComponent>(uid, out var actor))
+                return;
+
+            var playerMgr = IoCManager.Resolve<IPlayerManager>();
+            NetUserId userId;
+            userId = actor.PlayerSession.UserId;
+            if (!playerMgr.TryGetSessionById(userId, out var targetPlayer))
+                return;
+
+            _ticker.Respawn(targetPlayer);
+
+
+        }
+        //SS-220 end noDeath
         private void OnRelayMoveInput(EntityUid uid, GhostOnMoveComponent component, ref MoveInputEvent args)
         {
             // If they haven't actually moved then ignore it.
@@ -199,6 +218,15 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
+            //SS-220 noDeath
+            if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
+                && actResp.UseDelay != null)
+            {
+                var start = _gameTiming.CurTime;
+                var end = start + actResp.UseDelay.Value;
+                _actions.SetCooldown(component.RespawnActionEntity.Value, start, end);
+            }
+            //SS-220 end noDeath
         }
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)

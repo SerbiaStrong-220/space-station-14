@@ -23,7 +23,6 @@
   - type: Tag
     tags:
       - ClothMade
-      - DroneUsable
       - WhitelistChameleon
 
 - type: entity
@@ -128,6 +127,10 @@
   - type: TemperatureProtection
     coefficient: 0.2
   - type: IngestionBlocker
+  - type: Clothing
+    #Copies ClothingHeadHardsuitBase behavior
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
   - type: Tag
     tags:
     - HidesHair
@@ -164,7 +167,7 @@
         Slash: 0.90
         Piercing: 0.95
         Heat: 0.90
-        Radiation: 0.25
+        Radiation: 0.75 #ss-220 armReb
   - type: GroupExamine
   - type: IngestionBlocker
   - type: Tag

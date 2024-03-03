@@ -25,6 +25,17 @@ namespace Content.Server.Power.EntitySystems
             SubscribeLocalEvent<NetworkBatteryPostSync>(PostSync);
         }
 
+        // SS220 smes-ui-fix begin
+        public int GetChargePercentRounded(BatteryComponent component)
+        {
+            var effectiveMax = component.MaxCharge;
+            if (effectiveMax == 0)
+                effectiveMax = 1;
+            var chargeFraction = component.CurrentCharge / effectiveMax;
+            return (int) (chargeFraction * 100);
+        }
+        // SS220 smes-ui-fix end
+
         private void OnNetBatteryRejuvenate(EntityUid uid, PowerNetworkBatteryComponent component, RejuvenateEvent args)
         {
             component.NetworkBattery.CurrentStorage = component.NetworkBattery.Capacity;
@@ -41,11 +52,7 @@ namespace Content.Server.Power.EntitySystems
                 return;
             if (args.IsInDetailsRange)
             {
-                var effectiveMax = batteryComponent.MaxCharge;
-                if (effectiveMax == 0)
-                    effectiveMax = 1;
-                var chargeFraction = batteryComponent.CurrentCharge / effectiveMax;
-                var chargePercentRounded = (int) (chargeFraction * 100);
+                var chargePercentRounded = GetChargePercentRounded(batteryComponent); // SS220 smes-ui-fix
                 args.PushMarkup(
                     Loc.GetString(
                         "examinable-battery-component-examine-detail",

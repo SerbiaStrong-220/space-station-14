@@ -36,6 +36,8 @@
       - On
       - Off
       - Status
+    lastSignals:
+      Status: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:
