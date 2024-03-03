@@ -1,0 +1,132 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: tile
+  id: FloorSteelReinforced
+  name: стальные шестиугольные плиты
+  sprite: /Textures/SS220/Tiles/steel_reinforced.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteelReinforced
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteReinforced
+  name: белые шестиугольные плиты
+  sprite: /Textures/SS220/Tiles/white_reinforced.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemWhiteReinforced
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkReinforced
+  name: тёмные шестиугольные плиты
+  sprite: /Textures/SS220/Tiles/dark_reinforced.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemDarkReinforced
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintMono
+  name: стальной технический моно пол
+  sprite: /Textures/SS220/Tiles/steel_maint_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemSteelMaint
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintDrain
+  name: технический пол с вертикальной решёткой
+  sprite: /Textures/SS220/Tiles/tech_maint_drain.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemTechmaint
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintDrainHorizontal
+  name: технический пол с горизонтальной решёткой
+  sprite: /Textures/SS220/Tiles/tech_maint_drain_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemTechmaint
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintDrainMiddle
+  name: технический пол с центральной решёткой
+  sprite: /Textures/SS220/Tiles/tech_maint_drain_middle.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemTechmaint
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDutch
+  name: керамическая плитка
+  sprite: /Textures/SS220/Tiles/dutch.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemDutch
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDutchHorizontal
+  name: керамическая горизонтальная плитка
+  sprite: /Textures/SS220/Tiles/dutch_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemDutch
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDutchMini
+  name: керамическая мини-плитка
+  sprite: /Textures/SS220/Tiles/dutch_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemDutchMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDutchMiniHorizontal
+  name: керамическая горизонтальная мини-плитка
+  sprite: /Textures/SS220/Tiles/dutch_horizontal_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemDutchMini
+  heatCapacity: 10000

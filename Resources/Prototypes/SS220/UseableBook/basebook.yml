@@ -1,0 +1,51 @@
+- type: entity
+  id: cqc_nonlethal
+  parent: BaseItem
+  name: ent-cqc-nonlethal-name
+  description: ent-cqc-nonlethal-desc
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/books.rsi
+    layers:
+    - state: cqc
+  - type: Tag
+    tags:
+    - Book
+  - type: UseableBook
+    readTime: 3
+    canUseOneTime: true
+    customCanRead: !type:CQCCanReadBook
+    componentsOnRead:
+    - type: CQCCombat
+      availableSpells:
+      - NonLethalBlowback
+      - NonLethalPunch
+      - NonLethalDisarm
+      - NonLethalLongSleep
+    - type: Missable
+
+- type: entity
+  id: cqc_lethal
+  parent: BaseItem
+  name: ent-cqc-name
+  description: ent-cqc-desc
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/books.rsi
+    layers:
+    - state: cqc
+  - type: Tag
+    tags:
+    - Book
+  - type: UseableBook
+    readTime: 60
+    canUseOneTime: true
+    customCanRead: !type:CQCCanReadBook
+    componentsOnRead:
+    - type: CQCCombat
+      availableSpells:
+      - LethalBlowback
+      - LethalPunch
+      - LethalDisarm
+      - LethalLongSleep
+    - type: Missable

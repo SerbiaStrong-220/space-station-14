@@ -23,7 +23,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Server.Console;
+using Robust.Shared.Network;
 
 namespace Content.Server.Ghost
 {
@@ -43,7 +43,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
-        [Dependency] private readonly IServerConsoleHost _host = default!;
 
         public override void Initialize()
         {
@@ -124,7 +123,15 @@ namespace Content.Server.Ghost
             if (!TryComp<ActorComponent>(uid, out var actor))
                 return;
 
-            _host.ExecuteCommand(actor.PlayerSession, "respawn");
+            var playerMgr = IoCManager.Resolve<IPlayerManager>();
+            NetUserId userId;
+            userId = actor.PlayerSession.UserId;
+            if (!playerMgr.TryGetSessionById(userId, out var targetPlayer))
+                return;
+
+            _ticker.Respawn(targetPlayer);
+
+
         }
         //SS-220 end noDeath
         private void OnRelayMoveInput(EntityUid uid, GhostOnMoveComponent component, ref MoveInputEvent args)

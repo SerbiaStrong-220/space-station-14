@@ -1,26 +1,30 @@
 {
-  "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Derived by sprites from tgstation at https://github.com/tgstation/tgstation/commit/d0d81185f09ca30d3b0856d476544240dba0de53 and adapted by Saveliy360. NT_flag taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/tree/724d11274bf173044330ddc5f230c3abd80df8d2.",
-  "size": {
-    "x": 32,
-    "y": 32
-  },
-  "states": [
-    {
-      "name": "blank_flag"
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by MIXnikita for SS220, based on sprites from TauCetiClassic at commit https://github.com/TauCetiStation/TauCetiClassic/commit/fd5cfd76acdf5bda9e46413c11006a6e825d51a9 and tgstation (NT_flag)",
+    "size": {
+        "x": 32,
+        "y": 32
     },
-    {
-      "name": "NT_flag"
-    },
-    {
-      "name": "syndie_flag"
-    },
-    {
-      "name": "lgbtq_flag"
-    },
-    {
-      "name": "pirate_flag"
-    }
-  ]
+    "states": [
+        {
+            "name": "blank_flag",
+            "directions": 4
+        },
+        {
+            "name": "NT_flag",
+            "directions": 4
+        },
+        {
+            "name": "syndie_flag",
+            "directions": 4
+        },
+        {
+            "name": "lgbtq_flag"
+        },
+        {
+            "name": "pirate_flag",
+            "directions": 4
+        }
+    ]
 }
