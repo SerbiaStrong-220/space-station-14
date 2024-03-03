@@ -762,6 +762,7 @@ namespace Content.Client.Preferences.UI
 
             _requirements.Updated -= UpdateRoleRequirements;
             _preferencesManager.OnServerDataLoaded -= LoadServerData;
+            _requirements.Updated -= UpdateAntagList;
         }
 
         private void RebuildSpriteView()
