@@ -160,7 +160,6 @@ namespace Content.Client.Ghost
         private void OnGhostPlayerAttach(EntityUid uid, GhostComponent component, LocalPlayerAttachedEvent localPlayerAttachedEvent)
         {
             GhostVisibility = true;
-
             PlayerAttached?.Invoke(component);
         }
 
