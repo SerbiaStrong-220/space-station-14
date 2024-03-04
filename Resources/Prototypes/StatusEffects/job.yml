@@ -372,14 +372,14 @@
   parent: JobIcon
   id: JobIconBlueShield
   icon:
-    sprite: Interface/Misc/job_icons.rsi
+    sprite: /Textures/Interface/Misc/job_icons.rsi
     state: BlueShield
 
 - type: statusIcon
   parent: JobIcon
   id: JobIconIAA
   icon:
-    sprite: Interface/Misc/job_icons.rsi
+    sprite: /Textures/Interface/Misc/job_icons.rsi
     state: IAA
 
 - type: statusIcon
