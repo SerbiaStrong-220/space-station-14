@@ -125,9 +125,6 @@ namespace Content.Server.Ghost
             if (args.Handled)
                 return;
 
-            // Sooooo, I've done this because GhostComponent's BodyVisible field is changed faster, than it is handled on client.
-            // I've just decided to create a new argument to the event and pass correct value into it.
-            RaiseNetworkEvent(new AGhostToggleBodyVisualsEvent(GetNetEntity(uid), component.BodyVisible));
             component.BodyVisible = !component.BodyVisible;
             Dirty(uid, component);
 

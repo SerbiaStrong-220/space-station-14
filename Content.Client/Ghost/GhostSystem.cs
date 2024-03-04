@@ -70,7 +70,6 @@ namespace Content.Client.Ghost
 
             SubscribeNetworkEvent<GhostWarpsResponseEvent>(OnGhostWarpsResponse);
             SubscribeNetworkEvent<GhostUpdateGhostRoleCountEvent>(OnUpdateGhostRoleCount);
-            SubscribeNetworkEvent<AGhostToggleBodyVisualsEvent>(OnToggleBodyVisuals);
 
             SubscribeLocalEvent<EyeComponent, ToggleLightingActionEvent>(OnToggleLighting);
             SubscribeLocalEvent<EyeComponent, ToggleFoVActionEvent>(OnToggleFoV);
@@ -117,21 +116,6 @@ namespace Content.Client.Ghost
         }
 
         //SS220-ghost-hats begin
-        private void OnToggleBodyVisuals(AGhostToggleBodyVisualsEvent ev, EntitySessionEventArgs args)
-        {
-            if (!TryGetEntity(ev.SenderUid, out var senderEntity))
-                return;
-
-            var query = AllEntityQuery<GhostComponent, SpriteComponent>();
-            while (query.MoveNext(out var uid, out var ghost, out var sprite))
-            {
-                if (uid != senderEntity)
-                    continue;
-
-                SetBodyVisuals(uid, sprite, !ev.Visible);
-            }
-        }
-
         private void SetBodyVisuals(EntityUid uid, SpriteComponent? sprite, bool visible)
         {
             if (!Resolve(uid, ref sprite))
@@ -177,27 +161,18 @@ namespace Content.Client.Ghost
         {
             GhostVisibility = true;
 
-            //SS220-ghost-hats begin
-            // This also feels very horrible.
-            // Have to do this because new ghosts will not see updated body visuals.
-            var query = AllEntityQuery<GhostComponent, SpriteComponent>();
-            while (query.MoveNext(out var queryUid, out var queryGhost, out var querySprite))
-            {
-                // It's true by default, so why process every single one?...
-                if (queryGhost.BodyVisible)
-                    continue;
-
-                SetBodyVisuals(queryUid, querySprite, false);
-            }
-            //SS220-ghost-hats end
-
             PlayerAttached?.Invoke(component);
         }
 
         private void OnGhostState(EntityUid uid, GhostComponent component, ref AfterAutoHandleStateEvent args)
         {
             if (TryComp<SpriteComponent>(uid, out var sprite))
+            {
                 sprite.LayerSetColor(0, component.color);
+
+                //SS220-ghost-hats
+                SetBodyVisuals(uid, sprite, component.BodyVisible);
+            }
 
             if (uid != _playerManager.LocalEntity)
                 return;
