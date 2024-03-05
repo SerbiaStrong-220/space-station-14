@@ -362,3 +362,45 @@
     refineResult:
     - SheetGlass1
     - ShardCrystalGreen
+
+#SS220-New-Crystals-start
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: yellow crystal light tube
+  id: LightTubeCrystalYellow
+  components:
+  - type: LightBulb
+    color: "#ffea19" #Неоновый жёлтый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: YellowLight
+    node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalYellow
+
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: purple crystal light tube
+  id: LightTubeCrystalPurple
+  components:
+  - type: LightBulb
+    color: "#bc13fe" #Неоновый фиолетовый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: PurpleLight
+    node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalPurple
+#SS220-New-Crystals-end

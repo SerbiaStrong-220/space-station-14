@@ -561,3 +561,58 @@
     energy: 3
     softness: 0.5
     color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
+
+#SS220-New-Crystals-start
+- type: entity
+  id: PoweredlightYellow
+  suffix: Yellow
+  parent: Poweredlight
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: LightTubeCrystalYellow
+    damage:
+      types:
+        Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffea19" #Неоновый жёлтый
+
+- type: entity
+  id: AlwaysPoweredlightYellow
+  suffix: Always Powered, Yellow
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffea19" #Неоновый жёлтый
+
+- type: entity
+  id: PoweredlightPurple
+  suffix: Purple
+  parent: Poweredlight
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: LightTubeCrystalPurple
+    damage:
+      types:
+        Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#bc13fe" #Неоновый фиолетовый
+
+- type: entity
+  id: AlwaysPoweredlightPurple
+  suffix: Always Powered, Purple
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#bc13fe" #Неоновый фиолетовый

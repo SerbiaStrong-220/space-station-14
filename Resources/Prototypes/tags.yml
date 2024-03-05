@@ -407,6 +407,14 @@
 - type: Tag
   id: CrystalRed
 
+#SS220-New-Crystals-start
+- type: Tag
+  id: CrystalYellow
+
+- type: Tag
+  id: CrystalPurple
+#SS220-New-Crystals-end
+
 - type: Tag
   id: ConveyorAssembly
 
