@@ -1138,7 +1138,6 @@
   - type: Lathe
     idleState: base_machine
     runningState: base_machine_processing
-    producingSound: /Audio/Machines/circuitprinter.ogg
     staticRecipes:
     - MaterialSheetMeat
     - SheetPaper
