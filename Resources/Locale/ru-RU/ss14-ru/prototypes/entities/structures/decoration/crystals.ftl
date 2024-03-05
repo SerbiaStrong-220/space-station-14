@@ -25,6 +25,3 @@ ent-CrystalPurple = фиолетовый кристалл
 ent-CrystalWhite = белый кристалл
     .suffix = белый
     .desc = Блестящий белый кристалл.
-ent-CrystalBlack = чёрный кристалл
-    .suffix = чёрный
-    .desc = Блестящий чёрный кристалл.
