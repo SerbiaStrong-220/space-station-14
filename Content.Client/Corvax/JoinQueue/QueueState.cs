@@ -12,7 +12,6 @@ public sealed class QueueState : State
 {
     [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
     [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private const string JoinSoundPath = "/Audio/Effects/voteding.ogg";
 
@@ -36,7 +35,10 @@ public sealed class QueueState : State
 
     private void Ding()
     {
-        _audio.PlayGlobal(JoinSoundPath, Filter.Local(), false);
+        if (IoCManager.Resolve<IEntityManager>().TrySystem<SharedAudioSystem>(out var audio))
+        {
+            audio.PlayGlobal(JoinSoundPath, Filter.Local(), false);
+        }
     }
     
     public void OnQueueUpdate(MsgQueueUpdate msg)
