@@ -139,6 +139,14 @@ public abstract partial class SharedFultonSystem : EntitySystem
             return;
         }
 
+        //SS220 fulton_grid_restriction start
+        if (component.Beacon != null && Transform((EntityUid) component.Beacon).GridUid != Transform(uid).GridUid)
+        {
+            _popup.PopupClient(Loc.GetString("fulton-not-on-the-same-grid"), uid, args.User);
+            return;
+        }
+        //SS220 fulton_grid_restriction end
+
         if (!CanApplyFulton(args.Target.Value, component))
         {
             _popup.PopupClient(Loc.GetString("fulton-invalid"), uid, uid);
