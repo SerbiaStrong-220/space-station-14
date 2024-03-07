@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
   "copyright": "MadSkaven",
   "size": {
     "x": 32,
@@ -8,15 +8,15 @@
   },
     "states": [
         {
-            "name": "computer",
+            "name": "cluwne_computer",
             "directions": 4
         },
         {
-            "name": "generic_keyboard",
+            "name": "cluwne_keyboard",
             "directions": 4
         },
         {
-            "name": "generic_keys",
+            "name": "cluwne_keys",
             "directions": 4,
             "delays": [
                 [
@@ -42,36 +42,36 @@
             ]
         },
         {
-            "name": "generic",
+            "name": "cluwne_screen",
             "directions": 4,
             "delays": [
                 [
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6
                 ],
                 [
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6
                 ],
                 [
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6
                 ],
                 [
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2,
-                    0.2
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6,
+                    0.6
                 ]
             ]
         }

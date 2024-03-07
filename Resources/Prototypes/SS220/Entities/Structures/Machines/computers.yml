@@ -40,27 +40,27 @@
     sprite: SS220/Structures/Machines/cluwneComms.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: computer
+      state: cluwne_computer
     - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
+      state: cluwne_keyboard
     - map: ["computerLayerScreen"]
-      state: generic
+      state: cluwne_screen
     - map: ["computerLayerKeys"]
-      state: generic_keys
+      state: cluwne_keys
   - type: AccessReader
     access: [[ "Theatre" ]]
+  - type: ActivatableUI
+    key: enum.CluwneCommsConsoleUiKey.Key
   - type: CommunicationsConsole
     title: cluwne-comms-console-announcement-title-station
     sound: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/announce.ogg
       params:
         volume: -4
-  - type: ActivatableUI
-    key: enum.CommunicationsConsoleUiKey.Key
   - type: UserInterface
     interfaces:
-    - key: enum.CommunicationsConsoleUiKey.Key
-      type: CommunicationsConsoleBoundUserInterface
+    - key: enum.CluwneCommsConsoleUiKey.Key
+      type: CluwneCommsConsoleBoundUserInterface
   - type: Computer
     board: CluwneCommsComputerCircuitboard
   - type: PointLight
