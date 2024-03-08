@@ -199,6 +199,11 @@
     netsync: false
     radius: 1.2 #slightly stronger than the other lighters
     color: orange
+  #SS220 FlippoLighter fix start
+  - type: UseDelay
+  - type: IgnitionSource
+    ignited: false
+  #SS220 FlippoLighter fix end
 
 - type: entity
   name: flippo engraved lighter
