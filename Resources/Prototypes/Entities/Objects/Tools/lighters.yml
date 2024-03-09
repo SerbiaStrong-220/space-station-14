@@ -141,8 +141,12 @@
     predictable: false
     soundActivate:
       path: /Audio/Items/Lighters/zippo_open.ogg
+      params: #SS220 FlippoLighter fix
+        volume: -5 #SS220 FlippoLighter fix
     soundDeactivate:
       path: /Audio/Items/Lighters/zippo_close.ogg
+      params: #SS220 FlippoLighter fix
+        volume: -5 #SS220 FlippoLighter fix
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
