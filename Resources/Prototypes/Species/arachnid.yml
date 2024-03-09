@@ -14,6 +14,17 @@
   femaleLastNames: names_arachnid_last # Corvax-LastnameGender
   sexes:
   - Unsexed
+  blockedJobs: #SS220-Job-Restrictions-start
+#Командование
+    - Captain
+#ЦК
+    - IAA
+#Медицинский отдел
+    - Psychologist
+#Сервис
+    - Clown
+    - Mime
+#SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
   id: MobArachnidSprites
