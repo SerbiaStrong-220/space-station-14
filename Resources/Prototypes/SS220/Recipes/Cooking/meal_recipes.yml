@@ -27,7 +27,7 @@
 - type: microwaveMealRecipe
   id: RecipeBorsch
   name: Borsch recipe
-  result: FoodSoupBorsch
+  result: FoodSoupBeet
   time: 10
   reagents:
     Water: 10

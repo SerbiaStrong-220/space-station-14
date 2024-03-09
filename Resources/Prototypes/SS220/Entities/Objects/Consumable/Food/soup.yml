@@ -1,28 +1,4 @@
 - type: entity
-  name: борщ
-  parent: FoodBowlBase
-  id: FoodSoupBorsch
-  description: Принесите мне кто-нибудь квас и хлеб!
-  components:
-  - type: FlavorProfile
-    flavors:
-      - borsch
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/bowl.rsi
-    layers:
-    - state: bowl
-    - state: borsch
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Vitamin
-          Quantity: 5
-
-- type: entity
   name: щи
   parent: FoodBowlBase
   id: FoodSoupShchi
