@@ -112,6 +112,7 @@
   - type: Vocal
     sounds:
       Male: MaleEngineer
+      Female: FemaleEngineer
       Unsexed: MaleEngineer
   #ss220 special_sounds end
 

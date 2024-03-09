@@ -12,6 +12,13 @@
   - engineer_scream_3.ogg
   - engineer_scream_4.ogg
   - engineer_scream_5.ogg
+  - engineer_critgasp_1.ogg
+  - engineer_critgasp_2.ogg
+  - engineer_critgasp_3.ogg
+  - engineer_critgasp_4.ogg
+  - engineer_critgasp_5.ogg
+  - engineer_deathgasp_1.ogg
+  - engineer_deathgasp_2.ogg
   license: "CC-BY-4.0"
-  copyright: "Modified by SkaldetSkaeg (Github), shortened, cleaned from background sounds, converted to OGG."
+  copyright: "Modified by SkaldetSkaeg (Github), shortened, converted to OGG."
   source: "https://wiki.teamfortress.com/wiki/Engineer_responses"

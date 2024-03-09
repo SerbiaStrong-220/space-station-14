@@ -78,4 +78,21 @@
       collection: MaleEngineerGiggle
     Scream:
       collection: MaleEngineerScream
+    CritGasp:
+      collection: MaleEngineerCritGasp
+    DefaultDeathgasp:
+      collection: MaleEngineerDeathGasp
 
+- type: emoteSounds
+  id: FemaleEngineer
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleValeeraLaugh
+    Giggle:
+      collection: FemaleValeeraGiggle
+    Scream:
+      collection: FemaleValeeraScream
+    DefaultDeathgasp:
+      collection: FemaleValeeraDeathGasp
