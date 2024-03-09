@@ -9,6 +9,17 @@
   dollPrototype: MobSlimePersonDummy
   skinColoration: Hues
   buttScanTexture: /Textures/SS220/Interface/Butts/slime.png
+  blockedJobs: #SS220-Job-Restrictions-start
+#Командование
+    - Captain
+#ЦК
+    - IAA
+#Сервис
+    - Janitor
+    - Chef
+    - Bartender
+    - Botanist
+#SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
   id: MobSlimeSprites
