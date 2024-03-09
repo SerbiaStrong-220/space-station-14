@@ -74,3 +74,19 @@
   - type: Construction
     graph: SteelCatwalk
     node: DarkCatwalk
+
+- type: entity
+  id: CatwalkLight
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/catwalklight.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/catwalklight.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkLight
