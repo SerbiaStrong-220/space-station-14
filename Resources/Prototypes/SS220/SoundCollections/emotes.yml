@@ -134,3 +134,28 @@
   files:
     - /Audio/SS220/Voice/Whitemane/whitemane_giggle_1.ogg
     - /Audio/SS220/Voice/Whitemane/whitemane_giggle_2.ogg
+
+- type: soundCollection
+  id: MaleEngineerLaugh
+  files:
+    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_1.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_2.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_3.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_4.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_5.ogg
+
+- type: soundCollection
+  id: MaleEngineerGiggle
+  files:
+    - /Audio/SS220/Voice/EngieTF2/engineer_giggle_1.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_giggle_2.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_giggle_3.ogg
+
+- type: soundCollection
+  id: MaleEngineerScream
+  files:
+    - /Audio/SS220/Voice/EngieTF2/engineer_scream_1.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_scream_2.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_scream_3.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_scream_4.ogg
+    - /Audio/SS220/Voice/EngieTF2/engineer_scream_5.ogg

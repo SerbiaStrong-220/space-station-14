@@ -98,6 +98,14 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineering
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 #Spationaut Hardsuit
 - type: entity
@@ -351,6 +359,14 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineeringWhite
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 #Chief Medical Officer's Hardsuit
 - type: entity

@@ -67,3 +67,15 @@
     Giggle:
       collection: FemaleWhitemaneGiggle
 
+- type: emoteSounds
+  id: MaleEngineer
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleEngineerLaugh
+    Giggle:
+      collection: MaleEngineerGiggle
+    Scream:
+      collection: MaleEngineerScream
+

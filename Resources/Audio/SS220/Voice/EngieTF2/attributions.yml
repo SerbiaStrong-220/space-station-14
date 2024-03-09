@@ -1,0 +1,17 @@
+- files:
+  - engineer_giggle_1.ogg
+  - engineer_giggle_2.ogg
+  - engineer_giggle_3.ogg
+  - engineer_laugh_1.ogg
+  - engineer_laugh_2.ogg
+  - engineer_laugh_3.ogg
+  - engineer_laugh_4.ogg
+  - engineer_laugh_5.ogg
+  - engineer_scream_1.ogg
+  - engineer_scream_2.ogg
+  - engineer_scream_3.ogg
+  - engineer_scream_4.ogg
+  - engineer_scream_5.ogg
+  license: "CC-BY-4.0"
+  copyright: "Modified by SkaldetSkaeg (Github), shortened, cleaned from background sounds, converted to OGG."
+  source: "https://wiki.teamfortress.com/wiki/Engineer_responses"
