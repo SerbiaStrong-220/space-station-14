@@ -1015,7 +1015,8 @@
   components:
   - type: FlavorProfile #ss220 cooking
     flavors:
-      - borsch       
+      - borsch  
+  - type: Sprite    
     sprite: SS220/Objects/Consumable/Food/bowl.rsi #ss220 cooking
     layers:
     - state: bowl
