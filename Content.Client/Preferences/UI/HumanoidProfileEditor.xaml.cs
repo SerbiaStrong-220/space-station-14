@@ -539,6 +539,7 @@ namespace Content.Client.Preferences.UI
         private void UpdateAntagList()
         {
             _antagPreferences.Clear();
+            _antagList.DisposeAllChildren();
 
             foreach (var antag in _prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
             {
