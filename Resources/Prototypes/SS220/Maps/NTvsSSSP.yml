@@ -69,7 +69,7 @@
             Lawyer: [ 2, 2 ]
 
 - type: entity
-  id: AxiomaNanotrasenStation
+  id: NTvsSSSPStation
   parent: StandardNanotrasenStation
   noSpawn: true
   components:
