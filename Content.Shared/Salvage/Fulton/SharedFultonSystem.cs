@@ -143,7 +143,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
         //SS220 fulton_grid_restriction start
         if (GridCheck(uid, component))
         {
-            _popup.PopupClient(Loc.GetString("fulton-not-on-the-same-grid"), uid, args.User);
+            _popup.PopupClient(Loc.GetString("fulton-on-the-tradepost"), uid, args.User);
             return;
         }
         //SS220 fulton_grid_restriction end
