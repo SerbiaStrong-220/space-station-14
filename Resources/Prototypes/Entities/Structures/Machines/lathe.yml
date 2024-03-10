@@ -87,6 +87,8 @@
       - ClothingHeadHatWelding #SS220 Craftable-Welding-Mask
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
       - Wirecutter
+      - Igniter
+      - Signaller
       - Screwdriver
       - Welder
       - Wrench
@@ -279,7 +281,6 @@
       - Implanter
       - PillCanister
       - ChemistryEmptyBottle01
-      - Drone
       - AdvMopItem
       - WeaponSprayNozzle
       - ClothingBackpackWaterTank
@@ -1107,6 +1108,7 @@
       - IngotSilver30
       - MaterialBananium10
 
+#SS220-Sheetifier-rework-start
 - type: entity
   parent: BaseLathe
   id: Sheetifier
@@ -1124,11 +1126,13 @@
   - type: Machine
     board: SheetifierMachineCircuitboard
   - type: MaterialStorage
-    dropOnDeconstruct: false #should drop ores instead of ingots/sheets
     ignoreColor: true
     canEjectStoredMaterials: false
     whitelist:
       tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
       - Raw
       - Wooden
   - type: Lathe
@@ -1137,3 +1141,59 @@
     staticRecipes:
     - MaterialSheetMeat
     - SheetPaper
+    - TileSteel
+    - TileMetalDiamond
+    - TileWood
+    - TileWhite
+    - TileDark
+    - TileTechmaint
+    - TileMono
+    - TileLino
+    - TileElevatorShaft
+    - TileRockVault
+    - TileBlue
+    - TileLime
+    - TileMining
+    - TileMiningDark
+    - TileMiningLight
+    - TileFreezer
+    - TileShowroom
+    - TileHydro
+    - TileBar
+    - TileClown
+    - TileMime
+    - TileKitchen
+    - TileLaundry
+    - TileConcrete
+    - TileGrayConcrete
+    - TileOldConcrete
+    - TileArcadeBlue
+    - TileArcadeBlue2
+    - TileArcadeRed
+    - TileEighties
+    - TileCarpetClown
+    - TileCarpetOffice
+    - TileBoxing
+    - TileGym
+    - TileShuttleWhite
+    - TileShuttleBlue
+    - TileShuttleOrange
+    - TileShuttlePurple
+    - TileShuttleRed
+    - TileShuttleGrey
+    - TileShuttleBlack
+    - TileGold
+    - TileSilver
+    - TileGreenCircuit
+    - TileBlueCircuit
+    - TileWoodPattern
+    - TileFlesh
+    - TileSteelMaint
+    - TileGratingMaint
+    - TileWoodLarge
+    - TileSteelReinforced
+    - TileWhiteReinforced
+    - TileDarkReinforced
+    - TileDutch
+    - TileDutchMini
+#SS220-Sheetifier-rework-end

@@ -1,5 +1,6 @@
 using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
+using Content.Shared.Actions;
 using Content.Shared.Administration;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
@@ -81,6 +82,11 @@ namespace Content.Server.Administration.Commands
 
             var comp = _entities.GetComponent<GhostComponent>(ghost);
             _entities.System<SharedGhostSystem>().SetCanReturnToBody(comp, canReturn);
+
+            //SS220-ghost-hats begin
+            var actions = _entities.System<SharedActionsSystem>();
+            actions.AddAction(ghost, ref comp.ToggleAGhostBodyVisualsActionEntity, comp.ToggleAGhostBodyVisualsAction);
+            //SS220-ghost-hats end
         }
 
         /**

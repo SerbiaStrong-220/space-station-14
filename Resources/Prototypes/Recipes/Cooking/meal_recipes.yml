@@ -186,7 +186,7 @@
   time: 10
   solids:
     FoodBreadBun: 1
-    Ectoplasm: 1
+    ClothingOuterGhostSheet: 1 # SS220 Old craft ghostburger
 
 - type: microwaveMealRecipe
   id: RecipeHumanBurger

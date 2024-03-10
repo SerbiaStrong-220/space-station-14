@@ -1,0 +1,32 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterApronRed
+  name: red apron
+  description: Red chef upron with pockets.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/apron_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/apron_red.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterApronWhite
+  name: white apron
+  description: White chef upron with pockets.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/apron_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/apron_white.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterChefBluza
+  name: chef bluza
+  description: White chef bluza.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/chief_bluza.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/chief_bluza.rsi

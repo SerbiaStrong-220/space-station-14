@@ -44,11 +44,11 @@
   description: A small piece of crystal.
   components:
   - type: Sprite
-    color: "#47f8ff"
+    color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
   - type: PointLight
     radius: 2
     energy: 2.5
-    color: "#47f8ff"
+    color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
   - type: Tag
     tags:
       - Trash
@@ -60,11 +60,11 @@
   id: ShardCrystalBlue
   components:
   - type: Sprite
-    color: "#39a1ff"
+    color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
   - type: PointLight
     radius: 2
     energy: 2.5
-    color: "#39a1ff"
+    color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
   - type: Tag
     tags:
       - Trash
@@ -76,11 +76,11 @@
   name: orange crystal shard
   components:
   - type: Sprite
-    color: "#ff8227"
+    color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
   - type: PointLight
     radius: 2
     energy: 2.5
-    color: "#ff8227"
+    color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
   - type: Tag
     tags:
       - Trash
@@ -92,11 +92,11 @@
   name: pink crystal shard
   components:
   - type: Sprite
-    color: "#ff66cc"
+    color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
   - type: PointLight
     radius: 2
     energy: 2.5
-    color: "#ff66cc"
+    color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
   - type: Tag
     tags:
       - Trash
@@ -108,11 +108,11 @@
   name: green crystal shard
   components:
   - type: Sprite
-    color: "#52ff39"
+    color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
   - type: PointLight
     radius: 2
     energy: 2.5
-    color: "#52ff39"
+    color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
   - type: Tag
     tags:
       - Trash
@@ -124,12 +124,61 @@
   name: red crystal shard
   components:
   - type: Sprite
-    color: "#fb4747"
+    color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
   - type: PointLight
     radius: 2
     energy: 2.5
-    color: "#fb4747"
+    color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
   - type: Tag
     tags:
       - Trash
       - CrystalRed
+
+#SS220-New-Crystals-start
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalYellow
+  name: yellow crystal shard
+  components:
+  - type: Sprite
+    color: "#ffea19" #Неоновый жёлтый
+  - type: PointLight
+    radius: 2
+    energy: 2.5
+    color: "#ffea19" #Неоновый жёлтый
+  - type: Tag
+    tags:
+      - Trash
+      - CrystalYellow
+
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalPurple
+  name: purple crystal shard
+  components:
+  - type: Sprite
+    color: "#bc13fe" #Неоновый фиолетовый
+  - type: PointLight
+    radius: 2
+    energy: 2.5
+    color: "#bc13fe" #Неоновый фиолетовый
+  - type: Tag
+    tags:
+      - Trash
+      - CrystalPurple
+
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalWhite
+  name: white crystal shard
+  components:
+  - type: Sprite
+    color: "#ffffff" #Белый
+  - type: PointLight
+    radius: 2
+    energy: 2.5
+    color: "#ffffff" #Белый
+  - type: Tag
+    tags:
+      - Trash
+#SS220-New-Crystals-end

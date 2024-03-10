@@ -407,6 +407,14 @@
 - type: Tag
   id: CrystalRed
 
+#SS220-New-Crystals-start
+- type: Tag
+  id: CrystalYellow
+
+- type: Tag
+  id: CrystalPurple
+#SS220-New-Crystals-end
+
 - type: Tag
   id: ConveyorAssembly
 
@@ -466,9 +474,6 @@
 
 - type: Tag
   id: DrinkBottle
-
-- type: Tag
-  id: DroneUsable
 
 - type: Tag
   id: Duck
@@ -1220,6 +1225,11 @@
 
 - type: Tag
   id:  boots
+
+# SS220 - chemical-implants start
+- type: Tag
+  id: ChemicalImplant
+# SS220- - chemical-implants end
 
 # SS220 no-animal-zombs
 - type: Tag

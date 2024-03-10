@@ -1,0 +1,38 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: энергетическая сабля
+  parent: EnergySword
+  id: EnergySaberNT
+  description: Передовое оружие NanoTrasen для ведения ближнего боя.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 19
+        Heat: 6
+        Structural: 15
+  - type: DisarmMalus
+    malus: 0.6
+  - type: EnergySword
+    colorOptions:
+    - "#ffcc00"
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
+    layers:
+    - state: e_saber
+    - state: e_saber_blade
+      color: "#FFFF00"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: MeleeWeapon
+    attackRate: 1
+    soundHit:
+      path: /Audio/Weapons/eblade1.ogg
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Item
+    sprite: SS220/Objects/Weapons/Melee/e_saber.rsi

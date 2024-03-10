@@ -21,6 +21,7 @@
   - Chaplain
   - Chef
   - Clown
+  - Detective
   - HeadOfPersonnel
   - Janitor
   - Lawyer
@@ -86,7 +87,6 @@
   - HeadOfSecurity
   - SecurityCadet
   - SecurityOfficer
-  - Detective
   - Warden
   - Brigmedic
   - SecurityPilot

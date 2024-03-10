@@ -249,7 +249,7 @@
   id: LightTubeCrystalCyan
   components:
   - type: LightBulb
-    color: "#47f8ff"
+    color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -269,7 +269,7 @@
   id: LightTubeCrystalBlue
   components:
   - type: LightBulb
-    color: "#39a1ff"
+    color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -289,7 +289,7 @@
   id: LightTubeCrystalPink
   components:
   - type: LightBulb
-    color: "#ff66cc"
+    color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -309,7 +309,7 @@
   id: LightTubeCrystalOrange
   components:
   - type: LightBulb
-    color: "#ff8227"
+    color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -329,7 +329,7 @@
   id: LightTubeCrystalRed
   components:
   - type: LightBulb
-    color: "#fb4747"
+    color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -349,7 +349,7 @@
   id: LightTubeCrystalGreen
   components:
   - type: LightBulb
-    color: "#52ff39"
+    color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -362,3 +362,45 @@
     refineResult:
     - SheetGlass1
     - ShardCrystalGreen
+
+#SS220-New-Crystals-start
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: yellow crystal light tube
+  id: LightTubeCrystalYellow
+  components:
+  - type: LightBulb
+    color: "#ffea19" #Неоновый жёлтый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: YellowLight
+    node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalYellow
+
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: purple crystal light tube
+  id: LightTubeCrystalPurple
+  components:
+  - type: LightBulb
+    color: "#bc13fe" #Неоновый фиолетовый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: PurpleLight
+    node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalPurple
+#SS220-New-Crystals-end

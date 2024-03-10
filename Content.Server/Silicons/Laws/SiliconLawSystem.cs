@@ -1,7 +1,9 @@
 using System.Linq;
 using Content.Server.Administration;
+using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Radio.Components;
 using Content.Server.Roles;
 using Content.Server.Station.Systems;
@@ -39,6 +41,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -200,13 +203,30 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void EnsureEmaggedRole(EntityUid uid, EmagSiliconLawComponent component)
     {
-        if (component.AntagonistRole == null || !_mind.TryGetMind(uid, out var mindId, out _))
+        if (component.AntagonistRole == null || !_mind.TryGetMind(uid, out var mindId, out var mind))
             return;
 
         if (_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
             return;
 
-        _roles.MindAddRole(mindId, new SubvertedSiliconRoleComponent { PrototypeId = component.AntagonistRole });
+        // SS220 antag ban
+        if (_mind.TryGetSession(mindId, out var session) && _banManager.GetJobBans(session.UserId) is { } roleBans && roleBans.Contains("SubvertedSilicon"))
+        {
+            // If user has role ban - kick him out of emagged borg.
+            _mind.TransferTo(mindId, null, mind: mind);
+
+            var ghostRole = EnsureComp<GhostRoleComponent>(uid);
+            EnsureComp<GhostTakeoverAvailableComponent>(uid);
+            ghostRole.RoleName = Loc.GetString("roles-antag-subverted-silicon-name");
+            ghostRole.RoleDescription = Loc.GetString("roles-antag-subverted-silicon-name");
+            ghostRole.RoleRules = Loc.GetString("roles-antag-subverted-silicon-objective");
+
+            EnsureComp<SubvertedSiliconRoleComponent>(uid).PrototypeId = component.AntagonistRole;
+        }
+        else
+        {
+            _roles.MindAddRole(mindId, new SubvertedSiliconRoleComponent { PrototypeId = component.AntagonistRole });
+        }
     }
 
     public SiliconLawset GetLaws(EntityUid uid, SiliconLawBoundComponent? component = null)

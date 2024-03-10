@@ -13,7 +13,6 @@ using System.Numerics;
 using Content.Shared.Inventory;
 using Content.Server.Storage.EntitySystems;
 using Robust.Shared.Audio;
-using Robust.Server.GameObjects;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Robust.Shared.Containers;
@@ -26,6 +25,7 @@ using Robust.Server.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Server.Shuttles.Components;
+using Content.Server.Administration.Managers;
 
 namespace Content.Server.Antag;
 
@@ -43,6 +43,7 @@ public sealed class AntagSelectionSystem : GameRuleSystem<GameRuleComponent>
     [Dependency] private readonly StorageSystem _storageSystem = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
     /// <summary>
     /// Attempts to start the game rule by checking if there are enough players in lobby and readied.
@@ -166,6 +167,13 @@ public sealed class AntagSelectionSystem : GameRuleSystem<GameRuleComponent>
             // Role prevents antag.
             if (!_jobs.CanBeAntag(player))
                 continue;
+
+            // SS220 antag ban start
+            if (_banManager.GetJobBans(player.UserId) is { } jobBans && jobBans.Contains(antagPreferenceId))
+            {
+                continue;
+            }
+            // SS220 antag ban end
 
             // Latejoin
             if (player.AttachedEntity != null && pendingQuery.HasComponent(player.AttachedEntity.Value))

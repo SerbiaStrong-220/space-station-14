@@ -61,6 +61,7 @@ namespace Content.IntegrationTests.Tests
             "MeteorArena",
             "Atlas",
             "Reach",
+            "Train",
 
             // SS220 Maps
             "220Delta",

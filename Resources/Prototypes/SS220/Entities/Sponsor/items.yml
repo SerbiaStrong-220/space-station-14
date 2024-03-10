@@ -151,6 +151,7 @@
 - type: entity
   parent: BaseItem
   id: SponsorElWycco
+  suffix: Шлёпа
   name: Максон
   description: КРИЧИ! КРИЧИ КАК СУЧЕЧКА!
   components:
@@ -202,6 +203,7 @@
 - type: entity
   parent: BaseKnife
   id: SponsorElWyccoAxe
+  suffix: Шлёпа
   name: микро топор
   description: Мини топор для мини игрушки.
   components:

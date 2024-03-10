@@ -15,9 +15,6 @@
         Blunt: 5
   - type: Stack
     count: 1
-  - type: Tag
-    tags:
-      - DroneUsable
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -59,9 +56,9 @@
       - FloorSteel
   - type: Stack
     stackType: FloorTileSteel
-  - type: Construction
-    graph: TileSteel
-    node: steeltile
+#  - type: Construction #SS220-Sheetifier-Rework
+#    graph: TileSteel
+#    node: steeltile
 
 - type: entity
   name: steel dark checker tile
@@ -102,7 +99,7 @@
       - FloorMetalDiamond
   - type: Stack
     stackType: FloorTileMetalDiamond
-#  - type: Construction
+#  - type: Construction #SS220-Sheetifier-Rework
 #    graph: TileSteel
 #    node: steeltile
 
@@ -121,9 +118,9 @@
       - FloorWood
   - type: Stack
     stackType: FloorTileWood
-  - type: Construction
-    graph: TileWood
-    node: woodtile
+#  - type: Construction #SS220-Sheetifier-Rework
+#    graph: TileWood
+#    node: woodtile
 
 - type: entity
   name: white tile
@@ -140,9 +137,9 @@
       - FloorWhite
   - type: Stack
     stackType: FloorTileWhite
-  - type: Construction
-    graph: TileWhite
-    node: whitetile
+#  - type: Construction #SS220-Sheetifier-Rework
+#    graph: TileWhite
+#    node: whitetile
 
 - type: entity
   name: dark tile
@@ -159,9 +156,9 @@
       - FloorDark
   - type: Stack
     stackType: FloorTileDark
-  - type: Construction
-    graph: TileDark
-    node: darktile
+#  - type: Construction #SS220-Sheetifier-Rework
+#    graph: TileDark
+#    node: darktile
 
 - type: entity
   name: techmaint floor
@@ -787,9 +784,9 @@
     state: gold
   - type: Item
     heldPrefix: gold
-  - type: Construction #SS220 New tile crafting begin
-    graph: TileGold
-    node: goldtile #SS220 New tile crafting end
+#  - type: Construction #SS220 New tile crafting begin #SS220-Sheetifier-Rework
+#    graph: TileGold
+#    node: goldtile #SS220 New tile crafting end
   - type: FloorTile
     outputs:
       - Plating
@@ -806,9 +803,9 @@
     state: silver
   - type: Item
     heldPrefix: silver
-  - type: Construction #SS220 New tile crafting begin
-    graph: TileSilver
-    node: silvertile #SS220 New tile crafting end
+#  - type: Construction #SS220 New tile crafting begin #SS220-Sheetifier-Rework
+#    graph: TileSilver
+#    node: silvertile #SS220 New tile crafting end
   - type: FloorTile
     outputs:
       - Plating
@@ -947,9 +944,9 @@
     - FloorFlesh
   - type: Stack
     stackType: FloorTileFlesh
-  - type: Construction
-    graph: TileFlesh
-    node: fleshTile
+#  - type: Construction #SS220-Sheetifier-Rework
+#    graph: TileFlesh
+#    node: fleshTile
 
 - type: entity
   name: steel maint floor
@@ -1035,3 +1032,22 @@
     - FloorAstroIce
   - type: Stack
     stackType: FloorTileAstroIce
+
+- type: entity
+  name: large wood floor
+  parent: FloorTileItemBase
+  id: FloorTileItemWoodLarge
+  components:
+  - type: Sprite
+    state: wood-large
+  - type: Item
+    heldPrefix: wood
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWoodLarge
+  - type: Stack
+    stackType: FloorTileWoodLarge
+#  - type: Construction #SS220-Sheetifier-Rework
+#    graph: TileWoodLarge
+#    node: woodtilelarge

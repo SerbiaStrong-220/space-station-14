@@ -420,26 +420,8 @@ namespace Content.Client.Preferences.UI
 
             _antagPreferences = new List<AntagPreferenceSelector>();
 
-            foreach (var antag in prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
-            {
-                if (!antag.SetPreference)
-                    continue;
-
-                var selector = new AntagPreferenceSelector(antag);
-                _antagList.AddChild(selector);
-                _antagPreferences.Add(selector);
-                if (selector.Disabled)
-                {
-                    Profile = Profile?.WithAntagPreference(antag.ID, false);
-                    IsDirty = true;
-                }
-
-                selector.PreferenceChanged += preference =>
-                {
-                    Profile = Profile?.WithAntagPreference(antag.ID, preference);
-                    IsDirty = true;
-                };
-            }
+            // SS220 antag ban
+            _requirements.Updated += UpdateAntagList;
 
             #endregion Antags
 
@@ -552,6 +534,35 @@ namespace Content.Client.Preferences.UI
         private void ToggleClothes(BaseButton.ButtonEventArgs obj)
         {
             RebuildSpriteView();
+        }
+
+        private void UpdateAntagList()
+        {
+            _antagPreferences.Clear();
+
+            foreach (var antag in _prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
+            {
+                if (!antag.SetPreference)
+                    continue;
+
+                var selector = new AntagPreferenceSelector(antag, Profile);
+
+                _antagList.AddChild(selector);
+                _antagPreferences.Add(selector);
+                if (selector.Disabled)
+                {
+                    Profile = Profile?.WithAntagPreference(antag.ID, false);
+                    IsDirty = true;
+                }
+
+                selector.PreferenceChanged += preference =>
+                {
+                    Profile = Profile?.WithAntagPreference(antag.ID, preference);
+                    IsDirty = true;
+                };
+            }
+
+            UpdateAntagPreferences();
         }
 
         private void UpdateRoleRequirements()
@@ -751,6 +762,7 @@ namespace Content.Client.Preferences.UI
 
             _requirements.Updated -= UpdateRoleRequirements;
             _preferencesManager.OnServerDataLoaded -= LoadServerData;
+            _requirements.Updated -= UpdateAntagList;
         }
 
         private void RebuildSpriteView()
@@ -1188,7 +1200,7 @@ namespace Content.Client.Preferences.UI
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
-            UpdateAntagPreferences();
+            UpdateAntagList();
             UpdateTraitPreferences();
             UpdateMarkings();
             RebuildSpriteView();
@@ -1397,7 +1409,7 @@ namespace Content.Client.Preferences.UI
 
             public event Action<bool>? PreferenceChanged;
 
-            public AntagPreferenceSelector(AntagPrototype proto)
+            public AntagPreferenceSelector(AntagPrototype proto, HumanoidCharacterProfile? profile)
                 : base(proto)
             {
                 Options.OnItemSelected += args => PreferenceChanged?.Invoke(Preference);
@@ -1415,6 +1427,10 @@ namespace Content.Client.Preferences.UI
                 // another function checks Disabled after creating the selector so this has to be done now
                 var requirements = IoCManager.Resolve<JobRequirementsManager>();
                 if (proto.Requirements != null && !requirements.CheckRoleTime(proto.Requirements, out var reason))
+                {
+                    LockRequirements(reason);
+                }
+                else if (profile is not null && !requirements.IsAntagAllowed(proto, profile, out reason))
                 {
                     LockRequirements(reason);
                 }
