@@ -35,3 +35,29 @@
   components:
   - type: AccessReader
     access: [["Engineering"]]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockCentcomm
+  name: дверь Центрального Командования
+  description: Дверь Центрального Командования сразу внушает доверие своими выдержанными гранями и крепкой формой. Не каждый может сидеть за одной из таких.
+  suffix: CentComm
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/centcomm_glass.rsi
+  - type: PaintableAirlock
+    group: Glass
+  - type: AccessReader
+    access: [["CentralCommand"]]
+
+- type: entity
+  parent: Airlock
+  id: CentcommDoor
+  name: дверь Центрального Командования
+  description: Стильная дверь, к созданию которой прикладывали руки не простые инженеры. Через неё ничего не видно. Судя по звукам там кого-то повышают?..
+  suffix: CentComm
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/centcomm.rsi
+  - type: AccessReader
+    access: [["CentralCommand"]]
