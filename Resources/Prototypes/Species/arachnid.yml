@@ -12,16 +12,49 @@
   femaleFirstNames: names_arachnid_first
   maleLastNames: names_arachnid_last # Corvax-LastnameGender
   femaleLastNames: names_arachnid_last # Corvax-LastnameGender
-  blockedJobs: #SS220-Job-Restrictions-start
+  blockedJobsByAccessor: #SS220-Job-Restrictions-start
 #Командование
-    - Captain
+    Captain: [ ]
+    HeadOfPersonnel: [ male ]
+    HeadOfSecurity: [ male ]
+    ChiefEngineer: [ male ]
+    Quartermaster: [ male ]
+    ChiefMedicalOfficer: [ male ]
 #ЦК
-    - IAA
+    IAA: [ ]
+    BlueShield: [ male ]
+#Служба Безопасности
+    Warden: [ male ]
+    SecurityOfficer: [ male ]
+    SecurityPilot: [ male ]
+    SecurityCadet: [ male ]
+    Brigmedic: [ famele ]
+#Инженерный отдел
+    AtmosphericTechnician: [ famele ]
+    StationEngineer: [ female ]
+    TechnicalAssistant: [ female ]
 #Медицинский отдел
-    - Psychologist
+    Psychologist: [ female ]
+    Chemist: [ female ]
+    MedicalDoctor: [ female ]
+    MedicalIntern: [ female ]
+    Paramedic: [ female ]
+#Научный отдел
+    Scientist: [ female ]
+    ResearchAssistant: [ female ]
+#Отдел снабжения
+    CargoTechnician: [ female ]
+    SalvageSpecialist: [ female ]
 #Сервис
-    - Clown
-    - Mime
+    Janitor: [ female ]
+    Chef: [ female ]
+    Bartender: [ female ]
+    Detective: [ male ]
+    Librarian: [ female ]
+    Janitor: [ female ]
+    Botanist: [ female ]
+    Clown: [ ]
+    Mime: [ ]
 #SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
