@@ -92,8 +92,6 @@
       collection: FemaleValeeraLaugh
     Giggle:
       collection: FemaleValeeraGiggle
-    Scream:
-      collection: FemaleValeeraScream
     DefaultDeathgasp:
       collection: FemaleValeeraDeathGasp
 
