@@ -96,3 +96,15 @@
       collection: FemaleValeeraScream
     DefaultDeathgasp:
       collection: FemaleValeeraDeathGasp
+
+- type: emoteSounds
+  id: MaleMedic
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleMedicLaugh
+    Giggle:
+      collection: MaleMedicGiggle
+    Scream:
+      collection: MaleMedicScream

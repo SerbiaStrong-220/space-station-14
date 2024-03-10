@@ -192,8 +192,6 @@
     - /Audio/SS220/Voice/Valeera/valeera_laugh_12.ogg
     - /Audio/SS220/Voice/Valeera/valeera_laugh_13.ogg
     - /Audio/SS220/Voice/Valeera/valeera_laugh_14.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_15.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_16.ogg
 
 - type: soundCollection
   id: FemaleValeeraGiggle
@@ -204,11 +202,6 @@
     - /Audio/SS220/Voice/Valeera/valeera_giggle_4.ogg
     - /Audio/SS220/Voice/Valeera/valeera_giggle_5.ogg
     - /Audio/SS220/Voice/Valeera/valeera_giggle_6.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_7.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_8.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_9.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_10.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_11.ogg
 
 - type: soundCollection
   id: FemaleValeeraDeathGasp
@@ -216,6 +209,26 @@
     - /Audio/SS220/Voice/Valeera/valeera_deathgasp_1.ogg
     - /Audio/SS220/Voice/Valeera/valeera_deathgasp_2.ogg
     - /Audio/SS220/Voice/Valeera/valeera_deathgasp_3.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_deathgasp_4.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_deathgasp_5.ogg
 
+- type: soundCollection
+  id: MaleMedicLaugh
+  files:
+   - /Audio/SS220/Voice/MedicTF2/medic_laugh_1.ogg
+   - /Audio/SS220/Voice/MedicTF2/medic_laugh_2.ogg
+   - /Audio/SS220/Voice/MedicTF2/medic_laugh_3.ogg
+   - /Audio/SS220/Voice/MedicTF2/medic_laugh_4.ogg
+   - /Audio/SS220/Voice/MedicTF2/medic_laugh_5.ogg
+
+- type: soundCollection
+  id: MaleMedicGiggle
+  files:
+    - /Audio/SS220/Voice/MedicTF2/medic_giggle_1.ogg
+    - /Audio/SS220/Voice/MedicTF2/medic_giggle_1.ogg
+
+- type: soundCollection
+  id: MaleMedicScream
+  files:
+    - /Audio/SS220/Voice/MedicTF2/medic_scream_1.ogg
+    - /Audio/SS220/Voice/MedicTF2/medic_scream_2.ogg
+    - /Audio/SS220/Voice/MedicTF2/medic_scream_3.ogg
+    - /Audio/SS220/Voice/MedicTF2/medic_scream_4.ogg
