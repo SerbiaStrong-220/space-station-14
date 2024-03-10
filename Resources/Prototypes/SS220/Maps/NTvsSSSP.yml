@@ -7,7 +7,7 @@
   minPlayers: 0
   stations:
     Axioma:
-      stationProto: AxiomaNanotrasenStation
+      stationProto: NTvsSSSPStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/emergency_axioma.yml
