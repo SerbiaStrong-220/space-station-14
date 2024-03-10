@@ -127,6 +127,13 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleMedic
+      Unsexed: MaleMedic
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -142,6 +149,13 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleMedic
+      Unsexed: MaleMedic
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -157,6 +171,13 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleMedic
+      Unsexed: MaleMedic
+  #ss220 special_sounds end
 
 
 - type: entity
@@ -173,6 +194,13 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleMedic
+      Unsexed: MaleMedic
+  #ss220 special_sounds end
 
 
 - type: entity
