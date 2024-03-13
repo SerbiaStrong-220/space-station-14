@@ -143,7 +143,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
         //SS220 fulton_grid_restriction start
         if (GridCheck(uid, component))
         {
-            _popup.PopupClient(Loc.GetString("fulton-on-the-tradepost"), uid, args.User);
+            _popup.PopupClient(Loc.GetString("fulton-is-restricted"), uid, args.User);
             return;
         }
         //SS220 fulton_grid_restriction end
@@ -186,7 +186,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
         if (!_entity.TryGetComponent<MetaDataComponent>(xform, out var metadata))
             return true;
 
-        if (metadata.EntityName == "Automated Trade Station")
+        if (metadata.EntityName == "Automated Trade Station" || metadata.EntityName == "Cargo shuttle")
             return true;
 
         //check if item not on tradepost
@@ -195,7 +195,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
         if (!_entity.TryGetComponent<MetaDataComponent>(yform, out metadata))
             return true;
 
-        if (metadata.EntityName == "Automated Trade Station")
+        if (metadata.EntityName == "Automated Trade Station" || metadata.EntityName == "Cargo shuttle")
             return true;
 
         return false;

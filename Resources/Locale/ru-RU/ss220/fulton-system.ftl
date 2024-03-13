@@ -1,1 +1,1 @@
-fulton-on-the-tradepost = Пространство заблокированно.
+fulton-is-restricted = Пространство заблокированно.
