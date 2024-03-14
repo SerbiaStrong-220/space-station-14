@@ -380,8 +380,12 @@
     - CondenserMachineCircuitBoard
     - HotplateMachineCircuitboard
     - UniformPrinterMachineCircuitboard
-    - FloorGreenCircuit
-    - FloorBlueCircuit
+    - TileGreenCircuit #SS220-sheetifier-rework-start
+    - TileBlueCircuit
+    - TilePurpleCircuit
+    - TileYellowCircuit
+    - TileOrangeCircuit
+    - TileRedCircuit #SS220-sheetifier-rework-end
     - MicrowaveMachineCircuitboard
     - ReagentGrinderMachineCircuitboard
     - ElectricGrillMachineCircuitboard
@@ -1127,7 +1131,7 @@
     board: SheetifierMachineCircuitboard
   - type: MaterialStorage
     ignoreColor: true
-    canEjectStoredMaterials: false
+    canEjectStoredMaterials: true
     whitelist:
       tags:
       - Sheet
@@ -1184,8 +1188,6 @@
     - TileShuttleBlack
     - TileGold
     - TileSilver
-    - TileGreenCircuit
-    - TileBlueCircuit
     - TileWoodPattern
     - TileFlesh
     - TileSteelMaint

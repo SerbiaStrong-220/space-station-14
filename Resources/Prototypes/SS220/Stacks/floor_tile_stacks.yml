@@ -33,3 +33,31 @@
   spawn: FloorTileItemDutchMini
   maxCount: 30
   itemSize: 5
+
+- type: stack
+  id: FloorTilePCircuit
+  name: плитка фиолетовых микросхем
+  spawn: FloorTileItemPCircuit
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileYCircuit
+  name: плитка жёлтых микросхем
+  spawn: FloorTileItemYCircuit
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileOCircuit
+  name: плитка оранжевых микросхем
+  spawn: FloorTileItemOCircuit
+  maxCount: 30
+  itemSize: 5
+
+- type: stack
+  id: FloorTileRCircuit
+  name: плитка красных микросхем
+  spawn: FloorTileItemRCircuit
+  maxCount: 30
+  itemSize: 5

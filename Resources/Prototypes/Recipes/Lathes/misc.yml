@@ -139,16 +139,22 @@
   materials:
     Plastic: 100
 
-- type: latheRecipe
-  id: FloorGreenCircuit
-  result: FloorTileItemGCircuit4
-  completetime: 2
+- type: latheRecipe #SS220-sheetifier-rework-start
+  id: TileGreenCircuit
+  result: FloorTileItemGCircuit
+  completetime: 1
   materials:
-    Steel: 100
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
 
 - type: latheRecipe
-  id: FloorBlueCircuit
-  result: FloorTileItemBCircuit4
-  completetime: 2
+  id: TileBlueCircuit
+  result: FloorTileItemBCircuit
+  completetime: 1
   materials:
-    Steel: 100
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25 #SS220-sheetifier-rework-end

@@ -351,28 +351,6 @@
     Silver: 50
 
 - type: latheRecipe
-  id: TileGreenCircuit
-  result: FloorTileItemGCircuit
-  category: TileTech
-  completetime: 1
-  materials:
-    Steel: 25
-    Plastic: 25
-    Gold: 25
-    Silver: 25
-
-- type: latheRecipe
-  id: TileBlueCircuit
-  result: FloorTileItemBCircuit
-  category: TileTech
-  completetime: 1
-  materials:
-    Steel: 25
-    Plastic: 25
-    Gold: 25
-    Silver: 25
-
-- type: latheRecipe
   id: TileWoodPattern
   result: FloorTileItemWoodPattern
   category: Wood
@@ -450,3 +428,43 @@
   completetime: 1
   materials:
     Plastic: 50
+
+- type: latheRecipe
+  id: TilePurpleCircuit
+  result: FloorTileItemPCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: TileYellowCircuit
+  result: FloorTileItemYCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: TileOrangeCircuit
+  result: FloorTileItemOCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: TileRedCircuit
+  result: FloorTileItemRCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
