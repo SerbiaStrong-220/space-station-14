@@ -38,7 +38,7 @@ namespace Content.IntegrationTests.Tests
             "/Maps/centcomm.yml",
             "/Maps/Shuttles/cargo.yml",
             "/Maps/Shuttles/emergency.yml",
-            "/Maps/infiltrator.yml",
+            "/Maps/ss220_nukeops_shuttle.yml",
         };
 
         private static readonly string[] GameMaps =

@@ -144,7 +144,7 @@ public sealed partial class NukeopsRuleComponent : Component
     public string NormalNames = "SyndicateNamesNormal";
 
     [DataField(customTypeSerializer: typeof(ResPathSerializer))]
-    public ResPath OutpostMap = new("/NukeOps/ss220_nukeops_outpost_noshuttle.yml"); //SS220 Nukeops map
+    public ResPath OutpostMap = new("/Maps/NukeOps/ss220_nukeops_outpost_noshuttle.yml"); //SS220 Nukeops map
 
     [DataField(customTypeSerializer: typeof(ResPathSerializer))]
     public ResPath ShuttleMap = new("/Maps/NukeOps/ss220_nukeops_shuttle.yml"); //SS220 Nukeops map
