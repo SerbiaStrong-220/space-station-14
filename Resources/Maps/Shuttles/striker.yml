@@ -409,7 +409,7 @@ entities:
     - type: SpreaderGrid
     - type: GridPathfinding
     - type: IFF
-      color: '#00FFFF00'
+      color: '#FF0000FF'
 - proto: AirlockExternalGlassShuttleSyndicateLocked
   entities:
   - uid: 162
@@ -2132,15 +2132,6 @@ entities:
       capacity: 100
 - proto: WindoorSecure
   entities:
-  - uid: 142
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -3.5,-1.5
-      parent: 2
-    - type: AccessReader
-      access:
-      - - NuclearOperative
   - uid: 225
     components:
     - type: Transform
