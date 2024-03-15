@@ -144,10 +144,10 @@ public sealed partial class NukeopsRuleComponent : Component
     public string NormalNames = "SyndicateNamesNormal";
 
     [DataField(customTypeSerializer: typeof(ResPathSerializer))]
-    public ResPath OutpostMap = new("/Maps/nukieplanet.yml");
+    public ResPath OutpostMap = new("/NukeOps/ss220_nukeops_outpost_noshuttle.yml"); //SS220 Nukeops map
 
     [DataField(customTypeSerializer: typeof(ResPathSerializer))]
-    public ResPath ShuttleMap = new("/Maps/infiltrator.yml");
+    public ResPath ShuttleMap = new("/Maps/NukeOps/ss220_nukeops_shuttle.yml"); //SS220 Nukeops map
 
     [DataField]
     public WinType WinType = WinType.Neutral;
