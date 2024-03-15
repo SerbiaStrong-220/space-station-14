@@ -24,3 +24,7 @@
 # ss220 shlepi
 - type: Tag
   id: ElWyccoAxe
+
+# ss220 detective-camera
+- type: Tag
+  id: DetectiveCamera
