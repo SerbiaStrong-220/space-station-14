@@ -49,6 +49,7 @@
     jumpsuit: ClothingUniformCentCommOfficer
     shoes: ClothingShoesBootsLaceup
     head: ClothingHeadHatNavyFieldOfficerCap
+    neck: ClothingNeckCloakFieldOfficerCentComm
     eyes: ClothingEyesGlassesBlueShield
     gloves: ClothingHandsGlovesLatex
     id: CentcomFieldOfficerPDA
