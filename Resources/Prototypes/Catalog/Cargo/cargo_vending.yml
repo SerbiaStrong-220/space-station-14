@@ -163,8 +163,6 @@
     state: base
   product: CrateVendingMachineRestockSeedsFilled
   cost: 3450 # SS220 Cargo fix
-  category: Hydroponics
-  cost: 3375
   category: cargoproduct-category-name-hydroponics
   group: market
 
