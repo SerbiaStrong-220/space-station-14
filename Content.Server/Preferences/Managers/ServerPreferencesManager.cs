@@ -104,7 +104,7 @@ namespace Content.Server.Preferences.Managers
             // Corvax-Sponsors-Start: Ensure removing sponsor markings if client somehow bypassed client filtering
             // WARN! It's not removing markings from DB!
             var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
-            profile.EnsureValid(allowedMarkings);
+            profile.EnsureValid(_cfg, _protos, allowedMarkings);
             // Corvax-Sponsors-End
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
@@ -202,7 +202,7 @@ namespace Content.Server.Preferences.Managers
                     foreach (var (_, profile) in prefs.Characters)
                     {
                         var allowedMarkings = _sponsors.TryGetInfo(session.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
-                        profile.EnsureValid(allowedMarkings);
+                        profile.EnsureValid(_cfg, _protos, allowedMarkings);
                     }
                     // Corvax-Sponsors-End
                     prefsData.Prefs = prefs;
@@ -281,44 +281,19 @@ namespace Content.Server.Preferences.Managers
                 return await _db.InitPrefsAsync(userId, HumanoidCharacterProfile.Random());
             }
 
-            return SanitizePreferences(prefs);
+            return SanitizePreferences(prefs, userId);
         }
 
-        private PlayerPreferences SanitizePreferences(PlayerPreferences prefs)
+        private PlayerPreferences SanitizePreferences(PlayerPreferences prefs, NetUserId userId)
         {
             // Clean up preferences in case of changes to the game,
             // such as removed jobs still being selected.
 
+            var allowedMarkings = _sponsors.TryGetInfo(userId, out var sponsor) ? sponsor.AllowedMarkings : new string[] { };
+
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
-                ICharacterProfile newProf;
-                switch (p.Value)
-                {
-                    case HumanoidCharacterProfile hp:
-                    {
-                        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-                        var selectedSpecies = HumanoidAppearanceSystem.DefaultSpecies;
-
-                        if (prototypeManager.TryIndex<SpeciesPrototype>(hp.Species, out var species) && species.RoundStart)
-                        {
-                            selectedSpecies = hp.Species;
-                        }
-
-                        newProf = hp
-                            .WithJobPriorities(
-                                hp.JobPriorities.Where(job =>
-                                    _protos.HasIndex<JobPrototype>(job.Key)))
-                            .WithAntagPreferences(
-                                hp.AntagPreferences.Where(antag =>
-                                    _protos.HasIndex<AntagPrototype>(antag)))
-                            .WithSpecies(selectedSpecies);
-                        break;
-                    }
-                    default:
-                        throw new NotSupportedException();
-                }
-
-                return new KeyValuePair<int, ICharacterProfile>(p.Key, newProf);
+                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(_cfg, _protos, allowedMarkings));
             }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor);
         }
 

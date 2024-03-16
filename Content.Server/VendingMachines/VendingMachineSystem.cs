@@ -491,15 +491,17 @@ namespace Content.Server.VendingMachines
 
             EntityUid ent;
 
+            // SS220 vending-machine-inv begin
             if (vendComponent.NextEntityToEject is { } entityUid)
             {
-                vendComponent.Container.Remove(entityUid);
+                _containerSystem.Remove(entityUid, vendComponent.Container);
                 ent = entityUid;
             }
             else
             {
                 ent = Spawn(vendComponent.NextItemToEject, Transform(uid).Coordinates);
             }
+            // SS220 vending-machine-inv end
 
 
             if (vendComponent.ThrowNextItem)

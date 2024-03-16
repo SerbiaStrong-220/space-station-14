@@ -786,6 +786,7 @@
     - CogChamp
     - Honk
     - Carpetium
+    - JuiceThatMakesYouWeh
   - type: Drink
     solution: anomaly
   - type: DrainableSolution
@@ -803,7 +804,7 @@
   id: AnomalyShadow
   parent: BaseAnomaly
   suffix: Shadow
-  components:  
+  components:
   - type: Sprite
     sprite: Structures/Specific/Anomalies/shadow_anom.rsi
     layers:
@@ -837,14 +838,14 @@
         minAmount: 10
         maxAmount: 20
         maxRange: 4
-      spawns: 
+      spawns:
       - ShadowKudzuWeak
     - settings:
         spawnOnSuperCritical: true
         minAmount: 30
         maxAmount: 40
         maxRange: 50
-      spawns: 
+      spawns:
       - ShadowKudzu
   - type: Portal
     arrivalSound: /Audio/Items/hiss.ogg
