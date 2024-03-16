@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Kit0vras (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "steelreinf"
+    },
+    {
+      "name": "whitereinf"
+    },
+    {
+      "name": "darkreinf"
+    },
+    {
+      "name": "dutch"
+    },
+    {
+      "name": "dutchmini"
+    },
+    {
+      "name": "steelreinf-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "steelreinf-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "whitereinf-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "whitereinf-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "darkreinf-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "darkreinf-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "dutch-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "dutch-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pcircuit"
+    },
+    {
+      "name": "ycircuit"
+    },
+    {
+      "name": "ocircuit"
+    },
+    {
+      "name": "rcircuit"
+    },
+    {
+      "name": "pcircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pcircuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ycircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ycircuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ocircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ocircuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "rcircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "rcircuit-inhand-left",
+      "directions": 4
+    }
+  ]
+}

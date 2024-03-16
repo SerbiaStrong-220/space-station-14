@@ -68,7 +68,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MeleeWeaponComponent, EntityUnpausedEvent>(OnMeleeUnpaused);
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);
         SubscribeLocalEvent<MeleeWeaponComponent, GunShotEvent>(OnMeleeShot);
@@ -110,11 +109,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             component.NextAttack = gun.NextFire;
             Dirty(uid, component);
         }
-    }
-
-    private void OnMeleeUnpaused(EntityUid uid, MeleeWeaponComponent component, ref EntityUnpausedEvent args)
-    {
-        component.NextAttack += args.PausedTime;
     }
 
     private void OnMeleeSelected(EntityUid uid, MeleeWeaponComponent component, HandSelectedEvent args)
@@ -502,6 +496,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
         RaiseLocalEvent(target.Value, attackedEvent);
 
+        // SS220 hook attack event start
+        if (attackedEvent.Cancelled)
+            return;
+        // SS220 hook attack event end
+
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
         var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin:user);
 
@@ -640,6 +639,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);
+
+            // SS220 hook attack event start
+            if (attackedEvent.Cancelled)
+                continue;
+            // SS220 hook attack event end
+
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
             var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin:user);

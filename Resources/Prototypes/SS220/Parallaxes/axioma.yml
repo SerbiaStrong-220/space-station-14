@@ -1,0 +1,31 @@
+- type: parallax
+  id: AxiomaParallax
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/AxiomaBackground_space.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/AxiomaBackground_stars.png"
+      slowness: 0.97
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/AxiomaDust.png"
+      slowness: 0.94
+      scale: "2, 2"
+      scrolling: "-0.1, 0.1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/AxiomaStars.png"
+      slowness: 0.94
+      scale: "1, 1"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+        slowness: 0.875
+  layersLQUseHQ: false

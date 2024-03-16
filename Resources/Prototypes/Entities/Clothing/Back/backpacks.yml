@@ -201,7 +201,7 @@
     sprite: Clothing/Back/Backpacks/ertleader.rsi
   - type: Storage
     grid:
-    - 0,0,10,3
+    - 0,0,10,4 # SS220 bigger-ert-backpack
 
 - type: entity
   parent: ClothingBackpackERTLeader

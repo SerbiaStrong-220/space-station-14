@@ -21,6 +21,7 @@
   - Chaplain
   - Chef
   - Clown
+  - Detective
   - HeadOfPersonnel
   - Janitor
   - Lawyer
@@ -86,7 +87,6 @@
   - HeadOfSecurity
   - SecurityCadet
   - SecurityOfficer
-  - Detective
   - Warden
   - Brigmedic
   - SecurityPilot
@@ -100,6 +100,16 @@
   - ResearchDirector
   - Scientist
   - ResearchAssistant
+
+- type: department
+  id: Cryo
+  sort: 0
+  description: Крио
+  color: "#88FF88"
+  roles: []
+  primary: false
+  weight: -50
+
 
 - type: department
   id: Specific

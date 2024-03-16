@@ -26,6 +26,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Network;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -42,6 +44,7 @@ namespace Content.Server.Ghost.Roles
         [Dependency] private readonly SharedMindSystem _mindSystem = default!;
         [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
         [Dependency] private readonly IChatManager _chat = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
         private uint _nextRoleIdentifier;
         private bool _needsUpdateGhostRoleCount = true;
@@ -353,6 +356,12 @@ namespace Content.Server.Ghost.Roles
             if (string.IsNullOrEmpty(component.Prototype))
                 throw new NullReferenceException("Prototype string cannot be null or empty!");
 
+            if (IsGhostRolesBanned(args.Player.UserId) || IsRoleBanned(component.Prototype, args.Player.UserId))
+            {
+                args.TookRole = false;
+                return;
+            }
+
             var mob = Spawn(component.Prototype, Transform(uid).Coordinates);
             _transform.AttachToGridOrMap(mob);
 
@@ -380,6 +389,33 @@ namespace Content.Server.Ghost.Roles
             args.TookRole = true;
         }
 
+        private bool IsRoleBanned(string prototypeName, NetUserId userId)
+        {
+            var bans = _banManager.GetJobBans(userId) ?? new HashSet<string>();
+
+            var isBanned =
+                prototypeName == "MobHumanLoneNuclearOperative" && bans.Contains("Nukeops")
+                || prototypeName == "MobHumanTerminator" && bans.Contains("Terminator")
+                || prototypeName == "MobHumanSpaceNinja" && bans.Contains("SpaceNinja")
+                || prototypeName.StartsWith("Borg") && bans.Contains("SubvertedSilicon")
+                || prototypeName.Contains("Zombie") && bans.Contains("Zombie");
+
+            if (isBanned)
+            {
+                if (_playerManager.TryGetSessionById(userId, out var session))
+                {
+                    var msg = Loc.GetString("ghost-role-banned");
+                    var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", "Вам запрещено играть на данном антагонисте"));
+
+                    _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.Channel, Color.Red);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         private bool CanTakeGhost(EntityUid uid, GhostRoleComponent? component = null)
         {
             return Resolve(uid, ref component, false) &&
@@ -398,22 +434,21 @@ namespace Content.Server.Ghost.Roles
 
             var userId = args.Player.UserId;
 
-            if (_banManager.GetJobBans(userId) is {} bans && bans.Contains("GhostRole"))
+            // SS220 ban restricts start
+            if (IsGhostRolesBanned(userId))
             {
-                if (!_playerManager.TryGetSessionById(userId, out var session))
-                {
-                    args.TookRole = false;
-                    return;
-                }
-
-                var msg = Loc.GetString("ghost-role-banned");
-                var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
-
-                _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.Channel, Color.Red);
-
                 args.TookRole = false;
                 return;
             }
+
+            var entityProto = MetaData(uid).EntityPrototype;
+
+            if (entityProto is not null && IsRoleBanned(entityProto.ID, args.Player.UserId))
+            {
+                args.TookRole = false;
+                return;
+            }
+            // SS220 ban restricts end
 
             ghostRole.Taken = true;
 
@@ -432,6 +467,26 @@ namespace Content.Server.Ghost.Roles
             UnregisterGhostRole((uid, ghostRole));
 
             args.TookRole = true;
+        }
+
+        private bool IsGhostRolesBanned(NetUserId userId)
+        {
+            if (_banManager.GetJobBans(userId) is { } bans && bans.Contains("GhostRole"))
+            {
+                if (!_playerManager.TryGetSessionById(userId, out var session))
+                {
+                    return true;
+                }
+
+                var msg = Loc.GetString("ghost-role-banned");
+                var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+
+                _chat.ChatMessageToOne(ChatChannel.Server, msg, wrappedMsg, default, false, session.Channel, Color.Red);
+
+                return true;
+            }
+
+            return false;
         }
     }
 

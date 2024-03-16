@@ -342,6 +342,19 @@
   parent: LockerBaseSecure
   name: gun safe
   components:
+  - type: Sprite #SS220-Gun-Safe-Resprite-Start
+    sprite: Structures/Storage/gunsafe.rsi
+    layers:
+    - state: shotguncase
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: shotguncase_door
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"] #SS220-Gun-Safe-Resprite-End
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: shotguncase
@@ -359,7 +372,7 @@
   components:
   - type: AccessReader
     access: [["Detective"]]
-    
+
 - type: entity
   id: LockerEvidence
   parent: LockerSecurity
@@ -383,7 +396,7 @@
     stateDoorClosed: podpil_door
   - type: AccessReader
     access: [["Security"]]  #WMT
-    
+
 # Syndicate
 - type: entity
   id: LockerSyndicatePersonal

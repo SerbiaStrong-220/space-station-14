@@ -92,6 +92,19 @@ public sealed class JobRequirementsManager
         return _adminManager.IsActive();
     }
 
+    public bool IsAntagAllowed(AntagPrototype antag, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
+    {
+        reason = null;
+
+        if (_roleBans.Contains($"Job:{antag.ID}"))
+        {
+            reason = FormattedMessage.FromUnformatted("Этот антагонист для вас заблокирован");
+            return false;
+        }
+
+        return true;
+    }
+
     public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
@@ -102,13 +115,7 @@ public sealed class JobRequirementsManager
             return false;
         }
 
-        if (job.Requirements == null ||
-            !_cfg.GetCVar(CCVars.GameRoleTimers))
-        {
-            return true;
-        }
-
-        var player = _playerManager.LocalPlayer?.Session;
+        var player = _playerManager.LocalSession;
         if (player == null)
             return true;
 
@@ -171,7 +178,7 @@ public sealed class JobRequirementsManager
 
     public bool CheckRoleTime(HashSet<JobRequirement>? requirements, ReasonList reasons)
     {
-        if (requirements == null)
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
         foreach (var requirement in requirements)

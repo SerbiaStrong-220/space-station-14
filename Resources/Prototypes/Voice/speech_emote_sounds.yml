@@ -46,6 +46,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: FemaleHuman
@@ -94,6 +96,8 @@
     CritGasp:
       collection: FemaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: UnisexReptilian
@@ -130,6 +134,8 @@
     Growl:
       collection: LizardGrowl
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: MaleSlime
@@ -178,6 +184,8 @@
     Bubbles:
       collection: SlimeBubbles
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
 
@@ -228,6 +236,8 @@
     Bubbles:
       collection: SlimeBubbles
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
 
@@ -242,10 +252,13 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
-  sound:
-    path: /Audio/Voice/Vox/shriek1.ogg
-    params:
-      variation: 0.125
+    Scream:
+      path: /Audio/Voice/Vox/shriek1.ogg
+    Laugh:
+      path: /Audio/Voice/Vox/vox_laugh.ogg
+  params:
+    variation: 0.125
+    # We need vox sounds for the other emotes
 
 - type: emoteSounds
   id: UnisexDiona
@@ -256,9 +269,10 @@
       collection: DionaLaugh
     Honk:
       collection: BikeHorn
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
-
 
 - type: emoteSounds
   id: UnisexArachnid
@@ -283,6 +297,8 @@
     Hiss:
       collection: ArachnidHiss
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: UnisexDwarf
@@ -327,6 +343,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
     pitch: 0.75
@@ -365,6 +383,8 @@
     CritGasp:
       collection: FemaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
     pitch: 0.75
@@ -392,6 +412,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 # body emotes
 - type: emoteSounds
@@ -469,3 +491,9 @@
     path: /Audio/Animals/kangaroo_grunt.ogg
     params:
       variation: 0.125
+
+- type: emoteSounds
+  id: Nymph
+  sounds:
+    Chirp:
+      path: /Audio/Animals/nymph_chirp.ogg

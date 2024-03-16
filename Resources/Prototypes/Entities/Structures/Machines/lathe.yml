@@ -84,9 +84,10 @@
     idleState: icon
     runningState: building
     staticRecipes:
-      - ClothingHeadHatWelding #SS220 Craftable-Welding-Mask
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
       - Wirecutter
+      - Igniter
+      - Signaller
       - Screwdriver
       - Welder
       - Wrench
@@ -100,6 +101,7 @@
       - CableHVStack
       - HandheldGPSBasic
       - TRayScanner
+      - AirTank
       - GasAnalyzer
       - UtilityBelt
       - Fulton
@@ -112,9 +114,11 @@
       - Syringe
       - HandLabeler
       - LightTube
+      - LedLightTube
       - SodiumLightTube
       - ExteriorLightTube
       - LightBulb
+      - LedLightBulb
       - Bucket
       - DrinkMug
       - DrinkMugMetal
@@ -158,6 +162,8 @@
       - CellRechargerCircuitboard
       - BorgChargerCircuitboard
       - WeaponCapacitorRechargerCircuitboard
+      - HandheldStationMap
+      - ClothingHeadHatWelding
   - type: EmagLatheRecipes
     emagStaticRecipes:
        - CartridgePistol
@@ -278,7 +284,6 @@
       - Implanter
       - PillCanister
       - ChemistryEmptyBottle01
-      - Drone
       - AdvMopItem
       - WeaponSprayNozzle
       - ClothingBackpackWaterTank
@@ -287,9 +292,11 @@
       - ChemicalPayload
       - FlashPayload
       - Signaller
+      - SignallerAdvanced
       - SignalTrigger
       - VoiceTrigger
       - Igniter
+      - HandHeldMassScanner
       - PowerCellMicroreactor
       - PowerCellHigh
       - WeaponPistolCHIMP
@@ -377,13 +384,18 @@
     - CondenserMachineCircuitBoard
     - HotplateMachineCircuitboard
     - UniformPrinterMachineCircuitboard
-    - FloorGreenCircuit
-    - FloorBlueCircuit
+    - TileGreenCircuit #SS220-sheetifier-rework-start
+    - TileBlueCircuit
+    - TilePurpleCircuit
+    - TileYellowCircuit
+    - TileOrangeCircuit
+    - TileRedCircuit #SS220-sheetifier-rework-end
     - MicrowaveMachineCircuitboard
     - ReagentGrinderMachineCircuitboard
     - ElectricGrillMachineCircuitboard
     - BoozeDispenserMachineCircuitboard
     - SodaDispenserMachineCircuitboard
+    - SpaceHeaterMachineCircuitBoard
     dynamicRecipes:
       - ThermomachineFreezerMachineCircuitBoard
       - HellfireFreezerMachineCircuitBoard
@@ -487,7 +499,6 @@
     - SciFlash
     - BorgModuleCable
     - BorgModuleFireExtinguisher
-    - BorgModuleGPS
     - BorgModuleRadiationDetection
     - BorgModuleTool
     - BorgModuleAppraisal
@@ -537,6 +548,7 @@
     - BorgModuleMining
     - BorgModuleGrapplingGun
     - BorgModuleAdvancedTool
+    - BorgModuleGPS
     - BorgModuleRCD
     - BorgModuleArtifact
     - BorgModuleAnomaly
@@ -903,6 +915,8 @@
       - ClothingUniformJumpskirtDetective
       - ClothingUniformJumpsuitEngineering
       - ClothingUniformJumpskirtEngineering
+      - ClothingUniformJumpsuitSeniorEngineer
+      - ClothingUniformJumpskirtSeniorEngineer
       - ClothingHeadHatHopcap
       - ClothingUniformJumpsuitHoP
       - ClothingUniformJumpskirtHoP
@@ -928,11 +942,15 @@
       - ClothingHeadHatBeretSeniorPhysician
       - ClothingUniformJumpsuitMedicalDoctor
       - ClothingUniformJumpskirtMedicalDoctor
+      - ClothingUniformJumpsuitSeniorPhysician
+      - ClothingUniformJumpskirtSeniorPhysician
       - ClothingUniformJumpsuitMime
       - ClothingUniformJumpskirtMime
       - ClothingUniformJumpsuitMusician
       - ClothingUniformJumpsuitParamedic
       - ClothingUniformJumpskirtParamedic
+      - ClothingUniformJumpsuitSeniorOfficer
+      - ClothingUniformJumpskirtSeniorOfficer
       - ClothingUniformJumpsuitPrisoner
       - ClothingUniformJumpskirtPrisoner
       - ClothingHeadHatQMsoft
@@ -947,6 +965,8 @@
       - ClothingUniformJumpskirtResearchDirector
       - ClothingUniformJumpsuitScientist
       - ClothingUniformJumpskirtScientist
+      - ClothingUniformJumpsuitSeniorResearcher
+      - ClothingUniformJumpskirtSeniorResearcher
       - ClothingHeadHatBeretSecurity
       - ClothingUniformJumpsuitSec
       - ClothingUniformJumpskirtSec
@@ -957,6 +977,7 @@
       - ClothingHeadHatWarden
       - ClothingUniformJumpsuitWarden
       - ClothingUniformJumpskirtWarden
+      - ClothingHeadHatParamedicsoft
       # Winter outfits
       - ClothingOuterWinterCap
       - ClothingOuterWinterCE
@@ -1006,6 +1027,16 @@
       - ClothingNeckScarfStripedOrange
       - ClothingNeckScarfStripedBlack
       - ClothingNeckScarfStripedPurple
+      # Carpets
+      - Carpet
+      - CarpetBlack
+      - CarpetPink
+      - CarpetBlue
+      - CarpetGreen
+      - CarpetOrange
+      - CarpetPurple
+      - CarpetCyan
+      - CarpetWhite
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - ClothingHeadHatCentcomcap
@@ -1105,6 +1136,7 @@
       - IngotSilver30
       - MaterialBananium10
 
+#SS220-Sheetifier-rework-start
 - type: entity
   parent: BaseLathe
   id: Sheetifier
@@ -1122,11 +1154,13 @@
   - type: Machine
     board: SheetifierMachineCircuitboard
   - type: MaterialStorage
-    dropOnDeconstruct: false #should drop ores instead of ingots/sheets
     ignoreColor: true
-    canEjectStoredMaterials: false
+    canEjectStoredMaterials: true
     whitelist:
       tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
       - Raw
       - Wooden
   - type: Lathe
@@ -1135,3 +1169,57 @@
     staticRecipes:
     - MaterialSheetMeat
     - SheetPaper
+    - TileSteel
+    - TileMetalDiamond
+    - TileWood
+    - TileWhite
+    - TileDark
+    - TileTechmaint
+    - TileMono
+    - TileLino
+    - TileElevatorShaft
+    - TileRockVault
+    - TileBlue
+    - TileLime
+    - TileMining
+    - TileMiningDark
+    - TileMiningLight
+    - TileFreezer
+    - TileShowroom
+    - TileHydro
+    - TileBar
+    - TileClown
+    - TileMime
+    - TileKitchen
+    - TileLaundry
+    - TileConcrete
+    - TileGrayConcrete
+    - TileOldConcrete
+    - TileArcadeBlue
+    - TileArcadeBlue2
+    - TileArcadeRed
+    - TileEighties
+    - TileCarpetClown
+    - TileCarpetOffice
+    - TileBoxing
+    - TileGym
+    - TileShuttleWhite
+    - TileShuttleBlue
+    - TileShuttleOrange
+    - TileShuttlePurple
+    - TileShuttleRed
+    - TileShuttleGrey
+    - TileShuttleBlack
+    - TileGold
+    - TileSilver
+    - TileWoodPattern
+    - TileFlesh
+    - TileSteelMaint
+    - TileGratingMaint
+    - TileWoodLarge
+    - TileSteelReinforced
+    - TileWhiteReinforced
+    - TileDarkReinforced
+    - TileDutch
+    - TileDutchMini
+#SS220-Sheetifier-rework-end

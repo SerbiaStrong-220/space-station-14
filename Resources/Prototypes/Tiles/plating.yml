@@ -3,7 +3,7 @@
   name: tiles-plating
   sprite: /Textures/Tiles/plating.png
   baseTurf: Lattice
-  deconstructTools: [ PlatingCutting, Cutting ] #SS220 JOL TilePryingng
+  deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
@@ -20,7 +20,7 @@
   - 1.0
   - 1.0
   baseTurf: Lattice
-  deconstructTools: [ PlatingCutting, Cutting ] #SS220 JOL TilePryingng
+  deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
@@ -32,7 +32,7 @@
   name: tiles-plating
   sprite: /Textures/Tiles/plating_burnt.png
   baseTurf: Lattice
-  deconstructTools: [ PlatingCutting, Cutting ] #SS220 JOL TilePryingng
+  deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
@@ -44,7 +44,18 @@
   name: tiles-asteroid-plating
   sprite: /Textures/Tiles/Asteroid/asteroid_plating.png
   baseTurf: Lattice
-  deconstructTools: [ PlatingCutting, Cutting ] #SS220 JOL TilePryingng
+  deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepPlating
+  friction: 0.3
+  heatCapacity: 10000
+
+- type: tile
+  id: PlatingBrass
+  name: tiles-brass-plating
+  sprite: /Textures/Tiles/Misc/clockwork/clockwork_floor.png
+  baseTurf: Lattice
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
@@ -56,7 +67,7 @@
   name: tiles-snow-plating
   sprite: /Textures/Tiles/snow_plating.png #Not in the snow planet RSI because it doesn't have any metadata. Should probably be moved to its own folder later.
   baseTurf: Lattice
-  deconstructTools: [ PlatingCutting, Cutting ] #SS220 JOL TilePryingng
+  deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
@@ -78,3 +89,17 @@
   itemDrop: PartRodMetal1
   heatCapacity: 10000
 
+- type: tile
+  id: TrainLattice
+  name: tiles-lattice-train
+  sprite: /Textures/Tiles/latticeTrain.png
+  baseTurf: Space
+  isSubfloor: true
+  deconstructTools: [ Cutting ]
+  weather: true
+  footstepSounds:
+    collection: FootstepPlating
+  friction: 0.3
+  isSpace: true
+  itemDrop: PartRodMetal1
+  heatCapacity: 10000

@@ -1,0 +1,13 @@
+- type: technology
+  id: CloningPodMachine
+  name: research-technology-cloning-technology
+  icon:
+    sprite: Structures/Machines/scanner.rsi
+    state: open
+  discipline: CivilianServices
+  tier: 3
+  cost: 10000
+  recipeUnlocks:
+  - MedicalScannerMachineCircuitboard
+  - CloningPodMachineCircuitboard
+  - CloningConsoleComputerCircuitboard

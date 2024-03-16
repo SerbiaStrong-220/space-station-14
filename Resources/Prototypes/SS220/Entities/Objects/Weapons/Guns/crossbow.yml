@@ -34,6 +34,11 @@
     proto: BulletMiniEnergyCrossbow
     capacity: 1
     count: 1
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
 
 - type: entity
   name: energy crossbow

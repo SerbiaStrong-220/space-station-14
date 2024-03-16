@@ -17,6 +17,9 @@
     sprite: Clothing/Head/Hardsuits/basic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/basic.rsi
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -304,6 +307,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.60
     lowPressureMultiplier: 1000
+  - type: ExplosionResistance #ss-220 armReb
+    damageCoefficient: 0  #ss-220 armReb
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase

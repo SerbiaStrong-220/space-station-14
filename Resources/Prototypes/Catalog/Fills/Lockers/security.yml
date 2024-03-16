@@ -161,7 +161,9 @@
       - id: RubberStampDetective
       - id: BookBusido # Corvax-Books
       - id: HoloprojectorSecurity
-
+      - id: BoxEvidenceMarkers
+      - id: SpeedLoaderMagnum
+        amount: 2
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb

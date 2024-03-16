@@ -12,6 +12,7 @@
   - type: Tag
     tags:
     - SuitEVA
+    - MonkeyWearable
     - WhitelistChameleon
 
 #Syndicate EVA
@@ -28,12 +29,14 @@
   - type: Tag
     tags:
     - SuitEVA
+    - MonkeyWearable
     - WhitelistChameleon
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
 
@@ -75,6 +78,7 @@
   - type: Tag
     tags:
     - SuitEVA
+    - MonkeyWearable
     - WhitelistChameleon
 
 #NTSRA Voidsuit / Ancient Voidsuit

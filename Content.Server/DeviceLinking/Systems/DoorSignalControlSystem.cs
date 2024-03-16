@@ -13,7 +13,6 @@ namespace Content.Server.DeviceLinking.Systems
     [UsedImplicitly]
     public sealed class DoorSignalControlSystem : EntitySystem
     {
-        [Dependency] private readonly DoorBoltSystem _bolts = default!;
         [Dependency] private readonly DoorSystem _doorSystem = default!;
         [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
 
@@ -84,7 +83,7 @@ namespace Content.Server.DeviceLinking.Systems
                     bolt = state == SignalState.High;
                 }
 
-                _bolts.SetBoltsWithAudio(uid, bolts, bolt);
+                _doorSystem.SetBoltsDown((uid, bolts), bolt);
             }
         }
 
@@ -94,21 +93,16 @@ namespace Content.Server.DeviceLinking.Systems
             if (TryComp<ApcPowerReceiverComponent>(uid, out var receiverComp) && !receiverComp.Powered)
                 return;
 
-            var data = new NetworkPayload()
-            {
-                { DeviceNetworkConstants.LogicState, SignalState.Momentary }
-            };
-
             if (args.State == DoorState.Closed)
             {
-                data[DeviceNetworkConstants.LogicState] = SignalState.Low;
-                _signalSystem.InvokePort(uid, door.OutOpen, data);
+                // only ever say the door is closed when it is completely airtight
+                _signalSystem.SendSignal(uid, door.OutOpen, false);
             }
             else if (args.State == DoorState.Open
                      || args.State == DoorState.Emagging)
             {
-                data[DeviceNetworkConstants.LogicState] = SignalState.High;
-                _signalSystem.InvokePort(uid, door.OutOpen, data);
+                // say the door is open whenever it would be letting air pass
+                _signalSystem.SendSignal(uid, door.OutOpen, true);
             }
         }
     }

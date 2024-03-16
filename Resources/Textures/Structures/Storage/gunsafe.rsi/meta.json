@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "copyright": "Made by Kit0vras (Github) for SS220",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "states": [
+    {
+      "name": "shotguncase"
+    },
+    {
+      "name": "shotguncase_door"
+    },
+    {
+      "name": "shotguncase_open"
+    },
+    {
+      "name": "locked"
+    },
+    {
+      "name": "unlocked"
+    },
+    {
+      "name": "welded"
+    }
+  ]
+}

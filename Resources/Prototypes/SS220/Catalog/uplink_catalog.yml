@@ -9,7 +9,7 @@
   cost:
     Telecrystal: 10
   categories:
-  - UplinkWeapons
+  - UplinkWeaponry
 
  # Pointless
 
@@ -34,9 +34,19 @@
   cost:
     Telecrystal: 5
   categories:
-  - UplinkMisc
+  - UplinkWeaponry
   conditions:
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
       - SurplusBundle
+
+#- type: listing
+#  id: UplinkCQC
+#  name: ent-cqc-name
+#  description: ent-cqc-desc
+#  productEntity: cqc_lethal
+#  cost:
+#    Telecrystal: 4
+#  categories:
+#  - UplinkWeaponry
