@@ -711,7 +711,7 @@
     id: CentcomIDCardSyndie
 
 - type: entity
-  parent: CentcomPDA
+  parent: CentcomNewPDA #SS220 new CentComm
   id: DeathsquadPDA
   suffix: Death Squad
   components:

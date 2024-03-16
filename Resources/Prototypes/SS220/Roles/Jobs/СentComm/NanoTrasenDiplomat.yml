@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centcommfieldofficer # Надо будет поменять, когда альпака докинет спрайт
+      state: nanotrasendiplomat
     - type: RandomHumanoidSpawner
       settings: CentCommNanoTrasenDiplomat
 
