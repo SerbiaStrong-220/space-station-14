@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by MrALPAKA for SS220",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "clipboard"
+      },
+      {
+        "name": "clipboard_over"
+      },
+      {
+        "name": "clipboard_paper"
+      },
+      {
+        "name": "clipboard_pen"
+      },
+      {
+        "name": "equipped-BELT",
+        "directions": 4
+      },
+      {
+        "name": "inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "inhand-right",
+        "directions": 4
+      }
+    ]
+  }
