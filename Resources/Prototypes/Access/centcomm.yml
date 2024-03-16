@@ -1,3 +1,55 @@
 - type: accessLevel
   id: CentralCommand
   name: id-card-access-level-central-command
+
+#SS220 new CentComm begin
+
+- type: accessLevel
+  id: CentralCommandOfficer
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: CentralCommandFieldOfficer
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: NanoTrasenDiplomat
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: CentralCommandCBURN
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: CentralCommandERT
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: CentralCommandGSN
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: CentralCommandDeathSquad
+  name: id-card-access-level-central-command
+
+- type: accessLevel
+  id: Magistrate
+  name: id-card-access-level-central-command
+
+#SS220 new CentComm begin
+- type: accessGroup
+  id: CentralCommand
+  tags:
+  - CentralCommand
+  - Magistrate
+  - CentralCommandDeathSquad
+  - CentralCommandOfficer
+  - CentralCommandGSN
+  - CentralCommandFieldOfficer
+  - NanoTrasenDiplomat
+  - CentralCommandCBURN
+  - CentralCommandERT
+
+#SS220 new CentComm end
+
+

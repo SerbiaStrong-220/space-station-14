@@ -38,10 +38,10 @@
 
 - type: entity
   parent: AirlockGlass
-  id: AirlockCentcomm
+  id: AirlockGlassCentcomm
   name: дверь Центрального Командования
   description: Дверь Центрального Командования сразу внушает доверие своими выдержанными гранями и крепкой формой. Не каждый может сидеть за одной из таких.
-  suffix: CentComm
+  suffix: ЦК, Общий
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
@@ -51,13 +51,49 @@
     access: [["CentralCommand"]]
 
 - type: entity
+  parent: AirlockGlass
+  id: AirlockCentcommGlassLocked
+  suffix: ЦК, Общий, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommand"]]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockOCCGlassLocked
+  suffix: ЦК, Общий, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommand"]]
+
+- type: entity
   parent: Airlock
-  id: CentcommDoor
-  name: дверь Центрального Командования
-  description: Стильная дверь, к созданию которой прикладывали руки не простые инженеры. Через неё ничего не видно. Судя по звукам там кого-то повышают?..
-  suffix: CentComm
+  id: AirlockCentcomm
+  name: шлюз Центрального Командования
+  description: Стильный шлюз, к созданию которого прикладывали руки не простые инженеры. Через него ничего не видно. Судя по звукам там кого-то повышают?..
+  suffix: ЦК, Общий, Locked
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm.rsi
   - type: AccessReader
     access: [["CentralCommand"]]
+
+- type: entity
+  parent: AirlockCentcomm
+  id: AirlockCentcommLocked
+  suffix: ЦК, Общий, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommand"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockCentcomm
+  id: AirlockCentcommFOCC
+  suffix: ЦК, ПОЦК
+  components:
+  - type: AccessReader
+    access: [["CentralCommandFieldOfficer"]]
+  - type: Wires
+    layoutId: AirlockCommand

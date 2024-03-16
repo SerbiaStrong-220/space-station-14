@@ -226,6 +226,7 @@
 - type: entity
   parent: AirlockCentralCommand
   id: AirlockCentralCommandLocked
+  noSpawn: true #SS220 New CentCom
   suffix: Central Command, Locked
   components:
   - type: AccessReader
@@ -561,6 +562,7 @@
 - type: entity
   parent: AirlockCentralCommandGlass
   id: AirlockCentralCommandGlassLocked
+  noSpawn: true #SS220 New CentCom
   suffix: Central Command, Locked
   components:
   - type: AccessReader
