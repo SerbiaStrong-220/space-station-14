@@ -2843,6 +2843,8 @@ entities:
     - type: NavMap
     - type: IFF
       color: '#FF0000FF'
+    - type: BecomesStation
+      id: SyndicateOutpost
   - uid: 1295
     components:
     - type: MetaData
