@@ -9,7 +9,7 @@
   cost:
     Telecrystal: 10
   categories:
-  - UplinkWeapons
+  - UplinkWeaponry
 
  # Pointless
 
@@ -34,7 +34,7 @@
   cost:
     Telecrystal: 5
   categories:
-  - UplinkMisc
+  - UplinkWeaponry
   conditions:
   - !type:BuyerWhitelistCondition
     blacklist:
@@ -49,4 +49,4 @@
 #  cost:
 #    Telecrystal: 4
 #  categories:
-#  - UplinkMisc
+#  - UplinkWeaponry

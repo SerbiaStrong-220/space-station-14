@@ -102,6 +102,16 @@
   - ResearchAssistant
 
 - type: department
+  id: Cryo
+  sort: 0
+  description: Крио
+  color: "#88FF88"
+  roles: []
+  primary: false
+  weight: -50
+
+
+- type: department
   id: Specific
   sort: 0
   description: department-Specific-description

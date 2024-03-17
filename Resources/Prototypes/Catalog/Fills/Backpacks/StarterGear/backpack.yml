@@ -236,6 +236,16 @@
       - id: BoxSurvival
       - id: Bible
       - id: RubberStampChaplain
+  
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpack
+  id: ClothingBackpackLawyerFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvival
+      - id: RubberStampLawyer
 
 - type: entity
   noSpawn: true
@@ -363,7 +373,7 @@
   components:
     - type: Storage
       grid:
-      - 0,0,7,6
+      - 0,0,8,6 # SS220 Bigger-Ert-Backpacks
     - type: StorageFill
       contents:
         - id: BoxSurvivalEngineering

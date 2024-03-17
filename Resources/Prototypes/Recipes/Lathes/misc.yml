@@ -8,6 +8,15 @@
     Glass: 50
 
 - type: latheRecipe
+  id: LedLightTube
+  result: LedLightTube
+  category: Lights
+  completetime: 2
+  materials:
+    Steel: 50
+    Glass: 50
+
+- type: latheRecipe
   id: SodiumLightTube
   result: SodiumLightTube
   category: Lights
@@ -28,6 +37,15 @@
 - type: latheRecipe
   id: LightBulb
   result: LightBulb
+  category: Lights
+  completetime: 2
+  materials:
+    Steel: 50
+    Glass: 50
+
+- type: latheRecipe
+  id: LedLightBulb
+  result: LedLightBulb
   category: Lights
   completetime: 2
   materials:
@@ -139,16 +157,38 @@
   materials:
     Plastic: 100
 
-- type: latheRecipe
-  id: FloorGreenCircuit
-  result: FloorTileItemGCircuit4
-  completetime: 2
+- type: latheRecipe #SS220-sheetifier-rework-start
+  id: TileGreenCircuit
+  result: FloorTileItemGCircuit
+  completetime: 1
   materials:
-    Steel: 100
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
 
 - type: latheRecipe
-  id: FloorBlueCircuit
-  result: FloorTileItemBCircuit4
+  id: TileBlueCircuit
+  result: FloorTileItemBCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25 #SS220-sheetifier-rework-end
+
+- type: latheRecipe
+  id: HandheldStationMap
+  result: HandheldStationMapEmpty
   completetime: 2
   materials:
-    Steel: 100
+    Steel: 300
+    Plastic: 100
+
+- type: latheRecipe
+  id: ClothingHeadHatWelding
+  result: ClothingHeadHatWelding
+  completetime: 2
+  materials:
+    Steel: 400
+    Glass: 200

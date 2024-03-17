@@ -318,7 +318,7 @@ public sealed class ForcefieldGeneratorSystem : EntitySystem
 
         if (active)
         {
-            if (!TryComp<BatteryComponent>(entity, out var battery) || battery.Charge < battery.MaxCharge)
+            if (!TryComp<BatteryComponent>(entity, out var battery) || battery.CurrentCharge < battery.MaxCharge)
                 return;
         }
 
