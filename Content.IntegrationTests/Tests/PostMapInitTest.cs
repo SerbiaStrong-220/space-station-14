@@ -40,7 +40,7 @@ namespace Content.IntegrationTests.Tests
             "/Maps/Shuttles/cargo.yml",
             "/Maps/Shuttles/emergency.yml",
             "/Maps/Shuttles/infiltrator.yml",
-            "/Maps/NukeOps/ss220_nukeops_shuttle_grid.yml",
+            "/Maps/NukeOps/ss220_Nuke_shuttle_grid.yml",
         };
 
         private static readonly string[] GameMaps =
