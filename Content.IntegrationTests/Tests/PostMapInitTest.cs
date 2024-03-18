@@ -31,7 +31,8 @@ namespace Content.IntegrationTests.Tests
         {
             "CentComm",
             "Dart",
-            "NukieOutpost"
+            "NukieOutpost",
+            "ss220_NukieOutpost"
         };
 
         private static readonly string[] Grids =
@@ -81,7 +82,7 @@ namespace Content.IntegrationTests.Tests
             "VoidZone",
             "NTvsSSSP",
             "Axioma",
-            "ss220_NukieOutpost"
+            "ss220_NukieOutPost"
         };
 
         /// <summary>

@@ -9,3 +9,8 @@
       components:
         - type: StationNameSetup
           mapNameTemplate: "Nukie Outpost"
+        - type: StationJobs
+          overflowJobs:
+            - Passenger
+          availableJobs:
+            Passenger: [ -1, -1 ]
