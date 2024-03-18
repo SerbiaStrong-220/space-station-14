@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
+using Content.Server.SS220.Discord;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Players;
@@ -32,6 +33,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private readonly DiscordBanPostManager _discordBanPostManager = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -168,6 +170,13 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         _sawmill.Info(logMessage);
         _chat.SendAdminAlert(logMessage);
 
+        // SS220 user ban info post start
+        if (banDef.Id.HasValue)
+        {
+            await _discordBanPostManager.PostUserBanInfo(banDef.Id.Value);
+        }
+        // SS220 user ban info post end
+
         // If we're not banning a player we don't care about disconnecting people
         if (target == null)
             return;
@@ -221,6 +230,11 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         {
             _chat.SendAdminAlert(Loc.GetString("cmd-roleban-existing", ("target", targetUsername ?? "null"), ("role", role)));
             return;
+        }
+
+        if (banDef.Id.HasValue)
+        {
+            await _discordBanPostManager.PostUserJobBanInfo(banDef.Id.Value, targetUsername);
         }
 
         var length = expires == null ? Loc.GetString("cmd-roleban-inf") : Loc.GetString("cmd-roleban-until", ("expires", expires));
