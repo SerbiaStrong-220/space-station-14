@@ -1,0 +1,64 @@
+- type: entity 
+  parent: ClothingHeadBase
+  id: ClothingHeadHatAlex
+  name: Алекс #С большой, ибо оффовская маска Ричарда тоже
+  description: Кто пригласил всех этих идиотов?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Misc/alex.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Misc/alex.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatJake
+  name: Джейк
+  description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Misc/jake.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Misc/jake.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity 
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRasmus
+  name: Расмус
+  description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Misc/rasmus.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Misc/rasmus.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity 
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRichter
+  name: Рихтер
+  description: Ааа, вот ты где! А я всё думал, когда ты вернешься?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Misc/richter.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Misc/richter.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity 
+  parent: ClothingHeadBase
+  id: ClothingHeadHatTony
+  name: Тони
+  description: Чувак, эта вечеринка отстой. Я ненавижу этих людей.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Misc/tony.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Misc/tony.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
