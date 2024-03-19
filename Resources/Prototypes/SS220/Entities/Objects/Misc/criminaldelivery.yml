@@ -2,7 +2,7 @@
   parent: PresentRandom
   id: CriminalDeliveryBox
   name: криминальная посылка
-  description: Изрядно поношенная коробка. На удивление на ней ни одних отпечатков.
+  description: Изрядно поношенная коробка.
   components:
   - type: Item
     size: Normal
