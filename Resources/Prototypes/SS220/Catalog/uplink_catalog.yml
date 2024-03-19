@@ -31,7 +31,7 @@
   name: uplink-criminal-delivery-name
   description: uplink-criminal-delivery-desc
   icon: { sprite: /Textures/SS220/Objects/Misc/specialdelivery.rsi, state: specialdelivery }
-  productEntity: SpecialDeliveryBox
+  productEntity: CriminalDeliveryBox
   cost:
     Telecrystal: 1
   categories:

@@ -2,7 +2,7 @@
   parent: PresentRandom
   id: CriminalDeliveryBox
   name: криминальная посылка
-  description: Старая помятая коробка. Пахнет диско и ретро. Интересно, что внутри?
+  description: Изрядно поношенная коробка. На удивление на ней ни одних отпечатков.
   components:
   - type: Item
     size: Normal
@@ -22,7 +22,7 @@
       - id: ClothingHeadHatPDHoxton
         orGroup: PDMask
     sound:
-      path: /Audio/SS220/Effects/specialdelivery/specialdelivery_unwrap.ogg
+      path: /Audio/SS220/Effects/criminaldelivery/criminaldelivery_unwrap.ogg
 
 - type: entity
   id: CriminalDeliveryBoxTrash
