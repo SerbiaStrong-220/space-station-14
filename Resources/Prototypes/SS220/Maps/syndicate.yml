@@ -11,6 +11,6 @@
           mapNameTemplate: "Nukie Outpost"
         - type: StationJobs
           overflowJobs:
-            - Passenger
+            - GhostRole
           availableJobs:
-            Passenger: [ -1, -1 ]
+            GhostRole: [ -1, -1 ]
