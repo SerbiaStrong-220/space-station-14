@@ -1,0 +1,51 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPayDay1
+  name: МаскаПэйдэй1
+  description: Кто пригласил всех этих идиотов?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/PayDay/american.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/PayDay/american.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPayDay2
+  name: МаскаПэйдэй2
+  description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/PayDay/clownlike.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/PayDay/clownlike.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPayDay3
+  name: МаскаПэйдэй3
+  description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/PayDay/jockerlike.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/PayDay/jockerlike.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPayDay4
+  name: МаскаПэйдэй4
+  description: Ааа, вот ты где! А я всё думал, когда ты вернешься?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/PayDay/mime.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/PayDay/mime.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
