@@ -23,7 +23,20 @@
     Telecrystal: 1
   categories:
   - UplinkPointless
-  
+
+  #Masks-Boxes
+
+- type: listing
+  id: UplinkCriminalDelivery
+  name: uplink-criminal-delivery-name
+  description: uplink-criminal-delivery-desc
+  icon: { sprite: /Textures/SS220/Objects/Misc/specialdelivery.rsi, state: specialdelivery }
+  productEntity: SpecialDeliveryBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
 - type: listing
   id: UplinkSpecialDelivery
   name: uplink-special-delivery-name

@@ -1,0 +1,42 @@
+- type: entity
+  parent: PresentRandom
+  id: CriminalDeliveryBox
+  name: криминальная посылка
+  description: Старая помятая коробка. Пахнет диско и ретро. Интересно, что внутри?
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Misc/specialdelivery.rsi
+    layers:
+      - state: specialdelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: CriminalDeliveryBoxTrash
+      - id: ClothingHeadHatPDDallas
+        orGroup: PDMask
+      - id: ClothingHeadHatPDChains
+        orGroup: PDtMask
+      - id: ClothingHeadHatPDWolf
+        orGroup: PDMask
+      - id: ClothingHeadHatPDHoxton
+        orGroup: PDMask
+    sound:
+      path: /Audio/SS220/Effects/specialdelivery/specialdelivery_unwrap.ogg
+
+- type: entity
+  id: CriminalDeliveryBoxTrash
+  parent: BaseItem
+  name: обертка от посылки
+  description: Пыльная обертка от посылки из картона и скотча.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Cardboard: 50
+  - type: Sprite
+    sprite: SS220/Objects/Misc/specialdelivery.rsi
+    state: specialdelivery_unfolded
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage

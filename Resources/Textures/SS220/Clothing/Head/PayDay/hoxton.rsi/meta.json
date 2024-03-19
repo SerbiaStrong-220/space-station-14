@@ -1,10 +1,10 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by Qwerlink(discord dago#7393) for SS220",
+  "copyright": "Made by MadSkaven for SS220",
   "size": {
-    "x": 16,
-    "y": 64
+    "x": 32,
+    "y": 32
   },
   "states": [
     {
