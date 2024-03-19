@@ -1,51 +1,51 @@
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadHatPayDay1
-  name: МаскаПэйдэй1
-  description: Кто пригласил всех этих идиотов?
+  id: ClothingHeadHatPDDallas
+  name: Маска Далласа
+  description: Хей, хей! Давай посмотрим, насколько ты будешь разговорчив с моим стволом в твоей пасти.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/american.rsi
+     sprite: SS220/Clothing/Head/PayDay/dallas.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/american.rsi
+     sprite: SS220/Clothing/Head/PayDay/dallas.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadHatPayDay2
-  name: МаскаПэйдэй2
-  description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
+  id: ClothingHeadHatPDChains
+  name: Маска Чейнса
+  description: Твоя задница это трава, а я е****я газонокосилка.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/clownlike.rsi
+     sprite: SS220/Clothing/Head/PayDay/chains.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/clownlike.rsi
+     sprite: SS220/Clothing/Head/PayDay/chains.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadHatPayDay3
-  name: МаскаПэйдэй3
-  description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
+  id: ClothingHeadHatPDWolf
+  name: Маска Вульфа
+  description: Самый разыскиваемый? Чек. Пулевые ранения? Чек. Самый богатый? Большой с**а чек.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/jockerlike.rsi
+     sprite: SS220/Clothing/Head/PayDay/wolf.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/jockerlike.rsi
+     sprite: SS220/Clothing/Head/PayDay/wolf.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadHatPayDay4
-  name: МаскаПэйдэй4
-  description: Ааа, вот ты где! А я всё думал, когда ты вернешься?
+  id: ClothingHeadHatPDHoxton
+  name: Маска Хокстона
+  description: Мне нужно, чтобы вы стояли смирно как е***ые садовые гномы.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/mime.rsi
+     sprite: SS220/Clothing/Head/PayDay/hoxton.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/mime.rsi
+     sprite: SS220/Clothing/Head/PayDay/hoxton.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
