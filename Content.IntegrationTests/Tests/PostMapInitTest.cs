@@ -81,8 +81,7 @@ namespace Content.IntegrationTests.Tests
             "220Hive",
             "VoidZone",
             "NTvsSSSP",
-            "Axioma",
-            "ss220_NukieOutPost"
+            "Axioma"
         };
 
         /// <summary>
