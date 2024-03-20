@@ -22,11 +22,37 @@
       - id: ClothingHeadHatRichter
         orGroup: HotMask
       - id: ClothingHeadHatRichard
-        orGroup: HotMask        
+        orGroup: HotMask
       - id: ClothingHeadHatTony
         orGroup: HotMask
     sound:
       path: /Audio/SS220/Effects/specialdelivery/specialdelivery_unwrap.ogg
+
+- type: entity
+  parent: PresentRandom
+  id: CriminalDeliveryBox
+  name: криминальная посылка
+  description: Изрядно поношенная коробка, напоминает о былых авантюрах.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Misc/criminaldelivery.rsi
+    layers:
+      - state: specialdelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: ClothingHeadHatPDDallas
+        orGroup: PDMask
+      - id: ClothingHeadHatPDChains
+        orGroup: PDtMask
+      - id: ClothingHeadHatPDWolf
+        orGroup: PDMask
+      - id: ClothingHeadHatPDHoxton
+        orGroup: PDMask
+    sound:
+      path: /Audio/SS220/Effects/criminaldelivery/criminaldelivery_unwrap.ogg
 
 - type: entity
   id: SpecialDeliveryBoxTrash
