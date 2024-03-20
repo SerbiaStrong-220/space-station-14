@@ -5,9 +5,9 @@
   description: Кто пригласил всех этих идиотов?
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/Misc/alex.rsi
+     sprite: SS220/Clothing/Head/Hotline/alex.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/Misc/alex.rsi
+     sprite: SS220/Clothing/Head/Hotline/alex.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -18,9 +18,9 @@
   description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/Misc/jake.rsi
+     sprite: SS220/Clothing/Head/Hotline/jake.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/Misc/jake.rsi
+     sprite: SS220/Clothing/Head/Hotline/jake.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -31,9 +31,9 @@
   description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/Misc/rasmus.rsi
+     sprite: SS220/Clothing/Head/Hotline/rasmus.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/Misc/rasmus.rsi
+     sprite: SS220/Clothing/Head/Hotline/rasmus.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -44,9 +44,9 @@
   description: Ааа, вот ты где! А я всё думал, когда ты вернёшься?
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/Misc/richter.rsi
+     sprite: SS220/Clothing/Head/Hotline/richter.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/Misc/richter.rsi
+     sprite: SS220/Clothing/Head/Hotline/richter.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -57,8 +57,8 @@
   description: Чувак, эта вечеринка отстой. Я ненавижу этих людей.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/Misc/tony.rsi
+     sprite: SS220/Clothing/Head/Hotline/tony.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/Misc/tony.rsi
+     sprite: SS220/Clothing/Head/Hotline/tony.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
