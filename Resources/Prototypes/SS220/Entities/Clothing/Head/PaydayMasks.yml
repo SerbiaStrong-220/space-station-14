@@ -5,9 +5,9 @@
   description: Хей, хей! Давай посмотрим, насколько ты будешь разговорчив с моим стволом в твоей пасти.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/dallas.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/dallas.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/dallas.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/dallas.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -18,9 +18,9 @@
   description: Твоя задница это трава, а я гребанная газонокосилка.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/chains.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/chains.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/chains.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/chains.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -31,9 +31,9 @@
   description: Самый разыскиваемый? Чек. Пулевые ранения? Чек. Самый богатый? Большой черт подери чек.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/wolf.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/wolf.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/wolf.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/wolf.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
 
@@ -44,8 +44,8 @@
   description: Мне нужно, чтобы вы стояли смирно как чертоавы садовые гномы.
   components:
    - type: Sprite
-     sprite: SS220/Clothing/Head/PayDay/hoxton.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
    - type: Clothing
-     sprite: SS220/Clothing/Head/PayDay/hoxton.rsi
+     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker

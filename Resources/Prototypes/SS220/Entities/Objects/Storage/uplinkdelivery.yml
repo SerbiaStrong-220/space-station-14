@@ -39,14 +39,14 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/criminaldelivery.rsi
     layers:
-      - state: specialdelivery
+      - state: criminaldelivery
   - type: SpawnItemsOnUse
     items:
       - id: SpecialDeliveryBoxTrash
       - id: ClothingHeadHatPDDallas
         orGroup: PDMask
       - id: ClothingHeadHatPDChains
-        orGroup: PDtMask
+        orGroup: PDMask
       - id: ClothingHeadHatPDWolf
         orGroup: PDMask
       - id: ClothingHeadHatPDHoxton
@@ -64,7 +64,7 @@
     materialComposition:
       Cardboard: 50
   - type: Sprite
-    sprite: SS220/Objects/Misc/specialdelivery.rsi
+    sprite: SS220/Objects/Storage/specialdelivery.rsi
     state: specialdelivery_unfolded
   - type: Tag
     tags:
