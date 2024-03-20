@@ -13,4 +13,4 @@
           overflowJobs:
             - GhostRole
           availableJobs:
-            SpecOpsFighter: [ -1, -1 ]
+            JobGhostRole: [ -1, -1 ]
