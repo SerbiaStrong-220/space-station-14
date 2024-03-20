@@ -7,7 +7,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Misc/specialdelivery.rsi
+    sprite: SS220/Objects/Storage/specialdelivery.rsi
     layers:
       - state: specialdelivery
   - type: SpawnItemsOnUse
@@ -37,7 +37,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Misc/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
     layers:
       - state: specialdelivery
   - type: SpawnItemsOnUse

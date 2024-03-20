@@ -1,4 +1,4 @@
-- type: entity 
+- type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatAlex
   name: Алекс #С большой, ибо оффовская маска Ричарда тоже
@@ -24,7 +24,7 @@
    - type: IngestionBlocker
    - type: IdentityBlocker
 
-- type: entity 
+- type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatRasmus
   name: Расмус
@@ -37,11 +37,11 @@
    - type: IngestionBlocker
    - type: IdentityBlocker
 
-- type: entity 
+- type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatRichter
   name: Рихтер
-  description: Ааа, вот ты где! А я всё думал, когда ты вернешься?
+  description: Ааа, вот ты где! А я всё думал, когда ты вернёшься?
   components:
    - type: Sprite
      sprite: SS220/Clothing/Head/Misc/richter.rsi
@@ -50,7 +50,7 @@
    - type: IngestionBlocker
    - type: IdentityBlocker
 
-- type: entity 
+- type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatTony
   name: Тони
