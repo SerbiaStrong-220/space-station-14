@@ -11,6 +11,7 @@
   - type: Tag
     tags:
       - Cigarette
+      - Trash
   - type: Clothing
     sprite: SS220/Objects/Sponsor/cigs/cigarette.rsi
     slots: [ mask ]
