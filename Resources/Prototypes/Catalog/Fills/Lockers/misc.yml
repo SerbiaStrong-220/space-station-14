@@ -28,6 +28,14 @@
       - id: OxygenTankFilled
         prob: 0.20
         orGroup: EmergencyTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return start
+      - id: EmergencyNitrogenTankFilled
+        prob: 0.80
+        orGroup: EmergencyNitrogenTankOrRegularTank
+      - id: NitrogenTankFilled
+        prob: 0.20
+        orGroup: EmergencyNitrogenTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return end
       - id: ToolboxEmergencyFilled
         prob: 0.4
       - id: MedkitOxygenFilled
@@ -52,6 +60,14 @@
       - id: OxygenTankFilled
         prob: 0.20
         orGroup: EmergencyTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return start
+      - id: EmergencyNitrogenTankFilled
+        prob: 0.80
+        orGroup: EmergencyNitrogenTankOrRegularTank
+      - id: NitrogenTankFilled
+        prob: 0.20
+        orGroup: EmergencyNitrogenTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return end
       - id: ToolboxEmergencyFilled
         prob: 0.4
       - id: MedkitOxygenFilled
@@ -72,6 +88,7 @@
         - id: ClothingHeadHelmetFire
         - id: ClothingMaskGas
         - id: OxygenTankFilled
+        - id: NitrogenTankFilled #SS220 Emergency_Nitrogen_Tank_return
         - id: FireExtinguisher
           prob: 0.25
 - type: entity
@@ -85,6 +102,7 @@
         - id: ClothingHeadHelmetFire
         - id: ClothingMaskGas
         - id: OxygenTankFilled
+        - id: NitrogenTankFilled #SS220 Emergency_Nitrogen_Tank_return
         - id: FireExtinguisher
           prob: 0.25
 - type: entity
