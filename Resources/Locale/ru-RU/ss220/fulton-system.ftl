@@ -1,1 +1,1 @@
-fulton-is-restricted = Пространство заблокированно.
+fulton-is-restricted = Пространство заблокировано.
