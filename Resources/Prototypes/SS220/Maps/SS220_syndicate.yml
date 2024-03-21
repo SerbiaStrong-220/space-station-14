@@ -1,0 +1,31 @@
+- type: gameMap
+  id: SS220_syndicate
+  mapName: Nukie Outpost
+  mapPath: /Maps/NukeOps/ss220_Nuke_outpost_noshuttle.yml
+  minPlayers: 0
+  stations:
+    SyndicateOutpost:
+      stationProto: StandardSS220_syndicate
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: "NukeOps Outpost"
+
+- type: entity
+  id: StandardSS220_syndicate
+  parent:
+   - BaseStation
+   - BaseStationSS220Syndicate
+   - BaseStationJobsSpawning
+   - BaseStationRecords
+  noSpawn: true
+  components:
+    - type: Transform
+
+- type: entity
+  abstract: true
+  id: BaseStationSS220Syndicate
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Syndicate
+

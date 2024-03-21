@@ -108,13 +108,13 @@ public sealed partial class NukeopsRuleComponent : Component
     public string OperationName = "Test Operation";
 
     [DataField]
-    public ProtoId<GameMapPrototype> OutpostMapPrototype = "ss220_NukieOutpost";
+    public ProtoId<GameMapPrototype> OutpostMapPrototype = "SS220_syndicate"; //ss220 map nuke
 
     [DataField]
     public WinType WinType = WinType.Neutral;
 
     [DataField]
-    public List<WinCondition> WinConditions = new ();
+    public List<WinCondition> WinConditions = new();
 
     public MapId? NukiePlanet;
 
