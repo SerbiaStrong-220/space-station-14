@@ -115,7 +115,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
                 // Add a virtual item to rider's hand, unbuckle if we can't.
                 if (!_virtualItemSystem.TrySpawnVirtualItemInHand(uid, args.BuckledEntity))
                 {
-                    _buckle.TryUnbuckle(uid, uid, true);
+                    _buckle.TryUnbuckle(args.BuckledEntity, uid, true);//SS220 filled hands buckle fix
+                    //idk why this popup works at any circumstances
+                    //_popupSystem.PopupClient(Loc.GetString("vehicle-atleast-one-hand-required"), args.BuckledEntity, args.BuckledEntity);//SS220 filled hands buckle fix
                     return;
                 }
             }
