@@ -82,6 +82,7 @@ namespace Content.IntegrationTests.Tests
             "VoidZone",
             "NTvsSSSP",
             "Axioma",
+            "SS220_syndicate",
         };
 
         /// <summary>
