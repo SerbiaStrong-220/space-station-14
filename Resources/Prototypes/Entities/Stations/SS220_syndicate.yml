@@ -1,0 +1,18 @@
+- type: entity
+  id: StandardSS220_syndicate
+  parent:
+   - BaseStation
+   - BaseStationSS220Syndicate
+   - BaseStationJobsSpawning
+   - BaseStationRecords
+  noSpawn: true
+  components:
+    - type: Transform
+
+- type: entity
+  abstract: true
+  id: BaseStationSS220Syndicate
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Syndicate
