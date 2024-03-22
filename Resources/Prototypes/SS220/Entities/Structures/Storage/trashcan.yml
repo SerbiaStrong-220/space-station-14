@@ -1,0 +1,20 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: CrateGeneric
+  id: TrashCan
+  name: мусорный бак
+  description: Место, куда отправляется всё, что никому не нужно и никогда не пригодится.
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Storage/trash_can.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Storage/trash_can.rsi
+    offset: 0, 0
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: Construction
+    graph: TrashCan
+    node: TrashCan
