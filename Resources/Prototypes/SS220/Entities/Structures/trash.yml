@@ -1,0 +1,97 @@
+- type: entity
+  parent: BaseStructure
+  id: BagPile
+  name: куча мешков
+  description: Среди этой кучи мешков, полных мусора, теряются последние искры надежды на чистоту и порядок.
+  suffix: Мусор, Хлам
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/bags.rsi
+    state: bagpile9
+  - type: Physics
+  - type: Damageable
+    damageContainer: Box
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPacketCnDsTrash:
+            min: 0
+            max: 1
+          FoodPacketBoritosTrash:
+            min: 0
+            max: 1
+          FoodPacketSusTrash:
+            min: 0
+            max: 1
+          FoodPacketRaisinsTrash:
+            min: 0
+            max: 1
+          FoodPacketDanDanTrash:
+            min: 0
+            max: 1
+          FoodPacketChocolateTrash:
+            min: 0
+            max: 1
+          FoodPacketPopcornTrash:
+            min: 0
+            max: 1
+          FoodPacketSemkiTrash:
+            min: 0
+            max: 1
+          FoodPacketSyndiTrash:
+            min: 0
+            max: 1
+          FoodPacketCheesieTrash:
+            min: 0
+            max: 1
+          FoodPacketPistachioTrash:
+            min: 0
+            max: 1
+          FoodPacketChipsTrash:
+            min: 0
+            max: 1
+          FoodPacketChowMeinTrash:
+            min: 0
+            max: 1
+          FoodPacketEnergyTrash:
+            min: 0
+            max: 1
+          FoodCornTrash:
+            min: 0
+            max: 1
+          TrashBananaPeel:
+            min: 0
+            max: 1
+          FoodTinMRETrash:
+            min: 0
+            max: 1
+          BrokenBottle:
+            min: 0
+            max: 1
+          FoodBowlBigTrash:
+            min: 0
+            max: 1
+          FoodPlateTrash:
+            min: 0
+            max: 1
+          FoodPlateSmallTrash:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3 #per second, scales with number of fire 'stacks'
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
