@@ -2873,6 +2873,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1321
     components:
     - type: Transform
@@ -2883,6 +2886,9 @@ entities:
       deviceLists:
       - 1341
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1323
     components:
     - type: Transform
@@ -2893,6 +2899,9 @@ entities:
       deviceLists:
       - 1341
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
 - proto: FirelockGlass
   entities:
   - uid: 88
@@ -2904,6 +2913,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1341
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 105
     components:
     - type: Transform
@@ -2913,6 +2925,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1341
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1304
     components:
     - type: Transform
@@ -2922,6 +2937,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1305
     components:
     - type: Transform
@@ -2931,6 +2949,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1306
     components:
     - type: Transform
@@ -2941,6 +2962,9 @@ entities:
       deviceLists:
       - 1340
       - 1342
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1307
     components:
     - type: Transform
@@ -2951,6 +2975,9 @@ entities:
       deviceLists:
       - 1340
       - 1342
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1308
     components:
     - type: Transform
@@ -2960,6 +2987,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1309
     components:
     - type: Transform
@@ -2969,6 +2999,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1340
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1310
     components:
     - type: Transform
@@ -2978,6 +3011,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1342
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1311
     components:
     - type: Transform
@@ -2987,6 +3023,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1342
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1312
     components:
     - type: Transform
@@ -2995,6 +3034,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1342
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1313
     components:
     - type: Transform
@@ -3003,6 +3045,9 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 1342
+    - type: AccessReader
+      access:
+      - - NuclearOperative
   - uid: 1314
     components:
     - type: Transform
