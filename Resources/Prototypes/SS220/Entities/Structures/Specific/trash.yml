@@ -131,3 +131,54 @@
           trash4: ""
           trash5: ""
           trash6: ""
+
+- type: entity
+  parent: BaseStructure
+  id: ScrapPile
+  name: груда металлолома
+  description: Эта куча различного хлама, искажённая временем и забытая всеми, медленно ржавеет под тяжестью своей бесполезности. Она служит напоминанием о хаосе человеческого потребления и вызывает уныние и разочарование, возникающие при мысли о бесконечном цикле переработки материалов. Кажется, у вас есть два пути - либо выбросить мусор, либо забрать его с собой на художественную выставку и представить эту груду как искусство, назвав её "Бардак с утончённым гламуром". Победа уже у вас в кармане!
+  suffix: Мусор, Хлам, Случайный
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Structures/Specific/scrappile.rsi
+    snapCardinals: true
+    noRot: true
+    layers:
+    - state: scrap1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          scrap1: ""
+          scrap2: ""
+          scrap3: ""
+          scrap4: ""
+          scrap5: ""
+  - type: Physics
+    bodyType: Static
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 3
+          PartRodMetal1:
+            min: 0
+            max: 2
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: ScrapPile
+    node: ScrapPile
