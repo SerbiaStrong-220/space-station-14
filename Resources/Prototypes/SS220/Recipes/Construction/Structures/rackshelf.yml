@@ -1,7 +1,7 @@
 #© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: construction
   id: RackShelf
-  name: Rack
+  name: rack
   description: The boxes' best friend, who will provide them with a home.
   graph: Rackshelf
   startNode: start
