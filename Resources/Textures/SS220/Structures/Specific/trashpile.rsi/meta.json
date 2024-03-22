@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by gabova (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "trash1"
+    },
+    {
+      "name": "trash2"
+    },
+    {
+      "name": "trash3"
+    },
+    {
+      "name": "trash4"
+    },
+    {
+      "name": "trash5"
+    },
+    {
+      "name": "trash6"
+    }
+  ]
+}

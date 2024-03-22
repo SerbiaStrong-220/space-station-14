@@ -10,7 +10,14 @@
     noRot: true
     sprite: SS220/Structures/Specific/bags.rsi
     state: bagpile9
+  - type: AmbientSound
+    volume: -2
+    range: 3
+    sound:
+      path: /Audio/Ambience/Temporary/flies.ogg
   - type: Physics
+    bodyType: Static
+  - type: Climbable
   - type: Damageable
     damageContainer: Box
   - type: Destructible
@@ -84,6 +91,12 @@
           FoodPlateSmallTrash:
             min: 0
             max: 1
+          ShardGlass:
+            min: 0
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: trashBagRustle
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Flammable
@@ -95,3 +108,26 @@
   - type: FireVisuals
     sprite: Effects/fire.rsi
     normalState: 1
+
+- type: entity
+  parent: BagPile
+  id: TrashPile
+  name: куча мусора
+  description: Гора отходов, напоминающая о безразличии и безответственности человечества.
+  suffix: Мусор, Хлам, Случайный
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Specific/trashpile.rsi
+    snapCardinals: true
+    layers:
+    - state: trash1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          trash1: ""
+          trash2: ""
+          trash3: ""
+          trash4: ""
+          trash5: ""
+          trash6: ""
