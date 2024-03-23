@@ -1,0 +1,9 @@
+- type: entity
+  parent: SeedBase
+  name: пакет семян (свёкла)
+  id: BeetSeeds
+  components:
+    - type: Seed
+      seedId: beet
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/beet.rsi

@@ -6,6 +6,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Hands.EntitySystems;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.SmartFridge;
 public abstract class SharedSmartFridgeSystem : EntitySystem
@@ -14,6 +15,8 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
     [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -92,7 +95,7 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
         }
         else
         {
-            storageComp.Container.Remove(entity);
+            _container.Remove(entity, storageComp.Container);
         }
     }
 }

@@ -130,3 +130,75 @@
     collection: FootstepFloor
   itemDrop: FloorTileItemDutchMini
   heatCapacity: 10000
+
+- type: tile
+  id: FloorPurpleCircuit
+  name: фиолетовый микросхемный пол
+  sprite: /Textures/SS220/Tiles/purple_circuit.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemPCircuit
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorYellowCircuit
+  name: жёлтый микросхемный пол
+  sprite: /Textures/SS220/Tiles/yellow_circuit.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemYCircuit
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorOrangeCircuit
+  name: оранжевый микросхемный пол
+  sprite: /Textures/SS220/Tiles/orange_circuit.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemOCircuit
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRedCircuit
+  name: красный микросхемный пол
+  sprite: /Textures/SS220/Tiles/red_circuit.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemRCircuit
+  heatCapacity: 10000

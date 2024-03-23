@@ -1,0 +1,33 @@
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkAppleCompote
+  name: яблочный компот
+  description: Его сладковатый аромат напоминает вам сказки о былой жизни на Земле.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: AppleCompote
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
+
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkBerryСompote
+  name: ягодный компот
+  description: Аромат ягод напоминает вам сказку о Красной Шапочке.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: BerryСompote
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi 

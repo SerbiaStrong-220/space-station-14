@@ -1,0 +1,92 @@
+- type: microwaveMealRecipe
+  id: RecipeCheburek
+  name: Cheburek recipe
+  result: FoodCheburek
+  time: 15
+  reagents:
+    TableSalt: 5  
+  solids:
+    FoodDough: 1
+    FoodMeatCutlet: 1
+    FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeShawarma
+  name: Shawarma recipe
+  result: FoodShawarma
+  time: 15
+  reagents:
+    Mayo: 5  
+  solids:
+    FoodDough: 1
+    FoodMeatChicken: 1
+    FoodCabbage: 1
+    FoodTomato: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBorsch
+  name: Borsch recipe
+  result: FoodSoupBeet
+  time: 10
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatCutlet: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    Foodbeet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeShchi
+  name: Shchi recipe
+  result: FoodSoupShchi
+  time: 10
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatCutlet: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOkroshka
+  name: Okroshka recipe
+  result: FoodSoupOkroshka
+  time: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChicken: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodEggBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOkroshkaKvass
+  name: Okroshka witch kvass recipe
+  result: FoodSoupOkroshkaKvass
+  time: 10
+  reagents:
+    Kvass: 10  
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChicken: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodEggBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeVinaigrette
+  name: Vinaigrette recipe
+  result: FoodSaladVinaigrette
+  time: 10
+  solids:
+    FoodBowlBig: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    Foodbeet: 1
+    FoodPeaPod: 1
+    FoodCarrot: 1

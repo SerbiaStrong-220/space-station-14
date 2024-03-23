@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Administration.Managers;
+using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -23,6 +24,7 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IBanManager _banManager = default!;
+    [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaperMajorRule");
 
@@ -94,26 +96,10 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
             _sawmill.Info($"Spawning {comp.RunePrototypeId} at {runeCoords}");
             var rune = Spawn(comp.RunePrototypeId, runeCoords);
 
-            var everyone = new List<ICommonSession>(ev.PlayerPool);
-            var prefList = new List<ICommonSession>();
-            foreach (var player in everyone)
-            {
-                if (!ev.Profiles.ContainsKey(player.UserId))
-                    continue;
-
-                var profile = ev.Profiles[player.UserId];
-
-                if (profile.AntagPreferences.Contains(comp.RoleProtoId.Id) && !(_banManager.GetJobBans(player.UserId) is { } roleBans && roleBans.Contains("DarkReaper")))
-                {
-                    prefList.Add(player);
-                }
-            }
-
-            if (prefList.Count == 0)
-                return;
-
-            var rndIdx = _random.Next(prefList.Count);
-            var chosenPlayer = prefList[rndIdx];
+            var eligible = _antagSelection.GetEligibleSessions(ev.PlayerPool, "DarkReaper");
+            var chosenPlayer = _antagSelection.ChooseAntags(1, eligible, ev.PlayerPool).FirstOrDefault();
+            if (chosenPlayer == null)
+                continue;
 
             ev.PlayerPool.Remove(chosenPlayer);
             GameTicker.PlayerJoinGame(chosenPlayer);
