@@ -85,7 +85,7 @@
       Steel: 300
 
 - type: entity
-  id: JerrycanWeldingFuelFilled
+  id: JerrycanWeldingFuelFull
   parent: JerrycanEmpty
   suffix: Заполненный, Сварочное топливо
   components:
@@ -98,7 +98,7 @@
           Quantity: 500
 
 - type: entity
-  id: JerrycanWaterFilled
+  id: JerrycanWaterFull
   parent: JerrycanEmpty
   suffix: Заполненный, Вода
   components:
@@ -111,7 +111,7 @@
           Quantity: 500
 
 - type: entity
-  id: JerrycanPlasmaFilled
+  id: JerrycanPlasmaFull
   parent: JerrycanEmpty
   suffix: Заполненный, Жидкая плазма
   components:
