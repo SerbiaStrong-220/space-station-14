@@ -84,10 +84,10 @@ public sealed class DiscordBanPostManager
         if (!_userJobBanPostTimers.TryGetValue(targetUsername, out var timer))
         {
             timer = new();
-            timer.Elapsed += _ =>
-            {
+            //timer.Elapsed += _ =>
+            //{
 
-            };
+            //};
         }
     }
 
