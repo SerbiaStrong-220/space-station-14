@@ -2,15 +2,13 @@
 
 using Content.Shared.Corvax.CCCVars;
 using Robust.Shared.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Content.Server.SS220.Discord;
 
@@ -26,8 +24,6 @@ public sealed class DiscordBanPostManager
     public void Initialize()
     {
         _sawmill = Logger.GetSawmill("DiscordPlayerManager");
-
-        // _netMgr.RegisterNetMessage<MsgUpdatePlayerDiscordStatus>();
 
         _cfg.OnValueChanged(CCCVars.DiscordAuthApiUrl, v => _apiUrl = v, true);
         _cfg.OnValueChanged(CCCVars.DiscordAuthApiKey, v =>
@@ -46,7 +42,7 @@ public sealed class DiscordBanPostManager
 
         try
         {
-            var url = $"{_apiUrl}/userban/{banId}";
+            var url = $"{_apiUrl}/userBan/{banId}";
 
             var response = await _httpClient.PostAsync(url, content: null);
 
@@ -62,7 +58,7 @@ public sealed class DiscordBanPostManager
         }
         catch (Exception exc)
         {
-            _sawmill.Error(exc.Message);
+            _sawmill.Error($"Error while posting user ban. {exc.Message}");
         }
     }
 
@@ -70,24 +66,79 @@ public sealed class DiscordBanPostManager
 
     private readonly Dictionary<string, Timer> _userJobBanPostTimers = new();
 
-    public async Task PostUserJobBanInfo(int banId, string? targetUsername)
+    public async Task PostUserJobBanInfo(int banId, string? targetUserName)
     {
-        if (!string.IsNullOrWhiteSpace(targetUsername))
+        try
         {
-            AddUserJobBanToCache(banId, targetUsername);
-            AddUserJobBanTimer(targetUsername);
+            if (!string.IsNullOrWhiteSpace(targetUserName))
+            {
+                AddUserJobBanToCache(banId, targetUserName);
+                AddUserJobBanTimer(targetUserName);
+            }
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error($"Error while cached user role ban. {exc.Message}");
         }
     }
 
-    private void AddUserJobBanTimer(string targetUsername)
+    private void AddUserJobBanTimer(string targetUserName)
     {
-        if (!_userJobBanPostTimers.TryGetValue(targetUsername, out var timer))
+        if (!_userJobBanPostTimers.TryGetValue(targetUserName, out var timer))
         {
-            timer = new();
-            //timer.Elapsed += _ =>
-            //{
+            timer = new()
+            {
+                AutoReset = false
+            };
 
-            //};
+            timer.Elapsed += async (sender, e) => await JobBanProccessComplete(targetUserName);
+
+            _userJobBanPostTimers[targetUserName] = timer;
+        }
+
+        timer.Stop();
+
+        timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
+        timer.Start();
+    }
+
+    private async Task JobBanProccessComplete(string userName)
+    {
+        if (string.IsNullOrEmpty(_apiUrl))
+        {
+            return;
+        }
+
+        _userBanCache.Remove(userName, out var bans);
+
+        if (bans is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var url = $"{_apiUrl}/userBan/roleBan";
+
+            var response = await _httpClient.PostAsync(url,
+                new StringContent(
+                    JsonSerializer.Serialize(bans),
+                    Encoding.UTF8,
+                    "application/json"));
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+
+                _sawmill.Error(
+                    "Failed to post user role ban: [{StatusCode}] {Response}",
+                    response.StatusCode,
+                    errorText);
+            }
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error($"Error while posting user role ban. {exc.Message}");
         }
     }
 
@@ -95,10 +146,15 @@ public sealed class DiscordBanPostManager
     {
         if (!_userBanCache.TryGetValue(targetUsername, out var cache))
         {
-            cache = new List<int>();
+            cache = [];
             _userBanCache[targetUsername] = cache;
         }
 
         cache.Add(banId);
+    }
+
+    private sealed class UserRoleBanInfo
+    {
+        public required List<int> BanIds { get; set; }
     }
 }
