@@ -22,7 +22,7 @@
         Piercing: 0.6
         Heat: 0.7
         Caustic: 0.7
-        Radiation: 0.25
+        Radiation: 0.50
         Stamina: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.80
