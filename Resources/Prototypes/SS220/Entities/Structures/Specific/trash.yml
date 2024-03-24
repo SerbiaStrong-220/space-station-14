@@ -18,6 +18,18 @@
   - type: Physics
     bodyType: Static
   - type: Climbable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
   - type: Damageable
     damageContainer: Box
   - type: Destructible
@@ -157,6 +169,18 @@
           scrap5: ""
   - type: Physics
     bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic
