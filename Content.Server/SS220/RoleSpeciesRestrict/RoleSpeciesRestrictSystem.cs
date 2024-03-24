@@ -22,7 +22,7 @@ public sealed class RoleSpeciesRestrictSystem : EntitySystem
         {
             var profile = (_serverPreferences.GetPreferences(player.UserId).SelectedCharacter as HumanoidCharacterProfile)!;
             var species = _prototypes.Index<SpeciesPrototype>(profile.Species);
-            if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out _, _prototypes))
+            if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out _, _prototypes)) //ss220-arahFix
                 return true;
         }
         return false;

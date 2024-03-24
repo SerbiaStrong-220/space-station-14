@@ -110,6 +110,7 @@ namespace Content.Server.Preferences.Managers
             profile.EnsureValid(allowedMarkings);
             // Corvax-Sponsors-End
 
+            //ss-220 arahFix
             if (!_iSharedPlayerManager.TryGetSessionById(userId, out var session))
                 return;
 
@@ -130,6 +131,7 @@ namespace Content.Server.Preferences.Managers
                 profile = human;
                 message.Profile = human;
             }
+            //ss-220 arahFixend
 
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
