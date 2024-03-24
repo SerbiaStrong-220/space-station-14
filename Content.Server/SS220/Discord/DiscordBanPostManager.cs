@@ -152,9 +152,4 @@ public sealed class DiscordBanPostManager
 
         cache.Add(banId);
     }
-
-    private sealed class UserRoleBanInfo
-    {
-        public required List<int> BanIds { get; set; }
-    }
 }
