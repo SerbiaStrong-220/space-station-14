@@ -24,6 +24,7 @@
 #Служба Безопасности
     SecurityCadet: [ ]
     SecurityOfficer: [ ]
+    SecurityPilot: [ ]
     Warden: [ ]
 
 - type: markingPoints

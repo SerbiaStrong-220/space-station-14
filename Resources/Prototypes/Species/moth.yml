@@ -14,15 +14,15 @@
   femaleLastNames: names_moth_last_female
   blockedJobs: #SS220-Job-Restrictions-start
 #Командование
-    - Captain
-    - HeadOfSecurity
-    - ChiefEngineer
+    Captain: [ ]
+    HeadOfSecurity: [ ]
+    ChiefEngineer: [ ]
 #ЦК
-    - BlueShield
-    - IAA
+    BlueShield: [ ]
+    IAA: [ ]
 #Инженерный отдел
-    - StationEngineer
-    - TechnicalAssistant
+    StationEngineer: [ ]
+    TechnicalAssistant: [ ]
 #SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites

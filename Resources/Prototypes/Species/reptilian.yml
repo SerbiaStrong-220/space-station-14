@@ -14,17 +14,17 @@
   buttScanTexture: /Textures/SS220/Interface/Butts/unathi.png
   blockedJobs: #SS220-Job-Restrictions-start
 #Командование
-    - Captain
+    Captain: [ ]
 #ЦК
-    - IAA
+    IAA: [ ]
 #Служба Безопасности
-    - Brigmedic
+    Brigmedic: [ ]
 #Медицинский отдел
-    - Psychologist
+    Psychologist: [ ]
 #Сервис
-    - Chef
-    - Bartender
-    - Botanist
+    Chef: [ ]
+    Bartender: [ ]
+    Botanist: [ ]
 #SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites

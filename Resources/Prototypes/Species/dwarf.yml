@@ -9,12 +9,12 @@
   skinColoration: HumanToned
   blockedJobs: #SS220-Job-Restrictions-start
 #Командование
-    - Captain
-    - HeadOfPersonnel
-    - HeadOfSecurity
-    - ResearchDirector
+    Captain: [ ]
+    HeadOfPersonnel: [ ]
+    HeadOfSecurity: [ ]
+    ResearchDirector: [ ]
 #ЦК
-    - IAA
+    IAA: [ ]
 #Сервис
-    - Chaplain
+    Chaplain: [ ]
 #SS220-Job-Restrictions-end

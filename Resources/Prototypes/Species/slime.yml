@@ -11,16 +11,16 @@
   buttScanTexture: /Textures/SS220/Interface/Butts/slime.png
   blockedJobs: #SS220-Job-Restrictions-start
 #Командование
-    - Captain
+    Captain: [ ]
 #ЦК
-    - IAA
+    IAA: [ ]
 #Медицинский отдел
-    - Chemist
+    Chemist: [ ]
 #Сервис
-    - Janitor
-    - Chef
-    - Bartender
-    - Botanist
+    Janitor: [ ]
+    Chef: [ ]
+    Bartender: [ ]
+    Botanist: [ ]
 #SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites

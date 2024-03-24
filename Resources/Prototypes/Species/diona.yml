@@ -16,28 +16,28 @@
   buttScanTexture: /Textures/SS220/Interface/Butts/diona.png
   blockedJobs: #SS220-Job-Restrictions-start
 #Командование
-    - Captain
-    - HeadOfSecurity
-    - Quartermaster
+    Captain: [ ]
+    HeadOfSecurity: [ ]
+    Quartermaster: [ ]
 #ЦК
-    - BlueShield
-    - IAA
+    BlueShield: [ ]
+    IAA: [ ]
 #Служба Безопасности
-    - Warden
-    - SecurityOfficer
-    - SecurityPilot
-    - SecurityCadet
-    - Brigmedic
-#Медицинский отдел
-    - Paramedic
+    Warden: [ ]
+    SecurityOfficer: [ ]
+    SecurityPilot: [ ]
+    SecurityCadet: [ ]
+    Brigmedic: [ ]
+#Мединский отдел
+    Paramedic: [ ]
 #Отдел снабжения
-    - Quartermaster
-    - CargoTechnician
-    - SalvageSpecialist
+    Quartermaster: [ ]
+    CargoTechnician: [ ]
+    SalvageSpecialist: [ ]
 #Сервис
-    - Detective
-    - Chef
-    - Boxer
+    Detective: [ ]
+    Chef: [ ]
+    Boxer: [ ]
 #SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
