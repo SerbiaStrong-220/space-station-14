@@ -12,5 +12,20 @@ public enum SponsorTier
     BigShlopa,
     HugeShlopa,
     GoldenShlopa,
-    CriticalMassShlopa
+    CriticalMassShlopa,
+    Mentor,
+    MiniDeveloper,
+    Developer,
+    Moderator,
+    Administrator,
+    HeadAdministrator,
+    SeniorAdministrator,
+    SubHeadAdministrator,
+    HeadLoroved,
+    WikiHead,
+    HeadModerator,
+    HeadDeveloper,
+    SubHeadDeveloper,
+    ProjectManager,
+    SeniorDeveloper
 }
