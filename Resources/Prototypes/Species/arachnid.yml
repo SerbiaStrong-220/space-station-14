@@ -46,7 +46,6 @@
     CargoTechnician: [ female ]
     SalvageSpecialist: [ female ]
 #Сервис
-    Janitor: [ female ]
     Chef: [ female ]
     Bartender: [ female ]
     Detective: [ male ]

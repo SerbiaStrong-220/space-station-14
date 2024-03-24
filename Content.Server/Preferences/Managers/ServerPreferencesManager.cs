@@ -13,6 +13,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Server.SS220.RoleSpeciesRestrict;
 
 
 namespace Content.Server.Preferences.Managers
@@ -28,6 +29,8 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IPrototypeManager _protos = default!;
         [Dependency] private readonly SponsorsManager _sponsors = default!;
+        [Dependency] private readonly IEntitySystemManager _iEntitySystemManager = default!;
+        [Dependency] private readonly ISharedPlayerManager _iSharedPlayerManager = default!;
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
@@ -106,6 +109,28 @@ namespace Content.Server.Preferences.Managers
             var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
             profile.EnsureValid(allowedMarkings);
             // Corvax-Sponsors-End
+
+            if (!_iSharedPlayerManager.TryGetSessionById(userId, out var session))
+                return;
+
+            if (profile is HumanoidCharacterProfile human){
+
+                foreach (var (k,v) in human.JobPriorities)
+                {
+                    //Logger.Info($"{k} {v}");
+                    //Logger.Info(JobPriority.Never.ToString());
+                    if(session == null)
+                        continue;
+                    if(!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
+                        {
+                        //human.JobPriorities[k] = JobPriority.Never;
+                        human = human.WithJobPriority(k, JobPriority.Never);
+                        }
+                }
+                profile = human;
+                message.Profile = human;
+            }
+
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
                 [slot] = profile
