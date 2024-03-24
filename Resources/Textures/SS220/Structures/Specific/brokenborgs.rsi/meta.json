@@ -8,10 +8,22 @@
   },
   "states": [
     {
+      "name": "robot"
+    },
+    {
+      "name": "engineer"
+    },
+    {
+      "name": "medical"
+    },
+    {
+      "name": "janitor"
+    },
+    {
       "name": "miner"
     },
     {
-      "name": "no_cable"
+      "name": "service"
     }
   ]
 }

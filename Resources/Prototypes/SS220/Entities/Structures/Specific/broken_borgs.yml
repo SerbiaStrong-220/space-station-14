@@ -7,7 +7,7 @@
   suffix: Хлам
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/robot.rsi
+    sprite: SS220/Structures/Specific/brokenborgs.rsi
     state: robot
   - type: Transform
     anchored: true
@@ -54,7 +54,6 @@
   name: разрушенный киборг
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/robot.rsi
     state: robot
   - type: Construction
     graph: BrokenBorg
@@ -66,7 +65,6 @@
   name: разрушенный киборг-инженер
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/engineer.rsi
     state: engineer
   - type: Construction
     graph: BrokenBorg
@@ -78,7 +76,6 @@
   name: разрушенный киборг-уборщик
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/janitor.rsi
     state: janitor
   - type: Construction
     graph: BrokenBorg
@@ -90,7 +87,6 @@
   name: разрушенный киборг-доктор
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/medical.rsi
     state: medical
   - type: Construction
     graph: BrokenBorg
@@ -102,7 +98,6 @@
   name: разрушенный киборг-шахтёр
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/miner.rsi
     state: miner
   - type: Construction
     graph: BrokenBorg
@@ -114,7 +109,6 @@
   name: разрушенный киборг-официант
   components:
   - type: Sprite
-    sprite: SS220/Structures/Specific/BrokenBorgs/service.rsi
     state: service
   - type: Construction
     graph: BrokenBorg
