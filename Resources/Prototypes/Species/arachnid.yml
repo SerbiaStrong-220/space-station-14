@@ -30,7 +30,7 @@
     SecurityCadet: [ male ]
     Brigmedic: [ famele ]
 #Инженерный отдел
-    AtmosphericTechnician: [ famele ]
+    AtmosphericTechnician: [ female ]
     StationEngineer: [ female ]
     TechnicalAssistant: [ female ]
 #Медицинский отдел
