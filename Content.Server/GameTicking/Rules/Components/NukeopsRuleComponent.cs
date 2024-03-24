@@ -114,7 +114,7 @@ public sealed partial class NukeopsRuleComponent : Component
     public WinType WinType = WinType.Neutral;
 
     [DataField]
-    public List<WinCondition> WinConditions = new();
+    public List<WinCondition> WinConditions = new ();
 
     public MapId? NukiePlanet;
 
