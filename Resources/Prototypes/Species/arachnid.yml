@@ -28,7 +28,7 @@
     SecurityOfficer: [ male ]
     SecurityPilot: [ male ]
     SecurityCadet: [ male ]
-    Brigmedic: [ famele ]
+    Brigmedic: [ female ]
 #Инженерный отдел
     AtmosphericTechnician: [ female ]
     StationEngineer: [ female ]
