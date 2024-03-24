@@ -8,5 +8,5 @@
       stationProto: StandardSS220_syndicate
       components:
         - type: StationNameSetup
-          mapNameTemplate: "SI-NO220 Heavy Hell "
+          mapNameTemplate: "SI-NO220 Outer Heaven "
 
