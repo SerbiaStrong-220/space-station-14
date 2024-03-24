@@ -118,13 +118,10 @@ namespace Content.Server.Preferences.Managers
 
                 foreach (var (k,v) in human.JobPriorities)
                 {
-                    //Logger.Info($"{k} {v}");
-                    //Logger.Info(JobPriority.Never.ToString());
                     if(session == null)
                         continue;
                     if(!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
                         {
-                        //human.JobPriorities[k] = JobPriority.Never;
                         human = human.WithJobPriority(k, JobPriority.Never);
                         }
                 }
