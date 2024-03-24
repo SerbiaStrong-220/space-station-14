@@ -98,7 +98,7 @@ public sealed class DiscordBanPostManager
 
         timer.Stop();
 
-        timer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
+        timer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
         timer.Start();
     }
 
