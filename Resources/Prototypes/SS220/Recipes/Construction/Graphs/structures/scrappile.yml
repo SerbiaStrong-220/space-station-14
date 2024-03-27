@@ -25,7 +25,6 @@
         - !type:DeleteEntity
 
     - node: ScrapPile
-      entity: ScrapPile
       edges:
         - to: start
           steps:
@@ -38,20 +37,16 @@
             - !type:SpawnPrototype
               prototype: SheetPlastic1
               amount: 3
-              prob: 0.5
             - !type:SpawnPrototype
               prototype: PartRodMetal1
               amount: 2
             - !type:SpawnPrototype
               prototype: CableApcStack1
               amount: 2
-              prob: 0.3
             - !type:SpawnPrototype
               prototype: CableMVStack1
               amount: 2
-              prob: 0.3
             - !type:SpawnPrototype
               prototype: CableHVStack1
               amount: 2
-              prob: 0.3
             - !type:DeleteEntity {}

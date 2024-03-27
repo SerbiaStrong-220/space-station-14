@@ -10,7 +10,6 @@
         - !type:DeleteEntity
 
     - node: BoxPile
-      entity: BoxPile
       edges:
         - to: start
           steps:

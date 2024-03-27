@@ -20,8 +20,8 @@
     maxFillLevels: 7
     fillBaseName: box
   - type: Damageable
-    damageModifierSet: StructuralMetallic
-    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -40,9 +40,6 @@
             max: 3
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: Tag
-    tags:
-    - Structure
   - type: Physics
     bodyType: Static
   - type: Anchorable

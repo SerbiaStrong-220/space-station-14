@@ -182,8 +182,8 @@
         - MidImpassable
         - LowImpassable
   - type: Damageable
-    damageModifierSet: StructuralMetallic
-    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
