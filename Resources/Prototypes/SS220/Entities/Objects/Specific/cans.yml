@@ -17,7 +17,6 @@
     closeable: true
     closeSound:
       collection: bottleCloseSounds
-  - type: Drink
   - type: SolutionContainerManager
     solutions:
       tank:
@@ -151,7 +150,6 @@
     closeable: true
     closeSound:
       collection: bottleCloseSounds
-  - type: Drink
   - type: Spillable
     solution: spray
   - type: RefillableSolution
