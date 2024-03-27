@@ -58,7 +58,7 @@
   cost:
     Telecrystal: 5
   categories:
-  - UplinkWeaponry
+  - UplinkDeception
   conditions:
   - !type:BuyerWhitelistCondition
     blacklist:
