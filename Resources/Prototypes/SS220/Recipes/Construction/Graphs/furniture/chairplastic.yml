@@ -9,7 +9,6 @@
         - to: chairPlastic
           completed:
             - !type:SnapToGrid
-              southRotation: true
           steps:
             - material: Plastic
               amount: 3
