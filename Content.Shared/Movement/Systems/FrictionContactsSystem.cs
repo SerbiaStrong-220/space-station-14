@@ -3,8 +3,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Content.Shared.SS220.Vehicle.Components;
-using Content.Shared.Buckle;
-using Content.Shared.Buckle.Components;
+using Content.Shared.SS220.Movement;
 
 namespace Content.Shared.Movement.Systems;
 
@@ -83,7 +82,7 @@ public sealed class FrictionContactsSystem : EntitySystem
             //SS220 vehicle_friсtion_fix start
             if (HasComp(uid, typeof(VehicleComponent)))
             {
-                _speedModifierSystem.ChangeFriction(uid, 1, 6, 1, speedModifier);
+                _speedModifierSystem.ChangeFriction(uid, VehicleMovementSpeedModifierComponent.DefaultFriction, VehicleMovementSpeedModifierComponent.DefaultFrictionNoInput, VehicleMovementSpeedModifierComponent.DefaultAcceleration, speedModifier);
                 return;
             }
             //SS220 vehicle_friсtion_fix end
