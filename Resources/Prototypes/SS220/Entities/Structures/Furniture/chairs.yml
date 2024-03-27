@@ -257,3 +257,42 @@
     node: PewMiddle
   - type: Sprite
     state: middle
+
+#SS220 Plastic chair
+- type: entity
+  name: plastic chair
+  id: ChairPlastic
+  description: Вы сидите на этом. Либо по вашей воле, либо по принуждению, либо ради мотивации и силы!
+  parent: UnanchoredChairBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/plasticchair.rsi
+    state: plastic
+  - type: Construction
+    graph: Seat
+    node: plastic-overlay
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlastic:
+            min: 1
+            max: 1
+  - type: Tag
+    tags:
+    - Plastic
+  - type: StaticPrice
+    price: 75

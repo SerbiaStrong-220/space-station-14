@@ -1,0 +1,16 @@
+- type: construction
+  name: plastic chair
+  id: ChairPlastic
+  graph: SeatPlastic
+  startNode: start
+  targetNode: chairPlastic
+  category: construction-category-furniture
+  description: Вы сидите на этом. Либо по вашей воле, либо по принуждению, либо ради мотивации и силы!
+  icon:
+    sprite: SS220/Structures/Furniture/plasticchair.rsi
+    state: plastic
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

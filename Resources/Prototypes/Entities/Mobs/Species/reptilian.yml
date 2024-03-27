@@ -33,7 +33,7 @@
   - type: Vocal
     sounds:
       Male: UnisexReptilian
-      Female: UnisexReptilian
+      Female: FemaleReptilian
       Unsexed: UnisexReptilian
   - type: Damageable
     damageContainer: Biological

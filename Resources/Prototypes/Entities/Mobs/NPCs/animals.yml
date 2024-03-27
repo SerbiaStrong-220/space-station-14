@@ -1322,7 +1322,7 @@
   - type: Vocal
     sounds:
       Male: UnisexReptilian
-      Female: UnisexReptilian
+      Female: FemaleReptilian
       Unsexed: UnisexReptilian
   - type: TypingIndicator
     proto: lizard
