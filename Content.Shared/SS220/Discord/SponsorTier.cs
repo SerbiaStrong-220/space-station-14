@@ -8,11 +8,7 @@ namespace Content.Shared.SS220.Discord;
 public enum SponsorTier
 {
     None,
-    Shlopa,
-    BigShlopa,
-    HugeShlopa,
-    GoldenShlopa,
-    CriticalMassShlopa,
+
     Mentor,
     MiniDeveloper,
     Developer,
@@ -27,5 +23,12 @@ public enum SponsorTier
     HeadDeveloper,
     SubHeadDeveloper,
     ProjectManager,
-    SeniorDeveloper
+    SeniorDeveloper,
+
+    // Тиры подписок должны идти в конце, для упрощения вычисления лучшего уровня поддержки.
+    Shlopa,
+    BigShlopa,
+    HugeShlopa,
+    GoldenShlopa,
+    CriticalMassShlopa,
 }
