@@ -1306,7 +1306,9 @@
   id:  OilOlive
 # SS220 chiefs-belt end
 
+# SS220 Edit Biomass craft begin
 - type: Tag
   id: Scalpel
+# SS220 Edit Biomass craft end
 
 # PUT YOUR TAGS IN ALPHABETICAL ORDER
