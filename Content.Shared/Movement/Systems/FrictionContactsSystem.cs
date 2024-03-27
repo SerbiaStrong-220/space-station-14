@@ -2,6 +2,9 @@ using Content.Shared.Movement.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Content.Shared.SS220.Vehicle.Components;
+using Content.Shared.Buckle;
+using Content.Shared.Buckle.Components;
 
 namespace Content.Shared.Movement.Systems;
 
@@ -11,7 +14,7 @@ public sealed class FrictionContactsSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifierSystem = default!;
 
     // Comment copied from "original" SlowContactsSystem.cs
-    // TODO full-game-save 
+    // TODO full-game-save
     // Either these need to be processed before a map is saved, or slowed/slowing entities need to update on init.
     private HashSet<EntityUid> _toUpdate = new();
 
@@ -40,6 +43,10 @@ public sealed class FrictionContactsSystem : EntitySystem
         var otherUid = args.OtherEntity;
 
         if (!HasComp(otherUid, typeof(MovementSpeedModifierComponent)))
+            return;
+
+        //if (TryComp(otherUid, out BuckleComponent? bucklecomp) && HasComp<VehicleComponent>(bucklecomp.LastEntityBuckledTo))
+        if (HasComp(otherUid, typeof(VehicleComponent)))
             return;
 
         _toUpdate.Add(otherUid);
