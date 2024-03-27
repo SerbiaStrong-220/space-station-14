@@ -98,8 +98,6 @@
         - SmallMobMask #this is so they can go under plastic flaps
         layer:
         - MachineLayer
-  - type: StaticPrice
-    price: 500
 
 - type: entity
   id: PalletBoxSteel
