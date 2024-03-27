@@ -45,10 +45,6 @@ public sealed class FrictionContactsSystem : EntitySystem
         if (!HasComp(otherUid, typeof(MovementSpeedModifierComponent)))
             return;
 
-        //if (TryComp(otherUid, out BuckleComponent? bucklecomp) && HasComp<VehicleComponent>(bucklecomp.LastEntityBuckledTo))
-        if (HasComp(otherUid, typeof(VehicleComponent)))
-            return;
-
         _toUpdate.Add(otherUid);
     }
 
@@ -84,6 +80,14 @@ public sealed class FrictionContactsSystem : EntitySystem
 
         if (frictionComponent == null)
         {
+            //SS220 vehicle_friсtion_fix start
+            if (HasComp(uid, typeof(VehicleComponent)))
+            {
+                _speedModifierSystem.ChangeFriction(uid, 1, 6, 1, speedModifier);
+                return;
+            }
+            //SS220 vehicle_friсtion_fix end
+
             _speedModifierSystem.ChangeFriction(uid, MovementSpeedModifierComponent.DefaultFriction, null, MovementSpeedModifierComponent.DefaultAcceleration, speedModifier);
         }
         else
