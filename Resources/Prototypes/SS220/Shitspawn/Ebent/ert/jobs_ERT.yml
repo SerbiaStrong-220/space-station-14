@@ -77,6 +77,7 @@
     - id: ClothingBackpackERTMedical
     - id: ClothingUniformJumpsuitColorBlack
     - id: ClothingNeckMantleERTLeader
+    - id: ClothingEyesHudMedSec
 
 - type: entity
   parent: LockerEngineer
@@ -121,6 +122,7 @@
     - id: Hypospray
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
+    - id: ClothingEyesHudMedSec
     
 #Leader
 - type: startingGear

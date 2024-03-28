@@ -166,6 +166,7 @@
     back: ClothingBackpackNuclearEngineer
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
+    eyes: ClothingEyesGlassesMeson
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronCE
     suitstorage: OxygenTankFilled
@@ -238,6 +239,7 @@
       amount: 2
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
+    - id: ClothingEyesHudMedSec
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -348,6 +350,7 @@
       amount: 2
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
+    - id: ClothingEyesHudMedSec
 
 - type: entity
   parent: ClothingBackpackNuclear

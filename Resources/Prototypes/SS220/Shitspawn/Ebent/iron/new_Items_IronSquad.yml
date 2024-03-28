@@ -13,6 +13,14 @@
     sprite: SS220/Clothing/Mask/nuclear_mask.rsi
   - type: FlashImmunity
   - type: EyeProtection
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingShoesBootsMag

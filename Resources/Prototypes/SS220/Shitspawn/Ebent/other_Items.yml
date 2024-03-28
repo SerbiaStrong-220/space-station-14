@@ -32,7 +32,9 @@
       amount: 10
     - id: SyringeTranexamicAcid
       amount: 20
-    - id: Bloodpack
+    - id: BloodpackEbent
+      amount: 30
+    - id: Stimpack
       amount: 30
     - id: MedicatedSuture
       amount: 50
@@ -42,6 +44,8 @@
       amount: 20 
     - id: DnaScramblerImplanter
       amount: 100
+    - id: BoxBodyBag
+      amount: 10
   - type: EntityStorage
     capacity: 350
 
@@ -90,3 +94,22 @@
       amount: 20
   - type: EntityStorage
     capacity: 200
+
+- type: entity
+  name: кровяная сыворотка
+  description: Способствует быстрому восстановлению крови.
+  parent: Bloodpack
+  id: BloodpackEbent
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Healing
+    damageContainers:
+      - Biological
+    damage:
+      types:
+        Bloodloss: -10 
+    ModifyBloodLevel: 15 
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
