@@ -58,12 +58,23 @@ public sealed partial class BlockingSystem
             }
             var blockFraction = blocking.IsBlocking ? trueBlock : blocking.PassiveBlockFraction;
             //ss220-revorkblock end
+
+            // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
+            if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
+                return;
+
             blockFraction = Math.Clamp(blockFraction, 0, 1);
             _damageable.TryChangeDamage(component.BlockingItem, blockFraction * args.OriginalDamage);
 
-            args.Damage *= (1 - blockFraction);
+            var modify = new DamageModifierSet();
+            foreach (var key in dmgComp.Damage.DamageDict.Keys)
+            {
+                modify.Coefficients.TryAdd(key, 1 - blockFraction);
+            }
 
-            if (blocking.IsBlocking)
+            args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
+
+            if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
             {
                 _audio.PlayPvs(blocking.BlockSound, uid);
             }

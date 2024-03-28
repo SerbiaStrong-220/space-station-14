@@ -99,4 +99,5 @@ public enum LogType
     MessengerClientCartridge = 89,  // SS220 MessengerClientCartridge
     SecutiyRecords = 90, // SS220 Criminal-Records
     AtmosTemperatureChanged = 91,
+    DeviceNetwork = 92,
 }

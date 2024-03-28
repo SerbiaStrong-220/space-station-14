@@ -4,6 +4,16 @@
   id: BoxSurvival
   description: It's a box with basic internals inside.
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
       - id: ClothingMaskBreath
@@ -11,7 +21,7 @@
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
-      - id: FoodTinMRE
+      - id: FoodSnackNutribrick
       - id: DrinkWaterBottleFull
   - type: Sprite
     layers:
@@ -24,6 +34,16 @@
   id: BoxSurvivalEngineering
   description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
       - id: ClothingMaskBreath
@@ -31,7 +51,7 @@
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
-      - id: FoodTinMRE
+      - id: FoodSnackNutribrick
       - id: DrinkWaterBottleFull
   - type: Sprite
     layers:
@@ -45,6 +65,16 @@
   description: It's a box with basic internals inside.
   suffix: Security
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
       - id: ClothingMaskGasSecurity
@@ -66,6 +96,16 @@
   description: It's a box with basic internals inside.
   suffix: MedSec
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
       - id: ClothingMaskBreathMedicalSecurity
@@ -73,7 +113,7 @@
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
-      - id: FoodTinMRE
+      - id: FoodSnackNutribrick
       - id: DrinkWaterBottleFull
   - type: Sprite
     layers:
@@ -87,6 +127,16 @@
   description: It's a box with basic internals inside.
   suffix: Medical
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
       - id: ClothingMaskBreathMedical
@@ -94,7 +144,7 @@
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
-      - id: FoodTinMRE
+      - id: FoodSnackNutribrick
       - id: DrinkWaterBottleFull
   - type: Sprite
     layers:
@@ -106,12 +156,22 @@
   parent: BoxCardboard
   id: BoxHug
   description: A special box for sensitive people.
+  suffix: Emergency
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: Sprite
     layers:
       - state: box_hug
       - state: heart
   - type: Item
+    size: Large # SS220 Bigger-survival-box begin
+    shape:
+    - 0,0,2,3 # SS220 Bigger-survival-box end
     heldPrefix: hug
   - type: StorageFill
     contents:
@@ -120,7 +180,7 @@
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
       - id: Flare
-      - id: FoodTinMRE
+      - id: FoodSnackNutribrick
       - id: DrinkWaterBottleFull
   - type: Tag
     tags:
@@ -132,6 +192,16 @@
   id: BoxSurvivalSyndicate
   description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
   components:
+  # SS220 Bigger-survival-box begin
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
       - id: ClothingMaskGasSyndicate
@@ -141,10 +211,7 @@
       - id: Flare
       - id: FoodTinMRE
       - id: DrinkWaterBottleFull
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,3,2
+      - id: FoodSnackNutribrick
   - type: Sprite
     layers:
       - state: internals

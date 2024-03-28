@@ -1,0 +1,420 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: Pallet
+  parent: BaseStructure
+  name: поддон
+  description: Последняя надежда на сохранность груза.
+  suffix: Хлам
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    state: pallet
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroyHeavy
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Tag
+    tags:
+    - Structure
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+  - type: Construction
+    graph: Pallet
+    node: pallet
+
+- type: entity
+  id: PalletBoxBase
+  parent: Pallet
+  name: накрытый поддон
+  description: Поддон с грузом, накрытый тканью. Интересно, что внутри?
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#ffffff"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroyHeavy
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 360
+        mask:
+        - SmallMobMask #this is so they can go under plastic flaps
+        layer:
+        - MachineLayer
+
+- type: entity
+  id: PalletBoxSteel
+  parent: PalletBoxBase
+  suffix: Сталь
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#919295"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxSteel
+
+- type: entity
+  id: PalletBoxPlasteel
+  parent: PalletBoxBase
+  suffix: Пласталь
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#525355"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxPlasteel
+
+- type: entity
+  id: PalletBoxPlastic
+  parent: PalletBoxBase
+  suffix: Пластик
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#d8d8d8"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxPlastic
+
+- type: entity
+  id: PalletBoxPlasma
+  parent: PalletBoxBase
+  suffix: Плазма
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#d5559d"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxPlasma
+
+- type: entity
+  id: PalletBoxUranium
+  parent: PalletBoxBase
+  suffix: Уран
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#359535"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxUranium
+
+- type: entity
+  id: PalletBoxGlass
+  parent: PalletBoxBase
+  suffix: Стекло
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#bad4e5"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxGlass
+
+- type: entity
+  id: PalletBoxRGlass
+  parent: PalletBoxBase
+  suffix: Укреп. Стекло
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#819bad"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxRGlass
+
+- type: entity
+  id: PalletBoxPGlass
+  parent: PalletBoxBase
+  suffix: Плазм. Стекло
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#d5b4cd"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxPGlass
+
+- type: entity
+  id: PalletBoxRPGlass
+  parent: PalletBoxBase
+  suffix: Укреп. Плазм. Стекло
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#b195a9"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxRPGlass
+
+- type: entity
+  id: PalletBoxUGlass
+  parent: PalletBoxBase
+  suffix: Уран. Стекло
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#b8dac0"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxUGlass
+
+- type: entity
+  id: PalletBoxRUGlass
+  parent: PalletBoxBase
+  suffix: Укреп. Уран. Стекло
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#88a38f"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxRUGlass
+
+- type: entity
+  id: PalletBoxCloth
+  parent: PalletBoxBase
+  suffix: Ткань
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#dcdad0"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxCloth
+
+- type: entity
+  id: PalletBoxDurathread
+  parent: PalletBoxBase
+  suffix: Дюраткань
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#8b9bb4"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxDurathread
+
+- type: entity
+  id: PalletBoxWoodPlank
+  parent: PalletBoxBase
+  suffix: Древесина
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#b78c68"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxWoodPlank
+
+- type: entity
+  id: PalletBoxCardboard
+  parent: PalletBoxBase
+  suffix: Картон
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#70736c"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxCardboard
+
+- type: entity
+  id: PalletBoxBiomass
+  parent: PalletBoxBase
+  suffix: Биомасса
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/pallet.rsi
+    layers:
+    - map: ["pallet"]
+      state: pallet
+    - map: ["palletBox"]
+      state: box
+      color: "#695c1e"
+    - map: ["palletBoxFixation"]
+      state: fixation
+  - type: Construction
+    graph: Pallet
+    node: PalletBoxBiomass

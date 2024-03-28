@@ -1,0 +1,25 @@
+- type: seed
+  id: beet
+  name: пакет семян (свёкла)
+  noun: seeds-noun-seeds
+  displayName: свёкла
+  plantRsi: SS220/Objects/Specific/Hydroponics/beet.rsi
+  packetPrototype: BeetSeeds
+  productPrototypes:
+    - Foodbeet
+  lifespan: 30
+  maturation: 10
+  production: 3
+  yield: 3
+  potency: 10
+  growthStages: 4
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25

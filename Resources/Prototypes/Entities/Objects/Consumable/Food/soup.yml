@@ -1010,15 +1010,19 @@
             Quantity: 5
 
 - type: entity
-  name: beet soup
+  name: борщ #ss200 cooking
   parent: FoodBowlBase
   id: FoodSoupBeet
-  description: Wait, how do you spell it again..?
+  description: Принесите мне кто-нибудь квас и хлеб! #ss220 cooking
   components:
-  - type: Sprite
+  - type: FlavorProfile #ss220 cooking
+    flavors:
+      - borsch  
+  - type: Sprite    
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi #ss220 cooking
     layers:
     - state: bowl
-    - state: beet
+    - state: borsch
   - type: SolutionContainerManager
     solutions:
       food:

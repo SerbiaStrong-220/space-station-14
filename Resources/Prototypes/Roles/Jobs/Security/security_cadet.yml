@@ -15,6 +15,9 @@
   - Security
   - Brig
   - Maintenance
+  - Service
+  - External
+  - Cryogenics
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -30,6 +33,7 @@
     id: SecurityCadetPDA
     ears: ClothingHeadsetSecurity
     head: ClothingHeadHelmetBasic
+    belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58Nonlethal
     pocket2: BookSecurity
   innerClothingSkirt: ClothingUniformJumpskirtSecGrey # Corvax-Resprite

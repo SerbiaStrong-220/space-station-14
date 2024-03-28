@@ -50,9 +50,7 @@ public abstract class SharedCryopodSSDSystem : EntitySystem
         if (!HasComp<MobStateComponent>(target))
             return false;
 
-        var xform = Transform(target);
-        cryopodSsdComponent.BodyContainer.Insert(target, transform: xform, force: true);
-
+        _containerSystem.Insert(target, cryopodSsdComponent.BodyContainer, force: true);
         _actionsSystem.AddAction(target, ref cryopodSsdComponent.LeaveActionEntity, cryopodSsdComponent.LeaveAction, uid);
         _standingStateSystem.Stand(target, force: true);
 
@@ -87,7 +85,7 @@ public abstract class SharedCryopodSSDSystem : EntitySystem
             return null;
         }
 
-        cryopodSsdComponent.BodyContainer.Remove(contained);
+        _containerSystem.Remove(contained, cryopodSsdComponent.BodyContainer);
 
         if (HasComp<KnockedDownComponent>(contained) || _mobStateSystem.IsIncapacitated(contained))
         {

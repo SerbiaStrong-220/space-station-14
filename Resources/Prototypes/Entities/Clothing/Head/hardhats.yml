@@ -62,6 +62,9 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
+  - type: Tag
+    tags:
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadHatHardhatBase
@@ -84,6 +87,14 @@
     sprite: Clothing/Head/Hardhats/orange.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/orange.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadHatHardhatBase
@@ -117,6 +128,14 @@
     sprite: Clothing/Head/Hardhats/yellow.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardhats/yellow.rsi
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 - type: entity
   parent: ClothingHeadHatHardhatBase

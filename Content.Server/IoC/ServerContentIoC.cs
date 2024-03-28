@@ -68,7 +68,8 @@ namespace Content.Server.IoC
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<Primelist>();
-            IoCManager.Register<DiscordPlayerManager>();
+            IoCManager.Register<DiscordPlayerManager>(); // SS220 discord player manager
+            IoCManager.Register<DiscordBanPostManager>();  // SS220 discord ban post manager
             IoCManager.Register<ServerControlController>();
             IoCManager.Register<DiscordWebhook>();
             IoCManager.Register<ServerDbEntryManager>();

@@ -115,12 +115,6 @@ public sealed class JobRequirementsManager
             return false;
         }
 
-        if (job.Requirements == null ||
-            !_cfg.GetCVar(CCVars.GameRoleTimers))
-        {
-            return true;
-        }
-
         var player = _playerManager.LocalSession;
         if (player == null)
             return true;
@@ -184,7 +178,7 @@ public sealed class JobRequirementsManager
 
     public bool CheckRoleTime(HashSet<JobRequirement>? requirements, ReasonList reasons)
     {
-        if (requirements == null)
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
         foreach (var requirement in requirements)

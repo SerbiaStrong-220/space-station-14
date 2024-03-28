@@ -1,0 +1,26 @@
+- type: constructionGraph
+  id: SeatPlastic
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: chairPlastic
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - material: Plastic
+              amount: 3
+              doAfter: 1
+    - node: chairPlastic
+      entity: ChairPlastic
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetPlastic1
+                amount: 3
+          steps:
+            - tool: Screwing
+              doAfter: 1

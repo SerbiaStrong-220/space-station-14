@@ -50,7 +50,7 @@
   gasOverlayState: tritium
   color: 13FF4B
   reagent: Tritium
-  pricePerMole: 5
+  pricePerMole: 2.5
 
 - type: gas
   id: 5

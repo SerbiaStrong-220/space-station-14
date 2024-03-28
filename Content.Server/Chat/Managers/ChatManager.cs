@@ -253,14 +253,11 @@ namespace Content.Server.Chat.Managers
 
             //SS220-shlepi begin
             var SponsorInfo = player.ContentData()?.SponsorInfo;
-            if (SponsorInfo is not null && !_adminManager.HasAdminFlag(player, AdminFlags.Admin) && SponsorInfo.Tiers.Any(x => x is not Shared.SS220.Discord.SponsorTier.None))
+            if (SponsorInfo is not null && !_adminManager.HasAdminFlag(player, AdminFlags.Admin))
             {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", BoostyOocColors[SponsorInfo.Tiers.Last()]), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
-                switch (SponsorInfo.Tiers.Last()) // Add your own unique tiers using switch-case construction. CriticalMassShlopa as example.
+                if (BoostyOocColors.TryGetValue(SponsorInfo.Tiers.Max(), out var sponsorColor))
                 {
-                    case SponsorTier.CriticalMassShlopa:
-                        wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", BoostyOocColors[SponsorInfo.Tiers.Last()]), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
-                        break;
+                    wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
                 }
             }
             //SS220-shlepi end

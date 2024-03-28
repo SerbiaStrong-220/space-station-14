@@ -33,7 +33,7 @@
   - type: Vocal
     sounds:
       Male: UnisexReptilian
-      Female: UnisexReptilian
+      Female: FemaleReptilian #ss220-fix
       Unsexed: UnisexReptilian
   - type: Damageable
     damageContainer: Biological

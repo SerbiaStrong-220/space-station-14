@@ -23,6 +23,7 @@
   - ChiefMedicalOfficer
   - Paramedic
   - Brig
+  - Cryogenics
   special:
   - !type:AddComponentSpecial
     components:
