@@ -76,7 +76,7 @@
   - MedicalIntern
   - Psychologist
   - Paramedic
-  - Brigmedic
+  - Brigmedic #ss220-brigmed
 
 - type: department
   id: Security
