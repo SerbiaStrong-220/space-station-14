@@ -14,7 +14,7 @@
   femaleLastNames: DionaLast # Corvax-LastnameGender
   naming: TheFirstofLast
   buttScanTexture: /Textures/SS220/Interface/Butts/diona.png
-  blockedJobs: #SS220-Job-Restrictions-start
+  blockedJobsByAccessor: #SS220-Job-Restrictions-start
 #Командование
     Captain: [ ]
     HeadOfSecurity: [ ]

@@ -12,7 +12,7 @@
   femaleFirstNames: names_reptilian_female
   naming: FirstDashFirst
   buttScanTexture: /Textures/SS220/Interface/Butts/unathi.png
-  blockedJobs: #SS220-Job-Restrictions-start
+  blockedJobsByAccessor: #SS220-Job-Restrictions-start
 #Командование
     Captain: [ ]
 #ЦК

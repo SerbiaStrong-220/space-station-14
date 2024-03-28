@@ -12,7 +12,7 @@
   femaleFirstNames: names_moth_first_female
   maleLastNames: names_moth_last_male
   femaleLastNames: names_moth_last_female
-  blockedJobs: #SS220-Job-Restrictions-start
+  blockedJobsByAccessor: #SS220-Job-Restrictions-start
 #Командование
     Captain: [ ]
     HeadOfSecurity: [ ]

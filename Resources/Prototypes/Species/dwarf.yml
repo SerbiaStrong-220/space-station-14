@@ -7,7 +7,7 @@
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobDwarfDummy
   skinColoration: HumanToned
-  blockedJobs: #SS220-Job-Restrictions-start
+  blockedJobsByAccessor: #SS220-Job-Restrictions-start
 #Командование
     Captain: [ ]
     HeadOfPersonnel: [ ]
