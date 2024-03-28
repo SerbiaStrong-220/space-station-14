@@ -9,7 +9,7 @@
       time: 72000 # SS220-RoleTime
   startingGear: BrigmedicGear
   icon: "JobIconBrigmedic"
-  supervisors: job-supervisors-cmo
+  supervisors: job-supervisors-cmo #ss220-brigmed
   access:
   - Medical
   - Security
