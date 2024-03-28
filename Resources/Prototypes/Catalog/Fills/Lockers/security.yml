@@ -104,7 +104,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingEyesHudMedical
+      - id: ClothingEyesHudMedical #ss220-brigmed
       - id: TrackingImplanter
         amount: 2
       - id: ClothingOuterHardsuitBrigmedic
