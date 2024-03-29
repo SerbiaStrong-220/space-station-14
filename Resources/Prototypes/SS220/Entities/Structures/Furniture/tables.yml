@@ -67,9 +67,6 @@
           ShardGlassUranium:
             min: 1
             max: 1
-          PartRodMetal1:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Construction
@@ -122,14 +119,11 @@
           ShardGlassPlasma:
             min: 1
             max: 1
-          PartRodMetal1:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Construction
     graph: Table
-    node: TableReinforcedGlass
+    node: TableReinforcedPlasmaGlass
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepTile
@@ -177,14 +171,11 @@
           ShardGlassUranium:
             min: 1
             max: 1
-          PartRodMetal1:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Construction
     graph: Table
-    node: TableReinforcedGlass
+    node: TableReinforcedUraniumGlass
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepTile
