@@ -1311,4 +1311,27 @@
   id: Scalpel
 # SS220 Edit Biomass craft end
 
+# SS220 Flower update begin
+- type: Tag
+  id: wtulip
+
+- type: Tag
+  id: ytulip
+
+- type: Tag
+  id: ptulip
+
+- type: Tag
+  id: rclove
+
+- type: Tag
+  id: wclove
+
+- type: Tag
+  id: schamomile
+
+- type: Tag
+  id: wschamomile
+# SS220 Flower update end
+
 # PUT YOUR TAGS IN ALPHABETICAL ORDER

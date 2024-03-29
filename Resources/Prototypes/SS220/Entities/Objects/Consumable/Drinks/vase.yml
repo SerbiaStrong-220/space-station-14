@@ -1,0 +1,75 @@
+- type: entity
+  name: vase
+  description: strangely shaped glass vase, what is it for?
+  parent: DrinkGlassBase
+  id: vase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+    layers:
+      - state: icon
+        map: [ "enum.SolutionContainerLayers.Base" ]
+      - state: fill1
+        map: [ "enum.SolutionContainerLayers.Fill" ]
+        visible: false
+      - state: icon-front
+        map: [ "enum.SolutionContainerLayers.Overlay" ]
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+  - type: SolutionContainerVisuals
+    maxFillLevels: 9
+    fillBaseName: fill
+    metamorphicDefaultSprite:
+      sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+      state: icon
+  - type: Matchbox
+  - type: ItemSlots
+    slots:
+      item:
+        name: vase-flower
+        whitelist:
+          tags:
+          - wtulip
+          - ptulip
+          - ytulip
+          - rclove
+          - wclove
+          - schamomile
+          - wschamomile
+
+  - type: ItemMapper
+    mapLayers:
+      white_tulip:
+        whitelist:
+          tags:
+          - wtulip
+      pink_tulip:
+        whitelist:
+          tags:
+          - ptulip
+      yellow_tulip:
+        whitelist:
+          tags:
+          - ytulip
+      red_clove:
+        whitelist:
+          tags:
+          - rclove
+      white_clove:
+        whitelist:
+          tags:
+          - wclove
+      s_chamomile:
+        whitelist:
+          tags:
+          - schamomile
+      ws_chamomile:
+        whitelist:
+          tags:
+          - wschamomile
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+    layers:
+        visible: false

@@ -1,0 +1,124 @@
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodFlowerBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bitter
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  parent: FoodFlowerBase
+  id: wtulip
+  name: White tulip
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/wtulip.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/wtulip.rsi
+  - type: Tag
+    tags:
+    - wtulip
+
+- type: entity
+  parent: FoodFlowerBase
+  id: ytulip
+  name: yellow tulip
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/ytulip.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/ytulip.rsi
+  - type: Tag
+    tags:
+    - ytulip
+
+- type: entity
+  parent: FoodFlowerBase
+  id: ptulip
+  name: pink tulip
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/ptulip.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/ptulip.rsi
+  - type: Tag
+    tags:
+    - ptulip
+
+- type: entity
+  parent: FoodFlowerBase
+  id: rclove
+  name: red clove
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/rclove.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/rclove.rsi
+  - type: Tag
+    tags:
+    - rclove
+
+- type: entity
+  parent: FoodFlowerBase
+  id: wclove
+  name: white clove
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/wclove.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/wclove.rsi
+  - type: Tag
+    tags:
+    - wclove
+
+- type: entity
+  parent: FoodFlowerBase
+  id: schamomile
+  name: space schamomile
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/schamomile.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/schamomile.rsi
+  - type: Tag
+    tags:
+    - schamomile
+
+- type: entity
+  parent: FoodFlowerBase
+  id: wschamomile
+  name: white space schamomile
+  description: A pretty cute flower.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/wschamomile.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Consumable/Flowers/wschamomile.rsi
+  - type: Tag
+    tags:
+    - wschamomile
