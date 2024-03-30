@@ -379,4 +379,4 @@ ent-DrinkBloodGlass = { ent-DrinkGlass }
     .suffix = blood
     .desc = { ent-DrinkGlass.desc }
 ent-GlassVase = стелкянная ваза
-    .desc = Простая стеклянная ваза для разных видов цветов.
+    .desc = Простая стеклянная ваза для цветов.
