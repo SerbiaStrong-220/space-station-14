@@ -378,5 +378,5 @@ ent-DrinkHellRamen = чашка адского рамэна
 ent-DrinkBloodGlass = { ent-DrinkGlass }
     .suffix = blood
     .desc = { ent-DrinkGlass.desc }
-ent-Vase = стелкянная ваза
+ent-GlassVase = стелкянная ваза
     .desc = Простая стеклянная ваза для разных видов цветов.

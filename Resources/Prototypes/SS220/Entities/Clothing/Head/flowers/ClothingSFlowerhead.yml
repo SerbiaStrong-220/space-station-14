@@ -8,3 +8,6 @@
     sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
+  - type: Construction
+    graph: Clothingsflowerhead
+    node: ClothingSFlowerhead

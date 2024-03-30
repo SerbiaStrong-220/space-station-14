@@ -1,7 +1,7 @@
 - type: construction
   name: Венок из ромашек
   id: ClothingSFlowerhead
-  graph: ClothingSFlowerhead
+  graph: Clothingsflowerhead
   startNode: start
   targetNode: ClothingSFlowerhead
   category: construction-category-misc
@@ -14,7 +14,7 @@
 - type: construction
   name: Венок из белых ромашек
   id: ClothingWSFlowerhead
-  graph: ClothingWSFlowerhead
+  graph: Clothingwsflowerhead
   startNode: start
   targetNode: ClothingWSFlowerhead
   category: construction-category-misc
@@ -27,12 +27,25 @@
 - type: construction
   name: стеклянная ваза
   id: CraftVase
-  graph: CraftVase
+  graph: craftvase
   startNode: start
-  targetNode: CraftingVase
+  targetNode: CraftVase
   category: construction-category-misc
   objectType: Item
   description: Стеклянная ваза, предназначеная для хранения жидкости и цветов.
   icon:
     sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+    state: icon
+
+- type: construction
+  name: Букет космических цветов
+  id: Flowersbouqlet
+  graph: flowersbouqlet
+  startNode: start
+  targetNode: Flowersbouqlet
+  category: construction-category-misc
+  objectType: Item
+  description: Для вашей второй половинки!
+  icon:
+    sprite: SS220/Objects/Fun/flowersbouquet.rsi
     state: icon
