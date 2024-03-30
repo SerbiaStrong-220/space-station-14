@@ -38,6 +38,18 @@
   category: cargoproduct-category-name-hydroponics
   group: market
 
+#ss220-flowerupdate-begin
+- type: cargoProduct
+  id: HydroponicsFlowerSeeds
+  icon:
+    sprite: SS220/Objects/Specific/Hydroponics/ptulip.rsi
+    state: seed
+  product: CrateHydroponicsFlowerSeeds
+  cost: 1500
+  category: cargoproduct-category-name-hydroponics
+  group: market
+#ss220-flowerupdate-end
+
 - type: cargoProduct
   id: BulkPlantBGone
   icon:

@@ -2,7 +2,7 @@
   name: vase
   description: strangely shaped glass vase, what is it for?
   parent: DrinkGlassBase
-  id: vase
+  id: Vase
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
@@ -39,6 +39,10 @@
           - wclove
           - schamomile
           - wschamomile
+          - sflower
+          - lflower
+          - rrose
+          - wrose
 
   - type: ItemMapper
     mapLayers:
@@ -70,6 +74,22 @@
         whitelist:
           tags:
           - wschamomile
+      s_flower:
+        whitelist:
+          tags:
+          - sflower
+      l_flower:
+        whitelist:
+          tags:
+          - lflower
+      r_rose:
+        whitelist:
+          tags:
+          - rrose
+      w_rose:
+        whitelist:
+          tags:
+          - wrose
     sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
     layers:
         visible: false

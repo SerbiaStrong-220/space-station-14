@@ -60,6 +60,18 @@
         },
         {
             "name": "ws_chamomile"
+        },
+        {
+            "name": "s_flower"
+        },
+        {
+            "name": "l_flower"
+        },
+        {
+            "name": "r_rose"
+        },
+        {
+            "name": "w_rose"
         }
     ]
 }
