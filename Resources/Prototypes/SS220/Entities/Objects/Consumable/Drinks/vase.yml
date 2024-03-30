@@ -15,6 +15,10 @@
       - state: Icon-front
         map: [ "enum.SolutionContainerLayers.Overlay" ]
   - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
   - type: SolutionContainerVisuals
     maxFillLevels: 9
     fillBaseName: fill
@@ -25,6 +29,9 @@
     graph: craftvase
     node: CraftVase
   - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
   - type: ItemSlots
     slots:
       item:
