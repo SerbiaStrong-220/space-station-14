@@ -2,7 +2,7 @@
   parent: ClothingHeadBase
   id: ClothingWSFlowerhead
   name: венок из белых космических ромашек
-  description: Что-то.... На космически красивом!
+  description: Лёгкий и нежный цветочный оберег.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/wsflowerhead.rsi
