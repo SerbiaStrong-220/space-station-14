@@ -31,7 +31,7 @@
   - type: Matchbox
   - type: ContainerContainer
     containers:
-      entity_storage: !type:Container
+      item: !type:ContainerSlot
         ents: []
   - type: ItemSlots
     slots:
