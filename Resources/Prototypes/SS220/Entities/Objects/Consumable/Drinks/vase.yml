@@ -30,9 +30,6 @@
     node: CraftVase
   - type: Matchbox
   - type: ContainerContainer
-    containers:
-      item: !type:ContainerSlot
-        ents: []
   - type: ItemSlots
     slots:
       item:
