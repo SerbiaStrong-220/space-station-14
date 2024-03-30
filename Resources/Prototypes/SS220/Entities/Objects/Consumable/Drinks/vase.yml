@@ -32,6 +32,7 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
+        ents: []
   - type: ItemSlots
     slots:
       item:
