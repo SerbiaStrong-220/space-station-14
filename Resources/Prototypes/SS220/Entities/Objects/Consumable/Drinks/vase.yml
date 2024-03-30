@@ -15,10 +15,6 @@
       - state: Icon-front
         map: [ "enum.SolutionContainerLayers.Overlay" ]
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
   - type: SolutionContainerVisuals
     maxFillLevels: 9
     fillBaseName: fill
