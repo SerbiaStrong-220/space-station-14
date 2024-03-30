@@ -49,7 +49,7 @@
     - id: VendingMachineRestockChemVend
       amount: 20
   - type: EntityStorage
-    capacity: 350
+    capacity: 400
 
 - type: entity
   parent: CrateEngineering
