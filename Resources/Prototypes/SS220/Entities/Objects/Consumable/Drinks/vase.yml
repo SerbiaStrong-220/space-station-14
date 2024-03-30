@@ -94,5 +94,3 @@
           tags:
           - wrose
     sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
-    layers:
-        visible: false
