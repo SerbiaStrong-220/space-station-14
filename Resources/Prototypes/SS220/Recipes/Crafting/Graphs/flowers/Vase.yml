@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: CraftVase
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: CraftingVase
+          steps:
+          - material: Glass
+            amount: 2
+            doAfter: 3
+    - node: CraftingVase
+      entity: Vase

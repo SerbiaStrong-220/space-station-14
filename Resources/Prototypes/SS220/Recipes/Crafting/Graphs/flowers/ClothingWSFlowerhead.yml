@@ -1,0 +1,17 @@
+- type: constructionGraph
+  id: ClothingWSFlowerhead
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingWSFlowerhead
+          steps:
+          - tag: schamomile
+            name: белую космическую ромашку
+            icon:
+              sprite: SS220/Objects/Consumable/Flowers/wschamomile.rsi
+              state: icon
+            amount: 1
+            doAfter: 5
+    - node: ClothingWSFlowerhead
+      entity: ClothingWSFlowerhead

@@ -1,0 +1,38 @@
+- type: construction
+  name: Венок из ромашек
+  id: ClothingSFlowerhead
+  graph: ClothingSFlowerhead
+  startNode: start
+  targetNode: ClothingSFlowerhead
+  category: construction-category-misc
+  objectType: Item
+  description: Вернитесь в детство, воплотите цветочки в произведение искусства!
+  icon:
+    sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
+    state: icon
+
+- type: construction
+  name: Венок из белых ромашек
+  id: ClothingWSFlowerhead
+  graph: ClothingWSFlowerhead
+  startNode: start
+  targetNode: ClothingWSFlowerhead
+  category: construction-category-misc
+  objectType: Item
+  description: Вернитесь в детство, воплотите цветочки в произведение искусства!
+  icon:
+    sprite: SS220/Clothing/Head/Hats/wsflowerhead.rsi
+    state: icon
+
+- type: construction
+  name: стеклянная ваза
+  id: CraftVase
+  graph: CraftVase
+  startNode: start
+  targetNode: CraftingVase
+  category: construction-category-misc
+  objectType: Item
+  description: Стеклянная ваза, предназначеная для хранения жидкости и цветов.
+  icon:
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+    state: icon
