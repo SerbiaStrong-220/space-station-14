@@ -86,6 +86,11 @@
         Slash: 8
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  # SS220 Edit biomass craft begin
+  - type: Tag
+    tags:
+    - Scalpel
+  # SS220 Edit biomass craft end
 
 - type: entity
   name: shiv

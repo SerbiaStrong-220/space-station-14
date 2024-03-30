@@ -1,0 +1,115 @@
+- type: entity
+  parent: BaseStructure
+  id: BaseBrokenBorg
+  name: разрушенный киборг
+  description: Сломанный гибрид машины и человека.
+  abstract: true
+  suffix: Хлам
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Specific/brokenborgs.rsi
+    state: robot
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgRobot
+  name: разрушенный киборг
+  components:
+  - type: Sprite
+    state: robot
+  - type: Construction
+    graph: BrokenBorg
+    node: robot
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgEngineer
+  name: разрушенный киборг-инженер
+  components:
+  - type: Sprite
+    state: engineer
+  - type: Construction
+    graph: BrokenBorg
+    node: engineer
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgJanitor
+  name: разрушенный киборг-уборщик
+  components:
+  - type: Sprite
+    state: janitor
+  - type: Construction
+    graph: BrokenBorg
+    node: janitor
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgMedical
+  name: разрушенный киборг-доктор
+  components:
+  - type: Sprite
+    state: medical
+  - type: Construction
+    graph: BrokenBorg
+    node: medical
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgMiner
+  name: разрушенный киборг-шахтёр
+  components:
+  - type: Sprite
+    state: miner
+  - type: Construction
+    graph: BrokenBorg
+    node: miner
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgService
+  name: разрушенный киборг-официант
+  components:
+  - type: Sprite
+    state: service
+  - type: Construction
+    graph: BrokenBorg
+    node: service

@@ -30,6 +30,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
     [Dependency] private   readonly SharedPopupSystem _popup = default!;
     [Dependency] private   readonly SharedStackSystem _stack = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;//SS220 fulton_grid_restriction
 
     [ValidatePrototypeId<EntityPrototype>] public const string EffectProto = "FultonEffect";
     protected static readonly Vector2 EffectOffset = Vector2.Zero;
@@ -133,6 +134,14 @@ public abstract partial class SharedFultonSystem : EntitySystem
             return;
         }
 
+        //SS220 fulton_grid_restriction start
+        if (GridCheck(uid, component))
+        {
+            _popup.PopupClient(Loc.GetString("fulton-is-restricted"), uid, args.User);
+            return;
+        }
+        //SS220 fulton_grid_restriction end
+
         if (!CanApplyFulton(args.Target.Value, component))
         {
             _popup.PopupClient(Loc.GetString("fulton-invalid"), uid, uid);
@@ -159,6 +168,34 @@ public abstract partial class SharedFultonSystem : EntitySystem
                 NeedHand = true,
             });
     }
+    //SS220 fulton_grid_restriction start
+    private bool GridCheck(EntityUid uid, FultonComponent component)
+    {
+        //check if beacon not on tradepost
+        if (component.Beacon == null)
+            return true;
+
+        var xform = Transform((EntityUid) component.Beacon).GridUid;
+
+        if (!_entity.TryGetComponent<MetaDataComponent>(xform, out var metadata))
+            return true;
+
+        if (metadata.EntityName == "Automated Trade Station" || metadata.EntityName == "Cargo shuttle")
+            return true;
+
+        //check if item not on tradepost
+        var yform = Transform(uid).GridUid;
+
+        if (!_entity.TryGetComponent<MetaDataComponent>(yform, out metadata))
+            return true;
+
+        if (metadata.EntityName == "Automated Trade Station" || metadata.EntityName == "Cargo shuttle")
+            return true;
+
+        return false;
+    }
+
+    //SS220 fulton_grid_restriction end
 
     private void OnFultonSplit(EntityUid uid, FultonComponent component, ref StackSplitEvent args)
     {

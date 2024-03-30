@@ -1,6 +1,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 using Content.Shared.Roles;
 
 namespace Content.Shared.Humanoid.Prototypes;
@@ -135,8 +136,8 @@ public sealed partial class SpeciesPrototype : IPrototype
     public string ButtScanTexture = "/Textures/SS220/Interface/Butts/human.png";
 
     //SS220 Species-Job-Requirement
-    [DataField("blockedJobs", required: false, customTypeSerializer: typeof(PrototypeIdListSerializer<JobPrototype>))]
-    public List<string> BlockedJobs { get; } = new();
+    [DataField(customTypeSerializer: typeof(DictionarySerializer<string, string[]>))]
+    public Dictionary<string, string[]> BlockedJobsByAccessor { get; } = new();
 
     /// <summary>
     ///     The Style used for the guidebook info link in the character profile editor

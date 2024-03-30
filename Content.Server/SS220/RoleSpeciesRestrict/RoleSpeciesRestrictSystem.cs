@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 // Created specially for SS200 with love by Alan Wake (https://github.com/aw-c)
+
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Content.Shared.Humanoid.Prototypes;
@@ -21,7 +22,7 @@ public sealed class RoleSpeciesRestrictSystem : EntitySystem
         {
             var profile = (_serverPreferences.GetPreferences(player.UserId).SelectedCharacter as HumanoidCharacterProfile)!;
             var species = _prototypes.Index<SpeciesPrototype>(profile.Species);
-            if (JobRequirements.TryRequirementsSpeciesMet(job, species, out _, _prototypes))
+            if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out _, _prototypes)) //ss220-arahFix
                 return true;
         }
         return false;

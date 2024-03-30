@@ -1310,4 +1310,9 @@
 - type: Tag
   id: MagazineUssp_RPK
 
+# SS220 Edit Biomass craft begin
+- type: Tag
+  id: Scalpel
+# SS220 Edit Biomass craft end
+
 # PUT YOUR TAGS IN ALPHABETICAL ORDER

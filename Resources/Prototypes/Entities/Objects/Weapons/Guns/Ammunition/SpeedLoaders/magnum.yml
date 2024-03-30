@@ -49,12 +49,12 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi
     layers:
-      - state: base
+      - state: practice #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: practice-6
+      - state: base-6 #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
-    magState: practice
+    magState: base #ss-220 sprite fix
     steps: 7
     zeroVisible: false
   - type: Appearance
@@ -69,12 +69,12 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi
     layers:
-      - state: base
+      - state: rubber #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: rubber-6
+      - state: base-6 #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
-    magState: rubber
+    magState: base #ss-220 sprite fix
     steps: 7
     zeroVisible: false
   - type: Appearance
@@ -89,12 +89,12 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi
     layers:
-      - state: base
+      - state: piercing #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: piercing-6
+      - state: base-6 #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
-    magState: piercing
+    magState: base #ss-220 sprite fix
     steps: 7
     zeroVisible: false
   - type: Appearance
@@ -109,12 +109,12 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi
     layers:
-      - state: base
+      - state: uranium #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: uranium-6
+      - state: base-6 #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
-    magState: uranium
+    magState: base #ss-220 sprite fix
     steps: 7
     zeroVisible: false
   - type: Appearance

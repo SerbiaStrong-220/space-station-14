@@ -24,6 +24,30 @@
   categories:
   - UplinkPointless
 
+  #Masks-Boxes
+
+- type: listing
+  id: UplinkCriminalDelivery
+  name: uplink-criminal-delivery-name
+  description: uplink-criminal-delivery-desc
+  icon: { sprite: /Textures/SS220/Objects/Storage/criminaldelivery.rsi, state: criminaldelivery }
+  productEntity: CriminalDeliveryBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
+- type: listing
+  id: UplinkSpecialDelivery
+  name: uplink-special-delivery-name
+  description: uplink-special-delivery-desc
+  icon: { sprite: /Textures/SS220/Objects/Storage/specialdelivery.rsi, state: specialdelivery }
+  productEntity: SpecialDeliveryBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
 # READD-VEHICLES
 - type: listing
   id: UplinkSyndicateSegwayCrate
@@ -34,7 +58,7 @@
   cost:
     Telecrystal: 5
   categories:
-  - UplinkWeaponry
+  - UplinkDeception
   conditions:
   - !type:BuyerWhitelistCondition
     blacklist:

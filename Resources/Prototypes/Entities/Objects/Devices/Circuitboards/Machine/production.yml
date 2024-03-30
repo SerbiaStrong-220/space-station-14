@@ -593,10 +593,10 @@
         MatterBin: 2
         Manipulator: 1
       tagRequirements:
-        Knife:
+        Scalpel: #SS220 Edit biomasscraft
           Amount: 2
-          DefaultPrototype: KitchenKnife
-          ExamineName: Knife
+          DefaultPrototype: Scalpel #SS220 Edit biomasscraft
+          ExamineName: Scalpel #SS220 Edit biomasscraft
       materialRequirements:
         Steel: 5
 

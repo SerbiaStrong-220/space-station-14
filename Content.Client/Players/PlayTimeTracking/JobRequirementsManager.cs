@@ -151,7 +151,7 @@ public sealed class JobRequirementsManager
 
         if (species is not null)
         {
-            if (JobRequirements.TryRequirementsSpeciesMet(job, species, out var reason, _prototypeManager))
+            if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out var reason, _prototypeManager)) //ss220-arahFix
                 return true;
 
             reasons.Add(reason.ToMarkup());

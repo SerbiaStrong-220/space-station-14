@@ -76,6 +76,7 @@
   - MedicalIntern
   - Psychologist
   - Paramedic
+  - Brigmedic #ss220-brigmed
 
 - type: department
   id: Security
@@ -88,7 +89,6 @@
   - SecurityCadet
   - SecurityOfficer
   - Warden
-  - Brigmedic
   - SecurityPilot
 
 - type: department
