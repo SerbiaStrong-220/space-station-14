@@ -306,8 +306,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: SpeedLoaderMagnum
-      amount: 2
     - id: MagazineLightRifle
       amount: 2
     - id: CombatMedipen
