@@ -2,7 +2,7 @@
   parent: BaseItem
   id: FlowersBouquet
   name: Букет космических цветов
-  description: для вашей второй половинки!
+  description: Прекрасный благоухающий цветочный букет.
   components:
   - type: Sprite
     sprite: SS220/Objects/Fun/flowersbouquet.rsi
