@@ -16,7 +16,6 @@
             icon:
               sprite: SS220/Objects/Consumable/Flowers/rclove.rsi
               state: icon
-            amount: 1
             doAfter: 5
     - node: Flowersbouqlet
       entity: FlowersBouquet
