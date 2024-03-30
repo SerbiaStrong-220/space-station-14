@@ -130,7 +130,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
@@ -184,7 +184,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTEngineer
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
@@ -237,7 +237,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesNitrile
@@ -294,7 +294,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesNitrile
@@ -347,7 +347,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesCombat

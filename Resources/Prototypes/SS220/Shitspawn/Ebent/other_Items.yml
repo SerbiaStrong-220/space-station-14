@@ -32,7 +32,7 @@
       amount: 10
     - id: SyringeTranexamicAcid
       amount: 20
-    - id: BloodpackEbent
+    - id: BloodSalveEbent
       amount: 30
     - id: Stimpack
       amount: 30
@@ -46,6 +46,8 @@
       amount: 100
     - id: BoxBodyBag
       amount: 10
+    - id: VendingMachineRestockChemVend
+      amount: 20
   - type: EntityStorage
     capacity: 350
 
@@ -96,10 +98,10 @@
     capacity: 200
 
 - type: entity
-  name: кровяная сыворотка
-  description: Способствует быстрому восстановлению крови.
+  name: кровоостанавливающая мазь
+  description: Способствует быстрому восстановлению крови. Выглядит как что-то из детства.
   parent: Bloodpack
-  id: BloodpackEbent
+  id: BloodSalveEbent
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Healing
@@ -113,3 +115,17 @@
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/BloodSalveEbent.rsi
+    state: BloodSalve
+  - type: Stack
+    stackType: BloodSalveEbent
+    count: 10
+
+- type: stack
+  id: BloodSalveEbent
+  name: кровоостанавливающая мазь
+  icon: { sprite: "/Textures/SS220/Objects/Specific/Medical/BloodSalveEbent.rsi", state: BloodSalve }
+  spawn: BloodSalveEbent
+  maxCount: 10
+  itemSize: 1
