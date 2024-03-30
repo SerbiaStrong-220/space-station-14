@@ -140,7 +140,7 @@
     id: SpecOpsPDALeader
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -193,7 +193,7 @@
     id: SpecOpsPDAEngineer
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -246,7 +246,7 @@
     id: SpecOpsPDACorpsman
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -303,7 +303,7 @@
     id: SpecOpsPDACMO
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -356,7 +356,7 @@
     id: SpecOpsPDAFigher
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
