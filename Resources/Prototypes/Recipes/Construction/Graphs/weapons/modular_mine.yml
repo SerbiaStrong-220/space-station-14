@@ -22,7 +22,7 @@
         icon:
           sprite: Objects/Misc/proximity_sensor.rsi
           state: icon
-        name: proximity sensor
+        name: датчик движения
     - to: start
       completed:
       - !type:SpawnPrototype
