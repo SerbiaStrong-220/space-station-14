@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: CrateMedicalSupplies
+  parent: CrateMedical
   id: LockerEbentMedical
   name: "ящик медицинских принадлежностей"
   description: Стандартный ящик.
@@ -42,7 +42,7 @@
     capacity: 250
 
 - type: entity
-  parent: CrateMedicalSupplies
+  parent: CrateMedical
   id: LockerEbentMedical2
   name: "ящик медицинских принадлежностей-2"
   description: Стандартный ящик.
