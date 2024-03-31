@@ -35,8 +35,5 @@
           volume: -10
     - type: UseDelay
       delay: 300.0
-    - type: PhysicalComposition
-      materialComposition:
-        Cloth: 100
     - type: StaticPrice
       price: 5
