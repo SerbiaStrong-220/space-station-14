@@ -29,7 +29,6 @@
   components:
   - type: Storage
     maxItemSize: Huge
-    maxTotalWeight: 28
 
 - type: entity
   id: RandomID
