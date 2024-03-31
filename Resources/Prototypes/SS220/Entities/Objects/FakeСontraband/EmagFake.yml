@@ -25,6 +25,7 @@
 - type: entity
   id: PresentID
   parent: [PresentBaseID, BaseStorageItem]
+  abstract: true
   suffix: Empty
   components:
   - type: Storage
