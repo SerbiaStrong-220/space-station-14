@@ -32,7 +32,7 @@
     grid:
     - 0,0,10,10
   - type: Item
-    size: 2
+    size: Small
 
 - type: entity
   id: RandomID
