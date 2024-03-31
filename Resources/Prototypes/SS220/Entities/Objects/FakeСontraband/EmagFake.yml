@@ -30,7 +30,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,19,9
+    - 0,0,10,10
 
 - type: entity
   id: RandomID
