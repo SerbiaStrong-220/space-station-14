@@ -29,6 +29,8 @@
   components:
   - type: Storage
     maxItemSize: Huge
+    grid:
+    - 0,0,19,9
 
 - type: entity
   id: RandomID
