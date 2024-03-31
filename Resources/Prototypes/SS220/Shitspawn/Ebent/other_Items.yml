@@ -56,8 +56,6 @@
       amount: 100
     - id: BoxBodyBag
       amount: 10
-    - id: VendingMachineRestockChemVend
-      amount: 20
     - id: SyringeTranexamicAcid
       amount: 20
     - id: BloodSalveEbent
