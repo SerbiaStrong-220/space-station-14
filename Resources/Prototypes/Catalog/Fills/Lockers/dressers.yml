@@ -90,12 +90,13 @@
     contents:
       - id: ClothingNeckCloakQm
       - id: ClothingHeadHatBeretQM
-      - id: ClothingUniformJumpsuitQMFormal
+#      - id: ClothingUniformJumpsuitQMFormal #SS220-Fashion
       - id: ClothingUniformJumpsuitQMTurtleneck
       - id: ClothingUniformJumpskirtQMTurtleneck
       - id: ClothingHandsGlovesColorBrown
       - id: ClothingNeckMantleQM
       - id: ClothingOuterWinterQM
+      - id: ClothingOuterCoatQM #SS220-Fashion
 
 - type: entity
   id: DresserResearchDirectorFilled
