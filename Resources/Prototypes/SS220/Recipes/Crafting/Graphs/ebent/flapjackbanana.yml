@@ -1,0 +1,16 @@
+- type: constructionGraph
+  id: FoodFlapjackbananacreamSS220
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FoodFlapjackBananaCreamSS220
+          steps:
+          - tag: banana
+            name: FoodBanana
+            icon:
+              sprite: Objects/Specific/Hydroponics/banana.rsi
+              state: produce
+            doAfter: 5
+    - node: FoodFlapjackBananaCreamSS220
+      entity: FoodFlapjackBananaCreamSS220

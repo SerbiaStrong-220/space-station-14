@@ -41,3 +41,7 @@
     containers:
       payloadSlot: !type:ContainerSlot
   - type: Food
+  #SS220 fulls_day
+  - type: Construction
+    graph: FoodFlapjackbananacreamSS220
+    node: FoodFlapjackBananaCreamSS220
