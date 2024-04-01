@@ -123,7 +123,7 @@
 #     RenaultStealObjective: 1
 #     ShivaStealObjective: 1
 #     TropicoStealObjective: 1
-# SS220 Delete thief objective animals begin
+# SS220 Delete thief objective animals end
 
 - type: weightedRandom
   id: ThiefObjectiveGroupEscape
