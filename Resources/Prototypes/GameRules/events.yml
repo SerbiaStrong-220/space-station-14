@@ -75,17 +75,20 @@
     duration: 1
   - type: ClericalErrorRule
 
-# - type: entity
-#   parent: BaseGameRule
-#   id: ClosetSkeleton
-#   noSpawn: true
-#   components:
-#   - type: StationEvent
-#     weight: 10
-#     duration: 1
-#     minimumPlayers: 10
-#   - type: RandomEntityStorageSpawnRule
-#     prototype: MobSkeletonCloset
+# SS220 Revert closet skeleton begin
+- type: entity
+  parent: BaseGameRule
+  id: ClosetSkeleton
+  noSpawn: true
+  components:
+   - type: StationEvent
+     weight: 10
+     duration: 1
+     minimumPlayers: 10
+   - type: RandomEntityStorageSpawnRule
+     prototype: MobSkeletonCloset
+
+# SS220 Revert closet skeleton end
 
 - type: entity
   parent: BaseGameRule
