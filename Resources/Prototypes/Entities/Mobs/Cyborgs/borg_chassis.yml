@@ -219,7 +219,7 @@
   - type: AccessReader
     access: [["Medical"], ["Command"], ["Research"]]
   - type: Inventory
-    templateId: borgDutch
+    templateId: borgDutchMedical # SS220 Add medical visor
 
 - type: entity
   id: BorgChassisService
