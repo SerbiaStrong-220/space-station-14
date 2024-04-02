@@ -22,6 +22,8 @@
       - id: ClothingBeltUtility
       - id: OreBag
       - id: ClothingBeltSalvageWebbing
+      - id: ClothingHandsGlovesSalvage #SS220-Fashion
+        prob: 0.7 #SS220-Fashion
 
 - type: entity
   id: CrateSalvageAssortedGoodies

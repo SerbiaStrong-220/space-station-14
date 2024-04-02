@@ -1,0 +1,17 @@
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesSalvage
+  name: перчатки утилизатора
+  description: Изолированные перчатки для опасной работы вне станции.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/salvage.rsi
+  - type: GloveHeatResistance
+    heatResistance: 1400
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+    fiberColor: fibers-purple
+  - type: FingerprintMask
