@@ -106,9 +106,6 @@ SignPsych: SignPsychology
 # 2023-12-06 - SS220
 SignNtFlag: NTFlag
 
-# 2023-12-10 - SS220
-VendingMachineSmartFridge: StorageSmartFridge
-
 # 2023-12-10
 SpawnPointSeniorResearcher: null
 SpawnPointSeniorOfficer: null
