@@ -126,6 +126,14 @@
     sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
   - type: FlashImmunity
   - type: EyeProtection
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
 
 - type: entity
   parent: UnsensoredClothingUniformBase
@@ -212,10 +220,10 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Objects/Medical/USSRhypo.rsi
+    sprite: SS220/Objects/Specific/Medical/USSRhypo.rsi
     state: hypo
   - type: Item
-    sprite: SS220/Objects/Medical/USSRhypo.rsi
+    sprite: SS220/Objects/Specific/Medical/USSRhypo.rsi
   - type: SolutionContainerManager
     solutions:
       hypospray:
@@ -294,12 +302,10 @@
 - type: entity
   parent: ClothingBeltUsspWebbing
   id: ClothingBeltUsspWebbingFilled
-  suffix: Shitspawn, Ebent, СССП, FractWar
+  suffix: Shitspawn, Ebent, FractWar
   components:
   - type: StorageFill
     contents:
-    - id: SpeedLoaderMagnum
-      amount: 2
     - id: MagazineLightRifle
       amount: 2
     - id: CombatMedipen
@@ -323,3 +329,73 @@
       - id: WeaponRifleAk
       - id: EnergyHammer
       - id: EnergySickle
+
+- type: entity
+  name: ручной пулемёт Калашникова
+  id: WeaponLightMachineGunUssp_RPK
+  parent: BaseWeaponLightMachineGun
+  suffix: Shitspawn, Ebent, FractWar
+  description: Советская разработка, что уже более шестиста лет успешно доносит социалистические идеалы даже через самые толстые капиталистические черепа. Гарант качества!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/ussp_RPK.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/ussp_RPK.rsi
+    quickEquip: false
+    slots:
+    - Back
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineUssp_RPK
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineUssp_RPK
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeLightRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeLightRifle
+
+- type: entity
+  id: MagazineUssp_RPK
+  name: обойма ручного пулемёта Калашникова
+  parent: BaseMagazineLightRifle
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Tag
+    tags:
+      - MagazineUssp_RPK
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifle
+    capacity: 100
+  - type: Item
+  - type: Sprite
+    scale: 0.5, 0.5
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/MagazineUssp_RPK.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance

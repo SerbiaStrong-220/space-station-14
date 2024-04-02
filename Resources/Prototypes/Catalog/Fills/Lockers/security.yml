@@ -21,6 +21,8 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
+      - id: PieShooter
+        amount: 2
 
 - type: entity
   id: LockerWardenFilled

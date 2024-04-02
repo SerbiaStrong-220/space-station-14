@@ -207,6 +207,15 @@
         - id: WeaponSniperMosin
           prob: 0.0010
           orGroup: syndiemaintloot
+        - id: ReinforcementRadioSyndicateFake
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: BoxHoloparasiteFake
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: RandomID
+          prob: 0.005
+          orGroup: syndiemaintloot
 
 - type: entity
   id: ClosetWallMaintenanceFilledRandom

@@ -133,4 +133,4 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponRevolverPython
+    - id: WeaponRevolverPythonAP

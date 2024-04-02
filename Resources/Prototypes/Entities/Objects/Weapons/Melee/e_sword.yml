@@ -305,3 +305,74 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
+#ss220-syndieborg-fix-begin
+- type: entity
+  name: double-bladed energy sword
+  parent: EnergySword
+  id: EnergySwordDoubleBorg
+  description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
+  components:
+  - type: EnergySword
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/Weapons/ebladeon.ogg
+      params:
+        volume: 3
+    soundDeactivate:
+      path: /Audio/Weapons/ebladeoff.ogg
+      params:
+        volume: 3
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+        types:
+            Slash: 12
+            Heat: 12
+            Structural: 15
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+      params:
+        volume: 3
+  - type: ItemToggleDisarmMalus
+    activatedDisarmMalus: 0.7
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/e_sword_double.rsi
+    layers:
+      - state: e_sword_double
+      - state: e_sword_double_blade
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: Item
+    size: Small
+    sprite: SS220/Objects/Weapons/Melee/e_sword_double-inhands.rsi
+  - type: Reflect
+    enabled: true
+    reflects: Energy
+    reflectProb: .95
+    spread: 75
+  - type: UseDelay
+    delay: 1
+  - type: ToggleableLightVisuals
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+#ss220-syndieborg-fix-end

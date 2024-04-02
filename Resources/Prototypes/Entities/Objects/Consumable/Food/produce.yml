@@ -262,6 +262,7 @@
   - type: Tag
     tags:
     - Fruit
+    - banana #SS220 fulls_day
 
 - type: entity
   name: mimana

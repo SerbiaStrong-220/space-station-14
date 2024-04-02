@@ -1306,6 +1306,10 @@
   id:  OilOlive
 # SS220 chiefs-belt end
 
+# SS220 RPK
+- type: Tag
+  id: MagazineUssp_RPK
+
 # SS220 Edit Biomass craft begin
 - type: Tag
   id: Scalpel
@@ -1345,5 +1349,10 @@
 - type: Tag
   id: rrose
 # SS220 Flower update end
+
+# SS220 Fulls_day start
+- type: Tag
+  id: banana
+# SS220 Fulls_day end
 
 # PUT YOUR TAGS IN ALPHABETICAL ORDER

@@ -16,7 +16,7 @@
   # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
-      - id: ClothingMaskBreath
+      - id: ClothingMaskClown
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
@@ -46,7 +46,7 @@
   # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
-      - id: ClothingMaskBreath
+      - id: ClothingMaskClown
       - id: ExtendedEmergencyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
@@ -77,7 +77,7 @@
   # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
-      - id: ClothingMaskGasSecurity
+      - id: ClothingMaskClown
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
@@ -108,7 +108,7 @@
   # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
-      - id: ClothingMaskBreathMedicalSecurity
+      - id: ClothingMaskClown
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
@@ -139,7 +139,7 @@
   # SS220 Bigger-survival-box end
   - type: StorageFill
     contents:
-      - id: ClothingMaskBreathMedical
+      - id: ClothingMaskClown
       - id: EmergencyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen
@@ -175,7 +175,7 @@
     heldPrefix: hug
   - type: StorageFill
     contents:
-      - id: ClothingMaskBreath
+      - id: ClothingMaskClown
       - id: EmergencyFunnyOxygenTankFilled
       - id: EmergencyMedipen
       - id: SpaceMedipen # SS220 Revert deleted Medipen

@@ -9,12 +9,24 @@
   components:
   - type: StorageFill
     contents:
-    - id: SpeedLoaderMagnum
-      amount: 2
     - id: MagazinePistolSubMachineGun
       amount: 2
     - id: CombatMedipen
     - id: DnaScramblerImplanter
+
+- type: entity
+  name: Декард
+  parent: WeaponRevolverDeckard
+  id: WeaponRevolverDeckardAP
+  noSpawn: true
+  description: Редкий, изготавливаемый на заказ револьвер. Используйте, когда нет времени на тест Войта-Кампфа. Использует патроны калибра .45 магнум.
+  components:
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeMagnum
+        - SpeedLoaderMagnum
+    proto: CartridgeMagnumAP
 
 - type: entity
   parent: ClothingBackpackERTSecurity
