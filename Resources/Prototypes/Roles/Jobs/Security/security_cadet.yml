@@ -10,7 +10,6 @@
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
   canBeAntag: false
-  canBeZombie: false
   access:
   - Security
   - Brig
