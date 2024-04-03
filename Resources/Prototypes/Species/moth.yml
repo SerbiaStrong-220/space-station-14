@@ -12,18 +12,6 @@
   femaleFirstNames: names_moth_first_female
   maleLastNames: names_moth_last_male
   femaleLastNames: names_moth_last_female
-  blockedJobsByAccessor: #SS220-Job-Restrictions-start
-#Командование
-    Captain: [ ]
-    HeadOfSecurity: [ ]
-    ChiefEngineer: [ ]
-#ЦК
-    BlueShield: [ ]
-    IAA: [ ]
-#Инженерный отдел
-    StationEngineer: [ ]
-    TechnicalAssistant: [ ]
-#SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
   id: MobMothSprites
