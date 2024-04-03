@@ -102,10 +102,6 @@
   - UplinkWeaponry
   conditions:
     - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-          - LoneOpsUplink
       blacklist:
         components:
           - SurplusBundle
@@ -171,10 +167,6 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
     blacklist:
       components:
       - SurplusBundle
@@ -189,12 +181,6 @@
     Telecrystal: 30
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
 
 # Explosives
 
@@ -249,10 +235,6 @@
     - UplinkExplosives
   conditions:
     - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
       blacklist:
         components:
         - SurplusBundle
@@ -269,9 +251,6 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -291,11 +270,6 @@
     blacklist:
       components:
       - SurplusBundle
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
 
 - type: listing
   id: UplinkC4
@@ -1298,10 +1272,6 @@
   - UplinkWearables
   conditions:
     - !type:BuyerWhitelistCondition
-      whitelist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
       blacklist:
         components:
           - SurplusBundle
