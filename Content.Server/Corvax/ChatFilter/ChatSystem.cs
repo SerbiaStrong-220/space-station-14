@@ -8,7 +8,7 @@ public sealed partial class ChatSystem
     private static readonly Dictionary<string, string> SlangReplace = new()
     {
         // Game
-        { "геник", "генератор"},
+        { "геник", "генератор" },
         { "кэп", "капитан" },  //SS220 Filter Update begin
         { "кэпа", "капитана" },
         { "кэпу", "капитану" },
