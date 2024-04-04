@@ -8,6 +8,9 @@
   - type: StorageFill
     contents:
       - id: ClothingOuterHardsuitSalvage
+        orGroup: Suit #SS220-Fashion-start
+      - id: ClothingOuterExosuitSalvage
+        orGroup: Suit #SS220-Fashion-end
       - id: ClothingMaskBreath
       - id: OxygenTankFilled
       - id: FireExtinguisher
