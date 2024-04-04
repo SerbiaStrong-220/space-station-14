@@ -23,6 +23,6 @@
         Stamina: 0.9
   - type: ClothingSpeedModifier
     walkModifier: 1
-    sprintModifier: 0.95
+    sprintModifier: 0.90
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodExosuitSalvage
