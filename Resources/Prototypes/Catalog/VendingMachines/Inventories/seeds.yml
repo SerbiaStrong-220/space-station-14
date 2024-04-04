@@ -37,6 +37,19 @@
     BerrySeeds: 5
     PeaSeeds: 5
     CottonSeeds: 5
-    BeetSeeds: 5 #ss220 seeds
+    #ss220 seeds begin
+    BeetSeeds: 5
+    WtulipSeeds: 2
+    YtulipSeeds: 2
+    PtulipSeeds: 2
+    RcloveSeeds: 2
+    WcloveSeeds: 2
+    SchamomileSeeds: 2
+    WschamomileSeeds: 2
+    LflowerSeeds: 2
+    SflowerSeeds: 2
+    RroseSeeds: 1
+    WroseSeeds: 1
+    #ss220 seeds end
   emaggedInventory:
     FlyAmanitaSeeds: 1

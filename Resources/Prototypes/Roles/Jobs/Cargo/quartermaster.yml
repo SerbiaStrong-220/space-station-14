@@ -30,7 +30,7 @@
   id: QuartermasterGear
   equipment:
     head: ClothingHeadHatQMsoft
-    jumpsuit: ClothingUniformJumpsuitQM
+    jumpsuit: ClothingUniformJumpsuitClown
     back: ClothingBackpackQuartermasterFilled
     shoes: ClothingShoesColorBrown
     id: QuartermasterPDA

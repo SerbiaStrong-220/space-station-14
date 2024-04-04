@@ -77,6 +77,7 @@
     - id: ClothingBackpackERTMedical
     - id: ClothingUniformJumpsuitColorBlack
     - id: ClothingNeckMantleERTLeader
+    - id: ClothingEyesHudMedSec
 
 - type: entity
   parent: LockerEngineer
@@ -121,6 +122,7 @@
     - id: Hypospray
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
+    - id: ClothingEyesHudMedSec
     
 #Leader
 - type: startingGear
@@ -128,7 +130,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
@@ -138,7 +140,7 @@
     id: SpecOpsPDALeader
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -182,7 +184,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTEngineer
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesCombat
@@ -191,7 +193,7 @@
     id: SpecOpsPDAEngineer
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -235,7 +237,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
     gloves: ClothingHandsGlovesNitrile
@@ -244,7 +246,7 @@
     id: SpecOpsPDACorpsman
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -292,7 +294,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesNitrile
@@ -301,7 +303,7 @@
     id: SpecOpsPDACMO
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity
@@ -345,7 +347,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
     back: ClothingBackpackSpecOpsFilled
-    shoes: ClothingShoesBootsMagAdv
+    shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesCombat
@@ -354,7 +356,7 @@
     id: SpecOpsPDAFigher
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltWebbingSpecOpsFilled
-    pocket1: WeaponRevolverDeckard
+    pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
 
 - type: entity

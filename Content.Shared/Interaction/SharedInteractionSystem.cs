@@ -6,6 +6,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.CombatMode;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -982,7 +983,7 @@ namespace Content.Shared.Interaction
                 return false;
 
             // SS220 Ghost-UI-Activation-On-Use begin
-            if (!InteractionActivate(user.Value, uid, checkAccess: ShouldCheckAccess(user.Value)))
+            if (!InteractionActivate(user.Value, uid, checkAccess: ShouldCheckAccess(user.Value)) && HasComp<GhostComponent>(user.Value))
             {
                 var ev = new GhostInterationUiBypassEvent(user.Value, uid);
                 RaiseLocalEvent(uid, ev);

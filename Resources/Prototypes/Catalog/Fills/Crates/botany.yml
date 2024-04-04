@@ -92,3 +92,24 @@
       - id: WatermelonSeeds
       - id: PeaSeeds
       - id: BeetSeeds #ss220 seeds
+#ss220-flowerupdate-begin
+- type: entity
+  id: CrateHydroponicsFlowerSeeds
+  parent: CrateHydroponics
+  name: flower seeds crate
+  description: Big cute things have small beginnings. Contains twelve different flower seeds.
+  components:
+  - type: StorageFill
+    contents:
+      - id: WtulipSeeds
+      - id: YtulipSeeds
+      - id: PtulipSeeds
+      - id: RcloveSeeds
+      - id: WcloveSeeds
+      - id: SchamomileSeeds
+      - id: WschamomileSeeds
+      - id: LflowerSeeds
+      - id: SflowerSeeds
+      - id: RroseSeeds
+      - id: WroseSeeds
+#ss220-flowerupdate-end

@@ -257,3 +257,42 @@
     node: PewMiddle
   - type: Sprite
     state: middle
+
+#SS220 Plastic chair
+- type: entity
+  name: plastic chair
+  id: ChairPlastic
+  description: You're sitting on it. Either by your will, or by compulsion, or for the sake of motivation and power
+  parent: UnanchoredChairBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/plasticchair.rsi
+    state: plastic
+  - type: Construction
+    graph: SeatPlastic
+    node: chairPlastic
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlastic:
+            min: 1
+            max: 1
+  - type: Tag
+    tags:
+    - Plastic
+  - type: StaticPrice
+    price: 75

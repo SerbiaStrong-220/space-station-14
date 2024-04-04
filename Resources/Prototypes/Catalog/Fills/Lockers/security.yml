@@ -21,6 +21,8 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
+      - id: PieShooter
+        amount: 2
 
 - type: entity
   id: LockerWardenFilled
@@ -64,7 +66,7 @@
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
       - id: ClothingEyesHudSecurity
-      - id: ClothingOuterHardsuitSecurity
+      - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
       - id: HandheldGPSBasic
       - id: OxygenTankFilled
       - id: NitrogenTankFilled
@@ -104,8 +106,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingEyesHudSecurity
-      - id: WeaponDisabler
+      - id: ClothingEyesHudMedical #ss220-brigmed
       - id: TrackingImplanter
         amount: 2
       - id: ClothingOuterHardsuitBrigmedic

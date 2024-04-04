@@ -1,0 +1,12 @@
+- type: construction
+  name: Банановая лепеха
+  id: FoodFlapjackBananaCreamSS220
+  graph: FoodFlapjackbananacreamSS220
+  startNode: start
+  targetNode: FoodFlapjackBananaCreamSS220
+  category: construction-category-misc
+  objectType: Item
+  description: Окуните лицо оппонента играюче и воздушно.
+  icon:
+    sprite: SS220/Objects/Consumable/Food/special_pie.rsi
+    state: pie

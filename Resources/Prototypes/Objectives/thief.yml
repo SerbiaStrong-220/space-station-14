@@ -499,97 +499,99 @@
 
 # Animal
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: IanStealObjective
-  components:
-  - type: NotJobRequirement
-    job: HeadOfPersonnel
-  - type: StealCondition
-    stealGroup: AnimalIan
-  - type: Objective
-    difficulty: 2.5
+# SS220 Delete thief objective animals begin
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: IanStealObjective
+#   components:
+#   - type: NotJobRequirement
+#     job: HeadOfPersonnel
+#   - type: StealCondition
+#     stealGroup: AnimalIan
+#   - type: Objective
+#     difficulty: 2.5
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: BingusStealObjective
-  components:
-  - type: StealCondition
-    stealGroup: AnimalBingus
-  - type: Objective
-    difficulty: 1
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: BingusStealObjective
+#   components:
+#   - type: StealCondition
+#     stealGroup: AnimalBingus
+#   - type: Objective
+#     difficulty: 1
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: McGriffStealObjective
-  components:
-  - type: NotJobRequirement
-    job: Detective
-  - type: StealCondition
-    stealGroup: AnimalMcGriff
-  - type: Objective
-    difficulty: 1
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: McGriffStealObjective
+#   components:
+#   - type: NotJobRequirement
+#     job: Detective
+#   - type: StealCondition
+#     stealGroup: AnimalMcGriff
+#   - type: Objective
+#     difficulty: 1
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: WalterStealObjective
-  components:
-  - type: NotJobRequirement
-    job: Chemist
-  - type: StealCondition
-    stealGroup: AnimalWalter
-  - type: Objective
-    difficulty: 1
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: WalterStealObjective
+#   components:
+#   - type: NotJobRequirement
+#     job: Chemist
+#   - type: StealCondition
+#     stealGroup: AnimalWalter
+#   - type: Objective
+#     difficulty: 1
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: MortyStealObjective
-  components:
-  - type: StealCondition
-    stealGroup: AnimalMorty
-  - type: Objective
-    difficulty: 0.5
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: MortyStealObjective
+#   components:
+#   - type: StealCondition
+#     stealGroup: AnimalMorty
+#   - type: Objective
+#     difficulty: 0.5
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: RenaultStealObjective
-  components:
-  - type: NotJobRequirement
-    job: Captain
-  - type: StealCondition
-    stealGroup: AnimalRenault
-  - type: Objective
-    difficulty: 2
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: RenaultStealObjective
+#   components:
+#   - type: NotJobRequirement
+#     job: Captain
+#   - type: StealCondition
+#     stealGroup: AnimalRenault
+#   - type: Objective
+#     difficulty: 2
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: ShivaStealObjective
-  components:
-  - type: NotJobRequirement
-    job: SecurityOfficer
-  - type: StealCondition
-    stealGroup: AnimalShiva
-  - type: Objective
-    difficulty: 2
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: ShivaStealObjective
+#   components:
+#   - type: NotJobRequirement
+#     job: SecurityOfficer
+#   - type: StealCondition
+#     stealGroup: AnimalShiva
+#   - type: Objective
+#     difficulty: 2
 
-- type: entity
-  noSpawn: true
-  parent: BaseThiefStealAnimalObjective
-  id: TropicoStealObjective
-  components:
-  - type: NotJobRequirement
-    job: AtmosphericTechnician
-  - type: StealCondition
-    stealGroup: AnimalTropico
-  - type: Objective
-    difficulty: 1
+# - type: entity
+#   noSpawn: true
+#   parent: BaseThiefStealAnimalObjective
+#   id: TropicoStealObjective
+#   components:
+#   - type: NotJobRequirement
+#     job: AtmosphericTechnician
+#   - type: StealCondition
+#     stealGroup: AnimalTropico
+#   - type: Objective
+#     difficulty: 1
+# SS220 Delete thief objective animals end
 
 # Escape
 

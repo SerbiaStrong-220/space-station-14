@@ -40,8 +40,6 @@
       - id: FlashlightSecliteSyndicate
       - id: Stimpack
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnum
-        amount: 2
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 2
@@ -146,8 +144,6 @@
       - id: FlashlightSecliteSyndicate
       - id: Stimpack
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnum
-        amount: 2
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 2
@@ -166,6 +162,7 @@
     back: ClothingBackpackNuclearEngineer
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
+    eyes: ClothingEyesGlassesMeson
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronCE
     suitstorage: OxygenTankFilled
@@ -238,6 +235,7 @@
       amount: 2
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
+    - id: ClothingEyesHudMedSec
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -252,8 +250,6 @@
       - id: Lighter
       - id: FlashlightSecliteSyndicate
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnum
-        amount: 2
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 2
@@ -348,6 +344,7 @@
       amount: 2
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
+    - id: ClothingEyesHudMedSec
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -363,8 +360,6 @@
       - id: FlashlightSecliteSyndicate
       - id: Stimpack
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnum
-        amount: 2
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 2
@@ -465,8 +460,6 @@
       - id: Lighter
       - id: FlashlightSecliteSyndicate
       - id: PowerCellHyper
-      - id: SpeedLoaderMagnum
-        amount: 2
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 2

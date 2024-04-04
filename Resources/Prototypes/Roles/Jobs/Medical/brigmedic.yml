@@ -7,14 +7,9 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 72000 # SS220-RoleTime
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 18000 # SS220-RoleTime
   startingGear: BrigmedicGear
   icon: "JobIconBrigmedic"
-  supervisors: job-supervisors-hos
-  canBeAntag: false
-  canBeZombie: false
+  supervisors: job-supervisors-cmo #ss220-brigmed
   access:
   - Medical
   - Security

@@ -47,7 +47,7 @@
 - type: startingGear
   id: HoPGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitHoP
+    jumpsuit: ClothingUniformJumpsuitClown
     back: ClothingBackpackHOPFilled
     shoes: ClothingShoesColorBrown
     head: ClothingHeadHatHopcap
