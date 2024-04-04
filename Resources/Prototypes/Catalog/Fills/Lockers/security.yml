@@ -63,7 +63,7 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHandsGlovesCombat
+#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
       - id: ClothingShoesBootsJack
       - id: ClothingEyesHudSecurity
       - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
