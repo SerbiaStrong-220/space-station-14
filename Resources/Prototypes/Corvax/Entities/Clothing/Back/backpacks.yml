@@ -13,6 +13,8 @@
   name: death squadron backpack
   description: A spacious backpack using bluespace technology.
   components:
+  - type: Sprite
+    sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
 
 - type: entity
   parent: ClothingBackpack
