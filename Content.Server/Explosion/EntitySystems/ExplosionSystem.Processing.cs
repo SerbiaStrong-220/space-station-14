@@ -18,12 +18,16 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+using Content.Server.Atmos.Components;
+using Content.Server.Atmos.EntitySystems;
 
 namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly FlammableSystem _flammableSystem = default!;
+
     /// <summary>
     ///     Used to limit explosion processing time. See <see cref="MaxProcessingTime"/>.
     /// </summary>
@@ -158,7 +162,7 @@ public sealed partial class ExplosionSystem
 #endif
         }
 
-        Logger.InfoS("Explosion", $"Processed {TilesPerTick - tilesRemaining} tiles in {Stopwatch.Elapsed.TotalMilliseconds}ms");
+        Log.Info($"Processed {TilesPerTick - tilesRemaining} tiles in {Stopwatch.Elapsed.TotalMilliseconds}ms");
 
         // we have finished processing our tiles. Is there still an ongoing explosion?
         if (_activeExplosion != null)
@@ -205,7 +209,8 @@ public sealed partial class ExplosionSystem
         DamageSpecifier damage,
         MapCoordinates epicenter,
         HashSet<EntityUid> processed,
-        string id)
+        string id,
+        float? fireStacks)
     {
         var size = grid.Comp.TileSize;
         var gridBox = new Box2(tile * size, (tile + 1) * size);
@@ -224,7 +229,7 @@ public sealed partial class ExplosionSystem
         // process those entities
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks);
         }
 
         // process anchored entities
@@ -234,7 +239,7 @@ public sealed partial class ExplosionSystem
         foreach (var entity in _anchored)
         {
             processed.Add(entity);
-            ProcessEntity(entity, epicenter, damage, throwForce, id, null);
+            ProcessEntity(entity, epicenter, damage, throwForce, id, null, fireStacks);
         }
 
         // Walls and reinforced walls will break into girders. These girders will also be considered turf-blocking for
@@ -270,7 +275,7 @@ public sealed partial class ExplosionSystem
         {
             // Here we only throw, no dealing damage. Containers n such might drop their entities after being destroyed, but
             // they should handle their own damage pass-through, with their own damage reduction calculation.
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, null);
         }
 
         return !tileBlocked;
@@ -305,7 +310,8 @@ public sealed partial class ExplosionSystem
         DamageSpecifier damage,
         MapCoordinates epicenter,
         HashSet<EntityUid> processed,
-        string id)
+        string id,
+        float? fireStacks)
     {
         var gridBox = Box2.FromDimensions(tile * DefaultTileSize, new Vector2(DefaultTileSize, DefaultTileSize));
         var worldBox = spaceMatrix.TransformBox(gridBox);
@@ -321,7 +327,7 @@ public sealed partial class ExplosionSystem
         foreach (var (uid, xform) in state.Item1)
         {
             processed.Add(uid);
-            ProcessEntity(uid, epicenter, damage, throwForce, id, xform);
+            ProcessEntity(uid, epicenter, damage, throwForce, id, xform, fireStacks);
         }
 
         if (throwForce <= 0)
@@ -335,7 +341,7 @@ public sealed partial class ExplosionSystem
 
         foreach (var (uid, xform) in list)
         {
-            ProcessEntity(uid, epicenter, null, throwForce, id, xform);
+            ProcessEntity(uid, epicenter, null, throwForce, id, xform, fireStacks);
         }
     }
 
@@ -432,7 +438,8 @@ public sealed partial class ExplosionSystem
         DamageSpecifier? originalDamage,
         float throwForce,
         string id,
-        TransformComponent? xform)
+        TransformComponent? xform,
+        float? fireStacksOnIgnite)
     {
         if (originalDamage != null)
         {
@@ -441,6 +448,17 @@ public sealed partial class ExplosionSystem
             {
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
                 _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true);
+
+            }
+        }
+
+        // ignite
+        if (fireStacksOnIgnite != null)
+        {
+            if (_flammableQuery.TryGetComponent(uid, out var flammable))
+            {
+                flammable.FireStacks += fireStacksOnIgnite.Value;
+                _flammableSystem.Ignite(uid, uid, flammable);
             }
         }
 
@@ -707,14 +725,14 @@ sealed class Explosion
         {
             _currentIntensity = _tileSetIntensity[CurrentIteration];
 
-            #if DEBUG
+#if DEBUG
             if (_expectedDamage != null)
             {
                 // Check that explosion processing hasn't somehow accidentally mutated the damage set.
                 DebugTools.Assert(_expectedDamage.Equals(_currentDamage));
                 _expectedDamage = ExplosionType.DamagePerIntensity * _currentIntensity;
             }
-            #endif
+#endif
 
             _currentDamage = ExplosionType.DamagePerIntensity * _currentIntensity;
 
@@ -813,7 +831,8 @@ sealed class Explosion
                     _currentDamage,
                     Epicenter,
                     ProcessedEntities,
-                    ExplosionType.ID);
+                    ExplosionType.ID,
+                    ExplosionType.FireStacks);
 
                 // If the floor is not blocked by some dense object, damage the floor tiles.
                 if (canDamageFloor)
@@ -830,7 +849,8 @@ sealed class Explosion
                     _currentDamage,
                     Epicenter,
                     ProcessedEntities,
-                    ExplosionType.ID);
+                    ExplosionType.ID,
+                    ExplosionType.FireStacks);
             }
 
             if (!MoveNext())

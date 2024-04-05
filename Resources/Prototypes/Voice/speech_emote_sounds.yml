@@ -46,6 +46,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: FemaleHuman
@@ -94,6 +96,8 @@
     CritGasp:
       collection: FemaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: UnisexReptilian
@@ -130,6 +134,48 @@
     Growl:
       collection: LizardGrowl
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
+
+  #ss-220 female-reptilian
+- type: emoteSounds
+  id: FemaleReptilian
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+    Laugh:
+      path: /Audio/Animals/lizard_happy.ogg
+    Honk:
+      collection: BikeHorn
+    Whistle:
+      collection: Whistles
+    Crying:
+      collection: FemaleCry
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+    Giggle:
+      collection: LizardGiggle
+      params:
+        volume: 2
+    Hiss:
+      collection: LizardHiss
+    Growl:
+      collection: LizardGrowl
+    #SS220 emote sounds end
+    Weh:
+      collection: Weh
+
 
 - type: emoteSounds
   id: MaleSlime
@@ -178,6 +224,8 @@
     Bubbles:
       collection: SlimeBubbles
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
 
@@ -228,6 +276,8 @@
     Bubbles:
       collection: SlimeBubbles
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
 
@@ -259,9 +309,10 @@
       collection: DionaLaugh
     Honk:
       collection: BikeHorn
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
-
 
 - type: emoteSounds
   id: UnisexArachnid
@@ -286,6 +337,8 @@
     Hiss:
       collection: ArachnidHiss
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: UnisexDwarf
@@ -330,6 +383,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
     pitch: 0.75
@@ -368,6 +423,8 @@
     CritGasp:
       collection: FemaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
     pitch: 0.75
@@ -395,6 +452,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 # body emotes
 - type: emoteSounds

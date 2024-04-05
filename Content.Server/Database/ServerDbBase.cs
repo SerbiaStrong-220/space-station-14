@@ -362,7 +362,7 @@ namespace Content.Server.Database
             ImmutableArray<byte>? hwId,
             bool includeUnbanned);
 
-        public abstract Task AddServerBanAsync(ServerBanDef serverBan);
+        public abstract Task<int> AddServerBanAsync(ServerBanDef serverBan);
         public abstract Task AddServerUnbanAsync(ServerUnbanDef serverUnban);
 
         public async Task EditServerBan(int id, string reason, NoteSeverity severity, DateTimeOffset? expiration, Guid editedBy, DateTimeOffset editedAt)
@@ -1560,6 +1560,12 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         protected DateTime? NormalizeDatabaseTime(DateTime? time)
         {
             return time != null ? NormalizeDatabaseTime(time.Value) : time;
+        }
+
+        public async Task<bool> HasPendingModelChanges()
+        {
+            await using var db = await GetDb();
+            return db.DbContext.Database.HasPendingModelChanges();
         }
 
         protected abstract Task<DbGuard> GetDb([CallerMemberName] string? name = null);

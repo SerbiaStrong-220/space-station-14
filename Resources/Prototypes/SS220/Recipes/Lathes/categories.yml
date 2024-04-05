@@ -1,0 +1,28 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: latheCategory
+  id: Wood
+  name: lathe-category-wood
+
+- type: latheCategory
+  id: Carpet
+  name: lathe-category-carpet
+
+- type: latheCategory
+  id: Steel
+  name: lathe-category-steel
+
+- type: latheCategory
+  id: Shuttle
+  name: lathe-category-shuttle
+
+- type: latheCategory
+  id: Plastic
+  name: lathe-category-plastic
+
+- type: latheCategory
+  id: Concrete
+  name: lathe-category-concrete
+
+- type: latheCategory
+  id: TileTech
+  name: lathe-category-tiletech

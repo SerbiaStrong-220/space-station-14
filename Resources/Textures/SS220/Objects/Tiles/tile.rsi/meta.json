@@ -53,6 +53,50 @@
     {
       "name": "dutch-inhand-left",
       "directions": 4
+    },
+    {
+      "name": "pcircuit"
+    },
+    {
+      "name": "ycircuit"
+    },
+    {
+      "name": "ocircuit"
+    },
+    {
+      "name": "rcircuit"
+    },
+    {
+      "name": "pcircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pcircuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ycircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ycircuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ocircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ocircuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "rcircuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "rcircuit-inhand-left",
+      "directions": 4
     }
   ]
 }

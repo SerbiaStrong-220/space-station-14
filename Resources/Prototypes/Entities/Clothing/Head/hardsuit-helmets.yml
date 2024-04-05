@@ -17,6 +17,9 @@
     sprite: Clothing/Head/Hardsuits/basic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/basic.rsi
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -162,6 +165,7 @@
   name: head of security's hardsuit helmet
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS.
   components:
+  - type: BreathMask #ss-220 fix
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security-red.rsi
   - type: Clothing

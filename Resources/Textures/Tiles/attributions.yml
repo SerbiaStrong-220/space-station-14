@@ -1,7 +1,7 @@
 # Attempted to keep the files in alphabetical order so its easier to audit.
 # Finding individual authors is an unfeasible task. If you can reference the author please do so.
 
-- files: [ "asteroid_red.png", "elevator_shaft.png", "green_circuit.png", "lino.png", "rock_vault.png"]
+- files: [ "asteroid_red.png", "elevator_shaft.png", "lino.png"]
   license: "CC-BY-SA-3.0"
   copyright: "vgstation13 at roughly commit e4d3ea7f69d21c3667be12b114fa935c4640cb05, asteroid_red taken from commit /vg/station at commit 02b9f6894af4419c9f7e699a22c402b086d8067e."
   source: "https://github.com/vgstation-coders/vgstation13"
@@ -36,12 +36,17 @@
   copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
-- files: ["asteroid_plating.png, snow_plating.png"]
+- files: ["asteroid_plating.png", "snow_plating.png"]
   license: "CC-BY-SA-3.0"
   copyright: "Modified from plating.png by github user @Kit0vras" #SS220-Tile-Resprite
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/660"
 
-- files: ["blue.png", "blue_circuit.png", "cropped_parallax.png", "eighties.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png", "wood_large.png"]
+- files: ["green_circuit.png", "blue_circuit.png", "rock_vault.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt" #SS220-Tile-Resprite
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/816"
+
+- files: ["blue.png", "cropped_parallax.png", "eighties.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "snow.png", "wood.png", "wood_tile.png", "wood_broken.png", "wood_large.png"]
   license: "CC-BY-SA-3.0"
   copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, cropped_parallax modified from parallax. Wood tiles are new tg tiles, repaletted by TheArturZh using colors of old wood tiles."
   source: "https://github.com/tgstation/tgstation/"
@@ -73,8 +78,8 @@
 
 - files: ["shuttleblue.png", "shuttleorange.png", "shuttlepurple.png", "shuttlered.png", "shuttlewhite.png", "shuttlegrey.png", "shuttleblack.png"]
   license: "CC-BY-SA-3.0"
-  copyright: "Modified by Flareguy for Space Station 14. Unmodified sprite from paradisestation commit 69c831afcd9aef25a2889b507e4f36a3a5fc6def, originally from /VG/ eris"
-  source: "https://github.com/ParadiseSS13/Paradise"
+  copyright: "Taken from /tg/station at https://github.com/tgstation/tgstation/blob/1766a366cbbd57e17d5b8ac221cc78f04b271e96/icons/turf/floors.dmi" #SS220-Tile-Resprite
+  source: "https://github.com/tgstation/tgstation/" #SS220-Tile-Resprite
 
 - files: ["deprecated.png"]
   license: "MIT"
@@ -114,4 +119,4 @@
 - files: ["latticeTrain.png"]
   license: "CC0-1.0"
   copyright: "Created by TheShuEd (github) for space-station-14."
-  source: "https://github.com/space-wizards/space-station-14/pull/ED_INSERT_PR_CODE_HERE!"
+  source: "https://github.com/space-wizards/space-station-14/pull/24927"

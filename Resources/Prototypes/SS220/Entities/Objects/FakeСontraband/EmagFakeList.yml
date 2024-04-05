@@ -1,0 +1,261 @@
+- type: entity
+  parent: EmagFake
+  id: ArmoryIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Armory
+
+- type: entity
+  parent: EmagFake
+  id: AtmosphericsIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Atmospherics
+
+- type: entity
+  parent: EmagFake
+  id: BarIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Bar
+
+- type: entity
+  parent: EmagFake
+  id: BrigIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Brig
+
+- type: entity
+  parent: EmagFake
+  id: BlueshieldIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Blueshield
+
+- type: entity
+  parent: EmagFake
+  id: CaptainIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Captain
+
+- type: entity
+  parent: EmagFake
+  id: CargoIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Cargo
+
+- type: entity
+  parent: EmagFake
+  id: ChapelIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Chapel
+
+- type: entity
+  parent: EmagFake
+  id: ChemistryIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Chemistry
+
+- type: entity
+  parent: EmagFake
+  id: ChiefEngineerIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - ChiefEngineer
+
+- type: entity
+  parent: EmagFake
+  id: ChiefMedicalOfficerIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - ChiefMedicalOfficer
+
+- type: entity
+  parent: EmagFake
+  id: DetectiveIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Detective
+
+- type: entity
+  parent: EmagFake
+  id: EngineeringIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Engineering
+
+- type: entity
+  parent: EmagFake
+  id: ExternalIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - External
+
+- type: entity
+  parent: EmagFake
+  id: HeadOfPersonnelIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - HeadOfPersonnel
+
+- type: entity
+  parent: EmagFake
+  id: HeadOfSecurityIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - HeadOfSecurity
+
+- type: entity
+  parent: EmagFake
+  id: HydroponicsIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Hydroponics
+
+- type: entity
+  parent: EmagFake
+  id: JanitorIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Janitor
+
+- type: entity
+  parent: EmagFake
+  id: KitchenIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Kitchen
+
+- type: entity
+  parent: EmagFake
+  id: MaintenanceIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Maintenance
+
+- type: entity
+  parent: EmagFake
+  id: MedicalIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Medical
+
+- type: entity
+  parent: EmagFake
+  id: ParamedicIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Paramedic
+
+- type: entity
+  parent: EmagFake
+  id: QuartermasterIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Quartermaster
+
+- type: entity
+  parent: EmagFake
+  id: ResearchIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Research
+
+- type: entity
+  parent: EmagFake
+  id: ResearchDirectorIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - ResearchDirector
+
+- type: entity
+  parent: EmagFake
+  id: SalvageIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Salvage
+
+- type: entity
+  parent: EmagFake
+  id: SecurityIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Security
+
+- type: entity
+  parent: EmagFake
+  id: ServiceIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Service
+
+- type: entity
+  parent: EmagFake
+  id: TheatreIDCardEmagFake
+  noSpawn: true
+  components:
+  - type: Access
+    tags:
+      - Theatre
+

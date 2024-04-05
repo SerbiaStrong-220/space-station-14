@@ -13,9 +13,9 @@
   - type: IdentityBlocker
   - type: Tag
     tags:
-    - MonkeyWearable
     - HamsterWearable
     - WhitelistChameleon
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskGas
@@ -203,6 +203,7 @@
     tags:
     - ClownMask
     - WhitelistChameleon
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskClownBase
@@ -213,6 +214,7 @@
     - ClownMask
     - HamsterWearable
     - WhitelistChameleon
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskClown
@@ -239,6 +241,9 @@
     sprite: Clothing/Mask/joy.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -256,6 +261,7 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -306,6 +312,9 @@
   - type: BreathMask
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskClownBase
@@ -335,7 +344,9 @@
     sprite: Clothing/Mask/swat.rsi
   - type: Tag
     tags:
+    - WhitelistChameleon
     - HidesHair
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskGasExplorer
@@ -360,7 +371,9 @@
     sprite: Clothing/Mask/ert.rsi
   - type: Tag
     tags:
+    - WhitelistChameleon
     - HidesHair
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskGasERT
@@ -395,6 +408,7 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+    - HidesNose
   - type: IdentityBlocker
 
 - type: entity
@@ -409,6 +423,9 @@
     sprite: Clothing/Mask/fox.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -422,6 +439,9 @@
     sprite: Clothing/Mask/bee.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -435,6 +455,9 @@
     sprite: Clothing/Mask/bear.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -448,6 +471,9 @@
     sprite: Clothing/Mask/raven.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -461,6 +487,9 @@
     sprite: Clothing/Mask/jackal.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -474,6 +503,9 @@
     sprite: Clothing/Mask/bat.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HidesNose
 
 - type: entity
   parent: ClothingMaskBase
@@ -490,6 +522,16 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskNeckGaiter
+  id: ClothingMaskNeckGaiterRed
+  name: red neck gaiter
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/neckgaiterred.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/neckgaiterred.rsi
 
 - type: entity
   parent: ClothingMaskClownBase

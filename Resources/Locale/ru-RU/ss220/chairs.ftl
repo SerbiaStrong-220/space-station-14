@@ -29,3 +29,6 @@ ent-PewMiddle = церковная скамья (середина)
     .desc = { ent-SeatBase.desc }
 ent-PewRight = церковная скамья (право)
     .desc = { ent-SeatBase.desc }
+
+ent-ChairPlastic = пластиковый стул
+    .desc = Вы сидите на этом. Либо по вашей воле, либо по принуждению, либо ради мотивации и силы!

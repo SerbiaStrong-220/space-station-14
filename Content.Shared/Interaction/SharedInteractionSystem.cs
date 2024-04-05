@@ -6,6 +6,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.CombatMode;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -209,7 +210,7 @@ namespace Content.Shared.Interaction
         {
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
-                Logger.InfoS("system.interaction", $"TryPullObject input validation failed");
+                Log.Info($"TryPullObject input validation failed");
                 return true;
             }
 
@@ -241,7 +242,7 @@ namespace Content.Shared.Interaction
             // client sanitization
             if (!TryComp(item, out TransformComponent? itemXform) || !ValidateClientInput(args.SenderSession, itemXform.Coordinates, item, out var user))
             {
-                Logger.InfoS("system.interaction", $"Inventory interaction validation failed.  Session={args.SenderSession}");
+                Log.Info($"Inventory interaction validation failed.  Session={args.SenderSession}");
                 return;
             }
 
@@ -263,7 +264,7 @@ namespace Content.Shared.Interaction
             // client sanitization
             if (!ValidateClientInput(session, coords, uid, out var user))
             {
-                Logger.InfoS("system.interaction", $"Alt-use input validation failed");
+                Log.Info($"Alt-use input validation failed");
                 return true;
             }
 
@@ -277,7 +278,7 @@ namespace Content.Shared.Interaction
             // client sanitization
             if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
-                Logger.InfoS("system.interaction", $"Use input validation failed");
+                Log.Info($"Use input validation failed");
                 return true;
             }
 
@@ -600,7 +601,7 @@ namespace Content.Shared.Interaction
 
             if (length > MaxRaycastRange)
             {
-                Logger.Warning("InRangeUnobstructed check performed over extreme range. Limiting CollisionRay size.");
+                Log.Warning("InRangeUnobstructed check performed over extreme range. Limiting CollisionRay size.");
                 length = MaxRaycastRange;
             }
 
@@ -974,7 +975,7 @@ namespace Content.Shared.Interaction
         {
             if (!ValidateClientInput(session, coords, uid, out var user))
             {
-                Logger.InfoS("system.interaction", $"ActivateItemInWorld input validation failed");
+                Log.Info($"ActivateItemInWorld input validation failed");
                 return false;
             }
 
@@ -982,7 +983,7 @@ namespace Content.Shared.Interaction
                 return false;
 
             // SS220 Ghost-UI-Activation-On-Use begin
-            if (!InteractionActivate(user.Value, uid, checkAccess: ShouldCheckAccess(user.Value)))
+            if (!InteractionActivate(user.Value, uid, checkAccess: ShouldCheckAccess(user.Value)) && HasComp<GhostComponent>(user.Value))
             {
                 var ev = new GhostInterationUiBypassEvent(user.Value, uid);
                 RaiseLocalEvent(uid, ev);
@@ -1167,14 +1168,13 @@ namespace Content.Shared.Interaction
 
             if (!coords.IsValid(EntityManager))
             {
-                Logger.InfoS("system.interaction", $"Invalid Coordinates: client={session}, coords={coords}");
+                Log.Info($"Invalid Coordinates: client={session}, coords={coords}");
                 return false;
             }
 
             if (IsClientSide(uid))
             {
-                Logger.WarningS("system.interaction",
-                    $"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
+                Log.Warning($"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
                 return false;
             }
 
@@ -1182,15 +1182,13 @@ namespace Content.Shared.Interaction
 
             if (userEntity == null || !userEntity.Value.Valid)
             {
-                Logger.WarningS("system.interaction",
-                    $"Client sent interaction with no attached entity. Session={session}");
+                Log.Warning($"Client sent interaction with no attached entity. Session={session}");
                 return false;
             }
 
             if (!Exists(userEntity))
             {
-                Logger.WarningS("system.interaction",
-                    $"Client attempted interaction with a non-existent attached entity. Session={session},  entity={userEntity}");
+                Log.Warning($"Client attempted interaction with a non-existent attached entity. Session={session},  entity={userEntity}");
                 return false;
             }
 

@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.EUI;
@@ -71,7 +71,7 @@ public sealed class BanListEui : BaseEui
                 ban.Address is { } address
                     ? (address.address.ToString(), address.cidrMask)
                     : null,
-                ban.HWId == null ? null : Convert.ToBase64String(ban.HWId.Value.AsSpan()),
+                null, // ban.HWId == null ? null : Convert.ToBase64String(ban.HWId.Value.AsSpan()), // SS220 user hwid restrict
                 ban.BanTime.UtcDateTime,
                 ban.ExpirationTime?.UtcDateTime,
                 ban.Reason,
@@ -102,7 +102,7 @@ public sealed class BanListEui : BaseEui
                 ban.Address is { } address
                     ? (address.address.ToString(), address.cidrMask)
                     : null,
-                ban.HWId == null ? null : Convert.ToBase64String(ban.HWId.Value.AsSpan()),
+                null, //ban.HWId == null ? null : Convert.ToBase64String(ban.HWId.Value.AsSpan()), // SS220 user hwid restrict
                 ban.BanTime.UtcDateTime,
                 ban.ExpirationTime?.UtcDateTime,
                 ban.Reason,

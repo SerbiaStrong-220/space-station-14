@@ -67,3 +67,42 @@
     Giggle:
       collection: FemaleWhitemaneGiggle
 
+- type: emoteSounds
+  id: MaleEngineer
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleEngineerLaugh
+    Giggle:
+      collection: MaleEngineerGiggle
+    Scream:
+      collection: MaleEngineerScream
+    CritGasp:
+      collection: MaleEngineerCritGasp
+    DefaultDeathgasp:
+      collection: MaleEngineerDeathGasp
+
+- type: emoteSounds
+  id: FemaleEngineer
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleValeeraLaugh
+    Giggle:
+      collection: FemaleValeeraGiggle
+    DefaultDeathgasp:
+      collection: FemaleValeeraDeathGasp
+
+- type: emoteSounds
+  id: MaleMedic
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleMedicLaugh
+    Giggle:
+      collection: MaleMedicGiggle
+    Scream:
+      collection: MaleMedicScream

@@ -12,3 +12,8 @@
   license: "Custom"
   copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/775"
+
+- files: ["purple_circuit.png", "yellow_circuit.png", "orange_circuit.png", "red_circuit.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/816"

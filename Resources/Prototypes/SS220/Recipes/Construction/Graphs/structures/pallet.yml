@@ -1,0 +1,199 @@
+﻿- type: constructionGraph
+  id: Pallet
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: MaterialWoodPlank1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: pallet
+      entity: Pallet
+      edges:
+        - to: start
+          steps:
+            - tool: Prying
+              doAfter: 3
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank1
+              amount: 4
+            - !type:DeleteEntity {}
+
+    - node: PalletBoxSteel
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 30
+
+    - node: PalletBoxPlasteel
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 30
+
+    - node: PalletBoxPlastic
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastic1
+              amount: 30
+
+    - node: PalletBoxPlasma
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlasma1
+              amount: 30
+
+    - node: PalletBoxUranium
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetUranium1
+              amount: 30
+
+    - node: PalletBoxGlass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetGlass1
+              amount: 30
+
+    - node: PalletBoxRGlass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRGlass1
+              amount: 30
+
+    - node: PalletBoxPGlass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPGlass1
+              amount: 30
+
+    - node: PalletBoxRPGlass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 30
+
+    - node: PalletBoxUGlass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetUGlass1
+              amount: 30
+
+    - node: PalletBoxRUGlass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 30
+
+    - node: PalletBoxCloth
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCloth1
+              amount: 30
+
+    - node: PalletBoxDurathread
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialDurathread1
+              amount: 30
+
+    - node: PalletBoxWoodPlank
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank1
+              amount: 30
+
+    - node: PalletBoxCardboard
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCardboard1
+              amount: 30
+
+    - node: PalletBoxBiomass
+      edges:
+        - to: pallet
+          steps:
+            - tool: Prying
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialBiomass1
+              amount: 100

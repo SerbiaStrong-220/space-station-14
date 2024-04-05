@@ -115,6 +115,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
                 IoCManager.Resolve<Primelist>().Initialize();
                 IoCManager.Resolve<DiscordPlayerManager>().Initialize(); // SS220 discord player manager
+                IoCManager.Resolve<DiscordBanPostManager>().Initialize(); // SS220 discord ban post manager
                 IoCManager.Resolve<ServerControlController>().Initialize();
 
                 _voteManager.Initialize();

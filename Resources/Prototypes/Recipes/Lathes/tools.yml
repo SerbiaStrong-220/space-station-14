@@ -134,6 +134,15 @@
     Plastic: 250
 
 - type: latheRecipe
+  id: HandHeldMassScanner
+  result: HandHeldMassScannerEmpty
+  category: Tools
+  completetime: 2
+  materials:
+    Steel: 800
+    Glass: 300
+
+- type: latheRecipe
   id: HandheldGPSBasic
   result: HandheldGPSBasic
   category: Tools
@@ -249,17 +258,6 @@
     Uranium: 150
 
 #SS220 Craftable-Welding-Mask begin
-- type: latheRecipe
-  id: ClothingHeadHatWelding
-  icon:
-    sprite: Clothing/Head/Welding/welding.rsi
-    state: icon
-  result: ClothingHeadHatWelding
-  completetime: 3
-  materials:
-    Steel: 500
-    Glass: 200
-
 - type: latheRecipe
   id: ClothingEyesGlassesMeson
   icon:

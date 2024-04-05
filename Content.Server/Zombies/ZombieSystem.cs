@@ -250,6 +250,11 @@ namespace Content.Server.Zombies
                 }
                 else if (mobState.CurrentState == MobState.Alive) //heals when zombies bite live entities
                 {
+                    //SS220 no_heal_from_zombies start
+                    if (HasComp<ZombieComponent>(entity))
+                        continue;
+                    //SS220 no_heal_from_zombies end
+
                     _damageable.TryChangeDamage(uid, component.HealingOnBite, true, false);
                 }
             }

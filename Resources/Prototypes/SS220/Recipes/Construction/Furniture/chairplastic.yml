@@ -1,0 +1,16 @@
+- type: construction
+  name: plastic chair
+  id: ChairPlastic
+  graph: SeatPlastic
+  startNode: start
+  targetNode: chairPlastic
+  category: construction-category-furniture
+  description: You're sitting on it. Either by your will, or by compulsion, or for the sake of motivation and power!
+  icon:
+    sprite: SS220/Structures/Furniture/plasticchair.rsi
+    state: plastic
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

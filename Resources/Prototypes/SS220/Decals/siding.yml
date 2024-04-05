@@ -1,0 +1,135 @@
+﻿- type: decal
+  id: SidingBoxOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_box
+
+- type: decal
+  id: SidingCornerNeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_corner_ne
+
+- type: decal
+  id: SidingCornerNwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_corner_nw
+
+- type: decal
+  id: SidingCornerSeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_corner_se
+
+- type: decal
+  id: SidingCornerSwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_corner_sw
+
+- type: decal
+  id: SidingEndEOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_end_e
+
+- type: decal
+  id: SidingEndNOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_end_n
+
+- type: decal
+  id: SidingEndSOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_end_s
+
+- type: decal
+  id: SidingEndWOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_end_w
+
+- type: decal
+  id: SidingInnerNeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_inner_ne
+
+- type: decal
+  id: SidingInnerNwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_inner_nw
+
+- type: decal
+  id: SidingInnerSeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_inner_se
+
+- type: decal
+  id: SidingInnerSwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_inner_sw
+
+- type: decal
+  id: SidingLineEOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_line_e
+
+- type: decal
+  id: SidingLineNOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_line_n
+
+- type: decal
+  id: SidingLineSOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_line_s
+
+- type: decal
+  id: SidingLineWOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/siding.rsi
+    state: siding_line_w

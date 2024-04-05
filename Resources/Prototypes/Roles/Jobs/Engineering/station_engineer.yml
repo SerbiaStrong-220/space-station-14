@@ -21,7 +21,7 @@
   id: StationEngineerGear
   equipment:
     head: ClothingHeadHatHardhatYellow
-    jumpsuit: ClothingUniformJumpsuitEngineering
+    jumpsuit: ClothingUniformJumpsuitClown
     back: ClothingBackpackEngineeringFilled
     shoes: ClothingShoesBootsWork
     outerClothing: ClothingOuterVestHazard

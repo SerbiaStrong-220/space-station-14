@@ -81,6 +81,7 @@
 - type: entity
   parent: CrateGeneric
   id: CrateBaseWeldable
+  noSpawn: true
   components:
   - type: Weldable
   - type: ResistLocker
@@ -88,6 +89,7 @@
 - type: entity
   parent: CrateBaseWeldable
   id: CrateBaseSecure
+  suffix: Secure
   components:
   - type: Lock
   - type: LockVisuals

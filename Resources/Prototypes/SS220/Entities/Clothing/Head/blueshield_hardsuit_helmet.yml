@@ -5,6 +5,7 @@
   name: blueshield's hardsuit helmet
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the Blue Shield.
   components:
+  - type: BreathMask
   - type: Sprite
     sprite: SS220/Clothing/Head/Hardsuits/blueshield.rsi
   - type: Clothing
