@@ -1,170 +1,255 @@
+#- type: entity
+#  parent: BaseItem
+#  id: SpaceCash
+#  name: spesos
+#  description: You gotta have money.
+#  components:
+#  - type: Cash
+#  - type: Item
+#    shape:
+#    - 0,0,1,0
+#    storedOffset: 0,-2
+#  - type: Material
+#  - type: PhysicalComposition
+#    materialComposition:
+#      Credit: 1
+#  - type: StaticPrice
+#    price: 0
+#  - type: Stack
+#    stackType: Credit
+#    count: 1
+#    baseLayer: base
+#    layerStates:
+#    - cash_1
+#    - cash_10
+#    - cash_100
+#    - cash_1000
+#    - cash_50000
+#  - type: Sprite
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_1
+#    layers:
+#    - state: cash_1
+#      map: ["base"]
+#  - type: Physics
+#    bodyType: Dynamic
+#  - type: Fixtures
+#    fixtures:
+#      fix1:
+#        density: 30
+#        shape:
+#          !type:PhysShapeAabb
+#          bounds: "-0.35,-0.2,0.25,0.1"
+#        mask:
+#        - ItemMask
+#  - type: Appearance
+#
+#- type: material
+#  id: Credit
+#  name: speso
+#  unit: materials-unit-bill
+#  stackEntity: SpaceCash
+#  icon: { sprite: /Textures/SS220/Objects/Economy/cash.rsi, state: cash_1 }
+#  price: 1
+#
+#- type: stack
+#  id: Credit
+#  name: speso
+#  icon: { sprite: /Textures/SS220/Objects/Economy/cash.rsi, state: cash_1 }
+#  spawn: SpaceCash
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash10
+#  suffix: 10
+#  components:
+#  - type: Sprite
+#    state: cash_10
+#  - type: Stack
+#    stackType: Credit
+#    count: 10
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash100
+#  suffix: 100
+#  components:
+#  - type: Item
+#    state: cash_100
+#  - type: Stack
+#    stackType: Credit
+#    count: 100
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash500
+#  suffix: 500
+#  components:
+#  - type: Sprite
+#    state: cash_100
+#  - type: Stack
+#    count: 500
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash1000
+#  suffix: 1000
+#  components:
+#  - type: Sprite
+#    state: cash_1000
+#  - type: Stack
+#    stackType: Credit
+#    count: 1000
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash2500
+#  suffix: 2500
+#  components:
+#  - type: Icon
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_1000
+#  - type: Stack
+#    count: 2500
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash5000
+#  suffix: 5000
+#  components:
+#  - type: Icon
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_1000
+#  - type: Stack
+#    count: 5000
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash10000
+#  suffix: 10000
+#  components:
+#  - type: Icon
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_1000
+#  - type: Stack
+#    count: 10000
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash20000
+#  suffix: 20000
+#  components:
+#  - type: Icon
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_50000
+#  - type: Stack
+#    count: 20000
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash30000
+#  suffix: 30000
+#  components:
+#  - type: Icon
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_50000
+#  - type: Stack
+#    stackType: Credit
+#    count: 30000
+#
+#- type: entity
+#  parent: SpaceCash
+#  id: SpaceCash1000000
+#  suffix: 1000000
+#  components:
+#  - type: Icon
+#    sprite: SS220/Objects/Economy/cash.rsi
+#    state: cash_50000
+#  - type: Stack
+#    count: 1000000
+
+- type: material
+  id: Credit
+  stackEntity: SpaceCash
+  name: materials-cash
+  icon: { sprite: /Textures/SS220/Objects/Economy/cash.rsi, state: cash }
+  price: 1
+
+- type: stack
+  id: Credit
+  name: speso
+  icon: { sprite: /Textures/SS220/Objects/Economy/cash.rsi, state: cash }
+  spawn: SpaceCash
+  maxCount: 100000
+  itemSize: 1
+
 - type: entity
+  abstract: true
   parent: BaseItem
-  id: SpaceCash
-  name: spesos
-  description: You gotta have money.
+  id: BaseSpaceCash
   components:
   - type: Cash
+  - type: Sprite
+    sprite: SS220/Objects/Economy/cash.rsi
   - type: Item
-    shape:
-    - 0,0,1,0
-    storedOffset: 0,-2
+    sprite: SS220/Objects/Economy/cash.rsi
+
+- type: entity
+  parent: BaseSpaceCash
+  id: SpaceCash100
+  name: spesos
+  description: You gotta have money.
+  suffix: 100
+  components:
+  - type: Stack
+    stackType: Credit
+    baseLayer: base
+    layerStates:
+    - cash
+    - cash_10
+    - cash_100
+  - type: Sprite
+    state: cash_100
+    layers:
+    - state: cash_100
+      map: ["base"]
+  - type: Item
+    heldPrefix: cash
+  - type: Physics
+    bodyType: Dynamic
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: cash
   - type: Material
   - type: PhysicalComposition
     materialComposition:
       Credit: 1
   - type: StaticPrice
     price: 0
+
+- type: entity
+  parent: SpaceCash100
+  id: SpaceCash
+  name: spesos
+  description: You gotta have money.
+  components:
   - type: Stack
     stackType: Credit
     count: 1
-    baseLayer: base
-    layerStates:
-    - cash
-    - cash_10
-    - cash_100
-    - cash_500
-    - cash_1000
-    - cash_1000000
   - type: Sprite
-    sprite: Objects/Economy/cash.rsi
     state: cash
-    layers:
-    - state: cash
-      map: ["base"]
-  - type: Physics
-    bodyType: Dynamic
-  - type: Fixtures
-    fixtures:
-      fix1:
-        density: 30
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.35,-0.2,0.25,0.1"
-        mask:
-        - ItemMask
-  - type: Appearance
-
-- type: material
-  id: Credit
-  name: speso
-  unit: materials-unit-bill
-  stackEntity: SpaceCash
-  icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
-  price: 1
-
-- type: stack
-  id: Credit
-  name: speso
-  icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
-  spawn: SpaceCash
+  - type: Item
+    heldPrefix: cash
 
 - type: entity
   parent: SpaceCash
   id: SpaceCash10
   suffix: 10
   components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_10
+  - type: Sprite
+    state: cash
+  - type: Item
+    heldPrefix: cash
   - type: Stack
+    stackType: Credit
     count: 10
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash100
-  suffix: 100
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_100
-  - type: Stack
-    count: 100
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash500
-  suffix: 500
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_500
-  - type: Stack
-    count: 500
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash1000
-  suffix: 1000
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000
-  - type: Stack
-    count: 1000
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash2500
-  suffix: 2500
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000
-  - type: Stack
-    count: 2500
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash5000
-  suffix: 5000
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000
-  - type: Stack
-    count: 5000
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash10000
-  suffix: 10000
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000
-  - type: Stack
-    count: 10000
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash20000
-  suffix: 20000
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000
-  - type: Stack
-    count: 20000
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash30000
-  suffix: 30000
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000
-  - type: Stack
-    count: 30000
-
-- type: entity
-  parent: SpaceCash
-  id: SpaceCash1000000
-  suffix: 1000000
-  components:
-  - type: Icon
-    sprite: Objects/Economy/cash.rsi
-    state: cash_1000000
-  - type: Stack
-    count: 1000000
