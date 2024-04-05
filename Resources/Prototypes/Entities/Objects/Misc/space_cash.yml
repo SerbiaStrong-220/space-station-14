@@ -1,3 +1,4 @@
+#ss220-moneyupdate-begin
 #- type: entity
 #  parent: BaseItem
 #  id: SpaceCash
@@ -420,3 +421,4 @@
   - type: Stack
     stackType: Credit
     count: 100000
+#ss220-moneyupdate-end
