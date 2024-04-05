@@ -91,6 +91,7 @@
       components:
       - SurplusBundle
 
+#SS220fix
 - type: listing
   id: UplinkDisposableTurret
   name: uplink-disposable-turret-name
@@ -155,6 +156,7 @@
   categories:
   - UplinkWeaponry
 
+#SS220fix
 - type: listing
   id: UplinkGrenadeLauncherBundle
   name: uplink-grenade-launcher-bundle-name
@@ -171,6 +173,7 @@
       components:
       - SurplusBundle
 
+#SS220fix
 - type: listing
   id: UplinkL6SawBundle
   name: uplink-l6-saw-bundle-name
@@ -224,6 +227,7 @@
   categories:
     - UplinkExplosives
 
+#SS220fix
 - type: listing
   id: UplinkSupermatterGrenade
   name: uplink-supermatter-grenade-name
@@ -239,6 +243,7 @@
         components:
         - SurplusBundle
 
+#SS220fix
 - type: listing
   id: UplinkWhiteholeGrenade
   name: uplink-whitehole-grenade-name
@@ -256,6 +261,7 @@
       components:
       - SurplusBundle
 
+#SS220fix
 - type: listing
   id: UplinkGrenadePenguin
   name: uplink-penguin-grenade-name
@@ -1260,6 +1266,7 @@
   categories:
   - UplinkWearables
 
+#SS220fix
 - type: listing
   id: UplinkHardsuitSyndie
   name: uplink-hardsuit-syndie-name
