@@ -5,9 +5,6 @@ using Content.Server.Popups;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory.Events;
-using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.SS220.Detective.Camera;
 using Content.Shared.Whitelist;
 using System.Linq;
@@ -18,7 +15,6 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
 {
     private readonly static string DetectiveCameraKey = "DetectiveCamera";
 
-    //[Dependency] private readonly DetectiveCameraSystem _detectiveCamera = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
 
@@ -27,7 +23,6 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
         base.Initialize();
 
         SubscribeLocalEvent<DetectiveCameraAttachComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<DetectiveCameraAttachComponent, InventoryEquipActEvent>(OnInventoryEquipAct);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraDetachDoAfterEvent>(OnDetachDoAfter);
     }
@@ -46,23 +41,6 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
         args.Handled = true;
     }
 
-    private void OnInventoryEquipAct(EntityUid uid, DetectiveCameraAttachComponent component, InventoryEquipActEvent args)
-    {
-        //if (args.Handled || !args.CanReach || args.Target is not { } target)
-        //    return;
-
-        //if (component.Attached || !IsAttachable(args.ItemUid, component))
-        //    return;
-
-        //if (!HasComp<ClothingComponent>(args.ItemUid))
-        //    return false;
-
-        //if (!TryAttachCamera(target, component, args.User))
-        //    return;
-
-        //args.Handled = true;
-    }
-
     private void OnAttachDoAfter(EntityUid uid, DetectiveCameraAttachComponent component, DetectiveCameraAttachDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
@@ -72,7 +50,6 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
             return;
 
         AddCameraItemSlotsComponent(args.AttachTarget, args.User, component.CellSlotId);
-        //On camera
 
         var attachedCameraComp = EnsureComp<AttachedCameraComponent>(args.AttachTarget);
         attachedCameraComp.AttachedCamera = uid;
@@ -81,7 +58,6 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
 
         component.Attached = true;
         _popup.PopupEntity(Loc.GetString("detective-camera-attached"), uid, args.User);
-        //Attach audio
 
         Dirty(uid, component);
         args.Handled = true;
@@ -96,14 +72,12 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
             return;
 
         RemoveCameraItemSlotsComponent(args.DetachTarget, args.User);
-        //Off camera
 
         if (!RemComp<AttachedCameraComponent>(args.DetachTarget))
             return;
 
         component.Attached = false;
         _popup.PopupEntity(Loc.GetString("detective-camera-detached"), uid, args.User);
-        //Detach audio
 
         Dirty(uid, component);
         args.Handled = true;

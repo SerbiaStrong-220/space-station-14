@@ -3,16 +3,12 @@
 using Content.Server.Popups;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Detective.Camera;
 
 public sealed class DetectiveCameraSystem : EntitySystem
 {
-    private readonly static string DetectiveCameraName = "Detective camera";
-
     [Dependency] private readonly SurveillanceCameraSystem _camera = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -30,8 +26,6 @@ public sealed class DetectiveCameraSystem : EntitySystem
         if (!TryComp<SurveillanceCameraComponent>(uid, out var camera))
             return;
 
-        //camera.CameraId = DetectiveCameraName;
-        //camera.NameSet = true;
         _camera.SetActive(uid, false, camera);
     }
 
