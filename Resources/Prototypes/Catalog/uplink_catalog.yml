@@ -189,7 +189,6 @@
       components:
       - SurplusBundle
 
-#SS220fix
 - type: listing
   id: UplinkL6SawBundle
   name: uplink-l6-saw-bundle-name
