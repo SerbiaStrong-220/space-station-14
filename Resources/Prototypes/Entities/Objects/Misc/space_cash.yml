@@ -194,6 +194,16 @@
     sprite: SS220/Objects/Economy/cash.rsi
   - type: Item
     sprite: SS220/Objects/Economy/cash.rsi
+  - type: SolutionContainerManager
+    solutions:
+      Credit:
+        canReact: false
+  - type: PhysicalComposition
+    materialComposition:
+      Credit: 1
+  - type: Material
+  - type: StaticPrice
+    price: 0
 
 - type: entity
   parent: BaseSpaceCash
@@ -204,6 +214,7 @@
   components:
   - type: Stack
     stackType: Credit
+    count: 100
     baseLayer: base
     layerStates:
     - cash
@@ -215,22 +226,18 @@
     - state: cash_100
       map: ["base"]
   - type: Item
+    state: cash_100
     heldPrefix: cash
   - type: Physics
     bodyType: Dynamic
   - type: Appearance
   - type: Extractable
     grindableSolutionName: cash
-  - type: Material
-  - type: PhysicalComposition
-    materialComposition:
-      Credit: 1
-  - type: StaticPrice
-    price: 0
 
 - type: entity
   parent: SpaceCash100
   id: SpaceCash
+  suffix: 1
   name: spesos
   description: You gotta have money.
   components:
@@ -243,7 +250,7 @@
     heldPrefix: cash
 
 - type: entity
-  parent: SpaceCash
+  parent: SpaceCash100
   id: SpaceCash10
   suffix: 10
   components:
@@ -254,3 +261,12 @@
   - type: Stack
     stackType: Credit
     count: 10
+
+- type: entity
+  parent: SpaceCash100
+  id: SpaceCashLingering0
+  suffix: Lingering, 0
+  components:
+  - type: Stack
+    lingering: true
+    count: 0
