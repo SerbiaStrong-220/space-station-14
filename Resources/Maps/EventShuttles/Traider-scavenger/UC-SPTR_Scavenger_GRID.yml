@@ -25,7 +25,7 @@ entities:
     - type: MetaData
       name: UC-SPTR "Scavenger"
     - type: Transform
-      pos: 0.13888931,0
+      pos: 0.15273857,-2.861023E-06
       parent: invalid
     - type: MapGrid
       chunks:
@@ -754,24 +754,6 @@ entities:
     - type: RadiationGridResistance
     - type: IFF
       color: '#FFFACDFF'
-    - type: Joint
-      joints:
-        docking48616: !type:WeldJoint
-          bodyB: 140
-          bodyA: invalid
-          id: docking48616
-          localAnchorB: -9,-5.5
-          localAnchorA: 4,1.5
-          damping: 597.1343
-          stiffness: 5359.8647
-        docking48615: !type:WeldJoint
-          bodyB: 140
-          bodyA: invalid
-          id: docking48615
-          localAnchorB: -9,-7.5
-          localAnchorA: 4,-0.5
-          damping: 597.1343
-          stiffness: 5359.8647
 - proto: ActionToggleInternals
   entities:
   - uid: 1093
@@ -1137,30 +1119,20 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 8.5,1.5
       parent: 140
-  - uid: 1001
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -8.5,-7.5
-      parent: 140
-    - type: Docking
-      dockJointId: docking48615
-      dockedWith: invalid
-    - type: Door
-      secondsUntilStateChange: -1973.0001
-      state: Opening
-  - uid: 1003
+- proto: AirlockExternalShuttleLocked
+  entities:
+  - uid: 1
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -8.5,-5.5
       parent: 140
-    - type: Docking
-      dockJointId: docking48616
-      dockedWith: invalid
-    - type: Door
-      secondsUntilStateChange: -1972.5334
-      state: Opening
+  - uid: 2
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-7.5
+      parent: 140
 - proto: AirlockGlass
   entities:
   - uid: 1012
@@ -1717,17 +1689,17 @@ entities:
       parent: 140
 - proto: BoxLethalshot
   entities:
-  - uid: 11
+  - uid: 1022
     components:
     - type: Transform
       pos: 5.6137915,4.7970634
       parent: 140
-  - uid: 12
+  - uid: 1024
     components:
     - type: Transform
       pos: 5.6137915,4.3665075
       parent: 140
-  - uid: 13
+  - uid: 1027
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -1738,35 +1710,35 @@ entities:
   - uid: 192
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 220
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 242
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 251
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 283
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -1857,35 +1829,35 @@ entities:
   - uid: 197
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 224
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 241
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 257
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 291
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -2962,35 +2934,35 @@ entities:
   - uid: 196
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 218
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 234
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 258
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 280
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -2999,35 +2971,35 @@ entities:
   - uid: 189
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 215
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 237
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 247
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 287
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3048,35 +3020,35 @@ entities:
   - uid: 190
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 217
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 235
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 252
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 292
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3085,28 +3057,28 @@ entities:
   - uid: 188
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 211
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 238
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 246
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3115,35 +3087,35 @@ entities:
   - uid: 193
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 223
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 230
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 255
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 282
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3152,35 +3124,35 @@ entities:
   - uid: 187
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 213
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 232
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 245
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 284
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3189,35 +3161,35 @@ entities:
   - uid: 1127
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 1128
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 1129
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 1130
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 1131
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3226,35 +3198,35 @@ entities:
   - uid: 191
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 216
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 229
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 250
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 286
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3263,35 +3235,35 @@ entities:
   - uid: 185
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 222
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 231
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 254
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 285
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3330,35 +3302,35 @@ entities:
   - uid: 195
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 219
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 233
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 248
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 281
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3367,35 +3339,35 @@ entities:
   - uid: 194
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 214
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 240
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 253
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 289
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -3404,35 +3376,35 @@ entities:
   - uid: 184
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 212
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 236
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 256
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 288
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -5329,7 +5301,7 @@ entities:
       parent: 140
 - proto: LockerSyndicatePersonal
   entities:
-  - uid: 1
+  - uid: 183
     components:
     - type: Transform
       pos: 3.5,8.5
@@ -5361,7 +5333,7 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 2
+          - 210
           - 1131
           - 292
           - 280
@@ -5380,7 +5352,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-  - uid: 3
+  - uid: 228
     components:
     - type: Transform
       pos: 2.5,4.5
@@ -5412,7 +5384,7 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 4
+          - 244
           - 186
           - 185
           - 184
@@ -5432,7 +5404,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-  - uid: 5
+  - uid: 279
     components:
     - type: Transform
       pos: 5.5,5.5
@@ -5467,7 +5439,7 @@ entities:
           - 256
           - 257
           - 1130
-          - 6
+          - 1017
           - 258
           - 255
           - 254
@@ -5484,7 +5456,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-  - uid: 7
+  - uid: 1018
     components:
     - type: Transform
       pos: 5.5,6.5
@@ -5516,7 +5488,7 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 8
+          - 1019
           - 223
           - 1128
           - 224
@@ -5536,7 +5508,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-  - uid: 9
+  - uid: 1020
     components:
     - type: Transform
       pos: 3.5,4.5
@@ -5575,7 +5547,7 @@ entities:
           - 240
           - 241
           - 1129
-          - 10
+          - 1021
           - 242
           - 239
           - 238
@@ -7596,72 +7568,72 @@ entities:
   - uid: 186
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 221
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 239
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 249
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
   - uid: 290
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
 - proto: WeaponShotgunSawnEmpty
   entities:
-  - uid: 2
+  - uid: 210
     components:
     - type: Transform
-      parent: 1
+      parent: 183
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 4
+  - uid: 244
     components:
     - type: Transform
-      parent: 3
+      parent: 228
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 6
+  - uid: 1017
     components:
     - type: Transform
-      parent: 5
+      parent: 279
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 8
+  - uid: 1019
     components:
     - type: Transform
-      parent: 7
+      parent: 1018
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 10
+  - uid: 1021
     components:
     - type: Transform
-      parent: 9
+      parent: 1020
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
