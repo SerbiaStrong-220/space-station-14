@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: ClumpToMeat
+  start: start
+  graph:
+  - node: start
+    entity: FoodMeatWheat
+    edges:
+    - to: make meat
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: make meat
+    entity: FoodMeat
