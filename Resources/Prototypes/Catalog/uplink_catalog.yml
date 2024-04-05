@@ -87,11 +87,16 @@
   - UplinkWeaponry
   conditions:
     - !type:BuyerWhitelistCondition
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
       components:
       - SurplusBundle
 
-#SS220fix
 - type: listing
   id: UplinkDisposableTurret
   name: uplink-disposable-turret-name
@@ -103,6 +108,12 @@
   - UplinkWeaponry
   conditions:
     - !type:StoreWhitelistCondition
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
         components:
           - SurplusBundle
@@ -156,7 +167,6 @@
   categories:
   - UplinkWeaponry
 
-#SS220fix
 - type: listing
   id: UplinkGrenadeLauncherBundle
   name: uplink-grenade-launcher-bundle-name
@@ -169,6 +179,12 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
     blacklist:
       components:
       - SurplusBundle
@@ -184,6 +200,14 @@
     Telecrystal: 30
   categories:
   - UplinkWeaponry
+# SS220-uplink-fix begin
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#      - LoneOpsUplink
+# SS220-uplink-fix end
 
 # Explosives
 
@@ -227,7 +251,6 @@
   categories:
     - UplinkExplosives
 
-#SS220fix
 - type: listing
   id: UplinkSupermatterGrenade
   name: uplink-supermatter-grenade-name
@@ -243,7 +266,6 @@
         components:
         - SurplusBundle
 
-#SS220fix
 - type: listing
   id: UplinkWhiteholeGrenade
   name: uplink-whitehole-grenade-name
@@ -256,12 +278,16 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
+# SS220-uplink-fix begin
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
       - SurplusBundle
 
-#SS220fix
 - type: listing
   id: UplinkGrenadePenguin
   name: uplink-penguin-grenade-name
@@ -276,6 +302,13 @@
     blacklist:
       components:
       - SurplusBundle
+# SS220-uplink-fix begin
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#      - LoneOpsUplink
+# SS220-uplink-fix end
 
 - type: listing
   id: UplinkC4
@@ -1266,7 +1299,6 @@
   categories:
   - UplinkWearables
 
-#SS220fix
 - type: listing
   id: UplinkHardsuitSyndie
   name: uplink-hardsuit-syndie-name
@@ -1279,6 +1311,12 @@
   - UplinkWearables
   conditions:
     - !type:BuyerWhitelistCondition
+# SS220-uplink-fix begin
+#   whitelist: 
+#      tags: 
+#       - NukeOpsUplink 
+#       - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
         components:
           - SurplusBundle
