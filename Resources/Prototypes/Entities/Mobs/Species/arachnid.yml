@@ -54,7 +54,7 @@
     damage:
       types:
         Piercing: 4 #SS220-TweakDamageSpecies
-        Poisen: 0.9 #SS220-TweakDamageSpecies
+        Poison: 0.9 #SS220-TweakDamageSpecies
   # Visual & Audio
   - type: DamageVisuals
     damageOverlayGroups:
