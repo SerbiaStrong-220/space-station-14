@@ -34,6 +34,16 @@
         color: "#2cf274"
   - type: Bloodstream
     bloodReagent: Slime # TODO Color slime blood based on their slime color or smth
+#SS220-TweakDamageSpecies-Begin 
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 4
+        Caustic: 0.9
+#SS220-TweakDamageSpecies-End
   - type: Barotrauma
     damage:
       types:
