@@ -41,6 +41,8 @@
         reagents:
         - ReagentId: Blood
           Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 5
   - type: Produce
     seedId: meatwheat
   - type: SpawnItemsOnUse
