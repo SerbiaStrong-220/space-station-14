@@ -511,6 +511,15 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 1
+#SS220 MeatwheatUpdate begin
+  - type: Construction
+    graph: ClumpToMeat
+    node: start
+    defaultTarget: make meat
+  - type: Tag
+    tags:
+    - Meatwheat
+#SS220 MeatwheatUpdate end
 
 - type: entity
   name: raw snake meat
