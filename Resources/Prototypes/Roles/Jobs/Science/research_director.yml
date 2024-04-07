@@ -28,7 +28,7 @@
 - type: startingGear
   id: ResearchDirectorGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitClown
+    jumpsuit: ClothingUniformJumpsuitResearchDirector
     back: ClothingBackpackResearchDirectorFilled
     shoes: ClothingShoesColorBrown
     outerClothing: ClothingOuterCoatRD

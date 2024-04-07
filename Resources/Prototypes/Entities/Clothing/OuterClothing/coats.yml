@@ -437,3 +437,54 @@
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
+    
+#SS220-DressTweak-Begin
+
+- type: entity 
+  parent: ClothingOuterStorageBase
+  id: ClothingUniformJumpskirtCapFormalDress
+  name: captain's formal dress
+  description: A dress for special occasions.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Coats/cap_formaldress.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Coats/cap_formaldress.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.5
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingUniformJumpskirtCentcomFormalDress
+  name: central command formal dress
+  description: A dress for special occasions
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Coats/centcom_formaldress.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Coats/centcom_formaldress.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingUniformJumpskirtHosFormal
+  name: hos's formal dress
+  description: A dress for special occasions.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Coats/hos_formaldress.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Coats/hos_formaldress.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+       Blunt: 0.6
+       Slash: 0.6
+       Piercing: 0.4
+       Heat: 0.4
+        
+#SS220-DressTweak-End

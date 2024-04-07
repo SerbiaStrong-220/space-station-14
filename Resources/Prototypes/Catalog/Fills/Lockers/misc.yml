@@ -162,6 +162,15 @@
           prob: 0.20
         - id: DrinkMopwataBottleRandom
           prob: 0.20
+          #SS220-VodkaKazaki-Begin
+          orGroup: MaintenanceDrink
+        - id: DrinkVodkaKazakiBottleFull
+          prob: 0.05
+          orGroup: MaintenanceDrink
+        - id: null
+          prob: 0.75
+          orGroup: MaintenanceDrink
+          #SS220VodkaKazaki-End
         - id: ModularReceiver
           prob: 0.1
         - id: DrinkSpaceGlue

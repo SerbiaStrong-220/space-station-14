@@ -8,8 +8,10 @@
       collection: MaleScreams
     Laugh:
       collection: MaleLaugh
-    Giggle:
-      collection: MaleLaugh
+#   Giggle:
+#     collection: MaleLaugh
+    Giggle: # SS220 Giggle emote
+      collection: MaleGiggle
     Sneeze:
       collection: MaleSneezes
     Cough:
@@ -58,8 +60,10 @@
       collection: FemaleScreams
     Laugh:
       collection: FemaleLaugh
-    Giggle:
-      collection: FemaleLaugh
+#   Giggle:
+#     collection: FemaleLaugh
+    Giggle: # SS220 Giggle emote
+      collection: FemaleGiggle
     Sneeze:
       collection: FemaleSneezes
     Cough:

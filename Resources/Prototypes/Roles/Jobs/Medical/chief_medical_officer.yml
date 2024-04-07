@@ -32,7 +32,7 @@
 - type: startingGear
   id: CMOGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitClown
+    jumpsuit: ClothingUniformJumpsuitCMO
     back: ClothingBackpackCMOFilled
     shoes: ClothingShoesColorBrown
     outerClothing: ClothingOuterCoatLabCmo

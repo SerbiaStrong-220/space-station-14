@@ -35,7 +35,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitClown
     back: ClothingBackpackClownFilled
-    shoes: ClothingShoesBling
+    shoes: ClothingShoesClown
     mask: ClothingMaskClown
     pocket1: BikeHorn
     pocket2: ClownRecorder
