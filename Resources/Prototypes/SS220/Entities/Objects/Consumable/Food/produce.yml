@@ -28,7 +28,7 @@
         
  
 - type: entity
-  name: Сноп мясопшеницы
+  name: сноп мясопшеницы
   description: Эх... мясопшеница... стоп, что?
   id: MeatwheatBushel
   parent: ProduceBase
