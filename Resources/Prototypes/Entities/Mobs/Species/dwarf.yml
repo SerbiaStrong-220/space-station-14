@@ -29,10 +29,10 @@
     soundHit:
       collection: Punch
     animation: WeaponArcFist
-    attackRate: 0.8
+    attackRate: 0.7
     damage:
       types:
-        Blunt: 7
+        Blunt: 7.15
 #SS220-TweakDamageSpecies-End
   - type: Butcherable
     butcheringType: Spike
