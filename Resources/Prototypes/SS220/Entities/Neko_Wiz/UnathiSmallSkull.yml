@@ -1,0 +1,37 @@
+type: entity
+  id: NormalUNHeadSkeleton
+  name: "Череп ящера"
+  description: Череп ящеро подобного существа
+  parent: PartSkeleton
+  components:
+    - type: Sprite
+      sprite: SS220/unathi_skull.rsi
+      state: "skullUN_icon"
+    - type: Icon
+      sprite: SS220/unathi_skull.rsi
+      state: "skullUN_icon"
+    - type: BodyPart
+      partType: Head
+    - type: Input
+      context: "unathi"
+    - type: Speech
+    - type: SkeletonAccent
+    - type: Actions
+    - type: Vocal
+      sounds:
+        Male: Skeleton
+        Female: Skeleton
+        Unsexed: Skeleton
+    - type: Emoting
+    - type: Grammar
+      attributes:
+        proper: true
+    - type: Examiner
+    - type: DoAfter
+    - type: MobState
+      allowedStates:
+        - Alive
+    - type: Tag
+      tags:
+        - MindTransferTarget
+        - Head
