@@ -1,7 +1,7 @@
 type: entity
   id: NormalUNHeadSkeleton
-  name: "Череп ящера"
-  description: Череп ящеро подобного существа
+  name: "череп ящера"
+  description: Череп ящеро подобного существа.
   parent: PartSkeleton
   components:
     - type: Sprite
