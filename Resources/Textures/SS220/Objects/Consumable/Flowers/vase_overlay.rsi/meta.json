@@ -4,8 +4,8 @@
         "x": 32,
         "y": 32
     },
-    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-    "copyright": "Made by Team SS220 Gabka, Surani",
+    "license": "cc-by-sa 3.0.",
+    "copyright": "Made by Team SS220 Gabka",
     "states": [
         {
             "name": "icon"
