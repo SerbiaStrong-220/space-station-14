@@ -1,6 +1,6 @@
 type: entity
   id: NormalUNHeadSkeleton
-  name: "череп ящера"
+  name: череп ящера
   description: Череп ящеро подобного существа.
   parent: PartSkeleton
   components:
