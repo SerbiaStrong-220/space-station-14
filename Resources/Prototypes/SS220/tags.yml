@@ -27,3 +27,7 @@
  
 - type: Tag
   id: Meatwheat
+
+# ss220 detective-camera
+- type: Tag
+  id: DetectiveCamera

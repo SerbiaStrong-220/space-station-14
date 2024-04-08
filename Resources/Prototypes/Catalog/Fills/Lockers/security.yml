@@ -162,6 +162,8 @@
       - id: BoxEvidenceMarkers
       - id: SpeedLoaderMagnum
         amount: 2
+      - id: DetectiveHiddenCamera # SS220 add-detective-camera
+        amount: 3
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb
