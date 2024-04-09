@@ -10,7 +10,7 @@
     startDelay: 10
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 0
     duration: 60
   - type: CableRandomSpawnRule
     entries:
