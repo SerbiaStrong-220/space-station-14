@@ -29,7 +29,7 @@
     soundHit:
       collection: Punch
     animation: WeaponArcFist
-    attackRate: 0.7
+    attackRate: 0.625
     damage:
       types:
         Blunt: 7.15
