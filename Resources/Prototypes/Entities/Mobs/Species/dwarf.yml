@@ -32,7 +32,7 @@
     attackRate: 0.625
     damage:
       types:
-        Blunt: 7.15
+        Blunt: 8
 #SS220-TweakDamageSpecies-End
   - type: Butcherable
     butcheringType: Spike
