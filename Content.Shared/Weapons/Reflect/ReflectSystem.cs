@@ -95,13 +95,13 @@ public sealed class ReflectSystem : EntitySystem
             !reflect.Enabled ||
             !TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflect.Reflects & reflective.Reflective) == 0x0 ||
-            !_random.Prob(reflect.ReflectProb) ||
+            !_random.Prob(reflect.ReflectProbProjectile) || // ss220 FixESword
             !TryComp<PhysicsComponent>(projectile, out var physics))
         {
             return false;
         }
 
-        var rotation = _random.NextAngle(-reflect.Spread / 2, reflect.Spread / 2).Opposite();
+        var rotation = _random.NextAngle(-reflect.SpreadProjectile / 2, reflect.SpreadProjectile / 2).Opposite(); // ss220 FixESword
         var existingVelocity = _physics.GetMapLinearVelocity(projectile, component: physics);
         var relativeVelocity = existingVelocity - _physics.GetMapLinearVelocity(user);
         var newVelocity = rotation.RotateVec(relativeVelocity);

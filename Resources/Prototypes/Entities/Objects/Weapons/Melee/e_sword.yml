@@ -270,30 +270,16 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
+# ss220 FixESword
   - type: Reflect
-    enabled: true
-    reflects: Energy
-    reflectProb: .95
-    spread: 75
-  - type: Blocking
-    passiveBlockModifier:
-      coefficients:
-        Blunt: 0.3
-        Slash: 0.3
-        Piercing: 0.3
-        Heat: 0.3
-        Stamina: 0.3
-    activeBlockModifier:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-        Stamina: 0.9
-      flatReductions:
-        Heat: 1
-        Piercing: 1
-    activeBlockFraction: 0.75 #ss220-revorkblock
+    enabled: false
+    reflectProb: 0.95
+    reflects:
+      - NonEnergy
+    spread: 45
+    reflectProbProjectile: 0.5
+    spreadProjectile: 180
+# ss220 FixESword
   - type: UseDelay
     delay: 1
   - type: ToggleableLightVisuals
@@ -305,6 +291,7 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
+
 #ss220-syndieborg-fix-begin
 - type: entity
   name: double-bladed energy sword
@@ -359,11 +346,16 @@
   - type: Item
     size: Small
     sprite: SS220/Objects/Weapons/Melee/e_sword_double-inhands.rsi
+# ss220 FixESword
   - type: Reflect
-    enabled: true
-    reflects: Energy
-    reflectProb: .95
-    spread: 75
+    enabled: false
+    reflectProb: 0.95
+    reflects:
+      - NonEnergy
+    spread: 45
+    reflectProbProjectile: 0.5
+    spreadProjectile: 180
+# ss220 FixESword
   - type: UseDelay
     delay: 1
   - type: ToggleableLightVisuals
