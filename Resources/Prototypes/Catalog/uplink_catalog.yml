@@ -277,7 +277,7 @@
   description: uplink-whitehole-grenade-desc
   productEntity: WhiteholeGrenade
   cost:
-    Telecrystal: 6
+    Telecrystal: 2 #ss220-WhiteHole_Grenade fix
   categories:
     - UplinkExplosives
   conditions:
