@@ -60,14 +60,5 @@ namespace Content.Server.Speech.Muting
 
             args.Cancel();
         }
-        //ss220 buffHypopen
-        private void OnScreamActionSleeping(EntityUid uid, SleepingComponent component, ScreamActionEvent args)
-        {
-            if (args.Handled)
-                return;
-            _popupSystem.PopupEntity(Loc.GetString("Вы крепко спите."), uid, uid);
-            args.Handled = true;
-        }
-        //ss220 buffHypopen end
     }
 }
