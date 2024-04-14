@@ -100,6 +100,11 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
         targetGrid = EntityUid.Invalid;
 
         var possibleTargets = station.Comp.Grids;
+        if (possibleTargets.Count == 0)
+        {
+            targetGrid = EntityUid.Invalid;
+            return false;
+        }
 
         targetGrid = possibleTargets.First(); //ss220 fixEventSpawn
 
