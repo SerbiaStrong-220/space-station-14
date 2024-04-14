@@ -224,7 +224,7 @@
         maxVol: 30
         reagents:
         - ReagentId: Nocturine
-          Quantity: 30
+          Quantity: 20
 
 - type: entity
   id: EphedrineChemistryBottle
