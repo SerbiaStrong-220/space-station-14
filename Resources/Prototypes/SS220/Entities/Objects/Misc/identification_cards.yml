@@ -23,6 +23,55 @@
   - type: PresetIdCard
     job: null
 
+- type: entity
+  parent: CentcomIDCard
+  id: CentcomDiplomatIDCard
+  name: ID карта Дипломата NanoTrasen
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Дипломат NanoTrasen
+    - type: Access
+      groups:
+      - CentralCommand
+
+- type: entity
+  parent: CentcomIDCard
+  id: FieldOfficerIDCard
+  name: ID карта Полевого Офицера ЦК
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Полевой Офицер ЦК
+    - type: Access
+      groups:
+      - CentralCommand
+
+- type: entity
+  parent: CentcomIDCard
+  id: OfficerCentCommIDCard
+  name: ID карта Офицера ЦК
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Офицер ЦК
+    - type: Access
+      groups:
+      - CentralCommand
+
+- type: entity
+  parent: CentcomIDCard
+  id: OperativeSRTIDCard
+  name: ID карта Оперативника ГСН
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Оперативник ГСН
+    - type: Access
+      tags:
+      - CentralCommandGSN
+      - CentralCommand
+
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
   id: SecDogIDCard
