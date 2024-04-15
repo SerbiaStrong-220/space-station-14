@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Radio;
+using Content.Shared.SS220.Radio.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 
@@ -34,6 +35,11 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
         {
             SendMessage(new SelectHandheldRadioChannelMessage(channel));
         };
+
+        if (EntMan.TryGetComponent<HandheldRadioComponent>(Owner, out var handheldRadio))
+        {
+            _menu.Channel.IsValid = n => (n >= handheldRadio.LowerFrequencyBorder) && (n <= handheldRadio.UpperFrequencyBorder);
+        }
 
         _menu.OnClose += Close;
         _menu.OpenCentered();

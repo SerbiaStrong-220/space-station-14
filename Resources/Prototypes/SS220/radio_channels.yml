@@ -77,3 +77,10 @@
   longRange: true
   keycode: "9"
   frequency: 1399
+- type: radioChannel
+  id: Handheld10
+  name: chat-radio-handheld
+  color: "#d39f01"
+  longRange: true
+  keycode: "\u006A"
+  frequency: 1400
