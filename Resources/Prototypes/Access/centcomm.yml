@@ -5,18 +5,6 @@
 #SS220 new CentComm begin
 
 - type: accessLevel
-  id: CentralCommandOfficer
-  name: id-card-access-level-central-command
-
-- type: accessLevel
-  id: CentralCommandFieldOfficer
-  name: id-card-access-level-central-command
-
-- type: accessLevel
-  id: NanoTrasenDiplomat
-  name: id-card-access-level-central-command
-
-- type: accessLevel
   id: CentralCommandCBURN
   name: id-card-access-level-central-command
 
@@ -32,21 +20,13 @@
   id: CentralCommandDeathSquad
   name: id-card-access-level-central-command
 
-- type: accessLevel
-  id: Magistrate
-  name: id-card-access-level-central-command
-
-#SS220 new CentComm begin
+# Группа полного доступа
 - type: accessGroup
   id: CentralCommand
   tags:
   - CentralCommand
-  - Magistrate
   - CentralCommandDeathSquad
-  - CentralCommandOfficer
   - CentralCommandGSN
-  - CentralCommandFieldOfficer
-  - NanoTrasenDiplomat
   - CentralCommandCBURN
   - CentralCommandERT
 
