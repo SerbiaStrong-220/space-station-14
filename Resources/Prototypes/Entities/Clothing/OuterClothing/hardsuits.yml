@@ -98,6 +98,15 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineering
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 #Spationaut Hardsuit
 - type: entity
@@ -351,6 +360,15 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineeringWhite
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -527,6 +545,11 @@
       Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - Hardsuit
+    - WhitelistChameleon
 
 # Syndicate Medic Hardsuit
 - type: entity
@@ -559,6 +582,10 @@
     sprintModifier: 0.9 #ss-220 armReb
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieMedic
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -876,6 +903,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTSecurity
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #ERT Janitor Hardsuit
 - type: entity

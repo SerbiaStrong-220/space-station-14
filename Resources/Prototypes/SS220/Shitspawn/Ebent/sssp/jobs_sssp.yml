@@ -113,6 +113,7 @@
     back: ClothingBackpackUSSPFilled
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
+    eyes: ClothingEyesGlassesMeson
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSPCE
     suitstorage: OxygenTankFilled
@@ -184,6 +185,7 @@
       amount: 2
     - id: ClothingUniformJumpsuitUssp
     - id: ClothingOuterCoatUssp
+    - id: ClothingEyesHudMedSec
 
 - type: startingGear
   id: EbentUSSPCorpsmanGear
@@ -267,6 +269,7 @@
       amount: 2
     - id: ClothingUniformJumpsuitUssp
     - id: ClothingOuterCoatUssp
+    - id: ClothingEyesHudMedSec
 
 - type: startingGear
   id: EbentUSSPCMOGear

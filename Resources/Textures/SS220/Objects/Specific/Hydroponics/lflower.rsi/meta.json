@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Team SS220 Gabka, Surani",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "Produce"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "harvest"
+    },
+    {
+        "name": "seed"
+    },
+    {
+        "name": "stage-1"
+    },
+    {
+        "name": "stage-2"
+    },
+    {
+        "name": "stage-3"
+    }
+  ]
+}

@@ -23,11 +23,12 @@
       ballistic-ammo: !type:Container
         ents: []
   - type: BallisticAmmoProvider
+    cycleable: false
     capacity: 1000
     whitelist:
        components:
        - CreamPie
-    proto: FoodPieBananaCream
+    proto: FoodFlapjackBananaCreamSS220
   - type: Gun
     fireRate: 1.5
     selectedMode: SemiAuto

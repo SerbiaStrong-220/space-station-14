@@ -1061,3 +1061,14 @@
   components:
   - type: AccessReader
     access: [["Armory"]]
+
+#Airtight hatch
+
+- type: entity
+  parent: AirlockHatch
+  id: AirlockHatchSyndicate
+  suffix: Syndicate, Locked
+  components:
+  - type: AccessReader
+    access: [["SyndicateAgent"]]
+

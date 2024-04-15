@@ -191,6 +191,30 @@
   heatCapacity: 10000
 
 - type: tile
+  id: FloorBrassFilled
+  name: tiles-brass-floor-filled
+  sprite: /Textures/Tiles/Misc/clockwork/clockwork_floor_filled.png
+  baseTurf: PlatingBrass
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemBrassFilled
+  heatCapacity: 10000
+  
+- type: tile
+  id: FloorBrassReebe
+  name: tiles-brass-floor-reebe
+  sprite: /Textures/Tiles/Misc/clockwork/reebe.png
+  baseTurf: PlatingBrass
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemBrassReebe
+  heatCapacity: 10000
+
+- type: tile
   id: FloorPlastic
   name: tiles-plastic-floor
   sprite: /Textures/Tiles/plastic.png
@@ -1183,7 +1207,7 @@
   id: FloorShuttleWhite
   name: tiles-white-shuttle-floor
   sprite: /Textures/Tiles/shuttlewhite.png
-  # variants: 4  # SS220 resprie
+  # variants: 4  # SS220 Tile Resprite
   # placementVariants:
   # - 1.0
   # - 1.0
@@ -1201,12 +1225,12 @@
   id: FloorShuttleGrey
   name: tiles-grey-shuttle-floor
   sprite: /Textures/Tiles/shuttlegrey.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  # variants: 4 # SS220 Tile Resprite
+  # placementVariants:
+  # - 1.0
+  # - 1.0
+  # - 1.0
+  # - 1.0
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -1219,12 +1243,12 @@
   id: FloorShuttleBlack
   name: tiles-black-shuttle-floor
   sprite: /Textures/Tiles/shuttleblack.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  # variants: 4 # SS220 Tile Resprite
+  # placementVariants:
+  # - 1.0
+  # - 1.0
+  # - 1.0
+  # - 1.0
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -1237,7 +1261,7 @@
   id: FloorShuttleBlue
   name: tiles-blue-shuttle-floor
   sprite: /Textures/Tiles/shuttleblue.png
-  # variants: 4  # SS220 resprie
+  # variants: 4 # SS220 Tile Resprite
   # placementVariants:
   # - 1.0
   # - 1.0
@@ -1255,7 +1279,7 @@
   id: FloorShuttleOrange
   name: tiles-orange-shuttle-floor
   sprite: /Textures/Tiles/shuttleorange.png
-  # variants: 4  # SS220 resprie
+  # variants: 4 # SS220 Tile Resprite
   # placementVariants:
   # - 1.0
   # - 1.0
@@ -1273,7 +1297,7 @@
   id: FloorShuttlePurple
   name: tiles-purple-shuttle-floor
   sprite: /Textures/Tiles/shuttlepurple.png
-  # variants: 4  # SS220 resprie
+  # variants: 4 # SS220 Tile Resprite
   # placementVariants:
   # - 1.0
   # - 1.0
@@ -1291,7 +1315,7 @@
   id: FloorShuttleRed
   name: tiles-red-shuttle-floor
   sprite: /Textures/Tiles/shuttlered.png
-  # variants: 4  # SS220 resprie
+  # variants: 4 # SS220 Tile Resprite
   # placementVariants:
   # - 1.0
   # - 1.0
@@ -1372,6 +1396,12 @@
   id: FloorGreenCircuit
   name: tiles-green-circuit-floor
   sprite: /Textures/Tiles/green_circuit.png
+  variants: 4 # SS220 Tile Resprite start
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0 # SS220 Tile Resprite end
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -1384,6 +1414,12 @@
   id: FloorBlueCircuit
   name: tiles-blue-circuit-floor
   sprite: /Textures/Tiles/blue_circuit.png
+  variants: 4 # SS220 Tile Resprite start
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0 # SS220 Tile Resprite end
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]

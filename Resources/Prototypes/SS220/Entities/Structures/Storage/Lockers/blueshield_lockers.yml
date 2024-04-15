@@ -26,6 +26,7 @@
     - id: ClothingCloakBlueShield #SS220 new cloak
     - id: ExpensiveLighterShield #SS220-Zippo
     - id: ClothingOuterSRTCoat #SS220-CentComm
+    - id: HandheldCrewMonitor
 
 - type: entity
   parent: GunSafe

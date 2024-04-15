@@ -1,0 +1,22 @@
+﻿- type: constructionGraph
+  id: BoxPile
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: MaterialCardboard1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: BoxPile
+      edges:
+        - to: start
+          steps:
+            - tool: Cutting
+              doAfter: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCardboard1
+              amount: 4
+            - !type:DeleteEntity {}

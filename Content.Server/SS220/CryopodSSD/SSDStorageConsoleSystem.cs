@@ -49,6 +49,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -272,7 +273,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
         foreach (var item in itemsToTransfer)
         {
-            storageComponent.Container.Insert(item);
+            _containerSystem.Insert(item, storageComponent.Container);
         }
 
         foreach (var item in itemsToDelete)

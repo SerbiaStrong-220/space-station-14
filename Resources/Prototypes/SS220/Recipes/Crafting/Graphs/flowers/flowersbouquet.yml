@@ -1,0 +1,21 @@
+- type: constructionGraph
+  id: flowersbouqlet
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: Flowersbouqlet
+          steps:
+          - tag: schamomile
+            name: космическую ромашку
+            icon:
+              sprite: SS220/Objects/Consumable/Flowers/schamomile.rsi
+              state: icon
+          - tag: rclove
+            name: красные гвоздики
+            icon:
+              sprite: SS220/Objects/Consumable/Flowers/rclove.rsi
+              state: icon
+            doAfter: 5
+    - node: Flowersbouqlet
+      entity: FlowersBouquet

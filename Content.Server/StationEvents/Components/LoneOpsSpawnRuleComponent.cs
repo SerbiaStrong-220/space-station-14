@@ -9,7 +9,7 @@ namespace Content.Server.StationEvents.Components;
 public sealed partial class LoneOpsSpawnRuleComponent : Component
 {
     [DataField("loneOpsShuttlePath")]
-    public string LoneOpsShuttlePath = "Maps/Shuttles/striker.yml";
+    public string LoneOpsShuttlePath = "Maps/Shuttles/ss220_nuke_lone.yml";
 
     [DataField("gameRuleProto", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string GameRuleProto = "Nukeops";
@@ -26,6 +26,6 @@ public sealed partial class LoneOpsSpawnRuleComponent : Component
     //Waiting 20 minutes on a crapmed shuttle would make you go insane
     // so i cut it down to 10
     [DataField("warArriveDelay")]
-    public TimeSpan? WarArriveDelay = TimeSpan.FromMinutes(10);
+    public TimeSpan WarArriveDelay = TimeSpan.FromMinutes(10);
     // SS220 Lone-Nukie-Declare-War end
 }

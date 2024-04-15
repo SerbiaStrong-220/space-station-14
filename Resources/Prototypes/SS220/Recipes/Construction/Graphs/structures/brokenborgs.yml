@@ -1,0 +1,178 @@
+﻿- type: constructionGraph
+  id: BrokenBorg
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: robot
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+            - tool: Prying
+              doAfter: 2
+          completed:
+            - !type:SpawnPrototype
+              prototype: LightHeadBorg
+              amount: 1
+            - !type:DeleteEntity {}
+
+    - node: engineer
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+            - tool: Prying
+              doAfter: 2
+          completed:
+            - !type:SpawnPrototype
+              prototype: TorsoBorgEngineer
+              amount: 1
+            - !type:DeleteEntity {}
+
+    - node: janitor
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+            - tool: Prying
+              doAfter: 2
+          completed:
+            - !type:SpawnPrototype
+              prototype: HeadBorgJanitor
+              amount: 1
+            - !type:DeleteEntity {}
+
+    - node: medical
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+            - tool: Prying
+              doAfter: 2
+          completed:
+            - !type:SpawnPrototype
+              prototype: HeadBorgMedical
+              amount: 1
+            - !type:DeleteEntity {}
+
+    - node: miner
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+            - tool: Prying
+              doAfter: 2
+          completed:
+            - !type:SpawnPrototype
+              prototype: TorsoBorgMining
+              amount: 1
+            - !type:DeleteEntity {}
+
+    - node: service
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+            - tool: Prying
+              doAfter: 2
+          completed:
+            - !type:SpawnPrototype
+              prototype: HeadBorgService
+              amount: 1
+            - !type:DeleteEntity {}

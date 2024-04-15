@@ -14,7 +14,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/catwalk.rsi
+    sprite: SS220/Structures/Catwalks/catwalksolid.rsi
     state: catwalk
   objectType: Structure
   placementMode: SnapgridCenter
@@ -36,7 +36,7 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/catwalk.rsi
+    sprite: SS220/Structures/Catwalks/catwalksolid.rsi
     state: catwalk_white
   objectType: Structure
   placementMode: SnapgridCenter
@@ -58,8 +58,162 @@
         - Lattice
         - Plating
   icon:
-    sprite: SS220/Structures/catwalk.rsi
+    sprite: SS220/Structures/Catwalks/catwalksolid.rsi
     state: catwalk_black
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: red catwalk
+  id: CatwalkRed
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkRed
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkred.rsi
+    state: catwalk_preview
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: purple catwalk
+  id: CatwalkPurple
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkPurple
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkpurple.rsi
+    state: catwalk_preview
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: cyan catwalk
+  id: CatwalkCyan
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkCyan
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkcyan.rsi
+    state: catwalk_preview
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: brown catwalk
+  id: CatwalkBrown
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkBrown
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkbrown.rsi
+    state: catwalk_preview
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: orange catwalk
+  id: CatwalkOrange
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkOrange
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkorange.rsi
+    state: catwalk_preview
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: green catwalk
+  id: CatwalkGreen
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkGreen
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkgreen.rsi
+    state: catwalk_preview
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  name: blue catwalk
+  id: CatwalkBlue
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkBlue
+  category: construction-category-structures
+  description: Just like a lattice. Except it looks better.
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+    - !type:TileType
+      targets:
+        - Lattice
+        - Plating
+  icon:
+    sprite: SS220/Structures/Catwalks/catwalkblue.rsi
+    state: catwalk_preview
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

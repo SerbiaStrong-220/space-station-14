@@ -13,3 +13,23 @@
       amount: 1
   products:
     Glintwine: 3
+
+- type: reaction
+  id: AppleCompote
+  reactants:
+    JuiceApple:
+      amount: 1
+    Water:
+      amount: 2
+  products:
+    AppleCompote: 3
+
+- type: reaction
+  id: BerryСompote
+  reactants:
+    JuiceBerry:
+      amount: 1
+    Water:
+      amount: 2
+  products:
+    BerryСompote: 3

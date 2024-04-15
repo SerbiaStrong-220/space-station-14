@@ -8,11 +8,21 @@
   id: FlashlightSecliteUssp
 
 - type: entity
-  name: табельный револьвер СССП
-  noSpawn: true
   parent: WeaponRevolverInspector
   id: WeaponRevolverInspectorUssp
+  noSpawn: true
+  name: табельный револьвер СССП
   description: Стандартый револьвер армии СССП. Его предком является наган, но за годы он был доработан настолько, что от оригинала мало что осталось.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+  - type: RevolverAmmoProvider
+    proto: CartridgeMagnumAP
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
 
 - type: entity
   parent: ClothingBeltMercWebbing

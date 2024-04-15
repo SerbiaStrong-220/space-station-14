@@ -1,0 +1,81 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: BaseScaffolding
+  parent: BaseStructure
+  name: строительные леса
+  description: Временная конструкция для безопасной работы на высоте.
+  abstract: true
+  suffix: Хлам
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Specific/scaffolding.rsi
+    state: red
+  - type: Climbable
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 5
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Tag
+    tags:
+    - Structure
+  - type: Physics
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+
+- type: entity
+  id: ScaffoldingRed
+  parent: BaseScaffolding
+  components:
+  - type: Sprite
+    state: red
+  - type: Construction
+    graph: Scaffolding
+    node: scaffoldingred
+
+- type: entity
+  id: ScaffoldingGray
+  parent: BaseScaffolding
+  components:
+  - type: Sprite
+    state: gray
+  - type: Construction
+    graph: Scaffolding
+    node: scaffoldinggray
+
+- type: entity
+  id: ScaffoldingCyan
+  parent: BaseScaffolding
+  components:
+  - type: Sprite
+    state: cyan
+  - type: Construction
+    graph: Scaffolding
+    node: scaffoldingcyan
+
+- type: entity
+  id: ScaffoldingGreen
+  parent: BaseScaffolding
+  components:
+  - type: Sprite
+    state: green
+  - type: Construction
+    graph: Scaffolding
+    node: scaffoldinggreen

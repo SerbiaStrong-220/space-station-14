@@ -1,0 +1,58 @@
+﻿- type: constructionGraph
+  id: Scaffolding
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: scaffoldingred
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 4
+            - !type:DeleteEntity {}
+
+    - node: scaffoldinggray
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 4
+            - !type:DeleteEntity {}
+
+    - node: scaffoldingcyan
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 4
+            - !type:DeleteEntity {}
+
+    - node: scaffoldinggreen
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 4
+            - !type:DeleteEntity {}

@@ -1,0 +1,27 @@
+- type: entity
+  name: свёкла
+  parent: FoodProduceBase
+  id: Foodbeet
+  description: Сочная и полезная - отличный выбор для салатов и гарниров.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - beets
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 14
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/beet.rsi
+  - type: Produce
+    seedId: beet
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceBeet
+        Quantity: 10

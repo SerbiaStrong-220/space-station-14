@@ -145,6 +145,7 @@
   - type: ItemBorgModule
     items:
     - HandheldGPSBasic
+    - HandHeldMassScannerBorg
     - HandheldStationMapUnpowered
 
 - type: entity
@@ -207,7 +208,7 @@
     - Shovel
     - OreBag
     - Crowbar
-    - RadioHandheld
+    - HandheldRadio #SS220 Mining borg fix
 
 - type: entity
   id: BorgModuleGrapplingGun

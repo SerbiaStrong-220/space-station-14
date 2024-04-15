@@ -8,6 +8,9 @@
   - type: Sprite
   - type: StaticPrice
     price: 20
+  - type: Tag
+    tags:
+    - SurgeryTool
 
 # Cautery
 
@@ -75,12 +78,19 @@
     sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
     storedRotation: 90
   - type: MeleeWeapon
+    wideAnimationRotation: 90
+    swingLeft: true
     attackRate: 1.5
     damage:
       types:
         Slash: 8
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  # SS220 Edit biomass craft begin
+  - type: Tag
+    tags:
+    - Scalpel
+  # SS220 Edit biomass craft end
 
 - type: entity
   name: shiv

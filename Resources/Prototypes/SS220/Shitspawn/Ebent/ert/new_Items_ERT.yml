@@ -36,3 +36,61 @@
         Blunt: 4.5
   - type: Item
     sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
+
+- type: entity
+  name: ручной лазерный пулемёт- G&V
+  parent: BaseWeaponBattery
+  id: WeaponErt_machinegun
+  suffix: Shitspawn, Ebent, FractWar
+  description: Кажется, кто-то просто снял легкий лазерный пулемет производства G&V с истребителя москитного флота, приварив к нему ручку для удобства. Определённо взрывоопасен.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/ert_minigun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/ert_minigun.rsi
+    quickEquip: false
+    slots:
+    - Back
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -20
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto
+    minAngle: 20
+    maxAngle: 37
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 8
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: PulseEbent
+    fireCost: 24
+  - type: Battery
+    maxCharge: 2400
+    startingCharge: 2400
+
+- type: hitscan
+  id: PulseEbent
+  damage:
+    types:
+      Heat: 19
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_beam_heavy
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_heavy
+  impactFlash:
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_beam_heavymagic
