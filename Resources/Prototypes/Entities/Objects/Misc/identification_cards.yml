@@ -489,6 +489,7 @@
     - AllAccess
     tags:
     - CentralCommand
+    - CentralCommandERT
 
 - type: entity
   parent: CentcomIDCard
@@ -500,12 +501,15 @@
     - state: gold
     - state: ert_commander
   - type: IdCard
-    jobTitle: ERT Company Commander
+    jobTitle: Лидер отряда ОБР
   - type: Item
     heldPrefix: gold
+  - type: Access
+    groups:
+    - CentralCommand
 
 - type: entity
-  parent: ERTLeaderIDCard
+  parent: CentcomIDCard
   id: ERTChaplainIDCard
   name: ERT chaplain ID card
   components:
@@ -610,6 +614,10 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: Centcom Agent
+  - type: Access
+    tags:
+    - CentralCommandDeathSquad
+    - CentralCommand
 
 - type: entity
   name: passenger ID card
@@ -815,7 +823,11 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Centcom Quarantine Officer
+    jobTitle: Агент РХБЗ
+  - type: Access
+    tags:
+    - CentralCommandCBURN
+    - CentralCommand
 
 - type: entity
   parent: IDCardStandard

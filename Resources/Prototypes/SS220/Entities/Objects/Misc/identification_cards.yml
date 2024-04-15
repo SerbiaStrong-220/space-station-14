@@ -43,6 +43,9 @@
   components:
     - type: IdCard
       jobTitle: Дипломат NanoTrasen
+    - type: Access
+      groups:
+      - CentralCommand
 
 - type: entity
   parent: CentcomIDCard
@@ -52,6 +55,9 @@
   components:
     - type: IdCard
       jobTitle: Полевой Офицер ЦК
+    - type: Access
+      groups:
+      - CentralCommand
 
 - type: entity
   parent: CentcomIDCard
@@ -61,6 +67,9 @@
   components:
     - type: IdCard
       jobTitle: Офицер ЦК
+    - type: Access
+      groups:
+      - CentralCommand
 
 - type: entity
   parent: CentcomIDCard
@@ -70,4 +79,8 @@
   components:
     - type: IdCard
       jobTitle: Оперативник ГСН
+    - type: Access
+      tags:
+      - CentralCommandGSN
+      - CentralCommand
 

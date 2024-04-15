@@ -51,27 +51,51 @@
     access: [["CentralCommand"]]
 
 - type: entity
-  parent: AirlockGlass
-  id: AirlockCentcommGlassLocked
-  suffix: ЦК, Общий, Locked
+  parent: AirlockGlassCentcomm
+  id: AirlockGlassCentcommERT
+  suffix: ЦК, ОБР
   components:
   - type: AccessReader
-    access: [["CentralCommand"]]
+    access: [["CentralCommandERT"]]
+  - type: Wires
+    layoutId: AirlockCommand
 
 - type: entity
-  parent: AirlockGlass
-  id: AirlockOCCGlassLocked
-  suffix: ЦК, Общий, Locked
+  parent: AirlockGlassCentcomm
+  id: AirlockGlassCentcommGSN
+  suffix: ЦК, ГСН
   components:
   - type: AccessReader
-    access: [["CentralCommand"]]
+    access: [["CentralCommandGSN"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockGlassCentcomm
+  id: AirlockGlassCentcommDeathSquad
+  suffix: ЦК, Деды
+  components:
+  - type: AccessReader
+    access: [["CentralCommandDeathSquad"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockGlassCentcomm
+  id: AirlockGlassCentcommCBURN
+  suffix: ЦК, Р
+  components:
+  - type: AccessReader
+    access: [["CentralCommandCBURN"]]
+  - type: Wires
+    layoutId: AirlockCommand
 
 - type: entity
   parent: Airlock
   id: AirlockCentcomm
   name: шлюз Центрального Командования
   description: Стильный шлюз, к созданию которого прикладывали руки не простые инженеры. Через него ничего не видно. Судя по звукам там кого-то повышают?..
-  suffix: ЦК, Общий, Locked
+  suffix: ЦК, Общий
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm.rsi
@@ -90,10 +114,41 @@
 
 - type: entity
   parent: AirlockCentcomm
-  id: AirlockCentcommFOCC
-  suffix: ЦК, ПОЦК
+  id: AirlockCentcommGSN
+  suffix: ЦК, ГСН
   components:
   - type: AccessReader
-    access: [["CentralCommandFieldOfficer"]]
+    access: [["CentralCommandGSN"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockCentcomm
+  id: AirlockCentcommERT
+  suffix: ЦК, ОБР
+  components:
+  - type: AccessReader
+    access: [["CentralCommandERT"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockCentcomm
+  id: AirlockCentcommDeathSquad
+  suffix: ЦК, Деды
+  components:
+  - type: AccessReader
+    access: [["CentralCommandDeathSquad"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+
+- type: entity
+  parent: AirlockCentcomm
+  id: AirlockCentcommCBURN
+  suffix: ЦК, РХБЗ
+  components:
+  - type: AccessReader
+    access: [["CentralCommandCBURN"]]
   - type: Wires
     layoutId: AirlockCommand
