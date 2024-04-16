@@ -988,15 +988,15 @@
     Cloth: 100
     Durathread: 50
 
-#SS220 ClothingHeadCaptainCap begin
+#SS220 Captain's Cap tweak begin
 - type: latheRecipe
-  id: ClothingHeadHatCapcap
-  result: ClothingHeadHatCapcap
+  id: ClothingHeadCaptainCap
+  result: ClothingHeadCaptainCap
   completetime: 2
   materials:
     Cloth: 100
     Durathread: 50
-#SS220 ClothingHeadCaptainCap end
+#SS220 Captain's Cap tweak end
 
 - type: latheRecipe
   id: ClothingHeadHatBeretHoS
