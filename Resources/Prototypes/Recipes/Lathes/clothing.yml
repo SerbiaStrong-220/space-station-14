@@ -988,6 +988,16 @@
     Cloth: 100
     Durathread: 50
 
+#SS220 CapBeret begin
+- type: latheRecipe
+  id: ClothingHeadBeretCap
+  result: ClothingHeadBeretCap
+  completetime: 2
+  materials:
+    Cloth: 100
+    Durathread: 50
+#SS220 CapBeret end
+
 - type: latheRecipe
   id: ClothingHeadHatBeretHoS
   result: ClothingHeadHatBeretHoS
