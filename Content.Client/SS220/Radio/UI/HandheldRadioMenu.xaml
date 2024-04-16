@@ -26,7 +26,8 @@
         </BoxContainer>
         <Control MinHeight="10"/>
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Center" Margin="5 0 5 5">
-            <Button Name="MicButton" ToggleMode="True" Text="{Loc 'handheld-radio-button-text-mic'}" StyleClasses="OpenRight" MinWidth="90"/>
+            <Button Name="MicButton" ToggleMode="True" Text="{Loc 'handheld-radio-button-text-mic'}" StyleClasses="OpenRight" MinWidth="90">
+            </Button>
             <Button Name="SpeakerButton" ToggleMode="True" Text="{Loc 'handheld-radio-button-text-speaker'}" StyleClasses="OpenLeft" MinWidth="90"/>
         </BoxContainer>
         <BoxContainer Orientation="Vertical">

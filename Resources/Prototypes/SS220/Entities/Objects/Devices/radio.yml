@@ -14,6 +14,7 @@
   - type: Speech
     speechVerb: Robotic
   - type: HandheldRadio
+    upperBorder: 1399
   - type: Sprite
     sprite: Objects/Devices/communication.rsi
     layers:
@@ -32,3 +33,13 @@
     interfaces:
       - key: enum.HandheldRadioUiKey.Key
         type: HandheldRadioBoundUserInterface
+
+- type: entity
+  name: event handheld radio SS220
+  description: A handy handheld radio.
+  parent: HandheldRadio
+  id: EventHandheldRadio
+  components:
+  - type: HandheldRadio
+    lowerBorder: 1400
+    upperBorder: 1409

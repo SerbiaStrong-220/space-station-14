@@ -26,9 +26,9 @@ public sealed partial class HandheldRadioMenu : FancyWindow
         Channel.InitDefaultButtons();
         MicButton.OnPressed += args => OnMicPressed?.Invoke(args.Button.Pressed);
         SpeakerButton.OnPressed += args => OnSpeakerPressed?.Invoke(args.Button.Pressed);
-        //ChannelButton.OnPressed += args => OnChannelSelected?.Invoke(args.Button.Pressed);
+        //ChannelButton.OnPressed += args => OnChannelSelected?.Invoke(String.Format("Handheld{0}", Channel.Value % 1390));
         Channel.ValueChanged += args => OnChannelSelected?.Invoke(String.Format("Handheld{0}", Channel.Value % 1390));
-        Channel.Value = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", Channel.Value % 1390)).Frequency;
+        //Channel.Value = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", Channel.Value % 1390)).Frequency;
     }
 
     public void Update(HandheldRadioBoundUIState state)
