@@ -6,7 +6,6 @@
   - type: StorageFill
     contents:
       - id: ClothingHeadHatCaptain
-      - id: ClothingHeadHatCapcap
       - id: ClothingNeckCloakCap
       - id: ClothingNeckCloakCapFormal
       - id: ClothingUniformJumpsuitCapFormal
@@ -15,6 +14,7 @@
       # Corvax-Resprite-Start
       - id: ClothingHeadCaptainHat
       - id: ClothingOuterCoatCaptain
+      - id: ClothingHeadCaptainCap
       # Corvax-Resprite-End
       - id: ClothingNeckMantleCap
       - id: ClothingOuterWinterCap
