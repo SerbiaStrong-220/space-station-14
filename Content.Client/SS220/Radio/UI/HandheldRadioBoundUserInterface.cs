@@ -4,7 +4,6 @@ using Content.Shared.SS220.Radio.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Content.Shared.Radio;
-using Content.Shared.Instruments;
 
 namespace Content.Client.SS220.Radio.UI;
 
@@ -38,7 +37,7 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
         {
             SendMessage(new SelectHandheldRadioChannelMessage(channel));
         };
-        SetChannel(_menu);
+        SetChannelBorders(_menu);
 
         _menu.OnClose += Close;
         _menu.OpenCentered();
@@ -56,13 +55,14 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not HandheldRadioBoundUIState msg)
+        if (_menu == null || state is not HandheldRadioBoundUIState msg)
             return;
 
-        _menu?.Update(msg);
+        _menu.Update(msg);
+        _menu.SetChannel(_prototype.Index<RadioChannelPrototype>(msg.SelectedChannel).Frequency);
     }
 
-    private void SetChannel(HandheldRadioMenu? _menu)
+    private void SetChannelBorders(HandheldRadioMenu? _menu)
     {
         if (_menu is null)
             return;
@@ -70,9 +70,11 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
         if (!EntMan.TryGetComponent<HandheldRadioComponent>(Owner, out var handheldRadio))
             return;
 
-        _menu.Channel.IsValid = n => (n >= handheldRadio.LowerFrequencyBorder) && (n <= handheldRadio.UpperFrequencyBorder);//set borders for UI
+        _menu.Channel.IsValid = n => (n >= handheldRadio.LowerFrequencyBorder) && (n <= handheldRadio.UpperFrequencyBorder);//set borders for UI from component
 
+        /*
         if (_menu.Channel.Value == 0)
             _menu.Channel.Value = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", handheldRadio.LowerFrequencyBorder % 1390)).Frequency;
+        */
     }
 }
