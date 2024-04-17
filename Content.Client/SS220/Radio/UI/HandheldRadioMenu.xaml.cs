@@ -15,6 +15,7 @@ public sealed partial class HandheldRadioMenu : FancyWindow
     public event Action<bool>? OnMicPressed;
     public event Action<bool>? OnSpeakerPressed;
     public event Action<string>? OnChannelSelected;
+    public bool Opened = false;
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     public HandheldRadioMenu()
@@ -35,9 +36,14 @@ public sealed partial class HandheldRadioMenu : FancyWindow
     }
     public void SetChannel(int msg)
     {
-        if (msg == Channel.Value)
+        if (msg == Channel.Value || Opened)
             return;
 
         Channel.Value = msg;
+        Opened = true;
+    }
+    public void SetChannelDesc(int lower, int upper)
+    {
+        ChannelsDesc.Text = Loc.GetString("handheld-radio-component-flavor-text-left", ("lower", lower.ToString()), ("upper", upper.ToString()));
     }
 }

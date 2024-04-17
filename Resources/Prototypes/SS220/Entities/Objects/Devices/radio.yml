@@ -14,7 +14,6 @@
   - type: Speech
     speechVerb: Robotic
   - type: HandheldRadio
-    upperBorder: 1399
   - type: Sprite
     sprite: Objects/Devices/communication.rsi
     layers:
@@ -39,7 +38,8 @@
   description: A handy handheld radio.
   parent: HandheldRadio
   id: EventHandheldRadio
+  suffix: Ebent
   components:
   - type: HandheldRadio
-    lowerBorder: 1400
-    upperBorder: 1409
+    lowerBorder: 1582
+    upperBorder: 1591

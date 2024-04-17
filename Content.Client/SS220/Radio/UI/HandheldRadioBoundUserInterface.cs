@@ -13,6 +13,8 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private HandheldRadioMenu? _menu;
 
+    private int startedFreq;//idk how to set value which isnt 0, and dont fall into UpdateState=>Channel.ValueChanged=>UpdateState cycle, so fuck it
+
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public HandheldRadioBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -38,6 +40,7 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
             SendMessage(new SelectHandheldRadioChannelMessage(channel));
         };
         SetChannelBorders(_menu);
+        _menu.Opened = false;
 
         _menu.OnClose += Close;
         _menu.OpenCentered();
@@ -59,7 +62,9 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
             return;
 
         _menu.Update(msg);
-        _menu.SetChannel(_prototype.Index<RadioChannelPrototype>(msg.SelectedChannel).Frequency);
+
+        int channel = _prototype.Index<RadioChannelPrototype>(msg.SelectedChannel).Frequency;
+        _menu.SetChannel(channel == 1390? startedFreq : channel);
     }
 
     private void SetChannelBorders(HandheldRadioMenu? _menu)
@@ -71,10 +76,8 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
             return;
 
         _menu.Channel.IsValid = n => (n >= handheldRadio.LowerFrequencyBorder) && (n <= handheldRadio.UpperFrequencyBorder);//set borders for UI from component
+        _menu.SetChannelDesc(handheldRadio.LowerFrequencyBorder, handheldRadio.UpperFrequencyBorder);
 
-        /*
-        if (_menu.Channel.Value == 0)
-            _menu.Channel.Value = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", handheldRadio.LowerFrequencyBorder % 1390)).Frequency;
-        */
+        startedFreq = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", handheldRadio.LowerFrequencyBorder % 1390)).Frequency;
     }
 }
