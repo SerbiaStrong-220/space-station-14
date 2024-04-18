@@ -4,7 +4,7 @@
   parent: VendingMachine
   id: VendingMachineCentComm
   name: Цент'О'Венд
-  description: Данный автомат визуализирует всю мощь финаносовой составляющей Nanotrasen.
+  description: Данный автомат визуализирует всю мощь финансовой составляющей NanoTrasen.
   components:
   - type: VendingMachine
     pack: CentCommDrobeInventory

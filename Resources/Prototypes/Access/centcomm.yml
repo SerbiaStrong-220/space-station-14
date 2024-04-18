@@ -2,34 +2,3 @@
   id: CentralCommand
   name: id-card-access-level-central-command
 
-#SS220 new CentComm begin
-
-- type: accessLevel
-  id: CentralCommandCBURN
-  name: id-card-access-level-central-command
-
-- type: accessLevel
-  id: CentralCommandERT
-  name: id-card-access-level-central-command
-
-- type: accessLevel
-  id: CentralCommandGSN
-  name: id-card-access-level-central-command
-
-- type: accessLevel
-  id: CentralCommandDeathSquad
-  name: id-card-access-level-central-command
-
-# Группа полного доступа
-- type: accessGroup
-  id: CentralCommand
-  tags:
-  - CentralCommand
-  - CentralCommandDeathSquad
-  - CentralCommandGSN
-  - CentralCommandCBURN
-  - CentralCommandERT
-
-#SS220 new CentComm end
-
-

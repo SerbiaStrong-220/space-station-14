@@ -39,9 +39,7 @@
 - type: entity
   parent: AirlockGlass
   id: AirlockGlassCentcomm
-  name: дверь Центрального Командования
-  description: Дверь Центрального Командования сразу внушает доверие своими выдержанными гранями и крепкой формой. Не каждый может сидеть за одной из таких.
-  suffix: ЦК, Общий
+  suffix: ЦК, Закрыто, Общий
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
@@ -53,7 +51,7 @@
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommERT
-  suffix: ЦК, ОБР
+  suffix: ЦК, Закрыто, ОБР
   components:
   - type: AccessReader
     access: [["CentralCommandERT"]]
@@ -63,7 +61,7 @@
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommGSN
-  suffix: ЦК, ГСН
+  suffix: ЦК, Закрыто, ГСН
   components:
   - type: AccessReader
     access: [["CentralCommandGSN"]]
@@ -73,7 +71,7 @@
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommDeathSquad
-  suffix: ЦК, Деды
+  suffix: ЦК, Закрыто, Эскадрон Смерти
   components:
   - type: AccessReader
     access: [["CentralCommandDeathSquad"]]
@@ -83,7 +81,7 @@
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommCBURN
-  suffix: ЦК, Р
+  suffix: ЦК, Закрыто, отряд РХБЗ
   components:
   - type: AccessReader
     access: [["CentralCommandCBURN"]]
@@ -93,20 +91,10 @@
 - type: entity
   parent: Airlock
   id: AirlockCentcomm
-  name: шлюз Центрального Командования
-  description: Стильный шлюз, к созданию которого прикладывали руки не простые инженеры. Через него ничего не видно. Судя по звукам там кого-то повышают?..
-  suffix: ЦК, Общий
+  suffix: ЦК, Закрыто, Общий
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm.rsi
-  - type: AccessReader
-    access: [["CentralCommand"]]
-
-- type: entity
-  parent: AirlockCentcomm
-  id: AirlockCentcommLocked
-  suffix: ЦК, Общий, Locked
-  components:
   - type: AccessReader
     access: [["CentralCommand"]]
   - type: Wires
@@ -115,7 +103,7 @@
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommGSN
-  suffix: ЦК, ГСН
+  suffix: ЦК, Закрыто, ГСН
   components:
   - type: AccessReader
     access: [["CentralCommandGSN"]]
@@ -125,7 +113,7 @@
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommERT
-  suffix: ЦК, ОБР
+  suffix: ЦК, Закрыто, ОБР
   components:
   - type: AccessReader
     access: [["CentralCommandERT"]]
@@ -135,7 +123,7 @@
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommDeathSquad
-  suffix: ЦК, Деды
+  suffix: ЦК, Закрыто, Эскадрон Смерти
   components:
   - type: AccessReader
     access: [["CentralCommandDeathSquad"]]
@@ -146,7 +134,7 @@
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommCBURN
-  suffix: ЦК, РХБЗ
+  suffix: ЦК, Закрыто, Отряд РХБЗ
   components:
   - type: AccessReader
     access: [["CentralCommandCBURN"]]

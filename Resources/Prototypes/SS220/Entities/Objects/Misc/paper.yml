@@ -162,7 +162,7 @@
   id: BoxFolderCentCommClipboard
   parent: BoxFolderClipboard
   name: планшет Центрального Командования
-  description: Настолько искусно сделанного планшета для бумаги я не видел ещё никогда.
+  description: Кажется, вы ещё никогда не видели настолько искусно сделанного планшета для бумаги.
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/centcommclipboard.rsi

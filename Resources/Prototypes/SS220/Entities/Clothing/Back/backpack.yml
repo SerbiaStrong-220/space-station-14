@@ -1,6 +1,24 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
+  parent: ClothingBackpackSatchelLeather
+  id: ClothingBackpackCentCommFilled
+  name: кожаная сумка
+  description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
+  noSpawn: True
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: NTbaton
+        - id: RubberStampCentcom
+        - id: Flash
+        - id: CigarGoldCase
+        - id: ExpensiveLighterNanotrasen
+        - id: BoxFolderBlack
+        - id: BoxFolderBlue
+
+- type: entity
   parent: ClothingBackpack
   id: ClothingBackSatchelSRT
   name: сумка ГСН

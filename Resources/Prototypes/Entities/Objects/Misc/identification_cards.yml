@@ -489,7 +489,7 @@
     - AllAccess
     tags:
     - CentralCommand
-    - CentralCommandERT
+    - CentralCommandERT # SS220 New CentComm
 
 - type: entity
   parent: CentcomIDCard
@@ -501,15 +501,17 @@
     - state: gold
     - state: ert_commander
   - type: IdCard
-    jobTitle: Лидер отряда ОБР
+    jobTitle: Лидер отряда ОБР # SS220 new CentComm
   - type: Item
     heldPrefix: gold
+  # SS220 new CentComm begin
   - type: Access
     groups:
     - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
-  parent: CentcomIDCard
+  parent: CentcomIDCard # SS220 new CentComm begin
   id: ERTChaplainIDCard
   name: ERT chaplain ID card
   components:
@@ -614,10 +616,12 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: Centcom Agent
+  # SS220 new CentComm begin
   - type: Access
     tags:
     - CentralCommandDeathSquad
     - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
   name: passenger ID card
@@ -823,11 +827,13 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
+  # SS220 new CentComm begin
     jobTitle: Агент РХБЗ
   - type: Access
     tags:
     - CentralCommandCBURN
     - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
   parent: IDCardStandard
