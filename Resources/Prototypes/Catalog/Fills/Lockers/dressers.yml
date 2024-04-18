@@ -6,7 +6,6 @@
   - type: StorageFill
     contents:
       - id: ClothingHeadHatCaptain
-      - id: ClothingHeadHatCapcap
       - id: ClothingHeadBeretCap #SS220 CapBeret
       - id: ClothingNeckCloakCap
       - id: ClothingNeckCloakCapFormal
@@ -16,6 +15,7 @@
       # Corvax-Resprite-Start
       - id: ClothingHeadCaptainHat
       - id: ClothingOuterCoatCaptain
+      - id: ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       # Corvax-Resprite-End
       - id: ClothingNeckMantleCap
       - id: ClothingOuterWinterCap

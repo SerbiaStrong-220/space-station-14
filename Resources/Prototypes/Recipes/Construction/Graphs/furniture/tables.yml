@@ -73,7 +73,25 @@
             - material: PlasmaGlass
               amount: 1
               doAfter: 1
-        
+        #ss220-tables-update-start
+        - to: TableUraniumGlass
+          steps:
+            - material: UraniumGlass
+              amount: 1
+              doAfter: 1
+
+        - to: TableReinforcedPlasmaGlass
+          steps:
+            - material: ReinforcedPlasmaGlass
+              amount: 1
+              doAfter: 1
+
+        - to: TableReinforcedUraniumGlass
+          steps:
+            - material: ReinforcedUraniumGlass
+              amount: 1
+              doAfter: 1
+        #ss220-tables-update-end
         - to: TableBrass
           steps:
             - material: Brass
@@ -180,7 +198,43 @@
           steps:
             - tool: Anchoring
               doAfter: 1
+    #ss220-tables-update-start
+    - node: TableUraniumGlass
+      entity: TableUraniumGlass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetUGlass1
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
 
+    - node: TableReinforcedUraniumGlass
+      entity: TableReinforcedUraniumGlass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: TableReinforcedPlasmaGlass
+      entity: TableReinforcedPlasmaGlass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+    #ss220-tables-update-end
     - node: TableBrass
       entity: TableBrass
       edges:
