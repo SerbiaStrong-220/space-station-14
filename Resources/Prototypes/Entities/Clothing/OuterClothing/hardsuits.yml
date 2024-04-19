@@ -289,7 +289,7 @@
         Heat: 0.6
         Caustic: 0.4
         Radiation: 0.4
-        Stamina: 0.35
+        Stamina: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.65
     sprintModifier: 0.65 #SS220-WardenJuggernaut-End
