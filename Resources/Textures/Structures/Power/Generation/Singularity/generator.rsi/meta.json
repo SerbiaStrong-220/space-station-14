@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "copyright": "Taken from https://github.com/vgstation-coders/vgstation13/blob/68357f0b64a296d122ff1bdb2f13e9b0cb04a003/icons/obj/singularity.dmi Resprited by Neko_Wiz - (discord)",
   "license": "CC-BY-SA-3.0",
   "size": {
@@ -8,7 +8,17 @@
   },
   "states": [
     {
-      "name": "icon"
+      "name": "icon",
+      "delays" : [
+        [
+         0.1,
+         0.1,
+         0.1,
+         0.1,
+         0.1,
+         0.1
+        ]
+     ]
     }
   ]
 }
