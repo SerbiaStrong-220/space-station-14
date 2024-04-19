@@ -279,19 +279,19 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.3 #SS220-WardenJuggernaut-Begin
+    damageCoefficient: 0.3 #SS220-WardenJuggernaut
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
+        Blunt: 0.4 #SS220-WardenJuggernaut-Begin
         Slash: 0.4
         Piercing: 0.3
         Heat: 0.6
         Caustic: 0.4
-        Radiation: 0.4
+        Radiation: 0.4 #SS220-WardenJuggernaut-End
         Stamina: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.65
+    walkModifier: 0.65 #SS220-WardenJuggernaut-Begin
     sprintModifier: 0.65 #SS220-WardenJuggernaut-End
   - type: HeldSpeedModifier
   - type: ToggleableClothing
