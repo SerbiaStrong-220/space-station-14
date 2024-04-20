@@ -59,9 +59,6 @@
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
-  - type: Construction
-    graph: ArtAmmoShelf
-    node: ArtAmmoShelf
 
 
 
@@ -125,6 +122,4 @@
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
-  - type: Construction
-    graph: CartAmmoShelf
-    node: CartAmmoShelf
+
