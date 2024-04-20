@@ -179,8 +179,6 @@ public sealed partial class ChatSystem
         {"fagot","мужеложец"},
         {"fag","мужеложец"},
         {"fagg","мужеложец"},
-        {"пидр","мужеложец"}, //SS220 Filter Update begin
-        {"пидро","мужеложец"}, //SS220 Filter Update end
         {"пидор","мужеложец"},
         {"пидар","мужеложец"},
         {"пидоры","мужеложцы"},
