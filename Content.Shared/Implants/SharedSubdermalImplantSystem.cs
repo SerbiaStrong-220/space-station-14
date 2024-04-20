@@ -20,6 +20,11 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
 
     public const string BaseStorageId = "storagebase";
 
+    //SS220-mindslave begin
+    [ValidatePrototypeId<TagPrototype>]
+    private const string MindSlaveTag = "MindSlave";
+    //SS220-mindslave end
+
     public override void Initialize()
     {
         SubscribeLocalEvent<SubdermalImplantComponent, EntGotInsertedIntoContainerMessage>(OnInsert);
@@ -71,6 +76,14 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
 
         if (component.ImplantAction != null)
             _actionsSystem.RemoveProvidedActions(component.ImplantedEntity.Value, uid);
+
+        //SS220-mindslave start
+        if (_tag.HasTag(uid, MindSlaveTag))
+        {
+            var mindSlaveRemoved = new MindSlaveRemoved(uid, component.ImplantedEntity);
+            RaiseLocalEvent(uid, ref mindSlaveRemoved);
+        }
+        //SS220-mindslave end
 
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;
@@ -205,3 +218,22 @@ public readonly struct ImplantImplantedEvent
         Implanted = implanted;
     }
 }
+
+//SS220-mindslave start
+/// <summary>
+/// Event raised whenever MindSlave implant is removed.
+/// Raied on the implant itself.
+/// </summary>
+[ByRefEvent]
+public readonly struct MindSlaveRemoved
+{
+    public readonly EntityUid Implant;
+    public readonly EntityUid? Slave;
+
+    public MindSlaveRemoved(EntityUid implant, EntityUid? slave)
+    {
+        Implant = implant;
+        Slave = slave;
+    }
+}
+//SS220-mindslave end

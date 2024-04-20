@@ -5,6 +5,7 @@ using Content.Server.NPC.Systems;
 using Content.Server.Objectives;
 using Content.Server.PDA.Ringer;
 using Content.Server.Roles;
+using Content.Server.SS220.MindSlave;
 using Content.Server.Traitor.Uplink;
 using Content.Shared.CCVar;
 using Content.Shared.Dataset;
@@ -39,6 +40,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly ObjectivesSystem _objectives = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly MindSlaveSystem _mindSlave = default!;
 
     private int PlayersPerTraitor => _cfg.GetCVar(CCVars.TraitorPlayersPerTraitor);
     private int MaxTraitors => _cfg.GetCVar(CCVars.TraitorMaxTraitors);
