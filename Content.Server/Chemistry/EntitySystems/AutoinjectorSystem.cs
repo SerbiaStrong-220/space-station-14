@@ -2,6 +2,8 @@ using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry;
+using Robust.Shared.GameStates;
+using Content.Shared.Chemistry.Components;
 
 namespace Content.Server.Chemistry.EntitySystems
 {
@@ -15,13 +17,13 @@ namespace Content.Server.Chemistry.EntitySystems
 
         private void OnAfterHypo(EntityUid uid, AutoinjectorComponent component, AfterHypoEvent args)
         {
-            if (!_solutionContainerSystem.TryGetSolution(uid, component.Solution, out _, out var solutions))
+            if (!TryComp<HyposprayComponent>(uid, out var hypoComp))
                 return;
-
-            if (solutions.Volume <= 0)
+            if (!_solutionContainerSystem.TryGetSolution(uid, hypoComp.SolutionName, out _, out var sol))
+                return;
+            if (sol.Volume <= 0)
             {
-                RemComp<SolutionContainerManagerComponent>(uid);
-                RemComp<HyposprayComponent>(uid);
+                RemComp<RefillableSolutionComponent>(uid);
             }
 
         }

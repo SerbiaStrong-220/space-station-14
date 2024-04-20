@@ -30,7 +30,6 @@
     changeColor: false
     emptySpriteName: firstaid_empty
   - type: Autoinjector
-    solution: pen
 
 - type: entity
   name: Медицинский Автоинжектор
@@ -42,9 +41,6 @@
     sprite: Objects/Specific/Medical/medipen.rsi
     layers:
     - state: medautoinjector
-  - type: Item
-    sprite: Objects/Specific/Medical/medipen.rsi
-    size: Tiny
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -56,6 +52,4 @@
     transferAmount: 10
   - type: RefillableSolution
     solution: pen
-  - type: Appearance
   - type: Autoinjector
-    solution: pen
