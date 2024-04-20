@@ -19,8 +19,13 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         [DataField("outlet")]
         public string OutletName { get; set; } = "pipe";
 
-        [ViewVariables]
-        public readonly HashSet<Gas> FilterGases = new(GasVentScrubberData.DefaultFilterGases);
+        //SS220-scrubber-mode begin
+        [ViewVariables(VVAccess.ReadOnly)]
+        public HashSet<Gas> FilterGases = new(GasVentScrubberData.DefaultFilterGases);
+
+        [DataField("initialFilter"), ViewVariables]
+        public GasVentScrubberData.ScrubberFilter InitialFilter { get; set; } = GasVentScrubberData.ScrubberFilter.Default;
+        //SS220-scrubber-mode end
 
         [ViewVariables(VVAccess.ReadWrite)]
         public ScrubberPumpDirection PumpDirection { get; set; } = ScrubberPumpDirection.Scrubbing;
