@@ -14,3 +14,54 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  name: uranium glass table
+  id: TableUraniumGlass
+  graph: Table
+  startNode: start
+  targetNode: TableUraniumGlass
+  category: construction-category-furniture
+  description: A square piece of uranium glass, standing on four metal legs. Pretty!
+  icon:
+    sprite: SS220/Structures/Furniture/Tables/u_glass.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: reinforced plasma glass table
+  id: TableReinforcedPlasmaGlass
+  graph: Table
+  startNode: start
+  targetNode: TableReinforcedPlasmaGlass
+  category: construction-category-furniture
+  description: A square piece of plasma glass, standing on four metal legs. Extra robust.
+  icon:
+    sprite: SS220/Structures/Furniture/Tables/rp_glass.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: reinforced uranium glass table
+  id: TableReinforcedUraniumGlass
+  graph: Table
+  startNode: start
+  targetNode: TableReinforcedUraniumGlass
+  category: construction-category-furniture
+  description: A square piece of uranium glass, standing on four metal legs. Extra robust.
+  icon:
+    sprite: SS220/Structures/Furniture/Tables/ru_glass.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

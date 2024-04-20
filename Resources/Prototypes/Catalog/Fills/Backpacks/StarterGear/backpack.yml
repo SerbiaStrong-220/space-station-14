@@ -369,6 +369,10 @@
   name: death squad backpack
   description: Holds the kit of CentComm's most feared agents.
   components:
+#ss220-fix-sprite-begin
+    - type: Sprite
+      sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
+#ss220-fix-sprite-end
     - type: Storage
       grid:
       - 0,0,8,6 # SS220 Bigger-Ert-Backpacks

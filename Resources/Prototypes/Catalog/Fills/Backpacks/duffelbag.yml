@@ -344,7 +344,7 @@
       - id: WeaponPistolViper
       - id: PinpointerNuclear
       - id: MicroBombImplanter
-      - id: NukeOpsDeclarationOfWar
+      - id: NukeLoneOpsDeclarationOfWar #SS220-lone-ops-comms
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

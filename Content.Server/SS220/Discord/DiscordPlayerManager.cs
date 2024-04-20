@@ -179,5 +179,40 @@ public sealed class DiscordPlayerManager : IPostInjectInit
     {
         return Convert.ToBase64String(RandomNumberGenerator.GetBytes(count));
     }
+
+    public async Task<PrimeListUserStatus?> GetUserPrimeListStatus(Guid userId)
+    {
+        if (string.IsNullOrEmpty(_apiUrl))
+        {
+            return null;
+        }
+
+        try
+        {
+            var url = $"{_apiUrl}/checkPrimeAccess/{userId}";
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+
+                _sawmill.Error(
+                    "Failed to get user prime list status: [{StatusCode}] {Response}",
+                    response.StatusCode,
+                    errorText);
+
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<PrimeListUserStatus>(GetJsonSerializerOptions());
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error(exc.Message);
+        }
+
+        return null;
+    }
 }
 

@@ -287,12 +287,18 @@
   meltingPoint: 128.0
   metabolisms:
     Narcotic:
+      metabolismRate: 0.1 #ss220 buffHypopen
       effects:
+#ss220 buffHypopen
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+#ss220 buffHypopen end
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           reagent: Nocturine
-          min: 8
+          min: 6 #ss220 buffHypopen
         key: ForcedSleep
         component: ForcedSleeping
         refresh: false

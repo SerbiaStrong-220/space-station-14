@@ -236,14 +236,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 350
+        damage: 550 #modet by MIXnikita for SS220
       behaviors:
         - !type:ChangeConstructionNodeBehavior
           node: machineFrame
         - !type:DoActsBehavior
           acts: ["Destruction"]
   - type: Gun
-    projectileSpeed: 40
+    projectileSpeed: 800 #modet by MIXnikita for SS220
     fireRate: 0.3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
@@ -266,7 +266,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineGrenade
+          - MagazineGrenadeArta #modet by MIXnikita for SS220
         insertSound:
           path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
           params:

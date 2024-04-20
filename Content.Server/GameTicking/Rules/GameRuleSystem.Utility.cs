@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Station.Components;
 using Robust.Shared.Collections;
@@ -105,7 +106,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
             return false;
         }
 
-        targetGrid = RobustRandom.Pick(possibleTargets);
+        targetGrid = possibleTargets.First(); //ss220 fixEventSpawn
 
         if (!TryComp<MapGridComponent>(targetGrid, out var gridComp))
             return false;

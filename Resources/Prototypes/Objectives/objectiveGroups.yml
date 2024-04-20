@@ -111,17 +111,19 @@
     AltarNanotrasenStealObjective: 1
     PlantRDStealObjective: 1
 
-- type: weightedRandom
-  id: ThiefObjectiveGroupAnimal
-  weights:
-    IanStealObjective: 1
-    BingusStealObjective: 1
-    McGriffStealObjective: 1
-    WalterStealObjective: 1
-    MortyStealObjective: 1
-    RenaultStealObjective: 1
-    ShivaStealObjective: 1
-    TropicoStealObjective: 1
+# SS220 Delete thief objective animals begin
+# - type: weightedRandom
+#   id: ThiefObjectiveGroupAnimal
+#   weights:
+#     IanStealObjective: 1
+#     BingusStealObjective: 1
+#     McGriffStealObjective: 1
+#     WalterStealObjective: 1
+#     MortyStealObjective: 1
+#     RenaultStealObjective: 1
+#     ShivaStealObjective: 1
+#     TropicoStealObjective: 1
+# SS220 Delete thief objective animals end
 
 - type: weightedRandom
   id: ThiefObjectiveGroupEscape

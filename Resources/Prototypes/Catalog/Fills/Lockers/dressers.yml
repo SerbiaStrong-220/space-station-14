@@ -6,7 +6,7 @@
   - type: StorageFill
     contents:
       - id: ClothingHeadHatCaptain
-      - id: ClothingHeadHatCapcap
+      - id: ClothingHeadBeretCap #SS220 CapBeret
       - id: ClothingNeckCloakCap
       - id: ClothingNeckCloakCapFormal
       - id: ClothingUniformJumpsuitCapFormal
@@ -15,6 +15,7 @@
       # Corvax-Resprite-Start
       - id: ClothingHeadCaptainHat
       - id: ClothingOuterCoatCaptain
+      - id: ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       # Corvax-Resprite-End
       - id: ClothingNeckMantleCap
       - id: ClothingOuterWinterCap
@@ -90,12 +91,13 @@
     contents:
       - id: ClothingNeckCloakQm
       - id: ClothingHeadHatBeretQM
-      - id: ClothingUniformJumpsuitQMFormal
+#      - id: ClothingUniformJumpsuitQMFormal #SS220-Fashion
       - id: ClothingUniformJumpsuitQMTurtleneck
       - id: ClothingUniformJumpskirtQMTurtleneck
       - id: ClothingHandsGlovesColorBrown
       - id: ClothingNeckMantleQM
       - id: ClothingOuterWinterQM
+      - id: ClothingOuterCoatQM #SS220-Fashion
 
 - type: entity
   id: DresserResearchDirectorFilled

@@ -1,0 +1,46 @@
+- type: entity
+  id: BaseGrenadeArta
+  name: base grenade
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - GrenadeDusterArta
+  - type: Item
+    size: Small
+  - type: Sprite
+
+- type: entity
+  id: GrenadeSuperArta
+  name: artillery penetrator
+  parent: BaseGrenadeArta
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeSuperArta
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: frag
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: frag
+    suffix: false
+    
+- type: entity
+  id: GrenadeEMPArta
+  name: EMP artillery
+  parent: BaseGrenadeArta
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeEMPArta
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: emp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: frag
+    suffix: false

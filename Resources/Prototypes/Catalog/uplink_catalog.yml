@@ -87,6 +87,12 @@
   - UplinkWeaponry
   conditions:
     - !type:BuyerWhitelistCondition
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
       components:
       - SurplusBundle
@@ -102,10 +108,12 @@
   - UplinkWeaponry
   conditions:
     - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-          - LoneOpsUplink
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
         components:
           - SurplusBundle
@@ -171,10 +179,12 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
     blacklist:
       components:
       - SurplusBundle
@@ -189,12 +199,14 @@
     Telecrystal: 30
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
+# SS220-uplink-fix begin
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#      - LoneOpsUplink
+# SS220-uplink-fix end
 
 # Explosives
 
@@ -249,10 +261,12 @@
     - UplinkExplosives
   conditions:
     - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
+# SS220-uplink-fix begin
+#      whitelist:
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
         components:
         - SurplusBundle
@@ -263,15 +277,17 @@
   description: uplink-whitehole-grenade-desc
   productEntity: WhiteholeGrenade
   cost:
-    Telecrystal: 6
+    Telecrystal: 2 #ss220-WhiteHole_Grenade fix
   categories:
     - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
+# SS220-uplink-fix begin
+#        tags:
+#          - NukeOpsUplink
+#          - LoneOpsUplink
+# SS220-uplink-fix end
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -291,11 +307,13 @@
     blacklist:
       components:
       - SurplusBundle
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
+# SS220-uplink-fix begin
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#      - LoneOpsUplink
+# SS220-uplink-fix end
 
 - type: listing
   id: UplinkC4
@@ -1298,10 +1316,12 @@
   - UplinkWearables
   conditions:
     - !type:BuyerWhitelistCondition
-      whitelist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
+# SS220-uplink-fix begin
+#   whitelist: 
+#      tags: 
+#       - NukeOpsUplink 
+#       - LoneOpsUplink
+# SS220-uplink-fix end
       blacklist:
         components:
           - SurplusBundle

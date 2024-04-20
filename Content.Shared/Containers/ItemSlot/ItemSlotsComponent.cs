@@ -113,6 +113,7 @@ namespace Content.Shared.Containers.ItemSlots
         /// </remarks>
         [DataField(readOnly: true)]
         [ViewVariables(VVAccess.ReadWrite)]
+        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)] // SS220 add-detective-camera
         public bool Locked = false;
 
         /// <summary>

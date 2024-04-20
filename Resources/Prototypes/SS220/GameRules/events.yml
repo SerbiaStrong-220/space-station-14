@@ -1,0 +1,21 @@
+- type: entity
+  id: BananaRain
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-banana-rain-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    startDelay: 10
+    earliestStart: 20
+    minimumPlayers: 15
+    weight: 0
+    duration: 60
+  - type: CableRandomSpawnRule
+    entries:
+    - id: TrashBananaPeel
+      prob: 0.07
+    specialEntries:
+    - id: TrashBananaPeelExplosive
+      prob: 0.005

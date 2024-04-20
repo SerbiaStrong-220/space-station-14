@@ -232,3 +232,13 @@
     - /Audio/SS220/Voice/MedicTF2/medic_scream_2.ogg
     - /Audio/SS220/Voice/MedicTF2/medic_scream_3.ogg
     - /Audio/SS220/Voice/MedicTF2/medic_scream_4.ogg
+    
+- type: soundCollection
+  id: MaleGiggle
+  files:
+    - /Audio/SS220/Emotes/giggles/malegiggle.ogg
+
+- type: soundCollection
+  id: FemaleGiggle
+  files:
+    - /Audio/SS220/Emotes/giggles/femalegiggle.ogg

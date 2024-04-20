@@ -537,7 +537,7 @@
         - state: icon-tools
     - type: ItemBorgModule
       items:
-        - EnergySwordDouble
+        - EnergySwordDoubleBorg #ss220-borgfix
         - PinpointerSyndicateNuclear
 
 - type: entity

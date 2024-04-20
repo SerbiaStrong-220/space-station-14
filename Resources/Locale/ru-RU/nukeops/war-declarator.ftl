@@ -1,6 +1,7 @@
 war-declarator-not-nukeops = Устройство пищит, но ничего не происходит...
 war-declarator-ui-header = Объявление войны
 war-declarator-ui-war-button = ОБЪЯВИТЬ ВОЙНУ!
+war-declarator-ui-try-war-button = Попробуйте объявить войну
 war-declarator-conditions-small-crew = Менее { $min } оперативников
 war-declarator-conditions-left-outpost = Шаттл покинул аванпост Синдиката
 war-declarator-conditions-time-out = Время на объявление войны прошло
@@ -13,4 +14,5 @@ war-declarator-boost-declared = Война объявлена!
 war-declarator-boost-declared-delay = Объявлена война! Отправление шаттла временно недоступно
 war-declarator-boost-timer = Оставшееся время: {$time}
 war-declarator-default-message = Пограничный отряд Синдиката объявляет о своем намерении уничтожить станцию при помощи ядерного устройства и призывает экипаж предпринять ничтожную попытку остановить их.
+war-declarator-lone-default-message = Одиночный ядерный оперативник Синдиката объявляет о своем намерении уничтожить станцию при помощи ядерного устройства и призывает службу безопасности предпринять ничтожную попытку остановить его.
 war-declarator-message-placeholder = Введите текст объявления...

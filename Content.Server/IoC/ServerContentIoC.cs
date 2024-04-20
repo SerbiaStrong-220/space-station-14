@@ -23,7 +23,6 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.BackEndApi;
 using Content.Server.SS220.Discord;
-using Content.Server.SS220.PrimeWhitelist;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
@@ -67,7 +66,6 @@ namespace Content.Server.IoC
             IoCManager.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
-            IoCManager.Register<Primelist>();
             IoCManager.Register<DiscordPlayerManager>(); // SS220 discord player manager
             IoCManager.Register<DiscordBanPostManager>();  // SS220 discord ban post manager
             IoCManager.Register<ServerControlController>();

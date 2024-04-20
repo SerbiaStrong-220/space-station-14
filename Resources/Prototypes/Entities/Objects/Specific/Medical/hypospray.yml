@@ -410,6 +410,7 @@
   - type: ExaminableSolution
     solution: hypospray
   - type: Hypospray
+    transferAmount: 10 #SS220 buffHypopen
     onlyMobs: false
   - type: UseDelay
     delay: 0.5
