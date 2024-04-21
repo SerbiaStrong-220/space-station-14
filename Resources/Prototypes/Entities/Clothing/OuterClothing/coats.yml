@@ -447,9 +447,9 @@
   description: A dress for special occasions.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/cap_formaldress.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/cap_coat.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/cap_formaldress.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/cap_coat.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -476,15 +476,15 @@
   description: A dress for special occasions.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/hos_formaldress.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_coat.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/hos_formaldress.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/hos_coat.rsi
   - type: Armor
     modifiers:
       coefficients:
-       Blunt: 0.6
-       Slash: 0.6
-       Piercing: 0.4
-       Heat: 0.4
+       Blunt: 0.3
+       Slash: 0.3
+       Piercing: 0.5
+       Heat: 0.2
         
 #SS220-DressTweak-End
