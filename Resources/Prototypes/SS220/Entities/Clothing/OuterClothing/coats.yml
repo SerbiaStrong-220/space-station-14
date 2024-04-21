@@ -20,7 +20,7 @@
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCEFormalDress
   name: торжественное платье старшего инженера
-  description: Сделано из самых лучших огнеупорных тканей, а золото поможет вам маршировать от Сингулярности не боясь излучения.
+  description: Сделано из самых лучших огнеупорных тканей, а золото поможет вам маршировать от Сингулярности, не боясь излучения.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/ce_coat.rsi
