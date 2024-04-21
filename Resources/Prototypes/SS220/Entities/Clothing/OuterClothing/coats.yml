@@ -62,7 +62,7 @@
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatRDFormalDress
   name: торжественное платье научного руководителя
-  description: Специально для самых величайших открытий! Устройте в вашу честь салют из взрывов артефактов и марш киборгов.
+  description: Специально для самых величайших открытий! Устройте в свою честь марш киборгов и салют из взрывающихся артефактов.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/rd_coat.rsi
