@@ -108,7 +108,7 @@
       amount: 3
     - id: ClothingBackpackCloningSet
   - type: EntityStorage
-    capacity: 200
+    capacity: 300
 
 - type: entity
   name: кровоостанавливающая мазь
@@ -152,10 +152,8 @@
   components:
    - type: StorageFill
      contents:
-      - id: SheetSteel1
-        amount: 25
-      - id: SheetGlass1
-        amount: 8
+      - id: SheetSteel
+      - id: SheetGlass
       - id: CableApcStack10
       - id: CloningPodMachineCircuitboard
       - id: MedicalScannerMachineCircuitboard
