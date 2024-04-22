@@ -104,6 +104,8 @@
       amount: 20
     - id: CableApcStack
       amount: 20
+    - id: ClothingBackpackDuffelEngineering
+      amount: 3
     - id: ClothingBackpackCloningSet
   - type: EntityStorage
     capacity: 200
