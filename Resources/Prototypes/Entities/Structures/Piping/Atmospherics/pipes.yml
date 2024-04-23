@@ -20,6 +20,10 @@
   - type: Anchorable
   - type: Rotatable
   - type: Destructible
+#ss220-PipeSound begin
+  - type: EmitSoundOnLand
+    sound: /Audio/Effects/metal_pipe.ogg
+#ss220-PipeSound end
     thresholds:
     - trigger: # for nukes
         !type:DamageTrigger
