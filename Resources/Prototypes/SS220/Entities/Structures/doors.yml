@@ -39,6 +39,18 @@
 - type: entity
   parent: AirlockGlass
   id: AirlockGlassCentcomm
+  suffix: ЦК, Открыто, Общий
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/centcomm_glass.rsi
+  - type: PaintableAirlock
+    group: Glass
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassCentcommClosed
   suffix: ЦК, Закрыто, Общий
   components:
   - type: Sprite
@@ -50,7 +62,7 @@
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommERT
+  id: AirlockGlassCentcommERTClosed
   suffix: ЦК, Закрыто, ОБР
   components:
   - type: AccessReader
@@ -60,7 +72,17 @@
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommGSN
+  id: AirlockGlassCentcommERTClosed
+  suffix: ЦК, Закрыто, ОБР
+  components:
+  - type: AccessReader
+    access: [["CentralCommandERT"]]
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: AirlockGlassCentcomm
+  id: AirlockGlassCentcommGSNClosed
   suffix: ЦК, Закрыто, ГСН
   components:
   - type: AccessReader
@@ -70,7 +92,7 @@
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommDeathSquad
+  id: AirlockGlassCentcommDeathSquadClosed
   suffix: ЦК, Закрыто, Эскадрон Смерти
   components:
   - type: AccessReader
@@ -80,7 +102,7 @@
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommCBURN
+  id: AirlockGlassCentcommCBURNClosed
   suffix: ЦК, Закрыто, отряд РХБЗ
   components:
   - type: AccessReader
@@ -91,6 +113,16 @@
 - type: entity
   parent: Airlock
   id: AirlockCentcomm
+  suffix: ЦК, Открыто
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/centcomm.rsi
+  - type: Wires
+    layoutId: AirlockCommand
+
+- type: entity
+  parent: Airlock
+  id: AirlockCentcommClosed
   suffix: ЦК, Закрыто, Общий
   components:
   - type: Sprite
@@ -101,8 +133,8 @@
     layoutId: AirlockCommand
 
 - type: entity
-  parent: AirlockCentcomm
-  id: AirlockCentcommGSN
+  parent: AirlockCentcommClosed
+  id: AirlockCentcommGSNClosed
   suffix: ЦК, Закрыто, ГСН
   components:
   - type: AccessReader
@@ -111,8 +143,8 @@
     layoutId: AirlockCommand
 
 - type: entity
-  parent: AirlockCentcomm
-  id: AirlockCentcommERT
+  parent: AirlockCentcommClosed
+  id: AirlockCentcommERTClosed
   suffix: ЦК, Закрыто, ОБР
   components:
   - type: AccessReader
@@ -121,8 +153,8 @@
     layoutId: AirlockCommand
 
 - type: entity
-  parent: AirlockCentcomm
-  id: AirlockCentcommDeathSquad
+  parent: AirlockCentcommClosed
+  id: AirlockCentcommDeathSquadClosed
   suffix: ЦК, Закрыто, Эскадрон Смерти
   components:
   - type: AccessReader
@@ -132,8 +164,8 @@
 
 
 - type: entity
-  parent: AirlockCentcomm
-  id: AirlockCentcommCBURN
+  parent: AirlockCentcommClosed
+  id: AirlockCentcommCBURNClosed
   suffix: ЦК, Закрыто, Отряд РХБЗ
   components:
   - type: AccessReader
