@@ -44,7 +44,16 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
             SubscribeLocalEvent<GasVentScrubberComponent, PowerChangedEvent>(OnPowerChanged);
             SubscribeLocalEvent<GasVentScrubberComponent, DeviceNetworkPacketEvent>(OnPacketRecv);
             SubscribeLocalEvent<GasVentScrubberComponent, WeldableChangedEvent>(OnWeldChanged);
+            SubscribeLocalEvent<GasVentScrubberComponent, MapInitEvent>(OnInit);
         }
+
+        //SS220-scrubber-mode begin
+        private void OnInit(Entity<GasVentScrubberComponent> entity, ref MapInitEvent args)
+        {
+            var scrubberMode = GasVentScrubberData.ScrubberFilters[entity.Comp.InitialFilter];
+            entity.Comp.FilterGases = scrubberMode;
+        }
+        //SS220-scrubber-mode end
 
         private void OnVentScrubberUpdated(EntityUid uid, GasVentScrubberComponent scrubber, ref AtmosDeviceUpdateEvent args)
         {

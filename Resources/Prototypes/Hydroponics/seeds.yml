@@ -7,6 +7,8 @@
   packetPrototype: WheatSeeds
   productPrototypes:
     - WheatBushel
+  mutationPrototypes:
+    - meatwheat #SS220 MeatwheatUpdate
   lifespan: 25
   maturation: 6
   production: 3

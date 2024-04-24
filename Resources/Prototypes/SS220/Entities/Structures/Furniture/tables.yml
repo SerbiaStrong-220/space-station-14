@@ -23,3 +23,159 @@
     sprite: SS220/Structures/Furniture/wooddesk_nt.rsi
   - type: Icon
     sprite: SS220/Structures/Furniture/wooddesk_nt.rsi
+
+- type: entity
+  id: TableUraniumGlass
+  parent: TableBase
+  name: uranium glass table
+  description: A square piece of uranium glass, standing on four metal legs. Pretty!
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Tables/u_glass.rsi
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Tables/u_glass.rsi
+  - type: GlassTable
+    climberDamage:
+      types:
+        Slash: 30
+    tableDamage:
+      types:
+        Blunt: 100
+    tableMassLimit: 240
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: TableFrame
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: Table
+    node: TableUraniumGlass
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepTile
+
+- type: entity
+  id: TableReinforcedPlasmaGlass
+  parent: TableBase
+  name: reinforced plasma glass table
+  description: A square piece of plasma glass, standing on four metal legs. Extra robust.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Tables/rp_glass.rsi
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Tables/rp_glass.rsi
+  - type: GlassTable
+    climberDamage:
+      types:
+        Slash: 25
+    tableDamage:
+      types:
+        Blunt: 40
+    tableMassLimit: 120
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: TableFrame
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: Table
+    node: TableReinforcedPlasmaGlass
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepTile
+
+- type: entity
+  id: TableReinforcedUraniumGlass
+  parent: TableBase
+  name: reinforced uranium glass table
+  description: A square piece of uranium glass, standing on four metal legs. Extra robust.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Tables/ru_glass.rsi
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Tables/ru_glass.rsi
+  - type: GlassTable
+    climberDamage:
+      types:
+        Slash: 25
+    tableDamage:
+      types:
+        Blunt: 40
+    tableMassLimit: 120
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: TableFrame
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: Table
+    node: TableReinforcedUraniumGlass
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepTile

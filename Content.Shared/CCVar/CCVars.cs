@@ -1091,9 +1091,9 @@ namespace Content.Shared.CCVar
         /// <summary>
         ///     Whether monstermos explosive depressurization will rip tiles..
         ///     Needs <see cref="MonstermosEqualization"/> and <see cref="MonstermosDepressurization"/> to be enabled to work.
-		///     WARNING: This cvar causes MAJOR contrast issues, and usually tends to make any spaced scene look very cluttered.
-		///     This not only usually looks strange, but can also reduce playability for people with impaired vision. Please think twice before enabling this on your server.
-		///     Also looks weird on slow spacing for unrelated reasons. If you do want to enable this, you should probably turn on instaspacing.
+        ///     WARNING: This cvar causes MAJOR contrast issues, and usually tends to make any spaced scene look very cluttered.
+        ///     This not only usually looks strange, but can also reduce playability for people with impaired vision. Please think twice before enabling this on your server.
+        ///     Also looks weird on slow spacing for unrelated reasons. If you do want to enable this, you should probably turn on instaspacing.
         /// </summary>
         public static readonly CVarDef<bool> MonstermosRipTiles =
             CVarDef.Create("atmos.monstermos_rip_tiles", false, CVar.SERVERONLY);
@@ -1295,36 +1295,6 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<bool> PrimelistEnabled =
             CVarDef.Create("primelist.enabled", false, CVar.SERVERONLY);
-
-        /// <summary>
-        ///     IP address of the Prime database server
-        /// </summary>
-        public static readonly CVarDef<string> PrimelistDatabaseIp =
-            CVarDef.Create("primelist.ip", string.Empty, CVar.SERVERONLY);
-
-        /// <summary>
-        ///     Port of the Prime database server
-        /// </summary>
-        public static readonly CVarDef<int> PrimelistDatabasePort =
-            CVarDef.Create("primelist.port", 3306, CVar.SERVERONLY);
-
-        /// <summary>
-        ///     Name of the Prime database server
-        /// </summary>
-        public static readonly CVarDef<string> PrimelistDatabaseName =
-            CVarDef.Create("primelist.database", string.Empty, CVar.SERVERONLY);
-
-        /// <summary>
-        ///     Username for the Prime database server
-        /// </summary>
-        public static readonly CVarDef<string> PrimelistDatabaseUsername =
-            CVarDef.Create("primelist.username", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
-
-        /// <summary>
-        ///     Password for the Prime database server
-        /// </summary>
-        public static readonly CVarDef<string> PrimelistDatabasePassword =
-            CVarDef.Create("primelist.password", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
         /*
          * VOTE

@@ -32,6 +32,17 @@
         amount: 5
   - type: Bloodstream
     bloodReagent: Water
+#SS220-TweakDamageSpecies-Begin
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    attackRate: 0.5
+    damage:
+      types:
+        Blunt: 10
+        Structural: 7.5
+#SS220-TweakDamageSpecies-End
   - type: Reactive
     groups:
       Flammable: [ Touch ]

@@ -16,3 +16,5 @@ comms-console-announcement-title-station = Консоль связи
 comms-console-announcement-title-centcom = Центральное командование
 comms-console-announcement-title-nukie = Ядерные оперативники Синдиката
 comms-console-announcement-title-ussp = Союз Советских Социалистических Планет
+comms-console-announcement-title-solo-nukie = Одиночного Ядерного оперативника Синдиката
+comms-console-announcement-title-solo-nukie-war = Войны Одиночным Ядерным оперативником Синдиката

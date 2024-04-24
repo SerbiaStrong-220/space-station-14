@@ -224,7 +224,7 @@
         maxVol: 30
         reagents:
         - ReagentId: Nocturine
-          Quantity: 30
+          Quantity: 20 #ss220 buffHypopen
 
 - type: entity
   id: EphedrineChemistryBottle

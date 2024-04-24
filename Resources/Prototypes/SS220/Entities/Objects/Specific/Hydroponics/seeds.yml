@@ -117,3 +117,13 @@
       seedId: wrose
     - type: Sprite
       sprite: SS220/Objects/Specific/Hydroponics/wrose.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (мясопшеница)
+  id: MeatwheatSeeds
+  components:
+    - type: Seed
+      seedId: meatwheat
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/meatwheat.rsi

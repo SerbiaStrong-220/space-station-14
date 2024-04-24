@@ -21,8 +21,6 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
-      - id: PieShooter
-        amount: 2
 
 - type: entity
   id: LockerWardenFilled
@@ -63,7 +61,7 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHandsGlovesCombat
+#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
       - id: ClothingShoesBootsJack
       - id: ClothingEyesHudSecurity
       - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
@@ -164,6 +162,8 @@
       - id: BoxEvidenceMarkers
       - id: SpeedLoaderMagnum
         amount: 2
+      - id: DetectiveHiddenCamera # SS220 add-detective-camera
+        amount: 3
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb

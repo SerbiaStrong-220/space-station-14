@@ -1,0 +1,57 @@
+- type: entity
+  id: BaseMagazineGrenadeArta
+  name: магазин "Дастер"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: MultiHandedItem
+  - type: Tag
+    tags:
+    - MagazineGrenadeArta
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - GrenadeDusterArta
+    capacity: 5
+    soundRack:
+      path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+      params:
+        variation: 0.05
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
+      params:
+        variation: 0.05
+  - type: Item
+    size: Large
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/newdustcart.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-4
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: MagazineGrenadeSuperArta
+  name: магазин пробивных снарядов
+  parent: BaseMagazineGrenadeArta
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeSuperArta
+
+- type: entity
+  id: MagazineGrenadeEMPArta
+  name: магазин ЭМИ снарядов
+  parent: BaseMagazineGrenadeArta
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeEMPArta

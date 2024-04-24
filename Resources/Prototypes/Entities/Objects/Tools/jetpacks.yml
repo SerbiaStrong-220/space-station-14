@@ -186,6 +186,7 @@
   suffix: Empty
   components:
     - type: Item
+      size: Large #SS220 876
       sprite: Objects/Tanks/Jetpacks/mini.rsi
     - type: Sprite
       sprite: Objects/Tanks/Jetpacks/mini.rsi

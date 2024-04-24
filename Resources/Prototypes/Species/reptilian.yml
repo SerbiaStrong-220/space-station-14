@@ -12,20 +12,6 @@
   femaleFirstNames: names_reptilian_female
   naming: FirstDashFirst
   buttScanTexture: /Textures/SS220/Interface/Butts/unathi.png
-  blockedJobsByAccessor: #SS220-Job-Restrictions-start
-#Командование
-    Captain: [ ]
-#ЦК
-    IAA: [ ]
-#Служба Безопасности
-    Brigmedic: [ ]
-#Медицинский отдел
-    Psychologist: [ ]
-#Сервис
-    Chef: [ ]
-    Bartender: [ ]
-    Botanist: [ ]
-#SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
   id: MobReptilianSprites

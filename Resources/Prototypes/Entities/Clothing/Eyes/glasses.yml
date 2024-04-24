@@ -236,7 +236,13 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
-  - type: ShowSecurityIcons
+  #- type: ShowSecurityIcons #ss220-blueshield-fix-begin
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological #ss220-blueshield-fix-end
 #SS220-Blueshield-end
 
 - type: entity

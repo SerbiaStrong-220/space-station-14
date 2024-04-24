@@ -25,3 +25,30 @@
       reagents:
       - ReagentId: JuiceBeet
         Quantity: 10
+        
+- type: entity
+  name: сноп мясопшеницы
+  description: Эх... мясопшеница... стоп, что?
+  id: MeatwheatBushel
+  parent: ProduceBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Produce
+    seedId: meatwheat
+  - type: SpawnItemsOnUse
+    items:
+      - id: FoodMeatWheat
+    sound:
+      path: /Audio/Effects/Footsteps/slime1.ogg
+  - type: Tag
+    tags:
+    - Meatwheat

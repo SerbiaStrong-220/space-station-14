@@ -887,12 +887,13 @@
       - ClothingUniformJumpskirtColorGrey
       - ClothingUniformJumpsuitBartender
       - ClothingUniformJumpskirtBartender
-      - ClothingHeadHatCapcap
+      - ClothingHeadBeretCap #SS220 CapBeret
+      - ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       - ClothingHeadHatCaptain
       - ClothingUniformJumpsuitCaptain
       - ClothingUniformJumpskirtCaptain
       - ClothingUniformJumpsuitCapFormal
-      - ClothingUniformJumpskirtCapFormalDress
+#      - ClothingUniformJumpskirtCapFormalDress #SS220-FormalDress
       - ClothingUniformJumpsuitCargo
       - ClothingUniformJumpskirtCargo
       - ClothingUniformJumpsuitSalvageSpecialist
@@ -925,7 +926,7 @@
       - ClothingUniformJumpsuitHoS
       - ClothingUniformJumpskirtHoS
       - ClothingUniformJumpsuitHosFormal
-      - ClothingUniformJumpskirtHosFormal
+#      - ClothingUniformJumpskirtHosFormal #SS220-FormalDress
       - ClothingUniformJumpsuitHoSAlt
       - ClothingUniformJumpskirtHoSAlt
       - ClothingUniformJumpsuitHoSBlue

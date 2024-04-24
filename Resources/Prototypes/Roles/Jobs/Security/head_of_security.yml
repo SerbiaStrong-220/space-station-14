@@ -36,7 +36,7 @@
 - type: startingGear
   id: HoSGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitClown
+    jumpsuit: ClothingUniformJumpsuitHoS
     back: ClothingBackpackHOSFilled
     shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterCoatHoSTrench

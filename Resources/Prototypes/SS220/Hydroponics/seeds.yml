@@ -309,3 +309,25 @@
       Min: 1
       Max: 4
       PotencyDivisor: 25
+
+- type: seed
+  id: meatwheat
+  name: пакет семян (мясопшеница)
+  noun: seeds-noun-seeds
+  displayName: стебли мясопшеницы
+  plantRsi: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
+  packetPrototype: MeatwheatSeeds
+  productPrototypes:
+    - MeatwheatBushel
+  lifespan: 25
+  maturation: 6
+  production: 3
+  yield: 2
+  potency: 5
+  idealLight: 8
+  nutrientConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 20
+      PotencyDivisor: 20

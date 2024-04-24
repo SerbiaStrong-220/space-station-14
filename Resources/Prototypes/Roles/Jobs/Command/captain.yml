@@ -28,7 +28,7 @@
 - type: startingGear
   id: CaptainGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitClown
+    jumpsuit: ClothingUniformJumpsuitCaptain
     back: ClothingBackpackCaptainFilled
     shoes: ClothingShoesBootsLaceup
     head: ClothingHeadHatCaptain

@@ -34,6 +34,16 @@
         color: "#2cf274"
   - type: Bloodstream
     bloodReagent: Slime # TODO Color slime blood based on their slime color or smth
+#SS220-TweakDamageSpecies-Begin 
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 4.5
+        Caustic: 0.5 #Кислотный урон сложен в лечении (мазь - 1.5; лекарство, с относительно сложным рецептом), поэтому урон так мал
+#SS220-TweakDamageSpecies-End
   - type: Barotrauma
     damage:
       types:
