@@ -16,6 +16,7 @@
   <ItemGroup>
     <PackageReference Include="FFMpegCore" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+    <PackageReference Include="Lib.Harmony" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
   <ItemGroup>

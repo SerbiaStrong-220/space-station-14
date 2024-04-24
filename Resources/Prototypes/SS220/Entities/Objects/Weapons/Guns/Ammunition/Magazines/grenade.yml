@@ -1,9 +1,10 @@
 - type: entity
   id: BaseMagazineGrenadeArta
-  name: artillery cartridge
+  name: магазин "Дастер"
   parent: BaseItem
   abstract: true
   components:
+  - type: MultiHandedItem
   - type: Tag
     tags:
     - MagazineGrenadeArta
@@ -27,7 +28,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/newdustcart.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -35,13 +36,13 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 5
+    steps: 6
     zeroVisible: false
   - type: Appearance
 
 - type: entity
   id: MagazineGrenadeSuperArta
-  name: artillery penetrator cartridge
+  name: магазин пробивных снарядов
   parent: BaseMagazineGrenadeArta
   components:
   - type: BallisticAmmoProvider
@@ -49,7 +50,7 @@
 
 - type: entity
   id: MagazineGrenadeEMPArta
-  name: EMP artillery cartridge
+  name: магазин ЭМИ снарядов
   parent: BaseMagazineGrenadeArta
   components:
   - type: BallisticAmmoProvider

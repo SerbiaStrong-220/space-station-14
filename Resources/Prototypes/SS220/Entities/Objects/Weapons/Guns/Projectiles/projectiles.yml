@@ -85,8 +85,8 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 215
-    intensitySlope: 20
+    totalIntensity: 400
+    intensitySlope: 8
     maxIntensity: 20
 
 - type: entity
