@@ -19,7 +19,10 @@
   - type: PipeAppearance
 #ss220-PipeSound begin
   - type: EmitSoundOnLand
-    sound: /Audio/Effects/metal_pipe.ogg
+    sound:
+      path: /Audio/Effects/metal_pipe.ogg
+      params:
+        volume: -3
 #ss220-PipeSound end
   - type: Anchorable
   - type: Rotatable
