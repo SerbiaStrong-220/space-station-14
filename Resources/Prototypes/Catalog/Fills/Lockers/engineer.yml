@@ -81,7 +81,8 @@
   - type: StorageFill
     contents:
       - id: ClothingOuterHardsuitAtmos
-      - id: ClothingMaskGasAtmos
+      #- id: ClothingMaskGasAtmos
+      - id: ClothingMaskGasAtmosBlue    #SS220 Blue Atmos Mask
       - id: ClothingOuterSuitAtmosFire
       - id: ClothingHeadHelmetAtmosFire
       - id: GasAnalyzer
@@ -99,7 +100,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingMaskGasAtmos
+      #- id: ClothingMaskGasAtmos
+      - id: ClothingMaskGasAtmosBlue    #SS220 Blue Atmos Mask
       - id: ClothingOuterSuitAtmosFire
       - id: ClothingHeadHelmetAtmosFire
       - id: GasAnalyzer
