@@ -1,5 +1,21 @@
 - type: entity
   parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShieldTurtle
+  name: водолазка Синего Щита
+  description: Модная водолазка Синего Щита - как же она хороша!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBlackTurtle
   name: чёрная водолазка
   description: Повседневная, но элегантная водолазка.
