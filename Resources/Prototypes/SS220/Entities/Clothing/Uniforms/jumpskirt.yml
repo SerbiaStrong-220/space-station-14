@@ -1,0 +1,164 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBlackTurtle
+  name: чёрная водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/blackturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/blackturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBlueTurtle
+  name: синяя водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/blueturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/blueturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBrownTurtle
+  name: коричневая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/brownturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/brownturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtDarkBlueTurtle
+  name: тёмно-синяя водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/darkblueturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/darkblueturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtDarkGreenTurtle
+  name: тёмно-зелёная водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/darkgreenturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/darkgreenturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtGreenTurtle
+  name: зелёная водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/greenturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/greenturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtGreyTurtle
+  name: серая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/greyturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/greyturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtLightBrownTurtle
+  name: светло-коричневая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/lightbrownturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/lightbrownturtle.rsi
+    
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtLightPurpleTurtle
+  name: светло-фиолетовая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/lightpurpleturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/lightpurpleturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtMaragoonTurtle
+  name: бордовая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/maragoonturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/maragoonturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtPinkTurtle
+  name: розовая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/pinkturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/pinkturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtRedTurtle
+  name: красная водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/redturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/redturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTealTurtle
+  name: аквамариновая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/tealturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/tealturtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtWhiteTurtle
+  name: белая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/whiteturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/whiteturtle.rsi
+    
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtYellowTurtle
+  name: желтая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/yellowturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/turtle/yellowturtle.rsi
