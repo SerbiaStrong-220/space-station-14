@@ -54,14 +54,13 @@ namespace Content.Server.Entry
         /// <inheritdoc />
         public override void Init()
         {
-            var logManager = IoCManager.Resolve<ILogManager>(); // SS220 Harmony-Patching
-            Patcher.Patch(logManager); // SS220 Harmony-Patching
-            Patcher.ClearMessageQueues(logManager);
-
             base.Init();
 
             var cfg = IoCManager.Resolve<IConfigurationManager>();
             var res = IoCManager.Resolve<IResourceManager>();
+            var logManager = IoCManager.Resolve<ILogManager>();
+
+            Patcher.Patch(logManager); // SS220 Harmony-Patching
 
             LoadConfigPresets(cfg, res, logManager.GetSawmill("configpreset"));
 
