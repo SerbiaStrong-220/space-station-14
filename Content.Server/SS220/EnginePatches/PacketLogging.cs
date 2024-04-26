@@ -93,7 +93,7 @@ public static class NetPeer_ReceiveSocketData_Patch
 }
 
 /// <summary>
-/// This patch removes all "Received unhandled library message" warnings from ReceivedUnconnectedLibraryMessage method.
+/// This patch removes "Received unhandled library message" warning.
 /// </summary>
 [HarmonyPatch(typeof(NetPeer))]
 [HarmonyPatch("ReceivedUnconnectedLibraryMessage")]
@@ -104,7 +104,7 @@ public static class NetPeer_ReceivedUnconnectedLibraryMessage_Patch
         var codes = new List<CodeInstruction>(instructions);
 
         var warningStart = 0;
-        List<(int, int)> calls = new();
+        var warningEnd = 0;
 
         for (var i = 0; i < codes.Count; i++)
         {
@@ -112,40 +112,33 @@ public static class NetPeer_ReceivedUnconnectedLibraryMessage_Patch
                 && codes[i].operand is string s)
             {
                 if (s == "Received unhandled library message ")
-                {
-                    if (warningStart != 0)
-                        throw new Exception("Failed to patch NetPeer.ReceivedUnconnectedLibraryMessage: Found beginning of a call (" + warningStart + "), but didn't find end. Check if engine has been updated.");
                     warningStart = i - 1; // -1 is offset to ldarg.0
-
-                    if (Patcher.HARMONY_VERBOSE_LOGGING)
-                        FileLog.LogBuffered("\"Received unhandled library message\" warning start: " + warningStart);
-                }
             }
 
             if (codes[i].opcode == OpCodes.Call
                 && codes[i].operand is MethodInfo methodInfo)
             {
-                if (methodInfo.Name == "LogWarning" && warningStart != 0)
+                if (methodInfo.Name == "LogWarning" && warningEnd == 0 && warningStart != 0)
                 {
-                    calls.Add((warningStart, i));
-                    warningStart = 0;
-
-                    if (Patcher.HARMONY_VERBOSE_LOGGING)
-                        FileLog.LogBuffered("\"Received unhandled library message\" warning end: " + i);
+                    warningEnd = i;
+                    break;
                 }
             }
         }
 
-        if (calls.Count == 0)
-            throw new Exception("Failed to patch NetPeer.ReceivedUnconnectedLibraryMessage: No calls were found. Check if engine has been updated.");
+        if (Patcher.HARMONY_VERBOSE_LOGGING)
+        {
+            FileLog.LogBuffered("\"Received unhandled library message\" warning start: " + warningStart);
+            FileLog.LogBuffered("\"Received unhandled library message\" warning end: " + warningEnd);
+        }
+
+        if (warningStart == 0 || warningEnd == 0)
+            throw new Exception("Failed to patch NetPeer.ReceivedUnconnectedLibraryMessage. Check if engine has been updated. LENGTH:" + codes.Count + " INDEXES: warningStart: " + warningStart + ", warningEnd: " + warningEnd);
 
         // Cut out the warning message construction & log call.
-        foreach (var (callStart, callEnd) in calls)
+        for (var i = warningStart; i <= warningEnd; i++)
         {
-            for (var i = callStart; i <= callEnd; i++)
-            {
-                codes[i].opcode = OpCodes.Nop;
-            }
+            codes[i].opcode = OpCodes.Nop;
         }
 
         return codes.AsEnumerable();
