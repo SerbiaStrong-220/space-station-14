@@ -69,16 +69,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/blueturtle_alt.rsi
 
-#- type: entity
-#  parent: ClothingUniformBase
-#  id: ClothingUniformJumpsuitBrownTurtle
-#  name: коричневая водолазка
-#  description: Повседневная, но элегантная водолазка.
-#  components:
-#  - type: Sprite
-#    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/brownturtle.rsi
-#  - type: Clothing
-#    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/brownturtle.rsi
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBrownTurtle
+  name: коричневая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/brownturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/brownturtle.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -333,16 +333,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/whiteturtle_alt.rsi
 
-#- type: entity
-#  parent: ClothingUniformBase
-#  id: ClothingUniformJumpsuitYellowTurtle
-#  name: желтая водолазка
-#  description: Повседневная, но элегантная водолазка.
-#  components:
-#  - type: Sprite
-#    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/yellowturtle.rsi
-#  - type: Clothing
-#    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/yellowturtle.rsi
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitYellowTurtle
+  name: желтая водолазка
+  description: Повседневная, но элегантная водолазка.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/yellowturtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/turtle/yellowturtle.rsi
 
 - type: entity
   parent: ClothingUniformBase
