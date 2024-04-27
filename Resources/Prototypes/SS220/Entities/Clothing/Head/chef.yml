@@ -75,3 +75,30 @@
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatChefNanotrasen
+  name: синий поварской колпак
+  description: Владелец этого колпака точно не допустит, чтобы его волосы попали в чужую еду. Судя по еде, так и есть.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/Chef/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/Chef/chef_nt.rsi
+  - type: Storage
+    grid:
+    - 0,0,0,0
+  - type: UserInterface
+    interfaces:
+      - key: enum.StorageUiKey.Key
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon

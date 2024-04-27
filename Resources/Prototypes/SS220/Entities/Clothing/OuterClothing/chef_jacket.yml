@@ -30,3 +30,15 @@
     sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterJacketChefNanotrasen
+  name: жакет заслуженного шеф-повара NanoTrasen
+  description: Фартук-жакет, используемый шеф-поваром высочайшего класса - его мастерство неоспоримо.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi

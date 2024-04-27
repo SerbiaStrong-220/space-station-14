@@ -155,6 +155,46 @@
         - Utensil
 
 - type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltChefApronNanotrasen
+  name: синий фартук
+  description: Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+  - type: Storage
+    whitelist:
+      tags:
+        - KitchenKnife
+        - Cleaver
+        - RollingPin
+        - Coldsauce
+        - Enzyme
+        - Hotsauce
+        - Ketchup
+        - BBQsauce
+        - SaltShaker
+        - PepperShaker
+        - CigPack
+        - Packet
+        - Skewer
+        - MonkeyCube
+        #ss220 chiefs belt start
+        - WaterBottle
+        - Vinegar
+        - OilOlive
+        - GlassBeaker
+        #ss220 chiefs belt end
+        - Mayo
+      components:
+        - Mousetrap
+        - Smokable
+        - Utensil
+
+- type: entity
   id: ClothingBeltChefApronWhiteFilled
   parent: ClothingBeltChefApronWhite
   suffix: Заполненный
@@ -188,6 +228,16 @@
   id: ClothingBeltChefApronRedFilled
   parent: ClothingBeltChefApronRed
   suffix: Заполненный
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodShakerSalt
+    - id: FoodShakerPepper
+
+- type: entity
+  id: ClothingBeltChefApronNanotrasenFilled
+  parent: ClothingBeltChefApronNanotrasen
+  suffix: Заполненный, Не маппить, Сеньор
   components:
   - type: StorageFill
     contents:

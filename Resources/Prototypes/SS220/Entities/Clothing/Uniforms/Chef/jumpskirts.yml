@@ -30,3 +30,15 @@
     sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefNanotrasen
+  name: униформа заслуженного шеф-повара NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
