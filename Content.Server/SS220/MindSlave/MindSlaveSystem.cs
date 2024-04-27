@@ -1,18 +1,29 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Antag;
+using Content.Server.Body.Components;
+using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.Systems;
+using Content.Server.Objectives.Components;
+using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Shared.Cloning;
+using Content.Shared.Gibbing.Events;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Mobs;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.Roles;
 using Content.Shared.SS220.MindSlave;
-using Content.Shared.Tag;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MindSlave;
 
@@ -23,9 +34,16 @@ public sealed class MindSlaveSystem : EntitySystem
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
+    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
 
     [ValidatePrototypeId<AntagPrototype>]
     private const string MindSlaveAntagId = "MindSlave";
+
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string MindSlaveObjectiveId = "MindSlaveObeyObjective";
 
     [ValidatePrototypeId<NpcFactionPrototype>]
     private const string NanoTransenFactionId = "NanoTransen";
@@ -38,19 +56,43 @@ public sealed class MindSlaveSystem : EntitySystem
     /// <summary>
     /// Dictionary, containing list of all enslaved minds (as a key), and their master (as a value).
     /// </summary>
-    public Dictionary<EntityUid, EntityUid> MindSlaves { get; private set; } = new();
+    public Dictionary<EntityUid, EntityUid> EnslavedMinds { get; private set; } = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindSlaveComponent, MapInitEvent>(OnMindSlaveImplanted);
+        SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDead);
+        SubscribeLocalEvent<MindSlaveComponent, MobStateChangedEvent>(OnDead);
+        SubscribeLocalEvent<MindSlaveComponent, CloningEvent>(OnCloned);
         SubscribeLocalEvent<SubdermalImplantComponent, MindSlaveRemoved>(OnMindSlaveRemoved);
     }
 
-    private void OnMindSlaveImplanted(Entity<MindSlaveComponent> entity, ref MapInitEvent args)
+    private void OnMasterDead(Entity<MindSlaveMasterComponent> entity, ref MobStateChangedEvent args)
     {
-        Log.Debug("lmaooooo slave");
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        //NOT WORKING, ENUMERATION STOPS DUE TO CHANGES
+        var slaves = entity.Comp.enslavedEntities.GetEnumerator();
+        while (slaves.MoveNext())
+            TryRemoveSlave(slaves.Current);
+    }
+
+    private void OnDead(Entity<MindSlaveComponent> entity, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead || !IsEnslaved(entity))
+            return;
+
+        TryRemoveSlave(entity);
+    }
+
+    private void OnCloned(Entity<MindSlaveComponent> entity, ref CloningEvent args)
+    {
+        if (!IsEnslaved(entity))
+            return;
+
+        TryRemoveSlave(entity);
     }
 
     private void OnMindSlaveRemoved(Entity<SubdermalImplantComponent> mind, ref MindSlaveRemoved args)
@@ -61,6 +103,23 @@ public sealed class MindSlaveSystem : EntitySystem
         TryRemoveSlave(args.Slave.Value);
     }
 
+    //I need all of this for the TraitorMinds list
+    private void GetTraitorGamerule(out EntityUid? ruleEntity, out TraitorRuleComponent? component)
+    {
+        var gameRules = _gameTicker.GetActiveGameRules().GetEnumerator();
+        ruleEntity = null;
+        while (gameRules.MoveNext())
+        {
+            if (!HasComp<TraitorRuleComponent>(gameRules.Current))
+                continue;
+
+            ruleEntity = gameRules.Current;
+            break;
+        }
+
+        TryComp(ruleEntity, out component);
+    }
+
     /// <summary>
     /// Makes entity a slave, converting it into an antag.
     /// </summary>
@@ -69,6 +128,9 @@ public sealed class MindSlaveSystem : EntitySystem
     /// <returns>Whether enslaving were succesfull.</returns>
     public bool TryMakeSlave(EntityUid slave, EntityUid master)
     {
+        if (IsEnslaved(slave))
+            return false;
+
         if (!_mind.TryGetMind(slave, out var mindId, out var mindComp))
             return false;
 
@@ -81,28 +143,53 @@ public sealed class MindSlaveSystem : EntitySystem
             return false;
         }
 
-        //Assign role to the mind
-        _role.MindAddRole(mindId, new MindSlaveComponent
+        var objective = _objectives.TryCreateObjective(mindId, mindComp, MindSlaveObjectiveId);
+        _role.MindAddRole(mindId, new MindSlaveRoleComponent
         {
             PrototypeId = MindSlaveAntagId,
-            masterEntity = master
+            masterEntity = master,
+            objectiveEntity = objective
         }, mindComp, true);
 
-        //Assign briefing
         var masterMindName = masterMindComp.CharacterName ?? Loc.GetString("mindslave-unknown-master");
         var briefing = Loc.GetString("mindslave-briefing-slave", ("master", masterMindName));
-        _antagSelection.SendBriefing(slave, briefing, null, GreetSoundNotification);
+        _antagSelection.SendBriefing(slave, briefing, Color.Red, GreetSoundNotification);
 
-        _role.MindAddRole(mindId, new RoleBriefingComponent
+        if (mindComp.CharacterName != null)
         {
-            Briefing = briefing.ToString()
-        }, mindComp, true);
+            var briefingMaster = Loc.GetString("mindslave-briefing-slave-master", ("name", mindComp.CharacterName), ("ent", slave));
+            _popup.PopupEntity(briefingMaster, slave, master);
+            _antagSelection.SendBriefing(master, briefingMaster, null, null);
+        }
 
-        //Change the faction
+        //If we fail to add objective - try to use briefing for that...
+        if (objective != null && TryComp<TargetObjectiveComponent>(objective.Value, out var targetObjective))
+        {
+            _targetObjective.SetTarget(objective.Value, masterMindId, targetObjective);
+            _targetObjective.ResetEntityName(objective.Value, targetObjective);
+            _mind.AddObjective(mindId, mindComp, objective.Value);
+        }
+        else
+        {
+            _role.MindAddRole(mindId, new RoleBriefingComponent
+            {
+                Briefing = briefing.ToString()
+            }, mindComp, true);
+        }
+
+        EnsureComp<MindSlaveComponent>(slave);
+
+        var masterComp = EnsureComp<MindSlaveMasterComponent>(master);
+        masterComp.enslavedEntities.Add(slave);
+        Dirty(master, masterComp);
+
         _npcFaction.RemoveFaction(slave, NanoTransenFactionId, false);
         _npcFaction.AddFaction(slave, SyndicateFactionId);
 
-        MindSlaves.Add(mindId, masterMindId);
+        EnslavedMinds.Add(mindId, masterMindId);
+        GetTraitorGamerule(out var gameRuleEntity, out var gameRule);
+        if (gameRule != null && gameRuleEntity != null)
+            _traitorRule.AddToTraitorList(mindId, gameRuleEntity.Value, gameRule);
 
         return true;
     }
@@ -114,22 +201,49 @@ public sealed class MindSlaveSystem : EntitySystem
     /// <returns>Whether removing MindSlave were succesfull.</returns>
     public bool TryRemoveSlave(EntityUid slave)
     {
+        if (!IsEnslaved(slave))
+            return false;
+
         if (!_mind.TryGetMind(slave, out var mindId, out var mindComp))
             return false;
 
-        if (!HasComp<MindSlaveComponent>(mindId))
+        if (!TryComp<MindSlaveRoleComponent>(mindId, out var mindSlave))
             return false;
 
         var briefing = Loc.GetString("mindslave-removed-slave");
-        _antagSelection.SendBriefing(slave, briefing, null, null);
+        _antagSelection.SendBriefing(slave, briefing, Color.Red, null);
 
-        _role.MindRemoveRole<MindSlaveComponent>(mindId);
-        _role.MindRemoveRole<RoleBriefingComponent>(mindId);
+        var master = mindSlave.masterEntity;
+        if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
+        {
+            var briefingMaster = mindComp.CharacterName != null ? Loc.GetString("mindslave-removed-slave-master", ("name", mindComp.CharacterName), ("ent", slave)) :
+                "mindslave-removed-slave-master-unknown";
+
+            _antagSelection.SendBriefing(master.Value, briefingMaster, Color.Red, null);
+            _popup.PopupEntity(briefingMaster, master.Value, master.Value);
+
+            masterComponent.enslavedEntities.Remove(slave);
+            Dirty(master.Value, masterComponent);
+        }
+
+        _role.MindRemoveRole<MindSlaveRoleComponent>(mindId);
+
+        //If slave had a valid objective - remove it, otherwise - remove briefing
+        var objective = mindSlave.objectiveEntity;
+        if (objective != null)
+            _mind.TryRemoveObjective(mindId, mindComp, objective.Value);
+        else
+            _role.MindTryRemoveRole<RoleBriefingComponent>(mindId);
+
+        RemComp<MindSlaveComponent>(slave);
 
         _npcFaction.RemoveFaction(slave, SyndicateFactionId, false);
         _npcFaction.AddFaction(slave, NanoTransenFactionId);
 
-        MindSlaves.Remove(mindId);
+        EnslavedMinds.Remove(mindId);
+        GetTraitorGamerule(out var gameRuleEntity, out var gameRule);
+        if (gameRule != null && gameRuleEntity != null)
+            _traitorRule.RemoveFromTraitorList(mindId, gameRuleEntity.Value, gameRule);
 
         return true;
     }
@@ -144,6 +258,6 @@ public sealed class MindSlaveSystem : EntitySystem
         if (!_mind.TryGetMind(entity, out var mindId, out var mindComp))
             return false;
 
-        return HasComp<MindSlaveComponent>(mindId);
+        return HasComp<MindSlaveRoleComponent>(mindId);
     }
 }

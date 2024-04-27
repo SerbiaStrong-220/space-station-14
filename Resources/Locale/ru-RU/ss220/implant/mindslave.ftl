@@ -1,5 +1,8 @@
 mindslave-briefing-slave = Ваша воля сломлена инородным ИИ, теперь вы подчиняетесь { $master }.
 mindslave-removed-slave = Ваш разум вновь помутнен... Вы забираете контроль над своей волей, однако забываете всё, что произошло после потери контроля!
+mindslave-briefing-slave-master = Вы получили контроль над { $name }! Теперь {SUBJECT($ent)} подчиняется вашей воле.
+mindslave-removed-slave-master = Вы потеряли контроль над { $name }! {CAPITALIZE(SUBJECT($ent))} забывает всё, что произошло после потери контроля.
+mindslave-removed-slave-master-unknown = Вы потеряли контроль над одним из своих подчиненных разумов!
 # хз че еще тут написать можно было
 mindslave-unknown-master = ЛИЧНОСТЬ СКРЫТА
 mindslave-enslaving-yourself-attempt = Нельзя подчинить разум самому себе!
@@ -15,5 +18,4 @@ ent-MindSlaveImplant = Подчинитель разума
 #role
 roles-antag-syndicate-mindslave-name = Подчиненный разум
 roles-antag-syndicate-mindslave-objective = Ваш разум подчинен! Вы обязаны исполнять волю своего подчинителя.
-mindslave-round-end-name = подчиненный разум
-mindslave-round-end-info = Этот разум был подчинен { $master }!
+objective-condition-mindslave-obey-master = Подчиняться воле { $targetName }, { $job }.

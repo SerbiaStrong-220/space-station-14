@@ -40,7 +40,6 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly ObjectivesSystem _objectives = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MindSlaveSystem _mindSlave = default!;
 
     private int PlayersPerTraitor => _cfg.GetCVar(CCVars.TraitorPlayersPerTraitor);
     private int MaxTraitors => _cfg.GetCVar(CCVars.TraitorMaxTraitors);
@@ -135,6 +134,24 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             comp.SelectionStatus = TraitorRuleComponent.SelectionState.ReadyToStart;
         }
     }
+
+    //SS220-mindslave begin
+    public void AddToTraitorList(EntityUid mind, EntityUid gameRuleEntity, TraitorRuleComponent? component = null)
+    {
+        if (!Resolve(gameRuleEntity, ref component))
+            return;
+
+        component.TraitorMinds.Add(mind);
+    }
+
+    public void RemoveFromTraitorList(EntityUid mind, EntityUid gameRuleEntity, TraitorRuleComponent? component = null)
+    {
+        if (!Resolve(gameRuleEntity, ref component))
+            return;
+
+        component.TraitorMinds.Remove(mind);
+    }
+    //SS220-mindslave end
 
     public bool MakeTraitor(List<EntityUid> traitors, TraitorRuleComponent component, bool giveUplink = true, bool giveObjectives = true)
     {

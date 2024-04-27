@@ -1,4 +1,4 @@
-﻿using Content.Server.NPC.Components;
+using Content.Server.NPC.Components;
 using Content.Shared.Dataset;
 using Content.Shared.Random;
 using Content.Shared.Roles;

@@ -1,0 +1,15 @@
+- type: entity
+  noSpawn: true
+  parent: BaseSocialObjective
+  id: MindSlaveObeyObjective
+  description: Ваш разум теперь находится под контролем другого человека, следуйте его воле.
+  components:
+  - type: Objective
+    issuer: syndicate
+    difficulty: 1
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: TargetObjective
+    title: objective-condition-mindslave-obey-master
+  - type: SurviveCondition
