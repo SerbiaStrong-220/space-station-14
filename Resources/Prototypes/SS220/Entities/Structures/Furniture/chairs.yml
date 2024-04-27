@@ -334,7 +334,7 @@
             max: 1
   - type: Tag
     tags:
-    - Steel
+      - Steel
   - type: StaticPrice
     price: 75
 
@@ -373,6 +373,6 @@
             max: 1
   - type: Tag
     tags:
-    - Steel
+      - Steel
   - type: StaticPrice
     price: 75
