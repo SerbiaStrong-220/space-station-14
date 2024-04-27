@@ -1,13 +1,5 @@
 <Document>
-## Начало
-Это не все существующие рецепты, этот список предназначен для демонстрации основ.
-
-Продукты смешиваются в мензурке, еда готовится в микроволновке. Время готовки обычно указывается в рецепте.
-
-ВНИМАНИЕ: Это не автоматически сгенерированный список, все, что здесь перечислено, может устареть. На Wiki есть гораздо больше, чем перечислено здесь.
-
-## Основы: Смешивание
-
+## Смешивание:
 - Тесто = 15 муки, 10 воды
 - Кукурузное тесто = 1 яйцо (6 ед.), 10 молока, 15 кукурузной муки
 - Tortila Dough = 15 Cornmeal, 10 Water
@@ -40,49 +32,13 @@
 <GuideEntityEmbed Entity="FoodSnackChocolateBar"/>
 </Box>
 
-## Второстепенные продукты
+## Прочее
 
-- Кусочек теста: нарезать тесто
-- Булочка: положить в микроволновку кусочек теста на 5 секунд
-- Сырая котлета: нарезать сырое мясо
-- Сырный ломтик: нарезать головку сыра
-- Плоское тесто: раскатайте тесто скалкой либо другим крыглым объектом (огнетушитель, жестяная банка, бутылка).
-- Tortilla Dough Slice: cut Tortilla Dough
-- Flat Tortilla Dough: Use a rolling pin or a round object (fire extinguisher, soda can, bottle) on Tortilla Dough Slice
-- Taco Shell: Microwave Flat Tortilla Dough for 5 Seconds
+- Кусок теста: Разрежьте Тесто
+- Сырая котлета: Разрежьте сырое мясо
+- Кусок сыра: Разрежьте головку сыра
 
-## Примеры блюд
-
-- Хлеб: положить в микроволновку тесто на 10 секунд
-- Бургер: положить в микроволновку 1 булочку и 1 сырое мясо на 10 секунд
-- Томатный суп: 10 ед. воды, 1 пустая миска и 2 помидора на 10 секунд
-- Цитрусовый салат: 1 пустая миска, 1 лемон, 1 лайм, 1 апельсин на 5 секунд
-- Маргарита: положить в микроволновку 1 плоское тесто, 1 сырный ломтик и 4 помидора на 30 секунд
-- Торт: 1 тесто для торта в микроволновку на 15 секунд
-- Яблочный пирог: 1 тесто для пирога, 3 яблока и 1 формочку для пирога на 15 секунд
-- Beef Taco: Microwave 1 Taco Shell, 1 Raw Meat Cutlet, 1 Cheese Wedge for 10 Seconds
-- Cuban Carp : Microwave 1 Dough, 1 Cheese Wedge, 1 Chili, 1 Carp Meat for 15 Seconds
-- Banana Cream Pie : Microwave 1 Pie Dough, 3 Bananas, and 1 Pie Tin for 15 Seconds
-- Carrot Fries : Microwave 1 Carrot, 15u Salt for 15 Seconds
-- Pancake : Microwave 5u Flour, 5u Milk, 1 Egg (6u) for 5 Seconds
-
-<Box>
-<GuideEntityEmbed Entity="FoodBreadPlain"/>
-<GuideEntityEmbed Entity="FoodBurgerPlain"/>
-<GuideEntityEmbed Entity="FoodSoupTomato"/>
-<GuideEntityEmbed Entity="FoodSaladCitrus"/>
-</Box>
-<Box>
-<GuideEntityEmbed Entity="FoodPizzaMargherita"/>
-<GuideEntityEmbed Entity="FoodCakePlain"/>
-<GuideEntityEmbed Entity="FoodPieApple"/>
-<GuideEntityEmbed Entity="FoodTacoBeef"/>
-</Box>
-<Box>
-<GuideEntityEmbed Entity="FoodMealCubancarp"/>
-<GuideEntityEmbed Entity="FoodPieBananaCream"/>
-<GuideEntityEmbed Entity="FoodMealFriesCarrot"/>
-<GuideEntityEmbed Entity="FoodBakedPancake"/>
-</Box>
+## Рецепты
+<GuideCookingRecipeGroupEmbed/>
 
 </Document>

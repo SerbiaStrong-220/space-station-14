@@ -1,0 +1,45 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Vertical"
+              Margin="5 5 5 5">
+    <PanelContainer HorizontalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BorderThickness="1" BorderColor="#777777"/>
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer Name="NameBackground" HorizontalExpand="True" VerticalExpand="False">
+                <RichTextLabel Name="ProductsLabelTitle" HorizontalAlignment="Center"/>
+            </PanelContainer>
+
+            <BoxContainer Name="RecipeContainer" HorizontalExpand="True" Orientation="Vertical">
+                <!-- <Label Name="RecipeName" Text="{Loc 'guidebook-reagent-recipes-header'}"/> -->
+                <BoxContainer Name="RecipesDescriptionContainer"
+                                Margin="10 0 10 0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Stretch"
+                                HorizontalExpand="True">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
+                        <RichTextLabel Name="IngredientsLabel"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                    </BoxContainer>
+                    <BoxContainer Orientation="Vertical"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0">
+                        <TextureRect
+                            Name="InstrumentIcon"
+                            TexturePath="/Textures/Interface/Misc/beakerlarge.png"
+                            Stretch="KeepCentered"/>
+                        <RichTextLabel Name="InstrumentName"
+                                HorizontalAlignment="Center"/>
+                    </BoxContainer>
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
+                        <RichTextLabel Name="ProductsLabel"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

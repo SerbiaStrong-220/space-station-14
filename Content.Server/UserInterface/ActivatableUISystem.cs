@@ -35,6 +35,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         SubscribeLocalEvent<BoundUserInterfaceMessageAttempt>(OnBoundInterfaceInteractAttempt);
 
         SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<ActivationVerb>>(AddOpenUiVerb);
+        SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeOpenUiVerb);
 
         SubscribeLocalEvent<UserInterfaceComponent, OpenUiActionEvent>(OnActionPerform);
 
@@ -84,6 +85,10 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (!args.CanAccess)
             return;
 
+        // SS220 Alternative-open-verb
+        if (component.AltentativeOnly)
+            return;
+
         //SS220-Ghosts-paper-reading
         if (component.RequireHands && (args.Hands == null && !HasComp<GhostComponent>(args.User)))
             return;
@@ -101,9 +106,39 @@ public sealed partial class ActivatableUISystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
+    // SS220 Alternative-open-verb
+    private void AddAlternativeOpenUiVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess)
+            return;
+
+        if (!component.AltentativeOnly)
+            return;
+
+        //SS220-Ghosts-paper-reading
+        if (component.RequireHands && (args.Hands == null && !HasComp<GhostComponent>(args.User)))
+            return;
+
+        if (component.InHandsOnly && args.Using != uid)
+            return;
+
+        if (!args.CanInteract && (!component.AllowSpectator || !HasComp<GhostComponent>(args.User)))
+            return;
+
+        AlternativeVerb verb = new();
+        verb.Act = () => InteractUI(args.User, uid, component);
+        verb.Text = Loc.GetString(component.VerbText);
+
+        args.Verbs.Add(verb);
+    }
+
     private void OnActivate(EntityUid uid, ActivatableUIComponent component, ActivateInWorldEvent args)
     {
         if (args.Handled)
+            return;
+
+        // SS220 Alternative-open-verb
+        if (component.AltentativeOnly)
             return;
 
         if (component.InHandsOnly)
@@ -115,6 +150,10 @@ public sealed partial class ActivatableUISystem : EntitySystem
     private void OnUseInHand(EntityUid uid, ActivatableUIComponent component, UseInHandEvent args)
     {
         if (args.Handled)
+            return;
+
+        // SS220 Alternative-open-verb
+        if (component.AltentativeOnly)
             return;
 
         if (component.rightClickOnly)
