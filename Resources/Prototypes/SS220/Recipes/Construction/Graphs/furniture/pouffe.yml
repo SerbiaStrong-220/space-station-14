@@ -1,0 +1,55 @@
+- type: constructionGraph
+  id: SeatPouffeRed
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: chairPouffeRed
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 1
+    - node: chairPouffeRed
+      entity: ChairPouffeRed
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 3
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+- type: constructionGraph
+  id: SeatPouffeCyan
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: chairPouffeCyan
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Steel
+              amount: 3
+              doAfter: 1
+    - node: chairPouffeCyan
+      entity: ChairPouffeCyan
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 3
+          steps:
+            - tool: Screwing
+              doAfter: 1

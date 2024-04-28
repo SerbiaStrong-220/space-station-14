@@ -35,7 +35,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
-using Content.Server.SS220.EnginePatches;
 
 namespace Content.Server.Entry
 {
@@ -54,14 +53,11 @@ namespace Content.Server.Entry
         /// <inheritdoc />
         public override void Init()
         {
-            var logManager = IoCManager.Resolve<ILogManager>(); // SS220 Harmony-Patching
-            Patcher.Patch(logManager); // SS220 Harmony-Patching
-            Patcher.ClearMessageQueues(logManager);
-
             base.Init();
 
             var cfg = IoCManager.Resolve<IConfigurationManager>();
             var res = IoCManager.Resolve<IResourceManager>();
+            var logManager = IoCManager.Resolve<ILogManager>();
 
             LoadConfigPresets(cfg, res, logManager.GetSawmill("configpreset"));
 
@@ -118,7 +114,8 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
                 IoCManager.Resolve<DiscordPlayerManager>().Initialize(); // SS220 discord player manager
                 IoCManager.Resolve<DiscordBanPostManager>().Initialize(); // SS220 discord ban post manager
-                IoCManager.Resolve<ServerControlController>().Initialize();
+                IoCManager.Resolve<ServerControlController>().Initialize(); // SS220 Backend-Api
+                IoCManager.Resolve<ServerApi>().Initialize();
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();
@@ -184,6 +181,7 @@ namespace Content.Server.Entry
         {
             _playTimeTracking?.Shutdown();
             _dbManager?.Shutdown();
+            IoCManager.Resolve<ServerApi>().Shutdown();
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)

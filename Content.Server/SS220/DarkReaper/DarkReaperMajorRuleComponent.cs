@@ -10,11 +10,5 @@ public sealed partial class DarkReaperMajorRuleComponent : Component
     [DataField]
     public EntProtoId RunePrototypeId = "DarkReaperRune";
 
-    [DataField]
-    public ProtoId<AntagPrototype> RoleProtoId = "DarkReaper";
-
-    [DataField]
-    public int MinPlayers = 30;
-
     public EntityUid? ReaperMind;
 }

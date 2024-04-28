@@ -1,0 +1,33 @@
+- type: construction
+  name: red pouffe
+  id: ChairPouffeRed
+  graph: SeatPouffeRed
+  startNode: start
+  targetNode: chairPouffeRed
+  category: construction-category-furniture
+  description: Surprisingly soft, just what you need after a hard day at work.
+  icon:
+    sprite: SS220/Structures/Furniture/pouffe.rsi
+    state: pouffe-red
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: cyan pouffe
+  id: ChairPouffeCyan
+  graph: SeatPouffeCyan
+  startNode: start
+  targetNode: chairPouffeCyan
+  category: construction-category-furniture
+  description: Surprisingly soft, just what you need after a hard day at work.
+  icon:
+    sprite: SS220/Structures/Furniture/pouffe.rsi
+    state: pouffe-cyan
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

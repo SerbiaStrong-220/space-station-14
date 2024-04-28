@@ -110,7 +110,7 @@
     voltage: Medium
     node: input
   - type: PowerNetworkBattery
-    canSupply: false
+    canDischarge: false
     maxSupply: 0
     maxChargeRate: 100
     supplyRampTolerance: 5000

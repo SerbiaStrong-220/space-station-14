@@ -3,6 +3,7 @@ using Content.Server.EUI;
 using Content.Server.Ghost.Components;
 using Content.Server.Paper;
 using Content.Shared.Eui;
+using Content.Shared.Fax.Components;
 using Content.Shared.Fax;
 using Content.Shared.Follower;
 using Content.Shared.Ghost;
