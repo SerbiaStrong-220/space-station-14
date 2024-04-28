@@ -244,7 +244,7 @@
       - id: PlushieLizard
         prob: 0.03
         orGroup: dresserthirdloot
-      - id: ClothingUniformJumpskirtShrineMaiden #SS220-tohoUpdate
+      - id: ClothingOuterSuitShrineMaiden
         prob: 0.03
         orGroup: dressersecondloot
       - id: ClothingOuterClownPriest
