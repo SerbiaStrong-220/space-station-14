@@ -17,7 +17,7 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
-  
+
 - type: loadoutGroup
   id: Glasses
   name: loadout-group-glasses
@@ -26,7 +26,7 @@
   - Glasses
   - GlassesJamjar
   - GlassesJensen
-  
+
 # Command
 - type: loadoutGroup
   id: CaptainHead
@@ -184,6 +184,10 @@
   minLimit: 0
   loadouts:
   - ChefHead
+  - ChefHeadWhite #SS220 Chef Resprite start
+  - ChefHeadGreen
+  - ChefHeadBlack
+  - ChefHeadSenior #SS220 Chef Resprite end
 
 - type: loadoutGroup
   id: ChefMask
@@ -197,7 +201,15 @@
   name: loadout-group-chef-jumpsuit
   loadouts:
   - ChefJumpsuit
+  - ChefJumpsuitWhite #SS220 Chef Resprite start
+  - ChefJumpsuitGreen
+  - ChefJumpsuitBlack
+  - ChefJumpsuitSenior #SS220 Chef Resprite end
   - ChefJumpskirt
+  - ChefJumpskirtWhite #SS220 Chef Resprite start
+  - ChefJumpskirtGreen
+  - ChefJumpskirtBlack
+  - ChefJumpskirtSenior #SS220 Chef Resprite end
 
 - type: loadoutGroup
   id: ChefOuterClothing
@@ -206,6 +218,10 @@
   loadouts:
   - ChefApron
   - ChefJacket
+  - ChefJacketWhite #SS220 Chef Resprite start
+  - ChefJacketGreen
+  - ChefJacketBlack
+  - ChefJacketSenior #SS220 Chef Resprite end
   - ChefWintercoat
 
 - type: loadoutGroup
