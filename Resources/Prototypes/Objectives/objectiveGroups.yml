@@ -53,7 +53,7 @@
   id: ThiefBigObjectiveGroups
   weights:
     ThiefObjectiveGroupStructure: 0 #Temporarily disabled until obvious ways to steal structures are added
-    ThiefObjectiveGroupAnimal: 2
+#    ThiefObjectiveGroupAnimal: 2 # SS220 Delete thief objective animals
 
 - type: weightedRandom
   id: ThiefEscapeObjectiveGroups
