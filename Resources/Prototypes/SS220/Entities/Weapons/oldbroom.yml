@@ -1,7 +1,7 @@
 ﻿- type: entity
   name: старая метла
   parent: BaseItem
-  id: MagicBroom
+  id: OldBroom
   description: Обычная не волшебная метла. Только для реквизита.
   components:
   - type: Sprite

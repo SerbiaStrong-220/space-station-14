@@ -27,13 +27,13 @@
     ClothingOuterSuitMonkey: 2
     ClothingHeadHatPumpkin: 2
     ClothingHeadHatShrineMaidenWig: 2
-    ClothingOuterSuitShrineMaiden: 2
+    ClothingUniformJumpskirtShrineMaiden: 2 #SS220 toho Update
     Gohei: 2
-#SS220 toho Update start
+#SS220-tohoUpdate-begin
     ClothingHeadHatMagicianHat: 2
     ClothingUniformMagicianDress: 2
-    MagicBroom: 2
-#SS220 toho Update end
+    OldBroom: 2
+#SS220-tohoUpdate-end
     ClothingHeadHatRedRacoon: 2
     ClothingOuterRedRacoon: 2
     ClothingHeadPaperSack: 2

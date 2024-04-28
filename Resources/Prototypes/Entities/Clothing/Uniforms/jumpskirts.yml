@@ -930,3 +930,21 @@
       - state: equipped-INNERCLOTHING-jumpskirt
       - state: equipped-INNERCLOTHING-shirt
         color: "#b30000"
+
+# SS220-TohaUpdate-Begin
+
+- type: entity
+  parent: ClothingUniformSkirtBase #SS220-tohoUpdate-Begin
+  id: ClothingUniformJumpskirtShrineMaiden #SS220-tohoUpdate-End
+  name: shrine maiden outfit
+  description: Makes you want to go deal with some troublesome youkai.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
+  - type: Tag
+    tags:
+     - ShrineMaiden #SS220 tohoUpdate
+
+# SS220-TohaUpdate-End

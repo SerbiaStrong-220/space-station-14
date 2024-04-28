@@ -175,19 +175,20 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/chicken.rsi
 
-- type: entity
-  parent: ClothingUniformSkirtBase #SS220 tohoUpdate
-  id: ClothingOuterSuitShrineMaiden
-  name: shrine maiden outfit
-  description: Makes you want to go deal with some troublesome youkai.
-  components:
-  - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
-  - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
-  - type: Tag
-    tags:
-     - ShrineMaiden #SS220 tohoUpdate
+# SS220-TohaUpdate-Begin
+
+#- type: entity
+#  parent: ClothingOuterBase
+#  id: ClothingOuterSuitShrineMaiden
+#  name: shrine maiden outfit
+#  description: Makes you want to go deal with some troublesome youkai.
+#  components:
+#  - type: Sprite
+#    sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
+#  - type: Clothing
+#    sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
+
+# SS220-TohaUpdate-End
 
 - type: entity
   parent: ClothingOuterBase
