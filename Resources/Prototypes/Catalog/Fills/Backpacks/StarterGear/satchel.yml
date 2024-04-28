@@ -324,4 +324,20 @@
     contents:
     - id: GasAnalyzer
     - id: trayScanner
+#ss-220 addAdminTools
+    - id: GeigerCounter
+    - id: HandheldHealthAnalyzer
+    - id: JawsOfLife
+    - id: PowerDrill
+    - id: WelderExperimental
+    - id: NetworkConfigurator
+    - id: AnomalyScanner
+    - id: ForensicScanner
+    - id: NodeScanner
+    - id: RubberStampCentcom
+    - id: RubberStampApproved
+    - id: RubberStampDenied
+    - id: RubberStampSyndicate
+    - id: PenCentcom
+#ss-220 addAdminTools end
   - type: Unremoveable

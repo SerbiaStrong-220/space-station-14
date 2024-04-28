@@ -27,15 +27,15 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraDetachDoAfterEvent>(OnDetachDoAfter);
     }
 
-    private void OnAfterInteract(EntityUid uid, DetectiveCameraAttachComponent component, AfterInteractEvent args)
+    private void OnAfterInteract(Entity<DetectiveCameraAttachComponent> entity, ref AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach || args.Target is not { } target)
             return;
 
-        if (component.Attached || !IsAttachable(target, component))
+        if (entity.Comp.Attached || !IsAttachable(target, entity.Comp))
             return;
 
-        if (!TryAttachCamera(target, component, args.User))
+        if (!TryAttachCamera(target, entity, args.User))
             return;
 
         args.Handled = true;
@@ -91,7 +91,7 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
         if (!component.Attached)
             return false;
 
-        if (!TryDetachCamera(target, component, user))
+        if (!TryDetachCamera(target, (uid, component), user))
             return false;
 
         return true;

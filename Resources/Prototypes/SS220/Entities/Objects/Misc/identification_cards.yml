@@ -16,7 +16,7 @@
     inHandsOnly: true
   - type: UserInterface
     interfaces:
-      - key: enum.AgentIDCardUiKey.Key
+      enum.AgentIDCardUiKey.Key:
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null

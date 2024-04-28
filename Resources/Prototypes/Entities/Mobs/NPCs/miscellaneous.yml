@@ -66,3 +66,110 @@
       interactFailureString: petting-failure-generic
       interactSuccessSound:
         path: /Audio/Animals/lizard_happy.ogg
+
+- type: entity
+  id: MobTomatoKiller
+  parent:
+  - BaseSimpleMob
+  - MobDamageable
+  - MobBloodstream
+  - MobFlammable
+  - MobCombat
+  name: tomato killer
+  description: it seems today it's not you eating tomatoes, it's the tomatoes eating you.
+  components:
+  - type: Item
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: KillerTomatoCompound
+  - type: NPCImprintingOnSpawnBehaviour
+    whitelist:
+      components:
+      - HumanoidAppearance
+  - type: Damageable #SS220 Old-Tomato-Killer-Balance
+    damageContainer: Biological
+    damageModifierSet: TomatoKiller
+  - type: Sprite
+    sprite: Mobs/Demons/tomatokiller.rsi
+    noRot: true
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+  - type: Bloodstream
+    bloodReagent: JuiceTomato
+    bloodMaxVolume: 90 #SS220 Old-Tomato-Killer-Balance
+    chemicalMaxVolume: 30
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatTomato
+      amount: 2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:GibBehavior { }
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      110: Dead #SS220 Old-Tomato-Killer-Balance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MeleeWeapon #SS220 Old-Tomato-Killer-Balance
+    hidden: true
+    angle: 0
+    soundHit:
+      collection: AlienClaw
+    damage:
+      types:
+        Piercing: 9
+        Radiation: 4
+        Structural: 5
+    animation: WeaponArcBite
+  - type: Climbing
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      150: 0.7 #SS220 Old-Tomato-Killer-Balance
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Effects/Footsteps/slime1.ogg
+      params:
+        volume: 3
+  - type: Tag
+    tags:
+      - FootstepSound
+      - Fruit
+  - type: Extractable
+    grindableSolutionName: bloodstream
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Produce
+    seedId: killerTomato
+  #SS220 Old-Tomato-Killer-Balance begin
+  - type: IgnoreKudzu
+  - type: NoSlip
+  - type: Puller
+    needsHands: false
+  #SS220 Old-Tomato-Killer-Balance end

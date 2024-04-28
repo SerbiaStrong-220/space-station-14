@@ -25,17 +25,11 @@
 - type: startingGear
   id: SecurityCadetGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSecGrey # Corvax-Resprite
-    eyes: ClothingEyesHudSecurity #ss-220-GlassesSecurity
-    back: ClothingBackpackSecurityFilled
     shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
     ears: ClothingHeadsetSecurity
     head: ClothingHeadHelmetBasic
     belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
     pocket2: BookSecurity
-  innerClothingSkirt: ClothingUniformJumpskirtSecGrey # Corvax-Resprite
-  satchel: ClothingBackpackSatchelSecurityFilled
-  duffelbag: ClothingBackpackDuffelSecurityFilled

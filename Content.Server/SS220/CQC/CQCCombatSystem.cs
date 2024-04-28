@@ -7,7 +7,6 @@ using Content.Shared.SS220.UseableBook;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage;
 using Content.Server.Hands.Systems;
-using Content.Shared.Pulling.Components;
 using Content.Server.Bed.Sleep;
 using Content.Shared.StatusEffect;
 using Content.Shared.Bed.Sleep;
@@ -16,6 +15,7 @@ using Content.Shared.Humanoid;
 using Robust.Shared.Random;
 using Content.Shared.Popups;
 using Content.Shared.Zombies;
+using Content.Shared.Movement.Pulling.Components;
 
 namespace Content.Server.SS220.CQCCombat;
 
@@ -72,7 +72,7 @@ public sealed class CQCCombatSystem : CQCCombatSharedSystem
             return actionEvent.Target;
         if (args is InstantActionEvent)
         {
-            if (TryComp<SharedPullerComponent>(inflictor, out var puller))
+            if (TryComp<PullerComponent>(inflictor, out var puller))
                 return puller.Pulling;
         }
         return null;

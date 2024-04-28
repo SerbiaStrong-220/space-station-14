@@ -72,7 +72,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
             foreach (var slot in slots)
             {
-                var itemType = gear.GetGear(slot.Name, profile);
+                var itemType = gear.GetGear(slot.Name);
                 if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, true, true))
                 {
                     _entMan.DeleteEntity(unequippedItem.Value);
