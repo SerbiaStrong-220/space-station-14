@@ -18,6 +18,7 @@
     soundHit:
       collection: BoxingHit
     animation: WeaponArcFist
+    mustBeEquippedToUse: true
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-red
@@ -87,6 +88,7 @@
         Blunt: 8
         Stamina: 25 # SS220 Stamina-Armor
     bluntStaminaDamageFactor: 0.0 # so blunt doesn't deal stamina damage at all
+    mustBeEquippedToUse: true
 
 - type: entity
   parent: ClothingHandsBase
@@ -104,20 +106,6 @@
   - type: Fiber
     fiberMaterial: fibers-durathread
     fiberColor: fibers-regal-blue
-  - type: FingerprintMask
-
-- type: entity
-  parent: ClothingHandsBase
-  id: ClothingHandsGlovesIhscombat
-  name: IHS combat gloves
-  description: These tactical gloves are somewhat fire and impact resistant.
-  components:
-  - type: Sprite
-    sprite: Clothing/Hands/Gloves/ihscombat.rsi
-  - type: Clothing
-    sprite: Clothing/Hands/Gloves/ihscombat.rsi
-  - type: Fiber
-    fiberMaterial: fibers-durathread
   - type: FingerprintMask
 
 - type: entity
@@ -381,6 +369,7 @@
     soundHit:
       collection: Punch
     animation: WeaponArcFist
+    mustBeEquippedToUse: true
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue
@@ -393,7 +382,7 @@
   - type: Actions
   - type: UserInterface
     interfaces:
-      - key: enum.MeleeSpeechUiKey.Key
+      enum.MeleeSpeechUiKey.Key:
         type: MeleeSpeechBoundUserInterface
   - type: StaticPrice
     price: 0

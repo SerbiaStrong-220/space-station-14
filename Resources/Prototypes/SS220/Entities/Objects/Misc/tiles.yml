@@ -152,3 +152,21 @@
       - FloorRedCircuit
   - type: Stack
     stackType: FloorTileRCircuit
+
+- type: entity
+  name: красная кухонная плитка
+  parent: FloorTileItemBase
+  id: FloorTileItemKitchenRed
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/kitchenred.rsi
+    state: kitchenred
+  - type: Item
+    sprite: Objects/Tiles/tile.rsi
+    heldPrefix: steel
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorKitchenRed
+  - type: Stack
+    stackType: FloorTileKitchenRed

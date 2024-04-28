@@ -33,6 +33,7 @@
       - id: ClothingNeckCloakCe
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingOuterWinterCE
+      - id: ClothingOuterCoatCEFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
@@ -47,6 +48,7 @@
       - id: ClothingHeadHatBeretCmo
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
+      - id: ClothingOuterCoatCMOFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserHeadOfPersonnelFilled
@@ -60,6 +62,7 @@
       - id: ClothingHeadHatHopcap
       - id: ClothingOuterWinterHoP
       - id: ClothingEyesGlasses
+      - id: ClothingOuterCoatHoPFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserHeadOfSecurityFilled
@@ -112,6 +115,7 @@
       - id: ClothingHandsGlovesColorPurple
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterRD
+      - id: ClothingOuterCoatRDFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserWardenFilled

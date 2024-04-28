@@ -22,7 +22,7 @@
       key: enum.SSDStorageConsoleKey.Key
     - type: UserInterface
       interfaces:
-        - key: enum.SSDStorageConsoleKey.Key
+        enum.SSDStorageConsoleKey.Key:
           type: CryopodSSDBoundUserInterface
     - type: SSDStorageConsole
       whitelist:

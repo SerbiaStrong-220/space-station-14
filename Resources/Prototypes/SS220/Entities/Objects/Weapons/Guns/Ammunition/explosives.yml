@@ -13,15 +13,15 @@
 
 - type: entity
   id: GrenadeSuperArta
-  name: artillery penetrator
+  name: снаряд артиллерии
   parent: BaseGrenadeArta
   components:
   - type: CartridgeAmmo
     proto: BulletGrenadeSuperArta
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
     layers:
-    - state: frag
+    - state: pent
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
@@ -30,13 +30,13 @@
     
 - type: entity
   id: GrenadeEMPArta
-  name: EMP artillery
+  name: ЭМИ снаряд артиллерии
   parent: BaseGrenadeArta
   components:
   - type: CartridgeAmmo
     proto: BulletGrenadeEMPArta
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
     layers:
     - state: emp
       map: ["enum.AmmoVisualLayers.Base"]

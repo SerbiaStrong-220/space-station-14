@@ -28,6 +28,10 @@ using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
+using Content.Server.Popups;
+using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Collections;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -44,7 +48,8 @@ namespace Content.Server.Ghost.Roles
         [Dependency] private readonly SharedMindSystem _mindSystem = default!;
         [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
         [Dependency] private readonly IChatManager _chat = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private readonly IPrototypeManager _prototype = default!;
 
         private uint _nextRoleIdentifier;
         private bool _needsUpdateGhostRoleCount = true;
@@ -64,12 +69,14 @@ namespace Content.Server.Ghost.Roles
             SubscribeLocalEvent<GhostTakeoverAvailableComponent, MindAddedMessage>(OnMindAdded);
             SubscribeLocalEvent<GhostTakeoverAvailableComponent, MindRemovedMessage>(OnMindRemoved);
             SubscribeLocalEvent<GhostTakeoverAvailableComponent, MobStateChangedEvent>(OnMobStateChanged);
-            SubscribeLocalEvent<GhostRoleComponent, ComponentInit>(OnInit);
+            SubscribeLocalEvent<GhostRoleComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<GhostRoleComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<GhostRoleComponent, ComponentShutdown>(OnShutdown);
             SubscribeLocalEvent<GhostRoleComponent, EntityPausedEvent>(OnPaused);
             SubscribeLocalEvent<GhostRoleComponent, EntityUnpausedEvent>(OnUnpaused);
             SubscribeLocalEvent<GhostRoleMobSpawnerComponent, TakeGhostRoleEvent>(OnSpawnerTakeRole);
             SubscribeLocalEvent<GhostTakeoverAvailableComponent, TakeGhostRoleEvent>(OnTakeoverTakeRole);
+            SubscribeLocalEvent<GhostRoleMobSpawnerComponent, GetVerbsEvent<Verb>>(OnVerb);
             _playerManager.PlayerStatusChanged += PlayerStatusChanged;
         }
 
@@ -81,11 +88,11 @@ namespace Content.Server.Ghost.Roles
             switch (args.NewMobState)
             {
                 case MobState.Alive:
-                {
-                    if (!ghostRole.Taken)
-                        RegisterGhostRole((component, ghostRole));
-                    break;
-                }
+                    {
+                        if (!ghostRole.Taken)
+                            RegisterGhostRole((component, ghostRole));
+                        break;
+                    }
                 case MobState.Critical:
                 case MobState.Dead:
                     UnregisterGhostRole((component, ghostRole));
@@ -107,11 +114,11 @@ namespace Content.Server.Ghost.Roles
 
         public void OpenEui(ICommonSession session)
         {
-            if (session.AttachedEntity is not {Valid: true} attached ||
+            if (session.AttachedEntity is not { Valid: true } attached ||
                 !EntityManager.HasComponent<GhostComponent>(attached))
                 return;
 
-            if(_openUis.ContainsKey(session))
+            if (_openUis.ContainsKey(session))
                 CloseEui(session);
 
             var eui = _openUis[session] = new GhostRolesEui();
@@ -257,7 +264,7 @@ namespace Content.Server.Ghost.Roles
                 if (metaQuery.GetComponent(uid).EntityPaused)
                     continue;
 
-                roles.Add(new GhostRoleInfo {Identifier = id, Name = role.RoleName, Description = role.RoleDescription, Rules = role.RoleRules, Requirements = role.Requirements});
+                roles.Add(new GhostRoleInfo { Identifier = id, Name = role.RoleName, Description = role.RoleDescription, Rules = role.RoleRules, Requirements = role.Requirements });
             }
 
             return roles.ToArray();
@@ -325,17 +332,14 @@ namespace Content.Server.Ghost.Roles
             UpdateAllEui();
         }
 
-        private void OnInit(Entity<GhostRoleComponent> ent, ref ComponentInit args)
+        private void OnMapInit(Entity<GhostRoleComponent> ent, ref MapInitEvent args)
         {
-            var role = ent.Comp;
-            if (role.Probability < 1f && !_random.Prob(role.Probability))
-            {
-                RemComp<GhostRoleComponent>(ent);
-                return;
-            }
+            if (ent.Comp.Probability < 1f && !_random.Prob(ent.Comp.Probability))
+                RemCompDeferred<GhostRoleComponent>(ent);
+        }
 
-            if (role.RoleRules == "")
-                role.RoleRules = Loc.GetString("ghost-role-component-default-rules");
+        private void OnStartup(Entity<GhostRoleComponent> ent, ref ComponentStartup args)
+        {
             RegisterGhostRole(ent);
         }
 
@@ -488,6 +492,63 @@ namespace Content.Server.Ghost.Roles
 
             return false;
         }
+
+        private void OnVerb(EntityUid uid, GhostRoleMobSpawnerComponent component, GetVerbsEvent<Verb> args)
+        {
+            var prototypes = component.SelectablePrototypes;
+            if (prototypes.Count < 1)
+                return;
+
+            if (!args.CanAccess || !args.CanInteract || args.Hands == null)
+                return;
+
+            var verbs = new ValueList<Verb>();
+
+            foreach (var prototypeID in prototypes)
+            {
+                if (_prototype.TryIndex<GhostRolePrototype>(prototypeID, out var prototype))
+                {
+                    var verb = CreateVerb(uid, component, args.User, prototype);
+                    verbs.Add(verb);
+                }
+            }
+
+            args.Verbs.UnionWith(verbs);
+        }
+
+        private Verb CreateVerb(EntityUid uid, GhostRoleMobSpawnerComponent component, EntityUid userUid, GhostRolePrototype prototype)
+        {
+            var verbText = Loc.GetString(prototype.Name);
+
+            return new Verb()
+            {
+                Text = verbText,
+                Disabled = component.Prototype == prototype.EntityPrototype,
+                Category = VerbCategory.SelectType,
+                Act = () => SetMode(uid, prototype, verbText, component, userUid)
+            };
+        }
+
+        public void SetMode(EntityUid uid, GhostRolePrototype prototype, string verbText, GhostRoleMobSpawnerComponent? component, EntityUid? userUid = null)
+        {
+            if (!Resolve(uid, ref component))
+                return;
+
+            var ghostrolecomp = EnsureComp<GhostRoleComponent>(uid);
+
+            component.Prototype = prototype.EntityPrototype;
+            ghostrolecomp.RoleName = verbText;
+            ghostrolecomp.RoleDescription = prototype.Description;
+            ghostrolecomp.RoleRules = prototype.Rules;
+
+            // Dirty(ghostrolecomp);
+
+            if (userUid != null)
+            {
+                var msg = Loc.GetString("ghostrole-spawner-select", ("mode", verbText));
+                _popupSystem.PopupEntity(msg, uid, userUid.Value);
+            }
+        }
     }
 
     [AnyCommand]
@@ -498,7 +559,7 @@ namespace Content.Server.Ghost.Roles
         public string Help => $"{Command}";
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if(shell.Player != null)
+            if (shell.Player != null)
                 EntitySystem.Get<GhostRoleSystem>().OpenEui(shell.Player);
             else
                 shell.WriteLine("You can only open the ghost roles UI on a client.");

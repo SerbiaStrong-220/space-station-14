@@ -89,9 +89,6 @@
   noSpawn: true
   components:
     - type: Transform
-    - type: GridSpawn
-      paths:
-        - /Maps/Shuttles/cargo.yml
     - type: StationMinimap
       minimapData: !type:StationMinimapData
         mapTexture: SS220/ViewableMaps/220Delta.png

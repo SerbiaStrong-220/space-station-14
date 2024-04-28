@@ -215,7 +215,7 @@
 - type: entity
   id: AsteroidRockTinCrab
   parent: AsteroidRockTin
-  suffix: Iron
+  suffix: Iron Crab
   components:
     - type: OreVein
       oreChance: 1.0
@@ -300,7 +300,7 @@
   id: AsteroidRockMining
   parent: AsteroidRock
   name: asteroid rock
-  suffix: higher ore yield
+  suffix: higher ore yield .33
   description: An asteroid.
   components:
   - type: OreVein

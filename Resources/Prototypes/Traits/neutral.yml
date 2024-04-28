@@ -18,9 +18,16 @@
     - type: ReplacementAccent
       accent: dwarf
 
-- type: trait
+- type: trait # SS220 Slavic-Accent
   id: SlavicAccent
   name: trait-slavic-accent-name
   description: trait-slavic-accent-desc
   components:
     - type: SlavicAccent
+
+- type: trait
+  id: Southern
+  name: trait-southern-name
+  description: trait-southern-desc
+  components:
+    - type: SouthernAccent

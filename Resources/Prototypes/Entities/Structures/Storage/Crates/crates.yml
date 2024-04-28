@@ -195,6 +195,9 @@
       map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Construction
     graph: WebStructures
     node: crate
@@ -378,6 +381,10 @@
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "-0.25,0.625"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/livestock.rsi
     state: base
@@ -407,7 +414,7 @@
           bounds: "-0.4,-0.4,0.4,0.29"
         density: 135
         mask:
-        - SmallMobMask #this is so they can go under plastic flaps
+        - CrateMask #this is so they can go under plastic flaps
         layer:
         - LargeMobLayer
   - type: Construction
@@ -430,6 +437,10 @@
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "0.0,0.125"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/cage.rsi
   - type: Destructible
@@ -461,7 +472,7 @@
           bounds: "-0.4,-0.4,0.4,0.29"
         density: 80
         mask:
-        - LargeMobMask
+        - CrateMask
         layer:
         - LargeMobLayer
   - type: StaticPrice
@@ -484,6 +495,10 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "0.0,-0.09375"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/piratechest.rsi
     state: crate_icon
@@ -509,6 +524,8 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/toybox.rsi
     state: crate_icon
@@ -526,6 +543,8 @@
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/coffin.rsi
     state: base
@@ -565,6 +584,10 @@
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "-0.28125,0.625"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/wooden_grave.rsi
     state: base
@@ -609,6 +632,10 @@
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "-0.3125,0.5625"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: Structures/Storage/Crates/stone_grave.rsi
     state: base
@@ -625,7 +652,7 @@
     sprite: Structures/Storage/Crates/syndicate.rsi
 
 - type: entity
-  parent: CrateBaseWeldable
+  parent: [StructureWheeled, CrateBaseWeldable]
   id: CrateTrashCart
   name: trash cart
   components:
@@ -637,13 +664,16 @@
     offset: 0, 0
     layers:
     - state: base
-      map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "0.0,0.03125"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Cart #SS220-Cart-system
 
 - type: entity
@@ -668,6 +698,10 @@
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
 #SS220 Crate-tg-resprite end
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "0.0,0.03125"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: AccessReader
     access: [["Janitor"]]
   - type: Cart #SS220-Cart-system
