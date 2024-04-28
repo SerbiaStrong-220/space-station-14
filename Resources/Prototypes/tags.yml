@@ -1350,4 +1350,22 @@
   id: rrose
 # SS220 Flower update end
 
+# SS220-TohaUpdate-Begin
+- type: Tag
+  id: MagicianHat
+
+- type: Tag
+  id: ShrineMaiden
+  
+- type: Tag
+  id: Janimaid
+  
+- type: Tag
+  id: MagicianDress
+  
+- type: Tag
+  id: ShrineMaidenWig
+
+# SS220-TohaUpdate-End
+
 # PUT YOUR TAGS IN ALPHABETICAL ORDER
