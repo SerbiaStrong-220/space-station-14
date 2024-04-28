@@ -126,6 +126,7 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+    - ShrineMaidenWig #SS220 tohoUpdate
 
 - type: entity
   parent: ClothingHeadBase
