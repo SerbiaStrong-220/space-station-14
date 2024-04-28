@@ -2,7 +2,7 @@
   name: старая метла
   parent: BaseItem
   id: OldBroom
-  description: Обычная не волшебная метла. Только для реквизита.
+  description: Обычная, не волшебная метла. Только для реквизита.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/oldbroom.rsi
