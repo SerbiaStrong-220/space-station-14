@@ -30,10 +30,10 @@
   id: CaptainFormalSkirt
   equipment: CaptainFormalSkirt
 
-- type: startingGear
-  id: CaptainFormalSkirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtCapFormalDress
+#- type: startingGear SS220-RemoveFormalSkirtLoadouts-Begin
+#  id: CaptainFormalSkirt
+#  equipment:
+#    jumpsuit: ClothingUniformJumpskirtCapFormalDress SS220-RemoveFormalSkirtLoadouts-End
 
 # Head
 - type: loadout

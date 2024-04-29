@@ -43,7 +43,7 @@
   - CaptainJumpsuit
   - CaptainJumpskirt
   - CaptainFormalSuit
-  - CaptainFormalSkirt
+#  - CaptainFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
   id: CaptainNeck
@@ -828,7 +828,7 @@
   - HeadofSecurityTurtleneck
   - HeadofSecurityTurtleneckSkirt
   - HeadofSecurityFormalSuit
-  - HeadofSecurityFormalSkirt
+#  - HeadofSecurityFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
   id: HeadofSecurityNeck

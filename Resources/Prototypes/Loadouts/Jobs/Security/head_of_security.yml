@@ -44,9 +44,9 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitHosFormal
 
-- type: loadout
-  id: HeadofSecurityFormalSkirt
-  equipment: HeadofSecurityFormalSkirt
+#- type: loadout SS220-RemoveFormalSkirtLoadouts-Begin
+#  id: HeadofSecurityFormalSkirt
+#  equipment: HeadofSecurityFormalSkirt SS220-RemoveFormalSkirtLoadouts-End
 
 - type: startingGear
   id: HeadofSecurityFormalSkirt
