@@ -48,6 +48,16 @@
         whitelist:
           components:
           - FitsInDispenser
+# SS220 Исправление ломания измельчителя при помощи мышеловки begin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+# SS220 Исправление ломания измельчителя при помощи мышеловки end
   - type: Machine
     board: ReagentGrinderMachineCircuitboard
   - type: ContainerContainer

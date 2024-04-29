@@ -888,7 +888,8 @@
       - ClothingUniformJumpskirtColorGrey
       - ClothingUniformJumpsuitBartender
       - ClothingUniformJumpskirtBartender
-      - ClothingHeadHatCapcap
+      - ClothingHeadBeretCap #SS220 CapBeret
+      - ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       - ClothingHeadHatCaptain
       - ClothingUniformJumpsuitCaptain
       - ClothingUniformJumpskirtCaptain

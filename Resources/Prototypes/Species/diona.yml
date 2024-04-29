@@ -14,30 +14,6 @@
   femaleLastNames: DionaLast # Corvax-LastnameGender
   naming: TheFirstofLast
   buttScanTexture: /Textures/SS220/Interface/Butts/diona.png
-  blockedJobsByAccessor: #SS220-Job-Restrictions-start
-#Командование
-    Captain: [ ]
-    HeadOfSecurity: [ ]
-    Quartermaster: [ ]
-#ЦК
-    BlueShield: [ ]
-    IAA: [ ]
-#Служба Безопасности
-    Warden: [ ]
-    SecurityOfficer: [ ]
-    SecurityPilot: [ ]
-    SecurityCadet: [ ]
-    Brigmedic: [ ]
-#Мединский отдел
-    Paramedic: [ ]
-#Отдел снабжения
-    CargoTechnician: [ ]
-    SalvageSpecialist: [ ]
-#Сервис
-    Detective: [ ]
-    Chef: [ ]
-    Boxer: [ ]
-#SS220-Job-Restrictions-end
 
 - type: speciesBaseSprites
   id: MobDionaSprites

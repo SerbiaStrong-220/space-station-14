@@ -1,0 +1,17 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatQM
+  name: торжественная куртка квартирмейстера
+  description: Торжественная куртка квартирмейстера, инкрустированная золотом.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9

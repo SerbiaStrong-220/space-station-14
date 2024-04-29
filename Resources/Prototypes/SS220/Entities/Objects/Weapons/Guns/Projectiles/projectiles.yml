@@ -53,3 +53,59 @@
     damage:
       types:
         Poison: 10
+
+
+
+
+##Made by MIXnikita for SS220
+
+- type: entity
+  id: BaseBulletTriggerArta
+  parent: BaseBulletTrigger
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 20
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 12 
+
+
+- type: entity
+  id: BulletGrenadeSuperArta
+  name: пробивной снаряд
+  parent: BaseBulletTriggerArta
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 215
+    intensitySlope: 20
+    maxIntensity: 20
+
+- type: entity
+  id: BulletGrenadeEMPArta
+  name: снаряд ЭМИ
+  parent: BaseBulletTriggerArta
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: frag
+  - type: EmpOnTrigger
+    range: 10
+    energyConsumption: 50000
+    disableDuration: 20
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 5.5
+    color: blue
+    energy: 0.9 

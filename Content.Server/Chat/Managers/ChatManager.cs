@@ -255,7 +255,7 @@ namespace Content.Server.Chat.Managers
             var SponsorInfo = player.ContentData()?.SponsorInfo;
             if (SponsorInfo is not null && !_adminManager.HasAdminFlag(player, AdminFlags.Admin))
             {
-                if (BoostyOocColors.TryGetValue(SponsorInfo.Tiers.Max(), out var sponsorColor))
+                if (SponsorInfo.Tiers.Any() && BoostyOocColors.TryGetValue(SponsorInfo.Tiers.Max(), out var sponsorColor))
                 {
                     wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
                 }

@@ -14,10 +14,9 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FFMpegCore"/>
+    <PackageReference Include="FFMpegCore" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore"/>
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Content.Packaging\Content.Packaging.csproj" />

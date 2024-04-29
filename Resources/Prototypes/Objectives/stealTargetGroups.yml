@@ -372,58 +372,60 @@
 
 # Thief Animal
 
-- type: stealTargetGroup
-  id: AnimalIan
-  name: Ian
-  sprite:
-    sprite: Mobs/Pets/corgi.rsi
-    state: ian
+# SS220 Delete thief objective animals begin
+# - type: stealTargetGroup
+#   id: AnimalIan
+#   name: Ian
+#   sprite:
+#     sprite: Mobs/Pets/corgi.rsi
+#     state: ian
 
-- type: stealTargetGroup
-  id: AnimalBingus
-  name: Bingus
-  sprite:
-    sprite: Mobs/Pets/bingus.rsi
-    state: bingus
+# - type: stealTargetGroup
+#   id: AnimalBingus
+#   name: Bingus
+#   sprite:
+#     sprite: Mobs/Pets/bingus.rsi
+#     state: bingus
 
-- type: stealTargetGroup
-  id: AnimalMcGriff
-  name: McGriff
-  sprite:
-    sprite: Mobs/Pets/mcgriff.rsi
-    state: mcgriff
+# - type: stealTargetGroup
+#   id: AnimalMcGriff
+#   name: McGriff
+#   sprite:
+#     sprite: Mobs/Pets/mcgriff.rsi
+#     state: mcgriff
 
-- type: stealTargetGroup
-  id: AnimalWalter
-  name: Walter
-  sprite:
-    sprite: Mobs/Pets/walter.rsi
-    state: walter
+# - type: stealTargetGroup
+#   id: AnimalWalter
+#   name: Walter
+#   sprite:
+#     sprite: Mobs/Pets/walter.rsi
+#     state: walter
 
-- type: stealTargetGroup
-  id: AnimalMorty
-  name: Morty
-  sprite:
-    sprite: Mobs/Animals/possum.rsi
-    state: possum
+# - type: stealTargetGroup
+#   id: AnimalMorty
+#   name: Morty
+#   sprite:
+#     sprite: Mobs/Animals/possum.rsi
+#     state: possum
 
-- type: stealTargetGroup
-  id: AnimalRenault
-  name: Renault
-  sprite:
-    sprite: Mobs/Animals/fox.rsi
-    state: fox
+# - type: stealTargetGroup
+#   id: AnimalRenault
+#   name: Renault
+#   sprite:
+#     sprite: Mobs/Animals/fox.rsi
+#     state: fox
 
-- type: stealTargetGroup
-  id: AnimalShiva
-  name: Shiva
-  sprite:
-    sprite: Mobs/Pets/shiva.rsi
-    state: shiva
+# - type: stealTargetGroup
+#   id: AnimalShiva
+#   name: Shiva
+#   sprite:
+#     sprite: Mobs/Pets/shiva.rsi
+#     state: shiva
 
-- type: stealTargetGroup
-  id: AnimalTropico
-  name: Tropico
-  sprite:
-    sprite: Mobs/Animals/crab.rsi
-    state: crab
+# - type: stealTargetGroup
+#   id: AnimalTropico
+#   name: Tropico
+#   sprite:
+#     sprite: Mobs/Animals/crab.rsi
+#     state: crab
+# SS220 Delete thief objective animals end

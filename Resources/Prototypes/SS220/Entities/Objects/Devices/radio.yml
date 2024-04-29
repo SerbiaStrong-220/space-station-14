@@ -32,3 +32,14 @@
     interfaces:
       - key: enum.HandheldRadioUiKey.Key
         type: HandheldRadioBoundUserInterface
+
+- type: entity
+  name: event handheld radio SS220
+  description: A handy handheld radio.
+  parent: HandheldRadio
+  id: EventHandheldRadio
+  suffix: Ebent
+  components:
+  - type: HandheldRadio
+    lowerBorder: 1582
+    upperBorder: 1591
