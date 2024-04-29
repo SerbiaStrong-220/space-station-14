@@ -202,3 +202,15 @@
     collection: FootstepHull
   itemDrop: FloorTileItemRCircuit
   heatCapacity: 10000
+
+- type: tile
+  id: FloorKitchenRed
+  name: красный кухонный пол
+  sprite: /Textures/SS220/Tiles/kitchen_red.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemKitchenRed
+  heatCapacity: 10000

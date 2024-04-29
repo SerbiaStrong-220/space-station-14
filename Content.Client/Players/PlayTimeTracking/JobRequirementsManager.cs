@@ -9,6 +9,7 @@ using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Preferences;
@@ -17,7 +18,7 @@ using ReasonList = System.Collections.Generic.List<string>;
 
 namespace Content.Client.Players.PlayTimeTracking;
 
-public sealed class JobRequirementsManager
+public sealed class JobRequirementsManager : ISharedPlaytimeManager
 {
     [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IBaseClient _client = default!;
@@ -90,19 +91,6 @@ public sealed class JobRequirementsManager
     private bool IsBypassedChecks()
     {
         return _adminManager.IsActive();
-    }
-
-    public bool IsAntagAllowed(AntagPrototype antag, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
-    {
-        reason = null;
-
-        if (_roleBans.Contains($"Job:{antag.ID}"))
-        {
-            reason = FormattedMessage.FromUnformatted("Этот антагонист для вас заблокирован");
-            return false;
-        }
-
-        return true;
     }
 
     public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile profile, [NotNullWhen(false)] out FormattedMessage? reason)
@@ -214,5 +202,13 @@ public sealed class JobRequirementsManager
         }
     }
 
+    public IReadOnlyDictionary<string, TimeSpan> GetPlayTimes(ICommonSession session)
+    {
+        if (session != _playerManager.LocalSession)
+        {
+            return new Dictionary<string, TimeSpan>();
+        }
 
+        return _roles;
+    }
 }

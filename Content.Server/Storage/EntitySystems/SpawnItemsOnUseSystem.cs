@@ -82,7 +82,7 @@ namespace Content.Server.Storage.EntitySystems
 
             if (component.Sound != null)
             {
-                _audio.PlayPvs(component.Sound, args.User);//SS220 sound in hands fix
+                _audio.PlayPvs(component.Sound, uid);
             }
 
             component.Uses--;

@@ -24,14 +24,14 @@
     damageOverlayGroups:
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
-        color: "#75b1f0"
+        color: "#cd7314"
   - type: Butcherable
     butcheringType: Spike
     spawned:
       - id: FoodMeatPlant
         amount: 5
   - type: Bloodstream
-    bloodReagent: Water
+    bloodReagent: Sap
 #SS220-TweakDamageSpecies-Begin
   - type: MeleeWeapon
     soundHit:
@@ -57,7 +57,7 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaled: true
+        scaleByQuantity: true
         damage:
           types:
             Blunt: 2
@@ -72,7 +72,7 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaled: true
+        scaleByQuantity: true
         damage:
           types:
             Poison: 5

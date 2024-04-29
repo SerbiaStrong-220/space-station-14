@@ -142,8 +142,7 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
                 var doAfterArgs = new DoAfterArgs(EntityManager, target, cryopodSSDComp.EntryDelay, new TeleportToCryoFinished(GetNetEntity(portal)), cryopodSSDUid)
                 {
                     BreakOnDamage = false,
-                    BreakOnTargetMove = false,
-                    BreakOnUserMove = true,
+                    BreakOnMove = false,
                     NeedHand = false,
                 };
 
@@ -197,8 +196,7 @@ public sealed class CryopodSSDSystem : SharedCryopodSSDSystem
             target: args.Dragged, used: uid)
         {
             BreakOnDamage = true,
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             NeedHand = false,
         };
         _doAfterSystem.TryStartDoAfter(doAfterArgs);

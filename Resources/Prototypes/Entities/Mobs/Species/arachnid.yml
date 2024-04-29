@@ -50,7 +50,7 @@
   - type: MeleeWeapon
     animation: WeaponArcBite
     soundHit:
-      collection: AlienClaw
+      path: /Audio/Effects/bite.ogg
     damage:
       types:
         Piercing: 4 #SS220-TweakDamageSpecies

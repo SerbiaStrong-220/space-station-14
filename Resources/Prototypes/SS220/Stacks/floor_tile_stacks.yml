@@ -61,3 +61,10 @@
   spawn: FloorTileItemRCircuit
   maxCount: 30
   itemSize: 5
+
+- type: stack
+  id: FloorTileKitchenRed
+  name: красная кухонная плитка
+  spawn: FloorTileItemKitchenRed
+  maxCount: 30
+  itemSize: 5

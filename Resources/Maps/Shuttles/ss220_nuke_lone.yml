@@ -62,6 +62,7 @@ entities:
       fixtures: {}
     - type: OccluderTree
     - type: Shuttle
+    - type: NukeOpsShuttle
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
@@ -1686,7 +1687,7 @@ entities:
     - type: Transform
       pos: -0.5209762,-7.414211
       parent: 2
-- proto: SpawnPointLoneNukeOperative
+- proto: SpawnPointNukies
   entities:
   - uid: 155
     components:

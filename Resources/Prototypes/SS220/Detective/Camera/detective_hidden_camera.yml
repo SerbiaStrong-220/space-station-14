@@ -14,7 +14,7 @@
   - type: WirelessNetworkConnection
   - type: UserInterface
     interfaces:
-      - key: enum.SurveillanceCameraSetupUiKey.Camera
+      enum.SurveillanceCameraSetupUiKey.Camera:
         type: SurveillanceCameraSetupBoundUi
   - type: DeviceNetwork
     deviceNetId: Wired

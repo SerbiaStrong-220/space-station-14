@@ -21,7 +21,6 @@
     solutions:
       tank:
         maxVol: 800
-        canMix: true
   - type: Spillable
     solution: tank
   - type: RefillableSolution
@@ -35,8 +34,8 @@
     canChangeTransferAmount: true
   - type: UserInterface
     interfaces:
-    - key: enum.TransferAmountUiKey.Key
-      type: TransferAmountBoundUserInterface
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
   - type: HeldSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
@@ -167,11 +166,10 @@
     solutions:
       spray:
         maxVol: 300
-        canMix: true
   - type: UserInterface
     interfaces:
-    - key: enum.TransferAmountUiKey.Key
-      type: TransferAmountBoundUserInterface
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
   - type: PhysicalComposition
     materialComposition:
       Plastic: 100
