@@ -16,7 +16,7 @@
   - IAASatchel
   - IAADuffel
 
-# Chef loadout-group-chef-jumpsuit
+# Chef
 - type: loadoutGroup
   id: ChefBeltApron
   name: loadout-group-chef-belt
