@@ -533,6 +533,7 @@
   - type: Clothing
     quickEquip: false
   - type: Gun
+    fireRate: 0.5 #weaponBalance
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: ProjectileBatteryAmmoProvider

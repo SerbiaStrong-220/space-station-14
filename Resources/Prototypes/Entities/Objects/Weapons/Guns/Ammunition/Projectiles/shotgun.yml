@@ -53,8 +53,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
-        Heat: 7
+        Blunt: 7 #weaponBalance
+        Heat: 3 #weaponBalance
   - type: IgnitionSource
     ignited: true
 
