@@ -1,5 +1,45 @@
 - type: entity
   parent: ClothingBeltStorageBase
+  id: ClothingBeltChefApronBase
+  name: фартук
+  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+  - type: Storage
+    whitelist:
+      tags:
+        - KitchenKnife
+        - Cleaver
+        - RollingPin
+        - Coldsauce
+        - Enzyme
+        - Hotsauce
+        - Ketchup
+        - BBQsauce
+        - SaltShaker
+        - PepperShaker
+        - CigPack
+        - Packet
+        - Skewer
+        - MonkeyCube
+        #ss220 chiefs belt start
+        - WaterBottle
+        - Vinegar
+        - OilOlive
+        - GlassBeaker
+        #ss220 chiefs belt end
+        - Mayo
+      components:
+        - Mousetrap
+        - Smokable
+        - Utensil
+
+- type: entity
+  parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronWhite
   name: белый фартук
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
@@ -8,37 +48,9 @@
     sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronGreen
   name: зелёный фартук
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
@@ -47,37 +59,9 @@
     sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronBlack
   name: чёрный фартук
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
@@ -86,37 +70,9 @@
     sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronRed
   name: красный фартук
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
@@ -125,37 +81,9 @@
     sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronNanotrasen
   name: синий фартук
   description: Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
@@ -165,34 +93,6 @@
     sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
 
 - type: entity
   id: ClothingBeltChefApronWhiteFilled
