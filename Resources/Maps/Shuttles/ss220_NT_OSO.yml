@@ -1909,7 +1909,6 @@ entities:
       parent: 236
     - type: Physics
       canCollide: False
-    - type: ShowSecurityIcons
 - proto: ClothingHandsGlovesCombat
   entities:
   - uid: 238
