@@ -34,4 +34,4 @@
     shoes: ClothingShoesColorBlack
     id: ChefPDA
     ears: ClothingHeadsetService
-    belt: ClothingBeltChefFilled
+#    belt: ClothingBeltChefFilled #SS220 Chef Resprite

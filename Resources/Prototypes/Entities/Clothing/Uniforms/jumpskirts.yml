@@ -493,6 +493,9 @@
     sprite: Clothing/Uniforms/Jumpskirt/janimaid.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpskirt/janimaid.rsi
+  - type: Tag #SS220 tohoUpdate Begin
+    tags:
+     - Janimaid #SS220 tohoUpdate End
 
 - type: entity
   parent: ClothingUniformSkirtBase

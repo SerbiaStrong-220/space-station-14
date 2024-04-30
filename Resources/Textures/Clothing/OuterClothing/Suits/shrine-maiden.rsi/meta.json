@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/3d1a0a5b367a080c42fba0e85ce0382b2cbcb284 . Inhands were made for SS14 and available under the same license.",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/3d1a0a5b367a080c42fba0e85ce0382b2cbcb284 . Inhands were made for SS14 and available under the same license. Resprited by discord DaGo7393 for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,7 +11,7 @@
       "name": "icon"
     },
     {
-      "name": "equipped-OUTERCLOTHING",
+      "name": "equipped-INNERCLOTHING",
       "directions": 4
     },
     {

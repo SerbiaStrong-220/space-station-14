@@ -15,3 +15,15 @@
   - IAABackpack
   - IAASatchel
   - IAADuffel
+
+# Chef
+- type: loadoutGroup
+  id: ChefBeltApron
+  name: loadout-group-chef-belt
+  minLimit: 0
+  loadouts:
+  - ChefBeltApronWhite
+  - ChefBeltApronGreen
+  - ChefBeltApronBlack
+  - ChefBeltApronRed
+  - ChefBeltApronSenior
