@@ -24,7 +24,7 @@ entities:
       name: NT-CBURN-X3 "Asclepius"
     - type: Transform
       pos: -0.5625,-1.1555071
-      parent: 539
+      parent: 9
     - type: MapGrid
       chunks:
         0,0:
@@ -495,10 +495,10 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-  - uid: 539
+  - uid: 9
     components:
     - type: MetaData
-      name: Map Entity
+      name: map 2
     - type: Transform
     - type: Map
       mapPaused: True
@@ -507,6 +507,7 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
+    - type: LoadedMap
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -531,7 +532,6 @@ entities:
     - type: DeviceList
       devices:
       - 475
-      - 9
       - 827
       - 12
   - uid: 4
@@ -2146,7 +2146,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 305
+      - 476
 - proto: ClosetEmergency
   entities:
   - uid: 295
@@ -2249,7 +2249,7 @@ entities:
       parent: 1
 - proto: ComputerCloningConsole
   entities:
-  - uid: 305
+  - uid: 476
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2258,12 +2258,10 @@ entities:
     - type: DeviceLinkSource
       range: 5
       linkedPorts:
-        476:
+        539:
         - MedicalScannerSender: MedicalScannerReceiver
         294:
         - CloningPodSender: CloningPodReceiver
-    - type: ExtensionCableReceiver
-      receptionRange: 5
 - proto: ComputerRadar
   entities:
   - uid: 306
@@ -3505,16 +3503,11 @@ entities:
       color: '#FF0000FF'
 - proto: GasVentScrubberBasa
   entities:
-  - uid: 9
+  - uid: 305
     components:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - 542
-      deviceLists:
-      - 3
     - type: AtmosPipeColor
       color: '#FF0000FF'
 - proto: GeneratorBasic15kW
@@ -3936,16 +3929,14 @@ entities:
       parent: 1
 - proto: MedicalScanner
   entities:
-  - uid: 476
+  - uid: 539
     components:
     - type: Transform
       pos: 2.5,8.5
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 305
-    - type: ExtensionCableReceiver
-      receptionRange: 5
+      - 476
 - proto: MedkitAdvancedFilled
   entities:
   - uid: 540
@@ -3972,11 +3963,8 @@ entities:
   - uid: 542
     components:
     - type: Transform
-      pos: 2.328125,9.556869
+      pos: 2.303346,9.51523
       parent: 1
-    - type: NetworkConfigurator
-      devices:
-        'UID: 3398': 9
 - proto: NitrogenCanister
   entities:
   - uid: 543
