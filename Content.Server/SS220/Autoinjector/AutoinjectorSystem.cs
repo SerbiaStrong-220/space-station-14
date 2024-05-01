@@ -5,7 +5,7 @@ using Content.Shared.Chemistry;
 using Robust.Shared.GameStates;
 using Content.Shared.Chemistry.Components;
 
-namespace Content.Server.Chemistry.EntitySystems
+namespace Content.Server.SS220.Autoinjector
 {
     public sealed partial class AutoinjectorSystem : EntitySystem
     {
@@ -21,10 +21,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
             if (!_solutionContainerSystem.TryGetSolution(uid, hypoComp.SolutionName, out _, out var sol))
                 return;
-            if (sol.Volume <= 0)
-            {
-                RemComp<RefillableSolutionComponent>(uid);
-            }
+            RemComp<RefillableSolutionComponent>(uid);
 
         }
     }
