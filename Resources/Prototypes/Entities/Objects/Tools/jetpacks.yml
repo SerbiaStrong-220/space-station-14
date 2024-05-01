@@ -178,8 +178,7 @@
         - 1.025689525 # oxygen
         - 1.025689525 # nitrogen
   - type: GasTankSelfRefill
-  #    autoRefillRate: 200
-  #    autoRefill: True
+    autoRefillRate: 0.6
 
 #Empty mini
 - type: entity
