@@ -166,8 +166,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/disposal.rsi
-    state: "mailing"
+    sprite: Structures/Piping/mailing.rsi #MailingVisualBagFix-Begin
+    state: "disposal" #MailingVisualBagFix-End
 
 - type: construction
   name: disposal pipe
