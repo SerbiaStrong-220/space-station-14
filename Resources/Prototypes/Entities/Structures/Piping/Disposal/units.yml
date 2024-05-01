@@ -120,16 +120,16 @@
   description: A pneumatic mail delivery unit.
   components:
   - type: Sprite
-    sprite: Structures/Piping/mailing.rsi
+    sprite: Structures/Piping/mailing.rsi #MailingVisualBagFix
     snapCardinals: true
     layers:
       - state: conmailing
         map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
-      - state: disposal
+      - state: disposal #MailingVisualBagFix
         map: [ "enum.DisposalUnitVisualLayers.Base" ]
-      - state: disposal-charging
+      - state: disposal-charging #MailingVisualBagFix
         map: [ "enum.DisposalUnitVisualLayers.BaseCharging" ]
-      - state: dispover-flush
+      - state: dispover-flush #MailingVisualBagFix
         map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
       - state: dispover-charge
         map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
