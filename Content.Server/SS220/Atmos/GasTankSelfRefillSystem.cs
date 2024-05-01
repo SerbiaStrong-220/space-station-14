@@ -20,15 +20,18 @@ namespace Content.Server.SS220.Atmos
             var query = EntityQueryEnumerator<GasTankSelfRefillComponent, GasTankComponent>();
             while (query.MoveNext(out var uid, out var comp, out var tank))
             {
-                if (tank.IsValveOpen) //prevent air cycling
+                if (tank.IsValveOpen) //prevent air cycling and refillment when used
                     continue;
 
-                if(tank.Air.Pressure >= (1000 - comp.AutoRefillRate)) //fill if its lower than max.
+                if (tank.Air.Pressure >= (1000 - comp.AutoRefillRate)) //fill if its lower than 1000
                     continue;
-                /*
-                if(_atmosSys.GetContainingMixture(uid, excite: true) == null)
+
+                var tileMixture = _atmosSys.GetContainingMixture(uid, true);//smth i copypasted from GasAnalyzer
+                if (tileMixture == null)
                     continue;
-                */
+
+                if (tileMixture.Pressure == 0) //no preassure around == no refillment
+                    continue;
 
                 var mixSize = tank.Air.Volume;
                 var newMix = new GasMixture(mixSize);
