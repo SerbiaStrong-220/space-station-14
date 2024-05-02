@@ -50,6 +50,18 @@
       "name": "brick_line_w"
     },
     {
+      "name": "brick_inner_ne"
+    },
+    {
+      "name": "brick_inner_se"
+    },
+    {
+      "name": "brick_inner_nw"
+    },
+    {
+      "name": "brick_inner_sw"
+    },
+    {
       "name": "halftile_overlay"
     },
     {
