@@ -539,9 +539,9 @@
   - type: Armor
     modifiers:
       coefficients:
-       Blunt: 0.3
-       Slash: 0.3
+       Blunt: 0.7
+       Slash: 0.7
        Piercing: 0.5
-       Heat: 0.2
+       Heat: 0.8
         
 #SS220-DressTweak-End
