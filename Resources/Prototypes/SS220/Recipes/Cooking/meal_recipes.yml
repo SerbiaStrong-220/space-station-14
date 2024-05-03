@@ -91,6 +91,7 @@
     FoodPeaPod: 1
     FoodCarrot: 1
 
+# SS220-Salami-update begin
 - type: microwaveMealRecipe
   id: RecipeMeatSalami
   name: Salami recipe
@@ -101,3 +102,4 @@
   solids:
     FoodMeat: 3
     FoodEgg: 2
+# SS220 Salami-update end

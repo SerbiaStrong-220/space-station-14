@@ -609,6 +609,7 @@
     count: 3
     slice: FoodMeatTomatoCutlet
 
+# SS220-Salami-update begin
 - type: entity
   name: salami
   parent: FoodMeatBase
@@ -649,6 +650,7 @@
     damage:
       types:
         Blunt: 2
+# SS220 Salami-update end
 
 - type: entity
   name: meat clown
