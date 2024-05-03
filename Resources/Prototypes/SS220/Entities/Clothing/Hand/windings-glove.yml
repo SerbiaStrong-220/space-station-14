@@ -1,0 +1,17 @@
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesWindings
+  name: windings
+  description: Decrepit tissues enveloping hands
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/windings-gloves.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/windings-gloves.rsi
+  - type: GloveHeatResistance
+    heatResistance: 1400
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-regal-blue
+  - type: FingerprintMask
