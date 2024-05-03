@@ -3,7 +3,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi
     state: brick_inner_ne
 
 - type: decal
@@ -11,7 +11,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi
     state: brick_inner_se
 
 - type: decal
@@ -19,7 +19,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi
     state: brick_inner_nw
 
 - type: decal
@@ -27,5 +27,5 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi
     state: brick_inner_sw
