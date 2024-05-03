@@ -690,7 +690,7 @@
   description: If you are not an admin please return this PDA to the nearest admin.
   components:
   - type: Pda
-    id: PassengerIDCard
+    id: DebugIDCard # SS220 admin memes
   - type: HealthAnalyzer
     scanDelay: 0
   - type: CartridgeLoader

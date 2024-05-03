@@ -189,12 +189,12 @@
         - id: SpeedLoaderMagnumRubber # SS220 Bring-Rubber-Back
           amount: 2
 
-- type: entity
-  id: ClothingBeltChefFilled
-  parent: ClothingBeltChef
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: FoodShakerSalt
-    - id: FoodShakerPepper
+#- type: entity #SS220 Chef Resprite
+#  id: ClothingBeltChefFilled
+#  parent: ClothingBeltChef
+#  suffix: Filled
+#  components:
+#  - type: StorageFill
+#    contents:
+#    - id: FoodShakerSalt
+#    - id: FoodShakerPepper
