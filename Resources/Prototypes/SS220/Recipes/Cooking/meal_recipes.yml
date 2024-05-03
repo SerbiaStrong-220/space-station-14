@@ -90,3 +90,14 @@
     Foodbeet: 1
     FoodPeaPod: 1
     FoodCarrot: 1
+
+- type: microwaveMealRecipe
+  id: RecipeMeatSalami
+  name: Salami recipe
+  result: FoodMeatSalami
+  time: 30
+  reagents:
+    SodiumHydroxide: 10
+  solids:
+    FoodMeat: 3
+    FoodEgg: 2
