@@ -5,15 +5,15 @@
   suffix: Shitspawn, Ebent, FractWar
   description: Used to change job icons.
   components:
-    - type: Sprite
-      sprite: Objects/Tools/access_configurator.rsi
-      state: icon
-    - type: Item
-      size: Small
-    - type: ActivatableUI
-      key: enum.JobIconChangerKey.Key
-    - type: UserInterface
-      interfaces:
-      - key: enum.JobIconChangerKey.Key
-        type: JobIconChangerBoundUserInterface
-    - type: JobIconChanger
+  - type: Sprite
+    sprite: Objects/Tools/access_configurator.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: ActivatableUI
+    key: enum.JobIconChangerKey.Key
+  - type: UserInterface
+    interfaces:
+    - key: enum.JobIconChangerKey.Key
+      type: JobIconChangerBoundUserInterface
+  - type: JobIconChanger
