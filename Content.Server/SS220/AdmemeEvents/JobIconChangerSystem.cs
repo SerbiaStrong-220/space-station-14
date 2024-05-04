@@ -16,15 +16,15 @@ public sealed class JobIconChangerSystem : EntitySystem
         SubscribeLocalEvent<JobIconChangerComponent, AfterInteractEvent>(OnAfterInteract);
     }
 
-    private void OnJobChanged(EntityUid uid, JobIconChangerComponent component, JobIconChangerChangedMessage args)
+    private void OnJobChanged(Entity<JobIconChangerComponent> entity, ref JobIconChangerChangedMessage args)
     {
         if (string.IsNullOrWhiteSpace(args.JobIcon))
             return;
 
-        component.JobIcon = args.JobIcon;
+        entity.Comp.JobIcon = args.JobIcon;
     }
 
-    private void OnAfterInteract(EntityUid uid, JobIconChangerComponent component, AfterInteractEvent args)
+    private void OnAfterInteract(Entity<JobIconChangerComponent> entity, ref AfterInteractEvent args)
     {
         //if (component.JobIcon == null || !args.CanReach)
         //    return;
@@ -35,7 +35,10 @@ public sealed class JobIconChangerSystem : EntitySystem
         if (!TryComp(target, out EventRoleComponent? eventRoleComponent))
             return;
 
-        eventRoleComponent.StatusIcon = component.JobIcon;
+        if (entity.Comp.JobIcon == null)
+            return;
+
+        eventRoleComponent.StatusIcon = entity.Comp.JobIcon.Value;
 
         args.Handled = true;
 

@@ -11,5 +11,5 @@ using Robust.Shared.Prototypes;
 public sealed partial class JobIconChangerComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public ProtoId<StatusIconPrototype> JobIcon;
+    public ProtoId<StatusIconPrototype>? JobIcon;
 }
