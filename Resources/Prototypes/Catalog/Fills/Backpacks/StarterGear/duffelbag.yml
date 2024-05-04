@@ -154,7 +154,6 @@
       - id: MagazinePistolRubber
       - id: MagazinePistolRubber
       - id: DrinkRelaxingPeachCan
-      - id: PilotBriefing
 
 - type: entity
   noSpawn: true
@@ -169,7 +168,6 @@
       - id: MagazinePistolRubber
       - id: FlashlightSeclite
       - id: DrinkRelaxingPeachCan
-      - id: PilotBriefing
 
 - type: entity
   noSpawn: true
@@ -237,6 +235,16 @@
       - id: BoxSurvival
       - id: Bible
       - id: RubberStampChaplain
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackDuffelLawyerFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvival
+      - id: RubberStampLawyer
 
 - type: entity
   noSpawn: true

@@ -129,7 +129,7 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
             JobPrototype = jobId,
             Species = species,
             Gender = gender,
-            DisplayPriority = jobPrototype.Weight,
+            DisplayPriority = jobPrototype.RealDisplayWeight,
             Fingerprint = mobFingerprint,
             DNA = dna,
             Profile = profile,
@@ -213,7 +213,7 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
     /// </remarks>
     public uint? GetRecordByName(EntityUid station, string name, StationRecordsComponent? records = null)
     {
-        if (!Resolve(station, ref records))
+        if (!Resolve(station, ref records, false))
             return null;
 
         foreach (var (id, record) in GetRecordsOfType<GeneralStationRecord>(station, records))

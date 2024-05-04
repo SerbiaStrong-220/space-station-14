@@ -20,5 +20,5 @@
     key: enum.ShlepovendUiKey.Key
   - type: UserInterface
     interfaces:
-      - key: enum.ShlepovendUiKey.Key
+      enum.ShlepovendUiKey.Key:
         type: ShlepovendBoundUserInterface

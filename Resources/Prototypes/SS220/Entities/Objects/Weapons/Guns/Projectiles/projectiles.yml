@@ -26,20 +26,19 @@
         hard: false
         mask:
         - Opaque
-  - type: StaminaDamageOnCollide
-    damage: 25
   - type: Ammo
   - type: Projectile
     impactEffect: BulletImpactEffectGreenLaser
     damage:
       types:
         Poison: 15
+        Stamina: 25 #weaponBalance
     soundHit:
       collection: WeakHit
     forceSound: true
   - type: StunOnCollide
-    stunAmount: 1
-    knockdownAmount: 1
+    stunAmount: 4 #weaponBalance
+    knockdownAmount: 4 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
@@ -47,9 +46,67 @@
   parent: BulletMiniEnergyCrossbow
   noSpawn: true
   components:
-  - type: StaminaDamageOnCollide
-    damage: 20
   - type: Projectile
     damage:
       types:
         Poison: 10
+        Stamina: 55 #weaponBalance
+  - type: StunOnCollide
+    stunAmount: 1 #weaponBalance
+    knockdownAmount: 1 #weaponBalance
+
+
+
+
+##Made by MIXnikita for SS220
+
+- type: entity
+  id: BaseBulletTriggerArta
+  parent: BaseBulletTrigger
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 20
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 12
+
+
+- type: entity
+  id: BulletGrenadeSuperArta
+  name: пробивной снаряд
+  parent: BaseBulletTriggerArta
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 400
+    intensitySlope: 8
+    maxIntensity: 20
+
+- type: entity
+  id: BulletGrenadeEMPArta
+  name: снаряд ЭМИ
+  parent: BaseBulletTriggerArta
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: frag
+  - type: EmpOnTrigger
+    range: 10
+    energyConsumption: 50000
+    disableDuration: 20
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 5.5
+    color: blue
+    energy: 0.9

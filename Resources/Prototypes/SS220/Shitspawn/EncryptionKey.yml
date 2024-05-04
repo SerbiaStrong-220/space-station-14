@@ -1,0 +1,147 @@
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyMafia
+  suffix: AdminV
+  name: ключ шифрования мафии
+  description: В него вставили... Перфорированную карту?!
+  components:
+  - type: EncryptionKey
+    channels:
+    - ChannelMafia
+    defaultChannel: ChannelMafia
+  - type: Item
+    sprite: Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_gray
+    - state: common_label
+
+- type: entity
+  parent: EncryptionKeyMafia
+  id: EncryptionKeyTSF
+  suffix: AdminV
+  name: ключ шифрования ТСФ
+  components:
+  - type: EncryptionKey
+    channels:
+    - ChannelTSF
+    defaultChannel: ChannelTSF
+
+- type: entity
+  parent: EncryptionKeyMafia
+  id: EncryptionKeyAlpha
+  suffix: AdminV
+  name: ключ шифрования альфа
+  components:
+  - type: EncryptionKey
+    channels:
+    - ChannelAlpha
+    defaultChannel: ChannelAlpha
+
+- type: entity
+  parent: EncryptionKeyMafia
+  id: EncryptionKeyOmega
+  suffix: AdminV
+  name: ключ шифрования омега
+  components:
+  - type: EncryptionKey
+    channels:
+    - ChannelOmega
+    defaultChannel: ChannelOmega
+
+- type: entity
+  parent: EncryptionKeyMafia
+  id: EncryptionKeyTraders
+  suffix: AdminV
+  name: ключ шифрования торговцев
+  components:
+  - type: EncryptionKey
+    channels:
+    - ChannelTraders
+    defaultChannel: ChannelTraders
+
+- type: entity
+  parent: EncryptionKeyMafia
+  id: EncryptionKeyXonk
+  suffix: AdminV
+  name: ключ шифрования хонксквада
+  components:
+  - type: EncryptionKey
+    channels:
+    - ChannelXonk
+    defaultChannel: ChannelXonk
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetMafia
+  suffix: AdminV
+  name: гарнитура мафии
+  description: Модифицированный модульный интерком, надеваемый на голову. Принимает ключи шифрования.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyMafia
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/base.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/base.rsi
+
+- type: entity
+  parent: ClothingHeadsetMafia
+  id: ClothingHeadsetTSF
+  suffix: AdminV
+  name: гарнитура ТСФ
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyTSF
+      - EncryptionKeyStationMaster
+
+- type: entity
+  parent: ClothingHeadsetMafia
+  id: ClothingHeadsetAlpha
+  suffix: AdminV
+  name: гарнитура "альфа"
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyAlpha
+
+- type: entity
+  parent: ClothingHeadsetMafia
+  id: ClothingHeadsetOmega
+  suffix: AdminV
+  name: гарнитура "омега"
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyOmega
+
+- type: entity
+  parent: ClothingHeadsetMafia
+  id: ClothingHeadsetTraders
+  suffix: AdminV
+  name: гарнитура торговцев
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyTraders
+      - EncryptionKeyCommon
+
+- type: entity
+  parent: ClothingHeadsetMafia
+  id: ClothingHeadsetXonk
+  suffix: AdminV
+  name: гарнитура хонк-сквада
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyXonk
+      - EncryptionKeyStationMaster

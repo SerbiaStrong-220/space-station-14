@@ -1,0 +1,10 @@
+- type: entity
+  parent: PosterBase
+  id: SS220PosterWhoIsWycc
+  suffix: shitspawn
+  name: подозрительный плакат
+  description: На этом прекрасном плакате, видимо нарисованном вручную, изображен белый дракон на чёрном фоне. Кто же это?
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/poster_who.rsi
+      state: icon

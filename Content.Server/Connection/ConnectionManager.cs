@@ -1,10 +1,12 @@
 using System.Collections.Immutable;
+using System.Runtime.InteropServices;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Preferences.Managers;
-using Content.Server.SS220.PrimeWhitelist;
+using Content.Server.SS220.Discord;
 using Content.Shared.CCVar;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.GameTicking;
@@ -12,6 +14,7 @@ using Content.Shared.Players.PlayTimeTracking;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 
 
 namespace Content.Server.Connection
@@ -20,6 +23,18 @@ namespace Content.Server.Connection
     {
         void Initialize();
         Task<bool> HavePrivilegedJoin(NetUserId userId); // Corvax-Queue
+
+        /// <summary>
+        /// Temporarily allow a user to bypass regular connection requirements.
+        /// </summary>
+        /// <remarks>
+        /// The specified user will be allowed to bypass regular player cap,
+        /// whitelist and panic bunker restrictions for <paramref name="duration"/>.
+        /// Bans are not bypassed.
+        /// </remarks>
+        /// <param name="user">The user to give a temporary bypass.</param>
+        /// <param name="duration">How long the bypass should last for.</param>
+        void AddTemporaryConnectBypass(NetUserId user, TimeSpan duration);
     }
 
     /// <summary>
@@ -34,15 +49,31 @@ namespace Content.Server.Connection
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
         [Dependency] private readonly ILocalizationManager _loc = default!;
-        [Dependency] private readonly Primelist _primelist = default!;
         [Dependency] private readonly ServerDbEntryManager _serverDbEntry = default!;
+        [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!;
+        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private readonly ILogManager _logManager = default!;
+
+        private readonly Dictionary<NetUserId, TimeSpan> _temporaryBypasses = [];
+        private ISawmill _sawmill = default!;
 
         public void Initialize()
         {
+            _sawmill = _logManager.GetSawmill("connections");
+
             _netMgr.Connecting += NetMgrOnConnecting;
             _netMgr.AssignUserIdCallback = AssignUserIdCallback;
             // Approval-based IP bans disabled because they don't play well with Happy Eyeballs.
             // _netMgr.HandleApprovalCallback = HandleApproval;
+        }
+
+        public void AddTemporaryConnectBypass(NetUserId user, TimeSpan duration)
+        {
+            ref var time = ref CollectionsMarshal.GetValueRefOrAddDefault(_temporaryBypasses, user, out _);
+            var newTime = _gameTiming.RealTime + duration;
+            // Make sure we only update the time if we wouldn't shrink it.
+            if (newTime > time)
+                time = newTime;
         }
 
         /*
@@ -83,7 +114,11 @@ namespace Content.Server.Connection
                 if (banHits is { Count: > 0 })
                     await _db.AddServerBanHitsAsync(id, banHits);
 
-                e.Deny(msg);
+                var properties = new Dictionary<string, object>();
+                if (reason == ConnectionDenyReason.Full)
+                    properties["delay"] = _cfg.GetCVar(CCVars.GameServerFullReconnectDelay);
+
+                e.Deny(new NetDenyReason(msg, properties));
             }
             else
             {
@@ -110,11 +145,25 @@ namespace Content.Server.Connection
                 hwId = null;
             }
 
+            var bans = await _db.GetServerBansAsync(addr, userId, hwId, includeUnbanned: false);
+            if (bans.Count > 0)
+            {
+                var firstBan = bans[0];
+                var message = firstBan.FormatBanMessage(_cfg, _loc);
+                return (ConnectionDenyReason.Ban, message, bans);
+            }
+
+            if (HasTemporaryBypass(userId))
+            {
+                _sawmill.Verbose("User {UserId} has temporary bypass, skipping further connection checks", userId);
+                return null;
+            }
+
             var adminData = await _dbManager.GetAdminDataForAsync(e.UserId);
 
             // Corvax-Start: Allow privileged players bypass bunker
             var isPrivileged = await HavePrivilegedJoin(e.UserId);
-            if (_cfg.GetCVar(CCVars.PanicBunkerEnabled) && !isPrivileged)
+            if (_cfg.GetCVar(CCVars.PanicBunkerEnabled) && adminData == null && !isPrivileged)
             // Corvax-End
             {
                 var showReason = _cfg.GetCVar(CCVars.PanicBunkerShowReason);
@@ -162,30 +211,33 @@ namespace Content.Server.Connection
                 }
             }
 
-            // Corvax-Queue-Start
+            // Corvax-Queue
             var isQueueEnabled = _cfg.GetCVar(CCCVars.QueueEnabled);
-            if (_plyMgr.PlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && !isPrivileged && !isQueueEnabled)
-            // Corvax-Queue-End
+            var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
+                            ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
+                            status == PlayerGameStatus.JoinedGame;
+            var adminBypass = _cfg.GetCVar(CCVars.AdminBypassMaxPlayers) && adminData != null;
+            if ((_plyMgr.PlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && !adminBypass) && !wasInGame && !isQueueEnabled) // Corvax-Queue
             {
                 return (ConnectionDenyReason.Full, Loc.GetString("soft-player-cap-full"), null);
             }
 
-            var bans = await _db.GetServerBansAsync(addr, userId, hwId, includeUnbanned: false);
-            if (bans.Count > 0)
-            {
-                var firstBan = bans[0];
-                var message = firstBan.FormatBanMessage(_cfg, _loc);
-                return (ConnectionDenyReason.Ban, message, bans);
-            }
-
+            // SS220 prime list restriction start
             if (_cfg.GetCVar(CCVars.PrimelistEnabled))
             {
-                if (!await _primelist.IsPrimelisted(e.UserName.ToLower()))
+                var primeAccessStatus = await _discordPlayerManager.GetUserPrimeListStatus(userId);
+
+                if (primeAccessStatus is null)
                 {
-                    var msg = Loc.GetString(_cfg.GetCVar(CCVars.WhitelistReason));
-                    return (ConnectionDenyReason.Whitelist, msg, null);
+                    return (ConnectionDenyReason.Whitelist, "Статус доступа на prime не был получен. Попробуйте переподключиться к серверу.", null);
+                }
+
+                if (!string.IsNullOrWhiteSpace(primeAccessStatus.PrimeAccessNotAvailableReason))
+                {
+                    return (ConnectionDenyReason.Whitelist, primeAccessStatus.PrimeAccessNotAvailableReason, null);
                 }
             }
+            // SS220 prime list restriction end
             if (_cfg.GetCVar(CCVars.WhitelistEnabled))
             {
                 var min = _cfg.GetCVar(CCVars.WhitelistMinPlayers);
@@ -204,6 +256,11 @@ namespace Content.Server.Connection
             }
 
             return null;
+        }
+
+        private bool HasTemporaryBypass(NetUserId user)
+        {
+            return _temporaryBypasses.TryGetValue(user, out var time) && time > _gameTiming.RealTime;
         }
 
         private async Task<NetUserId?> AssignUserIdCallback(string name)

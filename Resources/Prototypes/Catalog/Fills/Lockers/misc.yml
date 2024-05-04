@@ -28,12 +28,14 @@
       - id: OxygenTankFilled
         prob: 0.20
         orGroup: EmergencyTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return start
       - id: EmergencyNitrogenTankFilled
         prob: 0.80
-        orGroup: EmergencyNitrogenOrRegularNitrogen
+        orGroup: EmergencyNitrogenTankOrRegularTank
       - id: NitrogenTankFilled
         prob: 0.20
-        orGroup: EmergencyNitrogenOrRegularNitrogen
+        orGroup: EmergencyNitrogenTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return end
       - id: ToolboxEmergencyFilled
         prob: 0.4
       - id: MedkitOxygenFilled
@@ -42,6 +44,8 @@
         prob: 0.05
       - id: BoxMRE
         prob: 0.1
+      - id: LotteryCash #SS220 Lottery
+        prob: 0.05
 
 - type: entity
   id: ClosetWallEmergencyFilledRandom
@@ -58,12 +62,14 @@
       - id: OxygenTankFilled
         prob: 0.20
         orGroup: EmergencyTankOrRegularTank
-      - id: NitrogenTankFilled
-        prob: 0.80
-        orGroup: EmergencyNitrogenOrRegularNitrogen
+        #SS220 Emergency_Nitrogen_Tank_return start
       - id: EmergencyNitrogenTankFilled
+        prob: 0.80
+        orGroup: EmergencyNitrogenTankOrRegularTank
+      - id: NitrogenTankFilled
         prob: 0.20
-        orGroup: EmergencyNitrogenOrRegularNitrogen  
+        orGroup: EmergencyNitrogenTankOrRegularTank
+        #SS220 Emergency_Nitrogen_Tank_return end
       - id: ToolboxEmergencyFilled
         prob: 0.4
       - id: MedkitOxygenFilled
@@ -72,6 +78,23 @@
         prob: 0.05
       - id: BoxMRE
         prob: 0.1
+      - id: LotteryCash #SS220 Lottery
+        prob: 0.05
+
+- type: entity
+  id: ClosetEmergencyN2FilledRandom
+  parent: ClosetEmergencyN2
+  suffix: Filled, Random
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingMaskBreath
+      - id: EmergencyNitrogenTankFilled
+        prob: 0.80
+        orGroup: EmergencyTankOrRegularTank
+      - id: NitrogenTankFilled
+        prob: 0.20
+        orGroup: EmergencyTankOrRegularTank
 
 - type: entity
   id: ClosetFireFilled
@@ -84,7 +107,7 @@
         - id: ClothingHeadHelmetFire
         - id: ClothingMaskGas
         - id: OxygenTankFilled
-        - id: NitrogenTankFilled
+        - id: NitrogenTankFilled #SS220 Emergency_Nitrogen_Tank_return
         - id: FireExtinguisher
           prob: 0.25
 - type: entity
@@ -98,7 +121,7 @@
         - id: ClothingHeadHelmetFire
         - id: ClothingMaskGas
         - id: OxygenTankFilled
-        - id: NitrogenTankFilled
+        - id: NitrogenTankFilled #SS220 Emergency_Nitrogen_Tank_return
         - id: FireExtinguisher
           prob: 0.25
 - type: entity
@@ -124,8 +147,21 @@
           prob: 0.10
         - id: Soap
           prob: 0.44
+        - id: null
+          prob: 0.67
+          orGroup: carp
         - id: PlushieCarp
           prob: 0.2
+          orGroup: carp
+        - id: PlushieHolocarp
+          prob: 0.05
+          orGroup: carp
+        - id: PlushieMagicarp
+          prob: 0.05
+          orGroup: carp
+        - id: PlushieRainbowCarp
+          prob: 0.03
+          orGroup: carp
         - id: PlushieSlime
           prob: 0.2
         - id: PlushieSnake
@@ -148,6 +184,15 @@
           prob: 0.20
         - id: DrinkMopwataBottleRandom
           prob: 0.20
+          #SS220-VodkaKazaki-Begin
+          orGroup: MaintenanceDrink
+        - id: DrinkVodkaKazakiBottleFull
+          prob: 0.05
+          orGroup: MaintenanceDrink
+        - id: null
+          prob: 0.75
+          orGroup: MaintenanceDrink
+          #SS220VodkaKazaki-End
         - id: ModularReceiver
           prob: 0.1
         - id: DrinkSpaceGlue
@@ -156,6 +201,8 @@
           prob: 0.20
         - id: BarberScissors
           prob: 0.05
+        - id: BookRandomStory
+          prob: 0.1
         # Syndicate loot
         - id: null
           prob: 0.95
@@ -193,6 +240,17 @@
         - id: WeaponSniperMosin
           prob: 0.0010
           orGroup: syndiemaintloot
+        - id: ReinforcementRadioSyndicateFake
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: BoxHoloparasiteFake
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: RandomID
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: LotteryCash #SS220 Lottery
+          prob: 0.05
 
 - type: entity
   id: ClosetWallMaintenanceFilledRandom
@@ -217,8 +275,21 @@
           prob: 0.10
         - id: Soap
           prob: 0.44
+        - id: null
+          prob: 0.67
+          orGroup: carp
         - id: PlushieCarp
           prob: 0.2
+          orGroup: carp
+        - id: PlushieHolocarp
+          prob: 0.05
+          orGroup: carp
+        - id: PlushieMagicarp
+          prob: 0.05
+          orGroup: carp
+        - id: PlushieRainbowCarp
+          prob: 0.03
+          orGroup: carp
         - id: PlushieSlime
           prob: 0.2
         - id: PlushieSnake
@@ -241,6 +312,8 @@
           prob: 0.20
         - id: ModularReceiver
           prob: 0.1
+        - id: LotteryCash #SS220 Lottery
+          prob: 0.05
         # Syndicate loot
         - id: null
           prob: 0.95

@@ -10,3 +10,6 @@
     sprite: SS220/Clothing/Mask/moryak.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HamsterWearable

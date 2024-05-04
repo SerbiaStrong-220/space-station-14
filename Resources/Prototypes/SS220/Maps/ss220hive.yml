@@ -67,7 +67,7 @@
             Mime: [ 1, 2 ]
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
-            
+
 - type: entity
   id: HiveNanotrasenStation
   parent: StandardNanotrasenStation

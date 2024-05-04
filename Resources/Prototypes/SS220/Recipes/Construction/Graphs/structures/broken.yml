@@ -1,0 +1,22 @@
+﻿- type: constructionGraph
+  id: BrokenEntity
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: weld
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 3
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 4
+            - !type:DeleteEntity {}

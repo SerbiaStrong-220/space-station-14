@@ -806,6 +806,10 @@
             Quantity: 4
           - ReagentId: Allicin
             Quantity: 3
+  - type: Tag
+    tags:
+    - ChiliBowl
+
 
 - type: entity
   name: cold chili
@@ -830,6 +834,9 @@
             Quantity: 8
           - ReagentId: Vitamin
             Quantity: 4
+  - type: Tag
+    tags:
+    - ChiliBowl
 
 - type: entity
   name: chili con carnival
@@ -860,6 +867,9 @@
             Quantity: 4
           - ReagentId: Allicin
             Quantity: 3
+  - type: Tag
+    tags:
+    - ChiliBowl
 
 - type: entity
   name: monkey's delight
@@ -1010,15 +1020,19 @@
             Quantity: 5
 
 - type: entity
-  name: beet soup
+  name: борщ #ss200 cooking
   parent: FoodBowlBase
   id: FoodSoupBeet
-  description: Wait, how do you spell it again..?
+  description: Принесите мне кто-нибудь квас и хлеб! #ss220 cooking
   components:
-  - type: Sprite
+  - type: FlavorProfile #ss220 cooking
+    flavors:
+      - borsch  
+  - type: Sprite    
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi #ss220 cooking
     layers:
     - state: bowl
-    - state: beet
+    - state: borsch
   - type: SolutionContainerManager
     solutions:
       food:

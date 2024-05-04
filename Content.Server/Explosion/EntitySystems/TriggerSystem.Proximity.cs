@@ -21,7 +21,6 @@ public sealed partial class TriggerSystem
         SubscribeLocalEvent<TriggerOnProximityComponent, StartCollideEvent>(OnProximityStartCollide);
         SubscribeLocalEvent<TriggerOnProximityComponent, EndCollideEvent>(OnProximityEndCollide);
         SubscribeLocalEvent<TriggerOnProximityComponent, MapInitEvent>(OnMapInit);
-        //SubscribeLocalEvent<TriggerOnProximityComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<TriggerOnProximityComponent, ComponentShutdown>(OnProximityShutdown);
         // Shouldn't need re-anchoring.
         SubscribeLocalEvent<TriggerOnProximityComponent, AnchorStateChangedEvent>(OnProximityAnchor);

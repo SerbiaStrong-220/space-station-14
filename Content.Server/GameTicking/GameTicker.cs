@@ -95,7 +95,6 @@ namespace Content.Server.GameTicking
             InitializeStatusShell();
             InitializeCVars();
             InitializePlayer();
-            InitializeLobbyMusic();
             InitializeLobbyBackground();
             InitializeGamePreset();
             DebugTools.Assert(_prototypeManager.Index<JobPrototype>(FallbackOverflowJob).Name == FallbackOverflowJobName,
@@ -136,6 +135,7 @@ namespace Content.Server.GameTicking
                 return;
             base.Update(frameTime);
             UpdateRoundFlow(frameTime);
+            UpdateGameRules();
         }
     }
 }

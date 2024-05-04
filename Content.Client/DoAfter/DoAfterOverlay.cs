@@ -1,10 +1,10 @@
 using System.Numerics;
 using Content.Shared.DoAfter;
+using Content.Client.UserInterface.Systems;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -19,9 +19,10 @@ public sealed class DoAfterOverlay : Overlay
     private readonly IPlayerManager _player;
     private readonly SharedTransformSystem _transform;
     private readonly MetaDataSystem _meta;
+    private readonly ProgressColorSystem _progressColor;
 
     private readonly Texture _barTexture;
-    private readonly ShaderInstance _shader;
+    private readonly ShaderInstance _unshadedShader;
 
     /// <summary>
     ///     Flash time for cancelled DoAfters
@@ -41,11 +42,12 @@ public sealed class DoAfterOverlay : Overlay
         _player = player;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _meta = _entManager.EntitySysManager.GetEntitySystem<MetaDataSystem>();
+        _progressColor = _entManager.System<ProgressColorSystem>();
         var sprite = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/progress_bar.rsi"), "icon");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
         _player = player; // SS220 Invisible-DoAfter
 
-        _shader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
+        _unshadedShader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -60,7 +62,6 @@ public sealed class DoAfterOverlay : Overlay
         const float scale = 1f;
         var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
         var rotationMatrix = Matrix3.CreateRotation(-rotation);
-        handle.UseShader(_shader);
 
         var curTime = _timing.CurTime;
 
@@ -80,6 +81,13 @@ public sealed class DoAfterOverlay : Overlay
             var worldPosition = _transform.GetWorldPosition(xform, xformQuery);
             if (!bounds.Contains(worldPosition))
                 continue;
+
+            // shades the do-after bar if the do-after bar belongs to other players
+            // does not shade do-afters belonging to the local player
+            if (uid != localEnt)
+                handle.UseShader(null);
+            else
+                handle.UseShader(_unshadedShader);
 
             // If the entity is paused, we will draw the do-after as it was when the entity got paused.
             var meta = metaQuery.GetComponent(uid);
@@ -129,7 +137,7 @@ public sealed class DoAfterOverlay : Overlay
                     elapsedRatio = (float) Math.Min(1, elapsed.TotalSeconds / doAfter.Args.Delay.TotalSeconds);
                     var cancelElapsed = (time - doAfter.CancelledTime.Value).TotalSeconds;
                     var flash = Math.Floor(cancelElapsed / FlashTime) % 2 == 0;
-                    color = new Color(1f, 0f, 0f, flash ? alpha : 0f);
+                    color = GetProgressColor(0, flash ? alpha : 0);
                 }
                 else
                 {
@@ -150,14 +158,8 @@ public sealed class DoAfterOverlay : Overlay
         handle.SetTransform(Matrix3.Identity);
     }
 
-    public static Color GetProgressColor(float progress, float alpha = 1f)
+    public Color GetProgressColor(float progress, float alpha = 1f)
     {
-        if (progress >= 1.0f)
-        {
-            return new Color(0f, 1f, 0f, alpha);
-        }
-        // lerp
-        var hue = (5f / 18f) * progress;
-        return Color.FromHsv((hue, 1f, 0.75f, alpha));
+        return _progressColor.GetProgressColor(progress).WithAlpha(alpha);
     }
 }

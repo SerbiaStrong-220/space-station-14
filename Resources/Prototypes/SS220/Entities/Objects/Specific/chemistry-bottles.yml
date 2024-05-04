@@ -1,0 +1,64 @@
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: DexalinPlusChemistryBottle
+  name: бутылочка дексалина +
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: DexalinPlus
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: BicaridineChemistryBottle
+  name: бутылочка бикаридина
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: DyloveneChemistryBottle
+  name: бутылочка диловена
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Dylovene
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: ArithrazineChemistryBottle
+  name: бутылочка аритразина
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Arithrazine
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: DermalineChemistryBottle
+  name: бутылочка дермалина
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Dermaline
+          Quantity: 30

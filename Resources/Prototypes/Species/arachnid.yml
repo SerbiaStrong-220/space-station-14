@@ -12,8 +12,6 @@
   femaleFirstNames: names_arachnid_first
   maleLastNames: names_arachnid_last # Corvax-LastnameGender
   femaleLastNames: names_arachnid_last # Corvax-LastnameGender
-  sexes:
-  - Unsexed
 
 - type: speciesBaseSprites
   id: MobArachnidSprites

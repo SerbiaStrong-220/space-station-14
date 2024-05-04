@@ -12,6 +12,7 @@
   weights:
     CaptainIDStealObjective: 1
     CMOHyposprayStealObjective: 1
+    CMOCrewMonitorStealObjective: 1
     RDHardsuitStealObjective: 1
     NukeDiskStealObjective: 1
     MagbootsStealObjective: 1
@@ -52,7 +53,7 @@
   id: ThiefBigObjectiveGroups
   weights:
     ThiefObjectiveGroupStructure: 0 #Temporarily disabled until obvious ways to steal structures are added
-    ThiefObjectiveGroupAnimal: 2
+#    ThiefObjectiveGroupAnimal: 2 # SS220 Delete thief objective animals
 
 - type: weightedRandom
   id: ThiefEscapeObjectiveGroups
@@ -71,7 +72,6 @@
     TechnologyDiskStealCollectionObjective: 1        #rnd
     FigurineStealCollectionObjective: 0.3          #service
     IDCardsStealCollectionObjective: 1
-    CannabisStealCollectionObjective: 1
     LAMPStealCollectionObjective: 2 #only for moth
 
 - type: weightedRandom
@@ -110,20 +110,19 @@
     AltarNanotrasenStealObjective: 1
     PlantRDStealObjective: 1
 
-- type: weightedRandom
-  id: ThiefObjectiveGroupAnimal
-  weights:
-    IanStealObjective: 1
-    BingusStealObjective: 1
-    McGriffStealObjective: 1
-    WalterStealObjective: 1
-    MortyStealObjective: 1
-    RenaultStealObjective: 1
-    HamletStealObjective: 1
-    ShivaStealObjective: 1
-    SmileStealObjective: 1
-    PunPunStealObjective: 1
-    TropicoStealObjective: 1
+# SS220 Delete thief objective animals begin
+# - type: weightedRandom
+#   id: ThiefObjectiveGroupAnimal
+#   weights:
+#     IanStealObjective: 1
+#     BingusStealObjective: 1
+#     McGriffStealObjective: 1
+#     WalterStealObjective: 1
+#     MortyStealObjective: 1
+#     RenaultStealObjective: 1
+#     ShivaStealObjective: 1
+#     TropicoStealObjective: 1
+# SS220 Delete thief objective animals end
 
 - type: weightedRandom
   id: ThiefObjectiveGroupEscape

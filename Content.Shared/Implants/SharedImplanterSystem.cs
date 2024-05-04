@@ -79,7 +79,7 @@ public abstract class SharedImplanterSystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = implanter };
         RaiseLocalEvent(target, ref ev);
 
-        Dirty(component);
+        Dirty(implanter, component);
     }
 
     public bool CanImplant(
@@ -158,7 +158,7 @@ public abstract class SharedImplanterSystem : EntitySystem
             if (component.CurrentMode == ImplanterToggleMode.Draw && !component.ImplantOnly && !permanentFound)
                 ImplantMode(implanter, component);
 
-            Dirty(component);
+            Dirty(implanter, component);
         }
     }
 

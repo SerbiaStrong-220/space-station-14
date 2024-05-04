@@ -18,7 +18,6 @@
       solutions:
         beaker:
           maxVol: 30
-          canMix: false
           canReact: false
     - type: RefillableSolution
       solution: beaker

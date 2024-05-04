@@ -17,4 +17,7 @@
         - CrystalBlue
         - CrystalCyan
         - CrystalGrey
+        - CrystalYellow #SS220-New-Crystals-start
+        - CrystalPurple
+        - CrystalWhite #SS220-New-Crystals-end
       chance: 0.7

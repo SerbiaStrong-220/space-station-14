@@ -7,10 +7,10 @@
     contents:
       - id: FlashlightSeclite
       - id: WeaponDisabler
-        prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
+      - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -31,10 +31,10 @@
     contents:
       - id: FlashlightSeclite
       - id: WeaponDisabler
-        prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
+      - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -45,6 +45,7 @@
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
+
 #SS220-Pilot
 - type: entity
   id: LockerPilotFilled
@@ -61,12 +62,11 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHandsGlovesCombat
+#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
       - id: ClothingShoesBootsJack
       - id: ClothingEyesHudSecurity
-      - id: ClothingOuterHardsuitSecurity
+      - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
       - id: HandheldGPSBasic
-      - id: PilotBriefing
       - id: OxygenTankFilled
       - id: NitrogenTankFilled
 
@@ -79,6 +79,7 @@
     contents:
       - id: FlashlightSeclite
         prob: 0.8
+      - id: WeaponDisabler
       - id: ClothingUniformJumpsuitSecGrey
         prob: 0.3
       - id: ClothingHeadHelmetBasic
@@ -86,7 +87,7 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
         prob: 0.5
-      - id: ClothingEyesGlassesSunglasses
+      - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetSecurity
       - id: ClothingHandsGlovesColorBlack
       - id: ClothingShoesBootsJack
@@ -94,7 +95,6 @@
         prob: 0.2
       - id: WeaponMeleeNeedle
         prob: 0.1
-      - id: ClothingEyesHudSecurity
       - id: HoloprojectorSecurity
         #prob: 0.6 # SS220 guranteed-holo-projector
 
@@ -105,8 +105,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingEyesHudSecurity
-      - id: WeaponDisabler
+      - id: ClothingEyesHudMedical #ss220-brigmed
       - id: TrackingImplanter
         amount: 2
       - id: ClothingOuterHardsuitBrigmedic
@@ -162,7 +161,10 @@
       - id: BookBusido # Corvax-Books
       - id: HoloprojectorSecurity
       - id: BoxEvidenceMarkers
-
+      - id: SpeedLoaderMagnum
+        amount: 2
+      - id: DetectiveHiddenCamera # SS220 add-detective-camera
+        amount: 3
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb
@@ -260,7 +262,7 @@
     contents:
     - id: WeaponSubMachineGunWt550
       amount: 2
-    - id: MagazinePistolSubMachineGun
+    - id: MagazinePistolSubMachineGunTopMounted
       amount: 4
 
 - type: entity

@@ -29,6 +29,9 @@ namespace Content.Server.GameTicking
 
         private WebhookIdentifier? _webhookIdentifier;
 
+        [ViewVariables]
+        private string? RoundEndSoundCollection { get; set; }
+
 #if EXCEPTION_TOLERANCE
         [ViewVariables]
         public int RoundStartFailShutdownCount { get; private set; } = 0;
@@ -73,6 +76,7 @@ namespace Content.Server.GameTicking
                     DiscordRoundEndRole = null;
                 }
             }, true);
+            Subs.CVar(_configurationManager, CCVars.RoundEndSoundCollection, value => RoundEndSoundCollection = value, true);
 #if EXCEPTION_TOLERANCE
             Subs.CVar(_configurationManager, CCVars.RoundStartFailShutdownCount, value => RoundStartFailShutdownCount = value, true);
 #endif

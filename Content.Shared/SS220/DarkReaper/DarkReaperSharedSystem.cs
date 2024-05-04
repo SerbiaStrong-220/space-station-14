@@ -110,8 +110,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         {
             Broadcast = false,
             BreakOnDamage = false,
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             NeedHand = false,
             BlockDuplicate = true,
             CancelDuplicate = true,
@@ -173,8 +172,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             {
                 Broadcast = false,
                 BreakOnDamage = false,
-                BreakOnTargetMove = false,
-                BreakOnUserMove = false,
+                BreakOnMove = false,
                 NeedHand = false,
                 BlockDuplicate = true,
                 CancelDuplicate = false
@@ -199,8 +197,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             {
                 Broadcast = false,
                 BreakOnDamage = false,
-                BreakOnTargetMove = false,
-                BreakOnUserMove = false,
+                BreakOnMove = false,
                 NeedHand = false,
                 BlockDuplicate = true,
                 CancelDuplicate = false

@@ -1,0 +1,95 @@
+- type: entity
+  name: щи
+  parent: FoodBowlBase
+  id: FoodSoupShchi
+  description: Суп с капусткой, но не красный.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - shchi
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: shchi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5
+
+- type: entity
+  name: окрошка
+  parent: FoodBowlBase
+  id: FoodSoupOkroshka
+  description: Суп, который можно есть ложкой или пить из бокала в зависимости от настроения.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - okroshka
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: okroshka
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5
+
+- type: entity
+  name: окрошка на квасе
+  parent: FoodBowlBase
+  id: FoodSoupOkroshkaKvass
+  description: Культурное наследие, которое прекрасно охладит вас в жаркий летний день.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - okroshkaKvass
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: okroshkaKvass
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5          
+
+- type: entity
+  name: винегрет
+  parent: FoodBowlBase
+  id: FoodSaladVinaigrette
+  description: Кладезь витаминов и микроэлементов. А почему тут нет вина? 
+  components:
+  - type: FlavorProfile
+    flavors:
+      - vinaigrette
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: vinaigrette
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5          

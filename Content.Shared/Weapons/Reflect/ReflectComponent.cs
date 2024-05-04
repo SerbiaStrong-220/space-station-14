@@ -26,10 +26,18 @@ public sealed partial class ReflectComponent : Component
     /// </summary>
     [DataField("reflectProb"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float ReflectProb = 0.25f;
+    // ss220 FixESword
+    [DataField("reflectProbProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float ReflectProbProjectile = 0.25f;
+    // ss220 FixESword end
 
     [DataField("spread"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public Angle Spread = Angle.FromDegrees(45);
 
+    // ss220 FixESword
+    [DataField("spreadProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public Angle SpreadProjectile = Angle.FromDegrees(45);
+    // ss220 FixESword end
     [DataField("soundOnReflect")]
     public SoundSpecifier? SoundOnReflect = new SoundPathSpecifier("/Audio/Weapons/Guns/Hits/laser_sear_wall.ogg");
 }

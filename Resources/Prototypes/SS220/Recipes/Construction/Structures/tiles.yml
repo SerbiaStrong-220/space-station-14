@@ -1,22 +1,23 @@
- - type: construction
-   name: gold floor
-   id: tileGold
-   graph: TileGold
-   startNode: start
-   targetNode: goldtile
-   category: construction-category-tiles
-   description: "A piece of gold flooring."
-   icon: { sprite: Objects/Tiles/tile.rsi, state: gold }
-   objectType: Item
-
- - type: construction
-   name: silver floor
-   id: tileSilver
-   graph: TileSilver
-   startNode: start
-   targetNode: silvertile
-   category: construction-category-tiles
-   description: "A piece of silver flooring."
-   icon: { sprite: Objects/Tiles/tile.rsi, state: silver }
-   objectType: Item
-
+#SS220-Sheetifier-Rework-start
+# - type: construction
+#   name: gold floor
+#   id: tileGold
+#   graph: TileGold
+#   startNode: start
+#   targetNode: goldtile
+#   category: construction-category-tiles
+#   description: "A piece of gold flooring."
+#   icon: { sprite: Objects/Tiles/tile.rsi, state: gold }
+#   objectType: Item
+#
+# - type: construction
+#   name: silver floor
+#   id: tileSilver
+#   graph: TileSilver
+#   startNode: start
+#   targetNode: silvertile
+#   category: construction-category-tiles
+#   description: "A piece of silver flooring."
+#   icon: { sprite: Objects/Tiles/tile.rsi, state: silver }
+#   objectType: Item
+#SS220-Sheetifier-Rework-end

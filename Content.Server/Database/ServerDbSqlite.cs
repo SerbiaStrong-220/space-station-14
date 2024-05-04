@@ -153,11 +153,11 @@ namespace Content.Server.Database
             return hwId is { Length: > 0 } hwIdVar && hwIdVar.AsSpan().SequenceEqual(ban.HWId);
         }
 
-        public override async Task AddServerBanAsync(ServerBanDef serverBan)
+        public override async Task<int> AddServerBanAsync(ServerBanDef serverBan)
         {
             await using var db = await GetDbImpl();
 
-            db.SqliteDbContext.Ban.Add(new ServerBan
+            var ban = db.SqliteDbContext.Ban.Add(new ServerBan
             {
                 Address = serverBan.Address.ToNpgsqlInet(),
                 Reason = serverBan.Reason,
@@ -174,6 +174,8 @@ namespace Content.Server.Database
             });
 
             await db.SqliteDbContext.SaveChangesAsync();
+
+            return ban.Entity.Id;
         }
 
         public override async Task AddServerUnbanAsync(ServerUnbanDef serverUnban)
@@ -454,34 +456,6 @@ namespace Content.Server.Database
             var adminRanks = await db.DbContext.AdminRank.Include(a => a.Flags).ToArrayAsync(cancel);
 
             return (admins.Select(p => (p.a, p.LastSeenUserName)).ToArray(), adminRanks)!;
-        }
-
-        public override async Task<int> AddNewRound(Server server, params Guid[] playerIds)
-        {
-            await using var db = await GetDb();
-
-            var players = await db.DbContext.Player
-                .Where(player => playerIds.Contains(player.UserId))
-                .ToListAsync();
-
-            var nextId = 1;
-            if (await db.DbContext.Round.AnyAsync())
-            {
-                nextId = db.DbContext.Round.Max(round => round.Id) + 1;
-            }
-
-            var round = new Round
-            {
-                Id = nextId,
-                Players = players,
-                ServerId = server.Id
-            };
-
-            db.DbContext.Round.Add(round);
-
-            await db.DbContext.SaveChangesAsync();
-
-            return round.Id;
         }
 
         protected override IQueryable<AdminLog> StartAdminLogsQuery(ServerDbContext db, LogFilter? filter = null)

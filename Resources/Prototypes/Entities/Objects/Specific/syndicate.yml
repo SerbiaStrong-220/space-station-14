@@ -21,7 +21,25 @@
   - type: Currency
     price:
       Telecrystal: 1
-
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-Telecrystal-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-Telecrystal-cargo
+      jobRequired:
+        - SalvageSpecialist
+    - label: corvax-hidden-desc-Telecrystal-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
+        
 - type: entity
   parent: Telecrystal
   id: Telecrystal1
@@ -63,8 +81,8 @@
     heldPrefix: old-radio
   - type: UserInterface
     interfaces:
-    - key: enum.StoreUiKey.Key
-      type: StoreBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
   - type: ActivatableUI
     key: enum.StoreUiKey.Key
   - type: Store
@@ -108,16 +126,16 @@
 
 - type: entity
   parent: BaseUplinkRadio
-  id: LoneOpsUplinkRadio40TC
-  suffix: 40 TC, LoneOps
+  id: LoneOpsUplinkRadio40TC # SS220 Lone-Ops-Uplink
+  suffix: 40 TC, LoneOps # SS220 Lone-Ops-Uplink
   components:
   - type: Store
     preset: StorePresetUplink
     balance:
-      Telecrystal: 40
+      Telecrystal: 40 # SS220 Lone-Ops-Uplink
   - type: Tag
     tags:
-    - LoneOpsUplink
+    - LoneOpsUplink # SS220 Lone-Ops-Uplink
 
 - type: entity
   parent: BaseUplinkRadio

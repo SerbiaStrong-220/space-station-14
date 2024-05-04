@@ -1,0 +1,39 @@
+- type: entity
+  name: коробка с голопаразитом
+  parent: BoxCardboard
+  id: BoxHoloparasiteFake
+  suffix: Фальшивый
+  description: Коробка, содержащая инъектор голопаразита
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingHeadHatBizarreSoft
+  - type: Sprite
+    layers:
+      - state: box
+      - state: holo
+
+- type: soundCollection
+  id: RequiemSound
+  files:
+    - /Audio/SS220/Music/Requiem.ogg
+
+- type: entity
+  parent: BaseItem
+  id: ReinforcementRadioSyndicateFake
+  name: старое радио
+  description: Винтажное радио, которое по никому не ясной причине застыло на крайне необычной частоте, со словом «АпЛинк» на лицевой стороне.
+  suffix: Фальшивый
+  components:
+    - type: Sprite
+      sprite: Objects/Devices/communication.rsi
+      state: old-radio
+    - type: EmitSoundOnUse
+      sound:
+        collection: RequiemSound
+        params:
+          volume: -10
+    - type: UseDelay
+      delay: 300.0
+    - type: StaticPrice
+      price: 5

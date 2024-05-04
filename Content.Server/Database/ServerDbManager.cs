@@ -85,7 +85,7 @@ namespace Content.Server.Database
             ImmutableArray<byte>? hwId,
             bool includeUnbanned=true);
 
-        Task AddServerBanAsync(ServerBanDef serverBan);
+        Task<int> AddServerBanAsync(ServerBanDef serverBan);
         Task AddServerUnbanAsync(ServerUnbanDef serverBan);
 
         public Task EditServerBan(
@@ -274,7 +274,15 @@ namespace Content.Server.Database
         Task DeleteAdminMessage(int id, Guid deletedBy, DateTimeOffset deletedAt);
         Task HideServerBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt);
         Task HideServerRoleBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt);
-        Task MarkMessageAsSeen(int id);
+
+        /// <summary>
+        /// Mark an admin message as being seen by the target player.
+        /// </summary>
+        /// <param name="id">The database ID of the admin message.</param>
+        /// <param name="dismissedToo">
+        /// If true, the message is "permanently dismissed" and will not be shown to the player again when they join.
+        /// </param>
+        Task MarkMessageAsSeen(int id, bool dismissedToo);
 
         #endregion
 
@@ -418,7 +426,7 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetServerBansAsync(address, userId, hwId, includeUnbanned));
         }
 
-        public Task AddServerBanAsync(ServerBanDef serverBan)
+        public Task<int> AddServerBanAsync(ServerBanDef serverBan)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.AddServerBanAsync(serverBan));
@@ -854,10 +862,10 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.HideServerRoleBanFromNotes(id, deletedBy, deletedAt));
         }
 
-        public Task MarkMessageAsSeen(int id)
+        public Task MarkMessageAsSeen(int id, bool dismissedToo)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.MarkMessageAsSeen(id));
+            return RunDbCommand(() => _db.MarkMessageAsSeen(id, dismissedToo));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

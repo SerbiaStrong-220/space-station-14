@@ -24,6 +24,16 @@
   - type: Body
     prototype: Dwarf
     requiredLegs: 2
+#SS220-TweakDamageSpecies-Begin
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    attackRate: 0.625
+    damage:
+      types:
+        Blunt: 8
+#SS220-TweakDamageSpecies-End
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -51,6 +61,11 @@
     accent: dwarf
   - type: Speech
     speechSounds: Bass
+  - type: HumanoidAppearance
+    species: Human
+    hideLayersOnEquip:
+    - Hair
+    - Snout
 
 - type: entity
   parent: BaseSpeciesDummy

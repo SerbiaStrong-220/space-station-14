@@ -400,6 +400,9 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 3
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatCutlet
 
 - type: entity
   name: raw lizard meat
@@ -508,6 +511,15 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 1
+#SS220 MeatwheatUpdate begin
+  - type: Construction
+    graph: ClumpToMeat
+    node: start
+    defaultTarget: make meat
+  - type: Tag
+    tags:
+    - Meatwheat
+#SS220 MeatwheatUpdate end
 
 - type: entity
   name: raw snake meat
@@ -716,6 +728,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: plain-cooked
@@ -775,6 +788,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: product-cooked
@@ -943,6 +957,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: goliath-cooked
@@ -972,6 +987,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: rouny-cooked
@@ -997,6 +1013,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: lizard-cooked

@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "size": 
+  "size":
   {
     "x": 32,
     "y": 32
   },
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
   "copyright": "Made by MIXnikita for SS220, based on sprites from TauCetiClassic at commit https://github.com/TauCetiStation/TauCetiClassic/commit/fd5cfd76acdf5bda9e46413c11006a6e825d51a9",
-  "states": 
+  "states":
   [
     {
       "name": "Generic_mob_burning",
@@ -72,7 +72,7 @@
     {
       "name": "Standing",
       "directions": 4,
-      "delays": 
+      "delays":
       [
         [
           0.1,
@@ -96,9 +96,19 @@
           0.1,
           0.1,
           0.1,
-          0.1 
+          0.1
         ]
       ]
+    },
+    {
+        "name": "Mouse_burning",
+        "directions": 4,
+        "delays": [
+            [ 0.1, 0.1, 0.1, 0.1, 0.1 ],
+            [ 0.1, 0.1, 0.1, 0.1, 0.1 ],
+            [ 0.1, 0.1, 0.1, 0.1, 0.1 ],
+            [ 0.1, 0.1, 0.1, 0.1, 0.1 ]
+        ]
     }
   ]
 }

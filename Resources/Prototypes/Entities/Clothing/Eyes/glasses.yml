@@ -128,17 +128,14 @@
 
 - type: entity
   parent: ClothingEyesBase
-  id: ClothingEyesGlassesSunglasses
-  name: sun glasses
-  description: A pair of black sunglasses.
+  id: ClothingEyesGlassesCheapSunglasses
+  name: cheap sunglasses
+  description: A pair of black sunglasses. Doesn't block light well, more of an accessory than something useful.
   components:
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/sunglasses.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Glasses/sunglasses.rsi
-  - type: FlashImmunity
-  - type: EyeProtection
-    protectionTime: 5
   - type: Tag
     tags:
     - HamsterWearable
@@ -148,7 +145,22 @@
     coverage: EYES
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: ClothingEyesGlassesCheapSunglasses
+  id: ClothingEyesGlassesSunglasses
+  name: sun glasses
+  description: A pair of black sunglasses.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Tag
+    tags:
+    - Sunglasses
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesGlassesSecurity
   name: security glasses
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
@@ -160,6 +172,9 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
+  - type: Construction
+    graph: GlassesSecHUD
+    node: glassesSec
   - type: Tag
     tags:
     - HamsterWearable
@@ -168,7 +183,6 @@
   - type: GuideHelp
     guides:
     - Security
-  - type: ShowSecurityIcons
   - type: IdentityBlocker
     coverage: EYES
 
@@ -229,7 +243,13 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
-  - type: ShowSecurityIcons
+  #- type: ShowSecurityIcons #ss220-blueshield-fix-begin
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological #ss220-blueshield-fix-end
 #SS220-Blueshield-end
 
 - type: entity

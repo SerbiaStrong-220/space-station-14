@@ -3,7 +3,6 @@ using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Random; //ss220-revorkblock
 
 namespace Content.Shared.Blocking;
 
@@ -11,9 +10,6 @@ public sealed partial class BlockingSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-
-    [Dependency] private readonly IRobustRandom _random = default!; //ss220-revorkblock
-
     private void InitializeUser()
     {
         SubscribeLocalEvent<BlockingUserComponent, DamageModifyEvent>(OnUserDamageModified);
@@ -49,21 +45,25 @@ public sealed partial class BlockingSystem
         {
             if (args.Damage.GetTotal() <= 0)
                 return;
-            //ss220-revorkblock
-            var trueBlock = 0;
 
-            if (_random.Prob(blocking.ActiveBlockFraction))
-            {
-                trueBlock = 1;
-            }
-            var blockFraction = blocking.IsBlocking ? trueBlock : blocking.PassiveBlockFraction;
-            //ss220-revorkblock end
+            var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+
+            // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
+            if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
+                return;
+
             blockFraction = Math.Clamp(blockFraction, 0, 1);
             _damageable.TryChangeDamage(component.BlockingItem, blockFraction * args.OriginalDamage);
 
-            args.Damage *= (1 - blockFraction);
+            var modify = new DamageModifierSet();
+            foreach (var key in dmgComp.Damage.DamageDict.Keys)
+            {
+                modify.Coefficients.TryAdd(key, 1 - blockFraction);
+            }
 
-            if (blocking.IsBlocking)
+            args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
+
+            if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
             {
                 _audio.PlayPvs(blocking.BlockSound, uid);
             }
