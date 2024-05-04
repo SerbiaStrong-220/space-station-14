@@ -14,6 +14,6 @@
     key: enum.JobIconChangerKey.Key
   - type: UserInterface
     interfaces:
-    - key: enum.JobIconChangerKey.Key
-      type: JobIconChangerBoundUserInterface
+      enum.JobIconChangerKey.Key:
+        type: JobIconChangerBoundUserInterface
   - type: JobIconChanger
