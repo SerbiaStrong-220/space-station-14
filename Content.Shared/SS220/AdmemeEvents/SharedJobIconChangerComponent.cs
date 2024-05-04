@@ -5,9 +5,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.AdmemeEvents;
 
 [Serializable, NetSerializable]
-public enum JobIconChangerKey : byte
+public enum JobIconChangerKey
 {
-    Key,
+    Key
 }
 
 [Serializable, NetSerializable]
