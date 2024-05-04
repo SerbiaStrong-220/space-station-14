@@ -13,7 +13,7 @@ public enum JobIconChangerKey : byte
 [Serializable, NetSerializable]
 public sealed class JobIconChangerChangedMessage : BoundUserInterfaceMessage
 {
-    public string JobIcon { get; }
+    public string? JobIcon { get; }
 
     public JobIconChangerChangedMessage(string jobIcon)
     {
