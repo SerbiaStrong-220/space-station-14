@@ -637,9 +637,6 @@
   - type: SliceableFood
     count: 25
     slice: FoodMeatSalamiSlice
-  - type: Construction
-    graph: MeatSalami
-    node: meat salami
   - type: MeleeWeapon
     wideAnimationRotation: 100
     damage:
