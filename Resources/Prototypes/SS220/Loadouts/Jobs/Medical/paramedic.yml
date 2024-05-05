@@ -1,0 +1,58 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: ParamedicTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: ParamedicJumpsuitTurtleneck
+  equipment: ParamedicJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedicTurtleneck
+
+- type: startingGear
+  id: ParamedicJumpsuitTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorDarkBlue
+
+- type: loadout
+  id: ParamedicJumpsuitTurtleneckAlt
+  equipment: ParamedicJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedicTurtleneck
+
+- type: startingGear
+  id: ParamedicJumpsuitTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorDarkBlue
+
+- type: loadout
+  id: ParamedicJumpskirtTurtleneck
+  equipment: ParamedicJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedicTurtleneck
+
+- type: startingGear
+  id: ParamedicJumpskirtTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorDarkBlue
+
+- type: loadout
+  id: ParamedicJumpskirtTurtleneckAlt
+  equipment: ParamedicJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedicTurtleneck
+
+- type: startingGear
+  id: ParamedicJumpskirtTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorDarkBlue
