@@ -119,8 +119,8 @@
   categories:
   - UplinkWeaponry
   conditions:
-    - !type:StoreWhitelistCondition
-# SS220-uplink-fix-begin
+#  SS220-uplink-fix-begin
+#   - !type:StoreWhitelistCondition
 #      whitelist:
 #        tags:
 #          - NukeOpsUplink
@@ -193,8 +193,8 @@
   categories:
   - UplinkWeaponry
   conditions:
-  - !type:StoreWhitelistCondition
 # SS220-uplink-fix-begin
+  - !type:StoreWhitelistCondition
      whitelist:
        tags:
          - NukeOpsUplink
@@ -1410,7 +1410,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
- #ss220-fix-uplink-end
+# ss220-fix-uplink-end
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate
