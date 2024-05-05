@@ -152,7 +152,7 @@
   name: uplink-sniper-bundle-name
   description: uplink-sniper-bundle-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: base }
-  productEntity: BriefcaseSyndieSniperBundleFilled  
+  productEntity: BriefcaseSyndieSniperBundleFilled
   cost:
     Telecrystal: 12
   categories:
@@ -192,15 +192,15 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-# SS220-uplink-fix begin
-#      whitelist:
-#        tags:
-#          - NukeOpsUplink
-#          - LoneOpsUplink
-# SS220-uplink-fix end
-    blacklist:
-      components:
-      - SurplusBundle
+  # SS220-uplink-fix-begin
+     whitelist:
+       tags:
+         - NukeOpsUplink
+         - LoneOpsUplink
+  # blacklist:
+  #   components:
+  #   - SurplusBundle
+  # SS220-uplink-fix-end
 
 - type: listing
   id: UplinkL6SawBundle
@@ -212,14 +212,12 @@
     Telecrystal: 30
   categories:
   - UplinkWeaponry
-# SS220-uplink-fix begin
-#  conditions:
-#  - !type:StoreWhitelistCondition
-#    whitelist:
-#      tags:
-#      - NukeOpsUplink
-#      - LoneOpsUplink
-# SS220-uplink-fix end
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
 
 # Explosives
 
@@ -1068,7 +1066,7 @@
     Telecrystal: 6
   categories:
     - UplinkAllies
-  
+
 - type: listing
   id: UplinkSyndicatePersonalAI
   name: uplink-syndicate-pai-name
@@ -1374,6 +1372,14 @@
     Telecrystal: 10
   categories:
   - UplinkWearables
+  #ss220-fix-antag-begin
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+        tags:
+        - NukeOpsUplink
+        - LoneOpsUplink
+  #ss220-fix-antag-end
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -1387,9 +1393,15 @@
   - UplinkWearables
   conditions:
   - !type:StoreWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+    #ss220-fix-antag-begin
+    #blacklist:
+    #  components:
+    #  - SurplusBundle
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+    #ss220-fix-antag-end
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate
