@@ -98,12 +98,12 @@
   - UplinkWeaponry
   conditions:
     - !type:BuyerWhitelistCondition
-# SS220-uplink-fix begin
+# SS220-uplink-fix-begin
 #      whitelist:
 #        tags:
 #          - NukeOpsUplink
 #          - LoneOpsUplink
-# SS220-uplink-fix end
+# SS220-uplink-fix-end
       blacklist:
         components:
         - SurplusBundle
@@ -119,17 +119,18 @@
   - UplinkWeaponry
   conditions:
     - !type:StoreWhitelistCondition
-# SS220-uplink-fix begin
+# SS220-uplink-fix-begin
 #      whitelist:
 #        tags:
 #          - NukeOpsUplink
 #          - LoneOpsUplink
-# SS220-uplink-fix end
+# SS220-uplink-fix-end
       blacklist:
         components:
           - SurplusBundle
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink #SS220-uplink-fix
 
 - type: listing
   id: UplinkEshield
@@ -146,6 +147,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink #SS220-uplink-fix
 
 - type: listing
   id: UplinkSniperBundle
@@ -192,15 +194,15 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-  # SS220-uplink-fix-begin
+# SS220-uplink-fix-begin
      whitelist:
        tags:
          - NukeOpsUplink
          - LoneOpsUplink
-  # blacklist:
-  #   components:
-  #   - SurplusBundle
-  # SS220-uplink-fix-end
+#    blacklist:
+#      components:
+#      - SurplusBundle
+# SS220-uplink-fix-end
 
 - type: listing
   id: UplinkL6SawBundle
@@ -272,12 +274,11 @@
     - UplinkExplosives
   conditions:
     - !type:StoreWhitelistCondition
-# SS220-uplink-fix begin
-#      whitelist:
-#        tags:
-#          - NukeOpsUplink
-#          - LoneOpsUplink
-# SS220-uplink-fix end
+      whitelist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
+    - !type:BuyerWhitelistCondition
       blacklist:
         components:
         - SurplusBundle
@@ -294,11 +295,11 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
-# SS220-uplink-fix begin
+# SS220-uplink-fix-begin
 #        tags:
 #          - NukeOpsUplink
 #          - LoneOpsUplink
-# SS220-uplink-fix end
+# SS220-uplink-fix-end
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -350,6 +351,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink #SS220-uplink-fix
 
 - type: listing
   id: UplinkC4Bundle
@@ -526,6 +528,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink #SS220-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -927,15 +930,17 @@
       components:
       - SurplusBundle
 
-- type: listing
-  id: UplinkSingarityBeacon
-  name: uplink-singularity-beacon-name
-  description: uplink-singularity-beacon-desc
-  productEntity: SingularityBeacon
-  cost:
-    Telecrystal: 12
-  categories:
-    - UplinkDisruption
+#ss220-uplink-fix-begin
+#- type: listing
+#  id: UplinkSingarityBeacon
+#  name: uplink-singularity-beacon-name
+#  description: uplink-singularity-beacon-desc
+#  productEntity: SingularityBeacon
+#  cost:
+#    Telecrystal: 12
+#  categories:
+#    - UplinkDisruption
+#ss220-uplink-fix-end
 
 # Allies
 
@@ -1352,12 +1357,12 @@
   - UplinkWearables
   conditions:
     - !type:BuyerWhitelistCondition
-# SS220-uplink-fix begin
+# SS220-uplink-fix-begin
 #   whitelist:
 #      tags:
 #       - NukeOpsUplink
 #       - LoneOpsUplink
-# SS220-uplink-fix end
+# SS220-uplink-fix-end
       blacklist:
         components:
           - SurplusBundle
@@ -1372,14 +1377,14 @@
     Telecrystal: 10
   categories:
   - UplinkWearables
-  #ss220-fix-antag-begin
+#ss220-fix-uplink-begin
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
         tags:
         - NukeOpsUplink
         - LoneOpsUplink
-  #ss220-fix-antag-end
+#ss220-fix-uplink-end
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -1391,17 +1396,18 @@
     Telecrystal: 12
   categories:
   - UplinkWearables
+# ss220-fix-uplink-begin
   conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
   - !type:StoreWhitelistCondition
-    #ss220-fix-antag-begin
-    #blacklist:
-    #  components:
-    #  - SurplusBundle
     whitelist:
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
-    #ss220-fix-antag-end
+ #ss220-fix-uplink-end
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate
