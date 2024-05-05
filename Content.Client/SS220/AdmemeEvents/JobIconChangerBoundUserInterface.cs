@@ -37,4 +37,13 @@ public sealed class JobIconChangerBoundUserInterface : BoundUserInterface
 
         _window?.Dispose();
     }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+        if (state is not JobIconChangerBoundUserInterfaceState iconChangerState)
+            return;
+
+        _window?.OnUpdateState(iconChangerState.Filter);
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace Content.Server.SS220.AdmemeEvents;
 
+using Content.Shared.SS220.AdmemeEvents;
 using Content.Shared.StatusIcon;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 [RegisterComponent]
@@ -12,4 +12,13 @@ public sealed partial class JobIconChangerComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<StatusIconPrototype>? JobIcon;
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool CheckReach = false;
+
+    /// <summary>
+    /// Filter mode: None | IOT | NT | USSP
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public EventRoleIconFilterGroup IconFilterGroup = EventRoleIconFilterGroup.None;
 }

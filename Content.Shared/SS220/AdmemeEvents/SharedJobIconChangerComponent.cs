@@ -11,6 +11,15 @@ public enum JobIconChangerKey : byte
 }
 
 [Serializable, NetSerializable]
+public enum EventRoleIconFilterGroup : byte
+{
+    None,
+    IOT,
+    NT,
+    USSP
+}
+
+[Serializable, NetSerializable]
 public sealed class JobIconChangerChangedMessage : BoundUserInterfaceMessage
 {
     public string? JobIcon { get; }
@@ -18,5 +27,16 @@ public sealed class JobIconChangerChangedMessage : BoundUserInterfaceMessage
     public JobIconChangerChangedMessage(string jobIcon)
     {
         JobIcon = jobIcon;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class JobIconChangerBoundUserInterfaceState : BoundUserInterfaceState
+{
+    public EventRoleIconFilterGroup Filter { get; }
+
+    public JobIconChangerBoundUserInterfaceState(EventRoleIconFilterGroup filter)
+    {
+        Filter = filter;
     }
 }
