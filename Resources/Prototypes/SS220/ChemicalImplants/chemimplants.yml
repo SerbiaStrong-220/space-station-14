@@ -1,0 +1,100 @@
+# capsules
+- type: entity
+  id: EmptyChemicalImplant
+  name: empty chemical implant
+  description: empty-chemical-implant-desc
+  components:
+    - type: ChemicalImplant
+    - type: SubdermalImplant
+      permanent: true
+      implantAction: ActionUseChemicalImplant
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      state: implant
+    - type: Item
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      size: Small
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          canReact: false
+    - type: RefillableSolution
+      solution: beaker
+    - type: ExaminableSolution
+      solution: beaker
+    - type: InteractionOutline
+    - type: Clickable
+    - type: Appearance
+    - type: SolutionContainerVisuals
+      maxFillLevels: 1
+      changeColor: false
+      emptySpriteName: implant_used
+    - type: Tag
+      tags:
+        - ChemicalImplant
+
+- type: entity
+  parent: EmptyChemicalImplant
+  id: CombatChemicalImplant
+  name: combat chemical implant
+  description: combat-chemical-implant-desc
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      layers:
+      - state: combat
+        map: ["enum.SolutionContainerLayers.Fill"]
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          reagents:
+          - ReagentId: Omnizine
+            Quantity: 25
+          - ReagentId: TranexamicAcid
+            Quantity: 5
+
+- type: entity
+  parent: EmptyChemicalImplant
+  id: DABChemicalImplant
+  name: dab chemical implant
+  description: dab-chemical-implant-desc
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      layers:
+        - state: dab
+          map: ["enum.SolutionContainerLayers.Fill"]
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          reagents:
+          - ReagentId: Dylovene
+            Quantity: 10
+          - ReagentId: Arithrazine
+            Quantity: 10
+          - ReagentId: Bicaridine
+            Quantity: 10
+
+- type: entity
+  parent: EmptyChemicalImplant
+  id: SuicideChemicalImplant
+  name: suicide chemical implant
+  description: suicide-chemical-implant-desc
+  components:
+    - type: SubdermalImplant
+      permanent: false
+    - type: Sprite
+      sprite: SS220/Objects/ChemicalImplants/implants.rsi
+      layers:
+        - state: dead
+          map: ["enum.SolutionContainerLayers.Fill"]
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 10
+          reagents:
+          - ReagentId: Amatoxin
+            Quantity: 10

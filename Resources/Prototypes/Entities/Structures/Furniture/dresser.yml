@@ -26,15 +26,15 @@
         acts: [ "Destruction" ]
   - type: Storage
     grid:
-    - 0,0,5,5 #SS220 bigger dresser
+    - 0,0,5,6 #SS220 bigger dresser
     maxItemSize: Normal
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
   - type: UserInterface
     interfaces:
-    - key: enum.StorageUiKey.Key
-      type: StorageBoundUserInterface
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: InteractionOutline
   - type: Clickable
   - type: Tag

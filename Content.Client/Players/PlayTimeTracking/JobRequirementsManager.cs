@@ -9,6 +9,7 @@ using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Preferences;
@@ -17,7 +18,7 @@ using ReasonList = System.Collections.Generic.List<string>;
 
 namespace Content.Client.Players.PlayTimeTracking;
 
-public sealed class JobRequirementsManager
+public sealed class JobRequirementsManager : ISharedPlaytimeManager
 {
     [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IBaseClient _client = default!;
@@ -102,13 +103,7 @@ public sealed class JobRequirementsManager
             return false;
         }
 
-        if (job.Requirements == null ||
-            !_cfg.GetCVar(CCVars.GameRoleTimers))
-        {
-            return true;
-        }
-
-        var player = _playerManager.LocalPlayer?.Session;
+        var player = _playerManager.LocalSession;
         if (player == null)
             return true;
 
@@ -144,7 +139,7 @@ public sealed class JobRequirementsManager
 
         if (species is not null)
         {
-            if (JobRequirements.TryRequirementsSpeciesMet(job, species, out var reason, _prototypeManager))
+            if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out var reason, _prototypeManager)) //ss220-arahFix
                 return true;
 
             reasons.Add(reason.ToMarkup());
@@ -171,7 +166,7 @@ public sealed class JobRequirementsManager
 
     public bool CheckRoleTime(HashSet<JobRequirement>? requirements, ReasonList reasons)
     {
-        if (requirements == null)
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
         foreach (var requirement in requirements)
@@ -207,5 +202,13 @@ public sealed class JobRequirementsManager
         }
     }
 
+    public IReadOnlyDictionary<string, TimeSpan> GetPlayTimes(ICommonSession session)
+    {
+        if (session != _playerManager.LocalSession)
+        {
+            return new Dictionary<string, TimeSpan>();
+        }
 
+        return _roles;
+    }
 }

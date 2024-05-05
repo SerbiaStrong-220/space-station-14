@@ -1,0 +1,331 @@
+- type: entity
+  id: ShuttleGunMLG
+  parent: [ ShuttleGunBase, ConstructibleMachine]
+  name: SPG-300 "Мародёр"
+  description: Это скорострельное бортовое орудие для мелких судов. Стрельба происходит путём преобразования энергии в плазму.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Shuttles/mlg.rsi
+    layers:
+    - state: spg-mlg
+    - state: mag-7
+      map: ["enum.GunVisualLayers.Mag"]
+      shader: unshaded
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+  - type: Gun
+    projectileSpeed: 55
+    fireRate: 9
+    selectedMode: SemiAuto
+    angleDecay: 45
+    minAngle: 2
+    maxAngle: 25
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/plasma_mlg.ogg # SS220 Shuttle-Gun-Sounds
+      params:
+        variation: 0.12
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 2
+    rechargeSound:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/plasma_mlg_load.ogg # SS220 Shuttle-Gun-Sounds
+      params:
+        pitch: 1.0
+        variation: 0.08
+  - type: BasicEntityAmmoProvider
+    proto: BulletMLG
+    capacity: 14
+    count: 14
+  - type: Machine
+    board: ShuttleGunKineticCircuitboard
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+
+
+- type: entity
+  id: ShuttleGunNURS
+  parent: [ShuttleGunBase, ConstructibleMachine]
+  name: EXP-16r "УНАР"
+  description: Залповая установка неуправляемых ракет. Вмещает до 16 снарядов.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Shuttles/nurs.rsi
+    layers:
+    - state: exp-nurs
+    - state: mag-16
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      ballistic-ammo: !type:Container
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+  - type: Gun
+    projectileSpeed: 50
+    fireRate: 8
+    angleDecay: 45
+    minAngle: 5
+    maxAngle: 40
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/nar_shot.ogg # SS220 Shuttle-Gun-Sounds
+      params:
+        variation: 0.15
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeNURS
+    capacity: 16
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+  - type: Machine
+    board: ShuttleGunFriendshipCircuitboard
+  - type: MagazineVisuals
+    magState: mag
+    steps: 17
+    zeroVisible: false
+
+
+- type: entity
+  id: ShuttleGunPkt
+  parent: [ShuttleGunBase, ConstructibleMachine]
+  name: СКПО-500 "ПКТ"
+  description: Станковый пулемёт ПКТ. вмещает в себя короб на 500 патронов .50 калибра. 
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Shuttles/pkt.rsi
+    layers:
+    - state: base
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      ballistic-ammo: !type:Container
+      gun_magazine: !type:ContainerSlot
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+  - type: Gun
+    projectileSpeed: 50
+    fireRate: 4
+    angleDecay: 45
+    minAngle: 2
+    maxAngle: 30
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/pkt_shot.ogg # SS220 Shuttle-Gun-Sounds
+      params:
+        variation: 0.2
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: MagazineAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        whitelist:
+          tags:
+          - BaseMagazinePkt
+        insertSound:
+          path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
+          params:
+            pitch: 2
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+
+
+
+
+#Bullets, Projectiles, Magazins and Cartridge
+- type: entity
+  id: BulletRocketNURS
+  name: НАР
+  parent: BaseBulletTrigger
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/nar.rsi
+    layers:
+      - state: nar
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 5
+    totalIntensity: 150
+    maxTileBreak: 1
+  - type: PointLight
+    radius: 1.5
+    color: orange
+    energy: 0.3
+
+
+- type: entity
+  id: CartridgeNURS
+  name: заряд НАР
+  parent: BaseItem
+  description: заряд неуправляемой ракеты 57 мм.
+  components:
+  - type: Tag
+    tags:
+      - CartridgeNURS
+  - type: Item
+    size: Small
+  - type: CartridgeAmmo
+    proto: BulletRocketNURS
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    state: nar
+  - type: StaticPrice
+    price: 20
+
+- type: Tag
+  id: CartridgeNURS
+
+
+#MLG bullet
+- type: entity
+  id: BulletMLG
+  name: сгусток плазмы
+  parent: BaseBullet
+  noSpawn: true
+  components:
+  - type: Reflective
+    reflective: None
+  - type: TimedDespawn
+    lifetime: 4 
+  - type: Sprite
+    noRot: false
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: declone
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 35
+        Piercing: 35
+        Structural: 95
+        Stamina: 15
+
+
+
+- type: entity
+  id: BaseMagazinePkt
+  name: короб (.50 калибр)
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - BaseMagazinePkt
+  - type: Item
+    size: Large
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgePkt
+    capacity: 500
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/pk_box.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-7
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+  - type: Appearance
+
+- type: Tag
+  id: BaseMagazinePkt
+
+- type: entity
+  id: MagazinePktFull
+  name: короб ПКТ (.50 калибр)
+  parent: BaseMagazinePkt
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePkt
+
+
+- type: entity
+  id: CartridgePkt
+  name: патрон (.50 калибр)
+  parent: BaseCartridgeHeavyRifle
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPkt
+    deleteOnSpawn: true
+
+- type: entity
+  noSpawn: true
+  parent: BaseBullet
+  id: BulletPkt
+  name: пуля (.50)
+  components:
+  - type: Reflective
+    reflective: None
+  - type: TimedDespawn
+    lifetime: 4
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+        Structural: 30
+        Stamina: 50
+    ignoreResistances: true
+
+
+- type: Tag
+  id: CartridgePkt

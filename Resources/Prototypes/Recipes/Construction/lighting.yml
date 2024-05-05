@@ -63,3 +63,27 @@
   description: A high powered light tube containing a green crystal
   icon: { sprite: Objects/Power/light_tube.rsi, state: normal }
   objectType: Item
+
+#SS220-New-Crystals-start
+- type: construction
+  name: yellow light tube
+  id: YellowLight
+  graph: YellowLight
+  startNode: start
+  targetNode: icon
+  category: construction-category-utilities
+  description: A high powered light tube containing a yellow crystal
+  icon: { sprite: Objects/Power/light_tube.rsi, state: normal }
+  objectType: Item
+
+- type: construction
+  name: purple light tube
+  id: PurpleLight
+  graph: PurpleLight
+  startNode: start
+  targetNode: icon
+  category: construction-category-utilities
+  description: A high powered light tube containing a purple crystal
+  icon: { sprite: Objects/Power/light_tube.rsi, state: normal }
+  objectType: Item
+#SS220-New-Crystals-end

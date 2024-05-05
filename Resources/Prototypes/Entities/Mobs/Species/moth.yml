@@ -31,6 +31,16 @@
       amount: 5
   - type: Bloodstream
     bloodReagent: InsectBlood
+#SS220-TweakDamageSpecies-Begin
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/pierce.ogg
+    angle: 30
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 5 #По лору на апрель 2024 года, у Ниан "когти"
+#SS220-TweakDamageSpecies-End
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:

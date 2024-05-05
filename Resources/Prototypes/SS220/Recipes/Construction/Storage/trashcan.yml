@@ -1,0 +1,17 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: construction
+  id: TrashCan
+  name: trash can
+  description: A place where everything is sent that no one needs and will never be useful.
+  graph: TrashCan
+  startNode: start
+  targetNode: TrashCan
+  category: construction-category-storage
+  icon:
+    sprite: SS220/Structures/Storage/trash_can.rsi
+    state: icon
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

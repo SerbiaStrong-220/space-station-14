@@ -47,17 +47,21 @@ public sealed partial class CrewManifestUiFragment : BoxContainer
             return entries;
         }
 
-        var result = new CrewManifestEntries();
+        var list = new List<CrewManifestEntry>();
         foreach (var entry in entries.Entries)
         {
             if (entry.Name.Contains(TextFilter.Text, StringComparison.OrdinalIgnoreCase)
                 || entry.JobPrototype.Contains(TextFilter.Text, StringComparison.OrdinalIgnoreCase)
                 || entry.JobTitle.Contains(TextFilter.Text, StringComparison.OrdinalIgnoreCase))
             {
-                result.Entries.Add(entry);
+                list.Add(entry);
             }
         }
 
+        var result = new CrewManifestEntries
+        {
+            Entries = list.ToArray()
+        };
         return result;
     }
 }

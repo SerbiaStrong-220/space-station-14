@@ -7,6 +7,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Utility;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Humanoid;
 
 namespace Content.Shared.Roles
 {
@@ -76,16 +77,45 @@ namespace Content.Shared.Roles
         public static bool TryRequirementsSpeciesMet(
             JobPrototype job,
             SpeciesPrototype species,
+            Sex selected_sex,
             [NotNullWhen(false)] out FormattedMessage? reason,
             IPrototypeManager prototypes)
         {
             reason = null;
 
-            if (species.BlockedJobs is not null && species.BlockedJobs.Contains(job.ID))
+            if (species.BlockedJobsByAccessor.ContainsKey(job.ID))
             {
+                if (species.BlockedJobsByAccessor[job.ID] is null || species.BlockedJobsByAccessor[job.ID].Length == 0)
+                    goto not_allowed;
+
+                foreach (var looking_sex in species.BlockedJobsByAccessor[job.ID])
+                {
+                    Sex sex = 0;
+                    switch (looking_sex)
+                    {
+                        case "female": 
+                            sex = Sex.Female;
+                            break;
+                        case "male":
+                            sex = Sex.Male;
+                            break;
+                        case "unsexed":
+                            sex = Sex.Unsexed;
+                            break;
+                    }
+
+                    if (selected_sex == sex)
+                        goto not_allowed;
+                }
+
+                return true;
+
+            not_allowed:
+
                 reason = FormattedMessage.FromMarkup(Loc.GetString("role-restrict-specie"));
                 return false;
             }
+
             return true;
         }
         //SS220 Species-Job-Requirement end
@@ -115,7 +145,7 @@ namespace Content.Shared.Roles
         /// </summary>
         public static bool TryRequirementMet(
             JobRequirement requirement,
-            Dictionary<string, TimeSpan> playTimes,
+            IReadOnlyDictionary<string, TimeSpan> playTimes,
             [NotNullWhen(false)] out FormattedMessage? reason,
             IEntityManager entManager,
             IPrototypeManager prototypes)
@@ -181,7 +211,7 @@ namespace Content.Shared.Roles
                             return true;
 
                         reason = FormattedMessage.FromMarkup(Loc.GetString(
-                              "role-timer-overall-insufficient", 
+                              "role-timer-overall-insufficient",
                               ("time", Math.Ceiling(overallDiff))));
                         return false;
                     }

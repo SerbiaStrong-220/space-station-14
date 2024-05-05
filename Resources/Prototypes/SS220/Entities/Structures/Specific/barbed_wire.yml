@@ -1,0 +1,135 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: BarbedWire
+  parent: BaseStructure
+  name: колючая проволока
+  description: Жёсткая, холодная и безжалостная - она стоит, как непреодолимое препятствие на пути к свободе.
+  components:
+    - type: MeleeSound
+      soundGroups:
+        Brute:
+          path:
+            "/Audio/Weapons/grille_hit.ogg"
+    - type: Sprite
+      drawdepth: Walls
+      sprite: SS220/Structures/Specific/barbed_wire.rsi
+      layers:
+        - state: wire
+        - state: electrified
+          sprite: Effects/electricity.rsi
+          map: ["enum.ElectrifiedLayers.Powered"]
+          shader: unshaded
+          visible: false
+    - type: Icon
+      sprite: SS220/Structures/Specific/barbed_wire.rsi
+      state: wire
+    - type: PowerConsumer
+      showInMonitor: false
+    - type: Electrified
+      requirePower: true
+      noWindowInTile: true
+      highVoltageNode: high
+      mediumVoltageNode: medium
+      lowVoltageNode: low
+    - type: NodeContainer
+      nodes:
+        high:
+          !type:CableDeviceNode
+          nodeGroupID: HVPower
+        medium:
+          !type:CableDeviceNode
+          nodeGroupID: MVPower
+        low:
+          !type:CableDeviceNode
+          nodeGroupID: Apc
+    - type: Physics
+      bodyType: Static
+    - type: Fixtures
+      fixtures:
+        slips:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.3,-0.3,0.3,0.3"
+          hard: false
+          layer:
+          - SlipLayer
+        fix1:
+          hard: false
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.4,-0.4,0.4,0.4"
+          layer:
+          - MidImpassable
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: DamageContacts
+      damage:
+        types:
+          Slash: 5
+          Piercing: 5
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.2
+      sprintSpeedModifier: 0.2
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.ElectrifiedVisuals.IsPowered:
+          enum.ElectrifiedLayers.Powered:
+            True: { visible: True }
+            False: { visible: False }
+    - type: AnimationPlayer
+    - type: Construction
+      graph: BarbedWire
+      node: BarbedWire
+#Звук ранения во время прохождения через проволоку - типа как в расте. Если появится компонент SpamSoundOnTrigger с настраиваемой частотой спама - заменить на него саунд-компоненты.
+    - type: StepTrigger
+      intersectRatio: 0.01
+    - type: Slippery
+      paralyzeTime: 0
+      slipSound:
+        path: "/Audio/Effects/Fluids/blood2.ogg"
+        params:
+          volume: 8
+          variation: 0.125
+    - type: TriggerOnStepTrigger
+    - type: EmitSoundOnTrigger
+      sound:
+        path: "/Audio/Effects/Fluids/blood2.ogg"
+        params:
+          volume: 8
+          variation: 0.125
+    - type: FootstepModifier
+      footstepSoundCollection:
+        path: /Audio/Effects/Fluids/blood2.ogg
+        params:
+          volume: 8
+
+- type: entity
+  id: BarbedWireCorner
+  parent: BarbedWire
+  name: колючая проволока
+  description: Жёсткая, холодная и безжалостная - она стоит, как непреодолимое препятствие на пути к свободе.
+  components:
+    - type: Sprite
+      drawdepth: Walls
+      layers:
+        - state: wirecorner
+        - state: electrified
+          sprite: Effects/electricity.rsi
+          map: ["enum.ElectrifiedLayers.Powered"]
+          shader: unshaded
+          visible: false
+    - type: Icon
+      state: wirecorner
+    - type: Construction
+      graph: BarbedWire
+      node: BarbedWireCorner

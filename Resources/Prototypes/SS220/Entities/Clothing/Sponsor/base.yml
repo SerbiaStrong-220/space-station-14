@@ -1,0 +1,179 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: ClothingSponsor
+  suffix: Шлёпа
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+  - type: StaticPrice
+    price: 15
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorMaskBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots: [mask]
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorHeadBase
+  components:
+  - type: Clothing
+    slots:
+    - HEAD
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+    storedRotation: -90
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorEyesBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Clothing
+    slots: [eyes]
+  - type: Item
+    size: Small
+    storedRotation: -90
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorShoesBase
+  components:
+  - type: Clothing
+    slots:
+    - FEET
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: UnsensoredClothingSponsorUniformBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Clothing
+    slots: [innerclothing]
+    equipSound:
+      path: /Audio/Items/jumpsuit_equip.ogg
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 3
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 30
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorOuterBase
+  components:
+  - type: Clothing
+    slots:
+    - outerClothing
+  - type: Sprite
+    state: icon
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsorOuterBase
+  id: ClothingSponsorOuterStorageBase
+  components:
+  - type: Storage
+    grid:
+    - 0,0,2,1
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: StaticPrice
+    price: 80
+
+- type: entity
+  abstract: true
+  parent: UnsensoredClothingSponsorUniformBase
+  id: ClothingSponsorUniformBase
+  components:
+  - type: SuitSensor
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: SuitSensor
+  - type: WirelessNetworkConnection
+    range: 1200
+  - type: StationLimitedNetwork
+
+- type: entity
+  abstract: true
+  parent: [ClothingSponsorShoesBase, ClothingSlotBase]
+  id: ClothingSponsorShoesMilitaryBase
+  components:
+  - type: Matchbox
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-military-boots-sidearm
+        whitelist:
+          tags:
+          - Knife
+          - Sidearm
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsor
+  id: ClothingSponsorNeckBase
+  components:
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: true
+    slots:
+    - neck
+  - type: Sprite
+    state: icon

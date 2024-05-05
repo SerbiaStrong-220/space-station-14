@@ -33,18 +33,15 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: WiresPanel
-  - type: Wires
-    boardName: wires-board-name-autolathe
-    layoutId: Autolathe
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
   - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
-    - key: enum.LatheUiKey.Key
-      type: LatheBoundUserInterface
-    - key: enum.ResearchClientUiKey.Key
-      type: ResearchClientBoundUserInterface
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
   - type: Transform
     anchored: true
   - type: Pullable
@@ -84,9 +81,10 @@
     idleState: icon
     runningState: building
     staticRecipes:
-      - ClothingHeadHatWelding #SS220 Craftable-Welding-Mask
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
       - Wirecutter
+      - Igniter
+      - Signaller
       - Screwdriver
       - Welder
       - Wrench
@@ -100,6 +98,7 @@
       - CableHVStack
       - HandheldGPSBasic
       - TRayScanner
+      - AirTank
       - GasAnalyzer
       - UtilityBelt
       - Fulton
@@ -112,15 +111,18 @@
       - Syringe
       - HandLabeler
       - LightTube
+      - LedLightTube
       - SodiumLightTube
       - ExteriorLightTube
       - LightBulb
+      - LedLightBulb
       - Bucket
       - DrinkMug
       - DrinkMugMetal
       - DrinkGlass
       - DrinkShotGlass
       - DrinkGlassCoupeShaped
+      - CustomDrinkJug
       - FoodPlate
       - FoodPlateSmall
       - FoodPlatePlastic
@@ -155,56 +157,62 @@
       - APCElectronics
       - SMESMachineCircuitboard
       - SubstationMachineCircuitboard
+      - WallmountSubstationElectronics
       - CellRechargerCircuitboard
       - BorgChargerCircuitboard
       - WeaponCapacitorRechargerCircuitboard
+      - HandheldStationMap
+      - ClothingHeadHatWelding
   - type: EmagLatheRecipes
     emagStaticRecipes:
-       - CartridgePistol
-       - CartridgeMagnum
-       - ShellShotgun
-       - ShellShotgunFlare
-       - CartridgeLightRifle
-       - CartridgeRifle
-       - MagazineBoxPistol
-       - MagazineBoxMagnum
-       - MagazineBoxRifle
-       - MagazineBoxLightRifle
-       - GrenadeBlast
+      - BoxLethalshot
+      - BoxShotgunFlare
+      - GrenadeBlast
+      - MagazineBoxLightRifle
+      - MagazineBoxMagnum
+      - MagazineBoxPistol
+      - MagazineBoxRifle
+      - MagazineLightRifle
+      - MagazineLightRifleEmpty
+      - MagazinePistol
+      - MagazinePistolEmpty
+      - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGunEmpty
+      - MagazineRifle
+      - MagazineRifleEmpty
+      - MagazineShotgun
+      - MagazineShotgunEmpty
+      - SpeedLoaderMagnum
+      - SpeedLoaderMagnumEmpty
     emagDynamicRecipes:
-      - CartridgePistolRubber
-      - CartridgeMagnumRubber
-      - ShellShotgunBeanbag
-      - CartridgeRifleRubber
-      - CartridgeLightRifleRubber
-      - MagazineBoxPistolRubber
-      - MagazineBoxMagnumRubber
-      - MagazineBoxRifleRubber
-      - MagazineBoxLightRifleRubber
-      - ShellShotgunIncendiary
-      - CartridgePistolIncendiary
-      - CartridgeMagnumIncendiary
-      - CartridgeLightRifleIncendiary
-      - CartridgeRifleIncendiary
-      - MagazineBoxPistolIncendiary
-      - MagazineBoxMagnumIncendiary
-      - MagazineBoxLightRifleIncendiary
-      - MagazineBoxRifleIncendiary
-      - ShellShotgunUranium
-      - CartridgePistolUranium
-      - CartridgeMagnumUranium
-      - CartridgeLightRifleUranium
-      - CartridgeRifleUranium
-      - MagazineBoxPistolUranium
-      - MagazineBoxMagnumUranium
-      - MagazineBoxLightRifleUranium
-      - MagazineBoxRifleUranium
-      - PowerCageSmall
-      - PowerCageMedium
-      - PowerCageHigh
-      - MagazineGrenadeEmpty
+      - BoxBeanbag
+      - BoxShotgunIncendiary
+      - BoxShotgunUranium
       - GrenadeEMP
       - GrenadeFlash
+      - MagazineBoxLightRifleIncendiary
+      - MagazineBoxLightRifleUranium
+      - MagazineBoxMagnumIncendiary
+      - MagazineBoxMagnumUranium
+      - MagazineBoxPistolIncendiary
+      - MagazineBoxPistolUranium
+      - MagazineBoxRifleIncendiary
+      - MagazineBoxRifleUranium
+      - MagazineGrenadeEmpty
+      - MagazineLightRifleIncendiary
+      - MagazineLightRifleUranium
+      - MagazinePistolIncendiary
+      - MagazinePistolUranium
+      - MagazineRifleIncendiary
+      - MagazineRifleUranium
+      - MagazineShotgunBeanbag
+      - MagazineShotgunIncendiary
+      - MagazineShotgunIncendiary
+      - PowerCageHigh
+      - PowerCageMedium
+      - PowerCageSmall
+      - SpeedLoaderMagnumIncendiary
+      - SpeedLoaderMagnumUranium
 
 - type: entity
   id: AutolatheHyperConvection
@@ -242,9 +250,6 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: Machine
     board: ProtolatheMachineCircuitboard
-  - type: Wires
-    boardName: wires-board-name-protolathe
-    layoutId: Protolathe
   - type: MaterialStorage
     whitelist:
       tags:
@@ -278,7 +283,6 @@
       - Implanter
       - PillCanister
       - ChemistryEmptyBottle01
-      - Drone
       - AdvMopItem
       - WeaponSprayNozzle
       - ClothingBackpackWaterTank
@@ -287,15 +291,17 @@
       - ChemicalPayload
       - FlashPayload
       - Signaller
+      - SignallerAdvanced
       - SignalTrigger
       - VoiceTrigger
       - Igniter
+      - HandHeldMassScanner
       - PowerCellMicroreactor
       - PowerCellHigh
       - WeaponPistolCHIMP
+      - ClothingMaskWeldingGas
       - WeaponGauntletGorilla
       - SynthesizerInstrument
-      - RPED
       - ClothingShoesBootsMagSci
       - ClothingShoesBootsSpeed
       - NodeScanner
@@ -313,7 +319,10 @@
       - WelderExperimental
       - JawsOfLife
       - FauxTileAstroGrass
+      - FauxTileMowedAstroGrass
+      - FauxTileJungleAstroGrass
       - FauxTileAstroIce
+      - FauxTileAstroSnow
       - OreBagOfHolding
       - DeviceQuantumSpinInverter
   - type: EmagLatheRecipes
@@ -377,13 +386,18 @@
     - CondenserMachineCircuitBoard
     - HotplateMachineCircuitboard
     - UniformPrinterMachineCircuitboard
-    - FloorGreenCircuit
-    - FloorBlueCircuit
+    - TileGreenCircuit #SS220-sheetifier-rework-start
+    - TileBlueCircuit
+    - TilePurpleCircuit
+    - TileYellowCircuit
+    - TileOrangeCircuit
+    - TileRedCircuit #SS220-sheetifier-rework-end
     - MicrowaveMachineCircuitboard
     - ReagentGrinderMachineCircuitboard
     - ElectricGrillMachineCircuitboard
     - BoozeDispenserMachineCircuitboard
     - SodaDispenserMachineCircuitboard
+    - SpaceHeaterMachineCircuitBoard
     dynamicRecipes:
       - ThermomachineFreezerMachineCircuitBoard
       - HellfireFreezerMachineCircuitBoard
@@ -409,6 +423,7 @@
       - PowerComputerCircuitboard
       - AutolatheHyperConvectionMachineCircuitboard
       - ProtolatheHyperConvectionMachineCircuitboard
+      - CircuitImprinterHyperConvectionMachineCircuitboard
       - FatExtractorMachineCircuitboard
       - FlatpackerMachineCircuitboard
       - SheetifierMachineCircuitboard
@@ -450,16 +465,32 @@
       - AnomalySynchronizerCircuitboard
       - APECircuitboard
       - ArtifactAnalyzerMachineCircuitboard
-      - TraversalDistorterMachineCircuitboard
       - ArtifactCrusherMachineCircuitboard
       - TelecomServerCircuitboard
       - MassMediaCircuitboard
+      - ReagentGrinderIndustrialMachineCircuitboard
+      - JukeboxCircuitBoard
   - type: MaterialStorage
     whitelist:
       tags:
         - Sheet
         - RawMaterial
         - Ingot
+
+- type: entity
+  id: CircuitImprinterHyperConvection
+  parent: CircuitImprinter
+  name: hyper convection circuit imprinter
+  description: A highly-experimental circuit imprinter that harnesses the power of extreme heat to slowly create objects more cost-effectively.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/circuit_imprinter_hypercon.rsi
+  - type: Lathe
+    materialUseMultiplier: 0.5
+    timeMultiplier: 1.5
+  - type: LatheHeatProducing
+  - type: Machine
+    board: CircuitImprinterHyperConvectionMachineCircuitboard
 
 - type: entity
   id: ExosuitFabricator
@@ -487,7 +518,6 @@
     - SciFlash
     - BorgModuleCable
     - BorgModuleFireExtinguisher
-    - BorgModuleGPS
     - BorgModuleRadiationDetection
     - BorgModuleTool
     - BorgModuleAppraisal
@@ -537,6 +567,7 @@
     - BorgModuleMining
     - BorgModuleGrapplingGun
     - BorgModuleAdvancedTool
+    - BorgModuleGPS
     - BorgModuleRCD
     - BorgModuleArtifact
     - BorgModuleAnomaly
@@ -644,79 +675,89 @@
     idleState: icon
     runningState: icon
     staticRecipes:
+      - BoxLethalshot
+      - BoxShotgunFlare
+      - BoxShotgunPractice
+      - BoxShotgunSlug
       - ClothingEyesHudSecurity
       - Flash
-      - Handcuffs
-      - Zipties
-      - Stunbaton
       - ForensicPad
-      - RiotShield
-      - ShellShotgun
-      - ShellShotgunSlug
-      - ShellShotgunFlare
-      - MagazinePistol
-      - MagazinePistolSubMachineGun
-      - MagazinePistolSubMachineGunTopMounted
-      - MagazineRifle
-      - MagazineLightRifle
-      - MagazineBoxPistol
-      - MagazineBoxMagnum
-      - MagazineBoxRifle
+      - Handcuffs
       - MagazineBoxLightRifle
+      - MagazineBoxLightRiflePractice
+      - MagazineBoxMagnum
+      - MagazineBoxMagnumPractice
+      - MagazineBoxPistol
+      - MagazineBoxPistolPractice
+      - MagazineBoxRifle
+      - MagazineBoxRiflePractice
+      - MagazineLightRifle
+      - MagazineLightRifleEmpty
+      - MagazinePistol
+      - MagazinePistolEmpty
+      - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGunEmpty
+      - MagazinePistolSubMachineGunTopMounted
+      - MagazinePistolSubMachineGunTopMountedEmpty
+      - MagazineRifle
+      - MagazineRifleEmpty
+      - MagazineShotgun
+      - MagazineShotgunEmpty
+      - MagazineShotgunSlug
+      - RiotShield
       - SpeedLoaderMagnum
+      - SpeedLoaderMagnumEmpty
+      - Stunbaton
+      - TargetClown
       - TargetHuman
       - TargetSyndicate
-      - TargetClown
-      - MagazineBoxLightRiflePractice
-      - MagazineBoxMagnumPractice
-      - MagazineBoxPistolPractice
-      - MagazineBoxRiflePractice
-      - ShellShotgunPractice
-      - WeaponLaserCarbinePractice
       - WeaponDisablerPractice
+      - WeaponLaserCarbinePractice
+      - Zipties
     dynamicRecipes:
-      - CartridgeLightRifleIncendiary
-      - CartridgeMagnumIncendiary
-      - CartridgePistolIncendiary
-      - CartridgeRifleIncendiary
-      - CartridgeLightRifleUranium
-      - CartridgeMagnumUranium
-      - CartridgePistolUranium
-      - CartridgeRifleUranium
-      - CartridgeLightRifleRubber
-      - CartridgeMagnumRubber
-      - CartridgePistolRubber
-      - CartridgeRifleRubber
-      - ClothingEyesGlassesSecurity
+      - BoxBeanbag
+      - BoxShotgunIncendiary
+      - BoxShotgunUranium
       - ExplosivePayload
       - FlashPayload
-      - HoloprojectorSecurity
-      - MagazineBoxLightRifleIncendiary
-      - MagazineBoxMagnumIncendiary
-      - MagazineBoxPistolIncendiary
-      - MagazineBoxRifleIncendiary
-      - MagazineBoxLightRifleUranium
-      - MagazineBoxMagnumUranium
-      - MagazineBoxPistolUranium
-      - MagazineBoxRifleUranium
-      - MagazineBoxLightRifleRubber
-      - MagazineBoxMagnumRubber
-      - MagazineBoxPistolRubber
-      - MagazineBoxRifleRubber
-      - MagazineGrenadeEmpty
       - GrenadeEMP
       - GrenadeFlash
-      - ShellShotgunBeanbag
-      - ShellShotgunIncendiary
-      - ShellShotgunUranium
+      - HoloprojectorSecurity
+      - MagazineBoxLightRifleIncendiary
+      - MagazineBoxLightRifleUranium
+      - MagazineBoxMagnumIncendiary
+      - MagazineBoxMagnumUranium
+      - MagazineBoxPistolIncendiary
+      - MagazineBoxPistolUranium
+      - MagazineBoxRifleIncendiary
+      - MagazineBoxRifleUranium
+      - MagazineGrenadeEmpty
+      - MagazineLightRifleIncendiary
+      - MagazineLightRifleUranium
+      - MagazinePistolIncendiary
+      - MagazinePistolUranium
+      - MagazineRifleIncendiary
+      - MagazineRifleUranium
+      - MagazineShotgunBeanbag
+      - MagazineShotgunIncendiary
+      - PowerCageHigh
+      - PowerCageMedium
+      - PowerCageSmall
+      # - ShellTranquilizer
+      - ShuttleGunDusterCircuitboard
+      - ShuttleGunFriendshipCircuitboard
+      - ShuttleGunPerforatorCircuitboard
+      - ShuttleGunSvalinnMachineGunCircuitboard
       - Signaller
       - SignalTrigger
+      - SpeedLoaderMagnumIncendiary
+      - SpeedLoaderMagnumUranium
       - TelescopicShield
       - TimerTrigger
       - Truncheon
       - VoiceTrigger
-      - WeaponDisablerPractice
       - WeaponAdvancedLaser
+      - WeaponDisabler
       - WeaponDisablerSMG
       - WeaponLaserCannon
       - WeaponLaserCarbine
@@ -730,6 +771,7 @@
       - ShuttleGunPerforatorCircuitboard
       - ShuttleGunFriendshipCircuitboard
       - ShuttleGunDusterCircuitboard
+      - PortableRecharger
   - type: MaterialStorage
     whitelist:
       tags:
@@ -762,21 +804,31 @@
       idleState: icon
       runningState: icon
       staticRecipes:
-        - CartridgePistol
-        - CartridgeMagnum
-        - ShellShotgun
-        - ShellShotgunSlug
-        - ShellShotgunFlare
-        - CartridgeLightRifle
-        - CartridgeRifle
-        - MagazineBoxPistol
-        - MagazineBoxMagnum
-        - MagazineBoxRifle
+        - BoxLethalshot
+        - BoxShotgunFlare
+        - BoxShotgunSlug
         - MagazineBoxLightRifle
+        - MagazineBoxMagnum
+        - MagazineBoxPistol
+        - MagazineBoxRifle
+        - MagazineLightRifle
+        - MagazineLightRifleEmpty
+        - MagazinePistol
+        - MagazinePistolEmpty
+        - MagazineRifle
+        - MagazineRifleEmpty
+        - MagazineShotgun
+        - MagazineShotgunEmpty
+        - MagazineShotgunSlug
+        # - ShellTranquilizer
+        - SpeedLoaderMagnum
+        - SpeedLoaderMagnumEmpty
     - type: MaterialStorage
       whitelist:
         tags:
           - Sheet
+          - RawMaterial
+          - Ingot
 
 - type: entity
   id: MedicalTechFab
@@ -875,12 +927,13 @@
       - ClothingUniformJumpskirtColorGrey
       - ClothingUniformJumpsuitBartender
       - ClothingUniformJumpskirtBartender
-      - ClothingHeadHatCapcap
+      - ClothingHeadBeretCap #SS220 CapBeret
+      - ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       - ClothingHeadHatCaptain
       - ClothingUniformJumpsuitCaptain
       - ClothingUniformJumpskirtCaptain
       - ClothingUniformJumpsuitCapFormal
-      - ClothingUniformJumpskirtCapFormalDress
+#      - ClothingUniformJumpskirtCapFormalDress #SS220-FormalDress
       - ClothingUniformJumpsuitCargo
       - ClothingUniformJumpskirtCargo
       - ClothingUniformJumpsuitSalvageSpecialist
@@ -903,6 +956,8 @@
       - ClothingUniformJumpskirtDetective
       - ClothingUniformJumpsuitEngineering
       - ClothingUniformJumpskirtEngineering
+      - ClothingUniformJumpsuitSeniorEngineer
+      - ClothingUniformJumpskirtSeniorEngineer
       - ClothingHeadHatHopcap
       - ClothingUniformJumpsuitHoP
       - ClothingUniformJumpskirtHoP
@@ -911,7 +966,7 @@
       - ClothingUniformJumpsuitHoS
       - ClothingUniformJumpskirtHoS
       - ClothingUniformJumpsuitHosFormal
-      - ClothingUniformJumpskirtHosFormal
+#      - ClothingUniformJumpskirtHosFormal #SS220-FormalDress
       - ClothingUniformJumpsuitHoSAlt
       - ClothingUniformJumpskirtHoSAlt
       - ClothingUniformJumpsuitHoSBlue
@@ -928,11 +983,15 @@
       - ClothingHeadHatBeretSeniorPhysician
       - ClothingUniformJumpsuitMedicalDoctor
       - ClothingUniformJumpskirtMedicalDoctor
+      - ClothingUniformJumpsuitSeniorPhysician
+      - ClothingUniformJumpskirtSeniorPhysician
       - ClothingUniformJumpsuitMime
       - ClothingUniformJumpskirtMime
       - ClothingUniformJumpsuitMusician
       - ClothingUniformJumpsuitParamedic
       - ClothingUniformJumpskirtParamedic
+      - ClothingUniformJumpsuitSeniorOfficer
+      - ClothingUniformJumpskirtSeniorOfficer
       - ClothingUniformJumpsuitPrisoner
       - ClothingUniformJumpskirtPrisoner
       - ClothingHeadHatQMsoft
@@ -947,6 +1006,8 @@
       - ClothingUniformJumpskirtResearchDirector
       - ClothingUniformJumpsuitScientist
       - ClothingUniformJumpskirtScientist
+      - ClothingUniformJumpsuitSeniorResearcher
+      - ClothingUniformJumpskirtSeniorResearcher
       - ClothingHeadHatBeretSecurity
       - ClothingUniformJumpsuitSec
       - ClothingUniformJumpskirtSec
@@ -957,12 +1018,14 @@
       - ClothingHeadHatWarden
       - ClothingUniformJumpsuitWarden
       - ClothingUniformJumpskirtWarden
+      - ClothingHeadHatParamedicsoft
       # Winter outfits
       - ClothingOuterWinterCap
       - ClothingOuterWinterCE
       - ClothingOuterWinterCMO
       - ClothingOuterWinterHoP
-      - ClothingOuterWinterHoS
+      - ClothingOuterWinterHoSUnarmored
+      - ClothingOuterWinterWardenUnarmored
       - ClothingOuterWinterQM
       - ClothingOuterWinterRD
       - ClothingNeckMantleCap
@@ -1006,6 +1069,16 @@
       - ClothingNeckScarfStripedOrange
       - ClothingNeckScarfStripedBlack
       - ClothingNeckScarfStripedPurple
+      # Carpets
+      - Carpet
+      - CarpetBlack
+      - CarpetPink
+      - CarpetBlue
+      - CarpetGreen
+      - CarpetOrange
+      - CarpetPurple
+      - CarpetCyan
+      - CarpetWhite
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - ClothingHeadHatCentcomcap
@@ -1105,6 +1178,7 @@
       - IngotSilver30
       - MaterialBananium10
 
+#SS220-Sheetifier-rework-start
 - type: entity
   parent: BaseLathe
   id: Sheetifier
@@ -1122,11 +1196,13 @@
   - type: Machine
     board: SheetifierMachineCircuitboard
   - type: MaterialStorage
-    dropOnDeconstruct: false #should drop ores instead of ingots/sheets
     ignoreColor: true
-    canEjectStoredMaterials: false
+    canEjectStoredMaterials: true
     whitelist:
       tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
       - Raw
       - Wooden
   - type: Lathe
@@ -1135,3 +1211,58 @@
     staticRecipes:
     - MaterialSheetMeat
     - SheetPaper
+    - TileSteel
+    - TileMetalDiamond
+    - TileWood
+    - TileWhite
+    - TileDark
+    - TileTechmaint
+    - TileMono
+    - TileLino
+    - TileElevatorShaft
+    - TileRockVault
+    - TileBlue
+    - TileLime
+    - TileMining
+    - TileMiningDark
+    - TileMiningLight
+    - TileFreezer
+    - TileShowroom
+    - TileHydro
+    - TileBar
+    - TileClown
+    - TileMime
+    - TileKitchen
+    - TileLaundry
+    - TileConcrete
+    - TileGrayConcrete
+    - TileOldConcrete
+    - TileArcadeBlue
+    - TileArcadeBlue2
+    - TileArcadeRed
+    - TileEighties
+    - TileCarpetClown
+    - TileCarpetOffice
+    - TileBoxing
+    - TileGym
+    - TileShuttleWhite
+    - TileShuttleBlue
+    - TileShuttleOrange
+    - TileShuttlePurple
+    - TileShuttleRed
+    - TileShuttleGrey
+    - TileShuttleBlack
+    - TileGold
+    - TileSilver
+    - TileWoodPattern
+    - TileFlesh
+    - TileSteelMaint
+    - TileGratingMaint
+    - TileWoodLarge
+    - TileSteelReinforced
+    - TileWhiteReinforced
+    - TileDarkReinforced
+    - TileDutch
+    - TileDutchMini
+    - TileKitchenRed #SS220 new kitchen tile 
+#SS220-Sheetifier-rework-end

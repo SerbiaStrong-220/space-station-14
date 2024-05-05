@@ -1,0 +1,208 @@
+- type: entity
+  parent: BaseStructure
+  id: BagPile
+  name: куча мешков
+  description: Среди этой кучи мешков, полных мусора, теряются последние искры надежды на чистоту и порядок.
+  suffix: Мусор, Хлам
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Specific/bags.rsi
+    state: bagpile9
+  - type: AmbientSound
+    volume: -2
+    range: 3
+    sound:
+      path: /Audio/Ambience/Temporary/flies.ogg
+  - type: Physics
+    bodyType: Static
+  - type: Climbable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageContainer: Box
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPacketCnDsTrash:
+            min: 0
+            max: 1
+          FoodPacketBoritosTrash:
+            min: 0
+            max: 1
+          FoodPacketSusTrash:
+            min: 0
+            max: 1
+          FoodPacketRaisinsTrash:
+            min: 0
+            max: 1
+          FoodPacketDanDanTrash:
+            min: 0
+            max: 1
+          FoodPacketChocolateTrash:
+            min: 0
+            max: 1
+          FoodPacketPopcornTrash:
+            min: 0
+            max: 1
+          FoodPacketSemkiTrash:
+            min: 0
+            max: 1
+          FoodPacketSyndiTrash:
+            min: 0
+            max: 1
+          FoodPacketCheesieTrash:
+            min: 0
+            max: 1
+          FoodPacketPistachioTrash:
+            min: 0
+            max: 1
+          FoodPacketChipsTrash:
+            min: 0
+            max: 1
+          FoodPacketChowMeinTrash:
+            min: 0
+            max: 1
+          FoodPacketEnergyTrash:
+            min: 0
+            max: 1
+          FoodCornTrash:
+            min: 0
+            max: 1
+          TrashBananaPeel:
+            min: 0
+            max: 1
+          FoodTinMRETrash:
+            min: 0
+            max: 1
+          BrokenBottle:
+            min: 0
+            max: 1
+          FoodBowlBigTrash:
+            min: 0
+            max: 1
+          FoodPlateTrash:
+            min: 0
+            max: 1
+          FoodPlateSmallTrash:
+            min: 0
+            max: 1
+          ShardGlass:
+            min: 0
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: trashBagRustle
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3 #per second, scales with number of fire 'stacks'
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+
+- type: entity
+  parent: BagPile
+  id: TrashPile
+  name: куча мусора
+  description: Гора отходов, напоминающая о безразличии и безответственности человечества.
+  suffix: Мусор, Хлам, Случайный
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Specific/trashpile.rsi
+    snapCardinals: true
+    layers:
+    - state: trash1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          trash1: ""
+          trash2: ""
+          trash3: ""
+          trash4: ""
+          trash5: ""
+          trash6: ""
+
+- type: entity
+  parent: BaseStructure
+  id: ScrapPile
+  name: груда металлолома
+  description: Эта куча различного хлама, искажённая временем и забытая всеми, медленно ржавеет под тяжестью своей бесполезности. Она служит напоминанием о хаосе человеческого потребления и вызывает уныние и разочарование, возникающие при мысли о бесконечном цикле переработки материалов. Кажется, у вас есть два пути - либо выбросить мусор, либо забрать его с собой на художественную выставку и представить эту груду как искусство, назвав её "Бардак с утончённым гламуром". Победа уже у вас в кармане!
+  suffix: Мусор, Хлам, Случайный
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Structures/Specific/scrappile.rsi
+    snapCardinals: true
+    noRot: true
+    layers:
+    - state: scrap1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          scrap1: ""
+          scrap2: ""
+          scrap3: ""
+          scrap4: ""
+          scrap5: ""
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 3
+          PartRodMetal1:
+            min: 0
+            max: 2
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: ScrapPile
+    node: ScrapPile

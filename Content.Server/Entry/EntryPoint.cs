@@ -23,7 +23,6 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.Discord;
-using Content.Server.SS220.PrimeWhitelist;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Kitchen;
@@ -113,9 +112,10 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<JoinQueueManager>().Initialize(); // Corvax-Queue
                 IoCManager.Resolve<TTSManager>().Initialize(); // Corvax-TTS
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
-                IoCManager.Resolve<Primelist>().Initialize();
                 IoCManager.Resolve<DiscordPlayerManager>().Initialize(); // SS220 discord player manager
-                IoCManager.Resolve<ServerControlController>().Initialize();
+                IoCManager.Resolve<DiscordBanPostManager>().Initialize(); // SS220 discord ban post manager
+                IoCManager.Resolve<ServerControlController>().Initialize(); // SS220 Backend-Api
+                IoCManager.Resolve<ServerApi>().Initialize();
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();
@@ -181,6 +181,7 @@ namespace Content.Server.Entry
         {
             _playTimeTracking?.Shutdown();
             _dbManager?.Shutdown();
+            IoCManager.Resolve<ServerApi>().Shutdown();
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)

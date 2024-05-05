@@ -13,9 +13,12 @@
   - type: IdentityBlocker
   - type: Tag
     tags:
-    - MonkeyWearable
     - HamsterWearable
     - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
+    hideOnToggle: true
 
 - type: entity
   parent: ClothingMaskGas
@@ -61,6 +64,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
 
@@ -184,6 +188,8 @@
     materialComposition:
       Steel: 50
       Plastic: 100
+  - type: StaticPrice
+    price: 12.5 # increases in price after decomposed into raw materials
 
 - type: entity
   parent: ClothingMaskBase
@@ -202,6 +208,9 @@
     tags:
     - ClownMask
     - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskClownBase
@@ -212,6 +221,9 @@
     - ClownMask
     - HamsterWearable
     - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskClown
@@ -238,6 +250,9 @@
     sprite: Clothing/Mask/joy.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -255,6 +270,9 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -268,7 +286,7 @@
     sprite: Clothing/Mask/sterile.rsi
   - type: IngestionBlocker
   - type: Item
-    storedRotation: -90
+    size: Tiny
   - type: IdentityBlocker
     coverage: MOUTH
 
@@ -305,6 +323,10 @@
   - type: BreathMask
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
+    hideOnToggle: true
 
 - type: entity
   parent: ClothingMaskClownBase
@@ -334,7 +356,12 @@
     sprite: Clothing/Mask/swat.rsi
   - type: Tag
     tags:
-    - HidesHair
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    hideOnToggle: true
 
 - type: entity
   parent: ClothingMaskGasExplorer
@@ -359,7 +386,12 @@
     sprite: Clothing/Mask/ert.rsi
   - type: Tag
     tags:
-    - HidesHair
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    hideOnToggle: true
 
 - type: entity
   parent: ClothingMaskGasERT
@@ -394,6 +426,9 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Snout
   - type: IdentityBlocker
 
 - type: entity
@@ -408,6 +443,9 @@
     sprite: Clothing/Mask/fox.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -421,6 +459,9 @@
     sprite: Clothing/Mask/bee.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -434,6 +475,9 @@
     sprite: Clothing/Mask/bear.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -447,6 +491,9 @@
     sprite: Clothing/Mask/raven.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -460,6 +507,9 @@
     sprite: Clothing/Mask/jackal.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -473,6 +523,9 @@
     sprite: Clothing/Mask/bat.rsi
   - type: BreathMask
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 - type: entity
   parent: ClothingMaskBase
@@ -489,6 +542,16 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskNeckGaiter
+  id: ClothingMaskNeckGaiterRed
+  name: red neck gaiter
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/neckgaiterred.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/neckgaiterred.rsi
 
 - type: entity
   parent: ClothingMaskClownBase

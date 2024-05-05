@@ -47,6 +47,10 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 2
+    fx: EffectRCDDeconstruct2  
   - type: Destructible
     thresholds:
     - trigger:
@@ -77,7 +81,7 @@
     mode: SnapgridCenter
     snap:
     - Wallmount
-
+    
 - type: entity
   name: light
   description: "A light fixture. Draws power and produces light when equipped with a light tube."
@@ -130,6 +134,10 @@
   - type: Sprite
     state: base
   - type: PointLight
+    radius: 10 #SS220-Mapping-Light-Fix
+    energy: 0.8 #SS220-Mapping-Light-Fix
+    softness: 1 #SS220-Mapping-Light-Fix
+    color: "#FFE4CE" #SS220-Mapping-Light-Fix
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: LightTube
@@ -154,7 +162,12 @@
     hasLampOnSpawn: LedLightTube
     damage:
       types:
-        Heat: 5
+        Heat: 2.5
+  - type: PointLight
+    radius: 15
+    energy: 1
+    softness: 0.9
+    color: "#EEEEFF"
 
 - type: entity
   parent: AlwaysPoweredWallLight
@@ -176,6 +189,11 @@
   components:
   - type: BloomLightMask # SS220 Grafon-Light
     useLightColor: true
+  - type: PointLight
+    radius: 12 #SS220-Mapping-Light-Fix
+    energy: 4.5 #SS220-Mapping-Light-Fix
+    softness: 0.5 #SS220-Mapping-Light-Fix
+    color: "#B4FCF0" #SS220-Mapping-Light-Fix
   - type: PoweredLight
     hasLampOnSpawn: ExteriorLightTube
     damage:
@@ -207,6 +225,11 @@
         Heat: 5
   - type: BloomLightMask # SS220 Grafon-Light
     useLightColor: true
+  - type: PointLight
+    radius: 10
+    energy: 4 #SS220-Mapping-Light-Fix
+    softness: 0.5 #SS220-Mapping-Light-Fix
+    color: "#FFAF38"
 
 - type: entity
   parent: AlwaysPoweredWallLight
@@ -317,6 +340,25 @@
       - Toggle
 
 - type: entity
+  id: PoweredLEDSmallLight
+  suffix: LED
+  parent: PoweredSmallLightEmpty
+  components:
+  - type: Sprite
+    state: base
+  - type: PointLight
+    enabled: true
+    radius: 8
+    energy: 1
+    softness: 1
+    color: "#EEEEFF"
+  - type: PoweredLight
+    hasLampOnSpawn: LedLightBulb
+    damage:
+      types:
+        Heat: 2.5
+
+- type: entity
   id: PoweredSmallLight
   suffix: ""
   parent: PoweredSmallLightEmpty
@@ -325,6 +367,10 @@
     state: base
   - type: PointLight
     enabled: true
+    color: "#FFAA66"
+    radius: 3.5 #SS220-Mapping-Light-Fix
+    energy: 0.9 #SS220-Mapping-Light-Fix
+    softness: 1.1 #SS220-Mapping-Light-Fix
   - type: PoweredLight
     hasLampOnSpawn: LightBulb
     damage:
@@ -346,7 +392,7 @@
     radius: 5
     energy: 0.6
     offset: "0, 0.4"
-    color: "#FF4020"
+    color: "#7CFC00"
     mask: /Textures/Effects/LightMasks/double_cone.png
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
@@ -363,10 +409,10 @@
       map: [ "enum.EmergencyLightVisualLayers.Base" ]
     - state: emergency_light_off
       map: [ "enum.EmergencyLightVisualLayers.LightOff" ]
-      color: "#FF4020"
+      color: "#7CFC00"
     - state: emergency_light_on
       map: [ "enum.EmergencyLightVisualLayers.LightOn" ]
-      color: "#FF4020"
+      color: "#7CFC00"
       shader: "unshaded"
       visible: false
   - type: Appearance
@@ -387,6 +433,22 @@
     damage:
       types:
         Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
+
+- type: entity
+  id: AlwaysPoweredlightCyan
+  suffix: Always Powered, Cyan
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
 
 - type: entity
   id: PoweredlightBlue
@@ -398,6 +460,22 @@
     damage:
       types:
         Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
+
+- type: entity
+  id: AlwaysPoweredlightBlue
+  suffix: Always Powered, Blue
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
 
 - type: entity
   id: PoweredlightPink
@@ -409,6 +487,22 @@
     damage:
       types:
         Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
+
+- type: entity
+  id: AlwaysPoweredlightPink
+  suffix: Always Powered, Pink
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
 
 - type: entity
   id: PoweredlightOrange
@@ -420,6 +514,22 @@
     damage:
       types:
         Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
+
+- type: entity
+  id: AlwaysPoweredlightOrange
+  suffix: Always Powered, Orange
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
 
 - type: entity
   id: PoweredlightRed
@@ -431,6 +541,22 @@
     damage:
       types:
         Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
+
+- type: entity
+  id: AlwaysPoweredlightRed
+  suffix: Always Powered, Red
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
 
 - type: entity
   id: PoweredlightGreen
@@ -442,4 +568,74 @@
     damage:
       types:
         Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
 
+- type: entity
+  id: AlwaysPoweredlightGreen
+  suffix: Always Powered, Green
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
+
+#SS220-New-Crystals-start
+- type: entity
+  id: PoweredlightYellow
+  suffix: Yellow
+  parent: Poweredlight
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: LightTubeCrystalYellow
+    damage:
+      types:
+        Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffea19" #Неоновый жёлтый
+
+- type: entity
+  id: AlwaysPoweredlightYellow
+  suffix: Always Powered, Yellow
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffea19" #Неоновый жёлтый
+
+- type: entity
+  id: PoweredlightPurple
+  suffix: Purple
+  parent: Poweredlight
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: LightTubeCrystalPurple
+    damage:
+      types:
+        Heat: 5
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#bc13fe" #Неоновый фиолетовый
+
+- type: entity
+  id: AlwaysPoweredlightPurple
+  suffix: Always Powered, Purple
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#bc13fe" #Неоновый фиолетовый

@@ -67,9 +67,6 @@
       color: "#c9c042"
       castShadows: false
     - type: WiresPanel
-    - type: Wires
-      boardName: wires-board-name-smes
-      layoutId: SMES
     - type: Machine
       board: SMESMachineCircuitboard
     - type: StationInfiniteBatteryTarget
@@ -94,6 +91,12 @@
     - type: WiredNetworkConnection
     - type: NameIdentifier #SS220 PowerId
       group: PowerId
+    - type: ActivatableUI #SS220 smes-ui-fix
+      key: enum.SmesUiKey.Key
+    - type: UserInterface #SS220 smes-ui-fix
+      interfaces:
+        enum.SmesUiKey.Key:
+          type: SmesBoundUserInterface
 
 # SMES' in use
 

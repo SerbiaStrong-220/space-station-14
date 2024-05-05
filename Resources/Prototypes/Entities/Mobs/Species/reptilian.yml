@@ -33,14 +33,14 @@
   - type: Vocal
     sounds:
       Male: UnisexReptilian
-      Female: UnisexReptilian
+      Female: FemaleReptilian #ss220-fix
       Unsexed: UnisexReptilian
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Scale
   - type: MeleeWeapon
     soundHit:
-      path: /Audio/Weapons/pierce.ogg
+      collection: AlienClaw
     angle: 30
     animation: WeaponArcClaw
     damage:

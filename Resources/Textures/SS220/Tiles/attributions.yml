@@ -1,0 +1,24 @@
+- files: [ "tech_maint_drain.png", "tech_maint_drain_horizontal.png", "tech_maint_drain_middle.png", "steel_maint_mono.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/775"
+
+- files: ["steel_reinforced.png, dark_reinforced.png, white_reinforced.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Modified from reinforced.png by github user @Kit0vras"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/775"
+
+- files: [ "dutch.png", "dutch_horizontal.png", "dutch_mini.png", "dutch_horizontal_mini.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/775"
+
+- files: ["purple_circuit.png", "yellow_circuit.png", "orange_circuit.png", "red_circuit.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/816"
+  
+- files: ["kitchen_red.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras, Resprited by DaGo7939 (Discord). EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/943"

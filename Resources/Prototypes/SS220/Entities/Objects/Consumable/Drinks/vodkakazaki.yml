@@ -1,0 +1,32 @@
+- type: entity
+  parent: [DrinkBottleVisualsAll, DrinkBottleGlassBaseFull]
+  id: DrinkVodkaKazakiBottleFull
+  name: бутылка водки "Казаки"
+  description: Невероятно мутная бутылка неизвестной марки. Сколько оно тут валялось?
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: VodkaKazaki
+          Quantity: 100
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/vodkakazaki.rsi
+  - type: Sealable
+  
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkVodkaKazakiGlass
+  name: cтакан водки "Казаки"
+  description: На вид и запах как просроченная водка. Мутное...
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        drink:
+          maxVol: 30
+          reagents:
+          - ReagentId: VodkaKazaki
+            Quantity: 30
+    - type: Sprite
+      sprite: Objects/Consumable/Drinks/ginvodkaglass.rsi
+      state: icon

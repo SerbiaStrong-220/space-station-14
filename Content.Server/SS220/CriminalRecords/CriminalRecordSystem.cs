@@ -44,7 +44,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         var scannerOn = false;
         if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out var ent))
         {
-            if (HasComp<ShowSecurityIconsComponent>(ent))
+            if (HasComp<ShowCriminalRecordIconsComponent>(ent))
             {
                 scannerOn = true;
             }
@@ -157,7 +157,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
     }
 
-    public bool RemoveCriminalRecordStatus(StationRecordKey key, int time, ICommonSession? sender = null)
+    public bool RemoveCriminalRecordStatus(StationRecordKey key, int time, EntityUid? sender = null)
     {
         if (!_stationRecords.TryGetRecord(key, out GeneralStationRecord? selectedRecord))
         {
@@ -179,7 +179,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             _logManager.Add(
                 LogType.SecutiyRecords,
                 LogImpact.High,
-                $"{ToPrettyString(sender.AttachedEntity):user} DELETED a criminal record for {selectedRecord.Name} with ID {time}"
+                $"{ToPrettyString(sender):user} DELETED a criminal record for {selectedRecord.Name} with ID {time}"
             );
         }
 
@@ -203,7 +203,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         return criminalRecord != null;
     }
 
-    public bool AddCriminalRecordStatus(StationRecordKey key, string message, string? statusPrototypeId, ICommonSession? sender = null)
+    public bool AddCriminalRecordStatus(StationRecordKey key, string message, string? statusPrototypeId, EntityUid? sender = null)
     {
         if (!_stationRecords.TryGetRecord(key, out GeneralStationRecord? selectedRecord))
         {
@@ -250,7 +250,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             _logManager.Add(
                 LogType.SecutiyRecords,
                 statusPrototypeId == "execute" ? LogImpact.Extreme : LogImpact.High,
-                $"{ToPrettyString(sender.AttachedEntity):user} sent a new criminal record for {selectedRecord.Name} with ID {currentRoundTime} with type '{statusPrototypeId ?? "none"}' with message: {message}"
+                $"{ToPrettyString(sender):user} sent a new criminal record for {selectedRecord.Name} with ID {currentRoundTime} with type '{statusPrototypeId ?? "none"}' with message: {message}"
             );
         }
 

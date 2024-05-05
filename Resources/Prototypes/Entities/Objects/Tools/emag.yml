@@ -1,20 +1,5 @@
 - type: entity
-  parent: BaseItem
-  id: Emag
-  name: cryptographic sequencer
-  description: The all-in-one hacking solution. The thinking man's lockpick. The iconic EMAG.
-  components:
-  - type: Emag
-  - type: LimitedCharges
-  - type: AutoRecharge
-  - type: Sprite
-    sprite: Objects/Tools/emag.rsi
-    state: icon
-  - type: Item
-    sprite: Objects/Tools/emag.rsi
-
-- type: entity
-  parent: BaseItem
+  parent: IDCardStandard #ss-220 FakeCont
   id: EmagUnlimited
   suffix: Unlimited
   name: cryptographic sequencer
@@ -26,3 +11,33 @@
     state: icon
   - type: Item
     sprite: Objects/Tools/emag.rsi
+    storedRotation: -90
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-Emag-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-Emag-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: corvax-hidden-desc-Emag-engineering
+      jobRequired:
+        - ChiefEngineer
+        - AtmosphericTechnician
+        - StationEngineer
+        - TechnicalAssistant
+# Corvax-HiddenDesc-End
+
+- type: entity
+  parent: EmagUnlimited
+  id: Emag
+  suffix: Limited
+  components:
+  - type: LimitedCharges
+  - type: AutoRecharge

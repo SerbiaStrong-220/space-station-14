@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/1a2b4c66e573cac0e9eb0699b42890b287662de4/icons/obj/machines/gateway.dmi",
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by MIXnikita for SS220",
   "size": {
     "x": 96,
     "y": 96

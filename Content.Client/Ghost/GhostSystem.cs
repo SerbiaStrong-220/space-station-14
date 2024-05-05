@@ -1,11 +1,14 @@
 using Content.Client.Movement.Systems;
 using Content.Shared.Actions;
+using Content.Shared.Chat.TypingIndicator;
 using Content.Shared.Ghost;
 using Robust.Client.Console;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Client.Ghost
 {
@@ -13,11 +16,14 @@ namespace Content.Client.Ghost
     {
         [Dependency] private readonly IClientConsoleHost _console = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
-        [Dependency] private readonly EyeSystem _eye = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
+
+        //SS220-ghost-hats
+        private const string HatEquippedState = "equipped-HELMET";
 
         private bool _ghostVisibility = true;
 
@@ -41,7 +47,7 @@ namespace Content.Client.Ghost
             }
         }
 
-        public GhostComponent? Player => CompOrNull<GhostComponent>(_playerManager.LocalPlayer?.ControlledEntity);
+        public GhostComponent? Player => CompOrNull<GhostComponent>(_playerManager.LocalEntity);
         public bool IsGhost => Player != null;
 
         public event Action<GhostComponent>? PlayerRemoved;
@@ -109,12 +115,40 @@ namespace Content.Client.Ghost
             args.Handled = true;
         }
 
+        //SS220-ghost-hats begin
+        private void SetBodyVisuals(EntityUid uid, SpriteComponent? sprite, bool visible)
+        {
+            if (!Resolve(uid, ref sprite))
+                return;
+
+            if (!HasComp<GhostComponent>(uid))
+                return;
+
+            var typingIndicatorStates = new string[0];
+            if (TryComp<TypingIndicatorComponent>(uid, out var typingIndicator) &&
+                _prototypeManager.TryIndex<TypingIndicatorPrototype>(typingIndicator.Prototype, out var typingProto))
+                typingIndicatorStates = new string[] { typingProto.TypingState, typingProto.IdleState };
+
+            var spriteLayers = sprite.AllLayers;
+            foreach (var layer in spriteLayers)
+            {
+                if (layer.RsiState == HatEquippedState ||
+                    typingIndicatorStates.Contains(layer.RsiState.ToString()))
+                    continue;
+
+                layer.Visible = visible;
+            }
+        }
+        //SS220-ghost-hats end
+
         private void OnGhostRemove(EntityUid uid, GhostComponent component, ComponentRemove args)
         {
             _actions.RemoveAction(uid, component.ToggleLightingActionEntity);
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
+            //SS220-ghost-hats
+            _actions.RemoveAction(uid, component.ToggleAGhostBodyVisualsActionEntity);
 
             if (uid != _playerManager.LocalEntity)
                 return;
@@ -131,12 +165,16 @@ namespace Content.Client.Ghost
 
         private void OnGhostState(EntityUid uid, GhostComponent component, ref AfterAutoHandleStateEvent args)
         {
-            // при прямом указаний цвета в sprite.LayerSetColor цвет назначается, если это делать через рандомизацию (даже если цвет успешно сгенерирован и это видно в дебагере)...
-            // ...тогда стандартный гост, увы
+            // ��� ������ �������� ����� � sprite.LayerSetColor ���� �����������, ���� ��� ������ ����� ������������ (���� ���� ���� ������� ������������ � ��� ����� � ��������)...
+            // ...����� ����������� ����, ���
             var _random = new Random();
             var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
             if (TryComp<SpriteComponent>(uid, out var sprite))
                 sprite.LayerSetColor(0, color);
+
+                //SS220-ghost-hats
+                SetBodyVisuals(uid, sprite, component.BodyVisible);
+            }
 
             if (uid != _playerManager.LocalEntity)
                 return;
@@ -182,9 +220,9 @@ namespace Content.Client.Ghost
             _console.RemoteExecuteCommand(null, "ghostroles");
         }
 
-        public void ToggleGhostVisibility()
+        public void ToggleGhostVisibility(bool? visibility = null)
         {
-            GhostVisibility = !GhostVisibility;
+            GhostVisibility = visibility ?? !GhostVisibility;
         }
     }
 }

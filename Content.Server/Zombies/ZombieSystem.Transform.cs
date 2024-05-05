@@ -20,18 +20,18 @@ using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Server.Traits.Assorted;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.AnimalHusbandry;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
-using Content.Shared.Pulling.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Zombies;
 using Content.Shared.Cuffs.Components;
@@ -39,6 +39,8 @@ using Content.Shared.Prying.Components;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
+using Content.Server.Administration.Managers;
+using Robust.Server.Player;
 
 namespace Content.Server.Zombies
 {
@@ -61,8 +63,8 @@ namespace Content.Server.Zombies
         [Dependency] private readonly IChatManager _chatMan = default!;
         [Dependency] private readonly MindSystem _mind = default!;
         [Dependency] private readonly SharedRoleSystem _roles = default!;
-        [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
         /// <summary>
         /// Handles an entity turning into a zombie when they die or go into crit
@@ -133,7 +135,10 @@ namespace Content.Server.Zombies
             var melee = EnsureComp<MeleeWeaponComponent>(target);
             melee.Animation = zombiecomp.AttackAnimation;
             melee.WideAnimation = zombiecomp.AttackAnimation;
+            melee.AltDisarm = false;
             melee.Range = 1.2f;
+            melee.Angle = 0.0f;
+            melee.HitSound = zombiecomp.BiteSound;
 
             if (mobState.CurrentState == MobState.Alive)
             {
@@ -189,7 +194,7 @@ namespace Content.Server.Zombies
                 Dirty(target, pryComp);
             }
 
-            Dirty(melee);
+            Dirty(target, melee);
 
             //The zombie gets the assigned damage weaknesses and strengths
             _damageable.SetDamageModifierSetId(target, "Zombie");
@@ -225,11 +230,7 @@ namespace Content.Server.Zombies
                 _damageable.SetAllDamage(target, damageablecomp, 0);
             _mobState.ChangeMobState(target, MobState.Alive);
 
-            var factionComp = EnsureComp<NpcFactionMemberComponent>(target);
-            foreach (var id in new List<string>(factionComp.Factions))
-            {
-                _faction.RemoveFaction(target, id);
-            }
+            _faction.ClearFactions(target, dirty: false);
             _faction.AddFaction(target, "Zombie");
 
             //gives it the funny "Zombie ___" name.
@@ -240,7 +241,8 @@ namespace Content.Server.Zombies
             _identity.QueueIdentityUpdate(target);
 
             //He's gotta have a mind
-            var hasMind = _mind.TryGetMind(target, out var mindId, out _);
+            var hasMind = _mind.TryGetMind(target, out var mindId, out var mind);
+
             if (hasMind && _mind.TryGetSession(mindId, out var session))
             {
                 //Zombie role for player manifest
@@ -251,6 +253,16 @@ namespace Content.Server.Zombies
 
                 // Notificate player about new role assignment
                 _audio.PlayGlobal(zombiecomp.GreetSoundNotification, session);
+
+                // SS220 role ban restrict
+                if (_banManager.GetJobBans(session.UserId) is { } roleBans && roleBans.Contains("Zombie"))
+                {
+                    // If user has zombie role ban - kick him out of new zombie.
+                    _mind.TransferTo(mindId, null, mind: mind);
+
+                    // Remove flag to make his body as ghost role.
+                    hasMind = false;
+                }
             }
             else
             {
@@ -279,7 +291,9 @@ namespace Content.Server.Zombies
             if (TryComp<CuffableComponent>(target, out CuffableComponent? cuffableComp)) // SS220 No-handcuffed-zombies
                 RemComp(target, cuffableComp); // SS22o No-handcuffed-zombies
 
-            RemComp<SharedPullerComponent>(target);
+            // Sloth: What the fuck?
+            // How long until compregistry lmao.
+            RemComp<PullerComponent>(target);
 
             // No longer waiting to become a zombie:
             // Requires deferral because this is (probably) the event which called ZombifyEntity in the first place.

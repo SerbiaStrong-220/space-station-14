@@ -1,4 +1,3 @@
-using Content.Server.Humanoid;
 using Content.Shared.Humanoid;
 using Content.Shared.Store;
 using Content.Shared.Humanoid.Prototypes;

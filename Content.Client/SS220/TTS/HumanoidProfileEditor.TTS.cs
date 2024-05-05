@@ -6,6 +6,7 @@ using Content.Client.SS220.TTS;
 using Content.Shared.SS220.TTS;
 using Content.Shared.Preferences;
 using Robust.Shared.Random;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Preferences.UI;
 
@@ -31,8 +32,11 @@ public sealed partial class HumanoidProfileEditor
 
     private void InitializeVoice()
     {
-        _ttsSys = _entMan.System<TTSSystem>();
-        _voiceList = _prototypeManager
+        var entMan = IoCManager.Resolve<IEntityManager>();
+        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+
+        _ttsSys = entMan.System<TTSSystem>();
+        _voiceList = prototypeManager
             .EnumeratePrototypes<TTSVoicePrototype>()
             .Where(o => o.RoundStart)
             .OrderBy(o => Loc.GetString(o.Name))
@@ -85,7 +89,7 @@ public sealed partial class HumanoidProfileEditor
 
     private void PlayTTS()
     {
-        if (_previewDummy is null || Profile is null)
+        if (Profile is null)
             return;
 
         _ttsSys.ResetQueuesAndEndStreams();

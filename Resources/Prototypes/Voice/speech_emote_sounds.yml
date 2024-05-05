@@ -8,8 +8,12 @@
       collection: MaleScreams
     Laugh:
       collection: MaleLaugh
-    Giggle:
-      collection: MaleLaugh
+#   Giggle:
+#     collection: MaleLaugh
+    Giggle: # SS220 Giggle emote
+      collection: MaleGiggle
+      params:
+        volume: 2
     Sneeze:
       collection: MaleSneezes
     Cough:
@@ -46,6 +50,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: FemaleHuman
@@ -56,8 +62,12 @@
       collection: FemaleScreams
     Laugh:
       collection: FemaleLaugh
-    Giggle:
-      collection: FemaleLaugh
+#   Giggle:
+#     collection: FemaleLaugh
+    Giggle: # SS220 Giggle emote
+      collection: FemaleGiggle
+      params:
+        volume: 2
     Sneeze:
       collection: FemaleSneezes
     Cough:
@@ -94,6 +104,8 @@
     CritGasp:
       collection: FemaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: UnisexReptilian
@@ -130,6 +142,48 @@
     Growl:
       collection: LizardGrowl
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
+
+  #ss-220 female-reptilian
+- type: emoteSounds
+  id: FemaleReptilian
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+    Laugh:
+      path: /Audio/Animals/lizard_happy.ogg
+    Honk:
+      collection: BikeHorn
+    Whistle:
+      collection: Whistles
+    Crying:
+      collection: FemaleCry
+    Fart: # SS220 Fard emote :DD
+      collection: Fart
+      params:
+        volume: 2
+    #SS220 emote sounds
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+    Giggle:
+      collection: LizardGiggle
+      params:
+        volume: 2
+    Hiss:
+      collection: LizardHiss
+    Growl:
+      collection: LizardGrowl
+    #SS220 emote sounds end
+    Weh:
+      collection: Weh
+
 
 - type: emoteSounds
   id: MaleSlime
@@ -178,6 +232,8 @@
     Bubbles:
       collection: SlimeBubbles
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
 
@@ -228,6 +284,8 @@
     Bubbles:
       collection: SlimeBubbles
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
 
@@ -242,10 +300,13 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
-  sound:
-    path: /Audio/Voice/Vox/shriek1.ogg
-    params:
-      variation: 0.125
+    Scream:
+      path: /Audio/Voice/Vox/shriek1.ogg
+    Laugh:
+      path: /Audio/Voice/Vox/vox_laugh.ogg
+  params:
+    variation: 0.125
+    # We need vox sounds for the other emotes
 
 - type: emoteSounds
   id: UnisexDiona
@@ -256,9 +317,10 @@
       collection: DionaLaugh
     Honk:
       collection: BikeHorn
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
-
 
 - type: emoteSounds
   id: UnisexArachnid
@@ -283,6 +345,8 @@
     Hiss:
       collection: ArachnidHiss
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
 
 - type: emoteSounds
   id: UnisexDwarf
@@ -327,6 +391,8 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
     pitch: 0.75
@@ -365,6 +431,8 @@
     CritGasp:
       collection: FemaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
   params:
     variation: 0.125
     pitch: 0.75
@@ -392,6 +460,26 @@
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
+    Weh:
+      collection: Weh
+
+- type: emoteSounds
+  id: UnisexSilicon
+  params:
+    variation: 0.05
+  sounds:
+    Beep:
+      path: /Audio/Machines/twobeep.ogg
+    Chime:
+      path: /Audio/Machines/chime.ogg
+    Buzz:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Buzz-Two:
+      path: /Audio/Machines/buzz-two.ogg
+    Honk:
+      path: /Audio/Items/bikehorn.ogg
+    Ping:
+      path: /Audio/Effects/Cargo/ping.ogg
 
 # body emotes
 - type: emoteSounds
@@ -467,5 +555,18 @@
   id: Kangaroo
   sound:
     path: /Audio/Animals/kangaroo_grunt.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Nymph
+  sounds:
+    Chirp:
+      path: /Audio/Animals/nymph_chirp.ogg
+
+- type: emoteSounds
+  id: Parrot
+  sound:
+    path: /Audio/Animals/parrot_raught.ogg
     params:
       variation: 0.125

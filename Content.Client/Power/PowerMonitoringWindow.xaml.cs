@@ -38,8 +38,6 @@ public sealed partial class PowerMonitoringWindow : FancyWindow
     public PowerMonitoringWindow(PowerMonitoringConsoleBoundUserInterface userInterface, EntityUid? owner)
     {
         RobustXamlLoader.Load(this);
-        SetSize = new Vector2(500, 450); // Corvax-Resize
-		MinSize = new Vector2(300, 450); // Corvax-Resize
         _entManager = IoCManager.Resolve<IEntityManager>();
         _gameTiming = IoCManager.Resolve<IGameTiming>();
 
@@ -172,9 +170,6 @@ public sealed partial class PowerMonitoringWindow : FancyWindow
             var blip = new NavMapBlip(monitorCoords.Value, texture, Color.Cyan, true, false);
             NavMap.TrackedEntities[mon.Value] = blip;
         }
-
-        // Update nav map
-        NavMap.ForceNavMapUpdate();
 
         // If the entry group doesn't match the current tab, the data is out dated, do not use it
         if (allEntries.Length > 0 && allEntries[0].Group != GetCurrentPowerMonitoringConsoleGroup())

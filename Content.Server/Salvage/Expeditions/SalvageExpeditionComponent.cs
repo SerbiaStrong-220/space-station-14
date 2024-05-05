@@ -11,7 +11,7 @@ namespace Content.Server.Salvage.Expeditions;
 /// <summary>
 /// Designates this entity as holding a salvage expedition.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class SalvageExpeditionComponent : SharedSalvageExpeditionComponent
 {
     public SalvageMissionParams MissionParams = default!;
@@ -26,6 +26,7 @@ public sealed partial class SalvageExpeditionComponent : SharedSalvageExpedition
     /// When the expeditions ends.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("endTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan EndTime;
 
     /// <summary>
@@ -45,7 +46,7 @@ public sealed partial class SalvageExpeditionComponent : SharedSalvageExpedition
     /// Sound that plays when the mission end is imminent.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("sound")]
-    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Misc/tension_session.ogg")
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/SS220/Misc/Extraction.ogg") //SS220 Music Update
     {
         Params = AudioParams.Default.WithVolume(-5),
     };

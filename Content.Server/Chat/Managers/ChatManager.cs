@@ -7,6 +7,7 @@ using Content.Server.Administration.Systems;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.MoMMI;
 using Content.Server.Preferences.Managers;
+using Content.Shared.Players;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -19,6 +20,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.SS220.Discord;
 
 namespace Content.Server.Chat.Managers
 {
@@ -34,6 +36,17 @@ namespace Content.Server.Chat.Managers
             { "syndicate_agent", "#aa00ff" },
             { "revolutionary", "#aa00ff" }
         };
+
+        // ss220 sponsor-chat-colors start
+        private static readonly Dictionary<SponsorTier, string> BoostyOocColors = new()
+        {
+            { SponsorTier.Shlopa, "#1f8b4c" },
+            { SponsorTier.BigShlopa, "#d877cf" },
+            { SponsorTier.HugeShlopa, "#ad1457" },
+            { SponsorTier.GoldenShlopa, "#ffd700" },
+            { SponsorTier.CriticalMassShlopa, "#74e7cd" }
+        };
+        // ss220 sponsor-chat-colors end
 
         [Dependency] private readonly IReplayRecordingManager _replay = default!;
         [Dependency] private readonly IServerNetManager _netManager = default!;
@@ -127,9 +140,23 @@ namespace Content.Server.Chat.Managers
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server message to {player:Player}: {message}");
         }
 
-        public void SendAdminAnnouncement(string message)
+        public void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist, AdminFlags? flagWhitelist)
         {
-            var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
+            var clients = _adminManager.ActiveAdmins.Where(p =>
+            {
+                var adminData = _adminManager.GetAdminData(p);
+
+                DebugTools.AssertNotNull(adminData);
+
+                if (adminData == null)
+                    return false;
+
+                if (flagBlacklist != null && adminData.HasFlag(flagBlacklist.Value))
+                    return false;
+
+                return flagWhitelist == null || adminData.HasFlag(flagWhitelist.Value);
+
+            }).Select(p => p.Channel);
 
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
                 ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
@@ -232,11 +259,21 @@ namespace Content.Server.Chat.Managers
                 var prefs = _preferencesManager.GetPreferences(player.UserId);
                 colorOverride = prefs.AdminOOCColor;
             }
-            if (player.Channel.UserData.PatronTier is { } patron &&
-                     PatronOocColors.TryGetValue(patron, out var patronColor))
+            if (  _netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) && player.Channel.UserData.PatronTier is { } patron && PatronOocColors.TryGetValue(patron, out var patronColor))
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
+
+            //SS220-shlepi begin
+            var SponsorInfo = player.ContentData()?.SponsorInfo;
+            if (SponsorInfo is not null && !_adminManager.HasAdminFlag(player, AdminFlags.Admin))
+            {
+                if (SponsorInfo.Tiers.Any() && BoostyOocColors.TryGetValue(SponsorInfo.Tiers.Max(), out var sponsorColor))
+                {
+                    wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                }
+            }
+            //SS220-shlepi end
 
             // Corvax-Sponsors-Start
             if (_sponsorsManager.TryGetInfo(player.UserId, out var sponsorData) && sponsorData.OOCColor != null)

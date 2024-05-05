@@ -6,6 +6,8 @@ using Content.Server.Speech.EntitySystems;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Puppet;
 using Content.Shared.Speech;
+using Content.Shared.Speech.Muting;
+using Content.Shared.Bed.Sleep;
 
 namespace Content.Server.Speech.Muting
 {
@@ -18,6 +20,7 @@ namespace Content.Server.Speech.Muting
             SubscribeLocalEvent<MutedComponent, SpeakAttemptEvent>(OnSpeakAttempt);
             SubscribeLocalEvent<MutedComponent, EmoteEvent>(OnEmote, before: new[] { typeof(VocalSystem) });
             SubscribeLocalEvent<MutedComponent, ScreamActionEvent>(OnScreamAction, before: new[] { typeof(VocalSystem) });
+            SubscribeLocalEvent<SleepingComponent, ScreamActionEvent>(OnScreamActionSleeping, before: new[] { typeof(VocalSystem) }); //ss220 fixSleep
         }
 
         private void OnEmote(EntityUid uid, MutedComponent component, ref EmoteEvent args)
@@ -57,5 +60,14 @@ namespace Content.Server.Speech.Muting
 
             args.Cancel();
         }
+        //ss220 fixSleep
+        private void OnScreamActionSleeping(EntityUid uid, SleepingComponent component, ScreamActionEvent args)
+        {
+            if (args.Handled)
+                return;
+            _popupSystem.PopupEntity(Loc.GetString("Вы крепко спите."), uid, uid);
+            args.Handled = true;
+        }
+        //ss220 fixSleep end
     }
 }

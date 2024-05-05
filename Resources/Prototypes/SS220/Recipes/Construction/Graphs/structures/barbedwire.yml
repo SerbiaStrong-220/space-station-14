@@ -1,0 +1,47 @@
+﻿#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: constructionGraph
+  id: BarbedWire
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: BarbedWire
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - material: MetalRod
+              amount: 10
+              doAfter: 5
+        - to: BarbedWireCorner
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - material: MetalRod
+              amount: 10
+              doAfter: 5
+
+    - node: BarbedWire
+      entity: BarbedWire
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 8
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 8
+
+    - node: BarbedWireCorner
+      entity: BarbedWireCorner
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 8
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 8

@@ -16,7 +16,7 @@
       map: ["enum.StorageVisualLayers.Base"]
     - state: smartfridge_door
       map: ["enum.StorageVisualLayers.Door"]
-      shader: unshaded
+#      shader: unshaded #SS220-SmartFridgeResprite
   - type: EntityStorageVisuals
     stateBaseClosed: smartfridge
     stateDoorOpen: smartfridge_open

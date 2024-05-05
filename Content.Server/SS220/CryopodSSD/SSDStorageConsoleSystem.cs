@@ -25,6 +25,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Mind;
 using Content.Shared.Storage;
 using Content.Server.Objectives.Components;
+using Robust.Shared.Player;
 
 namespace Content.Server.SS220.CryopodSSD;
 
@@ -49,6 +50,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -89,14 +91,16 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
     private void OnInteractWithItem(EntityUid uid, SSDStorageConsoleComponent component, CryopodSSDStorageInteractWithItemEvent args)
     {
-        if (args.Session.AttachedEntity is not EntityUid player)
-            return;
-
+        var player = args.Actor;
         var entInteractedItemUid = GetEntity(args.InteractedItemUid);
 
         if (!Exists(entInteractedItemUid))
         {
-            _sawmill.Error($"Player {args.Session} interacted with non-existent item {entInteractedItemUid} stored in {ToPrettyString(uid)}");
+            if (TryComp<ActorComponent>(player, out var actor))
+            {
+                var session = actor.PlayerSession;
+                _sawmill.Error($"Player {session} interacted with non-existent item {entInteractedItemUid} stored in {ToPrettyString(uid)}");
+            }
             return;
         }
 
@@ -272,7 +276,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
         foreach (var item in itemsToTransfer)
         {
-            storageComponent.Container.Insert(item);
+            _containerSystem.Insert(item, storageComponent.Container);
         }
 
         foreach (var item in itemsToDelete)
@@ -365,11 +369,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
     private void UpdateUserInterface(EntityUid uid, SSDStorageConsoleComponent component, BoundUIOpenedEvent args)
     {
-        if (args.Session.AttachedEntity is null)
-        {
-            return;
-        }
-        UpdateUserInterface(uid, component, args.Session.AttachedEntity.Value);
+        UpdateUserInterface(uid, component, args.Actor);
     }
 
     private void UpdateUserInterface(EntityUid uid, SSDStorageConsoleComponent? component, EntityUid user,
@@ -388,6 +388,6 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
 
     private void SetStateForInterface(EntityUid uid, SSDStorageConsoleState storageConsoleState)
     {
-        _userInterface.TrySetUiState(uid, SSDStorageConsoleKey.Key, storageConsoleState);
+        _userInterface.SetUiState(uid, SSDStorageConsoleKey.Key, storageConsoleState);
     }
 }

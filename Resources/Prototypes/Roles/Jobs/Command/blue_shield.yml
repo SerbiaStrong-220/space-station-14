@@ -42,12 +42,20 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+#  - !type:AddComponentSpecial
+#    components:
+#      - type: CQCCombat
+#        availableSpells:
+#        - NonLethalBlowback
+#        - NonLethalPunch
+#        - NonLethalDisarm
+#        - NonLethalLongSleep
+#      - type: Missable
 
 - type: startingGear
   id: BlueShieldGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
-    back: ClothingBackpackFilled
     shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretNavyBlue
@@ -57,5 +65,3 @@
     pocket1: WeaponAdvancedRevolver
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat
-  satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled

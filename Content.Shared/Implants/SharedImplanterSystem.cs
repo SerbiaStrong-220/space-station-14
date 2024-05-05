@@ -7,7 +7,7 @@ using Content.Shared.Forensics;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Implants.Components;
 using Content.Shared.Popups;
-using Content.Shared.SS220.ReagentImplanter;
+using Content.Shared.SS220.ChemicalImplant;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
@@ -79,7 +79,7 @@ public abstract class SharedImplanterSystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = implanter };
         RaiseLocalEvent(target, ref ev);
 
-        Dirty(component);
+        Dirty(implanter, component);
     }
 
     public bool CanImplant(
@@ -98,11 +98,6 @@ public abstract class SharedImplanterSystem : EntitySystem
             !CheckTarget(target, implantComp.Whitelist, implantComp.Blacklist))
         {
             return false;
-        }
-
-        if(TryComp<ReagentCapsuleComponent>(implant, out var capsuleComp) && capsuleComp.IsUsed)
-        {
-            _popup.PopupEntity(Loc.GetString("implanter-inject-used-capsule"), target);
         }
 
         var ev = new AddImplantAttemptEvent(user, target, implant.Value, implanter);
@@ -163,7 +158,7 @@ public abstract class SharedImplanterSystem : EntitySystem
             if (component.CurrentMode == ImplanterToggleMode.Draw && !component.ImplantOnly && !permanentFound)
                 ImplantMode(implanter, component);
 
-            Dirty(component);
+            Dirty(implanter, component);
         }
     }
 

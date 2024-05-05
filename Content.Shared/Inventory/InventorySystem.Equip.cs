@@ -56,7 +56,7 @@ public abstract partial class InventorySystem
         RaiseLocalEvent(args.Entity, gotUnequippedEvent, true);
 
         // SS220 Chat-Special-Emote begin
-        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp))
+        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp) && (soundcomp.Mode == SpecialSoundMode.SpecialSoundOn))
         {
             RaiseLocalEvent(uid, new UnloadSpecialSoundsEvent(args.Entity));
         }
@@ -75,9 +75,9 @@ public abstract partial class InventorySystem
         RaiseLocalEvent(args.Entity, gotEquippedEvent, true);
 
         // SS220 Chat-Special-Emote begin
-        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp))
+        if (_entManager.TryGetComponent<SpecialSoundsComponent>(args.Entity, out var soundcomp) && (soundcomp.Mode == SpecialSoundMode.SpecialSoundOn))
         {
-            RaiseLocalEvent(uid, new HasSpecialSoundsEvent(args.Entity));
+            RaiseLocalEvent(uid, new InitSpecialSoundsEvent(args.Entity));
         }
         // SS220 Chat-Special-Emote end
     }
@@ -184,8 +184,7 @@ public abstract partial class InventorySystem
             {
                 BlockDuplicate = true,
                 BreakOnHandChange = true,
-                BreakOnUserMove = true,
-                BreakOnTargetMove = true,
+                BreakOnMove = true,
                 CancelDuplicate = true,
                 RequireCanInteract = true,
                 NeedHand = true
@@ -430,8 +429,7 @@ public abstract partial class InventorySystem
             {
                 BlockDuplicate = true,
                 BreakOnHandChange = true,
-                BreakOnUserMove = true,
-                BreakOnTargetMove = true,
+                BreakOnMove = true,
                 CancelDuplicate = true,
                 RequireCanInteract = true,
                 NeedHand = true

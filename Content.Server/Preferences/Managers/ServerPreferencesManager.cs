@@ -9,10 +9,12 @@ using Content.Shared.CCVar;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Server.SS220.RoleSpeciesRestrict;
 
 
 namespace Content.Server.Preferences.Managers
@@ -26,8 +28,11 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly IServerNetManager _netManager = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _protos = default!;
         [Dependency] private readonly SponsorsManager _sponsors = default!;
+        [Dependency] private readonly IEntitySystemManager _iEntitySystemManager = default!;
+        [Dependency] private readonly ISharedPlayerManager _iSharedPlayerManager = default!;
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
@@ -100,12 +105,36 @@ namespace Content.Server.Preferences.Managers
             }
 
             var curPrefs = prefsData.Prefs!;
+            var session = _playerManager.GetSessionById(userId);
+            var collection = IoCManager.Instance!;
 
             // Corvax-Sponsors-Start: Ensure removing sponsor markings if client somehow bypassed client filtering
+            // TODO: Make SponsorManager shared
             // WARN! It's not removing markings from DB!
-            var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
-            profile.EnsureValid(allowedMarkings);
+            // var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
+            // profile.EnsureValid(_cfg, _protos, allowedMarkings);
             // Corvax-Sponsors-End
+
+            //ss-220 arahFix
+            if (profile is HumanoidCharacterProfile human){
+
+                foreach (var (k,v) in human.JobPriorities)
+                {
+                    if(session == null)
+                        continue;
+                    if(!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
+                        {
+                        human = human.WithJobPriority(k, JobPriority.Never);
+                        }
+                }
+                profile = human;
+                message.Profile = human;
+            }
+            //ss-220 arahFixend
+
+            if (session != null)
+                profile.EnsureValid(session, collection);
+
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
                 [slot] = profile
@@ -199,11 +228,12 @@ namespace Content.Server.Preferences.Managers
                 {
                     var prefs = await GetOrCreatePreferencesAsync(session.UserId);
                     // Corvax-Sponsors-Start: Remove sponsor markings from expired sponsors
-                    foreach (var (_, profile) in prefs.Characters)
-                    {
-                        var allowedMarkings = _sponsors.TryGetInfo(session.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
-                        profile.EnsureValid(allowedMarkings);
-                    }
+                    // TODO: Make SponsorManager shared
+                    // foreach (var (_, profile) in prefs.Characters)
+                    // {
+                    //     var allowedMarkings = _sponsors.TryGetInfo(session.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
+                    //     profile.EnsureValid(_cfg, _protos, allowedMarkings);
+                    // }
                     // Corvax-Sponsors-End
                     prefsData.Prefs = prefs;
                     prefsData.PrefsLoaded = true;
@@ -273,6 +303,20 @@ namespace Content.Server.Preferences.Managers
             return prefs;
         }
 
+        /// <summary>
+        /// Retrieves preferences for the given username from storage or returns null.
+        /// Creates and saves default preferences if they are not found, then returns them.
+        /// </summary>
+        public PlayerPreferences? GetPreferencesOrNull(NetUserId? userId)
+        {
+            if (userId == null)
+                return null;
+
+            if (_cachedPlayerPrefs.TryGetValue(userId.Value, out var pref))
+                return pref.Prefs;
+            return null;
+        }
+
         private async Task<PlayerPreferences> GetOrCreatePreferencesAsync(NetUserId userId)
         {
             var prefs = await _db.GetPlayerPreferencesAsync(userId);
@@ -281,44 +325,23 @@ namespace Content.Server.Preferences.Managers
                 return await _db.InitPrefsAsync(userId, HumanoidCharacterProfile.Random());
             }
 
-            return SanitizePreferences(prefs);
+            var session = _playerManager.GetSessionById(userId);
+            var collection = IoCManager.Instance!;
+
+            return SanitizePreferences(session, prefs, collection);
         }
 
-        private PlayerPreferences SanitizePreferences(PlayerPreferences prefs)
+        private PlayerPreferences SanitizePreferences(ICommonSession session, PlayerPreferences prefs, IDependencyCollection collection)
         {
             // Clean up preferences in case of changes to the game,
             // such as removed jobs still being selected.
 
+            // TODO: Make sponsor manager shared
+            //var allowedMarkings = _sponsors.TryGetInfo(userId, out var sponsor) ? sponsor.AllowedMarkings : new string[] { };
+
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
-                ICharacterProfile newProf;
-                switch (p.Value)
-                {
-                    case HumanoidCharacterProfile hp:
-                    {
-                        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-                        var selectedSpecies = HumanoidAppearanceSystem.DefaultSpecies;
-
-                        if (prototypeManager.TryIndex<SpeciesPrototype>(hp.Species, out var species) && species.RoundStart)
-                        {
-                            selectedSpecies = hp.Species;
-                        }
-
-                        newProf = hp
-                            .WithJobPriorities(
-                                hp.JobPriorities.Where(job =>
-                                    _protos.HasIndex<JobPrototype>(job.Key)))
-                            .WithAntagPreferences(
-                                hp.AntagPreferences.Where(antag =>
-                                    _protos.HasIndex<AntagPrototype>(antag)))
-                            .WithSpecies(selectedSpecies);
-                        break;
-                    }
-                    default:
-                        throw new NotSupportedException();
-                }
-
-                return new KeyValuePair<int, ICharacterProfile>(p.Key, newProf);
+                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection));
             }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor);
         }
 

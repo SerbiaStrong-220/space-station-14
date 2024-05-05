@@ -46,5 +46,9 @@ namespace Content.Shared.Weapons.Melee.Events
             User = user;
             ClickLocation = clickLocation;
         }
+
+        // SS220 hook attack event start
+        public bool Cancelled = false;
+        // SS220 hook attack event end
     }
 }

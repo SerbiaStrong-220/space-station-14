@@ -53,8 +53,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
-        Heat: 7
+        Blunt: 7 #weaponBalance
+        Heat: 3 #weaponBalance
   - type: IgnitionSource
     ignited: true
 
@@ -80,12 +80,13 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    state: shard
   - type: Projectile
     damage:
       types:
         Piercing: 3
-        Slash: 3 #remember, it's metal shrapnel!
+        Slash: 3
+
 
 - type: entity
   id: PelletShotgunTranquilizer
@@ -108,9 +109,9 @@
     solution: ammo
   - type: DrainableSolution
     solution: ammo
-  - type: SolutionInjectOnCollide
+  - type: SolutionInjectOnProjectileHit
     transferAmount: 15
-    blockSlots: NONE #tranquillizer darts shouldn't be blocked by a mask
+    solution: ammo
   - type: InjectableSolution
     solution: ammo
 

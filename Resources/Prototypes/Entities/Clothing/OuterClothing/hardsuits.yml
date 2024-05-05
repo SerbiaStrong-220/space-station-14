@@ -98,6 +98,15 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineering
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 #Spationaut Hardsuit
 - type: entity
@@ -270,18 +279,20 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.3 #SS220-WardenJuggernaut
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.6
-        Piercing: 0.6
-        Caustic: 0.7
+        Blunt: 0.4 #SS220-WardenJuggernaut-Begin
+        Slash: 0.4
+        Piercing: 0.3
+        Heat: 0.6
+        Caustic: 0.4
+        Radiation: 0.4 #SS220-WardenJuggernaut-End
         Stamina: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
+    walkModifier: 0.65 #SS220-WardenJuggernaut-Begin
+    sprintModifier: 0.65 #SS220-WardenJuggernaut-End
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWarden
@@ -351,6 +362,15 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineeringWhite
+  #ss220 special_sounds start
+  - type: SpecialSounds
+    mode: 0
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -383,7 +403,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitRd
   name: experimental research hardsuit
-  description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor. Able to be compressed to small sizes.
+  description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/rd.rsi
@@ -399,7 +419,7 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.3
-        Radiation: 0.1
+        Radiation: 0.15 #ss-220 armReb
         Caustic: 0.2
         Stamina: 0.8
   - type: ExplosionResistance
@@ -409,7 +429,9 @@
     sprintModifier: 0.75
   - type: HeldSpeedModifier
   - type: Item
-    size: Normal
+    size: Huge
+    shape:
+    - 0,0,4,4 #5X5, can fit in a duffel bag but nothing smaller.
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -509,10 +531,10 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
-        Heat: 0.5
+        Heat: 0.6 #ss-220 armReb
         Radiation: 0.5
         Caustic: 0.5
-        Stamina: 0.1
+        Stamina: 0.3 #ss-220 armReb
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -524,8 +546,14 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - Hardsuit
+    - WhitelistChameleon
 
 # Syndicate Medic Hardsuit
 - type: entity
@@ -542,22 +570,26 @@
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.2 #ss-220 armReb
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.2
-        Slash: 0.2
-        Piercing: 0.2
-        Heat: 0.2
+        Blunt: 0.4  #ss-220 armReb
+        Slash: 0.4  #ss-220 armReb
+        Piercing: 0.4 #ss-220 armReb
+        Heat: 0.5 #ss-220 armReb
         Radiation: 0.2
-        Caustic: 0.2
+        Caustic: 0.5  #ss-220 armReb
         Stamina: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.65
+    walkModifier: 0.9 #ss-220 armReb
+    sprintModifier: 0.9 #ss-220 armReb
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieMedic
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -580,16 +612,18 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.6
-        Heat: 0.2
-        Radiation: 0.01
+        Blunt: 0.4 #ss-220 armReb
+        Slash: 0.4  #ss-220 armReb
+        Piercing: 0.4 #ss-220 armReb
+        Heat: 0.5 #ss-220 armReb
+        Radiation: 0.2  #ss-220 armReb
         Caustic: 0.5
         Stamina: 0.1
+  - type: Item
+    size: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 0.9 #ss-220 armReb
+    sprintModifier: 0.9 #ss-220 armReb
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieElite
@@ -598,6 +632,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
 
@@ -616,20 +651,20 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.2  #ss-220 armReb
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.4
         Slash: 0.4
         Piercing: 0.3
-        Heat: 0.5
-        Radiation: 0.25
+        Heat: 0.4 #ss-220 armReb
+        Radiation: 0.1  #ss-220 armReb
         Caustic: 0.4
         Stamina: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 0.9 #ss-220 armReb
+    sprintModifier: 0.9 #ss-220 armReb
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommander
@@ -638,6 +673,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
 
@@ -655,15 +691,17 @@
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
+  - type: TemperatureProtection #ss-220 armReb
+    coefficient: 0.001  #ss-220 armReb
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.2  #ss-220 armReb
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
-        Heat: 0.2
+        Heat: 0.4 #ss-220 armReb
         Radiation: 0.2
         Caustic: 0.2
         Stamina: 0.1
@@ -678,6 +716,7 @@
   - type: Vocal
     sounds:
       Male: MaleEvil
+      Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
 
@@ -827,6 +866,20 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTLeader
 
+#ERT Chaplain Hardsuit
+- type: entity
+  parent: ClothingOuterHardsuitJuggernaut
+  id: ClothingOuterHardsuitERTChaplain
+  name: ERT chaplain's hardsuit
+  description: A protective hardsuit worn by the chaplains of an Emergency Response Team.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertchaplain.rsi #if you change this, please update the humanoid.yml with a better markers sprite.
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertchaplain.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTChaplain
+
 #ERT Engineer Hardsuit
 - type: entity
   parent: ClothingOuterHardsuitCBURN
@@ -868,6 +921,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTSecurity
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #ERT Janitor Hardsuit
 - type: entity

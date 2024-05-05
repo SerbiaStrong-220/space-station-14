@@ -1,0 +1,225 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTHeavy2
+  name: тяжёлый скафандр Gladiator
+  description: Тяжёлый боевой костюм, обшитый полимерным кремниевым покрытием.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.65
+    sprintModifier: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.17
+        Slash: 0.17
+        Piercing: 0.17
+        Heat: 0.17
+        Stamina: 0
+        Radiation: 0.2
+        Caustic: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.15
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy2
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTHeavy
+  name: тяжёлый боевой скафандр NT-3000
+  description: Непроницаемая броня, созданная для защиты от самого современного оружия.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Stamina: 0
+        Radiation: 0.25
+        Caustic: 0.35
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTSoldier
+  name: имритовый скафандр Х-27
+  description: Лёгкий и маневренный скафандр, обеспечивающий свободу движения в условиях невесомости.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.5
+        Caustic: 0.5
+        Stamina: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTSoldier
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTMed
+  name: боевой скафандр АМ-500
+  description: Серебристый скафандр с модулем повышающим скорость.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_med.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_med.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.5
+        Caustic: 0.5
+        Stamina: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTMed
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTcmo
+  name: боевой скафандр АЩ-690
+  description: Лёгкий и прочный, обеспечивает достойную защиту от лазерных выстрелов и пуль.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Radiation: 0.5
+        Caustic: 0
+        Stamina: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTcmo
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTAdmiral
+  name: боевой скафандр Панцирь-Ω
+  description: Лёгкий и прочный скафандр, обеспечивает огромную защиту не теряя в мобильности. Хотят слухи, что цена такого сравнима с небольшой исследовательской станцией.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.14
+        Slash: 0.14
+        Piercing: 0.14
+        Heat: 0.14
+        Radiation: 0.2
+        Caustic: 0.2
+        Stamina: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTAdmiral
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitERTCE
+  name: боевой скафандр ТЭК-670
+  description: Адаптированный скафандр для выживания во враждебной среде космоса, обеспечивает электрозащиту и полный иммунитет от радиации.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Radiation: 0
+        Caustic: 0.5
+        Stamina: 0
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTCE

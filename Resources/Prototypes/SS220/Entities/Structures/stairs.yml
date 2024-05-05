@@ -24,7 +24,7 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
-  - type: SlowContacts
+  - type: SpeedModifierContacts
     walkSpeedModifier: 0.8
     sprintSpeedModifier: 0.8
   - type: Physics

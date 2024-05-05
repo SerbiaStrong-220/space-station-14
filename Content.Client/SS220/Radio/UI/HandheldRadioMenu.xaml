@@ -2,8 +2,8 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                      Title="{Loc 'handheld-radio-component-title'}"
-                     MinSize="270 190"
-                     SetSize="270 190">
+                     MinSize="270 150"
+                     SetSize="270 150">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="False"
                   VerticalExpand="False"
@@ -16,23 +16,18 @@
                      HorizontalExpand="True"
                      SetSize="150 30"
                 />
-                <Button Name="ChannelButton"
-                Access="Public"
-                ToggleMode="False"
-                SetSize="150 30"
-                Text="{Loc 'handheld-radio-component-on-channel-set'}"
-                TextAlign="Center" />
             </BoxContainer>
         </BoxContainer>
         <Control MinHeight="10"/>
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Center" Margin="5 0 5 5">
-            <Button Name="MicButton" ToggleMode="True" Text="{Loc 'handheld-radio-button-text-mic'}" StyleClasses="OpenRight" MinWidth="90"/>
+            <Button Name="MicButton" ToggleMode="True" Text="{Loc 'handheld-radio-button-text-mic'}" StyleClasses="OpenRight" MinWidth="90">
+            </Button>
             <Button Name="SpeakerButton" ToggleMode="True" Text="{Loc 'handheld-radio-button-text-speaker'}" StyleClasses="OpenLeft" MinWidth="90"/>
         </BoxContainer>
         <BoxContainer Orientation="Vertical">
             <PanelContainer StyleClasses="LowDivider" />
             <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
-                <Label Text="{Loc 'handheld-radio-component-flavor-text-left'}" StyleClasses="WindowFooterText"
+                <Label Name="ChannelsDesc" StyleClasses="WindowFooterText"
                        HorizontalAlignment="Left" HorizontalExpand="True"  Margin="0 0 5 0" />
                 <TextureRect StyleClasses="NTLogoDark" Stretch="KeepAspectCentered"
                              VerticalAlignment="Center" HorizontalAlignment="Right" SetSize="19 19"/>

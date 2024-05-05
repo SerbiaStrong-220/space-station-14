@@ -27,7 +27,6 @@ namespace Content.Shared.Blocking;
 
 public sealed partial class BlockingSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
@@ -149,15 +148,6 @@ public sealed partial class BlockingSystem : EntitySystem
     {
         if (component.IsBlocking)
             return false;
-
-        //ss220-revorkblock
-        //A temporary crutch, I'll fix it after the New Year's.
-        if (TryComp(item, out ReflectComponent? useDelay))
-        {
-            if (!useDelay.Enabled)
-                return false;
-        }
-        //ss220-revorkblock end
 
         var xform = Transform(user);
 

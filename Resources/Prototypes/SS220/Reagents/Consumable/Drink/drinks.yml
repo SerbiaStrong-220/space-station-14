@@ -1,0 +1,23 @@
+- type: reagent
+  id: AppleCompote
+  name: reagent-name-apple-compote
+  parent: BaseDrink
+  desc: reagent-desc-apple-compote
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: juice
+  color: "#ffb51c"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
+    state: icon
+
+- type: reagent
+  id: BerryСompote
+  name: reagent-name-berry-compote
+  parent: BaseDrink
+  desc: reagent-desc-berry-compote
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: juice
+  color: "#f04737"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
+    state: icon   
