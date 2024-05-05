@@ -170,6 +170,7 @@ namespace Content.Client.Ghost
             var _random = new Random();
             var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
             if (TryComp<SpriteComponent>(uid, out var sprite))
+            {
                 sprite.LayerSetColor(0, color);
 
                 //SS220-ghost-hats
