@@ -179,6 +179,7 @@
     - JawsOfLife
     - BorgModuleAdvancedTool
     - BorgModuleRCD
+    - BorgModuleProtoKineticAccelerator # ss220
 # ss220 start thermoelectric generator 
 
 - type: technology

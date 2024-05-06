@@ -90,3 +90,16 @@
     Foodbeet: 1
     FoodPeaPod: 1
     FoodCarrot: 1
+
+# SS220-Salami-update begin
+- type: microwaveMealRecipe
+  id: RecipeMeatSalami
+  name: Salami recipe
+  result: FoodMeatSalami
+  time: 30
+  reagents:
+    SodiumHydroxide: 10
+  solids:
+    FoodMeat: 3
+    FoodEgg: 2
+# SS220 Salami-update end

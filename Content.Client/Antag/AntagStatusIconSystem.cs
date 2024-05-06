@@ -1,5 +1,6 @@
 using Content.Shared.Antag;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.SS220.AdmemeEvents;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Content.Shared.Zombies;
@@ -23,6 +24,7 @@ public sealed class AntagStatusIconSystem : SharedStatusIconSystem
         SubscribeLocalEvent<ZombieComponent, GetStatusIconsEvent>(GetIcon);
         SubscribeLocalEvent<HeadRevolutionaryComponent, GetStatusIconsEvent>(GetIcon);
         SubscribeLocalEvent<InitialInfectedComponent, GetStatusIconsEvent>(GetIcon);
+        SubscribeLocalEvent<EventRoleComponent, GetStatusIconsEvent>(GetIcon); //SS220-admeme-ebents
     }
 
     /// <summary>

@@ -1,167 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
+# Admiral     
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitERTHeavy2
-  noSpawn: true
-  name: шлем скафандра Gladiator
-  description: Настощий мир в розовых очках
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitERTHeavy
-  noSpawn: true
-  name: шлем скафандра NT-3000
-  description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitERTSoldier
-  noSpawn: true
-  name: шлем скафандра Х-27
-  description: Тонкий металла с мягкой обшивкой из шерсти неизвестного происхождения.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitERTMed
-  noSpawn: true
-  name: шлем скафандра АМ-500
-  description: Серебро известно своими антибактериальными свойствами, это точно не коррупционная схема.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitERTcmo
-  noSpawn: true
-  name: шлем скафандра АЩ-690
-  description: Царапины и капли крови явно указывают на то, что клятва Гиппократа не является такой уж обязательной в исполнении.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-        
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: ClothingHeadHelmetHardsuitBaseERT
   id: ClothingHeadHelmetHardsuitERTAdmiral
   noSpawn: true
   name: шлем скафандра Панцирь-Ω
@@ -171,29 +11,10 @@
     sprite: SS220/Clothing/Head/Hardsuits/ert_admiral.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardsuits/ert_admiral.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
 
+# CE
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: ClothingHeadHelmetHardsuitBaseERT
   id: ClothingHeadHelmetHardsuitERTCE
   noSpawn: true
   name: шлем скафандра ТЭК-670
@@ -203,23 +24,68 @@
     sprite: SS220/Clothing/Head/Hardsuits/ert_ce.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardsuits/ert_ce.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: "#ffadc6"
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: BreathMask
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
+
+# CMO
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTCMO
+  noSpawn: true
+  name: шлем скафандра АЩ-690
+  description: Царапины и капли крови явно указывают на то, что клятва Гиппократа не является такой уж обязательной в исполнении.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
+
+# Soldier
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTSoldier
+  noSpawn: true
+  name: шлем скафандра Х-27
+  description: Тонкий металла с мягкой обшивкой из шерсти неизвестного происхождения.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
+
+# Med
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTMed
+  noSpawn: true
+  name: шлем скафандра АМ-500
+  description: Серебро известно своими антибактериальными свойствами, это точно не коррупционная схема.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
+
+# Heavy
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTHeavy
+  noSpawn: true
+  name: шлем скафандра NT-3000
+  description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
+
+# Heavy2
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTHeavy2
+  noSpawn: true
+  name: шлем скафандра Gladiator
+  description: Настощий мир в розовых очках.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi

@@ -1,8 +1,9 @@
 ## vocal emotes
 - type: emote
   id: Meow
+  name: chat-emote-name-meow
   category: Vocal
-  chatMessages: [мяукает.]
+  chatMessages: [chat-emote-msg-meow]
   chatTriggers:
     - мяу
     - мяукнул
@@ -17,8 +18,9 @@
 
 - type: emote
   id: Mew
+  name: chat-emote-name-mew
   category: Vocal
-  chatMessages: [мякает.] # spo9k: может, есть слово получше?
+  chatMessages: [chat-emote-msg-mew]
   chatTriggers:
     - мя
     - мякает
@@ -33,8 +35,9 @@
 
 - type: emote
   id: Growl
+  name: chat-emote-name-growl
   category: Vocal
-  chatMessages: [growls.]
+  chatMessages: [chat-emote-msg-growl]
   chatTriggers:
     - рычит
     - ррр
@@ -47,8 +50,9 @@
 
 - type: emote
   id: Purr
+  name: chat-emote-name-purr
   category: Vocal
-  chatMessages: [мурчит.]
+  chatMessages: [chat-emote-msg-purr]
   chatTriggers:
     - мур
     - мурчит

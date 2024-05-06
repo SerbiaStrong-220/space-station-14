@@ -98,15 +98,16 @@
   - UplinkWeaponry
   conditions:
     - !type:BuyerWhitelistCondition
-# SS220-uplink-fix begin
+      blacklist:
+        components:
+        - SurplusBundle
+# SS220-uplink-fix-begin
+#   - !type:StoreWhitelistCondition
 #      whitelist:
 #        tags:
 #          - NukeOpsUplink
 #          - LoneOpsUplink
-# SS220-uplink-fix end
-      blacklist:
-        components:
-        - SurplusBundle
+# SS220-uplink-fix-end
 
 - type: listing
   id: UplinkDisposableTurret
@@ -118,18 +119,19 @@
   categories:
   - UplinkWeaponry
   conditions:
+#  SS220-uplink-fix-begin
     - !type:StoreWhitelistCondition
-# SS220-uplink-fix begin
-#      whitelist:
-#        tags:
-#          - NukeOpsUplink
+       blacklist:
+         tags:
+           - NukeOpsUplink
 #          - LoneOpsUplink
-# SS220-uplink-fix end
+    - !type:BuyerWhitelistCondition
       blacklist:
         components:
           - SurplusBundle
-        tags:
-          - NukeOpsUplink
+#        tags:
+#          - NukeOpsUplink
+# SS220-uplink-fix-end
 
 - type: listing
   id: UplinkEshield
@@ -146,13 +148,14 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink #SS220-uplink-fix
 
 - type: listing
   id: UplinkSniperBundle
   name: uplink-sniper-bundle-name
   description: uplink-sniper-bundle-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: base }
-  productEntity: BriefcaseSyndieSniperBundleFilled  
+  productEntity: BriefcaseSyndieSniperBundleFilled
   cost:
     Telecrystal: 12
   categories:
@@ -191,16 +194,18 @@
   categories:
   - UplinkWeaponry
   conditions:
+# SS220-uplink-fix-begin
   - !type:StoreWhitelistCondition
-# SS220-uplink-fix begin
-#      whitelist:
-#        tags:
-#          - NukeOpsUplink
-#          - LoneOpsUplink
-# SS220-uplink-fix end
+     whitelist:
+       tags:
+         - NukeOpsUplink
+         - LoneOpsUplink
+# SS220-uplink-fix-end
+  - !type:BuyerWhitelistCondition
     blacklist:
       components:
       - SurplusBundle
+
 
 - type: listing
   id: UplinkL6SawBundle
@@ -212,14 +217,12 @@
     Telecrystal: 30
   categories:
   - UplinkWeaponry
-# SS220-uplink-fix begin
-#  conditions:
-#  - !type:StoreWhitelistCondition
-#    whitelist:
-#      tags:
-#      - NukeOpsUplink
-#      - LoneOpsUplink
-# SS220-uplink-fix end
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
 
 # Explosives
 
@@ -274,12 +277,11 @@
     - UplinkExplosives
   conditions:
     - !type:StoreWhitelistCondition
-# SS220-uplink-fix begin
-#      whitelist:
-#        tags:
-#          - NukeOpsUplink
-#          - LoneOpsUplink
-# SS220-uplink-fix end
+      whitelist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink
+    - !type:BuyerWhitelistCondition
       blacklist:
         components:
         - SurplusBundle
@@ -294,13 +296,13 @@
   categories:
     - UplinkExplosives
   conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-# SS220-uplink-fix begin
+# SS220-uplink-fix-begin
+#  - !type:StoreWhitelistCondition
+#    whitelist:
 #        tags:
 #          - NukeOpsUplink
 #          - LoneOpsUplink
-# SS220-uplink-fix end
+# SS220-uplink-fix-end
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -352,6 +354,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - LoneOpsUplink #SS220-uplink-fix
 
 - type: listing
   id: UplinkC4Bundle
@@ -528,6 +531,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink #SS220-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -825,6 +829,17 @@
   - UplinkDisruption
 
 - type: listing
+  id: UplinkSyndicateMartyrModule
+  name: uplink-syndicate-martyr-module-name
+  description: uplink-syndicate-martyr-module-desc
+  productEntity: BorgModuleMartyr
+  icon: { sprite: /Textures/Objects/Specific/Robotics/borgmodule.rsi, state: syndicateborgbomb }
+  cost:
+    Telecrystal: 4
+  categories:
+    - UplinkDisruption
+
+- type: listing
   id: UplinkSoapSyndie
   name: uplink-soap-name
   description: uplink-soap-desc
@@ -929,15 +944,17 @@
       components:
       - SurplusBundle
 
-- type: listing
-  id: UplinkSingarityBeacon
-  name: uplink-singularity-beacon-name
-  description: uplink-singularity-beacon-desc
-  productEntity: SingularityBeacon
-  cost:
-    Telecrystal: 12
-  categories:
-    - UplinkDisruption
+#ss220-uplink-fix-begin
+#- type: listing
+#  id: UplinkSingarityBeacon
+#  name: uplink-singularity-beacon-name
+#  description: uplink-singularity-beacon-desc
+#  productEntity: SingularityBeacon
+#  cost:
+#    Telecrystal: 12
+#  categories:
+#    - UplinkDisruption
+#ss220-uplink-fix-end
 
 # Allies
 
@@ -1068,7 +1085,7 @@
     Telecrystal: 6
   categories:
     - UplinkAllies
-  
+
 - type: listing
   id: UplinkSyndicatePersonalAI
   name: uplink-syndicate-pai-name
@@ -1353,13 +1370,14 @@
   categories:
   - UplinkWearables
   conditions:
+# SS220-uplink-fix-begin
+#   - !type:BuyerWhitelistCondition
+#     whitelist:
+#        tags:
+#         - NukeOpsUplink
+#         - LoneOpsUplink
+# SS220-uplink-fix-end
     - !type:BuyerWhitelistCondition
-# SS220-uplink-fix begin
-#   whitelist:
-#      tags:
-#       - NukeOpsUplink
-#       - LoneOpsUplink
-# SS220-uplink-fix end
       blacklist:
         components:
           - SurplusBundle
@@ -1374,6 +1392,14 @@
     Telecrystal: 10
   categories:
   - UplinkWearables
+#ss220-fix-uplink-begin
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+        tags:
+        - NukeOpsUplink
+        - LoneOpsUplink
+#ss220-fix-uplink-end
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -1385,11 +1411,18 @@
     Telecrystal: 12
   categories:
   - UplinkWearables
+# ss220-fix-uplink-begin
   conditions:
-  - !type:StoreWhitelistCondition
+  - !type:BuyerWhitelistCondition
     blacklist:
       components:
       - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+# ss220-fix-uplink-end
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate

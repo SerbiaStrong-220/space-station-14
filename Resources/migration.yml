@@ -379,3 +379,12 @@ WeaponRifleLecterRubber: WeaponRifleLecter
 GlassBoxLaserBroken: GlassBoxBroken
 ReinforcementRadioSyndicateMonkey: ReinforcementRadioSyndicateAncestor
 ReinforcementRadioSyndicateMonkeyNukeops: ReinforcementRadioSyndicateAncestorNukeops
+
+# 2024-04-27 SS220 Chef Resprite
+ClothingHeadChefNew: ClothingHeadHatChef
+ClothingOuterApronRed: ClothingBeltChefApronRed
+ClothingOuterChefBluza: ClothingOuterJacketChef
+ClothingUniformChefNew: ClothingUniformJumpsuitChef
+
+# 2024-05-01
+DrinkBottleGoldschlager: DrinkBottleGildlager

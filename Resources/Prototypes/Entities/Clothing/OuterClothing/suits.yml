@@ -179,7 +179,7 @@
     slots: WITHOUT_POCKET
 
 - type: entity
-  parent: ClothingOuterBase
+  parent: ClothingUniformSkirtBase #SS220 tohoUpdate
   id: ClothingOuterSuitShrineMaiden
   name: shrine maiden outfit
   description: Makes you want to go deal with some troublesome youkai.
@@ -188,6 +188,9 @@
     sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
+  - type: Tag #SS220 tohoUpdate Begin
+    tags:
+     - ShrineMaiden #SS220 tohoUpdate End
 
 - type: entity
   parent: ClothingOuterBase

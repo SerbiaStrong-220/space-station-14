@@ -156,6 +156,7 @@
   cost: 10000
   recipeUnlocks:
   - AdvMopItem
+  - TrashBagAdvanced #SS220 Borg Modules
   - MegaSprayBottle
 
 - type: technology

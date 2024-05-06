@@ -26,14 +26,18 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitCapFormal
 
-- type: loadout
-  id: CaptainFormalSkirt
-  equipment: CaptainFormalSkirt
+#SS220-RemoveFormalSkirtLoadouts-Begin
 
-- type: startingGear
-  id: CaptainFormalSkirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtCapFormalDress
+#- type: loadout
+#  id: CaptainFormalSkirt
+#  equipment: CaptainFormalSkirt
+
+#- type: startingGear
+#  id: CaptainFormalSkirt
+#  equipment:
+#    jumpsuit: ClothingUniformJumpskirtCapFormalDress
+
+#SS220-RemoveFormalSkirtLoadouts-End
 
 # Head
 - type: loadout

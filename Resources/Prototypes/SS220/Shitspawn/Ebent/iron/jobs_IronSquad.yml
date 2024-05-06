@@ -66,7 +66,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadLeader
-  name: Спавнер лидера Железного Отряда
+  name: 1Спавнер лидера Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -175,7 +175,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadEngineer
-  name: Спавнер инженера Железного Отряда
+  name: 2Спавнер инженера Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -262,7 +262,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitParamedicSyndie
     back: ClothingBackpackNuclearCorpsman
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesNitrile
     neck: ClothingCloakIronSquadMed
@@ -276,7 +276,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCorpsman
-  name: Спавнер полевого медика Железного Отряда
+  name: 5Спавнер полевого медика Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -375,10 +375,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackNuclearCMO
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesNitrile
-    outerClothing: ClothingOuterHardsuitIroncmo
+    outerClothing: ClothingOuterHardsuitIronCMO
     suitstorage: OxygenTankFilled
     neck: ClothingCloakIronSquadCMO
     id: SyndiPDAAgentCMO
@@ -389,7 +389,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCMO
-  name: Спавнер главврача Железного Отряда
+  name: 3Спавнер главврача Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -471,7 +471,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackNuclearTrooper
-    shoes: ClothingShoesBootsMagSyndie
+    shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronSoldier
@@ -484,7 +484,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadTrooper
-  name: Спавнер бойца Железного Отряда
+  name: 4Спавнер бойца Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite

@@ -375,7 +375,8 @@
 
 - type: entity
   id: MagazineUssp_RPK
-  name: обойма ручного пулемёта Калашникова
+  name: магазин ручного пулемёта Калашникова
+  description: Большой магазин для больших коммунистических нужд.
   parent: BaseMagazineLightRifle
   suffix: Shitspawn, Ebent, FractWar
   components:
@@ -399,3 +400,93 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+
+- type: entity
+  id: BedsheetUSSP
+  parent: BedsheetBase
+  suffix: Shitspawn, Ebent, FractWar
+  name: коммунистическое одеяло
+  description: С коммуниста по нитке и будет всем одеяло...
+  components:
+  - type: Sprite
+    state: sheetUSSP
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Bedsheets/USSP.rsi
+
+- type: entity
+  parent: EnergySwordDouble
+  id: EnergyAxe
+  suffix: Shitspawn, Ebent, FractWar
+  name: двуручный энергетический топор
+  description: Огромный энергетический топор. Вызывает страх, уважение и желание вступить в профсоюз.
+  components:
+  - type: EnergySword
+    colorOptions:
+    - "#8B0000"
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/e_axe.rsi
+    layers:
+      - state: energyaxe
+      - state: energyaexe_blade
+        color: "#ff0000"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: ToggleableLightVisuals
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+  - type: Item
+    size: Small
+    sprite: SS220/Objects/Weapons/Melee/e_axe_inhands.rsi
+  - type: Reflect
+    enabled: true
+    reflects: Energy
+    reflectProb: .95
+    spread: 75
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Stamina: 0.3
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Stamina: 0.9
+      flatReductions:
+        Heat: 1
+        Piercing: 1
+    activeBlockFraction: 0.75 #ss220-revorkblock
+  - type: UseDelay
+    delay: 1
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Slash: 12
+            Heat: 12
+            Structural: 15
+  - type: ItemToggleDisarmMalus
+    activatedDisarmMalus: 0.7
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+      params:
+        volume: 3

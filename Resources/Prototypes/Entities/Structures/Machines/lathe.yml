@@ -167,7 +167,6 @@
     emagStaticRecipes:
       - BoxLethalshot
       - BoxShotgunFlare
-      - GrenadeBlast
       - MagazineBoxLightRifle
       - MagazineBoxMagnum
       - MagazineBoxPistol
@@ -188,6 +187,7 @@
       - BoxBeanbag
       - BoxShotgunIncendiary
       - BoxShotgunUranium
+      - GrenadeBlast
       - GrenadeEMP
       - GrenadeFlash
       - MagazineBoxLightRifleIncendiary
@@ -284,6 +284,7 @@
       - PillCanister
       - ChemistryEmptyBottle01
       - AdvMopItem
+      - TrashBagAdvanced #SS220 Borg Modules
       - WeaponSprayNozzle
       - ClothingBackpackWaterTank
       - MegaSprayBottle
@@ -566,6 +567,7 @@
     - BorgModuleAdvancedCleaning
     - BorgModuleMining
     - BorgModuleGrapplingGun
+    - BorgModuleProtoKineticAccelerator #SS220 Borg Modules
     - BorgModuleAdvancedTool
     - BorgModuleGPS
     - BorgModuleRCD
@@ -720,6 +722,7 @@
       - BoxShotgunUranium
       - ExplosivePayload
       - FlashPayload
+      - GrenadeBlast
       - GrenadeEMP
       - GrenadeFlash
       - HoloprojectorSecurity
@@ -740,6 +743,7 @@
       - MagazineRifleUranium
       - MagazineShotgunBeanbag
       - MagazineShotgunIncendiary
+      - PortableRecharger
       - PowerCageHigh
       - PowerCageMedium
       - PowerCageSmall
@@ -764,14 +768,6 @@
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
-      - PowerCageSmall
-      - PowerCageMedium
-      - PowerCageHigh
-      - ShuttleGunSvalinnMachineGunCircuitboard
-      - ShuttleGunPerforatorCircuitboard
-      - ShuttleGunFriendshipCircuitboard
-      - ShuttleGunDusterCircuitboard
-      - PortableRecharger
   - type: MaterialStorage
     whitelist:
       tags:
@@ -1264,5 +1260,5 @@
     - TileDarkReinforced
     - TileDutch
     - TileDutchMini
-    - TileKitchenRed #SS220 new kitchen tile 
+    - TileKitchenRed #SS220 new kitchen tile
 #SS220-Sheetifier-rework-end

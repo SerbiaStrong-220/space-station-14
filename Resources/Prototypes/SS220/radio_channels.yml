@@ -147,3 +147,47 @@
   longRange: true
   keycode: "\u00C9"
   frequency: 1591
+# Admin memes start
+- type: radioChannel 
+  id: ChannelMafia
+  name: Мафия
+  keycode: 'з'
+  frequency: 1001
+  color: "#8B0000"
+  longRange: true
+- type: radioChannel
+  id: ChannelTSF
+  name: ТСФ
+  keycode: 'л'
+  frequency: 1001
+  color: "#F0E68C"
+  longRange: true
+- type: radioChannel
+  id: ChannelAlpha
+  name: Альфа
+  keycode: 'а'
+  frequency: 1001
+  color: "#00BFFF"
+  longRange: true
+- type: radioChannel
+  id: ChannelOmega
+  name: Омега
+  keycode: 'щ'
+  frequency: 1001
+  color: "#00FA9A"
+  longRange: true
+- type: radioChannel
+  id: ChannelTraders
+  name: Торговцы
+  keycode: 'е'
+  frequency: 1001
+  color: "#9932CC"
+  longRange: true
+- type: radioChannel
+  id: ChannelXonk
+  name: Хонк-сквад
+  keycode: 'ч'
+  frequency: 1001
+  color: "#FFB6C1"
+  longRange: true
+# Admin memes end
