@@ -9,6 +9,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using System.Threading.Tasks;
+using Content.Shared.Sprite;
 
 namespace Content.Client.Ghost
 {
@@ -19,6 +21,7 @@ namespace Content.Client.Ghost
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
+        [Dependency] private readonly IEntityManager _entityManager = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
 
@@ -94,6 +97,31 @@ namespace Content.Client.Ghost
 
         private void OnToggleFoV(EntityUid uid, EyeComponent component, ToggleFoVActionEvent args)
         {
+            if (TryComp<SpriteComponent>(uid, out var sprite))
+            {
+                var _random = new Random();
+                var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
+
+                // sprite.Color = color;
+
+                sprite.Rotation += Angle.FromDegrees(180.0f);
+
+                sprite.Color = sprite.Color.WithBlue(10);
+                //var t = sprite.GetType();
+
+                //var pr = t.GetProperties();
+
+                //var col =  pr.FirstOrDefault(x => x.Name == "Color");
+
+                //if (col is not null)
+                //{
+
+                //    col.GetSetMethod(true)!.Invoke(sprite, new object[] { color });
+                //}
+
+                // sprite.
+                // PlayerUpdated?.Invoke(Player);
+            }
             if (args.Handled)
                 return;
 
@@ -159,20 +187,29 @@ namespace Content.Client.Ghost
 
         private void OnGhostPlayerAttach(EntityUid uid, GhostComponent component, LocalPlayerAttachedEvent localPlayerAttachedEvent)
         {
+            // SS220 colorful ghost begin
+            if (TryComp<SpriteComponent>(uid, out var sprite))
+            {
+                var random = new Random();
+
+                var color = new Color(
+                    (float) random.Next(1, 255) / byte.MaxValue,
+                    (float) random.Next(1, 255) / byte.MaxValue,
+                    (float) random.Next(1, 255) / byte.MaxValue,
+                    sprite.Color.A);
+
+                sprite.Color = color;
+            }
+            // SS220 colorful ghost end
+
             GhostVisibility = true;
             PlayerAttached?.Invoke(component);
         }
 
         private void OnGhostState(EntityUid uid, GhostComponent component, ref AfterAutoHandleStateEvent args)
         {
-            // ��� ������ �������� ����� � sprite.LayerSetColor ���� �����������, ���� ��� ������ ����� ������������ (���� ���� ���� ������� ������������ � ��� ����� � ��������)...
-            // ...����� ����������� ����, ���
-            var _random = new Random();
-            var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
             if (TryComp<SpriteComponent>(uid, out var sprite))
             {
-                sprite.LayerSetColor(0, color);
-
                 //SS220-ghost-hats
                 SetBodyVisuals(uid, sprite, component.BodyVisible);
             }
