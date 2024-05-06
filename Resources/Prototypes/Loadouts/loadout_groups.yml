@@ -556,7 +556,7 @@
 #SS220-MoreTurtleneck-Begin
 - type: loadoutGroup
   id: SalvageSpecialistJumpsuit
-  name: loadout-group-salvage-specialist-jumpsuit #НЕ ЗАБЫТЬ ЛОКАЛИЗОВАТЬ
+  name: loadout-group-salvage-specialist-jumpsuit
   loadouts:
   - SalvageSpecialistJumpsuitTurtleneck
   - SalvageSpecialistJumpsuitTurtleneckAlt

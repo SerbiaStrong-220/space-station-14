@@ -1,0 +1,1 @@
+loadout-group-salvage-specialist-jumpsuit = униформа утилизатора

@@ -23,7 +23,7 @@
 
 - type: loadout
   id: ScientistJumpsuitTurtleneckAlt
-  equipment: ScientistAssistantJumpsuitTurtleneckAlt
+  equipment: ScientistJumpsuitTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: ScientistTurtleneck
