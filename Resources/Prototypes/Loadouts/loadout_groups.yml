@@ -558,6 +558,7 @@
   id: SalvageSpecialistJumpsuit
   name: loadout-group-salvage-specialist-jumpsuit
   loadouts:
+  - UniformJumpsuitSalvageSpecialist
   - SalvageSpecialistJumpsuitTurtleneck
   - SalvageSpecialistJumpsuitTurtleneckAlt
   - SalvageSpecialistJumpskirtTurtleneck

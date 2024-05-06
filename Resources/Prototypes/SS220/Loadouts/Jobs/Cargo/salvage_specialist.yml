@@ -56,3 +56,12 @@
   id: SalvageSpecialistJumpskirtTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorBrown
+
+- type: loadout
+  id: UniformJumpsuitSalvageSpecialist
+  equipment: UniformJumpsuitSalvageSpecialist
+
+- type: startingGear
+  id: UniformJumpsuitSalvageSpecialist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
