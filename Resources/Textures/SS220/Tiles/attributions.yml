@@ -17,3 +17,8 @@
   license: "Custom"
   copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/816"
+  
+- files: ["kitchen_red.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras, Resprited by DaGo7939 (Discord). EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/943"

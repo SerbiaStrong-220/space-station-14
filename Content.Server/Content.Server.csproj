@@ -16,7 +16,6 @@
   <ItemGroup>
     <PackageReference Include="FFMpegCore" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
-    <PackageReference Include="Lib.Harmony" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objectives\Interfaces\" />
-    <Folder Include="Tools\Systems\" />
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
 </Project>

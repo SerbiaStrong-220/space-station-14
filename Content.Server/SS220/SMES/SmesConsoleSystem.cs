@@ -23,9 +23,6 @@ public sealed class SmesConsoleSystem : EntitySystem
 
     private void UpdateUserInterface(EntityUid uid, SmesComponent? component, BoundUIOpenedEvent args)
     {
-        if (args.Session.AttachedEntity is null)
-            return;
-
         if (!Resolve(uid, ref component))
             return;
 
@@ -45,6 +42,6 @@ public sealed class SmesConsoleSystem : EntitySystem
             (int) batteryComponent.MaxCharge / 1000,
             _batterySystem.GetChargePercentRounded(batteryComponent)
             );
-        _userInterface.TrySetUiState(uid, SmesUiKey.Key, state);
+        _userInterface.SetUiState(uid, SmesUiKey.Key, state);
     }
 }

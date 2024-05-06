@@ -110,6 +110,7 @@
     {
         "name": "yellow_door",
         "directions": 4
-    }
+    },
+    { "name": "generic_icon" }
   ]
 }

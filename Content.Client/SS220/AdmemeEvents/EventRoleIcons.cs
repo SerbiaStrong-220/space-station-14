@@ -25,19 +25,22 @@ public sealed class EventRoleIconsSystem : EntitySystem
         SubscribeLocalEvent<EventRoleComponent, CanDisplayStatusIconsEvent>(OnCanShowRevIcon);
     }
 
-    private void OnCanShowRevIcon(EntityUid uid, IAntagStatusIconComponent component, ref CanDisplayStatusIconsEvent args)
+    private void OnCanShowRevIcon(Entity<EventRoleComponent> entity, ref CanDisplayStatusIconsEvent args)
     {
-        args.Cancelled = !CanDisplayIcon(args.User, component.IconVisibleToGhost);
+        args.Cancelled = !CanDisplayIcon(args.User, entity.Comp.IconVisibleToGhost, entity.Comp.RoleGroupKey);
     }
 
-    private bool CanDisplayIcon(EntityUid? ent, bool visibleToGhost)
+    private bool CanDisplayIcon(EntityUid? ent, bool visibleToGhost, string roleGroupKey)
     {
         if (HasComp<GhostComponent>(ent) && visibleToGhost)
             return true;
 
-        if (!HasComp<EventRoleComponent>(ent))
+        if (!TryComp<EventRoleComponent>(ent, out var comp))
             return false;
 
-        return true;
+        if (!string.IsNullOrEmpty(roleGroupKey) && roleGroupKey == comp.RoleGroupKey)
+            return true;
+
+        return false;
     }
 }

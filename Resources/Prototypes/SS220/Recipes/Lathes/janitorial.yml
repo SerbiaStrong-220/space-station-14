@@ -1,0 +1,7 @@
+- type: latheRecipe
+  id: TrashBagAdvanced
+  result: TrashBagAdvanced
+  completetime: 1.2
+  materials:
+    Plastic: 100
+    Uranium: 50

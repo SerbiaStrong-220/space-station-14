@@ -1,0 +1,29 @@
+# Security
+- type: loadoutGroup
+  id: SecurityPilotBackpack
+  name: loadout-group-security-pilot-backpack
+  loadouts:
+  - SecurityPilotBackpack
+  - SecurityPilotSatchel
+  - SecurityPilotDuffel
+
+# IAA
+- type: loadoutGroup
+  id: IAABackpack
+  name: loadout-group-iaa-backpack
+  loadouts:
+  - IAABackpack
+  - IAASatchel
+  - IAADuffel
+
+# Chef
+- type: loadoutGroup
+  id: ChefBeltApron
+  name: loadout-group-chef-belt
+  minLimit: 0
+  loadouts:
+  - ChefBeltApronWhite
+  - ChefBeltApronGreen
+  - ChefBeltApronBlack
+  - ChefBeltApronRed
+  - ChefBeltApronSenior

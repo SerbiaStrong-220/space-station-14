@@ -609,6 +609,7 @@
     count: 3
     slice: FoodMeatTomatoCutlet
 
+# SS220-Salami-update begin
 - type: entity
   name: salami
   parent: FoodMeatBase
@@ -617,23 +618,36 @@
   components:
   - type: Tag
     tags:
-    - Raw
+    - Cooked
     - Meat
   - type: Sprite
     sprite: Objects/Consumable/Food/salami.rsi
     state: salami
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 24
+        - ReagentId: TableSalt
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 16
   - type: SliceableFood
+    count: 25
     slice: FoodMeatSalamiSlice
   - type: MeleeWeapon
     wideAnimationRotation: 100
     damage:
       types:
-        Blunt: 6
+        Blunt: 12
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
         Blunt: 2
+# SS220 Salami-update end
 
 - type: entity
   name: meat clown
@@ -728,6 +742,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: plain-cooked
@@ -787,6 +802,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: product-cooked
@@ -955,6 +971,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: goliath-cooked
@@ -984,6 +1001,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: rouny-cooked
@@ -1009,6 +1027,7 @@
     tags:
     - Cooked
     - Meat
+    - Steak
   - type: Sprite
     layers:
     - state: lizard-cooked

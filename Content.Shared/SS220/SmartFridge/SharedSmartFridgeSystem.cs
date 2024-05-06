@@ -7,6 +7,7 @@ using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.SmartFridge;
 public abstract class SharedSmartFridgeSystem : EntitySystem
@@ -65,14 +66,17 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
 
     private void OnInteractWithItem(EntityUid uid, StorageComponent storageComp, SmartFridgeInteractWithItemEvent args)
     {
-        if (args.Session.AttachedEntity is not { } player)
-            return;
-
+        var player = args.Actor;
         var entity = GetEntity(args.InteractedItemUID);
 
         if (!Exists(entity))
         {
-            Log.Error($"Player {args.Session} interacted with non-existent item {args.InteractedItemUID} stored in {ToPrettyString(uid)}");
+            if (TryComp<ActorComponent>(player, out var actor))
+            {
+                var session = actor.PlayerSession;
+                Log.Error($"Player {session} interacted with non-existent item {args.InteractedItemUID} stored in {ToPrettyString(uid)}");
+            }
+
             return;
         }
 

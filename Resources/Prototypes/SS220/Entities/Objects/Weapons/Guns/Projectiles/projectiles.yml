@@ -26,20 +26,19 @@
         hard: false
         mask:
         - Opaque
-  - type: StaminaDamageOnCollide
-    damage: 25
   - type: Ammo
   - type: Projectile
     impactEffect: BulletImpactEffectGreenLaser
     damage:
       types:
         Poison: 15
+        Stamina: 25 #weaponBalance
     soundHit:
       collection: WeakHit
     forceSound: true
   - type: StunOnCollide
-    stunAmount: 1
-    knockdownAmount: 1
+    stunAmount: 4 #weaponBalance
+    knockdownAmount: 4 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
@@ -47,12 +46,14 @@
   parent: BulletMiniEnergyCrossbow
   noSpawn: true
   components:
-  - type: StaminaDamageOnCollide
-    damage: 20
   - type: Projectile
     damage:
       types:
         Poison: 10
+        Stamina: 55 #weaponBalance
+  - type: StunOnCollide
+    stunAmount: 1 #weaponBalance
+    knockdownAmount: 1 #weaponBalance
 
 
 
@@ -69,7 +70,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 12 
+        Blunt: 12
 
 
 - type: entity
@@ -108,4 +109,4 @@
   - type: PointLight
     radius: 5.5
     color: blue
-    energy: 0.9 
+    energy: 0.9

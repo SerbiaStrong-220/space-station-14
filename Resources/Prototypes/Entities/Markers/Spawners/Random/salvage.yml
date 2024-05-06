@@ -78,6 +78,9 @@
       - WeaponCrusherDagger
       - WeaponCrusherGlaive
       - MiningDrill
+      rarePrototypes:
+        - LotteryCash #SS220 Lottery
+      rareChance: 0.05
       offset: 0.0
 
 - type: entity
