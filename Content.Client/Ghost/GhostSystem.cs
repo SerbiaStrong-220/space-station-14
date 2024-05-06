@@ -97,6 +97,7 @@ namespace Content.Client.Ghost
 
         private void OnToggleFoV(EntityUid uid, EyeComponent component, ToggleFoVActionEvent args)
         {
+            //SS220-colorful-ghosts begin
             if (TryComp<SpriteComponent>(uid, out var sprite))
             {
                 var _random = new Random();
@@ -122,6 +123,8 @@ namespace Content.Client.Ghost
                 // sprite.
                 // PlayerUpdated?.Invoke(Player);
             }
+            //SS220-colorful-ghosts end
+
             if (args.Handled)
                 return;
 
@@ -210,6 +213,9 @@ namespace Content.Client.Ghost
         {
             if (TryComp<SpriteComponent>(uid, out var sprite))
             {
+                //SS220-colorful-ghosts
+                //sprite.LayerSetColor(0, component.color);
+
                 //SS220-ghost-hats
                 SetBodyVisuals(uid, sprite, component.BodyVisible);
             }
