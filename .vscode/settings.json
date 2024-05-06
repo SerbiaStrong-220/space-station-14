@@ -8,6 +8,5 @@
         "*.elua": "lua",
         "string": "cpp"
     },
-    "dotnet.defaultSolution": "SpaceStation14.sln",
-    "workbench.editor.wrapTabs": true
+    "dotnet.defaultSolution": "SpaceStation14.sln"
 }
