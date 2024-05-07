@@ -29,3 +29,7 @@ trait-slavic-accent-name = Старославянский акцент
 trait-slavic-accent-desc = Доколе можно новые словечки выдумывать?
 trait-socialanxiety-name = Социофобия
 trait-socialanxiety-desc = Вы испытываете тревожность, когда говорите, что приводит к заиканию.
+trait-southern-name = Диалект юга США
+trait-southern-desc = У вас другая манера речи. Работает только с английским.
+trait-snoring-name = Храп
+trait-snoring-desc = Вы храпите во время сна.

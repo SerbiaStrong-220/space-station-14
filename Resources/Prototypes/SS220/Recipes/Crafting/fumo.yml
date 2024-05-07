@@ -1,0 +1,38 @@
+﻿- type: construction
+  name: shrine maiden fumo
+  id: PlushieFumoMaiden
+  graph: FumoMaiden
+  startNode: start
+  targetNode: fumoMaiden
+  category: construction-category-misc
+  objectType: Item
+  description: Not a single youkai will pass by the lazy gaze of this plush.
+  icon:
+    sprite: SS220/Objects/Fun/fumo.rsi
+    state: fumo-maiden
+
+- type: construction
+  name: magician fumo
+  id: PlushieFumoMagician
+  graph: FumoMagician
+  startNode: start
+  targetNode: fumoMagician
+  category: construction-category-misc
+  objectType: Item
+  description: A stuffed toy dressed in black and white definitely won't steal your books-ze!
+  icon:
+    sprite: SS220/Objects/Fun/fumo.rsi
+    state: fumo-magician
+
+- type: construction
+  name: maid fumo
+  id: PlushieFumoMaid
+  graph: FumoMaid
+  startNode: start
+  targetNode: fumoMaid
+  category: construction-category-misc
+  objectType: Item
+  description: The presence of a knife inside this soft plush raises some questions.
+  icon:
+    sprite: SS220/Objects/Fun/fumo.rsi
+    state: fumo-maid

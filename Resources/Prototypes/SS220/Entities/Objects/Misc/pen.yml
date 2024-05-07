@@ -1,0 +1,12 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+
+- type: entity
+  name: ручка Центрального Командования
+  description: Утонченный стиль, неповторимая эргономичность, цвет чернил, - всё это - достоинства этой ручки. Она предназначена для лучших и создана лучшими.
+  parent: Pen
+  id: CentCommNewPen
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/pen.rsi
+    state: centcommnew_pen

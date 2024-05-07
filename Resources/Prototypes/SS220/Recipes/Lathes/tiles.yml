@@ -468,3 +468,12 @@
     Plastic: 25
     Gold: 25
     Silver: 25
+
+- type: latheRecipe #SS220 new kithen tile
+  id: TileKitchenRed
+  result: FloorTileItemKitchenRed
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25

@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: Полевой Офицер Центрального Комадования
+  id: CentcomFieldOfficer
+  components:
+    - type: Sprite
+      sprite: SS220/Markers/jobs.rsi
+      state: centcommfieldofficer
+    - type: RandomHumanoidSpawner
+      settings: CentcomFieldOfficer
+
+- type: randomHumanoidSettings
+  id: CentcomFieldOfficer
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+    - type: RandomMetadata
+      nameSegments:
+        - NamesFirstCentcomAgent
+        - NamesLastCentcomAgent
+    - type: MindShield
+    - type: GhostRole
+      name: ghost-role-information-centcom-NavyOfficier-name
+      description: ghost-role-information-centcom-NavyOfficier-description
+    - type: GhostTakeoverAvailable
+    - type: Loadout
+      prototypes: [ CentcomFieldOfficerGear ]
+
+- type: playTimeTracker
+  id: JobCentcomFieldOfficer
+
+- type: job
+  id: CentcomFieldOfficer
+  name: job-name-centcomoff
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: CentcomFieldOfficerGear
+  playTimeTracker: JobCentcomFieldOfficer
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: CentcomFieldOfficerGear
+  equipment:
+    jumpsuit: ClothingUniformCentCommOfficer
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatNavyFieldOfficerCap
+    neck: ClothingNeckCloakFieldOfficerCentComm
+    eyes: ClothingEyesGlassesBlueShield
+    gloves: ClothingHandsGlovesLatex
+    id: CentcomFieldOfficerPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: WeaponPulsePistol
+    back: ClothingBackpackCentCommFilled

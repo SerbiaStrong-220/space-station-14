@@ -15,3 +15,61 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+
+- type: entity 
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCEFormalDress
+  name: торжественное платье старшего инженера
+  description: Сделано из самых лучших огнеупорных тканей, а золото поможет вам маршировать от Сингулярности, не боясь излучения.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/ce_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/ce_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.75
+        Radiation: 0.9
+        
+- type: entity 
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCMOFormalDress
+  name: торжественное платье главного врача
+  description: Встречайте - Главный Врач! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.75
+        
+- type: entity 
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPFormalDress
+  name: торжественное платье главы персонала
+  description: Только для настоящих машин бюрократии.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+    
+- type: entity 
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRDFormalDress
+  name: торжественное платье научного руководителя
+  description: Специально для самых величайших открытий! Устройте в свою честь марш киборгов и салют из взрывающихся артефактов.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/rd_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/rd_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.75
+        Radiation: 0.9

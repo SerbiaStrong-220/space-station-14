@@ -77,7 +77,8 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
 
     public void OnToggleInterface(Entity<ShlepovendComponent> entity, ref AfterActivatableUIOpenEvent args)
     {
-        SendTokenCount(args.Session);
+        if (TryComp<ActorComponent>(args.Actor, out var actor) && actor.PlayerSession is { } session)
+            SendTokenCount(session);
     }
 
     public void OnPurchaseAttempt(Entity<ShlepovendComponent> entity, ref ShlepovendPurchaseMsg args)
@@ -94,8 +95,11 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
         if (!_prototype.TryIndex(args.ItemId, out _))
             return;
 
+        if (!TryComp<ActorComponent>(args.Actor, out var actorComp) || actorComp.PlayerSession is not { } session)
+            return;
+
         // check if there is required information about the player
-        if (args.Session.ContentData() is not { } contentData)
+        if (session.ContentData() is not { } contentData)
             return;
 
         if (contentData.SponsorInfo is not { } sponsorInfo)
@@ -120,14 +124,11 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
             return;
 
         // Purchase finally happens
-        var item = Spawn(args.ItemId, Transform(args.Session.AttachedEntity ?? entity).Coordinates);
-        if (args.Session.AttachedEntity is { } character)
-        {
-            _hands.TryPickupAnyHand(character, item); //try put purchased item into hand
-        }
+        var item = Spawn(args.ItemId, Transform(args.Actor).Coordinates);
+        _hands.TryPickupAnyHand(args.Actor, item); //try put purchased item into hand
 
         contentData.ShlepovendTokens -= price;
-        SendTokenCount(args.Session);
+        SendTokenCount(session);
         _audio.PlayPvs(entity.Comp.SoundVend, entity);
     }
 }

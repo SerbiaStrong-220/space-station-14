@@ -114,7 +114,8 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
                 IoCManager.Resolve<DiscordPlayerManager>().Initialize(); // SS220 discord player manager
                 IoCManager.Resolve<DiscordBanPostManager>().Initialize(); // SS220 discord ban post manager
-                IoCManager.Resolve<ServerControlController>().Initialize();
+                IoCManager.Resolve<ServerControlController>().Initialize(); // SS220 Backend-Api
+                IoCManager.Resolve<ServerApi>().Initialize();
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();
@@ -180,6 +181,7 @@ namespace Content.Server.Entry
         {
             _playTimeTracking?.Shutdown();
             _dbManager?.Shutdown();
+            IoCManager.Resolve<ServerApi>().Shutdown();
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)

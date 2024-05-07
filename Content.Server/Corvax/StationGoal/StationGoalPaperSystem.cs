@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Fax;
 using Content.Server.Paper;
+using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Content.Shared.Random.Helpers;
@@ -52,9 +53,9 @@ namespace Content.Server.Corvax.StationGoal
         /// <returns>True if at least one fax received paper</returns>
         public bool SendStationGoal(StationGoalPrototype goal)
         {
-            var faxes = EntityManager.EntityQuery<FaxMachineComponent>();
+            var faxes = EntityManager.EntityQueryEnumerator<FaxMachineComponent>();
             var wasSent = false;
-            foreach (var fax in faxes)
+            while (faxes.MoveNext(out var uid, out var fax))
             {
                 if (!fax.ReceiveStationGoal) continue;
 
@@ -79,7 +80,7 @@ namespace Content.Server.Corvax.StationGoal
                 };
 
                 var printout = new FaxPrintout(dataToCopy, metaData);
-                _faxSystem.Receive(fax.Owner, printout, null, fax);
+                _faxSystem.Receive(uid, printout, null, fax);
 
                 wasSent = true;
             }

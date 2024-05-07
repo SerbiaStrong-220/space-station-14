@@ -1,0 +1,16 @@
+# VladIsLove for SS220
+- type: entity
+  id: BorgModuleProtoKineticAccelerator
+  parent: [ BaseBorgModuleCargo, BaseProviderBorgModule ]
+  name: протокинетический модуль киборга
+  description: Техническая деталь, дающая киборгам новые способности.
+  components:
+  - type: Sprite
+    layers:
+    - state: cargo
+    - state: icon-ProtoKinetic-gun
+  - type: ItemBorgModule
+    items:
+    - WeaponProtoKineticAccelerator
+    - JetpackBorgModule
+    - HandheldGPSBasic

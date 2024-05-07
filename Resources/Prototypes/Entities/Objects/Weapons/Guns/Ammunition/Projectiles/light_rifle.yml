@@ -21,17 +21,6 @@
         Blunt: 2
 
 - type: entity
-  id: BulletLightRifleRubber
-  name: bullet (.20 rifle rubber)
-  parent: BaseBulletRubber
-  noSpawn: true
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-
-- type: entity
   id: BulletLightRifleIncendiary
   parent: BaseBulletIncendiary
   name: bullet (.20 rifle incendiary)
@@ -40,8 +29,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
-        Heat: 16
+        Blunt: 16 #weaponBalance
+        Heat: 3 #weaponBalance
 
 - type: entity
   id: BulletLightRifleUranium

@@ -1,0 +1,16 @@
+# VladIsLove for SS220
+- type: entity
+  id: JetpackBorgModule
+  parent: JetpackBlack
+  name: модуль борга c реактивным ранцем
+  description: Самозаполняющийся реактивный ранец, прикреплённый к боргу особым креплением. Мечта утилизаторов.
+  components:
+  - type: GasTank
+    outputPressure: 0
+    air:
+      volume: 5
+      temperature: 293.15
+      moles:
+        - 2.055689525 # oxygen
+  - type: GasTankSelfRefill
+    autoRefillRate: 0.01

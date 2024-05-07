@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by EstKemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+  {
+      "name": "brick_inner_ne"
+    },
+    {
+      "name": "brick_inner_se"
+    },
+    {
+      "name": "brick_inner_nw"
+    },
+    {
+      "name": "brick_inner_sw"
+    }
+  ]
+}

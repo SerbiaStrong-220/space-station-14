@@ -210,6 +210,9 @@ public sealed class RadioDeviceSystem : EntitySystem
 
     private void OnReceiveRadio(EntityUid uid, RadioSpeakerComponent component, ref RadioReceiveEvent args)
     {
+        if (uid == args.RadioSource)
+            return;
+
         var nameEv = new TransformSpeakerNameEvent(args.MessageSource, Name(args.MessageSource));
         RaiseLocalEvent(args.MessageSource, nameEv);
 
@@ -227,25 +230,25 @@ public sealed class RadioDeviceSystem : EntitySystem
 
     private void OnToggleIntercomMic(EntityUid uid, IntercomComponent component, ToggleIntercomMicMessage args)
     {
-        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { } user)
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager))
             return;
 
-        SetMicrophoneEnabled(uid, user, args.Enabled, true);
+        SetMicrophoneEnabled(uid, args.Actor, args.Enabled, true);
         UpdateIntercomUi(uid, component);
     }
 
     private void OnToggleIntercomSpeaker(EntityUid uid, IntercomComponent component, ToggleIntercomSpeakerMessage args)
     {
-        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { } user)
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager))
             return;
 
-        SetSpeakerEnabled(uid, user, args.Enabled, true);
+        SetSpeakerEnabled(uid, args.Actor, args.Enabled, true);
         UpdateIntercomUi(uid, component);
     }
 
     private void OnSelectIntercomChannel(EntityUid uid, IntercomComponent component, SelectIntercomChannelMessage args)
     {
-        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { })
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager))
             return;
 
         if (!_protoMan.TryIndex<RadioChannelPrototype>(args.Channel, out _) || !component.SupportedChannels.Contains(args.Channel))
@@ -274,7 +277,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         var availableChannels = component.SupportedChannels;
         var selectedChannel = micComp?.BroadcastChannel ?? SharedChatSystem.CommonChannel;
         var state = new IntercomBoundUIState(micEnabled, speakerEnabled, availableChannels, selectedChannel);
-        _ui.TrySetUiState(uid, IntercomUiKey.Key, state);
+        _ui.SetUiState(uid, IntercomUiKey.Key, state);
     }
     // SS220 HandheldRadio start
     private void OnBeforeHandheldRadioUiOpen(EntityUid uid, HandheldRadioComponent component, BeforeActivatableUIOpenEvent args)
@@ -284,38 +287,41 @@ public sealed class RadioDeviceSystem : EntitySystem
 
     private void OnToggleHandheldRadioMic(EntityUid uid, HandheldRadioComponent component, ToggleHandheldRadioMicMessage args)
     {
-        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { } user)
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager))
             return;
 
-        SetMicrophoneEnabled(uid, user, args.Enabled, true);
+        SetMicrophoneEnabled(uid, args.Actor, args.Enabled, true);
         UpdateHandheldRadioUi(uid, component);
     }
 
     private void OnToggleHandheldRadioSpeaker(EntityUid uid, HandheldRadioComponent component, ToggleHandheldRadioSpeakerMessage args)
     {
-        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { } user)
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager))
             return;
 
-        SetSpeakerEnabled(uid, user, args.Enabled, true);
+        SetSpeakerEnabled(uid, args.Actor, args.Enabled, true);
         UpdateHandheldRadioUi(uid, component);
     }
 
     private void OnSelectHandheldRadioChannel(EntityUid uid, HandheldRadioComponent component, SelectHandheldRadioChannelMessage args)
     {
-        if (component.RequiresPower && !this.IsPowered(uid, EntityManager) || args.Session.AttachedEntity is not { })
+        if (component.RequiresPower && !this.IsPowered(uid, EntityManager))
             return;
 
-        if(!_protoMan.TryIndex<RadioChannelPrototype>(args.Channel,out _))
+        if (!_protoMan.TryIndex<RadioChannelPrototype>(args.Channel, out _))
             return;
+
         if (TryComp<RadioMicrophoneComponent>(uid, out var mic))
             mic.BroadcastChannel = args.Channel;
+
         if (TryComp<RadioSpeakerComponent>(uid, out var speaker))
-            speaker.Channels = new(){ args.Channel };
+            speaker.Channels = new() { args.Channel };
+
         if (TryComp<ActiveRadioComponent>(uid, out var speakerComp))
-            {
-                speakerComp.Channels.Clear();
-                speakerComp.Channels = new(){ args.Channel };
-            }
+        {
+            speakerComp.Channels.Clear();
+            speakerComp.Channels = new() { args.Channel };
+        }
 
         UpdateHandheldRadioUi(uid, component);
 
@@ -331,7 +337,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         var availableChannels = component.SupportedChannels;
         var selectedChannel = micComp?.BroadcastChannel ?? SharedChatSystem.CommonChannel;
         var state = new HandheldRadioBoundUIState(micEnabled, speakerEnabled, availableChannels, selectedChannel);
-        _ui.TrySetUiState(uid, HandheldRadioUiKey.Key, state);
+        _ui.SetUiState(uid, HandheldRadioUiKey.Key, state);
     }
     // SS220 HandheldRadio end
 }

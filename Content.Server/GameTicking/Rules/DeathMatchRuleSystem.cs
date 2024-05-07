@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Administration.Commands;
+using Content.Server.GameTicking.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.KillTracking;
 using Content.Server.Mind;
@@ -15,6 +16,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -45,10 +47,9 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnSpawnComplete);
         SubscribeLocalEvent<KillReportedEvent>(OnKillReported);
         SubscribeLocalEvent<DeathMatchRuleComponent, PlayerPointChangedEvent>(OnPointChanged);
-        SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend);
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnPlayersSpawned);
 
-        _cfg.OnValueChanged(CCVars.TraitorDeathMatchStartingBalance, SetDeathMatchStartingBalance, true);
+        _cfg.OnValueChanged(CCVars220.TraitorDeathMatchStartingBalance, SetDeathMatchStartingBalance, true);
     }
 
     private void SetDeathMatchStartingBalance(int value) => _deathMatchStartingBalance = value;
@@ -56,7 +57,7 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     public override void Shutdown()
     {
         base.Shutdown();
-        _cfg.UnsubValueChanged(CCVars.TraitorDeathMatchStartingBalance, SetDeathMatchStartingBalance);
+        _cfg.UnsubValueChanged(CCVars220.TraitorDeathMatchStartingBalance, SetDeathMatchStartingBalance);
     }
 
     private void OnBeforeSpawn(PlayerBeforeSpawnEvent ev)
@@ -151,22 +152,18 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         _roundEnd.EndRound(component.RestartDelay);
     }
 
-    private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
+    protected override void AppendRoundEndText(EntityUid uid, DeathMatchRuleComponent component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent args)
     {
-        var query = EntityQueryEnumerator<DeathMatchRuleComponent, PointManagerComponent, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var dm, out var point, out var rule))
-        {
-            if (!GameTicker.IsGameRuleAdded(uid, rule))
-                continue;
+        if (!TryComp<PointManagerComponent>(uid, out var point))
+            return;
 
-            if (dm.Victor != null && _player.TryGetPlayerData(dm.Victor.Value, out var data))
-            {
-                ev.AddLine(Loc.GetString("point-scoreboard-winner", ("player", data.UserName)));
-                ev.AddLine("");
-            }
-            ev.AddLine(Loc.GetString("point-scoreboard-header"));
-            ev.AddLine(new FormattedMessage(point.Scoreboard).ToMarkup());
+        if (component.Victor != null && _player.TryGetPlayerData(component.Victor.Value, out var data))
+        {
+            args.AddLine(Loc.GetString("point-scoreboard-winner", ("player", data.UserName)));
+            args.AddLine("");
         }
+        args.AddLine(Loc.GetString("point-scoreboard-header"));
+        args.AddLine(new FormattedMessage(point.Scoreboard).ToMarkup());
     }
 
     private void OnPlayersSpawned(RulePlayerJobsAssignedEvent ev)

@@ -1,0 +1,60 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: Оперативник Группы Специального Назначения
+  id: CentCommOperativeSRT
+  components:
+    - type: Sprite
+      sprite: SS220/Markers/jobs.rsi
+      state: centcommoperativesrt
+    - type: RandomHumanoidSpawner
+      settings: CentCommOperativeSRT
+
+- type: randomHumanoidSettings
+  id: CentCommOperativeSRT
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+    - type: RandomMetadata
+      nameSegments:
+        - NamesFirstGSNMember
+        - NamesLastGSNMember
+    - type: MindShield
+    - type: GhostRole
+      name: ghost-role-information-centcom-SRT-name
+      description: ghost-role-information-centcom-SRT-description
+    - type: GhostTakeoverAvailable
+    - type: Loadout
+      prototypes: [ CentcomOperativeSRTGear ]
+
+- type: playTimeTracker
+  id: JobCentcommOperativeSRT
+
+- type: job
+  id: CentcomOperativeSRT
+  name: job-name-centcomoff
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: CentcomOperativeSRTGear
+  playTimeTracker: JobCentcommOperativeSRT
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: CentcomOperativeSRTGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShield2
+    shoes: ClothingShoesSwat
+    head: ClothingHeadHatBeretNanoTrasenOfficer
+    eyes: ClothingEyesGlassesBlueShield
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterSRTCoat
+    id: CentcomOperativeSRTPDA
+    ears: ClothingHeadsetAltCentComm
+    pocket1: MagazinePistolSubMachineGun
+    pocket2: MagazinePistolSubMachineGun
+    belt: ClothingBeltWebbingSRTFilled
+    back: ClothingBackSatchelSRTFilled

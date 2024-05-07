@@ -1,0 +1,20 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: vendingMachineInventory
+  id: CentCommDrobeInventory
+  startingInventory:
+    ClothingHeadsetAltCentComm: 2
+    ClothingHeadHatNavyFieldOfficerCap: 1
+    ClothingOuterSRTCoat: 2
+    ClothingEyesGlassesSunglasses: 3
+    ClothingBackSatchelSRT: 3
+    NTbaton: 2
+    ClothingHeadHatBeretNanoTrasenOfficer: 2
+    ClothingHandsGlovesLatex: 4
+    ClothingUniformCentCommOfficer: 2
+    ClothingShoesBootsLaceup: 2
+    ClothingNeckScarfCentcomm: 2
+    ClothingNeckScarfCentcomGSN: 2
+    BoxFolderCentComm: 5
+    BoxFolderCentCommClipboard: 5
+    CentCommNewPen: 3

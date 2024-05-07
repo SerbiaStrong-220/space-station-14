@@ -149,15 +149,6 @@ public sealed partial class BlockingSystem : EntitySystem
         if (component.IsBlocking)
             return false;
 
-        //ss220-revorkblock
-        //A temporary crutch, I'll fix it after the New Year's.
-        if (TryComp(item, out ReflectComponent? useDelay))
-        {
-            if (!useDelay.Enabled)
-                return false;
-        }
-        //ss220-revorkblock end
-
         var xform = Transform(user);
 
         var shieldName = Name(item);

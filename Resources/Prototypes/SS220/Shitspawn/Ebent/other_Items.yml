@@ -104,8 +104,11 @@
       amount: 20
     - id: CableApcStack
       amount: 20
+    - id: ClothingBackpackDuffelEngineering
+      amount: 3
+    - id: ClothingBackpackCloningSet
   - type: EntityStorage
-    capacity: 200
+    capacity: 300
 
 - type: entity
   name: кровоостанавливающая мазь
@@ -139,3 +142,30 @@
   spawn: BloodSalveEbent
   maxCount: 10
   itemSize: 1
+
+- type: entity
+  parent: ClothingBackpackDuffelEngineering
+  id: ClothingBackpackCloningSet
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор для сборки клонирующего оборудования
+  description: Набор, содержащий все ресурсы и материалы, необходимые для сборки клонирующего и вспомогательного оборудования.
+  components:
+   - type: StorageFill
+     contents:
+      - id: SheetSteel
+      - id: SheetGlass
+      - id: CableApcStack10
+      - id: CloningPodMachineCircuitboard
+      - id: MedicalScannerMachineCircuitboard
+      - id: CloningConsoleComputerCircuitboard
+      - id: BiomassReclaimerMachineCircuitboard
+      - id: CapacitorStockPart
+      - id: MatterBinStockPart
+        amount: 4
+      - id: MicroManipulatorStockPart
+        amount: 3
+      - id: Scalpel
+        amount: 2
+      - id: NetworkConfigurator
+      - id: Screwdriver
+      - id: Wrench

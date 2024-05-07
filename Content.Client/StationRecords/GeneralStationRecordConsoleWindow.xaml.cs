@@ -234,7 +234,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
 
             foreach (var slot in slots)
             {
-                var itemType = gear.GetGear(slot.Name, profile);
+                var itemType = gear.GetGear(slot.Name);
                 if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, true, true))
                 {
                     entityManager.DeleteEntity(unequippedItem.Value);

@@ -146,4 +146,4 @@
         prob: 0.3
       - id: OxygenTankFilled # SS220 - Changing the contents of the paramedic closet
       - id: NitrogenTankFilled # SS220 - Changing the contents of the paramedic closet
-      - id: HandheldCrewMonitor # SS220 - Changing the contents of the paramedic closet
+#    - id: HandheldCrewMonitor # SS220 - RemoveParamedicCrewMonitor

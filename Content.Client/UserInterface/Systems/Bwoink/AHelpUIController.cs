@@ -26,8 +26,6 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using Content.Shared.CCVar;
-using Robust.Shared.Configuration;
 using Robust.Shared.Audio;
 
 namespace Content.Client.UserInterface.Systems.Bwoink;
@@ -58,7 +56,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
         base.Initialize();
 
         // SS220 Ahelp-Volume begin
-        _AHelpParams = new(_configManager.GetCVar(CCVars.AHelpVolume), 1, "Master", 0, 0, 0, false, 0f); // Set AHelp volume on start
+        _AHelpParams = new(_configManager.GetCVar(CCVars.AHelpVolume), 1, 0, 0, 0, false, 0f); // Set AHelp volume on start
         _AHelpSoundsEnabled = _configManager.GetCVar(CCVars.AHelpSoundsEnabled);
         _configManager.OnValueChanged(CCVars.AHelpVolume, AHelpVolumeCVarChanged); // Track AHekp volume change
         _configManager.OnValueChanged(CCVars.AHelpSoundsEnabled, AHelpSoundsEnabledCVarChanged); // Track AHekp sound change

@@ -706,8 +706,16 @@
     Durathread: 300
 
 - type: latheRecipe
-  id: ClothingOuterWinterHoS
-  result: ClothingOuterWinterHoS
+  id: ClothingOuterWinterHoSUnarmored
+  result: ClothingOuterWinterHoSUnarmored
+  completetime: 3.2
+  materials:
+    Cloth: 500
+    Durathread: 300
+
+- type: latheRecipe
+  id: ClothingOuterWinterWardenUnarmored
+  result: ClothingOuterWinterWardenUnarmored
   completetime: 3.2
   materials:
     Cloth: 500
@@ -987,6 +995,26 @@
   materials:
     Cloth: 100
     Durathread: 50
+
+#SS220 CapBeret begin
+- type: latheRecipe
+  id: ClothingHeadBeretCap
+  result: ClothingHeadBeretCap
+  completetime: 2
+  materials:
+    Cloth: 100
+    Durathread: 50
+#SS220 CapBeret end
+
+#SS220 Captain's Cap tweak begin
+- type: latheRecipe
+  id: ClothingHeadCaptainCap
+  result: ClothingHeadCaptainCap
+  completetime: 2
+  materials:
+    Cloth: 100
+    Durathread: 50
+#SS220 Captain's Cap tweak end
 
 - type: latheRecipe
   id: ClothingHeadHatBeretHoS

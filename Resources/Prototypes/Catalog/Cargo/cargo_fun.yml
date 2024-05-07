@@ -208,3 +208,39 @@
   cost: 20000 #SS220 fix_cargo
   category: cargoproduct-category-name-fun
   group: market
+
+#SS220 Lottery start
+- type: cargoProduct
+  id: cargoLotteryCash
+  name: лотерея V&L
+  icon: #SS220 fix_cargo begin
+    sprite: SS220/Objects/Fun/Lottery.rsi
+    state: icon
+  #SS220 fix_cargo end
+  product: LotteryCash
+  cost: 5000
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: FunCrateLottery5
+  icon: #SS220 fix_cargo begin
+    sprite: Structures/Storage/Crates/privatecrate_secure.rsi
+    state: icon
+  #SS220 fix_cargo end
+  product: CrateCargoLottery5
+  cost: 23500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: FunCrateLottery10
+  icon: #SS220 fix_cargo begin
+    sprite: Structures/Storage/Crates/privatecrate_secure.rsi
+    state: icon
+  #SS220 fix_cargo end
+  product: CrateCargoLottery10
+  cost: 45000
+  category: cargoproduct-category-name-fun
+  group: market
+#SS220 Lottery end 

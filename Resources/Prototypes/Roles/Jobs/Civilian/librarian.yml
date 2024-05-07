@@ -13,8 +13,6 @@
 - type: startingGear
   id: LibrarianGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitLibrarian
-    back: ClothingBackpackLibrarianFilled
     shoes: ClothingShoesBootsLaceup
     id: LibrarianPDA
     ears: ClothingHeadsetService
@@ -22,6 +20,3 @@
     pocket2: HandLabeler # for making named bestsellers
   inhand:
   - BriefcaseBrownFilled
-  innerClothingSkirt: ClothingUniformJumpskirtLibrarian
-  satchel: ClothingBackpackSatchelLibrarianFilled
-  duffelbag: ClothingBackpackDuffelLibrarianFilled

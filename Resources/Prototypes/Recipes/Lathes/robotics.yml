@@ -500,6 +500,7 @@
     Glass: 250
     Plastic: 250
     Gold: 50
+    Uranium: 50 #SS220 Borg Modules
 
 - type: latheRecipe
   id: BorgModuleDiagnosis

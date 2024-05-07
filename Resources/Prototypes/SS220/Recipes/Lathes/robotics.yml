@@ -1,0 +1,9 @@
+- type: latheRecipe
+  id: BorgModuleProtoKineticAccelerator
+  result: BorgModuleProtoKineticAccelerator
+  category: Robotics
+  completetime: 3
+  materials:
+    Steel: 600
+    Glass: 600
+    Silver: 100

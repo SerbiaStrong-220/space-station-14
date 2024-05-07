@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: Дипломат NanoTrasen
+  id: CentCommNanoTrasenDiplomat
+  components:
+    - type: Sprite
+      sprite: SS220/Markers/jobs.rsi
+      state: nanotrasendiplomat
+    - type: RandomHumanoidSpawner
+      settings: CentCommNanoTrasenDiplomat
+
+- type: randomHumanoidSettings
+  id: CentCommNanoTrasenDiplomat
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+    - type: RandomMetadata
+      nameSegments:
+        - NamesFirstDiplomatMale
+        - NamesLastDiplomatMale
+    - type: MindShield
+    - type: GhostRole
+      name: ghost-role-information-nanotrasen-Diplomat-name
+      description: ghost-role-information-nanotrasen-Diplomat-description
+    - type: GhostTakeoverAvailable
+    - type: Loadout
+      prototypes: [ CentCommNanoTrasenDiplomatGear ]
+
+- type: playTimeTracker
+  id: JobCentcommDiplomat
+
+- type: job
+  id: CentCommNanoTrasenDiplomat
+  name: job-name-centcomoff
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: CentCommNanoTrasenDiplomatGear
+  icon: "JobIconNanotrasen"
+  playTimeTracker: JobCentcommDiplomat
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: CentCommNanoTrasenDiplomatGear
+  equipment:
+    jumpsuit: ClothingUniformNanotrasenDiplomat
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatBeretNanoTrasenOfficer
+    eyes: ClothingEyesGlassesBlueShield
+    gloves: ClothingHandsGlovesLatex
+    id: CentcomDiplomatPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: WeaponPulsePistol
+    back: ClothingBackpackCentCommFilled
+

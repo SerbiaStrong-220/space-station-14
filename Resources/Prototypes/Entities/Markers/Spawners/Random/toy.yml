@@ -134,5 +134,6 @@
       - ToyFigurineMouse
       - ToyFigurineHamlet
       - ToyFigurineThief
+      - ToyFigurineBlueShield #SS220-FigurineBlueShield
       chance: 0.90
       offset: 0.2

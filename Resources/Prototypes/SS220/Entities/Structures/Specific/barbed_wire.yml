@@ -76,7 +76,7 @@
         types:
           Slash: 5
           Piercing: 5
-    - type: SlowContacts
+    - type: SpeedModifierContacts
       walkSpeedModifier: 0.2
       sprintSpeedModifier: 0.2
     - type: Appearance

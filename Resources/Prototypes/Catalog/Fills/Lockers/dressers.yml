@@ -6,7 +6,7 @@
   - type: StorageFill
     contents:
       - id: ClothingHeadHatCaptain
-      - id: ClothingHeadHatCapcap
+      - id: ClothingHeadBeretCap #SS220 CapBeret
       - id: ClothingNeckCloakCap
       - id: ClothingNeckCloakCapFormal
       - id: ClothingUniformJumpsuitCapFormal
@@ -15,6 +15,7 @@
       # Corvax-Resprite-Start
       - id: ClothingHeadCaptainHat
       - id: ClothingOuterCoatCaptain
+      - id: ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       # Corvax-Resprite-End
       - id: ClothingNeckMantleCap
       - id: ClothingOuterWinterCap
@@ -32,6 +33,7 @@
       - id: ClothingNeckCloakCe
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingOuterWinterCE
+      - id: ClothingOuterCoatCEFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
@@ -46,6 +48,7 @@
       - id: ClothingHeadHatBeretCmo
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
+      - id: ClothingOuterCoatCMOFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserHeadOfPersonnelFilled
@@ -59,6 +62,7 @@
       - id: ClothingHeadHatHopcap
       - id: ClothingOuterWinterHoP
       - id: ClothingEyesGlasses
+      - id: ClothingOuterCoatHoPFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserHeadOfSecurityFilled
@@ -111,6 +115,7 @@
       - id: ClothingHandsGlovesColorPurple
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterRD
+      - id: ClothingOuterCoatRDFormalDress #SS220-FormalDress
 
 - type: entity
   id: DresserWardenFilled
