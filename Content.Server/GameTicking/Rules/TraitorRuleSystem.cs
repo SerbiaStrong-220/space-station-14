@@ -16,6 +16,7 @@ using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
 using Content.Server.GameTicking.Components;
+using Content.Server.SS220.MindSlave;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -30,6 +31,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly ObjectivesSystem _objectives = default!;
+    [Dependency] private readonly MindSlaveSystem _mindSlave = default!;
 
     public const int MaxPicks = 20;
 
@@ -152,6 +154,15 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     private void OnObjectivesTextGetInfo(EntityUid uid, TraitorRuleComponent comp, ref ObjectivesTextGetInfoEvent args)
     {
         args.Minds = _antag.GetAntagMindEntityUids(uid);
+
+        //SS220-mindslave begin
+        if (_mindSlave.EnslavedMinds.Count > 0)
+        {
+            foreach (var slave in _mindSlave.EnslavedMinds)
+                args.Minds.Add(slave.Key);
+        }
+        //SS220-mindslave end
+
         args.AgentName = Loc.GetString("traitor-round-end-agent-name");
     }
 

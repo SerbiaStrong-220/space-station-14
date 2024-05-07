@@ -1,24 +1,22 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Antag;
-using Content.Server.Body.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
-using Content.Server.NPC.Components;
-using Content.Server.NPC.Systems;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Shared.Alert;
 using Content.Shared.Cloning;
-using Content.Shared.Gibbing.Events;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
-using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Roles;
 using Content.Shared.SS220.MindSlave;
@@ -38,6 +36,7 @@ public sealed class MindSlaveSystem : EntitySystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
     [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
+    [Dependency] private readonly AlertsSystem _alert = default!;
 
     [ValidatePrototypeId<AntagPrototype>]
     private const string MindSlaveAntagId = "MindSlave";
@@ -52,6 +51,8 @@ public sealed class MindSlaveSystem : EntitySystem
     private const string SyndicateFactionId = "Syndicate";
 
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
+
+    private const AlertType EnslavedAlert = AlertType.MindSlaved;
 
     /// <summary>
     /// Dictionary, containing list of all enslaved minds (as a key), and their master (as a value).
@@ -73,10 +74,11 @@ public sealed class MindSlaveSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        //NOT WORKING, ENUMERATION STOPS DUE TO CHANGES
-        var slaves = entity.Comp.enslavedEntities.GetEnumerator();
-        while (slaves.MoveNext())
-            TryRemoveSlave(slaves.Current);
+        if (entity.Comp.EnslavedEntities.Count <= 0)
+            return;
+
+        // This is disgusting, but I need to get rid of a reference
+        RemoveSlaves(new List<EntityUid>(entity.Comp.EnslavedEntities));
     }
 
     private void OnDead(Entity<MindSlaveComponent> entity, ref MobStateChangedEvent args)
@@ -97,7 +99,7 @@ public sealed class MindSlaveSystem : EntitySystem
 
     private void OnMindSlaveRemoved(Entity<SubdermalImplantComponent> mind, ref MindSlaveRemoved args)
     {
-        if (args.Slave == null)
+        if (args.Slave == null || !IsEnslaved(args.Slave.Value))
             return;
 
         TryRemoveSlave(args.Slave.Value);
@@ -178,9 +180,10 @@ public sealed class MindSlaveSystem : EntitySystem
         }
 
         EnsureComp<MindSlaveComponent>(slave);
+        _alert.ShowAlert(slave, EnslavedAlert);
 
         var masterComp = EnsureComp<MindSlaveMasterComponent>(master);
-        masterComp.enslavedEntities.Add(slave);
+        masterComp.EnslavedEntities.Add(slave);
         Dirty(master, masterComp);
 
         _npcFaction.RemoveFaction(slave, NanoTransenFactionId, false);
@@ -222,7 +225,7 @@ public sealed class MindSlaveSystem : EntitySystem
             _antagSelection.SendBriefing(master.Value, briefingMaster, Color.Red, null);
             _popup.PopupEntity(briefingMaster, master.Value, master.Value);
 
-            masterComponent.enslavedEntities.Remove(slave);
+            masterComponent.EnslavedEntities.Remove(slave);
             Dirty(master.Value, masterComponent);
         }
 
@@ -236,6 +239,7 @@ public sealed class MindSlaveSystem : EntitySystem
             _role.MindTryRemoveRole<RoleBriefingComponent>(mindId);
 
         RemComp<MindSlaveComponent>(slave);
+        _alert.ClearAlert(slave, EnslavedAlert);
 
         _npcFaction.RemoveFaction(slave, SyndicateFactionId, false);
         _npcFaction.AddFaction(slave, NanoTransenFactionId);
@@ -246,6 +250,15 @@ public sealed class MindSlaveSystem : EntitySystem
             _traitorRule.RemoveFromTraitorList(mindId, gameRuleEntity.Value, gameRule);
 
         return true;
+    }
+
+    public void RemoveSlaves(List<EntityUid> slaves)
+    {
+        if (slaves.Count <= 0)
+            return;
+
+        foreach (var slave in slaves)
+            TryRemoveSlave(slave);
     }
 
     /// <summary>

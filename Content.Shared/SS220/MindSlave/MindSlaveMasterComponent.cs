@@ -14,5 +14,5 @@ public sealed partial class MindSlaveMasterComponent : Component
     /// List of all enslaved entities, which were enslaved by the owner.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public List<EntityUid> enslavedEntities = new();
+    public List<EntityUid> EnslavedEntities = new();
 }
