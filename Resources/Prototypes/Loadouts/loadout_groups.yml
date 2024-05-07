@@ -919,12 +919,14 @@
   - SecuritySatchel
   - SecurityDuffel
 
-- type: loadoutGroup
-  id: SecurityBelt
-  name: loadout-group-security-belt
-  loadouts:
-  - SecurityBelt
-  - SecurityWebbing
+#SS220-TweakSecurityWebbing-Begin
+# - type: loadoutGroup
+#   id: SecurityBelt
+#   name: loadout-group-security-belt
+#   loadouts:
+#   - SecurityBelt
+#   - SecurityWebbing
+#SS220-TweakSecurityWebbing-End
 
 - type: loadoutGroup
   id: SecurityOuterClothing
