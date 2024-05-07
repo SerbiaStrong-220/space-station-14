@@ -30,6 +30,7 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] NoSpawnMaps =
         {
             "CentComm",
+            "SS220_CentComm",
             "Dart",
             "NukieOutpost",
             "SS220_syndicate"
@@ -38,6 +39,7 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] Grids =
         {
             "/Maps/centcomm.yml",
+            "/Maps/ss220-centcomm.yml",
             "/Maps/Shuttles/cargo.yml",
             "/Maps/Shuttles/emergency.yml",
             "/Maps/Shuttles/infiltrator.yml",
@@ -84,6 +86,7 @@ namespace Content.IntegrationTests.Tests
             "NTvsSSSP",
             "Axioma",
             "SS220_syndicate",
+            "SS220_CentComm",
         };
 
         /// <summary>
