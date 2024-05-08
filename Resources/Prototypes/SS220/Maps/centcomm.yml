@@ -1,7 +1,7 @@
 - type: gameMap
   id: SS220_CentComm
   mapName: 'Центральное Командование'
-  mapPath: /Maps/ss220-centcomm.yml
+  mapPath: /Maps/SS220/ss220-centcomm.yml
   minPlayers: 10
   stations:
     centcomm:

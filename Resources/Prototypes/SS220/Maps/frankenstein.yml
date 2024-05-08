@@ -3,7 +3,7 @@
 - type: gameMap
   id: Frankenstein
   mapName: 'NSS Frankenstein'
-  mapPath: /Maps/ss220-box.yml
+  mapPath: /Maps/SS220/ss220-box.yml
   minPlayers: 0
   stations:
     Boxstation:
