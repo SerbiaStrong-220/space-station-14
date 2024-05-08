@@ -62,7 +62,7 @@
   authors: Vnoeg, Surani, UrPrice, NightmareStalker
 
 - files: ["ss220-centcomm.yml"]
-  authors: Vnoeg, Kirus59, NightmareStalker
+  authors: Kirus59, Vnoeg, Bomjojuk, NightmareStalker, AliceValestray, UrPrice, VictorBoum
 
 - files: ["oasis.yml"]
   authors: CptJeanLuc
