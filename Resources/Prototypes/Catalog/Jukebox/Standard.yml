@@ -71,7 +71,7 @@
     path: /Audio/SS220/Lobby/neon.ogg
 
 - type: jukebox
-  id: neon
+  id: doubleu
   name: Quantum (Feat Z.W.E.I) - double u
   path:
     path: /Audio/SS220/Lobby/double-u.ogg
