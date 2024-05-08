@@ -40,6 +40,8 @@
   path:
     path: /Audio/Jukebox/sunset.ogg
 
+# SS220 music start
+
 - type: jukebox
   id: requem
   name: Quantum (Feat Z.W.E.I) - Reqiuem
@@ -75,3 +77,5 @@
   name: Quantum (Feat Z.W.E.I) - double u
   path:
     path: /Audio/SS220/Lobby/double-u.ogg
+
+# SS220 music begin
