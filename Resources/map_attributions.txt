@@ -61,5 +61,8 @@
 - files: ["ss220-nukeoutpost.yml"]
   authors: Vnoeg, Surani, UrPrice, NightmareStalker
 
+- files: ["ss220-centcomm.yml"]
+  authors: Vnoeg, Kirus59, NightmareStalker
+
 - files: ["oasis.yml"]
   authors: CptJeanLuc
