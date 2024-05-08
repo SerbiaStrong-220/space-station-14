@@ -22,3 +22,8 @@
   license: "Custom"
   copyright: "Created by github user @Kit0vras, Resprited by DaGo7939 (Discord). EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/943"
+
+- files: ["wood_light.png", "wood_dark.png", "wood_black.png", "wood_red.png", "wood_large_light.png", "wood_large_dark.png", "wood_large_black.png", "wood_large_red.png", "wood_tile_light.png", "wood_tile_dark.png", "wood_tile_black.png", "wood_tile_red.png", "wood_parquet.png", "wood_parquet_light.png", "wood_parquet_dark.png", "wood_parquet_black.png", "wood_parquet_red.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, Wood tiles are new tg tiles, repaletted by Kit0vras."
+  source: "https://github.com/tgstation/tgstation/"
