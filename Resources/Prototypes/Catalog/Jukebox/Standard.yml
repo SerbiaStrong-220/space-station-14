@@ -42,9 +42,9 @@
 
 - type: jukebox
   id: requem
-  name: Quantum (Feat Z.W.E.I) - Requem
+  name: Quantum (Feat Z.W.E.I) - Reqiuem
   path:
-    path: /Audio/SS220/Music/Requem.ogg
+    path: /Audio/SS220/Music/Requiem.ogg
 
 - type: jukebox
   id: life_at_station
