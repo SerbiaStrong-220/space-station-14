@@ -76,6 +76,8 @@
   - PetsNT
   - Revolutionary
 
+# SS220 AI Mapping Update Begin
+
 - type: npcFaction
   id: BloodCult
   hostile:
@@ -85,6 +87,8 @@
   - PetsNT
   - Zombie
   - Revolutionary
+
+# SS220 AI Mapping Update End
 
 - type: npcFaction
   id: Revolutionary
