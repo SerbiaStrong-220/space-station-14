@@ -46,7 +46,7 @@ public sealed class MindSlaveSystem : EntitySystem
     private const string MindSlaveObjectiveId = "MindSlaveObeyObjective";
 
     [ValidatePrototypeId<NpcFactionPrototype>]
-    private const string NanoTransenFactionId = "NanoTransen";
+    private const string NanoTrasenFactionId = "NanoTrasen";
 
     [ValidatePrototypeId<NpcFactionPrototype>]
     private const string SyndicateFactionId = "Syndicate";
@@ -197,7 +197,7 @@ public sealed class MindSlaveSystem : EntitySystem
         masterComp.EnslavedEntities.Add(slave);
         Dirty(master, masterComp);
 
-        _npcFaction.RemoveFaction(slave, NanoTransenFactionId, false);
+        _npcFaction.RemoveFaction(slave, NanoTrasenFactionId, false);
         _npcFaction.AddFaction(slave, SyndicateFactionId);
 
         EnslavedMinds.Add(mindId, masterMindId);
@@ -254,7 +254,7 @@ public sealed class MindSlaveSystem : EntitySystem
         _alert.ClearAlert(slave, EnslavedAlert);
 
         _npcFaction.RemoveFaction(slave, SyndicateFactionId, false);
-        _npcFaction.AddFaction(slave, NanoTransenFactionId);
+        _npcFaction.AddFaction(slave, NanoTrasenFactionId);
 
         EnslavedMinds.Remove(mindId);
         GetTraitorGamerule(out var gameRuleEntity, out var gameRule);
