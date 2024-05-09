@@ -109,3 +109,19 @@
   icon:
     sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: USSPMedicalOfficer
+
+- type: statusIcon
+  id: MindSlaveIcon
+  priority: 11
+  locationPreference: Right
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/mindslave-job-icon.rsi
+    state: slave
+
+- type: statusIcon
+  id: MindSlaveMasterIcon
+  priority: 11
+  locationPreference: Right
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/mindslave-job-icon.rsi
+    state: master

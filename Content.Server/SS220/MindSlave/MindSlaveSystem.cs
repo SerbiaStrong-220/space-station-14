@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Antag;
+using Content.Server.Body.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
@@ -64,26 +65,38 @@ public sealed class MindSlaveSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDead);
+        SubscribeLocalEvent<MindSlaveMasterComponent, BeingGibbedEvent>(OnMasterGibbed);
         SubscribeLocalEvent<MindSlaveComponent, MobStateChangedEvent>(OnDead);
         SubscribeLocalEvent<MindSlaveComponent, CloningEvent>(OnCloned);
         SubscribeLocalEvent<SubdermalImplantComponent, MindSlaveRemoved>(OnMindSlaveRemoved);
     }
 
-    private void OnMasterDead(Entity<MindSlaveMasterComponent> entity, ref MobStateChangedEvent args)
+    private void OnMasterGibbed(Entity<MindSlaveMasterComponent> entity, ref BeingGibbedEvent args)
     {
-        if (args.NewMobState != MobState.Dead)
-            return;
-
         if (entity.Comp.EnslavedEntities.Count <= 0)
             return;
 
         // This is disgusting, but I need to get rid of a reference
         RemoveSlaves(new List<EntityUid>(entity.Comp.EnslavedEntities));
     }
+    private void OnMasterDead(Entity<MindSlaveMasterComponent> entity, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead && args.NewMobState != MobState.Critical)
+            return;
 
+        if (entity.Comp.EnslavedEntities.Count <= 0)
+            return;
+
+        var message = args.NewMobState == MobState.Dead ? Loc.GetString("mindslave-master-dead") : Loc.GetString("mindslave-master-crit");
+        foreach (var slave in entity.Comp.EnslavedEntities)
+        {
+            _popup.PopupEntity(message, slave, slave, Shared.Popups.PopupType.LargeCaution);
+            _antagSelection.SendBriefing(slave, message, Color.Red, null);
+        }
+    }
     private void OnDead(Entity<MindSlaveComponent> entity, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState != MobState.Dead || !IsEnslaved(entity))
+        if (args.NewMobState != MobState.Dead)
             return;
 
         TryRemoveSlave(entity);
@@ -91,9 +104,6 @@ public sealed class MindSlaveSystem : EntitySystem
 
     private void OnCloned(Entity<MindSlaveComponent> entity, ref CloningEvent args)
     {
-        if (!IsEnslaved(entity))
-            return;
-
         TryRemoveSlave(entity);
     }
 
@@ -156,6 +166,7 @@ public sealed class MindSlaveSystem : EntitySystem
         var masterMindName = masterMindComp.CharacterName ?? Loc.GetString("mindslave-unknown-master");
         var briefing = Loc.GetString("mindslave-briefing-slave", ("master", masterMindName));
         _antagSelection.SendBriefing(slave, briefing, Color.Red, GreetSoundNotification);
+        _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
         if (mindComp.CharacterName != null)
         {
@@ -215,6 +226,7 @@ public sealed class MindSlaveSystem : EntitySystem
 
         var briefing = Loc.GetString("mindslave-removed-slave");
         _antagSelection.SendBriefing(slave, briefing, Color.Red, null);
+        _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
         var master = mindSlave.masterEntity;
         if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
@@ -223,7 +235,7 @@ public sealed class MindSlaveSystem : EntitySystem
                 "mindslave-removed-slave-master-unknown";
 
             _antagSelection.SendBriefing(master.Value, briefingMaster, Color.Red, null);
-            _popup.PopupEntity(briefingMaster, master.Value, master.Value);
+            _popup.PopupEntity(briefingMaster, master.Value, master.Value, Shared.Popups.PopupType.MediumCaution);
 
             masterComponent.EnslavedEntities.Remove(slave);
             Dirty(master.Value, masterComponent);
