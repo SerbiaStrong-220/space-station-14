@@ -1261,4 +1261,23 @@
     - TileDutch
     - TileDutchMini
     - TileKitchenRed #SS220 new kitchen tile
+    #SS220-NewWoodTiles-Begin
+    - TileWoodParquet
+    - TileWoodBlack
+    - TileWoodDark
+    - TileWoodLight
+    - TileWoodRed
+    - TileWoodLargeBlack
+    - TileWoodLargeDark
+    - TileWoodLargeLight
+    - TileWoodLargeRed
+    - TileWoodParquetBlack
+    - TileWoodParquetDark
+    - TileWoodParquetLight
+    - TileWoodParquetRed
+    - TileWoodTileBlack
+    - TileWoodTileDark
+    - TileWoodTileLight
+    - TileWoodTileRed
+    #SS220-NewWoodTiles-End
 #SS220-Sheetifier-rework-end
