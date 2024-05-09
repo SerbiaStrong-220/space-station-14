@@ -77,6 +77,16 @@
   - Revolutionary
 
 - type: npcFaction
+  id: BloodCult
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+
+- type: npcFaction
   id: Revolutionary
   hostile:
   - NanoTrasen
