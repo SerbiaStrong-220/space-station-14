@@ -187,7 +187,7 @@
       - Plating
       - FloorWoodParquet
   - type: Stack
-    stackType: FloorTileItemWood
+    stackType: FloorTileWood
 
 - type: entity
   name: tiles-wood-black
