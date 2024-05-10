@@ -387,6 +387,7 @@
   id: JobPsychologist
   groups:
   - MedicalBackpack
+  - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses
   - Trinkets
 

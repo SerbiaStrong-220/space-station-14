@@ -31,7 +31,7 @@
 - type: startingGear
   id: PsychologistJumpskirtTurtleneck
   equipment:
-    jumpsuit: ClothingUniformJumpsuitTurtleAltColorWhite
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite
 
 - type: loadout
   id: PsychologistJumpsuit
