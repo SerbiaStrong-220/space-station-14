@@ -41,17 +41,6 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitBrigDoctorTurtleneck
-  name: brigdoctor turtleneck
-  description: A professional turtleneck for mobility and protection on the job. The combination of comfort and style keeps you ready for any challenge.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigdoctor_turtle.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigdoctor_turtle.rsi
-
-- type: entity
-  parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBlueShieldTurtle
   name: blueshield turtleneck
   description: A stylish turtleneck that will help the Blue Shield officer be ready for any extreme situation. High quality materials and a layer of armor make it indispensable for the front line.

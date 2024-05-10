@@ -38,14 +38,3 @@
     modifiers:
       coefficients:
         Caustic: 0.95
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpskirtBrigDoctorTurtleneck
-  name: brigdoctor turtleneck
-  description: A professional turtleneck for mobility and protection on the job. The combination of comfort and style keeps you ready for any challenge.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigdoctor_turtle.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigdoctor_turtle.rsi
