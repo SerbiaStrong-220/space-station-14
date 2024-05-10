@@ -24,3 +24,10 @@
   - LawyerJumpsuit
   - IAABackpack
   - Trinkets
+
+# Medical
+- type: roleLoadout
+  id: JobPsychologist
+  groups:
+  - PsychologistJumpsuit
+  - MedicalBackpack

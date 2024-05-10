@@ -19,19 +19,7 @@
 - type: startingGear
   id: ParamedicJumpsuitTurtleneck
   equipment:
-    jumpsuit: ClothingUniformJumpsuitTurtleColorDarkBlue
-
-- type: loadout
-  id: ParamedicJumpsuitTurtleneckAlt
-  equipment: ParamedicJumpsuitTurtleneckAlt
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ParamedicTurtleneck
-
-- type: startingGear
-  id: ParamedicJumpsuitTurtleneckAlt
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitTurtleAltColorDarkBlue
+    jumpsuit: ClothingUniformJumpsuitParamedicTurtleneck
 
 - type: loadout
   id: ParamedicJumpskirtTurtleneck
@@ -43,16 +31,4 @@
 - type: startingGear
   id: ParamedicJumpskirtTurtleneck
   equipment:
-    jumpsuit: ClothingUniformJumpskirtTurtleColorDarkBlue
-
-- type: loadout
-  id: ParamedicJumpskirtTurtleneckAlt
-  equipment: ParamedicJumpskirtTurtleneckAlt
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ParamedicTurtleneck
-
-- type: startingGear
-  id: ParamedicJumpskirtTurtleneckAlt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtTurtleAltColorDarkBlue
+    jumpsuit: ClothingUniformJumpskirtParamedicTurtleneck

@@ -705,6 +705,8 @@
   - AtmosphericTechnicianJumpsuit
   - AtmosphericTechnicianJumpskirt
   - AtmosphericTechnicianJumpsuitCasual
+  - AtmosphericTechnicianJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - AtmosphericTechnicianJumpskirtTurtleneck #SS220-MoreTurtleneck-End
 
 - type: loadoutGroup
   id: AtmosphericTechnicianOuterClothing
@@ -855,6 +857,10 @@
   loadouts:
   - WhiteJumpsuit
   - WhiteJumpskirt
+  - ResearchAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - ResearchAssistantJumpsuitTurtleneckAlt
+  - ResearchAssistantJumpskirtTurtleneck
+  - ResearchAssistantJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
 
 # Security
 - type: loadoutGroup
@@ -905,6 +911,10 @@
   loadouts:
   - WardenJumpsuit
   - WardenJumpskirt
+  - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - WardenJumpsuitTurtleneckAlt
+  - WardenJumpskirtTurtleneck
+  - WardenJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
 
 - type: loadoutGroup
   id: WardenOuterClothing
@@ -932,6 +942,10 @@
   - SecurityJumpskirtGrey
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
+  - SecurityJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - SecurityJumpsuitTurtleneckAlt
+  - SecurityJumpskirtTurtleneck
+  - SecurityJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1017,6 +1031,10 @@
   loadouts:
   - RedJumpsuit
   - RedJumpskirt
+  - SecurityCadetJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - SecurityCadetJumpsuitTurtleneckAlt
+  - SecurityCadetJumpskirtTurtleneck
+  - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
 
 # Medical
 - type: loadoutGroup
@@ -1155,6 +1173,8 @@
   loadouts:
   - ChemistJumpsuit
   - ChemistJumpskirt
+  - ChemistJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - ChemistJumpskirtTurtleneck #SS220-MoreTurtleneck-End
 
 - type: loadoutGroup
   id: ChemistOuterClothing
@@ -1187,9 +1207,7 @@
   - ParamedicJumpsuit
   - ParamedicJumpskirt
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
-  - ParamedicJumpsuitTurtleneckAlt
-  - ParamedicJumpskirtTurtleneck
-  - ParamedicJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
 
 - type: loadoutGroup
   id: ParamedicOuterClothing
