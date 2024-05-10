@@ -2,6 +2,7 @@
 
 using Content.Server.Antag;
 using Content.Server.Body.Components;
+using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
@@ -10,6 +11,7 @@ using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Server.SS220.MindSlave.UI;
 using Content.Shared.Alert;
 using Content.Shared.Cloning;
 using Content.Shared.Implants;
@@ -21,6 +23,8 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Roles;
 using Content.Shared.SS220.MindSlave;
+using Content.Shared.Tag;
+using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
@@ -38,6 +42,10 @@ public sealed class MindSlaveSystem : EntitySystem
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
     [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     [ValidatePrototypeId<AntagPrototype>]
     private const string MindSlaveAntagId = "MindSlave";
@@ -50,6 +58,9 @@ public sealed class MindSlaveSystem : EntitySystem
 
     [ValidatePrototypeId<NpcFactionPrototype>]
     private const string SyndicateFactionId = "Syndicate";
+
+    [ValidatePrototypeId<TagPrototype>]
+    private const string MindSlaveImplantTag = "MindSlave";
 
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
 
@@ -64,7 +75,7 @@ public sealed class MindSlaveSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDead);
+        SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDeadOrCrit);
         SubscribeLocalEvent<MindSlaveMasterComponent, BeingGibbedEvent>(OnMasterGibbed);
         SubscribeLocalEvent<MindSlaveComponent, MobStateChangedEvent>(OnDead);
         SubscribeLocalEvent<MindSlaveComponent, CloningEvent>(OnCloned);
@@ -79,7 +90,8 @@ public sealed class MindSlaveSystem : EntitySystem
         // This is disgusting, but I need to get rid of a reference
         RemoveSlaves(new List<EntityUid>(entity.Comp.EnslavedEntities));
     }
-    private void OnMasterDead(Entity<MindSlaveMasterComponent> entity, ref MobStateChangedEvent args)
+
+    private void OnMasterDeadOrCrit(Entity<MindSlaveMasterComponent> entity, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead && args.NewMobState != MobState.Critical)
             return;
@@ -94,6 +106,7 @@ public sealed class MindSlaveSystem : EntitySystem
             _antagSelection.SendBriefing(slave, message, Color.Red, null);
         }
     }
+
     private void OnDead(Entity<MindSlaveComponent> entity, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
@@ -163,8 +176,8 @@ public sealed class MindSlaveSystem : EntitySystem
             objectiveEntity = objective
         }, mindComp, true);
 
-        var masterMindName = masterMindComp.CharacterName ?? Loc.GetString("mindslave-unknown-master");
-        var briefing = Loc.GetString("mindslave-briefing-slave", ("master", masterMindName));
+        var masterName = masterMindComp.CharacterName ?? Loc.GetString("mindslave-unknown-master");
+        var briefing = Loc.GetString("mindslave-briefing-slave", ("master", masterName));
         _antagSelection.SendBriefing(slave, briefing, Color.Red, GreetSoundNotification);
         _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
@@ -205,6 +218,9 @@ public sealed class MindSlaveSystem : EntitySystem
         if (gameRule != null && gameRuleEntity != null)
             _traitorRule.AddToTraitorList(mindId, gameRuleEntity.Value, gameRule);
 
+        if (mindComp.UserId != null && _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+            _eui.OpenEui(new MindSlaveNotificationEui(masterName, true), session);
+
         return true;
     }
 
@@ -240,6 +256,7 @@ public sealed class MindSlaveSystem : EntitySystem
             masterComponent.EnslavedEntities.Remove(slave);
             Dirty(master.Value, masterComponent);
         }
+        var masterName = master != null ? Name(master.Value) : string.Empty;
 
         _role.MindRemoveRole<MindSlaveRoleComponent>(mindId);
 
@@ -260,6 +277,28 @@ public sealed class MindSlaveSystem : EntitySystem
         GetTraitorGamerule(out var gameRuleEntity, out var gameRule);
         if (gameRule != null && gameRuleEntity != null)
             _traitorRule.RemoveFromTraitorList(mindId, gameRuleEntity.Value, gameRule);
+
+        if (mindComp.UserId != null && master != null && _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+            _eui.OpenEui(new MindSlaveNotificationEui(masterName, false), session);
+
+        // Remove implant if has one
+        // Recursion's not happening because all the other stuff is already removed, so it will not proceed with checks.
+        if (TryComp<ImplantedComponent>(slave, out var implantComp))
+        {
+            var implants = implantComp.ImplantContainer.ContainedEntities;
+
+            EntityUid? mindslaveImplant = null;
+            foreach (var implant in implants)
+            {
+                if (!_tag.HasTag(implant, MindSlaveImplantTag))
+                    continue;
+
+                mindslaveImplant = implant;
+            }
+
+            if (mindslaveImplant != null)
+                _implant.ForceRemove(slave, mindslaveImplant.Value);
+        }
 
         return true;
     }
