@@ -1392,14 +1392,14 @@
     Telecrystal: 10
   categories:
   - UplinkWearables
-#ss220-fix-uplink-begin
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
-#ss220-fix-uplink-end
+#ss220-refix-uplink-begin
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#        tags:
+#        - NukeOpsUplink
+#        - LoneOpsUplink
+#ss220-refix-uplink-end
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -1411,18 +1411,13 @@
     Telecrystal: 12
   categories:
   - UplinkWearables
-# ss220-fix-uplink-begin
+# ss220-refix-uplink-begin
   conditions:
-  - !type:BuyerWhitelistCondition
+  - !type:StoreWhitelistCondition
     blacklist:
       components:
       - SurplusBundle
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-# ss220-fix-uplink-end
+# ss220-refix-uplink-end
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate
