@@ -18,7 +18,7 @@ tiles-wood-tile-red = красный деревянный узорчатый п�
 tiles-red-glass-floor = красный стеклянный пол
 tiles-uranium-glass-floor = урановый стеклянный пол
 tiles-plasma-glass-floor = плазменный стеклянный пол
-tiles-shuttle-glass-floor - стеклянный пол шаттла
+tiles-shuttle-glass-floor = стеклянный пол шаттла
 tiles-reinforced-uranium-glass-floor = урановый бронестеклянный пол
 tiles-reinforced-plasma-glass-floor = плазменный бронестеклянный пол
 tiles-damaged-glass-floor = поврежденный стеклянный пол
