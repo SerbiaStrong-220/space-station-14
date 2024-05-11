@@ -14464,7 +14464,7 @@ entities:
       - - Security
     - type: GridFill
       addComponents: []
-      path: /Maps/Shuttles/ss220_NT_Guardian_grid.yml
+      path: /Maps/SS220/Shuttles/ss220-ntguardian.yml
 - proto: AirlockExternalLocked
   entities:
   - uid: 610

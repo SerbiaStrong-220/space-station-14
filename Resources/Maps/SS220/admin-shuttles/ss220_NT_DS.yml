@@ -25,7 +25,7 @@ entities:
       name: NT-DS-X3 "Wanderer"
     - type: Transform
       pos: -0.011718273,-0.114022255
-      parent: 609
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -475,19 +475,6 @@ entities:
     - type: ContainedSolution
       containerName: food
       container: 4
-  - uid: 609
-    components:
-    - type: MetaData
-      name: map 2
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
-    - type: LoadedMap
 - proto: ActionToggleMagboots
   entities:
   - uid: 263
@@ -5001,7 +4988,7 @@ entities:
           loop: False
           referenceDistance: 1
           rolloffFactor: 1
-          maxDistance: 20
+          maxDistance: 15
           pitch: 1
           volume: 0
         path: /Audio/Items/jaws_pry.ogg
@@ -5020,7 +5007,7 @@ entities:
           loop: False
           referenceDistance: 1
           rolloffFactor: 1
-          maxDistance: 20
+          maxDistance: 15
           pitch: 1
           volume: 0
         path: /Audio/Items/jaws_pry.ogg
@@ -5039,7 +5026,7 @@ entities:
           loop: False
           referenceDistance: 1
           rolloffFactor: 1
-          maxDistance: 20
+          maxDistance: 15
           pitch: 1
           volume: 0
         path: /Audio/Items/jaws_pry.ogg
@@ -5058,7 +5045,7 @@ entities:
           loop: False
           referenceDistance: 1
           rolloffFactor: 1
-          maxDistance: 20
+          maxDistance: 15
           pitch: 1
           volume: 0
         path: /Audio/Items/jaws_pry.ogg

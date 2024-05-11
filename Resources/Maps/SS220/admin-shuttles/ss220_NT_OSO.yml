@@ -26,7 +26,7 @@ entities:
       name: NT-DSO-X3 "Pluto"
     - type: Transform
       pos: -0.546875,-0.59376526
-      parent: 637
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -453,17 +453,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-  - uid: 637
-    components:
-    - type: MetaData
-      name: map 2
-    - type: Transform
-    - type: Map
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
 - proto: ActionToggleLight
   entities:
   - uid: 3
@@ -494,8 +483,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,-2.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
   - uid: 17
     components:
     - type: Transform
@@ -514,8 +501,6 @@ entities:
       - 29
       - 389
       - 296
-    - type: AtmosDevice
-      joinedGrid: 1
   - uid: 18
     components:
     - type: Transform
@@ -527,8 +512,6 @@ entities:
       - 388
       - 32
       - 296
-    - type: AtmosDevice
-      joinedGrid: 1
   - uid: 19
     components:
     - type: Transform
@@ -544,8 +527,6 @@ entities:
       - 301
       - 299
       - 298
-    - type: AtmosDevice
-      joinedGrid: 1
 - proto: AirCanister
   entities:
   - uid: 20
@@ -553,8 +534,6 @@ entities:
     - type: Transform
       pos: -2.5,-6.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
 - proto: AirlockCentralCommand
   entities:
   - uid: 21
@@ -2415,8 +2394,6 @@ entities:
     - type: Transform
       pos: 0.5,-7.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
 - proto: GasPassiveVent
@@ -2427,8 +2404,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 5.5,-6.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
 - proto: GasPipeBend
   entities:
   - uid: 304
@@ -3027,8 +3002,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,-7.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 381
@@ -3037,8 +3010,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,-8.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
 - proto: GasPressurePump
@@ -3049,8 +3020,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,-6.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 383
@@ -3059,8 +3028,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,-6.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
 - proto: GasVentPump
@@ -3074,8 +3041,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 17
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 385
@@ -3087,8 +3052,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 17
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 386
@@ -3097,8 +3060,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,-1.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 387
@@ -3109,8 +3070,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 19
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 388
@@ -3122,8 +3081,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 18
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#0335FCFF'
 - proto: GasVentScrubber
@@ -3137,8 +3094,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 17
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 390
@@ -3150,8 +3105,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 17
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 391
@@ -3160,8 +3113,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,-1.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 392
@@ -3172,8 +3123,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 19
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 393
@@ -3185,8 +3134,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 18
-    - type: AtmosDevice
-      joinedGrid: 1
     - type: AtmosPipeColor
       color: '#FF1212FF'
 - proto: GeneratorBasic15kW
@@ -3332,8 +3279,6 @@ entities:
     - type: Transform
       pos: -0.5,-7.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
 - proto: LiquidOxygenCanister
   entities:
   - uid: 413
@@ -3341,8 +3286,6 @@ entities:
     - type: Transform
       pos: 0.5,-8.5
       parent: 1
-    - type: AtmosDevice
-      joinedGrid: 1
 - proto: LockerBlueshield
   entities:
   - uid: 414
@@ -4580,7 +4523,7 @@ entities:
       pos: 2.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -3300.1062
+      secondsUntilStateChange: -3317.9768
       state: Opening
   - uid: 610
     components:

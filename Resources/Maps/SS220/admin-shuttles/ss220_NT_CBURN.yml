@@ -24,7 +24,7 @@ entities:
       name: NT-CBURN-X3 "Asclepius"
     - type: Transform
       pos: -0.5625,-1.1555071
-      parent: 9
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -495,19 +495,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-  - uid: 9
-    components:
-    - type: MetaData
-      name: map 2
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
-    - type: LoadedMap
 - proto: AirAlarm
   entities:
   - uid: 2

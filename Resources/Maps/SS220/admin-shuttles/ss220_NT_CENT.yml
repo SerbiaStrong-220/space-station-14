@@ -18,25 +18,13 @@ tilemap:
 entities:
 - proto: ""
   entities:
-  - uid: 1
-    components:
-    - type: MetaData
-      name: map 999
-    - type: Transform
-    - type: Map
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
-    - type: LoadedMap
   - uid: 2
     components:
     - type: MetaData
       name: NT-CC-X3 "Jumper"
     - type: Transform
       pos: -0.26736355,-0.612689
-      parent: 1
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -175,9 +163,9 @@ entities:
             color: '#FFFFFFFF'
             id: BrickTileSteelLineW
           decals:
-            68: 3,3
-            69: 3,2
-            70: 3,1
+            66: 3,3
+            67: 3,2
+            68: 3,1
         - node:
             color: '#00A042FF'
             id: BrickTileWhiteLineE
@@ -194,8 +182,8 @@ entities:
             color: '#FFFFFFFF'
             id: BrickTileWhiteLineE
           decals:
-            73: 1,-1
-            74: 1,-2
+            71: 1,-1
+            72: 1,-2
         - node:
             color: '#00A042FF'
             id: BrickTileWhiteLineN
@@ -222,65 +210,65 @@ entities:
             color: '#FFFFFFFF'
             id: BrickTileWhiteLineW
           decals:
-            71: 3,-1
-            72: 3,-2
+            69: 3,-1
+            70: 3,-2
         - node:
             angle: -1.5707963267948966 rad
             color: '#FFFFFFFF'
             id: Delivery
           decals:
-            61: -1,-5
-            62: -1,-6
-            63: -2,-6
+            59: -1,-5
+            60: -1,-6
+            61: -2,-6
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnCornerNE
           decals:
-            80: -6,-2
-            81: 6,-2
+            75: -6,-2
+            76: 6,-2
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnCornerNW
           decals:
-            78: -7,-2
-            84: 5,-2
+            74: -7,-2
+            79: 5,-2
         - node:
             color: '#FFFFFFFF'
             id: WarnCornerSE
           decals:
-            66: 4,-6
+            64: 4,-6
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnCornerSE
           decals:
-            82: 6,-3
-            83: -6,-3
+            77: 6,-3
+            78: -6,-3
         - node:
             cleanable: True
             color: '#FFFFFFFF'
             id: WarnCornerSW
           decals:
-            77: -7,-3
-            85: 5,-3
+            73: -7,-3
+            80: 5,-3
         - node:
             color: '#FFFFFFFF'
             id: WarnEndS
           decals:
-            67: 4,-6
+            65: 4,-6
         - node:
             color: '#FFFFFFFF'
             id: WarnLineN
           decals:
-            65: 4,-6
+            63: 4,-6
         - node:
             angle: -1.5707963267948966 rad
             color: '#FFFFFFFF'
             id: WarnLineW
           decals:
-            64: 4,-6
+            62: 4,-6
         - node:
             color: '#FFFFFFFF'
             id: WoodTrimThinCornerNe
@@ -444,8 +432,6 @@ entities:
       - 484
       - 485
       - 486
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: AirCanister
   entities:
   - uid: 350
@@ -453,8 +439,6 @@ entities:
     - type: Transform
       pos: -2.5,-3.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: Airlock
   entities:
   - uid: 431
@@ -1818,7 +1802,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-1.5
       parent: 2
-    - type: DeviceNetwork
   - uid: 472
     components:
     - type: Transform
@@ -1906,8 +1889,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-4.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: GasPipeBend
   entities:
   - uid: 310
@@ -2097,24 +2078,18 @@ entities:
     - type: Transform
       pos: -2.5,-3.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 306
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,-4.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 307
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -4.5,-5.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: GasPressurePump
   entities:
   - uid: 308
@@ -2123,8 +2098,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -3.5,-4.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: GasVentPump
   entities:
   - uid: 340
@@ -2133,78 +2106,58 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,5.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 341
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -2.5,5.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 342
     components:
     - type: Transform
       pos: 1.5,8.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 343
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,2.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 344
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,2.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 345
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,-4.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 346
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 5.5,-1.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 347
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,-1.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 348
     components:
     - type: Transform
       pos: -1.5,-0.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
   - uid: 349
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -2.5,-5.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: GeneratorBasic15kW
   entities:
   - uid: 134
@@ -2427,8 +2380,6 @@ entities:
     - type: Transform
       pos: -4.5,-5.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: OxygenCanister
   entities:
   - uid: 351
@@ -2436,8 +2387,6 @@ entities:
     - type: Transform
       pos: -5.5,-4.5
       parent: 2
-    - type: AtmosDevice
-      joinedGrid: 2
 - proto: PaintingMonkey
   entities:
   - uid: 496
