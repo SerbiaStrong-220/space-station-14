@@ -11,4 +11,4 @@
           mapNameTemplate: '{0} Центральное Командование {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: 'TG'
+            prefixCreator: 'SS220'
