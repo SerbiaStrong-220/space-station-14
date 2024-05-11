@@ -17,7 +17,7 @@
   license: "Custom"
   copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/816"
-  
+
 - files: ["kitchen_red.png"]
   license: "Custom"
   copyright: "Created by github user @Kit0vras, Resprited by DaGo7939 (Discord). EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
@@ -27,3 +27,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, Wood tiles are new tg tiles, repaletted by Kit0vras."
   source: "https://github.com/tgstation/tgstation/"
+
+- files: ["uglass.png", "pglass.png", "redglass.png", "shutleglass.png", "damagedGlass.png"]
+  license: "CC0-1.0"
+  copyright: "Created by github user @notquitehadouken, modified by github user @Kit0vras."
+  source: "https://github.com/space-wizards/space-station-14/pull/17948"
+
+- files: ["ruglass.png", "rpglass.png"]
+  license: "CC0-1.0"
+  copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, rglass modified by github user @notquitehadouken, modified by github user @Kit0vras."
+  source: "https://github.com/space-wizards/space-station-14/pull/17948"

@@ -554,3 +554,131 @@
     collection: BarestepWood
   itemDrop: FloorTileItemWoodRed
   heatCapacity: 10000
+
+- type: tile
+  id: FloorRedGlass
+  name: tiles-red-glass-floor
+  sprite: /Textures/SS220/Tiles/redglass.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetGlass1
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorUGlass
+  name: tiles-uranium-glass-floor
+  sprite: /Textures/SS220/Tiles/uglass.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetUGlass1
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorPGlass
+  name: tiles-plasma-glass-floor
+  sprite: /Textures/SS220/Tiles/pglass.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetPGlass1
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShuttleGlass
+  name: tiles-shuttle-glass-floor
+  sprite: /Textures/SS220/Tiles/shuttleglass.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetGlass1
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRUGlass
+  name: tiles-reinforced-uranium-glass-floor
+  sprite: /Textures/SS220/Tiles/ruglass.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetRUGlass1
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRPGlass
+  name: tiles-reinforced-plasma-glass-floor
+  sprite: /Textures/SS220/Tiles/rpglass.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetRPGlass1
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDamagedGlass
+  name: tiles-damaged-glass-floor
+  sprite: /Textures/SS220/Tiles/damagedGlass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: ShardGlass
+  heatCapacity: 10000

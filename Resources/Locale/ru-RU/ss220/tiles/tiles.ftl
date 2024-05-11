@@ -15,3 +15,10 @@ tiles-wood-red = деревянный красный пол
 tiles-wood-large-red = большой деревянный красный пол
 tiles-wood-parquet-red = красный деревянный паркет
 tiles-wood-tile-red = красный деревянный узорчатый пол
+tiles-red-glass-floor = красный стеклянный пол
+tiles-uranium-glass-floor = урановый стеклянный пол
+tiles-plasma-glass-floor = плазменный стеклянный пол
+tiles-shuttle-glass-floor - стеклянный пол шаттла
+tiles-reinforced-uranium-glass-floor = урановый бронестеклянный пол
+tiles-reinforced-plasma-glass-floor = плазменный бронестеклянный пол
+tiles-damaged-glass-floor = поврежденный стеклянный пол
