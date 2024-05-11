@@ -6535,10 +6535,6 @@ entities:
       - 5511
       - 5430
       - 4065
-      - 4067
-      - 4068
-      - 4069
-      - 4066
       - 4106
       - 5517
       - 5445
@@ -7172,8 +7168,6 @@ entities:
       - 5428
       - 5507
       - 4065
-      - 4067
-      - 4069
       - 4063
       - 4070
       - 4071
@@ -7629,17 +7623,11 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -34.5,0.5
       parent: 1
-    - type: GridFill
-      addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_CBURN.yml
   - uid: 184
     components:
     - type: Transform
       pos: -31.5,-16.5
       parent: 1
-    - type: GridFill
-      addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_OBR.yml
   - uid: 185
     components:
     - type: Transform
@@ -7655,9 +7643,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,31.5
       parent: 1
-    - type: GridFill
-      addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_CENT.yml
 - proto: AirlockExternalLocked
   entities:
   - uid: 180
@@ -7683,9 +7668,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -17.5,27.5
       parent: 1
-    - type: GridFill
-      addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_DS.yml
 - proto: AirlockFreezer
   entities:
   - uid: 189
@@ -24461,6 +24443,13 @@ entities:
     - type: Transform
       pos: 30.530754,-28.466908
       parent: 1
+- proto: ClothingNeckBrokenMedal
+  entities:
+  - uid: 3946
+    components:
+    - type: Transform
+      pos: -9.495799,24.528908
+      parent: 1
 - proto: ClothingNeckCloakCentcomAdmiral
   entities:
   - uid: 3259
@@ -29792,18 +29781,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -24.5,18.5
       parent: 1
-- proto: FaxMachineBase
-  entities:
-  - uid: 3946
-    components:
-    - type: MetaData
-      desc: Блюспейс-технологии на службе военных преступлений.
-      name: факс офицера специальных операций
-    - type: Transform
-      pos: -9.5,24.5
-      parent: 1
-    - type: FaxMachine
-      responsePings: False
 - proto: FaxMachineCentcom
   entities:
   - uid: 3947
@@ -29872,11 +29849,6 @@ entities:
     components:
     - type: Transform
       pos: -0.5,13.5
-      parent: 1
-  - uid: 3956
-    components:
-    - type: Transform
-      pos: -2.5,10.5
       parent: 1
   - uid: 3957
     components:
@@ -30869,44 +30841,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,6.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 118
-      - 76
-  - uid: 4066
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 8.5,4.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 76
-  - uid: 4067
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 8.5,3.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 118
-      - 76
-  - uid: 4068
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 8.5,2.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 76
-  - uid: 4069
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 8.5,1.5
       parent: 1
     - type: DeviceNetwork
       deviceLists:
@@ -45201,6 +45135,18 @@ entities:
       containers:
         solution@beaker: !type:ContainerSlot
           ent: 7
+- proto: Jukebox
+  entities:
+  - uid: 3956
+    components:
+    - type: Transform
+      pos: -2.5,10.5
+      parent: 1
+  - uid: 4066
+    components:
+    - type: Transform
+      pos: 15.5,-4.5
+      parent: 1
 - proto: KitchenElectricGrill
   entities:
   - uid: 5890
@@ -47119,13 +47065,6 @@ entities:
         - 0
         - 0
         - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 5993
 - proto: Multitool
   entities:
   - uid: 5994
@@ -55533,18 +55472,6 @@ entities:
     - type: Transform
       pos: 30.536951,-20.36205
       parent: 1
-- proto: ToyFigurineHamlet
-  entities:
-  - uid: 5993
-    components:
-    - type: MetaData
-      desc: На то что гребанные мапперы не будут срать трубами в процессе маппинга.
-      name: мои мечты
-    - type: Transform
-      parent: 5992
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: ToyFigurineHeadOfPersonnel
   entities:
   - uid: 7126
@@ -62065,7 +61992,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -390431.5
+      secondsUntilStateChange: -390598.44
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
