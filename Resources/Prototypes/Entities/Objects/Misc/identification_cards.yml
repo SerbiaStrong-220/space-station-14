@@ -507,6 +507,7 @@
   # SS220 new CentComm begin
   - type: Access
     groups:
+    - AllAccess
     - CentralCommand
   # SS220 new CentComm end
 
@@ -523,6 +524,9 @@
     jobTitle: ERT Soul Officer
   - type: Item
     heldPrefix: blue
+  - type: Access
+    groups:
+    - AllAccess
 
 - type: entity
   parent: ERTChaplainIDCard
@@ -618,6 +622,8 @@
     jobTitle: Centcom Agent
   # SS220 new CentComm begin
   - type: Access
+    groups:
+    - AllAccess
     tags:
     - CentralCommandDeathSquad
     - CentralCommand
@@ -845,6 +851,8 @@
   # SS220 new CentComm begin
     jobTitle: Агент РХБЗ
   - type: Access
+    groups:
+    - AllAccess
     tags:
     - CentralCommandCBURN
     - CentralCommand
