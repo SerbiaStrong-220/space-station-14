@@ -162,30 +162,32 @@
 #  components:
 #  - type: SandboxRule
 
-- type: entity
-  id: Revolutionary
-  parent: BaseGameRule
-  noSpawn: true
-  components:
-  - type: GameRule
-    minPlayers: 15
-  - type: RevolutionaryRule
-  - type: AntagSelection
-    definitions:
-    - prefRoles: [ HeadRev ]
-      max: 3
-      playerRatio: 15
-      briefing:
-        text: head-rev-role-greeting
-        color: CornflowerBlue
-        sound: "/Audio/Ambience/Antag/headrev_start.ogg"
-      startingGear: HeadRevGear
-      components:
-      - type: Revolutionary
-      - type: HeadRevolutionary
-      mindComponents:
-      - type: RevolutionaryRole
-        prototype: HeadRev
+#SS220 rev delete begin
+#- type: entity
+#  id: Revolutionary
+#  parent: BaseGameRule
+#  noSpawn: true
+#  components:
+#  - type: GameRule
+#    minPlayers: 15
+#  - type: RevolutionaryRule
+#  - type: AntagSelection
+#    definitions:
+#    - prefRoles: [ HeadRev ]
+#      max: 3
+#      playerRatio: 15
+#      briefing:
+#        text: head-rev-role-greeting
+#        color: CornflowerBlue
+#        sound: "/Audio/Ambience/Antag/headrev_start.ogg"
+#      startingGear: HeadRevGear
+#      components:
+#      - type: Revolutionary
+#      - type: HeadRevolutionary
+#      mindComponents:
+#      - type: RevolutionaryRole
+#        prototype: HeadRev
+#SS220 rev delete end
 
 - type: entity
   id: Secret

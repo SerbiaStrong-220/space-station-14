@@ -1,13 +1,16 @@
-- type: antag
-  id: HeadRev
-  name: roles-antag-rev-head-name
-  antagonist: true
-  setPreference: true
-  objective: roles-antag-rev-head-objective
-
-- type: antag
-  id: Rev
-  name: roles-antag-rev-name
-  antagonist: true
-  setPreference: false
-  objective: roles-antag-rev-objective
+# SS220 rev delete begin
+#- type: antag
+#  id: HeadRev
+#  name: roles-antag-rev-head-name
+#  antagonist: true
+#  setPreference: true
+#  objective: roles-antag-rev-head-objective
+#
+#- type: antag
+#  id: Rev
+#  name: roles-antag-rev-name
+#  antagonist: true
+#  setPreference: false
+#  objective: roles-antag-rev-objective
+#
+# SS220 rev delete end
