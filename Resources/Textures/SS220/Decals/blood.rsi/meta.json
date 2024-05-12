@@ -1,7 +1,11 @@
 {
     "version": 1,
     "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+<<<<<<< HEAD
     "copyright": "made by witarma(discrod,github) for ss220",
+=======
+    "copyright": "Made by witarma (GitHub) for SS220",
+>>>>>>> 69d49aa1db0312f60d790911390a3823ea018ae2
     "size": {
         "x": 32,
         "y": 32
