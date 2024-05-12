@@ -2,7 +2,7 @@
   parent: GasVentScrubber
   id: GasVentScrubberBasa
   suffix: WideFiltering
-  name: Скруббер
+  name: скруббер
   description: Он же вытяжка. Имеет клапан и прикрепленный к нему насос.
   components:
     - type: GasVentScrubber
