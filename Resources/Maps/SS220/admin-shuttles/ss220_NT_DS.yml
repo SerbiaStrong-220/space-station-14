@@ -1903,7 +1903,7 @@ entities:
   - uid: 170
     components:
     - type: Transform
-      pos: 2.4853063,3.5507083
+      pos: 1.7044048,7.4740024
       parent: 1
 - proto: Firelock
   entities:

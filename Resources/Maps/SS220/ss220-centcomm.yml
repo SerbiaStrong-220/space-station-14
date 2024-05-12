@@ -7651,7 +7651,7 @@ entities:
   - uid: 158
     components:
     - type: MetaData
-      desc: Даже приложив КПК самого офицера специальных операций, вам отказали в доступе... Кажется вы вообще не помните, чтобы кто-либо когда-либо входил или выходил из этого отсека.
+      desc: Даже приложив КПК оператора центрального командования, вам отказали в доступе... Кажется вы вообще не помните, чтобы кто-либо когда-либо входил или выходил из этого отсека.
       name: специализированный отсек военных преступлений
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -10656,19 +10656,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 22.341272,25.606934
       parent: 1
-- proto: BoxFolderCentCom
-  entities:
-  - uid: 585
-    components:
-    - type: Transform
-      pos: -4.7341237,10.679832
-      parent: 1
 - proto: BoxFolderCentComm
   entities:
   - uid: 581
     components:
     - type: Transform
-      pos: -4.6417875,10.495441
+      pos: -4.8120956,10.561023
       parent: 1
   - uid: 586
     components:
@@ -10715,7 +10708,7 @@ entities:
   - uid: 589
     components:
     - type: Transform
-      pos: -4.139565,10.666687
+      pos: -4.343345,10.675607
       parent: 1
   - uid: 590
     components:
@@ -21298,6 +21291,12 @@ entities:
       parent: 1
 - proto: CentCommNewPen
   entities:
+  - uid: 585
+    components:
+    - type: Transform
+      rot: 2.356194490192345 rad
+      pos: -5.879759,24.36576
+      parent: 1
   - uid: 3250
     components:
     - type: Transform
@@ -21349,13 +21348,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: Chainsaw
-  entities:
-  - uid: 2737
-    components:
-    - type: Transform
-      pos: -25.472607,10.538334
-      parent: 1
 - proto: Chair
   entities:
   - uid: 2738
@@ -25526,6 +25518,13 @@ entities:
     components:
     - type: Transform
       pos: -6.6558676,1.6079913
+      parent: 1
+- proto: ClothingUniformMagicianDress
+  entities:
+  - uid: 216
+    components:
+    - type: Transform
+      pos: -25.579943,10.587954
       parent: 1
 - proto: ClusterGrenade
   entities:
@@ -32104,7 +32103,7 @@ entities:
       pos: 27.5,19.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -1467.8158
+      secondsUntilStateChange: -2566.3215
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -47274,6 +47273,11 @@ entities:
       canCollide: False
 - proto: MagazineMagnum
   entities:
+  - uid: 215
+    components:
+    - type: Transform
+      pos: -14.26079,11.4943285
+      parent: 1
   - uid: 3029
     components:
     - type: Transform
@@ -47281,13 +47285,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: MagazineMagnumSubMachineGun
-  entities:
-  - uid: 5946
-    components:
-    - type: Transform
-      pos: -14.720116,11.553033
-      parent: 1
 - proto: MagazinePistolHighCapacity
   entities:
   - uid: 3054
@@ -48641,7 +48638,7 @@ entities:
       content: >
         [bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 
-        [head=2]Указ об отмене перечня должостей для представителей иноземных рас[/head]
+        [head=2]Указ об отмене перечня должностей для представителей иноземных рас[/head]
 
 
         [italic]Дата: 02.04.2568 [/italic]
@@ -48650,7 +48647,7 @@ entities:
         Центральным Командованием был пересмотрен приказ о принятии и утверждения перечня должностей для представителей иноземных рас. Нашим кадровым отделам это послужит опытом и поможет дальше двигаться в правильном направлении.
 
 
-        От лица Центрального Командования приказываю устроить представилей иноземных рас, подавших документы за 01.04.2568, согласно всем правилам. Документ, содержащий перечень должностей отныне является недействительным.
+        От лица Центрального Командования приказываю устроить представителей иноземных рас, подавших документы за 01.04.2568, согласно всем правилам. Документ, содержащий перечень должностей отныне является недействительным.
 
 
         Слава НаноТрейзен! Самой ксенолюбивой компании в ближнем космосе.
@@ -48776,7 +48773,7 @@ entities:
 
         Причины по которым я должен получить данную работу:
 
-        Вссссю сссвою жиссснь я ссссо сссвоим сссемейссством проводили ссса сссаботой о сссамых рассснообрасссных рассстительных культурах, мой многолетний опыт неприменно бы пригодилссся сссстоль сссамечательной ссстанции.
+        Вссссю сссвою жиссснь я ссссо сссвоим сссемейссством проводили ссса сссаботой о сссамых рассснообрасссных рассстительных культурах, мой многолетний опыт непременно бы пригодилссся сссстоль сссамечательной ссстанции.
 
 
         Я изучил и обязуюсь выполнять стандартные рабочие процедуры выдаваемой мне занятости.
@@ -49194,14 +49191,6 @@ entities:
       name: перьевая ручка
     - type: Transform
       pos: -3.9696913,-4.280646
-      parent: 1
-- proto: PenCentcom
-  entities:
-  - uid: 6116
-    components:
-    - type: Transform
-      rot: 2.356194490192345 rad
-      pos: -5.8212748,24.38379
       parent: 1
 - proto: PenHop
   entities:
@@ -49926,6 +49915,13 @@ entities:
     components:
     - type: Transform
       pos: 11.521303,12.620638
+      parent: 1
+- proto: PlushieFumoMagician
+  entities:
+  - uid: 187
+    components:
+    - type: Transform
+      pos: -26.507895,10.376042
       parent: 1
 - proto: PlushieLizard
   entities:
@@ -56480,7 +56476,7 @@ entities:
   - uid: 7131
     components:
     - type: MetaData
-      desc: нт - крысы, а я мышь!
+      desc: корпы - крысы, а я мышь!
     - type: Transform
       pos: 29.392822,-10.273598
       parent: 1
@@ -56608,9 +56604,9 @@ entities:
     - type: Transform
       pos: -15.5,-1.5
       parent: 1
-- proto: VendingMachineCentDrobe
+- proto: VendingMachineCentComm
   entities:
-  - uid: 7144
+  - uid: 226
     components:
     - type: Transform
       pos: -0.5,9.5
@@ -56713,13 +56709,6 @@ entities:
     - type: Transform
       pos: 3.5,-1.5
       parent: 1
-- proto: VendingMachineHydrobe
-  entities:
-  - uid: 7160
-    components:
-    - type: Transform
-      pos: 7.5,7.5
-      parent: 1
 - proto: VendingMachineJaniDrobe
   entities:
   - uid: 7161
@@ -56740,6 +56729,13 @@ entities:
     components:
     - type: Transform
       pos: 18.5,-17.5
+      parent: 1
+- proto: VendingMachineNutri
+  entities:
+  - uid: 234
+    components:
+    - type: Transform
+      pos: 7.5,7.5
       parent: 1
 - proto: VendingMachineSec
   entities:
@@ -62801,6 +62797,13 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -28.8,18.5
       parent: 1
+- proto: WeaponWandCluwne
+  entities:
+  - uid: 188
+    components:
+    - type: Transform
+      pos: -25.52352,10.469792
+      parent: 1
 - proto: WelderIndustrialAdvanced
   entities:
   - uid: 1658
@@ -62960,7 +62963,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -396490.62
+      secondsUntilStateChange: -397589.12
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
