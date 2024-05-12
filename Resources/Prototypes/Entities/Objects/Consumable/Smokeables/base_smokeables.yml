@@ -17,10 +17,10 @@
   - type: InjectableSolution
     solution: smokable
 
-# Base for all cigars and cigarettes.
+# SS220 Cigarettes questions this is base only for cigarettes.
 - type: entity
   parent: BaseSmokable
-  id: BaseCigar
+  id: BaseCigarette # SS220 Cigarettes questions
   abstract: true
   components:
   - type: Smokable
@@ -36,6 +36,29 @@
         reagents:
           - ReagentId: Nicotine
             Quantity: 10
+
+# SS220 Cigarettes questions this is base for cigars. (begin)
+
+- type: entity
+  parent: BaseSmokable
+  id: BaseCigar # SS220 Cigarettes questions
+  abstract: true
+  components:
+  - type: Smokable
+    exposeTemperature: 1173.15
+  - type: Cigar
+  - type: Tag
+    tags:
+    - Trash
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 20
+
+# SS220 Cigarettes questions this is base for cigars. (end)
 
 - type: entity
   parent: BaseSmokable
@@ -61,7 +84,7 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 30
+        maxVol: 45 # SS220 cigarettes questions
 
 - type: entity
   parent: BaseItem
