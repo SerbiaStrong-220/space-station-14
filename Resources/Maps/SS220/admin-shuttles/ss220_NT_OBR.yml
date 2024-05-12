@@ -3366,8 +3366,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,-10.5
       parent: 2
-    - type: Thruster
-      enabled: False
 - proto: InflatableDoorStack
   entities:
   - uid: 723
@@ -4266,8 +4264,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,4.5
       parent: 2
-    - type: Thruster
-      enabled: False
   - uid: 493
     components:
     - type: Transform
