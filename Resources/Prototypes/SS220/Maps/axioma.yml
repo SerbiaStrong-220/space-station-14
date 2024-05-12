@@ -3,7 +3,7 @@
 - type: gameMap
   id: Axioma
   mapName: 'NSS Axioma'
-  mapPath: /Maps/axioma.yml
+  mapPath: /Maps/SS220/axioma.yml
   minPlayers: 0
   stations:
     Axioma:

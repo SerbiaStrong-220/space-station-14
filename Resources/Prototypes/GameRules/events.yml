@@ -455,7 +455,7 @@
     reoccurrenceDelay: 30
     duration: 1
   - type: LoadMapRule
-    mapPath: /Maps/Shuttles/ss220_nuke_lone.yml # SS220 Lone-Ops-Shuttle
+    mapPath: /Maps/SS220/Shuttles/ss220-nukelone.yml # SS220 Lone-Ops-Shuttle
   - type: NukeopsRule
     roundEndBehavior: Nothing
     warTcAmountPerNukie: 100 # SS220 Lone-Ops-War

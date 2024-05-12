@@ -58,5 +58,11 @@
 - files: ["axioma.yml"]
   authors: Vnoeg, Kit0vras, Surani
 
+- files: ["ss220-nukeoutpost.yml"]
+  authors: Vnoeg, Surani, UrPrice, NightmareStalker
+
+- files: ["ss220-centcomm.yml"]
+  authors: Kirus59, Vnoeg, Bomjojuk, NightmareStalker, AliceValestray, UrPrice, VictorBoum, Glek3197
+
 - files: ["oasis.yml"]
   authors: CptJeanLuc

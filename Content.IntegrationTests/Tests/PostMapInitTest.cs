@@ -30,6 +30,7 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] NoSpawnMaps =
         {
             "CentComm",
+            "SS220_CentComm",
             "Dart",
             "NukieOutpost",
             "SS220_syndicate"
@@ -38,10 +39,11 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] Grids =
         {
             "/Maps/centcomm.yml",
+            "/Maps/SS220/ss220-centcomm.yml",
             "/Maps/Shuttles/cargo.yml",
             "/Maps/Shuttles/emergency.yml",
             "/Maps/Shuttles/infiltrator.yml",
-            "/Maps/NukeOps/ss220_Nuke_shuttle_grid.yml",
+            "/Maps/SS220/Shuttles/ss220-nukeshuttle.yml",
         };
 
         private static readonly string[] GameMaps =
@@ -69,21 +71,16 @@ namespace Content.IntegrationTests.Tests
             "Oasis",
 
             // SS220 Maps
-            "220Delta",
             "Frankenstein",
-            "220Bagel",
-            "220Fland",
-            "220Ishimura",
-            "220Gate",
             "Nox",
-            "Snout",
-            "220Avrite",
-            "220Marathon",
-            "220Hive",
-            "VoidZone",
-            "NTvsSSSP",
             "Axioma",
             "SS220_syndicate",
+            "SS220_CentComm",
+
+            // SS220 Event Maps
+            "Snout",
+            "VoidZone",
+            "NTvsSSSP",
         };
 
         /// <summary>

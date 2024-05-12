@@ -3,7 +3,7 @@
 - type: gameMap
   id: Nox
   mapName: 'NSS Nox'
-  mapPath: /Maps/nox.yml
+  mapPath: /Maps/SS220/nox.yml
   minPlayers: 0
   stations:
     Nox:
