@@ -86,10 +86,12 @@
     solutions:
       ironore:
         reagents:
+        #SS220 tweak produce lead begin
         - ReagentId: Iron
           Quantity: 9.6
         - ReagentId: Lead
           Quantity: 0.4
+        #SS220 tweak produce lead end
 
 - type: entity
   id: SteelOre1
