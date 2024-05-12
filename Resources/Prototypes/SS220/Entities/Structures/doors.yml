@@ -59,48 +59,45 @@
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
   - type: PaintableAirlock
     group: Glass
-  - type: AccessReader
-    access: [["CentralCommand"]]
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommLockedERT
   suffix: ЦК, Закрыто, ОБР
   components:
-  - type: AccessReader
-    access: [["CentralCommandERT"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommLockedGSN
   suffix: ЦК, Закрыто, ГСН
   components:
-  - type: AccessReader
-    access: [["CentralCommandGSN"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommLockedDeathSquad
   suffix: ЦК, Закрыто, Эскадрон Смерти
   components:
-  - type: AccessReader
-    access: [["CentralCommandDeathSquad"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockGlassCentcomm
   id: AirlockGlassCentcommLockedCBURN
   suffix: ЦК, Закрыто, отряд РХБЗ
   components:
-  - type: AccessReader
-    access: [["CentralCommandCBURN"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: Airlock
@@ -119,40 +116,36 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm.rsi
-  - type: AccessReader
-    access: [["CentralCommand"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommLockedGSN
   suffix: ЦК, Закрыто, ГСН
   components:
-  - type: AccessReader
-    access: [["CentralCommandGSN"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommLockedERT
   suffix: ЦК, Закрыто, ОБР
   components:
-  - type: AccessReader
-    access: [["CentralCommandERT"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 - type: entity
   parent: AirlockCentcomm
   id: AirlockCentcommLockedDeathSquad
   suffix: ЦК, Закрыто, Эскадрон Смерти
   components:
-  - type: AccessReader
-    access: [["CentralCommandDeathSquad"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
 
 
 - type: entity
@@ -160,7 +153,6 @@
   id: AirlockCentcommLockedCBURN
   suffix: ЦК, Закрыто, Отряд РХБЗ
   components:
-  - type: AccessReader
-    access: [["CentralCommandCBURN"]]
-  - type: Wires
-    layoutId: AirlockCommand
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
