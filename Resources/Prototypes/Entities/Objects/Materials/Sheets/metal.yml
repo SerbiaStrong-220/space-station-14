@@ -68,7 +68,9 @@
         - ReagentId: Iron
           Quantity: 9
         - ReagentId: Carbon
-          Quantity: 1
+          Quantity: 0.8
+        - ReagentId: Lead
+          Quantity: 0.2
 
 - type: entity
   parent: SheetSteel
@@ -203,7 +205,9 @@
         - ReagentId: Iron
           Quantity: 9
         - ReagentId: Carbon
-          Quantity: 1
+          Quantity: 0.8
+        - ReagentId: Lead
+          Quantity: 0.2
         canReact: false
 
 - type: entity
