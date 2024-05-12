@@ -33,7 +33,7 @@
       jobTitle: Дипломат NanoTrasen
     - type: Access
       groups:
-      - AllAccess
+      - AllAccess # SS220 Fast fix access
       - CentralCommand
 
 - type: entity
@@ -46,7 +46,7 @@
       jobTitle: Полевой Офицер ЦК
     - type: Access
       groups:
-      - AllAccess
+      - AllAccess # SS220 Fast fix access
       - CentralCommand
 
 - type: entity
@@ -59,7 +59,7 @@
       jobTitle: Офицер ЦК
     - type: Access
       groups:
-      - AllAccess
+      - AllAccess # SS220 Fast fix access
       - CentralCommand
 
 - type: entity
@@ -72,7 +72,7 @@
       jobTitle: Оперативник ГСН
     - type: Access
       groups:
-      - AllAccess
+      - AllAccess # SS220 Fast fix access
       tags:
       - CentralCommandGSN
       - CentralCommand

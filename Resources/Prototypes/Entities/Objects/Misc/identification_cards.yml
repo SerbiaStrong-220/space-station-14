@@ -486,7 +486,7 @@
     jobIcon: JobIconNanotrasen
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommand
     - CentralCommandERT # SS220 New CentComm
@@ -507,7 +507,7 @@
   # SS220 new CentComm begin
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     - CentralCommand
   # SS220 new CentComm end
 
@@ -526,7 +526,7 @@
     heldPrefix: blue
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
 
 - type: entity
   parent: ERTChaplainIDCard
@@ -623,7 +623,7 @@
   # SS220 new CentComm begin
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommandDeathSquad
     - CentralCommand
@@ -852,7 +852,7 @@
     jobTitle: Агент РХБЗ
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommandCBURN
     - CentralCommand
