@@ -86,8 +86,8 @@
     solutions:
       ironore:
         reagents:
-        #SS220 tweak produce lead begin
         - ReagentId: Iron
+        #SS220 tweak produce lead begin
           Quantity: 9.6
         - ReagentId: Lead
           Quantity: 0.4
