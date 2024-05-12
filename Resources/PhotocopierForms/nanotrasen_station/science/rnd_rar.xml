@@ -2,10 +2,10 @@
 <Form>
   <FormId>rnd_rar</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
-  <EntityName>форма НТ-ИСЛ-ОА</EntityName>
-  <PhotocopierTitle>Отчёт об артефакте</PhotocopierTitle>
+  <EntityName>Форма НТ-ИСЛ-ОА</EntityName>
+  <PhotocopierTitle>Отчет об артефакте</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИСЛ-ОА[/bold]
-[head=2]Отчёт об артефакте[/head]
+[head=2]Отчет об артефакте[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
 

@@ -27,6 +27,7 @@
     IconPath: /Textures/SS220/DepartmentIcons/goal.png
     Forms:
     - /PhotocopierForms/nanotrasen_station/goal/goal_simple.xml
+    - /PhotocopierForms/nanotrasen_station/goal/goal_impossible.xml
     - /PhotocopierForms/nanotrasen_station/goal/goal_guests.xml
     - /PhotocopierForms/nanotrasen_station/goal/goal_capsule.xml
     - /PhotocopierForms/nanotrasen_station/goal/goal_expedition.xml
@@ -38,14 +39,26 @@
     Forms:
     - /PhotocopierForms/nanotrasen_station/command/cc_req_bonus.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_acap.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_acap_1.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_acom.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_acom_1.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_cc_dng.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_cc_fcbrn.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_cc_frs.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_cc_inv.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_cc_srt.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_dcr_1.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_dcr_2.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_dcr_award.xml
     - /PhotocopierForms/nanotrasen_station/command/cmd_fcom.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_pmt.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_pmt_walk.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_rep_ask.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_rep_council.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_rep_crit.xml
+    - /PhotocopierForms/nanotrasen_station/command/cmd_rep_work.xml
   - Id: hr
-    Name: Отдел кадров
+    Name: Органические ресурсы и кадры
     Color: "#5555FFFF"
     IconPath: /Textures/SS220/DepartmentIcons/Cmd_dep.png
     Forms:
@@ -58,7 +71,7 @@
     - /PhotocopierForms/nanotrasen_station/hr/cmd_acr.xml
     - /PhotocopierForms/nanotrasen_station/hr/cmd_acwt.xml
   - Id: law
-    Name: Юридический отдел
+    Name: Департамент Внутренних Дел
     Color: "#DD4040FF"
     IconPath: /Textures/SS220/DepartmentIcons/Law_dep.png
     Forms:
@@ -87,6 +100,7 @@
     - /PhotocopierForms/nanotrasen_station/security/sec_swt.xml
     - /PhotocopierForms/nanotrasen_station/security/sup_ord_wep.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_sitrep.xml
+    - /PhotocopierForms/nanotrasen_station/security/sec_snt.xml
   - Id: medical
     Name: Медицинский отдел
     Color: "#8585FFFF"
@@ -116,7 +130,7 @@
     - /PhotocopierForms/nanotrasen_station/science/rnd_ord.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_rnt.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_rar.xml
-    - /PhotocopierForms/nanotrasen_station/science/rnd_ror.xml
+    - /PhotocopierForms/nanotrasen_station/science/rnd_sitrep.xml
   - Id: cargo
     Name: Отдел снабжения
     Color: "#C2904AFF"
@@ -126,7 +140,7 @@
     - /PhotocopierForms/nanotrasen_station/cargo/sup_ord_dng.xml
     - /PhotocopierForms/nanotrasen_station/cargo/sup_sitrep.xml
   - Id: service
-    Name: Отдел обслуживания
+    Name: Сервисный отдел
     Color: "#81D962FF"
     IconPath: /Textures/SS220/DepartmentIcons/Serv_dep.png
     Forms:
@@ -140,10 +154,19 @@
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_cargo.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_cmd.xml
+    - /PhotocopierForms/nanotrasen_station/blank/blank_regular_iad.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_eng.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_med.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_sci.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_sec.xml
+  - Id: additional
+    Name: Дополнительные для связи с ЦК
+    IconPath: /Textures/SS220/DepartmentIcons/Centcom_dep.png
+    Forms:
+    - /PhotocopierForms/nanotrasen_station/additional/additional_cc_evac_1.xml
+    - /PhotocopierForms/nanotrasen_station/additional/additional_cc_evac_2.xml
+    - /PhotocopierForms/nanotrasen_station/additional/additional_cc_shuttle.xml
+    - /PhotocopierForms/nanotrasen_station/additional/additional_cc_equip.xml
 - Id: syndicate
   Groups:
   - Id: syndicate

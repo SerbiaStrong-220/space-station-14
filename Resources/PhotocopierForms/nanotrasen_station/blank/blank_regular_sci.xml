@@ -3,6 +3,6 @@
   <FormId>blank_sci</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
   <EntityName>бумага</EntityName>
-  <PhotocopierTitle>Свободный бланк исследовательского отдела</PhotocopierTitle>
+  <PhotocopierTitle>Свободный бланк Научного отдела</PhotocopierTitle>
   <Content></Content>
 </Form>

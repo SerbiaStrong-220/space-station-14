@@ -2,8 +2,8 @@
 <Form>
   <FormId>goal_guests</FormId>
   <PrototypeId>PaperNtFormGoal</PrototypeId>
-  <EntityName>форма НТ-СРВ-ОТЧ-МСО</EntityName>
-  <PhotocopierTitle>Отчёт о модификации сервисного отдела</PhotocopierTitle>
+  <EntityName>Форма НТ-СРВ-ОТЧ-МСО</EntityName>
+  <PhotocopierTitle>Отчет о модификации сервисного отдела</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СРВ-ОТЧ-МСО[/bold]
 [head=2]Отчёт о модификации сервисного отдела[/head]
 
@@ -23,7 +23,7 @@
 [bold]Список напитков, приготовленных барменами для приема гостей:[/bold]
 (ПЕРЕЧИСЛИТЕ)
 
-[bold]Стоимость реставрации старого бара:[/bold] (СКОЛЬКО ДЕНЕГ КАРГО ЗАТРАТИЛО НА РЕСТАВРАЦИЮ)
+[bold]Стоимость реставрации старого бара:[/bold] (СКОЛЬКО ДЕНЕГ ЗАТРАЧЕНО НА РЕСТАВРАЦИЮ)
 
 [bold]Оценка реставрированного старого бара от экипажа:[/bold] (ОТ 1 ДО 5)
 

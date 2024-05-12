@@ -3,9 +3,9 @@
   <FormId>sec_sitrep</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
   <EntityName>форма НТ-СБ-ОТЧ-СИТ</EntityName>
-  <PhotocopierTitle>Отчёт о работе службы безопасности</PhotocopierTitle>
+  <PhotocopierTitle>Отчет о работе Службы Безопасности</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ОТЧ-СИТ[/bold]
-[head=2]Отчёт о работе службы безопасности[/head]
+[head=2]Отчет о работе Службы Безопасности[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
 

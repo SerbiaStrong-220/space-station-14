@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>cmd_cc_dng</FormId>
+  <PrototypeId>PaperNtFormCmd</PrototypeId>
+  <EntityName>Форма НТ-КОМ-ЦК-ЗВКУ</EntityName>
+  <PhotocopierTitle>Запрос на повышение уровня кода угрозы</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ЗВКУ[/bold]
+[head=2]Запрос на повышение уровня кода угрозы[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Уполномоченное лицо: (ПОЛНОЕ ИМЯ), (ПОЛНОЕ НАЗВАНИЕ ДОЛЖНОСТИ)
+Требуемый уровень кода угрозы: (Дельта/Гамма)
+Обстоятельства, в связи с которыми запрашивается введение кода угрозы: (Нарушение условий содержания Сингулярности и т.д.)
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

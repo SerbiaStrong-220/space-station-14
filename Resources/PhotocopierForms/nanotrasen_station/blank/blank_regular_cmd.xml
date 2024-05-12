@@ -3,6 +3,6 @@
   <FormId>blank_cmd</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
   <EntityName>бумага</EntityName>
-  <PhotocopierTitle>Свободный бланк командования</PhotocopierTitle>
+  <PhotocopierTitle>Свободный бланк Командования</PhotocopierTitle>
   <Content></Content>
 </Form>

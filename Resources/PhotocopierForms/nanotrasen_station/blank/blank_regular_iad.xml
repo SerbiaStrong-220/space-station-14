@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>blank_iad</FormId>
+  <PrototypeId>PaperNtFormLaw</PrototypeId>
+  <EntityName>бумага</EntityName>
+  <PhotocopierTitle>Свободный бланк Департамента Внутренних Дел</PhotocopierTitle>
+  <Content></Content>
+</Form>

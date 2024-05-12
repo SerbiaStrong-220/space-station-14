@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>cmd_rep_ask</FormId>
+  <PrototypeId>PaperNtFormCmd</PrototypeId>
+  <EntityName>Форма НТ-КОМ-ЗАП</EntityName>
+  <PhotocopierTitle>Обращение</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-КОМ-ЗАП[/bold]
+[head=2]Обращение[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
+
+[bold]Обращающиеся лицо:[/bold] (ПОЛНОЕ ИМЯ), (ДОЛЖНОСТЬ)
+
+Я, (ВАШЕ ПОЛНОЕ ИМЯ), в должности (ПОЛНОЕ НАЗВАНИЕ ДОЛЖСНОСТИ), прошу рассмотреть (ПОЛНОЕ ИМЯ), в должности (ДОЛЖНОСТЬ) мое обращение.
+Содержание обращения:
+
+Причины его написания:
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

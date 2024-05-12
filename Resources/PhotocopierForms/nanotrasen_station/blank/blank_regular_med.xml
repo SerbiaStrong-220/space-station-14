@@ -3,6 +3,6 @@
   <FormId>blank_med</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
   <EntityName>бумага</EntityName>
-  <PhotocopierTitle>Свободный бланк медицинского отдела</PhotocopierTitle>
+  <PhotocopierTitle>Свободный бланк Медицинского отдела</PhotocopierTitle>
   <Content></Content>
 </Form>

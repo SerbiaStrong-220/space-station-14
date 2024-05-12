@@ -2,12 +2,12 @@
 <Form>
   <FormId>cc_cmd_dcr_goal</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>форма НТ-ЦК-КОМ-УКЗ</EntityName>
+  <EntityName>Форма НТ-ЦК-КОМ-УКЗ</EntityName>
   <PhotocopierTitle>Приказ о назначении цели станции</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 [head=3]Приказ Секторального Штаба Центрального Командования[/head]
 
-[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
 
 Уполномоченное лицо: (ПОЛНОЕ ИМЯ), Офицер Центрального Командования
 

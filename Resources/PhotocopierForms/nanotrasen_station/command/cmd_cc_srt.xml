@@ -2,10 +2,10 @@
 <Form>
   <FormId>cmd_cc_srt</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЦК-СИТ</EntityName>
-  <PhotocopierTitle>Отчёт о ситуации на станции</PhotocopierTitle>
+  <EntityName>Форма НТ-КОМ-ЦК-СИТ</EntityName>
+  <PhotocopierTitle>Отчет о ситуации на станции</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-СИТ[/bold]
-[head=2]Отчёт о ситуации на станции[/head]
+[head=2]Отчет о ситуации на станции[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
 

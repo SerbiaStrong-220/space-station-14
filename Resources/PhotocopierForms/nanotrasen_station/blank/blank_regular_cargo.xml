@@ -3,6 +3,6 @@
   <FormId>blank_cargo</FormId>
   <PrototypeId>PaperNtFormCargo</PrototypeId>
   <EntityName>бумага</EntityName>
-  <PhotocopierTitle>Свободный бланк отдела снабжения</PhotocopierTitle>
+  <PhotocopierTitle>Свободный бланк Отдела снабжения</PhotocopierTitle>
   <Content></Content>
 </Form>
