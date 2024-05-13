@@ -150,8 +150,10 @@ namespace Content.Server.Chemistry.EntitySystems
 
             var ev = new TransferDnaEvent { Donor = target.Value, Recipient = uid };
             RaiseLocalEvent(target.Value, ref ev);
-            var afterhypoev = new AfterHypoEvent (hypo, target.Value); /// SS220 Autoinjectors update
-            RaiseLocalEvent(hypo, ref afterhypoev); /// SS220 Autoinjectors update
+            /// SS220 Autoinjectors update begin
+            var afterhypoev = new AfterHypoEvent(hypo, target.Value, user);
+            RaiseLocalEvent(hypo, ref afterhypoev);
+            /// SS220 Autoinjectors update end
 
 
 

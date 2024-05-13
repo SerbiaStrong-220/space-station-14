@@ -226,7 +226,7 @@
     Steel: 600
     Plastic: 300
 
-- type: latheRecipe
+- type: latheRecipe # ss220 autoinjectors update
   id: MedAutoinjector
   result: MedAutoinjector
   completetime: 2

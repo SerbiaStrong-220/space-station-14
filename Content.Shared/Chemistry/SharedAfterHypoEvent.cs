@@ -3,14 +3,15 @@ namespace Content.Shared.Chemistry
     [ByRefEvent]
     public readonly struct AfterHypoEvent
     {
+        public readonly EntityUid Hypo;
+        public readonly EntityUid Target;
         public readonly EntityUid User;
 
-        public readonly EntityUid Target;
-
-        public AfterHypoEvent(EntityUid user, EntityUid target)
+        public AfterHypoEvent(EntityUid hypo, EntityUid target, EntityUid user)
         {
-            User = user;
+            Hypo = hypo;
             Target = target;
+            User = user;
         }
     }
 }
