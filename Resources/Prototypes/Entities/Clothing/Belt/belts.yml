@@ -624,19 +624,27 @@
     sprite: Clothing/Belt/securitywebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/securitywebbing.rsi
-#SS220-TweakSecurityWebbing-Begin
+#SS220-ReWorkWebbing-Begin
   - type: Storage
     grid:
-    - 0,0,0,1
-    - 1,2,1,3
-    - 2,0,2,1
-    - 3,2,3,3
-    - 4,0,4,1
-    - 5,2,5,3
-    - 6,0,6,1
-    - 7,2,7,3
-#SS220-TweakSecurityWebbing-End
-  
+    - 0,1,0,2
+    - 1,1,1,1
+    - 2,2,2,3
+    - 3,0,3,1
+    - 4,2,4,3
+    - 5,0,5,1
+    - 6,2,6,3
+    - 7,1,7,1
+    - 8,1,8,2
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-boots-sidearm
+        whitelist:
+          components:
+            - Stunbaton
+#SS220-ReWorkWebbing-Begin
+
 - type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltMercWebbing

@@ -13,7 +13,7 @@
     ClothingEyesGlassesSunglasses: 2
     ClothingEyesHudSecurity: 2
     ClothingEyesEyepatchHudSecurity: 2
-    ClothingBeltSecurityWebbing: 5
+    ClothingBeltSecurityWebbing: 3 # SS220-ReWorkWebbing
     CombatKnife: 3
     Zipties: 12
     RiotShield: 2
