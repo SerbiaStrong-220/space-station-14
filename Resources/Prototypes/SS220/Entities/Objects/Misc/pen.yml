@@ -7,6 +7,26 @@
   parent: Pen
   id: CentCommNewPen
   components:
+  - type: Tag
+    tags:
+    - Write
+    - WriteIgnoreStamps
+    - Pickaxe
   - type: Sprite
     sprite: SS220/Objects/Tools/pen.rsi
     state: centcommnew_pen
+  - type: MeleeWeapon
+    wideAnimationRotation: -45
+    damage:
+      types:
+        Piercing: 15
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Tool
+    qualities:
+      - Screwing
+    useSound:
+      collection: Screwdriver
+  - type: Item
+    sprite: SS220/Objects/Tools/pen.rsi
+    size: Tiny
