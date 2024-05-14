@@ -42,8 +42,8 @@
       amount: 1
     Hydrogen:
       amount: 1
-  effects:
 # SS220 Dangerous chemistry update begin
+  effects:
   - !type:CreateGas
     gas: Tritium
   - !type:PopupMessage
