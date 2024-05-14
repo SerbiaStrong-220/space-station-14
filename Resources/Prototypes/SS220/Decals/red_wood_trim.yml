@@ -1,0 +1,118 @@
+- type: decal
+  id: RedWoodTrimThinBox
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_box
+
+- type: decal
+  id: RedWoodTrimThinCornerNe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_corner_ne
+
+- type: decal
+  id: RedWoodTrimThinCornerSe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_corner_se
+
+- type: decal
+  id: RedWoodTrimThinCornerNw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_corner_nw
+
+- type: decal
+  id: RedWoodTrimThinCornerSw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_corner_sw
+
+- type: decal
+  id: RedWoodTrimThinInnerNe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_inner_ne
+
+- type: decal
+  id: RedWoodTrimThinInnerSe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_inner_se
+
+- type: decal
+  id: RedWoodTrimThinInnerNw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_inner_nw
+
+- type: decal
+  id: RedWoodTrimThinInnerSw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_inner_sw
+
+- type: decal
+  id: RedWoodTrimThinEndN
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_end_n
+
+- type: decal
+  id: RedWoodTrimThinEndE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_end_e
+
+- type: decal
+  id: RedWoodTrimThinEndS
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_end_s
+
+- type: decal
+  id: RedWoodTrimThinEndW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_end_w
+
+- type: decal
+  id: RedWoodTrimThinLineN
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_line_n
+
+- type: decal
+  id: RedWoodTrimThinLineE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_line_e
+
+- type: decal
+  id: RedWoodTrimThinLineS
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_line_s
+
+- type: decal
+  id: RedWoodTrimThinLineW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/red_wood_trim.rsi
+    state: thin_line_w

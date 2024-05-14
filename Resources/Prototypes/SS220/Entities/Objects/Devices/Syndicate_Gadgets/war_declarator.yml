@@ -7,4 +7,4 @@
   components:
     - type: WarDeclarator
       message: war-declarator-lone-default-message
-      senderTitle: comms-console-announcement-title-solo-nukie
+      senderTitle: comms-console-announcement-title-solo-nukie-war

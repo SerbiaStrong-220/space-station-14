@@ -1,7 +1,7 @@
 - type: gameMap
   id: SS220_syndicate
-  mapName: Nukie Outpost
-  mapPath: /Maps/NukeOps/ss220_Nuke_outpost_noshuttle.yml
+  mapName: Nuke Outpost
+  mapPath: /Maps/SS220/ss220-nukeoutpost.yml
   minPlayers: 0
   stations:
     SyndicateOutpost:

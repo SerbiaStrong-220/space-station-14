@@ -3,7 +3,7 @@
 
 - type: entity
   id: Cigar
-  parent: BaseCigar
+  parent: BaseCigar # SS220 Cigarettes questions
   name: cigar
   description: "A brown roll of tobacco and... well, you're not quite sure."
   components:

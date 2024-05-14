@@ -31,6 +31,7 @@
         - AppraisalTool
         - JawsOfLife
         - GPS
+        - WeldingMask
       components:
         - SprayPainter
         - NetworkConfigurator
@@ -225,6 +226,7 @@
         - JanicartKeys # SS220 Readd-Vehicles
       components:
         - LightReplacer
+        - SmokeOnTrigger
     maxItemSize: Large
   - type: ItemMapper
     mapLayers:
@@ -375,88 +377,88 @@
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
 
-- type: entity
-  parent: ClothingBeltStorageBase
-  id: ClothingBeltChef
-  name: chef belt
-  description: A belt used to hold kitchen knives and condiments for quick access.
-  components:
-  - type: Sprite
-    sprite: Clothing/Belt/chef.rsi
-  - type: Clothing
-    sprite: Clothing/Belt/chef.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
-  - type: ItemMapper
-    mapLayers:
-      kitchenknife:
-        whitelist:
-          tags:
-          - KitchenKnife
-      cleaver:
-        whitelist:
-          tags:
-          - Cleaver
-      rollingpin:
-        whitelist:
-          tags:
-          - RollingPin
-      coldsauce:
-        whitelist:
-          tags:
-          - Coldsauce
-      enzyme:
-        whitelist:
-          tags:
-          - Enzyme
-      hotsauce:
-        whitelist:
-          tags:
-          - Hotsauce
-      ketchup:
-        whitelist:
-          tags:
-          - Ketchup
-      bbqsauce:
-        whitelist:
-          tags:
-          - BBQsauce
-      saltshaker:
-        whitelist:
-          tags:
-          - SaltShaker
-      peppershaker:
-        whitelist:
-          tags:
-          - PepperShaker
-    sprite: Clothing/Belt/belt_overlay.rsi
-  - type: Appearance
+#- type: entity #SS220 Chef Resprite
+#  parent: ClothingBeltStorageBase
+#  id: ClothingBeltChef
+#  name: chef belt
+#  description: A belt used to hold kitchen knives and condiments for quick access.
+#  components:
+#  - type: Sprite
+#    sprite: Clothing/Belt/chef.rsi
+#  - type: Clothing
+#    sprite: Clothing/Belt/chef.rsi
+#  - type: Storage
+#    whitelist:
+#      tags:
+#        - KitchenKnife
+#        - Cleaver
+#        - RollingPin
+#        - Coldsauce
+#        - Enzyme
+#        - Hotsauce
+#        - Ketchup
+#        - BBQsauce
+#        - SaltShaker
+#        - PepperShaker
+#        - CigPack
+#        - Packet
+#        - Skewer
+#        - MonkeyCube
+#        #ss220 chiefs belt start
+#        - WaterBottle
+#        - Vinegar
+#        - OilOlive
+#        - GlassBeaker
+#        #ss220 chiefs belt end
+#        - Mayo
+#      components:
+#        - Mousetrap
+#        - Smokable
+#        - Utensil
+#  - type: ItemMapper
+#    mapLayers:
+#      kitchenknife:
+#        whitelist:
+#          tags:
+#          - KitchenKnife
+#      cleaver:
+#        whitelist:
+#          tags:
+#          - Cleaver
+#      rollingpin:
+#        whitelist:
+#          tags:
+#          - RollingPin
+#      coldsauce:
+#        whitelist:
+#          tags:
+#          - Coldsauce
+#      enzyme:
+#        whitelist:
+#          tags:
+#          - Enzyme
+#      hotsauce:
+#        whitelist:
+#          tags:
+#          - Hotsauce
+#      ketchup:
+#        whitelist:
+#          tags:
+#          - Ketchup
+#      bbqsauce:
+#        whitelist:
+#          tags:
+#          - BBQsauce
+#      saltshaker:
+#        whitelist:
+#          tags:
+#          - SaltShaker
+#      peppershaker:
+#        whitelist:
+#          tags:
+#          - PepperShaker
+#    sprite: Clothing/Belt/belt_overlay.rsi
+#  - type: Appearance
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -478,12 +480,20 @@
         - Sidearm
         - MagazinePistol
         - MagazineMagnum
+        - CombatKnife
+        - Truncheon
       components:
         - Stunbaton
         - FlashOnTrigger
         - SmokeOnTrigger
         - Flash
         - Handcuff
+        - BallisticAmmoProvider
+        - CartridgeAmmo
+        - DoorRemote
+        - Whistle
+        - HolosignProjector
+        - BalloonPopper
   - type: ItemMapper
     mapLayers:
       flashbang:
@@ -520,6 +530,8 @@
         name: Sabre
         insertVerbText: sheath-insert-verb
         ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
         whitelist:
           tags:
           - CaptainSabre
@@ -603,7 +615,7 @@
         - CartridgeAmmo
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltStorageBase #SS220-TweakSecurityWebbing
   id: ClothingBeltSecurityWebbing
   name: security webbing
   description: Unique and versatile chest rig, can hold security gear.
@@ -612,11 +624,23 @@
     sprite: Clothing/Belt/securitywebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/securitywebbing.rsi
-
+#SS220-TweakSecurityWebbing-Begin
+  - type: Storage
+    grid:
+    - 0,0,0,1
+    - 1,2,1,3
+    - 2,0,2,1
+    - 3,2,3,3
+    - 4,0,4,1
+    - 5,2,5,3
+    - 6,0,6,1
+    - 7,2,7,3
+#SS220-TweakSecurityWebbing-End
+  
 - type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltMercWebbing
-  name: mercenarie webbing
+  name: mercenary webbing
   description: Ideal for storing everything from ammo to weapons and combat essentials.
   components:
   - type: Sprite

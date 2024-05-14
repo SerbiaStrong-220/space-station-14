@@ -8,6 +8,7 @@ comms-console-menu-recall-shuttle = Отозвать
 # Popup
 comms-console-permission-denied = В доступе отказано
 comms-console-shuttle-unavailable = В настоящее время шаттл недоступен
+comms-console-message-too-long = Сообщение слишком длинное
 # Placeholder values
 comms-console-announcement-sent-by = Отправитель
 comms-console-announcement-unknown-sender = Неизвестный
@@ -17,3 +18,4 @@ comms-console-announcement-title-centcom = Центральное командо
 comms-console-announcement-title-nukie = Ядерные оперативники Синдиката
 comms-console-announcement-title-ussp = Союз Советских Социалистических Планет
 comms-console-announcement-title-solo-nukie = Одиночного Ядерного оперативника Синдиката
+comms-console-announcement-title-solo-nukie-war = Войны Одиночным Ядерным оперативником Синдиката

@@ -76,6 +76,20 @@
   - PetsNT
   - Revolutionary
 
+# SS220 AI Mapping Update Begin
+
+- type: npcFaction
+  id: BloodCult
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+
+# SS220 AI Mapping Update End
+
 - type: npcFaction
   id: Revolutionary
   hostile:

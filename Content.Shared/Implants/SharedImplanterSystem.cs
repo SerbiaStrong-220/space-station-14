@@ -61,6 +61,9 @@ public abstract class SharedImplanterSystem : EntitySystem
         if (!CanImplant(user, target, implanter, component, out var implant, out var implantComp))
             return;
 
+        //SS220-mindslave
+        implantComp.user = user;
+
         //If the target doesn't have the implanted component, add it.
         var implantedComp = EnsureComp<ImplantedComponent>(target);
         var implantContainer = implantedComp.ImplantContainer;
@@ -79,7 +82,7 @@ public abstract class SharedImplanterSystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = implanter };
         RaiseLocalEvent(target, ref ev);
 
-        Dirty(component);
+        Dirty(implanter, component);
     }
 
     public bool CanImplant(
@@ -158,7 +161,7 @@ public abstract class SharedImplanterSystem : EntitySystem
             if (component.CurrentMode == ImplanterToggleMode.Draw && !component.ImplantOnly && !permanentFound)
                 ImplantMode(implanter, component);
 
-            Dirty(component);
+            Dirty(implanter, component);
         }
     }
 

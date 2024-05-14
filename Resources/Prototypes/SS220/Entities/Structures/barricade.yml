@@ -15,7 +15,6 @@
     noRot: false
   - type: Occluder
   - type: Appearance
-  - type: Physics
   - type: Fixtures
     fixtures:
       fix1:
@@ -33,6 +32,8 @@
   name: barricadedirectional
   abstract: true
   components:
+  - type: Occluder
+    boundingBox: "-0.5,-0.5,0.5,-0.36"
   - type: Fixtures
     fixtures:
       fix1:
@@ -43,7 +44,7 @@
         - FullTileMask
         layer:
         - WallLayer
-        
+
 - type: entity
   id: BaseBarricadeFloor220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
@@ -58,7 +59,6 @@
   - type: Appearance
   - type: AtmosExposed
   - type: Climbable
-  - type: Physics
   - type: Fixtures
     fixtures:
       fix1:
@@ -69,6 +69,7 @@
         - TableMask
         layer:
         - TableLayer
+
 #Баррикады
 - type: entity
   id: BarricadeWooden
@@ -110,7 +111,7 @@
             max: 3
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-        
+
 - type: entity
   id: BarricadeSteel
   description: Баррикада из стальных листов. Защищает вас от чужих глаз. Способна выдержать пулю.
@@ -174,9 +175,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
         
-        
 #Направленные баррикады
-
 - type: entity
   id: BarricadeWoodenDirectional
   description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
@@ -276,9 +275,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
         
-        
 #Напольные баррикады
-
 - type: entity
   id: BarricadeWoodenFloor
   description: Баррикада небольшой высоты из деревянных досок. Есть шанс защитить от шальной пули.

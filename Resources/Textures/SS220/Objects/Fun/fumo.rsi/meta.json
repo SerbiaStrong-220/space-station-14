@@ -1,0 +1,21 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "For SS220 by Meower / Whitly, Resprited by discord DaGo7393",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "fumo-magician"
+      },
+      {
+        "name": "fumo-maid"
+      },
+      {
+        "name": "fumo-maiden"
+      }
+    ]
+  }
+  

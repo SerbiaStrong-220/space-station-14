@@ -1,11 +1,15 @@
+using System.Linq;
 using Content.Server.Popups;
+using Content.Server.SS220.MindSlave;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Implants;
 
@@ -14,6 +18,12 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly MindSlaveSystem _mindslave = default!;
+
+    //SS220-mindslave begin
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string MindSlaveImplantProto = "MindSlaveImplant";
+    //SS220-mindslave end
 
     public override void Initialize()
     {
@@ -34,6 +44,29 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         var target = args.Target.Value;
         if (!CheckTarget(target, component.Whitelist, component.Blacklist))
             return;
+
+        //SS220-mindslave begin
+        if (component.Implant == MindSlaveImplantProto)
+        {
+            if (args.User == target)
+            {
+                _popup.PopupEntity(Loc.GetString("mindslave-enslaving-yourself-attempt"), target, args.User);
+                return;
+            }
+
+            if (_mindslave.IsEnslaved(target))
+            {
+                _popup.PopupEntity(Loc.GetString("mindslave-target-already-enslaved"), target, args.User);
+                return;
+            }
+
+            if (HasComp<MindShieldComponent>(target))
+            {
+                _popup.PopupEntity(Loc.GetString("mindslave-target-mindshielded"), target, args.User);
+                return;
+            }
+        }
+        //SS220-mindslave end
 
         //TODO: Rework when surgery is in for implant cases
         if (component.CurrentMode == ImplanterToggleMode.Draw && !component.ImplantOnly)
@@ -57,6 +90,17 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
                 return;
             }
 
+            // Check if we are trying to implant a implant which is already implanted
+            if (implant.HasValue && !component.AllowMultipleImplants && CheckSameImplant(target, implant.Value))
+            {
+                var name = Identity.Name(target, EntityManager, args.User);
+                var msg = Loc.GetString("implanter-component-implant-already", ("implant", implant), ("target", name));
+                _popup.PopupEntity(msg, target, args.User);
+                args.Handled = true;
+                return;
+            }
+
+
             //Implant self instantly, otherwise try to inject the target.
             if (args.User == target)
                 Implant(target, target, uid, component);
@@ -65,6 +109,15 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         }
 
         args.Handled = true;
+    }
+
+    public bool CheckSameImplant(EntityUid target, EntityUid implant)
+    {
+        if (!TryComp<ImplantedComponent>(target, out var implanted))
+            return false;
+
+        var implantPrototype = Prototype(implant);
+        return implanted.ImplantContainer.ContainedEntities.Any(entity => Prototype(entity) == implantPrototype);
     }
 
     /// <summary>
@@ -78,9 +131,8 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     {
         var args = new DoAfterArgs(EntityManager, user, component.ImplantTime, new ImplantEvent(), implanter, target: target, used: implanter)
         {
-            BreakOnUserMove = true,
-            BreakOnTargetMove = true,
             BreakOnDamage = true,
+            BreakOnMove = true,
             NeedHand = true,
         };
 
@@ -105,9 +157,8 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     {
         var args = new DoAfterArgs(EntityManager, user, component.DrawTime, new DrawEvent(), implanter, target: target, used: implanter)
         {
-            BreakOnUserMove = true,
-            BreakOnTargetMove = true,
             BreakOnDamage = true,
+            BreakOnMove = true,
             NeedHand = true,
         };
 

@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseCigar
+  parent: BaseCigarette # SS220 Cigarettes questions
   id: SponsorCig
   suffix: Шлёпа
   name: чёрная сигарета
@@ -252,8 +252,8 @@
         ents: []
   - type: UserInterface
     interfaces:
-    - key: enum.StorageUiKey.Key
-      type: StorageBoundUserInterface
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Item
     size: Huge
   - type: UseDelay

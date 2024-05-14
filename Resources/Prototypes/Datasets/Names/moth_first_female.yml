@@ -1,46 +1,48 @@
-- type: dataset
-  id: names_moth_first_female
-  values:
-  - Атропос # Acherontia atropos
-  - Бетулярия # Biston betularia
-  - Дафна # Daphnis
-  - Эврипта # Eurypteryx
-  - Эудриас # Eudryas
-  - Ирис # Salassa iris
-  - Лахезис # Acherontia lachesis
-  - Луна # Actias luna
-  - Лиманция # Lymantria
-  - Мэйпл # Dryocampa rubicunda, "Rosy Maple"
-  - Мима # Mimas
-  - Нефела # Nephele
-  - Рози # Dryocampa rubicunda
-  - Скарлет # Cosmosoma myrodora, "Scarlet-bodied wasp moth"
-  - Стикс # Acherontia styx
+# SS220-new-species-naming begin
+# - type: dataset
+#   id: names_moth_first_female
+#   values:
+#   - Атропос # Acherontia atropos
+#   - Бетулярия # Biston betularia
+#   - Дафна # Daphnis
+#   - Эврипта # Eurypteryx
+#   - Эудриас # Eudryas
+#   - Ирис # Salassa iris
+#   - Лахезис # Acherontia lachesis
+#   - Луна # Actias luna
+#   - Лиманция # Lymantria
+#   - Мэйпл # Dryocampa rubicunda, "Rosy Maple"
+#   - Мима # Mimas
+#   - Нефела # Nephele
+#   - Рози # Dryocampa rubicunda
+#   - Скарлет # Cosmosoma myrodora, "Scarlet-bodied wasp moth"
+#   - Стикс # Acherontia styx
 
-  # Other languages
-  - Авелайна # Galician "moth" (avelaíña)
-  - Фалена # Italian "winter moth"
-  - Менодора # Greek "moon gift"
-  - Молли # Romanian "moth"
-  - Полилла # Spanish "moth"
+#   # Other languages
+#   - Авелайна # Galician "moth" (avelaíña)
+#   - Фалена # Italian "winter moth"
+#   - Менодора # Greek "moon gift"
+#   - Молли # Romanian "moth"
+#   - Полилла # Spanish "moth"
 
-  # Myth and legend
-  - Алтея # Greek mythological figure
-  - Аврора # Roman goddess of the dawn
-  - Хелле # Greek mythological figure
-  - Селена # Greek goddess of the moon
-  - Никс # Greek goddess of the night
+#   # Myth and legend
+#   - Алтея # Greek mythological figure
+#   - Аврора # Roman goddess of the dawn
+#   - Хелле # Greek mythological figure
+#   - Селена # Greek goddess of the moon
+#   - Никс # Greek goddess of the night
 
-  # Fun names
-  - Сэнди
+#   # Fun names
+#   - Сэнди
 
-  # Common names, filler
-  - Беатрис
-  - Дэйзи
-  - Элизабет
-  - Люси
-  - Руби
-  - Сара
-  - Сиенна
-  - Уиллоу
-  - Зои
+#   # Common names, filler
+#   - Беатрис
+#   - Дэйзи
+#   - Элизабет
+#   - Люси
+#   - Руби
+#   - Сара
+#   - Сиенна
+#   - Уиллоу
+#   - Зои
+# SS220-new-species-naming end

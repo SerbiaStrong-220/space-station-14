@@ -21,7 +21,7 @@ public partial class VoiceMaskSystem
     {
         component.VoiceId = message.Voice;
 
-        _popupSystem.PopupCursor(Loc.GetString("voice-mask-voice-popup-success"), message.Session);
+        _popupSystem.PopupCursor(Loc.GetString("voice-mask-voice-popup-success"), message.Actor);
 
         TrySetLastKnownVoice(uid, message.Voice);
 

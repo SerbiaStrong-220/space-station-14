@@ -1,8 +1,9 @@
 #SS220 Bubbles for slimes
 - type: emote
   id: Bubbles
+  name: chat-emote-name-bubbles
   category: Vocal
-  chatMessages: [бурлит]
+  chatMessages: [chat-emote-msg-bubbles]
   chatTriggers:
     - bubbles
     - bubbles.

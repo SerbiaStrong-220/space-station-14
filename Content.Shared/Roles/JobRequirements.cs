@@ -145,7 +145,7 @@ namespace Content.Shared.Roles
         /// </summary>
         public static bool TryRequirementMet(
             JobRequirement requirement,
-            Dictionary<string, TimeSpan> playTimes,
+            IReadOnlyDictionary<string, TimeSpan> playTimes,
             [NotNullWhen(false)] out FormattedMessage? reason,
             IEntityManager entManager,
             IPrototypeManager prototypes)

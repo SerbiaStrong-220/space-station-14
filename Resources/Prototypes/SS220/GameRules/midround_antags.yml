@@ -17,4 +17,12 @@
   id: DarkReaperSpawnMajor
   noSpawn: true
   components:
+  - type: GameRule
+    minPlayers: 30
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - prefRoles: [ DarkReaper ]
+      max: 1
+      playerRatio: 10
   - type: DarkReaperMajorRule

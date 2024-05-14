@@ -37,3 +37,6 @@
 # ss220 detective-camera
 - type: Tag
   id: DetectiveCamera
+
+- type: Tag
+  id: MindSlave

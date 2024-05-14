@@ -1,0 +1,17 @@
+﻿- type: decal
+  id: blood1
+  sprite:
+    sprite: SS220/Decals/blood.rsi
+    state: "blood1"
+
+- type: decal
+  id: blood2
+  sprite:
+    sprite: SS220/Decals/blood.rsi
+    state: "blood2"
+
+- type: decal
+  id: blood3
+  sprite:
+    sprite: SS220/Decals/blood.rsi
+    state: "blood3"

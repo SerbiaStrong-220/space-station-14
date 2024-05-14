@@ -1,0 +1,118 @@
+- type: decal
+  id: BlackWoodTrimThinBox
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_box
+
+- type: decal
+  id: BlackWoodTrimThinCornerNe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_corner_ne
+
+- type: decal
+  id: BlackWoodTrimThinCornerSe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_corner_se
+
+- type: decal
+  id: BlackWoodTrimThinCornerNw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_corner_nw
+
+- type: decal
+  id: BlackWoodTrimThinCornerSw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_corner_sw
+
+- type: decal
+  id: BlackWoodTrimThinInnerNe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_inner_ne
+
+- type: decal
+  id: BlackWoodTrimThinInnerSe
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_inner_se
+
+- type: decal
+  id: BlackWoodTrimThinInnerNw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_inner_nw
+
+- type: decal
+  id: BlackWoodTrimThinInnerSw
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_inner_sw
+
+- type: decal
+  id: BlackWoodTrimThinEndN
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_end_n
+
+- type: decal
+  id: BlackWoodTrimThinEndE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_end_e
+
+- type: decal
+  id: BlackWoodTrimThinEndS
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_end_s
+
+- type: decal
+  id: BlackWoodTrimThinEndW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_end_w
+
+- type: decal
+  id: BlackWoodTrimThinLineN
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_line_n
+
+- type: decal
+  id: BlackWoodTrimThinLineE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_line_e
+
+- type: decal
+  id: BlackWoodTrimThinLineS
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_line_s
+
+- type: decal
+  id: BlackWoodTrimThinLineW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/black_wood_trim.rsi
+    state: thin_line_w

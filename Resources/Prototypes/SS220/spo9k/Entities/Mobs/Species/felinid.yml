@@ -82,9 +82,10 @@
     soundHit:
       collection: Punch
     animation: WeaponArcClaw
+    attackRate: 1.2 #SS220-TweakDamageSpecies
     damage:
       types:
-        Blunt: 0.9
+#        Blunt: 0.9 SS220-TweakDamageSpecies
         Slash: 5
   - type: Blindable
   - type: Speech

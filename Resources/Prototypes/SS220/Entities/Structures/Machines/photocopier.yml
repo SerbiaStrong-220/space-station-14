@@ -29,7 +29,6 @@
   - type: Climbable
   - type: ApcPowerReceiver
     powerLoad: 200
-    priority: Low
   - type: ShapeCollisionTracker
     enabled: true
     shape:
@@ -45,6 +44,7 @@
       ejectSound: /Audio/SS220/Effects/paper_pick_up.ogg
       whitelist:
         components:
+          - FaxableObject
           - Paper
           - ButtScan
     tonerSlot:
@@ -59,9 +59,9 @@
   - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
-      - key: enum.PhotocopierUiKey.Key
+      enum.PhotocopierUiKey.Key:
         type: PhotocopierBoundUi
-      - key: enum.WiresUiKey.Key
+      enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: ItemSlots
   - type: ContainerContainer

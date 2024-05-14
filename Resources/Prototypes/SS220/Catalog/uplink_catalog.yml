@@ -10,6 +10,29 @@
     Telecrystal: 10
   categories:
   - UplinkWeaponry
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        components:
+        - NukeOpsUplink
+
+# Implants
+
+- type: listing
+  id: UplinkMindSlaveImplanter
+  name: uplink-mindslave-implanter-name
+  description: uplink-mindslave-implanter-desc
+  icon: { sprite: /Textures/SS220/Alerts/MindSlave.rsi, state: icon }
+  productEntity: MindSlaveImplanter
+  cost:
+    Telecrystal: 8
+  categories:
+    - UplinkImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
 
  # Pointless
 

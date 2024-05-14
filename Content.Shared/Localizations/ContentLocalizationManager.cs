@@ -94,7 +94,7 @@ namespace Content.Shared.Localizations
             var maxDecimals = (int)Math.Floor(((LocValueNumber) args.Args[1]).Value);
             var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(Culture)).Clone();
             formatter.NumberDecimalDigits = maxDecimals;
-            return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd('.') + "%");
+            return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd(char.Parse(formatter.NumberDecimalSeparator)) + "%");
         }
 
         private ILocValue FormatNaturalFixed(LocArgs args)
@@ -103,7 +103,7 @@ namespace Content.Shared.Localizations
             var maxDecimals = (int)Math.Floor(((LocValueNumber) args.Args[1]).Value);
             var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(Culture)).Clone();
             formatter.NumberDecimalDigits = maxDecimals;
-            return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd('.'));
+            return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd(char.Parse(formatter.NumberDecimalSeparator)));
         }
 
         private static readonly Regex PluralEsRule = new("^.*(s|sh|ch|x|z)$");
@@ -167,6 +167,14 @@ namespace Content.Shared.Localizations
                 2 => $"{list[0]} и {list[1]}", //SS220 Localize
                 _ => $"{string.Join(", ", list.GetRange(0, list.Count - 1))}, и {list[^1]}" //SS220 Localize
             };
+        }
+
+        /// <summary>
+        /// Formats a direction struct as a human-readable string.
+        /// </summary>
+        public static string FormatDirection(Direction dir)
+        {
+            return Loc.GetString($"zzzz-fmt-direction-{dir.ToString()}");
         }
 
         private static ILocValue FormatLoc(LocArgs args)

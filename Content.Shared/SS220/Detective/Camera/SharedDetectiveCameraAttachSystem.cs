@@ -8,21 +8,20 @@ public abstract class SharedDetectiveCameraAttachSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
-    protected bool TryAttachCamera(EntityUid target, DetectiveCameraAttachComponent component, EntityUid user)
+    protected bool TryAttachCamera(EntityUid target, Entity<DetectiveCameraAttachComponent> cameraEntity, EntityUid user)
     {
-        if (component.Attached)
+        if (cameraEntity.Comp.Attached)
             return false;
 
         var doAfterEventArgs = new DoAfterArgs(
             EntityManager,
             user,
-            component.AttachTime,
+            cameraEntity.Comp.AttachTime,
             new DetectiveCameraAttachDoAfterEvent(target),
-            component.Owner,
-            target: component.Owner)
+            cameraEntity,
+            target: cameraEntity)
         {
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             BreakOnDamage = true,
             NeedHand = true,
             Hidden = true
@@ -32,21 +31,20 @@ public abstract class SharedDetectiveCameraAttachSystem : EntitySystem
         return true;
     }
 
-    protected bool TryDetachCamera(EntityUid target, DetectiveCameraAttachComponent component, EntityUid user)
+    protected bool TryDetachCamera(EntityUid target, Entity<DetectiveCameraAttachComponent> cameraEntity, EntityUid user)
     {
-        if (!component.Attached)
+        if (!cameraEntity.Comp.Attached)
             return false;
 
         var doAfterEventArgs = new DoAfterArgs(
             EntityManager,
             user,
-            component.DetachTime,
+            cameraEntity.Comp.DetachTime,
             new DetectiveCameraDetachDoAfterEvent(target),
-            component.Owner,
-            target: component.Owner)
+            cameraEntity,
+            target: cameraEntity)
         {
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             BreakOnDamage = true,
             NeedHand = true,
             Hidden = true

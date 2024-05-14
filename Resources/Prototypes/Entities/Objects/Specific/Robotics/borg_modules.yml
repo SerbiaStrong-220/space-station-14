@@ -177,7 +177,7 @@
     - Screwdriver
     - Wirecutter
     - Multitool
-    - Welder
+    - WelderIndustrial
 
 # cargo modules
 - type: entity
@@ -222,7 +222,6 @@
   - type: ItemBorgModule
     items:
     - WeaponGrapplingGun
-    - WeaponCrusherDagger
     - HandheldGPSBasic
 
 # engineering modules
@@ -316,9 +315,11 @@
   - type: ItemBorgModule
     items:
     - AdvMopItem
+    - TrashBagAdvanced # VladIsLove for SS220
     - HoloprojectorBorg
     - SprayBottleSpaceCleaner
     - Dropper
+    - TrashBag
 
 # medical modules
 - type: entity
@@ -517,13 +518,13 @@
   components:
     - type: Sprite
       layers:
-        - state: syndicate
-        - state: icon-tools
+      - state: syndicate
+      - state: icon-syndicate
     - type: ItemBorgModule
       items:
-        - Crowbar
-        - Emag
-        - PinpointerSyndicateNuclear
+      - Crowbar
+      - Emag
+      - PinpointerSyndicateNuclear
 
 - type: entity
   id: BorgModuleEsword
@@ -533,12 +534,12 @@
   components:
     - type: Sprite
       layers:
-        - state: syndicate
-        - state: icon-tools
+      - state: syndicate
+      - state: icon-syndicate
     - type: ItemBorgModule
       items:
-        - EnergySwordDoubleBorg #ss220-borgfix
-        - PinpointerSyndicateNuclear
+      - EnergySwordDoubleBorg #ss220-borgfix
+      - PinpointerSyndicateNuclear
 
 - type: entity
   id: BorgModuleL6C
@@ -548,9 +549,23 @@
   components:
     - type: Sprite
       layers:
-        - state: syndicate
-        - state: icon-tools
+      - state: syndicate
+      - state: icon-syndicate
     - type: ItemBorgModule
       items:
         - WeaponLightMachineGunL6C
         - PinpointerSyndicateNuclear
+
+- type: entity
+  id: BorgModuleMartyr
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: martyr cyborg module
+  description: "A module that comes with an explosive you probably don't want to handle yourself."
+  components:
+    - type: Sprite
+      layers:
+        - state: syndicateborgbomb
+        - state: icon-bomb
+    - type: ItemBorgModule
+      items:
+        - SelfDestructSeq

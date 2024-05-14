@@ -2,13 +2,28 @@
   id: ChefDrobeInventory
   startingInventory:
     ClothingHeadsetService: 2
-    ClothingOuterApronChef: 3
+    ClothingOuterApronChef: 1 #SS220 Chef Resprite Balance
     ClothingOuterWinterChef: 2
     ClothingOuterJacketChef: 1
     ClothingUniformJumpsuitChef: 1
     ClothingMaskItalianMoustache: 2
-    ClothingUniformJumpskirtChef:  2
-    ClothingHeadHatChef: 2
+    ClothingUniformJumpskirtChef:  1 #SS220 Chef Resprite Balance
+    ClothingHeadHatChef: 1 #SS220 Chef Resprite Balance
     ClothingShoesColorBlack: 2
     ClothingShoesChef: 2
-    ClothingBeltChef: 2
+    ClothingBeltChefApronWhite: 1 #SS220 Chef Resprite start
+    ClothingBeltChefApronGreen: 1
+    ClothingBeltChefApronBlack: 1
+    ClothingBeltChefApronRed: 1
+    ClothingHeadHatChefWhite: 1
+    ClothingHeadHatChefGreen: 1
+    ClothingHeadHatChefBlack: 1
+    ClothingUniformJumpsuitChefWhite: 1
+    ClothingUniformJumpsuitChefGreen: 1
+    ClothingUniformJumpsuitChefBlack: 1
+    ClothingUniformJumpskirtChefWhite: 1
+    ClothingUniformJumpskirtChefGreen: 1
+    ClothingUniformJumpskirtChefBlack: 1
+    ClothingOuterJacketChefWhite: 1
+    ClothingOuterJacketChefGreen: 1
+    ClothingOuterJacketChefBlack: 1 #SS220 Chef Resprite end

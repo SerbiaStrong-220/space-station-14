@@ -2,6 +2,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Server.SS220.MindSlave;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
@@ -21,9 +22,16 @@ public sealed class MindShieldSystem : EntitySystem
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly MindSlaveSystem _mindSlave = default!;
+    [Dependency] private readonly SharedSubdermalImplantSystem _sharedSubdermalImplant = default!;
 
     [ValidatePrototypeId<TagPrototype>]
     public const string MindShieldTag = "MindShield";
+
+    //SS220-mindslave begin
+    [ValidatePrototypeId<TagPrototype>]
+    public const string MindSlaveTag = "MindSlave";
+    //SS220-mindslave end
 
     public override void Initialize()
     {
@@ -41,6 +49,14 @@ public sealed class MindShieldSystem : EntitySystem
             EnsureComp<MindShieldComponent>(ev.Implanted.Value);
             MindShieldRemovalCheck(ev.Implanted.Value, ev.Implant);
         }
+
+        //SS220-mindslave begin
+        if (_tag.HasTag(ev.Implant, MindSlaveTag) && ev.Implanted != null && comp.user != null)
+        {
+            if (!_mindSlave.TryMakeSlave(ev.Implanted.Value, comp.user.Value))
+                _sharedSubdermalImplant.ForceRemove(ev.Implanted.Value, ev.Implant);
+        }
+        //SS220-mindslave end
     }
 
     /// <summary>

@@ -51,6 +51,7 @@
       amount: 3
     - id: ClothingNeckPolarIIIMedal
       amount: 4
+    - id: EnergySwordEbentDouble
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -145,7 +146,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsLeader
-  name: Спавнер Офицера Специальных Операций
+  name: 1Спавнер Офицера Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -198,7 +199,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsEngineer
-  name: Спавнер Старшего Инженера Специальных Операций
+  name: 2Спавнер Старшего Инженера Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -251,7 +252,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCorpsman
-  name: Спавнер Парамедика Специальных Операций
+  name: 5Спавнер Парамедика Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -298,7 +299,7 @@
     mask: ClothingMaskGasERT
     eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesNitrile
-    outerClothing: ClothingOuterHardsuitERTcmo
+    outerClothing: ClothingOuterHardsuitERTCMO
     suitstorage: OxygenTankFilled
     id: SpecOpsPDACMO
     ears: ClothingHeadsetAltCentCom
@@ -308,7 +309,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsCMO
-  name: Спавнер Главного Врача Специальных Операций
+  name: 3Спавнер Главного Врача Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
@@ -361,7 +362,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerEbentSpecOpsTrooper
-  name: Спавнер Рядового Специальных Операций
+  name: 4Спавнер Рядового Специальных Операций
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite

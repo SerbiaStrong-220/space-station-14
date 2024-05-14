@@ -1,4 +1,5 @@
 using Content.Shared.Roles;
+using Content.Shared.SS220.MindSlave;
 
 namespace Content.Server.Roles;
 
@@ -15,10 +16,11 @@ public sealed class RoleSystem : SharedRoleSystem
         SubscribeAntagEvents<NukeopsRoleComponent>();
         SubscribeAntagEvents<RevolutionaryRoleComponent>();
         SubscribeAntagEvents<SubvertedSiliconRoleComponent>();
-        SubscribeAntagEvents<TerminatorRoleComponent>();
         SubscribeAntagEvents<TraitorRoleComponent>();
         SubscribeAntagEvents<ZombieRoleComponent>();
         SubscribeAntagEvents<ThiefRoleComponent>();
+        //SS220-mindslave
+        SubscribeAntagEvents<MindSlaveRoleComponent>();
     }
 
     public string? MindGetBriefing(EntityUid? mindId)

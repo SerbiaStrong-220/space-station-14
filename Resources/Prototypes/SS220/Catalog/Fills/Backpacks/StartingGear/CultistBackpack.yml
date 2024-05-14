@@ -1,0 +1,8 @@
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackFilled
+  id: ClothingCultistBackpackFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity

@@ -1,15 +1,17 @@
+# Corvax-HiddenDesc-Start
 ent-ReinforcementRadioSyndicate = старое радио
-    .suffix = радио подкрепления синдиката
-    .desc = Винтажное радио, которое по никому не ясной причине застыло на крайне необычной частоте, со словом «Агент» на лицевой стороне.
+    .suffix = радио подкрепления Cиндиката
+    .desc = Винтажное радио с незнакомыми частотами.
 ent-ReinforcementRadioSyndicateNukeops = { ent-ReinforcementRadioSyndicate }
-    .suffix =  ЯО, радио подкрепления синдиката, Ядерные оперативники
+    .suffix = Радио подкрепления ЯО, Ядерный Оперативник
     .desc = { ent-ReinforcementRadioSyndicate.desc }
-ent-ReinforcementRadioSyndicateMonkey = { ent-ReinforcementRadioSyndicate }
-    .suffix = радио обезьяньего подкрепления синдиката
-    .desc = Винтажное радио, которое по никому не ясной причине застыло на крайне необычной частоте, со словом «Monkey» на лицевой стороне.
-ent-ReinforcementRadioSyndicateMonkeyNukeops = { ent-ReinforcementRadioSyndicateMonkey }
+ent-ReinforcementRadioSyndicateAncestor = телепорт подкрепления генетическим предком Синдиката
+    .desc = Призывает на помощь специально обученного предка по вашему выбору.
+ent-ReinforcementRadioSyndicateAncestorNukeops = { ent-ReinforcementRadioSyndicateAncestor }
     .suffix = Ядерные оперативники
-    .desc = { ent-ReinforcementRadioSyndicateMonkey.desc }
-ent-ReinforcementRadioSyndicateCyborgAssault = syndicate assault cyborg reinforcement radio
+    .desc = { ent-ReinforcementRadioSyndicateAncestor.desc }
+ent-ReinforcementRadioSyndicateCyborgAssault = { ent-ReinforcementRadioSyndicate }
+    .suffix = радио подкрепления штурмового киборга Синдиката
     .desc = Призовите хорошо вооружённого штурмового киборга, немедленно!
     .suffix = Ядерные оперативники
+# Corvax-HiddenDesc-End
