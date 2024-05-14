@@ -17,22 +17,22 @@ namespace Content.Server.SS220.Autoinjector
             SubscribeLocalEvent<AutoinjectorComponent, ExaminedEvent>(OnExamined);
         }
 
-        private void OnExamined(EntityUid uid, AutoinjectorComponent component, ExaminedEvent ev)
+        private void OnExamined(Entity<AutoinjectorComponent> entity, ref ExaminedEvent ev)
         {
-            if (component.Used)
-                ev.PushMarkup(Loc.GetString(component.OnExaminedMessage));
+            if (entity.Comp.Used)
+                ev.PushMarkup(Loc.GetString(entity.Comp.OnExaminedMessage));
         }
 
-        private void OnAfterHypo(EntityUid uid, AutoinjectorComponent component, AfterHypoEvent ev)
+        private void OnAfterHypo(Entity<AutoinjectorComponent> entity, ref AfterHypoEvent ev)
         {
-            if (!TryComp<HyposprayComponent>(uid, out var hypoComp)
-            || !_solutionContainerSystem.TryGetSolution(uid, hypoComp.SolutionName, out _, out _))
+            if (!TryComp<HyposprayComponent>(entity, out var hypoComp)
+            || !_solutionContainerSystem.TryGetSolution(entity.Owner, hypoComp.SolutionName, out _, out _))
                 return;
 
-            RemComp<RefillableSolutionComponent>(uid);
-            component.Used = true;
+            RemComp<RefillableSolutionComponent>(entity);
+            entity.Comp.Used = true;
 
-            var message = Loc.GetString(component.OnUseMessage);
+            var message = Loc.GetString(entity.Comp.OnUseMessage);
             _popup.PopupEntity(message, ev.Target, ev.User);
         }
     }

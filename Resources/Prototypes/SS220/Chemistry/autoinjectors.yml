@@ -40,7 +40,7 @@
     solution: pen
   - type: Hypospray
     solutionName: pen
-    onlyAffectsMobs: true
+    onlyAffectsMobs: false
     injectOnly: true
     transferAmount: 10
   - type: Autoinjector
