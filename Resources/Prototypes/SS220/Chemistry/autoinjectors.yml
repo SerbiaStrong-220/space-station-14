@@ -19,13 +19,15 @@
     solution: pen
   - type: Hypospray
     solutionName: pen
+    onlyAffectsMobs: false
+    injectOnly: true
     transferAmount: 15
   - type: RefillableSolution
     solution: pen
   - type: Autoinjector
 
 - type: entity
-  name: Медицинский Автоинжектор
+  name: Медицинский автоинжектор
   parent: BaseAutoinjectorss220
   description: Одноразовый медицинский автоинжектор, предназначеный для быстрой доставки веществ в организм. Внимание! После первого использование повторно пополнить инжектор будет невозможно. Использовать с умом.
   id: MedAutoinjector
@@ -38,5 +40,7 @@
     solution: pen
   - type: Hypospray
     solutionName: pen
+    onlyAffectsMobs: true
+    injectOnly: true
     transferAmount: 10
   - type: Autoinjector
