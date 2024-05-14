@@ -276,7 +276,7 @@
     solution: melee
   - type: SolutionInjectOnEmbed
     transferAmount: 2
-      solution: melee
+    solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 2
   - type: UseDelay
