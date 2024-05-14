@@ -94,7 +94,7 @@
     - !type:EmpReactionEffect
       rangePerUnit: 0.2
       maxRange: 2
-      energyConsumption: 2000
+      energyConsumption: 5000
       duration: 10
     - !type:PopupMessage
      visualType: LargeCaution
