@@ -36,7 +36,7 @@
 
 - type: reaction
   id: Arithrazine
-  minTemp: 300 # SS220 Dangerous chemistry update
+  minTemp: 380 # SS220 Dangerous chemistry update
   reactants:
     Hyronalin:
       amount: 1
@@ -125,7 +125,7 @@
 
 - type: reaction
   id: DexalinPlus
-  minTemp: 300 # Dangerous chemistry update
+  minTemp: 380 # Dangerous chemistry update
   reactants:
     Dexalin:
       amount: 1
