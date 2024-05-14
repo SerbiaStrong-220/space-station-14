@@ -23,5 +23,22 @@
       amount: 1
     Oil:
       amount: 1
+# SS220 Dangerous chemistry update begin
+  effects:
+  - !type:CreateGas
+    gas: NitrousOxide
+  - !type:CreateGas
+    gas: NitrousOxide
+  - !type:CreateGas
+    gas: NitrousOxide
+  - !type:CreateGas
+    gas: NitrousOxide
+  - !type:CreateGas
+    gas: NitrousOxide
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "haloperidol-nitrousoxide-created" ]
+    type: Pvs
+# SS220 Dangerous chemistry update end
   products:
     Haloperidol: 5
