@@ -269,16 +269,16 @@
       melee:
         maxVol: 2
   - type: MeleeChemicalInjector
-    solution: melee
+     solution: melee
   - type: RefillableSolution
-    solution: melee
+     solution: melee
   - type: InjectableSolution
-    solution: melee
+     solution: melee
   - type: SolutionInjectOnEmbed
-    transferAmount: 2
-    solution: melee
+     transferAmount: 2
+      solution: melee
   - type: SolutionTransfer
-    maxTransferAmount: 2
+     maxTransferAmount: 2
   - type: UseDelay
   - type: Appearance
   - type: SolutionContainerVisuals
