@@ -19,3 +19,21 @@
     Poison: 0.6
     Cellular: 1
     Radiation: 0.5
+
+# IPC
+- type: damageModifierSet
+  id: Robotic
+  coefficients:
+    Blunt: 1.0
+    Slash: 0.4
+    Piercing: 1.5
+    Cold: 0.0
+    Heat: 2.5
+    Shock: 3.0
+    Poison: 0.0
+    Radiation: 0.0
+    Asphyxiation: 0.0
+    Bloodloss: 0.0
+    Cellular: 0.0
+  flatReductions:
+    Blunt: 5
