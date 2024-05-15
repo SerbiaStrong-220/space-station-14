@@ -13,3 +13,44 @@
     - бурлит
     - бурлит.
     - бурлит!
+
+# IPC emotes
+- type: emote
+  id: IPCWhirr
+  name: chat-emote-name-IPCWhirr
+  category: Vocal
+  chatMessages: [chat-emote-msg-IPCWhirr]
+  chatTriggers:
+    - шум
+    - шум.
+    - шум!
+    - жжж
+    - шумит
+    
+- type: emote
+  id: IPCBoop
+  name: chat-emote-name-IPCBoop
+  category: Vocal
+  chatMessages: [chat-emote-msg-IPCBoop]
+  chatTriggers:
+    - бууп
+    - биип!
+    - биип.
+    - бУУУУП!!
+    - бип-буп-бип
+    - биип
+
+- type: emote
+  id: IPCPing
+  name: chat-emote-name-IPCPing
+  category: Vocal
+  chatMessages: [chat-emote-msg-IPCPing]
+  chatTriggers:
+    - пик
+    - пингует
+    - пик.
+    - пи.
+    - ПИ!
+    - пик-пик
+    - пи
+    - пикает
