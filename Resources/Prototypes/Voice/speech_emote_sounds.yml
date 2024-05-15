@@ -588,3 +588,29 @@
     path: /Audio/Animals/parrot_raught.ogg
     params:
       variation: 0.125
+
+#SS220 # IPC emoting-start
+- type: emoteSounds
+  id: UnisexIPC
+  sounds:
+    Scream:
+      path: /Audio/Effects/beep1.ogg
+      params:
+        variation: 0.125
+    Laugh:
+      path: /Audio/Effects/sparks1.ogg
+      params:
+        variation: 0.125
+    IPCPing:
+      path: /Audio/Effects/beep1.ogg
+      params:
+        variation: 0.125
+    IPCBoop:
+      collection: IPCBoops
+    IPCWhirr:
+      collection: IPCWhirrs
+    Honk:
+      collection: BikeHorn
+      params:
+        variation: 0.125
+#SS220 IPC-end
