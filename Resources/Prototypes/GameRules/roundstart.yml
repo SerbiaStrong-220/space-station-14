@@ -188,6 +188,14 @@
         prototype: HeadRev
 
 - type: entity
+  id: Survival
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: GameRule
+    minPlayers: 20
+
+- type: entity
   id: Secret
   parent: BaseGameRule
   noSpawn: true
