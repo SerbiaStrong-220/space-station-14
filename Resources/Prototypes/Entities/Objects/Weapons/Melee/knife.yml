@@ -263,7 +263,7 @@
   components:
 # SS220 BetterKnifes Update begin
   - type: ThrowingAngle
-    angle: 225
+    angle: 0
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -289,9 +289,9 @@
     - Knife
   - type: Sprite
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
-    - state: icon
+    state: icon
   - type: MeleeWeapon
-    wideAnimationRotation: -135
+    wideAnimationRotation: 0 # SS220 BetterKnifes Update
     attackRate: 2
     damage:
       types:
