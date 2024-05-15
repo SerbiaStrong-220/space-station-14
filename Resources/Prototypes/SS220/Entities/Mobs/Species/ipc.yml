@@ -1,0 +1,142 @@
+- type: entity
+  save: false
+  name: Урист МсКПБ
+  parent: # технически нам требуется несколько веток из-за повторной реализации BaseMobSpeciesOrganic, но без органики
+  - MobBloodstream
+  - MobRespirator
+  - MobAtmosStandard
+  - MobFlammable
+  - BaseMobSpecies
+  id: BaseMobIPC
+  abstract: true
+  components:
+    # beginregion Organic
+    - type: Flashable
+    - type: PassiveDamage # Небольшая пассивная регенерация. Если предположить один тип урона, получается примерно 4 урона в минуту.
+      allowedStates:
+      - Alive
+      damageCap: 20
+      damage:
+        types:
+          Heat: -0.07
+        groups:
+          Brute: -0.07
+    - type: StatusEffects
+      allowed:
+      - Stun
+      - KnockedDown
+      - SlowedDown
+      - Stutter
+      - SeeingRainbows
+      - Electrocution
+      - ForcedSleep
+      - TemporaryBlindness
+      - Drunk
+      - SlurredSpeech
+      - RatvarianLanguage
+      - PressureImmunity
+      - Muted
+      - Pacified
+      - StaminaModifier
+    - type: ThermalRegulator
+      metabolismHeat: 0
+      radiatedHeat: 100
+      implicitHeatRegulation: 500
+      sweatHeatRegulation: 2000
+      shiveringHeatRegulation: 2000
+      normalBodyTemperature: 313.15
+      thermalRegulationTemperatureThreshold: 25
+    - type: FireVisuals
+      alternateState: Standing
+    - type: DamageVisuals
+      damageOverlayGroups:
+        Brute:
+          sprite: Mobs/Effects/brute_damage.rsi
+          color: "#a76b1c"
+    # endregion Organic
+    # The important nessessities
+    - type: MovementSpeedModifier
+    - type: Body
+      prototype: IPC
+      requiredLegs: 2
+    - type: HumanoidAppearance
+      species: IPC
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: Metallic
+    - type: Icon
+      sprite: SS220/Mobs/Species/IPCs/parts.rsi
+      state: full
+    # Damage and speed
+    - type: Bloodstream
+      bloodReagent: Oil
+      bloodlossDamage:
+        types:
+          Heat: 0.25
+    - type: Temperature
+      heatDamageThreshold: 452.875 # температура плавления железа 1/4, потому что, черт возьми, физика, знаешь ли.
+      coldDamageThreshold: 283.15 # 10c, также известный как «холод», вызывает конденсацию/замерзание и, как следствие, короткое замыкание
+      currentTemperature: 313.15
+      specificHeat: 46
+      coldDamage:
+        types:
+          Cold: 1
+          Heat: -2
+      heatDamage:
+        types:
+          Heat: 2
+          Cold: -1
+    - type: Respirator
+      damage:
+        types:
+          Heat: 0.25 # нет воздуха для охлаждения
+          Asphyxiation: -1 # TODO FIX DEATHGASPS
+      damageRecovery:
+        types:
+          Heat: -0.25
+          Asphyxiation: -1
+    - type: Repairable
+      fuelcost: 7 # потому что большая часть топлива расходуется, как долго он включен
+      doAfterDelay: 14
+      damage:
+        types:
+          Blunt: -25 # вы не можете лечить групповой урон. это не работает. почему.
+          Slash: -25
+          Piercing: -25
+          Cold: -60 # ты их согреваешь...
+          Heat: 5 # еще 2 минуты простоя из-за незначительного перегрева
+          Asphyxiation: -200 # TODO FIX DEATHGASPS
+    - type: Barotrauma
+      damage:
+        types:
+          Heat: 0.25 # IPC не могут хорошо излучать, они полагаются на воздушное охлаждение
+    - type: SlowOnDamage
+      speedModifierThresholds:
+        70: 0.6
+        90: 0.4
+    # Misc
+    - type: Speech
+      speechSounds: IPC
+    - type: Vocal
+      sounds:
+        Male: UnisexIPC
+        Female: UnisexIPC
+        Unsexed: UnisexIPC
+      wilhelm:
+        path: /Audio/SS220/Voice/IPC/wilhelm.ogg
+      wilhelmProbability: 0.001
+    - type: Inventory
+      templateId: ipc
+    - type: ZombieImmune
+
+- type: entity
+  name: Urist McIPC
+  parent: MobHumanDummy
+  id: MobIPCDummy
+  noSpawn: true
+  save: false
+  components:
+    - type: Inventory
+      templateId: ipc
+    - type: HumanoidAppearance
+      species: IPC
