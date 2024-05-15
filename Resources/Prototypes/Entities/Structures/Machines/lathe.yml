@@ -887,6 +887,7 @@
       - Saw
       - Hemostat
       - ClothingEyesGlassesChemical
+      - MedAutoinjector #ss220 Autoinjecors update
     dynamicRecipes:
       - ChemicalPayload
       - CryostasisBeaker

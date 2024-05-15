@@ -259,7 +259,7 @@
   - HeadofSecurityNeck
   - HeadofSecurityJumpsuit
   - SecurityBackpack
-#  - SecurityBelt #SS220-TweakSecurityWebbing
+  - SecurityBelt
   - HeadofSecurityOuterClothing
   - SecurityShoes
   - Trinkets
@@ -270,7 +270,7 @@
   - WardenHead
   - WardenJumpsuit
   - SecurityBackpack
-#  - SecurityBelt #SS220-TweakSecurityWebbing
+  - SecurityBelt
   - WardenOuterClothing
   - SecurityShoes
   - Trinkets
@@ -284,7 +284,7 @@
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityPDA
-#  - SecurityBelt #SS220-TweakSecurityWebbing
+  - SecurityBelt
   - Trinkets
 
 - type: roleLoadout
