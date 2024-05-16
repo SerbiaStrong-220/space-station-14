@@ -169,7 +169,7 @@
     state: pda-bs
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
-    accentVColor: "#175e99" #SS220 PDA-Resprite
+    accentHColor: "#175e99" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
@@ -492,7 +492,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
-    - state: "screen-nt"
+    - state: "screen-cargo"
       shader: "unshaded"
     - state: "light_overlay"
       map: [ "enum.PdaVisualLayers.Flashlight" ]
@@ -995,7 +995,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
-    - state: "screen-nt"
+    - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
       map: [ "enum.PdaVisualLayers.Flashlight" ]
