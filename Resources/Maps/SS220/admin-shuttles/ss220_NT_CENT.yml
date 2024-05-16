@@ -532,13 +532,13 @@ entities:
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 7.5,-1.5
+      pos: 7.5,-2.5
       parent: 2
   - uid: 302
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 7.5,-2.5
+      pos: 7.5,-1.5
       parent: 2
   - uid: 472
     components:
