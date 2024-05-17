@@ -321,7 +321,7 @@
 
 - type: entity
   id: BoxFolderMedical
-  name: папка медецинского отдела
+  name: папка медицинского отдела
   parent: BoxFolderBase
   components:
   - type: Sprite
