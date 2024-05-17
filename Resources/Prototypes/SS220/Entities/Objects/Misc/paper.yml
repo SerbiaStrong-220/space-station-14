@@ -197,3 +197,135 @@
     - state: folder-base
 
 # Added new CentComm clipboard and folder end
+
+- type: entity
+  id: BoxFolderСaptain
+  name: папка капитана
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-captain
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderCE
+  name: папка старшего инженера
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-ce
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderCMO
+  name: папка главного врача
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-cmo
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderHoS
+  name: папка главы службы безопасности
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-hos
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderQM
+  name: папка квартирмейстера
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-qm
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderRD
+  name: папка научного руководителя
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-rd
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderCargo
+  name: папка отдела снабжения
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-cargo
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderSecurity
+  name: папка отдела службы безопасности
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-security
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderEngineer
+  name: папка инженерного отдела
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-engineer
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderSyndicate
+  name: папка синдиката
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-syndicate
+    - state: folder-base
+
+- type: entity
+  id: BoxFolder
+  name: разноцветная папка
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: rainbow-folder
+    - state: folder-base
+
+- type: entity
+  id: BoxFolderMedical
+  name: папка медецинского отдела
+  parent: BoxFolderBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-medical
+    - state: folder-base

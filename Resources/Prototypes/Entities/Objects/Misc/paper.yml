@@ -465,7 +465,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-colormap
-      color: "#cc2323"
+      color: "#c11b1b" #SS220-RespriteFolders
     - state: folder-base
 
 - type: entity
@@ -477,7 +477,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-colormap
-      color: "#355d99"
+      color: "#1367a7" #SS220-RespriteFolders
     - state: folder-base
 
 - type: entity
@@ -489,7 +489,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-colormap
-      color: "#b38e3c"
+      color: "#dfda25" #SS220-RespriteFolders
     - state: folder-base
 
 - type: entity
@@ -500,7 +500,8 @@
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
-    - state: folder-white
+    - state: folder-colormap #SS220-RespriteFolders-Begin
+      color: "#eeeeee" #SS220-RespriteFolders-End
     - state: folder-base
 
 - type: entity
@@ -512,7 +513,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-colormap
-      color: "#999999"
+      color: "#b1b1b1" #SS220-RespriteFolders
     - state: folder-base
 
 - type: entity
@@ -524,7 +525,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-colormap
-      color: "#3f3f3f"
+      color: "#39393f" #SS220-RespriteFolders
     - state: folder-base
 
 - type: entity
@@ -536,7 +537,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-colormap
-      color: "#43bc38"
+      color: "#1dbf1d" #SS220-RespriteFolders
     - state: folder-base
 
 - type: entity
