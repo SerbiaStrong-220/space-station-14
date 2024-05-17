@@ -406,7 +406,7 @@
   description: A folder filled with top secret paperwork.
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
     - state: folder-base
@@ -423,7 +423,7 @@
 #      black: "#3f3f3f"
 #      green: "#43bc38"
   - type: Item
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     size: Small
     shape: null
   - type: Storage
@@ -462,7 +462,7 @@
   suffix: Red
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
       color: "#c11b1b" #SS220-RespriteFolders
@@ -474,7 +474,7 @@
   suffix: Blue
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
       color: "#1367a7" #SS220-RespriteFolders
@@ -486,7 +486,7 @@
   suffix: Yellow
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
       color: "#dfda25" #SS220-RespriteFolders
@@ -498,7 +498,7 @@
   suffix: White
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap #SS220-RespriteFolders-Begin
       color: "#eeeeee" #SS220-RespriteFolders-End
@@ -510,7 +510,7 @@
   suffix: Grey
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
       color: "#b1b1b1" #SS220-RespriteFolders
@@ -522,7 +522,7 @@
   suffix: Black
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
       color: "#39393f" #SS220-RespriteFolders
@@ -534,7 +534,7 @@
   suffix: Green
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi #SS220-RespriteFolders
     layers:
     - state: folder-colormap
       color: "#1dbf1d" #SS220-RespriteFolders

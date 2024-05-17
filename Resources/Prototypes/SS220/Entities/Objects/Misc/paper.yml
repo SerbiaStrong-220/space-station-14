@@ -191,7 +191,7 @@
   suffix: CentComm
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-centcomm
     - state: folder-base
@@ -201,6 +201,7 @@
 - type: entity
   id: BoxFolderСaptain
   name: папка капитана
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -212,6 +213,7 @@
 - type: entity
   id: BoxFolderCE
   name: папка старшего инженера
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -223,6 +225,7 @@
 - type: entity
   id: BoxFolderCMO
   name: папка главного врача
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -234,6 +237,7 @@
 - type: entity
   id: BoxFolderHoS
   name: папка главы службы безопасности
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -245,6 +249,7 @@
 - type: entity
   id: BoxFolderQM
   name: папка квартирмейстера
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -256,6 +261,7 @@
 - type: entity
   id: BoxFolderRD
   name: папка научного руководителя
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -267,6 +273,7 @@
 - type: entity
   id: BoxFolderCargo
   name: папка отдела снабжения
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -278,6 +285,7 @@
 - type: entity
   id: BoxFolderSecurity
   name: папка отдела службы безопасности
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -289,6 +297,7 @@
 - type: entity
   id: BoxFolderEngineer
   name: папка инженерного отдела
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -300,6 +309,7 @@
 - type: entity
   id: BoxFolderSyndicate
   name: папка синдиката
+  description: Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -311,6 +321,7 @@
 - type: entity
   id: BoxFolder
   name: разноцветная папка
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
@@ -321,7 +332,8 @@
 
 - type: entity
   id: BoxFolderMedical
-  name: папка медецинского отдела
+  name: папка медицинского отдела
+  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
   - type: Sprite
