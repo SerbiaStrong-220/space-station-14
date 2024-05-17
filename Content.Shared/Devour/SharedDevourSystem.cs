@@ -8,6 +8,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
+using Content.Shared.Zombies;
 
 namespace Content.Shared.Devour;
 
@@ -46,6 +47,14 @@ public abstract class SharedDevourSystem : EntitySystem
 
         args.Handled = true;
         var target = args.Target;
+
+        // SS220 Zombie and Infected check before devour begin
+        if (args.Handled || component.Blacklist?.IsValid(args.Target, EntityManager) == true)
+        {
+            _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-zombie"), uid,uid);
+            return;
+        };
+        // SS220 Zombie and Infected check before devour end
 
         // Structure and mob devours handled differently.
         if (TryComp(target, out MobStateComponent? targetState))

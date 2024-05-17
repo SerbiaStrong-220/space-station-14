@@ -59,6 +59,18 @@ public sealed partial class DevourerComponent : Component
         }
     };
 
+    // SS220 Zombie and Infected check before devour begin
+    [ViewVariables(VVAccess.ReadWrite), DataField("blacklist")]
+    public EntityWhitelist? Blacklist = new()
+    {
+        Components = new[]
+        {
+            "Zombie",
+            "PendingZombie"
+        }
+    };
+    // SS220 Zombie and Infected check before devour start
+
     /// <summary>
     /// The chemical ID injected upon devouring
     /// </summary>
