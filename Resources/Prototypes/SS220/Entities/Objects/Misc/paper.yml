@@ -320,7 +320,7 @@
 
 - type: entity
   id: BoxFolder
-  name: разноцветная папка
+  name: радужная папка
   description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
   components:
