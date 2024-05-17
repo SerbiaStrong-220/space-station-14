@@ -20,7 +20,7 @@
   - type: StorageFill
     contents:
       - id: AmeJar
-        amount: 4 #ss220-engineering-rebalanc
+        amount: 4 #SS220 Engineering Rebalance
 
 - type: entity
   id: CrateEngineeringAMEControl

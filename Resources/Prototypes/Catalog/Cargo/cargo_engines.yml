@@ -1,14 +1,12 @@
-#ss220-engineering-rebalanc-begin
-#- type: cargoProduct
-#  id: EngineAmeJar
-#  icon:
-#    sprite: Objects/Power/AME/ame_jar.rsi
-#    state: jar
-#  product: CrateEngineeringAMEJar
-#  cost: 2000
-#  category: cargoproduct-category-name-engineering
-#  group: market
-#ss220-engineering-rebalanc-end
+- type: cargoProduct
+  id: EngineAmeJar
+  icon:
+    sprite: Objects/Power/AME/ame_jar.rsi
+    state: jar
+  product: CrateEngineeringAMEJar
+  cost: 2000
+  category: cargoproduct-category-name-engineering
+  group: market
 
 - type: cargoProduct
   id: EngineSingularityGenerator
