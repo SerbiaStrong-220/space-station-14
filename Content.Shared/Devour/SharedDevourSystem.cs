@@ -9,6 +9,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Content.Shared.Zombies;
+using Content.Shared.Whitelist; // SS220 Prevent fix merge conflict by using new WhitelistSystem
 
 namespace Content.Shared.Devour;
 
@@ -19,6 +20,7 @@ public abstract class SharedDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem ContainerSystem = default!;
+    [Dependency] protected readonly EntityWhitelistSystem _whitelistSystem = default!; // SS220 Prevent fix merge conflict by using new WhitelistSystem
 
     public override void Initialize()
     {
@@ -42,19 +44,19 @@ public abstract class SharedDevourSystem : EntitySystem
     /// </summary>
     protected void OnDevourAction(EntityUid uid, DevourerComponent component, DevourActionEvent args)
     {
-        if (args.Handled || component.Whitelist?.IsValid(args.Target, EntityManager) != true)
+        // SS220 Prevent fix merge conflict by using new WhitelistSystem begin
+        if (component.Whitelist is null || component.Blacklist is null)
             return;
+
+        if (args.Handled || !_whitelistSystem.IsValid(component.Whitelist, args.Target) || _whitelistSystem.IsValid(component.Blacklist, args.Target))
+        {
+            _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-blacklist"), uid);
+            return;
+        }
+        // SS220 Blacklist for devour and prevent fix merge conflict by using new WhitelistSystem end
 
         args.Handled = true;
         var target = args.Target;
-
-        // SS220 Zombie and Infected check before devour begin
-        if (args.Handled || component.Blacklist?.IsValid(args.Target, EntityManager) == true)
-        {
-            _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-zombie"), uid,uid);
-            return;
-        };
-        // SS220 Zombie and Infected check before devour end
 
         // Structure and mob devours handled differently.
         if (TryComp(target, out MobStateComponent? targetState))
@@ -70,7 +72,7 @@ public abstract class SharedDevourSystem : EntitySystem
                     });
                     break;
                 default:
-                    _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-alive"), uid,uid);
+                    _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-alive"), uid);
                     break;
             }
 
