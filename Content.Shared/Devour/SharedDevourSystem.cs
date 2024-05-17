@@ -4,12 +4,11 @@ using Content.Shared.DoAfter;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
-using Content.Shared.Zombies;
-using Content.Shared.Whitelist; // SS220 Prevent fix merge conflict by using new WhitelistSystem
 
 namespace Content.Shared.Devour;
 
@@ -20,7 +19,7 @@ public abstract class SharedDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem ContainerSystem = default!;
-    [Dependency] protected readonly EntityWhitelistSystem _whitelistSystem = default!; // SS220 Prevent fix merge conflict by using new WhitelistSystem
+    [Dependency] protected readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -44,16 +43,11 @@ public abstract class SharedDevourSystem : EntitySystem
     /// </summary>
     protected void OnDevourAction(EntityUid uid, DevourerComponent component, DevourActionEvent args)
     {
-        // SS220 Prevent fix merge conflict by using new WhitelistSystem begin
         if (component.Whitelist is null || component.Blacklist is null)
             return;
 
-        if (args.Handled || !_whitelistSystem.IsValid(component.Whitelist, args.Target) || _whitelistSystem.IsValid(component.Blacklist, args.Target))
-        {
-            _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-blacklist"), uid);
+        if (args.Handled || !_whitelistSystem.IsValid(component.Whitelist, args.Target))
             return;
-        }
-        // SS220 Blacklist for devour and prevent fix merge conflict by using new WhitelistSystem end
 
         args.Handled = true;
         var target = args.Target;
@@ -65,7 +59,11 @@ public abstract class SharedDevourSystem : EntitySystem
             {
                 case MobState.Critical:
                 case MobState.Dead:
-
+                    if (_whitelistSystem.IsValid(component.Blacklist, args.Target))
+                    {
+                        _popupSystem.PopupClient("ВЕРНИТЕ В МОДУ ЛЮБОВЬ ГДЕ БЫЛО ОЧЕНЬ ТЕПЛО РЯДОМ С ТОБОЙ Я МЕЧТАЛ ОБО ВСЁМ", uid,uid);
+                        break;
+                    }
                     _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.DevourTime, new DevourDoAfterEvent(), uid, target: target, used: uid)
                     {
                         BreakOnMove = true,
