@@ -20,4 +20,35 @@
   color: "#f04737"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
-    state: icon   
+    state: icon
+
+- type: reagent
+  id: HotArachne
+  name: reagent-name-hot-arachne
+  parent: BaseDrink
+  desc: reagent-desc-hot-arachne
+  physicalDesc: reagent-physical-desc-murky
+  flavor: alcohol
+  color: "#f04737"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.07
+    Poison:
+      effects:
+      - !type:AdjustTemperature
+        amount: 250 # thermal energy, not temp
+      - !type:PopupMessage
+        type: Local
+        messages: [ "capsaicin-effect-light-burn" ]
+        probability: 0.2
