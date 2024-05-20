@@ -2,7 +2,7 @@
   name: разбитая банка
   parent: BaseItem
   id: BrokenJar
-  description:  В этой банке было что-то отвратительное
+  description: В этой банке было что-то отвратительное.
   components:
   - type: Sharp
   - type: MeleeWeapon
