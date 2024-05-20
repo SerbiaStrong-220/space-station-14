@@ -1,5 +1,5 @@
 - type: entity
-  name: Разбитая банка
+  name: разбитая банка
   parent: BaseItem
   id: BrokenJar
   description:  В этой банке было что-то отвратительное
