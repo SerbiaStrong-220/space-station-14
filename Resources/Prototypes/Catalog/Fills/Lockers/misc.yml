@@ -194,7 +194,7 @@
           orGroup: MaintenanceDrink
           #SS220VodkaKazaki-End
           #SS220Bankate-begin
-        - id: DrinkMopwataBottleRandom
+        - id: DrinkBankateJarFull
           prob: 0.20
           orGroup: MaintenanceDrink
           #SS220Bankate-end 

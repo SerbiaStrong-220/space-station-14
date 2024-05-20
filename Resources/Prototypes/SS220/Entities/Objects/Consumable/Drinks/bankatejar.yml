@@ -1,5 +1,47 @@
 - type: entity
-  parent: [DrinkBottleVisualsAll, DrinkBottleGlassBaseFull]
+  parent: DrinkBottlePlasticBaseFull
+  id: DrinkBankateBaseFull
+  abstract: true
+  components:
+  - type: Sprite
+    state: icon
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 4
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BrokenJar:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tool
+    qualities:
+    - Rolling
+    speed: 0.75 # not as good as a rolling pin but does the job
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 100
+
+- type: entity
+  parent: [DrinkBottleVisualsAll, DrinkBankateBaseFull]
   id: DrinkBankateJarFull
   name: Банка банкате
   description: Вы же не собираетесь это пить, да?
