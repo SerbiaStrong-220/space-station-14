@@ -1,0 +1,60 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTechAssistant
+  name: technical assistant's jumpsuit
+  description: Suit for technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/texas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/texas.rsi
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtTechAssistant
+  name: technical assistant's jumpskirt
+  description: Suit for female technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/texas_skirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/texas_skirt.rsi
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitResearchAssistant
+  name: research assistant's jumpsuit
+  description: Suit for research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/resas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/resas.rsi 
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtResearchAssistant
+  name: research assistant's jumpskirt
+  description: Suit for female research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/resas_skirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/resas_skirt.rsi
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitIntern
+  name: intern's jumpsuit
+  description: Suit for medical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/intern.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/intern.rsi
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtIntern
+  name: intern's jumpskirt
+  description: Suit for female medical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/intern_skirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/intern_skirt.rsi

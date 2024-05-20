@@ -1,5 +1,23 @@
 # Jumpsuit
 - type: loadout
+  id: JumpsuitIntern
+  equipment: InternJumpsuit
+
+- type: startingGear
+  id: JumpsuitIntern
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitIntern
+
+- type: loadout
+  id: JumpskirtIntern
+  equipment: InternJumpsuit
+
+- type: startingGear
+  id: JumpskirtIntern
+  equipment:
+    jumpsuit: JumpskirtIntern
+
+- type: loadout
   id: WhiteJumpsuit
   equipment: WhiteJumpsuit
 
