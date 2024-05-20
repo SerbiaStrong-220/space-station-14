@@ -21,3 +21,20 @@
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
     state: icon   
+
+#Bankate
+- type: reagent
+  id: BankateDrink
+  name: reagent-name-bankate
+  parent: BaseDrink
+  desc: reagent-desc-bankate
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavors: horrible
+  color: "#dfe15f"
+  recognizable: true
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_bankate.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
