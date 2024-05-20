@@ -43,7 +43,7 @@
 - type: entity
   parent: [DrinkBottleVisualsAll, DrinkBankateBaseFull]
   id: DrinkBankateJarFull
-  name: Банка банкате
+  name: банка банкате
   description: Вы же не собираетесь это пить, да?
   components:
   - type: SolutionContainerManager
