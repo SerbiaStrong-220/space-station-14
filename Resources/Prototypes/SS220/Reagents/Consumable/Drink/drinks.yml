@@ -38,3 +38,18 @@
   metamorphicMaxFillLevels: 4
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Caustic: 0.3
+      - !type:PopupMessage
+        messages: [ "жидкость жжётся!" ]
+        visualType: MediumCaution
+        probability: 0.3
+        type: Local
