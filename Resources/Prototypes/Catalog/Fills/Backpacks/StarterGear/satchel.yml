@@ -355,4 +355,5 @@
     - id: DoorRemoteAll
     - id: HandheldCrewMonitor
 #SS-220 Admin memes end
+    - id: AccessConfiguratorUniversal
   - type: Unremoveable

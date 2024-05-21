@@ -235,3 +235,10 @@
     Plastic: 200
     Steel: 25
 
+- type: latheRecipe
+  id: WhiteCane
+  result: WhiteCane
+  completetime: 2
+  materials:
+    Steel: 100
+    Plastic: 100

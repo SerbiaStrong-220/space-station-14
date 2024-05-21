@@ -6,6 +6,7 @@
   showInVote: false # secret
   description: survival-description
   rules:
+    - SurvivalRule #SS220 survival rule
     - RampingStationEventScheduler
     - BasicRoundstartVariation
 

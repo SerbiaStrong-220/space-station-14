@@ -14,6 +14,7 @@ using Content.Server.Roles;
 using Content.Server.SS220.MindSlave.UI;
 using Content.Shared.Alert;
 using Content.Shared.Cloning;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
@@ -77,7 +78,6 @@ public sealed class MindSlaveSystem : EntitySystem
 
         SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDeadOrCrit);
         SubscribeLocalEvent<MindSlaveMasterComponent, BeingGibbedEvent>(OnMasterGibbed);
-        SubscribeLocalEvent<MindSlaveComponent, MobStateChangedEvent>(OnDead);
         SubscribeLocalEvent<MindSlaveComponent, CloningEvent>(OnCloned);
         SubscribeLocalEvent<SubdermalImplantComponent, MindSlaveRemoved>(OnMindSlaveRemoved);
     }
@@ -105,14 +105,6 @@ public sealed class MindSlaveSystem : EntitySystem
             _popup.PopupEntity(message, slave, slave, Shared.Popups.PopupType.LargeCaution);
             _antagSelection.SendBriefing(slave, message, Color.Red, null);
         }
-    }
-
-    private void OnDead(Entity<MindSlaveComponent> entity, ref MobStateChangedEvent args)
-    {
-        if (args.NewMobState != MobState.Dead)
-            return;
-
-        TryRemoveSlave(entity);
     }
 
     private void OnCloned(Entity<MindSlaveComponent> entity, ref CloningEvent args)
@@ -221,6 +213,10 @@ public sealed class MindSlaveSystem : EntitySystem
         if (mindComp.UserId != null && _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
             _eui.OpenEui(new MindSlaveNotificationEui(masterName, true), session);
 
+        //Remove pacifism from slave, because if the slave is pacified they becomes pretty useless.
+        if (TryComp<PacifiedComponent>(slave, out var pacified))
+            RemComp(slave, pacified);
+
         return true;
     }
 
@@ -248,7 +244,7 @@ public sealed class MindSlaveSystem : EntitySystem
         if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
         {
             var briefingMaster = mindComp.CharacterName != null ? Loc.GetString("mindslave-removed-slave-master", ("name", mindComp.CharacterName), ("ent", slave)) :
-                "mindslave-removed-slave-master-unknown";
+                Loc.GetString("mindslave-removed-slave-master-unknown");
 
             _antagSelection.SendBriefing(master.Value, briefingMaster, Color.Red, null);
             _popup.PopupEntity(briefingMaster, master.Value, master.Value, Shared.Popups.PopupType.MediumCaution);

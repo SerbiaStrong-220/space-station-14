@@ -3,6 +3,7 @@ using Content.Shared.Actions;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
@@ -24,6 +25,11 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     [ValidatePrototypeId<TagPrototype>]
     private const string MindSlaveTag = "MindSlave";
     //SS220-mindslave end
+
+    //SS220-removable-mindshield begin
+    [ValidatePrototypeId<TagPrototype>]
+    public const string MindShieldTag = "MindShield";
+    //SS220-removable-mindshield end
 
     public override void Initialize()
     {
@@ -84,6 +90,11 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
             RaiseLocalEvent(uid, ref mindSlaveRemoved);
         }
         //SS220-mindslave end
+
+        //SS220-removable-mindshield begin
+        if (_tag.HasTag(uid, MindShieldTag) && TryComp<MindShieldComponent>(component.ImplantedEntity.Value, out var mindShield))
+            RemComp(component.ImplantedEntity.Value, mindShield);
+        //SS220-removable-mindshield end
 
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;
