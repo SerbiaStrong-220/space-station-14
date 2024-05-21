@@ -1,0 +1,12 @@
+- type: entity
+  id: CrateDrinkBeerCan
+  parent: CratePlastic
+  name: ящик пива
+  description: Ящик пива - это источник настоящего удовольствия и отличного настроения. В нем спрятаны лучшие сорта пива, которые обещают золотистый цвет, искрящийся вкус и неповторимый аромат. Будьте уверены, что открыв этот ящик, вы откроете дверь в мир качественного и насыщенного вкуса. Содержит 18 банок пива.
+  components:
+  - type: StorageFill
+    contents:
+    - id: DrinkCanPackBeer
+      amount: 3
+    - id: FoodMeatSalami
+      prob: 0.04

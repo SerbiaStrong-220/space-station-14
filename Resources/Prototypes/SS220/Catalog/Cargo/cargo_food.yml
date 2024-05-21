@@ -8,3 +8,12 @@
   category: Food
   group: market
 
+- type: cargoProduct
+  id: FoodBeerCan
+  icon:
+    sprite: Objects/Consumable/Drinks/beer_can.rsi
+    state: icon
+  product: CrateDrinkBeerCan
+  cost: 3200
+  category: cargoproduct-category-name-food
+  group: market
