@@ -1,0 +1,96 @@
+# Head
+- type: loadout
+  id: BrigmedicHead
+  equipment: BrigmedicHead
+
+- type: startingGear
+  id: BrigmedicHead
+  equipment:
+    head: ClothingHeadHatBeretBrigmedic
+
+# Mask
+- type: loadout
+  id: BrigmedicMask
+  equipment: BrigmedicMask
+
+- type: startingGear
+  id: BrigmedicMask
+  equipment:
+    mask: ClothingMaskBreathMedicalSecurity
+
+# Jumpsuit
+- type: loadout
+  id: BrigmedicJumpsuit
+  equipment: BrigmedicJumpsuit
+
+- type: startingGear
+  id: BrigmedicJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBrigmedic
+
+- type: loadout
+  id: BrigmedicJumpskirt
+  equipment: BrigmedicJumpskirt
+
+- type: startingGear
+  id: BrigmedicJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtBrigmedic
+
+# Back
+- type: loadout
+  id: BrigmedicBackpack
+  equipment: BrigmedicBackpack
+
+- type: startingGear
+  id: BrigmedicBackpack
+  equipment:
+    back: ClothingBackpackBrigmedicFilled
+
+- type: loadout
+  id: BrigmedicSatchel
+  equipment: BrigmedicSatchel
+
+- type: startingGear
+  id: BrigmedicSatchel
+  equipment:
+    back: ClothingBackpackSatchelBrigmedicFilled
+
+- type: loadout
+  id: BrigmedicDuffel
+  equipment: BrigmedicDuffel
+
+- type: startingGear
+  id: BrigmedicDuffel
+  equipment:
+    back: ClothingBackpackDuffelBrigmedicFilled
+
+# Outer clothing
+- type: loadout
+  id: BrigmedicWindAMG
+  equipment: BrigmedicWindAMG
+
+- type: startingGear
+  id: BrigmedicWindAMG
+  equipment:
+    outerClothing: ClothingOuterCoatAMG
+
+- type: loadout
+  id: BrigmedicVestSecurity
+  equipment: BrigmedicVestSecurity
+
+- type: startingGear
+  id: BrigmedicVestSecurity
+  equipment:
+    outerClothing: ClothingOuterVestSecurityMedic
+
+# Shoes
+- type: loadout
+  id: RedShoes
+  equipment: RedShoes
+
+- type: startingGear
+  id: RedShoes
+  equipment:
+    shoes: ClothingShoesColorRed
+
