@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/e9f937f52b9f63acb49ffd6ab5e6de68e7b13e73 with some modifications by TheArturZh for SS220, ussp is made by MIXnikita for SS220",
+  "copyright": "Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/e9f937f52b9f63acb49ffd6ab5e6de68e7b13e73 with some modifications by TheArturZh for SS220, ussp is made by MIXnikita for SS220, idadmin made by Arimah (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "centcom"
+    },
+    {
+      "name": "admin"
     },
     {
       "name": "ert_chaplain"
@@ -176,6 +179,9 @@
       "name": "idblueshield"
     },
     {
+      "name": "idadmin"
+    },
+    {
       "name": "orange"
     },
     {
@@ -268,6 +274,14 @@
     },
 	{
       "name": "ussp_med"
+    },
+    {
+      "name": "green-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "green-inhand-right",
+      "directions": 4
     }
   ]
 }

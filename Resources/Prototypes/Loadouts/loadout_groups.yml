@@ -6,6 +6,14 @@
   maxLimit: 3
   loadouts:
   - PlushieLizard
+  - PlushieSpaceLizard
+  - Lighter
+  - CigPackGreen
+  - CigPackRed
+  - CigPackBlue
+  - CigPackBlack
+  - CigarCase
+  - CigarGold
   - ClothingNeckLGBTPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
@@ -919,14 +927,12 @@
   - SecuritySatchel
   - SecurityDuffel
 
-#SS220-TweakSecurityWebbing-Begin
-# - type: loadoutGroup
-#   id: SecurityBelt
-#   name: loadout-group-security-belt
-#   loadouts:
-#   - SecurityBelt
-#   - SecurityWebbing
-#SS220-TweakSecurityWebbing-End
+- type: loadoutGroup
+  id: SecurityBelt
+  name: loadout-group-security-belt
+  loadouts:
+  - SecurityBelt
+  - SecurityWebbing
 
 - type: loadoutGroup
   id: SecurityOuterClothing
@@ -1005,6 +1011,7 @@
   minLimit: 0
   loadouts:
   - ChiefMedicalOfficerBeret
+  - CMOMedicalHeadMirror
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1012,6 +1019,8 @@
   loadouts:
   - ChiefMedicalOfficerJumpsuit
   - ChiefMedicalOfficerJumpskirt
+  - ChiefMedicalOfficerTurtleneckJumpsuit
+  - ChiefMedicalOfficerTurtleneckJumpskirt
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
@@ -1051,6 +1060,7 @@
   loadouts:
   - MedicalBeret
   - SeniorPhysicianBeret
+  - MedicalHeadMirror
   - BlueSurgeryCap
   - GreenSurgeryCap
   - PurpleSurgeryCap

@@ -68,7 +68,11 @@
         - ReagentId: Iron
           Quantity: 9
         - ReagentId: Carbon
-          Quantity: 1
+        #SS220 tweak produce lead begin
+          Quantity: 0.8
+        - ReagentId: Lead
+          Quantity: 0.2
+        #SS220 tweak produce lead end
 
 - type: entity
   parent: SheetSteel
@@ -203,8 +207,13 @@
         - ReagentId: Iron
           Quantity: 9
         - ReagentId: Carbon
-          Quantity: 1
+        #SS220 tweak produce lead begin
+          Quantity: 0.8
+        - ReagentId: Lead
+          Quantity: 0.2
+        #SS220 tweak produce lead end
         canReact: false
+      
 
 - type: entity
   parent: SheetPlasteel

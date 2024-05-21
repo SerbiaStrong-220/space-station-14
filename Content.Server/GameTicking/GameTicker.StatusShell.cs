@@ -51,7 +51,7 @@ namespace Content.Server.GameTicking
                 jObject["panic_bunker"] = _cfg.GetCVar(CCVars.PanicBunkerEnabled);
                 jObject["run_level"] = (int) _runLevel;
                 if (preset != null)
-                    jObject["preset"] = Loc.GetString(preset.ModeTitle);
+                    jObject["preset"] = Loc.GetString("secret-title"); // SS220 preset info fix - Loc.GetString(preset.ModeTitle);
                 if (_runLevel >= GameRunLevel.InRound)
                 {
                     jObject["round_start_time"] = _roundStartDateTime.ToString("o");
