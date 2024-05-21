@@ -103,3 +103,54 @@
     FoodMeat: 3
     FoodEgg: 2
 # SS220 Salami-update end
+
+# SS220 Slimesoup-recipe begin
+- type: microwaveMealRecipe
+  id: RecipeSlimeSoup
+  name: slime soup recipe
+  result: FoodSoupSlime
+  time: 10
+  reagents:
+    Water: 5
+    Slime: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatSlime: 1
+# SS220 Slimesoup-recipe end
+
+#SS220 Nachos-recipe begin
+- type: microwaveMealRecipe
+  id: RecipeNachos
+  name: nachos recipe
+  result: FoodMealNachos
+  time: 10
+  reagents:
+    Blackpepper: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+
+- type: microwaveMealRecipe
+  id: RecipeNachosCheesy
+  name: nachos cheesy recipe
+  result: FoodMealNachosCheesy
+  time: 15
+  reagents:
+    Blackpepper: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+    FoodCheeseSlice: 2
+
+- type: microwaveMealRecipe
+  id: RecipeNachosCuban
+  name: nachos cuban recipe
+  result: FoodMealNachosCuban
+  time: 15
+  reagents:
+    Hotsauce: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+    FoodCheeseSlice: 1
+#SS220 Nachos-recipe end
