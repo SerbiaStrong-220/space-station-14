@@ -37,8 +37,15 @@ public sealed partial class RecordDetails : Control
         else if (input.Length == 1)
             return char.ToUpper(input[0]).ToString();
         else
-            return char.ToUpper(input[0]) + input.Substring(1);
+            return ConcatNoReadOnlySpan(char.ToUpper(input[0]).ToString(), input.Substring(1));
     }
+	
+	// fixes roslyn being too smart and trolling the sandbox
+	// probably will be fixed later and will need to be cleaned up
+	private string ConcatNoReadOnlySpan(string a, string b)
+	{
+		return a + b;
+	}
 
     public void LoadRecordDetails(GeneralStationRecord record, bool loadSecurity = true)
     {
