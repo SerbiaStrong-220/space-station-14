@@ -89,6 +89,15 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: SecurityOfficer
 
+#ss220-securitypilot-icon-begin
+- type: statusIcon
+  parent: JobIcon
+  id: JobIconSecurityPilot
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: SecurityPilot
+#ss220-securitypilot-icon-end
+
 - type: statusIcon
   parent: JobIcon
   id: JobIconNoId
