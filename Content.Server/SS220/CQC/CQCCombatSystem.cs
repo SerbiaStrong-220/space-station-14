@@ -116,7 +116,7 @@ public sealed class CQCCombatSystem : CQCCombatSharedSystem
             }
 
             args.Handled = true;
-            ApplyDamage(target, GetSpell(args.ActionId)?.Damage);
+            ApplyDamage(target, GetSpell(args.Action)?.Damage);
 
             return;
         }
