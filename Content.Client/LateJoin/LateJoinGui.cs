@@ -16,9 +16,8 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
-using Content.Client.Preferences;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
+using Content.Client.Lobby;
 
 namespace Content.Client.LateJoin
 {
