@@ -347,6 +347,15 @@
       amount: 1
     Water:
       amount: 1
+# SS220 Dangerous chemistry update begin
+  effects:
+  - !type:CreateGas
+    gas: NitrousOxide
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "chrolalhydrate-nitrousoxide-created" ]
+    type: Pvs
+# SS220 Dangerous chemistry update end
   products:
     ChloralHydrate: 1
 
