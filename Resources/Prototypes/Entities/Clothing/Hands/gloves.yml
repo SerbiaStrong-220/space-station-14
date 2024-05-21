@@ -251,6 +251,8 @@
     sprite: Clothing/Hands/Gloves/combat.rsi # Corvax-Resprite
   - type: Clothing
     sprite: Clothing/Hands/Gloves/combat.rsi # Corvax-Resprite
+  - type: GloveHeatResistance
+    heatResistance: 1400
   - type: Tag
     tags:
     - Kangaroo
@@ -348,7 +350,7 @@
     stripTimeReduction: 1.5
     stealthy: true
 # Corvax-HiddenDesc-Start
-  - type: HiddenDescription 
+  - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-ThievingGloves-syndicate
       whitelistMind:

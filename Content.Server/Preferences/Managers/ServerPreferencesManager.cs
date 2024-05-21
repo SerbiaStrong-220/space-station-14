@@ -15,6 +15,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.RoleSpeciesRestrict;
+using Robust.Shared.Utility;
 
 
 namespace Content.Server.Preferences.Managers
@@ -29,7 +30,7 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IPrototypeManager _protos = default!;
+        [Dependency] private readonly IDependencyCollection _dependencies = default!;
         [Dependency] private readonly SponsorsManager _sponsors = default!;
         [Dependency] private readonly IEntitySystemManager _iEntitySystemManager = default!;
         [Dependency] private readonly ISharedPlayerManager _iSharedPlayerManager = default!;
@@ -106,7 +107,6 @@ namespace Content.Server.Preferences.Managers
 
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
-            var collection = IoCManager.Instance!;
 
             // Corvax-Sponsors-Start: Ensure removing sponsor markings if client somehow bypassed client filtering
             // TODO: Make SponsorManager shared
@@ -116,16 +116,18 @@ namespace Content.Server.Preferences.Managers
             // Corvax-Sponsors-End
 
             //ss-220 arahFix
-            if (profile is HumanoidCharacterProfile human){
+            if (profile is HumanoidCharacterProfile human)
+            {
 
-                foreach (var (k,v) in human.JobPriorities)
+                foreach (var (k, v) in human.JobPriorities)
                 {
-                    if(session == null)
+                    if (session == null)
                         continue;
-                    if(!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
-                        {
+
+                    if (!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
+                    {
                         human = human.WithJobPriority(k, JobPriority.Never);
-                        }
+                    }
                 }
                 profile = human;
                 message.Profile = human;
@@ -133,7 +135,7 @@ namespace Content.Server.Preferences.Managers
             //ss-220 arahFixend
 
             if (session != null)
-                profile.EnsureValid(session, collection);
+                profile.EnsureValid(session, _dependencies);
 
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
@@ -226,7 +228,7 @@ namespace Content.Server.Preferences.Managers
 
                 async Task LoadPrefs()
                 {
-                    var prefs = await GetOrCreatePreferencesAsync(session.UserId);
+                    var prefs = await GetOrCreatePreferencesAsync(session.UserId, cancel);
                     // Corvax-Sponsors-Start: Remove sponsor markings from expired sponsors
                     // TODO: Make SponsorManager shared
                     // foreach (var (_, profile) in prefs.Characters)
@@ -236,17 +238,28 @@ namespace Content.Server.Preferences.Managers
                     // }
                     // Corvax-Sponsors-End
                     prefsData.Prefs = prefs;
-                    prefsData.PrefsLoaded = true;
-
-                    var msg = new MsgPreferencesAndSettings();
-                    msg.Preferences = prefs;
-                    msg.Settings = new GameSettings
-                    {
-                        MaxCharacterSlots = GetMaxUserCharacterSlots(session.UserId),  // Corvax-Sponsors
-                    };
-                    _netManager.ServerSendMessage(msg, session.Channel);
                 }
             }
+        }
+
+        public void FinishLoad(ICommonSession session)
+        {
+            // This is a separate step from the actual database load.
+            // Sanitizing preferences requires play time info due to loadouts.
+            // And play time info is loaded concurrently from the DB with preferences.
+            var prefsData = _cachedPlayerPrefs[session.UserId];
+            DebugTools.Assert(prefsData.Prefs != null);
+            prefsData.Prefs = SanitizePreferences(session, prefsData.Prefs, _dependencies);
+
+            prefsData.PrefsLoaded = true;
+
+            var msg = new MsgPreferencesAndSettings();
+            msg.Preferences = prefsData.Prefs;
+            msg.Settings = new GameSettings
+            {
+                MaxCharacterSlots = GetMaxUserCharacterSlots(session.UserId) // Corvax-Sponsors
+            };
+            _netManager.ServerSendMessage(msg, session.Channel);
         }
 
         public void OnClientDisconnected(ICommonSession session)
@@ -317,18 +330,15 @@ namespace Content.Server.Preferences.Managers
             return null;
         }
 
-        private async Task<PlayerPreferences> GetOrCreatePreferencesAsync(NetUserId userId)
+        private async Task<PlayerPreferences> GetOrCreatePreferencesAsync(NetUserId userId, CancellationToken cancel)
         {
-            var prefs = await _db.GetPlayerPreferencesAsync(userId);
+            var prefs = await _db.GetPlayerPreferencesAsync(userId, cancel);
             if (prefs is null)
             {
-                return await _db.InitPrefsAsync(userId, HumanoidCharacterProfile.Random());
+                return await _db.InitPrefsAsync(userId, HumanoidCharacterProfile.Random(), cancel);
             }
 
-            var session = _playerManager.GetSessionById(userId);
-            var collection = IoCManager.Instance!;
-
-            return SanitizePreferences(session, prefs, collection);
+            return prefs;
         }
 
         private PlayerPreferences SanitizePreferences(ICommonSession session, PlayerPreferences prefs, IDependencyCollection collection)

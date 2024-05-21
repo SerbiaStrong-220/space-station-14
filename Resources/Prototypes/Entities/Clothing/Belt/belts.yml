@@ -615,7 +615,7 @@
         - CartridgeAmmo
 
 - type: entity
-  parent: ClothingBeltStorageBase #SS220-TweakSecurityWebbing
+  parent: ClothingBeltSecurity
   id: ClothingBeltSecurityWebbing
   name: security webbing
   description: Unique and versatile chest rig, can hold security gear.
@@ -624,19 +624,7 @@
     sprite: Clothing/Belt/securitywebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/securitywebbing.rsi
-#SS220-TweakSecurityWebbing-Begin
-  - type: Storage
-    grid:
-    - 0,0,0,1
-    - 1,2,1,3
-    - 2,0,2,1
-    - 3,2,3,3
-    - 4,0,4,1
-    - 5,2,5,3
-    - 6,0,6,1
-    - 7,2,7,3
-#SS220-TweakSecurityWebbing-End
-  
+
 - type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltMercWebbing

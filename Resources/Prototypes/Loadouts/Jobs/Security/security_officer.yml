@@ -130,26 +130,24 @@
   equipment:
     back: ClothingBackpackDuffelSecurityFilled
 
-# SS220-TweakSecurityWebbing-Begin
-# # Belt
-# - type: loadout
-#   id: SecurityBelt
-#   equipment: SecurityBelt
+# Belt
+- type: loadout
+  id: SecurityBelt
+  equipment: SecurityBelt
 
-# - type: startingGear
-#   id: SecurityBelt
-#   equipment:
-#     belt: ClothingBeltSecurityFilled
+- type: startingGear
+  id: SecurityBelt
+  equipment:
+    belt: ClothingBeltSecurityFilled
 
-# - type: loadout
-#   id: SecurityWebbing
-#   equipment: SecurityWebbing
+- type: loadout
+  id: SecurityWebbing
+  equipment: SecurityWebbing
 
-# - type: startingGear
-#   id: SecurityWebbing
-#   equipment:
-#     belt: ClothingBeltSecurityWebbingFilled
-#SS220-TweakSecurityWebbing-End
+- type: startingGear
+  id: SecurityWebbing
+  equipment:
+    belt: ClothingBeltSecurityWebbingFilled
 
 # Outerclothing
 - type: loadout

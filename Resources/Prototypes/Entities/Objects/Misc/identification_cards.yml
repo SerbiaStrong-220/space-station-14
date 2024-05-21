@@ -486,7 +486,7 @@
     jobIcon: JobIconNanotrasen
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommand
     - CentralCommandERT # SS220 New CentComm
@@ -507,6 +507,7 @@
   # SS220 new CentComm begin
   - type: Access
     groups:
+    - AllAccess # SS220 Fast fix access
     - CentralCommand
   # SS220 new CentComm end
 
@@ -523,6 +524,9 @@
     jobTitle: ERT Soul Officer
   - type: Item
     heldPrefix: blue
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
 
 - type: entity
   parent: ERTChaplainIDCard
@@ -618,6 +622,8 @@
     jobTitle: Centcom Agent
   # SS220 new CentComm begin
   - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommandDeathSquad
     - CentralCommand
@@ -845,6 +851,8 @@
   # SS220 new CentComm begin
     jobTitle: Агент РХБЗ
   - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommandCBURN
     - CentralCommand
@@ -903,3 +911,30 @@
     layers:
     - state: default
     - state: idseniorofficer
+
+- type: entity
+  parent: IDCardStandard
+  id: UniversalIDCard
+  name: universal ID card
+  suffix: Admin
+  description: An ID card that gives you access beyond your wildest dreams.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: admin
+    - state: idadmin
+  - type: Clothing
+    sprite: Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: green
+  - type: IdCard
+    jobTitle: Universal
+    jobIcon: JobIconAdmin
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - CentralCommand
+    - NuclearOperative
+    - SyndicateAgent
