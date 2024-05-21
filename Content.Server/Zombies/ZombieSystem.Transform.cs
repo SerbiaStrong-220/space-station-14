@@ -41,6 +41,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
 using Content.Server.Administration.Managers;
 using Robust.Server.Player;
+using Content.Shared.Zombies;
 
 namespace Content.Server.Zombies
 {

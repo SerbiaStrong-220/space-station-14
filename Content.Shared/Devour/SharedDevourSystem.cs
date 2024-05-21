@@ -43,12 +43,10 @@ public abstract class SharedDevourSystem : EntitySystem
     /// </summary>
     protected void OnDevourAction(EntityUid uid, DevourerComponent component, DevourActionEvent args)
     {
+        // SS220 DragonZombieFix begin
         if (component.Whitelist is null || component.Blacklist is null)
             return;
-
-        if (args.Handled || !_whitelistSystem.IsValid(component.Whitelist, args.Target))
-            return;
-
+        // SS220 DragonZombieFix end
         args.Handled = true;
         var target = args.Target;
 
@@ -59,11 +57,13 @@ public abstract class SharedDevourSystem : EntitySystem
             {
                 case MobState.Critical:
                 case MobState.Dead:
+                    // SS220 DragonZombieFix Add blacklist check before Devour begin
                     if (_whitelistSystem.IsValid(component.Blacklist, args.Target))
                     {
-                        _popupSystem.PopupClient("ВЕРНИТЕ В МОДУ ЛЮБОВЬ ГДЕ БЫЛО ОЧЕНЬ ТЕПЛО РЯДОМ С ТОБОЙ Я МЕЧТАЛ ОБО ВСЁМ", uid,uid);
+                        _popupSystem.PopupClient("evour-action-popup-message-fail-target-blacklist", uid);
                         break;
                     }
+                    // SS220 DragonZombieFix Add blacklist check before Devour end
                     _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.DevourTime, new DevourDoAfterEvent(), uid, target: target, used: uid)
                     {
                         BreakOnMove = true,

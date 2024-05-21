@@ -2,7 +2,7 @@ using Content.Shared.Damage;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server.Zombies;
+namespace Content.Shared.Zombies;
 
 /// <summary>
 /// Temporary because diseases suck.
@@ -13,9 +13,10 @@ public sealed partial class PendingZombieComponent : Component
     /// <summary>
     /// Damage dealt every second to infected individuals.
     /// </summary>
-    [DataField("damage")] public DamageSpecifier Damage = new()
+    [DataField("damage")]
+    public DamageSpecifier Damage = new()
     {
-        DamageDict = new ()
+        DamageDict = new()
         {
             { "Cellular", 0.33 }, // SS220 zombie-balance
         }
@@ -27,7 +28,7 @@ public sealed partial class PendingZombieComponent : Component
     [DataField("critDamageMultiplier")]
     public float CritDamageMultiplier = 10f;
 
-    [DataField("nextTick", customTypeSerializer:typeof(TimeOffsetSerializer))]
+    [DataField("nextTick", customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextTick;
 
     /// <summary>
