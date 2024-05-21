@@ -29,7 +29,7 @@
   parent: BaseDrink
   desc: reagent-desc-bankate
   physicalDesc: reagent-physical-desc-strong-smelling
-  flavors: horrible
+  flavor: horrible
   color: "#dfe15f"
   recognizable: true
   metamorphicSprite:
