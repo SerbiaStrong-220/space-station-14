@@ -366,6 +366,21 @@
   - Glasses
   - Trinkets
 
+#SS220-brigmedic-loadout-begin
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - BrigmedicMask
+  - BrigmedicJumpsuit
+  - MedicalGloves
+  - BrigmedicBackpack
+  - BrigmedicOuterClothing
+  - BrigmedicShoes
+  - Glasses
+  - Trinkets
+#SS220-brigmedic-loadout-end
+
 # Wildcards
 - type: roleLoadout
   id: JobZookeeper

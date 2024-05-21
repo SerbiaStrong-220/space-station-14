@@ -156,7 +156,8 @@ public abstract partial class BaseActionEvent : HandledEntityEventArgs
     /// </summary>
     public EntityUid Performer;
 
-    //SS220 ActionId start
-    public EntityUid? ActionId;
-    //SS220 ActionId end
+    /// <summary>
+    ///     The action the event belongs to.
+    /// </summary>
+    public EntityUid Action;
 }

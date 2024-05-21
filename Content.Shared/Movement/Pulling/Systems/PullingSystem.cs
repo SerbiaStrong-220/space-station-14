@@ -14,6 +14,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
+using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -64,6 +65,7 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
         SubscribeLocalEvent<PullerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<PullerComponent, ComponentStartup>(OnPullerStartup);
+        SubscribeLocalEvent<PullerComponent, DropHandItemsEvent>(OnDropHandItems);
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.MovePulledObject, new PointerInputCmdHandler(OnRequestMovePulledObject))
@@ -84,7 +86,18 @@ public sealed class PullingSystem : EntitySystem
 
         entity.Comp.NeedsHands = false;
     }
+
     //SS220-Cart-system end
+    private void OnDropHandItems(EntityUid uid, PullerComponent pullerComp, DropHandItemsEvent args)
+    {
+        if (pullerComp.Pulling == null || pullerComp.NeedsHands)
+            return;
+
+        if (!TryComp(pullerComp.Pulling, out PullableComponent? pullableComp))
+            return;
+
+        TryStopPull(pullerComp.Pulling.Value, pullableComp, uid);
+    }
 
     private void OnPullerContainerInsert(Entity<PullerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
