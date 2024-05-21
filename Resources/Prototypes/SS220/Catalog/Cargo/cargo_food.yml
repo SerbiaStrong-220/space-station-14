@@ -14,6 +14,6 @@
     sprite: Objects/Consumable/Drinks/beer_can.rsi
     state: icon
   product: CrateDrinkBeerCan
-  cost: 1200
+  cost: 3200
   category: cargoproduct-category-name-food
   group: market
