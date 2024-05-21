@@ -15,7 +15,7 @@
     - id: ClothingBackpackClown
     - id: ClothingBackpackDuffelClown
     - id: CrayonRainbow
-    - id: ClownStumpBox #ss220-fake-stump-update
+    - id: ClownStampBox #ss220-fake-stump-update
 
 - type: entity
   id: LockerMimeFilled
@@ -30,4 +30,4 @@
     - id: ClothingUniformJumpsuitMime
     - id: ClothingUniformJumpskirtMime
     - id: CrayonMime
-    - id: ClownStumpBox #ss220-fake-stump-update
+    - id: ClownStampBox #ss220-fake-stump-update

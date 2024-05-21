@@ -63,16 +63,16 @@
 
 - type: entity
   parent: PresentRandom
-  id: ClownStumpBox
+  id: ClownStampBox
   name: коробка с печатью
   description: Поношенная коробка с чем-то, напоминает бомбу клоуна.
   components:
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/clownstumpbox.rsi
+    sprite: SS220/Objects/Storage/clownstampbox.rsi
     layers:
-      - state: clownstumpbox
+      - state: clownstampbox
   - type: SpawnItemsOnUse
     items:
       - id: SpecialDeliveryBoxTrash
