@@ -5,6 +5,7 @@ using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
+using Content.Shared.Item;
 
 namespace Content.Server.Containers;
 
@@ -26,6 +27,11 @@ public sealed class ThrowInsertContainerSystem : EntitySystem
     private void OnThrowCollide(Entity<ThrowInsertContainerComponent> ent, ref ThrowHitByEvent args)
     {
         var container = _containerSystem.GetContainer(ent, ent.Comp.ContainerId);
+
+        //SS220 nonitem insert fix start
+        if (!HasComp<ItemComponent>(args.Thrown))
+            return;
+        //SS220 nonitem insert fix end
 
         if (!_containerSystem.CanInsert(args.Thrown, container))
             return;

@@ -322,7 +322,7 @@
   noSpawn: true
   components:
    - type: SubdermalImplant
-     permanent: true
+   # permanent: true SS220-removable-mindshield
    - type: Tag
      tags:
        - MindShield

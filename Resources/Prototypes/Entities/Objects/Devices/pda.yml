@@ -1126,6 +1126,7 @@
   parent: BasePDA #SS220 PDA-Resprite
   id: AdminPDA
   name: Admin PDA
+  suffix: Admin
   description: If you are not an admin please return this PDA to the nearest admin.
   components:
   - type: Pda
