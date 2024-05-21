@@ -59,6 +59,18 @@ public sealed partial class DevourerComponent : Component
         }
     };
 
+    // SS220 Blacklist entities check before devour begin
+    [ViewVariables(VVAccess.ReadWrite), DataField("blacklist")]
+    public EntityWhitelist Blacklist = new()
+    {
+        Components = new[]
+        {
+            "Zombie",
+            "PendingZombie"
+        }
+    };
+    // SS220 Blacklist entities check before devour end
+
     /// <summary>
     /// The chemical ID injected upon devouring
     /// </summary>
