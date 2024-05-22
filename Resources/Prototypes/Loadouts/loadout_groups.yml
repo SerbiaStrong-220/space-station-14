@@ -43,6 +43,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+  #ss220-loadout-captain-begin
+  - CaptainWhiteHead
+  - CaptainWhiteBeret
+  #ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -51,6 +55,7 @@
   - CaptainJumpsuit
   - CaptainJumpskirt
   - CaptainFormalSuit
+  - CaptainWhiteJumpsuit #ss220-loadout-captain
 #  - CaptainFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
@@ -61,6 +66,7 @@
   - CaptainCloak
   - CaptainCloakFormal
   - CaptainMantle
+  - CaptainFormalWhiteCloak #ss220-loadout-captain
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -69,6 +75,11 @@
   - CaptainBackpack
   - CaptainSatchel
   - CaptainDuffel
+#ss220-loadout-captain-begin
+  - CaptainWhiteBackpack
+  - CaptainWhiteSatchel
+  - CaptainWhiteDuffel
+#ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: CaptainOuterClothing
@@ -76,6 +87,10 @@
   loadouts:
   - CaptainOuterClothing
   - CaptainWintercoat
+#ss220-loadout-captain-begin
+  - CaptainWhiteOuterClothing
+  - CaptainWhiteCoat
+#ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: HoPHead

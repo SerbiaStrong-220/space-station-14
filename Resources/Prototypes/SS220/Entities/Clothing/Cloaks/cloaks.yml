@@ -8,3 +8,12 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/centcomm_fo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakWhiteCapFormal
+  name: белый формальный плащ капитана
+  description: Роскошный плащ почётного ветерана за выслугу лет.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/whitecapcloakformal.rsi
