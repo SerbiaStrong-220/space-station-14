@@ -568,7 +568,7 @@
   icon: { sprite: /Textures/Objects/Storage/boxicons.rsi, state: vials }
   productEntity: ChemicalSynthesisKit
   cost:
-    Telecrystal: 4
+    Telecrystal: 5 # new syndie chemistry update
   categories:
   - UplinkChemicals
 
