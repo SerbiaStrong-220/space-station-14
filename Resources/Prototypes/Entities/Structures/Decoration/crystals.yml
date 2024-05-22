@@ -127,7 +127,7 @@
   suffix: red
   components:
     - type: Sprite
-      state: crystal_grey
+#      state: crystal_grey SS220-Crystal-Fix
       color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
     - type: PointLight
       radius: 3
