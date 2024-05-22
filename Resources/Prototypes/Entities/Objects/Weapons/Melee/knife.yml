@@ -81,6 +81,8 @@
     tags:
     - CombatKnife
     - Knife
+  - type: ThrowingAngle # SS220 BetterKnifes Update
+    angle: 225 # SS220 BetterKnifes Update
   - type: Sprite
     sprite: Objects/Weapons/Melee/combat_knife.rsi
     state: icon
@@ -259,6 +261,28 @@
   id: ThrowingKnife
   description: This bloodred knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
   components:
+# SS220 BetterKnifes Update begin
+  - type: ThrowingAngle
+    angle: 0
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 2
+  - type: MeleeChemicalInjector
+    solution: melee
+  - type: RefillableSolution
+    solution: melee
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    transferAmount: 2
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 2
+  - type: UseDelay
+  - type: Appearance
+  - type: SolutionContainerVisuals
+# SS220 BetterKnifes Update end
   - type: Tag
     tags:
     - CombatKnife
@@ -267,7 +291,7 @@
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
     state: icon
   - type: MeleeWeapon
-    wideAnimationRotation: -135
+    wideAnimationRotation: 0 # SS220 BetterKnifes Update
     attackRate: 2
     damage:
       types:
@@ -278,7 +302,7 @@
     ignoreResistances: true
     damage:
       types:
-        Slash: 10
+        Slash: 5 # SS220 BetterKnifes Update
         Piercing: 15
   - type: Item
     sprite: Objects/Weapons/Melee/throwing_knife.rsi

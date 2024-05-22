@@ -334,6 +334,14 @@
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: sake
   color: "#DDDDDD"
+  #SS220 NewDrinksSprites begin
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/sakeplate.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  #SS220 NewDrinksSprites end
 
 - type: reagent
   id: Tequila

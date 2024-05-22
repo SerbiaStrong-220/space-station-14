@@ -33,3 +33,15 @@
       amount: 2
   products:
     BerryСompote: 3
+
+- type: reaction
+  id: HotArachne
+  reactants:
+    WhiskeyCola:
+      amount: 4
+    Fiber:
+      amount: 1
+    Blackpepper:
+      amount: 1
+  products:
+    HotArachne: 6
