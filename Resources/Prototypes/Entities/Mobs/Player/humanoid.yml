@@ -784,7 +784,7 @@
     - RandomHumanoidDisasterVictimRD
     - RandomHumanoidDisasterVictimCMO
     - RandomHumanoidDisasterVictimCaptain
-    - MobSkeletonCloset
+   # - MobSkeletonCloset SS220 Removing ClosetSkeleton before add write rules
 
 - type: entity
   id: RandomHumanoidDisasterVictimRD
