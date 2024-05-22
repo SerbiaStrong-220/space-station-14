@@ -628,6 +628,8 @@
   id: TechnicalAssistantJumpsuit
   name: loadout-group-technical-assistant-jumpsuit
   loadouts:
+  - TechAssistantJumpsuit
+  - TechAssistantJumpskirt
   - YellowJumpsuit
   - YellowJumpskirt
 
@@ -831,6 +833,8 @@
   id: ResearchAssistantJumpsuit
   name: loadout-group-research-assistant-jumpsuit
   loadouts:
+  - ResearchAssistantJumpsuit
+  - ResearchAssistantJumpskirt
   - WhiteJumpsuit
   - WhiteJumpskirt
 
@@ -1118,6 +1122,8 @@
   id: MedicalInternJumpsuit
   name: loadout-group-medical-intern-jumpsuit
   loadouts:
+  - InternJumpsuit
+  - InternJumpskirt
   - WhiteJumpsuit
   - WhiteJumpskirt
 

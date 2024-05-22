@@ -1,0 +1,310 @@
+[33mcommit eaec6bcdd464434057d395c9f09e8634f93dc403[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32masic[m[33m)[m
+Author: vimenant <dr.steamplayer@yandex.ru>
+Date:   Mon May 20 18:49:21 2024 +0300
+
+    asicSuits
+
+[33mcommit a9c8479f92bb602701b34405a3ba0213b73a73d5[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: ZoNeSRuS <42711621+ZoNeSRuS@users.noreply.github.com>
+Date:   Fri May 10 19:10:33 2024 +0700
+
+    freeMobFelinid (#972)
+
+[33mcommit 39fb7e8c0bb2a5e36b76defbb0c3aa15e248c042[m
+Author: Rtmfool <165487086+Rtmfool@users.noreply.github.com>
+Date:   Fri May 10 09:19:53 2024 +1000
+
+    Ai Cult Mapping update (#981)
+    
+    * Ai CultMapping
+    
+    * Fix Commenting
+    
+    * Fix Ai Cult Mapping update
+
+[33mcommit 5754f63dc7cc67ac369cd43e4a79096ab6883bc8[m
+Author: EstKemran <157578255+EstKemran@users.noreply.github.com>
+Date:   Thu May 9 22:33:01 2024 +0300
+
+    NewWoodTiles (#982)
+    
+    * NewWoodTiles
+    
+    * NewWoodTiles
+    
+    * Update tiles.yml
+    
+    * Update tiles.yml
+    
+    * lathe
+    
+    * Decals
+    
+    * fixDecals
+    
+    * Update Resources/Textures/SS220/Decals/black_wood_trim.rsi/meta.json
+    
+    Co-authored-by: Kit0vras <123590995+Kit0vras@users.noreply.github.com>
+    
+    * Update Resources/Textures/SS220/Decals/dark_wood_trim.rsi/meta.json
+    
+    Co-authored-by: Kit0vras <123590995+Kit0vras@users.noreply.github.com>
+    
+    * Update Resources/Textures/SS220/Decals/light_wood_trim.rsi/meta.json
+    
+    Co-authored-by: Kit0vras <123590995+Kit0vras@users.noreply.github.com>
+    
+    * Update Resources/Textures/SS220/Objects/Tiles/tile_tg.rsi/meta.json
+    
+    Co-authored-by: Kit0vras <123590995+Kit0vras@users.noreply.github.com>
+    
+    * Update Resources/Textures/SS220/Decals/red_wood_trim.rsi/meta.json
+    
+    Co-authored-by: Kit0vras <123590995+Kit0vras@users.noreply.github.com>
+    
+    * localization
+    
+    ---------
+    
+    Co-authored-by: Kit0vras <123590995+Kit0vras@users.noreply.github.com>
+
+[33mcommit 657c7f260dc943ea801e2f888af0e014fadecc86[m
+Author: Surani <154987464+Surani1@users.noreply.github.com>
+Date:   Thu May 9 22:58:32 2024 +0500
+
+    Jukebox Music update (#980)
+    
+    * Music add
+    
+    * Fix issue yml
+    
+    * Fix issue yml X2
+    
+    * Fix issue yml X3
+
+[33mcommit 78070700916d4f5214f1e16b97c401086ce1bced[m
+Author: EstKemran <157578255+EstKemran@users.noreply.github.com>
+Date:   Wed May 8 15:21:50 2024 +0300
+
+    TweakSecurityWebbing (#979)
+    
+    * TweakSecurityWebbing
+    
+    * Update belt.yml
+    
+    * Update role_loadouts.yml
+
+[33mcommit 49984fedd88fdceb28e78b6cf436317d0e3edbdf[m
+Merge: 16dc1d0047 e42e9a3e37
+Author: Dexler <69513582+DexlerXD@users.noreply.github.com>
+Date:   Wed May 8 15:20:59 2024 +0300
+
+    Merge pull request #977 from TheArturZh/corvax-cherrypick-27
+    
+    Corvax cherrypick 27
+
+[33mcommit 16dc1d0047e6bd3e3c7d5699543ceeffee51ea53[m
+Author: EstKemran <157578255+EstKemran@users.noreply.github.com>
+Date:   Tue May 7 20:05:30 2024 +0300
+
+    New naming system for species (#978)
+    
+    * New naming system for species
+    
+    * commenting
+
+[33mcommit e42e9a3e376fd408941c80387e23755d3107731b[m
+Author: TheArturZh <thearturzh@gmail.com>
+Date:   Tue May 7 13:25:52 2024 +0300
+
+    Cherry-pick fixes
+
+[33mcommit ac1f97b2a22f5ef9758aed1085cfa1e1a98f3700[m
+Author: lapatison <100279397+lapatison@users.noreply.github.com>
+Date:   Tue May 7 08:15:48 2024 +0300
+
+    Translate Upstream #2104 (#2106)
+
+[33mcommit 918e8456dc12bdeb0baff6285692f0070cf3cd0a[m
+Author: lapatison <100279397+lapatison@users.noreply.github.com>
+Date:   Sat May 4 20:14:14 2024 +0300
+
+    Translate Upstream #2088 (#2097)
+    
+    Co-authored-by: lzk <124214523+lzk228@users.noreply.github.com>
+
+[33mcommit 0dd4c317a260fbff3bc56612db7f8f959d94548c[m
+Author: lapatison <100279397+lapatison@users.noreply.github.com>
+Date:   Thu May 2 22:45:00 2024 +0300
+
+    Locale fixes (#2094)
+
+[33mcommit fd4c4ac4614a72e849f0845b12e3b86ab6daea87[m
+Author: NotSoDana <75203942+NotSoDana@users.noreply.github.com>
+Date:   Thu May 2 21:47:29 2024 +0200
+
+    Kvass category fix (#2093)
+
+[33mcommit 90c2fc6fb8ff05851f9c5b041e17ff015dbe9fc3[m
+Author: lapatison <100279397+lapatison@users.noreply.github.com>
+Date:   Tue Apr 30 10:55:46 2024 +0300
+
+    Rename crowbar (#2085)
+
+[33mcommit 757c02cd5ed3c5bb5361547097b80cb567b3fe06[m
+Author: lapatison <100279397+lapatison@users.noreply.github.com>
+Date:   Wed May 1 00:45:56 2024 +0300
+
+    Перевод Upstream 2047
+
+[33mcommit 6110b8042c0ef9d5cf6fc124d5a0a0ad5cd3489c[m
+Author: MureixloI <132683811+MureixloI@users.noreply.github.com>
+Date:   Mon Apr 29 09:33:52 2024 +0300
+
+    [Resprite/Return] Cadet's jumpskirt & HoS's items (#2076)
+
+[33mcommit 50b01f37645946308abc866028fd9c75fe2920ec[m
+Author: Lazzi0706 <49803294+Lazzi0706@users.noreply.github.com>
+Date:   Tue May 7 04:56:56 2024 +0700
+
+    Colorful ghosts (#734)
+    
+    * huh, skub!
+    
+    * fix after merge
+    
+    * fix set ghost color
+    
+    * Fix RobustToolbox merge
+    
+    * we should prob comment that...
+    
+    ---------
+    
+    Co-authored-by: Lazzi0706 <lazzikrytskiy0706@gmail.com>
+    Co-authored-by: werzet <10843461+Werzet@users.noreply.github.com>
+    Co-authored-by: Dexler <69513582+DexlerXD@users.noreply.github.com>
+
+[33mcommit 3cf3b03ccec72260597abb849ebe4b2903f1af36[m
+Author: Ady4ik <141335742+Ady4ik@users.noreply.github.com>
+Date:   Tue May 7 00:11:21 2024 +0300
+
+    Finish centcomm (#910)
+    
+    * Add new CentComm roles and resprite CentComm items
+    
+    * Add suggested changes without migration
+    
+    * Try to fix, but not)
+    
+    * Suggested changes
+    
+    * Fix NT NO shitspawn icon
+    
+    * FINNALY THIS SHIT SPAWN ENTITIES
+    
+    * Add in LockerBlueshield coat NavyOfficer
+    
+    * Add speciesBlacklist to spawn only humans
+    
+    * Add GhostRole descriptions and names
+    
+    * Small changes
+    
+    * Fix textures PDA
+    
+    * Fix OCC spawn; Fix NTbaton sizes
+    
+    * Fix NTbaton-off sprite in inventory
+    
+    * Added jobTitles for new ID cards
+    
+    * Finished GhostRole names and descriptions
+    
+    * Added MindShield for all NT
+    
+    * Added tag noSpawn for all old CentComm stuff and rebase sprite for alt Centcom headset
+    
+    * Fix name and add description for headset
+    
+    * Fxied spawning items; Add backpack for OCC and FOCC
+    
+    * fix submodule
+    
+    * fuck submodule v2
+    
+    * Add centcomm doors
+    
+    * Added list names for FOCC OCC and GSN
+    
+    * Added coat for FOCC
+    
+    * Added scarfs; Added cent-o-vend; Added folder and clipboard
+    
+    * Fixed clipboard; fixed jobicon for DNT; small changes for accesses on CC
+    
+    * Added doors for CentComm
+    
+    * Robust
+    
+    * Resolve conflicts
+    
+    * Requested changes
+    
+    * Required changes
+    
+    * Required changes v2
+    
+    * fix attmept
+    
+    * fix attempt 2
+    
+    * vscode stuff
+    
+    * fix crlf issue ?
+    
+    * fix crlf issue 2 ?
+    
+    * i love line endings
+    
+    * we do a little folder name trolling
+    
+    * fix path 2
+    
+    * fixed field officer cloak
+    
+    * fix srt bag
+    
+    ---------
+    
+    Co-authored-by: Dexler <69513582+DexlerXD@users.noreply.github.com>
+
+[33mcommit 9ee214e120357f05c8ba5a7060e84d6b0a8550b6[m
+Author: Artur <thearturzh@gmail.com>
+Date:   Tue May 7 00:05:21 2024 +0300
+
+    Fix labeler (#975)
+
+[33mcommit b65b8e4e5450f049ec9a8d5ed8a19bbae4c017ea[m
+Merge: e33453ad40 70b0c64081
+Author: Dexler <69513582+DexlerXD@users.noreply.github.com>
+Date:   Mon May 6 21:29:35 2024 +0300
+
+    Merge pull request #974 from TheArturZh/upstream-merge-56
+    
+    Upstream merge 56
+
+[33mcommit 70b0c640819b451bfaf9f04e00588783c9743e78[m
+Merge: d404accbc5 aa426c9c3a
+Author: TheArturZh <thearturzh@gmail.com>
+Date:   Mon May 6 12:06:05 2024 +0300
+
+    Merge branch 'master' of https://github.com/space-wizards/space-station-14 into upstream-merge-56
+
+[33mcommit aa426c9c3aec67ee82f7b6d10cd5770ad008483d[m
+Author: Kara <lunarautomaton6@gmail.com>
+Date:   Mon May 6 01:54:37 2024 -0700
+
+    Fix missing command desc (#27722)
+
+[33mcommi

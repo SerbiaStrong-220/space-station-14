@@ -1,6 +1,8 @@
 - type: vendingMachineInventory
   id: EngiDrobeInventory
   startingInventory:
+    ClothingUniformJumpsuitTechAssistant: 2 # added by ss220
+    ClothingUniformJumpskirtTechAssistant: 2 # added by ss220
     ClothingBackpackDuffelEngineering: 3
     ClothingBackpackSatchelEngineering: 3
     ClothingBackpackEngineering: 3

@@ -1,6 +1,8 @@
 - type: vendingMachineInventory
   id: SciDrobeInventory
   startingInventory:
+    ClothingUniformJumpsuitResearchAssistant: 2 # added by ss220
+    ClothingUniformJumpskirtResearchAssistant: 2 # added by ss220
     ClothingBackpackScience: 3
     ClothingBackpackSatchelScience: 3
     ClothingBackpackDuffelScience: 3

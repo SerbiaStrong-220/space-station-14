@@ -1,6 +1,8 @@
 - type: vendingMachineInventory
   id: MediDrobeInventory
   startingInventory:
+    ClothingUniformJumpsuitIntern: 2 # added by ss220
+    ClothingUniformJumpskirtIntern: 2 # added by ss220
     ClothingBackpackDuffelMedical: 4
     ClothingBackpackMedical: 4
     ClothingBackpackSatchelMedical: 4

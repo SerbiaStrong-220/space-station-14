@@ -1,0 +1,12 @@
+ent-ClothingUniformJumpsuitTechAssistant = комбинезон технического ассистента
+    .desc = Комбинезон для самых юных инженеров.
+ent-ClothingUniformJumpskirtTechAssistant = юбка-комбинезон технического ассистента
+    .desc = Юбка-комбинезон для самых юных инженеров.
+ent-ClothingUniformJumpsuitResearchAssistant = комбинезон научного ассистента
+    .desc = Комбинезон для самых юных ученых.
+ent-ClothingUniformJumpskirtResearchAssistant = юбка-комбинезон научного ассистента
+    .desc = Юбка-комбинезон для самых юных ученых.
+ent-ClothingUniformJumpsuitIntern = комбинезон интерна
+    .desc = Комбинезон для самых юных врачей.
+ent-ClothingUniformJumpskirtIntern = юбка-комбинезон интерна
+    .desc = Юбка-комбинезон для самых юных врачей.

@@ -1,0 +1,20 @@
+# next added by ss220
+- type: loadout
+  id: ResearchAssistantJumpsuit
+  equipment: ResearchAssistantJumpsuit
+
+- type: startingGear
+  id: ResearchAssistantJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitResearchAssistant
+
+- type: loadout
+  id: ResearchAssistantJumpskirt
+  equipment: ResearchAssistantJumpskirt
+
+- type: startingGear
+  id: ResearchAssistantJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtResearchAssistant
+# end
+
