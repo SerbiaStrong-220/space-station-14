@@ -18,6 +18,7 @@ using Robust.Shared.GameStates;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Robust.Server.Audio;
+using Content.Shared.Chemistry;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -25,7 +26,6 @@ public sealed class HypospraySystem : SharedHypospraySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
 
     public override void Initialize()
     {
@@ -144,6 +144,10 @@ public sealed class HypospraySystem : SharedHypospraySystem
 
         var ev = new TransferDnaEvent { Donor = target, Recipient = uid };
         RaiseLocalEvent(target, ref ev);
+        //220 autoinjector update begin
+        var hypoev = new AfterHypoEvent(entity, target, user);
+        RaiseLocalEvent(entity, ref hypoev);
+        //220 autoinjector update end
 
         // same LogType as syringes...
         _adminLogger.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(user):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(uid):using}");

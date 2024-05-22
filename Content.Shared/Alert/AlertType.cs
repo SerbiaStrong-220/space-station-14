@@ -57,6 +57,7 @@ namespace Content.Shared.Alert
 		DeadscoreStage2, //SS220 DarkReaper
         ItemOffer, // SS220 ItemOfferVerb
         MindSlaved, //SS220-mindslave
+        Deflecting
     }
 
 }

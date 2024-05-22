@@ -36,11 +36,21 @@
 
 - type: reaction
   id: Arithrazine
+  minTemp: 380 # SS220 Dangerous chemistry update
   reactants:
     Hyronalin:
       amount: 1
     Hydrogen:
       amount: 1
+# SS220 Dangerous chemistry update begin
+  effects:
+  - !type:CreateGas
+    gas: Tritium
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "atithrazine-tririum-created" ]
+    type: Pvs
+# SS220 Dangerous chemistry update end
   products:
     Arithrazine: 2
 
@@ -115,6 +125,7 @@
 
 - type: reaction
   id: DexalinPlus
+  minTemp: 380 # Dangerous chemistry update
   reactants:
     Dexalin:
       amount: 1
@@ -122,6 +133,17 @@
       amount: 1
     Iron:
       amount: 1
+# SS220 Dangerous chemistry update begin
+  effects:
+  - !type:CreateGas
+    gas: CarbonDioxide
+  - !type:CreateGas
+    gas: WaterVapor
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "dexaline-carbondioxide-created" ]
+    type: Pvs
+# SS220 Dangerous chemistry update end
   products:
     DexalinPlus: 3
 
@@ -215,6 +237,21 @@
       amount: 1
     Blood:
       amount: 2
+# SS220 Dangerous chemistry update begin
+  effects:
+  - !type:CreateGas
+    gas: Ammonia
+  - !type:CreateGas
+    gas: Ammonia
+  - !type:CreateGas
+    gas: Ammonia
+  - !type:CreateGas
+    gas: Ammonia
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "ambuzol-ammonia-created" ]
+    type: Pvs
+# SS220 Dangerous chemistry update end
   products:
     Ambuzol: 4
 
@@ -258,6 +295,17 @@
       amount: 1
     MindbreakerToxin:
       amount: 1
+# SS220 Dangerous chemistry update begin
+  effects:
+  - !type:CreateGas
+    gas: CarbonDioxide
+  - !type:CreateGas
+    gas: WaterVapor
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "dexaline-carbondioxide-created" ]
+    type: Pvs
+# SS220 Dangerous chemistry update end
   products:
     HeartbreakerToxin: 2
 
@@ -555,6 +603,14 @@
       amount: 1
     Silicon:
       amount: 1
+# SS220 Dangerous chemistry update begin
+  effects:
+    - !type:EmpReactionEffect
+      rangePerUnit: 0.2
+      maxRange: 2
+      energyConsumption: 50
+      duration: 10
+# SS220 Dangerous chemistry update begin
   products:
     Insuzine: 3
 

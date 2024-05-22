@@ -14,14 +14,57 @@
         whitelist:
           tags:
           - Write
+    - type: PdaBorderColor
+      borderColor: "#4b474f"
+      accentHColor: "#dfac5c"
+    - type: Sprite
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
     - type: Icon
       state: pda-centcomnew
 
 - type: entity
-  parent: CentcomNewPDA
+  parent: BasePDA
   id: CentcomDiplomatPDA
   name: КПК Дипломата ЦК
   description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
+  components:
+    - type: Pda
+      id: CentcomDiplomatIDCard
+      state: pda-diplomat
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: PdaBorderColor
+      borderColor: "#cbcdd1"
+      accentHColor: "#dfac5c"
+    - type: Sprite
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-diplomat
 
 - type: entity
   parent: CentcomNewPDA

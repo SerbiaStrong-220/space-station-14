@@ -43,3 +43,30 @@
       - id: WeaponSubMachineGunAtreides
       - id: MagazinePistolSubMachineGun
       - id: MagazinePistolSubMachineGun
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackWhiteCaptain
+  name: белый рюкзак капитана
+  description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/whitecapbackpack.rsi
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackWhiteDuffelCaptain
+  name: белый вещмешок капитана
+  description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Duffels/whitecapduffel.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackWhiteSatchelCaptain
+  name: белая сумка капитана
+  description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi

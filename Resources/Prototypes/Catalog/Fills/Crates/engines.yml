@@ -9,7 +9,7 @@
   - type: StorageFill
     contents:
       - id: AmePartFlatpack
-        amount: 12 #SS220 Engineering Rebalance
+        amount: 15 # SS220 Engineering Rebalance
 
 - type: entity
   id: CrateEngineeringAMEJar
@@ -20,7 +20,7 @@
   - type: StorageFill
     contents:
       - id: AmeJar
-        amount: 3
+        amount: 4 # SS220 Engineering Rebalance
 
 - type: entity
   id: CrateEngineeringAMEControl

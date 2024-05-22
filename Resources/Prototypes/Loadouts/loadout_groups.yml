@@ -6,6 +6,14 @@
   maxLimit: 3
   loadouts:
   - PlushieLizard
+  - PlushieSpaceLizard
+  - Lighter
+  - CigPackGreen
+  - CigPackRed
+  - CigPackBlue
+  - CigPackBlack
+  - CigarCase
+  - CigarGold
   - ClothingNeckLGBTPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
@@ -35,6 +43,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+  #ss220-loadout-captain-begin
+  - CaptainWhiteHead
+  - CaptainWhiteBeret
+  #ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -43,6 +55,7 @@
   - CaptainJumpsuit
   - CaptainJumpskirt
   - CaptainFormalSuit
+  - CaptainWhiteJumpsuit #ss220-loadout-captain
 #  - CaptainFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
@@ -53,6 +66,7 @@
   - CaptainCloak
   - CaptainCloakFormal
   - CaptainMantle
+  - CaptainFormalWhiteCloak #ss220-loadout-captain
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -61,6 +75,11 @@
   - CaptainBackpack
   - CaptainSatchel
   - CaptainDuffel
+#ss220-loadout-captain-begin
+  - CaptainWhiteBackpack
+  - CaptainWhiteSatchel
+  - CaptainWhiteDuffel
+#ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: CaptainOuterClothing
@@ -68,6 +87,10 @@
   loadouts:
   - CaptainOuterClothing
   - CaptainWintercoat
+#ss220-loadout-captain-begin
+  - CaptainWhiteOuterClothing
+  - CaptainWhiteCoat
+#ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: HoPHead
@@ -919,14 +942,12 @@
   - SecuritySatchel
   - SecurityDuffel
 
-#SS220-TweakSecurityWebbing-Begin
-# - type: loadoutGroup
-#   id: SecurityBelt
-#   name: loadout-group-security-belt
-#   loadouts:
-#   - SecurityBelt
-#   - SecurityWebbing
-#SS220-TweakSecurityWebbing-End
+- type: loadoutGroup
+  id: SecurityBelt
+  name: loadout-group-security-belt
+  loadouts:
+  - SecurityBelt
+  - SecurityWebbing
 
 - type: loadoutGroup
   id: SecurityOuterClothing
@@ -1005,6 +1026,7 @@
   minLimit: 0
   loadouts:
   - ChiefMedicalOfficerBeret
+  - CMOMedicalHeadMirror
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1012,6 +1034,8 @@
   loadouts:
   - ChiefMedicalOfficerJumpsuit
   - ChiefMedicalOfficerJumpskirt
+  - ChiefMedicalOfficerTurtleneckJumpsuit
+  - ChiefMedicalOfficerTurtleneckJumpskirt
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
@@ -1051,6 +1075,7 @@
   loadouts:
   - MedicalBeret
   - SeniorPhysicianBeret
+  - MedicalHeadMirror
   - BlueSurgeryCap
   - GreenSurgeryCap
   - PurpleSurgeryCap
@@ -1181,6 +1206,54 @@
   loadouts:
   - BlueShoes
   - MedicalWinterBoots
+
+#SS220-brigmedic-loadout-begin
+- type: loadoutGroup
+  id: BrigmedicHead
+  name: loadout-group-brigmedic-head
+  minLimit: 0
+  loadouts:
+  - BrigmedicHead
+
+- type: loadoutGroup
+  id: BrigmedicMask
+  name: loadout-group-brigmedic-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  - BrigmedicMask
+
+- type: loadoutGroup
+  id: BrigmedicJumpsuit
+  name: loadout-group-brigmedic-jumpsuit
+  loadouts:
+  - BrigmedicJumpsuit
+  - BrigmedicJumpskirt
+
+- type: loadoutGroup
+  id: BrigmedicOuterClothing
+  name: loadout-group-brigmedic-outerclothing
+  minLimit: 0
+  loadouts:
+  - BrigmedicWindAMG
+  - BrigmedicVestSecurity
+
+- type: loadoutGroup
+  id: BrigmedicBackpack
+  name: loadout-group-brigmedic-backpack
+  loadouts:
+  - BrigmedicBackpack
+  - BrigmedicSatchel
+  - BrigmedicDuffel
+
+- type: loadoutGroup
+  id: BrigmedicShoes
+  name: loadout-group-brigmedic-shoes
+  loadouts:
+  - RedShoes
+  - BlueShoes
+  - MedicalWinterBoots
+#SS220-brigmedic-loadout-end
 
 # Wildcards
 - type: loadoutGroup

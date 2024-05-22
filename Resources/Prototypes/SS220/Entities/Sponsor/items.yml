@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseCigar
+  parent: BaseCigarette # SS220 Cigarettes questions
   id: SponsorCig
   suffix: Шлёпа
   name: чёрная сигарета

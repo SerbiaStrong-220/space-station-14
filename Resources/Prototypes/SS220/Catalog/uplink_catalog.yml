@@ -47,6 +47,17 @@
   categories:
   - UplinkPointless
 
+- type: listing
+  id: UplinkBoxFolderSyndicate
+  name: папка синдиката
+  description: Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
+  icon: { sprite: /Textures/SS220/Objects/Misc/bureaucracy.rsi, state: folder-syndicate }
+  productEntity: BoxFolderSyndicate
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
   #Masks-Boxes
 
 - type: listing

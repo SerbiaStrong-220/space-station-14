@@ -1,6 +1,6 @@
 - type: entity
   id: Joint
-  parent: BaseCigar
+  parent: BaseCigarette # SS220 Cigarettes questions
   name: joint
   description: A roll of dried plant matter wrapped in thin paper.
   components:
@@ -28,7 +28,7 @@
         reagents:
           - ReagentId: THC
             Quantity: 20
-            
+
 - type: entity
   id: JointRainbow
   parent: Joint
@@ -59,7 +59,7 @@
 
 - type: entity
   id: Blunt
-  parent: BaseCigar
+  parent: BaseCigarette # SS220 Cigarettes questions
   name: blunt
   description: A roll of dried plant matter wrapped in a dried tobacco leaf.
   components:

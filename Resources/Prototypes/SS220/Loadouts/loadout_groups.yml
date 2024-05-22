@@ -27,3 +27,13 @@
   - ChefBeltApronBlack
   - ChefBeltApronRed
   - ChefBeltApronSenior
+
+#Command
+
+- type: loadoutGroup
+  id: CaptainGloves
+  name: loadout-group-captain-gloves
+  minLimit: 0
+  loadouts:
+  - CaptainGloves
+  - CaptainWhiteGloves

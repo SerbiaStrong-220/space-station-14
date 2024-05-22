@@ -21,16 +21,18 @@
     grid:
     - 0,0,3,2
   - type: StorageFill
+# ss220 new syndie chemistry update begin
     contents:
       - id: Beaker
-        amount: 2
       - id: Dropper
-      # It would be cool to have special "syndicate" chemical analysis goggles
-      - id: ClothingEyesGlassesChemical
+      - id: ClothingEyesHudSyndChem
+      - id: SyringeStimulants
+      - id: SyringeStimulants
       - id: VestineChemistryVial
         amount: 2
-      - id: BaseChemistryEmptyVial
-      - id: SyringeStimulants
+      - id: LeadChemistryVial
+      - id: UraniumChemistryVial
+# ss220 new syndie chemistry update end
 
 - type: entity
   parent: BoxCardboard

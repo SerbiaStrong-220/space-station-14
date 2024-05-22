@@ -6,6 +6,7 @@
   - CaptainNeck
   - CaptainJumpsuit
   - CaptainBackpack
+# - CaptainGloves #SS220-ОНО НЕ РАБОТАЕТ БЛЯТЬ Я ТОГО МАНАЛ
   - CaptainOuterClothing
   - Trinkets
 
@@ -259,7 +260,7 @@
   - HeadofSecurityNeck
   - HeadofSecurityJumpsuit
   - SecurityBackpack
-#  - SecurityBelt #SS220-TweakSecurityWebbing
+  - SecurityBelt
   - HeadofSecurityOuterClothing
   - SecurityShoes
   - Trinkets
@@ -270,7 +271,7 @@
   - WardenHead
   - WardenJumpsuit
   - SecurityBackpack
-#  - SecurityBelt #SS220-TweakSecurityWebbing
+  - SecurityBelt
   - WardenOuterClothing
   - SecurityShoes
   - Trinkets
@@ -284,7 +285,7 @@
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityPDA
-#  - SecurityBelt #SS220-TweakSecurityWebbing
+  - SecurityBelt
   - Trinkets
 
 - type: roleLoadout
@@ -365,6 +366,21 @@
   - ParamedicShoes
   - Glasses
   - Trinkets
+
+#SS220-brigmedic-loadout-begin
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - BrigmedicMask
+  - BrigmedicJumpsuit
+  - MedicalGloves
+  - BrigmedicBackpack
+  - BrigmedicOuterClothing
+  - BrigmedicShoes
+  - Glasses
+  - Trinkets
+#SS220-brigmedic-loadout-end
 
 # Wildcards
 - type: roleLoadout

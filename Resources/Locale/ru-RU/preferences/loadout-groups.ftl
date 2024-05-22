@@ -6,6 +6,7 @@ loadout-group-captain-head = Капитан, голова
 loadout-group-captain-jumpsuit = Капитан, комбинезон
 loadout-group-captain-neck = Капитан, шея
 loadout-group-captain-backpack = Капитан, рюкзак
+loadout-group-captain-gloves = Капитан, перчатки
 loadout-group-captain-outerclothing = Капитан, верхняя одежда
 loadout-group-hop-head = Глава персонала, голова
 loadout-group-hop-jumpsuit = Глава персонала, комбинезон
@@ -149,6 +150,15 @@ loadout-group-paramedic-jumpsuit = Парамедик, комбинезон
 loadout-group-paramedic-outerclothing = Парамедик, верхняя одежда
 loadout-group-paramedic-shoes = Парамедик, обувь
 loadout-group-paramedic-backpack = Парамедик, рюкзак
+
+# SS220-Brigmedic
+loadout-group-brigmedic-head = Бригмедик, голова
+loadout-group-brigmedic-jumpsuit = Бригмедик, комбинезон
+loadout-group-brigmedic-outerclothing = Бригмедик, верхняя одежда
+loadout-group-brigmedic-shoes = Бригмедик, обувь
+loadout-group-brigmedic-backpack = Бригмедик, рюкзак
+loadout-group-brigmedic-mask = Бригмедик, маска
+
 # Wildcards
 loadout-group-reporter-jumpsuit = Репортёр, комбинезон
 loadout-group-boxer-jumpsuit = Боксёр, комбинезон

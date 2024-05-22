@@ -1,0 +1,21 @@
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesHudSyndChem
+  name: syndie chem med hud
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/syndchem.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Hud/syndchem.rsi
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: ShowSyndicateIcons
+  - type: SolutionScanner
+  - type: Tag
+    tags:
+    - HudMedical

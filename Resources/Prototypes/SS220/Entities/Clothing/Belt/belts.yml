@@ -1,0 +1,22 @@
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltJianSheath
+  name: jian sheath
+  description: An ancient sheath for an ancient sword.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/jian_sheath.rsi
+  - type: Clothing
+    sprite: SS220Clothing/Belt/jian_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        whitelist:
+          tags:
+          - JianSword
+  - type: ItemMapper
+    mapLayers:
+      sheath-jian:
+        whitelist:
+          tags:
+          - JianSword
