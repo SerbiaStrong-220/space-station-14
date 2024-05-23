@@ -1,4 +1,3 @@
-# next added by ss220
 - type: loadout
   id: ResearchAssistantJumpsuit
   equipment: ResearchAssistantJumpsuit
@@ -16,5 +15,3 @@
   id: ResearchAssistantJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtResearchAssistant
-# end
-
