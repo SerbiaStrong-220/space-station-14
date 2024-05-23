@@ -16,6 +16,9 @@
             prefixCreator: '-SS220'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
+        - type: StationRandomTransform
+          enableStationRotation: false
+          maxStationOffset: null
         - type: StationJobs
           overflowJobs:
             - Passenger
