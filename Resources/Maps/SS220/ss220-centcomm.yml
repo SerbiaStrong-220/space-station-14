@@ -71,7 +71,7 @@ entities:
       name: Central Command
     - type: Transform
       pos: -0.07078934,-0.6836653
-      parent: invalid
+      parent: 8624
     - type: MapGrid
       chunks:
         0,0:
@@ -6409,6 +6409,34 @@ entities:
     - type: ContainedSolution
       containerName: food
       container: 2737
+  - uid: 8624
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
+    - type: Broadphase
+    - type: OccluderTree
+  - uid: 8627
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 8626
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 8626
 - proto: ActionSleep
   entities:
   - uid: 9
@@ -32324,7 +32352,7 @@ entities:
       pos: 27.5,19.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -49646.332
+      secondsUntilStateChange: -50257.78
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -48066,11 +48094,29 @@ entities:
   - uid: 5987
     components:
     - type: MetaData
-      desc: 'Светит звезда во тьме космической благодаря самоотверженной работе великих архитекторов. Каждый фрагмент этой станции – капля пота, каждая деталь – проявление безграничной любви к космосу и человечеству. С благодарностью воздаем почести тем, кто строил мосты к звездам: Kirus59, UrPrice, AliceValestray, Glek3197, NightmareStalker, Bomjojuk, Vnoeg.'
+      desc: Светит звезда во тьме космической благодаря самоотверженной работе великих архитекторов. Каждый фрагмент этой станции – капля пота, каждая деталь – проявление безграничной любви к космосу и человечеству. С благодарностью воздаем почести тем, кто строил мосты к звездам и награждаем их вечной славой.
       name: памятник конструкторам станции
     - type: Transform
       pos: 35.5,-17.5
       parent: 1
+    - type: PaperLabel
+      labelSlot:
+        insertVerbText: Attach Label
+        ejectVerbText: Remove Label
+        whitelist:
+          components:
+          - Paper
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 8626
 - proto: MicStand
   entities:
   - uid: 5988
@@ -49210,6 +49256,78 @@ entities:
 
 
         [italic]Место для печати - Офицер Специальных Операций[/italic]
+  - uid: 8626
+    components:
+    - type: Transform
+      parent: 5987
+    - type: Paper
+      stampState: paper_stamp-lawyer
+      stampedBy:
+      - stampedColor: '#A35061FF'
+        stampedName: Инженерное Бюро Архитекторов
+      - stampedColor: '#006600FF'
+        stampedName: stamp-component-stamped-name-centcom
+      content: >
+        [bold]Вечные почести самым ответственным лицам и архитекторам NanoTrasen. [/bold]
+
+
+        [bullet]Старший проектировщик [bold]Алан Свит-Лисичанский[/bold] за постоянное усовершенствование проекта и контроль качества строительства;
+
+        [bullet]Дизайнер [bold]Леонид Головач[/bold] за общую концепцию, чертеж первых версий и проектировку инженерных систем;
+
+        [bullet][bold]Архитектор Авианосца Луна[/bold] за внедренные разработки в обновленные модели шаттлов;
+
+        [bullet]Архитектор [bold]Исаак Инсомния[/bold] за устранение дыр в системах безопасности и дизайнерскую помощь с красными оттенками;
+
+        [bullet][bold]Марск Дуерлонд[/bold] за стабильные поставки стройматериалов и помощь в проектировке отдела Снабжения;
+
+        [bullet]Заслуженный оператор [bold]Алиссия[/bold] за внесённую критику в обустройство отсеков ЦК и помощь в проектировке рабочих мест;
+
+        [bullet]Уборщик [bold]Эмиви Пушистые Вапки[/bold] что привнес свое немаловажное оценочное мнение в обустройство сервисного отдела и на которого удалось свалить косяки других перед инвесторами.
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 8627
 - proto: PaperNtFormCmd
   entities:
   - uid: 591
@@ -63691,7 +63809,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -444669.12
+      secondsUntilStateChange: -445280.56
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
