@@ -195,6 +195,13 @@
   id: polina
 
 - type: ttsVoice
+  name: Ромка
+  description: Голос персонажа Ромка из игры Tiny Bunny
+  sex: Male
+  speaker: romka
+  id: romka
+
+- type: ttsVoice
   name: Цицерон
   description: Голос персонажа Цицерон из игры TES 5 Skyrim
   sex: Male
@@ -608,6 +615,13 @@
   id: sulik
 
 - type: ttsVoice
+  name: Майрон
+  description: Голос персонажа Майрон из игры Fallout 2
+  sex: Female
+  speaker: myron
+  id: myron
+
+- type: ttsVoice
   name: Добрая Талия
   description: Голос персонажа Добрая Талия из игры Dungeons 3
   sex: Female
@@ -620,6 +634,13 @@
   sex: Female
   speaker: evil_thalya
   id: evil_thalya
+
+- type: ttsVoice
+  name: Рассказчик
+  description: Голос персонажа Рассказчик из игры Dungeons 3
+  sex: Female
+  speaker: narrator_d3
+  id: narrator_d3
 
 - type: ttsVoice
   name: Чувак
@@ -683,6 +704,20 @@
   sex: Male
   speaker: horner
   id: horner
+
+- type: ttsVoice
+  name: Габриэль Тош
+  description: Голос персонажа Габриэль Тош из игры StarCraft 2
+  sex: Male
+  speaker: tosh
+  id: tosh
+
+- type: ttsVoice
+  name: Тайкус Финдли
+  description: Голос персонажа Тайкус Финдли из игры StarCraft 2
+  sex: Male
+  speaker: tychus
+  id: tychus
 
 - type: ttsVoice
   name: Амит Таккар
@@ -760,3 +795,24 @@
   sex: Female
   speaker: matildaweasley
   id: matildaweasley
+
+- type: ttsVoice
+  name: Натсай Онай
+  description: Голос персонажа Натсай Онай из игры Hogwarts Legacy
+  sex: Female
+  speaker: natsaionai
+  id: natsaionai
+
+- type: ttsVoice
+  name: Оминис Мракс
+  description: Голос персонажа Оминис Мракс из игры Hogwarts Legacy
+  sex: Male
+  speaker: ominisgaunt
+  id: ominisgaunt
+
+- type: ttsVoice
+  name: Поппи Добринг
+  description: Голос персонажа Поппи Добринг из игры Hogwarts Legacy
+  sex: Female
+  speaker: poppysweeting
+  id: poppysweeting
