@@ -11,6 +11,9 @@
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/emergency_axioma.yml
+        - type: StationRandomTransform
+          enableStationRotation: false
+          maxStationOffset: null
         - type: StationNameSetup
           mapNameTemplate: '{0} Axioma {1}'
           nameGenerator:
