@@ -850,7 +850,7 @@
     collection: FootstepTile
   heatCapacity: 10000
 
-  - type: tile
+- type: tile
   id: FloorWasteland
   name: tiles-wasteland
   sprite: /Textures/Tiles/Planet/Concrete/wasteland.png
