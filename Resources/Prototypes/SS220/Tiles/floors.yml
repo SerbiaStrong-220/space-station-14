@@ -826,7 +826,7 @@
   baseTurf: Plating
   isSubfloor: false
   footstepSounds:
-    collection: FootstepGras
+    collection: FootstepGrass
   heatCapacity: 10000
 
 - type: tile
