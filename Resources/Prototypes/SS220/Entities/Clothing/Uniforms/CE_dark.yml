@@ -5,9 +5,9 @@
   description: Dark uniform for years of service as head of the engineering department.
   components:
   - type: Sprite
-    sprite: SS220\Clothing\Uniforms\CE_dark\jumpsuit\ce_dark.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpsuit/ce_dark.rsi
   - type: Clothing
-    sprite: SS220\Clothing\Uniforms\CE_dark\jumpsuit\ce_dark.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpsuit/ce_dark.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -16,9 +16,9 @@
   description: Dark turtleneck designed specifically for work in conditions of the engineering department.
   components:
   - type: Sprite
-    sprite: SS220\Clothing\Uniforms\CE_dark_turtle\jumpsuit\ce_dark_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpsuit/ce_dark_turtle.rsi
   - type: Clothing
-    sprite: SS220\Clothing\Uniforms\CE_dark_turtle\jumpsuit\ce_dark_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpsuit/ce_dark_turtle.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -27,9 +27,9 @@
   description: Dark uniform for years of service as head of the engineering department.
   components:
   - type: Sprite
-    sprite: SS220\Clothing\Uniforms\CE_dark\jumpskirt\ce_dark.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
   - type: Clothing
-    sprite: SS220\Clothing\Uniforms\CE_dark\jumpskirt\ce_dark.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -38,6 +38,6 @@
   description: Dark turtleneck designed specifically for work in conditions of the engineering department.
   components:
   - type: Sprite
-    sprite: SS220\Clothing\Uniforms\CE_dark_turtle\jumpskirt\ce_dark_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
   - type: Clothing
-    sprite: SS220\Clothing\Uniforms\CE_dark_turtle\jumpskirt\ce_dark_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
