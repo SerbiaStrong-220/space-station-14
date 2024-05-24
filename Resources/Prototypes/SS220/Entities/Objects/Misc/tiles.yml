@@ -476,3 +476,158 @@
       - FloorWoodTileRed
   - type: Stack
     stackType: FloorTileItemWoodTileRed
+
+# Carpet
+
+- type: entity
+  name: white carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetWhite
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-white
+  - type: Item
+    heldPrefix: carpet-white
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetWhite
+  - type: Stack
+    stackType: FloorTileStackCarpetWhite
+
+- type: entity
+  name: black carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetBlack
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-black
+  - type: Item
+    heldPrefix: carpet-black
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetBlack
+  - type: Stack
+    stackType: FloorTileStackCarpetBlack
+
+- type: entity
+  name: red carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetRed
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-red
+  - type: Item
+    heldPrefix: carpet-red
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetRed
+  - type: Stack
+    stackType: FloorTileStackCarpetRed
+
+- type: entity
+  name: magenta carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetMagenta
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-magenta
+  - type: Item
+    heldPrefix: carpet-magenta
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetMagenta
+  - type: Stack
+    stackType: FloorTileStackCarpetMagenta
+
+- type: entity
+  name: blue carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetBlue
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-blue
+  - type: Item
+    heldPrefix: carpet-blue
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetBlue
+  - type: Stack
+    stackType: FloorTileStackCarpetBlue
+
+- type: entity
+  name: green carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetGreen
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-green
+  - type: Item
+    heldPrefix: carpet-green
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetGreen
+  - type: Stack
+    stackType: FloorTileStackCarpetGreen
+
+- type: entity
+  name: cyan carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetCyan
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-cyan
+  - type: Item
+    heldPrefix: carpet-cyan
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetCyan
+  - type: Stack
+    stackType: FloorTileStackCarpetCyan
+
+- type: entity
+  name: purple carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetPurple
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-purple
+  - type: Item
+    heldPrefix: carpet-purple
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetPurple
+  - type: Stack
+    stackType: FloorTileStackCarpetPurple
+
+- type: entity
+  name: orange carpet floor
+  parent: FloorTileItemBase
+  id: FloorTileItemCarpetOrange
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_sh.rsi
+    state: carpet-orange
+  - type: Item
+    heldPrefix: carpet-orange
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTileCarpetOrange
+  - type: Stack
+    stackType: FloorTileStackCarpetOrange
