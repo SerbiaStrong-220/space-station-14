@@ -832,7 +832,7 @@
 - type: tile
   id: FloorRocks
   name: tiles-rocks
-  sprite: /Textures/Tiles/Planet/Concrete/rocks.png
+  sprite: /Textures/SS220/Tiles/rocks.png
   variants: 9
   placementVariants:
   - 1.0
@@ -853,7 +853,7 @@
 - type: tile
   id: FloorWasteland
   name: tiles-wasteland
-  sprite: /Textures/Tiles/Planet/Concrete/wasteland.png
+  sprite: /Textures/SS220/Tiles/wasteland.png
   variants: 9
   placementVariants:
   - 1.0
