@@ -78,7 +78,7 @@
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCentcomFormalDress
   name: central command formal dress
-  description: A dress for special occasions
+  description: A dress for special occasions.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi

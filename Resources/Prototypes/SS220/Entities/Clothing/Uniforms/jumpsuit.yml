@@ -24,8 +24,8 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitCentcomOfficer
-  name: CentCom turtleneck suit
+  id: ClothingUniformJumpsuitCentcomOfficerTurtleneck
+  name: centcom turtleneck suit
   description: A casual, yet refined green turtleneck, used by CentCom Officials. It has a fragrance of blueberry.
   components:
   - type: Sprite
