@@ -44,3 +44,7 @@
 # SS220-JianSword
 - type: Tag
   id: JianSword
+
+# SS220-Cards
+- type: Tag
+  id: GameCard
