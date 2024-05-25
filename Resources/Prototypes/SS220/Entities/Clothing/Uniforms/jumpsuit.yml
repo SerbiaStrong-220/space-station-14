@@ -21,3 +21,14 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCentcomOfficer
+  name: CentCom turtleneck suit # Corvax-Resprite
+  description: A casual, yet refined green turtleneck, used by CentCom Officials. It has a fragrance of blueberry.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
