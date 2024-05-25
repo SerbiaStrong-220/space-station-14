@@ -10,3 +10,14 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformNanotrasenDiplomat
+  name: дипломатическая форма NanoTrasen
+  description: Очень яркая и официальная униформа дипломатического корпуса NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi
