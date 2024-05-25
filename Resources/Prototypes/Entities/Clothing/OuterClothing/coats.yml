@@ -498,10 +498,10 @@
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
-    
+
 #SS220-DressTweak-Begin
 
-- type: entity 
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingUniformJumpskirtCapFormalDress
   name: captain's formal dress
@@ -523,6 +523,7 @@
   parent: ClothingOuterStorageBase
   id: ClothingUniformJumpskirtCentcomFormalDress
   name: central command formal dress
+  noSpawn: true #SS220-CentcomFashion
   description: A dress for special occasions
   components:
   - type: Sprite
@@ -547,5 +548,5 @@
        Slash: 0.7
        Piercing: 0.5
        Heat: 0.8
-        
+
 #SS220-DressTweak-End

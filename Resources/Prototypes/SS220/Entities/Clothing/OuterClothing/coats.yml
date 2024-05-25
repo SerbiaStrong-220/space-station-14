@@ -16,7 +16,7 @@
         Piercing: 0.9
         Heat: 0.9
 
-- type: entity 
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCEFormalDress
   name: торжественное платье старшего инженера
@@ -31,12 +31,12 @@
       coefficients:
         Heat: 0.75
         Radiation: 0.9
-        
-- type: entity 
+
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCMOFormalDress
   name: торжественное платье главного врача
-  description: Встречайте - Главный Врач! 
+  description: Встречайте - Главный Врач!
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
@@ -46,8 +46,8 @@
     modifiers:
       coefficients:
         Caustic: 0.75
-        
-- type: entity 
+
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatHoPFormalDress
   name: торжественное платье главы персонала
@@ -57,8 +57,8 @@
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
-    
-- type: entity 
+
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatRDFormalDress
   name: торжественное платье научного руководителя
@@ -73,3 +73,21 @@
       coefficients:
         Caustic: 0.75
         Radiation: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCentcomFormalDress
+  name: central command formal dress
+  description: A dress for special occasions
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.5
