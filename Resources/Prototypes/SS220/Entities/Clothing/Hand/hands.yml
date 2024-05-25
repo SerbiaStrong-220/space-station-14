@@ -25,9 +25,9 @@
   description: A pair of high-quality thick centcom gloves decorated with gold embroidery.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/centcom_officer.rsi
+    sprite: SS220/Clothing/Hands/Gloves/centcom_officer.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/centcom_officer.rsi
+    sprite: SS220/Clothing/Hands/Gloves/centcom_officer.rsi
   - type: GloveHeatResistance
     heatResistance: 1400
   - type: Insulated
@@ -39,9 +39,9 @@
   description: A pair of high-quality white thick gloves decorated with gold embroidery, which are issued to a Nanotrasen diplomat.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/nanotrasen_diplomat.rsi
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/nanotrasen_diplomat.rsi
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
   - type: GloveHeatResistance
     heatResistance: 1400
   - type: Insulated
