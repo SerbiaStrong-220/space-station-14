@@ -19,3 +19,26 @@
   - type: Tag
     tags:
     - HudMedical
+
+- type: entity
+  parent: [ClothingEyesBase, ClothingEyesGlassesSecurity]
+  id: ClothingEyesHudOmniversal
+  name: omniversal hud
+  description: A secret development for very secretive individuals.
+  suffix: Sec-med-chem
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/omni_hud.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/omni_hud.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+    - Inorganic
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: SolutionScanner
