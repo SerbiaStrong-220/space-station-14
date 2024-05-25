@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseItem
   id: BaseCard
-  name: Карта
+  name: карта
   description: Есть идеи что на этой карте?
   components:
   - type: Sprite
