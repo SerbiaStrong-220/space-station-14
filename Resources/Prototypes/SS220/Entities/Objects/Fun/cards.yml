@@ -3,7 +3,7 @@
   parent: BaseItem
   id: BaseCard
   name: карта
-  description: Есть идеи что на этой карте?
+  description: Предназначена для настольной игры. Погасите свою мысль о том, что она может быть отличным метательным оружием - это заблуждение.
   components:
   - type: Sprite
     sprite: SS220/Objects/Fun/cards.rsi
