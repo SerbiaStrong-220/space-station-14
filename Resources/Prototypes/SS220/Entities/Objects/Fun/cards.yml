@@ -272,12 +272,6 @@
           Off: { state: closedCard }
           On: { state: pv }
 
-
-
-
-
-
-
 - type: entity
   parent: BaseCard
   id: CarDkt
@@ -421,11 +415,6 @@
           Off: { state: closedCard }
           On: { state: kv }
 
-
-
-
-
-
 - type: entity
   parent: BaseCard
   id: CarDht
@@ -568,12 +557,6 @@
         base:
           Off: { state: closedCard }
           On: { state: hv }
-
-
-
-
-
-
 
 - type: entity
   parent: BaseCard
