@@ -1,31 +1,5 @@
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingNeckMantleBase
-  abstract: true
-  name: mantle
-  description: modestly but skillfully
-  components:
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
-    - id: MaterialCloth1
-      amount: 1
-  - type: Food
-    requiresSpecialDigestion: true
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 5
-  - type: Tag
-    tags:
-    - WhitelistChameleon
-    - ClothMade
-
-- type: entity
-  parent: ClothingNeckMantleBase
   id: ClothingNeckMantleCap
   name: captain's mantle
   description: A formal mantle to drape around the shoulders. Others stand on the shoulders of giants. You're the giant they stand on.  # Corvax-Resprite
@@ -36,7 +10,7 @@
     sprite: Clothing/Neck/mantles/capmantle.rsi
 
 - type: entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleCE
   name: chief engineer's mantle
   description: A bright white and yellow striped mantle. Do not wear around active machinery.  # Corvax-Resprite
@@ -47,7 +21,7 @@
     sprite: Clothing/Neck/mantles/cemantle.rsi
 
 - type: entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleCMO
   name: chief medical officer's mantle
   description: A light blue shoulder draping for THE medical professional. Contrasts well with blood.  # Corvax-Resprite
@@ -58,7 +32,7 @@
     sprite: Clothing/Neck/mantles/cmomantle.rsi
 
 - type: entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleHOP
   name: head of personnel's mantle
   description: A decorative draping of blue and red over your shoulders, signifying your stamping prowess.  # Corvax-Resprite
@@ -69,7 +43,7 @@
     sprite: Clothing/Neck/mantles/hopmantle.rsi
 
 - type: entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleHOS
   name: head of security's mantle
   description: A plated mantle that one might wrap around the upper torso. The 'scales' of the garment signify the members of security and how you're carrying them on your shoulders.  # Corvax-Resprite
@@ -80,7 +54,7 @@
     sprite: Clothing/Neck/mantles/hosmantle.rsi
 
 - type: entity # Corvax-Resprite: Old mantle renamed and saved as that new entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleHOSShoulder
   name: head of security's shoulder mantle
   description: Shootouts with nukies are just another Tuesday for this HoS. This mantle is a symbol of commitment to the station.
@@ -91,7 +65,7 @@
     sprite: Clothing/Neck/mantles/hosmantle_shoulder.rsi
 
 - type: entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleRD
   name: research director's mantle
   description: A terribly comfortable shoulder draping for the discerning scientist of fashion.  # Corvax-Resprite
@@ -102,7 +76,7 @@
     sprite: Clothing/Neck/mantles/rdmantle.rsi
 
 - type: entity
-  parent: ClothingNeckMantleBase
+  parent: ClothingNeckBase
   id: ClothingNeckMantleQM
   name: quartermaster's mantle
   description: For the master of goods and materials to rule over the department, a befitting mantle to show off superiority!

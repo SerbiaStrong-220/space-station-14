@@ -13,7 +13,6 @@
   - type: Tag
     tags:
       - FoodSnack
-      - WhitelistChameleon
   - type: FlavorProfile
     flavors:
       - chocolate
@@ -39,9 +38,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Broken.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Broken.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -53,9 +49,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Hydra.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Hydra.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -67,9 +60,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Plastic.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Plastic.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -81,9 +71,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PlasticSpecial.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PlasticSpecial.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -95,9 +82,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarI.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarI.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -109,9 +93,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarII.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarII.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -123,9 +104,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarIII.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/PolarIII.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -137,9 +115,6 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/SSSP.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/SSSP.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -151,6 +126,3 @@
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Syndie.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Medals/Medalpack1/Syndie.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon

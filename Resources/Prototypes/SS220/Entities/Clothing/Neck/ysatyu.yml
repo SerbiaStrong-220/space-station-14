@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingNeckScarfBase
+  parent: ClothingNeckBase
   id: ClothingNeckScarfYsatyu
   name: ysatyu scarf
   description: Long and narrow for convenient drinking of moonshine.
@@ -8,7 +8,3 @@
       sprite: SS220/Clothing/Neck/Scarfs/ysatyu.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Scarfs/ysatyu.rsi
-    - type: Tag
-      tags:
-      - WhitelistChameleon
-      - ClothMade
