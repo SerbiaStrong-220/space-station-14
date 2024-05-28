@@ -25,7 +25,7 @@ entities:
     - type: MetaData
       name: NT Evac Frankenstein
     - type: Transform
-      pos: -47.39544,3.777522
+      pos: -8.055161,-4.343569
       parent: invalid
     - type: MapGrid
       chunks:
@@ -1782,12 +1782,6 @@ entities:
       parent: 1
 - proto: EmergencyLight
   entities:
-  - uid: 228
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 7.5,-3.5
-      parent: 1
   - uid: 229
     components:
     - type: Transform
@@ -1822,13 +1816,25 @@ entities:
       rot: 3.141592653589793 rad
       pos: 10.5,9.5
       parent: 1
+  - uid: 240
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-3.5
+      parent: 1
 - proto: ExtinguisherCabinetFilled
   entities:
+  - uid: 228
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,8.5
+      parent: 1
   - uid: 235
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 14.5,8.5
+      pos: 2.5,-2.5
       parent: 1
   - uid: 236
     components:
@@ -1839,23 +1845,12 @@ entities:
   - uid: 237
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 19.5,12.5
       parent: 1
   - uid: 238
     components:
     - type: Transform
-      pos: 2.5,-2.5
-      parent: 1
-  - uid: 239
-    components:
-    - type: Transform
-      pos: 10.5,5.5
-      parent: 1
-  - uid: 240
-    components:
-    - type: Transform
-      pos: 4.5,1.5
+      pos: 10.5,8.5
       parent: 1
   - uid: 241
     components:
@@ -2606,6 +2601,12 @@ entities:
       parent: 1
 - proto: Poweredlight
   entities:
+  - uid: 239
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,11.5
+      parent: 1
   - uid: 367
     components:
     - type: Transform
@@ -2617,11 +2618,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 1.5,0.5
-      parent: 1
-  - uid: 369
-    components:
-    - type: Transform
-      pos: 18.5,11.5
       parent: 1
   - uid: 370
     components:
@@ -2805,7 +2801,7 @@ entities:
   - uid: 399
     components:
     - type: Transform
-      pos: 3.5,12.5
+      pos: 2.5,12.5
       parent: 1
 - proto: ShuttleWindow
   entities:
@@ -3225,6 +3221,11 @@ entities:
       parent: 1
 - proto: WallPlastitanium
   entities:
+  - uid: 369
+    components:
+    - type: Transform
+      pos: 19.5,13.5
+      parent: 1
   - uid: 470
     components:
     - type: Transform
@@ -3270,12 +3271,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 19.5,-0.5
-      parent: 1
-  - uid: 478
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 19.5,13.5
       parent: 1
 - proto: WallPlastitaniumDiagonal
   entities:
