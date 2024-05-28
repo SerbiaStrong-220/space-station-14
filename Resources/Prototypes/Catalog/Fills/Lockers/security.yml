@@ -159,12 +159,16 @@
       - id: ClothingHandsGlovesForensic
       - id: RubberStampDetective
       - id: BookBusido # Corvax-Books
+      - id: PhotoCamera # SS220-Photography
+      - id: PhotoCameraFilm # SS220-Photography
+        amount: 3
       - id: HoloprojectorSecurity
       - id: BoxEvidenceMarkers
       - id: SpeedLoaderMagnum
         amount: 2
       - id: DetectiveHiddenCamera # SS220 add-detective-camera
         amount: 3
+
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb
