@@ -169,3 +169,27 @@
       - id: NetworkConfigurator
       - id: Screwdriver
       - id: Wrench
+
+- type: entity
+  parent: ClothingBackpackDuffelMilitary
+  id: ClothingBackpackFractWarC4Set
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор взрывчатки C4
+  description: Набор взрывчатки для прорыва укреплений противника.
+  components:
+   - type: StorageFill
+     contents:
+      - id: C4
+        amount: 8
+
+- type: entity
+  parent: ClothingBackpackDuffelMilitary
+  id: ClothingBackpackFractWarExGrenadeSet
+  suffix: Shitspawn, Ebent, FractWar
+  name: вещмешок осколочных гранат
+  description: Большой вещмешок для хранения любого армейского снаряжения.
+  components: 
+   - type: StorageFill
+     contents:
+      - id: ExGrenade
+        amount: 10
