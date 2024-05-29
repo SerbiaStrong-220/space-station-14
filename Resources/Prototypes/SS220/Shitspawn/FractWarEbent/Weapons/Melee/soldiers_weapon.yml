@@ -1,0 +1,112 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# USSP
+- type: entity
+  name: Энергетический молот
+  parent: EnergySword
+  id: EnergyHammer
+  description: Новейшая разработка пытливых советских умов. Незаменимая вещь как в хозяйстве, так и на войне.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Blunt: 6
+            Structural: 60
+            Heat: 6
+    deactivatedSecret: true
+  - type: EnergySword
+    colorOptions:
+    - "#ff0000"
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/e_hammer.rsi
+    layers:
+    - state: e_hammer
+    - state: e_hammer_blade
+      color: "#FFFFFF"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: MeleeWeapon
+    attackRate: 1
+    soundHit:
+      path: /Audio/Weapons/eblade1.ogg
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/e_hammer.rsi
+
+- type: entity
+  name: Энергетический серп
+  parent: EnergySword
+  id: EnergySickle
+  description: Новейшая разработка пытливых советских умов. Незаменимая вещь как в хозяйстве, так и на войне.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 30
+        Heat: 6
+  - type: EnergySword
+    colorOptions:
+    - "#ffcc00"
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/e_sickle.rsi
+    layers:
+    - state: e_sickle
+    - state: e_sickle_blade
+      color: "#FFFFFF"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: MeleeWeapon
+    attackRate: 1
+    soundHit:
+      path: /Audio/Weapons/eblade1.ogg
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/e_sickle.rsi
+
+# ERT
+- type: entity
+  name: энергетическая сабля
+  parent: EnergySword
+  id: EnergySaberNT
+  description: Передовое оружие NanoTrasen для ведения ближнего боя.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 19
+        Heat: 6
+        Structural: 15
+  - type: DisarmMalus
+    malus: 0.6
+  - type: EnergySword
+    colorOptions:
+    - "#ffcc00"
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
+    layers:
+    - state: e_saber
+    - state: e_saber_blade
+      color: "#FFFF00"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: MeleeWeapon
+    attackRate: 1
+    soundHit:
+      path: /Audio/Weapons/eblade1.ogg
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Item
+    sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
