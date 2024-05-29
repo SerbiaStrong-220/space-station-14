@@ -35,4 +35,4 @@
   - type: StorageFill
     contents:
     - id: WeaponPulseCarbine
-      amount: 20
+      amount: 8
