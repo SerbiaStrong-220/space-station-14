@@ -10,3 +10,8 @@
     sprite: SS220/Clothing/Uniforms/nt_NO_uniform.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/nt_NO_uniform.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
