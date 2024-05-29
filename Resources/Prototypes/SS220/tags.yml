@@ -45,10 +45,13 @@
 - type: Tag
   id: JianSword
 
+<<<<<<< HEAD
 # SS220-Cards
 - type: Tag
   id: GameCard
 
+=======
+>>>>>>> d336d6eb452d812bb35611980c423d0e6a4c7266
 # FractWarEbent
 - type: Tag
   id: CartridgeIron_MG34
