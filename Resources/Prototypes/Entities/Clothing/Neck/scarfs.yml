@@ -1,5 +1,32 @@
 - type: entity
   parent: ClothingNeckBase
+  id: ClothingNeckScarfBase
+  abstract: true
+  name: scarf
+  description: warm and cozy
+  components:
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 2
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - ClothMade
+    - Ian
+
+- type: entity
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedRed
   name: striped red scarf
   description: A stylish striped red scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -8,13 +35,9 @@
     sprite: Clothing/Neck/Scarfs/red.rsi
   - type: Clothing
     sprite: Clothing/Neck/Scarfs/red.rsi
-  - type: Tag
-    tags:
-      - Ian # SS220 Shapochki
-
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedBlue
   name: striped blue scarf
   description: A stylish striped blue scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -23,12 +46,9 @@
     sprite: Clothing/Neck/Scarfs/blue.rsi
   - type: Clothing
     sprite: Clothing/Neck/Scarfs/blue.rsi
-  - type: Tag
-    tags:
-      - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedGreen
   name: striped green scarf
   description: A stylish striped green scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -37,12 +57,9 @@
     sprite: Clothing/Neck/Scarfs/green.rsi
   - type: Clothing
     sprite: Clothing/Neck/Scarfs/green.rsi
-  - type: Tag
-    tags:
-      - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedBlack
   name: striped black scarf
   description: A stylish striped black scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -51,12 +68,9 @@
       sprite: Clothing/Neck/Scarfs/black.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/black.rsi
-    - type: Tag
-      tags:
-        - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedBrown
   name: striped brown scarf
   description: A stylish striped brown scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -65,12 +79,9 @@
       sprite: Clothing/Neck/Scarfs/brown.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/brown.rsi
-    - type: Tag
-      tags:
-        - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedLightBlue
   name: striped light blue scarf
   description: A stylish striped light blue scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -79,9 +90,13 @@
       sprite: Clothing/Neck/Scarfs/lightblue.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/lightblue.rsi
+    - type: Tag
+      tags:
+       - ClothMade
+       - WhitelistChameleon
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedOrange
   name: striped orange scarf
   description: A stylish striped orange scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -90,12 +105,9 @@
       sprite: Clothing/Neck/Scarfs/orange.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/orange.rsi
-    - type: Tag
-      tags:
-       - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedPurple
   name: striped purple scarf
   description: A stylish striped purple scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
@@ -104,12 +116,9 @@
       sprite: Clothing/Neck/Scarfs/purple.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/purple.rsi
-    - type: Tag
-      tags:
-        - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedSyndieGreen
   name: striped syndicate green scarf
   description: A stylish striped syndicate green scarf. The perfect winter accessory for those with a keen fashion sense, and those who are in the mood to steal something.
@@ -118,12 +127,9 @@
       sprite: Clothing/Neck/Scarfs/syndiegreen.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/syndiegreen.rsi
-    - type: Tag
-      tags:
-        - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedSyndieRed
   name: striped syndicate red scarf
   description: A stylish striped syndicate red scarf. The perfect winter accessory for those with a keen fashion sense, and those who are in the mood to steal something.
@@ -132,9 +138,12 @@
       sprite: Clothing/Neck/Scarfs/syndiered.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/syndiered.rsi
+    - type: Tag
+      tags:
+       - WhitelistChameleon
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedCentcom
   name: striped CentCom scarf
   description: A stylish striped centcom colored scarf. The perfect winter accessory for those with a keen fashion sense, and those who need to do paperwork in the cold.
@@ -144,12 +153,9 @@
       sprite: Clothing/Neck/Scarfs/centcom.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/centcom.rsi
-    - type: Tag
-      tags:
-       - Ian # SS220 Shapochki
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckScarfBase
   id: ClothingNeckScarfStripedZebra
   name: zebra scarf
   description: A striped scarf, a mandatory accessory for artists.
@@ -158,6 +164,3 @@
     sprite: Clothing/Neck/Scarfs/zebra.rsi
   - type: Clothing
     sprite: Clothing/Neck/Scarfs/zebra.rsi
-  - type: Tag
-    tags:
-       - Ian # SS220 Shapochki

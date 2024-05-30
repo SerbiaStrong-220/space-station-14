@@ -1,5 +1,31 @@
 - type: entity
   parent: ClothingNeckBase
+  id: ClothingNeckStoleBase
+  abstract: true
+  name: Stole
+  description: warm and sweet
+  components:
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 2
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - ClothMade
+
+- type: entity
+  parent: ClothingNeckStoleBase
   id: ClothingNeckStoleChaplain
   name: chaplain stole
   description: An elegantly designed stole, with a vibrant gold plus on either end.

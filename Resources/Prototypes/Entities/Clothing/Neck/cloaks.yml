@@ -1,5 +1,31 @@
 - type: entity
   parent: ClothingNeckBase
+  id: ClothingNeckCloakBase
+  abstract: true
+  name: cloak
+  description: Greatness is my middle name
+  components:
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 3
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 15
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - ClothMade
+
+- type: entity
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakCentcom
   noSpawn: true #SS220 New CentCom
   name: central commander's cloak
@@ -11,7 +37,7 @@
     stealGroup: HeadCloak # leaving this here because I suppose it might be interesting?
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakCap
   name: captain's cloak
   description: A pompous and comfy blue cloak with a nice gold trim, while not particularly valuable as your other possessions, it sure is fancy.
@@ -22,7 +48,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakHos
   name: head of security's cloak
   description: An exquisite dark and red cloak fitting for those who can assert dominance over wrongdoers. Take a stab at being civil in prosecution!
@@ -33,7 +59,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakCe
   name: chief engineer's cloak
   description: A dark green cloak with light blue ornaments, given to those who proved themselves to master the precise art of engineering.
@@ -44,7 +70,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingCloakCmo
   name: chief medical officer's cloak
   description: A sterile blue cloak with a green cross, radiating with a sense of duty and willingness to help others.
@@ -55,7 +81,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakRd
   name: research director's cloak
   description: A white cloak with violet stripes, showing your status as the arbiter of cutting-edge technology.
@@ -74,7 +100,7 @@
   #ss220 special_sounds end
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakQm
   name: quartermaster's cloak
   description: A strong brown cloak with a reflective stripe, while not as fancy as others, it does show your managing skills.
@@ -85,7 +111,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakHop
   name: head of personnel's cloak
   description: A blue cloak with red shoulders and gold buttons, proving you are the gatekeeper to any airlock on the station.
@@ -96,7 +122,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakHerald
   name: herald's cloak
   description: An evil-looking red cloak with spikes on its shoulders.
@@ -105,7 +131,7 @@
     sprite: Clothing/Neck/Cloaks/herald.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakNanotrasen
   name: nanotrasen cloak
   description: A stately blue cloak to represent NanoTrasen.
@@ -114,7 +140,7 @@
     sprite: Clothing/Neck/Cloaks/nanotrasen.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakCapFormal
   name: captain's formal cloak
   description: A lavish and decorated cloak for special occasions.
@@ -125,7 +151,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakAdmin
   name: admin cloak
   description: Weh!
@@ -136,7 +162,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakMiner
   name: miner's cloak
   description: Worn by the most skilled miners, for one who has moved mountains and filled valleys.
@@ -145,7 +171,7 @@
     sprite: Clothing/Neck/Cloaks/miner.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakTrans
   name: vampire cloak
   description: Worn by high ranking vampires of the transylvanian society of vampires.
@@ -154,7 +180,7 @@
     sprite: Clothing/Neck/Cloaks/trans.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakGoliathCloak
   name: goliath cloak
   description: A cloak made from the hide of resilient fauna from a distant planet, though its protective value has faded with its age.
@@ -171,7 +197,7 @@
       toggleable-clothing: !type:ContainerSlot {}
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakPirateCap
   name: pirate captain cloak
   description: A rather fetching black pirate cloak, complete with skull motif.
@@ -180,7 +206,7 @@
     sprite: Clothing/Neck/Cloaks/piratecap.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakMoth
   name: moth cloak
   description: A cloak in the form of moth wings is an unusual and original element of the wardrobe that can attract the attention of others. It is made of a thin fabric imitating moth wings, with soft and fluffy edges. The raincoat is fastened around the neck with Velcro, and has a hood in the shape of a moths head.
@@ -207,7 +233,7 @@
   #ss220 special_sounds end
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakVoid
   name: void cloak
   description: A cloak of darkness. For those who have gone to the dark side of the force.
@@ -218,7 +244,7 @@
     proto: alien
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakAce
   name: pilot's cloak
   description: Cloak awarded to Nanotrasen's finest space aces.
@@ -227,7 +253,7 @@
     sprite: Clothing/Neck/Cloaks/ace.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakAro
   name: werewolf cloak
   description: This cloak lets others know you're a lone wolf.
@@ -236,7 +262,7 @@
     sprite: Clothing/Neck/Cloaks/aro.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakBi
   name: poison cloak
   description: The purple color is a clear indicator you are poisonous.
@@ -245,7 +271,7 @@
     sprite: Clothing/Neck/Cloaks/bi.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakIntersex
   name: cyclops cloak
   description: The circle on this cloak represents a cyclops' eye.
@@ -254,7 +280,7 @@
     sprite: Clothing/Neck/Cloaks/intersex.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakLesbian
   name: poet cloak
   description: This cloak belonged to an ancient poet, you forgot which one.
@@ -263,7 +289,7 @@
     sprite: Clothing/Neck/Cloaks/les.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakGay
   name: multi-level marketing cloak
   description: This cloak is highly sought after in the Nanotrasen Marketing Offices.
@@ -272,7 +298,7 @@
     sprite: Clothing/Neck/Cloaks/gay.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakEnby
   name: treasure hunter cloak
   description: This cloak belonged to a greedy treasure hunter.
@@ -281,11 +307,10 @@
     sprite: Clothing/Neck/Cloaks/enby.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: ClothingNeckCloakBase
   id: ClothingNeckCloakPan
   name: chef's cloak
   description: Meant to be worn alongside a frying pan.
   components:
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/pan.rsi
-
