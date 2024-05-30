@@ -25,6 +25,10 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  # SS220 Hand/FootWraps begin
+  - ClothingHandWraps
+  - ClothingFootWraps
+  # SS220 Hand/FootWraps end
 
 - type: loadoutGroup
   id: Glasses

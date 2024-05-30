@@ -44,3 +44,11 @@
 # SS220-JianSword
 - type: Tag
   id: JianSword
+
+# SS220 Hand/Foot Wraps begin
+- type: Tag
+  id: Handwraps
+
+- type: Tag
+  id: Footwraps
+# SS220 Hand/Foot Wraps end
