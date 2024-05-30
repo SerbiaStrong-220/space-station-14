@@ -1,4 +1,22 @@
-# Jumpsuits
+# next added by ss220
+- type: loadout
+  id: InternJumpsuit
+  equipment: InternJumpsuit
+
+- type: startingGear
+  id: InternJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitIntern
+
+- type: loadout
+  id: InternJumpskirt
+  equipment: InternJumpskirt
+
+- type: startingGear
+  id: InternJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtIntern
+# end
 - type: loadout
   id: WhiteJumpsuit
   equipment: WhiteJumpsuit
