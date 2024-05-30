@@ -45,6 +45,7 @@
 - type: Tag
   id: JianSword
 
+
 # SS220 Hand/Foot Wraps begin
 - type: Tag
   id: Handwraps
@@ -52,3 +53,14 @@
 - type: Tag
   id: Footwraps
 # SS220 Hand/Foot Wraps end
+
+# SS220-Cards
+- type: Tag
+  id: GameCard
+
+# FractWarEbent
+- type: Tag
+  id: CartridgeIron_MG34
+
+- type: Tag
+  id: MagazineIron_MG34
