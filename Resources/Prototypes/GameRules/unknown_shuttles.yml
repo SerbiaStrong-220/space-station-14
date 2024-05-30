@@ -43,7 +43,7 @@
 #    duration: 1
 #  - type: LoadMapRule
 #    preloadedGrid: DisasterEvacPod
-# SS220 No DisasterEvacPodEvent before add rules begin
+# SS220 No DisasterEvacPodEvent before add rules end
 
 - type: entity
   id: UnknownShuttleHonki
