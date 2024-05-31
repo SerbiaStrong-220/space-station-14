@@ -1,6 +1,6 @@
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingNeckTieBase
+  id: ClothingNecktieBase
   abstract: true
   name: Tie
   description: You are serious and businesslike
@@ -25,8 +25,8 @@
     - ClothMade
 
 - type: entity
-  parent: ClothingNeckTieBase
-  id: ClothingNeckTieRed
+  parent: ClothingNecktieBase
+  id: ClothingNecktieRed
   name: red-tie
   description: A neosilk clip-on red tie.
   components:
@@ -41,8 +41,8 @@
     - ClothMade
 
 - type: entity
-  parent: ClothingNeckTieBase
-  id: ClothingNeckTieDet
+  parent: ClothingNecktieBase
+  id: ClothingNecktieDet
   name: detective's tie
   description: A loosely tied necktie, a perfect accessory for the over-worked detective.
   components:
@@ -52,8 +52,8 @@
     sprite: Clothing/Neck/Ties/dettie.rsi
 
 - type: entity
-  parent: ClothingNeckTieBase
-  id: ClothingNeckTieSci
+  parent: ClothingNecktieBase
+  id: ClothingNecktieSci
   name: scientist's tie
   description: Why do we all have to wear these ridiculous ties?
   components:
