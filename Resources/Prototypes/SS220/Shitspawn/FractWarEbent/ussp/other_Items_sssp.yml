@@ -25,11 +25,18 @@
     ammoSlots: [ null, null, null, null, null, null ]
 
 - type: entity
-  parent: ClothingBeltMercWebbing
+  parent: ClothingBeltMilitaryWebbing
   id: ClothingBeltUsspWebbing
   name: РПС СССП
   noSpawn: true
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/mercwebbing.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/mercwebbing.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.0
 
 - type: entity
   parent: UsspIDCard

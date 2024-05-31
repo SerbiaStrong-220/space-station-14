@@ -3,7 +3,7 @@
 - type: gameMap
   id: NTvsSSSP
   mapName: 'NT vs SSSP war map'
-  mapPath: /Maps/EventMaps/NTvsSSSP.yml
+  mapPath: /Maps/SS220/EventMaps/NTvsSSSP.yml
   minPlayers: 0
   stations:
     Axioma:

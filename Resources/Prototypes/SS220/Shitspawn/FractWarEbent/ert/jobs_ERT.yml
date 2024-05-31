@@ -174,7 +174,7 @@
   playTimeTracker: SpecOpsLeader
   setPreference: false
   canBeAntag: false
-  accessGroups: [ AllAccess ]
+  accessGroups: [ AllAccess, CentralCommand ]
 
 - type: playTimeTracker
   id: SpecOpsLeader
@@ -227,7 +227,7 @@
   playTimeTracker: SpecOpsEngineer
   setPreference: false
   canBeAntag: false
-  accessGroups: [ AllAccess ]
+  accessGroups: [ AllAccess, CentralCommand ]
 
 - type: playTimeTracker
   id: SpecOpsEngineer
@@ -284,7 +284,7 @@
   playTimeTracker: SpecOpsCorpsman
   setPreference: false
   canBeAntag: false
-  accessGroups: [ AllAccess ]
+  accessGroups: [ AllAccess, CentralCommand ]
 
 - type: playTimeTracker
   id: SpecOpsCorpsman
@@ -337,7 +337,7 @@
   playTimeTracker: SpecOpsCMO
   setPreference: false
   canBeAntag: false
-  accessGroups: [ AllAccess ]
+  accessGroups: [ AllAccess, CentralCommand ]
 
 - type: playTimeTracker
   id: SpecOpsCMO
@@ -394,7 +394,7 @@
   playTimeTracker: SpecOpsFighter
   setPreference: false
   canBeAntag: false
-  accessGroups: [ AllAccess ]
+  accessGroups: [ AllAccess, CentralCommand ]
 
 - type: playTimeTracker
   id: SpecOpsFighter
