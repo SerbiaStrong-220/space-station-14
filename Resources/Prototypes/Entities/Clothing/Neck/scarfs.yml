@@ -140,6 +140,7 @@
       sprite: Clothing/Neck/Scarfs/syndiered.rsi
     - type: Tag
       tags:
+       - ClothMade
        - WhitelistChameleon
 
 - type: entity
