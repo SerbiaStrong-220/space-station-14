@@ -154,11 +154,3 @@
     FoodChiliPepper: 1
     FoodCheeseSlice: 1
 #SS220 Nachos-recipe end
-
-- type: microwaveMealRecipe
-  id: RecipeDriedTricoTobacco
-  name: dried tobacco leaves recipe
-  result: LeavesTricoTobaccoDried
-  time: 10
-  solids:
-    LeavesTricotobacco: 1
