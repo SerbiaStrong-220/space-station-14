@@ -3,7 +3,7 @@
 [RegisterComponent, Access(typeof(BasicStationEventSchedulerSystem))]
 public sealed partial class BasicStationEventSchedulerComponent : Component
 {
-    public const float MinimumTimeUntilFirstEvent = 750;//SS220 Event_spawn_decrease
+    public const float MinimumTimeUntilFirstEvent = 300;
 
     /// <summary>
     /// How long until the next check for an event runs
