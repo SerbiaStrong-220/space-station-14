@@ -45,8 +45,8 @@
         color: "#495448"
       - state: equipped-FEET-reptilian
         color: "#495448"
-      - state: equipped-FEET-vox
-        color: "#495448"
+      # - state: equipped-FEET-vox
+      #   color: "#495448"
   - type: Construction
     graph: ClothingFootWrapsBlackCraft
     node: ClothingFootWraps
@@ -81,8 +81,8 @@
         color: "#3c0afc"
       - state: equipped-FEET-reptilian
         color: "#3c0afc"
-      - state: equipped-FEET-vox
-        color: "#3c0afc"
+      # - state: equipped-FEET-vox
+      #   color: "#3c0afc"
   - type: Construction
     graph: ClothingFootWrapsBlueCraft
     node: ClothingFootWraps
@@ -117,8 +117,8 @@
         color: "#6acc10"
       - state: equipped-FEET-reptilian
         color: "#6acc10"
-      - state: equipped-FEET-vox
-        color: "#6acc10"
+      # - state: equipped-FEET-vox
+      #   color: "#6acc10"
   - type: Construction
     graph: ClothingFootWrapsGreenCraft
     node: ClothingFootWraps
@@ -153,8 +153,8 @@
         color: "#fc300a"
       - state: equipped-FEET-reptilian
         color: "#fc300a"
-      - state: equipped-FEET-vox
-        color: "#fc300a"
+      # - state: equipped-FEET-vox
+      #   color: "#fc300a"
   - type: Construction
     graph: ClothingFootWrapsRedCraft
     node: ClothingFootWraps
@@ -189,8 +189,8 @@
         color: "#f2fc0a"
       - state: equipped-FEET-reptilian
         color: "#f2fc0a"
-      - state: equipped-FEET-vox
-        color: "#f2fc0a"
+      # - state: equipped-FEET-vox
+      #   color: "#f2fc0a"
   - type: Construction
     graph: ClothingFootWrapsYellowCraft
     node: ClothingFootWraps

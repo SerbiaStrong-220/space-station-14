@@ -45,8 +45,8 @@
       gloves:
       - state: equipped-HAND
         color: "#495448"
-      - state: equipped-HAND-vox
-        color: "#495448"
+      # - state: equipped-HAND-vox
+      #   color: "#495448"
   - type: Fiber
     fiberColor: fibers-black
   - type: Construction
@@ -81,8 +81,8 @@
       gloves:
       - state: equipped-HAND
         color: "#3c0afc"
-      - state: equipped-HAND-vox
-        color: "#3c0afc"
+      # - state: equipped-HAND-vox
+      #   color: "#3c0afc"
   - type: Fiber
     fiberColor: fibers-blue
   - type: Construction
@@ -117,8 +117,8 @@
       gloves:
       - state: equipped-HAND
         color: "#6acc10"
-      - state: equipped-HAND-vox
-        color: "#6acc10"
+      # - state: equipped-HAND-vox
+      #   color: "#6acc10"
   - type: Fiber
     fiberColor: fibers-green
   - type: Construction
@@ -153,8 +153,8 @@
       gloves:
       - state: equipped-HAND
         color: "#fc300a"
-      - state: equipped-HAND-vox
-        color: "#fc300a"
+      # - state: equipped-HAND-vox
+      #   color: "#fc300a"
   - type: Fiber
     fiberColor: fibers-red
   - type: Construction
@@ -189,8 +189,8 @@
       gloves:
       - state: equipped-HAND
         color: "#f2fc0a"
-      - state: equipped-HAND-vox
-        color: "#f2fc0a"
+      # - state: equipped-HAND-vox
+      #   color: "#f2fc0a"
   - type: Fiber
     fiberColor: fibers-yellow
   - type: Construction
