@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: smokeableGroundTricoTobacco
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ground
+          steps:
+          - material: LeavesTricotobaccoDried
+            amount: 2
+            doAfter: 5
+    - node: ground
+      entity: GroundTricoTobacco

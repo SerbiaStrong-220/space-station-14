@@ -1,0 +1,16 @@
+- type: stack
+  id: GroundTricoTobacco
+  name: ground tricptobacco
+  icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
+  spawn: GroundTricoTobacco
+  maxCount: 1
+  itemSize: 1
+
+- type: stack
+  id: LeavesTricoTobaccoDried
+  name: dried tricotobacco leaves
+  icon: { sprite: SS220/Objects/Specific/Hydroponics/tricotobacco.rsi, state: dried }
+  spawn: LeavesTricoTobaccoDried
+  maxCount: 5
+  itemSize: 5
+

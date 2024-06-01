@@ -1,0 +1,48 @@
+- type: entity
+  name: измельченный трикотабакин
+  parent: BaseItem
+  id: GroundTricoTobacco
+  description: "Измельченный трикотабакин, идеально подходящий для сигарет ручной скрутки."
+  components:
+  - type: Stack
+    stackType: GroundTricoTobacco
+    count: 1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 15
+        - ReagentId: Tricordrazine
+          Quantity: 10
+  - type: Sprite
+    sprite: Objects/Misc/reagent_fillings.rsi
+    state: powderpile
+    color: "#1db7dc"
+  - type: Construction
+    graph: smokeableGroundTobacco
+    node: ground
+  - type: Tag
+    tags:
+      - Smokable
+  - type: Item
+    size: Tiny
+
+- type: entity
+  name: сушёные листья трикотабакина
+  parent: BaseItem
+  id: LeavesTricoTobaccoDried
+  description: "Высушенные листья трикотабакина, готовые к измельчению."
+  components:
+  - type: Stack
+    stackType: LeavesTricoTobaccoDried
+    count: 1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 3
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/tricotobacco.rsi
+    state: dried

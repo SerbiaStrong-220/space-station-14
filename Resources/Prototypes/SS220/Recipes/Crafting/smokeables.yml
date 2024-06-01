@@ -1,0 +1,10 @@
+- type: construction
+  name:  измельченный трикотабакин
+  id: smokeableGroundTricoTobacco
+  graph: smokeableGroundTricoTobacco
+  startNode: start
+  targetNode: ground
+  category: construction-category-misc
+  description: "Измельченный трикотабакин, идеально подходящий для сигарет ручной скрутки."
+  icon: { sprite: Objects/Misc/reagent_fillings.rsi, state: powderpile }
+  objectType: Item
