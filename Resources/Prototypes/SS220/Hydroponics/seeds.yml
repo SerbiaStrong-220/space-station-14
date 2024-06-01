@@ -331,3 +331,29 @@
       Min: 1
       Max: 20
       PotencyDivisor: 20
+
+- type: seed
+  id: tricotobacco
+  name: пакет семян (трикотабакин)
+  noun: seeds-noun-seeds
+  displayName: стебли трикотабакина
+  plantRsi: SS220/Objects/Specific/Hydroponics/tricotobacco.rsi
+  packetPrototype: TricotobaccoSeeds
+  productPrototypes:
+    - LeavesTricotobacco
+  lifespan: 50
+  maturation: 10
+  production: 5
+  yield: 2
+  potency: 10
+  growthStages: 4
+  waterConsumption: 0.60
+  chemicals:
+    Nicotine:
+      Min: 1
+      Max: 15
+      PotencyDivisor: 20
+    Tricordrazine:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10

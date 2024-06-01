@@ -868,6 +868,10 @@
   packetPrototype: TobaccoSeeds
   productPrototypes:
     - LeavesTobacco
+  #SS220-SnufBox-Begin
+  mutationPrototypes:
+    - tricotobacco
+  #SS220-SnufBox-End
   harvestRepeat: Repeat
   lifespan: 75
   maturation: 5

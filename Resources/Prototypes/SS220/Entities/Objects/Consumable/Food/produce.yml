@@ -25,7 +25,7 @@
       reagents:
       - ReagentId: JuiceBeet
         Quantity: 10
-        
+
 - type: entity
   name: сноп мясопшеницы
   description: Эх... мясопшеница... стоп, что?
@@ -52,3 +52,22 @@
   - type: Tag
     tags:
     - Meatwheat
+
+- type: entity
+  name: листья трикотабакина
+  description: Уникальное сочетание табачного листа и тайных специй, создающее неповторимый вкус и аромат. Этот табакин оставляет ощущение удовольствия и умиротворения.
+  id: LeavesTricotobacco
+  parent: ProduceBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/tricotobacco.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 15
+        - ReagentId: Tricordrazine
+          Quantity: 10
+  - type: Produce
+    seedId: tricotobacco

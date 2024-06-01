@@ -127,3 +127,13 @@
       seedId: meatwheat
     - type: Sprite
       sprite: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (трикотабакин)
+  id: TricotobaccoSeeds
+  components:
+    - type: Seed
+      seedId: tricotobacco
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/tricotobacco.rsi
