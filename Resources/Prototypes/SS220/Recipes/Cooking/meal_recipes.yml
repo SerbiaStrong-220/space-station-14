@@ -4,7 +4,7 @@
   result: FoodCheburek
   time: 15
   reagents:
-    TableSalt: 5  
+    TableSalt: 5
   solids:
     FoodDough: 1
     FoodMeatCutlet: 1
@@ -16,7 +16,7 @@
   result: FoodShawarma
   time: 15
   reagents:
-    Mayo: 5  
+    Mayo: 5
   solids:
     FoodDough: 1
     FoodMeatChicken: 1
@@ -70,7 +70,7 @@
   result: FoodSoupOkroshkaKvass
   time: 10
   reagents:
-    Kvass: 10  
+    Kvass: 10
   solids:
     FoodBowlBig: 1
     FoodMeatChicken: 1
@@ -103,3 +103,11 @@
     FoodMeat: 3
     FoodEgg: 2
 # SS220 Salami-update end
+
+- type: microwaveMealRecipe
+  id: RecipeDriedTricoTobacco
+  name: dried tobacco leaves recipe
+  result: LeavesTricoTobaccoDried
+  time: 10
+  solids:
+    LeavesTricotobacco: 1
