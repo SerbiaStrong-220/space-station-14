@@ -15,6 +15,7 @@ using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Content.Server.Body.Systems;
 
 namespace Content.Server.Dragon;
 
@@ -29,6 +30,7 @@ public sealed partial class DragonSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly BodySystem _body = default!;
 
     private EntityQuery<CarpRiftsConditionComponent> _objQuery;
 
@@ -100,7 +102,8 @@ public sealed partial class DragonSystem : EntitySystem
             if (comp.RiftAccumulator >= comp.RiftMaxAccumulator)
             {
                 Roar(uid, comp);
-                QueueDel(uid);
+                // QueueDel(uid);
+                _body.GibBody(uid); //220 Dragon Bodies Fix
             }
         }
     }
