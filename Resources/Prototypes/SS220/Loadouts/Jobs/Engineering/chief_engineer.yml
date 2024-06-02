@@ -1,0 +1,83 @@
+# ChiefEngineer Time
+- type: loadoutEffectGroup
+  id: DarkChiefEngineer
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChiefEngineer
+      time: 720000 #200 часов, форма для положивших уйму времени на работу
+
+# Jumpsuit
+- type: loadout
+  id: DarkChiefEngineerJumpsuit
+  equipment: DarkChiefEngineerJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerDark
+
+- type: loadout
+  id: DarkChiefEngineerJumpskirt
+  equipment: DarkChiefEngineerJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChiefEngineerDark
+
+- type: loadout
+  id: DarkChiefEngineerTurtleneck
+  equipment: DarkChiefEngineerTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerTurtleDark
+
+- type: loadout
+  id: DarkChiefEngineerTurtleneckSkirt
+  equipment: DarkChiefEngineerTurtleneckSkirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerTurtleneckSkirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChiefEngineerTurtleDark
+
+# Neck
+- type: loadout
+  id: DarkChiefEngineerCloak
+  equipment: DarkChiefEngineerCloak
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerCloak
+  equipment:
+    neck: ClothingNeckCloakCEDark
+
+- type: loadout
+  id: DarkChiefEngineerMantle
+  equipment: DarkChiefEngineerMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerMantle
+  equipment:
+    neck: ClothingNeckMantleCEDark

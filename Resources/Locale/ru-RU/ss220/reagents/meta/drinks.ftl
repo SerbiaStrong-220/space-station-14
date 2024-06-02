@@ -6,3 +6,7 @@ reagent-name-berry-compote = ягодный компот
 reagent-desc-berry-compote = Напиток, который получается, когда встречаются настойчивость клубники, сладость малины и нежность черники.
 reagent-name-vodkakazaki = водка "Казаки"
 reagent-desc-vodkakazaki = На вид и запах как просроченная водка. Мутное...
+reagent-name-bankate = банкате
+reagent-desc-bankate = Выглядит как то, что не стоит пить...
+reagent-name-hot-arachne = горячая арахна
+reagent-desc-hot-arachne = Горячие арахны всего в 300 метрах от вас!

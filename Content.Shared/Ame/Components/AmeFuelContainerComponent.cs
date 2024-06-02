@@ -9,11 +9,11 @@ public sealed partial class AmeFuelContainerComponent : Component
     /// The amount of fuel in the container.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public int FuelAmount = 500; // SS220 melkuu did that not me
+    public int FuelAmount = 300; // SS220 Engineering Rebalance
 
     /// <summary>
     /// The maximum fuel capacity of the container.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public int FuelCapacity = 500; // SS220 melkuu did that not me
+    public int FuelCapacity = 300; // SS220 Engineering Rebalance
 }

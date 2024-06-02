@@ -13,7 +13,6 @@
   requireAdminNotify: true
   supervisors: job-supervisors-captain
   canBeAntag: false
-  canBeZombie: false
   radioBold: true
   access:
   - HeadOfSecurity

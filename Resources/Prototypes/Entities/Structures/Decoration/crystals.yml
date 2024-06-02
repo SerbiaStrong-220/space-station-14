@@ -1,15 +1,23 @@
 - type: entity
-  id: CrystalGreen
+  id: CrystalBase #SS220-Crystal-fix
   parent: BaseStructure
-  suffix: green
+  abstract: true #SS220-Crystal-fix
   name: crystal
   description: A crystaline solid.
   components:
-    - type: Sprite
-      sprite: Structures/Decoration/crystal.rsi
-      state: crystal_grey
-      color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
+    - type: Sprite #SS220-Crystal-Resprite-Start
       noRot: true
+      layers:
+        - sprite: Structures/Decoration/crystal.rsi
+          state: crystal1
+#          color: "#39ff14" #SS220-Crystal-fix
+          map: [ "enum.DamageStateVisualLayers.Base" ]
+    - type: RandomSprite
+      available:
+        - enum.DamageStateVisualLayers.Base:
+            crystal1: ""
+            crystal2: ""
+            crystal3: "" #SS220-Crystal-Resprite-End
     - type: Reflect
       reflectProb: 0.5
       reflects:
@@ -33,19 +41,49 @@
             - LowImpassable
             - BulletImpassable
             - Opaque
+#    - type: PointLight #SS220-Crystal-fix-Start
+#      radius: 3
+#      energy: 3
+#      color: "#39ff14" #SS220-Crystal-fix-End
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Glass
+#    - type: Destructible #SS220-Crystal-fix-Start
+#      thresholds:
+#        - trigger:
+#            !type:DamageTrigger
+#            damage: 20
+#          behaviors:
+#            - !type:PlaySoundBehavior
+#              sound:
+#                collection: GlassBreak
+#            - !type:SpawnEntitiesBehavior
+#              spawn:
+#                ShardCrystalGreen:
+#                  min: 1
+#                  max: 1
+#            - !type:DoActsBehavior
+#              acts: [ "Destruction" ] #SS220-Crystal-fix-End
+
+- type: entity #SS220-Crystal-fix-Start
+  id: CrystalGreen
+  parent: CrystalBase
+  suffix: pink
+  components:
+    - type: Sprite
+      color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
     - type: PointLight
       radius: 3
       energy: 3
       color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
-    - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: Glass
     - type: Destructible
       thresholds:
         - trigger:
             !type:DamageTrigger
             damage: 20
           behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
             - !type:PlaySoundBehavior
               sound:
                 collection: GlassBreak
@@ -53,13 +91,11 @@
               spawn:
                 ShardCrystalGreen:
                   min: 1
-                  max: 1
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
+                  max: 1 #SS220-Crystal-fix-End
 
 - type: entity
   id: CrystalPink
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: pink
   components:
     - type: Sprite
@@ -87,11 +123,11 @@
 
 - type: entity
   id: CrystalGrey
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: red
   components:
     - type: Sprite
-      state: crystal_grey
+#      state: crystal_grey SS220-Crystal-Fix
       color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
     - type: PointLight
       radius: 3
@@ -116,7 +152,7 @@
 
 - type: entity
   id: CrystalOrange
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: orange
   components:
     - type: Sprite
@@ -144,7 +180,7 @@
 
 - type: entity
   id: CrystalBlue
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: blue
   components:
     - type: Sprite
@@ -172,7 +208,7 @@
 
 - type: entity
   id: CrystalCyan
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: cyan
   components:
     - type: Sprite
@@ -201,7 +237,7 @@
 #SS220-New-Crystals-start
 - type: entity
   id: CrystalYellow
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: yellow
   components:
     - type: Sprite
@@ -229,7 +265,7 @@
 
 - type: entity
   id: CrystalPurple
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: purple
   components:
     - type: Sprite
@@ -257,7 +293,7 @@
 
 - type: entity
   id: CrystalWhite
-  parent: CrystalGreen
+  parent: CrystalBase #SS220-Crystal-fix
   suffix: white
   components:
     - type: Sprite

@@ -12,7 +12,13 @@
     sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
   - type: TemperatureProtection
     coefficient: 0.1
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
   - type: Armor
     modifiers:
       coefficients:
-        Heat: 0.90
+        Heat: 0.7
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Caustic: 0.75

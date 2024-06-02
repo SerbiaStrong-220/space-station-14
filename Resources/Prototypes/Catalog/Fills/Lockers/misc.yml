@@ -193,6 +193,11 @@
           prob: 0.75
           orGroup: MaintenanceDrink
           #SS220VodkaKazaki-End
+          #SS220Bankate-begin
+        - id: DrinkBankateJarFull
+          prob: 0.20
+          orGroup: MaintenanceDrink
+          #SS220Bankate-end 
         - id: ModularReceiver
           prob: 0.1
         - id: DrinkSpaceGlue

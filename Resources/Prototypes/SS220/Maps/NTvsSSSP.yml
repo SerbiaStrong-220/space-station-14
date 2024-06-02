@@ -3,14 +3,14 @@
 - type: gameMap
   id: NTvsSSSP
   mapName: 'NT vs SSSP war map'
-  mapPath: /Maps/EventMaps/NTvsSSSP.yml
+  mapPath: /Maps/SS220/EventMaps/NTvsSSSP.yml
   minPlayers: 0
   stations:
     Axioma:
       stationProto: NTvsSSSPStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_axioma.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
         - type: StationNameSetup
           mapNameTemplate: '{0} Axioma {1}'
           nameGenerator:

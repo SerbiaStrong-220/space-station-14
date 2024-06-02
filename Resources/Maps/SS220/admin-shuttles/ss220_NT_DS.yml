@@ -24,7 +24,7 @@ entities:
     - type: MetaData
       name: NT-DS-X3 "Wanderer"
     - type: Transform
-      pos: -0.011718273,-0.114022255
+      pos: -0.027343273,-0.098397255
       parent: invalid
     - type: MapGrid
       chunks:
@@ -640,6 +640,13 @@ entities:
           - 432
           - 433
           - 455
+- proto: Ashtray
+  entities:
+  - uid: 179
+    components:
+    - type: Transform
+      pos: 1.3006847,-0.26700997
+      parent: 1
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 20
@@ -674,21 +681,21 @@ entities:
   - uid: 26
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 4.5,2.5
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 482
+      - 170
   - uid: 27
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 4.5,0.5
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 480
+      - 184
   - uid: 623
     components:
     - type: Transform
@@ -1341,6 +1348,14 @@ entities:
     - type: Transform
       pos: 3.5311031,-1.1977732
       parent: 1
+- proto: ChairFolding
+  entities:
+  - uid: 178
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.3163097,0.529865
+      parent: 1
 - proto: ChairPilotSeat
   entities:
   - uid: 259
@@ -1379,6 +1394,14 @@ entities:
     components:
     - type: Transform
       pos: -4.5,5.5
+      parent: 1
+- proto: CigPackBlack
+  entities:
+  - uid: 177
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.3788097,-0.51701
       parent: 1
 - proto: ClosetWallBlue
   entities:
@@ -1897,13 +1920,6 @@ entities:
     components:
     - type: Transform
       pos: -2.6585486,6.592718
-      parent: 1
-- proto: EnergySwordDouble
-  entities:
-  - uid: 170
-    components:
-    - type: Transform
-      pos: 1.7044048,7.4740024
       parent: 1
 - proto: Firelock
   entities:
@@ -3016,32 +3032,6 @@ entities:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-- proto: PowerCageHigh
-  entities:
-  - uid: 440
-    components:
-    - type: Transform
-      pos: 1.2910138,0.8088009
-      parent: 1
-  - uid: 441
-    components:
-    - type: Transform
-      pos: 1.3827434,0.35015363
-      parent: 1
-  - uid: 442
-    components:
-    - type: Transform
-      pos: 1.7129694,0.57030433
-      parent: 1
-- proto: PowerCageRecharger
-  entities:
-  - uid: 443
-    components:
-    - type: Transform
-      pos: 1.5,-0.5
-      parent: 1
-    - type: PointLight
-      enabled: False
 - proto: Poweredlight
   entities:
   - uid: 444
@@ -3110,11 +3100,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 1.5,2.5
-      parent: 1
-  - uid: 454
-    components:
-    - type: Transform
-      pos: 1.5,0.5
       parent: 1
   - uid: 457
     components:
@@ -3252,7 +3237,7 @@ entities:
       parent: 1
 - proto: ShuttleGunDuster
   entities:
-  - uid: 472
+  - uid: 180
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -3260,10 +3245,10 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 483
-- proto: ShuttleGunPerforator
+      - 183
+- proto: ShuttleGunMLG
   entities:
-  - uid: 473
+  - uid: 185
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -3271,7 +3256,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 481
+      - 181
 - proto: ShuttleWindow
   entities:
   - uid: 474
@@ -3282,58 +3267,58 @@ entities:
       parent: 1
 - proto: SignalButton
   entities:
-  - uid: 480
+  - uid: 170
+    components:
+    - type: MetaData
+      desc: Эта кнопка переключает положение бойниц.
+      name: бойницы верхнего орудия
+    - type: Transform
+      pos: 2.9198985,7.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        26:
+        - Pressed: Toggle
+  - uid: 181
+    components:
+    - type: MetaData
+      desc: 'Эта кнопка переключает режим (вкл/выкл) залпа орудия. '
+      name: залп нижнего орудия "Мародёр"
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,5.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        185:
+        - Pressed: Toggle
+        - Pressed: Trigger
+  - uid: 183
+    components:
+    - type: MetaData
+      desc: 'Эта кнопка переключает режим (вкл/выкл) залпа орудия. '
+      name: залп верхнего орудия "Дастер"
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        180:
+        - Pressed: Toggle
+        - Pressed: Trigger
+  - uid: 184
     components:
     - type: MetaData
       desc: Эта кнопка переключает положение бойниц.
       name: бойницы нижнего орудия
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 3.7673616,5.5
+      pos: 2.9198985,5.5
       parent: 1
     - type: DeviceLinkSource
       linkedPorts:
         27:
         - Pressed: Toggle
-  - uid: 481
-    components:
-    - type: MetaData
-      desc: 'Эта кнопка переключает режим (вкл/выкл) залпа орудия. '
-      name: залп нижнего орудия
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.2618303,5.5
-      parent: 1
-    - type: DeviceLinkSource
-      linkedPorts:
-        473:
-        - Pressed: Toggle
-        - Pressed: Trigger
-  - uid: 482
-    components:
-    - type: MetaData
-      desc: Эта кнопка переключает положение бойниц.
-      name: бойницы верхнего орудия
-    - type: Transform
-      pos: 3.7619257,7.5
-      parent: 1
-    - type: DeviceLinkSource
-      linkedPorts:
-        26:
-        - Pressed: Toggle
-  - uid: 483
-    components:
-    - type: MetaData
-      desc: 'Эта кнопка переключает режим (вкл/выкл) залпа орудия. '
-      name: залп верхнего орудия
-    - type: Transform
-      pos: 3.2672663,7.5
-      parent: 1
-    - type: DeviceLinkSource
-      linkedPorts:
-        472:
-        - Pressed: Toggle
-        - Pressed: Trigger
   - uid: 621
     components:
     - type: Transform
@@ -3432,6 +3417,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,4.5
+      parent: 1
+  - uid: 176
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-0.5
       parent: 1
   - uid: 487
     components:
@@ -3670,14 +3661,6 @@ entities:
       parent: 1
     missingComponents:
     - Airtight
-  - uid: 514
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,7.5
-      parent: 1
-    missingComponents:
-    - Airtight
   - uid: 515
     components:
     - type: Transform
@@ -3779,6 +3762,11 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,-3.5
+      parent: 1
+  - uid: 182
+    components:
+    - type: Transform
+      pos: 2.5,7.5
       parent: 1
   - uid: 522
     components:
