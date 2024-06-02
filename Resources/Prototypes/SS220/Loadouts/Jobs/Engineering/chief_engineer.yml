@@ -81,3 +81,13 @@
   id: DarkChiefEngineerMantle
   equipment:
     neck: ClothingNeckMantleCEDark
+
+# Head
+- type: loadout
+  id: BeretCE
+  equipment: BeretCE
+
+- type: startingGear
+  id: BeretCE
+  equipment:
+    head: ClothingHeadHatBeretCE

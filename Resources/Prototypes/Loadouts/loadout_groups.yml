@@ -607,6 +607,9 @@
   loadouts:
   - ChiefEngineerHead
   - ChiefEngineerBeret
+#ss220-loadout-chief-engineer-begin
+  - BeretCE
+#ss220-loadout-chief-engineer-end
 
 - type: loadoutGroup
   id: ChiefEngineerJumpsuit

@@ -1,0 +1,24 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretCE
+  name: chief engineer beret
+  description: The white beret is specially for the Chief Engineer.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_ce.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Ian # SS220 Shapochki
+    - HamsterWearable
+    - WhitelistChameleon
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer
+  #ss220 special_sounds end
