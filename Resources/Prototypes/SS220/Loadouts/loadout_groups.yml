@@ -37,3 +37,13 @@
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
+
+#Engineering
+
+- type: loadoutGroup
+  id: ChiefEngineerPDA
+  name: loadout-group-chief-engineer-PDA
+  minLimit: 0
+  loadouts:
+  - ChiefEngineerPDA
+  - DarkChiefEngineerPDA

@@ -1,0 +1,15 @@
+- type: entity
+  parent: CEPDA
+  id: DarkCEPDA
+  name: dark chief engineer PDA
+  description: A prestigious dark-colored PDA for a Chef Engineer that has put a lot of time into his work.
+  components:
+  - type: Pda
+    sprite: SS220/Objects/Devices/pda.rsi
+    state: pda-ce_dark
+  - type: PdaBorderColor
+    borderColor: "#3b3c3f"
+    accentHColor: "#cc6f00"
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi
+    state: pda-ce_dark
