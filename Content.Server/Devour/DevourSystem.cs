@@ -51,11 +51,11 @@ public sealed class DevourSystem : SharedDevourSystem
     }
 
     // Start 220 Dragon Bodies Fix
-    private void OnGibbed(EntityUid uid, DevourerComponent component, BeingGibbedEvent args)
+    private void OnGibbed(Entity<DevourerComponent> ent, ref BeingGibbedEvent args)
     {
-        if (component.ShouldStoreDevoured)
+        if (ent.Comp.ShouldStoreDevoured)
         {
-            _container.EmptyContainer(component.Stomach);
+            _container.EmptyContainer(ent.Comp.Stomach);
         }
     }
     // End 220 Dragon Bodies Fix
