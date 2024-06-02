@@ -3,20 +3,22 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Devour;
 using Content.Shared.Devour.Components;
 using Content.Shared.Humanoid;
-using Content.Server.Body.Components; // 220 Dragon Bodies Fix
+using Content.Server.Body.Components;
+using Robust.Server.Containers;
 
 namespace Content.Server.Devour;
 
 public sealed class DevourSystem : SharedDevourSystem
 {
     [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<DevourerComponent, DevourDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed); // 220 Dragon Bodies Fix
+        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed);
     }
 
     private void OnDoAfter(EntityUid uid, DevourerComponent component, DevourDoAfterEvent args)
@@ -53,7 +55,7 @@ public sealed class DevourSystem : SharedDevourSystem
     {
         if (component.ShouldStoreDevoured)
         {
-            ContainerSystem.EmptyContainer(component.Stomach);
+            _container.EmptyContainer(component.Stomach);
         }
     }
     // End 220 Dragon Bodies Fix
