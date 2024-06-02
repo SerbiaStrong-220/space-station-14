@@ -3,7 +3,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Devour;
 using Content.Shared.Devour.Components;
 using Content.Shared.Humanoid;
-using Content.Server.Body.Components;
+using Content.Server.Body.Components; // 220 Dragon Bodies Fix
 
 namespace Content.Server.Devour;
 
@@ -15,7 +15,7 @@ public sealed class DevourSystem : SharedDevourSystem
     {
         base.Initialize();
         SubscribeLocalEvent<DevourerComponent, DevourDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed);
+        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed); // 220 Dragon Bodies Fix
 
     }
 
@@ -47,13 +47,15 @@ public sealed class DevourSystem : SharedDevourSystem
 
         _audioSystem.PlayPvs(component.SoundDevour, uid);
     }
+
+    // Start 220 Dragon Bodies Fix
     private void OnGibbed(EntityUid uid, DevourerComponent component, BeingGibbedEvent args)
     {
-
         if (component.ShouldStoreDevoured)
         {
             ContainerSystem.EmptyContainer(component.Stomach);
         }
     }
+    // End 220 Dragon Bodies Fix
 }
 
