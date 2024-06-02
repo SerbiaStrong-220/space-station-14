@@ -3,6 +3,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Devour;
 using Content.Shared.Devour.Components;
 using Content.Shared.Humanoid;
+using Content.Server.Body.Components;
 
 namespace Content.Server.Devour;
 
@@ -13,8 +14,9 @@ public sealed class DevourSystem : SharedDevourSystem
     public override void Initialize()
     {
         base.Initialize();
-
         SubscribeLocalEvent<DevourerComponent, DevourDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed);
+
     }
 
     private void OnDoAfter(EntityUid uid, DevourerComponent component, DevourDoAfterEvent args)
@@ -44,6 +46,14 @@ public sealed class DevourSystem : SharedDevourSystem
         }
 
         _audioSystem.PlayPvs(component.SoundDevour, uid);
+    }
+    private void OnGibbed(EntityUid uid, DevourerComponent component, BeingGibbedEvent args)
+    {
+
+        if (component.ShouldStoreDevoured)
+        {
+            ContainerSystem.EmptyContainer(component.Stomach);
+        }
     }
 }
 
