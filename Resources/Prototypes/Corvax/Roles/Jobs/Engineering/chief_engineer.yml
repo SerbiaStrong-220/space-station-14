@@ -29,7 +29,7 @@
 - type: startingGear
   id: ChiefEngineerGear
   equipment:
-    id: CEPDA
+#    id: CEPDA SS220-dark-chief-engineer-pda
     eyes: ClothingEyesGlassesMeson
     ears: ClothingHeadsetCE
     belt: ClothingBeltUtilityEngineering

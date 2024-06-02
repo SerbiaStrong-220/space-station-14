@@ -8,7 +8,44 @@
   },
   "states": [
     {
+      "name": "id_overlay"
+    },
+    {
+      "name": "id_overlay_library"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "equipped-IDCARD",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "insert_overlay"
+    },
+    {
+      "name": "light_overlay"
+    },
+    {
       "name": "pda-ce_dark"
+    },
+    {
+      "name": "screen-ce",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
     }
   ]
 }
