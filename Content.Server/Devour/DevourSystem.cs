@@ -14,9 +14,9 @@ public sealed class DevourSystem : SharedDevourSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<DevourerComponent, DevourDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed); // 220 Dragon Bodies Fix
-
     }
 
     private void OnDoAfter(EntityUid uid, DevourerComponent component, DevourDoAfterEvent args)
