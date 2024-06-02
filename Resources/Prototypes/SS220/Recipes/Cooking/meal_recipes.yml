@@ -103,3 +103,11 @@
     FoodMeat: 3
     FoodEgg: 2
 # SS220 Salami-update end
+
+- type: microwaveMealRecipe
+  id: RecipeDriedTricoTobacco
+  name: dried tobacco leaves recipe
+  result: LeavesTricoTobaccoDried
+  time: 10
+  solids:
+    LeavesTricotobacco: 1
