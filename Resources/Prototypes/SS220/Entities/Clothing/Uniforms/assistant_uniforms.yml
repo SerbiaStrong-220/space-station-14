@@ -8,6 +8,7 @@
     sprite: SS220/Clothing/Uniforms/texas.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/texas.rsi
+    
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTechAssistant
@@ -18,6 +19,7 @@
     sprite: SS220/Clothing/Uniforms/texas_skirt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/texas_skirt.rsi
+    
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitResearchAssistant
@@ -28,6 +30,7 @@
     sprite: SS220/Clothing/Uniforms/resas.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/resas.rsi 
+    
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtResearchAssistant
@@ -38,6 +41,7 @@
     sprite: SS220/Clothing/Uniforms/resas_skirt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/resas_skirt.rsi
+    
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitIntern
@@ -48,6 +52,7 @@
     sprite: SS220/Clothing/Uniforms/intern.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/intern.rsi
+    
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtIntern
