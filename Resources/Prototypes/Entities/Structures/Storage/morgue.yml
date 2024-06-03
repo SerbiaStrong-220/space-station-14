@@ -56,8 +56,8 @@
   # SS220 morgue label sticking, pos
   - type: PaperLabel
     labelSlot:
-      insertVerbText: Attach Label
-      ejectVerbText: Remove Label
+      insertVerbText: hand-labeler-add-label-text
+      ejectVerbText: hand-labeler-remove-label-text
       whitelist:
         components:
         - Paper
