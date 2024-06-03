@@ -49,7 +49,20 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
+      # SS220 morgue label sticking, pos
+      paper_label: !type:ContainerSlot
+      # SS220 morgue label sticking, poe
   - type: Appearance
+  # SS220 morgue label sticking, pos
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Label
+      ejectVerbText: Remove Label
+      whitelist:
+        components:
+        - Paper
+  - type: ItemSlots
+  # SS220 morgue label sticking, poe
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
