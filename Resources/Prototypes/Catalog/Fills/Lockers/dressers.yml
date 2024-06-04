@@ -34,7 +34,7 @@
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingOuterWinterCE
       - id: ClothingOuterCoatCEFormalDress #SS220-FormalDress
-      - id: ClothingHeadHatBeretCE #SS220-Resprite
+      - id: ClothingHeadHatBeretCE #SS220-CEBeret
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
