@@ -72,6 +72,12 @@
   id: Snore
   name: chat-emote-name-snore
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-snore"]
 
 # SS220 emotes begin
@@ -79,6 +85,12 @@
   id: Gasp
   name: chat-emote-name-gasp
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-gasp"]
   chatTriggers:
     - задыхается
@@ -89,5 +101,11 @@
   id: CritGasp
   name: chat-emote-name-critgasp
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-critgasp"]
 # SS220 emotes end
