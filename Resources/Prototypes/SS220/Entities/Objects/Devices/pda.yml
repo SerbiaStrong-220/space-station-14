@@ -6,13 +6,12 @@
   components:
   - type: Pda
     id: CEIDCard
-    sprite: SS220/Objects/Devices/pda.rsi
     state: pda-ce_dark
   - type: PdaBorderColor
     borderColor: "#3b3c3f"
     accentHColor: "#cc6f00"
   - type: Sprite
-    sprite: SS220/Objects/Devices/pda.rsi
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
     - state: "screen-ce"
@@ -25,5 +24,5 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
   - type: Icon
-    sprite: SS220/Objects/Devices/pda.rsi
+    sprite: Objects/Devices/pda.rsi
     state: pda-ce_dark
