@@ -20,3 +20,26 @@
         whitelist:
           tags:
           - JianSword
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltMinamotoNoYorimitsuSheath
+  name: minamoto no yorimitsu sheath
+  description: The legendary sheath for the legendary sword.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/katana_sheath.rsi
+  - type: Clothing
+    sprite: SS220Clothing/Belt/katana_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        whitelist:
+          tags:
+          - MinamotoNoYorimitsu
+  - type: ItemMapper
+    mapLayers:
+      sheath-jian:
+        whitelist:
+          tags:
+          - MinamotoNoYorimitsu

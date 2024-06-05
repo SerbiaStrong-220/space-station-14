@@ -1,0 +1,19 @@
+- type: entity
+  name: minamoto no yorimitsu
+  parent: CaptainSabre
+  id: MinamotoNoYorimitsu
+  description: A legendary weapon with extraordinary sharpness and grace.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 27
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
+  - type: Tag
+    tags:
+    - MinamotoNoYorimitsu
