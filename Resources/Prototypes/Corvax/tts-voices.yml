@@ -638,7 +638,7 @@
 - type: ttsVoice
   name: Рассказчик
   description: Голос персонажа Рассказчик из игры Dungeons 3
-  sex: Female
+  sex: Male
   speaker: narrator_d3
   id: narrator_d3
 
