@@ -121,7 +121,7 @@
   - Boxer
   - Reporter
   - Zookeeper
-  - Psychologist
+#  - Psychologist The psychologist's color fix in the chat
   primary: false
 
 - type: department
