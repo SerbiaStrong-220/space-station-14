@@ -1,4 +1,4 @@
 ent-ClothingHandsGlovesCentcom = перчатки Центком
     .desc = Пара высококачественных плотных перчаток Центком, украшенных золотым шитьём.
-ent-ClothingHandsGlovesCentcom = перчатки Центком
+ent-ClothingHandsGlovesCentcom = белые перчатки Центком
     .desc = Пара высококачественных белых плотных перчаток, украшенных золотым шитьём, которые выдаются дипломату Nanotrasen.

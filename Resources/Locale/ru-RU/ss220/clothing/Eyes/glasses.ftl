@@ -1,2 +1,2 @@
-ent-ClothingEyesGlassesCentcom = очки охраны
+ent-ClothingEyesGlassesCentcom = очки Центком
     .desc = Модернизированные солнцезащитные очки с функцией защиты от вспышек и визором СБ.
