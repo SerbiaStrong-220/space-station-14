@@ -14,7 +14,7 @@
     - Pickaxe
   - type: Sprite
     sprite: SS220/Objects/Misc/pen.rsi
-    state: centcommnew_pen
+    state: pen_centcom
   - type: MeleeWeapon
     wideAnimationRotation: -45
     damage:
