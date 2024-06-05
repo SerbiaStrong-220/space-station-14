@@ -32,3 +32,14 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNanotrasenAdmiral
+  name: admiral suit
+  description: A magnificent uniform consisting of black silk with gold patches.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/admiral.rsi
