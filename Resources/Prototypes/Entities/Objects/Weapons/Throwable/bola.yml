@@ -43,8 +43,8 @@
   - type: Ensnaring
     freeTime: 2.0
     breakoutTime: 3.5 #all bola should generally be fast to remove
-    walkSpeed: 0.7 #makeshift bola shouldn't slow too much
-    sprintSpeed: 0.7
+    walkSpeed: 0.4 #SS220 bola buff
+    sprintSpeed: 0.4 #SS220 bola buff
     staminaDamage: 55 # Sudden weight increase sapping stamina
     canThrowTrigger: true
     canMoveBreakout: true

@@ -90,6 +90,7 @@
   - type: Blindable
   - type: Speech
     speechSounds: Alto
+    allowedEmotes: ['Meow','Mew','Growl','Purr','Hiss']
   - type: DamageOnHighSpeedImpact
     damage:
       types:

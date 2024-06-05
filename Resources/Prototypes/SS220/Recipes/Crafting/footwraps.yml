@@ -1,0 +1,77 @@
+- type: construction
+  name: обмотки для ног
+  id: ClothingFootWraps
+  graph: ClothingFootWrapsCraft
+  startNode: start
+  targetNode: ClothingFootWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые белые обмотки для ваших ног, если вы устали от ботинок.
+  icon:
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    state: icon
+
+- type: construction
+  name: черные обмотки для ног 
+  id: ClothingFootWrapsBlack
+  graph: ClothingFootWrapsBlackCraft
+  startNode: start
+  targetNode: ClothingFootWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые черные обмотки для ваших ног, если вы устали от ботинок.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsblack.rsi
+    state: icon
+
+- type: construction
+  name: синие обмотки для ног 
+  id: ClothingFootWrapsBlue
+  graph: ClothingFootWrapsBlueCraft
+  startNode: start
+  targetNode: ClothingFootWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые синие обмотки для ваших ног, если вы устали от ботинок.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsblue.rsi
+    state: icon
+
+- type: construction
+  name: красные обмотки для ног 
+  id: ClothingFootWrapsRed
+  graph: ClothingFootWrapsRedCraft
+  startNode: start
+  targetNode: ClothingFootWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые красные обмотки для ваших ног, если вы устали от ботинок.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsred.rsi
+    state: icon
+
+- type: construction
+  name: зеленые обмотки для ног 
+  id: ClothingFootWrapsGreen
+  graph: ClothingFootWrapsGreenCraft
+  startNode: start
+  targetNode: ClothingFootWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые зеленые обмотки для ваших ног, если вы устали от ботинок.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsgreen.rsi
+    state: icon
+
+- type: construction
+  name: желтые обмотки для ног 
+  id: ClothingFootWrapsYellow
+  graph: ClothingFootWrapsYellowCraft
+  startNode: start
+  targetNode: ClothingFootWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые желтые обмотки для ваших ног, если вы устали от ботинок.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsyellow.rsi
+    state: icon

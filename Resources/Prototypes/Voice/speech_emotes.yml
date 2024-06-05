@@ -520,6 +520,9 @@
 - type: emote
   id: Fart
   name: chat-emote-name-fart
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-fart"]
   chatTriggers:
   - fart
@@ -566,6 +569,13 @@
 - type: emote
   id: Giggle
   name: chat-emote-name-giggle
+  icon: Interface/Emotes/laugh.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-giggle"]
   chatTriggers:
   - хихикает
@@ -585,6 +595,13 @@
   id: Hiss
   name: chat-emote-name-hiss
   category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-hiss"]
   chatTriggers:
   - шипение

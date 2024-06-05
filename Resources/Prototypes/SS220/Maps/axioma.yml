@@ -10,7 +10,7 @@
       stationProto: AxiomaNanotrasenStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_axioma.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
         - type: StationRandomTransform
           enableStationRotation: false
           maxStationOffset: null

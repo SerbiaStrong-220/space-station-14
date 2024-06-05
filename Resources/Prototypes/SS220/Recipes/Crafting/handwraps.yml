@@ -1,0 +1,77 @@
+- type: construction
+  name: обмотки для рук
+  id: ClothingHandWraps
+  graph: ClothingHandWrapsCraft
+  startNode: start
+  targetNode: ClothingHandWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые белые обмотки для ваших рук, если не осталось перчаток.
+  icon:
+    sprite: SS220/Clothing/Hands/handwraps.rsi
+    state: icon
+
+- type: construction
+  name: черные обмотки для рук 
+  id: ClothingHandWrapsBlack
+  graph: ClothingHandWrapsBlackCraft
+  startNode: start
+  targetNode: ClothingHandWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые черные обмотки для ваших рук, если не осталось перчаток.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsblack.rsi
+    state: icon
+
+- type: construction
+  name: синие обмотки для рук 
+  id: ClothingHandWrapsBlue
+  graph: ClothingHandWrapsBlueCraft
+  startNode: start
+  targetNode: ClothingHandWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые синие обмотки для ваших рук, если не осталось перчаток.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsblue.rsi
+    state: icon
+
+- type: construction
+  name: красные обмотки для рук 
+  id: ClothingHandWrapsRed
+  graph: ClothingHandWrapsRedCraft
+  startNode: start
+  targetNode: ClothingHandWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые красные обмотки для ваших рук, если не осталось перчаток.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsred.rsi
+    state: icon
+
+- type: construction
+  name: зеленые обмотки для рук 
+  id: ClothingHandWrapsGreen
+  graph: ClothingHandWrapsGreenCraft
+  startNode: start
+  targetNode: ClothingHandWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые зеленые обмотки для ваших рук, если не осталось перчаток.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsgreen.rsi
+    state: icon
+
+- type: construction
+  name: желтые обмотки для рук 
+  id: ClothingHandWrapsYellow
+  graph: ClothingHandWrapsYellowCraft
+  startNode: start
+  targetNode: ClothingHandWraps
+  category: construction-category-misc
+  objectType: Item
+  description: Простые желтые обмотки для ваших рук, если не осталось перчаток.
+  icon:
+    sprite: SS220/Clothing/Coloredwraps/wrapsyellow.rsi
+    state: icon

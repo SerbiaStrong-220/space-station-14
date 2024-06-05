@@ -53,6 +53,7 @@
     damage: 0
     sound: /Audio/Weapons/egloves.ogg
     # SS220-Stunbaton-rework throwing angles
+  - type: Ensnaring # SS220 stunbaton pacifism fix
   - type: ThrowingAngle
     angle: 225
   - type: Fixtures
