@@ -11,14 +11,12 @@
   - type: Tag
     tags:
     - ClothMade
-    - Ian # SS220 Shapochki
+    - Ian
     - HamsterWearable
     - WhitelistChameleon
-  #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
     sounds:
       Male: MaleEngineer
       Female: FemaleEngineer
       Unsexed: MaleEngineer
-  #ss220 special_sounds end
