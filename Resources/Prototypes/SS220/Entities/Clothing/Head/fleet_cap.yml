@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadNavyCap
+  name: navy cap
+  description: A mandatory element of the uniform for all officers and crew members, emphasizing their belonging to a powerful corporation.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/fleetcap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/fleetcap.rsi
