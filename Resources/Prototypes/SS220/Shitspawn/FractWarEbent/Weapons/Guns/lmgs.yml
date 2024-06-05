@@ -1,0 +1,159 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#USSP
+- type: entity
+  name: ручной пулемёт Калашникова
+  id: WeaponLightMachineGunUssp_RPK
+  parent: BaseWeaponLightMachineGun
+  suffix: Shitspawn, Ebent, FractWar
+  description: Советская разработка, что уже более шестиста лет успешно доносит социалистические идеалы даже через самые толстые капиталистические черепа. Гарант качества!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/ussp_RPK.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/ussp_RPK.rsi
+    quickEquip: false
+    slots:
+    - Back
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineUssp_RPK
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineUssp_RPK
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeLightRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeLightRifle
+
+#ERT
+- type: entity
+  name: ручной лазерный пулемёт- G&V
+  parent: BaseWeaponBattery
+  id: WeaponErt_machinegun
+  suffix: Shitspawn, Ebent, FractWar
+  description: Кажется, кто-то просто снял легкий лазерный пулемет производства G&V с истребителя москитного флота, приварив к нему ручку для удобства. Определённо взрывоопасен.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/ert_minigun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/ert_minigun.rsi
+    quickEquip: false
+    slots:
+    - Back
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -20
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto
+    minAngle: 20
+    maxAngle: 37
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 8
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: PulseErt_Lmg
+    fireCost: 80
+  - type: Battery
+    maxCharge: 6400
+    startingCharge: 6400
+
+#Iron squad
+- type: entity
+  parent: BaseItem
+  name: maschinengewehr 34
+  id: WeaponLightMachineGunIron_Mg34
+  suffix: Shitspawn, Ebent, FractWar
+  description: Мы что, злодеи? Конечно злодеи! Использует патроны калибра 7.92X57mm
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/iron_MG34.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Huge
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -20
+  - type: Gun
+    minAngle: 24
+    maxAngle: 45
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 10
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+  - type: AmmoCounter
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineIron_MG34
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineIron_MG34
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeIron_MG34
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeIron_MG34
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 500
+  - type: UseDelay
+    delay: 1

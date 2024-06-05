@@ -25,6 +25,10 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  # SS220 Hand/FootWraps begin
+  - ClothingHandWraps
+  - ClothingFootWraps
+  # SS220 Hand/FootWraps end
 
 - type: loadoutGroup
   id: Glasses
@@ -616,6 +620,12 @@
   - ChiefEngineerJumpskirt
   - ChiefEngineerTurtleneck
   - ChiefEngineerTurtleneckSkirt
+#ss220-loadout-chief-engineer-begin
+  - DarkChiefEngineerJumpsuit
+  - DarkChiefEngineerJumpskirt
+  - DarkChiefEngineerTurtleneck
+  - DarkChiefEngineerTurtleneckSkirt
+#ss220-loadout-chief-engineer-end
 
 - type: loadoutGroup
   id: ChiefEngineerBackpack
@@ -632,6 +642,10 @@
   loadouts:
   - ChiefEngineerCloak
   - ChiefEngineerMantle
+#ss220-loadout-chief-engineer-begin
+  - DarkChiefEngineerCloak
+  - DarkChiefEngineerMantle
+#ss220-loadout-chief-engineer-end
 
 - type: loadoutGroup
   id: ChiefEngineerOuterClothing

@@ -3,6 +3,13 @@
   id: Bubbles
   name: chat-emote-name-bubbles
   category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: [chat-emote-msg-bubbles]
   chatTriggers:
     - bubbles

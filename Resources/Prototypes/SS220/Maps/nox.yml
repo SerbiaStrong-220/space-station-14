@@ -10,7 +10,7 @@
       stationProto: NoxNanotrasenStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_nox.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_nox.yml
         - type: StationRandomTransform
           enableStationRotation: false
           maxStationOffset: null

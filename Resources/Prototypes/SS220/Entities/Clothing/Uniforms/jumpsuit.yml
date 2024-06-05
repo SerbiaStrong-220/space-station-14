@@ -7,9 +7,14 @@
   description: На этой униформе изображено звание «лейтенант-коммандер». Её носят исключительно офицеры NanoTrasen. Защитные свойства форме придают экзотические материалы.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+    sprite: SS220/Clothing/Uniforms/nt_NO_uniform.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+    sprite: SS220/Clothing/Uniforms/nt_NO_uniform.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
 
 - type: entity
   parent: UnsensoredClothingUniformBase
