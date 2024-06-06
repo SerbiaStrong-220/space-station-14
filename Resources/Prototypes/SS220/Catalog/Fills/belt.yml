@@ -1,0 +1,19 @@
+- type: entity
+  id: ClothingBeltJianSheathFilled
+  parent: ClothingBeltJianSheath
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - JianSword
+
+- type: entity
+  id: ClothingBeltMinamotoNoYorimitsuSheathFilled
+  parent: ClothingBeltMinamotoNoYorimitsuSheath
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - MinamotoNoYorimitsu

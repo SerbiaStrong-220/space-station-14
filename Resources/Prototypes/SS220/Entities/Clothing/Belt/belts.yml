@@ -7,7 +7,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Belt/jian_sheath.rsi
   - type: Clothing
-    sprite: SS220Clothing/Belt/jian_sheath.rsi
+    sprite: SS220/Clothing/Belt/jian_sheath.rsi
   - type: ItemSlots
     slots:
       item:
@@ -30,7 +30,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Belt/katana_sheath.rsi
   - type: Clothing
-    sprite: SS220Clothing/Belt/katana_sheath.rsi
+    sprite: SS220/Clothing/Belt/katana_sheath.rsi
   - type: ItemSlots
     slots:
       item:
