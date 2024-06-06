@@ -3,6 +3,7 @@
   abstract: true
   priority: 2
   locationPreference: Right
+  isShaded: true
 
 - type: statusIcon
   parent: SecHudIcon
@@ -31,3 +32,10 @@
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: execute
+
+- type: statusIcon
+  parent: SecHudIcon
+  id: SecDemoteIcon
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/sechud.rsi
+    state: demote
