@@ -19,6 +19,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Robust.Server.Audio;
 using Content.Shared.Chemistry;
+using Content.Server.SS220.Autoinjector; //ss220 needle protection
+using Content.Shared.Inventory; //ss220 needle protection
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -26,6 +28,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!; //ss220 needle protection
 
     public override void Initialize()
     {
@@ -86,6 +89,20 @@ public sealed class HypospraySystem : SharedHypospraySystem
             if (_useDelay.IsDelayed((uid, delayComp)))
                 return false;
         }
+
+        //ss220 needleprotection begin
+        if (HasComp<NeedleProtectionComponent>(target) && component.IgnoreProtection)
+            return false;
+
+        if (_inventory.TryGetSlots(target, out var slots) && component.IgnoreProtection)
+        {
+            foreach (var slot in slots)
+            {
+                if (_inventory.TryGetSlotEntity(target, slot.Name, out var item) && HasComp<NeedleProtectionComponent>(item))
+                    return false;
+            }
+        }
+        //ss220 needleprotection end
 
         string? msgFormat = null;
 
