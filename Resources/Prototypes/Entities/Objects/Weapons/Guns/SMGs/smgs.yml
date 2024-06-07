@@ -93,13 +93,13 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
-#  - type: Wieldable #RevertGunWieldable-Begin
+#  - type: Wieldable #SS220-RevertGunWieldable-Begin
 #  - type: GunWieldBonus
 #    minAngle: -19
-#    maxAngle: -16 #RevertGunWieldable-End
+#    maxAngle: -16 #SS220-RevertGunWieldable-End
   - type: Gun
-#    minAngle: 21 #RevertGunWieldable-Begin
-#    maxAngle: 32 #RevertGunWieldable-End
+#    minAngle: 21 #SS220-RevertGunWieldable-Begin
+#    maxAngle: 32 #SS220-RevertGunWieldable-End
     shotsPerBurst: 5
     availableModes:
     - SemiAuto
@@ -130,13 +130,13 @@
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
       sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
-#    - type: Wieldable #RevertGunWieldable-Begin
+#    - type: Wieldable #SS220-RevertGunWieldable-Begin
 #    - type: GunWieldBonus
 #      minAngle: -19
-#      maxAngle: -16 #RevertGunWieldable-End
+#      maxAngle: -16 #SS220-RevertGunWieldable-End
     - type: Gun
-#      minAngle: 21 #RevertGunWieldable-Begin
-#      maxAngle: 32 #RevertGunWieldable-End
+#      minAngle: 21 #SS220-RevertGunWieldable-Begin
+#      maxAngle: 32 #SS220-RevertGunWieldable-End
       fireRate: 6
       selectedMode: FullAuto
       soundGunshot:

@@ -22,7 +22,7 @@
 
 - type: entity
   name: china lake
-  parent: BaseWeaponLauncher #RevertGunWieldable
+  parent: BaseWeaponLauncher #SS220-RevertGunWieldable
   id: WeaponLauncherChinaLake
   description: PLOOP
   components:
