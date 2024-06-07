@@ -91,10 +91,10 @@ public sealed class HypospraySystem : SharedHypospraySystem
         }
 
         //ss220 needleprotection begin
-        if (HasComp<NeedleProtectionComponent>(target) && component.IgnoreProtection)
+        if (HasComp<NeedleProtectionComponent>(target) && !component.IgnoreProtection)
             return false;
 
-        if (_inventory.TryGetSlots(target, out var slots) && component.IgnoreProtection)
+        if (_inventory.TryGetSlots(target, out var slots) && !component.IgnoreProtection)
         {
             foreach (var slot in slots)
             {
