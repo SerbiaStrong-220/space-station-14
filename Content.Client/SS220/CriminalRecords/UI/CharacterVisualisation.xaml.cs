@@ -11,6 +11,10 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Content.Shared.Preferences.Loadouts;
+using Content.Client.Lobby;
+using Content.Shared.Clothing;
+using Content.Client.Station;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
@@ -20,9 +24,12 @@ public sealed partial class CharacterVisualisation : BoxContainer
     private readonly IEntityManager _entMan;
     private readonly IPrototypeManager _prototype;
     private EntityUid _previewDummy;
+    private readonly LobbyUIController _controller = default!;
 
     private readonly SpriteView _face;
     private readonly SpriteView _side;
+
+    private readonly StationSpawningSystem _spawn = default!;
 
 
     public CharacterVisualisation()
@@ -54,36 +61,112 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
         _previewDummy = _entMan.SpawnEntity(_prototype.Index<SpeciesPrototype>(profile.Species).DollPrototype, MapCoordinates.Nullspace);
         appearanceSystem.LoadProfile(_previewDummy, profile);
-        GiveDummyJobClothes(_previewDummy, jobPrototype, profile);
+        var realjobprototype = _prototype.Index<JobPrototype>(jobPrototype ?? SharedGameTicker.FallbackOverflowJob);
+        GiveDummyJobClothesLoadout(_previewDummy, profile, realjobprototype);
 
         _face.SetEntity(_previewDummy);
         _side.SetEntity(_previewDummy);
     }
-    private void GiveDummyJobClothes(EntityUid dummy, string jobPrototype, HumanoidCharacterProfile profile)
+
+    public void GiveDummyJobClothesLoadout(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
     {
         ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
+        if (!inventorySystem.TryGetSlots(dummy, out var slots))
+            return;
+        GiveDummyJobClothes(dummy, profile, job);
+        _prototype.TryIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID), out var roleLoadoutProto);
+        // var jobLoadout = LoadoutSystem.GetJobPrototype(job?.ID);
 
-        // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract (what is resharper smoking?)
-        var job = _prototype.Index<JobPrototype>(jobPrototype ?? SharedGameTicker.FallbackOverflowJob);
+        RoleLoadout? loadout = null;
 
-        if (job.StartingGear != null && inventorySystem.TryGetSlots(dummy, out var slots))
+        // Clone so we don't modify the underlying loadout.
+        profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
+        loadout = loadout?.Clone();
+
+        if (loadout == null && roleLoadoutProto != null)
         {
-            var gear = _prototype.Index<StartingGearPrototype>(job.StartingGear);
+            loadout = new RoleLoadout(roleLoadoutProto.ID);
+            loadout.SetDefault(_prototype);
+            GiveDummyLoadout(dummy, loadout);
+        }
 
-            foreach (var slot in slots)
+    }
+
+
+    public void GiveDummyLoadout(EntityUid uid, RoleLoadout? roleLoadout)
+    {
+        if (roleLoadout == null)
+            return;
+        foreach (var group in roleLoadout.SelectedLoadouts.Values)
+        {
+            foreach (var loadout in group)
             {
-                var itemType = gear.GetGear(slot.Name);
-                if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, true, true))
-                {
-                    _entMan.DeleteEntity(unequippedItem.Value);
-                }
+                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
+                    continue;
 
-                if (itemType != string.Empty)
-                {
-                    var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
-                    inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
-                }
+                _spawn.EquipStartingGear(uid, _prototype.Index(loadoutProto.Equipment));
             }
         }
     }
+
+    public void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
+    {
+        ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
+        if (!inventorySystem.TryGetSlots(dummy, out var slots))
+            return;
+
+        // Apply loadout
+        if (profile.Loadouts.TryGetValue(job.ID, out var jobLoadout))
+        {
+            foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
+            {
+                foreach (var loadout in loadouts)
+                {
+                    if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
+                        continue;
+
+                    // TODO: Need some way to apply starting gear to an entity coz holy fucking shit dude.
+                    var loadoutGear = _prototype.Index(loadoutProto.Equipment);
+
+                    foreach (var slot in slots)
+                    {
+                        var itemType = loadoutGear.GetGear(slot.Name);
+
+                        if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                        {
+                            _entMan.DeleteEntity(unequippedItem.Value);
+                        }
+
+                        if (itemType != string.Empty)
+                        {
+                            var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                            inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (job.StartingGear == null)
+            return;
+
+        var gear = _prototype.Index<StartingGearPrototype>(job.StartingGear);
+
+        foreach (var slot in slots)
+        {
+            var itemType = gear.GetGear(slot.Name);
+
+            if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+            {
+                _entMan.DeleteEntity(unequippedItem.Value);
+            }
+
+            if (itemType != string.Empty)
+            {
+                var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
+            }
+        }
+    }
+
 }
