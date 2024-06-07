@@ -1,0 +1,13 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatDevilHorns
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: DO NOT MAP
+  components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/devils_horns.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/devils_horns.rsi
