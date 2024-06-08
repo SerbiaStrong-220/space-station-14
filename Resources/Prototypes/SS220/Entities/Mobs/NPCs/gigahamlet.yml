@@ -148,6 +148,7 @@
     name: Рикардо гамлес
     description: Покажите этому миру, как нужно танцевать!
   - type: GhostTakeoverAvailable
+  - type: Butcherable
     spawned:
     - id: ClothingUniformRicardoHamletJunior
       amount: 1
