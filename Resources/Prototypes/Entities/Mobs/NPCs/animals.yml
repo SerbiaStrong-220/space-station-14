@@ -2295,8 +2295,10 @@
       makeSentient: true
       name: ghost-role-information-giant-spider-name
       description: ghost-role-information-giant-spider-description
-      raffle:
-        settings: short
+# SS220-partial-revert-raffle-Begin
+#      raffle:
+#        settings: short
+# SS220-partial-revert-reffle-End
     - type: GhostTakeoverAvailable
 
 - type: entity
