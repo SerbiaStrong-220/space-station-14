@@ -231,9 +231,9 @@
   result: MedAutoinjector
   completetime: 2
   materials:
-    Glass: 100
-    Plastic: 200
-    Steel: 25
+    Glass: 400
+    Plastic: 600
+    Steel: 60
 
 - type: latheRecipe
   id: WhiteCane
