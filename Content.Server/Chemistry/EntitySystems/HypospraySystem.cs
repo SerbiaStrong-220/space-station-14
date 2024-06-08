@@ -92,14 +92,20 @@ public sealed class HypospraySystem : SharedHypospraySystem
 
         //ss220 needleprotection begin
         if (HasComp<NeedleProtectionComponent>(target) && !component.IgnoreProtection)
+        {
+            _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), entity, user);
             return false;
+        }
 
         if (_inventory.TryGetSlots(target, out var slots) && !component.IgnoreProtection)
         {
             foreach (var slot in slots)
             {
                 if (_inventory.TryGetSlotEntity(target, slot.Name, out var item) && HasComp<NeedleProtectionComponent>(item))
+                {
+                    _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), entity, user);
                     return false;
+                }
             }
         }
         //ss220 needleprotection end
