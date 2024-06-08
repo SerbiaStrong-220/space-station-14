@@ -19,8 +19,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Robust.Server.Audio;
 using Content.Shared.Chemistry;
-using Content.Server.SS220.Autoinjector; //ss220 needle protection
-using Content.Shared.Inventory; //ss220 needle protection
+using Content.Server.SS220.Autoinjector;
+using Content.Shared.Inventory;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -28,7 +28,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!; //ss220 needle protection
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
