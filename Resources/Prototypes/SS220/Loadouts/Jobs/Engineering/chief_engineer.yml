@@ -104,3 +104,13 @@
   equipment:
     id: CEPDA
 
+# Head
+- type: loadout
+  id: BeretCE
+  equipment: BeretCE
+
+- type: startingGear
+  id: BeretCE
+  equipment:
+    head: ClothingHeadHatBeretCE
+

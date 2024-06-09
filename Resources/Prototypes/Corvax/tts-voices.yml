@@ -197,7 +197,7 @@
 - type: ttsVoice
   name: Ромка
   description: Голос персонажа Ромка из игры Tiny Bunny
-  sex: Male
+  sex: Unsexed
   speaker: romka
   id: romka
 
@@ -617,7 +617,7 @@
 - type: ttsVoice
   name: Майрон
   description: Голос персонажа Майрон из игры Fallout 2
-  sex: Female
+  sex: Male
   speaker: myron
   id: myron
 
@@ -638,7 +638,7 @@
 - type: ttsVoice
   name: Рассказчик
   description: Голос персонажа Рассказчик из игры Dungeons 3
-  sex: Female
+  sex: Male
   speaker: narrator_d3
   id: narrator_d3
 

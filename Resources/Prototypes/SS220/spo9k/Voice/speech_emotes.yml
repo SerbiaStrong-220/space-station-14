@@ -2,7 +2,13 @@
 - type: emote
   id: Meow
   name: chat-emote-name-meow
-  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: [chat-emote-msg-meow]
   chatTriggers:
     - мяу
@@ -19,7 +25,13 @@
 - type: emote
   id: Mew
   name: chat-emote-name-mew
-  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: [chat-emote-msg-mew]
   chatTriggers:
     - мя
@@ -36,7 +48,13 @@
 - type: emote
   id: Growl
   name: chat-emote-name-growl
-  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: [chat-emote-msg-growl]
   chatTriggers:
     - рычит
@@ -51,7 +69,13 @@
 - type: emote
   id: Purr
   name: chat-emote-name-purr
-  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: [chat-emote-msg-purr]
   chatTriggers:
     - мур

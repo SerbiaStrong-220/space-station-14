@@ -78,4 +78,16 @@
   path:
     path: /Audio/SS220/Lobby/double-u.ogg
 
+- type: jukebox
+  id: vincent_helman
+  name: Quantum (Feat Z.W.E.I) - Vincent Helman
+  path:
+    path: /Audio/SS220/Music/Vincent_Helman.ogg
+
+- type: jukebox
+  id: the_bar_counter
+  name: Quantum (Feat Z.W.E.I) - The bar counter
+  path:
+    path: /Audio/SS220/Music/The_Bar_Counter.ogg
+
 # SS220 music begin

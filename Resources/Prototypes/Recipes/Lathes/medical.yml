@@ -226,14 +226,16 @@
     Steel: 600
     Plastic: 300
 
-- type: latheRecipe # ss220 autoinjectors update
+#SS220-autoinjectors-update begin
+- type: latheRecipe
   id: MedAutoinjector
   result: MedAutoinjector
   completetime: 2
   materials:
-    Glass: 100
-    Plastic: 200
-    Steel: 25
+    Glass: 400
+    Plastic: 600
+    Steel: 60
+#SS220-autoinjectors-update end
 
 - type: latheRecipe
   id: WhiteCane

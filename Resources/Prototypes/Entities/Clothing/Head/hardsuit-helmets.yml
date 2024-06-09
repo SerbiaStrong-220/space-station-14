@@ -20,6 +20,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+  - type: NeedleProtection # ss220 needleprotection
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
