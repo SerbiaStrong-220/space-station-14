@@ -33,6 +33,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Content.Shared.Bed.Sleep;
 
 namespace Content.Server.Chat.Systems;
 
@@ -59,6 +60,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
+    [Dependency] private readonly IEntityManager _entities = default!;// SS220 Emote
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -556,6 +558,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         var ent = Identity.Entity(source, EntityManager);
         string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
 
+        CheckForEmoteAbility(source, ref action);//SS220 emote
+
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
             ("entityName", name),
@@ -578,6 +582,27 @@ public sealed partial class ChatSystem : SharedChatSystem
             else
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
     }
+
+    //SS220 emote start
+    private void CheckForEmoteAbility(EntityUid uid,ref String action)
+    {
+        if (HasComp<SleepingComponent>(uid))
+        {
+            action = "бормочет";
+            return;
+        }
+
+        var actionLower = action.ToLower();
+        if (!_wordEmoteDict.TryGetValue(actionLower, out var emote))
+            return;
+
+        if (!_entities.TryGetComponent<ReplacementAccentComponent>(uid, out var accentComp))
+            return;
+
+        if (accentComp.Accent != "mumble")
+            return;
+    }
+    //SS220 emote end
 
     // ReSharper disable once InconsistentNaming
     private void SendLOOC(EntityUid source, ICommonSession player, string message, bool hideChat)
