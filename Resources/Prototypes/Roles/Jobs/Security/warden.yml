@@ -30,6 +30,6 @@
     eyes: ClothingEyesGlassesSecurity
     id: WardenPDA
     ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
+#    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol
