@@ -223,7 +223,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttle.rsi
+    sprite: SS220/Structures/Walls/shuttle.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -241,7 +241,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttleinterior.rsi
+    sprite: SS220/Structures/Walls/shuttleinterior.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -259,7 +259,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -555,7 +555,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Structures/Windows/shuttle_window.rsi
+    sprite: SS220/Structures/Windows/shuttle_window.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -1626,23 +1626,6 @@
     - !type:TileNotBlocked
 
 - type: construction
-  name: airtight plastic flaps
-  id: PlasticFlapsAirtight
-  graph: PlasticFlapsGraph
-  startNode: start
-  targetNode: airtightFlaps
-  category: construction-category-structures
-  placementMode: SnapgridCenter
-  description: An airtight plastic flap to let items through and keep people out.
-  objectType: Structure
-  canBuildInImpassable: false
-  icon:
-    sprite: Structures/plastic_flaps.rsi
-    state: plasticflaps
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
   name: opaque plastic flaps
   id: PlasticFlapsOpaque
   graph: PlasticFlapsGraph
@@ -1651,23 +1634,6 @@
   category: construction-category-structures
   placementMode: SnapgridCenter
   description: An opaque plastic flap to let items through and keep people out.
-  objectType: Structure
-  canBuildInImpassable: false
-  icon:
-    sprite: Structures/plastic_flaps.rsi
-    state: plasticflaps
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  name: airtight opaque plastic flaps
-  id: PlasticFlapsAirtightOpaque
-  graph: PlasticFlapsGraph
-  startNode: start
-  targetNode: airtightopaqueFlaps
-  category: construction-category-structures
-  placementMode: SnapgridCenter
-  description: An opaque, airtight plastic flap to let items through and keep people out.
   objectType: Structure
   canBuildInImpassable: false
   icon:

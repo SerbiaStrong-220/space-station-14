@@ -1,0 +1,47 @@
+- type: entity
+  name: Автоинжектор
+  parent: BaseItem
+  description: уээээ
+  id: BaseAutoinjectorss220
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/autoinjectors.rsi
+    state: autoinjector
+  - type: Item
+    sprite: SS220/Objects/Misc/autoinjectors.rsi
+    size: Small
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+  - type: ExaminableSolution
+    solution: pen
+  - type: Hypospray
+    solutionName: pen
+    onlyAffectsMobs: false
+    injectOnly: true
+    transferAmount: 15
+    ignoreProtection: false
+  - type: RefillableSolution
+    solution: pen
+  - type: Autoinjector
+
+- type: entity
+  name: Медицинский автоинжектор
+  parent: BaseAutoinjectorss220
+  description: Одноразовый медицинский автоинжектор, предназначеный для быстрой доставки веществ в организм. Внимание! После первого использование повторно пополнить инжектор будет невозможно. Использовать с умом.
+  id: MedAutoinjector
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+  - type: ExaminableSolution
+    solution: pen
+  - type: Hypospray
+    solutionName: pen
+    onlyAffectsMobs: false
+    injectOnly: true
+    transferAmount: 10
+  - type: Autoinjector

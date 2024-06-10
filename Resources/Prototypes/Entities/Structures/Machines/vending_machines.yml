@@ -1973,6 +1973,7 @@
 - type: entity
   parent: VendingMachine
   id: VendingMachineCentDrobe
+  noSpawn: true #SS220 New CentCom
   name: CentDrobe
   description: A one-of-a-kind vending machine for all your centcom aesthetic needs!
   components:

@@ -221,6 +221,9 @@
       map: ["base"]
   - type: Item
     heldPrefix: pglass
+  - type: FloorTile #SS220-NewGlassFloors-Begin
+    outputs:
+    - FloorPGlass #SS220-NewGlassFloors-End
   - type: Construction
     graph: Glass
     node: SheetPGlass
@@ -296,6 +299,9 @@
       map: ["base"]
   - type: Item
     heldPrefix: rpglass
+  - type: FloorTile #SS220-NewGlassFloors-Begin
+    outputs:
+    - FloorRPGlass #SS220-NewGlassFloors-End
   - type: Construction
     graph: Glass
     node: SheetRPGlass
@@ -351,6 +357,9 @@
       map: ["base"]
   - type: Item
     heldPrefix: uglass
+  - type: FloorTile #SS220-NewGlassFloors-Begin
+    outputs:
+    - FloorUGlass #SS220-NewGlassFloors-End
   - type: Construction
     graph: Glass
     node: SheetUGlass
@@ -425,6 +434,9 @@
       map: ["base"]
   - type: Item
     heldPrefix: ruglass
+  - type: FloorTile #SS220-NewGlassFloors-Begin
+    outputs:
+    - FloorRUGlass #SS220-NewGlassFloors-End
   - type: Construction
     graph: Glass
     node: SheetRUGlass

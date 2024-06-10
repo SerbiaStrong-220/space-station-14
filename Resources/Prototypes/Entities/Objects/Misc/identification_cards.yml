@@ -473,6 +473,7 @@
   parent: IDCardStandard
   id: CentcomIDCard
   name: command officer ID card
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     layers:
@@ -485,9 +486,10 @@
     jobIcon: JobIconNanotrasen
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommand
+    - CentralCommandERT # SS220 New CentComm
 
 - type: entity
   parent: CentcomIDCard
@@ -499,12 +501,18 @@
     - state: gold
     - state: ert_commander
   - type: IdCard
-    jobTitle: ERT Company Commander
+    jobTitle: Лидер отряда ОБР # SS220 new CentComm
   - type: Item
     heldPrefix: gold
+  # SS220 new CentComm begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
-  parent: ERTLeaderIDCard
+  parent: CentcomIDCard # SS220 new CentComm begin
   id: ERTChaplainIDCard
   name: ERT chaplain ID card
   components:
@@ -516,6 +524,9 @@
     jobTitle: ERT Soul Officer
   - type: Item
     heldPrefix: blue
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
 
 - type: entity
   parent: ERTChaplainIDCard
@@ -569,6 +580,7 @@
   parent: IDCardStandard
   id: CentcomIDCardSyndie
   name: command officer ID card
+  noSpawn: true #SS220 New CentCom
   suffix: Fake
   components:
   - type: Sprite
@@ -599,6 +611,7 @@
   parent: CentcomIDCard
   id: CentcomIDCardDeathsquad
   name: death squad ID card
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     layers:
@@ -607,6 +620,14 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: Centcom Agent
+  # SS220 new CentComm begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommandDeathSquad
+    - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
   name: passenger ID card
@@ -818,6 +839,7 @@
   parent: CentcomIDCard
   id: CBURNIDcard
   name: CBURN ID card
+  noSpawn: true #SS220 New CentCom
   suffix: CBURN
   components:
   - type: Sprite
@@ -826,7 +848,15 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Centcom Quarantine Officer
+  # SS220 new CentComm begin
+    jobTitle: Агент РХБЗ
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommandCBURN
+    - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
   parent: IDCardStandard
@@ -881,3 +911,30 @@
     layers:
     - state: default
     - state: idseniorofficer
+
+- type: entity
+  parent: IDCardStandard
+  id: UniversalIDCard
+  name: universal ID card
+  suffix: Admin
+  description: An ID card that gives you access beyond your wildest dreams.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: admin
+    - state: idadmin
+  - type: Clothing
+    sprite: Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: green
+  - type: IdCard
+    jobTitle: Universal
+    jobIcon: JobIconAdmin
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - CentralCommand
+    - NuclearOperative
+    - SyndicateAgent

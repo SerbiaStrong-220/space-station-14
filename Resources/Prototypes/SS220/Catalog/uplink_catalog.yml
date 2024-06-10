@@ -16,6 +16,24 @@
         components:
         - NukeOpsUplink
 
+# Implants
+
+- type: listing
+  id: UplinkMindSlaveImplanter
+  name: uplink-mindslave-implanter-name
+  description: uplink-mindslave-implanter-desc
+  icon: { sprite: /Textures/SS220/Alerts/MindSlave.rsi, state: icon }
+  productEntity: MindSlaveImplanter
+  cost:
+    Telecrystal: 8
+  categories:
+    - UplinkImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+
  # Pointless
 
 - type: listing
@@ -24,6 +42,17 @@
   description: uplink-expensive-lighter-desc
   icon: { sprite: /Textures/SS220/Objects/Tools/lighters.rsi, state: zippo_syndi_icon_base }
   productEntity: ExpensiveLighterSyndicate
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
+- type: listing
+  id: UplinkBoxFolderSyndicate
+  name: папка синдиката
+  description: Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
+  icon: { sprite: /Textures/SS220/Objects/Misc/bureaucracy.rsi, state: folder-syndicate }
+  productEntity: BoxFolderSyndicate
   cost:
     Telecrystal: 1
   categories:

@@ -106,7 +106,7 @@
   result: ClothingMaskSterile
   completetime: 2
   materials:
-    Plastic: 100
+    Plastic: 50
 
 - type: latheRecipe
   id: DiseaseSwab
@@ -226,3 +226,21 @@
     Steel: 600
     Plastic: 300
 
+#SS220-autoinjectors-update begin
+- type: latheRecipe
+  id: MedAutoinjector
+  result: MedAutoinjector
+  completetime: 2
+  materials:
+    Glass: 400
+    Plastic: 600
+    Steel: 60
+#SS220-autoinjectors-update end
+
+- type: latheRecipe
+  id: WhiteCane
+  result: WhiteCane
+  completetime: 2
+  materials:
+    Steel: 100
+    Plastic: 100

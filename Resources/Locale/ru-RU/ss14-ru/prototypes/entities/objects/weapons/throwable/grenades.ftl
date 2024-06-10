@@ -6,6 +6,13 @@ ent-GrenadeFlashBang = светошумовая граната
     .desc = Пиииииииииииииииииииии
 ent-GrenadeFlashEffect = { "" }
     .desc = { "" }
+# Corvax-HiddenDesc-Start
+ent-SyndieMiniBomb = минибомба с таймером
+    .suffix = Синдикат
+    .desc = Аккуратное, стильное взрывное устройство с приятно-потрескивающим таймером, предназначенное сеять хаос и разрушение.
+ent-SelfDestructSeq = Самоуничтожение
+    .desc = Уйти на своих условиях!
+# Corvax-HiddenDesc-End
 ent-SupermatterGrenade = граната суперматерии
     .desc = Граната, имитирующая расслоение сверхматерии двигателя, притягивает всё в кучу и через некоторое время взрывается.
 ent-WhiteholeGrenade = граната белой дыры

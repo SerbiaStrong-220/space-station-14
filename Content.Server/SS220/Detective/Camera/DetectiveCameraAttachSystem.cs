@@ -6,14 +6,16 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
 using Content.Shared.SS220.Detective.Camera;
+using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Server.SS220.Detective.Camera;
 
 public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSystem
 {
-    private readonly static string DetectiveCameraKey = "DetectiveCamera";
+    private readonly static ProtoId<TagPrototype> DetectiveCameraKey = "DetectiveCamera";
 
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -105,7 +107,7 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
 
         detectiveCameraSlot.Whitelist = new EntityWhitelist()
         {
-            Tags = new List<string>()
+            Tags = new List<ProtoId<TagPrototype>>()
             {
                 DetectiveCameraKey
             }

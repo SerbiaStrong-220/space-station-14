@@ -1,8 +1,15 @@
 ## vocal emotes
 - type: emote
   id: Meow
-  category: Vocal
-  chatMessages: [мяукает.]
+  name: chat-emote-name-meow
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-meow]
   chatTriggers:
     - мяу
     - мяукнул
@@ -17,8 +24,15 @@
 
 - type: emote
   id: Mew
-  category: Vocal
-  chatMessages: [мякает.] # spo9k: может, есть слово получше?
+  name: chat-emote-name-mew
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-mew]
   chatTriggers:
     - мя
     - мякает
@@ -33,8 +47,15 @@
 
 - type: emote
   id: Growl
-  category: Vocal
-  chatMessages: [growls.]
+  name: chat-emote-name-growl
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-growl]
   chatTriggers:
     - рычит
     - ррр
@@ -47,8 +68,15 @@
 
 - type: emote
   id: Purr
-  category: Vocal
-  chatMessages: [мурчит.]
+  name: chat-emote-name-purr
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-purr]
   chatTriggers:
     - мур
     - мурчит

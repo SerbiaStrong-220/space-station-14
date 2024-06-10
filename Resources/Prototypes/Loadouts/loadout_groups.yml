@@ -6,6 +6,14 @@
   maxLimit: 3
   loadouts:
   - PlushieLizard
+  - PlushieSpaceLizard
+  - Lighter
+  - CigPackGreen
+  - CigPackRed
+  - CigPackBlue
+  - CigPackBlack
+  - CigarCase
+  - CigarGold
   - ClothingNeckLGBTPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
@@ -17,6 +25,10 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  # SS220 Hand/FootWraps begin
+  - ClothingHandWraps
+  - ClothingFootWraps
+  # SS220 Hand/FootWraps end
 
 - type: loadoutGroup
   id: Glasses
@@ -35,6 +47,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+  #ss220-loadout-captain-begin
+  - CaptainWhiteHead
+  - CaptainWhiteBeret
+  #ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -43,6 +59,7 @@
   - CaptainJumpsuit
   - CaptainJumpskirt
   - CaptainFormalSuit
+  - CaptainWhiteJumpsuit #ss220-loadout-captain
 #  - CaptainFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
@@ -53,6 +70,7 @@
   - CaptainCloak
   - CaptainCloakFormal
   - CaptainMantle
+  - CaptainFormalWhiteCloak #ss220-loadout-captain
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -61,6 +79,11 @@
   - CaptainBackpack
   - CaptainSatchel
   - CaptainDuffel
+#ss220-loadout-captain-begin
+  - CaptainWhiteBackpack
+  - CaptainWhiteSatchel
+  - CaptainWhiteDuffel
+#ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: CaptainOuterClothing
@@ -68,6 +91,10 @@
   loadouts:
   - CaptainOuterClothing
   - CaptainWintercoat
+#ss220-loadout-captain-begin
+  - CaptainWhiteOuterClothing
+  - CaptainWhiteCoat
+#ss220-loadout-captain-end
 
 - type: loadoutGroup
   id: HoPHead
@@ -258,6 +285,14 @@
   minLimit: 0
   loadouts:
   - LawyerNeck
+
+- type: loadoutGroup
+  id: LawyerBackpack
+  name: loadout-group-lawyer-backpack
+  loadouts:
+  - LawyerBackpack
+  - LawyerSatchel
+  - LawyerDuffel
 
 - type: loadoutGroup
   id: ChaplainHead
@@ -594,6 +629,7 @@
   loadouts:
   - ChiefEngineerHead
   - ChiefEngineerBeret
+  - BeretCE #SS220-CEBeret
 
 - type: loadoutGroup
   id: ChiefEngineerJumpsuit
@@ -603,6 +639,12 @@
   - ChiefEngineerJumpskirt
   - ChiefEngineerTurtleneck
   - ChiefEngineerTurtleneckSkirt
+#ss220-loadout-chief-engineer-begin
+  - DarkChiefEngineerJumpsuit
+  - DarkChiefEngineerJumpskirt
+  - DarkChiefEngineerTurtleneck
+  - DarkChiefEngineerTurtleneckSkirt
+#ss220-loadout-chief-engineer-end
 
 - type: loadoutGroup
   id: ChiefEngineerBackpack
@@ -619,6 +661,10 @@
   loadouts:
   - ChiefEngineerCloak
   - ChiefEngineerMantle
+#ss220-loadout-chief-engineer-begin
+  - DarkChiefEngineerCloak
+  - DarkChiefEngineerMantle
+#ss220-loadout-chief-engineer-end
 
 - type: loadoutGroup
   id: ChiefEngineerOuterClothing
@@ -870,6 +916,7 @@
   loadouts:
   - HeadofSecurityHead
   - HeadofSecurityBeret
+  - HeadofSecurityBigCap #SS220-FreedomHoSCap
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -1043,6 +1090,7 @@
   minLimit: 0
   loadouts:
   - ChiefMedicalOfficerBeret
+  - CMOMedicalHeadMirror
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1050,6 +1098,8 @@
   loadouts:
   - ChiefMedicalOfficerJumpsuit
   - ChiefMedicalOfficerJumpskirt
+  - ChiefMedicalOfficerTurtleneckJumpsuit
+  - ChiefMedicalOfficerTurtleneckJumpskirt
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
@@ -1089,6 +1139,7 @@
   loadouts:
   - MedicalBeret
   - SeniorPhysicianBeret
+  - MedicalHeadMirror
   - BlueSurgeryCap
   - GreenSurgeryCap
   - PurpleSurgeryCap
@@ -1231,6 +1282,54 @@
   loadouts:
   - BlueShoes
   - MedicalWinterBoots
+
+#SS220-brigmedic-loadout-begin
+- type: loadoutGroup
+  id: BrigmedicHead
+  name: loadout-group-brigmedic-head
+  minLimit: 0
+  loadouts:
+  - BrigmedicHead
+
+- type: loadoutGroup
+  id: BrigmedicMask
+  name: loadout-group-brigmedic-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  - BrigmedicMask
+
+- type: loadoutGroup
+  id: BrigmedicJumpsuit
+  name: loadout-group-brigmedic-jumpsuit
+  loadouts:
+  - BrigmedicJumpsuit
+  - BrigmedicJumpskirt
+
+- type: loadoutGroup
+  id: BrigmedicOuterClothing
+  name: loadout-group-brigmedic-outerclothing
+  minLimit: 0
+  loadouts:
+  - BrigmedicWindAMG
+  - BrigmedicVestSecurity
+
+- type: loadoutGroup
+  id: BrigmedicBackpack
+  name: loadout-group-brigmedic-backpack
+  loadouts:
+  - BrigmedicBackpack
+  - BrigmedicSatchel
+  - BrigmedicDuffel
+
+- type: loadoutGroup
+  id: BrigmedicShoes
+  name: loadout-group-brigmedic-shoes
+  loadouts:
+  - RedShoes
+  - BlueShoes
+  - MedicalWinterBoots
+#SS220-brigmedic-loadout-end
 
 # Wildcards
 - type: loadoutGroup

@@ -3,7 +3,7 @@
 - type: gameMap
   id: Frankenstein
   mapName: 'NSS Frankenstein'
-  mapPath: /Maps/ss220-box.yml
+  mapPath: /Maps/SS220/ss220-box.yml
   minPlayers: 0
   stations:
     Boxstation:
@@ -15,7 +15,10 @@
             !type:NanotrasenNameGenerator
             prefixCreator: '-SS220'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_frankenstein.yml
+        - type: StationRandomTransform
+          enableStationRotation: false
+          maxStationOffset: null
         - type: StationJobs
           overflowJobs:
             - Passenger

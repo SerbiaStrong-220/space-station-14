@@ -5,6 +5,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Pullable
+  - type: Anchorable
   - type: Sprite
     sprite: Structures/Storage/morgue.rsi
     layers:
@@ -28,11 +30,11 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.5,-0.5,0.5,0.5"
-        density: 190
+        density: 1000
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - HalfWallLayer
   - type: EntityStorage
     isCollidableWhenOpen: true
     showContents: false
@@ -47,7 +49,20 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
+      # SS220 morgue label sticking, pos
+      paper_label: !type:ContainerSlot
+      # SS220 morgue label sticking, poe
   - type: Appearance
+  # SS220 morgue label sticking, pos
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: hand-labeler-add-label-text
+      ejectVerbText: hand-labeler-remove-label-text
+      whitelist:
+        components:
+        - Paper
+  - type: ItemSlots
+  # SS220 morgue label sticking, poe
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:

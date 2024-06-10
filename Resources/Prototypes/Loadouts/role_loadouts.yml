@@ -6,6 +6,7 @@
   - CaptainNeck
   - CaptainJumpsuit
   - CaptainBackpack
+# - CaptainGloves #SS220-ОНО НЕ РАБОТАЕТ БЛЯТЬ Я ТОГО МАНАЛ
   - CaptainOuterClothing
   - Trinkets
 
@@ -76,7 +77,7 @@
   groups:
   - LawyerNeck
   - LawyerJumpsuit
-  - CommonBackpack
+  - LawyerBackpack
   - Glasses
   - Trinkets
 
@@ -366,6 +367,21 @@
   - ParamedicShoes
   - Glasses
   - Trinkets
+
+#SS220-brigmedic-loadout-begin
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - BrigmedicMask
+  - BrigmedicJumpsuit
+  - MedicalGloves
+  - BrigmedicBackpack
+  - BrigmedicOuterClothing
+  - BrigmedicShoes
+  - Glasses
+  - Trinkets
+#SS220-brigmedic-loadout-end
 
 # Wildcards
 - type: roleLoadout

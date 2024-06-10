@@ -19,10 +19,13 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         [DataField("outlet")]
         public string OutletName { get; set; } = "pipe";
 
-        //SS220-scrubber-mode begin
-        [ViewVariables(VVAccess.ReadOnly)]
-        public HashSet<Gas> FilterGases = new(GasVentScrubberData.DefaultFilterGases);
+        [ViewVariables]
+        public readonly HashSet<Gas> FilterGases = new(GasVentScrubberData.DefaultFilterGases);
 
+        //SS220-scrubber-mode begin
+        /// <summary>
+        /// Filter mode, which will be set on a scrubber on a map initialization (or spawn).
+        /// </summary>
         [DataField("initialFilter"), ViewVariables]
         public GasVentScrubberData.ScrubberFilter InitialFilter { get; set; } = GasVentScrubberData.ScrubberFilter.Default;
         //SS220-scrubber-mode end

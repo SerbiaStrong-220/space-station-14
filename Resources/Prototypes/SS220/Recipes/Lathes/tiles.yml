@@ -477,3 +477,141 @@
   materials:
     Steel: 25
     Plastic: 25
+
+#WoodTiles-begin
+- type: latheRecipe
+  id: TileWoodParquet
+  result: FloorTileItemWoodParquet
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodBlack
+  result: FloorTileItemWoodBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodDark
+  result: FloorTileItemWoodDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLight
+  result: FloorTileItemWoodLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodRed
+  result: FloorTileItemWoodRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeBlack
+  result: FloorTileItemWoodLargeBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeDark
+  result: FloorTileItemWoodLargeDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeLight
+  result: FloorTileItemWoodLargeLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeRed
+  result: FloorTileItemWoodLargeRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetBlack
+  result: FloorTileItemWoodParquetBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetDark
+  result: FloorTileItemWoodParquetDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetLight
+  result: FloorTileItemWoodParquetLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetRed
+  result: FloorTileItemWoodParquetRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileBlack
+  result: FloorTileItemWoodTileBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileDark
+  result: FloorTileItemWoodTileDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileLight
+  result: FloorTileItemWoodTileLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileRed
+  result: FloorTileItemWoodTileRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+#WoodTiles-end

@@ -138,6 +138,4 @@
       components:
         - Produce
         - Seed
-  - type: UseDelay #SS220-BagsFix
-    delay: 0.5
   - type: Dumpable

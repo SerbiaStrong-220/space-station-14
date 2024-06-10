@@ -14,7 +14,7 @@
     state: barricade_wooden
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 - type: construction
   name: баррикада из стали 
@@ -29,7 +29,7 @@
     state: barricade_steel
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 - type: construction
   name: баррикада из пластали
@@ -44,7 +44,7 @@
     state: barricade_plasteel
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 # Баррикада направленная
 - type: construction
@@ -60,7 +60,7 @@
     state: barricade_wooden_directional
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 - type: construction
   name: баррикада из стали 
@@ -75,7 +75,7 @@
     state: barricade_steel_directional
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 - type: construction
   name: баррикада из пластали
@@ -90,7 +90,7 @@
     state: barricade_plasteel_directional
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 # Баррикада напольная
 - type: construction
@@ -106,7 +106,7 @@
     state: barricade_wooden_floor
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 - type: construction
   name: баррикада из стали 
@@ -121,7 +121,7 @@
     state: barricade_steel_floor
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true
   
 - type: construction
   name: баррикада из пластали
@@ -136,4 +136,4 @@
     state: barricade_plasteel_floor
   objectType: Structure
   placementMode: SnapgridCenter
-  canBuildInImpassable: false 
+  canBuildInImpassable: true

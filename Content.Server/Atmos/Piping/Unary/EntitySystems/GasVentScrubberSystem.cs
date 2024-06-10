@@ -51,7 +51,11 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
         private void OnInit(Entity<GasVentScrubberComponent> entity, ref MapInitEvent args)
         {
             var scrubberMode = GasVentScrubberData.ScrubberFilters[entity.Comp.InitialFilter];
-            entity.Comp.FilterGases = scrubberMode;
+
+            var filterGases = entity.Comp.FilterGases;
+            filterGases.Clear();
+            foreach (var gas in scrubberMode)
+                filterGases.Add(gas);
         }
         //SS220-scrubber-mode end
 

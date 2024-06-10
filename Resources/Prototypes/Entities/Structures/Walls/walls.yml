@@ -136,7 +136,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8    
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -263,7 +263,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8   
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -299,7 +299,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8  
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -420,7 +420,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8    
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -658,7 +658,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8    
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -694,7 +694,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8    
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -740,14 +740,14 @@
     - Wall
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
   - type: IconSmooth
     mode: Diagonal
     key: walls
     base: state
   - type: Icon
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
   - type: Damageable
     damageContainer: Inorganic
@@ -808,9 +808,9 @@
   suffix: Reinforced, Exterior
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle.rsi
+    sprite: SS220/Structures/Walls/shuttle.rsi #ss220-walls-update
   - type: Icon
-    sprite: Structures/Walls/shuttle.rsi
+    sprite: SS220/Structures/Walls/shuttle.rsi #ss220-walls-update
     state: full
   - type: Construction
     graph: Girder
@@ -840,9 +840,9 @@
   suffix: Interior
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttleinterior.rsi
+    sprite: SS220/Structures/Walls/shuttleinterior.rsi #ss220-walls-update
   - type: Icon
-    sprite: Structures/Walls/shuttleinterior.rsi
+    sprite: SS220/Structures/Walls/shuttleinterior.rsi #ss220-walls-update
   - type: Construction
     graph: Girder
     node: shuttleInteriorWall
@@ -871,7 +871,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8    
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -1211,7 +1211,7 @@
   name: force wall
   components:
     - type: TimedDespawn
-      lifetime: 20
+      lifetime: 12
     - type: Tag
       tags:
         - Wall
@@ -1251,7 +1251,7 @@
   - type: RCDDeconstructable
     cost: 6
     delay: 8
-    fx: EffectRCDDeconstruct8    
+    fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:

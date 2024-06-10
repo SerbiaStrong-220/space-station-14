@@ -61,6 +61,9 @@ public abstract class SharedImplanterSystem : EntitySystem
         if (!CanImplant(user, target, implanter, component, out var implant, out var implantComp))
             return;
 
+        //SS220-mindslave
+        implantComp.user = user;
+
         //If the target doesn't have the implanted component, add it.
         var implantedComp = EnsureComp<ImplantedComponent>(target);
         var implantContainer = implantedComp.ImplantContainer;

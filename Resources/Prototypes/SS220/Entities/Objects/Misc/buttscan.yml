@@ -18,7 +18,7 @@
         visible: false
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
-    closeOnHandDeselect: false
+    requireActiveHand: false
   - type: UserInterface
     interfaces:
       enum.PaperUiKey.Key:

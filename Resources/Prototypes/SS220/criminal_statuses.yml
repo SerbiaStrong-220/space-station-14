@@ -23,3 +23,10 @@
   color: "#CC0000FF"
   statusIcon: SecExecuteIcon
   radioReportMessage: criminal-status-execute-report
+
+- type: criminalStatus
+  id: demote
+  name: criminal-status-demote
+  color: "#FF0000FF"
+  statusIcon: SecDemoteIcon
+  radioReportMessage: criminal-status-demote-report

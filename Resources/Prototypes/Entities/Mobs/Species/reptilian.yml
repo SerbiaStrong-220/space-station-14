@@ -28,13 +28,14 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
+    allowedEmotes: ['Hiss'] # 220 emotesMenuFix
   - type: TypingIndicator
     proto: lizard
   - type: Vocal
     sounds:
-      Male: UnisexReptilian
-      Female: FemaleReptilian #ss220-fix
-      Unsexed: UnisexReptilian
+      Male: MaleReptilian
+      Female: FemaleReptilian
+      Unsexed: MaleReptilian
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Scale

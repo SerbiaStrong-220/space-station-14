@@ -504,6 +504,12 @@
   physicalDesc: reagent-physical-desc-sour
   flavor: bitter
   color: "#B3B599"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/posca.rsi #SS220 NewDrinksSprites
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
 
 - type: reagent
   id: KiraSpecial

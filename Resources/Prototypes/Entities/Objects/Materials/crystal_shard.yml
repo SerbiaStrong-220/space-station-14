@@ -7,16 +7,14 @@
   components:
   - type: Sharp
   - type: Sprite
-    layers:
-      - sprite: Objects/Materials/Shards/crystal.rsi
-        state: shard1
-        map: [ "enum.DamageStateVisualLayers.Base" ]
-  - type: RandomSprite
-    available:
-      - enum.DamageStateVisualLayers.Base:
-          shard1: ""
-          shard2: ""
-          shard3: ""
+    sprite: Objects/Materials/Shards/crystal.rsi #SS220-Crystal-Resprite-Start
+    state: shard
+#  - type: RandomSprite
+#    available:
+#      - enum.DamageStateVisualLayers.Base:
+#          shard1: ""
+#          shard2: ""
+#          shard3: "" #SS220-Crystal-Resprite-End
   - type: SpaceGarbage
   - type: MeleeWeapon
     wideAnimationRotation: -22.5

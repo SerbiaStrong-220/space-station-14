@@ -13,7 +13,7 @@
               name: cyan crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
                 color: #52ff39
               doAfter: 1
     - node: icon
@@ -34,7 +34,7 @@
               name: blue crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalBlue
@@ -54,7 +54,7 @@
               name: pink crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalPink
@@ -74,7 +74,7 @@
               name: orange crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalOrange
@@ -94,7 +94,7 @@
               name: red crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalRed
@@ -114,7 +114,7 @@
               name: green crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalGreen
@@ -135,7 +135,7 @@
               name: yellow crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalYellow
@@ -155,7 +155,7 @@
               name: purple crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalPurple

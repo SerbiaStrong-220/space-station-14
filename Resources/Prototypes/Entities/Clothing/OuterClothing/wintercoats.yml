@@ -113,6 +113,7 @@
   parent: ClothingOuterWinterCoatToggleable
   id: ClothingOuterWinterCentcom
   name: CentCom winter coat
+  noSpawn: true #SS220-new-centcomm
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/WinterCoats/coatcentcom.rsi

@@ -11,7 +11,6 @@
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
   canBeAntag: false
-  canBeZombie: false
   access:
   - Security
   - Brig
@@ -31,6 +30,6 @@
     eyes: ClothingEyesGlassesSecurity
     id: WardenPDA
     ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
+#    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol

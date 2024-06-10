@@ -244,6 +244,7 @@
   id: ClothingHeadHatCentcom
   name: CentCom brand hat
   description: "It's good to be the emperor."
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/centcom.rsi
@@ -421,7 +422,7 @@
     - Snout
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatWizardBase
   id: ClothingHeadHatRedwizard
   name: red wizard hat
   description: Strange-looking red hat-wear that most certainly belongs to a real magic user.
@@ -546,7 +547,7 @@
 
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatWizardBase
   id: ClothingHeadHatVioletwizard
   name: violet wizard hat
   description: "Strange-looking violet hat-wear that most certainly belongs to a real magic user."
@@ -575,6 +576,7 @@
   name: witch hat
   description: A witch hat.
   components:
+  - type: WizardClothes #Yes this will count
   - type: Sprite
     sprite: Clothing/Head/Hats/witch.rsi
   - type: Clothing
@@ -599,7 +601,14 @@
     sprite: Clothing/Head/Hats/wizard_fake.rsi
 
 - type: entity
+  abstract: true
   parent: ClothingHeadBase
+  id: ClothingHeadHatWizardBase
+  components:
+  - type: WizardClothes
+
+- type: entity
+  parent: ClothingHeadHatWizardBase
   id: ClothingHeadHatWizard
   name: wizard hat
   description: Strange-looking blue hat-wear that most certainly belongs to a powerful magic user.
@@ -931,6 +940,7 @@
   id: ClothingHeadHatCentcomcap
   name: CentCom cap
   description: An extravagant, fancy Central Commander cap.
+  noSpawn: true #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/comcap.rsi

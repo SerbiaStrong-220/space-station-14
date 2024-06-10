@@ -2,6 +2,10 @@
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }
 
+# Implants
+uplink-mindslave-implanter-name = Имплантер Подчинитель разума
+uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }
+
 # Pointless
 uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
 uplink-expensive-lighter-desc = { ent-ExpensiveLighterSyndicate.desc }

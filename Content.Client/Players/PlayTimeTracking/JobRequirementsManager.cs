@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Client.Administration.Managers;
-using Content.Client.Preferences;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
@@ -20,7 +19,6 @@ namespace Content.Client.Players.PlayTimeTracking;
 
 public sealed class JobRequirementsManager : ISharedPlaytimeManager
 {
-    [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IBaseClient _client = default!;
     [Dependency] private readonly IClientNetManager _net = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;

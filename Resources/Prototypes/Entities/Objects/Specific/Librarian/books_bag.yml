@@ -23,6 +23,4 @@
         tags:
           - Book
           - Document
-    - type: UseDelay #SS220-BagsFix
-      delay: 0.5
     - type: Dumpable

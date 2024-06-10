@@ -30,4 +30,20 @@
           Quantity: 30
   - type: Drink
   - type: Sprite
-    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi 
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkHotArachneGlass
+  suffix: HotArachne
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: HotArachne
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
+    state: icon

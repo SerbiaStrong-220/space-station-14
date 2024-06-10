@@ -36,3 +36,13 @@
   - PsychologistJumpsuit
   - PsychologistJumpsuitTurtleneck
   - PsychologistJumpskirtTurtleneck
+
+#Command
+
+- type: loadoutGroup
+  id: CaptainGloves
+  name: loadout-group-captain-gloves
+  minLimit: 0
+  loadouts:
+  - CaptainGloves
+  - CaptainWhiteGloves

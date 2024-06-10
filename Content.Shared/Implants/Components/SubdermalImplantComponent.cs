@@ -49,6 +49,11 @@ public sealed partial class SubdermalImplantComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    //SS220-mindslave begin
+    //I really need to pass user's uid...
+    public EntityUid? user;
+    //SS220-mindslave end
 }
 
 public sealed partial class UseChemicalImplantEvent : InstantActionEvent
