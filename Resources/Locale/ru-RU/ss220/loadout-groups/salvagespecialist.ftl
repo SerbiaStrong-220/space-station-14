@@ -1,1 +1,1 @@
-loadout-group-salvage-specialist-jumpsuit = униформа утилизатора
+loadout-group-salvage-specialist-jumpsuit = Утилизатор, комбинезон
