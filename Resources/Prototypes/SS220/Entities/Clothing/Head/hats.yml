@@ -1,0 +1,37 @@
+# CentCom
+
+  # Берет
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNanoTrasenOfficer
+  name: берет Офицера NanoTrasen
+  description: Чёрный офицерский берет с выгравированным щитом и мечом, объявляющий миру, что его владелец является защитником NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+  # Фуражка
+- type: entity
+  parent: ClothingHeadWhiteCaptainHat
+  id: ClothingHeadNavyCap
+  name: navy cap
+  description: A mandatory element of the uniform for all officers and crew members, emphasizing their belonging to a powerful corporation.
+
+- type: entity
+  parent: ClothingHeadBigCapHoS
+  id: ClothingHeadHatNavyFieldOfficerCap
+  name: фуражка полевого Офицера
+  description: Если видите её владельца на станции, прячьте колени.
+  components:
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
