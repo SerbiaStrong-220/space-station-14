@@ -54,3 +54,14 @@
       coefficients:
         Slash: 0.9
         Piercing: 0.9
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWardenTurtleneck
+  name: warden turtleneck
+  description: A special turtleneck for riot control.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi

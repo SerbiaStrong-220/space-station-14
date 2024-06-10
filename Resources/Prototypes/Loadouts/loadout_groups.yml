@@ -958,10 +958,7 @@
   loadouts:
   - WardenJumpsuit
   - WardenJumpskirt
-  - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
-  - WardenJumpsuitTurtleneckAlt
-  - WardenJumpskirtTurtleneck
-  - WardenJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck
 
 - type: loadoutGroup
   id: WardenOuterClothing
