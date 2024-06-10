@@ -990,9 +990,7 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - SecurityJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
-  - SecurityJumpsuitTurtleneckAlt
-  - SecurityJumpskirtTurtleneck
-  - SecurityJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
 
 - type: loadoutGroup
   id: SecurityBackpack

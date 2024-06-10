@@ -5,7 +5,7 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobSecurity
+      role: JobSecurityOfficer
       time: 108000 # 30 hrs
 
 # Jumpsuit
@@ -22,18 +22,6 @@
     jumpsuit: ClothingUniformJumpsuitTurtleColorBlack
 
 - type: loadout
-  id: SecurityJumpsuitTurtleneckAlt
-  equipment: SecurityJumpsuitTurtleneckAlt
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SecurityTurtleneck
-
-- type: startingGear
-  id: SecurityJumpsuitTurtleneckAlt
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitTurtleAltColorBlack
-
-- type: loadout
   id: SecurityJumpskirtTurtleneck
   equipment: SecurityJumpskirtTurtleneck
   effects:
@@ -44,15 +32,3 @@
   id: SecurityJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleColorBlack
-
-- type: loadout
-  id: SecurityJumpskirtTurtleneckAlt
-  equipment: SecurityJumpskirtTurtleneckAlt
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SecurityTurtleneck
-
-- type: startingGear
-  id: SecurityJumpskirtTurtleneckAlt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlack
