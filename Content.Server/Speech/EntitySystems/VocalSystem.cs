@@ -10,7 +10,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.SS220.Speech;
-using Content.Server.SS220.Muzzle;
+using Content.Shared.SS220.Muzzle;
 
 namespace Content.Server.Speech.EntitySystems;
 
