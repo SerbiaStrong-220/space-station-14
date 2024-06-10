@@ -10,7 +10,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.SS220.Speech;
-using Content.Shared.SS220.Muzzle;// SS220 No_vocal_emotes_when_muzzled
+using Content.Server.SS220.Muzzle;
 
 namespace Content.Server.Speech.EntitySystems;
 

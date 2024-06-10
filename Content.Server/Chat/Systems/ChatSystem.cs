@@ -61,8 +61,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;// SS220 No vocal emotes when muzzled
-    [Dependency] private readonly IPrototypeManager _proto = default!;// SS220 No vocal emotes when muzzled
+    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
 
     public const int VoiceRange = 10; // how far voice goes in world units
