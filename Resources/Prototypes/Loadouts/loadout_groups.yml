@@ -880,6 +880,7 @@
   loadouts:
   - HeadofSecurityHead
   - HeadofSecurityBeret
+  - HeadofSecurityBigCap #SS220-FreedomHoSCap
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit

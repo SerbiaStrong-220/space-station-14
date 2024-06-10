@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Sprited by Kit0vras (Github) for SS220",
+  "copyright": "Sprited by Kit0vras (Github) for SS220, pda-ce_dark sprited by nightmare_stalker (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -58,6 +58,9 @@
     },
     {
       "name": "pda-ce"
+    },
+    {
+      "name": "pda-ce_dark"
     },
     {
       "name": "pda-chaplain"

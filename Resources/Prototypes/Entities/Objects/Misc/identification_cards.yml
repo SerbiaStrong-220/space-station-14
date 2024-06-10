@@ -60,7 +60,7 @@
     job: BlueShield
   - type: Sprite
     layers:
-    - state: default
+    - state: silver #SS220 Id Repsrite
     - state: idblueshield
 
 - type: entity
@@ -152,7 +152,7 @@
   - type: Sprite
     layers:
     - state: default
-    - state: idsecurityofficer
+    - state: idpilot
   - type: PresetIdCard
     job: SecurityPilot
 

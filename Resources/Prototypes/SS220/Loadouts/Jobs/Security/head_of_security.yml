@@ -1,0 +1,9 @@
+# Head
+- type: loadout
+  id: HeadofSecurityBigCap
+  equipment: HeadofSecurityBigCap
+
+- type: startingGear
+  id: HeadofSecurityBigCap
+  equipment:
+    head: ClothingHeadBigCapHoS

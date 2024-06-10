@@ -188,6 +188,7 @@
   - ChiefEngineerOuterClothing
   - ChiefEngineerShoes
   - Trinkets
+  - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
 
 - type: roleLoadout
   id: JobTechnicalAssistant

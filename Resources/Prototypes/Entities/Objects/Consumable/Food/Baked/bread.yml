@@ -810,8 +810,10 @@
     allowMovement: true
     description: ghost-role-information-BreadDog-description
     rules: ghost-role-information-BreadDog-rules
-    raffle:
-      settings: short
+# SS220-partial-revert-raffle-Begin
+#    raffle:
+#      settings: short
+# SS220=-partial-revert-reffle-End
   - type: GhostTakeoverAvailable
   - type: BarkAccent
   - type: Speech

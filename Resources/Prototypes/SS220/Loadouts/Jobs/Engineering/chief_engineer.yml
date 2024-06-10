@@ -82,6 +82,28 @@
   equipment:
     neck: ClothingNeckMantleCEDark
 
+# PDA
+- type: loadout
+  id: DarkChiefEngineerPDA
+  equipment: DarkChiefEngineerPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+
+- type: startingGear
+  id: DarkChiefEngineerPDA
+  equipment:
+    id: DarkCEPDA
+
+- type: loadout
+  id: ChiefEngineerPDA
+  equipment: ChiefEngineerPDA
+
+- type: startingGear
+  id: ChiefEngineerPDA
+  equipment:
+    id: CEPDA
+
 # Head
 - type: loadout
   id: BeretCE
@@ -91,3 +113,4 @@
   id: BeretCE
   equipment:
     head: ClothingHeadHatBeretCE
+
