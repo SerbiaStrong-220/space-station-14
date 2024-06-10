@@ -5,6 +5,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Muzzle;
 
 [RegisterComponent, NetworkedComponent()]
+/// <summary>
+/// Added to entities when if entity should have blocked vocal emotions
+/// </summary>
 public sealed partial class MuzzledComponent : Component
 {
 }
