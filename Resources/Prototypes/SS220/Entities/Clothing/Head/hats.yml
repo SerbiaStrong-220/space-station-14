@@ -17,6 +17,22 @@
     - HamsterWearable
     - WhitelistChameleon
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNanoTrasenDiplomat
+  name: beret diplomat NanoTrasen
+  description: A white beret with an engraved shield and sword, announcing to the world that its owner is the defender of NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_diplomat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
   # Фуражка
 - type: entity
   parent: ClothingHeadWhiteCaptainHat
