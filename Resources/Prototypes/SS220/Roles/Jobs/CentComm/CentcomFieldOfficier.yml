@@ -48,10 +48,11 @@
   equipment:
     jumpsuit: ClothingUniformCentCommOfficer
     shoes: ClothingShoesBootsLaceup
+    outerClothing: ClothingOuterCoatOfficerFieldUniform
     head: ClothingHeadHatNavyFieldOfficerCap
     neck: ClothingNeckCloakFieldOfficerCentComm
-    eyes: ClothingEyesGlassesBlueShield
-    gloves: ClothingHandsGlovesLatex
+    eyes: ClothingEyesGlassesCentcom
+    gloves: ClothingHandsGlovesCentcom
     id: CentcomFieldOfficerPDA
     ears: ClothingHeadsetAltCentComm
     belt: WeaponPulsePistol
