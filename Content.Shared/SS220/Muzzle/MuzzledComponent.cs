@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.Muzzle;
 
 [RegisterComponent, NetworkedComponent]
 /// <summary>
-/// Added to entities when if entity should have blocked vocal emotions
+/// Added to entity that must block the vocal emotions of other entity
 /// </summary>
 public sealed partial class MuzzledComponent : Component
 {
