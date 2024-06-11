@@ -396,3 +396,12 @@
   icon:
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Admin
+
+# SS220 Status icon for borgs begin
+- type: statusIcon
+  parent: JobIcon
+  id: JobIconBorg
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Borg
+# SS220 Status icon for borgs end

@@ -194,6 +194,9 @@
         },
         {
             "name": "Admin"
+        },
+        {
+            "name": "Borg"
         }
     ]
 }
