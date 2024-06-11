@@ -13,13 +13,12 @@ public abstract class SharedMuzzleSystem : EntitySystem
         SubscribeLocalEvent<MuzzleComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<MuzzleComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
     }
-
-    private void OnGotUnequipped(EntityUid uid, MuzzleComponent component, ref ClothingGotUnequippedEvent args)
+    private void OnGotUnequipped(Entity<MuzzleComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         _entityManager.RemoveComponent<MuzzledComponent>(args.Wearer);
     }
 
-    private void OnGotEquipped(EntityUid uid, MuzzleComponent component, ref ClothingGotEquippedEvent args)
+    private void OnGotEquipped(Entity<MuzzleComponent> ent, ref ClothingGotEquippedEvent args)
     {
         _entityManager.AddComponent<MuzzledComponent>(args.Wearer);
     }
