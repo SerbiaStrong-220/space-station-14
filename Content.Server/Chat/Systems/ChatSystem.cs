@@ -561,7 +561,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var ent = Identity.Entity(source, EntityManager);
         string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
 
-        CheckForEmoteAbility(source, ref action);//SS220 emote
+        CheckForEmoteAbility(source, ref action);//SS220 No_vocal_emotes_when_muzzle
 
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
@@ -591,7 +591,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         if (_entities.TryGetComponent<SleepingComponent>(uid, out var sleeping))
         {
-            action = PickEmote(sleeping.SleepingEmotes);
+            action = PickEmote(sleeping.SleepingEmotes);//if you sleep you are doing smth wierd
             return;
         }
     }
