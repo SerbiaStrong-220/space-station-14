@@ -16,9 +16,11 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
 
     [ValidatePrototypeId<StatusIconPrototype>]
     private const string JobIconForNoId = "JobIconNoId";
-    /// SS220 Add icon for borgs begin
-    private const string JobInconForBorg = "JobIconBorg";
-    /// SS220 Add icon for borgs end
+
+    /// SS220 Add borg icon for hud begin
+    [ValidatePrototypeId<StatusIconPrototype>]
+    private const string JobIconForBorg = "JobIconBorg";
+    /// SS220 Add borg icon for hud end
 
     public override void Initialize()
     {
@@ -33,13 +35,6 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
             return;
 
         var iconId = JobIconForNoId;
-
-        /// SS220 check if Entity is not borg begin
-        if (HasComp<BorgChassisComponent>(uid))
-        {
-            iconId = JobInconForBorg;
-        }
-        /// SS220 check if Entity is not borg end
 
         if (_accessReader.FindAccessItemsInventory(uid, out var items))
         {
@@ -63,6 +58,10 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
             }
         }
 
+        /// SS220 Add borg icon for hud begin
+        if (HasComp<BorgChassisComponent>(uid))
+            iconId = "JobIconBorg";
+        /// SS220 Add borg icon for hud end
         if (_prototype.TryIndex<StatusIconPrototype>(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else
