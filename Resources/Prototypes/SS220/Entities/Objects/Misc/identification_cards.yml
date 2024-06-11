@@ -89,3 +89,16 @@
     - type: PresetIdCard
       job: SecurityOfficer
       name: Рокси
+
+- type: entity
+  parent: CentcomIDCard
+  id: NanoTrasenAdmiralIDCard
+  name: ID карта Адмирала NanoTrasen
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Адмирал NanoTrasen
+    - type: Access
+      groups:
+      - AllAccess # SS220 Fast fix access
+      - CentralCommand
