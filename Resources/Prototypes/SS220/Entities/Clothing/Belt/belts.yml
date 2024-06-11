@@ -39,7 +39,7 @@
           - MinamotoNoYorimitsu
   - type: ItemMapper
     mapLayers:
-      sheath-jian:
+      sheath-katana:
         whitelist:
           tags:
           - MinamotoNoYorimitsu
