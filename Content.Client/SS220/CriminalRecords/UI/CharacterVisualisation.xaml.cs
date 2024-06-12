@@ -21,10 +21,10 @@ public sealed partial class CharacterVisualisation : BoxContainer
 {
     private readonly IEntityManager _entMan;
     private readonly IPrototypeManager _prototype;
+    private readonly ClientInventorySystem _inventorySystem;
     private EntityUid _previewDummy;
     private readonly SpriteView _face;
     private readonly SpriteView _side;
-    private readonly ClientInventorySystem _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
 
     public CharacterVisualisation()
     {
@@ -32,6 +32,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
         _entMan = IoCManager.Resolve<IEntityManager>();
         _prototype = IoCManager.Resolve<IPrototypeManager>();
+        _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
 
         _face = new SpriteView() { Scale = new Vector2(5, 5) };
         _side = new SpriteView() { Scale = new Vector2(5, 5), OverrideDirection = Direction.East };
