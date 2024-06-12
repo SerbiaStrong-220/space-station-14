@@ -623,11 +623,11 @@ namespace Content.Shared.Preferences
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
             hashCode.Add(Age);
-            hashCode.Add((int) Sex);
-            hashCode.Add((int) Gender);
+            hashCode.Add((int)Sex);
+            hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
-            hashCode.Add((int) SpawnPriority);
-            hashCode.Add((int) PreferenceUnavailable);
+            hashCode.Add((int)SpawnPriority);
+            hashCode.Add((int)PreferenceUnavailable);
             return hashCode.ToHashCode();
         }
 

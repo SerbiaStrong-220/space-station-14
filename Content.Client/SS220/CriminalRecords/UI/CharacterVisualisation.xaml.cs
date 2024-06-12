@@ -11,10 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Content.Shared.Preferences.Loadouts;
-using Content.Client.Lobby;
 using Content.Shared.Clothing;
-using Content.Client.Station;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
@@ -24,13 +21,8 @@ public sealed partial class CharacterVisualisation : BoxContainer
     private readonly IEntityManager _entMan;
     private readonly IPrototypeManager _prototype;
     private EntityUid _previewDummy;
-    private readonly LobbyUIController _controller = default!;
-
     private readonly SpriteView _face;
     private readonly SpriteView _side;
-
-    private readonly StationSpawningSystem _spawn = default!;
-
 
     public CharacterVisualisation()
     {
@@ -68,7 +60,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _side.SetEntity(_previewDummy);
     }
 
-    public void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
+    private void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
     {
         ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
         if (!inventorySystem.TryGetSlots(dummy, out var slots))
@@ -88,11 +80,6 @@ public sealed partial class CharacterVisualisation : BoxContainer
                     foreach (var slot in slots)
                     {
                         var itemType = loadoutGear.GetGear(slot.Name);
-
-                        // if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
-                        // {
-                        //     _entMan.DeleteEntity(unequippedItem.Value);
-                        // }
 
                         if (itemType != string.Empty)
                         {
@@ -120,5 +107,4 @@ public sealed partial class CharacterVisualisation : BoxContainer
             }
         }
     }
-
 }
