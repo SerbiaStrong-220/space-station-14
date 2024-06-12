@@ -199,15 +199,6 @@ namespace Content.Shared.Preferences
         {
         }
 
-        public RoleLoadout GetLoadouts(string id)
-        {
-            if (_loadouts.TryGetValue(id, out var loadout))
-            {
-                return loadout;
-            }
-            return new RoleLoadout(id);
-        }
-
         /// <summary>
         ///     Return a default character profile, based on species.
         /// </summary>
