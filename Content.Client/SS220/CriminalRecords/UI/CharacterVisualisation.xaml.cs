@@ -12,6 +12,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.Clothing;
+using Content.Shared.Preferences.Loadouts;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
@@ -68,27 +69,13 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
         if (profile.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out var jobLoadout))
         {
-            foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
-            {
-                foreach (var loadout in loadouts)
-                {
-                    if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
-                        continue;
-
-                    var loadoutGear = _prototype.Index(loadoutProto.Equipment);
-
-                    foreach (var slot in slots)
-                    {
-                        var itemType = loadoutGear.GetGear(slot.Name);
-
-                        if (itemType != string.Empty)
-                        {
-                            var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
-                            inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
-                        }
-                    }
-                }
-            }
+            GiveDummyLoadout(dummy, profile, jobLoadout);
+        }
+        else
+        {
+            jobLoadout = new RoleLoadout(LoadoutSystem.GetJobPrototype(job.ID));
+            jobLoadout.SetDefault(_prototype);
+            GiveDummyLoadout(dummy, profile, jobLoadout);
         }
 
         if (job.StartingGear == null)
@@ -104,6 +91,35 @@ public sealed partial class CharacterVisualisation : BoxContainer
             {
                 var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
                 inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
+            }
+        }
+    }
+
+    private void GiveDummyLoadout(EntityUid dummy, HumanoidCharacterProfile profile, RoleLoadout jobLoadout)
+    {
+        ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
+        if (!inventorySystem.TryGetSlots(dummy, out var slots))
+            return;
+
+        foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
+        {
+            foreach (var loadout in loadouts)
+            {
+                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
+                    continue;
+
+                var loadoutGear = _prototype.Index(loadoutProto.Equipment);
+
+                foreach (var slot in slots)
+                {
+                    var itemType = loadoutGear.GetGear(slot.Name);
+
+                    if (itemType != string.Empty)
+                    {
+                        var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                        inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
+                    }
+                }
             }
         }
     }
