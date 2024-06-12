@@ -694,6 +694,9 @@
     - JobIconSecurityCadet
     - JobIconZookeeper
     - JobIconVisitor
+    - JobIconSecurityPilot #SS220-Adding-Icons-Begin
+    - JobIconBlueShield
+    - JobIconBrigmedic #SS220-Adding-Icons-End
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
