@@ -24,7 +24,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
     private EntityUid _previewDummy;
     private readonly SpriteView _face;
     private readonly SpriteView _side;
-
+    private readonly ClientInventorySystem _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
     public CharacterVisualisation()
     {
         RobustXamlLoader.Load(this);
@@ -63,14 +63,11 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
     private void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
     {
-        ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
-        if (!inventorySystem.TryGetSlots(dummy, out var slots))
+        if (!_inventorySystem.TryGetSlots(dummy, out var slots))
             return;
 
         if (profile.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out var jobLoadout))
-        {
             GiveDummyLoadout(dummy, profile, jobLoadout);
-        }
         else
         {
             jobLoadout = new RoleLoadout(LoadoutSystem.GetJobPrototype(job.ID));
@@ -90,15 +87,14 @@ public sealed partial class CharacterVisualisation : BoxContainer
             if (itemType != string.Empty)
             {
                 var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
-                inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
+                _inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
             }
         }
     }
 
     private void GiveDummyLoadout(EntityUid dummy, HumanoidCharacterProfile profile, RoleLoadout jobLoadout)
     {
-        ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
-        if (!inventorySystem.TryGetSlots(dummy, out var slots))
+        if (!_inventorySystem.TryGetSlots(dummy, out var slots))
             return;
 
         foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
@@ -117,7 +113,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
                     if (itemType != string.Empty)
                     {
                         var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
-                        inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
+                        _inventorySystem.TryEquip(dummy, item, slot.Name, true, true);
                     }
                 }
             }
