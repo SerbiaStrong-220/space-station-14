@@ -62,51 +62,10 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _previewDummy = _entMan.SpawnEntity(_prototype.Index<SpeciesPrototype>(profile.Species).DollPrototype, MapCoordinates.Nullspace);
         appearanceSystem.LoadProfile(_previewDummy, profile);
         var realjobprototype = _prototype.Index<JobPrototype>(jobPrototype ?? SharedGameTicker.FallbackOverflowJob);
-        GiveDummyJobClothesLoadout(_previewDummy, profile, realjobprototype);
+        GiveDummyJobClothes(_previewDummy, profile, realjobprototype);
 
         _face.SetEntity(_previewDummy);
         _side.SetEntity(_previewDummy);
-    }
-
-    public void GiveDummyJobClothesLoadout(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
-    {
-        ClientInventorySystem inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
-        if (!inventorySystem.TryGetSlots(dummy, out var slots))
-            return;
-        GiveDummyJobClothes(dummy, profile, job);
-        _prototype.TryIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID), out var roleLoadoutProto);
-        // var jobLoadout = LoadoutSystem.GetJobPrototype(job?.ID);
-
-        RoleLoadout? loadout = null;
-
-        // Clone so we don't modify the underlying loadout.
-        profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
-        loadout = loadout?.Clone();
-
-        if (loadout == null && roleLoadoutProto != null)
-        {
-            loadout = new RoleLoadout(roleLoadoutProto.ID);
-            loadout.SetDefault(_prototype);
-            GiveDummyLoadout(dummy, loadout);
-        }
-
-    }
-
-
-    public void GiveDummyLoadout(EntityUid uid, RoleLoadout? roleLoadout)
-    {
-        if (roleLoadout == null)
-            return;
-        foreach (var group in roleLoadout.SelectedLoadouts.Values)
-        {
-            foreach (var loadout in group)
-            {
-                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
-                    continue;
-
-                _spawn.EquipStartingGear(uid, _prototype.Index(loadoutProto.Equipment));
-            }
-        }
     }
 
     public void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
@@ -115,8 +74,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
         if (!inventorySystem.TryGetSlots(dummy, out var slots))
             return;
 
-        // Apply loadout
-        if (profile.Loadouts.TryGetValue(job.ID, out var jobLoadout))
+        if (profile.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out var jobLoadout))
         {
             foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
             {
@@ -125,17 +83,16 @@ public sealed partial class CharacterVisualisation : BoxContainer
                     if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
                         continue;
 
-                    // TODO: Need some way to apply starting gear to an entity coz holy fucking shit dude.
                     var loadoutGear = _prototype.Index(loadoutProto.Equipment);
 
                     foreach (var slot in slots)
                     {
                         var itemType = loadoutGear.GetGear(slot.Name);
 
-                        if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
-                        {
-                            _entMan.DeleteEntity(unequippedItem.Value);
-                        }
+                        // if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                        // {
+                        //     _entMan.DeleteEntity(unequippedItem.Value);
+                        // }
 
                         if (itemType != string.Empty)
                         {
@@ -155,11 +112,6 @@ public sealed partial class CharacterVisualisation : BoxContainer
         foreach (var slot in slots)
         {
             var itemType = gear.GetGear(slot.Name);
-
-            if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
-            {
-                _entMan.DeleteEntity(unequippedItem.Value);
-            }
 
             if (itemType != string.Empty)
             {
