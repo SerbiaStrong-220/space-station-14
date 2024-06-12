@@ -6,3 +6,13 @@
     path: /Audio/SS220/Voice/Roxi/dog_bark3.ogg
   exclaimSound:
     path: /Audio/SS220/Voice/Roxi/dog_bark3.ogg
+
+#IPC
+- type: speechSounds
+  id: IPC
+  saySound:
+    path: /Audio/Voice/Talk/pai.ogg
+  askSound:
+    path: /Audio/Voice/Talk/pai_ask.ogg
+  exclaimSound:
+    path: /Audio/Voice/Talk/pai_exclaim.ogg
