@@ -80,5 +80,9 @@ public enum CollisionGroup
     // FlyingMob can go past
     FullTileLayer = Opaque | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
 
-    SubfloorMask = Impassable | LowImpassable
+    SubfloorMask = Impassable | LowImpassable,
+
+    // SS220 Structure collsion fix begin
+    StructureLayer = HighImpassable | Impassable | MidImpassable
+    // SS220 Structure collsion fix end
 }

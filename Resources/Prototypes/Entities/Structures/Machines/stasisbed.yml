@@ -56,6 +56,10 @@
         density: 190
         mask:
         - LowImpassable
+        # SS220 Structure colision fix begin
+        layer:
+        - StructureLayer
+        # SS220 Structure colision fix end
   - type: GuideHelp
     guides:
     - Medical Doctor

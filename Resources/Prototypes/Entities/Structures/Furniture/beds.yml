@@ -20,6 +20,10 @@
         density: 190
         mask:
         - TableMask
+        # SS220 Structure colision fix begin
+        layer:
+        - TableLayer
+        # SS220 Structure colision fix end
   - type: Sprite
     sprite: Structures/Furniture/furniture.rsi
     state: bed
