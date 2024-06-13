@@ -100,14 +100,9 @@ public abstract class ClothingSystem : EntitySystem
                     {
                         //ss220-ToggleVisualLayers-Fix begin
                         //FunTust:Check where the item is placed and if it is not one of the clothing slots then do not touch the visibility
-                        _invSystem.TryGetContainingSlot(item, out var currentItemSlot);
-                        if(currentItemSlot != null)
-                        {
-                            if (currentItemSlot.SlotGroup != "Default")
-                            {
+                        if (_invSystem.TryGetContainingSlot(item, out var currentItemSlot)
+                        && currentItemSlot.SlotGroup != "Default")
                                 break;
-                            }
-                        }
                         //ss220-ToggleVisualLayers-Fix end
 
                         //Checks for mask toggling. TODO: Make a generic system for this
