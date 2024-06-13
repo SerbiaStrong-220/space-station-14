@@ -78,7 +78,7 @@ public abstract partial class SharedGunSystem
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.FillDelay, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
         {
-            BreakOnMove = true, // 220 ammoFillFix
+            BreakOnMove = false, // 220 ammoFillFix
             BreakOnDamage = false,
             NeedHand = true
         });
