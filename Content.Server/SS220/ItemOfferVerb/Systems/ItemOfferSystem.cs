@@ -41,10 +41,14 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                     _alerts.ClearAlert(uid, AlertType.ItemOffer);
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
+                bool foundInHand = false;
                 foreach (var hand in giverHands.Hands)
                 {
                     if (hand.Value.Container!.Contains(comp.Item!.Value))
-                        break;
+                        foundInHand = true;
+                }
+                if(!foundInHand)
+                {
                     _alerts.ClearAlert(uid, AlertType.ItemOffer);
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
