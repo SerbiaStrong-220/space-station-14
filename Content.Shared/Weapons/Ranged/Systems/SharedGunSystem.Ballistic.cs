@@ -49,7 +49,7 @@ public abstract partial class SharedGunSystem
 
         component.Entities.Add(args.Used);
 
-        if (!component.IsReloading) // 220ammo FillFix
+        if (!component.IsReloading) // 220 ammoFillFix
         {
             Containers.Insert(args.Used, component.Container);
             // Not predicted so
@@ -73,7 +73,7 @@ public abstract partial class SharedGunSystem
         {
             return;
         }
-        component.IsReloading = true; // 220ammo FillFix
+        component.IsReloading = true; // 220 ammoFillFix
         args.Handled = true;
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.FillDelay, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
@@ -149,7 +149,7 @@ public abstract partial class SharedGunSystem
                 if (IsClientSide(ent.Value))
                     Del(ent.Value);
 
-                component.IsReloading = false; // 220ammoFillFix
+                component.IsReloading = false; // 220 ammoFillFix
             }
         }
 
