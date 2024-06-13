@@ -42,7 +42,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
                 //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
-                bool foundInHand = false;
+                var foundInHand = false;
                 foreach (var hand in giverHands.Hands)
                 {
                     if (hand.Value.Container!.Contains(comp.Item!.Value))
