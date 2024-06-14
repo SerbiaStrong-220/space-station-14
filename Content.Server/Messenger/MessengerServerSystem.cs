@@ -317,12 +317,11 @@ public sealed class MessengerServerSystem : EntitySystem
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? loader1))
             return GetIdCardComponent(GetEntity(loader1), out idCardUid, out idCardComponent);
 
-        if(payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
-        {
+        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
             return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
-        }
+
         return false;
-        // ss220 pocchitsu = edit //
+        //SS220-messenger-fix end
     }
 
     private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)
