@@ -49,7 +49,7 @@
     tags:
     - Spray
   - type: Spray
-    transferAmount: 1
+    transferAmount: 5
   - type: Item
     sprite: Objects/Tools/Hydroponics/sprays.rsi
 
