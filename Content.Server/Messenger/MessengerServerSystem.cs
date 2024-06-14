@@ -306,13 +306,13 @@ public sealed class MessengerServerSystem : EntitySystem
 
         return true;
     }
- // ss220 pocchitsu = edit
+
     private bool GetIdCardComponent(NetworkPayload payload, [NotNullWhen(true)] out EntityUid? idCardUid,
         [NotNullWhen(true)] out IdCardComponent? idCardComponent)
     {
         idCardUid = null;
         idCardComponent = null;
-
+        // ss220 pocchitsu = edit
         if(payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? loader1))
         {
             return GetIdCardComponent(GetEntity(loader1), out idCardUid, out idCardComponent);
@@ -323,8 +323,9 @@ public sealed class MessengerServerSystem : EntitySystem
             return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
         }
         return false;
+        // ss220 pocchitsu = edit //
     }
-// ss220 pocchitsu = edit //
+
     private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)
     {
         _deviceNetworkSystem?.QueuePacket(uid, args.SenderAddress, payload);
