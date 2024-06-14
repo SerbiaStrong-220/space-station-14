@@ -102,6 +102,7 @@
     - !type:PlantAdjustPests
       amount: -6
   metabolisms:
+  # SS220 Change place medicine and add toxin damage to humans. begin
     Poison:
       effects:
       - !type:HealthChange
@@ -116,6 +117,7 @@
           conditions:
           - !type:OrganType
             type: Plant
+  # SS220 Change place medicine and add toxin damage to humans. end
 
 
 
