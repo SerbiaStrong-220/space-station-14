@@ -18,9 +18,9 @@ public sealed class ToggleAppearanceOnUseSystem : EntitySystem
         SubscribeLocalEvent<ToggleAppearanceOnUseComponent, ActivateInWorldEvent>(OnActivate);
     }
 
-    private void OnActivate(EntityUid uid, ToggleAppearanceOnUseComponent toggleComponent, ActivateInWorldEvent args)
+    private void OnActivate(Entity<ToggleAppearanceOnUseComponent> entity, ref ActivateInWorldEvent args)
     {
-        SetAppearanceState((uid, toggleComponent), !toggleComponent.IsEnabled);
+        SetAppearanceState((entity, entity.Comp), !entity.Comp.IsEnabled);
     }
 
     private void SetAppearanceState(Entity<ToggleAppearanceOnUseComponent?, AppearanceComponent?> entity, bool isEnabled)
@@ -34,17 +34,17 @@ public sealed class ToggleAppearanceOnUseSystem : EntitySystem
         _appearance.SetData(entity, GenericOnOffVisual.Visual, entity.Comp1.IsEnabled ? GenericOnOffVisual.On : GenericOnOffVisual.Off, entity.Comp2);
     }
 
-    private void OnGetState(EntityUid uid, ToggleAppearanceOnUseComponent toggleComponent, ref ComponentGetState args)
+    private void OnGetState(Entity<ToggleAppearanceOnUseComponent> entity, ref ComponentGetState args)
     {
-        args.State = new ToggleAppearanceOnUseState(toggleComponent.IsEnabled);
+        args.State = new ToggleAppearanceOnUseState(entity.Comp.IsEnabled);
     }
 
-    private void OnHandleState(EntityUid uid, ToggleAppearanceOnUseComponent toggleComponent, ref ComponentHandleState args)
+    private void OnHandleState(Entity<ToggleAppearanceOnUseComponent> entity, ref ComponentHandleState args)
     {
         if (args.Current is not ToggleAppearanceOnUseState state)
             return;
 
-        SetAppearanceState((uid, toggleComponent), state.IsEnabled);
+        SetAppearanceState((entity, entity.Comp), state.IsEnabled);
     }
 }
 
