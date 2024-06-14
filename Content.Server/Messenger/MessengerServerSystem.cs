@@ -313,10 +313,16 @@ public sealed class MessengerServerSystem : EntitySystem
         idCardUid = null;
         idCardComponent = null;
 
-        if (!payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
-            return false;
+        if(payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? loader1))
+        {
+            return GetIdCardComponent(GetEntity(loader1), out idCardUid, out idCardComponent);
+        }
 
-        return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
+        if(payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
+        {
+            return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
+        }
+        return false;
     }
 
     private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)
