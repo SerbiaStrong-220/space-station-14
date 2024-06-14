@@ -47,3 +47,10 @@
       - Service
       - SyndicateAgent
       - Theatre
+      #New centcomm accesses begin
+      - CentralCommand
+      - CentralCommandCBURN
+      - CentralCommandERT
+      - CentralCommandGSN
+      - CentralCommandDeathSquad
+      #New centcomm accesses end
