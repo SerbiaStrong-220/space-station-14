@@ -94,7 +94,7 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 2
+            Poison: 1
   # SS220 That gives PestKiller to be killer of people and tomat-killer if they in spay area. end
   plantMetabolism:
     - !type:PlantAdjustToxins
@@ -102,23 +102,22 @@
     - !type:PlantAdjustPests
       amount: -6
   metabolisms:
-    Medicine:
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 3
-        conditions:
-        - !type:OrganType
-          type: Plant
-    # SS220 That gives PestKiller to be killer of people if they would like to drink it. begin
     Poison:
       effects:
       - !type:HealthChange
         damage:
           types:
-            Poison: 2
-    # SS220 That gives PestKiller to be killer of people if they would like to drink it. end
+            Poison: 0.5
+    Medicine:
+      effects:
+        - !type:HealthChange
+          damage:
+            Poison: 3
+          conditions:
+          - !type:OrganType
+            type: Plant
+
+
 
 - type: reagent
   id: PlantBGone
@@ -232,7 +231,8 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 4
+            Poison: 1 # SS220 It gaves the same damage to people and plants.
+
 
 
 - type: reagent
