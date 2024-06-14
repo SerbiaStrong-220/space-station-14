@@ -1,6 +1,7 @@
 - type: accessLevel
   id: ChiefEngineer
   name: id-card-access-level-chief-engineer
+  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Engineering
@@ -9,6 +10,7 @@
 - type: accessLevel
   id: Atmospherics
   name: id-card-access-level-atmospherics
+  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessGroup
   id: Engineering

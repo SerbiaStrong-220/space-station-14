@@ -18,6 +18,12 @@ namespace Content.Shared.Access
         [DataField("name")]
         public string? Name { get; set; }
 
+        /// <summary>
+        ///     The ability to change access using the network configurator or multitool.
+        /// </summary>
+        [DataField("canDoorElectronicsConfiguratorChange")]
+        public bool CanDoorElectronicsConfiguratorChange { get; set; } = true;
+
         public string GetAccessLevelName()
         {
             if (Name is { } name)

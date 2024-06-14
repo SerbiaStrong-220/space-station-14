@@ -1,18 +1,22 @@
 - type: accessLevel
   id: HeadOfSecurity
   name: id-card-access-level-head-of-security
+  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Security
   name: id-card-access-level-security
+  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Armory
   name: id-card-access-level-armory
+  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Brig
   name: id-card-access-level-brig
+  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Detective

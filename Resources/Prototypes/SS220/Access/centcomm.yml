@@ -1,18 +1,22 @@
 - type: accessLevel
   id: CentralCommandCBURN
   name: id-card-access-level-central-command
+  canDoorElectronicsConfiguratorChange: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: CentralCommandERT
   name: id-card-access-level-central-command
+  canDoorElectronicsConfiguratorChange: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: CentralCommandGSN
   name: id-card-access-level-central-command
+  canDoorElectronicsConfiguratorChange: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: CentralCommandDeathSquad
   name: id-card-access-level-central-command
+  canDoorElectronicsConfiguratorChange: false #DoorElectronicsConfiguratorFix
 
 # Группа полного доступа
 - type: accessGroup
