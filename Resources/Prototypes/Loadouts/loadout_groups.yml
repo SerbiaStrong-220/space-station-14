@@ -417,6 +417,8 @@
   loadouts:
   - ClownSuit
   - JesterSuit
+  - ClownJumpsuit #SS220-Clown-reSprite-Begin
+  - ClownJumpskirt #SS220-Clown-reSprite-End
 
 - type: loadoutGroup
   id: ClownBackpack

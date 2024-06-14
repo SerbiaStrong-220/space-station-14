@@ -1,0 +1,18 @@
+# Jumpsuit
+- type: loadout
+  id: ClownJumpsuit
+  equipment: ClownJumpsuit
+
+- type: startingGear
+  id: ClownJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClowns
+
+- type: loadout
+  id: ClownJumpskirt
+  equipment: ClownJumpskirt
+
+- type: startingGear
+  id: ClownJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtClowns

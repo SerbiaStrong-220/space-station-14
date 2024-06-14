@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtClowns
+  name: юбка-комбинезон клоуна
+  description: ХОНК!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
