@@ -41,23 +41,21 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticInteractUsing(EntityUid uid, BallisticAmmoProviderComponent component, InteractUsingEvent args)
     {
-        if (args.Handled || component.Whitelist?.IsValid(args.Used, EntityManager) != true)
+        if (args.Handled ||
+        component.Whitelist?.IsValid(args.Used, EntityManager) != true ||
+        component.IsReloading) // 220 ammoFillFix
             return;
 
         if (GetBallisticShots(component) >= component.Capacity)
             return;
 
         component.Entities.Add(args.Used);
-
-        if (!component.IsReloading) // 220 ammoFillFix
-        {
-            Containers.Insert(args.Used, component.Container);
-            // Not predicted so
-            Audio.PlayPredicted(component.SoundInsert, uid, args.User);
-            args.Handled = true;
-            UpdateBallisticAppearance(uid, component);
-            Dirty(uid, component);
-        }
+        Containers.Insert(args.Used, component.Container);
+        // Not predicted so
+        Audio.PlayPredicted(component.SoundInsert, uid, args.User);
+        args.Handled = true;
+        UpdateBallisticAppearance(uid, component);
+        Dirty(uid, component);
     }
 
     private void OnBallisticAfterInteract(EntityUid uid, BallisticAmmoProviderComponent component, AfterInteractEvent args)
