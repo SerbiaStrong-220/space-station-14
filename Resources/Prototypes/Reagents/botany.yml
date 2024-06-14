@@ -86,6 +86,16 @@
   flavor: bitter
   color: "#9e9886"
   physicalDesc: reagent-physical-desc-bubbling
+  # SS220 That gives PestKiller to be killer of people and tomat-killer if they in spay area. begin
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 2
+  # SS220 That gives PestKiller to be killer of people and tomat-killer if they in spay area. end
   plantMetabolism:
     - !type:PlantAdjustToxins
       amount: 4
