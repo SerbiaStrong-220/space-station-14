@@ -314,8 +314,8 @@ public sealed class MessengerServerSystem : EntitySystem
         idCardComponent = null;
         
         //SS220-messenger-fix begin
-        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? loader1))
-            return GetIdCardComponent(GetEntity(loader1), out idCardUid, out idCardComponent);
+        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
+            return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);
 
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
             return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
