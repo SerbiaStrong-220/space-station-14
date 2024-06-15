@@ -33,10 +33,12 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
       offset: "0.0,0.375"
+#SS220 crates-labels-fix end
   - type: Construction
     graph: CratePlastic
     node: crateplastic
@@ -63,9 +65,11 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
+#SS220 crates-labels-fix end
   - type: AntiRottingContainer
   - type: ExplosionResistance
     damageCoefficient: 0.50
@@ -88,9 +92,11 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
+#SS220 crates-labels-fix end
 
 - type: entity
   parent: CratePlastic
@@ -110,9 +116,11 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
+#SS220 crates-labels-fix end
 
 - type: entity
   parent: CrateGenericSteel
@@ -143,9 +151,11 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
+#SS220 crates-labels-fix end
 
 - type: entity
   parent: CrateGenericSteel
@@ -165,9 +175,11 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
 #SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
+#SS220 crates-labels-fix end
 
 - type: entity
   parent: CrateGenericSteel
