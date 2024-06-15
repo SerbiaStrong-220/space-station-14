@@ -7,7 +7,7 @@
   - SecurityPilotSatchel
   - SecurityPilotDuffel
 
-# IAA
+# InternalAffairs
 - type: loadoutGroup
   id: IAABackpack
   name: loadout-group-iaa-backpack
@@ -15,6 +15,21 @@
   - IAABackpack
   - IAASatchel
   - IAADuffel
+
+- type: loadoutGroup
+  id: BlueShieldJumpsuit
+  name: loadout-group-blueshield-jumpsuit
+  loadouts:
+  - BlueShieldJumpsuit
+  - BlueShieldJumpsuit2
+  - BlueShieldJumpsuitTurtle
+
+- type: loadoutGroup
+  id: BlueShieldOuterclothing
+  name: loadout-group-blueshield-outerclothing
+  loadouts:
+  - BlueShieldArmorBulletproof
+  - BlueShieldSRTCoat
 
 # Chef
 - type: loadoutGroup
