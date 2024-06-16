@@ -1,9 +1,9 @@
 - type: accessLevel
   id: NuclearOperative
   name: id-card-access-level-nuclear-operative
-  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: SyndicateAgent
   name: id-card-access-level-syndicate-agent
-  canDoorElectronicsConfiguratorChange: false #SS220 DoorElectronicsConfiguratorFix
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix

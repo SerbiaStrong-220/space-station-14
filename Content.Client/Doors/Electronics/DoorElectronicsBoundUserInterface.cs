@@ -22,7 +22,7 @@ public sealed class DoorElectronicsBoundUserInterface : BoundUserInterface
 
         foreach (var accessLevel in _prototypeManager.EnumeratePrototypes<AccessLevelPrototype>())
         {
-            if (accessLevel.Name != null && accessLevel.CanDoorElectronicsConfiguratorChange)  //SS220 DoorElectronicsConfiguratorFix
+            if (accessLevel.Name != null && accessLevel.CanBeSwitchableInReader)  //SS220 DoorElectronicsConfiguratorFix
             {
                 accessLevels.Add(accessLevel.ID);
             }

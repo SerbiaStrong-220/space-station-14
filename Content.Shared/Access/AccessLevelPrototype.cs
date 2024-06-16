@@ -21,8 +21,8 @@ namespace Content.Shared.Access
         /// <summary>
         ///     The ability to change access using the network configurator or multitool.
         /// </summary>
-        [DataField("canDoorElectronicsConfiguratorChange")]
-        public bool CanDoorElectronicsConfiguratorChange { get; set; } = true;
+        [DataField("canBeSwitchableInReader")]
+        public bool CanBeSwitchableInReader { get; set; } = true;
 
         public string GetAccessLevelName()
         {
