@@ -10,6 +10,14 @@ public sealed partial class MimeRelicComponent : Component
     [DataField("wallPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string WallPrototype = "WallInvisible";
 
-    [DataField("invisibleWallActionEntity")] 
-    public EntityUid? InvisibleWallActionEntity;        
+    [DataField("cooldownTime")] 
+    public TimeSpan CooldownTime = TimeSpan.FromMinutes(2); // still need to think of dynamic of gameplay, base mime have like 2 times more cooldown, than lifetime         
+
+    [DataField("wallLifetime")] 
+    public TimeSpan WallLifetime = TimeSpan.FromSeconds(30); // still need to think of dynamic of gameplay     
+
+    // do i need to have here smthg like "lastUsedTime" or for fckng what it needed in component?
+
+    [DataField("spawnedWallEntity")] 
+    public EntityUid? SpawnedWallEntity;        
 }
