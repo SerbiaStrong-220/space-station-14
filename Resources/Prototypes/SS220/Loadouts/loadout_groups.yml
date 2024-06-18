@@ -42,7 +42,6 @@
 - type: loadoutGroup
   id: CaptainGloves
   name: loadout-group-captain-gloves
-  minLimit: 1
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
@@ -52,7 +51,6 @@
 - type: loadoutGroup
   id: ChiefEngineerPDA
   name: loadout-group-chief-engineer-PDA
-  minLimit: 1
   loadouts:
   - ChiefEngineerPDA
   - DarkChiefEngineerPDA
