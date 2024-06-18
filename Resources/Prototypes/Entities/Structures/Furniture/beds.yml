@@ -58,7 +58,7 @@
   - type: Transform
     anchored: true
     noRot: true
-  - type: Anchorable
+  # - type: Anchorable SS220 NewPhysicsFix
   - type: Pullable
 
 
