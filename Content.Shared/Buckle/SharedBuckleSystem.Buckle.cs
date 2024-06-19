@@ -490,7 +490,7 @@ public abstract partial class SharedBuckleSystem
 
             // SS220 BedCollision Fix begin
             if (HasComp<ClimbableComponent>(strapUid))
-                _climbSystem.ForciblySetClimbing(strapUid, userUid);
+                _climbSystem.ForciblySetClimbing(userUid, strapUid);
             // SS220 BedCollision Fix begin
         }
 

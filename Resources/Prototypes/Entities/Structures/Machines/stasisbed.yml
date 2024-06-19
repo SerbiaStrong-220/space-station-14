@@ -47,20 +47,8 @@
     board: StasisBedMachineCircuitboard
   - type: Physics
     bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.05"
-        density: 190
-        mask:
-        - LowImpassable
-        # SS220 Structure colision fix begin
-        layer:
-        - StructureLayer
-        # SS220 Structure colision fix end
   - type: GuideHelp
     guides:
     - Medical Doctor
   - type: Climbable
+  - type: Appearance
