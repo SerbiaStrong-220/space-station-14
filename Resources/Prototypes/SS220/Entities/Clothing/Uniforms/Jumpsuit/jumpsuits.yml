@@ -39,9 +39,9 @@
   description: Great for working outdoors.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -50,9 +50,9 @@
   description: Great for working outdoors.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -61,6 +61,6 @@
   description: Great for working outdoors.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi

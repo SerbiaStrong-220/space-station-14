@@ -2,23 +2,23 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterApronBotanistGreen
-  name: apron
-  suffix: Botanical, Green
+  name: green apron
+  suffix: Botanical
   description: A thick green-apron, perfect for insulating your soft flesh from spills, soil and thorns.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/apron-botanist-green.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-green.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/apron-botanist-green.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-green.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterApronBotanistBrown
-  name: apron
-  suffix: Botanical, Brown
+  name: brown apron
+  suffix: Botanical
   description: A thick brown-apron, perfect for insulating your soft flesh from spills, soil and thorns.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/apron-botanist-brown.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-brown.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/apron-botanist-brown.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-brown.rsi

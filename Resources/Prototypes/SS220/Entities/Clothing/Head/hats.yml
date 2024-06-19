@@ -6,9 +6,9 @@
   description: Formerly Chucks, this hat is yours now.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/truckershat-blue.rsi
+    sprite: SS220/Clothing/Head/Hats/truckershat-blue.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/truckershat-blue.rsi
+    sprite: SS220/Clothing/Head/Hats/truckershat-blue.rsi
 
 - type: entity
   parent: ClothingHeadHeadHatBaseFlippable
@@ -17,9 +17,9 @@
   description: Formerly Chucks, this hat is yours now.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/truckershat-brown.rsi
+    sprite: SS220/Clothing/Head/Hats/truckershat-brown.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/truckershat-brown.rsi
+    sprite: SS220/Clothing/Head/Hats/truckershat-brown.rsi
 
 - type: entity
   parent: ClothingHeadHeadHatBaseFlippable
@@ -28,6 +28,6 @@
   description: Formerly Chucks, this hat is yours now.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/truckershat-white.rsi
+    sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/truckershat-white.rsi
+    sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
