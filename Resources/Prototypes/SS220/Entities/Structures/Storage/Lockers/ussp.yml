@@ -5,6 +5,9 @@
   noSpawn: true
   description: Стандартное хранилище СССП для различных вещей.
   components:
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Storage/closet.rsi
   - type: EntityStorageVisuals
     stateBaseClosed: ussp
     stateDoorOpen: ussp_open
