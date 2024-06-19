@@ -1,0 +1,9 @@
+﻿- type: entity
+  id: TelepathyAction
+  name: Тестовое название для телепатии
+  description: Тестовое описание для телепатии
+  noSpawn: true
+  components:
+  - type: InstantAction
+    icon: Interface/Actions/eyeopen.png
+    itemIconStyle: NoItem
