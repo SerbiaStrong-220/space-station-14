@@ -7,8 +7,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: eng
-    stateDoorOpen: eng_open
+    stateBaseClosed: storage_eng #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite-end
     stateDoorClosed: eng_tool_door
 
 # Radiation suit closet
@@ -20,8 +20,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: eng
-    stateDoorOpen: eng_open
+    stateBaseClosed: yellow_steel_locker #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open #SS220-Closet-Resprite-end
     stateDoorClosed: eng_rad_door
 
 # Emergency closet
@@ -34,7 +34,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: emergency
-    stateDoorOpen: emergency_open
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite
     stateDoorClosed: emergency_door
 
 # Emergency N2 closet
@@ -47,7 +47,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: fire
-    stateDoorOpen: fire_open
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite
     stateDoorClosed: n2_door
 
 # Fire safety closet
@@ -60,7 +60,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: fire
-    stateDoorOpen: fire_open
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite
     stateDoorClosed: fire_door
 
 # EOD closet
@@ -72,8 +72,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: bomb
-    stateDoorOpen: bomb_open
+    stateBaseClosed: armory_steel_locker #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open #SS220-Closet-Resprite-end
     stateDoorClosed: bomb_door
 
 # Janitorial bomb suit closet
@@ -86,9 +86,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: janitor_bomb
-    stateDoorOpen: janitor_bomb_open
-    stateDoorClosed: janitor_bomb_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: bomb_janitor_door #SS220-Closet-Resprite-end
 
 # Biohazard
 
@@ -101,8 +101,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: bio
-    stateDoorOpen: bio_open
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open #SS220-Closet-Resprite-end
     stateDoorClosed: bio_door
 
 # Virology variant
@@ -112,9 +112,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: bio_viro
-    stateDoorOpen: bio_viro_open
-    stateDoorClosed: bio_viro_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: bio_virologist_door #SS220-Closet-Resprite-end
 
 # Security variant
 - type: entity
@@ -123,9 +123,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: bio_sec
-    stateDoorOpen: bio_sec_open
-    stateDoorClosed: bio_sec_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: bio_security_door #SS220-Closet-Resprite-end
 
 # Janitor variant
 - type: entity
@@ -134,9 +134,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: bio_jan
-    stateDoorOpen: bio_jan_open
-    stateDoorClosed: bio_jan_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: bio_janitor_door #SS220-Closet-Resprite-end
 
 # Maintenance closet
 - type: entity
@@ -160,7 +160,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: syndicate
-    stateDoorOpen: syndicate_open
+    stateDoorOpen: secdarksteel_open #SS220-Closet-Resprite
     stateDoorClosed: syndicate_door
 
 # Bluespace closet
