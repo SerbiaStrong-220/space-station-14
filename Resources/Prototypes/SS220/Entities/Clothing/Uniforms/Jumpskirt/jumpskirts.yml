@@ -1,3 +1,4 @@
+#Сервис
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtClowns
@@ -8,3 +9,25 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtHydroponicsBlue
+  name: blue hydroponics jumpskirt
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtHydroponicsWhite
+  name: white hydroponics jumpskirt
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
