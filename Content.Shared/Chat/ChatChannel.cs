@@ -85,6 +85,8 @@ namespace Content.Shared.Chat
         /// </summary>
         Unspecified = 1 << 14,
 
+        Telepathy = 1 << 15,
+
         /// <summary>
         ///     Channels considered to be IC.
         /// </summary>

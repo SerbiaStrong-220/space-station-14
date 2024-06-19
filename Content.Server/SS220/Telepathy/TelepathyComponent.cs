@@ -9,8 +9,8 @@ namespace Content.Server.SS220.Telepathy;
 public sealed partial class TelepathyComponent : Component
 {
     [DataField]
-    public EntProtoId Action = "TelepathyAction";
+    public EntProtoId TelepathyAction = "ActionTelepathy";
 
-    [DataField]
-    public EntityUid? ActionEntity;
+    [DataField, AutoNetworkedField]
+    public EntityUid? TelepathyActionEntity;
 }

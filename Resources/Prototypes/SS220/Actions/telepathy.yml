@@ -1,5 +1,6 @@
-﻿- type: entity
-  id: TelepathyAction
+﻿# TODO: Replace name, description, icon with actual data
+- type: entity
+  id: ActionTelepathy
   name: Тестовое название для телепатии
   description: Тестовое описание для телепатии
   noSpawn: true
@@ -7,3 +8,4 @@
   - type: InstantAction
     icon: Interface/Actions/eyeopen.png
     itemIconStyle: NoItem
+    event: !type:TelepathyActionEvent
