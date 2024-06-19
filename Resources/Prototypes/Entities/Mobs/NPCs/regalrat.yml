@@ -334,10 +334,10 @@
   - type: InstantAction
     useDelay: 1
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: stayOff
     iconOn:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: stay
     event:
       !type:RatKingOrderActionEvent
@@ -353,10 +353,10 @@
   - type: InstantAction
     useDelay: 1
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: followOff
     iconOn:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: follow
     event:
       !type:RatKingOrderActionEvent
@@ -372,10 +372,10 @@
   - type: InstantAction
     useDelay: 1
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: attackOff
     iconOn:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: attack
     event:
       !type:RatKingOrderActionEvent
@@ -391,10 +391,10 @@
   - type: InstantAction
     useDelay: 1
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: looseOff
     iconOn:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
       state: loose
     event:
       !type:RatKingOrderActionEvent
