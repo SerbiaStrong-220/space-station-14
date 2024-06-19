@@ -501,7 +501,16 @@
     },
     {
       "name": "cardboard_open"
-    }
+    },
+    {
+      "name": "cabinet"
+    },
+    {
+      "name": "cabinet_door"
+    },
+    {
+      "name": "cabinet_open"
+    },
     {
       "name": "locked"
     },
