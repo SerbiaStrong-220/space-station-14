@@ -487,11 +487,6 @@ public abstract partial class SharedBuckleSystem
             // If the person is crit or dead in any kind of strap, return. This prevents people from unbuckling themselves while incapacitated.
             if (_mobState.IsIncapacitated(buckleUid) && userUid == buckleUid)
                 return false;
-
-            // SS220 BedCollision Fix begin
-            if (HasComp<ClimbableComponent>(strapUid))
-                _climbSystem.ForciblySetClimbing(userUid, strapUid);
-            // SS220 BedCollision Fix begin
         }
 
         // Logging
@@ -554,6 +549,11 @@ public abstract partial class SharedBuckleSystem
         var ev = new BuckleChangeEvent(strapUid, buckleUid, false);
         RaiseLocalEvent(buckleUid, ref ev);
         RaiseLocalEvent(strapUid, ref ev);
+
+        // SS220 BedCollision Fix begin
+        if (HasComp<ClimbableComponent>(strapUid))
+            _climbSystem.ForciblySetClimbing(userUid, strapUid);
+        // SS220 BedCollision Fix begin
 
         return true;
     }
