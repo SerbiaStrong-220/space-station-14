@@ -1,5 +1,6 @@
 ﻿using Content.Server.Actions;
 using Content.Shared.Chat;
+using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -17,14 +18,14 @@ public sealed class TelepathySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TelepathyComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<TelepathyComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<TelepathyComponent, TelepathyActionEvent>(OnTelepathyActionPressed);
     }
 
     private void OnTelepathyActionPressed(EntityUid uid, TelepathyComponent component, TelepathyActionEvent args)
     {
         var chat = new ChatMessage(
-            ChatChannel.Telepathy,
+            ChatChannel.Radio,
             "Test Message",
             "",
             NetEntity.Invalid,
@@ -34,8 +35,7 @@ public sealed class TelepathySystem : EntitySystem
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(chatMsg, actor.PlayerSession.Channel);
     }
-
-    private void OnMapInit(EntityUid uid, TelepathyComponent component, MapInitEvent args)
+    private void OnComponentInit(EntityUid uid, TelepathyComponent component, ComponentInit args)
     {
         _actions.AddAction(uid, ref component.TelepathyActionEntity, component.TelepathyAction, uid);
     }

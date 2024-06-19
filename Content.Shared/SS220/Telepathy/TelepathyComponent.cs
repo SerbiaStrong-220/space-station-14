@@ -1,6 +1,7 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.Actions;
+using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Telepathy;
+namespace Content.Shared.SS220.Telepathy;
 
 /// <summary>
 /// This is used for giving telepathy ability
@@ -11,6 +12,11 @@ public sealed partial class TelepathyComponent : Component
     [DataField]
     public EntProtoId TelepathyAction = "ActionTelepathy";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? TelepathyActionEntity;
+}
+
+public sealed partial class TelepathyActionEvent : InstantActionEvent
+{
+
 }
