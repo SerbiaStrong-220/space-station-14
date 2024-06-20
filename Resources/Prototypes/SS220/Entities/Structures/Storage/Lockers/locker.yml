@@ -266,3 +266,72 @@
     stateDoorClosed: syndicate_medic_door
   - type: AccessReader
     access: [["SyndicateAgent"]]
+
+#Разное
+- type: entity
+  id: LockerSleepingGasSecurity
+  parent: LockerBase
+  name: шкаф с усыпляющим газом
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_red
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: n2o_door
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: LockerArmory
+  parent: LockerBase
+  name: армейский шкаф
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryArmor
+  parent: LockerBase
+  name: армейский шкаф
+  suffix: Броня
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_armor_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryEnergyGun
+  parent: LockerBase
+  name: армейский шкаф
+  suffix: Энергооружие
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_energy_gun_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryGun
+  parent: LockerBase
+  name: армейский шкаф
+  suffix: Оружие
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_gun_door
+  - type: AccessReader
+    access: [["Armory"]]

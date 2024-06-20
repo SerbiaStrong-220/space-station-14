@@ -1,6 +1,6 @@
 - type: entity
   id: WardenGasLocker
-  parent: LockerWarden
+  parent: LockerSleepingGasSecurity
   suffix: Filled
   name: шкаф с усыпляющим газом
   description: Стандартное хранилище Nanotrasen.
