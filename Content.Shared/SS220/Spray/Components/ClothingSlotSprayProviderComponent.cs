@@ -17,11 +17,11 @@ public sealed partial class ClothingSlotSprayProviderComponent : SprayProviderCo
     /// The slot that the ammo provider should be located in.
     /// </summary>
     [DataField("requiredSlot", required: true)]
-    public SlotFlags RequiredSlot;
+    public SlotFlags SolutionRequiredSlot;
 
     /// <summary>
     /// A whitelist for determining whether or not an solution provider is valid.
     /// </summary>
-    [DataField("providerWhitelist")]
-    public EntityWhitelist? ProviderWhitelist;
+    [DataField("solutionProviderWhitelist")]
+    public EntityWhitelist? solutionProviderWhitelist;
 }

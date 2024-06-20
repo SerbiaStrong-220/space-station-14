@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.Spray.Components;
 using Content.Shared.SS220.Spray.Events;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Spray.System;
@@ -10,6 +11,7 @@ public partial class SharedSpraySystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     private void InitializeClothing()
     {
@@ -39,12 +41,12 @@ public partial class SharedSpraySystem : EntitySystem
             return false;
         var user = container.Owner;
 
-        if (!_inventory.TryGetContainerSlotEnumerator(user, out var enumerator, component.RequiredSlot))
+        if (!_inventory.TryGetContainerSlotEnumerator(user, out var enumerator, component.SolutionRequiredSlot))
             return false;
 
         while (enumerator.NextItem(out var item))
         {
-            if (component.ProviderWhitelist == null || !component.ProviderWhitelist.IsValid(item, EntityManager))
+            if (component.solutionProviderWhitelist == null || !_whitelistSystem.IsValid(component.solutionProviderWhitelist, uid))
                 continue;
 
             slotEntity = item;

@@ -21,7 +21,7 @@ public sealed class TakeSolutionEvent : EntityEventArgs
     /// </summary>
     public EntityCoordinates Coordinates;
 
-    public TakeAmmoEvent(int shots, List<(EntityUid? Entity, IShootable Shootable)> ammo, EntityCoordinates coordinates, EntityUid? user)
+    public TakeSolutionEvent(int shots, List<(EntityUid? Entity, IShootable Shootable)> ammo, EntityCoordinates coordinates, EntityUid? user)
     {
         Shots = shots;
         Ammo = ammo;
