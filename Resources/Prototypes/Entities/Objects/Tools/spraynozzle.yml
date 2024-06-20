@@ -36,8 +36,6 @@
   - type: SolutionItemStatus
     solution: spray
   - type: Appearance
-  - type: SolutionAmmoProvider
-    solutionId: SpaceCleaner
   - type: ClothingSlotSolutionProvider
     solutionRequiredSlot: BACK
     solutionProviderWhitelist:

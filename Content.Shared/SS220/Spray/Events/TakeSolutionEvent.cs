@@ -9,24 +9,15 @@ namespace Content.Shared.SS220.Spray.Events;
 public sealed class TakeSolutionEvent : EntityEventArgs
 {
     public readonly EntityUid? User;
-    public readonly int Shots;
-    public List<(EntityUid? Entity, IShootable Shootable)> Ammo;
+    public byte SolutionAmount { get; }
 
     /// <summary>
     /// If no ammo returned what is the reason for it?
     /// </summary>
     public string? Reason;
 
-    /// <summary>
-    /// Coordinates to spawn the ammo at.
-    /// </summary>
-    public EntityCoordinates Coordinates;
-
-    public TakeSolutionEvent(int shots, List<(EntityUid? Entity, IShootable Shootable)> ammo, EntityCoordinates coordinates, EntityUid? user)
+    public TakeSolutionEvent(EntityUid? user, byte solutionAmount)
     {
-        Shots = shots;
-        Ammo = ammo;
-        Coordinates = coordinates;
-        User = user;
     }
+
 }

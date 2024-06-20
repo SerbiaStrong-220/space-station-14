@@ -12,10 +12,11 @@ namespace Content.Shared.SS220.Spray.Components;
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSpraySystem))]
 public sealed partial class ClothingSlotSolutionProviderComponent : SolutionProviderComponent
 {
+    public const string ContainmentSolutionName = "containmentsolution";
     /// <summary>
     /// The slot that the ammo provider should be located in.
     /// </summary>
-    [DataField("requiredSlot", required: true)]
+    [DataField("solutionRequiredSlot", required: true)]
     public SlotFlags SolutionRequiredSlot;
 
     /// <summary>
