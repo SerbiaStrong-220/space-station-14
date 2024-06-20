@@ -101546,7 +101546,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#006600FF'
+      - stampedColor: '#dca019FF'
         stampedName: stamp-component-stamped-name-centcom
       - stampedColor: '#00BE00FF'
         stampedName: stamp-component-stamped-name-approved

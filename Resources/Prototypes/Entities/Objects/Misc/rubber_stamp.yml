@@ -55,6 +55,7 @@
   parent: RubberStampBase
   id: RubberStampCentcom
   suffix: DO NOT MAP
+  noSpawn: true #SS220-CentcomFashion
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-centcom

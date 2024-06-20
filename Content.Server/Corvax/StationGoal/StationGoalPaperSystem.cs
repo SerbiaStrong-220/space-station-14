@@ -67,7 +67,7 @@ namespace Content.Server.Corvax.StationGoal
                     StampedBy = new List<StampDisplayInfo>{
                         new(){
                             StampedName = Loc.GetString("stamp-component-stamped-name-centcom"),
-                            StampedColor = Color.FromHex("#006600")
+                            StampedColor = Color.FromHex("#dca019") //SS220-CentcomFashion-Changed the stamp color
                         }
                     }
                 };
