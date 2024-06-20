@@ -51,3 +51,13 @@
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadCentcomCapNaval
+  name: naval cap
+  description: A cap worn by those in the Nanotrasen Navy.
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
