@@ -189,7 +189,7 @@
   tier: 2
   cost: 10000
   recipeUnlocks:
-  - WeaponSprayNozzle
+  - SprayNozzle
   - ClothingBackpackWaterTank
 
 - type: technology
