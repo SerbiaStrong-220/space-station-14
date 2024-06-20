@@ -1,43 +1,45 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Inventory;
-using Content.Shared.SS220.Spray;
-using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.SS220.Spray.Components;
+using Content.Shared.SS220.Spray.Events;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Spray.System;
 
-public partial class SharedSpraySystem
+public partial class SharedSpraySystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private void InitializeClothing()
     {
-        SubscribeLocalEvent<ClothingSlotAmmoProviderComponent, TakeAmmoEvent>(OnClothingTakeAmmo);
-        SubscribeLocalEvent<ClothingSlotAmmoProviderComponent, GetAmmoCountEvent>(OnClothingAmmoCount);
+        SubscribeLocalEvent<ClothingSlotSprayProviderComponent, TakeSolutionEvent>(OnClothingTakeSolution);
+        SubscribeLocalEvent<ClothingSlotSprayProviderComponent, GetSolutionCountEvent>(OnClothingSolutionCount);
     }
 
-    private void OnClothingTakeAmmo(EntityUid uid, ClothingSlotAmmoProviderComponent component, TakeAmmoEvent args)
+    private void OnClothingTakeSolution(EntityUid uid, ClothingSlotSprayProviderComponent component, TakeSolutionEvent args)
     {
         if (!TryGetClothingSlotEntity(uid, component, out var entity))
             return;
         RaiseLocalEvent(entity.Value, args);
     }
 
-    private void OnClothingAmmoCount(EntityUid uid, ClothingSlotAmmoProviderComponent component, ref GetAmmoCountEvent args)
+    private void OnClothingSolutionCount(EntityUid uid, ClothingSlotSprayProviderComponent component, ref GetSolutionCountEvent args)
     {
         if (!TryGetClothingSlotEntity(uid, component, out var entity))
             return;
         RaiseLocalEvent(entity.Value, ref args);
     }
 
-    private bool TryGetClothingSlotEntity(EntityUid uid, ClothingSlotAmmoProviderComponent component, [NotNullWhen(true)] out EntityUid? slotEntity)
+    private bool TryGetClothingSlotEntity(EntityUid uid, ClothingSlotSprayProviderComponent component, [NotNullWhen(true)] out EntityUid? slotEntity)
     {
         slotEntity = null;
 
-        if (!Containers.TryGetContainingContainer(uid, out var container))
+        if (!_container.TryGetContainingContainer(uid, out var container))
             return false;
         var user = container.Owner;
 
-        if (!_inventory.TryGetContainerSlotEnumerator(user, out var enumerator, component.TargetSlot))
+        if (!_inventory.TryGetContainerSlotEnumerator(user, out var enumerator, component.RequiredSlot))
             return false;
 
         while (enumerator.NextItem(out var item))

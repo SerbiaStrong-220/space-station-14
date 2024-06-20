@@ -1,9 +1,10 @@
 using Content.Shared.Inventory;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
-using Content.Shared.SS220.SpraySystem;
+using Content.Shared.SS220.Spray.System;
+using Content.Shared.SS220.Spray.Components;
 
-namespace Content.Shared.SS220.SpraySystem.Components;
+namespace Content.Shared.SS220.Spray.Components;
 
 /// <summary>
 /// This is used for relaying solition events
