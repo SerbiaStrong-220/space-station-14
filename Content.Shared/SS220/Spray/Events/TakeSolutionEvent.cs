@@ -1,4 +1,5 @@
 using Robust.Shared.Map;
+using Content.Shared.Weapons.Ranged;
 
 namespace Content.Shared.SS220.Spray.Events;
 

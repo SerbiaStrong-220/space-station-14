@@ -2,7 +2,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Content.Shared.SS220.Spray.System;
-using Content.Shared.SS220.Spray.Components;
 
 namespace Content.Shared.SS220.Spray.Components;
 
@@ -11,7 +10,7 @@ namespace Content.Shared.SS220.Spray.Components;
 /// to an entity in the user's clothing slot.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSpraySystem))]
-public sealed partial class ClothingSlotSprayProviderComponent : SprayProviderComponent
+public sealed partial class ClothingSlotSolutionProviderComponent : SolutionProviderComponent
 {
     /// <summary>
     /// The slot that the ammo provider should be located in.
@@ -23,5 +22,5 @@ public sealed partial class ClothingSlotSprayProviderComponent : SprayProviderCo
     /// A whitelist for determining whether or not an solution provider is valid.
     /// </summary>
     [DataField("solutionProviderWhitelist")]
-    public EntityWhitelist? solutionProviderWhitelist;
+    public EntityWhitelist? SolutionProviderWhitelist;
 }

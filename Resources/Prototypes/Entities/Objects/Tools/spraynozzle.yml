@@ -36,8 +36,10 @@
   - type: SolutionItemStatus
     solution: spray
   - type: Appearance
-  - type: ClothingSlotAmmoProvider
-    targetSlot: BACK
-    providerWhitelist:
+  - type: SolutionAmmoProvider
+    solutionId: SpaceCleaner
+  - type: ClothingSlotSolutionProvider
+    solutionRequiredSlot: BACK
+    solutionProviderWhitelist:
       tags:
       - NozzleBackTank

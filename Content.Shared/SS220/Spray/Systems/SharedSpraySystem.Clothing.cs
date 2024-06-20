@@ -15,25 +15,25 @@ public partial class SharedSpraySystem : EntitySystem
 
     private void InitializeClothing()
     {
-        SubscribeLocalEvent<ClothingSlotSprayProviderComponent, TakeSolutionEvent>(OnClothingTakeSolution);
-        SubscribeLocalEvent<ClothingSlotSprayProviderComponent, GetSolutionCountEvent>(OnClothingSolutionCount);
+        SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, TakeSolutionEvent>(OnClothingTakeSolution);
+        SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, GetSolutionCountEvent>(OnClothingSolutionCount);
     }
 
-    private void OnClothingTakeSolution(EntityUid uid, ClothingSlotSprayProviderComponent component, TakeSolutionEvent args)
+    private void OnClothingTakeSolution(EntityUid uid, ClothingSlotSolutionProviderComponent component, TakeSolutionEvent args)
     {
         if (!TryGetClothingSlotEntity(uid, component, out var entity))
             return;
         RaiseLocalEvent(entity.Value, args);
     }
 
-    private void OnClothingSolutionCount(EntityUid uid, ClothingSlotSprayProviderComponent component, ref GetSolutionCountEvent args)
+    private void OnClothingSolutionCount(EntityUid uid, ClothingSlotSolutionProviderComponent component, ref GetSolutionCountEvent args)
     {
         if (!TryGetClothingSlotEntity(uid, component, out var entity))
             return;
         RaiseLocalEvent(entity.Value, ref args);
     }
 
-    private bool TryGetClothingSlotEntity(EntityUid uid, ClothingSlotSprayProviderComponent component, [NotNullWhen(true)] out EntityUid? slotEntity)
+    private bool TryGetClothingSlotEntity(EntityUid uid, ClothingSlotSolutionProviderComponent component, [NotNullWhen(true)] out EntityUid? slotEntity)
     {
         slotEntity = null;
 
@@ -46,7 +46,7 @@ public partial class SharedSpraySystem : EntitySystem
 
         while (enumerator.NextItem(out var item))
         {
-            if (component.solutionProviderWhitelist == null || !_whitelistSystem.IsValid(component.solutionProviderWhitelist, uid))
+            if (component.SolutionProviderWhitelist == null || !_whitelistSystem.IsValid(component.SolutionProviderWhitelist, uid))
                 continue;
 
             slotEntity = item;
