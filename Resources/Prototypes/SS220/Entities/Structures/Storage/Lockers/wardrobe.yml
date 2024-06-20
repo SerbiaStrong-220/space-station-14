@@ -1,0 +1,89 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: WardrobeBlueshield
+  parent: WardrobeBase
+  name: гардероб Синего Щита
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: blueshield_wardrobe_door
+
+- type: entity
+  id: WardrobeIAA
+  parent: WardrobeBase
+  name: гардероб АВД
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: iaa_wardrobe_door
+
+- type: entity
+  id: WardrobeLawyer
+  parent: WardrobeBase
+  name: гардероб юриста
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: lawyer_wardrobe_door
+
+- type: entity
+  id: WardrobeBartender
+  parent: WardrobeBase
+  name: гардероб бармена
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: bartender_wardrobe_door
+
+- type: entity
+  id: WardrobeCentcomm
+  parent: WardrobeBase
+  name: гардероб Центрального Командования
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: nt_wardrobe_door
+
+- type: entity
+  id: WardrobeReporter
+  parent: WardrobeBase
+  name: гардероб репортёра
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: reporter_wardrobe_door
+
+- type: entity
+  id: WardrobeMusician
+  parent: WardrobeBase
+  name: гардероб музыканта
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: musician_wardrobe_door
+
+- type: entity
+  id: WardrobeDetective
+  parent: WardrobeBase
+  name: гардероб детектива
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: detective_wardrobe_door

@@ -1,17 +1,4 @@
 - type: entity
-  id: LockerPsychologist
-  parent: LockerBaseSecure
-  name: psychologist's locker
-  components:
-  - type: Appearance
-  - type: EntityStorageVisuals
-    stateBaseClosed: white_steel_locker
-    stateDoorOpen: medsteel_open
-    stateDoorClosed: psychologist_door
-  - type: AccessReader
-    access: [ [ "Medical" ] ]
-
-- type: entity
   id: LockerPsychologistFilled
   suffix: Filled
   parent: LockerPsychologist

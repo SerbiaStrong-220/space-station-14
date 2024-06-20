@@ -235,7 +235,7 @@
     stateDoorOpen: medsteel_open
     stateDoorClosed: paramedic_door #SS220-Closet-Resprite-end
   - type: AccessReader
-    access: [ [ "Medical" ] ]
+    access: [ [ "Paramedic" ] ] #SS220-Closet-Resprite
 
 
 # Chemical
@@ -398,21 +398,6 @@
     stateDoorClosed: prisoner_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Security"]]
-
-#SS220-Pilot
-- type: entity
-  id: LockerPilot
-  parent: LockerSecurity
-  name: шкаф пилота СБ
-  description: Место для хранения пожитков славных лётчиков Корпорации.
-  components:
-  - type: Appearance
-  - type: EntityStorageVisuals
-    stateBaseClosed: security
-    stateDoorOpen: secsteel_open
-    stateDoorClosed: securitypilot_door
-  - type: AccessReader
-    access: [["Security"]]  #WMT
 
 # Syndicate
 - type: entity

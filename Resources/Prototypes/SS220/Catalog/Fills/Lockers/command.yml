@@ -1,19 +1,4 @@
 - type: entity
-  id: LockerBlueshield
-  parent: LockerBaseSecure
-  name: blue shield's locker
-  components:
-  - type: Sprite
-    sprite: SS220/Structures/Storage/closet.rsi
-  - type: Appearance
-  - type: EntityStorageVisuals
-    stateBaseClosed: blueshield
-    stateDoorOpen: steeldarklocker_open
-    stateDoorClosed: blueshield_door
-  - type: AccessReader
-    access: [ [ "Blueshield" ] ]
-
-- type: entity
   id: LockerBlueshieldFilled
   suffix: Filled
   parent: LockerBlueshield
@@ -45,14 +30,3 @@
       amount: 2
     - id: MagazinePistolSubMachineGunRubber #SS220-MinorTweaks
       amount: 2
-
-- type: entity
-  id: WardrobeBlueshield
-  parent: WardrobeBase
-  name: гардероб Синего Щита
-  components:
-  - type: Appearance
-  - type: EntityStorageVisuals
-    stateBaseClosed: wardrobe
-    stateDoorOpen: wardrobe_open
-    stateDoorClosed: blueshield_wardrobe_door
