@@ -4,3 +4,5 @@ ent-ClothingHeadHatBeretNanoTrasenDiplomat = берет дипломата NanoT
     .desc = Белый берет с выгравированным щитом и мечом, объявляющий миру, что его владелец является защитником NanoTrasen.
 ent-ClothingHeadCentcomCapNaval = флотская фуражка
     .desc = Фуражка, которую носят на флоте Nanotrasen.
+ent-ClothingHeadHatCentcomm = фирменная шапка Центком
+    .desc = Хорошо быть императором.

@@ -61,3 +61,18 @@
       sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
+
+  # Шапка
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCentcomm
+  name: CentCom brand hat
+  description: "It's good to be the emperor."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/centcom.rsi
+  - type: Tag
+    tags:
+    - Ian
