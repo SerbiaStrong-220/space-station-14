@@ -1,0 +1,11 @@
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterCentcomm
+  noSpawn: true
+  name: Centcom winter coat hood
+  description: A hood for keeping the central comander's head warm.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
