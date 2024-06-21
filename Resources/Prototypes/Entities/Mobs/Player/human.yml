@@ -74,6 +74,9 @@
   parent: MobHuman
   id: MobHumanSpaceNinja
   components:
+    #SS220 - status icon component changes for ninja so that sec cannot see him in HUDs.
+  - type: StatusIcon
+    bounds: -1000,-1000,1000,1000
   - type: RandomHumanoidAppearance
     randomizeName: false
   - type: Loadout

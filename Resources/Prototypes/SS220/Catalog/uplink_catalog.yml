@@ -13,8 +13,9 @@
   conditions:
     - !type:StoreWhitelistCondition
       blacklist:
-        components:
+        tags:
         - NukeOpsUplink
+        - LoneOpsUplink        
 
 # Implants
 

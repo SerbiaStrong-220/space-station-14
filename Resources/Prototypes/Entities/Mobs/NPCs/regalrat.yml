@@ -196,6 +196,8 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
       state: eyes
       shader: unshaded
+  - type: Bloodstream
+    bloodMaxVolume: 40 #SS220 RatBlood fix
 
   - type: SpriteMovement
     movementLayers:

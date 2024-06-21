@@ -7,7 +7,7 @@
   - SecurityPilotSatchel
   - SecurityPilotDuffel
 
-# IAA
+# InternalAffairs
 - type: loadoutGroup
   id: IAABackpack
   name: loadout-group-iaa-backpack
@@ -15,6 +15,21 @@
   - IAABackpack
   - IAASatchel
   - IAADuffel
+
+- type: loadoutGroup
+  id: BlueShieldJumpsuit
+  name: loadout-group-blueshield-jumpsuit
+  loadouts:
+  - BlueShieldJumpsuit
+  - BlueShieldJumpsuit2
+  - BlueShieldJumpsuitTurtle
+
+- type: loadoutGroup
+  id: BlueShieldOuterclothing
+  name: loadout-group-blueshield-outerclothing
+  loadouts:
+  - BlueShieldArmorBulletproof
+  - BlueShieldSRTCoat
 
 # Chef
 - type: loadoutGroup
@@ -28,12 +43,29 @@
   - ChefBeltApronRed
   - ChefBeltApronSenior
 
+# Medical
+- type: loadoutGroup
+  id: PsychologistJumpsuit
+  name: loadout-group-psychologist-jumpsuit
+  loadouts:
+  - PsychologistJumpsuit
+  - PsychologistJumpsuitTurtleneck
+  - PsychologistJumpskirtTurtleneck
+
 #Command
 
 - type: loadoutGroup
   id: CaptainGloves
   name: loadout-group-captain-gloves
-  minLimit: 0
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
+
+#Engineering
+
+- type: loadoutGroup
+  id: ChiefEngineerPDA
+  name: loadout-group-chief-engineer-PDA
+  loadouts:
+  - ChiefEngineerPDA
+  - DarkChiefEngineerPDA

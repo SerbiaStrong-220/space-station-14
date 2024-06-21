@@ -39,6 +39,6 @@
     id: HoSPDA
     gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity
-    belt: ClothingBeltSecurityFilled
+#    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol

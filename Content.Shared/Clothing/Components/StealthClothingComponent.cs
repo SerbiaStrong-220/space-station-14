@@ -27,6 +27,20 @@ public sealed partial class StealthClothingComponent : Component
     [DataField("toggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string ToggleAction = "ActionTogglePhaseCloak";
 
+    //SS220-real-stealth begin
+    /// <summary>
+    /// Visibility change rate while standing passively (preffered to be negative).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float PassiveVisibilityRate = -0.2f;
+
+    /// <summary>
+    /// Visibility change rate while moving, scales with moving distance (preffered to be negative).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float MovementVisibilityRate = -0.2f;
+    //SS220-real-stealth end
+
     /// <summary>
     /// The action for enabling and disabling stealth.
     /// </summary>

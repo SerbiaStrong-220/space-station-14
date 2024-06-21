@@ -1,0 +1,58 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: StationEngineerTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobStationEngineer
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: StationEngineerJumpsuitTurtleneck
+  equipment: StationEngineerJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+
+- type: startingGear
+  id: StationEngineerJumpsuitTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorOrange
+
+- type: loadout
+  id: StationEngineerJumpsuitTurtleneckAlt
+  equipment: StationEngineerJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+
+- type: startingGear
+  id: StationEngineerJumpsuitTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorOrange
+
+- type: loadout
+  id: StationEngineerJumpskirtTurtleneck
+  equipment: StationEngineerJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+
+- type: startingGear
+  id: StationEngineerJumpskirtTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorOrange
+
+- type: loadout
+  id: StationEngineerJumpskirtTurtleneckAlt
+  equipment: StationEngineerJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+
+- type: startingGear
+  id: StationEngineerJumpskirtTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorOrange

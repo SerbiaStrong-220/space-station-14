@@ -2044,3 +2044,614 @@
   id: 158
   time: '2024-06-05T17:17:26.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/1079
+- author: NightmareStalker
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0431\u0435\u0440\u0435\
+      \u0442 \u0421\u0442\u0430\u0440\u0448\u0435\u0433\u043E \u0418\u043D\u0436\u0435\
+      \u043D\u0435\u0440\u0430 \u0432 \u0438\u0433\u0440\u0443, \u043B\u043E\u0434\
+      \u0430\u0443\u0442 \u0438 \u043A\u043E\u043C\u043E\u0434."
+    type: Add
+  id: 159
+  time: '2024-06-05T17:44:19.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1083
+- author: Kemran
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u0446\u0432\u0435\
+      \u0442 \u0443 \u0440\u043E\u043B\u0438 \u043F\u0441\u0438\u0445\u043E\u043B\u043E\
+      \u0433\u0430 \u0432 \u0447\u0430\u0442\u0435"
+    type: Fix
+  id: 160
+  time: '2024-06-05T17:43:44.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1088
+- author: MiraHell
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0441\u0442\u0430\u0442\
+      \u0443\u0441 \u0443\u0432\u043E\u043B\u044C\u043D\u0435\u043D\u0438\u0435 \u0434\
+      \u043B\u044F \u043A\u0440\u0438\u043C\u0438\u043D\u0430\u043B\u044C\u043D\u044B\
+      \u0445 \u0437\u0430\u043F\u0438\u0441\u0435\u0439"
+    type: Add
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043E\u0442\
+      \u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0438\u043A\u043E\u043D\
+      \u043E\u043A \u0440\u043E\u0437\u044B\u0441\u043A\u0430"
+    type: Fix
+  id: 161
+  time: '2024-06-06T16:11:41.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1091
+- author: Kemran
+  changes:
+  - message: "\u0423\u0431\u0440\u0430\u043D\u044B \u0438\u0432\u0435\u043D\u0442\u044B\
+      \ \u0441 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u043C\u0438\
+      \ \u0448\u0430\u0442\u0442\u043B\u0430\u043C\u0438"
+    type: Remove
+  id: 162
+  time: '2024-06-07T20:52:53.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1092
+- author: NightmareStalker
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u0430\
+      \u0437\u0432\u0430\u043D\u0438\u044F \u0438 \u043E\u043F\u0438\u0441\u0430\u043D\
+      \u0438\u044F \u043F\u043B\u0430\u0442 \u0434\u043B\u044F \u041B\u0435\u0432\u043E\
+      \u0433\u043E \u0438 \u041F\u0440\u0430\u0432\u043E\u0433\u043E \u0438\u0437\u043B\
+      \u0443\u0447\u0430\u0442\u0435\u043B\u0435\u0439 \u0423\u0441\u043A\u043E\u0440\
+      \u0438\u0442\u0435\u043B\u044F \u0427\u0430\u0441\u0442\u0438\u0446"
+    type: Fix
+  id: 163
+  time: '2024-06-07T21:28:18.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1094
+- author: MIXnikita
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0442\u0435\u043A\u0441\
+      \u0442\u0443\u0440\u044B \u0441\u0442\u0435\u043D \u0448\u0430\u0442\u0442\u043B\
+      \u043E\u0432."
+    type: Tweak
+  id: 164
+  time: '2024-06-08T13:37:54.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1054
+- author: Tyler Gnomeev
+  changes:
+  - message: "\u0426\u0435\u043D\u0430 \u043D\u0430 \u043A\u0440\u0430\u0444\u0442\
+      \ \u0430\u0432\u0442\u043E\u0438\u043D\u0436\u0435\u043A\u0442\u043E\u0440\u043E\
+      \u0432 \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0430, \u0437\u0430\u043D\
+      \u0438\u043C\u0430\u044E\u0442 \u0431\u043E\u043B\u044C\u0448\u0435 \u043C\u0435\
+      \u0441\u0442\u0430"
+    type: Tweak
+  - message: "\u0421\u043A\u0430\u0444\u0430\u043D\u0434\u0440\u0430\u043C \u0441\u043E\
+      \ \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u043D\u044B\u043C \u0448\u043B\u0435\
+      \u043C\u043E\u043C \u0438 \u043F\u0440\u043E\u0442\u0438\u0432\u043E\u0443\u0434\
+      \u0430\u0440\u043D\u043E\u0439 \u0431\u0440\u043E\u043D\u0435 \u0421\u0411 \u0434\
+      \u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0437\u0430\u0449\u0438\u0442\
+      \u0430 \u043E\u0442 \u0430\u0432\u0442\u043E\u0438\u043D\u044A\u043A\u0442\u043E\
+      \u0440\u043E\u0432"
+    type: Add
+  id: 165
+  time: '2024-06-08T13:39:22.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1097
+- author: MiraHell
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0433\u043E\
+      \u0440\u0435\u043D\u0438\u0435"
+    type: Fix
+  id: 166
+  time: '2024-06-08T13:55:23.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1078
+- author: Okroshka
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u0432\u043E\u0434\u043E\u043B\u0430\u0437\u043A\u0438 \u0421\
+      \u0442\u0430\u0440\u0448\u0435\u0433\u043E \u0418\u043D\u0436\u0435\u043D\u0435\
+      \u0440\u0430."
+    type: Tweak
+  id: 167
+  time: '2024-06-09T13:27:42.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1095
+- author: Kemran
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0444\u0443\u0440\
+      \u0430\u0436\u043A\u0430 \u0413\u0421\u0411 \u0432 \u0435\u0433\u043E \u043A\
+      \u043E\u043C\u043E\u0434 \u0438 \u043B\u043E\u0434\u0430\u0443\u0442."
+    type: Add
+  - message: "\u0423\u0431\u0440\u0430\u043D\u044B \u043F\u043E\u044F\u0441\u0430\
+      \ \u043E\u0445\u0440\u0430\u043D\u044B \u0438\u0437 \u0441\u0442\u0430\u0440\
+      \u0442\u043E\u0432\u043E\u0433\u043E \u0441\u043D\u0430\u0440\u044F\u0436\u0435\
+      \u043D\u0438\u044F \u0443 \u0413\u0421\u0411 \u0438 \u0412\u0430\u0440\u0434\
+      \u0435\u043D\u0430."
+    type: Remove
+  id: 168
+  time: '2024-06-09T13:40:05.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1102
+- author: Kemran
+  changes:
+  - message: "\u0423\u0431\u0440\u0430\u043D\u0430 \u043B\u043E\u0442\u0435\u0440\u0435\
+      \u044F \u0440\u043E\u043B\u0435\u0439 \u0443 \u0442\u0430\u0440\u0430\u043D\u0442\
+      \u0443\u043B\u043E\u0432, \u043A\u0430\u0440\u043F\u043E\u0432, \u0441\u043B\
+      \u0430\u0439\u043C\u043E\u0432, \u0445\u043B\u0435\u0431\u0430\u043A\u0438."
+    type: Remove
+  id: 169
+  time: '2024-06-09T13:40:23.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1100
+- author: Nonne
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E 13 \u043D\u043E\
+      \u0432\u044B\u0445 \u0433\u043E\u043B\u043E\u0441\u043E\u0432! \u041C\u043E\u0439\
+      \u0440\u0430 \u0411\u0440\u0430\u0443\u043D, \u0420\u043E\u0431\u0435\u0440\
+      \ \u041C\u0430\u043A\u041A\u0440\u0438\u0434\u0438, \u0422\u0440\u0438\u0434\
+      \u043E\u0433\u043D\u0430\u0439\u0442, \u0422\u0440\u0438\u0434\u043E\u0433\u043D\
+      \u0430\u0439\u0442 \u0420\u0430\u0434\u0438\u043E, \u0411\u043E\u0440\u0438\u0441\
+      \ \u041F\u0435\u0442\u0440\u043E\u0432, \u041A\u0430\u0440\u0438\u043D\u0430\
+      \ \u041F\u0435\u0442\u0440\u043E\u0432\u0430, \u041A\u0430\u0442\u044F \u0421\
+      \u043C\u0438\u0440\u043D\u043E\u0432\u0430, \u0421\u0435\u043C\u0451\u043D \u0411\
+      \u0430\u0431\u0443\u0440\u0438\u043D, \u041B\u0435\u0439\u0442\u0435\u043D\u0430\
+      \u043D\u0442 \u0422\u0438\u0445\u043E\u043D\u043E\u0432, \u0416\u0435\u043D\u0449\
+      \u0438\u043D\u0430 \u043A\u043E\u043C\u0430\u043D\u0434\u0438\u0440, \u041B\u043E\
+      \u0440\u0434 \u0425\u0430\u0440\u043A\u043E\u043D, \u0421\u0435\u0440\u0430\u043D\
+      \u0430 \u0438 \u0423\u0442\u0435\u0440 \u0421\u0432\u0435\u0442\u043E\u043D\u043E\
+      \u0441\u043D\u044B\u0439."
+    type: Add
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\u0441\
+      \u0435\u043B\u044C\u0435!"
+    type: Add
+  - message: "\u0423\u0431\u0440\u0430\u043D\u043E \u0432\u0435\u0441\u0435\u043B\u044C\
+      \u0435!"
+    type: Remove
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0432\u0435\u0441\u0435\
+      \u043B\u044C\u0435!"
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\
+      \u0441\u0435\u043B\u044C\u0435!"
+    type: Fix
+  id: 170
+  time: '2024-06-09T15:01:03.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1103
+- author: NightmareStalker
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0442\u0435\u043C\u043D\
+      \u044B\u0439 \u041A\u041F\u041A \u0421\u0442\u0430\u0440\u0448\u0435\u0433\u043E\
+      \ \u0418\u043D\u0436\u0435\u043D\u0435\u0440\u0430."
+    type: Add
+  id: 171
+  time: '2024-06-10T15:06:06.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1080
+- author: d1nazewwr
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0434\u044C\u044F\
+      \u0432\u043E\u043B\u044C\u0441\u043A\u0438\u0435 \u0440\u043E\u0436\u043A\u0438\
+      ."
+    type: Add
+  id: 172
+  time: '2024-06-10T15:08:52.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1096
+- author: Kit0vras
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u0430\u0439\u0434\u0438-\u043A\u0430\u0440\u0442."
+    type: Tweak
+  id: 173
+  time: '2024-06-10T15:56:19.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1105
+- author: kirus59
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043A\u043E\
+      \u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u0440\u043E\u0432\u0438\
+      \ \u0432 \u043A\u0440\u044B\u0441\u0438\u043D\u044B\u0445 \u0441\u043B\u0443\
+      \u0433\u0430\u0445"
+    type: Fix
+  id: 174
+  time: '2024-06-10T18:11:58.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1106
+- author: Lancevrot
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0441\u0438\u043B\u0430\
+      \ \u044D\u0444\u0444\u0435\u043A\u0442\u0430 \u043D\u0435\u0432\u0438\u0434\u0438\
+      \u043C\u043E\u0441\u0442\u0438 \u0434\u043B\u044F \u043D\u0438\u043D\u0434\u0437\
+      \u0438 \u0438 \u043A\u043E\u0440\u043E\u0431\u043A\u0438 \u0441\u0438\u043D\u0434\
+      \u0438\u043A\u0430\u0442\u0430, \u0442\u0435\u043F\u0435\u0440\u044C \u0438\u0445\
+      \ \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E\
+      \ \u0442\u0440\u0443\u0434\u043D\u043E \u0437\u0430\u043C\u0435\u0442\u0438\u0442\
+      \u044C. \u0422\u0430\u043A\u0436\u0435 \u043D\u0438\u043D\u0434\u0437\u044F\
+      \ \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043E\u0431\u0440\
+      \u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0443 \u0421\u0411 \u0432 \u0445\
+      \u0443\u0434\u0430\u0445."
+    type: Tweak
+  id: 175
+  time: '2024-06-11T08:30:09.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1075
+- author: Ady4
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0432\u0438\u0437\
+      \u043E\u0440 \u0434\u043B\u044F \u043C\u0435\u0434\u0438\u0446\u0438\u043D\u0441\
+      \u043A\u043E\u0433\u043E \u0431\u043E\u0440\u0433\u0430."
+    type: Add
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0438\u043A\u043E\
+      \u043D\u043A\u0438 \u0434\u043B\u044F \u0431\u043E\u0440\u0433\u043E\u0432."
+    type: Add
+  id: 176
+  time: '2024-06-11T23:46:16.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1107
+- author: MiraHell
+  changes:
+  - message: "\u0421\u0443\u0449\u0435\u0441\u0442\u0432\u0430 \u0431\u0435\u0437\
+      \ \u0440\u0443\u043A \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043A\u0440\
+      \u0443\u0442\u0438\u0442\u044C \u043E\u0431\u044A\u0435\u043A\u0442\u044B"
+    type: Tweak
+  id: 177
+  time: '2024-06-12T13:10:22.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1108
+- author: SkaldetSkaeg
+  changes:
+  - message: "\u041F\u043E\u0447\u0438\u043D\u0435\u043D\u0430 \u0433\u0435\u043D\u0435\
+      \u0440\u0430\u0446\u0438\u044F \u0444\u0430\u043C\u0438\u043B\u0438\u0439 \u0434\
+      \u043B\u044F \u0440\u043E\u043B\u0435\u0439 \u0432 \u0448\u0430\u0442\u0442\u043B\
+      \u0430\u0445."
+    type: Fix
+  id: 178
+  time: '2024-06-12T13:12:23.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1104
+- author: MiraHell
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043E\u0442\
+      \u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0441\
+      \u043E\u043D\u0430\u0436\u0435\u0439 \u043D\u0430 \u043A\u043E\u043D\u0441\u043E\
+      \u043B\u044F\u0445"
+    type: Fix
+  id: 179
+  time: '2024-06-12T14:12:57.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1109
+- author: Lancevrot
+  changes:
+  - message: "\u041E\u0437\u0432\u0443\u0447\u043A\u0430 \u044D\u043C\u043E\u0443\u0442\
+      \u043E\u0432 \u0438 \u0430\u043A\u0446\u0435\u043D\u0442 \u0434\u043B\u044F\
+      \ \u0432\u0443\u043B\u044C\u043F"
+    type: Add
+  - message: "\u0410\u043D\u0438\u043C\u0430\u0446\u0438\u044F \u0445\u0432\u043E\u0441\
+      \u0442\u0430 \u0434\u043B\u044F \u0432\u0443\u043B\u044C\u043F"
+    type: Add
+  - message: "\u0412\u0443\u043B\u044C\u043F\u044B \u0431\u044B\u0441\u0442\u0440\u0435\
+      \u0435 \u0433\u043E\u043B\u043E\u0434\u0430\u044E\u0442"
+    type: Tweak
+  - message: "\u041D\u0430 \u0432\u0443\u043B\u044C\u043F\u0430\u0445 \u043D\u043E\
+      \u0440\u043C\u0430\u043B\u044C\u043D\u043E \u043E\u0442\u043E\u0431\u0440\u0430\
+      \u0436\u0430\u044E\u0442\u0441\u044F \u043F\u043E\u0447\u0442\u0438 \u0432\u0441\
+      \u0435 \u043C\u0430\u0441\u043A\u0438"
+    type: Tweak
+  id: 180
+  time: '2024-06-12T14:40:48.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1099
+- author: stalengd
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u0431\u0430\u0433\
+      \ \u0441 \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\
+      \u044C\u044E \u043F\u0440\u0438\u043D\u044F\u0442\u0438\u044F \u043F\u0438\u0449\
+      \u0438 \u0441 \u043D\u0430\u0434\u0435\u0442\u043E\u0439 \u0431\u0430\u043D\u0434\
+      \u0430\u043D\u043E\u0439 \u043D\u0430 \u0433\u043E\u043B\u043E\u0432\u0443"
+    type: Fix
+  id: 181
+  time: '2024-06-12T14:41:19.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1110
+- author: stalengd
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043D\u0430 \u043F\u043E\u0434\u0430\
+      \u0447\u0430 \u043A\u0438\u0441\u043B\u043E\u0440\u043E\u0434\u0430 \u0438\u0437\
+      \ \u0431\u0430\u043B\u043B\u043E\u043D\u0430 \u0438 \u043C\u0430\u0441\u043A\
+      \u0438 \u0434\u043B\u044F \u043F\u0438\u0442\u043E\u043C\u0446\u0435\u0432"
+    type: Fix
+  id: 182
+  time: '2024-06-12T18:50:30.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1111
+- author: Kemran
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0438\u043A\u043E\
+      \u043D\u043A\u0438 \u0431\u0440\u0438\u0433\u043C\u0435\u0434\u0438\u043A\u0430\
+      , \u041E\u0421\u0429 \u0438 \u043F\u0438\u043B\u043E\u0442\u0430 \u0421\u0411\
+      \ \u0432 ID \u043A\u0430\u0440\u0442\u0443 \u0430\u0433\u0435\u043D\u0442\u0430\
+      ."
+    type: Add
+  id: 183
+  time: '2024-06-12T19:01:55.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1112
+- author: FunTust
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\
+      \u0439\u0441\u0442\u0432\u043E \u0445\u043E\u0436\u0434\u0435\u043D\u0438\u044F\
+      \ \u043F\u043E \u0441\u0442\u0435\u043A\u043B\u0443 \u0434\u043B\u044F \u0432\
+      \u0441\u0435\u0439 \u043E\u0431\u0443\u0432\u0438 \u0428\u043B\u0451\u043F"
+    type: Add
+  id: 184
+  time: '2024-06-13T06:06:32.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1114
+- author: Ady4ik
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\
+      \u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0437\u0430\u043A\u0440\
+      \u0435\u043F\u0438\u0442\u044C \u043A\u0440\u043E\u0432\u0430\u0442\u044C; \u0445\
+      \u0438\u043C.\u0440\u0430\u0437\u0434\u0430\u0442\u0447\u0438\u043A \u0432 \u043E\
+      \u0434\u0438\u043D \u0442\u0430\u0439\u043B."
+    type: Fix
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043A\u043E\u043B\
+      \u043B\u0438\u0437\u0438\u044F \u0434\u043B\u044F \u043A\u0440\u043E\u0432\u0430\
+      \u0442\u0438; \u0445\u0438\u043C.\u0440\u0430\u0437\u0434\u0430\u0442\u0447\u0438\
+      \u043A\u0430; \u043A\u0440\u0438\u043E\u043F\u043E\u0434\u0430."
+    type: Add
+  id: 185
+  time: '2024-06-13T06:11:16.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1113
+- author: FunTust
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u043E\u0448\
+      \u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0434\u0430\
+      \u0447\u0435 \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u043E\u0432 \u0438\u0437\
+      \ \u043B\u0435\u0432\u043E\u0439 \u0440\u0443\u043A\u0438"
+    type: Fix
+  id: 186
+  time: '2024-06-13T20:27:52.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1116
+- author: FunTust
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0438\u0441\
+      \u0447\u0435\u0437\u043D\u043E\u0432\u0435\u043D\u0438\u0435 \u0432\u043E\u043B\
+      \u043E\u0441, \u043F\u0440\u0438 \u0443\u0431\u0438\u0440\u0430\u043D\u0438\u0438\
+      \ \u0448\u043B\u044F\u043F \u0432 \u043A\u0430\u0440\u043C\u0430\u043D"
+    type: Fix
+  id: 187
+  time: '2024-06-13T20:31:53.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1124
+- author: Kemran
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043C\u043D\u043E\
+      \u0433\u043E \u0440\u0430\u0437\u043D\u043E\u0446\u0432\u0435\u0442\u043D\u044B\
+      \u0445 \u0438 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0443\u043D\
+      \u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0445 \u0432\u043E\u0434\u043E\u043B\
+      \u0430\u0437\u043E\u043A."
+    type: Add
+  - message: "\u0412 \u043B\u043E\u0430\u0434\u0430\u0443\u0442\u044B \u043A\u0430\
+      \u0436\u0434\u043E\u0439 \u0440\u043E\u043B\u0438, \u043A\u0440\u043E\u043C\u0435\
+      \ \u0440\u043E\u043B\u0435\u0439 \u043A\u043E\u043C\u0430\u043D\u0434\u043E\u0432\
+      \u0430\u043D\u0438\u044F \u0438 \u0441\u0435\u0440\u0432\u0438\u0441\u0430,\
+      \ \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B 4 \u0440\u0430\u0437\
+      \u043D\u043E\u0446\u0432\u0435\u0442\u043D\u044B\u0445 \u0438\u043B\u0438 \u0443\
+      \u043D\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0445 \u0432\u043E\u0434\u043E\
+      \u043B\u0430\u0437\u043E\u043A \u043F\u043E 4 \u0442\u0438\u043F\u0430. \u0418\
+      \u0445 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442\
+      \u044C \u0437\u0430 30 \u0447\u0430\u0441\u043E\u0432 \u0438\u0433\u0440\u044B\
+      \ \u043D\u0430 \u0440\u043E\u043B\u0438. \u0423\u043D\u0438\u043A\u0430\u043B\
+      \u044C\u043D\u044B\u0435 \u0432\u043E\u0434\u043E\u043B\u0430\u0437\u043A\u0438\
+      \ \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u0438: \u0430\u0442\u043C\u043E\
+      \u0441\u0444\u0435\u0440\u043D\u044B\u0439 \u0442\u0435\u0445\u043D\u0438\u043A\
+      , \u0445\u0438\u043C\u0438\u043A, \u043F\u0430\u0440\u0430\u043C\u0435\u0434\
+      \u0438\u043A, \u0441\u043C\u043E\u0442\u0440\u0438\u0442\u0435\u043B\u044C,\
+      \ \u0438 \u043E\u0444\u0438\u0446\u0435\u0440 \"\u0421\u0438\u043D\u0438\u0439\
+      \ \u0429\u0438\u0442\"."
+    type: Add
+  id: 188
+  time: '2024-06-13T20:38:25.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/973
+- author: stalengd
+  changes:
+  - message: "\u0418\u0433\u0440\u0430\u043B\u044C\u043D\u044B\u0435 \u043A\u0430\u0440\
+      \u0442\u044B \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u043F\u0440\u043E\
+      \u0441\u0432\u0435\u0447\u0438\u0432\u0430\u044E\u0442 \u043F\u0440\u043E\u0432\
+      \u043E\u0434\u043A\u0443 \u043F\u043E\u0434 \u043F\u043E\u043B\u0430\u043C\u0438\
+      ."
+    type: Fix
+  id: 189
+  time: '2024-06-14T06:22:40.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1125
+- author: MiraHell
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u0431\u044B\
+      \u0441\u0442\u0440\u0430\u044F \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\
+      \u0434\u043A\u0430 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u043E\u0432"
+    type: Fix
+  id: 190
+  time: '2024-06-14T14:44:08.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1089
+- author: kit0vras , d1nazewwr
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043A\u043E\u043C\
+      \u0431\u0438\u043D\u0435\u0437\u043E\u043D \u0438 \u044E\u0431\u043A\u0430-\u043A\
+      \u043E\u043C\u0431\u0438\u043D\u0435\u0437\u043E\u043D \u0434\u043B\u044F \u043A\
+      \u043B\u043E\u0443\u043D\u0430."
+    type: Add
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u043A\u043E\u0441\u0442\u044E\u043C\u0430, \u0431\u043E\u0442\
+      \u0438\u043D\u043E\u043A, \u043C\u0430\u0441\u043E\u043A \u043A\u043B\u043E\u0443\
+      \u043D\u0430."
+    type: Tweak
+  id: 191
+  time: '2024-06-14T21:52:11.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1143
+- author: witarma, dinazewwr
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u043A\u043E\u043C\u0431\u0438\u043D\u0435\u0437\u043E\u043D\
+      \u0430, \u044E\u0431\u043A\u0438-\u043A\u043E\u043C\u0431\u0438\u043D\u0435\u0437\
+      \u043E\u043D\u0430, \u0437\u0438\u043C\u043D\u0435\u0439 \u043A\u0443\u0440\u0442\
+      \u043A\u0438, \u0431\u0438\u043E\u0437\u0430\u0449\u0438\u0442\u043D\u043E\u0433\
+      \u043E \u043A\u043E\u0441\u0442\u044E\u043C\u0430 \u0443\u0431\u043E\u0440\u0449\
+      \u0438\u043A\u0430"
+    type: Tweak
+  id: 192
+  time: '2024-06-14T21:53:43.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1144
+- author: CANA
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u0431\u043E\u0442\u0430\u043D\u0438\u0447\u0435\u0441\u043A\
+      \u0438\u0445 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u043E\
+      \u0432"
+    type: Tweak
+  id: 193
+  time: '2024-06-14T22:28:15.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1145
+- author: pocchitsu
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u043C\u0435\u0441\
+      \u0441\u0435\u043D\u0434\u0436\u0435\u0440 \u0432 \u041A\u041F\u041A."
+    type: Fix
+  id: 194
+  time: '2024-06-14T22:52:52.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1146
+- author: stalengd
+  changes:
+  - message: "\u041D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u044F\u0449\u0438\
+      \u043A\u0438 \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u043F\u043E\u043A\
+      \u0430\u0437\u044B\u0432\u0430\u044E\u0442 \u043D\u0430\u0434\u043F\u0438\u0441\
+      \u044C ERROR \u0432\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u0438\u043A\u0435\
+      \u0442\u043A\u0438."
+    type: Fix
+  id: 195
+  time: '2024-06-15T21:19:04.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1150
+- author: Kemran
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043B\u043E\u0434\
+      \u0430\u0443\u0442\u044B \u0434\u043B\u044F \u041E\u0421\u0429."
+    type: Add
+  id: 196
+  time: '2024-06-15T21:23:04.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1151
+- author: UrPrice
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u043F\u043E\
+      \u043B\u043E\u0436\u0435\u043D\u0438\u044F \u0440\u0443\u043A \u0443 \u0444\u0435\
+      \u043B\u0438\u043D\u0438\u0434\u043E\u0432 \u043D\u0430 \u0438\u043D\u0442\u0435\
+      \u0440\u0444\u0435\u0439\u0441\u0435."
+    type: Fix
+  id: 197
+  time: '2024-06-16T06:51:05.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1152
+- author: FunTust
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u043E\u043F\
+      \u0435\u0447\u0430\u0442\u043A\u0430 \u043D\u0430 \u044D\u043A\u0440\u0430\u043D\
+      \u0435 \u043F\u0440\u0438\u0432\u044F\u0437\u043A\u0438 Discord"
+    type: Fix
+  id: 198
+  time: '2024-06-16T20:32:06.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1158
+- author: Dexler
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0434\u0436\u043E\u0431\
+      \u0431\u0430\u043D \u0444\u0435\u043B\u0438\u043D\u0438\u0434\u0430\u043C \u043D\
+      \u0430 \u0432\u0441\u0435 \u0440\u043E\u043B\u0438 \u043A\u043E\u043C\u0430\u043D\
+      \u0434\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0421\u0411."
+    type: Add
+  id: 199
+  time: '2024-06-16T21:23:05.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1159
+- author: Kemran
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0437\u0430\
+      \u0441\u0442\u0440\u0435\u0432\u0430\u043D\u0438\u0435 \u0432\u0435\u0434\u0451\
+      \u0440\u043A\u0438 \u0434\u043B\u044F \u0448\u0432\u0430\u0431\u0440\u044B \u0432\
+      \ \u043F\u0435\u0440\u0438\u043B\u0430\u0445."
+    type: Fix
+  id: 200
+  time: '2024-06-17T19:21:08.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1155
+- author: AlwyAnri
+  changes:
+  - message: "\u041E\u0434\u0438\u043D\u043E\u043A\u0438\u0435 \u043E\u043F\u0435\u0440\
+      \u0430\u0442\u0438\u0432\u043D\u0438\u043A\u0438 \u0441\u043D\u043E\u0432\u0430\
+      \ \u0432 \u0438\u0433\u0440\u0435!"
+    type: Fix
+  id: 201
+  time: '2024-06-17T19:30:41.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1164
+- author: AlwyAnri
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u043B\u043E\u0434\
+      \u0430\u0443\u0442 \u0421\u0418 \u0438 \u043A\u0430\u043F\u0438\u0442\u0430\u043D\
+      \u0430!"
+    type: Fix
+  id: 202
+  time: '2024-06-18T08:39:39.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1193
+- author: Ady4
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0437\u0430\
+      \u0441\u0442\u0440\u0435\u0432\u0430\u043D\u0438\u0435 \u0432 \u043A\u0440\u043E\
+      \u0432\u0430\u0442\u0438."
+    type: Fix
+  - message: "\u0422\u0435\u043F\u0435\u0440\u044C \u043A\u0440\u043E\u0432\u0430\u0442\
+      \u0438 \u043D\u0435\u043B\u044C\u0437\u044F \u043E\u0442\u043A\u0440\u0443\u0442\
+      \u0438\u0442\u044C."
+    type: Tweak
+  id: 203
+  time: '2024-06-19T13:49:29.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1196
+- author: AlwyAnri
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0430\
+      \u043B\u0438\u0447\u0438\u0435 \u044D\u043D\u0435\u0440\u0433\u043E\u0430\u0440\
+      \u0431\u043E\u043B\u0435\u0442\u0430 \u0432 \u0430\u043F\u043B\u0438\u043D\u043A\
+      \u0435!"
+    type: Fix
+  id: 204
+  time: '2024-06-20T19:09:28.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1195
+- author: d1nazewwr
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\
+      \u0430\u044F \u0431\u0430\u043D\u0434\u0430\u043D\u0430, 2 \u0444\u0430\u0440\
+      \u0442\u0443\u043A\u0430, 2 \u044E\u0431\u043A\u0438, 3 \u043A\u0435\u043F\u043A\
+      \u0438, 5 \u043A\u043E\u043C\u0431\u0438\u043D\u0435\u0437\u043E\u043D\u043E\
+      \u0432 \u0434\u043B\u044F \u0431\u043E\u0442\u0430\u043D\u0438\u043A\u0430.\
+      \ \u0412\u0441\u0451 \u044D\u0442\u043E \u0432\u044B \u0441\u043C\u043E\u0436\
+      \u0435\u0442\u0435 \u043D\u0430\u0439\u0442\u0438 \u0432 \u043B\u043E\u0434\u0430\
+      \u0443\u0442\u0430\u0445!"
+    type: Add
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u043A\u0443\u0440\u0442\u043A\u0438, \u043F\u0435\u0440\u0447\
+      \u0430\u0442\u043E\u043A, \u0431\u0430\u043D\u0434\u0430\u043D\u044B, \u0444\
+      \u0430\u0440\u0442\u0443\u043A\u0430, \u044E\u0431\u043A\u0438, \u043A\u043E\
+      \u043C\u0431\u0438\u043D\u0435\u0437\u043E\u043D\u0430, \u043A\u043E\u043C\u0431\
+      \u0438\u043D\u0435\u0437\u043E\u043D\u0430 \u043D\u0430 \u043B\u044F\u043C\u043A\
+      \u0430, \u043F\u043E\u044F\u0441\u0430, \u043A\u0435\u043F\u043E\u043A \u0431\
+      \u043E\u0442\u0430\u043D\u0438\u043A\u0430."
+    type: Tweak
+  id: 205
+  time: '2024-06-20T19:11:11.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1201
+- author: d1nazewwr
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0432\u0430\u0440\
+      \u0438\u043D\u0430\u043D\u0442\u044B \u043F\u0440\u043E\u0442\u0438\u0432\u043E\
+      \u0433\u0430\u0437\u043E\u0432 \u0434\u043B\u044F \u0413\u0430\u043C\u043B\u0435\
+      \u0442\u0430 \u0438 \u0432\u043E\u043A\u0441\u043E\u0432."
+    type: Add
+  id: 206
+  time: '2024-06-20T19:18:05.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1203
+- author: Kit0vras
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\
+      \u044B\u0435 \u0448\u043A\u0430\u0444\u044B."
+    type: Add
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u0448\u043A\u0430\u0444\u043E\u0432."
+    type: Tweak
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0437\u0432\u0443\u043A\
+      \u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F \u0438 \u0437\u0430\u043A\
+      \u0440\u044B\u0442\u0438\u044F \u0448\u043A\u0430\u0444\u043E\u0432."
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043E\u0442\
+      \u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u044D\u0442\u0438\u043A\
+      \u0435\u0442\u043E\u043A \u043D\u0430 \u0448\u043A\u0430\u0444\u0430\u0445."
+    type: Fix
+  id: 207
+  time: '2024-06-20T19:19:30.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1207
+- author: d1nazewwr
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0432\u0430\u0440\
+      \u0438\u0430\u0446\u0438\u0438 \u0441\u043F\u0440\u0430\u0439\u0442\u043E\u0439\
+      \ \u043C\u043E\u043D\u043E\u0432\u0438\u0437\u043E\u0440\u0430 \u0434\u043B\u044F\
+      \ \u0432\u043E\u043A\u0441\u043E\u0432."
+    type: Add
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u0441\u043F\
+      \u0440\u0430\u0439\u0442\u044B \u043C\u043E\u043D\u043E\u0432\u0438\u0437\u043E\
+      \u0440\u043E\u0432."
+    type: Fix
+  id: 208
+  time: '2024-06-20T19:22:34.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1204

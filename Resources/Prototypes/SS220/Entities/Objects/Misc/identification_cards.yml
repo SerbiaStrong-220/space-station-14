@@ -29,6 +29,10 @@
   name: ID карта Дипломата NanoTrasen
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
+  - type: Sprite
+    layers:
+    - state: silver
+    - state: idcentcom
     - type: IdCard
       jobTitle: Дипломат NanoTrasen
     - type: Access

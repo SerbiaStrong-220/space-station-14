@@ -41,7 +41,9 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticInteractUsing(EntityUid uid, BallisticAmmoProviderComponent component, InteractUsingEvent args)
     {
-        if (args.Handled || component.Whitelist?.IsValid(args.Used, EntityManager) != true)
+        if (args.Handled ||
+        component.Whitelist?.IsValid(args.Used, EntityManager) != true ||
+        component.IsReloading) // 220 ammoFillFix
             return;
 
         if (GetBallisticShots(component) >= component.Capacity)
@@ -69,12 +71,12 @@ public abstract partial class SharedGunSystem
         {
             return;
         }
-
+        component.IsReloading = true; // 220 ammoFillFix
         args.Handled = true;
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.FillDelay, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
         {
-            BreakOnMove = true,
+            BreakOnMove = false, // 220 ammoFillFix
             BreakOnDamage = false,
             NeedHand = true
         });
@@ -113,41 +115,47 @@ public abstract partial class SharedGunSystem
             RaiseLocalEvent(ammoProvider, evInsert);
         }
 
-        List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
-        var evTakeAmmo = new TakeAmmoEvent(1, ammo, Transform(uid).Coordinates, args.User);
-        RaiseLocalEvent(uid, evTakeAmmo);
-
-        foreach (var (ent, _) in ammo)
+        if (!component.IsReloading) // 220 ammoFillFix
         {
-            if (ent == null)
-                continue;
+            List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
+            var evTakeAmmo = new TakeAmmoEvent(1, ammo, Transform(uid).Coordinates, args.User);
+            RaiseLocalEvent(uid, evTakeAmmo);
 
-            if (!target.Whitelist.IsValid(ent.Value))
+            foreach (var (ent, _) in ammo)
             {
-                Popup(
-                    Loc.GetString("gun-ballistic-transfer-invalid",
-                        ("ammoEntity", ent.Value),
-                        ("targetEntity", args.Target.Value)),
-                    uid,
-                    args.User);
+                if (ent == null)
+                    continue;
 
-                SimulateInsertAmmo(ent.Value, uid, Transform(uid).Coordinates);
-            }
-            else
-            {
-                // play sound to be cool
-                Audio.PlayPredicted(component.SoundInsert, uid, args.User);
-                SimulateInsertAmmo(ent.Value, args.Target.Value, Transform(args.Target.Value).Coordinates);
-            }
+                if (!target.Whitelist.IsValid(ent.Value))
+                {
+                    Popup(
+                        Loc.GetString("gun-ballistic-transfer-invalid",
+                            ("ammoEntity", ent.Value),
+                            ("targetEntity", args.Target.Value)),
+                        uid,
+                        args.User);
 
-            if (IsClientSide(ent.Value))
-                Del(ent.Value);
+                    SimulateInsertAmmo(ent.Value, uid, Transform(uid).Coordinates);
+                }
+                else
+                {
+                    // play sound to be cool
+                    Audio.PlayPredicted(component.SoundInsert, uid, args.User);
+                    SimulateInsertAmmo(ent.Value, args.Target.Value, Transform(args.Target.Value).Coordinates);
+                }
+
+                if (IsClientSide(ent.Value))
+                    Del(ent.Value);
+
+                component.IsReloading = false; // 220 ammoFillFix
+            }
         }
 
         // repeat if there is more space in the target and more ammo to fill it
         var moreSpace = target.Entities.Count + target.UnspawnedCount < target.Capacity;
         var moreAmmo = component.Entities.Count + component.UnspawnedCount > 0;
         args.Repeat = moreSpace && moreAmmo;
+        component.IsReloading = false; // 220 ammoFillFix
     }
 
     private void OnBallisticVerb(EntityUid uid, BallisticAmmoProviderComponent component, GetVerbsEvent<Verb> args)

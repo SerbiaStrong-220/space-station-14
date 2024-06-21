@@ -7,6 +7,8 @@
     folded: true
   - type: Mask
     isToggled: true
+    enabled: false #ss220 bandana fix
+    disableOnFolded: true #ss220 bandana fix
   - type: IngestionBlocker
     enabled: false
   - type: IdentityBlocker

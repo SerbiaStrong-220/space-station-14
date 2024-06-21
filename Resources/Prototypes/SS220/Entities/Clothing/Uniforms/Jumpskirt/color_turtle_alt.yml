@@ -1,0 +1,460 @@
+# White Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorWhite
+  name: white turtleneck
+  description: Calm and versatile white turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Grey Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorGrey
+  name: grey turtleneck
+  description: Calm and versatile grey turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#b1b1b1"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#b1b1b1"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#b1b1b1"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#b1b1b1"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Blue Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorBlue
+  name: blue turtleneck
+  description: Calm and versatile blue turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#1d79bf"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1d79bf"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1d79bf"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1d79bf"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Dark Blue Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorDarkBlue
+  name: dark blue turtleneck
+  description: Calm and versatile blue turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#1d32bf"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1d32bf"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1d32bf"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: CSS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1d32bf"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Teal Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorTeal
+  name: teal turtleneck
+  description: Calm and versatile teal turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#1bc185"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1bc185"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1bc185"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1bc185"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Green Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorGreen
+  name: green turtleneck
+  description: Calm and versatile green turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#7cbf7c"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#7cbf7c"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#7cbf7c"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#7cbf7c"
+      - state: trinkets-equipped-INNERCLOTHING
+
+ # Dark Green Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorDarkGreen
+  name: dark green turtleneck
+  description: Calm and versatile dark green turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#1dbf1d"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1dbf1d"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1dbf1d"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1dbf1d"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Orange Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorOrange
+  name: orange turtleneck
+  description: Calm and versatile orange turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#c14d1b"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c14d1b"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c14d1b"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c14d1b"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Pink Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorPink
+  name: pink turtleneck
+  description: Calm and versatile pink turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#cc5c90"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#cc5c90"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#cc5c90"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#cc5c90"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Red Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorRed
+  name: red turtleneck
+  description: Calm and versatile red turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#c11b1b"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c11b1b"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c11b1b"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c11b1b"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Yellow Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorYellow
+  name: yellow turtleneck
+  description: Calm and versatile yellow turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#c1bd1b"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c1bd1b"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c1bd1b"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c1bd1b"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Purple Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorPurple
+  name: purple turtleneck
+  description: Calm and versatile purple turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#841dbf"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#841dbf"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#841dbf"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#841dbf"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Light Brown Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorLightBrown
+  name: light brown turtleneck
+  description: Calm and versatile light brown turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#bf7442"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#bf7442"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#bf7442"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#bf7442"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Brown Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorBrown
+  name: brown turtleneck
+  description: Calm and versatile brown turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#bf977c"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#bf977c"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#bf977c"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#bf977c"
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Maroon Jumpskirt Turtle
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTurtleAltColorMaroon
+  name: maroon turtleneck
+  description: Calm and versatile maroon turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    layers:
+    - state: icon
+      color: "#bf1d58"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#bf1d58"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#bf1d58"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/colorturtle_alt.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#bf1d58"
+      - state: trinkets-equipped-INNERCLOTHING

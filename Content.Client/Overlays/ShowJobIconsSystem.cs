@@ -2,6 +2,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Overlays;
 using Content.Shared.PDA;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
@@ -15,6 +16,11 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
 
     [ValidatePrototypeId<StatusIconPrototype>]
     private const string JobIconForNoId = "JobIconNoId";
+
+    /// SS220 Add borg icon for hud begin
+    [ValidatePrototypeId<StatusIconPrototype>]
+    private const string JobIconForBorg = "JobIconBorg";
+    /// SS220 Add borg icon for hud end
 
     public override void Initialize()
     {
@@ -52,6 +58,10 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
             }
         }
 
+        /// SS220 Add borg icon for hud begin
+        if (HasComp<BorgChassisComponent>(uid))
+            iconId = "JobIconBorg";
+        /// SS220 Add borg icon for hud end
         if (_prototype.TryIndex<StatusIconPrototype>(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else

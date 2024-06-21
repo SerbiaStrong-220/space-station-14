@@ -98,6 +98,13 @@ public abstract class ClothingSystem : EntitySystem
                 {
                     if (comp.Slots.Contains(layer))
                     {
+                        //ss220-ToggleVisualLayers-Fix begin
+                        //FunTust:Check where the item is placed and if it is not one of the clothing slots then do not touch the visibility
+                        if (_invSystem.TryGetContainingSlot(item, out var currentItemSlot)
+                        && currentItemSlot.SlotGroup != "Default")
+                                break;
+                        //ss220-ToggleVisualLayers-Fix end
+
                         //Checks for mask toggling. TODO: Make a generic system for this
                         if (comp.HideOnToggle && TryComp(item, out MaskComponent? mask) && TryComp(item, out ClothingComponent? clothing))
                         {
