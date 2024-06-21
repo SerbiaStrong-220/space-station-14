@@ -57,6 +57,7 @@
   id: ClothingHeadCentcomCapNaval
   name: naval cap
   description: A cap worn by those in the Nanotrasen Navy.
+  components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
     - type: Clothing
