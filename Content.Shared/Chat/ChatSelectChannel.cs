@@ -51,6 +51,8 @@
         /// </summary>
         Admin = ChatChannel.AdminChat,
 
+        Telepathy = ChatChannel.Telepathy,
+
         Console = ChatChannel.Unspecified
     }
 }
