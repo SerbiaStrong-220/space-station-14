@@ -89,7 +89,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          bounds: "-0.3,-0.3,0.3,0.3" #SS220-fix-fixtures-mop-bucket
         density: 60
         mask:
         - MachineMask

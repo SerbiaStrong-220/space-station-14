@@ -41,10 +41,25 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                     _alerts.ClearAlert(uid, AlertType.ItemOffer);
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
+                //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
+                var foundInHand = false;
                 foreach (var hand in giverHands.Hands)
                 {
                     if (hand.Value.Container!.Contains(comp.Item!.Value))
-                        break;
+                        //break;
+                        //FunTust: Now we check all hands and if found, we change the value of the variable
+                        foundInHand = true;
+                    /*
+                     FunTust: Actually, what caused the error was that if the object was in the second hand,
+                    then when we checked the first hand we didn't find it and deleted the transfer request.
+                    _alerts.ClearAlert(uid, AlertType.ItemOffer);
+                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+                    */
+                }
+                //FunTust: Just moved it here with a variable check, maybe not the most elegant solution,
+                //but it should work and it shouldn't affect performance too much because there are only 2 hands.
+                if (!foundInHand)
+                {
                     _alerts.ClearAlert(uid, AlertType.ItemOffer);
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }

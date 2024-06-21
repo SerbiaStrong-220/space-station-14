@@ -37,6 +37,10 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "equipped-MASK-Vulpkanin",
+      "directions": 4
     }
   ]
 }

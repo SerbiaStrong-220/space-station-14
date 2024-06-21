@@ -56,6 +56,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.9
   - type: GroupExamine
+  - type: NeedleProtection # ss220 needleprotection
 
 - type: entity
   parent: ClothingOuterArmorBasic

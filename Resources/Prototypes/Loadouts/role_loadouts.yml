@@ -6,7 +6,7 @@
   - CaptainNeck
   - CaptainJumpsuit
   - CaptainBackpack
-# - CaptainGloves #SS220-ОНО НЕ РАБОТАЕТ БЛЯТЬ Я ТОГО МАНАЛ
+  - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainOuterClothing
   - Trinkets
 
@@ -172,6 +172,7 @@
   id: JobSalvageSpecialist
   groups:
   - SalvageSpecialistBackpack
+  - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
   - SalvageSpecialistOuterClothing
   - SalvageSpecialistShoes
   - Glasses
@@ -188,6 +189,7 @@
   - ChiefEngineerOuterClothing
   - ChiefEngineerShoes
   - Trinkets
+  - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -402,6 +404,7 @@
   id: JobPsychologist
   groups:
   - MedicalBackpack
+  - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses
   - Trinkets
 

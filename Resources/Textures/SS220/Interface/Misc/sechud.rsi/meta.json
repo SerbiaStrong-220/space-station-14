@@ -20,6 +20,9 @@
         },
 		{
             "name": "monitor"
+        },
+		{
+            "name": "demote"
         }
     ]
 }

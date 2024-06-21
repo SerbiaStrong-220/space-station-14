@@ -188,18 +188,81 @@
   id: sentrybot
 
 - type: ttsVoice
-  name: Полина
-  description: Голос персонажа Полина из игры Tiny Bunny
+  name: Мойра Браун
+  description: Голос персонажа Мойра Браун из Fallout 3
+  sex: Female
+  speaker: moira_brown
+  id: moira_brown
+
+- type: ttsVoice
+  name: Робер МакКриди
+  description: Голос персонажа Робер МакКриди из Fallout 3
+  sex: Male
+  speaker: robert_maccready
+  id: robert_maccready
+
+- type: ttsVoice
+  name: Тридогнайт
+  description: Голос персонажа Тридогнайт из Fallout 3
+  sex: Male
+  speaker: threedog
+  id: threedog
+
+- type: ttsVoice
+  name: Тридогнайт Радио
+  description: Голос персонажа Тридогнайт версия по радио из Fallout 3
+  sex: Male
+  speaker: threedog_radio
+  id: threedog_radio
+
+- type: ttsVoice
+  name: Полина Морозова
+  description: Голос персонажа Полина Морозова из игры Tiny Bunny
   sex: Female
   speaker: polina
   id: polina
 
 - type: ttsVoice
-  name: Ромка
-  description: Голос персонажа Ромка из игры Tiny Bunny
-  sex: Male
+  name: Рома Пятифанов
+  description: Голос персонажа Рома Пятифанов из игры Tiny Bunny
+  sex: Unsexed
   speaker: romka
   id: romka
+
+- type: ttsVoice
+  name: Борис Петров
+  description: Голос персонажа Борис Петров из игры Tiny Bunny
+  sex: Male
+  speaker: boris_petrov_father_tb
+  id: boris_petrov_father_tb
+
+- type: ttsVoice
+  name: Карина Петрова
+  description: Голос персонажа Карина Петрова из игры Tiny Bunny
+  sex: Female
+  speaker: karina_petrova_tb
+  id: karina_petrova_tb
+
+- type: ttsVoice
+  name: Катя Смирнова
+  description: Голос персонажа Катя Смирнова из игры Tiny Bunny
+  sex: Female
+  speaker: kate_smirnova_tb
+  id: kate_smirnova_tb
+
+- type: ttsVoice
+  name: Семён Бабурин
+  description: Голос персонажа Семён Бабурин из игры Tiny Bunny
+  sex: Male
+  speaker: semen_baburin_tb
+  id: semen_baburin_tb
+
+- type: ttsVoice
+  name: Лейтенант Тихонов
+  description: Голос персонажа Лейтенант Тихонов из игры Tiny Bunny
+  sex: Male
+  speaker: tihonov_tb
+  id: tihonov_tb
 
 - type: ttsVoice
   name: Цицерон
@@ -298,6 +361,27 @@
   sex: Male
   speaker: nazir
   id: nazir
+
+- type: ttsVoice
+  name: Женщина командир
+  description: Голос женских персонажей командиров из игры TES 5 Skyrim
+  sex: Female
+  speaker: female_commander
+  id: female_commander
+
+- type: ttsVoice
+  name: Лорд Харкон
+  description: Голос персонажа Лорд Харкон из игры TES 5 Skyrim
+  sex: Male
+  speaker: lord_harkon
+  id: lord_harkon
+
+- type: ttsVoice
+  name: Серана
+  description: Голос персонажа Серана из игры TES 5 Skyrim
+  sex: Female
+  speaker: serana
+  id: serana
 
 - type: ttsVoice
   name: GLaDOS
@@ -617,7 +701,7 @@
 - type: ttsVoice
   name: Майрон
   description: Голос персонажа Майрон из игры Fallout 2
-  sex: Female
+  sex: Male
   speaker: myron
   id: myron
 
@@ -638,7 +722,7 @@
 - type: ttsVoice
   name: Рассказчик
   description: Голос персонажа Рассказчик из игры Dungeons 3
-  sex: Female
+  sex: Male
   speaker: narrator_d3
   id: narrator_d3
 
@@ -676,6 +760,13 @@
   sex: Female
   speaker: jaina
   id: jaina
+
+- type: ttsVoice
+  name: Утер Светоносный
+  description: Голос персонажа Утер Светоносный из игры Hearthstone
+  sex: Male
+  speaker: uther_hs
+  id: uther_hs
 
 - type: ttsVoice
   name: Адъютант

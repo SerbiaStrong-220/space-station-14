@@ -223,7 +223,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttle.rsi
+    sprite: SS220/Structures/Walls/shuttle.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -241,7 +241,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttleinterior.rsi
+    sprite: SS220/Structures/Walls/shuttleinterior.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -259,7 +259,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -555,7 +555,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Structures/Windows/shuttle_window.rsi
+    sprite: SS220/Structures/Windows/shuttle_window.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter

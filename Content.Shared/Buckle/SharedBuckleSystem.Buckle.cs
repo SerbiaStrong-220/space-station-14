@@ -3,6 +3,8 @@ using System.Numerics;
 using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Climbing.Components;
+using Content.Shared.Climbing.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
@@ -27,6 +29,9 @@ namespace Content.Shared.Buckle;
 
 public abstract partial class SharedBuckleSystem
 {
+    /// SS220 BedCollisionFix begin
+    [Dependency] private readonly ClimbSystem _climbSystem = default!;
+    /// SS220 BedCollisionFix end
     private void InitializeBuckle()
     {
         SubscribeLocalEvent<BuckleComponent, ComponentStartup>(OnBuckleComponentStartup);
@@ -544,6 +549,11 @@ public abstract partial class SharedBuckleSystem
         var ev = new BuckleChangeEvent(strapUid, buckleUid, false);
         RaiseLocalEvent(buckleUid, ref ev);
         RaiseLocalEvent(strapUid, ref ev);
+
+        // SS220 BedCollision Fix begin
+        if (HasComp<ClimbableComponent>(strapUid))
+            _climbSystem.ForciblySetClimbing(userUid, strapUid);
+        // SS220 BedCollision Fix begin
 
         return true;
     }

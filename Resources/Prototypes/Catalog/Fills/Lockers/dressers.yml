@@ -34,6 +34,7 @@
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingOuterWinterCE
       - id: ClothingOuterCoatCEFormalDress #SS220-FormalDress
+      - id: ClothingHeadHatBeretCE #SS220-CEBeret
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
@@ -85,8 +86,8 @@
       - id: ClothingHeadHatCapHoS # Corvax-SecFashion
       - id: ClothingOuterCoatHoSGreatcoat # Corvax-Resprite
       - id: ClothingMaskNeckGaiter
-      - id: ClothingHeadHatBeretHoS # SS220 NewHatForHoS
       - id: ClothingOuterWinterHoS
+      - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
 
 - type: entity
   id: DresserQuarterMasterFilled

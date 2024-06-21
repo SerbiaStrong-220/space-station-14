@@ -1,0 +1,337 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Центральное командование
+- type: entity
+  id: LockerCentcomm
+  parent: LockerBase
+  name: шкаф Центрального Командования
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: nt
+    stateDoorOpen: secdarksteel_open
+    stateDoorClosed: nt_door
+  - type: AccessReader
+    access: [ [ "CentralCommand" ] ]
+
+- type: entity
+  id: LockerErtCommander
+  parent: LockerBase
+  name: шкаф командира ОБР
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ert
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: ert_com_door
+  - type: AccessReader
+    access: [ [ "CentralCommandERT" ] ]
+
+- type: entity
+  id: LockerErtSecurity
+  parent: LockerBase
+  name: шкаф офицера безопасности ОБР
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ert
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: ert_sec_door
+  - type: AccessReader
+    access: [ [ "CentralCommandERT" ] ]
+
+- type: entity
+  id: LockerErtMedic
+  parent: LockerBase
+  name: шкаф медика ОБР
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ert
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: ert_med_door
+  - type: AccessReader
+    access: [ [ "CentralCommandERT" ] ]
+
+- type: entity
+  id: LockerErtEngineer
+  parent: LockerBase
+  name: шкаф инженера ОБР
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ert
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: ert_eng_door
+  - type: AccessReader
+    access: [ [ "CentralCommandERT" ] ]
+
+- type: entity
+  id: LockerErtJanitor
+  parent: LockerBase
+  name: шкаф уборщика ОБР
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ert
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: ert_jan_door
+  - type: AccessReader
+    access: [ [ "CentralCommandERT" ] ]
+
+- type: entity
+  id: LockerErtChaplain
+  parent: LockerBase
+  name: шкаф священника ОБР
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ert
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: ert_chap_door
+  - type: AccessReader
+    access: [ [ "CentralCommandERT" ] ]
+
+- type: entity
+  id: LockerCburn
+  parent: LockerBase
+  name: шкаф отряда РХБЗ
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_door
+  - type: AccessReader
+    access: [ [ "CentralCommandCBURN" ] ]
+
+- type: entity
+  id: LockerDeathsquad
+  parent: LockerBase
+  name: шкаф отряда Эскадрона Смерти
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: deathsquad
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: deathsquad_door
+  - type: AccessReader
+    access: [ [ "CentralCommandDeathSquad" ] ]
+
+#Командование
+- type: entity
+  id: LockerBlueshield
+  parent: LockerBaseSecure
+  name: blue shield's locker
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Storage/closet.rsi
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: blueshield
+    stateDoorOpen: steeldarklocker_open
+    stateDoorClosed: blueshield_door
+  - type: AccessReader
+    access: [ [ "Blueshield" ] ]
+
+#Медицинский отдел
+- type: entity
+  id: LockerPsychologist
+  parent: LockerBaseSecure
+  name: psychologist's locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: white_steel_locker
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: psychologist_door
+  - type: AccessReader
+    access: [ [ "Medical" ] ]
+
+- type: entity
+  id: LockerMedicineParamedic
+  parent: LockerBase
+  name: шкаф для медикаментов
+  description: Битком набит медицинскими штуками.
+  suffix: Парамедик
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_white
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: paramedic_storage_door
+  - type: AccessReader
+    access: [ [ "Paramedic" ] ]
+
+- type: entity
+  id: LockerMedicineChemist
+  parent: LockerBase
+  name: шкаф для медикаментов
+  description: Битком набит медицинскими штуками.
+  suffix: Химик
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_white
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: chemist_storage_door
+  - type: AccessReader
+    access: [ [ "Chemistry" ] ]
+
+- type: entity
+  id: LockerMedicineVirologist
+  parent: LockerBase
+  name: шкаф для медикаментов
+  description: Битком набит медицинскими штуками.
+  suffix: Вирусолог
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_white
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: virologist_storage_door
+  - type: AccessReader
+    access: [ [ "Medical" ] ]
+
+- type: entity
+  id: LockerMedicinePsychologist
+  parent: LockerBase
+  name: шкаф для медикаментов
+  description: Битком набит медицинскими штуками.
+  suffix: Психолог
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_white
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: psychologist_storage_door
+  - type: AccessReader
+    access: [ [ "Medical" ] ]
+
+- type: entity
+  id: LockerMedicineBrigmedic
+  parent: LockerBase
+  name: шкаф для медикаментов
+  description: Битком набит военными преступлениями в форме таблеток.
+  suffix: Бригмедик
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_red
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: brigmedic_storage_door
+  - type: AccessReader
+    access: [ [ "Medical" ] ]
+
+#Служба безопасности
+- type: entity
+  id: LockerPilot
+  parent: LockerSecurity
+  name: шкаф пилота службы безопасности
+  description: Место для хранения пожитков славных лётчиков Корпорации.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: security
+    stateDoorOpen: secsteel_open
+    stateDoorClosed: securitypilot_door
+  - type: AccessReader
+    access: [["Security"]]
+
+#Синдикат
+- type: entity
+  id: LockerMedicineSyndicate
+  parent: LockerBase
+  name: шкаф для медикаментов
+  description: Битком набит медицинскими штуками.
+  suffix: Синдикат
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_black
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: syndicate_medic_storage_door
+  - type: AccessReader
+    access: [ [ "Medical" ] ]
+
+- type: entity
+  id: LockerSyndicateMedic
+  parent: LockerBase
+  name: шкаф медика синдиката
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe_dark
+    stateDoorOpen: meddarksteel_open
+    stateDoorClosed: syndicate_medic_door
+  - type: AccessReader
+    access: [["SyndicateAgent"]]
+
+#Разное
+- type: entity
+  id: LockerSleepingGasSecurity
+  parent: LockerBase
+  name: шкаф с усыпляющим газом
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: storage_red
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: n2o_door
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: LockerArmory
+  parent: LockerBase
+  name: армейский шкаф
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryArmor
+  parent: LockerBase
+  name: армейский шкаф
+  suffix: Броня
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_armor_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryEnergyGun
+  parent: LockerBase
+  name: армейский шкаф
+  suffix: Энергооружие
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_energy_gun_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryGun
+  parent: LockerBase
+  name: армейский шкаф
+  suffix: Оружие
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_gun_door
+  - type: AccessReader
+    access: [["Armory"]]

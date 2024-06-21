@@ -1,0 +1,59 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: BlueShieldTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: BlueShieldJumpsuit
+  equipment: BlueShieldJumpsuit
+
+- type: startingGear
+  id: BlueShieldJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShield
+
+- type: loadout
+  id: BlueShieldJumpsuit2
+  equipment: BlueShieldJumpsuit2
+
+- type: startingGear
+  id: BlueShieldJumpsuit2
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShield2
+
+- type: loadout
+  id: BlueShieldJumpsuitTurtle
+  equipment: BlueShieldJumpsuitTurtle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldTurtleneck
+
+- type: startingGear
+  id: BlueShieldJumpsuitTurtle
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
+
+# Outer clothing
+- type: loadout
+  id: BlueShieldArmorBulletproof
+  equipment: BlueShieldArmorBulletproof
+
+- type: startingGear
+  id: BlueShieldArmorBulletproof
+  equipment:
+    outerClothing: ClothingOuterArmorBulletproof
+
+- type: loadout
+  id: BlueShieldSRTCoat
+  equipment: BlueShieldSRTCoat
+
+- type: startingGear
+  id: BlueShieldSRTCoat
+  equipment:
+    outerClothing: ClothingOuterSRTCoat
