@@ -1,0 +1,17 @@
+﻿- type: entity
+  name: Cultist sender
+  parent: MobArachnid
+  id: CultistSender
+  components:
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYogSothothCult
+
+- type: entity
+  name: Cultist receiver
+  id: CultistReceiver
+  parent: MobArachnid
+  components:
+  - type: Telepathy
+    canSend: false
+    telepathyChannelPrototype: TelepathyChannelYogSothothCult
