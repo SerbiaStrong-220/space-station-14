@@ -20,7 +20,6 @@ public sealed class TelepathySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TelepathyComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<TelepathyComponent, TelepathySaidEvent>(OnTelepathySay);
     }
 
@@ -40,10 +39,5 @@ public sealed class TelepathySystem : EntitySystem
         );
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(new MsgChatMessage() {Message = message}, actor.PlayerSession.Channel);
-    }
-
-    private void OnComponentInit(EntityUid uid, TelepathyComponent component, ComponentInit args)
-    {
-        _actions.AddAction(uid, ref component.TelepathyActionEntity, component.TelepathyAction, uid);
     }
 }
