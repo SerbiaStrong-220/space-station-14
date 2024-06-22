@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Made by Nimfar11 (GitHub) for Space Station 14. Reptilian edit by Nairod(Github)",
+  "copyright": "Made by Nimfar11 (GitHub) for Space Station 14. Reptilian edit by Nairod(Github), equipped-MASK-vox sprited by dinazewwr (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -28,6 +28,10 @@
     },
     {
       "name": "equipped-MASK-Vulpkanin",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-vox",
       "directions": 4
     }
   ]

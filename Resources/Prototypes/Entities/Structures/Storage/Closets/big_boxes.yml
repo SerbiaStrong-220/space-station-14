@@ -37,7 +37,7 @@
       damageContainer: Box
     - type: Sprite
       noRot: true
-      sprite: Structures/Storage/closet.rsi
+      sprite: SS220/Structures/Storage/closet.rsi #SS220-Closet-Resprite
       layers:
       - state: cardboard
         map: ["enum.StorageVisualLayers.Base"]

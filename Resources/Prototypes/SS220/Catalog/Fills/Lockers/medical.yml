@@ -1,0 +1,17 @@
+- type: entity
+  id: LockerPsychologistFilled
+  suffix: Filled
+  parent: LockerPsychologist
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSyringe
+      - id: PlaceboPillCanister
+        amount: 2
+      - id: ClothingHandsGlovesLatex
+      - id: BoxZiptie
+      - id: ClothingOuterStraightjacket
+        amount: 2
+      - id: TherapeuticPai
+        amount: 2
+      - id: RubberStampPsychologist

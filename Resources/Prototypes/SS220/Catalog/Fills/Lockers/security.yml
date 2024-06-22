@@ -1,0 +1,38 @@
+- type: entity
+  id: WardenGasLocker
+  parent: LockerSleepingGasSecurity
+  suffix: Filled
+  name: шкаф с усыпляющим газом
+  description: Стандартное хранилище Nanotrasen.
+  components:
+  - type: StorageFill
+    contents:
+    - id: NitrousOxideTankFilled
+      amount: 3
+    - id: ClothingMaskBreath
+      amount: 3
+    - id: ClothingOuterStraightjacket
+      amount: 3
+
+- type: entity
+  id: LockerPilotFilled
+  suffix: Filled
+  parent: LockerPilot
+  components:
+  - type: StorageFill
+    contents:
+      - id: FlashlightSeclite
+      - id: WeaponDisabler
+        prob: 0.3
+      - id: ClothingOuterArmorBobmer
+      - id: ClothingHeadHatPilotBeret
+      - id: ClothingBeltSecurityFilled
+      - id: Flash
+      - id: ClothingEyesGlassesSecurity
+#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
+      - id: ClothingShoesBootsJack
+      - id: ClothingEyesHudSecurity
+      - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
+      - id: HandheldGPSBasic
+      - id: OxygenTankFilled
+      - id: NitrogenTankFilled
