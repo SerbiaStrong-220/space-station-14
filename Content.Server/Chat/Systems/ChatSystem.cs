@@ -256,7 +256,8 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntityEmote(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
                 break;
             case InGameICChatType.Telepathy:
-                RaiseLocalEvent(source, new TelepathySaidEvent() { Message = message });
+                if (TryComp(source, out TelepathyComponent? telepathyComponent) && telepathyComponent.CanSend)
+                    RaiseLocalEvent(source, new TelepathySaidEvent() { Message = message });
                 break;
         }
     }
