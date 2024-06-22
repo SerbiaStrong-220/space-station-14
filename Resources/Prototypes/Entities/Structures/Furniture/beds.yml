@@ -59,7 +59,9 @@
     anchored: true
     noRot: true
   - type: Anchorable
+    flags: 0 # SS220 NewPhysicsFix
   - type: Pullable
+  - type: Climbable # SS220 NewPhysicsFix
 
 
 - type: entity

@@ -1,3 +1,4 @@
+#Сервис
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitClowns
@@ -8,3 +9,58 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitHydroponicsBlue
+  name: blue hydroponics jumpsuit
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydroblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydroblue.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitHydroponicsWhite
+  name: white hydroponics jumpsuit
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydrowhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydrowhite.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformOverallsBlue
+  name: blue overalls
+  description: Great for working outdoors.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformOverallsGreen
+  name: green overalls
+  description: Great for working outdoors.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformOverallsWhite
+  name: white overalls
+  description: Great for working outdoors.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi

@@ -5,11 +5,25 @@
     ClothingBackpackSatchelHydroponics: 2
     ClothingBackpackDuffelHydroponics: 2
     ClothingOuterApronBotanist: 2
+    ClothingOuterApronBotanistGreen: 2 #SS220-BotanyResprite-Begin
+    ClothingOuterApronBotanistBrown: 2 #SS220-BotanyResprite-End
     ClothingUniformOveralls: 3
+    ClothingUniformOverallsBlue: 3 #SS220-BotanyResprite-Begin
+    ClothingUniformOverallsGreen: 3
+    ClothingUniformOverallsWhite: 3 #SS220-BotanyResprite-End
     ClothingUniformJumpsuitHydroponics: 3
+    ClothingUniformJumpsuitHydroponicsBlue: 3 #SS220-BotanyResprite-Begin
+    ClothingUniformJumpsuitHydroponicsWhite: 3 #SS220-BotanyResprite-End
     ClothingUniformJumpskirtHydroponics: 3
+    ClothingUniformJumpskirtHydroponicsBlue: 3 #SS220-BotanyResprite-Begin
+    ClothingUniformJumpskirtHydroponicsWhite: 3 #SS220-BotanyResprite-End
     ClothingNeckScarfStripedGreen: 3
     ClothingHeadBandBotany: 3
+    ClothingHeadBandBlueBotany: 3 #SS220-BotanyResprite-Begin
+    ClothingHeadHatTrucker: 3
+    ClothingHeadHatTruckerBlue: 3
+    ClothingHeadHatTruckerBrown: 3
+    ClothingHeadHatTruckerWhite: 3 #SS220-BotanyResprite-End
     ClothingHeadsetService: 2
     ClothingOuterWinterHydro: 2
 

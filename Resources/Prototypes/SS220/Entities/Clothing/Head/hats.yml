@@ -1,0 +1,33 @@
+#Сервис
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerBlue
+  name: blue trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-blue.rsi
+
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerBrown
+  name: brown trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-brown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-brown.rsi
+
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerWhite
+  name: white trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi

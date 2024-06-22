@@ -29,6 +29,5 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesSunglasses
-    gloves: ClothingHandsGlovesCaptain #SS220-loadout-captain
     id: CaptainPDA
     ears: ClothingHeadsetAltCommand
