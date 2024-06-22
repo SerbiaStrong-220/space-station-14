@@ -21,20 +21,19 @@ public sealed class TelepathySystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<TelepathyComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<TelepathyComponent, TelepathyActionEvent>(OnTelepathyActionPressed);
+        SubscribeLocalEvent<TelepathyComponent, TelepathySaidEvent>(OnTelepathySay);
     }
 
-    private void OnTelepathyActionPressed(EntityUid uid, TelepathyComponent component, TelepathyActionEvent args)
+    private void OnTelepathySay(EntityUid uid, TelepathyComponent component, TelepathySaidEvent args)
     {
         var netSource = _entityManager.GetNetEntity(uid);
-        var testMessageText = "Test message";
         var wrappedMessage = Loc.GetString(
             "chat-manager-server-wrap-message",
-            ("message", FormattedMessage.EscapeText(testMessageText))
+            ("message", FormattedMessage.EscapeText(args.Message))
         );
         var message = new ChatMessage(
             ChatChannel.Telepathy,
-            testMessageText,
+            args.Message,
             wrappedMessage,
             netSource,
             null
@@ -42,6 +41,7 @@ public sealed class TelepathySystem : EntitySystem
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(new MsgChatMessage() {Message = message}, actor.PlayerSession.Channel);
     }
+
     private void OnComponentInit(EntityUid uid, TelepathyComponent component, ComponentInit args)
     {
         _actions.AddAction(uid, ref component.TelepathyActionEntity, component.TelepathyAction, uid);

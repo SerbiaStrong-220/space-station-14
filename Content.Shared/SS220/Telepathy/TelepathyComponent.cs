@@ -28,7 +28,7 @@ public sealed partial class TelepathyActionEvent : InstantActionEvent
 
 }
 
-public sealed partial class TelepathySayEvent : InstantActionEvent
+public sealed partial class TelepathySaidEvent : InstantActionEvent
 {
     public string Message { get; init; }
 }
