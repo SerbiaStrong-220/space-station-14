@@ -12,3 +12,5 @@
       types:
         Asphyxiation: -0.5
   - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYogSothothCult

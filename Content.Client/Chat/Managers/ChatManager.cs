@@ -67,6 +67,10 @@ namespace Content.Client.Chat.Managers
                     _consoleHost.ExecuteCommand($"whisper \"{CommandParsing.Escape(str)}\"");
                     break;
 
+                case ChatSelectChannel.Telepathy:
+                    _consoleHost.ExecuteCommand($"telepathy \"{CommandParsing.Escape(str)}\"");
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(channel), channel, null);
             }
