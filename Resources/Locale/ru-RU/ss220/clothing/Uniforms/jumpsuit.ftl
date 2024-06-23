@@ -1,4 +1,4 @@
 ent-ClothingUniformJumpsuitCentcomOfficer = водолазка Центком
     .desc = Повседневная, но элегантная водолазка тёмного цвета, используемая офицерами Центком. От неё веет черникой.
-ent-ClothingUniformJumpsuitCentcomOfficer = униформа адмирала
+ent-ClothingUniformJumpsuitNanotrasenAdmiral = униформа адмирала
     .desc = Великолепная униформа, состоящая из черного шелка с золотыми нашивками.

@@ -321,8 +321,8 @@
   id: ClothingBackpackSatchelHoldingAdmin
   components:
 #SS-220 Admin memes start
-  - type: Sprite 
-    sprite: SS220/Clothing/Back/Backpacks/admin_backpacks.rsi 
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/admin_backpacks.rsi
   - type: Storage
     grid:
     - 0,0,19,9
@@ -344,7 +344,7 @@
     - id: AnomalyScanner
     - id: ForensicScanner
     - id: NodeScanner
-    - id: RubberStampCentcom
+    - id: RubberStampCentcomm #SS220-CentcomFashion
     - id: RubberStampApproved
     - id: RubberStampDenied
     - id: RubberStampSyndicate

@@ -11,12 +11,14 @@
       contents:
         - id: BoxSurvival
         - id: NTbaton
-        - id: RubberStampCentcom
+        - id: RubberStampCentcomm
         - id: Flash
         - id: CigarGoldCase
         - id: ExpensiveLighterNanotrasen
-        - id: BoxFolderBlack
+        - id: BoxFolderCentComm
         - id: BoxFolderBlue
+        - id: RubberStampApproved
+        - id: RubberStampDenied
 
 - type: entity
   parent: ClothingBackpack

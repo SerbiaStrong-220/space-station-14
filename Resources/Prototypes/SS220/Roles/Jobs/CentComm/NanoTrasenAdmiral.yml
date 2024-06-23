@@ -6,7 +6,7 @@
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: nanotrasendiplomat #Респрайт иконок потом
+      state: nanotrasenadmiral
     - type: RandomHumanoidSpawner
       settings: CentComNanoTrasenAdmiral
 
@@ -46,8 +46,9 @@
 - type: startingGear
   id: CentComNanoTrasenAdmiralGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCentcomOfficer
+    jumpsuit: ClothingUniformJumpsuitNanotrasenAdmiral
     shoes: ClothingShoesBootsLaceup
+    outerClothing: ClothingOuterArmorCentcomNavalCarapace
     head: ClothingHeadNavyCap
     eyes: ClothingEyesGlassesCentcom
     gloves: ClothingHandsGlovesCentcom
