@@ -823,7 +823,7 @@
   id: FloorTileCarpetMud
   name: carpet-mud
   sprite: /Textures/SS220/Tiles/mud.png
-  baseTurf: Plating
+  baseTurf: FloorDirt
   isSubfloor: false
   footstepSounds:
     collection: FootstepGrass
