@@ -820,8 +820,8 @@
   heatCapacity: 10000
 
 - type: tile
-  id: FloorTileCarpetMud
-  name: carpet-mud
+  id: FloorTileMud
+  name: mud
   sprite: /Textures/SS220/Tiles/mud.png
   baseTurf: Plating
   isSubfloor: false

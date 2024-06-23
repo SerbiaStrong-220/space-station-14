@@ -245,3 +245,9 @@
   spawn: FloorTileItemCarpetRed
   maxCount: 30
   itemSize: 5
+
+  id: FloorTileSend
+  name: send floor tile
+  spawn: FloorTileItemSend
+  maxCount: 30
+  itemSize: 5

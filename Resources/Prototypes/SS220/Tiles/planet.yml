@@ -1,0 +1,34 @@
+# Send
+- type: tile
+  id: FloorPlanetSend
+  name: tiles-send-planet-floor
+  sprite: /Textures/SS220/Tiles/Planet/Send/grass.png
+  variants: 9
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/Planet/Send/single_edge.png
+    NorthEast: /Textures/SS220/Tiles/Planet/Send/single_edge.png
+    NorthWest: /Textures/SS220/Tiles/Planet/Send/single_edge.png
+    SouthWest: /Textures/SS220/Tiles/Planet/Send/single_edge.png
+    South: /Textures/SS220/Tiles/Planet/Send/double_edge.png
+    East: /Textures/SS220/Tiles/Planet/Send/double_edge.png
+    North: /Textures/SS220/Tiles/Planet/Send/double_edge.png
+    West: /Textures/SS220/Tiles/Planet/Send/double_edge.png
+  baseTurf: FloorPlanetDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemSend
+  heatCapacity: 10000
+  weather: true
+  indestructible: true

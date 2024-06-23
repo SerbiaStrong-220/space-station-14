@@ -59,6 +59,17 @@
       "name": "wood_tile_red"
     },
     {
+      "name": "send"
+    },
+    {
+      "name": "send-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "send-inhand-left",
+      "directions": 4
+    },
+    {
       "name": "wood-black-inhand-right",
       "directions": 4
     },

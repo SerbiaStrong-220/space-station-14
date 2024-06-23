@@ -631,3 +631,21 @@
       - FloorTileCarpetOrange
   - type: Stack
     stackType: FloorTileStackCarpetOrange
+
+# Terrain
+- type: entity
+  name: send tile
+  parent: FloorTileItemBase
+  id: FloorTileItemSend
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tile_tg.rsi
+    state: send
+  - type: Item
+    heldPrefix: send
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSend
+  - type: Stack
+    stackType: FloorTileSend
