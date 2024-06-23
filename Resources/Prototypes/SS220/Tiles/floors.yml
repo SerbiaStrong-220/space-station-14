@@ -871,3 +871,13 @@
     collection: FootstepTile
   heatCapacity: 10000
 ###################
+
+- type: tile
+  id: FloorTileSand
+  name: sand
+  sprite: /Textures/SS220/Tiles/Planet/Sand/sand.png
+  baseTurf: FloorDirt
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
