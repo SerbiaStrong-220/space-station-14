@@ -634,18 +634,18 @@
 
 # Terrain
 - type: entity
-  name: send tile
+  name: sand tile
   parent: FloorTileItemBase
-  id: FloorTileItemSend
+  id: FloorTileItemSand
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/tile_tg.rsi
-    state: send
+    state: sand
   - type: Item
-    heldPrefix: send
+    heldPrefix: sand
   - type: FloorTile
     outputs:
       - Plating
-      - FloorSend
+      - FloorSand
   - type: Stack
-    stackType: FloorTileSend
+    stackType: FloorTileSand

@@ -246,8 +246,9 @@
   maxCount: 30
   itemSize: 5
 
-  id: FloorTileSend
-  name: send floor tile
-  spawn: FloorTileItemSend
+- type: stack
+  id: FloorTileSand
+  name: sand floor tile
+  spawn: FloorTileItemSand
   maxCount: 30
   itemSize: 5
