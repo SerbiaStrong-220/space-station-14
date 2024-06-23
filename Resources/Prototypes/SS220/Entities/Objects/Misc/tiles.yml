@@ -646,6 +646,6 @@
   - type: FloorTile
     outputs:
       - Plating
-      - FloorSand
+      - FloorTileSand
   - type: Stack
     stackType: FloorTileSand
