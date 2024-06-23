@@ -51,9 +51,9 @@
     outerClothing: ClothingOuterArmorCentcomNavalCarapace
     head: ClothingHeadNavyCap
     eyes: ClothingEyesGlassesCentcom
-    gloves: ClothingHandsGlovesCentcom
+    gloves: ClothingHandsGlovesNanotrasenDiplomat
     id: CentcomAdmiralPDA
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     neck: ClothingNeckCloakNanotrasenAdmiral
     belt: WeaponPulsePistol
     back: ClothingBackpackCentCommFilled

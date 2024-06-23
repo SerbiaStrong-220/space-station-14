@@ -11,6 +11,10 @@
   - type: ItemSlots
     slots:
       item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
         whitelist:
           tags:
           - JianSword
@@ -34,6 +38,10 @@
   - type: ItemSlots
     slots:
       item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
         whitelist:
           tags:
           - MinamotoNoYorimitsu
@@ -43,3 +51,31 @@
         whitelist:
           tags:
           - MinamotoNoYorimitsu
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltRapierSheath
+  name: rapier sheath
+  description: An elegant rapier scabbard made of leviathan leather.
+  suffix: 27 piercing
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/rapier_sheath.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/rapier_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Rapier
+  - type: ItemMapper
+    mapLayers:
+      sheath-rapier:
+        whitelist:
+          tags:
+          - Rapier

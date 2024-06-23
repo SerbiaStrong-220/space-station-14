@@ -20,9 +20,9 @@
 
 - type: entity
   parent: BaseItem
-  id: Rapier #TODO: Обязательно поменять палитру лезвия
+  id: Rapier
   name: rapier
-  description: ###
+  description: A graceful and elegant weapon that is the perfect choice for those who prefer a sophisticated style during combat.
   suffix: 27 piercing
   components:
   - type: Sharp
@@ -50,8 +50,6 @@
 - type: entity
   parent: Rapier
   id: RapierAlt
-  name: rapier
-  description: ###
   suffix: 15 piercing
   components:
   - type: MeleeWeapon
