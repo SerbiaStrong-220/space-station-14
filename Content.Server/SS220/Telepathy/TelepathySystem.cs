@@ -12,7 +12,6 @@ namespace Content.Server.SS220.Telepathy;
 /// </summary>
 public sealed class TelepathySystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
@@ -24,6 +23,19 @@ public sealed class TelepathySystem : EntitySystem
     }
 
     private void OnTelepathySay(EntityUid uid, TelepathyComponent component, TelepathySaidEvent args)
+    {
+        if (!HasComp<TelepathyComponent>(uid))
+            return;
+
+        var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
+        while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
+        {
+            if (component.TelepathyChannelPrototype == receiverTelepathy.TelepathyChannelPrototype)
+                SendMessageToChat(receiverUid, args);
+        }
+    }
+
+    private void SendMessageToChat(EntityUid uid, TelepathySaidEvent args)
     {
         var netSource = _entityManager.GetNetEntity(uid);
         var wrappedMessage = Loc.GetString(

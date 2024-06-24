@@ -21,6 +21,7 @@ using Content.Shared.Damage.ForceSay;
 using Content.Shared.Examine;
 using Content.Shared.Input;
 using Content.Shared.Radio;
+using Content.Shared.SS220.Telepathy;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -95,7 +96,7 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
         {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
-        { ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix}
+        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix}
     };
 
     /// <summary>
@@ -529,7 +530,6 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
-            FilterableChannels |= ChatChannel.Telepathy;
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -539,7 +539,6 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
-                CanSendChannels |= ChatSelectChannel.Telepathy;
             }
         }
 
@@ -557,6 +556,12 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.AdminAlert;
             FilterableChannels |= ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
+        }
+
+        if (_ent.HasComponent<TelepathyComponent>(_player.LocalEntity))
+        {
+            FilterableChannels |= ChatChannel.Telepathy;
+            CanSendChannels |= ChatSelectChannel.Telepathy;
         }
 
         SelectableChannels = CanSendChannels;
