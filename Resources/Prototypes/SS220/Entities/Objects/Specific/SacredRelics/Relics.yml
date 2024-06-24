@@ -1,0 +1,9 @@
+- type: entity
+  parent: ToyFigurineMime
+  id: SacredRelicMime
+  name: mimes relic
+  description: A figurine what is sacred for all mime around the galaxy.
+  components:
+  - type: UseDelay
+    delay: 2
+  - type: MimeRelic

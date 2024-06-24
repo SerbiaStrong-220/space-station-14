@@ -3,21 +3,17 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.SS220.MimeRelic
-
-[RegisterComponent]
-public sealed partial class MimeRelicComponent : Component
 {
-    [DataField("wallPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string WallPrototype = "WallInvisible";
+    [RegisterComponent]
+    public sealed partial class MimeRelicComponent : Component
+    {
+        [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        public string WallToPlacePrototype = "WallInvisible";
 
-    [DataField("cooldownTime")] 
-    public TimeSpan CooldownTime = TimeSpan.FromMinutes(2); // still need to think of dynamic of gameplay, base mime have like 2 times more cooldown, than lifetime         
+        [DataField]
+        public TimeSpan CooldownTime = TimeSpan.FromSeconds(90); // still need to think of dynamic of gameplay, base mime have like 2 times more cooldown, than lifetime         
 
-    [DataField("wallLifetime")] 
-    public TimeSpan WallLifetime = TimeSpan.FromSeconds(30); // still need to think of dynamic of gameplay     
-
-    // do i need to have here smthg like "lastUsedTime" or for fckng what it needed in component?
-
-    [DataField("spawnedWallEntity")] 
-    public EntityUid? SpawnedWallEntity;        
+        [DataField]
+        public TimeSpan WallLifetime = TimeSpan.FromSeconds(20); // still need to think of dynamic of gameplay 
+    }
 }
