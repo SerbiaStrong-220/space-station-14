@@ -229,12 +229,13 @@
       amount: -6
   metabolisms:
   # SS220 Change place medicine and add toxin damage to humans. begin
-    Poison:
+    Acidic:
+      methods: [ Touch ]
       effects:
       - !type:HealthChange
         damage:
           types:
-            Poison: 0.5
+            Poison: 1
   # SS220 Change place medicine and add toxin damage to humans. end
 
 
