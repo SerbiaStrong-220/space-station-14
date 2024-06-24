@@ -87,6 +87,7 @@
     - /PhotocopierForms/nanotrasen_station/security/sec_swt.xml
     - /PhotocopierForms/nanotrasen_station/security/sup_ord_wep.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_sitrep.xml
+    - /PhotocopierForms/nanotrasen_station/security/sec_prig.xml
   - Id: medical
     Name: Медицинский отдел
     Color: "#8585FFFF"
