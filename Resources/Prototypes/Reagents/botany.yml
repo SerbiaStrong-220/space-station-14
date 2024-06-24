@@ -228,12 +228,14 @@
     - !type:PlantAdjustWeeds
       amount: -6
   metabolisms:
+  # SS220 Change place medicine and add toxin damage to humans. begin
     Poison:
       effects:
       - !type:HealthChange
         damage:
           types:
-            Poison: 1 # SS220 It gaves the same damage to people and plants.
+            Poison: 0.5
+  # SS220 Change place medicine and add toxin damage to humans. end
 
 
 
