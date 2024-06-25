@@ -1,30 +1,29 @@
-using Content.Server.Popups;
-using Content.Shared.Interaction;
-using Content.Server.Abilities.Mime;
-using Robust.Shared.Containers;
-using Robust.Shared.Timing;
-using Robust.Shared.Map;
-using Content.Shared.Coordinates.Helpers;
-using Content.Shared.Maps;
-using Content.Shared.Physics;
-using Content.Shared.Mobs.Components;
-using System.Numerics;
-using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Prototypes;
-using Content.Shared.Timing;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-//Make in alphabetic
+using Content.Server.Abilities.Mime;
+using Content.Server.Popups;
+using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Interaction;
+using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
+using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+using Robust.Shared.Timing;
+using System.Numerics;
+
 namespace Content.Server.SS220.MimeRelic
 {
     public sealed class MimeRelicSystem : EntitySystem
     {
+        [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
         [Dependency] private readonly TurfSystem _turf = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
+
         private TimeSpan _timeWallCanBePlaced = TimeSpan.Zero;
         public override void Initialize()
         {
@@ -34,7 +33,7 @@ namespace Content.Server.SS220.MimeRelic
 
         private void OnMimeRelicActivate(EntityUid uid, MimeRelicComponent component, ActivateInWorldEvent args)
         {
-            args.Handled = true; // brainrot?
+            args.Handled = true;
             TryComp<MimePowersComponent>(args.User, out MimePowersComponent? mimePowersComponent);
             if (mimePowersComponent == null || mimePowersComponent.VowBroken)
             {
@@ -69,7 +68,6 @@ namespace Content.Server.SS220.MimeRelic
                 else if (CanPlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector)))
                     PlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector), component.WallToPlacePrototype, component.WallLifetime);
             // -2 is a magic number, whic gets neighbour tile opposite to central wall (oxCoo -> ooCox or ooCxo -> xoCoo)
-            // This is what i name FLEX
         }
 
         private bool CanPlaceWallInTile(EntityCoordinates cordToPlace)
