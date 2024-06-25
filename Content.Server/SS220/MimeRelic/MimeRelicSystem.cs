@@ -10,6 +10,9 @@ using Content.Shared.Physics;
 using Content.Shared.Mobs.Components;
 using System.Numerics;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
+using Content.Shared.Timing;
 
 //Make in alphabetic
 namespace Content.Server.SS220.MimeRelic
@@ -32,19 +35,18 @@ namespace Content.Server.SS220.MimeRelic
         private void OnMimeRelicActivate(EntityUid uid, MimeRelicComponent component, ActivateInWorldEvent args)
         {
             args.Handled = true; // brainrot?
-            if (HasComp<MimePowersComponent>(args.User) == false)
+            TryComp<MimePowersComponent>(args.User, out MimePowersComponent? mimePowersComponent);
+            if (mimePowersComponent == null || mimePowersComponent.VowBroken)
             {
                 _popupSystem.PopupEntity(Loc.GetString("mimeRelic-not-a-mime"), args.User, args.User);
                 return;
             }
 
             if (_timing.CurTime < _timeWallCanBePlaced)
-                return; // sendmsgToPopup 'text-on-cooldown' // args.handled to start cd? It even had it?!
+                return;
 
             if (_container.IsEntityOrParentInContainer(args.User))
                 return;
-
-            // check if that proto even exists.
 
             TransformComponent userTransform = Transform(args.User);
             Vector2 viewVector = userTransform.LocalRotation.ToWorldVec();
@@ -56,16 +58,18 @@ namespace Content.Server.SS220.MimeRelic
                 _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-failed"), args.User, args.User);
                 return;
             }
-            PlaceWallInTile(centralWallPosition, component.WallToPlacePrototype,component.WallLifetime);
+            PlaceWallInTile(centralWallPosition, component.WallToPlacePrototype, component.WallLifetime);
             _timeWallCanBePlaced = _timing.CurTime + component.CooldownTime;
+            _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-success"), args.User, args.User);
 
             var orderList = new List<int>() { -1, 1 };
             foreach (int sideTileOrder in orderList)
                 if (CanPlaceWallInTile(centralWallPosition.Offset(sideTileOrder * perpendToViewVector)))
-                    PlaceWallInTile(centralWallPosition.Offset(sideTileOrder * perpendToViewVector), component.WallToPlacePrototype,component.WallLifetime);
-            _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-success"), args.User, args.User);
-            //TODO additional walls if ZANAYTO *(-2)
-            //
+                    PlaceWallInTile(centralWallPosition.Offset(sideTileOrder * perpendToViewVector), component.WallToPlacePrototype, component.WallLifetime);
+                else if (CanPlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector)))
+                    PlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector), component.WallToPlacePrototype, component.WallLifetime);
+            // -2 is a magic number, whic gets neighbour tile opposite to central wall (oxCoo -> ooCox or ooCxo -> xoCoo)
+            // This is what i name FLEX
         }
 
         private bool CanPlaceWallInTile(EntityCoordinates cordToPlace)
