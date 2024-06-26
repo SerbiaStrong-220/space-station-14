@@ -991,6 +991,15 @@
   - SecurityBeret
   - SecurityHat
 
+#SS220 holster loadout begin
+- type: loadoutGroup
+  id: SecurityNeck
+  name: loadout-group-security-neck
+  minLimit: 0
+  loadouts:
+  - SecurityHolster
+#SS220 holster loadout end
+
 - type: loadoutGroup
   id: SecurityJumpsuit
   name: loadout-group-security-jumpsuit

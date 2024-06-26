@@ -271,6 +271,7 @@
   id: JobWarden
   groups:
   - WardenHead
+  - SecurityNeck #SS220 holster loadout
   - WardenJumpsuit
   - SecurityBackpack
   - SecurityBelt
@@ -282,6 +283,7 @@
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
@@ -294,7 +296,7 @@
   id: JobDetective
   groups:
   - DetectiveHead
-  - DetectiveNeck
+  # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
   - DetectiveBackpack
   - DetectiveOuterClothing
