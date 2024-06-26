@@ -40,7 +40,7 @@
   id: UplinkMimeRelic
   name: uplink-mime-relic-name
   description: uplink-mime-relic-desc
-  icon: { sprite: /Textures/SS220/Objects/Tools/lighters.rsi, state: zippo_syndi_icon_base }  
+  icon: { sprite: SS220/Objects/Specific/SacredRelics/SacredRelicMime.rsi, state: icon }  
   productEntity: SacredRelicMime
   cost:
     Telecrystal: 4

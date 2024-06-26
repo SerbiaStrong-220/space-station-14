@@ -15,5 +15,7 @@ namespace Content.Server.SS220.MimeRelic
         public TimeSpan CooldownTime = TimeSpan.FromSeconds(90); // still need to think of dynamic of gameplay.
         [DataField]
         public TimeSpan WallLifetime = TimeSpan.FromSeconds(20); // still need to think of dynamic of gameplay 
+        [DataField]
+        public TimeSpan TimeWallCanBePlaced = TimeSpan.Zero;
     }
 }

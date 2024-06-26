@@ -24,7 +24,6 @@ namespace Content.Server.SS220.MimeRelic
         [Dependency] private readonly SharedContainerSystem _container = default!;
         [Dependency] private readonly TurfSystem _turf = default!;
 
-        private TimeSpan _timeWallCanBePlaced = TimeSpan.Zero;
         public override void Initialize()
         {
             SubscribeLocalEvent<MimeRelicComponent, ActivateInWorldEvent>(OnMimeRelicActivate);
@@ -37,11 +36,11 @@ namespace Content.Server.SS220.MimeRelic
             TryComp<MimePowersComponent>(args.User, out MimePowersComponent? mimePowersComponent);
             if (mimePowersComponent == null || mimePowersComponent.VowBroken)
             {
-                _popupSystem.PopupEntity(Loc.GetString("mimeRelic-not-a-mime"), args.User, args.User);
+                _popupSystem.PopupEntity(Loc.GetString("mimeRelic-not-a-mime", ("user", args.User)), args.User);
                 return;
             }
 
-            if (_timing.CurTime < _timeWallCanBePlaced)
+            if (_timing.CurTime < component.TimeWallCanBePlaced)
                 return;
 
             if (_container.IsEntityOrParentInContainer(args.User))
@@ -54,12 +53,12 @@ namespace Content.Server.SS220.MimeRelic
 
             if (CanPlaceWallInTile(centralWallPosition) == false)
             {
-                _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-failed"), args.User, args.User);
+                _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-failed", ("mime", args.User)), args.User);
                 return;
             }
             PlaceWallInTile(centralWallPosition, component.WallToPlacePrototype, component.WallLifetime);
-            _timeWallCanBePlaced = _timing.CurTime + component.CooldownTime;
-            _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-success"), args.User, args.User);
+            component.TimeWallCanBePlaced = _timing.CurTime + component.CooldownTime;
+            _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-success", ("mime", args.User)), args.User);
 
             var orderList = new List<int>() { -1, 1 };
             foreach (int sideTileOrder in orderList)
