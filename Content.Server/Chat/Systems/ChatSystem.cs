@@ -257,7 +257,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 break;
             case InGameICChatType.Telepathy:
                 if (TryComp(source, out TelepathyComponent? telepathyComponent) && telepathyComponent.CanSend)
-                    RaiseLocalEvent(source, new TelepathySaidEvent() { Message = message });
+                    RaiseLocalEvent(source, new TelepathySendEvent() { Message = message });
                 break;
         }
     }
@@ -375,6 +375,15 @@ public sealed partial class ChatSystem : SharedChatSystem
             RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message));
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
+    }
+
+    public void DispatchTelepathyAnnouncement(string message, string telepathyChannel)
+    {
+        RaiseLocalEvent(new TelepathyAnnouncementSendEvent()
+        {
+            Message = message,
+            TelepathyChannel = telepathyChannel
+        });
     }
 
     #endregion

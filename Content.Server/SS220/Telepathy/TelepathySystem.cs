@@ -1,5 +1,4 @@
-﻿using Content.Server.Actions;
-using Content.Shared.Chat;
+﻿using Content.Shared.Chat;
 using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -19,32 +18,44 @@ public sealed class TelepathySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TelepathyComponent, TelepathySaidEvent>(OnTelepathySay);
+        SubscribeLocalEvent<TelepathyComponent, TelepathySendEvent>(OnTelepathySend);
+        SubscribeLocalEvent<TelepathyComponent, TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
     }
 
-    private void OnTelepathySay(EntityUid uid, TelepathyComponent component, TelepathySaidEvent args)
+    private void OnTelepathyAnnouncementSend(EntityUid uid, TelepathyComponent component, TelepathyAnnouncementSendEvent args)
+    {
+        SendMessageToEveryoneWithRightChannel(args.TelepathyChannel, args.Message);
+    }
+
+    private void OnTelepathySend(EntityUid uid, TelepathyComponent component, TelepathySendEvent args)
     {
         if (!HasComp<TelepathyComponent>(uid))
             return;
 
+        SendMessageToEveryoneWithRightChannel(component.TelepathyChannelPrototype, args.Message);
+    }
+
+    private void SendMessageToEveryoneWithRightChannel(string rightTelepathyChanel, string message)
+    {
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
-            if (component.TelepathyChannelPrototype == receiverTelepathy.TelepathyChannelPrototype)
-                SendMessageToChat(receiverUid, args);
+            if (rightTelepathyChanel == receiverTelepathy.TelepathyChannelPrototype)
+                SendMessageToChat(receiverUid, message);
         }
     }
 
-    private void SendMessageToChat(EntityUid uid, TelepathySaidEvent args)
+
+    private void SendMessageToChat(EntityUid uid, string messageString)
     {
         var netSource = _entityManager.GetNetEntity(uid);
         var wrappedMessage = Loc.GetString(
             "chat-manager-server-wrap-message",
-            ("message", FormattedMessage.EscapeText(args.Message))
+            ("message", FormattedMessage.EscapeText(messageString))
         );
         var message = new ChatMessage(
             ChatChannel.Telepathy,
-            args.Message,
+            messageString,
             wrappedMessage,
             netSource,
             null

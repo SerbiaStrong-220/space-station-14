@@ -3,14 +3,14 @@ using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 
-namespace Content.Server.SS220.Chat.Command;
+namespace Content.Server.SS220.Chat.Command.Telepathy;
 
 [AnyCommand]
 public sealed class TelepathyCommand : IConsoleCommand
 {
     public string Command => "telepathy";
     public string Description => "Send message through the power of mind";
-    public string Help => "telepathy <text>";
+    public string Help => $"{Command} <text>";
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (shell.Player is not { } player)
