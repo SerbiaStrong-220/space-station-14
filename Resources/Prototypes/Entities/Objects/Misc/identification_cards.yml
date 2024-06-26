@@ -876,7 +876,7 @@
   - type: Unremoveable
 
 - type: entity
-  parent: EngineeringIDCard
+  parent: IDCardStandard
   id: SeniorEngineerIDCard
   name: senior engineer ID card
   components:
@@ -884,9 +884,11 @@
     layers:
     - state: default
     - state: idseniorengineer
+  - type: PresetIdCard
+    job: SeniorEngineer
 
 - type: entity
-  parent: ResearchIDCard
+  parent: IDCardStandard
   id: SeniorResearcherIDCard
   name: senior researcher ID card
   components:
@@ -894,9 +896,12 @@
     layers:
     - state: default
     - state: idseniorresearcher
+  - type: PresetIdCard
+    job: SeniorResearcher
+    
 
 - type: entity
-  parent: MedicalIDCard
+  parent: IDCardStandard
   id: SeniorPhysicianIDCard
   name: senior physician ID card
   components:
@@ -904,9 +909,11 @@
     layers:
     - state: default
     - state: idseniorphysician
-
+  - type: PresetIdCard
+    job: SeniorPhysician
+    
 - type: entity
-  parent: SecurityIDCard
+  parent: IDCardStandard
   id: SeniorOfficerIDCard
   name: senior officer ID card
   components:
@@ -914,6 +921,8 @@
     layers:
     - state: default
     - state: idseniorofficer
+  - type: PresetIdCard
+    job: SeniorOfficer
 
 - type: entity
   parent: IDCardStandard
