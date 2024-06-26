@@ -32,6 +32,7 @@
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
+            SeniorOfficer: [ 1, 1]
             Detective: [ 1, 1 ]
             SecurityPilot: [ 2, 2 ]
             SecurityOfficer: [ 6, 6 ]
@@ -39,6 +40,7 @@
             Brigmedic: [ 1, 1 ]
             #Engineering
             ChiefEngineer: [ 1, 1 ]
+            SeniorEngineer: [ 1, 1]
             StationEngineer: [ 8, 8 ]
             AtmosphericTechnician: [ 3, 3 ]
             TechnicalAssistant: [ 3, 3 ]
@@ -48,6 +50,7 @@
             SalvageSpecialist: [ 3, 3 ]
             #Medical
             ChiefMedicalOfficer: [ 1, 1 ]
+            SeniorPhysician: [ 1, 1]
             MedicalDoctor: [ 7, 7 ]
             Chemist: [ 2, 2 ]
             Psychologist: [ 1, 1 ]
@@ -55,6 +58,7 @@
             Paramedic: [ 1, 1 ]
             #Science
             ResearchDirector: [ 1, 1 ]
+            SeniorResearcher: [ 1, 1]
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 3, 3 ]
             Borg: [ 2, 2 ]
