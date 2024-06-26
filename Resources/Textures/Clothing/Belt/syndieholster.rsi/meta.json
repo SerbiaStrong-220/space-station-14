@@ -11,7 +11,8 @@
       "name": "icon"
     },
     {
-      "name": "equipped-BELT",
+      "_comment": "SS220 change BELT to NECK",
+      "name": "equipped-NECK",
       "directions": 4
     },
     {
