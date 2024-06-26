@@ -63,8 +63,13 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -20
   - type: Gun
     fireRate: 5
+    angleIncrease: 2
+    angleDecay: 12
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider
@@ -156,7 +161,12 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -20
   - type: Gun
+    angleIncrease: 2
+    angleDecay: 12
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
   - type: ItemSlots
