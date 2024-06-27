@@ -82,6 +82,7 @@ public sealed class ChatUIController : UIController
         {SharedChatSystem.AdminPrefix, ChatSelectChannel.Admin},
         {SharedChatSystem.RadioCommonPrefix, ChatSelectChannel.Radio},
         {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead},
+        //ss220-telepathy
         {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy}
     };
 
@@ -96,6 +97,7 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
         {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
+        //ss220-telepathy
         {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix}
     };
 
@@ -558,11 +560,13 @@ public sealed class ChatUIController : UIController
             CanSendChannels |= ChatSelectChannel.Admin;
         }
 
+        //ss220-telepathy-begin
         if (_ent.HasComponent<TelepathyComponent>(_player.LocalEntity))
         {
             FilterableChannels |= ChatChannel.Telepathy;
             CanSendChannels |= ChatSelectChannel.Telepathy;
         }
+        //ss220-telepathy-end
 
         SelectableChannels = CanSendChannels;
 

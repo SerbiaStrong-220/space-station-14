@@ -85,6 +85,7 @@ namespace Content.Shared.Chat
         /// </summary>
         Unspecified = 1 << 14,
 
+        //ss220-telepathy
         Telepathy = 1 << 15,
 
         /// <summary>

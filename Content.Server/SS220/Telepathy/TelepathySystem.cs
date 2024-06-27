@@ -1,4 +1,6 @@
-﻿using Content.Shared.Chat;
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Chat;
 using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -7,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Server.SS220.Telepathy;
 
 /// <summary>
-/// This handles telepathy
+/// This handles events related to sending messages over the telepathy channel
 /// </summary>
 public sealed class TelepathySystem : EntitySystem
 {

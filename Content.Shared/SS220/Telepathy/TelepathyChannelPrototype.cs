@@ -1,4 +1,6 @@
-﻿using Robust.Shared.Prototypes;
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Telepathy;
 
@@ -14,11 +16,6 @@ public sealed partial class TelepathyChannelPrototype : IPrototype
     [ViewVariables(VVAccess.ReadOnly)]
     public string LocalizedName => Loc.GetString(Name);
 
-    /// <summary>
-    /// Single-character prefix to determine what channel a message should be sent to.
-    /// </summary>
-    [DataField("keycode")]
-    public char KeyCode { get; private set; } = '\0';
 
     [DataField("color")]
     public Color Color { get; private set; } = Color.Lime;

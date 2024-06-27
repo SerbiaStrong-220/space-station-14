@@ -22,6 +22,7 @@ public abstract class SharedChatSystem : EntitySystem
     public const char WhisperPrefix = ',';
     public const char EmotesAltPrefix = '*';
     public const char DefaultChannelKey = 'р';
+    //ss220-telepathy
     public const char TelepathyChannelPrefix = '|';
 
     [ValidatePrototypeId<RadioChannelPrototype>]
