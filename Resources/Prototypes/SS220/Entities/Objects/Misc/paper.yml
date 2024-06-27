@@ -30,7 +30,7 @@
   name: paper
   parent: Paper
   id: PaperNtFormLaw
-  suffix: Юр. форма
+  suffix: Форма внут. дел
   description: "A sheet of paper with a NanoTrasen logo on it. There is a law department label on it."
   components:
     - type: PaperVisuals
