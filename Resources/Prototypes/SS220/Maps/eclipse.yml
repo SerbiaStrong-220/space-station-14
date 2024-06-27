@@ -10,7 +10,7 @@
       stationProto: EclipseNanotrasenStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_eclipse.yml
         - type: StationRandomTransform
           enableStationRotation: false
           maxStationOffset: null
