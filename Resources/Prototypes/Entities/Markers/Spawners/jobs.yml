@@ -96,6 +96,12 @@
   components:
   - type: SpawnPoint
     job_id: TechnicalAssistant
+  # ss220 spawner icon fix begin
+  - type: Sprite
+    layers:
+      - state: green
+      - state: technicalassistant
+  # ss220 spawner icon fix end
 
 - type: entity
   id: SpawnPointMedicalIntern
@@ -104,6 +110,12 @@
   components:
   - type: SpawnPoint
     job_id: MedicalIntern
+  # ss220 spawner icon fix begin
+  - type: Sprite
+    layers:
+      - state: green
+      - state: medicalintern
+  # ss220 spawner icon fix end
 
 - type: entity
   id: SpawnPointSecurityCadet
@@ -124,6 +136,12 @@
   components:
   - type: SpawnPoint
     job_id: ResearchAssistant
+# ss220 spawner icon fix begin
+  - type: Sprite
+    layers:
+      - state: green
+      - state: researchassistant
+# ss220 spawner icon fix end
 
 - type: entity
   id: SpawnPointServiceWorker
@@ -132,6 +150,12 @@
   components:
   - type: SpawnPoint
     job_id: ServiceWorker
+# ss220 spawner icon fix begin
+  - type: Sprite
+    layers:
+      - state: green
+      - state: serviceworker
+# ss220 spawner icon fix end
 
 - type: entity
   id: SpawnPointBartender
