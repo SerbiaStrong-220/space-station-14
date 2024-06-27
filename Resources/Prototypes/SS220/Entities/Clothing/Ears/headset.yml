@@ -1,0 +1,31 @@
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltCommandInternalAffairs
+  name: полноразмерная гарнитура департамента внутренних дел
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyInternalAffairs
+      - EncryptionKeyStationMaster
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/command.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/command.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetLawyer
+  name: гарнитура адвоката
+  description: Её используют представители закона.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyInternalAffairs
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/security.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/security.rsi

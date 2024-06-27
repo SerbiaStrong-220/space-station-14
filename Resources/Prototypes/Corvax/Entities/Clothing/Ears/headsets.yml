@@ -8,5 +8,6 @@
       containers:
         key_slots:
         - EncryptionKeyIAA
+        - EncryptionKeyInternalAffairs #SS220-InternalAffairs
     - type: Sprite
       sprite: Clothing/Ears/Headsets/servicesecurity.rsi

@@ -148,7 +148,7 @@
   keycode: "\u00C9"
   frequency: 1591
 # Admin memes start
-- type: radioChannel 
+- type: radioChannel
   id: ChannelMafia
   name: Мафия
   keycode: 'з'
@@ -191,3 +191,10 @@
   color: "#FFB6C1"
   longRange: true
 # Admin memes end
+
+- type: radioChannel
+  id: InternalAffairs
+  name: Внутренние дела
+  keycode: 'в'
+  frequency: 1488
+  color: "#5a463e"
