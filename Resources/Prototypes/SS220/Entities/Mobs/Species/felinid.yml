@@ -78,6 +78,9 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Felinid
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 10
+    baseSprintSpeed: 1
   - type: MeleeWeapon
     soundHit:
       collection: Punch
