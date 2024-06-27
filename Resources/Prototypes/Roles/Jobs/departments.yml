@@ -24,7 +24,7 @@
   - Detective
   - HeadOfPersonnel
   - Janitor
-  - Lawyer
+#  - Lawyer #SS220-Internal-Affairs
   - Librarian
   - Mime
   - Musician
@@ -41,7 +41,7 @@
   color: "#052EED"
   roles:
   - Captain
-  - IAA # Corvax-IAA
+#  - IAA #SS220-Internal-Affairs
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -49,7 +49,7 @@
   - HeadOfSecurity
   - ResearchDirector
   - Quartermaster
-  - BlueShield
+#  - BlueShield #SS220-Internal-Affairs
   primary: false
   weight: 100
 
