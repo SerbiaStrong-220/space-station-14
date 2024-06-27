@@ -380,15 +380,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
 
-    public void DispatchTelepathyAnnouncement(string message, string telepathyChannel)
-    {
-        RaiseLocalEvent(new TelepathyAnnouncementSendEvent()
-        {
-            Message = message,
-            TelepathyChannel = telepathyChannel
-        });
-    }
-
     #endregion
 
     #region Private API
@@ -980,6 +971,7 @@ public enum InGameICChatType : byte
     Speak,
     Emote,
     Whisper,
+    //ss220-telepathy
     Telepathy
 }
 
