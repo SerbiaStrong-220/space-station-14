@@ -204,6 +204,13 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         var playerPool = GetPlayerPool(ent, pool, def);
         var count = GetTargetAntagCount(ent, playerPool, def);
 
+        // ss220 edit start
+        if (ent.Comp.SelectionTime == AntagSelectionTime.PrePlayerSpawn)
+        {
+            def.PickPlayer = false;
+        }
+        // ss220 edit end
+
         for (var i = 0; i < count; i++)
         {
             var session = (ICommonSession?) null;
