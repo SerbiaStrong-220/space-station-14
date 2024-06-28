@@ -48,7 +48,7 @@ namespace Content.Server.DeviceLinking.Systems
             {
                 if (state == SignalState.High || state == SignalState.Momentary)
                 {
-                    if (door.State != DoorState.Closed)
+                    if (door.State == DoorState.Closed) // ss220 edit blast-door
                         _doorSystem.TryOpen(uid, door);
                 }
             }
@@ -56,7 +56,7 @@ namespace Content.Server.DeviceLinking.Systems
             {
                 if (state == SignalState.High || state == SignalState.Momentary)
                 {
-                    if (door.State != DoorState.Open)
+                    if (door.State == DoorState.Open) // ss220 edit blast-door
                         _doorSystem.TryClose(uid, door);
                 }
             }
