@@ -78,9 +78,11 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Felinid
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 10
-    baseSprintSpeed: 1
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Critical
+      180: Dead
   - type: MeleeWeapon
     soundHit:
       collection: Punch
