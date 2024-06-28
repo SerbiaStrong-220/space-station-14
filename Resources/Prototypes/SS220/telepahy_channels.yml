@@ -1,8 +1,3 @@
 ﻿- type: telepathyChannel
   id: TelepathyChannelYogSothothCult
   name: chat-telepathy-yogsothothcult
-
-#It exists for testing purposes only. Delete before pull.
-- type: telepathyChannel
-  id: TelepathyChannelYogSothothCult1
-  name: chat-telepathy-yogsothothcult1
