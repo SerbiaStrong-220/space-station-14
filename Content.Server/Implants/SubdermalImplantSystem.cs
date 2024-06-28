@@ -239,7 +239,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
             _humanoidAppearance.LoadProfile(ent, newProfile, humanoid);
             _metaData.SetEntityName(ent, newProfile.Name);
-            _identity.QueueIdentityUpdate(ent);
+            _identity.QueueIdentityUpdate(ent); //ss220 edit
             if (TryComp<DnaComponent>(ent, out var dna))
             {
                 dna.DNA = _forensicsSystem.GenerateDNA();
