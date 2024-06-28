@@ -21,6 +21,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using System.Numerics;
+using Content.Server.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.Collections;
@@ -43,6 +44,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly IdentitySystem _identity = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -237,6 +239,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
             _humanoidAppearance.LoadProfile(ent, newProfile, humanoid);
             _metaData.SetEntityName(ent, newProfile.Name);
+            _identity.QueueIdentityUpdate(ent);
             if (TryComp<DnaComponent>(ent, out var dna))
             {
                 dna.DNA = _forensicsSystem.GenerateDNA();

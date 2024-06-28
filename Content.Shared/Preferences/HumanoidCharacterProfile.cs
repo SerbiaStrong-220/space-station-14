@@ -269,6 +269,7 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
+                Voice = voiceId
             };
         }
 
