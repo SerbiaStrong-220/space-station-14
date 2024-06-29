@@ -385,7 +385,7 @@
     - node: TableCarpet
       entity: TableCarpet
       edges:
-        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+        - to: TableWood
           completed:
             - !type:SpawnPrototype
               prototype: MaterialCloth1
