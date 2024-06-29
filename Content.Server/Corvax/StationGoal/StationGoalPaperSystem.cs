@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Fax;
+using Content.Server.GameTicking;
 using Content.Server.Paper;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
@@ -19,6 +20,12 @@ namespace Content.Server.Corvax.StationGoal
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly FaxSystem _faxSystem = default!;
+        [Dependency] private readonly GameTicker _gameTicker = default!;
+
+        /// <summary>
+        /// Idk how to make configs so let's put it here :\
+        /// </summary>
+        private const int PlayersCountWhenPopulationIsHigh = 50;
 
         public override void Initialize()
         {
@@ -28,12 +35,21 @@ namespace Content.Server.Corvax.StationGoal
 
         private void OnRoundStarted(RoundStartedEvent ev)
         {
-            SendRandomGoal();
+            if (_gameTicker.PlayersJoinedRoundNormally > PlayersCountWhenPopulationIsHigh)
+            {
+                SendRandomGoal(GoalType.HighPopulation);
+            }
+            else
+            {
+                SendRandomGoal(GoalType.LowPopulation);
+            }
         }
 
-        public bool SendRandomGoal()
+        public bool SendRandomGoal(GoalType goalType = GoalType.AnyPopulation)
         {
-            var availableGoals = _prototypeManager.EnumeratePrototypes<StationGoalPrototype>().ToList();
+            var availableGoals = _prototypeManager.EnumeratePrototypes<StationGoalPrototype>()
+                    .Where(goal => goal.GoalType == GoalType.AnyPopulation || goal.GoalType == goalType)
+                    .ToList();
             var goal = _random.Pick(availableGoals);
             return SendStationGoal(goal);
         }
