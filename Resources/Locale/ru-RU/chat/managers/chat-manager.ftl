@@ -32,6 +32,8 @@ chat-manager-send-admin-dead-chat-wrap-message = { $adminChannelName }: [bold]([
 chat-manager-send-admin-chat-wrap-message = { $adminChannelName }: [bold]{ $playerName }:[/bold] { $message }
 chat-manager-send-admin-announcement-wrap-message = [bold]{ $adminChannelName }: { $message }[/bold]
 chat-manager-send-hook-ooc-wrap-message = OOC: [bold](D){ $senderName }:[/bold] { $message }
+chat-manager-send-telepathy-message = [color=purple]Эхо разума { $senderName }: { $message }[/color]
+chat-manager-send-telepathy-announce = [color=purple]Эхо разума: { $announce }[/color]
 chat-manager-dead-channel-name = МЁРТВЫЕ
 chat-manager-admin-channel-name = АДМИН
 chat-manager-rate-limited = Вы отправляете сообщения слишком быстро!

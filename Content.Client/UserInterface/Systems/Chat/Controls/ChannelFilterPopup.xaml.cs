@@ -16,6 +16,8 @@ public sealed partial class ChannelFilterPopup : Popup
         ChatChannel.Whisper,
         ChatChannel.Emotes,
         ChatChannel.Radio,
+        //ss220-telepathy
+        ChatChannel.Telepathy,
         ChatChannel.Notifications,
         ChatChannel.LOOC,
         ChatChannel.OOC,
