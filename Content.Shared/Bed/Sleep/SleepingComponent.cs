@@ -28,4 +28,7 @@ public sealed partial class SleepingComponent : Component
     public TimeSpan CoolDownEnd;
 
     [DataField("wakeAction")] public EntityUid? WakeAction;
+
+    //SS220 No vocal emotes when muzzled
+    [DataField("sleepingEmotes")] public string SleepingEmotes = "SleepingEmotesSS220";//Name of the dataset, that will replace regular emote
 }

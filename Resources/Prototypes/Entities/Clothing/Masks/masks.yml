@@ -313,6 +313,7 @@
   - type: Construction
     graph: Muzzle
     node: muzzle
+  - type: Muzzle #SS220 No vocal emotes when muzzled
 
 - type: entity
   parent: ClothingMaskPullableBase

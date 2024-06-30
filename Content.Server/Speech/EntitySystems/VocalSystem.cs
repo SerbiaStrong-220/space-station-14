@@ -9,7 +9,8 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
+using Content.Shared.SS220.Speech;
+using Content.Shared.SS220.Muzzle;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -60,10 +61,13 @@ public sealed class VocalSystem : EntitySystem
     {
         if (args.Handled || !args.Emote.Category.HasFlag(EmoteCategory.Vocal))
             return;
-            
+
+        if (HasComp<MuzzledComponent>(uid))// SS220 No_vocal_emotes_when_muzzled
+            return;
+
         // SS220 Chat-Special-Emote begin
         //Will play special emote if it exists
-        if(CheckSpecialSounds(uid, component, args.Emote))
+        if (CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
