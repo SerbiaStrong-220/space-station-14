@@ -48754,7 +48754,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#006600FF'
+      - stampedColor: '#dca019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: Данные импланты ОБЯЗАНЫ быть вколоты ОСО в начале КАЖДОЙ смены
     - type: Physics
@@ -49157,7 +49157,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#006600FF'
+      - stampedColor: '#dca019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: >
         [bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
@@ -49265,7 +49265,7 @@ entities:
       stampedBy:
       - stampedColor: '#A35061FF'
         stampedName: Инженерное Бюро Архитекторов
-      - stampedColor: '#006600FF'
+      - stampedColor: '#dca019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: >
         [bold]Вечные почести самым ответственным лицам и архитекторам NanoTrasen. [/bold]
@@ -53685,7 +53685,7 @@ entities:
     - type: Stamp
       stampedName: Офицер Спецопераций
       stampedColor: '#3E5F8AFF'
-- proto: RubberStampCentcom
+- proto: RubberStampCentcomm
   entities:
   - uid: 6748
     components:

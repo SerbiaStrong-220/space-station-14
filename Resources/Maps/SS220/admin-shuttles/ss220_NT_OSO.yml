@@ -3527,7 +3527,7 @@ entities:
     - type: Stamp
       stampedName: Офицер Спецопераций
       stampedColor: '#3E5F8AFF'
-- proto: RubberStampCentcom
+- proto: RubberStampCentcomm
   entities:
   - uid: 447
     components:

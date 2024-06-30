@@ -49,8 +49,9 @@
     jumpsuit: ClothingUniformCentCommOfficer
     shoes: ClothingShoesBootsLaceup
     head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesBlueShield
-    gloves: ClothingHandsGlovesLatex
+    outerClothing: ClothingOuterCoatCentcomJacket
+    eyes: ClothingEyesGlassesCentcom
+    gloves: ClothingHandsGlovesCentcom
     id: CentcomOfficerPDA
     ears: ClothingHeadsetAltCentComm
     belt: WeaponPulsePistol

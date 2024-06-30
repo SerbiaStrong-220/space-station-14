@@ -5,18 +5,20 @@
   id: ClothingBackpackCentCommFilled
   name: кожаная сумка
   description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
-  noSpawn: True
+#  noSpawn: True #Зачем?..
   components:
     - type: StorageFill
       contents:
         - id: BoxSurvival
         - id: NTbaton
-        - id: RubberStampCentcom
+        - id: RubberStampCentcomm
         - id: Flash
         - id: CigarGoldCase
         - id: ExpensiveLighterNanotrasen
-        - id: BoxFolderBlack
+        - id: BoxFolderCentComm
         - id: BoxFolderBlue
+        - id: RubberStampApproved
+        - id: RubberStampDenied
 
 - type: entity
   parent: ClothingBackpack

@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingEyesGlassesSecurity
+  id: ClothingEyesGlassesCentcom
+  name: centcom glasses
+  description: Upgraded sunglasses that provide flash immunity and a security HUD.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/centcom_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/centcom_glasses.rsi

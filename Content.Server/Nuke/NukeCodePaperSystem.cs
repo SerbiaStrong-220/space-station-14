@@ -70,7 +70,7 @@ namespace Content.Server.Nuke
                     StampState = "paper_stamp-centcom",
                     StampedBy = new List<StampDisplayInfo>
                     {
-                        new StampDisplayInfo { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#006600") },
+                        new StampDisplayInfo { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#dca019") }, //SS220-CentcomFashion-Changed the stamp color
                     }
                 };
                 dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);

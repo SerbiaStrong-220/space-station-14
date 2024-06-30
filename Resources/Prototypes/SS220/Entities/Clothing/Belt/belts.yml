@@ -7,10 +7,14 @@
   - type: Sprite
     sprite: SS220/Clothing/Belt/jian_sheath.rsi
   - type: Clothing
-    sprite: SS220Clothing/Belt/jian_sheath.rsi
+    sprite: SS220/Clothing/Belt/jian_sheath.rsi
   - type: ItemSlots
     slots:
       item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
         whitelist:
           tags:
           - JianSword
@@ -20,3 +24,58 @@
         whitelist:
           tags:
           - JianSword
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltMinamotoNoYorimitsuSheath
+  name: minamoto no yorimitsu sheath
+  description: The legendary sheath for the legendary sword.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/centcom_katana_sheath.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/centcom_katana_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - MinamotoNoYorimitsu
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          tags:
+          - MinamotoNoYorimitsu
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltRapierSheath
+  name: rapier sheath
+  description: An elegant rapier scabbard made of leviathan leather.
+  suffix: 27 piercing
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/rapier_sheath.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/rapier_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Rapier
+  - type: ItemMapper
+    mapLayers:
+      sheath-rapier:
+        whitelist:
+          tags:
+          - Rapier

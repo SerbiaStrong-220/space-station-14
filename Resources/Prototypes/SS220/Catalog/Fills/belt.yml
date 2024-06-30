@@ -1,0 +1,34 @@
+- type: entity
+  id: ClothingBeltJianSheathFilled
+  parent: ClothingBeltJianSheath
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - JianSword
+
+- type: entity
+  id: ClothingBeltMinamotoNoYorimitsuSheathFilled
+  parent: ClothingBeltMinamotoNoYorimitsuSheath
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - MinamotoNoYorimitsu
+
+- type: entity
+  id:  ClothingBeltRapierSheathFilled
+  parent:  ClothingBeltRapierSheath
+  suffix: Filled, 27 piercing
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - Rapier
+
+- type: entity
+  id:  ClothingBeltRapierSheathAltFilled
+  parent: ClothingBeltRapierSheathFilled
+  suffix: Filled, 15 piercing

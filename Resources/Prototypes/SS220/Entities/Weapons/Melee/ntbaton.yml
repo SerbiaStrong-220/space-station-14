@@ -16,12 +16,12 @@
     closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
     damageOpen:
       types:
-        Blunt: 28
-        Stamina: 120
+        Blunt: 120
+        Stamina: 0
     damageFolded:
       types:
-        Blunt: 0
-        Stamina: 0
+        Blunt: 28
+        Stamina: 120
     sizeOpened: Large
     sizeClosed: Small
   - type: StaminaDamageOnHit

@@ -1,3 +1,83 @@
+# CentCom
+
+  # Берет
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNanoTrasenOfficer
+  name: берет Офицера NanoTrasen
+  description: Чёрный офицерский берет с выгравированным щитом и мечом, объявляющий миру, что его владелец является защитником NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNanoTrasenDiplomat
+  name: beret diplomat NanoTrasen
+  description: A white beret with an engraved shield and sword, announcing to the world that its owner is the defender of NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_diplomat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+  # Фуражка
+- type: entity
+  parent: ClothingHeadWhiteCaptainHat
+  id: ClothingHeadNavyCap
+  name: navy cap
+  description: A mandatory element of the uniform for all officers and crew members, emphasizing their belonging to a powerful corporation.
+
+- type: entity
+  parent: ClothingHeadBigCapHoS
+  id: ClothingHeadHatNavyFieldOfficerCap
+  name: фуражка полевого Офицера
+  description: Если видите её владельца на станции, прячьте колени.
+  components:
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadCentcomCapNaval
+  name: naval cap
+  description: A cap worn by those in the Nanotrasen Navy.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
+
+  # Шапка
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCentcomm
+  name: CentCom brand hat
+  description: "It's good to be the emperor."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/centcom.rsi
+  - type: Tag
+    tags:
+    - Ian
+
 #Сервис
 - type: entity
   parent: ClothingHeadHeadHatBaseFlippable

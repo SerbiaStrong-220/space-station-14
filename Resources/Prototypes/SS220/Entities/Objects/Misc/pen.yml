@@ -13,8 +13,8 @@
     - WriteIgnoreStamps
     - Pickaxe
   - type: Sprite
-    sprite: SS220/Objects/Tools/pen.rsi
-    state: centcommnew_pen
+    sprite: SS220/Objects/Misc/pen.rsi
+    state: pen_centcom
   - type: MeleeWeapon
     wideAnimationRotation: -45
     damage:
@@ -28,5 +28,5 @@
     useSound:
       collection: Screwdriver
   - type: Item
-    sprite: SS220/Objects/Tools/pen.rsi
+    sprite: SS220/Objects/Misc/pen.rsi
     size: Tiny
