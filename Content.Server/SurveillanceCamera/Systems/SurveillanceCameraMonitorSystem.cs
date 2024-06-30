@@ -230,8 +230,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
     {
         if (!Resolve(uid, ref monitor)
             || monitor.LastHeartbeatSent < _heartbeatDelay
-            || monitor.ActiveSubnet == null // SS220 Camera-Map
-            || !monitor.KnownSubnets.TryGetValue(monitor.ActiveSubnet, out var subnetAddress))
+            || monitor.ActiveSubnet == null) // SS220 Camera-Map
         {
             return;
         }
@@ -242,7 +241,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
             { SurveillanceCameraSystem.CameraAddressData, monitor.ActiveCameraAddress }
         };
 
-        _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
+        _deviceNetworkSystem.QueuePacket(uid, monitor.ActiveSubnet, payload); //ss220 edit
     }
 
     private void DisconnectCamera(EntityUid uid, bool removeViewers, SurveillanceCameraMonitorComponent? monitor = null)
