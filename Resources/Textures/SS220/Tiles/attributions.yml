@@ -37,3 +37,13 @@
   license: "CC0-1.0"
   copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, rglass modified by github user @notquitehadouken, modified by github user @Kit0vras."
   source: "https://github.com/space-wizards/space-station-14/pull/17948"
+
+- files: ["wasteland.png", "mud.png", "rocks.png"]
+  license: "CC0-1.0"
+  copyright: "Taken from Shiptest at https://github.com/shiptest-ss13/Shiptest/blob/5c297839a311a630af630ffcf920d0fa8adc3ae6/icons/turf/floors.dmi, rocks are recolored wasteland tile."
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/1052" #Чтобы не вызывало ошибок, потом сменить
+
+- files: ["carpetwhite.png", "carpetred.png", "carpetpurple.png", "carpetorange.png", "carpetmagenta.png", "carpetgreen.png", "carpetcyan.png", "carpetblue.png", "carpetblack.png"]
+  license: "Custom"
+  copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/1052"

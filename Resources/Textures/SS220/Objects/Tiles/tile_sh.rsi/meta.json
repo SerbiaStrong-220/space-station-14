@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "carpet-black"
+    },
+    {
+      "name": "carpet-blue"
+    },
+    {
+      "name": "carpet-green"
+    },
+    {
+      "name": "carpet-orange"
+    },
+    {
+      "name": "carpet-purple"
+    },
+    {
+      "name": "carpet-red"
+    },
+    {
+      "name": "carpet-cyan"
+    },
+    {
+      "name": "carpet-white"
+    },
+    {
+      "name": "carpet-magenta"
+    },
+    {
+      "name": "carpet-black-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-black-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-blue-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-blue-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-green-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-green-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-orange-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-orange-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-purple-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-purple-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-red-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-red-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-magenta-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-magenta-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-cyan-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-cyan-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "carpet-white-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpet-white-inhand-right",
+      "directions": 4
+    }
+  ]
+}
