@@ -11,6 +11,7 @@ using Content.Shared.StationRecords;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Content.Shared.GameTicking;
+using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -395,6 +396,14 @@ public sealed class AccessReaderSystem : EntitySystem
         string? name = null;
         // TODO pass the ID card on IsAllowed() instead of using this expensive method
         // Set name if the accessor has a card and that card has a name and allows itself to be recorded
+
+        // ss220 borg edit start
+        if (HasComp<BorgChassisComponent>(accessor))
+        {
+            name = MetaData(accessor).EntityName;
+        }
+        // ss220 borg edit end
+
         if (_idCardSystem.TryFindIdCard(accessor, out var idCard)
             && idCard.Comp is { BypassLogging: false, FullName: not null })
             name = idCard.Comp.FullName;
