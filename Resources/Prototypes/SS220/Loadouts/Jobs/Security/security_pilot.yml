@@ -29,33 +29,6 @@
 # Head
 
 - type: loadout
-  id: SecurityHelmet
-  equipment: SecurityHelmet
-
-- type: startingGear
-  id: SecurityHelmet
-  equipment:
-    head: ClothingHeadHelmetBasic
-
-- type: loadout
-  id: SecurityHat
-  equipment: SecurityHat
-
-- type: startingGear
-  id: SecurityHat
-  equipment:
-    head: ClothingHeadHatSecsoft
-
-- type: loadout
-  id: SecurityBeret
-  equipment: SecurityBeret
-
-- type: startingGear
-  id: SecurityBeret
-  equipment:
-    head: ClothingHeadHatBeretSecurity
-
-- type: loadout
   id: PilotCapCap
   equipment: PilotCapCap
 
