@@ -73,6 +73,9 @@ namespace Content.Server.Tabletop
 
         private void OnInteractUsing(EntityUid uid, TabletopGameComponent component, InteractUsingEvent args)
         {
+            // SS220 spawn fix
+            return;
+
             if (!EntityManager.TryGetComponent(args.User, out HandsComponent? hands))
                 return;
 
