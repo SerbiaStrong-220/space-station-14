@@ -7,6 +7,16 @@
   - SecurityPilotSatchel
   - SecurityPilotDuffel
 
+- type: loadoutGroup
+  id: SecurityPilotHead
+  name: loadout-group-security-pilot-head
+  minLimit: 0
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - PilotCapCap
+
 # InternalAffairs
 - type: loadoutGroup
   id: IAABackpack
