@@ -45,6 +45,8 @@
 - type: Tag
   id: JianSword
 
+- type: Tag
+  id: ThermalImplant
 
 # SS220 Hand/Foot Wraps begin
 - type: Tag
