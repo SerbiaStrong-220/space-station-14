@@ -147,7 +147,7 @@
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 100
+            damage: 200
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -160,7 +160,7 @@
       soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
     - type: BallisticAmmoProvider
       proto: CartridgePistol
-      capacity: 50
+      capacity: 100
     - type: Construction
       deconstructionTarget: null
       graph: WeaponTurretSyndicateDisposable

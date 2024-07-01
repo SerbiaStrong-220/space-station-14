@@ -130,7 +130,7 @@
   components:
   - type: InstantAction
     checkCanInteract: false
-    charges: 3
+    charges: 5
     useDelay: 5
     itemIconStyle: BigAction
     priority: -20
@@ -142,12 +142,12 @@
 - type: entity
   id: ActionActivateScramImplant
   name: SCRAM!
-  description: Randomly teleports you within a large distance.
+  description: Randomly teleports you within a medium distance.
   noSpawn: true
   components:
   - type: InstantAction
     checkCanInteract: false
-    charges: 2
+    charges: 12 #SS220 changed
     useDelay: 5
     itemIconStyle: BigAction
     priority: -20
