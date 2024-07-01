@@ -1,4 +1,4 @@
-﻿- type: stack
+- type: stack
   id: FloorTileSteel
   name: steel tile
   spawn: FloorTileItemSteel
@@ -204,13 +204,15 @@
 - type: stack
   id: FloorCarpetRed
   name: red carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-red } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemRed
   maxCount: 30
   itemSize: 5
 
 - type: stack
   id: FloorCarpetBlack
-  name: block carpet tile
+  name: black carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-black } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemBlack
   maxCount: 30
   itemSize: 5
@@ -218,6 +220,7 @@
 - type: stack
   id: FloorCarpetBlue
   name: blue carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-blue } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemBlue
   maxCount: 30
   itemSize: 5
@@ -225,6 +228,7 @@
 - type: stack
   id: FloorCarpetGreen
   name: green carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-green } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemGreen
   maxCount: 30
   itemSize: 5
@@ -232,6 +236,7 @@
 - type: stack
   id: FloorCarpetOrange
   name: orange carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-orange } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemOrange
   maxCount: 30
   itemSize: 5
@@ -246,6 +251,7 @@
 - type: stack
   id: FloorCarpetPurple
   name: purple carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-purple } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemPurple
   maxCount: 30
   itemSize: 5
@@ -253,6 +259,7 @@
 - type: stack
   id: FloorCarpetPink
   name: pink carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-pink } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemPink
   maxCount: 30
   itemSize: 5
@@ -260,6 +267,7 @@
 - type: stack
   id: FloorCarpetCyan
   name: cyan carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-cyan } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemCyan
   maxCount: 30
   itemSize: 5
@@ -267,6 +275,7 @@
 - type: stack
   id: FloorCarpetWhite
   name: white carpet tile
+  icon: { sprite: /Textures/Objects/Tiles/tile.rsi, state: carpet-white } #SS220 Curtains and fancy tables recepie fix
   spawn: FloorCarpetItemWhite
   maxCount: 30
   itemSize: 5
