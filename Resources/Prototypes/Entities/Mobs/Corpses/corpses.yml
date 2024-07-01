@@ -98,7 +98,7 @@
     prototypes:
     #SS220 corpses equipment fix begin
     - HoPStandartGear
-    # - CentcomGear
+    - CentCommOfficerGear #SS220 New centcomm roles
     - CaptainStandartGear
     - HoSStandartGear
     - ResearchDirectorStandartGear

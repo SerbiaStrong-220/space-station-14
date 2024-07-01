@@ -447,16 +447,3 @@
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves
     pocket1: WeaponPistolMk58Nonlethal
-
-# Centcomm
-- type: startingGear
-  id: CentCommOfficerCorpsesGear
-  equipment:
-    jumpsuit: ClothingUniformCentCommOfficer
-    shoes: ClothingShoesBootsLaceup
-    head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesBlueShield
-    gloves: ClothingHandsGlovesLatex
-    id: CentcomOfficerPDA
-    ears: ClothingHeadsetAltCentComm
-    back: ClothingBackpackCentCommFilled
