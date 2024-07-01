@@ -52,6 +52,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220-emotes
+    #  collection: MaleGasp
+    #DefaultDeathgasp:
+    #  collection: MaleDeathGasp
 
 - type: emoteSounds
   id: FemaleHuman
@@ -106,6 +110,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220 emotes
+    #  collection: FemaleGasp
+    #DefaultDeathgasp:
+    #  collection: FemaleDeathGasp
 
 - type: emoteSounds
   id: MaleReptilian
@@ -144,6 +152,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220 emotes
+    #  collection: MaleGasp
+    #DefaultDeathgasp:
+    #  collection: DeathGasp
 
 - type: emoteSounds
   id: FemaleReptilian
@@ -232,6 +244,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220-emotes
+    #  collection: MaleGasp
+    #DefaultDeathgasp:
+    #  collection: MaleDeathGasp
   params:
     variation: 0.125
 
@@ -284,6 +300,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220 emotes
+    #  collection: FemaleGasp
+    #DefaultDeathgasp:
+    #  collection: FemaleDeathGasp
   params:
     variation: 0.125
 
@@ -317,6 +337,10 @@
       collection: BikeHorn
     Weh:
       collection: Weh
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: DeathGasp
   params:
     variation: 0.125
 
@@ -345,6 +369,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220 emotes
+    #  collection: MaleGasp
+    #DefaultDeathgasp:
+    #  collection: DeathGasp
 
 - type: emoteSounds
   id: UnisexDwarf
@@ -391,6 +419,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220 emotes
+    #  collection: MaleGasp
+    #DefaultDeathgasp:
+    #  collection: MaleDeathGasp
   params:
     variation: 0.125
     pitch: 0.75
@@ -431,6 +463,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
   params:
     variation: 0.125
     pitch: 0.75
@@ -460,6 +496,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    #Gasp: SS220 emotes
+    #  collection: MaleGasp
+    #DefaultDeathgasp:
+    #  collection: MothDeathGasp
 
 - type: emoteSounds
   id: UnisexSilicon

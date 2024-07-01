@@ -4,6 +4,21 @@
 
   <Box>
     <GuideEntityEmbed Entity="ComputerCargoBounty"/>
+    <GuideEntityEmbed Entity="PaperCargoBountyManifest"/>
+  </Box>
+
+  To start a bounty, open the bounty screen by interacting with the [color=cyan]Cargo Bounty Computer[/color]. The Cargo Bounty Computer maintains a list of all the current bounties and lets you either print out a label or skip it.
+
+  - Printing the label gives you a [color=cyan]Bounty Manifest[/color] listing the goods that need to be acquired. You can print out infinite Bounty Manifests, so ensure you are not repeating the same work as another Cargo Technician.
+
+  - Skipping a bounty replaces that bounty with a new one, as there can only be six active bounties at any time. Skipping has a 15-minute cooldown and voids that bounty, which may anger other Cargo Technicians working on it.
+
+  ## Fulfilling Bounties
+
+  <Box>
+    <GuideEntityEmbed Entity="PaperCargoBountyManifest"/>
+    <GuideEntityEmbed Entity="CrateGenericSteel"/>
+    <GuideEntityEmbed Entity="AppraisalTool"/>
   </Box>
   На каждой станции есть определённое количество доступных запросов. Их можно проверить на [color=#a4885c]консоли запросов[/color], которая показывает следующую информацию о них:
   - Какие предметы нужны для выполнения запроса
@@ -16,7 +31,7 @@
   <Box>
     <GuideEntityEmbed Entity="PaperCargoBountyManifest"/>
     <GuideEntityEmbed Entity="CrateGenericSteel"/>
-    <GuideEntityEmbed Entity="CargoPallet"/>
+    <GuideEntityEmbed Entity="CargoPalletSell"/>
   </Box>
   Как только вы соберёте предметы, необходимые для запроса, завершить его будет проще простого.:
   - Поместите все предметы в ящик и [bold]закройте его![/bold].

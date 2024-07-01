@@ -12,7 +12,6 @@
   - type: Sprite
     layers:
     - state: ussp
-  - type: AgentIDCard
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true

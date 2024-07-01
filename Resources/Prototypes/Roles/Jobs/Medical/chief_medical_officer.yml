@@ -35,3 +35,7 @@
     id: CMOPDA
     ears: ClothingHeadsetCMO
     belt: ClothingBeltMedicalFilled
+  storage:
+    back:
+    - BoxSurvivalMedical
+    - Flash

@@ -25,4 +25,8 @@
     id: BrigmedicPDA
     ears: ClothingHeadsetBrigmedic
     belt: ClothingBeltMedicalFilled
+  storage:
+    back:
+    - BoxSurvivalBrigmedic
+    - Flash
 #SS220-brigmedic-loadout-end

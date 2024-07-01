@@ -22,7 +22,7 @@
     qualities:
       - Prying
       - PlatingCutting #SS220 JOL TilePrying
-    speed: 3 #SS220 JOL TilePrying
+    speedModifier: 3 #SS220 JOL TilePrying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
     pryPowered: true
@@ -71,7 +71,7 @@
     qualities:
       - Prying
       - PlatingCutting #SS220 JOL TilePryingng
-    speed: 1 #SS220 JOL TilePrying
+    speedModifier: 1 #SS220 JOL TilePrying
   - type: MultipleTool
     entries:
       - behavior: [Prying, PlatingCutting] #SS220 JOL TilePryingng

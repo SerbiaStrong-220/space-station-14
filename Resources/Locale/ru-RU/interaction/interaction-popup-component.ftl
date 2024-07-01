@@ -43,7 +43,6 @@ petting-failure-goose = Вы тянетесь погладить { $target }, н
 petting-failure-possum = Вы тянетесь погладить { $target }, но на вас шипят и рычат.
 petting-failure-pig = Вы тянетесь погладить { $target }, но сталкиваетесь с раздражённым хрюканьем и визгом!
 petting-failure-sloth = Вы тянетесь погладить { $target }, но { $target } с невероятной скоростью уклоняется!
-petting-failure-pig = Вы тянетесь погладить { $target }, но сталкиваетесь с раздражённым хрюканьем и визгом!
 petting-failure-holo = Вы тянетесь погладить { $target }, но { $target } едва не пронзает шипами вашу руку!
 petting-failure-raccoon = Вы тянетесь погладить { $target }, но { $target } енотится от вас.
 petting-failure-dragon = Вы поднимаете руку, но { $target } издаёт рёв, и вы решаете, что не хотите стать кормом для карпов.

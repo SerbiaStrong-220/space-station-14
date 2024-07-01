@@ -71,6 +71,6 @@ public sealed class ForcefieldOverlay : Overlay
         }
 
         handle.UseShader(null);
-        handle.SetTransform(Matrix3.Identity);
+        handle.SetTransform(Matrix3x2.Identity);
     }
 }

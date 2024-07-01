@@ -26,7 +26,7 @@ public sealed class ShowCriminalRecordIconsSystem : EquipmentHudSystem<ShowCrimi
 
     private void OnGetStatusIconsEvent(EntityUid uid, IdentityComponent _, ref GetStatusIconsEvent ev) // 220 secincons fix
     {
-        if (!IsActive || ev.InContainer)
+        if (!IsActive)
             return;
 
         //SS220 Criminal-Records begin

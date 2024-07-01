@@ -232,7 +232,7 @@ accent-pirate-replaced-78 = казнить
 accent-pirate-replacement-78 = вздернуть на рее
 
 accent-pirate-replaced-79 = казнен
-accent-pirate-replaced-79 = вздернут на рее
+accent-pirate-replacement-79 = вздернут на рее
 
 accent-pirate-replaced-80 = зарплата
 accent-pirate-replacement-80 = доля

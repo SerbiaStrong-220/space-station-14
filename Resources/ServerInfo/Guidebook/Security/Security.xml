@@ -7,7 +7,7 @@
   <Box>
     <GuideEntityEmbed Entity="Stunbaton"/>
     <GuideEntityEmbed Entity="Handcuffs"/>
-    <GuideEntityEmbed Entity="WeaponDisabler"/>
+   <GuideEntityEmbed Entity="WeaponDisabler"/>
   </Box>
 
   ## Вспышки
@@ -23,6 +23,10 @@
   ## Летальные боеприпасы
   Если того потребует ситуация, служба безопасности имеет доступ к лазерным винтовкам, дробовикам, пистолетам и автоматам, способным вести огонь на поражение по любому, кто решит выступит против станции.
   <Box>
+    <GuideEntityEmbed Entity="WeaponLaserCarbine"/>
+    <GuideEntityEmbed Entity="WeaponShotgunKammerer"/>
+    <GuideEntityEmbed Entity="WeaponPistolMk58"/>
+    <GuideEntityEmbed Entity="WeaponRifleLecter"/>
     <GuideEntityEmbed Entity="WeaponLaserCarbine"/>
     <GuideEntityEmbed Entity="WeaponShotgunKammerer"/>
     <GuideEntityEmbed Entity="WeaponPistolMk58"/>

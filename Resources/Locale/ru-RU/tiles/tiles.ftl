@@ -101,7 +101,6 @@ tiles-dark-grass-floor = тёмная трава
 tiles-light-grass-floor = светлая трава
 tiles-dirt-floor = грязь
 tiles-asteroid-floor = пол астероида
-tiles-asteroid-tile = плитка астероида
 tiles-asteroid-sand = астероидный песок
 tiles-asteroid-sand-dug = копаный астероидный песок
 tiles-asteroid-plating = астероидное покрытие

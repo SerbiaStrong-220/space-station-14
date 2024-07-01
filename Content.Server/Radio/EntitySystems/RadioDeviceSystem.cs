@@ -91,6 +91,9 @@ public sealed class RadioDeviceSystem : EntitySystem
     #region Toggling
     private void OnActivateMicrophone(EntityUid uid, RadioMicrophoneComponent component, ActivateInWorldEvent args)
     {
+        if (!args.Complex)
+            return;
+
         if (!component.ToggleOnInteract)
             return;
 
@@ -100,6 +103,9 @@ public sealed class RadioDeviceSystem : EntitySystem
 
     private void OnActivateSpeaker(EntityUid uid, RadioSpeakerComponent component, ActivateInWorldEvent args)
     {
+        if (!args.Complex)
+            return;
+
         if (!component.ToggleOnInteract)
             return;
 

@@ -17,8 +17,6 @@
             !type:NanotrasenNameGenerator
             prefixCreator: '-SS220'
         - type: StationJobs
-          overflowJobs:
-            - Passenger
           availableJobs:
             Passenger: [ -1, -1 ]
             #Command

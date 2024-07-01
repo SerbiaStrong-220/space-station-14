@@ -11,9 +11,7 @@ namespace Content.Shared.SS220.MindSlave;
 /// Used to mark an entity as a mind-slave.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class MindSlaveComponent : Component, IAntagStatusIconComponent
+public sealed partial class MindSlaveComponent : Component
 {
     public ProtoId<StatusIconPrototype> StatusIcon { get; set; } = "MindSlaveIcon";
-
-    public bool IconVisibleToGhost { get; set; } = false;
 }

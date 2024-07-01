@@ -316,11 +316,6 @@ reagent-effect-guidebook-innoculate-zombie-infection =
         [1] Лечит
        *[other] лечат
     } зомби-вирус и обеспечивает иммунитет к нему в будущем
-reagent-effect-guidebook-reduce-rotting =
-    { $chance ->
-        [1] Regenerates
-        *[other] regenerate
-    } {NATURALFIXED($time, 3)} {MANY("second", $time)} of rotting
 reagent-effect-guidebook-missing =
     { $chance ->
         [1] Вызывает

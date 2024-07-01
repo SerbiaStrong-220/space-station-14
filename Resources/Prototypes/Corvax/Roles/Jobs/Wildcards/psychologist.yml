@@ -23,3 +23,6 @@
     shoes: ClothingShoesLeather
     id: PsychologistPDA
     ears: ClothingHeadsetMedical
+  storage:
+    back:
+    - BoxSurvivalMedical

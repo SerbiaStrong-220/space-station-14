@@ -33,3 +33,7 @@
     ears: ClothingHeadsetQM
     belt: BoxFolderClipboard
     pocket1: AppraisalTool
+  storage:
+    back:
+    - BoxSurvival
+    - Flash

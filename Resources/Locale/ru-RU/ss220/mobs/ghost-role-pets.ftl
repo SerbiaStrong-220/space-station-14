@@ -73,8 +73,6 @@ ghost-role-information-shiva-description = { ent-MobSpiderShiva.desc }
 ent-MobKangarooWillowGhostRole = { ent-MobKangarooWillow }
     .desc = { ent-MobKangarooWillow.desc }
 ent-SpawnMobKangarooWillowGhostRole = Спавнер { ent-MobKangarooWillow }
-ghost-role-information-willow-name = { ent-MobKangarooWillow }
-ghost-role-information-willow-description = { ent-MobKangarooWillow.desc }
 
 ent-MobSlimesPetGhostRole = { ent-MobSlimesPet }
     .desc = { ent-MobSlimesPet.desc }

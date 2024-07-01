@@ -710,7 +710,7 @@ namespace Content.Server.Ghost.Roles
 
         private bool IsRoleBanned(string prototypeName, NetUserId userId)
         {
-            var bans = _banManager.GetJobBans(userId) ?? new HashSet<string>();
+            var bans = _banManager.GetJobBans(userId) ?? new HashSet<ProtoId<JobPrototype>>();
 
             var isBanned =
                 prototypeName == "MobHumanLoneNuclearOperative" && bans.Contains("Nukeops")

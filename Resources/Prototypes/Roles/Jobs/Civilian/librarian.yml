@@ -20,3 +20,7 @@
     pocket2: HandLabeler # for making named bestsellers
   inhand:
   - BriefcaseBrownFilled
+  storage:
+    back:
+    - BoxSurvival
+    - BookRandom

@@ -87,6 +87,7 @@
   category: Vocal
   whitelist:
     components:
+    - Respirator
     - Vocal
   blacklist:
     components:

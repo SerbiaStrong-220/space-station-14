@@ -185,7 +185,7 @@ public sealed class ForcefieldGeneratorSystem : EntitySystem
             return;
 
         var genTransform = Transform(entity);
-        var pos = Matrix3.CreateRotation(component.Angle).Transform(new Vector2(0, component.Radius));
+        var pos = Vector2.Transform(new Vector2(0, component.Radius), Matrix3Helpers.CreateRotation(component.Angle));
         _transform.SetCoordinates(fieldEntity.Value, new EntityCoordinates(entity, pos));
         _transform.SetWorldRotation(fieldEntity.Value, _transform.GetWorldRotation(genTransform) + component.Angle);
 
