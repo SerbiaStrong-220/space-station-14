@@ -1,0 +1,14 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: reagent
+  id: TheBloodOfYogg
+  name: reagent-name-yoggs-blood
+  group: Toxins
+  desc: reagent-desc-yoggs-blood
+  physicalDesc: reagent-physical-desc-odorless
+  flavor: menacing
+  color: "#afdd9a" #change color to a shroom color
+  metabolisms:
+    Poison:
+      effects:
+      - !type:MiGomiceliumEffect

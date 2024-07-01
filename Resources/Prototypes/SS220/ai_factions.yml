@@ -1,0 +1,9 @@
+- type: npcFaction
+  id: CultYogg
+  hostile:
+  - SimpleHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - NanoTrasen

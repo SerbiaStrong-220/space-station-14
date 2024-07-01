@@ -1,0 +1,4 @@
+- type: flavor
+  id: menacing
+  flavorType: Complex
+  description: На вкус зловеще

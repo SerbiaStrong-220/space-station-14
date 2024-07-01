@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by jelly.crab for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "crypt"
+    },
+    {
+        "name": "crypt_activated",
+        "delays": [
+          [
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ]
+        ]
+      }
+  ]
+}

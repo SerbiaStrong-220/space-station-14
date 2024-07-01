@@ -9,6 +9,7 @@ using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using Content.Server.SS220.GameTicking.Rules;
 
 namespace Content.Server.Antag;
 

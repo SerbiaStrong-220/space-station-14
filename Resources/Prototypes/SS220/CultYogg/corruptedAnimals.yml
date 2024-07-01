@@ -1,0 +1,15 @@
+#list of corrupted recepies
+- type: corruptedAnimals
+  id: MobCow
+  corruptedAnimal: MobCow
+  result: FoodSnackMREBrownie
+
+- type: corruptedAnimals
+  id: MobMonkey
+  corruptedAnimal: MobMonkey
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse
+  corruptedAnimal: MobMouse
+  result: CultCowCorrupted

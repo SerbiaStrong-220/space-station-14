@@ -1,0 +1,10 @@
+#list of corrupted recepies
+- type: corrupted
+  id: WeaponRifleAk
+  corruptedEntity: WeaponRifleAk
+  result: FoodSnackMREBrownie
+
+- type: corrupted
+  id: WeaponLaserCarbine
+  corruptedEntity: WeaponLaserCarbine
+  result: FoodPacketMRETrash
