@@ -587,6 +587,7 @@
   - type: Sprite
     sprite: Clothing/Belt/holster.rsi
   - type: Clothing
+    slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/holster.rsi
   - type: Storage
     grid:
@@ -601,6 +602,7 @@
   - type: Sprite
     sprite: Clothing/Belt/syndieholster.rsi
   - type: Clothing
+    slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/syndieholster.rsi
   - type: Item
     size: Ginormous

@@ -126,10 +126,10 @@
       - EncryptionKeyCommon
 
 - type: entity
-  parent: ClothingBeltSyndieHolster
-  id: ClothingBeltSyndieHolsterPython
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltMilitaryWebbingEbent_IronSquad
   suffix: Shitspawn, Ebent, FractWar
-  name: плечевая кобура синдиката
+  name: армейская РПС
   components:
   - type: StorageFill
     contents:

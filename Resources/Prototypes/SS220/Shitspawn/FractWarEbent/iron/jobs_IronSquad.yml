@@ -60,7 +60,7 @@
     neck: ClothingCloakIronSquadCmd
     id: SyndiPDAAgentLeader
     ears: ClothingHeadsetAltSyndicateEbent
-    belt: ClothingBeltSyndieHolsterPython
+    belt: ClothingBeltMilitaryWebbingEbent_IronSquad
     pocket1: FreedomImplanter
     pocket2: StorageImplanter
 
@@ -169,7 +169,7 @@
     neck: ClothingCloakIronSquadEng
     id: SyndiPDAAgentEngineer
     ears: ClothingHeadsetAltSyndicateEbent
-    belt: ClothingBeltSyndieHolsterPython
+    belt: ClothingBeltMilitaryWebbingEbent_IronSquad
     pocket1: FreedomImplanter
     pocket2: StorageImplanter
 
@@ -270,7 +270,7 @@
     suitstorage: OxygenTankFilled
     id: SyndiPDAAgentCorpsman
     ears: ClothingHeadsetAltSyndicateEbent
-    belt: ClothingBeltSyndieHolsterPython
+    belt: ClothingBeltMilitaryWebbingEbent_IronSquad
     pocket1: CombatMedipen
     pocket2: Stimpack
 
@@ -383,7 +383,7 @@
     neck: ClothingCloakIronSquadCMO
     id: SyndiPDAAgentCMO
     ears: ClothingHeadsetAltSyndicateEbent
-    belt: ClothingBeltSyndieHolsterPython
+    belt: ClothingBeltMilitaryWebbingEbent_IronSquad
     pocket1: FreedomImplanter
     pocket2: StorageImplanter
 
@@ -478,7 +478,7 @@
     suitstorage: OxygenTankFilled
     id: SyndiPDAAgent
     ears: ClothingHeadsetAltSyndicateEbent
-    belt: ClothingBeltSyndieHolsterPython
+    belt: ClothingBeltMilitaryWebbingEbent_IronSquad
     pocket1: CombatMedipen
     pocket2: Stimpack
 
