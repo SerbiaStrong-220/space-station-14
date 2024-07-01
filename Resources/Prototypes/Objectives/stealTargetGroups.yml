@@ -2,84 +2,84 @@
 
 - type: stealTargetGroup
   id: Hypospray
-  name: hypospray
+  name: гипоспрей
   sprite:
     sprite: Objects/Specific/Medical/hypospray.rsi
     state: hypo
 
 - type: stealTargetGroup
   id: HandheldCrewMonitor
-  name: handheld crew monitor
+  name: портативный монитор экипажа
   sprite:
     sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
     state: scanner
 
 - type: stealTargetGroup
   id: ClothingOuterHardsuitRd
-  name: experimental research hardsuit
+  name: скафандр научного руководителя
   sprite:
     sprite: Clothing/OuterClothing/Hardsuits/rd.rsi
     state: icon
 
 - type: stealTargetGroup
   id: HandTeleporter
-  name: hand teleporter
+  name: ручной телепорт
   sprite:
     sprite: Objects/Devices/hand_teleporter.rsi
     state: icon
 
 - type: stealTargetGroup
   id: BookSecretDocuments
-  name: "emergency security orders"
+  name: чрезвычайные приказы по безопасности
   sprite:
     sprite: Objects/Misc/bureaucracy.rsi
     state: folder-sec-doc
 
 - type: stealTargetGroup
   id: ClothingShoesBootsMagAdv
-  name: advanced magboots
+  name: продвинутые магнитные сапоги
   sprite:
     sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
     state: icon
 
 - type: stealTargetGroup
   id: BoxFolderQmClipboard
-  name: requisition digi-board
+  name: цифровой планшет заявок
   sprite:
     sprite: Objects/Misc/qm_clipboard.rsi
     state: qm_clipboard
 
 - type: stealTargetGroup
   id: FoodMeatCorgi
-  name: prime-cut corgi meat
+  name: первосортное мясо корги
   sprite:
     sprite: Objects/Consumable/Food/meat.rsi
     state: corgi
     #
 - type: stealTargetGroup
   id: CaptainIDCard
-  name: captain ID card
+  name: ID карта капитана
   sprite:
     sprite: Objects/Misc/id_cards.rsi
     state: ert_commander #no one will know the difference.
 
 - type: stealTargetGroup
   id: JetpackCaptainFilled
-  name: captain's jetpack
+  name: джетпак капитана
   sprite:
     sprite: Objects/Tanks/Jetpacks/captain.rsi
     state: icon
 
 - type: stealTargetGroup
   id: WeaponAntiqueLaser
-  name: antique laser pistol
+  name: антикварный лазерный пистолет
   sprite:
     sprite: Objects/Weapons/Guns/Battery/antiquelasergun.rsi
     state: base
 
 - type: stealTargetGroup
   id: NukeDisk
-  name: nuclear authentication disk
+  name: диск ядерной авторизации
   sprite:
     sprite: Objects/Misc/nukedisk.rsi
     state: icon
@@ -88,56 +88,56 @@
 
 - type: stealTargetGroup
   id: Figurines
-  name: figurines (any)
+  name: фигурки (любые)
   sprite:
     sprite: Objects/Fun/figurines.rsi
     state: figurine_spawner
 
 - type: stealTargetGroup
   id: HeadCloak
-  name: head's cloaks (any)
+  name: плащи глав (любые)
   sprite:
     sprite: Clothing/Neck/Cloaks/cap.rsi
     state: icon
 
 - type: stealTargetGroup
   id: HeadBedsheet
-  name: head's bedsheets (any)
+  name: одеяла глав (любые)
   sprite:
     sprite: Objects/Misc/bedsheets.rsi
     state: sheetNT
 
 - type: stealTargetGroup
   id: Stamp
-  name: stamps (any)
+  name: печати (любые)
   sprite:
     sprite: Objects/Misc/stamps.rsi
     state: stamp-cap
 
 - type: stealTargetGroup
   id: DoorRemote
-  name: door remotes (any)
+  name: пульт от шлюзов (любой)
   sprite:
     sprite: Objects/Devices/door_remote.rsi
     state: door_remotebase
 
 - type: stealTargetGroup
   id: EncryptionKey
-  name: encryption keys (any)
+  name: ключи шифрования (любые)
   sprite:
     sprite: Objects/Devices/encryption_keys.rsi
     state: crypt_gray
 
 - type: stealTargetGroup
   id: TechnologyDisk
-  name: technology disks
+  name: технологический диск
   sprite:
     sprite: Objects/Misc/module.rsi
     state: datadisk_base
 
 - type: stealTargetGroup
   id: IDCard
-  name: ID Cards (any)
+  name: ID карты (любые)
   sprite:
     sprite: Objects/Misc/id_cards.rsi
     state: default
@@ -146,7 +146,7 @@
 
 - type: stealTargetGroup
   id: LAMP
-  name: LAMPS
+  name: лампа
   sprite:
     sprite: Objects/Tools/lantern.rsi
     state: lantern
@@ -176,7 +176,7 @@
 
 - type: stealTargetGroup
   id: ForensicScanner
-  name: forensic scanner
+  name: криминалистический сканер
   sprite:
     sprite: Objects/Devices/forensic_scanner.rsi
     state: forensicnew
@@ -197,105 +197,105 @@
 
 - type: stealTargetGroup
   id: AmmoTechFabCircuitboard
-  name: ammo techfab circuit board
+  name: ТехФаб патронов (машинная плата)
   sprite:
     sprite: Objects/Misc/module.rsi
     state: security
 
 - type: stealTargetGroup
   id: ClothingHeadHatWarden
-  name: warden's cap
+  name: фуражка смотрителя
   sprite:
     sprite: Clothing/Head/Hats/warden.rsi
     state: icon
 
 - type: stealTargetGroup
   id: ClothingOuterHardsuitVoidParamed
-  name: paramedic void suit
+  name: пустотный скафандр парамедика
   sprite:
     sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
     state: icon
 
 - type: stealTargetGroup
   id: MedicalTechFabCircuitboard
-  name: medical techfab machine board
+  name: медицинский ТехФаб (машинная плата)
   sprite:
     sprite: Objects/Misc/module.rsi
     state: medical
 
 - type: stealTargetGroup
   id: ClothingHeadsetAltMedical
-  name: chief medical officer's over-ear headset
+  name: полноразмерная гарнитура ГВ
   sprite:
     sprite: Clothing/Ears/Headsets/medical.rsi
     state: icon_alt
 
 - type: stealTargetGroup
   id: ResearchAndDevelopmentServerMachineCircuitboard
-  name: R&D server machine board
+  name: сервер РнД (машинная плата)
   sprite:
     sprite: Objects/Misc/module.rsi
     state: science
 
 - type: stealTargetGroup
   id: FireAxe
-  name: fireaxe
+  name: пожарный топор
   sprite:
     sprite: Objects/Weapons/Melee/fireaxe.rsi
     state: icon
 
 - type: stealTargetGroup
   id: AmePartFlatpack
-  name: AME part
+  name: упаковка ДАМ
   sprite:
     sprite: Objects/Devices/flatpack.rsi
     state: ame-part
 
 - type: stealTargetGroup
   id: SalvageExpeditionsComputerCircuitboard
-  name: salvage expeditions computer board
+  name: консоль утилизаторских экспедиций (консольная плата)
   sprite:
     sprite: Objects/Misc/module.rsi
     state: cpu_supply
 
 - type: stealTargetGroup
   id: CargoShuttleConsoleCircuitboard
-  name: cargo shuttle console board
+  name: консоль управления грузовым шаттлом (консольная плата)
   sprite:
     sprite: Objects/Misc/module.rsi
     state: cpuboard
 
 - type: stealTargetGroup
   id: SalvageShuttleConsoleCircuitboard
-  name: salvage shuttle console board
+  name: консоль управления утилизаторским шаттлом (консольная плата)
   sprite:
     sprite: Objects/Misc/module.rsi
     state: cpuboard
 
 - type: stealTargetGroup
   id: ClothingEyesHudBeer
-  name: beer goggles
+  name: пивные очки
   sprite:
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
     state: icon
 
 - type: stealTargetGroup
   id: Bible
-  name: bible
+  name: библия
   sprite:
     sprite: Objects/Specific/Chapel/bible.rsi
     state: icon
 
 - type: stealTargetGroup
   id: ClothingNeckGoldmedal
-  name: gold medal of crewmanship
+  name: золотая медаль мастерства экипажа
   sprite:
     sprite: Clothing/Neck/Medals/gold.rsi
     state: icon
 
 - type: stealTargetGroup
   id: ClothingNeckClownmedal
-  name: clown medal
+  name: медаль клоуна
   sprite:
     sprite: Clothing/Neck/Medals/clownmedal.rsi
     state: icon
@@ -304,63 +304,63 @@
 
 - type: stealTargetGroup
   id: NuclearBomb
-  name: nuclear fission explosive
+  name: ядерная боеголовка
   sprite:
     sprite: Objects/Devices/nuke.rsi
     state: nuclearbomb_base
 
 - type: stealTargetGroup
   id: FaxMachineCaptain
-  name: captain long range fax machine
+  name: факс дальнего действия капитана
   sprite:
     sprite: Structures/Machines/fax_machine.rsi
     state: icon
 
 - type: stealTargetGroup
   id: ChemDispenser
-  name: chemical dispenser
+  name: раздатчик химикатов
   sprite:
     sprite: Structures/dispensers.rsi
     state: industrial-working
 
 - type: stealTargetGroup
   id: XenoArtifact
-  name: big alien artifact
+  name: большой артефакт
   sprite:
     sprite: Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi
     state: ano28
 
 - type: stealTargetGroup
   id: FreezerHeater
-  name: freezer or heater
+  name: охладитель или нагреватель
   sprite:
     sprite: Structures/Piping/Atmospherics/thermomachine.rsi
     state: heaterOff
 
 - type: stealTargetGroup
   id: Teg
-  name: teg generator part
+  name: часть ТЭГ-а
   sprite:
     sprite: Structures/Power/Generation/teg.rsi
     state: teg
 
 - type: stealTargetGroup
   id: BoozeDispenser
-  name: booze dispenser
+  name: раздатчик алкоголя
   sprite:
     sprite: Structures/smalldispensers.rsi
     state: booze
 
 - type: stealTargetGroup
   id: AltarNanotrasen
-  name: nanotrasen altar (any)
+  name: алтарь Nanotrasen (любой)
   sprite:
     sprite: Structures/Furniture/Altars/Gods/nanotrasen.rsi
     state: nanotrasen
 
 - type: stealTargetGroup
   id: PlantRD
-  name: RD's potted plant
+  name: комнатное растение научрука
   sprite:
     sprite: Structures/Furniture/potted_plants.rsi
     state: plant-25
