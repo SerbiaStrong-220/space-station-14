@@ -202,7 +202,7 @@
 
   # База
 - type: entity
-  paren: BoxFolderBase
+  parent: BoxFolderBase
   id: BoxFolderBasee
   name: папка
   description: Папка, заполненная совершенно секретными документами.
