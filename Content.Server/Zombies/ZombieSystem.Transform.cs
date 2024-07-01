@@ -40,6 +40,7 @@ using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
 using Content.Server.Administration.Managers;
+using Content.Shared.Humanoid.Markings;
 using Robust.Server.Player;
 
 namespace Content.Server.Zombies
@@ -171,6 +172,13 @@ namespace Content.Server.Zombies
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.HeadSide, zombiecomp.BaseLayerExternal, humanoid: huApComp);
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.HeadTop, zombiecomp.BaseLayerExternal, humanoid: huApComp);
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.Snout, zombiecomp.BaseLayerExternal, humanoid: huApComp);
+
+                //ss220 - start edit
+                SetMarkingColors(MarkingCategories.Tail, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.HeadSide, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.HeadTop, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.Snout, zombiecomp.SkinColor, huApComp);
+                //ss220 - end edit
 
                 //This is done here because non-humanoids shouldn't get baller damage
                 //lord forgive me for the hardcoded damage
