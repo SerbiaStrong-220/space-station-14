@@ -1,0 +1,11 @@
+- type: department
+  id: InternalAffairs
+  sort: 0
+  description: department-Internal-Affairs-description
+  color: "#5a463e"
+  roles:
+  - IAA
+  - Lawyer
+  - BlueShield
+  primary: false
+  weight: 80

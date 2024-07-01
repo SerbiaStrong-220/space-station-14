@@ -22,7 +22,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetLawyer #SS220-InternalAffairs
     # TODO add copy of space law
   inhand:
     - BriefcaseBrownFilled

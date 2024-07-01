@@ -1,0 +1,15 @@
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyInternalAffairs
+  name: ключ шифрования внутренних дел
+  description: Ключ шифрования, использующаяся истинным законом
+  components:
+  - type: EncryptionKey
+    channels:
+    - InternalAffairs
+    defaultChannel: InternalAffairs
+  - type: Sprite
+    sprite: SS220/Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_silver
+    - state: lawyer_label
