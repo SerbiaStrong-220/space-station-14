@@ -31,7 +31,7 @@
     id: SalvagePDA
     ears: ClothingHeadsetCargo
 
-  # Civilian
+# Civilian
 - type: startingGear
   id: PassengerStandartGear
   equipment:
@@ -83,7 +83,7 @@
     id: ChefPDA
     ears: ClothingHeadsetService
     outerClothing: ClothingOuterApronChef
-    belt: ClothingBeltChefFilled
+    belt: ClothingBeltChefApronWhite
 
 - type: startingGear
   id: ClownStandartGear
@@ -163,6 +163,25 @@
     back: ClothingBackpackFilled
     shoes: ClothingShoesColorBlack
     id: ServiceWorkerPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: ReporterStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitReporter
+    back: ClothingBackpackFilled
+    shoes: ClothingShoesColorWhite
+    id: ReporterPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: ZookeeperStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSafari
+    back: ClothingBackpackFilled
+    head: ClothingHeadSafari
+    shoes: ClothingShoesColorWhite
+    id: ZookeeperPDA
     ears: ClothingHeadsetService
 
 # Command
@@ -306,6 +325,15 @@
     ears: ClothingHeadsetBrigmedic
     belt: ClothingBeltMedicalFilled
 
+- type: startingGear
+  id: PsychologistStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPsychologist
+    back: ClothingBackpackMedicalFilled
+    shoes: ClothingShoesLeather
+    id: PsychologistPDA
+    ears: ClothingHeadsetMedical
+
 # Science
 - type: startingGear
   id: ResearchAssistantStandartGear
@@ -419,3 +447,16 @@
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves
     pocket1: WeaponPistolMk58Nonlethal
+
+# Centcomm
+- type: startingGear
+  id: CentCommOfficerCorpsesGear
+  equipment:
+    jumpsuit: ClothingUniformCentCommOfficer
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatBeretNanoTrasenOfficer
+    eyes: ClothingEyesGlassesBlueShield
+    gloves: ClothingHandsGlovesLatex
+    id: CentcomOfficerPDA
+    ears: ClothingHeadsetAltCentComm
+    back: ClothingBackpackCentCommFilled
