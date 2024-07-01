@@ -1,4 +1,6 @@
-#Сервис
+# Сервис
+
+  # Ботаника
 - type: entity
   parent: ClothingHeadHeadHatBaseFlippable
   id: ClothingHeadHatTruckerBlue
@@ -31,3 +33,17 @@
     sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
+
+# Служба безопасности
+
+  # Пилот
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadPilotCapCap
+  name: pilot`s capcap
+  description: Catch the height!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi

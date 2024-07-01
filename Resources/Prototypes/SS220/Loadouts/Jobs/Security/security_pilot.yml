@@ -25,3 +25,14 @@
   id: SecurityPilotDuffel
   equipment:
     back: ClothingBackpackDuffelSecurityPilotFilled
+
+# Head
+
+- type: loadout
+  id: PilotCapCap
+  equipment: PilotCapCap
+
+- type: startingGear
+  id: PilotCapCap
+  equipment:
+    head: ClothingHeadPilotCapCap
