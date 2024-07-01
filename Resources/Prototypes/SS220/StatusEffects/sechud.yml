@@ -39,3 +39,31 @@
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: demote
+
+- type: statusIcon
+  parent: SecHudIcon
+  id: SecParoledIcon
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/sechud.rsi
+    state: paroled
+
+- type: statusIcon
+  parent: SecHudIcon
+  id: SecIncarceratedIcon
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/sechud.rsi
+    state: incarcerated
+
+- type: statusIcon
+  parent: SecHudIcon
+  id: SecDischargedIcon
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/sechud.rsi
+    state: discharged
+
+- type: statusIcon
+  parent: SecHudIcon
+  id: SecSuspectedIcon
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/sechud.rsi
+    state: suspected
