@@ -1,0 +1,33 @@
+- type: entity
+  parent: ToyFigurineMime
+  id: SacredRelicMime
+  name: mimes relic
+  description: A figurine what is sacred for all mime around the galaxy.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/SacredRelics/SacredRelicMime.rsi
+    state: relic
+  - type: UseDelay
+    delay: 2
+  - type: MimeRelic
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-SacredRelicMime-mime
+      jobRequired:
+        - Mime
+    - label: hidden-desc-SacredRelicMime-chaplain
+      jobRequired:
+        - Chaplain
+    - label: hidden-desc-SacredRelicMime-security
+      jobRequired:
+        - HeadOfSecurity
+        - Detective
+        - SecurityCadet
+        - SecurityOfficer
+        - Warden
+    - label: hidden-desc-SacredRelicMime-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg           

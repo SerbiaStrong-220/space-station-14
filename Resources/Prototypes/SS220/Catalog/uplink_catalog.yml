@@ -35,6 +35,29 @@
         tags:
           - NukeOpsUplink
 
+# JobItems
+
+- type: listing
+  id: UplinkMimeRelic
+  name: uplink-mime-relic-name
+  description: uplink-mime-relic-desc
+  icon: { sprite: SS220/Objects/Specific/SacredRelics/SacredRelicMime.rsi, state: icon }  
+  productEntity: SacredRelicMime
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Mime
+  - !type:ListingLimitedStockCondition
+      stock: 1  
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
  # Pointless
 
 - type: listing
