@@ -36,6 +36,7 @@ using Robust.Shared.Network;
 using Content.Server.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Collections;
+using Content.Shared.SS220.DarkReaper;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -784,6 +785,11 @@ namespace Content.Server.Ghost.Roles
 
             GhostRoleInternalCreateMindAndTransfer(args.Player, uid, uid, ghostRole);
             UnregisterGhostRole((uid, ghostRole));
+
+            //SS220 Dark Reaper consume fix begin
+            if (HasComp<CannotConsumeComponent>(uid))
+                RemComp<CannotConsumeComponent>(uid);
+            //SS220 Dark Reaper consume fix end
 
             args.TookRole = true;
         }

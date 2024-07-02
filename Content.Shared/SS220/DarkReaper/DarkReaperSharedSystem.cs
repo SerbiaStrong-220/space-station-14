@@ -99,6 +99,15 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             return;
         }
 
+        //Dark Reaper consume fix begin
+        if (HasComp<CannotConsumeComponent>(args.Target))
+        {
+            if (_net.IsClient)
+                _popup.PopupEntity($"Невозможно поглотить", uid, PopupType.MediumCaution);
+            return;
+        }
+        //Dark Reaper consume fix begin
+
         var doafterArgs = new DoAfterArgs(
             EntityManager,
             uid,
