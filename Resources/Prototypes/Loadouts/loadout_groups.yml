@@ -322,6 +322,7 @@
   - ChaplainNunRobe
   - ChaplainBlackHoodie
   - ChaplainHoodie
+  - HoodieChaplainWhite
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -1276,6 +1277,7 @@
   loadouts:
   - ReporterJumpsuit
   - JournalistJumpsuit
+  - JumpsuitJournalistRed
 
 - type: loadoutGroup
   id: BoxerJumpsuit

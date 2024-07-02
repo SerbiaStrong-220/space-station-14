@@ -8,3 +8,5 @@ ent-ClothingUniformOverallsGreen = зелёный комбинезон на ля
     .desc = Отлично подходит для работы на открытом воздухе.
 ent-ClothingUniformOverallsWhite = белый комбинезон на лямках
     .desc = Отлично подходит для работы на открытом воздухе.
+ent-ClothingUniformJumpsuitJournalistRed = красный костюм журналиста
+    .desc = Если журналистика хороша, то она противоречива по своей природе.

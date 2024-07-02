@@ -137,3 +137,12 @@
   id: ChaplainHoodie
   equipment:
     outerClothing: ClothingOuterHoodieChaplain
+
+- type: loadout
+  id: HoodieChaplainWhite
+  equipment: HoodieChaplainWhite
+
+- type: startingGear
+  id: HoodieChaplainWhite
+  equipment:
+    outerClothing: ClothingOuterHoodieChaplainWhite

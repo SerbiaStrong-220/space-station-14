@@ -4,3 +4,5 @@ ent-ClothingOuterApronBotanistGreen = зелёный фартук
 ent-ClothingOuterApronBotanistBrown = коричневый фартук
     .desc = Толстый коричневый фартук, идеально подходящий для защиты вашей нежной плоти от пятен, грязи и колючек.
     .suffix = Ботанический
+ent-ClothingOuterHoodieChaplainWhite = белое одеяние священника
+    .desc = Белое и строгое одеяние с капюшоном для священника.

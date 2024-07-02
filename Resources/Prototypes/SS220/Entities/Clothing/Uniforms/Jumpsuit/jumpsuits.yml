@@ -64,3 +64,14 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitJournalistRed
+  name: red journalist suit
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalistred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalistred.rsi

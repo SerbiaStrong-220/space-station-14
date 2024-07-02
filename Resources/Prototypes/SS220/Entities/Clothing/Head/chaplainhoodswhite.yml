@@ -1,0 +1,18 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodChaplainHoodWhite
+  noSpawn: true
+  name: chaplain's white hood
+  description: Maximum piety in this star system.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
