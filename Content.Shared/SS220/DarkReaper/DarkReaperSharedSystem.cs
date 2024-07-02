@@ -100,10 +100,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         }
 
         //Dark Reaper consume fix begin
-        if (HasComp<CannotConsumeComponent>(args.Target))
+        if (HasComp<CannotBeConsumedComponent>(args.Target))
         {
             if (_net.IsClient)
-                _popup.PopupEntity($"Невозможно поглотить", uid, PopupType.MediumCaution);
+                _popup.PopupEntity("Невозможно поглотить", uid, PopupType.MediumCaution);
             return;
         }
         //Dark Reaper consume fix begin

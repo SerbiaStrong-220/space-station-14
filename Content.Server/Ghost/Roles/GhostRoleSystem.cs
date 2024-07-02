@@ -787,8 +787,8 @@ namespace Content.Server.Ghost.Roles
             UnregisterGhostRole((uid, ghostRole));
 
             //SS220 Dark Reaper consume fix begin
-            if (HasComp<CannotConsumeComponent>(uid))
-                RemComp<CannotConsumeComponent>(uid);
+            if (HasComp<CannotBeConsumedComponent>(uid))
+                RemComp<CannotBeConsumedComponent>(uid);
             //SS220 Dark Reaper consume fix end
 
             args.TookRole = true;

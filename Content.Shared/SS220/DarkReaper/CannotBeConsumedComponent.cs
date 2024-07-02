@@ -5,6 +5,6 @@ namespace Content.Shared.SS220.DarkReaper;
 /// <summary>
 ///     Dark Reaper will not be able to consume entity with this component
 /// </summary>
-public sealed partial class CannotConsumeComponent : Component
+public sealed partial class CannotBeConsumedComponent : Component
 {
 }
