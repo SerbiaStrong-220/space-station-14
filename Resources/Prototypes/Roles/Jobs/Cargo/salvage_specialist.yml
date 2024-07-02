@@ -22,3 +22,6 @@
 #    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist SS220-SalvageSpecialist-Loadout-fix
     id: SalvagePDA
     ears: ClothingHeadsetCargo
+  storage:
+    back:
+    - BoxSurvival

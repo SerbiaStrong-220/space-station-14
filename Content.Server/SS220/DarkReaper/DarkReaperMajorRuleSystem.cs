@@ -3,7 +3,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Components;
+using Content.Shared.GameTicking.Components;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Respawn;

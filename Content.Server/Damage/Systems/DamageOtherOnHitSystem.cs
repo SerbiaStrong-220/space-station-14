@@ -39,24 +39,27 @@ namespace Content.Server.Damage.Systems
 
             if (hitEv.Handled)
                 return;
-
-            var dmg = _damageable.TryChangeDamage(args.Target, component.Damage, component.IgnoreResistances, origin: args.Component.Thrower);
             // SS220-Stunbaton-rework end
 
-            // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
-            if (dmg != null && HasComp<MobStateComponent>(args.Target))
-                _adminLogger.Add(LogType.ThrowHit, $"{ToPrettyString(args.Target):target} received {dmg.GetTotal():damage} damage from collision");
-
-            if (dmg is { Empty: false })
+            if (!TerminatingOrDeleted(args.Target))
             {
-                _color.RaiseEffect(Color.Red, new List<EntityUid>() { args.Target }, Filter.Pvs(args.Target, entityManager: EntityManager));
-            }
+                var dmg = _damageable.TryChangeDamage(args.Target, component.Damage, component.IgnoreResistances, origin: args.Component.Thrower);
 
-            _guns.PlayImpactSound(args.Target, dmg, null, false);
-            if (TryComp<PhysicsComponent>(uid, out var body) && body.LinearVelocity.LengthSquared() > 0f)
-            {
-                var direction = body.LinearVelocity.Normalized();
-                _sharedCameraRecoil.KickCamera(args.Target, direction);
+                // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
+                if (dmg != null && HasComp<MobStateComponent>(args.Target))
+                    _adminLogger.Add(LogType.ThrowHit, $"{ToPrettyString(args.Target):target} received {dmg.GetTotal():damage} damage from collision");
+
+                if (dmg is { Empty: false })
+                {
+                    _color.RaiseEffect(Color.Red, new List<EntityUid>() { args.Target }, Filter.Pvs(args.Target, entityManager: EntityManager));
+                }
+
+                _guns.PlayImpactSound(args.Target, dmg, null, false);
+                if (TryComp<PhysicsComponent>(uid, out var body) && body.LinearVelocity.LengthSquared() > 0f)
+                {
+                    var direction = body.LinearVelocity.Normalized();
+                    _sharedCameraRecoil.KickCamera(args.Target, direction);
+                }
             }
 
             // TODO: If more stuff touches this then handle it after.

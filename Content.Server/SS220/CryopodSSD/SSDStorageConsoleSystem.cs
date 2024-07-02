@@ -51,6 +51,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -306,7 +307,7 @@ public sealed class SSDStorageConsoleSystem : EntitySystem
                     continue;
                 }
 
-                if (whitelist is null || whitelist.IsValid(childUid))
+                if (whitelist is null || _whitelist.IsValid(whitelist, childUid))
                 {
                     whitelistedItems.Add(childUid);
                 }

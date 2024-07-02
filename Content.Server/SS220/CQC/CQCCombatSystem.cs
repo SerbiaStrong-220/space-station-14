@@ -7,7 +7,7 @@ using Content.Shared.SS220.UseableBook;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage;
 using Content.Server.Hands.Systems;
-using Content.Server.Bed.Sleep;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.StatusEffect;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Stunnable;

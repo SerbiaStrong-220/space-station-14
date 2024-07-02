@@ -4,7 +4,7 @@ using Content.Shared.Storage;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Content.Server.Power.Components;
-using Content.Server.GameTicking.Components;
+using Content.Shared.GameTicking.Components;
 
 namespace Content.Server.SS220.StationEvents;
 
