@@ -122,16 +122,18 @@ namespace Content.Shared.Roles
 
         public static bool TryRequirementsMet(
             JobPrototype job,
-            Dictionary<string, TimeSpan> playTimes,
+            IReadOnlyDictionary<string, TimeSpan> playTimes,
             [NotNullWhen(false)] out FormattedMessage? reason,
             IEntityManager entManager,
             IPrototypeManager prototypes)
         {
+            var sys = entManager.System<SharedRoleSystem>();
+            var requirements = sys.GetJobRequirement(job);
             reason = null;
-            if (job.Requirements == null)
+            if (requirements == null)
                 return true;
 
-            foreach (var requirement in job.Requirements)
+            foreach (var requirement in requirements)
             {
                 if (!TryRequirementMet(requirement, playTimes, out reason, entManager, prototypes))
                     return false;
@@ -179,7 +181,7 @@ namespace Content.Shared.Roles
                         if (deptDiff <= 0)
                             return true;
 
-                        reason = FormattedMessage.FromMarkup(Loc.GetString(
+                        reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                             "role-timer-department-insufficient",
                             ("time", Math.Ceiling(deptDiff)),
                             ("department", Loc.GetString(deptRequirement.Department)),
@@ -190,7 +192,7 @@ namespace Content.Shared.Roles
                     {
                         if (deptDiff <= 0)
                         {
-                            reason = FormattedMessage.FromMarkup(Loc.GetString(
+                            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                                 "role-timer-department-too-high",
                                 ("time", -deptDiff),
                                 ("department", Loc.GetString(deptRequirement.Department)),
@@ -210,7 +212,7 @@ namespace Content.Shared.Roles
                         if (overallDiff <= 0 || overallTime >= overallRequirement.Time)
                             return true;
 
-                        reason = FormattedMessage.FromMarkup(Loc.GetString(
+                        reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                               "role-timer-overall-insufficient",
                               ("time", Math.Ceiling(overallDiff))));
                         return false;
@@ -219,7 +221,7 @@ namespace Content.Shared.Roles
                     {
                         if (overallDiff <= 0 || overallTime >= overallRequirement.Time)
                         {
-                            reason = FormattedMessage.FromMarkup(Loc.GetString("role-timer-overall-too-high", ("time", -overallDiff)));
+                            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-overall-too-high", ("time", -overallDiff)));
                             return false;
                         }
 
@@ -246,7 +248,7 @@ namespace Content.Shared.Roles
                         if (roleDiff <= 0)
                             return true;
 
-                        reason = FormattedMessage.FromMarkup(Loc.GetString(
+                        reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                             "role-timer-role-insufficient",
                             ("time", Math.Ceiling(roleDiff)),
                             ("job", Loc.GetString(proto)),
@@ -257,7 +259,7 @@ namespace Content.Shared.Roles
                     {
                         if (roleDiff <= 0)
                         {
-                            reason = FormattedMessage.FromMarkup(Loc.GetString(
+                            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                                 "role-timer-role-too-high",
                                 ("time", -roleDiff),
                                 ("job", Loc.GetString(proto)),

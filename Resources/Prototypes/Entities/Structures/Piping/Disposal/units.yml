@@ -84,6 +84,7 @@
       enum.DisposalUnitUiKey.Key:
         type: DisposalUnitBoundUserInterface
   - type: RatKingRummageable
+  - type: RequireProjectileTarget
 
 # SS220 rnd-transport
 - type: entity

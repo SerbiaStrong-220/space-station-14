@@ -95,7 +95,6 @@
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
-      - id: DoorRemoteFirefight
       - id: ClothingShoesBootsMag
       - id: RCD
       - id: RCDAmmo
@@ -114,7 +113,6 @@
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
-      - id: DoorRemoteFirefight
       - id: RCD
       - id: RCDAmmo
 
