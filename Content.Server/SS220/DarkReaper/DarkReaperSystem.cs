@@ -39,6 +39,12 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaper");
 
+    [ValidatePrototypeId<AlertPrototype>]
+    private const string DeadscoreStage1Alert = "DeadscoreStage1";
+
+    [ValidatePrototypeId<AlertPrototype>]
+    private const string DeadscoreStage2Alert = "DeadscoreStage2";
+
     private const int MaxBooEntities = 30;
 
     public override void Initialize()
@@ -139,14 +145,14 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
     private void UpdateAlert(EntityUid uid, DarkReaperComponent comp)
     {
-        _alerts.ClearAlert(uid, AlertType.DeadscoreStage1);
-        _alerts.ClearAlert(uid, AlertType.DeadscoreStage2);
+        _alerts.ClearAlert(uid, DeadscoreStage1Alert);
+        _alerts.ClearAlert(uid, DeadscoreStage2Alert);
 
-        AlertType alert;
+        string alert;
         if (comp.CurrentStage == 1)
-            alert = AlertType.DeadscoreStage1;
+            alert = DeadscoreStage1Alert;
         else if (comp.CurrentStage == 2)
-            alert = AlertType.DeadscoreStage2;
+            alert = DeadscoreStage2Alert;
         else
         {
             return;
@@ -157,12 +163,12 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
         severity -= comp.Consumed;
 
-        if (alert == AlertType.DeadscoreStage1 && severity > 3)
+        if (alert == DeadscoreStage1Alert && severity > 3)
         {
             severity = 3; // 3 is a max value our sprite can display at stage 1
             _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
         }
-        else if (alert == AlertType.DeadscoreStage2 && severity > 8)
+        else if (alert == DeadscoreStage2Alert && severity > 8)
         {
             severity = 8; // 8 is a max value our sprite can display at stage 2
             _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
@@ -170,8 +176,8 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
         if (severity <= 0)
         {
-            _alerts.ClearAlert(uid, AlertType.DeadscoreStage1);
-            _alerts.ClearAlert(uid, AlertType.DeadscoreStage2);
+            _alerts.ClearAlert(uid, DeadscoreStage1Alert);
+            _alerts.ClearAlert(uid, DeadscoreStage2Alert);
             return;
         }
 

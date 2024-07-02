@@ -37,7 +37,7 @@
     - id: RegenerativeMesh
       amount: 50
     - id: SyringeEphedrine
-      amount: 20 
+      amount: 20
   - type: EntityStorage
     capacity: 250
 
@@ -122,8 +122,8 @@
       - Biological
     damage:
       types:
-        Bloodloss: -10 
-    ModifyBloodLevel: 15 
+        Bloodloss: -10
+    ModifyBloodLevel: 15
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
     healingEndSound:
@@ -141,7 +141,6 @@
   icon: { sprite: "/Textures/SS220/Objects/Specific/Medical/BloodSalveEbent.rsi", state: BloodSalve }
   spawn: BloodSalveEbent
   maxCount: 10
-  itemSize: 1
 
 - type: entity
   parent: ClothingBackpackDuffelEngineering
@@ -188,7 +187,7 @@
   suffix: Shitspawn, Ebent, FractWar
   name: вещмешок осколочных гранат
   description: Большой вещмешок для хранения любого армейского снаряжения.
-  components: 
+  components:
    - type: StorageFill
      contents:
       - id: ExGrenade

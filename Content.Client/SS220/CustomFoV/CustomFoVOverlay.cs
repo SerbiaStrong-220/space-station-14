@@ -84,7 +84,7 @@ public sealed class CustomFoVOverlay : Overlay
             if (handle is null || texture is null)
                 return;
 
-            var rotatedMatrix = Matrix3.CreateTransform(worldPosition, worldRot);
+            var rotatedMatrix = Matrix3Helpers.CreateTransform(worldPosition, worldRot);
             handle.SetTransform(rotatedMatrix);
             handle.DrawTexture(texture, new Vector2(-0.5f, -0.5f));
         }
@@ -98,8 +98,9 @@ public sealed class CustomFoVOverlay : Overlay
 
                 Vector2i GetDirRelativeToEdge(Vector2i edge)
                 {
-                    var invGridTransform = Matrix3.CreateTransform(worldPosition, gridRot).Invert();
-                    var relativePos = invGridTransform.Transform(eye!.Position.Position) + edge * 0.5f;
+                    var invGridTransform = Matrix3Helpers.CreateInverseTransform(worldPosition, gridRot);
+                    //var relativePos = invGridTransform.Transform(eye!.Position.Position) + edge * 0.5f;
+                    var relativePos = Vector2.Transform(eye!.Position.Position, invGridTransform) + edge * 0.5f;
                     return new Vector2i(MathF.Sign(relativePos.X), MathF.Sign(relativePos.Y));
                 }
 
@@ -146,7 +147,7 @@ public sealed class CustomFoVOverlay : Overlay
         }
 
         handle.UseShader(null);
-        handle.SetTransform(Matrix3.Identity);
+        handle.SetTransform(Matrix3x2.Identity);
         _entMapDict.Clear();
     }
 }

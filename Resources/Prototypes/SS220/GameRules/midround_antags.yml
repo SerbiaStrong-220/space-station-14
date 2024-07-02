@@ -25,4 +25,5 @@
     - prefRoles: [ DarkReaper ]
       max: 1
       playerRatio: 10
+      spawnerPrototype: SpawnPointGhostDarkReaperRune
   - type: DarkReaperMajorRule
