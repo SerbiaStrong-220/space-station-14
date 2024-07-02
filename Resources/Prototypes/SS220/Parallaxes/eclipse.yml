@@ -1,0 +1,43 @@
+- type: parallax
+  id: EclipseParallax
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/EclipseBackground_space.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/EclipseStars_Background.png"
+      slowness: 0.97
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/EclipseDust.png"
+      slowness: 0.98
+      scale: "1, 1"
+      scrolling: "-0.02, 0.02"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/EclipseNebulae.png"
+      slowness: 0.98
+      scale: "1, 1"
+      scrolling: "-0.02, 0.02"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/EclipseStars.png"
+      slowness: 0.94
+      scale: "1, 1"
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/SS220/Parallaxes/EclipsePlanets.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+      tiled: false
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+        slowness: 0.875
+  layersLQUseHQ: false
