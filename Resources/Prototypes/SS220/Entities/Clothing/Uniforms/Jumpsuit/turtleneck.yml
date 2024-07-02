@@ -65,3 +65,14 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSalvageSpecialistTurtleneck
+  name: salvage turtleneck turtleneck
+  description: Show that you are better than the damn dwarves!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_turtle.rsi
