@@ -35,7 +35,7 @@ entities:
       name: grid
     - type: Transform
       pos: 0.08385992,1.4122319
-      parent: invalid
+      parent: 1099
     - type: MapGrid
       chunks:
         0,0:
@@ -2129,6 +2129,18 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+  - uid: 1099
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
+    - type: Broadphase
+    - type: OccluderTree
 - proto: AirAlarm
   entities:
   - uid: 955
@@ -2259,17 +2271,17 @@ entities:
       - 503
       - 618
       - 604
-- proto: AirlockCommandGlass
+- proto: AirlockCommandGlassLocked
   entities:
-  - uid: 1099
-    components:
-    - type: Transform
-      pos: 0.5,6.5
-      parent: 1
   - uid: 1100
     components:
     - type: Transform
       pos: 0.5,8.5
+      parent: 1
+  - uid: 1143
+    components:
+    - type: Transform
+      pos: 0.5,6.5
       parent: 1
 - proto: AirlockEngineeringLocked
   entities:
@@ -3121,6 +3133,11 @@ entities:
     components:
     - type: Transform
       pos: 8.5,-11.5
+      parent: 1
+  - uid: 1144
+    components:
+    - type: Transform
+      pos: -6.5,6.5
       parent: 1
 - proto: CableApcStack
   entities:
