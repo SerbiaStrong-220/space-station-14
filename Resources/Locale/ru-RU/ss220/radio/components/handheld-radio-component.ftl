@@ -1,8 +1,3 @@
-handheld-radio-component-on-use = Радио { $radioState }.
-handheld-radio-component-on-examine = Настроено на работу на частоте { $frequency }.
-handheld-radio-component-on-state = включено
-handheld-radio-component-off-state = выключено
-handheld-radio-component-channel-set = Включён { $channel } канал
 handheld-radio-component-channel-examine = Выбранный канал: { $channel }.
 handheld-radio-component-on-channel-set = Настроить
 handheld-radio-component-title = Настройка радиочастот

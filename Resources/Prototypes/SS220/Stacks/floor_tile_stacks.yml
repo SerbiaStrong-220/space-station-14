@@ -4,179 +4,153 @@
   name: стальная шестиугольная плитка
   spawn: FloorTileItemSteelReinforced
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileWhiteReinforced
   name: белая шестиугольная плитка
   spawn: FloorTileItemWhiteReinforced
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileDarkReinforced
   name: тёмная шестиугольная плитка
   spawn: FloorTileItemDarkReinforced
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileDutch
   name: керамическая плитка
   spawn: FloorTileItemDutch
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileDutchMini
   name: керамическая мини-плитка
   spawn: FloorTileItemDutchMini
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTilePCircuit
   name: плитка фиолетовых микросхем
   spawn: FloorTileItemPCircuit
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileYCircuit
   name: плитка жёлтых микросхем
   spawn: FloorTileItemYCircuit
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileOCircuit
   name: плитка оранжевых микросхем
   spawn: FloorTileItemOCircuit
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileRCircuit
   name: плитка красных микросхем
   spawn: FloorTileItemRCircuit
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileKitchenRed
   name: красная кухонная плитка
   spawn: FloorTileItemKitchenRed
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodBlack
   name: black wood floor
   spawn: FloorTileItemWoodBlack
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodDark
   name: dark wood floor
   spawn: FloorTileItemWoodDark
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodLight
   name: light wood floor
   spawn: FloorTileItemWoodLight
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodRed
   name: red wood floor
   spawn: FloorTileItemWoodRed
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodLargeBlack
   name: large black wood floor
   spawn: FloorTileItemWoodLargeBlack
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodLargeDark
   name: large dark wood floor
   spawn: FloorTileItemWoodLargeDark
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodLargeLight
   name: large light wood floor
   spawn: FloorTileItemWoodLargeLight
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodLargeRed
   name: large red wood floor
   spawn: FloorTileItemWoodLargeRed
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodParquetBlack
   name: parquet black wood floor
   spawn: FloorTileItemWoodParquetBlack
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodParquetDark
   name: parquet dark wood floor
   spawn: FloorTileItemWoodParquetDark
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodParquetLight
   name: parquet light wood floor
   spawn: FloorTileItemWoodParquetLight
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodParquetRed
   name: parquet red wood floor
   spawn: FloorTileItemWoodParquetRed
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodTileBlack
   name: tile black wood floor
   spawn: FloorTileItemWoodTileBlack
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodTileDark
   name: tile dark wood floor
   spawn: FloorTileItemWoodTileDark
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodTileLight
   name: tile light wood floor
   spawn: FloorTileItemWoodTileLight
   maxCount: 30
-  itemSize: 5
 
 - type: stack
   id: FloorTileItemWoodTileRed
   name: tile red wood floor
   spawn: FloorTileItemWoodTileRed
   maxCount: 30
-  itemSize: 5

@@ -1,12 +1,3 @@
-# Security
-- type: loadoutGroup
-  id: SecurityPilotBackpack
-  name: loadout-group-security-pilot-backpack
-  loadouts:
-  - SecurityPilotBackpack
-  - SecurityPilotSatchel
-  - SecurityPilotDuffel
-
 # InternalAffairs
 - type: loadoutGroup
   id: IAABackpack
