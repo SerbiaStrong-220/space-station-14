@@ -66,6 +66,7 @@
             Chef: [ 2, 2 ]
             Clown: [ 1, 1 ]
             Janitor: [ 3, 3 ]
+            SeniorService: [ 1, 1]
             Mime: [ 1, 1 ]
             Chaplain: [ 1, 1 ]
             Librarian: [ 1, 1 ]

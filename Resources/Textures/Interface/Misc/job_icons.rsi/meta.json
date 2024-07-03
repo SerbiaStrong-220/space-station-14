@@ -170,6 +170,9 @@
         {
             "name": "SeniorOfficer"
         },
+		{
+			"name": "SeniorService"
+		},
         {
             "name": "Revolutionary"
         },

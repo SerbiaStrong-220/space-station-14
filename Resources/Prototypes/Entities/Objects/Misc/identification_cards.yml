@@ -898,7 +898,6 @@
     - state: idseniorresearcher
   - type: PresetIdCard
     job: SeniorResearcher
-    
 
 - type: entity
   parent: IDCardStandard

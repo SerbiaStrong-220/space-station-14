@@ -45,3 +45,15 @@
     layers:
       - state: green
       - state: seniorofficer
+ 
+- type: entity
+  id: SpawnPointServiceOfficer
+  parent: SpawnPointJobBase
+  name: seniorservice
+  components:
+  - type: SpawnPoint
+    job_id: SeniorService
+  - type: Sprite
+    layers:
+      - state: green
+      - state: serviceworker

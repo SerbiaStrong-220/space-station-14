@@ -24,6 +24,7 @@
             #service
             Captain: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
+            SeniorService: [ 1, 1]
             Bartender: [ 2, 2 ]
             Botanist: [ 3, 3 ]
             Chef: [ 2, 2 ]
@@ -31,6 +32,7 @@
             Chaplain: [ 2, 2 ]
             Librarian: [ 2, 2 ]
             ServiceWorker: [ 4, 4 ]
+            SeniorService: [ 1, 1]
             #engineering
             ChiefEngineer: [ 1, 1 ]
             SeniorEngineer: [ 1, 1]

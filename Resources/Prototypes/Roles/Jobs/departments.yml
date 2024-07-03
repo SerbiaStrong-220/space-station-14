@@ -19,6 +19,7 @@
   - Botanist
   - Boxer
   - Chaplain
+  - SeniorService
   - Chef
   - Clown
   - Detective
@@ -89,6 +90,7 @@
   weight: 20
   roles:
   - HeadOfSecurity
+  - SeniorOfficer
   - SecurityCadet
   - SecurityOfficer
   - SeniorOfficer

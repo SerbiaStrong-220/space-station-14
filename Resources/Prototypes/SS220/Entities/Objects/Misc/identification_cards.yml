@@ -92,3 +92,15 @@
     - type: PresetIdCard
       job: SecurityOfficer
       name: Рокси
+      
+- type: entity
+  parent: PassengerIDCard
+  id: SeniorServiceIDCard
+  name: senior service ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idseniorservice
+  - type: PresetIdCard
+    job: SeniorService
