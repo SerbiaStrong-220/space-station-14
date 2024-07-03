@@ -19,6 +19,7 @@
   - Botanist
   - Boxer
   - Chaplain
+  - SeniorService
   - Chef
   - Clown
   - Detective
@@ -61,6 +62,7 @@
   roles:
   - AtmosphericTechnician
   - ChiefEngineer
+  - SeniorEngineer
   - StationEngineer
   - TechnicalAssistant
 
@@ -72,6 +74,7 @@
   roles:
   - Chemist
   - ChiefMedicalOfficer
+  - SeniorPhysician
   - MedicalDoctor
   - MedicalIntern
   - Psychologist
@@ -86,6 +89,7 @@
   weight: 20
   roles:
   - HeadOfSecurity
+  - SeniorOfficer
   - SecurityCadet
   - SecurityOfficer
   - Warden
@@ -98,6 +102,7 @@
   color: "#D381C9"
   roles:
   - ResearchDirector
+  - SeniorResearcher
   - Scientist
   - ResearchAssistant
 
