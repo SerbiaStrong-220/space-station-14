@@ -118,7 +118,7 @@
   
 - type: loadoutGroup
   id: SeniorEngineerFace
-  name: Инженер, противогаз
+  name: loadout-group-passenger-mask
   minLimit: 0
   loadouts:
   - SeniorEngineerFace
