@@ -18,11 +18,13 @@ namespace Content.Shared.Access
         [DataField("name")]
         public string? Name { get; set; }
 
+        //SS220-door-electronic-configurator begin
         /// <summary>
         ///     The ability to change access using the network configurator or multitool.
         /// </summary>
         [DataField("canBeSwitchableInReader")]
         public bool CanBeSwitchableInReader { get; set; } = true;
+        //SS220-door-electronic-configurator begin
 
         public string GetAccessLevelName()
         {
