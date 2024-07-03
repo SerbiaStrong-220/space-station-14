@@ -12,6 +12,9 @@
   - type: Sprite
     layers:
     - state: ussp
+  - type: AgentIDCard
+    icons:
+    - JobIconPassenger
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
