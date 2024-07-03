@@ -13,6 +13,7 @@
     - /PhotocopierForms/nanotrasen_central_command/main/cc_cmd_dcr_sitrep.xml
     - /PhotocopierForms/nanotrasen_central_command/main/cc_cmd_dcr_sop.xml
     - /PhotocopierForms/nanotrasen_central_command/main/cc_cmd_dcr_law.xml
+    - /PhotocopierForms/nanotrasen_central_command/main/cc_cmd_dcr_arrival.xml
   - Id: blank_сс
     Name: Свободные бланки ЦентКома
     IconPath: /Textures/SS220/DepartmentIcons/Centcom_dep.png
@@ -87,6 +88,7 @@
     - /PhotocopierForms/nanotrasen_station/security/sec_swt.xml
     - /PhotocopierForms/nanotrasen_station/security/sup_ord_wep.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_sitrep.xml
+    - /PhotocopierForms/nanotrasen_station/security/sec_prig.xml
   - Id: medical
     Name: Медицинский отдел
     Color: "#8585FFFF"

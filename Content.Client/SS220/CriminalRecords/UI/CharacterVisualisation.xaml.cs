@@ -13,6 +13,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.Clothing;
+using Robust.Client.Player;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
@@ -21,6 +22,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
 {
     private readonly IEntityManager _entMan;
     private readonly IPrototypeManager _prototype;
+    private readonly IPlayerManager _player;
     private readonly ClientInventorySystem _inventorySystem;
     private EntityUid _previewDummy;
     private readonly SpriteView _face;
@@ -32,6 +34,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
         _entMan = IoCManager.Resolve<IEntityManager>();
         _prototype = IoCManager.Resolve<IPrototypeManager>();
+        _player = IoCManager.Resolve<IPlayerManager>();
         _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
 
         _face = new SpriteView() { Scale = new Vector2(5, 5) };
@@ -94,7 +97,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
         else
         {
             jobLoadout = new RoleLoadout(LoadoutSystem.GetJobPrototype(job.ID));
-            jobLoadout.SetDefault(_prototype);
+            jobLoadout.SetDefault(profile, _player.LocalSession, _prototype);
             GiveDummyLoadout(dummy, jobLoadout);
         }
     }

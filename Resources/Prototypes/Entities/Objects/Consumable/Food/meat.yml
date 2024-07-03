@@ -608,6 +608,8 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatTomatoCutlet
+  - type: StaticPrice
+    price: 100
 
 # SS220-Salami-update begin
 - type: entity
@@ -1294,6 +1296,8 @@
   - type: Sprite
     state: salami-slice
     color: red
+  - type: StaticPrice
+    price: 30
 
 - type: entity
   name: salami slice

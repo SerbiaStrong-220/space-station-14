@@ -1,0 +1,11 @@
+- type: entity
+  parent: ToyRubberDuck
+  id: ToyRubberDuckAlt
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/ducky_alt.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Objects/Fun/ducky_alt.rsi
+    slots:
+    - HEAD
