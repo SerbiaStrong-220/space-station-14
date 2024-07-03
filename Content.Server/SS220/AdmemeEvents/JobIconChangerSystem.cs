@@ -72,7 +72,6 @@ public sealed class JobIconChangerSystem : EntitySystem
             eventRoleComponent.RoleGroupKey = roleGroupKeys[roleIconFilter];
         }
 
-        //ss220 edit npcFaction begin
         if (HasComp<NpcFactionMemberComponent>(args.Target.Value))
         {
             _npcFaction.ClearFactions(args.Target.Value);
@@ -90,7 +89,6 @@ public sealed class JobIconChangerSystem : EntitySystem
                 _npcFaction.AddFaction(args.Target.Value,"EbentNanoTrasen");
             }
         }
-        //ss220 edit npcFaction end
 
         eventRoleComponent.StatusIcon = jobIcon;
         args.Handled = true;
