@@ -24,6 +24,7 @@
       amount: 4
     - id: ClothingNeckHydraMedal
       amount: 3
+    - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -85,6 +86,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTCommand
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadLeader
@@ -129,6 +133,7 @@
     - id: ClothingNeckScarfStripedSyndieRed
     - id: ClothingBeltChiefEngineerFilled
     - id: JetpackVoidFilled
+    - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -194,6 +199,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTEngineerOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadEngineer
@@ -299,6 +307,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTMedic
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadCorpsman
@@ -345,6 +356,7 @@
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -408,6 +420,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTMedicalOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadCMO
@@ -507,6 +522,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTCombatant
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadFighter
