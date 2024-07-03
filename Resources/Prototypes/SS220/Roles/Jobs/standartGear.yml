@@ -1,3 +1,5 @@
+# Returned these prototypes so that the corpses would spawned in this clothing, and not naked
+
 # Cargo
 - type: startingGear
   id: CargoTechStandartGear
