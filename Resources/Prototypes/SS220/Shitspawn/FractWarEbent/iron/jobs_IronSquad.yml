@@ -47,6 +47,7 @@
       - id: CombatMedipen
       - id: EnergySwordDouble
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -159,6 +160,7 @@
       - id: RCDAmmo
         amount: 3
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -264,6 +266,7 @@
       - id: EnergySword
       - id: SyndiHypo
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadCorpsmanGear
@@ -381,6 +384,7 @@
       - id: SyndiHypo
       - id: EnergyShield
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadCMOGear
@@ -480,6 +484,7 @@
         amount: 2
       - id: EnergySword
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadTrooperGear
