@@ -165,3 +165,6 @@
 
 - type: playTimeTracker
   id: JobSeniorResearcher
+
+- type: playTimeTracker
+  id: JobSeniorService
