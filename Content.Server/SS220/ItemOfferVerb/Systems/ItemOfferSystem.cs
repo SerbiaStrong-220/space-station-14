@@ -19,6 +19,10 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly HandsSystem _hands = default!;
+
+        [ValidatePrototypeId<AlertPrototype>]
+        private const string ItemOfferAlert = "ItemOffer";
+
         public override void Initialize()
         {
             base.Initialize();
@@ -38,7 +42,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 var giverHands = Comp<HandsComponent>(comp.Giver);
                 if (distance > comp.ReceiveRange)
                 {
-                    _alerts.ClearAlert(uid, AlertType.ItemOffer);
+                    _alerts.ClearAlert(uid, ItemOfferAlert);
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
                 //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
@@ -60,7 +64,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 //but it should work and it shouldn't affect performance too much because there are only 2 hands.
                 if (!foundInHand)
                 {
-                    _alerts.ClearAlert(uid, AlertType.ItemOffer);
+                    _alerts.ClearAlert(uid, ItemOfferAlert);
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
             }
@@ -80,7 +84,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                     var itemReceiver = EnsureComp<ItemReceiverComponent>(uid);
                     itemReceiver.Giver = args.User;
                     itemReceiver.Item = args.Hands.ActiveHandEntity;
-                    _alerts.ShowAlert(uid, AlertType.ItemOffer);
+                    _alerts.ShowAlert(uid, ItemOfferAlert);
                     _popupSystem.PopupEntity($"{Name(args.User)} протягивает {Name(args.Hands.ActiveHandEntity!.Value)} {Name(uid)}", args.User, PopupType.Small);
                 },
             };
@@ -95,7 +99,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
             if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
             {
                 _popupSystem.PopupEntity($"{Name(itemReceiver.Giver)} передал {Name(itemReceiver.Item!.Value)} {Name(receiver)}!", itemReceiver.Giver, PopupType.Medium);
-                _alerts.ClearAlert(receiver, AlertType.ItemOffer);
+                _alerts.ClearAlert(receiver, ItemOfferAlert);
                 _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
             };
         }

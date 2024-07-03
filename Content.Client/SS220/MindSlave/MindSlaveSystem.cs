@@ -2,33 +2,48 @@
 
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.StatusIcon.Components;
+using Robust.Client.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.MindSlave;
 
 public sealed class MindSlaveSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindSlaveComponent, CanDisplayStatusIconsEvent>(OnSlaveGetIcons);
-        SubscribeLocalEvent<MindSlaveMasterComponent, CanDisplayStatusIconsEvent>(OnMasterGetIcons);
+        SubscribeLocalEvent<MindSlaveComponent, GetStatusIconsEvent>(OnSlaveGetIcons);
+        SubscribeLocalEvent<MindSlaveMasterComponent, GetStatusIconsEvent>(OnMasterGetIcons);
     }
 
-    private void OnSlaveGetIcons(Entity<MindSlaveComponent> entity, ref CanDisplayStatusIconsEvent args)
+    private void OnSlaveGetIcons(Entity<MindSlaveComponent> entity, ref GetStatusIconsEvent args)
     {
-        if (TryComp<MindSlaveMasterComponent>(args.User, out var masterComp) && masterComp.EnslavedEntities.Contains(entity))
+        var viewer = _player.LocalSession?.AttachedEntity;
+
+        if (viewer != entity &&
+            (!TryComp<MindSlaveMasterComponent>(viewer, out var masterComp) ||
+            !masterComp.EnslavedEntities.Contains(entity)))
             return;
 
-        args.Cancelled = true;
+        var iconPrototype = _prototype.Index(entity.Comp.StatusIcon);
+        args.StatusIcons.Add(iconPrototype);
     }
 
-    private void OnMasterGetIcons(Entity<MindSlaveMasterComponent> entity, ref CanDisplayStatusIconsEvent args)
+    private void OnMasterGetIcons(Entity<MindSlaveMasterComponent> entity, ref GetStatusIconsEvent args)
     {
-        if (HasComp<MindSlaveComponent>(args.User) && entity.Comp.EnslavedEntities.Contains(args.User.Value))
+        var viewer = _player.LocalSession?.AttachedEntity;
+
+        if (viewer != entity &&
+            (!HasComp<MindSlaveComponent>(viewer) ||
+            !entity.Comp.EnslavedEntities.Contains(viewer.Value)))
             return;
 
-        args.Cancelled = true;
+        var iconPrototype = _prototype.Index(entity.Comp.StatusIcon);
+        args.StatusIcons.Add(iconPrototype);
     }
 }
 

@@ -93,6 +93,7 @@
   parent: UsspIDCard
   id: UsspIDCardCmdCMO
   suffix: Shitspawn, Ebent, FractWar
+  noSpawn: true
   components:
   - type: PresetIdCard
     job: USSPCMO

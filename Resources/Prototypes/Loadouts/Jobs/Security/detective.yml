@@ -18,14 +18,16 @@
     head: ClothingHeadHatFedoraGrey
   
 # Neck
-- type: loadout
-  id: DetectiveTie
-  equipment: DetectiveTie
+#SS220 holster to neck begin
+#- type: loadout
+#  id: DetectiveTie
+#  equipment: DetectiveTie
 
-- type: startingGear
-  id: DetectiveTie
-  equipment:
-    neck: ClothingNeckTieDet
+#- type: startingGear
+#  id: DetectiveTie
+#  equipment:
+#    neck: ClothingNeckTieDet
+#SS220 holster to neck end
 
 # Jumpsuit
 - type: loadout
@@ -63,34 +65,6 @@
   id: NoirJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtDetectiveGrey
-
-# Back
-- type: loadout
-  id: DetectiveBackpack
-  equipment: DetectiveBackpack
-
-- type: startingGear
-  id: DetectiveBackpack
-  equipment:
-    back: ClothingBackpackSecurityFilledDetective
-
-- type: loadout
-  id: DetectiveSatchel
-  equipment: DetectiveSatchel
-
-- type: startingGear
-  id: DetectiveSatchel
-  equipment:
-    back: ClothingBackpackSatchelSecurityFilledDetective
-
-- type: loadout
-  id: DetectiveDuffel
-  equipment: DetectiveDuffel
-
-- type: startingGear
-  id: DetectiveDuffel
-  equipment:
-    back: ClothingBackpackDuffelSecurityFilledDetective
 
 # OuterClothing
 - type: loadout

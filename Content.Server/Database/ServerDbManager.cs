@@ -9,6 +9,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ using Prometheus;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using LogLevel = Robust.Shared.Log.LogLevel;
 using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
@@ -295,6 +297,18 @@ namespace Content.Server.Database
 
         Task<DiscordPlayer?> GetAccountDiscordLink(Guid playerId);
         Task InsertDiscord(DiscordPlayer player);
+
+        #endregion
+
+        #region Job Whitelists
+
+        Task AddJobWhitelist(Guid player, ProtoId<JobPrototype> job);
+
+
+        Task<List<string>> GetJobWhitelists(Guid player, CancellationToken cancel = default);
+        Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job);
+
+        Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job);
 
         #endregion
     }
@@ -874,6 +888,30 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.MarkMessageAsSeen(id, dismissedToo));
+        }
+
+        public Task AddJobWhitelist(Guid player, ProtoId<JobPrototype> job)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddJobWhitelist(player, job));
+        }
+
+        public Task<List<string>> GetJobWhitelists(Guid player, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetJobWhitelists(player, cancel));
+        }
+
+        public Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.IsJobWhitelisted(player, job));
+        }
+
+        public Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveJobWhitelist(player, job));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

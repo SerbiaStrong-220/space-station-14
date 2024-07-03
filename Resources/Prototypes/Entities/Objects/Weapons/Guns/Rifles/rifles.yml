@@ -63,8 +63,17 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  #SS220 increase-automatic-rifles-spread begin
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -20
+  #SS220 increase-automatic-rifles-spread end
   - type: Gun
     fireRate: 5
+    #SS220 increase-automatic-rifles-spread begin
+    angleIncrease: 2
+    angleDecay: 12
+    #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider
@@ -156,7 +165,16 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
+  #SS220 increase-automatic-rifles-spread begin
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -20
+  #SS220 increase-automatic-rifles-spread end
   - type: Gun
+    #SS220 increase-automatic-rifles-spread begin
+    angleIncrease: 2
+    angleDecay: 12
+    #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
   - type: ItemSlots

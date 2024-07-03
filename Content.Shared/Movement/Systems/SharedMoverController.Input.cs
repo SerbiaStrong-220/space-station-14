@@ -312,10 +312,16 @@ namespace Content.Shared.Movement.Systems
 
             // For stuff like "Moving out of locker" or the likes
             // We'll relay a movement input to the parent.
+
+            //SS220 FIX out from containers when you stunned
+            if (!TryComp<InputMoverComponent>(entity, out var moveComp))
+                return;
+            //SS220 FIX
             if (_container.IsEntityInContainer(entity) &&
-                TryComp<TransformComponent>(entity, out var xform) &&
+                TryComp(entity, out TransformComponent? xform) &&
                 xform.ParentUid.IsValid() &&
-                _mobState.IsAlive(entity))
+                _mobState.IsAlive(entity)
+                && moveComp.CanMove /*Check for possibility to move. SS220 FIX END*/ )
             {
                 var relayMoveEvent = new ContainerRelayMovementEntityEvent(entity);
                 RaiseLocalEvent(xform.ParentUid, ref relayMoveEvent);
