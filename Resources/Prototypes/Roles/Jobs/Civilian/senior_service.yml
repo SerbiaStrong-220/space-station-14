@@ -2,7 +2,7 @@
   id: SeniorService
   name: ведущий сервисного отдела
   description: ходите по отделам, сервиса и учите поваров,ботаников работать сообща.
-  playTimeTracker: JobSeniorAssistanter
+  playTimeTracker: JobSeniorService
   requirements:
     - !type:RoleTimeRequirement
       role: JobServiceWorker
@@ -20,7 +20,6 @@
   - Bar
   - Service
   - Janitor
-  - Boxer
   - External
   - Theatre
   - Kitchen
