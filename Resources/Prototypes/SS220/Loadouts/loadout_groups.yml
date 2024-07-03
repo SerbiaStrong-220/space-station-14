@@ -63,21 +63,21 @@
 #senior service
 - type: loadoutGroup
   id: HatSeniorService
-  name: Кепки
+  name: loadout-group-bartender-head
   minLimit: 0
   loadouts:
   - HatSeniorService
 
 - type: loadoutGroup
   id: SeniorServiceJumpsuit
-  name: Одежда
+  name: loadout-group-bartender-jumpsuit
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
   
 - type: loadoutGroup
   id: SeniorServiceBackpack
-  name: Рюкзаки
+  name: loadout-group-backpack
   loadouts:
   - SeniorServiceBackpack
   - CommonSatchel
@@ -86,7 +86,7 @@
   
 - type: loadoutGroup
   id: SeniorServiceMask
-  name: Противогаз
+  name: loadout-group-passenger-mask
   minLimit: 0
   loadouts:
   - SeniorServiceFace
