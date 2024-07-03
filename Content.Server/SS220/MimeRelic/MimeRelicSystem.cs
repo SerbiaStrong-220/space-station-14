@@ -30,7 +30,7 @@ namespace Content.Server.SS220.MimeRelic
         }
 
 
-        private void OnMimeRelicActivate(EntityUid uid, MimeRelicComponent component, ActivateInWorldEvent args)
+        private void OnMimeRelicActivate(Entity<MimeRelicComponent> ent, ref ActivateInWorldEvent args)
         {
             args.Handled = true;
             TryComp<MimePowersComponent>(args.User, out MimePowersComponent? mimePowersComponent);
@@ -40,7 +40,7 @@ namespace Content.Server.SS220.MimeRelic
                 return;
             }
 
-            if (_timing.CurTime < component.TimeWallCanBePlaced)
+            if (_timing.CurTime < ent.Comp.TimeWallCanBePlaced)
                 return;
 
             if (_container.IsEntityOrParentInContainer(args.User))
@@ -56,16 +56,16 @@ namespace Content.Server.SS220.MimeRelic
                 _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-failed", ("mime", args.User)), args.User);
                 return;
             }
-            PlaceWallInTile(centralWallPosition, component.WallToPlacePrototype, component.WallLifetime);
-            component.TimeWallCanBePlaced = _timing.CurTime + component.CooldownTime;
+            PlaceWallInTile(centralWallPosition, ent.Comp.WallToPlacePrototype, ent.Comp.WallLifetime);
+            ent.Comp.TimeWallCanBePlaced = _timing.CurTime + ent.Comp.CooldownTime;
             _popupSystem.PopupEntity(Loc.GetString("mimeRelic-wall-success", ("mime", args.User)), args.User);
 
             var orderList = new List<int>() { -1, 1 };
             foreach (int sideTileOrder in orderList)
                 if (CanPlaceWallInTile(centralWallPosition.Offset(sideTileOrder * perpendToViewVector)))
-                    PlaceWallInTile(centralWallPosition.Offset(sideTileOrder * perpendToViewVector), component.WallToPlacePrototype, component.WallLifetime);
+                    PlaceWallInTile(centralWallPosition.Offset(sideTileOrder * perpendToViewVector), ent.Comp.WallToPlacePrototype, ent.Comp.WallLifetime);
                 else if (CanPlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector)))
-                    PlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector), component.WallToPlacePrototype, component.WallLifetime);
+                    PlaceWallInTile(centralWallPosition.Offset(-2 * sideTileOrder * perpendToViewVector), ent.Comp.WallToPlacePrototype, ent.Comp.WallLifetime);
             // -2 is a magic number, whic gets neighbour tile opposite to central wall (oxCoo -> ooCox or ooCxo -> xoCoo)
         }
 
