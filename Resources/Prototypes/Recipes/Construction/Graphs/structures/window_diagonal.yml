@@ -46,6 +46,7 @@
               amount: 2
               doAfter: 3
 
+#SS220-craft-start
         - to: shuttleWindowDiagonal
           steps:
             - material: Plasteel
@@ -53,7 +54,8 @@
             - material: ReinforcedGlass
               amount: 2
               doAfter: 4
-        
+#SS220-craft-end
+
     - node: windowDiagonal
       entity: WindowDiagonal
       edges:
@@ -199,6 +201,7 @@
             - tool: Anchoring
               doAfter: 3
 
+#SS220-craft-start
     - node: shuttleWindowDiagonal
       entity: ShuttleWindowDiagonal
       edges:
@@ -229,3 +232,4 @@
               doAfter: 4
             - tool: Anchoring
               doAfter: 1
+#SS220-craft-end

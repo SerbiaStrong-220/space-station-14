@@ -1711,6 +1711,7 @@
   conditions:
     - !type:TileNotBlocked
 
+#SS220-craft-start
 - type: construction
   name: diagonal shuttle window
   id: ShuttleWindowDiagonal
@@ -1728,3 +1729,4 @@
     state: state1
   objectType: Structure
   placementMode: SnapgridCenter
+#SS220-craft-end
