@@ -12,6 +12,9 @@
   - type: Sprite
     layers:
     - state: ussp
+  - type: AgentIDCard
+    icons:
+    - JobIconPassenger
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
@@ -21,6 +24,9 @@
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null
+  - type: Access
+    groups:
+    - UsspAllAccess
 
 - type: entity
   parent: CentcomIDCard
