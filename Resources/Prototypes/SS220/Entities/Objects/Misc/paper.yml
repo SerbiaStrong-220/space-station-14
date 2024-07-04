@@ -203,7 +203,7 @@
   # База
 - type: entity
   parent: BoxFolderBase
-  id: BoxFolderBasee
+  id: BoxFolderBaseSS220
   name: папка
   description: Папка, заполненная совершенно секретными документами.
   abstract: true
@@ -216,7 +216,7 @@
 
   # Командование
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderСaptain
   name: папка капитана
   components:
@@ -226,7 +226,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderHoP
   name: папка главы персонала
   components:
@@ -236,7 +236,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderCE
   name: папка старшего инженера
   components:
@@ -246,7 +246,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderCMO
   name: папка главного врача
   components:
@@ -256,7 +256,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderHoS
   name: папка главы службы безопасности
   components:
@@ -266,7 +266,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderQM
   name: папка квартирмейстера
   components:
@@ -276,7 +276,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderRD
   name: папка научного руководителя
   components:
@@ -287,7 +287,7 @@
 
   # Отделы
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderCargo
   name: папка отдела снабжения
   components:
@@ -297,7 +297,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderSecurity
   name: папка отдела службы безопасности
   components:
@@ -307,7 +307,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderEngineer
   name: папка инженерного отдела
   components:
@@ -317,7 +317,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderSyndicate
   name: папка синдиката
   components:
@@ -327,7 +327,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolder
   name: радужная папка
   components:
@@ -337,7 +337,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderMedical
   name: папка медицинского отдела
   components:
@@ -347,7 +347,7 @@
     - state: folder-base
 
 - type: entity
-  parent: BoxFolderBasee
+  parent: BoxFolderBaseSS220
   id: BoxFolderReserch
   name: папка отдела исследований
   components:
