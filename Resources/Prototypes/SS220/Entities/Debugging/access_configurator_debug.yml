@@ -54,3 +54,9 @@
       - CentralCommandGSN
       - CentralCommandDeathSquad
       #New centcomm accesses end
+      #Ussp accesses begin
+      - Ussp
+      - UsspCommand
+      - UsspMedical
+      - UsspEngineering
+      #Ussp accesses end
