@@ -17,7 +17,7 @@
   equipment:
     head: ClothingHeadHatQMsoft
     jumpsuit: ClothingUniformJumpsuitQM
-    back: ClothingBackpackQuartermaster
+    back: ClothingBackpackCargo
     shoes: ClothingShoesColorBrown
     id: QuartermasterPDA
     ears: ClothingHeadsetQM
@@ -69,7 +69,7 @@
   id: ChaplainStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitChaplain
-    back: ClothingBackpackChaplain
+    back: ClothingBackpack
     shoes: ClothingShoesColorBlack
     id: ChaplainPDA
     ears: ClothingHeadsetService
@@ -115,7 +115,7 @@
   id: LawyerStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerBlack
-    back: ClothingBackpackLawyer
+    back: ClothingBackpack
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
     ears: ClothingHeadsetSecurity
@@ -126,7 +126,7 @@
   id: LibrarianStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitLibrarian
-    back: ClothingBackpackLibrarian
+    back: ClothingBackpack
     shoes: ClothingShoesBootsLaceup
     id: LibrarianPDA
     ears: ClothingHeadsetService
@@ -152,7 +152,7 @@
   id: MusicianStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitMusician
-    back: ClothingBackpackMusician
+    back: ClothingBackpack
     eyes: ClothingEyesGlassesSunglasses
     shoes: ClothingShoesBootsLaceup
     id: MusicianPDA
@@ -204,7 +204,7 @@
   id: HoPStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoP
-    back: ClothingBackpackHOP
+    back: ClothingBackpack
     shoes: ClothingShoesColorBrown
     head: ClothingHeadHatHopcap
     id: HoPPDA
@@ -229,7 +229,7 @@
   equipment:
     head: ClothingHeadHatHardhatWhite
     jumpsuit: ClothingUniformJumpsuitChiefEngineer
-    back: ClothingBackpackChiefEngineer
+    back: ClothingBackpackEngineering
     shoes: ClothingShoesColorBrown
     id: CEPDA
     eyes: ClothingEyesGlassesMeson
@@ -277,7 +277,7 @@
   id: CMOStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitCMO
-    back: ClothingBackpackCMO
+    back: ClothingBackpackMedical
     shoes: ClothingShoesColorBrown
     outerClothing: ClothingOuterCoatLabCmo
     id: CMOPDA
@@ -310,7 +310,7 @@
   id: ParamedicStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitParamedic
-    back: ClothingBackpackParamedic
+    back: ClothingBackpackMedical
     shoes: ClothingShoesColorBlue
     id: ParamedicPDA
     ears: ClothingHeadsetMedical
@@ -351,7 +351,7 @@
   id: ResearchDirectorStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitResearchDirector
-    back: ClothingBackpackResearchDirector
+    back: ClothingBackpackScience
     shoes: ClothingShoesColorBrown
     outerClothing: ClothingOuterCoatRD
     id: RnDPDA
@@ -385,7 +385,7 @@
   id: HoSStandartGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoS
-    back: ClothingBackpackHOS
+    back: ClothingBackpackSecurity
     shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterCoatHoSTrench
     eyes: ClothingEyesGlassesSecurity
