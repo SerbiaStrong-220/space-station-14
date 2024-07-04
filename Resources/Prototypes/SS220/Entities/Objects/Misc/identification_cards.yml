@@ -24,6 +24,9 @@
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null
+  - type: Access
+    groups:
+    - UsspAllAccess
 
 - type: entity
   parent: CentcomIDCard

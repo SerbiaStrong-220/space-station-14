@@ -75,7 +75,7 @@
   playTimeTracker: USSPLeader
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -162,7 +162,7 @@
   playTimeTracker: USSPEngineer
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -249,7 +249,7 @@
   playTimeTracker: USSPCorpsman
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -333,7 +333,7 @@
   playTimeTracker: USSPCMO
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -414,7 +414,7 @@
   playTimeTracker: USSPFighter
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
