@@ -348,7 +348,7 @@
     - id: RubberStampApproved
     - id: RubberStampDenied
     - id: RubberStampSyndicate
-    - id: PenCentCom
+    - id: PenCentcom
 #ss-220 addAdminTools end
 #SS-220 Admin memes start
     - id: ClothingEyesHudMultiversal
