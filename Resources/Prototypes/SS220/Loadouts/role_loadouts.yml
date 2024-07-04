@@ -21,8 +21,9 @@
   id: JobSecurityPilot
   groups:
   - SecurityPilotHead
+  - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityPilotBackpack
+  - SecurityBackpack
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityPDA
