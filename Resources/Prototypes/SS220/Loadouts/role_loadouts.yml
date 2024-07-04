@@ -20,9 +20,9 @@
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
+  - SecurityPilotHead
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityPilotHead
   - SecurityBackpack
   - SecurityOuterClothing
   - SecurityShoes
