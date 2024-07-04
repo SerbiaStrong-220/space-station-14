@@ -60,6 +60,7 @@
   loadouts:
   - ChiefEngineerPDA
   - DarkChiefEngineerPDA
+
 #senior service
 - type: loadoutGroup
   id: HatSeniorService
@@ -230,3 +231,13 @@
   loadouts:
   - SeniorSecJumpsuit
   - SeniorSecJumpskirt
+
+# Cargo
+
+  # Утилизатор
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - UniformJumpsuitSalvageSpecialist
+  - SalvageSpecialistJumpsuitTurtleneck

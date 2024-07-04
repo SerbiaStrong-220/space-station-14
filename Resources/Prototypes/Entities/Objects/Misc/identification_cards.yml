@@ -852,7 +852,7 @@
     heldPrefix: blue
   - type: IdCard
   # SS220 new CentComm begin
-    jobTitle: Агент РХБЗ
+    jobTitle: Агент РХБЗЗ
   - type: Access
     groups:
     - AllAccess # SS220 Fast fix access

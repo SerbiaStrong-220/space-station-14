@@ -10,6 +10,15 @@
 
 # Jumpsuit
 - type: loadout
+  id: UniformJumpsuitSalvageSpecialist
+  equipment: UniformJumpsuitSalvageSpecialist
+
+- type: startingGear
+  id: UniformJumpsuitSalvageSpecialist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+
+- type: loadout
   id: SalvageSpecialistJumpsuitTurtleneck
   equipment: SalvageSpecialistJumpsuitTurtleneck
   effects:
@@ -19,49 +28,4 @@
 - type: startingGear
   id: SalvageSpecialistJumpsuitTurtleneck
   equipment:
-    jumpsuit: ClothingUniformJumpsuitTurtleColorBrown
-
-- type: loadout
-  id: SalvageSpecialistJumpsuitTurtleneckAlt
-  equipment: SalvageSpecialistJumpsuitTurtleneckAlt
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SalvageSpecialistTurtleneck
-
-- type: startingGear
-  id: SalvageSpecialistJumpsuitTurtleneckAlt
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitTurtleAltColorBrown
-
-- type: loadout
-  id: SalvageSpecialistJumpskirtTurtleneck
-  equipment: SalvageSpecialistJumpskirtTurtleneck
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SalvageSpecialistTurtleneck
-
-- type: startingGear
-  id: SalvageSpecialistJumpskirtTurtleneck
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtTurtleColorBrown
-
-- type: loadout
-  id: SalvageSpecialistJumpskirtTurtleneckAlt
-  equipment: SalvageSpecialistJumpskirtTurtleneckAlt
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SalvageSpecialistTurtleneck
-
-- type: startingGear
-  id: SalvageSpecialistJumpskirtTurtleneckAlt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtTurtleAltColorBrown
-
-- type: loadout
-  id: UniformJumpsuitSalvageSpecialist
-  equipment: UniformJumpsuitSalvageSpecialist
-
-- type: startingGear
-  id: UniformJumpsuitSalvageSpecialist
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialistTurtleneck
