@@ -60,3 +60,13 @@
   loadouts:
   - ChiefEngineerPDA
   - DarkChiefEngineerPDA
+
+# Cargo
+
+  # Утилизатор
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - UniformJumpsuitSalvageSpecialist
+  - SalvageSpecialistJumpsuitTurtleneck

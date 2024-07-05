@@ -1,0 +1,42 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Ussp
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsUssp
+  suffix: USSP
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/door_electronics_ussp.rsi
+
+- type: entity
+  parent: DoorElectronicsUssp
+  id: DoorElectronicsUsspLocked
+  suffix: USSP, Locked
+  components:
+  - type: AccessReader
+    access: [["Ussp"]]
+
+- type: entity
+  parent: DoorElectronicsUssp
+  id: DoorElectronicsUsspLockedCommand
+  suffix: USSP, Locked, Command
+  components:
+  - type: AccessReader
+    access: [["UsspCommand"]]
+
+- type: entity
+  parent: DoorElectronicsUssp
+  id: DoorElectronicsUsspLockedMedical
+  suffix: USSP, Locked, Medical
+  components:
+  - type: AccessReader
+    access: [["UsspMedical"]]
+
+- type: entity
+  parent: DoorElectronicsUssp
+  id: DoorElectronicsUsspLockedEngineering
+  suffix: Ussp, Locked, Engineering
+  components:
+  - type: AccessReader
+    access: [["UsspEngineering"]]

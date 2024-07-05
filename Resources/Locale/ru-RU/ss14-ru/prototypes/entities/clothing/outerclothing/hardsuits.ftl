@@ -55,7 +55,8 @@ ent-ClothingOuterHardsuitLing = органический космический 
     .desc = Устойчивая к космическому давлению и температуре биомасса.
 ent-ClothingOuterHardsuitSpatio = лёгкий скафандр утилизатора
     .desc = Легковесный скафандр, предназначенный для сложных технических работ в космосе.
-ent-ClothingOuterHardsuitCBURN = экзокостюм отряда РХБЗЗ
+# SS220 CBURN questions
+ent-ClothingOuterHardsuitCBURN = экзокостюм отряда РХБЗ
     .desc = Легковесный но прочный экзокостюм, который используют специальные подразделения зачистки.
 ent-ClothingOuterHardsuitERTLeader = скафандр лидера ОБР
     .desc = Защитный скафандр, используемый лидерами отряда быстрого реагирования.

@@ -10,3 +10,5 @@ ent-ClothingUniformOverallsWhite = белый комбинезон на лямк
     .desc = Отлично подходит для работы на открытом воздухе.
 ent-ClothingUniformJumpsuitJournalistRed = красный костюм журналиста
     .desc = Если журналистика хороша, то она противоречива по своей природе.
+ent-ClothingUniformJumpsuitCargonovich = каргонович
+    .desc = Ты бы ещё лопнувшую бочку для газа притащил...

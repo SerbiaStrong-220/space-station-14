@@ -509,6 +509,7 @@
   - QuartermasterTurtleneck
   - QuartermasterTurtleneckSkirt
   - QuartermasterFormalSuit
+  - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
 
 - type: loadoutGroup
   id: QuartermasterNeck
@@ -571,17 +572,7 @@
   loadouts:
   - BlackShoes
   - CargoWinterBoots
-#SS220-MoreTurtleneck-Begin
-- type: loadoutGroup
-  id: SalvageSpecialistJumpsuit
-  name: loadout-group-salvage-specialist-jumpsuit
-  loadouts:
-  - UniformJumpsuitSalvageSpecialist
-  - SalvageSpecialistJumpsuitTurtleneck
-  - SalvageSpecialistJumpsuitTurtleneckAlt
-  - SalvageSpecialistJumpskirtTurtleneck
-  - SalvageSpecialistJumpskirtTurtleneckAlt
-#SS220-MoreTurtleneck-End
+
 - type: loadoutGroup
   id: SalvageSpecialistBackpack
   name: loadout-group-salvage-specialist-backpack
@@ -943,6 +934,15 @@
   - SecurityBeret
   - SecurityHat
 
+#SS220 holster loadout begin
+- type: loadoutGroup
+  id: SecurityNeck
+  name: loadout-group-security-neck
+  minLimit: 0
+  loadouts:
+  - SecurityHolster
+#SS220 holster loadout end
+
 - type: loadoutGroup
   id: SecurityJumpsuit
   name: loadout-group-security-jumpsuit
@@ -1002,12 +1002,14 @@
   - DetectiveFedora
   - DetectiveFedoraGrey
 
-- type: loadoutGroup
-  id: DetectiveNeck
-  name: loadout-group-detective-neck
-  minLimit: 0
-  loadouts:
-  - DetectiveTie
+#SS220 holster to neck begin
+#- type: loadoutGroup
+#  id: DetectiveNeck
+#  name: loadout-group-detective-neck
+#  minLimit: 0
+#  loadouts:
+#  - DetectiveTie
+#SS220 holster to neck end
 
 - type: loadoutGroup
   id: DetectiveJumpsuit

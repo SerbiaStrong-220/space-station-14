@@ -1,3 +1,75 @@
+# Centcom
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCentcomFormalDress
+  name: central command formal dress
+  description: A dress for special occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.5
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCentcomJacket
+  name: central command jacket
+  description: The jacket of the central command, emphasizing your status.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
+  - type: TemperatureProtection
+    coefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.70
+        Slash: 0.70
+        Piercing: 0.60
+        Heat: 0.90
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatOfficerFieldUniform
+  name: полевая форма Офицера Флота NanoTrasen
+  description: Парадный плащ, разработанный в качестве массового варианта формы Верховного Главнокомандующего. У этой униформы нет тех же защитных свойств, что и у оригинала, но она все ещё является довольно удобным и стильным предметом гардероба.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
+  - type: TemperatureProtection
+    coefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.70
+        Slash: 0.60
+        Piercing: 0.50
+        Heat: 0.80
+
+# Command
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPFormalDress
+  name: торжественное платье главы персонала
+  description: Только для настоящих машин бюрократии.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+
+# Cargo
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatQM
@@ -16,7 +88,8 @@
         Piercing: 0.9
         Heat: 0.9
 
-- type: entity 
+# Engineering
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCEFormalDress
   name: торжественное платье старшего инженера
@@ -31,12 +104,13 @@
       coefficients:
         Heat: 0.75
         Radiation: 0.9
-        
-- type: entity 
+
+# Medical
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCMOFormalDress
   name: торжественное платье главного врача
-  description: Встречайте - Главный Врач! 
+  description: Встречайте - Главный Врач!
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
@@ -46,19 +120,9 @@
     modifiers:
       coefficients:
         Caustic: 0.75
-        
-- type: entity 
-  parent: ClothingOuterStorageBase
-  id: ClothingOuterCoatHoPFormalDress
-  name: торжественное платье главы персонала
-  description: Только для настоящих машин бюрократии.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
-    
-- type: entity 
+
+# Science
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatRDFormalDress
   name: торжественное платье научного руководителя
