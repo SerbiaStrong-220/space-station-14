@@ -1,4 +1,5 @@
-id-card-access-level-central-command-cburn = РХБЗЗ
+# SS220 CBURN questions
+id-card-access-level-central-command-cburn = РХБЗ
 id-card-access-level-central-command-ert = ОБР
 id-card-access-level-central-command-gsn = ГСН
 id-card-access-level-central-command-death-squad = Эскадрон смерти

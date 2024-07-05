@@ -508,6 +508,7 @@
   - QuartermasterTurtleneck
   - QuartermasterTurtleneckSkirt
   - QuartermasterFormalSuit
+  - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
 
 - type: loadoutGroup
   id: QuartermasterNeck

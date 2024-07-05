@@ -24,6 +24,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
+using Content.Shared.SS220.Telepathy;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -260,6 +261,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             case InGameICChatType.Emote:
                 SendEntityEmote(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
                 break;
+
+            //ss220-telepathy-begin
+            case InGameICChatType.Telepathy:
+                if (TryComp(source, out TelepathyComponent? telepathyComponent) && telepathyComponent.CanSend)
+                    RaiseLocalEvent(source, new TelepathySendEvent() { Message = message });
+                break;
+            //ss220-telepathy-end
         }
     }
 
@@ -971,7 +979,9 @@ public enum InGameICChatType : byte
 {
     Speak,
     Emote,
-    Whisper
+    Whisper,
+    //ss220-telepathy
+    Telepathy
 }
 
 /// <summary>

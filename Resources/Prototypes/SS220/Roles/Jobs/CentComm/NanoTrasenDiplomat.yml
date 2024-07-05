@@ -48,9 +48,9 @@
   equipment:
     jumpsuit: ClothingUniformNanotrasenDiplomat
     shoes: ClothingShoesBootsLaceup
-    head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesBlueShield
-    gloves: ClothingHandsGlovesLatex
+    head: ClothingHeadHatBeretNanoTrasenDiplomat
+    eyes: ClothingEyesGlassesCentcom
+    gloves: ClothingHandsGlovesNanotrasenDiplomat
     id: CentcomDiplomatPDA
     ears: ClothingHeadsetAltCentComm
     belt: WeaponPulsePistol

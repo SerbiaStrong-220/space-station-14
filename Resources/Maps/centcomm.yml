@@ -32620,7 +32620,7 @@ entities:
     - pos: 15.5,8.5
       parent: 1668
       type: Transform
-- proto: RubberStampCentcom
+- proto: RubberStampCentcomm
   entities:
   - uid: 2917
     components:

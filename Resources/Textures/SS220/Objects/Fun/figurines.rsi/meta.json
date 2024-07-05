@@ -1,14 +1,35 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by vimenant2 (Discord) for SS220",
+  "copyright": "Made by vimenant2 (Discord) for SS220; admiral, diplomat, field_officer_centcom, officer_centcom, quartermaster, senior_scientist, zombie sprited by cana5887 (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
+      "name": "admiral"
+    },
+    {
       "name": "blueshield"
+    },
+    {
+      "name": "diplomat"
+    },
+    {
+      "name": "field_officer_centcom"
+    },
+    {
+      "name": "officer_centcom"
+    },
+    {
+      "name": "qm"
+    },
+    {
+      "name": "senior_scientist"
+    },
+    {
+      "name": "zombie"
     }
   ]
 }
