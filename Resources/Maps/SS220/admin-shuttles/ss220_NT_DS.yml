@@ -510,9 +510,9 @@ entities:
       - 414
       - 410
       - 15
-- proto: AirlockCentcomm
+- proto: AirlockCentcommLockedDeathSquad
   entities:
-  - uid: 10
+  - uid: 8
     components:
     - type: MetaData
       name: машинный отсек
@@ -534,9 +534,9 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -6.5,1.5
       parent: 1
-- proto: AirlockGlassCentcomm
+- proto: AirlockGlassCentcommLockedDeathSquad
   entities:
-  - uid: 8
+  - uid: 10
     components:
     - type: MetaData
       name: рубка пилота
