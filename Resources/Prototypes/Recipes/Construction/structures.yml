@@ -1710,3 +1710,23 @@
     state: closed
   conditions:
     - !type:TileNotBlocked
+
+#SS220-craft-start
+- type: construction
+  name: diagonal shuttle window
+  id: ShuttleWindowDiagonal
+  graph: WindowDiagonal
+  startNode: start
+  targetNode: shuttleWindowDiagonal
+  category: construction-category-structures
+  description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/shuttle_window_diagonal.rsi
+    state: state1
+  objectType: Structure
+  placementMode: SnapgridCenter
+#SS220-craft-end

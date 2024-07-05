@@ -46,7 +46,8 @@ ent-ClothingHeadHelmetHardsuitLing = органический космическ
     .desc = Устойчивая к космическому давлению и температуре биомасса.
 ent-ClothingHeadHelmetHardsuitSpatio = шлем лёгкого скафандра утилизатора
     .desc = Прочный шлем, предназначенный для сложных технических работ в космосе.
-ent-ClothingHeadHelmetCBURN = шлем отряда РХБЗЗ
+# SS220 CBURN questions
+ent-ClothingHeadHelmetCBURN = шлем отряда РХБЗ
     .desc = Огнеупорный, защищающий давления шлем, который используют специальные подразделения зачистки.
 ent-ClothingHeadHelmetHardsuitPirateCap = шлем древнего скафандра
     .desc = Специальный шлем скафандра, изготвленный для капитана пиратского корабля.

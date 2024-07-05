@@ -49065,7 +49065,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#006600FF'
+      - stampedColor: '#dca019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: Данные импланты ОБЯЗАНЫ быть вколоты ОСО в начале КАЖДОЙ смены
     - type: Physics
@@ -49468,7 +49468,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#006600FF'
+      - stampedColor: '#dca019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: >
         [bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
@@ -49567,6 +49567,78 @@ entities:
 
 
         [italic]Место для печати - Офицер Специальных Операций[/italic]
+  - uid: 8626
+    components:
+    - type: Transform
+      parent: 5987
+    - type: Paper
+      stampState: paper_stamp-lawyer
+      stampedBy:
+      - stampedColor: '#A35061FF'
+        stampedName: Инженерное Бюро Архитекторов
+      - stampedColor: '#dca019FF'
+        stampedName: stamp-component-stamped-name-centcom
+      content: >
+        [bold]Вечные почести самым ответственным лицам и архитекторам NanoTrasen. [/bold]
+
+
+        [bullet]Старший проектировщик [bold]Алан Свит-Лисичанский[/bold] за постоянное усовершенствование проекта и контроль качества строительства;
+
+        [bullet]Дизайнер [bold]Леонид Головач[/bold] за общую концепцию, чертеж первых версий и проектировку инженерных систем;
+
+        [bullet][bold]Архитектор Авианосца Луна[/bold] за внедренные разработки в обновленные модели шаттлов;
+
+        [bullet]Архитектор [bold]Исаак Инсомния[/bold] за устранение дыр в системах безопасности и дизайнерскую помощь с красными оттенками;
+
+        [bullet][bold]Марск Дуерлонд[/bold] за стабильные поставки стройматериалов и помощь в проектировке отдела Снабжения;
+
+        [bullet]Заслуженный оператор [bold]Алиссия[/bold] за внесённую критику в обустройство отсеков ЦК и помощь в проектировке рабочих мест;
+
+        [bullet]Уборщик [bold]Эмиви Пушистые Вапки[/bold] что привнес свое немаловажное оценочное мнение в обустройство сервисного отдела и на которого удалось свалить косяки других перед инвесторами.
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 8627
 - proto: PaperNtFormCmd
   entities:
   - uid: 591
@@ -53949,7 +54021,7 @@ entities:
     - type: Stamp
       stampedName: Офицер Спецопераций
       stampedColor: '#3E5F8AFF'
-- proto: RubberStampCentcom
+- proto: RubberStampCentcomm
   entities:
   - uid: 6748
     components:
