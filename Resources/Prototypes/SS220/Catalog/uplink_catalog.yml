@@ -15,7 +15,7 @@
       blacklist:
         tags:
         - NukeOpsUplink
-        - LoneOpsUplink        
+        - LoneOpsUplink
 
 # Implants
 
@@ -41,7 +41,7 @@
   id: UplinkMimeRelic
   name: uplink-mime-relic-name
   description: uplink-mime-relic-desc
-  icon: { sprite: SS220/Objects/Specific/SacredRelics/SacredRelicMime.rsi, state: icon }  
+  icon: { sprite: SS220/Objects/Specific/SacredRelics/SacredRelicMime.rsi, state: icon }
   productEntity: SacredRelicMime
   cost:
     Telecrystal: 4
@@ -52,7 +52,7 @@
     whitelist:
     - Mime
   - !type:ListingLimitedStockCondition
-      stock: 1  
+      stock: 1
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -79,6 +79,17 @@
   productEntity: BoxFolderSyndicate
   cost:
     Telecrystal: 1
+  categories:
+  - UplinkPointless
+
+- type: listing
+  id: UplinkClothingniformJumpsuitSyndicateDiplomatistSyndicate
+  name: костюм дипломата
+  description: Костюм дипломата преступного синдиката, ничего необычного.
+  icon: { sprite: /Textures/SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi, state: icon }
+  productEntity: ClothingUniformJumpsuitSyndicateDiplomatist
+  cost:
+    Telecrystal: 2
   categories:
   - UplinkPointless
 

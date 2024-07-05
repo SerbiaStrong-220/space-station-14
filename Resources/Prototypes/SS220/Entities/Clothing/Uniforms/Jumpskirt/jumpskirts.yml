@@ -31,3 +31,16 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+
+# Синдикат
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtSyndicateDiplomatist
+  name: syndicate diplomatist uniforms
+  description: The uniform of a crime syndicate diplomat, nothing unusual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
