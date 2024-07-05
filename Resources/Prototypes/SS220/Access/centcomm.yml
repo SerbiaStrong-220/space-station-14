@@ -1,18 +1,22 @@
 - type: accessLevel
   id: CentralCommandCBURN
-  name: id-card-access-level-central-command
+  name: id-card-access-level-central-command-cburn
+  canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: CentralCommandERT
-  name: id-card-access-level-central-command
+  name: id-card-access-level-central-command-ert
+  canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: CentralCommandGSN
-  name: id-card-access-level-central-command
+  name: id-card-access-level-central-command-gsn
+  canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: CentralCommandDeathSquad
-  name: id-card-access-level-central-command
+  name: id-card-access-level-central-command-death-squad
+  canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 # Группа полного доступа
 - type: accessGroup

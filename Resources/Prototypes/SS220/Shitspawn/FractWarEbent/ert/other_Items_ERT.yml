@@ -13,6 +13,7 @@
       amount: 2
     - id: CombatMedipen
     - id: DnaScramblerImplanter
+    - id: ExGrenade
   - type: ExplosionResistance
     damageCoefficient: 0.0
 

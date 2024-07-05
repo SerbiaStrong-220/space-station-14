@@ -22,24 +22,26 @@ namespace Content.Server.Administration.Commands
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            ClearTrash (shell);
-            ClearAmmo (shell);
+            ClearTrash(shell);
+            ClearAmmo(shell);
         }
-        private void ClearTrash (IConsoleShell shell)
-        {var _containerSystem = _entMan.System<SharedContainerSystem>();
+        private void ClearTrash(IConsoleShell shell)
+        {
+            var _containerSystem = _entMan.System<SharedContainerSystem>();
+            var _tag = _entMan.System<TagSystem>();
             int processed = 0;
-           foreach (var ent in _entMan.GetEntities())
+            foreach (var ent in _entMan.GetEntities())
             {
 
                 if (_entMan.TryGetComponent<TagComponent>(ent, out var component))
                 {
-                    if (component.Tags.Contains("Trash") && !_containerSystem.IsEntityOrParentInContainer(ent))
+                    if (_tag.HasTag(ent, "Trash") && !_containerSystem.IsEntityOrParentInContainer(ent))
                     {
                         _entMan.DeleteEntity(ent);
                         processed++;
                         continue;
                     }
-                    else if (!_containerSystem.IsEntityOrParentInContainer(ent)&&component.Tags.Any(x=>x.Contains("Magazine")))
+                    else if (!_containerSystem.IsEntityOrParentInContainer(ent) && _tag.HasTag(ent, "Magazine"))
                     {
                         _entMan.DeleteEntity(ent);
                         processed++;
@@ -49,24 +51,28 @@ namespace Content.Server.Administration.Commands
 
                 if (_entMan.TryGetComponent(ent, out MetaDataComponent? comp))
                 {
-                    if (!_containerSystem.IsEntityOrParentInContainer(ent)&&(comp.EntityPrototype?.ID == "MaterialWoodPlank1" || comp.EntityPrototype?.ID == "SheetSteel1"))
+                    if (!_containerSystem.IsEntityOrParentInContainer(ent) && (comp.EntityPrototype?.ID == "MaterialWoodPlank1" || comp.EntityPrototype?.ID == "SheetSteel1"))
                     {
                         _entMan.DeleteEntity(ent);
                         processed++;
                     }
                 }
             }
-            shell.WriteLine($"Удалено {processed} мусора и магазинов.");}
-        public void ClearAmmo (IConsoleShell shell)
-        {var processed = 0;
-        var _containerSystem = _entMan.System<SharedContainerSystem>();
-        var query = _entMan.AllEntityQueryEnumerator<CartridgeAmmoComponent>();
-        while (query.MoveNext(out var entity, out var comp))
-            {if (!_containerSystem.IsEntityOrParentInContainer(entity))
-                _entMan.QueueDeleteEntity(entity);
+            shell.WriteLine($"Удалено {processed} мусора и магазинов.");
+        }
+        public void ClearAmmo(IConsoleShell shell)
+        {
+            var processed = 0;
+            var _containerSystem = _entMan.System<SharedContainerSystem>();
+            var query = _entMan.AllEntityQueryEnumerator<CartridgeAmmoComponent>();
+            while (query.MoveNext(out var entity, out var comp))
+            {
+                if (!_containerSystem.IsEntityOrParentInContainer(entity))
+                    _entMan.QueueDeleteEntity(entity);
                 processed++;
             }
 
-        shell.WriteLine($"Удалено {processed} патронов.");}
+            shell.WriteLine($"Удалено {processed} патронов.");
+        }
     }
 }

@@ -1,12 +1,3 @@
-# Security
-- type: loadoutGroup
-  id: SecurityPilotBackpack
-  name: loadout-group-security-pilot-backpack
-  loadouts:
-  - SecurityPilotBackpack
-  - SecurityPilotSatchel
-  - SecurityPilotDuffel
-
 # InternalAffairs
 - type: loadoutGroup
   id: IAABackpack
@@ -69,3 +60,13 @@
   loadouts:
   - ChiefEngineerPDA
   - DarkChiefEngineerPDA
+
+# Cargo
+
+  # Утилизатор
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - UniformJumpsuitSalvageSpecialist
+  - SalvageSpecialistJumpsuitTurtleneck

@@ -21,6 +21,7 @@ using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -40,6 +41,7 @@ using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
 using Content.Server.Administration.Managers;
+using Content.Shared.Humanoid.Markings;
 using Robust.Server.Player;
 
 namespace Content.Server.Zombies
@@ -111,6 +113,7 @@ namespace Content.Server.Zombies
             RemComp<ReproductiveComponent>(target);
             RemComp<ReproductivePartnerComponent>(target);
             RemComp<LegsParalyzedComponent>(target);
+            RemComp<ComplexInteractionComponent>(target);
 
             //funny voice
             var accentType = "zombie";
@@ -171,6 +174,13 @@ namespace Content.Server.Zombies
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.HeadSide, zombiecomp.BaseLayerExternal, humanoid: huApComp);
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.HeadTop, zombiecomp.BaseLayerExternal, humanoid: huApComp);
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.Snout, zombiecomp.BaseLayerExternal, humanoid: huApComp);
+
+                //ss220 - start edit
+                SetMarkingColors(MarkingCategories.Tail, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.HeadSide, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.HeadTop, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.Snout, zombiecomp.SkinColor, huApComp);
+                //ss220 - end edit
 
                 //This is done here because non-humanoids shouldn't get baller damage
                 //lord forgive me for the hardcoded damage

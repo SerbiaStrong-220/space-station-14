@@ -1,1 +1,2 @@
-admin-object-tab-window-type = Object type
+object-tab-entity-id = Entity ID
+object-tab-object-name = Object name
