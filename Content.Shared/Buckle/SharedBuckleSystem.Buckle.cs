@@ -28,6 +28,7 @@ namespace Content.Shared.Buckle;
 
 public abstract partial class SharedBuckleSystem
 {
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     private void InitializeBuckle()
     {
         SubscribeLocalEvent<BuckleComponent, ComponentStartup>(OnBuckleComponentStartup);
