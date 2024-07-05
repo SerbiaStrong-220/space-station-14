@@ -24,6 +24,7 @@
       amount: 4
     - id: ClothingNeckHydraMedal
       amount: 3
+    - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -46,6 +47,7 @@
       - id: CombatMedipen
       - id: EnergySwordDouble
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -85,6 +87,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTCommand
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadLeader
@@ -129,6 +134,7 @@
     - id: ClothingNeckScarfStripedSyndieRed
     - id: ClothingBeltChiefEngineerFilled
     - id: JetpackVoidFilled
+    - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -154,6 +160,7 @@
       - id: RCDAmmo
         amount: 3
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -194,6 +201,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTEngineerOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadEngineer
@@ -256,6 +266,7 @@
       - id: EnergySword
       - id: SyndiHypo
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadCorpsmanGear
@@ -299,6 +310,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTMedic
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadCorpsman
@@ -345,6 +359,7 @@
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -369,6 +384,7 @@
       - id: SyndiHypo
       - id: EnergyShield
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadCMOGear
@@ -408,6 +424,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTMedicalOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadCMO
@@ -465,6 +484,7 @@
         amount: 2
       - id: EnergySword
       - id: DnaScramblerImplanter
+      - id: ExGrenade
 
 - type: startingGear
   id: EbentIronSquadTrooperGear
@@ -507,6 +527,9 @@
     - type: EventRole
       roleGroupKey: IronSquad
       statusIcon: IOTCombatant
+    - type: NpcFactionMember
+      factions:
+      - EbentIronSquad
 
 - type: job
   id: IronSquadFighter

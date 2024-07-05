@@ -12,3 +12,5 @@ ent-ClothingUniformJumpsuitBartenderRed = красная униформа бар
     .desc = Красивая и опрятная форма. Жаль только, что про бар этого не скажешь.
 ent-ClothingUniformJumpsuitBartenderGreen = зелёная униформа бармена
     .desc = Красивая и опрятная форма. Жаль только, что про бар этого не скажешь.
+ent-ClothingUniformJumpsuitCargonovich = каргонович
+    .desc = Ты бы ещё лопнувшую бочку для газа притащил...

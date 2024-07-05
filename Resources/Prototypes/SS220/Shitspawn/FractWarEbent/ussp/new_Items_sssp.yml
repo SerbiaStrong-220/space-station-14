@@ -241,6 +241,7 @@
     - id: CombatMedipen
     - id: Stimpack
     - id: DnaScramblerImplanter
+    - id: ExGrenade
 
 - type: entity
   name: рюкзак СССП
