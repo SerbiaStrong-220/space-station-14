@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakNanotrasenAdmiral
+  name: admiral's cape
+  description: A cape with gold stitching, worn by Nanotrasen Navy Admirals.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Cloaks/nanotrasen_admiral.rsi

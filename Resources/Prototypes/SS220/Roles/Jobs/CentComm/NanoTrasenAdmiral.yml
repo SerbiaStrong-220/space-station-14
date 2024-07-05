@@ -1,0 +1,60 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: Адмирал NanoTrasen
+  id: CentComNanoTrasenAdmiral
+  components:
+    - type: Sprite
+      sprite: SS220/Markers/jobs.rsi
+      state: nanotrasenadmiral
+    - type: RandomHumanoidSpawner
+      settings: CentComNanoTrasenAdmiral
+
+- type: randomHumanoidSettings
+  id: CentComNanoTrasenAdmiral
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  components:
+    - type: RandomMetadata
+      nameSegments:
+        - NamesFirstCentcomAgent
+        - NamesLastCentcomAgent
+    - type: MindShield
+    - type: GhostRole
+      name: ghost-role-information-nanotrasen-Admiral-name
+      description: ghost-role-information-nanotrasen-Admiral-description
+    - type: GhostTakeoverAvailable
+    - type: Loadout
+      prototypes: [ CentComNanoTrasenAdmiralGear ]
+
+- type: playTimeTracker
+  id: JobCentcomAdmiral
+
+- type: job
+  id: CentComNanoTrasenAdmiral
+  name: job-name-centcomoff
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: CentComNanoTrasenAdmiralGear
+  icon: "JobIconNanotrasen"
+  playTimeTracker: JobCentcomAdmiral
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+
+- type: startingGear
+  id: CentComNanoTrasenAdmiralGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNanotrasenAdmiral
+    shoes: ClothingShoesBootsLaceup
+    outerClothing: ClothingOuterArmorCentcomNavalCarapace
+    head: ClothingHeadNavyCap
+    eyes: ClothingEyesGlassesCentcom
+    gloves: ClothingHandsGlovesNanotrasenDiplomat
+    id: CentcomAdmiralPDA
+    ears: ClothingHeadsetAltCentComm
+    neck: ClothingNeckCloakNanotrasenAdmiral
+    belt: WeaponPulsePistol
+    back: ClothingBackpackCentCommFilled
+

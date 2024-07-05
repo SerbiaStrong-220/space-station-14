@@ -92,3 +92,18 @@
         orGroup: FakeStump
     sound:
       path: /Audio/Items/bikehorn.ogg
+
+- type: entity
+  name: CentCom rubber stamp
+  parent: RubberStampBaseAlt
+  id: RubberStampCentcomm
+  suffix: DO NOT MAP
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-centcom
+    stampedColor: "#dca019"
+    stampState: "paper_stamp-centcom"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-centcom
+
