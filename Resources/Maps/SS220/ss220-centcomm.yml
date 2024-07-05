@@ -6357,7 +6357,7 @@ entities:
           - 0
           - 0
         - volume: 2500
-          temperature: 234.99979
+          temperature: 234.99957
           moles:
           - 20.078888
           - 75.53487
@@ -22608,7 +22608,7 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 234.99739
+        temperature: 234.9972
         moles:
         - 1.7459903
         - 6.568249
@@ -22628,23 +22628,23 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 8627
-          - 8628
-          - 8629
-          - 8630
-          - 8631
-          - 8632
-          - 8633
-          - 8634
-          - 8635
-          - 8636
-          - 8637
-          - 8638
-          - 8639
-          - 8640
-          - 8642
-          - 8641
           - 8643
+          - 8641
+          - 8642
+          - 8640
+          - 8639
+          - 8638
+          - 8637
+          - 8636
+          - 8635
+          - 8634
+          - 8633
+          - 8632
+          - 8631
+          - 8630
+          - 8629
+          - 8628
+          - 8627
 - proto: ClothingBackpackDeathSquadFilled
   entities:
   - uid: 53
@@ -64186,7 +64186,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -447271.03
+      secondsUntilStateChange: -447416
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
