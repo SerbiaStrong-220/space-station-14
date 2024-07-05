@@ -3,14 +3,23 @@
   startingInventory:
     ClothingHeadHatBowlerHat: 2
     ClothingHeadHatTophat: 2
+    BartenderHeadWhite: 2  #SS220-BartenderResprited-Begin
+    BartenderHeadRed: 2 #SS220-BartenderResprited-End
     ClothingEyesHudBeer: 2
     ClothingEyesEyepatchHudBeer: 2
     ClothingHeadsetService: 2
     ClothingOuterApronBar: 2
     ClothingOuterWinterBar: 2
     ClothingUniformJumpsuitBartender: 2
-    ClothingUniformJumpskirtBartender: 2
+#    ClothingUniformJumpskirtBartender: 2 #SS220-BartenderResprited
     ClothingUniformJumpsuitBartenderPurple: 2
+    BartenderJumpsuitRed: 2 #SS220-BartenderResprited-Begin
+    BartenderJumpsuitGreen: 2
+    BartenderJumpsuitNanotrasen: 2
+    BartenderJumpskirt: 2
+    BartenderJumpskirtRed: 2
+    BartenderJumpskirtGreen: 2
+    BartenderJumpskirtNanotrasen: 2 #SS220-BartenderResprited-End
     ClothingShoesColorBlack: 2
     ClothingOuterArmorBasicSlim: 2
     ClothingOuterVest: 2
