@@ -8,3 +8,5 @@ ent-ClothingUniformOverallsGreen = зелёный комбинезон на ля
     .desc = Отлично подходит для работы на открытом воздухе.
 ent-ClothingUniformOverallsWhite = белый комбинезон на лямках
     .desc = Отлично подходит для работы на открытом воздухе.
+ent-ClothingUniformJumpsuitCargonovich = каргонович
+    .desc = Ты бы ещё лопнувшую бочку для газа притащил...
