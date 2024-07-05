@@ -48423,11 +48423,22 @@ entities:
   - uid: 5987
     components:
     - type: MetaData
-      desc: 'Светит звезда во тьме космической благодаря самоотверженной работе великих архитекторов. Каждый фрагмент этой станции – капля пота, каждая деталь – проявление безграничной любви к космосу и человечеству. С благодарностью воздаем почести тем, кто строил мосты к звездам: Kirus59, UrPrice, AliceValestray, Glek3197, NightmareStalker, Bomjojuk, Vnoeg.'
+      desc: Светит звезда во тьме космической благодаря самоотверженной работе великих архитекторов. Каждый фрагмент этой станции – капля пота, каждая деталь – проявление безграничной любви к космосу и человечеству. С благодарностью воздаем почести тем, кто строил мосты к звездам и награждаем их вечной славой.
       name: памятник конструкторам станции
     - type: Transform
       pos: 35.5,-17.5
       parent: 1
+    - type: PaperLabel
+      labelSlot:
+        insertSound: !type:SoundPathSpecifier
+          path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+        ejectSound: !type:SoundPathSpecifier
+          path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        paper_label: !type:ContainerSlot
+          ent: 9100
 - proto: MicStand
   entities:
   - uid: 5988
@@ -49065,7 +49076,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#dca019FF'
+      - stampedColor: '#DCA019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: Данные импланты ОБЯЗАНЫ быть вколоты ОСО в начале КАЖДОЙ смены
     - type: Physics
@@ -49468,7 +49479,7 @@ entities:
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
-      - stampedColor: '#dca019FF'
+      - stampedColor: '#DCA019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: >
         [bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
@@ -49567,7 +49578,7 @@ entities:
 
 
         [italic]Место для печати - Офицер Специальных Операций[/italic]
-  - uid: 8626
+  - uid: 9100
     components:
     - type: Transform
       parent: 5987
@@ -49576,7 +49587,7 @@ entities:
       stampedBy:
       - stampedColor: '#A35061FF'
         stampedName: Инженерное Бюро Архитекторов
-      - stampedColor: '#dca019FF'
+      - stampedColor: '#DCA019FF'
         stampedName: stamp-component-stamped-name-centcom
       content: >
         [bold]Вечные почести самым ответственным лицам и архитекторам NanoTrasen. [/bold]
@@ -64175,7 +64186,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -446922.25
+      secondsUntilStateChange: -447271.03
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
