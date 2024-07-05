@@ -1,5 +1,15 @@
 - type: entity
   parent: BaseFigurine
+  id: ToyFigurineAdmiral
+  name: фигурка адмирала NanoTrasen
+  description: Фигурка, изображающая всю власть космического пространства.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi
+    state: admiral
+
+- type: entity
+  parent: BaseFigurine
   id: ToyFigurineBlueShield
   name: фигурка офицера "Синий Щит"
   description: Фигурка, изображающая офицера "Синий Щит", который с лёгкостью защитит вас от фигурок ядерных оперативников.
@@ -7,3 +17,53 @@
   - type: Sprite
     sprite: SS220/Objects/Fun/figurines.rsi
     state: blueshield
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurinediplomat
+  name: фигурка дипломата NanoTrasen
+  description: Фигурка, изображающая Дипломата НаноТрейзен. Выходит на сцену, когда ситуация уже вышла из-под контроля, но ещё не перешла черту военного конфликта.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi
+    state: diplomat
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineField0fficerCentcom
+  name: фигурка полевого офицера Центком
+  description: Фигурка, изображающая Полевого Офицера Центрального Командования. Напоминает о том, с чем можно столкнуться, если не выполнять свои прямые обязанности.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi
+    state: field_officer_centcom
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurine0fficerCentcom
+  name: фигурка офицера Центком
+  description: Фигурка, изображающая Офицера Центрального Командования. Только лучшие из лучших способны достичь подобных высот. На подставке написано А. Джогс.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi
+    state: officer_centcom
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineSeniorScientist
+  name: фигурка ведущего учёного
+  description: Фигурка, изображающая всю мощь науки.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi
+    state: senior_scientist
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineZombie
+  name: фигурка зомби
+  description: Фигурка, изображающая именно вас во время зомби-апокалипсиса.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi
+    state: zombie

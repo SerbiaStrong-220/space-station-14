@@ -10,4 +10,5 @@ ent-ClothingUniformOverallsWhite = белый комбинезон на лямк
     .desc = Отлично подходит для работы на открытом воздухе.
 ent-ClothingUniformJumpsuitSyndicateDiplomatist = костюм дипломата Syndicate
     .desc = Костюм дипломата преступного синдиката, ничего необычного.
-
+ent-ClothingUniformJumpsuitCargonovich = каргонович
+    .desc = Ты бы ещё лопнувшую бочку для газа притащил...

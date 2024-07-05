@@ -5,7 +5,7 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/CQCCombat/blowback.png
+    icon: SS220/Interface/Actions/CQCCombat/blowback.png
     event: !type:CQCBlowbackEvent
     useDelay: 7
     checkCanInteract: false
@@ -18,7 +18,7 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/CQCCombat/punch.png
+    icon: SS220/Interface/Actions/CQCCombat/punch.png
     event: !type:CQCPunchEvent
     useDelay: 2
     checkCanInteract: false
@@ -31,7 +31,7 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/CQCCombat/disarm.png
+    icon: SS220/Interface/Actions/CQCCombat/disarm.png
     event: !type:CQCDisarmEvent
     useDelay: 4
     checkCanInteract: false
@@ -44,7 +44,7 @@
   noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/CQCCombat/longsleep.png
+    icon: SS220/Interface/Actions/CQCCombat/longsleep.png
     event: !type:CQCLongSleepEvent
     useDelay: 40
     checkCanInteract: false
