@@ -172,6 +172,7 @@
   description: A figurine depicting the glorious head of the Cargo department.
   components:
   - type: Sprite
+    sprite: SS220/Objects/Fun/figurines.rsi #SS220-NewFigurine
     state: qm
 
 - type: entity

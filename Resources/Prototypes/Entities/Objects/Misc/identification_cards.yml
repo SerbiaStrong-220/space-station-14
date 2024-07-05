@@ -852,7 +852,8 @@
     heldPrefix: blue
   - type: IdCard
   # SS220 new CentComm begin
-    jobTitle: Агент РХБЗЗ
+  # SS220 CBURN questions changes name 05.07.2024
+    jobTitle: Агент РХБЗ
   - type: Access
     groups:
     - AllAccess # SS220 Fast fix access

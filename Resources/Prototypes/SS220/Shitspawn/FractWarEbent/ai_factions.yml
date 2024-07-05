@@ -1,0 +1,34 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: npcFaction
+  id: EbentUssp
+  hostile:
+  - EbentNanoTrasen
+  - EbentIronSquad
+  - NanoTrasen
+  - SimpleHostile
+  - Xeno
+  - PetsNT
+  - Zombie
+
+- type: npcFaction
+  id: EbentNanoTrasen
+  hostile:
+  - EbentUssp
+  - EbentIronSquad
+  - SimpleHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+
+- type: npcFaction
+  id: EbentIronSquad
+  hostile:
+  - EbentUssp
+  - EbentNanoTrasen
+  - NanoTrasen
+  - SimpleHostile
+  - Xeno
+  - PetsNT
+  - Zombie

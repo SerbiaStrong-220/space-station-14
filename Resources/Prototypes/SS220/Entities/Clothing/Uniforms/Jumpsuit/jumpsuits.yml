@@ -64,3 +64,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
+
+# Cargo
+
+  # Квартирмейстер
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCargonovich
+  name: cargonovich
+  description: You should also bring a burst gas barrel...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi

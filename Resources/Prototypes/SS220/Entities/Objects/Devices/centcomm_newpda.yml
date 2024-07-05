@@ -93,3 +93,37 @@
   components:
     - type: Pda
       id: OfficerCentCommIDCard
+
+- type: entity
+  parent: BasePDA
+  id: CentcomAdmiralPDA
+  name: КПК Адмирала NanoTrasen
+  description: КПК Адмирала NanoTrasen. Покажите, насколько величественен ваш флот.
+  components:
+    - type: Pda
+      id: NanoTrasenAdmiralIDCard
+      state: pda-admiral
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: PdaBorderColor
+      borderColor: "#cbcdd1"
+      accentHColor: "#dfac5c"
+      accentVColor: "#dfac5c"
+    - type: Sprite
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-admiral
