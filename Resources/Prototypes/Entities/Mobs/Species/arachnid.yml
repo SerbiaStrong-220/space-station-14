@@ -64,7 +64,7 @@
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
-    allowedEmotes: ['Click', 'Chitter', 'Hiss']
+    allowedEmotes: ['Click', 'Chitter', 'Hiss'] #ss-220-emote-fix
   - type: Vocal
     sounds:
       Male: UnisexArachnid
