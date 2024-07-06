@@ -16,3 +16,5 @@ ent-ClothingHeadHatWhiteTophat = белый цилиндр
     .desc = Стильный белый цилиндр.
 ent-ClothingHeadHatRedTophat = цилиндр
     .desc = Стильный красный цилиндр.
+ent-ClothingHeadPilotCapCap = фуражка пилота
+    .desc = Поймайте высоту!
