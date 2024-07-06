@@ -65,6 +65,12 @@
 - type: Tag
   id: MagazineIron_MG34
 
+- type: Tag
+  id: BlasterPowerCell
+
+- type: Tag
+  id: MagazinePistolSubMachineGunUssp_PPSh
+
 # SS220-CentcomFashion
 
 - type: Tag
