@@ -52,5 +52,6 @@ ent-ClothingBackpackDuffelSyndicateMedicalBundle = { ent-ClothingBackpackDuffelS
     .desc = { ent-ClothingBackpackDuffelSyndicateMedical.desc }
 ent-ClothingBackpackDuffelHolding = бездонный вещмешок
     .desc = Вещмешок, открывающийся в локальный карман блюспейса.
-ent-ClothingBackpackDuffelCBURN = вещмешок отряда РХБЗЗ
+# SS220 CBURN questions
+ent-ClothingBackpackDuffelCBURN = вещмешок отряда РХБЗ
     .desc = Вещмешок, содержащий различное оборудование для сдерживания биологической угрозы.

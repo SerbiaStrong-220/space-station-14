@@ -1,0 +1,94 @@
+- type: guideEntry
+  id: RulesSS220
+  name: guide-entry-rules
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/ServerRules/RulesSS220.xml"
+  children:
+  - RulesSS220C0
+  - RulesSS220C1
+  - RulesSS220C2
+  - RulesSS220C3
+  - RulesSS220C4
+  - RulesSS220C5
+  - RulesSS220C6
+  - RulesSS220C7
+  - RulesSS220C8
+  - RulesSS220C9
+  - RulesSS220C10
+
+- type: guideEntry
+  id: RulesSS220C0
+  name: guide-entry-rules-ss220-c0
+  ruleEntry: true
+  priority: 1
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC0.xml"
+
+- type: guideEntry
+  id: RulesSS220C1
+  name: guide-entry-rules-ss220-c1
+  ruleEntry: true
+  priority: 2
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC1.xml"
+
+- type: guideEntry
+  id: RulesSS220C2
+  name: guide-entry-rules-ss220-c2
+  ruleEntry: true
+  priority: 3
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC2.xml"
+
+- type: guideEntry
+  id: RulesSS220C3
+  name: guide-entry-rules-ss220-c3
+  ruleEntry: true
+  priority: 14
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC3.xml"
+
+- type: guideEntry
+  id: RulesSS220C4
+  name: guide-entry-rules-ss220-c4
+  ruleEntry: true
+  priority: 5
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC4.xml"
+
+- type: guideEntry
+  id: RulesSS220C5
+  name: guide-entry-rules-ss220-c5
+  ruleEntry: true
+  priority: 6
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC5.xml"
+
+- type: guideEntry
+  id: RulesSS220C6
+  name: guide-entry-rules-ss220-c6
+  ruleEntry: true
+  priority: 7
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC6.xml"
+
+- type: guideEntry
+  id: RulesSS220C7
+  name: guide-entry-rules-ss220-c7
+  ruleEntry: true
+  priority: 8
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC7.xml"
+
+- type: guideEntry
+  id: RulesSS220C8
+  name: guide-entry-rules-ss220-c8
+  ruleEntry: true
+  priority: 9
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC8.xml"
+
+- type: guideEntry
+  id: RulesSS220C9
+  name: guide-entry-rules-ss220-c9
+  ruleEntry: true
+  priority: 10
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC9.xml"
+
+- type: guideEntry
+  id: RulesSS220C10
+  name: guide-entry-rules-ss220-c10
+  ruleEntry: true
+  priority: 11
+  text: "/ServerInfo/Guidebook/ServerRules/SS220/RuleC10.xml"

@@ -1,0 +1,45 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#USSP
+- type: entity
+  parent: BaseWeaponSubMachineGun
+  id: WeaponSubMachineGunUssp_PPSh
+  suffix: Shitspawn, Ebent, FractWar
+  name: пистолет-пулемёт Шпагина
+  description: Настоящее оружие победы старой закалки. Обрушьте на врагов режима град из свинца!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/ussp_ppsh.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/ussp_ppsh.rsi
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -16
+  - type: Gun
+    minAngle: 21
+    maxAngle: 32 
+    shotsPerBurst: 5
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/c-20r.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazinePistolSubMachineGunUssp_PPSh
+        whitelist:
+          tags:
+            - MagazinePistolSubMachineGunUssp_PPSh
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance

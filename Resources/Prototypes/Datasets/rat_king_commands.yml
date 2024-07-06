@@ -18,10 +18,11 @@
     - "Фас!"
     - "Убить!"
     - "Убейте его!"
+    - "Рви их!" #SS220-resprite-ratking-action
 
 - type: dataset
   id: RatKingCommandLoose
   values:
     - "Вольно!"
     - "Врассыпную!"
-    
+

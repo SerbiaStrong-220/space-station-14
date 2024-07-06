@@ -1,0 +1,22 @@
+# Quartermaster Time
+- type: loadoutEffectGroup
+  id: Cargonovich
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobQuartermaster
+      time: 360000 # 100 hrs
+
+# Jumpsuit
+- type: loadout
+  id: QuartermasterJumpsuitCargonovich
+  equipment: QuartermasterJumpsuitCargonovich
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Cargonovich
+
+- type: startingGear
+  id: QuartermasterJumpsuitCargonovich
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCargonovich

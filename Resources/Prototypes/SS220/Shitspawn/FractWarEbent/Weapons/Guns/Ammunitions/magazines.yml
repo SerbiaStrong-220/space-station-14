@@ -1,5 +1,28 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+#Ussp
+- type: entity
+  parent: MagazinePistolSubMachineGun
+  id: MagazinePistolSubMachineGunUssp_PPSh
+  suffix: Shitspawn, Ebent, FractWar
+  name: магазин пистолета-пулемёта Шпагина
+  description: Ратата-та-та-та!
+  components:
+  - type: Tag
+    tags:
+      - MagazinePistolSubMachineGunUssp_PPSh
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/ussp_magppsh.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    
 - type: entity
   id: MagazineUssp_RPK
   name: магазин ручного пулемёта Калашникова
