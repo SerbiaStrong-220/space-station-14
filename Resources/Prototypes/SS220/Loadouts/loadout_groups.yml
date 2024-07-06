@@ -43,7 +43,7 @@
   - PsychologistJumpsuitTurtleneck
   - PsychologistJumpskirtTurtleneck
 
-#Command
+# Command
 
 - type: loadoutGroup
   id: CaptainGloves
@@ -52,7 +52,7 @@
   - CaptainGloves
   - CaptainWhiteGloves
 
-#Engineering
+# Engineering
 
 - type: loadoutGroup
   id: ChiefEngineerPDA
@@ -60,6 +60,19 @@
   loadouts:
   - ChiefEngineerPDA
   - DarkChiefEngineerPDA
+
+# Security
+
+  # Пилот
+- type: loadoutGroup
+  id: SecurityPilotHead
+  name: loadout-group-security-pilot-head
+  minLimit: 0
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - PilotCapCap
 
 # Cargo
 

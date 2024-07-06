@@ -28,7 +28,7 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
-    allowedEmotes: ['Hiss'] # 220 emotesMenuFix
+    allowedEmotes: ['Hiss', 'Growl'] # 220 emotesMenuFix
   - type: TypingIndicator
     proto: lizard
   - type: Vocal

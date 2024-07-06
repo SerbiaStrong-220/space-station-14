@@ -49,6 +49,35 @@
   id: ChiefEngineerBeret
   equipment: EngineeringBeret
 
+# Back (ss220 fix ce-loadout start)
+- type: loadout
+  id: ChiefEngineerBackpack
+  equipment: ChiefEngineerBackpack
+
+- type: startingGear
+  id: ChiefEngineerBackpack
+  equipment:
+    back: ClothingBackpackCE
+
+- type: loadout
+  id: ChiefEngineerSatchel
+  equipment: ChiefEngineerSatchel
+
+- type: startingGear
+  id: ChiefEngineerSatchel
+  equipment:
+    back: ClothingBackpackSatchelCE
+
+- type: loadout
+  id: ChiefEngineerDuffel
+  equipment: ChiefEngineerDuffel
+
+- type: startingGear
+  id: ChiefEngineerDuffel
+  equipment:
+    back: ClothingBackpackDuffelCE
+# ss220 fix ce-loadout end
+
 # Neck
 - type: loadout
   id: ChiefEngineerCloak
