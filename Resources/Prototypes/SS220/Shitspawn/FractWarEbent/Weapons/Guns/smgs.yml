@@ -6,7 +6,7 @@
   id: WeaponSubMachineGunUssp_PPSh
   suffix: Shitspawn, Ebent, FractWar
   name: пистолет-пулемёт Шпагина
-  description: A firearm that is often used by the infamous nuclear operatives. Uses .35 auto ammo.
+  description: Настоящее оружие победы старой закалки. Обрушьте на врагов режима град из свинца!
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/ussp_ppsh.rsi

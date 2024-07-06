@@ -6,10 +6,9 @@
   id: BlasterPowerCell
   suffix: Shitspawn, Ebent, FractWar
   name: бластерная энергоячейка
-  description: A rechargeable power cell. This is the cheapest kind you can find.
+  description: Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
   components:
   - type: Item
-    storedRotation: -90
   - type: Battery
     pricePerJoule: 0.15
     maxCharge: 2500

@@ -2,10 +2,11 @@
 
 #Ussp
 - type: entity
+  parent: MagazinePistolSubMachineGun
   id: MagazinePistolSubMachineGunUssp_PPSh
   suffix: Shitspawn, Ebent, FractWar
   name: магазин пистолета-пулемёта Шпагина
-  parent: MagazinePistolSubMachineGun
+  description: Ратата-та-та-та!
   components:
   - type: Tag
     tags:

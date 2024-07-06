@@ -2,7 +2,7 @@
   id: WeaponBlaster
   parent: BaseWeaponPowerCell
   name: бластерная энерговинтовка
-  description: бла бла бла
+  description: Штурмовая модификация старой надежной винтовки. Режим оглушения был заменен на автоматический режим стрельбы. Наслаждайтесь.
   suffix: Ebent, Shitspawn, FractWar
   components:
   - type: Sprite
