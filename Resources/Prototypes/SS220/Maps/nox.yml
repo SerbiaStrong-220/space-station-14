@@ -10,15 +10,16 @@
       stationProto: NoxNanotrasenStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_nox.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_nox.yml
+        - type: StationRandomTransform
+          enableStationRotation: false
+          maxStationOffset: null
         - type: StationNameSetup
           mapNameTemplate: '{0} Nox {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '-SS220'
         - type: StationJobs
-          overflowJobs:
-            - Passenger
           availableJobs:
             #service
             Captain: [ 1, 1 ]

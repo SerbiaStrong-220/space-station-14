@@ -79,6 +79,7 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 10
+  - type: ClothingRequiredStepTriggerImmune
 
 - type: entity
   abstract: true
@@ -116,6 +117,7 @@
     - outerClothing
   - type: Sprite
     state: icon
+  - type: AllowSuitStorage
 
 - type: entity
   abstract: true

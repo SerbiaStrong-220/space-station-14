@@ -1,0 +1,78 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitParamedicTurtleneck
+  name: paramedic turtleneck
+  description: A reliable and comfortable choice for rescuers, it provides protection from cold and moisture during rescue operations.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_turtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitAtmosphericTechnicianTurtleneck
+  name: atmospheric technician turtle
+  description: Built to withstand high humidity and temperature extremes, ideal for professionals in the atmospheric research industry.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_turtle.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.95
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChemistTurtleneck
+  name: chemist turtle
+  description: Specially designed for safe handling of chemicals, provides reliable protection from harmful substances and keeps the user safe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/chemist_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/chemist_turtle.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.95
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShieldTurtle
+  name: blueshield turtleneck
+  description: A stylish turtleneck that will help the Blue Shield officer be ready for any extreme situation. High quality materials and a layer of armor make it indispensable for the front line.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWardenTurtleneck
+  name: warden turtleneck
+  description: A special turtleneck for riot control.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSalvageSpecialistTurtleneck
+  name: salvage turtleneck turtleneck
+  description: Show that you are better than the damn dwarves!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_turtle.rsi

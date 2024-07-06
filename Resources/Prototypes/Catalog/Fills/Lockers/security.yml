@@ -46,30 +46,6 @@
       - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
 
-#SS220-Pilot
-- type: entity
-  id: LockerPilotFilled
-  suffix: Filled
-  parent: LockerPilot
-  components:
-  - type: StorageFill
-    contents:
-      - id: FlashlightSeclite
-      - id: WeaponDisabler
-        prob: 0.3
-      - id: ClothingOuterArmorBobmer
-      - id: ClothingHeadHatPilotBeret
-      - id: ClothingBeltSecurityFilled
-      - id: Flash
-      - id: ClothingEyesGlassesSecurity
-#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
-      - id: ClothingShoesBootsJack
-      - id: ClothingEyesHudSecurity
-      - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
-      - id: HandheldGPSBasic
-      - id: OxygenTankFilled
-      - id: NitrogenTankFilled
-
 - type: entity
   id: LockerSecurityFilled
   suffix: Filled

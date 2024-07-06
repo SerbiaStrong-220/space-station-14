@@ -350,4 +350,4 @@
   suffix: Conducting
   components:
   - type: Insulated
-    coefficient: 5 # zap em good
+    coefficient: 10 # zap em good  #NOW that's really good. SS220 conducting gloves update

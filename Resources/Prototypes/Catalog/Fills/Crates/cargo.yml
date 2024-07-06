@@ -225,6 +225,10 @@
     - id: ClothingUniformJumpskirtOfLife
       prob: 0.01
       orGroup: Clothes
+    #SS220-DevilHorns-Begin
+    - id: ClothingHeadHatDevilHorns
+      prob: 0.01
+    #SS220-DevilHorns-End
     #swag
     - id: ClothingNeckBling
       prob: 0.01

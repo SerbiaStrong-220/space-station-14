@@ -1,7 +1,18 @@
-# Command
+# InternalAffairs
+- type: roleLoadout
+  id: JobIAA
+  groups:
+  - LawyerNeck
+  - LawyerJumpsuit
+  - IAABackpack
+  - Trinkets
+
 - type: roleLoadout
   id: JobBlueShield
   groups:
+  - BlueShieldJumpsuit
+  - BlueShieldOuterclothing
+  - SecurityBelt
   - CommonBackpack
   - Trinkets
 
@@ -9,18 +20,11 @@
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
-  - SecurityHead
+  - SecurityPilotHead
+  - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityPilotBackpack
+  - SecurityBackpack
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityPDA
-  - Trinkets
-
-- type: roleLoadout
-  id: JobIAA
-  groups:
-  - LawyerNeck
-  - LawyerJumpsuit
-  - IAABackpack
   - Trinkets

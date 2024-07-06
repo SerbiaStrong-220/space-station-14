@@ -635,7 +635,7 @@
     sprite: Clothing/Head/Hats/xmascrown.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHeadHatBaseFlippable #SS220-Botany-Resprite
   id: ClothingHeadHatTrucker
   name: trucker hat
   description: Formerly Chucks, this hat is yours now.

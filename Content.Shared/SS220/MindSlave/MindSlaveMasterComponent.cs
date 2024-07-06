@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.MindSlave;
 /// Component, used to mark the master of some enslaved minds.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MindSlaveMasterComponent : Component, IAntagStatusIconComponent
+public sealed partial class MindSlaveMasterComponent : Component
 {
     /// <summary>
     /// List of all enslaved entities, which were enslaved by the owner.

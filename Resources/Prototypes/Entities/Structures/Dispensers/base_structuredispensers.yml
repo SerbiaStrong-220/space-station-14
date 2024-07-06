@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   id: ReagentDispenserBase
-  parent: ConstructibleMachine
+  parent: SmallConstructibleMachine
   placement:
     mode: SnapgridCenter
   components:
@@ -20,9 +20,9 @@
           bounds: "-0.4,-0.3,0.4,0.3"
         density: 190
         mask:
-        - TabletopMachineMask
+        - MachineMask # SS220 Structule collision fix
         layer:
-        - TabletopMachineLayer
+        - MachineLayer # SS220 Structule collision fix
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
   - type: ActivatableUI

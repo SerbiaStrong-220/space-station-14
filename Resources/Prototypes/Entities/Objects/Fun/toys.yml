@@ -623,11 +623,11 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Objects/Fun/ducky.rsi
+    sprite: SS220/Objects/Fun/ducky.rsi #SS220-DuckRepsrite
     state: icon
   - type: Clothing
     quickEquip: false
-    sprite: Objects/Fun/ducky.rsi
+    sprite: SS220/Objects/Fun/ducky.rsi #SS220-DuckRepsrite
     slots:
     - HEAD
   - type: EmitSoundOnUse
@@ -1222,6 +1222,7 @@
     - type: StaminaDamageOnHit
       damage: 8
     - type: MeleeWeapon
+      wideAnimationRotation: -135
       damage:
         types:
           Blunt: 0

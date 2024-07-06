@@ -1,0 +1,22 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: WardenTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobWarden
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: WardenJumpsuitTurtleneck
+  equipment: WardenJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WardenTurtleneck
+
+- type: startingGear
+  id: WardenJumpsuitTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWardenTurtleneck

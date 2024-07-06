@@ -10,7 +10,7 @@
     state: autoinjector
   - type: Item
     sprite: SS220/Objects/Misc/autoinjectors.rsi
-    size: Tiny
+    size: Small
   - type: SolutionContainerManager
     solutions:
       pen:
@@ -22,6 +22,7 @@
     onlyAffectsMobs: false
     injectOnly: true
     transferAmount: 15
+    ignoreProtection: false
   - type: RefillableSolution
     solution: pen
   - type: Autoinjector

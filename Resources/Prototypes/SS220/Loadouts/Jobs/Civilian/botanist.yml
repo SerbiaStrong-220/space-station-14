@@ -1,0 +1,119 @@
+# Head
+- type: loadout
+  id: BotanistHeadBlue
+  equipment: BotanistHeadBlue
+
+- type: startingGear
+  id: BotanistHeadBlue
+  equipment:
+    head: ClothingHeadHatTruckerBlue
+
+- type: loadout
+  id: BotanistHeadBrown
+  equipment: BotanistHeadBrown
+
+- type: startingGear
+  id: BotanistHeadBrown
+  equipment:
+    head: ClothingHeadHatTruckerBrown
+
+- type: loadout
+  id: BotanistHeadWhite
+  equipment: BotanistHeadWhite
+
+- type: startingGear
+  id: BotanistHeadWhite
+  equipment:
+    head: ClothingHeadHatTruckerWhite
+
+- type: loadout
+  id: BotanistBandanaBlue
+  equipment: BotanistBandanaBlue
+
+- type: startingGear
+  id: BotanistBandanaBlue
+  equipment:
+    head: ClothingHeadBandBlueBotany
+
+# Jumpsuit
+- type: loadout
+  id: BotanistJumpsuitBlue
+  equipment: BotanistJumpsuitBlue
+
+- type: startingGear
+  id: BotanistJumpsuitBlue
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponicsBlue
+
+- type: loadout
+  id: BotanistJumpsuitWhite
+  equipment: BotanistJumpsuitWhite
+
+- type: startingGear
+  id: BotanistJumpsuitWhite
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponicsWhite
+
+- type: loadout
+  id: BotanistJumpskirtBlue
+  equipment: BotanistJumpskirtBlue
+
+- type: startingGear
+  id: BotanistJumpskirtBlue
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtHydroponicsBlue
+
+- type: loadout
+  id: BotanistJumpskirtWhite
+  equipment: BotanistJumpskirtWhite
+
+- type: startingGear
+  id: BotanistJumpskirtWhite
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtHydroponicsWhite
+
+- type: loadout
+  id: BotanistOverallsBlue
+  equipment: BotanistOverallsBlue
+
+- type: startingGear
+  id: BotanistOverallsBlue
+  equipment:
+    jumpsuit: ClothingUniformOverallsBlue
+
+- type: loadout
+  id: BotanistOverallsGreen
+  equipment: BotanistOverallsGreen
+
+- type: startingGear
+  id: BotanistOverallsGreen
+  equipment:
+    jumpsuit: ClothingUniformOverallsGreen
+
+- type: loadout
+  id: BotanistOverallsWhite
+  equipment: BotanistOverallsWhite
+
+- type: startingGear
+  id: BotanistOverallsWhite
+  equipment:
+    jumpsuit: ClothingUniformOverallsWhite
+
+# Outer clothing
+- type: loadout
+  id: BotanistApronBrown
+  equipment: BotanistApronBrown
+
+- type: startingGear
+  id: BotanistApronBrown
+  equipment:
+    outerClothing: ClothingOuterApronBotanistBrown
+
+- type: loadout
+  id: BotanistApronGreen
+  equipment: BotanistApronGreen
+
+- type: startingGear
+  id: BotanistApronGreen
+  equipment:
+    outerClothing: ClothingOuterApronBotanistGreen

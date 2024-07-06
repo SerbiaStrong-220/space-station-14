@@ -191,9 +191,206 @@
   suffix: CentComm
   components:
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-centcomm
     - state: folder-base
 
 # Added new CentComm clipboard and folder end
+
+# Папки Begin
+
+  # База
+- type: entity
+  parent: BoxFolderBase
+  id: BoxFolderBaseSS220
+  name: папка
+  description: Папка, заполненная совершенно секретными документами.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+    - state: folder-base
+
+  # Командование
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderСaptain
+  name: папка капитана
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-captain
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderHoP
+  name: папка главы персонала
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-hop
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderCE
+  name: папка старшего инженера
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-ce
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderCMO
+  name: папка главного врача
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-cmo
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderHoS
+  name: папка главы службы безопасности
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-hos
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderQM
+  name: папка квартирмейстера
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-qm
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderRD
+  name: папка научного руководителя
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-rd
+    - state: folder-base
+
+  # Отделы
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderCargo
+  name: папка отдела снабжения
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-cargo
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderSecurity
+  name: папка отдела службы безопасности
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-security
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderEngineer
+  name: папка инженерного отдела
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-engineer
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderSyndicate
+  name: папка синдиката
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-syndicate
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolder
+  name: радужная папка
+  components:
+  - type: Sprite
+    layers:
+    - state: rainbow-folder
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderMedical
+  name: папка медицинского отдела
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-medical
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderReserch
+  name: папка отдела исследований
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-rnd
+    - state: folder-base
+
+  # Разноцветные
+- type: entity
+  parent: BoxFolderBase
+  id: BoxFolderOrange
+  suffix: Оранжевая
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+      color: "#c14d1b"
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBase
+  id: BoxFolderPurple
+  suffix: Фиолетовая
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+      color: "#841dbf"
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBase
+  id: BoxFolderBrown
+  suffix: Коричневая
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+      color: "#715646"
+    - state: folder-base
+
+# Папки End

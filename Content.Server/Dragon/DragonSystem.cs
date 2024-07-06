@@ -1,4 +1,3 @@
-using Content.Server.GenericAntag;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
@@ -15,6 +14,7 @@ using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Content.Server.Body.Systems;
 
 namespace Content.Server.Dragon;
 
@@ -29,6 +29,7 @@ public sealed partial class DragonSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly BodySystem _body = default!;
 
     private EntityQuery<CarpRiftsConditionComponent> _objQuery;
 
@@ -55,7 +56,6 @@ public sealed partial class DragonSystem : EntitySystem
         SubscribeLocalEvent<DragonComponent, DragonSpawnRiftActionEvent>(OnSpawnRift);
         SubscribeLocalEvent<DragonComponent, RefreshMovementSpeedModifiersEvent>(OnDragonMove);
         SubscribeLocalEvent<DragonComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<DragonComponent, GenericAntagCreatedEvent>(OnCreated);
         SubscribeLocalEvent<DragonComponent, EntityZombifiedEvent>(OnZombified);
     }
 
@@ -100,7 +100,8 @@ public sealed partial class DragonSystem : EntitySystem
             if (comp.RiftAccumulator >= comp.RiftMaxAccumulator)
             {
                 Roar(uid, comp);
-                QueueDel(uid);
+                // QueueDel(uid);
+                _body.GibBody(uid); //220 Dragon Bodies Fix
             }
         }
     }
@@ -190,18 +191,6 @@ public sealed partial class DragonSystem : EntitySystem
 
         // objective is explicitly not reset so that it will show how many you got before dying in round end text
         DeleteRifts(uid, false, component);
-    }
-
-    private void OnCreated(EntityUid uid, DragonComponent comp, ref GenericAntagCreatedEvent args)
-    {
-        var mindId = args.MindId;
-        var mind = args.Mind;
-
-        _role.MindAddRole(mindId, new DragonRoleComponent(), mind);
-        _role.MindAddRole(mindId, new RoleBriefingComponent()
-        {
-            Briefing = Loc.GetString("dragon-role-briefing")
-        }, mind);
     }
 
     private void OnZombified(Entity<DragonComponent> ent, ref EntityZombifiedEvent args)

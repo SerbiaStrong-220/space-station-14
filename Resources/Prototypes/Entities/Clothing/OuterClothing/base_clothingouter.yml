@@ -8,6 +8,7 @@
     - outerClothing
   - type: Sprite
     state: icon
+  - type: AllowSuitStorage #220 OuterClothing fix
 
 - type: entity
   abstract: true

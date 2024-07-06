@@ -1,0 +1,138 @@
+- type: constructionGraph
+  id: ClothingFootWrapsCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingFootWraps
+          steps:
+          - material: Cloth
+            amount: 2
+            doAfter: 5
+    - node: ClothingFootWraps
+      entity: ClothingFootWraps
+
+- type: constructionGraph
+  id: ClothingFootWrapsBlackCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingFootWraps
+          steps:
+          - tag: Footwraps
+            name: обмотки для ног
+            icon:
+              sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+              state: icon
+          - tag: Flower
+            name: мак
+            icon:
+              sprite: Objects/Specific/Hydroponics/poppy.rsi
+              state: produce
+          - tag: Ambrosia
+            name: амброзия
+            icon:
+              sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+              state: produce
+          - tag: Fruit
+            name: ягоды
+            icon:
+              sprite: Objects/Specific/Hydroponics/berries.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingFootWraps
+      entity: ClothingFootWrapsBlack
+
+- type: constructionGraph
+  id: ClothingFootWrapsBlueCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingFootWraps
+          steps:
+          - tag: Footwraps
+            name: обмотки для ног
+            icon:
+              sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+              state: icon
+          - tag: Fruit
+            name: ягоды
+            icon:
+              sprite: Objects/Specific/Hydroponics/berries.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingFootWraps
+      entity: ClothingFootWrapsBlue
+
+- type: constructionGraph
+  id: ClothingFootWrapsGreenCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingFootWraps
+          steps:
+          - tag: Footwraps
+            name: обмотки для ног
+            icon:
+              sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+              state: icon
+          - tag: Ambrosia
+            name: амброзия
+            icon:
+              sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingFootWraps
+      entity: ClothingFootWrapsGreen
+
+- type: constructionGraph
+  id: ClothingFootWrapsRedCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingFootWraps
+          steps:
+          - tag: Footwraps
+            name: обмотки для ног
+            icon:
+              sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+              state: icon
+          - tag: Flower
+            name: мак
+            icon:
+              sprite: Objects/Specific/Hydroponics/poppy.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingFootWraps
+      entity: ClothingFootWrapsRed
+
+- type: constructionGraph
+  id: ClothingFootWrapsYellowCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingFootWraps
+          steps:
+          - tag: Footwraps
+            name: обмотки для ног
+            icon:
+              sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+              state: icon
+          - tag: Fruit
+            name: ягоды
+            icon:
+              sprite: Objects/Specific/Hydroponics/berries.rsi
+              state: produce
+          - tag: Ambrosia
+            name: амброзия
+            icon:
+              sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingFootWraps
+      entity: ClothingFootWrapsYellow

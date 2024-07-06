@@ -20,7 +20,39 @@
   color: "#f04737"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
-    state: icon
+    state: icon   
+
+#Bankate
+- type: reagent
+  id: BankateDrink
+  name: reagent-name-bankate
+  parent: BaseDrink
+  desc: reagent-desc-bankate
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: horrible
+  color: "#dfe15f"
+  recognizable: true
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_bankate.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Caustic: 0.3
+      - !type:PopupMessage
+        messages: [ "жидкость жжётся!" ]
+        visualType: MediumCaution
+        probability: 0.3
+        type: Local
 
 - type: reagent
   id: HotArachne

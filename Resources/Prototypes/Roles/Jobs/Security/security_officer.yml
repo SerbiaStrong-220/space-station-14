@@ -11,7 +11,6 @@
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
   canBeAntag: false
-  canBeZombie: false
   access:
   - Security
   - Brig
@@ -29,3 +28,8 @@
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetSecurity
     pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
+  storage:
+    back:
+    - BoxSurvivalSecurity
+    - Flash
+    - MagazinePistol

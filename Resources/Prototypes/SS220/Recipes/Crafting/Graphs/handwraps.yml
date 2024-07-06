@@ -1,0 +1,138 @@
+- type: constructionGraph
+  id: ClothingHandWrapsCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingHandWraps
+          steps:
+          - material: Cloth
+            amount: 2
+            doAfter: 5
+    - node: ClothingHandWraps
+      entity: ClothingHandWraps
+
+- type: constructionGraph
+  id: ClothingHandWrapsBlackCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingHandWraps
+          steps:
+          - tag: Handwraps
+            name: обмотки для рук
+            icon:
+              sprite: SS220/Clothing/Hands/handwraps.rsi
+              state: icon
+          - tag: Flower
+            name: мак
+            icon:
+              sprite: Objects/Specific/Hydroponics/poppy.rsi
+              state: produce
+          - tag: Ambrosia
+            name: амброзия
+            icon:
+              sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+              state: produce
+          - tag: Fruit
+            name: ягоды
+            icon:
+              sprite: Objects/Specific/Hydroponics/berries.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingHandWraps
+      entity: ClothingHandWrapsBlack
+
+- type: constructionGraph
+  id: ClothingHandWrapsBlueCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingHandWraps
+          steps:
+          - tag: Handwraps
+            name: обмотки для рук
+            icon:
+              sprite: SS220/Clothing/Hands/handwraps.rsi
+              state: icon
+          - tag: Fruit
+            name: ягоды
+            icon:
+              sprite: Objects/Specific/Hydroponics/berries.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingHandWraps
+      entity: ClothingHandWrapsBlue
+
+- type: constructionGraph
+  id: ClothingHandWrapsGreenCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingHandWraps
+          steps:
+          - tag: Handwraps
+            name: обмотки для рук
+            icon:
+              sprite: SS220/Clothing/Hands/handwraps.rsi
+              state: icon
+          - tag: Ambrosia
+            name: амброзия
+            icon:
+              sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingHandWraps
+      entity: ClothingHandWrapsGreen
+
+- type: constructionGraph
+  id: ClothingHandWrapsRedCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingHandWraps
+          steps:
+          - tag: Handwraps
+            name: обмотки для рук
+            icon:
+              sprite: SS220/Clothing/Hands/handwraps.rsi
+              state: icon
+          - tag: Flower
+            name: мак
+            icon:
+              sprite: Objects/Specific/Hydroponics/poppy.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingHandWraps
+      entity: ClothingHandWrapsRed
+
+- type: constructionGraph
+  id: ClothingHandWrapsYellowCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothingHandWraps
+          steps:
+          - tag: Handwraps
+            name: обмотки для рук
+            icon:
+              sprite: SS220/Clothing/Hands/handwraps.rsi
+              state: icon
+          - tag: Fruit
+            name: ягоды
+            icon:
+              sprite: Objects/Specific/Hydroponics/berries.rsi
+              state: produce
+          - tag: Ambrosia
+            name: амброзия
+            icon:
+              sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+              state: produce
+            doAfter: 5
+    - node: ClothingHandWraps
+      entity: ClothingHandWrapsYellow

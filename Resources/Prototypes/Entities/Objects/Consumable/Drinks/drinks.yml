@@ -1671,6 +1671,9 @@
         reagents:
         - ReagentId: Sake
           Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/sakeplate.rsi #SS220 NewDrinksSprites
+    state: icon
 
 - type: entity
   parent: DrinkGlass

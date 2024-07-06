@@ -1,0 +1,58 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: ResearchAssistantTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobResearchAssistant
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: ResearchAssistantJumpsuitTurtleneck
+  equipment: ResearchAssistantJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchAssistantTurtleneck
+
+- type: startingGear
+  id: ResearchAssistantJumpsuitTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorWhite
+
+- type: loadout
+  id: ResearchAssistantJumpsuitTurtleneckAlt
+  equipment: ResearchAssistantJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchAssistantTurtleneck
+
+- type: startingGear
+  id: ResearchAssistantJumpsuitTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorWhite
+
+- type: loadout
+  id: ResearchAssistantJumpskirtTurtleneck
+  equipment: ResearchAssistantJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchAssistantTurtleneck
+
+- type: startingGear
+  id: ResearchAssistantJumpskirtTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorWhite
+
+- type: loadout
+  id: ResearchAssistantJumpskirtTurtleneckAlt
+  equipment: ResearchAssistantJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchAssistantTurtleneck
+
+- type: startingGear
+  id: ResearchAssistantJumpskirtTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite

@@ -1,13 +1,4 @@
-# Security
-- type: loadoutGroup
-  id: SecurityPilotBackpack
-  name: loadout-group-security-pilot-backpack
-  loadouts:
-  - SecurityPilotBackpack
-  - SecurityPilotSatchel
-  - SecurityPilotDuffel
-
-# IAA
+# InternalAffairs
 - type: loadoutGroup
   id: IAABackpack
   name: loadout-group-iaa-backpack
@@ -15,6 +6,21 @@
   - IAABackpack
   - IAASatchel
   - IAADuffel
+
+- type: loadoutGroup
+  id: BlueShieldJumpsuit
+  name: loadout-group-blueshield-jumpsuit
+  loadouts:
+  - BlueShieldJumpsuit
+  - BlueShieldJumpsuit2
+  - BlueShieldJumpsuitTurtle
+
+- type: loadoutGroup
+  id: BlueShieldOuterclothing
+  name: loadout-group-blueshield-outerclothing
+  loadouts:
+  - BlueShieldArmorBulletproof
+  - BlueShieldSRTCoat
 
 # Chef
 - type: loadoutGroup
@@ -27,3 +33,53 @@
   - ChefBeltApronBlack
   - ChefBeltApronRed
   - ChefBeltApronSenior
+
+# Medical
+- type: loadoutGroup
+  id: PsychologistJumpsuit
+  name: loadout-group-psychologist-jumpsuit
+  loadouts:
+  - PsychologistJumpsuit
+  - PsychologistJumpsuitTurtleneck
+  - PsychologistJumpskirtTurtleneck
+
+# Command
+
+- type: loadoutGroup
+  id: CaptainGloves
+  name: loadout-group-captain-gloves
+  loadouts:
+  - CaptainGloves
+  - CaptainWhiteGloves
+
+# Engineering
+
+- type: loadoutGroup
+  id: ChiefEngineerPDA
+  name: loadout-group-chief-engineer-PDA
+  loadouts:
+  - ChiefEngineerPDA
+  - DarkChiefEngineerPDA
+
+# Security
+
+  # Пилот
+- type: loadoutGroup
+  id: SecurityPilotHead
+  name: loadout-group-security-pilot-head
+  minLimit: 0
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - PilotCapCap
+
+# Cargo
+
+  # Утилизатор
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - UniformJumpsuitSalvageSpecialist
+  - SalvageSpecialistJumpsuitTurtleneck

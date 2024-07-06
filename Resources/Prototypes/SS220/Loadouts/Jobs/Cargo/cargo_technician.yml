@@ -1,0 +1,58 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: CargoTechnicianTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobCargoTechnician
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: CargoTechnicianJumpsuitTurtleneck
+  equipment: CargoTechnicianJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CargoTechnicianTurtleneck
+
+- type: startingGear
+  id: CargoTechnicianJumpsuitTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorLightBrown
+
+- type: loadout
+  id: CargoTechnicianJumpsuitTurtleneckAlt
+  equipment: CargoTechnicianJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CargoTechnicianTurtleneck
+
+- type: startingGear
+  id: CargoTechnicianJumpsuitTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorLightBrown
+
+- type: loadout
+  id: CargoTechnicianJumpskirtTurtleneck
+  equipment: CargoTechnicianJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CargoTechnicianTurtleneck
+
+- type: startingGear
+  id: CargoTechnicianJumpskirtTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorLightBrown
+
+- type: loadout
+  id: CargoTechnicianJumpskirtTurtleneckAlt
+  equipment: CargoTechnicianJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CargoTechnicianTurtleneck
+
+- type: startingGear
+  id: CargoTechnicianJumpskirtTurtleneckAlt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorLightBrown

@@ -139,8 +139,8 @@
     sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    # SS220 - real stealth.
   - type: StealthClothing
-    visibility: 1.1
     toggleAction: ActionTogglePhaseCloak
   - type: PressureProtection
     highPressureMultiplier: 0.6
@@ -195,6 +195,17 @@
   - type: Tag #SS220 tohoUpdate Begin
     tags:
      - ShrineMaiden #SS220 tohoUpdate End
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterSuitWitchRobes
+  name: witch robes
+  description: Magic is all about the spell power, ZE!
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Suits/witchrobe.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Suits/witchrobe.rsi
 
 - type: entity
   parent: ClothingOuterBase

@@ -17,6 +17,10 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+      offset: "-0.03125,0.28125"
 
 - type: entity
   parent: CrateGeneric
@@ -31,6 +35,10 @@
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+      offset: "-0.03125,0.28125"
   - type: Icon
     sprite: SS220/Structures/Storage/Crates/wood_crate.rsi
     state: base

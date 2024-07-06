@@ -1,0 +1,14 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Iron squad
+- type: entity
+  id: CartridgeIron_MG34
+  name: патрон (7.92X57mm)
+  parent: BaseCartridgeLightRifle
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CartridgeIron_MG34
+  - type: CartridgeAmmo
+    proto: BulletIron_MG34

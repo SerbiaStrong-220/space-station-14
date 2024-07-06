@@ -121,7 +121,7 @@
   - Boxer
   - Reporter
   - Zookeeper
-  - Psychologist
+#  - Psychologist SS220-psychologist-chat-color-fix
   primary: false
 
 - type: department

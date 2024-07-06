@@ -10,7 +10,7 @@
     noRot: true
   - type: Sprite
     noRot: true
-    sprite: Structures/Storage/closet.rsi
+    sprite: SS220/Structures/Storage/closet.rsi #SS220-Closet-Resprite
     layers:
     - state: generic
       map: ["enum.StorageVisualLayers.Base"]
@@ -19,6 +19,9 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper #SS220-Closet-Resprite-start
+      sprite: SS220/Structures/Storage/closet.rsi
+      map: ["enum.PaperLabelVisuals.Layer"] #SS220-Closet-Resprite-end
   - type: MovedByPressure
   - type: PaperLabel
     labelSlot:
@@ -27,6 +30,18 @@
       whitelist:
         components:
         - Paper
+  - type: GenericVisualizer #SS220-Closet-Resprite-start
+    visuals:
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Paper: { state: paper }
+          Bounty: { state: bounty }
+          CaptainsPaper: { state: captains_paper }
+          Invoice: { state: invoice } #SS220-Closet-Resprite-end
   - type: ItemSlots
   - type: DamageOnHighSpeedImpact
     damage:
@@ -48,6 +63,10 @@
         layer:
         - MachineLayer
   - type: EntityStorage
+    closeSound:
+      path: /Audio/SS220/Effects/closet/closet_close.ogg
+    openSound:
+      path: /Audio/SS220/Effects/closet/closet_open.ogg
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container

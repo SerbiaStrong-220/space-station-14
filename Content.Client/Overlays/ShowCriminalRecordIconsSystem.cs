@@ -1,5 +1,6 @@
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Overlays;
 using Content.Shared.PDA;
 using Content.Shared.Security.Components;
@@ -20,12 +21,12 @@ public sealed class ShowCriminalRecordIconsSystem : EquipmentHudSystem<ShowCrimi
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CriminalRecordComponent, GetStatusIconsEvent>(OnGetStatusIconsEvent);
+        SubscribeLocalEvent<IdentityComponent, GetStatusIconsEvent>(OnGetStatusIconsEvent); // 220 secincons fix
     }
 
-    private void OnGetStatusIconsEvent(EntityUid uid, CriminalRecordComponent component, ref GetStatusIconsEvent ev)
+    private void OnGetStatusIconsEvent(EntityUid uid, IdentityComponent _, ref GetStatusIconsEvent ev) // 220 secincons fix
     {
-        if (!IsActive || ev.InContainer)
+        if (!IsActive)
             return;
 
         //SS220 Criminal-Records begin

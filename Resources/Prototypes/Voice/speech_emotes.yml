@@ -505,6 +505,25 @@
     - отдала честь!
     # Corvax-Localization-End
 
+#- type: emote SS220-gasp-emote begin
+#  id: Gasp
+#  name: chat-emote-name-gasp
+#  whitelist:
+#    components:
+#    - Respirator
+#  chatMessages: ["chat-emote-msg-gasp"]
+#  chatTriggers:
+#   - gasp
+#   - gasp.
+#   - gasp!
+#   - gasps
+#   - gasps.
+#   - gasps!
+#   - gasped
+#   - gasped.
+#   - gasped!
+# SS220-gasp-emote end
+
 - type: emote
   id: DefaultDeathgasp
   name: chat-emote-name-deathgasp
@@ -520,6 +539,9 @@
 - type: emote
   id: Fart
   name: chat-emote-name-fart
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-fart"]
   chatTriggers:
   - fart
@@ -566,6 +588,13 @@
 - type: emote
   id: Giggle
   name: chat-emote-name-giggle
+  icon: Interface/Emotes/laugh.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-giggle"]
   chatTriggers:
   - хихикает
@@ -585,6 +614,13 @@
   id: Hiss
   name: chat-emote-name-hiss
   category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   chatMessages: ["chat-emote-msg-hiss"]
   chatTriggers:
   - шипение

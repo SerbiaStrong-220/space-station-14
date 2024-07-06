@@ -50,9 +50,21 @@ public sealed class StealthClothingSystem : EntitySystem
 
         var stealth = EnsureComp<StealthComponent>(user);
         // slightly visible, but doesn't change when moving so it's ok
-        var visibility = enabled ? stealth.MinVisibility + comp.Visibility : stealth.MaxVisibility;
-        _stealth.SetVisibility(user, visibility, stealth);
+        //SS220-real-stealth begin
+        // Not needed anymore.
+        //var visibility = enabled ? stealth.MinVisibility + comp.Visibility : stealth.MaxVisibility;
+        _stealth.SetVisibility(user, stealth.MaxVisibility, stealth);
         _stealth.SetEnabled(user, enabled, stealth);
+
+        if (enabled)
+        {
+            var stealthOnMove = EnsureComp<StealthOnMoveComponent>(user);
+            stealthOnMove.PassiveVisibilityRate = comp.PassiveVisibilityRate;
+            stealthOnMove.MovementVisibilityRate = comp.MovementVisibilityRate;
+            Dirty(user, stealthOnMove);
+        }
+        //SS220-real-stealth end
+
         return true;
     }
 
