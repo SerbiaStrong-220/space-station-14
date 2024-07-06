@@ -68,7 +68,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: АНС "Севастополь"
+      name: АСН "Севастополь"
     - type: Transform
       pos: -0.07078934,-0.6836653
       parent: invalid
@@ -64202,7 +64202,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -447629.34
+      secondsUntilStateChange: -447753.53
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
