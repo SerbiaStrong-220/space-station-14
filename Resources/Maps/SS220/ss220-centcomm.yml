@@ -68,7 +68,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: АНС "Севастополь"
+      name: АСН "Севастополь"
     - type: Transform
       pos: -0.07078934,-0.6836653
       parent: invalid
