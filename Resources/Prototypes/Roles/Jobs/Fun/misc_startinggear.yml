@@ -202,10 +202,10 @@
     - RCDExperimental
     - NodeScanner
     - RubberStampCentcomm
-    - RubberStampCentcom
     - RubberStampApproved
-    - RubberStampDenied
     - RubberStampSyndicate
+    - RubberStampCentcom
+    - RubberStampDenied
     - CentCommNewPen
     - NTbaton
     - AnomalyScanner
