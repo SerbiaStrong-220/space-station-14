@@ -138,6 +138,7 @@
   equipment:
     outerClothing: ClothingOuterHoodieChaplain
 
+  #SS220-Clothes-Start
 - type: loadout
   id: HoodieChaplainWhite
   equipment: HoodieChaplainWhite
@@ -146,3 +147,4 @@
   id: HoodieChaplainWhite
   equipment:
     outerClothing: ClothingOuterHoodieChaplainWhite
+  #SS220-Clothes-End

@@ -17,6 +17,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitJournalist
 
+  #SS220-Clothes-Start
 - type: loadout
   id: JumpsuitJournalistRed
   equipment: JumpsuitJournalistRed
@@ -25,3 +26,4 @@
   id: JumpsuitJournalistRed
   equipment:
     jumpsuit: ClothingUniformJumpsuitJournalistRed
+  #SS220-Clothes-End

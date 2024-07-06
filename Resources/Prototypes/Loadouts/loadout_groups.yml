@@ -322,7 +322,7 @@
   - ChaplainNunRobe
   - ChaplainBlackHoodie
   - ChaplainHoodie
-  - HoodieChaplainWhite
+  - HoodieChaplainWhite #SS220-Clothes
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -1277,7 +1277,7 @@
   loadouts:
   - ReporterJumpsuit
   - JournalistJumpsuit
-  - JumpsuitJournalistRed
+  - JumpsuitJournalistRed #SS220-Clothes
 
 - type: loadoutGroup
   id: BoxerJumpsuit
