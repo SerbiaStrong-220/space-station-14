@@ -510,19 +510,9 @@ entities:
       - 414
       - 410
       - 15
-- proto: AirlockCentralCommandGlassLocked
+- proto: AirlockCentcommLockedDeathSquad
   entities:
   - uid: 8
-    components:
-    - type: MetaData
-      name: рубка пилота
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,4.5
-      parent: 1
-- proto: AirlockCentralCommandLocked
-  entities:
-  - uid: 10
     components:
     - type: MetaData
       name: машинный отсек
@@ -543,6 +533,16 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -6.5,1.5
+      parent: 1
+- proto: AirlockGlassCentcommLockedDeathSquad
+  entities:
+  - uid: 10
+    components:
+    - type: MetaData
+      name: рубка пилота
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,4.5
       parent: 1
 - proto: AirSensor
   entities:
@@ -3342,7 +3342,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,4.5
       parent: 1
-- proto: soda_dispenser
+- proto: SodaDispenser
   entities:
   - uid: 485
     components:
