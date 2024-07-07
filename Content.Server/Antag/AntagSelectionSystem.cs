@@ -472,11 +472,17 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         //SS22-mindslave-begin
         //such a hack, and I'm lazy to do a shit about this
-        //if (_mindSlave.EnslavedMinds.Count > 0)
-        //{
-        //    foreach (var slave in _mindSlave.EnslavedMinds)
-        //        args.Minds.Add((slave.Key, Name(slave.Key)));
-        //}
+        if (_mindSlave.EnslavedMinds.Count > 0)
+        {
+            foreach (var slave in _mindSlave.EnslavedMinds)
+            {
+                if (TryComp<MetaDataComponent>(slave.Key, out var comp) && comp != null)
+                    args.Minds.Add((slave.Key, Name(slave.Key)));
+                _mindSlave.EnslavedMinds.Remove(slave.Key); // Problem is we dont clean slaved minds during the round.
+                // Whats why you cant slave someone whos mind was slaved anymatter on which puppet they were.
+                // Also is it intedented that EnslavedMinds exists with all information even after restart?
+            }
+        }
         //SS22-mindslave-end
 
         args.AgentName = Loc.GetString(name);
