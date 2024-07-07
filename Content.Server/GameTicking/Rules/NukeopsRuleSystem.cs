@@ -29,6 +29,11 @@ using System.Linq;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Maps;
+using System.Diagnostics.Contracts;
+using FastAccessors;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Content.Server.Messenger;
+using Content.Shared.GridPreloader.Prototypes;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -380,24 +385,81 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             // SS220 Lone-Ops-War begin
             // if (GetOutpost(nukieRule.Owner) is not { } outpost)
             //     continue;
-
             ProtoId<GameMapPrototype>? startMapProto = null;
+            ProtoId<PreloadedGridPrototype>? startGridProto = null;
             if (TryComp<LoadMapRuleComponent>(nukieRule.Owner, out var loadMap))
+            {
                 startMapProto = loadMap.GameMap;
+                startGridProto = loadMap.PreloadedGrid;
+            }
 
-            var mapProto = string.Empty;
+            if (startMapProto == null)
+                if (startGridProto == null)
+                {
+                    Log.Error($"Spawned nukies without correct LoadMapRuleComponent MapProto. Cant give {uid} additional TC for declaring war");
+                    continue;
+                }
+
+            // We use this list to differ nukies maps from others by name of map
+            List<String> loadMapStationNamesList = [];
+
+
+            if (startGridProto != null)
+                loadMapStationNamesList.Add(startGridProto.Value.ToString());
+
+            if (startMapProto != null)
+            {
+                var startMapIndex = _prototype.Index(startMapProto.Value);
+                var loadMapStationsDictionary = startMapIndex.Stations;
+
+                foreach (var config in loadMapStationsDictionary) // Goodluck :)
+                {
+                    foreach (var stationComponentOverridesDictionary in config.Value.StationComponentOverrides)
+                    {
+                        foreach (var prototypeValueKey in stationComponentOverridesDictionary.Value.Mapping.Keys)
+                        {
+                            if (prototypeValueKey.ToString() == "mapNameTemplate")
+                            {
+                                loadMapStationNamesList.Add(stationComponentOverridesDictionary.Value.Mapping[prototypeValueKey].ToString());
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+
+            List<String> uplinkMapNameList = [];
             var mapUid = Transform(uid).MapUid;
-            if (mapUid != null)
-                mapProto = MetaData(mapUid.Value).EntityPrototype?.ID;
-
-            if (mapProto != startMapProto.ToString()) // Will receive bonus TC only on their start outpost
+            if (mapUid == null)
                 continue;
+
+            uplinkMapNameList.Add(MetaData(mapUid.Value).EntityName);
+            var childEnum = Transform(mapUid.Value).ChildEnumerator;
+            while (childEnum.MoveNext(out var child))
+                uplinkMapNameList.Add(MetaData(child).EntityName);
+
+            // if (mapUid != null)
+            //     uplinkMapName = MetaData(mapUid.Value).EntityName;
+            bool permittedToAddTC = false;
+            foreach (var mapStationNameItem in loadMapStationNamesList)
+                foreach (var uplinkMapName in uplinkMapNameList)
+                    if (uplinkMapName == mapStationNameItem) // Will receive bonus TC only on their start outpost
+                    {
+                        permittedToAddTC = true;
+                        break;
+                    }
+
+            uplinkMapNameList.Clear();
+            loadMapStationNamesList.Clear();
+
+            if (permittedToAddTC)
+            {
+                _store.TryAddCurrency(new () { { TelecrystalCurrencyPrototype, nukieRule.Comp.WarTcAmountPerNukie } }, uid, component);
+
+                var msg = Loc.GetString("store-currency-war-boost-given", ("target", uid));
+                _popupSystem.PopupEntity(msg, uid);
+            }
             // SS220 Lone-Ops-War end
-
-            _store.TryAddCurrency(new () { { TelecrystalCurrencyPrototype, nukieRule.Comp.WarTcAmountPerNukie } }, uid, component);
-
-            var msg = Loc.GetString("store-currency-war-boost-given", ("target", uid));
-            _popupSystem.PopupEntity(msg, uid);
         }
     }
 

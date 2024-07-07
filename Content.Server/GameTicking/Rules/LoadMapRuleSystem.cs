@@ -1,5 +1,7 @@
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.GridPreloader;
+using Content.Server.Pinpointer;
+using Content.Server.Station.Components;
 using Content.Shared.GameTicking.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.Maps;
@@ -65,6 +67,11 @@ public sealed class LoadMapRuleSystem : GameRuleSystem<LoadMapRuleComponent>
             _transform.SetParent(loadedShuttle.Value, mapUid);
             grids = new List<EntityUid>() { loadedShuttle.Value };
             _map.InitializeMap(mapUid);
+            // SS220 LoneOps TC-adding-fix BEGIN
+            var mapName = comp.PreloadedGrid.ToString();
+            if (mapName != null)
+                _metaData.SetEntityName(mapUid, mapName, MetaData(mapUid));
+            // SS220 LoneOps TC-adding-fix END
         }
         else
         {
