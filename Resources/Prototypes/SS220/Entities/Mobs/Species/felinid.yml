@@ -105,7 +105,7 @@
         amount: 5
   #MEOW LESS OK THX
   - type: Emoting
-    chatEmoteCooldown: 5.0
+    chatEmoteCooldown: 3.0
 
 - type: entity
   save: false

@@ -112,8 +112,8 @@
     actionPrototype: DionaGibAction
     allowedStates:
     - Dead
-  - type: Emoting #ss220 emote 5 sec fix
-    chatEmoteCooldown: 5.0 #ss220 emote 5 sec fix
+  - type: Emoting #ss220 emote 3 sec fix
+    chatEmoteCooldown: 3.0 #ss220 emote 3 sec fix
 
 - type: entity
   parent: BaseSpeciesDummy
