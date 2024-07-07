@@ -70,7 +70,7 @@
         color: "#2cf274"
   - type: Bloodstream
     bloodReagent: Slime # TODO Color slime blood based on their slime color or smth
-#SS220-TweakDamageSpecies-Begin 
+#SS220-TweakDamageSpecies-Begin
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -120,6 +120,8 @@
       types:
         Asphyxiation: -1.0
     maxSaturation: 15
+  - type: Emoting #ss220 emote 5 sec fix
+    chatEmoteCooldown: 5.0 #ss220 emote 5 sec fix
 
 - type: entity
   parent: MobHumanDummy

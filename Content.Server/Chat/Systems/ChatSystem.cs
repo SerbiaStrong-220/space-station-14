@@ -72,11 +72,18 @@ public sealed partial class ChatSystem : SharedChatSystem
     public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units
     public const string DefaultAnnouncementSound = "/Audio/Announcements/announce.ogg";
     public const string CentComAnnouncementSound = "/Audio/Corvax/Announcements/centcomm.ogg"; // Corvax-Announcements
+    public const int MaximumLengthMsg = 4; //ss220 chat unique fix
 
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
     private readonly bool _adminLoocEnabled = true;
+
+    public TimeSpan ChatMsgCooldown = TimeSpan.FromSeconds(2); //ss220 chat unique fix
+
+    public TimeSpan? LastChatMsgTime; //ss220 chat unique fix
+
+    private string? LastMessage; //ss220 chat unique fix
 
     public override void Initialize()
     {
@@ -228,6 +235,20 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+
+        //ss220 Chat Unique start
+
+        var currentTime = _gameTiming.CurTime;
+
+        if (message.Length > MaximumLengthMsg && LastMessage != null && LastMessage == message && currentTime - LastChatMsgTime < ChatMsgCooldown)
+        {
+            return;
+        }
+
+        LastMessage = message;
+        LastChatMsgTime = _gameTiming.CurTime;
+
+        //ss220 Chat Unique end
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)

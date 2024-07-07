@@ -124,6 +124,8 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_arachnid"
         visible: false
+  - type: Emoting
+    chatEmoteCooldown: 5.0
 
 - type: entity
   parent: BaseSpeciesDummy

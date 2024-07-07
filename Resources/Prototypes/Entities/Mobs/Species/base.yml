@@ -289,6 +289,9 @@
   - type: FireVisuals
     alternateState: Standing
 
+  - type: Emoting #ss220 emote 5 sec fix
+    chatEmoteCooldown: 5.0 #ss220 emote 5 sec fix
+
 - type: entity
   save: false
   id: BaseSpeciesDummy
