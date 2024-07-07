@@ -114,6 +114,39 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
 
+  # Бармен
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatWhiteTophat
+  name: white tophat
+  description: A stylish white tophat.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/white_tophat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/white_tophat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRedTophat
+  name: red tophat
+  description: A stylish red tophat.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/red_tophat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/red_tophat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
 # Служба безопасности
 
   # Пилот

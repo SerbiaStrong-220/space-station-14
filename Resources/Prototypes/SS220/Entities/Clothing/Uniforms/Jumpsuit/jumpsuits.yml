@@ -1,4 +1,6 @@
-#Сервис
+# Сервис
+
+  # Клоун
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitClowns
@@ -10,6 +12,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
 
+  # Ботаник
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitHydroponicsBlue
@@ -65,6 +68,52 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitJournalistRed
+  name: red journalist suit
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalistred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalistred.rsi
+
+  # Бармен
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBartenderRed
+  name: red bartender's uniform
+  description: A special red outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_red.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBartenderGreen
+  name: green bartender's uniform
+  description: A special green outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBartenderNanotrasen
+  name: униформа заслуженного бармена NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
+
 # Cargo
 
   # Квартирмейстер
@@ -78,3 +127,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
+
+
+# Syndicate
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSyndicateDiplomatist
+  name: syndicate diplomatist uniforms
+  description: The uniform of a crime syndicate diplomat, nothing unusual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi

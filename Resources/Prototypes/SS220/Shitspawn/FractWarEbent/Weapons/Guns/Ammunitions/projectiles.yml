@@ -16,6 +16,27 @@
     sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: impact_beam_heavymagic
 
+- type: entity
+  name : Blaster bolt
+  id: BulletBlaster
+  parent: BulletDisabler
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+    - state: redlaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 13
+        Piercing: 5
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
 #Iron squad
 - type: entity
   id: BulletIron_MG34

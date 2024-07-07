@@ -137,3 +137,14 @@
   id: ChaplainHoodie
   equipment:
     outerClothing: ClothingOuterHoodieChaplain
+
+  #SS220-Clothes-Start
+- type: loadout
+  id: HoodieChaplainWhite
+  equipment: HoodieChaplainWhite
+
+- type: startingGear
+  id: HoodieChaplainWhite
+  equipment:
+    outerClothing: ClothingOuterHoodieChaplainWhite
+  #SS220-Clothes-End

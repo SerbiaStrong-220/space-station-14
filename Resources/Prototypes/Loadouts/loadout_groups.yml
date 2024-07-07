@@ -190,6 +190,8 @@
   minLimit: 0
   loadouts:
   - BartenderHead
+  - BartenderHeadWhite  #SS220-BartenderResprited-Begin
+  - BartenderHeadRed #SS220-BartenderResprited-End
   - BartenderBowler
 
 - type: loadoutGroup
@@ -197,8 +199,14 @@
   name: loadout-group-bartender-jumpsuit
   loadouts:
   - BartenderJumpsuit
-  - BartenderJumpskirt
   - BartenderJumpsuitPurple
+  - BartenderJumpsuitRed #SS220-BartenderResprited-Begin
+  - BartenderJumpsuitGreen
+  - BartenderJumpsuitNanotrasen
+  - BartenderJumpskirt
+  - BartenderJumpskirtRed
+  - BartenderJumpskirtGreen
+  - BartenderJumpskirtNanotrasen #SS220-BartenderResprited-End
 
 - type: loadoutGroup
   id: BartenderOuterClothing
@@ -322,6 +330,7 @@
   - ChaplainNunRobe
   - ChaplainBlackHoodie
   - ChaplainHoodie
+  - HoodieChaplainWhite #SS220-Clothes
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -630,6 +639,16 @@
   - DarkChiefEngineerCloak
   - DarkChiefEngineerMantle
 #ss220-loadout-chief-engineer-end
+
+#ss220-loadout-ce-backpack-begin
+- type: loadoutGroup
+  id: ChiefEngineerBack
+  name: loadout-group-chief-engineer-backpack
+  loadouts:
+    - ChiefEngineerBackpack
+    - ChiefEngineerSatchel
+    - ChiefEngineerDuffel
+#ss220-loadout-ce-backpack-end
 
 - type: loadoutGroup
   id: ChiefEngineerOuterClothing
@@ -1278,6 +1297,7 @@
   loadouts:
   - ReporterJumpsuit
   - JournalistJumpsuit
+  - JumpsuitJournalistRed #SS220-Clothes
 
 - type: loadoutGroup
   id: BoxerJumpsuit

@@ -1,4 +1,6 @@
-#Сервис
+# Сервис
+
+  # Клоун
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtClowns
@@ -10,6 +12,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
 
+  # Ботаник
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtHydroponicsBlue
@@ -31,3 +34,51 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+
+  # Бармен
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBartenderRed
+  name: red bartender's uniform
+  description: A special red outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBartenderGreen
+  name: green bartender's uniform
+  description: A special green outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBartenderNanotrasen
+  name: униформа заслуженного бармена NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
+
+# Синдикат
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtSyndicateDiplomatist
+  name: syndicate diplomatist uniforms
+  description: The uniform of a crime syndicate diplomat, nothing unusual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
