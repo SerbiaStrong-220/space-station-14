@@ -97,3 +97,10 @@
   - Zombie
   - SimpleHostile
   - Dragon
+
+# ss220 reaper passive start
+
+- type: npcFaction
+  id: DarkReaperPassive
+
+# ss220 reaper passive end
