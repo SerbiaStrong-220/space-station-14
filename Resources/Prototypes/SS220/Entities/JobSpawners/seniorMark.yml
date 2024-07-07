@@ -9,7 +9,7 @@
     layers:
       - state: green
       - state: seniorengineer
-      
+# 
 - type: entity
   id: SpawnPointSeniorPhysician
   parent: SpawnPointJobBase
@@ -21,7 +21,7 @@
     layers:
       - state: green
       - state: seniorphysician
-      
+ #    
 - type: entity
   id: SpawnPointSeniorResearcher
   parent: SpawnPointJobBase
@@ -33,7 +33,7 @@
     layers:
       - state: green
       - state: seniorresearcher
-      
+ #    
 - type: entity
   id: SpawnPointSeniorOfficer
   parent: SpawnPointJobBase
@@ -45,7 +45,7 @@
     layers:
       - state: green
       - state: seniorofficer
- 
+ #
 - type: entity
   id: SpawnPointServiceOfficer
   parent: SpawnPointJobBase
@@ -57,3 +57,4 @@
     layers:
       - state: green
       - state: serviceworker
+#
