@@ -177,6 +177,14 @@ public sealed partial class TestPair
         var prefMan = Server.ResolveDependency<IServerPreferencesManager>();
         var prefs = prefMan.GetPreferences(user);
         var profile = (HumanoidCharacterProfile) prefs.Characters[0];
+        //SS220 race job ban test fix
+        // begin
+        await Server.WaitPost(() => prefMan.SetProfile(user, 0, profile.WithSpecies("Human")).Wait());
+        // You have to do it in two steps cause of how RefreshSpecies and RefreshJob works. Changing order doesnt help.
+        prefs = prefMan.GetPreferences(user);
+        profile = (HumanoidCharacterProfile) prefs.Characters[0];
+        //SS220 race job ban test fix
+        // end
         var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(profile.JobPriorities);
 
         // Automatic preference resetting only resets slot 0.
