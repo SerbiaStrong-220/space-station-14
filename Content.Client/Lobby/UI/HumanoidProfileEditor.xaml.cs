@@ -897,6 +897,7 @@ namespace Content.Client.Lobby.UI
                     if (Profile is not null && !_requirements.IsAllowed(job, Profile, out var reason))
                     {
                         selector.LockRequirements(reason);
+                        Profile = Profile?.WithJobPriority(job.ID, JobPriority.Never); //ss220 fix job ban felinid
                     }
                     else
                     {
