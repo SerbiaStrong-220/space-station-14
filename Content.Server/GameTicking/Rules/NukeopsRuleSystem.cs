@@ -64,13 +64,14 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         SubscribeLocalEvent<NukeOperativeComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<NukeOperativeComponent, EntityZombifiedEvent>(OnOperativeZombified);
 
-        SubscribeLocalEvent<NukeOpsShuttleComponent, MapInitEvent>(OnMapInit);
+        // SubscribeLocalEvent<NukeOpsShuttleComponent, MapInitEvent>(OnMapInit); // GameRuleSystem<RuleGridsComponent>
 
         SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnShuttleFTLAttempt);
         SubscribeLocalEvent<WarDeclaredEvent>(OnWarDeclared);
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
+        SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids); // ss220 nukie fix - cant understand if it is was merged or not
     }
 
     protected override void Started(EntityUid uid, NukeopsRuleComponent component, GameRuleComponent gameRule,
@@ -262,20 +263,38 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     {
         RemCompDeferred(uid, component);
     }
+    // ss220 nukie-fix. It was official code but didnt get to us
+    // begin
+    // private void OnMapInit(Entity<NukeOpsShuttleComponent> ent, ref MapInitEvent args)
+    // {
+    //     var map = Transform(ent).MapID;
 
-    private void OnMapInit(Entity<NukeOpsShuttleComponent> ent, ref MapInitEvent args)
+    //     var rules = EntityQueryEnumerator<NukeopsRuleComponent, RuleGridsComponent>();
+    //     while (rules.MoveNext(out var uid, out _, out var grids))
+    //     {
+    //         if (map != grids.Map)
+    //             continue;
+    //         ent.Comp.AssociatedRule = uid;
+    //         break;
+    //     }
+    // }
+    private void OnRuleLoadedGrids(Entity<NukeopsRuleComponent> ent, ref RuleLoadedGridsEvent args)
     {
-        var map = Transform(ent).MapID;
-
-        var rules = EntityQueryEnumerator<NukeopsRuleComponent, RuleGridsComponent>();
-        while (rules.MoveNext(out var uid, out _, out var grids))
+        // Check each nukie shuttle
+        var query = EntityQueryEnumerator<NukeOpsShuttleComponent>();
+        while (query.MoveNext(out var uid, out var shuttle))
         {
-            if (map != grids.Map)
-                continue;
-            ent.Comp.AssociatedRule = uid;
-            break;
+            // Check if the shuttle's mapID is the one that just got loaded for this rule
+            if (Transform(uid).MapID == args.Map)
+            {
+                shuttle.AssociatedRule = ent;
+                break;
+            }
         }
     }
+    // ss220 nukie-fix. It was official code but didnt get to us
+    // end
+
 
     private void OnShuttleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
     {
