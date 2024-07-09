@@ -397,7 +397,7 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Admin
     
-- type: statusIcon
+- type: statusIcon  #SS220 SeniorService
   parent: JobIcon
   id: JobIconSeniorService
   icon:
