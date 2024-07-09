@@ -1,3 +1,15 @@
+# Внутренние дела
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNTR
+  name: nanotrasen representative uniform
+  description: The uniform of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr_uniform.rsi
+
 # Сервис
 
   # Клоун

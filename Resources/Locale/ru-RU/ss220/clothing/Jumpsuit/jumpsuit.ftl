@@ -18,3 +18,5 @@ ent-ClothingUniformJumpsuitCargonovich = каргонович
     .desc = Ты бы ещё лопнувшую бочку для газа притащил...
 ent-ClothingUniformJumpsuitSyndicateDiplomatist = костюм дипломата Syndicate
     .desc = Костюм дипломата преступного синдиката, ничего необычного.
+ent-ClothingUniformJumpsuitNTR = униформа НТР
+    .desc = Униформа представителя NanoTrasen. Несите истину корпарации своими руками.
