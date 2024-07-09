@@ -24,7 +24,7 @@ public sealed class LavaSystem : EntitySystem
     private void OnLavaStepTriggerAttempt(EntityUid uid, LavaComponent component, ref StepTriggerAttemptEvent args)
     {
         // SS220-vehicles-go-boom-in-lava-start
-        if(HasComp<VehicleComponent>(args.Tripper))
+        if (HasComp<VehicleComponent>(args.Tripper))
         {
             _explosionSystem.QueueExplosion(args.Tripper, "Default", 3, 25f, 10, canCreateVacuum:false); // Not deadly to rider but still painful
             if (TryComp<DamageableComponent>(args.Tripper, out var damageablecomp))
