@@ -61,7 +61,7 @@
   - type: StealCondition
     stealGroup: Figurines
     minCollectionSize: 10
-    maxCollectionSize: 50 #will be limited to the number of figures on the station anyway.
+    maxCollectionSize: 15 #will be limited to the number of figures on the station anyway. # ss220 50 -> 15 max
   - type: Objective
     difficulty: 0.25
 
@@ -93,8 +93,8 @@
   components:
   - type: StealCondition
     stealGroup: Stamp
-    minCollectionSize: 5
-    maxCollectionSize: 15
+    minCollectionSize: 3 # ss220 5 -> 3 max
+    maxCollectionSize: 5 # ss220 15 -> 5 max
   - type: Objective
     difficulty: 1.0
 
