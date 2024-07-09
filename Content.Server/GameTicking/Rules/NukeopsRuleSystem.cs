@@ -393,26 +393,18 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         var enumerator = EntityQueryEnumerator<StoreComponent>();
         while (enumerator.MoveNext(out var uid, out var component))
         {
-            if (!(_tag.HasTag(uid, NukeOpsUplinkTagPrototype) || _tag.HasTag(uid, LoneOpsUplinkTagPrototype))) // SS220 Lone-Ops-War
+            // SS220 Lone-Ops-War BEGIN
+            if (!(_tag.HasTag(uid, NukeOpsUplinkTagPrototype) || _tag.HasTag(uid, LoneOpsUplinkTagPrototype)))
                 continue;
 
-            // SS220 Lone-Ops-War begin
-            // if (GetOutpost(nukieRule.Owner) is not { } outpost)
-            //     continue;
+            EntityUid? outpost = null;
+            if ((outpost = GetOutpost(nukieRule.Owner)) is null)
+                if ((outpost = GetShuttle(nukieRule.Owner)) is null)
+                    continue;
 
-            ProtoId<GameMapPrototype>? startMapProto = null;
-            if (TryComp<LoadMapRuleComponent>(nukieRule.Owner, out var loadMap))
-                startMapProto = loadMap.GameMap;
-
-            var mapProto = string.Empty;
-            var mapUid = Transform(uid).MapUid;
-            if (mapUid != null)
-                mapProto = MetaData(mapUid.Value).EntityPrototype?.ID;
-
-            if (mapProto != startMapProto.ToString()) // Will receive bonus TC only on their start outpost
+            if (Transform(uid).MapID != Transform(outpost.Value).MapID) // Will receive bonus TC only on their start outpost
                 continue;
-            // SS220 Lone-Ops-War end
-
+            // SS220 Lone-Ops-War END
             _store.TryAddCurrency(new () { { TelecrystalCurrencyPrototype, nukieRule.Comp.WarTcAmountPerNukie } }, uid, component);
 
             var msg = Loc.GetString("store-currency-war-boost-given", ("target", uid));

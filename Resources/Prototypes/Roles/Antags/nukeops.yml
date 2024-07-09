@@ -100,3 +100,5 @@
   parent: SyndicateOperativeGearFull
   equipment:
     pocket2: LoneOpsUplinkRadio40TC
+  inhand:
+    - NukeLoneOpsDeclarationOfWar
