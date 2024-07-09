@@ -876,7 +876,7 @@
     jobTitle: Cluwne
   - type: Unremoveable
 
-- type: entity
+- type: entity #ss220
   parent: IDCardStandard
   id: SeniorEngineerIDCard
   name: senior engineer ID card
@@ -888,7 +888,7 @@
   - type: PresetIdCard
     job: SeniorEngineer
 
-- type: entity
+- type: entity #ss220
   parent: IDCardStandard
   id: SeniorResearcherIDCard
   name: senior researcher ID card
@@ -900,7 +900,7 @@
   - type: PresetIdCard
     job: SeniorResearcher
 
-- type: entity
+- type: entity #ss220
   parent: IDCardStandard
   id: SeniorPhysicianIDCard
   name: senior physician ID card
@@ -912,7 +912,7 @@
   - type: PresetIdCard
     job: SeniorPhysician
     
-- type: entity
+- type: entity # SS220
   parent: IDCardStandard
   id: SeniorOfficerIDCard
   name: senior officer ID card
