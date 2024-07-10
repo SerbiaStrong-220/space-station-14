@@ -23,6 +23,6 @@ public sealed class SS220DatasetTest
                 Assert.That(line is not null, $"Current dataset prototype ID is {proto.ID}");
         // null values generates by .yml if you write " - ", to make a empty string use " - !!string"
         // null values wont fatal until f.e. random name generator tries to use that value
+        await pair.CleanReturnAsync();
     }
-
 }
