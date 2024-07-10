@@ -118,7 +118,7 @@ public sealed class BanCommand : LocalizedCommands
         var targetUid = located.UserId;
         var targetHWid = located.LastHWId;
 
-        _bans.CreateServerBan(targetUid, target, player?.UserId, null, targetHWid, minutes, severity, player?.Name, round, reason);
+        _bans.CreateServerBan(targetUid, target, player?.UserId, null, targetHWid, minutes, severity, player?.Name, round, reason, postBanInfo: true);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

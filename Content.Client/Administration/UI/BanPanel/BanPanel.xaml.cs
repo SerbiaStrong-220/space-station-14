@@ -22,7 +22,7 @@ namespace Content.Client.Administration.UI.BanPanel;
 [GenerateTypedNameReferences]
 public sealed partial class BanPanel : DefaultWindow
 {
-    public event Action<string?, (IPAddress, int)?, bool, byte[]?, bool, uint, string, NoteSeverity, int, string[]?, bool>? BanSubmitted;
+    public event Action<string?, (IPAddress, int)?, bool, byte[]?, bool, uint, string, NoteSeverity, int, string[]?, bool, bool>? BanSubmitted;
     public event Action<string>? PlayerChanged;
     private string? PlayerUsername { get; set; }
     private (IPAddress, int)? IpAddress { get; set; }
@@ -533,7 +533,7 @@ public sealed partial class BanPanel : DefaultWindow
         var useLastHwid = HwidCheckbox.Pressed && LastConnCheckbox.Pressed && Hwid is null;
         var severity = (NoteSeverity) SeverityOption.SelectedId;
         var erase = EraseCheckbox.Pressed;
-        BanSubmitted?.Invoke(player, IpAddress, useLastIp, Hwid, useLastHwid, (uint) (TimeEntered * Multiplier), reason, severity, statedRoundEntered, roles, erase);
+        BanSubmitted?.Invoke(player, IpAddress, useLastIp, Hwid, useLastHwid, (uint) (TimeEntered * Multiplier), reason, severity, statedRoundEntered, roles, erase, PostBanInfoCheckbox.Pressed);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

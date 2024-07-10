@@ -97,7 +97,7 @@ public sealed class DepartmentBanCommand : IConsoleCommand
         var now = DateTimeOffset.UtcNow;
         foreach (var job in departmentProto.Roles)
         {
-            _banManager.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, now);
+            _banManager.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, now, postBanInfo: true);
         }
     }
 
