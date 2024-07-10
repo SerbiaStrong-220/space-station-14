@@ -93,8 +93,8 @@
   components:
   - type: StealCondition
     stealGroup: Stamp
-    minCollectionSize: 3 # ss220 5 -> 3 max
-    maxCollectionSize: 5 # ss220 15 -> 5 max
+    minCollectionSize: 4 # ss220 5 -> 4 max
+    maxCollectionSize: 7 # ss220 15 -> 7 max
   - type: Objective
     difficulty: 1.0
 
