@@ -60,8 +60,8 @@
       randomizeName: false
     - type: NukeOperative
     - type: LoneNukeOperative # SS220 Lone-Nukie-Declare-War
-    - type: Loadout
-      prototypes: [SyndicateLoneOperativeGearFull]
+    # - type: Loadout                                # SS220 Lone-Ops-Test-Fail-Fix
+    #   prototypes: [SyndicateLoneOperativeGearFull] # SS220 Lone-Ops-Test-Fail-Fix
     - type: RandomMetadata
       nameSegments:
       - SyndicateNamesPrefix
