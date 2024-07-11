@@ -1226,6 +1226,7 @@
   - ParamedicJumpskirt
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - ParamedicFeldsher #SS220-ParamedFashion
 
 - type: loadoutGroup
   id: ParamedicOuterClothing
