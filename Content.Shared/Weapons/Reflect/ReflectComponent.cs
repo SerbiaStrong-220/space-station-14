@@ -66,6 +66,11 @@ public sealed partial class ReflectComponent : Component
     /// </summary>
     [DataField]
     public float MinReflectProb = 0.1f;
+
+    // SS220 ESword reflect fix begin
+    [DataField("minReflectProbProjectile")]
+    public float MinReflectProbProjectile = 0.1f;
+    // SS220 ESword reflect fix end
 }
 
 [Flags]

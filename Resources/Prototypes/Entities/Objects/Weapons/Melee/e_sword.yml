@@ -330,6 +330,7 @@
     spread: 45
     reflectProbProjectile: 0.5
     spreadProjectile: 180
+    minReflectProbProjectile: .25  #SS220 ESword reflect fix
 # ss220 FixESword
     minReflectProb: .65
   - type: UseDelay
@@ -407,6 +408,7 @@
     spread: 45
     reflectProbProjectile: 0.5
     spreadProjectile: 180
+    minReflectProbProjectile: .25  #SS220 ESword reflect fix
 # ss220 FixESword
   - type: UseDelay
     delay: 1
