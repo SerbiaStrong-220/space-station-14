@@ -70,6 +70,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
 
+# Medical
+
+  # Бригмедик
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtMilitaryFeldsher
+  name: uniform military feldsher
+  description: This is not a red color at all..
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
 # Синдикат
 
 - type: entity
