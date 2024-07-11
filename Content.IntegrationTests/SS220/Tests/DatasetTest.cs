@@ -3,7 +3,7 @@ using System.Linq;
 using Content.Shared.Dataset;
 using Robust.Shared.Prototypes;
 
-namespace Content.IntegrationTests.Tests;
+namespace Content.IntegrationTests.SS220.Tests;
 
 [TestFixture]
 public sealed class SS220DatasetTest
