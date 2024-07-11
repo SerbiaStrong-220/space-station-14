@@ -99,6 +99,6 @@
   id: SyndicateLoneOperativeGearFull
   parent: SyndicateOperativeGearFull
   equipment:
-    pocket2: LoneOpsUplinkRadio40TC
-  inhand:
-    - NukeLoneOpsDeclarationOfWar
+    pocket2: LoneOpsUplinkRadio40TC # SS220 Lone-Ops-Uplink
+  inhand:                         # SS220 Lone-Ops-War
+    - NukeLoneOpsDeclarationOfWar # SS220 Lone-Ops-War
