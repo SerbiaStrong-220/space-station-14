@@ -70,6 +70,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
 
+# Medical
+
+  # Парамед
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtFeldsher
+  name: uniform feldsher
+  description: Just don't be offended, are you a feldsher or a real doctor?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
 # Синдикат
 
 - type: entity

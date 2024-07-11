@@ -68,6 +68,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
 
+  # Репортёр
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitJournalistRed
@@ -114,6 +115,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
 
+# Medical
+
+  # Парамед
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitFeldsher
+  name: uniform feldsher
+  description: Just don't be offended, are you a feldsher or a real doctor?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
 # Cargo
 
   # Квартирмейстер
