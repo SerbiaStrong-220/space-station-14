@@ -1,0 +1,11 @@
+- type: entity
+  name: vuyko test messenger
+  description: Vuyko's handheld device that displays a message when activated.
+  parent: BaseItem
+  id: VuykoTestMessenger
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/door_remote.rsi
+    state: door_remotebase
+  - type: MessageDisplay
+    message: "Hello World eba"
