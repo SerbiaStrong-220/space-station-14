@@ -32,3 +32,19 @@
   id:  ClothingBeltRapierSheathAltFilled
   parent: ClothingBeltRapierSheathFilled
   suffix: Filled, 15 piercing
+
+- type: entity
+  id: ClothingBeltSecurityMedicalFilled
+  parent: ClothingBeltSecurityMedical
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: Brutepack
+        amount: 2
+      - id: Ointment
+        amount: 1
+      - id: Bloodpack
+        amount: 1
+      - id: Gauze
+      - id: EmergencyMedipen

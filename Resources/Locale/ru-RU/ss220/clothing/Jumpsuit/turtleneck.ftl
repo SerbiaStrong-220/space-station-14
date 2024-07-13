@@ -10,4 +10,5 @@ ent-ClothingUniformJumpsuitWardenTurtleneck = водолазка смотрит�
     .desc = Специальная водолазка для борьбы с беспорядками.
 ent-ClothingUniformJumpsuitSalvageSpecialistTurtleneck = водолазка утилизатора
     .desc = Покажите, что вы лучше чёртовых дварфов!
-
+ent-ClothingUniformJumpsuitBrigmedicTurtleneck = водолазка бригмедика
+    .desc = Водолазка бригмедика.

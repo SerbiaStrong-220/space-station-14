@@ -43,6 +43,62 @@
   - PsychologistJumpsuitTurtleneck
   - PsychologistJumpskirtTurtleneck
 
+- type: loadoutGroup
+  id: BrigmedicHead
+  name: loadout-group-brigmedic-head
+  minLimit: 0
+  loadouts:
+  - BrigmedicHead
+  - SecurityMedicHead
+  - SecurityMedicHelmet
+
+- type: loadoutGroup
+  id: BrigmedicMask
+  name: loadout-group-brigmedic-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  - BrigmedicMask
+
+- type: loadoutGroup
+  id: BrigmedicJumpsuit
+  name: loadout-group-brigmedic-jumpsuit
+  loadouts:
+  - BrigmedicJumpsuit
+  - BrigmedicJumpskirt
+  - BrigmedicJumpsuitTurtleneck
+  - BrigmedicJumpskirtTurtleneck
+  - BrigmedicJumpskirtOfLife
+  - BrigmedicJumpsuitMilitaryFeldsher
+  - BrigmedicJumpskirtMilitaryFeldsher
+
+- type: loadoutGroup
+  id: BrigmedicOuterClothing
+  name: loadout-group-brigmedic-outerclothing
+  minLimit: 0
+  loadouts:
+  - BrigmedicWindAMG
+  - BrigmedicVestSecurity
+  - BrigmedicCoatLab
+  - BrigmedicVestArmorMedSec
+
+- type: loadoutGroup
+  id: BrigmedicBackpack
+  name: loadout-group-brigmedic-backpack
+  loadouts:
+  - BrigmedicBackpack
+  - BrigmedicSatchel
+  - BrigmedicDuffel
+
+- type: loadoutGroup
+  id: BrigmedicShoes
+  name: loadout-group-brigmedic-shoes
+  loadouts:
+  - RedShoes
+  - BlueShoes
+  - MedicalWinterBoots
+  - SecMedWinterBoots
+
 # Command
 
 - type: loadoutGroup

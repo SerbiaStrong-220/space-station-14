@@ -3,6 +3,7 @@ using Content.Server.DeviceNetwork.Components;
 using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Server.SS220.Shuttles.Components;
 using Content.Shared.Access;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -212,6 +213,7 @@ public sealed partial class EmergencyShuttleSystem
             // Don't dock them. If you do end up doing this then stagger launch.
             _shuttle.FTLToDock(uid, shuttle, centcomm.Entity.Value, hyperspaceTime: TransitTime);
             RemCompDeferred<EscapePodComponent>(uid);
+            EnsureComp<TravelingEscapePodComponent>(uid); // SS220 Objective on escape pod
         }
 
         // Departed

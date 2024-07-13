@@ -137,6 +137,34 @@
     sprite: Objects/Weapons/Guns/Shotguns/improvised_shotgun.rsi
     state: icon
 
+#ss220 handmade gun buff begin
+- type: construction
+  name: makeshift laser pistol
+  id: WeaponMakeshiftLaser
+  graph: WeaponMakeshiftLaserGraph
+  startNode: start
+  targetNode: pistol
+  category: construction-category-weapons
+  objectType: Item
+  description: A shitty, single-shot shotgun made from salvaged and hand-crafted gun parts. Ammo not included.
+  icon:
+    sprite: Objects/Weapons/Guns/Battery/makeshift.rsi
+    state: icon
+
+- type: construction
+  name: Hand made pistol
+  id: WeaponShotgunHandmade
+  graph: WeaponShotgunHandmadeGraph
+  startNode: start
+  targetNode: HDpistol
+  category: construction-category-weapons
+  objectType: Item
+  description: A shitty, single-shot shotgun made from salvaged and hand-crafted gun parts. Ammo not included.
+  icon:
+    sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
+    state: icon
+#ss220 handmade gun buff end
+
 - type: construction
   name: improvised shotgun shell
   id: ShellShotgunImprovised

@@ -10,3 +10,5 @@ ent-ClothingUniformJumpskirtSyndicateDiplomatist = костюм дипломат
     .desc = Костюм дипломата преступного синдиката, ничего необычного.
 ent-ClothingUniformJumpskirtFeldsher = униформа фельдшера
     .desc = Только не обижайтесь, вы фельдшер или настоящий врач?
+ent-ClothingUniformJumpskirtMilitaryFeldsher = униформа военного фельдшера
+    .desc = Это отнюдь не красная окраска..

@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.Administration.Logs;
@@ -161,7 +162,7 @@ public sealed class ReflectSystem : EntitySystem
             return false;
 
         // If this dice roll fails, the shot isn't deflected
-        if (!_random.Prob(GetReflectChance(reflector)))
+        if (!_random.Prob(GetProjectileReflectChance(reflector))) // SS220 ESword reflect fix
             return false;
 
         var rotation = _random.NextAngle(-reflector.Comp.SpreadProjectile / 2, reflector.Comp.SpreadProjectile / 2).Opposite(); // ss220 FixESword
@@ -263,6 +264,35 @@ public sealed class ReflectSystem : EntitySystem
             1 - Math.Clamp((reflectorPhysics.LinearVelocity.Length() - reflector.Comp.VelocityBeforeNotMaxProb) / (reflector.Comp.VelocityBeforeMinProb - reflector.Comp.VelocityBeforeNotMaxProb), 0, 1)
         );
     }
+
+    // SS220 ESword reflect fix begin
+    private float GetProjectileReflectChance(Entity<ReflectComponent> reflector)
+    {
+        /*
+         *  The rules of deflection are as follows:
+         *  If you innately reflect things via magic, biology etc., you always have a full chance.
+         *  If you are standing up and standing still, you're prepared to deflect and have full chance.
+         *  If you have velocity, your deflection chance depends on your velocity, clamped.
+         *  If you are floating, your chance is the minimum value possible.
+         */
+
+        if (reflector.Comp.Innate)
+            return reflector.Comp.ReflectProbProjectile;
+
+        if (_gravity.IsWeightless(reflector))
+            return reflector.Comp.MinReflectProbProjectile;
+
+        if (!TryComp<PhysicsComponent>(reflector, out var reflectorPhysics))
+            return reflector.Comp.ReflectProbProjectile;
+
+        return MathHelper.Lerp(
+            reflector.Comp.MinReflectProbProjectile,
+            reflector.Comp.ReflectProbProjectile,
+            // Inverse progression between velocities fed in as progression between probabilities. We go high -> low so the output here needs to be _inverted_.
+            1 - Math.Clamp((reflectorPhysics.LinearVelocity.Length() - reflector.Comp.VelocityBeforeNotMaxProb) / (reflector.Comp.VelocityBeforeMinProb - reflector.Comp.VelocityBeforeNotMaxProb), 0, 1)
+        );
+    }
+    // SS220 ESword reflect fix end
 
     private void OnReflectEquipped(Entity<ReflectComponent> reflector, ref GotEquippedEvent args)
     {

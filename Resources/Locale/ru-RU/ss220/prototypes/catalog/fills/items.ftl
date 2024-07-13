@@ -10,3 +10,6 @@ ent-ClothingBeltRapierSheathFilled = { ent-ClothingBeltRapierSheath }
 ent-ClothingBeltRapierSheathAltFilled = { ent-ClothingBeltRapierSheathFilled }
     .suffix = Заполненный, 15 проникающего урона
     .desc = { ent-ClothingBeltRapierSheath.desc }
+ent-ClothingBeltSecurityMedicalFilled = { ent-ClothingBeltSecurityMedical }
+    .suffix = Заполненный
+    .desc = { ent-ClothingBeltMedical.desc }

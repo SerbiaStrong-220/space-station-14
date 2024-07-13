@@ -1,0 +1,34 @@
+- type: constructionGraph
+  id: WeaponMakeshiftLaserGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: pistol
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 5 
+      - material: Cable
+        amount: 5
+        doAfter: 5 
+      - tag: CapacitorStockPart
+        name: capacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: capacitor
+        doAfter: 5 
+      - tag: CapacitorStockPart
+        name: capacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: capacitor  
+        doAfter: 5   
+      - tag: PowerCellHigh
+        name: Power Cell High 
+        icon:
+          sprite: Objects/Power/power_cells.rsi
+          state: high
+        doAfter: 5 
+  - node: pistol
+    entity: WeaponMakeshiftLaser

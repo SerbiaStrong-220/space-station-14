@@ -117,6 +117,7 @@
 
 # Medical
 
+
   # Парамед
 - type: entity
   parent: ClothingUniformBase
@@ -128,6 +129,20 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
+
+  # Бригмедик
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMilitaryFeldsher
+  name: uniform military feldsher
+  description: This is not a red color at all..
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_military_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_military_feldsher.rsi
+
+
 # Cargo
 
   # Квартирмейстер

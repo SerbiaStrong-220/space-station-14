@@ -146,6 +146,11 @@
   - type: Battery
     maxCharge: 1080
     startingCharge: 1080
+#ss220 kostyl for handmade gun buff begin
+  - type: Tag 
+    tags:
+      - PowerCellHigh
+#ss220 kostyl for handmade gun buff end
 
 - type: entity
   id: PowerCellHighPrinted
