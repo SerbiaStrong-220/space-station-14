@@ -32,12 +32,12 @@
         state: rock_asteroid_west
   - type: Damageable
     damageContainer: StructuralInorganic
-    damageModifierSet: Rock
+    damageModifierSet: Zemlya
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 120
+        damage: 400
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -365,6 +365,19 @@
     oreRarityPrototypeId: RandomOreDistributionStandard
 
 
+# Урон для камюшков
+- type: damageModifierSet
+  id: Zemlya
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.5
+    Piercing: 0.7
+    Shock: 1.2
+    Structural: 1.6
+  flatReductions:
+    Blunt: 5
+    Heat: 5
+
 # Rocks and ore veins
 - type: entity
   id: WallRock
@@ -374,20 +387,23 @@
   components:
     - type: Transform
       noRot: true
-    - type: SoundOnGather
-    - type: Gatherable
-      toolWhitelist:
-        tags:
-          - Pickaxe
+#    - type: SoundOnGather
+#    - type: Gatherable
+#      toolWhitelist:
+#        tags:
+#          - Pickaxe
     - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: Metallic
+      damageContainer: StructuralInorganic
+      damageModifierSet: Zemlya
     - type: Destructible
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 150
+            damage: 290
           behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                path: /Audio/Effects/break_stone.ogg
             - !type:DoActsBehavior
               acts: ["Destruction"]
     - type: IconSmooth

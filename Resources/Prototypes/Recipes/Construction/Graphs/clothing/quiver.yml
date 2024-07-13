@@ -6,9 +6,11 @@
     edges:
     - to: Quiver
       steps:
-      - material: Cable
-        amount: 2
-        doAfter: 1
+      - tag: Cable
+        name: "Верёвка"
+        icon:
+        sprite: Objects/Tools/cable-coils.rsi
+        state: coilhv-30
       - material: Cloth
         amount: 5
         doAfter: 2

@@ -1,0 +1,443 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Палка
+
+- type: entity
+  parent: BaseItem
+  id: Branch
+  name: "Ветка"
+  description: "Обычная веточка"
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 3
+  - type: Sprite
+    sprite: SS220/1Textures/Branch.rsi
+    state: icon
+#    layers:
+#    - state: Palka
+#      map: ["base"]
+  - type: Item
+    sprite: SS220/1Textures/Branch.rsi
+    size: Small
+  - type: Tag
+    tags:
+    - Branch
+  - type: Stack
+    stackType: Branch
+    count: 1
+#    baseLayer: base
+#    layerStates:
+#    - Palka
+#    - Palka_2
+#    - Palka_3
+#    - Palka_4
+#    - Palka_5
+
+- type: stack
+  id: Branch
+  name: "Ветка"
+  spawn: Branch
+  maxCount: 30
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Камни
+
+- type: entity
+  parent: BaseItem
+  id: Stone
+  name: "Камень"
+  description: "Если ударить камень-о-камень - получите заточенный камень!"
+  components:
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 8
+        Structural: 7
+    soundHit:
+      collection: MetalThud
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+        Structural: 5
+  - type: Sprite
+    sprite: SS220/1Textures/Stone.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 14
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Weapons/smash.ogg
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoneSharp:
+            min: 1
+            max: 1
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: FlaskStone
+      amount: 1
+  - type: Tag
+    tags:
+    - Stone
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- type: entity
+  parent: BaseKnife
+  id: StoneSharp
+  name: "Заострённый камень"
+  description: "Этим можно резать! А ещё с помощью этого можно сделать каменную чашу из обычного камня"
+  components:
+  - type: MeleeWeapon
+    attackRate: 1.4
+    damage:
+      types:
+        Slash: 5
+  - type: Sprite
+    sprite: SS220/1Textures/Stone.rsi
+    state: icon-1
+  - type: Item
+    size: Small
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 3
+        Structural: 5
+  - type: Tool
+    qualities:
+      - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
+    speedModifier: 0.1
+  - type: Tag
+    tags:
+    - StoneSharp
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- type: entity
+  parent: FlaskBase
+  id: FlaskStone
+  name: "Каменная чаша"
+  description: "Выглядит примитивно..."
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/Stone.rsi
+    layers:
+      - state: icon-flask
+        map: [ "enum.SolutionContainerLayers.Base" ]
+      - state: fill1
+        map: [ "enum.SolutionContainerLayers.Fill" ]
+#        visible: false
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: fill
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 3
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2
+  - type: Tag
+    tags:
+    - FlaskStone
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+- type: entity
+  parent: BaseItem
+  id: UrineCow
+  name: "Мочевыводительная система коровы"
+  description: "Фу... Ну и вонизма!..... А впрочем... из этого можно сделать инструменты и флягу!... Флягу... Хаха)..."
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/UrineCow.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - UrineCow
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Соломка и верёвка
+
+- type: entity
+  parent: BaseItem
+  id: WheatCable
+  name: "Соломенная верёвка"
+  description: "Золотистая"
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/cable-coils.rsi
+    state: coilhv-30
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - WheatCable
+    - Cable
+  - type: Construction
+    graph: WheatCable2
+    node: WheatCable1
+
+- type: entity
+  parent: WheatCable
+  id: ClothCable
+  name: "Тканная верёвка"
+  description: "Белистая"
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/cable-coils.rsi
+    state: coil-30
+  - type: Tag
+    tags:
+    - ClothCable
+    - Cable
+  - type: Construction
+    graph: ClothCable
+    node: ClothCable
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# КОРЗИНКА КОРЗИНКА КОРЗИНКА
+
+- type: entity
+  parent: BaseStorageItem
+  id: WheatBacket
+  name: "Соломенная корзина"
+  description: "Сюда могут поместиться предметы. Что говорите, неудобно? Берите ещё верёвку и сделайте себе соломенный рюкзак!"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/0/SatchelWheat.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/1Textures/0/SatchelWheat.rsi
+    size: Huge
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: icon-open }
+          False: { state: icon }
+  - type: Appearance
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,4,3
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/unwrap.ogg.ogg
+  - type: Tag
+    tags:
+    - WheatBacket
+  - type: Construction
+    graph: WheatBacket
+    node: WheatBacket
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# БАКПАК БАКБПАК БАКПАК
+
+- type: entity
+  parent: ClothingBackpack
+  id: WheatBackpack
+  name: "Соломенный рюкзак"
+  description: "Теперь можно жить спокойно..."
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/0/SatchelWheat1.rsi
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/unwrap.ogg.ogg
+  - type: Tag
+    tags:
+    - WheatBackpack
+  - type: Construction
+    graph: WheatBackpack
+    node: WheatBackpack
+  - type: Storage
+    storageOpenSound:
+      path: /Audio/Effects/unwrap.ogg
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# ГЛИНА ОБЫКНОВЕННАЯ
+
+- type: entity
+  id: ClayPile
+  parent: FertileSoilPile
+  name: "Горка глины"
+  description: "В нём хранится ценная глина, с помощью которой можно творить!"
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/1Textures/ClayPile.rsi
+    state: icon
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 170
+
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Glina:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Storage
+    grid:
+    - 0,0,7,3
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - Glina
+  - type: StorageFill
+    contents:
+    - id: Clay
+    - id: Clay
+    - id: Clay
+    - id: Clay
+    - id: Clay
+    - id: Clay
+    - id: Clay
+    - id: Clay
+
+
+- type: entity
+  name: "Сгорсток глины"
+  parent: FoodBakedBase
+  id: Clay
+  description: "Пора лепить!"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/Clay.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - Clay
+  - type: Item
+    size: Normal
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# ЗЕМЛЯ ФЕРТИЛЬНАЯ
+
+- type: entity
+  id: FertileSoilPile
+  parent: BaseStructure
+  name: "Горка чернозёма"
+  description: "В нём хранится ценный чернозём. С помощью этой плодородной почвы можно делать почву для растений"
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/1Textures/SoilPile.rsi
+    state: icon
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 165
+
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FertileSoil:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Storage
+    grid:
+    - 0,0,7,1
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - FertileSoil
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Tag
+    tags:
+    - Wooden
+  - type: StorageFill
+    contents:
+    - id: FertileSoil
+    - id: FertileSoil
+    - id: FertileSoil
+    - id: FertileSoil
+  - type: Physics
+    bodyType: Static
+
+
+- type: entity
+  name: "Чернозём"
+  parent: FoodBakedBase
+  id: FertileSoil
+  description: "Плородная земля. С помощью лопаты и чернозёма можно сделать почвы для растений"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/Soil.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - FertileSoil
+  - type: Item
+    size: Normal
+
+
+
+
+
+

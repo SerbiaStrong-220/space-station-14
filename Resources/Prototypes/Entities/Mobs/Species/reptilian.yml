@@ -5,6 +5,15 @@
   id: BaseMobReptilian
   abstract: true
   components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 5
+    baseSprintSpeed : 5
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.8
+      70: 0.7
+      80: 0.6
+      90: 0.55
   - type: HumanoidAppearance
     species: Reptilian
   - type: Hunger
@@ -21,7 +30,9 @@
     butcheringType: Spike
     spawned:
     - id: FoodMeatLizard
-      amount: 5
+      amount: 7
+    - id: MaterialBones1
+      amount: 30
   - type: Inventory
     speciesId: reptilian
   - type: LizardAccent
@@ -46,7 +57,7 @@
     animation: WeaponArcClaw
     damage:
       types:
-        Slash: 5
+        Slash: 8.5
   - type: Temperature
     heatDamageThreshold: 400
     coldDamageThreshold: 285

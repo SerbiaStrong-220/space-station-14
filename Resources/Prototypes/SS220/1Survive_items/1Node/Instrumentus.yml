@@ -1,0 +1,395 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# Трут для розжига
+
+- type: construction
+  name: "Трут"
+  id: Tinder
+  graph: Tinder
+  startNode: start
+  targetNode: Tinder
+  category: 1new-tools
+  description: "Альтернатива соломенной верёвке"
+  icon: { sprite: SS220/1Textures/Tinder.rsi, state: icon}
+  objectType: Item
+
+- type: constructionGraph
+  id: Tinder
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: Tinder
+          steps:
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coilhv-30
+            - tag: Branch
+              name: "Ветка"
+              icon:
+                sprite: SS220/1Textures/Branch.rsi
+                state: icon
+            - tag: Branch
+              name: "Ветка"
+              icon:
+                sprite: SS220/1Textures/Branch.rsi
+                state: icon
+            - tag: Stone
+              name: "Камень"
+              icon:
+                sprite: SS220/1Textures/Stone.rsi
+                state: icon
+              doAfter: 4
+    - node: Tinder
+      entity: Tinder
+
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# Гребешок тяпки
+
+- type: entity
+  parent: BaseItem
+  id: HoePART
+  name: "Гребешок тяпки"
+  description: "Нужен для создания железной тяпки"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9hoe.rsi
+    state: icon-1
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - HoePART
+  - type: Construction
+    graph: HoePART
+    node: HoePART
+
+- type: construction
+  name: "Гребешок тяпки"
+  id: HoePART
+  graph: HoePART
+  startNode: start
+  targetNode: HoePART
+  category: 1new-tools
+  description: "В будущем из этого можно будет сделать тяпку"
+  icon: { sprite: SS220/1Textures/9hoe.rsi, state: icon-1 }
+  objectType: Item
+
+- type: constructionGraph
+  id: HoePART
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: HoePART
+          steps:
+            - tag: SteelOre
+              name: "Железная руда"
+              icon:
+                sprite: Objects/Materials/ore.rsi
+                state: iron
+            - tag: SteelOre
+              name: "Железная руда"
+              icon:
+                sprite: Objects/Materials/ore.rsi
+                state: iron
+              doAfter: 8
+    - node: HoePART
+      entity: HoePART
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# сама ТЯПОЧКА ХУЯТРЯПОЧКА
+
+- type: construction
+  name: "Железная тяпка"
+  id: HoeCraft
+  graph: HoeCraft
+  startNode: start
+  targetNode: HoeCraft
+  category: 1new-tools
+  description: "Позволяет прополашивать почву от паразитов"
+  icon: { sprite: SS220/1Textures/9hoe.rsi, state: icon }
+  objectType: Item
+
+- type: constructionGraph
+  id: HoeCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: HoeCraft
+          steps:
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coilhv-30
+            - tag: Branch
+              name: "Ветка"
+              icon:
+                sprite: SS220/1Textures/Branch.rsi
+                state: icon
+            - tag: HoePART
+              name: "Гребешок тяпки"
+              icon:
+                sprite: SS220/1Textures/9hoe.rsi
+                state: icon-1
+              doAfter: 13
+    - node: HoeCraft
+      entity: IronToolMiniHoe
+
+
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Щепцы секатора
+
+- type: entity
+  parent: BaseItem
+  id: clippersPART
+  name: "Щепцы секатора"
+  description: "Нужен для создания железного секатора"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9clippers.rsi
+    state: icon-1
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - clippersPART
+  - type: Construction
+    graph: clippersPART
+    node: clippersPART
+
+- type: construction
+  name: "Щепцы секатора"
+  id: clippersPART
+  graph: clippersPART
+  startNode: start
+  targetNode: clippersPART
+  category: 1new-tools
+  description: "В будущем из этого можно будет сделать деревянный секатор"
+  icon: { sprite: SS220/1Textures/9clippers.rsi, state: icon-1 }
+  objectType: Item
+
+- type: constructionGraph
+  id: clippersPART
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: clippersPART
+          steps:
+            - tag: SteelOre
+              name: "Железная руда"
+              icon:
+                sprite: Objects/Materials/ore.rsi
+                state: iron
+            - tag: StoneSharp
+              name: "Заострённый камень"
+              icon:
+                sprite: SS220/1Textures/Stone.rsi
+                state: icon-1
+            - tag: StoneSharp
+              name: "Заострённый камень"
+              icon:
+                sprite: SS220/1Textures/Stone.rsi
+                state: icon-1
+              doAfter: 8
+    - node: clippersPART
+      entity: clippersPART
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# сама ЩЕПЦЫ СЕКАТОРА СЕКАТОР
+
+- type: construction
+  name: "Железный секатор"
+  id: ClippersCraft
+  graph: ClippersCraft
+  startNode: start
+  targetNode: ClippersCraft
+  category: 1new-tools
+  description: "Позволяет собирать семена растений"
+  icon: { sprite: SS220/1Textures/9clippers.rsi, state: icon }
+  objectType: Item
+
+- type: constructionGraph
+  id: ClippersCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClippersCraft
+          steps:
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coilhv-30
+            - tag: Branch
+              name: "Ветка"
+              icon:
+                sprite: SS220/1Textures/Branch.rsi
+                state: icon
+            - tag: Branch
+              name: "Ветка"
+              icon:
+                sprite: SS220/1Textures/Branch.rsi
+                state: icon
+            - tag: clippersPART
+              name: "Щепцы секатора"
+              icon:
+                sprite: SS220/1Textures/9clippers.rsi
+                state: icon-1
+              doAfter: 13
+    - node: ClippersCraft
+      entity: IronToolClippers
+
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+
+
+# Кайло кирки
+
+- type: entity
+  parent: BaseItem
+  id: PickaxePART
+  name: "Кайло кирки"
+  description: "Нужен для создания кирки"
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/pickaxe.rsi
+    state: pickaxe-1
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - PickaxePART
+  - type: Construction
+    graph: PickaxePART
+    node: PickaxePART
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    soundHit:
+      path: "/Audio/Weapons/smash.ogg"
+      params:
+        volume: -3
+    damage:
+      types:
+        Slash: 3
+        Piercing: 3
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+  - type: DamageOtherOnHit
+    ignoreResistances: true
+    damage:
+      types:
+        Slash: 2
+        Piercing: 2
+
+- type: construction
+  name: "Кайло кирки"
+  id: PickaxePART
+  graph: PickaxePART
+  startNode: start
+  targetNode: PickaxePART
+  category: 1new-tools
+  description: "В будущем из него можно будет сделать кирку"
+  icon: { sprite: Objects/Weapons/Melee/pickaxe.rsi, state: pickaxe-1 }
+  objectType: Item
+
+- type: constructionGraph
+  id: PickaxePART
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: PickaxePART
+          steps:
+            - tag: SteelOre
+              name: "Железная руда"
+              icon:
+                sprite: Objects/Materials/ore.rsi
+                state: iron
+            - tag: SteelOre
+              name: "Железная руда"
+              icon:
+                sprite: Objects/Materials/ore.rsi
+                state: iron
+            - tag: Stone
+              name: "Камень"
+              icon:
+                sprite: SS220/1Textures/Stone.rsi
+                state: icon
+            - tag: StoneSharp
+              name: "Заострённый камень"
+              icon:
+                sprite: SS220/1Textures/Stone.rsi
+                state: icon-1
+            - tag: StoneSharp
+              name: "Заострённый камень"
+              icon:
+                sprite: SS220/1Textures/Stone.rsi
+                state: icon-1
+              doAfter: 8
+    - node: PickaxePART
+      entity: PickaxePART
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# сама КИРКА КИРКА КИРКА
+
+- type: construction
+  name: "Кирка"
+  id: Pickaxe
+  graph: PickaxeCreate
+  startNode: start
+  targetNode: Pickaxe
+  category: 1new-tools
+  description: "Пригодится в хозяйстве. Копать всегда полезно!"
+  icon: { sprite: Objects/Weapons/Melee/pickaxe.rsi, state: pickaxe }
+  objectType: Item
+
+- type: constructionGraph
+  id: PickaxeCreate
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: Pickaxe
+          steps:
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coilhv-30
+            - tag: Branch
+              name: "Ветка"
+              icon:
+                sprite: SS220/1Textures/Branch.rsi
+                state: icon
+            - tag: PickaxePART
+              name: "Кайло кирки"
+              icon:
+                sprite: Objects/Weapons/Melee/pickaxe.rsi
+                state: pickaxe-1
+              doAfter: 20
+    - node: Pickaxe
+      entity: Pickaxe
+
+
+

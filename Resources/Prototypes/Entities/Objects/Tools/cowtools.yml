@@ -24,6 +24,9 @@
     speedModifier: 0.05
   - type: Item
     sprite: Objects/Tools/Cowtools/haycutters.rsi
+  - type: Construction
+    graph: Haycutters
+    node: Haycutters
 
 - type: entity
   name: moodriver

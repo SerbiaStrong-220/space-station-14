@@ -26,7 +26,7 @@
       groups:
         Brute: 10
       types:
-        Structural: 30
+        Structural: 50
   - type: Item
     size: Normal
     shape:
@@ -35,6 +35,9 @@
     sprite: Objects/Weapons/Melee/pickaxe.rsi
     storedRotation: -45
   - type: UseDelay
+  - type: Construction
+    graph: PickaxeCreate
+    node: Pickaxe
 
 - type: entity
   name: mining drill

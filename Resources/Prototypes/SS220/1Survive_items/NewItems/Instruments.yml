@@ -1,0 +1,127 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+- type: entity
+  parent: HydroponicsToolMiniHoe
+  name: "Железная тяпка"
+  description: "Помогает прополашивать землю от паразитов и грибков"
+  id: IronToolMiniHoe
+  suffix: 123
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9hoe.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/1Textures/9hoe.rsi
+  - type: Construction
+    graph: HoeCraft
+    node: HoeCraft
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- type: entity
+  parent: HydroponicsToolClippers
+  name: "Железный секатор"
+  description: "Позволяет извлекать семена"
+  id: IronToolClippers
+  suffix: 123
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9clippers.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/1Textures/9clippers.rsi
+    storedRotation: -90
+  - type: Construction
+    graph: ClippersCraft
+    node: ClippersCraft
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- type: entity
+  parent: HydroponicsToolScythe
+  name: "Железная коса"
+  description: "Легко рубить как сено, так и головы!"
+  id: IronToolScythe
+  suffix: 123
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9scythe.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/1Textures/9scythe.rsi
+  - type: Clothing
+    sprite: SS220/1Textures/9scythe.rsi
+    slots:
+    - back
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- type: entity
+  parent: HydroponicsToolHatchet
+  name: "Железная топорик"
+  description: "Рубите деревья!"
+  id: IronToolHatchet
+  suffix: 123
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9hatchet.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/1Textures/9hatchet.rsi
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- type: entity
+  parent: HydroponicsToolSpade
+  name: "Железная лопатка"
+  description: "Копайте, и ещё раз же - копайте!"
+  id: IronToolSpade
+  suffix: 123
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/9spade.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/1Textures/9spade.rsi
+  - type: Shovel
+    speedModifier: 0.65
+  - type: Tool
+    qualities:
+      - Dig
+    useSound:
+      path: /Audio/Items/shovel_dig.ogg
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Трут
+
+- type: entity
+  parent: BaseItem
+  id: Tinder
+  name: "Трут"
+  description: "Может создавать огонь, а также благодаря наконечнику неплохо бьёт!"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/Tinder.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Textures/Tinder.rsi
+    size: Small
+  - type: Tag
+    tags:
+    - Tinder
+  - type: Tool
+    qualities:
+      - Fire
+    useSound:
+      path: /Audio/Items/Flare/flare_on.ogg
+  - type: Construction
+    graph: Tinder
+    node: Tinder
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 8
+

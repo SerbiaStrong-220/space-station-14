@@ -92,6 +92,9 @@
         - ReagentId: Lead
           Quantity: 0.4
         #SS220 tweak produce lead end
+  - type: Tag
+    tags:
+    - SteelOre
 
 - type: entity
   id: SteelOre1

@@ -1,0 +1,203 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+- type: construction
+  name: "Почва"
+  id: PileOfSoil
+  graph: FertileCreate
+  startNode: start
+  targetNode: PileOfSoilComplete
+  category: 1new
+  description: "На почве можно выращивать различные растения. В начале игры рекомендуется выращивать бунго"
+  icon:
+    sprite: Structures/Hydroponics/misc.rsi
+    state: soil
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canRotate: false
+
+- type: constructionGraph
+  id: FertileCreate
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: incompletePo4va
+          steps:
+            - tag: FertileSoil
+              name: "плодородную почву"
+              icon:
+                sprite: SS220/1Textures/SoilPile.rsi
+                state: icon
+              doAfter: 5
+        
+    - node: incompletePileOfSoil
+      entity: IncompleteFertile1
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: FertileSoil
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Prying
+              doAfter: 5
+        - to: Po4va123
+          steps:
+            - tool: Dig
+              doAfter: 10
+        
+    - node: PileOfSoilComplete
+      entity: hydroponicsSoil
+
+- type: entity
+  name: "Рыхлая почва"
+  parent: BaseStructure
+  id: IncompleteFertile1
+  description: "Необходимо вскопать почву и сделать её мягче. Используйте лопатку"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/SoilPile.rsi
+    state: icon-1
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FertileSoil:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: FertileCreate
+    node: incompletePileOfSoil
+  - type: Physics
+    bodyType: Static
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.1"
+        density: 190
+        hard: false
+        mask:
+        - FullTileMask
+        layer:
+        - FullTileMask
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Костёрик
+
+- type: construction
+  name: "Костёр"
+  id: Bonfire
+  graph: BonfireCreate
+  startNode: start
+  targetNode: BonfireComplete
+  category: 1new
+  description: "Вначале соберите много брёвен, а потом подожгите их!"
+  icon: { sprite: Structures/Decoration/bonfire.rsi, state: bonfire_extinguished }
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canRotate: false
+
+- type: constructionGraph
+  id: BonfireCreate
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: incumBonfire
+          steps:
+            - tag: Log
+              name: "бревно"
+              icon:
+                sprite: Objects/Specific/Hydroponics/towercap.rsi
+                state: produce
+            - tag: Log
+              name: "бревно"
+              icon:
+                sprite: Objects/Specific/Hydroponics/towercap.rsi
+                state: produce
+            - tag: Log
+              name: "бревно"
+              icon:
+                sprite: Objects/Specific/Hydroponics/towercap.rsi
+                state: produce
+              doAfter: 10
+        
+    - node: incumBonfire
+      entity: incumBonfire
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: Log
+            - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: Log
+            - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: Log
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Prying
+              doAfter: 1
+        - to: BonfireComplete
+          steps:
+            - tool: Fire
+              doAfter: 1
+        
+    - node: BonfireComplete
+      entity: Bonfire
+
+- type: entity
+  name: "Неподожённый костёр"
+  parent: BaseStructure
+  id: incumBonfire
+  description: "Вам потребуется любое тепло. Самое простое, что вы можете сделать - трут!"
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/bonfire.rsi
+    state: bonfire
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Log:
+            min: 3
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: BonfireCreate
+    node: incumBonfire
+  - type: Physics
+    bodyType: Static
+  - type: Clickable
+  - type: InteractionOutline
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+
+
+

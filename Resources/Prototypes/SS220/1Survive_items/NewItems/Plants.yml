@@ -1,0 +1,292 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# ПШЕНО СОЛОМА ПЕШНО САЛОМЫЫЫЫ
+
+- type: entity
+  name: "Дикая пшеница"
+  parent: Spaceshroom
+  id: PlantWheat
+  suffix: Structure
+  description: "Даёт больше соломы, одноразово. После сбора изчезает"
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/wheat.rsi
+      state: harvest
+    - type: Gatherable
+      toolWhitelist:
+        components:
+          - Hands
+      loot:
+        All: WheatBushel123
+- type: entityLootTable
+  id: WheatBushel123
+  entries:
+  - id: SpawnWheatBushel
+    amount: 5
+    maxAmount: 6
+
+- type: entity
+  name: "Сбор Урожая..."
+  id: SpawnWheatBushel
+  description: "Ожидайте..."
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/wheat.rsi
+    state: stage-1
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - WheatBushel
+    intervalSeconds: 1
+    minimumEntitiesSpawned: 5
+    maximumEntitiesSpawned: 7
+  - type: TimedDespawn 
+    lifetime: 1.01
+  - type: Physics
+    bodyType: Static
+
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# ЯГОДКИ ЯГОДА БУБИ БАБИ
+
+- type: entity
+  name: "Дикие ягоды"
+  parent: Spaceshroom
+  id: PlantBerries
+  suffix: Structure
+  description: "Даёт больше ягод, одноразово. После сбора изчезает"
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/berries.rsi
+      state: harvest
+    - type: Gatherable
+      toolWhitelist:
+        components:
+          - Hands
+      loot:
+        All: FoodBerries123
+- type: entityLootTable
+  id: FoodBerries123
+  entries:
+  - id: SpawnFoodBerries
+    amount: 4
+    maxAmount: 5
+
+- type: entity
+  name: "Сбор урожая..."
+  id: SpawnFoodBerries
+  description: "Ожидайте..."
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/berries.rsi
+    state: stage-6
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - FoodBerries
+    intervalSeconds: 1
+    minimumEntitiesSpawned: 4
+    maximumEntitiesSpawned: 6
+  - type: TimedDespawn 
+    lifetime: 1.01
+  - type: Physics
+    bodyType: Static
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# БУНГО БУНГО БУНГО БИМ БИМ БАМ БАМ БИБУБИБУМ
+
+- type: entity
+  name: "Дикое Бунго"
+  parent: Spaceshroom
+  id: PlantBungo
+  suffix: Structure
+  description: "Даёт больше плодов, одноразово. Внутри плода содержится косточка, из которого может вырасти бунго. После сбора изчезает"
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/bungo.rsi
+      state: harvest
+    - type: Gatherable
+      toolWhitelist:
+        components:
+          - Hands
+      loot:
+        All: FoodBungo123
+- type: entityLootTable
+  id: FoodBungo123
+  entries:
+  - id: SpawnFoodBungo
+    amount: 4
+    maxAmount: 5
+
+- type: entity
+  name: "Сбор урожая..."
+  id: SpawnFoodBungo
+  description: "Ожидайте..."
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/bungo.rsi
+    state: dead
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - FoodBungo
+    intervalSeconds: 1
+    minimumEntitiesSpawned: 3
+    maximumEntitiesSpawned: 6
+  - type: TimedDespawn 
+    lifetime: 1.01
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# ЛИСИЧКИ ОЗАРНЫЕ СИСИЧКИ В ПЕЩЕРЕ ЕБАТЬ БЛЯТ ЬНАХУУУУЙ
+
+- type: entity
+  name: "Дикие подземные лисички"
+  parent: Spaceshroom
+  id: PlantMushroom
+  suffix: Structure
+  description: "Какого хуя они под землёй растут... После сбора изчезает"
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/chanterelle.rsi
+      state: harvest
+    - type: Gatherable
+      toolWhitelist:
+        components:
+          - Hands
+      loot:
+        All: FoodMushroom123
+- type: entityLootTable
+  id: FoodMushroom123
+  entries:
+  - id: SpawnFoodMushroom
+    amount: 4
+    maxAmount: 5
+
+- type: entity
+  name: "Сбор урожая..."
+  id: SpawnFoodMushroom
+  description: "Ожидайте..."
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/chanterelle.rsi
+    state: stage-1
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - FoodMushroom
+    intervalSeconds: 1
+    minimumEntitiesSpawned: 4
+    maximumEntitiesSpawned: 6
+  - type: TimedDespawn 
+    lifetime: 1.01
+  - type: Physics
+    bodyType: Static
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# ХЛОПОК СОБИРАЙ НАЙГЕР НАЙК НАЙК СОБИРАЙ Я ХОЧУ СЕБЕ НОВУЮ ФУТБОЛКУ ДА БЛЯТЬ СОБИРАЙ УУ СУКА Я ЗА НАГАЙКОЙ ПИЗДА ТЕБЕ
+
+- type: entity
+  name: "Хлопчатник"
+  parent: Spaceshroom
+  id: PlantCotton
+  suffix: Structure
+  description: "Из хлопка можно сделать ткань, пригодится. Одноразово, после сбора изчезает"
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/cotton.rsi
+      state: harvest
+    - type: Gatherable
+      toolWhitelist:
+        components:
+          - Hands
+      loot:
+        All: FoodCotton123
+- type: entityLootTable
+  id: FoodCotton123
+  entries:
+  - id: SpawnCottonBol
+    amount: 4
+    maxAmount: 5
+
+- type: entity
+  name: "Сбор урожая..."
+  id: SpawnCottonBol
+  description: "Ожидайте..."
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/cotton.rsi
+    state: stage-1
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - CottonBol
+    intervalSeconds: 1
+    minimumEntitiesSpawned: 4
+    maximumEntitiesSpawned: 6
+  - type: TimedDespawn 
+    lifetime: 1.01
+  - type: Physics
+    bodyType: Static
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# КОНОПЛЯЯЯЯЯЯЯЯ
+
+- type: entity
+  name: "Коноплянник"
+  parent: Spaceshroom
+  id: PlantCannabis
+  suffix: Structure
+  description: "Наркотики вредят вашему организму! Одноразово, после сбора изчезает"
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/cannabis.rsi
+      state: harvest
+    - type: Gatherable
+      toolWhitelist:
+        components:
+          - Hands
+      loot:
+        All: cannabis123
+- type: entityLootTable
+  id: cannabis123
+  entries:
+  - id: SpawnLeavesCannabis
+    amount: 4
+    maxAmount: 5
+
+- type: entity
+  name: "Сбор урожая..."
+  id: SpawnLeavesCannabis
+  description: "Ожидайте..."
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Specific/Hydroponics/cannabis.rsi
+    state: stage-2
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - LeavesCannabis
+    intervalSeconds: 1
+    minimumEntitiesSpawned: 4
+    maximumEntitiesSpawned: 6
+  - type: TimedDespawn 
+    lifetime: 1.01
+  - type: Physics
+    bodyType: Static

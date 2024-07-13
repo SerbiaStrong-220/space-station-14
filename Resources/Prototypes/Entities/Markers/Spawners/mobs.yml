@@ -16,6 +16,8 @@
       - MobMouse
       - MobMouse1
       - MobMouse2
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Cockroach Spawner
@@ -31,6 +33,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCockroach
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: HoP Corgi Spawner
@@ -47,6 +51,8 @@
       - MobCorgiIanOld
       - MobCorgiLisa
       - MobCorgiIanPup
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Possum Morty Spawner
@@ -60,6 +66,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobPossumMortyOld
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Raccoon Morticia Spawner
@@ -73,6 +81,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobRaccoonMorticia
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Fox Renault Spawner
@@ -86,6 +96,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobFoxRenault
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Runtime Spawner
@@ -99,6 +111,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCatRuntime
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Exception Spawner
@@ -112,6 +126,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCatException
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Tropico Spawner
@@ -125,6 +141,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCrabAtmos
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Floppa Spawner
@@ -138,6 +156,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCatFloppa
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Bingus Spawner
@@ -151,6 +171,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobBingus
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Cat Spawner
@@ -164,6 +186,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCatSpace
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Kitten Spawner
@@ -177,6 +201,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCatKitten
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Cat Spawner
@@ -193,6 +219,8 @@
       - MobCatException
       - MobCatFloppa
       - MobBingus
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Generic Cat Spawner
@@ -212,6 +240,8 @@
     rarePrototypes:
       - MobCatSpace
     rareChance: 0.05
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Bandito Spawner
@@ -225,6 +255,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobBandito
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name:  McGriff Spawner
@@ -238,6 +270,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobMcGriff
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Sloth Paperwork Spawner
@@ -251,6 +285,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobPaperwork
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Walter Spawner
@@ -264,6 +300,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobWalter
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Bear Spawner
@@ -278,6 +316,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobBearSpace
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Carp Spawner
@@ -292,6 +332,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCarp
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Magicarp Spawner
@@ -306,6 +348,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCarpMagic
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Holocarp Spawner
@@ -320,6 +364,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCarpHolo
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Sharkminnow Spawner
@@ -334,6 +380,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobShark
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Hamster Hamlet Spawner
@@ -349,6 +397,8 @@
   - type: ConditionalSpawner
     prototypes:
       - CrateNPCHamlet
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Alexander Spawner
@@ -362,6 +412,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAlexander
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Shiva Spawner
@@ -376,6 +428,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobSpiderShiva
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Willow Spawner
@@ -390,6 +444,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobKangarooWillow
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Kangaroo Spawner
@@ -404,6 +460,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobKangarooSpace
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Boxing Kangaroo Spawner
@@ -418,6 +476,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobBoxingKangaroo
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Spider Spawner
@@ -432,6 +492,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobSpiderSpace
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Space Cobra Spawner
@@ -446,6 +508,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCobraSpace
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slimes Spawner Blue
@@ -459,6 +523,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAdultSlimesBlue
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slimes Spawner Blue Angry
@@ -472,6 +538,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAdultSlimesBlueAngry
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slimes Spawner Green
@@ -485,6 +553,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAdultSlimesGreen
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slimes Spawner Green Angry
@@ -498,6 +568,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAdultSlimesGreenAngry
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slimes Spawner Yellow
@@ -511,6 +583,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAdultSlimesYellow
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slimes Spawner Yellow Angry
@@ -524,6 +598,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobAdultSlimesYellowAngry
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Smile Spawner
@@ -537,6 +613,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobSlimesPet
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Pun Pun Spawner
@@ -551,6 +629,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobMonkeyPunpun
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: behonker Spawner
@@ -568,6 +648,8 @@
       - MobBehonkerPyro
       - MobBehonkerElectrical
       - MobBehonkerGrav
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Monkey Spawner
@@ -582,6 +664,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobMonkey
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Purple Snake Spawner
@@ -596,6 +680,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobPurpleSnake
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Small Purple Snake Spawner
@@ -610,6 +696,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobSmallPurpleSnake
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Slug Spawner
@@ -624,6 +712,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobSlug
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Lizard Spawner
@@ -638,6 +728,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobLizard
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Crab Spawner
@@ -652,7 +744,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCrab
-
+  - type: TimedDespawn 
+    lifetime: 5
 - type: entity
   name: Goat Spawner
   id: SpawnMobGoat
@@ -666,6 +759,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobGoat
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Frog Spawner
@@ -680,6 +775,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobFrog
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Bee Spawner
@@ -694,6 +791,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobBee
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Parrot Spawner
@@ -708,6 +807,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobParrot
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Butterfly Spawner
@@ -722,6 +823,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobButterfly
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Cow Spawner
@@ -736,6 +839,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCow
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Gorilla Spawner
@@ -750,6 +855,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobGorilla
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: Penguin Spawner
@@ -764,6 +871,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobPenguin
+  - type: TimedDespawn 
+    lifetime: 5
 
 
 - type: entity
@@ -779,6 +888,8 @@
   - type: ConditionalSpawner
     prototypes:
       - MobHellspawn
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: ore crab spawner
@@ -796,6 +907,8 @@
       - MobSpawnCrabIron
       - MobSpawnCrabQuartz
       - MobSpawnCrabSilver
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: luminous person spawner
@@ -810,6 +923,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobLuminousPerson
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: luminous object spawner
@@ -824,6 +939,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobLuminousObject
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: luminous entity spawner
@@ -838,6 +955,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobLuminousEntity
+  - type: TimedDespawn 
+    lifetime: 5
 
 - type: entity
   name: clown spider spawner
@@ -852,3 +971,5 @@
   - type: ConditionalSpawner
     prototypes:
     - MobClownSpider
+  - type: TimedDespawn 
+    lifetime: 5

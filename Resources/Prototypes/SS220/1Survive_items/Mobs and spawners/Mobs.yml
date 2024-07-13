@@ -1,0 +1,68 @@
+- type: entity
+  name: "Дикая змея"
+  parent: MobPurpleSnake
+  id: MobSnake220
+  description: "Ядовита!!! Вам не стоит с ней иметь дел лично. Укусы - слабые, последствия - смертельные!"
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: snake
+      sprite: Mobs/Animals/snake.rsi
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 10
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: snake
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatSnake
+      amount: 1
+  - type: InteractionPopup
+    successChance: 0.6
+    interactSuccessString: petting-success-reptile
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+  - type: Bloodstream
+    bloodMaxVolume: 50
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Scale
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 1
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        reagents:
+        - ReagentId: Toxin
+          Quantity: 15
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 2.8
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      115: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      30: 0.8
+      50: 0.65
+      80: 0.5
+      100: 0.35

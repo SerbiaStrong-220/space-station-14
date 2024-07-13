@@ -141,6 +141,11 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MusicalLungInstrument
+      amount: 2
 
 - type: entity
   id: OrganHumanHeart

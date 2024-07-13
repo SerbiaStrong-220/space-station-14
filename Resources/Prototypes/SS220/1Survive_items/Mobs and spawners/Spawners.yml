@@ -1,0 +1,81 @@
+- type: entity
+  name: "Спавнер Ветки"
+  id: SpawnBranch
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: icon
+      sprite: SS220/1Textures/Branch.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - Branch
+  - type: TimedDespawn 
+    lifetime: 5
+
+- type: entity
+  name: "Спавнер Камней"
+  id: SpawnStone
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: icon
+      sprite: SS220/1Textures/Stone.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - Stone
+  - type: TimedDespawn 
+    lifetime: 5
+
+- type: entity
+  name: "Спавнер Хряков и Свиней"
+  id: SpawnMobPig
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: pig
+      sprite: Mobs/Animals/pig.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPig
+  - type: TimedDespawn 
+    lifetime: 5
+
+- type: entity
+  name: "Спавнер Дикой Змеи"
+  id: SpawnMobSnakeDick
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: snake
+      sprite: Mobs/Animals/snake.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSnakeDick
+  - type: TimedDespawn 
+    lifetime: 5
+
+- type: entity
+  name: "Спавнер куриц"
+  id: SpawnMobChicken
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: chicken-0
+        sprite: Mobs/Animals/chicken.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobChicken
+      - MobChicken1
+      - MobChicken2
+  - type: TimedDespawn 
+    lifetime: 5

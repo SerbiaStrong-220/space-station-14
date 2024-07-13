@@ -19,6 +19,9 @@
             "name": "pickaxe"
         },
         {
+            "name": "pickaxe-1"
+        },
+        {
             "name": "wielded-inhand-left",
             "directions": 4
         },

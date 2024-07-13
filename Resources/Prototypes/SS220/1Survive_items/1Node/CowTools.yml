@@ -1,0 +1,37 @@
+
+# Сенорез
+- type: construction
+  name: "Сенорез"
+  id: Haycutters
+  graph: Haycutters
+  startNode: start
+  targetNode: Haycutters
+  category: 1new-tools
+  description: "Позволяет резать провода. Не уверен, что вам оно щас понадобится)) Очень кустарное приспособление"
+  icon: { sprite: Objects/Tools/Cowtools/haycutters.rsi, state: haycutters }
+  objectType: Item
+
+- type: constructionGraph
+  id: Haycutters
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: Haycutters
+      steps:
+      - tag: StoneSharp
+        name: "Заострённый камень"
+        icon:
+          sprite: SS220/1Textures/Stone.rsi
+          state: icon-1
+        doAfter: 5
+      - tag: BrimFlatcapBrown
+        name: a brown flatcap
+        icon:
+          sprite: Clothing/Head/Hats/brownflatcap.rsi
+          state: icon
+  - node: Haycutters
+    entity: Haycutters
+
+# Коровёртка
+

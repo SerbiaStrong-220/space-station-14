@@ -26,7 +26,7 @@
   graph: BoneArmor
   startNode: start
   targetNode: armor
-  category: construction-category-clothing
+  category: 1new-clothing
   description: Armor made of bones.
   icon: { sprite: Clothing/OuterClothing/Armor/bone_armor.rsi, state: icon }
   objectType: Item
@@ -36,7 +36,7 @@
   id: BoneHelmet
   graph: BoneHelmet
   startNode: start
-  targetNode: helmet
+  targetNode: 1new-clothing
   category: construction-category-clothing
   description: Helmet made of bones.
   icon: { sprite: Clothing/Head/Helmets/bone_helmet.rsi, state: icon }
@@ -114,7 +114,7 @@
   graph: Quiver
   startNode: start
   targetNode: Quiver
-  category: construction-category-clothing
+  category: 1new
   description: Can hold up to 15 arrows, and fits snug around your waist.
   icon: { sprite: Clothing/Belt/quiver.rsi, state: icon }
   objectType: Item

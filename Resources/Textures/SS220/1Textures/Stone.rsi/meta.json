@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By _avoska3000",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-flask"
+    },
+    {
+      "name": "fill1"
+    },
+    {
+      "name": "fill2"
+    },
+    {
+      "name": "fill3"
+    },
+    {
+      "name": "fill4"
+    }
+  ]
+}

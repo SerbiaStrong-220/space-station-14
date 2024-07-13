@@ -1,0 +1,184 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ВЕРЁВКИ
+
+
+# Тканная верёвка
+
+- type: construction
+  name: "Тканная верёвка"
+  id: ClothCable
+  graph: ClothCable
+  startNode: start
+  targetNode: ClothCable
+  category: 1new-ingredients
+  description: "Альтернатива соломенной верёвке"
+  icon: { sprite: Objects/Tools/cable-coils.rsi, state: coil-30 }
+  objectType: Item
+
+- type: constructionGraph
+  id: ClothCable
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: ClothCable
+          steps:
+            - material: Cloth
+              amount: 2
+              doAfter: 16
+    - node: ClothCable
+      entity: ClothCable
+
+
+# Соломенная верёвка
+- type: construction
+  name: "Соломенная верёвка"
+  id: WheatCable
+  graph: WheatCable2
+  startNode: start
+  targetNode: WheatCable1
+  category: 1new-ingredients
+  description: "Верёвочка"
+  icon: { sprite: Objects/Tools/cable-coils.rsi, state: coilhv-30 }
+  objectType: Item
+
+- type: constructionGraph
+  id: WheatCable2
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: WheatCable1
+          steps:
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+              doAfter: 20
+    - node: WheatCable1
+      entity: WheatCable
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+# СТОРЕЙДЖИ!!!
+
+# Соломенная корзина
+
+- type: construction
+  name: "Соломенная корзина"
+  id: WheatBacket
+  graph: WheatBacket
+  startNode: start
+  targetNode: WheatBacket
+  category: 1new
+  description: "В нём можно хранить вещи на 5x4"
+  icon: { sprite: SS220/1Textures/0/SatchelWheat.rsi, state: icon }
+  objectType: Item
+
+- type: constructionGraph
+  id: WheatBacket
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: WheatBacket
+          steps:
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coil-30
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+              doAfter: 30
+    - node: WheatBacket
+      entity: WheatBacket
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+# Соломенный рюкзак
+
+- type: construction
+  name: "Соломенный Рюкзак"
+  id: WheatBackpack
+  graph: WheatBackpack
+  startNode: start
+  targetNode: WheatBackpack
+  category: 1new
+  description: "В нём можно хранить вещи на 6x5"
+  icon: { sprite: SS220/1Textures/0/SatchelWheat1.rsi, state: icon }
+  objectType: Item
+
+- type: constructionGraph
+  id: WheatBackpack
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: WheatBackpack
+          steps:
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coil-30
+            - tag: Cable
+              name: "Верёвка"
+              icon:
+                sprite: Objects/Tools/cable-coils.rsi
+                state: coil-30
+            - tag: WheatBacket
+              name: "Соломенная корзина"
+              icon:
+                sprite: SS220/1Textures/0/SatchelWheat.rsi
+                state: icon
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+            - tag: Wheat
+              name: "Пшено"
+              icon:
+                sprite: Objects/Specific/Hydroponics/wheat.rsi
+                state: produce
+              doAfter: 13
+    - node: WheatBackpack
+      entity: WheatBackpack
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮

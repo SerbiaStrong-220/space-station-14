@@ -176,3 +176,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 12
+  - type: Tag
+    tags:
+    - Meat

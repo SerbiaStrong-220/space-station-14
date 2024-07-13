@@ -1,0 +1,650 @@
+- type: biomeTemplate
+  id: SurviveWorld
+  layers:
+    # FLOOR VARIATION.
+    - !type:BiomeTileLayer
+      threshold: -1.0
+      tile: FloorCaveDrought
+    - !type:BiomeTileLayer
+      threshold: -0.60
+      tile: FloorAsteroidSand
+      noise:
+        seed: 0
+        frequency: 0.2
+        fractalType: None
+    - !type:BiomeTileLayer
+      threshold: -0.10
+      tile: FloorPlanetGrass
+      noise:
+        seed: 5
+        frequency: 0.008
+        fractalType: None
+    # FLOOR TYPE ENTITY
+    - !type:BiomeEntityLayer
+      threshold: 0.5
+      noise:
+        seed: 0
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 2
+      allowedTiles:
+        - FloorPlanetGrass
+      entities:
+        - FloraTree01
+        - FloraTree02
+        - FloraTree03
+        - FloraTree04
+        - FloraTree05
+        - FloraTree06
+        - FloraTreeLarge01
+        - FloraTreeLarge02
+        - FloraTreeLarge03
+        - FloraTreeLarge04
+        - FloraTreeLarge05
+        - FloraTreeLarge06
+        - FloraRockSolid01
+        - FloraRockSolid02
+        - FloraRockSolid03
+        - FloraTreeStump
+    - !type:BiomeDecalLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      threshold: -0.50
+      noise:
+        seed: 0
+        noiseType: Cellular
+        frequency: 1
+      decals:
+        - BushDOne
+        - BushDTwo
+        - BushDThree
+    - !type:BiomeDecalLayer
+      allowedTiles:
+      - FloorPlanetGrass
+      threshold: -0.35
+      noise:
+        seed: 0
+        noiseType: Cellular
+        frequency: 0.2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        cellularDistanceFunction: Euclidean
+        cellularReturnType: Distance2
+      decals:
+        - BushAOne
+        - BushATwo
+        - BushAThree
+        - BushCOne
+        - BushCTwo
+        - BushCThree
+    - !type:BiomeEntityLayer
+      threshold: 0.4
+      noise:
+        seed: 1
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 2
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - FloraStalagmite1
+        - FloraStalagmite2
+        - FloraStalagmite3
+        - FloraStalagmite4
+        - FloraStalagmite5
+        - FloraRockSolid01
+        - FloraRockSolid02
+        - FloraRockSolid03
+        - CrystalOrange
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 183
+        noiseType: OpenSimplex2
+        frequency: 1
+      threshold: 0.8
+      entities:
+        - Spaceshroom
+
+# Змейка крутая
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 178
+        noiseType: OpenSimplex2
+        frequency: 1.10
+      threshold: 1.05
+      entities:
+        - SpawnMobPurpleSnake
+
+# Змейка обычная
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 178
+        noiseType: OpenSimplex2
+        frequency: 1.08
+      threshold: 0.983
+      entities:
+        - SpawnMobSnake220
+
+
+# Крабик
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 168
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.99
+      entities:
+        - SpawnMobCrab
+
+# Курица
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 93
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.997
+      entities:
+        - SpawnMobChicken
+
+# Курица
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 36
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.997
+      entities:
+        - SpawnMobChicken
+
+# Коровушка
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 175
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.989
+      entities:
+        - SpawnMobCow
+
+# Ебаный хряк
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 124
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.985
+      entities:
+        - SpawnMobPig
+
+# Хеллспавн
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 213
+        noiseType: OpenSimplex2
+        frequency: 1.25
+      threshold: 1.30
+      entities:
+        - MobHellspawn
+# Хлам
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 132
+        noiseType: OpenSimplex2
+        frequency: 1.097
+      threshold: 1.025
+      entities:
+        - MaintenanceFluffSpawner
+
+
+# ОружкаИХлам
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 251
+        noiseType: OpenSimplex2
+        frequency: 1.05
+      threshold: 1.09
+      entities:
+        - MaintenanceWeaponSpawner
+
+# Медикал
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 146
+        noiseType: OpenSimplex2
+        frequency: 1.10
+      threshold: 1.02
+      entities:
+        - LootSpawnerMedicalMinor
+
+# Павучара паук
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 187
+        noiseType: OpenSimplex2
+        frequency: 1.11
+      threshold: 0.997
+      entities:
+        - MobGiantSpiderAngry
+
+# Алтарь
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 113
+        noiseType: OpenSimplex2
+        frequency: 1.087
+      threshold: 1.00
+      entities:
+        - AltarSpawner
+
+# Бехонкер
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 193
+        noiseType: OpenSimplex2
+        frequency: 1.19
+      threshold: 1.05
+      entities:
+        - SpawnMobBehonker
+
+# Коза ебаная
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 153
+        noiseType: OpenSimplex2
+        frequency: 1.10
+      threshold: 0.999
+      entities:
+        - SpawnMobGoat
+
+# Подключение
+#    - !type:BiomeEntityLayer
+#      allowedTiles:
+#        - FloorPlanetGrass
+#      noise:
+#        seed: 167
+#        noiseType: OpenSimplex2
+#        frequency: 1.10
+#      threshold: 0.98
+#      entities:
+#        - SpawnPointLatejoin
+
+
+# Глиночка
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 167
+        noiseType: OpenSimplex2
+        frequency: 1.10
+      threshold: 0.985
+      entities:
+        - ClayPile
+
+
+# Фертилочка
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 148
+        noiseType: OpenSimplex2
+        frequency: 1.05
+      threshold: 0.945
+      entities:
+        - FertileSoilPile
+
+
+    - !type:BiomeEntityLayer
+      threshold: 0.6
+      noise:
+        seed: 2
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 2
+      allowedTiles:
+        - FloorAsteroidSand
+      entities:
+        - FloraRockSolid01
+        - FloraRockSolid02
+        - FloraRockSolid03
+        - CrystalOrange
+        - CrystalGrey
+#    - !type:BiomeEntityLayer
+#      threshold: 0.8
+#      noise:
+#        seed: 12
+#        noiseType: OpenSimplex2
+#        fractalType: FBm
+#        frequency: 1.5
+#      allowedTiles:
+#        - FloorPlanetGrass
+#      entities:
+#        - CrystalGreen
+#        - CrystalCyan
+#        - CrystalBlue
+    # WALLS
+    - !type:BiomeTileLayer
+      tile: FloorCaveDrought
+      threshold: -0.25
+      noise:
+        seed: 0
+        noiseType: Cellular
+        frequency: 0.06
+        lacunarity: 2
+        fractalType: FBm
+        octaves: 5
+        cellularDistanceFunction: Euclidean
+        cellularReturnType: Distance2
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      threshold: -0.30
+      noise:
+        seed: 0
+        noiseType: Cellular
+        frequency: 0.05
+        lacunarity: 2
+        fractalType: FBm
+        octaves: 5
+        cellularDistanceFunction: Euclidean
+        cellularReturnType: Distance2
+      entities:
+        - WallRock
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      threshold: -0.30
+      noise:
+        seed: 123
+        noiseType: Cellular
+        frequency: 0.15
+        lacunarity: 2
+        fractalType: FBm
+        octaves: 5
+        cellularDistanceFunction: Euclidean
+        cellularReturnType: Distance2
+      entities:
+        - WallRockBasalt
+    # Water
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+        - FloorCaveDrought
+        - FloorAsteroidSand
+      threshold: 0.95
+      noise:
+        seed: 3
+        noiseType: OpenSimplex2
+        frequency: 0.003
+        lacunarity: 1.50
+        fractalType: Ridged
+        octaves: 1
+      entities:
+        - FloorWaterEntity
+    - !type:BiomeTileLayer
+      tile: FloorAsteroidSand
+      threshold: 0.87
+      noise:
+        seed: 3
+        noiseType: OpenSimplex2
+        frequency: 0.003
+        lacunarity: 1.50
+        fractalType: Ridged
+        octaves: 1
+    #Ores
+    - !type:BiomeEntityLayer
+      threshold: 0.6
+      noise:
+        seed: 0
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 3
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockBasaltTin
+    - !type:BiomeEntityLayer
+      threshold: 0.5
+      noise:
+        seed: 10
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 3
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockCoal
+    - !type:BiomeEntityLayer
+      threshold: 0.7
+      noise:
+        seed: 20
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 0.09
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockSalt
+    - !type:BiomeEntityLayer
+      threshold: 0.77
+      noise:
+        seed: 30
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 0.08
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockBasaltGold
+    - !type:BiomeEntityLayer
+      threshold: 0.77
+      noise:
+        seed: 40
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 0.07
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockBasaltSilver
+    - !type:BiomeEntityLayer
+      threshold: 0.79
+      noise:
+        seed: 50
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 0.06
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockBasaltPlasma
+    - !type:BiomeEntityLayer
+      threshold: 0.8
+      noise:
+        seed: 60
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        frequency: 0.05
+      allowedTiles:
+        - FloorCaveDrought
+      entities:
+        - WallRockBasaltUranium
+
+
+# КАМЮШКИ
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 128
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.979
+      entities:
+        - SpawnStone
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 138
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.975
+      entities:
+        - SpawnStone
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 148
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.96
+      entities:
+        - SpawnStone
+
+
+# Ракушка
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 96
+        noiseType: OpenSimplex2
+        frequency: 1.10
+      threshold: 1.15
+      entities:
+        - SeashellInstrument
+
+# Мерзость
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 337
+        noiseType: OpenSimplex2
+        frequency: 1.11
+      threshold: 1.24
+      entities:
+        - MobAbomination
+
+# Палка
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 29
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.96
+      entities:
+        - SpawnBranch
+
+
+# РАСТЕНИЯ!!! РАСТЕНИЯ!!!
+# FloorPlanetGrass
+# FloorAsteroidSand
+# FloorCaveDrought
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 17
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.986
+      entities:
+        - RastokWheat
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 29
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.977
+      entities:
+        - RastokBerries
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 45
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.98
+      entities:
+        - RastokBungo
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorAsteroidSand
+      noise:
+        seed: 64
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.991
+      entities:
+        - RastokCotton
+
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorCaveDrought
+      noise:
+        seed: 34
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 0.982
+      entities:
+        - RastokMushroom
+
+
+    - !type:BiomeEntityLayer
+      allowedTiles:
+        - FloorPlanetGrass
+      noise:
+        seed: 83
+        noiseType: OpenSimplex2
+        frequency: 1.09
+      threshold: 1.01
+      entities:
+        - RastokCannabis

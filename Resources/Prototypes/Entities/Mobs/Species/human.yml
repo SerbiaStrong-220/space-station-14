@@ -14,7 +14,9 @@
     butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
-      amount: 5
+      amount: 7
+    - id: MaterialBones1
+      amount: 28
   - type: HumanoidAppearance
     species: Human
     hideLayersOnEquip:

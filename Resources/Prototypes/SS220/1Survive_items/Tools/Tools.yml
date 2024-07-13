@@ -1,0 +1,13 @@
+- type: tool
+  id: Dig
+  name: "Копка"
+  toolName: "лопата"
+  spawn: Showel
+  icon: { sprite: Objects/Tools/shovel.rsi, state: icon }
+
+- type: tool
+  id: Fire
+  name: "Розжиг"
+  toolName: "огонь"
+  spawn: Showel
+  icon: { sprite: Effects/fire.rsi, state: fire }

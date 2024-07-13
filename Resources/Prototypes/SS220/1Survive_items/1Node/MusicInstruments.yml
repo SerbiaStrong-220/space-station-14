@@ -1,0 +1,128 @@
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+- type: construction
+  name: "Флейта"
+  id: FluteInstrument
+  graph: FluteInstrument
+  startNode: start
+  targetNode: FluteInstrumentComplete
+  category: 1new
+  description: "Высококачественная флейта из костей! Правда, неизвестно, чьих)"
+  icon:
+    sprite: Objects/Fun/Instruments/flute.rsi
+    state: icon
+  objectType: Item
+
+- type: constructionGraph
+  id: FluteInstrument
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: incomplete123
+          steps:
+            - material: Bones
+              amount: 5
+              doAfter: 19
+        
+    - node: incomplete123
+      entity: IncompleteFluteInstrument
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialBones1
+              amount: 5
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Prying
+              doAfter: 1
+        - to: FluteInstrumentComplete
+          steps:
+            - tool: Slicing
+              doAfter: 8
+        
+    - node: FluteInstrumentComplete
+      entity: FluteInstrument
+
+# <><><><><><><><><><><><><><><>
+
+- type: entity
+  name: "Недоделанная флейта"
+  parent: BaseItem
+  id: IncompleteFluteInstrument
+  description: "Из чьих-то костей. Остаётся продолбить дыренции чем-то режущим и вуаля!"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/BoneMusic.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: FluteInstrument
+    node: incomplete123
+
+# ▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮
+
+- type: construction
+  name: "БлокФлейта"
+  id: RecorderInstrument
+  graph: RecorderInstrument
+  startNode: start
+  targetNode: RecorderInstrumentComplete
+  category: 1new
+  description: "Высококачественная блокфлейта из костей! Правда, неизвестно, чьих)"
+  icon:
+    sprite: Objects/Fun/Instruments/recorder.rsi
+    state: icon
+  objectType: Item
+
+
+- type: constructionGraph
+  id: RecorderInstrument
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: incomplete1231
+          steps:
+            - material: Bones
+              amount: 5
+              doAfter: 19
+        
+    - node: incomplete1231
+      entity: IncompleteRecorderInstrument
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialBones1
+              amount: 5
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Prying
+              doAfter: 1
+        - to: RecorderInstrumentComplete
+          steps:
+            - tool: Slicing
+              doAfter: 8
+        
+    - node: RecorderInstrumentComplete
+      entity: RecorderInstrument
+
+# <><><><><><><><><><><><><><><>
+
+- type: entity
+  name: "Недоделанная блокфлейта"
+  parent: BaseItem
+  id: IncompleteRecorderInstrument
+  description: "Из чьих-то костей. Остаётся продолбить дыренции чем-то режущим и вуаля!"
+  components:
+  - type: Sprite
+    sprite: SS220/1Textures/BoneMusic.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: RecorderInstrument
+    node: incomplete1231

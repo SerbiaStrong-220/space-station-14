@@ -110,6 +110,9 @@
   - type: Tag
     tags:
     - WoodwindInstrument
+  - type: Construction
+    graph: FluteInstrument
+    node: FluteInstrumentComplete
 
 - type: entity
   parent: BaseHandheldInstrument
@@ -128,6 +131,9 @@
   - type: Tag
     tags:
     - WoodwindInstrument
+  - type: Construction
+    graph: RecorderInstrument
+    node: RecorderInstrumentComplete
 
 - type: entity
   parent: BaseHandheldInstrument

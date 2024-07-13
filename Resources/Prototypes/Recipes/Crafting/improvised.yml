@@ -210,7 +210,7 @@
   graph: CottonObjects
   startNode: start
   targetNode: cottoncloth
-  category: construction-category-misc
+  category: 1new-ingredients
   description: "A homemade piece of cotton cloth, it feels coarse."
   icon:
     sprite: Objects/Materials/materials.rsi
@@ -223,7 +223,7 @@
   graph: StrawHat
   startNode: start
   targetNode: strawhat
-  category: construction-category-clothing
+  category: 1new-clothing
   description: A fancy hat for hot days! Not recommended to wear near fires.
   icon:
     sprite: Clothing/Head/Hats/straw_hat.rsi
