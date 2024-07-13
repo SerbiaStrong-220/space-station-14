@@ -210,3 +210,12 @@
   equipment:
     shoes: ClothingShoesColorRed
 
+- type: loadout
+  id: SecMedWinterBoots
+  equipment: SecMedWinterBoots
+
+- type: startingGear
+  id: SecMedWinterBoots
+  equipment:
+    shoes: ClothingShoesBootsWinterSecMed
+
