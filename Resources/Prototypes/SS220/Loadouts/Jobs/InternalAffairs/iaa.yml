@@ -1,0 +1,22 @@
+# NTR time
+- type: loadoutEffectGroup
+  id: NanoTrasenRepresentativeTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 360000 # 100 hrs
+
+# Jumpsuit
+- type: loadout
+  id: JumpsuitNTR
+  equipment: JumpsuitNTR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeTime
+
+- type: startingGear
+  id: JumpsuitNTR
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNTR

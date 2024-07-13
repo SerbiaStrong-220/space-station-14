@@ -1,1 +1,1 @@
-loadout-group-iaa-backpack = рюкзак АВД
+loadout-group-iaa-jumpsuit = АВД, комбинезон

@@ -1,11 +1,19 @@
 # InternalAffairs
 - type: loadoutGroup
-  id: IAABackpack
-  name: loadout-group-iaa-backpack
+  id: IAAJumpsuit
+  name: loadout-group-iaa-jumpsuit
   loadouts:
-  - IAABackpack
-  - IAASatchel
-  - IAADuffel
+  - LawyerJumpsuit
+  - LawyerJumpskirt
+  - LawyerJumpsuitBlue
+  - LawyerJumpskirtBlue
+  - LawyerJumpsuitPurple
+  - LawyerJumpskirtPurple
+  - LawyerJumpsuitRed
+  - LawyerJumpskirtRed
+  - LawyerJumpsuitGood
+  - LawyerJumpskirtGood
+  - JumpsuitNTR
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -139,3 +147,15 @@
   loadouts:
   - UniformJumpsuitSalvageSpecialist
   - SalvageSpecialistJumpsuitTurtleneck
+
+# Wildcards
+
+- type: loadoutGroup
+  id: Gloves
+  name: loadout-group-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
+  - GlovesRed
+  - GlovesBlue

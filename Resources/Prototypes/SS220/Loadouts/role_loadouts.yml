@@ -3,9 +3,9 @@
   id: JobIAA
   groups:
   - LawyerNeck
-  - LawyerJumpsuit
-  - IAABackpack
+  - IAAJumpsuit
   - Trinkets
+  - Gloves
 
 - type: roleLoadout
   id: JobBlueShield
