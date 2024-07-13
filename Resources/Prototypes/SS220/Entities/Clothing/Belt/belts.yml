@@ -79,3 +79,13 @@
         whitelist:
           tags:
           - Rapier
+
+- type: entity
+  parent: ClothingBeltMedical
+  id: ClothingBeltSecurityMedical
+  name: security medical belt
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/security_medical.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/security_medical.rsi

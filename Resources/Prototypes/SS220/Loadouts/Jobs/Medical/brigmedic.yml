@@ -111,6 +111,18 @@
     jumpsuit: ClothingUniformJumpskirtOfLife
 
 - type: loadout
+  id: BrigmedicJumpsuitMilitaryFeldsher
+  equipment: BrigmedicJumpsuitMilitaryFeldsher
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MilitaryFeldsher
+
+- type: startingGear
+  id: BrigmedicJumpsuitMilitaryFeldsher
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
+
+- type: loadout
   id: BrigmedicJumpskirtMilitaryFeldsher
   equipment: BrigmedicJumpskirtMilitaryFeldsher
   effects:
@@ -120,7 +132,7 @@
 - type: startingGear
   id: BrigmedicJumpskirtMilitaryFeldsher
   equipment:
-    jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
+    jumpsuit: ClothingUniformJumpskirtMilitaryFeldsher
 
 
 # Back
