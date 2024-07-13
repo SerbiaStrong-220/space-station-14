@@ -14,6 +14,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Server.SS220.Shuttles.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
@@ -568,6 +569,18 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
                 return true;
             }
         }
+
+        // SS220 Objective on escape pod begin
+        var podQuery = EntityQueryEnumerator<TravelingEscapePodComponent>();
+
+        while (podQuery.MoveNext(out var uid, out _))
+        {
+            if (IsOnGrid(xform, uid))
+            {
+                return true;
+            }
+        }
+        // SS220 Objective on escape pod end
 
         return false;
     }

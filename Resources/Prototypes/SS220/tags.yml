@@ -78,3 +78,10 @@
 
 - type: Tag
   id: Rapier
+
+# handmade gun buff
+- type: Tag
+  id: PowerCellHigh
+
+- type: Tag
+  id: WeaponFlareGun
