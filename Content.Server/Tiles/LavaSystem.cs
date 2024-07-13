@@ -29,7 +29,8 @@ public sealed class LavaSystem : EntitySystem
             _explosionSystem.QueueExplosion(args.Tripper, "Default", 3, 25f, 10, canCreateVacuum:false); // Not deadly to rider but still painful
             if (TryComp<DamageableComponent>(args.Tripper, out var damageablecomp))
             {
-                _damageable.SetAllDamage(args.Tripper, damageablecomp, 600); // Hardcoded number but its enough to destroy any vehicle rn
+                var damageToVehicle = 600;
+                _damageable.SetAllDamage(args.Tripper, damageablecomp, damageToVehicle); // Hardcoded number but its enough to destroy any vehicle rn
             }
             return;
         }
