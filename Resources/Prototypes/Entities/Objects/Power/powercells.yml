@@ -150,6 +150,7 @@
   - type: Tag 
     tags:
       - PowerCellHigh
+      - PowerCell
 #ss220 kostyl for handmade gun buff end
 
 - type: entity
