@@ -22,4 +22,6 @@ ent-ClothingUniformJumpsuitNTR = униформа НТР
     .desc = Униформа представителя NanoTrasen. Несите истину корпарации своими руками.
 ent-ClothingUniformJumpsuitMilitaryFeldsher = униформа военного фельдшера
     .desc = Это отнюдь не красная окраска..
+ent-ClothingUniformJumpsuitTrustedLawyer = костюм доверенного юриста NanoTrasen
+    .desc = Шикарный костюм для тех, кто следит за безупречным исполнением законов компании. Говорят, что вы способны навязать свои требования даже самому Богу.
 

@@ -14,6 +14,7 @@
   - LawyerJumpsuitGood
   - LawyerJumpskirtGood
   - JumpsuitNTR
+  - JumpsuitTrustedLawyer
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit

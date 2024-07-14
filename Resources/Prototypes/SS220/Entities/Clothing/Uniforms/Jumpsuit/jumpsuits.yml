@@ -10,6 +10,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr_uniform.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTrustedLawyer
+  name: uniform trusted lawyer NanoTrasen
+  description: A chic suit for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
+
 # Сервис
 
   # Клоун
