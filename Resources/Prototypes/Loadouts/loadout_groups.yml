@@ -912,6 +912,7 @@
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
+  - SecurityHolster #SS220-HoS-Holster
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing

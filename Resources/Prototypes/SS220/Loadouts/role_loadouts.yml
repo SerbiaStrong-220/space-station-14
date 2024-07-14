@@ -10,6 +10,7 @@
 - type: roleLoadout
   id: JobBlueShield
   groups:
+  - SecurityNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - SecurityBelt
