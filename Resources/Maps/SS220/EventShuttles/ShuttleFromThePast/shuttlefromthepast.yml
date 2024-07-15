@@ -18,7 +18,7 @@ entities:
     - type: MetaData
       name: NSTRA CHALL EVAC SHIP №7
     - type: Transform
-      pos: -89.39146,114.80901
+      pos: -0.09693344,0
       parent: invalid
     - type: MapGrid
       chunks:
@@ -49,7 +49,7 @@ entities:
       fixtures: {}
     - type: OccluderTree
     - type: SpreaderGrid
-      updateAccumulator: 0.43246394
+      updateAccumulator: 0.41715056
     - type: Shuttle
     - type: GridPathfinding
     - type: Gravity
@@ -242,9 +242,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 21.873098
-          - 82.34278
-          - 0.01548884
+          - 21.796453
+          - 82.054245
+          - 0.015435026
           - 0
           - 0
           - 0
@@ -257,9 +257,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 21.998945
-          - 82.818146
-          - 0.016005553
+          - 21.788916
+          - 82.02916
+          - 0.016304618
           - 0
           - 0
           - 0
@@ -272,9 +272,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 20.240343
-          - 76.1927
-          - 0.013407817
+          - 21.666658
+          - 81.56225
+          - 0.014439957
           - 0
           - 0
           - 0
@@ -287,9 +287,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 21.998804
-          - 82.818146
-          - 0.016144859
+          - 21.789373
+          - 82.02917
+          - 0.015846197
           - 0
           - 0
           - 0
@@ -302,9 +302,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 21.999304
-          - 82.818146
-          - 0.015645498
+          - 21.78972
+          - 82.02915
+          - 0.015496318
           - 0
           - 0
           - 0
@@ -317,9 +317,9 @@ entities:
         - volume: 2500
           temperature: 293.14783
           moles:
-          - 21.982609
-          - 82.81816
-          - 0.03233444
+          - 21.773487
+          - 82.029175
+          - 0.03172659
           - 0
           - 0
           - 0
@@ -362,9 +362,9 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 22.014004
-          - 82.81812
-          - 0.0009388226
+          - 21.804295
+          - 82.02918
+          - 0.0009298792
           - 0
           - 0
           - 0
@@ -377,9 +377,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 21.999317
-          - 82.818146
-          - 0.015631923
+          - 21.789738
+          - 82.02917
+          - 0.015483003
           - 0
           - 0
           - 0
@@ -392,9 +392,9 @@ entities:
         - volume: 2500
           temperature: 293.1478
           moles:
-          - 21.999317
-          - 82.818146
-          - 0.015630763
+          - 21.789738
+          - 82.02917
+          - 0.015481854
           - 0
           - 0
           - 0
@@ -407,8 +407,8 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.789959
-          - 81.971756
+          - 21.753643
+          - 81.83514
           - 0
           - 0
           - 0
@@ -422,8 +422,8 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.717325
-          - 81.69852
+          - 21.753641
+          - 81.83514
           - 0
           - 0
           - 0
@@ -437,6 +437,20 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+  - uid: 13
+    components:
+    - type: MetaData
+      name: solution - battery
+    - type: Transform
+      parent: 12
+    - type: Solution
+      solution:
+        maxVol: 5
+        name: battery
+        reagents: []
+    - type: ContainedSolution
+      containerName: battery
+      container: 12
   - uid: 43
     components:
     - type: MetaData
@@ -533,6 +547,20 @@ entities:
     - type: ContainedSolution
       containerName: glass
       container: 79
+  - uid: 94
+    components:
+    - type: MetaData
+      name: solution - battery
+    - type: Transform
+      parent: 86
+    - type: Solution
+      solution:
+        maxVol: 5
+        name: battery
+        reagents: []
+    - type: ContainedSolution
+      containerName: battery
+      container: 86
   - uid: 114
     components:
     - type: MetaData
@@ -561,36 +589,263 @@ entities:
     - type: ContainedSolution
       containerName: battery
       container: 115
-  - uid: 142
+  - uid: 191
     components:
     - type: MetaData
-      name: solution - battery
+      name: solution - Welder
     - type: Transform
-      parent: 131
+      parent: 190
     - type: Solution
       solution:
-        maxVol: 5
-        name: battery
-        reagents: []
+        maxVol: 100
+        name: Welder
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
     - type: ContainedSolution
-      containerName: battery
-      container: 131
-  - uid: 151
+      containerName: Welder
+      container: 190
+  - uid: 193
     components:
     - type: MetaData
-      name: solution - battery
+      name: solution - drink
     - type: Transform
-      parent: 149
+      parent: 4
     - type: Solution
       solution:
-        maxVol: 5
-        name: battery
-        reagents: []
+        maxVol: 30
+        name: drink
+        reagents:
+        - ReagentId: Water
+          Quantity: 30
     - type: ContainedSolution
-      containerName: battery
-      container: 149
+      containerName: drink
+      container: 4
+  - uid: 194
+    components:
+    - type: MetaData
+      name: solution - drink
+    - type: Transform
+      parent: 5
+    - type: Solution
+      solution:
+        maxVol: 30
+        name: drink
+        reagents:
+        - ReagentId: Water
+          Quantity: 30
+    - type: ContainedSolution
+      containerName: drink
+      container: 5
+  - uid: 195
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 69
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: food
+      container: 69
+  - uid: 196
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 70
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: food
+      container: 70
+  - uid: 197
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 71
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: food
+      container: 71
+  - uid: 198
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 181
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+    - type: ContainedSolution
+      containerName: food
+      container: 181
+  - uid: 210
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 209
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 209
+  - uid: 212
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 211
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 211
+  - uid: 214
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 213
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 213
+  - uid: 216
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 215
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 215
+  - uid: 218
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 217
+    - type: Solution
+      solution:
+        maxVol: 20
+        name: food
+        reagents:
+        - ReagentId: Tricordrazine
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 217
+  - uid: 224
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 187
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 187
+  - uid: 225
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 188
+    - type: Solution
+      solution:
+        maxVol: 1
+        name: food
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 1
+    - type: ContainedSolution
+      containerName: food
+      container: 188
+  - uid: 230
+    components:
+    - type: MetaData
+      name: solution - food
+    - type: Transform
+      parent: 229
+    - type: Solution
+      solution:
+        maxVol: 10
+        name: food
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+    - type: ContainedSolution
+      containerName: food
+      container: 229
+- proto: ActionToggleJetpack
+  entities:
+  - uid: 227
+    components:
+    - type: Transform
+      parent: 226
+    - type: InstantAction
+      container: 226
 - proto: ActionToggleLight
   entities:
+  - uid: 15
+    components:
+    - type: Transform
+      parent: 185
+    - type: InstantAction
+      container: 185
+      attachedEntity: 185
   - uid: 186
     components:
     - type: Transform
@@ -616,12 +871,13 @@ entities:
           ents:
           - 18
           - 166
+          - 131
     - type: Airlock
       powered: True
     - type: DoorBolt
       powered: True
     - type: DeviceNetwork
-      address: 0086-8AD1
+      address: 6384-DD01
       receiveFrequency: 1280
   - uid: 83
     components:
@@ -640,12 +896,13 @@ entities:
           ents:
           - 84
           - 167
+          - 142
     - type: Airlock
       powered: True
     - type: DoorBolt
       powered: True
     - type: DeviceNetwork
-      address: 515D-A24F
+      address: 6F23-E90F
       receiveFrequency: 1280
 - proto: AirlockMaint
   entities:
@@ -677,12 +934,13 @@ entities:
           - 66
           - 19
           - 168
+          - 145
     - type: Airlock
       powered: True
     - type: DoorBolt
       powered: True
     - type: DeviceNetwork
-      address: 4EB3-46D0
+      address: 1F31-ADD4
       receiveFrequency: 1280
     - type: Forensics
       residues: []
@@ -713,12 +971,17 @@ entities:
   - uid: 90
     components:
     - type: MetaData
-      name: ЛКП (PU-326400) (PU-326400) (PU-326400)
+      name: ЛКП (PU-326400) (PU-326400) (PU-326400) (PU-851696)
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 1.5,1.5
       parent: 1
+    - type: AccessReader
+      accessLog:
+      - accessor: Неизвестный
+        accessTime: 829.4466822
     - type: Apc
+      hasAccess: True
       lastExternalState: Good
       lastChargeState: Full
     - type: PowerNetworkBattery
@@ -726,8 +989,8 @@ entities:
       currentReceiving: 8025.0317
       currentSupply: 8025
     - type: NameIdentifier
-      fullIdentifier: (PU-326400)
-      identifier: 326400
+      fullIdentifier: (PU-851696)
+      identifier: 851696
     - type: Forensics
       residues: []
       dnas: []
@@ -775,44 +1038,24 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-- proto: BlastDoorExterior1
+- proto: BlastDoor
   entities:
-  - uid: 169
+  - uid: 147
     components:
     - type: Transform
       pos: 0.5,-3.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 170
-    - type: DeviceNetwork
-      address: 3BD9-239A
-      receiveFrequency: 1280
     - type: DeviceLinkSink
       links:
-      - 171
-  - uid: 177
+      - 169
+  - uid: 148
     components:
     - type: Transform
       pos: -0.5,-3.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 178
-    - type: DeviceNetwork
-      address: 20AC-DC2E
-      receiveFrequency: 1280
     - type: DeviceLinkSink
       links:
-      - 171
+      - 169
 - proto: BrokenBorgEngineer
   entities:
   - uid: 150
@@ -820,6 +1063,14 @@ entities:
     - type: Transform
       pos: -0.5,-2.5
       parent: 1
+- proto: Brutepack
+  entities:
+  - uid: 205
+    components:
+    - type: Transform
+      parent: 183
+    - type: Physics
+      canCollide: False
 - proto: ButtonFrameCaution
   entities:
   - uid: 179
@@ -902,11 +1153,6 @@ entities:
     - type: Transform
       pos: 1.5,0.5
       parent: 1
-  - uid: 94
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
   - uid: 99
     components:
     - type: Transform
@@ -916,11 +1162,6 @@ entities:
     components:
     - type: Transform
       pos: 1.5,-0.5
-      parent: 1
-  - uid: 152
-    components:
-    - type: Transform
-      pos: 0.5,-0.5
       parent: 1
 - proto: CableMV
   entities:
@@ -966,6 +1207,12 @@ entities:
       parent: 1
 - proto: CapacitorStockPart
   entities:
+  - uid: 8
+    components:
+    - type: Transform
+      parent: 110
+    - type: Physics
+      canCollide: False
   - uid: 41
     components:
     - type: Transform
@@ -1016,16 +1263,12 @@ entities:
       parent: 110
     - type: Physics
       canCollide: False
+- proto: CartridgePistolRubber
+  entities:
   - uid: 118
     components:
     - type: Transform
-      parent: 145
-    - type: Physics
-      canCollide: False
-  - uid: 148
-    components:
-    - type: Transform
-      parent: 145
+      parent: 74
     - type: Physics
       canCollide: False
 - proto: CatwalkBlue
@@ -1093,9 +1336,9 @@ entities:
         immutable: False
         temperature: 293.1485
         moles:
-        - 1.9020084
-        - 7.1602416
-        - 0.0013468555
+        - 1.8953438
+        - 7.135152
+        - 0.0013421762
         - 0
         - 0
         - 0
@@ -1111,15 +1354,16 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 5
-          - 4
-          - 183
-          - 182
-          - 181
-          - 71
-          - 70
-          - 69
           - 73
+          - 69
+          - 70
+          - 71
+          - 181
+          - 182
+          - 183
+          - 4
+          - 5
+          - 170
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -1127,7 +1371,7 @@ entities:
   - uid: 123
     components:
     - type: Transform
-      pos: 1.5,-0.5
+      pos: 1.4999999,-0.5
       parent: 1
     - type: EntityStorage
       air:
@@ -1135,9 +1379,9 @@ entities:
         immutable: False
         temperature: 293.147
         moles:
-        - 1.7600299
-        - 6.625452
-        - 0.0011658971
+        - 1.8840573
+        - 7.092369
+        - 0.0012556484
         - 0
         - 0
         - 0
@@ -1169,6 +1413,83 @@ entities:
     components:
     - type: Transform
       parent: 67
+    - type: Storage
+      storedItems:
+        149:
+          position: 0,0
+          _rotation: South
+        151:
+          position: 1,0
+          _rotation: South
+        152:
+          position: 2,0
+          _rotation: South
+        175:
+          position: 3,0
+          _rotation: South
+        190:
+          position: 4,0
+          _rotation: South
+        192:
+          position: 5,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 149
+          - 151
+          - 152
+          - 175
+          - 190
+          - 192
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 265.1251202
+          length: 1
+        quickInsert:
+          endTime: 265.1251202
+          length: 0.5
+        storage:
+          endTime: 265.1251202
+- proto: ClothingHeadHelmetAncient
+  entities:
+  - uid: 229
+    components:
+    - type: Transform
+      parent: 68
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 230
+    - type: InsideEntityStorage
+- proto: ClothingMaskBreath
+  entities:
+  - uid: 231
+    components:
+    - type: Transform
+      parent: 68
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+- proto: ClothingOuterHardsuitAncientEVA
+  entities:
+  - uid: 228
+    components:
+    - type: Transform
+      parent: 68
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -1201,6 +1522,14 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: Crowbar
+  entities:
+  - uid: 149
+    components:
+    - type: Transform
+      parent: 182
+    - type: Physics
+      canCollide: False
 - proto: CurtainsBlackOpen
   entities:
   - uid: 55
@@ -1253,6 +1582,24 @@ entities:
       parent: 121
     - type: Physics
       canCollide: False
+  - uid: 131
+    components:
+    - type: Transform
+      parent: 17
+    - type: Physics
+      canCollide: False
+  - uid: 142
+    components:
+    - type: Transform
+      parent: 83
+    - type: Physics
+      canCollide: False
+  - uid: 145
+    components:
+    - type: Transform
+      parent: 65
+    - type: Physics
+      canCollide: False
   - uid: 165
     components:
     - type: Transform
@@ -1277,12 +1624,6 @@ entities:
       parent: 65
     - type: Physics
       canCollide: False
-  - uid: 170
-    components:
-    - type: Transform
-      parent: 169
-    - type: Physics
-      canCollide: False
   - uid: 172
     components:
     - type: Transform
@@ -1301,10 +1642,22 @@ entities:
       parent: 164
     - type: Physics
       canCollide: False
-  - uid: 178
+  - uid: 219
     components:
     - type: Transform
-      parent: 177
+      parent: 105
+    - type: Physics
+      canCollide: False
+  - uid: 220
+    components:
+    - type: Transform
+      parent: 121
+    - type: Physics
+      canCollide: False
+  - uid: 221
+    components:
+    - type: Transform
+      parent: 164
     - type: Physics
       canCollide: False
 - proto: DrinkWaterBottleFull
@@ -1313,16 +1666,36 @@ entities:
     components:
     - type: Transform
       parent: 67
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - drink
+    - type: PressurizedSolution
+      sprayFizzinessThresholdRoll: 0.18166748
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: ContainerContainer
+      containers:
+        solution@drink: !type:ContainerSlot
+          ent: 193
   - uid: 5
     components:
     - type: Transform
       parent: 67
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - drink
+    - type: PressurizedSolution
+      sprayFizzinessThresholdRoll: 0.90129125
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: ContainerContainer
+      containers:
+        solution@drink: !type:ContainerSlot
+          ent: 194
 - proto: FaxMachineBase
   entities:
   - uid: 57
@@ -1333,7 +1706,7 @@ entities:
     - type: ContainerContainer
       containers: {}
     - type: DeviceNetwork
-      address: 717E-6E17
+      address: 311B-911E
       transmitFrequency: 2640
       receiveFrequency: 2640
     missingComponents:
@@ -1346,22 +1719,27 @@ entities:
     - type: Transform
       parent: 123
     - type: HandheldLight
+      selfToggleActionEntity: 15
       toggleActionEntity: 186
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: null
+          ent: 86
         actions: !type:Container
           showEnts: False
           occludes: True
           ents:
           - 186
+          - 15
     - type: Physics
       canCollide: False
     - type: ActionsContainer
     - type: InsideEntityStorage
+    - type: Actions
+      actions:
+      - 15
 - proto: FoodPacketSusTrash
   entities:
   - uid: 129
@@ -1386,56 +1764,82 @@ entities:
     components:
     - type: Transform
       parent: 67
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 195
   - uid: 70
     components:
     - type: Transform
       parent: 67
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 196
 - proto: FoodTinMRE
   entities:
   - uid: 71
     components:
     - type: Transform
       parent: 67
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 197
   - uid: 181
     components:
     - type: Transform
       parent: 67
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: GeneratorWallmountAPU
-  entities:
-  - uid: 13
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
-    - type: PowerSupplier
-      supplyRampPosition: 4012.516
     - type: ContainerContainer
       containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 15
-          - 175
+        solution@food: !type:ContainerSlot
+          ent: 198
+- proto: Gauze
+  entities:
+  - uid: 207
+    components:
+    - type: Transform
+      parent: 183
+    - type: Physics
+      canCollide: False
+- proto: GeneratorWallmountAPU
+  entities:
   - uid: 81
     components:
     - type: Transform
       pos: 1.5,0.5
       parent: 1
     - type: PowerSupplier
-      supplyRampPosition: 4012.516
+      supplyRampPosition: 8025.032
+      supplyRate: 12000
     - type: ContainerContainer
       containers:
         board: !type:Container
@@ -1445,6 +1849,7 @@ entities:
           - 82
           - 109
           - 176
+          - 223
 - proto: Grille
   entities:
   - uid: 104
@@ -1503,6 +1908,23 @@ entities:
       parent: 75
     - type: Physics
       canCollide: False
+- proto: JetpackVoidFilled
+  entities:
+  - uid: 226
+    components:
+    - type: Transform
+      parent: 68
+    - type: Jetpack
+      toggleActionEntity: 227
+    - type: Physics
+      canCollide: False
+    - type: ActionsContainer
+    - type: ContainerContainer
+      containers:
+        actions: !type:Container
+          ents:
+          - 227
+    - type: InsideEntityStorage
 - proto: MachineFrameDestroyed
   entities:
   - uid: 26
@@ -1521,6 +1943,8 @@ entities:
     components:
     - type: Transform
       parent: 123
+    - type: BallisticAmmoProvider
+      unspawnedCount: 10
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -1530,27 +1954,151 @@ entities:
     components:
     - type: Transform
       parent: 123
+    - type: BallisticAmmoProvider
+      unspawnedCount: 10
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+  - uid: 117
+    components:
+    - type: Transform
+      parent: 74
+    - type: BallisticAmmoProvider
+      unspawnedCount: 10
+    - type: Physics
+      canCollide: False
 - proto: Matchbox
   entities:
   - uid: 73
     components:
     - type: Transform
       parent: 67
+    - type: Storage
+      storedItems:
+        199:
+          position: 0,0
+          _rotation: South
+        200:
+          position: 1,0
+          _rotation: South
+        201:
+          position: 2,0
+          _rotation: South
+        202:
+          position: 0,1
+          _rotation: South
+        203:
+          position: 1,1
+          _rotation: South
+        204:
+          position: 2,1
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 199
+          - 200
+          - 201
+          - 202
+          - 203
+          - 204
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 265.1251202
+          length: 1
+        quickInsert:
+          endTime: 265.1251202
+          length: 0.5
+        storage:
+          endTime: 265.1251202
+- proto: Matchstick
+  entities:
+  - uid: 199
+    components:
+    - type: Transform
+      parent: 73
+    - type: Physics
+      canCollide: False
+  - uid: 200
+    components:
+    - type: Transform
+      parent: 73
+    - type: Physics
+      canCollide: False
+  - uid: 201
+    components:
+    - type: Transform
+      parent: 73
+    - type: Physics
+      canCollide: False
+  - uid: 202
+    components:
+    - type: Transform
+      parent: 73
+    - type: Physics
+      canCollide: False
+  - uid: 203
+    components:
+    - type: Transform
+      parent: 73
+    - type: Physics
+      canCollide: False
+  - uid: 204
+    components:
+    - type: Transform
+      parent: 73
+    - type: Physics
+      canCollide: False
 - proto: MedkitFilled
   entities:
   - uid: 183
     components:
     - type: Transform
       parent: 67
+    - type: Storage
+      storedItems:
+        205:
+          position: 0,0
+          _rotation: South
+        206:
+          position: 1,0
+          _rotation: South
+        207:
+          position: 2,0
+          _rotation: South
+        208:
+          position: 3,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 205
+          - 206
+          - 207
+          - 208
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 265.1251202
+          length: 1
+        quickInsert:
+          endTime: 265.1251202
+          length: 0.5
+        storage:
+          endTime: 265.1251202
 - proto: MicroManipulatorStockPart
   entities:
   - uid: 77
@@ -1559,6 +2107,22 @@ entities:
       parent: 75
     - type: Stack
       count: 2
+    - type: Physics
+      canCollide: False
+- proto: Multitool
+  entities:
+  - uid: 192
+    components:
+    - type: Transform
+      parent: 182
+    - type: Physics
+      canCollide: False
+- proto: Ointment
+  entities:
+  - uid: 206
+    components:
+    - type: Transform
+      parent: 183
     - type: Physics
       canCollide: False
 - proto: OxygenCanister
@@ -1573,13 +2137,99 @@ entities:
   - uid: 187
     components:
     - type: Transform
-      pos: 0.6711731,2.6067429
+      rot: -0.06829272955656052 rad
+      pos: 0.91783684,2.2694998
       parent: 1
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 224
   - uid: 188
     components:
     - type: Transform
-      pos: 0.7864914,2.222458
+      rot: 0.012410026043653488 rad
+      pos: 0.91340816,2.618668
       parent: 1
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.25,-0.25
+            - 0.25,-0.25
+            - 0.25,0.25
+            - -0.25,0.25
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+        flammable:
+          shape: !type:PhysShapeCircle
+            radius: 0.35
+            position: 0,0
+          mask:
+          - TableLayer
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          layer: []
+          density: 1
+          hard: False
+          restitution: 0
+          friction: 0.4
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 225
 - proto: Pen
   entities:
   - uid: 189
@@ -1587,9 +2237,126 @@ entities:
     - type: MetaData
       name: Космическая ручка Фишера
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.17147827,2.0943604
+      rot: -1.780182913937841 rad
+      pos: 0.16339052,1.9985399
       parent: 1
+    - type: Physics
+      canCollide: False
+- proto: PillCanisterTricordrazine
+  entities:
+  - uid: 208
+    components:
+    - type: Transform
+      parent: 183
+    - type: Storage
+      storedItems:
+        209:
+          position: 0,0
+          _rotation: South
+        211:
+          position: 1,0
+          _rotation: South
+        213:
+          position: 2,0
+          _rotation: South
+        215:
+          position: 3,0
+          _rotation: South
+        217:
+          position: 4,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 209
+          - 211
+          - 213
+          - 215
+          - 217
+    - type: Physics
+      canCollide: False
+    - type: UseDelay
+      delays:
+        default:
+          length: 1
+        quickInsert:
+          length: 0.5
+        storage: {}
+- proto: PillTricordrazine
+  entities:
+  - uid: 209
+    components:
+    - type: Transform
+      parent: 208
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 210
+  - uid: 211
+    components:
+    - type: Transform
+      parent: 208
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 212
+  - uid: 213
+    components:
+    - type: Transform
+      parent: 208
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 214
+  - uid: 215
+    components:
+    - type: Transform
+      parent: 208
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 216
+  - uid: 217
+    components:
+    - type: Transform
+      parent: 208
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - food
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@food: !type:ContainerSlot
+          ent: 218
 - proto: PlastitaniumWindow
   entities:
   - uid: 107
@@ -1617,8 +2384,38 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.5,3.5
       parent: 1
+- proto: PowerCellMedium
+  entities:
+  - uid: 86
+    components:
+    - type: Transform
+      parent: 185
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - battery
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@battery: !type:ContainerSlot
+          ent: 94
 - proto: PowerCellSmall
   entities:
+  - uid: 12
+    components:
+    - type: Transform
+      parent: 110
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - battery
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@battery: !type:ContainerSlot
+          ent: 13
   - uid: 113
     components:
     - type: Transform
@@ -1647,34 +2444,36 @@ entities:
       containers:
         solution@battery: !type:ContainerSlot
           ent: 116
-  - uid: 131
+- proto: RemoteSignaller
+  entities:
+  - uid: 170
     components:
     - type: Transform
-      parent: 145
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - battery
+      parent: 67
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 0
+          startTime: 0
+          length: 1
+    - type: DeviceNetwork
+      address: 136D-5C87
+      receiveFrequency: 1280
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@battery: !type:ContainerSlot
-          ent: 142
-  - uid: 149
+    - type: InsideEntityStorage
+- proto: Screwdriver
+  entities:
+  - uid: 152
     components:
     - type: Transform
-      parent: 145
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - battery
+      parent: 182
+    - type: RandomSprite
+      selected:
+        enum.DamageStateVisualLayers.Base:
+          screwdriver: '#D58C18FF'
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@battery: !type:ContainerSlot
-          ent: 151
 - proto: SheetGlass1
   entities:
   - uid: 79
@@ -1767,36 +2566,26 @@ entities:
       parent: 35
     - type: Physics
       canCollide: False
-- proto: SignalButtonExt1
+- proto: SignalButton
   entities:
-  - uid: 171
+  - uid: 169
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -1.5,1.5
       parent: 1
-    - type: UseDelay
-      delays:
-        default:
-          endTime: 985.8460586
-          startTime: 985.3460586
-          length: 0.5
-    - type: SignalSwitch
-      state: True
-    - type: DeviceNetwork
-      address: 078D-41A6
     - type: DeviceLinkSource
       linkedPorts:
-        177:
+        148:
         - Pressed: Toggle
-        169:
+        147:
         - Pressed: Toggle
 - proto: SubstationWallBasic
   entities:
   - uid: 110
     components:
     - type: MetaData
-      name: настенная подстанция (PU-678796) (PU-678796)
+      name: настенная подстанция (PU-678796) (PU-678796) (PU-808161)
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,-0.5
@@ -1809,56 +2598,28 @@ entities:
           ents:
           - 111
           - 58
+          - 7
         capacitor: !type:Container
           showEnts: False
           occludes: True
           ents:
           - 112
           - 59
+          - 8
         powercell: !type:Container
           showEnts: False
           occludes: True
           ents:
           - 113
           - 115
+          - 12
     - type: PowerNetworkBattery
       loadingNetworkDemand: 8025.0317
       currentReceiving: 8025.0317
       currentSupply: 8025.0317
     - type: NameIdentifier
-      fullIdentifier: (PU-678796)
-      identifier: 678796
-  - uid: 145
-    components:
-    - type: MetaData
-      name: настенная подстанция (PU-528261) (PU-528261)
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,-2.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 147
-          - 117
-        capacitor: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 148
-          - 118
-        powercell: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 149
-          - 131
-    - type: NameIdentifier
-      fullIdentifier: (PU-528261)
-      identifier: 528261
+      fullIdentifier: (PU-808161)
+      identifier: 808161
 - proto: SuitStorageNTSRA
   entities:
   - uid: 68
@@ -1890,6 +2651,16 @@ entities:
         - 0
         - 0
         - 0
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 226
+          - 228
+          - 229
+          - 231
 - proto: TableReinforced
   entities:
   - uid: 28
@@ -2171,12 +2942,6 @@ entities:
       canCollide: False
 - proto: WallmountGeneratorAPUElectronics
   entities:
-  - uid: 15
-    components:
-    - type: Transform
-      parent: 13
-    - type: Physics
-      canCollide: False
   - uid: 82
     components:
     - type: Transform
@@ -2189,13 +2954,13 @@ entities:
       parent: 81
     - type: Physics
       canCollide: False
-  - uid: 175
+  - uid: 176
     components:
     - type: Transform
-      parent: 13
+      parent: 81
     - type: Physics
       canCollide: False
-  - uid: 176
+  - uid: 223
     components:
     - type: Transform
       parent: 81
@@ -2203,6 +2968,12 @@ entities:
       canCollide: False
 - proto: WallmountSubstationElectronics
   entities:
+  - uid: 7
+    components:
+    - type: Transform
+      parent: 110
+    - type: Physics
+      canCollide: False
   - uid: 58
     components:
     - type: Transform
@@ -2213,18 +2984,6 @@ entities:
     components:
     - type: Transform
       parent: 110
-    - type: Physics
-      canCollide: False
-  - uid: 117
-    components:
-    - type: Transform
-      parent: 145
-    - type: Physics
-      canCollide: False
-  - uid: 147
-    components:
-    - type: Transform
-      parent: 145
     - type: Physics
       canCollide: False
 - proto: WallShuttleDark
@@ -2298,11 +3057,6 @@ entities:
     - type: Transform
       pos: -1.5,0.5
       parent: 1
-  - uid: 86
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
   - uid: 87
     components:
     - type: Transform
@@ -2338,6 +3092,11 @@ entities:
     - type: Transform
       pos: -1.5,-4.5
       parent: 1
+  - uid: 222
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
 - proto: WallShuttleDarkDiagonal
   entities:
   - uid: 29
@@ -2357,6 +3116,8 @@ entities:
     components:
     - type: Transform
       parent: 123
+    - type: BallisticAmmoProvider
+      unspawnedCount: 1
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -2364,11 +3125,45 @@ entities:
   entities:
   - uid: 74
     components:
+    - type: MetaData
+      name: Табельное оружие
     - type: Transform
       parent: 123
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 117
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 118
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: Welder
+  entities:
+  - uid: 190
+    components:
+    - type: Transform
+      parent: 182
+    - type: UseDelay
+      delays:
+        default:
+          endTime: 0
+          startTime: 0
+          length: 1
+    - type: SolutionContainerManager
+      solutions: null
+      containers:
+      - Welder
+    - type: Physics
+      canCollide: False
+    - type: ContainerContainer
+      containers:
+        solution@Welder: !type:ContainerSlot
+          ent: 191
 - proto: WindoorSecure
   entities:
   - uid: 105
@@ -2378,7 +3173,7 @@ entities:
       pos: -0.5,-0.5
       parent: 1
     - type: DeviceNetwork
-      address: 4C40-A28E
+      address: 7A16-C785
       receiveFrequency: 1280
     - type: AccessReader
       accessLog:
@@ -2400,6 +3195,7 @@ entities:
           ents:
           - 106
           - 172
+          - 219
     - type: Airlock
       powered: True
     - type: DoorBolt
@@ -2411,7 +3207,7 @@ entities:
       pos: -0.5,-2.5
       parent: 1
     - type: DeviceNetwork
-      address: 18CA-65DF
+      address: 6DE0-D978
       receiveFrequency: 1280
     - type: ContainerContainer
       containers:
@@ -2421,6 +3217,7 @@ entities:
           ents:
           - 122
           - 173
+          - 220
     - type: Airlock
       powered: True
     - type: DoorBolt
@@ -2432,7 +3229,7 @@ entities:
       pos: -0.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      address: 6E99-1277
+      address: 0FC3-DFAF
       receiveFrequency: 1280
     - type: AccessReader
       accessLog:
@@ -2450,6 +3247,7 @@ entities:
           ents:
           - 165
           - 174
+          - 221
     - type: Airlock
       powered: True
     - type: DoorBolt
@@ -2461,4 +3259,24 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 1
+- proto: Wirecutter
+  entities:
+  - uid: 175
+    components:
+    - type: Transform
+      parent: 182
+    - type: RandomSprite
+      selected:
+        enum.DamageStateVisualLayers.Base:
+          cutters: '#0E7F1BFF'
+    - type: Physics
+      canCollide: False
+- proto: Wrench
+  entities:
+  - uid: 151
+    components:
+    - type: Transform
+      parent: 182
+    - type: Physics
+      canCollide: False
 ...
