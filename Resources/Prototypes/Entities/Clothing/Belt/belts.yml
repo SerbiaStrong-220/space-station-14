@@ -589,11 +589,11 @@
   - type: Clothing
     slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/holster.rsi
-  - type: Storage
-    maxItemSize: Huge
+  - type: Storage 
+    maxItemSize: Huge #SS220 holster maximum item size
     grid:
     - 0,0,3,1
-    whitelist: 
+    whitelist: #SS220 holster whitelist
       components:
         - Gun
         - BallisticAmmoProvider
