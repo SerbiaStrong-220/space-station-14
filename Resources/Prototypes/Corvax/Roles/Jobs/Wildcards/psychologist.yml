@@ -19,7 +19,7 @@
 - type: startingGear
   id: PsychologistGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitPsychologist
+#    jumpsuit: ClothingUniformJumpsuitPsychologist #SS220-Psychologist-Loadoust-Fix
     shoes: ClothingShoesLeather
     id: PsychologistPDA
     ears: ClothingHeadsetMedical
