@@ -162,3 +162,23 @@
     Weh:
       collection: Weh
 # Lanc emote sounds end
+# Cat emotes start
+- type: emoteSounds
+  id: Cat
+  params:
+    variation: 0.125
+    pitch: 0.75
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: FelinidMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+# Cat emotes end

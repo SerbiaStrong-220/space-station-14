@@ -2781,6 +2781,15 @@
   - type: Speech
     speechSounds: Cat
     speechVerb: SmallMob
+    # 220 cat-emotes start
+    allowedEmotes: ['Meow','Mew','Growl','Purr','Hiss']
+  - type: Vocal
+    wilhelm: "/Audio/Voice/Felinid/cat_wilhelm.ogg"
+    sounds:
+      Male: Cat
+      Female: Cat
+      Unsexed: Cat
+    # 220 cat-emotes end
   - type: Butcherable
     spawned:
     - id: FoodMeat
