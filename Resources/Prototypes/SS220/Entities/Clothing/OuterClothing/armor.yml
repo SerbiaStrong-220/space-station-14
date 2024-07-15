@@ -1,3 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Command
+- type: entity
+  parent: ClothingOuterArmorCaptainCarapace
+  id: ClothingOuterWhiteArmorCaptainCarapace
+  name: белый панцирь капитана
+  description: Белый панцирь, обеспечивающий хорошую защиту носителя и подчёркивающий его статус ветерана.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/whitecapcarapace.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/whitecapcarapace.rsi
+
 # Centcom
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
@@ -18,3 +32,4 @@
         Heat: 0.5
   - type: ExplosionResistance
     damageCoefficient: 0.65
+

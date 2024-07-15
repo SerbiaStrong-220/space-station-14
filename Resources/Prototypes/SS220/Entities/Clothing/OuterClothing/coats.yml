@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 # Centcom
 - type: entity
   parent: ClothingOuterStorageBase
@@ -58,6 +60,17 @@
         Heat: 0.80
 
 # Command
+- type: entity
+  parent: ClothingUniformJumpskirtCapFormalDress
+  id: ClothingOuterWhiteCoatCaptain
+  name: белое пальто капитана
+  description: Белый цвет - символ власти на флоте.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatHoPFormalDress
