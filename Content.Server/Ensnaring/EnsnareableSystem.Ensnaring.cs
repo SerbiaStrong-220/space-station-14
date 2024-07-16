@@ -33,25 +33,28 @@ public sealed partial class EnsnareableSystem
     }
 
     //ss220 Ensnareable begin
-    private void GetVerb(EntityUid entity, EnsnareableComponent comp, GetVerbsEvent<Verb> args)
+    private void GetVerb(Entity<EnsnareableComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanInteract || !args.CanAccess || args.Hands == null)
             return;
 
-        if (!comp.IsEnsnared)
+        if (!ent.Comp.IsEnsnared)
             return;
+
+        var target = args.Target;
+        var user = args.User;
 
         Verb verb = new Verb()
         {
             Text = Loc.GetString("ensnare-component-try-free-verb"),
             Act = () =>
             {
-                foreach (var entity in comp.Container.ContainedEntities)
+                foreach (var entity in ent.Comp.Container.ContainedEntities)
                 {
                     if (!TryComp<EnsnaringComponent>(entity, out var ensnaring))
                         continue;
 
-                    TryFree(args.Target, args.User, entity, ensnaring);
+                    TryFree(target, user, entity, ensnaring);
                 }
             },
         };
