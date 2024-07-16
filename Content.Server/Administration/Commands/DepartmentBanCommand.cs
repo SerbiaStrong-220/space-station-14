@@ -149,6 +149,12 @@ public sealed class DepartmentBanCommand : IConsoleCommand
             new("high", Loc.GetString("admin-note-editor-severity-high")),
         };
 
+        var postInfo = new CompletionOption[]
+        {
+            new("true", Loc.GetString("cmd-ban-hint-post-ban-true")),
+            new("false", Loc.GetString("cmd-ban-hint-post-ban-false"))
+        };
+
         return args.Length switch
         {
             1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(),
@@ -158,6 +164,7 @@ public sealed class DepartmentBanCommand : IConsoleCommand
             3 => CompletionResult.FromHint(Loc.GetString("cmd-roleban-hint-3")),
             4 => CompletionResult.FromHintOptions(durOpts, Loc.GetString("cmd-roleban-hint-4")),
             5 => CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-roleban-hint-5")),
+            6 => CompletionResult.FromHintOptions(postInfo, Loc.GetString("cmd-ban-hint-post-ban")),
             _ => CompletionResult.Empty
         };
     }

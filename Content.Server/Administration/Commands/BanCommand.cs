@@ -201,6 +201,17 @@ public sealed class BanCommand : LocalizedCommands
             return CompletionResult.FromHint(LocalizationManager.GetString("cmd-ban-hint-stated-round"));
         }
 
+        if (args.Length == 6)
+        {
+            var postInfo = new CompletionOption[]
+            {
+                new("true", Loc.GetString("cmd-ban-hint-post-ban-true")),
+                new("false", Loc.GetString("cmd-ban-hint-post-ban-false"))
+            };
+
+            return CompletionResult.FromHintOptions(postInfo, Loc.GetString("cmd-ban-hint-post-ban"));
+        }
+
         return CompletionResult.Empty;
     }
 }
