@@ -51,7 +51,7 @@
     sprite: SS220/Tiles/Planet/dirty_water.rsi
     drawdepth: BelowFloor
     layers:
-      - state: shoreline_water
+      - state: dirty_water
   - type: SolutionContainerManager
     solutions:
       pool:
@@ -108,7 +108,7 @@
     sprite: SS220/Tiles/Planet/stagnant_water.rsi
     drawdepth: BelowFloor
     layers:
-      - state: shoreline_water
+      - state: stagnant_water
   - type: SolutionContainerManager
     solutions:
       pool:
