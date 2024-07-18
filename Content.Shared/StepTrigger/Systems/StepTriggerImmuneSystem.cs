@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Examine;
 using Content.Shared.Inventory;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.Tag;
 
@@ -12,19 +13,20 @@ public sealed class StepTriggerImmuneSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<StepTriggerImmuneComponent, StepTriggerAttemptEvent>(OnStepTriggerAttempt);
+        // SubscribeLocalEvent<StepTriggerImmuneComponent, StepTriggerAttemptEvent>(OnStepTriggerAttempt); 220 borg shard fix
         SubscribeLocalEvent<ClothingRequiredStepTriggerComponent, StepTriggerAttemptEvent>(OnStepTriggerClothingAttempt);
         SubscribeLocalEvent<ClothingRequiredStepTriggerComponent, ExaminedEvent>(OnExamined);
     }
-
-    private void OnStepTriggerAttempt(Entity<StepTriggerImmuneComponent> ent, ref StepTriggerAttemptEvent args)
-    {
-        args.Cancelled = true;
-    }
-
+    // start 220 borg shard fix
+    // private void OnStepTriggerAttempt(Entity<StepTriggerImmuneComponent> ent, ref StepTriggerAttemptEvent args)
+    // {
+    //     args.Cancelled = true;
+    // }
+    // end 220 borg shard fix
     private void OnStepTriggerClothingAttempt(EntityUid uid, ClothingRequiredStepTriggerComponent component, ref StepTriggerAttemptEvent args)
     {
-        if (_inventory.TryGetInventoryEntity<ClothingRequiredStepTriggerImmuneComponent>(args.Tripper, out _))
+        if (_inventory.TryGetInventoryEntity<ClothingRequiredStepTriggerImmuneComponent>(args.Tripper, out _)
+        || TryComp<StepTriggerImmuneComponent>(args.Tripper, out _)) // 220 borg shard fix
         {
             args.Cancelled = true;
         }
