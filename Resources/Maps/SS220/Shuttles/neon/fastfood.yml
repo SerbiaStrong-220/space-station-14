@@ -19,7 +19,6 @@ entities:
       name: NT-CV "Fast Food"
     - type: Transform
       pos: -0.47916666,-0.5625
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -907,7 +906,7 @@ entities:
 
         Удачной Вам смены!
 
-        Слава NanoTrasen! 
+        Слава NanoTrasen!
 
     - type: SolutionContainerManager
       solutions: null

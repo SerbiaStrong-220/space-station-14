@@ -18,7 +18,6 @@ entities:
       desc: Evacuation pod
       name: SI-CVPOD
     - type: Transform
-      parent: invalid
     - type: MapGrid
       chunks:
         -1,-1:

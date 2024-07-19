@@ -19,7 +19,6 @@ entities:
       name: UC-SPMED "Trauma-TEAM"
     - type: Transform
       pos: -0.372891,-0.6234046
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:

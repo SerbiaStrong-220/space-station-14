@@ -18,7 +18,6 @@ entities:
       name: NT-SPPOD "Guardian"
     - type: Transform
       pos: -0.4375,-0.671875
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:

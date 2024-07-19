@@ -21,7 +21,6 @@ entities:
       name: UC-CV "Visitor"
     - type: Transform
       pos: -0.5625,-0.5
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -841,36 +840,24 @@ entities:
     - type: Transform
       pos: 0.5,3.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
   - uid: 115
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -1.5,0.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
   - uid: 116
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,0.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
   - uid: 117
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-2.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
 - proto: FloorDrainSmall
   entities:
   - uid: 118
@@ -1087,9 +1074,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,0.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 144
@@ -1098,9 +1082,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 4.5,0.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 145
@@ -1109,9 +1090,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -2.5,0.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#0335FCFF'
   - uid: 146
@@ -1130,9 +1108,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -2.5,1.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 148
@@ -1140,18 +1115,12 @@ entities:
     - type: Transform
       pos: -0.5,5.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
   - uid: 149
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,1.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 150

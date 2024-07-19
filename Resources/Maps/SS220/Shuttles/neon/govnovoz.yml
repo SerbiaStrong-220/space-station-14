@@ -23,7 +23,6 @@ entities:
       name: NT-SP "GAZ-220"
     - type: Transform
       pos: -0.578125,-0.515625
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -988,7 +987,7 @@ entities:
 
         Удачной Вам смены!
 
-        Слава NanoTrasen! 
+        Слава NanoTrasen!
 
     - type: SolutionContainerManager
       solutions: null
