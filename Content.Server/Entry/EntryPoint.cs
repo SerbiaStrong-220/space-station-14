@@ -74,6 +74,7 @@ namespace Content.Server.Entry
             factory.RegisterIgnore(IgnoredComponents.List);
 
             prototypes.RegisterIgnore("parallax");
+            prototypes.RegisterIgnore("wristWatchStyle"); // SS220 Wrist Watch
 
             ServerContentIoC.Register();
 

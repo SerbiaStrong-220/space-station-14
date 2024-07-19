@@ -69,6 +69,18 @@
             Reporter: [ 2, 2 ]
             ServiceWorker: [ 2, 2 ]
             Lawyer: [ 2, 2 ]
+        - type: StationGoal
+          goals:
+          - Shuttle
+          - Singularity
+          - SolarPanels
+          - Artifacts
+          - Bank
+          - Zoo
+          - MiningOutpost
+          - Tesla
+          - XenobiologyRepair
+          - VirusologyAmbusol
 
 - type: entity
   id: AxiomaNanotrasenStation

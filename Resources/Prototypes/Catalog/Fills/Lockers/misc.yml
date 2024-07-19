@@ -256,6 +256,10 @@
           orGroup: syndiemaintloot
         - id: LotteryCash #SS220 Lottery
           prob: 0.05
+        # SS220 Wrist Watch begin
+        - id: ClothingWristWatch
+          prob: 0.05
+        # SS220 Wrist Watch end
 
 - type: entity
   id: ClosetWallMaintenanceFilledRandom
@@ -362,3 +366,7 @@
         - id: WeaponSniperMosin
           prob: 0.0010
           orGroup: syndiemaintloot
+        # SS220 Wrist Watch begin
+        - id: ClothingWristWatch
+          prob: 0.05
+        # SS220 Wrist Watch end

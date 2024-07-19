@@ -188,6 +188,20 @@
   - type: Objective
     difficulty: 0.8 #SS220-Zippo-Steal-End
 
+# SS220 Wrist Watch Begin
+- type: entity
+  noSpawn: true
+  parent: BaseThiefStealObjective
+  id: WristWatchGoldStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: WristWatchGold
+    minCollectionSize: 2
+    maxCollectionSize: 3
+  - type: Objective
+    difficulty: 1.0
+# SS220 Wrist Watch End
+
 - type: entity                                      #Security subgroup
   parent: BaseThiefStealObjective
   id: ForensicScannerStealObjective

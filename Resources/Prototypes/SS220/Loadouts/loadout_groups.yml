@@ -126,6 +126,178 @@
   - ChiefEngineerPDA
   - DarkChiefEngineerPDA
 
+
+#senior service
+- type: loadoutGroup
+  id: HatSeniorService
+  name: loadout-group-bartender-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorService
+
+- type: loadoutGroup
+  id: SeniorServiceJumpsuit
+  name: loadout-group-bartender-jumpsuit
+  loadouts:
+  - SeniorServiceJumpsuit
+  - SeniorJumpskirtService
+  
+- type: loadoutGroup
+  id: SeniorServiceBackpack
+  name: loadout-group-backpack
+  loadouts:
+  - SeniorServiceBackpack
+  - CommonSatchel
+  - CommonBackpack
+  - CommonDuffel
+  
+- type: loadoutGroup
+  id: SeniorServiceMask
+  name: loadout-group-passenger-mask
+  minLimit: 0
+  loadouts:
+  - SeniorServiceFace
+  
+# senior engineer
+- type: loadoutGroup
+  id: HatSeniorEngineer
+  name: loadout-group-station-engineer-head
+  loadouts:
+  - StationEngineerHardhatYellow
+  - StationEngineerHardhatOrange
+  - StationEngineerHardhatRed
+  - HatSeniorEngineer
+  
+- type: loadoutGroup
+  id: SeniorsEngineerJumpsuit
+  name: loadout-group-station-engineer-jumpsuit
+  loadouts:
+  - SeniorsEngineerJumpsuit
+  - SeniorsEngineerJumpskirt
+  
+- type: loadoutGroup
+  id: SeniorEngineersBackpack
+  name: loadout-group-station-engineer-backpack
+  loadouts:
+  - StationEngineerBackpack
+  - StationEngineerSatchel
+  - StationEngineerDuffel
+  
+- type: loadoutGroup
+  id: SeniorEngineerFace
+  name: loadout-group-passenger-mask
+  minLimit: 0
+  loadouts:
+  - SeniorEngineerFace
+  
+# Senior Medical
+
+- type: loadoutGroup
+  id: HatSeniorMedical
+  name: loadout-group-medical-doctor-head
+  minLimit: 0
+  loadouts:
+  - MedicalBeret
+  - HatSeniorMedical
+  - MedicalHeadMirror
+  - BlueSurgeryCap
+  - GreenSurgeryCap
+  - PurpleSurgeryCap
+  - NurseHat
+  
+- type: loadoutGroup
+  id: SeniorMedicalJumpsuit
+  name: loadout-group-medical-doctor-jumpsuit
+  loadouts:
+  - MedicalDoctorJumpsuit
+  - MedicalDoctorJumpskirt
+  - SeniorMedicalJumpsuit
+  - SeniorMedicalJumpskirt
+  - MedicalBlueScrubs
+  - MedicalGreenScrubs
+  - MedicalPurpleScrubs
+  - MedicalDoctorJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - MedicalDoctorJumpsuitTurtleneckAlt
+  - MedicalDoctorJumpskirtTurtleneck
+  - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  
+- type: loadoutGroup
+  id: SeniorMedicalLabCoat
+  name: loadout-group-medical-doctor-outerclothing
+  minLimit: 0
+  loadouts:
+  - RegularLabCoat
+  - MedicalDoctorWintercoat
+  - SeniorMedicalLabCoat
+  
+- type: loadoutGroup
+  id: MedicalsBackpack
+  name: loadout-group-medical-doctor-backpack
+  loadouts:
+  - MedicalDoctorBackpack
+  - MedicalDoctorSatchel
+  - MedicalDoctorDuffel
+  
+- type: loadoutGroup
+  id: SeniorShoes
+  name: loadout-group-medical-doctor-shoes
+  loadouts:
+  - WhiteShoes
+  - MedicalWinterBoots
+  
+- type: loadoutGroup
+  id: MedicalsGloves
+  name: loadout-group-medical-gloves
+  minLimit: 0
+  loadouts:
+  - LatexGloves
+  - NitrileGloves
+  
+- type: loadoutGroup
+  id: MedicalsMask
+  name: loadout-group-medical-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  
+# Senior RND
+
+- type: loadoutGroup
+  id: HatSeniorRND
+  name: loadout-group-scientist-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorRND
+  - RoboticistCap
+  - SkullBandana
+  
+- type: loadoutGroup
+  id: SeniorRNDJumpsuit
+  name: loadout-group-scientist-jumpsuit
+  loadouts:
+  - SeniorRNDJumpsuit
+  - SeniorRNDJumpskirt
+  - RoboticistJumpsuit
+  - RoboticistJumpskirt
+  
+- type: loadoutGroup
+  id: SeniorRNDLabCoat
+  name: loadout-group-scientist-outerclothing
+  minLimit: 0
+  loadouts:
+  - SeniorRNDLabCoat
+  - RoboticistLabCoat
+  - RoboticistWintercoat
+  
+# Senior Security
+
+- type: loadoutGroup
+  id: SeniorSecJumpsuit
+  name: loadout-group-security-jumpsuit
+  loadouts:
+  - SeniorSecJumpsuit
+  - SeniorSecJumpskirt
+
 # Security
 
   # Пилот
@@ -138,6 +310,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+
 
 # Cargo
 
