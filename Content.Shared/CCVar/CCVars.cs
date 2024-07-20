@@ -351,7 +351,7 @@ namespace Content.Shared.CCVar
         /// <summary>
         /// Whether the baby jail is currently enabled.
         /// </summary>
-        public static readonly CVarDef<bool> BabyJailEnabled  =
+        public static readonly CVarDef<bool> BabyJailEnabled =
             CVarDef.Create("game.baby_jail.enabled", false, CVar.NOTIFY | CVar.REPLICATED | CVar.SERVER);
 
         /// <summary>
@@ -1794,7 +1794,7 @@ namespace Content.Shared.CCVar
             CVarDef.Create("afk.time_kick", 600f, CVar.SERVERONLY);
 
         public static readonly CVarDef<float> AfkTeleportToCryo =
-            CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
+            CVarDef.Create("afk.teleport_to_cryo", 30f, CVar.SERVERONLY);
 
         /*
          * IC

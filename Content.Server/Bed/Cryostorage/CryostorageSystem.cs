@@ -27,6 +27,12 @@ using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Content.Shared.DoAfter;
+using Content.Shared.SS220.CryopodSSD;
+using Content.Server.Forensics;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -49,6 +55,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -57,6 +65,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         SubscribeLocalEvent<CryostorageComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpened);
         SubscribeLocalEvent<CryostorageComponent, CryostorageRemoveItemBuiMessage>(OnRemoveItemBuiMessage);
+        SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(OnTeleportFinished);
 
         SubscribeLocalEvent<CryostorageContainedComponent, PlayerSpawnCompleteEvent>(OnPlayerSpawned);
         SubscribeLocalEvent<CryostorageContainedComponent, MindRemovedMessage>(OnMindRemoved);
@@ -232,7 +241,16 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords))
                 jobName = entry.JobTitle;
 
-            _stationRecords.RemoveRecord(key, stationRecords);
+            // _stationRecords.RemoveRecord(key, stationRecords);
+
+            // start 220 cryo department
+            var recordPairTry = FindEntityStationRecordKey(station.Value, ent);
+            if (recordPairTry is { } recordPair)
+            {
+                recordPair.Item2.IsInCryo = true;
+                _stationRecords.Synchronize(station.Value);
+            }
+            // end 220 cryo department
         }
 
         _chatSystem.DispatchStationAnnouncement(station.Value,
@@ -345,5 +363,87 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             var id = mindComp?.UserId ?? containedComp.UserId;
             HandleEnterCryostorage((uid, containedComp), id);
         }
+    }
+
+    // START 220 TELEPORT TO CRYO
+    /// <summary>
+    /// Tries to teleport target inside cryopod, if any available
+    /// </summary>
+    /// <param name="target"> Target to teleport in first matching cryopod</param>
+    /// <returns> true if player successfully transferred to cryo storage, otherwise returns false</returns>
+    public bool TeleportEntityToCryoStorageWithDelay(EntityUid target)
+    {
+        var station = _station.GetOwningStation(target);
+
+        if (station is null)
+            return false;
+
+        foreach (var comp in EntityQuery<CryostorageComponent>())
+        {
+            if (comp.StoredPlayers.Contains(target))
+                return true;
+        }
+
+        var cryopodSSDComponents = EntityQueryEnumerator<CryostorageComponent>();
+
+        while (cryopodSSDComponents.MoveNext(out var cryopodSSDUid, out var cryopodSSDComp))
+        {
+            // if (cryopodSSDComp.BodyContainer.ContainedEntity is null
+            if (!cryopodSSDComp.StoredPlayers.Contains(target)  // todo check
+            && _station.GetOwningStation(cryopodSSDUid) == station)
+            {
+                var portal = Spawn("CryoStoragePortal", Transform(target).Coordinates);
+
+                if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
+                {
+                    _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
+                }
+
+                var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4f), new TeleportToCryoFinished(GetNetEntity(portal)), cryopodSSDUid) // todo edit TimeSpan.FromSeconds(4)
+                {
+                    BreakOnDamage = false,
+                    BreakOnMove = false,
+                    NeedHand = false,
+                };
+
+                if (!_doAfterSystem.TryStartDoAfter(doAfterArgs))
+                    QueueDel(portal);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void OnTeleportFinished(Entity<CryostorageComponent> ent, ref TeleportToCryoFinished args)
+    {
+        if (_container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container))
+            _container.Insert(args.User, container);
+
+        if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
+            contained.GracePeriodEndTime = TimeSpan.FromSeconds(1f);
+
+        var portalEntity = GetEntity(args.PortalId);
+
+        if (TryComp<AmbientSoundComponent>(portalEntity, out var ambientSoundComponent))
+            _audioSystem.PlayPvs(ambientSoundComponent.Sound, portalEntity);
+
+        EntityManager.DeleteEntity(portalEntity);
+    }
+
+    private (StationRecordKey, GeneralStationRecord)? FindEntityStationRecordKey(EntityUid station, EntityUid uid)
+    {
+        if (TryComp<DnaComponent>(uid, out var dnaComponent))
+        {
+            var stationRecords = _stationRecords.GetRecordsOfType<GeneralStationRecord>(station);
+            var result = stationRecords.FirstOrNull(records => records.Item2.DNA == dnaComponent.DNA);
+            if (result is not null)
+            {
+                return (new(result.Value.Item1, station), result.Value.Item2);
+            }
+        }
+
+        return null;
     }
 }

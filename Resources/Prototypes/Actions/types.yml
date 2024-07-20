@@ -330,17 +330,6 @@
     checkConsciousness: false
 
 - type: entity
-  id: ActionCryopodSSDLeave
-  name: action-name-cryopodSSDLeave
-  description: action-desc-cryopodSSDLeave
-  noSpawn: true
-  components:
-  - type: InstantAction
-    icon: { sprite: SS220/Structures/Machines/cryopodSSD.rsi, state: icon }
-    checkCanInteract: false
-    event: !type:CryopodSSDLeaveActionEvent
-
-- type: entity
   id: ActionToggleWagging
   name: action-name-toggle-wagging
   description: action-description-toggle-wagging

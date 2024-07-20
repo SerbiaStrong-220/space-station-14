@@ -1,4 +1,4 @@
-﻿<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+﻿<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 <DefaultWindow xmlns="https://spacestation14.io"
                Title="{Loc 'cryopodSSD-ui-title'}"
@@ -8,4 +8,4 @@
             <ItemList Name="CryopodSSDRecord"></ItemList>
         </ScrollContainer>
     </BoxContainer>
-</DefaultWindow>
+</DefaultWindow> -->

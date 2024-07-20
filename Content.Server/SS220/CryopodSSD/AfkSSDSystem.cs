@@ -13,12 +13,13 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Server.Bed.Cryostorage;
 
 namespace Content.Server.SS220.CryopodSSD;
 
 public sealed class AfkSSDSystem : EntitySystem
 {
-    [Dependency] private readonly CryopodSSDSystem _cryopodSSDSystem = default!;
+    [Dependency] private readonly CryostorageSystem _cryopodSSDSystem = default!;
     [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -97,4 +98,5 @@ public sealed class AfkSSDSystem : EntitySystem
                 break;
         }
     }
+
 }

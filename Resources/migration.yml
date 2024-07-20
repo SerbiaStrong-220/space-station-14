@@ -402,3 +402,7 @@ DoorRemoteFirefight: null
 
 # 2024-06-03
 AirlockServiceCaptainLocked: AirlockCaptainLocked
+
+BaseSSDConsole: null
+SSDStorageConsole: null
+CryopodSSD: CryogenicSleepUnitSpawner

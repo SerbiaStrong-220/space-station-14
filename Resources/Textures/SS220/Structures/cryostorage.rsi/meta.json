@@ -8,14 +8,11 @@
   },
   "states": [
     {
-      "name": "icon"
-    },
-    {
-      "name": "cryopodSSD-open",
+      "name": "sleeper_0",
       "directions": 4
     },
     {
-      "name": "cryopodSSD-closed",
+      "name": "sleeper_1",
       "directions": 4
     }
   ]
