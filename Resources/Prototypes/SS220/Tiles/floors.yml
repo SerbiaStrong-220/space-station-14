@@ -821,7 +821,7 @@
 
 - type: tile
   id: FloorTileMud
-  name: mud
+  name: tiles-mud
   sprite: /Textures/SS220/Tiles/mud.png
   baseTurf: FloorDirt
   isSubfloor: false
