@@ -403,6 +403,7 @@ DoorRemoteFirefight: null
 # 2024-06-03
 AirlockServiceCaptainLocked: AirlockCaptainLocked
 
+# 2024-07-20 SS220 Cryo Migration
 BaseSSDConsole: null
 SSDStorageConsole: null
 CryopodSSD: CryogenicSleepUnitSpawner
