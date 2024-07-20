@@ -4,6 +4,6 @@
   id: SS220MapPool
   maps:
   - Frankenstein
-  - Nox
+# - Nox # Removed until rework
   - Axioma
   - Eclipse
