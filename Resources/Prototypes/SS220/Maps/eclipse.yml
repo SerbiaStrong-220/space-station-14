@@ -35,11 +35,13 @@
             SecurityOfficer: [ 6, 6 ]
             SecurityCadet: [ 3, 3 ]
             Brigmedic: [ 1, 1 ]
+            SeniorOfficer: [ 1, 1 ]
             #Engineering
             ChiefEngineer: [ 1, 1 ]
             StationEngineer: [ 8, 8 ]
             AtmosphericTechnician: [ 3, 3 ]
             TechnicalAssistant: [ 3, 3 ]
+            SeniorEngineer: [ 1, 1 ]
             #Cargo
             Quartermaster: [ 1, 1 ]
             CargoTechnician: [ 6, 6 ]
@@ -51,11 +53,13 @@
             Psychologist: [ 1, 1 ]
             MedicalIntern: [ 5, 5 ]
             Paramedic: [ 1, 1 ]
+            SeniorPhysician: [ 1, 1 ]
             #Science
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 3, 3 ]
             Borg: [ 2, 2 ]
+            SeniorResearcher: [ 1, 1 ]
             #Service
             Bartender: [ 2, 2 ]
             Botanist: [ 3, 3 ]
@@ -70,6 +74,7 @@
             ServiceWorker: [ 2, 2 ]
             Lawyer: [ 2, 2 ]
             Zookeeper: [ 1, 1 ]
+            SeniorService: [ 1, 1 ]
 
 - type: entity
   id: EclipseNanotrasenStation
