@@ -422,7 +422,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             _container.Insert(args.User, container);
 
         if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
-            contained.GracePeriodEndTime = TimeSpan.FromSeconds(1f);
+            contained.GracePeriodEndTime = TimeSpan.Zero;
 
         var portalEntity = GetEntity(args.PortalId);
 
