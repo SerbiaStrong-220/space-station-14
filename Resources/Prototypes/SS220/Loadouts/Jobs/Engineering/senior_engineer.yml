@@ -27,14 +27,3 @@
   id: SeniorsEngineerJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtSeniorEngineer
-    
-# Mask
-- type: loadout
-  id: SeniorEngineerFace
-  equipment: SeniorEngineerFace
-
-- type: startingGear
-  id: SeniorEngineerFace
-  equipment:
-    mask: ClothingMaskGasAtmos
-    

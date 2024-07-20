@@ -36,8 +36,7 @@
   groups:
   - HatSeniorService
   - SeniorServiceJumpsuit
-  - SeniorServiceBackpack
-  - SeniorServiceMask
+  - CommonBackpack
   - Glasses
   - Trinkets
   
@@ -46,8 +45,9 @@
   groups:
   - HatSeniorEngineer
   - SeniorsEngineerJumpsuit
-  - SeniorEngineersBackpack
-  - SeniorEngineerFace
+  - StationEngineerBackpack
+  - SeniorsEngineerOuterClothing
+  - StationEngineerShoes
   - Trinkets
   
 - type: roleLoadout
@@ -55,27 +55,32 @@
   groups:
   - HatSeniorMedical
   - SeniorMedicalJumpsuit
+  - MedicalGloves
   - MedicalsBackpack
   - MedicalsMask
+  - SeniorMedicalOuterClothing
   - SeniorShoes
-  - SeniorMedicalLabCoat
+  - Glasses
   - Trinkets
 
 - type: roleLoadout
   id: JobSeniorResearcher
   groups:
-  - HatSeniorRND
-  - SeniorRNDJumpsuit
+  - HatSeniorSciensist
+  - ScientistNeck
+  - SeniorSciensistJumpsuit
   - ScientistBackpack
-  - ScientistShoes
+  - SeniorSciensistOuterClothing
   - ScientistGloves
-  - SeniorRNDLabCoat
+  - ScientistShoes
+  - Glasses
   - Trinkets
   
 - type: roleLoadout
   id: JobSeniorOfficer
   groups:
   - SecurityHead
+  - SecurityNeck  #holster loadout
   - SeniorSecJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing

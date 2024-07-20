@@ -130,37 +130,22 @@
 #senior service
 - type: loadoutGroup
   id: HatSeniorService
-  name: loadout-group-bartender-head
+  name: loadout-group-senior-service-head
   minLimit: 0
   loadouts:
   - HatSeniorService
 
 - type: loadoutGroup
   id: SeniorServiceJumpsuit
-  name: loadout-group-bartender-jumpsuit
+  name: loadout-group-senior-service-jumpsuit
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
   
-- type: loadoutGroup
-  id: SeniorServiceBackpack
-  name: loadout-group-backpack
-  loadouts:
-  - CommonSatchel
-  - CommonBackpack
-  - CommonDuffel
-  
-- type: loadoutGroup
-  id: SeniorServiceMask
-  name: loadout-group-passenger-mask
-  minLimit: 0
-  loadouts:
-  - SeniorServiceFace
-  
 # senior engineer
 - type: loadoutGroup
   id: HatSeniorEngineer
-  name: loadout-group-station-engineer-head
+  name: loadout-group-senior-engineer-head
   loadouts:
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
@@ -169,65 +154,44 @@
   
 - type: loadoutGroup
   id: SeniorsEngineerJumpsuit
-  name: loadout-group-station-engineer-jumpsuit
+  name: loadout-group-senior-engineer-jumpsuit
   loadouts:
   - SeniorsEngineerJumpsuit
   - SeniorsEngineerJumpskirt
-  
+
 - type: loadoutGroup
-  id: SeniorEngineersBackpack
-  name: loadout-group-station-engineer-backpack
+  id: SeniorsEngineerOuterClothing
+  name: loadout-group-senior-engineer-outerclothing
   loadouts:
-  - StationEngineerBackpack
-  - StationEngineerSatchel
-  - StationEngineerDuffel
-  
-- type: loadoutGroup
-  id: SeniorEngineerFace
-  name: loadout-group-passenger-mask
-  minLimit: 0
-  loadouts:
-  - SeniorEngineerFace
+  - StationEngineerOuterVest
+  - StationEngineerWintercoat
+  - AtmosphericTechnicianWintercoat
   
 # Senior Medical
 
 - type: loadoutGroup
   id: HatSeniorMedical
-  name: loadout-group-medical-doctor-head
+  name: loadout-group-senior-medical-head
   minLimit: 0
   loadouts:
-  - MedicalBeret
   - HatSeniorMedical
-  - MedicalHeadMirror
-  - BlueSurgeryCap
-  - GreenSurgeryCap
-  - PurpleSurgeryCap
-  - NurseHat
+  - CMOMedicalHeadMirror
   
 - type: loadoutGroup
   id: SeniorMedicalJumpsuit
-  name: loadout-group-medical-doctor-jumpsuit
+  name: loadout-group-senior-medical-jumpsuit
   loadouts:
-  - MedicalDoctorJumpsuit
-  - MedicalDoctorJumpskirt
   - SeniorMedicalJumpsuit
   - SeniorMedicalJumpskirt
-  - MedicalBlueScrubs
-  - MedicalGreenScrubs
-  - MedicalPurpleScrubs
-  - MedicalDoctorJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
-  - MedicalDoctorJumpsuitTurtleneckAlt
-  - MedicalDoctorJumpskirtTurtleneck
-  - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   
 - type: loadoutGroup
-  id: SeniorMedicalLabCoat
-  name: loadout-group-medical-doctor-outerclothing
+  id: SeniorMedicalOuterClothing
+  name: loadout-group-senior-medical-outerclothing
   minLimit: 0
   loadouts:
-  - RegularLabCoat
-  - MedicalDoctorWintercoat
   - SeniorMedicalLabCoat
+  - MedicalDoctorWintercoat
+  - ChemistWintercoat
   
 - type: loadoutGroup
   id: MedicalsBackpack
@@ -262,37 +226,33 @@
 # Senior RND
 
 - type: loadoutGroup
-  id: HatSeniorRND
-  name: loadout-group-scientist-head
+  id: HatSeniorSciensist
+  name: loadout-group-senior-scientist-head
   minLimit: 0
   loadouts:
-  - HatSeniorRND
-  - RoboticistCap
-  - SkullBandana
+  - HatSeniorSciensist
   
 - type: loadoutGroup
-  id: SeniorRNDJumpsuit
-  name: loadout-group-scientist-jumpsuit
+  id: SeniorSciensistJumpsuit
+  name: loadout-group-senior-scientist-jumpsuit
   loadouts:
-  - SeniorRNDJumpsuit
-  - SeniorRNDJumpskirt
-  - RoboticistJumpsuit
-  - RoboticistJumpskirt
+  - SeniorSciensistJumpsuit
+  - SeniorSciensistJumpskirt
   
 - type: loadoutGroup
-  id: SeniorRNDLabCoat
-  name: loadout-group-scientist-outerclothing
+  id: SeniorSciensistOuterClothing
+  name: loadout-group-senior-scientist-outerclothing
   minLimit: 0
   loadouts:
-  - SeniorRNDLabCoat
-  - RoboticistLabCoat
+  - SeniorSciensistLabCoat
+  - ScienceWintercoat
   - RoboticistWintercoat
   
 # Senior Security
 
 - type: loadoutGroup
   id: SeniorSecJumpsuit
-  name: loadout-group-security-jumpsuit
+  name: loadout-group-senior-officer-jumpsuit
   loadouts:
   - SeniorSecJumpsuit
   - SeniorSecJumpskirt

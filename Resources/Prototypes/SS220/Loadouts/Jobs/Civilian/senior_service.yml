@@ -27,16 +27,3 @@
   id: SeniorJumpskirtService
   equipment:
     jumpsuit: ClothingUniformJumpskirtSeniorService
-    
-# Mask
-- type: loadout
-  id: SeniorServiceFace
-  equipment: GasMask
-
-- type: startingGear
-  id: SeniorServiceFace
-  equipment:
-    mask: ClothingMaskGas
-    
-
-    
