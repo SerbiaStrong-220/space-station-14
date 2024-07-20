@@ -190,6 +190,8 @@
   minLimit: 0
   loadouts:
   - BartenderHead
+  - BartenderHeadWhite  #SS220-BartenderResprited-Begin
+  - BartenderHeadRed #SS220-BartenderResprited-End
   - BartenderBowler
 
 - type: loadoutGroup
@@ -197,8 +199,14 @@
   name: loadout-group-bartender-jumpsuit
   loadouts:
   - BartenderJumpsuit
-  - BartenderJumpskirt
   - BartenderJumpsuitPurple
+  - BartenderJumpsuitRed #SS220-BartenderResprited-Begin
+  - BartenderJumpsuitGreen
+  - BartenderJumpsuitNanotrasen
+  - BartenderJumpskirt
+  - BartenderJumpskirtRed
+  - BartenderJumpskirtGreen
+  - BartenderJumpskirtNanotrasen #SS220-BartenderResprited-End
 
 - type: loadoutGroup
   id: BartenderOuterClothing
@@ -322,6 +330,7 @@
   - ChaplainNunRobe
   - ChaplainBlackHoodie
   - ChaplainHoodie
+  - HoodieChaplainWhite #SS220-Clothes
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -508,6 +517,7 @@
   - QuartermasterTurtleneck
   - QuartermasterTurtleneckSkirt
   - QuartermasterFormalSuit
+  - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
 
 - type: loadoutGroup
   id: QuartermasterNeck
@@ -570,17 +580,7 @@
   loadouts:
   - BlackShoes
   - CargoWinterBoots
-#SS220-MoreTurtleneck-Begin
-- type: loadoutGroup
-  id: SalvageSpecialistJumpsuit
-  name: loadout-group-salvage-specialist-jumpsuit
-  loadouts:
-  - UniformJumpsuitSalvageSpecialist
-  - SalvageSpecialistJumpsuitTurtleneck
-  - SalvageSpecialistJumpsuitTurtleneckAlt
-  - SalvageSpecialistJumpskirtTurtleneck
-  - SalvageSpecialistJumpskirtTurtleneckAlt
-#SS220-MoreTurtleneck-End
+
 - type: loadoutGroup
   id: SalvageSpecialistBackpack
   name: loadout-group-salvage-specialist-backpack
@@ -639,6 +639,16 @@
   - DarkChiefEngineerCloak
   - DarkChiefEngineerMantle
 #ss220-loadout-chief-engineer-end
+
+#ss220-loadout-ce-backpack-begin
+- type: loadoutGroup
+  id: ChiefEngineerBack
+  name: loadout-group-chief-engineer-backpack
+  loadouts:
+    - ChiefEngineerBackpack
+    - ChiefEngineerSatchel
+    - ChiefEngineerDuffel
+#ss220-loadout-ce-backpack-end
 
 - type: loadoutGroup
   id: ChiefEngineerOuterClothing
@@ -902,6 +912,7 @@
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
+  - SecurityHolster #SS220-HoS-Holster
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -941,6 +952,15 @@
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
+
+#SS220 holster loadout begin
+- type: loadoutGroup
+  id: SecurityNeck
+  name: loadout-group-security-neck
+  minLimit: 0
+  loadouts:
+  - SecurityHolster
+#SS220 holster loadout end
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1001,12 +1021,14 @@
   - DetectiveFedora
   - DetectiveFedoraGrey
 
-- type: loadoutGroup
-  id: DetectiveNeck
-  name: loadout-group-detective-neck
-  minLimit: 0
-  loadouts:
-  - DetectiveTie
+#SS220 holster to neck begin
+#- type: loadoutGroup
+#  id: DetectiveNeck
+#  name: loadout-group-detective-neck
+#  minLimit: 0
+#  loadouts:
+#  - DetectiveTie
+#SS220 holster to neck end
 
 - type: loadoutGroup
   id: DetectiveJumpsuit
@@ -1205,6 +1227,7 @@
   - ParamedicJumpskirt
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - ParamedicFeldsher #SS220-ParamedFashion
 
 - type: loadoutGroup
   id: ParamedicOuterClothing
@@ -1221,54 +1244,6 @@
   - BlueShoes
   - MedicalWinterBoots
 
-#SS220-brigmedic-loadout-begin
-- type: loadoutGroup
-  id: BrigmedicHead
-  name: loadout-group-brigmedic-head
-  minLimit: 0
-  loadouts:
-  - BrigmedicHead
-
-- type: loadoutGroup
-  id: BrigmedicMask
-  name: loadout-group-brigmedic-mask
-  minLimit: 0
-  loadouts:
-  - SterileMask
-  - BrigmedicMask
-
-- type: loadoutGroup
-  id: BrigmedicJumpsuit
-  name: loadout-group-brigmedic-jumpsuit
-  loadouts:
-  - BrigmedicJumpsuit
-  - BrigmedicJumpskirt
-
-- type: loadoutGroup
-  id: BrigmedicOuterClothing
-  name: loadout-group-brigmedic-outerclothing
-  minLimit: 0
-  loadouts:
-  - BrigmedicWindAMG
-  - BrigmedicVestSecurity
-
-- type: loadoutGroup
-  id: BrigmedicBackpack
-  name: loadout-group-brigmedic-backpack
-  loadouts:
-  - BrigmedicBackpack
-  - BrigmedicSatchel
-  - BrigmedicDuffel
-
-- type: loadoutGroup
-  id: BrigmedicShoes
-  name: loadout-group-brigmedic-shoes
-  loadouts:
-  - RedShoes
-  - BlueShoes
-  - MedicalWinterBoots
-#SS220-brigmedic-loadout-end
-
 # Wildcards
 - type: loadoutGroup
   id: ReporterJumpsuit
@@ -1276,6 +1251,7 @@
   loadouts:
   - ReporterJumpsuit
   - JournalistJumpsuit
+  - JumpsuitJournalistRed #SS220-Clothes
 
 - type: loadoutGroup
   id: BoxerJumpsuit

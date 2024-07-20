@@ -88,6 +88,7 @@
     ExpensiveLighterNanotrasenStealObjective: 0.5 #SS220 Zippo-Steal-Begin
     ExpensiveLighterShieldStealObjective: 0.5
     ExpensiveLighterSyndicateStealObjective: 0.5 #SS220 Zippo-Steal-End
+    WristWatchGoldStealObjective: 1 # SS2250 Wrist Watch
 
 - type: weightedRandom
   id: ThiefObjectiveGroupStructure

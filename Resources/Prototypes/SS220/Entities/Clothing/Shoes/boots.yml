@@ -1,0 +1,9 @@
+- type: entity
+  parent: ClothingShoesBaseWinterBoots
+  id: ClothingShoesBootsWinterSecMed
+  name: зимние ботинки бригмедика
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi

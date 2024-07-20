@@ -23,6 +23,7 @@
   - Clown
   - Detective
   - HeadOfPersonnel
+  - SeniorService #ss220-SEniorService
   - Janitor
   - Lawyer
   - Librarian
@@ -61,6 +62,7 @@
   roles:
   - AtmosphericTechnician
   - ChiefEngineer
+  - SeniorEngineer #ss220
   - StationEngineer
   - TechnicalAssistant
 
@@ -72,6 +74,7 @@
   roles:
   - Chemist
   - ChiefMedicalOfficer
+  - SeniorPhysician #ss220
   - MedicalDoctor
   - MedicalIntern
   - Psychologist
@@ -86,6 +89,7 @@
   weight: 20
   roles:
   - HeadOfSecurity
+  - SeniorOfficer #ss220
   - SecurityCadet
   - SecurityOfficer
   - Warden
@@ -98,6 +102,7 @@
   color: "#D381C9"
   roles:
   - ResearchDirector
+  - SeniorResearcher #ss220
   - Scientist
   - ResearchAssistant
 

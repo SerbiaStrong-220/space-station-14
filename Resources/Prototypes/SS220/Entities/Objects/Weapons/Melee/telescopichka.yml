@@ -27,8 +27,11 @@
   - type: StaminaDamageOnHit
     damage: 0
   - type: MeleeWeapon
-    soundHit: !type:SoundCollectionSpecifier
-      collection: BatonHit
+    wideAnimationRotation: -135
+    angle: 60
+    animation: WeaponArcSlash
+    soundHit:
+      path: /Audio/Weapons/egloves.ogg
     damage:
       types:
         Blunt: 0

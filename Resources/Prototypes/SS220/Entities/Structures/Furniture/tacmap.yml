@@ -1,16 +1,17 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+#Абстрактный ублюдок по запросу декслера
 - type: entity
-  id: FrankensteinTacmap
-  name: huge tactical map
+  id: TacmapBase
+  name: tactic map
+  abstract: true
+  noSpawn: true
   placement:
     mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap.rsi
     drawdepth: SmallObjects
-    layers:
-      - state: map
   - type: Transform
   - type: InteractionOutline
   - type: Clickable
@@ -33,6 +34,16 @@
       fix1:
         shape:
           !type:PhysShapeAabb
+
+#Сами карточки
+- type: entity
+  id: FrankensteinTacmap
+  parent: TacmapBase
+  name: huge tactical map
+  components:
+  - type: Sprite
+    layers:
+      - state: map
   - type: TabletopGame
     boardName: tabletop-frankenstein-tacmap
     size: 678,591
@@ -40,6 +51,60 @@
     setup:
       !type:TabletopTacmapSetup
       boardPrototype: FrankensteinTabletop
+
+- type: entity
+  id: NoxTacmap
+  name: huge tactical map
+  parent: TacmapBase
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      layers:
+      - state: map_nox
+    - type: TabletopGame
+      boardName: tabletop-nox-tacmap
+      size: 678,591
+      windowSize: 855,770
+      setup:
+        !type:TabletopTacmapSetup
+        boardPrototype: NoxTabletop
+
+- type: entity
+  id: AxiomaTacmap
+  name: huge tactical map
+  parent: TacmapBase
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      layers:
+      - state: map_axioma
+    - type: TabletopGame
+      boardName: tabletop-axioma-tacmap
+      size: 678,591
+      windowSize: 855,770
+      setup:
+        !type:TabletopTacmapSetup
+        boardPrototype: AxiomaTabletop
+
+- type: entity
+  id: EclipseTacmap
+  name: huge tactical map
+  parent: TacmapBase
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      layers:
+      - state: map_eclipse
+    - type: TabletopGame
+      boardName: tabletop-eclipse-tacmap
+      size: 678,591
+      windowSize: 855,770
+      setup:
+        !type:TabletopTacmapSetup
+        boardPrototype: EclipseTabletop
 
 # Background entity
 - type: entity
@@ -51,6 +116,42 @@
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
     state: tabletop
+    noRot: false
+    drawdepth: FloorTiles
+
+- type: entity
+  parent: BaseBoardTabletop
+  id: AxiomaTabletop
+  name: axioma map
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
+    state: tabletop_axioma
+    noRot: false
+    drawdepth: FloorTiles
+
+- type: entity
+  parent: BaseBoardTabletop
+  id: NoxTabletop
+  name: nox map
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
+    state: tabletop_nox
+    noRot: false
+    drawdepth: FloorTiles
+
+- type: entity
+  parent: BaseBoardTabletop
+  id: EclipseTabletop
+  name: eclipse map
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
+    state: tabletop_eclipse
     noRot: false
     drawdepth: FloorTiles
 
@@ -190,7 +291,7 @@
   components:
   - type: Sprite
     state: flag_c
-    
+
 - type: entity
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagDTabletop

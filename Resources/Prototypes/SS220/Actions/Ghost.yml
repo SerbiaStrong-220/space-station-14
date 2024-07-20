@@ -5,11 +5,11 @@
   noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/respawn.png
+    icon: SS220/Interface/Actions/respawn.png
     checkCanInteract: false
     event: !type:RespawnActionEvent
     useDelay: 1200
-    
+
 - type: entity
   id: ActionToggleAGhostBodyVisuals
   name: Скрыть тело

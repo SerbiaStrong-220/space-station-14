@@ -2,12 +2,14 @@
 using System.Numerics;
 using Content.Server.Actions;
 using Content.Server.AlertLevel;
+using Content.Server.Buckle.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
 using Content.Server.Light.Components;
 using Content.Server.Light.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Shared.Alert;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
@@ -36,6 +38,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly BuckleSystem _buckle = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaper");
 
@@ -88,6 +91,11 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
                 if (!_container.CanInsert(target, container))
                     return;
+
+                if (_buckle.IsBuckled(args.Target.Value))
+                {
+                    _buckle.TryUnbuckle(args.Target.Value, args.Target.Value, true);
+                }
 
                 // spawn gore
                 Spawn(comp.EntityToSpawnAfterConsuming, Transform(target).Coordinates);

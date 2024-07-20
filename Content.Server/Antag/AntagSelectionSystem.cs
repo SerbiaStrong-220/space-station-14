@@ -471,12 +471,21 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         args.Minds = ent.Comp.SelectedMinds;
 
         //SS22-mindslave-begin
-        //such a hack, and I'm lazy to do a shit about this
-        if (_mindSlave.EnslavedMinds.Count > 0)
+        //such a hack, and I'm lazy to do a shit about this <- yeah, yeah (c) bugfixer
+        foreach (var slave in _mindSlave.EnslavedMinds)
         {
-            foreach (var slave in _mindSlave.EnslavedMinds)
-                args.Minds.Add((slave.Key, Name(slave.Key)));
+            if (HasComp<MetaDataComponent>(slave.Key)) // we have deleted minds in EnslavedMinds because we clear them only if we have traitors
+                if (Name(slave.Key) != null)
+                {
+                    int firstNameSymbol = Name(slave.Key).IndexOf('(') + 1;
+                    int lastNameSymbol = Name(slave.Key).LastIndexOf(')');
+                    var correctSlaveName = Name(slave.Key);
+                    if (firstNameSymbol != -1 || lastNameSymbol != -1)
+                        correctSlaveName = Name(slave.Key)[firstNameSymbol..lastNameSymbol];
+                    args.Minds.Add((slave.Key, correctSlaveName));
+                }
         }
+        _mindSlave.EnslavedMinds.Clear(); // Problem is we dont clear slaved minds on new round start.
         //SS22-mindslave-end
 
         args.AgentName = Loc.GetString(name);

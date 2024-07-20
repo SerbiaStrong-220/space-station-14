@@ -49,6 +49,11 @@
 - files: ["core.yml"]
   authors: Ubaser
 
+- files: ["oasis.yml"]
+  authors: CptJeanLuc
+
+# ss220-maps
+
 - files: ["ss220-box.yml"]
   authors: ACJM, Emisse, TheArturZh, ZoNeSRuS
 
@@ -64,5 +69,5 @@
 - files: ["ss220-centcomm.yml"]
   authors: Kirus59, Vnoeg, Bomjojuk, NightmareStalker, AliceValestray, UrPrice, VictorBoum, Glek3197
 
-- files: ["oasis.yml"]
-  authors: CptJeanLuc
+- files: ["eclipse.yml"]
+  authors: Vnoeg, NightmareStalker, AliceValestray, UrPrice, VictorBoum, RtmFool, Ivan_comi

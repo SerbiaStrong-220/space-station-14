@@ -117,6 +117,7 @@
     runningState: building
     staticRecipes:
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
+      - ClothingWristWatch #SS220 Wrist Watch
       - Wirecutter
       - Igniter
       - Signaller

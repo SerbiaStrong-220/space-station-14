@@ -2110,19 +2110,19 @@ entities:
       rot: 3.141592653589793 rad
       pos: 6.5,3.5
       parent: 1
-- proto: chem_master
-  entities:
-  - uid: 292
-    components:
-    - type: Transform
-      pos: 1.5,-1.5
-      parent: 1
 - proto: ChemDispenser
   entities:
   - uid: 293
     components:
     - type: Transform
       pos: -0.5,-1.5
+      parent: 1
+- proto: ChemMaster
+  entities:
+  - uid: 292
+    components:
+    - type: Transform
+      pos: 1.5,-1.5
       parent: 1
 - proto: CloningPod
   entities:
@@ -2239,16 +2239,15 @@ entities:
   - uid: 476
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,7.5
+      rot: -1.5707963267948966 rad
+      pos: 2.5,7.5
       parent: 1
     - type: DeviceLinkSource
-      range: 5
       linkedPorts:
-        539:
-        - MedicalScannerSender: MedicalScannerReceiver
         294:
         - CloningPodSender: CloningPodReceiver
+        539:
+        - MedicalScannerSender: MedicalScannerReceiver
 - proto: ComputerRadar
   entities:
   - uid: 306
@@ -3793,65 +3792,65 @@ entities:
       parent: 1
 - proto: MaterialBiomass
   entities:
+  - uid: 638
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.3821563,7.769344
+      parent: 1
   - uid: 761
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.640625,9.702351
+      rot: -1.5707963267948966 rad
+      pos: -1.3127123,7.7554555
       parent: 1
   - uid: 762
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.671875,9.702351
+      rot: -1.5707963267948966 rad
+      pos: -1.2432683,7.7137885
       parent: 1
   - uid: 763
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.671875,9.702351
+      rot: -1.5707963267948966 rad
+      pos: -1.2432683,7.6026773
       parent: 1
   - uid: 766
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.734375,9.717976
+      rot: -1.5707963267948966 rad
+      pos: -1.3266016,7.6026773
       parent: 1
   - uid: 767
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.71875,9.733601
+      rot: -1.5707963267948966 rad
+      pos: -1.3682683,7.6026773
       parent: 1
   - uid: 769
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.765625,9.686726
+      rot: -1.5707963267948966 rad
+      pos: -1.3821563,7.547122
       parent: 1
   - uid: 770
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.765625,9.749226
+      rot: -1.5707963267948966 rad
+      pos: -1.3543789,7.5054555
       parent: 1
   - uid: 771
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.71875,9.702351
+      rot: -1.5707963267948966 rad
+      pos: -1.2849349,7.4776773
       parent: 1
   - uid: 773
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.78125,9.686726
-      parent: 1
-  - uid: 774
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.765625,9.717976
+      rot: -1.5707963267948966 rad
+      pos: -1.2154896,7.449899
       parent: 1
 - proto: MedicalBed
   entities:
@@ -3941,7 +3940,7 @@ entities:
   - uid: 542
     components:
     - type: Transform
-      pos: 2.303346,9.51523
+      pos: -1.7293789,7.561011
       parent: 1
 - proto: NitrogenCanister
   entities:
@@ -4037,6 +4036,13 @@ entities:
     components:
     - type: Transform
       pos: -3.5,13.5
+      parent: 1
+- proto: PottedPlantRandom
+  entities:
+  - uid: 375
+    components:
+    - type: Transform
+      pos: 2.5,9.5
       parent: 1
 - proto: PowerCellRecharger
   entities:
@@ -4506,6 +4512,12 @@ entities:
       parent: 1
 - proto: TableReinforced
   entities:
+  - uid: 9
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,7.5
+      parent: 1
   - uid: 635
     components:
     - type: Transform
@@ -4521,12 +4533,6 @@ entities:
     components:
     - type: Transform
       pos: 1.5,-3.5
-      parent: 1
-  - uid: 638
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,9.5
       parent: 1
 - proto: Thruster
   entities:

@@ -9,10 +9,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: MagazinePistolSubMachineGun
+    - id: BlasterPowerCell
       amount: 2
     - id: CombatMedipen
     - id: DnaScramblerImplanter
+    - id: ExGrenade
   - type: ExplosionResistance
     damageCoefficient: 0.0
 
@@ -44,7 +45,7 @@
       - id: Lighter
       - id: FlashlightSeclite
       - id: PowerCellHyper
-      - id: WeaponSubMachineGunDrozd
+      - id: WeaponBlaster
       - id: MedicatedSuture
       - id: WeaponPulsePistol
       - id: Stimpack

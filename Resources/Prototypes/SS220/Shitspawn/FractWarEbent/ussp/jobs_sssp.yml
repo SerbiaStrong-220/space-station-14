@@ -24,6 +24,7 @@
     - id: ClothingNeckSSSPMedal
       amount: 6
     - id: EnergyAxe
+    - id: JobIconChangerUSSP
 
 - type: startingGear
   id: EbentUSSPLeaderGear
@@ -62,6 +63,9 @@
     - type: EventRole
       roleGroupKey: USSPEbent
       statusIcon: USSPMarshal
+    - type: NpcFactionMember
+      factions:
+      - EbentUssp
 
 - type: job
   id: USSPLeader
@@ -71,7 +75,7 @@
   playTimeTracker: USSPLeader
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -105,6 +109,7 @@
     - id: RCD
     - id: RCDAmmo
       amount: 3
+    - id: JobIconChangerUSSP
 
 
 - type: startingGear
@@ -145,6 +150,9 @@
     - type: EventRole
       roleGroupKey: USSPEbent
       statusIcon: USSPEngineerOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentUssp
 
 - type: job
   id: USSPEngineer
@@ -154,7 +162,7 @@
   playTimeTracker: USSPEngineer
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -229,6 +237,9 @@
     - type: EventRole
       roleGroupKey: USSPEbent
       statusIcon: USSPMedic
+    - type: NpcFactionMember
+      factions:
+      - EbentUssp
 
 - type: job
   id: USSPCorpsman
@@ -238,7 +249,7 @@
   playTimeTracker: USSPCorpsman
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -271,6 +282,7 @@
     - id: ClothingUniformJumpsuitUssp
     - id: ClothingOuterCoatUssp
     - id: ClothingEyesHudMedSec
+    - id: JobIconChangerUSSP
 
 - type: startingGear
   id: EbentUSSPCMOGear
@@ -309,6 +321,9 @@
     - type: EventRole
       roleGroupKey: USSPEbent
       statusIcon: USSPMedicalOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentUssp
 
 - type: job
   id: USSPCMO
@@ -318,7 +333,7 @@
   playTimeTracker: USSPCMO
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker
@@ -387,6 +402,9 @@
     - type: EventRole
       roleGroupKey: USSPEbent
       statusIcon: USSPCombatant
+    - type: NpcFactionMember
+      factions:
+      - EbentUssp
 
 - type: job
   id: USSPFighter
@@ -396,7 +414,7 @@
   playTimeTracker: USSPFighter
   setPreference: false
   canBeAntag: false
-  accessGroups: []
+  accessGroups: [ UsspAllAccess ]
   access: []
 
 - type: playTimeTracker

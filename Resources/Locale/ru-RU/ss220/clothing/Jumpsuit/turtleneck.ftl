@@ -8,3 +8,7 @@ ent-ClothingUniformJumpsuitBlueShieldTurtle = водолазка офицера 
     .desc = Стильная водолазка, которая поможет офицеру "Синий Щит" быть готовым к любой экстремальной ситуации. Высококачественные материалы и слой брони делают ее незаменимой на передовой.
 ent-ClothingUniformJumpsuitWardenTurtleneck = водолазка смотрителя
     .desc = Специальная водолазка для борьбы с беспорядками.
+ent-ClothingUniformJumpsuitSalvageSpecialistTurtleneck = водолазка утилизатора
+    .desc = Покажите, что вы лучше чёртовых дварфов!
+ent-ClothingUniformJumpsuitBrigmedicTurtleneck = водолазка бригмедика
+    .desc = Водолазка бригмедика.

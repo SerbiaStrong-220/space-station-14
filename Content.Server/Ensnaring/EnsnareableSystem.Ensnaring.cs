@@ -11,6 +11,7 @@ using Content.Shared.Ensnaring.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Throwing;
+using Content.Shared.Verbs;
 
 namespace Content.Server.Ensnaring;
 
@@ -28,7 +29,38 @@ public sealed partial class EnsnareableSystem
         SubscribeLocalEvent<EnsnaringComponent, StepTriggeredOffEvent>(OnStepTrigger);
         SubscribeLocalEvent<EnsnaringComponent, ThrowDoHitEvent>(OnThrowHit);
         SubscribeLocalEvent<EnsnaringComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);
+        SubscribeLocalEvent<EnsnareableComponent, GetVerbsEvent<Verb>>(GetVerb); //ss220 Ensnareable
     }
+
+    //ss220 Ensnareable begin
+    private void GetVerb(Entity<EnsnareableComponent> ent, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess || args.Hands == null)
+            return;
+
+        if (!ent.Comp.IsEnsnared)
+            return;
+
+        var target = args.Target;
+        var user = args.User;
+
+        Verb verb = new Verb()
+        {
+            Text = Loc.GetString("ensnare-component-try-free-verb"),
+            Act = () =>
+            {
+                foreach (var entity in ent.Comp.Container.ContainedEntities)
+                {
+                    if (!TryComp<EnsnaringComponent>(entity, out var ensnaring))
+                        continue;
+
+                    TryFree(target, user, entity, ensnaring);
+                }
+            },
+        };
+        args.Verbs.Add(verb);
+    }
+    //ss220 Ensnareable end
 
     private void OnAttemptPacifiedThrow(Entity<EnsnaringComponent> ent, ref AttemptPacifiedThrowEvent args)
     {

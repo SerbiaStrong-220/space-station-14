@@ -236,11 +236,12 @@
   components:
   - type: StorageFill
     contents:
-    - id: MagazineLightRifle
+    - id: MagazinePistolSubMachineGunUssp_PPSh
       amount: 2
     - id: CombatMedipen
     - id: Stimpack
     - id: DnaScramblerImplanter
+    - id: ExGrenade
 
 - type: entity
   name: рюкзак СССП
@@ -256,7 +257,7 @@
       - id: Lighter
       - id: FlashlightSecliteUssp
       - id: PowerCellHyper
-      - id: WeaponRifleAk
+      - id: WeaponSubMachineGunUssp_PPSh
       - id: EnergyHammer
       - id: EnergySickle
 

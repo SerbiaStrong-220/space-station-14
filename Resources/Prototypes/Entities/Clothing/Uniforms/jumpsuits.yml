@@ -870,9 +870,9 @@
   description: Might as well relax with a job as easy as yours.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/atmos_casual.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmos_casual.rsi #SS220-AtmosCasualResprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/atmos_casual.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmos_casual.rsi #SS220-AtmosCasualResprite
 
 - type: entity
   parent: ClothingUniformBase
