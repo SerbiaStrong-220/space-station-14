@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/tgstation/tgstation/blob/726dc54d7f2bc99be1e0fe49d1b705fa71cc18b1/icons/obj/weapons/guns/projectiles.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "impact_laser_red",
+        "delays": [
+            [
+                0.05,
+                0.05,
+                0.05,
+                0.05
+            ]
+        ]
+    },
+    {
+      "name": "redlaser"
+    }
+  ]
+}

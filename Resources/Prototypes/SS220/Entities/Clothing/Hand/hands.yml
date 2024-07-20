@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: ClothingHandsBase
+  parent: ClothingHandsGlovesCaptain
   id: ClothingHandsWhiteGlovesCaptain
   name: белые перчатки капитана
   description: Дорогие перчатки ветерана флотской службы NT.
@@ -10,10 +10,31 @@
     sprite: SS220/Clothing/Hands/whitecapgloves.rsi
   - type: Clothing
     sprite: SS220/Clothing/Hands/whitecapgloves.rsi
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesCentcom
+  name: centcom gloves
+  description: A pair of high-quality thick centcom gloves decorated with gold embroidery.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/centcom_officer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/centcom_officer.rsi
   - type: GloveHeatResistance
     heatResistance: 1400
   - type: Insulated
-  - type: Fiber
-    fiberMaterial: fibers-durathread
-    fiberColor: fibers-regal-blue
-  - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesNanotrasenDiplomat
+  name: nanotrasen diplomat gloves
+  description: A pair of high-quality white thick gloves decorated with gold embroidery, which are issued to a Nanotrasen diplomat.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
+  - type: GloveHeatResistance
+    heatResistance: 1400
+  - type: Insulated

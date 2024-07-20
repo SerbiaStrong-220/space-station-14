@@ -36,4 +36,7 @@
     back:
     - BoxSurvivalSecurity
     - Flash
-    - MagazinePistol
+    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
+    - MagazinePistolRubber
+    - FlashlightSeclite
+    - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End

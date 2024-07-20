@@ -9,6 +9,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
@@ -49,6 +51,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
 
     public override void Initialize()
     {
@@ -358,12 +361,22 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         if (isMaterial)
         {
             _tag.AddTag(uid, "DoorBumpOpener");
+            if (HasComp<NpcFactionMemberComponent>(uid))
+            {
+                _npcFaction.ClearFactions(uid);
+                _npcFaction.AddFaction(uid, "SimpleHostile");
+            }
         }
         else
         {
             _tag.RemoveTag(uid, "DoorBumpOpener");
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
+            if (HasComp<NpcFactionMemberComponent>(uid))
+            {
+                _npcFaction.ClearFactions(uid);
+                _npcFaction.AddFaction(uid, "DarkReaperPassive");
+            }
             _appearance.SetData(uid, DarkReaperVisual.StunEffect, false);
         }
 

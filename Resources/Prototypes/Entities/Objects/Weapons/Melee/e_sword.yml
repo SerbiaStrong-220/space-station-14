@@ -331,6 +331,7 @@
     reflectProbProjectile: 0.5
     spreadProjectile: 180
 # ss220 FixESword
+    minReflectProbProjectile: .25  #SS220 ESword reflect fix
     minReflectProb: .65
   - type: UseDelay
     delay: 1
@@ -408,6 +409,7 @@
     reflectProbProjectile: 0.5
     spreadProjectile: 180
 # ss220 FixESword
+    minReflectProbProjectile: .25  #SS220 ESword reflect fix
   - type: UseDelay
     delay: 1
   - type: ToggleableLightVisuals

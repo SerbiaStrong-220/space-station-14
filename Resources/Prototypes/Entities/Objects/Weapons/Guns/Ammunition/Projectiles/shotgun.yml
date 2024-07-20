@@ -84,8 +84,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
-        Slash: 3
+        Piercing: 4 #ss220 handmade gun buff
+        Slash: 5 #ss220 handmade gun buff
 
 
 - type: entity

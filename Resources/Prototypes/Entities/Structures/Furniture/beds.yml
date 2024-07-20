@@ -20,10 +20,6 @@
         density: 190
         mask:
         - TableMask
-        # SS220 Structure colision fix begin
-        layer:
-        - TableLayer
-        # SS220 Structure colision fix end
   - type: Sprite
     sprite: Structures/Furniture/furniture.rsi
     state: bed
@@ -59,9 +55,7 @@
     anchored: true
     noRot: true
   - type: Anchorable
-    flags: 0 # SS220 NewPhysicsFix
   - type: Pullable
-  - type: Climbable # SS220 NewPhysicsFix
 
 
 - type: entity

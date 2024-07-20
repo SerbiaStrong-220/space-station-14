@@ -189,6 +189,28 @@
     - GasAnalyzer
     - trayScanner
     - AccessConfiguratorUniversal
+    # SS220-AdminComforts-Begin
+    - GeigerCounter
+    - MedicalPDA
+    - Multitool
+    - Omnitool
+    - JawsOfLife
+    - PowerDrill
+    - WelderExperimental
+    - WeaponTetherGunAdmin
+    - NetworkConfigurator
+    - RCDExperimental
+    - NodeScanner
+    - RubberStampCentcomm
+    - RubberStampApproved
+    - RubberStampSyndicate
+    - RubberStampCentcom
+    - RubberStampDenied
+    - CentCommNewPen
+    - NTbaton
+    - AnomalyScanner
+    - ForensicScanner
+    # SS220-AdminComforts-End
 
 #Gladiator with spear
 - type: startingGear

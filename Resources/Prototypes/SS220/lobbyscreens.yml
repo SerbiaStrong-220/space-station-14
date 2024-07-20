@@ -17,3 +17,7 @@
 - type: lobbyBackground
   id: SpaceFather
   background: /Textures/SS220/LobbyScreens/SpaceFather.jpeg
+
+- type: lobbyBackground
+  id: Destruction
+  background: /Textures/SS220/LobbyScreens/Destruction.png

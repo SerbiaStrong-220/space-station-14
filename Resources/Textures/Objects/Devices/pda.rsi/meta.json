@@ -39,6 +39,9 @@
       "name": "pda"
     },
     {
+      "name": "pda-admiral"
+    },
+    {
       "name": "pda-atmos"
     },
     {
@@ -212,6 +215,9 @@
     {
       "name": "pda-seniorofficer"
     },
+	{
+	  "name": "pda-seniorservice"
+	},
     {
       "name": "pda-ussp"
     },

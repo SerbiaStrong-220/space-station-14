@@ -5,7 +5,7 @@
   noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/GhostRoleSettings.png
+    icon: SS220/Interface/Actions/GhostRoleSettings.png
     event: !type:ToggleGhostRoleCastSettingsEvent
     useDelay: 1
     clientExclusive: true
@@ -19,7 +19,7 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleCast.png
+    icon: SS220/Interface/Actions/GhostRoleCast.png
     event: !type:ToggleGhostRoleCastActionEvent
     useDelay: 1
     clientExclusive: true
@@ -35,7 +35,7 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleRemove.png
+    icon: SS220/Interface/Actions/GhostRoleRemove.png
     event: !type:ToggleGhostRoleRemoveActionEvent
     useDelay: 1
     clientExclusive: true

@@ -7,6 +7,8 @@
   name: оружейный сейф рентгеновских винтовок
   suffix: Shitspawn, Ebent, FractWar
   components:
+  - type: AccessReader
+    access: [["Ussp"]]
   - type: StorageFill
     contents:
     - id: WeaponXrayCannon
@@ -14,15 +16,17 @@
 
 - type: entity
   parent: GunSafe
-  id: GunSafeShotgunBulldog
-  name: оружейный сейф бульдогов
+  id: GunSafeRifleAk
+  name: оружейный сейф АКМС
   suffix: Shitspawn, Ebent, FractWar
   components:
+  - type: AccessReader
+    access: [["Ussp"]]
   - type: StorageFill
     contents:
-    - id: WeaponShotgunBulldog
-      amount: 4
-    - id: MagazineShotgun
+    - id: WeaponRifleAk
+      amount: 8
+    - id: BoxMagazineLightRifle
       amount: 8
 
 #ERT
@@ -35,4 +39,20 @@
   - type: StorageFill
     contents:
     - id: WeaponPulseCarbine
+      amount: 8
+
+#Iron squad
+- type: entity
+  parent: GunSafe
+  id: GunSafeShotgunBulldog
+  name: оружейный сейф бульдогов
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: AccessReader
+    access: [["SyndicateAgent"]]
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunBulldog
+      amount: 4
+    - id: MagazineShotgun
       amount: 8

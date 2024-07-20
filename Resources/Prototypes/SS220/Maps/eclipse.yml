@@ -76,6 +76,19 @@
             Zookeeper: [ 1, 1 ]
             SeniorService: [ 1, 1 ]
 
+        - type: StationGoal
+          goals:
+          - Shuttle
+          - Singularity
+          - SolarPanels
+          - Artifacts
+          - Bank
+          - Zoo
+          - MiningOutpost
+          - Tesla
+          - XenobiologyRepair
+          - VirusologyAmbusol
+
 - type: entity
   id: EclipseNanotrasenStation
   parent: StandardNanotrasenStation

@@ -38,3 +38,14 @@
     modifiers:
       coefficients:
         Caustic: 0.95
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBrigmedicTurtleneck
+  name: brigmedic turtleneck
+  description: A brigmedic turtleneck.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_turtle.rsi
