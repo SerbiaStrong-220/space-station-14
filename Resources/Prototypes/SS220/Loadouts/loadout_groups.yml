@@ -146,7 +146,6 @@
   id: SeniorServiceBackpack
   name: loadout-group-backpack
   loadouts:
-  - SeniorServiceBackpack
   - CommonSatchel
   - CommonBackpack
   - CommonDuffel
