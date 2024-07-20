@@ -96,7 +96,7 @@ public abstract class SharedRatKingSystem : EntitySystem
     //ss220 rat servant fix begin
     private void OnServantDie(EntityUid uid, RatKingServantComponent component, MobStateChangedEvent args)
     {
-        if (args.NewMobState != MobState.Dead && args.OldMobState != MobState.Dead)
+        if (args.NewMobState != MobState.Dead)
             return;
 
         EnsureComp<ItemComponent>(uid);
