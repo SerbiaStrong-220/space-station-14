@@ -24,7 +24,8 @@
   - Theatre
   - Kitchen
   - Hydroponics
-  
+  - Maintenance
+
 - type: startingGear
   id: SeniorAssistantGear
   equipment:

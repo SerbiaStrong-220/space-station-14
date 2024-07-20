@@ -24,7 +24,6 @@
   - Security
   - Brig
   - Maintenance
-  - Service
   - External
   special:
   - !type:AddImplantSpecial
