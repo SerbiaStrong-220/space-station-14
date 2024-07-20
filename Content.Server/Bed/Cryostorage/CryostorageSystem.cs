@@ -118,7 +118,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         if (entity == null)
             return;
 
-        AdminLog.Add(LogType.Action, LogImpact.High,
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, // 220 cryo
             $"{ToPrettyString(attachedEntity):player} removed item {ToPrettyString(entity)} from cryostorage-contained player " +
             $"{ToPrettyString(cryoContained):player}, stored in cryostorage {ToPrettyString(ent)}");
 
@@ -136,6 +136,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
     private void OnPlayerSpawned(Entity<CryostorageContainedComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, $"{ToPrettyString(ent):player} woke up from cryosleep inside of {ToPrettyString(ent.Comp.Cryostorage)}"); // 220 cryo
         // if you spawned into cryostorage, we're not gonna round-remove you.
         ent.Comp.GracePeriodEndTime = null;
     }
@@ -228,7 +229,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         cryostorageComponent.StoredPlayers.Add(ent);
         Dirty(ent, comp);
         UpdateCryostorageUIState((cryostorageEnt.Value, cryostorageComponent));
-        AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}");
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}"); // 220 cryo
 
         if (!TryComp<StationRecordsComponent>(station, out var stationRecords))
             return;
@@ -289,7 +290,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         comp.GracePeriodEndTime = null;
         cryostorageComponent.StoredPlayers.Remove(uid);
-        AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}");
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}"); // 220 cryo
         UpdateCryostorageUIState((cryostorage, cryostorageComponent));
     }
 
@@ -419,7 +420,11 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     private void OnTeleportFinished(Entity<CryostorageComponent> ent, ref TeleportToCryoFinished args)
     {
         if (_container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container))
+        {
+            AdminLog.Add(LogType.CryoStorage, LogImpact.High,
+                $"{ToPrettyString(args.User):player} was teleported to cryostorage {ToPrettyString(ent)}");
             _container.Insert(args.User, container);
+        }
 
         if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
             contained.GracePeriodEndTime = TimeSpan.Zero;
