@@ -1,4 +1,4 @@
-﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: gameMap
   id: Axioma
@@ -76,6 +76,7 @@
             Lawyer: [ 2, 2 ]
         - type: StationGoal
           goals:
+          #Base
           - Shuttle
           - Singularity
           - SolarPanels
@@ -84,8 +85,16 @@
           - Zoo
           - MiningOutpost
           - Tesla
+          #SS220
+          - Saveplanet
+          - Expedition
+          - Guests
+          - PneumaticTubes
+          - Robotisation
+          - Homekeepers
+          - ComplexPVO
+          #Station special
           - XenobiologyRepair
-          - VirusologyAmbusol
 
 - type: entity
   id: AxiomaNanotrasenStation

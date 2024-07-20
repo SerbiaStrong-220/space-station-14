@@ -76,6 +76,7 @@
             Reporter: [ 2, 2 ]
         - type: StationGoal
           goals:
+          #Base
           - Shuttle
           - Singularity
           - SolarPanels
@@ -84,8 +85,14 @@
           - Zoo
           - MiningOutpost
           - Tesla
-          - XenobiologyRepair
-          - VirusologyAmbusol
+          #SS220
+          - Saveplanet
+          - Expedition
+          - Guests
+          - PneumaticTubes
+          - Robotisation
+          - Homekeepers
+          - ComplexPVO
 
 - type: entity
   id: FrankensteinStation
