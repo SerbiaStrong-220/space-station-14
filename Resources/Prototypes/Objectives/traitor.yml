@@ -231,18 +231,6 @@
     stealGroup: BoxFolderQmClipboard
     owner: job-name-qm
 
-#SS220 New Qm highrisk begin
-- type: entity
-  parent: BaseTraitorStealObjective
-  id: BrassKnucklesEtchedObjective
-  components:
-  - type: NotJobRequirement
-    job: Quartermaster
-  - type: StealCondition
-    stealGroup: BrassKnucklesEtchedQm
-    owner: job-name-qm
-#SS220 New Qm highrisk end
-
 ## hop
 
 - type: entity

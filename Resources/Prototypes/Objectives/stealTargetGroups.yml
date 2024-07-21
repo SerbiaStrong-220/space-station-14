@@ -49,15 +49,6 @@
     sprite: Objects/Misc/qm_clipboard.rsi
     state: qm_clipboard
 
-#SS220 New Qm highrisk begin
-- type: stealTargetGroup
-  id: BrassKnucklesEtchedQm
-  name: engraved brass knuckles
-  sprite:
-    sprite: SS220/Objects/Weapons/Melee/brass_knuckles.rsi
-    state: icon
-#SS220 New Qm highrisk end
-
 - type: stealTargetGroup
   id: FoodMeatCorgi
   name: prime-cut corgi meat
