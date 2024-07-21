@@ -316,9 +316,9 @@ namespace Content.Server.Ghost.Roles
             _ghostRoles[role.Comp.Identifier = GetNextRoleIdentifier()] = role;
             //SS220 Log-for-null-meta-excep begin
             if (MetaData(role).EntityPrototype != null)
-                Log.Info($"|error in GhostSystem| Added entity to _ghostRoles with uid - {role.Owner}, proto id: {MetaData(role).EntityPrototype}");
+                Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, proto id: {MetaData(role).EntityPrototype}");
             else
-                Log.Info($"|error in GhostSystem| Added entity to _ghostRoles with uid - {role.Owner}, with null Meta");
+                Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, with null Meta");
             //SS220 Log-for-null-meta-excep end
             UpdateAllEui();
         }
@@ -332,9 +332,9 @@ namespace Content.Server.Ghost.Roles
             _ghostRoles.Remove(comp.Identifier);
             //SS220 Log-for-null-meta-excep begin
             if (MetaData(role).EntityPrototype != null)
-                Log.Info($"|error in GhostSystem| Removed entity from _ghostRoles with uid - {role.Owner}, proto id: {MetaData(role).EntityPrototype}");
+                Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, proto id: {MetaData(role).EntityPrototype}");
             else
-                Log.Info($"|error in GhostSystem| Removed entity from _ghostRoles with uid - {role.Owner}, with null Meta");
+                Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, with null Meta");
             //SS220 Log-for-null-meta-excep end
             if (TryComp(role.Owner, out GhostRoleRaffleComponent? raffle))
             {
@@ -553,7 +553,7 @@ namespace Content.Server.Ghost.Roles
                 // SS220 Log-for-null-meta-excep begin
                 if (metaQuery.GetComponent(uid) == null)
                 {
-                    Log.Error($"|error in GhostSystem| Caught request to the Meta of {uid} but it hasnt got one");
+                    Log.Error($"|error in GhostRoleSystem| Caught request to the Meta of {uid} but it hasnt got one");
                     continue;
                 }
                 // SS220 Log-for-null-meta-excep end
