@@ -367,9 +367,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             var stationRecords = _stationRecords.GetRecordsOfType<GeneralStationRecord>(station);
             var result = stationRecords.FirstOrNull(records => records.Item2.DNA == dnaComponent.DNA);
             if (result is not null)
-            {
                 return (new(result.Value.Item1, station), result.Value.Item2);
-            }
         }
 
         return null;

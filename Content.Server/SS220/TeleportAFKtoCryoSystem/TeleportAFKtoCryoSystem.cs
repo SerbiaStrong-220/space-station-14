@@ -32,11 +32,10 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly ContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     private float _afkTeleportTocryo;
 
@@ -48,7 +47,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
         _cfg.OnValueChanged(CCVars.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
         _playerManager.PlayerStatusChanged += OnPlayerChange;
-        SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(OnTeleportFinished);
+        SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(HandleTeleportFinished);
     }
 
     private void SetAfkTeleportToCryo(float value)
@@ -68,7 +67,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         foreach (var pair in _entityEnteredSSDTimes.Where(uid => HasComp<MindContainerComponent>(uid.Key.Item1)))
         {
             if (pair.Value.Item2 && IsTeleportAfkToCryoTime(pair.Value.Item1)
-                && TeleportEntityToCryoStorageWithDelay(pair.Key.Item1))
+                && TeleportEntityToCryoStorage(pair.Key.Item1))
             {
                 _entityEnteredSSDTimes.Remove(pair.Key);
             }
@@ -117,62 +116,65 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     /// </summary>
     /// <param name="target"> Target to teleport in first matching cryopod</param>
     /// <returns> true if player successfully transferred to cryo storage, otherwise returns false</returns>
-    public bool TeleportEntityToCryoStorageWithDelay(EntityUid target)
+    public bool TeleportEntityToCryoStorage(EntityUid target)
     {
         var station = _station.GetOwningStation(target);
-
         if (station is null)
             return false;
 
-        foreach (var comp in EntityQuery<CryostorageComponent>())
+        if (TargetAlreadyInCryo(target))
+            return true;
+
+        var cryostorageComponents = EntityQueryEnumerator<CryostorageComponent>();
+        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var _))
         {
-            if (comp.StoredPlayers.Contains(target))
+            if (TryTeleportToCryo(target, cryostorageUid))
                 return true;
-        }
-
-        var cryopodSSDComponents = EntityQueryEnumerator<CryostorageComponent>();
-
-        while (cryopodSSDComponents.MoveNext(out var cryopodSSDUid, out var cryopodSSDComp))
-        {
-            // if (cryopodSSDComp.BodyContainer.ContainedEntity is null
-            if (!cryopodSSDComp.StoredPlayers.Contains(target)  // todo check
-            && _station.GetOwningStation(cryopodSSDUid) == station)
-            {
-                var portal = Spawn("CryoStoragePortal", Transform(target).Coordinates);
-
-                if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
-                {
-                    _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
-                }
-
-                var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4f), new TeleportToCryoFinished(GetNetEntity(portal)), cryopodSSDUid) // todo edit TimeSpan.FromSeconds(4)
-                {
-                    BreakOnDamage = false,
-                    BreakOnMove = false,
-                    NeedHand = false,
-                };
-
-                if (!_doAfterSystem.TryStartDoAfter(doAfterArgs))
-                    QueueDel(portal);
-
-                return true;
-            }
         }
 
         return false;
     }
 
-    private void OnTeleportFinished(Entity<CryostorageComponent> ent, ref TeleportToCryoFinished args)
+    private bool TargetAlreadyInCryo(EntityUid target)
     {
-        if (_container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container))
+        return EntityQuery<CryostorageComponent>().Any(comp => comp.StoredPlayers.Contains(target));
+    }
+
+    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid)
+    {
+        var portal = Spawn("CryoStoragePortal", Transform(target).Coordinates);
+
+        if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
+            _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
+
+        var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4f),
+            new TeleportToCryoFinished(GetNetEntity(portal)), cryopodUid)
+        {
+            BreakOnDamage = false,
+            BreakOnMove = false,
+            NeedHand = false
+        };
+
+        if (!_doAfterSystem.TryStartDoAfter(doAfterArgs))
+        {
+            QueueDel(portal);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void HandleTeleportFinished(Entity<CryostorageComponent> ent, ref TeleportToCryoFinished args)
+    {
+        if (_containerSystem.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container))
         {
             _adminLogger.Add(LogType.CryoStorage, LogImpact.High,
-                $"{ToPrettyString(args.User):player} was teleported to cryostorage {ToPrettyString(ent)}");
-            _container.Insert(args.User, container);
+                $"{ToPrettyString(args.User):player} was teleported to cryostorage {ent}");
+            _containerSystem.Insert(args.User, container);
         }
 
         if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
-            contained.GracePeriodEndTime = _timing.CurTime + TimeSpan.Zero;
+            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(5);
 
         var portalEntity = GetEntity(args.PortalId);
 
