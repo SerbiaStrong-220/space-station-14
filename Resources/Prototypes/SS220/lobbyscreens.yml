@@ -21,3 +21,7 @@
 - type: lobbyBackground
   id: Destruction
   background: /Textures/SS220/LobbyScreens/Destruction.png
+
+- type: lobbyBackground
+  id: RatKing
+  background: /Textures/SS220/LobbyScreens/RatKing.png
