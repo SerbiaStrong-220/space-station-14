@@ -18,7 +18,6 @@
       time: 468000 # 130 hrs
 
 # Head
-
 - type: loadout
   id: QuartermasterHeadWarehouseman
   equipment: QuartermasterHeadWarehouseman
@@ -29,7 +28,7 @@
 - type: startingGear
   id: QuartermasterHeadWarehouseman
   equipment:
-    jumpsuit: ClothingHeadWarehouseman
+    head: ClothingHeadWarehouseman
 
 # Jumpsuit
 - type: loadout
@@ -68,4 +67,4 @@
 - type: startingGear
   id: QuartermasterOuterCoatQMWarehouseman
   equipment:
-    jumpsuit: ClothingOuterCoatQMWarehouseman
+    outerClothing: ClothingOuterCoatQMWarehouseman
