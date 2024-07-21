@@ -3,7 +3,7 @@
 - type: entity
   name: brass knuckles
   parent: BaseItem
-  id: BrassKnuckles
+  id: BrassKnucklesEtchedQm
   description: кастет
   components:
   - type: Sprite
@@ -35,3 +35,5 @@
     damageSound: /Audio/SS220/Weapons/brassKnukles/critical-hit.ogg
   - type: StaticPrice
     price: 1000
+  - type: StealTarget
+    stealGroup: BrassKnucklesEtchedQm
