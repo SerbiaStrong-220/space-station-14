@@ -507,6 +507,7 @@
   loadouts:
   - QuartermasterHead
   - QuartermasterBeret
+  - QuartermasterHeadWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterJumpsuit
@@ -518,6 +519,7 @@
   - QuartermasterTurtleneckSkirt
   - QuartermasterFormalSuit
   - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
+  - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterNeck
@@ -533,6 +535,7 @@
   minLimit: 0
   loadouts:
   - QuartermasterWintercoat
+  - QuartermasterOuterCoatQMWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterShoes

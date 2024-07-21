@@ -101,6 +101,17 @@
         Piercing: 0.9
         Heat: 0.9
 
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatQMWarehouseman
+  name: the warehouse manager's coat
+  description: A coat that perfectly combines a mature style and a working purpose. In fact, it is your old work coat, which is still intact only thanks to the use of durotan and cigarette ash, which has already eaten into the fabric. You've never understood people putting on layers of clothes over coats.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
+
 # Engineering
 - type: entity
   parent: ClothingOuterStorageBase

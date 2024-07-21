@@ -156,7 +156,6 @@
 
 # Medical
 
-
   # Парамед
 - type: entity
   parent: ClothingUniformBase
@@ -196,6 +195,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWarehouseman
+  name: the overalls of the warehouse manager
+  description: Practical, comfortable, movement-free and, most importantly, stylish jumpsuit. You have bad memories of your former boss with him.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/qm_warehouseman.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/qm_warehouseman.rsi
 
 # Syndicate
 

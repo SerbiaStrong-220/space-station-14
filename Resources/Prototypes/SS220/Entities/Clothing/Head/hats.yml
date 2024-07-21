@@ -202,3 +202,17 @@
     sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
+
+# Карго
+
+  # Квартирмейстер
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadWarehouseman
+  name: the cap of the warehouse manager
+  description: Not the most ordinary cap of the main distributor of the station. Embroidered by personal order, you have never been concerned about the corporation's policy regarding a specific color of the uniform.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi
