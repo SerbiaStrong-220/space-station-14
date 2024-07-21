@@ -21,11 +21,10 @@
   - Engineering
   - External
   - Atmospherics
-  
+
 - type: startingGear
   id: SeniorEngineerGear
   equipment:
-    shoes: ClothingShoesBootsWork
     id: SeniorEngineerPDA
     eyes: ClothingEyesGlassesMeson
     belt: ClothingBeltUtilityEngineering
