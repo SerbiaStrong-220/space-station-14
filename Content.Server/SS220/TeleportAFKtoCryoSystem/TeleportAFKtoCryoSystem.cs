@@ -66,11 +66,8 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         base.Update(frameTime);
         foreach (var pair in _entityEnteredSSDTimes.Where(uid => HasComp<MindContainerComponent>(uid.Key.Item1)))
         {
-            if (pair.Value.Item2 && IsTeleportAfkToCryoTime(pair.Value.Item1)
-                && TeleportEntityToCryoStorage(pair.Key.Item1))
-            {
+            if (pair.Value.Item2 && IsTeleportAfkToCryoTime(pair.Value.Item1) && TeleportEntityToCryoStorage(pair.Key.Item1))
                 _entityEnteredSSDTimes.Remove(pair.Key);
-            }
         }
     }
 
@@ -82,7 +79,6 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
     private void OnPlayerChange(object? sender, SessionStatusEventArgs e)
     {
-
         switch (e.NewStatus)
         {
             case SessionStatus.Disconnected:
@@ -126,9 +122,9 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
             return true;
 
         var cryostorageComponents = EntityQueryEnumerator<CryostorageComponent>();
-        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var _))
+        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var сryostorageComp))
         {
-            if (TryTeleportToCryo(target, cryostorageUid))
+            if (TryTeleportToCryo(target, cryostorageUid, сryostorageComp.TeleportPortralID))
                 return true;
         }
 
@@ -140,9 +136,9 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         return EntityQuery<CryostorageComponent>().Any(comp => comp.StoredPlayers.Contains(target));
     }
 
-    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid)
+    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, string teleportPortralID)
     {
-        var portal = Spawn("CryoStoragePortal", Transform(target).Coordinates);
+        var portal = Spawn(teleportPortralID, Transform(target).Coordinates);
 
         if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
@@ -174,7 +170,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         }
 
         if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
-            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(5);
+            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(5f);
 
         var portalEntity = GetEntity(args.PortalId);
 

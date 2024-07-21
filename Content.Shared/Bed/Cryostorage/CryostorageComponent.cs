@@ -41,6 +41,13 @@ public sealed partial class CryostorageComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? RemoveSound = new SoundPathSpecifier("/Audio/Effects/teleport_departure.ogg");
+    // start 220 teleport to cryo
+    /// <summary>
+    /// ID of teleport portal, that will spawn on TryTeleportToCryo
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public string TeleportPortralID = "CryoStoragePortal";
+    // end 220 teleport to cryo
 }
 
 [Serializable, NetSerializable]

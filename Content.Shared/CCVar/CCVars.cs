@@ -1794,7 +1794,7 @@ namespace Content.Shared.CCVar
             CVarDef.Create("afk.time_kick", 600f, CVar.SERVERONLY);
 
         public static readonly CVarDef<float> AfkTeleportToCryo =
-            CVarDef.Create("afk.teleport_to_cryo", 30f, CVar.SERVERONLY);
+            CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
 
         /*
          * IC
