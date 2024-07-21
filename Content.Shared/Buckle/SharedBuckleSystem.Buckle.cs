@@ -460,7 +460,7 @@ public abstract partial class SharedBuckleSystem
 
             // SS220 Readd-Vehicles begin
             if (TryComp<VehicleComponent>(strapUid, out var vehicle) &&
-                vehicle.Rider != userUid)
+                vehicle.Rider != userUid && !_mobState.IsIncapacitated(buckleUid))
             {
                 //SS220-Vehicle-doafter-fix begin
                 //So here if the one to unbuckle isn't one riding the vehicle,
