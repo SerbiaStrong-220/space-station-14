@@ -314,6 +314,12 @@ namespace Content.Server.Ghost.Roles
                 return;
 
             _ghostRoles[role.Comp.Identifier = GetNextRoleIdentifier()] = role;
+            //SS220 Log-for-null-meta-excep begin
+            if (MetaData(role).EntityPrototype != null)
+                Log.Info($"|error in GhostSystem| Added entity to _ghostRoles with uid - {role.Owner}, proto id: {MetaData(role).EntityPrototype}");
+            else
+                Log.Info($"|error in GhostSystem| Added entity to _ghostRoles with uid - {role.Owner}, with null Meta");
+            //SS220 Log-for-null-meta-excep end
             UpdateAllEui();
         }
 
@@ -324,6 +330,12 @@ namespace Content.Server.Ghost.Roles
                 return;
 
             _ghostRoles.Remove(comp.Identifier);
+            //SS220 Log-for-null-meta-excep begin
+            if (MetaData(role).EntityPrototype != null)
+                Log.Info($"|error in GhostSystem| Removed entity from _ghostRoles with uid - {role.Owner}, proto id: {MetaData(role).EntityPrototype}");
+            else
+                Log.Info($"|error in GhostSystem| Removed entity from _ghostRoles with uid - {role.Owner}, with null Meta");
+            //SS220 Log-for-null-meta-excep end
             if (TryComp(role.Owner, out GhostRoleRaffleComponent? raffle))
             {
                 // if a raffle is still running, get rid of it
@@ -538,6 +550,13 @@ namespace Content.Server.Ghost.Roles
 
             foreach (var (id, (uid, role)) in _ghostRoles)
             {
+                // SS220 Log-for-null-meta-excep begin
+                if (metaQuery.GetComponent(uid) == null)
+                {
+                    Log.Error($"|error in GhostSystem| Caught request to the Meta of {uid} but it hasnt got one");
+                    continue;
+                }
+                // SS220 Log-for-null-meta-excep end
                 if (metaQuery.GetComponent(uid).EntityPaused)
                     continue;
 
