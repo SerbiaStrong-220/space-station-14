@@ -6,7 +6,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobIAA
-      time: 360000 # 100 hrs
+      time: 720000 # 200 hrs Ахуеть, да?
 
 # TrustedLawyer time
 - type: loadoutEffectGroup
@@ -16,7 +16,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobIAA
-      time: 180000 # 100 hrs
+      time: 180000 # 50 hrs
 
 # Jumpsuit
 - type: loadout
