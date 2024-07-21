@@ -65,3 +65,9 @@
     pocket1: WeaponAdvancedRevolver
 #    belt: ClothingBeltSecurityFilled #SS220-blueshield-loadouts
     gloves: ClothingHandsGlovesCombat
+# SS220-Blueshield-Storage-Fix-Begin
+  storage:
+    back:
+    - BoxSurvival
+    - Flash
+# SS220-Blueshield-Storage-Fix-End
