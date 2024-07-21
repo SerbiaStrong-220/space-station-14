@@ -106,7 +106,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
                 _popup.PopupEntity("Невозможно поглотить", uid, PopupType.MediumCaution);
             return;
         }
-        //Dark Reaper consume fix begin
+        //Dark Reaper consume fix end
 
         var doafterArgs = new DoAfterArgs(
             EntityManager,
