@@ -5,6 +5,7 @@
   startingInventory:
     #Jumpsuit
     ClothingUniformJumpsuitCentcomOfficer: 2
+    ClothingUniformJumpsuitCentcomOfficerTurtleneck: 2
     ClothingUniformJumpskirtCentcomOfficerTurtleneck: 2
     ClothingUniformCentCommOfficer: 2
     #Outerclothing
