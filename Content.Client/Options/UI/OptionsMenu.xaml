@@ -7,5 +7,6 @@
         <tabs:GraphicsTab Name="GraphicsTab" />
         <tabs:KeyRebindTab Name="KeyRebindTab" />
         <tabs:AudioTab Name="AudioTab" />
+        <tabs:NetworkTab Name="NetworkTab" /> <!-- 220 revert-network-tab -->
     </TabContainer>
 </DefaultWindow>
