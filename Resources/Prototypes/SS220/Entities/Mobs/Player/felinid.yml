@@ -50,6 +50,7 @@
     - TemporaryBlindness
     - Pacified
     - StaminaModifier
+    - Flashed
   - type: Alerts
   - type: Actions
   - type: Eye
