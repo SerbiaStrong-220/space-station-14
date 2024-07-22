@@ -1,7 +1,7 @@
 - type: job
   id: SeniorService
   name: ведущий сервисного отдела
-  description: ходите по отделам, сервиса и учите поваров,ботаников работать сообща.
+  description: job-description-senior-service
   playTimeTracker: JobSeniorService
   requirements:
     - !type:RoleTimeRequirement
