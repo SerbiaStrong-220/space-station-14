@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCentcomOfficerTurtleneck
   name: centcom turtleneck skirt
   description: A skirt version of the CentCom turtleneck, rarer and more sought after than the original.

@@ -4,7 +4,7 @@
 
   # Клоун
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtClowns
   name: юбка-комбинезон клоуна
   description: ХОНК!
@@ -39,7 +39,7 @@
 
   # Бармен
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBartenderRed
   name: red bartender's uniform
   description: A special red outfit to serve drinks.
@@ -50,7 +50,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBartenderGreen
   name: green bartender's uniform
   description: A special green outfit to serve drinks.
@@ -61,7 +61,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBartenderNanotrasen
   name: униформа заслуженного бармена NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
@@ -76,7 +76,7 @@
 
   # Парамед
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtFeldsher
   name: uniform feldsher
   description: Just don't be offended, are you a feldsher or a real doctor?
@@ -88,7 +88,7 @@
 
   # Бригмедик
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtMilitaryFeldsher
   name: uniform military feldsher
   description: This is not a red color at all..
@@ -101,7 +101,7 @@
 # Синдикат
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtSyndicateDiplomatist
   name: syndicate diplomatist uniforms
   description: The uniform of a crime syndicate diplomat, nothing unusual.
