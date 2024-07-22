@@ -42,8 +42,7 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticInteractUsing(EntityUid uid, BallisticAmmoProviderComponent component, InteractUsingEvent args)
     {
-        if (args.Handled ||
-        component.IsReloading) // 220 ammoFillFix
+        if (args.Handled)
             return;
 
         if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Used))
@@ -74,7 +73,7 @@ public abstract partial class SharedGunSystem
         {
             return;
         }
-        component.IsReloading = true; // 220 ammoFillFix
+
         args.Handled = true;
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.FillDelay, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
@@ -87,6 +86,10 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticAmmoFillDoAfter(EntityUid uid, BallisticAmmoProviderComponent component, AmmoFillDoAfterEvent args)
     {
+        // start 220 ammoFillFix
+        if (args.Handled || args.Cancelled)
+            return;
+        // end 220 ammoFillFix
         if (Deleted(args.Target) ||
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var target) ||
             target.Whitelist == null)
@@ -118,16 +121,14 @@ public abstract partial class SharedGunSystem
             RaiseLocalEvent(ammoProvider, evInsert);
         }
 
-        if (!component.IsReloading) // 220 ammoFillFix
-        {
-            List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
-            var evTakeAmmo = new TakeAmmoEvent(1, ammo, Transform(uid).Coordinates, args.User);
-            RaiseLocalEvent(uid, evTakeAmmo);
+        List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
+        var evTakeAmmo = new TakeAmmoEvent(1, ammo, Transform(uid).Coordinates, args.User);
+        RaiseLocalEvent(uid, evTakeAmmo);
 
-            foreach (var (ent, _) in ammo)
-            {
-                if (ent == null)
-                    continue;
+        foreach (var (ent, _) in ammo)
+        {
+            if (ent == null)
+                continue;
 
             if (_whitelistSystem.IsWhitelistFail(target.Whitelist, ent.Value))
             {
@@ -138,27 +139,23 @@ public abstract partial class SharedGunSystem
                     uid,
                     args.User);
 
-                    SimulateInsertAmmo(ent.Value, uid, Transform(uid).Coordinates);
-                }
-                else
-                {
-                    // play sound to be cool
-                    Audio.PlayPredicted(component.SoundInsert, uid, args.User);
-                    SimulateInsertAmmo(ent.Value, args.Target.Value, Transform(args.Target.Value).Coordinates);
-                }
-
-                if (IsClientSide(ent.Value))
-                    Del(ent.Value);
-
-                component.IsReloading = false; // 220 ammoFillFix
+                SimulateInsertAmmo(ent.Value, uid, Transform(uid).Coordinates);
             }
+            else
+            {
+                // play sound to be cool
+                Audio.PlayPredicted(component.SoundInsert, uid, args.User);
+                SimulateInsertAmmo(ent.Value, args.Target.Value, Transform(args.Target.Value).Coordinates);
+            }
+
+            if (IsClientSide(ent.Value))
+                Del(ent.Value);
         }
 
         // repeat if there is more space in the target and more ammo to fill it
         var moreSpace = target.Entities.Count + target.UnspawnedCount < target.Capacity;
         var moreAmmo = component.Entities.Count + component.UnspawnedCount > 0;
         args.Repeat = moreSpace && moreAmmo;
-        component.IsReloading = false; // 220 ammoFillFix
     }
 
     private void OnBallisticVerb(EntityUid uid, BallisticAmmoProviderComponent component, GetVerbsEvent<Verb> args)
