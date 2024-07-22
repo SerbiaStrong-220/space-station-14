@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
@@ -34,6 +35,7 @@ public sealed class WieldableSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly PullingSystem _pull = default!;
 
     public override void Initialize()
     {
@@ -184,6 +186,10 @@ public sealed class WieldableSystem : EntitySystem
             }
             return false;
         }
+        //ss220 weild fix begin
+        if (_pull.IsPulling(user))
+            return false;
+        //ss220 weild fix end
 
         // Seems legit.
         return true;
