@@ -7,7 +7,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/syndchem.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/Hud/syndchem.rsi
+    sprite: SS220/Clothing/Eyes/syndchem.rsi
   - type: ShowHealthBars
     damageContainers:
     - Biological
