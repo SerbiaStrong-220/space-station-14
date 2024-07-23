@@ -146,7 +146,7 @@ public sealed class InternalsSystem : EntitySystem
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, delay, new InternalsDoAfterEvent(), targetEnt, target: targetEnt)
         {
             BreakOnDamage = true,
-            BreakOnMove =  true,
+            BreakOnMove = true,
             MovementThreshold = 0.1f,
         });
     }
@@ -233,7 +233,7 @@ public sealed class InternalsSystem : EntitySystem
         if (!_inventory.TryGetSlotEntity(togglerUid, "mask", out var maskUid))
             return;
 
-        if (!TryComp<BreathToolComponent>(maskUid, out _))
+        if (!HasComp<BreathToolComponent>(maskUid))
             return;
 
         if (TryComp<MaskComponent>(maskUid, out var maskComponent) && maskComponent.IsToggled == true)
