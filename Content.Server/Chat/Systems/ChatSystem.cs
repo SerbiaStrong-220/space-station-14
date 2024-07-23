@@ -73,6 +73,9 @@ public sealed partial class ChatSystem : SharedChatSystem
     public const string DefaultAnnouncementSound = "/Audio/Announcements/announce.ogg";
     public const string CentComAnnouncementSound = "/Audio/Corvax/Announcements/centcomm.ogg"; // Corvax-Announcements
 
+    public readonly TimeSpan coolDown = TimeSpan.FromSeconds(2); //ss220 chat unique
+    public const int MaximumLengthMsg = 5; //ss220 chat unique
+
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
@@ -88,6 +91,16 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameChange);
     }
+
+    // ss220 chat unique begin
+    public struct ChatUniqueStruct
+    {
+        public TimeSpan? lastMessageTimeSent;
+        public string? message;
+    }
+
+    public Dictionary<EntityUid, ChatUniqueStruct> ChatMsgUnique = new();
+    // ss220 chat unique end
 
     private void OnLoocEnabledChanged(bool val)
     {
@@ -238,6 +251,24 @@ public sealed partial class ChatSystem : SharedChatSystem
         // This can happen if the entire string is sanitized out.
         if (string.IsNullOrEmpty(message))
             return;
+
+        //ss220 chat unique begin
+        if (ChatMsgUnique.TryGetValue(source, out var chatStruct)
+            && chatStruct.message == message
+            && message.Length >= MaximumLengthMsg)
+        {
+            var curTime = _gameTiming.CurTime;
+            if (curTime - chatStruct.lastMessageTimeSent < coolDown)
+                return;
+
+            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
+        }
+        else
+        {
+            var curTime = _gameTiming.CurTime;
+            ChatMsgUnique[source] = new ChatUniqueStruct() { message = message, lastMessageTimeSent = curTime };
+        }
+        //ss220 chat unique end
 
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
