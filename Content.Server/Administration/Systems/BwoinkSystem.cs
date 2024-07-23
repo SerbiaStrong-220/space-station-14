@@ -411,7 +411,7 @@ namespace Content.Server.Administration.Systems
             if (LastMessageSentTime.TryGetValue(message.UserId, out var lastMessageSentTime)
                 && _timing.CurTime - lastMessageSentTime < _messageDelay
                 && !senderAHelpAdmin)
-                    return;
+                return;
             // end 220 ahelp spam
 
             var escapedText = FormattedMessage.EscapeText(message.Text);
