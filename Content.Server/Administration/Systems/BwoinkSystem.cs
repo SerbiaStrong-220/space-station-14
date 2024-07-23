@@ -65,6 +65,10 @@ namespace Content.Server.Administration.Systems
         private const string TooLongText = "... **(too long)**";
 
         private int _maxAdditionalChars;
+        // start 220 ahelp spam
+        private TimeSpan _messageDelay = TimeSpan.FromSeconds(5);
+        public Dictionary<NetUserId, TimeSpan> LastMessageSentTime { get; private set; } = new();
+        // end 220 ahelp spam
 
         public override void Initialize()
         {
@@ -395,6 +399,13 @@ namespace Content.Server.Administration.Systems
                 return;
             }
 
+            // start 220 ahelp spam
+            if (LastMessageSentTime.TryGetValue(message.UserId, out var lastMessageSentTime)
+                && _timing.CurTime - lastMessageSentTime < _messageDelay
+                && !senderAHelpAdmin)
+                return;
+            // end 220 ahelp spam
+
             var escapedText = FormattedMessage.EscapeText(message.Text);
 
             string bwoinkText;
@@ -476,6 +487,8 @@ namespace Content.Server.Administration.Systems
                 var nonAfkAdmins = GetNonAfkAdmins();
                 _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(senderSession.Name, str, !personalChannel, _gameTicker.RoundDuration().ToString("hh\\:mm\\:ss"), _gameTicker.RunLevel, playedSound: playSound, noReceivers: nonAfkAdmins.Count == 0));
             }
+
+            LastMessageSentTime[message.UserId] = _timing.CurTime; // 220 ahelp spam
 
             if (admins.Count != 0 || sendsWebhook)
                 return;
