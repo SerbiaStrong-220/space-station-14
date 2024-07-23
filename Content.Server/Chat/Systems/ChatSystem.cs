@@ -99,7 +99,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         public string? message;
     }
 
-    private Dictionary<EntityUid, ChatUniqueStruct> ChatMsgUnique = new();
+    public Dictionary<EntityUid, ChatUniqueStruct> ChatMsgUnique { get; private set;} = new();
     // ss220 chat unique end
 
     private void OnLoocEnabledChanged(bool val)
