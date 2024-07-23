@@ -4,6 +4,8 @@ using Content.Server.Body.Components;
 using Content.Server.Popups;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Internals;
@@ -24,6 +26,7 @@ public sealed class InternalsSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly RespiratorSystem _respirator = default!;
+    [Dependency] private readonly MaskSystem _mask = default!;
 
     private EntityQuery<InternalsComponent> _internalsQuery;
 
@@ -213,7 +216,7 @@ public sealed class InternalsSystem : EntitySystem
 
     public bool TryConnectTank(Entity<InternalsComponent> ent, EntityUid tankEntity)
     {
-        if (ent.Comp.BreathTools.Count == 0)
+        if (!EnsureBreathMaskOn(ent)) // 220 internals mask toggle
             return false;
 
         if (TryComp(ent.Comp.GasTankEntity, out GasTankComponent? tank))
@@ -223,6 +226,28 @@ public sealed class InternalsSystem : EntitySystem
         _alerts.ShowAlert(ent, ent.Comp.InternalsAlert, GetSeverity(ent));
         return true;
     }
+
+    // start 220 internals mask toggle
+    private void TryToggleBreathMaskOn(EntityUid togglerUid)
+    {
+        if (!_inventory.TryGetSlotEntity(togglerUid, "mask", out var maskUid))
+            return;
+
+        if (!TryComp<BreathToolComponent>(maskUid, out _))
+            return;
+
+        if (TryComp<MaskComponent>(maskUid, out var maskComponent) && maskComponent.IsToggled == true)
+            _mask.ToggleMask(maskComponent, maskUid.Value, togglerUid);
+    }
+
+    private bool EnsureBreathMaskOn(Entity<InternalsComponent> ent)
+    {
+        if (ent.Comp.BreathTools.Count == 0)
+            TryToggleBreathMaskOn(ent.Owner);
+
+        return ent.Comp.BreathTools.Count > 0;
+    }
+    // end 220 internals mask toggle
 
     public bool AreInternalsWorking(EntityUid uid, InternalsComponent? component = null)
     {

@@ -220,7 +220,8 @@ namespace Content.Server.Atmos.EntitySystems
         public bool CanConnectToInternals(GasTankComponent component)
         {
             var internals = GetInternalsComponent(component, component.User);
-            return internals != null && internals.BreathTools.Count != 0 && !component.IsValveOpen;
+            // return internals != null && internals.BreathTools.Count != 0 && !component.IsValveOpen; // 220 internals mask toggle
+            return internals != null && !component.IsValveOpen; // 220 internals mask toggle
         }
 
         public void ConnectToInternals(Entity<GasTankComponent> ent)
