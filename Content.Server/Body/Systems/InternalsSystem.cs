@@ -146,7 +146,7 @@ public sealed class InternalsSystem : EntitySystem
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, delay, new InternalsDoAfterEvent(), targetEnt, target: targetEnt)
         {
             BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnMove =  true,
             MovementThreshold = 0.1f,
         });
     }
