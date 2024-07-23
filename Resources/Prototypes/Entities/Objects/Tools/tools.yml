@@ -149,6 +149,13 @@
     storedSprite:
       sprite: Objects/Tools/crowbar.rsi
       state: storage
+  # start 220 crowbar on belt
+  - type: Clothing
+    sprite: Objects/Tools/crowbar.rsi
+    quickEquip: false
+    slots:
+      - Belt
+  # end 220 crowbar on belt
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
