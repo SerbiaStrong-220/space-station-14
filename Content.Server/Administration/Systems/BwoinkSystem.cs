@@ -66,7 +66,7 @@ namespace Content.Server.Administration.Systems
 
         private int _maxAdditionalChars;
         // start 220 ahelp spam
-        private TimeSpan _messageDelay = TimeSpan.FromSeconds(5);
+        private TimeSpan _messageDelay;
         public Dictionary<NetUserId, TimeSpan> LastMessageSentTime { get; private set; } = new();
         // end 220 ahelp spam
 
@@ -78,6 +78,7 @@ namespace Content.Server.Administration.Systems
             Subs.CVar(_config, CCVars.DiscordAHelpAvatar, OnAvatarChanged, true);
             Subs.CVar(_config, CVars.GameHostName, OnServerNameChanged, true);
             Subs.CVar(_config, CCVars.AdminAhelpOverrideClientName, OnOverrideChanged, true);
+            Subs.CVar(_config, CCVars.AdminAhelpMessageDelay, OnDelayChanged, true);
             _sawmill = IoCManager.Resolve<ILogManager>().GetSawmill("AHELP");
             _maxAdditionalChars = GenerateAHelpMessage("", "", true, _gameTicker.RoundDuration().ToString("hh\\:mm\\:ss"), _gameTicker.RunLevel, playedSound: false).Length;
             _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
@@ -85,6 +86,13 @@ namespace Content.Server.Administration.Systems
             SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameRunLevelChanged);
             SubscribeNetworkEvent<BwoinkClientTypingUpdated>(OnClientTypingUpdated);
         }
+
+        // start 220 ahelp spam
+        private void OnDelayChanged(TimeSpan delay)
+        {
+            _messageDelay = delay;
+        }
+        // end 220 ahelp spam
 
         private void OnOverrideChanged(string obj)
         {
@@ -403,7 +411,7 @@ namespace Content.Server.Administration.Systems
             if (LastMessageSentTime.TryGetValue(message.UserId, out var lastMessageSentTime)
                 && _timing.CurTime - lastMessageSentTime < _messageDelay
                 && !senderAHelpAdmin)
-                return;
+                    return;
             // end 220 ahelp spam
 
             var escapedText = FormattedMessage.EscapeText(message.Text);
@@ -427,7 +435,7 @@ namespace Content.Server.Administration.Systems
 
             // If it's not an admin / admin chooses to keep the sound then play it.
             var playSound = !senderAHelpAdmin || message.PlaySound;
-            var msg = new BwoinkTextMessage(message.UserId, senderSession.UserId, bwoinkText, playSound: playSound, isSenderAdmin:senderAHelpAdmin); // SS220
+            var msg = new BwoinkTextMessage(message.UserId, senderSession.UserId, bwoinkText, playSound: playSound, isSenderAdmin: senderAHelpAdmin); // SS220
 
             LogBwoink(msg);
 
