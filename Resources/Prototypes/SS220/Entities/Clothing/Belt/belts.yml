@@ -89,3 +89,14 @@
     sprite: SS220/Clothing/Belt/security_medical.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/security_medical.rsi
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltBlueShieldWebbing
+  name: blueshield webbing
+  description: Ideal for storing everything from ammo to weapons and combat essentials.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/blueshieldwebbing.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/blueshieldwebbing.rsi
