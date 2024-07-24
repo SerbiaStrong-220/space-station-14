@@ -160,8 +160,10 @@
   parent: BaseCMOStealObjective
   id: CMOCrewMonitorStealObjective
   components:
-  - type: NotJobRequirement #ss220 paramed crewmonitor
-    job: Paramedic #ss220 paramed crewmonitor
+  #ss220 paramed crewmonitor begin
+  - type: NotJobRequirement
+    job: Paramedic
+  #ss220 paramed crewmonitor end
   - type: StealCondition
     stealGroup: HandheldCrewMonitor
 
