@@ -1,3 +1,28 @@
+#Внутренние дела
+
+  # ЧВК "Синий Щит"
+- type: entity
+  parent: ClothingShoesBootsJack
+  id: ClothingShoesBootsJackBlueShield
+  name: jackboots
+  description: Blueshield PMCs combat boots for combat scenarios or combat situations. All combat, all the time.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+
+- type: entity
+  parent: ClothingShoesBootsJackBlueShield
+  id: ClothingShoesBootsJackBlueShieldFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - CombatKnife
+
+# Медицинский отдел
 - type: entity
   parent: ClothingShoesBaseWinterBoots
   id: ClothingShoesBootsWinterSecMed
