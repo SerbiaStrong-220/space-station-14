@@ -32,3 +32,5 @@ ent-ClothingUniformJumpsuitBlueShield = униформа "Синий Щит"
     .desc = Стандартная униформа ЧВК "Синий Щит", представленная в виде рубашки и брюк.
 ent-ClothingUniformJumpsuitBlueShield2 = тактическая униформа "Синий Щит"
     .desc = Тактическая униформа, специально разработанная для ЧВК "Синий Щит". Как же она хороша!
+ent-ClothingUniformJumpsuitBlueShieldT-shirt = футболка "Синий Щит"
+    .desc = Черная футболка с короткими рукавами, украшенная синими узорами.

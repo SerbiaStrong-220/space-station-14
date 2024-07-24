@@ -28,6 +28,15 @@
     jumpsuit: ClothingUniformJumpsuitBlueShield2
 
 - type: loadout
+  id: BlueShieldT-shirt
+  equipment: BlueShieldT-shirt
+
+- type: startingGear
+  id: BlueShieldT-shirt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldT-shirt
+
+- type: loadout
   id: BlueShieldJumpsuitTurtle
   equipment: BlueShieldJumpsuitTurtle
   effects:

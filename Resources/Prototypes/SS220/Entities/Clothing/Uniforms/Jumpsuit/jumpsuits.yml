@@ -67,6 +67,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_alt.rsi
 
+- type: entity
+  parent: ClothingUniformJumpsuitBlueShield
+  id: ClothingUniformJumpsuitBlueShieldT-shirt
+  name: blueshield's t-shirt
+  description: A black short-sleeved T-shirt decorated with blue patterns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
+
 # Сервис
 
   # Клоун
