@@ -86,7 +86,7 @@ namespace Content.Server.Corvax.StationGoal
             var dataToCopy = new Dictionary<Type, IPhotocopiedComponentData>();
             var paperDataToCopy = new PaperPhotocopiedData()
             {
-                Content = Loc.GetString(goal.Text, ("station", MetaData(ent.Value).EntityName), ("rand_planet_name", Random_planet_name())), //SS220 Random planet name
+                Content = Loc.GetString(goal.Text, ("station", MetaData(ent.Value).EntityName), ("rand_planet_name", GetRandomPlanetName())), //SS220 Random planet name
                 StampState = "paper_stamp-centcom",
                 StampedBy = [
                     new()
@@ -129,7 +129,7 @@ namespace Content.Server.Corvax.StationGoal
         }
 
         //SS220 Random planet name begin
-        public static string Random_planet_name()
+        private string GetRandomPlanetName()
         {
             var rand = new Random();
             string name = $"{(char) rand.Next(65, 90)}-";
