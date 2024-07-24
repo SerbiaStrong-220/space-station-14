@@ -40,7 +40,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
 
   # ЧВК "Синий Щит"
- - type: entity
+- type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBlueShield
   name: blueshield's uniform
@@ -55,6 +55,17 @@
       coefficients:
         Slash: 0.9
         Piercing: 0.9
+
+- type: entity
+  parent: ClothingUniformJumpsuitBlueShield
+  id: ClothingUniformJumpsuitBlueShield2
+  name: tactical blueshield's uniform
+  description: A tactical uniform specially designed for the Blue Shield PMCs. How good she is!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_alt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_alt.rsi
 
 # Сервис
 
