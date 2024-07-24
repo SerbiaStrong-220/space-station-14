@@ -78,3 +78,22 @@
   id: BlueShieldCoat
   equipment:
     outerClothing: ClothingOuterBlueShieldCoat
+
+# Belt
+- type: loadout
+  id: BlueShieldBelt
+  equipment: BlueShieldBelt
+
+- type: startingGear
+  id: BlueShieldBelt
+  equipment:
+    belt: ClothingBeltBlueShieldBeltFilled
+
+- type: loadout
+  id: BlueShieldWebbing
+  equipment: BlueShieldWebbing
+
+- type: startingGear
+  id: BlueShieldWebbing
+  equipment:
+    belt: ClothingBeltBlueShieldWebbingFilled

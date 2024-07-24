@@ -33,6 +33,13 @@
   - BlueShieldArmorBulletproof
   - BlueShieldCoat
 
+- type: loadoutGroup
+  id: BlueShieldBelt
+  name: loadout-group-blueshield-belt
+  loadouts:
+  - BlueShieldBelt
+  - BlueShieldWebbing
+
 # Chef
 - type: loadoutGroup
   id: ChefBeltApron

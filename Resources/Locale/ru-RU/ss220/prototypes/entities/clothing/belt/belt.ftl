@@ -8,3 +8,5 @@ ent-ClothingBeltSecurityMedical = пояс бригмедика
     .desc = { ent-ClothingBeltMedical.desc }
 ent-ClothingBeltBlueShieldWebbing = РПС "Синий Щит"
     .desc = Идеально подходит для хранения всего - от боеприпасов до оружия и предметов первой необходимости.
+ent-ClothingBeltBlueShieldBelt = пояс "Синий Щит"
+    .desc = Идеально подходит для хранения всего - от боеприпасов до оружия и предметов первой необходимости.
