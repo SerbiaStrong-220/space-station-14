@@ -1127,13 +1127,25 @@
       - CarpetWhite
   - type: EmagLatheRecipes
     emagStaticRecipes: #SS220 TODO: Rework recipes what are there after EMAG
-      - ClothingHeadHatCentcomcap
-      - ClothingHeadHatCentcom
-      - ClothingUniformJumpsuitCentcomAgent
-      - ClothingUniformJumpsuitCentcomFormal
-      - ClothingUniformJumpskirtCentcomFormalDress
-      - ClothingUniformJumpsuitCentcomOfficer
-      - ClothingUniformJumpsuitCentcomOfficial
+#SS220-Centcom-EmagLatheRecipes-Fix-Begin
+      # - ClothingHeadHatCentcomcap
+      # - ClothingHeadHatCentcom
+      # - ClothingUniformJumpsuitCentcomAgent
+      # - ClothingUniformJumpsuitCentcomFormal
+      # - ClothingUniformJumpskirtCentcomFormalDress
+      # - ClothingUniformJumpsuitCentcomOfficer
+      # - ClothingUniformJumpsuitCentcomOfficial
+      - ClothingHeadHatNavyFieldOfficerCap
+      - ClothingHeadHatBeretNanoTrasenOfficer
+      - ClothingHeadHatBeretNanoTrasenDiplomat
+      - ClothingUniformCentCommOfficer
+      - ClothingUniformJumpsuitCentcomOfficerTurtleneck
+      - ClothingUniformJumpskirtCentcomOfficerTurtleneck
+      - ClothingUniformNanotrasenDiplomat
+      - ClothingOuterWinterCentcomm
+      - ClothingNeckCloakFieldOfficerCentComm
+      - ClothingNeckScarfCentcomm
+#SS220-Centcom-EmagLatheRecipes-Fix-End
       - ClothingHeadHatSyndieMAA
       - ClothingHeadHatSyndie
       - ClothingUniformJumpsuitOperative
@@ -1146,7 +1158,7 @@
       - ClothingUniformJumpsuitPyjamaSyndicatePink
       - ClothingHeadPyjamaSyndicateRed
       - ClothingUniformJumpsuitPyjamaSyndicateRed
-      - ClothingOuterWinterCentcom
+      # - ClothingOuterWinterCentcom SS220-Centcom-EmagLatheRecipes-Fix
       - ClothingOuterWinterSyndie
       - ClothingOuterWinterSyndieCap
   - type: MaterialStorage
