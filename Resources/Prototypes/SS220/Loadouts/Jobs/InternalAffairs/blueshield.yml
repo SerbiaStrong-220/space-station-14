@@ -62,10 +62,10 @@
     outerClothing: ClothingOuterArmorBlueShieldBulletproof
 
 - type: loadout
-  id: BlueShieldSRTCoat
-  equipment: BlueShieldSRTCoat
+  id: BlueShieldCoat
+  equipment: BlueShieldCoat
 
 - type: startingGear
-  id: BlueShieldSRTCoat
+  id: BlueShieldCoat
   equipment:
-    outerClothing: ClothingOuterSRTCoat
+    outerClothing: ClothingOuterBlueShieldCoat
