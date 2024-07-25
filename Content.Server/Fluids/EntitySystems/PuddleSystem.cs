@@ -80,7 +80,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
     private readonly EntityWhitelist _ignoreWhitelist = new()
     {
         Components = new[]
-    {
+        {
             "IgnoreOnfloorSlowers"
         }
     };
