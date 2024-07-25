@@ -71,7 +71,7 @@ entities:
       name: АСН "Севастополь"
     - type: Transform
       pos: -0.07078934,-0.6836653
-      parent: invalid
+      parent: 3383
     - type: MapGrid
       chunks:
         0,0:
@@ -6602,6 +6602,18 @@ entities:
     - type: ContainedSolution
       containerName: beaker
       container: 6
+  - uid: 3383
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
+    - type: Broadphase
+    - type: OccluderTree
   - uid: 5946
     components:
     - type: MetaData
@@ -26802,6 +26814,148 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CryogenicSleepUnit
+  entities:
+  - uid: 3384
+    components:
+    - type: Transform
+      pos: -17.5,-8.5
+      parent: 1
+  - uid: 3385
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -23.5,12.5
+      parent: 1
+  - uid: 3386
+    components:
+    - type: Transform
+      pos: -21.5,8.5
+      parent: 1
+  - uid: 3387
+    components:
+    - type: Transform
+      pos: -20.5,6.5
+      parent: 1
+  - uid: 3388
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-5.5
+      parent: 1
+  - uid: 3389
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-6.5
+      parent: 1
+  - uid: 3390
+    components:
+    - type: Transform
+      pos: -20.5,8.5
+      parent: 1
+  - uid: 3391
+    components:
+    - type: Transform
+      pos: -22.5,8.5
+      parent: 1
+  - uid: 3392
+    components:
+    - type: Transform
+      pos: -22.5,6.5
+      parent: 1
+  - uid: 3393
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-7.5
+      parent: 1
+  - uid: 3394
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-8.5
+      parent: 1
+  - uid: 3395
+    components:
+    - type: Transform
+      pos: 1.5,-5.5
+      parent: 1
+  - uid: 3396
+    components:
+    - type: Transform
+      pos: 1.5,-7.5
+      parent: 1
+  - uid: 3397
+    components:
+    - type: Transform
+      pos: -21.5,6.5
+      parent: 1
+  - uid: 3398
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -23.5,11.5
+      parent: 1
+  - uid: 3399
+    components:
+    - type: Transform
+      pos: -17.5,-6.5
+      parent: 1
+  - uid: 3400
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -23.5,10.5
+      parent: 1
+  - uid: 3401
+    components:
+    - type: Transform
+      pos: -20.5,10.5
+      parent: 1
+  - uid: 3402
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -21.5,-6.5
+      parent: 1
+  - uid: 3403
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -21.5,-7.5
+      parent: 1
+  - uid: 3404
+    components:
+    - type: Transform
+      pos: -17.5,-7.5
+      parent: 1
+  - uid: 3405
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -21.5,-8.5
+      parent: 1
+  - uid: 3406
+    components:
+    - type: Transform
+      pos: -20.5,11.5
+      parent: 1
+  - uid: 3407
+    components:
+    - type: Transform
+      pos: -20.5,12.5
+      parent: 1
+  - uid: 3408
+    components:
+    - type: Transform
+      pos: 1.5,-6.5
+      parent: 1
+  - uid: 8647
+    components:
+    - type: Transform
+      pos: 1.5,-8.5
+      parent: 1
 - proto: CryoPod
   entities:
   - uid: 3381
@@ -26813,157 +26967,6 @@ entities:
     components:
     - type: Transform
       pos: 14.5,-17.5
-      parent: 1
-- proto: CryopodSSD
-  entities:
-  - uid: 3383
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -17.5,-6.5
-      parent: 1
-  - uid: 3384
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -23.5,12.5
-      parent: 1
-  - uid: 3385
-    components:
-    - type: Transform
-      pos: -21.5,8.5
-      parent: 1
-  - uid: 3386
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -22.5,6.5
-      parent: 1
-  - uid: 3387
-    components:
-    - type: Transform
-      pos: -1.5,-5.5
-      parent: 1
-  - uid: 3388
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,-6.5
-      parent: 1
-  - uid: 3389
-    components:
-    - type: Transform
-      pos: -22.5,8.5
-      parent: 1
-  - uid: 3390
-    components:
-    - type: Transform
-      pos: -20.5,8.5
-      parent: 1
-  - uid: 3391
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -20.5,6.5
-      parent: 1
-  - uid: 3392
-    components:
-    - type: Transform
-      pos: -1.5,-7.5
-      parent: 1
-  - uid: 3393
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,-8.5
-      parent: 1
-  - uid: 3394
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,-8.5
-      parent: 1
-  - uid: 3395
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,-6.5
-      parent: 1
-  - uid: 3396
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -21.5,6.5
-      parent: 1
-  - uid: 3397
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -23.5,11.5
-      parent: 1
-  - uid: 3398
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -17.5,-8.5
-      parent: 1
-  - uid: 3399
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -23.5,10.5
-      parent: 1
-  - uid: 3400
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -20.5,10.5
-      parent: 1
-  - uid: 3401
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -21.5,-8.5
-      parent: 1
-  - uid: 3402
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -21.5,-7.5
-      parent: 1
-  - uid: 3403
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -17.5,-7.5
-      parent: 1
-  - uid: 3404
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -21.5,-6.5
-      parent: 1
-  - uid: 3405
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -20.5,11.5
-      parent: 1
-  - uid: 3406
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -20.5,12.5
-      parent: 1
-  - uid: 3407
-    components:
-    - type: Transform
-      pos: 1.5,-7.5
-      parent: 1
-  - uid: 3408
-    components:
-    - type: Transform
-      pos: 1.5,-5.5
       parent: 1
 - proto: CurtainsBlackOpen
   entities:
@@ -64202,7 +64205,7 @@ entities:
       pos: 30.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -447753.53
+      secondsUntilStateChange: -447884.8
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
