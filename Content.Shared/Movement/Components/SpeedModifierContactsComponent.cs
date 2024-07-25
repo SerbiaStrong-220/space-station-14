@@ -18,5 +18,6 @@ public sealed partial class SpeedModifierContactsComponent : Component
     public float SprintSpeedModifier = 1.0f;
 
     [DataField("ignoreWhitelist")]
+    [AutoNetworkedField] //SS220 Flying mobs slowdown fix
     public EntityWhitelist? IgnoreWhitelist;
 }

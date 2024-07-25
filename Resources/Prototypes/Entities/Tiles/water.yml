@@ -35,6 +35,9 @@
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.5
     sprintSpeedModifier: 0.5
+    ignoreWhitelist:
+        components:
+        - IgnoreOnfloorSlowers
   - type: Physics
     bodyType: Static
   - type: Fixtures
