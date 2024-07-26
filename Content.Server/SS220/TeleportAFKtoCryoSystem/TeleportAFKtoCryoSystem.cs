@@ -143,7 +143,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
 
-        var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4f),
+        var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4),
             new TeleportToCryoFinished(GetNetEntity(portal)), cryopodUid)
         {
             BreakOnDamage = false,
@@ -170,7 +170,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         }
 
         if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
-            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(5f);
+            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(1);
 
         var portalEntity = GetEntity(args.PortalId);
 

@@ -16,3 +16,13 @@
     - type: AmbientSound
       enabled: false
       sound: /Audio/Effects/teleport_departure.ogg
+
+- type: entity
+  id: ActionCryoGhost
+  name: action-name-cryo-ghost
+  description: action-desc-cryo-ghost
+  noSpawn: true
+  components:
+    - type: InstantAction
+      checkCanInteract: false
+      event: !type:CryopodGhostActionEvent
