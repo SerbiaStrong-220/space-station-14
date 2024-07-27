@@ -1,3 +1,4 @@
+using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Item;
@@ -107,6 +108,15 @@ namespace Content.Server.Kitchen.Components
         /// </summary>
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public bool CanMicrowaveIdsSafely = true;
+
+        //SS220 Microwave explosion tweak begin
+        /// <summary>
+        /// Chance of an explosion occurring when we microwave a id card
+        /// It's use if CanMicrowaveIdsSafely = false
+        /// </summary>
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public float IdCardExplosionChance = 1f;
+        //SS220 Microwave explosion tweak end
     }
 
     public sealed class BeingMicrowavedEvent : HandledEntityEventArgs
