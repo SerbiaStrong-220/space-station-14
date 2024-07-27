@@ -1,16 +1,17 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+#Quartermaster
 - type: entity
   name: brass knuckles
   parent: BaseItem
-  id: BrassKnucklesEtchedQm
+  id: EtchedBrassKnuckles
   description: кастет
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/brass_knuckles.rsi
+    sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
     state: icon
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Melee/brass_knuckles.rsi
+    sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
     slots: [gloves]
   - type: Item
     size: Small
@@ -33,7 +34,10 @@
             Stamina: 72 # 28 + 72 = 100 => куклу без стаминрезиста сразу ложит в стаминкрит
     randomDamageChance: 0.2
     damageSound: /Audio/SS220/Weapons/brassKnukles/critical-hit.ogg
+  - type: Tag
+    tags:
+    - EtchedBrassKnuckles
   - type: StaticPrice
     price: 1000
   - type: StealTarget
-    stealGroup: BrassKnucklesEtchedQm
+    stealGroup: EtchedBrassKnuckles

@@ -1,0 +1,61 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: [BaseItem, BaseItemCabinet]
+  id: GlassCase
+  name: glass case
+  suffix: Etched brass knuckles
+  description: Ударопрочный кейс с замком для хранения револьвера. Является аксессуаром к сувенирному револьверу "Уника".
+  components:
+  - type: Item
+    size: Large
+  - type: Lock
+  - type: LockVisuals
+  - type: Sprite
+    sprite: SS220/Misc/etched_brass_knuckles_case.rsi
+    layers:
+    - state: icon
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: open
+      map: ["enum.OpenableVisuals.Layer"]
+    - state: caplaser
+      map: ["enum.ItemCabinetVisuals.Layer"]
+      visible: true
+    - state: locked
+      shader: unshaded
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemCabinetVisuals.ContainsItem:
+        enum.ItemCabinetVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: open }
+          False: { state: icon }
+  - type: StaticPrice
+    price: 100
+
+- type: entity
+  parent: GlassCase
+  id: GlassCaseEtchedBrassKnucklesFilled
+  name: glass case
+  suffix: Etched brass knuckles
+  description: Ударопрочный кейс с замком для хранения револьвера. Является аксессуаром к сувенирному револьверу "Уника".
+  components:
+  - type: AccessReader
+    access: [["Quartermaster"]]
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        ejectOnInteract: true
+        whitelist:
+          tags:
+          - EtchedBrassKnuckles
+        ejectSound: /Audio/Machines/machine_switch.ogg
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - EtchedBrassKnuckles
