@@ -17,15 +17,18 @@ namespace Content.Client.SS220.Overlays;
 public abstract class IgnoreLightVisionOverlay : Overlay
 {
     [Dependency] protected readonly IEntityManager Entity = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] protected readonly IPlayerManager PlayerManager = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+
+    /// <summary> Defines radius in which you can see entities in containers </summary>
+    protected float ShowCloseRadius;
+    protected float ShowRadius;
 
     private readonly ContainerSystem _container;
     private readonly EntityLookupSystem _entityLookup;
     private readonly StealthSystem _stealthSystem;
-    private readonly float _showRadius;
-    private readonly float _showCloseRadius;
-    private const float MIN_RANGE = 0.3f;
+    /// <summary> If use lesser value wierd thing happens with admin spawn menu and GetEntitiesInRange. </summary>
+    private const float MIN_CLOSE_RANGE = 1.5f;
     /// <summary>Useless const due to how stealth work, but if they change it...</summary>
     private const float STEALTH_VISION_TRESHHOLD = 0;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -38,33 +41,31 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         _entityLookup = Entity.System<EntityLookupSystem>();
         _stealthSystem = Entity.System<StealthSystem>();
 
-        _showRadius = showRadius;
-        _showCloseRadius = _showRadius / 4 < MIN_RANGE ? MIN_RANGE : _showRadius / 4;
+        ShowRadius = showRadius < MIN_CLOSE_RANGE ? MIN_CLOSE_RANGE : showRadius;
+        ShowCloseRadius = ShowRadius / 4 < MIN_CLOSE_RANGE ? MIN_CLOSE_RANGE : ShowRadius / 4;
     }
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (_playerManager.LocalEntity == null)
+        if (PlayerManager.LocalEntity == null)
             return;
-        if (!Entity.TryGetComponent<MobStateComponent>(_playerManager.LocalEntity, out var mobstateComp))
+        if (!Entity.TryGetComponent<MobStateComponent>(PlayerManager.LocalEntity, out var mobstateComp))
             return;
         if (mobstateComp.CurrentState != MobState.Alive)
             return;
-        if (!Entity.TryGetComponent(_playerManager.LocalEntity, out ThermalVisionComponent? thermalVision) ||
+        if (!Entity.TryGetComponent(PlayerManager.LocalEntity, out ThermalVisionComponent? thermalVision) ||
             thermalVision.State == ThermalVisionState.Off)
             return;
 
-        if (Entity.TryGetComponent<TransformComponent>(_playerManager.LocalEntity,
+        if (Entity.TryGetComponent<TransformComponent>(PlayerManager.LocalEntity,
                                                 out var playerTransform) == false)
             return; // maybe need to log it
+
         var handle = args.WorldHandle;
         var eye = args.Viewport.Eye;
         var eyeRot = eye?.Rotation ?? default;
 
-        if (_showRadius < MIN_RANGE)
-            return; // can cause execp also need to log it
-
-        var entities = _entityLookup.GetEntitiesInRange<MobStateComponent>(playerTransform.Coordinates, _showRadius);
-        var entitiesClose = _entityLookup.GetEntitiesInRange<MobStateComponent>(playerTransform.Coordinates, _showCloseRadius);
+        var entities = _entityLookup.GetEntitiesInRange<MobStateComponent>(playerTransform.Coordinates, ShowRadius);
+        var entitiesClose = _entityLookup.GetEntitiesInRange<MobStateComponent>(playerTransform.Coordinates, ShowCloseRadius);
 
         foreach (var (uid, stateComp) in entities)
         {
@@ -98,7 +99,10 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         var states = target.Comp.AllowedStates;
 
         if (states.Contains(MobState.Dead) && states.Contains(MobState.Alive))
-            return false;
+            if (target.Comp.CurrentState == MobState.Dead)
+                return true;
+            else
+                return false;
 
         return true;
     }
@@ -131,13 +135,9 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return false;
     }
-    /// <summary>
-    ///  function wich defines what entities visible or not.
-    ///  Also contains const values of invis perception
-    /// </summary>
-    /// <returns>
-    ///  True if entities could be seen by thermals. Without any other obstacles
-    /// </returns>
+    /// <summary> function wich defines what entities visible or not.
+    ///  Also contains const values of invis perception</summary>
+    /// <returns>True if entities could be seen by thermals. Without any other obstacles </returns>
     private bool CantBeVisibleInContainer(EntityUid target, bool isCloseToOwner)
     {
         var blacklistComponentNames = new List<string>() { "DarkReaper", "Devourer" };
@@ -156,14 +156,8 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return false;
     }
-    /// <summary>
-    /// Checks if entity has a components from list
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="blacklistComponentNames"></param>
-    /// <returns>
-    /// true if entity has any of the listed components
-    /// </returns>
+    /// <summary> Checks if entity has a components from list </summary>
+    /// <returns> True if entity has any of the listed components </returns>
     /// <exception cref="Exception"> Throw excep if List contains false comp name</exception>
     private bool HasComponentFromList(EntityUid target, List<string> blacklistComponentNames)
     {

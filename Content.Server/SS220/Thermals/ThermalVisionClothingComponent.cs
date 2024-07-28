@@ -9,6 +9,6 @@ namespace Content.Server.SS220.Thermals;
 [RegisterComponent]
 public sealed partial class ThermalVisionClothingComponent : Component
 {
-    [DataField, ViewVariables]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float ThermalVisionRadius = 8f;
 }
