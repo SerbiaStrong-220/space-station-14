@@ -102,7 +102,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
   - type: StaticPrice
-    price: 10
+    price: 20
 
 - type: entity
   id: PlasmaWindowDirectionalAng
@@ -147,7 +147,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 30
+    price: 70
   - type: RadiationBlocker
     resistance: 1
 
@@ -209,7 +209,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 50
 
 - type: entity
   id: PlasmaReinforcedWindowDirectionalAng
@@ -263,7 +263,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 66
+    price: 150
   - type: RadiationBlocker
     resistance: 2
 
@@ -313,7 +313,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 140
 
 - type: entity
   id: UraniumWindowDirectionalAng
@@ -358,7 +358,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 40
+    price: 80
 
 - type: entity
   id: WindowClockworkDirectionalAng
@@ -405,7 +405,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 50
 
 #U-shaped directional window
 - type: entity
@@ -521,7 +521,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
   - type: StaticPrice
-    price: 10
+    price: 30
 
 - type: entity
   id: PlasmaWindowDirectionalU
@@ -566,7 +566,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 30
+    price: 100
   - type: RadiationBlocker
     resistance: 1
 
@@ -628,7 +628,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 70
 
 - type: entity
   id: PlasmaReinforcedWindowDirectionalU
@@ -682,7 +682,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 66
+    price: 200
   - type: RadiationBlocker
     resistance: 2
 
@@ -732,7 +732,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 230
 
 - type: entity
   id: UraniumWindowDirectionalU
@@ -777,7 +777,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 40
+    price: 130
 
 - type: entity
   id: WindowClockworkDirectionalU
@@ -824,7 +824,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 70
 
 #double directional window
 - type: entity
@@ -930,7 +930,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
   - type: StaticPrice
-    price: 10
+    price: 30
 
 - type: entity
   id: PlasmaWindowDirectionalDoub
@@ -975,7 +975,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 30
+    price: 70
   - type: RadiationBlocker
     resistance: 1
 
@@ -1037,7 +1037,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 50
 
 - type: entity
   id: PlasmaReinforcedWindowDirectionalDoub
@@ -1091,7 +1091,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 66
+    price: 150
   - type: RadiationBlocker
     resistance: 2
 
@@ -1141,7 +1141,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 150
 
 - type: entity
   id: UraniumWindowDirectionalDoub
@@ -1186,7 +1186,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 40
+    price: 85
 
 - type: entity
   id: WindowClockworkDirectionalDoub
@@ -1233,7 +1233,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 50
 
 #O-shaped window
 - type: entity
@@ -1359,7 +1359,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
   - type: StaticPrice
-    price: 10
+    price: 50
 
 - type: entity
   id: PlasmaWindowDirectionalO
@@ -1404,7 +1404,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 30
+    price: 130
   - type: RadiationBlocker
     resistance: 1
 
@@ -1466,7 +1466,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 90
 
 - type: entity
   id: PlasmaReinforcedWindowDirectionalO
@@ -1520,7 +1520,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 66
+    price: 270
   - type: RadiationBlocker
     resistance: 2
 
@@ -1570,7 +1570,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 300
 
 - type: entity
   id: UraniumWindowDirectionalO
@@ -1615,7 +1615,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 40
+    price: 170
 
 - type: entity
   id: WindowClockworkDirectionalO
@@ -1662,4 +1662,4 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 22
+    price: 90
