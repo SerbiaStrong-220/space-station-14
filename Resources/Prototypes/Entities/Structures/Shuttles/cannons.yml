@@ -264,7 +264,7 @@
   - type: MagazineVisuals
     magState: mag
     steps: 6 #SS220-Duster-Resprite
-    zeroVisible: false
+    zeroVisible: true #SS220-Duster-Resprite
   - type: ItemSlots
     slots:
       gun_magazine:
