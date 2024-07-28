@@ -1,3 +1,4 @@
+// Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
