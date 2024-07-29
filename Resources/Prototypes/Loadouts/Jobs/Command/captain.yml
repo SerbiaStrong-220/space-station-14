@@ -56,7 +56,7 @@
 - type: startingGear
   id: CaptainCap
   equipment:
-    head: ClothingHeadHatCapcap
+    head: ClothingHeadCaptainCap #SS220-CapHeadLoadoutsChanges
 
 # Neck
 - type: loadout

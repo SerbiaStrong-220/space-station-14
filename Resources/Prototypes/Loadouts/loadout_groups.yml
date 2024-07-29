@@ -47,6 +47,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+  #SS220-CapHeadLoadoutsChanges-Begin
+  - CaptainBeret
+  - CaptainHeadHat
+  #SS220-CapHeadLoadoutsChanges-End
   #ss220-loadout-captain-begin
   - CaptainWhiteHead
   - CaptainWhiteBeret
