@@ -138,6 +138,9 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
     private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, string teleportPortralID)
     {
+        if (_station.GetOwningStation(target) != _station.GetOwningStation(cryopodUid))
+            return false;
+
         var portal = Spawn(teleportPortralID, Transform(target).Coordinates);
 
         if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
