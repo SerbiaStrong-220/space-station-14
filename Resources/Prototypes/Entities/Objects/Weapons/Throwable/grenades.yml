@@ -3,6 +3,11 @@
   parent: BaseItem
   id: GrenadeBase
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/handgrenade.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/grenade.rsi
     layers:
@@ -290,6 +295,11 @@
   parent: BaseItem
   id: ModularGrenade
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/modular.rsi
     layers:

@@ -4,6 +4,11 @@
   id: Pickaxe
   description: Notched to perfection, for jamming it into rocks
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/axe.ogg
+      params:
+        volume: 2
   - type: Tag
     tags:
     - Pickaxe
@@ -42,6 +47,11 @@
   id: MiningDrill
   description: Powerful tool used to quickly drill through rocks
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/chainsaw.ogg
+      params:
+        volume: 2
   - type: Item
     storedRotation: -90
   - type: Tag

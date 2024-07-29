@@ -4,6 +4,11 @@
   name: clusterbang
   description: Can be used only with flashbangs. Explodes several times.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbang.rsi
     state: base-0
@@ -24,6 +29,11 @@
   description: Launches three flashbangs after the timer runs out.
   suffix: Full
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbang.rsi
     layers:
@@ -55,6 +65,11 @@
   name: clustergrenade
   description: Why use one grenade when you can use three at once!
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbomb.rsi
     layers:
@@ -84,6 +99,11 @@
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: produce
@@ -207,6 +227,11 @@
   name: slipocalypse clustersoap
   description: Spreads small pieces of syndicate soap over an area upon landing on the floor.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Specific/Janitorial/soap.rsi
     layers:

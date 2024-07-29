@@ -5,6 +5,11 @@
   description: Spray and pray
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/havy.ogg
+      params:
+        volume: 2
   - type: Sprite
   - type: Item
     size: Ginormous

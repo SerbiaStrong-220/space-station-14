@@ -5,6 +5,11 @@
   name: crusher
   description: An early design of the proto-kinetic accelerator.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/crusher.ogg
+      params:
+        volume: 2
   - type: Sharp
   - type: UnpoweredFlashlight
   - type: PointLight

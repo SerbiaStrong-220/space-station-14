@@ -4,6 +4,11 @@
   id: Spear
   description: Definition of a Classic. Keeping murder affordable since 200,000 BCE.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/spear.ogg
+      params:
+        volume: 2
   - type: EmbeddableProjectile
     offset: 0.15,0.15
   - type: ThrowingAngle

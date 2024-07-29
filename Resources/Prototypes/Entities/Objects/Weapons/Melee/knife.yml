@@ -3,6 +3,11 @@
   id: BaseKnife
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/blade.ogg
+      params:
+        volume: 2
   - type: Tag
     tags:
     - Knife
@@ -176,6 +181,11 @@
   id: Shiv
   description: A crude weapon fashioned from a piece of cloth and a glass shard.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/shiv.ogg
+      params:
+        volume: 2
   - type: Tag
     tags:
     - CombatKnife
@@ -262,6 +272,11 @@
   description: This bloodred knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
   components:
 # SS220 BetterKnifes Update begin
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/shiv.ogg
+      params:
+        volume: 2
   - type: ThrowingAngle
     angle: 0
   - type: SolutionContainerManager

@@ -5,6 +5,11 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/havy.ogg
+      params:
+        volume: 2
   - type: Sprite
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
@@ -26,6 +31,11 @@
   id: WeaponLauncherChinaLake
   description: PLOOP
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/rifles.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
     layers:
@@ -200,6 +210,11 @@
   id: WeaponForceGun
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: EmitSoundOnLand
+      sound:
+      path: /Audio/SS220/Effects/Drop/smg.ogg
+      params:
+        volume: 2
     - type: Item
       storedRotation: -90
     - type: ForceGun
@@ -242,6 +257,11 @@
   parent: BaseItem
   id: WeaponGrapplingGun
   components:
+    - type: EmitSoundOnLand
+      sound:
+      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      params:
+        volume: 2
     - type: AmmoCounter
     - type: GrapplingGun
     - type: Gun
@@ -315,6 +335,11 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: EmitSoundOnLand
+      sound:
+      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      params:
+        volume: 2
     - type: ForceGun
       canTetherAlive: true
       canUnanchor: true
