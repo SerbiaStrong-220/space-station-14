@@ -657,10 +657,12 @@ public sealed partial class ShuttleSystem
         if (config != null)
         {
             FTLDock((shuttleUid, shuttleXform), config);
+            Smimsh(shuttleUid, xform: shuttleXform); //SS220 Emergency shuttle gib
             return true;
         }
 
         TryFTLProximity(shuttleUid, targetUid, shuttleXform, targetXform);
+        Smimsh(shuttleUid, xform: shuttleXform); //SS220 Emergency shuttle gib
         return false;
     }
 
