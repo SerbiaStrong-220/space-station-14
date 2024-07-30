@@ -140,13 +140,13 @@ namespace Content.Shared.CCVar
         ///     Minimum time between meteor swarms in minutes.
         /// </summary>
         public static readonly CVarDef<float>
-            MeteorSwarmMinTime = CVarDef.Create("events.meteor_swarm_min_time", 18.5f, CVar.ARCHIVE | CVar.SERVERONLY); //ss220 meteor fix
+            MeteorSwarmMinTime = CVarDef.Create("events.meteor_swarm_min_time", 20f, CVar.ARCHIVE | CVar.SERVERONLY); //ss220 meteor fix. 30.07.2024 by Ady4 added more time for next event
 
         /// <summary>
         ///     Maximum time between meteor swarms in minutes.
         /// </summary>
         public static readonly CVarDef<float>
-            MeteorSwarmMaxTime = CVarDef.Create("events.meteor_swarm_max_time", 22.5f, CVar.ARCHIVE | CVar.SERVERONLY); //ss220 meteor fix
+            MeteorSwarmMaxTime = CVarDef.Create("events.meteor_swarm_max_time", 24f, CVar.ARCHIVE | CVar.SERVERONLY); //ss220 meteor fix. 30.07.2024 by Ady4 added more time for next event
 
         /*
          * Game
