@@ -23,25 +23,25 @@
       "name": "frosted_window",
       "directions": 1
     },
-	{
-	  "name": "clock_window",
-	  "directions": 1
-	},
-	{
-	  "name": "plasma_window",
-	  "directions": 1
-	},
+  	{
+	    "name": "clock_window",
+	    "directions": 1
+  	},
+  	{
+	    "name": "plasma_window",
+  	  "directions": 1
+  	},
     {
-        "name": "plasma_reinforced_window",
-        "directions": 1
+      "name": "plasma_reinforced_window",
+      "directions": 1
     },
     {
-        "name": "uranium_window",
-        "directions": 1
+      "name": "uranium_window",
+      "directions": 1
     },
     {
-        "name": "uranium_reinforced_window",
-        "directions": 1
+      "name": "uranium_reinforced_window",
+      "directions": 1
     }
   ]
 }
