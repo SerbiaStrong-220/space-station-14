@@ -10,7 +10,7 @@ namespace Content.Server.SS220.Thermals;
 public sealed partial class ThermalVisionImplantComponent : Component
 {
     [DataField]
-    public bool IsAcive = false;
+    public bool IsActive = false;
     [DataField, ViewVariables]
     public float ThermalVisionRadius = 8f;
 }

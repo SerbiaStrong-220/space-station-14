@@ -56,8 +56,8 @@ public abstract class IgnoreLightVisionOverlay : Overlay
             thermalVision.State == ThermalVisionState.Off)
             return;
 
-        if (Entity.TryGetComponent<TransformComponent>(PlayerManager.LocalEntity,
-                                                out var playerTransform) == false)
+        if (!Entity.TryGetComponent<TransformComponent>(PlayerManager.LocalEntity,
+                                                out var playerTransform))
             return; // maybe need to log it
 
         var handle = args.WorldHandle;
@@ -75,7 +75,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
                 continue;
             if (CantBeSeenByThermals((uid, stateComp)))
                 continue;
-            if (IsInvisibleToThermals(uid, isCloseToOwner))
+            if (IsStealthToThermals(uid, isCloseToOwner))
                 continue;
             if (_container.IsEntityOrParentInContainer(uid))
                 if (CantBeVisibleInContainer(uid, isCloseToOwner))
@@ -112,9 +112,9 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         sprite = null;
         xform = null;
 
-        if (Entity.TryGetComponent<SpriteComponent>(target, out sprite) == false)
+        if (!Entity.TryGetComponent<SpriteComponent>(target, out sprite))
             return true;
-        if (Entity.TryGetComponent<TransformComponent>(target, out xform) == false)
+        if (!Entity.TryGetComponent<TransformComponent>(target, out xform))
             return true;
 
         return false;
@@ -126,17 +126,19 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     /// <returns>
     ///  True if entities could be seen by thermals. Without any other obstacles
     /// </returns>
-    private bool IsInvisibleToThermals(EntityUid target, bool isCloseToOwner)
+    private bool IsStealthToThermals(EntityUid target, bool isCloseToOwner)
     {
-        if (Entity.TryGetComponent<StealthComponent>(target, out var component))
-            if (isCloseToOwner == false)
-                if (_stealthSystem.GetVisibility(target, component) < STEALTH_VISION_TRESHHOLD)
-                    return true;
+        if (!Entity.TryGetComponent<StealthComponent>(target, out var component))
+            return false;
+
+        if (!isCloseToOwner &&
+                _stealthSystem.GetVisibility(target, component) < STEALTH_VISION_TRESHHOLD)
+            return true;
 
         return false;
     }
     /// <summary> function wich defines what entities visible or not.
-    ///  Also contains const values of invis perception</summary>
+    ///  Also contains const values of invis perception </summary>
     /// <returns>True if entities could be seen by thermals. Without any other obstacles </returns>
     private bool CantBeVisibleInContainer(EntityUid target, bool isCloseToOwner)
     {
@@ -163,7 +165,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     {
         foreach (var compName in blacklistComponentNames)
         {
-            if (_componentFactory.TryGetRegistration(compName, out var compReg) == false)
+            if (!_componentFactory.TryGetRegistration(compName, out var compReg))
                 throw new Exception($"Cant find registration for component {compName} in blacklistComponents");
 
             if (Entity.HasComponent(target, compReg.Type))
