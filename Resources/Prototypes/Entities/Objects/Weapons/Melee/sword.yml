@@ -6,7 +6,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg
+      path: /Audio/SS220/Effects/Drop/sword.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sharp
@@ -46,7 +46,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg
+      path: /Audio/SS220/Effects/Drop/sword.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sharp
@@ -115,7 +115,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/blade.ogg
+      path: /Audio/SS220/Effects/Drop/blade.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sharp
@@ -145,7 +145,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg
+      path: /Audio/SS220/Effects/Drop/sword.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sharp
@@ -176,7 +176,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg
+      path: /Audio/SS220/Effects/Drop/sword.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sharp

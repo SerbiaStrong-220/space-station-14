@@ -6,7 +6,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/gohei.ogg
+      path: /Audio/SS220/Effects/Drop/gohei.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite

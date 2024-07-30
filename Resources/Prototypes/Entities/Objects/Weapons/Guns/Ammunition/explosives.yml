@@ -8,7 +8,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/rocket.ogg
+      path: /Audio/SS220/Effects/Drop/rocket.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Tag
@@ -55,7 +55,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/grenade.ogg
+      path: /Audio/SS220/Effects/Drop/grenade.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Tag
@@ -160,7 +160,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/cannonball.ogg
+      path: /Audio/SS220/Effects/Drop/cannonball.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Tag

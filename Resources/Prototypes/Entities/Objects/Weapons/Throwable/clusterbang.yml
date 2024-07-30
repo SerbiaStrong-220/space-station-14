@@ -6,7 +6,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -31,7 +31,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -67,7 +67,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -101,7 +101,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg
+      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -229,7 +229,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite

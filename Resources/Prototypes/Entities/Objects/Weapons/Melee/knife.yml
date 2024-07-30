@@ -5,7 +5,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/blade.ogg
+      path: /Audio/SS220/Effects/Drop/blade.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Tag
@@ -183,7 +183,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/shiv.ogg
+      path: /Audio/SS220/Effects/Drop/shiv.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Tag
@@ -274,7 +274,7 @@
 # SS220 BetterKnifes Update begin
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/shiv.ogg
+      path: /Audio/SS220/Effects/Drop/shiv.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: ThrowingAngle

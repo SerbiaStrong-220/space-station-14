@@ -6,7 +6,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/star.ogg
+      path: /Audio/SS220/Effects/Drop/star.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -35,7 +35,7 @@
         restitution: 0.3
         friction: 0.2
   - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
+    sound: /Audio/Weapons/star_hit.ogg ##new sound_drop effect, add MIXnikita
   - type: DamageOtherOnHit
     damage:
       types:

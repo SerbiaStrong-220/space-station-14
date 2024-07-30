@@ -3,6 +3,11 @@
   parent: BaseItem
   id: Clothing
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_base.ogg
+      params:
+        volume: 2
   - type: Item
     size: Normal
   - type: Sprite

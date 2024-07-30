@@ -4,6 +4,11 @@
   name: backpack
   description: You wear this on your back and put items into it.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_bag.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Clothing/Back/Backpacks/backpack.rsi
     state: icon

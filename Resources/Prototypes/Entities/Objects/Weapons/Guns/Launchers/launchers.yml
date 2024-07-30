@@ -7,7 +7,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/havy.ogg
+      path: /Audio/SS220/Effects/Drop/havy.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -33,7 +33,7 @@
   components:
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/rifles.ogg
+      path: /Audio/SS220/Effects/Drop/rifles.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
   - type: Sprite
@@ -212,7 +212,7 @@
   components:
     - type: EmitSoundOnLand
       sound:
-      path: /Audio/SS220/Effects/Drop/smg.ogg
+      path: /Audio/SS220/Effects/Drop/smg.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
     - type: Item
@@ -259,7 +259,7 @@
   components:
     - type: EmitSoundOnLand
       sound:
-      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
     - type: AmmoCounter
@@ -337,7 +337,7 @@
   components:
     - type: EmitSoundOnLand
       sound:
-      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
       params:
         volume: 2
     - type: ForceGun
