@@ -41,17 +41,6 @@
   equipment:
     head: ClothingHeadHatBeretSecurity
 
-# ss220 sec loadout update begin
-- type: loadout
-  id: HatCowboyBlack
-  equipment: HatCowboyBlack
-
-- type: startingGear
-  id: HatCowboyBlack
-  equipment:
-    head: ClothingHeadHatCowboyBlack
-# ss220 sec loadout update end
-
 # Neck
 #SS220 holster loadout begin
 - type: loadout
@@ -63,16 +52,6 @@
   equipment:
     neck: ClothingBeltHolster
 #SS220 holster loadout end
-# ss220 sec loadout update begin
-- type: loadout
-  id: Headphones
-  equipment: Headphones
-
-- type: startingGear
-  id: Headphones
-  equipment:
-    neck: ClothingNeckHeadphones
-# ss220 sec loadout update end
 
 # Jumpsuit
 - type: loadout
@@ -117,17 +96,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: SeniorOfficer
-
-#ss220 sec loadout update begin
-- type: loadout
-  id: JumpsuitSecBlue
-  equipment: JumpsuitSecBlue
-
-- type: startingGear
-  id: JumpsuitSecBlue
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitSecBlue
-#ss220 sec loadout update end
 
 - type: startingGear
   id: SeniorOfficerJumpsuit
@@ -221,26 +189,6 @@
   equipment:
     outerClothing: ClothingOuterWinterSec
 
-#ss220 sec loadout update begin
-- type: loadout
-  id: VestArmorSec
-  equipment: VestArmorSec
-
-- type: startingGear
-  id: VestArmorSec
-  equipment:
-    outerClothing: ClothingOuterVestArmorSec
-
-- type: loadout
-  id: CoatSecurityOvercoat
-  equipment: CoatSecurityOvercoat
-
-- type: startingGear
-  id: CoatSecurityOvercoat
-  equipment:
-    outerClothing: ClothingOuterCoatSecurityOvercoat
-#ss220 sec loadout update end
-
 # Shoes
 - type: loadout
   id: CombatBoots
@@ -268,17 +216,6 @@
   id: SecurityWinterBoots
   equipment:
     shoes: ClothingShoesBootsWinterSecFilled
-
-#ss220 sec loadout update begin
-- type: loadout
-  id: BootsJackSec
-  equipment: BootsJackSec
-
-- type: startingGear
-  id: BootsJackSec
-  equipment:
-    shoes: ClothingShoesBootsJackSec
-#ss220 sec loadout update end
 
 # PDA
 - type: loadout
