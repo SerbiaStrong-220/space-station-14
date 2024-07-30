@@ -3,7 +3,7 @@ using Content.Shared.SS220.Thermals;
 
 namespace Content.Server.SS220.Thermals;
 /// <summary>
-/// Handles enabling of thermal vision when clothing is equipped and disabling when unequipped.
+/// Handles enabling of thermal vision when impanted with thermalVisionImplant.
 /// </summary>
 public sealed class SharedThermalVisionImplantSystem : EntitySystem
 {
