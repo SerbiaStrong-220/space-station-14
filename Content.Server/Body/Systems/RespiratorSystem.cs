@@ -5,6 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Chemistry.ReagentEffectConditions;
 using Content.Server.Chemistry.ReagentEffects;
+using Content.Server.Popups;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
@@ -34,6 +35,7 @@ public sealed class RespiratorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
 
     private static readonly ProtoId<MetabolismGroupPrototype> GasId = new("Gas");
 
@@ -95,6 +97,11 @@ public sealed class RespiratorSystem : EntitySystem
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {
                     respirator.LastGaspEmoteTime = _gameTiming.CurTime;
+                    // SS220 emotes begin
+                    _popupSystem.PopupEntity(Loc.GetString("lung-behavior-gasp"), uid, Shared.Popups.PopupType.Medium);
+                    var emoteType = _mobState.IsIncapacitated(uid) ? "CritGasp" : "Gasp";
+                    _chat.TryEmoteWithoutChat(uid, emoteType, ignoreActionBlocker: true);
+                    // SS220 emotes end
                     _chat.TryEmoteWithChat(uid, respirator.GaspEmote, ChatTransmitRange.HideChat, ignoreActionBlocker: true);
                 }
 
