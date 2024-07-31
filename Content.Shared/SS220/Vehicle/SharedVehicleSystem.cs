@@ -18,6 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Serialization;
+using Content.Shared.SS220.Buckle;
 
 namespace Content.Shared.SS220.Vehicle;
 
@@ -131,6 +132,10 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
             _mover.SetRelay(args.BuckledEntity, uid);
             rider.Vehicle = uid;
+
+           if (TryComp<ChairVehcileComponent>(rider.Vehicle, out var chairVehcile))
+            chairVehcile.Disabled = uid;
+
 
             // Update appearance stuff, add actions
             UpdateBuckleOffset(uid, Transform(uid), component);

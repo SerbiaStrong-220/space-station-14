@@ -440,6 +440,7 @@
     - type: Strap
       buckleOffset: "0,0"
       maxBuckleDistance: 1
+    - type: ChairVehcile
     - type: Fixtures
       fixtures:
         fix1:
