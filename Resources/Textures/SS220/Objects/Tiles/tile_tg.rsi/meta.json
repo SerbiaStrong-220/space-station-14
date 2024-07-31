@@ -59,14 +59,14 @@
       "name": "wood_tile_red"
     },
     {
-      "name": "sand"
+      "name": "send"
     },
     {
-      "name": "sand-inhand-right",
+      "name": "send-inhand-right",
       "directions": 4
     },
     {
-      "name": "sand-inhand-left",
+      "name": "send-inhand-left",
       "directions": 4
     },
     {
