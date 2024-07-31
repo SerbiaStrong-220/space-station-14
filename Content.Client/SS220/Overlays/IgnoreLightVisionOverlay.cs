@@ -152,6 +152,8 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         {
             currentEntUid = container.Owner;
 
+            if (currentEntUid == PlayerManager.LocalEntity )
+                return true;
             if (HasComponentFromList(currentEntUid, blacklistComponentNames))
                 return true;
         }
