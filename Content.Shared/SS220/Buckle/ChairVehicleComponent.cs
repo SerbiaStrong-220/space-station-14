@@ -8,12 +8,11 @@ public sealed partial class ChairVehcileComponent : Component
 {
 
     /// <summary>
-    /// The entity currently riding a chairvehicle.
+    /// The time to unbuckle disabled
     /// </summary>
-
-    [ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
-    public EntityUid? Disabled;
+
+    public float ChairVehicleUnbuckleTime = 2f;
 
 }
 

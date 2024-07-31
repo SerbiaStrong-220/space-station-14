@@ -55,8 +55,8 @@ public sealed partial class BuckleComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public float VehicleUnbuckleTime;
-    //SS220 ChairVechile fix. Remove time for unbuckle from here and move it to DoAfterArgs
+    public float VehicleUnbuckleTime = .75f;
+    //SS220-Vehicle-doafter-fix end
 
     /// <summary>
     /// The amount of time that must pass for this entity to

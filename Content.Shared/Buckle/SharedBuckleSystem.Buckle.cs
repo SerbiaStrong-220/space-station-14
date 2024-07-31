@@ -19,7 +19,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-using Linguini.Syntax.Ast;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Utility;
@@ -464,25 +463,20 @@ public abstract partial class SharedBuckleSystem
                 vehicle.Rider != userUid && !_mobState.IsIncapacitated(buckleUid))
             {
 
-                else if (TryComp<ChairVehcileComponent>(strapUid, out var chairVehcile) &&
-                chairVehcile.Disabled != userUid && !_mobState.IsIncapacitated(buckleUid))
+                // SS220 ChairVechicle fix begin
+                var buckleTime = buckleComp.VehicleUnbuckleTime;
+
+                if (TryComp<ChairVehcileComponent>(strapUid, out var chair))
                 {
-                    var doAfterChairVechicleEventArgs = new DoAfterArgs(EntityManager, userUid,
-                    buckleComp.VehicleUnbuckleTime = 2f,
-                    new UnbuckleDoAfterEvent(), chairVehcile.Disabled, target: chairVehcile.Disabled)
-                    {
-                        BreakOnMove = true,
-                        BreakOnDamage = true,
-                        NeedHand = true
-                    };
-                    _doAfter.TryStartDoAfter(doAfterChairVechicleEventArgs);
+                    buckleTime = chair.ChairVehicleUnbuckleTime;
                 }
                 //SS220-Vehicle-doafter-fix begin
                 //So here if the one to unbuckle isn't one riding the vehicle,
                 //we are raising DoAfter event, so you need some time to
                 //unbuckle someone from a vehicle.
-                var doAfterEventArgs = new DoAfterArgs(EntityManager, userUid, buckleComp.VehicleUnbuckleTime = .75f, new UnbuckleDoAfterEvent(),
+                var doAfterEventArgs = new DoAfterArgs(EntityManager, userUid, buckleTime, new UnbuckleDoAfterEvent(),
                     vehicle.Rider, target: vehicle.Rider)
+                // SS220 ChairVechicle fix begin
                 {
                     BreakOnMove = true,
                     BreakOnDamage = true,
