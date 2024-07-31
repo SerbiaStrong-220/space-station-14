@@ -429,10 +429,10 @@
         collection: GlassSmack
   - type: Sprite
     drawdepth: Mobs
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
@@ -534,10 +534,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_window
   - type: Construction
     graph: WindowDirectionalU
@@ -581,10 +581,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: reinforced_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: reinforced_window
   - type: Construction
     graph: WindowDirectionalU
@@ -641,10 +641,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_reinforced_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_reinforced_window
   - type: Construction
     graph: WindowDirectionalU
@@ -697,10 +697,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_reinforced_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_reinforced_window
   - type: Construction
     graph: WindowDirectionalU
@@ -745,10 +745,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_window
   - type: Construction
     graph: WindowDirectionalU
@@ -790,10 +790,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: clock_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: clock_window
   - type: Construction
     graph: WindowDirectionalU
@@ -1257,10 +1257,10 @@
         collection: GlassSmack
   - type: Sprite
     drawdepth: Mobs
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
@@ -1372,10 +1372,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_window
   - type: Construction
     graph: WindowDirectionalO
@@ -1419,10 +1419,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: reinforced_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: reinforced_window
   - type: Construction
     graph: WindowDirectionalO
@@ -1479,10 +1479,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_reinforced_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_reinforced_window
   - type: Construction
     graph: WindowDirectionalO
@@ -1535,10 +1535,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_reinforced_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_reinforced_window
   - type: Construction
     graph: WindowDirectionalO
@@ -1583,10 +1583,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_window
   - type: Construction
     graph: WindowDirectionalO
@@ -1628,10 +1628,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: clock_window
   - type: Icon
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: clock_window
   - type: Construction
     graph: WindowDirectionalO

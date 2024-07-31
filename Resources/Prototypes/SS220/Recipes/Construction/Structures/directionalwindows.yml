@@ -139,7 +139,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -157,7 +157,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -175,7 +175,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: clock_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -193,7 +193,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -211,7 +211,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -229,7 +229,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -247,7 +247,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/U.rsi
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -393,7 +393,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -411,7 +411,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -429,7 +429,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: clock_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -447,7 +447,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -465,7 +465,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -483,7 +483,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_window
   objectType: Structure
   placementMode: SnapgridCenter
@@ -501,7 +501,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: SS220/Structures/Windows/directionals/O.rsi
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
