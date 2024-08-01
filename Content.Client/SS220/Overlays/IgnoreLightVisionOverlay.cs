@@ -96,8 +96,9 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     {
         var states = target.Comp.AllowedStates;
 
-        if (states.Contains(MobState.Dead) && states.Contains(MobState.Alive))
-            if (target.Comp.CurrentState == MobState.Dead)
+        if (states.Contains(MobState.Dead) &&
+        states.Contains(MobState.Alive) &&
+        target.Comp.CurrentState == MobState.Dead)
                 return true;
             else
                 return false;
