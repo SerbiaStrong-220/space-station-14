@@ -15,20 +15,22 @@ public sealed class SharedThermalVisionImplantSystem : EntitySystem
     }
     private void OnThermalVisionAction(Entity<ThermalVisionImplantComponent> ent, ref UseThermalVisionEvent args)
     {
-        if (ent.Comp.IsActive)
-            if (HasComp<ThermalVisionComponent>(args.Performer))
-                RemComp<ThermalVisionComponent>(args.Performer);
-            else
-                ent.Comp.IsActive = false;
+        if (ent.Comp.IsActive &&
+            HasComp<ThermalVisionComponent>(args.Performer))
+        {
+            RemComp<ThermalVisionComponent>(args.Performer);
+            ent.Comp.IsActive = !ent.Comp.IsActive;
+            args.Handled = true;
+            return;
+        }
 
-        if (!ent.Comp.IsActive)
-            if (!TryComp<ThermalVisionComponent>(args.Performer, out var thermalVision))
-                AddComp(args.Performer, new ThermalVisionComponent(ent.Comp.ThermalVisionRadius));
-            else
-            {
-                thermalVision.ThermalVisionRadius = ent.Comp.ThermalVisionRadius;
-                Dirty(args.Performer, thermalVision);
-            }
+        if (!TryComp<ThermalVisionComponent>(args.Performer, out var thermalVision))
+            AddComp(args.Performer, new ThermalVisionComponent(ent.Comp.ThermalVisionRadius));
+        else
+        {
+            thermalVision.ThermalVisionRadius = ent.Comp.ThermalVisionRadius;
+            Dirty(args.Performer, thermalVision);
+        }
 
         ent.Comp.IsActive = !ent.Comp.IsActive;
         args.Handled = true;

@@ -91,9 +91,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     ///  function wich defines what entities can be seen, f.e. pai or human, bread dog or reaper
     ///  Also contains list of components which defines it
     /// </summary>
-    /// <returns>
-    ///  True if entities could be seen by thermals. Without any other obstacles
-    /// </returns>
+    /// <returns> True if entities could be seen by thermals. Without any other obstacles </returns>
     private bool CantBeSeenByThermals(Entity<MobStateComponent> target)
     {
         var states = target.Comp.AllowedStates;
@@ -123,9 +121,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     ///  function wich defines what entities visible or not.
     ///  Also contains const values of invis perception
     /// </summary>
-    /// <returns>
-    ///  True if entities could be seen by thermals. Without any other obstacles
-    /// </returns>
+    /// <returns>True if entities could be seen by thermals. Without any other obstacles </returns>
     private bool IsStealthToThermals(EntityUid target, bool isCloseToOwner)
     {
         if (!Entity.TryGetComponent<StealthComponent>(target, out var component))
