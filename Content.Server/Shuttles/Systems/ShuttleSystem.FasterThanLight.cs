@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Server.SS220.Shuttles.Components;
 using Content.Server.Station.Events;
 using Content.Shared.Body.Components;
 using Content.Shared.Buckle.Components;
@@ -219,7 +220,8 @@ public sealed partial class ShuttleSystem
 
         if (FTLMassLimit > 0 &&
             TryComp(shuttleUid, out PhysicsComponent? shuttlePhysics) &&
-            shuttlePhysics.Mass > FTLMassLimit)
+            shuttlePhysics.Mass > FTLMassLimit &&
+            !HasComp<IgnoreFTLMassLimitComponent>(shuttleUid)) //SS220 Add IgnoreFTLMassLimitComponent
         {
             reason = Loc.GetString("shuttle-console-mass");
             return false;
