@@ -1,30 +1,30 @@
 //EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Thermals;
 
-
 namespace Content.Server.SS220.Thermals;
-
 /// <summary>
-/// Handles enabling of thermal vision when clothing is equipped and disabling when unequipped.
+/// Handles enabling of thermal vision when impanted with thermalVisionImplant.
 /// </summary>
 public sealed class SharedThermalVisionImplantSystem : EntitySystem
 {
-
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ThermalVisionImplantComponent, UseThermalVisionEvent>(OnThermalVisionAction);
     }
-
     private void OnThermalVisionAction(Entity<ThermalVisionImplantComponent> ent, ref UseThermalVisionEvent args)
     {
-        if (!TryComp<ThermalVisionImplantComponent>(args.Performer, out var thermalVisionImpalnt))
-            return;
-
-        if (HasComp<ThermalVisionComponent>(args.Performer) && thermalVisionImpalnt.IsAcive)
+        if (ent.Comp.IsActive &&
+            HasComp<ThermalVisionComponent>(args.Performer))
+        {
             RemComp<ThermalVisionComponent>(args.Performer);
-        else if (!TryComp<ThermalVisionComponent>(args.Performer, out var thermalVision))
+            ent.Comp.IsActive = !ent.Comp.IsActive;
+            args.Handled = true;
+            return;
+        }
+
+        if (!TryComp<ThermalVisionComponent>(args.Performer, out var thermalVision))
             AddComp(args.Performer, new ThermalVisionComponent(ent.Comp.ThermalVisionRadius));
         else
         {
@@ -32,6 +32,7 @@ public sealed class SharedThermalVisionImplantSystem : EntitySystem
             Dirty(args.Performer, thermalVision);
         }
 
-        thermalVisionImpalnt.IsAcive = !thermalVisionImpalnt.IsAcive;
+        ent.Comp.IsActive = !ent.Comp.IsActive;
+        args.Handled = true;
     }
 }

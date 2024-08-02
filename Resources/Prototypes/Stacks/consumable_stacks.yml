@@ -36,21 +36,21 @@
   name: ground tobacco
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
   spawn: GroundTobacco
-  maxCount: 5
+  maxCount: 1 #SS220-Snuff-box
 
 - type: stack
   id: GroundCannabis
   name: ground cannabis
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
   spawn: GroundCannabis
-  maxCount:
+  maxCount: 1 #SS220-Snuff-box
 
 - type: stack
   id: GroundCannabisRainbow
   name: ground rainbow cannabis
   icon: { sprite: /Textures/Objects/Specific/Hydroponics/rainbow_cannabis.rsi, state: powderpile_rainbow }
   spawn: GroundCannabisRainbow
-  maxCount:
+  maxCount: 1 #SS220-Snuff-box
 
 - type: stack
   id: LeavesTobaccoDried

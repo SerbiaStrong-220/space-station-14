@@ -1,7 +1,7 @@
 - type: entity
   id: ActionActivateThermalVision
-  name: ThermalVision
-  description: I CAN SEE EVERYTYNG
+  name: Переключить термальные сенсоры
+  description: Переключает термальные сенсоры в импланте владельца, что позволяет видеть живых существ сквозь преграды в ограниченном радиусе.
   noSpawn: true
   components:
   - type: InstantAction
@@ -11,4 +11,4 @@
       sprite: /Textures/SS220/Misc/ThermalEye.rsi
       state: EyeON
     event: !type:UseThermalVisionEvent
-    useDelay: 4
+    useDelay: 1

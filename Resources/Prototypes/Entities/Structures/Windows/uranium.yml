@@ -63,10 +63,10 @@
   components:
   - type: Sprite
     sprite: Structures/Windows/directional.rsi
-    state: uranium_window
+    state: uranium_window #SS220-Resprite
   - type: Icon
     sprite: Structures/Windows/directional.rsi
-    state: uranium_window
+    state: uranium_window #SS220-Resprite
   - type: Construction
     graph: WindowDirectional
     node: uraniumWindowDirectional

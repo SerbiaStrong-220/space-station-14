@@ -7,6 +7,8 @@
     CigPackBlack: 2
     CigPackMixed: 2
     CigarCase: 1
+    SnuffBox: 2 #SS220-Snuff-box
+    Ashtray: 7 #SS220-Snuff-box
     SmokingPipeFilledTobacco: 1
     Vape: 1
     Matchbox: 5
