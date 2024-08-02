@@ -17,6 +17,9 @@ public sealed partial class TTSComponent : Component
     [DataField("voice", customTypeSerializer: typeof(PrototypeIdSerializer<TTSVoicePrototype>))]
     public string? VoicePrototypeId { get; set; }
 
+    /// <summary>
+    /// Prototype that contains a list of voices for randomize
+    /// </summary>
     [DataField("randomVoicesList", customTypeSerializer: typeof(PrototypeIdSerializer<RandomVoicesListPrototype>))]
     public string? RandomVoicesList { get; private set; }
 }
