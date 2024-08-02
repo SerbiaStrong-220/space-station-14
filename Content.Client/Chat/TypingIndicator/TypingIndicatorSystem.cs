@@ -93,7 +93,7 @@ public sealed class TypingIndicatorSystem : SharedTypingIndicatorSystem
         // _isClientTyping = isClientTyping;
         // Corvax-TypingIndicator-End
 
-        // check if player controls any pawn
+        // check if player controls any entity.
         if (_playerManager.LocalEntity == null)
             return;
 
@@ -103,8 +103,8 @@ public sealed class TypingIndicatorSystem : SharedTypingIndicatorSystem
             state = _isClientTyping ? TypingIndicatorState.Typing : TypingIndicatorState.Idle;
         // Corvax-TypingIndicator-End
 
-        // send a networked event to server
-        RaiseNetworkEvent(new TypingChangedEvent(state)); // Corvax-TypingIndicator
+        //_isClientTyping = isClientTyping;
+        RaisePredictiveEvent(new TypingChangedEvent(state)); // Corvax-TypingIndicator
     }
 
     private void OnShowTypingChanged(bool showTyping)

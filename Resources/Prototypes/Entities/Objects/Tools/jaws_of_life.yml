@@ -18,6 +18,7 @@
     slots:
       - Belt
   - type: ToolTileCompatible
+    delay: 0.5
   - type: Tool
     qualities:
       - Prying
@@ -25,9 +26,9 @@
     speedModifier: 3 #SS220 JOL TilePrying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
+    speedModifier: 1.5
     pryPowered: true
     useSound: /Audio/Items/jaws_pry.ogg
-  - type: ToolForcePowered
   - type: MultipleTool
     statusShowBehavior: true
     entries:

@@ -8,12 +8,6 @@
         mapScale: 5
 
 - type: entity
-  id: BaseRandomStation
-  abstract: true
-  components:
-    - type: StationRandomTransform
-
-- type: entity
   id: BaseStationCargo
   abstract: true
   components:

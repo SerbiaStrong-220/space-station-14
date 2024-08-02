@@ -1,1 +1,2 @@
-admin-teleport-window-teleport = Телепортироваться
+#SS220-upstream-merge
+admin-ui-teleport = Телепортироваться

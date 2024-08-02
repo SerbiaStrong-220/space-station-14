@@ -1,6 +1,7 @@
-admin-add-gas-window-grid = Область
-admin-add-gas-window-tileX = Координата X
-admin-add-gas-window-tileY = Координата Y
-admin-add-gas-window-gas = Газ
-admin-add-gas-window-amount = Количество
-admin-add-gas-window-add = Добавить газ
+#SS220-upstream-merge begin
+admin-ui-atmos-tile-x = Координата X
+admin-ui-atmos-tile-y = Координата Y
+admin-ui-atmos-gas = Газ
+admin-ui-atmos-gas-amount = Количество
+admin-ui-atmos-add-gas = Добавить газ
+#SS220-upstream-merge end

@@ -30,6 +30,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Content.Shared.NameModifier.Components;
 
 namespace Content.Server.Fax;
 
@@ -409,6 +410,8 @@ public sealed class FaxSystem : EntitySystem
         var dataToCopy = _photocopierSystem.GetDataToCopyFromEntity(sendEntity);
         if (dataToCopy.Count == 0)
             return;
+
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
 
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 

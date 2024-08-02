@@ -1,4 +1,5 @@
-admin-fill-gas-window-grid = Область
-admin-fill-gas-window-gas = Газ
-admin-fill-gas-window-amount = Количество
-admin-fill-gas-window-fill = Наполнить газ
+#SS220-upstream-merge begin
+admin-ui-atmos-gas = Газ
+admin-ui-atmos-gas-amount = Количество
+admin-ui-atmos-fill-gas = Наполнить газ
+#SS220-upstream-merge end

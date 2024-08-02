@@ -1,7 +1,9 @@
 admin-player-actions-window-title = Действия с игроками
 admin-player-actions-window-ban = Панель банов
 admin-player-actions-window-admin-ghost = Админ призрак
-admin-player-actions-window-teleport = Телепорт
+#SS220-upstream-merge
+admin-ui-teleport = Телепорт
+#SS220-upstream-merge
 admin-player-actions-window-timeto = Панель времени
 admin-player-actions-window-permissions = Панель доступов
 admin-player-actions-window-announce = Сделать объявление

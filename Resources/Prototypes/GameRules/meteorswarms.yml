@@ -4,6 +4,7 @@
   components:
   - type: GameRule
     minPlayers: 0 #SS220-extended
+    cancelPresetOnTooFewPlayers: false
   - type: MeteorScheduler
 
 - type: weightedRandomEntity

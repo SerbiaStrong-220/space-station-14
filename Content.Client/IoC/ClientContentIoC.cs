@@ -5,6 +5,7 @@ using Content.Client.Clickable;
 using Content.Client.Corvax.DiscordAuth;
 using Content.Client.Corvax.JoinQueue;
 using Content.Client.Corvax.Sponsors;
+using Content.Client.DebugMon;
 using Content.Client.Eui;
 using Content.Client.GhostKick;
 using Content.Client.Launcher;
@@ -56,6 +57,7 @@ namespace Content.Client.IoC
             collection.Register<ContentReplayPlaybackManager, ContentReplayPlaybackManager>();
             collection.Register<DiscordPlayerInfoManager>(); //SS220 discord user info
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
+            collection.Register<DebugMonitorManager>();
         }
     }
 }

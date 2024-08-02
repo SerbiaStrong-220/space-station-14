@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -44,6 +45,8 @@ namespace Content.Shared.Examine
 
         protected const float ExamineBlurrinessMult = 2.5f;
 
+        private EntityQuery<GhostComponent> _ghostQuery;
+
         /// <summary>
         ///     Creates a new examine tooltip with arbitrary info.
         /// </summary>
@@ -59,6 +62,10 @@ namespace Content.Shared.Examine
             if (examinerComp is { SkipChecks: true })
                 return true;
             //SS220-Ghost-examine-priveleges end
+
+            // Ghosts can see everything.
+            if (_ghostQuery.HasComp(examiner))
+                return true;
 
             // check if the mob is in critical or dead
             if (MobStateSystem.IsIncapacitated(examiner))

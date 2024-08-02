@@ -38,6 +38,7 @@
       - Status
     lastSignals:
       Status: false
+  #SS220-signal-switch begin
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -45,6 +46,10 @@
         indicator:
           True: {state: on}
           False: {state: off}
+  #SS220-signal-switch end
+  - type: Tag
+    tags:
+    - Structure
 
 - type: entity
   id: SignalButton
@@ -105,6 +110,9 @@
               collection: MetalBreak
               params:
                 volume: -8
+  - type: Tag
+    tags:
+    - Structure
 
 - type: entity
   id: ApcNetSwitch
@@ -138,6 +146,9 @@
       graph: LightSwitchGraph
       node: LightSwitchNode
     - type: Fixtures
+    - type: Tag
+      tags:
+      - Structure
 
 - type: entity
   id: TwoWayLever
@@ -188,6 +199,9 @@
         - Left
         - Right
         - Middle
+    - type: Tag
+      tags:
+      - Structure
 
 #directional
 

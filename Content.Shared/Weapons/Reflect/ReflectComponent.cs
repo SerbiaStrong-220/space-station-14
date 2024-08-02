@@ -21,6 +21,12 @@ public sealed partial class ReflectComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField("reflects")]
     public ReflectType Reflects = ReflectType.Energy | ReflectType.NonEnergy;
 
+    /// <summary>
+    /// Probability for a projectile to be reflected.
+    /// </summary>
+    [DataField("reflectProb"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float ReflectProb = 0.25f;
+
     [DataField("spread"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public Angle Spread = Angle.FromDegrees(45);
 
@@ -34,11 +40,6 @@ public sealed partial class ReflectComponent : Component
     [DataField]
     public bool Innate = false;
 
-    /// <summary>
-    /// Maximum probability for a projectile to be reflected.
-    /// </summary>
-    [DataField("reflectProb"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public float ReflectProb = 0.25f;
     // ss220 FixESword
     [DataField("reflectProbProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float ReflectProbProjectile = 0.25f;
