@@ -217,6 +217,8 @@
     guides:
       - Cyborgs
   - type: StepTriggerImmune
+  - type: TTS
+    randomVoicesList: Borg
 
 - type: entity
   abstract: true
