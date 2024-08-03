@@ -73,9 +73,9 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
             if (CantBeRendered(uid, out var sprite, out var xform))
                 continue;
-            if (CantBeSeenByThermals((uid, stateComp)))
+            if (CantBeSeen((uid, stateComp)))
                 continue;
-            if (IsStealthToThermals(uid, isCloseToOwner))
+            if (IsStealthEnough(uid, isCloseToOwner))
                 continue;
             if (_container.IsEntityOrParentInContainer(uid))
                 if (CantBeVisibleInContainer(uid, isCloseToOwner))
@@ -88,20 +88,20 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     protected abstract void Render(Entity<SpriteComponent, TransformComponent> ent,
                         MapId? map, DrawingHandleWorld handle, Angle eyeRot);
     /// <summary>
-    ///  function wich defines what entities can be seen, f.e. pai or human, bread dog or reaper
+    ///  function which defines what entities can be seen, f.e. pai or human, bread dog or reaper
     ///  Also contains list of components which defines it
     /// </summary>
     /// <returns> True if entities could be seen by thermals. Without any other obstacles </returns>
-    private bool CantBeSeenByThermals(Entity<MobStateComponent> target)
+    private bool CantBeSeen(Entity<MobStateComponent> target)
     {
         var states = target.Comp.AllowedStates;
 
+        if (target.Comp.CurrentState == MobState.Dead)
+            return true;
+
         if (states.Contains(MobState.Dead) &&
-        states.Contains(MobState.Alive) &&
-        target.Comp.CurrentState == MobState.Dead)
-                return true;
-            else
-                return false;
+            states.Contains(MobState.Alive))
+            return false;
 
         return true;
     }
@@ -119,11 +119,11 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         return false;
     }
     /// <summary>
-    ///  function wich defines what entities visible or not.
+    ///  function which defines what entities visible or not.
     ///  Also contains const values of invis perception
     /// </summary>
     /// <returns>True if entities could be seen by thermals. Without any other obstacles </returns>
-    private bool IsStealthToThermals(EntityUid target, bool isCloseToOwner)
+    private bool IsStealthEnough(EntityUid target, bool isCloseToOwner)
     {
         if (!Entity.TryGetComponent<StealthComponent>(target, out var component))
             return false;
@@ -134,8 +134,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return false;
     }
-    /// <summary> function wich defines what entities visible or not.
-    ///  Also contains const values of invis perception </summary>
+    /// <summary> function for verifying if we can see smth in container </summary>
     /// <returns>True if entities could be seen by thermals. Without any other obstacles </returns>
     private bool CantBeVisibleInContainer(EntityUid target, bool isCloseToOwner)
     {
@@ -159,7 +158,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     }
     /// <summary> Checks if entity has a components from list </summary>
     /// <returns> True if entity has any of the listed components </returns>
-    /// <exception cref="Exception"> Throw excep if List contains false comp name</exception>
+    /// <exception cref="Exception"> Throw exception if List contains false comp name</exception>
     private bool HasComponentFromList(EntityUid target, List<string> blacklistComponentNames)
     {
         foreach (var compName in blacklistComponentNames)
