@@ -88,7 +88,7 @@ public sealed partial class GraphicsTab : Control
             (int)ViewportWidthSlider.Slider.MaxValue);
 
         Control.AddOption(new OptionIntegerScaling(Control, _cfg, IntegerScalingCheckBox));
-        Control.AddOptionCheckBox(CCvars220.BloomLightingEnabled, BloomLightingCheckBox); //SS220-bloom
+        Control.AddOptionCheckBox(CCVars220.BloomLightingEnabled, BloomLightingCheckBox); //SS220-bloom
         Control.AddOptionCheckBox(CCVars.ViewportScaleRender, ViewportLowResCheckBox, invert: true);
         Control.AddOptionCheckBox(CCVars.ParallaxLowQuality, ParallaxLowQualityCheckBox);
         Control.AddOptionCheckBox(CCVars.HudFpsCounterVisible, FpsCounterCheckBox);

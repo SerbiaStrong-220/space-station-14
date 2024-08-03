@@ -26,13 +26,9 @@ public sealed partial class BuckleComponent : Component
     /// True if the object we are buckled to has a seatbelt, false otherwise.
     /// This prevents us from being pulled by gravity (i.e. grav. anomaly).
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool FastenedSeatbelt;
     //SS220-gravpull-straps-fix end
-
-    [ViewVariables]
-    [AutoNetworkedField]
-    public EntityUid? LastEntityBuckledTo;
 
     [MemberNotNullWhen(true, nameof(BuckledTo))]
     public bool Buckled => BuckledTo != null;
@@ -53,9 +49,9 @@ public sealed partial class BuckleComponent : Component
     /// <summary>
     /// Time required for others to unbuckle us from a vehicle
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public float VehicleUnbuckleTime = .75f;
+    public TimeSpan VehicleUnbuckleTime = TimeSpan.FromSeconds(.75f);
     //SS220-Vehicle-doafter-fix end
 
     /// <summary>

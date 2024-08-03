@@ -32,6 +32,8 @@ public abstract partial class SharedBuckleSystem
     public static ProtoId<AlertCategoryPrototype> BuckledAlertCategory = "Buckled";
 
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+
     private void InitializeBuckle()
     {
         SubscribeLocalEvent<BuckleComponent, ComponentShutdown>(OnBuckleComponentShutdown);
@@ -71,7 +73,7 @@ public abstract partial class SharedBuckleSystem
         if (args.Handled || args.Cancelled)
             return;
 
-        TryUnbuckle(uid, uid, false, component);
+        TryUnbuckle(uid, uid, component);
         args.Handled = true;
     }
     //SS220-Vehicle-doafter-fix end
@@ -224,31 +226,6 @@ public abstract partial class SharedBuckleSystem
         }
         else
         {
-            _alerts.ClearAlertCategory(uid, BuckledAlertCategory);
-        }
-    }
-
-    /// <summary>
-    /// Sets the <see cref="BuckleComponent.BuckledTo"/> field in the component to a value
-    /// </summary>
-    /// <param name="strapUid"> Value tat with be assigned to the field </param>
-    private void SetBuckledTo(EntityUid buckleUid, EntityUid? strapUid, StrapComponent? strapComp, BuckleComponent buckleComp)
-    {
-        buckleComp.BuckledTo = strapUid;
-        var strapHasSeatbelt = strapComp?.HasSeatbelt;
-
-        if (strapUid == null)
-        {
-            buckleComp.Buckled = false;
-            buckleComp.FastenedSeatbelt = false;
-        }
-        else
-        {
-            buckleComp.LastEntityBuckledTo = strapUid;
-            buckleComp.DontCollide = true;
-            buckleComp.Buckled = true;
-            buckleComp.FastenedSeatbelt = strapHasSeatbelt ?? false;
-            buckleComp.BuckleTime = _gameTiming.CurTime;
             _alerts.ClearAlertCategory(buckle, BuckledAlertCategory);
         }
 
@@ -561,13 +538,15 @@ public abstract partial class SharedBuckleSystem
 
         // SS220 Readd-Vehicles begin
         if (TryComp<VehicleComponent>(strapUid, out var vehicle) &&
-            vehicle.Rider != userUid && !_mobState.IsIncapacitated(buckleUid))
+            user != null &&
+            vehicle.Rider != user &&
+            !_mobState.IsIncapacitated(buckle))
         {
             //SS220-Vehicle-doafter-fix begin
             //So here if the one to unbuckle isn't one riding the vehicle,
             //we are raising DoAfter event, so you need some time to
             //unbuckle someone from a vehicle.
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, userUid, buckleComp.VehicleUnbuckleTime, new UnbuckleDoAfterEvent(),
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, user.Value, buckle.Comp.VehicleUnbuckleTime, new UnbuckleDoAfterEvent(),
                 vehicle.Rider, target: vehicle.Rider)
             {
                 BreakOnMove = true,
