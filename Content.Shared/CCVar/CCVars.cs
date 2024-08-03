@@ -871,8 +871,8 @@ namespace Content.Shared.CCVar
         /// <summary>
         ///     Delay of ahelp messages for non-admins.
         /// </summary>
-        public static readonly CVarDef<TimeSpan> AdminAhelpMessageDelay =
-            CVarDef.Create("admin.ahelp_message_delay", TimeSpan.FromSeconds(5), CVar.SERVERONLY);
+        public static readonly CVarDef<float> AdminAhelpMessageDelay =
+            CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVERONLY);
         // end 220 ahelp spam
 
         /// <summary>

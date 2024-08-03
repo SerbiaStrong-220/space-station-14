@@ -88,9 +88,9 @@ namespace Content.Server.Administration.Systems
         }
 
         // start 220 ahelp spam
-        private void OnDelayChanged(TimeSpan delay)
+        private void OnDelayChanged(float delay)
         {
-            _messageDelay = delay;
+            _messageDelay = TimeSpan.FromSeconds(delay);
         }
         // end 220 ahelp spam
 
@@ -408,7 +408,7 @@ namespace Content.Server.Administration.Systems
             }
 
             // start 220 ahelp spam
-            if (LastMessageSentTime.TryGetValue(message.UserId, out var lastMessageSentTime)
+            if (LastMessageSentTime.TryGetValue(senderSession.UserId, out var lastMessageSentTime)
                 && _timing.CurTime - lastMessageSentTime < _messageDelay
                 && !senderAHelpAdmin)
                 return;
@@ -496,7 +496,7 @@ namespace Content.Server.Administration.Systems
                 _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(senderSession.Name, str, !personalChannel, _gameTicker.RoundDuration().ToString("hh\\:mm\\:ss"), _gameTicker.RunLevel, playedSound: playSound, noReceivers: nonAfkAdmins.Count == 0));
             }
 
-            LastMessageSentTime[message.UserId] = _timing.CurTime; // 220 ahelp spam
+            LastMessageSentTime[senderSession.UserId] = _timing.CurTime; // 220 ahelp spam
 
             if (admins.Count != 0 || sendsWebhook)
                 return;
@@ -534,7 +534,7 @@ namespace Content.Server.Administration.Systems
             else
                 stringbuilder.Append(":inbox_tray:");
 
-            if(roundTime != string.Empty && roundState == GameRunLevel.InRound)
+            if (roundTime != string.Empty && roundState == GameRunLevel.InRound)
                 stringbuilder.Append($" **{roundTime}**");
             if (!playedSound)
                 stringbuilder.Append(" **(S)**");
