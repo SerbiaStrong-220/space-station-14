@@ -21,6 +21,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.Administration.Systems
 {
@@ -78,7 +79,7 @@ namespace Content.Server.Administration.Systems
             Subs.CVar(_config, CCVars.DiscordAHelpAvatar, OnAvatarChanged, true);
             Subs.CVar(_config, CVars.GameHostName, OnServerNameChanged, true);
             Subs.CVar(_config, CCVars.AdminAhelpOverrideClientName, OnOverrideChanged, true);
-            Subs.CVar(_config, CCVars.AdminAhelpMessageDelay, OnDelayChanged, true);
+            Subs.CVar(_config, CCVars220.AdminAhelpMessageDelay, OnDelayChanged, true);
             _sawmill = IoCManager.Resolve<ILogManager>().GetSawmill("AHELP");
             _maxAdditionalChars = GenerateAHelpMessage("", "", true, _gameTicker.RoundDuration().ToString("hh\\:mm\\:ss"), _gameTicker.RunLevel, playedSound: false).Length;
             _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;

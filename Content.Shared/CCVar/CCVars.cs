@@ -867,13 +867,6 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<string> AdminAhelpOverrideClientName =
             CVarDef.Create("admin.override_adminname_in_client_ahelp", string.Empty, CVar.SERVERONLY);
 
-        // start 220 ahelp spam
-        /// <summary>
-        ///     Delay of ahelp messages for non-admins.
-        /// </summary>
-        public static readonly CVarDef<float> AdminAhelpMessageDelay =
-            CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVERONLY);
-        // end 220 ahelp spam
 
         /// <summary>
         ///     The threshold of minutes to appear as a "new player" in the ahelp menu
