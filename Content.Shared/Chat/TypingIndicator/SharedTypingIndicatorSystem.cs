@@ -73,7 +73,7 @@ public abstract class SharedTypingIndicatorSystem : EntitySystem
         if (!_actionBlocker.CanEmote(uid.Value) && !_actionBlocker.CanSpeak(uid.Value))
         {
             // nah, make sure that typing indicator is disabled
-            SetTypingIndicatorState(uid, TypingIndicatorState.None); // Corvax-TypingIndicator
+            SetTypingIndicatorState(uid.Value, TypingIndicatorState.None); // Corvax-TypingIndicator
             return;
         }
 

@@ -477,17 +477,6 @@ namespace Content.Shared.Preferences
             };
         }
 
-        public HumanoidCharacterProfile WithoutTraitPreference(ProtoId<TraitPrototype> traitId, IPrototypeManager protoManager)
-        {
-            var list = new HashSet<ProtoId<TraitPrototype>>(_traitPreferences);
-            list.Remove(traitId);
-
-            return new(this)
-            {
-                _traitPreferences = list,
-            };
-        }
-
         public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool teleportAfkToCryoStorage) //SS220
             => new(this) { TeleportAfkToCryoStorage = teleportAfkToCryoStorage };
 

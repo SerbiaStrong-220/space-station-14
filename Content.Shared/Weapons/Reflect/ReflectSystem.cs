@@ -28,10 +28,11 @@ namespace Content.Shared.Weapons.Reflect;
 /// </summary>
 public sealed class ReflectSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -94,7 +95,7 @@ public sealed class ReflectSystem : EntitySystem
     private bool TryReflectProjectile(EntityUid user, EntityUid reflector, EntityUid projectile, ProjectileComponent? projectileComp = null, ReflectComponent? reflect = null)
     {
         if (!Resolve(reflector, ref reflect, false) ||
-            !reflect.Enabled ||
+            !_toggle.IsActivated(reflector) ||
             !TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflect.Reflects & reflective.Reflective) == 0x0 ||
             !_random.Prob(reflect.ReflectProb) ||
@@ -103,31 +104,7 @@ public sealed class ReflectSystem : EntitySystem
             return false;
         }
 
-        return bestReflector != null;
-    }
-
-    private bool TryReflectProjectile(EntityUid user, Entity<ReflectComponent> reflector, Entity<ProjectileComponent> projectile)
-    {
-        if (
-            // Is it on?
-            !reflector.Comp.Enabled ||
-            // Is the projectile deflectable?
-            !TryComp<ReflectiveComponent>(projectile, out var reflective) ||
-            // Does the deflector deflect the type of projecitle?
-            (reflector.Comp.Reflects & reflective.Reflective) == 0x0 ||
-            // Is the projectile correctly set up with physics?
-            !TryComp<PhysicsComponent>(projectile, out var physics) ||
-            // If the user of the reflector is a mob with stamina, is it capable of deflecting?
-            TryComp<StaminaComponent>(user, out var staminaComponent) && staminaComponent.Critical ||
-            _standing.IsDown(reflector)
-        )
-            return false;
-
-        // If this dice roll fails, the shot isn't deflected
-        if (!_random.Prob(GetProjectileReflectChance(reflector))) // SS220 ESword reflect fix
-            return false;
-
-        var rotation = _random.NextAngle(-reflector.Comp.SpreadProjectile / 2, reflector.Comp.SpreadProjectile / 2).Opposite(); // ss220 FixESword
+        var rotation = _random.NextAngle(-reflect.Spread / 2, reflect.Spread / 2).Opposite();
         var existingVelocity = _physics.GetMapLinearVelocity(projectile, component: physics);
         var relativeVelocity = existingVelocity - _physics.GetMapLinearVelocity(user);
         var newVelocity = rotation.RotateVec(relativeVelocity);
