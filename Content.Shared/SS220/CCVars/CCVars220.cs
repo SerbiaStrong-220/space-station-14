@@ -30,5 +30,5 @@ public sealed class CCVars220
     /// Delay of ahelp messages for non-admins.
     /// </summary>
     public static readonly CVarDef<float> AdminAhelpMessageDelay =
-        CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVER);
+        CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVERONLY | CVar.REPLICATED);
 }
