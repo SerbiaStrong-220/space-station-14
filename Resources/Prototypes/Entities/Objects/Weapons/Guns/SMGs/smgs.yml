@@ -5,6 +5,11 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/smg.ogg
+      params:
+        volume: 2
   - type: Sprite
   - type: Item
     size: Large

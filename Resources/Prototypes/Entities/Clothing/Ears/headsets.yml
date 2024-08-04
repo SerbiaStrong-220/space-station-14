@@ -5,6 +5,11 @@
   name: headset
   description: An updated, modular intercom that fits over the head. Takes encryption keys.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_headset.ogg
+      params:
+        volume: 2
   - type: ContainerContainer
     containers:
       key_slots: !type:Container

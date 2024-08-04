@@ -8,6 +8,11 @@
   name: helmet
   description: Standard security gear. Protects the head from impacts.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Clothing/Head/Helmets/security.rsi
   - type: Clothing
