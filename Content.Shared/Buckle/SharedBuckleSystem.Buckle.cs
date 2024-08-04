@@ -466,11 +466,9 @@ public abstract partial class SharedBuckleSystem
                 // SS220 ChairVechicle fix begin
                 var buckleTime = buckleComp.VehicleUnbuckleTime;
 
-                if (TryComp<ChairVehcileComponent>(strapUid, out var chair))
-                {
-                    buckleTime = chair.ChairVehicleUnbuckleTime;
-                }
-                //SS220-Vehicle-doafter-fix begin
+                if (vehicle.UnbuckleTime != null)
+                    buckleTime = vehicle.UnbuckleTime.Value;
+                //SS220-Vehicle-doafter-fix end
                 //So here if the one to unbuckle isn't one riding the vehicle,
                 //we are raising DoAfter event, so you need some time to
                 //unbuckle someone from a vehicle.
