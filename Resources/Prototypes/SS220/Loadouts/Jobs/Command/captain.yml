@@ -23,6 +23,24 @@
 
 # Head
 - type: loadout
+  id: CaptainHeadHat
+  equipment: CaptainHeadHat
+
+- type: startingGear
+  id: CaptainHeadHat
+  equipment:
+    head: ClothingHeadCaptainHat
+
+- type: loadout
+  id: CaptainBeret
+  equipment: CaptainBeret
+
+- type: startingGear
+  id: CaptainBeret
+  equipment:
+    head: ClothingHeadBeretCap
+
+- type: loadout
   id: CaptainWhiteHead
   equipment: CaptainWhiteHead
   effects:

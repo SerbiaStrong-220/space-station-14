@@ -1,0 +1,16 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatSeniorService
+  name: фуражка ведущего сервисного отдела
+  description: Большая, стильная голова
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/seniorsercap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/seniorsercap.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Ian # SS220 Shapochki
+    - HamsterWearable
+    - WhitelistChameleon

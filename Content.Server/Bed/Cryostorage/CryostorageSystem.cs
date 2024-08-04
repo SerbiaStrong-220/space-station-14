@@ -27,6 +27,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Server.Forensics;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -57,6 +59,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         SubscribeLocalEvent<CryostorageComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpened);
         SubscribeLocalEvent<CryostorageComponent, CryostorageRemoveItemBuiMessage>(OnRemoveItemBuiMessage);
+        SubscribeLocalEvent<CryostorageComponent, CryopodGhostActionEvent>(OnCryopodGhostAction);
 
         SubscribeLocalEvent<CryostorageContainedComponent, PlayerSpawnCompleteEvent>(OnPlayerSpawned);
         SubscribeLocalEvent<CryostorageContainedComponent, MindRemovedMessage>(OnMindRemoved);
@@ -109,7 +112,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         if (entity == null)
             return;
 
-        AdminLog.Add(LogType.Action, LogImpact.High,
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, // 220 cryo
             $"{ToPrettyString(attachedEntity):player} removed item {ToPrettyString(entity)} from cryostorage-contained player " +
             $"{ToPrettyString(cryoContained):player}, stored in cryostorage {ToPrettyString(ent)}");
 
@@ -127,6 +130,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
     private void OnPlayerSpawned(Entity<CryostorageContainedComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, $"{ToPrettyString(ent):player} woke up from cryosleep inside of {ToPrettyString(ent.Comp.Cryostorage)}"); // 220 cryo
         // if you spawned into cryostorage, we're not gonna round-remove you.
         ent.Comp.GracePeriodEndTime = null;
     }
@@ -219,7 +223,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         cryostorageComponent.StoredPlayers.Add(ent);
         Dirty(ent, comp);
         UpdateCryostorageUIState((cryostorageEnt.Value, cryostorageComponent));
-        AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}");
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}"); // 220 cryo
 
         if (!TryComp<StationRecordsComponent>(station, out var stationRecords))
             return;
@@ -232,7 +236,16 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords))
                 jobName = entry.JobTitle;
 
-            _stationRecords.RemoveRecord(key, stationRecords);
+            // _stationRecords.RemoveRecord(key, stationRecords);
+
+            // start 220 cryo department record
+            var recordPairTry = FindEntityStationRecordKey(station.Value, ent);
+            if (recordPairTry is { } recordPair)
+            {
+                recordPair.Item2.IsInCryo = true;
+                _stationRecords.Synchronize(station.Value);
+            }
+            // end 220 cryo department record
         }
 
         _chatSystem.DispatchStationAnnouncement(station.Value,
@@ -271,7 +284,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         comp.GracePeriodEndTime = null;
         cryostorageComponent.StoredPlayers.Remove(uid);
-        AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}");
+        AdminLog.Add(LogType.CryoStorage, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}"); // 220 cryo
         UpdateCryostorageUIState((cryostorage, cryostorageComponent));
     }
 
@@ -346,4 +359,26 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             HandleEnterCryostorage((uid, containedComp), id);
         }
     }
+
+    // start 220 cryo department record
+    private (StationRecordKey, GeneralStationRecord)? FindEntityStationRecordKey(EntityUid station, EntityUid uid)
+    {
+        if (TryComp<DnaComponent>(uid, out var dnaComponent))
+        {
+            var stationRecords = _stationRecords.GetRecordsOfType<GeneralStationRecord>(station);
+            var result = stationRecords.FirstOrNull(records => records.Item2.DNA == dnaComponent.DNA);
+            if (result is not null)
+                return (new(result.Value.Item1, station), result.Value.Item2);
+        }
+
+        return null;
+    }
+    // end 220 cryo department record
+    // start 220 cryo action
+    public void OnCryopodGhostAction(Entity<CryostorageComponent> ent, ref CryopodGhostActionEvent args)
+    {
+        if (TryComp<CryostorageContainedComponent>(args.Performer, out var contained))
+            contained.GracePeriodEndTime = Timing.CurTime;
+    }
+    // start 220 cryo action
 }

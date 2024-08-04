@@ -3,8 +3,6 @@ using System.Numerics;
 using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Climbing.Components;
-using Content.Shared.Climbing.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
@@ -20,6 +18,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Utility;
@@ -29,9 +28,7 @@ namespace Content.Shared.Buckle;
 
 public abstract partial class SharedBuckleSystem
 {
-    /// SS220 BedCollisionFix begin
-    [Dependency] private readonly ClimbSystem _climbSystem = default!;
-    /// SS220 BedCollisionFix end
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     private void InitializeBuckle()
     {
         SubscribeLocalEvent<BuckleComponent, ComponentStartup>(OnBuckleComponentStartup);
@@ -48,6 +45,9 @@ public abstract partial class SharedBuckleSystem
         SubscribeLocalEvent<BuckleComponent, UpdateCanMoveEvent>(OnBuckleUpdateCanMove);
         SubscribeLocalEvent<BuckleComponent, UnbuckleDoAfterEvent>(OnUnbuckleDoAfter);
     }
+
+    [ValidatePrototypeId<AlertCategoryPrototype>]
+    public const string BuckledAlertCategory = "Buckled";
 
     private void OnBuckleComponentStartup(EntityUid uid, BuckleComponent component, ComponentStartup args)
     {
@@ -81,7 +81,7 @@ public abstract partial class SharedBuckleSystem
             return;
 
         var strapPosition = Transform(strapUid).Coordinates;
-        if (ev.NewPosition.InRange(EntityManager, _transform, strapPosition, strapComp.MaxBuckleDistance))
+        if (ev.NewPosition.EntityId.IsValid() && ev.NewPosition.InRange(EntityManager, _transform, strapPosition, strapComp.MaxBuckleDistance))
             return;
 
         TryUnbuckle(uid, uid, true, component);
@@ -204,7 +204,7 @@ public abstract partial class SharedBuckleSystem
         }
         else
         {
-            _alerts.ClearAlertCategory(uid, AlertCategory.Buckled);
+            _alerts.ClearAlertCategory(uid, BuckledAlertCategory);
         }
     }
 
@@ -263,8 +263,8 @@ public abstract partial class SharedBuckleSystem
         }
 
         // Does it pass the Whitelist
-        if (strapComp.Whitelist != null &&
-            !strapComp.Whitelist.IsValid(buckleUid, EntityManager) || strapComp.Blacklist?.IsValid(buckleUid, EntityManager) == true)
+        if (_whitelistSystem.IsWhitelistFail(strapComp.Whitelist, buckleUid) ||
+            _whitelistSystem.IsBlacklistPass(strapComp.Blacklist, buckleUid))
         {
             if (_netManager.IsServer)
                 _popup.PopupEntity(Loc.GetString("buckle-component-cannot-fit-message"), userUid, buckleUid, PopupType.Medium);
@@ -460,7 +460,7 @@ public abstract partial class SharedBuckleSystem
 
             // SS220 Readd-Vehicles begin
             if (TryComp<VehicleComponent>(strapUid, out var vehicle) &&
-                vehicle.Rider != userUid)
+                vehicle.Rider != userUid && !_mobState.IsIncapacitated(buckleUid))
             {
                 //SS220-Vehicle-doafter-fix begin
                 //So here if the one to unbuckle isn't one riding the vehicle,
@@ -549,11 +549,6 @@ public abstract partial class SharedBuckleSystem
         var ev = new BuckleChangeEvent(strapUid, buckleUid, false);
         RaiseLocalEvent(buckleUid, ref ev);
         RaiseLocalEvent(strapUid, ref ev);
-
-        // SS220 BedCollision Fix begin
-        if (HasComp<ClimbableComponent>(strapUid))
-            _climbSystem.ForciblySetClimbing(userUid, strapUid);
-        // SS220 BedCollision Fix begin
 
         return true;
     }

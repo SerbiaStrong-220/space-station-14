@@ -160,6 +160,11 @@ ent-AirlockExternalGlassNukeopLocked = { ent-AirlockExternalGlass }
 ent-AirlockExternalGlassEngineeringLocked = { ent-AirlockExternalGlass }
     .suffix = Внешний, Стеклянный, Инженерный, Закрыт
     .desc = { ent-AirlockExternalGlass.desc }
+# SS220 Science External Airlock begin
+ent-AirlockExternalGlassScienceLocked = { ent-AirlockExternalGlass }
+    .suffix = Внешний, Стеклянный, Научный, Закрыт
+    .desc = { ent-AirlockExternalGlass.desc }
+# SS220 Science External Airlock end
 ent-AirlockExternalGlassAtmosphericsLocked = { ent-AirlockExternalGlass }
     .suffix = Внешний, Стеклянный, Атмосферный, Закрыт
     .desc = { ent-AirlockExternalGlass.desc }

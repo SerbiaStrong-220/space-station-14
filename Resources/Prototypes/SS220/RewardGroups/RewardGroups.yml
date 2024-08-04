@@ -37,6 +37,7 @@
     SponsorBoxMafia: 3
     SponsorBoxBlackMafia: 3
     SponsorCigCarton: 2
+    ClothingWristWatchUssp: 2
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa

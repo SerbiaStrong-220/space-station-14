@@ -76,6 +76,7 @@
       ignoreWhitelist:
         components:
             - IgnoreSpiderWeb
+            - IgnoreOnfloorSlowers #SS220 Flying mobs slowdown fix
 
 - type: entity
   id: SpiderWebClown

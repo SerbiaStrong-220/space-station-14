@@ -114,6 +114,7 @@ public sealed class GeneratorSystem : SharedGeneratorSystem
                 multiplier * FixedPoint2.Epsilon.Float(),
                 availableReagent.Value);
 
+            entity.Comp.FractionalReagents[reagentId] = fractionalReagent;
             _solutionContainer.RemoveReagent(entity.Comp.Solution.Value, reagentId, FixedPoint2.FromCents(toRemove));
         }
     }

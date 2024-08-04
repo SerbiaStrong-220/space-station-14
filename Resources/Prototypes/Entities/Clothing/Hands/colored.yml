@@ -13,21 +13,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#9C0DE1"
+      color: "#841dbf" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#9C0DE1"
+        color: "#841dbf" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#9C0DE1"
+        color: "#841dbf" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#9C0DE1"
+        color: "#841dbf" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-purple
 
@@ -42,21 +42,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#940000"
+      color: "#c11b1b" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#940000"
+        color: "#c11b1b" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#940000"
+        color: "#c11b1b" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#940000"
+        color: "#c11b1b" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-red
 
@@ -71,21 +71,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#0089EF"
+      color: "#1d79bf" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#0089EF"
+        color: "#1d79bf" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#0089EF"
+        color: "#1d79bf" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#0089EF"
+        color: "#1d79bf" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-blue
 
@@ -100,21 +100,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#723A02"
+      color: "#bf977c" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#723A02"
+        color: "#bf977c" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#723A02"
+        color: "#bf977c" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#723A02"
+        color: "#bf977c" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-brown
 
@@ -129,21 +129,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#999999"
+      color: "#b1b1b1" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#999999"
+        color: "#b1b1b1" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#999999"
+        color: "#b1b1b1" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#999999"
+        color: "#b1b1b1" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-grey
 
@@ -158,21 +158,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#5ABF2F"
+      color: "#7cbf7c" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#5ABF2F"
+        color: "#7cbf7c" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#5ABF2F"
+        color: "#7cbf7c" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#5ABF2F"
+        color: "#7cbf7c" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-green
 
@@ -187,21 +187,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#C09F72"
+      color: "#bf7442" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#C09F72"
+        color: "#bf7442" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#C09F72"
+        color: "#bf7442" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#C09F72"
+        color: "#bf7442" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-brown
 
@@ -216,21 +216,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#EF8100"
+      color: "#c14d1b" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#EF8100"
+        color: "#c14d1b" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#EF8100"
+        color: "#c14d1b" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#EF8100"
+        color: "#c14d1b" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-orange
 
@@ -245,21 +245,21 @@
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:
     - state: icon
-      color: "#EAE8E8"
+      color: "#eeeeee" #SS220-Gloves-Color-Edited
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#EAE8E8"
+        color: "#eeeeee" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#EAE8E8"
+        color: "#eeeeee" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     clothingVisuals:
       gloves:
       - state: equipped-HAND
-        color: "#EAE8E8"
+        color: "#eeeeee" #SS220-Gloves-Color-Edited
   - type: Fiber
     fiberColor: fibers-white
 
@@ -277,10 +277,10 @@
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#535353"
+        color: "#39393f" #SS220-Gloves-Color-Edited
       right:
       - state: inhand-right
-        color: "#535353"
+        color: "#39393f" #SS220-Gloves-Color-Edited
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/black.rsi
   - type: GloveHeatResistance

@@ -54,12 +54,5 @@ public sealed partial class BallisticAmmoProviderComponent : Component
     /// DoAfter delay for filling a bullet into another ballistic ammo provider.
     /// </summary>
     [DataField]
-    public TimeSpan FillDelay = TimeSpan.FromSeconds(0.4);
-    // Start 220 ammoFillFix
-    /// <summary>
-    /// Is currently loading?.
-    /// </summary>
-    [DataField]
-    public bool IsReloading = false;
-    // End 220 ammoFillFix
+    public TimeSpan FillDelay = TimeSpan.FromSeconds(0.4); // 0.5->0.4 220 ammoFillFix
 }

@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [ BaseItem, StorePresetUplink ] #PDA's have uplinks so they have to inherit the data.
   id: BasePDA
   name: PDA
   description: Personal Data Assistant.
@@ -393,7 +393,7 @@
     state: pda-clown
   - type: Slippery
     paralyzeTime: 4
-    launchForwardsMultiplier: 9 #SS220 1st_april_event
+    launchForwardsMultiplier: 1.5 
   - type: StepTrigger
   - type: CollisionWake
     enabled: false
@@ -1100,7 +1100,7 @@
     id: CentcomIDCard
     state: pda-centcom
     penSlot:
-      startingItem: PenCentcom
+      startingItem: CentCommNewPen #SS220-CentcomFashion
       whitelist:
         tags:
         - Write
@@ -1133,7 +1133,7 @@
     id: DebugIDCard # SS220 admin memes
     state: pda-clear #SS220 PDA-Resprite-Start
     penSlot:
-      startingItem: PenCentcom
+      startingItem: CentCommNewPen #SS220-CentcomFashion
       whitelist:
         tags:
         - Write #SS220 PDA-Resprite-End

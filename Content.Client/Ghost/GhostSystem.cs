@@ -105,7 +105,7 @@ namespace Content.Client.Ghost
 
                 // sprite.Color = color;
 
-                sprite.Rotation += Angle.FromDegrees(180.0f);
+                //sprite.Rotation += Angle.FromDegrees(180.0f);  //SS220 Ghost rotation fix
 
                 sprite.Color = sprite.Color.WithBlue(10);
                 //var t = sprite.GetType();

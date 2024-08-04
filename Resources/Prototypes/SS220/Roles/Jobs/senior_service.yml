@@ -1,0 +1,39 @@
+- type: job
+  id: SeniorService
+  name: ведущий сервисного отдела
+  description: job-description-senior-service
+  playTimeTracker: JobSeniorService
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobServiceWorker
+      time: 43200 #12 ч
+    - !type:RoleTimeRequirement
+      role: JobJanitor
+      time: 43200 #12 ч
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 216000 # 60 ч
+  startingGear: SeniorAssistantGear
+  icon: "JobIconSeniorService"
+  supervisors: job-supervisors-hop
+  access:
+  - Bar
+  - Service
+  - Janitor
+  - External
+  - Theatre
+  - Kitchen
+  - Hydroponics
+  - Maintenance
+
+- type: startingGear
+  id: SeniorAssistantGear
+  equipment:
+    shoes: ClothingShoesColorBrown
+    id: SeniorServicePDA
+    belt: BoxFolderClipboard
+    ears: ClothingHeadsetService
+    gloves: ClothingHandsGlovesColorWhite
+  storage:
+    back:
+    - BoxSurvival

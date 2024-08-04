@@ -117,6 +117,7 @@
     runningState: building
     staticRecipes:
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
+      - ClothingWristWatch #SS220 Wrist Watch
       - Wirecutter
       - Igniter
       - Signaller
@@ -203,6 +204,7 @@
       - BoxLethalshot
       - BoxShotgunFlare
       - BoxShotgunSlug
+      - CombatKnife
       - MagazineBoxLightRifle
       - MagazineBoxMagnum
       - MagazineBoxPistol
@@ -310,6 +312,7 @@
       - WeaponGauntletGorilla
       - SynthesizerInstrument
       - ClothingShoesBootsMagSci
+      - ClothingShoesBootsMoon
       - ClothingShoesBootsSpeed
       - NodeScanner
       - HolofanProjector
@@ -332,11 +335,13 @@
       - FauxTileAstroSnow
       - OreBagOfHolding
       - DeviceQuantumSpinInverter
+      - ThermalVisorRND # SS220 Thermals
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - BoxBeanbag
       - BoxShotgunIncendiary
       - BoxShotgunUranium
+      # - BoxShellTranquilizer
       - ExplosivePayload
       - GrenadeBlast
       - GrenadeEMP
@@ -375,6 +380,7 @@
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
+      - ClothingEyesThermalGlassesSecurity #SS220 Thermals
 
 - type: entity
   id: ProtolatheHyperConvection
@@ -519,6 +525,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+  - type: RequireProjectileTarget
 
 - type: entity
   id: CircuitImprinterHyperConvection
@@ -720,6 +727,7 @@
       - BoxShotgunPractice
       - BoxShotgunSlug
       - ClothingEyesHudSecurity
+      - CombatKnife
       - Flash
       - ForensicPad
       - Handcuffs
@@ -758,6 +766,7 @@
       - BoxBeanbag
       - BoxShotgunIncendiary
       - BoxShotgunUranium
+      # - BoxShellTranquilizer
       - ExplosivePayload
       - FlashPayload
       - GrenadeBlast
@@ -806,6 +815,7 @@
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
+      - ClothingEyesThermalGlassesSecurity #SS220 Thermals
   - type: MaterialStorage
     whitelist:
       tags:
@@ -841,6 +851,7 @@
         - BoxLethalshot
         - BoxShotgunFlare
         - BoxShotgunSlug
+       #  - BoxShellTranquilizer
         - MagazineBoxLightRifle
         - MagazineBoxMagnum
         - MagazineBoxPistol
@@ -1119,13 +1130,25 @@
       - CarpetWhite
   - type: EmagLatheRecipes
     emagStaticRecipes: #SS220 TODO: Rework recipes what are there after EMAG
-      - ClothingHeadHatCentcomcap
-      - ClothingHeadHatCentcom
-      - ClothingUniformJumpsuitCentcomAgent
-      - ClothingUniformJumpsuitCentcomFormal
-      - ClothingUniformJumpskirtCentcomFormalDress
-      - ClothingUniformJumpsuitCentcomOfficer
-      - ClothingUniformJumpsuitCentcomOfficial
+#SS220-Centcom-EmagLatheRecipes-Fix-Begin
+      # - ClothingHeadHatCentcomcap
+      # - ClothingHeadHatCentcom
+      # - ClothingUniformJumpsuitCentcomAgent
+      # - ClothingUniformJumpsuitCentcomFormal
+      # - ClothingUniformJumpskirtCentcomFormalDress
+      # - ClothingUniformJumpsuitCentcomOfficer
+      # - ClothingUniformJumpsuitCentcomOfficial
+      - ClothingHeadHatNavyFieldOfficerCap
+      - ClothingHeadHatBeretNanoTrasenOfficer
+      - ClothingHeadHatBeretNanoTrasenDiplomat
+      - ClothingUniformCentCommOfficer
+      - ClothingUniformJumpsuitCentcomOfficerTurtleneck
+      - ClothingUniformJumpskirtCentcomOfficerTurtleneck
+      - ClothingUniformNanotrasenDiplomat
+      - ClothingOuterWinterCentcomm
+      - ClothingNeckCloakFieldOfficerCentComm
+      - ClothingNeckScarfCentcomm
+#SS220-Centcom-EmagLatheRecipes-Fix-End
       - ClothingHeadHatSyndieMAA
       - ClothingHeadHatSyndie
       - ClothingUniformJumpsuitOperative
@@ -1138,7 +1161,7 @@
       - ClothingUniformJumpsuitPyjamaSyndicatePink
       - ClothingHeadPyjamaSyndicateRed
       - ClothingUniformJumpsuitPyjamaSyndicateRed
-      - ClothingOuterWinterCentcom
+      # - ClothingOuterWinterCentcom SS220-Centcom-EmagLatheRecipes-Fix
       - ClothingOuterWinterSyndie
       - ClothingOuterWinterSyndieCap
   - type: MaterialStorage

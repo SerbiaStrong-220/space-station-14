@@ -35,6 +35,11 @@
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.5
     sprintSpeedModifier: 0.5
+    #SS220 Flying mobs slowdown fix begin
+    ignoreWhitelist:
+        components:
+        - IgnoreOnfloorSlowers
+    #SS220 Flying mobs slowdown fix end
   - type: Physics
     bodyType: Static
   - type: Fixtures

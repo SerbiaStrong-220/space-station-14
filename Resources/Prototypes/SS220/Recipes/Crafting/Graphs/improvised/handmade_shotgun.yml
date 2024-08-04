@@ -1,0 +1,26 @@
+- type: constructionGraph
+  id: WeaponShotgunHandmadeGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: HDpistol
+      steps:
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: pipe
+      - tag: RifleStock
+        icon:
+          sprite: Objects/Misc/rifle_stock.rsi
+          state: icon
+        name: rifle stock
+      - tag: WeaponFlareGun
+        icon:
+          sprite: Objects/Weapons/Guns/Shotguns/flaregun.rsi
+          state: icon
+        name: Flare Gun
+        doAfter: 25
+  - node: HDpistol
+    entity: WeaponShotgunHandmade

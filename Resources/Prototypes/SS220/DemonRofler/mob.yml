@@ -10,6 +10,7 @@
     healPerConsume:
       types:
         Piercing: -80
+        Slash: -80
         Blunt: -80
         Heat: -50
         Poison: -50

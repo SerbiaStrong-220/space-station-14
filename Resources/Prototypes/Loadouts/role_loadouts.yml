@@ -77,9 +77,10 @@
   groups:
   - LawyerNeck
   - LawyerJumpsuit
-  - LawyerBackpack
+  - CommonBackpack
   - Glasses
   - Trinkets
+  - Gloves #SS220-IAA-Loadouts
 
 - type: roleLoadout
   id: JobChaplain
@@ -88,7 +89,7 @@
   - ChaplainMask
   - ChaplainNeck
   - ChaplainJumpsuit
-  - ChaplainBackpack
+  - CommonBackpack
   - ChaplainOuterClothing
   - Glasses
   - Trinkets
@@ -139,7 +140,7 @@
 - type: roleLoadout
   id: JobMusician
   groups:
-  - MusicianBackpack
+  - CommonBackpack
   - MusicianOuterClothing
   - Glasses
   - Trinkets
@@ -151,7 +152,7 @@
   - QuartermasterHead
   - QuartermasterNeck
   - QuartermasterJumpsuit
-  - QuartermasterBackpack
+  - CargoTechnicianBackpack
   - QuartermasterOuterClothing
   - QuartermasterShoes
   - Glasses
@@ -184,7 +185,7 @@
   groups:
   - ChiefEngineerHead
   - ChiefEngineerJumpsuit
-  - ChiefEngineerBackpack
+  - ChiefEngineerBack #ss220-ce-fix
   - ChiefEngineerNeck
   - ChiefEngineerOuterClothing
   - ChiefEngineerShoes
@@ -225,7 +226,7 @@
   - ResearchDirectorHead
   - ResearchDirectorNeck
   - ResearchDirectorJumpsuit
-  - ResearchDirectorBackpack
+  - ScientistBackpack
   - ResearchDirectorOuterClothing
   - ScientistGloves
   - ResearchDirectorShoes
@@ -271,6 +272,7 @@
   id: JobWarden
   groups:
   - WardenHead
+  - SecurityNeck #SS220 holster loadout
   - WardenJumpsuit
   - SecurityBackpack
   - SecurityBelt
@@ -282,6 +284,7 @@
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
@@ -294,9 +297,9 @@
   id: JobDetective
   groups:
   - DetectiveHead
-  - DetectiveNeck
+  # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
-  - DetectiveBackpack
+  - SecurityBackpack
   - DetectiveOuterClothing
   - SecurityShoes
   - Trinkets
@@ -316,7 +319,7 @@
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
-  - ChiefMedicalOfficerBackpack
+  - MedicalBackpack
   - ChiefMedicalOfficerOuterClothing
   - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
@@ -363,7 +366,7 @@
   - MedicalMask
   - ParamedicJumpsuit
   - MedicalGloves
-  - ParamedicBackpack
+  - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
   - Glasses

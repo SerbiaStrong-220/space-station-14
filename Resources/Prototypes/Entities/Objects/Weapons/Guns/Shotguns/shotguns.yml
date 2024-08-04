@@ -212,7 +212,7 @@
     deconstructionTarget: null
 
 - type: entity
-  name: sawn-off shogun
+  name: sawn-off shotgun
   parent: WeaponShotgunSawn
   id: WeaponShotgunSawnEmpty
   description: Groovy! Uses .50 shotgun shells.
@@ -243,11 +243,16 @@
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_pipe.ogg
   - type: BallisticAmmoProvider
-    capacity: 1
+    proto: null #ss220 handmade gun buff
+    capacity: 1 #ss220 handmade gun buff
+  # ss220 handmade gun buff (Оффы зачем-то сделали крафт обреза из пистолета, я убрал) 
+  #- type: Construction 
+  #  graph: ShotgunSawn
+  #  node: shotgunsawn
+  # deconstructionTarget: null
   - type: Construction
-    graph: ShotgunSawn
-    node: shotgunsawn
-    deconstructionTarget: null
+    graph: WeaponShotgunHandmadeGraph
+    node: HDpistol
   - type: StaticPrice
     price: 0
 

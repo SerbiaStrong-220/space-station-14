@@ -9386,7 +9386,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 16.5,-1.5
       parent: 104
-- proto: KitchenMicrowave
+- proto: SyndicateMicrowave
   entities:
   - uid: 1189
     components:

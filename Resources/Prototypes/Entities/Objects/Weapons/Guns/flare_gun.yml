@@ -37,3 +37,8 @@
     slots:
     - Belt
     - suitStorage
+#ss220 handmade gun buff begin
+  - type: Tag 
+    tags:
+      - WeaponFlareGun
+#ss220 handmade gun buff end

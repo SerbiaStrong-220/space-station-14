@@ -100,5 +100,6 @@ public enum LogType
     SecutiyRecords = 90, // SS220 Criminal-Records
     AtmosTemperatureChanged = 91,
     DeviceNetwork = 92,
-    StoreRefund = 93
+    StoreRefund = 93,
+    CryoStorage = 94 // 220 Cryo-Storage
 }

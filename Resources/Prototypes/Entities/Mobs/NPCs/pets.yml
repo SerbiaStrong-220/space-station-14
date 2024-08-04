@@ -193,6 +193,18 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: bingus
   - type: Physics
+  # 220 cat-emotes start
+  - type: Speech
+    speechSounds: Cat
+    speechVerb: SmallMob
+    allowedEmotes: ['Meow','Mew','Growl','Purr','Hiss']
+  - type: Vocal
+    wilhelm: "/Audio/Voice/Felinid/cat_wilhelm.ogg"
+    sounds:
+      Male: Cat
+      Female: Cat
+      Unsexed: Cat
+  # 220 cat-emotes end
   - type: Fixtures
     fixtures:
       fix1:
@@ -783,7 +795,6 @@
       amount: 3
     - id: DrinkTequilaBottleFull
       amount: 1
-  - type: Flashable
   - type: Tag
     tags:
     - CannotSuicide
@@ -810,7 +821,6 @@
 #    name: ghost-role-information-tropico-name
 #    description: ghost-role-information-tropico-description
 #  - type: GhostTakeoverAvailable
-#  - type: Flashable
   - type: Tag
     tags:
     - VimPilot

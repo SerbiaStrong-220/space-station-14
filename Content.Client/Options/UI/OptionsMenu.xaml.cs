@@ -19,7 +19,7 @@ namespace Content.Client.Options.UI
             Tabs.SetTabTitle(1, Loc.GetString("ui-options-tab-graphics"));
             Tabs.SetTabTitle(2, Loc.GetString("ui-options-tab-controls"));
             Tabs.SetTabTitle(3, Loc.GetString("ui-options-tab-audio"));
-            Tabs.SetTabTitle(4, Loc.GetString("ui-options-tab-network"));
+            Tabs.SetTabTitle(4, Loc.GetString("ui-options-tab-network")); // 220 revert-network-tab
 
             UpdateTabs();
         }

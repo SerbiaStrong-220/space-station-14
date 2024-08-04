@@ -109,11 +109,11 @@ SignNtFlag: NTFlag
 # 2023-12-10 - SS220
 VendingMachineSmartFridge: StorageSmartFridge
 
-# 2023-12-10
-SpawnPointSeniorResearcher: null
-SpawnPointSeniorOfficer: null
-SpawnPointSeniorEngineer: null
-SpawnPointSeniorPhysician: null
+# 2023-12-10 / 2024-07-20 - SS220 Spawners returned in game
+# SpawnPointSeniorResearcher: null
+# SpawnPointSeniorOfficer: null
+# SpawnPointSeniorEngineer: null
+# SpawnPointSeniorPhysician: null
 
 # 2023-12-12
 #No this is not the CMO hardsuit, their prototype IDs were just confusingly similar
@@ -296,11 +296,11 @@ AirlockGlassShuttleEasyPryLocked: AirlockExternalGlassShuttleLocked
 AirlockShuttleEasyPryLocked: AirlockExternalShuttleLocked
 
 # 2024-03-10
-ClothingBackpackFilledDetective: ClothingBackpackSecurityFilledDetective
-ClothingBackpackDuffelFilledDetective: ClothingBackpackDuffelSecurityFilledDetective
-ClothingBackpackSatchelFilledDetective: ClothingBackpackSatchelSecurityFilledDetective
 FoodChili: FoodChiliPepper
 FoodChilly: FoodChillyPepper
+# ClothingBackpackFilledDetective: ClothingBackpackSecurityFilledDetective
+# ClothingBackpackDuffelFilledDetective: ClothingBackpackDuffelSecurityFilledDetective
+# ClothingBackpackSatchelFilledDetective: ClothingBackpackSatchelSecurityFilledDetective
 
 # 2024-03-11
 ImprovisedExplosive: FireBomb
@@ -393,3 +393,17 @@ DrinkBottleGoldschlager: DrinkBottleGildlager
 # 2024-05-14
 soda_dispenser: SodaDispenser
 chem_master: ChemMaster
+
+# 2024-05-21
+CrateJanitorExplosive: ClosetJanitorBombFilled
+
+# 2024-05-27
+DoorRemoteFirefight: null
+
+# 2024-06-03
+AirlockServiceCaptainLocked: AirlockCaptainLocked
+
+# 2024-07-20 SS220 Cryo Migration
+BaseSSDConsole: null
+SSDStorageConsole: null
+CryopodSSD: CryogenicSleepUnitSpawner

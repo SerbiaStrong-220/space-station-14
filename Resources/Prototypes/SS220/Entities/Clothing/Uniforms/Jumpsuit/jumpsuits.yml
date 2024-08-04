@@ -1,4 +1,45 @@
-#Сервис
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Командование
+
+  # Капитан
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformWhiteJumpsuitCaptain
+  name: белая униформа офицера
+  description: Это белый костюм с золотыми украшениями, на погонах одна золотая звезда - "Майор".
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
+
+# Внутренние дела
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNTR
+  name: nanotrasen representative uniform
+  description: The uniform of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr_uniform.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTrustedLawyer
+  name: uniform trusted lawyer NanoTrasen
+  description: A chic suit for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
+
+# Сервис
+
+  # Клоун
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitClowns
@@ -10,6 +51,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
 
+  # Ботаник
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitHydroponicsBlue
@@ -64,3 +106,115 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
+
+  # Репортёр
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitJournalistRed
+  name: red journalist suit
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalistred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/journalistred.rsi
+
+  # Бармен
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBartenderRed
+  name: red bartender's uniform
+  description: A special red outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_red.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBartenderGreen
+  name: green bartender's uniform
+  description: A special green outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBartenderNanotrasen
+  name: униформа заслуженного бармена NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
+
+# Medical
+
+  # Парамед
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitFeldsher
+  name: uniform feldsher
+  description: Just don't be offended, are you a feldsher or a real doctor?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
+
+  # Бригмедик
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMilitaryFeldsher
+  name: uniform military feldsher
+  description: This is not a red color at all..
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_military_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_military_feldsher.rsi
+
+
+# Cargo
+
+  # Квартирмейстер
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCargonovich
+  name: cargonovich
+  description: You should also bring a burst gas barrel...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWarehouseman
+  name: the overalls of the warehouse manager
+  description: Practical, comfortable, movement-free and, most importantly, stylish jumpsuit. You have bad memories of your former boss with him.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/qm_warehouseman.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/qm_warehouseman.rsi
+
+# Syndicate
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSyndicateDiplomatist
+  name: syndicate diplomatist uniforms
+  description: The uniform of a crime syndicate diplomat, nothing unusual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi

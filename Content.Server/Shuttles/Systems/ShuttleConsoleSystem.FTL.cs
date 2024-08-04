@@ -1,3 +1,4 @@
+using Content.Server.Popups;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared.Shuttles.BUIStates;
@@ -127,6 +128,7 @@ public sealed partial class ShuttleConsoleSystem
         // Check shuttle can even FTL
         if (!_shuttle.CanFTL(shuttleUid.Value, out var reason))
         {
+            _popup.PopupEntity(reason, consoleUid.Value); // SS220 War-Ops-Fix
             // TODO: Session popup
             return;
         }

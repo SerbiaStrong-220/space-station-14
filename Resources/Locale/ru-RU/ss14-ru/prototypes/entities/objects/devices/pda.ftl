@@ -103,7 +103,8 @@ ent-ERTMedicPDA = КПК врача ОБР
 ent-ERTSecurityPDA = КПК офицера безопасности ОБР
     .suffix = Офицер безопасности
     .desc = Красный значит мощный. На боку нацарапаны метки подсчёта.
-ent-CBURNPDA = КПК РХБЗЗ
+# SS220 CBURN questions
+ent-CBURNPDA = КПК РХБЗ
     .desc = Пахнет гнилой плотью.
 ent-PsychologistPDA = КПК психолога
     .desc = Выглядит безупречно чистым.

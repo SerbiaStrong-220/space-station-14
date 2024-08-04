@@ -1,7 +1,10 @@
 ﻿using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.Item;
+using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -20,6 +23,7 @@ public abstract class SharedRatKingSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -29,6 +33,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         SubscribeLocalEvent<RatKingComponent, RatKingOrderActionEvent>(OnOrderAction);
 
         SubscribeLocalEvent<RatKingServantComponent, ComponentShutdown>(OnServantShutdown);
+        SubscribeLocalEvent<RatKingServantComponent, MobStateChangedEvent>(OnServantDie);
 
         SubscribeLocalEvent<RatKingRummageableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<RatKingRummageableComponent, RatKingRummageDoAfterEvent>(OnDoAfterComplete);
@@ -87,6 +92,18 @@ public abstract class SharedRatKingSystem : EntitySystem
         if (TryComp(component.King, out RatKingComponent? ratKingComponent))
             ratKingComponent.Servants.Remove(uid);
     }
+
+    //ss220 rat servant fix begin
+    private void OnServantDie(EntityUid uid, RatKingServantComponent component, MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        EnsureComp<ItemComponent>(uid);
+
+        _tagSystem.AddTag(uid, "Trash");
+    }
+    //ss220 rat servant fix end
 
     private void UpdateActions(EntityUid uid, RatKingComponent? component = null)
     {

@@ -75,7 +75,9 @@ public sealed class BanManager : IBanManager, IPostInjectInit
 
     public HashSet<string>? GetRoleBans(NetUserId playerUserId)
     {
-        return _cachedRoleBans.TryGetValue(playerUserId, out var roleBans) ? roleBans.Select(banDef => banDef.Role).ToHashSet() : null;
+        return _cachedRoleBans.TryGetValue(playerUserId, out var roleBans)
+            ? roleBans.Select(banDef => banDef.Role).ToHashSet()
+            : null;
     }
 
     private async Task CacheDbRoleBans(NetUserId userId, IPAddress? address = null, ImmutableArray<byte>? hwId = null)
@@ -114,7 +116,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
     }
 
     #region Server Bans
-    public async void CreateServerBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableArray<byte>? hwid, uint? minutes, NoteSeverity severity, string? banningAdminName, int statedRound, string reason)
+    public async void CreateServerBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableArray<byte>? hwid, uint? minutes, NoteSeverity severity, string? banningAdminName, int statedRound, string reason, bool postBanInfo)
     {
         DateTimeOffset? expires = null;
         if (minutes > 0)
@@ -171,7 +173,10 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         _chat.SendAdminAlert(logMessage);
 
         // SS220 user ban info post start
-        await _discordBanPostManager.PostUserBanInfo(banId);
+        if (postBanInfo)
+        {
+            await _discordBanPostManager.PostUserBanInfo(banId);
+        }
         // SS220 user ban info post end
 
         // If we're not banning a player we don't care about disconnecting people
@@ -190,7 +195,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
     #region Job Bans
     // If you are trying to remove timeOfBan, please don't. It's there because the note system groups role bans by time, reason and banning admin.
     // Removing it will clutter the note list. Please also make sure that department bans are applied to roles with the same DateTimeOffset.
-    public async void CreateRoleBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableArray<byte>? hwid, string role, uint? minutes, NoteSeverity severity, string reason, DateTimeOffset timeOfBan)
+    public async void CreateRoleBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableArray<byte>? hwid, string role, uint? minutes, NoteSeverity severity, string reason, DateTimeOffset timeOfBan, bool postBanInfo)
     {
         if (!_prototypeManager.TryIndex(role, out JobPrototype? _) && !_prototypeManager.TryIndex(role, out AntagPrototype? _))
         {
@@ -232,7 +237,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         }
 
         // SS220 user ban info post start
-        if (banDef.Id.HasValue)
+        if (banDef.Id.HasValue && postBanInfo)
         {
             await _discordBanPostManager.PostUserJobBanInfo(banDef.Id.Value, targetUsername);
         }
@@ -280,13 +285,13 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         return $"Pardoned ban with id {banId}";
     }
 
-    public HashSet<string>? GetJobBans(NetUserId playerUserId)
+    public HashSet<ProtoId<JobPrototype>>? GetJobBans(NetUserId playerUserId)
     {
         if (!_cachedRoleBans.TryGetValue(playerUserId, out var roleBans))
             return null;
         return roleBans
             .Where(ban => ban.Role.StartsWith(JobPrefix, StringComparison.Ordinal))
-            .Select(ban => ban.Role[JobPrefix.Length..])
+            .Select(ban => new ProtoId<JobPrototype>(ban.Role[JobPrefix.Length..]))
             .ToHashSet();
     }
     #endregion
