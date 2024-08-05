@@ -23,7 +23,6 @@
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
     ears: ClothingHeadsetLawyer #SS220-InternalAffairs
-    ears: 
   inhand:
     - BriefcaseBrownFilled
   storage:
