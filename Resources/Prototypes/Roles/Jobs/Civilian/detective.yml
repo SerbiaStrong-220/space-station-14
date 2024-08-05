@@ -28,7 +28,6 @@
     neck: ClothingBeltHolsterFilled #SS220 holster to neck
   storage:
     back:
-    - BoxSurvivalSecurity
     - Flash
     - ForensicPad
     - ForensicScanner

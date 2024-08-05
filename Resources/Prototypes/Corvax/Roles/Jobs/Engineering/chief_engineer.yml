@@ -35,5 +35,4 @@
     belt: ClothingBeltUtilityEngineering
   storage:
     back:
-    - BoxSurvivalEngineering
     - Flash

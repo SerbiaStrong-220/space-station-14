@@ -39,6 +39,24 @@
   - GlassesJamjar
   - GlassesJensen
 
+- type: loadoutGroup
+  id: GroupTankHarness
+  name: loadout-group-tank-harness
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarness
+
+- type: loadoutGroup
+  id: Survival
+  name: loadout-group-survival-basic
+  minLimit: 3
+  hidden: true
+  loadouts:
+  - EmergencyNitrogen
+  - EmergencyOxygen
+  - LoadoutSpeciesEVANitrogen
+
 # Command
 - type: loadoutGroup
   id: CaptainHead
@@ -47,6 +65,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+  #SS220-CapHeadLoadoutsChanges-Begin
+  - CaptainBeret
+  - CaptainHeadHat
+  #SS220-CapHeadLoadoutsChanges-End
   #ss220-loadout-captain-begin
   - CaptainWhiteHead
   - CaptainWhiteBeret
@@ -370,6 +392,13 @@
   - JanitorWintercoat
 
 - type: loadoutGroup
+  id: JanitorPlunger
+  name: loadout-group-janitor-plunger
+  minLimit: 0
+  loadouts:
+  - JanitorGoldenPlunger
+
+- type: loadoutGroup
   id: BotanistHead
   name: loadout-group-botanist-head
   minLimit: 0
@@ -454,6 +483,16 @@
   - JesterShoes
 
 - type: loadoutGroup
+  id: SurvivalClown
+  name: loadout-group-survival-clown
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenClown
+  - EmergencyOxygenClown
+  - LoadoutSpeciesEVANitrogen
+
+- type: loadoutGroup
   id: MimeHead
   name: loadout-group-mime-head
   minLimit: 0
@@ -493,11 +532,53 @@
   - MimeWintercoat
 
 - type: loadoutGroup
+  id: MusicianJumpsuit
+  name: loadout-group-musician-jumpsuit
+  loadouts:
+  - MusicianJumpsuit
+  - MusicianJumpskirt
+
+- type: loadoutGroup
   id: MusicianOuterClothing
   name: loadout-group-musician-outerclothing
   minLimit: 0
   loadouts:
   - MusicianWintercoat
+
+- type: loadoutGroup
+  id: Instruments
+  name: loadout-group-instruments
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - Glockenspiel
+  - MusicBox
+  - Xylophone
+  - Microphone
+  - Synthesizer
+  - Kalimba
+  - Woodblock
+  - ElectricGuitar
+  - BassGuitar
+  - RockGuitar
+  - AcousticGuitar
+  - Banjo
+  - Violin
+  - Viola
+  - Cello
+  - Trumpet
+  - Trombone
+  - FrenchHorn
+  - Euphonium
+  - Saxophone
+  - Accordion
+  - Harmonica
+  - Clarinet
+  - Flute
+  - Recorder
+  - PanFlute
+  - Ocarina
+  - Bagpipe
 
 # Cargo
 - type: loadoutGroup
@@ -763,6 +844,16 @@
   - WhiteShoes
   - EngineeringWinterBoots
 
+- type: loadoutGroup
+  id: SurvivalExtended
+  name: loadout-group-survival-extended
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenExtended
+  - EmergencyOxygenExtended
+  - LoadoutSpeciesEVANitrogen
+
 # Science
 - type: loadoutGroup
   id: ResearchDirectorHead
@@ -896,6 +987,7 @@
   - HeadofSecurityHead
   - HeadofSecurityBeret
   - HeadofSecurityBigCap #SS220-FreedomHoSCap
+  - HatCapHoS #ss220 sec loadout update
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -906,6 +998,10 @@
   - HeadofSecurityTurtleneck
   - HeadofSecurityTurtleneckSkirt
   - HeadofSecurityFormalSuit
+  - JumpsuitHoSGrey #ss220 sec loadout update
+  - JumpsuitHoSBlue #ss220 sec loadout update
+  - JumpskirtHoSParadeMale #ss220 sec loadout update
+  - JumpsuitHoSParadeMale #ss220 sec loadout update
 #  - HeadofSecurityFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
@@ -916,6 +1012,7 @@
   - HeadofSecurityCloak
   - HeadofSecurityMantle
   - SecurityHolster #SS220-HoS-Holster
+  - MantleHOSShoulder #ss220 sec loadout update
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -923,6 +1020,7 @@
   loadouts:
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
+  - WinterHoSUnarmored #ss220 sec loadout update
 
 - type: loadoutGroup
   id: WardenHead
@@ -955,15 +1053,17 @@
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
+  - HatCowboyBlack #ss220 sec loadout update
 
-#SS220 holster loadout begin
+#SS220 neck loadout begin
 - type: loadoutGroup
   id: SecurityNeck
   name: loadout-group-security-neck
   minLimit: 0
   loadouts:
-  - SecurityHolster
-#SS220 holster loadout end
+  - SecurityHolster #SS220 holster loadout
+  - Headphones #SS220 sec loadout update
+#SS220 neck loadout end
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -977,6 +1077,7 @@
   # - SeniorOfficerJumpskirt  #SS220 Seniors roles
   - SecurityJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - JumpsuitSecBlue #ss220 sec loadout update
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1000,6 +1101,8 @@
   - ArmorVest
   - ArmorVestSlim
   - SecurityOfficerWintercoat
+  - CoatSecurityOvercoat #ss220 sec loadout update
+  - VestArmorSec #ss220 sec loadout update
 
 - type: loadoutGroup
   id: SecurityShoes
@@ -1008,6 +1111,7 @@
   - CombatBoots
   - JackBoots
   - SecurityWinterBoots
+  - BootsJackSec #ss220 sec loadout update
 
 - type: loadoutGroup
   id: SecurityPDA
@@ -1061,6 +1165,16 @@
   - SecurityCadetJumpsuitTurtleneckAlt
   - SecurityCadetJumpskirtTurtleneck
   - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: SurvivalSecurity
+  name: loadout-group-survival-security
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenSecurity
+  - EmergencyOxygenSecurity
+  - LoadoutSpeciesEVANitrogen
 
 # Medical
 - type: loadoutGroup
@@ -1247,6 +1361,16 @@
   - BlueShoes
   - MedicalWinterBoots
 
+- type: loadoutGroup
+  id: SurvivalMedical
+  name: loadout-group-survival-medical
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenMedical
+  - EmergencyOxygenMedical
+  - LoadoutSpeciesEVANitrogen
+
 # Wildcards
 - type: loadoutGroup
   id: ReporterJumpsuit
@@ -1271,3 +1395,41 @@
   - BlueBoxingGloves
   - GreenBoxingGloves
   - YellowBoxingGloves
+
+# Other
+- type: loadoutGroup
+  id: SurvivalSyndicate
+  name: loadout-group-survival-syndicate
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenSyndicate
+  - EmergencyOxygenSyndicate
+  - LoadoutSpeciesEVANitrogen
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathTool
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathTool
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathToolMedical
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathToolMedical
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathToolSecurity
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathToolSecurity

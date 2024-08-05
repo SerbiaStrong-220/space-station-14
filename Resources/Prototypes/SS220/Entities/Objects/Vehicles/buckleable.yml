@@ -50,7 +50,6 @@
   components:
   - type: Strap
     buckleOffset: "0.10, 0.36"
-    maxBuckleDistance: 1
   - type: InputMover
   - type: InteractionOutline
   - type: Vehicle
@@ -192,7 +191,6 @@
     noRot: true
   - type: Strap
     buckleOffset: "0.15, -0.05"
-    maxBuckleDistance: 1
   - type: MovementSpeedModifier
     acceleration: 1
     friction: 1
@@ -244,7 +242,6 @@
     baseSprintSpeed: 7
   - type: Strap
     buckleOffset: "0.1, -0.05"
-    maxBuckleDistance: 1
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false
@@ -288,7 +285,6 @@
       noRot: true
     - type: Strap
       buckleOffset: "0.15, -0.05"
-      maxBuckleDistance: 1
     - type: Armor
       modifiers:
         coefficients:
@@ -328,7 +324,6 @@
       noRot: true
     - type: Strap
       buckleOffset: "0.1, -0.05"
-      maxBuckleDistance: 1
     - type: MovementSpeedModifier
       acceleration: 2
       friction: 1.5
@@ -380,7 +375,6 @@
     noRot: true
   - type: Strap
     buckleOffset: "0.1, -0.05"
-    maxBuckleDistance: 1
   - type: MovementSpeedModifier
     acceleration: 1
     friction: 0.8
@@ -439,7 +433,6 @@
       baseSprintSpeed: 2
     - type: Strap
       buckleOffset: "0,0"
-      maxBuckleDistance: 1
     - type: Fixtures
       fixtures:
         fix1:

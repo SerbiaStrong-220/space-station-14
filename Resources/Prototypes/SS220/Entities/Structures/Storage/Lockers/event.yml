@@ -2,7 +2,7 @@
   id: UsspCloset
   parent: ClosetBase
   name: шкаф СССП
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: Стандартное хранилище СССП для различных вещей.
   components:
   - type: Sprite

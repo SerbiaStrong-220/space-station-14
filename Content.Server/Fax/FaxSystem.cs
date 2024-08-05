@@ -30,6 +30,8 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Content.Shared.NameModifier.Components;
 
 namespace Content.Server.Fax;
 
@@ -281,8 +283,8 @@ public sealed class FaxSystem : EntitySystem
 
                     break;
                 case FaxConstants.FaxPrintCommand:
-                    if(!args.Data.TryGetValue(FaxConstants.FaxPaperDataToCopy, out Dictionary<Type, IPhotocopiedComponentData>? dataToCopy) ||
-                       !args.Data.TryGetValue(FaxConstants.FaxPaperMetaData, out PhotocopyableMetaData? metaDataToCopy))
+                    if (!args.Data.TryGetValue(FaxConstants.FaxPaperDataToCopy, out Dictionary<Type, IPhotocopiedComponentData>? dataToCopy) ||
+                        !args.Data.TryGetValue(FaxConstants.FaxPaperMetaData, out PhotocopyableMetaData? metaDataToCopy))
                         return;
 
                     var printout = new FaxPrintout(dataToCopy, metaDataToCopy);
@@ -409,6 +411,8 @@ public sealed class FaxSystem : EntitySystem
         var dataToCopy = _photocopierSystem.GetDataToCopyFromEntity(sendEntity);
         if (dataToCopy.Count == 0)
             return;
+
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
 
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 

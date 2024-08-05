@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Paper;
+using Content.Shared.NameModifier.Components;
 using Content.Shared.SS220.Photocopier;
 using Content.Shared.SS220.Photocopier.Forms;
 using Robust.Shared.Map;
@@ -50,9 +51,11 @@ public sealed partial class PhotocopierSystem
             return false;
         }
 
+        TryComp<NameModifierComponent>(entity, out var nameMod);
+
         metaData = new PhotocopyableMetaData()
         {
-            EntityName = metaDataComp.EntityName,
+            EntityName = nameMod?.BaseName ?? metaDataComp.EntityName,
             EntityDescription = metaDataComp.EntityDescription,
             PrototypeId = metaDataComp.EntityPrototype?.ID
         };

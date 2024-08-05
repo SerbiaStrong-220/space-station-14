@@ -44,7 +44,6 @@
 #    pocket2: MagazinePistol #SS220-DeleteSecurityLetal-End
   storage:
     back:
-    - BoxSurvivalSecurity
     - Flash
     - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
     - MagazinePistolRubber

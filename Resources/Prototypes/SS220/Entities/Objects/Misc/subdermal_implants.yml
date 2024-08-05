@@ -3,7 +3,7 @@
   id: MindSlaveImplant
   name: mind-slave implant
   description: lmaoooo
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
    - type: Tag
      tags:

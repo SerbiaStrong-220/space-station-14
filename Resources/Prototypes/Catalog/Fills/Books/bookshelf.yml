@@ -15,7 +15,7 @@
         orGroup: BookPool
       - id: BookBartendersManual
         orGroup: BookPool
-      - id: BookChefGaming
+      - id: BookHowToCookForFortySpaceman
         orGroup: BookPool
       - id: BookLeafLoversSecret
         orGroup: BookPool
@@ -38,6 +38,8 @@
       - id: BookBusido # Corvax-Books
         prob: 0.1
         orGroup: BookAuthor
+      - id: BookSpaceLaw
+        orGroup: BookPool
       - id: BookNarsieLegend
         prob: 0.1
         orGroup: BookAuthor

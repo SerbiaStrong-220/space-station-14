@@ -128,7 +128,7 @@
   id: ClothingUniformJumpsuitCentcomAgent
   name: CentCom agent's jumpsuit
   description: A suit worn by CentCom's legal team. Smells of burnt coffee.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/centcom_agent.rsi
@@ -140,7 +140,7 @@
   id: ClothingUniformJumpsuitCentcomOfficial
   name: CentCom official's jumpsuit
   description: It's a jumpsuit worn by CentCom's officials.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/centcom_official.rsi
@@ -152,7 +152,7 @@
   id: ClothingUniformJumpsuitCentcomOfficer
   name: CentCom turtleneck suit # Corvax-Resprite
   description: A casual, yet refined green turtleneck, used by CentCom Officials. It has a fragrance of aloe. # Corvax-Resprite
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
@@ -213,10 +213,10 @@
     sprite: Clothing/Uniforms/Jumpsuit/clown.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/clown.rsi
-    femaleMask: UniformTop
   - type: Tag
     tags:
     - ClownSuit
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingUniformJumpsuitClown
@@ -227,7 +227,6 @@
     sprite: Clothing/Uniforms/Jumpsuit/clown_banana.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/clown_banana.rsi
-    femaleMask: UniformTop
   - type: Construction
     graph: BananaClownJumpsuit
     node: jumpsuit
@@ -343,6 +342,18 @@
     sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-left
+      right:
+      - state: inhand-right
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-right
 
 - type: entity
   parent: ClothingUniformBase
@@ -598,6 +609,18 @@
     sprite: Clothing/Uniforms/Jumpsuit/security.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-left
+      right:
+      - state: inhand-right
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-right
 
 - type: entity
   parent: ClothingUniformBase
@@ -631,6 +654,18 @@
     sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-left
+      right:
+      - state: inhand-right
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-right
 
 - type: entity
   parent: ClothingUniformBase
@@ -786,7 +821,7 @@
   id: ClothingUniformJumpsuitCentcomFormal
   name: central command formal suit
   description: A suit for special occasions.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/centcomformal.rsi
@@ -822,9 +857,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/tacticool.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/tacticool.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/tacticool.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/tacticool.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false

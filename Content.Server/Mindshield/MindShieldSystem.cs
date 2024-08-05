@@ -9,7 +9,6 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Tag;
-using Content.Server.SS220.Thermals;
 
 namespace Content.Server.Mindshield;
 
@@ -33,10 +32,6 @@ public sealed class MindShieldSystem : EntitySystem
     [ValidatePrototypeId<TagPrototype>]
     public const string MindSlaveTag = "MindSlave";
     //SS220-mindslave end
-    //SS220 Thermal implant begin
-    [ValidatePrototypeId<TagPrototype>]
-    public const string ThermalImplantTag = "ThermalImplant";
-    //SS220 Thermal implant ends
 
     public override void Initialize()
     {
@@ -62,13 +57,6 @@ public sealed class MindShieldSystem : EntitySystem
                 _sharedSubdermalImplant.ForceRemove(ev.Implanted.Value, ev.Implant);
         }
         //SS220-mindslave end
-        //SS220 Thermalvisionimplant begins
-        if (_tag.HasTag(ev.Implant, ThermalImplantTag) && ev.Implanted != null)
-        {
-            EnsureComp<ThermalVisionImplantComponent>(ev.Implanted.Value);
-        }
-        // else (_tag.HasTag(ev.Implant, ThermalImplantTag) && ev.Implanted != null)
-        //SS220 Thermalvisionimplant ends
     }
 
     /// <summary>

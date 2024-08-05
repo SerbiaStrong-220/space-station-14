@@ -8,6 +8,7 @@
   rules:
     - SurvivalRule #SS220 survival rule
     - RampingStationEventScheduler
+    - GameRuleMeteorScheduler
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -21,6 +22,7 @@
     # - Revolutionary
     - Zombie
     - RampingStationEventScheduler
+    - GameRuleMeteorScheduler
 
 - type: gamePreset
   id: Extended

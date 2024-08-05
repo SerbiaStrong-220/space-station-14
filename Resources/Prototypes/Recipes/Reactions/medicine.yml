@@ -618,7 +618,7 @@
   id: Opporozidone
   minTemp: 400 #Maybe if a method of reducing reagent temp exists one day, this could be -50
   reactants:
-    Cognizine: 
+    Cognizine:
       amount: 1
     Plasma:
       amount: 2
@@ -693,3 +693,30 @@
       catalyst: true
   products:
     Happiness: 4
+
+- type: reaction
+  id: PotassiumIodide
+  reactants:
+    Potassium:
+      amount: 1
+    Iodine:
+      amount: 1
+  products:
+    PotassiumIodide: 2
+
+# SS220 Haloperidol (remove official one)
+# - type: reaction
+#   id: Haloperidol
+#   reactants:
+#     Aluminium:
+#       amount: 1
+#     Chlorine:
+#       amount: 1
+#     Fluorine:
+#       amount: 1
+#     Oil:
+#       amount: 1
+#     PotassiumIodide:
+#       amount: 1
+#   products:
+#     Haloperidol: 5

@@ -682,3 +682,192 @@
     collection: FootstepTile
   itemDrop: ShardGlass
   heatCapacity: 10000
+
+###################
+- type: tile
+  id: FloorTileCarpetWhite
+  name: carpet-white
+  sprite: /Textures/SS220/Tiles/carpetwhite.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetWhite
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetBlack
+  name: carpet-black
+  sprite: /Textures/SS220/Tiles/carpetblack.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetBlack
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetRed
+  name: carpet-red
+  sprite: /Textures/SS220/Tiles/carpetred.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetRed
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetMagenta
+  name: carpet-magenta
+  sprite: /Textures/SS220/Tiles/carpetmagenta.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetMagenta
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetPurple
+  name: carpet-purple
+  sprite: /Textures/SS220/Tiles/carpetpurple.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetPurple
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetBlue
+  name: carpet-blue
+  sprite: /Textures/SS220/Tiles/carpetblue.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetBlue
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetCyan
+  name: carpet-cyan
+  sprite: /Textures/SS220/Tiles/carpetcyan.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetCyan
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetGreen
+  name: carpet-green
+  sprite: /Textures/SS220/Tiles/carpetgreen.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetGreen
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileCarpetOrange
+  name: carpet-orange
+  sprite: /Textures/SS220/Tiles/carpetorange.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  friction: 0.25
+  itemDrop: FloorTileItemCarpetOrange
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTileMud
+  name: tiles-mud
+  sprite: /Textures/SS220/Tiles/mud.png
+  baseTurf: FloorDirt
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRocks
+  name: tiles-rocks
+  sprite: /Textures/SS220/Tiles/rocks.png
+  variants: 9
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.09
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepTile
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWasteland
+  name: tiles-wasteland
+  sprite: /Textures/SS220/Tiles/wasteland.png
+  variants: 9
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.09
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepTile
+  heatCapacity: 10000
+###################

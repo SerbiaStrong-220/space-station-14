@@ -118,7 +118,7 @@
   id: ShuttleGunPkt
   parent: [ShuttleGunBase, ConstructibleMachine]
   name: СКПО-500 "ПКТ"
-  description: Станковый пулемёт ПКТ. вмещает в себя короб на 500 патронов .50 калибра. 
+  description: Станковый пулемёт ПКТ. вмещает в себя короб на 500 патронов .50 калибра.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Shuttles/pkt.rsi
@@ -184,7 +184,7 @@
   id: BulletRocketNURS
   name: НАР
   parent: BaseBulletTrigger
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/nar.rsi
@@ -232,12 +232,12 @@
   id: BulletMLG
   name: сгусток плазмы
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: None
   - type: TimedDespawn
-    lifetime: 4 
+    lifetime: 4
   - type: Sprite
     noRot: false
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
@@ -309,7 +309,7 @@
     deleteOnSpawn: true
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   id: BulletPkt
   name: пуля (.50)

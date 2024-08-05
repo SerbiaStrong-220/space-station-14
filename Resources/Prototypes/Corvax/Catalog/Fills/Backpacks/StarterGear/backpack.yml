@@ -1,5 +1,5 @@
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: ClothingBackpack
   id: ClothingBackpackIAAFilled
   components:
@@ -10,7 +10,7 @@
         - id: ExpensiveLighterNanotrasen #SS220-Zippo
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: ClothingBackpackMedical
   id: ClothingBackpackPsychologistFilled
   components:

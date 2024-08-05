@@ -4,6 +4,18 @@
   id: Pancake
   name: pancake
   spawn: FoodBakedPancake
+  maxCount: 9
+
+- type: stack
+  id: PancakeBb
+  name: blueberry pancake
+  spawn: FoodBakedPancakeBb
+  maxCount: 3
+
+- type: stack
+  id: PancakeCc
+  name: chocolate chip pancake
+  spawn: FoodBakedPancakeCc
   maxCount: 3
 
 # Food Containers
@@ -36,21 +48,21 @@
   name: ground tobacco
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
   spawn: GroundTobacco
-  maxCount: 5
+  maxCount: 1 #SS220-Snuff-box
 
 - type: stack
   id: GroundCannabis
   name: ground cannabis
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
   spawn: GroundCannabis
-  maxCount:
+  maxCount: 1 #SS220-Snuff-box
 
 - type: stack
   id: GroundCannabisRainbow
   name: ground rainbow cannabis
   icon: { sprite: /Textures/Objects/Specific/Hydroponics/rainbow_cannabis.rsi, state: powderpile_rainbow }
   spawn: GroundCannabisRainbow
-  maxCount:
+  maxCount: 1 #SS220-Snuff-box
 
 - type: stack
   id: LeavesTobaccoDried

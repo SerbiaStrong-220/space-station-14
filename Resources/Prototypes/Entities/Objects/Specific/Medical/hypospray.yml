@@ -449,6 +449,8 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
+  - type: EmitSoundOnUse
+    handle: false # don't want the sound to stop the self-inject from triggering
 
 - type: entity
   parent: BaseItem

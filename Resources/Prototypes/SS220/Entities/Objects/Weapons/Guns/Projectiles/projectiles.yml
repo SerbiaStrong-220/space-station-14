@@ -2,7 +2,7 @@
   name: mini energy crossbow bolt
   id: BulletMiniEnergyCrossbow
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: FlyBySound
     sound:
@@ -44,7 +44,7 @@
   name: energy crossbow bolt
   id: BulletEnergyCrossbow
   parent: BulletMiniEnergyCrossbow
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -63,7 +63,7 @@
 - type: entity
   id: BaseBulletTriggerArta
   parent: BaseBulletTrigger
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 20
@@ -77,7 +77,7 @@
   id: BulletGrenadeSuperArta
   name: пробивной снаряд
   parent: BaseBulletTriggerArta
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -94,7 +94,7 @@
   id: BulletGrenadeEMPArta
   name: снаряд ЭМИ
   parent: BaseBulletTriggerArta
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi

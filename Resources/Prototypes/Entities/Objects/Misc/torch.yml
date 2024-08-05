@@ -25,6 +25,10 @@
           color: "#FFFFFF"
           visible: false
           shader: unshaded
+        #ss220 error console fix start
+        - map: [ enum.ExpendableLightVisualLayers.Overlay ]
+          state: torch_unlit
+        #ss220 error console fix end
     - type: Icon
       sprite: Objects/Misc/torch.rsi
       state: icon

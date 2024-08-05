@@ -15,20 +15,19 @@ public sealed class AddSleepActionSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AddSleepActionComponent, BuckleChangeEvent>(OnBuckleChanged);
+        SubscribeLocalEvent<AddSleepActionComponent, StrappedEvent>(OnBuckled);
+        SubscribeLocalEvent<AddSleepActionComponent, UnstrappedEvent>(OnUnbuckled);
     }
 
-    private void OnBuckleChanged(EntityUid uid, AddSleepActionComponent component, BuckleChangeEvent args)
+    private void OnBuckled(EntityUid uid, AddSleepActionComponent component, StrappedEvent args)
     {
-        // Partially yoinked from BedSystem
+        _actionsSystem.AddAction(args.Buckle, ref component.SleepAction, SleepingSystem.SleepActionId, uid);
+    }
 
-        if (args.Buckling)
-        {
-            _actionsSystem.AddAction(args.BuckledEntity, ref component.SleepAction, SleepingSystem.SleepActionId, uid);
-            return;
-        }
-
-        _actionsSystem.RemoveAction(args.BuckledEntity, component.SleepAction);
-        _sleepingSystem.TryWaking(args.BuckledEntity);
+    private void OnUnbuckled(EntityUid uid, AddSleepActionComponent component, UnstrappedEvent args)
+    {
+        _actionsSystem.RemoveAction(args.Buckle, component.SleepAction);
+        if (TryComp<SleepingComponent>(args.Buckle, out var sleepingComponent))
+            _sleepingSystem.TryWaking((args.Buckle.Owner, sleepingComponent));
     }
 }

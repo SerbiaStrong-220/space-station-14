@@ -11,9 +11,6 @@
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
-        - type: StationRandomTransform
-          enableStationRotation: false
-          maxStationOffset: null
         - type: StationNameSetup
           mapNameTemplate: '{0} Axioma {1}'
           nameGenerator:
@@ -99,7 +96,7 @@
 - type: entity
   id: AxiomaNanotrasenStation
   parent: StandardNanotrasenStation
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData

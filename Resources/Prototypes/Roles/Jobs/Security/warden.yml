@@ -34,7 +34,6 @@
     pocket1: WeaponPistolMk58Nonlethal #SS220-DeleteSecurityLetal
   storage:
     back:
-    - BoxSurvivalSecurity
     - Flash
     - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
     - MagazinePistolRubber

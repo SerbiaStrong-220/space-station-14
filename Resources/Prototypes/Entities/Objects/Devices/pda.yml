@@ -113,6 +113,9 @@
   id: BaseMedicalPDA
   abstract: true
   components:
+  - type: ItemToggle
+    toggleLight: false
+    onUse: false
   - type: HealthAnalyzer
     scanDelay: 1
     scanningEndSound:
@@ -391,9 +394,7 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-clown
-  - type: Slippery
-    paralyzeTime: 4
-    launchForwardsMultiplier: 1.5 
+  - type: Slippery # secretly made of bananium
   - type: StepTrigger
   - type: CollisionWake
     enabled: false
@@ -1094,7 +1095,7 @@
   id: CentcomPDA
   name: CentCom PDA
   description: Light green sign of walking bureaucracy.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Pda
     id: CentcomIDCard
@@ -1156,6 +1157,7 @@
     state: pda-clear #SS220 PDA-Resprite-End
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
+    notificationsEnabled: false
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
@@ -1165,7 +1167,7 @@
 - type: entity
   parent: CentcomPDA
   id: CentcomPDAFake
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Fake
   components:
   - type: Pda
