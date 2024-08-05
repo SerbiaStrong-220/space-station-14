@@ -5,6 +5,7 @@ using Content.Client.Corvax.DiscordAuth;
 using Content.Client.Corvax.JoinQueue;
 using Content.Client.Corvax.Sponsors;
 using Content.Client.Options;
+using Content.Client.DebugMon;
 using Content.Client.Eui;
 using Content.Client.Fullscreen;
 using Content.Client.GhostKick;
@@ -38,6 +39,7 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Content.Client.SS220.Discord;
+using Robust.Shared.Timing;
 
 namespace Content.Client.Entry
 {
@@ -77,6 +79,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
         [Dependency] private readonly ContentReplayPlaybackManager _replayMan = default!;
+        [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
 
         public override void Init()
         {
@@ -217,6 +220,14 @@ namespace Content.Client.Entry
             else
             {
                 _stateManager.RequestStateChange<MainScreen>();
+            }
+        }
+
+        public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
+        {
+            if (level == ModUpdateLevel.FramePreEngine)
+            {
+                _debugMonitorManager.FrameUpdate();
             }
         }
     }

@@ -80,6 +80,9 @@ namespace Content.Server.Kitchen.Components
 
         public Container Storage = default!;
 
+        [DataField]
+        public string ContainerId = "microwave_entity_container";
+
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public int Capacity = 15; // SS220 - microwave fix 10 -> 15
 

@@ -154,6 +154,7 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
+  - type: WaddleWhenWorn
 
 - type: entity
   parent: ClothingSponsorMaskBase

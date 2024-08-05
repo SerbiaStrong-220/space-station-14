@@ -3,7 +3,7 @@
   id: ThermalVisorChameleon
   name: optical thermal chameleon scanner
   description: Useful both for security and cargonia.
-  suffix: ThermalGoogles
+  suffix: Syndicate
   components:
     - type: ThermalVisionClothing
     - type: Sprite
@@ -34,6 +34,7 @@
   id: ThermalVisorRND
   name: Advanced Thermal Glasses
   description: This glasses alows you to see persons through the walls in finate radius
+  suffix: RND
   components:
     - type: ThermalVisionClothing
       thermalVisionRadius: 5
@@ -48,6 +49,7 @@
   id: ClothingEyesThermalGlassesSecurity
   name: Advanced Security Glasses with SecHUD and Thermal Visor
   description: This glasses provided with SecHUD and Thermal Visor, which alows you to see persons through the walls in finate radius
+  suffix: SecRND
   components:
   - type: ThermalVisionClothing
     thermalVisionRadius: 5

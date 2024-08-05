@@ -2,7 +2,7 @@
 
 - type: entity
   id: CryoStoragePortal
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: портал в крио
   components:
     - type: Sprite
@@ -21,7 +21,6 @@
   id: ActionCryoGhost
   name: action-name-cryo-ghost
   description: action-desc-cryo-ghost
-  noSpawn: true
   components:
     - type: InstantAction
       checkCanInteract: false

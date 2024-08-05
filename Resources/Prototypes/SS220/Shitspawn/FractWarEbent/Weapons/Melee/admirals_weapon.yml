@@ -33,7 +33,6 @@
     size: Small
     sprite: SS220/Objects/Weapons/Melee/e_axe_inhands.rsi
   - type: Reflect
-    enabled: true
     reflects: Energy
     reflectProb: .95
     spread: 75
@@ -64,8 +63,11 @@
             Slash: 12
             Heat: 12
             Structural: 15
-  - type: ItemToggleDisarmMalus
-    activatedDisarmMalus: 0.7
+  - type: ComponentToggler
+    components:
+    - type: Sharp
+    - type: DisarmMalus
+      malus: 0.7
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5
@@ -112,7 +114,6 @@
     size: Small
     sprite: SS220/Objects/Weapons/Melee/e_sword_ebent_inhands_double.rsi
   - type: Reflect
-    enabled: true
     reflects: Energy
     reflectProb: .95
     spread: 75
@@ -143,8 +144,11 @@
             Slash: 12
             Heat: 12
             Structural: 15
-  - type: ItemToggleDisarmMalus
-    activatedDisarmMalus: 0.7
+  - type: ComponentToggler
+    components:
+    - type: Sharp
+    - type: DisarmMalus
+      malus: 0.7
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5

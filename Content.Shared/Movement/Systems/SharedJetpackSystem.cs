@@ -13,12 +13,12 @@ namespace Content.Shared.Movement.Systems;
 
 public abstract class SharedJetpackSystem : EntitySystem
 {
-    [Dependency] private   readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] protected  readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private   readonly SharedMoverController _mover = default!;
-    [Dependency] private   readonly SharedPopupSystem _popup = default!;
-    [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
     public override void Initialize()
@@ -125,8 +125,15 @@ public abstract class SharedJetpackSystem : EntitySystem
 
     private bool CanEnableOnGrid(EntityUid? gridUid)
     {
-        return gridUid == null ||
-               (!HasComp<GravityComponent>(gridUid));
+        //return gridUid == null ||
+        //       (!HasComp<GravityComponent>(gridUid));  //SS220 Convert to comment
+
+        //SS220 Fix jet in zero gravity begin
+        if (gridUid == null || !TryComp<GravityComponent>(gridUid, out var comp))
+            return true;
+
+        return !comp.Enabled;
+        //SS220 Fix jet in zero gravity end
     }
 
     private void OnJetpackGetAction(EntityUid uid, JetpackComponent component, GetItemActionsEvent args)
@@ -158,7 +165,7 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         if (user == null)
         {
-            Container.TryGetContainingContainer(uid, out var container);
+            Container.TryGetContainingContainer((uid, null, null), out var container);
             user = container?.Owner;
         }
 

@@ -37,7 +37,7 @@ public sealed class ButtScanPhotocopiedData : IPhotocopiedComponentData
             var changed = ButtTexturePath != buttScanComponent.ButtTexturePath;
             buttScanComponent.ButtTexturePath = ButtTexturePath;
             if (changed)
-                entSys.Dirty(buttScanComponent);
+                entSys.Dirty(uid, buttScanComponent);
         }
     }
 }

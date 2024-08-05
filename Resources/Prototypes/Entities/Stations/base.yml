@@ -8,12 +8,6 @@
         mapScale: 5
 
 - type: entity
-  id: BaseRandomStation
-  abstract: true
-  components:
-    - type: StationRandomTransform
-
-- type: entity
   id: BaseStationCargo
   abstract: true
   components:
@@ -55,17 +49,17 @@
       path: /Maps/SS220/Shuttles/cargo.yml # SS220 shuttle upd
     - type: GridSpawn
       groups:
-        trade:
+        trade: !type:GridSpawnGroup
           addComponents:
             - type: ProtectedGrid
             - type: TradeStation
           paths:
             - /Maps/SS220/Shuttles/trading_outpost.yml # SS220 shuttle upd
-        mining:
+        mining: !type:GridSpawnGroup
           paths:
           - /Maps/Shuttles/mining.yml # SS220 shuttle upd
         # Spawn last
-        ruins:
+        ruins: !type:GridSpawnGroup
           hide: true
           nameGrid: true
           minCount: 2
@@ -81,6 +75,17 @@
           - /Maps/Ruins/syndicate_dropship.yml
           - /Maps/Ruins/whiteship_ancient.yml
           - /Maps/Ruins/whiteship_bluespacejumper.yml
+        vgroid: !type:DungeonSpawnGroup
+          minimumDistance: 400
+          maximumDistance: 450
+          nameDataset: names_borer
+          stationGrid: false
+          addComponents:
+          - type: Gravity
+            enabled: true
+            inherent: true
+          protos:
+          - VGRoid
 
 - type: entity
   id: BaseStationCentcomm

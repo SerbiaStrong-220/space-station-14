@@ -3,14 +3,14 @@
 - type: entity
   name: "фонарик СССП"
   description: "Надежный фонарь, используемый СССП."
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: FlashlightSeclite
   id: FlashlightSecliteUssp
 
 - type: entity
   parent: WeaponRevolverInspector
   id: WeaponRevolverInspectorUssp
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: табельный револьвер СССП
   description: Стандартый револьвер армии СССП. Его предком является наган, но за годы он был доработан настолько, что от оригинала мало что осталось.
   components:
@@ -28,7 +28,7 @@
   parent: ClothingBeltMilitaryWebbing
   id: ClothingBeltUsspWebbing
   name: РПС СССП
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
   components:
   - type: Sprite
@@ -41,7 +41,7 @@
 - type: entity
   parent: UsspIDCard
   id: UsspIDCardCmdLeader
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: USSPLeader
@@ -49,7 +49,7 @@
 - type: entity
   parent: UsspPDA
   id: UsspPDALeader
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: UsspIDCardCmdLeader
@@ -57,7 +57,7 @@
 - type: entity
   parent: UsspIDCard
   id: UsspIDCardCmdEngineer
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: USSPEngineer
@@ -65,7 +65,7 @@
 - type: entity
   parent: UsspPDA
   id: UsspPDAEngineer
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: UsspIDCardCmdEngineer
@@ -73,7 +73,7 @@
 - type: entity
   parent: UsspIDCard
   id: UsspIDCardCorpsman
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: USSPCorpsman
@@ -84,7 +84,7 @@
 - type: entity
   parent: UsspMedicalPDA
   id: UsspPDACorpsman
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: UsspIDCardCorpsman
@@ -93,7 +93,7 @@
   parent: UsspIDCard
   id: UsspIDCardCmdCMO
   suffix: Shitspawn, Ebent, FractWar
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: USSPCMO
@@ -104,7 +104,7 @@
 - type: entity
   parent: UsspMedicalPDA
   id: UsspPDACMO
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: UsspIDCardCmdCMO
@@ -112,7 +112,7 @@
 - type: entity
   parent: UsspIDCard
   id: UsspIDCardFighter
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: USSPFighter
@@ -120,7 +120,7 @@
 - type: entity
   parent: UsspPDA
   id: UsspPDAFighter
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: UsspIDCardFighter

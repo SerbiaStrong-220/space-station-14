@@ -80,7 +80,7 @@
   id: ClothingHeadsetCentCom
   name: CentCom headset
   description: A headset used by the upper echelons of Nanotrasen.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: ContainerFill
     containers:

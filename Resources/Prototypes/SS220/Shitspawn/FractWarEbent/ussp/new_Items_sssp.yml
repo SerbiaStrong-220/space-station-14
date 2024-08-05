@@ -13,16 +13,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
   - type: Magboots
-    toggleAction: ActionToggleMagUSSSPEbent
   - type: ClothingSpeedModifier
     walkModifier: 1.1
     sprintModifier: 1.1
-    enabled: false
   - type: NoSlip
+  - type: ToggleClothing
+    action: ActionToggleMagUSSSPEbent
+
 - type: entity
   id: ActionToggleMagUSSSPEbent
-  parent: ActionBaseToggleMagboots
-  noSpawn: true
+  parent: ActionToggleMagboots
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     icon: { sprite: /Textures/SS220/Clothing/Shoes/Boots/magboots-ussp.rsi, state: icon }
@@ -33,7 +34,7 @@
   id: ClothingBackpackUSSP
   name: USSP backpack
   description: A standard backpack for USSP Red Army.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/ussp.rsi

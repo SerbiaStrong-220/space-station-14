@@ -9,6 +9,7 @@ using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Robust.Shared.Containers;
 
 namespace Content.Client.DoAfter;
 
@@ -20,6 +21,7 @@ public sealed class DoAfterOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly MetaDataSystem _meta;
     private readonly ProgressColorSystem _progressColor;
+    private readonly SharedContainerSystem _container;
 
     private readonly Texture _barTexture;
     private readonly ShaderInstance _unshadedShader;
@@ -42,6 +44,7 @@ public sealed class DoAfterOverlay : Overlay
         _player = player;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _meta = _entManager.EntitySysManager.GetEntitySystem<MetaDataSystem>();
+        _container = _entManager.EntitySysManager.GetEntitySystem<SharedContainerSystem>();
         _progressColor = _entManager.System<ProgressColorSystem>();
         var sprite = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/progress_bar.rsi"), "icon");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
@@ -102,11 +105,13 @@ public sealed class DoAfterOverlay : Overlay
 
             var offset = 0f;
 
+            var isInContainer = _container.IsEntityOrParentInContainer(uid, meta, xform);
+
             foreach (var doAfter in comp.DoAfters.Values)
             {
                 // Hide some DoAfters from other players for stealthy actions (ie: thieving gloves)
                 var alpha = 1f;
-                if (doAfter.Args.Hidden)
+                if (doAfter.Args.Hidden || isInContainer)
                 {
                     if (uid != localEnt)
                         continue;
