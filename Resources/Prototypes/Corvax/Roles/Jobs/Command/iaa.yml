@@ -11,7 +11,7 @@
     time: 72000 # SS220-RoleTime
   startingGear: IAAGear
   icon: "JobIconIAA"
-  supervisors: job-supervisors-centcom
+  supervisors: job-supervisors-magistrate
   canBeAntag: false
   access:
   - Service

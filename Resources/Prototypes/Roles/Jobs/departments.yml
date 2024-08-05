@@ -21,7 +21,7 @@
   - Chaplain
   - Chef
   - Clown
-  - Detective
+#  - Detective #SS220-Internal-Affairs
   - HeadOfPersonnel
   - Janitor
 #  - Lawyer #SS220-Internal-Affairs
@@ -41,7 +41,7 @@
   color: "#052EED"
   roles:
   - Captain
-#  - IAA #SS220-Internal-Affairs
+  - IAA
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer

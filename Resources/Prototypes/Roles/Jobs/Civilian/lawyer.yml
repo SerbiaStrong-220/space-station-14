@@ -10,9 +10,9 @@
   startingGear: LawyerGear
   setPreference: true # SS220 return-of-the-lawyer
   icon: "JobIconLawyer"
-  supervisors: job-supervisors-hop
+  supervisors: job-supervisors-IAA
   access:
-  - Service
+#  - Service SS220-Internal-Affairs
   - Lawyer
   - Brig
   - Maintenance
