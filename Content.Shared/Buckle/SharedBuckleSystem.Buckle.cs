@@ -446,10 +446,14 @@ public abstract partial class SharedBuckleSystem
             vehicle.Rider != user && !_mobState.IsIncapacitated(buckle))
         {
             //SS220-Vehicle-doafter-fix begin
+            var unbuckleTime = buckle.Comp.VehicleUnbuckleTime;
+
+            if (vehicle.UnbuckleTime != null)
+                unbuckleTime = vehicle.UnbuckleTime.Value;
             //So here if the one to unbuckle isn't one riding the vehicle,
             //we are raising DoAfter event, so you need some time to
             //unbuckle someone from a vehicle.
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, user.Value, buckle.Comp.VehicleUnbuckleTime, new UnbuckleDoAfterEvent(),
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, user.Value, unbuckleTime, new UnbuckleDoAfterEvent(),
                 vehicle.Rider, target: vehicle.Rider)
             {
                 BreakOnMove = true,

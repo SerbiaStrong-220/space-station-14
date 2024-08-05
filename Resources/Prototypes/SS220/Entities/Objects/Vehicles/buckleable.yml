@@ -419,6 +419,7 @@
       hasKey: true
       northOverride: 0
       southOverride: 0
+      unbuckleTime: 2 # SS220 wheelchair fix 04.08
     #SS220-fold-doafter begin
     - type: Foldable
       foldTime: 1
