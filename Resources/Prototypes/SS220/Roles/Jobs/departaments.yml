@@ -2,7 +2,7 @@
   id: InternalAffairs
   sort: 0
   description: department-Internal-Affairs-description
-  color: "#5a463e"
+  color: "#233067"
   roles:
   - IAA
   - Lawyer
