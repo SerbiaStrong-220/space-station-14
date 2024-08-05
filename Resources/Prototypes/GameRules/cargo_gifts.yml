@@ -199,7 +199,7 @@
 - type: entity
   id: GiftsGamma
   parent: BaseGameRule
-  noSpawn: true
+  categories: [ GameRules ]
   components:
     - type: CargoGiftsRule
       description: cargo-gift-dest-gamma

@@ -34,7 +34,6 @@
     pocket2: BookSecurity
   storage:
     back:
-    - BoxSurvivalSecurity
     - Flash
     - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
     - MagazinePistolRubber

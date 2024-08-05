@@ -1110,6 +1110,11 @@
   - type: IconSmooth
     key: walls
     base: mining
+  - type: RandomIconSmooth
+    randomStates:
+    - mining
+    - miningB
+  - type: Appearance
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -1185,7 +1190,7 @@
 
 - type: entity
   id: WallInvisible
-  name: Invisible Wall
+  name: invisible wall
   components:
   - type: TimedDespawn
     lifetime: 15

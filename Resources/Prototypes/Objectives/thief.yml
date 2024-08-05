@@ -4,7 +4,7 @@
   id: BaseThiefObjective
   components:
   - type: Objective
-    issuer: thief
+    issuer: objective-issuer-thief
   - type: RoleRequirement
     roles:
       components:
@@ -155,7 +155,6 @@
 # steal item
 
 - type: entity #SS220-Zippo-Steal-Begin
-  noSpawn: true
   parent: BaseThiefStealObjective
   id: ExpensiveLighterNanotrasenStealObjective
   components:
@@ -167,7 +166,6 @@
     difficulty: 0.8
 
 - type: entity
-  noSpawn: true
   parent: BaseThiefStealObjective
   id: ExpensiveLighterShieldStealObjective
   components:
@@ -179,7 +177,6 @@
     difficulty: 0.8
 
 - type: entity
-  noSpawn: true
   parent: BaseThiefStealObjective
   id: ExpensiveLighterSyndicateStealObjective
   components:
@@ -190,7 +187,6 @@
 
 # SS220 Wrist Watch Begin
 - type: entity
-  noSpawn: true
   parent: BaseThiefStealObjective
   id: WristWatchGoldStealObjective
   components:
@@ -470,7 +466,6 @@
 
 # SS220 Delete thief objective animals begin
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: IanStealObjective
 #   components:
@@ -482,17 +477,15 @@
 #     difficulty: 2.5
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: BingusStealObjective
 #   components:
 #   - type: StealCondition
-#     stealGroup: AnimalBingus
+#     stealGroup: AnimalNamedCat
 #   - type: Objective
 #     difficulty: 1
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: McGriffStealObjective
 #   components:
@@ -504,7 +497,6 @@
 #     difficulty: 1
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: WalterStealObjective
 #   components:
@@ -512,11 +504,10 @@
 #     job: Chemist
 #   - type: StealCondition
 #     stealGroup: AnimalWalter
-#   - type: Objective
+#   - type: ObjectiveNu
 #     difficulty: 1
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: MortyStealObjective
 #   components:
@@ -526,7 +517,6 @@
 #     difficulty: 0.5
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: RenaultStealObjective
 #   components:
@@ -538,7 +528,6 @@
 #     difficulty: 2
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: ShivaStealObjective
 #   components:
@@ -550,7 +539,6 @@
 #     difficulty: 2
 
 # - type: entity
-#   noSpawn: true
 #   parent: BaseThiefStealAnimalObjective
 #   id: TropicoStealObjective
 #   components:

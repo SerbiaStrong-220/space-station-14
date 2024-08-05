@@ -18,7 +18,10 @@
     sprite: Clothing/Head/Hardsuits/basic.rsi
   - type: HideLayerClothing
     slots:
+    - Hair
     - Snout
+    - HeadTop
+    - HeadSide
   - type: NeedleProtection # ss220 needleprotection
 
 - type: entity
@@ -58,6 +61,8 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.005
+  - type: FireProtection
+    reduction: 0.2
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -84,9 +89,14 @@
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-head
+      - state: equipped-head-unshaded
+        shader: unshaded
   - type: PointLight
     color: "#daffad"
+    radius: 6
   - type: PressureProtection
     highPressureMultiplier: 0.72
     lowPressureMultiplier: 1000
@@ -111,7 +121,7 @@
 - type: entity
   parent: ClothingHeadHardsuitBase
   id: ClothingHeadHelmetHardsuitMaxim
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: salvager maxim helmet
   description: A predication of decay washes over your mind.
   components:
@@ -262,6 +272,8 @@
         Piercing: 0.8
         Heat: 0.8
         Radiation: 0.5
+  - type: FireProtection
+    reduction: 0.2
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -653,6 +665,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: FireProtection
+    reduction: 0.2
   - type: Armor
     modifiers:
       coefficients:

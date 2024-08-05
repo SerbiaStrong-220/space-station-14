@@ -40,7 +40,7 @@
         hard: false
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseAntagSpawner
   id: SpawnPointGhostDarkReaperRune
   components:

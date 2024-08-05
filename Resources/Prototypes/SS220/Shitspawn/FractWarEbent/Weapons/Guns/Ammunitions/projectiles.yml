@@ -20,7 +20,7 @@
   name : Blaster bolt
   id: BulletBlaster
   parent: BulletDisabler
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
@@ -42,7 +42,7 @@
   id: BulletIron_MG34
   name: пуля (7.92X57mm)
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

@@ -299,6 +299,7 @@
       - id: BookSecretDocuments
       - id: BookBusido # Corvax-Books
       - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerHeadOfSecurityFilled
@@ -324,6 +325,7 @@
       - id: BookSecretDocuments
       - id: BookBusido # Corvax-Books
       - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerFreezerVaultFilled

@@ -7,7 +7,7 @@
     arc: 360
   - type: Sprite
     snapCardinals: false # SS220 Resprite
-    drawdepth: WallTops
+    drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/flags.rsi
 
 - type: entity
@@ -36,7 +36,7 @@
   components:
   - type: Sprite
     state: syndie_flag
-    
+
 - type: entity
   parent: BaseFlag
   id: LGBTQFlag
@@ -45,7 +45,7 @@
   components:
   - type: Sprite
     state: lgbtq_flag
-    
+
 - type: entity
   parent: BaseFlag
   id: PirateFlag

@@ -177,10 +177,10 @@
       params:
         volume: 2
     #SS220 emote sounds
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
+    # DefaultDeathgasp:
+    #   collection: Deathgasp
+    # Gasp:
+    #   collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
     Giggle:
@@ -194,6 +194,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
 
 - type: emoteSounds
   id: MaleSlime

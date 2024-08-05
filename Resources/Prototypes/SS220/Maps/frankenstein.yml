@@ -16,9 +16,6 @@
             prefixCreator: '-SS220'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_frankenstein.yml
-        - type: StationRandomTransform
-          enableStationRotation: false
-          maxStationOffset: null
         - type: StationJobs
           availableJobs:
             #service
@@ -97,7 +94,7 @@
 - type: entity
   id: FrankensteinStation
   parent: StandardNanotrasenStation
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData

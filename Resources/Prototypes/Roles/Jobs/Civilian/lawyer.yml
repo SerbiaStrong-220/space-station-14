@@ -23,10 +23,10 @@
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
     ears: ClothingHeadsetLawyer #SS220-InternalAffairs
-    # TODO add copy of space law
+    ears: 
   inhand:
     - BriefcaseBrownFilled
   storage:
     back:
-    - BoxSurvival
     - RubberStampLawyer
+    - BookSpaceLaw

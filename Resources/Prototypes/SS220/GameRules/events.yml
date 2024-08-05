@@ -1,7 +1,7 @@
 - type: entity
   id: BananaRain
   parent: BaseGameRule
-  noSpawn: true
+  categories: [ GameRules ]
   components:
   - type: StationEvent
     startAnnouncement: station-event-banana-rain-announcement

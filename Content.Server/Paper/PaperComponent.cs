@@ -1,6 +1,5 @@
 using Content.Shared.Paper;
 using Content.Shared.SS220.Photocopier;
-using Robust.Shared.GameStates;
 
 namespace Content.Server.Paper;
 
@@ -29,12 +28,15 @@ public sealed partial class PaperComponent : SharedPaperComponent, IPhotocopyabl
     [DataField("stampState")]
     public string? StampState { get; set; }
 
+    [DataField]
+    public bool EditingDisabled = false;
+
     public IPhotocopiedComponentData GetPhotocopiedData()
     {
         return new PaperPhotocopiedData()
         {
             Content = Content,
-            Writable = Writable,
+            EditingDisabled = EditingDisabled,
             ContentSize = ContentSize,
             StampedBy = StampedBy,
             StampState = StampState
@@ -53,7 +55,7 @@ public sealed class PaperPhotocopiedData : IPhotocopiedComponentData
     }
 
     public string? Content;
-    public bool? Writable;
+    public bool? EditingDisabled;
     public int? ContentSize;
     public List<StampDisplayInfo>? StampedBy;
     public string? StampState;
@@ -72,8 +74,8 @@ public sealed class PaperPhotocopiedData : IPhotocopiedComponentData
         if (!string.IsNullOrEmpty(Content))
             paperSystem.SetContent(uid, Content, paperComponent);
 
-        if (Writable is { } writable)
-            paperComponent.Writable = writable;
+        if (EditingDisabled is { } editingDisabled)
+            paperComponent.EditingDisabled = editingDisabled;
 
         // Apply stamps
         if (StampState is null || StampedBy is null)

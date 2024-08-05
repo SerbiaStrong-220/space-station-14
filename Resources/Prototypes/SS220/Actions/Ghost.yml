@@ -2,7 +2,6 @@
   id: ActionRespawn
   name: Возродиться
   description: Возвращение в лобби. Вы обязаны выбрать другого персонажа и "забыть" все, что видели, согласно правилам сервера.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: SS220/Interface/Actions/respawn.png
@@ -14,7 +13,6 @@
   id: ActionToggleAGhostBodyVisuals
   name: Скрыть тело
   description: Скрыть тело призрака, оставив только шляпу.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Mobs/Ghosts/ghost_human.rsi, state: icon }
