@@ -43,7 +43,7 @@ thief-backpack-category-sleeper-description =
 thief-backpack-category-communicator-name = Набор связиста
 thief-backpack-category-communicator-description =
     Набор для радиолюбителей. Включает мастер-ключ шифрования
-    для всех радиоканалов станции, ручку Cybersun, портативный монитор экипажа,
+    для всех радиоканалов станции, ручку Cybersun,
     голосовую маску-хамелеон, и много денег для ведения бизнеса.
 thief-backpack-category-smuggler-name = Набор контрабандиста
 thief-backpack-category-smuggler-description =
