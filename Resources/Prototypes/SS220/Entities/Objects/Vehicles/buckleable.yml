@@ -419,6 +419,10 @@
       hasKey: true
       northOverride: 0
       southOverride: 0
+    #SS220-fold-doafter begin
+    - type: Foldable
+      foldTime: 1
+    #SS220-fold-doafter end
     - type: Sprite
       sprite: Objects/Vehicles/wheelchair.rsi
       layers:
