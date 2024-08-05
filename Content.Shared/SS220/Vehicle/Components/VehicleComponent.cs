@@ -115,7 +115,7 @@ public sealed partial class VehicleComponent : Component
 
     // SS220 Wheelchair fix begin
     /// <summary>
-    /// Time needed to unbuckle an entity from a vehicle. Overrides Buckle unbuclkle time.
+    /// Time needed to unbuckle an entity from a vehicle. Overrides Buckle unbuckle time if not null.
     /// </summary>
     [DataField("unbuckleTime")]
     [ViewVariables(VVAccess.ReadWrite)]
