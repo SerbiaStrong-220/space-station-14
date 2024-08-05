@@ -72,3 +72,19 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackBlueShield
+  name: blueshield backpack
+  description: A backpack specially designed for the Blue Shield PMCs, with a unique pocket hardsuit technology.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Satchels/blueshield_backpacks.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,4
+  - type: ToggleableClothing
+    slot: outerClothing
+    requiredSlot: back
+    clothingPrototype: ClothingOuterHardsuitBlueshield

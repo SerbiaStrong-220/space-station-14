@@ -56,13 +56,14 @@
   id: BlueShieldGear
   equipment:
 #    jumpsuit: ClothingUniformJumpsuitBlueShield #SS220-blueshield-loadouts
-    shoes: ClothingShoesBootsCombatFilled
+    shoes: ClothingShoesBootsJackBlueShieldFilled #SS220-BlueShield-Fashion
     eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretNavyBlue
 #    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
     id: BlueShieldPDA
     ears: ClothingHeadsetAltCommand
     pocket1: WeaponAdvancedRevolver
+    back: ClothingBackpackBlueShield
 #    belt: ClothingBeltSecurityFilled #SS220-blueshield-loadouts
     gloves: ClothingHandsGlovesCombat
 # SS220-Blueshield-Storage-Fix-Begin

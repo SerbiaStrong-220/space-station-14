@@ -48,3 +48,22 @@
         amount: 1
       - id: Gauze
       - id: EmergencyMedipen
+
+- type: entity
+  id: ClothingBeltBlueShieldBeltFilled
+  parent: ClothingBeltBlueShieldBelt
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: GrenadeFlashBang
+      - id: TearGasGrenade
+      - id: Stunbaton
+      - id: Tourniquet
+      - id: Handcuffs
+      - id: Handcuffs
+
+- type: entity
+  id: ClothingBeltBlueShieldWebbingFilled
+  parent: ClothingBeltBlueShieldWebbing
+  suffix: Filled

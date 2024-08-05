@@ -15,6 +15,8 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
 
 # Внутренние дела
+
+  #Агент Внутренних Дел
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitNTR
@@ -36,6 +38,45 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
+
+  # ЧВК "Синий Щит"
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShield
+  name: blueshield's uniform
+  description: The standard uniform of the PMCs "Blue Shield", presented in the form of a shirt and trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: ClothingUniformJumpsuitBlueShield
+  id: ClothingUniformJumpsuitBlueShield2
+  name: tactical blueshield's uniform
+  description: A tactical uniform specially designed for the Blue Shield PMCs. How good she is!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_alt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_alt.rsi
+
+- type: entity
+  parent: ClothingUniformJumpsuitBlueShield
+  id: ClothingUniformJumpsuitBlueShieldT-shirt
+  name: blueshield's t-shirt
+  description: A black short-sleeved T-shirt decorated with blue patterns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
 
 # Сервис
 
