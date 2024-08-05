@@ -45,6 +45,8 @@ public sealed partial class TTSSystem : EntitySystem
 
     private void OnInit(Entity<TTSComponent> ent, ref ComponentInit args)
     {
+        // Set random voice from RandomVoicesList
+        // If RandomVoicesList is null - doesn`t set new voice
         SetRandomVoice(ent);
     }
 
