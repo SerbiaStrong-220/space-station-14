@@ -27,6 +27,7 @@
     SecurityOfficer: [ ]
     SecurityPilot: [ ]
     Warden: [ ]
+    SeniorOfficer: [ ]
 
 - type: markingPoints
   id: MobFelinidMarkingLimits

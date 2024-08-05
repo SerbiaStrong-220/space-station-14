@@ -92,7 +92,7 @@
   name: wrench
   parent: BaseItem
   id: Wrench
-  description: 'A common tool for assembly and disassembly. Remember: righty tighty, lefty loosey.'
+  description: 'A common tool for assembly and disassembly. Remember: lefty latchy, righty removey.'
   components:
   - type: UnPlaceable
   - type: EmitSoundOnLand
@@ -149,6 +149,13 @@
     storedSprite:
       sprite: Objects/Tools/crowbar.rsi
       state: storage
+  # start 220 crowbar on belt
+  - type: Clothing
+    sprite: Objects/Tools/crowbar.rsi
+    quickEquip: false
+    slots:
+      - Belt
+  # end 220 crowbar on belt
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
@@ -283,7 +290,7 @@
       price: 56
     - type: GuideHelp
       guides:
-        - NetworkConfigurator
+      - NetworkConfigurator
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -305,7 +312,7 @@
   - type: Tool
     qualities:
       - Screwing
-    speed: 1.5
+    speedModifier: 1.5
     useSound: /Audio/Items/drill_use.ogg
   - type: MultipleTool
     statusShowBehavior: true
@@ -402,20 +409,6 @@
   components:
   - type: LimitedCharges
     charges: 0
-  - type: RCD
-    availablePrototypes:
-    - WallSolid
-    - FloorSteel
-    - Plating
-    - Catwalk
-    - Grille
-    - Window
-    - WindowDirectional
-    - WindowReinforcedDirectional
-    - ReinforcedWindow
-    - Airlock
-    - AirlockGlass
-    - Firelock
 
 - type: entity
   id: RCDRecharging
@@ -480,7 +473,7 @@
   - type: Tool
     qualities:
       - Screwing
-    speed: 1.2 # Kept for future adjustments. Currently 1.2x for balance
+    speedModifier: 1.2 # Kept for future adjustments. Currently 1.2x for balance
     useSound: /Audio/Items/drill_use.ogg
   - type: ToolTileCompatible
   - type: MultipleTool

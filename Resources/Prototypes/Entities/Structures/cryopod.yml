@@ -6,23 +6,10 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: Structures/cryostorage.rsi
+    sprite: SS220/Structures/cryostorage.rsi # 220 resprite
     layers:
     - state: sleeper_0
       map: ["base"]
-  # SS220 Structure colision fix begin
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.05"
-        density: 190
-        mask:
-        - TableMask
-        layer:
-        - StructureLayer
-  # SS220 Structure colision fix end
   - type: UserInterface
     interfaces:
       enum.CryostorageUIKey.Key:
@@ -30,12 +17,12 @@
   - type: ActivatableUI
     key: enum.CryostorageUIKey.Key
   - type: AccessReader
-    breakOnEmag: false
-    access: [["Cryogenics"]]
+    breakOnEmag: true # 220 cryo
+    access: [["Command"]] # 220 cryo
   - type: InteractionOutline
   - type: Cryostorage
   - type: Physics
-    bodyType: Static # SS220 Structure colision
+    canCollide: false
   - type: DragInsertContainer
     containerId: storage
   - type: ExitContainerOnMove

@@ -19,6 +19,9 @@
 - type: startingGear
   id: SalvageSpecialistGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+#    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist SS220-SalvageSpecialist-Loadout-fix
     id: SalvagePDA
     ears: ClothingHeadsetCargo
+  #storage:
+    #back:
+    #- Stuff

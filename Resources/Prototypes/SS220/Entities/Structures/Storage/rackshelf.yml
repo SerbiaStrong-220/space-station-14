@@ -113,6 +113,8 @@
           prob: 0.2
         - id: CableHVStack10
           prob: 0.2
+        - id: ClothingWristWatch
+          prob: 0.05
         # hardhat loot
         - id: null
           prob: 0.3

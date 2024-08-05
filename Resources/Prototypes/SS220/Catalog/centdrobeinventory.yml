@@ -3,18 +3,42 @@
 - type: vendingMachineInventory
   id: CentCommDrobeInventory
   startingInventory:
-    ClothingHeadsetAltCentComm: 2
-    ClothingHeadHatNavyFieldOfficerCap: 1
-    ClothingOuterSRTCoat: 2
-    ClothingEyesGlassesSunglasses: 3
-    ClothingBackSatchelSRT: 3
-    NTbaton: 2
-    ClothingHeadHatBeretNanoTrasenOfficer: 2
-    ClothingHandsGlovesLatex: 4
+    #Jumpsuit
+    ClothingUniformJumpsuitCentcomOfficer: 2
+    ClothingUniformJumpsuitCentcomOfficerTurtleneck: 2
+    ClothingUniformJumpskirtCentcomOfficerTurtleneck: 2
     ClothingUniformCentCommOfficer: 2
-    ClothingShoesBootsLaceup: 2
+    #Outerclothing
+    ClothingOuterCoatCentcomJacket: 2
+    ClothingOuterCoatOfficerFieldUniform: 2
+    ClothingOuterCoatCentcomFormalDress: 2
+    ClothingOuterWinterCentcomm: 2
+    #Eyes
+    ClothingEyesGlassesSunglasses: 3
+    ClothingEyesGlassesCentcom: 2
+    #Ears
+    ClothingHeadsetAltCentComm: 4
+    #Head
+    ClothingHeadHatBeretNanoTrasenOfficer: 2
+    ClothingHeadHatBeretNanoTrasenDiplomat: 2
+    ClothingHeadHatNavyFieldOfficerCap: 2
+    ClothingHeadCentcomCapNaval: 2
+    ClothingHeadHatCentcomm: 2
+    #Hand
+    ClothingHandsGlovesCentcom: 4
+    ClothingHandsGlovesNanotrasenDiplomat: 4
+    ClothingHandsGlovesLatex: 4
+    #Neck
+    ClothingNeckCloakFieldOfficerCentComm: 2
+    ClothingNeckCloakNanotrasenAdmiral: 1
     ClothingNeckScarfCentcomm: 2
     ClothingNeckScarfCentcomGSN: 2
-    BoxFolderCentComm: 5
+    #Shoes
+    ClothingShoesBootsLaceup: 4
+    #Others
+    ClothingBackpackSatchelLeather: 2
+    BriefcaseBrownFilled: 2
+    NTbaton: 2
     BoxFolderCentCommClipboard: 5
+    BoxFolderCentComm: 5
     CentCommNewPen: 3

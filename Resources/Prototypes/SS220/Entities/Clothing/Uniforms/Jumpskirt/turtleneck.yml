@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtParamedicTurtleneck
   name: paramedic turtleneck
   description: A reliable and comfortable choice for rescuers, it provides protection from cold and moisture during rescue operations.
@@ -10,7 +10,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_turtle.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtAtmosphericTechnicianTurtleneck
   name: atmospheric technician turtle
   description: Built to withstand high humidity and temperature extremes, ideal for professionals in the atmospheric research industry.
@@ -25,7 +25,7 @@
         Heat: 0.95
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChemistTurtleneck
   name: chemist turtle
   description: Specially designed for safe handling of chemicals, provides reliable protection from harmful substances and keeps the user safe.
@@ -38,3 +38,14 @@
     modifiers:
       coefficients:
         Caustic: 0.95
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBrigmedicTurtleneck
+  name: brigmedic turtleneck
+  description: A brigmedic turtleneck.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_turtle.rsi

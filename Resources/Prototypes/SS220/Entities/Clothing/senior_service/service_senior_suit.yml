@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSeniorService
+  name: комбинезон ведущего сервисного отдела
+  description: Знак мастерства и мастерства сервисной службы.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi

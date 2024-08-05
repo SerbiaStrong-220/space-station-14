@@ -174,7 +174,7 @@
       visible: false
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: RGlass # SS220 Fix Hand Broke Windoor
+    damageModifierSet: RGlass
   - type: Destructible
     thresholds:
     - trigger:
@@ -260,7 +260,7 @@
 
 - type: entity
   id: BaseSecurePlasmaWindoor
-  parent: BaseWindoor
+  parent: BaseSecureWindoor
   abstract: true
   components:
   - type: Sprite
@@ -370,7 +370,7 @@
 
 - type: entity
   id: BaseSecureUraniumWindoor
-  parent: BaseWindoor
+  parent: BaseSecureWindoor
   abstract: true
   components:
   - type: Sprite

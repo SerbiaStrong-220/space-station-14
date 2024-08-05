@@ -52,6 +52,7 @@
     - id: ClothingNeckPolarIIIMedal
       amount: 4
     - id: EnergySwordEbentDouble
+    - id: JobIconChangerNT
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -79,6 +80,7 @@
     - id: ClothingUniformJumpsuitColorBlack
     - id: ClothingNeckMantleERTLeader
     - id: ClothingEyesHudMedSec
+    - id: JobIconChangerNT
 
 - type: entity
   parent: LockerEngineer
@@ -104,7 +106,7 @@
     - id: JawsOfLife
     - id: RCD
     - id: RCDAmmo
-
+    - id: JobIconChangerNT
 
 - type: entity
   parent: LockerMedical
@@ -165,6 +167,9 @@
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTSpecOpsOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentNanoTrasen
 
 - type: job
   id: SpecOpsLeader
@@ -218,6 +223,9 @@
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTEngineerOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentNanoTrasen
 
 - type: job
   id: SpecOpsEngineer
@@ -275,6 +283,9 @@
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTMedic
+    - type: NpcFactionMember
+      factions:
+      - EbentNanoTrasen
 
 - type: job
   id: SpecOpsCorpsman
@@ -328,6 +339,9 @@
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTMedicalOfficer
+    - type: NpcFactionMember
+      factions:
+      - EbentNanoTrasen
 
 - type: job
   id: SpecOpsCMO
@@ -385,6 +399,9 @@
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTCombatant
+    - type: NpcFactionMember
+      factions:
+      - EbentNanoTrasen
 
 - type: job
   id: SpecOpsFighter

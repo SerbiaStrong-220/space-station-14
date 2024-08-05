@@ -9,10 +9,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: MagazinePistolSubMachineGun
+    - id: BlasterPowerCell
       amount: 2
     - id: CombatMedipen
     - id: DnaScramblerImplanter
+    - id: ExGrenade
   - type: ExplosionResistance
     damageCoefficient: 0.0
 
@@ -20,7 +21,7 @@
   name: Декард
   parent: WeaponRevolverDeckard
   id: WeaponRevolverDeckardAP
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: Редкий, изготавливаемый на заказ револьвер. Используйте, когда нет времени на тест Войта-Кампфа. Использует патроны калибра .45 магнум.
   components:
   - type: RevolverAmmoProvider
@@ -44,7 +45,7 @@
       - id: Lighter
       - id: FlashlightSeclite
       - id: PowerCellHyper
-      - id: WeaponSubMachineGunDrozd
+      - id: WeaponBlaster
       - id: MedicatedSuture
       - id: WeaponPulsePistol
       - id: Stimpack
@@ -56,7 +57,7 @@
   id: IDCardSpecOpsLeader
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: SpecOpsLeader
@@ -66,7 +67,7 @@
   name: КПК Офицера Специальных Операций
   description: Строгий и стильный КПК.
   id: SpecOpsPDALeader
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: IDCardSpecOpsLeader
@@ -76,7 +77,7 @@
   id: IDCardSpecOpsEngineer
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: SpecOpsEngineer
@@ -86,7 +87,7 @@
   name: КПК Старшего Инженера Специальных Операций
   description: Стандартный КПК отрядов быстрого реагирования.
   id: SpecOpsPDAEngineer
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: IDCardSpecOpsEngineer
@@ -96,7 +97,7 @@
   id: IDCardSpecOpsCorpsman
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: SpecOpsCorpsman
@@ -106,7 +107,7 @@
   name: КПК Парамедика Специальных Операций
   description: И хотя опытный врач определяет повреждения на взгляд, КПК имеет встроенный анализатор здоровья.
   id: SpecOpsPDACorpsman
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: IDCardSpecOpsCorpsman
@@ -120,7 +121,7 @@
   id: IDCardSpecOpsCMO
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: SpecOpsCMO
@@ -130,7 +131,7 @@
   name: КПК Главного Врача Специальных Операций
   description: Имеет встроенный анализатор здоровья.
   id: SpecOpsPDACMO
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: IDCardSpecOpsCMO
@@ -144,7 +145,7 @@
   id: IDCardSpecOpsFighter
   name: ID карта ОБР
   description: Карта, необходимая для доступа в различные области станции.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PresetIdCard
     job: SpecOpsFighter
@@ -154,7 +155,7 @@
   name: КПК Рядового Специальных Операций
   description: Красный значит мощный.
   id: SpecOpsPDAFigher
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: IDCardSpecOpsFighter

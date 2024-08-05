@@ -3,7 +3,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmdLeader
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -12,7 +12,7 @@
 - type: entity
   parent: SyndiPDAAgent
   id: SyndiPDAAgentLeader
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
   suffix: Shitspawn, Ebent, FractWar
   components:
@@ -22,7 +22,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmdEngineer
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -33,7 +33,7 @@
   id: SyndiPDAAgentEngineer
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: AgentIDCardCmdEngineer
@@ -41,7 +41,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmdCorpsman
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -52,7 +52,7 @@
   id: SyndiPDAAgentCorpsman
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: AgentIDCardCmdCorpsman
@@ -60,7 +60,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmdCMO
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -71,7 +71,7 @@
   id: SyndiPDAAgentCMO
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: AgentIDCardCmdCMO
@@ -79,7 +79,7 @@
 - type: entity
   parent: AgentIDCard
   id: AgentIDCardCmd
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: ID карта пассажира
   components:
   - type: PresetIdCard
@@ -90,7 +90,7 @@
   id: SyndiPDAAgent
   name: "КПК синдиката"
   description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: AgentIDCardCmd
@@ -100,7 +100,7 @@
   id: MedicalPDAAgent
   name: "КПК врача синдиката"
   description: Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Pda
     id: AgentIDCardCmd
@@ -110,12 +110,12 @@
   description: "Надежный фонарь, используемый синдикатом."
   parent: FlashlightSeclite
   id: FlashlightSecliteSyndicate
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
 
 - type: entity
   parent: ClothingHeadsetAltSyndicate
   id: ClothingHeadsetAltSyndicateEbent
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: полноразмерная кроваво-красная гарнитура
   description: Модифицированный модульный интерком синдиката, надеваемый на голову и содержащий ключ шифрования. Имеет 5 ячеек для ключей шифрования.
   components:
@@ -126,10 +126,10 @@
       - EncryptionKeyCommon
 
 - type: entity
-  parent: ClothingBeltSyndieHolster
-  id: ClothingBeltSyndieHolsterPython
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltMilitaryWebbingEbent_IronSquad
   suffix: Shitspawn, Ebent, FractWar
-  name: плечевая кобура синдиката
+  name: армейская РПС
   components:
   - type: StorageFill
     contents:

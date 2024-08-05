@@ -8,6 +8,7 @@
       - id: Telescopichka
       - id: BoxFolderQmClipboard
       - id: CargoRequestComputerCircuitboard
+      - id: CargoSaleComputerCircuitboard
       - id: CargoShuttleComputerCircuitboard
       - id: CargoShuttleConsoleCircuitboard
       - id: SalvageShuttleConsoleCircuitboard
@@ -20,6 +21,7 @@
       - id: RubberStampApproved
       - id: ClothingHeadsetAltCargo
       - id: BoxEncryptionKeyCargo
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerCaptainFilledHardsuit
@@ -48,6 +50,7 @@
       - id: WeaponAntiqueLaser
       - id: JetpackCaptainFilled
       - id: MedalCase
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerCaptainFilled
@@ -74,6 +77,7 @@
       - id: WeaponAntiqueLaser
       - id: JetpackCaptainFilled
       - id: MedalCase
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerCaptainFilledNoLaser
@@ -99,6 +103,7 @@
       - id: RubberStampCaptain
       - id: JetpackCaptainFilled
       - id: MedalCase
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -129,6 +134,7 @@
         prob: 0.5
       - id: AccessConfigurator
       - id: ClothingOuterCoatHOP # Corvax-Resprite
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerChiefEngineerFilledHardsuit
@@ -154,6 +160,7 @@
       - id: AccessConfigurator
       - id: RCD
       - id: RCDAmmo
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerChiefEngineerFilled
@@ -175,6 +182,7 @@
       - id: AccessConfigurator
       - id: RCD
       - id: RCDAmmo
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerChiefMedicalOfficerFilledHardsuit
@@ -199,6 +207,7 @@
       - id: RubberStampCMO
       - id: MedicalTechFabCircuitboard
       - id: BoxEncryptionKeyMedical
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerChiefMedicalOfficerFilled
@@ -220,6 +229,7 @@
       - id: RubberStampCMO
       - id: MedicalTechFabCircuitboard
       - id: BoxEncryptionKeyMedical
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerResearchDirectorFilledHardsuit
@@ -240,6 +250,7 @@
       - id: BoxEncryptionKeyScience
       - id: ClothingHeadsetAltScience
       - id: EncryptionKeyBinary
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerResearchDirectorFilled
@@ -259,6 +270,7 @@
       - id: BoxEncryptionKeyScience
       - id: ClothingHeadsetAltScience
       - id: EncryptionKeyBinary
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
 
 - type: entity
   id: LockerHeadOfSecurityFilledHardsuit
@@ -286,6 +298,8 @@
       - id: HoloprojectorSecurity
       - id: BookSecretDocuments
       - id: BookBusido # Corvax-Books
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerHeadOfSecurityFilled
@@ -310,6 +324,8 @@
       - id: HoloprojectorSecurity
       - id: BookSecretDocuments
       - id: BookBusido # Corvax-Books
+      - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerFreezerVaultFilled

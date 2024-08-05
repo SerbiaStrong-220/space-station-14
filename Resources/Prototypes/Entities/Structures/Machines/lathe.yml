@@ -115,8 +115,11 @@
   - type: Lathe
     idleState: icon
     runningState: building
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticRecipes:
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
+      - ClothingWristWatch #SS220 Wrist Watch
       - Wirecutter
       - Igniter
       - Signaller
@@ -198,11 +201,14 @@
       - WeaponCapacitorRechargerCircuitboard
       - HandheldStationMap
       - ClothingHeadHatWelding
+      - WetFloorSign
+      - ClothingHeadHatCone
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - BoxLethalshot
       - BoxShotgunFlare
       - BoxShotgunSlug
+      - CombatKnife
       - MagazineBoxLightRifle
       - MagazineBoxMagnum
       - MagazineBoxPistol
@@ -265,6 +271,8 @@
   - type: Lathe
     idleState: icon
     runningState: building
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticRecipes:
     - LargeBeaker
     - Dropper
@@ -310,6 +318,7 @@
       - WeaponGauntletGorilla
       - SynthesizerInstrument
       - ClothingShoesBootsMagSci
+      - ClothingShoesBootsMoon
       - ClothingShoesBootsSpeed
       - NodeScanner
       - HolofanProjector
@@ -332,11 +341,13 @@
       - FauxTileAstroSnow
       - OreBagOfHolding
       - DeviceQuantumSpinInverter
+      - ThermalVisorRND # SS220 Thermals
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - BoxBeanbag
       - BoxShotgunIncendiary
       - BoxShotgunUranium
+      # - BoxShellTranquilizer
       - ExplosivePayload
       - GrenadeBlast
       - GrenadeEMP
@@ -375,6 +386,7 @@
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
+      - ClothingEyesThermalGlassesSecurity #SS220 Thermals
 
 - type: entity
   id: ProtolatheHyperConvection
@@ -435,6 +447,7 @@
     - BoozeDispenserMachineCircuitboard
     - SodaDispenserMachineCircuitboard
     - SpaceHeaterMachineCircuitBoard
+    - CutterMachineCircuitboard
     dynamicRecipes:
       - ThermomachineFreezerMachineCircuitBoard
       - HellfireFreezerMachineCircuitBoard
@@ -519,6 +532,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+  - type: RequireProjectileTarget
 
 - type: entity
   id: CircuitImprinterHyperConvection
@@ -720,6 +734,7 @@
       - BoxShotgunPractice
       - BoxShotgunSlug
       - ClothingEyesHudSecurity
+      - CombatKnife
       - Flash
       - ForensicPad
       - Handcuffs
@@ -758,6 +773,7 @@
       - BoxBeanbag
       - BoxShotgunIncendiary
       - BoxShotgunUranium
+      # - BoxShellTranquilizer
       - ExplosivePayload
       - FlashPayload
       - GrenadeBlast
@@ -806,6 +822,7 @@
       - WeaponXrayCannon
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
+      - ClothingEyesThermalGlassesSecurity #SS220 Thermals
   - type: MaterialStorage
     whitelist:
       tags:
@@ -841,6 +858,7 @@
         - BoxLethalshot
         - BoxShotgunFlare
         - BoxShotgunSlug
+       #  - BoxShellTranquilizer
         - MagazineBoxLightRifle
         - MagazineBoxMagnum
         - MagazineBoxPistol
@@ -1119,13 +1137,25 @@
       - CarpetWhite
   - type: EmagLatheRecipes
     emagStaticRecipes: #SS220 TODO: Rework recipes what are there after EMAG
-      - ClothingHeadHatCentcomcap
-      - ClothingHeadHatCentcom
-      - ClothingUniformJumpsuitCentcomAgent
-      - ClothingUniformJumpsuitCentcomFormal
-      - ClothingUniformJumpskirtCentcomFormalDress
-      - ClothingUniformJumpsuitCentcomOfficer
-      - ClothingUniformJumpsuitCentcomOfficial
+#SS220-Centcom-EmagLatheRecipes-Fix-Begin
+      # - ClothingHeadHatCentcomcap
+      # - ClothingHeadHatCentcom
+      # - ClothingUniformJumpsuitCentcomAgent
+      # - ClothingUniformJumpsuitCentcomFormal
+      # - ClothingUniformJumpskirtCentcomFormalDress
+      # - ClothingUniformJumpsuitCentcomOfficer
+      # - ClothingUniformJumpsuitCentcomOfficial
+      - ClothingHeadHatNavyFieldOfficerCap
+      - ClothingHeadHatBeretNanoTrasenOfficer
+      - ClothingHeadHatBeretNanoTrasenDiplomat
+      - ClothingUniformCentCommOfficer
+      - ClothingUniformJumpsuitCentcomOfficerTurtleneck
+      - ClothingUniformJumpskirtCentcomOfficerTurtleneck
+      - ClothingUniformNanotrasenDiplomat
+      - ClothingOuterWinterCentcomm
+      - ClothingNeckCloakFieldOfficerCentComm
+      - ClothingNeckScarfCentcomm
+#SS220-Centcom-EmagLatheRecipes-Fix-End
       - ClothingHeadHatSyndieMAA
       - ClothingHeadHatSyndie
       - ClothingUniformJumpsuitOperative
@@ -1138,7 +1168,7 @@
       - ClothingUniformJumpsuitPyjamaSyndicatePink
       - ClothingHeadPyjamaSyndicateRed
       - ClothingUniformJumpsuitPyjamaSyndicateRed
-      - ClothingOuterWinterCentcom
+      # - ClothingOuterWinterCentcom SS220-Centcom-EmagLatheRecipes-Fix
       - ClothingOuterWinterSyndie
       - ClothingOuterWinterSyndieCap
   - type: MaterialStorage
@@ -1187,6 +1217,7 @@
         - IngotGold30
         - IngotSilver30
         - MaterialBananium10
+        - MaterialDiamond
 
 - type: entity
   parent: OreProcessor
@@ -1215,8 +1246,8 @@
       - IngotGold30
       - IngotSilver30
       - MaterialBananium10
+      - MaterialDiamond
 
-#SS220-Sheetifier-rework-start
 - type: entity
   parent: BaseLathe
   id: Sheetifier
@@ -1249,77 +1280,158 @@
     staticRecipes:
     - MaterialSheetMeat
     - SheetPaper
-    - TileSteel
-    - TileMetalDiamond
-    - TileWood
-    - TileWhite
-    - TileDark
-    - TileTechmaint
-    - TileMono
-    - TileLino
-    - TileElevatorShaft
-    - TileRockVault
-    - TileBlue
-    - TileLime
-    - TileMining
-    - TileMiningDark
-    - TileMiningLight
-    - TileFreezer
-    - TileShowroom
-    - TileHydro
-    - TileBar
-    - TileClown
-    - TileMime
-    - TileKitchen
-    - TileLaundry
-    - TileConcrete
-    - TileGrayConcrete
-    - TileOldConcrete
-    - TileArcadeBlue
-    - TileArcadeBlue2
-    - TileArcadeRed
-    - TileEighties
-    - TileCarpetClown
-    - TileCarpetOffice
-    - TileBoxing
-    - TileGym
-    - TileShuttleWhite
-    - TileShuttleBlue
-    - TileShuttleOrange
-    - TileShuttlePurple
-    - TileShuttleRed
-    - TileShuttleGrey
-    - TileShuttleBlack
-    - TileGold
-    - TileSilver
-    - TileWoodPattern
-    - TileFlesh
-    - TileSteelMaint
-    - TileGratingMaint
-    - TileWoodLarge
-    - TileSteelReinforced
-    - TileWhiteReinforced
-    - TileDarkReinforced
-    - TileDutch
-    - TileDutchMini
-    - TileKitchenRed #SS220 new kitchen tile
-    #SS220-NewWoodTiles-Begin
-    - TileWoodParquet
-    - TileWoodBlack
-    - TileWoodDark
-    - TileWoodLight
-    - TileWoodRed
-    - TileWoodLargeBlack
-    - TileWoodLargeDark
-    - TileWoodLargeLight
-    - TileWoodLargeRed
-    - TileWoodParquetBlack
-    - TileWoodParquetDark
-    - TileWoodParquetLight
-    - TileWoodParquetRed
-    - TileWoodTileBlack
-    - TileWoodTileDark
-    - TileWoodTileLight
-    - TileWoodTileRed
-    #SS220-NewWoodTiles-End
-#SS220-Sheetifier-rework-end
+
+- type: entity
+  parent: BaseLathe
+  id: CutterMachine
+  name: cutter machine
+  description: This is a cutter. It cuts. Add variety to your station floor with eye-pleasing patterns! Don't stick your fingers in.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: Structures/Machines/cuttermachine.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: CutterMachineCircuitboard
+  - type: Lathe
+    producingSound: /Audio/Machines/cutter.ogg
+    idleState: icon
+    runningState: building
+    staticRecipes:
+      - FloorTileItemDark
+      - FloorTileItemDarkDiagonalMini
+      - FloorTileItemDarkDiagonal
+      - FloorTileItemDarkHerringbone
+      - FloorTileItemDarkMini
+      - FloorTileItemDarkMono
+      - FloorTileItemDarkPavement
+      - FloorTileItemDarkPavementVertical
+      - FloorTileItemDarkOffset
+      - FloorTileItemSteelCheckerDark
+      - FloorTileItemSteel
+      - FloorTileItemSteelOffset
+      - FloorTileItemSteelDiagonalMini
+      - FloorTileItemSteelDiagonal
+      - FloorTileItemSteelHerringbone
+      - FloorTileItemSteelMini
+      - FloorTileItemSteelMono
+      - FloorTileItemSteelPavement
+      - FloorTileItemSteelPavementVertical
+      - FloorTileItemWhite
+      - FloorTileItemWhiteOffset
+      - FloorTileItemWhiteDiagonalMini
+      - FloorTileItemWhiteDiagonal
+      - FloorTileItemWhiteHerringbone
+      - FloorTileItemWhiteMini
+      - FloorTileItemWhiteMono
+      - FloorTileItemWhitePavement
+      - FloorTileItemWhitePavementVertical
+      - FloorTileItemSteelCheckerLight
+      - FloorTileItemGratingMaint
+      - FloorTileItemTechmaint
+      - FloorTileItemSteelMaint
+      - FloorTileItemWood
+      - FloorTileItemWoodLarge
+      - FloorTileItemWoodPattern
+      - FloorTileItemConcrete
+      - FloorTileItemConcreteMono
+      - FloorTileItemConcreteSmooth
+      - FloorTileItemGrayConcrete
+      - FloorTileItemGrayConcreteMono
+      - FloorTileItemGrayConcreteSmooth
+      - FloorTileItemOldConcrete
+      - FloorTileItemOldConcreteMono
+      - FloorTileItemOldConcreteSmooth
+  #SS220-Sheetifier-rework-begin
+      #- TileSteel
+      - TileMetalDiamond
+      #- TileWood
+      #- TileWhite
+      #- TileDark
+      #- TileTechmaint
+      - TileMono
+      - TileLino
+      - TileElevatorShaft
+      - TileRockVault
+      - TileBlue
+      - TileLime
+      - TileMining
+      - TileMiningDark
+      - TileMiningLight
+      - TileFreezer
+      - TileShowroom
+      - TileHydro
+      - TileBar
+      - TileClown
+      - TileMime
+      - TileKitchen
+      - TileLaundry
+      #- TileConcrete
+      #- TileGrayConcrete
+      #- TileOldConcrete
+      - TileArcadeBlue
+      - TileArcadeBlue2
+      - TileArcadeRed
+      - TileEighties
+      - TileCarpetClown
+      - TileCarpetOffice
+      - TileBoxing
+      - TileGym
+      - TileShuttleWhite
+      - TileShuttleBlue
+      - TileShuttleOrange
+      - TileShuttlePurple
+      - TileShuttleRed
+      - TileShuttleGrey
+      - TileShuttleBlack
+      - TileGold
+      - TileSilver
+      #- TileWoodPattern
+      - TileFlesh
+      #- TileSteelMaint
+      #- TileGratingMaint
+      #- TileWoodLarge
+      - TileSteelReinforced
+      - TileWhiteReinforced
+      - TileDarkReinforced
+      - TileDutch
+      - TileDutchMini
+      - TileKitchenRed #SS220 new kitchen tile
+      #SS220-NewWoodTiles-Begin
+      - TileWoodParquet
+      - TileWoodBlack
+      - TileWoodDark
+      - TileWoodLight
+      - TileWoodRed
+      - TileWoodLargeBlack
+      - TileWoodLargeDark
+      - TileWoodLargeLight
+      - TileWoodLargeRed
+      - TileWoodParquetBlack
+      - TileWoodParquetDark
+      - TileWoodParquetLight
+      - TileWoodParquetRed
+      - TileWoodTileBlack
+      - TileWoodTileDark
+      - TileWoodTileLight
+      - TileWoodTileRed
+      #SS220-NewWoodTiles-End
+  #SS220-Sheetifier-rework-end
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - Metal
+        - Wooden
+        - RawMaterial
+        - Plastic
+        - Ingot

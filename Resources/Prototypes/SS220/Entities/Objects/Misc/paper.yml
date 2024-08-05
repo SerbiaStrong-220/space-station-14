@@ -198,146 +198,199 @@
 
 # Added new CentComm clipboard and folder end
 
+# Папки Begin
+
+  # База
 - type: entity
-  id: BoxFolderСaptain
-  name: папка капитана
-  description: Папка, заполненная совершенно секретными документами.
   parent: BoxFolderBase
+  id: BoxFolderBaseSS220
+  name: папка
+  description: Папка, заполненная совершенно секретными документами.
+  abstract: true
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+    - state: folder-base
+
+  # Командование
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderСaptain
+  name: папка капитана
+  components:
+  - type: Sprite
     layers:
     - state: folder-captain
     - state: folder-base
 
 - type: entity
-  id: BoxFolderCE
-  name: папка старшего инженера
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
+  parent: BoxFolderBaseSS220
+  id: BoxFolderHoP
+  name: папка главы персонала
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-hop
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderCE
+  name: папка старшего инженера
+  components:
+  - type: Sprite
     layers:
     - state: folder-ce
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderCMO
   name: папка главного врача
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-cmo
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderHoS
   name: папка главы службы безопасности
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-hos
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderQM
   name: папка квартирмейстера
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-qm
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderRD
   name: папка научного руководителя
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-rd
     - state: folder-base
 
+  # Отделы
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderCargo
   name: папка отдела снабжения
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-cargo
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderSecurity
   name: папка отдела службы безопасности
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-security
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderEngineer
   name: папка инженерного отдела
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-engineer
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderSyndicate
   name: папка синдиката
-  description: Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: folder-syndicate
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolder
   name: радужная папка
-  description: Папка, заполненная совершенно секретными документами.
-  parent: BoxFolderBase
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
     - state: rainbow-folder
     - state: folder-base
 
 - type: entity
+  parent: BoxFolderBaseSS220
   id: BoxFolderMedical
   name: папка медицинского отдела
-  description: Папка, заполненная совершенно секретными документами.
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-medical
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBaseSS220
+  id: BoxFolderReserch
+  name: папка отдела исследований
+  components:
+  - type: Sprite
+    layers:
+    - state: folder-rnd
+    - state: folder-base
+
+  # Разноцветные
+- type: entity
   parent: BoxFolderBase
+  id: BoxFolderOrange
+  suffix: Оранжевая
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/bureaucracy.rsi
     layers:
-    - state: folder-medical
+    - state: folder-colormap
+      color: "#c14d1b"
     - state: folder-base
+
+- type: entity
+  parent: BoxFolderBase
+  id: BoxFolderPurple
+  suffix: Фиолетовая
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+      color: "#841dbf"
+    - state: folder-base
+
+- type: entity
+  parent: BoxFolderBase
+  id: BoxFolderBrown
+  suffix: Коричневая
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+      color: "#715646"
+    - state: folder-base
+
+# Папки End

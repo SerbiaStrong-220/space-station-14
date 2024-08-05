@@ -45,6 +45,8 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.001
+  - type: FireProtection
+    reduction: 0.8
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Armor
@@ -125,7 +127,7 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Radiation: 0.3 #salv is supposed to have radiation hazards in the future
+        Radiation: 0.8 #salv is supposed to have radiation hazards in the future # ss220 rad fix 0.3 -> 0.8 (20%)
         Caustic: 0.8
         Stamina: 0.8
   - type: ClothingSpeedModifier
@@ -341,6 +343,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
+  - type: FireProtection
+    reduction: 0.8
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: Armor
@@ -607,7 +611,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: FireProtection
-    reduction: 0.8 # perfect protection like atmos firesuit for pyro tf2 ops
+    reduction: 0.8
   - type: Armor
     modifiers:
       coefficients:
@@ -957,6 +961,8 @@
     coefficient: 0.001
   - type: ExplosionResistance
     damageCoefficient: 0.2
+  - type: FireProtection
+    reduction: 0.8
   - type: Armor
     modifiers:
       coefficients:

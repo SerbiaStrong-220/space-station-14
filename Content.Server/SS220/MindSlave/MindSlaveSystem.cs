@@ -65,7 +65,8 @@ public sealed class MindSlaveSystem : EntitySystem
 
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
 
-    private const AlertType EnslavedAlert = AlertType.MindSlaved;
+    [ValidatePrototypeId<AlertPrototype>]
+    private const string EnslavedAlert = "MindSlaved";
 
     /// <summary>
     /// Dictionary, containing list of all enslaved minds (as a key), and their master (as a value).
@@ -206,9 +207,6 @@ public sealed class MindSlaveSystem : EntitySystem
         _npcFaction.AddFaction(slave, SyndicateFactionId);
 
         EnslavedMinds.Add(mindId, masterMindId);
-        GetTraitorGamerule(out var gameRuleEntity, out var gameRule);
-        if (gameRule != null && gameRuleEntity != null)
-            _traitorRule.AddToTraitorList(mindId, gameRuleEntity.Value, gameRule);
 
         if (mindComp.UserId != null && _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
             _eui.OpenEui(new MindSlaveNotificationEui(masterName, true), session);
@@ -270,9 +268,6 @@ public sealed class MindSlaveSystem : EntitySystem
         _npcFaction.AddFaction(slave, NanoTrasenFactionId);
 
         EnslavedMinds.Remove(mindId);
-        GetTraitorGamerule(out var gameRuleEntity, out var gameRule);
-        if (gameRule != null && gameRuleEntity != null)
-            _traitorRule.RemoveFromTraitorList(mindId, gameRuleEntity.Value, gameRule);
 
         if (mindComp.UserId != null && master != null && _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
             _eui.OpenEui(new MindSlaveNotificationEui(masterName, false), session);

@@ -101,7 +101,7 @@
   id: ClothingMaskGasCentcom
   name: CentCom gas mask
   description: Oooh, gold and green. Fancy! This should help as you sit in your office.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Mask/gascentcom.rsi
@@ -238,6 +238,24 @@
   - type: Construction
     graph: BananaClownMask
     node: mask
+
+- type: entity
+  parent: ClothingMaskClown
+  id: ClothingMaskClownSecurity
+  name: security clown wig and mask
+  description: A debatably oxymoronic but protective mask and wig.
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/clown_security.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/clown_security.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
 
 - type: entity
   parent: ClothingMaskBase

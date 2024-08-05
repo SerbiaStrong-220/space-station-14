@@ -11,7 +11,7 @@
   - type: Sprite
     sprite: SS220/Structures/Catwalks/catwalksolid.rsi
     drawdepth: FloorTiles
-    noRot: true
+    noRot: false
   - type: Transform
     anchored: true
   - type: FootstepModifier

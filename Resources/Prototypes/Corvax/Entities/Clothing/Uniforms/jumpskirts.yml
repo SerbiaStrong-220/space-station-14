@@ -4,7 +4,7 @@
   id: ClothingUniformJumpskirtCentcomOfficial
   name: CentCom officer's suitskirt
   description: It's a suitskirt worn by CentCom's highest-tier Commanders.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/centcom_official.rsi
@@ -16,7 +16,7 @@
   id: ClothingUniformJumpskirtCentcomOfficer
   name: CentCom turtleneck skirt
   description: A skirt version of the CentCom turtleneck, rarer and more sought after than the original.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/centcom_officer.rsi

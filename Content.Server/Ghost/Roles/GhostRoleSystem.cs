@@ -4,7 +4,6 @@ using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
-using Content.Server.Ghost.Roles.Raffles;
 using Content.Shared.Ghost.Roles.Raffles;
 using Content.Server.Ghost.Roles.UI;
 using Content.Server.Mind.Commands;
@@ -31,11 +30,12 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
 using Content.Server.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Collections;
+using Content.Shared.SS220.DarkReaper;
+using Content.Shared.Ghost.Roles.Components;
 
 namespace Content.Server.Ghost.Roles
 {
@@ -87,6 +87,7 @@ namespace Content.Server.Ghost.Roles
             SubscribeLocalEvent<GhostRoleMobSpawnerComponent, TakeGhostRoleEvent>(OnSpawnerTakeRole);
             SubscribeLocalEvent<GhostTakeoverAvailableComponent, TakeGhostRoleEvent>(OnTakeoverTakeRole);
             SubscribeLocalEvent<GhostRoleMobSpawnerComponent, GetVerbsEvent<Verb>>(OnVerb);
+            SubscribeLocalEvent<GhostRoleMobSpawnerComponent, GhostRoleRadioMessage>(OnGhostRoleRadioMessage);
             _playerManager.PlayerStatusChanged += PlayerStatusChanged;
         }
 
@@ -314,6 +315,12 @@ namespace Content.Server.Ghost.Roles
                 return;
 
             _ghostRoles[role.Comp.Identifier = GetNextRoleIdentifier()] = role;
+            //SS220 Log-for-null-meta-excep begin
+            if (TryComp<MetaDataComponent>(role.Owner, out var metaData)
+                                            && metaData.EntityPrototype != null)
+                Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, proto id: {metaData.EntityPrototype}");
+            else Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, with null Meta");
+            //SS220 Log-for-null-meta-excep end
             UpdateAllEui();
         }
 
@@ -324,6 +331,13 @@ namespace Content.Server.Ghost.Roles
                 return;
 
             _ghostRoles.Remove(comp.Identifier);
+            //SS220 Log-for-null-meta-excep begin
+            if (TryComp<MetaDataComponent>(role.Owner, out var metaData)
+                                            && metaData.EntityPrototype != null)
+                Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, proto id: {metaData.EntityPrototype}");
+            else
+                Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, with null Meta");
+            //SS220 Log-for-null-meta-excep end
             if (TryComp(role.Owner, out GhostRoleRaffleComponent? raffle))
             {
                 // if a raffle is still running, get rid of it
@@ -538,6 +552,13 @@ namespace Content.Server.Ghost.Roles
 
             foreach (var (id, (uid, role)) in _ghostRoles)
             {
+                // SS220 Log-for-null-meta-excep begin
+                if (TryComp<MetaDataComponent>(uid, out _) == false)
+                {
+                    Log.Error($"|error in GhostRoleSystem| Caught request to the Meta of {uid} but it hasnt got one");
+                    continue;
+                }
+                // SS220 Log-for-null-meta-excep end
                 if (metaQuery.GetComponent(uid).EntityPaused)
                     continue;
 
@@ -710,7 +731,7 @@ namespace Content.Server.Ghost.Roles
 
         private bool IsRoleBanned(string prototypeName, NetUserId userId)
         {
-            var bans = _banManager.GetJobBans(userId) ?? new HashSet<string>();
+            var bans = _banManager.GetJobBans(userId) ?? new HashSet<ProtoId<JobPrototype>>();
 
             var isBanned =
                 prototypeName == "MobHumanLoneNuclearOperative" && bans.Contains("Nukeops")
@@ -784,6 +805,11 @@ namespace Content.Server.Ghost.Roles
 
             GhostRoleInternalCreateMindAndTransfer(args.Player, uid, uid, ghostRole);
             UnregisterGhostRole((uid, ghostRole));
+
+            //SS220 Dark Reaper consume fix begin
+            if (HasComp<CannotBeConsumedComponent>(uid))
+                RemComp<CannotBeConsumedComponent>(uid);
+            //SS220 Dark Reaper consume fix end
 
             args.TookRole = true;
         }
@@ -863,6 +889,21 @@ namespace Content.Server.Ghost.Roles
                 var msg = Loc.GetString("ghostrole-spawner-select", ("mode", verbText));
                 _popupSystem.PopupEntity(msg, uid, userUid.Value);
             }
+        }
+
+        public void OnGhostRoleRadioMessage(Entity<GhostRoleMobSpawnerComponent> entity, ref GhostRoleRadioMessage args)
+        {
+            if (!_prototype.TryIndex(args.ProtoId, out var ghostRoleProto))
+                return;
+
+            // if the prototype chosen isn't actually part of the selectable options, ignore it
+            foreach (var selectableProto in entity.Comp.SelectablePrototypes)
+            {
+                if (selectableProto == ghostRoleProto.EntityPrototype.Id)
+                    return;
+            }
+
+            SetMode(entity.Owner, ghostRoleProto, ghostRoleProto.Name, entity.Comp);
         }
     }
 

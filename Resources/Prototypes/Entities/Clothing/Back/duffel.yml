@@ -256,3 +256,22 @@
     walkModifier: 1
     sprintModifier: 1
   - type: HeldSpeedModifier
+
+#SS220 RETURNED FOR CENTCOMM MAP
+- type: entity
+  id: ClothingBackpackDuffelCBURNFilled
+  parent: ClothingBackpackDuffelCBURN
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalEngineering
+    - id: WeaponShotgunDoubleBarreled
+    - id: BoxShotgunIncendiary
+      amount: 2
+    - id: GrenadeFlashBang
+      amount: 2
+    - id: PillAmbuzolPlus
+    - id: PillAmbuzol
+      amount: 4
+#SS220 RETURNED FOR CENTCOMM MAP

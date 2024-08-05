@@ -34,7 +34,7 @@
   weights:
     EscapeShuttleObjective: 1
     DieObjective: 0.05
-    #HijackShuttleObjective: 0.02
+    HijackShuttleObjective: 0.02  #SS220 Return hijack objective
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSocial
@@ -54,13 +54,6 @@
   weights:
     ThiefObjectiveGroupStructure: 0 #Temporarily disabled until obvious ways to steal structures are added
 #    ThiefObjectiveGroupAnimal: 2 # SS220 Delete thief objective animals
-
-- type: weightedRandom
-  id: ThiefEscapeObjectiveGroups
-  weights:
-    ThiefObjectiveGroupEscape: 1
-
-
 
 - type: weightedRandom
   id: ThiefObjectiveGroupCollection
@@ -95,6 +88,7 @@
     ExpensiveLighterNanotrasenStealObjective: 0.5 #SS220 Zippo-Steal-Begin
     ExpensiveLighterShieldStealObjective: 0.5
     ExpensiveLighterSyndicateStealObjective: 0.5 #SS220 Zippo-Steal-End
+    WristWatchGoldStealObjective: 1 # SS2250 Wrist Watch
 
 - type: weightedRandom
   id: ThiefObjectiveGroupStructure

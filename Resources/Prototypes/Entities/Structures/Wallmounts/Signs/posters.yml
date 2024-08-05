@@ -590,7 +590,7 @@
   components:
     - type: Sprite
       state: poster62_contraband
-      
+
 - type: entity
   parent: PosterBase
   id: PosterContrabandMissingSpacepen

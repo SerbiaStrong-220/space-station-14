@@ -4,11 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.Database;
-using Content.Server.Humanoid;
 using Content.Shared.CCVar;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
-using Content.Shared.Roles;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -17,20 +14,21 @@ using Robust.Shared.Prototypes;
 using Content.Server.SS220.RoleSpeciesRestrict;
 using Robust.Shared.Utility;
 
-
 namespace Content.Server.Preferences.Managers
 {
     /// <summary>
     /// Sends <see cref="MsgPreferencesAndSettings"/> before the client joins the lobby.
     /// Receives <see cref="MsgSelectCharacter"/> and <see cref="MsgUpdateCharacter"/> at any time.
     /// </summary>
-    public sealed class ServerPreferencesManager : IServerPreferencesManager
+    public sealed class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit
     {
         [Dependency] private readonly IServerNetManager _netManager = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IDependencyCollection _dependencies = default!;
+        [Dependency] private readonly ILogManager _log = default!;
+        [Dependency] private readonly UserDbDataManager _userDb = default!;
         [Dependency] private readonly SponsorsManager _sponsors = default!;
         [Dependency] private readonly IEntitySystemManager _iEntitySystemManager = default!;
         [Dependency] private readonly ISharedPlayerManager _iSharedPlayerManager = default!;
@@ -39,6 +37,7 @@ namespace Content.Server.Preferences.Managers
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
             new();
 
+        private ISawmill _sawmill = default!;
         // private int MaxCharacterSlots => _cfg.GetCVar(CCVars.GameMaxCharacterSlots); // Corvax-Sponsors
 
         public void Init()
@@ -47,6 +46,7 @@ namespace Content.Server.Preferences.Managers
             _netManager.RegisterNetMessage<MsgSelectCharacter>(HandleSelectCharacterMessage);
             _netManager.RegisterNetMessage<MsgUpdateCharacter>(HandleUpdateCharacterMessage);
             _netManager.RegisterNetMessage<MsgDeleteCharacter>(HandleDeleteCharacterMessage);
+            _sawmill = _log.GetSawmill("prefs");
         }
 
         private async void HandleSelectCharacterMessage(MsgSelectCharacter message)
@@ -83,20 +83,20 @@ namespace Content.Server.Preferences.Managers
 
         private async void HandleUpdateCharacterMessage(MsgUpdateCharacter message)
         {
-            var slot = message.Slot;
-            var profile = message.Profile;
             var userId = message.MsgChannel.UserId;
 
-            if (profile == null)
-            {
-                Logger.WarningS("prefs",
-                    $"User {userId} sent a {nameof(MsgUpdateCharacter)} with a null profile in slot {slot}.");
-                return;
-            }
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+            if (message.Profile == null)
+                _sawmill.Error($"User {userId} sent a {nameof(MsgUpdateCharacter)} with a null profile in slot {message.Slot}.");
+            else
+                await SetProfile(userId, message.Slot, message.Profile);
+        }
 
+        public async Task SetProfile(NetUserId userId, int slot, ICharacterProfile profile)
+        {
             if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
             {
-                Logger.WarningS("prefs", $"User {userId} tried to modify preferences before they loaded.");
+                _sawmill.Error($"Tried to modify user {userId} preferences before they loaded.");
                 return;
             }
 
@@ -130,7 +130,6 @@ namespace Content.Server.Preferences.Managers
                     }
                 }
                 profile = human;
-                message.Profile = human;
             }
             //ss-220 arahFixend
 
@@ -144,10 +143,8 @@ namespace Content.Server.Preferences.Managers
 
             prefsData.Prefs = new PlayerPreferences(profiles, slot, curPrefs.AdminOOCColor);
 
-            if (ShouldStorePrefs(message.MsgChannel.AuthType))
-            {
-                await _db.SaveCharacterSlotAsync(message.MsgChannel.UserId, message.Profile, message.Slot);
-            }
+            if (session != null && ShouldStorePrefs(session.Channel.AuthType))
+                await _db.SaveCharacterSlotAsync(userId, profile, slot);
         }
 
         private async void HandleDeleteCharacterMessage(MsgDeleteCharacter message)
@@ -303,7 +300,6 @@ namespace Content.Server.Preferences.Managers
 
         /// <summary>
         /// Retrieves preferences for the given username from storage.
-        /// Creates and saves default preferences if they are not found, then returns them.
         /// </summary>
         public PlayerPreferences GetPreferences(NetUserId userId)
         {
@@ -318,7 +314,6 @@ namespace Content.Server.Preferences.Managers
 
         /// <summary>
         /// Retrieves preferences for the given username from storage or returns null.
-        /// Creates and saves default preferences if they are not found, then returns them.
         /// </summary>
         public PlayerPreferences? GetPreferencesOrNull(NetUserId? userId)
         {
@@ -361,11 +356,7 @@ namespace Content.Server.Preferences.Managers
             return usernames
                 .Select(p => (_cachedPlayerPrefs[p].Prefs, p))
                 .Where(p => p.Prefs != null)
-                .Select(p =>
-                {
-                    var idx = p.Prefs!.SelectedCharacterIndex;
-                    return new KeyValuePair<NetUserId, ICharacterProfile>(p.p, p.Prefs!.GetProfile(idx));
-                });
+                .Select(p => new KeyValuePair<NetUserId, ICharacterProfile>(p.p, p.Prefs!.SelectedCharacter));
         }
 
         internal static bool ShouldStorePrefs(LoginType loginType)
@@ -377,6 +368,13 @@ namespace Content.Server.Preferences.Managers
         {
             public bool PrefsLoaded;
             public PlayerPreferences? Prefs;
+        }
+
+        void IPostInjectInit.PostInject()
+        {
+            _userDb.AddOnLoadPlayer(LoadData);
+            _userDb.AddOnFinishLoad(FinishLoad);
+            _userDb.AddOnPlayerDisconnect(OnClientDisconnected);
         }
     }
 }

@@ -85,10 +85,13 @@ namespace Content.Shared.Chat
         /// </summary>
         Unspecified = 1 << 14,
 
+        //ss220-telepathy
+        Telepathy = 1 << 15,
+
         /// <summary>
         ///     Channels considered to be IC.
         /// </summary>
-        IC = Local | Whisper | Radio | Dead | Emotes | Damage | Visual | Notifications,
+        IC = Local | Whisper | Radio | Dead | Emotes | Damage | Visual | Notifications | Telepathy,
 
         AdminRelated = Admin | AdminAlert | AdminChat,
     }

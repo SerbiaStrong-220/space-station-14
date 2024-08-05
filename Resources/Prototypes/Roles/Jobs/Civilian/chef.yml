@@ -35,3 +35,6 @@
     id: ChefPDA
     ears: ClothingHeadsetService
 #    belt: ClothingBeltChefFilled #SS220 Chef Resprite
+  #storage:
+    #back:
+    #- Stuff

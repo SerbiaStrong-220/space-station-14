@@ -270,6 +270,7 @@
         - Radio
         - DiscreteHealthAnalyzer
         - SurgeryTool
+        - Dropper
       components:
         - Hypospray
         - Injector
@@ -344,6 +345,7 @@
         - Bottle
         - Syringe
         - CigPack
+        - Dropper
       components:
         - Seed
         - Smokable
@@ -587,10 +589,17 @@
   - type: Sprite
     sprite: Clothing/Belt/holster.rsi
   - type: Clothing
+    slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/holster.rsi
-  - type: Storage
+  - type: Storage 
+    maxItemSize: Huge #SS220 holster maximum item size
     grid:
     - 0,0,3,1
+    whitelist: #SS220 holster whitelist
+      components:
+        - Gun
+        - BallisticAmmoProvider
+        - CartridgeAmmo
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -601,6 +610,7 @@
   - type: Sprite
     sprite: Clothing/Belt/syndieholster.rsi
   - type: Clothing
+    slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/syndieholster.rsi
   - type: Item
     size: Ginormous

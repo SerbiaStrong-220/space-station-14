@@ -1,7 +1,7 @@
 - type: entity
   id: PelletShotgunSlug
   name: pellet (.50 slug)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
   - type: Sprite
@@ -15,7 +15,7 @@
 - type: entity
   id: PelletShotgunBeanbag
   name: beanbag (.50)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
   - type: Sprite
@@ -30,7 +30,7 @@
 - type: entity
   id: PelletShotgun
   name: pellet (.50)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
   - type: Sprite
@@ -42,9 +42,19 @@
         Piercing: 10
 
 - type: entity
+  id: PelletShotgunSpread
+  noSpawn: true
+  parent: PelletShotgun
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgun
+    count: 6
+    spread: 15
+
+- type: entity
   id: PelletShotgunIncendiary
   name: pellet (.50 incendiary)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBulletIncendiary
   components:
   - type: Sprite
@@ -59,9 +69,19 @@
     ignited: true
 
 - type: entity
+  id: PelletShotgunIncendiarySpread
+  noSpawn: true
+  parent: PelletShotgunIncendiary
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunIncendiary
+    count: 6
+    spread: 15
+
+- type: entity
   id: PelletShotgunPractice
   name: pellet (.50 practice)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBulletPractice
   components:
   - type: Sprite
@@ -73,9 +93,19 @@
         Blunt: 1
 
 - type: entity
+  id: PelletShotgunPracticeSpread
+  noSpawn: true
+  parent: PelletShotgunPractice
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunPractice
+    count: 6
+    spread: 15
+
+- type: entity
   id: PelletShotgunImprovised
   name: improvised pellet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
   - type: Sprite
@@ -84,14 +114,23 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
-        Slash: 3
+        Piercing: 4 #ss220 handmade gun buff
+        Slash: 5 #ss220 handmade gun buff
 
+- type: entity
+  id: PelletShotgunImprovisedSpread
+  noSpawn: true
+  parent: PelletShotgunImprovised
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunImprovised
+    count: 10
+    spread: 45
 
 - type: entity
   id: PelletShotgunTranquilizer
   name: pellet (.50 tranquilizer)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBulletPractice
   components:
   - type: Sprite
@@ -118,7 +157,7 @@
 - type: entity
   id: PelletShotgunFlare
   name: pellet (.50 flare)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Physics
     bodyType: Dynamic
@@ -165,7 +204,7 @@
 - type: entity
   id: PelletShotgunUranium
   name: pellet (.50 uranium)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
   - type: Sprite
@@ -178,9 +217,19 @@
         Piercing: 5
 
 - type: entity
+  id: PelletShotgunUraniumSpread
+  noSpawn: true
+  parent: PelletShotgunUranium
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunUranium
+    count: 5
+    spread: 6
+
+- type: entity
   id: PelletGrapeshot #tally fucking ho
   name: grapeshot pellet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseBullet
   components:
   - type: Sprite
@@ -196,10 +245,20 @@
         Structural: 5
 
 - type: entity
+  id: PelletGrapeshotSpread
+  noSpawn: true
+  parent: PelletGrapeshot
+  components:
+  - type: ProjectileSpread
+    proto: PelletGrapeshot
+    count: 5
+    spread: 40
+
+- type: entity
   id: PelletGlass
   name: glass shard
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     noRot: false
@@ -214,3 +273,13 @@
     damage:
       types:
         Slash: 25
+
+- type: entity
+  id: PelletGlassSpread
+  parent: PelletGlass
+  noSpawn: true
+  components:
+  - type: ProjectileSpread
+    proto: PelletGlass
+    count: 5
+    spread: 10

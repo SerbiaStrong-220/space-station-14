@@ -1,6 +1,10 @@
+using Content.Client.Lock.Visualizers;
+using Content.Client.Storage.Visualizers;
+using Content.Client.Wires;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Polymorph.Components;
 using Content.Shared.Polymorph.Systems;
+using Content.Shared.VendingMachines;
 using Robust.Client.GameObjects;
 
 namespace Content.Client.Polymorph.Systems;
@@ -22,6 +26,13 @@ public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 
     private void OnHandleState(Entity<ChameleonDisguiseComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        //ss220 cham fix start
+        CopyComp<EntityStorageVisualsComponent>(ent);
+        CopyComp<LockVisualsComponent>(ent);
+        CopyComp<WiresVisualsComponent>(ent);
+        CopyComp<VendingMachineComponent>(ent);
+        //ss220 cham fix end
+
         CopyComp<SpriteComponent>(ent);
         CopyComp<GenericVisualizerComponent>(ent);
         CopyComp<SolutionContainerVisualsComponent>(ent);

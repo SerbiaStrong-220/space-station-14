@@ -8,6 +8,15 @@
       role: JobParamedic
       time: 108000 # 30 hrs
 
+- type: loadoutEffectGroup
+  id: Feldsher
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 162000 # 45 hrs
+
 # Jumpsuit
 - type: loadout
   id: ParamedicJumpsuitTurtleneck
@@ -32,3 +41,15 @@
   id: ParamedicJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtParamedicTurtleneck
+
+- type: loadout
+  id: ParamedicFeldsher
+  equipment: ParamedicFeldsher
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Feldsher
+
+- type: startingGear
+  id: ParamedicFeldsher
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitFeldsher

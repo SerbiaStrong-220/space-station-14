@@ -9,11 +9,13 @@ using Content.Shared.Bed.Sleep;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
@@ -35,10 +37,10 @@ namespace Content.Server.Zombies
         [Dependency] private readonly ActionsSystem _actions = default!;
         [Dependency] private readonly AutoEmoteSystem _autoEmote = default!;
         [Dependency] private readonly EmoteOnDamageSystem _emoteOnDamage = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly TagSystem _tag = default!;
+        [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
         private const string ZombifyableTag = "ZombifyableByMelee";
 
@@ -273,6 +275,20 @@ namespace Content.Server.Zombies
             }
         }
 
+        // ss220 - zombie - edit start
+        private void SetMarkingColors(MarkingCategories category, Color color, HumanoidAppearanceComponent huApComp)
+        {
+            if (!huApComp.MarkingSet.TryGetCategory(category, out var markings))
+                return;
+
+            var index = markings.Count - 1;
+            for (var i = 0; i < markings[index].MarkingColors.Count; i++)
+            {
+                markings[index].SetColor(i, color);
+            }
+        }
+        // ss220 - zombie - edit end
+
         /// <summary>
         ///     This is the function to call if you want to unzombify an entity.
         /// </summary>
@@ -296,11 +312,19 @@ namespace Content.Server.Zombies
             if (TryComp<HumanoidAppearanceComponent>(target, out var appcomp))
             {
                 appcomp.EyeColor = zombiecomp.BeforeZombifiedEyeColor;
+
+                //ss220 edit start
+                SetMarkingColors(MarkingCategories.Tail, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                SetMarkingColors(MarkingCategories.HeadSide, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                SetMarkingColors(MarkingCategories.HeadTop, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                SetMarkingColors(MarkingCategories.Snout, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                //ss220 edit end
+
             }
             _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor, false);
             _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
 
-            _metaData.SetEntityName(target, zombiecomp.BeforeZombifiedEntityName);
+            _nameMod.RefreshNameModifiers(target);
             return true;
         }
 

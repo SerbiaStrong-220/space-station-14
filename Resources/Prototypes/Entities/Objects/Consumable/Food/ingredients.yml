@@ -34,6 +34,9 @@
     solution: food
   - type: TrashOnSolutionEmpty
     solution: food
+  - type: Tag
+    tags:
+      - Ingredient
 
 - type: entity
   abstract: true
@@ -277,6 +280,9 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 15
+  - type: Tag
+    tags:
+      - Ingredient
 
 - type: entity
   name: dough
@@ -307,6 +313,27 @@
       - dough
   - type: Sprite
     state: dough-slice
+  - type: Tag
+    tags:
+    - Slice
+  - type: Construction
+    graph: DoughRope
+    node: start
+
+- type: entity
+  name: dough rope
+  parent: FoodBakingBase
+  id: FoodDoughRope
+  description: A thin noodle of dough. Can be cooked into a bagel.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - dough
+  - type: Sprite
+    state: dough-rope
+  - type: Construction
+    graph: DoughRope
+    node: rolled
 
 - type: entity
   name: cornmeal dough
@@ -336,6 +363,9 @@
       - dough
   - type: Sprite
     state: cornmealdough-slice
+  - type: Tag
+    tags:
+    - Slice
 
 - type: entity
   name: tortilla dough
@@ -368,6 +398,9 @@
   - type: Construction
     graph: Tortilla
     node: start
+  - type: Tag
+    tags:
+    - Slice
 
 - type: entity
   name: flattened tortilla dough
@@ -508,6 +541,9 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
+  - type: Tag
+    tags:
+    - Slice
 
 - type: entity
   name: chèvre log
@@ -555,6 +591,9 @@
           Quantity: 1
         - ReagentId: Vitamin
           Quantity: 0.2
+  - type: Tag
+    tags:
+    - Slice
 
 - type: entity
   name: tofu
@@ -600,6 +639,9 @@
           Quantity: 3
         - ReagentId: Nutriment
           Quantity: 2
+  - type: Tag
+    tags:
+    - Slice
 
 - type: entity
   name: burned mess
@@ -653,3 +695,6 @@
       reagents:
       - ReagentId: CocoaPowder
         Quantity: 2
+  - type: Tag
+    tags:
+      - Ingredient

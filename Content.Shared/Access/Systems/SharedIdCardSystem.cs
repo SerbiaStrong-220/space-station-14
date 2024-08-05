@@ -166,7 +166,7 @@ public abstract class SharedIdCardSystem : EntitySystem
 
         id.JobColor = jobColor;
         id.RadioBold = boldRadio;
-        Dirty(id);
+        Dirty(uid, id);
         UpdateEntityName(uid, id);
 
         if (player != null)

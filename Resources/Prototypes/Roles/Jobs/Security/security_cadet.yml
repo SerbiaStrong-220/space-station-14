@@ -32,3 +32,10 @@
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
     pocket2: BookSecurity
+  storage:
+    back:
+    - Flash
+    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
+    - MagazinePistolRubber
+    - FlashlightSeclite
+    - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End

@@ -26,4 +26,9 @@
     eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
     ears: ClothingHeadsetLawyer #SS220-Internal-Affairs
-    belt: ClothingBeltHolsterFilled
+    neck: ClothingBeltHolsterFilled #SS220 holster to neck
+  storage:
+    back:
+    - Flash
+    - ForensicPad
+    - ForensicScanner

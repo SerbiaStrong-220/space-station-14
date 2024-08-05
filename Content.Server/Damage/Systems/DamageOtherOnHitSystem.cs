@@ -39,9 +39,12 @@ namespace Content.Server.Damage.Systems
 
             if (hitEv.Handled)
                 return;
+            // SS220-Stunbaton-rework end
+
+            if (TerminatingOrDeleted(args.Target))
+                return;
 
             var dmg = _damageable.TryChangeDamage(args.Target, component.Damage, component.IgnoreResistances, origin: args.Component.Thrower);
-            // SS220-Stunbaton-rework end
 
             // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
             if (dmg != null && HasComp<MobStateComponent>(args.Target))
@@ -57,12 +60,6 @@ namespace Content.Server.Damage.Systems
             {
                 var direction = body.LinearVelocity.Normalized();
                 _sharedCameraRecoil.KickCamera(args.Target, direction);
-            }
-
-            // TODO: If more stuff touches this then handle it after.
-            if (TryComp<PhysicsComponent>(uid, out var physics))
-            {
-                _thrownItem.LandComponent(args.Thrown, args.Component, physics, false);
             }
         }
 

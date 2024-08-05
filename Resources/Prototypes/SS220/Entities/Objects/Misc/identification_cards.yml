@@ -13,6 +13,8 @@
     layers:
     - state: ussp
   - type: AgentIDCard
+    icons:
+    - JobIconPassenger
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
@@ -22,6 +24,9 @@
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null
+  - type: Access
+    groups:
+    - UsspAllAccess
 
 - type: entity
   parent: CentcomIDCard
@@ -93,3 +98,30 @@
     - type: PresetIdCard
       job: SecurityOfficer
       name: Рокси
+
+      
+- type: entity
+  parent: PassengerIDCard
+  id: SeniorServiceIDCard
+  name: senior service ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idseniorservice
+  - type: PresetIdCard
+    job: SeniorService
+
+
+- type: entity
+  parent: CentcomIDCard
+  id: NanoTrasenAdmiralIDCard
+  name: ID карта Адмирала NanoTrasen
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: Адмирал NanoTrasen
+    - type: Access
+      groups:
+      - AllAccess # SS220 Fast fix access
+      - CentralCommand

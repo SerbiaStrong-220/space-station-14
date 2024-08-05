@@ -105,7 +105,7 @@ namespace Content.Client.Ghost
 
                 // sprite.Color = color;
 
-                sprite.Rotation += Angle.FromDegrees(180.0f);
+                //sprite.Rotation += Angle.FromDegrees(180.0f);  //SS220 Ghost rotation fix
 
                 sprite.Color = sprite.Color.WithBlue(10);
                 //var t = sprite.GetType();
@@ -157,7 +157,7 @@ namespace Content.Client.Ghost
 
             var typingIndicatorStates = new string[0];
             if (TryComp<TypingIndicatorComponent>(uid, out var typingIndicator) &&
-                _prototypeManager.TryIndex<TypingIndicatorPrototype>(typingIndicator.Prototype, out var typingProto))
+                _prototypeManager.TryIndex<TypingIndicatorPrototype>(typingIndicator.TypingIndicatorPrototype, out var typingProto))
                 typingIndicatorStates = new string[] { typingProto.TypingState, typingProto.IdleState };
 
             var spriteLayers = sprite.AllLayers;

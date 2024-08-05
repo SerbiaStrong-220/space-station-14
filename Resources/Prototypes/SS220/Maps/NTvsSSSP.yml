@@ -17,8 +17,6 @@
             !type:NanotrasenNameGenerator
             prefixCreator: '-SS220'
         - type: StationJobs
-          overflowJobs:
-            - Passenger
           availableJobs:
             Passenger: [ -1, -1 ]
             #Command
@@ -71,7 +69,7 @@
 - type: entity
   id: NTvsSSSPStation
   parent: StandardNanotrasenStation
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData

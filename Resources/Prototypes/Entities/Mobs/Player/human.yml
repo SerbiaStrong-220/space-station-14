@@ -11,6 +11,9 @@
   name: syndicate agent
   suffix: Human, Base
   components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
+      hair: HairBald
     - type: Loadout
       prototypes: [SyndicateOperativeGearExtremelyBasic]
     - type: RandomMetadata
@@ -31,15 +34,45 @@
       giveObjectives: false
 
 - type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentMedic
+  name: syndicate medic
+  components:
+  - type: Loadout
+    prototypes: [SyndicateReinforcementMedic]
+
+- type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentSpy
+  name: syndicate spy
+  components:
+  - type: Loadout
+    prototypes: [SyndicateReinforcementSpy]
+
+- type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentThief
+  name: syndicate thief
+  components:
+  - type: Loadout
+    prototypes: [SyndicateReinforcementThief]
+
+- type: entity
   parent: MobHumanSyndicateAgentBase
   id: MobHumanSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
   suffix: Human, NukeOps
   components:
     - type: NukeOperative
+    - type: RandomMetadata
+      nameSegments:
+      - nukeops-role-operator
+      - SyndicateNamesNormal
+    - type: Loadout
+      prototypes: [SyndicateOperativeGearFullNoUplink]
 
 # Nuclear Operative
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: Nuclear Operative
   parent: MobHuman
   id: MobHumanNukeOp
@@ -48,7 +81,7 @@
     - type: RandomHumanoidAppearance
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: MobHuman
   id: MobHumanLoneNuclearOperative
   name: Lone Operative
@@ -57,8 +90,8 @@
       randomizeName: false
     - type: NukeOperative
     - type: LoneNukeOperative # SS220 Lone-Nukie-Declare-War
-    - type: Loadout
-      prototypes: [SyndicateLoneOperativeGearFull]
+    # - type: Loadout                                # SS220 Lone-Ops-Test-Fail-Fix
+    #   prototypes: [SyndicateLoneOperativeGearFull] # SS220 Lone-Ops-Test-Fail-Fix
     - type: RandomMetadata
       nameSegments:
       - SyndicateNamesPrefix
@@ -66,31 +99,3 @@
     - type: NpcFactionMember
       factions:
       - Syndicate
-
-# Space Ninja
-- type: entity
-  noSpawn: true
-  name: Space Ninja
-  parent: MobHuman
-  id: MobHumanSpaceNinja
-  components:
-    #SS220 - status icon component changes for ninja so that sec cannot see him in HUDs.
-  - type: StatusIcon
-    bounds: -1000,-1000,1000,1000
-  - type: RandomHumanoidAppearance
-    randomizeName: false
-  - type: Loadout
-    prototypes: [SpaceNinjaGear]
-  - type: NpcFactionMember
-    factions:
-    - Syndicate
-  - type: SpaceNinja
-  - type: GenericAntag
-    rule: Ninja
-  - type: AutoImplant
-    implants:
-    - DeathAcidifierImplant
-  - type: RandomMetadata
-    nameSegments:
-    - names_ninja_title
-    - names_ninja

@@ -1,7 +1,7 @@
 - type: entity
-  noSpawn: true
-  parent: ClothingBackpackFilled
-  id: ClothingCultistBackpackFilled
+  categories: [ HideSpawnMenu ]
+  parent: ClothingBackpack
+  id: ClothingCultistBackpack
   components:
   - type: StorageFill
     contents:
