@@ -126,6 +126,8 @@ public sealed class MutationSystem : EntitySystem
         CrossBool(ref result.TurnIntoKudzu, a.TurnIntoKudzu);
         CrossBool(ref result.CanScream, a.CanScream);
 
+        CrossRepeatable(ref result.HarvestRepeat, ref a.HarvestRepeat); //SS220 CrossRepeatable
+
         CrossGasses(ref result.ExudeGasses, a.ExudeGasses);
         CrossGasses(ref result.ConsumeGasses, a.ConsumeGasses);
 
@@ -406,6 +408,13 @@ public sealed class MutationSystem : EntitySystem
     {
         val = Random(0.5f) ? val : other;
     }
+
+    //SS220 CrossRepeatable start
+    private void CrossRepeatable(ref HarvestType val, ref HarvestType other)
+    {
+        val = Random(0.15f) ? val : other;
+    }
+    //SS220 CrossRepeatable end
 
     private bool Random(float p)
     {
