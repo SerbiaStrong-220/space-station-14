@@ -59,8 +59,8 @@
     - /PhotocopierForms/nanotrasen_station/hr/cmd_acr.xml
     - /PhotocopierForms/nanotrasen_station/hr/cmd_acwt.xml
   - Id: law
-    Name: Юридический отдел
-    Color: "#DD4040FF"
+    Name: Внутренние Дела
+    Color: "#323ba9FF"
     IconPath: /Textures/SS220/DepartmentIcons/Law_dep.png
     Forms:
     - /PhotocopierForms/nanotrasen_station/law/cmd_comp.xml
@@ -146,6 +146,7 @@
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_med.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_sci.xml
     - /PhotocopierForms/nanotrasen_station/blank/blank_regular_sec.xml
+    - /PhotocopierForms/nanotrasen_station/blank/blank_regular_law.xml
 - Id: syndicate
   Groups:
   - Id: syndicate
