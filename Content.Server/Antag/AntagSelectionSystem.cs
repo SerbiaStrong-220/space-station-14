@@ -228,7 +228,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         for (var i = 0; i < count; i++)
         {
-            var session = (ICommonSession?)null;
+            var session = (ICommonSession?) null;
             if (picking)
             {
                 if (!playerPool.TryPickAndTake(RobustRandom, out session) && noSpawner)
@@ -345,7 +345,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             _role.MindAddRoles(curMind.Value, def.MindComponents, null, true);
             ent.Comp.SelectedMinds.Add((curMind.Value, Name(player)));
 
-
             SendBriefing(session, def.Briefing);
         }
 
@@ -417,17 +416,17 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         switch (def.MultiAntagSetting)
         {
             case AntagAcceptability.None:
-                {
-                    if (_role.MindIsAntagonist(mind))
-                        return false;
-                    break;
-                }
+            {
+                if (_role.MindIsAntagonist(mind))
+                    return false;
+                break;
+            }
             case AntagAcceptability.NotExclusive:
-                {
-                    if (_role.MindIsExclusiveAntagonist(mind))
-                        return false;
-                    break;
-                }
+            {
+                if (_role.MindIsExclusiveAntagonist(mind))
+                    return false;
+                break;
+            }
         }
 
         // todo: expand this to allow for more fine antag-selection logic for game rules.
@@ -469,7 +468,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
     private void OnObjectivesTextGetInfo(Entity<AntagSelectionComponent> ent, ref ObjectivesTextGetInfoEvent args)
     {
-        if (ent.Comp.AgentName is not { } name)
+        if (ent.Comp.AgentName is not {} name)
             return;
 
         args.Minds = ent.Comp.SelectedMinds;
