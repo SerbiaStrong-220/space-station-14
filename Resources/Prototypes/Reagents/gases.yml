@@ -339,6 +339,18 @@
         type: Add
         time: 500
         refresh: false
+      #SS220 Temporary waddle status effect begin
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Frezon
+          min: 1
+        key: TemporaryWaddle
+        component: TemporaryWaddle
+        type: Add
+        time: 500
+        refresh: false
+      #SS220 Temporary waddle status effect end
       - !type:Drunk
         boozePower: 500
         conditions:

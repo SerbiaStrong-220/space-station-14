@@ -1,7 +1,8 @@
-﻿using Content.Shared.Clothing;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Inventory.Events;
+using Content.Shared.SS220.Movement.Components;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
@@ -27,6 +28,7 @@ public sealed class WaddleClothingSystem : EntitySystem
 
     private void OnGotUnequipped(EntityUid entity, WaddleWhenWornComponent comp, ClothingGotUnequippedEvent args)
     {
-        RemComp<WaddleAnimationComponent>(args.Wearer);
+        if (!HasComp<TemporaryWaddleComponent>(args.Wearer))  //SS220 Temporary waddle status effect
+            RemComp<WaddleAnimationComponent>(args.Wearer);
     }
 }
