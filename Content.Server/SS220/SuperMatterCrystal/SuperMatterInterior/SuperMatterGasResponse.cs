@@ -29,12 +29,33 @@ public static class SuperMatterGasResponse
         }
         return resultFlatInfluence;
     }
+    /// <summary> </summary>
+    /// <returns> Value from 0.05 to 1 </returns>
+    public static float GetGasInfluenceReleaseEnergyEfficiency(SuperMatterComponent smComp, GasMixture gasMixture)
+    {
+        var resultEfficiency = 0f;
+        var affectGases = smComp.EnergyEfficiencyChangerGases;
+
+        foreach (var gasId in affectGases.Keys)
+        {
+            resultEfficiency += affectGases[gasId].RelativeInfluence
+                    * GetNonLinierGasInfluenceEfficiencyFunction(gasId, gasMixture, affectGases[gasId].OptimalRatio);
+        }
+
+        return MathF.Max(Math.Min(resultEfficiency, 1f), 0.05f);
+    }
+
     /// <summary> Standalone method for easier  </summary>
     private static float GetGasInfluenceEfficiency(Gas gasId, GasMixture gasMixture)
     {
         return gasMixture.GetMoles(gasId) / gasMixture.TotalMoles;
     }
-}
-public struct GasEffectOnSuperMatter
-{
+    private static float GetNonLinierGasInfluenceEfficiencyFunction(Gas gasId, GasMixture gasMixture, float optimalRatio)
+    {
+        var maxValue = MathF.Pow(optimalRatio, 2) * MathF.Exp(-2);
+        var optParam = 2 / optimalRatio;
+        var normalizedMoles = gasMixture.GetMoles(gasId) / gasMixture.TotalMoles;
+
+        return MathF.Pow(normalizedMoles, 2) * MathF.Exp(-optParam * normalizedMoles) / maxValue;
+    }
 }

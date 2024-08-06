@@ -4,7 +4,7 @@ using Content.Shared.Atmos;
 
 
 namespace Content.Server.SS220.SuperMatterCrystal.Components;
-
+[RegisterComponent]
 public sealed partial class SuperMatterComponent : Component
 {
     /// <summary> The SM will only cycle if activated. </summary>

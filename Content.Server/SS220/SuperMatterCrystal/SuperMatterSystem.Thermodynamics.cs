@@ -3,8 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
-using Content.Server.Construction.Completions;
-using Content.Server.Chat.Commands;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -25,6 +23,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
     private float GetDeltaChemistryPotential(float temperature, float pressure) => SuperMatterInternalProcess.GetDeltaChemistryPotential(temperature, pressure);
     private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter);
+    private float GetReleaseEnergyConversionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetReleaseEnergyConversionEfficiency(temperature, pressure);
+    private float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetZapToRadiationRatio(temperature, pressure, smState);
+    private float GetO2ToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetO2ToPlasmaRatio(temperature, pressure, smState);
     private float GetRelativeGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture) => SuperMatterGasResponse.GetRelativeGasesInfluenceToMatterDecay(smComp, gasMixture);
     private float GetFlatGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture) => SuperMatterGasResponse.GetFlatGasesInfluenceToMatterDecay(smComp, gasMixture);
 
