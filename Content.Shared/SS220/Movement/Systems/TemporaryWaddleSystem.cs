@@ -24,7 +24,12 @@ public sealed class TemporaryWaddleSystem : EntitySystem
 
     private void OnInit(EntityUid uid, TemporaryWaddleComponent component, ComponentInit args)
     {
-        EnsureComp<WaddleAnimationComponent>(uid);
+        EnsureComp<WaddleAnimationComponent>(uid, out var waddleAnimComp);
+
+        waddleAnimComp.AnimationLength = component.AnimationLength;
+        waddleAnimComp.HopIntensity = component.HopIntensity;
+        waddleAnimComp.RunAnimationLengthMultiplier = component.RunAnimationLengthMultiplier;
+        waddleAnimComp.TumbleIntensity = component.TumbleIntensity;
     }
 
     private void OnRemoved(EntityUid uid, TemporaryWaddleComponent component, ComponentRemove args)
