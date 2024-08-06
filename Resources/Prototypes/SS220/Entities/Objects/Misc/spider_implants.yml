@@ -1,0 +1,124 @@
+- type: entity
+  parent: BaseSubdermalImplant 
+  id: LightImplantSpider
+  name: spider-spawn-egg-guard
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpider      
+    - type: PointLight
+      enabled: false
+      radius: 2.5
+      softness: 5
+      mask: /Textures/Effects/LightMasks/cone.png
+      autoRot: true
+    - type: Tag
+      tags:
+        - SubdermalImplant
+        - HideContextMenu
+        - Flashlight
+    - type: UnpoweredFlashlight
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderHunter
+  name: spider-spawn-egg-hunt
+  description:
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderHunter      
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderGhost
+  name: spider-spawn-egg-ghost
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderGhost      
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderShooter
+  name: spider-spawn-egg-shooter
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderShooter         
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderCrystal
+  name: spider-spawn-kristal
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderCrystal       
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderWallWeb
+  name: spider-spawn-wall
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderWallWeb        
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderWallWeb2
+  name: spider-spawn-wall2
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderWallWeb2         
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderLittle
+  name: spider-spawn-smallspider
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderLittle         
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderSpider
+  name: spider-spawn-web
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderSpiderWeb           
+
+- type: entity
+  parent: LightImplantSpider 
+  id: LightImplantSpiderSpiderHunter
+  name: spider-spawn-web-hunt
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderSpiderWebHunter
+
+- type: entity
+  parent: LightImplantSpider  
+  id: LightImplantSpiderSpiderQueen
+  name: spider-spawn-web-queen
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderSpiderWebQueen           
+
+- type: entity
+  parent: LightImplantSpider  
+  id: LightImplantSpiderSpiderClown
+  name: spider-spawn-web-clown
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnMagicarpSpellSpiderSpiderWebClown          
