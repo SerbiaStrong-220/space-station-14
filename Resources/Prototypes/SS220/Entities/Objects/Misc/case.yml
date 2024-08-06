@@ -5,7 +5,7 @@
   id: GlassCase
   name: glass case
   suffix: Etched brass knuckles
-  description: Ударопрочный кейс с замком для хранения револьвера. Является аксессуаром к сувенирному револьверу "Уника".
+  description: Made to order for storing valuables. The lid is made of tempered glass, and the base is made of wood grown on tropical planets and decorated with a velvet pad to prevent possible scratches.
   components:
   - type: Item
     size: Large
@@ -14,17 +14,25 @@
   - type: Sprite
     sprite: SS220/Misc/etched_brass_knuckles_case.rsi
     layers:
-    - state: icon
+    - state: base
       map: ["enum.StorageVisualLayers.Base"]
-    - state: open
+    - state: closed
       map: ["enum.OpenableVisuals.Layer"]
-    - state: caplaser
+    - state: brassknukles
       map: ["enum.ItemCabinetVisuals.Layer"]
       visible: true
     - state: locked
       shader: unshaded
       map: ["enum.LockVisualLayers.Lock"]
   - type: Appearance
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        ejectOnInteract: true
+        whitelist:
+          tags:
+          - EtchedBrassKnuckles
+        ejectSound: /Audio/Machines/machine_switch.ogg
   - type: GenericVisualizer
     visuals:
       enum.ItemCabinetVisuals.ContainsItem:
@@ -34,7 +42,33 @@
       enum.OpenableVisuals.Opened:
         enum.OpenableVisuals.Layer:
           True: { state: open }
-          False: { state: icon }
+          False: { state: closed }
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassReinforced:
+            min: 1
+            max: 2
+      # - !type:ChangeConstructionNodeBehavior
+      #   node: brokenGlassBox
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: StaticPrice
     price: 100
 
@@ -42,19 +76,10 @@
   parent: GlassCase
   id: GlassCaseEtchedBrassKnucklesFilled
   name: glass case
-  suffix: Etched brass knuckles
-  description: Ударопрочный кейс с замком для хранения револьвера. Является аксессуаром к сувенирному револьверу "Уника".
+  suffix: Etched brass knuckles, Filled
   components:
   - type: AccessReader
     access: [["Quartermaster"]]
-  - type: ItemSlots
-    slots:
-      ItemCabinet:
-        ejectOnInteract: true
-        whitelist:
-          tags:
-          - EtchedBrassKnuckles
-        ejectSound: /Audio/Machines/machine_switch.ogg
   - type: ContainerFill
     containers:
       ItemCabinet:
