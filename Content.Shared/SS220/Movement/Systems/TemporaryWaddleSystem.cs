@@ -26,10 +26,11 @@ public sealed class TemporaryWaddleSystem : EntitySystem
     {
         EnsureComp<WaddleAnimationComponent>(uid, out var waddleAnimComp);
 
-        waddleAnimComp.AnimationLength = component.AnimationLength;
-        waddleAnimComp.HopIntensity = component.HopIntensity;
-        waddleAnimComp.RunAnimationLengthMultiplier = component.RunAnimationLengthMultiplier;
-        waddleAnimComp.TumbleIntensity = component.TumbleIntensity;
+        //Set values from TemporaryWaddleComponent if entity hasn`t clown shoes or hasn`t shoes in that slot
+        if (!_inventorySystem.TryGetSlotEntity(uid, "shoes", out var shoesUid) || !HasComp<WaddleWhenWornComponent>(shoesUid))
+        {
+            SetAnimationValues(uid);
+        }
     }
 
     private void OnRemoved(EntityUid uid, TemporaryWaddleComponent component, ComponentRemove args)
@@ -39,5 +40,19 @@ public sealed class TemporaryWaddleSystem : EntitySystem
             return;
 
         RemComp<WaddleAnimationComponent>(uid);
+    }
+
+    public void SetAnimationValues(EntityUid uid, TemporaryWaddleComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        if (!TryComp<WaddleAnimationComponent>(uid, out var waddleAnimComp))
+            return;
+
+        waddleAnimComp.AnimationLength = component.AnimationLength;
+        waddleAnimComp.HopIntensity = component.HopIntensity;
+        waddleAnimComp.RunAnimationLengthMultiplier = component.RunAnimationLengthMultiplier;
+        waddleAnimComp.TumbleIntensity = component.TumbleIntensity;
     }
 }
