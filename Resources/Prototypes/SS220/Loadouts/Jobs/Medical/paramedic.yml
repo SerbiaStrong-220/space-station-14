@@ -20,36 +20,24 @@
 # Jumpsuit
 - type: loadout
   id: ParamedicJumpsuitTurtleneck
-  equipment: ParamedicJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: ParamedicTurtleneck
-
-- type: startingGear
-  id: ParamedicJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitParamedicTurtleneck
 
 - type: loadout
   id: ParamedicJumpskirtTurtleneck
-  equipment: ParamedicJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: ParamedicTurtleneck
-
-- type: startingGear
-  id: ParamedicJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtParamedicTurtleneck
 
 - type: loadout
   id: ParamedicFeldsher
-  equipment: ParamedicFeldsher
   effects:
   - !type:GroupLoadoutEffect
     proto: Feldsher
-
-- type: startingGear
-  id: ParamedicFeldsher
   equipment:
     jumpsuit: ClothingUniformJumpsuitFeldsher

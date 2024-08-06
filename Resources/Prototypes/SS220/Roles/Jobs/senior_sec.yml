@@ -16,6 +16,10 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 216000 # 60 hrs
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: SeniorOfficerGear
   icon: "JobIconSeniorOfficer"
   supervisors: job-supervisors-hos

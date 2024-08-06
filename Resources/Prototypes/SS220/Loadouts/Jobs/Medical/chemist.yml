@@ -11,24 +11,16 @@
 # Jumpsuit
 - type: loadout
   id: ChemistJumpsuitTurtleneck
-  equipment: ChemistJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: ChemistTurtleneck
-
-- type: startingGear
-  id: ChemistJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitChemistTurtleneck
 
 - type: loadout
   id: ChemistJumpskirtTurtleneck
-  equipment: ChemistJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: ChemistTurtleneck
-
-- type: startingGear
-  id: ChemistJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtChemistTurtleneck

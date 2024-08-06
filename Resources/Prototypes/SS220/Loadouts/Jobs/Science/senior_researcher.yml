@@ -1,19 +1,11 @@
 # Head
 - type: loadout
   id: HatSeniorSciensist
-  equipment: HatSeniorSciensist
-
-- type: startingGear
-  id: HatSeniorSciensist
   equipment:
     head: ClothingHeadHatBeretRND
     
 # Jumpsuit
 - type: loadout
-  id: SeniorSciensistJumpsuit
-  equipment: SeniorSciensistJumpsuit
-
-- type: startingGear
   id: SeniorSciensistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitSeniorResearcher
@@ -21,19 +13,11 @@
 # Jumpskirt
 - type: loadout
   id: SeniorSciensistJumpskirt
-  equipment: SeniorSciensistJumpskirt
-
-- type: startingGear
-  id: SeniorSciensistJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtSeniorResearcher
     
 # Lab
 - type: loadout
-  id: SeniorSciensistLabCoat
-  equipment: SeniorSciensistLabCoat
-
-- type: startingGear
   id: SeniorSciensistLabCoat
   equipment:
     outerClothing: ClothingOuterCoatLabSeniorResearcher

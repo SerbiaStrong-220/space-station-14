@@ -58,7 +58,7 @@ public sealed partial class ButtScanWindow : PaperWindow
         ButtTextureRect.Texture = contentImage;
     }
 
-    public new void Populate(SharedPaperComponent.PaperBoundUserInterfaceState state)
+    public new void Populate(PaperComponent.PaperBoundUserInterfaceState state)
     {
         base.Populate(state);
         BlankPaperIndicator.Visible = false;

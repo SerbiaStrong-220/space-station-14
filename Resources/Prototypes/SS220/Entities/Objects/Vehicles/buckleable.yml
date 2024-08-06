@@ -420,6 +420,10 @@
       northOverride: 0
       southOverride: 0
       unbuckleTime: 2 # SS220 wheelchair fix 04.08
+    #SS220-fold-doafter begin
+    - type: Foldable
+      foldTime: 2
+    #SS220-fold-doafter end
     - type: Sprite
       sprite: Objects/Vehicles/wheelchair.rsi
       layers:

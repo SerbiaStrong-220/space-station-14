@@ -11,33 +11,21 @@
 # Jumpsuit
 - type: loadout
   id: PsychologistJumpsuitTurtleneck
-  equipment: PsychologistJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: PsychologistTurtleneck
-
-- type: startingGear
-  id: PsychologistJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleAltColorWhite
 
 - type: loadout
   id: PsychologistJumpskirtTurtleneck
-  equipment: PsychologistJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: PsychologistTurtleneck
-
-- type: startingGear
-  id: PsychologistJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite
 
 - type: loadout
-  id: PsychologistJumpsuit
-  equipment: PsychologistJumpsuit
-
-- type: startingGear
   id: PsychologistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitPsychologist

@@ -11,48 +11,32 @@
 # Jumpsuit
 - type: loadout
   id: PassengerJumpsuitTurtleneck
-  equipment: PassengerJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: PassengerTurtleneck
-
-- type: startingGear
-  id: PassengerJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleColorGrey
 
 - type: loadout
   id: PassengerJumpsuitTurtleneckAlt
-  equipment: PassengerJumpsuitTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: PassengerTurtleneck
-
-- type: startingGear
-  id: PassengerJumpsuitTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleAltColorGrey
 
 - type: loadout
   id: PassengerJumpskirtTurtleneck
-  equipment: PassengerJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: PassengerTurtleneck
-
-- type: startingGear
-  id: PassengerJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleColorGrey
 
 - type: loadout
   id: PassengerJumpskirtTurtleneckAlt
-  equipment: PassengerJumpskirtTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: PassengerTurtleneck
-
-- type: startingGear
-  id: PassengerJumpskirtTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorGrey

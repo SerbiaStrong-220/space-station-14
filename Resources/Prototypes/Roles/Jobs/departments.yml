@@ -1,5 +1,6 @@
 - type: department
   id: Cargo
+  name: department-Cargo
   description: department-Cargo-description
   color: "#A46106"
   sort: 0
@@ -10,6 +11,7 @@
 
 - type: department
   id: Civilian
+  name: department-Civilian
   description: department-Civilian-description
   color: "#9FED58"
   weight: -10
@@ -37,6 +39,7 @@
 
 - type: department
   id: Command
+  name: department-Command
   sort: 1
   description: department-Command-description
   color: "#052EED"
@@ -56,6 +59,7 @@
 
 - type: department
   id: Engineering
+  name: department-Engineering
   sort: 0
   description: department-Engineering-description
   color: "#EFB341"
@@ -68,6 +72,7 @@
 
 - type: department
   id: Medical
+  name: department-Medical
   sort: 0
   description: department-Medical-description
   color: "#52B4E9"
@@ -83,6 +88,7 @@
 
 - type: department
   id: Security
+  name: department-Security
   sort: 0
   description: department-Security-description
   color: "#DE3A3A"
@@ -97,6 +103,7 @@
 
 - type: department
   id: Science
+  name: department-Science
   sort: 0
   description: department-Science-description
   color: "#D381C9"
@@ -108,8 +115,9 @@
 
 - type: department
   id: Cryo
+  name: department-Cryo
   sort: 0
-  description: Крио
+  description: department-Cryo
   color: "#88FF88"
   roles: []
   primary: false
@@ -118,6 +126,7 @@
 
 - type: department
   id: Specific
+  name: department-Specific
   sort: 0
   description: department-Specific-description
   color: "#9FED58"
@@ -131,8 +140,9 @@
 
 - type: department
   id: GhostRoles
+  name: ghost-roles
   sort: 0
-  description: Ghost roles
+  description: ghost-roles
   color: "#A9A9A9"
   roles:
   - GhostRole
