@@ -1,7 +1,7 @@
 #Base
 - type: entity
   parent: BaseSubdermalImplant 
-  id: LightImplantSpiderBase
+  id: BaseLightImplantSpider
   name: spider-spawn-egg-guard
   noSpawn: true
   components:
@@ -21,7 +21,7 @@
 
 #Egg
 - type: entity
-  parent: LightImplantSpiderBase 
+  parent: BaseLightImplantSpider 
   id: LightImplantSpiderEggDrone
   name: spider-spawn-egg-guard
   noSpawn: true
@@ -30,7 +30,7 @@
       implantAction: ActionSpawnSpiderEggDrone  
 
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderEggHunter
   name: spider-spawn-egg-hunt
   description:
@@ -40,7 +40,7 @@
       implantAction: ActionSpawnSpiderEggHunter   
 
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderEggGhost
   name: spider-spawn-egg-ghost
   noSpawn: true
@@ -49,7 +49,7 @@
       implantAction: ActionSpawnSpiderEggGhost   
 
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderEggShooter
   name: spider-spawn-egg-shooter
   noSpawn: true
@@ -59,7 +59,7 @@
 
 #Spider
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderLittle
   name: spider-spawn-smallspider
   noSpawn: true
@@ -69,7 +69,7 @@
 
 #Cristal
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderCrystal
   name: spider-spawn-kristal
   noSpawn: true
@@ -79,7 +79,7 @@
 
 #Wall
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderWallWeb
   name: spider-spawn-wall
   noSpawn: true
@@ -88,7 +88,7 @@
       implantAction: ActionSpawnSpiderWallWeb       
 
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSpiderWallWebLongDelay
   name: spider-spawn-wall2
   noSpawn: true
@@ -98,7 +98,7 @@
 
 #Web
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSingleSpiderWebShortDelay
   name: spider-spawn-web
   description: spider-spawn-web-desc
@@ -108,7 +108,7 @@
       implantAction: ActionSpawnSingleSpiderWebShortDelay       
 
 - type: entity
-  parent: LightImplantSpiderBase 
+  parent: BaseLightImplantSpider 
   id: LightImplantSingleSpiderWebMediumDelay
   name: spider-spawn-web-queen
   description: spider-spawn-web-desc
@@ -118,7 +118,7 @@
       implantAction: ActionSpawnSingleSpiderWebMediumDelay
 
 - type: entity
-  parent: LightImplantSpiderBase
+  parent: BaseLightImplantSpider
   id: LightImplantSingleSpiderWebLongDelay
   name: spider-spawn-web-hunt
   description: spider-spawn-web-desc
@@ -128,7 +128,7 @@
       implantAction: ActionSpawnSingleSpiderWebLongDelay   
 
 - type: entity
-  parent: LightImplantSpiderBase 
+  parent: BaseLightImplantSpider 
   id: LightImplantSingleSpiderWebClown
   name: spider-spawn-web-clown
   description: spider-spawn-web-desc

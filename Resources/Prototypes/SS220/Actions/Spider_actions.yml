@@ -1,6 +1,6 @@
 #Base
 - type: entity
-  id: ActionSpawnSpiderEggBase
+  id: BaseActionSpawnSpiderEgg
   name: spider-spawn-egg-guard
   description: spider-spawn-egg-guard-desc
   noSpawn: true
@@ -20,7 +20,7 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  id: ActionSpawnSingleSpiderWebBase
+  id: BaseActionSpawnSingleSpiderWeb
   name: spider-spawn-web
   description: spider-spawn-web-desc
   noSpawn: true
@@ -41,7 +41,7 @@
 
 #Egg
 - type: entity
-  parent: ActionSpawnSpiderEggBase
+  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggDrone
   name: spider-spawn-egg-guard
   description: spider-spawn-egg-guard-desc
@@ -56,7 +56,7 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  parent: ActionSpawnSpiderEggBase
+  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggHunter
   name: spider-spawn-egg-hunt
   noSpawn: true
@@ -71,7 +71,7 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  parent: ActionSpawnSpiderEggBase
+  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggGhost
   name: spider-spawn-egg-ghost
   noSpawn: true
@@ -86,7 +86,7 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  parent: ActionSpawnSpiderEggBase
+  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggShooter 
   name: spider-spawn-egg-shooter
   noSpawn: true
@@ -179,7 +179,7 @@
 
 #Web
 - type: entity
-  parent: ActionSpawnSingleSpiderWebBase
+  parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebShortDelay
   name: spider-spawn-web
   description: spider-spawn-web-desc
@@ -189,7 +189,7 @@
     useDelay: 2
 
 - type: entity
-  parent: ActionSpawnSingleSpiderWebBase
+  parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebMediumDelay
   name: spider-spawn-web-queen
   description: spider-spawn-web-desc
@@ -199,7 +199,7 @@
     useDelay: 4
 
 - type: entity
-  parent: ActionSpawnSingleSpiderWebBase
+  parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebLongDelay
   name: spider-spawn-web-hunt
   description: spider-spawn-web-desc
