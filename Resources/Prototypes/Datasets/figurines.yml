@@ -40,11 +40,14 @@
     prefix: figurines-musician-
     count: 2
 
-# - type: localizedDataset # TODO add something
-#   id: FigurinesBoxer
-#   values:
-#     prefix: figurines-boxer-
-#     count: 0
+# SS220 Add locale for all figurines begin
+- type: localizedDataset
+  id: FigurinesBoxer
+  values:
+    prefix: figurines-boxer-
+    count: 5
+# SS220 Add locale for all figurines end
+
 
 - type: localizedDataset
   id: FigurinesCaptain
@@ -226,11 +229,13 @@
     prefix: figurines-space-dragon-
     count: 1
 
-# - type: localizedDataset # TODO add something
-#   id: FigurinesQueen
-#   values:
-#     prefix: figurines-queen-
-#     count: 0
+# SS220 Add locale for all figurines begin
+- type: localizedDataset
+  id: FigurinesQueen
+  values:
+    prefix: figurines-queen-
+    count: 2
+# SS220 Add locale for all figurines end
 
 - type: localizedDataset
   id: FigurinesRatKing
