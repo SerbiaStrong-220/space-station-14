@@ -1,5 +1,6 @@
+#Base
 - type: entity
-  id: ActionSpawnMagicarpSpellSpider 
+  id: ActionSpawnSpiderEggBase
   name: spider-spawn-egg-guard
   description: spider-spawn-egg-guard-desc
   noSpawn: true
@@ -19,17 +20,49 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderHunter 
+  id: ActionSpawnSingleSpiderWebBase
+  name: spider-spawn-web
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Misc/spiderweb.rsi
+      state: spider_web_1
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebUsual
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Egg
+- type: entity
+  parent: ActionSpawnSpiderEggBase
+  id: ActionSpawnSpiderEggDrone
+  name: spider-spawn-egg-guard
+  description: spider-spawn-egg-guard-desc
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderEggDrone
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: ActionSpawnSpiderEggBase
+  id: ActionSpawnSpiderEggHunter
   name: spider-spawn-egg-hunt
   noSpawn: true
   components:
   - type: WorldTargetAction
     useDelay: 300 #КД
-    range: 1
-    itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Misc/eggspider.rsi
-      state: icon
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggHunter
@@ -38,17 +71,13 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderGhost
+  parent: ActionSpawnSpiderEggBase
+  id: ActionSpawnSpiderEggGhost
   name: spider-spawn-egg-ghost
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 350 #КД
-    range: 1
-    itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Misc/eggspider.rsi
-      state: icon
+    useDelay: 350
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggGhost
@@ -57,17 +86,13 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderShooter 
+  parent: ActionSpawnSpiderEggBase
+  id: ActionSpawnSpiderEggShooter 
   name: spider-spawn-egg-shooter
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 380 
-    range: 1
-    itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Misc/eggspider.rsi
-      state: icon
+    useDelay: 380
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggShooter
@@ -75,28 +100,9 @@
       offset: 0, 1
       speech: action-speech-spell-spider
 
+#Spider
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderCrystal 
-  name: spider-spawn-kristal
-  description: spider-spawn-kristal-desc
-  noSpawn: true
-  components:
-  - type: WorldTargetAction
-    useDelay: 30 
-    range: 1
-    itemIconStyle: BigAction
-    icon:
-      sprite: Structures/Decoration/crystal.rsi
-      state: crystal1
-    event: !type:WorldSpawnSpellEvent
-      prototypes:
-      - id: ShardCrystalBlueXeno
-        amount: 1
-      offset: 0, 1
-      speech: action-speech-spell-spider
-
-- type: entity
-  id: ActionSpawnMagicarpSpellSpiderLittle 
+  id: ActionSpawnSpiderLittle 
   name: spider-spawn-smallspider
   description: spider-spawn-smallspider-desc
   noSpawn: true
@@ -115,8 +121,30 @@
       offset: 0, 1
       speech: action-speech-spell-spider
 
+#Cryctal
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderWallWeb 
+  id: ActionSpawnSpiderCrystal
+  name: spider-spawn-kristal
+  description: spider-spawn-kristal-desc
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 30 
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: Structures/Decoration/crystal.rsi
+      state: crystal1
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: ShardCrystalBlueXeno
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Wall
+- type: entity
+  id: ActionSpawnSpiderWallWeb
   name: spider-spawn-wall
   noSpawn: true
   components:
@@ -141,92 +169,48 @@
       speech: action-speech-spell-spider
 
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderWallWeb2 
+  parent: ActionSpawnSpiderWallWeb
+  id: ActionSpawnSpiderWallWebLongDelay
   name: spider-spawn-wall3
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 10 
-    range: 1.5
-    hungerCost: 15 
-    itemIconStyle: BigAction
-    icon:
-      sprite: Structures/Walls/web.rsi
-      state: full
-      useDelay: 30
-    event: !type:WorldSpawnSpellEvent
-      useDelay: 25
-      prototypes:
-      - id: FloorTileItemWebSpiders2
-        doAfter: 5
-        amount: 1
-        useDelay: 25
-      offset: 0, 1
-      doAfter: 5
-      speech: action-speech-spell-spider
+    useDelay: 10
 
+#Web
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderSpiderWeb 
+  parent: ActionSpawnSingleSpiderWebBase
+  id: ActionSpawnSingleSpiderWebShortDelay
   name: spider-spawn-web
   description: spider-spawn-web-desc
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 2 #КД
-    range: 1.5
-    itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_1
-    event: !type:WorldSpawnSpellEvent
-      prototypes:
-      - id: SpiderWebUsual
-        amount: 1
-      offset: 0, 1
-      speech: action-speech-spell-spider
+    useDelay: 2
 
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderSpiderWebHunter 
+  parent: ActionSpawnSingleSpiderWebBase
+  id: ActionSpawnSingleSpiderWebMediumDelay
+  name: spider-spawn-web-queen
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+
+- type: entity
+  parent: ActionSpawnSingleSpiderWebBase
+  id: ActionSpawnSingleSpiderWebLongDelay
   name: spider-spawn-web-hunt
   description: spider-spawn-web-desc
   noSpawn: true
   components:
   - type: WorldTargetAction
     useDelay: 6
-    range: 1.5
-    itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_1
-    event: !type:WorldSpawnSpellEvent
-      prototypes:
-      - id: SpiderWeb
-        amount: 1
-      offset: 0, 1
-      speech: action-speech-spell-spider
 
+#Clown web
 - type: entity
-  id: ActionSpawnMagicarpSpellSpiderSpiderWebQueen 
-  name: spider-spawn-web-queen
-  description: spider-spawn-web-desc
-  noSpawn: true
-  components:
-  - type: WorldTargetAction
-    useDelay: 4 #КД
-    range: 1.5
-    itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_1
-    event: !type:WorldSpawnSpellEvent
-      prototypes:
-      - id: SpiderWebQueen
-        amount: 1
-      offset: 0, 1
-      speech: action-speech-spell-spider
-
-- type: entity
-  id: ActionSpawnMagicarpSpellSpiderSpiderWebClown 
+  id: ActionSpawnSingleSpiderWebClown
   name: spider-spawn-web-clown
   description: spider-spawn-web-desc
   noSpawn: true

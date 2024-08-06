@@ -170,14 +170,14 @@
   components:
   - type: AutoImplant
     implants:
-    - LightImplantSpiderHunter
-    - LightImplantSpiderWallWeb2
-    - LightImplantSpider
-    - LightImplantSpiderGhost
+    - LightImplantSpiderEggHunter
+    - LightImplantSpiderWallWebLongDelay
+    - LightImplantSpiderEggDrone
+    - LightImplantSpiderEggGhost
     - LightImplantSpiderCrystal
     - LightImplantSpiderLittle
-    - LightImplantSpiderSpiderQueen
-    - LightImplantSpiderShooter
+    - LightImplantSingleSpiderWebMediumDelay
+    - LightImplantSpiderEggShooter
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider
@@ -264,7 +264,7 @@
     implants:
     - LightImplantSpiderWallWeb
     - LightImplantSpiderCrystal
-    - LightImplantSpiderSpider
+    - LightImplantSingleSpiderWebShortDelay
   - type: Spider
     webPrototype: SpiderWebAbility
   - type: MovementSpeedModifier
@@ -333,7 +333,7 @@
     baseSprintSpeed : 3.9
   - type: AutoImplant
     implants:
-    - LightImplantSpiderSpiderHunter
+    - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
   name: spider ghost
@@ -413,7 +413,7 @@
     baseSprintSpeed : 3.9
   - type: AutoImplant
     implants:
-    - LightImplantSpiderSpiderHunter
+    - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
   name: spider shooter
@@ -486,7 +486,7 @@
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg  
   - type: AutoImplant
     implants:
-    - LightImplantSpiderSpiderClown
+    - LightImplantSingleSpiderWebClown
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.7
