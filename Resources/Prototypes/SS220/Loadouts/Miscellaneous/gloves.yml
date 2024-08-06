@@ -1,44 +1,24 @@
 - type: loadout
   id: GlovesWhite
-  equipment: GlovesWhite
-
-- type: startingGear
-  id: GlovesWhite
   equipment:
     gloves: ClothingHandsGlovesColorWhite
 
 - type: loadout
-  id: GlovesGray
-  equipment: GlovesGray
-
-- type: startingGear
   id: GlovesGray
   equipment:
     gloves: ClothingHandsGlovesColorGray
 
 - type: loadout
   id: GlovesBlack
-  equipment: GlovesBlack
-
-- type: startingGear
-  id: GlovesBlack
   equipment:
     gloves: ClothingHandsGlovesColorBlack
 
 - type: loadout
   id: GlovesRed
-  equipment: GlovesRed
-
-- type: startingGear
-  id: GlovesRed
   equipment:
     gloves: ClothingHandsGlovesColorRed
 
 - type: loadout
-  id: GlovesBlue
-  equipment: GlovesBlue
-
-- type: startingGear
   id: GlovesBlue
   equipment:
     gloves: ClothingHandsGlovesColorBlue

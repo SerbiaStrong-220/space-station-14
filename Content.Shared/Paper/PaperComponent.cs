@@ -1,13 +1,15 @@
-using Content.Shared.Paper;
 using Content.Shared.SS220.Photocopier;
+using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
-namespace Content.Server.Paper;
+namespace Content.Shared.Paper;
 
-[RegisterComponent]
-public sealed partial class PaperComponent : SharedPaperComponent, IPhotocopyableComponent
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class PaperComponent : Component, IPhotocopyableComponent
 {
     public PaperAction Mode;
-    [DataField("content")]
+    [DataField("content"), AutoNetworkedField]
     public string Content { get; set; } = "";
 
     /// <summary>
@@ -19,17 +21,23 @@ public sealed partial class PaperComponent : SharedPaperComponent, IPhotocopyabl
     [DataField("contentSize")]
     public int ContentSize { get; set; } = 6000;
 
-    [DataField("stampedBy")]
+    [DataField("stampedBy"), AutoNetworkedField]
     public List<StampDisplayInfo> StampedBy { get; set; } = new();
 
     /// <summary>
     ///     Stamp to be displayed on the paper, state from bureaucracy.rsi
     /// </summary>
-    [DataField("stampState")]
+    [DataField("stampState"), AutoNetworkedField]
     public string? StampState { get; set; }
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool EditingDisabled = false;
+
+    /// <summary>
+    /// Sound played after writing to the paper.
+    /// </summary>
+    [DataField("sound")]
+    public SoundSpecifier? Sound { get; private set; } = new SoundCollectionSpecifier("PaperScribbles", AudioParams.Default.WithVariation(0.1f));
 
     public IPhotocopiedComponentData GetPhotocopiedData()
     {
@@ -41,6 +49,59 @@ public sealed partial class PaperComponent : SharedPaperComponent, IPhotocopyabl
             StampedBy = StampedBy,
             StampState = StampState
         };
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class PaperBoundUserInterfaceState : BoundUserInterfaceState
+    {
+        public readonly string Text;
+        public readonly List<StampDisplayInfo> StampedBy;
+        public readonly PaperAction Mode;
+
+        public PaperBoundUserInterfaceState(string text, List<StampDisplayInfo> stampedBy, PaperAction mode = PaperAction.Read)
+        {
+            Text = text;
+            StampedBy = stampedBy;
+            Mode = mode;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class PaperInputTextMessage : BoundUserInterfaceMessage
+    {
+        public readonly string Text;
+
+        public PaperInputTextMessage(string text)
+        {
+            Text = text;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public enum PaperUiKey
+    {
+        Key
+    }
+
+    [Serializable, NetSerializable]
+    public enum PaperAction
+    {
+        Read,
+        Write,
+    }
+
+    [Serializable, NetSerializable]
+    public enum PaperVisuals : byte
+    {
+        Status,
+        Stamp
+    }
+
+    [Serializable, NetSerializable]
+    public enum PaperStatus : byte
+    {
+        Blank,
+        Written
     }
 }
 
@@ -70,9 +131,11 @@ public sealed class PaperPhotocopiedData : IPhotocopiedComponentData
         if (ContentSize is { } contentSize)
             paperComponent.ContentSize = contentSize;
 
+        var entity = new Entity<PaperComponent>(uid, paperComponent);
+
         //Don't set empty content string so empty paper notice is properly displayed
         if (!string.IsNullOrEmpty(Content))
-            paperSystem.SetContent(uid, Content, paperComponent);
+            paperSystem.SetContent(entity, Content);
 
         if (EditingDisabled is { } editingDisabled)
             paperComponent.EditingDisabled = editingDisabled;
@@ -83,7 +146,7 @@ public sealed class PaperPhotocopiedData : IPhotocopiedComponentData
 
         foreach (var stampedBy in StampedBy)
         {
-            paperSystem.TryStamp(uid, stampedBy, StampState);
+            paperSystem.TryStamp(entity, stampedBy, StampState);
         }
     }
 }

@@ -1,36 +1,20 @@
 # Jumpsuit
 - type: loadout
   id: JumpsuitHoSParadeMale
-  equipment: JumpsuitHoSParadeMale
-
-- type: startingGear
-  id: JumpsuitHoSParadeMale
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoSParadeMale
 
 - type: loadout
-  id: JumpskirtHoSParadeMale
-  equipment: JumpskirtHoSParadeMale
-
-- type: startingGear
   id: JumpskirtHoSParadeMale
   equipment:
     jumpsuit: ClothingUniformJumpskirtHoSParadeMale
 
 - type: loadout
   id: JumpsuitHoSBlue
-  equipment: JumpsuitHoSBlue
-
-- type: startingGear
-  id: JumpsuitHoSBlue
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoSBlue
 
 - type: loadout
-  id: JumpsuitHoSGrey
-  equipment: JumpsuitHoSGrey
-
-- type: startingGear
   id: JumpsuitHoSGrey
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoSGrey
@@ -38,18 +22,10 @@
 # Head
 - type: loadout
   id: HeadofSecurityBigCap
-  equipment: HeadofSecurityBigCap
-
-- type: startingGear
-  id: HeadofSecurityBigCap
   equipment:
     head: ClothingHeadBigCapHoS
 
 - type: loadout
-  id: HatCapHoS
-  equipment: HatCapHoS
-
-- type: startingGear
   id: HatCapHoS
   equipment:
     head: ClothingHeadHatCapHoS
@@ -57,19 +33,11 @@
 # Neck
 - type: loadout
   id: MantleHOSShoulder
-  equipment: MantleHOSShoulder
-
-- type: startingGear
-  id: MantleHOSShoulder
   equipment:
     neck: ClothingNeckMantleHOSShoulder
 
 # Outer
 - type: loadout
-  id: WinterHoSUnarmored
-  equipment: WinterHoSUnarmored
-
-- type: startingGear
   id: WinterHoSUnarmored
   equipment:
     outerClothing: ClothingOuterWinterHoSUnarmored

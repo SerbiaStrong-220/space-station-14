@@ -22,6 +22,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.RoleSpeciesRestrict;
+using Content.Shared.Objectives.Components;
 
 namespace Content.Server.GameTicking
 {
@@ -148,8 +149,8 @@ namespace Content.Server.GameTicking
             }
 
             //SS220 Species-Job-Requirement
-            if (jobId != null && !_roleSpeciesRestrictSystem.IsAllowed(player, jobId))
-                return;
+            //if (jobId != null && !_roleSpeciesRestrictSystem.IsAllowed(player, jobId))
+               // return;
 
             SpawnPlayer(player, character, station, jobId, lateJoin, silent);
         }

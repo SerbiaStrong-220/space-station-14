@@ -11,131 +11,87 @@
 # Jumpsuit
 - type: loadout
   id: CaptainWhiteJumpsuit
-  equipment: CaptainWhiteJumpsuit
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteJumpsuit
   equipment:
     jumpsuit: ClothingUniformWhiteJumpsuitCaptain
 
 # Head
 - type: loadout
   id: CaptainHeadHat
-  equipment: CaptainHeadHat
-
-- type: startingGear
-  id: CaptainHeadHat
   equipment:
     head: ClothingHeadCaptainHat
 
 - type: loadout
-  id: CaptainBeret
-  equipment: CaptainBeret
-
-- type: startingGear
   id: CaptainBeret
   equipment:
     head: ClothingHeadBeretCap
 
 - type: loadout
   id: CaptainWhiteHead
-  equipment: CaptainWhiteHead
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteHead
   equipment:
     head: ClothingHeadWhiteCaptainHat
 
 - type: loadout
   id: CaptainWhiteBeret
-  equipment: CaptainWhiteBeret
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteBeret
   equipment:
     head: ClothingHeadWhiteBeretCap
 
 # Neck
 - type: loadout
   id: CaptainFormalWhiteCloak
-  equipment: CaptainFormalWhiteCloak
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainFormalWhiteCloak
   equipment:
     neck: ClothingNeckCloakWhiteCapFormal
 
 # Back
 - type: loadout
   id: CaptainWhiteBackpack
-  equipment: CaptainWhiteBackpack
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteBackpack
   equipment:
     back: ClothingBackpackWhiteCaptain
 
 - type: loadout
   id: CaptainWhiteSatchel
-  equipment: CaptainWhiteSatchel
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteSatchel
   equipment:
     back: ClothingBackpackWhiteSatchelCaptain
 
 - type: loadout
   id: CaptainWhiteDuffel
-  equipment: CaptainWhiteDuffel
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteDuffel
   equipment:
     back: ClothingBackpackWhiteDuffelCaptain
 
 # Outer clothing
 - type: loadout
   id: CaptainWhiteOuterClothing
-  equipment: CaptainWhiteOuterClothing
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteOuterClothing
   equipment:
     outerClothing: ClothingOuterWhiteArmorCaptainCarapace
 
 - type: loadout
   id: CaptainWhiteCoat
-  equipment: CaptainWhiteCoat
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteCoat
   equipment:
     outerClothing: ClothingOuterWhiteCoatCaptain
 
@@ -143,21 +99,13 @@
 
 - type: loadout
   id: CaptainWhiteGloves
-  equipment: CaptainWhiteGloves
   effects:
   - !type:GroupLoadoutEffect
     proto: CaptainSenior
-
-- type: startingGear
-  id: CaptainWhiteGloves
   equipment:
     gloves: ClothingHandsWhiteGlovesCaptain
 
 - type: loadout
-  id: CaptainGloves
-  equipment: CaptainGloves
-
-- type: startingGear
   id: CaptainGloves
   equipment:
     gloves: ClothingHandsGlovesCaptain

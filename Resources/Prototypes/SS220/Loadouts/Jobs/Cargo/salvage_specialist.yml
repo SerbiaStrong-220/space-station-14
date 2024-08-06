@@ -11,21 +11,13 @@
 # Jumpsuit
 - type: loadout
   id: UniformJumpsuitSalvageSpecialist
-  equipment: UniformJumpsuitSalvageSpecialist
-
-- type: startingGear
-  id: UniformJumpsuitSalvageSpecialist
   equipment:
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
 
 - type: loadout
   id: SalvageSpecialistJumpsuitTurtleneck
-  equipment: SalvageSpecialistJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: SalvageSpecialistTurtleneck
-
-- type: startingGear
-  id: SalvageSpecialistJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialistTurtleneck

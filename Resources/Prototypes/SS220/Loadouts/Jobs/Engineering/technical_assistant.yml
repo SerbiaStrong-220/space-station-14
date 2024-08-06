@@ -11,48 +11,32 @@
 # Jumpsuit
 - type: loadout
   id: TechnicalAssistantJumpsuitTurtleneck
-  equipment: TechnicalAssistantJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: TechnicalAssistantTurtleneck
-
-- type: startingGear
-  id: TechnicalAssistantJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleColorYellow
 
 - type: loadout
   id: TechnicalAssistantJumpsuitTurtleneckAlt
-  equipment: TechnicalAssistantJumpsuitTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: TechnicalAssistantTurtleneck
-
-- type: startingGear
-  id: TechnicalAssistantJumpsuitTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleAltColorYellow
 
 - type: loadout
   id: TechnicalAssistantJumpskirtTurtleneck
-  equipment: TechnicalAssistantJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: TechnicalAssistantTurtleneck
-
-- type: startingGear
-  id: TechnicalAssistantJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleColorYellow
 
 - type: loadout
   id: TechnicalAssistantJumpskirtTurtleneckAlt
-  equipment: TechnicalAssistantJumpskirtTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: TechnicalAssistantTurtleneck
-
-- type: startingGear
-  id: TechnicalAssistantJumpskirtTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorYellow

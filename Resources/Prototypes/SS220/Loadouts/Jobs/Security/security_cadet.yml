@@ -11,48 +11,32 @@
 # Jumpsuit
 - type: loadout
   id: SecurityCadetJumpsuitTurtleneck
-  equipment: SecurityCadetJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: SecurityCadetTurtleneck
-
-- type: startingGear
-  id: SecurityCadetJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleColorRed
 
 - type: loadout
   id: SecurityCadetJumpsuitTurtleneckAlt
-  equipment: SecurityCadetJumpsuitTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: SecurityCadetTurtleneck
-
-- type: startingGear
-  id: SecurityCadetJumpsuitTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleAltColorRed
 
 - type: loadout
   id: SecurityCadetJumpskirtTurtleneck
-  equipment: SecurityCadetJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: SecurityCadetTurtleneck
-
-- type: startingGear
-  id: SecurityCadetJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleColorRed
 
 - type: loadout
   id: SecurityCadetJumpskirtTurtleneckAlt
-  equipment: SecurityCadetJumpskirtTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: SecurityCadetTurtleneck
-
-- type: startingGear
-  id: SecurityCadetJumpskirtTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorRed

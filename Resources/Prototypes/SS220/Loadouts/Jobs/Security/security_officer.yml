@@ -11,33 +11,21 @@
 # Jumpsuit
 - type: loadout
   id: SecurityJumpsuitTurtleneck
-  equipment: SecurityJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: SecurityTurtleneck
-
-- type: startingGear
-  id: SecurityJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleColorBlack
 
 - type: loadout
   id: SecurityJumpskirtTurtleneck
-  equipment: SecurityJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: SecurityTurtleneck
-
-- type: startingGear
-  id: SecurityJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleColorBlack
 
 - type: loadout
-  id: JumpsuitSecBlue
-  equipment: JumpsuitSecBlue
-
-- type: startingGear
   id: JumpsuitSecBlue
   equipment:
     jumpsuit: ClothingUniformJumpsuitSecBlue
@@ -45,19 +33,11 @@
 # Head
 - type: loadout
   id: HatCowboyBlack
-  equipment: HatCowboyBlack
-
-- type: startingGear
-  id: HatCowboyBlack
   equipment:
     head: ClothingHeadHatCowboyBlack
 
 # Neck
 - type: loadout
-  id: Headphones
-  equipment: Headphones
-
-- type: startingGear
   id: Headphones
   equipment:
     neck: ClothingNeckHeadphones
@@ -65,28 +45,16 @@
 #Outer
 - type: loadout
   id: VestArmorSec
-  equipment: VestArmorSec
-
-- type: startingGear
-  id: VestArmorSec
   equipment:
     outerClothing: ClothingOuterVestArmorSec
 
 - type: loadout
-  id: CoatSecurityOvercoat
-  equipment: CoatSecurityOvercoat
-
-- type: startingGear
   id: CoatSecurityOvercoat
   equipment:
     outerClothing: ClothingOuterCoatSecurityOvercoat
 
 # Shoes
 - type: loadout
-  id: BootsJackSec
-  equipment: BootsJackSec
-
-- type: startingGear
   id: BootsJackSec
   equipment:
     shoes: ClothingShoesBootsJackSec

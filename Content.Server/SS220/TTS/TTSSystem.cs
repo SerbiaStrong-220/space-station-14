@@ -8,6 +8,7 @@ using Content.Shared.SS220.AnnounceTTS;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server.SS220.TTS;
 
@@ -18,6 +19,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -36,8 +38,16 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+        SubscribeLocalEvent<TTSComponent, ComponentInit>(OnInit);
 
         SubscribeNetworkEvent<RequestGlobalTTSEvent>(OnRequestGlobalTTS);
+    }
+
+    private void OnInit(Entity<TTSComponent> ent, ref ComponentInit args)
+    {
+        // Set random voice from RandomVoicesList
+        // If RandomVoicesList is null - doesn`t set new voice
+        SetRandomVoice(ent);
     }
 
     private void OnRadioReceiveEvent(RadioSpokeEvent args)
@@ -72,6 +82,18 @@ public sealed partial class TTSSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private void SetRandomVoice(EntityUid uid, TTSComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        var protoId = comp.RandomVoicesList;
+        if (protoId is null)
+            return;
+
+        comp.VoicePrototypeId = _random.Pick(_prototypeManager.Index<RandomVoicesListPrototype>(protoId).VoicesList);
     }
 
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)

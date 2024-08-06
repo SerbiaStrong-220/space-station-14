@@ -116,21 +116,21 @@ namespace Content.Server.Preferences.Managers
             // Corvax-Sponsors-End
 
             //ss-220 arahFix
-            if (profile is HumanoidCharacterProfile human)
-            {
+            //if (profile is HumanoidCharacterProfile human)
+            //{
 
-                foreach (var (k, v) in human.JobPriorities)
-                {
-                    if (session == null)
-                        continue;
+            //    foreach (var (k, v) in human.JobPriorities)
+            //    {
+            //        if (session == null)
+            //            continue;
 
-                    if (!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
-                    {
-                        human = human.WithJobPriority(k, JobPriority.Never);
-                    }
-                }
-                profile = human;
-            }
+            //        if (!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
+            //        {
+            //            human = human.WithJobPriority(k, JobPriority.Never);
+            //        }
+            //    }
+            //    profile = human;
+            //}
             //ss-220 arahFixend
 
             if (session != null)

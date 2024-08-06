@@ -11,18 +11,10 @@
 # Head
 - type: loadout
   id: BartenderHeadWhite
-  equipment: BartenderHeadWhite
-
-- type: startingGear
-  id: BartenderHeadWhite
   equipment:
     head: ClothingHeadHatWhiteTophat
 
 - type: loadout
-  id: BartenderHeadRed
-  equipment: BartenderHeadRed
-
-- type: startingGear
   id: BartenderHeadRed
   equipment:
     head: ClothingHeadHatRedTophat
@@ -30,60 +22,36 @@
 # Jumpsuit
 - type: loadout
   id: BartenderJumpsuitRed
-  equipment: BartenderJumpsuitRed
-
-- type: startingGear
-  id: BartenderJumpsuitRed
   equipment:
     jumpsuit: ClothingUniformJumpsuitBartenderRed
 
 - type: loadout
-  id: BartenderJumpsuitGreen
-  equipment: BartenderJumpsuitGreen
-
-- type: startingGear
   id: BartenderJumpsuitGreen
   equipment:
     jumpsuit: ClothingUniformJumpsuitBartenderGreen
 
 - type: loadout
   id: BartenderJumpsuitNanotrasen
-  equipment: BartenderJumpsuitNanotrasen
   effects:
   - !type:GroupLoadoutEffect
     proto: BartenderSenior
-
-- type: startingGear
-  id: BartenderJumpsuitNanotrasen
   equipment:
     jumpsuit: ClothingUniformJumpsuitBartenderNanotrasen
 
 - type: loadout
-  id: BartenderJumpskirtRed
-  equipment: BartenderJumpskirtRed
-
-- type: startingGear
   id: BartenderJumpskirtRed
   equipment:
     jumpsuit: ClothingUniformJumpskirtBartenderRed
 
 - type: loadout
   id: BartenderJumpskirtGreen
-  equipment: BartenderJumpskirtGreen
-
-- type: startingGear
-  id: BartenderJumpskirtGreen
   equipment:
     jumpsuit: ClothingUniformJumpskirtBartenderGreen
 
 - type: loadout
   id: BartenderJumpskirtNanotrasen
-  equipment: BartenderJumpskirtNanotrasen
   effects:
   - !type:GroupLoadoutEffect
     proto: BartenderSenior
-
-- type: startingGear
-  id: BartenderJumpskirtNanotrasen
   equipment:
     jumpsuit: ClothingUniformJumpskirtBartenderNanotrasen

@@ -263,7 +263,7 @@
   id: BaseSubstationWallFrame
   categories: [ HideSpawnMenu ]
   name: wallmount substation frame
-  description: A substation frame for construction
+  description: A substation frame for construction.
   placement:
     mode: SnapgridCenter
   components:
