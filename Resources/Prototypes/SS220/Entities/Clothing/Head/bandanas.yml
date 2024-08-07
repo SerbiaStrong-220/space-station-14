@@ -4,4 +4,8 @@
   id: ClothingHeadBandBlueBotany
   name: blue botany bandana
 
-
+# Карго
+- type: entity
+  parent: [ClothingHeadBandBase, ClothingMaskBandSalvage]
+  id: ClothingHeadBandSalvage
+  name: Salvage bandana

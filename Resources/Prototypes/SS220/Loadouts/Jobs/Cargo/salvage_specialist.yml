@@ -8,6 +8,16 @@
       role: JobSalvageSpecialist
       time: 108000 # 30 hrs
 
+# Flannel Salvage Time
+- type: loadoutEffectGroup
+  id: UniformJumpsuitFlannelSalvage
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 252000 # 70 hrs
+
 # Jumpsuit
 - type: loadout
   id: UniformJumpsuitSalvageSpecialist
@@ -21,3 +31,43 @@
     proto: SalvageSpecialistTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialistTurtleneck
+
+- type: loadout
+  id: UniformJumpsuitFlannelSalvage
+  equipment: UniformJumpsuitFlannelSalvage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: UniformJumpsuitFlannelSalvage
+
+- type: startingGear
+  id: UniformJumpsuitFlannelSalvage
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitFlannelSalvage
+
+# Head
+- type: loadout
+  id: ClothingHeadHatSalvage
+  equipment: ClothingHeadHatSalvage
+
+- type: startingGear
+  id: ClothingHeadHatSalvage
+  equipment:
+    head: ClothingHeadHatSalvage
+
+- type: loadout
+  id: ClothingHeadBandSalvage
+  equipment: ClothingHeadBandSalvage
+
+- type: startingGear
+  id: ClothingHeadBandSalvage
+  equipment:
+    head: ClothingHeadBandSalvage
+
+- type: loadout
+  id: ClothingHeadHatHardhatViolet
+  equipment: ClothingHeadHatHardhatViolet
+
+- type: startingGear
+  id: ClothingHeadHatHardhatViolet
+  equipment:
+    head: ClothingHeadHatHardhatViolet

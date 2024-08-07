@@ -281,6 +281,16 @@
   loadouts:
   - UniformJumpsuitSalvageSpecialist
   - SalvageSpecialistJumpsuitTurtleneck
+  - UniformJumpsuitFlannelSalvage
+
+- type: loadoutGroup
+  id: SalvageSpecialistHead
+  name: loadout-group-salvage-specialist-head
+  minLimit: 0
+  loadouts:
+  - ClothingHeadHatSalvage
+  - ClothingHeadBandSalvage
+  - ClothingHeadHatHardhatViolet
 
 # Wildcards
 

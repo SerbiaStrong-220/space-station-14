@@ -186,11 +186,16 @@
    components:
    - type: StorageFill
      contents:
-       - id: ClothingBackpack
+       - id: ClothingBackpackSalvage #SS220-Salvage-Loadouts-Update-Begin
+       - id: ClothingBackpackSatchelSalvage
+       - id: ClothingBackpackDuffelSalvage #SS220-Salvage-Loadouts-Update-End
        - id: ClothingShoesBootsSalvage
          amount: 2
        - id: ClothingUniformJumpsuitSalvageSpecialist
          amount: 2
+       - id: ClothingHeadBandSalvage #SS220-Salvage-Loadouts-Update-Begin
+       - id: ClothingHeadHatSalvage
+       - id: ClothingHeadHatHardhatViolet #SS220-Salvage-Loadouts-Update-End
 
  - type: entity
    id: WardrobeAtmosphericsFilled

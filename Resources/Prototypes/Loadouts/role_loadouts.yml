@@ -220,6 +220,7 @@
 - type: roleLoadout
   id: JobSalvageSpecialist
   groups:
+  - SalvageSpecialistHead #SS220-Salvage-Loadouts-Update
   - GroupTankHarness
   - SalvageSpecialistBackpack
   - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
