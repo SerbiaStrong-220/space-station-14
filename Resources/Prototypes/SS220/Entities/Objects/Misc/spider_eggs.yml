@@ -48,6 +48,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 100
 
 - type: entity
   parent: BaseItemSpider
