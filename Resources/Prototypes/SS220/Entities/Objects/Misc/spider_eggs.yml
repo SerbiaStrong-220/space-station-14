@@ -107,8 +107,20 @@
   - type: SpawnOnDespawn
 
 #Spiders
+- type: entity 
+  parent: BaseSpiderEgg
+  id: SpiderEggDrone
+  noSpawn: true
+  name: spider hive egg
+  description: Is this a gem? Is this an egg? It looks expensive.
+  components:
+  - type: TimedDespawn 
+    lifetime: 55
+  - type: SpawnOnDespawn
+    prototype: MobSpiderSpaceDrone   
+
 - type: entity
-  parent: BaseItemSpider
+  parent: BaseSpiderEgg
   id: SpiderEggHunter 
   noSpawn: true
   name: the-egg-of-the-spider-guard
@@ -120,19 +132,7 @@
     prototype: MobSpiderSpaceHunter   #Система цикла  
 
 - type: entity 
-  parent: SpiderEggHunter
-  id: SpiderEggDrone
-  noSpawn: true
-  name: spider hive egg
-  description: Is this a gem? Is this an egg? It looks expensive.
-  components:
-  - type: TimedDespawn 
-    lifetime: 55
-  - type: SpawnOnDespawn
-    prototype: MobSpiderSpaceDrone   
-
-- type: entity 
-  parent: SpiderEggDrone
+  parent: BaseSpiderEgg
   id: SpiderEggGhost
   noSpawn: true
   name: spider hive egg
@@ -144,7 +144,7 @@
     prototype: MobSpiderSpaceGhost   
 
 - type: entity 
-  parent: SpiderEggDrone
+  parent: BaseSpiderEgg
   id: SpiderEggShooter
   noSpawn: true
   name: spider hive egg
