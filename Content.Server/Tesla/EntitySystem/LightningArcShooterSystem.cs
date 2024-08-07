@@ -32,6 +32,10 @@ public sealed class LightningArcShooterSystem : EntitySystem
         var query = EntityQueryEnumerator<LightningArcShooterComponent>();
         while (query.MoveNext(out var uid, out var arcShooter))
         {
+            // SS220-SM-begin
+            if (!arcShooter.Enabled)
+                continue;
+            // SS220-SM-end
             if (arcShooter.NextShootTime > _gameTiming.CurTime)
                 continue;
 

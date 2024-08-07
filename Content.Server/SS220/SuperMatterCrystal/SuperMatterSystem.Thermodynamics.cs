@@ -22,14 +22,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
     private float GetDeltaChemistryPotential(float temperature, float pressure) => SuperMatterInternalProcess.GetDeltaChemistryPotential(temperature, pressure);
+    private float GetChemistryPotential(float temperature, float pressure) => CHEMISTRY_POTENTIAL_BASE + GetDeltaChemistryPotential(temperature, pressure);
     private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter);
     private float GetReleaseEnergyConversionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetReleaseEnergyConversionEfficiency(temperature, pressure);
     private float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetZapToRadiationRatio(temperature, pressure, smState);
-    private float GetO2ToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetO2ToPlasmaRatio(temperature, pressure, smState);
+    private float GetOxygenToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetOxygenToPlasmaRatio(temperature, pressure, smState);
     private float GetRelativeGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture) => SuperMatterGasResponse.GetRelativeGasesInfluenceToMatterDecay(smComp, gasMixture);
     private float GetFlatGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture) => SuperMatterGasResponse.GetFlatGasesInfluenceToMatterDecay(smComp, gasMixture);
 
-    public const float MatterNondimensionalization = 12f; // like C mass in Mendeleev table
+    public const float MatterNondimensionalization = 32f; // like C mass in Mendeleev table
     public const float CHEMISTRY_POTENTIAL_BASE = 10f; // parrots now, but need to concrete in future
     private const float MATTER_DECAY_BASE_RATE = 80f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
@@ -38,7 +39,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     public void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
     {
         var (crystalUid, smComp) = crystal;
-        var chemistryPotential = CHEMISTRY_POTENTIAL_BASE + GetDeltaChemistryPotential(smComp.Temperature, gasMixture.Pressure);
+        var chemistryPotential = GetChemistryPotential(smComp.Temperature, gasMixture.Pressure);
         var crystalHeatFromGas = _atmosphere.GetThermalEnergy(gasMixture) * SM_HEAT_TRANSFER_RATIO
                                     * gasMixture.Temperature - smComp.Temperature
                                     / MathF.Max(gasMixture.Temperature, smComp.Temperature);

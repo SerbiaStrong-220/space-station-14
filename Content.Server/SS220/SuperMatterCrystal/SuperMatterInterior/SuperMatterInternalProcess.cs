@@ -74,7 +74,7 @@ public static class SuperMatterInternalProcess
     private const float SqrtOfMaxRatioValue = 1.2f;
     /// <summary> MADE IT! </summary>
     /// <returns></returns>
-    public static float GetO2ToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState)
+    public static float GetOxygenToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState)
     {
         var ratio = GetZapToRadiationRatio(temperature, pressure, smState);
         return (O2ToPlasmaBaseRatio + O2ToPlasmaFloatRatio * MathF.Sqrt(ratio+RatioValueOffset))
