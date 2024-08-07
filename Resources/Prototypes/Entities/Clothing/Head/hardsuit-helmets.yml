@@ -89,7 +89,7 @@
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+    sprite: Clothing/Head/Hardsuits/engineering-white.rsi # 220 fix
   - type: PointLight
     color: "#daffad"
     radius: 6

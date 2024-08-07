@@ -17,6 +17,6 @@ particle-accelerator-control-menu-draw = [bold]Мощность:[/bold]
 particle-accelerator-control-menu-draw-value = [font="Monospace"]{$watts}/{$lastReceive}[/font]
 particle-accelerator-control-menu-draw-not-available = [font="Monospace"][color=gray]Н/Д[/color][/font]
 
-particle-accelerator-radio-message-on = PA power has been switched on. Ускоритель частиц был активирован.
-particle-accelerator-radio-message-off = PA power has been switched off. Ускоритель частиц был деактивирован.
+particle-accelerator-radio-message-on = Ускоритель частиц был активирован.
+particle-accelerator-radio-message-off = Ускоритель частиц был деактивирован.
 particle-accelerator-radio-message-num = Мощность ускорителя частиц была установлена на уровень {$level}.
