@@ -1,4 +1,5 @@
 #Base
+#TODO: Когда будет анимация для спавна стен - переделать BaseItemSpider на наследование от BaseItem
 - type: entity
   name: "item"
   id: BaseItemSpider 
@@ -48,11 +49,10 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
-#Spiders
 - type: entity
   parent: BaseItemSpider
-  id: SpiderEggHunter 
-  noSpawn: true
+  id: BaseSpiderEgg
+  abstract: true
   name: the-egg-of-the-spider-guard
   description: Is it a gemstone? Is it an egg? It looks expensive.
   components:
@@ -103,6 +103,17 @@
         reagents:
         - ReagentId: PoisonWine
           Quantity: 10      
+  - type: TimedDespawn #Система цикла
+  - type: SpawnOnDespawn
+
+#Spiders
+- type: entity
+  parent: BaseItemSpider
+  id: SpiderEggHunter 
+  noSpawn: true
+  name: the-egg-of-the-spider-guard
+  description: Is it a gemstone? Is it an egg? It looks expensive.
+  components: 
   - type: TimedDespawn #Система цикла
     lifetime: 80        
   - type: SpawnOnDespawn

@@ -186,7 +186,6 @@
         amount: 1
         useDelay: 25
 
-
 #Web
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
