@@ -3,6 +3,7 @@
   id: BaseActionSpawnSpiderEgg
   name: spider-spawn-egg-guard
   description: spider-spawn-egg-guard-desc
+  abstract: true
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -23,6 +24,7 @@
   id: BaseActionSpawnSingleSpiderWeb
   name: spider-spawn-web
   description: spider-spawn-web-desc
+  abstract: true
   noSpawn: true
   components:
   - type: WorldTargetAction

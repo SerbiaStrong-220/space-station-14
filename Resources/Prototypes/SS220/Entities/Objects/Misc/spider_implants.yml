@@ -3,6 +3,7 @@
   parent: BaseSubdermalImplant 
   id: BaseLightImplantSpider
   name: spider-spawn-egg-guard
+  abstract: true
   noSpawn: true
   components:
     - type: SubdermalImplant
