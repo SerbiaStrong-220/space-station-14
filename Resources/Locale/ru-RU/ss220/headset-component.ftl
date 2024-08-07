@@ -5,3 +5,4 @@ chat-radio-alpha = Альфа
 chat-radio-omega = Омега
 chat-radio-traders = Торговцы
 chat-radio-honk = Хонк-сквад
+chat-radio-internal-affairs = Внутренние дела

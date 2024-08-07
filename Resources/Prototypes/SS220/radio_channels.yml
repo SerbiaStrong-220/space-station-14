@@ -194,7 +194,7 @@
 
 - type: radioChannel
   id: InternalAffairs
-  name: Внутренние дела
+  name: chat-radio-internal-affairs
   keycode: 'в'
   frequency: 1373
   color: "#323ba9"

@@ -1,7 +1,8 @@
 - type: entity
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetAltCommandInternalAffairs
-  name: полноразмерная гарнитура департамента внутренних дел
+  name: full-size headset of the Department of Internal Affairs
+  description: It is used by representatives of the law.
   components:
   - type: ContainerFill
     containers:
@@ -16,8 +17,8 @@
 - type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetLawyer
-  name: гарнитура департамента внутренних дел
-  description: Её используют представители закона.
+  name: headset of the Department of Internal Affairs
+  description: It is used by representatives of the law.
   components:
   - type: ContainerFill
     containers:

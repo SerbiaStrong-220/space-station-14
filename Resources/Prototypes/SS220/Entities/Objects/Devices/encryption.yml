@@ -1,8 +1,8 @@
 - type: entity
   parent: EncryptionKey
   id: EncryptionKeyInternalAffairs
-  name: ключ шифрования внутренних дел
-  description: Ключ шифрования, использующаяся истинным законом
+  name: internal affairs encryption key
+  description: The encryption key used by the true law.
   components:
   - type: EncryptionKey
     channels:
