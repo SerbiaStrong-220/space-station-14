@@ -36,7 +36,7 @@
       state: spider_web_1
     event: !type:WorldSpawnSpellEvent
       prototypes:
-      - id: SpiderWebUsual
+      - id: SpiderWebFragile
         amount: 1
       offset: 0, 1
       speech: action-speech-spell-spider
@@ -192,16 +192,6 @@
 
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
-  id: ActionSpawnSingleSpiderWebMediumDelay
-  name: spider-spawn-web-queen
-  description: spider-spawn-web-desc
-  noSpawn: true
-  components:
-  - type: WorldTargetAction
-    useDelay: 4
-
-- type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebLongDelay
   name: spider-spawn-web-hunt
   description: spider-spawn-web-desc
@@ -209,6 +199,22 @@
   components:
   - type: WorldTargetAction
     useDelay: 6
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebDurable
+  name: spider-spawn-web-queen
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebQueen
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
 
 #Clown web
 - type: entity

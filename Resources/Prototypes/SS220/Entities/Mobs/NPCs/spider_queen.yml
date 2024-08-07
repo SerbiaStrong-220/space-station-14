@@ -176,7 +176,7 @@
     - LightImplantSpiderEggGhost
     - LightImplantSpiderCrystal
     - LightImplantSpiderLittle
-    - LightImplantSingleSpiderWebMediumDelay
+    - LightImplantSingleSpiderWebDurable
     - LightImplantSpiderEggShooter
   - type: Butcherable
     spawned:

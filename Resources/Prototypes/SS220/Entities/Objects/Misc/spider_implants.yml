@@ -109,16 +109,6 @@
       implantAction: ActionSpawnSingleSpiderWebShortDelay       
 
 - type: entity
-  parent: BaseLightImplantSpider 
-  id: LightImplantSingleSpiderWebMediumDelay
-  name: spider-spawn-web-queen
-  description: spider-spawn-web-desc
-  noSpawn: true
-  components:
-    - type: SubdermalImplant
-      implantAction: ActionSpawnSingleSpiderWebMediumDelay
-
-- type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSingleSpiderWebLongDelay
   name: spider-spawn-web-hunt
@@ -126,7 +116,17 @@
   noSpawn: true
   components:
     - type: SubdermalImplant
-      implantAction: ActionSpawnSingleSpiderWebLongDelay   
+      implantAction: ActionSpawnSingleSpiderWebLongDelay
+
+- type: entity
+  parent: BaseLightImplantSpider 
+  id: LightImplantSingleSpiderWebDurable
+  name: spider-spawn-web-queen
+  description: spider-spawn-web-desc
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSingleSpiderWebDurable
 
 - type: entity
   parent: BaseLightImplantSpider 
