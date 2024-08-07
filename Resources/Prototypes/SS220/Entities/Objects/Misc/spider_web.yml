@@ -64,6 +64,9 @@
         Extinguish: [Touch]
     - type: SpiderWebObject
     - type: SpeedModifierContacts
+      ignoreWhitelist:
+        components:
+            - IgnoreSpiderWeb
 
 - type: entity
   parent: BaseSpiderWeb
@@ -110,8 +113,8 @@
       sprintSpeedModifier: 0.15
 
 - type: entity
-  parent: SpiderWebUsual
-  id: SpiderWebAbility
+  parent: BaseSpiderWeb
+  id: SpiderWebDespawned
   name: web
   description: web
   noSpawn: true
@@ -125,6 +128,3 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.1
       sprintSpeedModifier: 0.1
-      ignoreWhitelist:
-        components:
-            - IgnoreSpiderWeb

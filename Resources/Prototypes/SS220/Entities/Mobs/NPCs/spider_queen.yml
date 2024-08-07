@@ -185,7 +185,7 @@
     - id: MobSpiderSpaceLittle
       amount: 7
   - type: Spider
-    webPrototype: SpiderWebAbility
+    webPrototype: SpiderWebDespawned
   - type: RechargeBasicEntityAmmo 
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider
@@ -266,7 +266,7 @@
     - LightImplantSpiderCrystal
     - LightImplantSingleSpiderWebShortDelay
   - type: Spider
-    webPrototype: SpiderWebAbility
+    webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9 
@@ -327,7 +327,7 @@
         - ReagentId: ChloralHydrate
           Quantity: 0
   - type: Spider
-    webPrototype: SpiderWebAbility
+    webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9
