@@ -54,7 +54,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
+        damage: 40
       behaviors:
       - !type:EmptyAllContainersBehaviour
       - !type:PlaySoundBehavior
@@ -65,12 +65,10 @@
           ShardGlassReinforced:
             min: 1
             max: 2
-      # - !type:ChangeConstructionNodeBehavior
-      #   node: brokenGlassBox
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 100
+    price: 200
 
 - type: entity
   parent: GlassCase
