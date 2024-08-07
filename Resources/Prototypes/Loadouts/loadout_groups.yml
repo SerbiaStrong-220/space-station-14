@@ -374,6 +374,7 @@
   loadouts:
   - JanitorJumpsuit
   - JanitorJumpskirt
+  - JanitorBlueJumpsuit #SS220-Janitor-Control
 
 - type: loadoutGroup
   id: JanitorGloves
