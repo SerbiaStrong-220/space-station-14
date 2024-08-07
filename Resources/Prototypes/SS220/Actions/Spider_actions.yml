@@ -140,7 +140,7 @@
       offset: 0, 1
       speech: action-speech-spell-spider
 
-#WallLightImplantSpiderWallWebLongDelay
+#Wall
 - type: entity
   id: ActionSpawnSpiderWallWeb
   name: create a wall
