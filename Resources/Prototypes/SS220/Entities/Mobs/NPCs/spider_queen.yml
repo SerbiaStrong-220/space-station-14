@@ -1,11 +1,12 @@
 #Base
 - type: entity
-  noSpawn: true
-  name: Probca
   parent:
   - MobAtmosStandard
   - MobSpaceBasic
-  id: MobSpiderSpaceQueenBase
+  - MobSpiderGhostRole
+  id: BaseMobSpiderQueen
+  abstract: true
+  name: Probca
   description: spider dance
   components:
   - type: Insulated
@@ -148,7 +149,7 @@
 - type: entity
   noSpawn: true
   name: Ghost role
-  id: MobSpiderGhost
+  id: MobSpiderGhostRole
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -157,15 +158,13 @@
     requirements:
     name: spider-roy-name
     description: spider-roy-desc
-  - type: GhostTakeoverAvailable   #Ghost role
+  - type: GhostTakeoverAvailable #Ghost role
 
 #Spider queen
 - type: entity
-  name: Spider queen
+  parent: BaseMobSpiderQueen
   id: MobSpiderSpaceQueen
-  parent:
-  - MobSpiderSpaceQueenBase
-  - MobSpiderGhost
+  name: Spider queen
   description: spider dance
   components:
   - type: AutoImplant
@@ -206,11 +205,9 @@
 
 #Spiders-servants
 - type: entity
-  name: spider guard
+  parent: BaseMobSpiderQueen
   id: MobSpiderSpaceDrone
-  parent:
-  - MobSpiderSpaceQueenBase
-  - MobSpiderGhost
+  name: spider guard
   description: spider dance
   components:
   - type: Sprite #Спрайт
@@ -272,11 +269,9 @@
     baseSprintSpeed : 3.9 
 
 - type: entity
-  name: spider hunt
+  parent: BaseMobSpiderQueen
   id: MobSpiderSpaceHunter
-  parent:
-  - MobSpiderSpaceQueenBase
-  - MobSpiderGhost
+  name: spider hunt
   description: spider dance
   components:
   - type: Sprite 
@@ -336,11 +331,9 @@
     - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
-  name: spider ghost
+  parent: BaseMobSpiderQueen
   id: MobSpiderSpaceGhost
-  parent:
-  - MobSpiderSpaceQueenBase
-  - MobSpiderGhost
+  name: spider ghost
   description: spider dance
   components:
   - type: Sprite 
@@ -416,11 +409,9 @@
     - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
-  name: spider shooter
+  parent: BaseMobSpiderQueen
   id: MobSpiderSpaceShooter
-  parent:
-  - MobSpiderSpaceQueenBase
-  - MobSpiderGhost
+  name: spider shooter
   description: spider dance
   components:
   - type: Sprite 
@@ -492,9 +483,9 @@
     baseSprintSpeed : 3.7
 
 - type: entity
-  name: small spider
+  parent: BaseMobSpiderQueen
   id: MobSpiderSpaceLittle
-  parent: MobSpiderSpaceQueenBase
+  name: small spider
   description: spider dance
   components:
   - type: Sprite 

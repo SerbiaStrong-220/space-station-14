@@ -1,3 +1,4 @@
+#Used by gamerule
 - type: entity
   id: SpawnPointGhostSpaceQueen 
   name: спавнер роли королевы-пауков 
