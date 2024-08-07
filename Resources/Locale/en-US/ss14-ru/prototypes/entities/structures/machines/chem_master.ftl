@@ -1,2 +1,3 @@
-ent-ChemMaster = ChemMaster 4000 # 220 Loc Fix
+# 220 Loc Fix
+ent-ChemMaster = ChemMaster 4000
     .desc = An industrial grade chemical manipulator with pill and bottle production included.
