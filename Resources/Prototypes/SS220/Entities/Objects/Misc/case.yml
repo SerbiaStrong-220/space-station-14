@@ -2,7 +2,7 @@
 
 - type: entity
   parent: [BaseItem, BaseItemCabinet]
-  id: GlassCase
+  id: GlassCaseEtchedBrassKnuckles
   name: glass case
   suffix: Etched brass knuckles
   description: Made to order for storing valuables. The lid is made of tempered glass, and the base is made of wood grown on tropical planets and decorated with a velvet pad to prevent possible scratches.
@@ -16,11 +16,11 @@
     layers:
     - state: base
       map: ["enum.StorageVisualLayers.Base"]
-    - state: closed
-      map: ["enum.OpenableVisuals.Layer"]
     - state: brassknukles
       map: ["enum.ItemCabinetVisuals.Layer"]
       visible: true
+    - state: closed
+      map: ["enum.OpenableVisuals.Layer"]
     - state: locked
       shader: unshaded
       map: ["enum.LockVisualLayers.Lock"]
