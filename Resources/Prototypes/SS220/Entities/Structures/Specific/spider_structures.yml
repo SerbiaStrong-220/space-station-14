@@ -1,10 +1,12 @@
 # AT THE BOTTOM IS A TILE MADE OF COBWEBS.
+
+#TODO: Сделать нормальную анимацию спавна стены без использования костыля в виде спавна тайлов и столов
+#Base
 - type: entity
-  name: web construction
-  description: Very smooth and surprisingly durable.
-  parent: FloorTileItemBaseSpiders
-  id: FloorTileItemWebSpiders
-  noSpawn: true  
+  parent: BaseItemSpider
+  id: BaseFloorTileItemSpiders
+  description: These could work as a pretty decent throwing weapon.
+  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Tiles/web.rsi
@@ -12,9 +14,17 @@
   - type: FloorTile
     outputs:
       - FloorWebTile
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
   - type: Construction
     graph: WebObjects
     node: tile
+  - type: TimedDespawn 
+  - type: SpawnOnDespawn
   - type: Destructible
     thresholds:
     - trigger:
@@ -23,33 +33,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: TimedDespawn 
-    lifetime: 5
-  - type: SpawnOnDespawn
-    prototype: TableWebSpiders 
-
-- type: entity
-  parent: BaseItemSpider
-  id: FloorTileItemBaseSpiders
-  description: These could work as a pretty decent throwing weapon.
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: Objects/Tiles/tile.rsi
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger 
-        damage: 30
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20
@@ -66,23 +49,89 @@
       types:
         Blunt: 5
 
+#Tile (used to spawn walls)
+- type: entity
+  parent: BaseFloorTileItemSpiders
+  id: FloorTileItemWebSpiders
+  name: web construction
+  description: Very smooth and surprisingly durable.
+  noSpawn: true  
+  components:
+  - type: TimedDespawn 
+    lifetime: 5
+  - type: SpawnOnDespawn
+    prototype: TableWebSpiders 
+
 - type: entity
   name: web  
   description: Web
-  parent: FloorTileItemWebSpiders
-  id: FloorTileItemWebSpiders2
+  parent: BaseFloorTileItemSpiders
+  id: FloorTileItemWebSpidersDurable
   noSpawn: true
   components:
   - type: TimedDespawn 
     lifetime: 6
   - type: SpawnOnDespawn
-    prototype: TableWebSpiders2  
+    prototype: TableWebSpidersDurable 
   - type: Sprite
-    sprite: Objects/Tiles/web.rsi
-    state: icon
     shader: unshaded
     color: gray
 
+#Table (заглушка типо как анимация)
+- type: entity
+  id: TableWebSpiders 
+  parent: TableBase
+  name: web
+  description: web
+  noSpawn: true
+  components:
+  - type: Damageable
+    damageModifierSet: Web
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/web.rsi
+  - type: Icon
+    sprite: Structures/Furniture/Tables/web.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Construction
+    graph: WebStructures
+    node: table
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCarpet
+  - type: TimedDespawn 
+    lifetime: 5
+  - type: SpawnOnDespawn
+    prototype: WallWeb
+
+- type: entity
+  id: TableWebSpidersDurable
+  parent: TableWebSpiders
+  name: web
+  description: web
+  noSpawn: true
+  components:
+  - type: TimedDespawn 
+    lifetime: 8
+  - type: SpawnOnDespawn
+    prototype: WallWebDurable  
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/web.rsi
+    shader: unshaded
+    color: gray
+
+#Wall
 - type: entity
   parent: BaseWall
   id: WallWebDurable

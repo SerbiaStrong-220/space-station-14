@@ -178,6 +178,14 @@
   components:
   - type: WorldTargetAction
     useDelay: 10
+    event: !type:WorldSpawnSpellEvent
+      useDelay: 25
+      prototypes:
+      - id: FloorTileItemWebSpidersDurable
+        doAfter: 5
+        amount: 1
+        useDelay: 25
+
 
 #Web
 - type: entity
