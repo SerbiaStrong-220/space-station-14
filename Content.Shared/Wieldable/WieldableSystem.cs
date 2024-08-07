@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -197,7 +198,7 @@ public sealed class WieldableSystem : EntitySystem
             return false;
         }
         //ss220 weild fix begin
-        if (_pull.IsPulling(user))
+        if (TryComp<PullerComponent>(user, out var puller) && _pull.IsPulling(user, puller) && puller.NeedsHands)
             return false;
         //ss220 weild fix end
 
