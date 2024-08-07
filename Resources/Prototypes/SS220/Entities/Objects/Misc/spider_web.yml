@@ -4,7 +4,7 @@
 - type: entity
   id: BaseSpiderWeb
   name: web
-  description: web
+  description: Sticky web.. I wonder where it comes from?
   abstract: true
   noSpawn: true
   placement:
@@ -72,7 +72,6 @@
   parent: BaseSpiderWeb
   id: SpiderWebFragile
   name: web
-  description: web
   placement:
     mode: SnapgridCenter
     snap:
@@ -93,8 +92,7 @@
 - type: entity
   parent: BaseSpiderWeb
   id: SpiderWebDurable
-  name: web
-  description: web
+  name: durable web
   placement:
     mode: SnapgridCenter
     snap:
@@ -116,7 +114,6 @@
   parent: BaseSpiderWeb
   id: SpiderWebDespawned
   name: web
-  description: web
   noSpawn: true
   placement:
     mode: SnapgridCenter

@@ -170,7 +170,7 @@
   - type: AutoImplant
     implants:
     - LightImplantSpiderEggHunter
-    - LightImplantSpiderWallWebLongDelay
+    - LightImplantSpiderWallWebDurable
     - LightImplantSpiderEggDrone
     - LightImplantSpiderEggGhost
     - LightImplantSpiderCrystal

@@ -2,9 +2,7 @@
 - type: entity
   parent: BaseSubdermalImplant 
   id: BaseLightImplantSpider
-  name: spider-spawn-egg-guard
   abstract: true
-  noSpawn: true
   components:
     - type: SubdermalImplant
     - type: PointLight
@@ -24,7 +22,8 @@
 - type: entity
   parent: BaseLightImplantSpider 
   id: LightImplantSpiderEggDrone
-  name: spider-spawn-egg-guard
+  name: guard spider egg
+  description: He is also a drone and can build crystals and walls.
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -33,7 +32,7 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSpiderEggHunter
-  name: spider-spawn-egg-hunt
+  name: hunter spider egg
   description:
   noSpawn: true
   components:
@@ -43,7 +42,7 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSpiderEggGhost
-  name: spider-spawn-egg-ghost
+  name: ghost spider egg
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -52,7 +51,7 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSpiderEggShooter
-  name: spider-spawn-egg-shooter
+  name: shooter  spider egg
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -62,7 +61,8 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSpiderLittle
-  name: spider-spawn-smallspider
+  name: release the spiderlings
+  description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -72,7 +72,8 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSpiderCrystal
-  name: spider-spawn-kristal
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -82,7 +83,7 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSpiderWallWeb
-  name: spider-spawn-wall
+  name: create a wall
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -90,19 +91,19 @@
 
 - type: entity
   parent: BaseLightImplantSpider
-  id: LightImplantSpiderWallWebLongDelay
-  name: spider-spawn-wall2
+  id: LightImplantSpiderWallWebDurable
+  name: create a durable wall
   noSpawn: true
   components:
     - type: SubdermalImplant
-      implantAction: ActionSpawnSpiderWallWebLongDelay 
+      implantAction: ActionSpawnSpiderWallWebDurable
 
 #Web
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSingleSpiderWebShortDelay
-  name: spider-spawn-web
-  description: spider-spawn-web-desc
+  name: spin a web
+  description: Creates a web that slows down your prey.
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -111,8 +112,8 @@
 - type: entity
   parent: BaseLightImplantSpider
   id: LightImplantSingleSpiderWebLongDelay
-  name: spider-spawn-web-hunt
-  description: spider-spawn-web-desc
+  name: spin a web
+  description: Creates a web that slows down your prey.
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -121,8 +122,8 @@
 - type: entity
   parent: BaseLightImplantSpider 
   id: LightImplantSingleSpiderWebDurable
-  name: spider-spawn-web-queen
-  description: spider-spawn-web-desc
+  name: spin a durable web
+  description: Creates a web that slows down your prey.
   noSpawn: true
   components:
     - type: SubdermalImplant
@@ -131,8 +132,8 @@
 - type: entity
   parent: BaseLightImplantSpider 
   id: LightImplantSingleSpiderWebClown
-  name: spider-spawn-web-clown
-  description: spider-spawn-web-desc
+  name: spin a clown web
+  description: Creates a web that slows down your prey.
   noSpawn: true
   components:
     - type: SubdermalImplant

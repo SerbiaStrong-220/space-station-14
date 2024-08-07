@@ -1,9 +1,9 @@
 #Spiders eggs
 - type: entity
-  name: eggshells
   parent: Eggshells
   id: EggshellsSpider
   noSpawn: true
+  name: eggshells
   description: You're walkin' on 'em bud.
   suffix: FraG 
   components:

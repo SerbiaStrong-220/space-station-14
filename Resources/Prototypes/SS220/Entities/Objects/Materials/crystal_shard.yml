@@ -1,8 +1,8 @@
 - type: entity
   id: ShardCrystalBlueXeno 
   parent: ShardCrystalBlue
-  name: spider-spawn-crystal
-  description: spider-spawn-crystal-desc
+  name: shard of blue crystal
+  description: A small piece of crystal.
   noSpawn: true
   components:  
   - type: Destructible

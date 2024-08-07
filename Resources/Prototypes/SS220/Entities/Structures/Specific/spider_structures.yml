@@ -79,8 +79,8 @@
 
 #Table (заглушка типо как анимация)
 - type: entity
-  id: TableWebSpiders 
   parent: TableBase
+  id: TableWebSpiders 
   name: web
   description: web
   noSpawn: true
@@ -116,8 +116,8 @@
     prototype: WallWeb
 
 - type: entity
-  id: TableWebSpidersDurable
   parent: TableWebSpiders
+  id: TableWebSpidersDurable
   name: web
   description: web
   noSpawn: true

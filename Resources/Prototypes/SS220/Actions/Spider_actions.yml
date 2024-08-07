@@ -1,10 +1,7 @@
 #Base
 - type: entity
   id: BaseActionSpawnSpiderEgg
-  name: spider-spawn-egg-guard
-  description: spider-spawn-egg-guard-desc
   abstract: true
-  noSpawn: true
   components:
   - type: WorldTargetAction
     useDelay: 200 
@@ -22,10 +19,9 @@
 
 - type: entity
   id: BaseActionSpawnSingleSpiderWeb
-  name: spider-spawn-web
-  description: spider-spawn-web-desc
+  name: spin a web
+  description: Creates a web that slows down your prey.
   abstract: true
-  noSpawn: true
   components:
   - type: WorldTargetAction
     useDelay: 4
@@ -45,8 +41,8 @@
 - type: entity
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggDrone
-  name: spider-spawn-egg-guard
-  description: spider-spawn-egg-guard-desc
+  name: guard spider egg
+  description: He is also a drone and can build crystals and walls.
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -60,7 +56,7 @@
 - type: entity
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggHunter
-  name: spider-spawn-egg-hunt
+  name: hunter spider egg
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -75,7 +71,7 @@
 - type: entity
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggGhost
-  name: spider-spawn-egg-ghost
+  name: ghost spider egg
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -90,7 +86,7 @@
 - type: entity
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggShooter 
-  name: spider-spawn-egg-shooter
+  name: shooter  spider egg
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -105,8 +101,8 @@
 #Spider
 - type: entity
   id: ActionSpawnSpiderLittle 
-  name: spider-spawn-smallspider
-  description: spider-spawn-smallspider-desc
+  name: release the spiderlings
+  description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -126,8 +122,8 @@
 #Cryctal
 - type: entity
   id: ActionSpawnSpiderCrystal
-  name: spider-spawn-kristal
-  description: spider-spawn-kristal-desc
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -144,10 +140,10 @@
       offset: 0, 1
       speech: action-speech-spell-spider
 
-#Wall
+#WallLightImplantSpiderWallWebLongDelay
 - type: entity
   id: ActionSpawnSpiderWallWeb
-  name: spider-spawn-wall
+  name: create a wall
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -172,8 +168,8 @@
 
 - type: entity
   parent: ActionSpawnSpiderWallWeb
-  id: ActionSpawnSpiderWallWebLongDelay
-  name: spider-spawn-wall3
+  id: ActionSpawnSpiderWallWebDurable
+  name: create a durable wall
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -190,8 +186,6 @@
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebShortDelay
-  name: spider-spawn-web
-  description: spider-spawn-web-desc
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -200,8 +194,6 @@
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebLongDelay
-  name: spider-spawn-web-hunt
-  description: spider-spawn-web-desc
   noSpawn: true
   components:
   - type: WorldTargetAction
@@ -210,15 +202,14 @@
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebDurable
-  name: spider-spawn-web-queen
-  description: spider-spawn-web-desc
+  name: spin a durable web
   noSpawn: true
   components:
   - type: WorldTargetAction
     useDelay: 4
     event: !type:WorldSpawnSpellEvent
       prototypes:
-      - id: SpiderWebQueen
+      - id: SpiderWebDurable
         amount: 1
       offset: 0, 1
       speech: action-speech-spell-spider
@@ -226,8 +217,8 @@
 #Clown web
 - type: entity
   id: ActionSpawnSingleSpiderWebClown
-  name: spider-spawn-web-clown
-  description: spider-spawn-web-desc
+  name: spin a clown web
+  description: Creates a web that slows down your prey.
   noSpawn: true
   components:
   - type: WorldTargetAction
