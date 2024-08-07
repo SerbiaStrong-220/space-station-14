@@ -159,7 +159,6 @@
       - id: FloorTileItemWebSpiders
         amount: 1
       offset: 0, 1
-      doAfter: 5
       speech: action-speech-spell-spider
 
 - type: entity
@@ -173,9 +172,7 @@
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: FloorTileItemWebSpidersDurable
-        doAfter: 5
         amount: 1
-        useDelay: 25
 
 #Web
 - type: entity

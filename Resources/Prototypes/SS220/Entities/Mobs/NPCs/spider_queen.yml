@@ -221,8 +221,6 @@
     thresholds:
       0: Alive
       85: Dead   #HP
-  - type: Stamina
-    excess: 150
   - type: DamageStateVisuals
     states:
       Alive:
@@ -284,9 +282,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      110: Dead   
-  - type: Stamina
-    excess: 150
+      110: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -346,9 +342,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead   
-  - type: Stamina
-    excess: 150
+      100: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -424,9 +418,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      80: Dead   
-  - type: Stamina
-    excess: 150
+      80: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -498,9 +490,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      15: Dead   
-  - type: Stamina
-    excess: 150
+      15: Dead
   - type: DamageStateVisuals
     states:
       Alive:
