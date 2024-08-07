@@ -8,7 +8,6 @@
     - hardquit
     - svbind
     - bind
-    - exec # macro moment
     - cls
     - vram
     - monitor
@@ -73,6 +72,7 @@
     - detachent
     - localdelete
     - fullstatereset
+    - exec # macro moment #SS220 exec-command-perms-change
 
 - Flags: MAPPING
   Commands:
