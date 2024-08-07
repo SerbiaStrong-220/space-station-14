@@ -28,3 +28,4 @@ health-analyzer-window-damage-type-Poison = Яды
 health-analyzer-window-damage-type-Radiation = Радиация
 health-analyzer-window-damage-group-Genetic = Генетические
 health-analyzer-window-damage-type-Cellular = Клеточные
+health-analyzer-popup-scan-target = {CAPITALIZE(THE($user))} пытается тебя просканировать!
