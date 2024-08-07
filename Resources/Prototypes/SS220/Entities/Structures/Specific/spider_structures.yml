@@ -60,7 +60,7 @@
   - type: TimedDespawn 
     lifetime: 5
   - type: SpawnOnDespawn
-    prototype: TableWebSpiders 
+    prototype: WallWeb
 
 - type: entity
   name: web  
@@ -72,64 +72,64 @@
   - type: TimedDespawn 
     lifetime: 6
   - type: SpawnOnDespawn
-    prototype: TableWebSpidersDurable 
+    prototype: WallWebDurable
   - type: Sprite
     shader: unshaded
     color: gray
 
 #Table (заглушка типо как анимация)
-- type: entity
-  parent: TableBase
-  id: TableWebSpiders 
-  name: web
-  description: web
-  noSpawn: true
-  components:
-  - type: Damageable
-    damageModifierSet: Web
-  - type: Sprite
-    sprite: Structures/Furniture/Tables/web.rsi
-  - type: Icon
-    sprite: Structures/Furniture/Tables/web.rsi
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path:
-          "/Audio/Weapons/slash.ogg"
-  - type: Construction
-    graph: WebStructures
-    node: table
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepCarpet
-  - type: TimedDespawn 
-    lifetime: 5
-  - type: SpawnOnDespawn
-    prototype: WallWeb
+# - type: entity
+#   parent: TableBase
+#   id: TableWebSpiders 
+#   name: web
+#   description: web
+#   noSpawn: true
+#   components:
+#   - type: Damageable
+#     damageModifierSet: Web
+#   - type: Sprite
+#     sprite: Structures/Furniture/Tables/web.rsi
+#   - type: Icon
+#     sprite: Structures/Furniture/Tables/web.rsi
+#   - type: Destructible
+#     thresholds:
+#     - trigger:
+#         !type:DamageTrigger
+#         damage: 10
+#       behaviors:
+#       - !type:DoActsBehavior
+#         acts: [ "Destruction" ]
+#   - type: MeleeSound
+#     soundGroups:
+#       Brute:
+#         path:
+#           "/Audio/Weapons/slash.ogg"
+#   - type: Construction
+#     graph: WebStructures
+#     node: table
+#   - type: FootstepModifier
+#     footstepSoundCollection:
+#       collection: FootstepCarpet
+#   - type: TimedDespawn 
+#     lifetime: 5
+#   - type: SpawnOnDespawn
+#     prototype: WallWeb
 
-- type: entity
-  parent: TableWebSpiders
-  id: TableWebSpidersDurable
-  name: web
-  description: web
-  noSpawn: true
-  components:
-  - type: TimedDespawn 
-    lifetime: 8
-  - type: SpawnOnDespawn
-    prototype: WallWebDurable  
-  - type: Sprite
-    sprite: Structures/Furniture/Tables/web.rsi
-    shader: unshaded
-    color: gray
+# - type: entity
+#   parent: TableWebSpiders
+#   id: TableWebSpidersDurable
+#   name: web
+#   description: web
+#   noSpawn: true
+#   components:
+#   - type: TimedDespawn 
+#     lifetime: 8
+#   - type: SpawnOnDespawn
+#     prototype: WallWebDurable  
+#   - type: Sprite
+#     sprite: Structures/Furniture/Tables/web.rsi
+#     shader: unshaded
+#     color: gray
 
 #Wall
 - type: entity
