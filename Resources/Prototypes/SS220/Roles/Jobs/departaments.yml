@@ -1,5 +1,6 @@
 - type: department
   id: InternalAffairs
+  name: department-InternalAffairs
   sort: 0
   description: department-Internal-Affairs-description
   color: "#323ba9"
