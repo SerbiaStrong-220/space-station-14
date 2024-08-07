@@ -64,10 +64,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure);
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
+        crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
 
         if (crystal.Comp.NextOutputEnergySourceUpdate < _gameTiming.CurTime)
         {
             ReleaseEnergy(crystal);
+            crystal.Comp.AccumulatedRadiationEnergy = 0;
+            crystal.Comp.AccumulatedZapEnergy = 0;
             crystal.Comp.NextOutputEnergySourceUpdate = _gameTiming.CurTime + crystal.Comp.OutputEnergySourceUpdateDelay;
         }
 
