@@ -195,7 +195,7 @@
 #Spider queen antag
 - type: radioChannel #Connection
   id: HiveRadio
-  name: Улей
+  name: chat-radio-hive
   keycode: 'у' 
   frequency: 2885
   color: "#cc80ff"

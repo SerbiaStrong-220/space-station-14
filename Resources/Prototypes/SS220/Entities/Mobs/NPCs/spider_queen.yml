@@ -26,7 +26,7 @@
       0: Alive
       300: Dead
   - type: Stamina
-    excess: 150
+    critThreshold: 150
   - type: DamageStateVisuals
     states:
       Alive:
@@ -97,7 +97,7 @@
       - CannotSuicide
       - DoorBumpOpener
   - type: Tool # Open door from xeno.yml.
-    speed: 1.5
+    speedModifier: 1.5
     qualities:
       - Prying
     useSound:
