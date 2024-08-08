@@ -53,7 +53,7 @@
   - HeadOfSecurity
   - ResearchDirector
   - Quartermaster
-#  - BlueShield #SS220-Internal-Affairs
+  - BlueShield
   primary: false
   weight: 100
 
