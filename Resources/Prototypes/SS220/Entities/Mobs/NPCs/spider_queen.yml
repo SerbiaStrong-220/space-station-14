@@ -147,9 +147,9 @@
   #   - HiveRadio
 
 - type: entity
-  noSpawn: true
   name: Ghost role
   id: MobSpiderGhostRole
+  noSpawn: true
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -161,47 +161,47 @@
   - type: GhostTakeoverAvailable #Ghost role
 
 #Spider queen
-# - type: entity
-#   parent: BaseMobSpiderQueen
-#   id: MobSpiderSpaceQueen
-#   name: Spider queen
-#   description: spider dance
-#   components:
-#   # - type: AutoImplant
-#   #   implants:
-#   #   - LightImplantSpiderEggHunter
-#   #   - LightImplantSpiderWallWebDurable
-#   #   - LightImplantSpiderEggDrone
-#   #   - LightImplantSpiderEggGhost
-#   #   - LightImplantSpiderCrystal
-#   #   - LightImplantSpiderLittle
-#   #   - LightImplantSingleSpiderWebDurable
-#   #   - LightImplantSpiderEggShooter
-#   - type: Butcherable
-#     spawned:
-#     - id: FoodMeatSpider
-#       amount: 3
-#     - id: MobSpiderSpaceLittle
-#       amount: 7
-#   # - type: Spider
-#   #   webPrototype: SpiderWebDespawned
-#   # - type: RechargeBasicEntityAmmo 
-#   #   rechargeCooldown: 1.5
-#   # - type: BasicEntityAmmoProvider
-#   #   proto: PoisonousAcid
-#   #   capacity: 2
-#   #   count: 2
-#   # - type: Gun
-#   #   fireRate: 1
-#   #   useKey: false
-#   #   selectedMode: FullAuto
-#   #   availableModes:
-#   #     - FullAuto
-#   #   soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg  
-#   - type: MovementSpeedModifier 
-#     baseWalkSpeed : 3.5
-#     baseSprintSpeed : 4
-#   - type: LizardAccent    
+- type: entity
+  parent: BaseMobSpiderQueen
+  id: MobSpiderSpaceQueen
+  name: Spider queen
+  description: spider dance
+  components:
+  # - type: AutoImplant
+  #   implants:
+  #   - LightImplantSpiderEggHunter
+  #   - LightImplantSpiderWallWebDurable
+  #   - LightImplantSpiderEggDrone
+  #   - LightImplantSpiderEggGhost
+  #   - LightImplantSpiderCrystal
+  #   - LightImplantSpiderLittle
+  #   - LightImplantSingleSpiderWebDurable
+  #   - LightImplantSpiderEggShooter
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatSpider
+      amount: 3
+    - id: MobSpiderSpaceLittle
+      amount: 7
+  # - type: Spider
+  #   webPrototype: SpiderWebDespawned
+  # - type: RechargeBasicEntityAmmo 
+  #   rechargeCooldown: 1.5
+  # - type: BasicEntityAmmoProvider
+  #   proto: PoisonousAcid
+  #   capacity: 2
+  #   count: 2
+  # - type: Gun
+  #   fireRate: 1
+  #   useKey: false
+  #   selectedMode: FullAuto
+  #   availableModes:
+  #     - FullAuto
+  #   soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg  
+  - type: MovementSpeedModifier 
+    baseWalkSpeed : 3.5
+    baseSprintSpeed : 4
+  - type: LizardAccent    
 
 #Spiders-servants
 # - type: entity
