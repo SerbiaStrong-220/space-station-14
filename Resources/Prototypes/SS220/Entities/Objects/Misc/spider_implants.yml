@@ -1,0 +1,141 @@
+#Base
+- type: entity
+  parent: BaseSubdermalImplant 
+  id: BaseLightImplantSpider
+  abstract: true
+  components:
+    - type: SubdermalImplant
+    - type: PointLight
+      enabled: false
+      radius: 2.5
+      softness: 5
+      mask: /Textures/Effects/LightMasks/cone.png
+      autoRot: true
+    - type: Tag
+      tags:
+        - SubdermalImplant
+        - HideContextMenu
+        - Flashlight
+    - type: UnpoweredFlashlight
+
+# #Egg
+- type: entity
+  parent: BaseLightImplantSpider 
+  id: LightImplantSpiderEggDrone
+  name: guard spider egg
+  description: He is also a drone and can build crystals and walls.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderEggDrone  
+
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderEggHunter
+  name: hunter spider egg
+  description:
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderEggHunter   
+
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderEggGhost
+  name: ghost spider egg
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderEggGhost   
+
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderEggShooter
+  name: shooter  spider egg
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderEggShooter
+
+#Spider
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderLittle
+  name: release the spiderlings
+  description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderLittle   
+
+# #Cristal
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderCrystal
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderCrystal      
+
+#Wall
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderWallWeb
+  name: create a wall
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderWallWeb       
+
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSpiderWallWebDurable
+  name: create a durable wall
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSpiderWallWebDurable
+
+#Web
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSingleSpiderWebShortDelay
+  name: spin a web
+  description: Creates a web that slows down your prey.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSingleSpiderWebShortDelay       
+
+- type: entity
+  parent: BaseLightImplantSpider
+  id: LightImplantSingleSpiderWebLongDelay
+  name: spin a web
+  description: Creates a web that slows down your prey.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSingleSpiderWebLongDelay
+
+- type: entity
+  parent: BaseLightImplantSpider 
+  id: LightImplantSingleSpiderWebDurable
+  name: spin a durable web
+  description: Creates a web that slows down your prey.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSingleSpiderWebDurable
+
+#Clown web
+- type: entity
+  parent: BaseLightImplantSpider 
+  id: LightImplantSingleSpiderWebClown
+  name: spin a clown web
+  description: Creates a web that slows down your prey.
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionSpawnSingleSpiderWebClown        

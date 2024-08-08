@@ -191,3 +191,12 @@
   color: "#FFB6C1"
   longRange: true
 # Admin memes end
+
+#Spider queen antag
+- type: radioChannel #Connection
+  id: HiveRadio
+  name: chat-radio-hive
+  keycode: 'у' 
+  frequency: 2885
+  color: "#cc80ff"
+  longRange: true   

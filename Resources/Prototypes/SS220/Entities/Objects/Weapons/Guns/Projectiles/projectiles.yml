@@ -110,3 +110,22 @@
     radius: 5.5
     color: blue
     energy: 0.9
+
+#Spider queen
+- type: entity
+  id: PoisonousAcid 
+  name: poisonous Spit
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Projectile
+      damage:
+        types: 
+          Poison: 6
+          Structural: 2
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
+      layers:
+        - state: xeno_toxic
+    - type: Ammo
+      muzzleFlash: null
