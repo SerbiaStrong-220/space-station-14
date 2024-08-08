@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.SS220.SuperMatterCrystal.Components;
@@ -10,9 +11,10 @@ namespace Content.Server.SS220.SuperMatterCrystal;
 
 public sealed partial class SuperMatterSystem : EntitySystem
 {
-    [Dependency] IChatManager _chatManager = default!;
-    [Dependency] ChatSystem _chatSystem = default!;
-    [Dependency] IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     private ProtoId<RadioChannelPrototype> _engineerRadio = "Engineering";
     private ProtoId<RadioChannelPrototype> _commonRadio = "Common";
     private char _engineerRadioKey = '\0';
@@ -48,7 +50,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private void SendAdminChatAlert(Entity<SuperMatterComponent> crystal, string msg, string? whom = null)
     {
-        var startString = $"SuperMatter {crystal} Alert! ";
+        var startString = $"SuperMatter {EntityManager.ToPrettyString(crystal)} Alert! ";
         var endString = "";
         if (whom != null)
             endString = $" caused by {whom}.";

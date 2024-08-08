@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.SS220.SuperMatterCrystal;
+using Robust.Shared.Audio;
 using Content.Shared.Atmos;
+using Robust.Shared.Prototypes;
 
 
 namespace Content.Server.SS220.SuperMatterCrystal.Components;
@@ -58,6 +60,16 @@ public sealed partial class SuperMatterComponent : Component
     public Dictionary<Gas, (float OptimalRatio, float RelativeInfluence)> EnergyEfficiencyChangerGases;
 
     #endregion
+
+    // ProtoId Sector
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public ProtoId<EntityPrototype> ConsumeResultEntityPrototype = "Ash";
+
+    // Audio Sector
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public SoundSpecifier ConsumeSound = new SoundPathSpecifier("/Audio/SS220/Admin_sounds/ahelp_sound.ogg");
 }
 
 public enum SuperMatterPhaseState

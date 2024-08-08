@@ -9,7 +9,7 @@ namespace Content.Server.SS220.SuperMatterCrystal;
 
 public sealed partial class SuperMatterSystem : EntitySystem
 {
-    [Dependency] IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private const float ZapPerEnergy = 60f;
     private const float ZapThreshold = 80f;
@@ -119,9 +119,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         }
         var accumulatedZapEnergyTrashed = smComp.AccumulatedZapEnergy - ZapThreshold;
-        var maxAmountOfArcs = Math.Max(Math.Min((int) MathF.Round(accumulatedZapEnergyTrashed / ZapPerEnergy), MaxAmountOfArcs), 0);
-        var timeDecreaseBetweenArcs = MathF.Max(MathF.Min((accumulatedZapEnergyTrashed / ZapPerEnergy - MaxAmountOfArcs)
-                                                    * ArcsToTimeDecreaseEfficiency, MaxTimeDecreaseBetweenArcs), 0f);
+        var maxAmountOfArcs = Math.Clamp((int) MathF.Round(accumulatedZapEnergyTrashed / ZapPerEnergy), 0, MaxAmountOfArcs);
+        var timeDecreaseBetweenArcs = Math.Clamp((accumulatedZapEnergyTrashed / ZapPerEnergy - MaxAmountOfArcs)
+                                                    * ArcsToTimeDecreaseEfficiency, 0f, MaxTimeDecreaseBetweenArcs);
         if (maxAmountOfArcs == 0)
         {
             arcShooterComponent.Enabled = false;
