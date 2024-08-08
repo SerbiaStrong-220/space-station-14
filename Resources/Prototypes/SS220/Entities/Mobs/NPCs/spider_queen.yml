@@ -146,19 +146,19 @@
   #   channels:
   #   - HiveRadio
 
-# - type: entity
-#   noSpawn: true
-#   name: Ghost role
-#   id: MobSpiderGhostRole
-#   components:
-#   - type: GhostRole #Ghost role
-#     makeSentient: true
-#     allowSpeech: true
-#     allowMovement: true
-#     requirements:
-#     name: spider-roy-name
-#     description: spider-roy-desc
-#   - type: GhostTakeoverAvailable #Ghost role
+- type: entity
+  noSpawn: true
+  name: Ghost role
+  id: MobSpiderGhostRole
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    requirements:
+    name: spider-roy-name
+    description: spider-roy-desc
+  - type: GhostTakeoverAvailable #Ghost role
 
 #Spider queen
 # - type: entity
