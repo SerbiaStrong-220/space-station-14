@@ -265,65 +265,65 @@
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9 
 
-# - type: entity
-#   parent: BaseMobSpiderQueen
-#   id: MobSpiderSpaceHunter
-#   name: spider hunt
-#   description: spider dance
-#   components:
-#   - type: Sprite 
-#     drawdepth: Mobs
-#     sprite: Mobs/Animals/spider.rsi
-#     scale: 1, 1
-#     layers:
-#     - map: [ "enum.DamageStateVisualLayers.Base" ]
-#       state: hunter-moving
-#   - type: MobThresholds
-#     thresholds:
-#       0: Alive
-#       110: Dead
-#   - type: DamageStateVisuals
-#     states:
-#       Alive:
-#         Base: hunter-moving
-#       Dead:
-#         Base: hunter_dead
-#   - type: PassiveDamage 
-#     allowedStates:
-#     - Alive
-#     damageCap: 110
-#     damage:
-#       types:
-#         Heat: -3
-#       groups:
-#         Brute: -3
-#         Toxin: -6
-#         Airloss: -3
-#         Burn: -3
-#   - type: MeleeWeapon 
-#     hidden: true
-#     soundHit:
-#       path: /Audio/Effects/bite.ogg
-#     angle: 0
-#     animation: WeaponArcBite
-#     damage:
-#       types:
-#         Piercing: 15 
-#         Structural: 15
-#   - type: SolutionContainerManager 
-#     solutions:
-#       melee:
-#         reagents:
-#         - ReagentId: ChloralHydrate
-#           Quantity: 0
-#   # - type: Spider
-#   #   webPrototype: SpiderWebDespawned
-#   - type: MovementSpeedModifier
-#     baseWalkSpeed : 3
-#     baseSprintSpeed : 3.9
-#   # - type: AutoImplant
-#   #   implants:
-#     # - LightImplantSingleSpiderWebLongDelay
+- type: entity
+  parent: BaseMobSpiderQueen
+  id: MobSpiderSpaceHunter
+  name: spider hunt
+  description: spider dance
+  components:
+  - type: Sprite 
+    drawdepth: Mobs
+    sprite: Mobs/Animals/spider.rsi
+    scale: 1, 1
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: hunter-moving
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      110: Dead
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: hunter-moving
+      Dead:
+        Base: hunter_dead
+  - type: PassiveDamage 
+    allowedStates:
+    - Alive
+    damageCap: 110
+    damage:
+      types:
+        Heat: -3
+      groups:
+        Brute: -3
+        Toxin: -6
+        Airloss: -3
+        Burn: -3
+  - type: MeleeWeapon 
+    hidden: true
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 15 
+        Structural: 15
+  - type: SolutionContainerManager 
+    solutions:
+      melee:
+        reagents:
+        - ReagentId: ChloralHydrate
+          Quantity: 0
+  # - type: Spider
+  #   webPrototype: SpiderWebDespawned
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 3.9
+  # - type: AutoImplant
+  #   implants:
+    # - LightImplantSingleSpiderWebLongDelay
 
 # - type: entity
 #   parent: BaseMobSpiderQueen
