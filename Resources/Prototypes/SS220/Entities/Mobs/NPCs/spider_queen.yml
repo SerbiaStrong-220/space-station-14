@@ -315,7 +315,7 @@
       melee:
         reagents:
         - ReagentId: ChloralHydrate
-          Quantity: 0
+          Quantity: 1
   # - type: Spider
   #   webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
