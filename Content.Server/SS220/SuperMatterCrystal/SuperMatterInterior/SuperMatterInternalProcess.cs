@@ -3,7 +3,7 @@ using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Atmos;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
-/// <summary> TODO DESC </summary>
+
 public static class SuperMatterInternalProcess
 {
     private const float TriplePointTemperature = SuperMatterPhaseDiagram.SuperMatterTriplePointTemperature;
@@ -72,12 +72,10 @@ public static class SuperMatterInternalProcess
     private const float O2ToPlasmaFloatRatio = 1.7f;
     private const float RatioValueOffset = 0.44f;
     private const float SqrtOfMaxRatioValue = 1.2f;
-    /// <summary> MADE IT! </summary>
-    /// <returns></returns>
     public static float GetOxygenToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState)
     {
         var ratio = GetZapToRadiationRatio(temperature, pressure, smState);
-        return (O2ToPlasmaBaseRatio + O2ToPlasmaFloatRatio * MathF.Sqrt(ratio+RatioValueOffset))
+        return (O2ToPlasmaBaseRatio + O2ToPlasmaFloatRatio * MathF.Sqrt(ratio + RatioValueOffset))
                             / (O2ToPlasmaBaseRatio + O2ToPlasmaFloatRatio * SqrtOfMaxRatioValue);
     }
 

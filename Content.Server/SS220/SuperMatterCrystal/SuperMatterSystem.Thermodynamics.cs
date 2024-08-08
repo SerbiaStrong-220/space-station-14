@@ -36,7 +36,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
     private const float SM_HEAT_TRANSFER_RATIO = 0.07f;
 
-    public void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
+    private void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
     {
         var (crystalUid, smComp) = crystal;
         var chemistryPotential = GetChemistryPotential(smComp.Temperature, gasMixture.Pressure);
@@ -61,11 +61,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
         {
             // TODO loc it
             Log.Error($"Internal Energy of SuperMatter {crystal} became negative, forced to truthish value.");
-            _chatManager.SendAdminAlert($"SuperMatter {crystal} caught physics law breaking! If it possible ask how they do it and convey it to developer");
+            SendAdminChatAlert(crystal, "Physics law breaking! If it possible ask how they do it and convey it to developer");
             smComp.InternalEnergy = EvaluateTruthishInternalEnergy(crystal);
         }
         smComp.Matter = MathF.Max(smComp.Matter + deltaMatter * frameTime, MatterNondimensionalization); // actually should go boom at this low, but...
-        smComp.Temperature = MathF.Max(MathF.Min(Atmospherics.Tmax, smComp.Temperature + smDeltaT * frameTime), Atmospherics.TCMB); // weird but okay
+        smComp.Temperature = Math.Clamp(smComp.Temperature + smDeltaT * frameTime, Atmospherics.TCMB, Atmospherics.Tmax); // weird but okay
         _atmosphere.AddHeat(gasMixture, -crystalHeatFromGas * frameTime);
     }
     /// <summary> We dont apply it to Matter field of SMComp because we need this value in internal energy evaluation </summary>

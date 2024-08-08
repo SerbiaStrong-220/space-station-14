@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.Resources;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -83,6 +84,8 @@ internal sealed class Plot2DTimeView : Control
         handle.DrawString(_font, CorrectVector(AxisBorderPosition + 2 * SerifSize, AxisBorderPosition), $"{-xWidth:0.}");
         // here goes labels
         handle.DrawString(_font, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight), $"{_plotPoints.YLabel}");
+        // !!!TODO: Add title!!!
+        // !!!TODO: Make it it centered and below graph!!!
         if (_plotPoints.XLabel != null)
             handle.DrawString(_font, CorrectVector(PixelWidth - _plotPoints.XLabel.Length * FontSize, AxisBorderPosition), $"{_plotPoints.XLabel}");
     }

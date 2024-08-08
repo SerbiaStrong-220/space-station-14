@@ -5,5 +5,5 @@ namespace Content.Server.SS220.SuperMatterCrystal.Components;
 public sealed partial class SuperMatterSpecificConsumableComponent : Component
 {
     [DataField]
-    public float AdditionalEnergyOnConsumption = 0f;
+    public float AdditionalMatterOnConsumption = 0f;
 }

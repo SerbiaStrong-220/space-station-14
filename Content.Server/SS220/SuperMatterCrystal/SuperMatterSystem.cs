@@ -1,17 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Chat.Managers;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Tesla.Components;
 using Content.Shared.Radiation.Components;
 using Content.Shared.Atmos;
-
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
 public sealed partial class SuperMatterSystem : EntitySystem
 {
-    [Dependency] IChatManager _chatManager = default!;
     [Dependency] IGameTiming _gameTiming = default!;
 
     private const float ZapPerEnergy = 60f;
@@ -21,27 +18,42 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private const float MaxTimeDecreaseBetweenArcs = 4f;
     private const int MaxAmountOfArcs = 7;
     private const float ArcsToTimeDecreaseEfficiency = 0.3f;
+    private const float IntegrityDamageICAnnounceDelay = 10f;
+    private const float IntegrityDamageStationAnnouncementDelay = 20f;
     public override void Initialize()
     {
         base.Initialize();
 
+        InitializeAnnouncement();
+        InitializeInteractions();
+
         SubscribeLocalEvent<SuperMatterComponent, ComponentInit>(OnComponentInit);
-        // subscribe FCK EVENTS
     }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var curTime = _gameTiming.CurTime;
         var query = EntityQueryEnumerator<SuperMatterComponent>();
         while (query.MoveNext(out var uid, out var smComp))
         {
+            if (!smComp.Activated)
+                continue;
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
-            UpdateSuperMatter(crystal, frameTime);
+            SuperMatterUpdate(crystal, frameTime);
+            if (_gameTiming.CurTime > smComp.NextDamageImplementTime)
+            {
+                if (!TryImplementIntegrityDamage(smComp))
+                    MarkAsLaminated(crystal);
+                var announceType = GetAnnounceIntegrityType(smComp);
+                RadioAnnounceIntegrity(crystal, announceType);
+                smComp.IntegrityDamageAccumulator = 0f;
+                smComp.NextDamageImplementTime = _gameTiming.CurTime
+                                            + TimeSpan.FromSeconds(IntegrityDamageICAnnounceDelay);
+            }
         }
     }
 
-    private void UpdateSuperMatter(Entity<SuperMatterComponent> crystal, float frameTime)
+    private void SuperMatterUpdate(Entity<SuperMatterComponent> crystal, float frameTime)
     {
         if (!crystal.Comp.Activated)
             return;
@@ -76,9 +88,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
     }
-    // You can cry about it. Entity<SuperMatterComponent> not supported in ComponentInit
-    private void OnComponentInit(EntityUid uid, SuperMatterComponent smComp, ComponentInit args)
+    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref ComponentInit args)
     {
+        var (uid, _) = entity;
         RadiationSourceComponent? radiationSource = null;
         LightningArcShooterComponent? arcShooterComponent = null;
 
@@ -125,7 +137,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var radiationIntensity = smComp.AccumulatedRadiationEnergy / RadiationPerEnergy;
         radiationSource.Intensity = radiationIntensity;
     }
-    private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState , GasMixture gasMixture)
+    private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)
     {
         var pressure = gasMixture.Pressure;
         var oxygenMoles = decayedMatter * GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState);
