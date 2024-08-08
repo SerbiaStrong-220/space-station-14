@@ -167,16 +167,16 @@
   name: Spider queen
   description: spider dance
   components:
-  - type: AutoImplant
-    implants:
-    - LightImplantSpiderEggHunter
-    - LightImplantSpiderWallWebDurable
-    - LightImplantSpiderEggDrone
-    - LightImplantSpiderEggGhost
-    - LightImplantSpiderCrystal
-    - LightImplantSpiderLittle
-    # - LightImplantSingleSpiderWebDurable
-    - LightImplantSpiderEggShooter
+  # - type: AutoImplant
+  #   implants:
+  #   - LightImplantSpiderEggHunter
+  #   - LightImplantSpiderWallWebDurable
+  #   - LightImplantSpiderEggDrone
+  #   - LightImplantSpiderEggGhost
+  #   - LightImplantSpiderCrystal
+  #   - LightImplantSpiderLittle
+  #   - LightImplantSingleSpiderWebDurable
+  #   - LightImplantSpiderEggShooter
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider
@@ -255,10 +255,10 @@
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 0
-  - type: AutoImplant
-    implants:
-    - LightImplantSpiderWallWeb
-    - LightImplantSpiderCrystal
+  # - type: AutoImplant
+  #   implants:
+  #   - LightImplantSpiderWallWeb
+  #   - LightImplantSpiderCrystal
   #   - LightImplantSingleSpiderWebShortDelay
   # - type: Spider
   #   webPrototype: SpiderWebDespawned
@@ -467,9 +467,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg  
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebClown
+  # - type: AutoImplant
+  #   implants:
+  #   - LightImplantSingleSpiderWebClown
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.7
