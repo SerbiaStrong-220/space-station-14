@@ -175,7 +175,7 @@
     - LightImplantSpiderEggGhost
     - LightImplantSpiderCrystal
     - LightImplantSpiderLittle
-    - LightImplantSingleSpiderWebDurable
+    # - LightImplantSingleSpiderWebDurable
     - LightImplantSpiderEggShooter
   - type: Butcherable
     spawned:
@@ -183,8 +183,8 @@
       amount: 3
     - id: MobSpiderSpaceLittle
       amount: 7
-  - type: Spider
-    webPrototype: SpiderWebDespawned
+  # - type: Spider
+  #   webPrototype: SpiderWebDespawned
   - type: RechargeBasicEntityAmmo 
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider
@@ -259,9 +259,9 @@
     implants:
     - LightImplantSpiderWallWeb
     - LightImplantSpiderCrystal
-    - LightImplantSingleSpiderWebShortDelay
-  - type: Spider
-    webPrototype: SpiderWebDespawned
+  #   - LightImplantSingleSpiderWebShortDelay
+  # - type: Spider
+  #   webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9 
@@ -317,14 +317,14 @@
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 0
-  - type: Spider
-    webPrototype: SpiderWebDespawned
+  # - type: Spider
+  #   webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebLongDelay
+  # - type: AutoImplant
+  #   implants:
+    # - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
   parent: BaseMobSpiderQueen
@@ -398,9 +398,9 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 1.5
     baseSprintSpeed : 3.9
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebLongDelay
+  # - type: AutoImplant
+  #   implants:
+  #   - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
   parent: BaseMobSpiderQueen

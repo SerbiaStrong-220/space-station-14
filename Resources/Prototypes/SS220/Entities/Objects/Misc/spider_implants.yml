@@ -99,36 +99,37 @@
       implantAction: ActionSpawnSpiderWallWebDurable
 
 #Web
-- type: entity
-  parent: BaseLightImplantSpider
-  id: LightImplantSingleSpiderWebShortDelay
-  name: spin a web
-  description: Creates a web that slows down your prey.
-  noSpawn: true
-  components:
-    - type: SubdermalImplant
-      implantAction: ActionSpawnSingleSpiderWebShortDelay       
+# - type: entity
+#   parent: BaseLightImplantSpider
+#   id: LightImplantSingleSpiderWebShortDelay
+#   name: spin a web
+#   description: Creates a web that slows down your prey.
+#   noSpawn: true
+#   components:
+#     - type: SubdermalImplant
+#       implantAction: ActionSpawnSingleSpiderWebShortDelay       
 
-- type: entity
-  parent: BaseLightImplantSpider
-  id: LightImplantSingleSpiderWebLongDelay
-  name: spin a web
-  description: Creates a web that slows down your prey.
-  noSpawn: true
-  components:
-    - type: SubdermalImplant
-      implantAction: ActionSpawnSingleSpiderWebLongDelay
+# - type: entity
+#   parent: BaseLightImplantSpider
+#   id: LightImplantSingleSpiderWebLongDelay
+#   name: spin a web
+#   description: Creates a web that slows down your prey.
+#   noSpawn: true
+#   components:
+#     - type: SubdermalImplant
+#       implantAction: ActionSpawnSingleSpiderWebLongDelay
 
-- type: entity
-  parent: BaseLightImplantSpider 
-  id: LightImplantSingleSpiderWebDurable
-  name: spin a durable web
-  description: Creates a web that slows down your prey.
-  noSpawn: true
-  components:
-    - type: SubdermalImplant
-      implantAction: ActionSpawnSingleSpiderWebDurable
+# - type: entity
+#   parent: BaseLightImplantSpider 
+#   id: LightImplantSingleSpiderWebDurable
+#   name: spin a durable web
+#   description: Creates a web that slows down your prey.
+#   noSpawn: true
+#   components:
+#     - type: SubdermalImplant
+#       implantAction: ActionSpawnSingleSpiderWebDurable
 
+#Clown web
 - type: entity
   parent: BaseLightImplantSpider 
   id: LightImplantSingleSpiderWebClown

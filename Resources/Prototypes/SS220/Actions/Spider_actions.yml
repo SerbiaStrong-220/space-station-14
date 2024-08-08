@@ -175,36 +175,36 @@
         amount: 1
 
 #Web
-- type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
-  id: ActionSpawnSingleSpiderWebShortDelay
-  noSpawn: true
-  components:
-  - type: WorldTargetAction
-    useDelay: 2
+# - type: entity
+#   parent: BaseActionSpawnSingleSpiderWeb
+#   id: ActionSpawnSingleSpiderWebShortDelay
+#   noSpawn: true
+#   components:
+#   - type: WorldTargetAction
+#     useDelay: 2
 
-- type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
-  id: ActionSpawnSingleSpiderWebLongDelay
-  noSpawn: true
-  components:
-  - type: WorldTargetAction
-    useDelay: 6
+# - type: entity
+#   parent: BaseActionSpawnSingleSpiderWeb
+#   id: ActionSpawnSingleSpiderWebLongDelay
+#   noSpawn: true
+#   components:
+#   - type: WorldTargetAction
+#     useDelay: 6
 
-- type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
-  id: ActionSpawnSingleSpiderWebDurable
-  name: spin a durable web
-  noSpawn: true
-  components:
-  - type: WorldTargetAction
-    useDelay: 4
-    event: !type:WorldSpawnSpellEvent
-      prototypes:
-      - id: SpiderWebDurable
-        amount: 1
-      offset: 0, 1
-      speech: action-speech-spell-spider
+# - type: entity
+#   parent: BaseActionSpawnSingleSpiderWeb
+#   id: ActionSpawnSingleSpiderWebDurable
+#   name: spin a durable web
+#   noSpawn: true
+#   components:
+#   - type: WorldTargetAction
+#     useDelay: 4
+#     event: !type:WorldSpawnSpellEvent
+#       prototypes:
+#       - id: SpiderWebDurable
+#         amount: 1
+#       offset: 0, 1
+#       speech: action-speech-spell-spider
 
 #Clown web
 - type: entity
