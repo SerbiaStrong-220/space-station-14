@@ -1,0 +1,153 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Server.Tesla.Components;
+using Content.Shared.Radiation.Components;
+using Content.Shared.Atmos;
+using Robust.Shared.Timing;
+
+namespace Content.Server.SS220.SuperMatterCrystal;
+
+public sealed partial class SuperMatterSystem : EntitySystem
+{
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+
+    private const float ZapPerEnergy = 60f;
+    private const float ZapThreshold = 80f;
+    private const float RadiationPerEnergy = 70f;
+    private const float MaxTimeBetweenArcs = 8f;
+    private const float MaxTimeDecreaseBetweenArcs = 4f;
+    private const int MaxAmountOfArcs = 7;
+    private const float ArcsToTimeDecreaseEfficiency = 0.3f;
+    private const float IntegrityDamageICAnnounceDelay = 10f;
+    private const float IntegrityDamageStationAnnouncementDelay = 20f;
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        InitializeAnnouncement();
+        InitializeInteractions();
+
+        SubscribeLocalEvent<SuperMatterComponent, ComponentInit>(OnComponentInit);
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<SuperMatterComponent>();
+        while (query.MoveNext(out var uid, out var smComp))
+        {
+            if (!smComp.Activated)
+                continue;
+            var crystal = new Entity<SuperMatterComponent>(uid, smComp);
+            SuperMatterUpdate(crystal, frameTime);
+            if (_gameTiming.CurTime > smComp.NextDamageImplementTime)
+            {
+                if (!TryImplementIntegrityDamage(smComp))
+                    MarkAsLaminated(crystal);
+                var announceType = GetAnnounceIntegrityType(smComp);
+                RadioAnnounceIntegrity(crystal, announceType);
+                smComp.IntegrityDamageAccumulator = 0f;
+                smComp.NextDamageImplementTime = _gameTiming.CurTime
+                                            + TimeSpan.FromSeconds(IntegrityDamageICAnnounceDelay);
+            }
+        }
+    }
+
+    private void SuperMatterUpdate(Entity<SuperMatterComponent> crystal, float frameTime)
+    {
+        if (!crystal.Comp.Activated)
+            return;
+        if (!TryGetCrystalGasMixture(crystal.Owner, out var gasMixture))
+        {
+            Log.Error($"Got null GasMixture in {crystal}. AddedComponentToGetIt");
+            // ADD IT!
+            return;
+        }
+
+        // here we ask for values before update SM parameters
+        var decayedMatter = CalculateDecayedMatter(crystal, gasMixture) * frameTime;
+        // this method make changes in SM parameters!
+        EvaluateDeltaInternalEnergy(crystal, gasMixture, frameTime);
+
+        var smState = GetSuperMatterPhase(crystal, gasMixture);
+        var crystalTemperature = crystal.Comp.Temperature;
+        var pressure = gasMixture.Pressure;
+
+        var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure);
+        crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
+        crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
+        crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
+
+        if (crystal.Comp.NextOutputEnergySourceUpdate < _gameTiming.CurTime)
+        {
+            ReleaseEnergy(crystal);
+            crystal.Comp.AccumulatedRadiationEnergy = 0;
+            crystal.Comp.AccumulatedZapEnergy = 0;
+            crystal.Comp.NextOutputEnergySourceUpdate = _gameTiming.CurTime + crystal.Comp.OutputEnergySourceUpdateDelay;
+        }
+
+        EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
+    }
+    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref ComponentInit args)
+    {
+        var (uid, _) = entity;
+        RadiationSourceComponent? radiationSource = null;
+        LightningArcShooterComponent? arcShooterComponent = null;
+
+        if (!TryComp(uid, out radiationSource))
+            radiationSource = AddComp<RadiationSourceComponent>(uid);
+        if (!TryComp(uid, out arcShooterComponent))
+            arcShooterComponent = AddComp<LightningArcShooterComponent>(uid);
+
+        radiationSource.Enabled = false;
+        arcShooterComponent.Enabled = false;
+        Dirty(uid, radiationSource);
+        Dirty(uid, arcShooterComponent);
+    }
+    private void ReleaseEnergy(Entity<SuperMatterComponent> crystal)
+    {
+        var (crystalUid, smComp) = crystal;
+
+        if (!TryComp<RadiationSourceComponent>(crystalUid, out var radiationSource))
+        {
+            Log.Error($"SM doesnt has a RadiationSourceComponent, error while updating {crystal}");
+            return;
+        }
+        if (!TryComp<LightningArcShooterComponent>(crystalUid, out var arcShooterComponent))
+        {
+            Log.Error($"SM doesnt has a LightningArcShooterComponent, error while updating {crystal}");
+            return;
+        }
+        var accumulatedZapEnergyTrashed = smComp.AccumulatedZapEnergy - ZapThreshold;
+        var maxAmountOfArcs = Math.Clamp((int) MathF.Round(accumulatedZapEnergyTrashed / ZapPerEnergy), 0, MaxAmountOfArcs);
+        var timeDecreaseBetweenArcs = Math.Clamp((accumulatedZapEnergyTrashed / ZapPerEnergy - MaxAmountOfArcs)
+                                                    * ArcsToTimeDecreaseEfficiency, 0f, MaxTimeDecreaseBetweenArcs);
+        if (maxAmountOfArcs == 0)
+        {
+            arcShooterComponent.Enabled = false;
+            Dirty(crystalUid, arcShooterComponent);
+        }
+        else
+        {
+            arcShooterComponent.Enabled = true;
+            arcShooterComponent.MaxLightningArc = maxAmountOfArcs;
+            arcShooterComponent.ShootMaxInterval = MaxTimeBetweenArcs - timeDecreaseBetweenArcs;
+        }
+
+        var radiationIntensity = smComp.AccumulatedRadiationEnergy / RadiationPerEnergy;
+        radiationSource.Intensity = radiationIntensity;
+    }
+    private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)
+    {
+        var pressure = gasMixture.Pressure;
+        var oxygenMoles = decayedMatter * GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState);
+        var plasmaMoles = decayedMatter * (1 - GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState));
+        var heatEnergy = GetChemistryPotential(crystalTemperature, gasMixture.Pressure) * decayedMatter / MatterNondimensionalization;
+        var releasedGasMixture = new GasMixture(gasMixture.Volume) { Temperature = crystalTemperature };
+        releasedGasMixture.SetMoles(Gas.Oxygen, oxygenMoles);
+        releasedGasMixture.SetMoles(Gas.Plasma, plasmaMoles);
+
+        _atmosphere.Merge(gasMixture, releasedGasMixture);
+        _atmosphere.AddHeat(gasMixture, heatEnergy);
+    }
+}

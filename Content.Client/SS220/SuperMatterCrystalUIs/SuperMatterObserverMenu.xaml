@@ -1,0 +1,14 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:plot="clr-namespace:Content.Client.SS220.UserInterface.PlotFigure"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'apc-menu-title'}"
+    Resizable="False"
+    MinSize="512 512"
+    SetSize="512 512">
+    <BoxContainer Orientation="Vertical">
+        <plot:Plot2DTimeView Name="PlotView2D" MinHeight="256" MouseFilter="Stop" Margin="8 8" />
+        </BoxContainer>
+</controls:FancyWindow>
