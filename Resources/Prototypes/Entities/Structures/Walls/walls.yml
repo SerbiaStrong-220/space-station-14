@@ -127,9 +127,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/clown.rsi
+    sprite: SS220/Structures/Walls/clown.rsi #SS220-Walls-Sprite-Update
   - type: Icon
-    sprite: Structures/Walls/clown.rsi
+    sprite: SS220/Structures/Walls/clown.rsi #SS220-Walls-Sprite-Update
   - type: Construction
     graph: Girder
     node: bananiumWall
@@ -652,9 +652,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/sandstone.rsi
+    sprite: SS220/Structures/Walls/sandstone.rsi #SS220-Walls-Sprite-Update
   - type: Icon
-    sprite: Structures/Walls/sandstone.rsi
+    sprite: SS220/Structures/Walls/sandstone.rsi #SS220-Walls-Sprite-Update
   - type: RCDDeconstructable
     cost: 6
     delay: 8
@@ -984,9 +984,9 @@
   name: wood wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
   - type: Icon
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
   - type: Construction
     graph: Girder
     node: woodWall

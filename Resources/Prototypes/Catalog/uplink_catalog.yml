@@ -72,7 +72,7 @@
   icon: { sprite: /Textures/Objects/Storage/boxicons.rsi, state: throwing_knives }
   productEntity: ThrowingKnivesKit
   cost:
-    Telecrystal: 6
+    Telecrystal: 4 #SS220-underused-uplinks-stuff
   categories:
     - UplinkWeaponry
 
@@ -648,7 +648,7 @@
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
   - UplinkChemicals
 
@@ -1126,7 +1126,7 @@
   icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: freedom }
   productEntity: FreedomImplanter
   cost:
-    Telecrystal: 5
+    Telecrystal: 3 #SS220-underused-uplinks-stuff
   categories:
     - UplinkImplants
 
@@ -1159,7 +1159,7 @@
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: shield }
   productEntity: EmpImplanter
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
     - UplinkImplants
 
@@ -1226,7 +1226,7 @@
   icon: { sprite: /Textures/Objects/Devices/communication.rsi, state: old-radio }
   productEntity: UplinkImplanter
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
   - UplinkImplants
   conditions:
@@ -1355,7 +1355,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
   - UplinkWearables
 

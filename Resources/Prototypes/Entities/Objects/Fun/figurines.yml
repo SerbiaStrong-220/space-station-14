@@ -109,8 +109,9 @@
   components:
   - type: Sprite
     state: boxer
-  # - type: SpeakOnUse # TODO add something
-  #   pack: FigurinesBoxer
+  # SS220 Add locale for all figurines
+  - type: SpeakOnUse
+    pack: FigurinesBoxer
 
 - type: entity
   parent: BaseFigurine
@@ -464,8 +465,9 @@
   components:
   - type: Sprite
     state: queen
-  # - type: SpeakOnUse # TODO add something
-  #   pack: FigurinesQueen
+  # SS220 Add locale for all figurines
+  - type: SpeakOnUse
+    pack: FigurinesQueen
 
 - type: entity
   parent: BaseFigurine
@@ -533,6 +535,9 @@
   components:
   - type: Sprite
     state: griffinprize
+  # SS220 Speak for all toys
+  - type: SpeakOnUse
+    pack: FigurinesGriffin
 
 - type: entity
   parent: BaseFigurine
@@ -542,6 +547,9 @@
   components:
   - type: Sprite
     state: owlprize
+  # SS220 Speak for all toys
+  - type: SpeakOnUse
+    pack: FigurinesOwl
 
 - type: entity
   parent: BaseFigurine
@@ -551,6 +559,9 @@
   components:
   - type: Sprite
     state: skeletonprize
+  # SS220 Speak for all toys
+  - type: SpeakOnUse
+    pack: FigurinesSceleton
 
 - type: entity
   parent: BaseFigurine
@@ -560,3 +571,6 @@
   components:
   - type: Sprite
     state: thiefcharacter
+  # SS220 Speak for all toys
+  - type: SpeakOnUse
+    pack: FigurinesTheif

@@ -89,11 +89,14 @@
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
+#SS220-Chief-Helmet-FIX-Begin
+    # clothingVisuals:
+    #   head:
+    #   - state: equipped-head
+    #   - state: equipped-head-unshaded
+    #     shader: unshaded
+    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+#SS220-Chief-Helmet-FIX-End
   - type: PointLight
     color: "#daffad"
     radius: 6

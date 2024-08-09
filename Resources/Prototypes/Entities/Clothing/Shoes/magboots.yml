@@ -91,13 +91,15 @@
   - type: Clothing
     sprite: Clothing/Shoes/Boots/magboots-syndicate.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.9
+    #SS220-underused-uplinks-stuff begin
+    walkModifier: 1
+    sprintModifier: 1
+    #SS220-underused-uplinks-stuff end
   - type: GasTank
     outputPressure: 42.6
     air:
-      # 2 minutes of thrust
-      volume: 0.75
+      # SS220 fix
+      volume: 5
       temperature: 293.15
       moles:
       - 0.153853429 # oxygen

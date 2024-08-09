@@ -67,6 +67,7 @@
     sprite: Objects/Weapons/Grenades/flashbang.rsi
   - type: FlashOnTrigger
     range: 7
+    stun: true # 220 flash grenade stun
   - type: SoundOnTrigger
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
@@ -386,7 +387,7 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
-          
+
 - type: entity
   parent: GrenadeBase
   id: SmokeGrenade

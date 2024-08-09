@@ -309,6 +309,12 @@
     sprite: Clothing/Back/Backpacks/syndicate.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
+  #SS220-underused-uplinks-stuff begin
+  - type: Storage
+    grid:
+    - 0,0,7,4
+    maxItemSize: Huge
+  #SS220-underused-uplinks-stuff end
 
 #Special
 - type: entity

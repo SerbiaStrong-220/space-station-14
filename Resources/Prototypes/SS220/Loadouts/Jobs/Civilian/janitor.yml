@@ -1,0 +1,18 @@
+# Janitor Time
+- type: loadoutEffectGroup
+  id: JanitorControl
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobJanitor
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: JanitorBlueJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorControl
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJanitorBlue
