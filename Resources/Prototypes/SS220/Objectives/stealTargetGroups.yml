@@ -4,3 +4,10 @@
   sprite:
     sprite: Objects/Vehicles/secway.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: EtchedBrassKnuckles
+  name: engraved brass knuckles
+  sprite:
+    sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
+    state: icon

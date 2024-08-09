@@ -16,7 +16,7 @@ internal sealed partial class WeaponRandomComponent : Component
     /// <summary>
     /// Chance for the damage bonus to occur (1 = 100%).
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("randomDamageChance"), ViewVariables(VVAccess.ReadWrite)] // SS220 add DataField
     public float RandomDamageChance = 0.00001f;
 
     /// <summary>

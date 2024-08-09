@@ -87,3 +87,7 @@
 
 - type: Tag
   id: WeaponFlareGun
+
+# New Qm highrisk
+- type: Tag
+  id: EtchedBrassKnuckles

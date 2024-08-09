@@ -22,6 +22,7 @@
       - id: ClothingHeadsetAltCargo
       - id: BoxEncryptionKeyCargo
       - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: GlassCaseEtchedBrassKnucklesFilled # SS220 New Qm highrisk
 
 - type: entity
   id: LockerCaptainFilledHardsuit
