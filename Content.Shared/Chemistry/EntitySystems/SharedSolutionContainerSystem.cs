@@ -19,6 +19,10 @@ using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Dependency = Robust.Shared.IoC.DependencyAttribute;
+using Content.Shared.SS220.Spray.Components;
+using Content.Shared.SS220.Spray.Events;
+using Content.Shared.SS220.Spray.System;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -82,6 +86,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         SubscribeLocalEvent<ExaminableSolutionComponent, ExaminedEvent>(OnExamineSolution);
         SubscribeLocalEvent<ExaminableSolutionComponent, GetVerbsEvent<ExamineVerb>>(OnSolutionExaminableVerb);
         SubscribeLocalEvent<SolutionContainerManagerComponent, MapInitEvent>(OnMapInit);
+        //SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, TakeSolutionEvent>(OnGetSolution);
 
         if (NetManager.IsServer)
         {
@@ -1217,4 +1222,14 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
             dissolvedReagentAmount += overflow;
         return dissolvedReagentAmount;
     }
+
+    // SS220 Refactor nuzzle begin
+    private void OnGetSolution(EntityUid uid, TakeSolutionEvent takeSolutionEvent)
+    {
+        if (!TryGetSolution(uid, ClothingSlotSolutionProviderComponent.ContainmentSolutionName, out var soln, out var solution))
+            return;
+
+        SplitSolution(uid, FixedPoint2.Value, FixedPoint2.New(takeSolutionEvent.SolutionAmount));
+    }
+    // SS220 Refactor nuzzle end
 }
