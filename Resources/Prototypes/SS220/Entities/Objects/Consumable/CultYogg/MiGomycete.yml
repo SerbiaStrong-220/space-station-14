@@ -1,0 +1,69 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: МиГомицелий
+  parent: FoodProduceBase
+  id: FoodMiGomyceteCult
+  description: Мистическая субстанция взывающая к полгощению и рвотные позывы.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 0.5
+        reagents:
+        - ReagentId: TheBloodOfYogg
+          Quantity: 0.5
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/migomycete.rsi
+    state: produce
+  - type: Produce
+    seedId: MiGospores
+  - type: Extractable
+    grindableSolutionName: food
+  - type: DesiredFood
+    desireLevel: 1
+  - type: Tag
+    tags:
+    - Omnivorous
+
+- type: entity
+  parent: SeedBase
+  name: packet of fly MiGo spores
+  description: "The iconic, extremely deadly mushroom to be used for purely ornamental purposes."
+  id: Mi'GoSeedsCult
+  components:
+    - type: Seed
+      seedId: MiGospores
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/migomycete.rsi
+      state: seed
+
+- type: seed
+  id: Mi'Gospores
+  name: seeds-MiGo-name
+  noun: seeds-noun-spores
+  displayName: seeds-flyamanita-display-name
+  plantRsi: SS220/Objects/CultYogg/migomycete.rsi
+  packetPrototype: MiGoSeedsCult
+  productPrototypes:
+    - FoodMiGomyceteCult
+  lifespan: 25
+  maturation: 12
+  production: 3
+  yield: 3
+  potency: 10
+  growthStages: 2
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  chemicals:
+    Amatoxin:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 4
+    Nutriment: ## yumby :)
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20

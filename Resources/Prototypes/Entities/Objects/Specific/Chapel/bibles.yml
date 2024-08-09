@@ -42,11 +42,35 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+#SS220 CultYogg begin
+      enum.ExorcismUiKey.Key:
+        type: ExorcismBoundUserInterface
+#SS220 CultYogg end
   - type: Tag
     tags:
     - Book
   - type: StealTarget
     stealGroup: Bible
+#SS220 CultYogg begin
+  - type: Appearance
+  - type: ExorcismPerformer
+    exorcismAction: ActionExorcism
+    messageLengthMin: 80
+    messageLengthMax: 120
+    range: 5
+  - type: PointLight
+    energy: 0
+  - type: LightBehaviour
+    behaviours:
+      - !type:RandomizeBehaviour 
+        id: exorcism_performance
+        interpolate: Linear
+        isLooped: true
+        maxDuration: 0.2
+        startValue: 0.0
+        endValue: 5.0
+        property: Energy
+#SS220 CultYogg end
 
 - type: entity
   parent: Bible

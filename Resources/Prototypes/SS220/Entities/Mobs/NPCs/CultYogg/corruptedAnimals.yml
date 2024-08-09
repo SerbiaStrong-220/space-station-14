@@ -1,0 +1,108 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: base corrupted mob
+  id: BaseMobCorrupted
+  parent: [ MobRespirator, MobAtmosStandard, MobCombat ] #idk if they should breathe
+  description: Unspeakable evil
+  abstract: true
+  components:
+    - type: InputMover
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: SimpleHostileCompound #what is this? should it be cult?
+      blackboard:
+        NavSmash: !type:Bool
+          true
+    - type: NpcFactionMember
+      factions:
+        - Cult
+    - type: CombatMode
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.40
+          density: 80
+          mask:
+            - MobMask
+          layer:
+            - MobLayer
+    - type: MobState
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        50: Dead
+    - type: Stamina
+      critThreshold: 100
+    - type: Butcherable
+      spawned:
+        - id: FoodMeatFish #Should be shrooms
+          amount: 2
+    - type: MeleeWeapon
+      altDisarm: false
+      angle: 0
+      animation: WeaponArcBite
+      soundHit:
+        path: /Audio/Effects/bite.ogg #maybe different sound
+      damage:
+        types:
+          Piercing: 5
+          Slash: 10
+    - type: TypingIndicator #new indicator?
+      proto: alien
+    - type: Tag
+      tags: #should we add our own tag?
+        - DoorBumpOpener
+    - type: ReplacementAccent
+      accent: genericAggressive
+    - type: Speech
+      speechVerb: LargeMob
+    - type: GhostRole
+      makeSentient: true
+      allowMovement: true
+      allowSpeech: false
+      name: ghost-role-information-corrupted-mob-cultyogg-name
+      description: ghost-role-information-corrupted-mob-cultyogg-description
+      rules: ghost-role-information-corrupted-mob-cultyogg-rules
+    - type: GhostTakeoverAvailable
+    - type: ShowCultYoggIcons
+
+- type: entity
+  parent: [BaseMobCorrupted , MobCow]
+  id: CultCowCorrupted
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: cow
+      sprite: SS220/Mobs/CultYogg/cow_corrupted.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 400
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: cow
+      Dead:
+        Base: dead
+  - type: InteractionPopup
+    successChance: 0.7
+    interactDelay: 2 # Avoids overlapping SFX due to spam - these SFX are a little longer than the typical 1 second.
+    interactSuccessString: petting-success-soft-floofy
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/cow_moo.ogg

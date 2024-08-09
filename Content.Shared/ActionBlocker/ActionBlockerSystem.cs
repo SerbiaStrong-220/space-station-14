@@ -97,6 +97,11 @@ namespace Content.Shared.ActionBlocker
             var ev = new UseAttemptEvent(user, used);
             RaiseLocalEvent(user, ev);
 
+            //ss220 roleitem begin
+            var usedEv = new BeingUsedAttemptEvent(user, used);
+            RaiseLocalEvent(used, usedEv);
+            //ss220 roleitem end
+
             return !ev.Cancelled;
         }
 

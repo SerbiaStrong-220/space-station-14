@@ -1,0 +1,54 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Objectives of th cult
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseCultYoggObjective
+  components:
+  - type: Objective
+    issuer: cult_yogg
+  - type: RoleRequirement
+    roles:
+      components:
+      - CultYoggRole
+
+# requires that the player sacrifice someone
+# disables social objectives and is disabled by social objectives
+- type: entity
+  abstract: true
+  parent: BaseTargetObjective
+  id: CultYoggSacraficeObjective
+  components:
+  - type: Objective
+    unique: false
+    icon:
+      sprite: Objects/Weapons/Guns/Pistols/viper.rsi #need to chose an icon for this
+      state: icon
+  - type: KillPersonCondition
+
+- type: entity
+  abstract: true
+  parent: BaseTargetObjective
+  id: BaseCultYoggSacraficeObjective
+  components:
+  - type: Objective
+    unique: false
+    icon:
+      sprite: Objects/Weapons/Guns/Pistols/viper.rsi #need to chose an icon for this
+      state: icon
+  - type: KillPersonCondition
+
+# requires that the god will be summoned
+- type: entity
+  parent: [BaseCultYoggObjective, BaseLivingObjective]
+  id: CultEscapeShuttleObjective
+  name: Escape to centcom alive and unrestrained.
+  description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs.
+  components:
+  - type: Objective
+    difficulty: 1.3
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle
+  - type: EscapeShuttleCondition

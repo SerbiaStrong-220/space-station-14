@@ -1,0 +1,72 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#list of corrupted animals mutations
+- type: corruptedAnimals
+  id: MobCow
+  corruptedAnimal: MobCow
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobMonkey
+  corruptedAnimal: MobMonkey
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse
+  corruptedAnimal: MobMouse
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse1
+  corruptedAnimal: MobMouse1
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse2
+  corruptedAnimal: MobMouse2
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobBat
+  corruptedAnimal: MobBat
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobBatRemilia
+  corruptedAnimal: MobBatRemilia
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobBearSpace
+  corruptedAnimal: MobBearSpace
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobBearSpaceSalvage
+  corruptedAnimal: MobBearSpaceSalvage
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobChicken
+  corruptedAnimal: MobChicken
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobChicken1
+  corruptedAnimal: MobChicken1
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobChicken2
+  corruptedAnimal: MobChicken2
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobPig
+  corruptedAnimal: MobPig
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobAlexander
+  corruptedAnimal: MobAlexander
+  result: CultCowCorrupted

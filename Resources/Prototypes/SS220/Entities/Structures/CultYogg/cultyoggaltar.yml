@@ -1,0 +1,46 @@
+- type: entity
+  name: Алтарь культа Йогг
+  id: CultYoggAltar
+  parent: BaseStructure
+  description: Загадочный алтарь культа
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/yoggaltar.rsi
+    state: cultaltar
+  - type: Icon
+    sprite: SS220/Structures/yoggaltar.rsi
+    state: cultaltar
+  - type: Anchorable
+  - type: Pullable
+  - type: Appearance
+  - type: CultYoggAltar
+  - type: Prayable
+  - type: Strap
+    position: Down
+    rotation: -90
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.05"
+        density: 190
+        mask:
+        - TableMask
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 650
+  - type: GenericVisualizer
+    visuals:
+      enum.CultYoggAltarVisuals.Sacrificed:
+        base:
+          True: { state: blood }
+          False: { state: cultaltar }

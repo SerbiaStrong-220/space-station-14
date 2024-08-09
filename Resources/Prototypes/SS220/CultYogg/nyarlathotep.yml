@@ -1,0 +1,64 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: Nyarlathotep
+  name: ньярлатотеп
+  description: Воплощение предстоящего хаоса, посланник Богов. Не имеет четкой формы. Со слов самого Ньярлатхотепа, он имеет тысячи обличий.
+  components:
+  - type: Clickable
+  - type: CargoSellBlacklist
+  - type: InteractionOutline
+  - type: StandingState
+  - type: CanMoveInAir
+  - type: MovementIgnoreGravity
+  - type: Appearance
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+    sleepingAllowed: false
+  - type: PointLight
+    enabled: true
+    radius: 25
+    color: "#FF0000"
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
+    shader: unshaded
+    layers:
+    - state: nyarlatoteph
+  - type: ChasingWalk
+    minSpeed: 0.2
+    maxSpeed: 1
+    ChangeVectorMinInterval: 99999
+    ChangeVectorMaxInterval: 100000
+    chasingComponent:
+    - type: NyarlathotepTarget
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/SS220/Music/hellmarch.ogg
+  - type: Fixtures
+    fixtures:
+      NyarlathotepHorizonCollider:
+        shape:
+          !type:PhysShapeCircle
+            radius: 0.35
+        mask:
+        - AllMask
+        layer:
+        - AllMask
+      NyarlathotepHorizonConsumer:
+        shape:
+          !type:PhysShapeCircle
+            radius: 0.35
+        mask:
+        - AllMask
+        layer:
+        - AllMask
+  - type: NyarlathotepHorizon
+    radius: 0.6
+    consumeEntities: false
+    colliderFixtureId: NyarlathotepHorizonCollider
+    consumerFixtureId: NyarlathotepHorizonConsumer
+  - type: NyarlathotepSearchTargets
+    searchRange: 100
+

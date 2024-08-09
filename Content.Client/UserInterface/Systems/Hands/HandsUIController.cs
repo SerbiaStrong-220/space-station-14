@@ -6,6 +6,7 @@ using Content.Client.UserInterface.Systems.Hotbar.Widgets;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.SS220.Irremovable;
 using Content.Shared.Timing;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -189,6 +190,14 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
             hand.SetEntity(entity);
             hand.Blocked = false;
         }
+
+        //ss220 irremovable begin
+        if (_entities.TryGetComponent(entity, out IrremovableComponent? irremovableComp) && irremovableComp.InHandItem)
+        {
+            hand.SetEntity(entity);
+            hand.Irremovable = true;
+        }
+        //ss220 irremovable begin end
 
         UpdateHandStatus(hand, entity);
     }

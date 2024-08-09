@@ -1,0 +1,58 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: МиГо
+  parent: [ SimpleSpaceMobBase, FlyingMobBase]
+  description: Дитя темного бога
+  id: MiGoCultYogg
+  components:
+  - type: MiGo
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 6
+    baseSprintSpeed : 6
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/CultYogg/Mi'Go.rsi
+    layers:
+      - map: [ "enum.MiGoVisual.Base" ]
+        state: alive
+  - type: Physics
+  - type: NpcFactionMember
+    factions:
+    - CultYogg
+  - type: RandomMetadata #ToDo нагенерить спец имена
+    nameSegments: [ cult_yogg_migo ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+          - FlyingMobMask
+        layer:
+          - FlyingMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: Stamina
+    critThreshold: 100
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+  - type: UserInterface
+    interfaces:
+      enum.MiGoErectUiKey.Key:
+       #type: FlatpackCreatorBoundUserInterface #just for check
+        type: MiGoErectBoundUserInterface
+  - type: ShowCultYoggIcons

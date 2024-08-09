@@ -12,6 +12,7 @@ namespace Content.Client.UserInterface.Controls
             FullButtonTexturePath = slotData.FullTextureName;
             Blocked = slotData.Blocked;
             Highlight = slotData.Highlighted;
+            Irremovable = slotData.Irremovable; //ss220 irremovable
             StorageTexturePath = "Slots/back";
             SlotName = slotData.SlotName;
         }

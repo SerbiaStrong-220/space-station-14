@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: SheetMetalBase
+  id: SheetTokl
+  name: ток'л
+  suffix: Full
+  description: Лист искаженного металла, с вкраплениями плесени и грибов, он склизкий и пульсирующий.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Materials/Sheets/tokl.rsi
+    state: tokl_3
+    layers:
+    - state: tokl_3
+      map: ["base"]
+  - type: Item
+    sprite: SS220/Objects/Materials/Sheets/tokl.rsi
+    size: Normal
+    heldPrefix: tokl
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+  - type: Stack
+    stackType: Tokl
+    baseLayer: base
+    layerStates:
+    - tokl
+    - tokl_2
+    - tokl_3
+  - type: Appearance
+  - type: CultYoggCorrupted
+    originalPrototypeId: SheetSteel
+    recipe: SheetTokl
+
+- type: entity
+  parent: SheetTokl
+  id: SheetTokl10
+  name: ток'л
+  suffix: 10
+  components:
+  - type: Sprite
+    state: tokl
+  - type: Stack
+    stackType: Tokl
+    count: 10
+
+- type: entity
+  parent: SheetTokl
+  id: SheetTokl1
+  name: ток'л
+  suffix: Single
+  components:
+  - type: Sprite
+    state: tokl
+  - type: Stack
+    stackType: Tokl
+    count: 1
