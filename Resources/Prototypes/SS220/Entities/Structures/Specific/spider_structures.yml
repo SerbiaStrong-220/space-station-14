@@ -50,32 +50,32 @@
         Blunt: 5
 
 #Tile (used to spawn walls)
-- type: entity
-  parent: BaseFloorTileItemSpiders
-  id: FloorTileItemWebSpiders
-  name: web construction
-  description: Very smooth and surprisingly durable.
-  noSpawn: true  
-  components:
-  - type: TimedDespawn 
-    lifetime: 5
-  - type: SpawnOnDespawn
-    prototype: TableWebSpiders 
+# - type: entity
+#   parent: BaseFloorTileItemSpiders
+#   id: FloorTileItemWebSpiders
+#   name: web construction
+#   description: Very smooth and surprisingly durable.
+#   noSpawn: true  
+#   components:
+#   - type: TimedDespawn 
+#     lifetime: 5
+#   - type: SpawnOnDespawn
+#     prototype: TableWebSpiders 
 
-- type: entity
-  name: web  
-  description: Web
-  parent: BaseFloorTileItemSpiders
-  id: FloorTileItemWebSpidersDurable
-  noSpawn: true
-  components:
-  - type: TimedDespawn 
-    lifetime: 6
-  - type: SpawnOnDespawn
-    prototype: TableWebSpidersDurable
-  - type: Sprite
-    shader: unshaded
-    color: gray
+# - type: entity
+#   name: web  
+#   description: Web
+#   parent: BaseFloorTileItemSpiders
+#   id: FloorTileItemWebSpidersDurable
+#   noSpawn: true
+#   components:
+#   - type: TimedDespawn 
+#     lifetime: 6
+#   - type: SpawnOnDespawn
+#     prototype: TableWebSpidersDurable
+#   - type: Sprite
+#     shader: unshaded
+#     color: gray
 
 #Table (заглушка типо как анимация)
 - type: entity

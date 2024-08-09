@@ -147,16 +147,15 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 8 
+    useDelay: 12
     range: 1.5
     itemIconStyle: BigAction
     icon:
       sprite: Structures/Walls/web.rsi
       state: full
-      useDelay: 30
     event: !type:WorldSpawnSpellEvent
       prototypes:
-      - id: FloorTileItemWebSpiders
+      - id: TableWebSpiders
         amount: 1
       offset: 0, 1
       speech: action-speech-spell-spider
@@ -168,10 +167,10 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 10
+    useDelay: 16
     event: !type:WorldSpawnSpellEvent
       prototypes:
-      - id: FloorTileItemWebSpidersDurable
+      - id: TableWebSpidersDurable
         amount: 1
 
 #Web
