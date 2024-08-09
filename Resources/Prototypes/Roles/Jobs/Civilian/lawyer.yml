@@ -5,14 +5,14 @@
   playTimeTracker: JobLawyer
   requirements:
     - !type:DepartmentTimeRequirement
-      department: Civilian
+      department: Security #SS220-InternalAffairs
       time: 72000 # SS220-RoleTime
   startingGear: LawyerGear
   setPreference: true # SS220 return-of-the-lawyer
   icon: "JobIconLawyer"
-  supervisors: job-supervisors-hop
+  supervisors: job-supervisors-IAA
   access:
-  - Service
+#  - Service SS220-Internal-Affairs
   - Lawyer
   - Brig
   - Maintenance
@@ -22,7 +22,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetLawyer #SS220-InternalAffairs
   inhand:
     - BriefcaseBrownFilled
   storage:

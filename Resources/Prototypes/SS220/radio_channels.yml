@@ -192,6 +192,13 @@
   longRange: true
 # Admin memes end
 
+- type: radioChannel
+  id: InternalAffairs
+  name: chat-radio-internal-affairs
+  keycode: 'в'
+  frequency: 1373
+  color: "#323ba9"
+
 #Spider queen antag
 - type: radioChannel #Connection
   id: HiveRadio

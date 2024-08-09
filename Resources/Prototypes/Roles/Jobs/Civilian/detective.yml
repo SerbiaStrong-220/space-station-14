@@ -9,13 +9,14 @@
     time: 72000 # SS220-RoleTime
   startingGear: DetectiveGear
   icon: "JobIconDetective"
-  supervisors: job-supervisors-hop
+  supervisors: job-supervisors-IAA
   canBeAntag: true
   access:
   - Brig
   - Maintenance
-  - Service
+#  - Service SS220-Internal-Affairs
   - Detective
+  - Lawyer #SS220-Internal-Affairs
   extendedAccess:
   - Security
 
@@ -24,7 +25,7 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetLawyer #SS220-Internal-Affairs
     neck: ClothingBeltHolsterFilled #SS220 holster to neck
   storage:
     back:
