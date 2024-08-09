@@ -5,6 +5,9 @@ using JetBrains.Annotations;
 using Robust.Shared.Physics.Dynamics;
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Events;
+using Content.Shared.Clothing;
+using Content.Shared.Inventory;
+
 
 namespace Content.Server.Stunnable
 {
@@ -12,6 +15,7 @@ namespace Content.Server.Stunnable
     internal sealed class StunOnCollideSystem : EntitySystem
     {
         [Dependency] private readonly StunSystem _stunSystem = default!;
+        [Dependency] private   readonly InventorySystem _inventory = default!;
 
         public override void Initialize()
         {
@@ -22,6 +26,14 @@ namespace Content.Server.Stunnable
 
         private void TryDoCollideStun(EntityUid uid, StunOnCollideComponent component, EntityUid target)
         {
+
+            //ss220 taserNerf
+            _inventory.TryGetSlotEntity(target, "shoes", out var entityUid);
+
+            if (TryComp<MagbootsComponent>(entityUid, out var magboots))
+                return;
+
+            //ss220 taserNerf end
 
             if (EntityManager.TryGetComponent<StatusEffectsComponent>(target, out var status))
             {
