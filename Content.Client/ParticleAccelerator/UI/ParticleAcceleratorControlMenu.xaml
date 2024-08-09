@@ -4,8 +4,8 @@
             xmlns:ui="clr-namespace:Content.Client.ParticleAccelerator.UI"
             xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
             Title="{Loc 'particle-accelerator-control-menu-device-version-label'}"
-            MinSize="420 320"
-            SetSize="420 320">
+            MinSize="480 320"
+            SetSize="530 320">
     <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="0 10 0 0">
         <BoxContainer Orientation="Horizontal" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="10 0 10 5">

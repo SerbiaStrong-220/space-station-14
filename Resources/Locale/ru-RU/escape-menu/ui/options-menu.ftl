@@ -36,7 +36,8 @@ ui-options-event-music = Музыка событий
 ui-options-admin-sounds = Музыка админов
 ui-options-ahelp-sounds = Звуки АХелпа
 ui-options-volume-label = Громкость
-ui-options-volume-percent = { TOSTRING($volume, "P0") }
+# 220 loc fix
+ui-options-value-percent = { TOSTRING($value, "P0") }
 
 ## Graphics menu
 
