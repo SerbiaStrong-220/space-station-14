@@ -180,6 +180,11 @@ public sealed class EventManagerSystem : EntitySystem
         if (GameTicker.IsGameRuleActive(prototype.ID))
             return false;
 
+        //SS220 GiftsGamma event fix begin
+        if (stationEvent.CannotStartRandomly)
+            return false;
+        //SS220 GiftsGamma event fix end
+
         if (stationEvent.MaxOccurrences.HasValue && GetOccurrences(prototype) >= stationEvent.MaxOccurrences.Value)
         {
             return false;

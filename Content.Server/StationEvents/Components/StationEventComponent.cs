@@ -87,4 +87,12 @@ public sealed partial class StationEventComponent : Component
     /// </summary>
     [DataField]
     public bool OccursDuringRoundEnd = true;
+
+    //SS220 GiftsGamma event fix begin
+    /// <summary>
+    /// If true, the event isn't triggered randomly in round
+    /// </summary>
+    [DataField]
+    public bool CannotStartRandomly = false;
+    //SS220 GiftsGamma event fix end
 }
