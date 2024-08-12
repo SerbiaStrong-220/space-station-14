@@ -7,6 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.SuperMatterCrystalUIs;
 
+// For optimization make cache value in ServerSystem and then subscribe from client if it needs it;
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterObserverMenu : FancyWindow
 {
@@ -15,8 +16,8 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
-        PlotView2D.SetXLabel("t, с");
-        PlotView2D.SetYLabel("u, эрг");
+        PlotValueOverTime.SetXLabel("t, с");
+        PlotValueOverTime.SetYLabel("u, эрг");
     }
     public void UpdateState()
     {
@@ -25,6 +26,6 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
-        PlotView2D.AddPointToPlot(new Vector2(counter++, counter++));
+        PlotValueOverTime.AddPointToPlot(new Vector2(counter++, counter++));
     }
 }

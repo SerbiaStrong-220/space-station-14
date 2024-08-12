@@ -41,19 +41,19 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var (crystalUid, smComp) = crystal;
         var chemistryPotential = GetChemistryPotential(smComp.Temperature, gasMixture.Pressure);
         var crystalHeatFromGas = _atmosphere.GetThermalEnergy(gasMixture) * SM_HEAT_TRANSFER_RATIO
-                                    * gasMixture.Temperature - smComp.Temperature
+                                    * (gasMixture.Temperature - smComp.Temperature)
                                     / MathF.Max(gasMixture.Temperature, smComp.Temperature);
         var smDeltaT = crystalHeatFromGas / GetHeatCapacity(smComp.Temperature, smComp.Matter);
         var normalizedMatter = smComp.Matter / MatterNondimensionalization;
         // here we start to change mix in SM cause nothing else depends on it after
-        var deltaMatter = SynthesizeMatterFromGas(crystal, gasMixture, frameTime) - CalculateDecayedMatter(crystal, gasMixture);
+        var deltaMatter = SynthesizeMatterFromGas(crystal, gasMixture, frameTime, deleteUsedGases: true) - CalculateDecayedMatter(crystal, gasMixture);
         var normalizedDeltaMatter = deltaMatter / MatterNondimensionalization;
 
         var matterToTemperatureRatio = normalizedMatter / smComp.Temperature;
         var newMatterToTemperatureRatio = (normalizedMatter + normalizedDeltaMatter) / (smComp.Temperature + smDeltaT);
         // here we connect chemistry potential with internal energy, so thought of their units adequate, maybe even calculate it
         var deltaInternalEnergy = (smDeltaT * (matterToTemperatureRatio - newMatterToTemperatureRatio) * smComp.InternalEnergy
-                                    + chemistryPotential * normalizedDeltaMatter)
+                                    - chemistryPotential * normalizedDeltaMatter)
                                     / (1 + newMatterToTemperatureRatio * smDeltaT);
 
         smComp.InternalEnergy += deltaInternalEnergy * frameTime;
@@ -77,22 +77,23 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         /// gas effect multiplier should affects only Base decay rate, f.e. for gases which mostly occupy SM decay
         var environmentMultiplier = GetDecayMatterMultiplier(smComp.Temperature, gasMixture.Pressure);
-        environmentMultiplier = Math.Max(environmentMultiplier, 20f); // cut off enormous numbers, our goal fun not overwhelm
+        environmentMultiplier = Math.Min(environmentMultiplier, 20f); // cut off enormous numbers, our goal fun not overwhelm
 
-        return (MATTER_DECAY_BASE_RATE * gasEffectMultiplier + gasFlatInfluence) * environmentMultiplier;
+        return (MATTER_DECAY_BASE_RATE * (gasEffectMultiplier + 1) + gasFlatInfluence) * environmentMultiplier;
     }
     /// <summary> Calculate how much matter will be added this step
     ///  and distract used gas from its inner gasMixture if deleteUsedGases true
     /// We dont apply it to Matter field of SMComp because we need this value in internal energy evaluation </summary>
-    private float SynthesizeMatterFromGas(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime, bool deleteUsedGases = true)
+    private float SynthesizeMatterFromGas(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime, bool deleteUsedGases = false)
     {
         var (crystalUid, smComp) = crystal;
         var resultAdditionalMatter = 0f;
-
+        if (smComp.GasesToMatterConvertRatio == null)
+            return resultAdditionalMatter;
         foreach (var gasId in smComp.GasesToMatterConvertRatio.Keys)
         {
             var gasMolesInReact = gasMixture.GetMoles(gasId)
-                                    * GetMolesReactionEfficiency(smComp.Temperature, gasMixture.Pressure) ;
+                                    * GetMolesReactionEfficiency(smComp.Temperature, gasMixture.Pressure);
 
             if (deleteUsedGases)
                 gasMixture.AdjustMoles(gasId, gasMolesInReact * frameTime);

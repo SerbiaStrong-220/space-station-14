@@ -11,6 +11,8 @@ public static class SuperMatterGasResponse
     public static float GetRelativeGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultRelativeInfluence = 0f;
+        if (smComp.DecayInfluenceGases == null)
+            return resultRelativeInfluence;
         foreach (var gasId in smComp.DecayInfluenceGases.Keys)
         {
             var gasEfficiency = GetGasInfluenceEfficiency(gasId, gasMixture);
@@ -22,6 +24,9 @@ public static class SuperMatterGasResponse
     public static float GetFlatGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultFlatInfluence = 0f;
+
+        if (smComp.DecayInfluenceGases == null)
+            return resultFlatInfluence;
         foreach (var gasId in smComp.DecayInfluenceGases.Keys)
         {
             var gasEfficiency = GetGasInfluenceEfficiency(gasId, gasMixture);
@@ -30,19 +35,20 @@ public static class SuperMatterGasResponse
         return resultFlatInfluence;
     }
     /// <summary> </summary>
-    /// <returns> Value from 0.05 to 1 </returns>
+    /// <returns> Value from -0.5 to 1 </returns>
     public static float GetGasInfluenceReleaseEnergyEfficiency(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultEfficiency = 0f;
         var affectGases = smComp.EnergyEfficiencyChangerGases;
-
+        if (affectGases == null)
+            return resultEfficiency;
         foreach (var gasId in affectGases.Keys)
         {
             resultEfficiency += affectGases[gasId].RelativeInfluence
                     * GetNonLinierGasInfluenceEfficiencyFunction(gasId, gasMixture, affectGases[gasId].OptimalRatio);
         }
 
-        return MathF.Max(Math.Min(resultEfficiency, 1f), 0.05f);
+        return MathF.Max(Math.Min(resultEfficiency, 1f), -0.5f);
     }
 
     /// <summary> Standalone method for easier  </summary>

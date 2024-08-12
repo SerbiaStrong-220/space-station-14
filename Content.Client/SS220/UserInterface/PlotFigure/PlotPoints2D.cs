@@ -8,10 +8,8 @@ namespace Content.Client.SS220.UserInterface.PlotFigure;
 /// This class make working with time dependent plot easier
 /// It is designed to have the newest dots in the end and oldest at the start
 /// </summary>
-public sealed class Plot2DTimePoints(int maxPoints)
+public sealed class PlotPoints2D(int maxPoints) : LabelContainer
 {
-    public string? XLabel;
-    public string? YLabel;
     public List<Vector2>? Point2Ds => _point2Ds;
     public int MaxLength => _maxAmountOfPoints;
     private List<Vector2>? _point2Ds;

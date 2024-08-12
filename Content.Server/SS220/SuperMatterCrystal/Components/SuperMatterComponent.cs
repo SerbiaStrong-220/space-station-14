@@ -44,20 +44,22 @@ public sealed partial class SuperMatterComponent : Component
 
     [ViewVariables(VVAccess.ReadOnly)]
     public float Integrity = 100f;
+    [ViewVariables(VVAccess.ReadOnly)]
     public float Temperature = Atmospherics.T20C;
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public float Matter = 200 * SuperMatterSystem.MatterNondimensionalization; // To wrap it in own VAR
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public float InternalEnergy = 2e4f; // If wrong parrots we will log it on Comp init in System and force none error value
+    /// <summary> Will be set in CompInit by system</summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float InternalEnergy = 0f;
 
     #region GasInteraction
     [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<Gas, (float RelativeInfluence, float flatInfluence)> DecayInfluenceGases;
+    public Dictionary<Gas, (float RelativeInfluence, float flatInfluence)>? DecayInfluenceGases;
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     // It is used to define how much matter will be added if 1 mole of gas consumed
-    public Dictionary<Gas, float> GasesToMatterConvertRatio;
+    public Dictionary<Gas, float>? GasesToMatterConvertRatio;
     [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<Gas, (float OptimalRatio, float RelativeInfluence)> EnergyEfficiencyChangerGases;
+    public Dictionary<Gas, (float OptimalRatio, float RelativeInfluence)>? EnergyEfficiencyChangerGases;
 
     #endregion
 

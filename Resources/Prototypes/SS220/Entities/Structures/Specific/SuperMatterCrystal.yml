@@ -1,0 +1,52 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: SuperMatterCrystal
+  name: supermatter crystal
+  description: A strangely translucent and iridescent crystal.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Anchorable
+  - type: Fixtures # TODO find masks/layers together
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2" # TEST QoL
+        mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          - Opaque
+        layer:
+          - MidImpassable
+          - HighImpassable
+          - BulletImpassable
+          - InteractImpassable
+  - type: CollisionWake
+    enabled: false
+  - type: SuperMatter # all things like radiation source etc will be added through SMSystem
+  - type: Sprite
+    sprite: SS220/Objects/Specific/jerrycan.rsi
+    state: icon
+  - type: Icon
+    sprite: SS220/Objects/Specific/jerrycan.rsi
+    state: icon
+  - type: Clickable
+  - type: InteractionOutline
+  - type: InteractionPopup # add its own hugging!
+    successChance: 1
+    interactSuccessString: hugging-success-generic
+    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+    messagePerceivedByOthers: hugging-success-generic-others
+  - type: WarpPoint
+    follow: true
+    location: SuperMatterCrystal
+

@@ -1,0 +1,87 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
+using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Server.Tesla.Components;
+using Content.Shared.Radiation.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Database;
+using Content.Shared.Projectiles;
+
+namespace Content.Server.SS220.SuperMatterCrystal;
+
+public sealed partial class SuperMatterSystem : EntitySystem
+{
+    public void InitializeEventHandler()
+    {
+        SubscribeLocalEvent<SuperMatterComponent, InteractHandEvent>(OnHandInteract);
+        SubscribeLocalEvent<SuperMatterComponent, InteractUsingEvent>(OnItemInteract);
+        SubscribeLocalEvent<SuperMatterComponent, StartCollideEvent>(OnCollideEvent);
+        SubscribeLocalEvent<SuperMatterComponent, SuperMatterActivationEvent>(OnActivationEvent);
+        SubscribeLocalEvent<SuperMatterComponent, SuperMatterSetAdminDisableEvent>(OnAdminDisableEvent);
+        SubscribeLocalEvent<SuperMatterComponent, ComponentInit>(OnComponentInit);
+
+    }
+    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref ComponentInit args)
+    {
+        var (uid, _) = entity;
+        RadiationSourceComponent? radiationSource = null;
+        LightningArcShooterComponent? arcShooterComponent = null;
+
+        if (!TryComp(uid, out radiationSource))
+            radiationSource = AddComp<RadiationSourceComponent>(uid);
+        if (!TryComp(uid, out arcShooterComponent))
+            arcShooterComponent = AddComp<LightningArcShooterComponent>(uid);
+
+        radiationSource.Enabled = false;
+        arcShooterComponent.Enabled = false;
+        entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
+    }
+    private void OnHandInteract(Entity<SuperMatterComponent> entity, ref InteractHandEvent args)
+    {
+        entity.Comp.Matter += MatterNondimensionalization;
+        ConsumeObject(args.User, entity);
+    }
+    private void OnItemInteract(Entity<SuperMatterComponent> entity, ref InteractUsingEvent args)
+    {
+        entity.Comp.Matter += MatterNondimensionalization / 4;
+        ConsumeObject(args.User, entity);
+    }
+    private void OnCollideEvent(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
+    {
+        if (args.OtherBody.BodyType == BodyType.Static)
+            return;
+        if (TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
+            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max((float) projectile.Damage.GetTotal(), 0f);
+
+        entity.Comp.Matter += MatterNondimensionalization / 4;
+        ConsumeObject(args.OtherEntity, entity, HasComp<ProjectileComponent>(args.OtherEntity));
+    }
+    private void OnActivationEvent(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
+    {
+        if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
+        {
+            Log.Error($"Tried to activate SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
+            return;
+        }
+        if (smComp.DisabledByAdmin)
+            return;
+        if (!smComp.Activated)
+        {
+            SendAdminChatAlert(entity, "supermatter-activated", $"{EntityManager.ToPrettyString(args.Target)}");
+            smComp.Activated = true;
+        }
+        args.Handled = true;
+    }
+    private void OnAdminDisableEvent(Entity<SuperMatterComponent> entity, ref SuperMatterSetAdminDisableEvent args)
+    {
+        if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
+        {
+            Log.Error($"Tried to AdminDisable SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
+            return;
+        }
+        _adminLog.Add(LogType.Verb, LogImpact.Extreme, $"{EntityManager.ToPrettyString(args.Performer):player} has set AdminDisable to {args.AdminDisableValue}");
+        smComp.DisabledByAdmin = args.AdminDisableValue;
+        // TODO other logic like freezing Delamination and etc etc
+    }
+}

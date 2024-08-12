@@ -43,12 +43,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
     private bool TryImplementIntegrityDamage(SuperMatterComponent smComp)
     {
-        var resultIntegrityDamage = Math.Clamp(smComp.IntegrityDamageAccumulator, -MaxDamagePerSecond, MaxRegenerationPerSecond);
-        if (smComp.Integrity + resultIntegrityDamage < 0f)
+        var resultIntegrityDamage = Math.Clamp(smComp.IntegrityDamageAccumulator, -MaxRegenerationPerSecond, MaxDamagePerSecond);
+        if (smComp.Integrity - resultIntegrityDamage < 0f)
             return false;
-        if (smComp.Integrity + resultIntegrityDamage < 100f)
+        if (smComp.Integrity - resultIntegrityDamage < 100f)
         {
-            smComp.Integrity += resultIntegrityDamage;
+            smComp.Integrity -= resultIntegrityDamage;
             return true;
         }
         if (smComp.Integrity != 100f)
@@ -56,12 +56,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
         return true;
     }
 
-    private const float EnergyToMatterDamageFactorSlowerOffset = 1000f;
-    private const float EnergyToMatterDamageFactorDeltaOffset = 1000f;
+    private const float EnergyToMatterDamageFactorWide = 1000f;
+    private const float EnergyToMatterDamageFactorCoeff = 2f;
+    private const float EnergyToMatterDamageFactorOffset = 1f;
     private float EnergyToMatterDamageFactorFunction(float delta)
     {
-        var offsetedDelta = delta - EnergyToMatterDamageFactorDeltaOffset;
-        return offsetedDelta / (MathF.Abs(offsetedDelta) + EnergyToMatterDamageFactorSlowerOffset);
+        return EnergyToMatterDamageFactorOffset - EnergyToMatterDamageFactorCoeff
+                * MathF.Exp(-1 * MathF.Pow(delta / EnergyToMatterDamageFactorWide, 2));
     }
 
     private const float SafeInternalEnergyToMatterCoeff = 800f;

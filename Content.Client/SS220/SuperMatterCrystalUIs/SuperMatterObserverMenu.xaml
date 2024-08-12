@@ -7,8 +7,9 @@
     Title="{Loc 'apc-menu-title'}"
     Resizable="False"
     MinSize="512 512"
-    SetSize="512 512">
+    SetSize="512 512"
+    RectClipContent="False">
     <BoxContainer Orientation="Vertical">
-        <plot:Plot2DTimeView Name="PlotView2D" MinHeight="256" MouseFilter="Stop" Margin="8 8" />
+        <plot:PlotSequencedView Name="PlotValueOverTime" MinHeight="256" MouseFilter="Stop" Margin="8 8"  />
         </BoxContainer>
 </controls:FancyWindow>

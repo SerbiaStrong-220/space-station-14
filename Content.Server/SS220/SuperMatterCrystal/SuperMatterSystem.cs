@@ -6,7 +6,6 @@ using Content.Shared.Atmos;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
-
 public sealed partial class SuperMatterSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -25,9 +24,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         base.Initialize();
 
         InitializeAnnouncement();
-        InitializeInteractions();
-
-        SubscribeLocalEvent<SuperMatterComponent, ComponentInit>(OnComponentInit);
+        InitializeEventHandler();
     }
     public override void Update(float frameTime)
     {
@@ -40,16 +37,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
                 continue;
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
             SuperMatterUpdate(crystal, frameTime);
-            if (_gameTiming.CurTime > smComp.NextDamageImplementTime)
-            {
-                if (!TryImplementIntegrityDamage(smComp))
-                    MarkAsLaminated(crystal);
-                var announceType = GetAnnounceIntegrityType(smComp);
-                RadioAnnounceIntegrity(crystal, announceType);
-                smComp.IntegrityDamageAccumulator = 0f;
-                smComp.NextDamageImplementTime = _gameTiming.CurTime
-                                            + TimeSpan.FromSeconds(IntegrityDamageICAnnounceDelay);
-            }
+            UpdateDelayed(crystal, frameTime);
         }
     }
 
@@ -73,11 +61,20 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
-        var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure);
+        var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
+                        * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(crystal.Comp, gasMixture) + 1);
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
         crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
 
+
+        EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
+        crystal.Comp.Matter -= decayedMatter;
+        _atmosphere.AddHeat(gasMixture, releasedEnergyPerFrame + decayedMatter * GetHeatCapacity(crystal.Comp.Temperature, crystal.Comp.Matter));
+        AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
+    }
+    private void UpdateDelayed(Entity<SuperMatterComponent> crystal, float frameTime)
+    {
         if (crystal.Comp.NextOutputEnergySourceUpdate < _gameTiming.CurTime)
         {
             ReleaseEnergy(crystal);
@@ -85,24 +82,16 @@ public sealed partial class SuperMatterSystem : EntitySystem
             crystal.Comp.AccumulatedZapEnergy = 0;
             crystal.Comp.NextOutputEnergySourceUpdate = _gameTiming.CurTime + crystal.Comp.OutputEnergySourceUpdateDelay;
         }
-
-        EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
-    }
-    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref ComponentInit args)
-    {
-        var (uid, _) = entity;
-        RadiationSourceComponent? radiationSource = null;
-        LightningArcShooterComponent? arcShooterComponent = null;
-
-        if (!TryComp(uid, out radiationSource))
-            radiationSource = AddComp<RadiationSourceComponent>(uid);
-        if (!TryComp(uid, out arcShooterComponent))
-            arcShooterComponent = AddComp<LightningArcShooterComponent>(uid);
-
-        radiationSource.Enabled = false;
-        arcShooterComponent.Enabled = false;
-        Dirty(uid, radiationSource);
-        Dirty(uid, arcShooterComponent);
+        if (_gameTiming.CurTime > crystal.Comp.NextDamageImplementTime)
+        {
+            if (!TryImplementIntegrityDamage(crystal.Comp))
+                MarkAsLaminated(crystal);
+            var announceType = GetAnnounceIntegrityType(crystal.Comp);
+            RadioAnnounceIntegrity(crystal, announceType);
+            crystal.Comp.IntegrityDamageAccumulator = 0f;
+            crystal.Comp.NextDamageImplementTime = _gameTiming.CurTime
+                                        + TimeSpan.FromSeconds(1);
+        }
     }
     private void ReleaseEnergy(Entity<SuperMatterComponent> crystal)
     {
@@ -123,10 +112,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var timeDecreaseBetweenArcs = Math.Clamp((accumulatedZapEnergyTrashed / ZapPerEnergy - MaxAmountOfArcs)
                                                     * ArcsToTimeDecreaseEfficiency, 0f, MaxTimeDecreaseBetweenArcs);
         if (maxAmountOfArcs == 0)
-        {
             arcShooterComponent.Enabled = false;
-            Dirty(crystalUid, arcShooterComponent);
-        }
         else
         {
             arcShooterComponent.Enabled = true;
@@ -146,7 +132,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var releasedGasMixture = new GasMixture(gasMixture.Volume) { Temperature = crystalTemperature };
         releasedGasMixture.SetMoles(Gas.Oxygen, oxygenMoles);
         releasedGasMixture.SetMoles(Gas.Plasma, plasmaMoles);
-
         _atmosphere.Merge(gasMixture, releasedGasMixture);
         _atmosphere.AddHeat(gasMixture, heatEnergy);
     }

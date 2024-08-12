@@ -7,24 +7,28 @@ using System.Numerics;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
 
-internal sealed class Plot2DTimeView : Control
+internal sealed class PlotSequencedView : Plot
 {
-    [Dependency] private readonly IResourceCache _cache = default!;
-    private Plot2DTimePoints _plotPoints;
-    private const int SerifSize = 5;
+    public Color FirstGraphicColor = Color.LightGreen;
+    public Color SecondGraphicColor = Color.Red;
+    public float FirstGraphicThickness = 3f;
+    public float SecondGraphicThickness = 3f;
+    private void DrawFirstGraphicLine(DrawingHandleScreen handle, Vector2 from, Vector2 to)
+                    => DrawLine(handle, from, to, FirstGraphicThickness, FirstGraphicColor);
+
+    private PlotPoints2D _plotPoints;
+    private const int SerifSize = 12;
     private const int FontSize = 12;
-    private readonly List<float> _steps = new() { 0.2f, 0.4f, 0.6f, 0.8f };
     private readonly Font _font;
-    private const int AxisBorderPosition = 20;
-    public Plot2DTimeView()
+    public PlotSequencedView() : base()
     {
+        _font = AxisFont;
         RectClipContent = true;
         IoCManager.InjectDependencies(this);
-        _plotPoints = new Plot2DTimePoints(128);
+        _plotPoints = new PlotPoints2D(128);
 
-        _font = _cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", FontSize);
     }
-    public void LoadPlot2DTimePoints(Plot2DTimePoints plotPoints)
+    public void LoadPlot2DTimePoints(PlotPoints2D plotPoints)
     {
         _plotPoints = plotPoints;
     }
@@ -34,6 +38,7 @@ internal sealed class Plot2DTimeView : Control
     }
     public void SetXLabel(string label) => _plotPoints.XLabel = label;
     public void SetYLabel(string label) => _plotPoints.YLabel = label;
+    public void SetLabel(string label) => _plotPoints.Label = label;
 
     protected override void Draw(DrawingHandleScreen handle)
     {
@@ -59,40 +64,23 @@ internal sealed class Plot2DTimeView : Control
             var firstPoint = CorrectVector(deltaXWidth * (i - 1) + AxisBorderPosition, point2Ds[i - 1].Y * yNormalizer);
             var secondPoint = CorrectVector(deltaXWidth * i + AxisBorderPosition, point2Ds[i].Y * yNormalizer);
 
-            handle.DrawLine(firstPoint, secondPoint, Color.Black);
+            DrawFirstGraphicLine(handle, firstPoint, secondPoint);
         }
         //Draw axis here to draw it on top of other
         DrawAxis(handle, yMaxResult, xWidthResult);
     }
     private void DrawAxis(DrawingHandleScreen handle, float maxY, float xWidth)
     {
+        base.DrawAxis(handle, _plotPoints);
 
         //start with drawing axises
-        handle.DrawLine(CorrectVector(AxisBorderPosition, AxisBorderPosition), CorrectVector(PixelWidth, AxisBorderPosition), Color.Black);
-        handle.DrawLine(CorrectVector(AxisBorderPosition, AxisBorderPosition), CorrectVector(AxisBorderPosition, PixelHeight), Color.Black);
-        foreach (var step in _steps)
+        foreach (var step in AxisSteps)
         {
             // X
-            handle.DrawLine(CorrectVector(PixelWidth * step + AxisBorderPosition, AxisBorderPosition),
-                                CorrectVector(PixelWidth * step + AxisBorderPosition, AxisBorderPosition + SerifSize), Color.Black);
             handle.DrawString(_font, CorrectVector(PixelWidth * step, AxisBorderPosition), $"{step * xWidth - xWidth:0.}");
             // Y
-            handle.DrawLine(CorrectVector(AxisBorderPosition, PixelHeight * step),
-                                CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step), Color.Black);
             handle.DrawString(_font, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step), $"{step * maxY:0.}");
         }
         handle.DrawString(_font, CorrectVector(AxisBorderPosition + 2 * SerifSize, AxisBorderPosition), $"{-xWidth:0.}");
-        // here goes labels
-        handle.DrawString(_font, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight), $"{_plotPoints.YLabel}");
-        // !!!TODO: Add title!!!
-        // !!!TODO: Make it it centered and below graph!!!
-        if (_plotPoints.XLabel != null)
-            handle.DrawString(_font, CorrectVector(PixelWidth - _plotPoints.XLabel.Length * FontSize, AxisBorderPosition), $"{_plotPoints.XLabel}");
-    }
-    private Vector2 CorrectVector(float x, float y)
-    {
-        var newX = Math.Clamp(x, 1f, PixelWidth);
-        var newY = Math.Clamp(PixelHeight - y, 1f, PixelHeight);
-        return new Vector2(newX, newY);
     }
 }
