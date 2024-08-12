@@ -6,8 +6,8 @@
     state: icon
 
 - type: stealTargetGroup
-  id: EtchedBrassKnuckles
-  name: engraved brass knuckles
+  id: EngravedKnuckleduster
+  name: engraved knuckleduster
   sprite:
-    sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
+    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
     state: icon

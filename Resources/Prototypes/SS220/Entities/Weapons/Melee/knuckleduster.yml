@@ -2,16 +2,16 @@
 
 #Quartermaster
 - type: entity
-  name: brass knuckles
+  name: engraved knuckleduster
   parent: BaseItem
-  id: EtchedBrassKnuckles
-  description: кастет
+  id: EngravedKnuckleduster
+  description: The quartermaster's engraved knuckleduster, made by special order. It was issued as a means of combating the increased cases of theft of personal belongings and materials from the supply department.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
+    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
     state: icon
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
+    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
     slots: [gloves]
   - type: Item
     size: Small
@@ -36,8 +36,8 @@
     damageSound: /Audio/SS220/Weapons/brassKnukles/critical-hit.ogg
   - type: Tag
     tags:
-    - EtchedBrassKnuckles
+    - EngravedKnuckleduster
   - type: StaticPrice
     price: 1000
   - type: StealTarget
-    stealGroup: EtchedBrassKnuckles
+    stealGroup: EngravedKnuckleduster
