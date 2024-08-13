@@ -71,10 +71,10 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
 
             if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
             {
-                if (fireMode.FireModeName is null)
-                    text = entProto.Name;
-                else
+                if (fireMode.FireModeName is not null)
                     text = fireMode.FireModeName;
+                else
+                    text = entProto.Name;
             }
             else if (_prototypeManager.TryIndex<HitscanPrototype>(fireMode.Prototype, out _))
             {
@@ -154,10 +154,10 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
                 if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
                 {
 
-                    if (fireMode.FireModeName is null)
-                        name = entProto.Name;
-                    else
+                    if (fireMode.FireModeName is not null)
                         name = fireMode.FireModeName;
+                    else
+                        name = entProto.Name;
 
                     projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
                     projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;

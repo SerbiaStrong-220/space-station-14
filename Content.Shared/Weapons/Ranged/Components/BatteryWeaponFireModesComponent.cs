@@ -39,10 +39,10 @@ public sealed partial class BatteryWeaponFireMode
 
     //SS220 Add Multifaze gun begin
     [DataField("fireModeName")]
-    public string? FireModeName = null;
+    public string? FireModeName;
 
     [DataField]
-    public string? SoundGunshot = null;
+    public string? SoundGunshot;
     //SS220 Add Multifaze gun end
 
     /// <summary>
