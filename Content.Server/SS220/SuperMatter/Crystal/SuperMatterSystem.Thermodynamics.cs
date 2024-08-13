@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Atmos.EntitySystems;
+using Content.Shared.SS220.SuperMatter.Functions;
 using Content.Shared.Atmos;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
@@ -16,9 +17,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
 
-    private float GetSingularityTeslaEquilibriumPressure(float temperature) => SuperMatterPhaseDiagram.GetSingularityTeslaEquilibriumPressure(temperature);
-    private float GetSingularityResonanceEquilibriumPressure(float temperature) => SuperMatterPhaseDiagram.GetSingularityResonanceEquilibriumPressure(temperature);
-    private float GetResonanceTeslaEquilibriumPressure(float temperature) => SuperMatterPhaseDiagram.GetResonanceTeslaEquilibriumPressure(temperature);
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
     private float GetDeltaChemistryPotential(float temperature, float pressure) => SuperMatterInternalProcess.GetDeltaChemistryPotential(temperature, pressure);
@@ -30,7 +28,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private float GetRelativeGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture) => SuperMatterGasResponse.GetRelativeGasesInfluenceToMatterDecay(smComp, gasMixture);
     private float GetFlatGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture) => SuperMatterGasResponse.GetFlatGasesInfluenceToMatterDecay(smComp, gasMixture);
 
-    public const float MatterNondimensionalization = 32f; // like C mass in Mendeleev table
+    public const float MatterNondimensionalization = SuperMatterFunctions.MatterNondimensionalization; // like C mass in Mendeleev table
     public const float CHEMISTRY_POTENTIAL_BASE = 10f; // parrots now, but need to concrete in future
     private const float MATTER_DECAY_BASE_RATE = 80f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
@@ -101,28 +99,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
         }
 
         return resultAdditionalMatter;
-    }
-    private SuperMatterPhaseState GetSuperMatterPhase(Entity<SuperMatterComponent> crystal, GasMixture gasMixture)
-    {
-        var (crystalUid, smComp) = crystal;
-
-        if (smComp.Temperature < Atmospherics.T20C)
-        {
-            if (gasMixture.Pressure < GetSingularityTeslaEquilibriumPressure(smComp.Temperature))
-                return SuperMatterPhaseState.TeslaRegion;
-            else
-                return SuperMatterPhaseState.SingularityRegion;
-        }
-        if (smComp.Temperature > Atmospherics.T20C)
-        {
-            if (gasMixture.Pressure < GetResonanceTeslaEquilibriumPressure(smComp.Temperature))
-                return SuperMatterPhaseState.TeslaRegion;
-            if (gasMixture.Pressure < GetSingularityResonanceEquilibriumPressure(smComp.Temperature))
-                return SuperMatterPhaseState.ResonanceRegion;
-            return SuperMatterPhaseState.TeslaRegion;
-        }
-
-        return SuperMatterPhaseState.InertRegion;
     }
     /// <summary>
     /// In future maybe useful if a need to make/init own SM gasStructs

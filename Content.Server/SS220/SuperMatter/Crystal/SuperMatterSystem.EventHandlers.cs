@@ -59,17 +59,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void OnActivationEvent(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
     {
-        if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
-        {
-            Log.Error($"Tried to activate SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
+        if (entity.Comp.DisabledByAdmin)
             return;
-        }
-        if (smComp.DisabledByAdmin)
-            return;
-        if (!smComp.Activated)
+        if (!entity.Comp.Activated)
         {
             SendAdminChatAlert(entity, "supermatter-activated", $"{EntityManager.ToPrettyString(args.Target)}");
-            smComp.Activated = true;
+            entity.Comp.Activated = true;
         }
         args.Handled = true;
     }

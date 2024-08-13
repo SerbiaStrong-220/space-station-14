@@ -1,7 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Client.Resources;
-using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Client.Graphics;
 using System.Numerics;
 
@@ -81,6 +78,5 @@ internal sealed class PlotSequencedView : Plot
             // Y
             handle.DrawString(_font, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step), $"{step * maxY:0.}");
         }
-        handle.DrawString(_font, CorrectVector(AxisBorderPosition + 2 * SerifSize, AxisBorderPosition), $"{-xWidth:0.}");
     }
 }

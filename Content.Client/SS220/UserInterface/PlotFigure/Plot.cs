@@ -4,7 +4,6 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.Graphics;
 using System.Numerics;
-using System.Security.Policy;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
 
@@ -49,25 +48,25 @@ internal abstract class Plot : Control
         {
             pointSpan[i] = new DrawVertexUV2D(pointList[i], new Vector2(0.5f, 0.5f));
         }
-        // handle.DrawLine(to, from, Color.AliceBlue);
-        // handle.DrawLine(new Vector2(0f, 0f), leftTop, Color.Aqua);
-        // handle.DrawLine(new Vector2(0f, 0f), rightBottom, Color.BetterViolet);
-
-        // Angle angle = Math.Atan2(fromToVector.X, fromToVector.Y);
-        // var oldHandleTransform = handle.GetTransform();
-        // var boxUI = new UIBox2(leftTop, rightBottom);
-        // var newHandleTransform = Matrix3Helpers.CreateTransform(oldHandleTransform.M31, oldHandleTransform.M32, Math.PI / 10);
-        // handle.SetTransform(newHandleTransform);
-        // handle.DrawRect(boxUI, color, true);
-        // handle.SetTransform(oldHandleTransform);
         handle.DrawPrimitives(DrawPrimitiveTopology.TriangleStrip, Texture.White, pointSpan, color);
     }
     internal Vector2 CorrectVector(float x, float y)
     {
-        var newX = Math.Clamp(x, 1f, PixelWidth);
-        var newY = Math.Clamp(PixelHeight - y, 1f, PixelHeight);
-        return new Vector2(newX, newY);
+        return new Vector2(GetCorrectX(x), GetCorrectY(y));
     }
+    internal Vector2 CorrectVector(Vector2 vector)
+    {
+        return new Vector2(GetCorrectX(vector.X), GetCorrectY(vector.Y));
+    }
+    internal float GetCorrectX(float x)
+    {
+        return Math.Clamp(x, 0f, PixelWidth);
+    }
+    internal float GetCorrectY(float y)
+    {
+        return Math.Clamp(PixelHeight - y, 0f, PixelHeight);
+    }
+
     internal void DrawAxis(DrawingHandleScreen handle, LabelContainer? mainLabels = null, LabelContainer? secondLabels = null)
     {
         // TODO think of adding AxisDots here or in childs.

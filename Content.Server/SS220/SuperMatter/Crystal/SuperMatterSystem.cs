@@ -3,6 +3,7 @@ using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Tesla.Components;
 using Content.Shared.Radiation.Components;
 using Content.Shared.Atmos;
+using Content.Shared.SS220.SuperMatter.Functions;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
@@ -48,16 +49,19 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (!TryGetCrystalGasMixture(crystal.Owner, out var gasMixture))
         {
             Log.Error($"Got null GasMixture in {crystal}. AddedComponentToGetIt");
-            // ADD IT!
             return;
         }
 
         // here we ask for values before update SM parameters
+        // f.e. we save prev value for broadcast's accumulators
+        var prevInternalEnergy = crystal.Comp.InternalEnergy;
+        var prevMatter = crystal.Comp.Matter;
+        crystal.Comp.PressureAccumulator += gasMixture.Pressure;
         var decayedMatter = CalculateDecayedMatter(crystal, gasMixture) * frameTime;
         // this method make changes in SM parameters!
         EvaluateDeltaInternalEnergy(crystal, gasMixture, frameTime);
 
-        var smState = GetSuperMatterPhase(crystal, gasMixture);
+        var smState = SuperMatterFunctions.GetSuperMatterPhase(crystal.Comp.Temperature, gasMixture.Pressure);
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
@@ -67,11 +71,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
         crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
 
-
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
         _atmosphere.AddHeat(gasMixture, releasedEnergyPerFrame + decayedMatter * GetHeatCapacity(crystal.Comp.Temperature, crystal.Comp.Matter));
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
+
+        // Update Accumulators for Broadcasting to Clients
+        crystal.Comp.UpdatesBetweenBroadcast++;
+        crystal.Comp.MatterDervAccumulator = (crystal.Comp.Matter - prevMatter) / frameTime;
+        crystal.Comp.InternalEnergyDervAccumulator = (crystal.Comp.InternalEnergy - prevInternalEnergy) / frameTime;
     }
     private void UpdateDelayed(Entity<SuperMatterComponent> crystal, float frameTime)
     {
@@ -88,6 +96,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
                 MarkAsLaminated(crystal);
             var announceType = GetAnnounceIntegrityType(crystal.Comp);
             RadioAnnounceIntegrity(crystal, announceType);
+            BroadcastData(crystal);
             crystal.Comp.IntegrityDamageAccumulator = 0f;
             crystal.Comp.NextDamageImplementTime = _gameTiming.CurTime
                                         + TimeSpan.FromSeconds(1);

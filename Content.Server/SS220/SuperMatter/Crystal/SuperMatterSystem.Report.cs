@@ -35,7 +35,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var localePath = "supermatter-" + announceType.ToString().ToLower();
         var message = Loc.GetString(localePath, ("integrity", integrity));
         if (TryGetChannelKey(announceType, out var channelKey))
-            message = channelKey + message;
+            message = channelKey + ' ' + message;
         RadioAnnouncement(crystal.Owner, message);
     }
     public void StationAnnounceIntegrity(Entity<SuperMatterComponent> crystal, AnnounceIntegrityTypeEnum announceType)

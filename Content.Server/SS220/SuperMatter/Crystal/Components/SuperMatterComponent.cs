@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.SS220.SuperMatterCrystal;
 using Robust.Shared.Audio;
 using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
@@ -9,18 +8,29 @@ namespace Content.Server.SS220.SuperMatterCrystal.Components;
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class SuperMatterComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool Activated = false;
     /// <summary> Super flag for freezing all SM interaction.
     /// Only changing it to true will invoke base SM logic </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool DisabledByAdmin = false;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool IsDelaminate = false;
 
 
     // Accumulators
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string? Name;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public int UpdatesBetweenBroadcast;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float PressureAccumulator;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float MatterDervAccumulator;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float InternalEnergyDervAccumulator;
     [ViewVariables(VVAccess.ReadOnly)]
     public float IntegrityDamageAccumulator = 0f;
-
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public float AccumulatedZapEnergy = 0f;
     [DataField, ViewVariables(VVAccess.ReadOnly)]
@@ -39,6 +49,10 @@ public sealed partial class SuperMatterComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     [AutoPausedField]
     public TimeSpan NextDamageStationAnnouncement = default!;
+    [ViewVariables(VVAccess.ReadOnly)]
+    [AutoPausedField]
+    public TimeSpan TimeOfDelamination = default!;
+
 
     // SM params
 
@@ -65,20 +79,11 @@ public sealed partial class SuperMatterComponent : Component
 
     // ProtoId Sector
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public ProtoId<EntityPrototype> ConsumeResultEntityPrototype = "Ash";
 
     // Audio Sector
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public SoundSpecifier ConsumeSound = new SoundPathSpecifier("/Audio/SS220/Admin_sounds/ahelp_sound.ogg");
-}
-
-public enum SuperMatterPhaseState
-{
-    ErrorState = -1,
-    InertRegion,
-    SingularityRegion,
-    ResonanceRegion,
-    TeslaRegion
 }

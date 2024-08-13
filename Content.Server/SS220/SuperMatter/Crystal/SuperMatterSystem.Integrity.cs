@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Atmos;
 using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Shared.Atmos;
+using Content.Shared.SS220.SuperMatter.Functions;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -20,13 +21,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         var safeInternalEnergy = GetSafeInternalEnergyToMatterValue(matter);
         var delta = internalEnergy - safeInternalEnergy;
-        var damageFromDelta = EnergyToMatterDamageFactorFunction(delta);
+        var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta);
         return damageFromDelta;
     }
     public float GetSafeInternalEnergyToMatterValue(float matter)
     {
         var normalizedMatter = matter / MatterNondimensionalization;
-        return SafeInternalEnergyToMatterFunction(normalizedMatter);
+        return SuperMatterFunctions.SafeInternalEnergyToMatterFunction(normalizedMatter);
     }
     public void AddIntegrityDamage(SuperMatterComponent smComp, float damage)
     {
@@ -55,29 +56,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
             smComp.Integrity = 100f;
         return true;
     }
-
-    private const float EnergyToMatterDamageFactorWide = 1000f;
-    private const float EnergyToMatterDamageFactorCoeff = 2f;
-    private const float EnergyToMatterDamageFactorOffset = 1f;
-    private float EnergyToMatterDamageFactorFunction(float delta)
-    {
-        return EnergyToMatterDamageFactorOffset - EnergyToMatterDamageFactorCoeff
-                * MathF.Exp(-1 * MathF.Pow(delta / EnergyToMatterDamageFactorWide, 2));
-    }
-
-    private const float SafeInternalEnergyToMatterCoeff = 800f;
-    private const float SafeInternalEnergyToMatterSlowerOffset = 50f;
-    private float SafeInternalEnergyToMatterFunction(float normalizedMatter)
-    {
-        return SafeInternalEnergyToMatterCoeff * MathF.Pow(normalizedMatter, 1.5f)
-                            / (normalizedMatter + SafeInternalEnergyToMatterSlowerOffset);
-    }
-
     private const float TemperatureDamageFactorCoeff = 3f;
     private const float TemperatureDamageFactorSlowerOffset = 20f;
     private float TemperatureDamageFactorFunction(float normalizedTemperature)
     {
-        var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterPhaseDiagram.SuperMatterTriplePointTemperature;
+        var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
         var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
                 (normalizedMaxTemperature - TemperatureDamageFactorSlowerOffset);
 

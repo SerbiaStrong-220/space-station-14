@@ -1,13 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Shared.SS220.SuperMatter.Functions;
 using Content.Shared.Atmos;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
 public static class SuperMatterInternalProcess
 {
-    private const float TriplePointTemperature = SuperMatterPhaseDiagram.SuperMatterTriplePointTemperature;
-    private const float TriplePointPressure = SuperMatterPhaseDiagram.SuperMatterTriplePointPressure;
+    private const float TriplePointTemperature = SuperMatterFunctions.SuperMatterTriplePointTemperature;
+    private const float TriplePointPressure = SuperMatterFunctions.SuperMatterTriplePointPressure;
     ///<summary> TODO desc </summary>
     ///<returns> Return parrots value of  Decay multiplier </returns>
     public static float GetDecayMatterMultiplier(float temperature, float pressure)

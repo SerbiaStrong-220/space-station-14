@@ -39,6 +39,11 @@
   - type: Icon
     sprite: SS220/Objects/Specific/jerrycan.rsi
     state: icon
+  - type: Speech
+    speechSounds: Pai
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Engineering
   - type: Clickable
   - type: InteractionOutline
   - type: InteractionPopup # add its own hugging!

@@ -29,7 +29,7 @@ public sealed class Color2DPointView : LabelContainer
         _x = MakeCoordFrom(xParams.xOffset, xParams.xSize, xParams.xStep);
         _y = MakeCoordFrom(yParams.yOffset, yParams.ySize, yParams.yStep);
     }
-    public void EvalFunction(FunctionDelegate func)
+    public void EvalFunction(Func<float, float, float> func)
     {
         foreach (var x in _x)
             foreach (var y in _y)
@@ -47,7 +47,6 @@ public sealed class Color2DPointView : LabelContainer
         _y = points.Select(entry => entry.Y).Distinct().ToList();
     }
 
-    public delegate float FunctionDelegate(float x, float y);
     private List<float> MakeCoordFrom(float offset, float size, float step)
     {
         var returnList = new List<float>();
