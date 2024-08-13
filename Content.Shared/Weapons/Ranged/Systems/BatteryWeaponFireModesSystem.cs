@@ -7,6 +7,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using static Content.Shared.Weapons.Ranged.Systems.SharedGunSystem;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -24,6 +25,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ActivateInWorldEvent>(OnInteractHandEvent);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, GetVerbsEvent<Verb>>(OnGetVerb);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<BatteryWeaponFireModesComponent, ComponentInit>(OnInit); //SS220 Add Multifaze gun
     }
 
     private void OnExamined(EntityUid uid, BatteryWeaponFireModesComponent component, ExaminedEvent args)
@@ -201,4 +203,11 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", name)), uid, user.Value); //SS220 Add Multifaze gun
         }
     }
+
+    //SS220 Add Multifaze gun begin
+    private void OnInit(EntityUid uid, BatteryWeaponFireModesComponent component, ref ComponentInit args)
+    {
+        SetFireMode(uid, component, component.CurrentFireMode);
+    }
+    //SS220 Add Multifaze gun end
 }

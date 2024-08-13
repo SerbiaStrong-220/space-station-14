@@ -15,15 +15,15 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/antiquelasergun.rsi
   - type: Gun
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: BulletDisabler
       fireCost: 100
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
     - proto: RedMediumLaser
       fireModeName: Красный средний лазер
       fireCost: 50
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
     - proto: AnomalousParticleZetaStrong
       fireCost: 200
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
