@@ -7,7 +7,6 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using static Content.Shared.Weapons.Ranged.Systems.SharedGunSystem;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
