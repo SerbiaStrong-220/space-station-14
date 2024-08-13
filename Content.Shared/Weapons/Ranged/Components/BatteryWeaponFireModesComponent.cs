@@ -2,6 +2,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+// using Robust.Shared.Audio;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -35,7 +36,12 @@ public sealed partial class BatteryWeaponFireMode
     /// The projectile prototype associated with this firing mode
     /// </summary>
     [DataField("proto", required: true)]
-    public EntProtoId Prototype = default!;
+    public string Prototype = default!; //SS220 Add Multifaze gun
+
+    //SS220 Add Multifaze gun begin
+    [DataField("fireModeName")]
+    public string? FireModeName = null;
+    //SS220 Add Multifaze gun end
 
     /// <summary>
     /// The battery cost to fire the projectile associated with this firing mode
