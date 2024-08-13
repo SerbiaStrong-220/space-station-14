@@ -15,6 +15,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!; //SS220 Add Multifaze gun
+    [Dependency] private readonly SharedGunSystem _gunSystem = default!; //SS220 Add Multifaze gun
 
     public override void Initialize()
     {
@@ -190,6 +191,9 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             Log.Error($"{fireMode.Prototype} is not Entity or Hitscan prototype");
             return;
         }
+
+        if (fireMode.SoundGunshot is not null)
+            _gunSystem.SetSoundGunshot(uid, fireMode.SoundGunshot);
         //SS220 Add Multifaze gun end
 
         if (user != null)

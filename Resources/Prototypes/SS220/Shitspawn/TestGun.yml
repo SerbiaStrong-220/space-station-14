@@ -26,9 +26,11 @@
       fireCost: 50
     - proto: AnomalousParticleZetaStrong
       fireCost: 200
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
     - proto: RedLaser
       fireModeName: Красный лазер
       fireCost: 50
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: MagazineVisuals
     magState: mag
     steps: 5

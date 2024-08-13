@@ -2,7 +2,6 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-// using Robust.Shared.Audio;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -41,6 +40,9 @@ public sealed partial class BatteryWeaponFireMode
     //SS220 Add Multifaze gun begin
     [DataField("fireModeName")]
     public string? FireModeName = null;
+
+    [DataField]
+    public string? SoundGunshot = null;
     //SS220 Add Multifaze gun end
 
     /// <summary>
