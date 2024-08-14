@@ -1,0 +1,21 @@
+- type: weightedRandomEntity
+  id: HallucinationSupermatterCrystal
+  weights:
+    Lightning: 8
+    JetpackEffect: 15
+    EffectEmpPulse: 6
+    EffectRCDDeconstruct2: 7
+    EffectSparks: 5
+    EffectTeslaSparks: 10
+    MobSpiderSpace: 1
+    BalloonCommanderUnfolded: 0.2
+    DarkReaperPortalEffect: 0.1
+    MeteorUrist: 0.1
+
+- type: entity
+  parent: BalloonCommander
+  id: BalloonCommanderUnfolded
+  hideSpawnMenu: true
+  components:
+  - type: Foldable
+    folded: false

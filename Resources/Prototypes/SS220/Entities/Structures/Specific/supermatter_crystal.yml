@@ -33,6 +33,15 @@
   - type: CollisionWake
     enabled: false
   - type: SuperMatter # all things like radiation source etc will be added through SMSystem
+  - type: HallucinationSource
+    weightedRandom: HallucinationSupermatterCrystal
+    range: 6
+    rangeEnd: 8
+    betweenHallucinations: 4
+    hallucinationMinTime: 2
+    hallucinationMaxTime: 10
+    totalDuration: 20
+    eyeProtectionDependent: true
   - type: Sprite
     sprite: SS220/Objects/Specific/jerrycan.rsi
     state: icon
