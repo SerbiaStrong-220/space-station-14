@@ -11,24 +11,16 @@
 # Jumpsuit
 - type: loadout
   id: AtmosphericTechnicianJumpsuitTurtleneck
-  equipment: AtmosphericTechnicianJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: AtmosphericTechnicianTurtleneck
-
-- type: startingGear
-  id: AtmosphericTechnicianJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitAtmosphericTechnicianTurtleneck
 
 - type: loadout
   id: AtmosphericTechnicianJumpskirtTurtleneck
-  equipment: AtmosphericTechnicianJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: AtmosphericTechnicianTurtleneck
-
-- type: startingGear
-  id: AtmosphericTechnicianJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtAtmosphericTechnicianTurtleneck

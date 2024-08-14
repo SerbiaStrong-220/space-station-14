@@ -97,6 +97,7 @@
     - type: DeleteOnTrigger
     - type: FlashOnTrigger
       range: 6
+      stun: true # 220 flash grenade stun
     - type: EmitSoundOnTrigger
       sound:
         path: "/Audio/Effects/flash_bang.ogg"

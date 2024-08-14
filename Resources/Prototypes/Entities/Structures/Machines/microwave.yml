@@ -105,6 +105,7 @@
   - type: GuideHelp
     guides:
     - Chef
+    - FoodRecipes
 
 - type: entity
   id: SyndicateMicrowave
@@ -116,6 +117,7 @@
     cookTimeMultiplier: 0.5
     capacity: 10
     canMicrowaveIdsSafely: false
+    idCardExplosionChance: 0.1 #SS220 Microwave explosion tweak
     explosionChance: 0.3
   - type: Sprite
     sprite: Structures/Machines/microwave_syndie.rsi

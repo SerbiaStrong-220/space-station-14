@@ -1,7 +1,7 @@
 - type: entity
   parent: EmagFake
   id: ArmoryIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -10,7 +10,7 @@
 - type: entity
   parent: EmagFake
   id: AtmosphericsIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -19,7 +19,7 @@
 - type: entity
   parent: EmagFake
   id: BarIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -28,7 +28,7 @@
 - type: entity
   parent: EmagFake
   id: BrigIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -37,7 +37,7 @@
 - type: entity
   parent: EmagFake
   id: BlueshieldIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -46,7 +46,7 @@
 - type: entity
   parent: EmagFake
   id: CaptainIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -55,7 +55,7 @@
 - type: entity
   parent: EmagFake
   id: CargoIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -64,7 +64,7 @@
 - type: entity
   parent: EmagFake
   id: ChapelIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -73,7 +73,7 @@
 - type: entity
   parent: EmagFake
   id: ChemistryIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -82,7 +82,7 @@
 - type: entity
   parent: EmagFake
   id: ChiefEngineerIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -91,7 +91,7 @@
 - type: entity
   parent: EmagFake
   id: ChiefMedicalOfficerIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -100,7 +100,7 @@
 - type: entity
   parent: EmagFake
   id: DetectiveIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -109,7 +109,7 @@
 - type: entity
   parent: EmagFake
   id: EngineeringIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -118,7 +118,7 @@
 - type: entity
   parent: EmagFake
   id: ExternalIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -127,7 +127,7 @@
 - type: entity
   parent: EmagFake
   id: HeadOfPersonnelIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -136,7 +136,7 @@
 - type: entity
   parent: EmagFake
   id: HeadOfSecurityIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -145,7 +145,7 @@
 - type: entity
   parent: EmagFake
   id: HydroponicsIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -154,7 +154,7 @@
 - type: entity
   parent: EmagFake
   id: JanitorIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -163,7 +163,7 @@
 - type: entity
   parent: EmagFake
   id: KitchenIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -172,7 +172,7 @@
 - type: entity
   parent: EmagFake
   id: MaintenanceIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -181,7 +181,7 @@
 - type: entity
   parent: EmagFake
   id: MedicalIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -190,7 +190,7 @@
 - type: entity
   parent: EmagFake
   id: ParamedicIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -199,7 +199,7 @@
 - type: entity
   parent: EmagFake
   id: QuartermasterIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -208,7 +208,7 @@
 - type: entity
   parent: EmagFake
   id: ResearchIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -217,7 +217,7 @@
 - type: entity
   parent: EmagFake
   id: ResearchDirectorIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -226,7 +226,7 @@
 - type: entity
   parent: EmagFake
   id: SalvageIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -235,7 +235,7 @@
 - type: entity
   parent: EmagFake
   id: SecurityIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -244,7 +244,7 @@
 - type: entity
   parent: EmagFake
   id: ServiceIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:
@@ -253,7 +253,7 @@
 - type: entity
   parent: EmagFake
   id: TheatreIDCardEmagFake
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Access
     tags:

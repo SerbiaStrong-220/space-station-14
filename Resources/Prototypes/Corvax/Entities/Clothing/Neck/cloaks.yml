@@ -3,7 +3,7 @@
   id: ClothingNeckCloakCentcomBlack
   name: special operations officer cloak
   description: The NanoTrasen logo embroidered in gold speaks for itself.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Neck/Cloaks/centcom_officer_black.rsi
@@ -13,7 +13,7 @@
   id: ClothingNeckCloakCentcomAdmiral
   name: admiral's cape
   description: A vibrant green cape with gold stitching, worn by Nanotrasen Navy Admirals.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Neck/Cloaks/admiral.rsi

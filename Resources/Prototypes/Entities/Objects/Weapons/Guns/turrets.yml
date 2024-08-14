@@ -147,7 +147,7 @@
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 100
+            damage: 200 #SS220-underused-uplinks-stuff
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -160,7 +160,7 @@
       soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
     - type: BallisticAmmoProvider
       proto: CartridgePistol
-      capacity: 50
+      capacity: 100 #SS220-underused-uplinks-stuff
     - type: Construction
       deconstructionTarget: null
       graph: WeaponTurretSyndicateDisposable
@@ -197,7 +197,7 @@
 
 - type: entity
   name: xeno turret
-  description: Shoots 9mm acid projectiles
+  description: Shoots 9mm acid projectiles.
   parent: BaseWeaponTurret
   id: WeaponTurretXeno
   suffix: Xeno

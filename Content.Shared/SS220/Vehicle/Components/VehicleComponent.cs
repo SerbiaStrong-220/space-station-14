@@ -111,4 +111,14 @@ public sealed partial class VehicleComponent : Component
     [DataField("hideRider")]
     [ViewVariables(VVAccess.ReadWrite)]
     public bool HideRider;
+
+
+    // SS220 Wheelchair fix begin
+    /// <summary>
+    /// Time needed to unbuckle an entity from a vehicle. Overrides Buckle unbuckle time if not null.
+    /// </summary>
+    [DataField("unbuckleTime")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan? UnbuckleTime;
+    // SS220 Wheelchair fix end
 }

@@ -1,7 +1,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatHoodChaplainHoodWhite
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: chaplain's white hood
   description: Maximum piety in this star system.
   components:

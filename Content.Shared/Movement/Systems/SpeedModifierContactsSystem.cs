@@ -64,6 +64,20 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
         _toUpdate.UnionWith(_physics.GetContactingEntities(uid));
     }
 
+    //SS220 Flying mobs slowdown fix begin
+    public void SetWhitelist(EntityUid uid, EntityWhitelist? whitelist, SpeedModifierContactsComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+        {
+            return;
+        }
+
+        component.IgnoreWhitelist = whitelist;
+        Dirty(uid, component);
+        _toUpdate.UnionWith(_physics.GetContactingEntities(uid));
+    }
+    //SS220 Flying mobs slowdown fix end
+
     private void OnShutdown(EntityUid uid, SpeedModifierContactsComponent component, ComponentShutdown args)
     {
         if (!TryComp(uid, out PhysicsComponent? phys))

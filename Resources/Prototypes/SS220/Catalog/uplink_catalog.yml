@@ -117,6 +117,28 @@
   categories:
   - UplinkPointless
 
+- type: listing
+  id: UplinkThermalGlasses
+  name: uplink-thermal-glasses-name
+  description: uplink-thermal-glasses-desc
+  icon: {sprite: Clothing/Eyes/Glasses/thermal.rsi, state: icon }
+  productEntity: ThermalVisorChameleon
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: ThermalVisorImplanter
+  name: uplink-thermal-visor-implanter-name
+  description: uplink-thermal-visor-implanter-desc
+  icon: {sprite: /Textures/SS220/Misc/ThermalEye.rsi, state: EyeON}
+  productEntity: ThermalVisorImplanter
+  cost:
+    Telecrystal: 6
+  categories:
+  - UplinkImplants
+
 # READD-VEHICLES
 - type: listing
   id: UplinkSyndicateSegwayCrate

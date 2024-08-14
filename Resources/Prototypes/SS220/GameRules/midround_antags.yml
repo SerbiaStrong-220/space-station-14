@@ -2,7 +2,7 @@
 - type: entity
   parent: BaseGameRule
   id: DarkReaperSpawn
-  noSpawn: true
+  categories: [ GameRules ]
   components:
   - type: StationEvent
     weight: 7.5
@@ -15,7 +15,7 @@
 - type: entity
   parent: BaseGameRule
   id: DarkReaperSpawnMajor
-  noSpawn: true
+  categories: [ GameRules ]
   components:
   - type: GameRule
     minPlayers: 30

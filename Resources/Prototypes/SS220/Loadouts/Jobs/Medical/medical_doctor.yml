@@ -11,48 +11,32 @@
 # Jumpsuit
 - type: loadout
   id: MedicalDoctorJumpsuitTurtleneck
-  equipment: MedicalDoctorJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: MedicalDoctorTurtleneck
-
-- type: startingGear
-  id: MedicalDoctorJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleColorBlue
 
 - type: loadout
   id: MedicalDoctorJumpsuitTurtleneckAlt
-  equipment: MedicalDoctorJumpsuitTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: MedicalDoctorTurtleneck
-
-- type: startingGear
-  id: MedicalDoctorJumpsuitTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpsuitTurtleAltColorBlue
 
 - type: loadout
   id: MedicalDoctorJumpskirtTurtleneck
-  equipment: MedicalDoctorJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: MedicalDoctorTurtleneck
-
-- type: startingGear
-  id: MedicalDoctorJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleColorBlue
 
 - type: loadout
   id: MedicalDoctorJumpskirtTurtleneckAlt
-  equipment: MedicalDoctorJumpskirtTurtleneckAlt
   effects:
   - !type:GroupLoadoutEffect
     proto: MedicalDoctorTurtleneck
-
-- type: startingGear
-  id: MedicalDoctorJumpskirtTurtleneckAlt
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlue

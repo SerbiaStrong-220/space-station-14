@@ -40,8 +40,6 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-#pragma warning disable 618
-
 namespace Content.Shared.Interaction
 {
     /// <summary>
@@ -169,10 +167,7 @@ namespace Content.Shared.Interaction
                 return;
             }
 
-            if (!uiComp.RequireHands)
-                return;
-
-            if (!_handsQuery.TryComp(ev.Actor, out var hands) || hands.Hands.Count == 0)
+            if (uiComp.RequireHands && !_handsQuery.HasComp(ev.Actor))
                 ev.Cancel();
         }
 
@@ -539,6 +534,21 @@ namespace Content.Shared.Interaction
         public void InteractUsingRanged(EntityUid user, EntityUid used, EntityUid? target,
             EntityCoordinates clickLocation, bool inRangeUnobstructed)
         {
+            if (target != null)
+            {
+                _adminLogger.Add(
+                    LogType.InteractUsing,
+                    LogImpact.Low,
+                    $"{ToPrettyString(user):user} interacted with {ToPrettyString(target):target} using {ToPrettyString(used):used}");
+            }
+            else
+            {
+                _adminLogger.Add(
+                    LogType.InteractUsing,
+                    LogImpact.Low,
+                    $"{ToPrettyString(user):user} interacted with *nothing* using {ToPrettyString(used):used}");
+            }
+
             if (RangedInteractDoBefore(user, used, target, clickLocation, inRangeUnobstructed))
                 return;
 
@@ -560,11 +570,11 @@ namespace Content.Shared.Interaction
         protected bool ValidateInteractAndFace(EntityUid user, EntityCoordinates coordinates)
         {
             // Verify user is on the same map as the entity they clicked on
-            if (coordinates.GetMapId(EntityManager) != Transform(user).MapID)
+            if (_transform.GetMapId(coordinates) != Transform(user).MapID)
                 return false;
 
             if (!HasComp<NoRotateOnInteractComponent>(user))
-                _rotateToFaceSystem.TryFaceCoordinates(user, coordinates.ToMapPos(EntityManager, _transform));
+                _rotateToFaceSystem.TryFaceCoordinates(user, _transform.ToMapCoordinates(coordinates).Position);
 
             return true;
         }
@@ -897,7 +907,7 @@ namespace Content.Shared.Interaction
             Ignored? predicate = null,
             bool popup = false)
         {
-            return InRangeUnobstructed(origin, other.ToMap(EntityManager, _transform), range, collisionMask, predicate, popup);
+            return InRangeUnobstructed(origin, _transform.ToMapCoordinates(other), range, collisionMask, predicate, popup);
         }
 
         /// <summary>
@@ -979,6 +989,11 @@ namespace Content.Shared.Interaction
             if (checkCanUse && !_actionBlockerSystem.CanUseHeldEntity(user, used))
                 return;
 
+            _adminLogger.Add(
+                LogType.InteractUsing,
+                LogImpact.Low,
+                $"{ToPrettyString(user):user} interacted with {ToPrettyString(target):target} using {ToPrettyString(used):used}");
+
             if (RangedInteractDoBefore(user, used, target, clickLocation, true))
                 return;
 
@@ -987,7 +1002,7 @@ namespace Content.Shared.Interaction
             RaiseLocalEvent(target, interactUsingEvent, true);
             DoContactInteraction(user, used, interactUsingEvent);
             DoContactInteraction(user, target, interactUsingEvent);
-            DoContactInteraction(used, target, interactUsingEvent);
+            // Contact interactions are currently only used for forensics, so we don't raise used -> target
             if (interactUsingEvent.Handled)
                 return;
 
@@ -999,7 +1014,7 @@ namespace Content.Shared.Interaction
         /// </summary>
         public void InteractDoAfter(EntityUid user, EntityUid used, EntityUid? target, EntityCoordinates clickLocation, bool canReach)
         {
-            if (target is {Valid: false})
+            if (target is { Valid: false })
                 target = null;
 
             var afterInteractEvent = new AfterInteractEvent(user, used, target, clickLocation, canReach);
@@ -1008,7 +1023,7 @@ namespace Content.Shared.Interaction
             if (canReach)
             {
                 DoContactInteraction(user, target, afterInteractEvent);
-                DoContactInteraction(used, target, afterInteractEvent);
+                // Contact interactions are currently only used for forensics, so we don't raise used -> target
             }
 
             if (afterInteractEvent.Handled)
@@ -1024,7 +1039,7 @@ namespace Content.Shared.Interaction
             if (canReach)
             {
                 DoContactInteraction(user, target, afterInteractUsingEvent);
-                DoContactInteraction(used, target, afterInteractUsingEvent);
+                // Contact interactions are currently only used for forensics, so we don't raise used -> target
             }
         }
 
@@ -1223,7 +1238,7 @@ namespace Content.Shared.Interaction
         /// </summary>
         public bool CanAccessViaStorage(EntityUid user, EntityUid target)
         {
-            if (!_containerSystem.TryGetContainingContainer(target, out var container))
+            if (!_containerSystem.TryGetContainingContainer((target, null, null), out var container))
                 return false;
 
             return CanAccessViaStorage(user, target, container);
@@ -1249,7 +1264,7 @@ namespace Content.Shared.Interaction
             if (Deleted(target))
                 return false;
 
-            if (!_containerSystem.TryGetContainingContainer(target, out var container))
+            if (!_containerSystem.TryGetContainingContainer((target, null, null), out var container))
                 return false;
 
             var wearer = container.Owner;

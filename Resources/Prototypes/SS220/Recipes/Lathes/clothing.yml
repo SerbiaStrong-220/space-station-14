@@ -1,0 +1,84 @@
+# Jumpsuits/skirts
+- type: latheRecipe
+  id: ClothingUniformCentCommOfficer
+  result: ClothingUniformCentCommOfficer
+  completetime: 4
+  materials:
+    Cloth: 300
+    Durathread: 100
+
+- type: latheRecipe
+  id: ClothingUniformJumpsuitCentcomOfficerTurtleneck
+  result: ClothingUniformJumpsuitCentcomOfficerTurtleneck
+  completetime: 4
+  materials:
+    Cloth: 300
+    Durathread: 100
+
+- type: latheRecipe
+  id: ClothingUniformJumpskirtCentcomOfficerTurtleneck
+  result: ClothingUniformJumpskirtCentcomOfficerTurtleneck
+  completetime: 4
+  materials:
+    Cloth: 300
+    Durathread: 100
+
+- type: latheRecipe
+  id: ClothingUniformNanotrasenDiplomat
+  result: ClothingUniformNanotrasenDiplomat
+  completetime: 4
+  materials:
+    Cloth: 300
+    Durathread: 100
+
+#  Winter coats
+- type: latheRecipe
+  id: ClothingOuterWinterCentcomm
+  result: ClothingOuterWinterCentcomm
+  completetime: 3.2
+  materials:
+    Cloth: 500
+    Durathread: 300
+
+# Mantles
+- type: latheRecipe
+  id: ClothingNeckCloakFieldOfficerCentComm
+  result: ClothingNeckCloakFieldOfficerCentComm
+  completetime: 2.8
+  materials:
+    Cloth: 200
+    Durathread: 150
+
+# Hats
+- type: latheRecipe
+  id: ClothingHeadHatNavyFieldOfficerCap
+  result: ClothingHeadHatNavyFieldOfficerCap
+  completetime: 2
+  materials:
+    Cloth: 100
+    Durathread: 50
+
+- type: latheRecipe
+  id: ClothingHeadHatBeretNanoTrasenOfficer
+  result: ClothingHeadHatBeretNanoTrasenOfficer
+  completetime: 2
+  materials:
+    Cloth: 100
+    Durathread: 50
+
+- type: latheRecipe
+  id: ClothingHeadHatBeretNanoTrasenDiplomat
+  result: ClothingHeadHatBeretNanoTrasenDiplomat
+  completetime: 2
+  materials:
+    Cloth: 100
+    Durathread: 50
+
+# Scarfs
+- type: latheRecipe
+  id: ClothingNeckScarfCentcomm
+  result: ClothingNeckScarfCentcomm
+  completetime: 2.8
+  materials:
+    Cloth: 200
+    Durathread: 150

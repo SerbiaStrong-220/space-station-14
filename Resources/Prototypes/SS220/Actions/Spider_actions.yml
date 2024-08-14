@@ -1,0 +1,227 @@
+#Base
+- type: entity
+  id: BaseActionSpawnSpiderEgg
+  abstract: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 200 
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Misc/eggspider.rsi
+      state: icon
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderEggDrone
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  id: BaseActionSpawnSingleSpiderWeb
+  name: spin a web
+  description: Creates a web that slows down your prey.
+  abstract: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Misc/spiderweb.rsi
+      state: spider_web_1
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebFragile
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Egg
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggDrone
+  name: guard spider egg
+  description: He is also a drone and can build crystals and walls.
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderEggDrone
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggHunter
+  name: hunter spider egg
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 300 #КД
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderEggHunter
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggGhost
+  name: ghost spider egg
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 350
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderEggGhost
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggShooter 
+  name: shooter  spider egg
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 380
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderEggShooter
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Spider
+- type: entity
+  id: ActionSpawnSpiderLittle 
+  name: release the spiderlings
+  description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 40 
+    range: 2
+    itemIconStyle: BigAction
+    icon:
+      sprite: Mobs/Animals/spider.rsi
+      state: viper_dead
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: MobSpiderSpaceLittle
+        amount: 3
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Cryctal
+- type: entity
+  id: ActionSpawnSpiderCrystal
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 30 
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: Structures/Decoration/crystal.rsi
+      state: crystal1
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: ShardCrystalBlueXeno
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Wall
+- type: entity
+  id: ActionSpawnSpiderWallWeb
+  name: create a wall
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 12
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: Structures/Walls/web.rsi
+      state: full
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: TableWebSpiders
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: ActionSpawnSpiderWallWeb
+  id: ActionSpawnSpiderWallWebDurable
+  name: create a durable wall
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 16
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: TableWebSpidersDurable
+        amount: 1
+
+#Web
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebShortDelay
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 2
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebLongDelay
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 6
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebDurable
+  name: spin a durable web
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebDurable
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Clown web
+- type: entity
+  id: ActionSpawnSingleSpiderWebClown
+  name: spin a clown web
+  description: Creates a web that slows down your prey.
+  noSpawn: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 30 #КД
+    range: 1.3
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Misc/spiderweb.rsi
+      state: spider_web_clown_1
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebClown
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider

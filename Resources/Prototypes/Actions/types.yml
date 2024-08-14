@@ -37,6 +37,7 @@
   description: Turn the light on and off.
   components:
   - type: InstantAction
+    useDelay: 1
     icon: { sprite: Objects/Tools/flashlight.rsi, state: flashlight }
     iconOn: { sprite: Objects/Tools/flashlight.rsi, state: flashlight-on }
     event: !type:ToggleActionEvent
@@ -121,7 +122,7 @@
   components:
   - type: InstantAction
     checkCanInteract: false
-    charges: 3
+    charges: 5 #SS220-underused-uplinks-stuff begin
     useDelay: 5
     itemIconStyle: BigAction
     priority: -20
@@ -133,11 +134,14 @@
 - type: entity
   id: ActionActivateScramImplant
   name: SCRAM!
-  description: Randomly teleports you within a large distance.
+  #SS220-underused-uplinks-stuff begin
+  description: Randomly teleports you within a medium distance.
+  noSpawn: true
+  #SS220-underused-uplinks-stuff end
   components:
   - type: InstantAction
     checkCanInteract: false
-    charges: 2
+    charges: 12 #SS220 changed
     useDelay: 5
     itemIconStyle: BigAction
     priority: -20
@@ -165,6 +169,8 @@
   name: Morph into Geras
   description:  Morphs you into a Geras - a miniature version of you which allows you to move fast, at the cost of your inventory.
   components:
+  - type: ConfirmableAction
+    popup: gera-transformation-popup
   - type: InstantAction
     itemIconStyle: BigAction
     useDelay: 10 # prevent spam
@@ -345,7 +351,6 @@
   id: ActionToggleWaggingVulp
   name: action-name-toggle-wagging
   description: action-description-toggle-wagging
-  noSpawn: true
   components:
     - type: InstantAction
       icon: { sprite: SS220/Mobs/Customization/vulpkanin_parts.rsi, state: Tail_Icon }

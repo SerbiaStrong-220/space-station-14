@@ -270,6 +270,7 @@
         - Radio
         - DiscreteHealthAnalyzer
         - SurgeryTool
+        - Dropper
       components:
         - Hypospray
         - Injector
@@ -344,6 +345,7 @@
         - Bottle
         - Syringe
         - CigPack
+        - Dropper
       components:
         - Seed
         - Smokable

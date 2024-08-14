@@ -8,265 +8,164 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 
-namespace Content.Client.Options.UI.Tabs
+namespace Content.Client.Options.UI.Tabs;
+
+[GenerateTypedNameReferences]
+public sealed partial class GraphicsTab : Control
 {
-    [GenerateTypedNameReferences]
-    public sealed partial class GraphicsTab : Control
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+    public GraphicsTab()
     {
-        private static readonly float[] UIScaleOptions =
+        IoCManager.InjectDependencies(this);
+        RobustXamlLoader.Load(this);
+
+        Control.AddOptionCheckBox(CVars.DisplayVSync, VSyncCheckBox);
+        Control.AddOptionCheckBox(CCVars220.BloomLightingEnabled, BloomLightingCheckBox); // SS220 Grafon-Lighting
+        Control.AddOption(new OptionFullscreen(Control, _cfg, FullscreenCheckBox));
+        Control.AddOption(new OptionLightingQuality(Control, _cfg, DropDownLightingQuality));
+
+        Control.AddOptionDropDown(
+            CVars.DisplayUIScale,
+            DropDownUIScale,
+            [
+                new OptionDropDownCVar<float>.ValueOption(
+                    0f,
+                    Loc.GetString("ui-options-scale-auto", ("scale", UserInterfaceManager.DefaultUIScale))),
+                // ss220-more-scale-options begin
+                new OptionDropDownCVar<float>.ValueOption(0.75f, Loc.GetString("ui-options-scale-75")),
+                new OptionDropDownCVar<float>.ValueOption(0.80f, Loc.GetString("ui-options-scale-80")),
+                new OptionDropDownCVar<float>.ValueOption(0.85f, Loc.GetString("ui-options-scale-85")),
+                new OptionDropDownCVar<float>.ValueOption(0.90f, Loc.GetString("ui-options-scale-90")),
+                new OptionDropDownCVar<float>.ValueOption(0.95f, Loc.GetString("ui-options-scale-95")),
+                new OptionDropDownCVar<float>.ValueOption(1.00f, Loc.GetString("ui-options-scale-100")),
+                new OptionDropDownCVar<float>.ValueOption(1.05f, Loc.GetString("ui-options-scale-105")),
+                new OptionDropDownCVar<float>.ValueOption(1.10f, Loc.GetString("ui-options-scale-110")),
+                new OptionDropDownCVar<float>.ValueOption(1.15f, Loc.GetString("ui-options-scale-115")),
+                new OptionDropDownCVar<float>.ValueOption(1.20f, Loc.GetString("ui-options-scale-120")),
+                new OptionDropDownCVar<float>.ValueOption(1.25f, Loc.GetString("ui-options-scale-125")),
+                new OptionDropDownCVar<float>.ValueOption(1.30f, Loc.GetString("ui-options-scale-130")),
+                new OptionDropDownCVar<float>.ValueOption(1.35f, Loc.GetString("ui-options-scale-135")),
+                new OptionDropDownCVar<float>.ValueOption(1.40f, Loc.GetString("ui-options-scale-140")),
+                new OptionDropDownCVar<float>.ValueOption(1.45f, Loc.GetString("ui-options-scale-145")),
+                new OptionDropDownCVar<float>.ValueOption(1.50f, Loc.GetString("ui-options-scale-150")),
+                new OptionDropDownCVar<float>.ValueOption(1.55f, Loc.GetString("ui-options-scale-155")),
+                new OptionDropDownCVar<float>.ValueOption(1.60f, Loc.GetString("ui-options-scale-160")),
+                new OptionDropDownCVar<float>.ValueOption(1.65f, Loc.GetString("ui-options-scale-165")),
+                new OptionDropDownCVar<float>.ValueOption(1.70f, Loc.GetString("ui-options-scale-170")),
+                new OptionDropDownCVar<float>.ValueOption(1.75f, Loc.GetString("ui-options-scale-175")),
+                new OptionDropDownCVar<float>.ValueOption(1.80f, Loc.GetString("ui-options-scale-180")),
+                new OptionDropDownCVar<float>.ValueOption(1.85f, Loc.GetString("ui-options-scale-185")),
+                new OptionDropDownCVar<float>.ValueOption(1.90f, Loc.GetString("ui-options-scale-190")),
+                new OptionDropDownCVar<float>.ValueOption(1.95f, Loc.GetString("ui-options-scale-195")),
+                new OptionDropDownCVar<float>.ValueOption(2.00f, Loc.GetString("ui-options-scale-200")),
+                // ss220-more-scale-options end
+            ]);
+
+        var vpStretch = Control.AddOptionCheckBox(CCVars.ViewportStretch, ViewportStretchCheckBox);
+        var vpVertFit = Control.AddOptionCheckBox(CCVars.ViewportVerticalFit, ViewportVerticalFitCheckBox);
+        Control.AddOptionSlider(
+            CCVars.ViewportFixedScaleFactor,
+            ViewportScaleSlider,
+            1,
+            5,
+            (_, value) => Loc.GetString("ui-options-vp-scale-value", ("scale", value)));
+
+        vpStretch.ImmediateValueChanged += _ => UpdateViewportSettingsVisibility();
+        vpVertFit.ImmediateValueChanged += _ => UpdateViewportSettingsVisibility();
+
+        Control.AddOptionSlider(
+            CCVars.ViewportWidth,
+            ViewportWidthSlider,
+            (int)ViewportWidthSlider.Slider.MinValue,
+            (int)ViewportWidthSlider.Slider.MaxValue);
+
+        Control.AddOption(new OptionIntegerScaling(Control, _cfg, IntegerScalingCheckBox));
+        Control.AddOptionCheckBox(CCVars.ViewportScaleRender, ViewportLowResCheckBox, invert: true);
+        Control.AddOptionCheckBox(CCVars.ParallaxLowQuality, ParallaxLowQualityCheckBox);
+        Control.AddOptionCheckBox(CCVars.HudFpsCounterVisible, FpsCounterCheckBox);
+
+        Control.Initialize();
+
+        _cfg.OnValueChanged(CCVars.ViewportMinimumWidth, _ => UpdateViewportWidthRange());
+        _cfg.OnValueChanged(CCVars.ViewportMaximumWidth, _ => UpdateViewportWidthRange());
+
+        UpdateViewportWidthRange();
+        UpdateViewportSettingsVisibility();
+    }
+
+    private void UpdateViewportSettingsVisibility()
+    {
+        ViewportScaleSlider.Visible = !ViewportStretchCheckBox.Pressed;
+        IntegerScalingCheckBox.Visible = ViewportStretchCheckBox.Pressed;
+        ViewportVerticalFitCheckBox.Visible = ViewportStretchCheckBox.Pressed;
+        ViewportWidthSlider.Visible = !ViewportStretchCheckBox.Pressed || !ViewportVerticalFitCheckBox.Pressed;
+    }
+
+    private void UpdateViewportWidthRange()
+    {
+        var min = _cfg.GetCVar(CCVars.ViewportMinimumWidth);
+        var max = _cfg.GetCVar(CCVars.ViewportMaximumWidth);
+
+        ViewportWidthSlider.Slider.MinValue = min;
+        ViewportWidthSlider.Slider.MaxValue = max;
+    }
+
+    private sealed class OptionLightingQuality : BaseOption
+    {
+        private readonly IConfigurationManager _cfg;
+        private readonly OptionDropDown _dropDown;
+
+        private const int QualityVeryLow = 0;
+        private const int QualityLow = 1;
+        private const int QualityMedium = 2;
+        private const int QualityHigh = 3;
+
+        private const int QualityDefault = QualityMedium;
+
+        public OptionLightingQuality(OptionsTabControlRow controller, IConfigurationManager cfg, OptionDropDown dropDown) : base(controller)
         {
-            0f,
-            0.75f,
-            0.8f,
-            0.85f,
-            0.9f,
-            0.95f,
-            1f,
-            1.05f,
-            1.1f,
-            1.15f,
-            1.20f,
-            1.25f,
-            1.3f,
-            1.35f,
-            1.4f,
-            1.45f,
-            1.50f,
-            1.55f,
-            1.6f,
-            1.65f,
-            1.7f,
-            1.75f,
-            1.8f,
-            1.85f,
-            1.9f,
-            1.95f,
-            2f
-        };
-
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-
-        public GraphicsTab()
-        {
-            IoCManager.InjectDependencies(this);
-            RobustXamlLoader.Load(this);
-
-            VSyncCheckBox.OnToggled += OnCheckBoxToggled;
-            FullscreenCheckBox.OnToggled += OnCheckBoxToggled;
-
-            LightingPresetOption.AddItem(Loc.GetString("ui-options-lighting-very-low"));
-            LightingPresetOption.AddItem(Loc.GetString("ui-options-lighting-low"));
-            LightingPresetOption.AddItem(Loc.GetString("ui-options-lighting-medium"));
-            LightingPresetOption.AddItem(Loc.GetString("ui-options-lighting-high"));
-            LightingPresetOption.OnItemSelected += OnLightingQualityChanged;
-
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-auto",
-                                                ("scale", UserInterfaceManager.DefaultUIScale)));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-75"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-80"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-85"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-90"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-95"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-100"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-105"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-110"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-115"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-120"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-125"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-130"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-135"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-140"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-145"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-150"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-155"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-160"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-165"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-170"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-175"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-180"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-185"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-190"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-195"));
-            UIScaleOption.AddItem(Loc.GetString("ui-options-scale-200"));
-            UIScaleOption.OnItemSelected += OnUIScaleChanged;
-
-            ViewportStretchCheckBox.OnToggled += _ =>
-            {
-                UpdateViewportScale();
-                UpdateApplyButton();
-            };
-
-            ViewportScaleSlider.OnValueChanged += _ =>
-            {
-                UpdateApplyButton();
-                UpdateViewportScale();
-            };
-
-            ViewportWidthSlider.OnValueChanged += _ =>
-            {
-                UpdateViewportWidthDisplay();
-                UpdateApplyButton();
-            };
-
-            ViewportVerticalFitCheckBox.OnToggled += _ =>
-            {
-                UpdateViewportScale();
-                UpdateApplyButton();
-            };
-
-            IntegerScalingCheckBox.OnToggled += OnCheckBoxToggled;
-            ViewportLowResCheckBox.OnToggled += OnCheckBoxToggled;
-            ParallaxLowQualityCheckBox.OnToggled += OnCheckBoxToggled;
-            FpsCounterCheckBox.OnToggled += OnCheckBoxToggled;
-            ApplyButton.OnPressed += OnApplyButtonPressed;
-            BloomLightingCheckBox.OnToggled += OnCheckBoxToggled; // SS220 Grafon-lighting
-            VSyncCheckBox.Pressed = _cfg.GetCVar(CVars.DisplayVSync);
-            FullscreenCheckBox.Pressed = ConfigIsFullscreen;
-            LightingPresetOption.SelectId(GetConfigLightingQuality());
-            UIScaleOption.SelectId(GetConfigUIScalePreset(ConfigUIScale));
-            ViewportScaleSlider.Value = _cfg.GetCVar(CCVars.ViewportFixedScaleFactor);
-            ViewportStretchCheckBox.Pressed = _cfg.GetCVar(CCVars.ViewportStretch);
-            IntegerScalingCheckBox.Pressed = _cfg.GetCVar(CCVars.ViewportSnapToleranceMargin) != 0;
-            ViewportVerticalFitCheckBox.Pressed = _cfg.GetCVar(CCVars.ViewportVerticalFit);
-            ViewportLowResCheckBox.Pressed = !_cfg.GetCVar(CCVars.ViewportScaleRender);
-            ParallaxLowQualityCheckBox.Pressed = _cfg.GetCVar(CCVars.ParallaxLowQuality);
-            FpsCounterCheckBox.Pressed = _cfg.GetCVar(CCVars.HudFpsCounterVisible);
-            ViewportWidthSlider.Value = _cfg.GetCVar(CCVars.ViewportWidth);
-            BloomLightingCheckBox.Pressed = _cfg.GetCVar(CCVars220.BloomLightingEnabled);  // SS220 Grafon-lighting
-
-            _cfg.OnValueChanged(CCVars.ViewportMinimumWidth, _ => UpdateViewportWidthRange());
-            _cfg.OnValueChanged(CCVars.ViewportMaximumWidth, _ => UpdateViewportWidthRange());
-
-            UpdateViewportWidthRange();
-            UpdateViewportWidthDisplay();
-            UpdateViewportScale();
-            UpdateApplyButton();
+            _cfg = cfg;
+            _dropDown = dropDown;
+            var button = dropDown.Button;
+            button.AddItem(Loc.GetString("ui-options-lighting-very-low"), QualityVeryLow);
+            button.AddItem(Loc.GetString("ui-options-lighting-low"), QualityLow);
+            button.AddItem(Loc.GetString("ui-options-lighting-medium"), QualityMedium);
+            button.AddItem(Loc.GetString("ui-options-lighting-high"), QualityHigh);
+            button.OnItemSelected += OnOptionSelected;
         }
 
-        private void OnUIScaleChanged(OptionButton.ItemSelectedEventArgs args)
+        private void OnOptionSelected(OptionButton.ItemSelectedEventArgs obj)
         {
-            UIScaleOption.SelectId(args.Id);
-            UpdateApplyButton();
+            _dropDown.Button.SelectId(obj.Id);
+            ValueChanged();
         }
 
-        private void OnApplyButtonPressed(BaseButton.ButtonEventArgs args)
+        public override void LoadValue()
         {
-            _cfg.SetCVar(CVars.DisplayVSync, VSyncCheckBox.Pressed);
-            SetConfigLightingQuality(LightingPresetOption.SelectedId);
-
-            _cfg.SetCVar(CVars.DisplayWindowMode,
-                         (int) (FullscreenCheckBox.Pressed ? WindowMode.Fullscreen : WindowMode.Windowed));
-            _cfg.SetCVar(CVars.DisplayUIScale, UIScaleOptions[UIScaleOption.SelectedId]);
-            _cfg.SetCVar(CCVars.ViewportStretch, ViewportStretchCheckBox.Pressed);
-            _cfg.SetCVar(CCVars.ViewportFixedScaleFactor, (int) ViewportScaleSlider.Value);
-            _cfg.SetCVar(CCVars.ViewportSnapToleranceMargin,
-                         IntegerScalingCheckBox.Pressed ? CCVars.ViewportSnapToleranceMargin.DefaultValue : 0);
-            _cfg.SetCVar(CCVars.ViewportVerticalFit, ViewportVerticalFitCheckBox.Pressed);
-            _cfg.SetCVar(CCVars.ViewportScaleRender, !ViewportLowResCheckBox.Pressed);
-            _cfg.SetCVar(CCVars.ParallaxLowQuality, ParallaxLowQualityCheckBox.Pressed);
-            _cfg.SetCVar(CCVars.HudFpsCounterVisible, FpsCounterCheckBox.Pressed);
-            _cfg.SetCVar(CCVars.ViewportWidth, (int) ViewportWidthSlider.Value);
-            _cfg.SetCVar(CCVars220.BloomLightingEnabled, BloomLightingCheckBox.Pressed); // SS220 Grafon-lighting
-
-            _cfg.SaveToFile();
-            UpdateApplyButton();
+            _dropDown.Button.SelectId(GetConfigLightingQuality());
         }
 
-        private void OnCheckBoxToggled(BaseButton.ButtonToggledEventArgs args)
+        public override void SaveValue()
         {
-            UpdateApplyButton();
-        }
-
-        private void OnLightingQualityChanged(OptionButton.ItemSelectedEventArgs args)
-        {
-            LightingPresetOption.SelectId(args.Id);
-            UpdateApplyButton();
-        }
-
-        private void UpdateApplyButton()
-        {
-            var isVSyncSame = VSyncCheckBox.Pressed == _cfg.GetCVar(CVars.DisplayVSync);
-            var isFullscreenSame = FullscreenCheckBox.Pressed == ConfigIsFullscreen;
-            var isLightingQualitySame = LightingPresetOption.SelectedId == GetConfigLightingQuality();
-            var isUIScaleSame = MathHelper.CloseToPercent(UIScaleOptions[UIScaleOption.SelectedId], ConfigUIScale);
-            var isVPStretchSame = ViewportStretchCheckBox.Pressed == _cfg.GetCVar(CCVars.ViewportStretch);
-            var isVPScaleSame = (int) ViewportScaleSlider.Value == _cfg.GetCVar(CCVars.ViewportFixedScaleFactor);
-            var isIntegerScalingSame = IntegerScalingCheckBox.Pressed == (_cfg.GetCVar(CCVars.ViewportSnapToleranceMargin) != 0);
-            var isVPVerticalFitSame = ViewportVerticalFitCheckBox.Pressed == _cfg.GetCVar(CCVars.ViewportVerticalFit);
-            var isVPResSame = ViewportLowResCheckBox.Pressed == !_cfg.GetCVar(CCVars.ViewportScaleRender);
-            var isPLQSame = ParallaxLowQualityCheckBox.Pressed == _cfg.GetCVar(CCVars.ParallaxLowQuality);
-            var isFpsCounterVisibleSame = FpsCounterCheckBox.Pressed == _cfg.GetCVar(CCVars.HudFpsCounterVisible);
-            var isWidthSame = (int) ViewportWidthSlider.Value == _cfg.GetCVar(CCVars.ViewportWidth);
-            var isBloomLightingSame = BloomLightingCheckBox.Pressed == _cfg.GetCVar(CCVars220.BloomLightingEnabled); // SS220 Grafon-lighting
-
-            ApplyButton.Disabled = isVSyncSame &&
-                                   isFullscreenSame &&
-                                   isLightingQualitySame &&
-                                   isUIScaleSame &&
-                                   isVPStretchSame &&
-                                   isVPScaleSame &&
-                                   isIntegerScalingSame &&
-                                   isVPVerticalFitSame &&
-                                   isVPResSame &&
-                                   isPLQSame &&
-                                   isFpsCounterVisibleSame &&
-                                   isWidthSame &&
-                                   isBloomLightingSame; // SS220 Grafon-lighting
-        }
-
-        private bool ConfigIsFullscreen =>
-            _cfg.GetCVar(CVars.DisplayWindowMode) == (int) WindowMode.Fullscreen;
-
-        public void UpdateProperties()
-        {
-            FullscreenCheckBox.Pressed = ConfigIsFullscreen;
-        }
-
-
-        private float ConfigUIScale => _cfg.GetCVar(CVars.DisplayUIScale);
-
-        private int GetConfigLightingQuality()
-        {
-            var val = _cfg.GetCVar(CVars.LightResolutionScale);
-            var soft = _cfg.GetCVar(CVars.LightSoftShadows);
-            if (val <= 0.125)
+            switch (_dropDown.Button.SelectedId)
             {
-                return 0;
-            }
-            else if ((val <= 0.5) && !soft)
-            {
-                return 1;
-            }
-            else if (val <= 0.5)
-            {
-                return 2;
-            }
-            else
-            {
-                return 3;
-            }
-        }
-
-        private void SetConfigLightingQuality(int value)
-        {
-            switch (value)
-            {
-                case 0:
+                case QualityVeryLow:
                     _cfg.SetCVar(CVars.LightResolutionScale, 0.125f);
                     _cfg.SetCVar(CVars.LightSoftShadows, false);
                     _cfg.SetCVar(CVars.LightBlur, false);
                     break;
-                case 1:
+                case QualityLow:
                     _cfg.SetCVar(CVars.LightResolutionScale, 0.5f);
                     _cfg.SetCVar(CVars.LightSoftShadows, false);
                     _cfg.SetCVar(CVars.LightBlur, true);
                     break;
-                case 2:
+                default: // = QualityMedium
                     _cfg.SetCVar(CVars.LightResolutionScale, 0.5f);
                     _cfg.SetCVar(CVars.LightSoftShadows, true);
                     _cfg.SetCVar(CVars.LightBlur, true);
                     break;
-                case 3:
+                case QualityHigh:
                     _cfg.SetCVar(CVars.LightResolutionScale, 1);
                     _cfg.SetCVar(CVars.LightSoftShadows, true);
                     _cfg.SetCVar(CVars.LightBlur, true);
@@ -274,40 +173,83 @@ namespace Content.Client.Options.UI.Tabs
             }
         }
 
-        private static int GetConfigUIScalePreset(float value)
+        public override void ResetToDefault()
         {
-            for (var i = 0; i < UIScaleOptions.Length; i++)
+            _dropDown.Button.SelectId(QualityDefault);
+        }
+
+        public override bool IsModified()
+        {
+            return _dropDown.Button.SelectedId != GetConfigLightingQuality();
+        }
+
+        public override bool IsModifiedFromDefault()
+        {
+            return _dropDown.Button.SelectedId != QualityDefault;
+        }
+
+        private int GetConfigLightingQuality()
+        {
+            var val = _cfg.GetCVar(CVars.LightResolutionScale);
+            var soft = _cfg.GetCVar(CVars.LightSoftShadows);
+            if (val <= 0.125)
+                return QualityVeryLow;
+
+            if ((val <= 0.5) && !soft)
+                return QualityLow;
+
+            if (val <= 0.5)
+                return QualityMedium;
+
+            return QualityHigh;
+        }
+    }
+
+    private sealed class OptionFullscreen : BaseOptionCVar<int>
+    {
+        private readonly CheckBox _checkBox;
+
+        protected override int Value
+        {
+            get => _checkBox.Pressed ? (int) WindowMode.Fullscreen : (int) WindowMode.Windowed;
+            set => _checkBox.Pressed = (value == (int) WindowMode.Fullscreen);
+        }
+
+        public OptionFullscreen(
+            OptionsTabControlRow controller,
+            IConfigurationManager cfg,
+            CheckBox checkBox)
+            : base(controller, cfg, CVars.DisplayWindowMode)
+        {
+            _checkBox = checkBox;
+            _checkBox.OnToggled += _ =>
             {
-                if (MathHelper.CloseToPercent(UIScaleOptions[i], value))
-                {
-                    return i;
-                }
-            }
+                ValueChanged();
+            };
+        }
+    }
 
-            return 0;
+    private sealed class OptionIntegerScaling : BaseOptionCVar<int>
+    {
+        private readonly CheckBox _checkBox;
+
+        protected override int Value
+        {
+            get => _checkBox.Pressed ? CCVars.ViewportSnapToleranceMargin.DefaultValue : 0;
+            set => _checkBox.Pressed = (value != 0);
         }
 
-        private void UpdateViewportScale()
+        public OptionIntegerScaling(
+            OptionsTabControlRow controller,
+            IConfigurationManager cfg,
+            CheckBox checkBox)
+            : base(controller, cfg, CCVars.ViewportSnapToleranceMargin)
         {
-            ViewportScaleBox.Visible = !ViewportStretchCheckBox.Pressed;
-            IntegerScalingCheckBox.Visible = ViewportStretchCheckBox.Pressed;
-            ViewportVerticalFitCheckBox.Visible = ViewportStretchCheckBox.Pressed;
-            ViewportWidthSlider.Visible = ViewportWidthSliderDisplay.Visible = !ViewportStretchCheckBox.Pressed || ViewportStretchCheckBox.Pressed && !ViewportVerticalFitCheckBox.Pressed;
-            ViewportScaleText.Text = Loc.GetString("ui-options-vp-scale", ("scale", ViewportScaleSlider.Value));
-        }
-
-        private void UpdateViewportWidthRange()
-        {
-            var min = _cfg.GetCVar(CCVars.ViewportMinimumWidth);
-            var max = _cfg.GetCVar(CCVars.ViewportMaximumWidth);
-
-            ViewportWidthSlider.MinValue = min;
-            ViewportWidthSlider.MaxValue = max;
-        }
-
-        private void UpdateViewportWidthDisplay()
-        {
-            ViewportWidthSliderDisplay.Text = Loc.GetString("ui-options-vp-width", ("width", (int) ViewportWidthSlider.Value));
+            _checkBox = checkBox;
+            _checkBox.OnToggled += _ =>
+            {
+                ValueChanged();
+            };
         }
     }
 }

@@ -57,7 +57,7 @@
     makeSentient: true
     name: ghost-role-information-revenant-name
     description: ghost-role-information-revenant-description
-    rules: ghost-role-information-revenant-rules
+    rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -97,3 +97,9 @@
     - RevenantTheme
   - type: Speech
     speechVerb: Ghost
+  #ss220 spec fix start
+  - type: MobState
+    allowedStates:
+      - Alive
+      - Dead
+  #ss220 spec fix end
