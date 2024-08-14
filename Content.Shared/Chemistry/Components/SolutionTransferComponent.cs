@@ -22,14 +22,14 @@ public sealed partial class SolutionTransferComponent : Component
     /// </summary>
     [DataField("minTransferAmount")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 MinimumTransferAmount { get; set; } = FixedPoint2.New(5);
+    public FixedPoint2 MinimumTransferAmount { get; set; } = FixedPoint2.New(1); // ss220 change amount transfer fix
 
     /// <summary>
     ///     The maximum amount of solution that can be transferred at once from this solution.
     /// </summary>
     [DataField("maxTransferAmount")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 MaximumTransferAmount { get; set; } = FixedPoint2.New(50);
+    public FixedPoint2 MaximumTransferAmount { get; set; } = FixedPoint2.New(1000); // ss220 change amount transfer fix
 
     /// <summary>
     ///     Can this entity take reagent from reagent tanks?

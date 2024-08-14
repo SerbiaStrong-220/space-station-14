@@ -8,7 +8,7 @@
       min: 10
       max: 10
   - type: StationEvent
-    startColor: "#18abf5"
+    startAnnouncementColor: "#18abf5"  #SS220 CargoGifts events color fix
     startAudio:
       path: /Audio/Announcements/announce.ogg
   - type: CargoGiftsRule
@@ -198,16 +198,20 @@
 #ss220-gamma
 - type: entity
   id: GiftsGamma
-  parent: BaseGameRule
+  parent: CargoGiftsBase #SS220 GiftsGamma event fix
   categories: [ GameRules ]
   components:
-    - type: CargoGiftsRule
-      description: cargo-gift-dest-gamma
-      sender: cargo-gift-default-sender
-      dest: cargo-gift-dest-all
-      gifts:
-        SecurityArmor: 2
-        SecurityHelmet: 2
-        ArmorySmg: 3
-        ArmoryShotgun: 3
+  #SS220 GiftsGamma event fix begin
+  - type: StationEvent
+    cannotStartRandomly: true
+  #SS220 GiftsGamma event fix end
+  - type: CargoGiftsRule
+    description: cargo-gift-dest-gamma
+    sender: cargo-gift-default-sender
+    dest: cargo-gift-dest-all
+    gifts:
+      SecurityArmor: 2
+      SecurityHelmet: 2
+      ArmorySmg: 3
+      ArmoryShotgun: 3
 #ss220-gammaend

@@ -97,3 +97,9 @@
     - RevenantTheme
   - type: Speech
     speechVerb: Ghost
+  #ss220 spec fix start
+  - type: MobState
+    allowedStates:
+      - Alive
+      - Dead
+  #ss220 spec fix end
