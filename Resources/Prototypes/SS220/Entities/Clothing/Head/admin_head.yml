@@ -1,7 +1,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_hell
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/hellspawn_a.rsi
@@ -11,7 +11,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_revenant
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/mobsGhostsrevenant_a.rsi
@@ -21,7 +21,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_mothroach
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/mothroach_a.rsi
@@ -31,7 +31,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_carpsuit
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/carpsuit_a.rsi
@@ -41,7 +41,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_buffrat
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     drawdepth: Ghosts
@@ -55,7 +55,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_behonker
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/behonker_a.rsi
@@ -65,7 +65,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_jensencoat
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/jensencoat_a.rsi
@@ -75,7 +75,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_ghostsheet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/ghostsheet_a.rsi
@@ -85,7 +85,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_terminator
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/terminator_a.rsi
@@ -95,7 +95,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_mimebot
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/admin_head/mimebot_a.rsi
@@ -105,7 +105,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_tech_guardians
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/tech_guardians_a.rsi
@@ -115,7 +115,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_miner_guardians
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/miner_guardians_a.rsi
@@ -125,7 +125,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_holoclown_guardians
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/holoclown_guardians_a.rsi
@@ -135,7 +135,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_magic_guardians
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/magic_guardians_a.rsi
@@ -145,7 +145,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_judge
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/judge_a.rsi
@@ -155,7 +155,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_rainbow_slime
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/rainbow_slime_a.rsi
@@ -165,7 +165,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_nuke
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/nuke_a.rsi
@@ -175,7 +175,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_plushie_lizard
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/plushie_lizard_a.rsi
@@ -185,7 +185,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_singularitytoy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/singularitytoy_a.rsi
@@ -195,7 +195,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_db_shotgun
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/db_shotgun_a.rsi
@@ -205,7 +205,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_watermelon
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/watermelon_a.rsi
@@ -215,7 +215,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_whiskeybottle
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/whiskeybottle_a.rsi
@@ -225,7 +225,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_parrot
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/parrot_a.rsi
@@ -235,7 +235,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: admin_Head_blue_slime
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     sprite: SS220/Clothing/Head/admin_head/blue_slime_a.rsi

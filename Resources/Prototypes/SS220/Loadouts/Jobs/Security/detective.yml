@@ -1,8 +1,4 @@
 - type: loadout
   id: DetectiveCoatDark
-  equipment: DetectiveCoatDark
-
-- type: startingGear
-  id: DetectiveCoatDark
   equipment:
     outerClothing: ClothingOuterCoatDetectiveDark

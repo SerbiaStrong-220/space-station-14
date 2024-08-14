@@ -3,7 +3,7 @@
   id: ClothingOuterArmorCentcomCarapace
   name: naval carapace
   description: A carapace worn by Naval Command members.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/OuterClothing/Armor/centcom_naval_carapace.rsi

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "by MIXnikita (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sandstone0",
+      "directions": 4
+    },
+    {
+      "name": "sandstone1",
+      "directions": 4
+    },
+    {
+      "name": "sandstone2",
+      "directions": 4
+    },
+    {
+      "name": "sandstone3",
+      "directions": 4
+    },
+    {
+      "name": "sandstone4",
+      "directions": 4
+    },
+    {
+      "name": "sandstone5",
+      "directions": 4
+    },
+    {
+      "name": "sandstone6",
+      "directions": 4
+    },
+    {
+      "name": "sandstone7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

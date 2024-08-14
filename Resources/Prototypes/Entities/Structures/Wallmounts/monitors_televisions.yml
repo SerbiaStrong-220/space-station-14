@@ -108,6 +108,7 @@
   - type: ActivatableUI
     key: enum.SurveillanceCameraMonitorUiKey.Key
   - type: ActivatableUIRequiresPower
+  - type: ActivatableUIRequiresVision
   - type: UserInterface
     interfaces:
         enum.SurveillanceCameraMonitorUiKey.Key:
@@ -169,6 +170,7 @@
   - type: ActivatableUI
     key: enum.SurveillanceCameraMonitorUiKey.Key
   - type: ActivatableUIRequiresPower
+  - type: ActivatableUIRequiresVision
   - type: UserInterface
     interfaces:
         enum.SurveillanceCameraMonitorUiKey.Key:

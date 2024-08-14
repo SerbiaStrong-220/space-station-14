@@ -3,9 +3,9 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Containers.EntitySystems;
-using Content.Server.Chemistry.ReagentEffectConditions;
-using Content.Server.Chemistry.ReagentEffects;
 using Content.Server.Popups;
+using Content.Server.EntityEffects.EffectConditions;
+using Content.Server.EntityEffects.Effects;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
@@ -14,6 +14,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects;
 using Content.Shared.Mobs.Systems;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -120,7 +121,7 @@ public sealed class RespiratorSystem : EntitySystem
         if (!Resolve(uid, ref body, logMissing: false))
             return;
 
-        var organs = _bodySystem.GetBodyOrganComponents<LungComponent>(uid, body);
+        var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((uid, body));
 
         // Inhale gas
         var ev = new InhaleLocationEvent();
@@ -137,11 +138,11 @@ public sealed class RespiratorSystem : EntitySystem
 
         var lungRatio = 1.0f / organs.Count;
         var gas = organs.Count == 1 ? actualGas : actualGas.RemoveRatio(lungRatio);
-        foreach (var (lung, _) in organs)
+        foreach (var (organUid, lung, _) in organs)
         {
             // Merge doesn't remove gas from the giver.
             _atmosSys.Merge(lung.Air, gas);
-            _lungSystem.GasToReagent(lung.Owner, lung);
+            _lungSystem.GasToReagent(organUid, lung);
         }
     }
 
@@ -150,7 +151,7 @@ public sealed class RespiratorSystem : EntitySystem
         if (!Resolve(uid, ref body, logMissing: false))
             return;
 
-        var organs = _bodySystem.GetBodyOrganComponents<LungComponent>(uid, body);
+        var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((uid, body));
 
         // exhale gas
 
@@ -167,12 +168,12 @@ public sealed class RespiratorSystem : EntitySystem
         }
 
         var outGas = new GasMixture(ev.Gas.Volume);
-        foreach (var (lung, _) in organs)
+        foreach (var (organUid, lung, _) in organs)
         {
             _atmosSys.Merge(outGas, lung.Air);
             lung.Air.Clear();
 
-            if (_solutionContainerSystem.ResolveSolution(lung.Owner, lung.SolutionName, ref lung.Solution))
+            if (_solutionContainerSystem.ResolveSolution(organUid, lung.SolutionName, ref lung.Solution))
                 _solutionContainerSystem.RemoveAllSolution(lung.Solution.Value);
         }
 
@@ -207,7 +208,7 @@ public sealed class RespiratorSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp))
             return false;
 
-        var organs = _bodySystem.GetBodyOrganComponents<LungComponent>(ent);
+        var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
         if (organs.Count == 0)
             return false;
 
@@ -219,7 +220,7 @@ public sealed class RespiratorSystem : EntitySystem
         float saturation = 0;
         foreach (var organ in organs)
         {
-            saturation += GetSaturation(solution, organ.Comp.Owner, out var toxic);
+            saturation += GetSaturation(solution, organ.Owner, out var toxic);
             if (toxic)
                 return false;
         }
@@ -268,7 +269,7 @@ public sealed class RespiratorSystem : EntitySystem
         // TODO generalize condition checks
         // this is pretty janky, but I just want to bodge a method that checks if an entity can breathe a gas mixture
         // Applying actual reaction effects require a full ReagentEffectArgs struct.
-        bool CanMetabolize(ReagentEffect effect)
+        bool CanMetabolize(EntityEffect effect)
         {
             if (effect.Conditions == null)
                 return true;
@@ -293,10 +294,10 @@ public sealed class RespiratorSystem : EntitySystem
         if (ent.Comp.SuffocationCycles >= ent.Comp.SuffocationCycleThreshold)
         {
             // TODO: This is not going work with multiple different lungs, if that ever becomes a possibility
-            var organs = _bodySystem.GetBodyOrganComponents<LungComponent>(ent);
-            foreach (var (comp, _) in organs)
+            var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
+            foreach (var entity in organs)
             {
-                _alertsSystem.ShowAlert(ent, comp.Alert);
+                _alertsSystem.ShowAlert(entity.Owner, entity.Comp1.Alert);
             }
         }
 
@@ -309,10 +310,10 @@ public sealed class RespiratorSystem : EntitySystem
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} stopped suffocating");
 
         // TODO: This is not going work with multiple different lungs, if that ever becomes a possibility
-        var organs = _bodySystem.GetBodyOrganComponents<LungComponent>(ent);
-        foreach (var (comp, _) in organs)
+        var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
+        foreach (var entity in organs)
         {
-            _alertsSystem.ClearAlert(ent, comp.Alert);
+            _alertsSystem.ClearAlert(entity.Owner, entity.Comp1.Alert);
         }
 
         //SS220 air_fix begin
@@ -344,6 +345,9 @@ public sealed class RespiratorSystem : EntitySystem
         Entity<RespiratorComponent> ent,
         ref ApplyMetabolicMultiplierEvent args)
     {
+        // TODO REFACTOR THIS
+        // This will slowly drift over time due to floating point errors.
+        // Instead, raise an event with the base rates and allow modifiers to get applied to it.
         if (args.Apply)
         {
             ent.Comp.UpdateInterval *= args.Multiplier;

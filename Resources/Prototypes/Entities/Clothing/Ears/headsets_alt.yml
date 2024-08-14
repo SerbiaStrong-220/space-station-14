@@ -30,7 +30,7 @@
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetAltCentCom
   name: CentCom over-ear headset
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: ContainerFill
     containers:
@@ -45,7 +45,7 @@
 - type: entity
   parent: ClothingHeadsetAltCentCom
   id: ClothingHeadsetAltCentComFake
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Fake
   components:
   - type: ContainerFill

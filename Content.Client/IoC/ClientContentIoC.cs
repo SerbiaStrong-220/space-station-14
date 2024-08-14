@@ -5,24 +5,25 @@ using Content.Client.Clickable;
 using Content.Client.Corvax.DiscordAuth;
 using Content.Client.Corvax.JoinQueue;
 using Content.Client.Corvax.Sponsors;
+using Content.Client.DebugMon;
 using Content.Client.Eui;
+using Content.Client.Fullscreen;
 using Content.Client.GhostKick;
+using Content.Client.Guidebook;
 using Content.Client.Launcher;
+using Content.Client.Mapping;
 using Content.Client.Parallax.Managers;
 using Content.Client.Players.PlayTimeTracking;
+using Content.Client.Replay;
 using Content.Client.Screenshot;
-using Content.Client.Fullscreen;
 using Content.Client.Stylesheets;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Administration.Logs;
-using Content.Client.Guidebook;
 using Content.Client.Lobby;
-using Content.Client.Replay;
 using Content.Shared.Administration.Managers;
 using Content.Client.SS220.Discord;
 using Content.Shared.Players.PlayTimeTracking;
-
 
 namespace Content.Client.IoC
 {
@@ -56,6 +57,8 @@ namespace Content.Client.IoC
             collection.Register<ContentReplayPlaybackManager, ContentReplayPlaybackManager>();
             collection.Register<DiscordPlayerInfoManager>(); //SS220 discord user info
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
+            collection.Register<MappingManager>();
+            collection.Register<DebugMonitorManager>();
         }
     }
 }

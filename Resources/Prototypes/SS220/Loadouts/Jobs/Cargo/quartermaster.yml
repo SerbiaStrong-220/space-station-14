@@ -20,38 +20,26 @@
 # Head
 - type: loadout
   id: QuartermasterHeadWarehouseman
-  equipment: QuartermasterHeadWarehouseman
   effects:
   - !type:GroupLoadoutEffect
     proto: Warehouseman
-
-- type: startingGear
-  id: QuartermasterHeadWarehouseman
   equipment:
     head: ClothingHeadWarehouseman
 
 # Jumpsuit
 - type: loadout
   id: QuartermasterJumpsuitCargonovich
-  equipment: QuartermasterJumpsuitCargonovich
   effects:
   - !type:GroupLoadoutEffect
     proto: Cargonovich
-
-- type: startingGear
-  id: QuartermasterJumpsuitCargonovich
   equipment:
     jumpsuit: ClothingUniformJumpsuitCargonovich
 
 - type: loadout
   id: QuartermasterJumpsuitWarehouseman
-  equipment: QuartermasterJumpsuitWarehouseman
   effects:
   - !type:GroupLoadoutEffect
     proto: Warehouseman
-
-- type: startingGear
-  id: QuartermasterJumpsuitWarehouseman
   equipment:
     jumpsuit: ClothingUniformJumpsuitWarehouseman
 
@@ -59,12 +47,8 @@
 
 - type: loadout
   id: QuartermasterOuterCoatQMWarehouseman
-  equipment: QuartermasterOuterCoatQMWarehouseman
   effects:
   - !type:GroupLoadoutEffect
     proto: Warehouseman
-
-- type: startingGear
-  id: QuartermasterOuterCoatQMWarehouseman
   equipment:
     outerClothing: ClothingOuterCoatQMWarehouseman

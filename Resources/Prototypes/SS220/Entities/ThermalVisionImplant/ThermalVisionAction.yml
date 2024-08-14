@@ -2,7 +2,6 @@
   id: ActionActivateThermalVision
   name: Переключить термальные сенсоры
   description: Переключает термальные сенсоры в импланте владельца, что позволяет видеть живых существ сквозь преграды в ограниченном радиусе.
-  noSpawn: true
   components:
   - type: InstantAction
     itemIconStyle: BigAction

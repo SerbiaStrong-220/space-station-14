@@ -154,6 +154,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
 
+  # Уборщик
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitJanitorBlue
+  name: blue janitor's suit
+  description: The costume of the mysterious cleaner.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
+
 # Medical
 
   # Парамед

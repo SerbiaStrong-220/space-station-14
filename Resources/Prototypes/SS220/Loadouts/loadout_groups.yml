@@ -49,6 +49,7 @@
   name: loadout-group-psychologist-jumpsuit
   loadouts:
   - PsychologistJumpsuit
+  - PsychologistJumpskirt
   - PsychologistJumpsuitTurtleneck
   - PsychologistJumpskirtTurtleneck
 
@@ -141,7 +142,7 @@
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
-  
+
 # senior engineer
 - type: loadoutGroup
   id: HatSeniorEngineer
@@ -151,7 +152,7 @@
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
   - HatSeniorEngineer
-  
+
 - type: loadoutGroup
   id: SeniorsEngineerJumpsuit
   name: loadout-group-senior-engineer-jumpsuit
@@ -166,7 +167,7 @@
   - StationEngineerOuterVest
   - StationEngineerWintercoat
   - AtmosphericTechnicianWintercoat
-  
+
 # Senior Medical
 
 - type: loadoutGroup
@@ -176,14 +177,14 @@
   loadouts:
   - HatSeniorMedical
   - CMOMedicalHeadMirror
-  
+
 - type: loadoutGroup
   id: SeniorMedicalJumpsuit
   name: loadout-group-senior-medical-jumpsuit
   loadouts:
   - SeniorMedicalJumpsuit
   - SeniorMedicalJumpskirt
-  
+
 - type: loadoutGroup
   id: SeniorMedicalOuterClothing
   name: loadout-group-senior-medical-outerclothing
@@ -192,7 +193,7 @@
   - SeniorMedicalLabCoat
   - MedicalDoctorWintercoat
   - ChemistWintercoat
-  
+
 - type: loadoutGroup
   id: MedicalsBackpack
   name: loadout-group-medical-doctor-backpack
@@ -200,14 +201,14 @@
   - MedicalDoctorBackpack
   - MedicalDoctorSatchel
   - MedicalDoctorDuffel
-  
+
 - type: loadoutGroup
   id: SeniorShoes
   name: loadout-group-medical-doctor-shoes
   loadouts:
   - WhiteShoes
   - MedicalWinterBoots
-  
+
 - type: loadoutGroup
   id: MedicalsGloves
   name: loadout-group-medical-gloves
@@ -215,14 +216,14 @@
   loadouts:
   - LatexGloves
   - NitrileGloves
-  
+
 - type: loadoutGroup
   id: MedicalsMask
   name: loadout-group-medical-mask
   minLimit: 0
   loadouts:
   - SterileMask
-  
+
 # Senior RND
 
 - type: loadoutGroup
@@ -231,14 +232,14 @@
   minLimit: 0
   loadouts:
   - HatSeniorSciensist
-  
+
 - type: loadoutGroup
   id: SeniorSciensistJumpsuit
   name: loadout-group-senior-scientist-jumpsuit
   loadouts:
   - SeniorSciensistJumpsuit
   - SeniorSciensistJumpskirt
-  
+
 - type: loadoutGroup
   id: SeniorSciensistOuterClothing
   name: loadout-group-senior-scientist-outerclothing
@@ -247,7 +248,7 @@
   - SeniorSciensistLabCoat
   - ScienceWintercoat
   - RoboticistWintercoat
-  
+
 # Senior Security
 
 - type: loadoutGroup

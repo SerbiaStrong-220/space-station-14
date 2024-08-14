@@ -31,16 +31,19 @@ public sealed class CharacterInfoSystem : EntitySystem
             return;
 
         var entity = args.SenderSession.AttachedEntity.Value;
-        var jobTitle = "No Profession";
+
         var objectives = new Dictionary<string, List<ObjectiveInfo>>();
+        var jobTitle = Loc.GetString("character-info-no-profession");
         string? briefing = null;
 
         if (_minds.TryGetMind(entity, out var mindId, out var mind))
         {
+            // SS220 Antag-List (moved code to GetObjectives method)
+
             if (_jobs.MindTryGetJobName(mindId, out var jobName))
                 jobTitle = jobName;
 
-            GetObjectives(mindId, mind, objectives);
+            GetObjectives(mindId, mind, objectives); // SS220 Antag-List
 
             // Get briefing
             briefing = _roles.MindGetBriefing(mindId);
@@ -70,19 +73,21 @@ public sealed class CharacterInfoSystem : EntitySystem
         RaiseNetworkEvent(new AntagonistInfoEvent(GetNetEntity(receiver), antagonist, jobTitle, objectives), args.SenderSession);
     }
 
+    // SS220 Antag-List begin
     private void GetObjectives([NotNullWhen(true)] EntityUid mindId, [NotNullWhen(true)] MindComponent mind, Dictionary<string, List<ObjectiveInfo>> objectives)
     {
-        foreach (var objective in mind.AllObjectives)
+        foreach (var objective in mind.Objectives)
         {
             var info = _objectives.GetInfo(objective, mindId, mind);
             if (info == null)
                 continue;
 
             // group objectives by their issuer
-            var issuer = Comp<ObjectiveComponent>(objective).Issuer;
+            var issuer = Comp<ObjectiveComponent>(objective).LocIssuer;
             if (!objectives.ContainsKey(issuer))
                 objectives[issuer] = new List<ObjectiveInfo>();
             objectives[issuer].Add(info.Value);
         }
     }
+    // SS220 Antag-List end
 }

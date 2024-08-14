@@ -69,7 +69,7 @@
 - type: entity
   id: NTvsSSSPStation
   parent: StandardNanotrasenStation
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData

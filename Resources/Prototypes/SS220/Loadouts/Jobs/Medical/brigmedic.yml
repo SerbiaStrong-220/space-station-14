@@ -20,27 +20,15 @@
 # Head
 - type: loadout
   id: BrigmedicHead
-  equipment: BrigmedicHead
-
-- type: startingGear
-  id: BrigmedicHead
   equipment:
     head: ClothingHeadHatBeretBrigmedic
 
 - type: loadout
   id: SecurityMedicHead
-  equipment: SecurityMedicHead
-
-- type: startingGear
-  id: SecurityMedicHead
   equipment:
     head: ClothingHeadHatBeretSecurityMedic
 
 - type: loadout
-  id: SecurityMedicHelmet
-  equipment: SecurityMedicHelmet
-
-- type: startingGear
   id: SecurityMedicHelmet
   equipment:
     head: ClothingHeadHelmetSecurityMedic
@@ -48,89 +36,57 @@
 # Mask
 - type: loadout
   id: BrigmedicMask
-  equipment: BrigmedicMask
-
-- type: startingGear
-  id: BrigmedicMask
   equipment:
     mask: ClothingMaskBreathMedicalSecurity
 
 # Jumpsuit
 - type: loadout
   id: BrigmedicJumpsuit
-  equipment: BrigmedicJumpsuit
-
-- type: startingGear
-  id: BrigmedicJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitBrigmedic
 
 - type: loadout
-  id: BrigmedicJumpskirt
-  equipment: BrigmedicJumpskirt
-
-- type: startingGear
   id: BrigmedicJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtBrigmedic
 
 - type: loadout
   id: BrigmedicJumpsuitTurtleneck
-  equipment: BrigmedicJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: BrigmedicTurtleneck
-
-- type: startingGear
-  id: BrigmedicJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitBrigmedicTurtleneck
 
 - type: loadout
   id: BrigmedicJumpskirtTurtleneck
-  equipment: BrigmedicJumpskirtTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: BrigmedicTurtleneck
-
-- type: startingGear
-  id: BrigmedicJumpskirtTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtBrigmedicTurtleneck
 
 - type: loadout
   id: BrigmedicJumpskirtOfLife
-  equipment: BrigmedicJumpskirtOfLife
   effects:
   - !type:GroupLoadoutEffect
     proto: BrigmedicTurtleneck #Увы
-
-- type: startingGear
-  id: BrigmedicJumpskirtOfLife
   equipment:
     jumpsuit: ClothingUniformJumpskirtOfLife
 
 - type: loadout
   id: BrigmedicJumpsuitMilitaryFeldsher
-  equipment: BrigmedicJumpsuitMilitaryFeldsher
   effects:
   - !type:GroupLoadoutEffect
     proto: MilitaryFeldsher
-
-- type: startingGear
-  id: BrigmedicJumpsuitMilitaryFeldsher
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
 
 - type: loadout
   id: BrigmedicJumpskirtMilitaryFeldsher
-  equipment: BrigmedicJumpskirtMilitaryFeldsher
   effects:
   - !type:GroupLoadoutEffect
     proto: MilitaryFeldsher
-
-- type: startingGear
-  id: BrigmedicJumpskirtMilitaryFeldsher
   equipment:
     jumpsuit: ClothingUniformJumpskirtMilitaryFeldsher
 
@@ -138,27 +94,15 @@
 # Back
 - type: loadout
   id: BrigmedicBackpack
-  equipment: BrigmedicBackpack
-
-- type: startingGear
-  id: BrigmedicBackpack
   equipment:
     back: ClothingBackpackBrigmedic
 
 - type: loadout
   id: BrigmedicSatchel
-  equipment: BrigmedicSatchel
-
-- type: startingGear
-  id: BrigmedicSatchel
   equipment:
     back: ClothingBackpackSatchelBrigmedic
 
 - type: loadout
-  id: BrigmedicDuffel
-  equipment: BrigmedicDuffel
-
-- type: startingGear
   id: BrigmedicDuffel
   equipment:
     back: ClothingBackpackDuffelBrigmedic
@@ -166,36 +110,20 @@
 # Outer clothing
 - type: loadout
   id: BrigmedicWindAMG
-  equipment: BrigmedicWindAMG
-
-- type: startingGear
-  id: BrigmedicWindAMG
   equipment:
     outerClothing: ClothingOuterCoatAMG
 
 - type: loadout
-  id: BrigmedicVestSecurity
-  equipment: BrigmedicVestSecurity
-
-- type: startingGear
   id: BrigmedicVestSecurity
   equipment:
     outerClothing: ClothingOuterVestSecurityMedic
 
 - type: loadout
   id: BrigmedicCoatLab
-  equipment: BrigmedicCoatLab
-
-- type: startingGear
-  id: BrigmedicCoatLab
   equipment:
     outerClothing: ClothingOuterCoatLabSecurityMedic
 
 - type: loadout
-  id: BrigmedicVestArmorMedSec
-  equipment: BrigmedicVestArmorMedSec
-
-- type: startingGear
   id: BrigmedicVestArmorMedSec
   equipment:
     outerClothing: ClothingOuterVestArmorMedSec
@@ -203,19 +131,10 @@
 # Shoes
 - type: loadout
   id: RedShoes
-  equipment: RedShoes
-
-- type: startingGear
-  id: RedShoes
   equipment:
     shoes: ClothingShoesColorRed
 
 - type: loadout
   id: SecMedWinterBoots
-  equipment: SecMedWinterBoots
-
-- type: startingGear
-  id: SecMedWinterBoots
   equipment:
     shoes: ClothingShoesBootsWinterSecMed
-

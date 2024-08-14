@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client.Buckle;
 using Content.Client.Gravity;
 using Content.Shared.ActionBlocker;
@@ -86,6 +86,11 @@ public sealed class WaddleAnimationSystem : SharedWaddleAnimationSystem
 
         if (!TryComp<InputMoverComponent>(entity.Owner, out var mover))
             return;
+
+        //SS220 Waddle in crit/death fix begin
+        if (_mobState.IsIncapacitated(entity.Owner))
+            return;
+        //SS220 Waddle in crit/death fix end
 
         PlayWaddleAnimationUsing(
             (entity.Owner, entity.Comp),
