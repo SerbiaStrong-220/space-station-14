@@ -9,17 +9,18 @@ public enum SuperMatterObserverUiKey : byte
     Key
 }
 
-[Serializable, NetSerializable]
-public sealed class SuperMatterObserverUpdateState : BoundUserInterfaceState
-{
+// [Serializable, NetSerializable]
+// public sealed class SuperMatterObserverUpdateState : BoundUserInterfaceState
+// {
 
-}
+// }
 
 
 [Serializable, NetSerializable]
 public sealed class SuperMatterStateUpdate(
                                             int id,
                                             string name,
+                                            float integrity,
                                             float pressure,
                                             float temperature,
                                             (float Value, float Derivative) matter,
@@ -31,6 +32,7 @@ public sealed class SuperMatterStateUpdate(
     public int Id { get; } = id;
     public string Name { get; } = name;
     public float Pressure { get; } = pressure;
+    public float Integrity { get; } = integrity;
     public float Temperature { get; } = temperature;
     public (float Value, float Derivative) Matter { get; } = matter;
     public (float Value, float Derivative) InternalEnergy { get; } = internalEnergy;

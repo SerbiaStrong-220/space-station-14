@@ -17,7 +17,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var pressure = comp.PressureAccumulator / comp.UpdatesBetweenBroadcast;
         comp.Name ??= MetaData(crystal.Owner).EntityName;
 
-        var ev = new SuperMatterStateUpdate(uid.Id, comp.Name,
+        var ev = new SuperMatterStateUpdate(uid.Id, comp.Name, GetIntegrity(comp),
                                             pressure, comp.Temperature,
                                             (comp.Matter, matterDerv),
                                             (comp.InternalEnergy, internalEnergyDerv),
