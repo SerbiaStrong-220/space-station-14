@@ -9,7 +9,7 @@
     time: 72000 # SS220-RoleTime
   startingGear: DetectiveGear
   icon: "JobIconDetective"
-  supervisors: job-supervisors-IAA
+  supervisors: job-supervisors-IAA #SS220-Internal-Affairs
   canBeAntag: true
   access:
   - Brig

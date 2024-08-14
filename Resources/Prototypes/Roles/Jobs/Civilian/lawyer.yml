@@ -10,7 +10,7 @@
   startingGear: LawyerGear
   setPreference: true # SS220 return-of-the-lawyer
   icon: "JobIconLawyer"
-  supervisors: job-supervisors-IAA
+  supervisors: job-supervisors-IAA #SS220-InternalAffairs
   access:
 #  - Service SS220-Internal-Affairs
   - Lawyer
