@@ -6,7 +6,6 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -207,6 +206,12 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         SetFireMode(uid, component, component.CurrentFireMode);
     }
 
+    /// <summary>
+    /// The event that rises when the fire mode is selected
+    /// </summary>
+    /// <param name="Uid"></param>
+    /// <param name="Component"></param>
+    /// <param name="Index"></param>
     [ByRefEvent]
     public record struct ChangeFireModeEvent(EntityUid Uid, BatteryWeaponFireModesComponent Component, int Index);
     //SS220 Add Multifaze gun end

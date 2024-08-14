@@ -38,12 +38,21 @@ public sealed partial class BatteryWeaponFireMode
     public string Prototype = default!; //SS220 Add Multifaze gun
 
     //SS220 Add Multifaze gun begin
-    [DataField("fireModeName")]
+    /// <summary>
+    /// Name of the fire mode
+    /// </summary>
+    [DataField]
     public string? FireModeName;
 
+    /// <summary>
+    /// Sound of a gunshot that is used in the selected fire mode
+    /// </summary>
     [DataField]
     public string? SoundGunshot;
 
+    /// <summary>
+    /// Sprite of the remaining charge that is used in the selected fire mode
+    /// </summary>
     [DataField]
     public string? MagState;
     //SS220 Add Multifaze gun end

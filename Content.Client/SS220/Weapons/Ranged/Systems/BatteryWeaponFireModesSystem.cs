@@ -4,6 +4,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using static Content.Shared.Weapons.Ranged.Systems.BatteryWeaponFireModesSystem;
 
 namespace Content.Client.SS220.Weapons.Ranged.Systems;
+
 public sealed partial class BatteryWeaponFireModesSystem : EntitySystem
 {
     [Dependency] private readonly GunSystem _gunSystem = default!;
