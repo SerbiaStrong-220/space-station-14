@@ -57,6 +57,6 @@
 - type: loadout
   id: BootsJackSec
   equipment:
-    shoes: ClothingShoesBootsJackSec
+    shoes: ClothingShoesBootsJackSecFilled
 
 

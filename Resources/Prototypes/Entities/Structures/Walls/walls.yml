@@ -1275,9 +1275,9 @@
   name: basalt brick wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/cobblebrick_basalt.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_basalt.rsi #SS220-Walls-Sprite-Update-V2
   - type: Icon
-    sprite: Structures/Walls/cobblebrick_basalt.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_basalt.rsi #SS220-Walls-Sprite-Update-V2
   - type: IconSmooth
     key: cobblebricks
     base: cobblebrick
@@ -1315,9 +1315,9 @@
   name: sandstone brick wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/cobblebrick_sand.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_sand.rsi #SS220-Walls-Sprite-Update-V2
   - type: Icon
-    sprite: Structures/Walls/cobblebrick_sand.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_sand.rsi #SS220-Walls-Sprite-Update-V2
   - type: IconSmooth
     key: cobblebricks
     base: cobblebrick

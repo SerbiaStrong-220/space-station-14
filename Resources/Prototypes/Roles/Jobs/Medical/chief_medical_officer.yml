@@ -9,6 +9,9 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 180000 # SS220-RoleTime
+    - !type:RoleTimeRequirement
+      role: JobChemist
+      time: 18000 # SS220-RoleTime 2
     - !type:AgeRequirement
       requiredAge: 20
     - !type:SpeciesRequirement #SS220-jobbans begin
