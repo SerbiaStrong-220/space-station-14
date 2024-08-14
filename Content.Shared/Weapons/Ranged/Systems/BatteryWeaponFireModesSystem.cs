@@ -82,10 +82,6 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             {
                 text += fireMode.FireModeName;
             }
-            else
-            {
-                return;
-            }
             //SS220 Add Multifaze gun end
 
             var v = new Verb
@@ -146,46 +142,42 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
 
         if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
         {
+            if (HasComp<HitscanBatteryAmmoProviderComponent>(uid))
+                RemComp<HitscanBatteryAmmoProviderComponent>(uid);
+
+            if (!_gameTiming.ApplyingState)
+                EnsureComp<ProjectileBatteryAmmoProviderComponent>(uid);
+
+            if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
             {
-                if (HasComp<HitscanBatteryAmmoProviderComponent>(uid))
-                    RemComp<HitscanBatteryAmmoProviderComponent>(uid);
 
-                if (!_gameTiming.ApplyingState)
-                    EnsureComp<ProjectileBatteryAmmoProviderComponent>(uid);
+                if (fireMode.FireModeName is not null)
+                    name = fireMode.FireModeName;
+                else
+                    name = entProto.Name;
 
-                if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
-                {
+                projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
+                projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
 
-                    if (fireMode.FireModeName is not null)
-                        name = fireMode.FireModeName;
-                    else
-                        name = entProto.Name;
-
-                    projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
-                    projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
-
-                    Dirty(uid, projectileBatteryAmmoProvider);
-                }
+                Dirty(uid, projectileBatteryAmmoProvider);
             }
         }
         else if (_prototypeManager.TryIndex<HitscanPrototype>(fireMode.Prototype, out _))
         {
+            if (HasComp<ProjectileBatteryAmmoProviderComponent>(uid))
+                RemComp<ProjectileBatteryAmmoProviderComponent>(uid);
+
+            if (!_gameTiming.ApplyingState)
+                EnsureComp<HitscanBatteryAmmoProviderComponent>(uid);
+
+            if (TryComp(uid, out HitscanBatteryAmmoProviderComponent? hitscanBatteryAmmoProvider))
             {
-                if (HasComp<ProjectileBatteryAmmoProviderComponent>(uid))
-                    RemComp<ProjectileBatteryAmmoProviderComponent>(uid);
+                name += fireMode.FireModeName;
 
-                if (!_gameTiming.ApplyingState)
-                    EnsureComp<HitscanBatteryAmmoProviderComponent>(uid);
+                hitscanBatteryAmmoProvider.Prototype = fireMode.Prototype;
+                hitscanBatteryAmmoProvider.FireCost = fireMode.FireCost;
 
-                if (TryComp(uid, out HitscanBatteryAmmoProviderComponent? hitscanBatteryAmmoProvider))
-                {
-                    name += fireMode.FireModeName;
-
-                    hitscanBatteryAmmoProvider.Prototype = fireMode.Prototype;
-                    hitscanBatteryAmmoProvider.FireCost = fireMode.FireCost;
-
-                    Dirty(uid, hitscanBatteryAmmoProvider);
-                }
+                Dirty(uid, hitscanBatteryAmmoProvider);
             }
         }
         else
