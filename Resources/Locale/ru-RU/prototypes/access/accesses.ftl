@@ -27,9 +27,9 @@ id-card-access-level-service = Сервис
 id-card-access-level-janitor = Уборщик
 id-card-access-level-theatre = Театр
 id-card-access-level-chapel = Церковь
-#InternalAffairs-Begin
+#InternalAffairsBegin
 id-card-access-level-lawyer = Внутренние дела
-#InternalAffairs-End
+#InternalAffairsEnd
 id-card-access-level-maintenance = Техобслуживание
 id-card-access-level-external = Внешний
 id-card-access-level-nuclear-operative = Ядерный оперативник

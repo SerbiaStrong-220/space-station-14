@@ -15,7 +15,7 @@
       - Felinid #SS220-jobbans end
   startingGear: IAAGear
   icon: "JobIconIAA"
-  supervisors: job-supervisors-magistrate
+  supervisors: job-supervisors-magistrate #SS220-Internal-Affairs
   canBeAntag: false
   access:
   - Service
