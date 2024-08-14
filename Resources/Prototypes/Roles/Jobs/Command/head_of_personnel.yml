@@ -6,6 +6,12 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 180000 # SS220-RoleTime
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
@@ -54,5 +60,4 @@
     belt: BoxFolderClipboard
   storage:
     back:
-    - BoxSurvival
     - Flash

@@ -1,0 +1,43 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Quartermaster
+- type: entity
+  name: engraved knuckleduster
+  parent: BaseItem
+  id: EngravedKnuckleduster
+  description: The quartermaster's engraved knuckleduster, made by special order. It was issued as a means of combating the increased cases of theft of personal belongings and materials from the supply department.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    slots: [gloves]
+  - type: Item
+    size: Small
+    storedRotation: -90
+  - type: MeleeWeapon
+    autoAttack: true
+    attackRate: 1
+    damage:
+      types:
+       Blunt: 10
+       Stamina: 28
+    soundHit:
+      collection: GenericHit
+    animation: WeaponArcFist
+    mustBeEquippedToUse: true
+  - type: WeaponRandom
+    damageBonus:
+        types:
+            Blunt: 10
+            Stamina: 72 # 28 + 72 = 100 => куклу без стаминрезиста сразу ложит в стаминкрит
+    randomDamageChance: 0.2
+    damageSound: /Audio/SS220/Weapons/brassKnukles/critical-hit.ogg
+  - type: Tag
+    tags:
+    - EngravedKnuckleduster
+  - type: StaticPrice
+    price: 1000
+  - type: StealTarget
+    stealGroup: EngravedKnuckleduster

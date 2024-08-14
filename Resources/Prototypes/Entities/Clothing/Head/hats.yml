@@ -28,7 +28,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretFrench
-  name: French beret
+  name: french beret
   description: A French beret, "vive la France".
   components:
   - type: Sprite
@@ -63,7 +63,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatCasa
   name: casa
-  description: Cone-shaped hat
+  description: Cone-shaped hat.
   components:
     - type: Sprite
       sprite: Clothing/Head/Hats/casa.rsi
@@ -244,7 +244,7 @@
   id: ClothingHeadHatCentcom
   name: CentCom brand hat
   description: "It's good to be the emperor."
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/centcom.rsi
@@ -274,6 +274,10 @@
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
+  - type: PilotedClothing
+    pilotWhitelist:
+      tags:
+        - ChefPilot
   - type: Tag
     tags:
     - ClothMade
@@ -344,8 +348,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatHoshat
-  name: head of security's hat
-  description: "There's a new sheriff in station."
+  name: head of security cap
+  description: The robust standard-issue cap of the Head of Security. For showing the officers who's in charge.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/hoshat.rsi
@@ -419,7 +423,8 @@
   - type: HideLayerClothing
     slots:
     - Hair
-    - Snout
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadHatWizardBase
@@ -436,7 +441,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatSantahat
   name: santa hat
-  description: "A festive hat worn by Santa Claus"
+  description: A festive hat worn by Santa Claus.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/santahat.rsi
@@ -940,7 +945,7 @@
   id: ClothingHeadHatCentcomcap
   name: CentCom cap
   description: An extravagant, fancy Central Commander cap.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/comcap.rsi

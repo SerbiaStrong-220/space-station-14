@@ -154,3 +154,59 @@
   name: tile red wood floor
   spawn: FloorTileItemWoodTileRed
   maxCount: 30
+
+# Carpet
+
+- type: stack
+  id: FloorTileStackCarpetWhite
+  name: white carpet floor
+  spawn: FloorTileItemCarpetWhite
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetBlack
+  name: black carpet floor
+  spawn: FloorTileItemCarpetBlack
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetBlue
+  name: blue carpet floor
+  spawn: FloorTileItemCarpetBlue
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetOrange
+  name: orange carpet floor
+  spawn: FloorTileItemCarpetOrange
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetCyan
+  name: cyan carpet floor
+  spawn: FloorTileItemCarpetCyan
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetMagenta
+  name: magenta carpet floor
+  spawn: FloorTileItemCarpetMagenta
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetGreen
+  name: green carpet floor
+  spawn: FloorTileItemCarpetGreen
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetPurple
+  name: purple carpet floor
+  spawn: FloorTileItemCarpetPurple
+  maxCount: 30
+
+- type: stack
+  id: FloorTileStackCarpetRed
+  name: red carpet floor
+  spawn: FloorTileItemCarpetRed
+  maxCount: 30

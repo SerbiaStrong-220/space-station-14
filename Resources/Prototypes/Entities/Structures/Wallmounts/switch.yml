@@ -45,6 +45,9 @@
         indicator:
           True: {state: on}
           False: {state: off}
+  - type: Tag
+    tags:
+    - Structure
 
 - type: entity
   id: SignalButton
@@ -105,6 +108,9 @@
               collection: MetalBreak
               params:
                 volume: -8
+  - type: Tag
+    tags:
+    - Structure
 
 - type: entity
   id: ApcNetSwitch
@@ -138,6 +144,9 @@
       graph: LightSwitchGraph
       node: LightSwitchNode
     - type: Fixtures
+    - type: Tag
+      tags:
+      - Structure
 
 - type: entity
   id: TwoWayLever
@@ -188,6 +197,9 @@
         - Left
         - Right
         - Middle
+    - type: Tag
+      tags:
+      - Structure
 
 #directional
 
@@ -233,7 +245,7 @@
   id: LockableButton
   name: lockable button
   parent: SignalButtonDirectional
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Appearance
   - type: Lock
@@ -493,7 +505,7 @@
 - type: entity
   id: ButtonFrame
   name: button frame
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: It's a frame to help distinguish switches visually.
   placement:
     mode: SnapgridCenter

@@ -5,7 +5,7 @@
   id: TacmapBase
   name: tactic map
   abstract: true
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
   components:
@@ -111,7 +111,7 @@
   parent: BaseBoardTabletop
   id: FrankensteinTabletop
   name: frankenstein map
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
@@ -123,7 +123,7 @@
   parent: BaseBoardTabletop
   id: AxiomaTabletop
   name: axioma map
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
@@ -135,7 +135,7 @@
   parent: BaseBoardTabletop
   id: NoxTabletop
   name: nox map
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
@@ -147,7 +147,7 @@
   parent: BaseBoardTabletop
   id: EclipseTabletop
   name: eclipse map
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
@@ -160,7 +160,7 @@
   parent: BaseTabletopPiece
   id: ToyFigurineTacmapBase
   name: Base Tacmap Figurine
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   abstract: true
   components:
   - type: Sprite
@@ -170,7 +170,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineSecurityTabletop
   name: фигурка офицера СБ
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: security
@@ -179,7 +179,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineNukieTabletop
   name: фигурка оперативника синдиката
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: nukie
@@ -188,7 +188,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurinePassengerTabletop
   name: фигурка пассажира
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: passenger_greytide
@@ -197,7 +197,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineCaptainTabletop
   name: фигурка капитана
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: captain
@@ -206,7 +206,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineClownTabletop
   name: фигурка клоуна
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: clown
@@ -215,7 +215,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineSpaceDragonTabletop
   name: фигурка космического дракона
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: spacedragon
@@ -224,7 +224,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineQueenTabletop
   name: фигурка королевы ксеноморфов
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: queen
@@ -233,7 +233,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineDetectiveTabletop
   name: фигурка детектива
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: detective
@@ -242,7 +242,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineHeadOfSecurityTabletop
   name: фигурка ГСБ
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: hos
@@ -251,7 +251,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineWardenTabletop
   name: фигурка смотрителя
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: warden
@@ -260,7 +260,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineRatkingTabletop
   name: фигурка крысиного короля
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: ratking
@@ -269,7 +269,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagATabletop
   name: флаг А
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: flag_a
@@ -278,7 +278,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagBTabletop
   name: флаг Б
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: flag_b
@@ -287,7 +287,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagCTabletop
   name: флаг В
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: flag_c
@@ -296,7 +296,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagDTabletop
   name: флаг Г
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: flag_d
@@ -305,7 +305,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagETabletop
   name: флаг Д
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: flag_e
@@ -314,7 +314,7 @@
   parent: ToyFigurineTacmapBase
   id: ToyFigurineFlagFTabletop
   name: флаг Е
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: flag_f
@@ -323,7 +323,7 @@
   parent: ToyFigurineTacmapBase
   id: CigarSpentTabletop
   name: окурок сигары
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_cigar.rsi

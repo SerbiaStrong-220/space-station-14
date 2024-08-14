@@ -35,20 +35,21 @@
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/magsyndieebent.rsi
   - type: Magboots
-    toggleAction: ActionToggleMagSyndieEbent
   - type: ClothingSpeedModifier
     walkModifier: 1.1
     sprintModifier: 1.1
-    enabled: false
   - type: NoSlip
+  - type: ToggleClothing
+    action: ActionToggleMagSyndieEbent
+
 - type: entity
   id: ActionToggleMagSyndieEbent
-  parent: ActionBaseToggleMagboots
-  noSpawn: true
+  parent: ActionToggleMagboots
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     icon: { sprite: /Textures/SS220/Clothing/Shoes/Boots/magsyndieebent.rsi, state: icon }
-    iconOn: /Textures/SS220/Clothing/Shoes/Boots/magsyndieebent.rsi/icon-on.png 
+    iconOn: /Textures/SS220/Clothing/Shoes/Boots/magsyndieebent.rsi/icon-on.png
 
 - type: entity
   parent: ClothingBackpack

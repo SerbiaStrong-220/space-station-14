@@ -11,7 +11,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseSSSP
   id: ClothingHeadHelmetHardsuitUSSPAdmiral
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем тяжёлого боевого скафандра Маршала СССП
   components:
   - type: Sprite
@@ -23,7 +23,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseSSSP
   id: ClothingHeadHelmetHardsuitUSSPCE
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем инженерного скафандра СССП
   components:
   - type: Sprite
@@ -35,7 +35,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseSSSP
   id: ClothingHeadHelmetHardsuitUSSPCMO
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем медицинского скафандра СССП
   components:
   - type: Sprite
@@ -47,7 +47,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseSSSP
   id: ClothingHeadHelmetHardsuitUSSPSoldier
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем красноармейского скафандра СССП
   components:
   - type: Sprite
@@ -59,7 +59,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseSSSP
   id: ClothingHeadHelmetHardsuitUSSPHeavy2
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем тяжёлого боевого скафандра СССП 2.0
   components:
   - type: Sprite

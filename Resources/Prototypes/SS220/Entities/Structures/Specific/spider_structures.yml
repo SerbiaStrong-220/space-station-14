@@ -1,0 +1,179 @@
+# AT THE BOTTOM IS A TILE MADE OF COBWEBS.
+
+#TODO: Сделать нормальную анимацию спавна стены без использования костыля в виде спавна тайлов и столов
+#Base
+- type: entity
+  parent: BaseItemSpider
+  id: BaseFloorTileItemSpiders
+  description: These could work as a pretty decent throwing weapon.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Tiles/web.rsi
+    state: icon
+  - type: FloorTile
+    outputs:
+      - FloorWebTile
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Construction
+    graph: WebObjects
+    node: tile
+  - type: TimedDespawn 
+  - type: SpawnOnDespawn
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+
+#Tile (used to spawn walls)
+# - type: entity
+#   parent: BaseFloorTileItemSpiders
+#   id: FloorTileItemWebSpiders
+#   name: web construction
+#   description: Very smooth and surprisingly durable.
+#   noSpawn: true  
+#   components:
+#   - type: TimedDespawn 
+#     lifetime: 5
+#   - type: SpawnOnDespawn
+#     prototype: TableWebSpiders 
+
+# - type: entity
+#   name: web  
+#   description: Web
+#   parent: BaseFloorTileItemSpiders
+#   id: FloorTileItemWebSpidersDurable
+#   noSpawn: true
+#   components:
+#   - type: TimedDespawn 
+#     lifetime: 6
+#   - type: SpawnOnDespawn
+#     prototype: TableWebSpidersDurable
+#   - type: Sprite
+#     shader: unshaded
+#     color: gray
+
+#Table (заглушка типо как анимация)
+- type: entity
+  parent: TableBase
+  id: TableWebSpiders 
+  name: web
+  description: web
+  noSpawn: true
+  components:
+  - type: Damageable
+    damageModifierSet: Web
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/web.rsi
+  - type: Icon
+    sprite: Structures/Furniture/Tables/web.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Construction
+    graph: WebStructures
+    node: table
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCarpet
+  - type: TimedDespawn 
+    lifetime: 5
+  - type: SpawnOnDespawn
+    prototype: WallWeb
+
+- type: entity
+  parent: TableWebSpiders
+  id: TableWebSpidersDurable
+  name: web
+  description: web
+  noSpawn: true
+  components:
+  - type: TimedDespawn 
+    lifetime: 8
+  - type: SpawnOnDespawn
+    prototype: WallWebDurable  
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/web.rsi
+    shader: unshaded
+    color: gray
+
+#Wall
+- type: entity
+  parent: BaseWall
+  id: WallWebDurable
+  name: web
+  description: web
+  components:
+  - type: Clickable
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Damageable
+    damageModifierSet: Web
+  - type: Tag
+    tags:
+      - Wall
+  - type: Sprite
+    sprite: Structures/Walls/web.rsi
+    shader: unshaded
+    color: gray
+  - type: Icon
+    sprite: Structures/Walls/web.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 125
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWebSilk:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+  - type: IconSmooth
+    key: webs
+    base: wall
+  - type: Construction
+    graph: WebStructures
+    node: wall

@@ -21,24 +21,16 @@
 # Jumpsuit
 - type: loadout
   id: JumpsuitNTR
-  equipment: JumpsuitNTR
   effects:
   - !type:GroupLoadoutEffect
     proto: NanoTrasenRepresentativeTime
-
-- type: startingGear
-  id: JumpsuitNTR
   equipment:
     jumpsuit: ClothingUniformJumpsuitNTR
 
 - type: loadout
   id: JumpsuitTrustedLawyer
-  equipment: JumpsuitTrustedLawyer
   effects:
   - !type:GroupLoadoutEffect
     proto: TrustedLawyerTime
-
-- type: startingGear
-  id: JumpsuitTrustedLawyer
   equipment:
     jumpsuit: ClothingUniformJumpsuitTrustedLawyer

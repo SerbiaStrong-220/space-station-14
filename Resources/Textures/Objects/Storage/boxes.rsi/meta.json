@@ -26,6 +26,9 @@
             "name": "emergencytank"
         },
         {
+            "name": "nitrogentank"
+        },
+        {
             "name": "heart"
         },
         {
@@ -220,6 +223,9 @@
         },
         {
             "name": "vials"
+        },
+        {
+            "name": "envelope"
         }
     ]
 }

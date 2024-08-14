@@ -24,7 +24,7 @@
       enum.PaperUiKey.Key:
         type: ButtScanBoundUserInterface
   - type: Paper
-    writable: false
+    editingDisabled: true
   - type: Appearance
   - type: PaperVisuals
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"

@@ -35,6 +35,8 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
+  - type: EmitSoundOnUse
+    handle: false # don't want the sound to stop the explosion from triggering
 
 - type: entity
   parent: BaseItem

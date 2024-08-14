@@ -8,6 +8,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Slippery;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Whitelist; //SS220 Flying mobs slowdown fix
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 
@@ -25,6 +26,16 @@ namespace Content.Server.Chemistry.TileReactions
         /// <see cref="SlipperyComponent.SuperSlippery"/>
         /// </summary>
         [DataField("superSlippery")] private bool _superSlippery;
+
+        //SS220 Flying mobs slowdown fix begin
+        private readonly EntityWhitelist _ignoreWhitelist = new()
+        {
+            Components = new[]
+            {
+                "IgnoreOnfloorSlowers"
+            }
+        };
+        //SS220 Flying mobs slowdown fix end
 
         public FixedPoint2 TileReact(TileRef tile,
             ReagentPrototype reagent,
@@ -49,6 +60,7 @@ namespace Content.Server.Chemistry.TileReactions
                 var slow = entityManager.EnsureComponent<SpeedModifierContactsComponent>(puddleUid);
                 var speedModifier = 1 - reagent.Viscosity;
                 entityManager.EntitySysManager.GetEntitySystem<SpeedModifierContactsSystem>().ChangeModifiers(puddleUid, speedModifier, slow);
+                entityManager.EntitySysManager.GetEntitySystem<SpeedModifierContactsSystem>().SetWhitelist(puddleUid, _ignoreWhitelist, slow); //SS220 Flying mobs slowdown fix
 
                 return reactVolume;
             }

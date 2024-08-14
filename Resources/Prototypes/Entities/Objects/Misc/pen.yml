@@ -18,6 +18,14 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 25
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/pen_click.ogg
+      params:
+        volume: -4
+        maxDistance: 2
+  - type: UseDelay
+    delay: 1.5
 
 - type: entity
   parent: Pen
@@ -29,6 +37,7 @@
     removalTime: 0.0
   - type: ThrowingAngle
     angle: 315
+  - type: LandAtCursor
   - type: DamageOtherOnHit
     damage:
       types:
@@ -89,7 +98,7 @@
   name: CentCom pen
   parent: CyberPen
   id: PenCentcom
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   description: In an attempt to keep up with the "power" of the cybersun bureaucracy, NT made a replica of cyber pen, in their corporate style.
   components:
   - type: Sprite

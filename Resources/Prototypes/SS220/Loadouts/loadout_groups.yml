@@ -58,6 +58,7 @@
   name: loadout-group-psychologist-jumpsuit
   loadouts:
   - PsychologistJumpsuit
+  - PsychologistJumpskirt
   - PsychologistJumpsuitTurtleneck
   - PsychologistJumpskirtTurtleneck
 

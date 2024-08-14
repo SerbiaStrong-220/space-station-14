@@ -3,7 +3,7 @@
   parent:
    - BaseStation
    - BaseStationSS220Syndicate
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Transform
 

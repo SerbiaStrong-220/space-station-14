@@ -260,7 +260,7 @@ entities:
       parent: 173
     - type: DeviceLinkSink
       links:
-      - 25
+      - 4
   - uid: 21
     components:
     - type: Transform
@@ -269,7 +269,7 @@ entities:
       parent: 173
     - type: DeviceLinkSink
       links:
-      - 25
+      - 27
   - uid: 22
     components:
     - type: Transform
@@ -278,7 +278,7 @@ entities:
       parent: 173
     - type: DeviceLinkSink
       links:
-      - 25
+      - 20
 - proto: CableApcExtension
   entities:
   - uid: 100
@@ -935,12 +935,20 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.5,-0.5
       parent: 173
+    - type: DeviceLinkSource
+      linkedPorts:
+        6:
+        - Pressed: Toggle
   - uid: 20
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,-0.5
       parent: 173
+    - type: DeviceLinkSource
+      linkedPorts:
+        22:
+        - Pressed: Toggle
   - uid: 25
     components:
     - type: Transform
@@ -951,18 +959,16 @@ entities:
       linkedPorts:
         3:
         - Pressed: Toggle
-        21:
-        - Pressed: Toggle
-        22:
-        - Pressed: Toggle
-        6:
-        - Pressed: Toggle
   - uid: 27
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,5.5
       parent: 173
+    - type: DeviceLinkSource
+      linkedPorts:
+        21:
+        - Pressed: Toggle
 - proto: SubstationWallBasic
   entities:
   - uid: 66

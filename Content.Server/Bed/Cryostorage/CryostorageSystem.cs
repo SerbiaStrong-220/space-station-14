@@ -59,6 +59,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         SubscribeLocalEvent<CryostorageComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpened);
         SubscribeLocalEvent<CryostorageComponent, CryostorageRemoveItemBuiMessage>(OnRemoveItemBuiMessage);
+        SubscribeLocalEvent<CryostorageComponent, CryopodGhostActionEvent>(OnCryopodGhostAction);
 
         SubscribeLocalEvent<CryostorageContainedComponent, PlayerSpawnCompleteEvent>(OnPlayerSpawned);
         SubscribeLocalEvent<CryostorageContainedComponent, MindRemovedMessage>(OnMindRemoved);
@@ -373,4 +374,11 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         return null;
     }
     // end 220 cryo department record
+    // start 220 cryo action
+    public void OnCryopodGhostAction(Entity<CryostorageComponent> ent, ref CryopodGhostActionEvent args)
+    {
+        if (TryComp<CryostorageContainedComponent>(args.Performer, out var contained))
+            contained.GracePeriodEndTime = Timing.CurTime;
+    }
+    // start 220 cryo action
 }

@@ -1,7 +1,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterCentcomm
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: Centcom winter coat hood
   description: A hood for keeping the central comander's head warm.
   components:

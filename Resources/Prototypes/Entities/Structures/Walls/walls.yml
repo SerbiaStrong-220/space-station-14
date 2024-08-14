@@ -127,9 +127,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/clown.rsi
+    sprite: SS220/Structures/Walls/clown.rsi #SS220-Walls-Sprite-Update
   - type: Icon
-    sprite: Structures/Walls/clown.rsi
+    sprite: SS220/Structures/Walls/clown.rsi #SS220-Walls-Sprite-Update
   - type: Construction
     graph: Girder
     node: bananiumWall
@@ -652,9 +652,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/sandstone.rsi
+    sprite: SS220/Structures/Walls/sandstone.rsi #SS220-Walls-Sprite-Update
   - type: Icon
-    sprite: Structures/Walls/sandstone.rsi
+    sprite: SS220/Structures/Walls/sandstone.rsi #SS220-Walls-Sprite-Update
   - type: RCDDeconstructable
     cost: 6
     delay: 8
@@ -984,9 +984,9 @@
   name: wood wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
   - type: Icon
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
   - type: Construction
     graph: Girder
     node: woodWall
@@ -1110,6 +1110,11 @@
   - type: IconSmooth
     key: walls
     base: mining
+  - type: RandomIconSmooth
+    randomStates:
+    - mining
+    - miningB
+  - type: Appearance
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -1185,7 +1190,7 @@
 
 - type: entity
   id: WallInvisible
-  name: Invisible Wall
+  name: invisible wall
   components:
   - type: TimedDespawn
     lifetime: 15
@@ -1270,9 +1275,9 @@
   name: basalt brick wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/cobblebrick_basalt.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_basalt.rsi #SS220-Walls-Sprite-Update-V2
   - type: Icon
-    sprite: Structures/Walls/cobblebrick_basalt.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_basalt.rsi #SS220-Walls-Sprite-Update-V2
   - type: IconSmooth
     key: cobblebricks
     base: cobblebrick
@@ -1310,9 +1315,9 @@
   name: sandstone brick wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/cobblebrick_sand.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_sand.rsi #SS220-Walls-Sprite-Update-V2
   - type: Icon
-    sprite: Structures/Walls/cobblebrick_sand.rsi
+    sprite: SS220/Structures/Walls/cobblebrick_sand.rsi #SS220-Walls-Sprite-Update-V2
   - type: IconSmooth
     key: cobblebricks
     base: cobblebrick

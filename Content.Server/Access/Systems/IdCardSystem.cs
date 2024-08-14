@@ -54,7 +54,7 @@ public sealed class IdCardSystem : SharedIdCardSystem
             }
 
             //Explode if the microwave can't handle it
-            if (!micro.CanMicrowaveIdsSafely)
+            if (!micro.CanMicrowaveIdsSafely && _random.Prob(micro.IdCardExplosionChance)) //SS220 Microwave explosion tweak
             {
                 _microwave.Explode((args.Microwave, micro));
                 return;

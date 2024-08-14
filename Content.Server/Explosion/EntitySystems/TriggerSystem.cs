@@ -154,7 +154,7 @@ namespace Content.Server.Explosion.EntitySystems
         private void HandleFlashTrigger(EntityUid uid, FlashOnTriggerComponent component, TriggerEvent args)
         {
             // TODO Make flash durations sane ffs.
-            _flashSystem.FlashArea(uid, args.User, component.Range, component.Duration * 1000f, probability: component.Probability);
+            _flashSystem.FlashArea(uid, args.User, component.Range, component.Duration * 1000f, probability: component.Probability, stun: component.Stun, stunDuration: component.StunDuration); // 220 flash grenade stun
             args.Handled = true;
         }
 
@@ -263,6 +263,18 @@ namespace Content.Server.Explosion.EntitySystems
                 return;
 
             comp.TimeRemaining += amount;
+        }
+
+        /// <summary>
+        /// Start the timer for triggering the device.
+        /// </summary>
+        public void StartTimer(Entity<OnUseTimerTriggerComponent?> ent, EntityUid? user)
+        {
+            if (!Resolve(ent, ref ent.Comp, false))
+                return;
+
+            var comp = ent.Comp;
+            HandleTimerTrigger(ent, user, comp.Delay, comp.BeepInterval, comp.InitialBeepDelay, comp.BeepSound);
         }
 
         public void HandleTimerTrigger(EntityUid uid, EntityUid? user, float delay, float beepInterval, float? initialBeepDelay, SoundSpecifier? beepSound)

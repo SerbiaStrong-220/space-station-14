@@ -1,5 +1,7 @@
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.DoAfter; //SS220-fold-doafter
+using Content.Shared.SS220.Foldable; //SS220-fold-doafter
 using Content.Shared.Storage.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -13,7 +15,8 @@ public sealed class FoldableSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-fold-doafter
+ 
     public override void Initialize()
     {
         base.Initialize();
@@ -25,8 +28,9 @@ public sealed class FoldableSystem : EntitySystem
         SubscribeLocalEvent<FoldableComponent, ContainerGettingInsertedAttemptEvent>(OnInsertEvent);
         SubscribeLocalEvent<FoldableComponent, StoreMobInItemContainerAttemptEvent>(OnStoreThisAttempt);
         SubscribeLocalEvent<FoldableComponent, StorageOpenAttemptEvent>(OnFoldableOpenAttempt);
+        SubscribeLocalEvent<FoldableComponent, SetFoldableStateDoAfterEvent>(OnSetFoldableDoAfter); //SS220-fold-doafter
 
-        SubscribeLocalEvent<FoldableComponent, BuckleAttemptEvent>(OnBuckleAttempt);
+        SubscribeLocalEvent<FoldableComponent, StrapAttemptEvent>(OnStrapAttempt);
     }
 
     private void OnHandleState(EntityUid uid, FoldableComponent component, ref AfterAutoHandleStateEvent args)
@@ -53,9 +57,9 @@ public sealed class FoldableSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    public void OnBuckleAttempt(EntityUid uid, FoldableComponent comp, ref BuckleAttemptEvent args)
+    public void OnStrapAttempt(EntityUid uid, FoldableComponent comp, ref StrapAttemptEvent args)
     {
-        if (args.Buckling && comp.IsFolded)
+        if (comp.IsFolded)
             args.Cancelled = true;
     }
 
@@ -90,10 +94,12 @@ public sealed class FoldableSystem : EntitySystem
             args.Cancel();
     }
 
-    public bool TryToggleFold(EntityUid uid, FoldableComponent comp)
+    //SS220-fold-doafter begin
+    public bool TryToggleFold(EntityUid uid, FoldableComponent comp, EntityUid? user)
     {
-        return TrySetFolded(uid, comp, !comp.IsFolded);
+        return TrySetFolded(uid, comp, !comp.IsFolded, user);
     }
+    //SS220-fold-doafter end
 
     public bool CanToggleFold(EntityUid uid, FoldableComponent? fold = null)
     {
@@ -109,16 +115,38 @@ public sealed class FoldableSystem : EntitySystem
         return !ev.Cancelled;
     }
 
+    //SS220-fold-doafter begin
+    private void OnSetFoldableDoAfter(Entity<FoldableComponent> entity, ref SetFoldableStateDoAfterEvent args)
+    {
+        SetFolded(entity.Owner, entity.Comp, args.State);
+    }
+    //SS220-fold-doafter end
+
     /// <summary>
     /// Try to fold/unfold
     /// </summary>
-    public bool TrySetFolded(EntityUid uid, FoldableComponent comp, bool state)
+    public bool TrySetFolded(EntityUid uid, FoldableComponent comp, bool state, EntityUid? user = null) //SS220-fold-doafter
     {
         if (state == comp.IsFolded)
             return false;
 
         if (!CanToggleFold(uid, comp))
             return false;
+
+        //SS220-fold-doafter begin
+        if (comp.FoldTime != null && user != null)
+        {
+            var foldDoAfterArgs = new DoAfterArgs(EntityManager, user.Value, comp.FoldTime.Value, new SetFoldableStateDoAfterEvent(state), uid, uid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                NeedHand = true
+            };
+
+            _doAfter.TryStartDoAfter(foldDoAfterArgs);
+            return true;
+        }
+        //SS220-fold-doafter end
 
         SetFolded(uid, comp, state);
         return true;
@@ -133,7 +161,7 @@ public sealed class FoldableSystem : EntitySystem
 
         AlternativeVerb verb = new()
         {
-            Act = () => TryToggleFold(uid, component),
+            Act = () => TryToggleFold(uid, component, args.User), //SS220-fold-doafter
             Text = component.IsFolded ? Loc.GetString(component.UnfoldVerbText) : Loc.GetString(component.FoldVerbText),
             Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/fold.svg.192dpi.png")),
 

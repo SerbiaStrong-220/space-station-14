@@ -257,7 +257,7 @@
 - type: entity
   parent: AirlockCentralCommand
   id: AirlockCentralCommandLocked
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Central Command, Locked
   components:
   - type: ContainerFill
@@ -623,7 +623,7 @@
 - type: entity
   parent: AirlockCentralCommandGlass
   id: AirlockCentralCommandGlassLocked
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Central Command, Locked
   components:
   - type: ContainerFill
@@ -1162,6 +1162,10 @@
   suffix: External, Escape 3x4, Glass, Docking
   components:
   - type: GridFill
+    addComponents:
+    - type: IFF
+      flags:
+      - HideLabel
 
 #HighSecDoors
 - type: entity

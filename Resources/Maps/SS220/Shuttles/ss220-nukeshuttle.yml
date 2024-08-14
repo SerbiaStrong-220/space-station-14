@@ -4031,7 +4031,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: KitchenMicrowave
+- proto: SyndicateMicrowave
   entities:
   - uid: 1515
     components:

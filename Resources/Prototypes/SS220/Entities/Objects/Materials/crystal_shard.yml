@@ -1,0 +1,23 @@
+- type: entity
+  id: ShardCrystalBlueXeno 
+  parent: ShardCrystalBlue
+  name: shard of blue crystal
+  description: A small piece of crystal.
+  noSpawn: true
+  components:  
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWebSilk:
+            min: 0
+            max: 0
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy  

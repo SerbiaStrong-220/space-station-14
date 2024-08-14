@@ -1,29 +1,17 @@
 # Head
 - type: loadout
   id: HatSeniorEngineer
-  equipment: HatSeniorEngineer
-
-- type: startingGear
-  id: HatSeniorEngineer
   equipment:
     head: ClothingHeadHatBeretEngineering
-    
+
 # Jumpsuit
 - type: loadout
   id: SeniorsEngineerJumpsuit
-  equipment: SeniorsEngineerJumpsuit
-
-- type: startingGear
-  id: SeniorsEngineerJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitSeniorEngineer
-    
+
 # Jumpskirt
 - type: loadout
-  id: SeniorsEngineerJumpskirt
-  equipment: SeniorEngineerJumpskirt
-
-- type: startingGear
   id: SeniorsEngineerJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtSeniorEngineer

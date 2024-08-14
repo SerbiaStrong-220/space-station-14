@@ -228,10 +228,10 @@
   suffix: DO NOT MAP
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shuttles/launcher.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shuttles/launcher.rsi #SS220-Duster-Resprite
     layers:
     - state: exp-2100g
-    - state: mag-7
+    - state: mag-5 #SS220-Duster-Resprite
       map: ["enum.GunVisualLayers.Mag"]
   - type: ContainerContainer
     containers:
@@ -263,8 +263,8 @@
   - type: MagazineAmmoProvider
   - type: MagazineVisuals
     magState: mag
-    steps: 8
-    zeroVisible: false
+    steps: 6 #SS220-Duster-Resprite
+    zeroVisible: true #SS220-Duster-Resprite
   - type: ItemSlots
     slots:
       gun_magazine:

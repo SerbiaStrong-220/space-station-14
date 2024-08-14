@@ -124,7 +124,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         var cryostorageComponents = EntityQueryEnumerator<CryostorageComponent>();
         while (cryostorageComponents.MoveNext(out var cryostorageUid, out var сryostorageComp))
         {
-            if (TryTeleportToCryo(target, cryostorageUid, сryostorageComp.TeleportPortralID))
+            if (TryTeleportToCryo(target, cryostorageUid, station.Value, сryostorageComp.TeleportPortralID))
                 return true;
         }
 
@@ -136,14 +136,17 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         return EntityQuery<CryostorageComponent>().Any(comp => comp.StoredPlayers.Contains(target));
     }
 
-    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, string teleportPortralID)
+    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, EntityUid station, string teleportPortralID)
     {
+        if (station != _station.GetOwningStation(cryopodUid))
+            return false;
+
         var portal = Spawn(teleportPortralID, Transform(target).Coordinates);
 
         if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
 
-        var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4f),
+        var doAfterArgs = new DoAfterArgs(EntityManager, target, TimeSpan.FromSeconds(4),
             new TeleportToCryoFinished(GetNetEntity(portal)), cryopodUid)
         {
             BreakOnDamage = false,
@@ -170,7 +173,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         }
 
         if (TryComp<CryostorageContainedComponent>(args.User, out var contained))
-            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(5f);
+            contained.GracePeriodEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(1);
 
         var portalEntity = GetEntity(args.PortalId);
 

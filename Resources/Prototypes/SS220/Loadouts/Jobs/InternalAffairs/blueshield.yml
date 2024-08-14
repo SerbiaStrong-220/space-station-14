@@ -11,18 +11,10 @@
 # Jumpsuit
 - type: loadout
   id: BlueShieldJumpsuit
-  equipment: BlueShieldJumpsuit
-
-- type: startingGear
-  id: BlueShieldJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
 
 - type: loadout
-  id: BlueShieldJumpsuit2
-  equipment: BlueShieldJumpsuit2
-
-- type: startingGear
   id: BlueShieldJumpsuit2
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield2
@@ -38,13 +30,9 @@
 
 - type: loadout
   id: BlueShieldJumpsuitTurtle
-  equipment: BlueShieldJumpsuitTurtle
   effects:
   - !type:GroupLoadoutEffect
     proto: BlueShieldTurtleneck
-
-- type: startingGear
-  id: BlueShieldJumpsuitTurtle
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
 
@@ -63,18 +51,10 @@
 # Outer clothing
 - type: loadout
   id: BlueShieldArmorBulletproof
-  equipment: BlueShieldArmorBulletproof
-
-- type: startingGear
-  id: BlueShieldArmorBulletproof
   equipment:
     outerClothing: ClothingOuterArmorBlueShieldBulletproof
 
 - type: loadout
-  id: BlueShieldCoat
-  equipment: BlueShieldCoat
-
-- type: startingGear
   id: BlueShieldCoat
   equipment:
     outerClothing: ClothingOuterBlueShieldCoat
@@ -82,18 +62,10 @@
 # Belt
 - type: loadout
   id: BlueShieldBelt
-  equipment: BlueShieldBelt
-
-- type: startingGear
-  id: BlueShieldBelt
   equipment:
     belt: ClothingBeltBlueShieldBeltFilled
 
 - type: loadout
-  id: BlueShieldWebbing
-  equipment: BlueShieldWebbing
-
-- type: startingGear
   id: BlueShieldWebbing
   equipment:
     belt: ClothingBeltBlueShieldWebbingFilled
