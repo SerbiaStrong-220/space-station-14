@@ -80,11 +80,11 @@
   description: A backpack specially designed for the Blue Shield PMCs, with a unique pocket hardsuit technology.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Satchels/blueshield_backpacks.rsi
+    sprite: SS220/Clothing/Back/Backpacks/blueshield_backpacks.rsi
   - type: Storage
     grid:
     - 0,0,7,4
   - type: ToggleableClothing
     slot: outerClothing
     requiredSlot: back
-    clothingPrototype: ClothingOuterHardsuitBlueshield
+    clothingPrototype: ClothingOuterHardsuitLightBlueshield
