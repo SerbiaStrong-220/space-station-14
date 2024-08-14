@@ -80,10 +80,10 @@ public sealed partial class SuperMatterComponent : Component
     // ProtoId Sector
 
     [DataField]
-    public ProtoId<EntityPrototype> ConsumeResultEntityPrototype = "Ash";
+    public EntProtoId ConsumeResultEntityPrototype = "Ash";
 
     // Audio Sector
 
     [DataField]
-    public SoundSpecifier ConsumeSound = new SoundPathSpecifier("/Audio/SS220/Admin_sounds/ahelp_sound.ogg");
+    public SoundSpecifier ConsumeSound = new SoundPathSpecifier("/Audio/SS220/Effects/shield/eshild_hit.ogg");
 }
