@@ -20,17 +20,21 @@
     - proto: BulletDisabler
       fireCost: 100
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      magState: mag
     - proto: RedMediumLaser
       fireModeName: Красный средний лазер
       fireCost: 50
       soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      magState: magMediumLaser
     - proto: AnomalousParticleZetaStrong
       fireCost: 200
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
+      magState: magParticleZeta
     - proto: RedLaser
       fireModeName: Красный лазер
       fireCost: 50
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      magState: magLaser
   - type: MagazineVisuals
     magState: mag
     steps: 5

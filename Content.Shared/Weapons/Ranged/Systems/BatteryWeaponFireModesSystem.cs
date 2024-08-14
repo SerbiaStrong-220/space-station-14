@@ -6,6 +6,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -201,6 +202,11 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         {
             _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", name)), uid, user.Value); //SS220 Add Multifaze gun
         }
+
+        //SS220 Add Multifaze gun begin
+        var ev = new ChangeFireModeEvent(uid, component, index);
+        RaiseLocalEvent(uid, ref ev);
+        //SS220 Add Multifaze gun end
     }
 
     //SS220 Add Multifaze gun begin
@@ -208,5 +214,8 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     {
         SetFireMode(uid, component, component.CurrentFireMode);
     }
+
+    [ByRefEvent]
+    public record struct ChangeFireModeEvent(EntityUid Uid, BatteryWeaponFireModesComponent Component, int Index);
     //SS220 Add Multifaze gun end
 }

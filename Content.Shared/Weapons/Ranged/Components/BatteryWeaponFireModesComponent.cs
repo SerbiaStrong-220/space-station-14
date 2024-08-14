@@ -43,6 +43,9 @@ public sealed partial class BatteryWeaponFireMode
 
     [DataField]
     public string? SoundGunshot;
+
+    [DataField]
+    public string? MagState;
     //SS220 Add Multifaze gun end
 
     /// <summary>
