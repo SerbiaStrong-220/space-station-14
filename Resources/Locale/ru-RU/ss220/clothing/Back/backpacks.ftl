@@ -1,2 +1,9 @@
 ent-ClothingBackpackBlueShield = рюкзак "Синий Щит"
     .desc = Рюкзак, специально разработанный для ЧВК "Синий Щит", с уникальной технологией карманного скафандра.
+ent-ClothingBackpackBlueShieldOperative = рюкзак оперативника "Синий Щит"
+    .desc = { ent-ClothingBackpackBlueShield.desc }
+ent-ClothingBackpackBlueShieldOperativeFilled = { ent-ClothingBackpackBlueShieldOperative }
+    .suffix = Заполненный
+    .desc = { ent-ClothingBackpackBlueShield.desc }
+ent-ClothingBackpackCentCommFilled = кожаная сумка
+    .desc = Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.

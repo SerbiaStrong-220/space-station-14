@@ -1,51 +1,8 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-- type: entity
-  parent: ClothingBackpackSatchelLeather
-  id: ClothingBackpackCentCommFilled
-  name: кожаная сумка
-  description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
-#  noSpawn: True #Зачем?..
-  components:
-    - type: StorageFill
-      contents:
-        - id: BoxSurvival
-        - id: NTbaton
-        - id: RubberStampCentcomm
-        - id: Flash
-        - id: CigarGoldCase
-        - id: ExpensiveLighterNanotrasen
-        - id: BoxFolderCentComm
-        - id: BoxFolderBlue
-        - id: RubberStampApproved
-        - id: RubberStampDenied
+# Командование
 
-- type: entity
-  parent: ClothingBackpack
-  id: ClothingBackSatchelSRT
-  name: сумка ГСН
-  description: Прочная сумка спецназа NanoTrasen.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Satchel/SRTSatchel.rsi
-  - type: Storage
-    grid:
-    - 0,0,6,3
-
-- type: entity
-  noSpawn: false
-  parent: ClothingBackSatchelSRT
-  id: ClothingBackSatchelSRTFilled
-  suffix: Заполненный
-  components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalSecurity
-      - id: WeaponAdvancedRevolver
-      - id: WeaponSubMachineGunAtreides
-      - id: MagazinePistolSubMachineGun
-      - id: MagazinePistolSubMachineGun
-
+  # Капитан
 - type: entity
   parent: ClothingBackpack
   id: ClothingBackpackWhiteCaptain
@@ -73,6 +30,9 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi
 
+# Внутренние дела
+
+  # Офицер "Синий Щит"
 - type: entity
   parent: ClothingBackpackSatchel
   id: ClothingBackpackBlueShield
@@ -88,3 +48,66 @@
     slot: outerClothing
     requiredSlot: back
     clothingPrototype: ClothingOuterHardsuitLightBlueshield
+
+# Центком
+
+- type: entity
+  parent: ClothingBackpackSatchelLeather
+  id: ClothingBackpackCentCommFilled
+  name: leather bag
+  description: A slightly dilapidated bag that has not been changed to the Central Commander for many years - they say they have not allocated a budget.
+#  noSpawn: True #Зачем?..
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: NTbaton
+        - id: RubberStampCentcomm
+        - id: Flash
+        - id: CigarGoldCase
+        - id: ExpensiveLighterNanotrasen
+        - id: BoxFolderCentComm
+        - id: BoxFolderBlue
+        - id: RubberStampApproved
+        - id: RubberStampDenied
+
+# - type: entity
+#   parent: ClothingBackpack
+#   id: ClothingBackSatchelSRT
+#   name: сумка ГСН
+#   description: Прочная сумка спецназа NanoTrasen.
+#   components:
+#   - type: Sprite
+#     sprite: SS220/Clothing/Satchel/SRTSatchel.rsi
+#   - type: Storage
+#     grid:
+#     - 0,0,6,3
+
+- type: entity
+  parent: ClothingBackpackBlueShieldOperative
+  id: ClothingBackpackBlueShieldOperative
+  name: blueshield operative backpack
+  description: A backpack specially designed for the Blue Shield PMCs, with a unique pocket hardsuit technology.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/blueshield_backpacks.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: ToggleableClothing
+    slot: outerClothing
+    requiredSlot: back
+    clothingPrototype: ClothingOuterHardsuitLightBlueshield #TODO: Сменить на скафандр оперативника СЩ
+
+- type: entity
+  parent: ClothingBackpackBlueShieldOperative
+  id: ClothingBackpackBlueShieldOperativeFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: WeaponAdvancedRevolver #TODO: Сменить
+      - id: WeaponSubMachineGunAtreides
+      - id: MagazinePistolSubMachineGun
+      - id: MagazinePistolSubMachineGun
+      - id: MedkitCombatFilled

@@ -1,0 +1,27 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Центком
+
+  # Оперативник "Синий Щит"
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckScarfCentcomBlueShieldOperative
+  name: the "Blue Shield" operative's scarf
+  description: Black tones allow you to look into the farthest corners of the soul of the owner of this scarf. Don't stare, it's better to leave.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Scarfs/blackcentscarf.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Scarfs/blackcentscarf.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckScarfCentcomm
+  name: the scarf of the Central Command
+  description: Not everyone can wear this tasteless stuff, right? Someone likes it, and someone will be shot.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Scarfs/yellowcentscarf.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Scarfs/yellowcentscarf.rsi
+

@@ -74,11 +74,11 @@
 - type: entity
   parent: CentcomIDCard
   id: OperativeSRTIDCard
-  name: ID карта Оперативника ГСН
+  name: ID карта Оперативника "Синий Щит"
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Оперативник ГСН
+      jobTitle: Оперативник "Синий Шит"
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
@@ -99,7 +99,7 @@
       job: SecurityOfficer
       name: Рокси
 
-      
+
 - type: entity
   parent: PassengerIDCard
   id: SeniorServiceIDCard

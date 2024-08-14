@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Оперативник Группы Специального Назначения
+  name: Оперативник "Синий Щит"
   id: CentCommOperativeSRT
   components:
     - type: Sprite

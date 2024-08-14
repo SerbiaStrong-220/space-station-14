@@ -13,3 +13,7 @@ ent-DoorElectronicsUsspMedical = { ent-DoorElectronicsUssp }
 ent-DoorElectronicsUsspEngineering = { ent-DoorElectronicsUssp }
     .suffix = СССП, Закрыт, Инженерный
     .desc = { ent-DoorElectronics.desc }
+
+ent-AirlockGlassCentcommLockedGSN = { ent-AirlockGlass }
+    .suffix = ЦК, Закрыто, Оперативник "Синий Щит"
+    .desc = { ent-AirlockGlass.desc }
