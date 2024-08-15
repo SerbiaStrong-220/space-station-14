@@ -11,3 +11,10 @@
   sprite:
     sprite: SS220/Objects/Weapons/Melee/etched_brass_knuckles.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: WeaponMultiPhaseEnergyGun
+  name: engraved brass knuckles
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+    state: icon

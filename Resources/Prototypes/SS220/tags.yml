@@ -91,3 +91,7 @@
 # New Qm highrisk
 - type: Tag
   id: EtchedBrassKnuckles
+
+#MultiPhaze Energy Gun
+- type: Tag
+  id: WeaponMultiPhaseEnergyGun

@@ -23,6 +23,7 @@
     CaptainJetpackStealObjective: 0.5
     HandTeleporterStealObjective: 0.5
     SecretDocumentsStealObjective: 0.5
+    MultiPhaseEnergyGunStealObjective: 0.5 #SS220 MultiPhaze Energy Gun
 
 - type: weightedRandom
   id: TraitorObjectiveGroupKill

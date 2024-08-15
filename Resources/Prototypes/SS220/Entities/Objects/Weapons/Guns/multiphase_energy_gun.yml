@@ -44,3 +44,5 @@
     - WeaponMultiPhaseEnergyGun
   - type: StaticPrice
     price: 750
+  - type: StealTarget
+    stealGroup: WeaponMultiPhaseEnergyGun
