@@ -129,3 +129,31 @@
         - state: xeno_toxic
     - type: Ammo
       muzzleFlash: null
+
+#MulriPhaze Energy Gun
+- type: entity
+  parent: BaseBullet
+  id: BulletEMP
+  name: EMP Bolt
+  noSpawn: true
+  components:
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: frag
+  - type: EmpOnTrigger
+    range: 0.5
+    energyConsumption: 500
+    disableDuration: 25
+  - type: Projectile
+    damage:
+      types:
+        Heat: 4
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 3.5
+    color: blue
+    energy: 0.5

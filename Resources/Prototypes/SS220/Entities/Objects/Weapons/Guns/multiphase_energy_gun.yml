@@ -19,14 +19,19 @@
     fireModes:
     - proto: BulletDisabler
       name: firemode-name-disabler
-      fireCost: 100
+      fireCost: 40
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
       magState: disarm-mag
     - proto: RedMediumLaser
       name: firemode-name-laser
-      fireCost: 50
+      fireCost: 62.5
       soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
       magState: laser-mag
+    - proto: BulletEMP
+      name: firemode-name-emp
+      fireCost: 200
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
+      magState: emp-mag
   - type: MagazineVisuals
     magState: disarm-mag
     steps: 5
