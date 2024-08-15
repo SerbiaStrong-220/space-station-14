@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "disarm-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-left-0",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-left-1",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-left-2",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-left-3",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-right-0",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-right-1",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-right-2",
+      "directions": 4
+    },
+    {
+      "name": "disarm-inhand-right-3",
+      "directions": 4
+    },
+    {
+      "name": "disarm-mag-unshaded-0",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "disarm-mag-unshaded-1"
+    },
+    {
+      "name": "disarm-mag-unshaded-2"
+    },
+    {
+      "name": "disarm-mag-unshaded-3"
+    },
+    {
+      "name": "disarm-mag-unshaded-4"
+    },
+    {
+      "name": "emp-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-left-0",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-left-1",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-left-2",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-left-3",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-right-0",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-right-1",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-right-2",
+      "directions": 4
+    },
+    {
+      "name": "emp-inhand-right-3",
+      "directions": 4
+    },
+    {
+      "name": "emp-mag-unshaded-0",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "emp-mag-unshaded-1"
+    },
+    {
+      "name": "emp-mag-unshaded-2"
+    },
+    {
+      "name": "emp-mag-unshaded-3"
+    },
+    {
+      "name": "emp-mag-unshaded-4"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "laser-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-left-0",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-left-1",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-left-2",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-left-3",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-right-0",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-right-1",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-right-2",
+      "directions": 4
+    },
+    {
+      "name": "laser-inhand-right-3",
+      "directions": 4
+    },
+    {
+      "name": "laser-mag-unshaded-0",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "laser-mag-unshaded-1"
+    },
+    {
+      "name": "laser-mag-unshaded-2"
+    },
+    {
+      "name": "laser-mag-unshaded-3"
+    },
+    {
+      "name": "laser-mag-unshaded-4"
+    }
+  ]
+}

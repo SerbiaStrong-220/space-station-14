@@ -115,6 +115,7 @@ public sealed partial class GunSystem
     private void OnFireModeChange(EntityUid uid, BatteryAmmoProviderComponent component, ref ChangeFireModeEvent args)
     {
         UpdateShots(uid, component);
+        Dirty(uid, component);
     }
     //SS220 Add Multifaze gun end
 }
