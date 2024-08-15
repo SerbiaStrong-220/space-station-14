@@ -140,9 +140,9 @@
   - type: TriggerOnCollide
     fixtureID: projectile
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/bullet_EMP.rsi
     layers:
-      - state: frag
+      - state: emp
   - type: EmpOnTrigger
     range: 0.5
     energyConsumption: 500
