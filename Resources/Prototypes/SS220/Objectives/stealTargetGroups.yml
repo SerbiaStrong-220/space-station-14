@@ -14,7 +14,7 @@
 
 - type: stealTargetGroup
   id: WeaponMultiPhaseEnergyGun
-  name: engraved brass knuckles
+  name: multiphase energy gun
   sprite:
     sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
     state: icon
