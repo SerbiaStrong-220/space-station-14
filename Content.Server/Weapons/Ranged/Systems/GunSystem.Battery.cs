@@ -20,13 +20,13 @@ public sealed partial class GunSystem
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ComponentStartup>(OnBatteryStartup);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ChargeChangedEvent>(OnBatteryChargeChange);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
-        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ChangeFireModeEvent>(OnFireModeChange);
+        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ChangeFireModeEvent>(OnFireModeChange); //SS220 Add Multifaze gun
 
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ComponentStartup>(OnBatteryStartup);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ChargeChangedEvent>(OnBatteryChargeChange);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
-        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ChangeFireModeEvent>(OnFireModeChange);
+        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ChangeFireModeEvent>(OnFireModeChange); //SS220 Add Multifaze gun
     }
 
     private void OnBatteryStartup(EntityUid uid, BatteryAmmoProviderComponent component, ComponentStartup args)
@@ -111,8 +111,10 @@ public sealed partial class GunSystem
         _battery.UseCharge(uid, component.FireCost);
     }
 
+    //SS220 Add Multifaze gun begin
     private void OnFireModeChange(EntityUid uid, BatteryAmmoProviderComponent component, ref ChangeFireModeEvent args)
     {
         UpdateShots(uid, component);
     }
+    //SS220 Add Multifaze gun end
 }
