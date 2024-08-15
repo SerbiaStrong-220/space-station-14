@@ -1,4 +1,5 @@
 using Content.Shared.Weapons.Ranged.Components;
+using Robust.Client.GameObjects;
 
 namespace Content.Client.Weapons.Ranged.Systems;
 
@@ -10,10 +11,12 @@ public sealed partial class GunSystem
         // Hitscan
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
+        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnAppearanceChange); //SS220 Add Multifaze gun
 
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
+        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnAppearanceChange); //SS220 Add Multifaze gun
     }
 
     private void OnAmmoCountUpdate(EntityUid uid, BatteryAmmoProviderComponent component, UpdateAmmoCounterEvent args)
@@ -27,4 +30,11 @@ public sealed partial class GunSystem
     {
         args.Control = new BoxesStatusControl();
     }
+
+    //SS220 Add Multifaze gun begin
+    private void OnAppearanceChange(EntityUid uid, BatteryAmmoProviderComponent component, ref AppearanceChangeEvent args)
+    {
+        UpdateAmmoCount(uid);
+    }
+    //SS220 Add Multifaze gun end
 }
