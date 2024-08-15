@@ -2,12 +2,12 @@
 
 - type: entity
   parent: BaseTraitorStealObjective
-  id: EtchedBrassKnucklesStealObjective
+  id: EngravedKnuckledusterStealObjective
   components:
   - type: NotJobRequirement
     job: Quartermaster
   - type: StealCondition
-    stealGroup: EtchedBrassKnuckles
+    stealGroup: EngravedKnuckleduster
     owner: job-name-qm
 
 - type: entity

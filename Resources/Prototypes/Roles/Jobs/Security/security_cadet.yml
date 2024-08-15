@@ -5,7 +5,7 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 18000 # SS220-RoleTime
+      time: 36000 # SS220-RoleTime 2
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:

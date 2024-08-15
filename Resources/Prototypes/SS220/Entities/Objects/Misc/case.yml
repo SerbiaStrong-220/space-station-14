@@ -2,9 +2,9 @@
 
 - type: entity
   parent: [BaseItem, BaseItemCabinet]
-  id: GlassCaseEtchedBrassKnuckles
+  id: GlassCaseEngravedKnuckleduster
   name: glass case
-  suffix: Etched brass knuckles
+  suffix: Engraved knuckleduster
   description: Made to order for storing valuables. The lid is made of tempered glass, and the base is made of wood grown on tropical planets and decorated with a velvet pad to prevent possible scratches.
   components:
   - type: Item
@@ -12,11 +12,11 @@
   - type: Lock
   - type: LockVisuals
   - type: Sprite
-    sprite: SS220/Misc/etched_brass_knuckles_case.rsi
+    sprite: SS220/Misc/engraved_knuckleduster_case.rsi
     layers:
     - state: base
       map: ["enum.StorageVisualLayers.Base"]
-    - state: brassknukles
+    - state: knuckleduster
       map: ["enum.ItemCabinetVisuals.Layer"]
       visible: true
     - state: closed
@@ -31,7 +31,7 @@
         ejectOnInteract: true
         whitelist:
           tags:
-          - EtchedBrassKnuckles
+          - EngravedKnuckleduster
         ejectSound: /Audio/Machines/machine_switch.ogg
   - type: GenericVisualizer
     visuals:
@@ -74,14 +74,14 @@
     price: 200
 
 - type: entity
-  parent: GlassCaseEtchedBrassKnuckles
-  id: GlassCaseEtchedBrassKnucklesFilled
+  parent: GlassCaseEngravedKnuckleduster
+  id: GlassCaseEngravedKnuckledusterFilled
   name: glass case
-  suffix: Etched brass knuckles, Filled
+  suffix: Engraved knuckleduster, Filled
   components:
   - type: AccessReader
     access: [["Quartermaster"]]
   - type: ContainerFill
     containers:
       ItemCabinet:
-      - EtchedBrassKnuckles
+      - EngravedKnuckleduster

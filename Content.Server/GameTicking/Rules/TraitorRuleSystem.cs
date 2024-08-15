@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using Content.Shared.GameTicking.Components;
 using Content.Server.SS220.MindSlave;
+using Content.Shared.SS220.ShowCodewords;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -105,6 +106,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         _antag.SendBriefing(traitor, GenerateBriefing(component.Codewords, code, issuer), null, component.GreetSoundNotification);
 
         component.TraitorMinds.Add(mindId);
+
+        //ss220 codewords highlight add start
+
+        var showCodewordsComp = EnsureComp<ShowCodewordsComponent>(traitor);
+        showCodewordsComp.CodeWords = component.Codewords;
+
+        //ss220 codewords highlight add end
 
         // Assign briefing
         _roleSystem.MindAddRole(mindId, new RoleBriefingComponent
