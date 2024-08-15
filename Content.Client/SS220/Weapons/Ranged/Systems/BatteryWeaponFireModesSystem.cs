@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Ranged.Components;
-using static Content.Shared.Weapons.Ranged.Systems.BatteryWeaponFireModesSystem;
+using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Client.SS220.Weapons.Ranged.Systems;
 

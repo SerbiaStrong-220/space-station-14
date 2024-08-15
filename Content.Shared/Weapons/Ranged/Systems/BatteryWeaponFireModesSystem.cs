@@ -195,7 +195,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         }
 
         //SS220 Add Multifaze gun begin
-        var ev = new ChangeFireModeEvent(uid, component, index);
+        var ev = new ChangeFireModeEvent(index);
         RaiseLocalEvent(uid, ref ev);
         //SS220 Add Multifaze gun end
     }
@@ -205,14 +205,14 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     {
         SetFireMode(uid, component, component.CurrentFireMode);
     }
-
-    /// <summary>
-    /// The event that rises when the fire mode is selected
-    /// </summary>
-    /// <param name="Uid"></param>
-    /// <param name="Component"></param>
-    /// <param name="Index"></param>
-    [ByRefEvent]
-    public record struct ChangeFireModeEvent(EntityUid Uid, BatteryWeaponFireModesComponent Component, int Index);
     //SS220 Add Multifaze gun end
 }
+
+//SS220 Add Multifaze gun begin
+/// <summary>
+/// The event that rises when the fire mode is selected
+/// </summary>
+/// <param name="Index"></param>
+[ByRefEvent]
+public record struct ChangeFireModeEvent(int Index);
+//SS220 Add Multifaze gun end
