@@ -41,7 +41,7 @@ public sealed partial class BatteryWeaponFireMode
     /// <summary>
     /// Name of the fire mode
     /// </summary>
-    [DataField]
+    [DataField("name")]
     public string? FireModeName;
 
     /// <summary>

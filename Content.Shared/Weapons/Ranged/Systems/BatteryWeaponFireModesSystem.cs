@@ -45,7 +45,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             name = entProto.Name;
         //SS220 Add Multifaze gun end
 
-        args.PushMarkup(Loc.GetString("gun-set-fire-mode", ("mode", name))); //SS220 Add Multifaze gun
+        args.PushMarkup(Loc.GetString("gun-set-fire-mode", ("mode", Loc.GetString(name)))); //SS220 Add Multifaze gun
     }
 
     private BatteryWeaponFireMode GetMode(BatteryWeaponFireModesComponent component)
@@ -87,7 +87,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             {
                 Priority = 1,
                 Category = VerbCategory.SelectType,
-                Text = text, //SS220 Add Multifaze gun
+                Text = Loc.GetString(text), //SS220 Add Multifaze gun
                 Disabled = i == component.CurrentFireMode, 
                 Impact = LogImpact.Low,
                 DoContactInteraction = true,
@@ -191,7 +191,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
 
         if (user != null)
         {
-            _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", name)), uid, user.Value); //SS220 Add Multifaze gun
+            _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", Loc.GetString(name))), uid, user.Value); //SS220 Add Multifaze gun
         }
 
         //SS220 Add Multifaze gun begin
