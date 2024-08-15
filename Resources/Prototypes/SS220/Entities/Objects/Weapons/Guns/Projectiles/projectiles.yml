@@ -130,7 +130,7 @@
     - type: Ammo
       muzzleFlash: null
 
-#MulriPhaze Energy Gun
+#MultiPhaze Energy Gun
 - type: entity
   parent: BaseBullet
   id: BulletEMP

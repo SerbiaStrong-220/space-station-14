@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseWeaponBatterySmall
   id: WeaponMultiPhaseEnergyGun
-  name: MultiPhase Energy gun
-  description: This is an antique laser pistol. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy.
+  name: multiphase energy gun
+  description: This is an expensive, modern version of an antique laser pistol. This weapon has several unique fire modes, but there is no way to recharge yourself over time.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi

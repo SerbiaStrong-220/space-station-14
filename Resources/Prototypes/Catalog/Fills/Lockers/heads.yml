@@ -301,6 +301,7 @@
       - id: BookBusido # Corvax-Books
       - id: ClothingWristWatchGold # SS220 Wrist Watch
       - id: BookSpaceLaw
+      - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
 
 - type: entity
   id: LockerHeadOfSecurityFilled
@@ -327,6 +328,7 @@
       - id: BookBusido # Corvax-Books
       - id: ClothingWristWatchGold # SS220 Wrist Watch
       - id: BookSpaceLaw
+      - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
 
 - type: entity
   id: LockerFreezerVaultFilled
