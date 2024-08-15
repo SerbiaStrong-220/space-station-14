@@ -8,9 +8,6 @@
       role: JobWarden
       time: 43200 #12 hrs
     - !type:RoleTimeRequirement
-      role: JobDetective
-      time: 15400 #4 hrs
-    - !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 72000 #20 hrs
     - !type:DepartmentTimeRequirement

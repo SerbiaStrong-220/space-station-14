@@ -1,0 +1,12 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+uniform highp float FadeProgress;
+
+void fragment() {
+
+    highp vec4 color = texture2D(TEXTURE, UV.xy);
+    if (color.a <= FadeProgress) {
+        discard;
+    }
+	color.a = 1;
+	COLOR = color;
+}
