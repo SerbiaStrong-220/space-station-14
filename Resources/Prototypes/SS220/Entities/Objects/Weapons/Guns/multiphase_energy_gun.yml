@@ -32,6 +32,9 @@
       fireCost: 200
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
       magState: emp-mag
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletDisabler
+    fireCost: 40
   - type: MagazineVisuals
     magState: disarm-mag
     steps: 5
