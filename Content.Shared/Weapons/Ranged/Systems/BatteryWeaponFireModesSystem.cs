@@ -203,6 +203,9 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     //SS220 Add Multifaze gun begin
     private void OnInit(EntityUid uid, BatteryWeaponFireModesComponent component, ref ComponentInit args)
     {
+        if (component.FireModes.Count <= 0)
+            return;
+
         var index = component.CurrentFireMode % component.FireModes.Count;
         SetFireMode(uid, component, index);
     }
