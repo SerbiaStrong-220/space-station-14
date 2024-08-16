@@ -115,7 +115,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -480,7 +480,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Structures/Windows/clockwork_window.rsi
+    sprite: SS220/Structures/Windows/clockwork_window.rsi #SS220-Walls-Sprite-Update-V3
     state: full
   objectType: Structure
   placementMode: SnapgridCenter

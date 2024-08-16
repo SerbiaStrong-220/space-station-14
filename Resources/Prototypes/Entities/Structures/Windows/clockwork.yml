@@ -6,9 +6,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/clockwork_window.rsi
+    sprite: SS220/Structures/Windows/clockwork_window.rsi #SS220-Walls-Sprite-Update-V3
   - type: Icon
-    sprite: Structures/Windows/clockwork_window.rsi
+    sprite: SS220/Structures/Windows/clockwork_window.rsi #SS220-Walls-Sprite-Update-V3
   - type: Repairable
     fuelCost: 10
     doAfterDelay: 2
