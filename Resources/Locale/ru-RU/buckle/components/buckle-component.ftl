@@ -5,4 +5,3 @@ buckle-component-cannot-buckle-message = Вы не можете пристегн
 buckle-component-other-cannot-buckle-message = Вы не можете пристегнуть { $owner } туда!
 buckle-component-cannot-fit-message = Вы туда не помещаетесь!
 buckle-component-other-cannot-fit-message = { $owner } туда не помещается!
-buckle-component-both-hands-in-use = Вы удерживаете предмет в двух руках
