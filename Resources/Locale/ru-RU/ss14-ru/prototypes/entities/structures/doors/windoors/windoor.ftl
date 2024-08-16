@@ -122,11 +122,11 @@ ent-WindoorSecureAtmosphericsLocked = { ent-WindoorSecure }
 ent-PlasmaWindoorSecureJanitorLocked = { ent-WindoorSecurePlasma }
     .suffix = Уборщик, Закрыт, Плазма
     .desc = { ent-WindoorSecurePlasma.desc }
+#
 ent-WindoorSecureSecurityLawyerLocked = { ent-WindoorSecureSecurityLocked }
-#
     .suffix = Служба Безопасности/Внутренние Дела, Закрыт
-#
     .desc = { ent-WindoorSecureSecurityLocked.desc }
+#
 ent-WindoorSecureParamedicLocked = { ent-WindoorSecure }
     .suffix = Парамедик, Закрыт
     .desc = { ent-WindoorSecure.desc }

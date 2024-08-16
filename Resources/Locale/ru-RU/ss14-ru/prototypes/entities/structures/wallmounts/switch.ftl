@@ -53,11 +53,11 @@ ent-LockableButtonArmory = { ent-LockableButton }
 ent-LockableButtonBrig = { ent-LockableButton }
     .suffix = Бриг
     .desc = { ent-LockableButton.desc }
+#
 ent-LockableButtonLawyer = { ent-LockableButton }
-#
     .suffix = Внутренние дела
-#
     .desc = { ent-LockableButton.desc }
+#
 ent-LockableButtonEngineering = { ent-LockableButton }
     .suffix = Инженерный
     .desc = { ent-LockableButton.desc }

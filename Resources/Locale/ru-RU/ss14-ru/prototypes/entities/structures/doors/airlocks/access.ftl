@@ -1,11 +1,11 @@
 ent-AirlockServiceLocked = { ent-Airlock }
     .suffix = Сервисный, Закрыт
     .desc = { ent-Airlock.desc }
+#
 ent-AirlockLawyerLocked = { ent-AirlockServiceLocked }
-#
     .suffix = Внутренние дела, Закрыт
-#
     .desc = { ent-AirlockServiceLocked.desc }
+#
 ent-AirlockTheatreLocked = { ent-AirlockServiceLocked }
     .suffix = Театр, Закрыт
     .desc = { ent-AirlockServiceLocked.desc }
@@ -123,11 +123,11 @@ ent-AirlockDetectiveLocked = { ent-AirlockSecurity }
 ent-AirlockBrigLocked = { ent-AirlockSecurity }
     .suffix = Бриг, Закрыт
     .desc = { ent-AirlockSecurity.desc }
+#
 ent-AirlockSecurityLawyerLocked = { ent-AirlockSecurity }
-#
     .suffix = Служба безопасности/Внутренние дела, Закрыт
-#
     .desc = { ent-AirlockSecurity.desc }
+#
 ent-AirlockArmoryLocked = { ent-AirlockSecurity }
     .suffix = Оружейная, Закрыт
     .desc = { ent-AirlockSecurity.desc }
@@ -140,11 +140,11 @@ ent-AirlockEVALocked = { ent-AirlockCommand }
 ent-AirlockServiceGlassLocked = { ent-AirlockGlass }
     .suffix = Сервисный, Закрыт
     .desc = { ent-AirlockGlass.desc }
+#
 ent-AirlockLawyerGlassLocked = { ent-AirlockServiceGlassLocked }
-#
     .suffix = Внутренние дела, Закрыт
-#
     .desc = { ent-AirlockServiceGlassLocked.desc }
+#
 ent-AirlockTheatreGlassLocked = { ent-AirlockServiceGlassLocked }
     .suffix = Театр, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
@@ -252,11 +252,11 @@ ent-AirlockDetectiveGlassLocked = { ent-AirlockSecurityGlass }
 ent-AirlockBrigGlassLocked = { ent-AirlockSecurityGlass }
     .suffix = Бриг, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
+#
 ent-AirlockSecurityLawyerGlassLocked = { ent-AirlockSecurityGlass }
-#
     .suffix = Служба безопасности/Внутренние дела, Закрыт
-#
     .desc = { ent-AirlockSecurityGlass.desc }
+#
 ent-AirlockArmoryGlassLocked = { ent-AirlockSecurityGlass }
     .suffix = Оружейная, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
@@ -305,11 +305,11 @@ ent-AirlockMaintHydroLocked = { ent-AirlockMaintServiceLocked }
 ent-AirlockMaintJanitorLocked = { ent-AirlockMaintServiceLocked }
     .suffix = Уборщик, Закрыт
     .desc = { ent-AirlockMaintServiceLocked.desc }
+#
 ent-AirlockMaintLawyerLocked = { ent-AirlockMaintServiceLocked }
-#
     .suffix = Внутренние Дела, Закрыт
-#
     .desc = { ent-AirlockMaintServiceLocked.desc }
+#
 ent-AirlockMaintServiceLocked = { ent-AirlockMaint }
     .suffix = Сервисный, Закрыт
     .desc = { ent-AirlockMaint.desc }

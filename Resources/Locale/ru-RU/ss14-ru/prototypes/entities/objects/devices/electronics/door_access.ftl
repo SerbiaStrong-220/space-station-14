@@ -22,11 +22,11 @@ ent-DoorElectronicsBar = { ent-DoorElectronics }
 ent-DoorElectronicsHydroponics = { ent-DoorElectronics }
     .suffix = Гидропоника, Закрыт
     .desc = { ent-DoorElectronics.desc }
+#
 ent-DoorElectronicsLawyer = { ent-DoorElectronics }
-#
     .suffix = Внутренние дела, Закрыт
-#
     .desc = { ent-DoorElectronics.desc }
+#
 ent-DoorElectronicsKitchenHydroponics = { ent-DoorElectronics }
     .suffix = Кухня/Гидропоника, Закрыт
     .desc = { ent-DoorElectronics.desc }
@@ -93,11 +93,11 @@ ent-DoorElectronicsQuartermaster = { ent-DoorElectronics }
 ent-DoorElectronicsSecurity = { ent-DoorElectronics }
     .suffix = Служба безопасности, Закрыт
     .desc = { ent-DoorElectronics.desc }
+#
 ent-DoorElectronicsSecurityLawyer = { ent-DoorElectronics }
-#
     .suffix = Служба безопасности/Внутренние дела, Закрыт
-#
     .desc = { ent-DoorElectronics.desc }
+#
 ent-DoorElectronicsDetective = { ent-DoorElectronics }
     .suffix = Детектив, Закрыт
     .desc = { ent-DoorElectronics.desc }
