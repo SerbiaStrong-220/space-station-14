@@ -54,9 +54,9 @@ ent-LockableButtonBrig = { ent-LockableButton }
     .suffix = Бриг
     .desc = { ent-LockableButton.desc }
 ent-LockableButtonLawyer = { ent-LockableButton }
-#InternalAffairsBegin
+#
     .suffix = Внутренние дела
-#InternalAffairsEnd
+#
     .desc = { ent-LockableButton.desc }
 ent-LockableButtonEngineering = { ent-LockableButton }
     .suffix = Инженерный

@@ -123,9 +123,9 @@ ent-PlasmaWindoorSecureJanitorLocked = { ent-WindoorSecurePlasma }
     .suffix = Уборщик, Закрыт, Плазма
     .desc = { ent-WindoorSecurePlasma.desc }
 ent-WindoorSecureSecurityLawyerLocked = { ent-WindoorSecureSecurityLocked }
-#InternalAffairsBegin
+#
     .suffix = Служба Безопасности/Внутренние Дела, Закрыт
-#InternalAffairsEnd
+#
     .desc = { ent-WindoorSecureSecurityLocked.desc }
 ent-WindoorSecureParamedicLocked = { ent-WindoorSecure }
     .suffix = Парамедик, Закрыт
