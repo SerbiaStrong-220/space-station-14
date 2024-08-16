@@ -1,0 +1,32 @@
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltInternalAffairs
+  name: full-size headset of the Department of Internal Affairs
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyInternalAffairs
+      - EncryptionKeyStationMaster
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/internal_affairs.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/internal_affairs.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetLawyer
+  name: headset of the Department of Internal Affairs
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyInternalAffairs
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/internal_affairs.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/internal_affairs.rsi

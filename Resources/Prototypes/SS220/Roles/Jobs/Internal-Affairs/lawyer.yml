@@ -22,7 +22,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetLawyer #SS220-Internal-Affair
   inhand:
     - BriefcaseBrownFilled
   storage:
