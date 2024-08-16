@@ -16,11 +16,11 @@ public sealed partial class BatteryWeaponFireModesSystem : EntitySystem
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ChangeFireModeEvent>(OnFireModeChange);
     }
 
-    private void OnFireModeChange(EntityUid uid, BatteryWeaponFireModesComponent component, ChangeFireModeEvent args)
+    private void OnFireModeChange(Entity<BatteryWeaponFireModesComponent> ent, ref ChangeFireModeEvent args)
     {
-        var fireMode = component.FireModes[args.Index];
+        var fireMode = ent.Comp.FireModes[args.Index];
 
         if (fireMode.MagState is not null)
-            _gunSystem.SetMagState(uid, fireMode.MagState);
+            _gunSystem.SetMagState(ent, fireMode.MagState);
     }
 }

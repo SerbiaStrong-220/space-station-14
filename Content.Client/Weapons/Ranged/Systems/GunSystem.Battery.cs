@@ -11,12 +11,12 @@ public sealed partial class GunSystem
         // Hitscan
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
-        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnAppearanceChange); //SS220 Add Multifaze gun
+        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnHitscanAppearanceChange); //SS220 Add Multifaze gun
 
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
-        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnAppearanceChange); //SS220 Add Multifaze gun
+        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AppearanceChangeEvent>(OnProjectileAppearanceChange); //SS220 Add Multifaze gun
     }
 
     private void OnAmmoCountUpdate(EntityUid uid, BatteryAmmoProviderComponent component, UpdateAmmoCounterEvent args)
@@ -32,9 +32,14 @@ public sealed partial class GunSystem
     }
 
     //SS220 Add Multifaze gun begin
-    private void OnAppearanceChange(EntityUid uid, BatteryAmmoProviderComponent component, ref AppearanceChangeEvent args)
+    private void OnHitscanAppearanceChange(Entity<HitscanBatteryAmmoProviderComponent> ent, ref AppearanceChangeEvent args)
     {
-        UpdateAmmoCount(uid);
+        UpdateAmmoCount(ent);
+    }
+
+    private void OnProjectileAppearanceChange(Entity<ProjectileBatteryAmmoProviderComponent> ent, ref AppearanceChangeEvent args)
+    {
+        UpdateAmmoCount(ent);
     }
     //SS220 Add Multifaze gun end
 }
