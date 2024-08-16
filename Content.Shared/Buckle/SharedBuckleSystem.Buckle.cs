@@ -286,6 +286,18 @@ public abstract partial class SharedBuckleSystem
             return false;
         }
 
+        //ss220 fix buckle with two hands start
+        if (TryComp<HandsComponent>(user, out var handsComponent))
+        {
+            if (!handsComponent.Hands["body_part_slot_right hand"].IsEmpty && !handsComponent.Hands["body_part_slot_left hand"].IsEmpty)
+            {
+                if (_netManager.IsServer && popup)
+                    _popup.PopupEntity(Loc.GetString("buckle-component-both-hands-in-use"), user.Value, user.Value);
+                return false;
+            }
+        }
+        //ss220 fix buckle with two hands end
+
         if (buckleComp.Buckled)
         {
             if (_netManager.IsClient || popup || user == null)
