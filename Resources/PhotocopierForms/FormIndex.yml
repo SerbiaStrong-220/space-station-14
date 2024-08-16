@@ -59,8 +59,8 @@
     - /PhotocopierForms/nanotrasen_station/hr/cmd_acr.xml
     - /PhotocopierForms/nanotrasen_station/hr/cmd_acwt.xml
   - Id: law
-    Name: Юридический отдел
-    Color: "#DD4040FF"
+    Name: Внутренние Дела #SS220-InternalAffairs
+    Color: "#323ba9FF" #SS220-InternalAffairs
     IconPath: /Textures/SS220/DepartmentIcons/Law_dep.png
     Forms:
     - /PhotocopierForms/nanotrasen_station/law/cmd_comp.xml
@@ -71,6 +71,8 @@
     - /PhotocopierForms/nanotrasen_station/law/sec_vdc.xml
     - /PhotocopierForms/nanotrasen_station/law/sec_vdc_gop.xml
     - /PhotocopierForms/nanotrasen_station/law/law_anonymousdenunciation.xml
+    - /PhotocopierForms/nanotrasen_station/law/law_req.xml #SS220-InternalAffairs
+    - /PhotocopierForms/nanotrasen_station/blank/blank_regular_law.xml #SS220-InternalAffairs
   - Id: security
     Name: Служба Безопасности
     Color: "#DD4040FF"
