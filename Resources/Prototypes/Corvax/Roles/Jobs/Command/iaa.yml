@@ -1,48 +1,52 @@
-- type: job
-  id: IAA
-  name: job-name-iaa
-  playTimeTracker: JobIAA
-  requirements:
-  - !type:DepartmentTimeRequirement
-    department: Command
-    time: 72000 # SS220-RoleTime
-  - !type:DepartmentTimeRequirement
-    department: Security
-    time: 72000 # SS220-RoleTime
-  - !type:SpeciesRequirement #SS220-jobbans begin
-      inverted: true
-      species:
-      - Felinid #SS220-jobbans end
-  startingGear: IAAGear
-  icon: "JobIconIAA"
-  supervisors: job-supervisors-centcom
-  canBeAntag: false
-  access:
-  - Service
-  - Brig
-  - Maintenance
-  - Command
-  - External
-  - Lawyer
-  special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
+#SS220-InternalAffairs-Begin
+#
+# - type: job
+#   id: IAA
+#   name: job-name-iaa
+#   playTimeTracker: JobIAA
+#   requirements:
+#   - !type:DepartmentTimeRequirement
+#     department: Command
+#     time: 72000 # SS220-RoleTime
+#   - !type:DepartmentTimeRequirement
+#     department: Security
+#     time: 72000 # SS220-RoleTime
+#   - !type:SpeciesRequirement #SS220-jobbans begin
+#       inverted: true
+#       species:
+#       - Felinid #SS220-jobbans end
+#   startingGear: IAAGear
+#   icon: "JobIconIAA"
+#   supervisors: job-supervisors-centcom
+#   canBeAntag: false
+#   access:
+#   - Service
+#   - Brig
+#   - Maintenance
+#   - Command
+#   - External
+#   - Lawyer
+#   special:
+#   - !type:AddImplantSpecial
+#     implants: [ MindShieldImplant ]
 
-- type: startingGear
-  id: IAAGear
-  equipment:
-    shoes: ClothingShoesBootsLaceup #SS220-IAA-Loadout
-    id: IAAPDA
-    eyes: ClothingEyesGlassesSunglasses
-    ears: ClothingHeadsetIAA
-    back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout
-  inhand:
-    - BriefcaseIAAFilled
-#SS220-IAA-Loadout-Begin
-  storage:
-    back:
-    - BoxSurvival
-    - Telescopichka
-    - Flash
-    - ExpensiveLighterNanotrasen
-#SS220-IAA-Loadout-End
+# - type: startingGear
+#   id: IAAGear
+#   equipment:
+#     shoes: ClothingShoesBootsLaceup #SS220-IAA-Loadout
+#     id: IAAPDA
+#     eyes: ClothingEyesGlassesSunglasses
+#     ears: ClothingHeadsetIAA
+#     back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout
+#   inhand:
+#     - BriefcaseIAAFilled
+# #SS220-IAA-Loadout-Begin
+#   storage:
+#     back:
+#     - BoxSurvival
+#     - Telescopichka
+#     - Flash
+#     - ExpensiveLighterNanotrasen
+# #SS220-IAA-Loadout-End
+#
+#SS220-InternalAffairs-End

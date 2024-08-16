@@ -43,6 +43,7 @@
   - Cargo
   - Medical
   - Blueshield
+  - Lawyer #SS220-InternalAffairs
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
