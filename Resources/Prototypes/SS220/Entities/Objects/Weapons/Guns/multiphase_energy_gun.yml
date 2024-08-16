@@ -21,7 +21,7 @@
       name: firemode-name-disabler
       fireCost: 40
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-      magState: disarm-mag
+      magState: disabler-mag
     - proto: RedMediumLaser
       name: firemode-name-laser
       fireCost: 62.5
@@ -36,7 +36,7 @@
     proto: BulletDisabler
     fireCost: 40
   - type: MagazineVisuals
-    magState: disarm-mag
+    magState: disabler-mag
     steps: 5
     zeroVisible: true
   - type: Appearance

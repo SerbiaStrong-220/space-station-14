@@ -11,7 +11,7 @@
       "name": "base"
     },
     {
-      "name": "disarm-mag-unshaded-0",
+      "name": "disabler-mag-unshaded-0",
       "delays": [
         [
           0.1,
@@ -22,16 +22,16 @@
       ]
     },
     {
-      "name": "disarm-mag-unshaded-1"
+      "name": "disabler-mag-unshaded-1"
     },
     {
-      "name": "disarm-mag-unshaded-2"
+      "name": "disabler-mag-unshaded-2"
     },
     {
-      "name": "disarm-mag-unshaded-3"
+      "name": "disabler-mag-unshaded-3"
     },
     {
-      "name": "disarm-mag-unshaded-4"
+      "name": "disabler-mag-unshaded-4"
     },
     {
       "name": "emp-mag-unshaded-0",
