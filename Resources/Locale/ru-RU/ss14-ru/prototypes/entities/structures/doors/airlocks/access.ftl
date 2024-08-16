@@ -254,7 +254,7 @@ ent-AirlockBrigGlassLocked = { ent-AirlockSecurityGlass }
     .desc = { ent-AirlockSecurityGlass.desc }
 #SS220-InternalAffairs-Begin
 ent-AirlockSecurityLawyerGlassLocked = { ent-AirlockSecurityGlass }
-    .suffix = Служба безопасности/End, Закрыт
+    .suffix = Служба безопасности/Внутренние дела, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
 #SS220-InternalAffairs-End
 ent-AirlockArmoryGlassLocked = { ent-AirlockSecurityGlass }
