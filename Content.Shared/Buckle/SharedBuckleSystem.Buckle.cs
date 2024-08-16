@@ -287,7 +287,7 @@ public abstract partial class SharedBuckleSystem
         }
 
         //ss220 fix buckle with two hands start
-        if (TryComp<HandsComponent>(user, out var handsComponent))
+        if (TryComp<HandsComponent>(user, out var handsComponent) && HasComp<VehicleComponent>(strapUid))
         {
             if (!handsComponent.Hands["body_part_slot_right hand"].IsEmpty && !handsComponent.Hands["body_part_slot_left hand"].IsEmpty)
             {
