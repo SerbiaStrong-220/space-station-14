@@ -402,16 +402,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle());
     }
 
-    //SS220 Add Multifaze gun begin
-    public void SetSoundGunshot(EntityUid uid, string newSoundPath, GunComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        component.SoundGunshotModified = new SoundPathSpecifier(newSoundPath);
-    }
-    //SS220 Add Multifaze gun end
-
     protected abstract void Popup(string message, EntityUid? uid, EntityUid? user);
 
     /// <summary>

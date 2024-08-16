@@ -6,7 +6,6 @@ using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Weapons.Ranged.Systems;

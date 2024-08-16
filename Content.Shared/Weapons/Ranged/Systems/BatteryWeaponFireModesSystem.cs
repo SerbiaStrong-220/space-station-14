@@ -5,6 +5,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -25,6 +27,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, GetVerbsEvent<Verb>>(OnGetVerb);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ComponentInit>(OnInit); //SS220 Add Multifaze gun
+        SubscribeLocalEvent<BatteryWeaponFireModesComponent, GunRefreshModifiersEvent>(OnRefreshModifiers); //SS220 Add Multifaze gun
     }
 
     private void OnExamined(EntityUid uid, BatteryWeaponFireModesComponent component, ExaminedEvent args)
@@ -88,7 +91,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
                 Priority = 1,
                 Category = VerbCategory.SelectType,
                 Text = Loc.GetString(text), //SS220 Add Multifaze gun
-                Disabled = i == component.CurrentFireMode, 
+                Disabled = i == component.CurrentFireMode,
                 Impact = LogImpact.Low,
                 DoContactInteraction = true,
                 Act = () =>
@@ -185,8 +188,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             return;
         }
 
-        if (fireMode.SoundGunshot is not null)
-            _gunSystem.SetSoundGunshot(uid, fireMode.SoundGunshot);
+        _gunSystem.RefreshModifiers(uid);
         //SS220 Add Multifaze gun end
 
         if (user != null)
@@ -201,13 +203,21 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     }
 
     //SS220 Add Multifaze gun begin
-    private void OnInit(EntityUid uid, BatteryWeaponFireModesComponent component, ref ComponentInit args)
+    private void OnInit(Entity<BatteryWeaponFireModesComponent> ent, ref ComponentInit args)
     {
-        if (component.FireModes.Count <= 0)
+        if (ent.Comp.FireModes.Count <= 0)
             return;
 
-        var index = component.CurrentFireMode % component.FireModes.Count;
-        SetFireMode(uid, component, index);
+        var index = ent.Comp.CurrentFireMode % ent.Comp.FireModes.Count;
+        SetFireMode(ent, ent.Comp, index);
+    }
+
+    private void OnRefreshModifiers(Entity<BatteryWeaponFireModesComponent> ent, ref GunRefreshModifiersEvent args)
+    {
+        var firemode = GetMode(ent.Comp);
+
+        if (firemode.SoundGunshot is not null)
+            args.SoundGunshot = new SoundPathSpecifier(firemode.SoundGunshot);
     }
     //SS220 Add Multifaze gun end
 }
