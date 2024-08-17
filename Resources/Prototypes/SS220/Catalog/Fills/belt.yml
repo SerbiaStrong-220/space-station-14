@@ -48,3 +48,13 @@
         amount: 1
       - id: Gauze
       - id: EmergencyMedipen
+
+- type: entity
+  id: ClothingBeltCutlassSheathFilled
+  parent: ClothingBeltCutlassSheath
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - OfficerCutlass

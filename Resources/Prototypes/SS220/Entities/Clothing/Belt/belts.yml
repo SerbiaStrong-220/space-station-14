@@ -89,3 +89,36 @@
     sprite: SS220/Clothing/Belt/security_medical.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/security_medical.rsi
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltCutlassSheath
+  name: officer's cutlass sheath
+  description: The sheath of an officer's cutlass. Protects the cutlass from you, and you from the sea.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/cutlass_sheath.rsi
+  - type: Clothing
+    slots:
+    - SuitStorage
+    - belt
+    equipSound:
+      path: /Audio/Items/belt_equip.ogg
+    quickEquip: false
+    sprite: SS220/Clothing/Belt/cutlass_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - OfficerCutlass
+  - type: ItemMapper
+    mapLayers:
+      sheath-cutlass:
+        whitelist:
+          tags:
+          - OfficerCutlass

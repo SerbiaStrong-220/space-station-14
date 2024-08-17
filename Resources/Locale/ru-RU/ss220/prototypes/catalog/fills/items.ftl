@@ -13,3 +13,6 @@ ent-ClothingBeltRapierSheathAltFilled = { ent-ClothingBeltRapierSheathFilled }
 ent-ClothingBeltSecurityMedicalFilled = { ent-ClothingBeltSecurityMedical }
     .suffix = Заполненный
     .desc = { ent-ClothingBeltMedical.desc }
+ent-ClothingBeltCutlassSheathFilled = { ent-ClothingBeltCutlassSheath }
+    .suffix = Заполненный
+    .desc = { ent-ClothingBeltCutlassSheath.desc }
