@@ -260,6 +260,14 @@
 
 # Security
 
+  # Глава службы безопасности
+- type: loadoutGroup
+  id: SecurityHoSSiutstorage
+  name: loadout-group-head-of-security-siutstorage
+  minLimit: 0
+  loadouts:
+  - OfficerCutlass
+
   # Пилот
 - type: loadoutGroup
   id: SecurityPilotHead
