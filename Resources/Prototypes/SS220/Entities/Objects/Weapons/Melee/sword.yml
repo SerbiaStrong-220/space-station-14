@@ -8,6 +8,7 @@
     sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
     state: icon
   - type: MeleeWeapon
+    wideAnimationRotation: -45
     damage:
       types:
         Slash: 27
@@ -56,3 +57,26 @@
     damage:
       types:
         Piercing: 15
+
+- type: entity
+  parent: CaptainSabre
+  id: OfficerCutlass
+  name: officer`s cutlass
+  description: An ornate award-winning weapon, which is the symbol of an officer of the fleet of Mankind.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: 45
+    damage:
+      types:
+        Piercing: 12
+    angle: 0
+    animation: WeaponArcThrust
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
+  - type: Tag
+    tags:
+    - OfficerCutlass
