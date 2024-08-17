@@ -1,4 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.SuperMatter.Ui;
+using Robust.Client.UserInterface;
+
 namespace Content.Client.SS220.SuperMatter.Ui;
 
 public sealed class SuperMatterObserverBUI : BoundUserInterface
@@ -10,23 +13,33 @@ public sealed class SuperMatterObserverBUI : BoundUserInterface
     protected override void Open()
     {
         base.Open();
+        _menu = this.CreateWindow<SuperMatterObserverMenu>();
 
-        _menu = new SuperMatterObserverMenu();
-        _menu.OnClose += Close;
-        _menu.OpenCentered();
+        _menu.OnServerButtonPressed += (args, observerComp) =>
+            {
+                if (!args.Button.Pressed)
+                    _menu.Observer = null;
+                else
+                    _menu.Observer = observerComp;
+                _menu.CrystalKey = null;
+                _menu.LoadCrystal();
+            };
+        _menu.OnCrystalButtonPressed += (_, crystalKey) =>
+            {
+                _menu.CrystalKey = crystalKey;
+                _menu.LoadCachedData();
+            };
     }
-    protected override void UpdateState(BoundUserInterfaceState state)
+    public void DirectUpdateState(BoundUserInterfaceState state)
     {
-        base.UpdateState(state);
-
-        _menu?.UpdateState();
-    }
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (!disposing)
-            return;
-        _menu?.Close();
-        _menu?.Dispose();
+        switch (state)
+        {
+            case SuperMatterObserverInitState msg:
+                _menu?.LoadState(msg.ObserverEntity);
+                break;
+            case SuperMatterObserverUpdateState msg:
+                _menu?.UpdateState(msg);
+                break;
+        }
     }
 }

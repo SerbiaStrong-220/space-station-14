@@ -6,11 +6,23 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="{Loc 'supermatter-observer-title'}"
     Resizable="False"
-    MinSize="512 576"
-    SetSize="512 576"
+    MinSize="512 608"
+    SetSize="512 608"
     RectClipContent="False">
-    <BoxContainer Orientation="Vertical">
-        <plot:PlotSequencedView Name="PlotValueOverTime" MinHeight="256" MouseFilter="Stop" Margin="8 8"  />
-        <plot:Pseudo3DColoredView Name="ColorState" MinHeight="256" MouseFilter="Stop" Margin="8 8"  />
+    <BoxContainer Name="ContentHolderContainer" Orientation="Vertical">
+        <BoxContainer Name="ServerNavigationBar" HorizontalExpand="True" MinHeight="16" Margin="1 1 3 0">
+        <!-- Here goes all avaible "Servers" with SM data -->
         </BoxContainer>
+        <BoxContainer Name="CrystalNavigationBar" HorizontalExpand="True" MinHeight="16" Margin="1 1 3 0">
+        <!-- Here goes all avaible "Servers" with SM data -->
+        </BoxContainer>
+        <BoxContainer Name="UpperDataContainer" MinHeight="256" Orientation="Vertical" Margin="8 8">
+            <plot:PlotSequencedView Name="PlotValueOverTime" MinHeight="256" MouseFilter="Stop"/>
+            <!-- Here go numberic Data -->
+            </BoxContainer>
+        <BoxContainer Name="LowerDataContainer" MinHeight="256" Orientation="Vertical" Margin="8 8">
+            <plot:Pseudo3DColoredView Name="ColorState" MinHeight="256" MouseFilter="Stop"/>
+            <!-- Here go data about gasses ratio near SM and their amount as label? or just in text -->
+            </BoxContainer>
+    </BoxContainer>
 </controls:FancyWindow>

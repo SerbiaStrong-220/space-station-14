@@ -14,20 +14,34 @@ internal sealed class Pseudo3DColoredView : Plot
     private UIBox2 _uIBox2 = new();
     private Vector3 _curPoint = new();
     private (float xMax, float xMin, float yMax, float yMin) _meshgridBorders = new();
+    private ((float Offset, float Size, float Step) x, (float Offset, float Size, float Step) y) _initCachedParams;
     private ((float Offset, float Size, float Step) x, (float Offset, float Size, float Step) y) _cachedParams;
     private Func<float, float, float>? _cachedFunction;
     private float _maxZ = 0f;
     private float _minZ = 0f;
 
+    public void SetLabels(string? xLabel, string? yLabel, string? title)
+    {
+        if (_color2DPoint == null)
+            return;
+        _color2DPoint.XLabel = xLabel;
+        _color2DPoint.YLabel = yLabel;
+        _color2DPoint.Title = title;
+    }
     public void LoadColor2DPoint(List<Vector3> vector3) => _color2DPoint?.LoadData(vector3);
     public void MakeMeshgrid((float Offset, float Size, float Step) xParams, (float Offset, float Size, float Step) yParams)
     {
+        if (_color2DPoint == null)
+        {
+            _initCachedParams.x = xParams;
+            _initCachedParams.y = yParams;
+        }
         _cachedParams.x = xParams;
         _cachedParams.y = yParams;
 
-        _color2DPoint = new Color2DPointView(xParams, yParams);
+        _color2DPoint = new Color2DPointView(xParams, yParams, _color2DPoint);
     }
-    public void MakeMeshgrid(List<float> x, List<float> y) => _color2DPoint = new Color2DPointView(x, y);
+    public void MakeMeshgrid(List<float> x, List<float> y) => _color2DPoint = new Color2DPointView(x, y, _color2DPoint);
     public void EvalFunctionOnMeshgrid(Func<float, float, float> func)
     {
         _cachedFunction = func;
@@ -40,8 +54,8 @@ internal sealed class Pseudo3DColoredView : Plot
                 || position.Y > _cachedParams.y.Offset + (_cachedParams.y.Size - 1) * _cachedParams.y.Step
                 || position.X < _cachedParams.x.Offset || position.Y < _cachedParams.x.Offset)
         {
-            MakeMeshgrid((MakeOffsetFromCoord(position.X, _cachedParams.x.Offset), _cachedParams.x.Size, _cachedParams.x.Step),
-                            (MakeOffsetFromCoord(position.Y, _cachedParams.x.Offset), _cachedParams.y.Size, _cachedParams.y.Step));
+            MakeMeshgrid((MakeOffsetFromCoord(position.X, _initCachedParams.x.Offset), _initCachedParams.x.Size, _initCachedParams.x.Step),
+                            (MakeOffsetFromCoord(position.Y, _initCachedParams.x.Offset), _initCachedParams.y.Size, _initCachedParams.y.Step));
             if (_cachedFunction != null)
                 EvalFunctionOnMeshgrid(_cachedFunction);
         }
@@ -90,7 +104,7 @@ internal sealed class Pseudo3DColoredView : Plot
             _movingPoint.DrawMovingDirection(handle);
             _movingPoint.DrawPoint(handle);
         }
-        DrawAxis(handle);
+
         foreach (var step in AxisSteps)
         {
             // X
@@ -98,6 +112,7 @@ internal sealed class Pseudo3DColoredView : Plot
             // Y
             handle.DrawString(AxisFont, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step), $"{_color2DPoint.Y[(int) (_color2DPoint.Y.Count * step)]:0.}");
         }
+        base.DrawAxis(handle, _color2DPoint);
     }
 
     /// <summary> Adjust vector to borders also offsets it with AxisBorderPosition </summary>

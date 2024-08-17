@@ -34,11 +34,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var query = EntityQueryEnumerator<SuperMatterComponent>();
         while (query.MoveNext(out var uid, out var smComp))
         {
+            var crystal = new Entity<SuperMatterComponent>(uid, smComp);
+            UpdateDelayed(crystal, frameTime);
             if (!smComp.Activated)
                 continue;
-            var crystal = new Entity<SuperMatterComponent>(uid, smComp);
+
             SuperMatterUpdate(crystal, frameTime);
-            UpdateDelayed(crystal, frameTime);
+
         }
     }
 
@@ -83,7 +85,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void UpdateDelayed(Entity<SuperMatterComponent> crystal, float frameTime)
     {
-        if (crystal.Comp.NextOutputEnergySourceUpdate < _gameTiming.CurTime)
+        if (_gameTiming.CurTime > crystal.Comp.NextOutputEnergySourceUpdate
+            && crystal.Comp.Activated)
         {
             ReleaseEnergy(crystal);
             crystal.Comp.AccumulatedRadiationEnergy = 0;

@@ -62,6 +62,9 @@
     color: "#ffb800" # check it
   # - type: Computer
   #   board: PowerComputerCircuitboard DOIT
+  - type: SuperMatterObserver
+  - type: SuperMatterObserverReceiver
+  - type: ActivatableUIRequiresPower
   - type: ActivatableUI
     singleUser: true
     key: enum.SuperMatterObserverUiKey.Key

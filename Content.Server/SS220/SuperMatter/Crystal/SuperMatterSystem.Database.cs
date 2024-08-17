@@ -8,6 +8,7 @@ namespace Content.Server.SS220.SuperMatterCrystal;
 // TODO: added: Fun!
 public sealed partial class SuperMatterSystem : EntitySystem
 {
+    // TODO add shifts counter for not delaminate
     public void BroadcastData(Entity<SuperMatterComponent> crystal)
     {
         var (uid, comp) = crystal;
@@ -17,8 +18,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var pressure = comp.PressureAccumulator / comp.UpdatesBetweenBroadcast;
         comp.Name ??= MetaData(crystal.Owner).EntityName;
 
-        var ev = new SuperMatterStateUpdate(uid.Id, comp.Name, GetIntegrity(comp),
-                                            pressure, comp.Temperature,
+        // just in case...
+        if (!HasComp<TransformComponent>(uid))
+        {
+            Log.Error($" Tried to get TransformComp of {EntityManager.ToPrettyString(crystal)}, but it hasnt it");
+            return;
+        }
+
+        var ev = new SuperMatterStateUpdate(uid.Id, EntityManager.GetNetEntity(Transform(uid).GridUid),
+                                            comp.Name, GetIntegrity(comp), pressure, comp.Temperature,
                                             (comp.Matter, matterDerv),
                                             (comp.InternalEnergy, internalEnergyDerv),
                                             (comp.IsDelaminate, comp.TimeOfDelamination));

@@ -18,16 +18,25 @@ public sealed class Color2DPointView : LabelContainer
     private List<Vector3> _points3D = new() { };
     private List<float> _x;
     private List<float> _y;
-
-    public Color2DPointView(List<float> x, List<float> y) : base()
+    public Color2DPointView(List<float> x, List<float> y, LabelContainer? labelContainer = null) : base()
     {
         _x = x;
         _y = y;
+        if (labelContainer != null)
+        {
+            this.CopyLabels(labelContainer);
+        }
     }
-    public Color2DPointView((float xOffset, float xSize, float xStep) xParams, (float yOffset, float ySize, float yStep) yParams) : base()
+    public Color2DPointView((float xOffset, float xSize, float xStep) xParams,
+                            (float yOffset, float ySize, float yStep) yParams,
+                            LabelContainer? labelContainer = null) : base()
     {
         _x = MakeCoordFrom(xParams.xOffset, xParams.xSize, xParams.xStep);
         _y = MakeCoordFrom(yParams.yOffset, yParams.ySize, yParams.yStep);
+        if (labelContainer != null)
+        {
+            this.CopyLabels(labelContainer);
+        }
     }
     public void EvalFunction(Func<float, float, float> func)
     {

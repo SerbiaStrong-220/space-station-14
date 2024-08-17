@@ -14,7 +14,16 @@ public sealed class PlotPoints2D(int maxPoints) : LabelContainer
     public int MaxLength => _maxAmountOfPoints;
     private List<Vector2>? _point2Ds;
     private int _maxAmountOfPoints = maxPoints;
-
+    /// <summary> Inits plots with existing list </summary>
+    /// <exception cref="Exception">If values have more entries than maxPoints.</exception>
+    public PlotPoints2D(int maxPoints, List<float> values, float xDelta, float xOffset) : this(maxPoints)
+    {
+        if (values.Count > maxPoints)
+            throw new Exception("Tried to init PlotPoints2D with longer list than maxPoints in PlotPoints2D");
+        _point2Ds = new(maxPoints);
+        for (var i = 0; i < values.Count; i++)
+            _point2Ds.Add(new Vector2(i * xDelta + xOffset, values[i]));
+    }
     public void AddPoint(Vector2 point)
     {
         _point2Ds ??= new() { point };

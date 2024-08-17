@@ -5,7 +5,19 @@ public abstract class LabelContainer()
 {
     public string? XLabel;
     public string? YLabel;
-    public string? Label;
-    // think of it also should contain a axis text...
+    public string? Title;
 
+    public LabelContainer(string xLabel, string yLabel, string title) : this()
+    {
+        XLabel = xLabel;
+        YLabel = yLabel;
+        Title = title;
+    }
+    public void CopyLabels(LabelContainer otherLabelContainer)
+    {
+        XLabel = otherLabelContainer.XLabel;
+        YLabel = otherLabelContainer.YLabel;
+        Title = otherLabelContainer.Title;
+    }
+    // think of it also should contain a axis text...
 }

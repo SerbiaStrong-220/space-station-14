@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Client.Graphics;
+using System.Linq;
 using System.Numerics;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
@@ -20,23 +21,36 @@ internal sealed class PlotSequencedView : Plot
     public PlotSequencedView() : base()
     {
         _font = AxisFont;
-        RectClipContent = true;
+        RectClipContent = false;
         IoCManager.InjectDependencies(this);
         _plotPoints = new PlotPoints2D(128);
 
     }
-    public void LoadPlot2DTimePoints(PlotPoints2D plotPoints)
+    public void LoadPlot2DTimePoints(PlotPoints2D plotPoints, LabelContainer? label = null)
     {
+        if (label == null)
+            plotPoints.CopyLabels(_plotPoints);
+        else
+            plotPoints.CopyLabels(label);
         _plotPoints = plotPoints;
+
     }
     public void AddPointToPlot(Vector2 point)
     {
         _plotPoints.AddPoint(point);
     }
-    public void SetXLabel(string label) => _plotPoints.XLabel = label;
-    public void SetYLabel(string label) => _plotPoints.YLabel = label;
-    public void SetLabel(string label) => _plotPoints.Label = label;
-
+    public void SetLabels(string? xLabel, string? yLabel, string? title)
+    {
+        _plotPoints.XLabel = xLabel;
+        _plotPoints.YLabel = yLabel;
+        _plotPoints.Title = title;
+    }
+    public float GetLastAddedPointX()
+    {
+        if (_plotPoints.Point2Ds == null)
+            return float.NaN;
+        return _plotPoints.Point2Ds.Last().X;
+    }
     protected override void Draw(DrawingHandleScreen handle)
     {
         if (_plotPoints == null)
@@ -68,7 +82,7 @@ internal sealed class PlotSequencedView : Plot
     }
     private void DrawAxis(DrawingHandleScreen handle, float maxY, float xWidth)
     {
-        base.DrawAxis(handle, _plotPoints);
+        DrawAxis(handle, _plotPoints);
 
         //start with drawing axises
         foreach (var step in AxisSteps)

@@ -35,15 +35,16 @@ public static class SuperMatterInternalProcess
         // maybe compress value here?
         return DeltaChemistryPotentialFunction(temperature, pressure);
     }
+    private const float BASE_HEAT_CAPACITY = 20f;
     /// <summary> Defines how many J you need to raise the temperature to 1 grad </summary>
     /// <returns> heat capacity in J/K </returns>
     public static float GetHeatCapacity(float temperature, float matter)
     {
-        if (temperature < Atmospherics.Tmax / 50)
-            return 11 / 2 * Atmospherics.R * matter;
-        if (temperature < Atmospherics.Tmax / 10)
-            return 15 / 2 * Atmospherics.R * matter;
-        return 27 / 2 * Atmospherics.R * matter;
+        if (temperature < Atmospherics.Tmax / 50f)
+            return BASE_HEAT_CAPACITY + 11f / 2f * Atmospherics.R * matter;
+        if (temperature < Atmospherics.Tmax / 10f)
+            return BASE_HEAT_CAPACITY + 15f / 2f * Atmospherics.R * matter;
+        return BASE_HEAT_CAPACITY + 27f / 2f * Atmospherics.R * matter;
     }
     /// <summary>  </summary>
     /// <returns> Value from 0.0002 to 0.03 </returns>
