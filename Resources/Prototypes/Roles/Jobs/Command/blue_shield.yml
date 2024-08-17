@@ -43,7 +43,6 @@
   - Cargo
   - Medical
   - Blueshield
-  - Lawyer #SS220-InternalAffairs
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -66,7 +65,7 @@
     head: ClothingHeadHatBeretNavyBlue
 #    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
     id: BlueShieldPDA
-    ears: ClothingHeadsetAltInternalAffairs #SS220-InternalAffairs
+    ears: ClothingHeadsetAltCommand
     pocket1: WeaponAdvancedRevolver
 #    belt: ClothingBeltSecurityFilled #SS220-blueshield-loadouts
     gloves: ClothingHandsGlovesCombat

@@ -196,15 +196,7 @@
 - type: radioChannel #Connection
   id: HiveRadio
   name: chat-radio-hive
-  keycode: 'у'
+  keycode: 'у' 
   frequency: 2885
   color: "#cc80ff"
-  longRange: true
-
-#Department Internal Affairs
-- type: radioChannel
-  id: InternalAffairs
-  name: chat-radio-internal-affairs
-  keycode: 'в'
-  frequency: 1373
-  color: "#323ba9"
+  longRange: true   

@@ -22,11 +22,9 @@ ent-DoorElectronicsBar = { ent-DoorElectronics }
 ent-DoorElectronicsHydroponics = { ent-DoorElectronics }
     .suffix = Гидропоника, Закрыт
     .desc = { ent-DoorElectronics.desc }
-#SS220-InternalAffairs-Begin
 ent-DoorElectronicsLawyer = { ent-DoorElectronics }
-    .suffix = Внутренние дела, Закрыт
+    .suffix = Юридический, Закрыт
     .desc = { ent-DoorElectronics.desc }
-#SS220-InternalAffairs-End
 ent-DoorElectronicsKitchenHydroponics = { ent-DoorElectronics }
     .suffix = Кухня/Гидропоника, Закрыт
     .desc = { ent-DoorElectronics.desc }
@@ -93,11 +91,9 @@ ent-DoorElectronicsQuartermaster = { ent-DoorElectronics }
 ent-DoorElectronicsSecurity = { ent-DoorElectronics }
     .suffix = Служба безопасности, Закрыт
     .desc = { ent-DoorElectronics.desc }
-#SS220-InternalAffairs-Begin
 ent-DoorElectronicsSecurityLawyer = { ent-DoorElectronics }
-    .suffix = Служба безопасности/Внутренние дела, Закрыт
+    .suffix = Служба безопасности/Юридический, Закрыт
     .desc = { ent-DoorElectronics.desc }
-#SS220-InternalAffairs-End
 ent-DoorElectronicsDetective = { ent-DoorElectronics }
     .suffix = Детектив, Закрыт
     .desc = { ent-DoorElectronics.desc }

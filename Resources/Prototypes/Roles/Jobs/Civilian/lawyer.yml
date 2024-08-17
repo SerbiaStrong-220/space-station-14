@@ -1,35 +1,31 @@
-#SS220-InternalAffairs-Begin
-#
-# - type: job
-#   id: Lawyer
-#   name: job-name-lawyer
-#   description: job-description-lawyer
-#   playTimeTracker: JobLawyer
-#   requirements:
-#     - !type:DepartmentTimeRequirement
-#       department: Security
-#       time: 36000 # SS220-RoleTime 2
-#   startingGear: LawyerGear
-#   setPreference: true # SS220 return-of-the-lawyer
-#   icon: "JobIconLawyer"
-#   supervisors: job-supervisors-hop
-#   access:
-#   - Service
-#   - Lawyer
-#   - Brig
-#   - Maintenance
+- type: job
+  id: Lawyer
+  name: job-name-lawyer
+  description: job-description-lawyer
+  playTimeTracker: JobLawyer
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 36000 # SS220-RoleTime 2
+  startingGear: LawyerGear
+  setPreference: true # SS220 return-of-the-lawyer
+  icon: "JobIconLawyer"
+  supervisors: job-supervisors-hop
+  access:
+  - Service
+  - Lawyer
+  - Brig
+  - Maintenance
 
-# - type: startingGear
-#   id: LawyerGear
-#   equipment:
-#     shoes: ClothingShoesBootsLaceup
-#     id: LawyerPDA
-#     ears: ClothingHeadsetSecurity
-#   inhand:
-#     - BriefcaseBrownFilled
-#   storage:
-#     back:
-#     - RubberStampLawyer
-#     - BookSpaceLaw
-#
-#SS220-InternalAffairs-End
+- type: startingGear
+  id: LawyerGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    id: LawyerPDA
+    ears: ClothingHeadsetSecurity
+  inhand:
+    - BriefcaseBrownFilled
+  storage:
+    back:
+    - RubberStampLawyer
+    - BookSpaceLaw

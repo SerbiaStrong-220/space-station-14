@@ -1,11 +1,9 @@
 ent-AirlockServiceLocked = { ent-Airlock }
     .suffix = Сервисный, Закрыт
     .desc = { ent-Airlock.desc }
-#SS220-InternalAffairs-Begin
 ent-AirlockLawyerLocked = { ent-AirlockServiceLocked }
-    .suffix = Внутренние дела, Закрыт
+    .suffix = Юридический, Закрыт
     .desc = { ent-AirlockServiceLocked.desc }
-#SS220-InternalAffairs-End
 ent-AirlockTheatreLocked = { ent-AirlockServiceLocked }
     .suffix = Театр, Закрыт
     .desc = { ent-AirlockServiceLocked.desc }
@@ -123,11 +121,9 @@ ent-AirlockDetectiveLocked = { ent-AirlockSecurity }
 ent-AirlockBrigLocked = { ent-AirlockSecurity }
     .suffix = Бриг, Закрыт
     .desc = { ent-AirlockSecurity.desc }
-#SS220-InternalAffairs-Begin
 ent-AirlockSecurityLawyerLocked = { ent-AirlockSecurity }
-    .suffix = Служба безопасности/Внутренние дела, Закрыт
+    .suffix = Служба безопасности/Юридический, Закрыт
     .desc = { ent-AirlockSecurity.desc }
-#SS220-InternalAffairs-End
 ent-AirlockArmoryLocked = { ent-AirlockSecurity }
     .suffix = Оружейная, Закрыт
     .desc = { ent-AirlockSecurity.desc }
@@ -140,11 +136,9 @@ ent-AirlockEVALocked = { ent-AirlockCommand }
 ent-AirlockServiceGlassLocked = { ent-AirlockGlass }
     .suffix = Сервисный, Закрыт
     .desc = { ent-AirlockGlass.desc }
-#SS220-InternalAffairs-Begin
 ent-AirlockLawyerGlassLocked = { ent-AirlockServiceGlassLocked }
-    .suffix = Внутренние дела, Закрыт
+    .suffix = Юридический, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
-#SS220-InternalAffairs-End
 ent-AirlockTheatreGlassLocked = { ent-AirlockServiceGlassLocked }
     .suffix = Театр, Закрыт
     .desc = { ent-AirlockServiceGlassLocked.desc }
@@ -252,11 +246,9 @@ ent-AirlockDetectiveGlassLocked = { ent-AirlockSecurityGlass }
 ent-AirlockBrigGlassLocked = { ent-AirlockSecurityGlass }
     .suffix = Бриг, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
-#SS220-InternalAffairs-Begin
 ent-AirlockSecurityLawyerGlassLocked = { ent-AirlockSecurityGlass }
-    .suffix = Служба безопасности/Внутренние дела, Закрыт
+    .suffix = Служба безопасности/Юридический, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
-#SS220-InternalAffairs-End
 ent-AirlockArmoryGlassLocked = { ent-AirlockSecurityGlass }
     .suffix = Оружейная, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
@@ -305,11 +297,9 @@ ent-AirlockMaintHydroLocked = { ent-AirlockMaintServiceLocked }
 ent-AirlockMaintJanitorLocked = { ent-AirlockMaintServiceLocked }
     .suffix = Уборщик, Закрыт
     .desc = { ent-AirlockMaintServiceLocked.desc }
-#SS220-InternalAffairs-Begin
 ent-AirlockMaintLawyerLocked = { ent-AirlockMaintServiceLocked }
-    .suffix = Внутренние дела, Закрыт
+    .suffix = Юридический, Закрыт
     .desc = { ent-AirlockMaintServiceLocked.desc }
-#SS220-InternalAffairs-End
 ent-AirlockMaintServiceLocked = { ent-AirlockMaint }
     .suffix = Сервисный, Закрыт
     .desc = { ent-AirlockMaint.desc }

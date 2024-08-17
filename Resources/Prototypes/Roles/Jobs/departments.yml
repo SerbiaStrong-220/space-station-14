@@ -23,11 +23,11 @@
   - Chaplain
   - Chef
   - Clown
-#  - Detective #SS220-Internal-Affairs
+  - Detective
   - HeadOfPersonnel
   - SeniorService #ss220-SEniorService
   - Janitor
-#  - Lawyer #SS220-Internal-Affairs
+  - Lawyer
   - Librarian
   - Mime
   - Musician
