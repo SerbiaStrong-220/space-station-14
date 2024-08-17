@@ -48,5 +48,5 @@ ent-JugOxygen = кувшин
 ent-JugPlantBGone = кувшин
     .desc = { ent-Jug.desc }
 ent-JugWeldingFuel = кувшин
-#SS220-double-label-fix end
     .desc = { ent-Jug.desc }
+#SS220-double-label-fix end
