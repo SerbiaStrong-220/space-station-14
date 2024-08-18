@@ -1,10 +1,10 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: телескопическая бита НТ
   parent: BaseItem
   id: NTbaton
-  description: А вы знали, что Офицеры ЦК любят играть в бейсбол головами некомпетентного руководства своих активов?
+  name: telescopic bat NT
+  description: Did you know that Central Committee officers like to play baseball with the heads of the incompetent management of their assets?
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi

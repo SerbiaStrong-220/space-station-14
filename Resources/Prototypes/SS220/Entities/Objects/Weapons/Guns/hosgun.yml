@@ -1,8 +1,10 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
-  name: Уника
   parent: BaseWeaponRevolver
   id: WeaponRevolverMatebaSouvenir
-  description: Сувенирная версия авторевольвера Матеба с золотым покрытием. Из-за других материалов обладает конструктивно уменьшенной скорострельностью. Использует патроны калибра .45 магнум.
+  name: unika
+  description: A souvenir version of the Mateb auto revolver with a gold coating. Due to other materials, it has a structurally reduced rate of fire. Uses caliber cartridges .45 magnum.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/hosgun.rsi
@@ -22,10 +24,10 @@
     price: 5000
 
 - type: entity
-  name: защищённый кейс для револьвера
-  description: Ударопрочный кейс с замком для хранения револьвера. Является аксессуаром к сувенирному револьверу "Уника".
-  id: LockedUnicaBox
   parent: BaseStorageItem
+  id: LockedUnicaBox
+  name: a protected revolver case
+  description: A shockproof case with a lock for storing a revolver. It is an accessory to the souvenir revolver "Unica".
   components:
   - type: Storage
     grid:

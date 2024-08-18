@@ -1,3 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Цзянь
+- type: entity
+  name: jian sword
+  parent: CaptainSabre
+  id: JianSword
+  description: An ancient ceremonial sword.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/jian_sword.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/jian_sword.rsi
+  - type: Tag
+    tags:
+    - JianSword
+
+# Ёримицу
 - type: entity
   name: minamoto no yorimitsu
   parent: CaptainSabre
@@ -19,6 +39,7 @@
     tags:
     - MinamotoNoYorimitsu
 
+# Рапира
 - type: entity
   parent: BaseItem
   id: Rapier
@@ -37,7 +58,6 @@
       types:
         Piercing: 27
     angle: 0
-    animation: WeaponArcThrust
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -58,6 +78,7 @@
       types:
         Piercing: 15
 
+# Офицерский кортик
 - type: entity
   parent: CaptainSabre
   id: OfficerCutlass
@@ -73,7 +94,6 @@
       types:
         Piercing: 12
     angle: 0
-    animation: WeaponArcThrust
   - type: Item
     size: Normal
     sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
