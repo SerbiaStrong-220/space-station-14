@@ -163,6 +163,12 @@
         Blunt: 8
     soundHit:
       collection: MetalThud
+  # ss220 crowbar Damage on hit start
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 6
+   # ss220 crowbar Damage on hit end    
   - type: Tool
     qualities:
       - Prying

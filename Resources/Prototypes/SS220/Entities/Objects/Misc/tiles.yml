@@ -631,3 +631,293 @@
       - FloorTileCarpetOrange
   - type: Stack
     stackType: FloorTileStackCarpetOrange
+
+# Marble
+
+- type: entity
+  name: tile black marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleBlack
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: blackmarble
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: marbleblack
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleBlack
+  - type: Stack
+    stackType: FloorTileItemMarbleBlack
+
+- type: entity
+  name: tile white marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleWhite
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: whitemarble
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: marblewhite
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleWhite
+  - type: Stack
+    stackType: FloorTileItemMarbleWhite
+
+- type: entity
+  name: tile border marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleBorderWB
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: bordermarblewb
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: bordermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleBorderWB
+  - type: Stack
+    stackType: FloorTileItemMarbleBorderWB
+
+- type: entity
+  name: tile border marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleBorderBW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: bordermarblebw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: bordermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleBorderBW
+  - type: Stack
+    stackType: FloorTileItemMarbleBorderBW
+
+- type: entity
+  name: tile diagonal marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleDiagonalBW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: diagonalmarblebw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: diagonalmarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleDiagonalBW
+  - type: Stack
+    stackType: FloorTileItemMarbleDiagonalBW
+
+- type: entity
+  name: tile diagonal marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleDiagonalWB
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: diagonalmarblewb
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: diagonalmarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleDiagonalWB
+  - type: Stack
+    stackType: FloorTileItemMarbleDiagonalWB
+
+- type: entity
+  name: tile border marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleVerticalBW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: verticalmarblebw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: verticalmarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleVerticalBW
+  - type: Stack
+    stackType: FloorTileItemMarbleVerticalBW
+
+- type: entity
+  name: tile border marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleVerticalWB
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: verticalmarblewb
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: verticalmarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleVerticalWB
+  - type: Stack
+    stackType: FloorTileItemMarbleVerticalWB
+
+- type: entity
+  name: tile corner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleCornerNE
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: cornermarblene
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: cornermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleCornerNE
+  - type: Stack
+    stackType: FloorTileItemMarbleCornerNE
+
+- type: entity
+  name: tile corner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleCornerNW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: cornermarblenw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: cornermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleCornerNW
+  - type: Stack
+    stackType: FloorTileItemMarbleCornerNW
+
+- type: entity
+  name: tile corner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleCornerSE
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: cornermarblese
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: cornermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleCornerSE
+  - type: Stack
+    stackType: FloorTileItemMarbleCornerSE
+
+- type: entity
+  name: tile corner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleCornerSW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: cornermarblesw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: cornermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleCornerSW
+  - type: Stack
+    stackType: FloorTileItemMarbleCornerSW
+
+- type: entity
+  name: tile inner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleInnerNE
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: innermarblene
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: innermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleInnerNE
+  - type: Stack
+    stackType: FloorTileItemMarbleInnerNE
+
+- type: entity
+  name: tile inner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleInnerNW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: innermarblenw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: innermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleInnerNW
+  - type: Stack
+    stackType: FloorTileItemMarbleInnerNW
+
+- type: entity
+  name: tile inner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleInnerSE
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: innermarblese
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: innermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleInnerSE
+  - type: Stack
+    stackType: FloorTileItemMarbleInnerSE
+
+- type: entity
+  name: tile inner marble floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMarbleInnerSW
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/marble.rsi
+    state: innermarblesw
+  - type: Item
+    sprite: SS220/Objects/Tiles/marble.rsi
+    heldPrefix: innermarble
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMarbleInnerSW
+  - type: Stack
+    stackType: FloorTileItemMarbleInnerSW

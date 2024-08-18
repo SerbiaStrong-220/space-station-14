@@ -552,6 +552,7 @@
   minLimit: 0
   maxLimit: 2
   loadouts:
+  - SuperSynthesizer # ss220 super loadout
   - Glockenspiel
   - MusicBox
   - Xylophone

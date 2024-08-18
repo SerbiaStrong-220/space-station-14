@@ -871,3 +871,195 @@
     collection: FootstepTile
   heatCapacity: 10000
 ###################
+
+- type: tile
+  id: FloorMarbleBlack
+  name: black-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_black.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleBlack
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleWhite
+  name: white-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_white.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleWhite
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleDiagonalBW
+  name: diagonal-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_diagonal_bw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleDiagonalBW
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleDiagonalWB
+  name: diagonal-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_diagonal_wb.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleDiagonalWB
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleBorderWB
+  name: border-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_border_wb.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleBorderWB
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleBorderBW
+  name: border-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_border_bw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleBorderBW
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleVerticalBW
+  name: vertical-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_vertical_bw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleVerticalBW
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleVerticalWB
+  name: vertical-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_vertical_wb.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleVerticalWB
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleCornerNE
+  name: corner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_corner_ne.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleCornerNE
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleCornerNW
+  name: corner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_corner_nw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleCornerNW
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleCornerSE
+  name: corner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_corner_se.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleCornerSE
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleCornerSW
+  name: corner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_corner_sw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleCornerSW
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleInnerNE
+  name: inner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_inner_ne.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleInnerNE
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleInnerNW
+  name: inner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_inner_nw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleInnerNW
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleInnerSE
+  name: inner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_inner_se.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleInnerSE
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMarbleInnerSW
+  name: inner-marble-floor
+  sprite: /Textures/SS220/Tiles/marble_inner_sw.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemMarbleInnerSW
+  heatCapacity: 10000

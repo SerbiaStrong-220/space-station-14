@@ -20,6 +20,8 @@
     selectedMode: FullAuto
     availableModes:
       - FullAuto
+      - SemiAuto #ss220 gunmodes
+      - Burst    #ss220 gunmodes
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
   - type: ChamberMagazineAmmoProvider
@@ -70,6 +72,11 @@
     maxAngle: -20
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
+   #ss220 gunmodes start
+    availableModes:
+      - FullAuto
+      - SemiAuto
+   #ss220 gunmodes end
     fireRate: 5
     #SS220 increase-automatic-rifles-spread begin
     angleIncrease: 2
@@ -174,6 +181,12 @@
     maxAngle: -20
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
+  #ss220 gunmodes start
+    availableModes:
+      - FullAuto
+      - SemiAuto
+      - Burst
+  #ss220 gunmodes end
     #SS220 increase-automatic-rifles-spread begin
     angleIncrease: 2
     angleDecay: 12

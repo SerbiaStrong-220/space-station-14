@@ -95,9 +95,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/clock.rsi
+    sprite: SS220/Structures/Walls/clock.rsi #SS220-Walls-Sprite-Update-V3
   - type: Icon
-    sprite: Structures/Walls/clock.rsi
+    sprite: SS220/Structures/Walls/clock.rsi #SS220-Walls-Sprite-Update-V3
   - type: Construction
     graph: ClockworkGirder
     node: clockworkWall
