@@ -11,6 +11,8 @@ using System.Numerics;
 using System.Linq;
 using Robust.Client.Graphics;
 using Content.Shared.Atmos;
+using Robust.Client.UserInterface;
+using Linguini.Syntax.Ast;
 
 namespace Content.Client.SS220.SuperMatter.Ui;
 
@@ -182,7 +184,12 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
             Value = 0.5f,
             BackgroundStyleBoxOverride = retBackground,
             ForegroundStyleBoxOverride = retForeground,
+            MouseFilter = MouseFilterMode.Stop,
+            TrackingTooltip = true,
+            TooltipDelay = 0,
+            ToolTip = gas + Environment.NewLine + gas.ToString(),
         };
+        // gasBar.OnMouseEntered += _ =>;
 
         var gasLabel = new Label
         {

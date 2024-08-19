@@ -44,8 +44,8 @@
             <BoxContainer Name="LowerDataContainer" MinHeight="256" HorizontalExpand="True" Orientation="Horizontal" Margin="4 4">
                 <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MaxSize="512 256" MinSize="384 256" MouseFilter="Stop"  Margin="4 4"/>
                 <ScrollContainer Name="GasScroll" HScrollEnabled="False" HorizontalExpand="True"
-                                    MaxSize="256 256" MinSize="192 192" Margin="2 2 2 20">
-                    <BoxContainer Name="GasContainer" MinSize="192 256" Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio ="4"  Margin="0 0 4 0">
+                                    MaxSize="256 256" MinSize="192 192" Margin="2 2 2 20" MouseFilter="Pass">
+                    <BoxContainer Name="GasContainer" MinSize="192 256" Orientation="Vertical" HorizontalExpand="True" MouseFilter="Pass"  Margin="0 0 4 0">
                         <!-- Gas Ratio Bars goes here-->
                     </BoxContainer>
                 </ScrollContainer>

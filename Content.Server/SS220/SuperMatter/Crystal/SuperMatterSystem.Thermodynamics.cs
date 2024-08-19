@@ -86,16 +86,17 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         var (crystalUid, smComp) = crystal;
         var resultAdditionalMatter = 0f;
-        if (smComp.GasesToMatterConvertRatio == null)
+        var gasesToMatterConvertRatio = SuperMatterGasInteraction.GasesToMatterConvertRatio;
+        if (gasesToMatterConvertRatio == null)
             return resultAdditionalMatter;
-        foreach (var gasId in smComp.GasesToMatterConvertRatio.Keys)
+        foreach (var gasId in gasesToMatterConvertRatio.Keys)
         {
             var gasMolesInReact = gasMixture.GetMoles(gasId)
                                     * GetMolesReactionEfficiency(smComp.Temperature, gasMixture.Pressure);
 
             if (deleteUsedGases)
                 gasMixture.AdjustMoles(gasId, gasMolesInReact * frameTime);
-            resultAdditionalMatter += gasMolesInReact * smComp.GasesToMatterConvertRatio[gasId];
+            resultAdditionalMatter += gasMolesInReact * gasesToMatterConvertRatio[gasId];
         }
 
         return resultAdditionalMatter;

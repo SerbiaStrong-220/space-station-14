@@ -66,17 +66,6 @@ public sealed partial class SuperMatterComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public float InternalEnergy = 0f;
 
-    #region GasInteraction
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<Gas, (float RelativeInfluence, float flatInfluence)>? DecayInfluenceGases;
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    // It is used to define how much matter will be added if 1 mole of gas consumed
-    public Dictionary<Gas, float>? GasesToMatterConvertRatio;
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<Gas, (float OptimalRatio, float RelativeInfluence)>? EnergyEfficiencyChangerGases;
-
-    #endregion
-
     // ProtoId Sector
 
     [DataField]

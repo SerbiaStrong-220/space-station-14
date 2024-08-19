@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Atmos;
 using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Shared.SS220.SuperMatter.Functions;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -11,26 +12,27 @@ public static class SuperMatterGasResponse
     public static float GetRelativeGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultRelativeInfluence = 0f;
-        if (smComp.DecayInfluenceGases == null)
+        var decayInfluenceGases = SuperMatterGasInteraction.DecayInfluenceGases;
+        if (decayInfluenceGases == null)
             return resultRelativeInfluence;
-        foreach (var gasId in smComp.DecayInfluenceGases.Keys)
+        foreach (var gasId in decayInfluenceGases.Keys)
         {
             var gasEfficiency = GetGasInfluenceEfficiency(gasId, gasMixture);
             resultRelativeInfluence = (resultRelativeInfluence + 1)
-                    * (smComp.DecayInfluenceGases[gasId].RelativeInfluence * gasEfficiency + 1) - 1;
+                    * (decayInfluenceGases[gasId].RelativeInfluence * gasEfficiency + 1) - 1;
         }
         return resultRelativeInfluence;
     }
     public static float GetFlatGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultFlatInfluence = 0f;
-
-        if (smComp.DecayInfluenceGases == null)
+        var decayInfluenceGases = SuperMatterGasInteraction.DecayInfluenceGases;
+        if (decayInfluenceGases == null)
             return resultFlatInfluence;
-        foreach (var gasId in smComp.DecayInfluenceGases.Keys)
+        foreach (var gasId in decayInfluenceGases.Keys)
         {
             var gasEfficiency = GetGasInfluenceEfficiency(gasId, gasMixture);
-            resultFlatInfluence += smComp.DecayInfluenceGases[gasId].flatInfluence * gasEfficiency;
+            resultFlatInfluence += decayInfluenceGases[gasId].flatInfluence * gasEfficiency;
         }
         return resultFlatInfluence;
     }
@@ -39,7 +41,7 @@ public static class SuperMatterGasResponse
     public static float GetGasInfluenceReleaseEnergyEfficiency(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultEfficiency = 0f;
-        var affectGases = smComp.EnergyEfficiencyChangerGases;
+        var affectGases = SuperMatterGasInteraction.EnergyEfficiencyChangerGases;
         if (affectGases == null)
             return resultEfficiency;
         foreach (var gasId in affectGases.Keys)
