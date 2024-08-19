@@ -33,7 +33,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (!TryComp(uid, out arcShooterComponent))
             arcShooterComponent = AddComp<LightningArcShooterComponent>(uid);
 
-        radiationSource.Enabled = false;
+        radiationSource.Intensity = 1f;
+        radiationSource.Slope = 1f;
+        radiationSource.Enabled = true;
         arcShooterComponent.Enabled = false;
         arcShooterComponent.ShootRange = 3f;
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
@@ -45,7 +47,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void OnItemInteract(Entity<SuperMatterComponent> entity, ref InteractUsingEvent args)
     {
-        entity.Comp.Matter += MatterNondimensionalization / 10f;
+        entity.Comp.Matter += MatterNondimensionalization / 5f;
         ConsumeObject(args.User, entity);
     }
     private void OnCollideEvent(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
@@ -53,9 +55,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (args.OtherBody.BodyType == BodyType.Static)
             return;
         if (TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
-            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max((float) projectile.Damage.GetTotal(), 0f);
+            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max(4f * (float)projectile.Damage.GetTotal(), 0f);
 
-        entity.Comp.Matter += MatterNondimensionalization / 10f;
+        entity.Comp.Matter += MatterNondimensionalization / 5f;
         ConsumeObject(args.OtherEntity, entity, false);
     }
     private void OnActivationEvent(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)

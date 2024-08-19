@@ -129,7 +129,7 @@ public static class SuperMatterInternalProcess
         var normalizedPressure = pressure / TriplePointPressure;
         var normalizedCombined = normalizedPressure * normalizedTemperature / ChemistryPotentialCombinedStretchCoeff;
 
-        return ChemistryPotentialCoeff * MathF.Pow(normalizedCombined, 2) * MathF.Exp(MathF.Pow(normalizedCombined, 2));
+        return ChemistryPotentialCoeff * MathF.Pow(normalizedCombined, 2) * MathF.Exp(-MathF.Pow(normalizedCombined, 2));
     }
 
     private const float ReleaseEnergyConversionEfficiencyCoeff = 0.01f;

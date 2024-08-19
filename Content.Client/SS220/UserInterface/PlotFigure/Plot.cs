@@ -11,7 +11,7 @@ internal abstract class Plot : Control
 {
     [Dependency] internal readonly IResourceCache ResourceCache = default!;
     public Color AxisColor = Color.WhiteSmoke;
-    public List<float> AxisSteps = new() { 0.2f, 0.4f, 0.6f, 0.8f };
+    public List<float> AxisSteps = new() { 0.2f, 0.4f, 0.6f, 0.8f, 1f};
     public float AxisBorderPosition = 20f;
     public float AxisThickness = 4f;
     public float SerifSize = 5f;
@@ -64,11 +64,11 @@ internal abstract class Plot : Control
         foreach (var step in AxisSteps)
         {
             // X
-            DrawAxisLine(handle, CorrectVector(PixelWidth * step + AxisBorderPosition, AxisBorderPosition),
-                                CorrectVector(PixelWidth * step + AxisBorderPosition, AxisBorderPosition + SerifSize));
+            DrawAxisLine(handle, InsideVector(PixelWidth * step, 0f),
+                                InsideVector(PixelWidth * step, SerifSize));
             // Y
-            DrawAxisLine(handle, CorrectVector(AxisBorderPosition, PixelHeight * step),
-                                CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step));
+            DrawAxisLine(handle, InsideVector(0f, PixelHeight * step),
+                                InsideVector(SerifSize, PixelHeight * step));
         }
         // adding labels
         AddAxisLabels(handle, mainLabels);
@@ -80,7 +80,7 @@ internal abstract class Plot : Control
         if (labels == null)
             return;
         if (labels.YLabel != null)
-            handle.DrawString(AxisFont, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight - SerifSize), labels.YLabel, AxisColor);
+            handle.DrawString(AxisFont, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight - AxisBorderPosition), labels.YLabel, AxisColor);
         if (labels.XLabel != null)
             handle.DrawString(AxisFont, CorrectVector(PixelWidth - FontSize * 3f / 4f * labels.XLabel.Length, 2f * AxisBorderPosition + SerifSize), labels.XLabel, AxisColor);
         if (labels.Title != null)
@@ -90,6 +90,7 @@ internal abstract class Plot : Control
     {
         return new Vector2(GetCorrectX(x), GetCorrectY(y));
     }
+
     internal Vector2 CorrectVector(Vector2 vector)
     {
         return new Vector2(GetCorrectX(vector.X), GetCorrectY(vector.Y));
@@ -101,6 +102,24 @@ internal abstract class Plot : Control
     internal float GetCorrectY(float y)
     {
         return Math.Clamp(PixelHeight - y, 0f, PixelHeight);
+    }
+    /// <summary> Helps with resizing into axises plot </summary>
+    internal Vector2 InsideVector(float x, float y)
+    {
+        return new Vector2(GetInsideX(x), GetInsideY(y));
+    }
+    internal Vector2 InsideVector(Vector2 vector)
+    {
+        return new Vector2(GetInsideX(vector.X), GetInsideY(vector.Y));
+    }
+    internal float GetInsideX(float x)
+    {
+        return GetCorrectX(x) / PixelWidth * (PixelWidth - 2 * AxisBorderPosition) + AxisBorderPosition;
+    }
+    internal float GetInsideY(float y)
+    {
+        y = Math.Clamp(y, 0f, MaxHeight);
+        return GetCorrectY(y / PixelHeight * (PixelHeight - 3 * AxisBorderPosition) + AxisBorderPosition);
     }
     private void DrawArrowHeadHat(DrawingHandleScreen handle, Vector2 from, Vector2 to, float arrowRange, Color color, Vector2 perpendicularClockwise)
     {

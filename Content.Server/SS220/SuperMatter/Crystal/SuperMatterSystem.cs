@@ -30,16 +30,17 @@ public sealed partial class SuperMatterSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-
+        // 0.033f corresponds to 30 ticks per second. Just in case if server got very laggy
+        var flooredFrameTime = MathF.Min(frameTime, 0.033f);
         var query = EntityQueryEnumerator<SuperMatterComponent>();
         while (query.MoveNext(out var uid, out var smComp))
         {
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
-            UpdateDelayed(crystal, frameTime);
+            UpdateDelayed(crystal, flooredFrameTime);
             if (!smComp.Activated)
                 continue;
 
-            SuperMatterUpdate(crystal, frameTime);
+            SuperMatterUpdate(crystal, flooredFrameTime);
 
         }
     }
@@ -50,7 +51,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         if (!TryGetCrystalGasMixture(crystal.Owner, out var gasMixture))
         {
-            Log.Error($"Got null GasMixture in {crystal}. AddedComponentToGetIt");
+            Log.Error($"Got null GasMixture in {crystal}");
             return;
         }
 
@@ -62,12 +63,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var decayedMatter = CalculateDecayedMatter(crystal, gasMixture) * frameTime;
         // this method make changes in SM parameters!
         EvaluateDeltaInternalEnergy(crystal, gasMixture, frameTime);
-
         var smState = SuperMatterFunctions.GetSuperMatterPhase(crystal.Comp.Temperature, gasMixture.Pressure);
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
-        var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
+        var releasedEnergyPerFrame = 0.1f * crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
                         * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(crystal.Comp, gasMixture) + 1);
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
@@ -138,6 +138,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)
     {
         var pressure = gasMixture.Pressure;
+        // TODO make 4f to variable!
         var oxygenMoles = decayedMatter * GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState);
         var plasmaMoles = decayedMatter * (1 - GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState));
         var heatEnergy = GetChemistryPotential(crystalTemperature, gasMixture.Pressure) * decayedMatter / MatterNondimensionalization;

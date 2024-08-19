@@ -38,8 +38,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
         return MathF.Round(smComp.Integrity, 2);
     }
 
-    private const float MaxDamagePerSecond = 1.5f;
-    private const float MaxRegenerationPerSecond = 1.5f;
+    private const float MaxDamagePerSecond = 0.7f;
+    private const float MaxRegenerationPerSecond = 1.2f;
     /// <summary> Based lie, negative damage = heal, no exception will thrown </summary>
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
     private bool TryImplementIntegrityDamage(SuperMatterComponent smComp)

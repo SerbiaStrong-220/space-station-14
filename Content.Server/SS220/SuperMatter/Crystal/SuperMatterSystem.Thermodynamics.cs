@@ -53,16 +53,16 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var deltaInternalEnergy = (smDeltaT * (matterToTemperatureRatio - newMatterToTemperatureRatio) * smComp.InternalEnergy
                                     - chemistryPotential * normalizedDeltaMatter)
                                     / (1 + newMatterToTemperatureRatio * smDeltaT);
-
         smComp.InternalEnergy += deltaInternalEnergy * frameTime;
         if (smComp.InternalEnergy < 0)
         {
             // TODO loc it
             Log.Error($"Internal Energy of SuperMatter {crystal} became negative, forced to truthish value.");
             SendAdminChatAlert(crystal, "Physics law breaking! If it possible ask how they do it and convey it to developer");
+            smComp.Matter += 20 * MatterNondimensionalization;
             smComp.InternalEnergy = EvaluateTruthishInternalEnergy(crystal);
         }
-        smComp.Matter = MathF.Max(smComp.Matter + deltaMatter * frameTime, MatterNondimensionalization); // actually should go boom at this low, but...
+        smComp.Matter = MathF.Max(smComp.Matter + deltaMatter * frameTime, 4 * MatterNondimensionalization); // actually should go boom at this low, but...
         smComp.Temperature = Math.Clamp(smComp.Temperature + smDeltaT * frameTime, Atmospherics.TCMB, Atmospherics.Tmax); // weird but okay
         _atmosphere.AddHeat(gasMixture, -crystalHeatFromGas * frameTime);
     }

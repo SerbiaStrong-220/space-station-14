@@ -88,7 +88,7 @@ public static class SuperMatterFunctions
                (float) MathF.Pow(temperature + ResonanceTeslaEquilibriumTemperatureOffset, 0.7f);
     }
     //region Integrity
-    private const float EnergyToMatterDamageFactorWide = 1000f;
+    private const float EnergyToMatterDamageFactorWide = 2000f;
     private const float EnergyToMatterDamageFactorCoeff = 2f;
     private const float EnergyToMatterDamageFactorOffset = 1f;
     public static float EnergyToMatterDamageFactorFunction(float delta)

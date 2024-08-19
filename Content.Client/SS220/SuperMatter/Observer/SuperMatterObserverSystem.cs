@@ -19,6 +19,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     private List<EntityUid> _smReceiverUIOwnersToInit = new();
     private TimeSpan _nextUpdateTime = default!;
     private HashSet<Entity<SuperMatterObserverReceiverComponent>> _receivers = new();
+    private SortedList<int, EntityUid> _processedReceivers = new();
     public override void Initialize()
     {
         base.Initialize();
@@ -102,12 +103,18 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             _entityLookup.GetEntitiesOnMap(Transform(observerUid).MapID, _receivers);
             // logic
             foreach (var receiver in _receivers)
-                TrySendToUIState(receiver.Owner, new SuperMatterObserverUpdateState(args.Id, args.Name, args.Integrity, args.Pressure,
-                                                                                      args.Temperature, args.Matter, args.InternalEnergy, args.Delaminate));
+            {
+                if (_processedReceivers.ContainsKey(receiver.Owner.Id))
+                    continue;
+                if (TrySendToUIState(receiver.Owner, new SuperMatterObserverUpdateState(args.Id, args.Name, args.Integrity, args.Pressure,
+                                                                                      args.Temperature, args.Matter, args.InternalEnergy, args.Delaminate)))
+                    _processedReceivers.Add(receiver.Owner.Id, receiver.Owner);
+            }
             _receivers.Clear();
             // RaiseLocalEvent(SMpanels -> accept information)
         }
         _observerEntities.Clear();
+        _processedReceivers.Clear();
     }
     private void OnReceiverBoundUIOpened(Entity<SuperMatterObserverReceiverComponent> entity, ref BoundUIOpenedEvent args)
     {

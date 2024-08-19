@@ -35,19 +35,24 @@
   - type: SuperMatter # all things like radiation source etc will be added through SMSystem
   - type: HallucinationSource
     weightedRandom: HallucinationSupermatterCrystal
-    range: 6
-    rangeEnd: 8
+    range: 7
+    rangeEnd: 9
     betweenHallucinations: 4
     hallucinationMinTime: 2
     hallucinationMaxTime: 10
     totalDuration: 20
     eyeProtectionDependent: true
   - type: Sprite
-    sprite: SS220/Objects/Specific/jerrycan.rsi
-    state: icon
+    sprite: SS220/Objects/Specific/Supermatter/crystal.rsi
+    state: base
   - type: Icon
-    sprite: SS220/Objects/Specific/jerrycan.rsi
+    sprite: SS220/Objects/Specific/Supermatter/crystal.rsi
     state: icon
+  - type: PointLight
+    enabled: true
+    radius: 10
+    energy: 5
+    color: "#ffe000"
   - type: Speech
     speechSounds: Pai
   - type: IntrinsicRadioTransmitter

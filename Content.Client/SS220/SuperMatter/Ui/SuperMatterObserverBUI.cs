@@ -17,16 +17,19 @@ public sealed class SuperMatterObserverBUI : BoundUserInterface
 
         _menu.OnServerButtonPressed += (args, observerComp) =>
             {
-                if (!args.Button.Pressed)
-                    _menu.Observer = null;
-                else
+                if (args.Button.Pressed)
                     _menu.Observer = observerComp;
+                else
+                    _menu.Observer = null;
                 _menu.CrystalKey = null;
                 _menu.LoadCrystal();
             };
-        _menu.OnCrystalButtonPressed += (_, crystalKey) =>
+        _menu.OnCrystalButtonPressed += (args, crystalKey) =>
             {
-                _menu.CrystalKey = crystalKey;
+                if (args.Button.Pressed)
+                    _menu.CrystalKey = crystalKey;
+                else
+                    _menu.CrystalKey = null;
                 _menu.LoadCachedData();
             };
     }

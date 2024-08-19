@@ -64,16 +64,17 @@ internal sealed class PlotSequencedView : Plot
         if (!(PixelWidth - AxisBorderPosition > 0))
             return;
 
-        var yMaxResult = (yMax + 0.1f) * 1.1f ?? 0.1f;
+        var yMaxResult = (yMax + 0.1f) ?? 0.1f;
         var xWidthResult = xWidth ?? 1f;
-        var deltaXWidth = (PixelWidth - (float) AxisBorderPosition) / _plotPoints.Point2Ds.Count;
+
+        var deltaXWidth = PixelWidth / _plotPoints.Point2Ds.Count;
         var yNormalizer = PixelHeight / yMaxResult;
 
         var point2Ds = _plotPoints.Point2Ds;
         for (var i = 1; i < point2Ds.Count; i++)
         {
-            var firstPoint = CorrectVector(deltaXWidth * (i - 1) + AxisBorderPosition, point2Ds[i - 1].Y * yNormalizer);
-            var secondPoint = CorrectVector(deltaXWidth * i + AxisBorderPosition, point2Ds[i].Y * yNormalizer);
+            var firstPoint = InsideVector(deltaXWidth * (i - 1), point2Ds[i - 1].Y * yNormalizer);
+            var secondPoint = InsideVector(deltaXWidth * i, point2Ds[i].Y * yNormalizer);
 
             DrawFirstGraphicLine(handle, firstPoint, secondPoint);
         }
@@ -88,9 +89,9 @@ internal sealed class PlotSequencedView : Plot
         foreach (var step in AxisSteps)
         {
             // X
-            handle.DrawString(_font, CorrectVector(PixelWidth * step, AxisBorderPosition), $"{step * xWidth - xWidth:0.}");
+            handle.DrawString(_font, InsideVector(PixelWidth * step, 0), $"{step * xWidth - xWidth:0.}");
             // Y
-            handle.DrawString(_font, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step), $"{step * maxY:0.}");
+            handle.DrawString(_font, InsideVector(SerifSize, PixelHeight * step), $"{step * maxY:0.}");
         }
     }
 }

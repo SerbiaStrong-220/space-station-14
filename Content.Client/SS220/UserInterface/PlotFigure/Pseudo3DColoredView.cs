@@ -54,8 +54,8 @@ internal sealed class Pseudo3DColoredView : Plot
                 || position.Y > _cachedParams.y.Offset + (_cachedParams.y.Size - 1) * _cachedParams.y.Step
                 || position.X < _cachedParams.x.Offset || position.Y < _cachedParams.x.Offset)
         {
-            MakeMeshgrid((MakeOffsetFromCoord(position.X, _initCachedParams.x.Offset), _initCachedParams.x.Size, _initCachedParams.x.Step),
-                            (MakeOffsetFromCoord(position.Y, _initCachedParams.x.Offset), _initCachedParams.y.Size, _initCachedParams.y.Step));
+            MakeMeshgrid((MakeOffsetFromCoord(position.X, _initCachedParams.x), _initCachedParams.x.Size, _initCachedParams.x.Step),
+                            (MakeOffsetFromCoord(position.Y, _initCachedParams.y), _initCachedParams.y.Size, _initCachedParams.y.Step));
             if (_cachedFunction != null)
                 EvalFunctionOnMeshgrid(_cachedFunction);
         }
@@ -70,10 +70,10 @@ internal sealed class Pseudo3DColoredView : Plot
         _movingPoint?.Update(position, moveDirection);
     }
     /// <summary> Make sure that we wont get into wrong position by changing Meshgrid </summary>
-    private float MakeOffsetFromCoord(float coord, float min)
+    private float MakeOffsetFromCoord(float coord, (float Min, float Size, float Step) parameters)
     {
         // TODO Make it to variables of plot and add difference between X and Y
-        return Math.Clamp(coord - _cachedParams.x.Size / 2 * _cachedParams.x.Step, min, float.PositiveInfinity);
+        return Math.Clamp(coord - parameters.Size / 2f * parameters.Step, parameters.Min, float.PositiveInfinity);
     }
 
     public void DeleteMovingPoint() => _movingPoint = null;
@@ -99,6 +99,7 @@ internal sealed class Pseudo3DColoredView : Plot
                     Colormap.GetCorrespondingColor((_curPoint.Z - _minZ) / (_maxZ - _minZ)));
             }
         }
+        DrawAxis(handle, _color2DPoint);
         if (_movingPoint != null)
         {
             _movingPoint.DrawMovingDirection(handle);
@@ -108,11 +109,10 @@ internal sealed class Pseudo3DColoredView : Plot
         foreach (var step in AxisSteps)
         {
             // X
-            handle.DrawString(AxisFont, CorrectVector(PixelWidth * step, AxisBorderPosition), $"{_color2DPoint.X[(int) (_color2DPoint.X.Count * step)]:0.}");
+            handle.DrawString(AxisFont, InsideVector(PixelWidth * step, 0f), $"{_color2DPoint.X[(int)((_color2DPoint.X.Count - 1) * step)]:0.}");
             // Y
-            handle.DrawString(AxisFont, CorrectVector(AxisBorderPosition + SerifSize, PixelHeight * step), $"{_color2DPoint.Y[(int) (_color2DPoint.Y.Count * step)]:0.}");
+            handle.DrawString(AxisFont, InsideVector(SerifSize, PixelHeight * step), $"{_color2DPoint.Y[(int)((_color2DPoint.Y.Count - 1) * step)]:0.}");
         }
-        base.DrawAxis(handle, _color2DPoint);
     }
 
     /// <summary> Adjust vector to borders also offsets it with AxisBorderPosition </summary>
@@ -126,6 +126,8 @@ internal sealed class Pseudo3DColoredView : Plot
     }
     private void DrawPoint(DrawingHandleScreen handle, (float X, float Y) coords, (float X, float Y) size, Color color)
     {
+        size.X *= 1.05f;
+        size.Y *= 1.05f;
         _uIBox2 = UIBox2.FromDimensions(coords.X - size.X / 2, coords.Y + size.Y / 2, size.X, size.Y);
         handle.DrawRect(_uIBox2, color, true);
     }
