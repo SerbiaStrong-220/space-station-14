@@ -7,6 +7,15 @@
       !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 108000 # 30 hrs
+# TacSec Time
+- type: loadoutEffectGroup
+  id: TacSec
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 360000 # 100 hrs
 
 # Jumpsuit
 - type: loadout
@@ -30,17 +39,38 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitSecBlue
 
+- type: loadout
+  id: JumpsuitTacSec
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    jumpsuit: ClothingUniformTacticalSecurity
+
 # Head
 - type: loadout
   id: HatCowboyBlack
   equipment:
     head: ClothingHeadHatCowboyBlack
 
+- type: loadout
+  id: HelmetTacSec
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    head: ClothingHeadHelmetTactical
+
 # Neck
 - type: loadout
   id: Headphones
   equipment:
     neck: ClothingNeckHeadphones
+
+- type: loadout
+  id: ProtectGear
+  equipment:
+    neck: ClothingNeckProtectBundle
 
 #Outer
 - type: loadout

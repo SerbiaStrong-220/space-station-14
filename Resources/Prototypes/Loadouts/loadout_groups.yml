@@ -1055,6 +1055,7 @@
   - SecurityBeret
   - SecurityHat
   - HatCowboyBlack #ss220 sec loadout update
+  - HelmetTacSec #ss220 tacsec update
 
 #SS220 neck loadout begin
 - type: loadoutGroup
@@ -1064,6 +1065,7 @@
   loadouts:
   - SecurityHolster #SS220 holster loadout
   - Headphones #SS220 sec loadout update
+  - ProtectGear #ss220 tacsec update
 #SS220 neck loadout end
 
 - type: loadoutGroup
@@ -1079,6 +1081,7 @@
   - SecurityJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
+  - JumpsuitTacSec #ss220 tacsec update
 
 - type: loadoutGroup
   id: SecurityBackpack

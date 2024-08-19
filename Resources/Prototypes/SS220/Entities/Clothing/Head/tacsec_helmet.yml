@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadHelmetBasic
+  id: ClothingHeadHelmetTactical
+  name: тактический шлем СБ
+  description: Тактический шлем для самых элитных офицеров службы безопасности НТ.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Helmets/opscore.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Helmets/opscore.rsi
