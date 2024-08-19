@@ -68,6 +68,11 @@ public sealed class SharedMagbootsSystem : EntitySystem
             _alerts.ShowAlert(user, ent.Comp.MagbootsAlert);
         else
             _alerts.ClearAlert(user, ent.Comp.MagbootsAlert);
+
+        //SS220 Magboots with jet fix begin
+        var ev = new MagbootsUpdateStateEvent(state);
+        RaiseLocalEvent(user, ref ev);
+        //SS220 Magboots with jet fix end
     }
 
     private void OnIsWeightless(Entity<MagbootsComponent> ent, ref IsWeightlessEvent args)
@@ -88,3 +93,12 @@ public sealed class SharedMagbootsSystem : EntitySystem
         OnIsWeightless(ent, ref args.Args);
     }
 }
+
+//SS220 Magboots with jet fix begin
+/// <summary>
+/// The event that rises when the state of MagbootEffects is changes
+/// </summary>
+/// <param name="State"></param>
+[ByRefEvent]
+public record struct MagbootsUpdateStateEvent(bool State);
+//SS220 Magboots with jet fix end
