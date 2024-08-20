@@ -1,4 +1,13 @@
 # InternalAffairs
+
+#ss220 iaa fix start
+- type: loadoutGroup
+  id: IAABackpacks
+  name: loadout-group-iaa-backpack
+  loadouts:
+    - IAABackpackLeather
+#ss220 iaa fix end
+
 - type: loadoutGroup
   id: IAAJumpsuit
   name: loadout-group-iaa-jumpsuit

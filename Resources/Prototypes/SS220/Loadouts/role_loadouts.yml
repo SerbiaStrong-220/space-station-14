@@ -4,6 +4,7 @@
   groups:
   - LawyerNeck
   - IAAJumpsuit
+  - IAABackpacks #ss220 iaa loadout fix
   - Trinkets
   - Gloves
 
@@ -29,7 +30,7 @@
   - SecurityShoes
   - SecurityPDA
   - Trinkets
-  
+
 #Senior
 - type: roleLoadout
   id: JobSeniorService
@@ -39,7 +40,7 @@
   - CommonBackpack
   - Glasses
   - Trinkets
-  
+
 - type: roleLoadout
   id: JobSeniorEngineer
   groups:
@@ -49,7 +50,7 @@
   - SeniorsEngineerOuterClothing
   - StationEngineerShoes
   - Trinkets
-  
+
 - type: roleLoadout
   id: JobSeniorPhysician
   groups:
@@ -75,7 +76,7 @@
   - ScientistShoes
   - Glasses
   - Trinkets
-  
+
 - type: roleLoadout
   id: JobSeniorOfficer
   groups:
