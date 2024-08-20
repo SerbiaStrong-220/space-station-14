@@ -119,7 +119,7 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         TemperatureLabel.SetMessage(_localization.GetString("smObserver-temperature", ("value", msg.Temperature.ToString("N2"))));
         MatterLabel.SetMessage(_localization.GetString("smObserver-matter", ("value", msg.Matter.Value.ToString("N2"))));
         InternalEnergyLabel.SetMessage(_localization.GetString("smObserver-internalEnergy", ("value", msg.InternalEnergy.Value.ToString("N2"))));
-        DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus", ("status", msg.Delaminate.Delaminates)));
+        DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus", ("status", _localization.GetString(msg.Delaminate.Delaminates.ToString()))));
         MolesAmount.SetMessage(_localization.GetString("smObserver-molesAmount", ("value", msg.TotalMoles.ToString("N2"))));
     }
     private void SetMessageDataToTextInfo()
@@ -206,9 +206,14 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     {
         if (!_prototypeManager.TryIndex<GasPrototype>(((int)gas).ToString(), out var gasProto))
             return "";
-        return _localization.GetString(gasProto.Name)
-                + Environment.NewLine
-                + gasProto.PricePerMole;
+        var interactionTooltip = _localization.GetString(gasProto.Name);
+        if (SuperMatterGasInteraction.DecayInfluenceGases.TryGetValue(gas, out var decayInfluence))
+            interactionTooltip += Environment.NewLine + "   " + _localization.GetString("smObserver-decay", ("flat", decayInfluence.flatInfluence.ToString("N0")), ("relative", decayInfluence.RelativeInfluence.ToString("N2")));
+        if (SuperMatterGasInteraction.GasesToMatterConvertRatio.TryGetValue(gas, out var gassesToMatter))
+            interactionTooltip += Environment.NewLine + "   " + _localization.GetString("smObserver-gasToMatter", ("value", gassesToMatter.ToString("N0")));
+        if (SuperMatterGasInteraction.EnergyEfficiencyChangerGases.TryGetValue(gas, out var energyInfluence))
+            interactionTooltip += Environment.NewLine + "   " + _localization.GetString("smObserver-energyInfluence", ("optimalRatio", (energyInfluence.OptimalRatio * 100).ToString("N0")), ("relative", ((energyInfluence.RelativeInfluence + 1) * 100).ToString("N0")));
+        return interactionTooltip;
     }
     private sealed class ServerButton : Button
     {

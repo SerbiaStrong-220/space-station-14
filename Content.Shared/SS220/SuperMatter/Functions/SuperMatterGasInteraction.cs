@@ -4,8 +4,23 @@ using Content.Shared.Atmos;
 namespace Content.Shared.SS220.SuperMatter.Functions;
 public struct SuperMatterGasInteraction
 {
-    public static Dictionary<Gas, (float RelativeInfluence, float flatInfluence)>? DecayInfluenceGases;
+    public static Dictionary<Gas, (float RelativeInfluence, float flatInfluence)> DecayInfluenceGases = new()
+        {
+            {Gas.Oxygen, (0.6f, -4f) },
+            {Gas.Frezon, (0.1f, 0f) },
+            {Gas.Ammonia, (2.2f, 4f)}
+        };
     // It is used to define how much matter will be added if 1 mole of gas consumed
-    public static Dictionary<Gas, float>? GasesToMatterConvertRatio;
-    public static Dictionary<Gas, (float OptimalRatio, float RelativeInfluence)>? EnergyEfficiencyChangerGases;
+    public static Dictionary<Gas, float> GasesToMatterConvertRatio = new()
+        {
+            {Gas.Tritium, 6f},
+            {Gas.NitrousOxide, 2f},
+        };
+    public static Dictionary<Gas, (float OptimalRatio, float RelativeInfluence)> EnergyEfficiencyChangerGases = new()
+        {
+            {Gas.Nitrogen,  (0.8f, -0.4f)},
+            {Gas.Ammonia, (0.7f, 0.8f)},
+            {Gas.Frezon, (0.2f, -0.8f)},
+            {Gas.NitrousOxide, (0.6f, -0.6f)}
+        };
 }

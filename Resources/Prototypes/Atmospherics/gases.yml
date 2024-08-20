@@ -48,7 +48,7 @@
   molarMass: 6
   gasOverlaySprite: /Textures/Effects/atmospherics.rsi
   gasOverlayState: tritium
-  color: 13FF4B
+  color: 3BBF58 #SS220 Supermatter-crystal
   reagent: Tritium
   pricePerMole: 2.5
 
@@ -60,7 +60,7 @@
   molarMass: 18
   gasOverlaySprite: /Textures/Effects/atmospherics.rsi
   gasOverlayState: water_vapor
-  color: bffffd
+  color: 9BBFBE #SS220 Supermatter-crystal
   reagent: Water
   pricePerMole: 0
 
