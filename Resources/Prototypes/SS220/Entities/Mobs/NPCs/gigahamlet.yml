@@ -1,14 +1,14 @@
 - type: entity
-  name: Гигагамлет
-  id: MobGigaHamlet
   parent: [ SimpleMobBase, MobCombat ]
-  description: Огромный мускулистый хомяк - это поразительное явление природы. Его массивное тело украшено густой, блестящей шерстью, подчеркивающей каждый контур его внушительных мышц. Сильные лапы этого хомяка напоминают мощные колонны, способные поддерживать его впечатляющий вес. Его глаза сверкают уверенностью и силой, а его улыбка выражает дружелюбие и непоколебимую силу. Этот хомяк несомненно вызывает восхищение и уважение у всех, кто имеет счастье встретить его.
+  id: MobGigaHamlet
+  name: gigahamlet
+  description: A huge muscular hamster is an amazing phenomenon of nature. His massive body is decorated with thick, shiny fur that accentuates every contour of his impressive muscles. The strong paws of this hamster resemble powerful columns capable of supporting its impressive weight. His eyes sparkle with confidence and strength, and his smile expresses friendliness and unwavering strength. This hamster is undoubtedly admired and respected by all who are lucky enough to meet him.
   suffix: Shitspawn
   components:
   - type: CombatMode
   - type: MovementSpeedModifier
-    baseWalkSpeed : 3.00
-    baseSprintSpeed : 5.00
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
   - type: MobState
   - type: Deathgasp
   - type: MobStateActions
@@ -54,7 +54,9 @@
     thresholds:
       0: Alive
       400: Critical
-      600: Dead
+      500: Dead
+  - type: Stamina
+    critThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
       250: 0.7
@@ -126,15 +128,15 @@
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
-    name: Гигагамлет
-    description: Вы огромный, мускулистый, уверенный в себе, с блестящей шерстью, человекоподобный хомяк.
+    name: ghost-role-information-gigagamlet-name
+    description: ghost-role-information-gigagamlet-description
   - type: GhostTakeoverAvailable
 
 - type: entity
-  name: Рикардо гамлес
-  id: MobRicardoHamlet
   parent: MobGigaHamlet
-  description: Если бы хомяки могли быть супергероями, то Рикардо Гамлес был бы их лучшим представителем. Ах.. как же он танцует.. боже..
+  id: MobRicardoHamlet
+  name: ricardo hamles
+  description: If hamsters could be superheroes, then Ricardo Gomez would be their best representative. Ah.. How he dances.. God..
   suffix: Shitspawn
   components:
   - type: Sprite
@@ -145,10 +147,11 @@
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
-    name: Рикардо гамлес
-    description: Покажите этому миру, как нужно танцевать!
+    name: ghost-role-information-gigohamles-name
+    description: ghost-role-information-gigohamles-description
   - type: GhostTakeoverAvailable
-  - type: Butcherable
-    spawned:
-    - id: ClothingUniformRicardoHamletJunior
-      amount: 1
+  # Всё же, думаю не стоит...
+  # - type: Butcherable
+  #   spawned:
+  #   - id: ClothingUniformRicardoHamletJunior
+  #     amount: 1
