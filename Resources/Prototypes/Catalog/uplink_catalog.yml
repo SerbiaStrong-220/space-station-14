@@ -798,6 +798,18 @@
 
 # Disruption
 
+#ss220 ADD pen-signaller start
+- type: listing
+  id: UplinkSyndicatePenSignaller
+  name: uplink-syndicate-pen-signaller
+  description: uplink-syndicate-pen-signaller-desc
+  productEntity: PenSignaller
+  cost:
+    Telecrystal: 1
+  categories:
+    - UplinkDisruption
+#ss220 ADD pen-signaller end
+
 - type: listing
   id: UplinkEmag
   name: uplink-emag-name
