@@ -1,0 +1,54 @@
+# Quartermaster Time
+- type: loadoutEffectGroup
+  id: Cargonovich
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobQuartermaster
+      time: 360000 # 100 hrs
+
+- type: loadoutEffectGroup
+  id: Warehouseman
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobQuartermaster
+      time: 468000 # 130 hrs
+
+# Head
+- type: loadout
+  id: QuartermasterHeadWarehouseman
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Warehouseman
+  equipment:
+    head: ClothingHeadWarehouseman
+
+# Jumpsuit
+- type: loadout
+  id: QuartermasterJumpsuitCargonovich
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Cargonovich
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCargonovich
+
+- type: loadout
+  id: QuartermasterJumpsuitWarehouseman
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Warehouseman
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWarehouseman
+
+# Outerclothing
+
+- type: loadout
+  id: QuartermasterOuterCoatQMWarehouseman
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Warehouseman
+  equipment:
+    outerClothing: ClothingOuterCoatQMWarehouseman

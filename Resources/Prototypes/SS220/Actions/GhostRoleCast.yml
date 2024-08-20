@@ -2,10 +2,9 @@
   id: ActionToggleGhostRoleName
   name: action-toggle-ghostrole-cast-settings-name
   description: action-toggle-ghostrole-cast-settings-desc
-  noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/GhostRoleSettings.png
+    icon: SS220/Interface/Actions/GhostRoleSettings.png
     event: !type:ToggleGhostRoleCastSettingsEvent
     useDelay: 1
     clientExclusive: true
@@ -16,10 +15,9 @@
   id: ActionToggleGhostRoleCast
   name: action-toggle-ghostrole-cast-name
   description: action-toggle-ghostrole-cast-desc
-  noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleCast.png
+    icon: SS220/Interface/Actions/GhostRoleCast.png
     event: !type:ToggleGhostRoleCastActionEvent
     useDelay: 1
     clientExclusive: true
@@ -32,10 +30,9 @@
   id: ActionToggleGhostRoleRemove
   name: action-toggle-ghostrole-remove-name
   description: action-toggle-ghostrole-remove-desc
-  noSpawn: true
   components:
   - type: EntityTargetAction
-    icon: SS220/Interface/actions/GhostRoleRemove.png
+    icon: SS220/Interface/Actions/GhostRoleRemove.png
     event: !type:ToggleGhostRoleRemoveActionEvent
     useDelay: 1
     clientExclusive: true

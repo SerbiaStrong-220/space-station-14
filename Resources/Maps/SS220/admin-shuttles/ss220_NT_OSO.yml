@@ -467,14 +467,6 @@ entities:
       parent: 5
     - type: InstantAction
       container: 5
-- proto: ActionToggleMagbootsAdvanced
-  entities:
-  - uid: 11
-    components:
-    - type: Transform
-      parent: 10
-    - type: InstantAction
-      container: 10
 - proto: AirAlarm
   entities:
   - uid: 16
@@ -1941,15 +1933,8 @@ entities:
     - type: Transform
       parent: 9
     - type: Magboots
-      toggleActionEntity: 11
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 11
     - type: InsideEntityStorage
 - proto: ClothingShoesCentcomBlack
   entities:
@@ -3527,7 +3512,7 @@ entities:
     - type: Stamp
       stampedName: Офицер Спецопераций
       stampedColor: '#3E5F8AFF'
-- proto: RubberStampCentcom
+- proto: RubberStampCentcomm
   entities:
   - uid: 447
     components:

@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseSubdermalImplant
+  id: ThermalVisionImplant
+  name: thermal-vision implant
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionActivateThermalVision
+    - type: TriggerImplantAction
+    - type: ThermalVisionImplant
+    - type: Tag
+      tags:
+        - ThermalImplant

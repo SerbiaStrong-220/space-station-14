@@ -46,6 +46,16 @@
               amount: 2
               doAfter: 3
 
+#SS220-craft-start
+        - to: shuttleWindowDiagonal
+          steps:
+            - material: Plasteel
+              amount: 2
+            - material: ReinforcedGlass
+              amount: 2
+              doAfter: 4
+#SS220-craft-end
+
     - node: windowDiagonal
       entity: WindowDiagonal
       edges:
@@ -190,3 +200,36 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
+
+#SS220-craft-start
+    - node: shuttleWindowDiagonal
+      entity: ShuttleWindowDiagonal
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRGlass1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps:
+          #To-Do: Add deconstruct visuals
+            - tool: Welding
+              doAfter: 6
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Welding
+              doAfter: 5
+            - tool: Screwing
+              doAfter: 1
+            - tool: Prying
+              doAfter: 2
+            - tool: Welding
+              doAfter: 4
+            - tool: Anchoring
+              doAfter: 1
+#SS220-craft-end

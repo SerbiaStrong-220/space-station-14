@@ -3,6 +3,9 @@
   name: job-name-serviceworker
   description: job-description-serviceworker
   playTimeTracker: JobServiceWorker
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 3600 # SS220-RoleTime 2
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
@@ -21,3 +24,6 @@
     shoes: ClothingShoesColorBlack
     id: ServiceWorkerPDA
     ears: ClothingHeadsetService
+  #storage:
+    #back:
+    #- Stuff

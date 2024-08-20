@@ -1,6 +1,6 @@
 - type: entity
   id: BulletImpactEffectGreenLaser
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 0.2

@@ -11,7 +11,11 @@
     - HEAD
     unfoldedSlots:
     - MASK
+    foldedHideLayers: []
+    unfoldedHideLayers:
+    - Snout
   - type: Mask
+    disableOnFolded: true #ss220 bandana fix
   - type: IngestionBlocker
   - type: IdentityBlocker
     coverage: MOUTH

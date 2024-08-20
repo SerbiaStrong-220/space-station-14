@@ -9,6 +9,10 @@
   - !type:DepartmentTimeRequirement
     department: Security
     time: 72000 # SS220-RoleTime
+  - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: IAAGear
   icon: "JobIconIAA"
   supervisors: job-supervisors-centcom
@@ -27,9 +31,18 @@
 - type: startingGear
   id: IAAGear
   equipment:
-    shoes: ClothingShoesColorBlack
+    shoes: ClothingShoesBootsLaceup #SS220-IAA-Loadout
     id: IAAPDA
     eyes: ClothingEyesGlassesSunglasses
     ears: ClothingHeadsetIAA
+    back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout
   inhand:
     - BriefcaseIAAFilled
+#SS220-IAA-Loadout-Begin
+  storage:
+    back:
+    - BoxSurvival
+    - Telescopichka
+    - Flash
+    - ExpensiveLighterNanotrasen
+#SS220-IAA-Loadout-End

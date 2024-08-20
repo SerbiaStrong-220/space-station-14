@@ -115,7 +115,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -223,7 +223,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttle.rsi
+    sprite: SS220/Structures/Walls/shuttle.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -241,7 +241,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttleinterior.rsi
+    sprite: SS220/Structures/Walls/shuttleinterior.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -259,7 +259,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -480,7 +480,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Structures/Windows/clockwork_window.rsi
+    sprite: SS220/Structures/Windows/clockwork_window.rsi #SS220-Walls-Sprite-Update-V3
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -555,7 +555,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Structures/Windows/shuttle_window.rsi
+    sprite: SS220/Structures/Windows/shuttle_window.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -796,7 +796,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  name: Thin firelock
+  name: thin firelock
   id: FirelockEdge
   graph: Firelock
   startNode: start
@@ -1710,3 +1710,59 @@
     state: closed
   conditions:
     - !type:TileNotBlocked
+
+#SS220-craft-start
+- type: construction
+  name: diagonal shuttle window
+  id: ShuttleWindowDiagonal
+  graph: WindowDiagonal
+  startNode: start
+  targetNode: shuttleWindowDiagonal
+  category: construction-category-structures
+  description: Extra sturdy to resist the pressure of FTL or sustain damage from munitions.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/shuttle_window_diagonal.rsi
+    state: state1
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional uranium window
+  id: UraniumWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: uraniumWindowDirectional
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/directional.rsi
+    state: uranium_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced uranium window
+  id: UraniumReinforcedWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectional
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/directional.rsi
+    state: uranium_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+#SS220-craft-end

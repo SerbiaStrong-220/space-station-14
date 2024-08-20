@@ -1,3 +1,4 @@
+using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Devour;
@@ -11,14 +12,13 @@ namespace Content.Server.Devour;
 public sealed class DevourSystem : SharedDevourSystem
 {
     [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<DevourerComponent, DevourDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibbed);
+        SubscribeLocalEvent<DevourerComponent, BeingGibbedEvent>(OnGibContents);
     }
 
     private void OnDoAfter(EntityUid uid, DevourerComponent component, DevourDoAfterEvent args)
@@ -49,15 +49,15 @@ public sealed class DevourSystem : SharedDevourSystem
 
         _audioSystem.PlayPvs(component.SoundDevour, uid);
     }
-
-    // Start 220 Dragon Bodies Fix
-    private void OnGibbed(Entity<DevourerComponent> ent, ref BeingGibbedEvent args)
+    
+    private void OnGibContents(EntityUid uid, DevourerComponent component, ref BeingGibbedEvent args)
     {
-        if (ent.Comp.ShouldStoreDevoured)
-        {
-            _container.EmptyContainer(ent.Comp.Stomach);
-        }
+        if (!component.ShouldStoreDevoured)
+            return;
+
+        // For some reason we have two different systems that should handle gibbing,
+        // and for some another reason GibbingSystem, which should empty all containers, doesn't get involved in this process
+        ContainerSystem.EmptyContainer(component.Stomach);
     }
-    // End 220 Dragon Bodies Fix
 }
 

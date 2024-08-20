@@ -1,20 +1,20 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Audio;
-using Content.Shared.Damage.Components;
 using Content.Shared.Database;
-using Content.Shared.Gravity;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Standing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
@@ -29,18 +29,16 @@ namespace Content.Shared.Weapons.Reflect;
 /// </summary>
 public sealed class ReflectSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
@@ -63,7 +61,7 @@ public sealed class ReflectSystem : EntitySystem
         if (args.Reflected)
             return;
 
-        foreach (var ent in _inventorySystem.GetHandOrInventoryEntities(uid, SlotFlags.WITHOUT_POCKET))
+        foreach (var ent in _inventorySystem.GetHandOrInventoryEntities(uid, SlotFlags.All & ~SlotFlags.POCKET))
         {
             if (!TryReflectHitscan(uid, ent, args.Shooter, args.SourceItem, args.Direction, out var dir))
                 continue;
@@ -76,7 +74,7 @@ public sealed class ReflectSystem : EntitySystem
 
     private void OnReflectUserCollide(EntityUid uid, ReflectUserComponent component, ref ProjectileReflectAttemptEvent args)
     {
-        foreach (var ent in _inventorySystem.GetHandOrInventoryEntities(uid, SlotFlags.WITHOUT_POCKET))
+        foreach (var ent in _inventorySystem.GetHandOrInventoryEntities(uid, SlotFlags.All & ~SlotFlags.POCKET))
         {
             if (!TryReflectProjectile(uid, ent, args.ProjUid))
                 continue;
@@ -97,22 +95,17 @@ public sealed class ReflectSystem : EntitySystem
 
     private bool TryReflectProjectile(EntityUid user, EntityUid reflector, EntityUid projectile, ProjectileComponent? projectileComp = null, ReflectComponent? reflect = null)
     {
-        // Do we have the components needed to try a reflect at all?
-        if (
-            !Resolve(reflector, ref reflect, false) ||
-            !reflect.Enabled ||
+        if (!Resolve(reflector, ref reflect, false) ||
+            !_toggle.IsActivated(reflector) ||
             !TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflect.Reflects & reflective.Reflective) == 0x0 ||
-            !TryComp<PhysicsComponent>(projectile, out var physics) ||
-            TryComp<StaminaComponent>(reflector, out var staminaComponent) && staminaComponent.Critical ||
-            _standing.IsDown(reflector)
-        )
+            !_random.Prob(reflect.ReflectProbProjectile) || // SS220 Separate-Projectile-Stats
+            !TryComp<PhysicsComponent>(projectile, out var physics))
+        {
             return false;
+        }
 
-        if (!_random.Prob(CalcReflectChance(reflector, reflect, true)))
-            return false;
-
-        var rotation = _random.NextAngle(-reflect.SpreadProjectile / 2, reflect.SpreadProjectile / 2).Opposite(); // ss220 FixESword
+        var rotation = _random.NextAngle(-reflect.SpreadProjectile / 2, reflect.SpreadProjectile / 2).Opposite(); // SS220 Separate-Projectile-Stats
         var existingVelocity = _physics.GetMapLinearVelocity(projectile, component: physics);
         var relativeVelocity = existingVelocity - _physics.GetMapLinearVelocity(user);
         var newVelocity = rotation.RotateVec(relativeVelocity);
@@ -148,36 +141,6 @@ public sealed class ReflectSystem : EntitySystem
         return true;
     }
 
-    private float CalcReflectChance(EntityUid reflector, ReflectComponent reflect, bool isProjectile /* SS220 esword balance fuckery */ )
-    {
-        /*
-         *  The rules of deflection are as follows:
-         *  If you innately reflect things via magic, biology etc., you always have a full chance.
-         *  If you are standing up and standing still, you're prepared to deflect and have full chance.
-         *  If you have velocity, your deflection chance depends on your velocity, clamped.
-         *  If you are floating, your chance is the minimum value possible.
-         *  You cannot deflect if you are knocked down or stunned.
-         */
-
-        var finalMaxProb = isProjectile ? reflect.ReflectProbProjectile : reflect.ReflectProb; // SS220 esword balance fuckery
-
-        if (reflect.Innate)
-            return finalMaxProb;
-
-        if (_gravity.IsWeightless(reflector))
-            return reflect.MinReflectProb;
-
-        if (!TryComp<PhysicsComponent>(reflector, out var reflectorPhysics))
-            return finalMaxProb;
-
-        return MathHelper.Lerp(
-            reflect.MinReflectProb,
-            finalMaxProb,
-            // Inverse progression between velocities fed in as progression between probabilities. We go high -> low so the output here needs to be _inverted_.
-            1 - Math.Clamp((reflectorPhysics.LinearVelocity.Length() - reflect.VelocityBeforeNotMaxProb) / (reflect.VelocityBeforeMinProb - reflect.VelocityBeforeNotMaxProb), 0, 1)
-        );
-    }
-
     private void OnReflectHitscan(EntityUid uid, ReflectComponent component, ref HitScanReflectAttemptEvent args)
     {
         if (args.Reflected ||
@@ -202,15 +165,8 @@ public sealed class ReflectSystem : EntitySystem
         [NotNullWhen(true)] out Vector2? newDirection)
     {
         if (!TryComp<ReflectComponent>(reflector, out var reflect) ||
-            !reflect.Enabled ||
-            TryComp<StaminaComponent>(reflector, out var staminaComponent) && staminaComponent.Critical ||
-            _standing.IsDown(reflector))
-        {
-            newDirection = null;
-            return false;
-        }
-
-        if (!_random.Prob(CalcReflectChance(reflector, reflect, false)))
+            !_toggle.IsActivated(reflector) ||
+            !_random.Prob(reflect.ReflectProb))
         {
             newDirection = null;
             return false;
@@ -239,9 +195,6 @@ public sealed class ReflectSystem : EntitySystem
             return;
 
         EnsureComp<ReflectUserComponent>(args.Equipee);
-
-        if (component.Enabled)
-            EnableAlert(args.Equipee);
     }
 
     private void OnReflectUnequipped(EntityUid uid, ReflectComponent comp, GotUnequippedEvent args)
@@ -255,9 +208,6 @@ public sealed class ReflectSystem : EntitySystem
             return;
 
         EnsureComp<ReflectUserComponent>(args.User);
-
-        if (component.Enabled)
-            EnableAlert(args.User);
     }
 
     private void OnReflectHandUnequipped(EntityUid uid, ReflectComponent component, GotUnequippedHandEvent args)
@@ -267,13 +217,8 @@ public sealed class ReflectSystem : EntitySystem
 
     private void OnToggleReflect(EntityUid uid, ReflectComponent comp, ref ItemToggledEvent args)
     {
-        comp.Enabled = args.Activated;
-        Dirty(uid, comp);
-
-        if (comp.Enabled)
-            EnableAlert(uid);
-        else
-            DisableAlert(uid);
+        if (args.User is {} user)
+            RefreshReflectUser(user);
     }
 
     /// <summary>
@@ -281,28 +226,15 @@ public sealed class ReflectSystem : EntitySystem
     /// </summary>
     private void RefreshReflectUser(EntityUid user)
     {
-        foreach (var ent in _inventorySystem.GetHandOrInventoryEntities(user, SlotFlags.WITHOUT_POCKET))
+        foreach (var ent in _inventorySystem.GetHandOrInventoryEntities(user, SlotFlags.All & ~SlotFlags.POCKET))
         {
-            if (!HasComp<ReflectComponent>(ent))
+            if (!HasComp<ReflectComponent>(ent) || !_toggle.IsActivated(ent))
                 continue;
 
             EnsureComp<ReflectUserComponent>(user);
-            EnableAlert(user);
-
             return;
         }
 
         RemCompDeferred<ReflectUserComponent>(user);
-        DisableAlert(user);
-    }
-
-    private void EnableAlert(EntityUid alertee)
-    {
-        _alerts.ShowAlert(alertee, AlertType.Deflecting);
-    }
-
-    private void DisableAlert(EntityUid alertee)
-    {
-        _alerts.ClearAlert(alertee, AlertType.Deflecting);
     }
 }

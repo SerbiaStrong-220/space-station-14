@@ -16,11 +16,11 @@ using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
-using Content.Shared.Decals;
 using Content.Shared.Damage.ForceSay;
-using Content.Shared.Examine;
+using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
+using Content.Shared.SS220.Telepathy;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -80,7 +80,9 @@ public sealed class ChatUIController : UIController
         {SharedChatSystem.EmotesAltPrefix, ChatSelectChannel.Emotes},
         {SharedChatSystem.AdminPrefix, ChatSelectChannel.Admin},
         {SharedChatSystem.RadioCommonPrefix, ChatSelectChannel.Radio},
-        {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead}
+        {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead},
+        //ss220-telepathy
+        {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy}
     };
 
     public static readonly Dictionary<ChatSelectChannel, char> ChannelPrefixes = new()
@@ -93,7 +95,9 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Emotes, SharedChatSystem.EmotesPrefix},
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
-        {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix}
+        {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
+        //ss220-telepathy
+        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix}
     };
 
     /// <summary>
@@ -555,6 +559,14 @@ public sealed class ChatUIController : UIController
             CanSendChannels |= ChatSelectChannel.Admin;
         }
 
+        //ss220-telepathy-begin
+        if (_ent.HasComponent<TelepathyComponent>(_player.LocalEntity))
+        {
+            FilterableChannels |= ChatChannel.Telepathy;
+            CanSendChannels |= ChatSelectChannel.Telepathy;
+        }
+        //ss220-telepathy-end
+
         SelectableChannels = CanSendChannels;
 
         // Necessary so that we always have a channel to fall back to.
@@ -626,7 +638,7 @@ public sealed class ChatUIController : UIController
         var predicate = static (EntityUid uid, (EntityUid compOwner, EntityUid? attachedEntity) data)
             => uid == data.compOwner || uid == data.attachedEntity;
         var playerPos = player != null
-            ? _transform?.GetMapCoordinates(player.Value) ?? MapCoordinates.Nullspace
+            ? _eye.CurrentEye.Position
             : MapCoordinates.Nullspace;
 
         var occluded = player != null && _examine.IsOccluded(player.Value);
@@ -771,7 +783,7 @@ public sealed class ChatUIController : UIController
 
         // we need to handle selected channel
         // and prefix-channel separately..
-        var allowedChannels = ChatSelectChannel.Local | ChatSelectChannel.Whisper;
+        var allowedChannels = ChatSelectChannel.Local | ChatSelectChannel.Whisper | ChatSelectChannel.Radio; // 220 force-say-radio
         if ((chatBox.SelectedChannel & allowedChannels) == ChatSelectChannel.None)
             return;
 

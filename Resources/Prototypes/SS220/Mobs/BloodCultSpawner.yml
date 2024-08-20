@@ -39,3 +39,4 @@
     - type: HTN
       rootTask:
         task: SimpleHumanoidHostileCompound
+    - type: CannotBeConsumed #Dark Reaper consume fix

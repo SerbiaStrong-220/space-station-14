@@ -117,3 +117,45 @@
         key: ForcedSleep
         component: ForcedSleeping
         refresh: false
+
+- type: reagent
+  id: Harai
+  name: reagent-name-harai
+  group: Medicine
+  desc: reagent-desc-harai
+  physicalDesc: reagent-physical-desc-thick
+  flavor: soothing
+  color: "#9400D3"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:GenericStatusEffect
+        key: Pacified
+        component: Pacified
+        time: 6.0
+        refresh: false
+        type: Add
+        conditions:
+        - !type:OrganType
+          type: Arachnid
+          shouldHave: true
+    Narcotic:
+      effects:
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 8
+        refresh: false
+        conditions:
+        - !type:OrganType
+          type: Arachnid
+          shouldHave: false
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Arachnid
+          shouldHave: false
+        damage:
+          types:
+            Poison: 0.5

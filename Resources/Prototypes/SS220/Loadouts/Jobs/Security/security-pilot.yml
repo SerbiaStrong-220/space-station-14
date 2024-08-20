@@ -1,0 +1,6 @@
+# Head
+
+- type: loadout
+  id: PilotCapCap
+  equipment:
+    head: ClothingHeadPilotCapCap

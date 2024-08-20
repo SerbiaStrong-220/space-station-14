@@ -5,6 +5,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Weapons.Ranged.Systems;
@@ -19,11 +20,13 @@ public sealed partial class GunSystem
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ComponentStartup>(OnBatteryStartup);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ChargeChangedEvent>(OnBatteryChargeChange);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
+        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ChangeFireModeEvent>(OnHitscanFireModeChange); //SS220 Add Multifaze gun
 
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ComponentStartup>(OnBatteryStartup);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ChargeChangedEvent>(OnBatteryChargeChange);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
+        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ChangeFireModeEvent>(OnProjectileFireModeChange); //SS220 Add Multifaze gun
     }
 
     private void OnBatteryStartup(EntityUid uid, BatteryAmmoProviderComponent component, ComponentStartup args)
@@ -107,4 +110,18 @@ public sealed partial class GunSystem
         // Will raise ChargeChangedEvent
         _battery.UseCharge(uid, component.FireCost);
     }
+
+    //SS220 Add Multifaze gun begin
+    private void OnHitscanFireModeChange(Entity<HitscanBatteryAmmoProviderComponent> ent, ref ChangeFireModeEvent args)
+    {
+        UpdateShots(ent, ent.Comp);
+        Dirty(ent, ent.Comp);
+    }
+
+    private void OnProjectileFireModeChange(Entity<ProjectileBatteryAmmoProviderComponent> ent, ref ChangeFireModeEvent args)
+    {
+        UpdateShots(ent, ent.Comp);
+        Dirty(ent, ent.Comp);
+    }
+    //SS220 Add Multifaze gun end
 }

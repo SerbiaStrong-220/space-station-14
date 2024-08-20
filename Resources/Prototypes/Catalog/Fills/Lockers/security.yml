@@ -21,6 +21,7 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerWardenFilled
@@ -45,30 +46,7 @@
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
-
-#SS220-Pilot
-- type: entity
-  id: LockerPilotFilled
-  suffix: Filled
-  parent: LockerPilot
-  components:
-  - type: StorageFill
-    contents:
-      - id: FlashlightSeclite
-      - id: WeaponDisabler
-        prob: 0.3
-      - id: ClothingOuterArmorBobmer
-      - id: ClothingHeadHatPilotBeret
-      - id: ClothingBeltSecurityFilled
-      - id: Flash
-      - id: ClothingEyesGlassesSecurity
-#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
-      - id: ClothingShoesBootsJack
-      - id: ClothingEyesHudSecurity
-      - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
-      - id: HandheldGPSBasic
-      - id: OxygenTankFilled
-      - id: NitrogenTankFilled
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerSecurityFilled
@@ -97,6 +75,8 @@
         prob: 0.1
       - id: HoloprojectorSecurity
         #prob: 0.6 # SS220 guranteed-holo-projector
+      - id: BookSpaceLaw
+        prob: 0.5
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -165,6 +145,8 @@
         amount: 2
       - id: DetectiveHiddenCamera # SS220 add-detective-camera
         amount: 3
+      - id: HandLabeler
+
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb

@@ -11,120 +11,72 @@
 # Head
 - type: loadout
   id: ChefHeadWhite
-  equipment: ChefHeadWhite
-
-- type: startingGear
-  id: ChefHeadWhite
   equipment:
     head: ClothingHeadHatChefWhite
 
 - type: loadout
-  id: ChefHeadGreen
-  equipment: ChefHeadGreen
-
-- type: startingGear
   id: ChefHeadGreen
   equipment:
     head: ClothingHeadHatChefGreen
 
 - type: loadout
   id: ChefHeadBlack
-  equipment: ChefHeadBlack
-
-- type: startingGear
-  id: ChefHeadBlack
   equipment:
     head: ClothingHeadHatChefBlack
 
 - type: loadout
   id: ChefHeadSenior
-  equipment: ChefHeadSenior
   effects:
   - !type:GroupLoadoutEffect
     proto: ChefSenior
-
-- type: startingGear
-  id: ChefHeadSenior
   equipment:
     head: ClothingHeadHatChefNanotrasen
 
 # Jumpsuit
 - type: loadout
   id: ChefJumpsuitWhite
-  equipment: ChefJumpsuitWhite
-
-- type: startingGear
-  id: ChefJumpsuitWhite
   equipment:
     jumpsuit: ClothingUniformJumpsuitChefWhite
 
 - type: loadout
-  id: ChefJumpsuitGreen
-  equipment: ChefJumpsuitGreen
-
-- type: startingGear
   id: ChefJumpsuitGreen
   equipment:
     jumpsuit: ClothingUniformJumpsuitChefGreen
 
 - type: loadout
   id: ChefJumpsuitBlack
-  equipment: ChefJumpsuitBlack
-
-- type: startingGear
-  id: ChefJumpsuitBlack
   equipment:
     jumpsuit: ClothingUniformJumpsuitChefBlack
 
 - type: loadout
   id: ChefJumpsuitSenior
-  equipment: ChefJumpsuitSenior
   effects:
   - !type:GroupLoadoutEffect
     proto: ChefSenior
-
-- type: startingGear
-  id: ChefJumpsuitSenior
   equipment:
     jumpsuit: ClothingUniformJumpsuitChefNanotrasen
 
 # Jumpskirt
 - type: loadout
   id: ChefJumpskirtWhite
-  equipment: ChefJumpskirtWhite
-
-- type: startingGear
-  id: ChefJumpskirtWhite
   equipment:
     jumpsuit: ClothingUniformJumpskirtChefWhite
 
 - type: loadout
-  id: ChefJumpskirtGreen
-  equipment: ChefJumpskirtGreen
-
-- type: startingGear
   id: ChefJumpskirtGreen
   equipment:
     jumpsuit: ClothingUniformJumpskirtChefGreen
 
 - type: loadout
   id: ChefJumpskirtBlack
-  equipment: ChefJumpskirtBlack
-
-- type: startingGear
-  id: ChefJumpskirtBlack
   equipment:
     jumpsuit: ClothingUniformJumpskirtChefBlack
 
 - type: loadout
   id: ChefJumpskirtSenior
-  equipment: ChefJumpskirtSenior
   effects:
   - !type:GroupLoadoutEffect
     proto: ChefSenior
-
-- type: startingGear
-  id: ChefJumpskirtSenior
   equipment:
     jumpsuit: ClothingUniformJumpskirtChefNanotrasen
 
@@ -132,40 +84,24 @@
 
 - type: loadout
   id: ChefJacketWhite
-  equipment: ChefJacketWhite
-
-- type: startingGear
-  id: ChefJacketWhite
   equipment:
     outerClothing: ClothingOuterJacketChefWhite
 
 - type: loadout
-  id: ChefJacketGreen
-  equipment: ChefJacketGreen
-
-- type: startingGear
   id: ChefJacketGreen
   equipment:
     outerClothing: ClothingOuterJacketChefGreen
 
 - type: loadout
   id: ChefJacketBlack
-  equipment: ChefJacketBlack
-
-- type: startingGear
-  id: ChefJacketBlack
   equipment:
     outerClothing: ClothingOuterJacketChefBlack
 
 - type: loadout
   id: ChefJacketSenior
-  equipment: ChefJacketSenior
   effects:
   - !type:GroupLoadoutEffect
     proto: ChefSenior
-
-- type: startingGear
-  id: ChefJacketSenior
   equipment:
     outerClothing: ClothingOuterJacketChefNanotrasen
 
@@ -173,48 +109,28 @@
 
 - type: loadout
   id: ChefBeltApronWhite
-  equipment: ChefBeltApronWhite
-
-- type: startingGear
-  id: ChefBeltApronWhite
   equipment:
     belt: ClothingBeltChefApronWhiteFilled
 
 - type: loadout
-  id: ChefBeltApronGreen
-  equipment: ChefBeltApronGreen
-
-- type: startingGear
   id: ChefBeltApronGreen
   equipment:
     belt: ClothingBeltChefApronGreenFilled
 
 - type: loadout
   id: ChefBeltApronBlack
-  equipment: ChefBeltApronBlack
-
-- type: startingGear
-  id: ChefBeltApronBlack
   equipment:
     belt: ClothingBeltChefApronBlackFilled
 
 - type: loadout
-  id: ChefBeltApronRed
-  equipment: ChefBeltApronRed
-
-- type: startingGear
   id: ChefBeltApronRed
   equipment:
     belt: ClothingBeltChefApronRedFilled
 
 - type: loadout
   id: ChefBeltApronSenior
-  equipment: ChefBeltApronSenior
   effects:
   - !type:GroupLoadoutEffect
     proto: ChefSenior
-
-- type: startingGear
-  id: ChefBeltApronSenior
   equipment:
     belt: ClothingBeltChefApronNanotrasenFilled

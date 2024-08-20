@@ -80,7 +80,7 @@
   id: ClothingHeadsetCentCom
   name: CentCom headset
   description: A headset used by the upper echelons of Nanotrasen.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: ContainerFill
     containers:
@@ -279,7 +279,7 @@
   parent: ClothingHeadset
   id: ClothingHeadsetFreelance
   name: freelancer headset
-  description: This is used by a roaming group of freelancers
+  description: This is used by a roaming group of freelancers.
   components:
     - type: ContainerFill
       containers:

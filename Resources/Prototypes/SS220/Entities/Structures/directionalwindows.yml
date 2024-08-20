@@ -1,0 +1,1665 @@
+#angular directional window
+- type: entity
+  id: WindowDirectionalAng
+  parent: BaseStructure
+  name: directional window angular
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: WallMount
+    arc: 360 # interact despite grilles
+  - type: Tag
+    tags:
+      - Window
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: window
+  - type: InteractionPopup
+    interactSuccessString: comp-window-knock
+    messagePerceivedByOthers: comp-window-knock
+    interactSuccessSound:
+      path: /Audio/Effects/glass_knock.ogg
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.49,0.36,-0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Repairable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 2
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: windowDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: StaticPrice
+    price: 20
+
+- type: entity
+  id: PlasmaWindowDirectionalAng
+  parent: WindowDirectionalAng
+  name: directional plasma window angular
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: plasma_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: plasma_window
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: plasmaWindowDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 70
+  - type: RadiationBlocker
+    resistance: 1
+
+- type: entity
+  id: WindowReinforcedDirectionalAng
+  parent: WindowDirectionalAng
+  name: directional reinforced window angular
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: reinforced_window
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: windowReinforcedDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 4
+    fx: EffectRCDDeconstruct4  
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassReinforced:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  id: PlasmaReinforcedWindowDirectionalAng
+  parent: WindowDirectionalAng
+  name: directional reinforced plasma window angular
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: plasma_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: plasma_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: plasmaReinforcedWindowDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 36
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 2
+          PartRodMetal:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 150
+  - type: RadiationBlocker
+    resistance: 2
+
+- type: entity
+  id: UraniumReinforcedWindowDirectionalAng
+  parent: WindowDirectionalAng
+  name: directional reinforced uranium window angular
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: uranium_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: uranium_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: uraniumReinforcedWindowDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 140
+
+- type: entity
+  id: UraniumWindowDirectionalAng
+  parent: WindowDirectionalAng
+  name: directional uranium window angular
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: uranium_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: uranium_window
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: uraniumWindowDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 80
+
+- type: entity
+  id: WindowClockworkDirectionalAng
+  parent: WindowDirectionalAng
+  name: directional clockwork window angular
+  description: Don't smudge up the brass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: clock_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: clock_window
+  - type: Construction
+    graph: WindowDirectionalAng
+    node: windowClockworkDirectionalAng
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassClockwork:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 50
+
+#U-shaped directional window
+- type: entity
+  id: WindowDirectionalU
+  parent: BaseStructure
+  name: directional window u-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: WallMount
+    arc: 360 # interact despite grilles
+  - type: Tag
+    tags:
+      - Window
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: window
+  - type: InteractionPopup
+    interactSuccessString: comp-window-knock
+    messagePerceivedByOthers: comp-window-knock
+    interactSuccessSound:
+      path: /Audio/Effects/glass_knock.ogg
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.36,0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.36,-0.49,0.49,0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Repairable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 2
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
+    - West
+  - type: Construction
+    graph: WindowDirectionalU
+    node: windowDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  id: PlasmaWindowDirectionalU
+  parent: WindowDirectionalU
+  name: directional plasma window u-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: plasma_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: plasma_window
+  - type: Construction
+    graph: WindowDirectionalU
+    node: plasmaWindowDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 100
+  - type: RadiationBlocker
+    resistance: 1
+
+- type: entity
+  id: WindowReinforcedDirectionalU
+  parent: WindowDirectionalU
+  name: directional reinforced window u-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: reinforced_window
+  - type: Construction
+    graph: WindowDirectionalU
+    node: windowReinforcedDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 4
+    fx: EffectRCDDeconstruct4  
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassReinforced:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 70
+
+- type: entity
+  id: PlasmaReinforcedWindowDirectionalU
+  parent: WindowDirectionalU
+  name: directional reinforced plasma window u-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: plasma_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: plasma_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalU
+    node: plasmaReinforcedWindowDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 36
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 3
+          PartRodMetal:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 200
+  - type: RadiationBlocker
+    resistance: 2
+
+- type: entity
+  id: UraniumReinforcedWindowDirectionalU
+  parent: WindowDirectionalU
+  name: directional reinforced uranium window u-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: uranium_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: uranium_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalU
+    node: uraniumReinforcedWindowDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 3
+          PartRodMetal1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 230
+
+- type: entity
+  id: UraniumWindowDirectionalU
+  parent: WindowDirectionalU
+  name: directional uranium window u-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: uranium_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: uranium_window
+  - type: Construction
+    graph: WindowDirectionalU
+    node: uraniumWindowDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 130
+
+- type: entity
+  id: WindowClockworkDirectionalU
+  parent: WindowDirectionalU
+  name: directional clockwork window u-shaped
+  description: Don't smudge up the brass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: clock_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: clock_window
+  - type: Construction
+    graph: WindowDirectionalU
+    node: windowClockworkDirectionalU
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassClockwork:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 70
+
+#double directional window
+- type: entity
+  id: WindowDirectionalDoub
+  parent: BaseStructure
+  name: directional window double
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: WallMount
+    arc: 360 # interact despite grilles
+  - type: Tag
+    tags:
+      - Window
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: window
+  - type: InteractionPopup
+    interactSuccessString: comp-window-knock
+    messagePerceivedByOthers: comp-window-knock
+    interactSuccessSound:
+      path: /Audio/Effects/glass_knock.ogg
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.36,-0.49,0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Repairable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 2
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - North
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: windowDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  id: PlasmaWindowDirectionalDoub
+  parent: WindowDirectionalDoub
+  name: directional plasma window double
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: plasma_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: plasma_window
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: plasmaWindowDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 70
+  - type: RadiationBlocker
+    resistance: 1
+
+- type: entity
+  id: WindowReinforcedDirectionalDoub
+  parent: WindowDirectionalDoub
+  name: directional reinforced window double
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: reinforced_window
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: windowReinforcedDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 4
+    fx: EffectRCDDeconstruct4  
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassReinforced:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  id: PlasmaReinforcedWindowDirectionalDoub
+  parent: WindowDirectionalDoub
+  name: directional reinforced plasma window double
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: plasma_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: plasma_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: plasmaReinforcedWindowDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 36
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 2
+          PartRodMetal:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 150
+  - type: RadiationBlocker
+    resistance: 2
+
+- type: entity
+  id: UraniumReinforcedWindowDirectionalDoub
+  parent: WindowDirectionalDoub
+  name: directional reinforced uranium window double
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: uranium_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: uranium_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: uraniumReinforcedWindowDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 150
+
+- type: entity
+  id: UraniumWindowDirectionalDoub
+  parent: WindowDirectionalDoub
+  name: directional uranium window double
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: uranium_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: uranium_window
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: uraniumWindowDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 85
+
+- type: entity
+  id: WindowClockworkDirectionalDoub
+  parent: WindowDirectionalDoub
+  name: directional clockwork window double
+  description: Don't smudge up the brass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: clock_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: clock_window
+  - type: Construction
+    graph: WindowDirectionalDoub
+    node: windowClockworkDirectionalDoub
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassClockwork:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 50
+
+#O-shaped window
+- type: entity
+  id: WindowDirectionalO
+  parent: BaseStructure
+  name: directional window o-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: WallMount
+    arc: 360 # interact despite grilles
+  - type: Tag
+    tags:
+      - Window
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: window
+  - type: InteractionPopup
+    interactSuccessString: comp-window-knock
+    messagePerceivedByOthers: comp-window-knock
+    interactSuccessSound:
+      path: /Audio/Effects/glass_knock.ogg
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.36,0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.36,-0.49,0.49,0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+      fix4:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.36,-0.49,0.49"
+        density: 1500
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Repairable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 2
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
+    - North
+    - West
+  - type: Construction
+    graph: WindowDirectionalO
+    node: windowDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  id: PlasmaWindowDirectionalO
+  parent: WindowDirectionalO
+  name: directional plasma window o-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: plasma_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: plasma_window
+  - type: Construction
+    graph: WindowDirectionalO
+    node: plasmaWindowDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 130
+  - type: RadiationBlocker
+    resistance: 1
+
+- type: entity
+  id: WindowReinforcedDirectionalO
+  parent: WindowDirectionalO
+  name: directional reinforced window o-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: reinforced_window
+  - type: Construction
+    graph: WindowDirectionalO
+    node: windowReinforcedDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: RCDDeconstructable
+    cost: 4
+    delay: 4
+    fx: EffectRCDDeconstruct4  
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassReinforced:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 90
+
+- type: entity
+  id: PlasmaReinforcedWindowDirectionalO
+  parent: WindowDirectionalO
+  name: directional reinforced plasma window o-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: plasma_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: plasma_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalO
+    node: plasmaReinforcedWindowDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 36
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 2
+            max: 4
+          PartRodMetal:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 270
+  - type: RadiationBlocker
+    resistance: 2
+
+- type: entity
+  id: UraniumReinforcedWindowDirectionalO
+  parent: WindowDirectionalO
+  name: directional reinforced uranium window o-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: uranium_reinforced_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: uranium_reinforced_window
+  - type: Construction
+    graph: WindowDirectionalO
+    node: uraniumReinforcedWindowDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 2
+            max: 4
+          PartRodMetal1:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 300
+
+- type: entity
+  id: UraniumWindowDirectionalO
+  parent: WindowDirectionalO
+  name: directional uranium window o-shaped
+  description: Don't smudge up the glass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: uranium_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: uranium_window
+  - type: Construction
+    graph: WindowDirectionalO
+    node: uraniumWindowDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 3.333
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassUranium:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 170
+
+- type: entity
+  id: WindowClockworkDirectionalO
+  parent: WindowDirectionalO
+  name: directional clockwork window o-shaped
+  description: Don't smudge up the brass down there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: clock_window
+  - type: Icon
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: clock_window
+  - type: Construction
+    graph: WindowDirectionalO
+    node: windowClockworkDirectionalO
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
+  - type: Damageable
+    damageModifierSet: RGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassClockwork:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 90

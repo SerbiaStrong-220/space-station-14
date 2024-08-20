@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingShoesBootsJackSec
+  id: ClothingShoesBootsJackSecFilled
+  components:
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife

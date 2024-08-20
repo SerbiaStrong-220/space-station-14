@@ -100,6 +100,8 @@
     - id: FoodMeatCorgi
       amount: 2
     - id: MaterialHideCorgi
+  - type: StealTarget
+    stealGroup: AnimalIan
 
 - type: entity
   name: Runtime
@@ -121,6 +123,8 @@
     tags:
     - CannotSuicide
     - VimPilot
+  - type: StealTarget
+    stealGroup: AnimalNamedCat
 
 - type: entity
   name: Exception
@@ -139,6 +143,8 @@
     tags:
     - CannotSuicide
     - VimPilot
+  - type: StealTarget
+    stealGroup: AnimalNamedCat
 
 - type: entity
   name: Floppa
@@ -164,6 +170,8 @@
     tags:
     - CannotSuicide
     - VimPilot
+  - type: StealTarget
+    stealGroup: AnimalNamedCat
 
 - type: entity
   name: Bandito
@@ -182,7 +190,7 @@
 
 - type: entity
   name: Bingus
-  parent: SimpleMobBase
+  parent: [SimpleMobBase, StripableInventoryBase]
   id: MobBingus
   description: Bingus my beloved...
   components:
@@ -193,6 +201,18 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: bingus
   - type: Physics
+  # 220 cat-emotes start
+  - type: Speech
+    speechSounds: Cat
+    speechVerb: SmallMob
+    allowedEmotes: ['Meow','Mew','Growl','Purr','Hiss']
+  - type: Vocal
+    wilhelm: "/Audio/Voice/Felinid/cat_wilhelm.ogg"
+    sounds:
+      Male: Cat
+      Female: Cat
+      Unsexed: Cat
+  # 220 cat-emotes end
   - type: Fixtures
     fixtures:
       fix1:
@@ -207,12 +227,6 @@
   - type: Inventory
     speciesId: cat
     templateId: pet
-  - type: InventorySlots
-  - type: Strippable
-  - type: UserInterface
-    interfaces:
-      enum.StrippingUiKey.Key:
-        type: StrippableBoundUserInterface
   - type: DamageStateVisuals
     states:
       Alive:
@@ -243,11 +257,11 @@
   - type: ReplacementAccent
     accent: cat
   - type: StealTarget
-    stealGroup: AnimalBingus
+    stealGroup: AnimalNamedCat
 
 - type: entity
   name: McGriff
-  parent: SimpleMobBase
+  parent: [SimpleMobBase, StripableInventoryBase]
   id: MobMcGriff
   description: This dog can tell something smells around here, and that something is CRIME!
   components:
@@ -272,12 +286,6 @@
   - type: Inventory
     speciesId: puppy
     templateId: pet
-  - type: InventorySlots
-  - type: Strippable
-  - type: UserInterface
-    interfaces:
-      enum.StrippingUiKey.Key:
-        type: StrippableBoundUserInterface
   - type: DamageStateVisuals
     states:
       Alive:
@@ -346,7 +354,7 @@
 
 - type: entity
   name: Walter
-  parent: SimpleMobBase
+  parent: [SimpleMobBase, StripableInventoryBase]
   id: MobWalter
   description: He likes chems and treats. Walter.
   components:
@@ -371,12 +379,6 @@
   - type: Inventory
     speciesId: dog
     templateId: pet
-  - type: InventorySlots
-  - type: Strippable
-  - type: UserInterface
-    interfaces:
-      enum.StrippingUiKey.Key:
-        type: StrippableBoundUserInterface
   - type: DamageStateVisuals
     states:
       Alive:
@@ -574,6 +576,7 @@
     allowMovement: true
     name: ghost-role-information-hamlet-name
     description: ghost-role-information-hamlet-description
+    rules: ghost-role-information-nonantagonist-rules
   - type: GhostTakeoverAvailable
   - type: InteractionPopup
     successChance: 1
@@ -595,6 +598,7 @@
     - CannotSuicide
     - Hamster
     - VimPilot
+    - ChefPilot
 
 - type: entity
   name: Shiva
@@ -687,6 +691,7 @@
     prob: 0.25
     name: ghost-role-information-willow-name
     description: ghost-role-information-willow-description
+    rules: ghost-role-information-nonantagonist-rules
   - type: GhostTakeoverAvailable
   - type: Loadout
     prototypes: [ BoxingKangarooGear ]
@@ -757,6 +762,7 @@
   - type: GhostRole
     name: ghost-role-information-smile-name
     description: ghost-role-information-smile-description
+    rules: ghost-role-information-nonantagonist-rules
   - type: Grammar
     attributes:
       proper: true
@@ -775,6 +781,7 @@
     allowMovement: true
     name: ghost-role-information-punpun-name
     description: ghost-role-information-punpun-description
+    rules: ghost-role-information-nonantagonist-rules
   - type: GhostTakeoverAvailable
   - type: Butcherable
     butcheringType: Spike
@@ -783,7 +790,6 @@
       amount: 3
     - id: DrinkTequilaBottleFull
       amount: 1
-  - type: Flashable
   - type: Tag
     tags:
     - CannotSuicide
@@ -809,8 +815,8 @@
 #    allowMovement: true
 #    name: ghost-role-information-tropico-name
 #    description: ghost-role-information-tropico-description
+#    rules: ghost-role-information-nonantagonist-rules
 #  - type: GhostTakeoverAvailable
-#  - type: Flashable
   - type: Tag
     tags:
     - VimPilot

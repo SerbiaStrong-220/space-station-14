@@ -3,6 +3,9 @@
   name: job-name-cargotech
   description: job-description-cargotech
   playTimeTracker: JobCargoTechnician
+  requirements:
+    - !type:OverallPlaytimeRequirement 
+      time: 3600 # SS220-RoleTime 2
   startingGear: CargoTechGear
   icon: "JobIconCargoTechnician"
   supervisors: job-supervisors-qm
@@ -18,3 +21,6 @@
     id: CargoPDA
     ears: ClothingHeadsetCargo
     pocket1: AppraisalTool
+  #storage:
+    #back:
+    #- Stuff

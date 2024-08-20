@@ -6,7 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 36000 # SS220-RoleTime
+      time: 54000 # SS220-RoleTime 2
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: SecurityPilotGear
   icon: "JobIconSecurityPilot"
   supervisors: job-supervisors-hos
@@ -29,3 +33,11 @@
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves
     pocket1: WeaponPistolMk58Nonlethal
+  storage:
+    back:
+    - BoxSurvivalSecurity
+    - Flash
+    - MagazinePistolRubber
+    - MagazinePistolRubber
+    - FlashlightSeclite
+    - DrinkRelaxingPeachCan

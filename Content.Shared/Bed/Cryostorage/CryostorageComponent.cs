@@ -1,6 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Bed.Cryostorage;
 
@@ -41,6 +42,24 @@ public sealed partial class CryostorageComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? RemoveSound = new SoundPathSpecifier("/Audio/Effects/teleport_departure.ogg");
+
+    // start 220 cryo
+
+    /// <summary>
+    /// ProtoId of teleport portal, that will spawn on TryTeleportToCryo
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public EntProtoId TeleportPortralID = "CryoStoragePortal";
+
+    /// <summary>
+    /// ProtoId of ghost action
+    /// </summary>
+    [DataField]
+    public EntProtoId LeaveActionID = "ActionCryoGhost";
+
+    [DataField]
+    public EntityUid? LeaveActionUid;
+    // end 220 cryo
 }
 
 [Serializable, NetSerializable]

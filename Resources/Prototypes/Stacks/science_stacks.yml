@@ -1,6 +1,27 @@
-﻿- type: stack
+- type: stack
   id: ArtifactFragment
   name: artifact fragment
+  icon: { sprite: /Textures/Objects/Specific/Xenoarchaeology/artifact_fragments.rsi, state: ancientball1 } #SS220 Recepies fix
   spawn: ArtifactFragment1
   maxCount: 30
-  itemSize: 5
+
+- type: stack
+  id: Capacitor
+  name: capacitor
+  icon: { sprite: /Textures/Objects/Misc/stock_parts.rsi, state: capacitor } #SS220 Recepies fix
+  spawn: CapacitorStockPart
+  maxCount: 10
+
+- type: stack
+  id: Manipulator
+  name: micro manipulator
+  icon: { sprite: /Textures/Objects/Misc/stock_parts.rsi, state: micro_mani } #SS220 Recepies fix
+  spawn: MicroManipulatorStockPart
+  maxCount: 10
+
+- type: stack
+  id: MatterBin
+  name: matter bin
+  icon: { sprite: /Textures/Objects/Misc/stock_parts.rsi, state: matter_bin }  #SS220 Recepies fix
+  spawn: MatterBinStockPart
+  maxCount: 10

@@ -169,6 +169,11 @@
   - type: Battery
     maxCharge: 500
     startingCharge: 500
+#ss220 handmade gun buff begin
+  - type: Construction
+    graph: WeaponMakeshiftLaserGraph
+    node: pistol
+#ss220 handmade gun buff end
 
 - type: entity
   name: tesla gun
@@ -446,6 +451,7 @@
     - type: GuideHelp
       guides:
       - Security
+      - Antagonists
 
 - type: entity
   name: disabler SMG

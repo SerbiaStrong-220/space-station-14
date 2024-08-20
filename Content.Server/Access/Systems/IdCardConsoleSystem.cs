@@ -85,7 +85,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
             var jobProto = new ProtoId<AccessLevelPrototype>(string.Empty);
             if (TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
-                && keyStorage.Key is {} key
+                && keyStorage.Key is { } key
                 && _record.TryGetRecord<GeneralStationRecord>(key, out var record))
             {
                 jobProto = record.JobPrototype;
@@ -129,7 +129,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
         if (_prototype.TryIndex<JobPrototype>(newJobProto, out var job)
-            && _prototype.TryIndex<StatusIconPrototype>(job.Icon, out var jobIcon))
+            && _prototype.TryIndex(job.Icon, out var jobIcon))
         {
             _idCard.TryChangeJobIcon(targetId, jobIcon, player: player);
 
@@ -140,6 +140,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             );
             _idCard.TryChangeJobDepartment(targetId, job);
         }
+
+        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, job);
 
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
@@ -174,8 +176,6 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         This current implementation is pretty shit as it logs 27 entries (27 lines) if someone decides to give themselves AA*/
         _adminLogger.Add(LogType.Action, LogImpact.Medium,
             $"{ToPrettyString(player):player} has modified {ToPrettyString(targetId):entity} with the following accesses: [{string.Join(", ", addedTags.Union(removedTags))}] [{string.Join(", ", newAccessList)}]");
-
-        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, job);
     }
 
     /// <summary>

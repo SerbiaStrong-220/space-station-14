@@ -1,0 +1,26 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: ChemistTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChemist
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: ChemistJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChemistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChemistTurtleneck
+
+- type: loadout
+  id: ChemistJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChemistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChemistTurtleneck

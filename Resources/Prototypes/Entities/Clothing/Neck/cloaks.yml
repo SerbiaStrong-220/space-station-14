@@ -1,7 +1,7 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakCentcom
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   name: central commander's cloak
   description: A pompous and elite green cloak with a nice gold trim, tailored specifically to the Central Commander. It's so heavy, the gold trim might be real.
   components:
@@ -127,7 +127,7 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakAdmin
-  name: admin cloak
+  name: weh cloak
   description: Weh!
   components:
   - type: Sprite

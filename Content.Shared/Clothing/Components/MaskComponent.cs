@@ -22,4 +22,16 @@ public sealed partial class MaskComponent : Component
 
     [DataField, AutoNetworkedField]
     public string EquippedPrefix = "toggled";
+
+    /// <summary>
+    /// When <see langword="true"/> will function normally, otherwise will not react to events
+    /// </summary>
+    [DataField("enabled"), AutoNetworkedField]
+    public bool IsEnabled = true; // ss220 bandana fix
+
+    /// <summary>
+    /// When <see langword="true"/> will disable <see cref="IsEnabled"/> when folded
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DisableOnFolded; // ss220 bandana fix
 }

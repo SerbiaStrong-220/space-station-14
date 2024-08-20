@@ -1,0 +1,223 @@
+- type: decal
+  id: MarbleBlackCornerNE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_corner_ne
+
+- type: decal
+  id: MarbleBlackCornerNW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_corner_nw
+
+- type: decal
+  id: MarbleBlackCornerSE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_corner_se
+
+- type: decal
+  id: MarbleBlackCornerSW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_corner_sw
+
+- type: decal
+  id: MarbleWhiteCornerNE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_corner_ne
+
+- type: decal
+  id: MarbleWhiteCornerNW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_corner_nw
+
+- type: decal
+  id: MarbleWhiteCornerSE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_corner_se
+
+- type: decal
+  id: MarbleWhiteCornerSW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_corner_sw
+
+- type: decal
+  id: MarbleBlackInnerNE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_inner_ne
+
+- type: decal
+  id: MarbleBlackInnerNW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_inner_nw
+
+- type: decal
+  id: MarbleBlackInnerSE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_inner_se
+
+- type: decal
+  id: MarbleBlackInnerSW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_inner_sw
+
+- type: decal
+  id: MarbleWhiteInnerNE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_inner_ne
+
+- type: decal
+  id: MarbleWhiteInnerNW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_inner_nw
+
+- type: decal
+  id: MarbleWhiteInnerSE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_inner_se
+
+- type: decal
+  id: MarbleWhiteInnerSW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_inner_sw
+
+- type: decal
+  id: MarbleBlackLineW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_line_w
+
+- type: decal
+  id: MarbleBlackLineS
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_line_s
+
+- type: decal
+  id: MarbleBlackLineE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_line_e
+
+- type: decal
+  id: MarbleBlackLineN
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: black_line_n
+
+- type: decal
+  id: MarbleWhiteLineW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_line_w
+
+- type: decal
+  id: MarbleWhiteLineS
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_line_s
+
+- type: decal
+  id: MarbleWhiteLineE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_line_e
+
+- type: decal
+  id: MarbleWhiteLineN
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: white_line_n
+
+- type: decal
+  id: MarbleBWCornerNE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: bw_corner_ne
+
+- type: decal
+  id: MarbleBWCornerNW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: bw_corner_nw
+
+- type: decal
+  id: MarbleBWCornerSE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: bw_corner_se
+
+- type: decal
+  id: MarbleBWCornerSW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: bw_corner_sw
+
+- type: decal
+  id: MarbleWBCornerNE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: wb_corner_ne
+
+- type: decal
+  id: MarbleWBCornerNW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: wb_corner_nw
+
+- type: decal
+  id: MarbleWBCornerSE
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: wb_corner_se
+
+- type: decal
+  id: MarbleWBCornerSW
+  tags: ["station", "markings"]
+  sprite:
+    sprite: SS220/Decals/marble.rsi
+    state: wb_corner_sw

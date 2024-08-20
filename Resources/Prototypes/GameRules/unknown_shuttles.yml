@@ -1,8 +1,8 @@
-﻿# SS220-NoUnknownShuttles-Begin
+# SS220-NoUnknownShuttles-Begin
 # - type: entity
 #   id: UnknownShuttleCargoLost
 #   parent: BaseGameRule
-#   noSpawn: true
+#   categories: [ GameRules ]
 #   components:
 #   - type: StationEvent
 #     startAnnouncement: station-event-unknown-shuttle-incoming
@@ -17,7 +17,7 @@
 # - type: entity
 #   id: UnknownShuttleTravelingCuisine
 #   parent: BaseGameRule
-#   noSpawn: true
+#   categories: [ GameRules ]
 #   components:
 #   - type: StationEvent
 #     startAnnouncement: station-event-unknown-shuttle-incoming
@@ -32,7 +32,7 @@
 #- type: entity
 #  id: UnknownShuttleDisasterEvacPod
 #  parent: BaseGameRule
-#  noSpawn: true
+#  categories: [ GameRules ]
 #  components:
 #  - type: StationEvent
 #    startAnnouncement: station-event-unknown-shuttle-incoming
@@ -47,7 +47,7 @@
 # - type: entity
 #   id: UnknownShuttleHonki
 #   parent: BaseGameRule
-#   noSpawn: true
+#   categories: [ GameRules ]
 #   components:
 #   - type: StationEvent
 #     startAnnouncement: station-event-unknown-shuttle-incoming
@@ -62,7 +62,7 @@
 # - type: entity
 #   id: UnknownShuttleSyndieEvacPod
 #   parent: BaseGameRule
-#   noSpawn: true
+#   categories: [ GameRules ]
 #   components:
 #   - type: StationEvent
 #     startAnnouncement: station-event-unknown-shuttle-incoming

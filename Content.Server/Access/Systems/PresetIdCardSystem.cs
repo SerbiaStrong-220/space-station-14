@@ -84,10 +84,8 @@ public sealed class PresetIdCardSystem : EntitySystem
         _cardSystem.TryChangeJobDepartment(uid, job);
         _cardSystem.TryChangeJobColor(uid, GetJobColor(_prototypeManager, job), job.RadioIsBold); // SS220 Radio-Job-Color
 
-        if (_prototypeManager.TryIndex<StatusIconPrototype>(job.Icon, out var jobIcon))
-        {
+        if (_prototypeManager.TryIndex(job.Icon, out var jobIcon))
             _cardSystem.TryChangeJobIcon(uid, jobIcon);
-        }
     }
 
     // SS220 Radio-Job-Color
@@ -98,10 +96,7 @@ public sealed class PresetIdCardSystem : EntitySystem
         var departments = prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
         departments.Sort((a, b) => a.Sort.CompareTo(b.Sort));
 
-        foreach (var department in from department in departments
-                from jobId in department.Roles
-                where jobId == jobCode
-                select department)
+        foreach (var department in departments.Where(department => department.Roles.Contains(jobCode))) // SS220 Radio-Job-Color
         {
             return department.Color.ToHex();
         }

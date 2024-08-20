@@ -21,7 +21,7 @@
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpsuit/ce_dark_turtle.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChiefEngineerDark
   name: dark uniform chief engineer
   description: Dark uniform for years of service as head of the engineering department.

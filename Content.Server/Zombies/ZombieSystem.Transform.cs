@@ -9,7 +9,6 @@ using Content.Server.Inventory;
 using Content.Server.Mind;
 using Content.Server.Mind.Commands;
 using Content.Server.NPC;
-using Content.Server.NPC.Components;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Roles;
@@ -21,12 +20,11 @@ using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.AnimalHusbandry;
 using Content.Shared.Nutrition.Components;
@@ -40,7 +38,9 @@ using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
 using Content.Server.Administration.Managers;
+using Content.Shared.Humanoid.Markings;
 using Robust.Server.Player;
+using Content.Shared.Ghost.Roles.Components;
 
 namespace Content.Server.Zombies
 {
@@ -111,6 +111,7 @@ namespace Content.Server.Zombies
             RemComp<ReproductiveComponent>(target);
             RemComp<ReproductivePartnerComponent>(target);
             RemComp<LegsParalyzedComponent>(target);
+            RemComp<ComplexInteractionComponent>(target);
 
             //funny voice
             var accentType = "zombie";
@@ -171,6 +172,13 @@ namespace Content.Server.Zombies
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.HeadSide, zombiecomp.BaseLayerExternal, humanoid: huApComp);
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.HeadTop, zombiecomp.BaseLayerExternal, humanoid: huApComp);
                 _humanoidAppearance.SetBaseLayerId(target, HumanoidVisualLayers.Snout, zombiecomp.BaseLayerExternal, humanoid: huApComp);
+
+                //ss220 - start edit
+                SetMarkingColors(MarkingCategories.Tail, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.HeadSide, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.HeadTop, zombiecomp.SkinColor, huApComp);
+                SetMarkingColors(MarkingCategories.Snout, zombiecomp.SkinColor, huApComp);
+                //ss220 - end edit
 
                 //This is done here because non-humanoids shouldn't get baller damage
                 //lord forgive me for the hardcoded damage
@@ -234,9 +242,7 @@ namespace Content.Server.Zombies
             _faction.AddFaction(target, "Zombie");
 
             //gives it the funny "Zombie ___" name.
-            var meta = MetaData(target);
-            zombiecomp.BeforeZombifiedEntityName = meta.EntityName;
-            _metaData.SetEntityName(target, Loc.GetString("zombie-name-prefix", ("target", meta.EntityName)), meta);
+            _nameMod.RefreshNameModifiers(target);
 
             _identity.QueueIdentityUpdate(target);
 

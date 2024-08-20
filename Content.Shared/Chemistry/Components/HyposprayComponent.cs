@@ -37,4 +37,7 @@ public sealed partial class HyposprayComponent : Component
     /// </summary>
     [DataField]
     public bool InjectOnly = false;
+
+    [DataField]
+    public bool IgnoreProtection = true; //ss220 needleprotection
 }

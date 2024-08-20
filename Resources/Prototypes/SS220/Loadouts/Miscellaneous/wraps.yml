@@ -1,18 +1,10 @@
 - type: loadout
   id: ClothingHandWraps
-  equipment: ClothingHandWraps
-
-- type: startingGear
-  id: ClothingHandWraps
   storage:
     back:
     - ClothingHandWraps
 
 - type: loadout
-  id: ClothingFootWraps
-  equipment: ClothingFootWraps
-
-- type: startingGear
   id: ClothingFootWraps
   storage:
     back:

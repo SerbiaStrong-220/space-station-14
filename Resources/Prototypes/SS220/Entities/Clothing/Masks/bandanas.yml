@@ -1,0 +1,15 @@
+#Сервис
+- type: entity
+  parent: ClothingMaskBandanaBase
+  id: ClothingMaskBandBlueBotany
+  name: blue botany bandana
+  description: A botany bandana to make you look cool, made from natural fibers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Bandanas/botanyblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Bandanas/botanyblue.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon

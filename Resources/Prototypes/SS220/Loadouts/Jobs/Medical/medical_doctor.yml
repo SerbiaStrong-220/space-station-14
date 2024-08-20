@@ -1,0 +1,42 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: MedicalDoctorTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMedicalDoctor
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: MedicalDoctorJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalDoctorTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorBlue
+
+- type: loadout
+  id: MedicalDoctorJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalDoctorTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorBlue
+
+- type: loadout
+  id: MedicalDoctorJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalDoctorTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorBlue
+
+- type: loadout
+  id: MedicalDoctorJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalDoctorTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlue

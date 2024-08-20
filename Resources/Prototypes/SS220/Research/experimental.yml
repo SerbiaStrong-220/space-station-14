@@ -1,0 +1,12 @@
+- type: technology
+  id: AdvancedThermalSensors
+  name: research-technology-advanced-thermal-sensors
+  icon:
+    sprite: Clothing/Eyes/Glasses/thermal.rsi
+    state: icon
+  discipline: Experimental
+  tier: 3
+  cost: 10000
+  recipeUnlocks:
+  - ThermalVisorRND
+  - ClothingEyesThermalGlassesSecurity

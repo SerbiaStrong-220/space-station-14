@@ -42,6 +42,7 @@ namespace Content.Server.Rotatable
         {
             if (!args.CanAccess
                 || !args.CanInteract
+                || args.Hands == null // 220 rotate fix
                 || Transform(uid).NoLocalRotation) // Good ol prototype inheritance, eh?
                 return;
 

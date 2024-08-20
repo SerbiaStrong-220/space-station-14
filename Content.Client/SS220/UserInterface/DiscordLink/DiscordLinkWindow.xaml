@@ -7,7 +7,7 @@
     MinWidth="400"
     MinHeight="150">
     <BoxContainer Name="LinkPanel" Visible="True" Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="2" StyleClasses="BackgroundDark" Margin="8">
-        <Label Text="Ваша командя для привязки аккаунта Discrod:" />
+        <Label Text="Ваша командя для привязки аккаунта Discord:" />
         <LineEdit Name="LinkText" Editable="False" />
     </BoxContainer>
     <BoxContainer Name="LinkAlreadyExistPanel" Visible="False" Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="2" StyleClasses="BackgroundDark" Margin="8">

@@ -1,0 +1,42 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: ScientistTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobScientist
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: ScientistJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ScientistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorPurple
+
+- type: loadout
+  id: ScientistJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ScientistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorPurple
+
+- type: loadout
+  id: ScientistJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ScientistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorPurple
+
+- type: loadout
+  id: ScientistJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ScientistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorPurple

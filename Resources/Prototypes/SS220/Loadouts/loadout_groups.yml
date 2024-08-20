@@ -1,20 +1,35 @@
-# Security
+# InternalAffairs
 - type: loadoutGroup
-  id: SecurityPilotBackpack
-  name: loadout-group-security-pilot-backpack
+  id: IAAJumpsuit
+  name: loadout-group-iaa-jumpsuit
   loadouts:
-  - SecurityPilotBackpack
-  - SecurityPilotSatchel
-  - SecurityPilotDuffel
+  - LawyerJumpsuit
+  - LawyerJumpskirt
+  - LawyerJumpsuitBlue
+  - LawyerJumpskirtBlue
+  - LawyerJumpsuitPurple
+  - LawyerJumpskirtPurple
+  - LawyerJumpsuitRed
+  - LawyerJumpskirtRed
+  - LawyerJumpsuitGood
+  - LawyerJumpskirtGood
+  - JumpsuitNTR
+  - JumpsuitTrustedLawyer
 
-# IAA
 - type: loadoutGroup
-  id: IAABackpack
-  name: loadout-group-iaa-backpack
+  id: BlueShieldJumpsuit
+  name: loadout-group-blueshield-jumpsuit
   loadouts:
-  - IAABackpack
-  - IAASatchel
-  - IAADuffel
+  - BlueShieldJumpsuit
+  - BlueShieldJumpsuit2
+  - BlueShieldJumpsuitTurtle
+
+- type: loadoutGroup
+  id: BlueShieldOuterclothing
+  name: loadout-group-blueshield-outerclothing
+  loadouts:
+  - BlueShieldArmorBulletproof
+  - BlueShieldSRTCoat
 
 # Chef
 - type: loadoutGroup
@@ -28,12 +43,261 @@
   - ChefBeltApronRed
   - ChefBeltApronSenior
 
-#Command
+# Medical
+- type: loadoutGroup
+  id: PsychologistJumpsuit
+  name: loadout-group-psychologist-jumpsuit
+  loadouts:
+  - PsychologistJumpsuit
+  - PsychologistJumpskirt
+  - PsychologistJumpsuitTurtleneck
+  - PsychologistJumpskirtTurtleneck
+
+- type: loadoutGroup
+  id: BrigmedicHead
+  name: loadout-group-brigmedic-head
+  minLimit: 0
+  loadouts:
+  - BrigmedicHead
+  - SecurityMedicHead
+  - SecurityMedicHelmet
+
+- type: loadoutGroup
+  id: BrigmedicMask
+  name: loadout-group-brigmedic-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  - BrigmedicMask
+
+- type: loadoutGroup
+  id: BrigmedicJumpsuit
+  name: loadout-group-brigmedic-jumpsuit
+  loadouts:
+  - BrigmedicJumpsuit
+  - BrigmedicJumpskirt
+  - BrigmedicJumpsuitTurtleneck
+  - BrigmedicJumpskirtTurtleneck
+  - BrigmedicJumpskirtOfLife
+  - BrigmedicJumpsuitMilitaryFeldsher
+  - BrigmedicJumpskirtMilitaryFeldsher
+
+- type: loadoutGroup
+  id: BrigmedicOuterClothing
+  name: loadout-group-brigmedic-outerclothing
+  minLimit: 0
+  loadouts:
+  - BrigmedicWindAMG
+  - BrigmedicVestSecurity
+  - BrigmedicCoatLab
+  - BrigmedicVestArmorMedSec
+
+- type: loadoutGroup
+  id: BrigmedicBackpack
+  name: loadout-group-brigmedic-backpack
+  loadouts:
+  - BrigmedicBackpack
+  - BrigmedicSatchel
+  - BrigmedicDuffel
+
+- type: loadoutGroup
+  id: BrigmedicShoes
+  name: loadout-group-brigmedic-shoes
+  loadouts:
+  - RedShoes
+  - BlueShoes
+  - MedicalWinterBoots
+  - SecMedWinterBoots
+
+# Command
 
 - type: loadoutGroup
   id: CaptainGloves
   name: loadout-group-captain-gloves
-  minLimit: 0
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
+
+# Engineering
+
+- type: loadoutGroup
+  id: ChiefEngineerPDA
+  name: loadout-group-chief-engineer-PDA
+  loadouts:
+  - ChiefEngineerPDA
+  - DarkChiefEngineerPDA
+
+
+#senior service
+- type: loadoutGroup
+  id: HatSeniorService
+  name: loadout-group-senior-service-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorService
+
+- type: loadoutGroup
+  id: SeniorServiceJumpsuit
+  name: loadout-group-senior-service-jumpsuit
+  loadouts:
+  - SeniorServiceJumpsuit
+  - SeniorJumpskirtService
+
+# senior engineer
+- type: loadoutGroup
+  id: HatSeniorEngineer
+  name: loadout-group-senior-engineer-head
+  loadouts:
+  - StationEngineerHardhatYellow
+  - StationEngineerHardhatOrange
+  - StationEngineerHardhatRed
+  - HatSeniorEngineer
+
+- type: loadoutGroup
+  id: SeniorsEngineerJumpsuit
+  name: loadout-group-senior-engineer-jumpsuit
+  loadouts:
+  - SeniorsEngineerJumpsuit
+  - SeniorsEngineerJumpskirt
+
+- type: loadoutGroup
+  id: SeniorsEngineerOuterClothing
+  name: loadout-group-senior-engineer-outerclothing
+  loadouts:
+  - StationEngineerOuterVest
+  - StationEngineerWintercoat
+  - AtmosphericTechnicianWintercoat
+
+# Senior Medical
+
+- type: loadoutGroup
+  id: HatSeniorMedical
+  name: loadout-group-senior-medical-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorMedical
+  - CMOMedicalHeadMirror
+
+- type: loadoutGroup
+  id: SeniorMedicalJumpsuit
+  name: loadout-group-senior-medical-jumpsuit
+  loadouts:
+  - SeniorMedicalJumpsuit
+  - SeniorMedicalJumpskirt
+
+- type: loadoutGroup
+  id: SeniorMedicalOuterClothing
+  name: loadout-group-senior-medical-outerclothing
+  minLimit: 0
+  loadouts:
+  - SeniorMedicalLabCoat
+  - MedicalDoctorWintercoat
+  - ChemistWintercoat
+
+- type: loadoutGroup
+  id: MedicalsBackpack
+  name: loadout-group-medical-doctor-backpack
+  loadouts:
+  - MedicalDoctorBackpack
+  - MedicalDoctorSatchel
+  - MedicalDoctorDuffel
+
+- type: loadoutGroup
+  id: SeniorShoes
+  name: loadout-group-medical-doctor-shoes
+  loadouts:
+  - WhiteShoes
+  - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: MedicalsGloves
+  name: loadout-group-medical-gloves
+  minLimit: 0
+  loadouts:
+  - LatexGloves
+  - NitrileGloves
+
+- type: loadoutGroup
+  id: MedicalsMask
+  name: loadout-group-medical-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+
+# Senior RND
+
+- type: loadoutGroup
+  id: HatSeniorSciensist
+  name: loadout-group-senior-scientist-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorSciensist
+
+- type: loadoutGroup
+  id: SeniorSciensistJumpsuit
+  name: loadout-group-senior-scientist-jumpsuit
+  loadouts:
+  - SeniorSciensistJumpsuit
+  - SeniorSciensistJumpskirt
+
+- type: loadoutGroup
+  id: SeniorSciensistOuterClothing
+  name: loadout-group-senior-scientist-outerclothing
+  minLimit: 0
+  loadouts:
+  - SeniorSciensistLabCoat
+  - ScienceWintercoat
+  - RoboticistWintercoat
+
+# Senior Security
+
+- type: loadoutGroup
+  id: SeniorSecJumpsuit
+  name: loadout-group-senior-officer-jumpsuit
+  loadouts:
+  - SeniorSecJumpsuit
+  - SeniorSecJumpskirt
+
+# Security
+
+  # Глава службы безопасности
+- type: loadoutGroup
+  id: SecurityHoSSiutstorage
+  name: loadout-group-head-of-security-siutstorage
+  minLimit: 0
+  loadouts:
+  - OfficerCutlass
+
+  # Пилот
+- type: loadoutGroup
+  id: SecurityPilotHead
+  name: loadout-group-security-pilot-head
+  minLimit: 0
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - PilotCapCap
+
+
+# Cargo
+
+  # Утилизатор
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - UniformJumpsuitSalvageSpecialist
+  - SalvageSpecialistJumpsuitTurtleneck
+
+# Wildcards
+
+- type: loadoutGroup
+  id: Gloves
+  name: loadout-group-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
+  - GlovesRed
+  - GlovesBlue

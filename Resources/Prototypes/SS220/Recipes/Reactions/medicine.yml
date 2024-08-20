@@ -42,3 +42,15 @@
 # SS220 Dangerous chemistry update end
   products:
     Haloperidol: 5
+
+- type: reaction
+  id: Harai
+  reactants:
+    Pax:
+      amount: 2
+    ChloralHydrate:
+      amount: 2
+    Psicodine:
+      amount: 1
+  products:
+    Harai: 5

@@ -35,25 +35,32 @@ public sealed class MaskSystem : EntitySystem
     private void OnToggleMask(Entity<MaskComponent> ent, ref ToggleMaskEvent args)
     {
         var (uid, mask) = ent;
-        if (mask.ToggleActionEntity == null || !_timing.IsFirstTimePredicted)
+        // ss220 bandana fix
+        if (mask.ToggleActionEntity == null || !_timing.IsFirstTimePredicted || !mask.IsEnabled)
             return;
 
         if (!_inventorySystem.TryGetSlotEntity(args.Performer, "mask", out var existing) || !uid.Equals(existing))
             return;
 
-        mask.IsToggled ^= true;
+        ToggleMask(mask, uid, args.Performer); // 220 internals mask toggle
+    }
 
+    // start 220 internals mask toggle
+    public void ToggleMask(MaskComponent mask, EntityUid maskUid, EntityUid actorUid)
+    {
+        mask.IsToggled ^= true;
         var dir = mask.IsToggled ? "down" : "up";
         var msg = $"action-mask-pull-{dir}-popup-message";
-        _popupSystem.PopupClient(Loc.GetString(msg, ("mask", uid)), args.Performer, args.Performer);
-
-        ToggleMaskComponents(uid, mask, args.Performer, mask.EquippedPrefix);
+        _popupSystem.PopupClient(Loc.GetString(msg, ("mask", maskUid)), actorUid, actorUid);
+        ToggleMaskComponents(maskUid, mask, actorUid, mask.EquippedPrefix);
     }
+    // end 220 internals mask toggle
 
     // set to untoggled when unequipped, so it isn't left in a 'pulled down' state
     private void OnGotUnequipped(EntityUid uid, MaskComponent mask, GotUnequippedEvent args)
     {
-        if (!mask.IsToggled)
+        // ss220 bandana fix
+        if (!mask.IsToggled || !mask.IsEnabled)
             return;
 
         mask.IsToggled = false;
@@ -78,6 +85,10 @@ public sealed class MaskSystem : EntitySystem
 
     private void OnFolded(Entity<MaskComponent> ent, ref FoldedEvent args)
     {
+        // ss220 bandana fix begin
+        if (ent.Comp.DisableOnFolded)
+            ent.Comp.IsEnabled = !args.IsFolded;
+        // ss220 bandana fix end
         ent.Comp.IsToggled = args.IsFolded;
 
         ToggleMaskComponents(ent.Owner, ent.Comp, ent.Owner);

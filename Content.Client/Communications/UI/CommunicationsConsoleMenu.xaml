@@ -1,9 +1,23 @@
+<!-- SS220 Text Edit Limits begin -->
+<!--
 <controls:FancyWindow xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="{Loc 'comms-console-menu-title'}"
     MinSize="400 225">
+-->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:ui220="clr-namespace:Content.Client.SS220.UserInterface"
+    Title="{Loc 'comms-console-menu-title'}"
+    MinSize="400 225">
+<!-- SS220 Text Edit Limits end -->
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="5">
+        <!-- SS220 Text Edit Limits begin -->
+        <!--
         <TextEdit Name="MessageInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 0 5" MinHeight="100" />
+        -->
+        <ui220:ExtendedTextEdit Name="MessageInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 0 5" MinHeight="100" />
+        <!-- SS220 Text Edit Limits end -->
         <Button Name="AnnounceButton" Text="{Loc 'comms-console-menu-announcement-button'}" StyleClasses="OpenLeft" Access="Public" />
         <Button Name="BroadcastButton" Text="{Loc 'comms-console-menu-broadcast-button'}" StyleClasses="OpenLeft" Access="Public" />
 

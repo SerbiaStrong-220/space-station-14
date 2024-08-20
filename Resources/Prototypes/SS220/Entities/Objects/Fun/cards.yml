@@ -11,8 +11,7 @@
     - state: closedCard
   - type: Item
     size: Small
-  - type: TrayScanner
-    range: 0.01
+  - type: ToggleAppearanceOnUse
   - type: Appearance
   - type: Tag
     tags:
@@ -135,7 +134,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: pt }
@@ -146,7 +145,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p2 }
@@ -157,7 +156,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p3 }
@@ -168,7 +167,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p4 }
@@ -179,7 +178,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p5 }
@@ -190,7 +189,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p6 }
@@ -201,7 +200,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p7 }
@@ -212,7 +211,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p8 }
@@ -223,7 +222,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p9 }
@@ -234,7 +233,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: p10 }
@@ -245,7 +244,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: pd }
@@ -256,7 +255,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: pk }
@@ -267,7 +266,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: pv }
@@ -278,7 +277,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: kt }
@@ -289,7 +288,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k2 }
@@ -300,7 +299,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k3 }
@@ -311,7 +310,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k4 }
@@ -322,7 +321,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k5 }
@@ -333,7 +332,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k6 }
@@ -344,7 +343,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k7 }
@@ -355,7 +354,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k8 }
@@ -366,7 +365,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k9 }
@@ -377,7 +376,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: k10 }
@@ -388,7 +387,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: kd }
@@ -399,7 +398,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: kk }
@@ -410,7 +409,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: kv }
@@ -421,7 +420,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: ht }
@@ -432,7 +431,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h2 }
@@ -443,7 +442,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h3 }
@@ -454,7 +453,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h4 }
@@ -465,7 +464,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h5 }
@@ -476,7 +475,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h6 }
@@ -487,7 +486,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h7 }
@@ -498,7 +497,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h8 }
@@ -509,7 +508,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h9 }
@@ -520,7 +519,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: h10 }
@@ -531,7 +530,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: hd }
@@ -542,7 +541,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: hk }
@@ -553,7 +552,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: hv }
@@ -564,7 +563,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: bt }
@@ -575,7 +574,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b2 }
@@ -586,7 +585,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b3 }
@@ -597,7 +596,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b4 }
@@ -608,7 +607,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b5 }
@@ -619,7 +618,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b6 }
@@ -630,7 +629,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b7 }
@@ -641,7 +640,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b8 }
@@ -652,7 +651,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b9 }
@@ -663,7 +662,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: b10 }
@@ -674,7 +673,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: bd }
@@ -685,7 +684,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: bk }
@@ -696,7 +695,7 @@
   components:
   - type: GenericVisualizer
     visuals:
-      enum.TrayScannerVisual.Visual:
+      enum.GenericOnOffVisual.Visual:
         base:
           Off: { state: closedCard }
           On: { state: bv }

@@ -312,11 +312,16 @@ public sealed class MessengerServerSystem : EntitySystem
     {
         idCardUid = null;
         idCardComponent = null;
+        
+        //SS220-messenger-fix begin
+        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
+            return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);
 
-        if (!payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
-            return false;
+        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
+            return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
 
-        return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
+        return false;
+        //SS220-messenger-fix end
     }
 
     private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)

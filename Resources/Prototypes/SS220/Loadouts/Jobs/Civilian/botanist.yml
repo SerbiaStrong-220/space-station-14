@@ -1,0 +1,67 @@
+# Head
+- type: loadout
+  id: BotanistHeadBlue
+  equipment:
+    head: ClothingHeadHatTruckerBlue
+
+- type: loadout
+  id: BotanistHeadBrown
+  equipment:
+    head: ClothingHeadHatTruckerBrown
+
+- type: loadout
+  id: BotanistHeadWhite
+  equipment:
+    head: ClothingHeadHatTruckerWhite
+
+- type: loadout
+  id: BotanistBandanaBlue
+  equipment:
+    head: ClothingHeadBandBlueBotany
+
+# Jumpsuit
+- type: loadout
+  id: BotanistJumpsuitBlue
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponicsBlue
+
+- type: loadout
+  id: BotanistJumpsuitWhite
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponicsWhite
+
+- type: loadout
+  id: BotanistJumpskirtBlue
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtHydroponicsBlue
+
+- type: loadout
+  id: BotanistJumpskirtWhite
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtHydroponicsWhite
+
+- type: loadout
+  id: BotanistOverallsBlue
+  equipment:
+    jumpsuit: ClothingUniformOverallsBlue
+
+- type: loadout
+  id: BotanistOverallsGreen
+  equipment:
+    jumpsuit: ClothingUniformOverallsGreen
+
+- type: loadout
+  id: BotanistOverallsWhite
+  equipment:
+    jumpsuit: ClothingUniformOverallsWhite
+
+# Outer clothing
+- type: loadout
+  id: BotanistApronBrown
+  equipment:
+    outerClothing: ClothingOuterApronBotanistBrown
+
+- type: loadout
+  id: BotanistApronGreen
+  equipment:
+    outerClothing: ClothingOuterApronBotanistGreen

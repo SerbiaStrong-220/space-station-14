@@ -1,4 +1,4 @@
-﻿- type: soundCollection
+- type: soundCollection
   id: NukeMusic
   files:
     - /Audio/StationEvents/running_out.ogg
@@ -6,5 +6,6 @@
     - /Audio/Corvax/StationEvents/level.ogg # Corvax-NukeMusic
     - /Audio/SS220/StationEvents/broken.ogg # SS220-NukeMusic
     - /Audio/SS220/StationEvents/ourclasstrial.ogg # SS220-NukeMusic
-    - /Audio/SS220/StationEvents/meat.ogg # SS220-NukeMusic
+    - /Audio/SS220/StationEvents/running-in.ogg # SS220-NukeMusic
     - /Audio/StationEvents/clearly_nuclear.ogg
+    - /Audio/StationEvents/sound_station_14.ogg

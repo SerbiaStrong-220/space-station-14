@@ -25,6 +25,7 @@
     availableModes:
     - SemiAuto
     - FullAuto
+    - Burst #ss220 gunmodes 
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/smg.ogg
   - type: ChamberMagazineAmmoProvider
@@ -41,6 +42,7 @@
         whitelist:
           tags:
             - MagazinePistolSubMachineGun
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol
@@ -94,12 +96,13 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
   - type: Wieldable
+    unwieldOnUse: false
   - type: GunWieldBonus
     minAngle: -19
     maxAngle: -16
   - type: Gun
     minAngle: 21
-    maxAngle: 32 
+    maxAngle: 32
     shotsPerBurst: 5
     availableModes:
     - SemiAuto
@@ -131,6 +134,7 @@
     - type: Clothing
       sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
     - type: Wieldable
+      unwieldOnUse: false
     - type: GunWieldBonus
       minAngle: -19
       maxAngle: -16
@@ -141,8 +145,8 @@
       selectedMode: FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-      availableModes:
-        - FullAuto
+#     availableModes: #ss220 gunmodes
+#        - FullAuto   #ss220 gunmodes
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -154,6 +158,7 @@
           whitelist:
             tags:
               - MagazinePistolSubMachineGun
+          whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
           startingItem: CartridgePistol
@@ -188,8 +193,8 @@
     selectedMode: FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-    availableModes:
-    - FullAuto
+#    availableModes: #ss220 gunmodes
+#    - FullAuto      #ss220 gunmodes
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -208,6 +213,7 @@
         whitelist:
           tags:
             - CartridgeMagnum
+        whitelistFailPopup: gun-magazine-whitelist-fail
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -260,6 +266,7 @@
         whitelist:
           tags:
             - MagazinePistolSubMachineGunTopMounted
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol

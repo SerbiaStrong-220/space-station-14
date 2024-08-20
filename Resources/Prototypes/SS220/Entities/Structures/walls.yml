@@ -5,9 +5,9 @@
   suffix: Диагональ, Красный
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_red_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_red_diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_red_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_red_diagonal.rsi
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -16,9 +16,9 @@
   suffix: Диагональ, Синий
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_blue_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_blue_diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_blue_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_blue_diagonal.rsi
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -27,9 +27,20 @@
   suffix: Диагональ, Тёмный
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_dark_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_dark_diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_dark_diagonal.rsi
+    sprite: SS220/Structures/Walls/shuttle_dark_diagonal.rsi
+
+- type: entity
+  parent: WallShuttleDiagonal
+  id: WallShuttleOrangeDiagonal
+  name: стена шаттла
+  suffix: Диагональ, Оранжевый
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Walls/shuttle_orang_diagonal.rsi
+  - type: Icon
+    sprite: SS220/Structures/Walls/shuttle_orang_diagonal.rsi
 
 - type: entity
   parent: WallShuttle
@@ -38,9 +49,9 @@
   suffix: Красный
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_red.rsi
+    sprite: SS220/Structures/Walls/shuttle_red.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_red.rsi
+    sprite: SS220/Structures/Walls/shuttle_red.rsi
 
 - type: entity
   parent: WallShuttle
@@ -49,9 +60,9 @@
   suffix: Синий
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_blue.rsi
+    sprite: SS220/Structures/Walls/shuttle_blue.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_blue.rsi
+    sprite: SS220/Structures/Walls/shuttle_blue.rsi
 
 - type: entity
   parent: WallShuttle
@@ -60,6 +71,17 @@
   suffix: Тёмный
   components:
   - type: Sprite
-    sprite: Structures/Walls/shuttle_dark.rsi
+    sprite: SS220/Structures/Walls/shuttle_dark.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_dark.rsi
+    sprite: SS220/Structures/Walls/shuttle_dark.rsi
+
+- type: entity
+  parent: WallShuttle
+  id: WallShuttleOrange
+  name: стена шаттла
+  suffix: Оранжевый
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Walls/shuttle_orang.rsi
+  - type: Icon
+    sprite: SS220/Structures/Walls/shuttle_orang.rsi

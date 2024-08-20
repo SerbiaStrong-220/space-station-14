@@ -14,23 +14,6 @@
       - id: Scalpel
 
 - type: entity
-  id: ClothingBackpackDuffelCBURNFilled
-  parent: ClothingBackpackDuffelCBURN
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalEngineering
-    - id: WeaponShotgunDoubleBarreled
-    - id: BoxShotgunIncendiary
-      amount: 2
-    - id: GrenadeFlashBang
-      amount: 2
-    - id: PillAmbuzolPlus
-    - id: PillAmbuzol
-      amount: 4
-
-- type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle
   id: ClothingBackpackDuffelSyndicateFilledMedical
   name: syndicate surgical duffel bag
@@ -149,7 +132,7 @@
   id: ClothingBackpackDuffelSyndicateCostumeCentcom
   name: CentCom official costume duffel bag
   description: "Contains a full CentCom Official uniform set, headset and clipboard included. Encryption keys and ID access are not included."
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: DO NOT MAP
   components:
   - type: Tag
@@ -264,6 +247,19 @@
       - id: ClothingHandsGlovesColorYellowBudget
       - id: DoubleEmergencyOxygenTankFilled
       - id: DoubleEmergencyNitrogenTankFilled
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateRaidBundle
+  name: syndicate raid suit bundle
+  description: "Contains the Syndicate's durable raid armor suit."
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingOuterArmorRaid
+      - id: ClothingHeadHelmetRaid
+      - id: ClothingMaskGasSyndicate
+      - id: ClothingHandsGlovesCombat
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle

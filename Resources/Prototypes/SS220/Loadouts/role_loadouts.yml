@@ -1,7 +1,19 @@
-# Command
+# InternalAffairs
+- type: roleLoadout
+  id: JobIAA
+  groups:
+  - LawyerNeck
+  - IAAJumpsuit
+  - Trinkets
+  - Gloves
+
 - type: roleLoadout
   id: JobBlueShield
   groups:
+  - SecurityNeck
+  - BlueShieldJumpsuit
+  - BlueShieldOuterclothing
+  - SecurityBelt
   - CommonBackpack
   - Trinkets
 
@@ -9,18 +21,69 @@
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
-  - SecurityHead
+  - SecurityPilotHead
+  - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityPilotBackpack
+  - SecurityBackpack
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityPDA
   - Trinkets
+  
+#Senior
+- type: roleLoadout
+  id: JobSeniorService
+  groups:
+  - HatSeniorService
+  - SeniorServiceJumpsuit
+  - CommonBackpack
+  - Glasses
+  - Trinkets
+  
+- type: roleLoadout
+  id: JobSeniorEngineer
+  groups:
+  - HatSeniorEngineer
+  - SeniorsEngineerJumpsuit
+  - StationEngineerBackpack
+  - SeniorsEngineerOuterClothing
+  - StationEngineerShoes
+  - Trinkets
+  
+- type: roleLoadout
+  id: JobSeniorPhysician
+  groups:
+  - HatSeniorMedical
+  - SeniorMedicalJumpsuit
+  - MedicalGloves
+  - MedicalsBackpack
+  - MedicalsMask
+  - SeniorMedicalOuterClothing
+  - SeniorShoes
+  - Glasses
+  - Trinkets
 
 - type: roleLoadout
-  id: JobIAA
+  id: JobSeniorResearcher
   groups:
-  - LawyerNeck
-  - LawyerJumpsuit
-  - IAABackpack
+  - HatSeniorSciensist
+  - ScientistNeck
+  - SeniorSciensistJumpsuit
+  - ScientistBackpack
+  - SeniorSciensistOuterClothing
+  - ScientistGloves
+  - ScientistShoes
+  - Glasses
+  - Trinkets
+  
+- type: roleLoadout
+  id: JobSeniorOfficer
+  groups:
+  - SecurityHead
+  - SecurityNeck  #holster loadout
+  - SeniorSecJumpsuit
+  - SecurityBackpack
+  - SecurityOuterClothing
+  - SecurityShoes
+  - SecurityBelt
   - Trinkets

@@ -84,7 +84,7 @@
         scaleByQuantity: true
         damage:
           types:
-            Heat: 3
+            Heat: 0.15
       - !type:PopupMessage
         type: Local
         messages: [ "slime-hurt-by-water-popup" ]
@@ -127,8 +127,11 @@
     makeSentient: true
     name: ghost-role-information-slimes-name
     description: ghost-role-information-slimes-description
-    raffle:
-      settings: short
+    rules: ghost-role-information-nonantagonist-rules
+# SS220-partial-revert-raffle-Begin
+#    raffle:
+#      settings: short
+# SS220-partial-revert-reffle-End
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
@@ -147,7 +150,7 @@
   description: A geras of a slime - the name is ironic, isn't it?
   id: MobSlimesGeras
   parent: BaseMobAdultSlimes
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   # they portable...
   - type: MovementSpeedModifier
@@ -200,8 +203,11 @@
         - SimpleHostile
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
-      raffle:
-        settings: short
+      rules: ghost-role-information-angry-slimes-rules
+# SS220-partial-revert-raffle-Begin
+#      raffle:
+#        settings: short
+# SS220-partial-revert-reffle-End
 
 - type: entity
   name: green slime
@@ -237,8 +243,11 @@
         - SimpleHostile
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
-      raffle:
-        settings: short
+      rules: ghost-role-information-angry-slimes-rules
+# SS220-partial-revert-raffle-Begin
+#      raffle:
+#        settings: short
+# SS220-partial-revert-reffle-End
 
 - type: entity
   name: yellow slime
@@ -274,5 +283,8 @@
         - SimpleHostile
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
-      raffle:
-        settings: short
+      rules: ghost-role-information-angry-slimes-rules
+# SS220-partial-revert-raffle-Begin
+#      raffle:
+#        settings: short
+# SS220-partial-revert-reffle-End

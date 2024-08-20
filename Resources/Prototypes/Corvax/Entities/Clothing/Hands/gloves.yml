@@ -17,7 +17,7 @@
   id: ClothingHandsGlovesCentcomNaval
   name: nanotrasen naval gloves
   description: A high quality pair of thick gloves covered in gold stitching, given to Nanotrasen's Naval Commanders.
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Hands/Gloves/centcom_naval.rsi

@@ -1,3 +1,4 @@
+using Content.Server.Construction.Conditions;
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.EUI;
 using Content.Server.Ghost.Components;
@@ -63,6 +64,7 @@ public sealed class AdminFaxEui : BaseEui
                 {
                     Content = sendData.Content,
                     StampState = sendData.StampState,
+                    EditingDisabled = sendData.Locked,
                     StampedBy = new() { new StampDisplayInfo { StampedName = sendData.From, StampedColor = sendData.StampColor } }
                 };
                 dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);

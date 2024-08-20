@@ -1,0 +1,218 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Command
+
+  # Капитан
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretCap
+  name: берет капитана
+  description: Голубой берет миротворца.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/beret_cap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/beret_cap.rsi
+    - type: Tag
+      tags:
+      - ClothMade
+      - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadWhiteBeretCap
+  name: белый берет капитана
+  description: Белый берет ветерана.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/whiteberetcap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/whiteberetcap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadWhiteCaptainHat
+  name: белая фуражка капитана
+  description: Символ власти на флоте.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+
+# CentCom
+
+  # Берет
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNanoTrasenOfficer
+  name: берет Офицера NanoTrasen
+  description: Чёрный офицерский берет с выгравированным щитом и мечом, объявляющий миру, что его владелец является защитником NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_centcom.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNanoTrasenDiplomat
+  name: beret diplomat NanoTrasen
+  description: A white beret with an engraved shield and sword, announcing to the world that its owner is the defender of NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_diplomat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+  # Фуражка
+- type: entity
+  parent: ClothingHeadWhiteCaptainHat
+  id: ClothingHeadNavyCap
+  name: navy cap
+  description: A mandatory element of the uniform for all officers and crew members, emphasizing their belonging to a powerful corporation.
+
+- type: entity
+  parent: ClothingHeadBigCapHoS
+  id: ClothingHeadHatNavyFieldOfficerCap
+  name: фуражка полевого Офицера
+  description: Если видите её владельца на станции, прячьте колени.
+  components:
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadCentcomCapNaval
+  name: naval cap
+  description: A cap worn by those in the Nanotrasen Navy.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/centcom_naval_cap.rsi
+
+  # Шапка
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCentcomm
+  name: CentCom brand hat
+  description: "It's good to be the emperor."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/centcom.rsi
+  - type: Tag
+    tags:
+    - Ian
+
+# Сервис
+
+  # Ботаника
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerBlue
+  name: blue trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-blue.rsi
+
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerBrown
+  name: brown trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-brown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-brown.rsi
+
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerWhite
+  name: white trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
+
+  # Бармен
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatWhiteTophat
+  name: white tophat
+  description: A stylish white tophat.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/white_tophat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/white_tophat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRedTophat
+  name: red tophat
+  description: A stylish red tophat.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/red_tophat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/red_tophat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+# Служба безопасности
+
+  # Пилот
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadPilotCapCap
+  name: pilot`s capcap
+  description: Catch the height!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
+
+# Карго
+
+  # Квартирмейстер
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadWarehouseman
+  name: the cap of the warehouse manager
+  description: Not the most ordinary cap of the main distributor of the station. Embroidered by personal order, you have never been concerned about the corporation's policy regarding a specific color of the uniform.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi

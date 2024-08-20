@@ -1,0 +1,121 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: ClosetMaintenanceOrange
+  parent: ClosetMaintenance
+  name: оранжевый технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_orange_door
+
+- type: entity
+  id: ClosetMaintenanceArmy
+  parent: ClosetMaintenance
+  name: армейский технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_army_door
+
+- type: entity
+  id: ClosetMaintenanceBrown
+  parent: ClosetMaintenance
+  name: коричневый технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_brown_door
+
+- type: entity
+  id: ClosetMaintenancePink
+  parent: ClosetMaintenance
+  name: розовый технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_pink_door
+
+- type: entity
+  id: ClosetMaintenancePurple
+  parent: ClosetMaintenance
+  name: фиолетовый технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_purple_door
+
+- type: entity
+  id: ClosetMaintenanceBlue
+  parent: ClosetMaintenance
+  name: синий технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_blue_door
+
+- type: entity
+  id: ClosetMaintenanceBlack
+  parent: ClosetMaintenance
+  name: чёрный технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_black_door
+
+- type: entity
+  id: ClosetMaintenanceYellow
+  parent: ClosetMaintenance
+  name: жёлтый технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_yellow_door
+
+- type: entity
+  id: ClosetMaintenanceGreen
+  parent: ClosetMaintenance
+  name: зелёный технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_green_door
+
+- type: entity
+  id: ClosetMaintenanceWhite
+  parent: ClosetMaintenance
+  name: белый технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_white_door
+
+- type: entity
+  id: ClosetMaintenanceRed
+  parent: ClosetMaintenance
+  name: красный технический шкаф
+  description: Это хранилище.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_red_door

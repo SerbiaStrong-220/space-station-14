@@ -141,6 +141,10 @@
   - type: Speech
   - type: Transform
     noRot: false
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -168,6 +172,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -202,6 +210,7 @@
   - type: GuideHelp
     guides:
     - Bartender
+    - Drinks
 
 - type: entity
   parent: VendingMachine
@@ -296,6 +305,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -328,6 +341,10 @@
     radius: 1.8
     energy: 1.6
     color: "#3db83b"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -360,6 +377,10 @@
     radius: 1.8
     energy: 1.6
     color: "#3db83b"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -402,6 +423,10 @@
     radius: 1.5
     energy: 1.3
     color: "#ad7c4b"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -439,6 +464,10 @@
     radius: 1.5
     energy: 1.6
     color: "#3c5eb5"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineCola
@@ -459,6 +488,10 @@
     radius: 1.5
     energy: 1.6
     color: "#423438"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineCola
@@ -480,6 +513,10 @@
     radius: 1.5
     energy: 1.6
     color: "#A50824"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineCola
@@ -503,6 +540,10 @@
     radius: 1.5
     energy: 1.6
     color: "#44964A"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineCola
@@ -525,6 +566,10 @@
     radius: 1.5
     energy: 1.6
     color: "#CBC6BE"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineCola
@@ -548,6 +593,10 @@
     radius: 1.5
     energy: 1.6
     color: "#D3A44D"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -583,6 +632,10 @@
     radius: 1.5
     energy: 1.6
     color: "#66538F"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -620,6 +673,10 @@
     radius: 1.5
     energy: 1.6
     color: "#6927C5"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -657,6 +714,10 @@
     radius: 1.5
     energy: 1.6
     color: "#D82929"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -720,6 +781,10 @@
     radius: 1.5
     energy: 1.6
     color: "#9a18d6"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -754,6 +819,10 @@
     radius: 1.5
     energy: 1.6
     color: "#6148c7"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -893,6 +962,7 @@
   - type: GuideHelp
     guides:
     - Security
+    - Antagonists
 
 - type: entity
   parent: VendingMachine
@@ -926,6 +996,10 @@
     radius: 1.5
     energy: 1.6
     color: "#326e3f"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineSeedsUnlocked
@@ -970,6 +1044,10 @@
     radius: 1.5
     energy: 1.6
     color: "#c73434"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineSnack
@@ -1000,6 +1078,10 @@
     radius: 1.5
     energy: 1.6
     color: "#737785"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineSnack
@@ -1020,6 +1102,10 @@
     radius: 1.5
     energy: 1.6
     color: "#3c5eb5"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineSnack
@@ -1040,6 +1126,10 @@
     radius: 1.5
     energy: 1.6
     color: "#CE3401"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineSnack
@@ -1060,6 +1150,10 @@
     radius: 1.5
     energy: 1.6
     color: "#5F6A1C"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineSnack
@@ -1080,6 +1174,10 @@
     radius: 1.5
     energy: 1.6
     color: "#207E79"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -1116,6 +1214,10 @@
     radius: 1.5
     energy: 1.6
     color: "#389690"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -1188,6 +1290,10 @@
     radius: 1.5
     energy: 1.6
     color: "#9dc5c9"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -1254,6 +1360,10 @@
     radius: 1.5
     energy: 1.6
     color: "#d4ab33"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -1286,6 +1396,10 @@
     radius: 1.5
     energy: 1.6
     color: "#326e3f"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -1320,6 +1434,10 @@
     radius: 1.5
     energy: 1.6
     color: "#ffe599"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -1346,7 +1464,7 @@
   - type: PointLight
     radius: 1.5
     energy: 1.6
-    color: "#9dc5c9"
+    color: "#b89f25"
   - type: AccessReader
     access: [["Salvage"]]
   - type: GuideHelp
@@ -1386,6 +1504,10 @@
     radius: 1.5
     energy: 1.6
     color: "#d4ab33"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 # wallmounted machines
 
@@ -1407,6 +1529,10 @@
     arc: 175
   - type: Transform
     noRot: false
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachineWallmount
@@ -1430,6 +1556,10 @@
       shader: unshaded
     - texture: Structures/Machines/VendingMachines/maintenance_panel.png
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.3
+    energy: 1.6
+    color: "#43ccb5"
   - type: AccessReader
     access: [["Medical"]]
   - type: GuideHelp
@@ -1463,6 +1593,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#326e3f"
   - type: AccessReader
     access: [["Hydroponics"]]
 
@@ -1519,6 +1653,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#d82929"
   - type: AccessReader
     access: [["Security"]]
 
@@ -1603,6 +1741,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89e2a"
   - type: AccessReader
     access: [["Cargo"]]
 
@@ -1715,6 +1857,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89e2a"
   - type: AccessReader
     access: [["Engineering"]]
 
@@ -1743,6 +1889,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89e2a"
   - type: AccessReader
     access: [["Engineering"]]
 
@@ -1827,6 +1977,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#6927C5"
   - type: AccessReader
     access: [["Janitor"]]
 
@@ -1883,6 +2037,10 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#d82929"
   - type: AccessReader
     access: [["NuclearOperative"], ["SyndicateAgent"]]
 
@@ -1973,7 +2131,7 @@
 - type: entity
   parent: VendingMachine
   id: VendingMachineCentDrobe
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   name: CentDrobe
   description: A one-of-a-kind vending machine for all your centcom aesthetic needs!
   components:
@@ -2051,6 +2209,10 @@
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/tankdispenser.rsi #TODO add visualiser for remaining tanks as layers
     state: dispenser
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -2066,6 +2228,10 @@
     layers:
     - state: dispenser
     - state: dispensereng
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end
 
 - type: entity
   parent: VendingMachine
@@ -2094,6 +2260,7 @@
   - type: GuideHelp
     guides:
     - Chemicals
+    - Chemist
 
 - type: entity
   parent: VendingMachineChemicals

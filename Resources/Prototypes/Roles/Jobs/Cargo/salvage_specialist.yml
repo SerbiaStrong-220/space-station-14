@@ -7,6 +7,8 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 36000 # SS220-RoleTime
+    - !type:OverallPlaytimeRequirement
+      time: 72000 # SS220-RoleTime 2
   icon: "JobIconShaftMiner"
   startingGear: SalvageSpecialistGear
   supervisors: job-supervisors-qm
@@ -19,6 +21,9 @@
 - type: startingGear
   id: SalvageSpecialistGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+#    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist SS220-SalvageSpecialist-Loadout-fix
     id: SalvagePDA
     ears: ClothingHeadsetCargo
+  #storage:
+    #back:
+    #- Stuff

@@ -1,0 +1,36 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: PsychologistTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPsychologist
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: PsychologistJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PsychologistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorWhite
+
+- type: loadout
+  id: PsychologistJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PsychologistTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite
+
+- type: loadout
+  id: PsychologistJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPsychologist
+
+- type: loadout
+  id: PsychologistJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtPsychologist

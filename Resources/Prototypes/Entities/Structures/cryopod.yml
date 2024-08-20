@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: Structures/cryostorage.rsi
+    sprite: SS220/Structures/cryostorage.rsi # 220 resprite
     layers:
     - state: sleeper_0
       map: ["base"]
@@ -17,8 +17,8 @@
   - type: ActivatableUI
     key: enum.CryostorageUIKey.Key
   - type: AccessReader
-    breakOnEmag: false
-    access: [["Cryogenics"]]
+    breakOnEmag: true # 220 cryo
+    access: [["Command"]] # 220 cryo
   - type: InteractionOutline
   - type: Cryostorage
   - type: Physics
