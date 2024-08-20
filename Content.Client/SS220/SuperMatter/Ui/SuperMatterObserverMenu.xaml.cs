@@ -11,8 +11,8 @@ using System.Numerics;
 using System.Linq;
 using Robust.Client.Graphics;
 using Content.Shared.Atmos;
-using Robust.Client.UserInterface;
-using Linguini.Syntax.Ast;
+using Robust.Shared.Prototypes;
+using Content.Shared.Atmos.Prototypes;
 
 namespace Content.Client.SS220.SuperMatter.Ui;
 
@@ -21,18 +21,13 @@ namespace Content.Client.SS220.SuperMatter.Ui;
 public sealed partial class SuperMatterObserverMenu : FancyWindow
 {
     [Dependency] ILocalizationManager _localization = default!;
+    [Dependency] IPrototypeManager _prototypeManager = default!;
     public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;
     public SuperMatterObserverComponent? Observer;
     public int? CrystalKey;
-    public Dictionary<Gas, Color> GasBarColors = new()
-    {
-        {Gas.Oxygen, Color.SeaBlue},
-        {Gas.Nitrogen, Color.LightCoral},
-        {Gas.Plasma, Color.Violet},
-        {Gas.CarbonDioxide, Color.Gray}
-    };
     public const int MAX_DATA_LENGTH = 180;
+    private Dictionary<Gas, string> _gasLocalizedNames = new();
     public SuperMatterObserverMenu()
     {
         IoCManager.InjectDependencies(this);
@@ -113,28 +108,31 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         PlotValueOverTime.AddPointToPlot(new Vector2(PlotValueOverTime.GetLastAddedPointX() + 1f, msg.Integrity));
         ColorState.LoadMovingPoint(new Vector2(msg.Matter.Value, msg.InternalEnergy.Value), new Vector2(msg.Matter.Derivative, msg.InternalEnergy.Derivative));
         SetMessageDataToTextInfo(msg);
+        UpdateGasRatioBars(msg.GasRatios);
     }
 
     private void SetMessageDataToTextInfo(SuperMatterObserverUpdateState msg)
     {
         NameLabel.SetMessage(_localization.GetString("smObserver-name", ("name", msg.Name)));
-        IntegrityLabel.SetMessage(_localization.GetString("smObserver-integrity", ("value", msg.Integrity)));
-        PressureLabel.SetMessage(_localization.GetString("smObserver-pressure", ("value", msg.Pressure)));
-        TemperatureLabel.SetMessage(_localization.GetString("smObserver-temperature", ("value", msg.Temperature)));
-        MatterLabel.SetMessage(_localization.GetString("smObserver-matter", ("value", msg.Matter.Value)));
-        InternalEnergyLabel.SetMessage(_localization.GetString("smObserver-internalEnergy", ("value", msg.InternalEnergy.Value)));
-        DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus",
-                                ("status", msg.Delaminate.Delaminates), ("ETA", msg.Delaminate.ETOfDelamination)));
+        IntegrityLabel.SetMessage(_localization.GetString("smObserver-integrity", ("value", msg.Integrity.ToString("N2"))));
+        PressureLabel.SetMessage(_localization.GetString("smObserver-pressure", ("value", msg.Pressure.ToString("N2"))));
+        TemperatureLabel.SetMessage(_localization.GetString("smObserver-temperature", ("value", msg.Temperature.ToString("N2"))));
+        MatterLabel.SetMessage(_localization.GetString("smObserver-matter", ("value", msg.Matter.Value.ToString("N2"))));
+        InternalEnergyLabel.SetMessage(_localization.GetString("smObserver-internalEnergy", ("value", msg.InternalEnergy.Value.ToString("N2"))));
+        DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus", ("status", msg.Delaminate.Delaminates)));
+        MolesAmount.SetMessage(_localization.GetString("smObserver-molesAmount", ("value", msg.TotalMoles.ToString("N2"))));
     }
     private void SetMessageDataToTextInfo()
     {
-        NameLabel.SetMessage(_localization.GetString("smObserver-integrity-none"));
-        IntegrityLabel.SetMessage(_localization.GetString("smObserver-integrity-none"));
-        PressureLabel.SetMessage(_localization.GetString("smObserver-pressure-none"));
-        TemperatureLabel.SetMessage(_localization.GetString("smObserver-temperature-none"));
-        MatterLabel.SetMessage(_localization.GetString("smObserver-matter-none"));
-        InternalEnergyLabel.SetMessage(_localization.GetString("smObserver-internalEnergy-none"));
-        DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus-none"));
+        var noneString = _localization.GetString("smObserver-none-value");
+        NameLabel.SetMessage(_localization.GetString("smObserver-name", ("name", noneString)));
+        IntegrityLabel.SetMessage(_localization.GetString("smObserver-integrity", ("value", noneString)));
+        PressureLabel.SetMessage(_localization.GetString("smObserver-pressure", ("value", noneString)));
+        TemperatureLabel.SetMessage(_localization.GetString("smObserver-temperature", ("value", noneString)));
+        MatterLabel.SetMessage(_localization.GetString("smObserver-matter", ("value", noneString)));
+        InternalEnergyLabel.SetMessage(_localization.GetString("smObserver-internalEnergy", ("value", noneString)));
+        DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus", ("status", noneString)));
+        MolesAmount.SetMessage(_localization.GetString("smObserver-molesAmount", ("value", noneString)));
     }
     private float GetIntegrityDamageMap(float matter, float internalEnergy)
     {
@@ -157,19 +155,25 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
                 return;
 
             ((ProgressBar)gasBar).SetAsRatio(gasRatios[((GasBar)gasBar).GasId]);
+            foreach (var child in gasBar.Children)
+            {
+                if (child.GetType() == typeof(Label))
+                    ((Label)child).Text = _gasLocalizedNames[((GasBar)gasBar).GasId] + " " + MathF.Round(gasRatios[((GasBar)gasBar).GasId] * 100f, 2) + " %";
+            }
         }
     }
     private ProgressBar MakeGasRatioProgressBar(Gas gas)
     {
+        _prototypeManager.TryIndex<GasPrototype>(((int)gas).ToString(), out var gasProto);
 
         if (TryGetStyleProperty<StyleBoxFlat>(ProgressBar.StylePropertyBackground, out var retBackground))
             retBackground.BackgroundColor = Color.FromHex("#2B2A26");
         else
             retBackground = new StyleBoxFlat(Color.FromHex("#2B2A26"));
         if (TryGetStyleProperty<StyleBoxFlat>(ProgressBar.StylePropertyForeground, out var retForeground))
-            retForeground.BackgroundColor = GasBarColors.TryGetValue(gas, out var color) ? color : Color.ForestGreen;
+            retForeground.BackgroundColor = gasProto != null ? Color.FromHex("#" + gasProto.Color) : Color.ForestGreen;
         else
-            retForeground = new StyleBoxFlat(GasBarColors.TryGetValue(gas, out var color) ? color : Color.ForestGreen);
+            retForeground = new StyleBoxFlat(gasProto != null ? Color.FromHex("#" + gasProto.Color) : Color.ForestGreen);
         retForeground.BorderThickness = new Thickness(2f, 2f, 0f, 4f);
         retBackground.BorderThickness = new Thickness(2f, 2f, 0f, 4f);
         var gasBar = new GasBar
@@ -187,17 +191,24 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
             MouseFilter = MouseFilterMode.Stop,
             TrackingTooltip = true,
             TooltipDelay = 0,
-            ToolTip = gas + Environment.NewLine + gas.ToString(),
+            ToolTip = GetGasTooltip(gas),
         };
-        // gasBar.OnMouseEntered += _ =>;
-
         var gasLabel = new Label
         {
             Margin = new Thickness(2f, 2f, 0f, 14f),
-            Text = gas.ToString(),
+            Text = _localization.GetString(gasProto == null ? gas.ToString() : gasProto.Name),
         };
+        _gasLocalizedNames.Add(gas, _localization.GetString(gasProto == null ? gas.ToString() : gasProto.Name));
         gasBar.AddChild(gasLabel);
         return gasBar;
+    }
+    private string GetGasTooltip(Gas gas)
+    {
+        if (!_prototypeManager.TryIndex<GasPrototype>(((int)gas).ToString(), out var gasProto))
+            return "";
+        return _localization.GetString(gasProto.Name)
+                + Environment.NewLine
+                + gasProto.PricePerMole;
     }
     private sealed class ServerButton : Button
     {

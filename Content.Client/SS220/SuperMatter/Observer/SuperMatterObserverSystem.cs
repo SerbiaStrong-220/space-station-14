@@ -107,7 +107,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
                 if (_processedReceivers.ContainsKey(receiver.Owner.Id))
                     continue;
                 if (TrySendToUIState(receiver.Owner, new SuperMatterObserverUpdateState(args.Id, args.Name, args.Integrity, args.Pressure,
-                                                                                      args.Temperature, args.Matter, args.InternalEnergy, args.Delaminate)))
+                                                                                      args.Temperature, args.Matter, args.InternalEnergy, args.GasRatios, args.TotalMoles, args.Delaminate)))
                     _processedReceivers.Add(receiver.Owner.Id, receiver.Owner);
             }
             _receivers.Clear();

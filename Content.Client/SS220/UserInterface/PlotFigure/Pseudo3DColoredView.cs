@@ -82,8 +82,8 @@ internal sealed class Pseudo3DColoredView : Plot
     {
         if (_color2DPoint == null)
             return;
-
-        _maxZ = _color2DPoint.MaxZ;
+        // lmaoooooo
+        _maxZ = _color2DPoint.MaxZ + 0.01f;
         _minZ = _color2DPoint.MinZ;
         _meshgridBorders = (_color2DPoint.X.Max(), _color2DPoint.X.Min(), _color2DPoint.Y.Max(), _color2DPoint.Y.Min());
 

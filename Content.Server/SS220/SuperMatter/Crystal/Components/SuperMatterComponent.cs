@@ -31,10 +31,12 @@ public sealed partial class SuperMatterComponent : Component
     public float InternalEnergyDervAccumulator;
     [ViewVariables(VVAccess.ReadOnly)]
     public float IntegrityDamageAccumulator = 0f;
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    [ViewVariables(VVAccess.ReadOnly)]
     public float AccumulatedZapEnergy = 0f;
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    [ViewVariables(VVAccess.ReadOnly)]
     public float AccumulatedRadiationEnergy = 0f;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public Dictionary<Gas, float> AccumulatedGasesMoles = new();
 
     // TimeSpans
     /// <summary> Current Value set to 3.5f cause for Arcs where is no point in lesser </summary>

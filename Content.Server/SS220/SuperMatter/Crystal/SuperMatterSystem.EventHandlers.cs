@@ -39,6 +39,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
         arcShooterComponent.Enabled = false;
         arcShooterComponent.ShootRange = 3f;
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
+
+        InitGasMolesAccumulator(entity.Comp);
     }
     private void OnHandInteract(Entity<SuperMatterComponent> entity, ref InteractHandEvent args)
     {

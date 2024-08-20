@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.Linq;
 using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Shared.Atmos;
 using Content.Shared.SS220.SuperMatter.Ui;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
@@ -17,7 +19,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var internalEnergyDerv = comp.InternalEnergyDervAccumulator / comp.UpdatesBetweenBroadcast;
         var pressure = comp.PressureAccumulator / comp.UpdatesBetweenBroadcast;
         comp.Name ??= MetaData(crystal.Owner).EntityName;
-
+        Dictionary<Gas, float> gasRatios = new();
+        foreach (var gas in Enum.GetValues<Gas>())
+        {
+            gasRatios.Add(gas, comp.AccumulatedGasesMoles[gas] / comp.AccumulatedGasesMoles.Values.Sum());
+        }
+        var totalMoles = comp.AccumulatedGasesMoles.Values.Sum() / comp.UpdatesBetweenBroadcast;
         // just in case...
         if (!HasComp<TransformComponent>(uid))
         {
@@ -29,11 +36,35 @@ public sealed partial class SuperMatterSystem : EntitySystem
                                             comp.Name, GetIntegrity(comp), pressure, comp.Temperature,
                                             (comp.Matter, matterDerv),
                                             (comp.InternalEnergy, internalEnergyDerv),
+                                            gasRatios, totalMoles,
                                             (comp.IsDelaminate, comp.TimeOfDelamination));
         RaiseNetworkEvent(ev);
 
         comp.MatterDervAccumulator = 0;
         comp.InternalEnergyDervAccumulator = 0;
         comp.UpdatesBetweenBroadcast = 0;
+        comp.PressureAccumulator = 0;
+        ZeroGasMolesAccumulator(comp);
+    }
+    private void AddGasesToAccumulator(SuperMatterComponent smComp, GasMixture gasMixture)
+    {
+        foreach (var gas in Enum.GetValues<Gas>())
+        {
+            smComp.AccumulatedGasesMoles[gas] += gasMixture.GetMoles((int)gas);
+        }
+    }
+    private void InitGasMolesAccumulator(SuperMatterComponent smComp)
+    {
+        foreach (var gas in Enum.GetValues<Gas>())
+        {
+            smComp.AccumulatedGasesMoles.Add(gas, 0f);
+        }
+    }
+    private void ZeroGasMolesAccumulator(SuperMatterComponent smComp)
+    {
+        foreach (var gas in Enum.GetValues<Gas>())
+        {
+            smComp.AccumulatedGasesMoles[gas] = 0;
+        }
     }
 }

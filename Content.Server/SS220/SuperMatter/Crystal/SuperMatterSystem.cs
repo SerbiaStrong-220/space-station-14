@@ -31,15 +31,14 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         base.Update(frameTime);
         // 0.033f corresponds to 30 ticks per second. Just in case if server got very laggy
-        var flooredFrameTime = MathF.Min(frameTime, 0.033f);
+        var flooredFrameTime = MathF.Min(frameTime, 0.09f);
         var query = EntityQueryEnumerator<SuperMatterComponent>();
         while (query.MoveNext(out var uid, out var smComp))
         {
+            if (smComp.DisabledByAdmin)
+                continue;
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
             UpdateDelayed(crystal, flooredFrameTime);
-            if (!smComp.Activated)
-                continue;
-
             SuperMatterUpdate(crystal, flooredFrameTime);
 
         }
@@ -47,19 +46,20 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private void SuperMatterUpdate(Entity<SuperMatterComponent> crystal, float frameTime)
     {
-        if (!crystal.Comp.Activated)
-            return;
+        crystal.Comp.UpdatesBetweenBroadcast++;
         if (!TryGetCrystalGasMixture(crystal.Owner, out var gasMixture))
         {
             Log.Error($"Got null GasMixture in {crystal}");
             return;
         }
-
+        AddGasesToAccumulator(crystal.Comp, gasMixture);
+        crystal.Comp.PressureAccumulator += gasMixture.Pressure;
+        if (!crystal.Comp.Activated)
+            return;
         // here we ask for values before update SM parameters
         // f.e. we save prev value for broadcast's accumulators
         var prevInternalEnergy = crystal.Comp.InternalEnergy;
         var prevMatter = crystal.Comp.Matter;
-        crystal.Comp.PressureAccumulator += gasMixture.Pressure;
         var decayedMatter = CalculateDecayedMatter(crystal, gasMixture) * frameTime;
         // this method make changes in SM parameters!
         EvaluateDeltaInternalEnergy(crystal, gasMixture, frameTime);
@@ -79,7 +79,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
 
         // Update Accumulators for Broadcasting to Clients
-        crystal.Comp.UpdatesBetweenBroadcast++;
         crystal.Comp.MatterDervAccumulator = (crystal.Comp.Matter - prevMatter) / frameTime;
         crystal.Comp.InternalEnergyDervAccumulator = (crystal.Comp.InternalEnergy - prevInternalEnergy) / frameTime;
     }
