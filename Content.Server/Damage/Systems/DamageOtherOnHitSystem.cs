@@ -12,6 +12,7 @@ using Content.Shared.Throwing;
 using Content.Shared.SS220.Damage;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Content.Shared.CombatMode.Pacification;
 
 namespace Content.Server.Damage.Systems
 {
@@ -29,6 +30,7 @@ namespace Content.Server.Damage.Systems
         {
             SubscribeLocalEvent<DamageOtherOnHitComponent, ThrowDoHitEvent>(OnDoHit);
             SubscribeLocalEvent<DamageOtherOnHitComponent, DamageExamineEvent>(OnDamageExamine);
+            SubscribeLocalEvent<DamageOtherOnHitComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow); //SS220 Pacified with EmbeddableProjectileComponent fix
         }
 
         private void OnDoHit(EntityUid uid, DamageOtherOnHitComponent component, ThrowDoHitEvent args)
@@ -67,5 +69,19 @@ namespace Content.Server.Damage.Systems
         {
             _damageExamine.AddDamageExamine(args.Message, component.Damage, Loc.GetString("damage-throw"));
         }
+
+        //SS220 Pacified with EmbeddableProjectileComponent fix begin
+        /// <summary>
+        /// Prevent Pacified entities from throwing damaging items.
+        /// </summary>
+        private void OnAttemptPacifiedThrow(Entity<DamageOtherOnHitComponent> ent, ref AttemptPacifiedThrowEvent args)
+        {
+            // Allow healing projectiles, forbid any that do damage:
+            if (ent.Comp.Damage.AnyPositive())
+            {
+                args.Cancel("pacified-cannot-throw");
+            }
+        }
+        //SS220 Pacified with EmbeddableProjectileComponent fix end
     }
 }
