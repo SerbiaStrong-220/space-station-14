@@ -24,7 +24,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     {
         base.Initialize();
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
-        SubscribeLocalEvent<EmbeddableProjectileComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);
+        SubscribeLocalEvent<EmbeddableProjectileComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow); //SS220 Pacified with EmbeddableProjectileComponent
     }
 
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
