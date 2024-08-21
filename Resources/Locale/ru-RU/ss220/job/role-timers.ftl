@@ -4,15 +4,10 @@ role-timer-antag-insufficient = Требуется ещё [color=yellow]{ TOSTRI
 role-timer-antag-too-high = Требуется на [color=yellow]{ TOSTRING( $time, "0" ) }[/color] меньше минут игры за [color={ $antagColor }]{ $antagName }[/color]. (Вы пытаетесь играть за роль для новичков?)
 
 # Antags timers
-AntagDragon = Дракон
-AntagSpaceNinja = Космический ниндзя
 AntagNukeops = Ядерный оперативник
 AntagNukeopsMedic = Командир ядерных оперативников
 AntagNukeopsCommander = Медик ядерных оперативников
 AntagHedRev = Глава революции
-AntagRev = Революционер
-AntagTraitor = Предатель
+AntagTraitor = Агент Синдиката
 AntagThief = Вор
-AntagInitialInfected = Нулевой зараженный
-AntagZombie = Зомби
-AntagDarkReaper = Тёмный жнец
+AntagInitialInfected = Нулевой заражённый

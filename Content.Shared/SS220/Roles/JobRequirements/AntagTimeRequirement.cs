@@ -52,7 +52,7 @@ public sealed partial class AntagTimeRequirement : JobRequirement
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                 "role-timer-antag-insufficient",
                 ("time", Math.Ceiling(antagDiff)),
-                ("antagName", Loc.GetString(antag.Name)),
+                ("antagName", Loc.GetString(proto)),
                 ("antagColor", antag.AntagColor.ToHex())));
             return false;
         }
@@ -62,7 +62,7 @@ public sealed partial class AntagTimeRequirement : JobRequirement
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                 "role-timer-antag-too-high",
                 ("time", -antagDiff),
-                ("antagName", Loc.GetString(antag.Name)),
+                ("antagName", Loc.GetString(proto)),
                 ("antagColor", antag.AntagColor.ToHex())));
             return false;
         }

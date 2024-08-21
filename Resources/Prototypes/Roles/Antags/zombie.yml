@@ -11,7 +11,7 @@
   #SS220 Add antags playtime trackers end
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 108000 # 30h SS220 time
+    time: 180000 # 50h SS220 time
 
 - type: antag
   id: Zombie
@@ -20,7 +20,3 @@
   setPreference: false
   objective: roles-antag-zombie-objective
   guides: [ Zombies ]
-  #SS220 Add antags playtime trackers begin
-  playTimeTracker: AntagZombie
-  antagColor: Plum
-  #SS220 Add antags playtime trackers end

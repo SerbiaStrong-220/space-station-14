@@ -30,12 +30,6 @@
 
 # Antags
 - type: playTimeTracker
-  id: AntagDragon
-
-- type: playTimeTracker
-  id: AntagSpaceNinja
-
-- type: playTimeTracker
   id: AntagNukeops
 
 - type: playTimeTracker
@@ -48,9 +42,6 @@
   id: AntagHeadRev
 
 - type: playTimeTracker
-  id: AntagRev
-
-- type: playTimeTracker
   id: AntagTraitor
 
 - type: playTimeTracker
@@ -58,9 +49,3 @@
 
 - type: playTimeTracker
   id: AntagInitialInfected
-
-- type: playTimeTracker
-  id: AntagZombie
-
-- type: playTimeTracker
-  id: AntagDarkReaper
