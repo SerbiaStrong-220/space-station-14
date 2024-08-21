@@ -2,8 +2,6 @@
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Content.Server.SS220.SuperMatterCrystal.Components;
-using Content.Server.Tesla.Components;
-using Content.Shared.Radiation.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Database;
 using Content.Shared.Projectiles;
@@ -24,22 +22,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void OnComponentInit(Entity<SuperMatterComponent> entity, ref ComponentInit args)
     {
-        var (uid, _) = entity;
-        RadiationSourceComponent? radiationSource = null;
-        LightningArcShooterComponent? arcShooterComponent = null;
-
-        if (!TryComp(uid, out radiationSource))
-            radiationSource = AddComp<RadiationSourceComponent>(uid);
-        if (!TryComp(uid, out arcShooterComponent))
-            arcShooterComponent = AddComp<LightningArcShooterComponent>(uid);
-
-        radiationSource.Intensity = 1f;
-        radiationSource.Slope = 1f;
-        radiationSource.Enabled = true;
-        arcShooterComponent.Enabled = false;
-        arcShooterComponent.ShootRange = 3f;
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
-
         InitGasMolesAccumulator(entity.Comp);
     }
     private void OnHandInteract(Entity<SuperMatterComponent> entity, ref InteractHandEvent args)
@@ -49,7 +32,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void OnItemInteract(Entity<SuperMatterComponent> entity, ref InteractUsingEvent args)
     {
-        entity.Comp.Matter += MatterNondimensionalization / 5f;
+        entity.Comp.Matter += MatterNondimensionalization / 8f;
         ConsumeObject(args.User, entity);
     }
     private void OnCollideEvent(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
@@ -57,9 +40,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (args.OtherBody.BodyType == BodyType.Static)
             return;
         if (TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
-            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max(4f * (float)projectile.Damage.GetTotal(), 0f);
+            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max(2f * (float)projectile.Damage.GetTotal(), 0f);
 
-        entity.Comp.Matter += MatterNondimensionalization / 5f;
+        entity.Comp.Matter += MatterNondimensionalization / 8f;
         ConsumeObject(args.OtherEntity, entity, false);
     }
     private void OnActivationEvent(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)

@@ -39,7 +39,7 @@ public sealed class PlotColormap
     }
     public void DrawColorBar(DrawingHandleScreen handle)
     {
-
+        //Times I forgot about it: x1
     }
 
     private Color InterpolateBetween((float Ratio, Color Value) lesserPoint, (float Ratio, Color Value) seniorPoint, float ratio)

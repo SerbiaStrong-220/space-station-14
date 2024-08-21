@@ -308,10 +308,6 @@
       types:
         Heat: 14
   # mining laser real
-  # SS220 SM-Crystal-begin
-  - type: SuperMatterSpecificConsumable
-    additionalMatterOnConsumption: 8
-  # SS220 SM-Crystal-end
   - type: GatheringProjectile
   - type: Tag
     tags:

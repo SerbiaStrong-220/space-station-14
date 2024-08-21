@@ -22,13 +22,19 @@ public sealed partial class SuperMatterSystem : EntitySystem
             var ev = new SuperMatterActivationEvent(crystalUid, targetUid);
             RaiseLocalEvent(crystalUid, ev);
         }
-        if (TryComp<SuperMatterSpecificConsumableComponent>(targetUid, out var consumableComponent))
-            smComp.Matter += consumableComponent.AdditionalMatterOnConsumption;
 
-        _popupSystem.PopupEntity(Loc.GetString("supermatter-consume", ("target", targetUid)), targetUid);
+        if (TryComp<SuperMatterSpecificConsumableComponent>(targetUid, out var consumableComponent))
+        {
+            smComp.Matter += consumableComponent.AdditionalMatterOnConsumption;
+            smComp.InternalEnergy += consumableComponent.AdditionalEnergyOnConsumption;
+        }
+
         _audioSystem.PlayPvs(smComp.ConsumeSound, crystalUid);
         if (spawnEntity)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("supermatter-consume", ("target", targetUid)), targetUid);
             EntityManager.SpawnEntity(smComp.ConsumeResultEntityPrototype, Transform(targetUid).Coordinates);
+        }
         EntityManager.QueueDeleteEntity(targetUid);
     }
 }

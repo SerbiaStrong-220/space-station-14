@@ -6,4 +6,6 @@ public sealed partial class SuperMatterSpecificConsumableComponent : Component
 {
     [DataField]
     public float AdditionalMatterOnConsumption = 0f;
+    [DataField]
+    public float AdditionalEnergyOnConsumption = 0f;
 }

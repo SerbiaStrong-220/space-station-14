@@ -16,11 +16,11 @@ smObserver-temperature = Температура кристала: { $value } К
 smObserver-matter = Материя: { $value } у.е.
 smObserver-internalEnergy = Энергия кристала: { $value } эрг
 smObserver-delamStatus = Статус расслоения: { $status }
-smObserver-molesAmount = Всего молей: { $value }
+smObserver-molesAmount = Всего { $value } моль
 # GasInteraction
-smObserver-decay = Мольная доля этого газа влияет на разложение материи.
-    Изменение базовой скорости разложения на { $flat } у.е., и изменяет общую скорость разложения на { $relative } %.
-smObserver-gasToMatter = Этот газ усваивается кристалом супер материи.
+smObserver-decay = Мольная доля этого газа влияет на разложение материи кристала.
+    Базовой скорость разложения максимально изменяется на { $flat } у.е., а общая скорость разложения до { $relative } %.
+smObserver-gasToMatter = Этот газ усваивается кристалом суперматерии.
     За каждую моль усвоенного газа количество материи кристала увеличивается на { $value } у.е.
 smObserver-energyInfluence = Этот газ влияет на количество выделяемой энергии.
     При мольной доле { $optimalRatio } % достигается максимальное изменение выделяемой энергии соответствующее { $relative } % от базовой.

@@ -1,0 +1,21 @@
+- type: entity
+  id: SMEmitter
+  name: Supermatter emitter
+  parent: Emitter
+  description: A experimental supermatter emitter, which allows user to manually specify bolt parameters and power consumption
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Power/Generation/Supermatter/smemitter.rsi
+    layers:
+    - state: emitter
+    - state: beam
+      shader: unshaded
+      visible: false
+      map: ["enum.EmitterVisualLayers.Lights"]
+    - state: locked
+      shader: unshaded
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Emitter
+    boltType: SMEmitterBolt

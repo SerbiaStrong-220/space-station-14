@@ -29,15 +29,15 @@
             <BoxContainer Name="UpperDataContainer" MinHeight="256" HorizontalExpand="True" Orientation="Horizontal" Margin="4 4">
                 <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MaxWidth="512"  MouseFilter="Stop" MinWidth ="384"/>
                 <BoxContainer HorizontalExpand="True" Orientation="Vertical" MaxWidth="256" MinWidth ="192">
-                    <Control VerticalExpand ="True" HorizontalExpand="True"/>
-                    <RichTextLabel Name="NameLabel" HorizontalExpand="True"/>
-                    <RichTextLabel Name="IntegrityLabel" HorizontalExpand="True"/>
-                    <RichTextLabel Name="PressureLabel" HorizontalExpand="True"/>
-                    <RichTextLabel Name="TemperatureLabel" HorizontalExpand="True"/>
-                    <RichTextLabel Name="MatterLabel" HorizontalExpand="True"/>
-                    <RichTextLabel Name="InternalEnergyLabel" HorizontalExpand="True"/>
-                    <RichTextLabel Name="DelamStatus" HorizontalExpand="True"/>
-                    <Control VerticalExpand ="True" HorizontalExpand="True"/>
+                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
+                    <RichTextLabel Name="NameLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
+                    <RichTextLabel Name="IntegrityLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
+                    <RichTextLabel Name="PressureLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
+                    <RichTextLabel Name="TemperatureLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
+                    <RichTextLabel Name="MatterLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
+                    <RichTextLabel Name="InternalEnergyLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192" />
+                    <RichTextLabel Name="DelamStatus" HorizontalExpand="True" MaxWidth="256" MinWidth ="192" />
+                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="256" MinWidth ="192" />
                 </BoxContainer>
                 <!-- Here go numberic Data -->
                 </BoxContainer>
