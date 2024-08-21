@@ -4,6 +4,7 @@
   antagonist: true
   setPreference: true
   objective: roles-antag-thief-objective
+  playTimeTracker: AntagThief #SS220 Add antags playtime trackers
 
 - type: startingGear
   id: ThiefGear

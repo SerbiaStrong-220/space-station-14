@@ -8,6 +8,10 @@
   - !type:OverallPlaytimeRequirement
     time: 18000 # 5h
   guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeops
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: NukeopsMedic
@@ -22,6 +26,10 @@
     role: JobChemist
     time: 10800 # 3h
   guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeopsMedic
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: NukeopsCommander
@@ -35,8 +43,18 @@
   - !type:DepartmentTimeRequirement
     department: Security
     time: 18000 # 5h
+  - !type:AntagTimeRequirement
+    role: NukeopsMedic
+    time: 18000 # 5h
+  - !type:AntagGroupTimeRequirement
+    antagGroup: Nukeops
+    time: 36000 # 10h
   # should be changed to nukie playtime when thats tracked (wyci)
   guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeopsCommander
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplink

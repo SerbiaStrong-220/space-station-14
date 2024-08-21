@@ -1,0 +1,27 @@
+- type: antagGroup
+  id: Nukeops
+  name: antag-group-nukeops
+  color: crimson
+  roles:
+  - Nukeops
+  - NukeopsMedic
+  - NukeopsCommander
+
+- type: antagGroup
+  id: Syndicate
+  name: antag-group-syndicate
+  color: crimson
+  roles:
+  - Thief
+  - Traitor
+  - Nukeops
+  - NukeopsMedic
+  - NukeopsCommander
+
+- type: antagGroup
+  id: Revolutionary
+  name: antag-group-revolutionary
+  color: CornflowerBlue
+  roles:
+  - HeadRev
+  - Rev

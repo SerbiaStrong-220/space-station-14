@@ -5,6 +5,10 @@
   setPreference: true
   objective: roles-antag-syndicate-agent-objective
   guides: [ Traitors ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagTraitor
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: TraitorSleeper
