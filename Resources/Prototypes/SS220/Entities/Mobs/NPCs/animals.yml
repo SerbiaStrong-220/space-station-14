@@ -106,3 +106,45 @@
     tags:
     - DoorBumpOpener
     - VimPilot
+
+- type: entity
+  name: E-N
+  parent: MobCorgi
+  id: MobE-N
+  description: Сorgi made of metal with a heart of gold, because a heart of gold is a great guide
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Pets/e-n.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: e-n
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: e-n
+      Dead:
+        Base: e-n_dead
+  - type: InteractionPopup
+    interactSuccessString: petting-success-medibot
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/SS220/Animals/small_robot_bark_happy.ogg
+  - type: Bloodstream
+    bloodMaxVolume: 150
+    bloodReagent: WeldingFuel
+  - type: Butcherable
+    spawned:
+    - id: PositronicBrain
+      amount: 1
+    - id: ProximitySensor
+      amount: 1
+    - id: CableApcStack
+      amount: 5
+    - id: SheetSteel1
+      amount: 3
+  - type: SentienceTarget
+    flavorKind: station-event-random-sentience-flavor-corgi
+  - type: MobPrice
+    price: 1000

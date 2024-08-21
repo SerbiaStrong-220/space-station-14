@@ -1,0 +1,12 @@
+- type: entity
+  name: E-N Spawner
+  id: SpawnMobE-N
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+      - MobE-N
