@@ -1,9 +1,7 @@
 using Content.Server.Administration.Logs;
-using Content.Server.Damage.Components;
 using Content.Server.Effects;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Projectiles;
