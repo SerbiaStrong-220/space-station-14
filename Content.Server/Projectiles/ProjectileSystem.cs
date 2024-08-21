@@ -1,7 +1,9 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Damage.Components;
 using Content.Server.Effects;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Projectiles;
@@ -22,6 +24,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     {
         base.Initialize();
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
+        SubscribeLocalEvent<EmbeddableProjectileComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);
     }
 
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
@@ -77,4 +80,15 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             RaiseNetworkEvent(new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(xform.Coordinates)), Filter.Pvs(xform.Coordinates, entityMan: EntityManager));
         }
     }
+
+    //SS220 Pacified with EmbeddableProjectileComponent fix begin
+    /// <summary>
+    /// Prevent players with the Pacified status effect from throwing embeddable projectiles that can cause damage on hit.
+    /// </summary>
+    private void OnAttemptPacifiedThrow(Entity<EmbeddableProjectileComponent> ent, ref AttemptPacifiedThrowEvent args)
+    {
+        if (HasComp<DamageOtherOnHitComponent>(ent.Owner))
+            args.Cancel("pacified-cannot-throw-embed");
+    }
+    //SS220 Pacified with EmbeddableProjectileComponent fix end
 }
