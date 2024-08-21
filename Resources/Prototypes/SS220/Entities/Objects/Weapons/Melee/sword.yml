@@ -90,9 +90,10 @@
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: 45
+    attackRate: 1.7
     damage:
       types:
-        Piercing: 12
+        Piercing: 14
     angle: 0
   - type: Item
     size: Normal

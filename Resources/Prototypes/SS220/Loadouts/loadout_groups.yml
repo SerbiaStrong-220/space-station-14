@@ -1,3 +1,20 @@
+# Command
+
+  # Капитан
+- type: loadoutGroup
+  id: CaptainGloves
+  name: loadout-group-captain-gloves
+  loadouts:
+  - CaptainGloves
+  - CaptainWhiteGloves
+
+- type: loadoutGroup
+  id: SecurityCAPSiutstorage
+  name: loadout-group-captain-siutstorage
+  minLimit: 0
+  loadouts:
+  - OfficerCutlass
+
 # InternalAffairs
 
 #ss220 iaa fix start
@@ -117,15 +134,6 @@
   - BlueShoes
   - MedicalWinterBoots
   - SecMedWinterBoots
-
-# Command
-
-- type: loadoutGroup
-  id: CaptainGloves
-  name: loadout-group-captain-gloves
-  loadouts:
-  - CaptainGloves
-  - CaptainWhiteGloves
 
 # Engineering
 
