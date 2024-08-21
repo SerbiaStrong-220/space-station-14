@@ -98,7 +98,6 @@ namespace Content.Server.Cloning
 
             //SS220 Add antags playtime trackers begin
             if (HasComp<ZombieRoleComponent>(mindId)) _role.MindRemoveRole<ZombieRoleComponent>(mindId);
-            if (HasComp<InitialInfectedRoleComponent>(mindId)) _role.MindRemoveRole<InitialInfectedRoleComponent>(mindId);
             //SS220 Add antags playtime trackers end
 
             ClonesWaitingForMind.Remove(mind);
