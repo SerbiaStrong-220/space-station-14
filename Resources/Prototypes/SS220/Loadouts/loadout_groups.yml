@@ -1,12 +1,27 @@
+
 #! Командование (Начало)
 
-  # Капитан (Начало)
+  # Капитан
+- type: loadoutGroup
+  id: CAPSiutstorage
+  name: loadout-group-captain-siutstorage
+  minLimit: 0
+  loadouts:
+  - CapOfficerCutlass
+
 - type: loadoutGroup
   id: CaptainGloves
   name: loadout-group-captain-gloves
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
+
+- type: loadoutGroup
+  id: CAPSiutstorage
+  name: loadout-group-captain-siutstorage
+  minLimit: 0
+  loadouts:
+  - CapOfficerCutlass
   # Капитан (Конец)
 #! Командование (Конец)
 
