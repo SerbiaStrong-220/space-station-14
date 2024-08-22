@@ -1,4 +1,4 @@
-# Turtleneck Time
+# Job Time
 - type: loadoutEffectGroup
   id: SalvageSpecialistTurtleneck
   effects:
@@ -8,7 +8,6 @@
       role: JobSalvageSpecialist
       time: 108000 # 30 hrs
 
-# Flannel Salvage Time
 - type: loadoutEffectGroup
   id: UniformJumpsuitFlannelSalvage
   effects:
