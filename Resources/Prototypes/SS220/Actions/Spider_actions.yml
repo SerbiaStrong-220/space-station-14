@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: WorldTargetAction
-    useDelay: 200 
+    useDelay: 200
     range: 1
     itemIconStyle: BigAction
     icon:
@@ -85,7 +85,7 @@
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggShooter 
+  id: ActionSpawnSpiderEggShooter
   name: shooter  spider egg
   noSpawn: true
   components:
@@ -100,13 +100,13 @@
 
 #Spider
 - type: entity
-  id: ActionSpawnSpiderLittle 
+  id: ActionSpawnSpiderLittle
   name: release the spiderlings
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 40 
+    useDelay: 40
     range: 2
     itemIconStyle: BigAction
     icon:
@@ -127,7 +127,7 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 30 
+    useDelay: 30
     range: 1
     itemIconStyle: BigAction
     icon:
@@ -151,7 +151,7 @@
     range: 1.5
     itemIconStyle: BigAction
     icon:
-      sprite: Structures/Walls/web.rsi
+      sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
       state: full
     event: !type:WorldSpawnSpellEvent
       prototypes:

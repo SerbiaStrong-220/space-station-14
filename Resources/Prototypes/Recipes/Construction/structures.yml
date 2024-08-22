@@ -205,7 +205,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/gold.rsi
+    sprite: SS220/Structures/Walls/gold.rsi #SS220-Walss-Sprite-Update-V4
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
