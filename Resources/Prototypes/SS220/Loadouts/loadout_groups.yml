@@ -6,7 +6,7 @@
   name: loadout-group-captain-siutstorage
   minLimit: 0
   loadouts:
-  - OfficerCutlass
+  - CapOfficerCutlass
 
 # InternalAffairs
 
