@@ -1,0 +1,16 @@
+- type: entity
+  parent: BasePowerCell
+  id: EnHeart
+  name: heart
+  description: "I feel bad for the heartless bastard who lost this."
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Pets/E-N/organs.rsi
+    state: heart
+  - type: Organ
+  - type: Battery
+    maxCharge: 2200
+    startingCharge: 2200
+  - type: Tag
+    tags:
+    - E-N

@@ -91,3 +91,7 @@
 # New Qm highrisk
 - type: Tag
   id: EngravedKnuckleduster
+
+# E-N heart
+- type: Tag
+  id: E-N

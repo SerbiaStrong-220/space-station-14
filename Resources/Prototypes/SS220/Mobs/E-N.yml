@@ -1,6 +1,6 @@
 - type: entity
   name: E-N Spawner
-  id: SpawnMobE-N
+  id: SpawnMobEN
   parent: MarkerBase
   components:
   - type: Sprite
@@ -9,4 +9,4 @@
       - state: ai
   - type: ConditionalSpawner
     prototypes:
-      - MobE-N
+      - MobEN
