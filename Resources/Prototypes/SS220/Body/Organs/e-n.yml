@@ -1,8 +1,8 @@
 - type: entity
   parent: BasePowerCell
   id: EnHeart
-  name: heart
-  description: "I feel bad for the heartless bastard who lost this."
+  name: golden heart
+  description: A good boy's golden heart.
   components:
   - type: Sprite
     sprite: SS220/Mobs/Pets/E-N/organs.rsi
