@@ -1,4 +1,6 @@
-# InternalAffairs
+#! Внутренние дела (Начало)
+
+  # Агент внутренних дел
 - type: roleLoadout
   id: JobIAA
   groups:
@@ -8,6 +10,7 @@
   - Trinkets
   - Gloves
 
+  # Офицер "Синий Щит"
 - type: roleLoadout
   id: JobBlueShield
   groups:
@@ -17,8 +20,24 @@
   - SecurityBelt
   - CommonBackpack
   - Trinkets
+#! Внутренние дела (Конец)
 
-# Security
+#! Служба безопасности (Начало)
+
+  # Инструктор СБ
+- type: roleLoadout
+  id: JobSeniorOfficer
+  groups:
+  - SecurityHead
+  - SecurityNeck  #holster loadout
+  - SeniorSecJumpsuit
+  - SecurityBackpack
+  - SecurityOuterClothing
+  - SecurityShoes
+  - SecurityBelt
+  - Trinkets
+
+  # Пилот
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
@@ -30,27 +49,11 @@
   - SecurityShoes
   - SecurityPDA
   - Trinkets
+#! Служба безопасности (Конец)
 
-#Senior
-- type: roleLoadout
-  id: JobSeniorService
-  groups:
-  - HatSeniorService
-  - SeniorServiceJumpsuit
-  - CommonBackpack
-  - Glasses
-  - Trinkets
+#! Медицинский отдел (Начало)
 
-- type: roleLoadout
-  id: JobSeniorEngineer
-  groups:
-  - HatSeniorEngineer
-  - SeniorsEngineerJumpsuit
-  - StationEngineerBackpack
-  - SeniorsEngineerOuterClothing
-  - StationEngineerShoes
-  - Trinkets
-
+  # Ведущий врач
 - type: roleLoadout
   id: JobSeniorPhysician
   groups:
@@ -63,7 +66,25 @@
   - SeniorShoes
   - Glasses
   - Trinkets
+#! Медицинский отдел (Конец)
 
+#! Инженерный отдел (Начало)
+
+  # Ведущий инженер
+- type: roleLoadout
+  id: JobSeniorEngineer
+  groups:
+  - HatSeniorEngineer
+  - SeniorsEngineerJumpsuit
+  - StationEngineerBackpack
+  - SeniorsEngineerOuterClothing
+  - StationEngineerShoes
+  - Trinkets
+#! Инженерный отдел (Конец)
+
+#! Исследовательский отдел (Начало)
+
+  # Ведущий учёный
 - type: roleLoadout
   id: JobSeniorResearcher
   groups:
@@ -76,15 +97,17 @@
   - ScientistShoes
   - Glasses
   - Trinkets
+#! Исследовательский отдел (Конец)
 
+#! Сервис (Начало)
+
+  # Ведущий сервисный работник
 - type: roleLoadout
-  id: JobSeniorOfficer
+  id: JobSeniorService
   groups:
-  - SecurityHead
-  - SecurityNeck  #holster loadout
-  - SeniorSecJumpsuit
-  - SecurityBackpack
-  - SecurityOuterClothing
-  - SecurityShoes
-  - SecurityBelt
+  - HatSeniorService
+  - SeniorServiceJumpsuit
+  - CommonBackpack
+  - Glasses
   - Trinkets
+#! Сервис (Конец)

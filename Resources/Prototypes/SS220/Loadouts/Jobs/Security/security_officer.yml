@@ -1,4 +1,4 @@
-# Turtleneck Time
+# Job Time
 - type: loadoutEffectGroup
   id: SecurityTurtleneck
   effects:
@@ -7,7 +7,7 @@
       !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 108000 # 30 hrs
-# TacSec Time
+
 - type: loadoutEffectGroup
   id: TacSec
   effects:
@@ -72,7 +72,7 @@
   equipment:
     neck: ClothingNeckProtectBundle
 
-#Outer
+# Outer
 - type: loadout
   id: VestArmorSec
   equipment:

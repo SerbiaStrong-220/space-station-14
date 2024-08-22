@@ -81,7 +81,6 @@
     jumpsuit: ClothingUniformJumpskirtChefNanotrasen
 
 # Outer clothing
-
 - type: loadout
   id: ChefJacketWhite
   equipment:
@@ -106,7 +105,6 @@
     outerClothing: ClothingOuterJacketChefNanotrasen
 
 # Belt
-
 - type: loadout
   id: ChefBeltApronWhite
   equipment:

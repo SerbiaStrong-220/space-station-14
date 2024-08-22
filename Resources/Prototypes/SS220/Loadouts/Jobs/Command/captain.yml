@@ -8,15 +8,6 @@
       role: JobCaptain
       time: 540000 #250 часов, форма для самых лучших
 
-- type: loadoutEffectGroup
-  id: CapOfficerCutlass
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobCaptain
-      time: 363600 # 101 hrs
-
 # Jumpsuit
 - type: loadout
   id: CaptainWhiteJumpsuit
@@ -118,12 +109,3 @@
   id: CaptainGloves
   equipment:
     gloves: ClothingHandsGlovesCaptain
-
-# SUITSTORAGE
-- type: loadout
-  id: CapOfficerCutlass
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: CapOfficerCutlass
-  equipment:
-    suitstorage: ClothingBeltCutlassSheathFilled
