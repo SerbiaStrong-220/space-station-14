@@ -2,14 +2,7 @@
 
   # Капитан
 - type: loadoutGroup
-  id: CaptainGloves
-  name: loadout-group-captain-gloves
-  loadouts:
-  - CaptainGloves
-  - CaptainWhiteGloves
-
-- type: loadoutGroup
-  id: SecurityCAPSiutstorage
+  id: CAPSiutstorage
   name: loadout-group-captain-siutstorage
   minLimit: 0
   loadouts:
@@ -134,6 +127,15 @@
   - BlueShoes
   - MedicalWinterBoots
   - SecMedWinterBoots
+
+# Command
+
+- type: loadoutGroup
+  id: CaptainGloves
+  name: loadout-group-captain-gloves
+  loadouts:
+  - CaptainGloves
+  - CaptainWhiteGloves
 
 # Engineering
 

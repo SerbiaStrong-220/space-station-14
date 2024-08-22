@@ -11,7 +11,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SecurityCAPSiutstorage #SS220-Cutlass-Update
+  - CAPSiutstorage #SS220-Cutlass-Update
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
