@@ -74,9 +74,6 @@
       {
         "name": "e-n_e_r",
         "directions": 4
-      },
-    {
-      "name": "e-n_dead"
-    }
+      }
   ]
 }
