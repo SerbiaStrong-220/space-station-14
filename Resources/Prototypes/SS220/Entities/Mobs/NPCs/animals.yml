@@ -142,8 +142,6 @@
       shader: unshaded
       map: ["light"]
       visible: false
-  - type: RotationVisuals
-    horizontalRotation: 90
   - type: Stamina
     critThreshold: 120
   - type: MobState
@@ -224,19 +222,6 @@
   - type: Repairable
     doAfterDelay: 5
     fuelCost: 10
-  - type: Pullable
-  - type: Butcherable
-    spawned:
-    - id: PositronicBrain
-      amount: 1
-    - id: ProximitySensor
-      amount: 1
-    - id: CableApcStack
-      amount: 5
-    - id: SheetSteel1
-      amount: 3
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-corgi
   - type: MobPrice
     price: 1000
   - type: TTS
