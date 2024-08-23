@@ -30,8 +30,3 @@ ent-LockerArmoryEnergyGunDouble = { ent-LockerArmoryDouble }
 ent-LockerArmoryGunDouble = { ent-LockerArmoryDouble }
     .desc = { ent-LockerArmoryDouble }
     .suffix = Оружие
-
-
-ent-LockerBlueshieldFilled = { ent-LockerBlueshield }
-    .suffix = Заполненный
-    .desc = { ent-LockerBaseSecure.desc }
