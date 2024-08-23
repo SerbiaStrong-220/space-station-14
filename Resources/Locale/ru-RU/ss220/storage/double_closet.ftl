@@ -17,7 +17,7 @@ ent-ClosetEmergencyDoubleFilledRandom = { ent-ClosetEmergencyDouble }
     .desc = { ent-ClosetEmergencyDouble.desc }
 
 ent-LockerArmoryDouble = двойной армейский шкаф
-    .desc = Армейское хранилище
+    .desc = Армейское хранилище.
 
 ent-LockerArmoryArmorDouble = { ent-LockerArmoryDouble }
     .desc = { ent-LockerArmoryDouble }
