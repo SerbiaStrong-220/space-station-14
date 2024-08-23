@@ -16,7 +16,6 @@ using Content.Shared.Atmos.Prototypes;
 
 namespace Content.Client.SS220.SuperMatter.Ui;
 
-// For optimization make cache value in ServerSystem and then subscribe from client if it needs it;
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterObserverMenu : FancyWindow
 {

@@ -4,10 +4,4 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.SuperMatter.Emitter;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SuperMatterEmitterBoltComponent : Component
-{
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float MatterEnergyRatio = 0.5f;
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float PowerConsumedToNormal = 1.2f;
-}
+public sealed partial class SuperMatterEmitterBoltComponent : Component { }
