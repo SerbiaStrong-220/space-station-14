@@ -45,3 +45,17 @@
       amount: 1
   products:
     HotArachne: 6
+
+- type: reaction
+  id: French75
+  reactants:
+    Gin:
+      amount: 2
+    Champagne:
+      amount: 2
+    JuiceLemon:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    French75: 6
