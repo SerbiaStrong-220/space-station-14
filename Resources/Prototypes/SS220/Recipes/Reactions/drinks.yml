@@ -48,6 +48,8 @@
 
 - type: reaction
   id: French75
+  requiredMixerCategories:
+  - Shake
   reactants:
     Gin:
       amount: 2
