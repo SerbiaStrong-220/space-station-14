@@ -44,10 +44,16 @@
       "name": "emergency_door"
     },
     {
+      "name": "emergency_open"
+    },
+    {
       "name": "fire"
     },
     {
       "name": "fire_door"
+    },
+    {
+      "name": "fire_open"
     },
     {
       "name": "wardrobe_open"

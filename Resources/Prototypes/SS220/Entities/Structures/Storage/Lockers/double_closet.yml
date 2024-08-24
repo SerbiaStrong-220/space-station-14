@@ -70,7 +70,7 @@
   components:
   - type: EntityStorageVisuals
     stateBaseClosed: fire
-    stateDoorOpen: wardrobe_open
+    stateDoorOpen: fire_open
     stateDoorClosed: fire_door
 
 # Emergency closet
@@ -83,7 +83,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: emergency
-    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite
+    stateDoorOpen: emergency_open
     stateDoorClosed: emergency_door
 
 #Armory
