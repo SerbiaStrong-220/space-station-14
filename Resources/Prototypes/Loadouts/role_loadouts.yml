@@ -363,6 +363,7 @@
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
