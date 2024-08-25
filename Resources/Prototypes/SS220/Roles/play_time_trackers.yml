@@ -27,3 +27,25 @@
 
 - type: playTimeTracker
   id: JobSeniorService
+
+# Antags
+- type: playTimeTracker
+  id: AntagNukeops
+
+- type: playTimeTracker
+  id: AntagNukeopsMedic
+
+- type: playTimeTracker
+  id: AntagNukeopsCommander
+
+- type: playTimeTracker
+  id: AntagHeadRev
+
+- type: playTimeTracker
+  id: AntagTraitor
+
+- type: playTimeTracker
+  id: AntagThief
+
+- type: playTimeTracker
+  id: AntagInitialInfected
