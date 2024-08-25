@@ -325,7 +325,7 @@ namespace Content.Server.Zombies
             _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor, false);
             _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
 
-            //SS220 ZOMBIE NAME FIX START
+            //SS220 ZOMBIE NAME FIX START (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1651 && https://github.com/SerbiaStrong-220/space-station-14/issues/1567)
             var targetModifierComponent = AddComp<NameModifierComponent>(target);
 
             if (TryComp<NameModifierComponent>(source, out var sourceModifierComponent))
