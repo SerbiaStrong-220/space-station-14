@@ -1,0 +1,64 @@
+- type: entity
+  name: syringe gun
+  parent: BaseItem
+  id: WeaponSyringeGun
+  description: Improvised using nothing but a pipe, some zipties, and a pneumatic cannon. Doesn't accept tanks without enough gas.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Cannons/pneumatic_cannon.rsi
+    layers:
+    - state: icon
+    - state: tank
+      map: [ "tank" ]
+      visible: false
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+  - type: SyringeGun
+    container: syringe
+    solution: injector
+    damageOnHit:
+      types:
+         Piercing: 5
+    syringeThrowAngle: 45
+    pierceArmor: false
+  - type: Gun
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Effects/thunk.ogg
+    soundEmpty:
+      path: /Audio/Items/hiss.ogg
+    clumsyProof: true
+  - type: ContainerAmmoProvider
+    container: syringe
+  - type: Appearance
+  - type: ItemMapper
+    containerWhitelist: [syringe]
+    mapLayers:
+      tank:
+        whitelist:
+          tags:
+          - Syringe
+  - type: Construction
+    graph: PneumaticCannon
+    node: cannon
+  - type: ItemSlots
+    slots:
+      syringe:
+        name: syringe
+        whitelist:
+          tags:
+          - Syringe
+        insertSound:
+          path: /Audio/Weapons/click.ogg
+          params:
+            volume: -3
+  - type: ContainerContainer
+    containers:
+      syringe: !type:ContainerSlot

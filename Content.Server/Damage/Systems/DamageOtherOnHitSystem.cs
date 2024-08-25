@@ -83,5 +83,16 @@ namespace Content.Server.Damage.Systems
             }
         }
         //SS220 Pacified with EmbeddableProjectileComponent fix end
+
+        //SS220 Add syringe gun begin
+        public void SetComponentStates(EntityUid uid, DamageSpecifier damage, bool ignoreResistance, DamageOtherOnHitComponent? component = null)
+        {
+            if (!Resolve(uid, ref component))
+                return;
+
+            component.Damage = damage;
+            component.IgnoreResistances = ignoreResistance;
+        }
+        //SS220 Add syringe gun end
     }
 }
