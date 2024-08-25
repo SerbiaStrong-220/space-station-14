@@ -9,8 +9,15 @@
     duration: 1
     earliestStart: 45
     minimumPlayers: 30
-  - type: RandomSpawnRule
-    prototype: DarkReaperRune
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDarkReaperRune
+      max: 1
+      playerRatio: 10
+      mindComponents:
+      - type: DarkReaperRole
+        prototype: DarkReaper
+  - type: DarkReaperMajorRule
 
 - type: entity
   parent: BaseGameRule
@@ -26,4 +33,7 @@
       max: 1
       playerRatio: 10
       spawnerPrototype: SpawnPointGhostDarkReaperRune
+      mindComponents:
+      - type: DarkReaperRole
+        prototype: DarkReaper
   - type: DarkReaperMajorRule

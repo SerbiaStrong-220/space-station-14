@@ -16,6 +16,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Overlays;
+using Content.Shared.SS220.Ghost;
 using Content.Shared.Storage.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -78,10 +80,42 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespanw);
             SubscribeLocalEvent<GhostComponent, ToggleAGhostBodyVisualsActionEvent>(OnToggleBodyVisualsAction);
+            SubscribeLocalEvent<GhostComponent, ToggleHudOnOtherActionEvent>(OnToggleHudOnOther);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
         }
+
+        // SS220 ADD GHOST HUD'S START
+        private void OnToggleHudOnOther(EntityUid uid, GhostComponent component, ToggleHudOnOtherActionEvent args)
+        {
+            args.Handled = true;
+
+            if (HasComp<GhostHudOnOtherComponent>(uid))
+            {
+                RemComp<GhostHudOnOtherComponent>(uid);
+                RemComp<ShowJobIconsComponent>(uid);
+                RemComp<ShowMindShieldIconsComponent>(uid);
+                RemComp<ShowCriminalRecordIconsComponent>(uid);
+
+                _actions.SetToggled(component.ToggleHudOnOtherActionEntity, true);
+            }
+            else
+            {
+                AddComp<GhostHudOnOtherComponent>(uid);
+                AddComp<ShowJobIconsComponent>(uid);
+                AddComp<ShowMindShieldIconsComponent>(uid);
+                AddComp<ShowCriminalRecordIconsComponent>(uid);
+
+                _actions.SetToggled(component.ToggleHudOnOtherActionEntity, false);
+            }
+            var str = HasComp<GhostHudOnOtherComponent>(uid)
+                ? Loc.GetString("ghost-gui-toggle-hud-on")
+                : Loc.GetString("ghost-gui-toggle-hud-off");
+
+            Popup.PopupEntity(str, uid, uid);
+        }
+        // SS220 ADD GHOST HUD'S END
 
         private void OnGhostHearingAction(EntityUid uid, GhostComponent component, ToggleGhostHearingActionEvent args)
         {
@@ -242,6 +276,8 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
+            // SS220 ADD GHOST HUD'S
+            _actions.AddAction(uid, ref component.ToggleHudOnOtherActionEntity, component.ToggleHudOnOtherAction);
             //SS-220 noDeath
             if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
                 && actResp.UseDelay != null)

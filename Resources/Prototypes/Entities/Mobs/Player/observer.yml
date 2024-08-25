@@ -33,6 +33,14 @@
     skipChecks: true
   - type: Ghost
   - type: GhostHearing
+  # SS220 ADD GHOST HUD'S START
+  - type: ShowHealthBars
+    damageContainers:
+      - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+      - Biological
+  # SS220 ADD GHOST HUD'S END
   - type: MovementSpeedModifier
     baseSprintSpeed: 12
     baseWalkSpeed: 8
