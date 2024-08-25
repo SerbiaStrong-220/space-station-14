@@ -20,12 +20,6 @@ public sealed partial class SyringeGunComponent : Component
     public string SolutionType = string.Empty;
 
     /// <summary>
-    /// Speed of the projectile fired
-    /// </summary>
-    [DataField]
-    public float ProjectileSpeed = 20f;
-
-    /// <summary>
     /// How long it takes to remove the embedded object.
     /// </summary>
     [DataField]

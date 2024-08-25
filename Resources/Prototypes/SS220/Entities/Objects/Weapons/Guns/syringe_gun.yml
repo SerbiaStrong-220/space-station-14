@@ -28,6 +28,7 @@
     pierceArmorVest: false
   - type: Gun
     fireRate: 1
+    projectileSpeed: 20
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
