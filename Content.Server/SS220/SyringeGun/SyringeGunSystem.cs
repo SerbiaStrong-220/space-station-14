@@ -2,8 +2,7 @@
 using Content.Server.Chemistry.Components;
 using Content.Server.Damage.Components;
 using Content.Server.Damage.Systems;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.SS220.SyringeGun;
 
 namespace Content.Server.SS220.SyringeGun;
@@ -11,6 +10,7 @@ namespace Content.Server.SS220.SyringeGun;
 public sealed partial class SyringeGunSystem : SharedSyringeGunSystem
 {
     [Dependency] private readonly DamageOtherOnHitSystem _damageOtherOnHitSystem = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
     public override void Initialize()
     {
@@ -24,8 +24,8 @@ public sealed partial class SyringeGunSystem : SharedSyringeGunSystem
         var item = args.Uid;
         var (_, gunComp) = ent;
 
-        if (!TryComp<InjectorComponent>(item, out var injector) ||
-            !TryComp<TemporarySyringeComponentsComponent>(item, out var temporarySyringeComponents))
+        if (!TryComp<TemporarySyringeComponentsComponent>(item, out var temporarySyringeComponents) ||
+            !_solutionContainerSystem.TryGetSolution(item, gunComp.SolutionType, out _, out var solution))
         {
             args.Cancelled = true;
             return;
@@ -35,7 +35,7 @@ public sealed partial class SyringeGunSystem : SharedSyringeGunSystem
         {
             embedComponent.Solution = gunComp.SolutionType;
             embedComponent.PierceArmor = gunComp.PierceArmor;
-            embedComponent.TransferAmount = injector.MaximumTransferAmount;
+            embedComponent.TransferAmount = solution.MaxVolume;
             temporarySyringeComponents.Components.Add(embedComponent.GetType());
         }
 
