@@ -33,9 +33,9 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/Effects/thunk.ogg
+      path: /Audio/SS220/Weapons/Guns/Gunshots/syringeproj.ogg
     soundEmpty:
-      path: /Audio/Items/hiss.ogg
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
     clumsyProof: true
   - type: ContainerAmmoProvider
     container: syringe

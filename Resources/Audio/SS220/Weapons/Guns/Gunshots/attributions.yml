@@ -2,3 +2,8 @@
   license: "Custom"
   copyright: "Made by MIXnikita for SS220. Licensed under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14"
+
+- files: ["syringeproj.ogg"]
+  license: "GNU Affero General Public License version 3"
+  copyright: "Taken from Paradise-Remastered"
+  source: "https://github.com/SerbiaStrong-220/Paradise-Remastered/blob/b3880e50d1115391c3715fe8b09aeaebe1a3ce30/sound/items/syringeproj.ogg"
