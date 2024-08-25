@@ -8,10 +8,6 @@
   "copyright": "Made by funny_mushroom (Discord) for SS220",
   "states": [
     {
-      "name": "E-N",
-      "directions": 4
-    },
-    {
       "name": "e-n",
       "directions": 4
     },
