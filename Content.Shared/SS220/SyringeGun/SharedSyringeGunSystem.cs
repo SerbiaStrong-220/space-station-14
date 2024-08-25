@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Hands;
 using Content.Shared.Projectiles;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -18,6 +19,7 @@ public abstract class SharedSyringeGunSystem : EntitySystem
 
         // Events that trigger the removal of temporary components
         SubscribeLocalEvent<TemporarySyringeComponentsComponent, LandEvent>(OnLand);
+        SubscribeLocalEvent<TemporarySyringeComponentsComponent, GotEquippedHandEvent>(OnPickup);
     }
 
     private void OnAttemptShoot(Entity<SyringeGunComponent> ent, ref AttemptShootEvent args)
@@ -94,6 +96,12 @@ public abstract class SharedSyringeGunSystem : EntitySystem
     }
 
     private void OnLand(Entity<TemporarySyringeComponentsComponent> ent, ref LandEvent args)
+    {
+        RemoveTemporaryComponents(ent.Owner, ent.Comp);
+    }
+
+    // This method need for situations when someone was able to catch a projectile in flight
+    private void OnPickup(Entity<TemporarySyringeComponentsComponent> ent, ref GotEquippedHandEvent args)
     {
         RemoveTemporaryComponents(ent.Owner, ent.Comp);
     }
