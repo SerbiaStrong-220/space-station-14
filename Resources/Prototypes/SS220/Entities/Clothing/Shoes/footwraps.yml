@@ -14,6 +14,9 @@
   - type: Tag
     tags:
     - Footwraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -50,6 +53,9 @@
   - type: Construction
     graph: ClothingFootWrapsBlackCraft
     node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -86,6 +92,9 @@
   - type: Construction
     graph: ClothingFootWrapsBlueCraft
     node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -122,6 +131,9 @@
   - type: Construction
     graph: ClothingFootWrapsGreenCraft
     node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -158,6 +170,9 @@
   - type: Construction
     graph: ClothingFootWrapsRedCraft
     node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -194,3 +209,6 @@
   - type: Construction
     graph: ClothingFootWrapsYellowCraft
     node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard

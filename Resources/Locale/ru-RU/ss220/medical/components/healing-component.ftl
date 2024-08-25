@@ -1,0 +1,1 @@
+medical-item-popup-target = {CAPITALIZE($user)} пытается вылечить вас с помощью {$item}!

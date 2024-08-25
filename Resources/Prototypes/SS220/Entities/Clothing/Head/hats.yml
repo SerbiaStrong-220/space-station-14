@@ -216,3 +216,20 @@
     sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi
+
+  # Утилизатор
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatSalvage
+  name: salvage cap
+  description: "Why they wear caps if they dig in caves?"
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/salvagehat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/salvagehat.rsi
+
+- type: entity
+  parent: [ClothingHeadHeadHatBaseFlipped, ClothingHeadHatSalvage]
+  id: ClothingHeadHatSalvageFlipped
+  name: salvage cap

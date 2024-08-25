@@ -123,6 +123,10 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
+  #ss220 emote 5 sec start
+  - type: Emoting
+    chatEmoteCooldown: 5.0
+  #ss220 emote 5 sec end
 
 - type: entity
   parent: BaseSpeciesDummy

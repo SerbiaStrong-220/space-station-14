@@ -25,6 +25,7 @@
     availableModes:
     - SemiAuto
     - FullAuto
+    - Burst #ss220 gunmodes 
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/smg.ogg
   - type: ChamberMagazineAmmoProvider
@@ -144,8 +145,8 @@
       selectedMode: FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-      availableModes:
-        - FullAuto
+#     availableModes: #ss220 gunmodes
+#        - FullAuto   #ss220 gunmodes
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -192,8 +193,8 @@
     selectedMode: FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-    availableModes:
-    - FullAuto
+#    availableModes: #ss220 gunmodes
+#    - FullAuto      #ss220 gunmodes
   - type: ItemSlots
     slots:
       gun_magazine:

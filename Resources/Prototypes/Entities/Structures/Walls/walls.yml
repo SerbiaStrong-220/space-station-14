@@ -95,9 +95,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/clock.rsi
+    sprite: SS220/Structures/Walls/clock.rsi #SS220-Walls-Sprite-Update-V3
   - type: Icon
-    sprite: Structures/Walls/clock.rsi
+    sprite: SS220/Structures/Walls/clock.rsi #SS220-Walls-Sprite-Update-V3
   - type: Construction
     graph: ClockworkGirder
     node: clockworkWall
@@ -290,9 +290,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/gold.rsi
+    sprite: SS220/Structures/Walls/gold.rsi #SS220-Walss-Sprite-Update-V4
   - type: Icon
-    sprite: Structures/Walls/gold.rsi
+    sprite: SS220/Structures/Walls/gold.rsi #SS220-Walss-Sprite-Update-V4
   - type: Construction
     graph: Girder
     node: goldWall
@@ -1034,9 +1034,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/web.rsi
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
   - type: Icon
-    sprite: Structures/Walls/web.rsi
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
   - type: Destructible
     thresholds:
     - trigger:

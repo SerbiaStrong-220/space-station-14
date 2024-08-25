@@ -18,8 +18,10 @@ public sealed class ActivatableUIRequiresPowerSystem : SharedActivatableUIRequir
             return;
         }
 
-        if (TryComp<WiresPanelComponent>(ent.Owner, out var panel) && panel.Open)
-            return;
+        //SS220 ActivatableUI with open panel fix begin
+        //if (TryComp<WiresPanelComponent>(ent.Owner, out var panel) && panel.Open)
+        //    return;
+        //SS220 ActivatableUI with open panel fix end
 
         _popup.PopupClient(Loc.GetString("base-computer-ui-component-not-powered", ("machine", ent.Owner)), args.User, args.User);
         args.Cancel();

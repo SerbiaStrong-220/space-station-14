@@ -356,8 +356,8 @@
     pillType: 15
   - type: Sprite
     state: pill16
-  - type: Label
-    currentLabel: dexalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dexalin 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -372,8 +372,8 @@
   id: PillCanisterDexalin
   suffix: Dexalin 10u, 7
   components:
-  - type: Label
-    currentLabel: dexalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dexalin 10u
   - type: StorageFill
     contents:
     - id: PillDexalin
@@ -389,8 +389,8 @@
     pillType: 9
   - type: Sprite
     state: pill10
-  - type: Label
-    currentLabel: dylovene 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dylovene 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -405,8 +405,8 @@
   id: PillCanisterDylovene
   suffix: Dylovene 10u, 5
   components:
-  - type: Label
-    currentLabel: dylovene 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dylovene 10u
   - type: StorageFill
     contents:
     - id: PillDylovene
@@ -422,8 +422,8 @@
     pillType: 16
   - type: Sprite
     state: pill17
-  - type: Label
-    currentLabel: hyronalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: hyronalin 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -438,8 +438,8 @@
   id: PillCanisterHyronalin
   suffix: Hyronalin 10u, 5
   components:
-  - type: Label
-    currentLabel: hyronalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: hyronalin 10u
   - type: StorageFill
     contents:
     - id: PillHyronalin
@@ -455,8 +455,8 @@
     pillType: 8
   - type: Sprite
     state: pill9
-  - type: Label
-    currentLabel: potassium iodide 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: potassium iodide 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -471,8 +471,8 @@
   id: PillCanisterPotassiumIodide
   suffix: Potassium iodide 10u, 5
   components:
-  - type: Label
-    currentLabel: potassium iodide 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: potassium iodide 10u
   - type: StorageFill
     contents:
     - id: PillPotassiumIodide
@@ -488,8 +488,8 @@
     pillType: 13
   - type: Sprite
     state: pill14
-  - type: Label
-    currentLabel: iron 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: iron 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -508,8 +508,8 @@
     pillType: 12
   - type: Sprite
     state: pill13
-  - type: Label
-    currentLabel: copper 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: copper 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -524,8 +524,8 @@
   id: PillCanisterIron
   suffix: Iron 10u, 5
   components:
-  - type: Label
-    currentLabel: iron 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: iron 10u
   - type: StorageFill
     contents:
     - id: PillIron
@@ -537,8 +537,8 @@
   id: PillCanisterCopper
   suffix: Copper 10u, 5
   components:
-  - type: Label
-    currentLabel: copper 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: copper 10u
   - type: StorageFill
     contents:
     - id: PillCopper
@@ -554,8 +554,8 @@
     pillType: 3
   - type: Sprite
     state: pill4
-  - type: Label
-    currentLabel: kelotane 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: kelotane 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -570,8 +570,8 @@
   id: PillCanisterKelotane
   suffix: Kelotane 10u, 5
   components:
-  - type: Label
-    currentLabel: kelotane 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: kelotane 10u
   - type: StorageFill
     contents:
     - id: PillKelotane
@@ -587,8 +587,8 @@
     pillType: 7
   - type: Sprite
     state: pill8
-  - type: Label
-    currentLabel: dermaline 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dermaline 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -603,8 +603,8 @@
   id: PillCanisterDermaline
   suffix: Dermaline 10u, 5
   components:
-  - type: Label
-    currentLabel: dermaline 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dermaline 10u
   - type: StorageFill
     contents:
     - id: PillDermaline
@@ -633,8 +633,8 @@
     pillType: 2
   - type: Sprite
     state: pill3
-  - type: Label
-    currentLabel: tricordrazine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: tricordrazine 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -649,8 +649,8 @@
   id: PillCanisterTricordrazine
   suffix: Tricordrazine 10u, 5
   components:
-  - type: Label
-    currentLabel: tricordrazine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: tricordrazine 10u
   - type: StorageFill
     contents:
     - id: PillTricordrazine
@@ -666,8 +666,8 @@
     pillType: 4
   - type: Sprite
     state: pill5
-  - type: Label
-    currentLabel: bicaridine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: bicaridine 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -682,8 +682,8 @@
   id: PillCanisterBicaridine
   suffix: Bicaridine 10u, 5
   components:
-  - type: Label
-    currentLabel: bicaridine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: bicaridine 10u
   - type: StorageFill
     contents:
     - id: PillBicaridine
@@ -699,8 +699,8 @@
     pillType: 20
   - type: Sprite
     state: pill21
-  - type: Label
-    currentLabel: charcoal 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: charcoal 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -715,8 +715,8 @@
   id: PillCanisterCharcoal
   suffix: Charcoal 10u, 3
   components:
-  - type: Label
-    currentLabel: charcoal 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: charcoal 10u
   - type: StorageFill
     contents:
     - id: PillCharcoal

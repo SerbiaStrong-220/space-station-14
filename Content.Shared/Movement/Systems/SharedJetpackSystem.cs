@@ -1,6 +1,10 @@
 using Content.Shared.Actions;
+using Content.Shared.Clothing;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Gravity;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -20,6 +24,7 @@ public abstract class SharedJetpackSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!; //SS220 Magboots with jet fix
 
     public override void Initialize()
     {
@@ -31,6 +36,7 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         SubscribeLocalEvent<JetpackUserComponent, CanWeightlessMoveEvent>(OnJetpackUserCanWeightless);
         SubscribeLocalEvent<JetpackUserComponent, EntParentChangedMessage>(OnJetpackUserEntParentChanged);
+        SubscribeLocalEvent<JetpackUserComponent, MagbootsUpdateStateEvent>(OnMagbootsUpdateState); //SS220 Magboots with jet fix
 
         SubscribeLocalEvent<GravityChangedEvent>(OnJetpackUserGravityChanged);
         SubscribeLocalEvent<JetpackComponent, MapInitEvent>(OnMapInit);
@@ -112,6 +118,28 @@ public abstract class SharedJetpackSystem : EntitySystem
     {
         if (args.Handled)
             return;
+
+        //SS220 Magboots with jet fix begin
+        var slotEnumerator = _inventory.GetSlotEnumerator(args.Performer);
+        while (slotEnumerator.NextItem(out var item))
+        {
+            if (HasComp<MagbootsComponent>(item) &&
+                TryComp<ItemToggleComponent>(item, out var itemToggle) &&
+                itemToggle.Activated)
+            {
+                _popup.PopupClient(Loc.GetString("jetpack-no-magboots"), uid, args.Performer);
+                return;
+            }
+
+            //SS220 Moonboots with jet fix begin
+            if (HasComp<AntiGravityClothingComponent>(item))
+            {
+                SetEnabled(uid, component, !IsEnabled(uid));
+                return;
+            }
+            //SS220 Moonboots with jet fix end
+        }
+        //SS220 Magboots with jet fix end
 
         if (TryComp(uid, out TransformComponent? xform) && !CanEnableOnGrid(xform.GridUid))
         {
@@ -200,6 +228,20 @@ public abstract class SharedJetpackSystem : EntitySystem
     {
         return true;
     }
+
+    //SS220 Magboots with jet fix begin
+    private void OnMagbootsUpdateState(Entity<JetpackUserComponent> ent, ref MagbootsUpdateStateEvent args)
+    {
+        if (!args.State)
+            return;
+
+        if (TryComp<JetpackComponent>(ent.Comp.Jetpack, out var jetpack))
+        {
+            SetEnabled(ent.Comp.Jetpack, jetpack, false, ent.Owner);
+            _popup.PopupClient(Loc.GetString("jetpack-to-grid"), ent.Comp.Jetpack, ent.Owner);
+        }
+    }
+    //SS220 Magboots with jet fix end
 }
 
 [Serializable, NetSerializable]

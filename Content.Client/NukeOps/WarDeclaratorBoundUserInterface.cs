@@ -1,4 +1,4 @@
-﻿using Content.Shared.CCVar;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.NukeOps;
 using JetBrains.Annotations;
@@ -24,6 +24,7 @@ public sealed class WarDeclaratorBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<WarDeclaratorWindow>();
         _window.OnActivated += OnWarDeclaratorActivated;
+        _window.SetMaxMessageLength(_cfg.GetCVar(CCVars.ChatMaxAnnouncementLength)); // SS220 Text Edit Limits
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

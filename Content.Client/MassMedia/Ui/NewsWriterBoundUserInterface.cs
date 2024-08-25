@@ -43,7 +43,10 @@ public sealed class NewsWriterBoundUserInterface : BoundUserInterface
         if (_menu == null || title.Length == 0)
             return;
 
-        var stringContent = Rope.Collapse(_menu.ArticleEditorPanel.ContentField.TextRope).Trim();
+        // SS220 Text Edit Limits begin
+        //var stringContent = Rope.Collapse(_menu.ArticleEditorPanel.ContentField.TextRope).Trim();
+        var stringContent = Rope.Collapse(_menu.ArticleEditorPanel.ContentField.Edit.TextRope).Trim();
+        // SS220 Text Edit Limits end
 
         if (stringContent.Length == 0)
             return;

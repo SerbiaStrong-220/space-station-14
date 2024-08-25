@@ -11,6 +11,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - CAPSiutstorage #SS220-Cutlass-Update
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -220,6 +221,7 @@
 - type: roleLoadout
   id: JobSalvageSpecialist
   groups:
+  - SalvageSpecialistHead #SS220-Salvage-Loadouts-Update
   - GroupTankHarness
   - SalvageSpecialistBackpack
   - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
@@ -341,6 +343,7 @@
   - SurvivalSecurity
   - Trinkets
   - GroupSpeciesBreathToolSecurity
+  - SecurityHoSSiutstorage #SS220-OfficerCutlass
 
 - type: roleLoadout
   id: JobWarden

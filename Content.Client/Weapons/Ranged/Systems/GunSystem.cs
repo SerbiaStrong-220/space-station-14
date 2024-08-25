@@ -387,4 +387,14 @@ public sealed partial class GunSystem : SharedGunSystem
         _animPlayer.Stop(gunUid, uidPlayer, "muzzle-flash-light");
         _animPlayer.Play((gunUid, uidPlayer), animTwo, "muzzle-flash-light");
     }
+
+    //SS220 Add Multifaze gun begin
+    public void SetMagState(EntityUid uid, string magState, MagazineVisualsComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        component.MagState = magState;
+    }
+    //SS220 Add Multifaze gun end
 }
