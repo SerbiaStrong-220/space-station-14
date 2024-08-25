@@ -103,3 +103,7 @@
 # ArmorVest
 - type: Tag
   id: ArmorVest
+
+# SyringeBluespace
+- type: Tag
+  id: SyringeBluespace

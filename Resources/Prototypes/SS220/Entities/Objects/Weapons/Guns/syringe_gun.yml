@@ -27,7 +27,7 @@
     pierceArmor: false
     pierceArmorVest: false
   - type: Gun
-    fireRate: 0.5
+    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -46,9 +46,6 @@
         whitelist:
           tags:
           - Syringe
-  - type: Construction
-    graph: PneumaticCannon
-    node: cannon
   - type: ItemSlots
     slots:
       syringe:
@@ -56,6 +53,9 @@
         whitelist:
           tags:
           - Syringe
+        blacklist:
+          tags:
+          - SyringeBluespace
         insertSound:
           path: /Audio/Weapons/click.ogg
           params:

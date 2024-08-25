@@ -419,6 +419,7 @@
     tags:
     - Syringe
     - Trash
+    - SyringeBluespace #SS220 Add syringe gun
 
 - type: entity
   id: SyringeCryostasis
