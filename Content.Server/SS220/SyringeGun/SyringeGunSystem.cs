@@ -35,6 +35,7 @@ public sealed partial class SyringeGunSystem : SharedSyringeGunSystem
         {
             embedComponent.Solution = gunComp.SolutionType;
             embedComponent.PierceArmor = gunComp.PierceArmor;
+            embedComponent.PierceArmorVest = gunComp.PierceArmorVest;
             embedComponent.TransferAmount = solution.MaxVolume;
             temporarySyringeComponents.Components.Add(embedComponent.GetType());
         }

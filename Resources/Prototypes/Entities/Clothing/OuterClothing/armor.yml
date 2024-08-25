@@ -21,6 +21,12 @@
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 0.90
+  #SS220 Add syringe gun begin
+  - type: Tag
+    tags:
+      - WhitelistChameleon
+      - ArmorVest
+  #SS220 Add syringe gun end
 
 #Alternate / slim basic armor vest
 - type: entity

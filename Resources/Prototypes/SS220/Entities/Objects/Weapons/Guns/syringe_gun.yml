@@ -25,8 +25,9 @@
          Piercing: 5
     syringeThrowAngle: 45
     pierceArmor: false
+    pierceArmorVest: false
   - type: Gun
-    fireRate: 2
+    fireRate: 0.5
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

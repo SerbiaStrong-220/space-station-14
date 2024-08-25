@@ -49,6 +49,12 @@ public sealed partial class SyringeGunComponent : Component
     [DataField]
     public bool PierceArmor = true;
 
+    /// <summary>
+    /// Whether this will inject through armour vest or not.
+    /// </summary>
+    [DataField]
+    public bool PierceArmorVest = true;
+
     [DataField]
     public Angle SyringeThrowAngle = Angle.Zero;
 }

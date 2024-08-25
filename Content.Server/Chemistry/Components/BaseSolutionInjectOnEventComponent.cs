@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 
 namespace Content.Server.Chemistry.Components;
@@ -41,6 +41,14 @@ public abstract partial class BaseSolutionInjectOnEventComponent : Component
     /// </summary>
     [DataField]
     public bool PierceArmor = true;
+
+    //SS220 Add syringe gun begin
+    /// <summary>
+    /// Whether this will inject through armour vest or not.
+    /// </summary>
+    [DataField]
+    public bool PierceArmorVest = true;
+    //SS220 Add syringe gun end
 
     /// <summary>
     /// Contents of popup message to display to the attacker when injection
