@@ -32,7 +32,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         }
 
-        var ev = new SuperMatterStateUpdate(uid.Id, EntityManager.GetNetEntity(Transform(uid).GridUid),
+        var ev = new SuperMatterStateUpdate(uid.Id, EntityManager.GetNetEntity(Transform(uid).GridUid), comp.Activated,
                                             comp.Name, GetIntegrity(comp), pressure, comp.Temperature,
                                             (comp.Matter, matterDerv),
                                             (comp.InternalEnergy, internalEnergyDerv),

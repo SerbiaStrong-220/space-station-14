@@ -14,6 +14,7 @@ public enum SuperMatterObserverUiKey : byte
 public sealed class SuperMatterStateUpdate(
                                             int id,
                                             NetEntity? smGridId,
+                                            bool isActive,
                                             string name,
                                             float integrity,
                                             float pressure,
@@ -28,6 +29,7 @@ public sealed class SuperMatterStateUpdate(
     public int Id { get; } = id;
     public string Name { get; } = name;
     public NetEntity? SMGridId { get; } = smGridId;
+    public bool IsActive { get; } = isActive;
     public float Pressure { get; } = pressure;
     public float Integrity { get; } = integrity;
     public float Temperature { get; } = temperature;

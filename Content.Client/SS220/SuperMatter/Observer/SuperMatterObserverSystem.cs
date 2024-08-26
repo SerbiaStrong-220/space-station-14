@@ -4,6 +4,7 @@ using Robust.Client.GameObjects;
 using Content.Shared.SS220.SuperMatter.Ui;
 using Content.Client.SS220.SuperMatter.Ui;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.SuperMatter.Observer;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
 
@@ -12,12 +13,14 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;
     private const float UpdateDelay = 1f;
+    private TimeSpan _nextUpdateTime = default!;
     private HashSet<Entity<SuperMatterObserverComponent>> _observerEntities = new();
     private List<EntityUid> _smReceiverUIOwnersToInit = new();
-    private TimeSpan _nextUpdateTime = default!;
+    private HashSet<Entity<SuperMatterObserverVisualReceiverComponent>> _visualReceivers = new();
     private HashSet<Entity<SuperMatterObserverReceiverComponent>> _receivers = new();
     private SortedList<int, EntityUid> _processedReceivers = new();
     public override void Initialize()
@@ -91,8 +94,16 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             AddToCacheList(observerComp.Temperatures[args.Id], args.Temperature);
             AddToCacheList(observerComp.Matters[args.Id], args.Matter);
             AddToCacheList(observerComp.InternalEnergy[args.Id], args.InternalEnergy);
+
             // here dispatches events to sprites of SM itself
-            // RaiseLocalEvent(GetIntegrityState changed then change sprite)
+            _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _visualReceivers);
+            var state = GetVisualState(args);
+            foreach (var visualReceiver in _visualReceivers)
+            {
+                // TODO make it possible to have multiple SMCrystals on one grid
+                _appearanceSystem.SetData(visualReceiver.Owner, SuperMatterVisuals.VisualState, state);
+            }
+
             // check if console has power
             if (!(TryComp<ApcPowerReceiverComponent>(observerUid, out var powerReceiver)
                 && powerReceiver.Powered))
@@ -144,5 +155,19 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         }
         ((SuperMatterObserverBUI)bui).DirectUpdateState(state);
         return true;
+    }
+    private SuperMatterVisualState GetVisualState(SuperMatterStateUpdate args)
+    {
+        if (!args.IsActive)
+            return SuperMatterVisualState.UnActiveState;
+        if (args.Delaminate.Delaminates)
+            return SuperMatterVisualState.Delaminate;
+        if (args.Integrity < 35)
+            return SuperMatterVisualState.Danger;
+        if (args.Integrity < 75)
+            return SuperMatterVisualState.Warning;
+        if (args.IsActive)
+            return SuperMatterVisualState.Okay;
+        return SuperMatterVisualState.Disable;
     }
 }

@@ -17,7 +17,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2" # TEST QoL
+          bounds: "-0.3,-0.3,0.3,0.3" # TEST QoL
         mask:
           - Impassable
           - MidImpassable
@@ -50,11 +50,25 @@
     enabled: false
     ShootRange: 3
   - type: Sprite
+    offset: 0, 0.25
     sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
-    state: base
+    layers:
+    - state: base
+      map: ["enum.SuperMatterVisualLayers.Lights"]
+    - state: field
+      shader: unshaded
+      visible: false
+      map: ["enum.SuperMatterVisualLayers.UnShaded"]
   - type: Icon
     sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
     state: icon
+  - type: Appearance
+  - type: SuperMatterObserverVisualReceiver
+    unActiveState: base
+    onState: base
+    warningState: glow
+    dangerState: psy
+    delaminateState: psy
   - type: PointLight
     enabled: true
     radius: 10
