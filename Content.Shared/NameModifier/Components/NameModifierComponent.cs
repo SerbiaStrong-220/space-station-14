@@ -16,5 +16,6 @@ public sealed partial class NameModifierComponent : Component
     /// The entity's name without any modifiers applied.
     /// </summary>
     [DataField, AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWrite)] // ss220 access to zombie name fix
     public string BaseName = string.Empty;
 }

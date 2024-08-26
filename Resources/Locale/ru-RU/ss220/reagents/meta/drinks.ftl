@@ -10,3 +10,5 @@ reagent-name-bankate = банкате
 reagent-desc-bankate = Выглядит как то, что не стоит пить...
 reagent-name-hot-arachne = горячая арахна
 reagent-desc-hot-arachne = Горячие арахны всего в 300 метрах от вас!
+reagent-name-french-75 = френч-75
+reagent-desc-french-75 = Не только блюспейс артиллерия всё ещё может задать жару.

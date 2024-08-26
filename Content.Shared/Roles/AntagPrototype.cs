@@ -1,6 +1,8 @@
 using Content.Shared.Guidebook;
+using Content.Shared.Players.PlayTimeTracking;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Roles;
 
@@ -38,6 +40,17 @@ public sealed partial class AntagPrototype : IPrototype
     /// </summary>
     [DataField("setPreference")]
     public bool SetPreference { get; private set; }
+
+    //SS220 Add antags playtime trackers begin
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<PlayTimeTrackerPrototype>))]
+    public string? PlayTimeTracker { get; private set; }
+
+    /// <summary>
+    /// A color representing this antag to use for text.
+    /// </summary>
+    [DataField]
+    public Color AntagColor = Color.Red;
+    //SS220 Add antags playtime trackers end
 
     /// <summary>
     ///     Requirements that must be met to opt in to this antag role.
