@@ -637,7 +637,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
+    - state: laser-mag-unshaded-5
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
@@ -647,10 +647,21 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
-    fireCost: 100
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: RedMediumLaser
+      name: firemode-name-laser
+      fireCost: 100
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      magState: laser-mag
+    - proto: BulletDisabler
+      name: firemode-name-disabler
+      fireCost: 100
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      magState: disabler-mag
   - type: MagazineVisuals
-    magState: mag
-    steps: 5
+    magState: laser-mag
+    steps: 6
     zeroVisible: true
   - type: BatterySelfRecharger
     autoRecharge: true
