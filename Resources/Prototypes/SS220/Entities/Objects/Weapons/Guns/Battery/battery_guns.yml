@@ -647,7 +647,6 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
-    #ss220 add stun mode begin
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: RedMediumLaser
@@ -660,12 +659,9 @@
       fireCost: 100
       soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
       magState: disabler-mag
-    #ss220 add stun mode end
   - type: MagazineVisuals
-    #ss220 add stun mode begin
-    magState: laser-mag     #changed from magState: mag -> magState: laser-mag
-    steps: 6        #changed from steps: 5 -> steps 6
-    #ss220 add stun mode end
+    magState: laser-mag
+    steps: 6
     zeroVisible: true
   - type: BatterySelfRecharger
     autoRecharge: true
