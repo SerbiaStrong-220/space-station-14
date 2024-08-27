@@ -54,21 +54,27 @@
     sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
     layers:
     - state: base
-      map: ["enum.SuperMatterVisualLayers.Lights"]
+      map: ["enum.SuperMatterVisualLayers.Shaded"]
     - state: field
       shader: unshaded
       visible: false
-      map: ["enum.SuperMatterVisualLayers.UnShaded"]
+      map: ["enum.SuperMatterVisualLayers.Unshaded"]
   - type: Icon
     sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
     state: icon
   - type: Appearance
   - type: SuperMatterObserverVisualReceiver
-    unActiveState: base
-    onState: base
-    warningState: glow
-    dangerState: psy
-    delaminateState: psy
+    unActiveState:
+      shaded: icon
+      unshaded: field
+    onState:
+      shaded: base
+    warningState:
+      shaded: glow
+    dangerState:
+      shaded: psy
+    delaminateState:
+      unshaded: psy
   - type: PointLight
     enabled: true
     radius: 10

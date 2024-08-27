@@ -16,12 +16,12 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Appearance
-  - type: SuperMatterObserverVisualReceiver
-    unActiveState: icon
-    onState: icon
-    disabledState: !!str off
-    dangerState: shame
-    delaminateState: broken
+  # - type: SuperMatterObserverVisualReceiver
+  #   unActiveState: icon
+  #   onState: icon
+  #   disabledState: !!str off
+  #   dangerState: shame
+  #   delaminateState: broken
   - type: Sprite
     drawdepth: AboveFovOverlay #SS220 FoV
     sprite: Structures/Wallmounts/screen.rsi
@@ -47,16 +47,10 @@
     noRot: true
     layers:
     - state: !!str off
-      map: ["enum.SuperMatterVisualLayers.Lights"]
+      map: ["enum.SuperMatterVisualLayers.Shaded"]
     - state: icon
       shader: unshaded
-      map: ["enum.SuperMatterVisualLayers.Lights"]
-    - state: shame
-      shader: unshaded
-      map: ["enum.SuperMatterVisualLayers.Lights"]
-    - state: broken
-      shader: unshaded
-      map: ["enum.SuperMatterVisualLayers.Lights"]
+      map: ["enum.SuperMatterVisualLayers.Unshaded"]
 
 - type: entity
   id: SuperMatterCrystalScreen
@@ -74,11 +68,7 @@
     noRot: true
     layers:
     - state: !!str off
+      map: ["enum.SuperMatterVisualLayers.Shaded"]
     - state: icon
       shader: unshaded
-      map: ["enum.SuperMatterVisualLayers.Lights"]
-    - state: shame
-      shader: unshaded
-      visible: false
-    - state: broken
-      shader: unshaded
+      map: ["enum.SuperMatterVisualLayers.Unshaded"]

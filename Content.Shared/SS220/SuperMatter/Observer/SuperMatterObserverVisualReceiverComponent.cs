@@ -9,17 +9,17 @@ namespace Content.Shared.SS220.SuperMatter.Observer;
 public sealed partial class SuperMatterObserverVisualReceiverComponent() : Component
 {
     [DataField, AutoNetworkedField]
-    public string? UnActiveState;
+    public Dictionary<SuperMatterVisualLayers, string>? UnActiveState;
     [DataField, AutoNetworkedField]
-    public string? OnState;
+    public Dictionary<SuperMatterVisualLayers, string>? OnState;
     [DataField, AutoNetworkedField]
-    public string? WarningState;
+    public Dictionary<SuperMatterVisualLayers, string>? WarningState;
     [DataField, AutoNetworkedField]
-    public string? DisabledState;
+    public Dictionary<SuperMatterVisualLayers, string>? DisabledState;
     [DataField, AutoNetworkedField]
-    public string? DangerState;
+    public Dictionary<SuperMatterVisualLayers, string>? DangerState;
     [DataField, AutoNetworkedField]
-    public string? DelaminateState;
+    public Dictionary<SuperMatterVisualLayers, string>? DelaminateState;
 }
 
 public enum SuperMatterVisualState
@@ -33,8 +33,8 @@ public enum SuperMatterVisualState
 }
 public enum SuperMatterVisualLayers
 {
-    Lights,
-    UnShaded
+    Shaded,
+    Unshaded
 }
 public enum SuperMatterVisuals : byte
 {

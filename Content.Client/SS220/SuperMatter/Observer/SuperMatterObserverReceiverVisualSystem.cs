@@ -21,50 +21,63 @@ public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
 
         if (!_appearance.TryGetData<SuperMatterVisualState>(entity.Owner, SuperMatterVisuals.VisualState, out var state, args.Component))
             return;
-
-        if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Lights, out var layer))
+        if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Shaded, out var layer))
             return;
-        if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.UnShaded, out var unshadedLayer))
+        if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Unshaded, out var unshadedLayer))
             return;
+        Dictionary<SuperMatterVisualLayers, int> layers = new()
+                {{ SuperMatterVisualLayers.Shaded, layer },
+                    { SuperMatterVisualLayers.Unshaded, unshadedLayer }};
         // For those who wanted to make it right. Make it, thanks
-        var isUnshadedVisible = false;
         switch (state)
         {
             case SuperMatterVisualState.Disable:
-                isUnshadedVisible = true;
                 if (entity.Comp.DisabledState == null)
                     break;
-                args.Sprite.LayerSetState(layer, entity.Comp.DisabledState);
+                SetVisualLayers(entity.Comp.DisabledState, layers, args.Sprite);
                 break;
             case SuperMatterVisualState.UnActiveState:
-                isUnshadedVisible = true;
                 if (entity.Comp.UnActiveState == null)
                     break;
-                args.Sprite.LayerSetState(layer, entity.Comp.UnActiveState);
+                SetVisualLayers(entity.Comp.UnActiveState, layers, args.Sprite);
                 break;
             case SuperMatterVisualState.Okay:
                 if (entity.Comp.OnState == null)
                     break;
-                args.Sprite.LayerSetState(layer, entity.Comp.OnState);
+                SetVisualLayers(entity.Comp.OnState, layers, args.Sprite);
                 break;
             case SuperMatterVisualState.Warning:
                 if (entity.Comp.WarningState == null)
                     break;
-                args.Sprite.LayerSetState(layer, entity.Comp.WarningState);
+                SetVisualLayers(entity.Comp.WarningState, layers, args.Sprite);
                 break;
             case SuperMatterVisualState.Danger:
                 if (entity.Comp.DangerState == null)
                     break;
-                args.Sprite.LayerSetState(layer, entity.Comp.DangerState);
+                SetVisualLayers(entity.Comp.DangerState, layers, args.Sprite);
                 break;
             case SuperMatterVisualState.Delaminate:
                 if (entity.Comp.DelaminateState == null)
                     break;
-                args.Sprite.LayerSetState(layer, entity.Comp.DelaminateState);
+                SetVisualLayers(entity.Comp.DelaminateState, layers, args.Sprite);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        args.Sprite.LayerSetVisible(unshadedLayer, isUnshadedVisible);
+    }
+    private void SetVisualLayers(Dictionary<SuperMatterVisualLayers, string> state, Dictionary<SuperMatterVisualLayers, int> layers, SpriteComponent sprite)
+    {
+        foreach (SuperMatterVisualLayers visualLayerKey in Enum.GetValues(typeof(SuperMatterVisualLayers)))
+        {
+            if (!layers.TryGetValue(visualLayerKey, out var layer))
+                continue;
+            if (!state.TryGetValue(visualLayerKey, out var rsiState))
+            {
+                sprite.LayerSetVisible(layers[visualLayerKey], false);
+                continue;
+            }
+            sprite.LayerSetState(layer, rsiState);
+            sprite.LayerSetVisible(layer, true);
+        }
     }
 }
