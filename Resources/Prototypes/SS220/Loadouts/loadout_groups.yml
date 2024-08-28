@@ -340,8 +340,18 @@
   - ChefBeltApronBlack
   - ChefBeltApronRed
   - ChefBeltApronSenior
-  # Шеф-повар (Начало)
-#! Сервис
+  # Шеф-повар (Конец)
+
+  # Уборщик (Начало)
+- type: loadoutGroup
+  id: JanitorOrange
+  name: Уборщик, обувь
+  loadouts:
+  - JanitorShoes
+  - JanitorOrangeShoes
+  # Уборщик (Конец)
+
+#! Сервис (Конец)
 
 #! Разное
 
