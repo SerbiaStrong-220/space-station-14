@@ -934,13 +934,12 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
-  - type: StaminaDamageOnCollide
-    damage: 15
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
         Heat: 2
+        Stamina: 20
     soundHit:
       collection: WeakHit
     forceSound: true
