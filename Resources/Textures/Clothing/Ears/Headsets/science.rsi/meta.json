@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Made by Hqlle and SonicHDC (github)",
+  "license": "CC-BY-SA-3.0, alt-equipped-EARS-secdog && equipped-EARS-secdog EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Hqlle and SonicHDC (github), alt-equipped-EARS-secdog && equipped-EARS-secdog Made by Dinazewwr (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -19,6 +19,14 @@
     },
     {
       "name": "alt-equipped-EARS",
+      "directions": 4
+    },
+    {
+      "name": "alt-equipped-EARS-secdog",
+      "directions": 4
+    },
+    {
+      "name": "equipped-EARS-secdog",
       "directions": 4
     }
   ]
