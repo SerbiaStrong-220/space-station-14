@@ -166,6 +166,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitJanitorOrange
+  name: фиолетовая униформа с оранжевыми подтяжками
+  description: Фиолетовая униформа уборщика, но с оранжевыми штанами на подтяжках.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor.rsi
+
 # Medical
 
   # Парамед

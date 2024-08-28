@@ -7,3 +7,19 @@
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesJanitorOrange
+  name: ораньжевые галоши
+  description: Оранжевые галоши, чтобы кровь на ваших ногах была менее заметна.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
+  - type: NoSlip
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.75
