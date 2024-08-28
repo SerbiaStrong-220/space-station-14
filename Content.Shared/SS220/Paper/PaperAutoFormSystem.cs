@@ -19,17 +19,14 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
 
     public string ReplaceKeyWords(Entity<PaperComponent> ent, string content)
     {
-        if (string.IsNullOrEmpty(content))
-            return content;
-
         return Regex.Replace(content, "\\u0025\\b(\\w+)\\b", match =>
         {
             var word = match.Value.ToLower();
 
             if (word == "%date")
             {
-                var day = DateTime.Now.Day;
-                var month = DateTime.Now.Month;
+                var day = DateTime.UtcNow.AddHours(3).Day;
+                var month = DateTime.UtcNow.AddHours(3).Month;
                 var year = 2568;
                 return $"{day}.{month}.{year}";
             }
