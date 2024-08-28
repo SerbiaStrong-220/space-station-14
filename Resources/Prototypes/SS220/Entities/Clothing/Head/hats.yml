@@ -189,18 +189,6 @@
     - HamsterWearable
     - WhitelistChameleon
 
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatJanitorOrange
-  name: оранжевая каска
-  description: Окрашенная в оранжевый цвет каска.
-  suffix: Не маппить
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/janitor.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/janitor.rsi
-
 # Служба безопасности
 
   # Пилот

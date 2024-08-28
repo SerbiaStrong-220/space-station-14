@@ -13,13 +13,6 @@
   equipment:
     head: ClothingHeadHatPurplesoft
 
-
-# Shoes
-- type: loadout
-  id: JanitorShoes
-  equipment:
-    shoes: ClothingShoesGaloshes #SS220-Add-Goloshes-to-the-loadout
-
 # Jumpsuit
 - type: loadout
   id: JanitorJumpsuit
