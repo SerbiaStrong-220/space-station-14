@@ -28,7 +28,7 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
                 var day = DateTime.UtcNow.AddHours(3).Day;
                 var month = DateTime.UtcNow.AddHours(3).Month;
                 var year = 2568;
-                return $"{day}.{month}.{year}";
+                return $"{day:00}.{month:00}.{year}";
             }
 
             if (word == "%time")
