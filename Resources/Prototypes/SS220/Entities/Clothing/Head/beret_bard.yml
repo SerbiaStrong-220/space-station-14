@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretBard #SS220 bard loadout
+  name: beret with feather
+  description: Will add atmosphere!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi

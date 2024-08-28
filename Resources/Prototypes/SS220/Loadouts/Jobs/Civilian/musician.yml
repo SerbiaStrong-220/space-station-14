@@ -1,0 +1,52 @@
+# SS220 bard loadout
+
+# Bard Time
+
+- type: loadoutEffectGroup
+  id: MusicianBard
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMusician
+      time: 108000 #30 часов
+
+# Head
+
+- type: loadout
+  id: BardHead
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MusicianBard
+  equipment:
+    head: ClothingHeadHatBeretBard
+
+# Jumpsuit
+
+- type: loadout
+  id: BardUniform
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MusicianBard
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBard
+
+# Outer clothing
+
+- type: loadout
+  id: BardApron
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MusicianBard
+  equipment:
+    outerClothing: ClothingOuterApronBard
+
+# Shoes
+
+- type: loadout
+  id: BardShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MusicianBard
+  equipment:
+    shoes: ClothingShoesBootsBard
