@@ -24,11 +24,11 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -91,6 +91,7 @@
     capacity: 99
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/10x24.rsi
+#SS220-FixAmmoSprite-Begin
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -100,6 +101,7 @@
     magState: mag
     steps: 7
     zeroVisible: false
+#SS220-FixAmmoSprite-End
 
 - type: entity
   id: MagazinePistolCaselessRifle
