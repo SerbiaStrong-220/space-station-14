@@ -221,6 +221,15 @@
   - MedicalWinterBoots
   - SecMedWinterBoots
   # Бригмедик (Конец)
+
+  # Врач (Начало)
+- type: loadoutGroup
+  id: MedicalNeck
+  minLimit: 0
+  name: loadout-group-medical-neck
+  loadouts:
+  - WhiteScarf
+  # Врач (Конец)
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
