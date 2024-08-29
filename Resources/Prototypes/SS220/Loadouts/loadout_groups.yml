@@ -359,7 +359,16 @@
   - BardShoes
   # Музыкант (конец)
 
-#! Сервис
+# Уборщик (Начало)
+- type: loadoutGroup
+  id: JanitorShoes
+  name: Уборщик, Обувь
+  loadouts:
+  - ShoesGaloshes
+  - JanitorOrangeShoes
+# Уборщик (Конец)
+
+#! Сервис (Конец)
 
 #! Разное
 

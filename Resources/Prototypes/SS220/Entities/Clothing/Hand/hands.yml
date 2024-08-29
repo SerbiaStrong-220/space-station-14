@@ -38,3 +38,16 @@
   - type: GloveHeatResistance
     heatResistance: 1400
   - type: Insulated
+
+# Уборщик
+- type: entity
+  parent: ClothingHandsGlovesJanitor
+  id: ClothingHandsOrangeGlovesJanitor
+  name: ораньжевые резиновые перчатки
+  description: Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/janitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/janitor.rsi

@@ -367,6 +367,7 @@
   minLimit: 0
   loadouts:
   - JanitorHead
+  - JanitorOrangeHat #SS220-Add-new-Janitor-Hat-to-the-loadout
 
 - type: loadoutGroup
   id: JanitorJumpsuit
@@ -375,6 +376,7 @@
   - JanitorJumpsuit
   - JanitorJumpskirt
   - JanitorBlueJumpsuit #SS220-Janitor-Control
+  - JanitorOrangeJumpsuit #SS220-Add-new-janitor-jumpsuit-to-the-loadout
 
 - type: loadoutGroup
   id: JanitorGloves
@@ -382,6 +384,7 @@
   minLimit: 0
   loadouts:
   - JanitorRubberGloves
+  - JanitorOrangeGloves #SS220-Add-new-Janitor-gloves-to-the-loadout
   - OrangeGloves
   - PurpleGloves
 

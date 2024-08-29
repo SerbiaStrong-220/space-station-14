@@ -46,6 +46,14 @@
   equipment:
     outerClothing: ClothingOuterWinterJani
 
+# Shoes
+#SS220-Add-Goloshes-to-the-loadout begin
+- type: loadout
+  id: ShoesGaloshes
+  equipment:
+    shoes: ClothingShoesGaloshes
+#SS220-Add-Goloshes-to-the-loadout end
+
 # Misc
 - type: loadout
   id: JanitorGoldenPlunger
