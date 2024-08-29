@@ -49,8 +49,15 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi
     layers:
-      - state: base
+      - state: base #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Base" ]
+      - state: base-6 #ss-220 sprite fix
+        map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base #ss-220 sprite fix
+    steps: 7
+    zeroVisible: false
+  - type: Appearance
 
 - type: entity
   id: SpeedLoaderMagnumIncendiary
