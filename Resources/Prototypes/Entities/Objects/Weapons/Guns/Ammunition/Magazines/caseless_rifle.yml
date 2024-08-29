@@ -91,6 +91,7 @@
     capacity: 99
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/10x24.rsi
+#SS220-FixAmmoSprite-Begin
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -100,6 +101,8 @@
     magState: mag
     steps: 7
     zeroVisible: false
+#SS220-FisAmmoSprite-End
+
 
 - type: entity
   id: MagazinePistolCaselessRifle
