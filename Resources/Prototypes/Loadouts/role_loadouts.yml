@@ -148,6 +148,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - BotanistBelt #SS220 druid loadout
+  - BotanistNeck #SS220 druid loadout
+  - BotanistShoes #SS220 druid loadout
 
 - type: roleLoadout
   id: JobClown
