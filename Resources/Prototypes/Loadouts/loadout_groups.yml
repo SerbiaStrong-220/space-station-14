@@ -547,6 +547,7 @@
   loadouts:
   - MusicianWintercoat
   - BardApron #SS220 bard loadout
+  - DangerCoat #SS220 danger coat
 
 - type: loadoutGroup
   id: Instruments
