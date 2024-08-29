@@ -935,13 +935,13 @@
       fly-by: *flybyfixture
   - type: Ammo
   #- type: StaminaDamageOnCollide SS220-FIX
-  #  damage: 15
+  #  damage: 15 SS220-FIX
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
         Heat: 2
-        Stamina: 20
+        Stamina: 20 # SS220-BUFF
     soundHit:
       collection: WeakHit
     forceSound: true
