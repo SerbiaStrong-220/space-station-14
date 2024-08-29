@@ -101,7 +101,8 @@
     magState: mag
     steps: 7
     zeroVisible: false
-#SS220-FixAmmoSprite-End
+#SS220-FisAmmoSprite-End
+
 
 - type: entity
   id: MagazinePistolCaselessRifle

@@ -99,6 +99,7 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi
     layers:
+#SS220-FixAmmoSprite-Begin
       - state: piercing #ss-220 sprite fix
         map: [ "enum.GunVisualLayers.Base" ]
       - state: base-6 #ss-220 sprite fix
@@ -108,6 +109,7 @@
     steps: 7
     zeroVisible: false
   - type: Appearance
+#SS220-FisAmmoSprite-End
 
 - type: entity
   id: SpeedLoaderMagnumUranium
