@@ -54,38 +54,33 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
                         return stationTime.ToString("hh\\:mm\\:ss");
                     }
 
-                case ReplacedData.Name:
+                case ReplacedData.Name when writer != null:
                     {
-                        if (writer != null)
-                        {
-                            if (TryComp<MetaDataComponent>(writer.Value, out var metaData))
-                                return metaData.EntityName;
-                        }
+                        if (TryComp<MetaDataComponent>(writer.Value, out var metaData))
+                            return metaData.EntityName;
                         break;
                     }
 
-                case ReplacedData.Job:
+                case ReplacedData.Job when writer != null:
                     {
-                        if (writer != null)
+                        if (_inventorySystem.TryGetSlotEntity(writer.Value, "id", out var idUid))
                         {
-                            if (_inventorySystem.TryGetSlotEntity(writer.Value, "id", out var idUid))
+                            // PDA
+                            if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
+                                TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
+                                id.JobTitle != null)
                             {
-                                // PDA
-                                if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
-                                    TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
-                                    id.JobTitle != null)
-                                {
-                                    return id.JobTitle;
-                                }
+                                return id.JobTitle;
+                            }
 
-                                // ID Card
-                                if (EntityManager.TryGetComponent(idUid, out id) &&
-                                    id.JobTitle != null)
-                                {
-                                    return id.JobTitle;
-                                }
+                            // ID Card
+                            if (EntityManager.TryGetComponent(idUid, out id) &&
+                                id.JobTitle != null)
+                            {
+                                return id.JobTitle;
                             }
                         }
+
                         break;
                     }
 
