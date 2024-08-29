@@ -273,3 +273,9 @@
     name: ghost-role-information-en-name
     description: ghost-role-information-en-description
     rules: ghost-role-information-silicon-rules
+
+- type: entity
+  name: крокодил 
+  parent: SimpleMobBase
+  id: MobCrocodile 
+  description: он же не кусается, да...?
