@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterApronBard #SS220 bard loadout
+  name: bard cape
+  description: Emphasizes the owner's style.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi

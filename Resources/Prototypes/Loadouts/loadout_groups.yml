@@ -538,6 +538,7 @@
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
+  - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup
   id: MusicianOuterClothing
@@ -545,6 +546,7 @@
   minLimit: 0
   loadouts:
   - MusicianWintercoat
+  - BardApron #SS220 bard loadout
 
 - type: loadoutGroup
   id: Instruments

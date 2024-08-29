@@ -24,3 +24,5 @@ ent-ClothingHeadHatSalvage = кепка утилизатора
     .desc = Зачем они носят кепки, если работают в пещерах?
 ent-ClothingHeadHatSalvageFlipped = кепка утилизатора
     .desc = Зачем они носят кепки, если работают в пещерах?
+ent-ClothingHeadHatBeretBard = берет с пером
+    .desc = Добавит атмосферы!

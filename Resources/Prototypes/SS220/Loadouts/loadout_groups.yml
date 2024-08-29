@@ -340,7 +340,25 @@
   - ChefBeltApronBlack
   - ChefBeltApronRed
   - ChefBeltApronSenior
-  # Шеф-повар (Начало)
+  # Шеф-повар (Конец)
+
+  # Музыкант (начало)
+- type: loadoutGroup
+  id: MusicianHead
+  name: loadout-group-musician-head
+  minLimit: 0
+  loadouts:
+  - BardHead
+
+- type: loadoutGroup
+  id: MusicianShoes
+  name: loadout-group-musician-shoes
+  minLimit: 0
+  loadouts:
+  - MusicianBootsLaceup
+  - BardShoes
+  # Музыкант (конец)
+
 #! Сервис
 
 #! Разное
