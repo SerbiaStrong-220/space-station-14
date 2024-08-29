@@ -17,58 +17,91 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
     [Dependency] private readonly IdExaminableSystem _idExaminableSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
+    private readonly Dictionary<string, ReplacedData> _keyWordsReplace = new()
+    {
+        { "%date", ReplacedData.Date },
+        { "%дата", ReplacedData.Date },
+        { "%time", ReplacedData.Time },
+        { "%время", ReplacedData.Time },
+        { "%name", ReplacedData.Name },
+        { "%имя", ReplacedData.Name },
+        { "%job", ReplacedData.Job },
+        { "%должность", ReplacedData.Job }
+    };
+
     public string ReplaceKeyWords(Entity<PaperComponent> ent, string content)
     {
         return Regex.Replace(content, "\\u0025\\b(\\w+)\\b", match =>
         {
             var word = match.Value.ToLower();
+            if (!_keyWordsReplace.TryGetValue(word, out var replacedData))
+                return word;
 
-            if (word == "%date")
+            var writer = ent.Comp.Writer;
+            switch (replacedData)
             {
-                var day = DateTime.UtcNow.AddHours(3).Day;
-                var month = DateTime.UtcNow.AddHours(3).Month;
-                var year = 2568;
-                return $"{day:00}.{month:00}.{year}";
-            }
-
-            if (word == "%time")
-            {
-                var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
-                return stationTime.ToString("hh\\:mm\\:ss");
-            }
-
-            if (ent.Comp.Writer != null)
-            {
-                var writerUid = (EntityUid)ent.Comp.Writer;
-                if (word == "%name")
-                {
-                    if (TryComp<MetaDataComponent>(writerUid, out var metaData))
-                        return metaData.EntityName;
-                }
-
-                if (word == "%job")
-                {
-                    if (_inventorySystem.TryGetSlotEntity(writerUid, "id", out var idUid))
+                case ReplacedData.Date:
                     {
-                        // PDA
-                        if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
-                            TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
-                            id.JobTitle != null)
-                        {
-                            return id.JobTitle;
-                        }
-
-                        // ID Card
-                        if (EntityManager.TryGetComponent(idUid, out id) &&
-                            id.JobTitle != null)
-                        {
-                            return id.JobTitle;
-                        }
+                        var day = DateTime.UtcNow.AddHours(3).Day;
+                        var month = DateTime.UtcNow.AddHours(3).Month;
+                        var year = 2568;
+                        return $"{day:00}.{month:00}.{year}";
                     }
-                }
+
+                case ReplacedData.Time:
+                    {
+                        var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
+                        return stationTime.ToString("hh\\:mm\\:ss");
+                    }
+
+                case ReplacedData.Name:
+                    {
+                        if (writer != null)
+                        {
+                            if (TryComp<MetaDataComponent>(writer.Value, out var metaData))
+                                return metaData.EntityName;
+                        }
+                        break;
+                    }
+
+                case ReplacedData.Job:
+                    {
+                        if (writer != null)
+                        {
+                            if (_inventorySystem.TryGetSlotEntity(writer.Value, "id", out var idUid))
+                            {
+                                // PDA
+                                if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
+                                    TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
+                                    id.JobTitle != null)
+                                {
+                                    return id.JobTitle;
+                                }
+
+                                // ID Card
+                                if (EntityManager.TryGetComponent(idUid, out id) &&
+                                    id.JobTitle != null)
+                                {
+                                    return id.JobTitle;
+                                }
+                            }
+                        }
+                        break;
+                    }
+
+                default:
+                    break;
             }
 
             return word;
         });
+    }
+
+    private enum ReplacedData : byte
+    {
+        Date,
+        Time,
+        Name,
+        Job,
     }
 }
