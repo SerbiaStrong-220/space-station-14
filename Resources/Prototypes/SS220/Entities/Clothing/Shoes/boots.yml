@@ -21,16 +21,3 @@
     sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
-
-# Уборщик
-- type: entity
-  parent: ClothingShoesGaloshes
-  id: ClothingShoesBootsOrangeGaloshes
-  name: оранжевые галоши
-  description: Резиновые ботинки.
-  suffix: Не маппить
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Shoes/Specific/janitor_control.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
