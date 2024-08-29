@@ -14,7 +14,6 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly IdExaminableSystem _idExaminableSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
     private readonly Dictionary<string, ReplacedData> _keyWordsReplace = new()
