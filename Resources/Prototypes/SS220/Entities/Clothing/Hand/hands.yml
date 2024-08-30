@@ -42,7 +42,7 @@
 - type: entity
   parent: ClothingHandsGlovesJanitor
   id: ClothingHandsGlovesOrangeJanitor
-  name: ораньжевые резиновые перчатки
+  name: оранжевые резиновые перчатки
   description: Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
   suffix: Не маппить
   components:

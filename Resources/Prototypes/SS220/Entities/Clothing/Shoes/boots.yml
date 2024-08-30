@@ -11,8 +11,8 @@
 - type: entity
   parent: ClothingShoesGaloshes
   id: ClothingShoesOrangeGaloshes
-  name: ораньжевые галоши
-  description: Ораньжевые резиновые ботинки.
+  name: оранжевые галоши
+  description: Оранжевые резиновые ботинки.
   suffix: Не маппить
   components:
   - type: Sprite
