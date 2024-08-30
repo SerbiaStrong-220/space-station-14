@@ -65,7 +65,7 @@
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 5
+  metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
@@ -91,12 +91,12 @@
   parent: BaseDrink
   desc: reagent-desc-eggnog
   physicalDesc: reagent-physical-desc-opaque
-  flavor: soda
+  flavor: milk
   color: "#ffb51c"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 4
+  metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
