@@ -25,11 +25,11 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 2
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -53,7 +53,7 @@
     layers:
     - state: pellets
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -67,7 +67,7 @@
     layers:
     - state: beanbag
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -81,7 +81,7 @@
     layers:
     - state: slug
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -95,5 +95,5 @@
     layers:
     - state: slug
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]

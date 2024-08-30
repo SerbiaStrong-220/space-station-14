@@ -21,3 +21,15 @@
     sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Specific/janitor.rsi
+
+# Ботаник
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesBootsDruid #SS220 druid loadout
+  name: druid spanks
+  description: Druid spanks made from natural materials.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi

@@ -637,7 +637,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
+    - state: laser-mag-unshaded-5 #SS220-add-stun-mode
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
@@ -647,10 +647,25 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser
-    fireCost: 100
+    #ss220 add stun mode begin
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: RedMediumLaser
+      name: firemode-name-laser
+      fireCost: 100
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      magState: laser-mag
+    - proto: BulletDisabler
+      name: firemode-name-disabler
+      fireCost: 100
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      magState: disabler-mag
+    #ss220 add stun mode end
   - type: MagazineVisuals
-    magState: mag
-    steps: 5
+    #ss220 add stun mode begin
+    magState: laser-mag     #changed from magState: mag -> magState: laser-mag
+    steps: 6        #changed from steps: 5 -> steps 6
+    #ss220 add stun mode end
     zeroVisible: true
   - type: BatterySelfRecharger
     autoRecharge: true
