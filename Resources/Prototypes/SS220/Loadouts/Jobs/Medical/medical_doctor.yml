@@ -40,3 +40,9 @@
     proto: MedicalDoctorTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlue
+
+# Neck
+- type: loadout
+  id: WhiteScarf
+  equipment:
+    neck: ClothingNeckScarfStripedWhite

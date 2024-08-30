@@ -20,7 +20,7 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/caseless_rifle.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 2
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -37,11 +37,11 @@
     layers:
     - state: base-10x24
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag10-1
+    - state: mag10-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag10
-    steps: 2
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -57,11 +57,11 @@
     layers:
     - state: base-b
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
+    - state: magb-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: magb
-    steps: 2
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -76,7 +76,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -90,6 +90,6 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice

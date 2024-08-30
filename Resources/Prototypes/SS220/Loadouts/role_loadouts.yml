@@ -58,6 +58,7 @@
   id: JobSeniorPhysician
   groups:
   - HatSeniorMedical
+  - MedicalNeck
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
