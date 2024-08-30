@@ -375,7 +375,33 @@
   loadouts:
   - ShoesGaloshes
   - JanitorOrangeShoes
-# Уборщик (Конец)
+# Уборщик (Конeц)
+
+  #Ботаник (начало)
+- type: loadoutGroup
+  id: BotanistNeck
+  name: loadout-group-botanist-neck
+  minLimit: 0
+  loadouts:
+  - BotanistDruidAmulet #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistBelt
+  name: loadout-group-botanist-belt
+  minLimit: 0
+  loadouts:
+  - BotanistBeltDefoult
+  - BotanistDruidBelt #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistShoes
+  name: loadout-group-botanist-shoes
+  minLimit: 0
+  loadouts:
+  - BotanistShoesBrown
+  - BotanistDruidShoes #SS220 druid loadout
+
+  #Ботаник (конец)
 
 #! Сервис (Конец)
 
