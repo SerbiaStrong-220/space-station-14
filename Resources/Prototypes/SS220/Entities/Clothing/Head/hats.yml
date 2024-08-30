@@ -204,7 +204,6 @@
     sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
 
 # Карго
-
   # Квартирмейстер
 - type: entity
   parent: ClothingHeadBase
