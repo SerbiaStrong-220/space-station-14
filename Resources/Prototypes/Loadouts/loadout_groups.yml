@@ -413,7 +413,6 @@
   - BotanistHeadWhite #SS220-BotanyResprite-End
   - BotanistBandana
   - BotanistBandanaBlue #SS220-BotanyResprite
-  - BotanistDruidHead #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistJumpsuit
