@@ -27,8 +27,8 @@
       layers:
         - state: syndie_lethal
     - type: InteractionPopup
-      interactDelay: 0
-      successChance: 0
+      interactDelay: 0.2
+      successChance: 0.8
       interactSuccessString: petting-success-generic
       interactFailureString: petting-failure-generic
       interactSuccessSound:
@@ -93,8 +93,8 @@
 - type: entity
   parent: LaserWeaponTurret
   name: одноразовая лазерная турель
-  id: LaserTurretSyndicateDisposable
-  suffix: Syndicate, Disposable
+  id: LaserTurretSyndicate
+  suffix: Syndicate
   components:
     - type: NpcFactionMember
       factions:
