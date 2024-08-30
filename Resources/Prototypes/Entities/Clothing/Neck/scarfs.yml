@@ -11,7 +11,9 @@
   - type: Tag
     tags:
       - Ian # SS220 Shapochki
-
+      - Scarf 
+      - ClothMade 
+      - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -26,6 +28,9 @@
   - type: Tag
     tags:
       - Ian # SS220 Shapochki
+      - Scarf 
+      - ClothMade 
+      - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -40,6 +45,9 @@
   - type: Tag
     tags:
       - Ian # SS220 Shapochki
+      - Scarf 
+      - ClothMade 
+      - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -54,6 +62,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
+        - Scarf 
+        - ClothMade 
+        - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -68,6 +79,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
+        - Scarf 
+        - ClothMade 
+        - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -93,6 +107,9 @@
     - type: Tag
       tags:
        - Ian # SS220 Shapochki
+       - Scarf 
+       - ClothMade 
+       - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -107,6 +124,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
+        - Scarf 
+        - ClothMade 
+        - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -121,6 +141,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
+        - Scarf 
+        - ClothMade 
+        - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -147,6 +170,9 @@
     - type: Tag
       tags:
        - Ian # SS220 Shapochki
+       - Scarf 
+       - ClothMade 
+       - WhitelistChameleon 
 
 - type: entity
   parent: ClothingScarfBase
@@ -161,3 +187,6 @@
   - type: Tag
     tags:
        - Ian # SS220 Shapochki
+       - Scarf 
+       - ClothMade 
+       - WhitelistChameleon 

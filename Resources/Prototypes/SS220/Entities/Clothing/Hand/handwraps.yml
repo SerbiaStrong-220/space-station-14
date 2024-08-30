@@ -16,6 +16,7 @@
   - type: Tag
     tags:
     - Handwraps
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHandsGlovesSyntheticBase

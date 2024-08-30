@@ -217,6 +217,7 @@
     tags:
     - ClownSuit
     - WhitelistChameleon
+    - ClothMade #SS220-FIX-ISSUE
 
 - type: entity
   parent: ClothingUniformJumpsuitClown

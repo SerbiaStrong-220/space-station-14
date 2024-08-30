@@ -150,6 +150,9 @@
   - type: WirelessNetworkConnection
     range: 1200
   - type: StationLimitedNetwork
+  - type: Tag
+    tags: 
+      - ClothMade
 
 - type: entity
   abstract: true

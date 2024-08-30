@@ -280,6 +280,7 @@
   - type: Tag
     tags:
     - Kangaroo
+    - WhitelistChameleon #SS220-FIX-ISSUE
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-insulative

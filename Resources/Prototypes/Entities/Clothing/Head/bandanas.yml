@@ -27,6 +27,8 @@
   - type: Tag
     tags:
     - Bandana
+    - WhitelistChameleon #SS220-FIX-ISSUE
+    - ClothMade #SS220-FIX-ISSUE
 
 - type: entity
   parent: [ClothingHeadBandBase, ClothingMaskBandBlack]

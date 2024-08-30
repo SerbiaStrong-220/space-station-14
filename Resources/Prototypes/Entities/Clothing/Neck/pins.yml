@@ -7,6 +7,9 @@
   components:
   - type: Item
     size: Tiny
+  - type: Tag #SS220-FIX-ISSUE
+    tags: #SS220-FIX-ISSUE
+    - WhitelistChameleon #SS220-FIX-ISSUE
 
 - type: entity
   parent: ClothingNeckPinBase
