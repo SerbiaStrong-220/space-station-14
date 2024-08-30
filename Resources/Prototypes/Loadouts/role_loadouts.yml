@@ -130,6 +130,7 @@
   - JanitorGloves
   - CommonBackpack
   - JanitorOuterClothing
+  - JanitorShoesOrange #SS220-OrangeJanitor
   - Glasses
   - Survival
   - Trinkets
@@ -148,6 +149,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - BotanistBelt #SS220 druid loadout
+  - BotanistNeck #SS220 druid loadout
+  - BotanistShoes #SS220 druid loadout
 
 - type: roleLoadout
   id: JobClown
@@ -179,9 +183,11 @@
   id: JobMusician
   groups:
   - GroupTankHarness
+  - MusicianHead #SS220 bard loadout
   - MusicianJumpsuit
   - CommonBackpack
   - MusicianOuterClothing
+  - MusicianShoes #SS220 bard loadout
   - Glasses
   - Survival
   - Trinkets
@@ -403,6 +409,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -420,6 +427,7 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
   - MedicalGloves
@@ -436,6 +444,7 @@
   id: JobMedicalIntern
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
   - MedicalBackpack
   - Glasses
@@ -447,6 +456,7 @@
   id: JobChemist
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
   - MedicalGloves
@@ -462,6 +472,7 @@
   groups:
   - GroupTankHarness
   - ParamedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ParamedicJumpsuit
   - MedicalGloves
@@ -478,6 +489,7 @@
   id: JobBrigmedic
   groups:
   - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - BrigmedicMask
   - BrigmedicJumpsuit
   - MedicalGloves
@@ -514,6 +526,7 @@
   id: JobPsychologist
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalBackpack
   - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses

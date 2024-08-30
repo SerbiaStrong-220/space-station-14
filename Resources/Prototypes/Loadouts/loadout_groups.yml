@@ -367,6 +367,7 @@
   minLimit: 0
   loadouts:
   - JanitorHead
+  - JanitorOrangeHat #SS220-OrangeJanitor
 
 - type: loadoutGroup
   id: JanitorJumpsuit
@@ -375,6 +376,7 @@
   - JanitorJumpsuit
   - JanitorJumpskirt
   - JanitorBlueJumpsuit #SS220-Janitor-Control
+  - JanitorOrangeJumpsuit #SS220-OrangeJanitor
 
 - type: loadoutGroup
   id: JanitorGloves
@@ -382,6 +384,7 @@
   minLimit: 0
   loadouts:
   - JanitorRubberGloves
+  - JanitorOrangeGloves #SS220-OrangeJanitor
   - OrangeGloves
   - PurpleGloves
 
@@ -410,6 +413,7 @@
   - BotanistHeadWhite #SS220-BotanyResprite-End
   - BotanistBandana
   - BotanistBandanaBlue #SS220-BotanyResprite
+  - BotanistDruidHead #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistJumpsuit
@@ -425,6 +429,7 @@
   - BotanistOverallsBlue #SS220-BotanyResprite-Begin
   - BotanistOverallsGreen
   - BotanistOverallsWhite #SS220-BotanyResprite-End
+  - BotanistDruidJumpsuit #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistBackpack
@@ -538,6 +543,7 @@
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
+  - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup
   id: MusicianOuterClothing
@@ -545,6 +551,8 @@
   minLimit: 0
   loadouts:
   - MusicianWintercoat
+  - BardApron #SS220 bard loadout
+  - DangerCoat #SS220 danger coat
 
 - type: loadoutGroup
   id: Instruments

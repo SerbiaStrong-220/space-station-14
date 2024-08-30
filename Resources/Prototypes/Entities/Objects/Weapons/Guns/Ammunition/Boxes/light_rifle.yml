@@ -20,7 +20,7 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/light_rifle.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 2
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -37,11 +37,11 @@
     layers:
     - state: base-b
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
+    - state: magb-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: magb
-    steps: 2
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -56,7 +56,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -70,7 +70,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice
 
@@ -85,7 +85,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
     - state: incendiary
 
@@ -100,6 +100,6 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium

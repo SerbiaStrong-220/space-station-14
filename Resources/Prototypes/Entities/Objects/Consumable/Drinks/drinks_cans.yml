@@ -257,9 +257,9 @@
         - ReagentId: SolDry
           Quantity: 30
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/sol_dry.rsi
+    sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/sol_dry.rsi
+    sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -527,9 +527,9 @@
           Quantity: 30
   - type: Drink
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/beer_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/beer_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
   - type: Tag
     tags:
     - Beer
@@ -549,9 +549,9 @@
           Quantity: 30
   - type: Drink
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/wine_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/wine_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
   - type: Tag
     tags:
     - Wine
