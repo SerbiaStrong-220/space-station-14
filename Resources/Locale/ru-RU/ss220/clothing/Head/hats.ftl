@@ -26,3 +26,5 @@ ent-ClothingHeadHatSalvageFlipped = кепка утилизатора
     .desc = Зачем они носят кепки, если работают в пещерах?
 ent-ClothingHeadHatBeretBard = берет с пером
     .desc = Добавит атмосферы!
+ent-ClothingHeadTiaraDruid = диадема друида
+        .desc = Символ гармонии с природой, даже среди звезд и планет.
