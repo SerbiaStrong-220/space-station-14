@@ -362,7 +362,7 @@
 # Уборщик (Начало)
 - type: loadoutGroup
   id: JanitorShoes
-  name: Уборщик, Обувь
+  name: уборщик, обувь
   loadouts:
   - ShoesGaloshes
   - JanitorOrangeShoes
