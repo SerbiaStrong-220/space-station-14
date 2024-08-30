@@ -428,7 +428,6 @@
   - BotanistOverallsBlue #SS220-BotanyResprite-Begin
   - BotanistOverallsGreen
   - BotanistOverallsWhite #SS220-BotanyResprite-End
-  - BotanistDruidJumpsuit #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistBackpack
