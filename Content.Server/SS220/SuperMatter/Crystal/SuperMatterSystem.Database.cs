@@ -1,7 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Linq;
+using Content.Server.SS220.SuperMatter;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Atmos;
+using Content.Shared.CartridgeLoader;
 using Content.Shared.SS220.SuperMatter.Ui;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
@@ -11,6 +13,10 @@ namespace Content.Server.SS220.SuperMatterCrystal;
 public sealed partial class SuperMatterSystem : EntitySystem
 {
     // TODO add shifts counter for not delaminate
+    private void InitializeDatabase()
+    {
+        SubscribeLocalEvent<SuperMatterObserverReceiverComponent, CartridgeUiReadyEvent>(OnCartridgeReceiverUIOpened);
+    }
     public void BroadcastData(Entity<SuperMatterComponent> crystal)
     {
         var (uid, comp) = crystal;
@@ -46,6 +52,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
         comp.PressureAccumulator = 0;
         ZeroGasMolesAccumulator(comp);
     }
+    private void OnCartridgeReceiverUIOpened(Entity<SuperMatterObserverReceiverComponent> entity, ref CartridgeUiReadyEvent args)
+    {
+        // if (!_userInterface.HasUi(entity, args.UiKey))
+        //     return;
+
+    }
+
     private void AddGasesToAccumulator(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         foreach (var gas in Enum.GetValues<Gas>())

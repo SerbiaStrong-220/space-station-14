@@ -5,8 +5,11 @@ using Content.Shared.SS220.SuperMatter.Ui;
 using Content.Client.SS220.SuperMatter.Ui;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.SuperMatter.Observer;
+using Content.Client.UserInterface.Fragments;
+using Content.Client.SS220.Cartridges;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
+// It isnt a warCrime if you make shittyCode... kinda...
 
 public sealed class SuperMatterObserverSystem : EntitySystem
 {
@@ -14,6 +17,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;
     private const float UpdateDelay = 1f;
@@ -29,6 +33,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
 
         SubscribeLocalEvent<SuperMatterObserverReceiverComponent, BoundUIOpenedEvent>(OnReceiverBoundUIOpened);
         SubscribeLocalEvent<SuperMatterObserverReceiverComponent, BoundUIClosedEvent>(OnReceiverBoundUIClosed);
+
         SubscribeNetworkEvent<SuperMatterStateUpdate>(OnCrystalUpdate);
     }
     public override void FrameUpdate(float frameTime)
@@ -51,8 +56,6 @@ public sealed class SuperMatterObserverSystem : EntitySystem
                     if (TryComp<ApcPowerReceiverComponent>(observerUid, out var powerReceiver)
                         && powerReceiver.Powered)
                     {
-                        if (!_userInterface.HasUi(smReceiverOwner, SuperMatterObserverUiKey.Key))
-                            return;
                         if (TrySendToUIState(smReceiverOwner,
                                                 new SuperMatterObserverInitState(new List<Entity<SuperMatterObserverComponent>>(_observerEntities))))
                             _smReceiverUIOwnersToInit.Remove(smReceiverOwner);
@@ -100,7 +103,6 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             var state = GetVisualState(args);
             foreach (var visualReceiver in _visualReceivers)
             {
-                // TODO make it possible to have multiple SMCrystals on one grid
                 _appearanceSystem.SetData(visualReceiver.Owner, SuperMatterVisuals.VisualState, state);
             }
 
@@ -149,12 +151,31 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     }
     private bool TrySendToUIState(EntityUid uid, BoundUserInterfaceState state)
     {
-        if (!_userInterface.TryGetOpenUi(uid, SuperMatterObserverUiKey.Key, out var bui))
+        if (_userInterface.TryGetOpenUi(uid, SuperMatterObserverUiKey.Key, out var bui))
         {
-            return false;
+            ((SuperMatterObserverBUI)bui).DirectUpdateState(state);
+            return true;
         }
-        ((SuperMatterObserverBUI)bui).DirectUpdateState(state);
-        return true;
+        if (TryComp<UIFragmentComponent>(uid, out var uiFragment)
+            && uiFragment.Ui != null
+            && uiFragment.Ui.GetType() == typeof(SupermatterObserverUi))
+        {
+            switch (state)
+            {
+                case SuperMatterObserverInitState:
+                    ((SupermatterObserverUi)uiFragment.Ui).DirectUpdateState(state);
+                    break;
+                case SuperMatterObserverUpdateState:
+                    if (!((SupermatterObserverUi)uiFragment.Ui).IsInitd)
+                    {
+                        _smReceiverUIOwnersToInit.Add(uid);
+                        return false;
+                    }
+                    ((SupermatterObserverUi)uiFragment.Ui).DirectUpdateState(state);
+                    return true;
+            }
+        }
+        return false;
     }
     private SuperMatterVisualState GetVisualState(SuperMatterStateUpdate args)
     {
