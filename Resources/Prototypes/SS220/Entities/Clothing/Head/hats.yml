@@ -119,8 +119,8 @@
   - type: Tag
     tags:
     - Ian
-    - WhitelistChameleon
-    - ClothMade
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+    - ClothMade #SS220-pr: FIX CLOTHING TAGS 
 
 # Сервис
 
