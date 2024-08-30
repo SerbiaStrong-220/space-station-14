@@ -38,7 +38,7 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<DnaComponent, TransferDnaEvent>(OnTransferDnaEvent);
             SubscribeLocalEvent<CleansForensicsComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);
 
-            SubscribeLocalEvent<ForensicsComponent, StrippableDoAfterEvent>(OnStrippableDoAfterFinished); //SS220 Fingerprint on strip
+            SubscribeLocalEvent<FingerprintComponent, StrippableDoAfterEvent>(OnStrippableDoAfterFinished); //SS220 Fingerprint on strip
 
         }
 
@@ -252,13 +252,13 @@ namespace Content.Server.Forensics
         }
 
         //SS220 Fingerprint on strip fix begin
-        private void OnStrippableDoAfterFinished(Entity<ForensicsComponent> entity, ref StrippableDoAfterEvent args)
+        private void OnStrippableDoAfterFinished(Entity<FingerprintComponent> entity, ref StrippableDoAfterEvent args)
         {
             if (args.Cancelled)
                 return;
 
             if (args.Used != null && args.InventoryOrHand && !args.InsertOrRemove)
-                ApplyEvidence(args.User, args.Used.Value);
+                ApplyEvidence(entity.Owner, args.Used.Value);
         }
         //SS220 Fingerprint on strip fix end
         #region Public API
