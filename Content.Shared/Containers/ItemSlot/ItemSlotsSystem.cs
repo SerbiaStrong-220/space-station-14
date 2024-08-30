@@ -209,6 +209,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 slots.Add(slot);
+                break;
             }
 
             if (slots.Count == 0)
