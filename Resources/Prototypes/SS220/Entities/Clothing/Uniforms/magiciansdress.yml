@@ -11,5 +11,5 @@
   - type: Tag
     tags:
      - MagicianDress
-     - ClothMade
-     - WhitelistChameleon
+     - ClothMade #SS220-pr: FIX CLOTHING TAGS 
+     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
