@@ -278,7 +278,7 @@
   name: крокодил 
   parent: SimpleMobBase
   id: MobCrocodile 
-  description: он не кусается, наверное. 
+  description: Он не кусается, наверное. 
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -333,7 +333,7 @@
     attackRate: 0.5
     damage:
       types:
-        Slash: 20
+        Piercing: 20
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.0
     baseSprintSpeed : 3.0
