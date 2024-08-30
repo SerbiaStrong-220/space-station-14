@@ -11,9 +11,9 @@
   - type: Tag
     tags:
       - Ian # SS220 Shapochki
-      - Scarf 
-      - ClothMade 
-      - WhitelistChameleon 
+      - Scarf # SS220-pr: FIX CLOTHING TAGS
+      - ClothMade # SS220-pr: FIX CLOTHING TAGS
+      - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -28,9 +28,9 @@
   - type: Tag
     tags:
       - Ian # SS220 Shapochki
-      - Scarf 
-      - ClothMade 
-      - WhitelistChameleon 
+      - Scarf # SS220-pr: FIX CLOTHING TAGS
+      - ClothMade # SS220-pr: FIX CLOTHING TAGS
+      - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -45,9 +45,9 @@
   - type: Tag
     tags:
       - Ian # SS220 Shapochki
-      - Scarf 
-      - ClothMade 
-      - WhitelistChameleon 
+      - Scarf # SS220-pr: FIX CLOTHING TAGS
+      - ClothMade # SS220-pr: FIX CLOTHING TAGS
+      - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -62,9 +62,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
-        - Scarf 
-        - ClothMade 
-        - WhitelistChameleon 
+        - Scarf # SS220-pr: FIX CLOTHING TAGS
+        - ClothMade # SS220-pr: FIX CLOTHING TAGS
+        - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -79,9 +79,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
-        - Scarf 
-        - ClothMade 
-        - WhitelistChameleon 
+        - Scarf # SS220-pr: FIX CLOTHING TAGS
+        - ClothMade # SS220-pr: FIX CLOTHING TAGS
+        - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -107,9 +107,9 @@
     - type: Tag
       tags:
        - Ian # SS220 Shapochki
-       - Scarf 
-       - ClothMade 
-       - WhitelistChameleon 
+       - Scarf # SS220-pr: FIX CLOTHING TAGS
+       - ClothMade # SS220-pr: FIX CLOTHING TAGS
+       - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -124,9 +124,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
-        - Scarf 
-        - ClothMade 
-        - WhitelistChameleon 
+        - Scarf # SS220-pr: FIX CLOTHING TAGS
+        - ClothMade # SS220-pr: FIX CLOTHING TAGS
+        - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -141,9 +141,9 @@
     - type: Tag
       tags:
         - Ian # SS220 Shapochki
-        - Scarf 
-        - ClothMade 
-        - WhitelistChameleon 
+        - Scarf # SS220-pr: FIX CLOTHING TAGS
+        - ClothMade # SS220-pr: FIX CLOTHING TAGS
+        - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -170,9 +170,9 @@
     - type: Tag
       tags:
        - Ian # SS220 Shapochki
-       - Scarf 
-       - ClothMade 
-       - WhitelistChameleon 
+       - Scarf # SS220-pr: FIX CLOTHING TAGS
+       - ClothMade # SS220-pr: FIX CLOTHING TAGS
+       - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingScarfBase
@@ -187,6 +187,6 @@
   - type: Tag
     tags:
        - Ian # SS220 Shapochki
-       - Scarf 
-       - ClothMade 
-       - WhitelistChameleon 
+       - Scarf # SS220-pr: FIX CLOTHING TAGS
+       - ClothMade # SS220-pr: FIX CLOTHING TAGS
+       - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
