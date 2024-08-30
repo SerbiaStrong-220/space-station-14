@@ -51,7 +51,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
             // We need stop the user from being pulled so they don't just get "attached" with whoever is pulling them.
             // This can for example happen when the user is cuffed and being pulled.
-            if (TryComp<PullableComponent>(entity.Owner, out var pull) && _pullingSystem.IsPulled(entity, pull))
+            if (TryComp<PullableComponent>(entity, out var pull) && _pullingSystem.IsPulled(entity, pull))
                 _pullingSystem.TryStopPull(entity, pull);
 
             if (!args.DamageIncreased || args.DamageDelta == null)
