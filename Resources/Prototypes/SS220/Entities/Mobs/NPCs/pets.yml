@@ -32,3 +32,22 @@
     - CannotSuicide
     - VimPilot
     - DoorBumpOpener
+
+
+- type: entity
+  name: Гена
+  parent: MobCrocodile
+  id: MobCrocodileGena
+  description: Очень аристократичный представитель крокодилов. Домашний.
+  components:
+  - type: GhostRole
+    name: "Гена"
+    description: "Вы очень добрый крокодил Гена. Агент Внутренних Дел - ваш чебурашка"
+  - type: GhostTakeoverAvailable
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: NpcFactionMember
+    factions:
+      - PetsNT
