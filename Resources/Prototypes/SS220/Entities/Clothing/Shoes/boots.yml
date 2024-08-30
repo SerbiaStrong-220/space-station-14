@@ -7,3 +7,15 @@
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
+
+- type: entity
+  parent: ClothingShoesGaloshes
+  id: ClothingShoesOrangeGaloshes
+  name: ораньжевые галоши
+  description: Ораньжевые резиновые ботинки.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
