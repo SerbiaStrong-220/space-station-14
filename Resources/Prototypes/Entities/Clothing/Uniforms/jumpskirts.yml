@@ -551,8 +551,8 @@
   - type: Tag #SS220 tohoUpdate Begin
     tags:
      - Janimaid #SS220 tohoUpdate End
-     - ClothMade
-     - WhitelistChameleon
+     - ClothMade #SS220-pr: FIX CLOTHING TAGS 
+     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   parent: ClothingUniformSkirtBase
