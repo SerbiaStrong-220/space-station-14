@@ -1,1 +1,1 @@
-loadout-group-chef-belt= Уборщик, обувь
+loadout-group-janitor-shoes = Уборщик, обувь
