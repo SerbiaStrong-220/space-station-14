@@ -28,3 +28,5 @@ ent-ClothingHeadHatBeretBard = берет с пером
     .desc = Добавит атмосферы!
 ent-ClothingHeadTiaraDruid = диадема друида
         .desc = Символ гармонии с природой, даже среди звезд и планет.
+ent-ClothingHeadBeretSalvageSpecialist = берет утилизатора
+        .desc = Берет утилизатора, потому что, ну, а почему нет?

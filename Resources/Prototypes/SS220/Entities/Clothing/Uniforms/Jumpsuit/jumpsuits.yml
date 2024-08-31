@@ -241,6 +241,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/flannel_salvage.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitExpeditor
+  name: expeditor uniform
+  description: Comfortable, practical and loose expeditor's uniform. Feel the space breeze, or rather the lack thereof, with every tip of your left and right hand.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
+
 # Syndicate
 
 - type: entity
