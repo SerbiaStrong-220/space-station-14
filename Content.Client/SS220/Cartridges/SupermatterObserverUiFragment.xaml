@@ -2,6 +2,7 @@
 <cartridges:SupermatterObserverUiFragment
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pda="clr-namespace:Content.Client.PDA"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:cartridges="clr-namespace:Content.Client.SS220.Cartridges"
     xmlns:plot="clr-namespace:Content.Client.SS220.UserInterface.PlotFigure"
@@ -13,14 +14,15 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Name="ContentHolderContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Name="ServerNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
-            <!-- Here goes all avaible "Servers" with SM data -->
-            <Label Text ="IM HERE TO BE HERE" />
+            <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" HorizontalExpand="True">
+                <BoxContainer Name="ServerNavigationBar" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
+                <!-- Here goes all avaible "Servers" with SM data -->
+                </BoxContainer>
+                <pda:PdaNavigationButton Name="RefreshButton" SetWidth="32" CurrentTabBorderThickness="0 0 2 0" IsCurrent="True"/>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
             <BoxContainer Name="CrystalNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
             <!-- Here goes all avaible "Servers" with SM data -->
-            <Label Text ="IM HERE TO BE HERE" />
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
             <ScrollContainer VerticalExpand="True" HorizontalExpand="True">

@@ -16,7 +16,7 @@
     - type: Cartridge
       programName: log-supermatter-observer-program-name
       icon:
-        sprite: Structures/Doors/Airlocks/Standard/security.rsi
-        state: closed
+        sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
+        state: icon
     - type: SuperMatterObserverReceiver
 

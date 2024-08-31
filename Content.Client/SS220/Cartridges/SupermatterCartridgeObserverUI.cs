@@ -1,7 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.UserInterface.Fragments;
-using Content.Shared.CartridgeLoader.Cartridges;
-using Content.Shared.CartridgeLoader;
 using Robust.Client.UserInterface;
 using Content.Shared.SS220.SuperMatter.Ui;
 
@@ -11,7 +9,7 @@ public sealed partial class SupermatterObserverUi : UIFragment
 {
     private SupermatterObserverUiFragment? _fragment;
     public bool IsInitd => _isInitd;
-    private bool _isInitd = false;
+    private bool _isInitd = true;
 
     public override Control GetUIFragmentRoot()
     {
@@ -20,6 +18,7 @@ public sealed partial class SupermatterObserverUi : UIFragment
     public override void Setup(BoundUserInterface userInterface, EntityUid? fragmentOwner)
     {
         _fragment = new SupermatterObserverUiFragment();
+        _isInitd = false;
 
         _fragment.OnServerButtonPressed += (args, observerComp) =>
             {
@@ -38,19 +37,8 @@ public sealed partial class SupermatterObserverUi : UIFragment
                     _fragment.CrystalKey = null;
                 _fragment.LoadCachedData();
             };
-    }
-    public void DirectUpdateState(BoundUserInterfaceState state)
-    {
-        switch (state)
-        {
-            case SuperMatterObserverInitState msg:
-                _fragment?.LoadState(msg.ObserverEntity);
-                _isInitd = true;
-                break;
-            case SuperMatterObserverUpdateState msg:
-                _fragment?.UpdateState(msg);
-                break;
-        }
+        _fragment.OnRefreshButton += (_) =>
+            _isInitd = false;
     }
     public override void UpdateState(BoundUserInterfaceState state)
     {
@@ -58,6 +46,7 @@ public sealed partial class SupermatterObserverUi : UIFragment
         {
             case SuperMatterObserverInitState msg:
                 _fragment?.LoadState(msg.ObserverEntity);
+                _isInitd = true;
                 break;
             case SuperMatterObserverUpdateState msg:
                 _fragment?.UpdateState(msg);

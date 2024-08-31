@@ -9,7 +9,7 @@ using Content.Client.UserInterface.Fragments;
 using Content.Client.SS220.Cartridges;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
-// It isnt a warCrime if you make shittyCode... kinda...
+// It isn't a warCrime if you make shittyCode... kinda...
 
 public sealed class SuperMatterObserverSystem : EntitySystem
 {
@@ -153,7 +153,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     {
         if (_userInterface.TryGetOpenUi(uid, SuperMatterObserverUiKey.Key, out var bui))
         {
-            ((SuperMatterObserverBUI)bui).DirectUpdateState(state);
+            ((SuperMatterObserverBUI)bui)?.DirectUpdateState(state);
             return true;
         }
         if (TryComp<UIFragmentComponent>(uid, out var uiFragment)
@@ -163,15 +163,15 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             switch (state)
             {
                 case SuperMatterObserverInitState:
-                    ((SupermatterObserverUi)uiFragment.Ui).DirectUpdateState(state);
-                    break;
+                    ((SupermatterObserverUi)uiFragment.Ui)?.UpdateState(state);
+                    return true;
                 case SuperMatterObserverUpdateState:
                     if (!((SupermatterObserverUi)uiFragment.Ui).IsInitd)
                     {
                         _smReceiverUIOwnersToInit.Add(uid);
                         return false;
                     }
-                    ((SupermatterObserverUi)uiFragment.Ui).DirectUpdateState(state);
+                    ((SupermatterObserverUi)uiFragment.Ui)?.UpdateState(state);
                     return true;
             }
         }
