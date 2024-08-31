@@ -27,7 +27,7 @@
     isOffableVisuals: true
   - type: SurveillanceCameraMicrophone
   - type: ActiveListener
-    range: 5
+    range: 10
   - type: DetectiveCamera
   - type: Tag
     tags:
