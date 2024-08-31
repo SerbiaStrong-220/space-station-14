@@ -507,6 +507,7 @@
   id: LoneOpsSpawn
   components:
   - type: StationEvent
+    cannotStartRandomly: true
     earliestStart: 35
     weight: 5.5
     minimumPlayers: 20
