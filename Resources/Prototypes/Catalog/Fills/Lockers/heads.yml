@@ -290,6 +290,7 @@
       - id: ClothingEyesGlassesSecurity
       - id: ClothingShoesBootsJack
       - id: CigarGoldCase
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.50
       - id: DoorRemoteSecurity
       - id: RubberStampHos
@@ -318,6 +319,7 @@
       - id: ClothingEyesGlassesSecurity
       - id: ClothingShoesBootsJack
       - id: CigarGoldCase
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.50
       - id: DoorRemoteSecurity
       - id: RubberStampHos
