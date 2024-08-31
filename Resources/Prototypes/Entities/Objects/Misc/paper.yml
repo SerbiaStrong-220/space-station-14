@@ -18,7 +18,7 @@
   - type: PaperLabelType
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
-    requireHands: false
+    requiresComplex: false
   - type: UserInterface
     interfaces:
       enum.PaperUiKey.Key:
@@ -278,6 +278,26 @@
   - type: Paper
 
 - type: entity
+  id: BoxFolderNuclearCodes
+  parent: BaseItem
+  name: nuclear code folder
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: folder-colormap
+      color: "#cc2323"
+    - state: folder-base
+    - state: folder-stamp-inverse
+      color: "#1dff00"
+  - type: SpawnItemsOnUse
+    items:
+    - id: NukeCodePaper
+    sound:
+      path: /Audio/Effects/packetrip.ogg
+  - type: Appearance
+
+- type: entity
   id: BoxFolderBase
   parent: BoxBase
   name: folder
@@ -420,10 +440,10 @@
 
 - type: entity
   id: BoxFolderCentCom
-  name: CentCom folder
+  name: CentComm folder
   parent: BoxFolderBase
   suffix: DO NOT MAP
-  description: CentCom's miserable little pile of secrets!
+  description: CentComm's miserable little pile of secrets!
   categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
@@ -493,8 +513,8 @@
 - type: entity
   id: BoxFolderCentComClipboard
   parent: BoxFolderClipboard
-  name: centcom clipboard
-  description: A luxurious clipboard upholstered with green velvet. Often seen carried by CentCom officials, seldom seen actually used.
+  name: CentComm clipboard
+  description: A luxurious clipboard upholstered with green velvet. Often seen carried by CentComm officials, seldom seen actually used.
   categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
@@ -515,7 +535,7 @@
 
 - type: entity
   id: BoxFolderQmClipboard
-  parent: BoxFolderClipboard
+  parent: [BoxFolderClipboard, BaseGrandTheftContraband]
   name: requisition digi-board
   description: A bulky electric clipboard, filled with shipping orders and financing details. With so many compromising documents, you ought to keep this safe.
   components:
@@ -578,7 +598,7 @@
     stealGroup: BoxFolderQmClipboard
 
 - type: entity
-  parent: Paper
+  parent: [Paper, BaseSyndicateContraband] # eat or burn your damn piece of paper damn thieves
   id: TraitorCodePaper
   name: syndicate codeword
   description: A leaked codeword to possibly get in touch with the Syndicate.
@@ -587,7 +607,7 @@
   - type: TraitorCodePaper
 
 - type: entity
-  parent: Paper
+  parent: [Paper, BaseSyndicateContraband]
   id: AllTraitorCodesPaper
   name: syndicate codewords registry
   description: A registry of all active Syndicate codewords.
@@ -639,7 +659,7 @@
             - Paper
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
-    requireHands: false
+    requiresComplex: false
   - type: UserInterface
     interfaces:
       enum.PaperUiKey.Key:

@@ -35,17 +35,6 @@
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/rainbow.rsi
 
 - type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpskirtPsychologist
-  name: psychologist suitskirt
-  description: I don't lose things. I place things in locations which later elude me.
-  components:
-    - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/psychologist.rsi #SS220-Psychologist-Resprite
-    - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/psychologist.rsi #SS220-Psychologist-Resprite
-
-- type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtSchool
   name: school skirt

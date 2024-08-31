@@ -24,13 +24,3 @@
     proto: PsychologistTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite
-
-- type: loadout
-  id: PsychologistJumpsuit
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitPsychologist
-
-- type: loadout
-  id: PsychologistJumpskirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtPsychologist

@@ -153,17 +153,6 @@
   - SterileMask
   # Ведущий врач (Конец)
 
-  # Психолог (Начало)
-- type: loadoutGroup
-  id: PsychologistJumpsuit
-  name: loadout-group-psychologist-jumpsuit
-  loadouts:
-  - PsychologistJumpsuit
-  - PsychologistJumpskirt
-  - PsychologistJumpsuitTurtleneck
-  - PsychologistJumpskirtTurtleneck
-  # Психолог (Конец)
-
   # Бригмедик (Начало)
 - type: loadoutGroup
   id: BrigmedicHead
@@ -221,6 +210,15 @@
   - MedicalWinterBoots
   - SecMedWinterBoots
   # Бригмедик (Конец)
+
+  # Врач (Начало)
+- type: loadoutGroup
+  id: MedicalNeck
+  minLimit: 0
+  name: loadout-group-medical-neck
+  loadouts:
+  - WhiteScarf
+  # Врач (Конец)
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -359,6 +357,32 @@
   - BardShoes
   # Музыкант (конец)
 
+  #Ботаник (начало)
+- type: loadoutGroup
+  id: BotanistNeck
+  name: loadout-group-botanist-neck
+  minLimit: 0
+  loadouts:
+  - BotanistDruidAmulet #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistBelt
+  name: loadout-group-botanist-belt
+  minLimit: 0
+  loadouts:
+  - BotanistBeltDefoult
+  - BotanistDruidBelt #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistShoes
+  name: loadout-group-botanist-shoes
+  minLimit: 0
+  loadouts:
+  - BotanistShoesBrown
+  - BotanistDruidShoes #SS220 druid loadout
+
+  #Ботаник (конец)
+
 #! Сервис
 
 #! Разное
@@ -373,3 +397,12 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+ # Уборщик (Начало)
+- type: loadoutGroup
+  id: JanitorShoesOrange
+  name: loadout-group-janitor-shoes
+  loadouts:
+  - JanitorGaloshes
+  - JanitorOrangeShoes
+  # Уборщик (Конец)

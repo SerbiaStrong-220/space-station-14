@@ -12,6 +12,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Enums;
 
 namespace Content.Client.StationRecords;
 

@@ -84,3 +84,23 @@
         type: Local
         messages: [ "capsaicin-effect-light-burn" ]
         probability: 0.2
+
+- type: reagent
+  id: Eggnog
+  name: reagent-name-eggnog
+  parent: BaseDrink
+  desc: reagent-desc-eggnog
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: soda
+  color: "#ffb51c"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1

@@ -10,6 +10,7 @@ using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Power;
 using Content.Shared.Radio;
 using Content.Shared.SS220.Radio;
 using Content.Shared.Radio.Components;

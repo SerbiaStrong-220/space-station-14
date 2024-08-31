@@ -273,3 +273,91 @@
     name: ghost-role-information-en-name
     description: ghost-role-information-en-description
     rules: ghost-role-information-silicon-rules
+
+- type: entity
+  name: крокодил 
+  parent: SimpleMobBase
+  id: MobCrocodile 
+  description: Он не кусается, наверное. 
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Animals/crocodile.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: croc
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: croc
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: croc-moving
+    noMovementLayers:
+      movement: 
+        state: croc
+  - type: MobThresholds
+    thresholds: 
+      0: Alive
+      250: Critical
+      350: Dead
+  - type: Bloodstream
+    bloodMaxVolume: 300
+  - type: CombatMode
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: MeleeWeapon
+    hidden: true
+    altDisarm: false
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    attackRate: 0.5
+    damage:
+      types:
+        Piercing: 20
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.0
+    baseSprintSpeed : 3.0
+  - type: NpcFactionMember
+    factions:
+      - Passive
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatLizard
+      amount: 6
+  - type: Puller
+    needsHands: false
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Speech
+    speechVerb: LargeMob
+  - type: Temperature
+    heatDamageThreshold: 315
+    coldDamageThreshold: 250
+    currentTemperature: 300
+  - type: InteractionPopup
+    successChance: 0.3
+  - type: Tag
+    tags:
+    - CannotSuicide

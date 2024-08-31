@@ -14,11 +14,11 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
 
-    [ValidatePrototypeId<StatusIconPrototype>]
+    [ValidatePrototypeId<JobIconPrototype>]
     private const string JobIconForNoId = "JobIconNoId";
 
     /// SS220 Add borg icon for hud begin
-    [ValidatePrototypeId<StatusIconPrototype>]
+    [ValidatePrototypeId<JobIconPrototype>]
     private const string JobIconForBorg = "JobIconBorg";
     /// SS220 Add borg icon for hud end
 
@@ -62,7 +62,8 @@ public sealed class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIconsComponen
         if (HasComp<BorgChassisComponent>(uid))
             iconId = "JobIconBorg";
         /// SS220 Add borg icon for hud end
-        if (_prototype.TryIndex<StatusIconPrototype>(iconId, out var iconPrototype))
+
+        if (_prototype.TryIndex<JobIconPrototype>(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else
             Log.Error($"Invalid job icon prototype: {iconPrototype}");

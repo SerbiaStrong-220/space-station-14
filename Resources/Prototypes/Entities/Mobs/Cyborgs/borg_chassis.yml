@@ -265,7 +265,6 @@
     access: [["Medical"], ["Command"], ["Research"]]
   - type: Inventory
     templateId: borgDutch
-  - type: SolutionScanner
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepHoverBorg
@@ -277,6 +276,7 @@
     damageContainers:
     - Biological
   # SS220 Medical vision for medical borg end
+  - type: SolutionScanner
   - type: InteractionPopup
     interactSuccessString: petting-success-medical-cyborg
     interactFailureString: petting-failure-medical-cyborg

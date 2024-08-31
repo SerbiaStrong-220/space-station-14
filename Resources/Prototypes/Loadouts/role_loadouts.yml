@@ -27,6 +27,11 @@
   - Trinkets
   - GroupSpeciesBreathTool
 
+# Silicons
+- type: roleLoadout
+  id: JobStationAi
+  nameDataset: names_ai
+
 # Civilian
 - type: roleLoadout
   id: JobPassenger
@@ -34,6 +39,7 @@
   - GroupTankHarness
   - PassengerJumpsuit
   - CommonBackpack
+  - PassengerNeck
   - PassengerFace
   - PassengerGloves
   - PassengerOuterClothing
@@ -130,6 +136,7 @@
   - JanitorGloves
   - CommonBackpack
   - JanitorOuterClothing
+  - JanitorShoesOrange #SS220-OrangeJanitor
   - Glasses
   - Survival
   - Trinkets
@@ -148,6 +155,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - BotanistBelt #SS220 druid loadout
+  - BotanistNeck #SS220 druid loadout
+  - BotanistShoes #SS220 druid loadout
 
 - type: roleLoadout
   id: JobClown
@@ -171,8 +181,9 @@
   - MimeJumpsuit
   - MimeBackpack
   - MimeOuterClothing
+  - MimeBelt
   - Glasses
-  - Survival
+  - SurvivalMime
   - Trinkets
 
 - type: roleLoadout
@@ -344,6 +355,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
 
@@ -359,6 +371,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -374,6 +387,7 @@
   - SecurityBelt
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -388,6 +402,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -405,6 +420,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -422,6 +438,7 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
   - MedicalGloves
@@ -438,6 +455,7 @@
   id: JobMedicalIntern
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
   - MedicalBackpack
   - Glasses
@@ -449,6 +467,7 @@
   id: JobChemist
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
   - MedicalGloves
@@ -464,6 +483,7 @@
   groups:
   - GroupTankHarness
   - ParamedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ParamedicJumpsuit
   - MedicalGloves
@@ -480,6 +500,7 @@
   id: JobBrigmedic
   groups:
   - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - BrigmedicMask
   - BrigmedicJumpsuit
   - MedicalGloves
@@ -516,6 +537,8 @@
   id: JobPsychologist
   groups:
   - GroupTankHarness
+  - PsychologistJumpsuit
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalBackpack
   - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses
@@ -578,3 +601,9 @@
   - SurvivalSyndicate
   - GroupSpeciesBreathTool
   - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalEVA
+  groups:
+  - GroupEVATank
+  - SurvivalExtended

@@ -27,6 +27,6 @@ public sealed class CriminalStatusPrototype : IPrototype
     /// The icon that's displayed on the entity and in the UIs
     /// </summary>
     [DataField]
-    public ProtoId<StatusIconPrototype>? StatusIcon = null;
+    public ProtoId<SecurityIconPrototype>? StatusIcon = null;
 }
 

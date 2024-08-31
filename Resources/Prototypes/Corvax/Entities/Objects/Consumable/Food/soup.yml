@@ -8,8 +8,8 @@
       flavors:
         - meaty
     - type: Food
-      trash: FoodBowlBig
-      utensil: 
+      trash: [ FoodBowlBig ]
+      utensil:
         - Spoon
         - Fork
     - type: Sprite
