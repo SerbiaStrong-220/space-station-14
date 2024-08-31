@@ -46,9 +46,6 @@
 
 - type: loadout
   id: JanitorGaloshes
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: JanitorOrange
   equipment:
     shoes: ClothingShoesGaloshes
 
