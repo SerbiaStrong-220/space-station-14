@@ -9,6 +9,7 @@
       - id: WeaponDisabler
       - id: ClothingBeltSecurityFilled
       - id: Flash
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
@@ -38,6 +39,7 @@
       - id: WeaponDisabler
       - id: ClothingBeltSecurityFilled
       - id: Flash
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
@@ -64,6 +66,7 @@
   - type: StorageFill
     contents:
       - id: FlashlightSeclite
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.8
       - id: WeaponDisabler
       - id: ClothingUniformJumpsuitSecGrey
@@ -103,6 +106,7 @@
       - id: ClothingUniformJumpsuitBrigmedic
       - id: ClothingUniformJumpskirtBrigmedic
       - id: ClothingUniformJumpskirtOfLife
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.1
       - id: MedkitFilled
       - id: MedkitCombatFilled
@@ -132,6 +136,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BodySecurityCamera #SS220-Bodycam
       - id: Telescopichka
       - id: ClothingEyesHudSecurity
         prob: 0.3
