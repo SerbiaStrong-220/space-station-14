@@ -34,7 +34,7 @@
     - DetectiveCamera
 
 - type: entity
-  id: BodySecutiryCamera
+  id: BodySecurityCamera
   parent: BodyCamera
   components:
   - type: SurveillanceCamera
