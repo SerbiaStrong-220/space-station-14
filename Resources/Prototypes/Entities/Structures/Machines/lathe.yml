@@ -353,6 +353,7 @@
       - FauxTileJungleAstroGrass
       - FauxTileAstroIce
       - FauxTileAstroSnow
+      - FauxTileAstroSand #SS220-beachCraftng
       - OreBagOfHolding
       - DeviceQuantumSpinInverter
       - ThermalVisorRND # SS220 Thermals

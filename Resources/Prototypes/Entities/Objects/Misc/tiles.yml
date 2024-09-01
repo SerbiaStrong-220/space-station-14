@@ -1548,3 +1548,21 @@
 #  - type: Construction #SS220-Sheetifier-Rework
 #    graph: TileWoodLarge
 #    node: woodtilelarge
+
+#SS220-beachCrafting-Begin
+- type: entity
+  name: астро-песок
+  parent: FloorTileItemBase
+  id: FloorTileItemSand
+  components:
+  - type: Sprite
+    state: astrodesert
+  - type: Item
+    heldPrefix: desert
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorAstroSnad
+  - type: Stack
+    stackType: FloorTileSnow
+#SS220-beachCrafting-Ens

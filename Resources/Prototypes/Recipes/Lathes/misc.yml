@@ -185,6 +185,15 @@
   materials:
     Plastic: 100
 
+#SS220-beachCraftng-Begin
+- type: latheRecipe
+  id: FauxTileAstroSand
+  result: FloorTileItemSand
+  completetime: 1
+  materials:
+    Plastic: 100
+#SS220-beachCraftng-End
+
 - type: latheRecipe #SS220-sheetifier-rework-start
   id: TileGreenCircuit
   result: FloorTileItemGCircuit
