@@ -382,6 +382,7 @@
     reflectProb: 0.95
     reflects:
       - NonEnergy
+      - Energy #SS220-FixReflects
     spread: 45
     reflectProbProjectile: 0.5
     spreadProjectile: 180
