@@ -10,23 +10,6 @@
   youngAge: 20
   oldAge: 40
   maxAge: 40
-  blockedJobsByAccessor: # we are deny all sex if don't put anytihng inside the [], but when we put something inside, we deny just this sex
-#Командование
-    Captain: [ ]
-    HeadOfPersonnel: [ ]
-    ChiefEngineer: [ ]
-    ResearchDirector: [ ]
-    HeadOfSecurity: [ ]
-    ChiefMedicalOfficer: [ ]
-    Quartermaster: [ ]
-#ЦК
-    IAA: [ ]
-    BlueShield: [ ]
-#Служба Безопасности
-    SecurityCadet: [ ]
-    SecurityOfficer: [ ]
-    SecurityPilot: [ ]
-    Warden: [ ]
 
 - type: markingPoints
   id: MobFelinidMarkingLimits

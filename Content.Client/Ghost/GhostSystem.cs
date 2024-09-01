@@ -105,7 +105,7 @@ namespace Content.Client.Ghost
 
                 // sprite.Color = color;
 
-                sprite.Rotation += Angle.FromDegrees(180.0f);
+                //sprite.Rotation += Angle.FromDegrees(180.0f);  //SS220 Ghost rotation fix
 
                 sprite.Color = sprite.Color.WithBlue(10);
                 //var t = sprite.GetType();
@@ -138,8 +138,8 @@ namespace Content.Client.Ghost
             if (args.Handled)
                 return;
 
-            Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-ghost-visibility-popup"), args.Performer);
-
+            var locId = GhostVisibility ? "ghost-gui-toggle-ghost-visibility-popup-off" : "ghost-gui-toggle-ghost-visibility-popup-on";
+            Popup.PopupEntity(Loc.GetString(locId), args.Performer);
             if (uid == _playerManager.LocalEntity)
                 ToggleGhostVisibility();
 
@@ -157,7 +157,7 @@ namespace Content.Client.Ghost
 
             var typingIndicatorStates = new string[0];
             if (TryComp<TypingIndicatorComponent>(uid, out var typingIndicator) &&
-                _prototypeManager.TryIndex<TypingIndicatorPrototype>(typingIndicator.Prototype, out var typingProto))
+                _prototypeManager.TryIndex<TypingIndicatorPrototype>(typingIndicator.TypingIndicatorPrototype, out var typingProto))
                 typingIndicatorStates = new string[] { typingProto.TypingState, typingProto.IdleState };
 
             var spriteLayers = sprite.AllLayers;
@@ -178,6 +178,8 @@ namespace Content.Client.Ghost
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
+            // SS220 ADD GHOST HUD'S
+            _actions.RemoveAction(uid, component.ToggleHudOnOtherActionEntity);
             //SS220-ghost-hats
             _actions.RemoveAction(uid, component.ToggleAGhostBodyVisualsActionEntity);
 

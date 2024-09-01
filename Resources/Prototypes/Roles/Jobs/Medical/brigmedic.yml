@@ -24,5 +24,9 @@
     eyes: ClothingEyesHudMedical
     id: BrigmedicPDA
     ears: ClothingHeadsetBrigmedic
-    belt: ClothingBeltMedicalFilled
+    belt: ClothingBeltSecurityMedicalFilled #SS220-Brigmedic-Fashion
+  storage:
+    back:
+    - BoxSurvivalBrigmedic
+    - Flash
 #SS220-brigmedic-loadout-end

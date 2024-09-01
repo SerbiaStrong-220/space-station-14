@@ -1,7 +1,5 @@
 ent-ClothingBackpackDuffelSurgeryFilled = хирургический вещмешок
     .desc = Большой вещевой мешок для хранения дополнительного медицинского снаряжения - похоже, этот мешок предназначен для хранения хирургических инструментов.
-ent-ClothingBackpackDuffelCBURN = вещмешок отряда РХБЗЗ
-    .desc = Вещмешок, содержащий различное оборудование для сдерживания биологической угрозы.
 ent-ClothingBackpackDuffelCBURNFilled = { ent-ClothingBackpackDuffelCBURN }
     .suffix = Заполненный
     .desc = { ent-ClothingBackpackDuffelCBURN.desc }
@@ -52,6 +50,8 @@ ent-ClothingBackpackDuffelSyndicateC4tBundle = { ent-ClothingBackpackDuffelSyndi
 ent-ClothingBackpackChameleonFill = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = Заполненный, Хамелеон
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
+ent-ClothingBackpackDuffelSyndicateRaidBundle = набор рейдерского костюма Синдиката
+    .desc = Содержит прочный рейдерский бронекостюм Синдиката.
 ent-ClothingBackpackDuffelSyndicateEVABundle = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор EVA Синдиката
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }

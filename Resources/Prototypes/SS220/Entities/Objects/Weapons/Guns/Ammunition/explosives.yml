@@ -4,6 +4,11 @@
   parent: BaseItem
   abstract: true
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/arta_shell.ogg
+      params:
+        volume: 2
   - type: Tag
     tags:
     - GrenadeDusterArta

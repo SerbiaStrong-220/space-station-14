@@ -1,0 +1,128 @@
+#Spider queen webs 
+
+#Base
+- type: entity
+  id: BaseSpiderWeb
+  name: web
+  description: Sticky web.. I wonder where it comes from?
+  abstract: true
+  noSpawn: true
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: MeleeSound
+      soundGroups:
+        Brute:
+          path:
+            "/Audio/Weapons/slash.ogg"
+    - type: Sprite
+      sprite: Objects/Misc/spiderweb.rsi
+      layers:
+        - state: spider_web_1
+          map: ["spiderWebLayer"]
+      drawdepth: WallMountedItems
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.SpiderWebVisuals.Variant:
+          spiderWebLayer:
+            1:  {state: spider_web_1}
+            2:  {state: spider_web_2}
+    - type: Clickable
+    - type: Transform
+      anchored: true
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        fix1:
+          hard: false
+          density: 7
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          layer:
+          - MidImpassable
+    - type: Damageable
+      damageModifierSet: Wood
+    - type: Destructible
+    - type: Temperature
+      heatDamage:
+        types:
+          Heat: 5
+      coldDamage: {}
+      coldDamageThreshold: 0
+    - type: Flammable
+      fireSpread: true
+      damage:
+        types:
+          Heat: 5
+    - type: Reactive
+      groups:
+        Flammable: [Touch]
+        Extinguish: [Touch]
+    - type: SpiderWebObject
+    - type: SpeedModifierContacts
+      ignoreWhitelist:
+        components:
+            - IgnoreSpiderWeb
+
+#Web
+- type: entity
+  parent: BaseSpiderWeb
+  id: SpiderWebFragile
+  name: web
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 30
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]  
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.25
+      sprintSpeedModifier: 0.25
+
+- type: entity
+  parent: BaseSpiderWeb
+  id: SpiderWebDurable
+  name: durable web
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]  
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.15
+      sprintSpeedModifier: 0.15
+
+- type: entity
+  parent: BaseSpiderWeb
+  id: SpiderWebDespawned
+  name: web
+  noSpawn: true
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: TimedDespawn
+      lifetime: 13
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.1
+      sprintSpeedModifier: 0.1

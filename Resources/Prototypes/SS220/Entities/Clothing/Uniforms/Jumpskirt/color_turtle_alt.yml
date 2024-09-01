@@ -1,6 +1,6 @@
 # White Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorWhite
   name: white turtleneck
   description: Calm and versatile white turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -27,7 +27,7 @@
 
 # Grey Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorGrey
   name: grey turtleneck
   description: Calm and versatile grey turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -58,7 +58,7 @@
 
 # Blue Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorBlue
   name: blue turtleneck
   description: Calm and versatile blue turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -89,7 +89,7 @@
 
 # Dark Blue Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorDarkBlue
   name: dark blue turtleneck
   description: Calm and versatile blue turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -120,7 +120,7 @@
 
 # Teal Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorTeal
   name: teal turtleneck
   description: Calm and versatile teal turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -151,7 +151,7 @@
 
 # Green Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorGreen
   name: green turtleneck
   description: Calm and versatile green turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -182,7 +182,7 @@
 
  # Dark Green Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorDarkGreen
   name: dark green turtleneck
   description: Calm and versatile dark green turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -213,7 +213,7 @@
 
 # Orange Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorOrange
   name: orange turtleneck
   description: Calm and versatile orange turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -244,7 +244,7 @@
 
 # Pink Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorPink
   name: pink turtleneck
   description: Calm and versatile pink turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -275,7 +275,7 @@
 
 # Red Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorRed
   name: red turtleneck
   description: Calm and versatile red turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -306,7 +306,7 @@
 
 # Yellow Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorYellow
   name: yellow turtleneck
   description: Calm and versatile yellow turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -337,7 +337,7 @@
 
 # Purple Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorPurple
   name: purple turtleneck
   description: Calm and versatile purple turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -368,7 +368,7 @@
 
 # Light Brown Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorLightBrown
   name: light brown turtleneck
   description: Calm and versatile light brown turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -399,7 +399,7 @@
 
 # Brown Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorBrown
   name: brown turtleneck
   description: Calm and versatile brown turtleneck will go with any pants or skirt. A great choice for creating a basic look.
@@ -430,7 +430,7 @@
 
 # Maroon Jumpskirt Turtle
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTurtleAltColorMaroon
   name: maroon turtleneck
   description: Calm and versatile maroon turtleneck will go with any pants or skirt. A great choice for creating a basic look.

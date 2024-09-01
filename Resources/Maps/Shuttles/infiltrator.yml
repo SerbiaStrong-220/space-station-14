@@ -3635,10 +3635,10 @@ entities:
   entities:
   - uid: 633
     components:
-    - pos: 3.5,-3.5
-      parent: 73
-      type: Transform
-- proto: KitchenMicrowave
+    - type: Transform
+      pos: 3.5,-3.5
+      parent: 1
+- proto: SyndicateMicrowave
   entities:
   - uid: 530
     components:
@@ -3771,18 +3771,13 @@ entities:
     - pos: -2.5,-12.5
       parent: 73
       type: Transform
-- proto: NukeCodePaperStation
+- proto: BoxFolderNuclearCodes
   entities:
   - uid: 798
     components:
     - pos: -2.2848654,-11.417734
       parent: 73
       type: Transform
-    - stampState: paper_stamp-syndicate
-      stampedBy:
-      - stampedColor: '#850000FF'
-        stampedName: stamp-component-stamped-name-syndicate
-      type: Paper
 - proto: Ointment
   entities:
   - uid: 575
@@ -3842,7 +3837,7 @@ entities:
       stampedBy:
       - stampedColor: '#850000FF'
         stampedName: stamp-component-stamped-name-syndicate
-      content: НЕ ЗАБУДЬТЕ перед вылетом настроить универсальные пинпоинтеры на боеголовку рядом, что бы не потерять её во время боя.
+      content: �� �������� ����� ������� ��������� ������������� ����������� �� ���������� �����, ��� �� �� �������� � �� ����� ���.
       type: Paper
   - uid: 511
     components:
@@ -3853,7 +3848,7 @@ entities:
       stampedBy:
       - stampedColor: '#850000FF'
         stampedName: stamp-component-stamped-name-syndicate
-      content: Уходя НЕ ЗАБУДЬТЕ закрыть гермозатворы, а то у прошлой команды во время задания угнали шаттл.
+      content: ����� �� �������� ������� ������������, � �� � ������� ������� �� ����� ������� ������ �����.
       type: Paper
 - proto: PinpointerUniversal
   entities:
@@ -3862,28 +3857,28 @@ entities:
     - pos: -2.8006573,-13.166342
       parent: 73
       type: Transform
-    - targetName: ядерная боеголовка
+    - targetName: ������� ����������
       type: Pinpointer
   - uid: 799
     components:
     - pos: -2.8631573,-13.619467
       parent: 73
       type: Transform
-    - targetName: ядерная боеголовка
+    - targetName: ������� ����������
       type: Pinpointer
   - uid: 800
     components:
     - pos: -2.394407,-13.635092
       parent: 73
       type: Transform
-    - targetName: ядерная боеголовка
+    - targetName: ������� ����������
       type: Pinpointer
   - uid: 801
     components:
     - pos: -2.222532,-13.244438
       parent: 73
       type: Transform
-    - targetName: ядерная боеголовка
+    - targetName: ������� ����������
       type: Pinpointer
 - proto: PlasmaReinforcedWindowDirectional
   entities:

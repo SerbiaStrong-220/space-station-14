@@ -4,6 +4,11 @@
   name: cane
   description: A wooden cane.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/baseball_bat.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane.rsi
     state: cane
@@ -28,10 +33,15 @@
 
 - type: entity
   name: cane blade
-  parent: BaseItem
+  parent: [BaseItem, BaseSyndicateContraband]
   id: CaneBlade
   description: A sharp blade with a cane shaped hilt.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/cane_blade.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane_blade.rsi

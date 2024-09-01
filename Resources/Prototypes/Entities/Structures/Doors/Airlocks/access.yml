@@ -74,15 +74,6 @@
       board: [ DoorElectronicsHydroponics ]
 
 - type: entity
-  parent: AirlockCommandLocked
-  id: AirlockServiceCaptainLocked
-  suffix: Captain, Locked
-  components:
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsCaptain ]
-
-- type: entity
   parent: AirlockExternal
   id: AirlockExternalLocked
   suffix: External, Locked
@@ -266,7 +257,7 @@
 - type: entity
   parent: AirlockCentralCommand
   id: AirlockCentralCommandLocked
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Central Command, Locked
   components:
   - type: ContainerFill
@@ -632,7 +623,7 @@
 - type: entity
   parent: AirlockCentralCommandGlass
   id: AirlockCentralCommandGlassLocked
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Central Command, Locked
   components:
   - type: ContainerFill
@@ -1171,6 +1162,10 @@
   suffix: External, Escape 3x4, Glass, Docking
   components:
   - type: GridFill
+    addComponents:
+    - type: IFF
+      flags:
+      - HideLabel
 
 #HighSecDoors
 - type: entity

@@ -2,21 +2,31 @@
   id: ActionRespawn
   name: Возродиться
   description: Возвращение в лобби. Вы обязаны выбрать другого персонажа и "забыть" все, что видели, согласно правилам сервера.
-  noSpawn: true
   components:
   - type: InstantAction
-    icon: SS220/Interface/actions/respawn.png
+    icon: SS220/Interface/Actions/respawn.png
     checkCanInteract: false
     event: !type:RespawnActionEvent
     useDelay: 1200
-    
+
 - type: entity
   id: ActionToggleAGhostBodyVisuals
   name: Скрыть тело
   description: Скрыть тело призрака, оставив только шляпу.
-  noSpawn: true
   components:
   - type: InstantAction
     icon: { sprite: Mobs/Ghosts/ghost_human.rsi, state: icon }
     checkCanInteract: false
     event: !type:ToggleAGhostBodyVisualsActionEvent
+
+- type: entity
+  id: ActionToggleHudOnOther
+  name: Переключить видимость СБ визора.
+  description: Переключить между отображением СБ визором и обычным зрением.
+  components:
+    - type: InstantAction
+      checkCanInteract: false
+      icon:
+        sprite: Clothing/Eyes/Hud/sec.rsi
+        state: icon
+      event: !type:ToggleHudOnOtherActionEvent

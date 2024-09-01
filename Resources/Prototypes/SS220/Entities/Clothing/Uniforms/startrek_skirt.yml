@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorYellowOne
   name: yellow Star-Trek uniform
   description: Uniform for star travelers.
@@ -10,7 +10,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow1.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorYellowTwo
   name: yellow Star-Trek uniform
   description: Uniform for star travelers.
@@ -21,7 +21,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow2.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorYellowThree
   name: yellow Star-Trek uniform
   description: Uniform for star travelers.
@@ -32,7 +32,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow3.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorYellowFour
   name: yellow Star-Trek uniform
   description: Uniform for star travelers.
@@ -43,7 +43,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow4.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorRedOne
   name: red Star-Trek uniform
   description: Uniform for star travelers.
@@ -54,7 +54,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red1.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorRedTwo
   name: red Star-Trek uniform
   description: Uniform for star travelers.
@@ -65,7 +65,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red2.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorRedThree
   name: red Star-Trek uniform
   description: Uniform for star travelers.
@@ -76,7 +76,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red3.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorRedFour
   name: red Star-Trek uniform
   description: Uniform for star travelers.
@@ -87,7 +87,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red4.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorOrangeOne
   name: orange Star-Trek uniform
   description: Uniform for star travelers.
@@ -98,7 +98,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange1.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorOrangeTwo
   name: orange Star-Trek uniform
   description: Uniform for star travelers.
@@ -109,7 +109,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange2.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorOrangeThree
   name: orange Star-Trek uniform
   description: Uniform for star travelers.
@@ -120,7 +120,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange3.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorOrangeFour
   name: orange Star-Trek uniform
   description: Uniform for star travelers.
@@ -131,7 +131,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange4.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGreenOne
   name: green Star-Trek uniform
   description: Uniform for star travelers.
@@ -142,7 +142,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green1.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGreenTwo
   name: green Star-Trek uniform
   description: Uniform for star travelers.
@@ -153,7 +153,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green2.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGreenThree
   name: green Star-Trek uniform
   description: Uniform for star travelers.
@@ -164,7 +164,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green3.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGreenFour
   name: green Star-Trek uniform
   description: Uniform for star travelers.
@@ -175,7 +175,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green4.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGrayOne
   name: gray Star-Trek uniform
   description: Uniform for star travelers.
@@ -186,7 +186,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray1.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGrayTwo
   name: gray Star-Trek uniform
   description: Uniform for star travelers.
@@ -197,7 +197,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray2.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGrayThree
   name: gray Star-Trek uniform
   description: Uniform for star travelers.
@@ -208,7 +208,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray3.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorGrayFour
   name: gray Star-Trek uniform
   description: Uniform for star travelers.
@@ -219,7 +219,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray4.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorBlueOne
   name: blue Star-Trek uniform
   description: Uniform for star travelers.
@@ -230,7 +230,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue1.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorBlueTwo
   name: blue Star-Trek uniform
   description: Uniform for star travelers.
@@ -241,7 +241,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue2.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorBlueThree
   name: blue Star-Trek uniform
   description: Uniform for star travelers.
@@ -252,7 +252,7 @@
     sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue3.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingStarTrekJumpskirtColorBlueFour
   name: blue Star-Trek uniform
   description: Uniform for star travelers.

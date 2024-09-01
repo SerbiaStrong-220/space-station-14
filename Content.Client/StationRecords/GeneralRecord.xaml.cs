@@ -12,6 +12,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Enums;
 
 namespace Content.Client.StationRecords;
 
@@ -60,7 +61,7 @@ public sealed partial class GeneralRecord : Control
 
             foreach (var slot in slots)
             {
-                var itemType = gear.GetGear(slot.Name);
+                var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
                 if (inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, true, true))
                 {
                     entityManager.DeleteEntity(unequippedItem.Value);

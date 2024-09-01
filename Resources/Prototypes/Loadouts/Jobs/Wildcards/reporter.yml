@@ -1,18 +1,17 @@
 # Jumpsuit
 - type: loadout
   id: ReporterJumpsuit
-  equipment: ReporterJumpsuit
-
-- type: startingGear
-  id: ReporterJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitReporter
 
 - type: loadout
   id: JournalistJumpsuit
-  equipment: JournalistJumpsuit
-
-- type: startingGear
-  id: JournalistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitJournalist
+
+  #SS220-Clothes-Start
+- type: loadout
+  id: JumpsuitJournalistRed
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJournalistRed
+  #SS220-Clothes-End

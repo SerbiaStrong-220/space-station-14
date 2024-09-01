@@ -4,7 +4,7 @@
   id: LeftHandMousi
   name: animal hands
   parent: [PartAnimal, BaseLeftHand]
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Mobs/Species/Reptilian/parts.rsi
@@ -17,7 +17,7 @@
   id: RightHandMousi
   name: animal hands
   parent: [PartAnimal, BaseRightHand]
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Mobs/Species/Reptilian/parts.rsi

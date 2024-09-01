@@ -1,4 +1,4 @@
-﻿- type: constructionGraph
+- type: constructionGraph
   id: WallmountSubstation
   start: start
   graph:
@@ -57,13 +57,18 @@
             sprite: "Objects/Power/power_cells.rsi"
             state: "medium"
           doAfter: 0.5
-        - tag: CapacitorStockPart
-          name: a capacitor
-          store: capacitor
-          icon:
-            sprite: "Objects/Misc/stock_parts.rsi"
-            state: "capacitor"
+        #SS220 Recepies fix begin
+        - material: Capacitor
+          amount: 1
           doAfter: 0.5
+        # - tag: CapacitorStockPart
+        #   name: a capacitor
+        #   store: capacitor
+        #   icon:
+        #     sprite: "Objects/Misc/stock_parts.rsi"
+        #     state: "capacitor"
+        #   doAfter: 0.5
+        #SS220 Recepies fix end
       - to: frame
         completed:
         - !type:GivePrototype

@@ -18,10 +18,13 @@
 - type: startingGear
   id: JanitorGear
   equipment:
-    shoes: ClothingShoesGaloshes
+#    shoes: ClothingShoesGaloshes #SS220-OrangeJanitor
     id: JanitorPDA
     ears: ClothingHeadsetService
     belt: ClothingBeltJanitorFilled
+  #storage:
+    #back:
+    #- Stuff
 
 - type: startingGear
   id: JanitorMaidGear

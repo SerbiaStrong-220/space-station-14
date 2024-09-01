@@ -11,13 +11,13 @@ whitelist-playercount-invalid =
     }
 whitelist-not-whitelisted-rp = Вас нет в вайтлисте. Чтобы попасть в вайтлист, посетите наш Discord (https://discord.gg/ss220).
 cmd-whitelistadd-desc = Добавить игрока в вайтлист сервера.
-cmd-whitelistadd-help = Использование: whitelistadd <username>
+cmd-whitelistadd-help = Использование: whitelistadd <username или  User ID>
 cmd-whitelistadd-existing = { $username } уже находится в вайтлисте!
 cmd-whitelistadd-added = { $username } добавлен в вайтлист
 cmd-whitelistadd-not-found = Не удалось найти игрока '{ $username }'
 cmd-whitelistadd-arg-player = [player]
 cmd-whitelistremove-desc = Удалить игрока с вайтлиста сервера.
-cmd-whitelistremove-help = Использование: whitelistremove <username>
+cmd-whitelistremove-help = Использование: whitelistremove <username или  User ID>
 cmd-whitelistremove-existing = { $username } не находится в вайтлисте!
 cmd-whitelistremove-removed = { $username } удалён с вайтлиста
 cmd-whitelistremove-not-found = Не удалось найти игрока '{ $username }'
@@ -40,9 +40,9 @@ panic-bunker-account-denied = Этот сервер находится в реж
 panic-bunker-account-denied-reason = Этот сервер находится в режиме "Бункер", часто используемом в качестве меры предосторожности против рейдов. Новые подключения от аккаунтов, не соответствующих определённым требованиям, временно не принимаются. Повторите попытку позже Причина: "{ $reason }"
 panic-bunker-account-reason-account = Ваш аккаунт Space Station 14 слишком новый. Он должен быть старше { $minutes } минут
 panic-bunker-account-reason-overall =
-    Необходимо минимальное отыгранное Вами время на сервере — { $hours } { $hours ->
-        [one] час
-        [few] часа
-       *[other] часов
+    Необходимо минимальное отыгранное Вами время на сервере — { $minutes } { $minutes ->
+        [one] минута
+        [few] минуты
+       *[other] минут
     }.
 kick-afk = Вы были кикнуты за AFK

@@ -32,3 +32,13 @@
   id: beets
   flavorType: Complex
   description: сладко и как земля
+
+- type: flavor
+  id: soothing
+  flavorType: Base
+  description: успокаивающе
+
+- type: flavor
+  id: french75
+  flavorType: Complex
+  description: терпко-сладко

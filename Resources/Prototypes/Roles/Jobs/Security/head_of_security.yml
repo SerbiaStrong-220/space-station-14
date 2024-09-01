@@ -7,6 +7,15 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 180000 # SS220-RoleTime
+    - !type:RoleTimeRequirement
+      role: JobWarden
+      time: 43200 # SS220-RoleTime 2
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
@@ -40,5 +49,12 @@
     gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity
 #    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
-    pocket1: WeaponPistolMk58
-    pocket2: MagazinePistol
+    pocket1: WeaponPistolMk58Nonlethal #SS220-DeleteSecurityLetal-Begin
+#    pocket2: MagazinePistol #SS220-DeleteSecurityLetal-End
+  storage:
+    back:
+    - Flash
+    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
+    - MagazinePistolRubber
+    - FlashlightSeclite
+    - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End

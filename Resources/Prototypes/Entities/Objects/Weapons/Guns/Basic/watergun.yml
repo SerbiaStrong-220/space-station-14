@@ -1,8 +1,13 @@
-﻿- type: entity
+- type: entity
   id: WeaponWaterGunBase
   abstract: true
   parent: BaseItem
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/smg.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/water_pistol.rsi
   - type: Clothing

@@ -1,21 +1,50 @@
-# Security
-- type: loadoutGroup
-  id: SecurityPilotBackpack
-  name: loadout-group-security-pilot-backpack
-  loadouts:
-  - SecurityPilotBackpack
-  - SecurityPilotSatchel
-  - SecurityPilotDuffel
+#! Командование (Начало)
 
-# InternalAffairs
+  # Капитан (Начало)
 - type: loadoutGroup
-  id: IAABackpack
+  id: CaptainGloves
+  name: loadout-group-captain-gloves
+  loadouts:
+  - CaptainGloves
+  - CaptainWhiteGloves
+
+- type: loadoutGroup
+  id: CAPSiutstorage
+  name: loadout-group-captain-siutstorage
+  minLimit: 0
+  loadouts:
+  - CapOfficerCutlass
+  # Капитан (Конец)
+#! Командование (Конец)
+
+#! Внутренние дела (Начало)
+
+  # Агент Внутренних Дел (Начало)
+- type: loadoutGroup
+  id: IAAJumpsuit
+  name: loadout-group-iaa-jumpsuit
+  loadouts:
+  - LawyerJumpsuit
+  - LawyerJumpskirt
+  - LawyerJumpsuitBlue
+  - LawyerJumpskirtBlue
+  - LawyerJumpsuitPurple
+  - LawyerJumpskirtPurple
+  - LawyerJumpsuitRed
+  - LawyerJumpskirtRed
+  - LawyerJumpsuitGood
+  - LawyerJumpskirtGood
+  - JumpsuitNTR
+  - JumpsuitTrustedLawyer
+
+- type: loadoutGroup
+  id: IAABackpacks
   name: loadout-group-iaa-backpack
   loadouts:
-  - IAABackpack
-  - IAASatchel
-  - IAADuffel
+    - IAABackpackLeather
+  # Агент Внутренних Дел (Конец)
 
+  # Офицер "Синий Щит" (Начало)
 - type: loadoutGroup
   id: BlueShieldJumpsuit
   name: loadout-group-blueshield-jumpsuit
@@ -30,8 +59,277 @@
   loadouts:
   - BlueShieldArmorBulletproof
   - BlueShieldSRTCoat
+  # Офицер "Синий Щит" (Конец)
+#! Внутренние дела (Конец)
 
-# Chef
+#! Служба безопасности (Начало)
+
+  # Глава службы безопасности (Начало)
+- type: loadoutGroup
+  id: SecurityHoSSiutstorage
+  name: loadout-group-head-of-security-siutstorage
+  minLimit: 0
+  loadouts:
+  - OfficerCutlass
+  # Глава службы безопасности (Конец)
+
+  # Инструктор СБ (Начало)
+- type: loadoutGroup
+  id: SeniorSecJumpsuit
+  name: loadout-group-senior-officer-jumpsuit
+  loadouts:
+  - SeniorSecJumpsuit
+  - SeniorSecJumpskirt
+  # Инструктор СБ (Конец)
+
+  # Пилот (Начало)
+- type: loadoutGroup
+  id: SecurityPilotHead
+  name: loadout-group-security-pilot-head
+  minLimit: 0
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - PilotCapCap
+  # Пилот (Конец)
+#! Служба безопасности (Конец)
+
+#! Медицинский отдел (Начало)
+
+  # Ведущий врач (Начало)
+- type: loadoutGroup
+  id: HatSeniorMedical
+  name: loadout-group-senior-medical-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorMedical
+  - CMOMedicalHeadMirror
+
+- type: loadoutGroup
+  id: SeniorMedicalJumpsuit
+  name: loadout-group-senior-medical-jumpsuit
+  loadouts:
+  - SeniorMedicalJumpsuit
+  - SeniorMedicalJumpskirt
+
+- type: loadoutGroup
+  id: SeniorMedicalOuterClothing
+  name: loadout-group-senior-medical-outerclothing
+  minLimit: 0
+  loadouts:
+  - SeniorMedicalLabCoat
+  - MedicalDoctorWintercoat
+  - ChemistWintercoat
+
+- type: loadoutGroup
+  id: MedicalsBackpack
+  name: loadout-group-medical-doctor-backpack
+  loadouts:
+  - MedicalDoctorBackpack
+  - MedicalDoctorSatchel
+  - MedicalDoctorDuffel
+
+- type: loadoutGroup
+  id: SeniorShoes
+  name: loadout-group-medical-doctor-shoes
+  loadouts:
+  - WhiteShoes
+  - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: MedicalsGloves
+  name: loadout-group-medical-gloves
+  minLimit: 0
+  loadouts:
+  - LatexGloves
+  - NitrileGloves
+
+- type: loadoutGroup
+  id: MedicalsMask
+  name: loadout-group-medical-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  # Ведущий врач (Конец)
+
+  # Бригмедик (Начало)
+- type: loadoutGroup
+  id: BrigmedicHead
+  name: loadout-group-brigmedic-head
+  minLimit: 0
+  loadouts:
+  - BrigmedicHead
+  - SecurityMedicHead
+  - SecurityMedicHelmet
+
+- type: loadoutGroup
+  id: BrigmedicMask
+  name: loadout-group-brigmedic-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+  - BrigmedicMask
+
+- type: loadoutGroup
+  id: BrigmedicJumpsuit
+  name: loadout-group-brigmedic-jumpsuit
+  loadouts:
+  - BrigmedicJumpsuit
+  - BrigmedicJumpskirt
+  - BrigmedicJumpsuitTurtleneck
+  - BrigmedicJumpskirtTurtleneck
+  - BrigmedicJumpskirtOfLife
+  - BrigmedicJumpsuitMilitaryFeldsher
+  - BrigmedicJumpskirtMilitaryFeldsher
+
+- type: loadoutGroup
+  id: BrigmedicOuterClothing
+  name: loadout-group-brigmedic-outerclothing
+  minLimit: 0
+  loadouts:
+  - BrigmedicWindAMG
+  - BrigmedicVestSecurity
+  - BrigmedicCoatLab
+  - BrigmedicVestArmorMedSec
+
+- type: loadoutGroup
+  id: BrigmedicBackpack
+  name: loadout-group-brigmedic-backpack
+  loadouts:
+  - BrigmedicBackpack
+  - BrigmedicSatchel
+  - BrigmedicDuffel
+
+- type: loadoutGroup
+  id: BrigmedicShoes
+  name: loadout-group-brigmedic-shoes
+  loadouts:
+  - RedShoes
+  - BlueShoes
+  - MedicalWinterBoots
+  - SecMedWinterBoots
+  # Бригмедик (Конец)
+
+  # Врач (Начало)
+- type: loadoutGroup
+  id: MedicalNeck
+  minLimit: 0
+  name: loadout-group-medical-neck
+  loadouts:
+  - WhiteScarf
+  # Врач (Конец)
+#! Медицинский отдел (Конец)
+
+#! Инженерный отдел (Начало)
+
+  # Старший инженер (Начало)
+- type: loadoutGroup
+  id: ChiefEngineerPDA
+  name: loadout-group-chief-engineer-PDA
+  loadouts:
+  - ChiefEngineerPDA
+  - DarkChiefEngineerPDA
+  # Старший инженер (Конец)
+
+  # Ведущий инженер (Начало)
+- type: loadoutGroup
+  id: HatSeniorEngineer
+  name: loadout-group-senior-engineer-head
+  loadouts:
+  - StationEngineerHardhatYellow
+  - StationEngineerHardhatOrange
+  - StationEngineerHardhatRed
+  - HatSeniorEngineer
+
+- type: loadoutGroup
+  id: SeniorsEngineerJumpsuit
+  name: loadout-group-senior-engineer-jumpsuit
+  loadouts:
+  - SeniorsEngineerJumpsuit
+  - SeniorsEngineerJumpskirt
+
+- type: loadoutGroup
+  id: SeniorsEngineerOuterClothing
+  name: loadout-group-senior-engineer-outerclothing
+  loadouts:
+  - StationEngineerOuterVest
+  - StationEngineerWintercoat
+  - AtmosphericTechnicianWintercoat
+  # Ведущий инженер (Конец)
+#! Инженерный отдел (Конец)
+
+#! Исследовательский отдел (Начало)
+
+  # Ведущий учёный (Начало)
+- type: loadoutGroup
+  id: HatSeniorSciensist
+  name: loadout-group-senior-scientist-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorSciensist
+
+- type: loadoutGroup
+  id: SeniorSciensistJumpsuit
+  name: loadout-group-senior-scientist-jumpsuit
+  loadouts:
+  - SeniorSciensistJumpsuit
+  - SeniorSciensistJumpskirt
+
+- type: loadoutGroup
+  id: SeniorSciensistOuterClothing
+  name: loadout-group-senior-scientist-outerclothing
+  minLimit: 0
+  loadouts:
+  - SeniorSciensistLabCoat
+  - ScienceWintercoat
+  - RoboticistWintercoat
+    # Ведущий учёный (Начало)
+#! Исследовательский отдел (Конец)
+
+#! Отдел снабжения (Начало)
+
+  # Утилизатор (Начало)
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - UniformJumpsuitSalvageSpecialist
+  - SalvageSpecialistJumpsuitTurtleneck
+  - UniformJumpsuitFlannelSalvage
+  - ClothingUniformJumpsuitExpeditor
+
+- type: loadoutGroup
+  id: SalvageSpecialistHead
+  name: loadout-group-salvage-specialist-head
+  minLimit: 0
+  loadouts:
+  - ClothingHeadHatSalvage
+  - ClothingHeadBandSalvage
+  - ClothingHeadHatHardhatViolet
+  - ClothingHeadBeretSalvageSpecialist
+  # Утилизатор (Конец)
+#! Отдел снабжения (Конец)
+
+#! Сервис (Начало)
+
+  # Ведущий сервисный работник (Начало)
+- type: loadoutGroup
+  id: HatSeniorService
+  name: loadout-group-senior-service-head
+  minLimit: 0
+  loadouts:
+  - HatSeniorService
+
+- type: loadoutGroup
+  id: SeniorServiceJumpsuit
+  name: loadout-group-senior-service-jumpsuit
+  loadouts:
+  - SeniorServiceJumpsuit
+  - SeniorJumpskirtService
+  # Ведущий сервисный работник (Конец)
+
+  # Шеф-повар (Начало)
 - type: loadoutGroup
   id: ChefBeltApron
   name: loadout-group-chef-belt
@@ -42,30 +340,71 @@
   - ChefBeltApronBlack
   - ChefBeltApronRed
   - ChefBeltApronSenior
+  # Шеф-повар (Конец)
 
-# Medical
+  # Музыкант (начало)
 - type: loadoutGroup
-  id: PsychologistJumpsuit
-  name: loadout-group-psychologist-jumpsuit
+  id: MusicianHead
+  name: loadout-group-musician-head
+  minLimit: 0
   loadouts:
-  - PsychologistJumpsuit
-  - PsychologistJumpsuitTurtleneck
-  - PsychologistJumpskirtTurtleneck
-
-#Command
+  - BardHead
 
 - type: loadoutGroup
-  id: CaptainGloves
-  name: loadout-group-captain-gloves
+  id: MusicianShoes
+  name: loadout-group-musician-shoes
+  minLimit: 0
   loadouts:
-  - CaptainGloves
-  - CaptainWhiteGloves
+  - MusicianBootsLaceup
+  - BardShoes
+  # Музыкант (конец)
 
-#Engineering
+  #Ботаник (начало)
+- type: loadoutGroup
+  id: BotanistNeck
+  name: loadout-group-botanist-neck
+  minLimit: 0
+  loadouts:
+  - BotanistDruidAmulet #SS220 druid loadout
 
 - type: loadoutGroup
-  id: ChiefEngineerPDA
-  name: loadout-group-chief-engineer-PDA
+  id: BotanistBelt
+  name: loadout-group-botanist-belt
+  minLimit: 0
   loadouts:
-  - ChiefEngineerPDA
-  - DarkChiefEngineerPDA
+  - BotanistBeltDefoult
+  - BotanistDruidBelt #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistShoes
+  name: loadout-group-botanist-shoes
+  minLimit: 0
+  loadouts:
+  - BotanistShoesBrown
+  - BotanistDruidShoes #SS220 druid loadout
+
+  #Ботаник (конец)
+
+#! Сервис
+
+#! Разное
+
+  # Перчатки
+- type: loadoutGroup
+  id: Gloves
+  name: loadout-group-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
+  - GlovesRed
+  - GlovesBlue
+
+ # Уборщик (Начало)
+- type: loadoutGroup
+  id: JanitorShoesOrange
+  name: loadout-group-janitor-shoes
+  loadouts:
+  - JanitorGaloshes
+  - JanitorOrangeShoes
+  # Уборщик (Конец)

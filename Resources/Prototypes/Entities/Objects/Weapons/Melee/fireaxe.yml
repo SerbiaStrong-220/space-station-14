@@ -1,13 +1,20 @@
 - type: entity
   name: fireaxe
-  parent: BaseItem
+  parent: [BaseItem, BaseEngineeringContraband]
   id: FireAxe
   description: Truly, the weapon of a madman. Who would think to fight fire with an axe?
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/axe.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Tag
     tags:
     - FireAxe
   - type: Sharp
+  - type: Execution
+    doAfterDuration: 4.0
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxe.rsi
     state: icon

@@ -1,0 +1,11 @@
+#Сервис
+- type: entity
+  parent: [ClothingHeadBandBase, ClothingMaskBandBlueBotany]
+  id: ClothingHeadBandBlueBotany
+  name: blue botany bandana
+
+# Карго
+- type: entity
+  parent: [ClothingHeadBandBase, ClothingMaskBandSalvage]
+  id: ClothingHeadBandSalvage
+  name: Salvage bandana

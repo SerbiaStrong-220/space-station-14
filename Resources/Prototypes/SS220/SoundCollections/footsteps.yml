@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: FootstepQuicksand
+  files:
+  - /Audio/SS220/Effects/Footsteps/quicksand1.ogg
+  - /Audio/SS220/Effects/Footsteps/quicksand2.ogg
+  - /Audio/SS220/Effects/Footsteps/quicksand3.ogg
+  - /Audio/SS220/Effects/Footsteps/quicksand4.ogg

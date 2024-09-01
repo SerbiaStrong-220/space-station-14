@@ -1,0 +1,108 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Цзянь
+- type: entity
+  name: jian sword
+  parent: CaptainSabre
+  id: JianSword
+  description: An ancient ceremonial sword.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/jian_sword.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/jian_sword.rsi
+  - type: Tag
+    tags:
+    - JianSword
+
+# Ёримицу
+- type: entity
+  name: minamoto no yorimitsu
+  parent: CaptainSabre
+  id: MinamotoNoYorimitsu
+  description: A legendary weapon with extraordinary sharpness and grace.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -45
+    damage:
+      types:
+        Slash: 27
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
+  - type: Tag
+    tags:
+    - MinamotoNoYorimitsu
+
+# Рапира
+- type: entity
+  parent: BaseItem
+  id: Rapier
+  name: rapier
+  description: A graceful and elegant weapon that is the perfect choice for those who prefer a sophisticated style during combat.
+  suffix: 27 piercing
+  components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/cane_blade.ogg
+      params:
+        volume: 2
+  - type: Sharp
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/rapier.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 2.5
+    damage:
+      types:
+        Piercing: 27
+    angle: 0
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/rapier.rsi
+  - type: Tag
+    tags:
+    - Rapier
+  - type: DisarmMalus
+
+- type: entity
+  parent: Rapier
+  id: RapierAlt
+  suffix: 15 piercing
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 15
+
+# Офицерский кортик
+- type: entity
+  parent: CaptainSabre
+  id: OfficerCutlass
+  name: officer`s cutlass
+  description: An ornate award-winning weapon, which is the symbol of an officer of the fleet of Mankind.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: 45
+    attackRate: 1.7
+    damage:
+      types:
+        Piercing: 14
+    angle: 0
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
+  - type: Tag
+    tags:
+    - OfficerCutlass

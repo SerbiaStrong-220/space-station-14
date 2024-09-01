@@ -29,6 +29,19 @@
   - ClothingHandWraps
   - ClothingFootWraps
   # SS220 Hand/FootWraps end
+  # SS220-Hand/FootWraps-More-Color-Begin
+  - ClothingHandWrapsYellow
+  - ClothingFootWrapsYellow
+  - ClothingHandWrapsGreen
+  - ClothingFootWrapsGreen
+  - ClothingHandWrapsRed
+  - ClothingFootWrapsRed
+  - ClothingHandWrapsBlue
+  - ClothingFootWrapsBlue
+  - ClothingHandWrapsBlack
+  - ClothingFootWrapsBlack
+  # SS220-Hand/FootWraps-More-Color-End
+
 
 - type: loadoutGroup
   id: Glasses
@@ -39,6 +52,32 @@
   - GlassesJamjar
   - GlassesJensen
 
+- type: loadoutGroup
+  id: GroupTankHarness
+  name: loadout-group-tank-harness
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarness
+
+- type: loadoutGroup
+  id: Survival
+  name: loadout-group-survival-basic
+  minLimit: 3
+  hidden: true
+  loadouts:
+  - EmergencyNitrogen
+  - EmergencyOxygen
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: GroupEVATank
+  name: loadout-group-EVA-tank
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesEVAOxygen
+
 # Command
 - type: loadoutGroup
   id: CaptainHead
@@ -47,6 +86,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+  #SS220-CapHeadLoadoutsChanges-Begin
+  - CaptainBeret
+  - CaptainHeadHat
+  #SS220-CapHeadLoadoutsChanges-End
   #ss220-loadout-captain-begin
   - CaptainWhiteHead
   - CaptainWhiteBeret
@@ -122,9 +165,9 @@
   id: HoPBackpack
   name: loadout-group-hop-backpack
   loadouts:
-  - HoPBackpack
-  - HoPSatchel
-  - HoPDuffel
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
   - HoPBackpackIan
 
 - type: loadoutGroup
@@ -141,12 +184,12 @@
   loadouts:
   - GreyJumpsuit
   - GreyJumpskirt
-  - RainbowJumpsuit
   - AncientJumpsuit
   - PassengerJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - PassengerJumpsuitTurtleneckAlt
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - RainbowJumpsuit
 
 - type: loadoutGroup
   id: PassengerFace
@@ -164,11 +207,18 @@
 
 - type: loadoutGroup
   id: CommonBackpack
-  name: loadout-group-passenger-backpack
+  name: loadout-group-backpack
   loadouts:
   - CommonBackpack
   - CommonSatchel
   - CommonDuffel
+
+- type: loadoutGroup
+  id: PassengerNeck
+  name: loadout-group-passenger-neck
+  minLimit: 0
+  loadouts:
+  - Mantle
 
 - type: loadoutGroup
   id: PassengerOuterClothing
@@ -190,6 +240,8 @@
   minLimit: 0
   loadouts:
   - BartenderHead
+  - BartenderHeadWhite  #SS220-BartenderResprited-Begin
+  - BartenderHeadRed #SS220-BartenderResprited-End
   - BartenderBowler
 
 - type: loadoutGroup
@@ -197,8 +249,14 @@
   name: loadout-group-bartender-jumpsuit
   loadouts:
   - BartenderJumpsuit
-  - BartenderJumpskirt
   - BartenderJumpsuitPurple
+  - BartenderJumpsuitRed #SS220-BartenderResprited-Begin
+  - BartenderJumpsuitGreen
+  - BartenderJumpsuitNanotrasen
+  - BartenderJumpskirt
+  - BartenderJumpskirtRed
+  - BartenderJumpskirtGreen
+  - BartenderJumpskirtNanotrasen #SS220-BartenderResprited-End
 
 - type: loadoutGroup
   id: BartenderOuterClothing
@@ -287,14 +345,6 @@
   - LawyerNeck
 
 - type: loadoutGroup
-  id: LawyerBackpack
-  name: loadout-group-lawyer-backpack
-  loadouts:
-  - LawyerBackpack
-  - LawyerSatchel
-  - LawyerDuffel
-
-- type: loadoutGroup
   id: ChaplainHead
   name: loadout-group-chaplain-head
   minLimit: 0
@@ -322,14 +372,6 @@
   - ChaplainRobesDark
 
 - type: loadoutGroup
-  id: ChaplainBackpack
-  name: loadout-group-chaplain-backpack
-  loadouts:
-  - ChaplainBackpack
-  - ChaplainSatchel
-  - ChaplainDuffel
-
-- type: loadoutGroup
   id: ChaplainOuterClothing
   name: loadout-group-chaplain-outerclothing
   minLimit: 0
@@ -338,6 +380,7 @@
   - ChaplainNunRobe
   - ChaplainBlackHoodie
   - ChaplainHoodie
+  - HoodieChaplainWhite #SS220-Clothes
 
 - type: loadoutGroup
   id: ChaplainNeck
@@ -352,6 +395,7 @@
   minLimit: 0
   loadouts:
   - JanitorHead
+  - JanitorOrangeHat #SS220-OrangeJanitor
 
 - type: loadoutGroup
   id: JanitorJumpsuit
@@ -359,6 +403,8 @@
   loadouts:
   - JanitorJumpsuit
   - JanitorJumpskirt
+  - JanitorBlueJumpsuit #SS220-Janitor-Control
+  - JanitorOrangeJumpsuit #SS220-OrangeJanitor
 
 - type: loadoutGroup
   id: JanitorGloves
@@ -366,6 +412,7 @@
   minLimit: 0
   loadouts:
   - JanitorRubberGloves
+  - JanitorOrangeGloves #SS220-OrangeJanitor
   - OrangeGloves
   - PurpleGloves
 
@@ -377,20 +424,40 @@
   - JanitorWintercoat
 
 - type: loadoutGroup
+  id: JanitorPlunger
+  name: loadout-group-janitor-plunger
+  minLimit: 0
+  loadouts:
+  - JanitorGoldenPlunger
+
+- type: loadoutGroup
   id: BotanistHead
   name: loadout-group-botanist-head
   minLimit: 0
   loadouts:
   - BotanistHead
+  - BotanistHeadBlue #SS220-BotanyResprite-Begin
+  - BotanistHeadBrown
+  - BotanistHeadWhite #SS220-BotanyResprite-End
   - BotanistBandana
+  - BotanistBandanaBlue #SS220-BotanyResprite
+  - BotanistDruidHead #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistJumpsuit
   name: loadout-group-botanist-jumpsuit
   loadouts:
   - BotanistJumpsuit
+  - BotanistJumpsuitBlue #SS220-BotanyResprite-Begin
+  - BotanistJumpsuitWhite #SS220-BotanyResprite-End
   - BotanistJumpskirt
+  - BotanistJumpskirtBlue #SS220-BotanyResprite-Begin
+  - BotanistJumpskirtWhite #SS220-BotanyResprite-End
   - BotanistOveralls
+  - BotanistOverallsBlue #SS220-BotanyResprite-Begin
+  - BotanistOverallsGreen
+  - BotanistOverallsWhite #SS220-BotanyResprite-End
+  - BotanistDruidJumpsuit #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistBackpack
@@ -406,6 +473,8 @@
   minLimit: 0
   loadouts:
   - BotanistApron
+  - BotanistApronBrown #SS220-BotanyResprite-Begin
+  - BotanistApronGreen #SS220-BotanyResprite-End
   - BotanistWintercoat
 
 - type: loadoutGroup
@@ -414,15 +483,18 @@
   minLimit: 0
   loadouts:
   - JesterHat
+  - JesterAltHat
 
 - type: loadoutGroup
   id: ClownJumpsuit
   name: loadout-group-clown-jumpsuit
   loadouts:
   - ClownSuit
+  - ClownSkirt
   - JesterSuit
   - ClownJumpsuit #SS220-Clown-reSprite-Begin
   - ClownJumpskirt #SS220-Clown-reSprite-End
+  - JesterAltSuit
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -448,6 +520,16 @@
   - JesterShoes
 
 - type: loadoutGroup
+  id: SurvivalClown
+  name: loadout-group-survival-clown
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenClown
+  - EmergencyOxygenClown
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
   id: MimeHead
   name: loadout-group-mime-head
   minLimit: 0
@@ -459,7 +541,6 @@
 - type: loadoutGroup
   id: MimeMask
   name: loadout-group-mime-mask
-  minLimit: 0
   loadouts:
   - MimeMask
   - MimeMaskSad
@@ -488,12 +569,29 @@
   - MimeWintercoat
 
 - type: loadoutGroup
-  id: MusicianBackpack
-  name: loadout-group-musician-backpack
+  id: MimeBelt
+  name: loadout-group-mime-belt
   loadouts:
-  - MusicianBackpack
-  - MusicianSatchel
-  - MusicianDuffel
+  - MimeSuspendersRed
+  - MimeSuspendersBlack
+  
+- type: loadoutGroup
+  id: SurvivalMime
+  name: loadout-group-survival-mime
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenMime
+  - EmergencyOxygenMime
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: MusicianJumpsuit
+  name: loadout-group-musician-jumpsuit
+  loadouts:
+  - MusicianJumpsuit
+  - MusicianJumpskirt
+  - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup
   id: MusicianOuterClothing
@@ -501,6 +599,44 @@
   minLimit: 0
   loadouts:
   - MusicianWintercoat
+  - BardApron #SS220 bard loadout
+  - DangerCoat #SS220 danger coat
+
+- type: loadoutGroup
+  id: Instruments
+  name: loadout-group-instruments
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - SuperSynthesizer # ss220 super loadout
+  - Glockenspiel
+  - MusicBox
+  - Xylophone
+  - Microphone
+  - Synthesizer
+  - Kalimba
+  - Woodblock
+  - ElectricGuitar
+  - BassGuitar
+  - RockGuitar
+  - AcousticGuitar
+  - Banjo
+  - Violin
+  - Viola
+  - Cello
+  - Trumpet
+  - Trombone
+  - FrenchHorn
+  - Euphonium
+  - Saxophone
+  - Accordion
+  - Harmonica
+  - Clarinet
+  - Flute
+  - Recorder
+  - PanFlute
+  - Ocarina
+  - Bagpipe
 
 # Cargo
 - type: loadoutGroup
@@ -510,6 +646,7 @@
   loadouts:
   - QuartermasterHead
   - QuartermasterBeret
+  - QuartermasterHeadWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterJumpsuit
@@ -520,14 +657,8 @@
   - QuartermasterTurtleneck
   - QuartermasterTurtleneckSkirt
   - QuartermasterFormalSuit
-
-- type: loadoutGroup
-  id: QuartermasterBackpack
-  name: loadout-group-quartermaster-backpack
-  loadouts:
-  - QuartermasterBackpack
-  - QuartermasterSatchel
-  - QuartermasterDuffel
+  - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
+  - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterNeck
@@ -543,6 +674,7 @@
   minLimit: 0
   loadouts:
   - QuartermasterWintercoat
+  - QuartermasterOuterCoatQMWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterShoes
@@ -590,17 +722,7 @@
   loadouts:
   - BlackShoes
   - CargoWinterBoots
-#SS220-MoreTurtleneck-Begin
-- type: loadoutGroup
-  id: SalvageSpecialistJumpsuit
-  name: loadout-group-salvage-specialist-jumpsuit
-  loadouts:
-  - UniformJumpsuitSalvageSpecialist
-  - SalvageSpecialistJumpsuitTurtleneck
-  - SalvageSpecialistJumpsuitTurtleneckAlt
-  - SalvageSpecialistJumpskirtTurtleneck
-  - SalvageSpecialistJumpskirtTurtleneckAlt
-#SS220-MoreTurtleneck-End
+
 - type: loadoutGroup
   id: SalvageSpecialistBackpack
   name: loadout-group-salvage-specialist-backpack
@@ -649,14 +771,6 @@
 #ss220-loadout-chief-engineer-end
 
 - type: loadoutGroup
-  id: ChiefEngineerBackpack
-  name: loadout-group-chief-engineer-backpack
-  loadouts:
-  - ChiefEngineerBackpack
-  - ChiefEngineerSatchel
-  - ChiefEngineerDuffel
-
-- type: loadoutGroup
   id: ChiefEngineerNeck
   name: loadout-group-chief-engineer-neck
   minLimit: 0
@@ -667,6 +781,16 @@
   - DarkChiefEngineerCloak
   - DarkChiefEngineerMantle
 #ss220-loadout-chief-engineer-end
+
+#ss220-loadout-ce-backpack-begin
+- type: loadoutGroup
+  id: ChiefEngineerBack
+  name: loadout-group-chief-engineer-backpack
+  loadouts:
+    - ChiefEngineerBackpack
+    - ChiefEngineerSatchel
+    - ChiefEngineerDuffel
+#ss220-loadout-ce-backpack-end
 
 - type: loadoutGroup
   id: ChiefEngineerOuterClothing
@@ -700,7 +824,7 @@
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
-  - SeniorEngineerBeret
+  # - SeniorEngineerBeret  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: StationEngineerJumpsuit
@@ -709,8 +833,8 @@
   - StationEngineerJumpsuit
   - StationEngineerJumpskirt
   - StationEngineerHazardsuit
-  - SeniorEngineerJumpsuit
-  - SeniorEngineerJumpskirt
+  # - SeniorEngineerJumpsuit  #SS220 Seniors roles
+  # - SeniorEngineerJumpskirt  #SS220 Seniors roles
   - StationEngineerJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - StationEngineerJumpsuitTurtleneckAlt
   - StationEngineerJumpskirtTurtleneck
@@ -744,7 +868,7 @@
   name: loadout-group-station-engineer-id
   loadouts:
   - StationEngineerPDA
-  - SeniorEngineerPDA
+  # - SeniorEngineerPDA  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: AtmosphericTechnicianJumpsuit
@@ -778,6 +902,16 @@
   - WhiteShoes
   - EngineeringWinterBoots
 
+- type: loadoutGroup
+  id: SurvivalExtended
+  name: loadout-group-survival-extended
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenExtended
+  - EmergencyOxygenExtended
+  - LoadoutSpeciesVoxNitrogen
+
 # Science
 - type: loadoutGroup
   id: ResearchDirectorHead
@@ -802,14 +936,6 @@
   - ResearchDirectorJumpskirt
 
 - type: loadoutGroup
-  id: ResearchDirectorBackpack
-  name: loadout-group-research-director-backpack
-  loadouts:
-  - ResearchDirectorBackpack
-  - ResearchDirectorSatchel
-  - ResearchDirectorDuffel
-
-- type: loadoutGroup
   id: ResearchDirectorOuterClothing
   name: loadout-group-research-director-outerclothing
   minLimit: 0
@@ -831,7 +957,7 @@
   loadouts:
   - RoboticistCap
   - SkullBandana
-  - ScientificBeret
+  # - ScientificBeret  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: ScientistNeck
@@ -848,8 +974,8 @@
   - ScientistJumpskirt
   - RoboticistJumpsuit
   - RoboticistJumpskirt
-  - SeniorResearcherJumpsuit
-  - SeniorResearcherJumpskirt
+  # - SeniorResearcherJumpsuit  #SS220 Seniors roles
+  # - SeniorResearcherJumpskirt  #SS220 Seniors roles
   - ScientistJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ScientistJumpsuitTurtleneckAlt
   - ScientistJumpskirtTurtleneck
@@ -873,7 +999,7 @@
   - ScienceWintercoat
   - RoboticistLabCoat
   - RoboticistWintercoat
-  - SeniorResearcherLabCoat
+  # - SeniorResearcherLabCoat  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: ScientistShoes
@@ -897,7 +1023,7 @@
   name: loadout-group-scientist-id
   loadouts:
   - ScientistPDA
-  - SeniorResearcherPDA
+  # - SeniorResearcherPDA  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: ResearchAssistantJumpsuit
@@ -919,6 +1045,7 @@
   - HeadofSecurityHead
   - HeadofSecurityBeret
   - HeadofSecurityBigCap #SS220-FreedomHoSCap
+  - HatCapHoS #ss220 sec loadout update
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -929,6 +1056,10 @@
   - HeadofSecurityTurtleneck
   - HeadofSecurityTurtleneckSkirt
   - HeadofSecurityFormalSuit
+  - JumpsuitHoSGrey #ss220 sec loadout update
+  - JumpsuitHoSBlue #ss220 sec loadout update
+  - JumpskirtHoSParadeMale #ss220 sec loadout update
+  - JumpsuitHoSParadeMale #ss220 sec loadout update
 #  - HeadofSecurityFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
@@ -938,6 +1069,8 @@
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
+  - SecurityHolster #SS220-HoS-Holster
+  - MantleHOSShoulder #ss220 sec loadout update
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -945,6 +1078,7 @@
   loadouts:
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
+  - WinterHoSUnarmored #ss220 sec loadout update
 
 - type: loadoutGroup
   id: WardenHead
@@ -977,6 +1111,19 @@
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
+  - HatCowboyBlack #ss220 sec loadout update
+  - HelmetTacSec #ss220 tacsec update
+
+#SS220 neck loadout begin
+- type: loadoutGroup
+  id: SecurityNeck
+  name: loadout-group-security-neck
+  minLimit: 0
+  loadouts:
+  - SecurityHolster #SS220 holster loadout
+  - Headphones #SS220 sec loadout update
+  - ProtectGear #ss220 tacsec update
+#SS220 neck loadout end
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -986,10 +1133,12 @@
   - SecurityJumpskirt
   - SecurityJumpsuitGrey
   - SecurityJumpskirtGrey
-  - SeniorOfficerJumpsuit
-  - SeniorOfficerJumpskirt
+  # - SeniorOfficerJumpsuit  #SS220 Seniors roles
+  # - SeniorOfficerJumpskirt  #SS220 Seniors roles
   - SecurityJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - JumpsuitSecBlue #ss220 sec loadout update
+  - JumpsuitTacSec #ss220 tacsec update
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1013,20 +1162,23 @@
   - ArmorVest
   - ArmorVestSlim
   - SecurityOfficerWintercoat
+  - CoatSecurityOvercoat #ss220 sec loadout update
+  - VestArmorSec #ss220 sec loadout update
 
 - type: loadoutGroup
   id: SecurityShoes
   name: loadout-group-security-shoes
   loadouts:
-  - CombatBoots
+  - JackBoots
   - SecurityWinterBoots
+  - BootsJackSec #ss220 sec loadout update
 
 - type: loadoutGroup
   id: SecurityPDA
   name: loadout-group-security-id
   loadouts:
   - SecurityPDA
-  - SeniorOfficerPDA
+  # - SeniorOfficerPDA  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: DetectiveHead
@@ -1036,12 +1188,14 @@
   - DetectiveFedora
   - DetectiveFedoraGrey
 
-- type: loadoutGroup
-  id: DetectiveNeck
-  name: loadout-group-detective-neck
-  minLimit: 0
-  loadouts:
-  - DetectiveTie
+#SS220 holster to neck begin
+#- type: loadoutGroup
+#  id: DetectiveNeck
+#  name: loadout-group-detective-neck
+#  minLimit: 0
+#  loadouts:
+#  - DetectiveTie
+#SS220 holster to neck end
 
 - type: loadoutGroup
   id: DetectiveJumpsuit
@@ -1051,14 +1205,6 @@
   - DetectiveJumpskirt
   - NoirJumpsuit
   - NoirJumpskirt
-
-- type: loadoutGroup
-  id: DetectiveBackpack
-  name: loadout-group-detective-backpack
-  loadouts:
-  - DetectiveBackpack
-  - DetectiveSatchel
-  - DetectiveDuffel
 
 - type: loadoutGroup
   id: DetectiveOuterClothing
@@ -1079,6 +1225,23 @@
   - SecurityCadetJumpsuitTurtleneckAlt
   - SecurityCadetJumpskirtTurtleneck
   - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: SurvivalSecurity
+  name: loadout-group-survival-security
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenSecurity
+  - EmergencyOxygenSecurity
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: SecurityStar
+  name: loadout-group-security-star
+  minLimit: 0
+  loadouts:
+  - SecStar
 
 # Medical
 - type: loadoutGroup
@@ -1107,14 +1270,6 @@
   - ChiefMedicalOfficerWintercoat
 
 - type: loadoutGroup
-  id: ChiefMedicalOfficerBackpack
-  name: loadout-group-chief-medical-officer-backpack
-  loadouts:
-  - ChiefMedicalOfficerBackpack
-  - ChiefMedicalOfficerSatchel
-  - ChiefMedicalOfficerDuffel
-
-- type: loadoutGroup
   id: ChiefMedicalOfficerNeck
   name: loadout-group-chief-medical-officer-neck
   minLimit: 0
@@ -1135,7 +1290,7 @@
   minLimit: 0
   loadouts:
   - MedicalBeret
-  - SeniorPhysicianBeret
+  # - SeniorPhysicianBeret  #SS220 Seniors roles
   - MedicalHeadMirror
   - BlueSurgeryCap
   - GreenSurgeryCap
@@ -1148,8 +1303,8 @@
   loadouts:
   - MedicalDoctorJumpsuit
   - MedicalDoctorJumpskirt
-  - SeniorPhysicianJumpsuit
-  - SeniorPhysicianJumpskirt
+  # - SeniorPhysicianJumpsuit  #SS220 Seniors roles
+  # - SeniorPhysicianJumpskirt  #SS220 Seniors roles
   - MedicalBlueScrubs
   - MedicalGreenScrubs
   - MedicalPurpleScrubs
@@ -1165,7 +1320,7 @@
   loadouts:
   - RegularLabCoat
   - MedicalDoctorWintercoat
-  - SeniorPhysicianLabCoat
+  # - SeniorPhysicianLabCoat  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: MedicalBackpack
@@ -1187,7 +1342,7 @@
   name: loadout-group-medical-doctor-id
   loadouts:
   - MedicalDoctorPDA
-  - SeniorPhysicianPDA
+  # - SeniorPhysicianPDA  #SS220 Seniors roles
 
 - type: loadoutGroup
   id: MedicalGloves
@@ -1256,6 +1411,7 @@
   - ParamedicJumpskirt
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - ParamedicFeldsher #SS220-ParamedFashion
 
 - type: loadoutGroup
   id: ParamedicOuterClothing
@@ -1266,67 +1422,21 @@
   - ParamedicWintercoat
 
 - type: loadoutGroup
-  id: ParamedicBackpack
-  name: loadout-group-paramedic-backpack
-  loadouts:
-  - ParamedicBackpack
-  - ParamedicSatchel
-  - ParamedicDuffel
-
-- type: loadoutGroup
   id: ParamedicShoes
   name: loadout-group-paramedic-shoes
   loadouts:
   - BlueShoes
   - MedicalWinterBoots
 
-#SS220-brigmedic-loadout-begin
 - type: loadoutGroup
-  id: BrigmedicHead
-  name: loadout-group-brigmedic-head
-  minLimit: 0
+  id: SurvivalMedical
+  name: loadout-group-survival-medical
+  minLimit: 2
+  hidden: true
   loadouts:
-  - BrigmedicHead
-
-- type: loadoutGroup
-  id: BrigmedicMask
-  name: loadout-group-brigmedic-mask
-  minLimit: 0
-  loadouts:
-  - SterileMask
-  - BrigmedicMask
-
-- type: loadoutGroup
-  id: BrigmedicJumpsuit
-  name: loadout-group-brigmedic-jumpsuit
-  loadouts:
-  - BrigmedicJumpsuit
-  - BrigmedicJumpskirt
-
-- type: loadoutGroup
-  id: BrigmedicOuterClothing
-  name: loadout-group-brigmedic-outerclothing
-  minLimit: 0
-  loadouts:
-  - BrigmedicWindAMG
-  - BrigmedicVestSecurity
-
-- type: loadoutGroup
-  id: BrigmedicBackpack
-  name: loadout-group-brigmedic-backpack
-  loadouts:
-  - BrigmedicBackpack
-  - BrigmedicSatchel
-  - BrigmedicDuffel
-
-- type: loadoutGroup
-  id: BrigmedicShoes
-  name: loadout-group-brigmedic-shoes
-  loadouts:
-  - RedShoes
-  - BlueShoes
-  - MedicalWinterBoots
-#SS220-brigmedic-loadout-end
+  - EmergencyNitrogenMedical
+  - EmergencyOxygenMedical
+  - LoadoutSpeciesVoxNitrogen
 
 # Wildcards
 - type: loadoutGroup
@@ -1335,6 +1445,16 @@
   loadouts:
   - ReporterJumpsuit
   - JournalistJumpsuit
+  - JumpsuitJournalistRed #SS220-Clothes
+
+- type: loadoutGroup
+  id: PsychologistJumpsuit
+  name: loadout-group-psychologist-jumpsuit
+  loadouts:
+  - PsychologistJumpsuit
+  - PsychologistJumpskirt
+  - PsychologistJumpsuitTurtleneck #SS220-MoreTurtleneck
+  - PsychologistJumpskirtTurtleneck #SS220-MoreTurtleneck
 
 - type: loadoutGroup
   id: BoxerJumpsuit
@@ -1351,3 +1471,41 @@
   - BlueBoxingGloves
   - GreenBoxingGloves
   - YellowBoxingGloves
+
+# Other
+- type: loadoutGroup
+  id: SurvivalSyndicate
+  name: loadout-group-survival-syndicate
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenSyndicate
+  - EmergencyOxygenSyndicate
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathTool
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathTool
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathToolMedical
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathToolMedical
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathToolSecurity
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathToolSecurity

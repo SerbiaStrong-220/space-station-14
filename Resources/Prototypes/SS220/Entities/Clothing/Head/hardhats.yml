@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatViolet
+  name: violet hard hat
+  description: A hard hat, painted in violet, used in dangerous working conditions to protect the head. Comes with a built-in flashlight.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/violet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/violet.rsi

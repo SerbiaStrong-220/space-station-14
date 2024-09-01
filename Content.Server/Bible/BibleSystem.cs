@@ -1,11 +1,11 @@
 using Content.Server.Bible.Components;
-using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Popups;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Bible;
 using Content.Shared.Damage;
+using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -167,7 +167,7 @@ namespace Content.Server.Bible
             {
                 Act = () =>
                 {
-                    if (!TryComp<TransformComponent>(args.User, out var userXform))
+                    if (!TryComp(args.User, out TransformComponent? userXform))
                         return;
 
                     AttemptSummon((uid, component), args.User, userXform);

@@ -38,9 +38,9 @@
   suffix: Диагональ, Оранжевый
   components:
   - type: Sprite
-    sprite: SS220/Structures/Walls/shuttle_orang.rsi
+    sprite: SS220/Structures/Walls/shuttle_orang_diagonal.rsi
   - type: Icon
-    sprite: SS220/Structures/Walls/shuttle_orang.rsi
+    sprite: SS220/Structures/Walls/shuttle_orang_diagonal.rsi
 
 - type: entity
   parent: WallShuttle

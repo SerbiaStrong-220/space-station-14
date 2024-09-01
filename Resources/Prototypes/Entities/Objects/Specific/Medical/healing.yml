@@ -347,7 +347,8 @@
 
 # Pills
 - type: entity
-  name: pill (dexalin 10u)
+  name: pill
+  suffix: Dexalin 10u
   parent: Pill
   id: PillDexalin
   components:
@@ -355,8 +356,8 @@
     pillType: 15
   - type: Sprite
     state: pill16
-  - type: Label
-    currentLabel: dexalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dexalin 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -366,20 +367,21 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (dexalin 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterDexalin
-  suffix: Dexalin, 7
+  suffix: Dexalin 10u, 7
   components:
-  - type: Label
-    currentLabel: dexalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dexalin 10u
   - type: StorageFill
     contents:
     - id: PillDexalin
       amount: 7
 
 - type: entity
-  name: pill (dylovene 10u)
+  name: pill
+  suffix: Dylovene 10u
   parent: Pill
   id: PillDylovene
   components:
@@ -387,8 +389,8 @@
     pillType: 9
   - type: Sprite
     state: pill10
-  - type: Label
-    currentLabel: dylovene 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dylovene 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -398,20 +400,21 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (dylovene 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterDylovene
-  suffix: Dylovene, 5
+  suffix: Dylovene 10u, 5
   components:
-  - type: Label
-    currentLabel: dylovene 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dylovene 10u
   - type: StorageFill
     contents:
     - id: PillDylovene
       amount: 5
 
 - type: entity
-  name: pill (hyronalin 10u)
+  name: pill
+  suffix: Hyronalin 10u
   parent: Pill
   id: PillHyronalin
   components:
@@ -419,8 +422,8 @@
     pillType: 16
   - type: Sprite
     state: pill17
-  - type: Label
-    currentLabel: hyronalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: hyronalin 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -430,20 +433,54 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (hyronalin 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterHyronalin
-  suffix: Hyronalin, 5
+  suffix: Hyronalin 10u, 5
   components:
-  - type: Label
-    currentLabel: hyronalin 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: hyronalin 10u
   - type: StorageFill
     contents:
     - id: PillHyronalin
       amount: 5
 
 - type: entity
-  name: pill (iron 10u)
+  name: pill
+  suffix: Potassium iodide 10u
+  parent: Pill
+  id: PillPotassiumIodide
+  components:
+  - type: Pill
+    pillType: 8
+  - type: Sprite
+    state: pill9
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: potassium iodide 10u
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: PotassiumIodide
+          Quantity: 10
+
+- type: entity
+  name: pill canister
+  parent: PillCanister
+  id: PillCanisterPotassiumIodide
+  suffix: Potassium iodide 10u, 5
+  components:
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: potassium iodide 10u
+  - type: StorageFill
+    contents:
+    - id: PillPotassiumIodide
+      amount: 5
+
+- type: entity
+  name: pill
+  suffix: Iron 10u
   parent: Pill
   id: PillIron
   components:
@@ -451,8 +488,8 @@
     pillType: 13
   - type: Sprite
     state: pill14
-  - type: Label
-    currentLabel: iron 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: iron 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -462,7 +499,8 @@
           Quantity: 10
 
 - type: entity
-  name: pill (copper 10u)
+  name: pill
+  suffix: Copper 10u
   parent: Pill
   id: PillCopper
   components:
@@ -470,8 +508,8 @@
     pillType: 12
   - type: Sprite
     state: pill13
-  - type: Label
-    currentLabel: copper 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: copper 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -481,33 +519,34 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (iron 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterIron
-  suffix: Iron, 5
+  suffix: Iron 10u, 5
   components:
-  - type: Label
-    currentLabel: iron 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: iron 10u
   - type: StorageFill
     contents:
     - id: PillIron
       amount: 5
 
 - type: entity
-  name: pill canister (copper 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterCopper
-  suffix: Copper, 5
+  suffix: Copper 10u, 5
   components:
-  - type: Label
-    currentLabel: copper 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: copper 10u
   - type: StorageFill
     contents:
     - id: PillCopper
       amount: 5
 
 - type: entity
-  name: pill (kelotane 10u)
+  name: pill
+  suffix: Kelotane 10u
   parent: Pill
   id: PillKelotane
   components:
@@ -515,8 +554,8 @@
     pillType: 3
   - type: Sprite
     state: pill4
-  - type: Label
-    currentLabel: kelotane 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: kelotane 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -526,20 +565,21 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (kelotane 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterKelotane
-  suffix: Kelotane, 5
+  suffix: Kelotane 10u, 5
   components:
-  - type: Label
-    currentLabel: kelotane 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: kelotane 10u
   - type: StorageFill
     contents:
     - id: PillKelotane
       amount: 5
 
 - type: entity
-  name: pill (dermaline 10u)
+  name: pill
+  suffix: Dermaline 10u
   parent: Pill
   id: PillDermaline
   components:
@@ -547,8 +587,8 @@
     pillType: 7
   - type: Sprite
     state: pill8
-  - type: Label
-    currentLabel: dermaline 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dermaline 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -558,20 +598,20 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (dermaline 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterDermaline
-  suffix: Dermaline, 5
+  suffix: Dermaline 10u, 5
   components:
-  - type: Label
-    currentLabel: dermaline 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: dermaline 10u
   - type: StorageFill
     contents:
     - id: PillDermaline
       amount: 5
 
 - type: entity
-  name: space drugs
+  name: space mirage
   parent: Pill
   id: PillSpaceDrugs
   components:
@@ -584,7 +624,8 @@
           Quantity: 15
 
 - type: entity
-  name: pill (tricordrazine 10u)
+  name: pill
+  suffix: Tricordrazine 10u
   parent: Pill
   id: PillTricordrazine
   components:
@@ -592,8 +633,8 @@
     pillType: 2
   - type: Sprite
     state: pill3
-  - type: Label
-    currentLabel: tricordrazine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: tricordrazine 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -603,20 +644,21 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (tricordrazine 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterTricordrazine
-  suffix: Tricordrazine, 5
+  suffix: Tricordrazine 10u, 5
   components:
-  - type: Label
-    currentLabel: tricordrazine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: tricordrazine 10u
   - type: StorageFill
     contents:
     - id: PillTricordrazine
       amount: 5
 
 - type: entity
-  name: pill (bicaridine 10u)
+  name: pill
+  suffix: Bicaridine 10u
   parent: Pill
   id: PillBicaridine
   components:
@@ -624,8 +666,8 @@
     pillType: 4
   - type: Sprite
     state: pill5
-  - type: Label
-    currentLabel: bicaridine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: bicaridine 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -635,20 +677,21 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (bicaridine 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterBicaridine
-  suffix: Bicaridine, 5
+  suffix: Bicaridine 10u, 5
   components:
-  - type: Label
-    currentLabel: bicaridine 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: bicaridine 10u
   - type: StorageFill
     contents:
     - id: PillBicaridine
       amount: 5
 
 - type: entity
-  name: pill (charcoal 10u)
+  name: pill
+  suffix: Charcoal 10u
   parent: Pill
   id: PillCharcoal
   components:
@@ -656,8 +699,8 @@
     pillType: 20
   - type: Sprite
     state: pill21
-  - type: Label
-    currentLabel: charcoal 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: charcoal 10u
   - type: SolutionContainerManager
     solutions:
       food:
@@ -667,13 +710,13 @@
           Quantity: 10
 
 - type: entity
-  name: pill canister (charcoal 10u)
+  name: pill canister
   parent: PillCanister
   id: PillCanisterCharcoal
-  suffix: Charcoal, 3
+  suffix: Charcoal 10u, 3
   components:
-  - type: Label
-    currentLabel: charcoal 10u
+  #- type: Label SS220-fix-pill-canister-names
+  #  currentLabel: charcoal 10u
   - type: StorageFill
     contents:
     - id: PillCharcoal
@@ -738,6 +781,10 @@
       maxAmount: 7
       orGroup: RandomPill
     - id: PillHyronalin
+      prob: 0.10
+      maxAmount: 7
+      orGroup: RandomPill
+    - id: PillPotassiumIodide
       prob: 0.10
       maxAmount: 7
       orGroup: RandomPill
@@ -946,7 +993,7 @@
 #this is where all the syringes are so i didn't know where to put it
 - type: entity
   name: romerol syringe
-  parent: PrefilledSyringe
+  parent: [PrefilledSyringe, BaseSyndicateContraband]
   id: SyringeRomerol
   components:
   - type: SolutionContainerManager
@@ -958,8 +1005,8 @@
           Quantity: 15
 
 - type: entity
-  name: stimulants syringe
-  parent: PrefilledSyringe
+  name: hyperzine syringe
+  parent: [PrefilledSyringe, BaseSyndicateContraband]
   id: SyringeStimulants
   components:
   - type: SolutionContainerManager

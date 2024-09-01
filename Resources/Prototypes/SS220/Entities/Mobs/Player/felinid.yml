@@ -33,23 +33,6 @@
       methods: [Touch]
       effects:
       - !type:WashCreamPieReaction
-  - type: StatusEffects
-    allowed:
-    - Stun
-    - KnockedDown
-    - SlowedDown
-    - Stutter
-    - SeeingRainbows
-    - Electrocution
-    - Drunk
-    - SlurredSpeech
-    - RatvarianLanguage
-    - PressureImmunity
-    - Muted
-    - ForcedSleep
-    - TemporaryBlindness
-    - Pacified
-    - StaminaModifier
   - type: Alerts
   - type: Actions
   - type: Eye

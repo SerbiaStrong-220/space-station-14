@@ -1,3 +1,4 @@
+using Content.Server.Popups;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared.Shuttles.BUIStates;
@@ -63,7 +64,7 @@ public sealed partial class ShuttleConsoleSystem
 
     private void OnPositionFTLMessage(Entity<ShuttleConsoleComponent> entity, ref ShuttleConsoleFTLPositionMessage args)
     {
-        var mapUid = _mapManager.GetMapEntityId(args.Coordinates.MapId);
+        var mapUid = _mapSystem.GetMap(args.Coordinates.MapId);
 
         // If it's beacons only block all position messages.
         if (!Exists(mapUid) || _shuttle.IsBeaconMap(mapUid))
@@ -127,6 +128,7 @@ public sealed partial class ShuttleConsoleSystem
         // Check shuttle can even FTL
         if (!_shuttle.CanFTL(shuttleUid.Value, out var reason))
         {
+            _popup.PopupEntity(reason, consoleUid.Value); // SS220 War-Ops-Fix
             // TODO: Session popup
             return;
         }

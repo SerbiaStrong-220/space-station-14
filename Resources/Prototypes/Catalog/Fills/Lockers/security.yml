@@ -9,6 +9,7 @@
       - id: WeaponDisabler
       - id: ClothingBeltSecurityFilled
       - id: Flash
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
@@ -21,6 +22,11 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
+      - id: BookSpaceLaw
+      - id: ClothingBackpackElectropack
+        amount: 2
+      - id: RemoteSignaller
+        amount: 2
 
 - type: entity
   id: LockerWardenFilled
@@ -33,6 +39,7 @@
       - id: WeaponDisabler
       - id: ClothingBeltSecurityFilled
       - id: Flash
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
@@ -45,30 +52,11 @@
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
-
-#SS220-Pilot
-- type: entity
-  id: LockerPilotFilled
-  suffix: Filled
-  parent: LockerPilot
-  components:
-  - type: StorageFill
-    contents:
-      - id: FlashlightSeclite
-      - id: WeaponDisabler
-        prob: 0.3
-      - id: ClothingOuterArmorBobmer
-      - id: ClothingHeadHatPilotBeret
-      - id: ClothingBeltSecurityFilled
-      - id: Flash
-      - id: ClothingEyesGlassesSecurity
-#      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
-      - id: ClothingShoesBootsJack
-      - id: ClothingEyesHudSecurity
-      - id: ClothingOuterHardsuitSecurityPilot #ss220-pilot-hardsuit
-      - id: HandheldGPSBasic
-      - id: OxygenTankFilled
-      - id: NitrogenTankFilled
+      - id: BookSpaceLaw
+      - id: ClothingBackpackElectropack
+        amount: 2
+      - id: RemoteSignaller
+        amount: 2
 
 - type: entity
   id: LockerSecurityFilled
@@ -78,6 +66,7 @@
   - type: StorageFill
     contents:
       - id: FlashlightSeclite
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.8
       - id: WeaponDisabler
       - id: ClothingUniformJumpsuitSecGrey
@@ -97,6 +86,8 @@
         prob: 0.1
       - id: HoloprojectorSecurity
         #prob: 0.6 # SS220 guranteed-holo-projector
+      - id: BookSpaceLaw
+        prob: 0.5
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -115,6 +106,7 @@
       - id: ClothingUniformJumpsuitBrigmedic
       - id: ClothingUniformJumpskirtBrigmedic
       - id: ClothingUniformJumpskirtOfLife
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.1
       - id: MedkitFilled
       - id: MedkitCombatFilled
@@ -144,6 +136,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BodySecurityCamera #SS220-Bodycam
       - id: Telescopichka
       - id: ClothingEyesHudSecurity
         prob: 0.3
@@ -165,6 +158,8 @@
         amount: 2
       - id: DetectiveHiddenCamera # SS220 add-detective-camera
         amount: 3
+      - id: HandLabeler
+
 - type: entity
   id: ClosetBombFilled
   parent: ClosetBomb
@@ -183,7 +178,7 @@
         prob: 0.5
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   id: GunSafeDisabler
   name: disabler safe
   components:
@@ -193,7 +188,7 @@
       amount: 5
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   id: GunSafePistolMk58
   name: mk58 safe
   components:
@@ -205,7 +200,7 @@
       amount: 8
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   id: GunSafeRifleLecter
   name: lecter safe
   components:
@@ -217,7 +212,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   id: GunSafeSubMachineGunDrozd
   name: drozd safe
   components:
@@ -229,7 +224,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   id: GunSafeShotgunEnforcer
   name: enforcer safe
   components:
@@ -241,7 +236,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   id: GunSafeShotgunKammerer
   name: kammerer safe
   components:
@@ -255,7 +250,7 @@
 - type: entity
   id: GunSafeSubMachineGunWt550
   suffix: Wt550
-  parent: GunSafe
+  parent: [GunSafe, BaseRestrictedContraband]
   name: wt550 safe
   components:
   - type: StorageFill

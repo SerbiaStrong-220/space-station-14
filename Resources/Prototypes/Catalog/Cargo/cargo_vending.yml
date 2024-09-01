@@ -42,7 +42,7 @@
     sprite: Objects/Specific/Service/vending_machine_restock.rsi
     state: base
   product: CrateVendingMachineRestockAutoDrobeFilled
-  cost: 1300 #SS220-tohoUPDATE
+  cost: 2500
   category: cargoproduct-category-name-service
   group: market
 
@@ -172,7 +172,7 @@
     sprite: Objects/Specific/Service/vending_machine_restock.rsi
     state: base
   product: CrateVendingMachineRestockSeedsFilled
-  cost: 3850 # SS220 Cargo fix
+  cost: 4095 # SS220 Cargo fix
   category: cargoproduct-category-name-hydroponics
   group: market
 

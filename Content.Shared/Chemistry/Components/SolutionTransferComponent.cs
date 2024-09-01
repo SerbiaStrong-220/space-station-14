@@ -6,7 +6,7 @@ namespace Content.Shared.Chemistry.Components;
 /// <summary>
 ///     Gives click behavior for transferring to/from other reagent containers.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SolutionTransferComponent : Component
 {
     /// <summary>
@@ -14,6 +14,7 @@ public sealed partial class SolutionTransferComponent : Component
     /// </summary>
     [DataField("transferAmount")]
     [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
     public FixedPoint2 TransferAmount { get; set; } = FixedPoint2.New(5);
 
     /// <summary>
@@ -21,14 +22,14 @@ public sealed partial class SolutionTransferComponent : Component
     /// </summary>
     [DataField("minTransferAmount")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 MinimumTransferAmount { get; set; } = FixedPoint2.New(5);
+    public FixedPoint2 MinimumTransferAmount { get; set; } = FixedPoint2.New(1); // ss220 change amount transfer fix
 
     /// <summary>
     ///     The maximum amount of solution that can be transferred at once from this solution.
     /// </summary>
     [DataField("maxTransferAmount")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 MaximumTransferAmount { get; set; } = FixedPoint2.New(50);
+    public FixedPoint2 MaximumTransferAmount { get; set; } = FixedPoint2.New(1000); // ss220 change amount transfer fix
 
     /// <summary>
     ///     Can this entity take reagent from reagent tanks?

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cev-eris and modified by Swept at https://github.com/discordia-space/CEV-Eris/commit/efce5b6c3be75458ce238dcc01510e8f8a653ca6, old-radio is taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/498d1b32708c014044ca7b9cbb1766d8ecef7cf0",
+  "copyright": "Taken from cev-eris and modified by Swept at https://github.com/discordia-space/CEV-Eris/commit/efce5b6c3be75458ce238dcc01510e8f8a653ca6, old-radio is taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/498d1b32708c014044ca7b9cbb1766d8ecef7cf0,  urist's icon resprite by @mishutka09",
   "size": {
     "x": 32,
     "y": 32
@@ -86,6 +86,21 @@
     {
       "name": "old-radio-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "old-radio-syndicat"
+    },
+    {
+      "name": "old-radio-urist"
+    },
+    {
+      "name": "old-radio-nukeop"
+    },
+    {
+      "name": "old-radio-ancestor"
+    },
+    {
+      "name": "old-radio-borg-assault"
     }
   ]
 }

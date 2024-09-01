@@ -1,6 +1,6 @@
 - type: entity
   id: MachineArtifactAnalyzer
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, SmallConstructibleMachine ]
   name: artifact analyzer
   description: A platform capable of performing analysis on various types of artifacts.
   components:
@@ -24,7 +24,17 @@
     volume: -8
   - type: Fixtures
     fixtures:
-      fix1:
+# SS220 Fix #1544 begin
+#      fix1:
+#        shape:
+#          !type:PhysShapeAabb
+#          bounds: "-0.35,-0.35,0.35,0.35"
+#         mask:
+#         - Impassable
+#         - HighImpassable
+#         - MidImpassable
+# SS220 Fix #1544 end
+      fix:
         shape:
           !type:PhysShapeAabb
           bounds: "-0.35,-0.35,0.35,0.35"
@@ -35,10 +45,10 @@
         - Impassable
         - MidImpassable
         - LowImpassable
+        - BulletImpassable
         hard: False
   - type: Transform
     anchored: true
-    noRot: false
   - type: ApcPowerReceiver
     powerLoad: 12000
     needsPower: false #only turns on when scanning

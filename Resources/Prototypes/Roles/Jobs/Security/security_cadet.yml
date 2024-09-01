@@ -5,7 +5,11 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 18000 # SS220-RoleTime
+      time: 36000 # SS220-RoleTime 2
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
@@ -24,7 +28,7 @@
 - type: startingGear
   id: SecurityCadetGear
   equipment:
-    shoes: ClothingShoesBootsCombatFilled
+    shoes: ClothingShoesBootsJackFilled
     outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
     ears: ClothingHeadsetSecurity
@@ -32,3 +36,10 @@
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
     pocket2: BookSecurity
+  storage:
+    back:
+    - Flash
+    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
+    - MagazinePistolRubber
+    - FlashlightSeclite
+    - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End

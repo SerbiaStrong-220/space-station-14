@@ -21,7 +21,10 @@
 - type: startingGear
   id: BotanistGear
   equipment:
-    shoes: ClothingShoesColorBrown
+    #shoes: ClothingShoesColorBrown #SS220 to do druid loadout
     id: BotanistPDA
     ears: ClothingHeadsetService
-    belt: ClothingBeltPlantFilled
+    #belt: ClothingBeltPlantFilled #SS220 to do druid loadout
+  #storage:
+    #back:
+    #- Stuff

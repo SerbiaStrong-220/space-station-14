@@ -1,0 +1,451 @@
+# Returned these prototypes so that the corpses would spawned in this clothing, and not naked
+
+# Cargo
+- type: startingGear
+  id: CargoTechStandartGear
+  equipment:
+    head: ClothingHeadHatCargosoft
+    jumpsuit: ClothingUniformJumpsuitCargo
+    back: ClothingBackpackCargo
+    shoes: ClothingShoesColorBlack
+    id: CargoPDA
+    ears: ClothingHeadsetCargo
+    pocket1: AppraisalTool
+
+- type: startingGear
+  id: QuartermasterStandartGear
+  equipment:
+    head: ClothingHeadHatQMsoft
+    jumpsuit: ClothingUniformJumpsuitQM
+    back: ClothingBackpackCargo
+    shoes: ClothingShoesColorBrown
+    id: QuartermasterPDA
+    ears: ClothingHeadsetQM
+    belt: BoxFolderClipboard
+    pocket1: AppraisalTool
+
+- type: startingGear
+  id: SalvageSpecialistStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    back: ClothingBackpackSalvage
+    shoes: ClothingShoesBootsSalvage
+    id: SalvagePDA
+    ears: ClothingHeadsetCargo
+
+# Civilian
+- type: startingGear
+  id: PassengerStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    back: ClothingBackpack
+    shoes: ClothingShoesColorBlack
+    id: PassengerPDA
+    ears: ClothingHeadsetGrey
+
+- type: startingGear
+  id: BartenderStandartGear
+  equipment:
+    head: ClothingHeadHatTophat
+    jumpsuit: ClothingUniformJumpsuitBartender
+    outerClothing: ClothingOuterVest
+    back: ClothingBackpack
+    shoes: ClothingShoesColorBlack
+    id: BartenderPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: BotanistStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponics
+    back: ClothingBackpackHydroponics
+    shoes: ClothingShoesColorBrown
+    id: BotanistPDA
+    ears: ClothingHeadsetService
+    outerClothing: ClothingOuterApronBotanist
+    belt: ClothingBeltPlantFilled
+
+- type: startingGear
+  id: ChaplainStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChaplain
+    back: ClothingBackpack
+    shoes: ClothingShoesColorBlack
+    id: ChaplainPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: ChefStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+    head: ClothingHeadHatChef
+    back: ClothingBackpack
+    mask: ClothingMaskItalianMoustache
+    shoes: ClothingShoesColorBlack
+    id: ChefPDA
+    ears: ClothingHeadsetService
+    outerClothing: ClothingOuterApronChef
+    belt: ClothingBeltChefApronWhite
+
+- type: startingGear
+  id: ClownStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClown
+    back: ClothingBackpackClown
+    shoes: ClothingShoesClown
+    mask: ClothingMaskClown
+    pocket1: BikeHorn
+    pocket2: ClownRecorder
+    id: ClownPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: JanitorStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJanitor
+    back: ClothingBackpack
+    shoes: ClothingShoesGaloshes
+    head: ClothingHeadHatPurplesoft
+    id: JanitorPDA
+    gloves: ClothingHandsGlovesJanitor
+    ears: ClothingHeadsetService
+    belt: ClothingBeltJanitorFilled
+
+- type: startingGear
+  id: LawyerStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLawyerBlack
+    back: ClothingBackpack
+    shoes: ClothingShoesBootsLaceup
+    id: LawyerPDA
+    ears: ClothingHeadsetSecurity
+  inhand:
+    - BriefcaseBrownFilled
+
+- type: startingGear
+  id: LibrarianStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLibrarian
+    back: ClothingBackpack
+    shoes: ClothingShoesBootsLaceup
+    id: LibrarianPDA
+    ears: ClothingHeadsetService
+    pocket1: d10Dice
+    pocket2: HandLabeler
+
+- type: startingGear
+  id: MimeStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMime
+    back: ClothingBackpackMime
+    head: ClothingHeadHatBeret
+    belt: ClothingBeltSuspendersRed
+    gloves: ClothingHandsGlovesColorWhite
+    shoes: ClothingShoesColorWhite
+    pocket1: CrayonMime
+    pocket2: Paper
+    mask: ClothingMaskMime
+    id: MimePDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: MusicianStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMusician
+    back: ClothingBackpack
+    eyes: ClothingEyesGlassesSunglasses
+    shoes: ClothingShoesBootsLaceup
+    id: MusicianPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: ServiceWorkerStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBartender
+    back: ClothingBackpack
+    shoes: ClothingShoesColorBlack
+    id: ServiceWorkerPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: ReporterStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitReporter
+    back: ClothingBackpack
+    shoes: ClothingShoesColorWhite
+    id: ReporterPDA
+    ears: ClothingHeadsetService
+
+- type: startingGear
+  id: ZookeeperStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSafari
+    back: ClothingBackpack
+    head: ClothingHeadSafari
+    shoes: ClothingShoesColorWhite
+    id: ZookeeperPDA
+    ears: ClothingHeadsetService
+
+# Command
+- type: startingGear
+  id: CaptainStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    back: ClothingBackpackCaptain
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatCaptain
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesCaptain
+    outerClothing: ClothingOuterArmorCaptainCarapace
+    id: CaptainPDA
+    ears: ClothingHeadsetAltCommand
+
+- type: startingGear
+  id: HoPStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHoP
+    back: ClothingBackpack
+    shoes: ClothingShoesColorBrown
+    head: ClothingHeadHatHopcap
+    id: HoPPDA
+    gloves: ClothingHandsGlovesHop
+    ears: ClothingHeadsetAltCommand
+    belt: BoxFolderClipboard
+
+# Engineering
+- type: startingGear
+  id: AtmosphericTechnicianStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAtmos
+    back: ClothingBackpackAtmospherics
+    shoes: ClothingShoesColorWhite
+    eyes: ClothingEyesGlassesMeson
+    id: AtmosPDA
+    belt: ClothingBeltUtilityEngineering
+    ears: ClothingHeadsetEngineering
+
+- type: startingGear
+  id: ChiefEngineerStandartGear
+  equipment:
+    head: ClothingHeadHatHardhatWhite
+    jumpsuit: ClothingUniformJumpsuitChiefEngineer
+    back: ClothingBackpackEngineering
+    shoes: ClothingShoesColorBrown
+    id: CEPDA
+    eyes: ClothingEyesGlassesMeson
+    ears: ClothingHeadsetCE
+    belt: ClothingBeltUtilityEngineering
+
+- type: startingGear
+  id: StationEngineerStandartGear
+  equipment:
+    head: ClothingHeadHatHardhatYellow
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    back: ClothingBackpackEngineering
+    shoes: ClothingShoesBootsWork
+    outerClothing: ClothingOuterVestHazard
+    id: EngineerPDA
+    eyes: ClothingEyesGlassesMeson
+    belt: ClothingBeltUtilityEngineering
+    ears: ClothingHeadsetEngineering
+
+- type: startingGear
+  id: TechnicalAssistantStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorYellow
+    back: ClothingBackpackEngineering
+    shoes: ClothingShoesBootsWork
+    id: TechnicalAssistantPDA
+    belt: ClothingBeltUtilityEngineering
+    ears: ClothingHeadsetEngineering
+    pocket2: BookEngineersHandbook
+
+# Medical
+- type: startingGear
+  id: ChemistStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChemistry
+    back: ClothingBackpackChemistry
+    shoes: ClothingShoesColorWhite
+    outerClothing: ClothingOuterCoatLabChem
+    id: ChemistryPDA
+    ears: ClothingHeadsetMedical
+    belt: ChemBag
+    pocket1: HandLabeler
+
+- type: startingGear
+  id: CMOStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCMO
+    back: ClothingBackpackMedical
+    shoes: ClothingShoesColorBrown
+    outerClothing: ClothingOuterCoatLabCmo
+    id: CMOPDA
+    ears: ClothingHeadsetCMO
+    belt: ClothingBeltMedicalFilled
+
+- type: startingGear
+  id: DoctorStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    back: ClothingBackpackMedical
+    shoes: ClothingShoesColorWhite
+    outerClothing: ClothingOuterCoatLab
+    id: MedicalPDA
+    ears: ClothingHeadsetMedical
+    belt: ClothingBeltMedicalFilled
+
+- type: startingGear
+  id: MedicalInternStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorWhite
+    back: ClothingBackpackMedical
+    shoes: ClothingShoesColorWhite
+    id: MedicalInternPDA
+    ears: ClothingHeadsetMedical
+    belt: ClothingBeltMedicalFilled
+    pocket2: BookMedicalReferenceBook
+
+- type: startingGear
+  id: ParamedicStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitParamedic
+    back: ClothingBackpackMedical
+    shoes: ClothingShoesColorBlue
+    id: ParamedicPDA
+    ears: ClothingHeadsetMedical
+    belt: ClothingBeltMedicalEMTFilled
+
+- type: startingGear
+  id: BrigmedicStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBrigmedic
+    back: ClothingBackpackBrigmedic
+    eyes: ClothingEyesHudMedical
+    shoes: ClothingShoesColorWhite
+    id: BrigmedicPDA
+    ears: ClothingHeadsetBrigmedic
+    belt: ClothingBeltMedicalFilled
+
+- type: startingGear
+  id: PsychologistStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPsychologist
+    back: ClothingBackpackMedical
+    shoes: ClothingShoesLeather
+    id: PsychologistPDA
+    ears: ClothingHeadsetMedical
+
+# Science
+- type: startingGear
+  id: ResearchAssistantStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorWhite
+    back: ClothingBackpackScience
+    shoes: ClothingShoesColorWhite
+    id: ResearchAssistantPDA
+    ears: ClothingHeadsetScience
+    pocket2: BookScientistsGuidebook
+
+- type: startingGear
+  id: ResearchDirectorStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitResearchDirector
+    back: ClothingBackpackScience
+    shoes: ClothingShoesColorBrown
+    outerClothing: ClothingOuterCoatRD
+    id: RnDPDA
+    ears: ClothingHeadsetRD
+
+- type: startingGear
+  id: ScientistStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitScientist
+    back: ClothingBackpackScience
+    shoes: ClothingShoesColorWhite
+    outerClothing: ClothingOuterCoatRnd
+    id: SciencePDA
+    ears: ClothingHeadsetScience
+
+# Security
+- type: startingGear
+  id: DetectiveStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDetective
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHatFedoraBrown
+    outerClothing: ClothingOuterVestDetective
+    id: DetectivePDA
+    ears: ClothingHeadsetSecurity
+    # belt: ClothingBeltHolsterFilled  #Temporarily in comment, because the holster moves to the neck slot
+
+- type: startingGear
+  id: HoSStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHoS
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    outerClothing: ClothingOuterCoatHoSTrench
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHatBeretHoS
+    id: HoSPDA
+    gloves: ClothingHandsGlovesCombat
+    ears: ClothingHeadsetAltSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58
+
+- type: startingGear
+  id: SecurityCadetStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorRed
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityCadetPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58
+    pocket2: BookSecurity
+
+- type: startingGear
+  id: SecurityOfficerStandartGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    head: ClothingHeadHelmetBasic
+    outerClothing: ClothingOuterArmorBasic
+    id: SecurityPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58
+
+- type: startingGear
+  id: WardenStandartGear
+  equipment:
+    head: ClothingHeadHatWarden
+    jumpsuit: ClothingUniformJumpsuitWarden
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    outerClothing: ClothingOuterCoatWarden
+    id: WardenPDA
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58
+
+- type: startingGear
+  id: SecurityPilotStandartGear
+  equipment:
+    head: ClothingHeadHatPilotBeret
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesSecurity
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves
+    pocket1: WeaponPistolMk58Nonlethal

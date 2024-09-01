@@ -1,0 +1,51 @@
+- type: entity
+  parent: BaseWeaponBatterySmall
+  id: WeaponMultiPhaseEnergyGun
+  name: multiphase energy gun
+  description: This is an expensive, modern version of an antique laser pistol. This weapon has several unique fire modes, but there is no way to recharge yourself over time.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: disabler-mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+  - type: Gun
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: BulletDisabler
+      name: firemode-name-disabler
+      fireCost: 40
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      magState: disabler-mag
+    - proto: RedMediumLaser
+      name: firemode-name-laser
+      fireCost: 62.5
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      magState: laser-mag
+    - proto: BulletEMP
+      name: firemode-name-emp
+      fireCost: 200
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
+      magState: emp-mag
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletDisabler
+    fireCost: 40
+  - type: MagazineVisuals
+    magState: disabler-mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: Tag
+    tags:
+    - HighRiskItem
+    - Sidearm
+    - WeaponMultiPhaseEnergyGun
+  - type: StaticPrice
+    price: 750
+  - type: StealTarget
+    stealGroup: WeaponMultiPhaseEnergyGun

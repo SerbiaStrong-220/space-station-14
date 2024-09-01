@@ -5,7 +5,6 @@ using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Labels;
-using Content.Server.Paper;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.SS220.Photocopier;
@@ -30,6 +29,9 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Content.Shared.NameModifier.Components;
+using Content.Shared.Power;
 
 namespace Content.Server.Fax;
 
@@ -232,7 +234,8 @@ public sealed class FaxSystem : EntitySystem
                 return;
             }
 
-            _adminLogger.Add(LogType.Action, LogImpact.Low,
+            _adminLogger.Add(LogType.Action,
+                LogImpact.Low,
                 $"{ToPrettyString(args.User):user} renamed {ToPrettyString(uid):tool} from \"{component.FaxName}\" to \"{newName}\"");
             component.FaxName = newName;
             _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-name-set"), uid);
@@ -281,8 +284,8 @@ public sealed class FaxSystem : EntitySystem
 
                     break;
                 case FaxConstants.FaxPrintCommand:
-                    if(!args.Data.TryGetValue(FaxConstants.FaxPaperDataToCopy, out Dictionary<Type, IPhotocopiedComponentData>? dataToCopy) ||
-                       !args.Data.TryGetValue(FaxConstants.FaxPaperMetaData, out PhotocopyableMetaData? metaDataToCopy))
+                    if (!args.Data.TryGetValue(FaxConstants.FaxPaperDataToCopy, out Dictionary<Type, IPhotocopiedComponentData>? dataToCopy) ||
+                        !args.Data.TryGetValue(FaxConstants.FaxPaperMetaData, out PhotocopyableMetaData? metaDataToCopy))
                         return;
 
                     var printout = new FaxPrintout(dataToCopy, metaDataToCopy);
@@ -301,7 +304,7 @@ public sealed class FaxSystem : EntitySystem
     private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)
     {
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
-            _faxecute.Faxecute(uid, component); /// when button pressed it will hurt the mob.
+            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
         else
             Send(uid, component, args);
     }
@@ -410,6 +413,8 @@ public sealed class FaxSystem : EntitySystem
         if (dataToCopy.Count == 0)
             return;
 
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
+
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
         var payload = new NetworkPayload()
@@ -423,7 +428,8 @@ public sealed class FaxSystem : EntitySystem
 
         _deviceNetworkSystem.QueuePacket(uid, component.DestinationFaxAddress, payload);
 
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.Action,
+            LogImpact.Low,
             $"{ToPrettyString(args.Actor):actor} " +
             $"sent fax from \"{component.FaxName}\" {ToPrettyString(uid):tool} " +
             $"to \"{faxName}\" ({component.DestinationFaxAddress}) " +

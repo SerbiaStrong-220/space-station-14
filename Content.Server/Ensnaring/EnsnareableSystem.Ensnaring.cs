@@ -11,6 +11,7 @@ using Content.Shared.Ensnaring.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Throwing;
+using Content.Shared.Verbs;
 
 namespace Content.Server.Ensnaring;
 
@@ -28,11 +29,61 @@ public sealed partial class EnsnareableSystem
         SubscribeLocalEvent<EnsnaringComponent, StepTriggeredOffEvent>(OnStepTrigger);
         SubscribeLocalEvent<EnsnaringComponent, ThrowDoHitEvent>(OnThrowHit);
         SubscribeLocalEvent<EnsnaringComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);
+        SubscribeLocalEvent<EnsnareableComponent, GetVerbsEvent<Verb>>(GetVerb); //ss220 Ensnareable
+        SubscribeLocalEvent<EnsnareableComponent, RemoveEnsnareAlertEvent>(OnRemoveEnsnareAlert);
     }
+
+    //ss220 Ensnareable begin
+    private void GetVerb(Entity<EnsnareableComponent> ent, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess || args.Hands == null)
+            return;
+
+        if (!ent.Comp.IsEnsnared)
+            return;
+
+        var target = args.Target;
+        var user = args.User;
+
+        Verb verb = new Verb()
+        {
+            Text = Loc.GetString("ensnare-component-try-free-verb"),
+            Act = () =>
+            {
+                foreach (var entity in ent.Comp.Container.ContainedEntities)
+                {
+                    if (!TryComp<EnsnaringComponent>(entity, out var ensnaring))
+                        continue;
+
+                    TryFree(target, user, entity, ensnaring);
+                }
+            },
+        };
+        args.Verbs.Add(verb);
+    }
+    //ss220 Ensnareable end
 
     private void OnAttemptPacifiedThrow(Entity<EnsnaringComponent> ent, ref AttemptPacifiedThrowEvent args)
     {
         args.Cancel("pacified-cannot-throw-snare");
+    }
+
+    private void OnRemoveEnsnareAlert(Entity<EnsnareableComponent> ent, ref RemoveEnsnareAlertEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        foreach (var ensnare in ent.Comp.Container.ContainedEntities)
+        {
+            if (!TryComp<EnsnaringComponent>(ensnare, out var ensnaringComponent))
+                return;
+
+            TryFree(ent, ent, ensnare, ensnaringComponent);
+
+            args.Handled = true;
+            // Only one snare at a time.
+            break;
+        }
     }
 
     private void OnComponentRemove(EntityUid uid, EnsnaringComponent component, ComponentRemove args)
@@ -109,7 +160,7 @@ public sealed partial class EnsnareableSystem
     /// <param name="component">The ensnaring component</param>
     public void TryFree(EntityUid target, EntityUid user, EntityUid ensnare, EnsnaringComponent component)
     {
-        //Don't do anything if they don't have the ensnareable component.
+        // Don't do anything if they don't have the ensnareable component.
         if (!HasComp<EnsnareableComponent>(target))
             return;
 
@@ -121,7 +172,7 @@ public sealed partial class EnsnareableSystem
             BreakOnMove = breakOnMove,
             BreakOnDamage = false,
             NeedHand = true,
-            BlockDuplicate = true,
+            BreakOnDropItem = false,
         };
 
         if (!_doAfter.TryStartDoAfter(doAfterEventArgs))
@@ -163,8 +214,8 @@ public sealed partial class EnsnareableSystem
     public void UpdateAlert(EntityUid target, EnsnareableComponent component)
     {
         if (!component.IsEnsnared)
-            _alerts.ClearAlert(target, AlertType.Ensnared);
+            _alerts.ClearAlert(target, component.EnsnaredAlert);
         else
-            _alerts.ShowAlert(target, AlertType.Ensnared);
+            _alerts.ShowAlert(target, component.EnsnaredAlert);
     }
 }

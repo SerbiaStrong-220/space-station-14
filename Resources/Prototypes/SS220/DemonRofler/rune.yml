@@ -38,3 +38,19 @@
         layer:
         - WallLayer
         hard: false
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostDarkReaperRune
+  components:
+  - type: GhostRole
+    name: Тёмный Жнец
+    description: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
+    rules: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+      - sprite: SS220/DemonRofler/dark_reaper.rsi
+        state: jnec_s1

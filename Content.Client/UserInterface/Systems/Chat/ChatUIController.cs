@@ -9,6 +9,8 @@ using Content.Client.Chat.UI;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
+using Content.Client.Mind;
+using Content.Client.Roles;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
@@ -16,11 +18,12 @@ using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
-using Content.Shared.Decals;
 using Content.Shared.Damage.ForceSay;
-using Content.Shared.Examine;
+using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
+using Content.Shared.SS220.Telepathy;
+using Content.Shared.Roles.RoleCodeword;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -61,6 +64,8 @@ public sealed class ChatUIController : UIController
     [UISystemDependency] private readonly TypingIndicatorSystem? _typingIndicator = default;
     [UISystemDependency] private readonly ChatSystem? _chatSys = default;
     [UISystemDependency] private readonly TransformSystem? _transform = default;
+    [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
+    [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
 
     [ValidatePrototypeId<ColorPalettePrototype>]
     private const string ChatNamePalette = "ChatNames";
@@ -80,7 +85,8 @@ public sealed class ChatUIController : UIController
         {SharedChatSystem.EmotesAltPrefix, ChatSelectChannel.Emotes},
         {SharedChatSystem.AdminPrefix, ChatSelectChannel.Admin},
         {SharedChatSystem.RadioCommonPrefix, ChatSelectChannel.Radio},
-        {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead}
+        {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead},
+        {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy} //ss220-telepathy
     };
 
     public static readonly Dictionary<ChatSelectChannel, char> ChannelPrefixes = new()
@@ -93,7 +99,8 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Emotes, SharedChatSystem.EmotesPrefix},
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
-        {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix}
+        {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
+        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix} //ss220-telepathy
     };
 
     /// <summary>
@@ -527,6 +534,7 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
+            FilterableChannels |= ChatChannel.Telepathy; //ss220 telepathy
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -536,6 +544,7 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
+                CanSendChannels |= ChatSelectChannel.Telepathy; //ss220 telepathy
             }
         }
 
@@ -626,7 +635,7 @@ public sealed class ChatUIController : UIController
         var predicate = static (EntityUid uid, (EntityUid compOwner, EntityUid? attachedEntity) data)
             => uid == data.compOwner || uid == data.attachedEntity;
         var playerPos = player != null
-            ? _transform?.GetMapCoordinates(player.Value) ?? MapCoordinates.Nullspace
+            ? _eye.CurrentEye.Position
             : MapCoordinates.Nullspace;
 
         var occluded = player != null && _examine.IsOccluded(player.Value);
@@ -771,7 +780,7 @@ public sealed class ChatUIController : UIController
 
         // we need to handle selected channel
         // and prefix-channel separately..
-        var allowedChannels = ChatSelectChannel.Local | ChatSelectChannel.Whisper;
+        var allowedChannels = ChatSelectChannel.Local | ChatSelectChannel.Whisper | ChatSelectChannel.Radio; // 220 force-say-radio
         if ((chatBox.SelectedChannel & allowedChannels) == ChatSelectChannel.None)
             return;
 
@@ -818,6 +827,19 @@ public sealed class ChatUIController : UIController
             var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
             if (grammar != null && grammar.ProperNoun == true)
                 msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+        }
+
+        // Color any codewords for minds that have roles that use them
+        if (_player.LocalUser != null && _mindSystem != null && _roleCodewordSystem != null)
+        {
+            if (_mindSystem.TryGetMind(_player.LocalUser.Value, out var mindId) && _ent.TryGetComponent(mindId, out RoleCodewordComponent? codewordComp))
+            {
+                foreach (var (_, codewordData) in codewordComp.RoleCodewords)
+                {
+                    foreach (string codeword in codewordData.Codewords)
+                        msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, codeword, "color", codewordData.Color.ToHex());
+                }
+            }
         }
 
         // Log all incoming chat to repopulate when filter is un-toggled

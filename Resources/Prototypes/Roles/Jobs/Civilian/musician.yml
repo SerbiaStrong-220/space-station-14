@@ -17,8 +17,10 @@
 - type: startingGear
   id: MusicianGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitMusician
     eyes: ClothingEyesGlassesSunglasses
-    shoes: ClothingShoesBootsLaceup
+    #shoes: ClothingShoesBootsLaceup #SS220 to do bard loadout
     id: MusicianPDA
     ears: ClothingHeadsetService
+  #storage:
+    #back:
+    #- Stuff

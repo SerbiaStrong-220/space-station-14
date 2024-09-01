@@ -1,5 +1,10 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Сервис
+
+  # Клоун
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtClowns
   name: юбка-комбинезон клоуна
   description: ХОНК!
@@ -8,3 +13,100 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
+
+  # Ботаник
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtHydroponicsBlue
+  name: blue hydroponics jumpskirt
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtHydroponicsWhite
+  name: white hydroponics jumpskirt
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+
+  # Бармен
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBartenderRed
+  name: red bartender's uniform
+  description: A special red outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBartenderGreen
+  name: green bartender's uniform
+  description: A special green outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBartenderNanotrasen
+  name: униформа заслуженного бармена NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
+
+# Medical
+
+  # Парамед
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtFeldsher
+  name: uniform feldsher
+  description: Just don't be offended, are you a feldsher or a real doctor?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
+
+  # Бригмедик
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtMilitaryFeldsher
+  name: uniform military feldsher
+  description: This is not a red color at all..
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
+
+# Синдикат
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtSyndicateDiplomatist
+  name: syndicate diplomatist uniforms
+  description: The uniform of a crime syndicate diplomat, nothing unusual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi

@@ -3,6 +3,11 @@
   parent: Clothing
   id: ClothingHeadBase
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head.ogg
+      params:
+        volume: 2
   - type: Clothing
     slots:
     - HEAD
@@ -45,6 +50,11 @@
   parent: Clothing
   id: HatBase
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head.ogg
+      params:
+        volume: 2
   - type: Clothing
     slots:
     - HEAD
@@ -59,8 +69,13 @@
   parent: ClothingHeadBase
   id: ClothingHeadLightBase
   name: base helmet with light
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: Sprite
     layers:
     - state: icon
@@ -119,6 +134,12 @@
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
+  - type: BreathMask
   - type: Item
     size: Normal
   - type: PressureProtection
@@ -142,14 +163,22 @@
     slots:
     - Hair
     - Snout
+    - HeadTop
+    - HeadSide
 
 - type: entity
   abstract: true
   # No parent since we aren't actually an item.
   id: ClothingHeadHardsuitBase
   name: base hardsuit helmet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
+  - type: BreathMask
   - type: Sprite
     state: icon # default state used by most inheritors
   - type: Clickable
@@ -165,8 +194,6 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.1
-  - type: FireProtection
-    reduction: 0.2
   - type: Armor
     modifiers:
       coefficients:
@@ -185,13 +212,15 @@
     slots:
     - Hair
     - Snout
+    - HeadTop
+    - HeadSide
 
 - type: entity
   abstract: true
   parent: ClothingHeadHardsuitBase
   id: ClothingHeadHardsuitWithLightBase
   name: base hardsuit helmet with light
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -244,7 +273,7 @@
   id: ClothingHeadHatHoodWinterBase
   name: base winter coat hood
   description: A hood, made to keep your head warm.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: icon
@@ -260,3 +289,5 @@
   - type: HideLayerClothing
     slots:
     - Hair
+    - HeadTop
+    - HeadSide

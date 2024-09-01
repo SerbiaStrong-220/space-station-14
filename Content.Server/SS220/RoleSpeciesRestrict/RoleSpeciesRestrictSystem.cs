@@ -15,16 +15,17 @@ public sealed class RoleSpeciesRestrictSystem : EntitySystem
     [Dependency] private readonly IServerPreferencesManager _serverPreferences = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
-    public bool IsAllowed(ICommonSession player, string jobId)
-    {
-        var job = _prototypes.Index<JobPrototype>(jobId);
-        if (job is not null)
-        {
-            var profile = (_serverPreferences.GetPreferences(player.UserId).SelectedCharacter as HumanoidCharacterProfile)!;
-            var species = _prototypes.Index<SpeciesPrototype>(profile.Species);
-            if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out _, _prototypes)) //ss220-arahFix
-                return true;
-        }
-        return false;
-    }
+    //IDK, comment for now, maybe delete later (caused errors) - Dexler
+    //public bool IsAllowed(ICommonSession player, string jobId)
+    //{
+    //    var job = _prototypes.Index<JobPrototype>(jobId);
+    //    if (job is not null)
+    //    {
+    //        var profile = (_serverPreferences.GetPreferences(player.UserId).SelectedCharacter as HumanoidCharacterProfile)!;
+    //        var species = _prototypes.Index<SpeciesPrototype>(profile.Species);
+    //        if (JobRequirements.TryRequirementsSpeciesMet(job, species, profile.Sex, out _, _prototypes)) //ss220-arahFix
+    //            return true;
+    //    }
+    //    return false;
+    //}
 }

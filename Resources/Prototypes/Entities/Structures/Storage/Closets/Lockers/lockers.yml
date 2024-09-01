@@ -26,8 +26,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: secure
-    stateDoorOpen: secure_open
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: secsteel_open #SS220-Closet-Resprite-end
     stateDoorClosed: secure_door
 
 # Cargo
@@ -39,7 +39,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: qm
-    stateDoorOpen: qm_open
+    stateDoorOpen: steeldarklocker_open #SS220-Closet-Resprite
     stateDoorClosed: qm_door
   - type: AccessReader
     access: [["Quartermaster"]]
@@ -52,9 +52,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: mining
-    stateDoorOpen: mining_open
-    stateDoorClosed: mining_door
+    stateBaseClosed: miner #SS220-Closet-Resprite-start
+    stateDoorOpen: steeldarklocker_open
+    stateDoorClosed: miner_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Salvage"]]
 
@@ -66,9 +66,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: cap
-    stateDoorOpen: cap_open
-    stateDoorClosed: cap_door
+    stateBaseClosed: captain #SS220-Closet-Resprite-start
+    stateDoorOpen: secdarksteel_open
+    stateDoorClosed: captain_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Captain"]]
 
@@ -80,7 +80,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: hop
-    stateDoorOpen: hop_open
+    stateDoorOpen: secdarksteel_open #SS220-Closet-Resprite
     stateDoorClosed: hop_door
   - type: AccessReader
     access: [["HeadOfPersonnel"]]
@@ -94,7 +94,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: ce
-    stateDoorOpen: ce_open
+    stateDoorOpen: steeldarklocker_open #SS220-Closet-Resprite
     stateDoorClosed: ce_door
   - type: AccessReader
     access: [ [ "ChiefEngineer" ] ]
@@ -107,8 +107,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: eng
-    stateDoorOpen: eng_open
+    stateBaseClosed: storage_eng #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite-end
     stateDoorClosed: eng_elec_door
   - type: AccessReader
     access: [ [ "Engineering" ] ]
@@ -121,8 +121,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: eng
-    stateDoorOpen: eng_open
+    stateBaseClosed: storage_eng #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite-end
     stateDoorClosed: eng_weld_door
   - type: AccessReader
     access: [ [ "Engineering" ] ]
@@ -136,7 +136,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: atmos
-    stateDoorOpen: atmos_open
+    stateDoorOpen: steellocker_open #SS220-Closet-Resprite
     stateDoorClosed: atmos_door
   - type: AccessReader
     access: [ [ "Atmospherics" ] ]
@@ -149,9 +149,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: eng_secure
-    stateDoorOpen: eng_secure_open
-    stateDoorClosed: eng_secure_door
+    stateBaseClosed: engineer #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_open
+    stateDoorClosed: engineer_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [ [ "Engineering" ] ]
 
@@ -188,9 +188,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: hydro
-    stateDoorOpen: hydro_open
-    stateDoorClosed: hydro_door
+    stateBaseClosed: botanist #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_open
+    stateDoorClosed: botanist_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [ [ "Hydroponics" ] ]
 
@@ -203,9 +203,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: med
-    stateDoorOpen: med_open
-    stateDoorClosed: med_door
+    stateBaseClosed: storage_white #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: med_storage_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [ [ "Medical" ] ]
 
@@ -217,9 +217,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: med_secure
-    stateDoorOpen: med_secure_open
-    stateDoorClosed: med_secure_door
+    stateBaseClosed: white_steel_locker #SS220-Closet-Resprite-start
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: medic_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [ [ "Medical" ] ]
 
@@ -231,11 +231,11 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: paramed
-    stateDoorOpen: paramed_open
-    stateDoorClosed: paramed_door
+    stateBaseClosed: white_steel_locker #SS220-Closet-Resprite-start
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: paramedic_door #SS220-Closet-Resprite-end
   - type: AccessReader
-    access: [ [ "Medical" ] ]
+    access: [ [ "Paramedic" ] ] #SS220-Closet-Resprite
 
 
 # Chemical
@@ -246,9 +246,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: med
-    stateDoorOpen: med_open
-    stateDoorClosed: chemical_door
+    stateBaseClosed: white_steel_locker #SS220-Closet-Resprite-start
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: chemist_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [ [ "Chemistry" ] ]
 
@@ -261,7 +261,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: cmo
-    stateDoorOpen: cmo_open
+    stateDoorOpen: meddarksteel_open #SS220-Closet-Resprite
     stateDoorClosed: cmo_door
   - type: AccessReader
     access: [ [ "ChiefMedicalOfficer" ] ]
@@ -275,7 +275,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: rd
-    stateDoorOpen: rd_open
+    stateDoorOpen: steeldarklocker_open #SS220-Closet-Resprite
     stateDoorClosed: rd_door
   - type: AccessReader
     access: [ [ "ResearchDirector" ] ]
@@ -287,9 +287,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: science
-    stateDoorOpen: science_open
-    stateDoorClosed: science_door
+    stateBaseClosed: scientist #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_open
+    stateDoorClosed: scientist_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [ [ "Research" ] ]
 
@@ -302,7 +302,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: hos
-    stateDoorOpen: hos_open
+    stateDoorOpen: secdarksteel_open #SS220-Closet-Resprite
     stateDoorClosed: hos_door
   - type: AccessReader
     access: [["HeadOfSecurity"]]
@@ -315,9 +315,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: warden
-    stateDoorOpen: warden_open
-    stateDoorClosed: warden_door
+    stateBaseClosed: security #SS220-Closet-Resprite-start
+    stateDoorOpen: secsteel_open
+    stateDoorClosed: securitywarden_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Armory"]]
 
@@ -329,8 +329,8 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: brigmedic
-    stateDoorOpen: armory_open
+    stateBaseClosed: storage_red #SS220-Closet-Resprite-start
+    stateDoorOpen: steellocker_storage_open #SS220-Closet-Resprite-end
     stateDoorClosed: brigmedic_door
   - type: AccessReader
     access: [["Medical"]]
@@ -343,9 +343,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: sec
-    stateDoorOpen: sec_open
-    stateDoorClosed: sec_door
+    stateBaseClosed: security #SS220-Closet-Resprite-start
+    stateDoorOpen: secsteel_open
+    stateDoorClosed: securityofficer_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Security"]]
 
@@ -391,23 +391,13 @@
   name: evidence locker
   description: To store bags of bullet casings and detainee belongings.
   components:
-  - type: AccessReader
-    access: [["Security"]]
-
-#SS220-Pilot
-- type: entity
-  id: LockerPilot
-  parent: LockerSecurity
-  name: шкаф пилота СБ
-  description: Место для хранения пожитков славных лётчиков Корпорации.
-  components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: podpil
-    stateDoorOpen: podpil_open
-    stateDoorClosed: podpil_door
+    stateBaseClosed: storage_red #SS220-Closet-Resprite-start
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: prisoner_door #SS220-Closet-Resprite-end
   - type: AccessReader
-    access: [["Security"]]  #WMT
+    access: [["Security"]]
 
 # Syndicate
 - type: entity
@@ -419,7 +409,7 @@
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: syndicate
-    stateDoorOpen: syndicate_open
+    stateDoorOpen: secdarksteel_open #SS220-Closet-Resprite
     stateDoorClosed: syndicate_door
 
 # Bluespace
@@ -459,7 +449,7 @@
     access: [["Theatre"]]
   - type: EntityStorageVisuals
     stateBaseClosed: clown
-    stateDoorOpen: clown_open
+    stateDoorOpen: steellocker_open #SS220-Closet-Resprite
     stateDoorClosed: clown_door
 
 # Mime
@@ -473,7 +463,7 @@
     access: [["Theatre"]]
   - type: EntityStorageVisuals
     stateBaseClosed: mime
-    stateDoorOpen: mime_open
+    stateDoorOpen: steellocker_open #SS220-Closet-Resprite
     stateDoorClosed: mime_door
 
 # Representative
@@ -486,6 +476,6 @@
   - type: AccessReader
     access: [["Command"]]
   - type: EntityStorageVisuals
-    stateBaseClosed: hop
-    stateDoorOpen: hop_open
-    stateDoorClosed: representative_door
+    stateBaseClosed: nt
+    stateDoorOpen: secdarksteel_open
+    stateDoorClosed: nt_door

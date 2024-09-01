@@ -12,3 +12,5 @@ ent-WeaponRifleLecter = Лектер
 ent-WeaponRifleLecterRubber = Лектер
     .suffix = Травматический
     .desc = { ent-WeaponRifleLecter.desc }
+ent-WeaponRifleFoam = Астро-Ас Сила Пенопласта
+    .desc = Первоклассная пенопластовая винтовка высочайшего качества. Её пластик прочен на ощупь, а механизмы надёжены.

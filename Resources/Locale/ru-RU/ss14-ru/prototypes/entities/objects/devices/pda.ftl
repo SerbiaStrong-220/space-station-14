@@ -66,6 +66,7 @@ ent-CentcomPDA = КПК Центком
     .desc = Светло-зелёный символ ходячей бюрократии.
 ent-AdminPDA = КПК админа
     .desc = Если вы не админ, верните этот КПК ближайшему админу.
+    .suffix = Админ
 ent-CentcomPDAFake = { ent-CentcomPDA }
     .suffix = Фальшивый
     .desc = { ent-CentcomPDA.desc }
@@ -103,7 +104,8 @@ ent-ERTMedicPDA = КПК врача ОБР
 ent-ERTSecurityPDA = КПК офицера безопасности ОБР
     .suffix = Офицер безопасности
     .desc = Красный значит мощный. На боку нацарапаны метки подсчёта.
-ent-CBURNPDA = КПК РХБЗЗ
+# SS220 CBURN questions
+ent-CBURNPDA = КПК РХБЗ
     .desc = Пахнет гнилой плотью.
 ent-PsychologistPDA = КПК психолога
     .desc = Выглядит безупречно чистым.

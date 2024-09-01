@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformTacticalSecurity
+  name: тактическая униформа СБ
+  description: Боевая рубаха для самых элитных офицеров СБ. Индивидуальный пошив!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/tacuniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/tacuniform.rsi

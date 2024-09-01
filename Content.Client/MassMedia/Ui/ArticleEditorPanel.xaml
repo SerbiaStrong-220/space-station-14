@@ -1,6 +1,14 @@
+<!-- SS220 Text Edit Limits begin -->
+<!--
 <Control xmlns="https://spacestation14.io"
          xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
          MouseFilter="Stop">
+-->
+<Control xmlns="https://spacestation14.io"
+         xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+         xmlns:ui220="clr-namespace:Content.Client.SS220.UserInterface"
+         MouseFilter="Stop">
+<!-- SS220 Text Edit Limits end -->
     <PanelContainer StyleClasses="BackgroundOpenLeft"/>
     <PanelContainer>
         <PanelContainer.PanelOverride>
@@ -18,7 +26,12 @@
         <PanelContainer StyleClasses="LowDivider" Margin="0 0 1 0"/>
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc news-write-ui-article-name-label}" Margin="17 10 0 9" VerticalAlignment="Center"/>
+            <!-- SS220 Text Edit Limits begin -->
+            <!--
             <LineEdit Name="TitleField" Margin="6 10 0 9" MinWidth="260" MinHeight="23" Access="Public"/>
+            -->
+            <ui220:ExtendedLineEdit Name="TitleField" Margin="6 10 0 9" MinWidth="260" MinHeight="23" Access="Public"/>
+            <!-- SS220 Text Edit Limits end -->
             <Control HorizontalExpand="True" />
             <Label Name="RichTextInfoLabel" Text="?" MouseFilter="Pass" Margin="14 0" StyleClasses="LabelSecondaryColor"/>
         </BoxContainer>
@@ -28,7 +41,12 @@
                     <graphics:StyleBoxFlat BackgroundColor="#202023" BorderThickness="1" BorderColor="#3B3E56"/>
                 </PanelContainer.PanelOverride>
             </PanelContainer>
+            <!-- SS220 Text Edit Limits begin -->
+            <!--
             <TextEdit Name="ContentField" Margin="0 1" Access="Public"/>
+            -->
+            <ui220:ExtendedTextEdit Name="ContentField" Margin="0 1" Access="Public"/>
+            <!-- SS220 Text Edit Limits end -->
         </Control>
         <Control Name="PreviewPanel" Visible="False" VerticalExpand="True" Margin="11 0 11 0">
             <PanelContainer>
@@ -47,9 +65,16 @@
             </Control>
             <Control HorizontalExpand="True"/>
             <BoxContainer Orientation="Horizontal">
+            <!-- SS220 Text Edit Limits begin -->
+            <!--
                 <Button Name="ButtonPreview" SetHeight="32" SetWidth="85"
                         StyleClasses="OpenRight" Text="{Loc news-write-ui-preview-text}"/>
                 <Button Name="ButtonPublish" SetHeight="32" SetWidth="85" Text="{Loc news-write-ui-publish-text}" Access="Public"/>
+            -->
+                <Button Name="ButtonPreview" SetHeight="32" SetWidth="150"
+                        StyleClasses="OpenRight" Text="{Loc news-write-ui-preview-text}"/>
+                <Button Name="ButtonPublish" SetHeight="32" SetWidth="150" Text="{Loc news-write-ui-publish-text}" Access="Public"/>
+            <!-- SS220 Text Edit Limits end -->
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

@@ -1,29 +1,114 @@
-# InternalAffairs
+#! Внутренние дела (Начало)
+
+  # Агент внутренних дел
 - type: roleLoadout
   id: JobIAA
   groups:
   - LawyerNeck
-  - LawyerJumpsuit
-  - IAABackpack
+  - IAAJumpsuit
+  - IAABackpacks #ss220 iaa loadout fix
   - Trinkets
+  - Gloves
 
+  # Офицер "Синий Щит"
 - type: roleLoadout
   id: JobBlueShield
   groups:
+  - SecurityNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - SecurityBelt
   - CommonBackpack
   - Trinkets
+#! Внутренние дела (Конец)
 
-# Security
+#! Служба безопасности (Начало)
+
+  # Инструктор СБ
+- type: roleLoadout
+  id: JobSeniorOfficer
+  groups:
+  - SecurityHead
+  - SecurityNeck  #holster loadout
+  - SeniorSecJumpsuit
+  - SecurityBackpack
+  - SecurityOuterClothing
+  - SecurityShoes
+  - SecurityBelt
+  - Trinkets
+
+  # Пилот
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
-  - SecurityHead
+  - SecurityPilotHead
+  - SecurityNeck #holster loadout
   - SecurityJumpsuit
-  - SecurityPilotBackpack
+  - SecurityBackpack
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityPDA
   - Trinkets
+#! Служба безопасности (Конец)
+
+#! Медицинский отдел (Начало)
+
+  # Ведущий врач
+- type: roleLoadout
+  id: JobSeniorPhysician
+  groups:
+  - HatSeniorMedical
+  - MedicalNeck
+  - SeniorMedicalJumpsuit
+  - MedicalGloves
+  - MedicalsBackpack
+  - MedicalsMask
+  - SeniorMedicalOuterClothing
+  - SeniorShoes
+  - Glasses
+  - Trinkets
+#! Медицинский отдел (Конец)
+
+#! Инженерный отдел (Начало)
+
+  # Ведущий инженер
+- type: roleLoadout
+  id: JobSeniorEngineer
+  groups:
+  - HatSeniorEngineer
+  - SeniorsEngineerJumpsuit
+  - StationEngineerBackpack
+  - SeniorsEngineerOuterClothing
+  - StationEngineerShoes
+  - Trinkets
+#! Инженерный отдел (Конец)
+
+#! Исследовательский отдел (Начало)
+
+  # Ведущий учёный
+- type: roleLoadout
+  id: JobSeniorResearcher
+  groups:
+  - HatSeniorSciensist
+  - ScientistNeck
+  - SeniorSciensistJumpsuit
+  - ScientistBackpack
+  - SeniorSciensistOuterClothing
+  - ScientistGloves
+  - ScientistShoes
+  - Glasses
+  - Trinkets
+#! Исследовательский отдел (Конец)
+
+#! Сервис (Начало)
+
+  # Ведущий сервисный работник
+- type: roleLoadout
+  id: JobSeniorService
+  groups:
+  - HatSeniorService
+  - SeniorServiceJumpsuit
+  - CommonBackpack
+  - Glasses
+  - Trinkets
+#! Сервис (Конец)

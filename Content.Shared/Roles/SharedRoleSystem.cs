@@ -1,10 +1,12 @@
-using System.Linq;
 using Content.Shared.Administration.Logs;
+using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.Ghost.Roles;
 using Content.Shared.Mind;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -16,14 +18,30 @@ public abstract class SharedRoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _minds = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     // TODO please lord make role entities
     private readonly HashSet<Type> _antagTypes = new();
+
+    private JobRequirementOverridePrototype? _requirementOverride;
 
     public override void Initialize()
     {
         // TODO make roles entities
         SubscribeLocalEvent<JobComponent, MindGetAllRolesEvent>(OnJobGetAllRoles);
+        Subs.CVar(_cfg, CCVars.GameRoleTimerOverride, SetRequirementOverride, true);
+    }
+
+    private void SetRequirementOverride(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            _requirementOverride = null;
+            return;
+        }
+
+        if (!_prototypes.TryIndex(value, out _requirementOverride ))
+            Log.Error($"Unknown JobRequirementOverridePrototype: {value}");
     }
 
     private void OnJobGetAllRoles(EntityUid uid, JobComponent component, ref MindGetAllRolesEvent args)
@@ -49,14 +67,16 @@ public abstract class SharedRoleSystem : EntitySystem
         {
             var name = "game-ticker-unknown-role";
             var prototype = "";
+            string? playTimeTracker = null; //SS220 Add antags playtime trackers
             if (component.PrototypeId != null && _prototypes.TryIndex(component.PrototypeId, out AntagPrototype? antag))
             {
                 name = antag.Name;
                 prototype = antag.ID;
+                playTimeTracker = antag.PlayTimeTracker; //SS220 Add antags playtime trackers
             }
             name = Loc.GetString(name);
 
-            args.Roles.Add(new RoleInfo(component, name, true, null, prototype));
+            args.Roles.Add(new RoleInfo(component, name, true, playTimeTracker, prototype)); //SS220 Add antags playtime trackers
         });
 
         SubscribeLocalEvent((EntityUid _, T _, ref MindIsAntagonistEvent args) => { args.IsAntagonist = true; args.IsExclusiveAntagonist |= typeof(T).TryGetCustomAttribute<ExclusiveAntagonistAttribute>(out _); });
@@ -252,5 +272,37 @@ public abstract class SharedRoleSystem : EntitySystem
     {
         if (Resolve(mindId, ref mind) && mind.Session != null)
             _audio.PlayGlobal(sound, mind.Session);
+    }
+
+    public HashSet<JobRequirement>? GetJobRequirement(JobPrototype job)
+    {
+        if (_requirementOverride != null && _requirementOverride.Jobs.TryGetValue(job.ID, out var req))
+            return req;
+
+        return job.Requirements;
+    }
+
+    public HashSet<JobRequirement>? GetJobRequirement(ProtoId<JobPrototype> job)
+    {
+        if (_requirementOverride != null && _requirementOverride.Jobs.TryGetValue(job, out var req))
+            return req;
+
+        return _prototypes.Index(job).Requirements;
+    }
+
+    public HashSet<JobRequirement>? GetAntagRequirement(ProtoId<AntagPrototype> antag)
+    {
+        if (_requirementOverride != null && _requirementOverride.Antags.TryGetValue(antag, out var req))
+            return req;
+
+        return _prototypes.Index(antag).Requirements;
+    }
+
+    public HashSet<JobRequirement>? GetAntagRequirement(AntagPrototype antag)
+    {
+        if (_requirementOverride != null && _requirementOverride.Antags.TryGetValue(antag.ID, out var req))
+            return req;
+
+        return antag.Requirements;
     }
 }
