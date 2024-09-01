@@ -81,8 +81,7 @@ public sealed class ChatUIController : UIController
         {SharedChatSystem.AdminPrefix, ChatSelectChannel.Admin},
         {SharedChatSystem.RadioCommonPrefix, ChatSelectChannel.Radio},
         {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead},
-        //ss220-telepathy
-        {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy}
+        {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy} //ss220-telepathy
     };
 
     public static readonly Dictionary<ChatSelectChannel, char> ChannelPrefixes = new()
@@ -96,8 +95,7 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
         {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
-        //ss220-telepathy
-        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix}
+        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix} //ss220-telepathy
     };
 
     /// <summary>
@@ -531,6 +529,7 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
+            FilterableChannels |= ChatChannel.Telepathy; //ss220 telepathy
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -540,6 +539,7 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
+                CanSendChannels |= ChatSelectChannel.Telepathy; //ss220 telepathy
             }
         }
 
@@ -558,14 +558,6 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
         }
-
-        //ss220-telepathy-begin
-        if (_ent.HasComponent<TelepathyComponent>(_player.LocalEntity))
-        {
-            FilterableChannels |= ChatChannel.Telepathy;
-            CanSendChannels |= ChatSelectChannel.Telepathy;
-        }
-        //ss220-telepathy-end
 
         SelectableChannels = CanSendChannels;
 
