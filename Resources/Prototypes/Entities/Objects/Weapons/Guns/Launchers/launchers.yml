@@ -265,9 +265,9 @@
   components:
     - type: EmitSoundOnLand
       sound:
-      path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
-      params:
-        volume: 2
+        path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: AmmoCounter
     - type: GrapplingGun
     - type: Gun
