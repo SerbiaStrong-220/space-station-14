@@ -1548,22 +1548,3 @@
 #  - type: Construction #SS220-Sheetifier-Rework
 #    graph: TileWoodLarge
 #    node: woodtilelarge
-
-#SS220-beachCrafting-Begin
-- type: entity
-  id: FloorTileItemSand
-  parent: FloorTileItemBase
-  name: астро-песок
-  description: Искусственный песок, такой же рассыпчатый, как настоящий, и при этом легко снимается!
-  components:
-  - type: Sprite
-    state: astrodesert
-  - type: Item
-    heldPrefix: desert
-  - type: FloorTile
-    outputs:
-      - Plating
-      - FloorAstroSnad
-  - type: Stack
-    stackType: FloorTileSnow
-#SS220-beachCrafting-Ens
