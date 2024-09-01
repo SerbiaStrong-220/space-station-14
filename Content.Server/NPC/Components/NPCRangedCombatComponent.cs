@@ -1,5 +1,4 @@
 using Content.Server.NPC.Systems;
-using Content.Shared.Fluids;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
 
