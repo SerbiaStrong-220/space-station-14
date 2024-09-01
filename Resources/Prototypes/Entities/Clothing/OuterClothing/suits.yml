@@ -159,8 +159,9 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: 0.0 # SS220 Full Ninja Stealth (#1075)
-      lastVisibility: 0.1
+      minVisibility: -1 # SS220 Revert Ninja Stealth by #1075. Fix #1575 begin
+      maxVisibility: -1
+      lastVisibility: 0 # SS220 Revert Ninja Stealth by #1075. Fix #1575 end
   - type: PowerCellDraw
     drawRate: 1.8 # 200 seconds on the default cell
   - type: ToggleCellDraw
