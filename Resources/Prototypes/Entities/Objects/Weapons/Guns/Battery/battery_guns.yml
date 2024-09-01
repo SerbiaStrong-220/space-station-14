@@ -819,10 +819,12 @@
     sprite: Objects/Weapons/Guns/Battery/inhands_64x.rsi
     heldPrefix: energy
   - type: Tag
-    tags:
-    - HighRiskItem
-  - type: StealTarget
-    stealGroup: WeaponEnergyShotgun
+    #SS220 HOS shotgun removal begin
+    #tags:
+    #- HighRiskItem
+  #- type: StealTarget
+    #stealGroup: WeaponEnergyShotgun
+    #SS220 HOS shotgun removal end
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Battery
     maxCharge: 1050

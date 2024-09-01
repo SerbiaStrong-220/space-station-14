@@ -200,19 +200,21 @@
 
 ## hos
 
-- type: entity
-  noSpawn: true
-  parent: BaseTraitorStealObjective
-  id: EnergyShotgunStealObjective
-  components:
-  - type: Objective
+#SS220 HOS shotgun removal begin
+#- type: entity
+  #noSpawn: true
+  #parent: BaseTraitorStealObjective
+  #id: EnergyShotgunStealObjective
+  #components:
+  #- type: Objective
     # HoS will have this on them a lot of the time so..
-    difficulty: 3
-  - type: NotJobRequirement
-    job: HeadOfSecurity
-  - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-hos
+    #difficulty: 3
+  #- type: NotJobRequirement
+    #job: HeadOfSecurity
+  #- type: StealCondition
+    #stealGroup: WeaponEnergyShotgun
+    #owner: job-name-hos
+##SS220 HOS shotgun removal end
 
 ## ce
 
