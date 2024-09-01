@@ -1,10 +1,12 @@
 using Content.Server.NPC.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
+using Content.Shared.Physics;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Dynamics;
 
 namespace Content.Server.NPC.Systems;
 
@@ -133,7 +135,14 @@ public sealed partial class NPCCombatSystem
             {
                 comp.LOSAccumulator += UnoccludedCooldown;
                 // For consistency with NPC steering.
-                comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, comp.Target, distance + 0.1f);
+
+                //SS220 Change laser turrets AI begin
+                //comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, comp.Target, distance + 0.1f);
+                if (comp.CollisionGroup is { } collisionMask)
+                    comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, comp.Target, distance + 0.1f, collisionMask);
+                else
+                    comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, comp.Target, distance + 0.1f);
+                //SS220 Change laser turrets AI end
             }
 
             if (!comp.TargetInLOS)

@@ -75,7 +75,7 @@
       startingCharge: 500
     - type: HTN
       rootTask:
-        task: TurretCompound
+        task: LaserTurretCompound
       blackboard:
         RotateSpeed: !type:Single
           5

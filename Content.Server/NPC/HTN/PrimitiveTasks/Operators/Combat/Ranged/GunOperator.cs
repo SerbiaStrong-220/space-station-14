@@ -4,6 +4,8 @@ using Content.Server.NPC.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Combat.Ranged;
@@ -68,6 +70,14 @@ public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
         {
             ranged.SoundTargetInLOS = losSound;
         }
+
+        //SS220 Change laser turrets AI begin
+        var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (_entManager.HasComponent<HitscanBatteryAmmoProviderComponent>(owner))
+        {
+            ranged.CollisionGroup = CollisionGroup.Opaque;
+        }
+        //SS220 Change laser turrets AI end
     }
 
     public void ConditionalShutdown(NPCBlackboard blackboard)

@@ -1,4 +1,6 @@
 using Content.Server.NPC.Systems;
+using Content.Shared.Fluids;
+using Content.Shared.Physics;
 using Robust.Shared.Audio;
 
 namespace Content.Server.NPC.Components;
@@ -54,4 +56,9 @@ public sealed partial class NPCRangedCombatComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier? SoundTargetInLOS;
+
+    //SS220 Change laser turrets AI begin
+    [ViewVariables(VVAccess.ReadWrite)]
+    public CollisionGroup? CollisionGroup;
+    //SS220 Change laser turrets AI end
 }
