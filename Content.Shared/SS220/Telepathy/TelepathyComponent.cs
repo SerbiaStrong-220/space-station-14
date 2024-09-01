@@ -11,6 +11,9 @@ namespace Content.Shared.SS220.Telepathy;
 [RegisterComponent]
 public sealed partial class TelepathyComponent : Component
 {
+    [DataField("canSend", required: true)]
+    public bool CanSend;
+
     [DataField("telepathyChannelPrototype", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<TelepathyChannelPrototype>))]
     public string TelepathyChannelPrototype;
 }

@@ -295,7 +295,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             //ss220-telepathy-begin
             case InGameICChatType.Telepathy:
-                if (HasComp<TelepathyComponent>(source))
+                if (TryComp<TelepathyComponent>(source, out var telepathy) && telepathy.CanSend)
                     RaiseLocalEvent(source, new TelepathySendEvent() { Message = message });
 
                 break;
