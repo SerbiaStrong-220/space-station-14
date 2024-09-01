@@ -86,7 +86,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         SubscribeLocalEvent<ExaminableSolutionComponent, ExaminedEvent>(OnExamineSolution);
         SubscribeLocalEvent<ExaminableSolutionComponent, GetVerbsEvent<ExamineVerb>>(OnSolutionExaminableVerb);
         SubscribeLocalEvent<SolutionContainerManagerComponent, MapInitEvent>(OnMapInit);
-        //SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, TakeSolutionEvent>(OnGetSolution);
+        SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, TakeSolutionEvent>(OnGetSolution);
 
         if (NetManager.IsServer)
         {
@@ -1224,12 +1224,12 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     }
 
     // SS220 Refactor nuzzle begin
-    private void OnGetSolution(EntityUid uid, TakeSolutionEvent takeSolutionEvent)
+    private void OnGetSolution(Entity<SolutionProviderComponent> entity, ref TakeSolutionEvent takeSolutionEvent)
     {
-        if (!TryGetSolution(uid, ClothingSlotSolutionProviderComponent.ContainmentSolutionName, out var soln, out var solution))
+        if (!TryGetSolution(entity, ClothingSlotSolutionProviderComponent.ContainmentSolutionName, out var entsoln, out var solution))
             return;
 
-        SplitSolution(uid, FixedPoint2.Value, FixedPoint2.New(takeSolutionEvent.SolutionAmount));
+        var splitSolution = SplitSolution(entsoln, new FixedPoint2(10f));
     }
     // SS220 Refactor nuzzle end
 }
