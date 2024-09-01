@@ -149,9 +149,13 @@
     sprite: Clothing/Head/Misc/cone.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/cone.rsi
+  - type: Item
+    storedRotation: 0
   - type: PhysicalComposition #you can't just pass up some free plastic!
     materialComposition:
       Plastic: 100
+  - type: StaticPrice
+    price: 25
 
 - type: entity
   parent: ClothingHeadBase
@@ -169,7 +173,7 @@
     accent: MobsterAccent
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ ClothingHeadBase, BaseSyndicateContraband ]
   id: ClothingHeadHatCatEars
   name: cat ears
   description: "NYAH!"
@@ -192,6 +196,36 @@
       Female: FemaleFelinid
       Unsexed: MaleFelinid
   #ss220 special_sounds end
+
+- type: entity
+  parent: [ClothingHeadHatCatEars, BaseToggleClothing]
+  id: ClothingHeadHatCatEarsValid
+  suffix: Valid, DO NOT MAP
+  components:
+  - type: ToggleClothing
+    action: ActionBecomeValid
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: KillSign
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+  - type: Sprite
+    sprite: Clothing/Head/Hats/catears.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/catears.rsi
+  - type: AddAccentClothing
+    accent: OwOAccent
+
+- type: entity
+  categories: [ Actions, HideSpawnMenu ]
+  id: ActionBecomeValid
+  name: Become Valid
+  description: "*notices your killsign* owo whats this"
+  components:
+  - type: InstantAction
+    event: !type:ToggleActionEvent
 
 - type: entity
   parent: ClothingHeadBase

@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseRestrictedContraband]
   id: ClusterBang
   name: clusterbang
   description: Can be used only with flashbangs. Explodes several times.
@@ -25,7 +25,7 @@
 - type: entity
   parent: GrenadeBase
   id: ClusterBangFull
-  name: ClusterBang
+  name: clusterbang
   description: Launches three flashbangs after the timer runs out.
   suffix: Full
   components:
@@ -60,7 +60,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: ClusterGrenade
   name: clustergrenade
   description: Why use one grenade when you can use three at once!
@@ -94,7 +94,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseSyndicateContraband]
   id: ClusterBananaPeel
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
@@ -116,6 +116,7 @@
     damage:
       types:
         Blunt: 10
+  - type: LandAtCursor
   - type: Damageable
     damageContainer: Inorganic
   - type: EmitSoundOnTrigger
@@ -135,7 +136,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: GrenadeStinger
   name: stinger grenade
   description: Nothing to see here, please disperse.
@@ -164,7 +165,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: GrenadeIncendiary
   name: incendiary grenade
   description: Guaranteed to light up the mood.
@@ -193,7 +194,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: GrenadeShrapnel
   name: shrapnel grenade
   description: Releases a deadly spray of shrapnel that causes severe bleeding.
@@ -249,6 +250,7 @@
     damage:
       types:
         Blunt: 10
+  - type: LandAtCursor
   - type: EmitSoundOnTrigger
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
@@ -266,3 +268,22 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
+
+- type: entity
+  parent: GrenadeShrapnel
+  id: GrenadeFoamDart
+  name: foam dart grenade
+  description: Releases a bothersome spray of foam darts that cause severe welching.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/foamdart.rsi
+    layers:
+    - state: icon
+      map: ["Base"]
+    - state: primed
+      map: ["enum.TriggerVisualLayers.Base"]
+  - type: ClusterGrenade
+    fillPrototype: BulletFoam
+    maxGrenadesCount: 30
+    grenadeType: enum.GrenadeType.Throw
+    velocity: 70

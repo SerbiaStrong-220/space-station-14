@@ -1,5 +1,6 @@
 // Original code github.com/CM-14 Licence MIT, All edits under © SS220, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Thermals;
+using Content.Client.SS220.Overlays;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;

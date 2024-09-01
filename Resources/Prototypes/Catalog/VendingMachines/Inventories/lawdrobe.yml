@@ -25,8 +25,10 @@
     ClothingHeadHatTophat: 1
     # Corvax-LawyerDrip-End
     BriefcaseBrown: 2
+    BookSpaceLaw: 3
     LuxuryPen: 2
     ClothingWristWatchGold: 1 # SS220 Wrist Watch
+    HandLabeler: 2
   contrabandInventory:
     ClothingOuterRobesJudge: 1
     ClothingHeadHatPwig: 1

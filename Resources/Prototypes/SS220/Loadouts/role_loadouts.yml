@@ -1,12 +1,16 @@
-# InternalAffairs
+#! Внутренние дела (Начало)
+
+  # Агент внутренних дел
 - type: roleLoadout
   id: JobIAA
   groups:
   - LawyerNeck
   - IAAJumpsuit
+  - IAABackpacks #ss220 iaa loadout fix
   - Trinkets
   - Gloves
 
+  # Офицер "Синий Щит"
 - type: roleLoadout
   id: JobBlueShield
   groups:
@@ -16,8 +20,24 @@
   - SecurityBelt
   - CommonBackpack
   - Trinkets
+#! Внутренние дела (Конец)
 
-# Security
+#! Служба безопасности (Начало)
+
+  # Инструктор СБ
+- type: roleLoadout
+  id: JobSeniorOfficer
+  groups:
+  - SecurityHead
+  - SecurityNeck  #holster loadout
+  - SeniorSecJumpsuit
+  - SecurityBackpack
+  - SecurityOuterClothing
+  - SecurityShoes
+  - SecurityBelt
+  - Trinkets
+
+  # Пилот
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
@@ -29,17 +49,29 @@
   - SecurityShoes
   - SecurityPDA
   - Trinkets
-  
-#Senior
+#! Служба безопасности (Конец)
+
+#! Медицинский отдел (Начало)
+
+  # Ведущий врач
 - type: roleLoadout
-  id: JobSeniorService
+  id: JobSeniorPhysician
   groups:
-  - HatSeniorService
-  - SeniorServiceJumpsuit
-  - CommonBackpack
+  - HatSeniorMedical
+  - MedicalNeck
+  - SeniorMedicalJumpsuit
+  - MedicalGloves
+  - MedicalsBackpack
+  - MedicalsMask
+  - SeniorMedicalOuterClothing
+  - SeniorShoes
   - Glasses
   - Trinkets
-  
+#! Медицинский отдел (Конец)
+
+#! Инженерный отдел (Начало)
+
+  # Ведущий инженер
 - type: roleLoadout
   id: JobSeniorEngineer
   groups:
@@ -49,20 +81,11 @@
   - SeniorsEngineerOuterClothing
   - StationEngineerShoes
   - Trinkets
-  
-- type: roleLoadout
-  id: JobSeniorPhysician
-  groups:
-  - HatSeniorMedical
-  - SeniorMedicalJumpsuit
-  - MedicalGloves
-  - MedicalsBackpack
-  - MedicalsMask
-  - SeniorMedicalOuterClothing
-  - SeniorShoes
-  - Glasses
-  - Trinkets
+#! Инженерный отдел (Конец)
 
+#! Исследовательский отдел (Начало)
+
+  # Ведущий учёный
 - type: roleLoadout
   id: JobSeniorResearcher
   groups:
@@ -75,15 +98,17 @@
   - ScientistShoes
   - Glasses
   - Trinkets
-  
+#! Исследовательский отдел (Конец)
+
+#! Сервис (Начало)
+
+  # Ведущий сервисный работник
 - type: roleLoadout
-  id: JobSeniorOfficer
+  id: JobSeniorService
   groups:
-  - SecurityHead
-  - SecurityNeck  #holster loadout
-  - SeniorSecJumpsuit
-  - SecurityBackpack
-  - SecurityOuterClothing
-  - SecurityShoes
-  - SecurityBelt
+  - HatSeniorService
+  - SeniorServiceJumpsuit
+  - CommonBackpack
+  - Glasses
   - Trinkets
+#! Сервис (Конец)

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.Light.Components;
+using Content.Client.Light.EntitySystems;
 using Content.Shared.Ghost;
 using Content.Shared.Revenant.Components;
 using Content.Shared.SS220.DarkReaper;
@@ -14,6 +15,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly PointLightSystem _pointLight = default!;
+    [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
 
     private static readonly Color ReaperGhostColor = Color.FromHex("#bbbbff88");
 
@@ -40,14 +42,14 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
             if (_appearance.TryGetData(uid, DarkReaperVisual.StunEffect, out var glareData))
             {
                 if (glareData is bool)
-                    hasGlare = (bool) glareData;
+                    hasGlare = (bool)glareData;
             }
 
             bool ghostCooldown = false;
             if (_appearance.TryGetData(uid, DarkReaperVisual.GhostCooldown, out var ghostCooldownData))
             {
                 if (ghostCooldownData is bool)
-                    ghostCooldown = (bool) ghostCooldownData;
+                    ghostCooldown = (bool)ghostCooldownData;
             }
 
             if (data is bool isPhysical)
@@ -69,9 +71,9 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (TryComp<LightBehaviourComponent>(uid, out var lightBehaviour))
         {
             if (hasGlare)
-                lightBehaviour.StartLightBehaviour(comp.LightBehaviorFlicker);
+                _lightBehavior.StartLightBehaviour((uid, lightBehaviour));
             else
-                lightBehaviour.StopLightBehaviour();
+                _lightBehavior.StopLightBehaviour((uid, lightBehaviour));
         }
 
         if (sprite.LayerMapTryGet(DarkReaperVisual.Stage, out var layerIndex))
@@ -95,14 +97,14 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (args.AppearanceData.TryGetValue(DarkReaperVisual.StunEffect, out var glareData))
         {
             if (glareData is bool)
-                hasGlare = (bool) glareData;
+                hasGlare = (bool)glareData;
         }
 
         bool ghostCooldown = false;
         if (args.AppearanceData.TryGetValue(DarkReaperVisual.GhostCooldown, out var ghostCooldownData))
         {
             if (ghostCooldownData is bool)
-                ghostCooldown = (bool) ghostCooldownData;
+                ghostCooldown = (bool)ghostCooldownData;
         }
 
         if (data is bool isPhysical)

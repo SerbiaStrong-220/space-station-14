@@ -162,7 +162,6 @@ public abstract partial class SharedFultonSystem : EntitySystem
         _doAfter.TryStartDoAfter(
             new DoAfterArgs(EntityManager, args.User, component.ApplyFultonDuration, ev, args.Target, args.Target, args.Used)
             {
-                CancelDuplicate = true,
                 MovementThreshold = 0.5f,
                 BreakOnMove = true,
                 Broadcast = true,

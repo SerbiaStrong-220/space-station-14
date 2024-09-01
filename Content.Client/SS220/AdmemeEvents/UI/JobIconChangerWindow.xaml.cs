@@ -43,11 +43,11 @@ public sealed partial class JobIconChangerWindow : DefaultWindow
         SetAllowedIcons(GetIconsList(filter));
     }
 
-    public List<StatusIconPrototype> GetIconsList(EventRoleIconFilterGroup filter)
+    public List<FactionIconPrototype> GetIconsList(EventRoleIconFilterGroup filter)
     {
         if (filter == EventRoleIconFilterGroup.None)
         {
-            var allEventIcons = _prototypeManager.EnumeratePrototypes<StatusIconPrototype>()
+            var allEventIcons = _prototypeManager.EnumeratePrototypes<FactionIconPrototype>()
                 .Where(icon => JobIconFilter.Any(filter => icon.ID.StartsWith(filter)))
                 .OrderBy(icon => icon.ID)
                 .ToList();
@@ -55,7 +55,7 @@ public sealed partial class JobIconChangerWindow : DefaultWindow
             return allEventIcons;
         }
 
-        var jobIconList = _prototypeManager.EnumeratePrototypes<StatusIconPrototype>()
+        var jobIconList = _prototypeManager.EnumeratePrototypes<FactionIconPrototype>()
             .Where(icon => icon.ID.StartsWith(filter.ToString()))
             .OrderBy(icon => icon.ID)
             .ToList();
@@ -63,7 +63,7 @@ public sealed partial class JobIconChangerWindow : DefaultWindow
         return jobIconList;
     }
 
-    public void SetAllowedIcons(List<StatusIconPrototype> jobIconList)
+    public void SetAllowedIcons(List<FactionIconPrototype> jobIconList)
     {
         IconGrid.DisposeAllChildren();
 

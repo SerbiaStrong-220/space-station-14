@@ -52,6 +52,9 @@
 - files: ["oasis.yml"]
   authors: CptJeanLuc
 
+- files: ["cog.yml"]
+  authors: Spacemann
+
 # ss220-maps
 
 - files: ["ss220-box.yml"]

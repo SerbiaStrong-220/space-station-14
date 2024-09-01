@@ -11,105 +11,69 @@
 # Jumpsuit
 - type: loadout
   id: DarkChiefEngineerJumpsuit
-  equipment: DarkChiefEngineerJumpsuit
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitChiefEngineerDark
 
 - type: loadout
   id: DarkChiefEngineerJumpskirt
-  equipment: DarkChiefEngineerJumpskirt
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChiefEngineerDark
 
 - type: loadout
   id: DarkChiefEngineerTurtleneck
-  equipment: DarkChiefEngineerTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitChiefEngineerTurtleDark
 
 - type: loadout
   id: DarkChiefEngineerTurtleneckSkirt
-  equipment: DarkChiefEngineerTurtleneckSkirt
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerTurtleneckSkirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChiefEngineerTurtleDark
 
 # Neck
 - type: loadout
   id: DarkChiefEngineerCloak
-  equipment: DarkChiefEngineerCloak
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerCloak
   equipment:
     neck: ClothingNeckCloakCEDark
 
 - type: loadout
   id: DarkChiefEngineerMantle
-  equipment: DarkChiefEngineerMantle
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerMantle
   equipment:
     neck: ClothingNeckMantleCEDark
 
 # PDA
 - type: loadout
   id: DarkChiefEngineerPDA
-  equipment: DarkChiefEngineerPDA
   effects:
   - !type:GroupLoadoutEffect
     proto: DarkChiefEngineer
-
-- type: startingGear
-  id: DarkChiefEngineerPDA
   equipment:
     id: DarkCEPDA
 
 - type: loadout
-  id: ChiefEngineerPDA
-  equipment: ChiefEngineerPDA
-
-- type: startingGear
   id: ChiefEngineerPDA
   equipment:
     id: CEPDA
 
 # Head
 - type: loadout
-  id: BeretCE
-  equipment: BeretCE
-
-- type: startingGear
   id: BeretCE
   equipment:
     head: ClothingHeadHatBeretCE

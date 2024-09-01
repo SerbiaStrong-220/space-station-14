@@ -30,6 +30,7 @@
     availableModes:
     - SemiAuto
     - FullAuto
+    - Burst #ss220 gunmodes 
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/smg.ogg
   - type: ChamberMagazineAmmoProvider
@@ -46,6 +47,7 @@
         whitelist:
           tags:
             - MagazinePistolSubMachineGun
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol
@@ -62,7 +64,7 @@
 
 - type: entity
   name: Atreides
-  parent: BaseWeaponSubMachineGun
+  parent: [BaseWeaponSubMachineGun, BaseMajorContraband]
   id: WeaponSubMachineGunAtreides
   description: Pla-ket-ket-ket-ket! Uses .35 auto ammo.
   components:
@@ -85,7 +87,7 @@
 
 - type: entity
   name: C-20r sub machine gun
-  parent: BaseWeaponSubMachineGun
+  parent: [BaseWeaponSubMachineGun, BaseSyndicateContraband]
   id: WeaponSubMachineGunC20r
   description: A firearm that is often used by the infamous nuclear operatives. Uses .35 auto ammo.
   components:
@@ -105,7 +107,7 @@
     maxAngle: -16
   - type: Gun
     minAngle: 21
-    maxAngle: 32 
+    maxAngle: 32
     shotsPerBurst: 5
     availableModes:
     - SemiAuto
@@ -123,7 +125,7 @@
 
 - type: entity
   name: Drozd
-  parent: BaseWeaponSubMachineGun
+  parent: [BaseWeaponSubMachineGun, BaseRestrictedContraband]
   id: WeaponSubMachineGunDrozd
   description: An excellent fully automatic Heavy SMG.
   components:
@@ -148,8 +150,8 @@
       selectedMode: FullAuto
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-      availableModes:
-        - FullAuto
+#     availableModes: #ss220 gunmodes
+#        - FullAuto   #ss220 gunmodes
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -161,6 +163,7 @@
           whitelist:
             tags:
               - MagazinePistolSubMachineGun
+          whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
           startingItem: CartridgePistol
@@ -195,8 +198,8 @@
     selectedMode: FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-    availableModes:
-    - FullAuto
+#    availableModes: #ss220 gunmodes
+#    - FullAuto      #ss220 gunmodes
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -215,6 +218,7 @@
         whitelist:
           tags:
             - CartridgeMagnum
+        whitelistFailPopup: gun-magazine-whitelist-fail
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -223,7 +227,7 @@
 
 - type: entity
   name: WT550
-  parent: BaseWeaponSubMachineGun
+  parent: [ BaseWeaponSubMachineGun, BaseRestrictedContraband ]
   id: WeaponSubMachineGunWt550
   description: An excellent SMG, produced by NanoTrasen's Small Arms Division. Uses .35 auto ammo.
   components:
@@ -267,6 +271,7 @@
         whitelist:
           tags:
             - MagazinePistolSubMachineGunTopMounted
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol

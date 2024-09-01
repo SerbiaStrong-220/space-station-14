@@ -12,7 +12,7 @@
   parent: EventHumanoid
   components:
     - type: MindShield
-    - type: InitialInfectedExempt
+    - type: AntagImmune
 
 ## Death Squad
 
@@ -30,20 +30,21 @@
         - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: DeathSquad
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: DeathSquad
   parent: EventHumanoidMindShielded
   randomizeName: false
-  components:        
+  components:
     - type: GhostRole
       name: ghost-role-information-Death-Squad-name
       description: ghost-role-information-Death-Squad-description
+      rules: ghost-role-information-Death-Squad-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ DeathSquadGear ]
+      roleLoadout: [ RoleSurvivalEVA ]
     - type: RandomMetadata
       nameSegments:
         - NamesFirstMilitaryLeader
@@ -66,7 +67,6 @@
       - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTLeader
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeader
@@ -76,6 +76,7 @@
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
@@ -83,6 +84,7 @@
         settings: short
     - type: Loadout
       prototypes: [ ERTLeaderGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitaryLeader
@@ -99,7 +101,6 @@
       state: ertleadereva
     - type: RandomHumanoidSpawner
       settings: ERTLeaderEVA
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
@@ -108,10 +109,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTLeaderGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVALecter
@@ -120,7 +123,6 @@
   components:
     - type: RandomHumanoidSpawner
       settings: ERTLeaderEVALecter
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
@@ -129,10 +131,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTLeaderGearEVALecter ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Chaplain
 
@@ -159,6 +163,7 @@
     - type: GhostRole
       name: ghost-role-information-ert-chaplain-name
       description: ghost-role-information-ert-chaplain-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: RandomMetadata
@@ -167,6 +172,8 @@
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTChaplainGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
+    - type: BibleUser
 
 - type: entity
   id: RandomHumanoidSpawnerERTChaplainEVA
@@ -187,10 +194,13 @@
     - type: GhostRole
       name: ghost-role-information-ert-chaplain-name
       description: ghost-role-information-ert-chaplain-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTChaplainGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
+    - type: BibleUser
 
 ## ERT Janitor
 
@@ -217,6 +227,7 @@
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
@@ -228,6 +239,7 @@
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTJanitorEVA
@@ -248,10 +260,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTJanitorGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Engineer
 
@@ -278,6 +292,7 @@
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
@@ -289,6 +304,7 @@
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTEngineerEVA
@@ -309,10 +325,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTEngineerGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Security
 
@@ -339,6 +357,7 @@
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
@@ -350,6 +369,7 @@
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVA
@@ -370,10 +390,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTSecurityGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVALecter
@@ -390,10 +412,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTSecurityGearEVALecter ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Medic
 
@@ -420,6 +444,7 @@
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
@@ -431,6 +456,7 @@
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTMedicalEVA
@@ -451,10 +477,12 @@
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ERTMedicalGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## CBURN
 
@@ -468,7 +496,6 @@
       state: cburn
     - type: RandomHumanoidSpawner
       settings: CBURNAgent
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: CBURNAgent
@@ -476,9 +503,11 @@
   components:
     - type: Loadout
       prototypes: [CBURNGear]
+      roleLoadout: [ RoleSurvivalEVA ]
     - type: GhostRole
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
@@ -488,19 +517,19 @@
       nameSegments:
       - NamesFirstMilitary
       - NamesLastMilitary
+
 ## Central Command
 
 - type: entity
-  name: CentCom official
+  name: CentComm official
   id: RandomHumanoidSpawnerCentcomOfficial
-  noSpawn: true #SS220 New CentCom
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
       state: centcom
     - type: RandomHumanoidSpawner
       settings: CentcomOfficial
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
@@ -509,10 +538,12 @@
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
       description: ghost-role-information-centcom-official-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: default
     - type: Loadout
       prototypes: [ CentcomGear ]
+      roleLoadout: [ RoleSurvivalStandard ]
 
 ## Syndicate
 
@@ -535,6 +566,7 @@
       randomizeName: false
     - type: Loadout
       prototypes: [SyndicateOperativeGearExtremelyBasic]
+      roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
   id: RandomHumanoidSpawnerNukeOp
@@ -576,6 +608,7 @@
     - type: GhostRole
       name: ghost-role-information-cluwne-name
       description: ghost-role-information-cluwne-description
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: default
     - type: Cluwne
@@ -617,11 +650,13 @@
     - type: GhostRole
       name: ghost-role-information-lost-cargo-technical-name
       description: ghost-role-information-lost-cargo-technical-description
-      rules: ghost-role-information-lost-cargo-technical-rules
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ LostCargoTechGearSuit, LostCargoTechGearCoat ]
+      roleLoadout: [ RoleSurvivalStandard ]
+
 
 # Clown troupe
 
@@ -668,11 +703,12 @@
     - type: GhostRole
       name: ghost-role-information-clown-troupe-name
       description: ghost-role-information-clown-troupe-description
-      rules: ghost-role-information-clown-troupe-rules
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ ClownTroupe ]
+      roleLoadout: [ RoleSurvivalStandard ]
     - type: RandomMetadata
       nameSegments:
       - names_clown
@@ -684,6 +720,7 @@
   components:
     - type: Loadout
       prototypes: [ BananaClown ]
+      roleLoadout: [ RoleSurvivalStandard ]
 
 # Traveling exotic chef
 
@@ -718,11 +755,12 @@
     - type: GhostRole
       name: ghost-role-information-traveling-chef-name
       description: ghost-role-information-traveling-chef-description
-      rules: ghost-role-information-traveling-chef-rules
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ TravelingChef ]
+      roleLoadout: [ RoleSurvivalStandard ]
 
 # Disaster victim
 
@@ -778,7 +816,7 @@
     - type: GhostRole
       name: ghost-role-information-disaster-victim-name
       description: ghost-role-information-disaster-victim-description
-      rules: ghost-role-information-disaster-victim-rules
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: default
 
@@ -788,6 +826,7 @@
   components:
     - type: Loadout
       prototypes: [ DisasterVictimRD, DisasterVictimRDAlt ]
+      roleLoadout: [ RoleSurvivalStandard ]
 
 - type: randomHumanoidSettings
   id: DisasterVictimCMO
@@ -795,6 +834,7 @@
   components:
     - type: Loadout
       prototypes: [ DisasterVictimCMO, DisasterVictimCMOAlt ]
+      roleLoadout: [ RoleSurvivalMedical ]
 
 - type: randomHumanoidSettings
   id: DisasterVictimCaptain
@@ -802,6 +842,7 @@
   components:
     - type: Loadout
       prototypes: [ DisasterVictimCaptain, DisasterVictimCaptainAlt ]
+      roleLoadout: [ RoleSurvivalStandard ]
 
 # Syndie Disaster Victim
 
@@ -839,8 +880,9 @@
     - type: GhostRole
       name: ghost-role-information-syndie-disaster-victim-name
       description: ghost-role-information-syndie-disaster-victim-description
-      rules: ghost-role-information-syndie-disaster-victim-rules
+      rules: ghost-role-information-nonantagonist-rules
       raffle:
         settings: short
     - type: Loadout
       prototypes: [ SyndicateOperativeGearCivilian ]
+      roleLoadout: [ RoleSurvivalStandard ]

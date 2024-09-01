@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: BaseItem
+  id: MagicBroom
+  name: an old broom
+  description: An ordinary, non-magical broom. Only for props.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/oldbroom.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -150
+    damage:
+      types:
+        Blunt: 0
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/oldbroom.rsi
+
+- type: entity
+  parent: BaseItem
+  id: OldBroom
+  name: an old broom
+  description: An ordinary, non-magical broom. Only for props.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/oldbroom.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -150
+    damage:
+      types:
+        Blunt: 0
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/oldbroom.rsi

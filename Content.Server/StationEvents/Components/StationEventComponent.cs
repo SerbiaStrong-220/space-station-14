@@ -81,4 +81,18 @@ public sealed partial class StationEventComponent : Component
     [DataField("endTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan? EndTime;
+
+    /// <summary>
+    /// If false, the event won't trigger during ongoing evacuation.
+    /// </summary>
+    [DataField]
+    public bool OccursDuringRoundEnd = true;
+
+    //SS220 GiftsGamma event fix begin
+    /// <summary>
+    /// If true, the event isn't triggered randomly in round
+    /// </summary>
+    [DataField]
+    public bool CannotStartRandomly = false;
+    //SS220 GiftsGamma event fix end
 }

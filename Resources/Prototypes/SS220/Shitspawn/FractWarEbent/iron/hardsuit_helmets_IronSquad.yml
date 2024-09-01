@@ -1,9 +1,9 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-# Admiral     
+# Admiral
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronAdmiral
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Lucifer
   description: Яркий дизайн и смертоносное исполнение - в лучших традициях CryTech technology.
   components:
@@ -16,7 +16,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronCE
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Cerberus
   description: Шлем с поверхностью, устойчивой к радиации, коррозии и агрессивным веществам.
   components:
@@ -29,7 +29,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronCMO
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Cyanide-X
   description: Стильная подсветка и дизайн прекрасно отражает вашу натуру психопата, любящего мучать пациентов горькими лекарствами.
   components:
@@ -42,7 +42,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronSoldier
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Zeros
   description: Тонкий металла с мягкой обшивкой из шерсти неизвестного происхождения.
   components:
@@ -55,7 +55,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronMed
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Cyanide
   description: Стильная подсветка и простой дизайн, выполненный в лучших традициях красных торговцев смертью.
   components:
@@ -68,7 +68,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronHeavy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Aid
   description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров, но не от пота.
   components:
@@ -81,7 +81,7 @@
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
   id: ClothingHeadHelmetHardsuitIronHeavy2
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: шлем скафандра Aid-2
   description: Огромная защита, стиль и капелька радиации!
   components:

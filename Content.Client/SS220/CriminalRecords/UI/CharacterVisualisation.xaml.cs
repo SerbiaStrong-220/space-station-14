@@ -78,7 +78,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
         foreach (var slot in slots)
         {
-            var itemType = gear.GetGear(slot.Name);
+            var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
 
             if (_inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
             {
@@ -111,14 +111,13 @@ public sealed partial class CharacterVisualisation : BoxContainer
         {
             foreach (var loadout in loadouts)
             {
-                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
+                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto) ||
+                    loadoutProto.Equipment == null)
                     continue;
-
-                var loadoutGear = _prototype.Index(loadoutProto.Equipment);
 
                 foreach (var slot in slots)
                 {
-                    var itemType = loadoutGear.GetGear(slot.Name);
+                    var itemType = ((IEquipmentLoadout) loadoutProto).GetGear(slot.Name);
 
                     if (itemType != string.Empty)
                     {

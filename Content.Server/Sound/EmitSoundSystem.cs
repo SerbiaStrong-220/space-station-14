@@ -40,18 +40,7 @@ public sealed class EmitSoundSystem : SharedEmitSoundSystem
         base.Initialize();
 
         SubscribeLocalEvent<EmitSoundOnTriggerComponent, TriggerEvent>(HandleEmitSoundOnTrigger);
-        SubscribeLocalEvent<EmitSoundOnUIOpenComponent, AfterActivatableUIOpenEvent>(HandleEmitSoundOnUIOpen);
         SubscribeLocalEvent<SpamEmitSoundComponent, MapInitEvent>(HandleSpamEmitSoundMapInit);
-    }
-
-    private void HandleEmitSoundOnUIOpen(EntityUid uid, EmitSoundOnUIOpenComponent component, AfterActivatableUIOpenEvent args)
-    {
-        // Ghost-UI-Activation-On-Use begin
-        if (HasComp<GhostComponent>(args.User))
-            return;
-        // Ghost-UI-Activation-On-Use end
-
-        TryEmitSound(uid, component, args.User, false);
     }
 
     private void HandleEmitSoundOnTrigger(EntityUid uid, EmitSoundOnTriggerComponent component, TriggerEvent args)

@@ -2,7 +2,7 @@
   id: BaseBulletRubber
   name: base bullet rubber
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -20,7 +20,7 @@
   id: BulletMagnumRubber
   name: bullet (.45 magnum rubber)
   parent: BaseBulletRubber
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -32,7 +32,7 @@
   id: BulletPistolRubber
   name: bullet (.35 auto rubber)
   parent: BaseBulletRubber
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -44,7 +44,7 @@
   id: BulletRifleRubber
   name: bullet (0.20 rifle rubber)
   parent: BaseBulletRubber
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -56,7 +56,7 @@
   id: BulletCaselessRifleRubber
   name: bullet (.25 caseless rubber)
   parent: BaseBulletRubber
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -67,7 +67,7 @@
   id: BulletLightRifleRubber
   name: bullet (.20 rifle rubber)
   parent: BaseBulletRubber
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

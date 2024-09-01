@@ -115,7 +115,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/wood.rsi
+    sprite: SS220/Structures/Walls/wood.rsi #SS220-Walls-Sprite-Update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -205,7 +205,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/gold.rsi
+    sprite: SS220/Structures/Walls/gold.rsi #SS220-Walss-Sprite-Update-V4
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -480,7 +480,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Structures/Windows/clockwork_window.rsi
+    sprite: SS220/Structures/Windows/clockwork_window.rsi #SS220-Walls-Sprite-Update-V3
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -774,6 +774,7 @@
     state: closed
   objectType: Structure
   placementMode: SnapgridCenter
+  canRotate: false
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
@@ -791,12 +792,13 @@
     state: closed
   objectType: Structure
   placementMode: SnapgridCenter
+  canRotate: false
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
 
 - type: construction
-  name: Thin firelock
+  name: thin firelock
   id: FirelockEdge
   graph: Firelock
   startNode: start
@@ -1643,6 +1645,23 @@
     - !type:TileNotBlocked
 
 - type: construction
+  name: carp statue
+  id: CarpStatue
+  graph: CarpStatue
+  startNode: start
+  targetNode: statue
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  description: A statue of one of the brave carp that got us where we are today. Made with real teeth!
+  objectType: Structure
+  canBuildInImpassable: false
+  icon:
+    sprite: Structures/Specific/carp_statue.rsi
+    state: icon
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
   name: bananium clown statue
   id: BananiumClownStatue
   graph: BananiumStatueClown
@@ -1727,6 +1746,42 @@
   icon:
     sprite: Structures/Windows/shuttle_window_diagonal.rsi
     state: state1
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional uranium window
+  id: UraniumWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: uraniumWindowDirectional
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/directional.rsi
+    state: uranium_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced uranium window
+  id: UraniumReinforcedWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectional
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: Structures/Windows/directional.rsi
+    state: uranium_reinforced_window
   objectType: Structure
   placementMode: SnapgridCenter
 #SS220-craft-end

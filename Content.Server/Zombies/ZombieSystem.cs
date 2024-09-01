@@ -15,6 +15,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NameModifier.Components;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
@@ -36,10 +38,10 @@ namespace Content.Server.Zombies
         [Dependency] private readonly ActionsSystem _actions = default!;
         [Dependency] private readonly AutoEmoteSystem _autoEmote = default!;
         [Dependency] private readonly EmoteOnDamageSystem _emoteOnDamage = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly TagSystem _tag = default!;
+        [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
         private const string ZombifyableTag = "ZombifyableByMelee";
 
@@ -323,7 +325,16 @@ namespace Content.Server.Zombies
             _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor, false);
             _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
 
-            _metaData.SetEntityName(target, zombiecomp.BeforeZombifiedEntityName);
+            //SS220 ZOMBIE NAME FIX START (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1651 && https://github.com/SerbiaStrong-220/space-station-14/issues/1567)
+            var targetModifierComponent = AddComp<NameModifierComponent>(target);
+
+            if (TryComp<NameModifierComponent>(source, out var sourceModifierComponent))
+            {
+                targetModifierComponent.BaseName = sourceModifierComponent.BaseName;
+            }
+            //SS220 ZOMBIE NAME FIX END
+
+            _nameMod.RefreshNameModifiers(target);
             return true;
         }
 

@@ -85,3 +85,9 @@ ent-MobSpaceCatPetGhostRole = { ent-MobSpaceCatPet }
 ent-SpawnMobSpaceCatPetGhostRole = Спавнер { ent-MobSpaceCatPet }
 ghost-role-information-pet-spacecat-name = { ent-MobSpaceCatPet }
 ghost-role-information-pet-spacecat-description = { ent-MobSpaceCatPet.desc }
+
+ent-MobENGhostRole = { ent-MobEN }
+    .desc = { ent-MobEN.desc }
+ent-SpawnMobENGhostRole = Спавнер { ent-MobEN }
+ghost-role-information-en-name = Борги Е-Н
+ghost-role-information-en-description = Самый хороший мальчик робототехники.

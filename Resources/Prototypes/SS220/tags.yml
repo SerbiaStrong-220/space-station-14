@@ -87,3 +87,19 @@
 
 - type: Tag
   id: WeaponFlareGun
+
+# New Qm highrisk
+- type: Tag
+  id: EngravedKnuckleduster
+
+#MultiPhaze Energy Gun
+- type: Tag
+  id: WeaponMultiPhaseEnergyGun
+
+# Офицерский кортик
+- type: Tag
+  id: OfficerCutlass
+
+# corgi E-N
+- type: Tag
+  id: E-N

@@ -7,8 +7,13 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 108000 # SS220-RoleTime
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: WardenGear
   icon: "JobIconWarden"
+  requireAdminNotify: true
   supervisors: job-supervisors-hos
   canBeAntag: false
   access:
@@ -34,7 +39,6 @@
     pocket1: WeaponPistolMk58Nonlethal #SS220-DeleteSecurityLetal
   storage:
     back:
-    - BoxSurvivalSecurity
     - Flash
     - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
     - MagazinePistolRubber

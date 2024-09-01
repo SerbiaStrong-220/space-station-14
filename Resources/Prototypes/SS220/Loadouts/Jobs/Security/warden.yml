@@ -1,4 +1,4 @@
-# Turtleneck Time
+# Job Time
 - type: loadoutEffectGroup
   id: WardenTurtleneck
   effects:
@@ -11,12 +11,8 @@
 # Jumpsuit
 - type: loadout
   id: WardenJumpsuitTurtleneck
-  equipment: WardenJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
     proto: WardenTurtleneck
-
-- type: startingGear
-  id: WardenJumpsuitTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitWardenTurtleneck

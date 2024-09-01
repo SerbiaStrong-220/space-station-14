@@ -211,3 +211,17 @@
     prototypes:
     - MobSpaceCatPetGhostRole
 # SS220 AVD pet end
+
+- type: entity
+  name: E-N Spawner
+  id: SpawnMobENGhostRole
+  parent: MarkerBase
+  suffix: Роль
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+      - MobEN

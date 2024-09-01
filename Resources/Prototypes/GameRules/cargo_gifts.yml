@@ -1,3 +1,22 @@
+# Tables --  Add your new event to this Table if you want it to happen via the basic/ramping schedulers.
+
+- type: entityTable
+  id: CargoGiftsTable
+  table: !type:GroupSelector # ~~we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp~~ But we arent doing that shit yet, it picks a random one StationEventComp be damned.
+    children:
+    - id: GiftsEngineering
+    - id: GiftsFireProtection
+    - id: GiftsJanitor
+    - id: GiftsMedical
+    - id: GiftsPizzaPartyLarge
+    - id: GiftsPizzaPartySmall
+    - id: GiftsSecurityGuns
+    - id: GiftsSecurityRiot
+    - id: GiftsSpacingSupplies
+    - id: GiftsVendingRestock
+
+# Game Rules
+    
 - type: entity
   id: CargoGiftsBase
   parent: BaseGameRule
@@ -8,7 +27,7 @@
       min: 10
       max: 10
   - type: StationEvent
-    startColor: "#18abf5"
+    startAnnouncementColor: "#18abf5"  #SS220 CargoGifts events color fix
     startAudio:
       path: /Audio/Announcements/announce.ogg
   - type: CargoGiftsRule
@@ -198,16 +217,20 @@
 #ss220-gamma
 - type: entity
   id: GiftsGamma
-  parent: BaseGameRule
-  noSpawn: true
+  parent: CargoGiftsBase #SS220 GiftsGamma event fix
+  categories: [ GameRules ]
   components:
-    - type: CargoGiftsRule
-      description: cargo-gift-dest-gamma
-      sender: cargo-gift-default-sender
-      dest: cargo-gift-dest-all
-      gifts:
-        SecurityArmor: 2
-        SecurityHelmet: 2
-        ArmorySmg: 3
-        ArmoryShotgun: 3
+  #SS220 GiftsGamma event fix begin
+  - type: StationEvent
+    cannotStartRandomly: true
+  #SS220 GiftsGamma event fix end
+  - type: CargoGiftsRule
+    description: cargo-gift-dest-gamma
+    sender: cargo-gift-default-sender
+    dest: cargo-gift-dest-all
+    gifts:
+      SecurityArmor: 2
+      SecurityHelmet: 2
+      ArmorySmg: 3
+      ArmoryShotgun: 3
 #ss220-gammaend

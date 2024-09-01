@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 36000 # SS220-RoleTime
+      time: 54000 # SS220-RoleTime 2
   startingGear: ParamedicGear
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
@@ -25,5 +25,4 @@
     belt: ClothingBeltMedicalEMTFilled
   storage:
     back:
-    - BoxSurvivalMedical
     - EmergencyRollerBedSpawnFolded
