@@ -4,11 +4,11 @@
   name: magboots
   description: Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
   components:
-    - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
-      sound:
-        path: /Audio/SS220/Effects/Drop/clothing_magboots.ogg
-        params:
-          volume: 2 ##new sound_drop effect, add MIXnikita
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_magboots.ogg
+      params:
+        olume: 2 ##new sound_drop effect, add MIXnikita
   - type: Sprite
     sprite: Clothing/Shoes/Boots/magboots.rsi
     layers:

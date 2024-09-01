@@ -35,6 +35,11 @@
     sprite: Objects/Weapons/Melee/pickaxe.rsi
     storedRotation: -45
   - type: UseDelay
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+    sound:
+      path: /Audio/SS220/Effects/Drop/axe.ogg
+      params:
+        volume: 2 ##new sound_drop effect, add MIXnikita
 
 - type: entity
   name: mining drill
