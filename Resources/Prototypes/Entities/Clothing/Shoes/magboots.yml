@@ -8,7 +8,7 @@
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_magboots.ogg
       params:
-        olume: 2 ##new sound_drop effect, add MIXnikita
+        volume: 2 ##new sound_drop effect, add MIXnikita
   - type: Sprite
     sprite: Clothing/Shoes/Boots/magboots.rsi
     layers:
