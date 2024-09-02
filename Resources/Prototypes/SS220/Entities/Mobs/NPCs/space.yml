@@ -63,7 +63,7 @@
     soundHit:
       path: /Audio/Effects/bite.ogg
     angle: 0
-      animation: WeaponArcBite
+    animation: WeaponArcBite
     attackRate: 0.5
     damage:
       types:
