@@ -8,8 +8,8 @@
     range: 1
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Misc/eggspider.rsi
-      state: icon
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: viper_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggDrone
@@ -60,6 +60,9 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: guard_spawn
     useDelay: 300 #КД
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -75,6 +78,9 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: nurse
     useDelay: 350
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -90,6 +96,9 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: hunter_spawn
     useDelay: 380
     event: !type:WorldSpawnSpellEvent
       prototypes:
