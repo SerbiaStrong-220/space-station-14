@@ -178,6 +178,7 @@
        - id: ClothingUniformJumpskirtCargo
        - id: ClothingHandsGlovesFingerless
        - id: AppraisalTool
+       - id: ClothingEyesHudSupply # SS220 ADD CARGO HUD
 
  - type: entity
    id: WardrobeSalvageFilled
