@@ -40,7 +40,7 @@ public sealed class ShowSupplyPriceSystem : EntitySystem
             return;
         }
 
-        var price = _pricingSystem.GetPrice(args.Examined);
+        var price = Math.Round(_pricingSystem.GetPrice(args.Examined), 2); // price = ,**
 
         if (price == 0)
         {
