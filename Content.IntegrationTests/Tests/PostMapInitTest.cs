@@ -74,6 +74,7 @@ namespace Content.IntegrationTests.Tests
             "Frankenstein",
             //"Nox",
             "Axioma",
+			"Donuts",
             "Eclipse",
             "SS220_syndicate",
             "SS220_CentComm",
