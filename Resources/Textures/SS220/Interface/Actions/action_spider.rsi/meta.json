@@ -14,10 +14,10 @@
       "name": "hunter_spawn"
     },
     {
-      "name": "nurse"
+      "name": "nurse_spawn"
     },
     {
       "name": "viper_spawn"
-    },
+    }
   ]
 }

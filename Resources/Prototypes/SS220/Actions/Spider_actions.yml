@@ -9,7 +9,7 @@
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
-      state: viper_spawn
+      state: guard_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggDrone
@@ -62,7 +62,7 @@
   - type: WorldTargetAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
-      state: guard_spawn
+      state: hunter_spawn
     useDelay: 300 #КД
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -80,7 +80,7 @@
   - type: WorldTargetAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
-      state: nurse
+      state: nurse_spawn
     useDelay: 350
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -98,7 +98,7 @@
   - type: WorldTargetAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
-      state: hunter_spawn
+      state: viper_spawn
     useDelay: 380
     event: !type:WorldSpawnSpellEvent
       prototypes:
