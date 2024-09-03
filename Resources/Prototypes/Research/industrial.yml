@@ -16,6 +16,7 @@
   - BorgModuleGrapplingGun
   - OreProcessorIndustrialMachineCircuitboard
   - ClothingMaskWeldingGas
+  - ClothingEyesHudSupply #ss220 HUD CARGO ADD
 
 - type: technology
   id: SpaceScanning
@@ -168,7 +169,7 @@
     - BorgModuleAdvancedTool
     - BorgModuleRCD
     - BorgModuleProtoKineticAccelerator # ss220
-# ss220 start thermoelectric generator 
+# ss220 start thermoelectric generator
 
 - type: technology
   id: RenewablePower
@@ -184,7 +185,7 @@
   - ThermoelectricgeneratorTurbine
   technologyPrerequisites:
   - PowerGeneration
-# ss220 end thermoelectric generator 
+# ss220 end thermoelectric generator
 
 - type: technology
   id: MassExcavation

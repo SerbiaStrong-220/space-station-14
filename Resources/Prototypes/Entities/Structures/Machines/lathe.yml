@@ -357,6 +357,7 @@
       - OreBagOfHolding
       - DeviceQuantumSpinInverter
       - ThermalVisorRND # SS220 Thermals
+      - ClothingEyesHudSupply #ss220 hud cargo add
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - BoxBeanbag
