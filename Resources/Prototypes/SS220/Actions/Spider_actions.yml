@@ -119,8 +119,8 @@
     range: 2
     itemIconStyle: BigAction
     icon:
-      sprite: Mobs/Animals/spider.rsi
-      state: viper_dead
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: little_spider_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: MobSpiderSpaceLittle
