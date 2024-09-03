@@ -17,8 +17,8 @@ public abstract partial class SharedSalvageSystem
     private Dictionary<ISalvageMagnetOffering, float> _offeringWeights = new()
     {
         { new AsteroidOffering(), 3.0f },
-        { new DebrisOffering(), 4.0f },
-        { new SalvageOffering(), 1.0f }
+        { new DebrisOffering(), 2.0f },
+        { new SalvageOffering(), 2.0f }
     };
 
     private readonly List<ProtoId<DungeonConfigPrototype>> _asteroidConfigs = new()
