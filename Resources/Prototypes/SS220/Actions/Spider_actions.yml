@@ -28,8 +28,8 @@
     range: 1.5
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_1
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: web_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderWebFragile
@@ -226,8 +226,8 @@
     range: 1.3
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_clown_1
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: clown_web_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderWebClown

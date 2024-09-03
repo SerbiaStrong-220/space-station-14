@@ -21,6 +21,12 @@
     },
     {
       "name": "little_spider_spawn"
+    },
+    {
+      "name": "web_spawn"
+    },
+    {
+      "name": "clown_web_spawn"
     }
   ]
 }
