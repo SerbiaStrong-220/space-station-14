@@ -21,6 +21,7 @@ entities:
   - uid: 407
     components:
     - type: MetaData
+      name: Космический Обломок
     - type: Transform
       parent: invalid
     - type: MapGrid
@@ -688,8 +689,6 @@ entities:
       parent: 407
     - type: Apc
       hasAccess: True
-      lastExternalState: Good
-      lastChargeState: Full
   - uid: 230
     components:
     - type: Transform

@@ -12,7 +12,7 @@ entities:
   - uid: 2
     components:
     - type: MetaData
-      name: grid
+      name: Космический Обломок
     - type: Transform
       pos: -0.5,-0.48605028
       parent: invalid
@@ -663,7 +663,8 @@ entities:
         maxVol: 1
         name: food
         reagents:
-        - ReagentId: Fiber
+        - data: []
+          ReagentId: Fiber
           Quantity: 1
     - type: ContainedSolution
       containerName: food
@@ -678,7 +679,8 @@ entities:
         maxVol: 1
         name: food
         reagents:
-        - ReagentId: Fiber
+        - data: []
+          ReagentId: Fiber
           Quantity: 1
     - type: ContainedSolution
       containerName: food
@@ -693,7 +695,8 @@ entities:
         maxVol: 1
         name: food
         reagents:
-        - ReagentId: Fiber
+        - data: []
+          ReagentId: Fiber
           Quantity: 1
     - type: ContainedSolution
       containerName: food
@@ -1071,19 +1074,19 @@ entities:
     - type: Transform
       pos: 4.5,1.5
       parent: 2
-- proto: chem_master
-  entities:
-  - uid: 145
-    components:
-    - type: Transform
-      pos: 5.5,7.5
-      parent: 2
 - proto: ChemDispenserEmpty
   entities:
   - uid: 150
     components:
     - type: Transform
       pos: 4.5,3.5
+      parent: 2
+- proto: ChemMaster
+  entities:
+  - uid: 145
+    components:
+    - type: Transform
+      pos: 5.5,7.5
       parent: 2
 - proto: ClothingHeadHatBeretSeniorPhysician
   entities:
@@ -1205,7 +1208,7 @@ entities:
       pos: 8.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1700.0769
+      secondsUntilStateChange: -1709.8099
       state: Closing
   - uid: 264
     components:
@@ -1213,7 +1216,7 @@ entities:
       pos: 9.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1701.2306
+      secondsUntilStateChange: -1710.9636
       state: Closing
   - uid: 265
     components:
@@ -1221,7 +1224,7 @@ entities:
       pos: 10.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1702.3217
+      secondsUntilStateChange: -1712.0547
       state: Closing
   - uid: 266
     components:
@@ -1229,7 +1232,7 @@ entities:
       pos: 16.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1658.247
+      secondsUntilStateChange: -1667.98
       state: Closing
   - uid: 267
     components:
@@ -1237,7 +1240,7 @@ entities:
       pos: 17.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1657.564
+      secondsUntilStateChange: -1667.297
       state: Closing
   - uid: 268
     components:
@@ -1245,7 +1248,7 @@ entities:
       pos: 18.5,8.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1656.6808
+      secondsUntilStateChange: -1666.4138
       state: Closing
 - proto: Girder
   entities:
@@ -1331,7 +1334,7 @@ entities:
     - type: Transform
       pos: 12.5,1.5
       parent: 2
-- proto: IntercomAssesmbly
+- proto: IntercomAssembly
   entities:
   - uid: 121
     components:
@@ -2085,7 +2088,7 @@ entities:
     - type: Transform
       pos: 4.5,8.5
       parent: 2
-- proto: SignChemistry1
+- proto: SignChem
   entities:
   - uid: 112
     components:
@@ -2518,7 +2521,7 @@ entities:
       pos: 13.5,4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -9660.94
+      secondsUntilStateChange: -9670.674
       state: Opening
   - uid: 77
     components:
@@ -2527,7 +2530,7 @@ entities:
       pos: 15.5,4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -9658.906
+      secondsUntilStateChange: -9668.64
       state: Opening
   - uid: 140
     components:
