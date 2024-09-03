@@ -2,7 +2,7 @@
   name: космический крокодил
   id: MobCrocodileSpace
   parent: MobSpaceBasic
-  description: ДА Я ХУЙ ЗНАЕТ ЧЕ СЮдА ПИСАТЬ.
+  description: Абсолютно обычный крокодил на самой обычной станции. 
   components:
   - type: Sprite
     drawdepth: Mobs
