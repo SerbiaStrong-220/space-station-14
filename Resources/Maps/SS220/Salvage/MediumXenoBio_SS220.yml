@@ -528,45 +528,6 @@ entities:
     - type: ContainedSolution
       containerName: beaker
       container: 3
-  - uid: 6
-    components:
-    - type: MetaData
-    - type: Transform
-      parent: 5
-    - type: Solution
-      solution:
-        maxVol: 100
-        name: beaker
-        reagents: []
-    - type: ContainedSolution
-      containerName: beaker
-      container: 5
-  - uid: 8
-    components:
-    - type: MetaData
-    - type: Transform
-      parent: 7
-    - type: Solution
-      solution:
-        maxVol: 100
-        name: beaker
-        reagents: []
-    - type: ContainedSolution
-      containerName: beaker
-      container: 7
-  - uid: 10
-    components:
-    - type: MetaData
-    - type: Transform
-      parent: 9
-    - type: Solution
-      solution:
-        maxVol: 50
-        name: beaker
-        reagents: []
-    - type: ContainedSolution
-      containerName: beaker
-      container: 9
 - proto: AirlockAssemblyScience
   entities:
   - uid: 11
@@ -618,34 +579,17 @@ entities:
     - type: Transform
       pos: 15.5,0.5
       parent: 1
-- proto: Beaker
-  entities:
-  - uid: 9
-    components:
-    - type: Transform
-      parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 10
 - proto: BluespaceBeaker
   entities:
   - uid: 3
     components:
     - type: Transform
-      parent: 2
+      pos: 12.573217,3.6574326
+      parent: 1
     - type: SolutionContainerManager
       solutions: null
       containers:
       - beaker
-    - type: Physics
-      canCollide: False
     - type: ContainerContainer
       containers:
         solution@beaker: !type:ContainerSlot
@@ -655,32 +599,8 @@ entities:
   - uid: 2
     components:
     - type: Transform
-      pos: 12.386249,3.865954
+      pos: 12.432592,3.876183
       parent: 1
-    - type: Storage
-      storedItems:
-        3:
-          position: 0,2
-          _rotation: East
-        7:
-          position: 0,0
-          _rotation: East
-        5:
-          position: 2,0
-          _rotation: South
-        9:
-          position: 2,2
-          _rotation: East
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3
-          - 7
-          - 5
-          - 9
 - proto: BoxRandom
   entities:
   - uid: 18
@@ -1450,36 +1370,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,-1.5
       parent: 1
-- proto: LargeBeaker
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 6
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 8
 - proto: LightBulbBroken
   entities:
   - uid: 152

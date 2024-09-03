@@ -756,34 +756,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-  - uid: 4
-    components:
-    - type: MetaData
-      name: solution - beaker
-    - type: Transform
-      parent: 3
-    - type: Solution
-      solution:
-        maxVol: 100
-        name: beaker
-        reagents: []
-    - type: ContainedSolution
-      containerName: beaker
-      container: 3
-  - uid: 6
-    components:
-    - type: MetaData
-      name: solution - beaker
-    - type: Transform
-      parent: 5
-    - type: Solution
-      solution:
-        maxVol: 1000
-        name: beaker
-        reagents: []
-    - type: ContainedSolution
-      containerName: beaker
-      container: 5
   - uid: 8
     components:
     - type: MetaData
@@ -1161,22 +1133,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: BluespaceBeaker
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 6
 - proto: Bookshelf
   entities:
   - uid: 60
@@ -1189,33 +1145,8 @@ entities:
   - uid: 2
     components:
     - type: Transform
-      pos: 1.0964184,5.807209
+      pos: 1.0935202,5.751305
       parent: 1
-    - type: Storage
-      storedItems:
-        3:
-          position: 0,0
-          _rotation: South
-        5:
-          position: 2,2
-          _rotation: East
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3
-          - 5
-    - type: UseDelay
-      delays:
-        default:
-          endTime: 11349.4046062
-          startTime: 24957.9668343
-          length: 1
-        quickInsert:
-          length: 0.5
-        storage: {}
 - proto: BoxFolderMedical
   entities:
   - uid: 61
@@ -1899,7 +1830,7 @@ entities:
       pos: 5.5,1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -12082.682
+      secondsUntilStateChange: -12204.918
       state: Opening
   - uid: 150
     components:
@@ -1928,22 +1859,6 @@ entities:
     - type: Transform
       pos: -4.5,5.5
       parent: 1
-- proto: LargeBeaker
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 4
 - proto: LockerMedical
   entities:
   - uid: 154
