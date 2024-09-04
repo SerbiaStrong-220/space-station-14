@@ -28,3 +28,18 @@
     - id: FloppaCigar
       amount: 8
 
+- type: entity
+  parent: BasePlushie
+  id: SmokingFish #TODO: Обязательно обсудить с Адучем
+  name: курящая рыба
+  description: Игрушка, олицетворяющая всю бренность этого мира.
+  suffix: Шлёпа
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Sponsor/Toy/smoking_fish.rsi
+      state: icon
+    - type: MeleeWeapon
+      wideAnimationRotation: -135
+    - type: Item
+      size: Small
+      sprite: SS220/Clothing/Sponsor/Toy/smoking_fish.rsi
