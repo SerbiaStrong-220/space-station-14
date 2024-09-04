@@ -460,3 +460,50 @@
     sprite: SS220/Clothing/Sponsor/Fools/Hands/muzhik.rsi
   - type: Fiber
     fiberColor: fibers-red
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingUniformJumpsuitJujutsuShlepa
+  name: рубашка офисного работника
+  description: Рубашка, пропитанная запахом Малазии. От неё веет усталостью, может возьмёте отдых?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijumpsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijumpsuit.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorCoatJujutsuShlepa
+  name: пиджак офисного работника.
+  description: Вы не чувствуете себя по-настоящему ценным? Бюрократия поможет вам решить эту проблема!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijacket.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijacket.rsi
+
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorGlassesJujutsuShlepa
+  name: очки офисного работника
+  description: Семь к трём - идеальное соотношение
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamigoggles.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamigoggles.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorTieJujutsuShlepa
+  name: галстук офисного работника
+  description: U r my SPECIAL.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamitie.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamitie.rsi

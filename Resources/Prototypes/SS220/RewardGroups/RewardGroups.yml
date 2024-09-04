@@ -48,6 +48,7 @@
     ClothingWristWatchUssp: 2
   # Вторая итерация
     ClothingHeadHatDevilHorns: 1
+    SponsorBoxJujutsuShlepa: 4
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa

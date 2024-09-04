@@ -362,3 +362,18 @@
     - id: ClothingSponsorMaidHat
     sound:
       path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxJujutsuShlepa
+  name: костюм офисного работника
+  description: Содержит в себе костюм офисного работника. Осторожно! Набор предметов не поместится в ваших руках!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingUniformJumpsuitJujutsuShlepa
+    - id: ClothingSponsorCoatJujutsuShlepa
+    - id: ClothingSponsorGlassesJujutsuShlepa
+    - id: ClothingSponsorTieJujutsuShlepa
+    sound:
+      path: /Audio/Effects/unwrap.ogg
