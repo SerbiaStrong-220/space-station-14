@@ -102,11 +102,13 @@
 - type: roleLoadout
   id: JobLawyer
   groups:
+  - IAAGlasses #SS220-Two Floppa Iteration
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit
+  - IAAOuterclothing #SS220-Two Floppa Iteration
   - CommonBackpack
-  - Glasses
+  - IAAGlasses #SS220-IAA-Loadouts
   - Survival
   - Gloves #SS220-IAA-Loadouts
   - Trinkets

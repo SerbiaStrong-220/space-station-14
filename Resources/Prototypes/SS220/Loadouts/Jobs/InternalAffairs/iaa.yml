@@ -35,6 +35,32 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitTrustedLawyer
 
+- type: loadout
+  id: JumpsuitJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJujutsuShlepa
+
+# Outer clothing
+- type: loadout
+  id: OuterClothingJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCoatJujutsuShlepa
+
+# Glasses
+- type: loadout
+  id: GlassesujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorGlassesJujutsuShlepa
+
 # Back
 - type: loadout
   id: IAABackpackLeather

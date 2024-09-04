@@ -4,8 +4,10 @@
 - type: roleLoadout
   id: JobIAA
   groups:
+  - IAAGlasses
   - LawyerNeck
   - IAAJumpsuit
+  - IAAOuterclothing
   - IAABackpacks #ss220 iaa loadout fix
   - Trinkets
   - Gloves

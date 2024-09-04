@@ -4,6 +4,7 @@
 - type: loadoutGroup
   id: CaptainGloves
   name: loadout-group-captain-gloves
+  minLimit: 0
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
@@ -36,6 +37,23 @@
   - LawyerJumpskirtGood
   - JumpsuitNTR
   - JumpsuitTrustedLawyer
+  - JumpsuitJujutsuShlepa
+
+- type: loadoutGroup
+  id: IAAOuterclothing
+  name: loadout-group-iaa-outerclothing
+  loadouts:
+  - OuterClothingJujutsuShlepa
+
+- type: loadoutGroup
+  id: IAAGlasses
+  minLimit: 0
+  name: loadout-group-iaa-glasses
+  loadouts:
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+  - GlassesujutsuShlepa
 
 - type: loadoutGroup
   id: IAABackpacks
