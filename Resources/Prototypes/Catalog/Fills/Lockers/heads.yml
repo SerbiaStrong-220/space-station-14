@@ -2,6 +2,7 @@
   id: LockerFillQuarterMaster
   table: !type:AllSelector
     children:
+    - id: ClothingEyesQuartermasterGlasses
     - id: BoxEncryptionKeyCargo
     - id: BoxFolderQmClipboard
     - id: CargoBountyComputerCircuitboard
