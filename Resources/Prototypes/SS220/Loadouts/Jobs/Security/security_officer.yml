@@ -61,6 +61,15 @@
   equipment:
     head: ClothingHeadHelmetTactical
 
+# Mask
+- type: loadout
+  id: MaskTacSec
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    mask: ClothingMaskNeckGaiter
+
 # Neck
 - type: loadout
   id: Headphones

@@ -136,7 +136,7 @@
   - JanitorGloves
   - CommonBackpack
   - JanitorOuterClothing
-  - JanitorShoesOrange #SS220-OrangeJanitor
+  - JanitorShoes #SS220-OrangeJanitor
   - Glasses
   - Survival
   - Trinkets
@@ -378,6 +378,7 @@
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
