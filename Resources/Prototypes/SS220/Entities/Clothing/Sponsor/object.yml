@@ -1,0 +1,30 @@
+- type: entity
+  id: FloppaCigar
+  parent: Cigar
+  name: элитная сигара
+  description: Сигара, предназначенная для элиты.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cigars/cigar-floppa.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cigars/cigar-floppa.rsi
+  - type: Item
+    sprite: SS220/Clothing/Sponsor/Cigars/cigar-floppa.rsi
+
+- type: entity
+  id: FloppaCigarCase
+  parent: [ CigarCase ]
+  name: элитные портсигар
+  description: Футляр элитных эдемских сигар прямиком из Марса!
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cigars/floppa-case.rsi
+  - type: Item
+    sprite: SS220/Clothing/Sponsor/Cigars/floppa-case.rsi
+  - type: StorageFill
+    contents:
+    - id: FloppaCigar
+      amount: 8
+
