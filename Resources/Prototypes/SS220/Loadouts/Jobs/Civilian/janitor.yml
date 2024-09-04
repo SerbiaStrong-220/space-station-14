@@ -49,6 +49,11 @@
   equipment:
     shoes: ClothingShoesGaloshes
 
+- type: loadout
+  id: ShoesColorPurple
+  equipment:
+    shoes: ClothingShoesColorPurple
+
 #Head
 - type: loadout
   id: JanitorOrangeHat

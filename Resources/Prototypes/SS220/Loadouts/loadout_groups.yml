@@ -405,6 +405,7 @@
   id: JanitorShoesOrange
   name: loadout-group-janitor-shoes
   loadouts:
+  - ShoesColorPurple
   - JanitorGaloshes
   - JanitorOrangeShoes
   # Уборщик (Конец)
