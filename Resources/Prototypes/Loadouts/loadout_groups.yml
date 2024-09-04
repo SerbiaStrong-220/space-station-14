@@ -1058,15 +1058,6 @@
   - HatCowboyBlack #ss220 sec loadout update
   - HelmetTacSec #ss220 tacsec update
 
-#SS220 mask loadout begin
-- type: loadoutGroup
-  id: SecurityMask
-  name: loadout-group-security-mask
-  minLimit: 0
-  loadouts:
-  - MaskTacSec
-#SS220 mask loadout end
-
 #SS220 neck loadout begin
 - type: loadoutGroup
   id: SecurityNeck

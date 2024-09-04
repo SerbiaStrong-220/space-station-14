@@ -73,6 +73,15 @@
   - OfficerCutlass
   # Глава службы безопасности (Конец)
 
+  # Офицер СБ (Начало)
+- type: loadoutGroup
+  id: SecurityMask
+  name: loadout-group-security-mask
+  minLimit: 0
+  loadouts:
+  - MaskTacSec
+  # Офицер СБ (Конец)
+
   # Инструктор СБ (Начало)
 - type: loadoutGroup
   id: SeniorSecJumpsuit
