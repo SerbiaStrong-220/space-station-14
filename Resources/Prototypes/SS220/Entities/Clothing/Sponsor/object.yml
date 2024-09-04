@@ -43,3 +43,27 @@
     - type: Item
       size: Small
       sprite: SS220/Clothing/Sponsor/Toy/smoking_fish.rsi
+
+- type: entity
+  parent: FlippoLighter
+  id: ExpensiveLighterSponsor
+  name: элитная зажигалка
+  description: Элитная зажигалка элитных людей для не менее элитных сигар!
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cigars/floppa-zippo.rsi
+    layers:
+    - state: zippo_shlepa_icon_base
+      map: ["base"]
+    - state: zippo_shlepa_open
+      map: ["open"]
+      visible: false
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+  - type: Item
+    size: Tiny
+    sprite: SS220/Clothing/Sponsor/Cigars/floppa-zippo.rsi
+    heldPrefix: zippo

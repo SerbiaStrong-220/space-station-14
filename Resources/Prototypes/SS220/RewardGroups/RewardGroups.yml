@@ -14,7 +14,8 @@
     ClothingSponsorWreath: 1
     ClothingSponsorScarfTube: 1
   # Вторая итерация
-    FloppaCigarCase: 1
+    FloppaCigarCase: 2
+    ExpensiveLighterSponsor: 1
 
 - type: ShlepaRewardGroup
   id: BigShlopa
