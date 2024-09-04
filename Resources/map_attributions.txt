@@ -74,3 +74,6 @@
 
 - files: ["eclipse.yml"]
   authors: Vnoeg, NightmareStalker, AliceValestray, UrPrice, VictorBoum, RtmFool, Ivan_comi
+
+- files: ["Donuts.yml"]
+  authors: spo9k, Persia
