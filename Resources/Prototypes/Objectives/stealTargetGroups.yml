@@ -29,13 +29,6 @@
     state: icon
 
 - type: stealTargetGroup
-  id: BookSecretDocuments
-  name: "emergency security orders"
-  sprite:
-    sprite: Objects/Misc/bureaucracy.rsi
-    state: folder-sec-doc
-
-- type: stealTargetGroup
   id: ClothingShoesBootsMagAdv
   name: advanced magboots
   sprite:
@@ -83,6 +76,15 @@
   sprite:
     sprite: Objects/Misc/nukedisk.rsi
     state: icon
+    
+#SS220 HOS shotgun removal begin
+#- type: stealTargetGroup
+  #id: WeaponEnergyShotgun
+  #name: energy shotgun
+  #sprite:
+    #sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
+    #state: base
+#SS220 HOS shotgun removal end
 
 # Thief Collection
 
@@ -141,8 +143,6 @@
   sprite:
     sprite: Objects/Misc/id_cards.rsi
     state: default
-
-
 
 - type: stealTargetGroup
   id: LAMP
@@ -373,6 +373,13 @@
   sprite:
     sprite: Structures/Furniture/potted_plants.rsi
     state: plant-25
+
+- type: stealTargetGroup
+  id: ToiletGoldenDirtyWater
+  name: golden toilet
+  sprite:
+    sprite: Structures/Furniture/golden_toilet.rsi
+    state: condisposal
 
 # Thief Animal
 

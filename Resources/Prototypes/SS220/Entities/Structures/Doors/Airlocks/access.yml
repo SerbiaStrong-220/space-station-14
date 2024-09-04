@@ -8,3 +8,14 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsResearch ]
+
+- type: entity
+  parent: AirlockGlassShuttle
+  id: AirlockExternalGlassEscapePodLocked
+  suffix: External, EscapePod, Glass, Docking, Locked
+  components:
+  - type: PriorityDock
+    tag: EscapePod
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsExternal ]

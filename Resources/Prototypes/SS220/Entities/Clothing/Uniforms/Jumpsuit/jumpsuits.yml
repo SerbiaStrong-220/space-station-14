@@ -107,6 +107,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitDruid #SS220 druid loadout
+  name: druid jupmsuit
+  description: Convenient and functional, it helps researchers unlock the mysteries of nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/druid_jumpsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/druid_jumpsuit.rsi
+
   # Репортёр
 - type: entity
   parent: ClothingUniformBase
@@ -165,6 +176,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitOrangeJanitor
+  name: фиолетовая униформа
+  description: Фиолетовая униформа, но с оранжевыми штанами на подтяжках.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/orangejanitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/orangejanitor.rsi
 
 # Medical
 
@@ -229,6 +251,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/flannel_salvage.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/flannel_salvage.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitExpeditor
+  name: expeditor uniform
+  description: Comfortable, practical and loose expeditor's uniform. Feel the space breeze, or rather the lack thereof, with every tip of your left and right hand.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
 
 # Syndicate
 

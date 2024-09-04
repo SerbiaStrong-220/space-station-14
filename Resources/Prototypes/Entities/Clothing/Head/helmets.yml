@@ -3,11 +3,16 @@
 
 #Basic Helmet (Security Helmet)
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseRestrictedContraband]
   id: ClothingHeadHelmetBasic
   name: helmet
   description: Standard security gear. Protects the head from impacts.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Clothing/Head/Helmets/security.rsi
   - type: Clothing
@@ -42,7 +47,7 @@
 
 #SWAT Helmet
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseRestrictedContraband]
   id: ClothingHeadHelmetSwat
   name: SWAT helmet
   description: An extremely robust helmet, commonly used by paramilitary forces. This one has the Nanotrasen logo emblazoned on the top.
@@ -78,7 +83,7 @@
 
 #Light Riot Helmet
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseRestrictedContraband]
   id: ClothingHeadHelmetRiot
   name: light riot helmet
   description: It's a helmet specifically designed to protect against close range attacks.
@@ -359,7 +364,7 @@
     sprite: Clothing/Head/Helmets/ert_janitor.rsi
 
 - type: entity
-  parent: ClothingHeadHelmetBasic
+  parent: [ BaseSyndicateContraband, ClothingHeadHelmetBasic ]
   id: ClothingHeadHelmetRaid
   name: syndicate raid helmet
   description: An armored helmet for use with the syndicate raid suit. Very stylish.

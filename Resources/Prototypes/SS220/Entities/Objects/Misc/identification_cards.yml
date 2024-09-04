@@ -13,8 +13,6 @@
     layers:
     - state: ussp
   - type: AgentIDCard
-    icons:
-    - JobIconPassenger
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
@@ -99,7 +97,7 @@
       job: SecurityOfficer
       name: Рокси
 
-      
+
 - type: entity
   parent: PassengerIDCard
   id: SeniorServiceIDCard

@@ -15,6 +15,15 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobSalvageSpecialist
+      time: 180000 # 50 hrs
+
+- type: loadoutEffectGroup
+  id: UniformExpeditor
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
       time: 252000 # 70 hrs
 
 # Jumpsuit
@@ -39,6 +48,14 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitFlannelSalvage
 
+- type: loadout
+  id: ClothingUniformJumpsuitExpeditor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: UniformExpeditor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitExpeditor
+
 # Head
 - type: loadout
   id: ClothingHeadHatSalvage
@@ -54,3 +71,11 @@
   id: ClothingHeadHatHardhatViolet
   equipment:
     head: ClothingHeadHatHardhatViolet
+
+- type: loadout
+  id: ClothingHeadBeretSalvageSpecialist
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: UniformExpeditor
+  equipment:
+    head: ClothingHeadBeretSalvageSpecialist

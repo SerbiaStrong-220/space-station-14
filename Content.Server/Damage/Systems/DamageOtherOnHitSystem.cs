@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Damage.Components;
 using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -10,6 +11,7 @@ using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.SS220.Damage;
+using Content.Shared.Wires;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
@@ -30,7 +32,7 @@ namespace Content.Server.Damage.Systems
         {
             SubscribeLocalEvent<DamageOtherOnHitComponent, ThrowDoHitEvent>(OnDoHit);
             SubscribeLocalEvent<DamageOtherOnHitComponent, DamageExamineEvent>(OnDamageExamine);
-            SubscribeLocalEvent<DamageOtherOnHitComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow); //SS220 Pacified with EmbeddableProjectileComponent fix
+            SubscribeLocalEvent<DamageOtherOnHitComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);
         }
 
         private void OnDoHit(EntityUid uid, DamageOtherOnHitComponent component, ThrowDoHitEvent args)
@@ -70,18 +72,17 @@ namespace Content.Server.Damage.Systems
             _damageExamine.AddDamageExamine(args.Message, component.Damage, Loc.GetString("damage-throw"));
         }
 
-        //SS220 Pacified with EmbeddableProjectileComponent fix begin
         /// <summary>
-        /// Prevent Pacified entities from throwing damaging items.
+        /// Prevent players with the Pacified status effect from throwing things that deal damage.
         /// </summary>
         private void OnAttemptPacifiedThrow(Entity<DamageOtherOnHitComponent> ent, ref AttemptPacifiedThrowEvent args)
         {
+            // SS220 Allow-Healing-Projectiles
             // Allow healing projectiles, forbid any that do damage:
             if (ent.Comp.Damage.AnyPositive())
             {
                 args.Cancel("pacified-cannot-throw");
             }
         }
-        //SS220 Pacified with EmbeddableProjectileComponent fix end
     }
 }

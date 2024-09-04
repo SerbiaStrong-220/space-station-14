@@ -1,8 +1,31 @@
+# Shuttle Game Rule Tables -- If you dont add your rules to these they wont be used by the games schedulers.
 # SS220-NoUnknownShuttles-Begin
+# - type: entityTable
+#   id: UnknownShuttlesFriendlyTable
+#   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+#     children:
+#     - id: UnknownShuttleCargoLost
+#     - id: UnknownShuttleTravelingCuisine
+#     - id: UnknownShuttleDisasterEvacPod
+#     - id: UnknownShuttleHonki
+
+# - type: entityTable
+#   id: UnknownShuttlesFreelanceTable
+#   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+#     children:
+#     - id: UnknownShuttleSyndieEvacPod
+
+# - type: entityTable
+#   id: UnknownShuttlesHostileTable
+#   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+#     children:
+#     - id: LoneOpsSpawn
+
+# # Shuttle Game Rules
 # - type: entity
-#   id: UnknownShuttleCargoLost
+#   abstract: true
 #   parent: BaseGameRule
-#   categories: [ GameRules ]
+#   id: BaseUnknownShuttleRule
 #   components:
 #   - type: StationEvent
 #     startAnnouncement: station-event-unknown-shuttle-incoming
@@ -11,66 +34,45 @@
 #     weight: 5
 #     reoccurrenceDelay: 30
 #     duration: 1
+#   - type: RuleGrids
+#   - type: LoadMapRule
+
+# - type: entity
+#   parent: BaseUnknownShuttleRule
+#   id: UnknownShuttleCargoLost
+#   components:
 #   - type: LoadMapRule
 #     preloadedGrid: ShuttleCargoLost
 
 # - type: entity
+#   parent: BaseUnknownShuttleRule
 #   id: UnknownShuttleTravelingCuisine
-#   parent: BaseGameRule
-#   categories: [ GameRules ]
 #   components:
-#   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming
-#     startAudio:
-#       path: /Audio/Announcements/attention.ogg
-#     weight: 5
-#     reoccurrenceDelay: 30
-#     duration: 1
 #   - type: LoadMapRule
 #     preloadedGrid: TravelingCuisine
 
-#- type: entity
-#  id: UnknownShuttleDisasterEvacPod
-#  parent: BaseGameRule
-#  categories: [ GameRules ]
-#  components:
-#  - type: StationEvent
-#    startAnnouncement: station-event-unknown-shuttle-incoming
-#    startAudio:
-#      path: /Audio/Announcements/attention.ogg
-#    weight: 5
-#    reoccurrenceDelay: 30
-#    duration: 1
-#  - type: LoadMapRule
-#    preloadedGrid: DisasterEvacPod
+# - type: entity
+#   parent: BaseUnknownShuttleRule
+#   id: UnknownShuttleDisasterEvacPod
+#   components:
+#   - type: LoadMapRule
+#     preloadedGrid: DisasterEvacPod
 
 # - type: entity
+#   parent: BaseUnknownShuttleRule
 #   id: UnknownShuttleHonki
-#   parent: BaseGameRule
-#   categories: [ GameRules ]
 #   components:
 #   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming
-#     startAudio:
-#       path: /Audio/Announcements/attention.ogg
 #     weight: 2
-#     reoccurrenceDelay: 30
-#     duration: 1
 #   - type: LoadMapRule
 #     preloadedGrid: Honki
 
 # - type: entity
+#   parent: BaseUnknownShuttleRule
 #   id: UnknownShuttleSyndieEvacPod
-#   parent: BaseGameRule
-#   categories: [ GameRules ]
 #   components:
 #   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming
-#     startAudio:
-#       path: /Audio/Announcements/attention.ogg
 #     weight: 2
-#     reoccurrenceDelay: 30
-#     duration: 1
 #   - type: LoadMapRule
 #     preloadedGrid: SyndieEvacPod
-# SS220-NoUnknownShuttles-End
+# SS220-NoUnknownShuttles-end

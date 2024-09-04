@@ -29,6 +29,19 @@
   - ClothingHandWraps
   - ClothingFootWraps
   # SS220 Hand/FootWraps end
+  # SS220-Hand/FootWraps-More-Color-Begin
+  - ClothingHandWrapsYellow
+  - ClothingFootWrapsYellow
+  - ClothingHandWrapsGreen
+  - ClothingFootWrapsGreen
+  - ClothingHandWrapsRed
+  - ClothingFootWrapsRed
+  - ClothingHandWrapsBlue
+  - ClothingFootWrapsBlue
+  - ClothingHandWrapsBlack
+  - ClothingFootWrapsBlack
+  # SS220-Hand/FootWraps-More-Color-End
+
 
 - type: loadoutGroup
   id: Glasses
@@ -55,7 +68,15 @@
   loadouts:
   - EmergencyNitrogen
   - EmergencyOxygen
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: GroupEVATank
+  name: loadout-group-EVA-tank
+  hidden: true
+  loadouts:
   - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesEVAOxygen
 
 # Command
 - type: loadoutGroup
@@ -191,6 +212,13 @@
   - CommonBackpack
   - CommonSatchel
   - CommonDuffel
+
+- type: loadoutGroup
+  id: PassengerNeck
+  name: loadout-group-passenger-neck
+  minLimit: 0
+  loadouts:
+  - Mantle
 
 - type: loadoutGroup
   id: PassengerOuterClothing
@@ -367,6 +395,7 @@
   minLimit: 0
   loadouts:
   - JanitorHead
+  - JanitorOrangeHat #SS220-OrangeJanitor
 
 - type: loadoutGroup
   id: JanitorJumpsuit
@@ -375,6 +404,7 @@
   - JanitorJumpsuit
   - JanitorJumpskirt
   - JanitorBlueJumpsuit #SS220-Janitor-Control
+  - JanitorOrangeJumpsuit #SS220-OrangeJanitor
 
 - type: loadoutGroup
   id: JanitorGloves
@@ -382,6 +412,7 @@
   minLimit: 0
   loadouts:
   - JanitorRubberGloves
+  - JanitorOrangeGloves #SS220-OrangeJanitor
   - OrangeGloves
   - PurpleGloves
 
@@ -410,6 +441,7 @@
   - BotanistHeadWhite #SS220-BotanyResprite-End
   - BotanistBandana
   - BotanistBandanaBlue #SS220-BotanyResprite
+  - BotanistDruidHead #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistJumpsuit
@@ -425,6 +457,7 @@
   - BotanistOverallsBlue #SS220-BotanyResprite-Begin
   - BotanistOverallsGreen
   - BotanistOverallsWhite #SS220-BotanyResprite-End
+  - BotanistDruidJumpsuit #SS220 druid loadout
 
 - type: loadoutGroup
   id: BotanistBackpack
@@ -450,15 +483,18 @@
   minLimit: 0
   loadouts:
   - JesterHat
+  - JesterAltHat
 
 - type: loadoutGroup
   id: ClownJumpsuit
   name: loadout-group-clown-jumpsuit
   loadouts:
   - ClownSuit
+  - ClownSkirt
   - JesterSuit
   - ClownJumpsuit #SS220-Clown-reSprite-Begin
   - ClownJumpskirt #SS220-Clown-reSprite-End
+  - JesterAltSuit
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -491,7 +527,7 @@
   loadouts:
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
-  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
   id: MimeHead
@@ -533,11 +569,29 @@
   - MimeWintercoat
 
 - type: loadoutGroup
+  id: MimeBelt
+  name: loadout-group-mime-belt
+  loadouts:
+  - MimeSuspendersRed
+  - MimeSuspendersBlack
+  
+- type: loadoutGroup
+  id: SurvivalMime
+  name: loadout-group-survival-mime
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenMime
+  - EmergencyOxygenMime
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
   id: MusicianJumpsuit
   name: loadout-group-musician-jumpsuit
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
+  - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup
   id: MusicianOuterClothing
@@ -545,6 +599,8 @@
   minLimit: 0
   loadouts:
   - MusicianWintercoat
+  - BardApron #SS220 bard loadout
+  - DangerCoat #SS220 danger coat
 
 - type: loadoutGroup
   id: Instruments
@@ -854,7 +910,7 @@
   loadouts:
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
-  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesVoxNitrogen
 
 # Science
 - type: loadoutGroup
@@ -1113,7 +1169,6 @@
   id: SecurityShoes
   name: loadout-group-security-shoes
   loadouts:
-  - CombatBoots
   - JackBoots
   - SecurityWinterBoots
   - BootsJackSec #ss220 sec loadout update
@@ -1179,7 +1234,14 @@
   loadouts:
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
-  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: SecurityStar
+  name: loadout-group-security-star
+  minLimit: 0
+  loadouts:
+  - SecStar
 
 # Medical
 - type: loadoutGroup
@@ -1374,7 +1436,7 @@
   loadouts:
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
-  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesVoxNitrogen
 
 # Wildcards
 - type: loadoutGroup
@@ -1384,6 +1446,15 @@
   - ReporterJumpsuit
   - JournalistJumpsuit
   - JumpsuitJournalistRed #SS220-Clothes
+
+- type: loadoutGroup
+  id: PsychologistJumpsuit
+  name: loadout-group-psychologist-jumpsuit
+  loadouts:
+  - PsychologistJumpsuit
+  - PsychologistJumpskirt
+  - PsychologistJumpsuitTurtleneck #SS220-MoreTurtleneck
+  - PsychologistJumpskirtTurtleneck #SS220-MoreTurtleneck
 
 - type: loadoutGroup
   id: BoxerJumpsuit
@@ -1410,7 +1481,7 @@
   loadouts:
   - EmergencyNitrogenSyndicate
   - EmergencyOxygenSyndicate
-  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
   id: GroupSpeciesBreathTool

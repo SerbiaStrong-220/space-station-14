@@ -7,8 +7,8 @@
     folded: true
   - type: Mask
     isToggled: true
-    enabled: false #ss220 bandana fix
-    disableOnFolded: true #ss220 bandana fix
+    enabled: false
+    disableOnFolded: true
   - type: IngestionBlocker
     enabled: false
   - type: IdentityBlocker
@@ -27,6 +27,8 @@
   - type: Tag
     tags:
     - Bandana
+    - ClothMade
+    - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: [ClothingHeadBandBase, ClothingMaskBandBlack]

@@ -6,6 +6,11 @@
   abstract: true
   description: Energy crossbow.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/smg.ogg
+      params:
+        volume: 2
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay

@@ -1,9 +1,14 @@
 - type: entity
-  parent: [ClothingShoesBase, BaseToggleClothing]
+  parent: [ClothingShoesBase, BaseToggleClothing, BaseEngineeringContraband]
   id: ClothingShoesBootsMag
   name: magboots
   description: Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_magboots.ogg
+      params:
+        volume: 2 ##new sound_drop effect, add MIXnikita
   - type: Sprite
     sprite: Clothing/Shoes/Boots/magboots.rsi
     layers:
@@ -36,7 +41,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingShoesBootsMag
+  parent: [ClothingShoesBootsMag, BaseGrandTheftContraband]
   id: ClothingShoesBootsMagAdv
   name: advanced magboots
   description: State-of-the-art magnetic boots that do not slow down their wearer.
@@ -80,7 +85,7 @@
     price: 3000
 
 - type: entity
-  parent: [ClothingShoesBootsMag, BaseJetpack]
+  parent: [ClothingShoesBootsMag, BaseJetpack, BaseSyndicateContraband]
   id: ClothingShoesBootsMagSyndie
   name: blood-red magboots
   description: Reverse-engineered magnetic boots that have a heavy magnetic pull and integrated thrusters. It can hold 0.75 L of gas.

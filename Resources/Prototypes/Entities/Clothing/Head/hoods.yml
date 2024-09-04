@@ -311,7 +311,7 @@
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterCentcom
   categories: [ HideSpawnMenu ]
-  name: Centcom winter coat hood
+  name: CentComm winter coat hood
   description: A hood for keeping the central comander's head warm.
   components:
   - type: Sprite
@@ -356,7 +356,7 @@
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterHOP
   categories: [ HideSpawnMenu ]
-  name: head of personel's winter coat hood
+  name: head of personnel's winter coat hood
   components:
   - type: Sprite
     sprite: Clothing/Head/Hoods/Coat/hoodhop.rsi
@@ -531,7 +531,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorBlack
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: black winter coat hood
   components:
   - type: Sprite
@@ -551,7 +551,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorPurple
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: purple winter coat hood
   components:
   - type: Sprite
@@ -571,7 +571,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorRed
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: red winter coat hood
   components:
   - type: Sprite
@@ -591,7 +591,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorBlue
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: blue winter coat hood
   components:
   - type: Sprite
@@ -611,7 +611,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorBrown
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: brown winter coat hood
   components:
   - type: Sprite
@@ -631,7 +631,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorGray
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: gray winter coat hood
   components:
   - type: Sprite
@@ -651,7 +651,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorGreen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: green winter coat hood
   components:
   - type: Sprite
@@ -671,7 +671,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorLightBrown
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: light brown winter coat hood
   components:
   - type: Sprite
@@ -691,7 +691,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorOrange
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: orange winter coat hood
   components:
   - type: Sprite
@@ -711,7 +711,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorWhite
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: white winter coat hood
   components:
   - type: Sprite
@@ -731,7 +731,7 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodWinterColorYellow
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: yellow winter coat hood
   components:
   - type: Sprite

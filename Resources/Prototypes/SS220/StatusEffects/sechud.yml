@@ -1,67 +1,67 @@
-- type: statusIcon
+- type: securityIcon
   id: SecHudIcon
   abstract: true
   priority: 3
   locationPreference: Right
   isShaded: true
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecWantedIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: wanted
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecMonitorIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: monitor
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecSearchIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: search
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecExecuteIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: execute
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecDemoteIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: demote
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecParoledIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: paroled
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecIncarceratedIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: incarcerated
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecDischargedIcon
   icon:
     sprite: /Textures/SS220/Interface/Misc/sechud.rsi
     state: discharged
 
-- type: statusIcon
+- type: securityIcon
   parent: SecHudIcon
   id: SecSuspectedIcon
   icon:

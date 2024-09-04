@@ -4,6 +4,11 @@
   name: white cane
   description: This isn't for you. It's for the people who can't figure out you're blind when you ask if cargo is the bar.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/baseball_bat.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Melee/white_cane.rsi
     state: icon

@@ -25,9 +25,9 @@ namespace Content.Server.Database
         public ServerUnbanDef? Unban { get; }
         public string? BanningAdminName { get; }
         public int StatedRound { get; }
+        public ServerBanExemptFlags ExemptFlags { get; }
 
-        public ServerBanDef(
-            int? id,
+        public ServerBanDef(int? id,
             NetUserId? userId,
             (IPAddress, int)? address,
             ImmutableArray<byte>? hwId,
@@ -40,7 +40,8 @@ namespace Content.Server.Database
             NetUserId? banningAdmin,
             string? banningAdminName,
             int round,
-            ServerUnbanDef? unban)
+            ServerUnbanDef? unban,
+            ServerBanExemptFlags exemptFlags = default)
         {
             if (userId == null && address == null && hwId ==  null)
             {
@@ -68,6 +69,7 @@ namespace Content.Server.Database
             BanningAdminName = banningAdminName;
             StatedRound = round;
             Unban = unban;
+            ExemptFlags = exemptFlags;
         }
 
         public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc)

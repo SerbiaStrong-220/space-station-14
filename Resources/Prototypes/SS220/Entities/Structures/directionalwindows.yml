@@ -102,7 +102,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
   - type: StaticPrice
-    price: 20
+    price: 30
 
 - type: entity
   id: PlasmaWindowDirectionalAng
@@ -147,7 +147,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 100
   - type: RadiationBlocker
     resistance: 1
 
@@ -182,7 +182,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -313,7 +313,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 140
+    price: 215
 
 - type: entity
   id: UraniumWindowDirectionalAng
@@ -358,7 +358,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 80
+    price: 200
 
 - type: entity
   id: WindowClockworkDirectionalAng
@@ -521,7 +521,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
   - type: StaticPrice
-    price: 30
+    price: 45
 
 - type: entity
   id: PlasmaWindowDirectionalU
@@ -566,7 +566,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 100
+    price: 150
   - type: RadiationBlocker
     resistance: 1
 
@@ -601,7 +601,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -732,7 +732,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 230
+    price: 322.5
 
 - type: entity
   id: UraniumWindowDirectionalU
@@ -777,7 +777,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 130
+    price: 300
 
 - type: entity
   id: WindowClockworkDirectionalU
@@ -975,7 +975,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 100
   - type: RadiationBlocker
     resistance: 1
 
@@ -1010,7 +1010,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -1141,7 +1141,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 150
+    price: 215
 
 - type: entity
   id: UraniumWindowDirectionalDoub
@@ -1186,7 +1186,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 85
+    price: 200
 
 - type: entity
   id: WindowClockworkDirectionalDoub
@@ -1359,7 +1359,7 @@
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
   - type: StaticPrice
-    price: 50
+    price: 60
 
 - type: entity
   id: PlasmaWindowDirectionalO
@@ -1404,7 +1404,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 130
+    price: 200
   - type: RadiationBlocker
     resistance: 1
 
@@ -1439,7 +1439,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -1570,7 +1570,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 300
+    price: 430
 
 - type: entity
   id: UraniumWindowDirectionalO
@@ -1615,7 +1615,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 170
+    price: 400
 
 - type: entity
   id: WindowClockworkDirectionalO

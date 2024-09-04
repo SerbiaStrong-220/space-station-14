@@ -47,3 +47,35 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
     state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkFrench75Glass
+  suffix: French75
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: French75
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/french75.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkEggnogGlass
+  suffix: Eggnog
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Eggnog
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
+    state: icon

@@ -1,0 +1,143 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Base
+- type: entity
+  id: ClosetSteelDoubleBase
+  name: double closet
+  parent: ClosetSteelBase
+  abstract: true
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_door
+  - type: Sprite
+    sprite: SS220/Structures/Storage/double_closet.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.40,-0.48,0.40,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  id: LockerDoubleBase
+  name: double
+  parent: LockerBase
+  abstract: true
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_door
+  - type: Sprite
+    sprite: SS220/Structures/Storage/double_closet.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.40,-0.48,0.40,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+# Closet&Locker
+
+# Maintenance
+- type: entity
+  id: ClosetMaintenanceDouble
+  name: double maintenance closet
+  parent: ClosetSteelDoubleBase
+  description: It's a storage unit.
+  components:
+  - type: EntityStorageVisuals
+    stateDoorOpen: generic_open
+    stateDoorClosed: generic_door
+
+# Fire safety closet
+- type: entity
+  id: ClosetFireDouble
+  name: double fire-safety closet
+  parent: ClosetSteelDoubleBase
+  description: It's a storage unit for fire-fighting supplies.
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: fire
+    stateDoorOpen: fire_open
+    stateDoorClosed: fire_door
+
+# Emergency closet
+- type: entity
+  id: ClosetEmergencyDouble
+  name: double emergency closet
+  parent: ClosetSteelDoubleBase
+  description: It's a storage unit for emergency breath masks and O2 tanks.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: emergency
+    stateDoorOpen: emergency_open
+    stateDoorClosed: emergency_door
+
+#Armory
+- type: entity
+  id: LockerArmoryDouble
+  parent: LockerDoubleBase
+  name: army closet
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryArmorDouble
+  parent: LockerDoubleBase
+  name: army closet
+  suffix: Armor
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_armor_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryEnergyGunDouble
+  parent: LockerDoubleBase
+  name: army closet
+  suffix: EnergyGun
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_energy_gun_door
+  - type: AccessReader
+    access: [["Armory"]]
+
+- type: entity
+  id: LockerArmoryGunDouble
+  parent: LockerDoubleBase
+  name: army closet
+  suffix: Gun
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_gun_door
+  - type: AccessReader
+    access: [["Armory"]]

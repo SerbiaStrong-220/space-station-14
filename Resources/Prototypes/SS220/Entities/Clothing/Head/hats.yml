@@ -119,6 +119,8 @@
   - type: Tag
     tags:
     - Ian
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+    - ClothMade #SS220-pr: FIX CLOTHING TAGS 
 
 # Сервис
 
@@ -204,7 +206,6 @@
     sprite: SS220/Clothing/Head/Hats/pilot_capcap.rsi
 
 # Карго
-
   # Квартирмейстер
 - type: entity
   parent: ClothingHeadBase
@@ -233,3 +234,25 @@
   parent: [ClothingHeadHeadHatBaseFlipped, ClothingHeadHatSalvage]
   id: ClothingHeadHatSalvageFlipped
   name: salvage cap
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretSalvageSpecialist
+  name: salvage beret
+  description: Salvage beret, because, well, why not?
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadTiaraDruid #SS220 druid loadout
+  name: druid tiara
+  description: A symbol of harmony with nature, even among the stars and planets.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi

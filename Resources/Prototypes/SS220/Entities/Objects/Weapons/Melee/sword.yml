@@ -47,6 +47,11 @@
   description: A graceful and elegant weapon that is the perfect choice for those who prefer a sophisticated style during combat.
   suffix: 27 piercing
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/cane_blade.ogg
+      params:
+        volume: 2
   - type: Sharp
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/rapier.rsi

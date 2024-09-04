@@ -38,7 +38,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ActivateInWorldEvent>(OnEmbedActivate);
         SubscribeLocalEvent<EmbeddableProjectileComponent, RemoveEmbeddedProjectileEvent>(OnEmbedRemove);
-        //SubscribeLocalEvent<EmbeddableProjectileComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow); //SS220 Pacified with EmbeddableProjectileComponent fix
     }
 
     private void OnEmbedActivate(EntityUid uid, EmbeddableProjectileComponent component, ActivateInWorldEvent args)
@@ -154,16 +153,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
         public override DoAfterEvent Clone() => this;
     }
-
-    //SS220 Pacified with EmbeddableProjectileComponent fix begin
-    /// <summary>
-    /// Prevent players with the Pacified status effect from throwing embeddable projectiles.
-    /// </summary>
-    //private void OnAttemptPacifiedThrow(Entity<EmbeddableProjectileComponent> ent, ref AttemptPacifiedThrowEvent args)
-    //{
-    //    args.Cancel("pacified-cannot-throw-embed");
-    //}
-    //SS220 Pacified with EmbeddableProjectileComponent fix end
 }
 
 [Serializable, NetSerializable]

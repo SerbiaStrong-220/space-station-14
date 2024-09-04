@@ -3,6 +3,11 @@
   parent: Clothing
   id: ClothingHeadBase
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head.ogg
+      params:
+        volume: 2
   - type: Clothing
     slots:
     - HEAD
@@ -45,6 +50,11 @@
   parent: Clothing
   id: HatBase
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head.ogg
+      params:
+        volume: 2
   - type: Clothing
     slots:
     - HEAD
@@ -61,6 +71,11 @@
   name: base helmet with light
   categories: [ HideSpawnMenu ]
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: Sprite
     layers:
     - state: icon
@@ -119,6 +134,11 @@
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: BreathMask
   - type: Item
     size: Normal
@@ -153,6 +173,11 @@
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: BreathMask
   - type: Sprite
     state: icon # default state used by most inheritors

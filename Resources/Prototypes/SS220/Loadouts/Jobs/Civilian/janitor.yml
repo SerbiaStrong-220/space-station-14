@@ -8,6 +8,16 @@
       role: JobJanitor
       time: 108000 # 30 hrs
 
+# Janitor Time2
+- type: loadoutEffectGroup
+  id: JanitorOrange
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobJanitor
+      time: 180000 # 50 hrs
+
 # Jumpsuit
 - type: loadout
   id: JanitorBlueJumpsuit
@@ -16,3 +26,43 @@
     proto: JanitorControl
   equipment:
     jumpsuit: ClothingUniformJumpsuitJanitorBlue
+
+- type: loadout
+  id: JanitorOrangeJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorOrange
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOrangeJanitor
+
+#Shoes
+- type: loadout
+  id: JanitorOrangeShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorOrange
+  equipment:
+    shoes: ClothingShoesOrangeGaloshes
+
+- type: loadout
+  id: JanitorGaloshes
+  equipment:
+    shoes: ClothingShoesGaloshes
+
+#Head
+- type: loadout
+  id: JanitorOrangeHat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorOrange
+  equipment:
+    head: ClothingHeadHatOrangeJanitor
+
+#gloves
+- type: loadout
+  id: JanitorOrangeGloves
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorOrange
+  equipment:
+    gloves: ClothingHandsGlovesOrangeJanitor
