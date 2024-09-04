@@ -54,6 +54,8 @@
   requiredRole: enum.SponsorTier.GoldenShlopa
   rewards:
     SponsorBoxGoldClown: 3
+  # Вторая итерация
+    ClothingHeadVipCrocks: 1
 
 - type: ShlepaRewardGroup
   id: CriticalMassShlopa

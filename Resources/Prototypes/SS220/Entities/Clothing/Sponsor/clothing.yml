@@ -361,3 +361,15 @@
     sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadVipCrocks
+  name: випкрок
+  description: Золотые кроксы, но одеваются.. На голову?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/crocs.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/crocs.rsi
