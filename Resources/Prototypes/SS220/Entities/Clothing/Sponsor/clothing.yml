@@ -337,3 +337,27 @@
     sprite: SS220/Clothing/Sponsor/scarf-tube.rsi
   - type: Item
     storedRotation: -90
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatDevilHorns #TODO: Дать уникальную эмоцию
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatDevilHornsAlt
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi

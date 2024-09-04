@@ -30,6 +30,7 @@
     ClothingSponsorStudentSuitBlack: 1
   # Вторая итерация
     PlushFloppa: 1
+    ClothingHeadHatDevilHornsAlt: 1
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
@@ -43,6 +44,8 @@
     SponsorBoxBlackMafia: 3
     SponsorCigCarton: 2
     ClothingWristWatchUssp: 2
+  # Вторая итерация
+    ClothingHeadHatDevilHorns: 1
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa
