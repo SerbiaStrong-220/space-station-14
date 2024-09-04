@@ -487,6 +487,7 @@
   loadouts:
   - JesterHat
   - JesterAltHat
+  - HeadMuzhik #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: ClownJumpsuit
@@ -498,6 +499,7 @@
   - ClownJumpsuit #SS220-Clown-reSprite-Begin
   - ClownJumpskirt #SS220-Clown-reSprite-End
   - JesterAltSuit
+  - JumpsuitMuzhik #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -521,6 +523,7 @@
   loadouts:
   - ClownShoes
   - JesterShoes
+  - ShoesMuzhik #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: SurvivalClown

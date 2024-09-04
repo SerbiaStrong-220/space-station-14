@@ -166,7 +166,9 @@
   groups:
   - GroupTankHarness
   - ClownHead
+  - ClownMask #SS220-Two Floppa Iteration
   - ClownJumpsuit
+  - ClownGloves #SS220-Two Floppa Iteration
   - ClownBackpack
   - ClownOuterClothing
   - ClownShoes

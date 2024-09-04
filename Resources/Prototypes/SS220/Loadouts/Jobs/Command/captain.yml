@@ -21,8 +21,8 @@
 - type: loadout
   id: CaptainWhiteJumpsuit
   effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    proto: ShlopaSponsorTier
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
   equipment:
     jumpsuit: ClothingUniformWhiteJumpsuitCaptain
 

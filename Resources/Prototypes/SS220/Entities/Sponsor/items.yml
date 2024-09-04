@@ -340,7 +340,7 @@
   parent: BasePlushie
   id: PlushFloppa #TODO: Обязательно обсудить с Адучем
   name: плюшевый шлёпа
-  description: Очаровательная мягкая игрушка, , напоминающая большого шлёпу
+  description: Очаровательная мягкая игрушка, напоминающая большого шлёпу
   suffix: Шлёпа
   components:
     - type: Sprite

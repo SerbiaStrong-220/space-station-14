@@ -1,3 +1,26 @@
+# Head
+- type: loadout
+  id: HeadMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    head: ClothingHeadHatMuzhik
+
+# Mask
+- type: loadout
+  id: MaskClown
+  equipment:
+    mask: ClothingMaskClown
+
+- type: loadout
+  id: MaskMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    mask: ClothingSponsorMaskMuzhik
+
 # Jumpsuit
 - type: loadout
   id: ClownJumpsuit
@@ -8,3 +31,38 @@
   id: ClownJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtClowns
+
+- type: loadout
+  id: JumpsuitMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMuzhik
+
+# Neck
+- type: loadout
+  id: CloakMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    neck: ClothingSponsorScarfMuzhik
+
+# Gloves
+- type: loadout
+  id: GlovesMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    gloves: ClothingHandsGlovesMuzhik
+
+# Shoes
+- type: loadout
+  id: ShoesMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    shoes: ClothingSponsorBootsMuzhik

@@ -377,7 +377,7 @@
   - BardShoes
   # Музыкант (конец)
 
-  #Ботаник (начало)
+  # Ботаник (начало)
 - type: loadoutGroup
   id: BotanistNeck
   name: loadout-group-botanist-neck
@@ -400,10 +400,29 @@
   loadouts:
   - BotanistShoesBrown
   - BotanistDruidShoes #SS220 druid loadout
+  # Ботаник (конец)
 
-  #Ботаник (конец)
+  # Клоун (Начало)
+- type: loadoutGroup
+  id: ClownMask
+  name: loadout-group-clown-mask
+  minLimit: 1
+  loadouts:
+  - MaskClown
+  - MaskMuzhik
 
-#! Сервис
+- type: loadoutGroup
+  id: ClownGloves
+  name: loadout-group-clown-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
+  - GlovesRed
+  - GlovesBlue
+  - GlovesMuzhik
+  # Клоун (Конец)
+#! Сервис (Конец)
 
 #! Разное
 
