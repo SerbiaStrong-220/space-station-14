@@ -474,15 +474,17 @@
   name: surgical cap
   description: A blue cap surgeons wear during operations. Keeps their hair from tickling your internal organs.
   components:
+  #SS220-surgery-resprite begin
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/surgcap_blue.rsi #SS220 resprite
+    sprite: SS220/Clothing/Head/Hats/surgcap_blue.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/surgcap_blue.rsi #SS220 resprite
+    sprite: SS220/Clothing/Head/Hats/surgcap_blue.rsi
   - type: Tag
     tags:
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingHeadBase
@@ -490,15 +492,17 @@
   name: surgical cap
   description: A green cap surgeons wear during operations. Keeps their hair from tickling your internal organs.
   components:
+  #SS220-surgery-resprite begin
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi #SS220 resprite
+    sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi #SS220 resprite
+    sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
   - type: Tag
     tags:
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingHeadBase
@@ -506,15 +510,17 @@
   name: surgical cap
   description: A purple cap surgeons wear during operations. Keeps their hair from tickling your internal organs.
   components:
+  #SS220-surgery-resprite begin
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi #SS220 resprite
+    sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi #SS220 resprite
+    sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi
   - type: Tag
     tags:
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingHeadBase
