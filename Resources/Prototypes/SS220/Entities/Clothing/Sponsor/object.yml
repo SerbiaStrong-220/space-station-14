@@ -84,3 +84,44 @@
     size: Tiny
     sprite: SS220/Clothing/Sponsor/Cigars/floppa-zippo.rsi
     heldPrefix: zippo
+
+- type: entity
+  parent: DrinkChampagneBottleFull
+  id: DrinkChampagneSponsorBottleFull
+  name: бутылка элитного шампанского
+  description: Элитное шампанское, сделанная таярочками, специально для самых важных людей!
+  suffix: Шлёпа
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: ChampagneSponsor
+          Quantity: 100
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Drinks/champagnebottle_floppa.rsi
+
+- type: reagent
+  id: ChampagneSponsor
+  name: элитное шампанское
+  parent: BaseAlcohol
+  desc: Элитный вид шампанского.
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: champagne
+  color: "#e8e4d6"
+  recognizable: true
+  metamorphicSprite:
+    sprite: SS220/Clothing/Sponsor/Drinks/champagneglass_floppa.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+  fizziness: 0.8

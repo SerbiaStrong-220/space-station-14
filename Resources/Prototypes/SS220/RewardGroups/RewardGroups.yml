@@ -16,6 +16,7 @@
   # Вторая итерация
     FloppaCigarCase: 2
     ExpensiveLighterSponsor: 1
+    DrinkChampagneSponsorBottleFull: 2
 
 - type: ShlepaRewardGroup
   id: BigShlopa
