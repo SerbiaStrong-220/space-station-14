@@ -28,6 +28,8 @@
     SponsorBoxMaid: 3
     ClothingSponsorStudentSuit: 1
     ClothingSponsorStudentSuitBlack: 1
+  # Вторая итерация
+    PlushFloppa: 1
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
