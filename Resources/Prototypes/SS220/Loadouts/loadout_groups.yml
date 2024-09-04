@@ -385,6 +385,16 @@
 
   #Ботаник (конец)
 
+ # Уборщик (Начало)
+- type: loadoutGroup
+  id: JanitorShoes
+  name: loadout-group-janitor-shoes
+  loadouts:
+  - ShoesColorPurple
+  - JanitorGaloshes
+  - JanitorOrangeShoes
+  # Уборщик (Конец)
+
 #! Сервис
 
 #! Разное
@@ -399,13 +409,3 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
-
- # Уборщик (Начало)
-- type: loadoutGroup
-  id: JanitorShoesOrange
-  name: loadout-group-janitor-shoes
-  loadouts:
-  - ShoesColorPurple
-  - JanitorGaloshes
-  - JanitorOrangeShoes
-  # Уборщик (Конец)
