@@ -160,6 +160,29 @@
     - Sunglasses
     - HamsterWearable
     - WhitelistChameleon
+    
+#SS220 add QM glasses begin
+- type: entity
+  parent: ClothingEyesGlassesCheapSunglasses
+  id: ClothingEyesQuartermasterGlasses
+  name: очки квартирмейстера
+  description: Эксклюзивные очки квартирмейстера.
+  components:
+  - type: Sprite
+    sprite: SS220\Clothing\Eyes\qmglasses.rsi
+  - type: Clothing
+    sprite: SS220\Clothing\Eyes\qmglasses.rsi
+  - type: ShowSupplyPrice
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Tag
+    tags:
+    - Sunglasses
+    - HamsterWearable
+    - WhitelistChameleon
+    - SecDogWearable
+#SS220 add QM glasses end
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseRestrictedContraband]
@@ -188,6 +211,8 @@
     - Antagonists
   - type: IdentityBlocker
     coverage: EYES
+    
+   
 
 - type: entity
   parent: [ClothingEyesBase, BaseCommandContraband]
