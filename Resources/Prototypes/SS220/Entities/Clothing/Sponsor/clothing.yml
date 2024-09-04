@@ -373,3 +373,15 @@
     sprite: SS220/Clothing/Sponsor/crocs.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/crocs.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorPivozavr
+  name: футболка "Пивовазавр"
+  description: Пиво начинает свой путь с эпохи динозавров, вы не знали?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/pivozavr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/pivozavr.rsi
