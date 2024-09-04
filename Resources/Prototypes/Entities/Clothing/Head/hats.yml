@@ -479,12 +479,12 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_blue.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_blue.rsi
+    #SS220-surgery-resprite end
   - type: Tag
     tags:
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
-    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingHeadBase
