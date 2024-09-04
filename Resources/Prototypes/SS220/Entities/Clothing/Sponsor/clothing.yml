@@ -385,3 +385,78 @@
     sprite: SS220/Clothing/Sponsor/pivozavr.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/pivozavr.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingUniformJumpsuitMuzhik
+  name: униформа мужика
+  description: Пахнет самогоном.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Jumpsuit/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Jumpsuit/muzhik.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatMuzhik
+  name: фуражка мужика
+  description: Фуражка самогонных дел мастера.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite:  SS220/Clothing/Sponsor/Fools/Head/Hats/muzhik.rsi
+  - type: Clothing
+    sprite:  SS220/Clothing/Sponsor/Fools/Head/Hats/muzhik.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorScarfMuzhik
+  name: шарф мужика
+  description: Длинный и узкий для удобного распития самогона.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Neck/Scarfs/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Neck/Scarfs/muzhik.rsi
+  - type: Item
+    storedRotation: -90
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorMaskMuzhik
+  name: маска мужика
+  description: Нет лучше времяпрепровождения, чем распивать самогон с товарищами.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Mask/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Mask/muzhik.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorBootsMuzhik
+  name: ботинки мужика
+  description: Проложит путь к ближайшим самогонным месторождениям.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Shoes/Boots/laceups_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Shoes/Boots/laceups_red.rsi
+
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesMuzhik
+  name: перчатки мужика
+  description: Ни один стакан самогона не выскользнет из ваших рук.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Hands/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Hands/muzhik.rsi
+  - type: Fiber
+    fiberColor: fibers-red

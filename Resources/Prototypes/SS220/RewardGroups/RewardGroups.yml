@@ -17,6 +17,7 @@
     FloppaCigarCase: 2
     ExpensiveLighterSponsor: 1
     DrinkChampagneSponsorBottleFull: 2
+    ClothingSponsorPivozavr: 1
 
 - type: ShlepaRewardGroup
   id: BigShlopa
