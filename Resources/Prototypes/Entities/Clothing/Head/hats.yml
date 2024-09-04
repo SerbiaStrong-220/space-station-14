@@ -494,6 +494,11 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi #SS220 resprite
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi #SS220 resprite
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
@@ -505,6 +510,11 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi #SS220 resprite
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi #SS220 resprite
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
