@@ -128,7 +128,7 @@
 - type: entity
   id: FloppaCigarCase
   parent: [ CigarCase ]
-  name: элитные портсигар
+  name: элитный портсигар
   description: Футляр элитных эдемских сигар прямиком из Марса!
   suffix: Шлёпа
   components:
@@ -164,6 +164,34 @@
     size: Tiny
     sprite: SS220/Objects/Sponsor/cigs/floppa-zippo.rsi
     heldPrefix: zippo
+
+- type: entity
+  id: SmokingPipeSponsor
+  parent: BaseSmokingPipe
+  name: элитная курительная трубка
+  description: Прямо как курил дедуля.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+
+- type: entity
+  id: SmokingPipeFilledTobaccoSponsor
+  parent: SmokingPipeFilledTobacco
+  name: элитная курительная трубка
+  description: Прямо как курил дедуля.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
 
 # Еда/Напитки
 - type: entity
