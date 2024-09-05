@@ -106,3 +106,276 @@
     tags:
     - DoorBumpOpener
     - VimPilot
+
+- type: entity
+  name: E-N
+  parent: [BorgChassisGeneric, StripableInventoryBase]
+  id: MobEN
+  description: Corgi made of metal with a heart of gold, because a heart of gold is a great guide
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleGPS
+        - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: EnHeart
+        whitelist:
+          tags:
+          - E-N
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Pets/E-N/e-n.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+    - state: e-n
+    - state: e-n_e_r
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: e-n_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: Stamina
+    critThreshold: 120
+  - type: MobState
+    allowedStates:
+      - Alive
+      - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      125: Critical
+      150: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+    showOverlays: false
+    allowRevives: true
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSilicon
+  - type: UnblockableSpeech
+  - type: TypingIndicator
+    proto: robot
+  - type: ZombieImmune
+  - type: StepTriggerImmune
+  - type: NoSlip
+  - type: Insulated
+  - type: InteractionPopup
+    interactSuccessString: petting-success-robot
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/SS220/Animals/small_robot_bark_happy.ogg
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+    - Science
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+    - Science
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+    locPrefix: silicon
+  - type: MovedByPressure
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - Electrocution
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Inventory
+    speciesId: dog
+    templateId: ian
+  - type: Repairable
+    doAfterDelay: 5
+    fuelCost: 10
+  - type: MobPrice
+    price: 1000
+  - type: TTS
+    randomVoicesList: Borg
+  - type: ReplacementAccent
+    accent: dog
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - VimPilot
+  - type: BorgChassis
+    maxModules: 2
+    moduleWhitelist:
+      tags:
+      - BorgModuleGeneric
+    hasMindState: e-n_e
+    noMindState: e-n_e_r
+  - type: HandheldLight
+    toggleOnInteract: false
+    wattage: 0.2
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      maxDuration: 1.0
+      startValue: 1.5
+      endValue: 1.0
+      isLooped: true
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 0.5
+      minValue: 0.05
+      maxValue: 1.0
+      isLooped: true
+  - type: ToggleableLightVisuals
+  - type: PointLight
+    color: red
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    radius: 2
+    netsync: false
+  - type: GhostRole
+    prob: 1
+    name: ghost-role-information-en-name
+    description: ghost-role-information-en-description
+    rules: ghost-role-information-silicon-rules
+
+- type: entity
+  name: крокодил 
+  parent: SimpleMobBase
+  id: MobCrocodile 
+  description: Он не кусается, наверное. 
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Animals/crocodile.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: croc
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: croc
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: croc-moving
+    noMovementLayers:
+      movement: 
+        state: croc
+  - type: MobThresholds
+    thresholds: 
+      0: Alive
+      250: Critical
+      350: Dead
+  - type: Stamina
+    critThreshold: 200
+  - type: Bloodstream
+    bloodMaxVolume: 300
+  - type: CombatMode
+  - type: NoSlip
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: MeleeWeapon
+    hidden: true
+    altDisarm: false
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    attackRate: 0.5
+    damage:
+      types:
+        Piercing: 20
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.0
+    baseSprintSpeed : 3.0
+  - type: NpcFactionMember
+    factions:
+      - Passive
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatLizard
+      amount: 6
+  - type: Puller
+    needsHands: false
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Speech
+    speechVerb: LargeMob
+  - type: Temperature
+    heatDamageThreshold: 315
+    coldDamageThreshold: 250
+    currentTemperature: 300
+  - type: InteractionPopup
+    successChance: 0.3
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+  
+- type: entity
+  name: крокодил 
+  suffix: злой
+  parent: MobCrocodile
+  id: MobCrocodileAngry  
+  description: Он кусается, наверное.
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile

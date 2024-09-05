@@ -16,7 +16,7 @@ figurines-clown-3 = Мыло!
 figurines-clown-4 = Если у Главы Персонала только один клоун, то у Главы Службы Безопасности - целый отдел!
 figurines-clown-5 = Я ведь никого не раздражаю?
 
-figurines-holoclown-1 = Я просто помогаю моему старшему брату
+figurines-holoclown-1 = Я просто помогаю моему старшему брату.
 
 figurines-mime-1 = ...
 figurines-mime-2 = ...
@@ -24,8 +24,8 @@ figurines-mime-3 = ....
 figurines-mime-4 = .......
 figurines-mime-5 = ................
 
-figurines-musician-1 = Разбешавшись прыгну со скалы!
-figurines-musician-2 = 40 лет уж под наркозом я работал ХоСом. Не юристом, не культисом...
+figurines-musician-1 = Разбежавшись прыгну со скалы!
+figurines-musician-2 = 40 лет уж под наркозом я работал ХоСом. Не юристом, не культистом...
 
 # figurines-boxer-
 
@@ -37,7 +37,7 @@ figurines-hos-2 = Задержать клоуна по 307.
 
 figurines-warden-1 = Бриг - мой дом. Мой дом - бриг. Мой бриг - дом. Стоп, что?
 
-figurines-detective-1 = Эта станция прогнила..
+figurines-detective-1 = Эта станция прогнила...
 
 figurines-security-1 = Я есть закон.
 figurines-security-2 = У тебя есть два права: хранить молчание и поплакать об этом.

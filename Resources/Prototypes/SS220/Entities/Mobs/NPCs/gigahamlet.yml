@@ -1,0 +1,157 @@
+- type: entity
+  parent: [ SimpleMobBase, MobCombat ]
+  id: MobGigaHamlet
+  name: gigahamlet
+  description: A huge muscular hamster is an amazing phenomenon of nature. His massive body is decorated with thick, shiny fur that accentuates every contour of his impressive muscles. The strong paws of this hamster resemble powerful columns capable of supporting its impressive weight. His eyes sparkle with confidence and strength, and his smile expresses friendliness and unwavering strength. This hamster is undoubtedly admired and respected by all who are lucky enough to meet him.
+  suffix: Shitspawn
+  components:
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: Inventory
+    speciesId: hamster
+    templateId: hamster
+  - type: NoSlip
+  - type: Hunger
+    baseDecayRate: 0.3
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Animals/gigahamlet.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: gigahamlet
+  - type: DamageStateVisuals
+    rotate: true
+    states:
+      Alive:
+        Base: gigahamlet
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Stamina
+    critThreshold: 300
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      250: 0.7
+      350: 0.5
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Weapons/Xeno/alien_claw_flesh2.ogg
+    angle: 0
+    attackRate: 0.75
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 80
+  - type: Bloodstream
+    bloodMaxVolume: 750
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: ['Squeak']
+  - type: Body
+    prototype: Rat
+    requiredLegs: 1
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+  - type: TTS
+    voice: horner
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 4
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: MobPrice
+    price: 4000
+  - type: NonSpreaderZombie
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - Hamster
+    #Для открытия дверей
+  - type: Tool
+    speedModifier: 1.5
+    qualities:
+      - Prying
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Prying
+    pryPowered: !type:Bool
+        true
+    force: !type:Bool
+      true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+    #Для открытия дверей
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 599
+    damage:
+      groups:
+        Brute: -0.1
+        Burn: -0.1
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    name: ghost-role-information-gigagamlet-name
+    description: ghost-role-information-gigagamlet-description
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: MobGigaHamlet
+  id: MobRicardoHamlet
+  name: ricardo hamles
+  description: If hamsters could be superheroes, then Ricardo Gomez would be their best representative. Ah.. How he dances.. God..
+  suffix: Shitspawn
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Animals/ricardohamlet.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: ricardohamlet
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    name: ghost-role-information-gigohamles-name
+    description: ghost-role-information-gigohamles-description
+  - type: GhostTakeoverAvailable
+  # Всё же, думаю не стоит...
+  # - type: Butcherable
+  #   spawned:
+  #   - id: ClothingUniformRicardoHamletJunior
+  #     amount: 1

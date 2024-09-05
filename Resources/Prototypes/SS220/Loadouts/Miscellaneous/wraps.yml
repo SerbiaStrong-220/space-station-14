@@ -9,3 +9,63 @@
   storage:
     back:
     - ClothingFootWraps
+
+- type: loadout
+  id: ClothingHandWrapsYellow
+  storage:
+    back:
+    - ClothingHandWrapsYellow
+
+- type: loadout
+  id: ClothingFootWrapsYellow
+  storage:
+    back:
+    - ClothingFootWrapsYellow
+
+- type: loadout
+  id: ClothingHandWrapsGreen
+  storage:
+    back:
+    - ClothingHandWrapsGreen
+
+- type: loadout
+  id: ClothingFootWrapsGreen
+  storage:
+    back:
+    - ClothingFootWrapsGreen
+
+- type: loadout
+  id: ClothingHandWrapsRed
+  storage:
+    back:
+    - ClothingHandWrapsRed
+
+- type: loadout
+  id: ClothingFootWrapsRed
+  storage:
+    back:
+    - ClothingFootWrapsRed
+
+- type: loadout
+  id: ClothingHandWrapsBlue
+  storage:
+    back:
+    - ClothingHandWrapsBlue
+
+- type: loadout
+  id: ClothingFootWrapsBlue
+  storage:
+    back:
+    - ClothingFootWrapsBlue
+
+- type: loadout
+  id: ClothingHandWrapsBlack
+  storage:
+    back:
+    - ClothingHandWrapsBlack
+
+- type: loadout
+  id: ClothingFootWrapsBlack
+  storage:
+    back:
+    - ClothingFootWrapsBlack

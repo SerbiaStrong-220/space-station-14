@@ -1,9 +1,14 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseRestrictedContraband]
   id: ClusterBang
   name: clusterbang
   description: Can be used only with flashbangs. Explodes several times.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbang.rsi
     state: base-0
@@ -24,6 +29,11 @@
   description: Launches three flashbangs after the timer runs out.
   suffix: Full
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbang.rsi
     layers:
@@ -50,11 +60,16 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: ClusterGrenade
   name: clustergrenade
   description: Why use one grenade when you can use three at once!
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbomb.rsi
     layers:
@@ -79,11 +94,16 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseSyndicateContraband]
   id: ClusterBananaPeel
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: produce
@@ -116,7 +136,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: GrenadeStinger
   name: stinger grenade
   description: Nothing to see here, please disperse.
@@ -145,7 +165,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: GrenadeIncendiary
   name: incendiary grenade
   description: Guaranteed to light up the mood.
@@ -174,7 +194,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: GrenadeBase
+  parent: [GrenadeBase, BaseSyndicateContraband]
   id: GrenadeShrapnel
   name: shrapnel grenade
   description: Releases a deadly spray of shrapnel that causes severe bleeding.
@@ -208,6 +228,11 @@
   name: slipocalypse clustersoap
   description: Spreads small pieces of syndicate soap over an area upon landing on the floor.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Specific/Janitorial/soap.rsi
     layers:

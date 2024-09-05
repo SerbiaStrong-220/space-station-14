@@ -30,6 +30,9 @@
       path: /Audio/Items/flashlight_on.ogg
     soundDeactivate:
       path: /Audio/Items/flashlight_off.ogg
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS 
+    tags: #SS220-pr: FIX CLOTHING TAGS 
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   parent: ClothingNeckBase
@@ -42,6 +45,9 @@
   - type: Clothing
     sprite: Clothing/Neck/Misc/stethoscope.rsi
   - type: Stethoscope
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS 
+    tags: #SS220-pr: FIX CLOTHING TAGS 
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   parent: ClothingNeckBase
@@ -53,6 +59,9 @@
     sprite: Clothing/Neck/Misc/bling.rsi
   - type: Clothing
     sprite: Clothing/Neck/Misc/bling.rsi
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS 
+    tags: #SS220-pr: FIX CLOTHING TAGS 
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   parent: ClothingNeckBase
@@ -66,6 +75,9 @@
     sprite: Clothing/Neck/Misc/lawyerbadge.rsi
   - type: TypingIndicatorClothing
     proto: lawyer
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS 
+    tags: #SS220-pr: FIX CLOTHING TAGS  
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   id: ActionStethoscope

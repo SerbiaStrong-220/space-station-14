@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by funny_mushroom (Discord) for SS220",
+  "states": [
+    {
+      "name": "e-n",
+      "directions": 4
+    },
+    {
+        "name": "e-n_l",
+        "directions": 4,
+        "delays": [
+          [
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.2
+          ]
+        ]
+      },
+      {
+        "name": "e-n_e",
+        "directions": 4,
+        "delays": [
+          [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ]
+        ]
+      },
+      {
+        "name": "e-n_e_r",
+        "directions": 4
+      }
+  ]
+}

@@ -25895,19 +25895,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -11.4006195,-49.526516
       parent: 1667
-- proto: BookSecretDocuments
-  entities:
-  - uid: 1995
-    components:
-    - type: MetaData
-      flags: InContainer
-      desc: Документация с важной информацией о изучении и разработке неизвестного типа оружия. Поверх папки виден гриф СОВЕРШЕННО СЕКРЕТНО
-      name: Документация исследовательской станции NT-RCS-221
-    - type: Transform
-      parent: 1994
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: BookSecurity
   entities:
   - uid: 1997
@@ -95428,7 +95415,6 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 1995
           - 1996
         paper_label: !type:ContainerSlot
           showEnts: False

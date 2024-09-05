@@ -137,6 +137,11 @@
   - type: Construction
     graph: DoorGraph
     node: paperDoor
+  - type: Door #SS220 paperdoor sound fix beginning
+    openSound:
+      path: /Audio/SS220/Effects/paper_pick_up.ogg
+    closeSound:
+      path: /Audio/SS220/Effects/paper_pick_up.ogg #SS220 paperdoor sound fix end
 
 - type: entity
   id: PlasmaDoor

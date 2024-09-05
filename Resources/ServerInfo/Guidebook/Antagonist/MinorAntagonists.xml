@@ -6,8 +6,7 @@
   # Ревенант
 
   <Box>
-    <GuideEntityEmbed Entity="MobRevenant" Caption=""/>
-    <GuideEntityEmbed Entity="Ectoplasm" Caption=""/>
+    <GuideEntityEmbed Entity="MobRevenant"/>
   </Box>
 
   Ревенант наделён способностью преследовать членов экипажа и красть у них жизненную энергию.
@@ -61,12 +60,14 @@
   <Box>
     <GuideEntityEmbed Entity="MobCarp" Caption=""/>
     <GuideEntityEmbed Entity="CarpRift" Caption=""/>
+    <GuideEntityEmbed Entity="MobDragon"/>
+    <GuideEntityEmbed Entity="CarpRift" Caption=""/>
     <GuideEntityEmbed Entity="MobCarp" Caption=""/>
   </Box>
 
   - Вызовите Карповый разлом, который периодически порождает [color=#a4885c]Космических карпов[/color].
 
-  ## Carp Rifts
+  # Slimes and Spiders
 
   - Space Dragons may have up to three Carp Rifts active at any given time.
   - Carp Rifts spawn a [color=#a4885c]Space Carp[/color] every thirty seconds while active.
@@ -75,4 +76,7 @@
   - After the rifts are done charging, they are invulnerable and will continue to spawn [color=#a4885c]Space Carp[/color] so long as the Dragon lives.
   - If a period of five minutes passes since the appearance of the Space Dragon or the last time a Carp Rift was charging and unless the Space Dragon already controls the maximum of three Carp Rifts, the Space Dragon will disappear.
 
+  Slimes and spiders have no remarkable features, but will [color=cyan]infest the station[/color] from time to time regardless. Both will give chase and attack anything they see.
+  - Slimes may deal extra [bold]cellular or posion damage[/bold], based upon their color. Water hurts them just as it would hurt a slime person.
+  - Spiders can lay [bold]webs[/bold], which non-spiders have a hard time moving through. They can easily be destroyed with a blade.
 </Document>

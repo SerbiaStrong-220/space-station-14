@@ -2,6 +2,11 @@
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }
 
+# Disruption
+
+uplink-syndicate-pen-signaller = Ручка-передатчик
+uplink-syndicate-pen-signaller-desc = Ручка, со встроенным передатчиком, способным отправить сигнал на устройство.
+
 # Implants
 uplink-mindslave-implanter-name = Имплантер Подчинитель разума
 uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }

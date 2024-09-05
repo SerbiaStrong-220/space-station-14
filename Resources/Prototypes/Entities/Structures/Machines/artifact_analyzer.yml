@@ -24,15 +24,17 @@
     volume: -8
   - type: Fixtures
     fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.35,-0.35,0.35,0.35"
-        mask:
-        - Impassable
-        - HighImpassable
-        - MidImpassable
-      fix2:
+# SS220 Fix #1544 begin
+#      fix1:
+#        shape:
+#          !type:PhysShapeAabb
+#          bounds: "-0.35,-0.35,0.35,0.35"
+#         mask:
+#         - Impassable
+#         - HighImpassable
+#         - MidImpassable
+# SS220 Fix #1544 end
+      fix:
         shape:
           !type:PhysShapeAabb
           bounds: "-0.35,-0.35,0.35,0.35"

@@ -1,4 +1,4 @@
-# Turtleneck Time
+# Job Time
 - type: loadoutEffectGroup
   id: MedicalDoctorTurtleneck
   effects:
@@ -40,3 +40,9 @@
     proto: MedicalDoctorTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlue
+
+# Neck
+- type: loadout
+  id: WhiteScarf
+  equipment:
+    neck: ClothingNeckScarfStripedWhite

@@ -38,7 +38,7 @@
 - type: entity
   parent: [BaseTraitorObjective, BaseLivingObjective]
   id: EscapeShuttleObjective
-  name: Escape to centcom alive and unrestrained.
+  name: Escape to centcomm alive and unrestrained.
   description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs.
   components:
   - type: Objective
@@ -86,7 +86,7 @@
 - type: entity
   parent: [BaseTraitorObjective, BaseKillObjective]
   id: KillRandomPersonObjective
-  description: Do it however you like, just make sure they don't make it to centcom.
+  description: Do it however you like, just make sure they don't make it to centcomm.
   components:
   - type: Objective
     difficulty: 1.75
@@ -200,18 +200,21 @@
 
 ## hos
 
-- type: entity
-  parent: BaseTraitorStealObjective
-  id: SecretDocumentsStealObjective
-  components:
-  - type: Objective
-    # hos has a gun ce does not, higher difficulty than most
-    difficulty: 3
-  - type: NotJobRequirement
-    job: HeadOfSecurity
-  - type: StealCondition
-    stealGroup: BookSecretDocuments
-    owner: job-name-hos
+#SS220 HOS shotgun removal begin
+#- type: entity
+  #noSpawn: true
+  #parent: BaseTraitorStealObjective
+  #id: EnergyShotgunStealObjective
+  #components:
+  #- type: Objective
+    # HoS will have this on them a lot of the time so..
+    #difficulty: 3
+  #- type: NotJobRequirement
+    #job: HeadOfSecurity
+  #- type: StealCondition
+    #stealGroup: WeaponEnergyShotgun
+    #owner: job-name-hos
+##SS220 HOS shotgun removal end
 
 ## ce
 

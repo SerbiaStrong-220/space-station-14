@@ -3,6 +3,11 @@
   parent: Clothing
   id: ClothingShoesBase
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_boots.ogg
+      params:
+        volume: 2
   - type: Clothing
     slots:
     - FEET
@@ -42,6 +47,11 @@
   parent: [ClothingShoesBase, ClothingSlotBase]
   id: ClothingShoesMilitaryBase
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_boots.ogg
+      params:
+        volume: 2
   - type: Matchbox
   - type: ItemSlots
     slots:

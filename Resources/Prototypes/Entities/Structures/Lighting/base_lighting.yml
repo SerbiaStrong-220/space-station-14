@@ -96,9 +96,6 @@
     enabled: false
   - type: PoweredLight
     bulb: Tube
-    damage:
-      types:
-        Heat: 2
   - type: ContainerContainer
     containers:
       light_bulb: !type:ContainerSlot
@@ -124,6 +121,11 @@
       on: base
       broken: broken
       burned: burned
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: Poweredlight
@@ -141,15 +143,17 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: LightTube
-    damage:
-      types:
-        Heat: 2
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -15
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 #LED lights
 - type: entity
@@ -160,14 +164,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LedLightTube
-    damage:
-      types:
-        Heat: 1 #LEDs don't get as hot
   - type: PointLight
     radius: 15
     energy: 1
     softness: 0.9
     color: "#EEEEFF"
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 1 # LEDs don't get as hot
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   parent: AlwaysPoweredWallLight
@@ -196,9 +202,11 @@
     color: "#B4FCF0" #SS220-Mapping-Light-Fix
   - type: PoweredLight
     hasLampOnSpawn: ExteriorLightTube
+  - type: DamageOnInteract
     damage:
       types:
-        Heat: 4 #brighter light gets hotter
+        Heat: 4 # brighter light gets hotter
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   parent: AlwaysPoweredWallLight
@@ -220,9 +228,6 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: SodiumLightTube
-    damage:
-      types:
-        Heat: 2
   - type: BloomLightMask # SS220 Grafon-Light
     useLightColor: true
   - type: PointLight
@@ -230,6 +235,11 @@
     energy: 4 #SS220-Mapping-Light-Fix
     softness: 0.5 #SS220-Mapping-Light-Fix
     color: "#FFAF38"
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   parent: AlwaysPoweredWallLight
@@ -315,9 +325,6 @@
       light_bulb: !type:ContainerSlot
   - type: PoweredLight
     bulb: Bulb
-    damage:
-      types:
-        Heat: 2
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
   - type: DeviceNetwork
@@ -338,6 +345,11 @@
       - On
       - Off
       - Toggle
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: PoweredLEDSmallLight
@@ -354,9 +366,11 @@
     color: "#EEEEFF"
   - type: PoweredLight
     hasLampOnSpawn: LedLightBulb
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 1
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: PoweredSmallLight
@@ -373,9 +387,11 @@
     softness: 1.1 #SS220-Mapping-Light-Fix
   - type: PoweredLight
     hasLampOnSpawn: LightBulb
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
+    popupText: powered-light-component-burn-hand
 
 #Emergency Lights
 - type: entity
@@ -430,14 +446,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalCyan
-    damage:
-      types:
-        Heat: 2
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightCyan
@@ -457,14 +475,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalBlue
-    damage:
-      types:
-        Heat: 2
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightBlue
@@ -484,14 +504,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalPink
-    damage:
-      types:
-        Heat: 2
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightPink
@@ -511,14 +533,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalOrange
-    damage:
-      types:
-        Heat: 2
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightOrange
@@ -538,14 +562,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalRed
-    damage:
-      types:
-        Heat: 2
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightRed
@@ -565,14 +591,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalGreen
-    damage:
-      types:
-        Heat: 2
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightGreen
@@ -593,14 +621,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalYellow
-    damage:
-      types:
-        Heat: 5
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#ffea19" #Неоновый жёлтый
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightYellow
@@ -620,14 +650,16 @@
   components:
   - type: PoweredLight
     hasLampOnSpawn: LightTubeCrystalPurple
-    damage:
-      types:
-        Heat: 5
   - type: PointLight
     radius: 8
     energy: 3
     softness: 0.5
     color: "#bc13fe" #Неоновый фиолетовый
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
 
 - type: entity
   id: AlwaysPoweredlightPurple

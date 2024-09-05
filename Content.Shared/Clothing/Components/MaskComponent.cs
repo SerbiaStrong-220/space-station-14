@@ -27,11 +27,11 @@ public sealed partial class MaskComponent : Component
     /// When <see langword="true"/> will function normally, otherwise will not react to events
     /// </summary>
     [DataField("enabled"), AutoNetworkedField]
-    public bool IsEnabled = true; // ss220 bandana fix
+    public bool IsEnabled = true;
 
     /// <summary>
     /// When <see langword="true"/> will disable <see cref="IsEnabled"/> when folded
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool DisableOnFolded; // ss220 bandana fix
+    public bool DisableOnFolded;
 }

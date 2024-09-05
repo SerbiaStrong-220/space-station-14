@@ -109,7 +109,6 @@
   components:
   - type: Sprite
     state: boxer
-  # SS220 Add locale for all figurines
   - type: SpeakOnUse
     pack: FigurinesBoxer
 

@@ -108,6 +108,7 @@
       - DrinkTheMartinez
       - DrinkMoonshineGlass
       - DrinkHotArachneGlass #SS220 HotArachne cocktail
+      - DrinkFrench75Glass #SS220 French 75 cocktail
     chance: 0.8
     offset: 0.0
     #rare

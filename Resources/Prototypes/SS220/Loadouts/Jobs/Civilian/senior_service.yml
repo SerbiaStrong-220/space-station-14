@@ -3,14 +3,13 @@
   id: HatSeniorService
   equipment:
     head: ClothingHeadHatSeniorService
-    
+
 # Jumpsuit
 - type: loadout
   id: SeniorServiceJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitSeniorService
-    
-# Jumpskirt
+
 - type: loadout
   id: SeniorJumpskirtService
   equipment:

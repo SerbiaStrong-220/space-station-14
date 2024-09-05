@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/dd190ff418ab64d60c9c975dcb01c3de350007d1/icons/obj/storage/closet.dmi and resprited by Kit0vras (Github) for SS220, modifided by Estkemran (Github) for SS220",
+  "license": "CC-BY-SA-3.0",
+  "states": [
+    {
+      "name": "generic"
+    },
+    {
+      "name": "generic_door"
+    },
+    {
+      "name": "generic_open"
+    },
+    {
+      "name": "generic_icon"
+    },
+    {
+      "name": "armory"
+    },
+    {
+      "name": "armory_steel_locker"
+    },
+    {
+      "name": "armory_armor_door"
+    },
+    {
+      "name": "armory_door"
+    },
+    {
+      "name": "armory_gun_door"
+    },
+    {
+      "name": "armory_energy_gun_door"
+    },
+    {
+      "name": "emergency"
+    },
+    {
+      "name": "emergency_door"
+    },
+    {
+      "name": "emergency_open"
+    },
+    {
+      "name": "fire"
+    },
+    {
+      "name": "fire_door"
+    },
+    {
+      "name": "fire_open"
+    },
+    {
+      "name": "wardrobe_open"
+    },
+    {
+      "name": "bounty"
+    },
+    {
+      "name": "captains_paper"
+    },
+    {
+      "name": "invoice"
+    },
+    {
+      "name": "paper"
+    },
+    {
+      "name": "welded"
+    },
+    {
+      "name": "locked"
+    },
+    {
+      "name": "unlocked"
+    }
+  ]
+}

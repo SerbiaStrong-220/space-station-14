@@ -33,6 +33,14 @@ public sealed partial class GhostComponent : Component
     [DataField]
     public EntityUid? ToggleGhostHearingActionEntity;
 
+    // SS220 ADD GHOST HUD'S START
+    [DataField]
+    public EntProtoId ToggleHudOnOtherAction = "ActionToggleHudOnOther";
+
+    [DataField]
+    public EntityUid? ToggleHudOnOtherActionEntity;
+    // SS220 ADD GHOST HUD'S END
+
     [DataField]
     public EntProtoId BooAction = "ActionGhostBoo";
 
@@ -131,3 +139,5 @@ public sealed partial class BooActionEvent : InstantActionEvent { }
 public sealed partial class RespawnActionEvent : InstantActionEvent { } //SS-220 noDeath
 
 public sealed partial class ToggleAGhostBodyVisualsActionEvent : InstantActionEvent { } //SS220-ghost-hats
+
+public sealed partial class ToggleHudOnOtherActionEvent : InstantActionEvent { } //SS220 ADD GHOST HUD'S

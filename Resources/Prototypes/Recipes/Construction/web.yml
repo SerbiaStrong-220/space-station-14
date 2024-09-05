@@ -7,7 +7,7 @@
   category: construction-category-structures
   description: A fairly weak yet silky smooth wall.
   icon:
-    sprite: Structures/Walls/web.rsi
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
     state: full
   objectType: Structure
   placementMode: SnapgridCenter

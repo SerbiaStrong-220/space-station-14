@@ -1,4 +1,5 @@
 using Content.Server.Chat.Systems;
+using Content.Server.Power.Components;
 using Content.Server.Speech;
 using Content.Shared.Speech;
 using Robust.Shared.Audio.Systems;
@@ -29,6 +30,13 @@ public sealed class SurveillanceCameraSpeakerSystem : EntitySystem
         {
             return;
         }
+
+        //ss220 fix unpowered speech fix start
+        if (TryComp<ApcPowerReceiverComponent>(uid, out var apcPower) && !apcPower.Powered)
+        {
+            return;
+        }
+        //ss220 fix unpowered speech fix end
 
         var time = _gameTiming.CurTime;
         var cd = TimeSpan.FromSeconds(component.SpeechSoundCooldown);

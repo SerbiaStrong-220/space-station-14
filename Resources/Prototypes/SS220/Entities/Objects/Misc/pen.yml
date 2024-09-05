@@ -30,3 +30,30 @@
   - type: Item
     sprite: SS220/Objects/Misc/pen.rsi
     size: Tiny
+
+- type: entity
+  name: ручка
+  description: Ручка с чёрными чернилами.
+  parent: BaseItem
+  id: PenSignaller
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/pens.rsi
+      state: pen
+    - type: Item
+      sprite: Objects/Misc/pens.rsi
+      heldPrefix: pen
+      size: Tiny
+    - type: Signaller
+    - type: DeviceLinkSource
+      ports:
+        - Pressed
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      receiveFrequencyId: BasicDevice
+    - type: WirelessNetworkConnection
+      range: 15
+    - type: Tag
+      tags:
+        - Write
+        - Pen

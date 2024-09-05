@@ -11,6 +11,7 @@ using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Paper;
 using Content.Shared.Placeable;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Research.Components;
 using Content.Shared.Xenoarchaeology.Equipment;
 using Content.Shared.Xenoarchaeology.XenoArtifacts;
@@ -328,8 +329,16 @@ public sealed class ArtifactAnalyzerSystem : EntitySystem
         var effectproto = _prototype.Index<ArtifactEffectPrototype>(n.Effect);
         if (effectproto.EffectHint != null)
         {
+            //SS220 Reaction info on not triggerd artifact node begin
+            var effect = string.Empty;
+            if (n.Triggered)
+                effect = effectproto.EffectHint;
+            else
+                effect = "analysis-console-info-unknown";
+            //SS220 Reaction info on not triggerd artifact node end
+
             msg.AddMarkup(Loc.GetString("analysis-console-info-effect",
-                ("effect", Loc.GetString(effectproto.EffectHint))) + "\n");
+                ("effect", Loc.GetString(effect))) + "\n"); //SS220 Reaction info on not triggerd artifact node
             needSecondNewline = true;
         }
 

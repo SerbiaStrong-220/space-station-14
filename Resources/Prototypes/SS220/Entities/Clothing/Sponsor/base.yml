@@ -150,6 +150,9 @@
   - type: WirelessNetworkConnection
     range: 1200
   - type: StationLimitedNetwork
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS 
+    tags: #SS220-pr: FIX CLOTHING TAGS 
+      - ClothMade #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   abstract: true

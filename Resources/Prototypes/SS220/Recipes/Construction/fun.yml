@@ -1,0 +1,16 @@
+- type: construction
+  name: костёр
+  id: BonFireCraft
+  graph: BonFire
+  startNode: start
+  targetNode: BonfireNode
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  description: Что может быть лучше позднего вечера под открытым небом с гитарой и друзьями.
+  objectType: Structure
+  canBuildInImpassable: false
+  icon:
+    sprite: Structures/Decoration/bonfire.rsi
+    state: burning
+  conditions:
+    - !type:TileNotBlocked

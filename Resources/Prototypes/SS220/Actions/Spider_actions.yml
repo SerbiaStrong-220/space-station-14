@@ -4,12 +4,12 @@
   abstract: true
   components:
   - type: WorldTargetAction
-    useDelay: 200 
+    useDelay: 200
     range: 1
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Misc/eggspider.rsi
-      state: icon
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: guard_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggDrone
@@ -28,8 +28,8 @@
     range: 1.5
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_1
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: web_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderWebFragile
@@ -60,6 +60,9 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: hunter_spawn
     useDelay: 300 #КД
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -75,6 +78,9 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: nurse_spawn
     useDelay: 350
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -85,11 +91,14 @@
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggShooter 
+  id: ActionSpawnSpiderEggShooter
   name: shooter  spider egg
   noSpawn: true
   components:
   - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: viper_spawn
     useDelay: 380
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -100,18 +109,18 @@
 
 #Spider
 - type: entity
-  id: ActionSpawnSpiderLittle 
+  id: ActionSpawnSpiderLittle
   name: release the spiderlings
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 40 
+    useDelay: 40
     range: 2
     itemIconStyle: BigAction
     icon:
-      sprite: Mobs/Animals/spider.rsi
-      state: viper_dead
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: little_spider_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: MobSpiderSpaceLittle
@@ -127,7 +136,7 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
-    useDelay: 30 
+    useDelay: 30
     range: 1
     itemIconStyle: BigAction
     icon:
@@ -151,7 +160,7 @@
     range: 1.5
     itemIconStyle: BigAction
     icon:
-      sprite: Structures/Walls/web.rsi
+      sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
       state: full
     event: !type:WorldSpawnSpellEvent
       prototypes:
@@ -217,8 +226,8 @@
     range: 1.3
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Misc/spiderweb.rsi
-      state: spider_web_clown_1
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: clown_web_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderWebClown

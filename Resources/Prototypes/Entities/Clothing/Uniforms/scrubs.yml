@@ -4,10 +4,12 @@
   name: purple scrubs
   description: A combination of comfort and utility intended to make removing every last organ someone has and selling them to a space robot much more official looking.
   components:
+  #SS220-surgery-resprite begin
   - type: Sprite
-    sprite: Clothing/Uniforms/Scrubs/purple.rsi
+    sprite: SS220/Clothing/Uniforms/Scrubs/purple.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Scrubs/purple.rsi
+    sprite: SS220/Clothing/Uniforms/Scrubs/purple.rsi
+    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingUniformBase
@@ -15,10 +17,12 @@
   name: green scrubs
   description: A combination of comfort and utility intended to make removing every last organ someone has and selling them to a space robot much more official looking.
   components:
+  #SS220-surgery-resprite begin
   - type: Sprite
-    sprite: Clothing/Uniforms/Scrubs/green.rsi
+    sprite: SS220/Clothing/Uniforms/Scrubs/green.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Scrubs/green.rsi
+    sprite: SS220/Clothing/Uniforms/Scrubs/green.rsi
+    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingUniformBase
@@ -26,7 +30,9 @@
   name: blue scrubs
   description: A combination of comfort and utility intended to make removing every last organ someone has and selling them to a space robot much more official looking.
   components:
+  #SS220-surgery-resprite begin
   - type: Sprite
-    sprite: Clothing/Uniforms/Scrubs/blue.rsi
+    sprite: SS220/Clothing/Uniforms/Scrubs/blue.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Scrubs/blue.rsi
+    sprite: SS220/Clothing/Uniforms/Scrubs/blue.rsi
+    #SS220-surgery-resprite end

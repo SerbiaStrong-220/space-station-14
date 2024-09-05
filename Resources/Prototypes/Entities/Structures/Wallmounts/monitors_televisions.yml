@@ -114,7 +114,10 @@
         enum.SurveillanceCameraMonitorUiKey.Key:
           type: SurveillanceCameraMonitorBoundUserInterface
   - type: ViewableStationMap # SS220 Camera-Map
-
+  # SS220-Bodycam-Begin
+  - type: Speech
+  - type: SurveillanceCameraSpeaker
+  # SS220-Bodycam-End
 
 # Wall Televisions
 

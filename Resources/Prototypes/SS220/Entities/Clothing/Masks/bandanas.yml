@@ -13,3 +13,19 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+
+# Карго
+- type: entity
+  parent: ClothingMaskBandanaBase
+  id: ClothingMaskBandSalvage
+  name: salvage bandana
+  description: A bandana that helps protect you from mine dust.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Bandanas/salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Bandanas/salvage.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon

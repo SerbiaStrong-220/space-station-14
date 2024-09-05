@@ -91,6 +91,7 @@
       - id: GrapeSeeds
       - id: WatermelonSeeds
       - id: PeaSeeds
+      - id: CherrySeeds
       - id: BeetSeeds #ss220 seeds
 #ss220-flowerupdate-begin
 - type: entity

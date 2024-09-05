@@ -1,0 +1,15 @@
+- type: entity
+  parent: BasePowerCell
+  id: EnHeart
+  name: golden heart
+  description: A good boy's golden heart.
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Pets/E-N/organs.rsi
+    state: heart
+  - type: Battery
+    maxCharge: 2200
+    startingCharge: 2200
+  - type: Tag
+    tags:
+    - E-N

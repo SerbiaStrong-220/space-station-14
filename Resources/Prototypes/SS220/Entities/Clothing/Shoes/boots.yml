@@ -7,3 +7,14 @@
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesBootsDruid #SS220 druid loadout
+  name: druid spanks
+  description: Druid spanks made from natural materials.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi

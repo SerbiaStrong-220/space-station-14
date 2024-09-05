@@ -67,14 +67,16 @@ public abstract class SharedRoleSystem : EntitySystem
         {
             var name = "game-ticker-unknown-role";
             var prototype = "";
+            string? playTimeTracker = null; //SS220 Add antags playtime trackers
             if (component.PrototypeId != null && _prototypes.TryIndex(component.PrototypeId, out AntagPrototype? antag))
             {
                 name = antag.Name;
                 prototype = antag.ID;
+                playTimeTracker = antag.PlayTimeTracker; //SS220 Add antags playtime trackers
             }
             name = Loc.GetString(name);
 
-            args.Roles.Add(new RoleInfo(component, name, true, null, prototype));
+            args.Roles.Add(new RoleInfo(component, name, true, playTimeTracker, prototype)); //SS220 Add antags playtime trackers
         });
 
         SubscribeLocalEvent((EntityUid _, T _, ref MindIsAntagonistEvent args) => { args.IsAntagonist = true; args.IsExclusiveAntagonist |= typeof(T).TryGetCustomAttribute<ExclusiveAntagonistAttribute>(out _); });

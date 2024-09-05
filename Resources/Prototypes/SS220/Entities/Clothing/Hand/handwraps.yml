@@ -16,6 +16,7 @@
   - type: Tag
     tags:
     - Handwraps
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
 
 - type: entity
   parent: ClothingHandsGlovesSyntheticBase

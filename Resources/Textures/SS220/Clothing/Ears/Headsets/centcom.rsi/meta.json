@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Made by Hqlle and SonicHDC (github), color edited by Estkemran (Github) for SS220",
+  "copyright": "Made by Hqlle and SonicHDC (github), color edited by Estkemran (Github) for SS220, equipped-EARS-secdog && alt-equipped-EARS-secdog Made by dinazewwr (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -19,6 +19,14 @@
     },
     {
       "name": "alt-equipped-EARS",
+      "directions": 4
+    },
+    {
+      "name": "equipped-EARS-secdog",
+      "directions": 4
+    },
+    {
+      "name": "alt-equipped-EARS-secdog",
       "directions": 4
     }
   ]

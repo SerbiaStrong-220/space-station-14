@@ -1,0 +1,10 @@
+- type: entity
+  id: CrateNPCCrocodile
+  parent: CrateLivestock
+  name: ящик с крокодилом
+  description: Ящик с домашним крокодилом.
+  components:
+  - type: StorageFill
+    contents:
+      - id: MobCrocodile
+        amount: 1

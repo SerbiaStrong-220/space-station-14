@@ -23,7 +23,7 @@
   - type: Construction
     graph: WebObjects
     node: tile
-  - type: TimedDespawn 
+  - type: TimedDespawn
   - type: SpawnOnDespawn
   - type: Destructible
     thresholds:
@@ -55,21 +55,21 @@
 #   id: FloorTileItemWebSpiders
 #   name: web construction
 #   description: Very smooth and surprisingly durable.
-#   noSpawn: true  
+#   noSpawn: true
 #   components:
-#   - type: TimedDespawn 
+#   - type: TimedDespawn
 #     lifetime: 5
 #   - type: SpawnOnDespawn
-#     prototype: TableWebSpiders 
+#     prototype: TableWebSpiders
 
 # - type: entity
-#   name: web  
+#   name: web
 #   description: Web
 #   parent: BaseFloorTileItemSpiders
 #   id: FloorTileItemWebSpidersDurable
 #   noSpawn: true
 #   components:
-#   - type: TimedDespawn 
+#   - type: TimedDespawn
 #     lifetime: 6
 #   - type: SpawnOnDespawn
 #     prototype: TableWebSpidersDurable
@@ -80,7 +80,7 @@
 #Table (заглушка типо как анимация)
 - type: entity
   parent: TableBase
-  id: TableWebSpiders 
+  id: TableWebSpiders
   name: web
   description: web
   noSpawn: true
@@ -110,7 +110,7 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepCarpet
-  - type: TimedDespawn 
+  - type: TimedDespawn
     lifetime: 5
   - type: SpawnOnDespawn
     prototype: WallWeb
@@ -122,10 +122,10 @@
   description: web
   noSpawn: true
   components:
-  - type: TimedDespawn 
+  - type: TimedDespawn
     lifetime: 8
   - type: SpawnOnDespawn
-    prototype: WallWebDurable  
+    prototype: WallWebDurable
   - type: Sprite
     sprite: Structures/Furniture/Tables/web.rsi
     shader: unshaded
@@ -150,11 +150,11 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/web.rsi
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
     shader: unshaded
     color: gray
   - type: Icon
-    sprite: Structures/Walls/web.rsi
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
   - type: Destructible
     thresholds:
     - trigger:

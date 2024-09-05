@@ -1,0 +1,11 @@
+- type: entity
+  parent: ClothingShoesGaloshes
+  id: ClothingShoesOrangeGaloshes
+  name: оранжевые галоши
+  description: Оранжевые резиновые ботинки.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi

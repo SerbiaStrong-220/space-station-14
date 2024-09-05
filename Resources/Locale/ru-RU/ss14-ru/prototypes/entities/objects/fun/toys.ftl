@@ -1,5 +1,7 @@
 ent-BasePlushie = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
+ent-PlushieThrongler = плюшевый Нагибатор
+    .desc = Мягкая игрушка, напоминающая грузчикам о том, чего они больше не могут иметь.
 ent-PlushieGhost = плюшевый призрак
     .desc = Начало вашей собственной БАНДЫ ПРИЗРАКОВ!
 ent-PlushieGhostRevenant = плюшевый ревенант
@@ -104,7 +106,7 @@ ent-RevolverCapGun = игрушечный пистолет
 ent-RevolverCapGunFake = { ent-RevolverCapGun }
     .desc = { ent-RevolverCapGun.desc }
     .suffix = Боевой
-ent-FoamBlade = пенаклинок
+ent-FoamBlade = пеноклинок
     .desc = Полустёртая надпись на нём выглядит непонятной игрой слов с использованием местных идиоматических выражений.
 ent-Basketball = баскетбольный мяч
     .desc = Где спортивная площадка?

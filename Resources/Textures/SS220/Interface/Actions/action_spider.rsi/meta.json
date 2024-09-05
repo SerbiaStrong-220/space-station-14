@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "guard_spawn"
+    },
+    {
+      "name": "hunter_spawn"
+    },
+    {
+      "name": "nurse_spawn"
+    },
+    {
+      "name": "viper_spawn"
+    },
+    {
+      "name": "little_spider_spawn"
+    },
+    {
+      "name": "web_spawn"
+    },
+    {
+      "name": "clown_web_spawn"
+    }
+  ]
+}

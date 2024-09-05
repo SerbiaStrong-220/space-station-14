@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: LivestockCrocodile
+  icon:
+    sprite: SS220/Mobs/Animals/crocodile.rsi
+    state: croc
+  product: CrateNPCCrocodile
+  cost: 5000
+  category: cargoproduct-category-name-livestock
+  group: market

@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBard #SS220 bard loadout
+  name: bard jumpsuit
+  description: Comfortable clothes for long concerts.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/bard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/bard.rsi

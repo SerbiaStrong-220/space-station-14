@@ -34,6 +34,7 @@
       blacklist:
         tags:
           - NukeOpsUplink
+          - LoneOpsUplink # SS220 mindslave fix
 
 # JobItems
 

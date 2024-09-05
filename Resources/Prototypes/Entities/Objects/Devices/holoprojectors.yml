@@ -58,7 +58,7 @@
   components:
   - type: HolosignProjector
     signProto: HoloFan
-    chargeUse: 120
+    chargeUse: 110 #SS220 holo buff. 120 -> 110. 6 charges
   - type: Sprite
     sprite: Objects/Devices/Holoprojectors/atmos.rsi
     state: icon

@@ -7,10 +7,12 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Database;
 using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Inventory;
 using Content.Shared.Overlays;
 using Content.Shared.PDA;
 using Content.Shared.SS220.CriminalRecords;
+using Content.Shared.SS220.Ghost;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Player;
@@ -42,6 +44,17 @@ public sealed class CriminalRecordSystem : EntitySystem
     private void OnStatusExamine(EntityUid uid, StatusIconComponent comp, ExaminedEvent args)
     {
         var scannerOn = false;
+
+        // SS220 ADD GHOST HUD'S START
+        if (HasComp<GhostComponent>(args.Examiner) && HasComp<GhostHudOnOtherComponent>(args.Examiner))
+        {
+            if (HasComp<ShowCriminalRecordIconsComponent>(args.Examiner))
+            {
+                scannerOn = true;
+            }
+        }
+        // SS220 ADD GHOST HUD'S END
+
         if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out var ent))
         {
             if (HasComp<ShowCriminalRecordIconsComponent>(ent))

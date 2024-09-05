@@ -1,5 +1,3 @@
-chat-emote-name-gasp = удушье
-chat-emote-msg-gasp = задыхается.
 chat-emote-name-critgasp = удушье
 chat-emote-msg-critgasp = задыхается.
 chat-emote-name-meow = мяуканье

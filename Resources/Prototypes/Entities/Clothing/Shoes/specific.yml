@@ -112,9 +112,14 @@
   - type: ClothingSpeedModifier # Corvax-MRP
     walkModifier: 0.8
     sprintModifier: 0.75 # Try to run fast in big rubber boots, lol
+  - type: SlowedOverSlippery
+    slowdownModifier: 0.7
+  - type: SpeedModifierContactCapClothing
+    maxContactSprintSlowdown: 0.7
+    maxContactWalkSlowdown: 0.7
 
 - type: entity
-  parent: ClothingShoesBaseButcherable
+  parent: [ClothingShoesBaseButcherable, BaseMajorContraband]
   id: ClothingShoesSpaceNinja
   name: space ninja shoes
   description: A pair of nano-enhanced boots with built-in magnetic suction cups.
@@ -255,7 +260,7 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
-          
+
 - type: entity
   parent: ClothingShoesClown
   id: ClothingShoesJester

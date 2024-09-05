@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/e1142f20f5e4661cb6845cfcf2dd69f864d67432, icon taken at https://github.com/tgstation/tgstation/commit/324f016c8af32738430aacfd0c4f5888976c9438",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/e1142f20f5e4661cb6845cfcf2dd69f864d67432, icon taken at https://github.com/tgstation/tgstation/commit/324f016c8af32738430aacfd0c4f5888976c9438, equipped-SUITSTORAGE-secdog Made by dinazewwr (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -60,6 +60,11 @@
     },
     {
       "name": "equipped-SUITSTORAGE-pig",
+      "directions": 4,
+      "delays": [[1],[1],[1],[1]]
+    },
+    {
+      "name": "equipped-SUITSTORAGE-secdog",
       "directions": 4,
       "delays": [[1],[1],[1],[1]]
     },

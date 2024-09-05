@@ -45,7 +45,7 @@
     containers:
     - entity_storage
   - type: StaticPrice
-    price: 80
+    price: 100
 
 - type: entity
   parent: CratePlastic
@@ -259,7 +259,7 @@
 # Secure Crates
 
 - type: entity
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, BaseRestrictedContraband ]
   id: CrateSecgear
   name: secgear crate
   components:
@@ -375,7 +375,7 @@
     access: [["Armory"]]
 
 - type: entity
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, BaseRestrictedContraband ]
   suffix: Armory, Secure
   id: CrateContrabandStorageSecure
   name: contraband storage crate
@@ -507,7 +507,7 @@
         layer:
         - LargeMobLayer
   - type: StaticPrice
-    price: 60
+    price: 75
 
 - type: entity
   parent: CrateGeneric

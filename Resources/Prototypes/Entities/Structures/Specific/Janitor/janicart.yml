@@ -84,6 +84,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: DnaSubstanceTrace
   - type: Fixtures
     fixtures:
       fix1:
@@ -335,3 +336,4 @@
       guides:
       - Janitorial
     - type: Cart #SS220-Cart-systems
+    - type: DnaSubstanceTrace

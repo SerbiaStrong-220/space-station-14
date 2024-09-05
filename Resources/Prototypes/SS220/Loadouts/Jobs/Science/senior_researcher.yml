@@ -3,20 +3,19 @@
   id: HatSeniorSciensist
   equipment:
     head: ClothingHeadHatBeretRND
-    
+
 # Jumpsuit
 - type: loadout
   id: SeniorSciensistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitSeniorResearcher
-    
-# Jumpskirt
+
 - type: loadout
   id: SeniorSciensistJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtSeniorResearcher
-    
-# Lab
+
+# Outer
 - type: loadout
   id: SeniorSciensistLabCoat
   equipment:

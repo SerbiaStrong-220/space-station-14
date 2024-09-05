@@ -1,9 +1,14 @@
 - type: entity
   name: stun baton
-  parent: BaseItem
+  parent: [BaseItem, BaseRestrictedContraband]
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/stunprod.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunbaton.rsi
     layers:
@@ -123,10 +128,15 @@
 
 - type: entity
   name: truncheon
-  parent: BaseItem
+  parent: [BaseItem, BaseRestrictedContraband]
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/baseball_bat.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Melee/truncheon.rsi
     state: icon
@@ -160,10 +170,15 @@
 
 - type: entity
   name: flash
-  parent: BaseItem
+  parent: [BaseItem, BaseSecurityScienceCommandContraband]
   id: Flash
   description: An ultrabright flashbulb with a trigger, which causes the victim to be dazed and lose their eyesight for a moment. Useless when burnt out.
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/handgrenade.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: Sprite
       sprite: Objects/Weapons/Melee/flash.rsi
       layers:
@@ -216,7 +231,7 @@
 
 - type: entity
   name: portable flasher
-  parent: BaseMachine
+  parent: [BaseMachine, BaseRestrictedContraband]
   id: PortableFlasher
   description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
   components:

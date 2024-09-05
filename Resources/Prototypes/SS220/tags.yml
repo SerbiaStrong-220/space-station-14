@@ -99,3 +99,11 @@
 # Офицерский кортик
 - type: Tag
   id: OfficerCutlass
+
+# corgi E-N
+- type: Tag
+  id: E-N
+
+# EscapePod
+- type: Tag
+  id: EscapePod

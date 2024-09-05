@@ -161,3 +161,15 @@
       coefficients:
         Caustic: 0.75
         Radiation: 0.9
+
+# Сервис
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatDanger
+  name: опасная куртка
+  description: Опасный лук, опасного человека.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi

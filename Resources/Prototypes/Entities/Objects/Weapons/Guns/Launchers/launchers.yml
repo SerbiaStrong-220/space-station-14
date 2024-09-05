@@ -5,6 +5,11 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/havy.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
@@ -22,10 +27,15 @@
 
 - type: entity
   name: china lake
-  parent: [BaseWeaponLauncher, BaseGunWieldable]
+  parent: [BaseWeaponLauncher, BaseGunWieldable, BaseSyndicateContraband]
   id: WeaponLauncherChinaLake
   description: PLOOP.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/rifles.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
     layers:
@@ -55,7 +65,7 @@
 
 - type: entity
   name: RPG-7
-  parent: BaseWeaponLauncher
+  parent: [ BaseWeaponLauncher, BaseMajorContraband ]
   id: WeaponLauncherRocket
   description: A modified ancient rocket-propelled grenade launcher.
   components:
@@ -169,6 +179,7 @@
     - type: ItemToggle
       onUse: false
     - type: PowerCellDraw
+    - type: ToggleCellDraw
     - type: Sprite
       sprite: Objects/Weapons/Guns/Launchers/tether_gun.rsi
       layers:
@@ -202,6 +213,11 @@
   id: WeaponForceGun
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/smg.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: Item
       storedRotation: -90
     - type: ForceGun
@@ -216,6 +232,7 @@
     - type: ItemToggle
       onUse: false
     - type: PowerCellDraw
+    - type: ToggleCellDraw
     - type: Sprite
       sprite: Objects/Weapons/Guns/Launchers/force_gun.rsi
       layers:
@@ -246,6 +263,11 @@
   parent: BaseItem
   id: WeaponGrapplingGun
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: AmmoCounter
     - type: GrapplingGun
     - type: Gun
@@ -320,6 +342,11 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: ForceGun
       canTetherAlive: true
       canUnanchor: true

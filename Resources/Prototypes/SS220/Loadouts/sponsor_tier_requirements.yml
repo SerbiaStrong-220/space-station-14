@@ -1,0 +1,29 @@
+- type: loadoutEffectGroup
+  id: ShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
+
+- type: loadoutEffectGroup
+  id: BigShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: BigShlopa
+
+- type: loadoutEffectGroup
+  id: HugeShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HugeShlopa
+
+- type: loadoutEffectGroup
+  id: GoldenShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: GoldenShlopa
+
+- type: loadoutEffectGroup
+  id: CriticalMassShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: CriticalMassShlopa

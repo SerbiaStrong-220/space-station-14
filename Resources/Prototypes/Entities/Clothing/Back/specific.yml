@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ClothingBackpack
   id: ClothingBackpackChameleon
   name: backpack
@@ -40,6 +40,11 @@
   name: backpack water tank
   description: Holds a large amount of fluids. Supplies to spray nozzles in your hands.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_bag_tank.ogg
+      params:
+        volume: 2
   - type: Tag
     tags:
     - NozzleBackTank

@@ -5,6 +5,11 @@
   description: Spray and pray.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/havy.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
   - type: Item
     size: Ginormous
@@ -24,7 +29,7 @@
 - type: entity
   name: minigun
   id: WeaponMinigun
-  parent: BaseWeaponHeavyMachineGun
+  parent: [ BaseWeaponHeavyMachineGun, BaseMajorContraband ]
   description: Vzzzzzt! Rahrahrahrah! Vrrrrr! Uses .10 rifle ammo.
   components:
   - type: Sprite

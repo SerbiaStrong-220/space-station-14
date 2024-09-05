@@ -1,0 +1,46 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BodyCamera
+  name: нагрудная камера
+  description: Нагрудная камера, за вами всегда будут смотреть.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: SS220/Objects/Tools/bodycam.rsi
+    state: icon
+  - type: Eye
+  - type: WirelessNetworkConnection
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraSetupUiKey.Camera:
+        type: SurveillanceCameraSetupBoundUi
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: SurveillanceCameraSecurity
+    transmitFrequencyId: SurveillanceCamera
+  - type: SurveillanceCamera
+    setupAvailableNetworks:
+      - SurveillanceCameraSecurity
+    isOffable: true
+    isOffableVisuals: true
+  - type: SurveillanceCameraMicrophone
+  - type: ActiveListener
+    range: 10
+  - type: DetectiveCamera
+  - type: Tag
+    tags:
+    - DetectiveCamera
+
+- type: entity
+  id: BodySecurityCamera
+  parent: BodyCamera
+  components:
+  - type: SurveillanceCamera
+    networkSet: true
+    id: "Нагрудная камера"
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - neck

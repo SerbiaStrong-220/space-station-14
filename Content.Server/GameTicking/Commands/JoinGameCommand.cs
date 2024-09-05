@@ -1,4 +1,5 @@
 using Content.Server.Administration.Managers;
+using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -65,9 +66,33 @@ namespace Content.Server.GameTicking.Commands
                     shell.WriteError(Loc.GetString("shell-argument-must-be-number"));
                 }
 
-                var station = _entManager.GetEntity(new NetEntity(sid));
-                var jobPrototype = _prototypeManager.Index<JobPrototype>(id);
-                if(stationJobs.TryGetJobSlot(station, jobPrototype, out var slots) == false || slots == 0)
+                //SS220 joingame command fix begin
+                //var station = _entManager.GetEntity(new NetEntity(sid));
+                //var jobPrototype = _prototypeManager.Index<JobPrototype>(id);
+                if (!_entManager.TryGetEntity(new NetEntity(sid), out var stationUid) ||
+                    !_entManager.HasComponent<StationDataComponent>(stationUid))
+                {
+                    shell.WriteLine($"Station with id: {sid} does not exist.");
+                    return;
+                }
+
+                //The check is on StationJobsComponent, because method TryGetJobSlot causes an error in the absence of this component
+                if (!_entManager.HasComponent<StationJobsComponent>(stationUid))
+                {
+                    shell.WriteLine($"Station {stationUid} doesn't have a StationJobsComponent.");
+                    return;
+                }
+
+                if (!_prototypeManager.TryIndex<JobPrototype>(id, out var jobPrototype))
+                {
+                    shell.WriteLine($"JobPrototype with id: {id} does not exist.");
+                    return;
+                }
+
+                var station = (EntityUid)stationUid;
+                //SS220 joingame command fix end
+
+                if (stationJobs.TryGetJobSlot(station, jobPrototype, out var slots) == false || slots == 0)
                 {
                     shell.WriteLine($"{jobPrototype.LocalizedName} has no available slots.");
                     return;

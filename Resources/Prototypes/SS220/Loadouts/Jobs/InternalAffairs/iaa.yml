@@ -34,3 +34,9 @@
     proto: TrustedLawyerTime
   equipment:
     jumpsuit: ClothingUniformJumpsuitTrustedLawyer
+
+# Back
+- type: loadout
+  id: IAABackpackLeather
+  equipment:
+    back: ClothingBackpackSatchelLeather

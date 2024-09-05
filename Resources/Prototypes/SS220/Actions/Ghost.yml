@@ -18,3 +18,15 @@
     icon: { sprite: Mobs/Ghosts/ghost_human.rsi, state: icon }
     checkCanInteract: false
     event: !type:ToggleAGhostBodyVisualsActionEvent
+
+- type: entity
+  id: ActionToggleHudOnOther
+  name: Переключить видимость СБ визора.
+  description: Переключить между отображением СБ визором и обычным зрением.
+  components:
+    - type: InstantAction
+      checkCanInteract: false
+      icon:
+        sprite: Clothing/Eyes/Hud/sec.rsi
+        state: icon
+      event: !type:ToggleHudOnOtherActionEvent

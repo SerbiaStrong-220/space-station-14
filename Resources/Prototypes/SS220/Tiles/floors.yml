@@ -1063,3 +1063,22 @@
     collection: FootstepTile
   itemDrop: FloorTileItemMarbleInnerSW
   heatCapacity: 10000
+
+- type: tile
+  id: FloorAstroSnad
+  name: астро-песок
+  sprite: /Textures/Tiles/Planet/Desert/low_desert.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepAsteroid
+  itemDrop: FloorTileItemSand
