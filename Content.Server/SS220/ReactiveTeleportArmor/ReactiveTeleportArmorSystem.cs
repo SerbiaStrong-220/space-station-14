@@ -12,6 +12,11 @@ using Robust.Shared.Map.Components;
 using System.Numerics;
 using Content.Shared.Physics;
 using Robust.Shared.Collections;
+using Content.Shared.Clothing;
+using Content.Shared.Inventory;
+using Content.Server.Explosion.EntitySystems;
+using Content.Server.Explosion.Components;
+using Content.Shared.Inventory.Events;
 using Robust.Shared.GameObjects;
 
 
@@ -29,6 +34,8 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
         [Dependency] private readonly PullingSystem _pullingSystem = default!;
         [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
         [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+        [Dependency] private readonly InventorySystem _inventory = default!;
+        [Dependency] private readonly ExplosionSystem _explosion = default!;
 
 
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -40,36 +47,58 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
             base.Initialize();
             SubscribeLocalEvent<ReactiveTeleportArmorComponent, DamageChangedEvent>(OnReactiveTeleportArmor);
+            SubscribeLocalEvent<ReactiveTeleportArmorComponent, ClothingGotEquippedEvent>(OnEquip);
+            SubscribeLocalEvent<ReactiveTeleportArmorComponent, ClothingGotUnequippedEvent>(OnUnequip);
         }
 
-        private void OnReactiveTeleportArmor(EntityUid uid, ReactiveTeleportArmorComponent component, ref DamageChangedEvent args)
+        private void OnEquip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotEquippedEvent args)
         {
-            if (component.ArmorEntity is not { } entity)
-                return;
-            if (!TryComp<ReactiveTeleportArmorComponent>(uid, out var armor))
+           EnsureComp<ReactiveTeleportArmorComponent>(args.Wearer);
+           ent.Comp.ArmorUid = ent;
+        }
+        private void OnUnequip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotUnequippedEvent args)
+        {
+            RemComp<ReactiveTeleportArmorComponent>(args.Wearer);
+        }
+
+
+        private void OnReactiveTeleportArmor(Entity<ReactiveTeleportArmorComponent> ent, ref DamageChangedEvent args)
+        {
+
+
+            if (!TryComp<ReactiveTeleportArmorComponent>(ent, out var armor))
                 return;
 
             // We need stop the user from being pulled so they don't just get "attached" with whoever is pulling them.
             // This can for example happen when the user is cuffed and being pulled.
-            if (TryComp<PullableComponent>(entity, out var pull) && _pullingSystem.IsPulled(entity, pull))
-                _pullingSystem.TryStopPull(entity, pull);
+            if (TryComp<PullableComponent>(ent.Owner, out var pull) && _pullingSystem.IsPulled(ent.Owner, pull))
+                _pullingSystem.TryStopPull(ent.Owner, pull);
+
+
+            var xform = Transform(ent.Owner);
+            var targetCoords = SelectRandomTileInRange(xform, armor.TeleportRadius);
+
 
             if (!args.DamageIncreased || args.DamageDelta == null)
                 return;
 
-
-            var xform = Transform(entity);
-            var targetCoords = SelectRandomTileInRange(xform, armor.TeleportRadius);
-
-            if (args.DamageIncreased)
+            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null)
             {
-                SelectRandomTileInRange(xform, armor.TeleportRadius);
-            }
 
-            if (targetCoords != null)
-            {
-                _xform.SetCoordinates(entity, targetCoords.Value);
-                _audio.PlayPvs(armor.TeleportSound, entity);
+                switch (_random.Prob(ent.Comp.TeleportChance))
+                {
+                    case true:
+
+                        _xform.SetCoordinates(ent.Owner, targetCoords.Value);
+                        _audio.PlayPvs(armor.TeleportSound, ent.Owner);
+                        SelectRandomTileInRange(xform, armor.TeleportRadius);
+
+                        break;
+                    case false:
+                        _explosion.TriggerExplosive(ent.Comp.ArmorUid); ///пользуясб случаем я хочу сказать: ГНОМА Я ЛЮБЛЮ ТЕБЯ ПОФИКСИ ПОЖАЛУЙСТА ЭТО ХУЙНЯ
+                        break;
+
+                }
             }
         }
 
