@@ -128,8 +128,9 @@ public sealed class AmeNodeGroup : BaseNodeGroup
         var safeFuelLimit = CoreCount * 2;
 
         var powerOutput = CalculatePower(fuel, CoreCount);
-        if (fuel <= safeFuelLimit)
-            return powerOutput;
+
+        // if (fuel <= safeFuelLimit) // SS220 safe regress (AME powerup)
+        //    return powerOutput; // SS220 safe regress (AME powerup)
 
         // The AME is being overloaded.
         // Note about these maths: I would assume the general idea here is to make larger engines less safe to overload.
@@ -140,6 +141,17 @@ public sealed class AmeNodeGroup : BaseNodeGroup
         var fuzz = _random.Next(-1, 2); // -1 to 1
         instability += fuzz; // fuzz the values a tiny bit.
 
+        // SS220 safeoverload edited (AME powerup) - begin | PR #1744
+        if (fuel == safeFuelLimit + 2) // checkout 1 more grade higher than safe for safeoverload
+            if (_random.Prob(0.75f))
+                instability = 1;
+            else
+                instability = 0; // chance for safe tick without stability damage
+
+        if (fuel <= safeFuelLimit) // safe regress overload
+            instability = -1;
+        // SS220 safeoverload edited (AME powerup)- end | PR #1744
+
         overloading = true;
         var integrityCheck = 100;
         foreach (var coreUid in _cores)
@@ -149,6 +161,9 @@ public sealed class AmeNodeGroup : BaseNodeGroup
 
             var oldIntegrity = core.CoreIntegrity;
             core.CoreIntegrity -= instability;
+
+            if (core.CoreIntegrity > 100) // SS220 safe regress begin (AME powerup)
+                core.CoreIntegrity = 100; // SS220 safe regress end (AME powerup)
 
             if (oldIntegrity > 95
                 && core.CoreIntegrity <= 95
@@ -173,7 +188,8 @@ public sealed class AmeNodeGroup : BaseNodeGroup
 
         // The adjustment for cores make it so that a 1 core AME at 2 injections is better than a 2 core AME at 2 injections.
         // However, for the relative amounts for each (1 core at 2 and 2 core at 4), more cores has more output.
-        return 200000f * MathF.Log10(fuel * fuel) * MathF.Pow(0.75f, cores - 1);
+        var ss220AMEmod = 1.4f; // SS220 special modifier for AME to powerup AME
+        return 200000f * MathF.Log10(fuel * fuel) * ss220AMEmod * MathF.Pow(0.8f, cores - 1); // SS220 AME powerup
     }
 
     public int GetTotalStability()
