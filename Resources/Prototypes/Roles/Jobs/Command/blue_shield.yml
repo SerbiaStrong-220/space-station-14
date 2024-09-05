@@ -72,6 +72,6 @@
 # SS220-Blueshield-Storage-Fix-Begin
   storage:
     back:
-    - BoxSurvival
+#    - BoxSurvival SS220-Two Floppa Iteration
     - Flash
 # SS220-Blueshield-Storage-Fix-End

@@ -64,10 +64,12 @@
   id: Survival
   name: loadout-group-survival-basic
   minLimit: 3
-  hidden: true
+  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
   loadouts:
   - EmergencyNitrogen
   - EmergencyOxygen
+  - EmergencyNitrogenSponsor #SS220-Two Floppa Iteration
+  - EmergencyOxygenSponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -912,10 +914,12 @@
   id: SurvivalExtended
   name: loadout-group-survival-extended
   minLimit: 2
-  hidden: true
+  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
   loadouts:
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
+  - EmergencyNitrogenExtendedSponsor #SS220-Two Floppa Iteration
+  - EmergencyOxygenExtendedSponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 # Science
@@ -1236,10 +1240,12 @@
   id: SurvivalSecurity
   name: loadout-group-survival-security
   minLimit: 2
-  hidden: true
+  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
   loadouts:
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
+  - EmergencyNitrogenSecuritySponsor #SS220-Two Floppa Iteration
+  - EmergencyOxygenSecuritySponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1438,10 +1444,12 @@
   id: SurvivalMedical
   name: loadout-group-survival-medical
   minLimit: 2
-  hidden: true
+  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
   loadouts:
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
+  - EmergencyNitrogenMedicalSponsor #SS220-Two Floppa Iteration
+  - EmergencyOxygenMedicalSponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 # Wildcards

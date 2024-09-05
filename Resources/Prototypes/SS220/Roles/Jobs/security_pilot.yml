@@ -35,7 +35,6 @@
     pocket1: WeaponPistolMk58Nonlethal
   storage:
     back:
-    - BoxSurvivalSecurity
     - Flash
     - MagazinePistolRubber
     - MagazinePistolRubber

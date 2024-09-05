@@ -22,6 +22,8 @@
     shoes: ClothingShoesLeather
     id: PsychologistPDA
     ears: ClothingHeadsetMedical
-  storage:
-    back:
-    - BoxSurvivalMedical
+# SS220-Two Floppa Iteration-Begin
+  # storage:
+  #   back:
+  #   - BoxSurvivalMedical
+# SS220-Two Floppa Iteration-End

@@ -506,3 +506,131 @@
     - id: ClothingSponsorTieJujutsuShlepa
     sound:
       path: /Audio/Effects/unwrap.ogg
+
+# Аварийные запасы
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Стандартный, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxSurvivalNitrogen
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  id: BoxSurvivalNitrogenSponsor
+  suffix: Стандартный Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalEngineering
+  id: BoxSurvivalEngineeringSponsor
+  name: расширенный элитный аварийный запас
+  description: Коробка с базовым набором для выживания. Согласно этикетке, содержит более ёмкий баллон.
+  suffix: Расширенный, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalEngineeringNitrogen
+  id: BoxSurvivalEngineeringNitrogenSponsor
+  name: расширенный элитный аварийный запас
+  description: Коробка с базовым набором для выживания. Согласно этикетке, содержит более ёмкий баллон.
+  suffix: Расширенный Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalSecurity
+  id: BoxSurvivalSecuritySponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: СБ, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalBrigmedic
+  id: BoxSurvivalBrigmedicSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Мед-СБ, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalSecurityNitrogen
+  id: BoxSurvivalSecurityNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Охранный Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalMedical
+  id: BoxSurvivalMedicalSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Медицинский, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalMedicalNitrogen
+  id: BoxSurvivalMedicalNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Медицинский Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs

@@ -9,6 +9,7 @@
   - IAAJumpsuit
   - IAAOuterclothing
   - IAABackpacks #ss220 iaa loadout fix
+  - Survival
   - Trinkets
   - Gloves
 
@@ -21,6 +22,7 @@
   - BlueShieldOuterclothing
   - SecurityBelt
   - CommonBackpack
+  - Survival
   - Trinkets
 #! Внутренние дела (Конец)
 
@@ -35,6 +37,7 @@
   - SeniorSecJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SurvivalSecurity
   - SecurityShoes
   - SecurityBelt
   - Trinkets
@@ -48,6 +51,7 @@
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SurvivalSecurity
   - SecurityShoes
   - SecurityPDA
   - Trinkets
@@ -66,6 +70,7 @@
   - MedicalsBackpack
   - MedicalsMask
   - SeniorMedicalOuterClothing
+  - SurvivalMedical
   - SeniorShoes
   - Glasses
   - Trinkets
@@ -81,6 +86,7 @@
   - SeniorsEngineerJumpsuit
   - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
+  - SurvivalExtended
   - StationEngineerShoes
   - Trinkets
 #! Инженерный отдел (Конец)
@@ -98,6 +104,7 @@
   - SeniorSciensistOuterClothing
   - ScientistGloves
   - ScientistShoes
+  - Survival
   - Glasses
   - Trinkets
 #! Исследовательский отдел (Конец)
@@ -111,6 +118,7 @@
   - HatSeniorService
   - SeniorServiceJumpsuit
   - CommonBackpack
+  - Survival
   - Glasses
   - Trinkets
 #! Сервис (Конец)
