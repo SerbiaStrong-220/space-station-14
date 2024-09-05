@@ -166,7 +166,7 @@
   parent: ClothingEyesGlassesCheapSunglasses
   id: ClothingEyesQuartermasterGlasses
   name: очки квартирмейстера
-  description: Эксклюзивные очки квартирмейстера.
+  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей, встроенный интерфейс оценивания груза и выдержанный стиль отдела снабжения. 
   components:
   - type: Sprite
     sprite: SS220/Clothing/Eyes/qmglasses.rsi
