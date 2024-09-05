@@ -30,7 +30,11 @@
 # Silicons
 - type: roleLoadout
   id: JobStationAi
-  nameDataset: names_ai
+  nameDataset: ai_names # SS220 Fix II Dataset
+
+- type: roleLoadout
+  id: JobStationBorg
+  nameDataset: borg_names # SS220 Fix II Dataset
 
 # Civilian
 - type: roleLoadout
