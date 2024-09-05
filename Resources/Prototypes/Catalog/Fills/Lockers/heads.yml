@@ -2,6 +2,7 @@
   id: LockerFillQuarterMaster
   table: !type:AllSelector
     children:
+     # SS220 Add goggles for QM
     - id: ClothingEyesQuartermasterGlasses
     - id: BoxEncryptionKeyCargo
     - id: BoxFolderQmClipboard
