@@ -169,9 +169,9 @@
   description: Эксклюзивные очки квартирмейстера.
   components:
   - type: Sprite
-    sprite: SS220\Clothing\Eyes\qmglasses.rsi
+    sprite: SS220/Clothing/Eyes/qmglasses.rsi
   - type: Clothing
-    sprite: SS220\Clothing\Eyes\qmglasses.rsi
+    sprite: SS220/Clothing/Eyes/qmglasses.rsi
   - type: ShowSupplyPrice
   - type: FlashImmunity
   - type: EyeProtection
