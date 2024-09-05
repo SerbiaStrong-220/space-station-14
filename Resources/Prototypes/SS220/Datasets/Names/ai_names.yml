@@ -1,5 +1,5 @@
 - type: dataset
-  id: ai_names
+  id: borg_names
   values:
   - СМЕ 001
   - СМЕ 002
@@ -53,7 +53,7 @@
   - СМЕ 050
 
 - type: dataset
-  id: borg_names
+  id: ai_names
   values:
   - СЕИИ 001
   - СЕИИ 002
