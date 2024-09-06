@@ -1,13 +1,13 @@
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
   id: ClothingOuterReactiveArmor
   name: "name1"
   description: "Desc2."
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/ReactiveArmor #спрайтеры будут ныть
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/ReactiveArmor #спрайтеры будут ныть
   - type: Armor
     modifiers:
       coefficients:
@@ -16,16 +16,26 @@
         Piercing: 0.6
         Heat: 0.5
         Caustic: 0.9
-  - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
   - type: HeldSpeedModifier
     damageCoefficient: 0.65
+  - type: ToggleClothing
+    action: ActionToggleReactiveArmor
   - type: GroupExamine
   - type: ReactiveTeleportArmor
   - type: Explosive # Powerful explosion in a very small radius. Doesn't break underplating.
-    explosionType: DemolitionCharge
-    totalIntensity: 60
-    intensitySlope: 5
-    maxIntensity: 30
+    explosionType: Default
+    maxIntensity: 5
+    totalIntensity: 2
+    intensitySlope: 2
     canCreateVacuum: false
+    deleteAfterExplosion: false
+
+
+- type: entity
+  id: ActionToggleReactiveArmor
+  name: Переключение реактивной брони
+  description: Включает или выключает реактивную броню.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent   

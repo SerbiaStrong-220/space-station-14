@@ -1,11 +1,10 @@
-using System.Linq;
+
 using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Map.Components;
@@ -13,30 +12,27 @@ using System.Numerics;
 using Content.Shared.Physics;
 using Robust.Shared.Collections;
 using Content.Shared.Clothing;
-using Content.Shared.Inventory;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Server.Explosion.EntitySystems;
-using Content.Server.Explosion.Components;
-using Content.Shared.Inventory.Events;
-using Robust.Shared.GameObjects;
-
-
+using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
 
 
 namespace Content.Server.SS220.ReactiveTeleportArmor
 {
     internal class ReactiveTeleportArmorSystem : EntitySystem
     {
-        [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly SharedTransformSystem _xform = default!;
-        [Dependency] protected readonly DamageableSystem Damageable = default!;
         [Dependency] private readonly PullingSystem _pullingSystem = default!;
         [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
         [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-        [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly ExplosionSystem _explosion = default!;
-
+        [Dependency] private readonly SharedItemSystem _item = default!;
+        [Dependency] private readonly ClothingSystem _clothing = default!;
+        [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
         private EntityQuery<PhysicsComponent> _physicsQuery;
         private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -46,34 +42,36 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
             base.Initialize();
-            SubscribeLocalEvent<ReactiveTeleportArmorComponent, DamageChangedEvent>(OnReactiveTeleportArmor);
+            SubscribeLocalEvent<ReactiveTeleportArmorOnUristComponent, DamageChangedEvent>(OnReactiveTeleportArmor);
             SubscribeLocalEvent<ReactiveTeleportArmorComponent, ClothingGotEquippedEvent>(OnEquip);
             SubscribeLocalEvent<ReactiveTeleportArmorComponent, ClothingGotUnequippedEvent>(OnUnequip);
+            SubscribeLocalEvent<ReactiveTeleportArmorComponent, ItemToggledEvent>(ToggleDone);
         }
 
         private void OnEquip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotEquippedEvent args)
         {
-           EnsureComp<ReactiveTeleportArmorComponent>(args.Wearer);
-           ent.Comp.ArmorUid = ent;
+           EnsureComp<ReactiveTeleportArmorOnUristComponent>(args.Wearer, out var comp);
+
+           comp.ArmorUid = ent;
         }
         private void OnUnequip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotUnequippedEvent args)
         {
-            RemComp<ReactiveTeleportArmorComponent>(args.Wearer);
+            RemComp<ReactiveTeleportArmorOnUristComponent>(args.Wearer);
+        }
+        private void ToggleDone(Entity<ReactiveTeleportArmorComponent> ent, ref ItemToggledEvent args)
+        {
+            var prefix = args.Activated ? "on" : null;
+            _item.SetHeldPrefix(ent, prefix);
+            _clothing.SetEquippedPrefix(ent, prefix);
         }
 
 
-        private void OnReactiveTeleportArmor(Entity<ReactiveTeleportArmorComponent> ent, ref DamageChangedEvent args)
+        private void OnReactiveTeleportArmor(Entity<ReactiveTeleportArmorOnUristComponent> ent, ref DamageChangedEvent args)
         {
 
 
-            if (!TryComp<ReactiveTeleportArmorComponent>(ent, out var armor))
+            if (!TryComp<ReactiveTeleportArmorOnUristComponent>(ent, out var armor))
                 return;
-
-            // We need stop the user from being pulled so they don't just get "attached" with whoever is pulling them.
-            // This can for example happen when the user is cuffed and being pulled.
-            if (TryComp<PullableComponent>(ent.Owner, out var pull) && _pullingSystem.IsPulled(ent.Owner, pull))
-                _pullingSystem.TryStopPull(ent.Owner, pull);
-
 
             var xform = Transform(ent.Owner);
             var targetCoords = SelectRandomTileInRange(xform, armor.TeleportRadius);
@@ -81,9 +79,14 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
             if (!args.DamageIncreased || args.DamageDelta == null)
                 return;
-
-            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null)
+            ///teleport entity if taken damage && !null && armor is on && cooldown
+            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null && _toggle.IsActivated(ent.Comp.ArmorUid))
             {
+
+                // We need stop the user from being pulled so they don't just get "attached" with whoever is pulling them.
+                // This can for example happen when the user is cuffed and being pulled.
+                if (TryComp<PullableComponent>(ent.Owner, out var pull) && _pullingSystem.IsPulled(ent.Owner, pull))
+                    _pullingSystem.TryStopPull(ent.Owner, pull);
 
                 switch (_random.Prob(ent.Comp.TeleportChance))
                 {
@@ -95,7 +98,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
                         break;
                     case false:
-                        _explosion.TriggerExplosive(ent.Comp.ArmorUid); ///пользуясб случаем я хочу сказать: ГНОМА Я ЛЮБЛЮ ТЕБЯ ПОФИКСИ ПОЖАЛУЙСТА ЭТО ХУЙНЯ
+                        _explosion.TriggerExplosive(ent.Comp.ArmorUid); 
                         break;
 
                 }
@@ -178,6 +181,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             } while (true);
 
             return targetCoords;
+
         }
 
     }
