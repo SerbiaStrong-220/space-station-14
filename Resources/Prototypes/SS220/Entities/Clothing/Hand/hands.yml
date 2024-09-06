@@ -54,3 +54,19 @@
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
+
+- type: entity
+  parent: ClothingHandsBase
+  id: GlovesTest
+  name: name of test gloves
+  description: Description of test gloves
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+  - type: Insulated
