@@ -19,7 +19,7 @@
     sprite: SS220/Clothing/Sponsor/blackcoat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/blackcoat.rsi
- - type: TemperatureProtection
+  - type: TemperatureProtection
     coefficient: 0.1
 
 - type: entity

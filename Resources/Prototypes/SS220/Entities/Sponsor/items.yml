@@ -274,6 +274,52 @@
         amount: 0.4
   fizziness: 0.8
 
+- type: entity
+  parent: DrinkBeerCan
+  id: DrinkBeerCanSponsor
+  name: банка пива "Tracker"
+  description: Банка пива "Tracker", особенный напиток для дворфов "Трекероведов".
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Beer
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/drinks/beer_can.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/drinks/beer_can.rsi
+  - type: Tag
+    tags:
+    - SponsorBeer
+
+- type: Tag
+  id: SponsorBeer
+
+- type: entity
+  id: DrinkCanPackBeerSponsor
+  parent: DrinkCanPack
+  name: упаковка пива "Tracker"
+  description: Прогресс не возможен без пива!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/drinks/6pack.rsi
+  - type: Storage
+    whitelist:
+      tags:
+        - SponsorBeer
+    hideStackVisualsWhenClosed: false
+  - type: StorageFill
+    contents:
+      - id: DrinkBeerCanSponsor
+        amount: 6
+  - type: ItemCounter
+    count:
+      tags: [SponsorBeer]
+
 # Игрушки
 - type: entity
   parent: BaseItem

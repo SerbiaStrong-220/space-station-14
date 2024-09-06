@@ -19,6 +19,7 @@
     ExpensiveLighterSponsor: 1
     DrinkChampagneSponsorBottleFull: 2
     ClothingSponsorPivozavr: 1
+    DrinkBeerCanSponsor: 1
 
 - type: ShlepaRewardGroup
   id: BigShlopa
@@ -34,6 +35,7 @@
   # Вторая итерация
     PlushFloppa: 1
     ClothingHeadHatDevilHornsAlt: 1
+    DrinkCanPackBeerSponsor: 2
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
