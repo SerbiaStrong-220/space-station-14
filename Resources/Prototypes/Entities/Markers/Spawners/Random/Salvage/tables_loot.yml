@@ -114,7 +114,7 @@
         range: 4, 7
     - id: SpaceCash1000
     # - id: WristwatchGold
-    - id: ClothingWristWatchGold # SS220 Wristwatch
+    - id: ClothingWristWatch # SS220 Wristwatch
     - !type:NestedSelector
       tableId: RingTableCommon
 
