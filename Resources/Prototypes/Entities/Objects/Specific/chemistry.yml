@@ -518,9 +518,9 @@
     tags:
       - PillCanister
   - type: Storage
-    whitelist:
+    whitelist: # SS220 PillCanister fix beginning
       components:
-        - Pill
+        - Pill # SS220 PillCanister fix end
     grid:
     - 0,0,4,1
     quickInsert: true
