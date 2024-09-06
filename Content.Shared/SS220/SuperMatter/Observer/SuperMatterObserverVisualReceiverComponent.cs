@@ -20,6 +20,11 @@ public sealed partial class SuperMatterObserverVisualReceiverComponent() : Compo
     public Dictionary<SuperMatterVisualLayers, string>? DangerState;
     [DataField, AutoNetworkedField]
     public Dictionary<SuperMatterVisualLayers, string>? DelaminateState;
+    [DataField, AutoNetworkedField]
+    public Dictionary<SuperMatterVisualLayers, string>? RandomEvent;
+    [DataField, AutoNetworkedField]
+    public float RandomEventDuration = 5f;
+    public TimeSpan RandomEventTime = default!;
 }
 
 public enum SuperMatterVisualState
@@ -30,6 +35,7 @@ public enum SuperMatterVisualState
     Warning,
     Danger,
     Delaminate,
+    RandomEvent
 }
 public enum SuperMatterVisualLayers
 {

@@ -15,23 +15,29 @@
         </PanelContainer>
         <BoxContainer Name="ContentHolderContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" HorizontalExpand="True">
-                <BoxContainer Name="ServerNavigationBar" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
+                <BoxContainer Name="ServerNavigationBar" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="24" MaxHeight="24" Margin="2 2 6 2">
                 <!-- Here goes all avaible "Servers" with SM data -->
                 </BoxContainer>
                 <pda:PdaNavigationButton Name="RefreshButton" SetWidth="32" CurrentTabBorderThickness="0 0 2 0" IsCurrent="True"/>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
-            <BoxContainer Name="CrystalNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
+            <BoxContainer Name="CrystalNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="24" MaxHeight="24" Margin="2 2 6 2">
             <!-- Here goes all avaible "Servers" with SM data -->
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
             <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
                 <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
-                    <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MinSize="168 256" MouseFilter="Stop" Margin="2 4 20 4"/>
+                    <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MinSize="168 232" MouseFilter="Stop" Margin="2 4 20 4"/>
                     <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
-                    <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MouseFilter="Stop" MinSize="168 256" Margin="2 4 20 4"/>
+                    <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MouseFilter="Stop" MinSize="168 232" Margin="2 4 20 4"/>
                 </BoxContainer>
             </ScrollContainer>
+            <BoxContainer Orientation="Vertical">
+                <PanelContainer StyleClasses="LowDivider" />
+                <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                    <Label Text="{Loc 'smObserver-cartridge-footer-left'}" StyleClasses="WindowFooterText" />
+                </BoxContainer>
+            </BoxContainer>
         </BoxContainer>
     </Control>
 </cartridges:SupermatterObserverUiFragment>

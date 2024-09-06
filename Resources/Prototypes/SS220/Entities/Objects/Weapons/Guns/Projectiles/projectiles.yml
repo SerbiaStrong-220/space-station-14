@@ -68,8 +68,8 @@
         shader: unshaded
   - type: SuperMatterEmitterBolt
   - type: SuperMatterSpecificConsumable
-    additionalMatterOnConsumption: 8
-    additionalEnergyOnConsumption: 70
+    additionalMatterOnConsumption: 4
+    additionalEnergyOnConsumption: 20
 
 
 ##Made by MIXnikita for SS220

@@ -5,6 +5,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Radio;
+using Content.Shared.SS220.SuperMatter.Functions;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
@@ -33,9 +34,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         var integrity = GetIntegrity(crystal.Comp);
         var localePath = "supermatter-" + announceType.ToString().ToLower();
-        var message = Loc.GetString(localePath, ("integrity", integrity));
+        var message = Loc.GetString(localePath, ("integrity", integrity.ToString("n2")));
         if (TryGetChannelKey(announceType, out var channelKey))
-            message = channelKey + ' ' + message;
+            message = channelKey?.ToString() + " " + message;
         RadioAnnouncement(crystal.Owner, message);
     }
     public void StationAnnounceIntegrity(Entity<SuperMatterComponent> crystal, AnnounceIntegrityTypeEnum announceType)
@@ -45,7 +46,17 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         var integrity = GetIntegrity(crystal.Comp);
         var localePath = "supermatter-" + announceType.ToString().ToLower();
-        var message = Loc.GetString(localePath, ("integrity", integrity));
+        var message = Loc.GetString(localePath, ("integrity", integrity.ToString("n2")));
+        SendStationAnnouncement(crystal.Owner, message);
+    }
+    public void StationAnnounceIntegrity(Entity<SuperMatterComponent> crystal, AnnounceIntegrityTypeEnum announceType, SuperMatterPhaseState smState)
+    {
+        if (!(announceType == AnnounceIntegrityTypeEnum.Explosion))
+            Log.Warning("Used unexpecting announce type to announce Integrity with SuperMatterPhaseState ");
+
+        var localePath = "supermatter-" + announceType.ToString().ToLower() + "-" + smState.ToString().ToLower();
+        var message = Loc.GetString(localePath);
+        SendStationAnnouncement(crystal.Owner, message);
     }
 
     private void SendAdminChatAlert(Entity<SuperMatterComponent> crystal, string msg, string? whom = null)
@@ -98,16 +109,16 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         return type;
     }
-    private bool TryGetChannelKey(AnnounceIntegrityTypeEnum announceType, [NotNullWhen(true)] out char? channelKey)
+    private bool TryGetChannelKey(AnnounceIntegrityTypeEnum announceType, [NotNullWhen(true)] out string? channelKey)
     {
         channelKey = announceType switch
         {
-            AnnounceIntegrityTypeEnum.DangerRecovering => _commonRadioKey,
-            AnnounceIntegrityTypeEnum.Danger => _commonRadioKey,
-            AnnounceIntegrityTypeEnum.Delamination => _commonRadioKey,
-            AnnounceIntegrityTypeEnum.DelaminationStopped => _commonRadioKey,
-            AnnounceIntegrityTypeEnum.Warning => _engineerRadioKey,
-            AnnounceIntegrityTypeEnum.WarningRecovering => _engineerRadioKey,
+            AnnounceIntegrityTypeEnum.DangerRecovering => _commonRadioKey.ToString(),
+            AnnounceIntegrityTypeEnum.Danger => _commonRadioKey.ToString(),
+            AnnounceIntegrityTypeEnum.Delamination => _commonRadioKey.ToString(),
+            AnnounceIntegrityTypeEnum.DelaminationStopped => _commonRadioKey.ToString(),
+            AnnounceIntegrityTypeEnum.Warning => ":" + _engineerRadioKey.ToString(),
+            AnnounceIntegrityTypeEnum.WarningRecovering => ":" + _engineerRadioKey.ToString(),
             _ => null
         };
         return channelKey is not null;
@@ -123,5 +134,6 @@ public enum AnnounceIntegrityTypeEnum
     WarningRecovering,
     DangerRecovering,
     Delamination,
-    DelaminationStopped
+    DelaminationStopped,
+    Explosion
 }

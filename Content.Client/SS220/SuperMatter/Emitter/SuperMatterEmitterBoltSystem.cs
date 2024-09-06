@@ -27,6 +27,6 @@ public sealed class SuperMatterEmitterSystem : EntitySystem
             return;
 
         spriteComponent.Color = Colormaps.Jet.GetCorrespondingColor(superMatterEmitter.EnergyToMatterRatio / 100f);
-        spriteComponent.Scale = new Vector2(superMatterEmitter.PowerConsumption / SuperMatterEmitterExtensionConsts.BaseEnergyConsumption);
+        spriteComponent.Scale = new Vector2(MathF.Sqrt(superMatterEmitter.PowerConsumption / SuperMatterEmitterExtensionConsts.BaseEnergyConsumption));
     }
 }

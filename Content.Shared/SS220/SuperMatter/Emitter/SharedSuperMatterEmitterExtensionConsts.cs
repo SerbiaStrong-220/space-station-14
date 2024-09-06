@@ -4,13 +4,13 @@ namespace Content.Shared.SS220.SuperMatter.Emitter;
 public sealed class SuperMatterEmitterExtensionConsts
 {
     public const float BaseEnergyConsumption = 600f;
-    private const float BaseMatter = 8f;
+    private const float BaseMatter = 4f;
     private const float BaseMatterPowerDivider = 300f;
     public static float GetMatterFromPower(float power)
     {
         return BaseMatter * MathF.Sqrt(power / BaseMatterPowerDivider);
     }
-    private const float BaseEnergy = 70f;
+    private const float BaseEnergy = 90f;
     private const float BaseEnergyPowerDivider = 300f;
     public static float GetEnergyFromPower(float power)
     {

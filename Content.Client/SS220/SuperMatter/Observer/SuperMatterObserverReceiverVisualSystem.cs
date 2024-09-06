@@ -3,12 +3,14 @@
 
 using Content.Shared.SS220.SuperMatter.Observer;
 using Robust.Client.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
 
 public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
@@ -28,6 +30,8 @@ public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
         Dictionary<SuperMatterVisualLayers, int> layers = new()
                 {{ SuperMatterVisualLayers.Shaded, layer },
                     { SuperMatterVisualLayers.Unshaded, unshadedLayer }};
+        if (_gameTiming.CurTime < entity.Comp.RandomEventTime)
+            return;
         // For those who wanted to make it right. Make it, thanks
         switch (state)
         {
@@ -60,6 +64,12 @@ public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
                 if (entity.Comp.DelaminateState == null)
                     break;
                 SetVisualLayers(entity.Comp.DelaminateState, layers, args.Sprite);
+                break;
+            case SuperMatterVisualState.RandomEvent:
+                if (entity.Comp.RandomEvent == null)
+                    break;
+                SetVisualLayers(entity.Comp.RandomEvent, layers, args.Sprite);
+                entity.Comp.RandomEventTime = _gameTiming.CurTime + TimeSpan.FromSeconds(entity.Comp.RandomEventDuration);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

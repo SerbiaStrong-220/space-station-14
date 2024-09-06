@@ -39,11 +39,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         if (args.OtherBody.BodyType == BodyType.Static)
             return;
-        if (TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
-            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max(2f * (float)projectile.Damage.GetTotal(), 0f);
-
         entity.Comp.Matter += MatterNondimensionalization / 8f;
-        ConsumeObject(args.OtherEntity, entity, false);
+        if (TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
+        {
+            entity.Comp.InternalEnergy += CHEMISTRY_POTENTIAL_BASE * MathF.Max(2f * (float)projectile.Damage.GetTotal(), 0f);
+            ConsumeObject(args.OtherEntity, entity, false);
+            return;
+        }
+
+        ConsumeObject(args.OtherEntity, entity);
     }
     private void OnActivationEvent(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
     {

@@ -56,13 +56,13 @@ public static class SuperMatterGasResponse
     /// <summary> Standalone method for easier  </summary>
     private static float GetGasInfluenceEfficiency(Gas gasId, GasMixture gasMixture)
     {
-        return gasMixture.GetMoles(gasId) / gasMixture.TotalMoles;
+        return gasMixture.GetMoles(gasId) / (gasMixture.TotalMoles + 0.01f);
     }
     private static float GetNonLinierGasInfluenceEfficiencyFunction(Gas gasId, GasMixture gasMixture, float optimalRatio)
     {
         var maxValue = MathF.Pow(optimalRatio, 2) * MathF.Exp(-2);
         var optParam = 2 / optimalRatio;
-        var normalizedMoles = gasMixture.GetMoles(gasId) / gasMixture.TotalMoles;
+        var normalizedMoles = gasMixture.GetMoles(gasId) / (gasMixture.TotalMoles + 0.01f);
 
         return MathF.Pow(normalizedMoles, 2) * MathF.Exp(-optParam * normalizedMoles) / maxValue;
     }

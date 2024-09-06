@@ -32,6 +32,17 @@
           - InteractImpassable
   - type: CollisionWake
     enabled: false
+  - type: SinguloFood
+    energy: 10000
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 25000
+    intensitySlope: 5
+    totalIntensity: 25000
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: TTS
+    voicePrototypeId:
   - type: SuperMatter # all things like radiation source etc will be added through SMSystem
   - type: HallucinationSource
     weightedRandom: HallucinationSupermatterCrystal
@@ -45,10 +56,10 @@
   - type: RadiationSource
     enabled: true
     intensity: 2
-    slope: 2
+    slope: 1.5
   - type: LightningArcShooter
     enabled: false
-    ShootRange: 3
+    shootRange: 3
   - type: Sprite
     offset: 0, 0.25
     sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
@@ -85,6 +96,7 @@
   - type: IntrinsicRadioTransmitter
     channels:
     - Engineering
+    - Common
   - type: Clickable
   - type: InteractionOutline
   - type: InteractionPopup # add its own hugging!
@@ -95,3 +107,12 @@
   - type: WarpPoint
     follow: true
     location: SuperMatterCrystal
+
+- type: randomVoicesList
+  id: SuperMatterVoices
+  voices:
+  - adjutant
+  - good_thalya
+  - turret_floor
+  - glados
+  - fact_core

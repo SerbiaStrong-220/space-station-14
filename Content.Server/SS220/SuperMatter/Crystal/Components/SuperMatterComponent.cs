@@ -36,6 +36,10 @@ public sealed partial class SuperMatterComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public float AccumulatedRadiationEnergy = 0f;
     [ViewVariables(VVAccess.ReadOnly)]
+    public float AccumulatedRegenerationDelamination = 0f;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float NextRegenerationThreshold = 0f;
+    [ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<Gas, float> AccumulatedGasesMoles = new();
 
     // TimeSpans
@@ -72,6 +76,14 @@ public sealed partial class SuperMatterComponent : Component
 
     [DataField]
     public EntProtoId ConsumeResultEntityPrototype = "Ash";
+    /// <summary> For future realization </summary>
+    [DataField]
+    public EntProtoId ResonanceSpawnPrototype = "TeslaEnergyBall";
+    [DataField]
+    public EntProtoId SingularitySpawnPrototype = "Singularity";
+    [DataField]
+    public EntProtoId TeslaSpawnPrototype = "TeslaEnergyBall";
+    public string? PreviousAlertLevel;
 
     // Audio Sector
 

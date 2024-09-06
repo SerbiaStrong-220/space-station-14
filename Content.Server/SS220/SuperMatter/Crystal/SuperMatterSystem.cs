@@ -11,15 +11,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private const float ZapPerEnergy = 60f;
-    private const float ZapThreshold = 80f;
-    private const float RadiationPerEnergy = 70f;
+    private const float ZapPerEnergy = 90f;
+    private const float ZapThreshold = 100f;
+    private const float RadiationPerEnergy = 900f;
     private const float MaxTimeBetweenArcs = 8f;
     private const float MaxTimeDecreaseBetweenArcs = 4f;
     private const int MaxAmountOfArcs = 7;
     private const float ArcsToTimeDecreaseEfficiency = 0.3f;
-    private const float IntegrityDamageICAnnounceDelay = 10f;
-    private const float IntegrityDamageStationAnnouncementDelay = 20f;
+    private const float IntegrityDamageICAnnounceDelay = 8f;
+    private const float IntegrityDamageStationAnnouncementDelay = 4f;
     public override void Initialize()
     {
         base.Initialize();
@@ -40,7 +40,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
             UpdateDelayed(crystal, flooredFrameTime);
             SuperMatterUpdate(crystal, flooredFrameTime);
-
         }
     }
 
@@ -75,7 +74,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
-        _atmosphere.AddHeat(gasMixture, releasedEnergyPerFrame + decayedMatter * GetHeatCapacity(crystal.Comp.Temperature, crystal.Comp.Matter));
+        _atmosphere.AddHeat(gasMixture, 10f * releasedEnergyPerFrame);
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
 
         // Update Accumulators for Broadcasting to Clients
@@ -94,14 +93,25 @@ public sealed partial class SuperMatterSystem : EntitySystem
         }
         if (_gameTiming.CurTime > crystal.Comp.NextDamageImplementTime)
         {
+            if (crystal.Comp.IsDelaminate)
+            {
+                UpdateDelamination(crystal);
+                return;
+            }
             if (!TryImplementIntegrityDamage(crystal.Comp))
+            {
+                crystal.Comp.Integrity = 0.01f;
                 MarkAsLaminated(crystal);
+            }
+            crystal.Comp.IntegrityDamageAccumulator = 0f;
+            crystal.Comp.NextDamageImplementTime = _gameTiming.CurTime + TimeSpan.FromSeconds(1);
+            BroadcastData(crystal);
+        }
+        if (_gameTiming.CurTime > crystal.Comp.NextDamageStationAnnouncement)
+        {
             var announceType = GetAnnounceIntegrityType(crystal.Comp);
             RadioAnnounceIntegrity(crystal, announceType);
-            BroadcastData(crystal);
-            crystal.Comp.IntegrityDamageAccumulator = 0f;
-            crystal.Comp.NextDamageImplementTime = _gameTiming.CurTime
-                                        + TimeSpan.FromSeconds(1);
+            crystal.Comp.NextDamageStationAnnouncement = _gameTiming.CurTime + TimeSpan.FromSeconds(IntegrityDamageICAnnounceDelay);
         }
     }
     private void ReleaseEnergy(Entity<SuperMatterComponent> crystal)
@@ -119,7 +129,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         }
         var accumulatedZapEnergyTrashed = smComp.AccumulatedZapEnergy - ZapThreshold;
-        var maxAmountOfArcs = Math.Clamp((int) MathF.Round(accumulatedZapEnergyTrashed / ZapPerEnergy), 0, MaxAmountOfArcs);
+        var maxAmountOfArcs = Math.Clamp((int)MathF.Round(accumulatedZapEnergyTrashed / ZapPerEnergy), 0, MaxAmountOfArcs);
         var timeDecreaseBetweenArcs = Math.Clamp((accumulatedZapEnergyTrashed / ZapPerEnergy - MaxAmountOfArcs)
                                                     * ArcsToTimeDecreaseEfficiency, 0f, MaxTimeDecreaseBetweenArcs);
         if (maxAmountOfArcs == 0)
@@ -137,7 +147,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)
     {
         var pressure = gasMixture.Pressure;
-        // TODO make 4f to variable!
         var oxygenMoles = decayedMatter * GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState);
         var plasmaMoles = decayedMatter * (1 - GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState));
         var heatEnergy = GetChemistryPotential(crystalTemperature, gasMixture.Pressure) * decayedMatter / MatterNondimensionalization;

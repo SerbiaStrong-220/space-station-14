@@ -7,6 +7,7 @@ using Robust.Shared.Timing;
 using Content.Shared.SS220.SuperMatter.Observer;
 using Content.Client.UserInterface.Fragments;
 using Content.Client.SS220.Cartridges;
+using Robust.Shared.Random;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
 // It isn't a warCrime if you make shittyCode... kinda...
@@ -17,10 +18,11 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly IRobustRandom _robustRandom = default!;
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;
     private const float UpdateDelay = 1f;
+    private const float RandomEventChance = 0.02f;
     private TimeSpan _nextUpdateTime = default!;
     private HashSet<Entity<SuperMatterObserverComponent>> _observerEntities = new();
     private List<EntityUid> _smReceiverUIOwnersToInit = new();
@@ -101,6 +103,8 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             // here dispatches events to sprites of SM itself
             _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _visualReceivers);
             var state = GetVisualState(args);
+            if (_robustRandom.NextDouble() > RandomEventChance)
+                state = SuperMatterVisualState.RandomEvent;
             foreach (var visualReceiver in _visualReceivers)
             {
                 _appearanceSystem.SetData(visualReceiver.Owner, SuperMatterVisuals.VisualState, state);
@@ -124,7 +128,6 @@ public sealed class SuperMatterObserverSystem : EntitySystem
                     _processedReceivers.Add(receiver.Owner.Id, receiver.Owner);
             }
             _receivers.Clear();
-            // RaiseLocalEvent(SMpanels -> accept information)
         }
         _observerEntities.Clear();
         _processedReceivers.Clear();
