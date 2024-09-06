@@ -402,7 +402,7 @@
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
-  - SecurityBackpack
+  - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
   - SecurityShoes
   - SurvivalSecurity

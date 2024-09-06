@@ -3,3 +3,8 @@
   id: DetectiveCoatDark
   equipment:
     outerClothing: ClothingOuterCoatDetectiveDark
+
+- type: loadout
+  id: DetectiveNoirSatchel
+  equipment:
+    back: ClothingBackpackNoirSatchel
