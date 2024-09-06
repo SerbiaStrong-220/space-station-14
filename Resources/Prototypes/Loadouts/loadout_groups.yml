@@ -1206,17 +1206,6 @@
   - NoirJumpsuit
   - NoirJumpskirt
 
-#SS220 Backpack start
-- type: loadoutGroup
-  id: DetectiveSecBackpack
-  name: loadout-group-security-backpack
-  loadouts:
-    - SecurityBackpack
-    - SecuritySatchel
-    - SecurityDuffel
-    - DetectiveNoirSatchel
-#SS220 Backpack end
-
 - type: loadoutGroup
   id: DetectiveOuterClothing
   name: loadout-group-detective-outerclothing
