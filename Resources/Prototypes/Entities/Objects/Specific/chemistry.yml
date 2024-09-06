@@ -518,6 +518,9 @@
     tags:
       - PillCanister
   - type: Storage
+    whitelist:
+      components:
+        - Pill
     grid:
     - 0,0,4,1
     quickInsert: true
