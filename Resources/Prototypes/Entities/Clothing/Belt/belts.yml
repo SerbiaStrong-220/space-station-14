@@ -258,7 +258,6 @@
   - type: Storage
     whitelist:
       tags:
-        - Wrench
         - Bottle
         - Spray
         - Brutepack
@@ -591,7 +590,7 @@
   - type: Clothing
     slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/holster.rsi
-  - type: Storage 
+  - type: Storage
     maxItemSize: Huge #SS220 holster maximum item size
     grid:
     - 0,0,3,1
