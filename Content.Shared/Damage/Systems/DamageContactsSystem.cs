@@ -44,11 +44,11 @@ public sealed class DamageContactsSystem : EntitySystem
     {
         var otherUid = args.OtherEntity;
 
-        if (!TryComp<PhysicsComponent>(uid, out var body))
+        if (!TryComp<PhysicsComponent>(otherUid, out var body)) //SS220 Damaged by contact fix
             return;
 
         var damageQuery = GetEntityQuery<DamageContactsComponent>();
-        foreach (var ent in _physics.GetContactingEntities(uid, body))
+        foreach (var ent in _physics.GetContactingEntities(otherUid, body)) //SS220 Damaged by contact fix
         {
             if (ent == uid)
                 continue;
