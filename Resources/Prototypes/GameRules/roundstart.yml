@@ -30,7 +30,7 @@
   id: SurvivalRule
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 30
 #SS220 survival minimum players end
 
 - type: entity
