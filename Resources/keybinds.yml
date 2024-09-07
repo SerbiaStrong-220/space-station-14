@@ -251,7 +251,7 @@ binds:
   type: State
   key: E
   mod1: Shift
-- function: SmartEquipNeck
+- function: SmartEquipNeck #SS220-SmartEquipNeck
   type: State
   key: H
   mod1: Shift

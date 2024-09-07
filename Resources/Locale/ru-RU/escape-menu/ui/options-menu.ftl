@@ -167,7 +167,6 @@ ui-options-function-save-item-location = Сохранить расположен
 ui-options-static-storage-ui = Закрепить интерфейс хранилища на хотбаре
 ui-options-function-smart-equip-backpack = Умная экипировка в рюкзак
 ui-options-function-smart-equip-belt = Умная экипировка на пояс
-ui-options-function-smart-equip-neck = Умная экипировка на шею
 ui-options-function-open-backpack = Открыть рюкзак
 ui-options-function-open-belt = Открыть пояс
 ui-options-function-throw-item-in-hand = Бросить предмет
