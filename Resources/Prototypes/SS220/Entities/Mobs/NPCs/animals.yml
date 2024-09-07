@@ -365,7 +365,7 @@
   name: крокодил 
   suffix: злой
   parent: MobCrocodile
-  id: MobCrocodileAngry
+  id: MobCrocodileAngry  
   description: Он кусается, наверное.
   components:
   - type: HTN
