@@ -9,7 +9,7 @@ using Robust.Client.GameObjects;
 namespace Content.Client.SS220.Weapons.Ranged.Visualizer.Systems;
 
 /// <summary>
-/// This handles the display of fire effects on flammable entities.
+/// This handles the display of inhand sprite on guns.
 /// </summary>
 public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmoVisualsComponent>
 {
