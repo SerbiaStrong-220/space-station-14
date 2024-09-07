@@ -40,7 +40,7 @@
   - type: GuardianCreator
     guardianProto: MobHoloClownGuardian
 # Corvax-HiddenDesc-Start
-  - type: HiddenDescription
+  - type: HiddenDescription 
     entries:
     - label: corvax-hidden-desc-HoloClownInjector-syndicate
       whitelistMind:
