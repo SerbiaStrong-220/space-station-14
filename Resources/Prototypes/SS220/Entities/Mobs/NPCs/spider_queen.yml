@@ -157,15 +157,17 @@
   components:
   - type: AutoImplant
     implants:
-    - LightImplantSpiderEggHunter
-    - LightImplantSpiderWallWebDurable
-    - LightImplantSpiderEggDrone
-    - LightImplantSpiderEggGhost
-    - LightImplantSpiderCrystal
-    - LightImplantSpiderLittle
-    - LightImplantSingleSpiderWebDurable
-    - LightImplantSpiderEggShooter
     - ThermalVisionImplant
+  - type: SpiderQueen
+    actions:
+    - ActionSpawnSpiderEggDrone
+    - ActionSpawnSpiderEggHunter
+    - ActionSpawnSpiderEggGhost
+    - ActionSpawnSpiderEggShooter
+    - ActionSpawnSpiderLittle
+    - ActionSpawnSpiderCrystal
+    - ActionSpawnSingleSpiderWebDurable
+    - ActionSpawnSpiderWallWebDurable
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider
