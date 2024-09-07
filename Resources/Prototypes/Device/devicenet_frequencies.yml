@@ -59,11 +59,6 @@
   frequency: 1939
 
 - type: deviceFrequency
-  id: SurveillanceBodyCameraSecurity
-  name: device-frequency-prototype-name-surveillance-body-camera-security
-  frequency: 1940
-
-- type: deviceFrequency
   id: AtmosMonitor
   name: device-frequency-prototype-name-atmos
   frequency: 1621
