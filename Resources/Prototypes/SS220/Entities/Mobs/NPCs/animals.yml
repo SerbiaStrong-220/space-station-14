@@ -268,6 +268,7 @@
     autoRot: true
     radius: 2
     netsync: false
+  - type: GhostTakeoverAvailable
   - type: GhostRole
     prob: 1
     name: ghost-role-information-en-name
@@ -275,10 +276,10 @@
     rules: ghost-role-information-silicon-rules
 
 - type: entity
-  name: крокодил 
+  name: крокодил
   parent: SimpleMobBase
-  id: MobCrocodile 
-  description: Он не кусается, наверное. 
+  id: MobCrocodile
+  description: Он не кусается, наверное.
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -311,10 +312,10 @@
       movement:
         state: croc-moving
     noMovementLayers:
-      movement: 
+      movement:
         state: croc
   - type: MobThresholds
-    thresholds: 
+    thresholds:
       0: Alive
       250: Critical
       350: Dead
@@ -365,12 +366,12 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
-  
+
 - type: entity
-  name: крокодил 
+  name: крокодил
   suffix: злой
   parent: MobCrocodile
-  id: MobCrocodileAngry  
+  id: MobCrocodileAngry
   description: Он кусается, наверное.
   components:
   - type: HTN
