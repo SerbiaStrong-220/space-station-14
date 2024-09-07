@@ -574,7 +574,7 @@
   loadouts:
   - MimeSuspendersRed
   - MimeSuspendersBlack
-
+  
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
