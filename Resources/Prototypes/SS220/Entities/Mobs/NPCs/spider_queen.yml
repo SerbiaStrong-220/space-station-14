@@ -17,6 +17,8 @@
   - type: InputMover
   - type: MobMover
   - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
@@ -93,6 +95,7 @@
     tags:
       - CannotSuicide
       - DoorBumpOpener
+      - SpiderQueen
   - type: Tool # Open door from xeno.yml.
     speedModifier: 1.5
     qualities:

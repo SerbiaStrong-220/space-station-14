@@ -89,6 +89,16 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.25
       sprintSpeedModifier: 0.25
+    - type: DamageContacts
+      standStillTime: 3
+      damage:
+        types:
+          Slash: -10
+          Piercing: -40
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
 
 - type: entity
   parent: BaseSpiderWeb
@@ -99,7 +109,8 @@
     snap:
       - Wall
   components:
-
+    - type: Sprite
+      color: gray
     - type: Destructible
       thresholds:
       - trigger:
@@ -111,6 +122,16 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.15
       sprintSpeedModifier: 0.15
+    - type: DamageContacts
+      standStillTime: 3
+      damage:
+        types:
+          Slash: -10
+          Piercing: -40
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
 
 - type: entity
   parent: BaseSpiderWeb

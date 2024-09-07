@@ -107,3 +107,10 @@
 # EscapePod
 - type: Tag
   id: EscapePod
+
+# Spider queen antag
+- type: Tag
+  id: SpiderQueen
+
+- type: Tag
+  id: SpiderServant
