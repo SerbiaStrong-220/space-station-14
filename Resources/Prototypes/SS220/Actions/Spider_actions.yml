@@ -4,18 +4,18 @@
   abstract: true
   components:
   - type: WorldTargetAction
-    useDelay: 200
-    range: 1
+    useDelay: 2
+    range: 2
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: guard_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderWorldSpawnEvent
       prototypes:
       - id: SpiderEggDrone
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      cost: 10
 
 - type: entity
   id: BaseActionSpawnSingleSpiderWeb
@@ -46,12 +46,12 @@
   noSpawn: true
   components:
   - type: WorldTargetAction
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderWorldSpawnEvent
       prototypes:
       - id: SpiderEggDrone
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      cost: 10
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -63,13 +63,12 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: hunter_spawn
-    useDelay: 300 #КД
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderWorldSpawnEvent
       prototypes:
       - id: SpiderEggHunter
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      cost: 30
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -81,13 +80,12 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: nurse_spawn
-    useDelay: 350
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderWorldSpawnEvent
       prototypes:
       - id: SpiderEggGhost
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      cost: 40
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -99,13 +97,12 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: viper_spawn
-    useDelay: 380
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderWorldSpawnEvent
       prototypes:
       - id: SpiderEggShooter
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      cost: 20
 
 #Spider
 - type: entity

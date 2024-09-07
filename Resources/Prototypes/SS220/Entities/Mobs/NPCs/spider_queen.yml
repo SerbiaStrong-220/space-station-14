@@ -159,6 +159,8 @@
     implants:
     - ThermalVisionImplant
   - type: SpiderQueen
+    currentMana: 50
+    passiveGeneration: 0.5
     actions:
     - ActionSpawnSpiderEggDrone
     - ActionSpawnSpiderEggHunter
