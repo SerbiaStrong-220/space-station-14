@@ -38,6 +38,7 @@
       setupAvailableNetworks:
         - SurveillanceCameraEngineering
         - SurveillanceCameraSecurity
+        - SurveillanceBodyCameraSecurity
         - SurveillanceCameraService
         - SurveillanceCameraSupply
         - SurveillanceCameraScience
@@ -60,6 +61,14 @@
   components:
     - type: SurveillanceCameraRouter
       subnetFrequency: SurveillanceCameraSecurity
+
+- type: entity
+  parent: SurveillanceCameraRouterBase
+  id: SurveillanceBodyCameraRouterSecurity
+  suffix: Security (Bodycamera)
+  components:
+    - type: SurveillanceCameraRouter
+      subnetFrequency: SurveillanceBodyCameraSecurity
 
 - type: entity
   parent: SurveillanceCameraRouterBase
