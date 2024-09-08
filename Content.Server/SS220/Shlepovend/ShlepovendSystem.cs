@@ -109,12 +109,14 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
         var gotRequiredRole = false;
         foreach (var tier in sponsorInfo.Tiers)
         {
-            if (groupProto.RequiredRole is SponsorTier &&
-            (int) tier >= (int) (SponsorTier) groupProto.RequiredRole)
-            {
-                gotRequiredRole = true;
+            if (groupProto.RequiredRole is not SponsorTier)
                 break;
-            }
+
+            gotRequiredRole = groupProto.IsExactRoleRequired ? tier == (SponsorTier)groupProto.RequiredRole :
+                (int)tier >= (int)(SponsorTier)groupProto.RequiredRole;
+
+            if (gotRequiredRole)
+                break;
         }
         if (!gotRequiredRole)
             return;

@@ -16,16 +16,21 @@ public abstract partial class SharedSponsorTierRequirementLoadoutEffect : Loadou
     [DataField(required: true)]
     public SponsorTier Requirement = default!;
 
+    /// <summary>
+    /// Is this exact tier required? Use this for stuff like developer rewards.
+    /// </summary>
+    [DataField]
+    public bool IsExact = false;
+
     protected bool CheckRequirement(SponsorTier[] playerTiers)
     {
         var result = false;
         foreach (var tier in playerTiers)
         {
-            if ((int)tier < (int)Requirement)
-                continue;
+            result = IsExact ? tier == Requirement : (int)tier >= (int)Requirement;
 
-            result = true;
-            break;
+            if (result)
+                break;
         }
 
         return result;
