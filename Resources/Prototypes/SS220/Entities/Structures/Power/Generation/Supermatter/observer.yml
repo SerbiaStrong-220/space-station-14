@@ -12,7 +12,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-      state: power_monitor
+      state: engine
     - map: ["computerLayerKeys"]
       state: power_key
   - type: PointLight

@@ -28,7 +28,17 @@
       "directions": 4
     },
     {
-      "name": "projectile"
+      "name": "projectile",
+      "delays": [
+          [
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05
+          ]
+      ]
     }
   ]
 }

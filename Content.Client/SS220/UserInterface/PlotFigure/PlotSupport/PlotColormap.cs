@@ -5,7 +5,8 @@ namespace Content.Client.SS220.UserInterface.PlotFigure;
 
 public sealed class Colormaps
 {
-    public static PlotColormap Jet = new PlotColormap(new() { (0f, Color.RoyalBlue), (1f, Color.DarkRed) });
+    public static PlotColormap SMEmitter = new PlotColormap(new() { (0f, Color.FromHex("#FFC000")), (1f, Color.FromHex("#510FAD")) });
+    public static PlotColormap Jet = new PlotColormap(new() { (0f, Color.DarkBlue), (1f, Color.DarkRed) });
     public static PlotColormap Thermal = new PlotColormap(new() { (0f, Color.Black), (1f, Color.DarkRed) });
     public static PlotColormap Gray = new PlotColormap(new() { (0f, Color.Black), (1f, Color.White) });
     public static PlotColormap Autumn = new PlotColormap(new() { (0f, Color.DarkRed), (1f, Color.Yellow) });

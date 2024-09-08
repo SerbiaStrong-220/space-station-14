@@ -6,11 +6,11 @@
   description: A compact program which provides essential info about SM crystal
   components:
     - type: Sprite
-      sprite: Objects/Devices/cartridge.rsi
-      state: cart-log
+      sprite: SS220/Objects/Devices/cartridge.rsi
+      state: cart-smobserver
     - type: Icon
-      sprite: Objects/Devices/cartridge.rsi
-      state: cart-log
+      sprite: SS220/Objects/Devices/cartridge.rsi
+      state: cart-smobserver
     - type: UIFragment
       ui: !type:SupermatterObserverUi
     - type: Cartridge
