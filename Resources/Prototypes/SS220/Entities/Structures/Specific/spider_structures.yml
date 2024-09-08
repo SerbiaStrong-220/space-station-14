@@ -177,3 +177,53 @@
   - type: Construction
     graph: WebStructures
     node: wall
+
+# Cocoon
+- type: entity
+  id: SpiderCocoon
+  name: кокон
+  description: описание
+  components:
+  - type: Icon
+    sprite: Structures/Storage/Crates/generic.rsi
+    state: icon
+  - type: Sprite
+    sprite: Structures/Storage/Crates/generic.rsi
+    layers:
+      - state: icon
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      cocoon: !type:Container
+  - type: Tag
+    tags:
+      - SpiderCocoon
+  - type: SpiderCocoon
+    container: cocoon

@@ -18,10 +18,10 @@ public sealed partial class SpiderQueenComponent : Component
     /// Maximum amount of mana
     /// </summary>
     [DataField]
-    public FixedPoint2 MaxMana = 200f;
+    public FixedPoint2 MaxMana = FixedPoint2.Zero;
 
     [DataField]
-    public bool ShouldShowMana = true;
+    public bool ShouldShowMana = false;
 
     /// <summary>
     /// How much mana will be generated in a second
@@ -37,4 +37,10 @@ public sealed partial class SpiderQueenComponent : Component
     /// </summary>
     [DataField]
     public List<EntProtoId>? Actions;
+
+    /// <summary>
+    /// Id of the cocoon prototype
+    /// </summary>
+    [DataField]
+    public EntProtoId CocoonProto = "SpiderCocoon";
 }

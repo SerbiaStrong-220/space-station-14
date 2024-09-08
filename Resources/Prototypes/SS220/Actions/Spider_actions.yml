@@ -231,3 +231,17 @@
         amount: 1
       offset: 0, 1
       speech: action-speech-spell-spider
+
+#Cocooning
+- type: entity
+  id: ActionSpiderCoconning
+  name: окукливание
+  description: Покрывает цель паутиной
+  noSpawn: true
+  components:
+  - type: EntityTargetAction
+    event: !type:SpiderCocooningActionEvent
+      cocooningTime: 5
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_jneceat }
+    useDelay: 10

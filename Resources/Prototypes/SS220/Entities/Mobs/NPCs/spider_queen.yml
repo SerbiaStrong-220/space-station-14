@@ -160,6 +160,8 @@
     - ThermalVisionImplant
   - type: SpiderQueen
     currentMana: 50
+    maxMana: 200
+    shouldShowMana: true
     passiveGeneration: 0.5
     actions:
     - ActionSpawnSpiderEggDrone
@@ -170,6 +172,7 @@
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebDurable
     - ActionSpawnSpiderWallWebDurable
+    - ActionSpiderCoconning
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider

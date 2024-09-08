@@ -1,7 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Actions;
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Storage;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using System.Numerics;
 
 namespace Content.Shared.SS220.SpiderQueen;
@@ -26,4 +29,15 @@ public sealed partial class SpiderWorldSpawnEvent : WorldTargetActionEvent
     /// </summary>
     [DataField]
     public FixedPoint2 Cost = FixedPoint2.Zero;
+}
+
+public sealed partial class SpiderCocooningActionEvent : EntityTargetActionEvent
+{
+    [DataField]
+    public TimeSpan CocooningTime = TimeSpan.Zero;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class AfterCocooningEvent : SimpleDoAfterEvent
+{
 }

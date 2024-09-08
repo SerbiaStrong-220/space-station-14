@@ -2,10 +2,13 @@
 using Content.Server.Popups;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
+using Robust.Server.GameObjects;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
@@ -16,12 +19,17 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SpiderWorldSpawnEvent>(OnWorldSpawn);
+
+        SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
     }
 
     private void OnWorldSpawn(SpiderWorldSpawnEvent args)
@@ -54,5 +62,26 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             targetMapCords = targetMapCords.Offset(args.Offset);
         }
         args.Handled = true;
+    }
+
+    private void OnAfterCocooning(Entity<SpiderQueenComponent> entity, ref AfterCocooningEvent args)
+    {
+        if (args.Cancelled || args.Target is not EntityUid target)
+            return;
+
+        if (!TryComp<TransformComponent>(target, out var transform) || !_mobState.IsDead(target))
+            return;
+
+        var targetCords = _transform.GetMoverCoordinates(target, transform);
+        var cocoonUid = Spawn(entity.Comp.CocoonProto, targetCords.SnapToGrid(EntityManager, _mapManager));
+
+        if (!TryComp<SpiderCocoonComponent>(cocoonUid, out var spiderCocoon) ||
+            !_container.TryGetContainer(cocoonUid, spiderCocoon.CocoonContainerId, out var container))
+        {
+            Log.Error($"{cocoonUid} doesn't have required components to cocooning target");
+            return;
+        }
+
+        _container.Insert(target, container);
     }
 }
