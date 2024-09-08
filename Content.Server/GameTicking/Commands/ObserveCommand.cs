@@ -42,6 +42,11 @@ namespace Content.Server.GameTicking.Commands
                 status != PlayerGameStatus.JoinedGame)
             {
                 ticker.JoinAsObserver(player);
+
+                // SS220 aghost on observe-as-admin begin
+                if (isAdminCommand && _adminManager.IsAdmin(player))
+                    shell.ExecuteCommand("aghost");
+                // SS220 aghost on observe-as-admin end
             }
             else
             {
