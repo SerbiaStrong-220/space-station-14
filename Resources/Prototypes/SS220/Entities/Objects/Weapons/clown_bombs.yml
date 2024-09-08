@@ -44,7 +44,7 @@
   description: It's going to be an amazing show!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Bombs/clown.rsi
+    sprite: Objects/Weapons/Bombs/c4gift.rsi
     state: icon
   - type: ClusterGrenade
     fillPrototype: GrenadeFlashBang
