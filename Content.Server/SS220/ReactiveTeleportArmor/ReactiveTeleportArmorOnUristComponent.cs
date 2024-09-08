@@ -25,7 +25,7 @@ public sealed partial class ReactiveTeleportArmorOnUristComponent : Component
     public FixedPoint2 WakeThreshold = FixedPoint2.New(4);
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float TeleportChance = .1f;
+    public float TeleportChance = .9f;
 
     [ViewVariables, AutoNetworkedField]
     public EntityUid ArmorUid;
