@@ -66,3 +66,26 @@
   - type: GunRequiresWield
   - type: UseDelay
     delay: 0.5
+
+- type: entity
+  id: CrossbowKingClown
+  name: sweet revenge crossbow
+  parent: BaseBow
+  description: Revenge can sting to the core.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Crossbow/crossbow_clown.rsi
+    state: icon
+  - type: Item
+    size: Huge
+  - type: ItemSlots
+    slots:
+      projectiles:
+        name: Projectiles
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/Misc/arrow_nock.ogg
+        whitelist:
+          tags:
+          - Arrow
+          - Plunger
+  - type: Appearance

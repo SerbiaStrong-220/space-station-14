@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHandsGlovesColorWhite
+  id: ClothingHandsGlovesClownKing
+  name: the king's hands
+  suffix: Unremoveable
+  description: The power is in these hands.
+  components:
+  - type: Insulated 
+  - type: Unremoveable
+    lockToHands: false

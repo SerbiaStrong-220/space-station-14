@@ -1,0 +1,23 @@
+- type: entity
+  parent: ClothingBeltQuiver
+  id: ClothingBeltQuiverKingClown
+  name: honkovsky quiver for arrows
+  description: Honk Dad's best friend.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,15,7
+    whitelist:
+      tags:
+      - Arrow
+      - Plunger
+      - GlassShard
+      - ReinforcedGlassShard
+      - PlasmaGlassShard
+      - UraniumGlassShard
+      - ClockworkGlassShard
+      - Crowbar
+  - type: StorageFill
+    contents:
+      - id: ArrowClown
+        amount: 64

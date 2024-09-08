@@ -14,6 +14,8 @@ uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }
 #JobItems
 uplink-mime-relic-name = { ent-SacredRelicMime }
 uplink-mime-relic-desc = Ценная реликвия Ордена Тишины, Вашего ордена. Зажав в руке, позволяет мимам поставить сразу три невидимые стены, закрывающие широкий проход, раз в 90 секунд.
+uplink-king-clown-name = { ent-CrateNoFunToyBox }
+uplink-king-clown-desc = Ящик, содержащий в себе наследие короля Хонк Государя из Хонк-Государства.
 
 # Pointless
 uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
