@@ -1,13 +1,13 @@
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
   id: ClothingOuterReactiveArmor
-  name: "name1"
-  description: "Desc2."
+  name: "name1" # да-да, сделаю
+  description: "Desc2." # да............ точно сделаю, кстати всем ревьюевирам дарова
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Armor/ReactiveArmor #спрайтеры будут ныть
+    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi #спрайтеры будут ныть как бляди если это будут спрайты с 13
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Armor/ReactiveArmor #спрайтеры будут ныть
+    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi #инфа по борщу не БУДЕТ
   - type: Armor
     modifiers:
       coefficients:
@@ -22,13 +22,14 @@
     action: ActionToggleReactiveArmor
   - type: GroupExamine
   - type: ReactiveTeleportArmor
-  - type: Explosive # Powerful explosion in a very small radius. Doesn't break underplating.
+  - type: Explosive 
     explosionType: Default
-    maxIntensity: 5
-    totalIntensity: 2
-    intensitySlope: 2
+    maxIntensity: 2
+    totalIntensity: 1.5
+    intensitySlope: 1
     canCreateVacuum: false
     deleteAfterExplosion: false
+    repeatable: true
 
 
 - type: entity

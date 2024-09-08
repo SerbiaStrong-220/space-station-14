@@ -1,4 +1,3 @@
-
 using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Pulling.Systems;
@@ -17,7 +16,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
-
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.ReactiveTeleportArmor
 {
@@ -36,7 +35,6 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
         private EntityQuery<PhysicsComponent> _physicsQuery;
         private HashSet<Entity<MapGridComponent>> _targetGrids = [];
-
         public override void Initialize()
         {
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -50,9 +48,9 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
         private void OnEquip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotEquippedEvent args)
         {
-           EnsureComp<ReactiveTeleportArmorOnUristComponent>(args.Wearer, out var comp);
+            EnsureComp<ReactiveTeleportArmorOnUristComponent>(args.Wearer, out var comp);
 
-           comp.ArmorUid = ent;
+            comp.ArmorUid = ent;
         }
         private void OnUnequip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotUnequippedEvent args)
         {
@@ -65,23 +63,20 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             _clothing.SetEquippedPrefix(ent, prefix);
         }
 
-
         private void OnReactiveTeleportArmor(Entity<ReactiveTeleportArmorOnUristComponent> ent, ref DamageChangedEvent args)
         {
-
-
             if (!TryComp<ReactiveTeleportArmorOnUristComponent>(ent, out var armor))
                 return;
 
             var xform = Transform(ent.Owner);
             var targetCoords = SelectRandomTileInRange(xform, armor.TeleportRadius);
 
-
             if (!args.DamageIncreased || args.DamageDelta == null)
                 return;
-            ///teleport entity if taken damage && !null && armor is on && cooldown
-            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null && _toggle.IsActivated(ent.Comp.ArmorUid))
+            ///teleport entity if taken damage && coord = !null && armor is on && !cooldown
+            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null && _toggle.IsActivated(ent.Comp.ArmorUid) && !ent.Comp.OnCoolDown)
             {
+                ent.Comp.OnCoolDown = true;
 
                 // We need stop the user from being pulled so they don't just get "attached" with whoever is pulling them.
                 // This can for example happen when the user is cuffed and being pulled.
@@ -95,13 +90,13 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
                         _xform.SetCoordinates(ent.Owner, targetCoords.Value);
                         _audio.PlayPvs(armor.TeleportSound, ent.Owner);
                         SelectRandomTileInRange(xform, armor.TeleportRadius);
-
                         break;
                     case false:
-                        _explosion.TriggerExplosive(ent.Comp.ArmorUid); 
-                        break;
 
+                        _explosion.TriggerExplosive(ent.Comp.ArmorUid);
+                        break;
                 }
+                Timer.Spawn(ent.Comp.CoolDownTime, () => ent.Comp.OnCoolDown = false);
             }
         }
 
@@ -183,8 +178,5 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             return targetCoords;
 
         }
-
     }
-
-
 }

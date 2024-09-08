@@ -252,6 +252,7 @@
       - id: ClothingHeadsetAltScience
       - id: EncryptionKeyBinary
       - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: ClothingOuterReactiveArmor # SS220       
 
 - type: entity
   id: LockerResearchDirectorFilled
@@ -272,6 +273,7 @@
       - id: ClothingHeadsetAltScience
       - id: EncryptionKeyBinary
       - id: ClothingWristWatchGold # SS220 Wrist Watch
+      - id: ClothingOuterReactiveArmor # SS220      
 
 - type: entity
   id: LockerHeadOfSecurityFilledHardsuit

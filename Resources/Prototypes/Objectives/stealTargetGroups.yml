@@ -27,6 +27,14 @@
   sprite:
     sprite: Objects/Devices/hand_teleporter.rsi
     state: icon
+# SS220 - ReactiveArmor-start
+- type: stealTargetGroup
+  id: ClothingOuterHardsuitRd
+  name: экспериментальная реактивная броня 
+  sprite:
+    sprite: Clothing/OuterClothing/Hardsuits/rd.rsi #да-да
+    state: icon
+# SS220 - ReactiveArmor-end        
 
 - type: stealTargetGroup
   id: BookSecretDocuments

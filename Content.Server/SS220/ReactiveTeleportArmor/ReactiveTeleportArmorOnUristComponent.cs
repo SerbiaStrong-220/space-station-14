@@ -1,8 +1,5 @@
 using Robust.Shared.Audio;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
-using Robust.Shared.GameObjects;
-using Content.Server.Explosion.Components;
 
 namespace Content.Server.SS220.ReactiveTeleportArmor;
 
@@ -34,13 +31,10 @@ public sealed partial class ReactiveTeleportArmorOnUristComponent : Component
     public EntityUid ArmorUid;
 
     [DataField]
-    public int IntervalSeconds = 60;
-}
+    public bool OnCoolDown = false;
 
-
-public sealed partial class OnReactiveTeleportArmorEvent : Component
-{
-
+    [DataField]
+    public TimeSpan CoolDownTime = TimeSpan.FromSeconds(5);
 }
 
 
