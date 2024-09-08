@@ -119,6 +119,13 @@ namespace Content.Server.Atmos.EntitySystems
             if (args.Handled)
                 return;
 
+            //ss220 mag boots internals fix start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1759)
+            if (args.Action != gasTank.Comp.ToggleActionEntity)
+            {
+                return;
+            }
+            //ss220 mag boots internals fix end
+
             ToggleInternals(gasTank);
             args.Handled = true;
         }
