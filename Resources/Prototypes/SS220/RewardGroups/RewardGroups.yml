@@ -62,6 +62,7 @@
     SponsorBoxGoldClown: 3
   # Вторая итерация
     ClothingHeadVipCrocks: 1
+    ClothingSponsor1984: 1
 
 - type: ShlepaRewardGroup
   id: CriticalMassShlopa

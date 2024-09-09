@@ -44,6 +44,7 @@
   name: loadout-group-iaa-outerclothing
   loadouts:
   - OuterClothingJujutsuShlepa
+  - Outer1984
 
 - type: loadoutGroup
   id: IAAGlasses
@@ -61,6 +62,14 @@
   loadouts:
     - IAABackpackLeather
   # Агент Внутренних Дел (Конец)
+
+  # Адвокат (Начало)
+- type: loadoutGroup
+  id: LawyerOuterclothing
+  name: loadout-group-lawyer-outerclothing
+  loadouts:
+  - OuterClothingJujutsuShlepa
+  # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
 - type: loadoutGroup

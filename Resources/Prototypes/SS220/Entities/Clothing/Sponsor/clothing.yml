@@ -509,3 +509,16 @@
     sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamitie.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamitie.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsor1984
+  name: куртка "1984"
+  description: Большой брат следит за тобой.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/1984.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/1984.rsi
+  - type: TemperatureProtection
+    coefficient: 0.1
