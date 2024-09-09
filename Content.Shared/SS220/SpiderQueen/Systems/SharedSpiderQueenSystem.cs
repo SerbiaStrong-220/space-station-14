@@ -26,7 +26,6 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpiderQueenComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
     }
@@ -51,24 +50,9 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         }
     }
 
-    private void OnStartup(Entity<SpiderQueenComponent> ent, ref ComponentStartup args)
-    {
-        var (uid, component) = ent;
-        if (component.Actions != null)
-        {
-            foreach (var action in component.Actions)
-            {
-                if (string.IsNullOrWhiteSpace(action))
-                    continue;
-
-                _actions.AddAction(uid, action);
-            }
-        }
-    }
-
     private void OnExamine(Entity<SpiderQueenComponent> entity, ref ExaminedEvent args)
     {
-        if (args.Examined == args.Examiner && entity.Comp.ShouldShowMana)
+        if (args.Examined == args.Examiner)
         {
             args.PushMarkup(Loc.GetString("spider-queen-mana-amount",
                 ("current", entity.Comp.CurrentMana.Int()), ("max", entity.Comp.MaxMana.Int())));

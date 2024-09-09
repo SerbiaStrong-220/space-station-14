@@ -161,8 +161,8 @@
   - type: SpiderQueen
     currentMana: 50
     maxMana: 200
-    shouldShowMana: true
     passiveGeneration: 0.5
+  - type: ActionGrant
     actions:
     - ActionSpawnSpiderEggDrone
     - ActionSpawnSpiderEggHunter
@@ -253,11 +253,11 @@
       types:
         Piercing: 5 #Damage
         Structural: 10
-  - type: AutoImplant
-    implants:
-    - LightImplantSpiderWallWebDurable
-    - LightImplantSpiderCrystal
-    - LightImplantSingleSpiderWebShortDelay
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSpiderWallWebDurable
+    - ActionSpawnSpiderCrystal
+    - ActionSpawnSingleSpiderWebShortDelay
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -316,9 +316,9 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebLongDelay
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSingleSpiderWebLongDelay
 
 - type: entity
   parent:
@@ -394,9 +394,9 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 1.5
     baseSprintSpeed : 3.9
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebLongDelay
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSingleSpiderWebLongDelay
 
 - type: entity
   parent:
@@ -465,13 +465,12 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebClown
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSingleSpiderWebClown
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.7
-
 - type: entity
   parent:
   - BaseMobSpiderQueen

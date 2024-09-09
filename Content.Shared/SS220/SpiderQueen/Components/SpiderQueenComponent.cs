@@ -20,9 +20,6 @@ public sealed partial class SpiderQueenComponent : Component
     [DataField]
     public FixedPoint2 MaxMana = FixedPoint2.Zero;
 
-    [DataField]
-    public bool ShouldShowMana = false;
-
     /// <summary>
     /// How much mana will be generated in a second
     /// </summary>
@@ -31,12 +28,6 @@ public sealed partial class SpiderQueenComponent : Component
 
     [ViewVariables]
     public TimeSpan NextSecond = TimeSpan.Zero;
-
-    /// <summary>
-    /// List of actions
-    /// </summary>
-    [DataField]
-    public List<EntProtoId>? Actions;
 
     /// <summary>
     /// Id of the cocoon prototype
