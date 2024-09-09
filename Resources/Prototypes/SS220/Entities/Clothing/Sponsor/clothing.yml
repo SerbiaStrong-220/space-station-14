@@ -522,3 +522,25 @@
     sprite: SS220/Clothing/Sponsor/1984.rsi
   - type: TemperatureProtection
     coefficient: 0.1
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorSamuraiJacket
+  name: самурайская куртка
+  description: Дешёвый эпатаж, консюмеризм и бунт против серости.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/vbomberjacket.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/vbomberjacket.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - state: equipped-OUTERCLOTHING-unshaded
+        shader: unshaded
+  - type: TemperatureProtection
+    coefficient: 0.1

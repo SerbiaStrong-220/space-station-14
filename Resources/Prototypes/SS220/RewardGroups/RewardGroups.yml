@@ -52,6 +52,7 @@
   # Вторая итерация
     ClothingHeadHatDevilHorns: 1
     SponsorBoxJujutsuShlepa: 4
+    ClothingSponsorSamuraiJacket: 1
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa
