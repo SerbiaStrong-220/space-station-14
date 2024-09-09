@@ -44,7 +44,7 @@ public abstract partial class SharedSponsorTierRequirementLoadoutEffect : Loadou
 
         foreach (var (_, group) in rewardGroups)
         {
-            if (group.RequiredRole == null || (SponsorTier)group.RequiredRole != Requirement)
+            if (group.RequiredRole == null || group.RequiredRole != Requirement)
                 continue;
 
             tierName = group.Name;

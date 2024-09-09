@@ -118,11 +118,11 @@ public sealed partial class ShlepovendWindow : FancyWindow
             var isAvailable = false;
             foreach (var tier in _sponsorTiers)
             {
-                if (groupProto.RequiredRole is not SponsorTier)
+                if (groupProto.RequiredRole == null)
                     continue;
 
-                isAvailable = groupProto.IsExactRoleRequired ? tier == (SponsorTier)groupProto.RequiredRole :
-                    (int)tier >= (int)(SponsorTier)groupProto.RequiredRole;
+                isAvailable = groupProto.IsExactRoleRequired ? tier == groupProto.RequiredRole :
+                    (int)tier >= (int)groupProto.RequiredRole;
 
                 if (isAvailable)
                     break;

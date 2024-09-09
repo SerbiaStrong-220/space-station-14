@@ -17,7 +17,7 @@ public sealed class ShlepaRewardGroupPrototype : IPrototype
     public Dictionary<EntProtoId, int> Rewards = new();
 
     [ViewVariables(VVAccess.ReadOnly), DataField]
-    public Enum? RequiredRole = null;
+    public SponsorTier? RequiredRole = null;
 
     [ViewVariables(VVAccess.ReadOnly), DataField]
     public string Name = "";
