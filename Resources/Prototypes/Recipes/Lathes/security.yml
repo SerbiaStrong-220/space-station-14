@@ -283,6 +283,15 @@
   materials:
     Steel: 240
 
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazineBoxMagnumRubber
+  result: MagazineBoxMagnumRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 350
+    Plastic: 300 #SS220-fix Magazine Pistol Rubber Lathe end
+
 - type: latheRecipe
   id: MagazineRifleEmpty
   result: MagazineRifleEmpty
@@ -299,6 +308,14 @@
   materials:
     Steel: 475
 
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazineRifleRubber
+  result: MagazineRifleRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 175
+    Plastic: 300 #SS220-fix Magazine Pistol Rubber Lathe end
 
 - type: latheRecipe
   id: MagazineRiflePractice
@@ -343,6 +360,15 @@
   materials:
     Steel: 565
 
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazineLightRifleRubber
+  result: MagazineLightRifleRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 175
+    Plastic: 300 #SS220-fix Magazine Pistol Rubber Lathe end
+
 - type: latheRecipe
   id: MagazineLightRiflePractice
   result: MagazineLightRiflePractice
@@ -379,6 +405,15 @@
   materials:
     Steel: 750
 
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazineBoxRifleRubber
+  result: MagazineBoxRifleRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 350
+    Plastic: 600 #SS220-fix Magazine Pistol Rubber Lathe end
+
 - type: latheRecipe
   id: MagazineBoxLightRifle
   result: MagazineBoxLightRifle
@@ -386,6 +421,15 @@
   completetime: 5
   materials:
     Steel: 900
+
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazineBoxLightRifleRubber
+  result: MagazineBoxLightRifleRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 350
+    Plastic: 600 #SS220-fix Magazine Pistol Rubber Lathe end
 
 - type: latheRecipe
   id: BoxLethalshot
@@ -420,6 +464,15 @@
   completetime: 5
   materials:
     Steel: 50
+
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: SpeedLoaderMagnumRubber
+  result: SpeedLoaderMagnumRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 175
+    Plastic: 150 #SS220-fix Magazine Pistol Rubber Lathe end
 
 - type: latheRecipe
   id: SpeedLoaderMagnum
@@ -556,6 +609,15 @@
   completetime: 5
   materials:
     Steel: 300
+
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazineBoxPistolRubber
+  result: MagazineBoxPistolRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 350
+    Plastic: 300 #SS220-fix Magazine Pistol Rubber Lathe end
 
 - type: latheRecipe
   id: MagazineBoxMagnumPractice
