@@ -2,12 +2,10 @@
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.SpiderQueen.Components;
-using Content.Shared.Storage.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -109,13 +107,5 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
 
             return;
         }
-    }
-
-    /// <summary>
-    /// Checks if there is enough mana for some action
-    /// </summary>
-    public bool CheckEnoughMana(EntityUid uid, SpiderQueenComponent component, FixedPoint2 cost)
-    {
-        return component.CurrentMana >= cost;
     }
 }

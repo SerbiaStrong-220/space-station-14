@@ -3,7 +3,6 @@ using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Storage;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Numerics;
 

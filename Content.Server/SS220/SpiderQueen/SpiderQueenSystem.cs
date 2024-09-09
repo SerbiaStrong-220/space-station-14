@@ -44,7 +44,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 component is null)
                 return;
 
-            if (!CheckEnoughMana(performer, component, args.Cost))
+            if (component.CurrentMana < args.Cost)
             {
                 _popup.PopupEntity(Loc.GetString("spider-queen-not-enough-mana"), performer, performer);
                 return;
