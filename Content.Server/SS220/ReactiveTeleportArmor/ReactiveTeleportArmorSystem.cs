@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Pulling.Systems;
@@ -40,7 +42,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
             base.Initialize();
-            SubscribeLocalEvent<ReactiveTeleportArmorOnUristComponent, DamageChangedEvent>(OnReactiveTeleportArmor);
+            SubscribeLocalEvent<TeleportOnDamageComponent, DamageChangedEvent>(TeleporWhenDamaged);
             SubscribeLocalEvent<ReactiveTeleportArmorComponent, ClothingGotEquippedEvent>(OnEquip);
             SubscribeLocalEvent<ReactiveTeleportArmorComponent, ClothingGotUnequippedEvent>(OnUnequip);
             SubscribeLocalEvent<ReactiveTeleportArmorComponent, ItemToggledEvent>(ToggleDone);
@@ -48,13 +50,13 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
         private void OnEquip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotEquippedEvent args)
         {
-            EnsureComp<ReactiveTeleportArmorOnUristComponent>(args.Wearer, out var comp);
+            EnsureComp<TeleportOnDamageComponent>(args.Wearer, out var comp);
 
-            comp.ArmorUid = ent;
+            comp.SavedUid = ent;
         }
         private void OnUnequip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotUnequippedEvent args)
         {
-            RemComp<ReactiveTeleportArmorOnUristComponent>(args.Wearer);
+            RemComp<TeleportOnDamageComponent>(args.Wearer);
         }
         private void ToggleDone(Entity<ReactiveTeleportArmorComponent> ent, ref ItemToggledEvent args)
         {
@@ -63,9 +65,9 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             _clothing.SetEquippedPrefix(ent, prefix);
         }
 
-        private void OnReactiveTeleportArmor(Entity<ReactiveTeleportArmorOnUristComponent> ent, ref DamageChangedEvent args)
+        private void TeleporWhenDamaged(Entity<TeleportOnDamageComponent> ent, ref DamageChangedEvent args)
         {
-            if (!TryComp<ReactiveTeleportArmorOnUristComponent>(ent, out var armor))
+            if (!TryComp<TeleportOnDamageComponent>(ent, out var armor))
                 return;
 
             var xform = Transform(ent.Owner);
@@ -74,7 +76,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             if (!args.DamageIncreased || args.DamageDelta == null)
                 return;
             ///teleport entity if taken damage && coord = !null && armor is on && !cooldown
-            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null && _toggle.IsActivated(ent.Comp.ArmorUid) && !ent.Comp.OnCoolDown)
+            if (args.DamageDelta.GetTotal() >= ent.Comp.WakeThreshold && targetCoords != null && _toggle.IsActivated(ent.Comp.SavedUid) && !ent.Comp.OnCoolDown)
             {
                 ent.Comp.OnCoolDown = true;
 
@@ -93,7 +95,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
                         break;
                     case false:
 
-                        _explosion.TriggerExplosive(ent.Comp.ArmorUid);
+                        _explosion.TriggerExplosive(ent.Comp.SavedUid);
                         break;
                 }
                 Timer.Spawn(ent.Comp.CoolDownTime, () => ent.Comp.OnCoolDown = false);

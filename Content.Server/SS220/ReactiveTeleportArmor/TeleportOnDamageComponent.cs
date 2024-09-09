@@ -4,10 +4,10 @@ using Content.Shared.FixedPoint;
 namespace Content.Server.SS220.ReactiveTeleportArmor;
 
 /// <summary>
-/// Randomly teleports entity when triggered.
+/// Randomly teleports entity when damaged.
 /// </summary>
 [RegisterComponent]
-public sealed partial class ReactiveTeleportArmorOnUristComponent : Component
+public sealed partial class TeleportOnDamageComponent : Component
 {
     /// <summary>
     /// Up to how far to teleport the user
@@ -28,9 +28,8 @@ public sealed partial class ReactiveTeleportArmorOnUristComponent : Component
     public float TeleportChance = .9f;
 
     [ViewVariables, AutoNetworkedField]
-    public EntityUid ArmorUid;
+    public EntityUid SavedUid;
 
-    [DataField]
     public bool OnCoolDown = false;
 
     [DataField]
