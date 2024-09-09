@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Content.Server.SS220.ReactiveTeleportArmor
 {
     /// <summary>
-    /// Intermediate component to work with ReactiveTeleportArmorOnUristComponent
+    /// Intermediate component to work with TeleportOnDamageComponent
     /// </summary>
 
     [RegisterComponent]
