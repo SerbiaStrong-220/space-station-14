@@ -290,6 +290,7 @@
   materials:
     Steel: 475
 
+
 - type: latheRecipe
   id: MagazineRiflePractice
   result: MagazineRiflePractice
