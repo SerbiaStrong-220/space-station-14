@@ -767,6 +767,7 @@
       - MagazineLightRifleEmpty
       - MagazinePistol
       - MagazinePistolEmpty
+      - MagazinePistolRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazinePistolSubMachineGun
       - MagazinePistolSubMachineGunEmpty
       - MagazinePistolSubMachineGunTopMounted

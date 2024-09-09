@@ -199,6 +199,15 @@
   materials:
     Steel: 145
 
+- type: latheRecipe #SS220-fix Magazine Pistol Rubber Lathe start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+  id: MagazinePistolRubber
+  result: MagazinePistolRubber
+  category: Ammo
+  completetime: 5
+  materials:
+    Steel: 145
+    Plastic: 145 #SS220-fix Magazine Pistol Rubber Lathe end
+
 - type: latheRecipe
   id: MagazinePistolPractice
   result: MagazinePistolPractice
