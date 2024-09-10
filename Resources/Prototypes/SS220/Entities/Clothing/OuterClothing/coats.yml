@@ -84,6 +84,17 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
 
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPPurpleDress
+  name: purple dress
+  description: The robe of a real smug snake.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+
 # Cargo
 - type: entity
   parent: ClothingOuterStorageBase

@@ -1,0 +1,27 @@
+#play-time-loadout
+- type: loadoutEffectGroup
+  id: HoPPurpleDress
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobHeadOfPersonnel
+      time: 100000
+
+# Head
+- type: loadout
+  id: HoPSilverHeadBand
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HoPPurpleDress
+  equipment:
+    head: ClothingHeadHoPSilverHeadBand
+
+# Outer clothing
+- type: loadout
+  id: HoPPurpleDress
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HoPPurpleDress
+  equipment:
+    outerClothing: ClothingOuterCoatHoPPurpleDress

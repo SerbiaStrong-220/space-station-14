@@ -40,6 +40,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
 
+  # Глава Персонала
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHoPSilverHeadBand
+  name: silver headband and earrings
+  description: They are as bright as your future.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
+
 # CentCom
 
   # Берет
@@ -255,4 +267,3 @@
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
