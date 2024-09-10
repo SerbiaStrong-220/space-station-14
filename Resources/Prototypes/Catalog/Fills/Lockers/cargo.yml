@@ -1,3 +1,27 @@
+- type: entityTable
+  id: FillSalvageSpecialistHardsuitSpatio
+  table: !type:AllSelector
+    children:
+    - id: OxygenTankFilled
+    - id: ClothingShoesBootsMag
+    - id: ClothingOuterHardsuitSpatio
+    - id: ClothingMaskGasExplorer
+
+- type: entityTable
+  id: LockerFillSalvageSpecialist
+  table: !type:AllSelector
+    children:
+    - id: ClothingBeltUtilityFilled
+    - id: SurvivalKnife
+    - id: HandheldGPSBasic
+    - id: RadioHandheld
+    - id: AppraisalTool
+    - id: FireExtinguisher
+    - id: Flare
+      prob: 0.3
+      rolls: !type:ConstantNumberSelector
+        value: 3
+
 - type: entity
   id: LockerSalvageSpecialistFilledHardsuit
   suffix: Filled, Hardsuit

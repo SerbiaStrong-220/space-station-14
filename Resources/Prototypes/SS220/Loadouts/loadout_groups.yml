@@ -80,6 +80,15 @@
   minLimit: 0
   loadouts:
   - MaskTacSec
+
+- type: loadoutGroup
+  id: DetectiveSecBackpack
+  name: loadout-group-security-backpack
+  loadouts:
+    - SecurityBackpack
+    - SecuritySatchel
+    - SecurityDuffel
+    - DetectiveNoirSatchel
   # Офицер СБ (Конец)
 
   # Инструктор СБ (Начало)

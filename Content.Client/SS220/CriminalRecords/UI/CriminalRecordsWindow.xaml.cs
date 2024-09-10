@@ -261,7 +261,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
             _prototype.TryIndex(entry.RecordType, out statusProto))
             {
                 if (statusProto.StatusIcon != null &&
-                _prototype.TryIndex<StatusIconPrototype>(statusProto.StatusIcon, out var statusIconProto))
+                _prototype.TryIndex(statusProto.StatusIcon, out var statusIconProto))
                 {
                     iconTexture = _sprite.Frame0(statusIconProto.Icon);
                 }

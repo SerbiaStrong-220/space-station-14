@@ -7,6 +7,7 @@
     mode: SnapgridCenter
   components:
   - type: FoVOverlay # SS220 perspective-wall-fov
+  - type: StationAiWhitelist
   - type: InteractionOutline
   - type: Sprite
     sprite: Structures/Doors/Airlocks/highsec/highsec.rsi
@@ -81,6 +82,8 @@
     alwaysRandomize: true
   - type: UserInterface
     interfaces:
+      enum.AiUi.Key:
+        type: StationAiBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Airtight

@@ -13,6 +13,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic
       - label: hidden-desc-ThermalVisorImplanter-research
         jobRequired:
           - ResearchAssistant

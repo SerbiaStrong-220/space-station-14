@@ -139,8 +139,6 @@
       - AirTank
       - GasAnalyzer
       - UtilityBelt
-      - Fulton
-      - FultonBeacon
       - Pickaxe
       - ModularReceiver
       - AppraisalTool
@@ -329,6 +327,8 @@
       - PowerCellHigh
       - WeaponPistolCHIMP
       - ClothingMaskWeldingGas
+      - MineralScannerEmpty
+      - AdvancedMineralScannerEmpty
       - WeaponGauntletGorilla
       - SynthesizerInstrument
       - ClothingShoesBootsMagSci
@@ -342,7 +342,6 @@
       - WeaponLaserSvalinn
       - WeaponProtoKineticAccelerator
       - WeaponTetherGun
-      - WeaponGrapplingGun
       - ClothingBackpackHolding
       - ClothingBackpackSatchelHolding
       - ClothingBackpackDuffelHolding
@@ -463,6 +462,7 @@
     - SodaDispenserMachineCircuitboard
     - SpaceHeaterMachineCircuitBoard
     - CutterMachineCircuitboard
+    - StationAnchorCircuitboard
     dynamicRecipes:
       - ThermomachineFreezerMachineCircuitBoard
       - HellfireFreezerMachineCircuitBoard
@@ -757,28 +757,36 @@
       - Handcuffs
       - MagazineBoxLightRifle
       - MagazineBoxLightRiflePractice
+      - MagazineBoxLightRifleRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazineBoxMagnum
       - MagazineBoxMagnumPractice
+      - MagazineBoxMagnumRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazineBoxPistol
       - MagazineBoxPistolPractice
+      - MagazineBoxPistolRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazineBoxRifle
       - MagazineBoxRiflePractice
+      - MagazineBoxRifleRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazineLightRifle
       - MagazineLightRifleEmpty
+      - MagazineLightRifleRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazinePistol
       - MagazinePistolEmpty
+      - MagazinePistolRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazinePistolSubMachineGun
       - MagazinePistolSubMachineGunEmpty
       - MagazinePistolSubMachineGunTopMounted
       - MagazinePistolSubMachineGunTopMountedEmpty
       - MagazineRifle
       - MagazineRifleEmpty
+      - MagazineRifleRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazineShotgun
       - MagazineShotgunEmpty
       - MagazineShotgunSlug
       - RiotShield
       - SpeedLoaderMagnum
       - SpeedLoaderMagnumEmpty
+      - SpeedLoaderMagnumRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - Stunbaton
       - TargetClown
       - TargetHuman

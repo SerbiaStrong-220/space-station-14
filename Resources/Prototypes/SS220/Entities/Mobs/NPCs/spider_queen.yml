@@ -2,22 +2,25 @@
 - type: entity
   parent:
   - MobAtmosStandard
-  - MobSpaceBasic
-  - MobSpiderGhostRole
+  - SimpleMobBase
+  - MobCombat
   id: BaseMobSpiderQueen
   abstract: true
   name: Probca
   description: spider dance
   components:
+  - type: NpcFactionMember
+    factions:
+    - SpiderQueen
   - type: Insulated
   - type: CombatMode
   - type: InputMover
   - type: MobMover
   - type: HTN
-  - type: Sprite 
+  - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
-    scale: 1.3, 1.3  
+    scale: 1.3, 1.3
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: midwife-moving
@@ -80,12 +83,12 @@
     damageCap: 300
     damage:
       types:
-        Heat: -4.5
+        Heat: -2.5
       groups:
-        Brute: -4.5
-        Toxin: -7
-        Airloss: -4.5
-        Burn: -4.5
+        Brute: -3
+        Toxin: -5
+        Airloss: -2.5
+        Burn: -2.5
   - type: Tag
     tags:
       - CannotSuicide
@@ -131,8 +134,8 @@
     radius: 0
     energy: 0
     color: "#ff4242"
-    castShadows: false     
-  - type: IntrinsicRadioReceiver    
+    castShadows: false
+  - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
     - HiveRadio
@@ -140,22 +143,11 @@
     channels:
     - HiveRadio
 
-- type: entity
-  name: Ghost role
-  id: MobSpiderGhostRole
-  noSpawn: true
-  components:
-  - type: GhostRole #Ghost role
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: spider-roy-name
-    description: spider-roy-desc
-  - type: GhostTakeoverAvailable #Ghost role
-
 #Spider queen
 - type: entity
-  parent: BaseMobSpiderQueen
+  parent:
+  - BaseMobSpiderQueen
+  - MobSpiderQueenGhostRole
   id: MobSpiderSpaceQueen
   name: Spider queen
   description: spider dance
@@ -170,6 +162,7 @@
     - LightImplantSpiderLittle
     - LightImplantSingleSpiderWebDurable
     - LightImplantSpiderEggShooter
+    - ThermalVisionImplant
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider
@@ -178,7 +171,7 @@
       amount: 7
   - type: Spider
     webPrototype: SpiderWebDespawned
-  - type: RechargeBasicEntityAmmo 
+  - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider
     proto: PoisonousAcid
@@ -197,14 +190,16 @@
         reagents:
         - ReagentId: ChloralHydrate #Iad
           Quantity: 60
-  - type: MovementSpeedModifier 
+  - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4
-  - type: LizardAccent    
+  - type: LizardAccent
 
 #Spiders-servants
 - type: entity
-  parent: BaseMobSpiderQueen
+  parent:
+  - MobSpiderDroneGhostRole
+  - BaseMobSpiderQueen
   id: MobSpiderSpaceDrone
   name: spider guard
   description: spider dance
@@ -212,7 +207,7 @@
   - type: Sprite #Спрайт
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
-    scale: 1, 1 
+    scale: 1, 1
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: guard-moving
@@ -232,12 +227,12 @@
     damageCap: 85
     damage:
       types:
-        Heat: -4
+        Heat: -3
       groups:
-        Brute: -4
-        Toxin: -6
-        Airloss: -4
-        Burn: -4
+        Brute: -2
+        Toxin: -5
+        Airloss: -2
+        Burn: -2
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -250,22 +245,24 @@
         Structural: 10
   - type: AutoImplant
     implants:
-    - LightImplantSpiderWallWeb
+    - LightImplantSpiderWallWebDurable
     - LightImplantSpiderCrystal
     - LightImplantSingleSpiderWebShortDelay
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
-    baseSprintSpeed : 3.9 
+    baseSprintSpeed : 3.9
 
 - type: entity
-  parent: BaseMobSpiderQueen
+  parent:
+  - MobSpiderHunterGhostRole
+  - BaseMobSpiderQueen
   id: MobSpiderSpaceHunter
   name: spider hunt
   description: spider dance
   components:
-  - type: Sprite 
+  - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
     scale: 1, 1
@@ -282,19 +279,19 @@
         Base: hunter-moving
       Dead:
         Base: hunter_dead
-  - type: PassiveDamage 
+  - type: PassiveDamage
     allowedStates:
     - Alive
     damageCap: 110
     damage:
       types:
-        Heat: -3
+        Heat: -2.5
       groups:
         Brute: -3
-        Toxin: -6
-        Airloss: -3
-        Burn: -3
-  - type: MeleeWeapon 
+        Toxin: -5
+        Airloss: -2
+        Burn: -1
+  - type: MeleeWeapon
     hidden: true
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -302,7 +299,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 15 
+        Piercing: 15
         Structural: 15
   - type: Spider
     webPrototype: SpiderWebDespawned
@@ -314,12 +311,14 @@
     - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
-  parent: BaseMobSpiderQueen
+  parent:
+  - MobSpiderGhostGhostRole
+  - BaseMobSpiderQueen
   id: MobSpiderSpaceGhost
   name: spider ghost
   description: spider dance
   components:
-  - type: Sprite 
+  - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
     scale: 1, 1
@@ -336,19 +335,19 @@
         Base: nurse-moving
       Dead:
         Base: nurse_dead
-  - type: PassiveDamage 
+  - type: PassiveDamage
     allowedStates:
     - Alive
     damageCap: 100
     damage:
       types:
-        Heat: -3
+        Heat: -2
       groups:
         Brute: -3
-        Toxin: -8
-        Airloss: -3
-        Burn: -3
-  - type: MeleeWeapon 
+        Toxin: -5
+        Airloss: -2
+        Burn: -1
+  - type: MeleeWeapon
     hidden: true
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -356,20 +355,20 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 3 
+        Piercing: 3
         Poison: 4
         Structural: 10
-  - type: SolutionContainerManager 
+  - type: SolutionContainerManager
     solutions:
       melee:
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 20
-  - type: Stealth 
+  - type: Stealth
   - type: StealthOnMove
     passiveVisibilityRate: -0.37
     movementVisibilityRate: 0.35
-  - type: RechargeBasicEntityAmmo 
+  - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider
     proto: PoisonousAcid
@@ -381,7 +380,7 @@
     selectedMode: FullAuto
     availableModes:
       - FullAuto
-    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg  
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
   - type: MovementSpeedModifier
     baseWalkSpeed : 1.5
     baseSprintSpeed : 3.9
@@ -390,12 +389,14 @@
     - LightImplantSingleSpiderWebLongDelay
 
 - type: entity
-  parent: BaseMobSpiderQueen
+  parent:
+  - MobSpiderShooterGhostRole
+  - BaseMobSpiderQueen
   id: MobSpiderSpaceShooter
   name: spider shooter
   description: spider dance
   components:
-  - type: Sprite 
+  - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
     scale: 1, 1
@@ -412,19 +413,19 @@
         Base: viper-moving
       Dead:
         Base: viper_dead
-  - type: PassiveDamage 
+  - type: PassiveDamage
     allowedStates:
     - Alive
     damageCap: 80
     damage:
       types:
-        Heat: -1.5
+        Heat: -3
       groups:
-        Brute: -2.5
+        Brute: -1
         Toxin: -5
-        Airloss: -2.5
-        Burn: -2.5
-  - type: MeleeWeapon 
+        Airloss: -2
+        Burn: -2
+  - type: MeleeWeapon
     hidden: true
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -434,14 +435,14 @@
       types:
         Poison: 5
         Piercing: 2
-        Structural: 5 
-  - type: SolutionContainerManager 
+        Structural: 5
+  - type: SolutionContainerManager
     solutions:
       melee:
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 35
-  - type: RechargeBasicEntityAmmo 
+  - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider
     proto: PoisonousAcid
@@ -453,7 +454,7 @@
     selectedMode: FullAuto
     availableModes:
       - FullAuto
-    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg  
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
   - type: AutoImplant
     implants:
     - LightImplantSingleSpiderWebClown
@@ -462,12 +463,14 @@
     baseSprintSpeed : 3.7
 
 - type: entity
-  parent: BaseMobSpiderQueen
+  parent:
+  - BaseMobSpiderQueen
+  - MobSpiderLittleGhostRole
   id: MobSpiderSpaceLittle
   name: small spider
   description: spider dance
   components:
-  - type: Sprite 
+  - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
     scale: 0.4, 0.4
@@ -483,8 +486,8 @@
       Alive:
         Base: viper-moving
       Dead:
-        Base: viper_dead 
-  - type: PassiveDamage 
+        Base: viper_dead
+  - type: PassiveDamage
     allowedStates:
     - Alive
     damageCap: 15
@@ -496,7 +499,7 @@
         Toxin: -0.5
         Airloss: -0.5
         Burn: -0.5
-  - type: MeleeWeapon 
+  - type: MeleeWeapon
     hidden: true
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -505,8 +508,118 @@
     damage:
       types:
         Piercing: 5
-  - type: TimedDespawn 
+  - type: TimedDespawn
     lifetime: 20
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4.5
+
+# GHOST ROLES
+
+- type: entity
+  name: Ghost role
+  id: MobSpiderQueenGhostRole
+  noSpawn: true
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: spider-royQueen-name
+    description: spider-royQueen-desc
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 216000 # 60h
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable #Ghost role
+
+- type: entity
+  name: Ghost role
+  id: MobSpiderDroneGhostRole
+  noSpawn: true
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: spider-royDrone-name
+    description: spider-royDrone-desc
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 18000 # 5h
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable #Ghost role
+
+- type: entity
+  name: Ghost role
+  id: MobSpiderHunterGhostRole
+  noSpawn: true
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: spider-royHunter-name
+    description: spider-royHunter-desc
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 18000 # 5h
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable #Ghost role
+
+- type: entity
+  name: Ghost role
+  id: MobSpiderGhostGhostRole
+  noSpawn: true
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: spider-royGhost-name
+    description: spider-royGhost-desc
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 18000 # 5h
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable #Ghost role
+
+- type: entity
+  name: Ghost role
+  id: MobSpiderShooterGhostRole
+  noSpawn: true
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: spider-royShooter-name
+    description: spider-royShooter-desc
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 3600 # 5h
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable #Ghost role
+
+- type: entity
+  name: Ghost role
+  id: MobSpiderLittleGhostRole
+  noSpawn: true
+  components:
+  - type: GhostRole #Ghost role
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: spider-royLittle-name
+    description: spider-royLittle-desc
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 3600 # 1h
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable #Ghost role

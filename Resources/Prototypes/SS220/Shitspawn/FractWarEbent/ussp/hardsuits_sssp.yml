@@ -20,7 +20,7 @@
   parent: ClothingOuterHardsuitBaseCE
   id: ClothingOuterHardsuitUSSPCE
   name: тяжёлый боевой скафандр Заслуженного Инженера СССП
-  description: Отечественный инженерный скафандр - это настоящий металлургический чудо-труд. Классический советский дизайн, в котором каждая ручка, каждый шов и каждая кнопочка задуманы для максимального удобства и эффективности. 
+  description: Отечественный инженерный скафандр - это настоящий металлургический чудо-труд. Классический советский дизайн, в котором каждая ручка, каждый шов и каждая кнопочка задуманы для максимального удобства и эффективности.
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
@@ -42,7 +42,6 @@
     sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_cmo.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_cmo.rsi
-  - type: TemperatureProtection
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitUSSPCMO
 

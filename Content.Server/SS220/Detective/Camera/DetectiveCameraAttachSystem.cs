@@ -2,6 +2,7 @@
 
 using Content.Server.Construction.Components;
 using Content.Server.Popups;
+using Content.Server.SurveillanceCamera;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
@@ -19,14 +20,24 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
 
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SurveillanceCameraSystem _camera = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<DetectiveCameraAttachComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraDetachDoAfterEvent>(OnDetachDoAfter);
+    }
+
+    private void OnComponentStartup(Entity<DetectiveCameraAttachComponent> entity, ref ComponentStartup args)
+    {
+        if (!TryComp<SurveillanceCameraComponent>(entity, out var camera))
+            return;
+
+        _camera.SetActive(entity, false, camera);
     }
 
     private void OnAfterInteract(Entity<DetectiveCameraAttachComponent> entity, ref AfterInteractEvent args)
@@ -51,6 +62,11 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
         if (HasComp<AttachedCameraComponent>(args.AttachTarget))
             return;
 
+        if (!TryComp<SurveillanceCameraComponent>(uid, out var cameraComponent))
+            return;
+
+        _camera.SetActive(uid, true, cameraComponent);
+
         AddCameraItemSlotsComponent(args.AttachTarget, args.User, component.CellSlotId);
 
         var attachedCameraComp = EnsureComp<AttachedCameraComponent>(args.AttachTarget);
@@ -72,6 +88,11 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
 
         if (!HasComp<AttachedCameraComponent>(args.DetachTarget))
             return;
+
+        if (!TryComp<SurveillanceCameraComponent>(uid, out var cameraComponent))
+            return;
+
+        _camera.SetActive(uid, false, cameraComponent);
 
         RemoveCameraItemSlotsComponent(args.DetachTarget, args.User);
 

@@ -30,7 +30,7 @@
   id: SurvivalRule
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 30
 #SS220 survival minimum players end
 
 - type: entity
@@ -292,6 +292,11 @@
         tableId: BasicAntagEventsTable
       - !type:NestedSelector
         tableId: CargoGiftsTable
+      - !type:NestedSelector
+        tableId: CalmPestEventsTable
+      - !type:NestedSelector
+        tableId: SpicyPestEventsTable
+        
 
 # SS220-NoUnknownShuttles begin
 # - type: entityTable

@@ -1,18 +1,21 @@
 action-speech-spell-spider = Кссс...!??
 
 
-ent-ActionSpawnSpiderEggDrone = Яйцо охранного паука
+ent-ActionSpawnSpiderEggDrone = Яйцо паука рыцаря
     .desc = Он же трутень, может строить кристаллы и стены.
 
-ent-ActionSpawnSpiderEggHunter = Яйцо паука охотника
+ent-ActionSpawnSpiderEggHunter = Яйцо паучьего охотника
+    .desc = Создает яйцо паучьего охотника. Главный добытчик пищи. Во имя королевы!
 
-ent-ActionSpawnSpiderEggGhost = Яйцо паука призрака
+ent-ActionSpawnSpiderEggGhost = Яйцо паучьего призрака
+    .desc = Создает яйцо паучьего призрака. Ваш невидимый слуга. Уничтожит всех ваших врагов скрытым способом.
 
-ent-ActionSpawnSpiderEggShooter = Яйцо паука стрелка
+ent-ActionSpawnSpiderEggShooter = Яйцо паучьего стрелка
+    .desc = Создает яйцо паучьего стрелка Дальнобойные враги не проблема. Стрелок сможет защитить вас от них.
 
 
 ent-ActionSpawnSpiderLittle  = Выпустить паучат
-    .desc = Выпускает трёх маленьких пауков, которые атакуют вашу добычу. Пауки исчезают через 20 секунд.
+    .desc = Выпускает трёх маленьких паучков, которые атакуют вашу добычу. Пауки исчезают через 20 секунд.
 
 
 ent-ActionSpawnSpiderCrystal = Создать осколок кристалла
@@ -20,8 +23,10 @@ ent-ActionSpawnSpiderCrystal = Создать осколок кристалла
 
 
 ent-ActionSpawnSpiderWallWeb = Создать стену
+    .desc = Наматывает огромную стену из паутины.
 
 ent-ActionSpawnSpiderWallWebDurable = Создать прочную стену
+    .desc = Создаёт прочную стену из... Паутины?!?!?
 
 
 ent-ActionSpawnSingleSpiderWebShortDelay = Пустить паутину

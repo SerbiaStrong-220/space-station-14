@@ -116,7 +116,7 @@ public sealed partial class RecordListEntry : PanelContainer
             var color = GetJobColor(record.JobPrototype);
             JobLabel.SetMarkup($"[color={color}]{jobProto.LocalizedName}[/color]");
 
-            var iconProto = _prototype.Index<StatusIconPrototype>(jobProto.Icon);
+            var iconProto = _prototype.Index(jobProto.Icon);
             JobIcon.Texture = _sprite.Frame0(iconProto.Icon);
         }
 

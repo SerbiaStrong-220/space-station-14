@@ -72,7 +72,8 @@
   abstract: true
   components:
   - type: TemperatureProtection
-    coefficient: 0.001
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 10000

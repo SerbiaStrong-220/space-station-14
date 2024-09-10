@@ -58,7 +58,7 @@ public sealed partial class RecordDetails : Control
             jobTitle = jobPrototype.LocalizedName;
             jobColor = GetJobColor(record.JobPrototype);
 
-            var iconPrototype = _prototype.Index<StatusIconPrototype>(jobPrototype.Icon);
+            var iconPrototype = _prototype.Index(jobPrototype.Icon);
             JobIcon.Texture = _sprite.Frame0(iconPrototype.Icon);
         }
 
@@ -115,7 +115,7 @@ public sealed partial class RecordDetails : Control
                 CriminalStatusIcon.Visible = recordType.StatusIcon.HasValue;
                 if (recordType.StatusIcon.HasValue)
                 {
-                    var iconProto = _prototype.Index<StatusIconPrototype>(recordType.StatusIcon);
+                    var iconProto = _prototype.Index(recordType.StatusIcon.Value);
                     CriminalStatusIcon.Texture = _sprite.Frame0(iconProto.Icon);
                 }
             }

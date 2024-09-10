@@ -1,0 +1,4 @@
+- type: deviceFrequency
+  id: SurveillanceBodyCameraSecurity
+  name: device-frequency-prototype-name-surveillance-body-camera-security
+  frequency: 1940

@@ -857,6 +857,12 @@ namespace Content.Client.Lobby.UI
             {
                 var departmentName = Loc.GetString($"department-{department.ID}");
 
+                //ss220 lobby zero fix start
+                if (department.Roles.Count == 0)
+                {
+                    return;
+                }
+                //ss220 lobby zero fix end
                 if (!_jobCategories.TryGetValue(department.ID, out var category))
                 {
                     category = new BoxContainer

@@ -114,7 +114,7 @@
         range: 4, 7
     - id: SpaceCash1000
     # - id: WristwatchGold
-    - id: ClothingWristWatchGold # SS220 Wristwatch
+    - id: ClothingWristWatch # SS220 Wristwatch
     - !type:NestedSelector
       tableId: RingTableCommon
 
@@ -198,10 +198,12 @@
     - id: PowerCellHighPrinted
     - id: RadioHandheld
     - id: ClothingBeltUtility
+    - id: Floodlight
     - id: WeaponProtoKineticAccelerator
       weight: 0.5
     - id: OxygenTankFilled
     - id: WelderIndustrial
+    - id: WeaponGrapplingGun
     - !type:GroupSelector
       children:
       - id: ClothingHeadHatWelding
@@ -227,6 +229,8 @@
     - id: ClothingEyesGlassesMeson
     - id: ClothingBeltSalvageWebbing
     - id: SeismicCharge
+    - id: MineralScanner
+      weight: 0.5
     - id: WeaponCrusher
       weight: 0.5
     - !type:GroupSelector
@@ -238,6 +242,7 @@
   id: SalvageEquipmentLegendary
   table: !type:GroupSelector
     children:
+    - id: AdvancedMineralScanner
     - id: BlueprintFulton
     - id: BlueprintSeismicCharge
     - id: WeaponCrusherGlaive

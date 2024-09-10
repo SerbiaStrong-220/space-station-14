@@ -63,6 +63,9 @@
     solution: food
     delay: 7
     forceFeedDelay: 7
+  - type: FlavorProfile
+    flavors:
+    - paper
   - type: BadFood
   - type: SolutionContainerManager
     solutions:
@@ -693,3 +696,8 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # SS220 EnvelopeCraft begin
+  - type: Construction
+    graph: envelope
+    node: envelope
+  # SS220 EnvelopeCraft end

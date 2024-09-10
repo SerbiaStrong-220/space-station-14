@@ -176,11 +176,12 @@
     inHandsFillBaseName: -fill-
 
 - type: entity
-  name: cryoxadone beaker
-  description: Filled with a reagent used in cryogenic tubes.
+  suffix: cryoxadone
   parent: Beaker
   id: CryoxadoneBeakerSmall
   components:
+  - type: Label
+    currentLabel: reagent-name-cryoxadone
   - type: SolutionContainerManager
     solutions:
       beaker:
@@ -518,6 +519,9 @@
     tags:
       - PillCanister
   - type: Storage
+    whitelist: # SS220 PillCanister fix beginning
+      components:
+        - Pill # SS220 PillCanister fix end
     grid:
     - 0,0,4,1
     quickInsert: true

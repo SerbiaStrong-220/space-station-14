@@ -3,7 +3,7 @@
   icon:
     sprite: Mobs/Animals/bee.rsi
     state: 0
-  product: CrateNPCBee
+  product: CrateNPCBeeLocked #ss220-locked-update
   cost: 7000
   category: cargoproduct-category-name-livestock
   group: market
@@ -13,7 +13,7 @@
   icon:
     sprite: Mobs/Animals/butterfly.rsi
     state: butterfly
-  product: CrateNPCButterflies
+  product: CrateNPCButterfliesLocked #ss220-locked-update
   cost: 4400
   category: cargoproduct-category-name-livestock
   group: market
@@ -23,7 +23,7 @@
   icon:
     sprite: Mobs/Pets/cat.rsi
     state: cat
-  product: CrateNPCCat
+  product: CrateNPCCatLocked #ss220-locked-update
   cost: 1200
   category: cargoproduct-category-name-livestock
   group: market
@@ -33,7 +33,7 @@
   icon:
     sprite: Mobs/Animals/chicken.rsi
     state: icon-1
-  product: CrateNPCChicken
+  product: CrateNPCChickenLocked #ss220-locked-update
   cost: 4000
   category: cargoproduct-category-name-livestock
   group: market
@@ -43,7 +43,7 @@
   icon:
     sprite: Mobs/Animals/crab.rsi
     state: crab
-  product: CrateNPCCrab
+  product: CrateNPCCrabLocked #ss220-locked-update
   cost: 3000
   category: cargoproduct-category-name-livestock
   group: market
@@ -53,7 +53,7 @@
   icon:
     sprite: Mobs/Animals/duck.rsi
     state: icon-0
-  product: CrateNPCDuck
+  product: CrateNPCDuckLocked #ss220-locked-update
   cost: 4000
   category: cargoproduct-category-name-livestock
   group: market
@@ -63,17 +63,17 @@
   icon:
     sprite: Mobs/Pets/corgi.rsi
     state: corgi
-  product: CrateNPCCorgi
+  product: CrateNPCCorgiLocked #ss220-locked-update
   cost: 1200
   category: cargoproduct-category-name-livestock
   group: market
 
 - type: cargoProduct
-  id: LivestockPupCorgi
+  id: LivestockPupCorgiLocked #ss220-locked-update
   icon:
     sprite: Mobs/Pets/corgi.rsi
     state: puppy
-  product: CrateNPCPuppyCorgi
+  product: CrateNPCPuppyCorgiLocked #ss220-locked-update
   cost: 1200
   category: cargoproduct-category-name-livestock
   group: market
@@ -83,7 +83,7 @@
   icon:
     sprite: Mobs/Animals/cow.rsi
     state: cow
-  product: CrateNPCCow
+  product: CrateNPCCowLocked #ss220-locked-update
   cost: 3200
   category: cargoproduct-category-name-livestock
   group: market
@@ -93,7 +93,7 @@
   icon:
     sprite: Mobs/Animals/goat.rsi
     state: goat
-  product: CrateNPCGoat
+  product: CrateNPCGoatLocked #ss220-locked-update
   cost: 1200
   category: cargoproduct-category-name-livestock
   group: market
@@ -103,7 +103,7 @@
   icon:
     sprite: Mobs/Animals/goose.rsi
     state: goose
-  product: CrateNPCGoose
+  product: CrateNPCGooseLocked #ss220-locked-update
   cost: 2100
   category: cargoproduct-category-name-livestock
   group: market
@@ -113,7 +113,7 @@
   icon:
     sprite: Mobs/Animals/gorilla.rsi
     state: icon
-  product: CrateNPCGorilla
+  product: CrateNPCGorillaLocked #ss220-locked-update
   cost: 1100
   category: cargoproduct-category-name-livestock
   group: market
@@ -143,7 +143,7 @@
   icon:
     sprite: Mobs/Animals/mouse.rsi
     state: icon-0
-  product: CrateNPCMouse
+  product: CrateNPCMouseLocked #ss220-locked-update
   cost: 4400
   category: cargoproduct-category-name-livestock
   group: market
@@ -153,7 +153,7 @@
   icon:
     sprite: Mobs/Animals/parrot.rsi
     state: parrot
-  product: CrateNPCParrot
+  product: CrateNPCParrotLocked #ss220-locked-update
   cost: 3000
   category: cargoproduct-category-name-livestock
   group: market
@@ -163,7 +163,7 @@
   icon:
     sprite: Mobs/Animals/penguin.rsi
     state: penguin
-  product: CrateNPCPenguin
+  product: CrateNPCPenguinLocked #ss220-locked-update
   cost: 2100
   category: cargoproduct-category-name-livestock
   group: market
@@ -173,7 +173,7 @@
   icon:
     sprite: Mobs/Animals/pig.rsi
     state: pig
-  product: CrateNPCPig
+  product: CrateNPCPigLocked #ss220-locked-update
   cost: 1100
   category: cargoproduct-category-name-livestock
   group: market
@@ -183,7 +183,7 @@
   icon:
     sprite: Mobs/Animals/snake.rsi
     state: snake
-  product: CrateNPCSnake
+  product: CrateNPCSnakeLocked #ss220-locked-update
   cost: 3000
   category: cargoproduct-category-name-livestock
   group: market
@@ -193,7 +193,7 @@
   icon:
     sprite: Mobs/Animals/hamster.rsi
     state: icon-0
-  product: CrateNPCHamster
+  product: CrateNPCHamsterLocked #ss220-locked-update
   cost: 2800
   category: cargoproduct-category-name-livestock
   group: market
@@ -203,7 +203,7 @@
   icon:
     sprite: Mobs/Animals/lizard.rsi
     state: lizard
-  product: CrateNPCLizard
+  product: CrateNPCLizardLocked #ss220-locked-update
   cost: 1100
   category: cargoproduct-category-name-livestock
   group: market
@@ -213,7 +213,7 @@
   icon:
     sprite: Mobs/Animals/kangaroo.rsi
     state: kangaroo
-  product: CrateNPCKangaroo
+  product: CrateNPCKangarooLocked #ss220-locked-update
   cost: 2800
   category: cargoproduct-category-name-livestock
   group: market
@@ -223,7 +223,7 @@
   icon:
     sprite: Mobs/Animals/mothroach/mothroach.rsi
     state: mothroach
-  product: CrateNPCMothroach
+  product: CrateNPCMothroachLocked #ss220-locked-update
   cost: 5000
   category: cargoproduct-category-name-livestock
   group: market

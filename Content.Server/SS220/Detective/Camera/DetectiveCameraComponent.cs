@@ -11,6 +11,9 @@ public sealed partial class DetectiveCameraComponent : Component
     [DataField("enabled"), ViewVariables(VVAccess.ReadWrite)]
     public bool Enabled;
 
+    [DataField("activateCameraOnEnable"), ViewVariables(VVAccess.ReadWrite)]
+    public bool ActivateCameraOnEnable;
+
     [DataField("powerOnSound"), ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier PowerOnSound = new SoundPathSpecifier("/Audio/Items/Defib/defib_success.ogg");
 

@@ -8,3 +8,24 @@
     sprite: SS220/Clothing/Eyes/centcom_glasses.rsi
   - type: Clothing
     sprite: SS220/Clothing/Eyes/centcom_glasses.rsi
+
+- type: entity
+  parent: ClothingEyesGlassesCheapSunglasses
+  id: ClothingEyesQuartermasterGlasses
+  name: очки квартирмейстера
+  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника. 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/qmglasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/qmglasses.rsi
+  - type: ShowSupplyPrice
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Tag
+    tags:
+    - Sunglasses
+    - HamsterWearable
+    - WhitelistChameleon
+    - SecDogWearable
