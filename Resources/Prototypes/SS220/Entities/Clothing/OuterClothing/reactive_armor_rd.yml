@@ -1,8 +1,8 @@
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
   id: ClothingOuterReactiveArmor
-  name: "name1" # да-да, сделаю
-  description: "Desc2." # да............ точно сделаю, кстати всем ревьюевирам дарова
+  name: "name1" # да-да, сделаю #.ftl
+  description: "Desc2." # да............ точно сделаю, кстати всем ревьюевирам дарова #.ftl
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi #спрайтеры будут ныть как бляди если это будут спрайты с 13
@@ -34,8 +34,8 @@
 
 - type: entity
   id: ActionToggleReactiveArmor
-  name: Переключение реактивной брони
-  description: Включает или выключает реактивную броню.
+  name: Переключение реактивной брони #.ftl
+  description: Включает или выключает реактивную броню. #.ftl
   components:
   - type: InstantAction
     itemIconStyle: BigItem
