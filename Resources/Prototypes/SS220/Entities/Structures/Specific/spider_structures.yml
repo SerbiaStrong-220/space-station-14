@@ -227,3 +227,4 @@
       - SpiderCocoon
   - type: SpiderCocoon
     container: cocoon
+    manaGenerationBonus: 1

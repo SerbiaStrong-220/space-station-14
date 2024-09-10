@@ -32,6 +32,9 @@ public sealed partial class SpiderWorldSpawnEvent : WorldTargetActionEvent
 
 public sealed partial class SpiderCocooningActionEvent : EntityTargetActionEvent
 {
+    /// <summary>
+    /// The time it takes to create a cocoon on the target
+    /// </summary>
     [DataField]
     public TimeSpan CocooningTime = TimeSpan.Zero;
 }

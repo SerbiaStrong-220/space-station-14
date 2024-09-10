@@ -162,6 +162,7 @@
     currentMana: 50
     maxMana: 200
     passiveGeneration: 0.5
+    cocoonsBonusCoefficient: 0.9
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderEggDrone

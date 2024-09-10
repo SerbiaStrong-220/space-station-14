@@ -40,7 +40,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
 
             comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
 
-            var newValue = comp.CurrentMana + comp.PassiveGeneration;
+            var newValue = comp.CurrentMana + comp.PassiveGeneration + comp.CocoonsManaBonus;
             comp.CurrentMana = newValue > comp.MaxMana
                 ? comp.MaxMana
                 : newValue;

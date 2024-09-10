@@ -27,9 +27,10 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpiderWorldSpawnEvent>(OnWorldSpawn);
-
         SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
+        SubscribeLocalEvent<SpiderCocoonComponent, ComponentShutdown>(OnShutdown);
+
+        SubscribeLocalEvent<SpiderWorldSpawnEvent>(OnWorldSpawn);
     }
 
     private void OnWorldSpawn(SpiderWorldSpawnEvent args)
@@ -83,5 +84,46 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         }
 
         _container.Insert(target, container);
+        entity.Comp.CocoonsList.Add(cocoonUid);
+        Dirty(entity.Owner, entity.Comp);
+
+        spiderCocoon.CocoonOwner = entity.Owner;
+        Dirty(cocoonUid, spiderCocoon);
+
+        UpdateCocoonsBonus(entity.Owner);
+    }
+
+    private void OnShutdown(Entity<SpiderCocoonComponent> entity, ref ComponentShutdown args)
+    {
+        var (uid, comp) = entity;
+        if (comp.CocoonOwner is null ||
+            !TryComp<SpiderQueenComponent>(comp.CocoonOwner, out var queenComponent))
+            return;
+
+        queenComponent.CocoonsList.Remove(uid);
+        UpdateCocoonsBonus(comp.CocoonOwner.Value);
+    }
+
+    /// <summary>
+    /// Updates the bonus that cocoons give
+    /// </summary>
+    private void UpdateCocoonsBonus(EntityUid spider, SpiderQueenComponent? component = null)
+    {
+        if (!Resolve(spider, ref component))
+            return;
+
+        var newBonus = FixedPoint2.Zero;
+        var i = 0;
+        foreach (var cocoon in component.CocoonsList)
+        {
+            if (!TryComp<SpiderCocoonComponent>(cocoon, out var spiderCocoon))
+                continue;
+
+            newBonus += spiderCocoon.ManaGenerationBonus * Math.Pow(component.CocoonsBonusCoefficient.Double(), i);
+            i++;
+        }
+
+        component.CocoonsManaBonus = newBonus;
+        Dirty(spider, component);
     }
 }
