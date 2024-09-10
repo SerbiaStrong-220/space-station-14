@@ -53,6 +53,7 @@
     ClothingHeadHatDevilHorns: 1
     SponsorBoxJujutsuShlepa: 4
     ClothingSponsorSamuraiJacket: 1
+    ClothingSponsorNeckSS220: 1
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa

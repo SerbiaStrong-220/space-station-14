@@ -544,3 +544,15 @@
         shader: unshaded
   - type: TemperatureProtection
     coefficient: 0.1
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckSS220
+  name: плащ SS220
+  description: Проклятье SS220!
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/ss220.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/ss220.rsi
