@@ -508,6 +508,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
         RaiseLocalEvent(target.Value, attackedEvent);
 
+        //ss220 extended weapon logic start
+        var weaponAttackEvent = new WeaponAttackEvent(user, target.Value);
+        RaiseLocalEvent(meleeUid, weaponAttackEvent);
+        //ss220 extended weapon logic end
+
         // SS220 hook attack event start
         if (attackedEvent.Cancelled)
             return;
@@ -657,6 +662,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);
+
+            //ss220 extended weapon logic start
+            var weaponAttackEvent = new WeaponAttackEvent(user, entity);
+            RaiseLocalEvent(meleeUid, weaponAttackEvent);
+            //ss220 extended weapon logic end
 
             // SS220 hook attack event start
             if (attackedEvent.Cancelled)
