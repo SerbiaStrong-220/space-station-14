@@ -1,0 +1,15 @@
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingOuterBioChemistry
+  name: bio suit
+  suffix: Chemistry
+  description: A suit that protects against biological contamination.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Bio/chemistry.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Bio/chemistry.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.5
