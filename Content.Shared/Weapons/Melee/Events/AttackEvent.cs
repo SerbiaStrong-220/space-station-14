@@ -64,6 +64,7 @@ namespace Content.Shared.Weapons.Melee.Events
     /// <summary>
     ///     SS220 Event raised on user for extended melee weapon logic.
     /// </summary>
+    [Serializable, NetSerializable]
     public sealed class WeaponAttackEvent : EntityEventArgs
     {
         /// <summary>

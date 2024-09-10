@@ -42,7 +42,7 @@ public sealed class KnockingWeaponOutOfHandsSystem : EntitySystem
         foreach (var handOrInventoryEntity in _inventory.GetHandOrInventoryEntities(target, SlotFlags.POCKET))
         {
             if (!HasComp<MeleeWeaponComponent>(handOrInventoryEntity)
-                && !HasComp<GunComponent>(handOrInventoryEntity))
+                || !HasComp<GunComponent>(handOrInventoryEntity))
                 continue;
             if (!_random.Prob(entity.Comp.Chance))
                 continue;
