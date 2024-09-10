@@ -509,7 +509,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(target.Value, attackedEvent);
 
         //ss220 extended weapon logic start
-        var weaponAttackEvent = new WeaponAttackEvent(user, target.Value);
+        var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
         //ss220 extended weapon logic end
 
@@ -664,7 +664,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             RaiseLocalEvent(entity, attackedEvent);
 
             //ss220 extended weapon logic start
-            var weaponAttackEvent = new WeaponAttackEvent(user, entity);
+            var weaponAttackEvent = new WeaponAttackEvent(user, entity, AttackType.HEAVY);
             RaiseLocalEvent(meleeUid, weaponAttackEvent);
             //ss220 extended weapon logic end
 

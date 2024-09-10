@@ -24,15 +24,29 @@ public sealed class KnockingWeaponOutOfHandsSystem : EntitySystem
 
     private void OnAttackEvent(Entity<KnockingWeaponOutOfHandsComponent> entity, ref WeaponAttackEvent args)
     {
-        foreach (var handOrInventoryEntity in _inventory.GetHandOrInventoryEntities(args.Target, SlotFlags.POCKET))
+        switch(args.Type)
+        {
+            case AttackType.HEAVY:
+                if(entity.Comp.DropOnHeavyAtack)
+                    DropOnAtack(entity, args.Target);
+                break;
+            case AttackType.LIGHT:
+                if(entity.Comp.DropOnLightAtack)
+                    DropOnAtack(entity, args.Target);
+                break;
+        }
+    }
+
+    private void DropOnAtack(Entity<KnockingWeaponOutOfHandsComponent> entity, EntityUid target)
+    {
+        foreach (var handOrInventoryEntity in _inventory.GetHandOrInventoryEntities(target, SlotFlags.POCKET))
         {
             if (!HasComp<MeleeWeaponComponent>(handOrInventoryEntity)
                 && !HasComp<GunComponent>(handOrInventoryEntity))
                 continue;
             if (!_random.Prob(entity.Comp.Chance))
                 continue;
-            _handsSystem.TryDrop(args.Target, handOrInventoryEntity);
+            _handsSystem.TryDrop(target, handOrInventoryEntity);
         }
-
     }
 }

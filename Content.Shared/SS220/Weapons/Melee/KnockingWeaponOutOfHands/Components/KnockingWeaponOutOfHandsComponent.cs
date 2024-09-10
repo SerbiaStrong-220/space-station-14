@@ -5,6 +5,12 @@ namespace Content.Shared.SS220.Weapons.Melee.KnockingWeaponOutOfHands.Components
 
 public sealed partial class KnockingWeaponOutOfHandsComponent : Component
 {
+    [DataField]
+    public bool DropOnHeavyAtack = true;
+
+    [DataField]
+    public bool DropOnLightAtack = true;
+
     [DataField("chance", required: true)]
     public float Chance;
 }
