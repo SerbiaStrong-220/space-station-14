@@ -37,6 +37,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         SubscribeLocalEvent<SuperMatterObserverReceiverComponent, BoundUIClosedEvent>(OnReceiverBoundUIClosed);
 
         SubscribeNetworkEvent<SuperMatterStateUpdate>(OnCrystalUpdate);
+        SubscribeNetworkEvent<SuperMatterStateDeleted>(OnCrystalDelete);
     }
     public override void FrameUpdate(float frameTime)
     {
@@ -103,7 +104,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             // here dispatches events to sprites of SM itself
             _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _visualReceivers);
             var state = GetVisualState(args);
-            if (_robustRandom.NextDouble() > RandomEventChance)
+            if (_robustRandom.Prob(RandomEventChance))
                 state = SuperMatterVisualState.RandomEvent;
             foreach (var visualReceiver in _visualReceivers)
             {
@@ -132,6 +133,14 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         _observerEntities.Clear();
         _processedReceivers.Clear();
     }
+    private void OnCrystalDelete(SuperMatterStateDeleted args)
+    {
+        var enumerator = EntityManager.EntityQuery<SuperMatterObserverComponent>();
+        foreach (var observerComp in enumerator)
+        {
+            TryDeleteData(args.ID, observerComp);
+        }
+    }
     private void OnReceiverBoundUIOpened(Entity<SuperMatterObserverReceiverComponent> entity, ref BoundUIOpenedEvent args)
     {
         if (!_userInterface.HasUi(entity, args.UiKey))
@@ -151,6 +160,14 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         if (listToAdd.Count == MAX_CACHED_AMOUNT)
             listToAdd.RemoveAt(0);
         listToAdd.Add(value);
+    }
+    private void TryDeleteData(int id, SuperMatterObserverComponent comp)
+    {
+        comp.Integrities.Remove(id);
+        comp.Pressures.Remove(id);
+        comp.Temperatures.Remove(id);
+        comp.Matters.Remove(id);
+        comp.InternalEnergy.Remove(id);
     }
     private bool TrySendToUIState(EntityUid uid, BoundUserInterfaceState state)
     {

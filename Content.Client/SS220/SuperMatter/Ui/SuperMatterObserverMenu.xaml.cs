@@ -135,8 +135,9 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     }
     private float GetIntegrityDamageMap(float matter, float internalEnergy)
     {
-        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(
-                    internalEnergy - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization));
+        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(internalEnergy
+                     - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
+                matter / SuperMatterFunctions.MatterNondimensionalization);
     }
     private void InitGasRatioBars()
     {

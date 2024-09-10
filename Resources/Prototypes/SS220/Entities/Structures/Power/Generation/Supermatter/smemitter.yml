@@ -46,6 +46,10 @@
         Capacitor: 2
         CableHV: 5
         Glass: 2
+    - type: Construction
+      graph: SuperMatterEmitterBoard
+      deconstructionTarget: null
+      node: smEmitter
 
 - type: constructionGraph
   id: SuperMatterEmitterBoard

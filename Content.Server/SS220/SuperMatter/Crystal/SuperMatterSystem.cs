@@ -11,15 +11,19 @@ public sealed partial class SuperMatterSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private const float ZapPerEnergy = 90f;
-    private const float ZapThreshold = 100f;
-    private const float RadiationPerEnergy = 900f;
+    private const float ZapPerEnergy = 55f;
+    private const float ZapThreshold = 70f;
+    private const float RadiationPerEnergy = 70f;
     private const float MaxTimeBetweenArcs = 8f;
     private const float MaxTimeDecreaseBetweenArcs = 4f;
     private const int MaxAmountOfArcs = 7;
     private const float ArcsToTimeDecreaseEfficiency = 0.3f;
-    private const float IntegrityDamageICAnnounceDelay = 8f;
+    private const float IntegrityDamageICAnnounceDelay = 12f;
     private const float IntegrityDamageStationAnnouncementDelay = 4f;
+    private const float InternalEnergyMinValue = 1220f;
+
+    public float InternalEnergyTreshhold { get; private set; }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -70,11 +74,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
                         * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(crystal.Comp, gasMixture) + 1);
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
-        crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
+        if (crystal.Comp.InternalEnergy - releasedEnergyPerFrame > InternalEnergyMinValue)
+            crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
-        _atmosphere.AddHeat(gasMixture, 10f * releasedEnergyPerFrame);
+        _atmosphere.AddHeat(gasMixture, 50f * releasedEnergyPerFrame);
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
 
         // Update Accumulators for Broadcasting to Clients
@@ -147,9 +152,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)
     {
         var pressure = gasMixture.Pressure;
-        var oxygenMoles = decayedMatter * GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState);
-        var plasmaMoles = decayedMatter * (1 - GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState));
-        var heatEnergy = GetChemistryPotential(crystalTemperature, gasMixture.Pressure) * decayedMatter / MatterNondimensionalization;
+        var matter = MathF.Max(decayedMatter, 0f);
+        var oxygenMoles = matter * GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState);
+        var plasmaMoles = matter * (1 - GetOxygenToPlasmaRatio(crystalTemperature, pressure, smState));
+        var heatEnergy = GetChemistryPotential(crystalTemperature, gasMixture.Pressure) * matter / MatterNondimensionalization;
         var releasedGasMixture = new GasMixture(gasMixture.Volume) { Temperature = crystalTemperature };
         releasedGasMixture.SetMoles(Gas.Oxygen, oxygenMoles);
         releasedGasMixture.SetMoles(Gas.Plasma, plasmaMoles);

@@ -29,6 +29,18 @@
         "name": "off"
       },
       {
+        "name": "on"
+      },
+      {
+        "name": "warn"
+      },
+      {
+        "name": "event"
+      },
+      {
+        "name": "shame"
+      },
+      {
         "name": "num_0"
       },
       {
@@ -63,9 +75,6 @@
       },
       {
         "name": "falling"
-      },
-      {
-        "name": "shame"
       }
     ]
   }

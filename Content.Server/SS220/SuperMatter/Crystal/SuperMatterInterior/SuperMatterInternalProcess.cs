@@ -52,7 +52,7 @@ public static class SuperMatterInternalProcess
     {
         var resultEfficiency = ReleaseEnergyConversionEfficiencyFunction(temperature, pressure);
 
-        return MathF.Max(Math.Min(resultEfficiency, 0.03f), 0.0002f);
+        return Math.Clamp(resultEfficiency, 0.0002f, 0.03f);
     }
     public static float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState)
     {

@@ -16,15 +16,24 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Appearance
-  # - type: SuperMatterObserverVisualReceiver
-  #   unActiveState: icon
-  #   onState: icon
-  #   disabledState: !!str off
-  #   dangerState: shame
-  #   delaminateState: broken
+  - type: SuperMatterObserverVisualReceiver
+    unActiveState:
+      shaded: off
+    onState:
+      shaded: off
+      unshaded: on
+    warningState:
+      shaded: off
+      unshaded: warn
+    dangerState:
+      shaded: shame
+      unshaded: warn
+    delaminateState:
+      shaded: shame
+      unshaded: broken
   - type: Sprite
     drawdepth: AboveFovOverlay #SS220 FoV
-    sprite: Structures/Wallmounts/screen.rsi
+    sprite: SS220/Structures/Power/Generation/Supermatter/moth_stat_display.rsi
     state: screen
     noRot: true
   - type: ApcPowerReceiver
@@ -48,7 +57,7 @@
     layers:
     - state: !!str off
       map: ["enum.SuperMatterVisualLayers.Shaded"]
-    - state: icon
+    - state: on
       shader: unshaded
       map: ["enum.SuperMatterVisualLayers.Unshaded"]
 
@@ -69,6 +78,6 @@
     layers:
     - state: !!str off
       map: ["enum.SuperMatterVisualLayers.Shaded"]
-    - state: icon
+    - state: on
       shader: unshaded
       map: ["enum.SuperMatterVisualLayers.Unshaded"]

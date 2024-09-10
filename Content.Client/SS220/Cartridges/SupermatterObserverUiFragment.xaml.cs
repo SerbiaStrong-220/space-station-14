@@ -40,8 +40,9 @@ public sealed partial class SupermatterObserverUiFragment : BoxContainer
 
     private float GetIntegrityDamageMap(float matter, float internalEnergy)
     {
-        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(
-                    internalEnergy - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization));
+        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction( internalEnergy
+                - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
+            matter / SuperMatterFunctions.MatterNondimensionalization);
     }
     public void LoadCrystal()
     {

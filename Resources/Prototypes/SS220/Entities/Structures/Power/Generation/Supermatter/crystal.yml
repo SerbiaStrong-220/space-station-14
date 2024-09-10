@@ -8,6 +8,7 @@
   components:
   - type: Physics
     bodyType: Static
+  - type: Pullable
   - type: Transform
     anchored: true
     noRot: true
@@ -68,7 +69,6 @@
       map: ["enum.SuperMatterVisualLayers.Shaded"]
     - state: field
       shader: unshaded
-      visible: false
       map: ["enum.SuperMatterVisualLayers.Unshaded"]
   - type: Icon
     sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi

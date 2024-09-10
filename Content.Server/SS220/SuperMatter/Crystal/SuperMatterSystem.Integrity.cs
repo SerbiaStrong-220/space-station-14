@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.ComponentModel;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Atmos;
 using Content.Shared.SS220.SuperMatter.Functions;
@@ -21,7 +22,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         var safeInternalEnergy = GetSafeInternalEnergyToMatterValue(matter);
         var delta = internalEnergy - safeInternalEnergy;
-        var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta);
+        var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, matter / MatterNondimensionalization);
         return damageFromDelta;
     }
     public float GetSafeInternalEnergyToMatterValue(float matter)
@@ -44,7 +45,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
     private bool TryImplementIntegrityDamage(SuperMatterComponent smComp)
     {
-        var resultIntegrityDamage = Math.Clamp(smComp.IntegrityDamageAccumulator, -MaxRegenerationPerSecond, MaxDamagePerSecond);
+        var resultIntegrityDamage = Math.Clamp(smComp.IntegrityDamageAccumulator, -MaxRegenerationPerSecond,
+                                            MaxDamagePerSecond * GetIntegrityDamageCoefficient(smComp.Integrity));
         if (smComp.Integrity - resultIntegrityDamage < 0f)
             return false;
         if (smComp.Integrity - resultIntegrityDamage < 100f)
@@ -67,5 +69,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
         return TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
                 (normalizedTemperature - TemperatureDamageFactorSlowerOffset)) / maxFuncValue;
     }
-
+    private float GetIntegrityDamageCoefficient(float integrity)
+    {
+        var coeff = 1f;
+        if (integrity > 50f)
+            return coeff;
+        coeff = 0.25f + 0.75f * integrity / 50f;
+        return coeff;
+    }
 }

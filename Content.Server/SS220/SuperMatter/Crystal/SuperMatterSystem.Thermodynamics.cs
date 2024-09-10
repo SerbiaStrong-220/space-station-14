@@ -30,7 +30,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     public const float MatterNondimensionalization = SuperMatterFunctions.MatterNondimensionalization; // like C mass in Mendeleev table
     public const float CHEMISTRY_POTENTIAL_BASE = 12f; // parrots now, but need to concrete in future
-    private const float MATTER_DECAY_BASE_RATE = 35f; // parrots now, but need to concrete in future
+    private const float MATTER_DECAY_BASE_RATE = 85f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
     private const float SM_HEAT_TRANSFER_RATIO = 0.07f;
 

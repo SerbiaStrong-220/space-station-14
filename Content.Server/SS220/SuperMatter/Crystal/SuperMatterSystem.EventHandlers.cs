@@ -39,6 +39,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         if (args.OtherBody.BodyType == BodyType.Static)
             return;
+        if (HasComp<MetaDataComponent>(args.OtherEntity)
+            && MetaData(args.OtherEntity).EntityPrototype != null
+            && MetaData(args.OtherEntity).EntityPrototype!.ID == entity.Comp.ConsumeResultEntityPrototype)
+            return;
         entity.Comp.Matter += MatterNondimensionalization / 8f;
         if (TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
         {

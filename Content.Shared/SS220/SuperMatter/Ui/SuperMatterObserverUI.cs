@@ -39,3 +39,9 @@ public sealed class SuperMatterStateUpdate(
     public float TotalMoles { get; } = totalMoles;
     public (bool Delaminates, TimeSpan ETOfDelamination) Delaminate { get; } = delaminate;
 }
+
+[Serializable, NetSerializable]
+public sealed class SuperMatterStateDeleted(int id)
+{
+    public int ID = id;
+}

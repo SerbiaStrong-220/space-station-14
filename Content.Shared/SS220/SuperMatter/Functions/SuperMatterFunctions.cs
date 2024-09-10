@@ -88,13 +88,13 @@ public static class SuperMatterFunctions
                (float) MathF.Pow(temperature + ResonanceTeslaEquilibriumTemperatureOffset, 0.7f);
     }
     //region Integrity
-    private const float EnergyToMatterDamageFactorWide = 2000f;
+    private const float EnergyToMatterDamageFactorWide = 3500f;
     private const float EnergyToMatterDamageFactorCoeff = 2f;
     private const float EnergyToMatterDamageFactorOffset = 1f;
-    public static float EnergyToMatterDamageFactorFunction(float delta)
+    public static float EnergyToMatterDamageFactorFunction(float delta, float matter)
     {
         return EnergyToMatterDamageFactorOffset - EnergyToMatterDamageFactorCoeff
-                * MathF.Exp(-1 * MathF.Pow(delta / EnergyToMatterDamageFactorWide, 2));
+                * MathF.Exp(-1 * MathF.Pow(delta / (EnergyToMatterDamageFactorWide * MassWideCoeff(matter)), 2));
     }
 
     private const float SafeInternalEnergyToMatterCoeff = 800f;
@@ -103,6 +103,15 @@ public static class SuperMatterFunctions
     {
         return SafeInternalEnergyToMatterCoeff * MathF.Pow(normalizedMatter, 1.5f)
                             / (normalizedMatter + SafeInternalEnergyToMatterSlowerOffset);
+    }
+
+    private const float MinimalWideCoeff = 0.2f;
+    private const float MaxMassToAchieveMaxWide = 40f;
+    public static float MassWideCoeff(float normalizedMatter)
+    {
+        if (normalizedMatter > MaxMassToAchieveMaxWide)
+            return 1f;
+        return MinimalWideCoeff + (1f - MinimalWideCoeff) * normalizedMatter / MaxMassToAchieveMaxWide;
     }
 }
 public enum SuperMatterPhaseState
