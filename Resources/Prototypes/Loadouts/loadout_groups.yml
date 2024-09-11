@@ -504,6 +504,7 @@
   - ClownJumpskirt #SS220-Clown-reSprite-End
   - JesterAltSuit
   - JumpsuitMuzhik #SS220-Two Floppa Iteration
+  - JumpsuitGold #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -528,6 +529,7 @@
   - ClownShoes
   - JesterShoes
   - ShoesMuzhik #SS220-Two Floppa Iteration
+  - ShoesGold #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: SurvivalClown

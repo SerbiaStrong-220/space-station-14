@@ -437,6 +437,7 @@
   loadouts:
   - MaskClown
   - MaskMuzhik
+  - MaskGold
 
 - type: loadoutGroup
   id: ClownGloves

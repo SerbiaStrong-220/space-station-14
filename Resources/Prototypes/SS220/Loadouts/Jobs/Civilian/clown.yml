@@ -21,6 +21,14 @@
   equipment:
     mask: ClothingSponsorMaskMuzhik
 
+- type: loadout
+  id: MaskGold
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    mask: ClothingSponsorGoldClownMask
+
 # Jumpsuit
 - type: loadout
   id: ClownJumpsuit
@@ -40,6 +48,14 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitMuzhik
 
+- type: loadout
+  id: JumpsuitGold
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingSponsorGoldClownSuit
+
 # Neck
 - type: loadout
   id: CloakMuzhik
@@ -54,7 +70,7 @@
   id: GlovesMuzhik
   effects:
   - !type:GroupLoadoutEffect
-    proto: BigShlopaSponsorTier
+    proto: GoldenShlopaSponsorTier
   equipment:
     gloves: ClothingHandsGlovesMuzhik
 
@@ -63,6 +79,14 @@
   id: ShoesMuzhik
   effects:
   - !type:GroupLoadoutEffect
-    proto: BigShlopaSponsorTier
+    proto: GoldenShlopaSponsorTier
   equipment:
     shoes: ClothingSponsorBootsMuzhik
+
+- type: loadout
+  id: ShoesGold
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    shoes: ClothingSponsorGoldClownShoes
