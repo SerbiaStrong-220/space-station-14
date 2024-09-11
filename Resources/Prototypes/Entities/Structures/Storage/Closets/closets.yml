@@ -46,7 +46,7 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: fire
+    stateBaseClosed: fire #SS220-Closet-Resprite
     stateDoorOpen: wardrobe_open #SS220-Closet-Resprite
     stateDoorClosed: n2_door
 

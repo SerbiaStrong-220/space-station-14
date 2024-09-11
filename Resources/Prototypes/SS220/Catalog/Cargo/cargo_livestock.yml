@@ -1,5 +1,5 @@
 - type: cargoProduct
-  id: LivestockCrocodile
+  id: LivestockCrocodileLocked
   icon:
     sprite: SS220/Mobs/Animals/crocodile.rsi
     state: croc

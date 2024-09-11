@@ -18,17 +18,25 @@
         type: SurveillanceCameraSetupBoundUi
   - type: DeviceNetwork
     deviceNetId: Wired
-    receiveFrequencyId: SurveillanceCameraSecurity
+    receiveFrequencyId: SurveillanceBodyCameraSecurity
     transmitFrequencyId: SurveillanceCamera
   - type: SurveillanceCamera
     setupAvailableNetworks:
-      - SurveillanceCameraSecurity
+      - SurveillanceBodyCameraSecurity
     isOffable: true
     isOffableVisuals: true
   - type: SurveillanceCameraMicrophone
+    blacklist:
+      components:
+        - SurveillanceCamera
+        - SurveillanceCameraMonitor
+        - RadioSpeaker
+        - BodyCameraBase
   - type: ActiveListener
     range: 10
+  - type: StationAiVision
   - type: DetectiveCamera
+  - type: WearableCamera
   - type: Tag
     tags:
     - DetectiveCamera
@@ -41,6 +49,7 @@
     networkSet: true
     id: "Нагрудная камера"
   - type: Clothing
+    sprite: SS220/Objects/Tools/bodycam.rsi
     quickEquip: false
     slots:
     - neck

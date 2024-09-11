@@ -11,7 +11,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: ExplosionResistance
     damageCoefficient: 0.9
   - type: Armor

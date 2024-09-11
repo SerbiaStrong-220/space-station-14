@@ -1,0 +1,12 @@
+- type: entity
+  parent: ClothingHeadHatHoodBioGeneral
+  id: ClothingHeadHatHoodBioChemistry
+  name: bio hood
+  suffix: Chemistry
+  description: An advanced hood for chemistry officers that protects the head and face from biological contaminants.
+  components:
+  - type: IdentityBlocker
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Bio/chemistry.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Bio/chemistry.rsi

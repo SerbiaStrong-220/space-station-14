@@ -1,20 +1,22 @@
 #Used by gamerule
 - type: entity
-  id: SpawnPointGhostSpaceQueen 
-  name: спавнер роли королевы-пауков 
+  id: SpawnPointGhostSpaceQueen
+  name: спавнер роли королевы-пауков
   suffix: паук-королева
   parent: MarkerBase
   components:
   - type: GhostRole
-    name: spider-roy-name
-    description: spider-roy-desc
-    rules: spider-roy-desc
+    name: spider-royQueen-name
+    description: spider-royQueen-desc
+    rules: spider-royQueen-desc
     requirements:
       - !type:DepartmentTimeRequirement
         department: Security
-        time: 600    
+        time: 3600 #h
+      - !type:OverallPlaytimeRequirement
+        time: 18000 # 5h
     raffle:
-      settings: default        
+      settings: default
   - type: GhostRoleMobSpawner
     prototype: MobSpiderSpaceQueen
   - type: Sprite
@@ -22,4 +24,4 @@
     layers:
       - state: green
       - sprite: Mobs/Animals/spider.rsi
-        state: midwife    
+        state: midwife

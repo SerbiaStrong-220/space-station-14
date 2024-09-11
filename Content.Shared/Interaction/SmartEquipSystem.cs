@@ -34,6 +34,7 @@ public sealed class SmartEquipSystem : EntitySystem
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SmartEquipBackpack, InputCmdHandler.FromDelegate(HandleSmartEquipBackpack, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipBelt, InputCmdHandler.FromDelegate(HandleSmartEquipBelt, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipNeck, InputCmdHandler.FromDelegate(HandleSmartEquipNeck, handle: false, outsidePrediction: false)) //#SS220-SmartEquipNeck
             .Register<SmartEquipSystem>();
     }
 
@@ -53,6 +54,13 @@ public sealed class SmartEquipSystem : EntitySystem
     {
         HandleSmartEquip(session, "belt");
     }
+
+//#SS220-SmartEquipNeck begin
+    private void HandleSmartEquipNeck(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "neck");
+    }
+//#SS220-SmartEquipNeck end
 
     private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
     {

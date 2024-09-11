@@ -205,7 +205,7 @@ public sealed class PullingSystem : EntitySystem
 
         if (EntityManager.TryGetComponent(args.BlockingEntity, out PullableComponent? comp))
         {
-            TryStopPull(args.BlockingEntity, comp, uid);
+            TryStopPull(args.BlockingEntity, comp);
         }
     }
 

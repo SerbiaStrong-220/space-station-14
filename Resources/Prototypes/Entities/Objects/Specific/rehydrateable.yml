@@ -15,6 +15,11 @@
           Quantity: 10
   - type: Food
     solution: cube
+  - type: FlavorProfile
+    flavors:
+    - chewy
+    - horrible
+    - compressed-meat
   - type: RefillableSolution
     solution: cube
   - type: Sprite
@@ -166,7 +171,7 @@
       plushie:
         maxVol: 11 # needs room for water
         reagents:
-        - ReagentId: Nutriment
+        - ReagentId: Nutriment #contains nutriment like other dehydrated animals, but isn't edible? Who is grinding dehydrated carp to eat them??
           Quantity: 10
   - type: RefillableSolution
     solution: plushie
@@ -210,7 +215,7 @@
     sound:
       path: /Audio/Effects/bite.ogg
 
-- type: entity
+- type: entity #why is this all redefined down here as a parent of base object instead of just being parented to monkeycube?? TODO: Fix this shit
   parent: BaseItem
   id: SyndicateSponge
   name: monkey cube
@@ -228,6 +233,11 @@
           Quantity: 10
   - type: Food
     solution: cube
+  - type: FlavorProfile
+    flavors:
+    - chewy
+    - horrible
+    - compressed-meat
   - type: RefillableSolution
     solution: cube
   - type: Sprite

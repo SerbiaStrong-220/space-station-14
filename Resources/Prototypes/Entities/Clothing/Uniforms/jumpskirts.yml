@@ -397,13 +397,13 @@
       - state: inhand-left
         color: "#C12D30"
         sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
+      - state: inhand-left # SS220 fix #1729
         sprite: Clothing/Uniforms/Jumpsuit/security.rsi
       right:
       - state: inhand-right
         color: "#C12D30"
         sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
+      - state: inhand-right # SS220 fix #1729
         sprite: Clothing/Uniforms/Jumpsuit/security.rsi
 
 
@@ -551,8 +551,8 @@
   - type: Tag #SS220 tohoUpdate Begin
     tags:
      - Janimaid #SS220 tohoUpdate End
-     - ClothMade #SS220-pr: FIX CLOTHING TAGS 
-     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+     - ClothMade #SS220-pr: FIX CLOTHING TAGS
+     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingUniformSkirtBase

@@ -72,3 +72,12 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackNoirSatchel
+  name: нуарная кожаная сумка
+  description: Модная сумка в нуарном стиле, ушедшая из нашей эпохи.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Back/Satchels/leather-noir.rsi

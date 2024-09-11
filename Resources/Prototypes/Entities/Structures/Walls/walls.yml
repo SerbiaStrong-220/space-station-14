@@ -820,7 +820,7 @@
     sprite: SS220/Structures/Walls/shuttle_diagonal.rsi #ss220-walls-update
     state: state0
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
   - type: Physics
     bodyType: Static

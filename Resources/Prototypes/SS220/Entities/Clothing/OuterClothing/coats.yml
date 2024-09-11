@@ -30,7 +30,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -50,7 +51,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -81,6 +83,17 @@
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPPurpleDress
+  name: purple dress
+  description: The robe of a real smug snake.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
 
 # Cargo
 - type: entity

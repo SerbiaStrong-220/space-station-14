@@ -51,8 +51,13 @@ public sealed class DetectiveCameraSystem : EntitySystem
         if (!TryComp<SurveillanceCameraComponent>(uid, out var cameraComponent))
             return false;
 
-        _camera.SetActive(uid, !component.Enabled, cameraComponent);
+        if (component.ActivateCameraOnEnable)
+        {
+            _camera.SetActive(uid, !component.Enabled, cameraComponent);
+        }
         component.Enabled = !component.Enabled;
+        var evt = new DetectiveCameraToggledEvent(component.Enabled);
+        RaiseLocalEvent(uid, evt);
 
         if (component.Enabled)
         {
@@ -67,4 +72,9 @@ public sealed class DetectiveCameraSystem : EntitySystem
 
         return true;
     }
+}
+
+public readonly record struct DetectiveCameraToggledEvent(bool IsEnabled)
+{
+
 }

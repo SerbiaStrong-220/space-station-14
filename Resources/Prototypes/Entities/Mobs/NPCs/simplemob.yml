@@ -16,7 +16,7 @@
       Acidic: [Touch, Ingestion]
   - type: Internals
   - type: MovementSpeedModifier
-    baseWalkSpeed : 4
+    baseWalkSpeed : 2 #ss220 walk slower than sprint (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1812)
     baseSprintSpeed : 4
   - type: StatusEffects
     allowed:

@@ -38,6 +38,7 @@
       setupAvailableNetworks:
         - SurveillanceCameraEngineering
         - SurveillanceCameraSecurity
+        - SurveillanceBodyCameraSecurity #SS220 bodycamera new channel
         - SurveillanceCameraService
         - SurveillanceCameraSupply
         - SurveillanceCameraScience
