@@ -218,7 +218,8 @@ public partial class ChatSystem
 
         if (!emote.Available &&
             TryComp<SpeechComponent>(source, out var speech) &&
-            !speech.AllowedEmotes.Contains(emote.ID))
+            !speech.AllowedEmotes.Contains(emote.ID) &&
+            !speech.ClothingEmotes.Contains(emote.ID)) //SS220 Clothing special emotes
             return false;
 
         return true;
