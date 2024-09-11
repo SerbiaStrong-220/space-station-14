@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Pulling.Systems;
@@ -37,6 +36,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
         private EntityQuery<PhysicsComponent> _physicsQuery;
         private HashSet<Entity<MapGridComponent>> _targetGrids = [];
+
         public override void Initialize()
         {
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -51,13 +51,14 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
         private void OnEquip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotEquippedEvent args)
         {
             EnsureComp<TeleportOnDamageComponent>(args.Wearer, out var comp);
-
             comp.SavedUid = ent;
         }
+
         private void OnUnequip(Entity<ReactiveTeleportArmorComponent> ent, ref ClothingGotUnequippedEvent args)
         {
             RemComp<TeleportOnDamageComponent>(args.Wearer);
         }
+
         private void ToggleDone(Entity<ReactiveTeleportArmorComponent> ent, ref ItemToggledEvent args)
         {
             var prefix = args.Activated ? "on" : null;
@@ -85,18 +86,15 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
                 if (TryComp<PullableComponent>(ent.Owner, out var pull) && _pullingSystem.IsPulled(ent.Owner, pull))
                     _pullingSystem.TryStopPull(ent.Owner, pull);
 
-                switch (_random.Prob(ent.Comp.TeleportChance))
+                if (_random.Prob(ent.Comp.TeleportChance))
                 {
-                    case true:
-
-                        _xform.SetCoordinates(ent.Owner, targetCoords.Value);
-                        _audio.PlayPvs(armor.TeleportSound, ent.Owner);
-                        SelectRandomTileInRange(xform, armor.TeleportRadius);
-                        break;
-                    case false:
-
-                        _explosion.TriggerExplosive(ent.Comp.SavedUid);
-                        break;
+                    _xform.SetCoordinates(ent.Owner, targetCoords.Value);
+                    _audio.PlayPvs(armor.TeleportSound, ent.Owner);
+                    SelectRandomTileInRange(xform, armor.TeleportRadius);
+                }
+                else
+                {
+                    _explosion.TriggerExplosive(ent.Comp.SavedUid);
                 }
                 Timer.Spawn(ent.Comp.CoolDownTime, () => ent.Comp.OnCoolDown = false);
             }
@@ -130,8 +128,6 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
             EntityCoordinates? targetCoords = null;
 
-            do
-            {
                 var valid = false;
 
                 var range = (float)Math.Sqrt(radius);
@@ -171,11 +167,8 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
                     }
                 }
 
-                if (valid || _targetGrids.Count == 0) // if we don't do the check here then PickAndTake will blow up on an empty set.
-                    break;
-
-                targetGrid = _random.GetRandom().PickAndTake(_targetGrids);
-            } while (true);
+                if (!valid || _targetGrids.Count != 0) // if we don't do the check here then PickAndTake will blow up on an empty set.
+                    targetGrid = _random.GetRandom().PickAndTake(_targetGrids);
 
             return targetCoords;
 

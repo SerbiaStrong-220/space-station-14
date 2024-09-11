@@ -18,3 +18,10 @@
   sprite:
     sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: ClothingOuterReactiveArmor
+  name: experimental reactive armor
+  sprite:
+    sprite: Clothing/OuterClothing/Hardsuits/rd.rsi #да-да
+    state: icon

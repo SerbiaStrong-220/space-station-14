@@ -29,7 +29,7 @@ public sealed partial class TeleportOnDamageComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float TeleportChance = .9f;
 
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables]
     public EntityUid SavedUid;
 
     public bool OnCoolDown = false;
