@@ -22,8 +22,7 @@
     shoes: ClothingShoesLeather
     id: PsychologistPDA
     ears: ClothingHeadsetMedical
-# SS220-Two Floppa Iteration-Begin
-  # storage:
-  #   back:
-  #   - BoxSurvivalMedical
-# SS220-Two Floppa Iteration-End
+  storage:
+    back:
+#    - BoxSurvivalMedical #SS220-delete-dupe-box
+    - PillCanisterPsycho #SS220-Pills-Psychologist
