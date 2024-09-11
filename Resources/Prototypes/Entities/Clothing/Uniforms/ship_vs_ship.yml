@@ -80,9 +80,9 @@
   description: It is often joked that the role of the combat-sector Chief Engineer is where the actual, logistically-minded engineers are promoted to. Good luck.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/ce_nt.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_nt.rsi #SS220-fractional-clothing-resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/ce_nt.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_nt.rsi #SS220-fractional-clothing-resprite
 
 - type: entity
   parent: ClothingUniformBase
@@ -91,6 +91,6 @@
   description: An evil-looking jumpsuit with a reflective vest & red undershirt. #TODO: Write a better description for this once Ship vs. Ship is real and actual player habits begin forming
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/ce_syndie.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_syndie.rsi #SS220-fractional-clothing-resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/ce_syndie.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_syndie.rsi #SS220-fractional-clothing-resprite
