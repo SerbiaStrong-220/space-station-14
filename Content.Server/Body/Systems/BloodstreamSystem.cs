@@ -472,7 +472,7 @@ public sealed class BloodstreamSystem : EntitySystem
             return;
         }
 
-        var currentVolume = bloodSolution.RemoveReagent(component.BloodReagent, bloodSolution.Volume);
+        var currentVolume = bloodSolution.RemoveReagent(component.BloodReagent, bloodSolution.Volume, null, true); //ss220 zombie blood fix
 
         component.BloodReagent = reagent;
 

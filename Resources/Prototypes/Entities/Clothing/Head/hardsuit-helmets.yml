@@ -12,7 +12,7 @@
   name: basic hardsuit helmet
   description: A basic-looking hardsuit helmet that provides minor protection against most sources of damage.
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
       params:
@@ -538,7 +538,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndieCommander
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieCommander ]
   id: ClothingHeadHelmetHardsuitERTLeader
   name: ERT leader hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -552,7 +552,7 @@
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
   id: ClothingHeadHelmetHardsuitERTChaplain
   name: ERT chaplain hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -566,7 +566,7 @@
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
   id: ClothingHeadHelmetHardsuitERTEngineer
   name: ERT engineer hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -579,7 +579,7 @@
     color: "#f4ffad"
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndieElite
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieElite ]
   id: ClothingHeadHelmetHardsuitERTMedical
   name: ERT medic hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -592,7 +592,7 @@
     color: "#adffec"
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
   id: ClothingHeadHelmetHardsuitERTSecurity
   name: ERT security hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -605,7 +605,7 @@
     color: "#ffadc6"
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSyndie
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
   id: ClothingHeadHelmetHardsuitERTJanitor
   name: ERT janitor hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
@@ -619,7 +619,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ BaseCentcommContraband, ClothingHeadHardsuitWithLightBase ]
   id: ClothingHeadHelmetCBURN
   name: CBURN exosuit helmet
   description: A pressure resistant and fireproof hood worn by special cleanup units.
@@ -661,7 +661,7 @@
 
 #Deathsquad Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase  # Corvax-Resprite
+  parent: [ BaseCentcommContraband, ClothingHeadHardsuitWithLightBase ] #SS220-upstream-merge
   id: ClothingHeadHelmetHardsuitDeathsquad
   name: deathsquad hardsuit helmet
   description: A robust helmet for special operations.

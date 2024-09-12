@@ -1,0 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingOuterBioChemistry
+  name: bio suit
+  suffix: Chemistry
+  description: A suit that protects against biological contamination.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Bio/chemistry.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Bio/chemistry.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.5
