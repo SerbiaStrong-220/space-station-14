@@ -145,6 +145,7 @@
   minLimit: 0
   loadouts:
   - HoPHead
+  - HoPSilverHeadBand #SS220-Purple HoP
 
 - type: loadoutGroup
   id: HoPJumpsuit
@@ -176,6 +177,7 @@
   minLimit: 0
   loadouts:
   - HoPWintercoat
+  - HoPPurpleDress #SS220-Purple HoP
 
 # Civilian
 - type: loadoutGroup
@@ -574,7 +576,7 @@
   loadouts:
   - MimeSuspendersRed
   - MimeSuspendersBlack
-  
+
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
@@ -1124,6 +1126,7 @@
   - Headphones #SS220 sec loadout update
   - ProtectGear #ss220 tacsec update
 #SS220 neck loadout end
+  - TrooperHat
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1139,6 +1142,9 @@
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
   - JumpsuitTacSec #ss220 tacsec update
+  - SeniorOfficerJumpsuit
+  - SeniorOfficerJumpskirt
+  - TrooperUniform
 
 - type: loadoutGroup
   id: SecurityBackpack

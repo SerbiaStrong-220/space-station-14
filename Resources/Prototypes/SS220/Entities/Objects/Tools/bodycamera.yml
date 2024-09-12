@@ -18,11 +18,11 @@
         type: SurveillanceCameraSetupBoundUi
   - type: DeviceNetwork
     deviceNetId: Wired
-    receiveFrequencyId: SurveillanceCameraSecurity
+    receiveFrequencyId: SurveillanceBodyCameraSecurity
     transmitFrequencyId: SurveillanceCamera
   - type: SurveillanceCamera
     setupAvailableNetworks:
-      - SurveillanceCameraSecurity
+      - SurveillanceBodyCameraSecurity
     isOffable: true
     isOffableVisuals: true
   - type: SurveillanceCameraMicrophone

@@ -268,11 +268,6 @@
     autoRot: true
     radius: 2
     netsync: false
-  - type: GhostRole
-    prob: 1
-    name: ghost-role-information-en-name
-    description: ghost-role-information-en-description
-    rules: ghost-role-information-silicon-rules
 
 - type: entity
   name: крокодил 

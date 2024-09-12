@@ -1,0 +1,10 @@
+- type: construction
+  name: Конверт
+  id: envelope
+  graph: envelope
+  startNode: start
+  targetNode: envelope
+  category: construction-category-misc
+  description: "Простой конверт для отправки писем."
+  icon: { sprite: Objects/Misc/bureaucracy.rsi, state: envelope_closed }
+  objectType: Item

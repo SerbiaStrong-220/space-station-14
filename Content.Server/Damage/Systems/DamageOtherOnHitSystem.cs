@@ -26,7 +26,6 @@ namespace Content.Server.Damage.Systems
         [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
         [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
         [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-        [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
 
         public override void Initialize()
         {

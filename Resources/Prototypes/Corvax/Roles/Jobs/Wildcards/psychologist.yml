@@ -24,4 +24,5 @@
     ears: ClothingHeadsetMedical
   storage:
     back:
-    - BoxSurvivalMedical
+#    - BoxSurvivalMedical #SS220-delete-dupe-box
+    - PillCanisterPsycho #SS220-Pills-Psychologist

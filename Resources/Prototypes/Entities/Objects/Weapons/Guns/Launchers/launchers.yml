@@ -95,6 +95,15 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+  #ss220-start fix https://github.com/SerbiaStrong-220/space-station-14/issues/1192
+  - type: GunByHasAmmoVisuals
+    inhandVisuals:
+      left:
+      - state: rocket0-inhand-left
+      right:
+      - state: rocket0-inhand-right
+  ##ss220-end
+
 
 - type: entity
   name: multiple rocket launcher
@@ -283,7 +292,6 @@
         - state: base
         - state: base-unshaded
           map: [ "unshaded" ]
-          shader: unshaded
           visible: true
     - type: UseDelay
       delay: 1.5
@@ -294,6 +302,7 @@
           unshaded:
             True: { state: base-unshaded }
             False: { state: base-unshaded-off }
+    - type: PacifismAllowedGun
 
 # Admeme
 - type: entity

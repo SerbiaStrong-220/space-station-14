@@ -96,15 +96,18 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             // creadth: we need to create uplink for the antag.
             // PDA should be in place already
             var pda = _uplink.FindUplinkTarget(traitor);
-            if (pda == null || !_uplink.AddUplink(traitor, startingBalance))
-                return false;
 
-            // Give traitors their codewords and uplink code to keep in their character info menu
-            code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
+            //ss220 fix no codewords for traitor w/o pda start
+            if (pda != null && _uplink.AddUplink(traitor, startingBalance, giveDiscounts: true))
+            {
+                // Give traitors their codewords and uplink code to keep in their character info menu
+                code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
 
-            // If giveUplink is false the uplink code part is omitted
-            briefing = string.Format("{0}\n{1}", briefing,
-                Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+                // If giveUplink is false the uplink code part is omitted
+                briefing = string.Format("{0}\n{1}", briefing,
+                    Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+            }
+            //ss220 fix no codewords for traitor w/o pda end
         }
 
         _antag.SendBriefing(traitor, GenerateBriefing(component.Codewords, code, issuer), null, component.GreetSoundNotification);

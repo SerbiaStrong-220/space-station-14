@@ -5,6 +5,7 @@
   mapName: 'NSS Donuts'
   mapPath: /Maps/SS220/Donuts.yml
   minPlayers: 0
+  maxPlayers: 60
   stations:
     Donuts:
       stationProto: StandardNanotrasenStation

@@ -26,9 +26,18 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
     {
         base.Initialize();
 
+        SubscribeLocalEvent<DetectiveCameraAttachComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraDetachDoAfterEvent>(OnDetachDoAfter);
+    }
+
+    private void OnComponentStartup(Entity<DetectiveCameraAttachComponent> entity, ref ComponentStartup args)
+    {
+        if (!TryComp<SurveillanceCameraComponent>(entity, out var camera))
+            return;
+
+        _camera.SetActive(entity, false, camera);
     }
 
     private void OnAfterInteract(Entity<DetectiveCameraAttachComponent> entity, ref AfterInteractEvent args)

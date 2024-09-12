@@ -143,6 +143,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-SadTromboneImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -169,6 +170,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-LightImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -195,6 +197,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-BikeHornImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -223,6 +226,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-TrackingImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -251,6 +255,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-StorageImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -277,6 +282,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-FreedomImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -303,6 +309,7 @@
         - Paramedic
         - MedicalDoctor
         - ChiefMedicalOfficer
+        - Brigmedic #SS220 brigmedic implanters fix
     - label: corvax-hidden-desc-UplinkImplanter-research
       jobRequired:
         - ResearchAssistant
@@ -329,6 +336,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-EmpImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -355,6 +363,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-ScramImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -381,6 +390,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-DnaScramblerImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -409,6 +419,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-MicroBombImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -435,6 +446,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-MacroBombImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -461,6 +473,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-DeathRattleImplanter-research
         jobRequired:
           - ResearchAssistant
@@ -487,6 +500,7 @@
         - Paramedic
         - MedicalDoctor
         - ChiefMedicalOfficer
+        - Brigmedic #SS220 brigmedic implanters fix
     - label: corvax-hidden-desc-DeathAcidifierImplanter-research
       jobRequired:
         - ResearchAssistant
@@ -515,6 +529,7 @@
           - Paramedic
           - MedicalDoctor
           - ChiefMedicalOfficer
+          - Brigmedic #SS220 brigmedic implanters fix
       - label: corvax-hidden-desc-MindShieldImplanter-research
         jobRequired:
           - ResearchAssistant
