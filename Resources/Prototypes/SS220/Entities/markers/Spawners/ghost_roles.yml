@@ -1,9 +1,9 @@
 #Used by gamerule
 - type: entity
+  parent: BaseAntagSpawner
   id: SpawnPointGhostSpaceQueen
   name: спавнер роли королевы-пауков
   suffix: паук-королева
-  parent: MarkerBase
   components:
   - type: GhostRole
     name: spider-royQueen-name

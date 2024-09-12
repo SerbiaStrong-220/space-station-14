@@ -37,3 +37,24 @@
       - type: DarkReaperRole
         prototype: DarkReaper
   - type: DarkReaperMajorRule
+
+- type: entity
+  parent: BaseGameRule
+  id: SpiderQueenSpawn
+  categories: [ GameRules ]
+  components:
+  - type: StationEvent
+    weight: 7.5
+    duration: 1
+    earliestStart: 45
+    minimumPlayers: 30
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - max: 1
+      playerRatio: 10
+      spawnerPrototype: SpawnPointGhostSpaceQueen
+  - type: SpiderQueenRule
+    markersWhitelist:
+      tags:
+       - SpiderQueenSpawnMarker
