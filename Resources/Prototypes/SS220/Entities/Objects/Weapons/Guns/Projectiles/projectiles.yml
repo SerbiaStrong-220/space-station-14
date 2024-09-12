@@ -120,7 +120,7 @@
   components:
     - type: Projectile
       damage:
-        types:
+        types: 
           Poison: 6
           Structural: 2
     - type: Sprite
