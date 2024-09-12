@@ -5901,3 +5901,22 @@
   id: 492
   time: '2024-09-11T19:55:12.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/1832
+- author: ReeZii
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u0441\u043F\u0430\
+      \u043C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u0432\
+      \u043E\u0439\u043D\u044B"
+    type: Fix
+  id: 493
+  time: '2024-09-12T16:17:25.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1850
+- author: WMT, Surani
+  changes:
+  - message: "\u041D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u0430 \u0442\u0440\u0430\
+      \u043D\u0441\u043A\u0440\u0438\u043F\u0446\u0438\u044F \u0422\u0422\u0421 \u043D\
+      \u0435\u043C\u0435\u0446\u043A\u043E\u0433\u043E \u0430\u043A\u0446\u0435\u043D\
+      \u0442\u0430."
+    type: Tweak
+  id: 494
+  time: '2024-09-12T16:20:03.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1852

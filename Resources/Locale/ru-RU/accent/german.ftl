@@ -67,7 +67,8 @@ accent-german-words-32 = травка
 accent-german-words-32-2 = капуста
 accent-german-words-replace-32 = kraut
 accent-german-words-33 = водка
-accent-german-words-replace-33 = wodka
+#ss220 wodka --> Branntwein
+accent-german-words-replace-33 = Branntwein
 accent-german-words-34 = рюкзак
 accent-german-words-replace-34 = rucksack
 accent-german-words-35 = медикаменты
@@ -105,6 +106,7 @@ accent-german-words-replace-49 = guten Tag
 accent-german-words-50 = скорая
 accent-german-words-replace-50 = krankenwagen
 accent-german-words-51 = до встречи
+accent-german-words-51-2 = Досвидания
 accent-german-words-replace-51 = auf Wiedersehen
 accent-german-words-52 = пока
 accent-german-words-replace-52 = tschüss
@@ -136,3 +138,30 @@ accent-german-words-61-5 = тесла
 accent-german-words-replace-61 = kugelblitz
 accent-german-words-62 = авто
 accent-german-words-replace-62 = auto
+
+#ss220-deutch-accent-update-begin
+
+accent-german-words-63 = это
+accent-german-words-replace-63 = das ist
+
+accent-german-words-64 = глава
+accent-german-words-replace-64 = offizier
+accent-german-words-65-1 = главы
+accent-german-words-65-2 = главе
+accent-german-words-65-3 = глав
+accent-german-words-replace-65 = offiziere
+accent-german-words-66-1 = главу
+accent-german-words-66-2 = главой
+accent-german-words-replace-66 = offiziers
+
+accent-german-words-67 = шаттл
+accent-german-words-replace-67 = pulkzerstörer
+accent-german-words-68-4 = шаттла
+accent-german-words-68-3 = шаттлу
+accent-german-words-68-2 = шаттлом
+accent-german-words-68-1 = шаттле
+accent-german-words-replace-68 = pulkzerstörers
+accent-german-words-69 = шаттлов
+accent-german-words-replace-69 = pulkzerstörere
+
+#ss220-deutch-accent-update-end
