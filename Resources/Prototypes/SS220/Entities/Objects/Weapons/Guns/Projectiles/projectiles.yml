@@ -113,7 +113,7 @@
 
 #Spider queen
 - type: entity
-  id: PoisonousAcid
+  id: PoisonousAcid 
   name: poisonous Spit
   parent: BaseBullet
   noSpawn: true
