@@ -26,7 +26,7 @@
     damage:
       types:
         Blunt: 3
-        Stamina: 35
+        Stamina: 45
 
 - type: entity
   id: BulletPistolRubber
@@ -37,8 +37,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
-        Stamina: 22
+        Blunt: 5
+        Stamina: 24
 
 - type: entity
   id: BulletRifleRubber
@@ -49,8 +49,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
-        Stamina: 25
+        Blunt: 9
+        Stamina: 30
 
 - type: entity
   id: BulletCaselessRifleRubber
@@ -73,4 +73,4 @@
     damage:
       types:
         Blunt: 3
-        Stamina: 20
+        Stamina: 33

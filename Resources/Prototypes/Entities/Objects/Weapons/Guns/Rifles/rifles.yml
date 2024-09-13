@@ -73,8 +73,8 @@
         map: ["enum.GunVisualLayers.Mag"]
   #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -20
+    minAngle: -18
+    maxAngle: -24
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
    #ss220 gunmodes start
@@ -84,8 +84,8 @@
    #ss220 gunmodes end
     fireRate: 5
     #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 2
-    angleDecay: 12
+    angleIncrease: 4
+    angleDecay: 14
     #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
