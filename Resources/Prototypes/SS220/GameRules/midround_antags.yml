@@ -51,6 +51,9 @@
     minimumPlayers: 30
   - type: AntagSpawner
     prototype: MobSpiderSpaceQueen
+  - type: AntagObjectives
+    objectives:
+    - CreateCocoonsObjective
   - type: AntagSelection
     definitions:
     - prefRoles: [ SpiderQueen ]
