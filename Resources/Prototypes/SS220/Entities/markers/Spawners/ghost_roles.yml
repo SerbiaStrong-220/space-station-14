@@ -1,5 +1,6 @@
 #Used by gamerule
 - type: entity
+  categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
   id: SpawnPointGhostSpaceQueen
   name: спавнер роли королевы-пауков
@@ -17,8 +18,6 @@
         time: 18000 # 5h
     raffle:
       settings: default
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderSpaceQueen
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

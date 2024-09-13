@@ -1,3 +1,4 @@
+using Content.Server.SS220.Roles;
 using Content.Shared.Roles;
 using Content.Shared.SS220.DarkReaper;
 using Content.Shared.SS220.MindSlave;
@@ -24,6 +25,8 @@ public sealed class RoleSystem : SharedRoleSystem
         SubscribeAntagEvents<MindSlaveRoleComponent>();
         //SS220 DarkReaper
         SubscribeAntagEvents<DarkReaperRoleComponent>();
+        //SS220 Spider queen
+        SubscribeAntagEvents<SpiderQueenRoleComponent>();
     }
 
     public string? MindGetBriefing(EntityUid? mindId)

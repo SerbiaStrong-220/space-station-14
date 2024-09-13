@@ -7,12 +7,6 @@ namespace Content.Server.SS220.SpiderQueen;
 public sealed partial class SpiderQueenRuleComponent : Component
 {
     /// <summary>
-    /// ID of the spawner of this antagonist
-    /// </summary>
-    [DataField]
-    public string SpawnerID = "SpawnPointGhostSpaceQueen";
-
-    /// <summary>
     /// Spawn on a random entity that passed whitelist.
     /// If null - spawn on a random tile.
     /// </summary>

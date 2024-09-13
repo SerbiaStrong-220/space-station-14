@@ -21,16 +21,7 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpiderQueenRuleComponent, AntagSelectEntityEvent>(OnAntagSelectEntity);
         SubscribeLocalEvent<SpiderQueenRuleComponent, AntagSelectLocationEvent>(OnAntagSelectLocation);
-    }
-
-    private void OnAntagSelectEntity(Entity<SpiderQueenRuleComponent> ent, ref AntagSelectEntityEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Entity = Spawn(ent.Comp.SpawnerID);
     }
 
     private void OnAntagSelectLocation(Entity<SpiderQueenRuleComponent> ent, ref AntagSelectLocationEvent args)

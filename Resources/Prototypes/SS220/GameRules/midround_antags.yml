@@ -38,6 +38,7 @@
         prototype: DarkReaper
   - type: DarkReaperMajorRule
 
+  # Spider queen
 - type: entity
   parent: BaseGameRule
   id: SpiderQueenSpawn
@@ -48,13 +49,18 @@
     duration: 1
     earliestStart: 45
     minimumPlayers: 30
+  - type: AntagSpawner
+    prototype: MobSpiderSpaceQueen
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn
     definitions:
-    - max: 1
-      playerRatio: 10
+    - prefRoles: [ SpiderQueen ]
       spawnerPrototype: SpawnPointGhostSpaceQueen
+      max: 1
+      playerRatio: 10
+      mindComponents:
+      - type: SpiderQueenRole
+        prototype: SpiderQueen
   - type: SpiderQueenRule
     markersWhitelist:
       tags:
-       - SpiderQueenSpawnMarker
+         - SpiderQueenSpawnMarker
