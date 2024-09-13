@@ -27,6 +27,12 @@
     },
     {
       "name": "clown_web_spawn"
+    },
+    {
+      "name": "cocoon"
+    },
+    {
+      "name": "crystal_spawn"
     }
   ]
 }

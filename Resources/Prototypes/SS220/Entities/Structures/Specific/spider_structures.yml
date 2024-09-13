@@ -49,6 +49,78 @@
       types:
         Blunt: 5
 
+- type: entity
+  id: BaseSpiderCocoon
+  name: spider cocoon
+  description: описание
+  abstract: true
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    drawdepth: Items
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+  - type: ContainerContainer
+    containers:
+      cocoon: !type:Container
+  - type: Tag
+    tags:
+      - SpiderCocoon
+  - type: SpiderCocoon
+    container: cocoon
+    manaGenerationBonus: 1
+
+- type: entity
+  id: BaseSpiderCocoonDestroyed
+  name: spider cocoon destroyed
+  description: описание
+  abstract: true
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    drawdepth: Items
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+
 #Tile (used to spawn walls)
 # - type: entity
 #   parent: BaseFloorTileItemSpiders
@@ -180,31 +252,16 @@
 
 # Cocoon
 - type: entity
-  id: SpiderCocoon
-  name: кокон
-  description: описание
+  parent: BaseSpiderCocoon
+  id: SpiderCocoonHorizontal
   components:
   - type: Icon
-    sprite: Structures/Storage/Crates/generic.rsi
-    state: icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    state: cocoon1
   - type: Sprite
-    sprite: Structures/Storage/Crates/generic.rsi
+    sprite: SS220/Structures/Specific/cocoon.rsi
     layers:
-      - state: icon
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
-    canCollide: false
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb {}
-  - type: Clickable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
+      - state: cocoon1
   - type: Destructible
     thresholds:
     - trigger:
@@ -217,14 +274,66 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonHorizontalDestroyed
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: ContainerContainer
-    containers:
-      cocoon: !type:Container
-  - type: Tag
-    tags:
-      - SpiderCocoon
-  - type: SpiderCocoon
-    container: cocoon
-    manaGenerationBonus: 1
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontal
+
+- type: entity
+  parent: BaseSpiderCocoon
+  id: SpiderCocoonVertical
+  components:
+  - type: Icon
+    state: cocoon2
+  - type: Sprite
+    layers:
+      - state: cocoon2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonVerticalDestroyed
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonVertical
+
+# Destroyed cocoon
+- type: entity
+  parent: BaseSpiderCocoonDestroyed
+  id: SpiderCocoonHorizontalDestroyed
+  components:
+  - type: Icon
+    state: destroyed_cocoon1
+  - type: Sprite
+    layers:
+      - state: destroyed_cocoon1
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontalDestroyed
+
+- type: entity
+  parent: BaseSpiderCocoonDestroyed
+  id: SpiderCocoonVerticalDestroyed
+  components:
+  - type: Icon
+    state: destroyed_cocoon2
+  - type: Sprite
+    layers:
+      - state: destroyed_cocoon2
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonVerticalDestroyed

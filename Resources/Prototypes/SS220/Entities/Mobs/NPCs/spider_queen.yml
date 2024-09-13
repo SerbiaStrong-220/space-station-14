@@ -163,6 +163,9 @@
     maxMana: 200
     passiveGeneration: 0.5
     cocoonsBonusCoefficient: 0.9
+    cocoonPrototypes:
+    - SpiderCocoonHorizontal
+    - SpiderCocoonVertical
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderEggDrone

@@ -137,8 +137,8 @@
     range: 1
     itemIconStyle: BigAction
     icon:
-      sprite: Structures/Decoration/crystal.rsi
-      state: crystal1
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: crystal_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: ShardCrystalBlueXeno
@@ -243,5 +243,5 @@
     event: !type:SpiderCocooningActionEvent
       cocooningTime: 5
     itemIconStyle: NoItem
-    icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_jneceat }
+    icon: { sprite: SS220/Interface/Actions/action_spider.rsi, state: cocoon }
     useDelay: 10

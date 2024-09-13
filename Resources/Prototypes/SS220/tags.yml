@@ -117,3 +117,6 @@
 
 - type: Tag
   id: SpiderCocoon
+
+- type: Tag
+  id: SpiderQueenSpawnMarker

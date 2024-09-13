@@ -74,7 +74,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             return;
 
         var targetCords = _transform.GetMoverCoordinates(target, transform);
-        var cocoonUid = Spawn(entity.Comp.CocoonProto, targetCords.SnapToGrid(EntityManager, _mapManager));
+        var cocoonPrototypeID = _random.Pick(entity.Comp.CocoonPrototypes);
+        var cocoonUid = Spawn(cocoonPrototypeID, targetCords);
 
         if (!TryComp<SpiderCocoonComponent>(cocoonUid, out var spiderCocoon) ||
             !_container.TryGetContainer(cocoonUid, spiderCocoon.CocoonContainerId, out var container))
@@ -116,7 +117,9 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var i = 0;
         foreach (var cocoon in component.CocoonsList)
         {
-            if (!TryComp<SpiderCocoonComponent>(cocoon, out var spiderCocoon))
+            if (!TryComp<SpiderCocoonComponent>(cocoon, out var spiderCocoon) ||
+                !_container.TryGetContainer(cocoon, spiderCocoon.CocoonContainerId, out var container) ||
+                container.Count <= 0)
                 continue;
 
             newBonus += spiderCocoon.ManaGenerationBonus * Math.Pow(component.CocoonsBonusCoefficient.Double(), i);

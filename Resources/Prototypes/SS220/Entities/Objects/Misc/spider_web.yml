@@ -110,7 +110,6 @@
       - Wall
   components:
     - type: Sprite
-      color: gray
     - type: Destructible
       thresholds:
       - trigger:

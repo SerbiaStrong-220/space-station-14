@@ -33,7 +33,7 @@ public sealed partial class SpiderQueenComponent : Component
     /// Id of the cocoon prototype
     /// </summary>
     [DataField]
-    public EntProtoId CocoonProto = "SpiderCocoon";
+    public List<EntProtoId> CocoonPrototypes = new();
 
     /// <summary>
     /// List of cocoons created by this entity
