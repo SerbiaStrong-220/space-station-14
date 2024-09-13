@@ -247,7 +247,7 @@
   - type: Item
     size: Large # SS220 Bigger-survival-box begin
     shape: #SS220 Bigger-survival-box end
-     - 0,0,2,1 #SS220-decrease-survival-box
+    - 0,0,2,1 #SS220-decrease-survival-box
     heldPrefix: hug
   - type: StorageFill
     contents:
