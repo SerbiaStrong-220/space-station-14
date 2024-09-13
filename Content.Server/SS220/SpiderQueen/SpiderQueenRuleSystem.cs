@@ -71,11 +71,9 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
                 break;
             }
 
-            if (!grid.HasValue || !map.HasValue)
-                return;
-
-            _specialRespawn.TryFindRandomTile(grid.Value, map.Value, 30, out var randomCoords);
-            args.Coordinates.Add(_transform.ToMapCoordinates(randomCoords));
+            if (grid.HasValue && map.HasValue &&
+                _specialRespawn.TryFindRandomTile(grid.Value, map.Value, 30, out var randomCoords))
+                args.Coordinates.Add(_transform.ToMapCoordinates(randomCoords));
         }
     }
 }
