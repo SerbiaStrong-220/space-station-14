@@ -102,7 +102,7 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
             var max = spiderQueen.MaxMana;
 
             briefing = string.Format("{0}\n{1}", briefing,
-                Loc.GetString("spider-queen-mana-information", ("current", current), ("max", max)));
+                Loc.GetString("spider-queen-role-mana-information", ("current", current), ("max", max)));
         }
 
         args.Append(briefing);

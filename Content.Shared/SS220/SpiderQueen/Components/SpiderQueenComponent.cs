@@ -8,6 +8,9 @@ namespace Content.Shared.SS220.SpiderQueen.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SpiderQueenComponent : Component
 {
+    [ViewVariables]
+    public bool IsAnnounced = false;
+
     /// <summary>
     /// Current amount of mana
     /// </summary>
@@ -58,4 +61,10 @@ public sealed partial class SpiderQueenComponent : Component
     /// </summary>
     [DataField]
     public float CocoonsMinDistance = 0.5f;
+
+    /// <summary>
+    /// How many cocoons need to station announcement
+    /// </summary>
+    [DataField]
+    public int? CocoonsCountToAnnouncement;
 }

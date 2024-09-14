@@ -1,4 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Chat.Systems;
+using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.FixedPoint;
@@ -8,10 +10,13 @@ using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.SpiderQueen;
 
@@ -24,6 +29,9 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly NavMapSystem _navMap = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -114,6 +122,12 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         spiderCocoon.CocoonOwner = entity.Owner;
         Dirty(cocoonUid, spiderCocoon);
 
+        if (entity.Comp.CocoonsCountToAnnouncement is { } value &&
+            entity.Comp.CocoonsList.Count >= value)
+        {
+            DoStationAnnouncement(entity);
+        }
+
         UpdateCocoonsBonus(entity.Owner);
     }
 
@@ -151,5 +165,22 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         component.CocoonsManaBonus = newBonus;
         Dirty(spider, component);
+    }
+
+    /// <summary>
+    /// Do a station announcement if all conditions are met
+    /// </summary>
+    private void DoStationAnnouncement(EntityUid uid, SpiderQueenComponent? component = null)
+    {
+        if (!Resolve(uid, ref component) ||
+            component.IsAnnounced ||
+            !TryComp<TransformComponent>(uid, out var xform))
+            return;
+
+        var msg = Loc.GetString("spider-queen-warning",
+            ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, xform)))));
+        _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
+        _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
+        component.IsAnnounced = true;
     }
 }
