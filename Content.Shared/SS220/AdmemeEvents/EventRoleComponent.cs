@@ -15,7 +15,7 @@ namespace Content.Shared.SS220.AdmemeEvents;
 public sealed partial class EventRoleComponent : Component
 {
     [DataField(required: true), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public ProtoId<StatusIconPrototype> StatusIcon { get; set; }
+    public ProtoId<FactionIconPrototype> StatusIcon { get; set; }
 
     [DataField(required: true), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public string RoleGroupKey;

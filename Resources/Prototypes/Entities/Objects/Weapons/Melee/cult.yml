@@ -4,6 +4,11 @@
   id: RitualDagger
   description: A strange dagger used by sinister groups for rituals and sacrifices.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/blade.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cult_dagger.rsi
@@ -28,6 +33,11 @@
   id: EldritchBlade
   description: A sword humming with unholy energy.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/blade.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cult_blade.rsi
@@ -52,6 +62,11 @@
   id: UnholyHalberd
   description: A poleaxe that seems to be linked to its wielder.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/axe.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Tag
     tags:
     - FireAxe

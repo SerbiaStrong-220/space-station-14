@@ -11,6 +11,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - CAPSiutstorage #SS220-Cutlass-Update
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -26,6 +27,15 @@
   - Trinkets
   - GroupSpeciesBreathTool
 
+# Silicons
+- type: roleLoadout
+  id: JobStationAi
+  nameDataset: ai_names # SS220 Fix II Dataset
+
+- type: roleLoadout
+  id: JobStationBorg
+  nameDataset: borg_names # SS220 Fix II Dataset
+
 # Civilian
 - type: roleLoadout
   id: JobPassenger
@@ -33,6 +43,7 @@
   - GroupTankHarness
   - PassengerJumpsuit
   - CommonBackpack
+  - PassengerNeck
   - PassengerFace
   - PassengerGloves
   - PassengerOuterClothing
@@ -129,6 +140,7 @@
   - JanitorGloves
   - CommonBackpack
   - JanitorOuterClothing
+  - JanitorShoes #SS220-OrangeJanitor
   - Glasses
   - Survival
   - Trinkets
@@ -147,6 +159,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - BotanistBelt #SS220 druid loadout
+  - BotanistNeck #SS220 druid loadout
+  - BotanistShoes #SS220 druid loadout
 
 - type: roleLoadout
   id: JobClown
@@ -170,17 +185,20 @@
   - MimeJumpsuit
   - MimeBackpack
   - MimeOuterClothing
+  - MimeBelt
   - Glasses
-  - Survival
+  - SurvivalMime
   - Trinkets
 
 - type: roleLoadout
   id: JobMusician
   groups:
   - GroupTankHarness
+  - MusicianHead #SS220 bard loadout
   - MusicianJumpsuit
   - CommonBackpack
   - MusicianOuterClothing
+  - MusicianShoes #SS220 bard loadout
   - Glasses
   - Survival
   - Trinkets
@@ -220,6 +238,7 @@
 - type: roleLoadout
   id: JobSalvageSpecialist
   groups:
+  - SalvageSpecialistHead #SS220-Salvage-Loadouts-Update
   - GroupTankHarness
   - SalvageSpecialistBackpack
   - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
@@ -340,7 +359,9 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SecurityHoSSiutstorage #SS220-OfficerCutlass
 
 - type: roleLoadout
   id: JobWarden
@@ -354,12 +375,14 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
@@ -369,6 +392,7 @@
   - SecurityBelt
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -378,11 +402,12 @@
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
-  - SecurityBackpack
+  - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -400,6 +425,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -417,6 +443,7 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
   - MedicalGloves
@@ -433,6 +460,7 @@
   id: JobMedicalIntern
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
   - MedicalBackpack
   - Glasses
@@ -444,6 +472,7 @@
   id: JobChemist
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
   - MedicalGloves
@@ -459,6 +488,7 @@
   groups:
   - GroupTankHarness
   - ParamedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ParamedicJumpsuit
   - MedicalGloves
@@ -475,6 +505,7 @@
   id: JobBrigmedic
   groups:
   - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - BrigmedicMask
   - BrigmedicJumpsuit
   - MedicalGloves
@@ -511,6 +542,8 @@
   id: JobPsychologist
   groups:
   - GroupTankHarness
+  - PsychologistJumpsuit
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalBackpack
   - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses
@@ -532,6 +565,12 @@
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
+
+- type: roleLoadout
+  id: RoleSurvivalVoxSupport
+  groups:
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
 
 - type: roleLoadout
   id: RoleSurvivalStandard
@@ -573,3 +612,9 @@
   - SurvivalSyndicate
   - GroupSpeciesBreathTool
   - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalEVA
+  groups:
+  - GroupEVATank
+  - SurvivalExtended

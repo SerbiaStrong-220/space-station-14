@@ -18,6 +18,6 @@
   - type: PointLight
     radius: 1.5
     energy: 3
-    color: "#4faffb"
+    color: "#8c8751" #SS220-Spider Action Sprite
   - type: StaticPrice
     price: 500

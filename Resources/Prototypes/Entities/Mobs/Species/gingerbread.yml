@@ -21,6 +21,8 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#896e55"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -47,7 +49,10 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
-
+  #ss220 emote 5 sec start
+  - type: Emoting
+    chatEmoteCooldown: 5.0
+  #ss220 emote 5 sec end
 
 - type: entity
   parent: BaseSpeciesDummy

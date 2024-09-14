@@ -36,7 +36,7 @@ public abstract class SharedShlepovendSystem : EntitySystem
         // Try to get a role proto with a corresponding enum
         foreach (var (_, proto) in protos)
         {
-            if (proto.RequiredRole is SponsorTier && (SponsorTier) proto.RequiredRole == highestAvailableTier.Value)
+            if (proto.RequiredRole != null && proto.RequiredRole == highestAvailableTier.Value)
                 return proto;
         }
 
@@ -51,7 +51,7 @@ public abstract class SharedShlepovendSystem : EntitySystem
         // Try to get a role proto with a corresponding enum
         foreach (var (_, proto) in protos)
         {
-            if (proto.RequiredRole is SponsorTier && (SponsorTier) proto.RequiredRole == role)
+            if (proto.RequiredRole != null && proto.RequiredRole == role)
                 return true;
         }
 

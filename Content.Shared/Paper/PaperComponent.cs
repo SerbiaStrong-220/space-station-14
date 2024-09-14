@@ -39,6 +39,11 @@ public sealed partial class PaperComponent : Component, IPhotocopyableComponent
     [DataField("sound")]
     public SoundSpecifier? Sound { get; private set; } = new SoundCollectionSpecifier("PaperScribbles", AudioParams.Default.WithVariation(0.1f));
 
+    //SS220 Add auto form
+    [AutoNetworkedField]
+    public EntityUid? Writer;
+    //SS220 Add auto form
+
     public IPhotocopiedComponentData GetPhotocopiedData()
     {
         return new PaperPhotocopiedData()

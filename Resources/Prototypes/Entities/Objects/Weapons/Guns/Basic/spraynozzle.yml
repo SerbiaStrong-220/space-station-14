@@ -1,9 +1,14 @@
-﻿- type: entity
+- type: entity
   id: WeaponSprayNozzle
   parent: BaseItem
   name: spray nozzle
   description: A high-powered spray nozzle used in conjunction with a backpack-mounted water tank.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/pistol.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/spraynozzle.rsi
     state: icon

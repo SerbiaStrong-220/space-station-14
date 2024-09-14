@@ -10,20 +10,23 @@ using Content.Shared.Mind;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Shared.PDA;
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Roles.RoleCodeword;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
 using Content.Shared.GameTicking.Components;
 using Content.Server.SS220.MindSlave;
-using Content.Shared.SS220.ShowCodewords;
 
 namespace Content.Server.GameTicking.Rules;
 
 public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 {
+    private static readonly Color TraitorCodewordColor = Color.FromHex("#cc3b3b");
+
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -32,6 +35,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private readonly SharedRoleCodewordSystem _roleCodewordSystem = default!;
 
     public override void Initialize()
     {
@@ -92,33 +96,36 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             // creadth: we need to create uplink for the antag.
             // PDA should be in place already
             var pda = _uplink.FindUplinkTarget(traitor);
-            if (pda == null || !_uplink.AddUplink(traitor, startingBalance))
-                return false;
 
-            // Give traitors their codewords and uplink code to keep in their character info menu
-            code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
+            //ss220 fix no codewords for traitor w/o pda start
+            if (pda != null && _uplink.AddUplink(traitor, startingBalance, giveDiscounts: true))
+            {
+                // Give traitors their codewords and uplink code to keep in their character info menu
+                code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
 
-            // If giveUplink is false the uplink code part is omitted
-            briefing = string.Format("{0}\n{1}", briefing,
-                Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+                // If giveUplink is false the uplink code part is omitted
+                briefing = string.Format("{0}\n{1}", briefing,
+                    Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+            }
+            //ss220 fix no codewords for traitor w/o pda end
         }
 
         _antag.SendBriefing(traitor, GenerateBriefing(component.Codewords, code, issuer), null, component.GreetSoundNotification);
 
+
         component.TraitorMinds.Add(mindId);
-
-        //ss220 codewords highlight add start
-
-        var showCodewordsComp = EnsureComp<ShowCodewordsComponent>(traitor);
-        showCodewordsComp.CodeWords = component.Codewords;
-
-        //ss220 codewords highlight add end
 
         // Assign briefing
         _roleSystem.MindAddRole(mindId, new RoleBriefingComponent
         {
             Briefing = briefing
         }, mind, true);
+
+        // Send codewords to only the traitor client
+        var color = TraitorCodewordColor; // Fall back to a dark red Syndicate color if a prototype is not found
+
+        RoleCodewordComponent codewordComp = EnsureComp<RoleCodewordComponent>(mindId);
+        _roleCodewordSystem.SetRoleCodewords(codewordComp, "traitor", component.Codewords.ToList(), color);
 
         // Change the faction
         _npcFaction.RemoveFaction(traitor, component.NanoTrasenFaction, false);

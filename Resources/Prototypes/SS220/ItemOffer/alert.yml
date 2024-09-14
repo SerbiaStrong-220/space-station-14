@@ -4,6 +4,6 @@
   icons:
   - sprite: /Textures/SS220/Alerts/ItemOfferAlarm.rsi
     state: mrrroew
-  onClick: !type:ItemOfferAlertClicked  { }
+  clickEvent: !type:ItemOfferAlertEvent
   name: Передача предмета
   description: Вам хотят передать предмет

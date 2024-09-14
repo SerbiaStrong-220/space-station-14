@@ -52,6 +52,9 @@
 - files: ["oasis.yml"]
   authors: CptJeanLuc
 
+- files: ["cog.yml"]
+  authors: Spacemann
+
 # ss220-maps
 
 - files: ["ss220-box.yml"]
@@ -71,3 +74,6 @@
 
 - files: ["eclipse.yml"]
   authors: Vnoeg, NightmareStalker, AliceValestray, UrPrice, VictorBoum, RtmFool, Ivan_comi
+
+- files: ["Donuts.yml"]
+  authors: spo9k, Persia

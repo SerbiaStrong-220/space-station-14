@@ -210,3 +210,101 @@
   name: red carpet floor
   spawn: FloorTileItemCarpetRed
   maxCount: 30
+
+# Marble
+
+- type: stack
+  id: FloorTileItemMarbleBlack
+  name: black marble
+  spawn: FloorTileItemMarbleBlack
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleWhite
+  name: white marble
+  spawn: FloorTileItemMarbleWhite
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleBorderWB
+  name: border marble
+  spawn: FloorTileItemMarbleBorderWB
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleBorderBW
+  name: border marble
+  spawn: FloorTileItemMarbleBorderBW
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleDiagonalBW
+  name: diagonal marble
+  spawn: FloorTileItemMarbleDiagonalBW
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleDiagonalWB
+  name: diagonal marble
+  spawn: FloorTileItemMarbleDiagonalWB
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleVerticalBW
+  name: vertical marble
+  spawn: FloorTileItemMarbleVerticalBW
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleVerticalWB
+  name: vertical marble
+  spawn: FloorTileItemMarbleVerticalWB
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleCornerNE
+  name: vertical marble
+  spawn: FloorTileItemMarbleCornerNE
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleCornerNW
+  name: vertical marble
+  spawn: FloorTileItemMarbleCornerNW
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleCornerSE
+  name: vertical marble
+  spawn: FloorTileItemMarbleCornerSE
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleCornerSW
+  name: vertical marble
+  spawn: FloorTileItemMarbleCornerSW
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleInnerNE
+  name: inner marble
+  spawn: FloorTileItemMarbleInnerNE
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleInnerNW
+  name: inner marble
+  spawn: FloorTileItemMarbleInnerNW
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleInnerSE
+  name: inner marble
+  spawn: FloorTileItemMarbleInnerSE
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemMarbleInnerSW
+  name: inner marble
+  spawn: FloorTileItemMarbleInnerSW
+  maxCount: 30

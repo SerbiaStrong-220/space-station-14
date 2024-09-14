@@ -1,4 +1,4 @@
-﻿using Content.Shared.CCVar;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.NukeOps;
 using JetBrains.Annotations;
@@ -24,6 +24,7 @@ public sealed class WarDeclaratorBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<WarDeclaratorWindow>();
         _window.OnActivated += OnWarDeclaratorActivated;
+        _window.SetMaxMessageLength(_cfg.GetCVar(CCVars.ChatMaxAnnouncementLength)); // SS220 Text Edit Limits
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -40,5 +41,12 @@ public sealed class WarDeclaratorBoundUserInterface : BoundUserInterface
         var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
         var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
         SendMessage(new WarDeclaratorActivateMessage(msg));
+
+        //ss220 SPAM Button NukeDecWar fix start
+        if (_window != null)
+        {
+            _window.WarButton.Disabled = true;
+        }
+        //ss220 SPAM Button NukeDecWar fix end
     }
 }

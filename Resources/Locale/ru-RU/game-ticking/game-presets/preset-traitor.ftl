@@ -3,6 +3,7 @@
 # Shown at the end of a round of Traitor
 traitor-round-end-agent-name = предатель
 objective-issuer-syndicate = [color=crimson]Синдикат[/color]
+objective-issuer-unknown = Неизвестно
 traitor-round-end-codewords = Кодовыми словами были: [color=White]{ $codewords }[/color].
 # Shown at the end of a round of Traitor
 traitor-user-was-a-traitor = [color=gray]{ $user }[/color] был(а) предателем.
@@ -33,17 +34,17 @@ traitor-death-match-end-round-description-entry = КПК { $originalName }, с {
 
 # TraitorRole
 traitor-role-greeting =
-    Вы - агент Синдиката.
+    Вы - агент организации { $corporation } на задании [color = darkred]Синдиката.[/color].
     Ваши цели и кодовые слова перечислены в меню персонажа.
     Воспользуйтесь аплинком, встроенным в ваш КПК, чтобы приобрести всё необходимое для выполнения работы.
     Смерть Nanotrasen!
 traitor-role-codewords =
-    Кодовые слова следующие:
-    { $codewords }
+    Кодовые слова следующие: [color = lightgray]
+    { $codewords }.[/color]
     Кодовые слова можно использовать в обычном разговоре, чтобы незаметно идентифицировать себя для других агентов Синдиката.
     Прислушивайтесь к ним и храните их в тайне.
 traitor-role-uplink-code =
-    Установите рингтон Вашего КПК на { $code } чтобы заблокировать или разблокировать аплинк.
+    Установите рингтон Вашего КПК на [color = lightgray]{ $code }[/color] чтобы заблокировать или разблокировать аплинк.
     Не забудьте заблокировать его и сменить код, иначе кто угодно из экипажа станции сможет открыть аплинк!
 # don't need all the flavour text for character menu
 traitor-role-codewords-short =

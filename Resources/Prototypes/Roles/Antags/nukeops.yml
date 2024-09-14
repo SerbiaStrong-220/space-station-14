@@ -6,8 +6,12 @@
   objective: roles-antag-nuclear-operative-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 216000 # 60h SS220 time
   guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeops
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: NukeopsMedic
@@ -17,11 +21,18 @@
   objective: roles-antag-nuclear-operative-agent-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 216000 # 60h SS220 time (temporarily, in the future it will be changed on AntagGroupTimeRequirement)
   - !type:RoleTimeRequirement
     role: JobChemist
-    time: 10800 # 3h
+    time: 36000 # 10h SS220 time
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 36000 # 10h SS220 time
   guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeopsMedic
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: NukeopsCommander
@@ -31,12 +42,16 @@
   objective: roles-antag-nuclear-operative-commander-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 216000 # 60h SS220 time (temporarily, in the future it will be changed on AntagGroupTimeRequirement)
   - !type:DepartmentTimeRequirement
     department: Security
     time: 18000 # 5h
   # should be changed to nukie playtime when thats tracked (wyci)
   guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeopsCommander
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplink
@@ -55,7 +70,6 @@
     belt: ClothingBeltMilitaryWebbing
   storage:
     back:
-    - BoxSurvivalSyndicate
     - WeaponPistolViper
     - PinpointerSyndicateNuclear
     - DeathAcidifierImplanter
@@ -90,7 +104,6 @@
   storage:
     back:
     - SyndiHypo
-    - BoxSurvivalSyndicate
     - SawAdvanced
     - Cautery
     - CombatKnife

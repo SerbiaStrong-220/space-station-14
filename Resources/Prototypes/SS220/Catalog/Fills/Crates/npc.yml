@@ -1,0 +1,177 @@
+- type: entity
+  id: CrateNPCCrocodile
+  parent: CrateLivestock
+  name: ящик с крокодилом
+  description: Ящик с домашним крокодилом.
+  components:
+  - type: StorageFill
+    contents:
+      - id: MobCrocodile
+        amount: 1
+
+- type: entity
+  id: BaseCrateNPCLocked
+  parent: CrateLivestock
+  abstract: True
+  components:
+  - type: Lock
+# - type: LockVisuals - Если будете добавлять визуал для закрытых ящиков, вынести из коммента
+  - type: AccessReader
+    access: [["Cargo"]]
+
+- type: entity
+  id: CrateNPCCrocodileLocked
+  parent: [ CrateNPCCrocodile , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: ящик с крокодилом
+  description: Ящик с домашним крокодилом.
+
+- type: entity
+  id: CrateNPCBeeLocked
+  parent: [ CrateNPCBee , BaseCrateNPCLocked ]
+  suffix: Закрыт
+  name: crate of bees
+  description: A crate containing a swarm of eight bees.
+
+- type: entity
+  id: CrateNPCButterfliesLocked
+  parent: [ CrateNPCButterflies , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: crate of butterflies
+  description: A crate containing five butterflies.
+
+- type: entity
+  id: CrateNPCCatLocked
+  parent: [ CrateNPCCat , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: cat crate
+  description: A crate containing a single cat.
+
+- type: entity
+  id: CrateNPCChickenLocked
+  parent: [ CrateNPCChicken , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: chicken crate
+  description: A crate containing four fully grown chickens.
+
+- type: entity
+  id: CrateNPCCrabLocked
+  parent: [ CrateNPCCrab , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: crab crate
+  description: A crate containing three huge crabs.
+
+- type: entity
+  id: CrateNPCDuckLocked
+  parent: [ CrateNPCDuck , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: duck crate
+  description: A crate containing six fully grown ducks.
+
+- type: entity
+  id: CrateNPCCorgiLocked
+  parent: [ CrateNPCCorgi , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: corgi crate
+  description: A crate containing a single corgi.
+
+- type: entity
+  id: CrateNPCPuppyCorgiLocked
+  parent: [ CrateNPCPuppyCorgi , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: puppy corgi crate
+  description: A crate containing a single puppy corgi. Awww.
+
+- type: entity
+  id: CrateNPCCowLocked
+  parent: [ CrateNPCCow , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: cow crate
+  description: A crate containing a single cow.
+
+- type: entity
+  id: CrateNPCGoatLocked
+  parent: [ CrateNPCGoat , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: goat crate
+  description: A crate containing a single goat.
+
+- type: entity
+  id: CrateNPCGooseLocked
+  parent: [ CrateNPCGoose , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: goose crate
+  description: A crate containing two geese.
+
+- type: entity
+  id: CrateNPCGorillaLocked
+  parent: [ CrateNPCGorilla , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: gorilla crate
+  description: A crate containing a single gorilla.
+
+- type: entity
+  id: CrateNPCMouseLocked
+  parent: [ CrateNPCMouse , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: mice crate
+  description: A crate containing five mice.
+
+- type: entity
+  id: CrateNPCParrotLocked
+  parent: [ CrateNPCParrot , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: parrot crate
+  description: A crate containing three parrots.
+
+- type: entity
+  id: CrateNPCPenguinLocked
+  parent: [ CrateNPCPenguin , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: penguin crate
+  description: A crate containing two penguins.
+
+- type: entity
+  id: CrateNPCPigLocked
+  parent: [ CrateNPCPig , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: pig crate
+  description: A crate containing a single pig.
+
+- type: entity
+  id: CrateNPCSnakeLocked
+  parent: [ CrateNPCSnake , BaseCrateNPCLocked ]
+  suffix: Locked
+  name: snake crate
+  description: A crate containing three snakes.
+
+- type: entity
+  id: CrateNPCHamsterLocked
+  parent: [ CrateNPCHamster , BaseCrateNPCLocked ]
+  suffix: Filled, Locked
+
+- type: entity
+  id: CrateNPCHamletLocked
+  parent: [ CrateNPCHamlet , BaseCrateNPCLocked ]
+  suffix: Hamlet, Locked
+
+- type: entity
+  id: CrateNPCLizardLocked
+  parent: [ CrateNPCLizard , BaseCrateNPCLocked ]
+  name: lizard crate
+  description: A crate containing a lizard.
+  suffix: Locked
+
+- type: entity
+  id: CrateNPCKangarooLocked
+  parent: [ CrateNPCKangaroo , BaseCrateNPCLocked ]
+  name: kangaroo crate
+  description: A crate containing a kangaroo.
+  suffix: Locked
+
+- type: entity
+  id: CrateNPCMothroachLocked
+  parent: [ CrateNPCMothroach , BaseCrateNPCLocked ]
+  name: crate of mothroaches
+  description: A crate containing four mothroaches.
+  suffix: Locked

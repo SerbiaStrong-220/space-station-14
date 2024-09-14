@@ -6,8 +6,8 @@ using Content.Server.SS220.ItemOfferVerb.Components;
 using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
 using Content.Shared.Popups;
+using Content.Shared.SS220.ItemOfferVerb;
 using Content.Shared.Verbs;
-using Robust.Server.GameObjects;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -27,6 +27,12 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         {
             base.Initialize();
             SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
+            SubscribeLocalEvent<ItemReceiverComponent, ItemOfferAlertEvent>(OnItemOffserAlertClicked);
+        }
+
+        private void OnItemOffserAlertClicked(Entity<ItemReceiverComponent> ent, ref ItemOfferAlertEvent args)
+        {
+            TransferItemInHands(ent, ent);
         }
 
         public override void Update(float frameTime)

@@ -10,7 +10,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitSeniorEngineer
 
-# Jumpskirt
 - type: loadout
   id: SeniorsEngineerJumpskirt
   equipment:

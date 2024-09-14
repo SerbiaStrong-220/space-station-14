@@ -5,11 +5,17 @@
   playTimeTracker: JobSeniorService
   requirements:
     - !type:RoleTimeRequirement
-      role: JobServiceWorker
-      time: 43200 #12 ч
-    - !type:RoleTimeRequirement
       role: JobJanitor
-      time: 43200 #12 ч
+      time: 18000 # SS220-RoleTime 2
+    - !type:RoleTimeRequirement
+      role: JobChef
+      time: 18000 # SS220-RoleTime 2
+    - !type:RoleTimeRequirement
+      role: JobBotanist
+      time: 18000 # SS220-RoleTime 2
+    - !type:RoleTimeRequirement
+      role: JobBartender
+      time: 18000 # SS220-RoleTime 2
     - !type:DepartmentTimeRequirement
       department: Civilian
       time: 216000 # 60 ч

@@ -2,10 +2,10 @@ using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Popups;
 using Content.Server.EntityEffects.EffectConditions;
 using Content.Server.EntityEffects.Effects;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
@@ -34,7 +34,7 @@ public sealed class RespiratorSystem : EntitySystem
     [Dependency] private readonly LungSystem _lungSystem = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
 
@@ -297,7 +297,7 @@ public sealed class RespiratorSystem : EntitySystem
             var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
             foreach (var entity in organs)
             {
-                _alertsSystem.ShowAlert(entity.Owner, entity.Comp1.Alert);
+                _alertsSystem.ShowAlert(ent, entity.Comp1.Alert);
             }
         }
 
@@ -313,21 +313,10 @@ public sealed class RespiratorSystem : EntitySystem
         var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
         foreach (var entity in organs)
         {
-            _alertsSystem.ClearAlert(entity.Owner, entity.Comp1.Alert);
+            _alertsSystem.ClearAlert(ent, entity.Comp1.Alert);
         }
 
-        //SS220 air_fix begin
-        if (!TryComp<DamageableComponent>(ent, out var damageable))
-            return;
-
-        if (!damageable.DamagePerGroup.TryGetValue("Airloss", out var airloss))
-            return;
-
-        if (airloss == 0)
-            return;
-
-        _damageableSys.TryChangeDamage(ent, ent.Comp.DamageRecovery, damageable: damageable);
-        //SS220 air_fix end
+        _damageableSys.TryChangeDamage(ent, ent.Comp.DamageRecovery);
     }
 
     public void UpdateSaturation(EntityUid uid, float amount,

@@ -47,3 +47,8 @@
   license: "Custom"
   copyright: "Created by github user @Kit0vras. EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14/pull/1052"
+
+- files: ["marble_white.png", "marble_black.png", "marble_border_bw.png", "marble_border_wb.png", "marble_another_border_bw.png", "marble_another_border_wb.png", "marble_diagonal_bw.png", "marble_diagonal_wb.png","marble_corner_ne.png", "marble_corner_nw.png", "marble_corner_se.png", "marble_corner_sw.png", "marble_inner_ne.png", "marble_inner_nw.png", "marble_inner_se.png", "marble_inner_sw.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "goonstation commit 2b0d74d8baad01feb28da91837316728bdf99e36."
+  source: "https://github.com/goonstation/goonstation/pull/5567"

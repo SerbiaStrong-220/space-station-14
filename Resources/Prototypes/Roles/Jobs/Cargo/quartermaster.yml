@@ -7,6 +7,9 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 108000 # SS220-RoleTime
+    - !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 18000 # SS220-RoleTime 2
     - !type:OverallPlaytimeRequirement
       time: 180000 # SS220-RoleTime
     - !type:AgeRequirement

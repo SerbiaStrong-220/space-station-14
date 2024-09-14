@@ -59,6 +59,8 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/bench.rsi
     noRot: false
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: bench
@@ -110,7 +112,7 @@
     sprite: SS220/Structures/Furniture/sofa.rsi
     noRot: false
   - type: StaticPrice
-    price: 15
+    price: 30
 
 - type: entity
   name: sofa
@@ -173,7 +175,7 @@
     sprite: SS220/Structures/Furniture/dinner_sofa.rsi
     noRot: false
   - type: StaticPrice
-    price: 15
+    price: 30
 
 - type: entity
   name: sofa
@@ -224,6 +226,8 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/pew.rsi
     noRot: false
+  - type: StaticPrice
+    price: 20
 
 - type: entity
   name: pew

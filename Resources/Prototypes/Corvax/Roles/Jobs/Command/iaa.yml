@@ -35,7 +35,7 @@
     id: IAAPDA
     eyes: ClothingEyesGlassesSunglasses
     ears: ClothingHeadsetIAA
-    back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout
+    # back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout #SS220 - FIX loadout IAA
   inhand:
     - BriefcaseIAAFilled
 #SS220-IAA-Loadout-Begin
