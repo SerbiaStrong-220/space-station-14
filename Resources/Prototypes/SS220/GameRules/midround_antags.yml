@@ -56,6 +56,7 @@
     - CreateCocoonsObjective
     - SpiderQueenSurviveObjective
   - type: AntagSelection
+    agentName: spider-queen-round-end-agent-name
     definitions:
     - prefRoles: [ SpiderQueen ]
       spawnerPrototype: SpawnPointGhostSpaceQueen
