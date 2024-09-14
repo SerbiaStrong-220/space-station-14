@@ -19,5 +19,4 @@ public abstract class LabelContainer()
         YLabel = otherLabelContainer.YLabel;
         Title = otherLabelContainer.Title;
     }
-    // think of it also should contain a axis text...
 }

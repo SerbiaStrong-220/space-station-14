@@ -11,20 +11,29 @@ internal sealed class PlotSequencedView : Plot
     public Color SecondGraphicColor = Color.Red;
     public float FirstGraphicThickness = 3f;
     public float SecondGraphicThickness = 3f;
+    /// <summary>
+    /// Defines maximum number of points that will be stored/drawn
+    /// </summary>
+    public int PointStored = 128;
+    /// <summary>
+    /// Save thing in case we somehow have ymax = ymin and etc
+    /// </summary>
+    public float YMaxOffset = 0.1f;
+    /// <summary>
+    /// Save thing if we have null in width of X data
+    /// </summary>
+    public float XWidthSave = 1f;
     private void DrawFirstGraphicLine(DrawingHandleScreen handle, Vector2 from, Vector2 to)
                     => DrawLine(handle, from, to, FirstGraphicThickness, FirstGraphicColor);
 
     private PlotPoints2D _plotPoints;
-    private const int SerifSize = 12;
-    private const int FontSize = 12;
     private readonly Font _font;
     public PlotSequencedView() : base()
     {
         _font = AxisFont;
         RectClipContent = false;
         IoCManager.InjectDependencies(this);
-        _plotPoints = new PlotPoints2D(128);
-
+        _plotPoints = new PlotPoints2D(PointStored);
     }
     public void LoadPlot2DTimePoints(PlotPoints2D plotPoints, LabelContainer? label = null)
     {
@@ -33,7 +42,6 @@ internal sealed class PlotSequencedView : Plot
         else
             plotPoints.CopyLabels(label);
         _plotPoints = plotPoints;
-
     }
     public void AddPointToPlot(Vector2 point)
     {
@@ -64,8 +72,8 @@ internal sealed class PlotSequencedView : Plot
         if (!(PixelWidth - AxisBorderPosition > 0))
             return;
 
-        var yMaxResult = (yMax + 0.1f) ?? 0.1f;
-        var xWidthResult = xWidth ?? 1f;
+        var yMaxResult = (yMax + YMaxOffset) ?? YMaxOffset;
+        var xWidthResult = xWidth ?? XWidthSave;
 
         var deltaXWidth = PixelWidth / _plotPoints.Point2Ds.Count;
         var yNormalizer = PixelHeight / yMaxResult;
@@ -81,6 +89,7 @@ internal sealed class PlotSequencedView : Plot
         //Draw axis here to draw it on top of other
         DrawAxis(handle, yMaxResult, xWidthResult);
     }
+
     private void DrawAxis(DrawingHandleScreen handle, float maxY, float xWidth)
     {
         DrawAxis(handle, _plotPoints);

@@ -22,10 +22,9 @@ public sealed class Color2DPointView : LabelContainer
     {
         _x = x;
         _y = y;
+
         if (labelContainer != null)
-        {
-            this.CopyLabels(labelContainer);
-        }
+            CopyLabels(labelContainer);
     }
     public Color2DPointView((float xOffset, float xSize, float xStep) xParams,
                             (float yOffset, float ySize, float yStep) yParams,
@@ -33,10 +32,9 @@ public sealed class Color2DPointView : LabelContainer
     {
         _x = MakeCoordFrom(xParams.xOffset, xParams.xSize, xParams.xStep);
         _y = MakeCoordFrom(yParams.yOffset, yParams.ySize, yParams.yStep);
+
         if (labelContainer != null)
-        {
             this.CopyLabels(labelContainer);
-        }
     }
     public void EvalFunction(Func<float, float, float> func)
     {
@@ -50,7 +48,6 @@ public sealed class Color2DPointView : LabelContainer
     }
     public void LoadData(List<Vector3> points)
     {
-        // do smth with size?
         _points3D = points;
         _x = points.Select(entry => entry.X).Distinct().ToList();
         _y = points.Select(entry => entry.Y).Distinct().ToList();

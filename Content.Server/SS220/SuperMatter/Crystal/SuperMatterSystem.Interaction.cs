@@ -24,7 +24,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             RaiseLocalEvent(crystalUid, ev);
         }
 
-        if (TryComp<SuperMatterSpecificConsumableComponent>(targetUid, out var consumableComponent))
+        if (TryComp<SuperMatterExtraConsumableComponent>(targetUid, out var consumableComponent))
         {
             // well, uh, kinda need to hide it in component getter....
             RaiseLocalEvent(targetUid, new SyncSuperMatterBoltStats());

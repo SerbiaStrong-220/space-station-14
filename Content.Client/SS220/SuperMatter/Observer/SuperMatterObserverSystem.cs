@@ -8,6 +8,8 @@ using Content.Shared.SS220.SuperMatter.Observer;
 using Content.Client.UserInterface.Fragments;
 using Content.Client.SS220.Cartridges;
 using Robust.Shared.Random;
+using Robust.Shared.Configuration;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Client.SS220.SuperMatter.Observer;
 // It isn't a warCrime if you make shittyCode... kinda...
@@ -19,10 +21,12 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;
-    private const float UpdateDelay = 1f;
     private const float RandomEventChance = 0.02f;
+
+    private float _updateDelay = 1f;
     private TimeSpan _nextUpdateTime = default!;
     private HashSet<Entity<SuperMatterObserverComponent>> _observerEntities = new();
     private List<EntityUid> _smReceiverUIOwnersToInit = new();
@@ -38,6 +42,8 @@ public sealed class SuperMatterObserverSystem : EntitySystem
 
         SubscribeNetworkEvent<SuperMatterStateUpdate>(OnCrystalUpdate);
         SubscribeNetworkEvent<SuperMatterStateDeleted>(OnCrystalDelete);
+
+        Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, OnDelayChanged, true);
     }
     public override void FrameUpdate(float frameTime)
     {
@@ -46,7 +52,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         if (_gameTiming.CurTime > _nextUpdateTime)
         {
             // kinda simulate servers and clients working
-            _nextUpdateTime += TimeSpan.FromSeconds(UpdateDelay);
+            _nextUpdateTime += TimeSpan.FromSeconds(_updateDelay);
             foreach (var smReceiverOwner in new List<EntityUid>(_smReceiverUIOwnersToInit))
             {
                 if (!HasComp<TransformComponent>(smReceiverOwner)
@@ -124,7 +130,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             {
                 if (_processedReceivers.ContainsKey(receiver.Owner.Id))
                     continue;
-                if (TrySendToUIState(receiver.Owner, new SuperMatterObserverUpdateState(args.Id, args.Name, args.Integrity, args.Pressure,
+                if (TrySendToUIState(receiver.Owner, new SuperMatterObserverUpdateState(args.Id, args.Name, _updateDelay, args.Integrity, args.Pressure,
                                                                                       args.Temperature, args.Matter, args.InternalEnergy, args.GasRatios, args.TotalMoles, args.Delaminate)))
                     _processedReceivers.Add(receiver.Owner.Id, receiver.Owner);
             }
@@ -140,6 +146,10 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         {
             TryDeleteData(args.ID, observerComp);
         }
+    }
+    private void OnDelayChanged(float delay)
+    {
+        _updateDelay = delay;
     }
     private void OnReceiverBoundUIOpened(Entity<SuperMatterObserverReceiverComponent> entity, ref BoundUIOpenedEvent args)
     {

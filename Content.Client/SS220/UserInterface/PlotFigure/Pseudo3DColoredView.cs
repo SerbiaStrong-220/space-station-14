@@ -9,6 +9,7 @@ namespace Content.Client.SS220.UserInterface.PlotFigure;
 internal sealed class Pseudo3DColoredView : Plot
 {
     public PlotColormap Colormap = Colormaps.GoodBad;
+
     private Color2DPointView? _color2DPoint;
     private MovingPoint? _movingPoint;
     private UIBox2 _uIBox2 = new();
@@ -20,6 +21,10 @@ internal sealed class Pseudo3DColoredView : Plot
     private float _maxZ = 0f;
     private float _minZ = 0f;
 
+    public void MakeMeshgrid(List<float> x, List<float> y) => _color2DPoint = new Color2DPointView(x, y, _color2DPoint);
+    public void LoadColor2DPoint(List<Vector3> vector3) => _color2DPoint?.LoadData(vector3);
+    public void DeleteMovingPoint() => _movingPoint = null;
+
     public void SetLabels(string? xLabel, string? yLabel, string? title)
     {
         if (_color2DPoint == null)
@@ -28,7 +33,6 @@ internal sealed class Pseudo3DColoredView : Plot
         _color2DPoint.YLabel = yLabel;
         _color2DPoint.Title = title;
     }
-    public void LoadColor2DPoint(List<Vector3> vector3) => _color2DPoint?.LoadData(vector3);
     public void MakeMeshgrid((float Offset, float Size, float Step) xParams, (float Offset, float Size, float Step) yParams)
     {
         if (_color2DPoint == null)
@@ -41,7 +45,6 @@ internal sealed class Pseudo3DColoredView : Plot
 
         _color2DPoint = new Color2DPointView(xParams, yParams, _color2DPoint);
     }
-    public void MakeMeshgrid(List<float> x, List<float> y) => _color2DPoint = new Color2DPointView(x, y, _color2DPoint);
     public void EvalFunctionOnMeshgrid(Func<float, float, float> func)
     {
         _cachedFunction = func;
@@ -49,7 +52,7 @@ internal sealed class Pseudo3DColoredView : Plot
     }
     public void LoadMovingPoint(Vector2 position, Vector2 moveDirection)
     {
-        // TODO make it normal pls
+        // SM_TODO hide borders calc
         if (position.X > _cachedParams.x.Offset + (_cachedParams.x.Size - 1) * _cachedParams.x.Step
                 || position.Y > _cachedParams.y.Offset + (_cachedParams.y.Size - 1) * _cachedParams.y.Step
                 || position.X < _cachedParams.x.Offset || position.Y < _cachedParams.x.Offset)
@@ -69,20 +72,12 @@ internal sealed class Pseudo3DColoredView : Plot
 
         _movingPoint?.Update(position, moveDirection);
     }
-    /// <summary> Make sure that we wont get into wrong position by changing Meshgrid </summary>
-    private float MakeOffsetFromCoord(float coord, (float Min, float Size, float Step) parameters)
-    {
-        // TODO Make it to variables of plot and add difference between X and Y
-        return Math.Clamp(coord - parameters.Size / 2f * parameters.Step, parameters.Min, float.PositiveInfinity);
-    }
-
-    public void DeleteMovingPoint() => _movingPoint = null;
-
     protected override void Draw(DrawingHandleScreen handle)
     {
         if (_color2DPoint == null)
             return;
-        // lmaoooooo
+        // SM_TODO: make it more obvious
+        // to differ min from max
         _maxZ = _color2DPoint.MaxZ + 0.01f;
         _minZ = _color2DPoint.MinZ;
         _meshgridBorders = (_color2DPoint.X.Max(), _color2DPoint.X.Min(), _color2DPoint.Y.Max(), _color2DPoint.Y.Min());
@@ -115,6 +110,11 @@ internal sealed class Pseudo3DColoredView : Plot
         }
     }
 
+    /// <summary> Make sure that we wont get into wrong position by changing Meshgrid </summary>
+    private float MakeOffsetFromCoord(float coord, (float Min, float Size, float Step) parameters)
+    {
+        return Math.Clamp(coord - parameters.Size / 2f * parameters.Step, parameters.Min, float.PositiveInfinity);
+    }
     /// <summary> Adjust vector to borders also offsets it with AxisBorderPosition </summary>
     private float AdjustCoordToBorder(float coord, float curMin, float curMax, float availableSize)
     {
@@ -124,10 +124,15 @@ internal sealed class Pseudo3DColoredView : Plot
     {
         return coord / (curMax - curMin) * (availableSize - AxisBorderPosition - AxisThickness / 2);
     }
-    private void DrawPoint(DrawingHandleScreen handle, (float X, float Y) coords, (float X, float Y) size, Color color)
+    /// <summary>
+    /// Function to draw point with internal scaling of a point size
+    /// </summary>
+    /// <param name="scale"> scale point a little to prevent bugs with scaling of UI in different resolutions</param>
+    private void DrawPoint(DrawingHandleScreen handle, (float X, float Y) coords, (float X, float Y) size, Color color, float scale = 1.05f)
     {
-        size.X *= 1.05f;
-        size.Y *= 1.05f;
+        // we scale a little point to prevent it
+        size.X *= scale;
+        size.Y *= scale;
         _uIBox2 = UIBox2.FromDimensions(coords.X - size.X / 2, coords.Y + size.Y / 2, size.X, size.Y);
         handle.DrawRect(_uIBox2, color, true);
     }

@@ -40,7 +40,7 @@ public sealed class PlotColormap
     }
     public void DrawColorBar(DrawingHandleScreen handle)
     {
-        //Times I forgot about it: x1
+        //Times I forgot about it: x2
     }
 
     private Color InterpolateBetween((float Ratio, Color Value) lesserPoint, (float Ratio, Color Value) seniorPoint, float ratio)
@@ -50,6 +50,7 @@ public sealed class PlotColormap
         var returnColor = new Color(seniorPoint.Value.R * resultedRatio + lesserPoint.Value.R * (1 - resultedRatio),
                                     seniorPoint.Value.G * resultedRatio + lesserPoint.Value.G * (1 - resultedRatio),
                                     seniorPoint.Value.B * resultedRatio + lesserPoint.Value.B * (1 - resultedRatio),
+                                    // Special for Stalengd
                                     seniorPoint.Value.A * resultedRatio + lesserPoint.Value.A * (1 - resultedRatio));
         return returnColor;
     }

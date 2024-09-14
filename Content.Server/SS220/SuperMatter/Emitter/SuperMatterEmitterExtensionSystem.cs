@@ -15,7 +15,7 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SuperMatterEmitterExtensionComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<SuperMatterEmitterExtensionComponent, SuperMatterEmitterExtensionApply>(OnApplyMessage);
+        SubscribeLocalEvent<SuperMatterEmitterExtensionComponent, SuperMatterEmitterExtensionValueMessage>(OnApplyMessage);
     }
 
     private void OnComponentInit(Entity<SuperMatterEmitterExtensionComponent> entity, ref ComponentInit args)
@@ -27,7 +27,7 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
         if (!boltProto.Components.ContainsKey("SuperMatterEmitterBolt"))
             Log.Error($"Added SM Emitter Extension to entity, but its EmitterComponent.BoltType dont have {nameof(SuperMatterEmitterBoltComponent)}");
     }
-    private void OnApplyMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionApply args)
+    private void OnApplyMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionValueMessage args)
     {
         entity.Comp.PowerConsumption = args.PowerConsumption;
         entity.Comp.EnergyToMatterRatio = args.EnergyToMatterRatio;

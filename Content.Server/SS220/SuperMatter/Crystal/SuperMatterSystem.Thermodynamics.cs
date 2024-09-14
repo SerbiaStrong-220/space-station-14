@@ -61,6 +61,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             SendAdminChatAlert(crystal, "Physics law breaking! If it possible ask how they do it and convey it to developer");
             smComp.Matter += 20 * MatterNondimensionalization;
             smComp.InternalEnergy = EvaluateTruthishInternalEnergy(crystal);
+            // SM_TODO popup it and add integrity dmg
         }
         smComp.Matter = MathF.Max(smComp.Matter + deltaMatter * frameTime, 4 * MatterNondimensionalization); // actually should go boom at this low, but...
         smComp.Temperature = Math.Clamp(smComp.Temperature + smDeltaT * frameTime, Atmospherics.TCMB, Atmospherics.Tmax); // weird but okay

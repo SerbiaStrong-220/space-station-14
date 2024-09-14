@@ -13,25 +13,31 @@ using Robust.Client.Graphics;
 using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
 using Content.Shared.Atmos.Prototypes;
+using System.Text;
 
 namespace Content.Client.SS220.SuperMatter.Ui;
 
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterObserverMenu : FancyWindow
 {
-    [Dependency] ILocalizationManager _localization = default!;
-    [Dependency] IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly ILocalizationManager _localization = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
     public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;
     public SuperMatterObserverComponent? Observer;
     public int? CrystalKey;
+    // Defines how much data point about the past we will show
     public const int MAX_DATA_LENGTH = 180;
+
     private Dictionary<Gas, string> _gasLocalizedNames = new();
+
     public SuperMatterObserverMenu()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
         PlotValueOverTime.SetLabels(_localization.GetString("smObserver-plotXLabel-integrity"), _localization.GetString("smObserver-plotYLabel-integrity"), _localization.GetString("smObserver-plotTitle-integrity"));
+        // SM_TODO hide it in xaml
         ColorState.MakeMeshgrid((1, 100, 25), (1, 100, 100));
         ColorState.EvalFunctionOnMeshgrid(GetIntegrityDamageMap);
         ColorState.SetLabels(_localization.GetString("smObserver-plotXLabel-colorState"), _localization.GetString("smObserver-plotYLabel-colorState"), _localization.GetString("smObserver-plotTitle-colorState"));
@@ -104,7 +110,7 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         if (msg.Id != CrystalKey)
             return;
 
-        PlotValueOverTime.AddPointToPlot(new Vector2(PlotValueOverTime.GetLastAddedPointX() + 1f, msg.Integrity));
+        PlotValueOverTime.AddPointToPlot(new Vector2(PlotValueOverTime.GetLastAddedPointX() + msg.UpdateDelay, msg.Integrity));
         ColorState.LoadMovingPoint(new Vector2(msg.Matter.Value, msg.InternalEnergy.Value), new Vector2(msg.Matter.Derivative, msg.InternalEnergy.Derivative));
         SetMessageDataToTextInfo(msg);
         UpdateGasRatioBars(msg.GasRatios);
@@ -136,8 +142,8 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     private float GetIntegrityDamageMap(float matter, float internalEnergy)
     {
         return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(internalEnergy
-                     - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
-                matter / SuperMatterFunctions.MatterNondimensionalization);
+                - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
+            matter / SuperMatterFunctions.MatterNondimensionalization);
     }
     private void InitGasRatioBars()
     {
@@ -170,12 +176,15 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
             retBackground.BackgroundColor = Color.FromHex("#2B2A26");
         else
             retBackground = new StyleBoxFlat(Color.FromHex("#2B2A26"));
+
         if (TryGetStyleProperty<StyleBoxFlat>(ProgressBar.StylePropertyForeground, out var retForeground))
             retForeground.BackgroundColor = gasProto != null ? Color.FromHex("#" + gasProto.Color) : Color.ForestGreen;
         else
             retForeground = new StyleBoxFlat(gasProto != null ? Color.FromHex("#" + gasProto.Color) : Color.ForestGreen);
+
         retForeground.BorderThickness = new Thickness(2f, 2f, 0f, 4f);
         retBackground.BorderThickness = new Thickness(2f, 2f, 0f, 4f);
+        // SM_TODO hide in its own xaml.cs xaml
         var gasBar = new GasBar
         {
             GasId = gas,
@@ -206,14 +215,17 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     {
         if (!_prototypeManager.TryIndex<GasPrototype>(((int)gas).ToString(), out var gasProto))
             return "";
-        var interactionTooltip = _localization.GetString(gasProto.Name);
+
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine(_localization.GetString(gasProto.Name));
         if (SuperMatterGasInteraction.DecayInfluenceGases.TryGetValue(gas, out var decayInfluence))
-            interactionTooltip += Environment.NewLine + "   " + _localization.GetString("smObserver-decay", ("flat", decayInfluence.flatInfluence.ToString("N0")), ("relative", decayInfluence.RelativeInfluence.ToString("N2")));
+            stringBuilder.AppendLine(_localization.GetString("smObserver-decay", ("flat", decayInfluence.flatInfluence.ToString("N0")), ("relative", decayInfluence.RelativeInfluence.ToString("N2"))));
         if (SuperMatterGasInteraction.GasesToMatterConvertRatio.TryGetValue(gas, out var gassesToMatter))
-            interactionTooltip += Environment.NewLine + "   " + _localization.GetString("smObserver-gasToMatter", ("value", gassesToMatter.ToString("N0")));
+            stringBuilder.AppendLine(_localization.GetString("smObserver-gasToMatter", ("value", gassesToMatter.ToString("N0"))));
         if (SuperMatterGasInteraction.EnergyEfficiencyChangerGases.TryGetValue(gas, out var energyInfluence))
-            interactionTooltip += Environment.NewLine + "   " + _localization.GetString("smObserver-energyInfluence", ("optimalRatio", (energyInfluence.OptimalRatio * 100).ToString("N0")), ("relative", ((energyInfluence.RelativeInfluence + 1) * 100).ToString("N0")));
-        return interactionTooltip;
+            stringBuilder.AppendLine(_localization.GetString("smObserver-energyInfluence", ("optimalRatio", (energyInfluence.OptimalRatio * 100).ToString("N0")), ("relative", ((energyInfluence.RelativeInfluence + 1) * 100).ToString("N0"))));
+
+        return stringBuilder.ToString();
     }
     private sealed class ServerButton : Button
     {

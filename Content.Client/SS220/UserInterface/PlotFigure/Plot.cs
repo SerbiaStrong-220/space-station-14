@@ -75,6 +75,7 @@ internal abstract class Plot : Control
         AddAxisLabels(handle, secondLabels);
     }
     // TODO add logic for secondLabels like moving swapping etc etc
+    // good luck guys =)
     private void AddAxisLabels(DrawingHandleScreen handle, LabelContainer? labels)
     {
         if (labels == null)

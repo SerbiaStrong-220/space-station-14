@@ -14,10 +14,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly StationSystem _station = default!;
+
     private const float SECONDS_BEFORE_EXPLOSION = 13f;
     private const float IntegrityRegenerationStep = 5f;
     private const float IntegrityRegenerationEnd = 40f;
-    /// <summary> !TODO IT! </summary>
+
     public void MarkAsLaminated(Entity<SuperMatterComponent> crystal, float? secondsToBlow = null)
     {
         crystal.Comp.TimeOfDelamination = _gameTiming.CurTime

@@ -30,8 +30,6 @@ public sealed class MovingPoint
     }
     public void DrawPoint(DrawingHandleScreen handle)
     {
-        // _uIBox2 = UIBox2.FromDimensions(_pointPosition.X - PointSize / 2, _pointPosition.Y + PointSize / 2, PointSize, PointSize);
-        // handle.DrawRect(_uIBox2, PointColor, true);
         handle.DrawCircle(_pointPosition, PointSize, PointColor, true);
     }
     public void DrawMovingDirection(DrawingHandleScreen handle)
@@ -39,6 +37,7 @@ public sealed class MovingPoint
         DrawArrow(handle, _pointPosition, _pointPosition + 10 * _moveDirection, 6f, MoveDirectionColor, true);
         DrawArrow(handle, _pointPosition - 10 * _moveDirection, _pointPosition, 6f, MoveDirectionColor, false);
     }
+
     private void DrawArrow(DrawingHandleScreen handle, Vector2 from, Vector2 to, float arrowRange, Color color, bool ArrowFront)
     {
         var perpendicularClockwise = new Vector2((to - from).Y, -(to - from).X);
@@ -48,13 +47,12 @@ public sealed class MovingPoint
                                     from - perpendicularClockwise * arrowRange / 3,
                                     to + perpendicularClockwise * arrowRange / 3,
                                     to - perpendicularClockwise * arrowRange / 3,], color);
-        //draw ArrowHat
+
         if (ArrowFront)
             DrawArrowHeadHat(handle, from, to, arrowRange, color, perpendicularClockwise);
         else
             DrawArrowEndHat(handle, to, from, arrowRange, color, perpendicularClockwise);
     }
-
     private void DrawArrowHeadHat(DrawingHandleScreen handle, Vector2 from, Vector2 to, float arrowRange, Color color, Vector2 perpendicularClockwise)
     {
         DrawTriangleStrip(handle, [ to + perpendicularClockwise * arrowRange,
@@ -69,7 +67,6 @@ public sealed class MovingPoint
                                     to,
                                     to - perpendicularClockwise * arrowRange], color);
     }
-
     private void DrawTriangleStrip(DrawingHandleScreen handle, Vector2[] vectors, Color color)
     {
         Span<DrawVertexUV2D> toSpanVector = new DrawVertexUV2D[vectors.Length];

@@ -27,13 +27,13 @@ public sealed class PlotPoints2D(int maxPoints) : LabelContainer
     public void AddPoint(Vector2 point)
     {
         _point2Ds ??= new() { point };
-
+        // we limit number of elements in list, so if we want to add more -> delete first one
         if (_point2Ds.Count == _maxAmountOfPoints)
-        {
             _point2Ds.RemoveAt(0);
-        }
+
         if (_point2Ds[_point2Ds.Count - 1].X > point.X)
             throw new Exception("To Plot2DTimePoints added value with lesser X then last element");
+
         _point2Ds.Add(point);
     }
     public bool TryGetDeltaBetweenMaxMinX([NotNullWhen(true)] out float? delta)

@@ -2,6 +2,7 @@
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
 
+// TODO HallucinationParams -> struct
 namespace Content.Server.SS220.Hallucination;
 [RegisterComponent]
 public sealed partial class HallucinationSourceComponent : Component

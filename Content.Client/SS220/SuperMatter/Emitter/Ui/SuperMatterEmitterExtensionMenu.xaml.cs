@@ -49,7 +49,7 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
         PowerConsumptionSpinBox.AddRightButton(500, "+500");
         PowerConsumptionSpinBox.IsValid = PowerConsumptionValidate;
         // it should be here to Force SpinBox UpdateButtonCanPress() cause its private
-        PowerConsumptionSpinBox.Value = (int)SuperMatterEmitterExtensionConsts.BaseEnergyConsumption;
+        PowerConsumptionSpinBox.Value = SuperMatterEmitterExtensionConsts.BaseEnergyConsumption;
         PowerConsumptionSpinBox.ValueChanged += (_) =>
         {
             ChangeApplyState(ApplyButtonStateEnum.ChangesNotSaved);
@@ -57,9 +57,6 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
     }
     private void InitMatterToEnergyRatioSlider()
     {
-        MatterToEnergyRatioSlider.MaxValue = 100;
-        MatterToEnergyRatioSlider.MinValue = 0;
-        MatterToEnergyRatioSlider.Value = 50;
         MatterToEnergyRatioSlider.OnValueChanged += (_) =>
         {
             ChangeApplyState(ApplyButtonStateEnum.ChangesNotSaved);
@@ -92,14 +89,7 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
     }
     private void ChangeButtonLabelColor(Color color)
     {
-        foreach (var child in SubmitButton.Children)
-        {
-            if (child.GetType() == typeof(Label))
-            {
-                ((Label)child).FontColorOverride = color;
-                return;
-            }
-        }
+        SubmitButton.Label.FontColorOverride = color;
     }
     private void ChangeSliderLabels()
     {

@@ -9,8 +9,11 @@ public enum SuperMatterEmitterExtensionUiKey : byte
     Key
 }
 
+/// <summary>
+/// This event raised when user applied changes in emitter interface
+/// </summary>
 [Serializable, NetSerializable]
-public sealed class SuperMatterEmitterExtensionApply(int power, int ratio) : BoundUserInterfaceMessage
+public sealed class SuperMatterEmitterExtensionValueMessage(int power, int ratio) : BoundUserInterfaceMessage
 {
     public int PowerConsumption = power;
     public int EnergyToMatterRatio = ratio;

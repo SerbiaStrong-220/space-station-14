@@ -16,22 +16,22 @@ public sealed class SuperMatterObserverBUI : BoundUserInterface
         _menu = this.CreateWindow<SuperMatterObserverMenu>();
 
         _menu.OnServerButtonPressed += (args, observerComp) =>
-            {
-                if (args.Button.Pressed)
-                    _menu.Observer = observerComp;
-                else
-                    _menu.Observer = null;
-                _menu.CrystalKey = null;
-                _menu.LoadCrystal();
-            };
+        {
+            if (args.Button.Pressed)
+                _menu.Observer = observerComp;
+            else
+                _menu.Observer = null;
+            _menu.CrystalKey = null;
+            _menu.LoadCrystal();
+        };
         _menu.OnCrystalButtonPressed += (args, crystalKey) =>
-            {
-                if (args.Button.Pressed)
-                    _menu.CrystalKey = crystalKey;
-                else
-                    _menu.CrystalKey = null;
-                _menu.LoadCachedData();
-            };
+        {
+            if (args.Button.Pressed)
+                _menu.CrystalKey = crystalKey;
+            else
+                _menu.CrystalKey = null;
+            _menu.LoadCachedData();
+        };
     }
     public void DirectUpdateState(BoundUserInterfaceState state)
     {

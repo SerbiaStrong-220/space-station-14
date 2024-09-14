@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Shared.SS220.SuperMatter.Emitter;
 using Content.Shared.Projectiles;
 using Content.Server.SS220.SuperMatterCrystal.Components;
-using Content.Server.Administration.Commands;
 
 namespace Content.Server.SS220.SuperMatter.Emitter;
 
@@ -13,6 +12,7 @@ public sealed class SuperMatterEmitterSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<SuperMatterEmitterBoltComponent, SyncSuperMatterBoltStats>(OnSync);
+        //TODO: SubscribeLocalEvent<SuperMatterEmitterBoltComponent, MapInitEvent>();
     }
 
     private void OnSync(Entity<SuperMatterEmitterBoltComponent> entity, ref SyncSuperMatterBoltStats _)
@@ -22,7 +22,7 @@ public sealed class SuperMatterEmitterSystem : EntitySystem
         var shootAuthorUid = projectileComponent.Shooter;
         if (!TryComp<SuperMatterEmitterExtensionComponent>(shootAuthorUid, out var superMatterEmitter))
             return;
-        var consumableComponent = EnsureComp<SuperMatterSpecificConsumableComponent>(entity.Owner);
+        var consumableComponent = EnsureComp<SuperMatterExtraConsumableComponent>(entity.Owner);
 
         consumableComponent.AdditionalEnergyOnConsumption =
             SuperMatterEmitterExtensionConsts.GetEnergyFromPower(superMatterEmitter.EnergyToMatterRatio / 100f * superMatterEmitter.PowerConsumption);

@@ -26,7 +26,8 @@
                     <Label Text="{Loc 'supermatter-emitter-extension-matter-none'}" Name="MatterRatioResult" HorizontalAlignment="Left" HorizontalExpand="True" Margin="4 0 0 1" />
                     <Label Text="{Loc 'supermatter-emitter-extension-energy-none'}" Name="EnergyRatioResult" HorizontalAlignment="Right" HorizontalExpand="True" Margin="4 0 0 1" />
                 </BoxContainer>
-                <SliderIntInput Name="MatterToEnergyRatioSlider" HorizontalAlignment="Stretch" HorizontalExpand="True"/>
+                <SliderIntInput Name="MatterToEnergyRatioSlider" HorizontalAlignment="Stretch" HorizontalExpand="True"
+                    MaxValue="100" MinValue="0" Value="50",/>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="4 4 4 2"/>
             <BoxContainer MaxHeight="30">

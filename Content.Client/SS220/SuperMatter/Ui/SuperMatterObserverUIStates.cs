@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.SuperMatter.Ui;
 
 
 [Serializable]
-public sealed class SuperMatterObserverUpdateState(int id, string name,
+public sealed class SuperMatterObserverUpdateState(int id, string name, float updateDelay,
                                             float integrity, float pressure,
                                             float temperature,
                                             (float Value, float Derivative) matter,
@@ -17,6 +17,10 @@ public sealed class SuperMatterObserverUpdateState(int id, string name,
 {
     public int Id { get; } = id;
     public string Name { get; } = name;
+    /// <summary>
+    /// Delay in seconds, used to correctly show time evolution on plots.
+    /// </summary>
+    public float UpdateDelay { get; } = updateDelay;
     public float Pressure { get; } = pressure;
     public float Integrity { get; } = integrity;
     public float Temperature { get; } = temperature;

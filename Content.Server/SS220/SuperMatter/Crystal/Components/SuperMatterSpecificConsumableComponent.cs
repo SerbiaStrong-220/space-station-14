@@ -2,7 +2,7 @@
 namespace Content.Server.SS220.SuperMatterCrystal.Components;
 
 [RegisterComponent]
-public sealed partial class SuperMatterSpecificConsumableComponent : Component
+public sealed partial class SuperMatterExtraConsumableComponent : Component
 {
     [DataField]
     public float AdditionalMatterOnConsumption = 0f;

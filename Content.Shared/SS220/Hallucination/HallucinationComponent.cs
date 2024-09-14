@@ -2,9 +2,10 @@
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
-using Content.Shared.Eye.Blinding.Components;
 
 namespace Content.Shared.SS220.Hallucination;
+// TODO Dictionary -> list
+// TODO HallucinationParams -> struct
 /// <summary> Never use it yourself! NEVER! Check the server system if you want to work with it. </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class HallucinationComponent : Component
@@ -13,11 +14,14 @@ public sealed partial class HallucinationComponent : Component
     public int HallucinationCount => _randomEntities.Count;
     [ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<int, TimeSpan> TotalDurationTimeSpans = new();
+    /// <summary> Any operation bool flags goes here </summary>
+    public Dictionary<int, bool> EyeProtectionDependent = new();
+
     [AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<int, (float BetweenHallucinations, float HallucinationMinTime,
                                 float HallucinationMaxTime, float TotalDuration)> TimeParams = new();
-    /// <summary> Any operation bool flags goes here </summary>
-    public Dictionary<int, bool> EyeProtectionDependent = new();
+    [AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
+    private Dictionary<int, ProtoId<WeightedRandomEntityPrototype>> _randomEntities = new();
 
     /// <summary> for Key use the id of author/performing entity </summary>
     public HallucinationComponent(int key, ProtoId<WeightedRandomEntityPrototype> randomEntities,
@@ -26,12 +30,9 @@ public sealed partial class HallucinationComponent : Component
                                     bool eyeProtectionDependent = false)
     {
         _randomEntities = new() { { key, randomEntities } };
-        TimeParams = new() { { key, timeParams ?? (10f, 2f, 8f, 20f)} };
+        TimeParams = new() { { key, timeParams ?? (10f, 2f, 8f, 20f) } };
         EyeProtectionDependent = new() { { key, eyeProtectionDependent } };
     }
-    [AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
-    private Dictionary<int, ProtoId<WeightedRandomEntityPrototype>> _randomEntities = new();
-
     public void AddToRandomEntities(int key, ProtoId<WeightedRandomEntityPrototype> randomEntities,
                                     (float BetweenHallucinations, float HallucinationMinTime,
                                     float HallucinationMaxTime, float TotalDuration)? timeParams = null,

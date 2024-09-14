@@ -31,4 +31,10 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<float> AdminAhelpMessageDelay =
         CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.
+    /// </summary>
+    public static readonly CVarDef<float> SuperMatterUpdateNetworkDelay =
+        CVarDef.Create("network.superMatter_update_delay", 1f, CVar.SERVER | CVar.REPLICATED);
 }

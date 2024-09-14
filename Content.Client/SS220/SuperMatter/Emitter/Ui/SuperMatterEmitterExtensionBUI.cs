@@ -20,11 +20,12 @@ public sealed class SuperMatterEmitterExtensionBUI : BoundUserInterface
             _power = superMatterEmitter.PowerConsumption;
             _ratio = superMatterEmitter.EnergyToMatterRatio;
         }
+
         _menu = this.CreateWindow<SuperMatterEmitterExtensionMenu>();
         _menu.SetEmitterParams(_ratio, _power);
         _menu.OnSubmitButtonPressed += (_, powerConsumption, ratio) =>
         {
-            SendMessage(new SuperMatterEmitterExtensionApply(powerConsumption, ratio));
+            SendMessage(new SuperMatterEmitterExtensionValueMessage(powerConsumption, ratio));
         };
     }
 }
