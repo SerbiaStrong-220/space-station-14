@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
+using Content.Server.SS220.Roles;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.SS220.SpiderQueen.Components;
@@ -11,8 +12,6 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 {
     [Dependency] private readonly NumberObjectiveSystem _number = default!;
 
-    private Dictionary<MindComponent, bool> IsCompletedOnce = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -22,13 +21,15 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 
     private void OnGetProgress(Entity<CreateCocoonsConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
-        args.Progress = GetProgress(args.Mind, _number.GetTarget(ent.Owner));
+        args.Progress = GetProgress(args.MindId, args.Mind, _number.GetTarget(ent.Owner));
     }
 
-    private float GetProgress(MindComponent mind, int target)
+    private float GetProgress(EntityUid mindId, MindComponent mind, int target)
     {
-        if (IsCompletedOnce.TryGetValue(mind, out var comleted) &&
-            comleted)
+        if (!TryComp<SpiderQueenRoleComponent>(mindId, out var spiderQueenRole))
+            return 0f;
+
+        if (spiderQueenRole.IsCreateCocoonsCompletedOnce)
             return 1f;
 
         var mobUid = mind.CurrentEntity;
@@ -38,7 +39,7 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 
         if (spiderQueen.CocoonsList.Count >= target)
         {
-            IsCompletedOnce.Add(mind, true);
+            spiderQueenRole.IsCreateCocoonsCompletedOnce = true;
             return 1f;
         }
         else

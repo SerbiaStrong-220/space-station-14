@@ -6,4 +6,6 @@ namespace Content.Server.SS220.Roles;
 [RegisterComponent, ExclusiveAntagonist]
 public sealed partial class SpiderQueenRoleComponent : AntagonistRoleComponent
 {
+    [ViewVariables]
+    public bool IsCreateCocoonsCompletedOnce = false;
 }
