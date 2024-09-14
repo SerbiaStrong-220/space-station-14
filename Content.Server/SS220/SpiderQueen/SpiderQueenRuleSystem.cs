@@ -1,10 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Mind;
 using Content.Server.Respawn;
+using Content.Server.Roles;
 using Content.Server.SS220.Markers;
+using Content.Server.SS220.Roles;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Mind;
+using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 
@@ -16,12 +21,17 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SpecialRespawnSystem _specialRespawn = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly AntagSelectionSystem _antag = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenRuleComponent, AntagSelectLocationEvent>(OnAntagSelectLocation);
+        SubscribeLocalEvent<SpiderQueenRuleComponent, AfterAntagEntitySelectedEvent>(AfterEntitySelected);
+
+        SubscribeLocalEvent<SpiderQueenRoleComponent, GetBriefingEvent>(OnGetBriefing);
     }
 
     private void OnAntagSelectLocation(Entity<SpiderQueenRuleComponent> ent, ref AntagSelectLocationEvent args)
@@ -66,6 +76,36 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
                 _specialRespawn.TryFindRandomTile(grid.Value, map.Value, 30, out var randomCoords))
                 args.Coordinates.Add(_transform.ToMapCoordinates(randomCoords));
         }
+    }
+
+    private void AfterEntitySelected(Entity<SpiderQueenRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
+    {
+        var spider = args.EntityUid;
+        if (!_mind.TryGetMind(spider, out var mindId, out var mind))
+            return;
+
+        var briefing = Loc.GetString("spider-queen-role-greeting");
+        _antag.SendBriefing(spider, briefing, null, null);
+    }
+
+    private void OnGetBriefing(Entity<SpiderQueenRoleComponent> ent, ref GetBriefingEvent args)
+    {
+        if (!TryComp<MindComponent>(ent.Owner, out var mind))
+            return;
+
+        var briefing = Loc.GetString("spider-queen-role-greeting");
+
+        if (mind.OwnedEntity is { } spider &&
+            TryComp<SpiderQueenComponent>(spider, out var spiderQueen))
+        {
+            var current = spiderQueen.CurrentMana;
+            var max = spiderQueen.MaxMana;
+
+            briefing = string.Format("{0}\n{1}", briefing,
+                Loc.GetString("spider-queen-mana-information", ("current", current), ("max", max)));
+        }
+
+        args.Append(briefing);
     }
 }
 

@@ -11,6 +11,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.SpiderQueen;
 
@@ -22,6 +23,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -31,6 +33,27 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         SubscribeLocalEvent<SpiderCocoonComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<SpiderWorldSpawnEvent>(OnWorldSpawn);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<SpiderQueenComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_timing.CurTime < comp.NextSecond)
+                continue;
+
+            comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
+
+            var newValue = comp.CurrentMana + comp.PassiveGeneration + comp.CocoonsManaBonus;
+            comp.CurrentMana = newValue > comp.MaxMana
+                ? comp.MaxMana
+                : newValue;
+
+            Dirty(uid, comp);
+        }
     }
 
     private void OnWorldSpawn(SpiderWorldSpawnEvent args)

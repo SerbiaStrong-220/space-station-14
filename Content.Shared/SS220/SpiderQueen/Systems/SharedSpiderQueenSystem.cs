@@ -7,14 +7,11 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.SpiderQueen.Systems;
 
 public abstract class SharedSpiderQueenSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -27,26 +24,6 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
 
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<SpiderQueenComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (_timing.CurTime < comp.NextSecond)
-                continue;
-
-            comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
-
-            var newValue = comp.CurrentMana + comp.PassiveGeneration + comp.CocoonsManaBonus;
-            comp.CurrentMana = newValue > comp.MaxMana
-                ? comp.MaxMana
-                : newValue;
-            Dirty(uid, comp);
-        }
     }
 
     private void OnExamine(Entity<SpiderQueenComponent> entity, ref ExaminedEvent args)
