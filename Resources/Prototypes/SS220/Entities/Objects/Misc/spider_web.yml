@@ -93,8 +93,11 @@
       standStillTime: 3
       damage:
         types:
-          Slash: -10
-          Piercing: -40
+          Bloodloss: -1
+        groups:
+          Brute: -0.5
+          Toxin: -0.5
+          Burn: -0.5
       ignoreBlacklist:
         tags:
         - SpiderQueen
@@ -125,8 +128,12 @@
       standStillTime: 3
       damage:
         types:
-          Slash: -10
-          Piercing: -40
+          Bloodloss: -1.5
+        groups:
+          Brute: -1
+          Toxin: -0.5
+          Airloss: -1
+          Burn: -1
       ignoreBlacklist:
         tags:
         - SpiderQueen

@@ -52,7 +52,8 @@
 - type: entity
   id: BaseSpiderCocoon
   name: spider cocoon
-  description: описание
+  description: description
+  suffix: Spider hive
   abstract: true
   components:
   - type: Icon
@@ -87,7 +88,8 @@
 - type: entity
   id: BaseSpiderCocoonDestroyed
   name: spider cocoon destroyed
-  description: описание
+  description: description
+  suffix: Spider hive
   abstract: true
   components:
   - type: Icon
@@ -254,6 +256,7 @@
 - type: entity
   parent: BaseSpiderCocoon
   id: SpiderCocoonHorizontal
+  suffix: Spider hive
   components:
   - type: Icon
     sprite: SS220/Structures/Specific/cocoon.rsi
@@ -285,6 +288,7 @@
 - type: entity
   parent: BaseSpiderCocoon
   id: SpiderCocoonVertical
+  suffix: Spider hive
   components:
   - type: Icon
     state: cocoon2
@@ -315,6 +319,7 @@
 - type: entity
   parent: BaseSpiderCocoonDestroyed
   id: SpiderCocoonHorizontalDestroyed
+  suffix: Spider hive
   components:
   - type: Icon
     state: destroyed_cocoon1
@@ -328,6 +333,7 @@
 - type: entity
   parent: BaseSpiderCocoonDestroyed
   id: SpiderCocoonVerticalDestroyed
+  suffix: Spider hive
   components:
   - type: Icon
     state: destroyed_cocoon2

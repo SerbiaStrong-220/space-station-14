@@ -59,17 +59,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: MeleeWeapon
-    hidden: true
-    soundHit:
-      path: /Audio/Effects/bite.ogg
-    angle: 0.
-    animation: WeaponArcBite
-    damage:
-      types:
-        Piercing: 12 #Damage
-        Poison: 4
-        Structural: 15
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 3
@@ -79,18 +68,6 @@
     interactFailureString: petting-failure-generic
   - type: NoSlip
   - type: IgnoreSpiderWeb
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.Самолечение
-    allowedStates:
-    - Alive
-    damageCap: 300
-    damage:
-      types:
-        Heat: -2.5
-      groups:
-        Brute: -3
-        Toxin: -5
-        Airloss: -2.5
-        Burn: -2.5
   - type: Tag
     tags:
       - CannotSuicide
@@ -146,12 +123,23 @@
     channels:
     - HiveRadio
 
+- type: entity
+  parent: BaseMobSpiderQueen
+  id: BaseMobSpiderServant
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - SpiderServant
+
 #Spider queen
 - type: entity
   parent:
   - BaseMobSpiderQueen
   - MobSpiderQueenGhostRole
-  id: MobSpiderSpaceQueen
+  id: MobSpiderQueen
   name: Spider queen
   description: spider dance
   components:
@@ -192,6 +180,17 @@
     proto: PoisonousAcid
     capacity: 2
     count: 2
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0.
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 25 #Damage
+        Poison: 5
+        Structural: 25
   - type: Gun
     fireRate: 1
     useKey: false
@@ -199,6 +198,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderQueen
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -209,14 +211,26 @@
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4
   - type: LizardAccent
+  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.Самолечение
+    allowedStates:
+    - Alive
+    damageCap: 300
+    damage:
+      types:
+        Bloodloss: -1
+      groups:
+        Brute: -2
+        Toxin: -5
+        Airloss: -2.5
+        Burn: -2.5
 
 #Spiders-servants
 - type: entity
   parent:
   - MobSpiderDroneGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceDrone
-  name: spider guard
+  - BaseMobSpiderServant
+  id: MobSpiderDrone
+  name: spider drone
   description: spider dance
   components:
   - type: Sprite #Спрайт
@@ -229,7 +243,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      85: Dead   #HP
+      60: Dead   #HP
   - type: DamageStateVisuals
     states:
       Alive:
@@ -239,13 +253,12 @@
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute. Самолечение
     allowedStates:
     - Alive
-    damageCap: 85
+    damageCap: 60
     damage:
       types:
-        Heat: -3
+        Bloodloss: -3
       groups:
         Brute: -2
-        Toxin: -5
         Airloss: -2
         Burn: -2
   - type: MeleeWeapon #Damage
@@ -257,7 +270,10 @@
     damage:
       types:
         Piercing: 5 #Damage
-        Structural: 10
+        Structural: 20
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderDrone
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderWallWebDurable
@@ -272,8 +288,8 @@
 - type: entity
   parent:
   - MobSpiderHunterGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceHunter
+  - BaseMobSpiderServant
+  id: MobSpiderHunter
   name: spider hunt
   description: spider dance
   components:
@@ -300,9 +316,9 @@
     damageCap: 110
     damage:
       types:
-        Heat: -2.5
+        Bloodloss: -1.5
       groups:
-        Brute: -3
+        Brute: -1.5
         Toxin: -5
         Airloss: -2
         Burn: -1
@@ -314,8 +330,12 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 15
-        Structural: 15
+        Piercing: 20
+        Poison: 5
+        Structural: 10
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderHunter
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -328,8 +348,8 @@
 - type: entity
   parent:
   - MobSpiderGhostGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceGhost
+  - BaseMobSpiderServant
+  id: MobSpiderGhost
   name: spider ghost
   description: spider dance
   components:
@@ -343,7 +363,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      90: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -353,12 +373,12 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 100
+    damageCap: 90
     damage:
       types:
-        Heat: -2
+        Bloodloss: -1
       groups:
-        Brute: -3
+        Brute: -1.5
         Toxin: -5
         Airloss: -2
         Burn: -1
@@ -370,9 +390,12 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 3
-        Poison: 4
-        Structural: 10
+        Piercing: 5
+        Poison: 10
+        Structural: 5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderGhost
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -406,8 +429,8 @@
 - type: entity
   parent:
   - MobSpiderShooterGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceShooter
+  - BaseMobSpiderServant
+  id: MobSpiderShooter
   name: spider shooter
   description: spider dance
   components:
@@ -421,7 +444,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      80: Dead
+      70: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -431,10 +454,10 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 80
+    damageCap: 70
     damage:
       types:
-        Heat: -3
+        Bloodloss: -0.5
       groups:
         Brute: -1
         Toxin: -5
@@ -449,8 +472,11 @@
     damage:
       types:
         Poison: 5
-        Piercing: 2
+        Piercing: 5
         Structural: 5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderShooter
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -476,11 +502,12 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.7
+
 - type: entity
   parent:
-  - BaseMobSpiderQueen
+  - BaseMobSpiderServant
   - MobSpiderLittleGhostRole
-  id: MobSpiderSpaceLittle
+  id: MobSpiderLittle
   name: small spider
   description: spider dance
   components:
@@ -494,7 +521,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      15: Dead
+      30: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -504,10 +531,8 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 15
+    damageCap: 30
     damage:
-      types:
-        Heat: -0.5
       groups:
         Brute: -0.5
         Toxin: -0.5
@@ -522,6 +547,10 @@
     damage:
       types:
         Piercing: 5
+        Structural: 10
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderLittle
   - type: TimedDespawn
     lifetime: 20
   - type: MovementSpeedModifier

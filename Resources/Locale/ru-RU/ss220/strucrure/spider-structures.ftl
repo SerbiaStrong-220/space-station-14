@@ -17,3 +17,27 @@ ent-TableWebSpidersDurable = каркас стены из паутины
 ent-WallWebDurable = прочная паутинная стена
     .desc = Удерживает паучат внутри, а ассистентов снаружи.
     .suffix = { ent-TableWebSpiders.suffix }	
+
+ent-BaseSpiderCocoon = кокон из паутины
+    .desc = описание
+    .suffix = Улей пауков
+
+ent-SpiderCocoonHorizontal = { ent-BaseSpiderCocoon }
+    .desc = { ent-BaseSpiderCocoon.desc }
+    .suffix = { ent-BaseSpiderCocoon.suffix }
+
+ent-SpiderCocoonVertical = { ent-BaseSpiderCocoon }
+    .desc = { ent-BaseSpiderCocoon.desc }
+    .suffix = { ent-BaseSpiderCocoon.suffix }
+
+ent-BaseSpiderCocoonDestroyed = разрушенный кокон
+    .desc = разрушенное описание
+    .suffix = Улей пауков
+
+ent-SpiderCocoonHorizontalDestroyed = { ent-BaseSpiderCocoonDestroyed }
+    .desc = { ent-BaseSpiderCocoonDestroyed.desc }
+    .suffix = { ent-BaseSpiderCocoonDestroyed.suffix }
+
+ent-SpiderCocoonVerticalDestroyed = { ent-BaseSpiderCocoonDestroyed }
+    .desc = { ent-BaseSpiderCocoonDestroyed.desc }
+    .suffix = { ent-BaseSpiderCocoonDestroyed.suffix }
