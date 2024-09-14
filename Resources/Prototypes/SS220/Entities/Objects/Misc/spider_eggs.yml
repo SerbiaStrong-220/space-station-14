@@ -119,7 +119,7 @@
   - type: TimedDespawn 
     lifetime: 55
   - type: SpawnOnDespawn
-    prototype: MobSpiderSpaceDrone   
+    prototype: MobSpiderDrone   
 
 - type: entity
   parent: BaseSpiderEgg
@@ -131,7 +131,7 @@
   - type: TimedDespawn #Система цикла
     lifetime: 80        
   - type: SpawnOnDespawn
-    prototype: MobSpiderSpaceHunter   #Система цикла  
+    prototype: MobSpiderHunter   #Система цикла  
 
 - type: entity 
   parent: BaseSpiderEgg
@@ -143,7 +143,7 @@
   - type: TimedDespawn 
     lifetime: 80
   - type: SpawnOnDespawn
-    prototype: MobSpiderSpaceGhost   
+    prototype: MobSpiderGhost   
 
 - type: entity 
   parent: BaseSpiderEgg
@@ -155,4 +155,4 @@
   - type: TimedDespawn 
     lifetime: 80
   - type: SpawnOnDespawn
-    prototype: MobSpiderSpaceShooter  
+    prototype: MobSpiderShooter  

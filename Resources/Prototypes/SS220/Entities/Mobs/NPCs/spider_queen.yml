@@ -170,7 +170,7 @@
     spawned:
     - id: FoodMeatSpider
       amount: 3
-    - id: MobSpiderSpaceLittle
+    - id: MobSpiderLittle
       amount: 7
   - type: Spider
     webPrototype: SpiderWebDespawned

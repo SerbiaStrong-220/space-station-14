@@ -50,7 +50,7 @@
     earliestStart: 45
     minimumPlayers: 30
   - type: AntagSpawner
-    prototype: MobSpiderSpaceQueen
+    prototype: MobSpiderQueen
   - type: AntagObjectives
     objectives:
     - CreateCocoonsObjective
