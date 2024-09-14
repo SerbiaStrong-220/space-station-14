@@ -24,7 +24,7 @@ public sealed partial class SpiderQueenComponent : Component
     /// How much mana will be generated in a second
     /// </summary>
     [DataField]
-    public FixedPoint2 PassiveGeneration = 0.5f;
+    public FixedPoint2 PassiveGeneration = FixedPoint2.New(0.5);
 
     [ViewVariables]
     public TimeSpan NextSecond = TimeSpan.Zero;
@@ -51,5 +51,11 @@ public sealed partial class SpiderQueenComponent : Component
     /// Coefficient that indicating how much the bonus from each subsequent cocoon will decrease
     /// </summary>
     [DataField]
-    public FixedPoint2 CocoonsBonusCoefficient = 1f;
+    public FixedPoint2 CocoonsBonusCoefficient = FixedPoint2.New(1);
+
+    /// <summary>
+    /// The minimum distance between cocoons for their spawn
+    /// </summary>
+    [DataField]
+    public float CocoonsMinDistance = 0.5f;
 }

@@ -26,3 +26,14 @@
     title: objective-create-cocoons-title
     description: objective-create-cocoons-description
   - type: CreateCocoonsCondition
+
+- type: entity
+  parent: [BaseSpiderQueenObjective, BaseSurviveObjective]
+  id: SpiderQueenSurviveObjective
+  name: Survive
+  description: You have to stay alive to maintain control.
+  components:
+  - type: Objective
+    icon:
+      sprite: Mobs/Animals/spider.rsi
+      state: midwife

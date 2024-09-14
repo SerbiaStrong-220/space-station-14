@@ -54,6 +54,7 @@
   - type: AntagObjectives
     objectives:
     - CreateCocoonsObjective
+    - SpiderQueenSurviveObjective
   - type: AntagSelection
     definitions:
     - prefRoles: [ SpiderQueen ]
