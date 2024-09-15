@@ -54,8 +54,9 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 continue;
 
             comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
+            comp.MaxMana += comp.CocoonsMaxManaBonus;
 
-            var newValue = comp.CurrentMana + comp.PassiveGeneration + comp.CocoonsManaBonus;
+            var newValue = comp.CurrentMana + comp.PassiveGeneration + comp.CocoonsManaGenerationBonus;
             comp.CurrentMana = newValue > comp.MaxMana
                 ? comp.MaxMana
                 : newValue;
@@ -150,7 +151,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (!Resolve(spider, ref component))
             return;
 
-        var newBonus = FixedPoint2.Zero;
+        var generationBonus = FixedPoint2.Zero;
+        var maxManaBonus = FixedPoint2.Zero;
         var i = 0;
         foreach (var cocoon in component.CocoonsList)
         {
@@ -159,11 +161,13 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 container.Count <= 0)
                 continue;
 
-            newBonus += spiderCocoon.ManaGenerationBonus * Math.Pow(component.CocoonsBonusCoefficient.Double(), i);
+            generationBonus += spiderCocoon.ManaGenerationBonus * Math.Pow(component.CocoonsBonusCoefficient.Double(), i);
+            maxManaBonus += spiderCocoon.MaxManaBonus;
             i++;
         }
 
-        component.CocoonsManaBonus = newBonus;
+        component.CocoonsManaGenerationBonus = generationBonus;
+        component.CocoonsMaxManaBonus = maxManaBonus;
         Dirty(spider, component);
     }
 

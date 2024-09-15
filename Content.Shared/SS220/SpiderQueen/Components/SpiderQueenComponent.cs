@@ -45,10 +45,16 @@ public sealed partial class SpiderQueenComponent : Component
     public List<EntityUid> CocoonsList = new();
 
     /// <summary>
-    /// The bonus to passive mana generation that give by cocoons 
+    /// Bonus to maximum mana count that give by cocoons
     /// </summary>
     [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 CocoonsManaBonus = FixedPoint2.Zero;
+    public FixedPoint2 CocoonsMaxManaBonus = FixedPoint2.Zero;
+
+    /// <summary>
+    /// Bonus to passive mana generation that give by cocoons 
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public FixedPoint2 CocoonsManaGenerationBonus = FixedPoint2.Zero;
 
     /// <summary>
     /// Coefficient that indicating how much the bonus from each subsequent cocoon will decrease

@@ -84,6 +84,7 @@
   - type: SpiderCocoon
     container: cocoon
     manaGenerationBonus: 1
+    maxManaBonus: 20
 
 - type: entity
   id: BaseSpiderCocoonDestroyed

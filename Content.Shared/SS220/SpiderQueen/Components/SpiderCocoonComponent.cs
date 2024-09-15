@@ -25,4 +25,10 @@ public sealed partial class SpiderCocoonComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 ManaGenerationBonus = FixedPoint2.Zero;
+
+    /// <summary>
+    /// Bonus to max mana from this cocoon
+    /// </summary>
+    [DataField]
+    public FixedPoint2 MaxManaBonus = FixedPoint2.Zero;
 }
