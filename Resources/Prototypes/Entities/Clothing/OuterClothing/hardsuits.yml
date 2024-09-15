@@ -116,13 +116,7 @@
   description: A lightweight hardsuit designed for industrial EVA in zero gravity.
   components:
   - type: Sprite
-  #SS220-Salvage Hardsuit Resprite-Begin
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/spatio.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-  #SS220-Salvage Hardsuit Resprite-End
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/spatio.rsi #SS220-Salvage Hardsuit Resprite
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/OuterClothing/Hardsuits/spatio.rsi
@@ -159,13 +153,7 @@
   description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
   components:
   - type: Sprite
-  #SS220-Salvage Hardsuit Resprite-Begin
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/salvage.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-  #SS220-Salvage Hardsuit Resprite-End
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/salvage.rsi #SS220-Salvage Hardsuit Resprite
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/OuterClothing/Hardsuits/salvage.rsi
@@ -512,13 +500,7 @@
   description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
   components:
   - type: Sprite
-  #SS220-Salvage Hardsuit Resprite-Begin
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-  #SS220-Salvage Hardsuit Resprite-End
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi #SS220-Salvage Hardsuit Resprite
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi
