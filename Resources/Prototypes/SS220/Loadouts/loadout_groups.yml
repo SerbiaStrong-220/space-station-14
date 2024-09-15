@@ -451,6 +451,15 @@
   - GlovesMuzhik
   # Клоун (Конец)
 
+  # Мим (Начало)
+- type: loadoutGroup
+  id: MimeShoes
+  name: loadout-group-mime-shoes
+  loadouts:
+  - ClothingShoesColorWhite
+  - MoryakShoes
+  # Мим (Конец)
+
  # Уборщик (Начало)
 - type: loadoutGroup
   id: JanitorShoes
