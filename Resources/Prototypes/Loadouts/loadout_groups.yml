@@ -1231,6 +1231,8 @@
   - SecurityCadetJumpsuitTurtleneckAlt
   - SecurityCadetJumpskirtTurtleneck
   - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - SecurityGrayJumpsuit #ss220-grey-jumpsit-add
+  - SecurityGrayJumpskirt #ss220-grey-jumpsit-add
 
 - type: loadoutGroup
   id: SurvivalSecurity

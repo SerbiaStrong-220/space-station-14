@@ -34,6 +34,7 @@
     - id: RevenantSpawn
     - id: SleeperAgents
     - id: ZombieOutbreak
+    - id: DarkReaperSpawn #ss220 darkreaper middle event
 
 
 - type: entity

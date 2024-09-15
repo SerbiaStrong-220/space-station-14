@@ -16,7 +16,7 @@
   - type: UseDelay
     delay: 4
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 4
+    rechargeCooldown: 6 #NerfCrossbow
     rechargeSound:
       path: /Audio/SS220/Weapons/Guns/MagIn/draw_bow2.ogg
   - type: Gun

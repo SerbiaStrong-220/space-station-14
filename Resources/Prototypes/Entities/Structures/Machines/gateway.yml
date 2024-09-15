@@ -41,7 +41,7 @@
         - FullTileMask
         layer:
         - WallLayer
-        hard: false
+        #hard: false #ss220 gateway examinable
   - type: Appearance
 
 - type: entity

@@ -1,3 +1,16 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtCentcomOfficerTurtleneck
+  name: centcom turtleneck skirt
+  description: A skirt version of the CentCom turtleneck, rarer and more sought after than the original.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/centcom_officer.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/centcom_officer.rsi
+
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtParamedicTurtleneck

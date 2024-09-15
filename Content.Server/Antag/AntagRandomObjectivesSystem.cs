@@ -1,5 +1,6 @@
 using Content.Server.Antag.Components;
 using Content.Server.Objectives;
+using Content.Server.Traitor.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
@@ -30,6 +31,13 @@ public sealed class AntagRandomObjectivesSystem : EntitySystem
             Log.Error($"Antag {ToPrettyString(args.EntityUid):player} was selected by {ToPrettyString(ent):rule} but had no mind attached!");
             return;
         }
+
+        //ss220 reinforcement objective fix start
+        if (TryComp<AutoTraitorComponent>(mind.OwnedEntity, out var autoTraitorComponent) && !autoTraitorComponent.GiveObjectives)
+        {
+            return;
+        }
+        //ss220 reinforcement objective fix end
 
         var difficulty = 0f;
         foreach (var set in ent.Comp.Sets)
