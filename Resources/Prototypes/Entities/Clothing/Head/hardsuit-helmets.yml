@@ -117,9 +117,31 @@
   description: A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating for wildlife encounters and dual floodlights.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/salvage.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    sprite: SS220/Clothing/Head/Hardsuits/salvage.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+    - state: light-overlay
+      visible: false
+      shader: unshaded
+      map: [ "light" ]
+  #SS220-Salvage Hardsuit Resprite-End
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/salvage.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    sprite: SS220/Clothing/Head/Hardsuits/salvage.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+  - type: ToggleableLightVisuals
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET-light
+        shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -344,9 +366,31 @@
   description: A refurbished mining hardsuit helmet, fitted with satin cushioning and an extra (non-functioning) antenna, because you're that extra.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/luxury.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    sprite: SS220/Clothing/Head/Hardsuits/luxury.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+    - state: light-overlay
+      visible: false
+      shader: unshaded
+      map: [ "light" ]
+  #SS220-Salvage Hardsuit Resprite-End
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/luxury.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    # sprite: SS220/Clothing/Head/Hardsuits/luxury.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+  - type: ToggleableLightVisuals
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET-light
+        shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -363,7 +407,7 @@
   description: A heavily armored helmet designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/spatiohelm.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/spatio.rsi #SS220-Salvage Hardsuit Resprite
     layers:
     - state: icon
     - state: icon-unshaded
