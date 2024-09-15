@@ -205,6 +205,10 @@
       Female: UnisexMoth
       Unsexed: UnisexMoth
   #ss220 special_sounds end
+  #SS220 clothing special emotes begin
+  - type: ClothingSpecialEmotes
+    emotes: ['Chitter', 'Squeak']
+  #SS220 clothing special emotes end
 
 - type: entity
   parent: ClothingNeckBase
