@@ -3,7 +3,8 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Damage.Components;
 
-[NetworkedComponent, RegisterComponent, AutoGenerateComponentState]
+[NetworkedComponent, RegisterComponent]
+[AutoGenerateComponentState] //SS220 Add stand still time
 public sealed partial class DamagedByContactComponent : Component
 {
     [DataField("nextSecond", customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
