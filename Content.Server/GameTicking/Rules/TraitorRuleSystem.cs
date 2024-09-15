@@ -61,15 +61,17 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     private void SetCodewords(TraitorRuleComponent component)
     {
         //ss220 same codewords for all traitors start
-        if (_gameTicker.IsGameRuleAdded<TraitorRuleComponent>())
+        if (!_gameTicker.IsGameRuleAdded<TraitorRuleComponent>())
         {
-            var ruleEnts = _gameTicker.GetAddedGameRules();
-            foreach (var ruleEnt in ruleEnts)
+            return;
+        }
+
+        var ruleEnts = _gameTicker.GetAddedGameRules();
+        foreach (var ruleEnt in ruleEnts)
+        {
+            if (TryComp<TraitorRuleComponent>(ruleEnt, out var traitorComp))
             {
-                if (TryComp(ruleEnt, out TraitorRuleComponent? traitorComp))
-                {
-                    component.Codewords = traitorComp.Codewords.Contains(null) ? GenerateTraitorCodewords(component) : traitorComp.Codewords;
-                }
+                component.Codewords = traitorComp.Codewords.Contains(null) ? GenerateTraitorCodewords(component) : traitorComp.Codewords;
             }
         }
         //ss220 same codewords for all traitors end
