@@ -3,6 +3,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.SpiderQueen;
@@ -32,6 +33,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
@@ -39,8 +41,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
         SubscribeLocalEvent<SpiderCocoonComponent, ComponentShutdown>(OnShutdown);
-
-        SubscribeLocalEvent<SpiderWorldSpawnEvent>(OnWorldSpawn);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderWorldSpawnEvent>(OnWorldSpawn);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderWorldSpawnDoAfterEvent>(OnWorldSpawnDoAfter);
     }
 
     public override void Update(float frameTime)
@@ -65,36 +67,70 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         }
     }
 
-    private void OnWorldSpawn(SpiderWorldSpawnEvent args)
+    private void OnWorldSpawn(Entity<SpiderQueenComponent> entity, ref SpiderWorldSpawnEvent args)
     {
-        if (args.Handled)
+        if (args.Handled ||
+            entity.Owner != args.Performer)
             return;
 
-        var performer = args.Performer;
+        var performer = entity.Owner;
+
+        if (args.Cost > FixedPoint2.Zero &&
+            !CheckEnoughMana(performer, args.Cost, entity.Comp))
+            return;
+
+        var netCoordinates = GetNetCoordinates(args.Target);
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            performer,
+            args.DoAfter,
+            new SpiderWorldSpawnDoAfterEvent()
+            {
+                TargetCoordinates = netCoordinates,
+                Prototypes = args.Prototypes,
+                Offset = args.Offset,
+                Cost = args.Cost,
+            },
+            performer
+        )
+        {
+            Broadcast = false,
+            BreakOnDamage = false,
+            BreakOnMove = true,
+            NeedHand = false,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+
+        var started = _doAfter.TryStartDoAfter(doAfterArgs);
+        if (started)
+            args.Handled = true;
+        else
+            Log.Error($"Failed to start DoAfter by {performer}");
+    }
+
+    private void OnWorldSpawnDoAfter(Entity<SpiderQueenComponent> entity, ref SpiderWorldSpawnDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var performer = entity.Owner;
         if (args.Cost > FixedPoint2.Zero)
         {
-            if (!TryComp<SpiderQueenComponent>(args.Performer, out var component) ||
-                component is null)
+            if (!CheckEnoughMana(performer, args.Cost, entity.Comp))
                 return;
 
-            if (component.CurrentMana < args.Cost)
-            {
-                _popup.PopupEntity(Loc.GetString("spider-queen-not-enough-mana"), performer, performer);
-                return;
-            }
-
-            component.CurrentMana -= args.Cost;
-            Dirty(performer, component);
+            entity.Comp.CurrentMana -= args.Cost;
         }
 
         var getProtos = EntitySpawnCollection.GetSpawns(args.Prototypes, _random);
-        var targetMapCords = args.Target;
+        var targetMapCords = GetCoordinates(args.TargetCoordinates);
         foreach (var proto in getProtos)
         {
             Spawn(proto, targetMapCords.SnapToGrid(EntityManager, _mapManager));
             targetMapCords = targetMapCords.Offset(args.Offset);
         }
-        args.Handled = true;
     }
 
     private void OnAfterCocooning(Entity<SpiderQueenComponent> entity, ref AfterCocooningEvent args)

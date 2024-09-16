@@ -29,6 +29,9 @@
       "name": "clown_web_spawn"
     },
     {
+      "name": "wall_spawn"
+    },
+    {
       "name": "cocoon"
     },
     {

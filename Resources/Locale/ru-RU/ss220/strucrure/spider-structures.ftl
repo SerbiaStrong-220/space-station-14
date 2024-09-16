@@ -19,7 +19,8 @@ ent-WallWebDurable = прочная паутинная стена
     .suffix = { ent-TableWebSpiders.suffix }	
 
 ent-BaseSpiderCocoon = кокон из паутины
-    .desc = описание
+    .desc = Большая куча паучьего шёлка оплетающее...
+            Что-то массивное. Кажется, или это похоже на туловище?
     .suffix = Улей пауков
 
 ent-SpiderCocoonHorizontal = { ent-BaseSpiderCocoon }
@@ -31,8 +32,8 @@ ent-SpiderCocoonVertical = { ent-BaseSpiderCocoon }
     .suffix = { ent-BaseSpiderCocoon.suffix }
 
 ent-BaseSpiderCocoonDestroyed = разрушенный кокон
-    .desc = разрушенное описание
-    .suffix = Улей пауков
+    .desc = { ent-BaseSpiderCocoon.desc }
+    .suffix = { ent-BaseSpiderCocoon.suffix }
 
 ent-SpiderCocoonHorizontalDestroyed = { ent-BaseSpiderCocoonDestroyed }
     .desc = { ent-BaseSpiderCocoonDestroyed.desc }

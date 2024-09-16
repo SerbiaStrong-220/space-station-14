@@ -3,6 +3,7 @@ using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Storage;
+using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using System.Numerics;
 
@@ -28,6 +29,12 @@ public sealed partial class SpiderWorldSpawnEvent : WorldTargetActionEvent
     /// </summary>
     [DataField]
     public FixedPoint2 Cost = FixedPoint2.Zero;
+
+    /// <summary>
+    /// The time it takes before spawn entities
+    /// </summary>
+    [DataField]
+    public TimeSpan DoAfter = TimeSpan.Zero;
 }
 
 public sealed partial class SpiderCocooningActionEvent : EntityTargetActionEvent
@@ -42,4 +49,29 @@ public sealed partial class SpiderCocooningActionEvent : EntityTargetActionEvent
 [Serializable, NetSerializable]
 public sealed partial class AfterCocooningEvent : SimpleDoAfterEvent
 {
+}
+
+[Serializable, NetSerializable]
+public sealed partial class SpiderWorldSpawnDoAfterEvent : SimpleDoAfterEvent
+{
+    /// <summary>
+    /// The coordinates of the location that the user targeted.
+    /// </summary>
+    public NetCoordinates TargetCoordinates;
+
+    /// <summary>
+    /// List of prototypes to spawn
+    /// </summary>
+    public List<EntitySpawnEntry> Prototypes = new();
+
+    /// <summary>
+    /// The offset the prototypes will spawn in on relative to the one prior.
+    /// Set to 0,0 to have them spawn on the same tile.
+    /// </summary>
+    public Vector2 Offset;
+
+    /// <summary>
+    /// The cost of mana to use this action
+    /// </summary>
+    public FixedPoint2 Cost = FixedPoint2.Zero;
 }

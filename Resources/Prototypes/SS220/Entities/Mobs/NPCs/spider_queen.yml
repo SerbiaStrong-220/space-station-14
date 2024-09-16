@@ -9,6 +9,9 @@
   name: Probca
   description: spider dance
   components:
+  - type: AutoImplant
+    implants:
+    - ThermalVisionImplant
   - type: NpcFactionMember
     factions:
     - SpiderQueen
@@ -143,9 +146,6 @@
   name: Spider queen
   description: spider dance
   components:
-  - type: AutoImplant
-    implants:
-    - ThermalVisionImplant
   - type: SpiderQueen
     currentMana: 50
     maxMana: 200

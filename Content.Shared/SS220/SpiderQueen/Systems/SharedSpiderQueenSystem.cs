@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -94,5 +94,27 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
 
             return;
         }
+    }
+
+    /// <summary>
+    /// Checks if the spider has enough mana for any action
+    /// </summary>
+    public bool CheckEnoughMana(EntityUid uid, FixedPoint2 cost, SpiderQueenComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+        {
+            if (_net.IsServer)
+                Log.Error($"{uid} doesn't have SpiderQueenComponent to CheckEnoughMana");
+
+            return false;
+        }
+
+        if (component.CurrentMana < cost)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-queen-not-enough-mana"), uid, uid);
+            return false;
+        }
+        else
+            return true;
     }
 }

@@ -16,6 +16,7 @@
         amount: 1
       offset: 0, 1
       cost: 10
+      doAfter: 5
 
 - type: entity
   id: BaseActionSpawnSingleSpiderWeb
@@ -52,6 +53,7 @@
         amount: 1
       offset: 0, 1
       cost: 10
+      doAfter: 5
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -69,6 +71,7 @@
         amount: 1
       offset: 0, 1
       cost: 30
+      doAfter: 5
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -86,6 +89,7 @@
         amount: 1
       offset: 0, 1
       cost: 40
+      doAfter: 5
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -103,6 +107,7 @@
         amount: 1
       offset: 0, 1
       cost: 20
+      doAfter: 5
 
 #Spider
 - type: entity
@@ -157,11 +162,11 @@
     range: 1.5
     itemIconStyle: BigAction
     icon:
-      sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
-      state: full
+      sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
+      state: wall_spawn
     event: !type:WorldSpawnSpellEvent
       prototypes:
-      - id: TableWebSpiders
+      - id: WallWebSpawn
         amount: 1
       offset: 0, 1
       speech: action-speech-spell-spider
@@ -176,8 +181,10 @@
     useDelay: 16
     event: !type:WorldSpawnSpellEvent
       prototypes:
-      - id: TableWebSpidersDurable
+      - id: WallWebDurableSpawn
         amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
 
 #Web
 - type: entity
