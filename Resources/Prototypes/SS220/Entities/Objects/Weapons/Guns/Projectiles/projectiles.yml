@@ -37,7 +37,7 @@
       collection: WeakHit
     forceSound: true
   - type: StunOnCollide
-    stunAmount: 4 #weaponBalance
+    stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
     knockdownAmount: 2 #weaponBalance
 
 - type: entity
@@ -113,14 +113,14 @@
 
 #Spider queen
 - type: entity
-  id: PoisonousAcid 
+  id: PoisonousAcid
   name: poisonous Spit
   parent: BaseBullet
   noSpawn: true
   components:
     - type: Projectile
       damage:
-        types: 
+        types:
           Poison: 6
           Structural: 2
     - type: Sprite
