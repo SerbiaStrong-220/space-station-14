@@ -113,14 +113,14 @@
 
 #Spider queen
 - type: entity
-  id: PoisonousAcid
+  id: PoisonousAcid 
   name: poisonous Spit
   parent: BaseBullet
   noSpawn: true
   components:
     - type: Projectile
       damage:
-        types:
+        types: 
           Poison: 6
           Structural: 2
     - type: Sprite
