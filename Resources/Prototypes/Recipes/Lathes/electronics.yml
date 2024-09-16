@@ -426,6 +426,7 @@
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
   id: MicrowaveMachineCircuitboard
+  result: MicrowaveMachineCircuitboard #ss220 microwave board fix
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
