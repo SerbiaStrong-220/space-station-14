@@ -38,7 +38,7 @@
     forceSound: true
   - type: StunOnCollide
     stunAmount: 4 #weaponBalance
-    knockdownAmount: 4 #weaponBalance
+    knockdownAmount: 2 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt

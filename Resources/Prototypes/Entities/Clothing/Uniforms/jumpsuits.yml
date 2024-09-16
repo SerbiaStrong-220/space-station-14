@@ -817,9 +817,9 @@
   description: A stately blue jumpsuit to represent NanoTrasen.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/nanotrasen.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen.rsi #SS220-fractional-clothing-resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/nanotrasen.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen.rsi #SS220-fractional-clothing-resprite
 
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]

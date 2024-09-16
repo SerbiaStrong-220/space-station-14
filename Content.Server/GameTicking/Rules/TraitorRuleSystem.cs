@@ -36,6 +36,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SharedRoleCodewordSystem _roleCodewordSystem = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     public override void Initialize()
     {
@@ -59,7 +60,21 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
     private void SetCodewords(TraitorRuleComponent component)
     {
-        component.Codewords = GenerateTraitorCodewords(component);
+        //ss220 same codewords for all traitors start
+        if (!_gameTicker.IsGameRuleAdded<TraitorRuleComponent>())
+        {
+            return;
+        }
+
+        var ruleEnts = _gameTicker.GetAddedGameRules();
+        foreach (var ruleEnt in ruleEnts)
+        {
+            if (TryComp<TraitorRuleComponent>(ruleEnt, out var traitorComp))
+            {
+                component.Codewords = traitorComp.Codewords.Contains(null) ? GenerateTraitorCodewords(component) : traitorComp.Codewords;
+            }
+        }
+        //ss220 same codewords for all traitors end
     }
 
     public string[] GenerateTraitorCodewords(TraitorRuleComponent component)
