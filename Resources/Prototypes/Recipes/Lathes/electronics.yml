@@ -537,6 +537,7 @@
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
   id: MiniGravityGeneratorCircuitboard
+  result: MiniGravityGeneratorCircuitboard #ss220 board fix
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
