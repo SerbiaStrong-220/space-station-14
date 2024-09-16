@@ -181,9 +181,11 @@
   - type: Tag
     tags:
     - Knife
-  - type: Utensil #SS220 fix. Why it can't slice a pizza? Now it can
+#SS220-knife-cutter-fix-begin
+  - type: Utensil
     types:
       - Knife
+#SS220-knife-cutter-fix-end
 
 # Like a crusher... but better
 - type: entity
