@@ -128,47 +128,47 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
 
             EntityCoordinates? targetCoords = null;
 
-                var valid = false;
+            var valid = false;
 
-                var range = (float)Math.Sqrt(radius);
-                var box = Box2.CenteredAround(userCoords.Position, new Vector2(range, range));
-                var tilesInRange = _mapSystem.GetTilesEnumerator(targetGrid.Value.Owner, targetGrid.Value.Comp, box, false);
-                var tileList = new ValueList<Vector2i>();
+            var range = (float)Math.Sqrt(radius);
+            var box = Box2.CenteredAround(userCoords.Position, new Vector2(range, range));
+            var tilesInRange = _mapSystem.GetTilesEnumerator(targetGrid.Value.Owner, targetGrid.Value.Comp, box, false);
+            var tileList = new ValueList<Vector2i>();
 
-                while (tilesInRange.MoveNext(out var tile))
+            while (tilesInRange.MoveNext(out var tile))
+            {
+                tileList.Add(tile.GridIndices);
+            }
+
+            while (tileList.Count != 0)
+            {
+                var tile = tileList.RemoveSwap(_random.Next(tileList.Count));
+                valid = true;
+                foreach (var entity in _mapSystem.GetAnchoredEntities(targetGrid.Value.Owner, targetGrid.Value.Comp,
+                             tile))
                 {
-                    tileList.Add(tile.GridIndices);
+                    if (!_physicsQuery.TryGetComponent(entity, out var body))
+                        continue;
+
+                    if (body.BodyType != BodyType.Static ||
+                        !body.Hard ||
+                        (body.CollisionLayer & (int)CollisionGroup.MobMask) == 0)
+                        continue;
+
+                    valid = false;
+                    break;
                 }
 
-                while (tileList.Count != 0)
+                if (valid)
                 {
-                    var tile = tileList.RemoveSwap(_random.Next(tileList.Count));
-                    valid = true;
-                    foreach (var entity in _mapSystem.GetAnchoredEntities(targetGrid.Value.Owner, targetGrid.Value.Comp,
-                                 tile))
-                    {
-                        if (!_physicsQuery.TryGetComponent(entity, out var body))
-                            continue;
-
-                        if (body.BodyType != BodyType.Static ||
-                            !body.Hard ||
-                            (body.CollisionLayer & (int)CollisionGroup.MobMask) == 0)
-                            continue;
-
-                        valid = false;
-                        break;
-                    }
-
-                    if (valid)
-                    {
-                        targetCoords = new EntityCoordinates(targetGrid.Value.Owner,
-                            _mapSystem.TileCenterToVector(targetGrid.Value, tile));
-                        break;
-                    }
+                    targetCoords = new EntityCoordinates(targetGrid.Value.Owner,
+                        _mapSystem.TileCenterToVector(targetGrid.Value, tile));
+                    break;
                 }
+            }
 
-                if (!valid || _targetGrids.Count != 0) // if we don't do the check here then PickAndTake will blow up on an empty set.
-                    targetGrid = _random.GetRandom().PickAndTake(_targetGrids);
+            if (!valid || _targetGrids.Count != 0) // if we don't do the check here then PickAndTake will blow up on an empty set.
+                targetGrid = _random.GetRandom().PickAndTake(_targetGrids);
 
             return targetCoords;
 
