@@ -268,10 +268,10 @@ public sealed class RadioSystem : EntitySystem
         if (!TryComp<ActiveRadioComponent>(entity.Owner, out var activeRadio))
             return;
 
-        activeRadio.Channels.Clear();
+        HashSet<string> channels = entity.Comp.Channels;
+        channels.UnionWith(args.Component.Channels);
 
-        activeRadio.Channels.UnionWith(entity.Comp.Channels);
-        activeRadio.Channels.UnionWith(args.Component.Channels);
+        activeRadio.Channels = new(channels);
     }
     //SS220 PAI with encryption keys end
 }
