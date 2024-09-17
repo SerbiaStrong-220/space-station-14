@@ -14,7 +14,7 @@
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
-    delay: 4
+    delay: 6 #ss220 fix 4 -> 6
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 6 #NerfCrossbow
     rechargeSound:
