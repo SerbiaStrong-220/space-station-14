@@ -447,25 +447,3 @@
     sprite: SS220/Clothing/Uniforms/bard.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/bard.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitYsatyu
-  name: ysatyu suit
-  description: It smells like moonshine.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitMoryak
-  name: moryak suit
-  description: Sailor suit for mime.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
