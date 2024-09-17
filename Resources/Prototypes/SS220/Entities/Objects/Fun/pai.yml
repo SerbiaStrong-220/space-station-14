@@ -1,0 +1,16 @@
+- type: entity
+  parent: PersonalAI
+  id: EncryptionKeysPersonalAI
+  components:
+  - type: IntrinsicRadioReceiver
+    channels:
+    - Binary
+  - type: ContainerContainer
+    containers:
+      key_slots: !type:Container
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+  - type: EncryptionKeyHolder
+    keySlots: 2

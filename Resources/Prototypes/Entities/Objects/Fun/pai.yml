@@ -3,6 +3,7 @@
 - type: entity
   parent: BaseItem
   id: PersonalAI
+  noSpawn: true #SS220 PAI with encryption keys
   name: personal ai device
   description: Your electronic pal who's fun to be with!
   components:
@@ -99,6 +100,16 @@
   - type: ActiveRadio
     channels:
     - Syndicate
+  #SS220 PAI with encryption keys begin
+  - type: IntrinsicRadioReceiver
+    channels:
+    - Syndicate
+  - type: ContainerContainer
+    containers:
+      key_slots: !type:Container
+  - type: EncryptionKeyHolder
+    keySlots: 2
+  #SS220 PAI with encryption keys end
   - type: Appearance
   - type: GenericVisualizer
     visuals:
