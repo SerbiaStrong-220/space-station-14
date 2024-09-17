@@ -58,6 +58,7 @@
   groups:
   - GroupTankHarness
   - BartenderHead
+  - Neck #SS220-Two Floppa Iteration
   - BartenderJumpsuit
   - CommonBackpack
   - BartenderOuterClothing
@@ -71,6 +72,7 @@
   groups:
   - GroupTankHarness
   - BartenderJumpsuit
+  - Neck #SS220-Two Floppa Iteration
   - CommonBackpack
   - Glasses
   - Survival
@@ -83,6 +85,7 @@
   - GroupTankHarness
   - ChefHead
   - ChefMask
+  - Neck #SS220-Two Floppa Iteration
   - ChefJumpsuit
   - CommonBackpack
   - ChefOuterClothing
@@ -96,6 +99,7 @@
   id: JobLibrarian
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - LibrarianJumpsuit
   - CommonBackpack
   - Glasses
@@ -138,6 +142,7 @@
   groups:
   - GroupTankHarness
   - JanitorHead
+  - Neck #SS220-Two Floppa Iteration
   - JanitorJumpsuit
   - JanitorGloves
   - CommonBackpack
@@ -170,6 +175,7 @@
   groups:
   - GroupTankHarness
   - ClownHead
+  - Neck #SS220-Two Floppa Iteration
   - ClownMask #SS220-Two Floppa Iteration
   - ClownJumpsuit
   - ClownGloves #SS220-Two Floppa Iteration
@@ -185,6 +191,7 @@
   groups:
   - GroupTankHarness
   - MimeHead
+  - Neck #SS220-Two Floppa Iteration
   - MimeMask
   - MimeJumpsuit
   - MimeBackpack
@@ -200,6 +207,7 @@
   groups:
   - GroupTankHarness
   - MusicianHead #SS220 bard loadout
+  - Neck #SS220-Two Floppa Iteration
   - MusicianJumpsuit
   - CommonBackpack
   - MusicianOuterClothing
@@ -231,6 +239,7 @@
   groups:
   - GroupTankHarness
   - CargoTechnicianHead
+  - Neck #SS220-Two Floppa Iteration
   - CargoTechnicianJumpsuit
   - CargoTechnicianBackpack
   - CargoTechnicianOuterClothing
@@ -244,6 +253,7 @@
   id: JobSalvageSpecialist
   groups:
   - SalvageSpecialistHead #SS220-Salvage-Loadouts-Update
+  - Neck #SS220-Two Floppa Iteration
   - GroupTankHarness
   - SalvageSpecialistBackpack
   - SalvageSpecialistJumpsuit #SS220-MoreTurtleneck
@@ -274,6 +284,7 @@
   id: JobTechnicalAssistant
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - TechnicalAssistantJumpsuit
   - StationEngineerBackpack
   - SurvivalExtended
@@ -285,6 +296,7 @@
   groups:
   - GroupTankHarness
   - StationEngineerHead
+  - Neck #SS220-Two Floppa Iteration
   - StationEngineerJumpsuit
   - StationEngineerBackpack
   - StationEngineerOuterClothing
@@ -298,6 +310,7 @@
   id: JobAtmosphericTechnician
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - AtmosphericTechnicianJumpsuit
   - AtmosphericTechnicianBackpack
   - AtmosphericTechnicianOuterClothing
@@ -344,6 +357,7 @@
   id: JobResearchAssistant
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - ResearchAssistantJumpsuit
   - ScientistBackpack
   - Glasses
@@ -405,6 +419,7 @@
   groups:
   - GroupTankHarness
   - DetectiveHead
+  - Neck #SS220-Two Floppa Iteration
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
   - DetectiveSecBackpack #ss220 backpack noir
@@ -418,6 +433,7 @@
 - type: roleLoadout
   id: JobSecurityCadet
   groups:
+  - Neck #SS220-Two Floppa Iteration
   - SecurityCadetJumpsuit
   - SecurityBackpack
   - SurvivalSecurity
@@ -527,6 +543,7 @@
   id: JobZookeeper
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - CommonBackpack
   - Glasses
   - Survival
@@ -537,6 +554,7 @@
   id: JobReporter
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - ReporterJumpsuit
   - CommonBackpack
   - Glasses
@@ -561,6 +579,7 @@
   id: JobBoxer
   groups:
   - GroupTankHarness
+  - Neck #SS220-Two Floppa Iteration
   - BoxerJumpsuit
   - BoxerGloves
   - CommonBackpack

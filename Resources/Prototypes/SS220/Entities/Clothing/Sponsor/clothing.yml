@@ -596,11 +596,66 @@
 - type: entity
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckSS220
-  name: плащ SS220
-  description: Проклятье SS220!
-  suffix: Шлёпа
+  name: накидка причастия
+  description: Вручается избранным, удостоенных уникального места в этом мире.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Cloak/ss220.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Cloak/ss220.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckCoder
+  name: плащ созидания
+  description: Особый плащ, носителям оного дозволено вмешиваться и менять правила мира.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/coder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/coder.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckMapper
+  name: плащ сотворения
+  description: Особый плащ, чьим обладателям выпала честь участвовать в сотворении мира.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/mapper.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/mapper.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckSpriter
+  name: плащ начертания
+  description: Особый плащ, чьи хозяева привнесли краски и наполнили изяществом мир.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/spriter.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/spriter.rsi
+
+# Нет спрайтра
+# - type: entity
+#   parent: ClothingSponsorNeckBase
+#   id: ClothingSponsorNeckTrackerExpert #Трекероведы
+#   name: плащ равновесия
+#   description: Особый плащ для тех, кто посвятил себя защите внешнему миру.
+#   components:
+#   - type: Sprite
+#     sprite: SS220/Clothing/Sponsor/Cloak/tracker_expert.rsi
+#   - type: Clothing
+#     sprite: SS220/Clothing/Sponsor/Cloak/tracker_expert.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckAdministrator
+  name: плащ порядка
+  description: Вручается избранным, удостоенных уникального места в этом мире.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/administrator.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/administrator.rsi

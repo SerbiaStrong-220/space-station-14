@@ -109,10 +109,10 @@
     isExact: true
 
 - type: loadoutEffectGroup
-  id: SeniorAdministratorSponsorTier
+  id: HeadAdministratorSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
-    requirement: SeniorAdministrator
+    requirement: HeadAdministrator
     isExact: true
 
 # Модерация

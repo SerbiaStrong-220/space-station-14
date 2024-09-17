@@ -484,3 +484,15 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+  # Плащи
+- type: loadoutGroup
+  id: Neck
+  name: loadout-group-neck
+  loadouts:
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+#  - TrackerExpertCoderNeck
+  - AdministratorNeck
+#  - HeadDeveloperNeck
