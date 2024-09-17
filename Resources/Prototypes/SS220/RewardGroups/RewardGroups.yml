@@ -1,3 +1,4 @@
+# Шлёпы
 - type: ShlepaRewardGroup
   id: Shlopa
   name: Шлёпстер
@@ -75,3 +76,111 @@
     SponsorElWycco: 1
   # Вторая итерация
     SmokingFish: 1
+
+# Разработка
+- type: ShlepaRewardGroup
+  id: MiniDeveloper
+  name: Начинающий Разработчик
+  requiredRole: MiniDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Developer
+  name: Разработчик
+  requiredRole: Developer
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: HeadLoroved
+  name: Ведущий Лоровед
+  requiredRole: HeadLoroved
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: WikiHead
+  name: Ведущий Редактор Вики
+  requiredRole: WikiHead
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id:  HeadDeveloper
+  name: Ведущий Разработчик
+  requiredRole:  HeadDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: SubHeadDeveloper
+  name: Заместитель Ведущего Разработчика
+  requiredRole: SubHeadDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: ProjectManager
+  name: Проект Менеджер
+  requiredRole: ProjectManager
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: SeniorDeveloper
+  name: Старший Разработчик
+  requiredRole: SeniorDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+# Администрация
+- type: ShlepaRewardGroup
+  id: Mentor
+  name: Ментор
+  requiredRole: Mentor
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Administrator
+  name: Администратор
+  requiredRole: Administrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: HeadAdministrator
+  name: Главный Администратор
+  requiredRole: HeadAdministrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: SeniorAdministrator
+  name: Старший Администратор
+  requiredRole: SeniorAdministrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id:  SubHeadAdministrator
+  name: Заместитель Главного Администратора
+  requiredRole:  SubHeadAdministrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+# Модерация
+- type: ShlepaRewardGroup
+  id: Moderator
+  name: Модератор
+  requiredRole: Moderator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: HeadModerator
+  name: Старший Модератор
+  requiredRole: HeadModerator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
