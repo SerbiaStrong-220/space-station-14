@@ -6,6 +6,7 @@ using Content.Server.Respawn;
 using Content.Server.Roles;
 using Content.Server.SS220.Markers;
 using Content.Server.SS220.Roles;
+using Content.Server.SS220.SpiderQueen.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Mind;
@@ -13,7 +14,7 @@ using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 
-namespace Content.Server.SS220.SpiderQueen;
+namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleComponent>
 {

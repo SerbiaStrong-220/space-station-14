@@ -19,7 +19,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Server.SS220.SpiderQueen;
+namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 {
@@ -40,7 +40,6 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
-        SubscribeLocalEvent<SpiderCocoonComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderWorldSpawnEvent>(OnWorldSpawn);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderWorldSpawnDoAfterEvent>(OnWorldSpawnDoAfter);
     }
@@ -58,10 +57,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
             comp.MaxMana += comp.CocoonsMaxManaBonus;
 
-            var newValue = comp.CurrentMana + comp.PassiveGeneration + comp.CocoonsManaGenerationBonus;
-            comp.CurrentMana = newValue > comp.MaxMana
-                ? comp.MaxMana
-                : newValue;
+            var newValue = comp.CurrentMana + comp.PassiveGeneration;
+            comp.CurrentMana = MathF.Min((float)newValue, (float)comp.MaxMana);
 
             Dirty(uid, comp);
         }
@@ -168,45 +165,6 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         UpdateCocoonsBonus(entity.Owner);
     }
 
-    private void OnShutdown(Entity<SpiderCocoonComponent> entity, ref ComponentShutdown args)
-    {
-        var (uid, comp) = entity;
-        if (comp.CocoonOwner is null ||
-            !TryComp<SpiderQueenComponent>(comp.CocoonOwner, out var queenComponent))
-            return;
-
-        queenComponent.CocoonsList.Remove(uid);
-        UpdateCocoonsBonus(comp.CocoonOwner.Value);
-    }
-
-    /// <summary>
-    /// Updates the bonus that cocoons give
-    /// </summary>
-    private void UpdateCocoonsBonus(EntityUid spider, SpiderQueenComponent? component = null)
-    {
-        if (!Resolve(spider, ref component))
-            return;
-
-        var generationBonus = FixedPoint2.Zero;
-        var maxManaBonus = FixedPoint2.Zero;
-        var i = 0;
-        foreach (var cocoon in component.CocoonsList)
-        {
-            if (!TryComp<SpiderCocoonComponent>(cocoon, out var spiderCocoon) ||
-                !_container.TryGetContainer(cocoon, spiderCocoon.CocoonContainerId, out var container) ||
-                container.Count <= 0)
-                continue;
-
-            generationBonus += spiderCocoon.ManaGenerationBonus * Math.Pow(component.CocoonsBonusCoefficient.Double(), i);
-            maxManaBonus += spiderCocoon.MaxManaBonus;
-            i++;
-        }
-
-        component.CocoonsManaGenerationBonus = generationBonus;
-        component.CocoonsMaxManaBonus = maxManaBonus;
-        Dirty(spider, component);
-    }
-
     /// <summary>
     /// Do a station announcement if all conditions are met
     /// </summary>
@@ -222,5 +180,27 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
         _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
         component.IsAnnounced = true;
+    }
+
+    public void UpdateCocoonsBonus(EntityUid spider, SpiderQueenComponent? component = null)
+    {
+        if (!Resolve(spider, ref component))
+            return;
+
+        var maxManaBonus = FixedPoint2.Zero;
+        var i = 0;
+        foreach (var cocoon in component.CocoonsList)
+        {
+            if (!TryComp<SpiderCocoonComponent>(cocoon, out var spiderCocoon) ||
+                !_container.TryGetContainer(cocoon, spiderCocoon.CocoonContainerId, out var container) ||
+                container.Count <= 0)
+                continue;
+
+            maxManaBonus += spiderCocoon.MaxManaBonus;
+            i++;
+        }
+
+        component.CocoonsMaxManaBonus = maxManaBonus;
+        Dirty(spider, component);
     }
 }

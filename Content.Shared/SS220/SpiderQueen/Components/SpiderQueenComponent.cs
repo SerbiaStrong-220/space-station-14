@@ -51,16 +51,10 @@ public sealed partial class SpiderQueenComponent : Component
     public FixedPoint2 CocoonsMaxManaBonus = FixedPoint2.Zero;
 
     /// <summary>
-    /// Bonus to passive mana generation that give by cocoons 
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 CocoonsManaGenerationBonus = FixedPoint2.Zero;
-
-    /// <summary>
-    /// Coefficient that indicating how much the bonus from each subsequent cocoon will decrease
+    /// The time it takes to extract mana from the cocoon
     /// </summary>
     [DataField]
-    public FixedPoint2 CocoonsBonusCoefficient = FixedPoint2.New(1);
+    public TimeSpan ExtractManaTime = TimeSpan.FromSeconds(3);
 
     /// <summary>
     /// The minimum distance between cocoons for their spawn

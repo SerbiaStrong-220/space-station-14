@@ -35,8 +35,12 @@
       - SpiderCocoon
   - type: SpiderCocoon
     container: cocoon
-    manaGenerationBonus: 1
-    maxManaBonus: 20
+    manaByCorpse: 1
+    damagePerSecond:
+      types:
+        Poison: 1
+    damageCap:
+      Poison: 150
 
 - type: entity
   id: BaseSpiderCocoonDestroyed

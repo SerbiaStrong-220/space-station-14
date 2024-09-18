@@ -75,3 +75,8 @@ public sealed partial class SpiderWorldSpawnDoAfterEvent : SimpleDoAfterEvent
     /// </summary>
     public FixedPoint2 Cost = FixedPoint2.Zero;
 }
+
+[Serializable, NetSerializable]
+public sealed partial class CocoonExtractManaEvent : SimpleDoAfterEvent
+{
+}
