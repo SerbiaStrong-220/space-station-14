@@ -12,6 +12,6 @@ cocooning-too-close = Слишком близко к другому кокону
 cocooning-target-not-dead = Цель должна быть мертва
 cocooning-target-not-humanoid = Цель должна быть гуманоидом
 
-objective-issuer-spider-queen = [color=yellow]Королева пауков[/color]
+objective-issuer-spider-queen = [color=#c8a2c8]Королева пауков[/color]
 
-spider-queen-round-end-agent-name = [color=green]королева пауков[/color]
+spider-queen-round-end-agent-name = [color=#c8a2c8]королева пауков[/color]

@@ -35,7 +35,7 @@
       - SpiderCocoon
   - type: SpiderCocoon
     container: cocoon
-    manaByCorpse: 1
+    manaByEntity: 1
     damagePerSecond:
       types:
         Poison: 1
