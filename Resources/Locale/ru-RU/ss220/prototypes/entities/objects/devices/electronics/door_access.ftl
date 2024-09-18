@@ -14,6 +14,6 @@ ent-DoorElectronicsUsspEngineering = { ent-DoorElectronicsUssp }
     .suffix = СССП, Закрыт, Инженерный
     .desc = { ent-DoorElectronics.desc }
 
-ent-AirlockMagistrateLocked = { ent-DoorElectronics }
+ent-DoorElectronicsMagistrate = { ent-DoorElectronics }
     .suffix = Магистрат, Закрыт
     .desc = { ent-DoorElectronics.desc }
