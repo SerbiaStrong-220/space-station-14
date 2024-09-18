@@ -130,6 +130,11 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
+      belt:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: belt
   #ss220 emote 5 sec start
   - type: Emoting
     chatEmoteCooldown: 5.0
@@ -182,3 +187,8 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
+      belt:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: belt
