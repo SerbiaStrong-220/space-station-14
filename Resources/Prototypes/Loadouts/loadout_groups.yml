@@ -497,6 +497,7 @@
   - ClownJumpsuit #SS220-Clown-reSprite-Begin
   - ClownJumpskirt #SS220-Clown-reSprite-End
   - JesterAltSuit
+  - ClownPennywiseJumpsuit #SS220-Clown-Pennywise
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -520,6 +521,23 @@
   loadouts:
   - ClownShoes
   - JesterShoes
+  - ClownPennywiseShoes #SS220-Clown-Pennywise
+
+#ss220-loadout-clown-mask-begin
+- type: loadoutGroup
+  id: ClownMask
+  name: loadout-group-clown-mask
+  loadouts:
+  - ClownPennywiseMask
+#ss220-loadout-clown-mask-end
+
+#ss220-loadout-clown-neck-begin
+- type: loadoutGroup
+  id: ClownNeck
+  name: loadout-group-clown-neck
+  loadouts:
+  - ClownPennywiseRuff
+#ss220-loadout-clown-neck-end
 
 - type: loadoutGroup
   id: SurvivalClown

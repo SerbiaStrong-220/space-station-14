@@ -125,6 +125,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitClownPennywise
+  name: uniform dance clown
+  description: A uniform for a comedy master who feeds on emotions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
+
   # Ботаник
 - type: entity
   parent: ClothingUniformBase

@@ -187,7 +187,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatPDHoxton
   name: маска Хокстона
-  description: Мне нужно, чтобы вы стояли смирно как чертоавы садовые гномы.
+  description: Мне нужно, чтобы вы стояли смирно как чертовы садовые гномы.
   components:
    - type: Sprite
      sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
@@ -195,3 +195,19 @@
      sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
    - type: IngestionBlocker
    - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingMaskBase
+  id: ClothingMaskClownPennywise
+  name: dance clown mask
+  description: We assure you, the owner of this mask feeds only on positive emotions!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/clown_pennywise.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout

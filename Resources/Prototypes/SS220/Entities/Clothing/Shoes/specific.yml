@@ -238,3 +238,17 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesClownBase
+  id: ClothingShoesClownPennywise
+  name: dance clown shoes
+  description: "Their elegance can cause genuine laughter."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
