@@ -7,9 +7,6 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 288000 # SS220-RoleTime 2
-    - !type:DepartmentTimeRequirement #todo поменять при добавлении ДВД
-      department: InternalAffairs
-      time: 288000 # SS220-RoleTime 2
     - !type:AgeRequirement
       requiredAge: 32
     - !type:SpeciesRequirement #SS220-jobbans begin

@@ -64,10 +64,10 @@
   - type: Pda
     id: MagistrateIDCard
     state: pda-magistrate
-    - type: PdaBorderColor
-      borderColor: "#414452"
-      accentVColor: "#731611"
-      accentHColor: "#dfac5c"
+  - type: PdaBorderColor
+    borderColor: "#414452"
+    accentVColor: "#731611"
+    accentHColor: "#dfac5c"
   - type: Sprite
     sprite: Objects/Devices/pda.rsi
     layers:
