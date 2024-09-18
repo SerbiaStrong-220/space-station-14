@@ -78,4 +78,3 @@
       - EncryptionKeyCommon
   - type: EncryptionKeyHolder
     keySlots: 2
-  - type: ActiveRadio
