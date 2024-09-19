@@ -55,7 +55,6 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 continue;
 
             comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
-            comp.MaxBloodPoints += comp.CocoonsMaxBloodPointsBonus;
 
             var newValue = comp.CurrentBloodPoints + comp.BloodPointsPerSecond;
             comp.CurrentBloodPoints = MathF.Min((float)newValue, (float)comp.MaxBloodPoints);
@@ -151,6 +150,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         _container.Insert(target, container);
         entity.Comp.CocoonsList.Add(cocoonUid);
+        entity.Comp.MaxBloodPoints += spiderCocoon.BloodPointsBonus;
         Dirty(entity.Owner, entity.Comp);
 
         spiderCocoon.CocoonOwner = entity.Owner;
@@ -158,11 +158,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         if (entity.Comp.CocoonsCountToAnnouncement is { } value &&
             entity.Comp.CocoonsList.Count >= value)
-        {
             DoStationAnnouncement(entity);
-        }
-
-        UpdateCocoonsBonus(entity.Owner);
     }
 
     /// <summary>
@@ -180,27 +176,5 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
         _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
         component.IsAnnounced = true;
-    }
-
-    public void UpdateCocoonsBonus(EntityUid spider, SpiderQueenComponent? component = null)
-    {
-        if (!Resolve(spider, ref component))
-            return;
-
-        var maxBloodPointsBonus = FixedPoint2.Zero;
-        var i = 0;
-        foreach (var cocoon in component.CocoonsList)
-        {
-            if (!TryComp<SpiderCocoonComponent>(cocoon, out var spiderCocoon) ||
-                !_container.TryGetContainer(cocoon, spiderCocoon.CocoonContainerId, out var container) ||
-                container.Count <= 0)
-                continue;
-
-            maxBloodPointsBonus += spiderCocoon.BloodPointsBonus;
-            i++;
-        }
-
-        component.CocoonsMaxBloodPointsBonus = maxBloodPointsBonus;
-        Dirty(spider, component);
     }
 }

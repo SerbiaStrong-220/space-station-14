@@ -67,7 +67,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             return;
 
         queenComponent.CocoonsList.Remove(uid);
-        _spiderQueen.UpdateCocoonsBonus(uid);
+        queenComponent.MaxBloodPoints -= entity.Comp.BloodPointsBonus;
     }
 
     private void OnExamine(Entity<SpiderCocoonComponent> entity, ref ExaminedEvent args)
@@ -136,9 +136,9 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         if (solutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
             return;
 
-        _bloodstream.TryModifyBleedAmount(target, -2f, bloodstream);
+        _bloodstream.TryModifyBleedAmount(target, -1f, bloodstream);
         _solutionContainer.SplitSolution(solutionEnt, amount);
-        component.BloodPointsAmount += amount * component.BloodPointsCoefficient;
+        component.BloodPointsAmount += amount * component.BloodConversionCoefficient;
         Dirty(uid, component);
     }
 

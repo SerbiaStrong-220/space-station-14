@@ -136,6 +136,8 @@
       - CannotSuicide
       - DoorBumpOpener
       - SpiderServant
+  - type: Puller
+    needsHands: false
 
 #Spider queen
 - type: entity
@@ -210,6 +212,8 @@
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4
   - type: LizardAccent
+  - type: Puller
+    needsHands: false
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.Самолечение
     allowedStates:
     - Alive
@@ -504,7 +508,7 @@
 
 - type: entity
   parent:
-  - BaseMobSpiderServant
+  - BaseMobSpiderQueen
   - MobSpiderLittleGhostRole
   id: MobSpiderLittle
   name: small spider
@@ -555,6 +559,11 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4.5
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - SpiderLittle
 
 # GHOST ROLES
 

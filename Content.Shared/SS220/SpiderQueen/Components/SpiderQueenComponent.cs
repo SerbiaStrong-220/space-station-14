@@ -20,7 +20,7 @@ public sealed partial class SpiderQueenComponent : Component
     /// <summary>
     /// Maximum amount of blood points
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 MaxBloodPoints = FixedPoint2.Zero;
 
     /// <summary>
@@ -43,12 +43,6 @@ public sealed partial class SpiderQueenComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public List<EntityUid> CocoonsList = new();
-
-    /// <summary>
-    /// Bonus to maximum blood points that give by cocoons
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 CocoonsMaxBloodPointsBonus = FixedPoint2.Zero;
 
     /// <summary>
     /// The time it takes to extract blood points from the cocoon

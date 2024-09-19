@@ -102,6 +102,7 @@
         tags:
         - SpiderQueen
         - SpiderServant
+        - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb
@@ -138,6 +139,7 @@
         tags:
         - SpiderQueen
         - SpiderServant
+        - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb
