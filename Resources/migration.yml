@@ -502,3 +502,6 @@ HatBase: null
 
 # 2024-09-11 SS220-upstream-merge
 ClothingBeltChefFilled: null
+
+# 2024-09-17 SS220 PAI with encryption keys
+PersonalAI: EncryptionKeysPersonalAI
