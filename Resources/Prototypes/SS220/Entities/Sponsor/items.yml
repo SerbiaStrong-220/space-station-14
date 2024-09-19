@@ -321,52 +321,53 @@
       tags: [SponsorBeer]
 
 # Игрушки
+
 - type: entity
-  parent: BaseItem
-  id: SponsorElWycco
+  parent: BasePlushie
+  id: SponsorElWycc
   suffix: Шлёпа
   name: Максон
   description: КРИЧИ! КРИЧИ КАК СУЧЕЧКА!
   components:
-  - type: UseDelay
-    delay: 1.0
-  - type: MeleeWeapon
-    wideAnimationRotation: 180
-    soundHit:
-      path: /Audio/Items/Toys/weh.ogg
-    damage:
-      types:
-        Blunt: 0
   - type: Sprite
-    sprite: SS220/Objects/Sponsor/elwycco.rsi
-    layers:
-    - state: icon
-    - state: axe
-      map: ["axe"]
-      sprite: SS220/Objects/Sponsor/elwycco.rsi
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+  - type: Matchbox
   - type: ContainerContainer
     containers:
       item: !type:ContainerSlot
   - type: ItemSlots
     slots:
       item:
-        name: Топорик
+        name: Wycco-Axe
         whitelist:
           tags:
-          - ElWyccoAxe
+          - WyccoAxe
+  - type: ItemMapper
+    mapLayers:
+      wycc_axe:
+        whitelist:
+          tags:
+          - WyccoAxe
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
   - type: ContainerFill
     containers:
       item:
-      - SponsorElWyccoAxe
+      - SponsorElWyccAxe
+  - type: Appearance
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAAAT_wycc.ogg
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Items/Toys/weh.ogg
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/Toys/weh.ogg
+      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
   - type: EmitSoundOnActivate
     sound:
-      path: /Audio/Items/Toys/weh.ogg
+      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
+  - type: UseDelay
+    delay: 5.0
   - type: PhysicalComposition
     materialComposition:
       Cloth: 100
@@ -375,24 +376,26 @@
 
 - type: entity
   parent: BaseKnife
-  id: SponsorElWyccoAxe
+  id: SponsorElWyccAxe
   suffix: Шлёпа
-  name: микро топор
+  name: мини топорик
   description: Мини топор для мини игрушки.
   components:
-  - type: Tag
-    tags:
-    - ElWyccoAxe
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/wyccaxe.rsi
+    state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
-        Slash: 0.1
-  - type: Sprite
-    sprite: SS220/Objects/Sponsor/elwycco.rsi
-    state: axe_icon
+        Stamina: 1
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg
   - type: Item
     size: Tiny
+  - type: Tag
+    tags:
+    - WyccoAxe
 
 - type: entity
   parent: BasePlushie
