@@ -25,7 +25,7 @@
       - PlatingCutting #SS220 JOL TilePrying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
-    speedModifier: 3 #SS220 JOL Speedup
+    speedModifier: 1 #SS220 even speed for both jaws
     pryPowered: true
     useSound: /Audio/Items/jaws_pry.ogg
   - type: MultipleTool
@@ -72,7 +72,7 @@
       - Prying
       - PlatingCutting #SS220 JOL TilePryingng
   - type: Prying
-    speedModifier: 1 #SS220 JOL TilePrying
+    speedModifier: 1 #SS220 even speed for both jaws
   - type: MultipleTool
     entries:
       - behavior: [Prying, PlatingCutting] #SS220 JOL TilePryingng

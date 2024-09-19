@@ -34,6 +34,15 @@ namespace Content.Shared.Speech
         [DataField]
         public List<ProtoId<EmotePrototype>> AllowedEmotes = new();
 
+        //SS220 Clothing special emotes begin
+        /// <summary>
+        ///     What emotions allowed to use with special clothing
+        /// </summary>
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField, AutoNetworkedField]
+        public List<ProtoId<EmotePrototype>> ClothingEmotes = new();
+        //SS220 Clothing special emotes end
+
         /// <summary>
         ///     A mapping from chat suffixes loc strings to speech verb prototypes that should be conditionally used.
         ///     For things like '?' changing to 'asks' or '!!' making text bold and changing to 'yells'. Can be overridden if necessary.

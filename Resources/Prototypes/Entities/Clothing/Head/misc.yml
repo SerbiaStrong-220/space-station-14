@@ -196,6 +196,11 @@
       Female: FemaleFelinid
       Unsexed: MaleFelinid
   #ss220 special_sounds end
+  #SS220 clothing special emotes begin
+  - type: ClothingSpecialEmotes
+    emotes: ['Meow', 'Mew', 'Growl', 'Purr', 'Hiss']
+  #SS220 clothing special emotes end
+
 
 - type: entity
   parent: [ClothingHeadHatCatEars, BaseToggleClothing]

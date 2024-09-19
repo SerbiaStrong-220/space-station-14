@@ -214,5 +214,43 @@ public sealed class DiscordPlayerManager : IPostInjectInit
 
         return null;
     }
+
+    /// <summary>
+    /// Возвращает список спонсоров проекта.
+    /// </summary>
+    /// <returns></returns>
+    internal async Task<SponsorUsers?> GetSponsorUsers()
+    {
+        if (string.IsNullOrWhiteSpace(_apiUrl))
+        {
+            return null;
+        }
+
+        try
+        {
+            var url = $"{_apiUrl}/userinfo/sponsors";
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+
+                _sawmill.Error(
+                    "Failed to get sponsor users info: [{StatusCode}] {Response}",
+                    response.StatusCode,
+                    errorText);
+
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<SponsorUsers>(GetJsonSerializerOptions());
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error(exc.Message);
+        }
+
+        return null;
+    }
 }
 

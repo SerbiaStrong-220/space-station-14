@@ -14,6 +14,9 @@
   id: EventRole
 
 - type: playTimeTracker
+  id: JobMagistrate
+
+- type: playTimeTracker
   id: JobSeniorEngineer
 
 - type: playTimeTracker

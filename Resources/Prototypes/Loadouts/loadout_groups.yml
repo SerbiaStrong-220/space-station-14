@@ -1115,6 +1115,7 @@
   - SecurityHat
   - HatCowboyBlack #ss220 sec loadout update
   - HelmetTacSec #ss220 tacsec update
+  - TrooperHat # SS220 TrooperHat neck-to-head loadout transfer
 
 #SS220 neck loadout begin
 - type: loadoutGroup
@@ -1126,7 +1127,7 @@
   - Headphones #SS220 sec loadout update
   - ProtectGear #ss220 tacsec update
 #SS220 neck loadout end
-  - TrooperHat
+#- TrooperHat # SS220 TrooperHat neck-to-head loadout transfer
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1231,6 +1232,8 @@
   - SecurityCadetJumpsuitTurtleneckAlt
   - SecurityCadetJumpskirtTurtleneck
   - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - SecurityGrayJumpsuit #ss220-grey-jumpsit-add
+  - SecurityGrayJumpskirt #ss220-grey-jumpsit-add
 
 - type: loadoutGroup
   id: SurvivalSecurity

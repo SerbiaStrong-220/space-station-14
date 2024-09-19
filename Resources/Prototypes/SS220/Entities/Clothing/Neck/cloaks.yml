@@ -53,23 +53,3 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
-
-# SPONSOR
-
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCloakFloppa
-  name: шкура Шлёпы
-  description: Это - не то, что вы думаете
-  suffix: Sponsor # А точно ли он спонсор?
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi
-  - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHatFloppa
-    requiredSlot:
-    - neck
-    slot: head
-  - type: ContainerContainer
-    containers:
-      toggleable-clothing: !type:ContainerSlot {}

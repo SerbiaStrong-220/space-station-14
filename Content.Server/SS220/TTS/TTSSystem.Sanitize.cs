@@ -16,9 +16,9 @@ public sealed partial class TTSSystem
     private string Sanitize(string text)
     {
         text = text.Trim();
+        text = Regex.Replace(text, @"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", ReplaceMatchedWord, RegexOptions.Multiline | RegexOptions.IgnoreCase);
         text = Regex.Replace(text, @"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]", "");
         text = Regex.Replace(text, @"[a-zA-Z]", ReplaceLat2Cyr, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        text = Regex.Replace(text, @"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", ReplaceMatchedWord, RegexOptions.Multiline | RegexOptions.IgnoreCase);
         text = Regex.Replace(text, @"(?<=[1-90])(\.|,)(?=[1-90])", " целых ");
         text = Regex.Replace(text, @"\d+", ReplaceWord2Num);
         text = text.Trim();
@@ -145,15 +145,15 @@ public sealed partial class TTSSystem
             {"meine", "Майнэ"},
             {"hier", "Хие"},
             {"dumnkopf", "Думкопф"},
-            {"dummköpfe", "Думкёпфэ"},
+            {"dummkopfe", "Думкёпфэ"},
             {"schmetterling", "Шмэттерлин"},
             {"maschine", "Машинэ"},
             {"maschinen", "Машинэн"},
             {"achtung", "Ахтунг"},
             {"musik", "Музык"},
-            {"kapitän", "Капитэин"},
-            {"döner", "Дёнэр"},
-            {"dankeschön", "Данке Шён"},
+            {"kapitan", "Капитэин"},
+            {"doner", "Дёнэр"},
+            {"dankeschon", "Данке Шён"},
             {"gesundheit", "Гесундхайт"},
             {"flammenwerfer", "Фламэнверфер"},
             {"poltergeist", "Полтэргайст"},
@@ -172,18 +172,18 @@ public sealed partial class TTSSystem
             {"krankenwagen", "Кранкн Вагн"},
             {"auf", "Ау"},
             {"wiedersehen", "Фидерзеин"},
-            {"tschüss", "Чус"},
+            {"tschuss", "Чус"},
             {"tschau", "Чау"},
             {"fantastisch", "Фантастиш"},
-            {"doppelgänger", "Доппэльгнгэа"},
+            {"doppelganger", "Доппэльгнгэа"},
             {"verboten", "Вэрботн"},
             {"schnell", "Шнэль"},
             {"krankenhaus", "Кранкнхауз"},
             {"kugelblitz", "Кьюгельблиц"},
             {"ist", "Ыст"},
-            {"pulkzerstörer", "Пулькцерштёрер"},
-            {"pulkzerstörers", "Пулькцерштёрер"},
-            {"pulkzerstörere", "Пулькцерштёрер"},
+            {"pulkzerstorer", "Пулькцерштёрер"},
+            {"pulkzerstorers", "Пулькцерштёрер"},
+            {"pulkzerstorere", "Пулькцерштёрер"},
             {"offizier", "Оффизые"},
             {"offiziere", "Оффизыер"},
             {"offiziers", "Оффизыерс"},

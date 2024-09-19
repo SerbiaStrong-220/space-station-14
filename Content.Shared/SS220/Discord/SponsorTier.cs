@@ -24,6 +24,7 @@ public enum SponsorTier
     SubHeadDeveloper,
     ProjectManager,
     SeniorDeveloper,
+    Mapper,
 
     // Тиры подписок должны идти в конце, для упрощения вычисления лучшего уровня поддержки.
     Shlopa,
