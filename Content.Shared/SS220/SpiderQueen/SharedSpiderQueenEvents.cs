@@ -25,7 +25,7 @@ public sealed partial class SpiderWorldSpawnEvent : WorldTargetActionEvent
     public Vector2 Offset;
 
     /// <summary>
-    /// The cost of mana to use this action
+    /// The cost of blood points to use this action
     /// </summary>
     [DataField]
     public FixedPoint2 Cost = FixedPoint2.Zero;
@@ -71,12 +71,12 @@ public sealed partial class SpiderWorldSpawnDoAfterEvent : SimpleDoAfterEvent
     public Vector2 Offset;
 
     /// <summary>
-    /// The cost of mana to use this action
+    /// The cost of blood points to use this action
     /// </summary>
     public FixedPoint2 Cost = FixedPoint2.Zero;
 }
 
 [Serializable, NetSerializable]
-public sealed partial class CocoonExtractManaEvent : SimpleDoAfterEvent
+public sealed partial class CocoonExtractBloodPintsEvent : SimpleDoAfterEvent
 {
 }

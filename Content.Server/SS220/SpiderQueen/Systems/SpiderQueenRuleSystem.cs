@@ -99,11 +99,11 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
         if (mind.OwnedEntity is { } spider &&
             TryComp<SpiderQueenComponent>(spider, out var spiderQueen))
         {
-            var current = spiderQueen.CurrentMana;
-            var max = spiderQueen.MaxMana;
+            var current = spiderQueen.CurrentBloodPoints;
+            var max = spiderQueen.MaxBloodPoints;
 
             briefing = string.Format("{0}\n{1}", briefing,
-                Loc.GetString("spider-queen-role-mana-information", ("current", current), ("max", max)));
+                Loc.GetString("spider-queen-role-blood-points-information", ("current", current), ("max", max)));
         }
 
         args.Append(briefing);

@@ -147,9 +147,9 @@
   description: spider dance
   components:
   - type: SpiderQueen
-    currentMana: 50
-    maxMana: 200
-    passiveGeneration: 0.5
+    currentBloodPoints: 50
+    maxBloodPoints: 200
+    bloodPointsPerSecond: 0.5
     cocoonsCountToAnnouncement: 10
     cocoonPrototypes:
     - SpiderCocoonHorizontal

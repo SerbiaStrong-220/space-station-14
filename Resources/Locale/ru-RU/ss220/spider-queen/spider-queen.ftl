@@ -1,12 +1,12 @@
-spider-queen-mana-amount = У вас [color=yellow]{ $current } маны[/color]. Ваш максимум — [color=yellow]{ $max } маны[/color].
-spider-queen-not-enough-mana = Недостаточно маны
+spider-queen-blood-points-amount = У вас [color=#800000]{ $current } крови[/color]. Ваш максимум — [color=#800000]{ $max } крови[/color].
+spider-queen-not-enough-blood-points = Недостаточно [color=#800000]крови[/color]
 spider-queen-warning = Замечена аномальная биологическая активность в { $location }. Служба Безопасности должна ликвидировать угрозу до того как активу будет нанесен непоправимый ущерб! 
 
 spider-queen-role-greeting = Ваша задача — построить максимально большой улей. Не позволяйте причинить вред потомству. Экипаж - ваша пища, устройте большой пир!
-spider-queen-role-mana-information = У вас { $current } маны. Ваш максимум — { $max } маны.
+spider-queen-role-blood-points-information = У вас { $current } крови. Ваш максимум — { $max } крови.
 
-spider-cocoon-mana-amount = В коконе содержится [color=skyblue]{ $amount }[/color] маны.
-spider-cocoon-extract-mana-verb = Извлечь ману
+spider-cocoon-blood-points-amount = В коконе содержится [color=#800000]{ $amount } крови[/color].
+spider-cocoon-extract-blood-points-verb = Извлечь ману
 
 cocooning-too-close = Слишком близко к другому кокону
 cocooning-target-not-dead = Цель должна быть мертва

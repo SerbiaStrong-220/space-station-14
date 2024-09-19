@@ -1,8 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Body.Components;
+using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.Verbs;
@@ -18,6 +22,8 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly SpiderQueenSystem _spiderQueen = default!;
+    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
     public override void Initialize()
     {
@@ -26,7 +32,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         SubscribeLocalEvent<SpiderCocoonComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderCocoonComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderCocoonComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
-        SubscribeLocalEvent<SpiderCocoonComponent, CocoonExtractManaEvent>(OnExtractMana);
+        SubscribeLocalEvent<SpiderCocoonComponent, CocoonExtractBloodPintsEvent>(OnExtractMana);
     }
 
     public override void Update(float frameTime)
@@ -37,10 +43,19 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         while (query.MoveNext(out var uid, out var component))
         {
             if (_gameTiming.CurTime < component.NextSecond)
-                return;
+                continue;
 
             component.NextSecond = _gameTiming.CurTime + TimeSpan.FromSeconds(1);
-            UpdateManaAmount(uid, component);
+            if (!_container.TryGetContainer(uid, component.CocoonContainerId, out var container) ||
+                container.ContainedEntities is not { } entities ||
+                entities.Count <= 0)
+                continue;
+
+            foreach (var entity in entities)
+            {
+                ConvertBloodIntoBloodPoints(uid, component, entity, component.BloodConversionPerSecond);
+                CauseCocoonDamage(uid, component, entity);
+            }
         }
     }
 
@@ -59,7 +74,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
     {
         if (HasComp<SpiderQueenComponent>(args.Examiner))
         {
-            args.PushMarkup(Loc.GetString("spider-cocoon-mana-amount", ("amount", entity.Comp.ManaAmount)));
+            args.PushMarkup(Loc.GetString("spider-cocoon-blood-points-amount", ("amount", entity.Comp.BloodPointsAmount)));
         }
     }
 
@@ -71,13 +86,13 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
 
         var extractVerb = new AlternativeVerb
         {
-            Text = Loc.GetString("spider-cocoon-extract-mana-verb"),
+            Text = Loc.GetString("spider-cocoon-extract-blood-points-verb"),
             Act = () =>
             {
                 var doAfterEventArgs = new DoAfterArgs(EntityManager,
                     args.User,
-                    spiderQueen.ExtractManaTime,
-                    new CocoonExtractManaEvent(),
+                    spiderQueen.CocoonExtractTime,
+                    new CocoonExtractBloodPintsEvent(),
                     uid,
                     uid)
                 {
@@ -97,53 +112,58 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         args.Verbs.Add(extractVerb);
     }
 
-    private void OnExtractMana(Entity<SpiderCocoonComponent> entity, ref CocoonExtractManaEvent args)
+    private void OnExtractMana(Entity<SpiderCocoonComponent> entity, ref CocoonExtractBloodPintsEvent args)
     {
         if (args.Cancelled ||
             !TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
             return;
 
-        var amountToMax = spiderQueen.MaxMana - spiderQueen.CurrentMana;
-        spiderQueen.CurrentMana += MathF.Min((float)amountToMax, (float)entity.Comp.ManaAmount);
-        entity.Comp.ManaAmount -= MathF.Min((float)amountToMax, (float)entity.Comp.ManaAmount);
+        var amountToMax = spiderQueen.MaxBloodPoints - spiderQueen.CurrentBloodPoints;
+        spiderQueen.CurrentBloodPoints += MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
+        entity.Comp.BloodPointsAmount -= MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
 
         Dirty(args.User, spiderQueen);
         Dirty(entity.Owner, entity.Comp);
     }
 
-    private void UpdateManaAmount(EntityUid uid, SpiderCocoonComponent component)
+    private void ConvertBloodIntoBloodPoints(EntityUid uid, SpiderCocoonComponent component, EntityUid target, FixedPoint2 amount)
     {
-        if (!_container.TryGetContainer(uid, component.CocoonContainerId, out var container) ||
-            container.ContainedEntities is not { } entities ||
-            entities.Count <= 0)
+        if (!TryComp<BloodstreamComponent>(target, out var bloodstream) ||
+            !_solutionContainer.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution))
             return;
 
-        foreach (var entity in entities)
+        var solutionEnt = bloodstream.BloodSolution.Value;
+        if (solutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
+            return;
+
+        _bloodstream.TryModifyBleedAmount(target, -2f, bloodstream);
+        _solutionContainer.SplitSolution(solutionEnt, amount);
+        component.BloodPointsAmount += amount * component.BloodPointsCoefficient;
+        Dirty(uid, component);
+    }
+
+    private void CauseCocoonDamage(EntityUid uid, SpiderCocoonComponent component, EntityUid target)
+    {
+        if (!TryComp<DamageableComponent>(target, out var damageable) ||
+            component.DamagePerSecond is not { } damagePerSecond)
+            return;
+
+        var canDamage = true;
+        foreach (var damageType in component.DamageCap)
         {
-            if (!TryComp<DamageableComponent>(entity, out var damageable))
-                continue;
-
-            var canDamage = true;
-            foreach (var damageType in component.DamageCap)
+            var (type, value) = damageType;
+            if (damageable.Damage.DamageDict.TryGetValue(type, out var total) &&
+                total >= value)
             {
-                var (type, value) = damageType;
-                if (damageable.Damage.DamageDict.TryGetValue(type, out var total) &&
-                    total >= value)
-                {
-                    canDamage = false;
-                    break;
-                }
+                canDamage = false;
+                break;
             }
-
-            if (!canDamage)
-                continue;
-
-            if (component.DamagePerSecond is { } damagePerSecond)
-                _damageable.TryChangeDamage(entity, damagePerSecond);
-
-            component.ManaAmount += component.ManaByEntity;
         }
 
+        if (!canDamage)
+            return;
+
+        _damageable.TryChangeDamage(target, damagePerSecond);
         Dirty(uid, component);
     }
 }

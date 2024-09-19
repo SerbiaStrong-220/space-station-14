@@ -12,22 +12,22 @@ public sealed partial class SpiderQueenComponent : Component
     public bool IsAnnounced = false;
 
     /// <summary>
-    /// Current amount of mana
+    /// Current amount of blood points
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 CurrentMana = FixedPoint2.Zero;
+    public FixedPoint2 CurrentBloodPoints = FixedPoint2.Zero;
 
     /// <summary>
-    /// Maximum amount of mana
+    /// Maximum amount of blood points
     /// </summary>
     [DataField]
-    public FixedPoint2 MaxMana = FixedPoint2.Zero;
+    public FixedPoint2 MaxBloodPoints = FixedPoint2.Zero;
 
     /// <summary>
-    /// How much mana will be generated in a second
+    /// How much blood points will be generated in a second
     /// </summary>
     [DataField]
-    public FixedPoint2 PassiveGeneration = FixedPoint2.New(0.5);
+    public FixedPoint2 BloodPointsPerSecond = FixedPoint2.New(0.5);
 
     [ViewVariables]
     public TimeSpan NextSecond = TimeSpan.Zero;
@@ -45,16 +45,16 @@ public sealed partial class SpiderQueenComponent : Component
     public List<EntityUid> CocoonsList = new();
 
     /// <summary>
-    /// Bonus to maximum mana count that give by cocoons
+    /// Bonus to maximum blood points that give by cocoons
     /// </summary>
     [ViewVariables, AutoNetworkedField]
-    public FixedPoint2 CocoonsMaxManaBonus = FixedPoint2.Zero;
+    public FixedPoint2 CocoonsMaxBloodPointsBonus = FixedPoint2.Zero;
 
     /// <summary>
-    /// The time it takes to extract mana from the cocoon
+    /// The time it takes to extract blood points from the cocoon
     /// </summary>
     [DataField]
-    public TimeSpan ExtractManaTime = TimeSpan.FromSeconds(3);
+    public TimeSpan CocoonExtractTime = TimeSpan.FromSeconds(3);
 
     /// <summary>
     /// The minimum distance between cocoons for their spawn

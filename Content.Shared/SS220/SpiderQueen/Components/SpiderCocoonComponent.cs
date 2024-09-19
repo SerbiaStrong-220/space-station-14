@@ -24,32 +24,37 @@ public sealed partial class SpiderCocoonComponent : Component
     public string CocoonContainerId = "cocoon";
 
     /// <summary>
-    /// Bonus to max mana from this cocoon
+    /// Bonus to max blood points from this cocoon
     /// </summary>
     [DataField]
-    public FixedPoint2 MaxManaBonus = FixedPoint2.Zero;
+    public FixedPoint2 BloodPointsBonus = FixedPoint2.Zero;
 
     /// <summary>
-    /// The amount of mana that can be extracted from the cocoon
+    /// The amount of blood points that can be extracted from the cocoon
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 ManaAmount = FixedPoint2.Zero;
+    public FixedPoint2 BloodPointsAmount = FixedPoint2.Zero;
 
     /// <summary>
-    /// How much mana is given by entity per second
+    /// How much blood points is given by entity per second
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 ManaByEntity = FixedPoint2.New(1);
+    public FixedPoint2 BloodPointsCoefficient = FixedPoint2.New(0.5);
+
+    /// <summary>
+    /// How much blood is converted into blood points per second
+    /// </summary>
+    [DataField("bloodConversion"), AutoNetworkedField]
+    public FixedPoint2 BloodConversionPerSecond = FixedPoint2.New(2);
 
     /// <summary>
     /// How much damage does the entity receive inside the cocoon
     /// </summary>
-    [DataField]
+    [DataField("damage")]
     public DamageSpecifier? DamagePerSecond;
 
     /// <summary>
     /// The cap of the damage of the entity, above which the cocoon cannot cause damage.
-    /// Also, when this damage cap is reached, the cocoon stops accumulating mana
     /// </summary>
     [DataField]
     public Dictionary<string, FixedPoint2> DamageCap = new();

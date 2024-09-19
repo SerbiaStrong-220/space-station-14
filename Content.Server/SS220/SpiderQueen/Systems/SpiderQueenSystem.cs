@@ -55,10 +55,10 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 continue;
 
             comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
-            comp.MaxMana += comp.CocoonsMaxManaBonus;
+            comp.MaxBloodPoints += comp.CocoonsMaxBloodPointsBonus;
 
-            var newValue = comp.CurrentMana + comp.PassiveGeneration;
-            comp.CurrentMana = MathF.Min((float)newValue, (float)comp.MaxMana);
+            var newValue = comp.CurrentBloodPoints + comp.BloodPointsPerSecond;
+            comp.CurrentBloodPoints = MathF.Min((float)newValue, (float)comp.MaxBloodPoints);
 
             Dirty(uid, comp);
         }
@@ -73,7 +73,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var performer = entity.Owner;
 
         if (args.Cost > FixedPoint2.Zero &&
-            !CheckEnoughMana(performer, args.Cost, entity.Comp))
+            !CheckEnoughBloodPoints(performer, args.Cost, entity.Comp))
             return;
 
         var netCoordinates = GetNetCoordinates(args.Target);
@@ -115,10 +115,10 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var performer = entity.Owner;
         if (args.Cost > FixedPoint2.Zero)
         {
-            if (!CheckEnoughMana(performer, args.Cost, entity.Comp))
+            if (!CheckEnoughBloodPoints(performer, args.Cost, entity.Comp))
                 return;
 
-            entity.Comp.CurrentMana -= args.Cost;
+            entity.Comp.CurrentBloodPoints -= args.Cost;
         }
 
         var getProtos = EntitySpawnCollection.GetSpawns(args.Prototypes, _random);
@@ -187,7 +187,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (!Resolve(spider, ref component))
             return;
 
-        var maxManaBonus = FixedPoint2.Zero;
+        var maxBloodPointsBonus = FixedPoint2.Zero;
         var i = 0;
         foreach (var cocoon in component.CocoonsList)
         {
@@ -196,11 +196,11 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 container.Count <= 0)
                 continue;
 
-            maxManaBonus += spiderCocoon.MaxManaBonus;
+            maxBloodPointsBonus += spiderCocoon.BloodPointsBonus;
             i++;
         }
 
-        component.CocoonsMaxManaBonus = maxManaBonus;
+        component.CocoonsMaxBloodPointsBonus = maxBloodPointsBonus;
         Dirty(spider, component);
     }
 }

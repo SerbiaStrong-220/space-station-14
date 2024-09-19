@@ -30,8 +30,8 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     {
         if (args.Examined == args.Examiner)
         {
-            args.PushMarkup(Loc.GetString("spider-queen-mana-amount",
-                ("current", entity.Comp.CurrentMana.Int()), ("max", entity.Comp.MaxMana.Int())));
+            args.PushMarkup(Loc.GetString("spider-queen-blood-points-amount",
+                ("current", entity.Comp.CurrentBloodPoints.Int()), ("max", entity.Comp.MaxBloodPoints.Int())));
         }
     }
 
@@ -97,21 +97,21 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     }
 
     /// <summary>
-    /// Checks if the spider has enough mana for any action
+    /// Checks if the spider has enough blood points for any action
     /// </summary>
-    public bool CheckEnoughMana(EntityUid uid, FixedPoint2 cost, SpiderQueenComponent? component = null)
+    public bool CheckEnoughBloodPoints(EntityUid uid, FixedPoint2 cost, SpiderQueenComponent? component = null)
     {
         if (!Resolve(uid, ref component))
         {
             if (_net.IsServer)
-                Log.Error($"{uid} doesn't have SpiderQueenComponent to CheckEnoughMana");
+                Log.Error($"{uid} doesn't have SpiderQueenComponent to CheckEnoughBloodPoints");
 
             return false;
         }
 
-        if (component.CurrentMana < cost)
+        if (component.CurrentBloodPoints < cost)
         {
-            _popup.PopupEntity(Loc.GetString("spider-queen-not-enough-mana"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("spider-queen-not-enough-blood-points"), uid, uid);
             return false;
         }
         else

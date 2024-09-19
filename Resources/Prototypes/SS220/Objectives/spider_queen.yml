@@ -21,8 +21,8 @@
       state: cocoon2
   - type: NumberObjective
     # dragon can only spawn 3 rifts so keep objective the same
-    min: 2
-    max: 2
+    min: 10
+    max: 10
     title: objective-create-cocoons-title
     description: objective-create-cocoons-description
   - type: CreateCocoonsCondition
