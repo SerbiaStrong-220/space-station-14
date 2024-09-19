@@ -78,6 +78,6 @@
       - EncryptionKeyCommon
   - type: EncryptionKeyHolder
     keySlots: 2
-  - type: Vocal
+  - type: Vocal # SS220 borg emotes to PAI start
     sounds:
-      Unsexed: UnisexSilicon
+      Unsexed: UnisexSilicon # SS220 borg emotes to PAI end
