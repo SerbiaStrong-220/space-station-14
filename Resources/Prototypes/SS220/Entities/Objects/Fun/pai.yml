@@ -78,3 +78,6 @@
       - EncryptionKeyCommon
   - type: EncryptionKeyHolder
     keySlots: 2
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSilicon
