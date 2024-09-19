@@ -528,6 +528,7 @@
   name: chat-emote-name-chime
   category: Vocal
   icon: Interface/Emotes/chime.png
+#    whitelist: # SS220 TODO borg emotes to PAI
 #    requireAll: true # SS220 TODO borg emotes to PAI
     components:
     - BorgChassis
@@ -548,6 +549,7 @@
   name: chat-emote-name-buzztwo
   category: Vocal
   icon: Interface/Emotes/buzztwo.png
+#    whitelist: # SS220 TODO borg emotes to PAI
 #    requireAll: true # SS220 TODO borg emotes to PAI
     components:
     - BorgChassis
@@ -579,6 +581,7 @@
   name: chat-emote-name-ping
   category: Vocal
   icon: Interface/Emotes/ping.png
+#    whitelist: # SS220 TODO borg emotes to PAI
 #    requireAll: true # SS220 TODO borg emotes to PAI
     components:
     - BorgChassis
