@@ -668,8 +668,8 @@
   suffix: Sponsor # Награда ведущих разработчиков
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/neck/vedicloak.rsi
-  
+    sprite: SS220/Clothing/Sponsor/Cloak/vedicloak.rsi
+
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakFloppa

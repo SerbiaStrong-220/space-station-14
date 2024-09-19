@@ -25,7 +25,7 @@
     neck: ClothingSponsorNeckSpriter
 
 # - type: loadout
-#   id: TrackerExpertCoderNeck #Трекероведы
+#   id: TrackerExpertNeck #Трекероведы
 #   effects:
 #   - !type:GroupLoadoutEffect
 #     proto: DeveloperSponsorTier #Нет тира для трекероведов
@@ -40,10 +40,10 @@
   equipment:
     neck: ClothingSponsorNeckAdministrator
 
-# - type: loadout
-#   id: HeadDeveloperNeck
-#   effects:
-#   - !type:GroupLoadoutEffect
-#     proto: HeadDeveloperSponsorTier
-#   equipment:
-#     neck: ClothingSponsorNeckHeadDeveloper
+- type: loadout
+  id: HeadDeveloperNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HeadDeveloperSponsorTier
+  equipment:
+    neck: ClothingSponsorNeckHeadDevelopment

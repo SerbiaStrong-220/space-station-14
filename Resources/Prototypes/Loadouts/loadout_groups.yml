@@ -120,9 +120,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
@@ -175,9 +175,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
@@ -239,14 +239,6 @@
   minLimit: 0
   loadouts:
   - Mantle
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-#  - TrackerExpertCoderNeck
-  - AdministratorNeck
-#  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: PassengerOuterClothing
@@ -374,14 +366,6 @@
   loadouts:
   - LawyerNeck
   - CloakJujutsuShlepa #SS220-Two Floppa Iteration
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-#  - TrackerExpertCoderNeck
-  - AdministratorNeck
-#  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: ChaplainHead
@@ -427,14 +411,6 @@
   minLimit: 0
   loadouts:
   - ChaplainNeck
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-#  - TrackerExpertCoderNeck
-  - AdministratorNeck
-#  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: JanitorHead
@@ -726,9 +702,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
@@ -848,9 +824,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 #ss220-loadout-ce-backpack-begin
@@ -1004,9 +980,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
@@ -1046,14 +1022,6 @@
   minLimit: 0
   loadouts:
   - ScientistTie
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-#  - TrackerExpertCoderNeck
-  - AdministratorNeck
-#  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: ScientistJumpsuit
@@ -1164,9 +1132,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
@@ -1223,14 +1191,6 @@
   - ProtectGear #ss220 tacsec update
 #SS220 neck loadout end
   - TrooperHat
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-#  - TrackerExpertCoderNeck
-  - AdministratorNeck
-#  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1394,9 +1354,9 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+#  - TrackerExpert
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck
   #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
