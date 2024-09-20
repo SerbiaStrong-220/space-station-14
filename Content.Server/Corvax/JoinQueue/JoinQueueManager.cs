@@ -69,7 +69,7 @@ public sealed class JoinQueueManager
         {
             foreach (var session in _queue)
             {
-                session.ConnectedClient.Disconnect("Queue was disabled");
+                session.Channel.Disconnect("Queue was disabled");
             }
         }
     }

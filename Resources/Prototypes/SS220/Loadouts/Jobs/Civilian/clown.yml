@@ -1,3 +1,15 @@
+#SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Clown Time
+- type: loadoutEffectGroup
+  id: ClownPennywise
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 180000
+     
 # Head
 - type: loadout
   id: HeadMuzhik
@@ -29,6 +41,14 @@
   equipment:
     mask: ClothingSponsorGoldClownMask
 
+- type: loadout
+  id: ClownPennywiseMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    mask: ClothingMaskClownPennywise
+
 # Jumpsuit
 - type: loadout
   id: ClownJumpsuit
@@ -56,6 +76,14 @@
   equipment:
     jumpsuit: ClothingSponsorGoldClownSuit
 
+- type: loadout
+  id: ClownPennywiseJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClownPennywise
+
 # Neck
 - type: loadout
   id: CloakMuzhik
@@ -64,6 +92,14 @@
     proto: BigShlopaSponsorTier
   equipment:
     neck: ClothingSponsorScarfMuzhik
+
+- type: loadout
+  id: ClownPennywiseRuff
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    neck: ClothingNeckRuffClownPennywise
 
 # Gloves
 - type: loadout
@@ -90,3 +126,11 @@
     proto: GoldenShlopaSponsorTier
   equipment:
     shoes: ClothingSponsorGoldClownShoes
+
+- type: loadout
+  id: ClownPennywiseShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    shoes: ClothingShoesClownPennywise
