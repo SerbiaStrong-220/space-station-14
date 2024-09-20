@@ -565,6 +565,9 @@
   name: loadout-group-clown-mask
   loadouts:
   - ClownPennywiseMask
+  - MaskClown
+  - MaskMuzhik
+  - MaskGold
 #ss220-loadout-clown-mask-end
 
 #ss220-loadout-clown-neck-begin
