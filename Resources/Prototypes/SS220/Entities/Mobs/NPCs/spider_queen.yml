@@ -163,7 +163,7 @@
     - ActionSpawnSpiderEggShooterBloodPoints
     - ActionSpawnSpiderLittleBloodPoints
     - ActionSpawnSpiderCrystalBloodPoints
-    - ActionSpawnSingleSpiderWebDurable
+    - ActionSpawnSingleSpiderWebDurableBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
   - type: Butcherable

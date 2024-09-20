@@ -1,6 +1,6 @@
 #Base
 - type: entity
-  id: BaseActionSpawnSpiderEggBloodPoints
+  id: BaseActionSpawnSpiderEgg
   abstract: true
   components:
   - type: WorldTargetAction
@@ -39,7 +39,7 @@
 
 #Egg
 - type: entity
-  parent: BaseActionSpawnSpiderEggBloodPoints
+  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggDroneBloodPoints
   name: guard spider egg
   description: He is also a drone and can build crystals and walls.
@@ -131,26 +131,6 @@
 
 #Cryctal
 - type: entity
-  id: ActionSpawnSpiderCrystalBloodPoints
-  name: create a crystal shard
-  description: A shard that serves as a backlight for spiders.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: WorldTargetAction
-    useDelay: 5
-    range: 1
-    itemIconStyle: BigAction
-    icon:
-      sprite: SS220/Interface/Actions/action_spider.rsi
-      state: crystal_spawn
-    event: !type:SpiderWorldSpawnEvent
-      prototypes:
-      - id: ShardCrystalBlueXeno
-        amount: 1
-      offset: 0, 1
-      cost: 5
-
-- type: entity
   id: ActionSpawnSpiderCrystal
   name: create a crystal shard
   description: A shard that serves as a backlight for spiders.
@@ -170,22 +150,27 @@
       offset: 0, 1
       speech: action-speech-spell-spider
 
-#Wall
 - type: entity
-  parent: ActionSpawnSpiderWallWeb
-  id: ActionSpawnSpiderWallWebDurableBloodPoints
-  name: create a durable wall
+  id: ActionSpawnSpiderCrystalBloodPoints
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
   categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
-    useDelay: 6
+    useDelay: 5
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: crystal_spawn
     event: !type:SpiderWorldSpawnEvent
       prototypes:
-      - id: WallWebDurableSpawn
+      - id: ShardCrystalBlueXeno
         amount: 1
       offset: 0, 1
-      cost: 10
+      cost: 5
 
+#Wall
 - type: entity
   id: ActionSpawnSpiderWallWeb
   name: create a wall
@@ -220,22 +205,22 @@
       offset: 0, 1
       speech: action-speech-spell-spider
 
-#Web
 - type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
-  id: ActionSpawnSingleSpiderWebDurable
-  name: spin a durable web
+  parent: ActionSpawnSpiderWallWeb
+  id: ActionSpawnSpiderWallWebDurableBloodPoints
+  name: create a durable wall
   categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
-    useDelay: 2
+    useDelay: 6
     event: !type:SpiderWorldSpawnEvent
       prototypes:
-      - id: SpiderWebDurable
+      - id: WallWebDurableSpawn
         amount: 1
       offset: 0, 1
       cost: 10
 
+#Web
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebShortDelay
@@ -266,6 +251,21 @@
         amount: 1
       offset: 0, 1
       speech: action-speech-spell-spider
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebDurableBloodPoints
+  name: spin a durable web
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 2
+    event: !type:SpiderWorldSpawnEvent
+      prototypes:
+      - id: SpiderWebDurable
+        amount: 1
+      offset: 0, 1
+      cost: 2
 
 #Clown web
 - type: entity
