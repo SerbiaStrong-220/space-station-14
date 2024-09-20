@@ -54,7 +54,7 @@ public sealed partial class SpiderQueenComponent : Component
     /// The time it takes to extract blood points from the cocoon
     /// </summary>
     [DataField]
-    public TimeSpan CocoonExtractTime = TimeSpan.FromSeconds(3);
+    public TimeSpan CocoonExtractTime = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// The minimum distance between cocoons for their spawn

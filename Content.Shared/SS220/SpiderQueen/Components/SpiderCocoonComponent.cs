@@ -39,13 +39,13 @@ public sealed partial class SpiderCocoonComponent : Component
     /// How much blood points is given for each unit of blood
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float BloodConversionCoefficient = 0.5f;
+    public float BloodConversionCoefficient = 1f;
 
     /// <summary>
     /// How much blood is converted into blood points per second
     /// </summary>
     [DataField("bloodConversion"), AutoNetworkedField]
-    public FixedPoint2 BloodConversionPerSecond = FixedPoint2.New(2);
+    public FixedPoint2 BloodConversionPerSecond = FixedPoint2.New(0.5);
 
     /// <summary>
     /// How much damage does the entity receive inside the cocoon

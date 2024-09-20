@@ -185,8 +185,16 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (!Resolve(uid, ref hunger))
             return;
 
-        _hunger.ModifyHunger(uid, -amount, hunger);
-        component.CurrentBloodPoints += amount * component.HungerConvertCoefficient;
+        var amountToMax = component.MaxBloodPoints - component.CurrentBloodPoints;
+        if (amountToMax <= FixedPoint2.Zero)
+            return;
+
+        var value = amount * component.HungerConvertCoefficient;
+        value = MathF.Min(value, (float)amountToMax);
+
+        var hungerDecreaseValue = -(value / component.HungerConvertCoefficient);
+        _hunger.ModifyHunger(uid, hungerDecreaseValue, hunger);
+        component.CurrentBloodPoints += value;
         Dirty(uid, component);
     }
 }

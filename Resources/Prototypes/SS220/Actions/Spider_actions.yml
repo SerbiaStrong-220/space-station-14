@@ -1,6 +1,6 @@
 #Base
 - type: entity
-  id: BaseActionSpawnSpiderEgg
+  id: BaseActionSpawnSpiderEggBloodPoints
   abstract: true
   components:
   - type: WorldTargetAction
@@ -10,13 +10,12 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: guard_spawn
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:WorldSpawnSpellEvent
       prototypes:
       - id: SpiderEggDrone
         amount: 1
       offset: 0, 1
-      cost: 10
-      doAfter: 5
+      speech: action-speech-spell-spider
 
 - type: entity
   id: BaseActionSpawnSingleSpiderWeb
@@ -40,8 +39,8 @@
 
 #Egg
 - type: entity
-  parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggDrone
+  parent: BaseActionSpawnSpiderEggBloodPoints
+  id: ActionSpawnSpiderEggDroneBloodPoints
   name: guard spider egg
   description: He is also a drone and can build crystals and walls.
   categories: [ HideSpawnMenu ]
@@ -52,12 +51,12 @@
       - id: SpiderEggDrone
         amount: 1
       offset: 0, 1
-      cost: 10
+      cost: 40
       doAfter: 5
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggHunter
+  id: ActionSpawnSpiderEggHunterBloodPoints
   name: hunter spider egg
   categories: [ HideSpawnMenu ]
   components:
@@ -70,12 +69,12 @@
       - id: SpiderEggHunter
         amount: 1
       offset: 0, 1
-      cost: 30
+      cost: 60
       doAfter: 5
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggGhost
+  id: ActionSpawnSpiderEggGhostBloodPoints
   name: ghost spider egg
   categories: [ HideSpawnMenu ]
   components:
@@ -88,12 +87,12 @@
       - id: SpiderEggGhost
         amount: 1
       offset: 0, 1
-      cost: 40
+      cost: 60
       doAfter: 5
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggShooter
+  id: ActionSpawnSpiderEggShooterBloodPoints
   name: shooter  spider egg
   categories: [ HideSpawnMenu ]
   components:
@@ -106,12 +105,12 @@
       - id: SpiderEggShooter
         amount: 1
       offset: 0, 1
-      cost: 20
+      cost: 50
       doAfter: 5
 
 #Spider
 - type: entity
-  id: ActionSpawnSpiderLittle
+  id: ActionSpawnSpiderLittleBloodPoints
   name: release the spiderlings
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   categories: [ HideSpawnMenu ]
@@ -123,14 +122,34 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: little_spider_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderWorldSpawnEvent
       prototypes:
       - id: MobSpiderLittle
         amount: 3
       offset: 0, 1
-      speech: action-speech-spell-spider
+      cost: 20
 
 #Cryctal
+- type: entity
+  id: ActionSpawnSpiderCrystalBloodPoints
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 5
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: crystal_spawn
+    event: !type:SpiderWorldSpawnEvent
+      prototypes:
+      - id: ShardCrystalBlueXeno
+        amount: 1
+      offset: 0, 1
+      cost: 5
+
 - type: entity
   id: ActionSpawnSpiderCrystal
   name: create a crystal shard
@@ -152,6 +171,21 @@
       speech: action-speech-spell-spider
 
 #Wall
+- type: entity
+  parent: ActionSpawnSpiderWallWeb
+  id: ActionSpawnSpiderWallWebDurableBloodPoints
+  name: create a durable wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 6
+    event: !type:SpiderWorldSpawnEvent
+      prototypes:
+      - id: WallWebDurableSpawn
+        amount: 1
+      offset: 0, 1
+      cost: 10
+
 - type: entity
   id: ActionSpawnSpiderWallWeb
   name: create a wall
@@ -187,6 +221,21 @@
       speech: action-speech-spell-spider
 
 #Web
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebDurable
+  name: spin a durable web
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 2
+    event: !type:SpiderWorldSpawnEvent
+      prototypes:
+      - id: SpiderWebDurable
+        amount: 1
+      offset: 0, 1
+      cost: 10
+
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebShortDelay
@@ -248,7 +297,7 @@
   components:
   - type: EntityTargetAction
     event: !type:SpiderCocooningActionEvent
-      cocooningTime: 5
+      cocooningTime: 15
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/action_spider.rsi, state: cocoon }
     useDelay: 10

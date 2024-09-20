@@ -21,7 +21,7 @@
               amount: 2
           steps:
             - tool: Slicing
-              doAfter: 3
+              doAfter: 10
 
     - node: cocoonVertical
       entity: SpiderCocoonVertical
@@ -35,7 +35,7 @@
               amount: 2
           steps:
             - tool: Slicing
-              doAfter: 3
+              doAfter: 10
 
     - node: cocoonHorizontalDestroyed
       entity: SpiderCocoonHorizontalDestroyed
@@ -43,7 +43,7 @@
         - to: start
           steps:
             - tool: Slicing
-              doAfter: 3
+              doAfter: 4
 
     - node: cocoonVerticalDestroyed
       entity: SpiderCocoonVerticalDestroyed
@@ -51,4 +51,4 @@
         - to: start
           steps:
             - tool: Slicing
-              doAfter: 3
+              doAfter: 4

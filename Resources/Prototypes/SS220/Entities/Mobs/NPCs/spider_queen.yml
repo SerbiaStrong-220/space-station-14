@@ -149,8 +149,8 @@
   description: spider dance
   components:
   - type: SpiderQueen
-    currentBloodPoints: 50
-    maxBloodPoints: 200
+    currentBloodPoints: 100
+    maxBloodPoints: 100
     bloodPointsPerSecond: 0.5
     cocoonsCountToAnnouncement: 10
     cocoonPrototypes:
@@ -158,14 +158,14 @@
     - SpiderCocoonVertical
   - type: ActionGrant
     actions:
-    - ActionSpawnSpiderEggDrone
-    - ActionSpawnSpiderEggHunter
-    - ActionSpawnSpiderEggGhost
-    - ActionSpawnSpiderEggShooter
-    - ActionSpawnSpiderLittle
-    - ActionSpawnSpiderCrystal
+    - ActionSpawnSpiderEggDroneBloodPoints
+    - ActionSpawnSpiderEggHunterBloodPoints
+    - ActionSpawnSpiderEggGhostBloodPoints
+    - ActionSpawnSpiderEggShooterBloodPoints
+    - ActionSpawnSpiderLittleBloodPoints
+    - ActionSpawnSpiderCrystalBloodPoints
     - ActionSpawnSingleSpiderWebDurable
-    - ActionSpawnSpiderWallWebDurable
+    - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
   - type: Butcherable
     spawned:
