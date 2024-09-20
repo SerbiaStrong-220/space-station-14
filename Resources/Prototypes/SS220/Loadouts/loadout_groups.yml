@@ -517,15 +517,6 @@
 
   # Клоун (Начало)
 - type: loadoutGroup
-  id: ClownMask
-  name: loadout-group-clown-mask
-  minLimit: 1
-  loadouts:
-  - MaskClown
-  - MaskMuzhik
-  - MaskGold
-
-- type: loadoutGroup
   id: ClownGloves
   name: loadout-group-clown-gloves
   loadouts:
