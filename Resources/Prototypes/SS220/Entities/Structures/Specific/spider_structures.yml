@@ -82,7 +82,7 @@
 #WallSpawnWeb
 - type: entity
   id: WallWebSpawn
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: True
@@ -111,7 +111,7 @@
 - type: entity
   parent: WallWebSpawn
   id: WallWebDurableSpawn
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: SS220/Effects/wallwebspawn.rsi

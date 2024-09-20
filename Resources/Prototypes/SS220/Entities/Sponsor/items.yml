@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: BaseCigarette # SS220 Cigarettes questions
   id: SponsorCig
@@ -149,79 +151,6 @@
     sound:
       path: /Audio/Effects/unwrap.ogg
 
-- type: entity
-  parent: BaseItem
-  id: SponsorElWycco
-  suffix: Шлёпа
-  name: Максон
-  description: КРИЧИ! КРИЧИ КАК СУЧЕЧКА!
-  components:
-  - type: UseDelay
-    delay: 1.0
-  - type: MeleeWeapon
-    wideAnimationRotation: 180
-    soundHit:
-      path: /Audio/Items/Toys/weh.ogg
-    damage:
-      types:
-        Blunt: 0
-  - type: Sprite
-    sprite: SS220/Objects/Sponsor/elwycco.rsi
-    layers:
-    - state: icon
-    - state: axe
-      map: ["axe"]
-      sprite: SS220/Objects/Sponsor/elwycco.rsi
-  - type: ContainerContainer
-    containers:
-      item: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      item:
-        name: Топорик
-        whitelist:
-          tags:
-          - ElWyccoAxe
-  - type: ContainerFill
-    containers:
-      item:
-      - SponsorElWyccoAxe
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Items/Toys/weh.ogg
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/Toys/weh.ogg
-  - type: EmitSoundOnActivate
-    sound:
-      path: /Audio/Items/Toys/weh.ogg
-  - type: PhysicalComposition
-    materialComposition:
-      Cloth: 100
-  - type: StaticPrice
-    price: 5
-
-- type: entity
-  parent: BaseKnife
-  id: SponsorElWyccoAxe
-  suffix: Шлёпа
-  name: микро топор
-  description: Мини топор для мини игрушки.
-  components:
-  - type: Tag
-    tags:
-    - ElWyccoAxe
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Slash: 0.1
-  - type: Sprite
-    sprite: SS220/Objects/Sponsor/elwycco.rsi
-    state: axe_icon
-  - type: Item
-    size: Tiny
-
 # Наборы
 
 - type: entity
@@ -362,3 +291,80 @@
     - id: ClothingSponsorMaidHat
     sound:
       path: /Audio/Effects/unwrap.ogg
+
+# ss220-fix-WYCC!!!
+
+- type: entity
+  parent: BasePlushie
+  id: SponsorElWycc
+  suffix: Шлёпа
+  name: Максон
+  description: КРИЧИ! КРИЧИ КАК СУЧЕЧКА!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+  - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: Wycco-Axe
+        whitelist:
+          tags:
+          - WyccoAxe
+  - type: ItemMapper
+    mapLayers:
+      wycc_axe:
+        whitelist:
+          tags:
+          - WyccoAxe
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+  - type: ContainerFill
+    containers:
+      item:
+      - SponsorElWyccAxe
+  - type: Appearance
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAAAT_wycc.ogg
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
+  - type: UseDelay
+    delay: 5.0
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 100
+  - type: StaticPrice
+    price: 5
+
+- type: entity
+  parent: BaseKnife
+  id: SponsorElWyccAxe
+  suffix: Шлёпа
+  name: мини топорик
+  description: Мини топор для мини игрушки.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/wyccaxe.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Stamina: 1
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - WyccoAxe

@@ -1,0 +1,213 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingMaskGas
+  id: ClothingMaskGasAtmosBlue
+  name: атмос-противогаз
+  description: Улучшенный противогаз, используемый атмосферными техниками. Огнеупорный!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/atmos_mask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/atmos_mask.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.80
+
+- type: entity
+  parent: ClothingMaskGasAtmos
+  id: ClothingMaskGasCentcomm
+  name: CentCom gas mask
+  description: Oooh, gold and black. Fancy! This should help as you sit in your office.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/gascentcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/gascentcom.rsi
+  - type: BreathMask
+  - type: IngestionBlocker
+
+
+- type: entity
+  parent: ClothingMaskGasExplorer
+  id: BlueShieldSWAT
+  name: синяя маска спецназа
+  description: Неоново-синяя маска, используемая для деморализации Грейтайда в дикой природе.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/blue-shield-mask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/blue-shield-mask.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+
+- type: entity
+  parent: ClothingMaskBase
+  id: ClothingMaskMoryak
+  name: moryak mask
+  description: The mask of a cheerful sailor.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/moryak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/moryak.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HamsterWearable
+
+- type: entity
+  parent: ClothingMaskBase
+  id: ClothingMaskYsatyu
+  name: ysatyu mask
+  description: There is no better pastime than drinking moonshine with comrades.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/ysatyu.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/ysatyu.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - HamsterWearable
+
+
+# Syndie HOTLINE MIAMI MASKS
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatAlex
+  name: Алекс #С большой, ибо оффовская маска Ричарда тоже
+  description: Кто пригласил всех этих идиотов?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/alex.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/alex.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatJake
+  name: Джейк
+  description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/jake.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/jake.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRasmus
+  name: Расмус
+  description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/rasmus.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/rasmus.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRichter
+  name: Рихтер
+  description: Ааа, вот ты где! А я всё думал, когда ты вернёшься?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/richter.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/richter.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatTony
+  name: Тони
+  description: Чувак, эта вечеринка отстой. Я ненавижу этих людей.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/tony.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/tony.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+# Syndie PAYDAY MASKS
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDDallas
+  name: маска Далласа
+  description: Хей, хей! Давай посмотрим, насколько ты будешь разговорчив с моим стволом в твоей пасти.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/dallas.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/dallas.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDChains
+  name: маска Чейнса
+  description: Твоя задница это трава, а я гребанная газонокосилка.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/chains.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/chains.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDWolf
+  name: маска Вульфа
+  description: Самый разыскиваемый? Чек. Пулевые ранения? Чек. Самый богатый? Большой черт подери чек.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/wolf.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/wolf.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDHoxton
+  name: маска Хокстона
+  description: Мне нужно, чтобы вы стояли смирно как чертовы садовые гномы.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingMaskBase
+  id: ClothingMaskClownPennywise
+  name: dance clown mask
+  description: We assure you, the owner of this mask feeds only on positive emotions!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/clown_pennywise.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout

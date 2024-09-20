@@ -439,7 +439,7 @@ namespace Content.Client.Lobby.UI
 
             #region TeleportAfkToCryoStorage
 
-            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-edtior-afkPreferences-tab"));
+            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-editor-afkPreferences-tab")); //ss220 loc fix
             CTeleportAfkToCryoStorage.Pressed = Profile?.TeleportAfkToCryoStorage ?? true;
             CTeleportAfkToCryoStorage.OnToggled += args => SetTeleportAfkToCryoStorage(args.Pressed);
 
@@ -1243,6 +1243,7 @@ namespace Content.Client.Lobby.UI
         private void SetTeleportAfkToCryoStorage(bool newTeleportAfkToCryoStorage)
         {
             Profile = Profile?.WithTeleportAfkToCryoStorage(newTeleportAfkToCryoStorage);
+            SetDirty(); // ss220 cryo button fix
         }
 
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)

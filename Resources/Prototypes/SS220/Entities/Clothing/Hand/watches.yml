@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: Clothing
   id: ClothingWristWatch
@@ -32,7 +34,7 @@
   panelTexture: /Textures/SS220/Interface/WristWatch/WristWatchPanel.png
   panelSize: 256, 214
   hoursLabel:
-    font: 
+    font:
       path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-22.ttf
       size: 33 # Should be 32, but 33 gives wanted result
     color: "#75E6FF"
@@ -47,7 +49,7 @@
     position: 100, 92
     size: 20, 44
   secondsLabel:
-    font: 
+    font:
       path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-16.ttf
       size: 24 # Should be 20, but 24 gives wanted result
     color: "#75E6FF"
@@ -76,7 +78,7 @@
   panelTexture: /Textures/SS220/Interface/WristWatch/WristWatchPanelGold.png
   panelSize: 256, 214
   hoursLabel:
-    font: 
+    font:
       path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-22.ttf
       size: 33 # Should be 32, but 33 gives wanted result
     color: "#DBD6BB"
@@ -91,7 +93,7 @@
     position: 100, 92
     size: 20, 44
   secondsLabel:
-    font: 
+    font:
       path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-16.ttf
       size: 24 # Should be 20, but 24 gives wanted result
     color: "#DBD6BB"
@@ -112,7 +114,7 @@
   panelTexture: /Textures/SS220/Interface/WristWatch/WristWatchPanelElectronika.png
   panelSize: 256, 214
   hoursLabel:
-    font: 
+    font:
       path: /Fonts/SS220/WristWatch/SS220-Electronika-Watch-Digits-20.ttf
       size: 30 # Should be 28, but 30 gives wanted result
     color: "#0E201C"
@@ -127,7 +129,7 @@
     position: 102, 96
     size: 20, 44
   secondsLabel:
-    font: 
+    font:
       path: /Fonts/SS220/WristWatch/SS220-Electronika-Watch-Digits-16.ttf
       size: 24 # Should be 20, but 24 gives wanted result
     color: "#0E201C"

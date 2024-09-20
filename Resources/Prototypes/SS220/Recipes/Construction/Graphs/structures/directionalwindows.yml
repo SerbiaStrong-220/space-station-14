@@ -61,6 +61,26 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaWindowDirectionalAng
+          steps:
+            - material: Plasma
+              amount: 2
+              doAfter: 1
+        - to: uraniumWindowDirectionalAng
+          steps:
+            - material: Uranium
+              amount: 2
+              doAfter: 1
+        - to: windowClockworkDirectionalAng
+          steps:
+            - material: Brass
+              amount: 2
+              doAfter: 2
+        - to: windowReinforcedDirectionalAng
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 2
 
     - node: windowReinforcedDirectionalAng
       entity: WindowReinforcedDirectionalAng
@@ -80,6 +100,16 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaReinforcedWindowDirectionalAng
+          steps:
+            - material: Plasma
+              amount: 2
+              doAfter: 1
+        - to: uraniumReinforcedWindowDirectionalAng
+          steps:
+            - material: Uranium
+              amount: 2
+              doAfter: 1
 
     - node: plasmaWindowDirectionalAng
       entity: PlasmaWindowDirectionalAng
@@ -99,25 +129,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
-
-    - node: windowClockworkDirectionalAng
-      entity: WindowClockworkDirectionalAng
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetClockworkGlass1
-              amount: 2
-            - !type:DeleteEntity {}
+        - to: plasmaReinforcedWindowDirectionalAng
           steps:
-            - tool: Screwing
-              doAfter: 2
-            - tool: Prying
-              doAfter: 3
-            - tool: Screwing
-              doAfter: 2
-            - tool: Anchoring
-              doAfter: 3
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
 
     - node: plasmaReinforcedWindowDirectionalAng
       entity: PlasmaReinforcedWindowDirectionalAng
@@ -156,6 +172,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
+        - to: uraniumReinforcedWindowDirectionalAng
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
 
     - node: uraniumReinforcedWindowDirectionalAng
       entity: UraniumReinforcedWindowDirectionalAng
@@ -164,6 +185,25 @@
           completed:
             - !type:SpawnPrototype
               prototype: SheetRUGlass1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 3
+
+    - node: windowClockworkDirectionalAng
+      entity: WindowClockworkDirectionalAng
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetClockworkGlass1
               amount: 2
             - !type:DeleteEntity {}
           steps:
@@ -239,6 +279,26 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaWindowDirectionalU
+          steps:
+            - material: Plasma
+              amount: 3
+              doAfter: 1
+        - to: uraniumWindowDirectionalU
+          steps:
+            - material: Uranium
+              amount: 3
+              doAfter: 1
+        - to: windowClockworkDirectionalU
+          steps:
+            - material: Brass
+              amount: 3
+              doAfter: 2
+        - to: windowReinforcedDirectionalU
+          steps:
+            - material: MetalRod
+              amount: 3
+              doAfter: 2
 
     - node: windowReinforcedDirectionalU
       entity: WindowReinforcedDirectionalU
@@ -258,6 +318,16 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaReinforcedWindowDirectionalU
+          steps:
+            - material: Plasma
+              amount: 3
+              doAfter: 1
+        - to: uraniumReinforcedWindowDirectionalU
+          steps:
+            - material: Uranium
+              amount: 3
+              doAfter: 1
 
     - node: plasmaWindowDirectionalU
       entity: PlasmaWindowDirectionalU
@@ -277,25 +347,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
-
-    - node: windowClockworkDirectionalU
-      entity: WindowClockworkDirectionalU
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetClockworkGlass1
-              amount: 3
-            - !type:DeleteEntity {}
+        - to: plasmaReinforcedWindowDirectionalU
           steps:
-            - tool: Screwing
-              doAfter: 2
-            - tool: Prying
-              doAfter: 3
-            - tool: Screwing
-              doAfter: 2
-            - tool: Anchoring
-              doAfter: 3
+            - material: MetalRod
+              amount: 3
+              doAfter: 1
 
     - node: plasmaReinforcedWindowDirectionalU
       entity: PlasmaReinforcedWindowDirectionalU
@@ -334,6 +390,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
+        - to: uraniumReinforcedWindowDirectionalU
+          steps:
+            - material: MetalRod
+              amount: 3
+              doAfter: 1
 
     - node: uraniumReinforcedWindowDirectionalU
       entity: UraniumReinforcedWindowDirectionalU
@@ -342,6 +403,25 @@
           completed:
             - !type:SpawnPrototype
               prototype: SheetRUGlass1
+              amount: 3
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 3
+
+    - node: windowClockworkDirectionalU
+      entity: WindowClockworkDirectionalU
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetClockworkGlass1
               amount: 3
             - !type:DeleteEntity {}
           steps:
@@ -417,6 +497,26 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaWindowDirectionalDoub
+          steps:
+            - material: Plasma
+              amount: 2
+              doAfter: 1
+        - to: uraniumWindowDirectionalDoub
+          steps:
+            - material: Uranium
+              amount: 2
+              doAfter: 1
+        - to: windowClockworkDirectionalDoub
+          steps:
+            - material: Brass
+              amount: 2
+              doAfter: 2
+        - to: windowReinforcedDirectionalDoub
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 2
 
     - node: windowReinforcedDirectionalDoub
       entity: WindowReinforcedDirectionalDoub
@@ -436,6 +536,16 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaReinforcedWindowDirectionalDoub
+          steps:
+            - material: Plasma
+              amount: 2
+              doAfter: 1
+        - to: uraniumReinforcedWindowDirectionalDoub
+          steps:
+            - material: Uranium
+              amount: 2
+              doAfter: 1
 
     - node: plasmaWindowDirectionalDoub
       entity: PlasmaWindowDirectionalDoub
@@ -455,25 +565,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
-
-    - node: windowClockworkDirectionalDoub
-      entity: WindowClockworkDirectionalDoub
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetClockworkGlass1
-              amount: 2
-            - !type:DeleteEntity {}
+        - to: plasmaReinforcedWindowDirectionalDoub
           steps:
-            - tool: Screwing
-              doAfter: 2
-            - tool: Prying
-              doAfter: 3
-            - tool: Screwing
-              doAfter: 2
-            - tool: Anchoring
-              doAfter: 3
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
 
     - node: plasmaReinforcedWindowDirectionalDoub
       entity: PlasmaReinforcedWindowDirectionalDoub
@@ -512,6 +608,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
+        - to: uraniumReinforcedWindowDirectionalDoub
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
 
     - node: uraniumReinforcedWindowDirectionalDoub
       entity: UraniumReinforcedWindowDirectionalDoub
@@ -520,6 +621,25 @@
           completed:
             - !type:SpawnPrototype
               prototype: SheetRUGlass1
+              amount: 2
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 3
+
+    - node: windowClockworkDirectionalDoub
+      entity: WindowClockworkDirectionalDoub
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetClockworkGlass1
               amount: 2
             - !type:DeleteEntity {}
           steps:
@@ -595,6 +715,26 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaWindowDirectionalO
+          steps:
+            - material: Plasma
+              amount: 4
+              doAfter: 1
+        - to: uraniumWindowDirectionalO
+          steps:
+            - material: Uranium
+              amount: 4
+              doAfter: 1
+        - to: windowClockworkDirectionalO
+          steps:
+            - material: Brass
+              amount: 4
+              doAfter: 2
+        - to: windowReinforcedDirectionalO
+          steps:
+            - material: MetalRod
+              amount: 4
+              doAfter: 2
 
     - node: windowReinforcedDirectionalO
       entity: WindowReinforcedDirectionalO
@@ -614,6 +754,16 @@
               doAfter: 1
             - tool: Anchoring
               doAfter: 2
+        - to: plasmaReinforcedWindowDirectionalO
+          steps:
+            - material: Plasma
+              amount: 4
+              doAfter: 1
+        - to: uraniumReinforcedWindowDirectionalO
+          steps:
+            - material: Uranium
+              amount: 4
+              doAfter: 1
 
     - node: plasmaWindowDirectionalO
       entity: PlasmaWindowDirectionalO
@@ -633,25 +783,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
-
-    - node: windowClockworkDirectionalO
-      entity: WindowClockworkDirectionalO
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetClockworkGlass1
-              amount: 4
-            - !type:DeleteEntity {}
+        - to: plasmaReinforcedWindowDirectionalO
           steps:
-            - tool: Screwing
-              doAfter: 2
-            - tool: Prying
-              doAfter: 3
-            - tool: Screwing
-              doAfter: 2
-            - tool: Anchoring
-              doAfter: 3
+            - material: MetalRod
+              amount: 4
+              doAfter: 1
 
     - node: plasmaReinforcedWindowDirectionalO
       entity: PlasmaReinforcedWindowDirectionalO
@@ -690,6 +826,11 @@
               doAfter: 2
             - tool: Anchoring
               doAfter: 3
+        - to: uraniumReinforcedWindowDirectionalO
+          steps:
+            - material: MetalRod
+              amount: 4
+              doAfter: 1
 
     - node: uraniumReinforcedWindowDirectionalO
       entity: UraniumReinforcedWindowDirectionalO
@@ -698,6 +839,25 @@
           completed:
             - !type:SpawnPrototype
               prototype: SheetRUGlass1
+              amount: 4
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 3
+
+    - node: windowClockworkDirectionalO
+      entity: WindowClockworkDirectionalO
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetClockworkGlass1
               amount: 4
             - !type:DeleteEntity {}
           steps:

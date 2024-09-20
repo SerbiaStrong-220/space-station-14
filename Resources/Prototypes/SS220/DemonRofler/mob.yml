@@ -30,6 +30,7 @@
   - type: AntiRottingContainer
   - type: RadiationBlockingContainer
     resistance: 5
+  - type: ExplosionResistance
 
   # Visuals and appearance
   - type: Sprite

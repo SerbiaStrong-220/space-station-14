@@ -32,6 +32,9 @@
   id: ElWyccoAxe
 
 - type: Tag
+  id: WyccoAxe
+
+- type: Tag
   id: Meatwheat
 
 # ss220 detective-camera

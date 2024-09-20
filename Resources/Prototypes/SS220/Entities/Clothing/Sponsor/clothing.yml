@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorWhiteCoat
@@ -337,3 +339,33 @@
     sprite: SS220/Clothing/Sponsor/scarf-tube.rsi
   - type: Item
     storedRotation: -90
+
+# Плащи
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakFloppa
+  name: шкура Шлёпы
+  description: Это - не то, что вы думаете
+  suffix: Sponsor # А точно ли он спонсор?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatFloppa
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakHeadDevelopment
+  name: плащ ведающего созидания
+  description: Особый плащ, принадлежащий сущности, которой предписывают власть над самим мирозданием.
+  suffix: Sponsor # Награда ведущих разработчиков
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/neck/vedicloak.rsi

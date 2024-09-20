@@ -11,6 +11,7 @@
     - id: CargoSaleComputerCircuitboard
     - id: CargoShuttleComputerCircuitboard
     - id: CargoShuttleConsoleCircuitboard
+    - id: SalvageMagnetMachineCircuitboard
     - id: CigPackGreen
       prob: 0.50
     - id: ClothingHeadsetAltCargo
@@ -18,7 +19,7 @@
     - id: RubberStampApproved
     - id: RubberStampDenied
     - id: RubberStampQm
-    - id: SalvageShuttleConsoleCircuitboard
+    # - id: SalvageShuttleConsoleCircuitboard SS220-upstream-merge
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: GlassCaseEngravedKnuckledusterFilled # SS220 New Qm highrisk
@@ -277,7 +278,6 @@
     - id: ClothingBeltUtilityFilled
     - id: ClothingHeadsetAltScience
     - id: DoorRemoteResearch
-    - id: EncryptionKeyBinary
     - id: HandTeleporter
     - id: ProtolatheMachineCircuitboard
     - id: ResearchComputerCircuitboard
@@ -345,6 +345,7 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
     - id: BodySecurityCamera #SS220-Bodycam
+    - id: WantedListCartridge
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

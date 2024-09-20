@@ -1,3 +1,5 @@
+#SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 # Jumpsuit
 - type: loadout
   id: ClownJumpsuit
@@ -8,3 +10,49 @@
   id: ClownJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtClowns
+
+# Clown Time
+- type: loadoutEffectGroup
+  id: ClownPennywise
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 180000
+
+# Jumpsuit
+- type: loadout
+  id: ClownPennywiseJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClownPennywise
+
+# Neck
+- type: loadout
+  id: ClownPennywiseRuff
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    neck: ClothingNeckRuffClownPennywise
+
+# Mask
+- type: loadout
+  id: ClownPennywiseMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    mask: ClothingMaskClownPennywise
+
+# Shoes
+- type: loadout
+  id: ClownPennywiseShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    shoes: ClothingShoesClownPennywise

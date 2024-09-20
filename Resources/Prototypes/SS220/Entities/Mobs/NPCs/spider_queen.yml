@@ -6,7 +6,7 @@
   - MobCombat
   id: BaseMobSpiderQueen
   abstract: true
-  name: Probca
+  name: Spider queen
   description: spider dance
   components:
   - type: AutoImplant
@@ -570,7 +570,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderQueenGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -588,7 +588,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderDroneGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -606,7 +606,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderHunterGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -624,7 +624,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderGhostGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -642,7 +642,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderShooterGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -660,7 +660,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderLittleGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true

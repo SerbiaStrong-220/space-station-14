@@ -1,5 +1,46 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+# ЦК
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformCentCommOfficer
+  name: униформа Офицера NanoTrasen
+  description: На этой униформе изображено звание «лейтенант-коммандер». Её носят исключительно офицеры NanoTrasen. Защитные свойства форме придают экзотические материалы.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformNanotrasenDiplomat
+  name: дипломатическая форма NanoTrasen
+  description: Очень яркая и официальная униформа дипломатического корпуса NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNanotrasenAdmiral
+  name: admiral suit
+  description: A magnificent uniform consisting of black silk with gold patches.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/admiral.rsi
+
+
 # Командование
 
   # Капитан
@@ -13,6 +54,25 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
+
+  # Синий щит
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShield2
+  name: униформа Синего Щита
+  description: Модная форма Синего Щита - как же она хороша!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Blueshield_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Blueshield_uniform.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
 
 # Внутренние дела
 - type: entity
@@ -39,6 +99,20 @@
 
 # Сервис
 
+  # Ведущий сервис
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSeniorService
+  name: комбинезон ведущего сервисного отдела
+  description: Знак мастерства и мастерства сервисной службы.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi
+
+
   # Клоун
 - type: entity
   parent: ClothingUniformBase
@@ -50,6 +124,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitClownPennywise
+  name: uniform dance clown
+  description: A uniform for a comedy master who feeds on emotions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
 
   # Ботаник
 - type: entity
@@ -188,6 +273,53 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/orangejanitor.rsi
 
+  # Шеф-повар
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChefWhite
+  name: белая униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_white.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChefGreen
+  name: зелёная униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChefBlack
+  name: чёрная униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_black.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChefNanotrasen
+  name: униформа заслуженного шеф-повара NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_nt.rsi
+
 # Medical
 
   # Парамед
@@ -263,6 +395,33 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
 
+# Инженерия
+
+  # Старший инженер
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChiefEngineerDark
+  name: dark uniform chief engineer
+  description: Dark uniform for years of service as head of the engineering department.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpsuit/ce_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpsuit/ce_dark.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitChiefEngineerTurtleDark
+  name: dark chief engineer's turtleneck
+  description: Dark turtleneck designed specifically for work in conditions of the engineering department.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpsuit/ce_dark_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpsuit/ce_dark_turtle.rsi
+
+
 # Syndicate
 
 - type: entity
@@ -275,3 +434,49 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi
+
+# Other
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMPolice
+  name: Militar Police suit
+  description: few people will want to resist you.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/mpolice.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/mpolice.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBard #SS220 bard loadout
+  name: bard jumpsuit
+  description: Comfortable clothes for long concerts.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/bard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/bard.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitYsatyu
+  name: ysatyu suit
+  description: It smells like moonshine.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMoryak
+  name: moryak suit
+  description: Sailor suit for mime.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/moryak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/moryak.rsi

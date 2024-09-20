@@ -61,9 +61,12 @@ namespace Content.Client.RoundEnd
             //Gamemode Name
             var gamemodeLabel = new RichTextLabel();
             var gamemodeMessage = new FormattedMessage();
-            gamemodeMessage.AddMarkup(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
+            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
             gamemodeMessage.AddText(" ");
-            gamemodeMessage.AddMarkup(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
+            // SS220 Round End Titles begin
+            //gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
+            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", Loc.GetString(gamemode))));
+            // SS220 Round End Titles end
             gamemodeLabel.SetMessage(gamemodeMessage);
             roundEndSummaryContainer.AddChild(gamemodeLabel);
 

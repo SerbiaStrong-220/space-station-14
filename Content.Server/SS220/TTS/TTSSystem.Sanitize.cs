@@ -16,9 +16,9 @@ public sealed partial class TTSSystem
     private string Sanitize(string text)
     {
         text = text.Trim();
+        text = Regex.Replace(text, @"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", ReplaceMatchedWord, RegexOptions.Multiline | RegexOptions.IgnoreCase);
         text = Regex.Replace(text, @"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]", "");
         text = Regex.Replace(text, @"[a-zA-Z]", ReplaceLat2Cyr, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        text = Regex.Replace(text, @"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", ReplaceMatchedWord, RegexOptions.Multiline | RegexOptions.IgnoreCase);
         text = Regex.Replace(text, @"(?<=[1-90])(\.|,)(?=[1-90])", " целых ");
         text = Regex.Replace(text, @"\d+", ReplaceWord2Num);
         text = text.Trim();
@@ -64,6 +64,8 @@ public sealed partial class TTSSystem
             {"си", "Эс И"},
             {"срп", "Эс Эр Пэ"},
             {"пцк", "Пэ Цэ Каа"},
+            {"оцк", "О Цэ Каа"},
+            {"поцк", "Пэ О Цэ Каа"},
             {"цк", "Цэ Каа"},
             {"рнд", "Эр Эн Дэ"},
             {"сб", "Эс Бэ"},
@@ -128,6 +130,64 @@ public sealed partial class TTSSystem
             {"с4", "Си 4"}, // cyrillic
             {"c4", "Си 4"}, // latinic
             {"бсс", "Бэ Эс Эс"},
+            // ss220 fix deutch begin
+            {"ja", "Я"},
+            {"mein", "Майн"},
+            {"gott", "Готх"},
+            {"nein", "Найнъ"},
+            {"scheisse", "Шайз"},
+            {"wurst", "Вуст"},
+            {"wurste", "Вёстэ"},
+            {"manner", "Мяннэ"},
+            {"frauen", "Фраун"},
+            {"herr", "Герр"},
+            {"herren", "Геррен"},
+            {"meine", "Майнэ"},
+            {"hier", "Хие"},
+            {"dumnkopf", "Думкопф"},
+            {"dummkopfe", "Думкёпфэ"},
+            {"schmetterling", "Шмэттерлин"},
+            {"maschine", "Машинэ"},
+            {"maschinen", "Машинэн"},
+            {"achtung", "Ахтунг"},
+            {"musik", "Музык"},
+            {"kapitan", "Капитэин"},
+            {"doner", "Дёнэр"},
+            {"dankeschon", "Данке Шён"},
+            {"gesundheit", "Гесундхайт"},
+            {"flammenwerfer", "Фламэнверфер"},
+            {"poltergeist", "Полтэргайст"},
+            {"branntwein", "Брантвайн"},
+            {"rucksack", "Рюксак"},
+            {"medizin", "Медицин"},
+            {"akzent", "Акцэнт"},
+            {"anomalie", "Аномалий"},
+            {"doof", "Доф"},
+            {"warnung" , "Варнун"},
+            {"wunderbar", "Вундэрбар"},
+            {"warnungen", "Варнунгэ"},
+            {"karpfen", "Карпфн"},
+            {"bier", "Биэ"},
+            {"guten", "Гутн"},
+            {"krankenwagen", "Кранкн Вагн"},
+            {"auf", "Ау"},
+            {"wiedersehen", "Фидерзеин"},
+            {"tschuss", "Чус"},
+            {"tschau", "Чау"},
+            {"fantastisch", "Фантастиш"},
+            {"doppelganger", "Доппэльгнгэа"},
+            {"verboten", "Вэрботн"},
+            {"schnell", "Шнэль"},
+            {"krankenhaus", "Кранкнхауз"},
+            {"kugelblitz", "Кьюгельблиц"},
+            {"ist", "Ыст"},
+            {"pulkzerstorer", "Пулькцерштёрер"},
+            {"pulkzerstorers", "Пулькцерштёрер"},
+            {"pulkzerstorere", "Пулькцерштёрер"},
+            {"offizier", "Оффизые"},
+            {"offiziere", "Оффизыер"},
+            {"offiziers", "Оффизыерс"},
+            // ss220 fix deutch end
         };
 
     private static readonly IReadOnlyDictionary<string, string> ReverseTranslit =
@@ -167,6 +227,9 @@ public sealed partial class TTSSystem
             {"eh", "э"},
             {"ju", "ю"},
             {"ja", "я"},
+            {"ü", "у"},
+            {"ö", "о"},
+            {"ä", "а"},
         };
 }
 
