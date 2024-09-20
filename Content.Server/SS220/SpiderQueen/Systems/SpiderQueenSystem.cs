@@ -1,11 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
-using Content.Server.Popups;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
@@ -23,7 +24,6 @@ namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
@@ -34,6 +34,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly HungerSystem _hunger = default!;
 
     public override void Initialize()
     {
@@ -56,10 +57,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
             comp.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
 
-            var newValue = comp.CurrentBloodPoints + comp.BloodPointsPerSecond;
-            comp.CurrentBloodPoints = MathF.Min((float)newValue, (float)comp.MaxBloodPoints);
-
-            Dirty(uid, comp);
+            if (!_hunger.IsHungerBelowState(uid, HungerThreshold.Okay))
+                ConvertHungerIntoBloodPoints(uid, comp, comp.HungerConversionPerSecond);
         }
     }
 
@@ -176,5 +175,18 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
         _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
         component.IsAnnounced = true;
+    }
+
+    /// <summary>
+    /// Converts hunger into blood points based on the <see cref="SpiderQueenComponent.HungerConvertCoefficient"/>
+    /// </summary>
+    private void ConvertHungerIntoBloodPoints(EntityUid uid, SpiderQueenComponent component, float amount, HungerComponent? hunger = null)
+    {
+        if (!Resolve(uid, ref hunger))
+            return;
+
+        _hunger.ModifyHunger(uid, -amount, hunger);
+        component.CurrentBloodPoints += amount * component.HungerConvertCoefficient;
+        Dirty(uid, component);
     }
 }

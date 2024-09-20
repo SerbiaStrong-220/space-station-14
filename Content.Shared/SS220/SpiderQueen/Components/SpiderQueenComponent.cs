@@ -24,10 +24,16 @@ public sealed partial class SpiderQueenComponent : Component
     public FixedPoint2 MaxBloodPoints = FixedPoint2.Zero;
 
     /// <summary>
-    /// How much blood points will be generated in a second
+    /// How much hunger converts into blood points per second
     /// </summary>
-    [DataField]
-    public FixedPoint2 BloodPointsPerSecond = FixedPoint2.New(0.5);
+    [DataField("hungerConversion")]
+    public float HungerConversionPerSecond = 0.25f;
+
+    /// <summary>
+    /// How much blood points is given for each unit of hunger
+    /// </summary>
+    [DataField("convertCoefficient")]
+    public float HungerConvertCoefficient = 2f;
 
     [ViewVariables]
     public TimeSpan NextSecond = TimeSpan.Zero;

@@ -126,6 +126,9 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         Dirty(entity.Owner, entity.Comp);
     }
 
+    /// <summary>
+    /// Converts entity blood into blood points based on the <see cref="SpiderCocoonComponent.BloodConversionCoefficient"/>
+    /// </summary>
     private void ConvertBloodIntoBloodPoints(EntityUid uid, SpiderCocoonComponent component, EntityUid target, FixedPoint2 amount)
     {
         if (!TryComp<BloodstreamComponent>(target, out var bloodstream) ||

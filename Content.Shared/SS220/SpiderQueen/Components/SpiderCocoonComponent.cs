@@ -39,7 +39,7 @@ public sealed partial class SpiderCocoonComponent : Component
     /// How much blood points is given for each unit of blood
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BloodConversionCoefficient = FixedPoint2.New(0.5);
+    public float BloodConversionCoefficient = 0.5f;
 
     /// <summary>
     /// How much blood is converted into blood points per second
