@@ -151,7 +151,6 @@
   - type: SpiderQueen
     currentBloodPoints: 100
     maxBloodPoints: 100
-    bloodPointsPerSecond: 0.5
     cocoonsCountToAnnouncement: 10
     cocoonPrototypes:
     - SpiderCocoonHorizontal
