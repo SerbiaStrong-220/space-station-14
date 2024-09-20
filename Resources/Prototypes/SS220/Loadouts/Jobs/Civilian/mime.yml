@@ -27,6 +27,11 @@
 
 # Shoes
 - type: loadout
+  id: MimeWhiteShoes
+  equipment:
+    shoes: ClothingShoesColorWhite
+
+- type: loadout
   id: MoryakShoes
   effects:
   - !type:GroupLoadoutEffect

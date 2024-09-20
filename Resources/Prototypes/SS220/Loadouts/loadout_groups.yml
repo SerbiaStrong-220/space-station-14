@@ -96,6 +96,12 @@
   - Headphones
   - ProtectGear
   - BlueShieldNeckCloak
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+#  - TrackerExpert
+  - AdministratorNeck
+  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -104,20 +110,6 @@
   - BlueShieldJumpsuit
   - BlueShieldJumpsuit2
   - BlueShieldJumpsuitTurtle
-
-- type: loadoutGroup
-  id: BlueShieldNeck
-  name: loadout-group-blueshield-neck
-  loadouts:
-  - SecurityHolster
-  - Headphones
-  - ProtectGear
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-#  - TrackerExpert
-  - AdministratorNeck
-  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: BlueShieldOuterclothing
@@ -533,7 +525,7 @@
   id: MimeShoes
   name: loadout-group-mime-shoes
   loadouts:
-  - ClothingShoesColorWhite
+  - MimeWhiteShoes
   - MoryakShoes
   # Мим (Конец)
 

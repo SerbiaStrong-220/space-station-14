@@ -169,7 +169,7 @@
 
 - type: entity
   id: SmokingPipeSponsor
-  parent: BaseSmokingPipe
+  parent: SmokingPipe
   name: элитная курительная трубка
   description: Прямо как курил дедуля.
   suffix: Шлёпа
