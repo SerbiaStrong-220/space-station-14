@@ -5,7 +5,7 @@
   id: JobIAA
   groups:
   - IAAGlasses
-  - LawyerNeck
+  - IAANeck
   - IAAJumpsuit
   - IAAOuterclothing
   - IAABackpacks #ss220 iaa loadout fix
@@ -17,7 +17,7 @@
 - type: roleLoadout
   id: JobBlueShield
   groups:
-  - SecurityNeck
+  - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - SecurityBelt

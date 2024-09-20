@@ -42,3 +42,12 @@
     proto: JensenTimer
   equipment:
     eyes: ClothingEyesGlassesJensen
+
+# Sponsor / Cyber
+- type: loadout
+  id: GlassesCyber
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorCyberCevVisor

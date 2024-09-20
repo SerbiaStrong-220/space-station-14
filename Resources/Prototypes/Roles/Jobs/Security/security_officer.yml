@@ -29,7 +29,7 @@
 - type: startingGear
   id: SecurityOfficerGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
+#    eyes: ClothingEyesGlassesSecurity #SS220-Two Floppa Iteration
     ears: ClothingHeadsetSecurity
     pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
   storage:

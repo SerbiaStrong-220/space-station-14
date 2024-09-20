@@ -285,6 +285,7 @@
   groups:
   - GroupTankHarness
   - StationEngineerHead
+  - EngineerGlasses #SS220-Two Floppa Iteration
   - StationEngineerJumpsuit
   - StationEngineerBackpack
   - StationEngineerOuterClothing
@@ -293,6 +294,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - CyberJacketEngineer #SS220-Two Floppa Iteration
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -327,6 +329,7 @@
   id: JobScientist
   groups:
   - GroupTankHarness
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistHead
   - ScientistNeck
   - ScientistJumpsuit
@@ -335,7 +338,7 @@
   - ScientistGloves
   - ScientistShoes
   - ScientistPDA
-  - Glasses
+#  - Glasses #SS220-Two Floppa Iteration
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
@@ -387,6 +390,7 @@
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityGlasses #SS220-Two Floppa Iteration
   - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
@@ -430,7 +434,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - MedicalNeck #SS220-WhiteScarf
+  - ChefMedicalNeck #SS220-Two Floppa Iteration
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -448,6 +452,7 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
+  - MedicalGlasses #SS220-Two Floppa Iteration
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
@@ -456,7 +461,7 @@
   - MedicalDoctorOuterClothing
   - MedicalShoes
   - MedicalDoctorPDA
-  - Glasses
+#  - Glasses #SS220-Two Floppa Iteration
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
