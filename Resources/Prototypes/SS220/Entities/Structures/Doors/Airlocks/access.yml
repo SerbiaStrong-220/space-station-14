@@ -19,3 +19,25 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsExternal ]
+
+- type: entity
+  parent: AirlockCommandGlass
+  id: AirlockMagistrateGlassLocked
+  suffix: Magistrate, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Glass/magistrate.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMagistrate ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockMagistrateLocked
+  suffix: Magistrate, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Glass/magistrate.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMagistrate ]
