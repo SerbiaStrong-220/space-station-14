@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.IO;
 using System.Xml.Serialization;
@@ -201,7 +201,7 @@ public sealed class FormManager : EntitySystem
     {
         _sawmill.Debug("Received photocopier forms request from client");
         var response = new PhotocopierFormsMessage(_collections);
-        RaiseNetworkEvent(response, args.SenderSession.ConnectedClient);
+        RaiseNetworkEvent(response, args.SenderSession.Channel);
     }
 }
 

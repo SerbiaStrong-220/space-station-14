@@ -55,7 +55,7 @@
 #   id: FloorTileItemWebSpiders
 #   name: web construction
 #   description: Very smooth and surprisingly durable.
-#   noSpawn: true
+#   categories: [ HideSpawnMenu ]
 #   components:
 #   - type: TimedDespawn
 #     lifetime: 5
@@ -67,7 +67,7 @@
 #   description: Web
 #   parent: BaseFloorTileItemSpiders
 #   id: FloorTileItemWebSpidersDurable
-#   noSpawn: true
+#   categories: [ HideSpawnMenu ]
 #   components:
 #   - type: TimedDespawn
 #     lifetime: 6
@@ -83,7 +83,7 @@
   id: TableWebSpiders
   name: web
   description: web
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Damageable
     damageModifierSet: Web
@@ -120,7 +120,7 @@
   id: TableWebSpidersDurable
   name: web
   description: web
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 8

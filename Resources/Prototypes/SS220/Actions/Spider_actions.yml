@@ -43,7 +43,7 @@
   id: ActionSpawnSpiderEggDrone
   name: guard spider egg
   description: He is also a drone and can build crystals and walls.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:WorldSpawnSpellEvent
@@ -57,7 +57,7 @@
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggHunter
   name: hunter spider egg
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     icon:
@@ -75,7 +75,7 @@
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggGhost
   name: ghost spider egg
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     icon:
@@ -93,7 +93,7 @@
   parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggShooter
   name: shooter  spider egg
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     icon:
@@ -112,7 +112,7 @@
   id: ActionSpawnSpiderLittle
   name: release the spiderlings
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 40
@@ -133,7 +133,7 @@
   id: ActionSpawnSpiderCrystal
   name: create a crystal shard
   description: A shard that serves as a backlight for spiders.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 30
@@ -153,7 +153,7 @@
 - type: entity
   id: ActionSpawnSpiderWallWeb
   name: create a wall
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 12
@@ -173,7 +173,7 @@
   parent: ActionSpawnSpiderWallWeb
   id: ActionSpawnSpiderWallWebDurable
   name: create a durable wall
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 16
@@ -186,7 +186,7 @@
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebShortDelay
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 2
@@ -194,7 +194,7 @@
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebLongDelay
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 6
@@ -203,7 +203,7 @@
   parent: BaseActionSpawnSingleSpiderWeb
   id: ActionSpawnSingleSpiderWebDurable
   name: spin a durable web
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 4
@@ -219,7 +219,7 @@
   id: ActionSpawnSingleSpiderWebClown
   name: spin a clown web
   description: Creates a web that slows down your prey.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     useDelay: 30 #КД
