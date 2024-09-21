@@ -15,11 +15,11 @@
     ClothingSponsorWreath: 1
     ClothingSponsorScarfTube: 1
   # Вторая итерация
+    ClothingSponsorPivozavr: 1
     FloppaCigarCase: 2
     SmokingPipeFilledTobaccoSponsor: 1
     ExpensiveLighterSponsor: 1
     DrinkChampagneSponsorBottleFull: 2
-    ClothingSponsorPivozavr: 1
     DrinkBeerCanSponsor: 1
 
 - type: ShlepaRewardGroup
@@ -34,9 +34,10 @@
     ClothingSponsorStudentSuit: 1
     ClothingSponsorStudentSuitBlack: 1
   # Вторая итерация
+    DrinkCanPackBeerSponsorBox: 2
     PlushFloppa: 1
     ClothingHeadHatDevilHornsAlt: 1
-    DrinkCanPackBeerSponsor: 2
+    ClothingHeadHatHaloAlt: 1
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
@@ -51,10 +52,11 @@
     SponsorCigCarton: 2
     ClothingWristWatchUssp: 2
   # Вторая итерация
-    ClothingHeadHatDevilHorns: 1
     SponsorBoxJujutsuShlepa: 4
     ClothingSponsorSamuraiJacket: 1
     ClothingSponsorNeckSS220: 1
+    ClothingHeadHatDevilHorns: 1
+    ClothingHeadHatHalo: 1
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa

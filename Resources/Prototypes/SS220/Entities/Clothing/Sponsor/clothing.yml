@@ -368,6 +368,98 @@
     sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi
 
 - type: entity
+  parent: [ ClothingSponsorHeadBase, BaseFoldable ]
+  id: ClothingHeadHatHalo
+  name: ангельский нимб с крыльями
+  description: Двойная ангельская красота!
+  suffix: Шлёпа
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-hell
+      map: ["foldedLayer"]
+      visible: false
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: halo-verb
+    foldVerbText: halo-hell-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: hell
+    foldedHeldPrefix: hell
+
+- type: entity
+  parent: ClothingHeadHatHalo
+  id: ClothingHeadHatHaloHell
+  name: нимб падшего ангела с крыльями
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo.rsi
+    equippedPrefix: hell
+  - type: Item
+    heldPrefix: hell
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon-hell
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  parent: [ ClothingSponsorHeadBase, BaseFoldable ]
+  id: ClothingHeadHatHaloAlt
+  name: ангельский нимб
+  description: Покажите свою ангельскую красоту!
+  suffix: Шлёпа
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo-alt.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-hell
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo-alt.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: halo-verb
+    foldVerbText: halo-hell-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: hell
+    foldedHeldPrefix: hell
+
+- type: entity
+  parent: ClothingHeadHatHaloAlt
+  id: ClothingHeadHatHaloAltHell
+  name: нимб падшего ангела
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo-alt.rsi
+    equippedPrefix: hell
+  - type: Item
+    heldPrefix: hell
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon-hell
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingHeadVipCrocks
   name: випкрок
@@ -497,7 +589,7 @@
 
 - type: entity
   parent: ClothingSponsorMaskBase
-  id: ClothingSponsorMaskMoryak
+  id: ClothingMaskMoryak
   name: маска морячка
   description: Есть легенда, что при виде самогона маска улыбается.
   components:
