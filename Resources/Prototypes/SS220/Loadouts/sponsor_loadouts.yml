@@ -24,13 +24,13 @@
   equipment:
     neck: ClothingSponsorNeckSpriter
 
-# - type: loadout
-#   id: TrackerExpertNeck #Трекероведы
-#   effects:
-#   - !type:GroupLoadoutEffect
-#     proto: DeveloperSponsorTier #Нет тира для трекероведов
-#   equipment:
-#     neck: ClothingSponsorNeckTrackerExpert
+- type: loadout
+  id: TrackerExpertNeck #Трекероведы
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DeveloperSponsorTier #Нет тира для трекероведов
+  equipment:
+    neck: ClothingSponsorNeckTrackerExpert
 
 - type: loadout
   id: AdministratorNeck

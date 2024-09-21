@@ -24,6 +24,12 @@
 
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
+  id: IAAHead
+  name: loadout-group-iaa-head
+  loadouts:
+  - DevilHorns
+
+- type: loadoutGroup
   id: IAANeck
   name: loadout-group-iaa-neck
   loadouts:
@@ -32,7 +38,7 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpert
+  - TrackerExpertNeck
   - AdministratorNeck
   - HeadDeveloperNeck
 
@@ -99,7 +105,7 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpert
+  - TrackerExpertNeck
   - AdministratorNeck
   - HeadDeveloperNeck
 
@@ -190,7 +196,7 @@
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpert
+  - TrackerExpertNeck
   - AdministratorNeck
   - HeadDeveloperNeck
   # Главный врач (Конец)
@@ -556,12 +562,12 @@
 
   # Плащи
 - type: loadoutGroup
-  id: Neck
+  id: Neck # Не используется
   name: loadout-group-neck
   loadouts:
   - CoderNeck
   - MapperNeck
   - SpriterNeck
-#  - TrackerExpertCoderNeck
+  - TrackerExpertNeck
   - AdministratorNeck
-#  - HeadDeveloperNeck
+  - HeadDeveloperNeck

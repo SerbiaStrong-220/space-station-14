@@ -22,7 +22,8 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/blackcoat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
 
 - type: entity
   parent: ClothingSponsorOuterStorageBase
@@ -377,6 +378,11 @@
     sprite: SS220/Clothing/Sponsor/crocs.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/crocs.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -150
+    damage:
+      types:
+        Blunt: 0
 
 - type: entity
   parent: ClothingSponsorUniformBase
@@ -571,7 +577,8 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/1984.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
 
 - type: entity
   parent: ClothingSponsorOuterStorageBase
@@ -593,7 +600,8 @@
       - state: equipped-OUTERCLOTHING-unshaded
         shader: unshaded
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
 
 - type: entity
   parent: ClothingSponsorNeckBase
@@ -639,17 +647,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Cloak/spriter.rsi
 
-# Нет спрайтра
-# - type: entity
-#   parent: ClothingSponsorNeckBase
-#   id: ClothingSponsorNeckTrackerExpert #Трекероведы
-#   name: плащ равновесия
-#   description: Особый плащ для тех, кто посвятил себя защите внешнему миру.
-#   components:
-#   - type: Sprite
-#     sprite: SS220/Clothing/Sponsor/Cloak/tracker_expert.rsi
-#   - type: Clothing
-#     sprite: SS220/Clothing/Sponsor/Cloak/tracker_expert.rsi
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckTrackerExpert #Трекероведы
+  name: плащ равновесия
+  description: Особый плащ для тех, кто посвятил себя защите внешнему миру.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/pivocloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/pivocloak.rsi
 
 - type: entity
   parent: ClothingSponsorNeckBase

@@ -6,6 +6,7 @@
 - type: roleLoadout
   id: JobIAA
   groups:
+  - IAAHead
   - IAAGlasses
   - IAANeck
   - IAAJumpsuit

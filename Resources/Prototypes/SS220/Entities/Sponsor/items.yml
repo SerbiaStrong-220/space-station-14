@@ -253,9 +253,9 @@
 
 - type: reagent
   id: ChampagneSponsor
-  name: элитное шампанское
+  name: reagent-name-champagnesponsor
   parent: BaseAlcohol
-  desc: Элитный вид шампанского.
+  desc: reagent-desc-champagnesponsor
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: champagne
   color: "#e8e4d6"
