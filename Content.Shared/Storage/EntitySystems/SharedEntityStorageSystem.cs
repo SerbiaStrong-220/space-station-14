@@ -321,6 +321,13 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (component.Contents.ContainedEntities.Count >= component.Capacity)
             return false;
 
+        // SS220 fix #1121 begin
+        SharedEntityStorageComponent? insertedComp = null;
+
+        if (ResolveStorage(toInsert,  ref insertedComp))
+            return false;
+        // SS220 fix #1121 end
+
         return CanFit(toInsert, container, component);
     }
 
