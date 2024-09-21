@@ -9,6 +9,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using System.Numerics;
 using Robust.Shared.Timing;
+using Robust.Shared.GameStates;
+using Robust.Shared.Utility;
 namespace Content.Client.SS220.Hallucination;
 
 public sealed class HallucinationSystem : EntitySystem
@@ -18,9 +20,13 @@ public sealed class HallucinationSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    private Dictionary<int, TimeSpan> _hallucinationTotalTimeSpans = new();
-    private Dictionary<int, TimeSpan> _nextUpdateTimes = new();
-    // private Random _random = new Random();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<HallucinationComponent, ComponentHandleState>(HandleState);
+    }
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
@@ -28,48 +34,65 @@ public sealed class HallucinationSystem : EntitySystem
         if (!TryComp<HallucinationComponent>(_playerManager.LocalEntity, out var hallucinationComponent))
             return;
 
-        foreach (var key in _nextUpdateTimes.Keys.Except(hallucinationComponent.TimeParams.Keys))
+        for (int i = 0; i < hallucinationComponent.HallucinationSpawnerTimers.Count; i++)
         {
-            _nextUpdateTimes.Remove(key);
-            _hallucinationTotalTimeSpans.Remove(key);
-        }
-
-        foreach (var (key, timeParams) in hallucinationComponent.TimeParams)
-        {
-
-            if (_nextUpdateTimes.TryAdd(key, _gameTiming.CurTime + TimeSpan.FromSeconds(timeParams.BetweenHallucinations))
-                && !float.IsNaN(hallucinationComponent.TimeParams[key].TotalDuration))
-                _hallucinationTotalTimeSpans.TryAdd(key, _gameTiming.CurTime + TimeSpan.FromSeconds(timeParams.TotalDuration));
-            // NaN is used for unlimited Hallucination
-            if (_gameTiming.CurTime > _nextUpdateTimes[key])
+            var nextHallucinationSpawnTime = hallucinationComponent.HallucinationSpawnerTimers[i];
+            if (_gameTiming.CurTime > nextHallucinationSpawnTime)
             {
-                MakeHallucination(key, hallucinationComponent);
-                var timeBetweenHallucination = TimeSpan.FromSeconds(hallucinationComponent.TimeParams[key].BetweenHallucinations);
-                _nextUpdateTimes[key] = _gameTiming.CurTime + timeBetweenHallucination;
-            }
-            if (_hallucinationTotalTimeSpans.TryGetValue(key, out var hallucinationTotalTimeSpan)
-                && _gameTiming.CurTime > hallucinationTotalTimeSpan)
-            {
-                hallucinationComponent.RemoveFromRandomEntities(key);
-                Dirty(_playerManager.LocalEntity.Value, hallucinationComponent);
-                _hallucinationTotalTimeSpans.Remove(key);
+                var hallucination = hallucinationComponent.Hallucinations[i];
+                MakeHallucination(hallucination);
+
+                var timeBetweenHallucination = TimeSpan.FromSeconds(hallucination.TimeParams.BetweenHallucinations);
+                hallucinationComponent.HallucinationSpawnerTimers[i] = _gameTiming.CurTime + timeBetweenHallucination;
             }
         }
     }
-    private void MakeHallucination(int key, HallucinationComponent hallucinationComponent)
+    /// <summary>
+    /// Specific handler for hallucination due to bound between timer and hallucinationSettings. Probably saving the same order as in server
+    /// </summary>
+    private void HandleState(Entity<HallucinationComponent> entity, ref ComponentHandleState args)
     {
-        var randomWeightedPrototypes = _prototypeManager.Index(hallucinationComponent.RandomEntities(key));
+        if (args.Current is not HallucinationComponentState state)
+            return;
+
+        var hallucinationSymmetricDifference = new List<HallucinationSetting>(entity.Comp.Hallucinations.Union(state.Hallucinations).
+                                            Except(entity.Comp.Hallucinations.Intersect(state.Hallucinations)));
+        var index = -1;
+
+        foreach (var hallucination in hallucinationSymmetricDifference)
+        {
+            // handle deleting hallucination in client
+            index = entity.Comp.Hallucinations.IndexOf(hallucination);
+            if (index != -1)
+            {
+                entity.Comp.Hallucinations.RemoveAt(index);
+                entity.Comp.HallucinationSpawnerTimers.RemoveAt(index);
+            }
+            //handle adding hallucination to client
+            index = state.Hallucinations.IndexOf(hallucination);
+            if (index != -1)
+            {
+                entity.Comp.Hallucinations.Add(hallucination);
+                entity.Comp.HallucinationSpawnerTimers.Add(_gameTiming.CurTime);
+            }
+        }
+        // some self-checks in case of my mistake
+        DebugTools.Assert(entity.Comp.Hallucinations.Count == state.Hallucinations.Count);
+        DebugTools.Assert(entity.Comp.Hallucinations.Count == entity.Comp.HallucinationSpawnerTimers.Count);
+    }
+    private void MakeHallucination(HallucinationSetting hallucination)
+    {
+        var randomWeightedPrototypes = _prototypeManager.Index(hallucination.RandomEntities);
         if (!_prototypeManager.TryIndex<EntityPrototype>(randomWeightedPrototypes.Pick(_random), out var randomProto))
-            return; // No way i can log it without killing client...
+            return;
 
-        var spawnedEntityUid = EntityManager.SpawnAtPosition(randomProto.ID, Transform(_playerManager.LocalEntity!.Value).Coordinates);
-
+        var spawnedEntityUid = EntityManager.SpawnAtPosition(randomProto.ID,
+                                                            Transform(_playerManager.LocalEntity!.Value).Coordinates);
         var randomCoordinates = _transformSystem.GetWorldPosition(_playerManager.LocalEntity!.Value)
-                                             + new Vector2(_random.NextFloat(-6f, 6f), _random.NextFloat(-6f, 6f));
+                                + new Vector2(_random.NextFloat(-6f, 6f), _random.NextFloat(-6f, 6f));
         _transformSystem.SetWorldPosition(spawnedEntityUid, randomCoordinates);
-        var lifeTime = _random.NextFloat(hallucinationComponent.TimeParams[key].HallucinationMinTime,
-                                    hallucinationComponent.TimeParams[key].HallucinationMaxTime);
 
+        var lifeTime = _random.NextFloat(hallucination.TimeParams.HallucinationMinTime, hallucination.TimeParams.HallucinationMaxTime);
         var timedDespawnComp = EnsureComp<TimedDespawnComponent>(spawnedEntityUid);
         timedDespawnComp.Lifetime = lifeTime;
     }

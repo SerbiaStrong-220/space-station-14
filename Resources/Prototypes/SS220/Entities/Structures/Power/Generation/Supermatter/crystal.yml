@@ -46,14 +46,16 @@
     voicePrototypeId:
   - type: SuperMatter # all things like radiation source etc will be added through SMSystem
   - type: HallucinationSource
-    weightedRandom: HallucinationSupermatterCrystal
+    hallucination:
+        randomEntities: HallucinationSupermatterCrystal
+        betweenHallucinations: 4
+        hallucinationMinTime: 2
+        hallucinationMaxTime: 10
+        totalDuration: 20
+        componentName: EyeProtection
+        itemSlot: EYES
+        checkPockets: false
     range: 7
-    rangeEnd: 9
-    betweenHallucinations: 4
-    hallucinationMinTime: 2
-    hallucinationMaxTime: 10
-    totalDuration: 20
-    eyeProtectionDependent: true
   - type: RadiationSource
     enabled: true
     intensity: 2

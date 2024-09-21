@@ -10,6 +10,7 @@ namespace Content.Client.SS220.UserInterface.PlotFigure;
 internal abstract class Plot : Control
 {
     [Dependency] internal readonly IResourceCache ResourceCache = default!;
+
     public Color AxisColor = Color.WhiteSmoke;
     public List<float> AxisSteps = new() { 0.2f, 0.4f, 0.6f, 0.8f, 1f};
     public float AxisBorderPosition = 20f;
@@ -40,7 +41,7 @@ internal abstract class Plot : Control
         var leftBottom = from - perpendicularClockwise * thickness / 2f;
         var rightBottom = to - perpendicularClockwise * thickness / 2f;
         var rightTop = to + perpendicularClockwise * thickness / 2f;
-        // look to this properly cause idk how it works, but in handle it the same...
+
         var pointList = new List<Vector2> { leftBottom, leftTop, rightBottom, rightTop };
         DrawVertexUV2D[] pointSpan = new DrawVertexUV2D[pointList.Count];
         for (var i = 0; i < pointList.Count; i++)

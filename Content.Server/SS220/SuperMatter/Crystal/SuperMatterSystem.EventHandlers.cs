@@ -5,6 +5,7 @@ using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Database;
 using Content.Shared.Projectiles;
+using Content.Shared.Administration;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -17,10 +18,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
         SubscribeLocalEvent<SuperMatterComponent, StartCollideEvent>(OnCollideEvent);
         SubscribeLocalEvent<SuperMatterComponent, SuperMatterActivationEvent>(OnActivationEvent);
         SubscribeLocalEvent<SuperMatterComponent, SuperMatterSetAdminDisableEvent>(OnAdminDisableEvent);
-        SubscribeLocalEvent<SuperMatterComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<SuperMatterComponent, MapInitEvent>(OnComponentInit);
 
     }
-    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref ComponentInit args)
+    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref MapInitEvent args)
     {
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
         InitGasMolesAccumulator(entity.Comp);

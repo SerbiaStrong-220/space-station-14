@@ -12,7 +12,7 @@ public sealed class SuperMatterEmitterSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<SuperMatterEmitterBoltComponent, SyncSuperMatterBoltStats>(OnSync);
-        //TODO: SubscribeLocalEvent<SuperMatterEmitterBoltComponent, MapInitEvent>();
+        //SM_TODO: SubscribeLocalEvent<SuperMatterEmitterBoltComponent, MapInitEvent>();
     }
 
     private void OnSync(Entity<SuperMatterEmitterBoltComponent> entity, ref SyncSuperMatterBoltStats _)

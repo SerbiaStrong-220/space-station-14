@@ -2,55 +2,78 @@
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
+using Content.Shared.Inventory;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Hallucination;
-// TODO Dictionary -> list
-// TODO HallucinationParams -> struct
-/// <summary> Never use it yourself! NEVER! Check the server system if you want to work with it. </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class HallucinationComponent : Component
+/// <summary>
+/// lmaoooooo
+/// </summary>
+[NetworkedComponent]
+public abstract partial class SharedHallucinationComponent : Component
 {
-    public ProtoId<WeightedRandomEntityPrototype> RandomEntities(int key) => _randomEntities[key];
-    public int HallucinationCount => _randomEntities.Count;
-    [ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<int, TimeSpan> TotalDurationTimeSpans = new();
-    /// <summary> Any operation bool flags goes here </summary>
-    public Dictionary<int, bool> EyeProtectionDependent = new();
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public List<HallucinationSetting> Hallucinations = [];
+}
 
-    [AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<int, (float BetweenHallucinations, float HallucinationMinTime,
-                                float HallucinationMaxTime, float TotalDuration)> TimeParams = new();
-    [AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
-    private Dictionary<int, ProtoId<WeightedRandomEntityPrototype>> _randomEntities = new();
+[Serializable, NetSerializable]
+public sealed class HallucinationComponentState : ComponentState
+{
+    public List<HallucinationSetting> Hallucinations { get; init; } = [];
+}
+[DataDefinition, Serializable, NetSerializable]
+public partial struct HallucinationSetting()
+{
+    [DataField]
+    public ProtoId<WeightedRandomEntityPrototype> RandomEntities;
+    /// <summary>
+    /// if null nothing can defend from hallucination
+    /// </summary>
+    [DataField]
+    public string? ComponentName;
+    /// <summary>
+    /// If ItemSlot null we check all slots and even pockets if CheckPockets is true
+    /// </summary>
+    [DataField]
+    public SlotFlags? ItemSlot;
+    [DataField]
+    public bool CheckPockets;
+    [DataField]
+    public float BetweenHallucinations;
+    [DataField]
+    public float HallucinationMinTime;
+    [DataField]
+    public float HallucinationMaxTime;
+    [DataField]
+    public float TotalDuration;
 
-    /// <summary> for Key use the id of author/performing entity </summary>
-    public HallucinationComponent(int key, ProtoId<WeightedRandomEntityPrototype> randomEntities,
-                                    (float BetweenHallucinations, float HallucinationMinTime,
-                                    float HallucinationMaxTime, float TotalDuration)? timeParams = null,
-                                    bool eyeProtectionDependent = false)
+    public readonly (string? ComponentName, SlotFlags? ItemSlot, bool CheckPockets) Protection =>
+                                                                        (ComponentName, ItemSlot, CheckPockets);
+    public readonly (float BetweenHallucinations, float HallucinationMinTime,
+            float HallucinationMaxTime, float TotalDuration) TimeParams =>
+                                                                        (BetweenHallucinations, HallucinationMinTime,
+                                                                        HallucinationMaxTime, TotalDuration);
+
+    public HallucinationSetting(float betweenHallucinations, float hallucinationMinTime,
+                        float hallucinationMaxTime, float totalDuration,
+                        ProtoId<WeightedRandomEntityPrototype> randomEntities,
+                        string? protectionComponent, SlotFlags? itemSlot, bool checkPockets)
+                        : this()
     {
-        _randomEntities = new() { { key, randomEntities } };
-        TimeParams = new() { { key, timeParams ?? (10f, 2f, 8f, 20f) } };
-        EyeProtectionDependent = new() { { key, eyeProtectionDependent } };
+        RandomEntities = randomEntities;
+        ComponentName = protectionComponent;
+        ItemSlot = itemSlot;
+        CheckPockets = checkPockets;
+        BetweenHallucinations = betweenHallucinations;
+        HallucinationMinTime = hallucinationMinTime;
+        HallucinationMaxTime = hallucinationMaxTime;
+        TotalDuration = totalDuration;
     }
-    public void AddToRandomEntities(int key, ProtoId<WeightedRandomEntityPrototype> randomEntities,
-                                    (float BetweenHallucinations, float HallucinationMinTime,
-                                    float HallucinationMaxTime, float TotalDuration)? timeParams = null,
-                                    bool eyeProtectionDependent = false)
+
+    public bool Equals(HallucinationSetting other)
     {
-        _randomEntities.Add(key, randomEntities);
-        TimeParams.Add(key, timeParams ?? (10f, 2f, 8f, 20f));
-        EyeProtectionDependent.Add(key, eyeProtectionDependent);
-    }
-    public void RemoveFromRandomEntities(int key)
-    {
-        _randomEntities.Remove(key);
-        TimeParams.Remove(key);
-        EyeProtectionDependent.Remove(key);
-        TotalDurationTimeSpans.Remove(key);
-    }
-    public bool TryFindKey(int key)
-    {
-        return _randomEntities.ContainsKey(key);
+        return TimeParams.Equals(other.TimeParams)
+                && RandomEntities.Equals(other.RandomEntities)
+                && Protection.Equals(other.Protection);
     }
 }

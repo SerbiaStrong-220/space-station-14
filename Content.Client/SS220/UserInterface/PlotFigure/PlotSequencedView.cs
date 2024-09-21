@@ -5,6 +5,14 @@ using System.Numerics;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
 
+/// <summary>
+/// Well it have two downsides:
+/// <list  type="number">
+/// <item> We believe that minimum of y is zero. For my case its true </item>
+/// <item> We can plot only with increasing X cause how <see cref="PlotPoints2D"/> works </item>
+/// </list>
+/// good luck if you want to change it
+/// </summary>
 internal sealed class PlotSequencedView : Plot
 {
     public Color FirstGraphicColor = Color.LightGreen;
@@ -57,6 +65,7 @@ internal sealed class PlotSequencedView : Plot
     {
         if (_plotPoints.Point2Ds == null)
             return float.NaN;
+
         return _plotPoints.Point2Ds.Last().X;
     }
     protected override void Draw(DrawingHandleScreen handle)
@@ -72,8 +81,8 @@ internal sealed class PlotSequencedView : Plot
         if (!(PixelWidth - AxisBorderPosition > 0))
             return;
 
-        var yMaxResult = (yMax + YMaxOffset) ?? YMaxOffset;
-        var xWidthResult = xWidth ?? XWidthSave;
+        var yMaxResult = yMax.Value + YMaxOffset;
+        var xWidthResult = xWidth.Value;
 
         var deltaXWidth = PixelWidth / _plotPoints.Point2Ds.Count;
         var yNormalizer = PixelHeight / yMaxResult;

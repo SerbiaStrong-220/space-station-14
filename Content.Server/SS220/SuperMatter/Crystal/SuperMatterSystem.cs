@@ -41,6 +41,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
         {
             if (smComp.DisabledByAdmin)
                 continue;
+            if (!HasComp<MetaDataComponent>(uid)
+                || MetaData(uid).Initialized == false)
+                continue;
+
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
             UpdateDelayed(crystal, flooredFrameTime);
             SuperMatterUpdate(crystal, flooredFrameTime);

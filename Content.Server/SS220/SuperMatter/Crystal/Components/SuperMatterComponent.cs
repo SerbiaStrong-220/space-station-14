@@ -46,16 +46,12 @@ public sealed partial class SuperMatterComponent : Component
     /// <summary> Current Value set to 3.5f cause for Arcs where is no point in lesser </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public TimeSpan OutputEnergySourceUpdateDelay = TimeSpan.FromSeconds(3.5f);
-    [ViewVariables(VVAccess.ReadOnly)]
     [AutoPausedField]
     public TimeSpan NextOutputEnergySourceUpdate = default!;
-    [ViewVariables(VVAccess.ReadOnly)]
     [AutoPausedField]
     public TimeSpan NextDamageImplementTime = default!;
-    [ViewVariables(VVAccess.ReadOnly)]
     [AutoPausedField]
     public TimeSpan NextDamageStationAnnouncement = default!;
-    [ViewVariables(VVAccess.ReadOnly)]
     [AutoPausedField]
     public TimeSpan TimeOfDelamination = default!;
 

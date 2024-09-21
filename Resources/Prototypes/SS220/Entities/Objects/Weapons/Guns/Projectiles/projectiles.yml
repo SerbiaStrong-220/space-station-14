@@ -67,7 +67,7 @@
       - state: projectile
         shader: unshaded
   - type: SuperMatterEmitterBolt
-  - type: SuperMatterSpecificConsumable
+  - type: SuperMatterExtraConsumable
     additionalMatterOnConsumption: 4
     additionalEnergyOnConsumption: 20
 

@@ -1,114 +1,256 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Hallucination;
-using Content.Shared.Random;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind.Components;
-using System.Linq;
-using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory;
+using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.GameStates;
 
 namespace Content.Server.SS220.Hallucination;
-/// <summary> System which make it easier to work with Hallucinations </summary>
+/// <summary>
+/// System which make it easier to work with Hallucinations
+/// </summary>
 public sealed class HallucinationSystem : EntitySystem
 {
-    [Dependency] IGameTiming _gameTiming = default!;
-    [Dependency] EntityLookupSystem _entityLookup = default!;
-    [Dependency] InventorySystem _inventory = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+
+    public const float DelayBetweenHallucinateAttempt = 2f;
+
+    /// <summary>
+    /// Used to store protectComponents, see <see cref="HallucinationSystem.TryGetComponentType" />
+    /// </summary>
+    private SortedDictionary<string, Type?> _cachedProtectComponentsType = [];
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EyeProtectionComponent, GotEquippedEvent>(OnEyeProtectionEquip);
-    }
+        SubscribeLocalEvent<HallucinationComponent, ComponentGetState>(GetComponentState);
+        SubscribeLocalEvent<GotEquippedEvent>(OnEquip);
 
+    }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        var hallucinationQuery = EntityQueryEnumerator<HallucinationComponent>();
+        while (hallucinationQuery.MoveNext(out var entityUid, out var hallucination))
+        {
+            for (var i = 0; i < hallucination.TotalDurationTimeSpans.Count; i++)
+            {
+                if (_gameTiming.CurTime > hallucination.TotalDurationTimeSpans[i])
+                    Remove((entityUid, hallucination), i);
+            }
+        }
 
         var sourceQuery = EntityQueryEnumerator<HallucinationSourceComponent>();
         while (sourceQuery.MoveNext(out var sourceUid, out var hallucinationSource))
         {
             if (_gameTiming.CurTime < hallucinationSource.NextUpdateTime)
                 continue;
+
+            hallucinationSource.NextUpdateTime += TimeSpan.FromSeconds(DelayBetweenHallucinateAttempt);
             if (!HasComp<TransformComponent>(sourceUid))
                 continue;
-            // Still have problems with things like RDs portal and endless hallucinations,
-            // but for this case... well... goodluck)
-            var hallucination = _entityLookup.GetEntitiesInRange<MindContainerComponent>(Transform(sourceUid).Coordinates, hallucinationSource.RangeOfHallucinations);
-            var endHallucination = _entityLookup.GetEntitiesInRange<MindContainerComponent>(Transform(sourceUid).Coordinates, hallucinationSource.RangeOfEndHallucinations);
 
-            foreach (var entity in hallucination)
-            {
-                if (HasComp<HallucinationImmuneComponent>(entity.Owner))
-                    continue;
-                if (hallucinationSource.EyeProtectionDependent
-                        && _inventory.TryGetSlotEntity(entity.Owner, "eyes", out var eyesSlotEntity)
-                        && HasComp<EyeProtectionComponent>(eyesSlotEntity))
-                    continue;
-                if (TryFindKey(entity.Owner, sourceUid.Id))
-                    continue;
-                Add(entity.Owner, sourceUid.Id, hallucinationSource.RandomEntitiesProto,
-                    hallucinationSource.GetTimeParams(), hallucinationSource.EyeProtectionDependent);
-            }
-            foreach (var entity in endHallucination.Except(hallucination))
-            {
-                if (TryFindKey(entity.Owner, sourceUid.Id))
-                    Remove(entity.Owner, sourceUid.Id);
-            }
+            var hallucinationTargets = _entityLookup.GetEntitiesInRange<MindContainerComponent>(
+                                        Transform(sourceUid).Coordinates, hallucinationSource.RangeOfHallucinations);
+            foreach (var entity in hallucinationTargets)
+                TryAdd(entity.Owner, hallucinationSource.Hallucination);
         }
-        // Logic for deleting hallucinations which wasnt handled correctly
-        var hallucinationQuery = EntityQueryEnumerator<HallucinationComponent>();
-        while (hallucinationQuery.MoveNext(out var entityUid, out var hallucination))
-        {
-            foreach (var (key, timer) in hallucination.TotalDurationTimeSpans)
-                if (_gameTiming.CurTime > timer)
-                    Remove(entityUid, key);
-        }
-
     }
-    /// <summary> for Key use the id of author/performing entity </summary>
-    public void Add(EntityUid target, int key, ProtoId<WeightedRandomEntityPrototype> randomEntities,
-                                    (float BetweenHallucinations, float HallucinationMinTime,
-                                    float HallucinationMaxTime, float TotalDuration)? timeParams = null,
-                                    bool eyeProtectionDependent = false)
+    /// <summary>
+    /// Check if entity is protected from hallucination and if not.
+    /// After that checks if hallucination exist and than renews its timer.
+    /// Adds component if needed and then after adding hallucination dirties.
+    /// </summary>
+    /// <returns> false if protected and true if not</returns>
+    public bool TryAdd(EntityUid target, HallucinationSetting hallucination)
     {
-        var hallucinationComponent = EnsureComp<HallucinationComponent>(target);
-        hallucinationComponent.AddToRandomEntities(key, randomEntities, timeParams, eyeProtectionDependent);
-        if (timeParams != null && timeParams.Value.TotalDuration != float.NaN)
-            hallucinationComponent.TotalDurationTimeSpans[key] = _gameTiming.CurTime + TimeSpan.FromSeconds(timeParams.Value.TotalDuration);
-        Dirty(target, hallucinationComponent);
-    }
-    public void Remove(EntityUid target, int key) => TryRemove(target, key);
-
-    /// <returns> False if target dont have HallucinationComponent.
-    /// If key doesnt exist in component throw exception </returns>
-    public bool TryRemove(EntityUid target, int key)
-    {
-        if (!TryComp<HallucinationComponent>(target, out var hallucinationComponent))
+        if (Protected(target, hallucination))
             return false;
-        hallucinationComponent.RemoveFromRandomEntities(key);
-        Dirty(target, hallucinationComponent);
+
+        if (TryFindHallucination(target, hallucination))
+        {
+            var comp = Comp<HallucinationComponent>(target);
+            var index = comp.Hallucinations.IndexOf(hallucination);
+            comp.TotalDurationTimeSpans[index] = _gameTiming.CurTime + TimeSpan.FromSeconds(hallucination.TotalDuration);
+            return true;
+        }
+
+        Add(target, hallucination);
         return true;
     }
-    /// <returns> False if target dont have HallucinationComponent or if key wasnt found </returns>
-    public bool TryFindKey(EntityUid target, int key)
+
+    /// <summary>
+    /// False if target dont have HallucinationComponent or hallucination doesnt exist? otherwise true.
+    /// SM_TODO also delete TimeSpan
+    /// </summary>
+    public bool Remove(Entity<HallucinationComponent> target, int index)
+    {
+        var (uid, comp) = target;
+        if (comp.Hallucinations.Count <= index
+            && comp.TotalDurationTimeSpans.Count <= index)
+        {
+            Log.Error("Tried to Remove Hallucination with index more than Count one of the Lists");
+            return false;
+        }
+
+        comp.Hallucinations.RemoveAt(index);
+        comp.TotalDurationTimeSpans.RemoveAt(index);
+        if (comp.Hallucinations.Count != comp.TotalDurationTimeSpans.Count)
+            Log.Error("After removing of the hallucination Counts of both list doesnt match.");
+
+        Dirty(target);
+        return true;
+    }
+    /// <inheritdoc cref="HallucinationSystem.Remove" />
+    public bool Remove(Entity<HallucinationComponent?> target, HallucinationSetting hallucination)
+    {
+        if (!Resolve(target.Owner, ref target.Comp))
+            return false;
+
+        var index = target.Comp.Hallucinations.IndexOf(hallucination);
+        return Remove((target.Owner, target.Comp), index);
+    }
+    /// <inheritdoc cref="HallucinationSystem.Remove" />
+    public bool Remove(Entity<HallucinationComponent?> target, TimeSpan time)
+    {
+        if (!Resolve(target.Owner, ref target.Comp))
+            return false;
+
+        var index = target.Comp.TotalDurationTimeSpans.IndexOf(time);
+        return Remove((target.Owner, target.Comp), index);
+    }
+
+    /// <summary>
+    /// False if target dont have HallucinationComponent or if key wasnt found
+    /// </summary>
+    public bool TryFindHallucination(EntityUid target, HallucinationSetting hallucination)
     {
         if (!TryComp<HallucinationComponent>(target, out var hallucinationComponent))
             return false;
-        return hallucinationComponent.TryFindKey(key);
+
+        return hallucinationComponent.Hallucinations.TryFirstOrNull(hallucination.Equals, out _);
     }
 
-    private void OnEyeProtectionEquip(Entity<EyeProtectionComponent> entity, ref GotEquippedEvent args)
+    private void Add(EntityUid target, HallucinationSetting hallucination)
     {
-        if (args.Slot != "eyes")
-            return;
+        var hallucinationComponent = EnsureComp<HallucinationComponent>(target);
 
+        Add((target, hallucinationComponent), hallucination);
+    }
+    private void Add(Entity<HallucinationComponent> target, HallucinationSetting hallucination)
+    {
+        var (_, comp) = target;
+
+        comp.Hallucinations.Add(hallucination);
+
+        if (hallucination.TimeParams.TotalDuration == float.NaN)
+            comp.TotalDurationTimeSpans.Add(null);
+        else
+            comp.TotalDurationTimeSpans.Add(_gameTiming.CurTime
+                                                        + TimeSpan.FromSeconds(hallucination.TimeParams.TotalDuration));
+
+        if (comp.Hallucinations.Count != comp.TotalDurationTimeSpans.Count)
+            Log.Error("After adding of the hallucination Counts of both list doesnt match.");
+
+        Dirty(target);
+    }
+    /// <summary>
+    /// Think of sending only to PlayersEntity
+    /// </summary>
+    private void GetComponentState(Entity<HallucinationComponent> entity, ref ComponentGetState args)
+    {
+        args.State = new HallucinationComponentState
+        {
+            Hallucinations = entity.Comp.Hallucinations
+        };
+    }
+    /// <summary>
+    /// Here we proceed equipping clothing with protection
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnEquip(GotEquippedEvent args)
+    {
         if (TryComp<HallucinationComponent>(args.Equipee, out var hallucinationComponent))
-            foreach (var (key, depends) in hallucinationComponent.EyeProtectionDependent)
-                if (depends)
-                    Remove(args.Equipee, key);
+        {
+            foreach (var hallucination in new List<HallucinationSetting>(hallucinationComponent.Hallucinations))
+            {
+                if (hallucination.Protection.ComponentName == null)
+                    continue;
 
+                if (!TryGetComponentType(hallucination.Protection.ComponentName, out var protectionComponentType))
+                    continue;
+
+                if (Protects(args.Equipment, args.SlotFlags, protectionComponentType, hallucination.Protection.CheckPockets))
+                    Remove(args.Equipee, hallucination);
+            }
+        }
+    }
+    /// <summary>
+    /// Checks if Entity is protected by anything like components on Entity or equipment on it/him/her/etc
+    /// </summary>
+    private bool Protected(EntityUid mobUid, HallucinationSetting hallucination)
+    {
+        if (HasComp<HallucinationImmuneComponent>(mobUid))
+            return true;
+
+        var protection = hallucination.Protection;
+        if (protection.ComponentName == null)
+            return false;
+
+        if (!TryGetComponentType(protection.ComponentName, out var protectionComponentType))
+            return false;
+
+        // SM_TODO:
+        // think of making out concrete method for it
+        InventorySystem.InventorySlotEnumerator? inventorySlot = null;
+        if (protection.ItemSlot.HasValue)
+            inventorySlot = _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value);
+        else
+            inventorySlot = _inventory.GetSlotEnumerator(mobUid);
+
+        while (inventorySlot.Value.NextItem(out var itemUid, out var slot))
+        {
+            if (Protects(itemUid, slot.SlotFlags, protectionComponentType, protection.CheckPockets))
+                return true;
+        }
+
+        return false;
+    }
+    /// <summary>
+    /// Use to check if item is able to protect from hallucination
+    /// </summary>
+    private bool Protects(EntityUid itemUid, SlotFlags slotFlag, Type protectionComponent, bool checkPockets)
+    {
+        if (!checkPockets
+            && slotFlag == SlotFlags.POCKET)
+            return false;
+
+        if (HasComp(itemUid, protectionComponent))
+            return true;
+
+        return false;
+    }
+    private bool TryGetComponentType(string componentName, [NotNullWhen(true)] out Type? componentType)
+    {
+        if (_cachedProtectComponentsType.TryGetValue(componentName, out componentType))
+            return componentType != null;
+
+        if (!_componentFactory.TryGetRegistration(componentName, out var componentRegistration))
+        {
+            Log.Error($"Tried to get registration of component {componentName}");
+            return false;
+        }
+
+        componentType = _componentFactory.GetComponent(componentRegistration).GetType();
+        _cachedProtectComponentsType.Add(componentName, componentType);
+        return true;
     }
 }

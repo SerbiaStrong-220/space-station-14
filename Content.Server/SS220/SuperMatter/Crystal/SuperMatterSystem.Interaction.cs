@@ -12,6 +12,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     public void ConsumeObject(EntityUid targetUid, Entity<SuperMatterComponent> crystal, bool spawnEntity = true)
     {
+        if (HasComp<MetaDataComponent>(targetUid)
+           && MetaData(targetUid).EntityDeleted)
+            return;
+
         var (crystalUid, smComp) = crystal;
 
         if (smComp.DisabledByAdmin)
