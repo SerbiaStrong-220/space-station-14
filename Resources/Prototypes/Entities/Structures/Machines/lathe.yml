@@ -895,6 +895,12 @@
         - MagazineLightRifleEmpty
         - MagazinePistol
         - MagazinePistolEmpty
+        #SS220 forgotten mags add begin
+        - MagazinePistolSubMachineGun
+        - MagazinePistolSubMachineGunEmpty
+        - MagazinePistolSubMachineGunTopMounted
+        - MagazinePistolSubMachineGunTopMountedEmpty
+        #SS220 forgotten mags add end
         - MagazineRifle
         - MagazineRifleEmpty
         - MagazineShotgun
