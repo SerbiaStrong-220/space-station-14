@@ -362,6 +362,12 @@
 # SS220 new hood start
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWardenArmored
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
 # SS220 new hood end
 
 - type: entity
