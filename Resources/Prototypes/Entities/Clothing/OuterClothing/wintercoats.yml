@@ -190,7 +190,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterCentcom
 
 - type: entity
-  parent: ClothingOuterWinterCoat
+  parent: ClothingOuterWinterCoatToggleable
   id: ClothingOuterWinterChef
   name: chef's freezer coat
   description: A coat specifically designed for work inside cold storage, sorely needed by cold-blooded lizard chefs.
