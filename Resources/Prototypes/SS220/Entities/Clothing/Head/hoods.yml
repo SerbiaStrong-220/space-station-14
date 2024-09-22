@@ -130,9 +130,9 @@
   name: atmospherics coat hood
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hoods/Coat/hoodatmos.rsi
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodatmos.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hoods/Coat/hoodatmos.rsi
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodatmos.rsi
 
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
