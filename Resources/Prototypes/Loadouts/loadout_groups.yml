@@ -564,10 +564,10 @@
   id: ClownMask
   name: loadout-group-clown-mask
   loadouts:
-  - MaskClown
+  - MaskClown #SS220-Two Floppa Iteration
   - ClownPennywiseMask
-  - MaskMuzhik
-  - MaskGold
+  - MaskMuzhik #SS220-Two Floppa Iteration
+  - MaskGold #SS220-Two Floppa Iteration
 #ss220-loadout-clown-mask-end
 
 #ss220-loadout-clown-neck-begin
