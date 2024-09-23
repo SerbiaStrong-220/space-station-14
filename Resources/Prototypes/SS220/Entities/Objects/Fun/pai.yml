@@ -45,6 +45,7 @@
   - type: IntrinsicRadioTransmitter
     channels:
     - Binary
+  - type: ActiveRadio
   - type: DoAfter
   - type: Actions
   - type: TypingIndicator
