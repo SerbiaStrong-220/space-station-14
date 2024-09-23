@@ -473,8 +473,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitRDAlt
-  name: Рубашка отчаянного учёного
-  description: Аккуратная голубая рубашка на подтяжках. Она вселяет в вас веру в мир через ядерное сдерживание.
+  name: shirt of a desperate scientist
+  description: neat blue shirt with suspenders. It gives you faith in peace through nuclear deterrence.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/RD.rsi
