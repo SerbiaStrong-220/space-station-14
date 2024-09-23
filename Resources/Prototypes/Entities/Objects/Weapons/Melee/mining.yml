@@ -181,6 +181,11 @@
   - type: Tag
     tags:
     - Knife
+#SS220-knife-cutter-fix-begin
+  - type: Utensil
+    types:
+      - Knife
+#SS220-knife-cutter-fix-end
 
 # Like a crusher... but better
 - type: entity

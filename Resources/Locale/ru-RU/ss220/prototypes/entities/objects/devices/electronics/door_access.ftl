@@ -13,3 +13,7 @@ ent-DoorElectronicsUsspMedical = { ent-DoorElectronicsUssp }
 ent-DoorElectronicsUsspEngineering = { ent-DoorElectronicsUssp }
     .suffix = СССП, Закрыт, Инженерный
     .desc = { ent-DoorElectronics.desc }
+
+ent-DoorElectronicsMagistrate = { ent-DoorElectronics }
+    .suffix = Магистрат, Закрыт
+    .desc = { ent-DoorElectronics.desc }

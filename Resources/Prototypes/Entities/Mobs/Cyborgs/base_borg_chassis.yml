@@ -239,9 +239,9 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: StepTriggerImmune
   - type: TTS
     randomVoicesList: Borg
+  - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:

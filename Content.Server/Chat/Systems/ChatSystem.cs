@@ -382,7 +382,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 announcementSound = new SoundPathSpecifier(CentComAnnouncementSound); // Corvax-Announcements: Support custom alert sound from admin panel
             }
             announcementSound ??= new SoundPathSpecifier(DefaultAnnouncementSound);
-            var announcementFilename = announcementSound.GetSound();
+            var announcementFilename = _audio.GetSound(announcementSound);
             var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), announcementFilename ?? DefaultAnnouncementSound, announcementSound.Params, message);
             RaiseLocalEvent(announcementEv);
         }

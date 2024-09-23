@@ -1,0 +1,39 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<roundend:RoundEndTitlesRole xmlns="https://spacestation14.io"
+                      xmlns:roundend="clr-namespace:Content.Client.SS220.RoundEnd.UI"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      HorizontalExpand="True"
+                        >
+
+<!-- I just hate all of this, but there is no other way of doing this UI without writing new (better) container types -->
+    
+    <BoxContainer>
+        <Control SizeFlagsStretchRatio="1" HorizontalExpand="True" VerticalAlignment="Center" Margin="0 0 24 0">
+            <Control Name="DollContainerLeft" HorizontalAlignment="Left" SetHeight="0">
+                <SpriteView
+                    Name="DollView"
+                    VerticalAlignment="Center"
+                    Stretch="Fill"
+                    SetSize="64 64" />
+            </Control>
+            <Control SetWidth="0" HorizontalAlignment="Right">
+                <BoxContainer HorizontalAlignment="Right" Orientation="Horizontal" Align="End" SetWidth="999">
+                    <Label Name="NickNameLabel" Align="Right" HorizontalAlignment="Right" StyleClasses="RoundEndTitlesUsername" />
+                </BoxContainer>
+            </Control>
+        </Control>
+        <Control SizeFlagsStretchRatio="1" HorizontalExpand="True" VerticalAlignment="Center" Margin="24 0 0 0">
+            <Control Name="DollContainerRight" HorizontalAlignment="Right" SetHeight="0">
+                
+            </Control>
+            <Control SetWidth="0" HorizontalAlignment="Left">
+                <BoxContainer HorizontalAlignment="Left" Orientation="Horizontal" Align="Begin" SetWidth="999">
+                    <Label Name="RoleNameLabel" Align="Left" StyleClasses="RoundEndTitlesRole" />
+                    <Label Name="CharacterNameLabel" Align="Left" HorizontalAlignment="Left" Margin="6 0 0 0" StyleClasses="RoundEndTitlesName" />
+                    <Control HorizontalExpand="True" />
+                </BoxContainer>
+            </Control>
+        </Control>
+    </BoxContainer>
+
+</roundend:RoundEndTitlesRole>

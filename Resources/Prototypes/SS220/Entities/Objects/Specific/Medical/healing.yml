@@ -1,0 +1,57 @@
+# Pills
+
+- type: entity
+  name: таблетка
+  description: Странная таблетка странного врача.
+  suffix: Пакс 10u
+  parent: Pill
+  id: PillPax
+  components:
+  - type: Pill
+    pillType: 15
+  - type: Sprite
+    state: pill16
+  - type: Label
+    currentLabel: пакс 10u
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Pax
+          Quantity: 10
+
+- type: entity
+  name: таблетка
+  description: Странная таблетка странного врача.
+  suffix: хлоралгидрат 10u
+  parent: Pill
+  id: PillCholarHydrate
+  components:
+  - type: Pill
+    pillType: 14
+  - type: Sprite
+    state: pill15
+  - type: Label
+    currentLabel: хлоралгидрат 10u
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: ChloralHydrate
+          Quantity: 10
+
+- type: entity
+  name: баночка таблеток психоактивных веществ
+  description: Странная баночка таблеток странного врача.
+  parent: PillCanister
+  id: PillCanisterPsycho
+  suffix: Пакс 10u 5, Хлоральгидрад 10u 5
+  components:
+  - type: StorageFill
+    contents:
+    - id: PillCholarHydrate
+      amount: 5
+    - id: PillPax
+      amount: 5

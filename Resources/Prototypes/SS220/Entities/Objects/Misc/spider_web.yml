@@ -6,7 +6,7 @@
   name: web
   description: Sticky web.. I wonder where it comes from?
   abstract: true
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -116,7 +116,7 @@
   parent: BaseSpiderWeb
   id: SpiderWebDespawned
   name: web
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:

@@ -23,6 +23,8 @@ namespace Content.Server.GameTicking
         /// </summary>
         public GamePresetPrototype? CurrentPreset { get; private set; }
 
+        public string? CurrentPresetTitleOverride { get; set; } // SS220 Round End Titles
+
         private bool StartPreset(ICommonSession[] origReadyPlayers, bool force)
         {
             var startAttempt = new RoundStartAttemptEvent(origReadyPlayers, force);

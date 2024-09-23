@@ -169,7 +169,7 @@
   - type: TypingIndicator
     proto: robot
   - type: ZombieImmune
-  - type: StepTriggerImmune
+  - type: ProtectedFromStepTriggers
   - type: NoSlip
   - type: Insulated
   - type: InteractionPopup
@@ -270,10 +270,10 @@
     netsync: false
 
 - type: entity
-  name: крокодил 
+  name: крокодил
   parent: SimpleMobBase
-  id: MobCrocodile 
-  description: Он не кусается, наверное. 
+  id: MobCrocodile
+  description: Он не кусается, наверное.
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -306,10 +306,10 @@
       movement:
         state: croc-moving
     noMovementLayers:
-      movement: 
+      movement:
         state: croc
   - type: MobThresholds
-    thresholds: 
+    thresholds:
       0: Alive
       250: Critical
       350: Dead
@@ -360,12 +360,12 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
-  
+
 - type: entity
-  name: крокодил 
+  name: крокодил
   suffix: злой
   parent: MobCrocodile
-  id: MobCrocodileAngry  
+  id: MobCrocodileAngry
   description: Он кусается, наверное.
   components:
   - type: HTN

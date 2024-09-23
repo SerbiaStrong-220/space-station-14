@@ -53,4 +53,5 @@
   roundstartTokens: 9
   requiredRole: CriticalMassShlopa
   rewards:
-    SponsorElWycco: 1
+    SponsorElWycc: 1
+#   SponsorElWycco: 1 пока закомментил, на всякий случай

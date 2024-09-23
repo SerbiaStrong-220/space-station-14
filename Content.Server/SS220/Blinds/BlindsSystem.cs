@@ -5,6 +5,7 @@ using Content.Shared.SS220.Blinds;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 
 namespace Content.Server.SS220.Blinds;
@@ -62,7 +63,7 @@ public sealed class BlindsSystem : EntitySystem
         if (!TryComp<TransformComponent>(uid, out var transform))
             return;
 
-        if (transform.Anchored && _mapManager.TryGetGrid(transform.GridUid, out var grid))
+        if (transform.Anchored && TryComp<MapGridComponent>(transform.GridUid, out var grid)) //SS220-upstream-merge
         {
             var pos = grid.CoordinatesToTile(transform.Coordinates);
 

@@ -3,7 +3,7 @@
   parent: Clothing
   id: ClothingHeadBase
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_head.ogg
       params:
@@ -47,31 +47,12 @@
 
 - type: entity
   abstract: true
-  parent: Clothing
-  id: HatBase
-  components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
-    sound:
-      path: /Audio/SS220/Effects/Drop/clothing_head.ogg
-      params:
-        volume: 2
-  - type: Clothing
-    slots:
-    - HEAD
-  - type: Sprite
-    state: icon
-  - type: Tag
-    tags:
-      - WhitelistChameleon
-
-- type: entity
-  abstract: true
   parent: ClothingHeadBase
   id: ClothingHeadLightBase
   name: base helmet with light
   categories: [ HideSpawnMenu ]
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
       params:
@@ -134,7 +115,7 @@
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
       params:
@@ -174,7 +155,7 @@
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
       params:

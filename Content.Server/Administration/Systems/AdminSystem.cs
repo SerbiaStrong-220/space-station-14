@@ -106,6 +106,7 @@ public sealed class AdminSystem : EntitySystem
         SubscribeLocalEvent<GameRuleStartedEvent>(OnGameRuleStarted);
         SubscribeLocalEvent<GameRuleEndedEvent>(OnGameRuleEnded);
         // SS220-View-active-gamerules end
+        SubscribeLocalEvent<ActorComponent, EntityRenamedEvent>(OnPlayerRenamed);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -160,6 +161,11 @@ public sealed class AdminSystem : EntitySystem
         RaiseNetworkEvent(ev);
     }
     // SS220-View-active-gamerules end
+
+    private void OnPlayerRenamed(Entity<ActorComponent> ent, ref EntityRenamedEvent args)
+    {
+        UpdatePlayerList(ent.Comp.PlayerSession);
+    }
 
     public void UpdatePlayerList(ICommonSession player)
     {

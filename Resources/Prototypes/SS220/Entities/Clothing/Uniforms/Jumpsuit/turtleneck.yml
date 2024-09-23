@@ -1,3 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# ЦК
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCentcomOfficerTurtleneck
+  name: centcom turtleneck suit
+  description: A casual, yet refined green turtleneck, used by CentCom Officials. It has a fragrance of blueberry.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
+
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitParamedicTurtleneck

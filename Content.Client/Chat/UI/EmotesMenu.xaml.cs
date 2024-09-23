@@ -43,7 +43,8 @@ public sealed partial class EmotesMenu : RadialMenu
 
             if (!emote.Available &&
                 _entManager.TryGetComponent<SpeechComponent>(player.Value, out var speech) &&
-                !speech.AllowedEmotes.Contains(emote.ID))
+                !speech.AllowedEmotes.Contains(emote.ID) &&
+                !speech.ClothingEmotes.Contains(emote.ID)) //SS220 Clothing special emotes
                 continue;
 
             var parent = FindControl<RadialContainer>(emote.Category.ToString());

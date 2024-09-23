@@ -3,6 +3,7 @@
 - type: entity
   parent: BaseItem
   id: PersonalAI
+  categories: [ HideSpawnMenu ] #SS220 PAI with encryption keys
   name: personal ai device
   description: Your electronic pal who's fun to be with!
   components:
@@ -75,6 +76,9 @@
           Searching: { state: pai-searching-overlay }
           On: { state: pai-on-overlay }
   - type: StationMap
+  - type: Vocal # SS220 borg emotes to PAI start
+    sounds:
+      Unsexed: UnisexSilicon # SS220 borg emotes to PAI end
 
 - type: entity
   parent: [ PersonalAI, BaseSyndicateContraband]
@@ -99,6 +103,16 @@
   - type: ActiveRadio
     channels:
     - Syndicate
+  #SS220 PAI with encryption keys begin
+  - type: IntrinsicRadioReceiver
+    channels:
+    - Syndicate
+  - type: ContainerContainer
+    containers:
+      key_slots: !type:Container
+  - type: EncryptionKeyHolder
+    keySlots: 2
+  #SS220 PAI with encryption keys end
   - type: Appearance
   - type: GenericVisualizer
     visuals:

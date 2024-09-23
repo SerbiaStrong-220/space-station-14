@@ -41,5 +41,12 @@ public sealed class WarDeclaratorBoundUserInterface : BoundUserInterface
         var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
         var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
         SendMessage(new WarDeclaratorActivateMessage(msg));
+
+        //ss220 SPAM Button NukeDecWar fix start
+        if (_window != null)
+        {
+            _window.WarButton.Disabled = true;
+        }
+        //ss220 SPAM Button NukeDecWar fix end
     }
 }

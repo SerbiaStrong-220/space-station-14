@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 #! Внутренние дела (Начало)
 
   # Агент внутренних дел
@@ -14,7 +16,7 @@
 - type: roleLoadout
   id: JobBlueShield
   groups:
-  - SecurityNeck
+  - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - SecurityBelt

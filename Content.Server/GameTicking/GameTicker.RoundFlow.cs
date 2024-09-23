@@ -353,7 +353,10 @@ namespace Content.Server.GameTicking
             _adminLogger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Round ended, showing summary");
 
             //Tell every client the round has ended.
-            var gamemodeTitle = CurrentPreset != null ? Loc.GetString(CurrentPreset.ModeTitle) : string.Empty;
+            // SS220 Round End Titles begin 
+            //var gamemodeTitle = CurrentPreset != null ? Loc.GetString(CurrentPreset.ModeTitle) : string.Empty;
+            var gamemodeTitle = CurrentPreset != null ? CurrentPresetTitleOverride ?? Loc.GetString(CurrentPreset.ModeTitle) : string.Empty;
+            // SS220 Round End Titles end 
 
             // Let things add text here.
             var textEv = new RoundEndTextAppendEvent();
@@ -366,6 +369,7 @@ namespace Content.Server.GameTicking
 
             //Generate a list of basic player info to display in the end round summary.
             var listOfPlayerInfo = new List<RoundEndMessageEvent.RoundEndPlayerInfo>();
+            var listOfSponsors = new List<RoundEndMessageEvent.RoundEndSponsorInfo>(); // SS220 Round End Titles
             // Grab the great big book of all the Minds, we'll need them for this.
             var allMinds = EntityQueryEnumerator<MindComponent>();
             var pvsOverride = _configurationManager.GetCVar(CCVars.RoundEndPVSOverrides);
@@ -431,6 +435,25 @@ namespace Content.Server.GameTicking
             var listOfPlayerInfoFinal = listOfPlayerInfo.OrderBy(pi => pi.PlayerOOCName).ToArray();
             var sound = RoundEndSoundCollection == null ? null : _audio.GetSound(new SoundCollectionSpecifier(RoundEndSoundCollection));
 
+            // SS220 Round End Titles begin
+            var discordManager = IoCManager.Resolve<SS220.Discord.DiscordPlayerManager>();
+            void AddSponsorsTierFrom(Shared.SS220.Discord.SponsorTier tier, IReadOnlyList<string> names)
+            {
+                foreach (var sponsor in names)
+                {
+                    listOfSponsors.Add(new(sponsor, [tier]));
+                }
+            }
+            if (discordManager.CachedSponsorUsers is { } sponsorUsers)
+            {
+                AddSponsorsTierFrom(Shared.SS220.Discord.SponsorTier.CriticalMassShlopa, sponsorUsers.CriticalMassShlopas);
+                AddSponsorsTierFrom(Shared.SS220.Discord.SponsorTier.GoldenShlopa, sponsorUsers.GoldenShlopas);
+                AddSponsorsTierFrom(Shared.SS220.Discord.SponsorTier.HugeShlopa, sponsorUsers.HugeShlopas);
+                AddSponsorsTierFrom(Shared.SS220.Discord.SponsorTier.BigShlopa, sponsorUsers.BigShlopas);
+                AddSponsorsTierFrom(Shared.SS220.Discord.SponsorTier.Shlopa, sponsorUsers.Shlopas);
+            }
+            // SS220 Round End Titles end
+
             var roundEndMessageEvent = new RoundEndMessageEvent(
                 gamemodeTitle,
                 roundEndText,
@@ -438,6 +461,7 @@ namespace Content.Server.GameTicking
                 RoundId,
                 listOfPlayerInfoFinal.Length,
                 listOfPlayerInfoFinal,
+                listOfSponsors.ToArray(), // SS220 Round End Titles
                 sound
             );
             RaiseNetworkEvent(roundEndMessageEvent);
@@ -577,6 +601,7 @@ namespace Content.Server.GameTicking
             // Clear up any game rules.
             ClearGameRules();
             CurrentPreset = null;
+            CurrentPresetTitleOverride = null; // SS220 Round End Titles
 
             _allPreviousGameRules.Clear();
 

@@ -1,0 +1,21 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Chaplain Time
+- type: loadoutEffectGroup
+  id: ChaplainSenior
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChaplain
+      time: 180000 #50 часов
+
+# Neck
+
+- type: loadout
+  id: ChaplainNeckCloak
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChaplainSenior
+  equipment:
+    neck: ClothingNeckCloakEnby

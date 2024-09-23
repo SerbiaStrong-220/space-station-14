@@ -321,6 +321,13 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (component.Contents.ContainedEntities.Count >= component.Capacity)
             return false;
 
+        // SS220 fix #1121 begin
+        SharedEntityStorageComponent? insertedComp = null;
+
+        if (ResolveStorage(toInsert,  ref insertedComp))
+            return false;
+        // SS220 fix #1121 end
+
         return CanFit(toInsert, container, component);
     }
 
@@ -486,9 +493,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
                 component.RemovedMasks = 0;
             }
         }
-
-        if (TryComp<PlaceableSurfaceComponent>(uid, out var surface))
-            _placeableSurface.SetPlaceable(uid, component.Open, surface);
 
         _appearance.SetData(uid, StorageVisuals.Open, component.Open);
         _appearance.SetData(uid, StorageVisuals.HasContents, component.Contents.ContainedEntities.Count > 0);

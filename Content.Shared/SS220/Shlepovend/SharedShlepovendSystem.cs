@@ -29,14 +29,18 @@ public abstract class SharedShlepovendSystem : EntitySystem
 
         if (highestAvailableTier == null)
             return null;
+        return GetTierRewardOrDefault(highestAvailableTier.Value);
+    }
 
+    public ShlepaRewardGroupPrototype? GetTierRewardOrDefault(SponsorTier tier)
+    {
         if (!_prototype.TryGetInstances<ShlepaRewardGroupPrototype>(out var protos))
             return null;
 
         // Try to get a role proto with a corresponding enum
         foreach (var (_, proto) in protos)
         {
-            if (proto.RequiredRole != null && proto.RequiredRole == highestAvailableTier.Value)
+            if (proto.RequiredRole == tier)
                 return proto;
         }
 

@@ -202,7 +202,7 @@
 
 #SS220 HOS shotgun removal begin
 #- type: entity
-  #noSpawn: true
+  #categories: [ HideSpawnMenu ]
   #parent: BaseTraitorStealObjective
   #id: EnergyShotgunStealObjective
   #components:

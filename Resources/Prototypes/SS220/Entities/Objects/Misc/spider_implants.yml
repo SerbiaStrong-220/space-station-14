@@ -24,7 +24,7 @@
   id: LightImplantSpiderEggDrone
   name: guard spider egg
   description: He is also a drone and can build crystals and walls.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderEggDrone  
@@ -34,7 +34,7 @@
   id: LightImplantSpiderEggHunter
   name: hunter spider egg
   description:
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderEggHunter   
@@ -43,7 +43,7 @@
   parent: BaseLightImplantSpider
   id: LightImplantSpiderEggGhost
   name: ghost spider egg
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderEggGhost   
@@ -52,7 +52,7 @@
   parent: BaseLightImplantSpider
   id: LightImplantSpiderEggShooter
   name: shooter  spider egg
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderEggShooter
@@ -63,7 +63,7 @@
   id: LightImplantSpiderLittle
   name: release the spiderlings
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderLittle   
@@ -74,7 +74,7 @@
   id: LightImplantSpiderCrystal
   name: create a crystal shard
   description: A shard that serves as a backlight for spiders.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderCrystal      
@@ -84,7 +84,7 @@
   parent: BaseLightImplantSpider
   id: LightImplantSpiderWallWeb
   name: create a wall
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderWallWeb       
@@ -93,7 +93,7 @@
   parent: BaseLightImplantSpider
   id: LightImplantSpiderWallWebDurable
   name: create a durable wall
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSpiderWallWebDurable
@@ -104,7 +104,7 @@
   id: LightImplantSingleSpiderWebShortDelay
   name: spin a web
   description: Creates a web that slows down your prey.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSingleSpiderWebShortDelay       
@@ -114,7 +114,7 @@
   id: LightImplantSingleSpiderWebLongDelay
   name: spin a web
   description: Creates a web that slows down your prey.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSingleSpiderWebLongDelay
@@ -124,7 +124,7 @@
   id: LightImplantSingleSpiderWebDurable
   name: spin a durable web
   description: Creates a web that slows down your prey.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSingleSpiderWebDurable
@@ -135,7 +135,7 @@
   id: LightImplantSingleSpiderWebClown
   name: spin a clown web
   description: Creates a web that slows down your prey.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
       implantAction: ActionSpawnSingleSpiderWebClown        

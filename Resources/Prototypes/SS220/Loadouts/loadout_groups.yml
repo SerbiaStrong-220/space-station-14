@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 #! Командование (Начало)
 
   # Капитан (Начало)
@@ -45,6 +47,16 @@
   # Агент Внутренних Дел (Конец)
 
   # Офицер "Синий Щит" (Начало)
+- type: loadoutGroup
+  id: BlueShieldNeck
+  name: loadout-group-blueshield-neck
+  minLimit: 0
+  loadouts:
+  - SecurityHolster
+  - Headphones
+  - ProtectGear
+  - BlueShieldNeckCloak
+
 - type: loadoutGroup
   id: BlueShieldJumpsuit
   name: loadout-group-blueshield-jumpsuit
@@ -413,7 +425,7 @@
   - JanitorOrangeShoes
   # Уборщик (Конец)
 
-#! Сервис
+#! Сервис (Конец)
 
 #! Разное
 

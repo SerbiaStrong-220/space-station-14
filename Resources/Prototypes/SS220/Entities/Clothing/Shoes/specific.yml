@@ -1,0 +1,254 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Military Police Shoes #by MIXnikita for SS200
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingShoesMpolice
+  name: military police shoes
+  description: they go to detention in these shoes.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/mboots.rsi
+  - type: Clothing
+    sprite: Clothing/Shoes/Specific/mboots.rsi
+
+- type: entity
+  parent: ClothingShoesGaloshes
+  id: ClothingShoesOrangeGaloshes
+  name: оранжевые галоши
+  description: Оранжевые резиновые ботинки.
+  suffix: Не маппить
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingFootWraps
+  name: footwraps
+  description: Just some white wraps for your feet if you are tired of your shoes.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+  - type: Construction
+    graph: ClothingFootWrapsCraft
+    node: ClothingFootWraps
+  - type: Tag
+    tags:
+    - Footwraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingFootWrapsBlack
+  name: black footwraps
+  description: Just some black wraps for your feet if you are tired of your shoes.
+  components:
+  - type: Icon
+    sprite: SS220/Clothing/Coloredwraps/wrapsblack.rsi
+    state: icon
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    layers:
+    - state: icon
+      color: "#495448"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#495448"
+      right:
+      - state: inhand-right
+        color: "#495448"
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        color: "#495448"
+      - state: equipped-FEET-reptilian
+        color: "#495448"
+      # - state: equipped-FEET-vox
+      #   color: "#495448"
+  - type: Construction
+    graph: ClothingFootWrapsBlackCraft
+    node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingFootWrapsBlue
+  name: blue footwraps
+  description: Just some blue wraps for your feet if you are tired of your shoes.
+  components:
+  - type: Icon
+    sprite: SS220/Clothing/Coloredwraps/wrapsblue.rsi
+    state: icon
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    layers:
+    - state: icon
+      color: "#3c0afc"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#3c0afc"
+      right:
+      - state: inhand-right
+        color: "#3c0afc"
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        color: "#3c0afc"
+      - state: equipped-FEET-reptilian
+        color: "#3c0afc"
+      # - state: equipped-FEET-vox
+      #   color: "#3c0afc"
+  - type: Construction
+    graph: ClothingFootWrapsBlueCraft
+    node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingFootWrapsGreen
+  name: green footwraps
+  description: Just some green wraps for your feet if you are tired of your shoes.
+  components:
+  - type: Icon
+    sprite: SS220/Clothing/Coloredwraps/wrapsgreen.rsi
+    state: icon
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    layers:
+    - state: icon
+      color: "#6acc10"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#6acc10"
+      right:
+      - state: inhand-right
+        color: "#6acc10"
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        color: "#6acc10"
+      - state: equipped-FEET-reptilian
+        color: "#6acc10"
+      # - state: equipped-FEET-vox
+      #   color: "#6acc10"
+  - type: Construction
+    graph: ClothingFootWrapsGreenCraft
+    node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingFootWrapsRed
+  name: red footwraps
+  description: Just some red wraps for your feet if you are tired of your shoes.
+  components:
+  - type: Icon
+    sprite: SS220/Clothing/Coloredwraps/wrapsred.rsi
+    state: icon
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    layers:
+    - state: icon
+      color: "#fc300a"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#fc300a"
+      right:
+      - state: inhand-right
+        color: "#fc300a"
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        color: "#fc300a"
+      - state: equipped-FEET-reptilian
+        color: "#fc300a"
+      # - state: equipped-FEET-vox
+      #   color: "#fc300a"
+  - type: Construction
+    graph: ClothingFootWrapsRedCraft
+    node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingFootWrapsYellow
+  name: yellow footwraps
+  description: Just some yellow wraps for your feet if you are tired of your shoes.
+  components:
+  - type: Icon
+    sprite: SS220/Clothing/Coloredwraps/wrapsyellow.rsi
+    state: icon
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    layers:
+    - state: icon
+      color: "#f2fc0a"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#f2fc0a"
+      right:
+      - state: inhand-right
+        color: "#f2fc0a"
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        color: "#f2fc0a"
+      - state: equipped-FEET-reptilian
+        color: "#f2fc0a"
+      # - state: equipped-FEET-vox
+      #   color: "#f2fc0a"
+  - type: Construction
+    graph: ClothingFootWrapsYellowCraft
+    node: ClothingFootWraps
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: BarestepHard
+
+- type: entity
+  parent: ClothingShoesClownBase
+  id: ClothingShoesClownPennywise
+  name: dance clown shoes
+  description: "Their elegance can cause genuine laughter."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown

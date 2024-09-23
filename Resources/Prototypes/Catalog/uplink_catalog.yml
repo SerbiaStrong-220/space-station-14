@@ -755,9 +755,11 @@
   name: uplink-cigarettes-name
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: rareDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -844,8 +846,8 @@
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
   description: uplink-binary-translator-key-desc
-  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: rd_label }
-  productEntity: EncryptionKeyBinary
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: borg_label }
+  productEntity: EncryptionKeyBinarySyndicate
   cost:
     Telecrystal: 1
   categories:
@@ -1368,9 +1370,11 @@
   description: uplink-emp-implanter-desc
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: shield }
   productEntity: EmpImplanter
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: veryRareDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -1438,9 +1442,11 @@
   description: uplink-uplink-implanter-desc
   icon: { sprite: /Textures/Objects/Devices/communication.rsi, state: old-radio }
   productEntity: UplinkImplanter
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: usualDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -1591,9 +1597,11 @@
   description: uplink-eva-syndie-desc
   icon: { sprite: /Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: rareDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:

@@ -1,3 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakFieldOfficerCentComm
+  name: плащ Полевого Офицера Центрального Командования
+  description: От этого плаща так и веет властью и вашим увольнением.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/centcomm_fo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakWhiteCapFormal
+  name: белый формальный плащ капитана
+  description: Роскошный плащ почётного ветерана за выслугу лет.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/whitecapcloakformal.rsi
+
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakNanotrasenAdmiral
@@ -6,3 +26,30 @@
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/nanotrasen_admiral.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingCloakBlueShield
+  name: плащ Синего Щита
+  description: Используется офицером «Синий Щит», который верно защищает своих глав.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Cloaks/Blueshield.rsi
+
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakAlisa
+  name: сердце Алисы
+  description: Огромное доброе сердце, запечатанное в куске ткани.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/AlisaCloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodHeartFinaly
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}

@@ -1,0 +1,27 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<roundend:RoundEndTitlesSection xmlns="https://spacestation14.io"
+                      xmlns:roundend="clr-namespace:Content.Client.SS220.RoundEnd.UI"
+                        >
+
+<BoxContainer Orientation="Vertical" Margin="5 5">
+    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+        <TextureRect
+            Name="IconRect"
+            VerticalAlignment="Center"
+            Stretch="KeepAspectCentered"
+            TextureScale="2 2"
+            VerticalExpand="True"
+            Margin="0 0 12 0"/>
+        <Label Name="TitleLabel" Access="Public" StyleClasses="RoundEndTitlesHeader2" VerticalAlignment="Top" HorizontalExpand="True"/>
+    </BoxContainer>
+
+    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Stretch" HorizontalExpand="True">
+        <Control Name="ListMarginLeft" SizeFlagsStretchRatio="1" HorizontalExpand="True" />
+        <GridContainer Name="RolesContainer" Access="Public" SizeFlagsStretchRatio="8" Columns="1" HorizontalExpand="True" Margin="0 32 0 64">
+            <!-- Here all the roles will be added via code -->
+        </GridContainer>
+        <Control Name="ListMarginRight" SizeFlagsStretchRatio="1" HorizontalExpand="True" />
+    </BoxContainer>
+</BoxContainer>
+
+</roundend:RoundEndTitlesSection>

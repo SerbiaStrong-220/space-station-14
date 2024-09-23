@@ -205,6 +205,10 @@
       Female: UnisexMoth
       Unsexed: UnisexMoth
   #ss220 special_sounds end
+  #SS220 clothing special emotes begin
+  - type: ClothingSpecialEmotes
+    emotes: ['Chitter', 'Squeak']
+  #SS220 clothing special emotes end
 
 - type: entity
   parent: ClothingNeckBase
@@ -214,6 +218,14 @@
   components:
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/void.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodVoidCloak
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
   - type: TypingIndicatorClothing
     proto: alien
 

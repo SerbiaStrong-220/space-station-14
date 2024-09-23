@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Buckle;
 
@@ -34,6 +35,8 @@ public abstract partial class SharedBuckleSystem
     public static ProtoId<AlertCategoryPrototype> BuckledAlertCategory = "Buckled";
 
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
+
     private void InitializeBuckle()
     {
         SubscribeLocalEvent<BuckleComponent, ComponentShutdown>(OnBuckleComponentShutdown);
@@ -277,8 +280,9 @@ public abstract partial class SharedBuckleSystem
         if (_whitelistSystem.IsWhitelistFail(strapComp.Whitelist, buckleUid) ||
             _whitelistSystem.IsBlacklistPass(strapComp.Blacklist, buckleUid))
         {
-            if (_netManager.IsServer && popup && user != null)
-                _popup.PopupEntity(Loc.GetString("buckle-component-cannot-fit-message"), user.Value, user.Value, PopupType.Medium);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("buckle-component-cannot-fit-message"), user, PopupType.Medium);
+
             return false;
         }
 
@@ -296,9 +300,9 @@ public abstract partial class SharedBuckleSystem
 
         if (user != null && !HasComp<HandsComponent>(user))
         {
-            // PopupPredicted when
-            if (_netManager.IsServer && popup)
-                _popup.PopupEntity(Loc.GetString("buckle-component-no-hands-message"), user.Value, user.Value);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("buckle-component-no-hands-message"), user);
+
             return false;
         }
 
@@ -314,17 +318,18 @@ public abstract partial class SharedBuckleSystem
         }
         //ss220 fix buckle with two hands end
 
-        if (buckleComp.Buckled)
+        if (buckleComp.Buckled && !TryUnbuckle(buckleUid, user, buckleComp))
         {
-            if (_netManager.IsClient || popup || user == null)
-                return false;
-
-            var message = Loc.GetString(buckleUid == user
+            if (popup)
+            {
+                var message = Loc.GetString(buckleUid == user
                     ? "buckle-component-already-buckled-message"
                     : "buckle-component-other-already-buckled-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
-            _popup.PopupEntity(message, user.Value, user.Value);
+                _popup.PopupClient(message, user);
+            }
+
             return false;
         }
 
@@ -338,29 +343,30 @@ public abstract partial class SharedBuckleSystem
                 continue;
             }
 
-            if (_netManager.IsClient || popup || user == null)
-                return false;
-
-            var message = Loc.GetString(buckleUid == user
+            if (popup)
+            {
+                var message = Loc.GetString(buckleUid == user
                     ? "buckle-component-cannot-buckle-message"
                     : "buckle-component-other-cannot-buckle-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
-            _popup.PopupEntity(message, user.Value, user.Value);
+                _popup.PopupClient(message, user);
+            }
+
             return false;
         }
 
         if (!StrapHasSpace(strapUid, buckleComp, strapComp))
         {
-            if (_netManager.IsClient || popup || user == null)
-                return false;
-
-            var message = Loc.GetString(buckleUid == user
-                    ? "buckle-component-cannot-fit-message"
-                    : "buckle-component-other-cannot-fit-message",
+            if (popup)
+            {
+                var message = Loc.GetString(buckleUid == user
+                    ? "buckle-component-cannot-buckle-message"
+                    : "buckle-component-other-cannot-buckle-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
-            _popup.PopupEntity(message, user.Value, user.Value);
+                _popup.PopupClient(message, user);
+            }
 
             return false;
         }

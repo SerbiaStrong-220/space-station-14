@@ -439,7 +439,7 @@ namespace Content.Client.Lobby.UI
 
             #region TeleportAfkToCryoStorage
 
-            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-edtior-afkPreferences-tab"));
+            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-editor-afkPreferences-tab")); //ss220 loc fix
             CTeleportAfkToCryoStorage.Pressed = Profile?.TeleportAfkToCryoStorage ?? true;
             CTeleportAfkToCryoStorage.OnToggled += args => SetTeleportAfkToCryoStorage(args.Pressed);
 
@@ -857,12 +857,6 @@ namespace Content.Client.Lobby.UI
             {
                 var departmentName = Loc.GetString($"department-{department.ID}");
 
-                //ss220 lobby zero fix start
-                if (department.Roles.Count == 0)
-                {
-                    return;
-                }
-                //ss220 lobby zero fix end
                 if (!_jobCategories.TryGetValue(department.ID, out var category))
                 {
                     category = new BoxContainer
@@ -1249,6 +1243,7 @@ namespace Content.Client.Lobby.UI
         private void SetTeleportAfkToCryoStorage(bool newTeleportAfkToCryoStorage)
         {
             Profile = Profile?.WithTeleportAfkToCryoStorage(newTeleportAfkToCryoStorage);
+            SetDirty(); // ss220 cryo button fix
         }
 
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)

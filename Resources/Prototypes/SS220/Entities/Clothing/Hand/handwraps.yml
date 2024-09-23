@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: ClothingHandsGlovesSyntheticBase
   id: ClothingHandWraps
@@ -16,7 +18,7 @@
   - type: Tag
     tags:
     - Handwraps
-    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
   parent: ClothingHandsGlovesSyntheticBase

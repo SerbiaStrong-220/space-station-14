@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -370,6 +371,12 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         if (isMaterial)
         {
             _tag.AddTag(uid, "DoorBumpOpener");
+
+            if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
+            {
+                explosionResistanceComponent.DamageCoefficient = 1f; //full damage
+            }
+
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
@@ -381,6 +388,12 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             _tag.RemoveTag(uid, "DoorBumpOpener");
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
+
+            if (TryComp<ExplosionResistanceComponent>(uid, out var explodeComponent))
+            {
+                explodeComponent.DamageCoefficient = 0f; // full resistance
+            }
+
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);

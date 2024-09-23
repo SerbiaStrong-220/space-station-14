@@ -1,0 +1,39 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckProtectBundle
+  name: защитный комплект СБ
+  description: Защитный комплект состоящий из пары наколенников и налокотников идеально впишутся в ваш рабочий процесс по устранению беспорядков!
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/tactical.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/tactical.rsi
+    - type: Armor # perfect
+      modifiers:
+        coefficients:
+          Blunt: 0.90
+          Slash: 0.90
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckAmuletDruid #SS220 druid loadout
+  name: druid amulet
+  description: A beautiful amulet that emphasizes harmony with nature and most likely endows its wearer with the power of the earth.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/druid_amulet.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/druid_amulet.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckRuffClownPennywise
+  name: white ruff
+  description: An item of clothing of the high society.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi

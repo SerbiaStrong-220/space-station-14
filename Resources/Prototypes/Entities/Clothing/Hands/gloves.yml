@@ -260,7 +260,7 @@
       - type: CriminalRecordsHacker
 
 - type: entity
-  parent: [ClothingHandsGlovesColorBlack, BaseSecurityEngineeringContraband]
+  parent: [ ClothingHandsGlovesColorBlack, BaseSecurityEngineeringContraband ]
   id: ClothingHandsGlovesCombat
   name: combat gloves
   description: These tactical gloves are fireproof and shock resistant.
@@ -276,7 +276,7 @@
   - type: Tag
     tags:
     - Kangaroo
-    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -411,9 +411,9 @@
   description: These gloves allow you to punch incredibly fast.
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/northstar.rsi
+    sprite: SS220/Clothing/Hands/Gloves/northstar.rsi # SS220 sprite fix
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/northstar.rsi
+    sprite: SS220/Clothing/Hands/Gloves/northstar.rsi # SS220 sprite fix
   - type: MeleeWeapon
     autoAttack: true
     attackRate: 4

@@ -15,6 +15,7 @@
   blacklist:
     components:
     - BorgChassis
+    - PAI # SS220 borg emotes to PAI
   chatMessages: ["chat-emote-msg-cough"]
   chatTriggers:
     - cough
@@ -66,6 +67,7 @@
   blacklist:
     components:
     - BorgChassis
+    - PAI # SS220 borg emotes to PAI
   chatMessages: ["chat-emote-msg-yawn"]
   chatTriggers:
     - yawn
@@ -85,6 +87,7 @@
   blacklist:
     components:
     - BorgChassis
+    - PAI # SS220 borg emotes to PAI
   chatMessages: ["chat-emote-msg-snore"]
 
 # SS220 emotes begin
@@ -99,6 +102,7 @@
   blacklist:
     components:
     - BorgChassis
+    - PAI # SS220 borg emotes to PAI
   chatMessages: ["chat-emote-msg-gasp"]
   chatTriggers:
     - задыхается
@@ -115,5 +119,6 @@
   blacklist:
     components:
     - BorgChassis
+    - PAI # SS220 borg emotes to PAI
   chatMessages: ["chat-emote-msg-critgasp"]
 # SS220 emotes end

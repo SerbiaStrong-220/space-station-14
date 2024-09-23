@@ -15,13 +15,13 @@ accent-german-words-5 = sausage
 accent-german-words-replace-5 = wurst
 
 accent-german-words-6 = sausages
-accent-german-words-replace-6 = würste
+accent-german-words-replace-6 = wurste
 
 accent-german-words-7 = man
 accent-german-words-replace-7 = mann
 
 accent-german-words-8 = men
-accent-german-words-replace-8 = männer
+accent-german-words-replace-8 = manner
 
 accent-german-words-9 = woman
 accent-german-words-9-2 = lady
@@ -50,7 +50,7 @@ accent-german-words-16 = idiot
 accent-german-words-replace-16 = dummkopf
 
 accent-german-words-17 = idiots
-accent-german-words-replace-17 = dummköpfe
+accent-german-words-replace-17 = dummkopfe
 
 accent-german-words-18 = butterfly
 accent-german-words-replace-18 = schmetterling
@@ -68,10 +68,10 @@ accent-german-words-22 = music
 accent-german-words-replace-22 = musik
 
 accent-german-words-23 = captain
-accent-german-words-replace-23 = kapitän
+accent-german-words-replace-23 = kapitan
 
 accent-german-words-24 = kebab
-accent-german-words-replace-24 = döner
+accent-german-words-replace-24 = doner
 
 accent-german-words-25 = mouse
 accent-german-words-replace-25 = maus
@@ -80,7 +80,7 @@ accent-german-words-26 = what
 accent-german-words-replace-26 = wat
 
 accent-german-words-27 = thank you
-accent-german-words-replace-27 = dankeschön
+accent-german-words-replace-27 = dankeschon
 
 accent-german-words-28 = thanks
 accent-german-words-replace-28 = danke
@@ -158,7 +158,7 @@ accent-german-words-51 = goodbye
 accent-german-words-replace-51 = auf Wiedersehen
 
 accent-german-words-52 = bye
-accent-german-words-replace-52 = tschüss
+accent-german-words-replace-52 = tschuss
 
 accent-german-words-53 = bye bye
 accent-german-words-53-2 = bye-bye
@@ -168,7 +168,7 @@ accent-german-words-54 = fantastic
 accent-german-words-replace-54 = fantastisch
 
 accent-german-words-55 = changeling
-accent-german-words-replace-55 = doppelgänger
+accent-german-words-replace-55 = doppelganger
 
 accent-german-words-56 = forbidden
 accent-german-words-56-2 = prohibited

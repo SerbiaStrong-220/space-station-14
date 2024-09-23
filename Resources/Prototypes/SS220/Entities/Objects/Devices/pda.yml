@@ -54,3 +54,33 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorservice
+
+- type: entity
+  parent: BasePDA
+  id: MagistratePDA
+  name: magistrate PDA
+  description: ###
+  components:
+  - type: Pda
+    id: MagistrateIDCard
+    state: pda-magistrate
+  - type: PdaBorderColor
+    borderColor: "#414452"
+    accentVColor: "#731611"
+    accentHColor: "#dfac5c"
+  - type: Sprite
+    sprite: Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    sprite: Objects/Devices/pda.rsi
+    state: pda-magistrate

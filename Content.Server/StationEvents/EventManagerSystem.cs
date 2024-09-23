@@ -45,6 +45,7 @@ public sealed class EventManagerSystem : EntitySystem
             Log.Error(errStr);
             return;
         }
+        // SS220 Проверка на отключенные случаные события в текущем пресете
 
         var randomEvent = PickRandomEvent();
 
@@ -63,6 +64,15 @@ public sealed class EventManagerSystem : EntitySystem
     /// </summary>
     public void RunRandomEvent(EntityTableSelector limitedEventsTable)
     {
+        // SS220 Проверка на отключенные случаные события в текущем пресете
+        if (GameTicker.CurrentPreset != null && GameTicker.CurrentPreset.DisableRandomEvents)
+        {
+            var errStr = Loc.GetString("station-event-system-run-random-event-disablerandevents");
+            Log.Error(errStr);
+            return;
+        }
+        // SS220 Проверка на отключенные случаные события в текущем пресете
+
         if (!TryBuildLimitedEvents(limitedEventsTable, out var limitedEvents))
         {
             Log.Warning("Provided event table could not build dict!");
