@@ -15,10 +15,12 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Server.SS220.SpiderQueen.Systems;
 
@@ -41,8 +43,9 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderWorldSpawnEvent>(OnWorldSpawn);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderWorldSpawnDoAfterEvent>(OnWorldSpawnDoAfter);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderTargetSpawnEvent>(OnTargetSpawn);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderSpawnDoAfterEvent>(OnSpawnDoAfter);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderNearbySpawnEvent>(OnNearbySpawn);
     }
 
     public override void Update(float frameTime)
@@ -62,50 +65,38 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         }
     }
 
-    private void OnWorldSpawn(Entity<SpiderQueenComponent> entity, ref SpiderWorldSpawnEvent args)
+    private void OnTargetSpawn(Entity<SpiderQueenComponent> entity, ref SpiderTargetSpawnEvent args)
     {
+        var spider = entity.Owner;
         if (args.Handled ||
-            entity.Owner != args.Performer)
+            spider != args.Performer ||
+            (args.Cost > FixedPoint2.Zero && !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp)))
             return;
 
-        var performer = entity.Owner;
-
-        if (args.Cost > FixedPoint2.Zero &&
-            !CheckEnoughBloodPoints(performer, args.Cost, entity.Comp))
-            return;
-
-        var netCoordinates = GetNetCoordinates(args.Target);
-        var doAfterArgs = new DoAfterArgs(
-            EntityManager,
-            performer,
-            args.DoAfter,
-            new SpiderWorldSpawnDoAfterEvent()
-            {
-                TargetCoordinates = netCoordinates,
-                Prototypes = args.Prototypes,
-                Offset = args.Offset,
-                Cost = args.Cost,
-            },
-            performer
-        )
+        if (!TryStartSpiderSpawnDoAfter(spider, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.Cost))
         {
-            Broadcast = false,
-            BreakOnDamage = false,
-            BreakOnMove = true,
-            NeedHand = false,
-            BlockDuplicate = true,
-            CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
-        };
-
-        var started = _doAfter.TryStartDoAfter(doAfterArgs);
-        if (started)
-            args.Handled = true;
-        else
-            Log.Error($"Failed to start DoAfter by {performer}");
+            Log.Error($"Failed to start DoAfter by {spider}");
+            return;
+        }
     }
 
-    private void OnWorldSpawnDoAfter(Entity<SpiderQueenComponent> entity, ref SpiderWorldSpawnDoAfterEvent args)
+    private void OnNearbySpawn(Entity<SpiderQueenComponent> entity, ref SpiderNearbySpawnEvent args)
+    {
+        var spider = entity.Owner;
+        if (args.Handled ||
+            spider != args.Performer ||
+            !TryComp<TransformComponent>(entity.Owner, out var transform) ||
+            (args.Cost > FixedPoint2.Zero && !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp)))
+            return;
+
+        if (!TryStartSpiderSpawnDoAfter(spider, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.Cost))
+        {
+            Log.Error($"Failed to start DoAfter by {spider}");
+            return;
+        }
+    }
+
+    private void OnSpawnDoAfter(Entity<SpiderQueenComponent> entity, ref SpiderSpawnDoAfterEvent args)
     {
         if (args.Cancelled)
             return;
@@ -196,5 +187,43 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         _hunger.ModifyHunger(uid, hungerDecreaseValue, hunger);
         component.CurrentBloodPoints += value;
         Dirty(uid, component);
+    }
+
+    private bool TryStartSpiderSpawnDoAfter(EntityUid spider,
+        TimeSpan doAfter,
+        EntityCoordinates coordinates,
+        List<EntitySpawnEntry> prototypes,
+        Vector2 offset,
+        FixedPoint2 cost)
+    {
+        var netCoordinates = GetNetCoordinates(coordinates);
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            spider,
+            doAfter,
+            new SpiderSpawnDoAfterEvent()
+            {
+                TargetCoordinates = netCoordinates,
+                Prototypes = prototypes,
+                Offset = offset,
+                Cost = cost,
+            },
+            spider
+        )
+        {
+            Broadcast = false,
+            BreakOnDamage = false,
+            BreakOnMove = true,
+            NeedHand = false,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+
+        var started = _doAfter.TryStartDoAfter(doAfterArgs);
+        if (started)
+            return true;
+        else
+            return false;
     }
 }

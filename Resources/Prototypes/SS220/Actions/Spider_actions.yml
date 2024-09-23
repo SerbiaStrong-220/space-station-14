@@ -3,14 +3,13 @@
   id: BaseActionSpawnSpiderEgg
   abstract: true
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     useDelay: 2
-    range: 2
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: guard_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggDrone
         amount: 1
@@ -45,8 +44,8 @@
   description: He is also a drone and can build crystals and walls.
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
-    event: !type:SpiderWorldSpawnEvent
+  - type: InstantAction
+    event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggDrone
         amount: 1
@@ -60,11 +59,11 @@
   name: hunter spider egg
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: hunter_spawn
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggHunter
         amount: 1
@@ -78,11 +77,11 @@
   name: ghost spider egg
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: nurse_spawn
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggGhost
         amount: 1
@@ -96,11 +95,11 @@
   name: shooter  spider egg
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: viper_spawn
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggShooter
         amount: 1
@@ -115,18 +114,18 @@
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     useDelay: 40
     range: 2
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: little_spider_spawn
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: MobSpiderLittle
         amount: 3
-      offset: 0, 1
+      offset: 0, 0.5
       cost: 20
 
 #Cryctal
@@ -163,7 +162,7 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: crystal_spawn
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: ShardCrystalBlueXeno
         amount: 1
@@ -213,7 +212,7 @@
   components:
   - type: WorldTargetAction
     useDelay: 6
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: WallWebDurableSpawn
         amount: 1
@@ -260,7 +259,7 @@
   components:
   - type: WorldTargetAction
     useDelay: 2
-    event: !type:SpiderWorldSpawnEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebDurable
         amount: 1
@@ -291,8 +290,8 @@
 #Cocooning
 - type: entity
   id: ActionSpiderCoconning
-  name: окукливание
-  description: Покрывает цель паутиной
+  name: weave a cocoon
+  description: Wraps the victim in a web! After fully clothed in silk, you can drink blood from it.
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction

@@ -35,6 +35,12 @@ public sealed partial class SpiderQueenComponent : Component
     [DataField("convertCoefficient")]
     public float HungerConvertCoefficient = 2f;
 
+    /// <summary>
+    /// How much hunger is given for each unit of extracted blood points
+    /// </summary>
+    [DataField]
+    public float HungerExtractCoefficient = 0.2f;
+
     [ViewVariables]
     public TimeSpan NextSecond = TimeSpan.Zero;
 

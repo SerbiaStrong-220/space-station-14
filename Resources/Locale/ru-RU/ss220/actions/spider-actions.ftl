@@ -47,3 +47,6 @@ ent-ActionSpawnSingleSpiderWebDurableBloodPoints  = { ent-ActionSpawnSingleSpide
 
 ent-ActionSpawnSingleSpiderWebClown = Пустить клоунскую паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }
+
+ent-ActionSpiderCoconning = Сплести кокон
+    .desc = Заматывает жертву в паутину! После полного облачения в шёлк из неё можно пить кровь.

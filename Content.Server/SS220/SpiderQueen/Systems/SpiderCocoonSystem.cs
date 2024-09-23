@@ -7,9 +7,11 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.Verbs;
+using FastAccessors;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -24,6 +26,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
     [Dependency] private readonly SpiderQueenSystem _spiderQueen = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly HungerSystem _hunger = default!;
 
     public override void Initialize()
     {
@@ -32,7 +35,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         SubscribeLocalEvent<SpiderCocoonComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderCocoonComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderCocoonComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
-        SubscribeLocalEvent<SpiderCocoonComponent, CocoonExtractBloodPintsEvent>(OnExtractMana);
+        SubscribeLocalEvent<SpiderCocoonComponent, CocoonExtractBloodPointsEvent>(OnExtractBloodPoints);
     }
 
     public override void Update(float frameTime)
@@ -92,7 +95,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
                 var doAfterEventArgs = new DoAfterArgs(EntityManager,
                     args.User,
                     spiderQueen.CocoonExtractTime,
-                    new CocoonExtractBloodPintsEvent(),
+                    new CocoonExtractBloodPointsEvent(),
                     uid,
                     uid)
                 {
@@ -112,15 +115,18 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         args.Verbs.Add(extractVerb);
     }
 
-    private void OnExtractMana(Entity<SpiderCocoonComponent> entity, ref CocoonExtractBloodPintsEvent args)
+    private void OnExtractBloodPoints(Entity<SpiderCocoonComponent> entity, ref CocoonExtractBloodPointsEvent args)
     {
         if (args.Cancelled ||
             !TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
             return;
 
         var amountToMax = spiderQueen.MaxBloodPoints - spiderQueen.CurrentBloodPoints;
-        spiderQueen.CurrentBloodPoints += MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
-        entity.Comp.BloodPointsAmount -= MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
+        var extractedValue = MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
+        entity.Comp.BloodPointsAmount -= extractedValue;
+        spiderQueen.CurrentBloodPoints += extractedValue;
+
+        _hunger.ModifyHunger(args.User, extractedValue * spiderQueen.HungerExtractCoefficient);
 
         Dirty(args.User, spiderQueen);
         Dirty(entity.Owner, entity.Comp);
@@ -151,22 +157,18 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             component.DamagePerSecond is not { } damagePerSecond)
             return;
 
-        var canDamage = true;
+        var damage = damagePerSecond;
         foreach (var damageType in component.DamageCap)
         {
             var (type, value) = damageType;
             if (damageable.Damage.DamageDict.TryGetValue(type, out var total) &&
                 total >= value)
             {
-                canDamage = false;
-                break;
+                damage.DamageDict.Remove(type);
             }
         }
 
-        if (!canDamage)
-            return;
-
-        _damageable.TryChangeDamage(target, damagePerSecond);
+        _damageable.TryChangeDamage(target, damage);
         Dirty(uid, component);
     }
 }
