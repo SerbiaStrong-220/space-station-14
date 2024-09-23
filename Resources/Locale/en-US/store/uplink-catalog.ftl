@@ -444,7 +444,3 @@ uplink-backpack-syndicate-desc = A lightweight explosion-proof backpack for hold
 
 uplink-combat-bakery-name = Combat Bakery Kit
 uplink-combat-bakery-desc = A kit of clandestine baked weapons. Contains a baguette sword, a pair of throwing croissants, and a syndicate microwave board for making more. Once the job is done, eat the evidence.
-
-#SS220 syndie-visor-buff
-uplink-clothing-eyes-hud-syndicate-agent-name = Syndicate agent Visor
-uplink-clothing-eyes-hud-syndicate-agent-desc = The syndicate's advanced head-up display, designed for better detection of humanoids and their subsequent elimination. Able to determine the health condition of humanoids and cyborgs.
