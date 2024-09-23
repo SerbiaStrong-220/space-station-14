@@ -14,7 +14,7 @@
   - !type:GroupLoadoutEffect
     proto: BigShlopaSponsorTier
   equipment:
-    mask: ClothingSponsorMaskMoryak
+    mask: ClothingMaskMoryak
 
 # Jumpsuit
 - type: loadout

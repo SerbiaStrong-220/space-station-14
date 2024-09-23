@@ -15,10 +15,18 @@
       "directions": 4
     },
     {
+      "name": "equipped-OUTERCLOTHING-vox",
+      "directions": 4
+    },
+    {
       "name": "icon-unshaded"
     },
     {
       "name": "equipped-OUTERCLOTHING-unshaded",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-unshaded-vox",
       "directions": 4
     },
     {
