@@ -21,7 +21,6 @@ namespace Content.Client.SS220.SuperMatter.Ui;
 public sealed partial class SuperMatterObserverMenu : FancyWindow
 {
     [Dependency] private readonly ILocalizationManager _localization = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;
@@ -149,84 +148,22 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     {
         foreach (var gas in Enum.GetValues<Gas>())
         {
-            var gasBar = MakeGasRatioProgressBar(gas);
+            var gasBar = new SuperMatterObserverGasBar();
+            gasBar.Initialize(gas);
             GasContainer.AddChild(gasBar);
         }
     }
     private void UpdateGasRatioBars(Dictionary<Gas, float> gasRatios)
     {
-        foreach (var gasBar in GasContainer.Children)
+        foreach (var child in GasContainer.Children)
         {
-            if (gasBar.GetType() != typeof(GasBar))
+            if (child is not SuperMatterObserverGasBar gasBar)
                 return;
 
-            ((ProgressBar)gasBar).SetAsRatio(gasRatios[((GasBar)gasBar).GasId]);
-            foreach (var child in gasBar.Children)
-            {
-                if (child.GetType() == typeof(Label))
-                    ((Label)child).Text = _gasLocalizedNames[((GasBar)gasBar).GasId] + " " + MathF.Round(gasRatios[((GasBar)gasBar).GasId] * 100f, 2) + " %";
-            }
+            gasBar.UpdateBar(gasRatios[gasBar.GasId]);
         }
     }
-    private ProgressBar MakeGasRatioProgressBar(Gas gas)
-    {
-        _prototypeManager.TryIndex<GasPrototype>(((int)gas).ToString(), out var gasProto);
 
-        if (TryGetStyleProperty<StyleBoxFlat>(ProgressBar.StylePropertyBackground, out var retBackground))
-            retBackground.BackgroundColor = Color.FromHex("#2B2A26");
-        else
-            retBackground = new StyleBoxFlat(Color.FromHex("#2B2A26"));
-
-        if (TryGetStyleProperty<StyleBoxFlat>(ProgressBar.StylePropertyForeground, out var retForeground))
-            retForeground.BackgroundColor = gasProto != null ? Color.FromHex("#" + gasProto.Color) : Color.ForestGreen;
-        else
-            retForeground = new StyleBoxFlat(gasProto != null ? Color.FromHex("#" + gasProto.Color) : Color.ForestGreen);
-
-        retForeground.BorderThickness = new Thickness(2f, 2f, 0f, 4f);
-        retBackground.BorderThickness = new Thickness(2f, 2f, 0f, 4f);
-        // SM_TODO hide in its own xaml.cs xaml
-        var gasBar = new GasBar
-        {
-            GasId = gas,
-            HorizontalExpand = true,
-            VerticalExpand = true,
-            MinValue = 0f,
-            MaxValue = 1f,
-            MinHeight = 20f,
-            Page = 0f,
-            Value = 0.5f,
-            BackgroundStyleBoxOverride = retBackground,
-            ForegroundStyleBoxOverride = retForeground,
-            MouseFilter = MouseFilterMode.Stop,
-            TrackingTooltip = true,
-            TooltipDelay = 0,
-            ToolTip = GetGasTooltip(gas),
-        };
-        var gasLabel = new Label
-        {
-            Margin = new Thickness(2f, 2f, 0f, 14f),
-            Text = _localization.GetString(gasProto == null ? gas.ToString() : gasProto.Name),
-        };
-        _gasLocalizedNames.Add(gas, _localization.GetString(gasProto == null ? gas.ToString() : gasProto.Name));
-        gasBar.AddChild(gasLabel);
-        return gasBar;
-    }
-    private string GetGasTooltip(Gas gas)
-    {
-        if (!_prototypeManager.TryIndex<GasPrototype>(((int)gas).ToString(), out var gasProto))
-            return "";
-
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine(_localization.GetString(gasProto.Name));
-        if (SuperMatterGasInteraction.DecayInfluenceGases.TryGetValue(gas, out var decayInfluence))
-            stringBuilder.AppendLine(_localization.GetString("smObserver-decay", ("flat", decayInfluence.flatInfluence.ToString("N0")), ("relative", decayInfluence.RelativeInfluence.ToString("N2"))));
-        if (SuperMatterGasInteraction.GasesToMatterConvertRatio.TryGetValue(gas, out var gassesToMatter))
-            stringBuilder.AppendLine(_localization.GetString("smObserver-gasToMatter", ("value", gassesToMatter.ToString("N0"))));
-        if (SuperMatterGasInteraction.EnergyEfficiencyChangerGases.TryGetValue(gas, out var energyInfluence))
-            stringBuilder.AppendLine(_localization.GetString("smObserver-energyInfluence", ("optimalRatio", (energyInfluence.OptimalRatio * 100).ToString("N0")), ("relative", ((energyInfluence.RelativeInfluence + 1) * 100).ToString("N0"))));
-
-        return stringBuilder.ToString();
-    }
     private sealed class ServerButton : Button
     {
         public SuperMatterObserverComponent? ObserverComponent;
@@ -234,10 +171,6 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
     private sealed class CrystalButton : Button
     {
         public int CrystalKey;
-    }
-    private sealed class GasBar : ProgressBar
-    {
-        public Gas GasId;
     }
 }
 

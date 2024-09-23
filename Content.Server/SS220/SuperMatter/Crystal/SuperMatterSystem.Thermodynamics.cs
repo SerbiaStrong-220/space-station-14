@@ -58,10 +58,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
         {
             // TODO loc it
             Log.Error($"Internal Energy of SuperMatter {crystal} became negative, forced to truthish value.");
+            // TODO remove before release
             SendAdminChatAlert(crystal, "Physics law breaking! If it possible ask how they do it and convey it to developer");
             smComp.Matter += 20 * MatterNondimensionalization;
             smComp.InternalEnergy = EvaluateTruthishInternalEnergy(crystal);
-            // SM_TODO popup it and add integrity dmg
+            _popupSystem.PopupEntity(Loc.GetString("supermatter-crystal-restructure"), crystalUid);
+            // SM_TODO: add variable like min Integrity or add it to comp
+            smComp.Integrity = MathF.Max(smComp.Integrity * 0.9f, 0.1f) ;
         }
         smComp.Matter = MathF.Max(smComp.Matter + deltaMatter * frameTime, 4 * MatterNondimensionalization); // actually should go boom at this low, but...
         smComp.Temperature = Math.Clamp(smComp.Temperature + smDeltaT * frameTime, Atmospherics.TCMB, Atmospherics.Tmax); // weird but okay

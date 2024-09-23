@@ -88,8 +88,7 @@ public sealed class HallucinationSystem : EntitySystem
     }
 
     /// <summary>
-    /// False if target dont have HallucinationComponent or hallucination doesnt exist? otherwise true.
-    /// SM_TODO also delete TimeSpan
+    /// False if target dont have HallucinationComponent or hallucination doesnt exists otherwise true.
     /// </summary>
     public bool Remove(Entity<HallucinationComponent> target, int index)
     {
@@ -208,8 +207,6 @@ public sealed class HallucinationSystem : EntitySystem
         if (!TryGetComponentType(protection.ComponentName, out var protectionComponentType))
             return false;
 
-        // SM_TODO:
-        // think of making out concrete method for it
         InventorySystem.InventorySlotEnumerator? inventorySlot = null;
         if (protection.ItemSlot.HasValue)
             inventorySlot = _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value);
