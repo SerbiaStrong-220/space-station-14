@@ -37,4 +37,4 @@
   - !type:GroupLoadoutEffect
     proto: BigShlopaSponsorTier
   equipment:
-    shoes: ClothingSponsorBootsMoryak
+    shoes: ClothingShoesMoryak

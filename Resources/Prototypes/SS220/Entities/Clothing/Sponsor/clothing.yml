@@ -602,7 +602,7 @@
 
 - type: entity
   parent: ClothingSponsorShoesBase
-  id: ClothingSponsorBootsMoryak
+  id: ClothingShoesMoryak
   name: башмаки морячка
   description: Тесные матроские башмаки, но хотя бы водонепроницаемые.
   components:
