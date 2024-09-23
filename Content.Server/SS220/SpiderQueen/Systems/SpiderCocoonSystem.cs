@@ -157,18 +157,19 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             component.DamagePerSecond is not { } damagePerSecond)
             return;
 
-        var damage = damagePerSecond;
-        foreach (var damageType in component.DamageCap)
+        DamageSpecifier causedDamage = new();
+        foreach (var damage in damagePerSecond.DamageDict)
         {
-            var (type, value) = damageType;
-            if (damageable.Damage.DamageDict.TryGetValue(type, out var total) &&
-                total >= value)
-            {
-                damage.DamageDict.Remove(type);
-            }
+            var (type, value) = damage;
+            if (component.DamageCap.TryGetValue(type, out var cap) &&
+                damageable.Damage.DamageDict.TryGetValue(type, out var total) &&
+                total >= cap)
+                continue;
+
+            causedDamage.DamageDict.Add(type, value);
         }
 
-        _damageable.TryChangeDamage(target, damage);
+        _damageable.TryChangeDamage(target, causedDamage, true);
         Dirty(uid, component);
     }
 }
