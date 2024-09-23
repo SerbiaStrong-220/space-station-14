@@ -46,6 +46,8 @@
     channels:
     - Binary
   - type: ActiveRadio
+    channels:
+    - Binary
   - type: DoAfter
   - type: Actions
   - type: TypingIndicator
