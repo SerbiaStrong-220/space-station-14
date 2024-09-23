@@ -43,7 +43,7 @@
   equipment:
     eyes: ClothingEyesGlassesJensen
 
-# Sponsor / Cyber
+# SS220 Second flopa iteration / Cyber
 - type: loadout
   id: GlassesCyber
   effects:
