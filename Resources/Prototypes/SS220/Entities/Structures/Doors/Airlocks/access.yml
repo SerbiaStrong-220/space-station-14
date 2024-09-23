@@ -37,7 +37,7 @@
   suffix: Magistrate, Locked
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Glass/magistrate.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standart/magistrate.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsMagistrate ]

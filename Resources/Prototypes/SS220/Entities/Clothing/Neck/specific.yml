@@ -26,3 +26,14 @@
       sprite: SS220/Clothing/Neck/druid_amulet.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/druid_amulet.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckRuffClownPennywise
+  name: white ruff
+  description: An item of clothing of the high society.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi

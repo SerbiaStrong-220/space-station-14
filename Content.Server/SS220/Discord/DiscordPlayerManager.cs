@@ -7,10 +7,12 @@ using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Players;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Discord;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -20,8 +22,10 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Discord;
 
-public sealed class DiscordPlayerManager : IPostInjectInit
+public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
 {
+    internal SponsorUsers? CachedSponsorUsers => _cachedSponsorUsers;
+
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IServerNetManager _netMgr = default!;
@@ -29,6 +33,8 @@ public sealed class DiscordPlayerManager : IPostInjectInit
 
 
     private ISawmill _sawmill = default!;
+    private Timer? _statusRefreshTimer; // We should keep reference or else evil GC will kill our timer
+    private volatile SponsorUsers? _cachedSponsorUsers;
     private readonly HttpClient _httpClient = new();
 
     private string _apiUrl = string.Empty;
@@ -45,11 +51,26 @@ public sealed class DiscordPlayerManager : IPostInjectInit
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", v);
         },
         true);
+
+        _statusRefreshTimer = new Timer(async _ =>
+            {
+                _cachedSponsorUsers = await GetSponsorUsers();
+            },
+            state: null,
+            dueTime: TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.DiscordSponsorsCacheLoadDelaySeconds)),
+            period: TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.DiscordSponsorsCacheRefreshIntervalSeconds))
+        );
     }
 
     void IPostInjectInit.PostInject()
     {
         _playerManager.PlayerStatusChanged += PlayerManager_PlayerStatusChanged;
+    }
+
+    public void Dispose()
+    {
+        _statusRefreshTimer?.Dispose();
+        _httpClient.Dispose();
     }
 
     private async void PlayerManager_PlayerStatusChanged(object? sender, SessionStatusEventArgs e)

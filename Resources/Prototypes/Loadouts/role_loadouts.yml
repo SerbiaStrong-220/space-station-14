@@ -168,6 +168,8 @@
   groups:
   - GroupTankHarness
   - ClownHead
+  - ClownMask #SS220 clown pennywise loadout
+  - ClownNeck #SS220 clown pennywise loadout
   - ClownJumpsuit
   - ClownBackpack
   - ClownOuterClothing
@@ -612,6 +614,13 @@
   - SurvivalSyndicate
   - GroupSpeciesBreathTool
   - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalNukie
+  groups:
+  - SurvivalSyndicate
+  - GroupSpeciesBreathTool
+  - GroupPocketTankDouble
 
 - type: roleLoadout
   id: RoleSurvivalEVA

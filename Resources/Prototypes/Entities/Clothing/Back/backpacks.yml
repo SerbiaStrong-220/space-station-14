@@ -274,7 +274,7 @@
 
 #SS220 RETURNED FOR CENTCOMM MAP
 - type: entity
-  noSpawn: false
+  
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadFilled
   name: death squad backpack

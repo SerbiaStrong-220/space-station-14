@@ -45,7 +45,8 @@ public sealed class RoundEndSummaryUIController : UIController,
 
     public void OnSystemLoaded(ClientGameTicker system)
     {
-        _input.SetInputCommand(ContentKeyFunctions.ToggleRoundEndSummaryWindow,
-            InputCmdHandler.FromDelegate(ToggleScoreboardWindow));
+        // SS220 Round End Titles (this should not override our re-implementation's bind)
+        //_input.SetInputCommand(ContentKeyFunctions.ToggleRoundEndSummaryWindow,
+        //    InputCmdHandler.FromDelegate(ToggleScoreboardWindow));
     }
 }

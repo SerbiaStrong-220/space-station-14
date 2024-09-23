@@ -3,7 +3,7 @@
   parent: ShardCrystalBlue
   name: shard of blue crystal
   description: A small piece of crystal.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:  
   - type: Destructible
     thresholds:
