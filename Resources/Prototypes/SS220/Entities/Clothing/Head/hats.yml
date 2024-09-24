@@ -591,3 +591,19 @@
     sprite: SS220/Clothing/Head/Hats/devils_horns-alt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/devils_horns-alt.rsi
+
+# WMT Ebent
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadKiver
+  name: kiver
+  description: The headdress of a soldier of the Kingdom's great army.
+  suffix: HOCebent
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/kiver.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/kiver.rsi
+    - type: Tag
+      tags:
+      - ClothMade

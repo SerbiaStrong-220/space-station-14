@@ -32,3 +32,5 @@ ent-ClothingHeadBeretSalvageSpecialist = берет утилизатора
     .desc = Берет утилизатора, потому что, ну, а почему нет?
 ent-ClothingHeadHoPSilverHeadBand = серебряный ободок и серёжки
     .desc = Ярки столько же, сколько и ваше будущее.
+ent-ClothingHeadKiver = кивер
+    .desc = Головной убор солдата великой армии Королевства.
