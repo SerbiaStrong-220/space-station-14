@@ -441,12 +441,3 @@
     grid:
     - 5,5,11,8
 
-- type: entity
-  parent: ClothingBackpack
-  id: ClothingBackpackArmy
-  name: army backpack
-  description: Solid satchel with sleeping bag. Helps you survive long marches.
-  suffix: HOCebent
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/armybackpack.rsi
