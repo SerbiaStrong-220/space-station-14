@@ -4,7 +4,7 @@
   name: backpack
   description: You wear this on your back and put items into it.
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_bag.ogg
       params:
@@ -274,7 +274,7 @@
 
 #SS220 RETURNED FOR CENTCOMM MAP
 - type: entity
-
+  
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadFilled
   name: death squad backpack
@@ -440,4 +440,3 @@
   - type: Storage
     grid:
     - 5,5,11,8
-
