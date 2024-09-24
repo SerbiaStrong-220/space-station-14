@@ -469,3 +469,14 @@
     sprite: SS220/Clothing/Uniforms/moryak.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/moryak.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitVaas
+  name: vaas suit
+  description: description
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi

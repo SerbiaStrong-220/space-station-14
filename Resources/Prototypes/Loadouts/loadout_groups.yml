@@ -1146,6 +1146,7 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - TrooperUniform
+  - JumpsuitSecVaas #ss220 vaas loadout
 
 - type: loadoutGroup
   id: SecurityBackpack

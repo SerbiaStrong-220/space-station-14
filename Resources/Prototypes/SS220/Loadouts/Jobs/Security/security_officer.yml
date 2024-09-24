@@ -17,6 +17,15 @@
       role: JobSecurityOfficer
       time: 360000 # 100 hrs
 
+- type: loadoutEffectGroup
+  id: SecuritySecVaas
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 180000 #50hrs
+
 # Jumpsuit
 - type: loadout
   id: SecurityJumpsuitTurtleneck
@@ -38,6 +47,14 @@
   id: JumpsuitSecBlue
   equipment:
     jumpsuit: ClothingUniformJumpsuitSecBlue
+
+- type: loadout
+  id: JumpsuitSecVaas
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecuritySecVaas
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVaas
 
 - type: loadout
   id: JumpsuitTacSec
