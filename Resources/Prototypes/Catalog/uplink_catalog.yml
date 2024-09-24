@@ -1734,7 +1734,7 @@
   description: uplink-clothing-eyes-hud-syndicate-agent-desc
   productEntity: ClothingEyesHudSyndicateAgent
   cost:
-    Telecrystal: 1 #price is lower because that is basically enemy equipment and in-game perma
+    Telecrystal: 2
   categories:
     - UplinkWearables
 #SS220 Syndie visor buff end
