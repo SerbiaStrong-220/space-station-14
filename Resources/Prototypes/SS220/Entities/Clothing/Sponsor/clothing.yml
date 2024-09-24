@@ -345,7 +345,7 @@
 
 - type: entity
   parent: ClothingSponsorHeadBase
-  id: ClothingHeadHatDevilHorns #TODO: Дать уникальную эмоцию
+  id: ClothingHeadHatDevilHorns
   name: devil's horns
   description: Now you look like hell.
   suffix: Шлёпа
@@ -408,7 +408,7 @@
     - state: icon
       map: [ "unfoldedLayer" ]
       visible: false
-    - state: icon-hell
+    - state: hell-icon
       map: ["foldedLayer"]
       visible: true
 
@@ -455,7 +455,7 @@
     - state: icon
       map: [ "unfoldedLayer" ]
       visible: false
-    - state: icon-hell
+    - state: hell-icon
       map: ["foldedLayer"]
       visible: true
 

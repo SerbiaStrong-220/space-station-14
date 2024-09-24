@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-    "copyright": "Made by dinazewwr (Discord) for SS220",
+    "copyright": "Made by vimenant2 (Discord) & Estkemran (Github) for SS220",
     "size": {
       "x": 32,
       "y": 32
@@ -23,18 +23,18 @@
         "directions": 4
       },
       {
-        "name": "icon-hell"
+        "name": "hell-icon"
       },
       {
-        "name": "equipped-HELMET-hell",
+        "name": "hell-equipped-HELMET",
         "directions": 4
       },
       {
-        "name": "inhand-left-hell",
+        "name": "hell-inhand-left",
         "directions": 4
       },
       {
-        "name": "inhand-right-hell",
+        "name": "hell-inhand-right",
         "directions": 4
       }
     ]

@@ -39,7 +39,10 @@
   - type: StorageFill
     contents:
     - id: SponsorCig
-      amount: 10
+      amount: 12
+  - type: Storage
+    grid:
+    - 0,0,5,1
   - type: Sprite
     sprite: SS220/Objects/Sponsor/cigs/pack.rsi
     layers:
@@ -71,6 +74,30 @@
       map: ["cig6"]
       sprite: SS220/Objects/Sponsor/cigs/pack.rsi
       visible: false
+    - state: cig7
+      map: ["cig7"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
   - type: ItemCounter
     count:
       tags: [Cigarette]
@@ -82,6 +109,12 @@
     - cig4
     - cig5
     - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
   - type: Item
     sprite: SS220/Objects/Sponsor/cigs/pack.rsi
 
@@ -108,7 +141,7 @@
     contents:
       - id: SponsorCigPack
         amount: 5
-      - id: Lighter
+      - id: ExpensiveLighterSponsor
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
@@ -401,9 +434,9 @@
 
 - type: entity
   parent: BasePlushie
-  id: SmokingFish #TODO: Обязательно обсудить с Адучем
+  id: SmokingFish
   name: курящая рыба
-  description: Игрушка, олицетворяющая всю бренность этого мира.
+  description: Рыба тоже курит!
   suffix: Шлёпа
   components:
     - type: Sprite
@@ -411,13 +444,27 @@
       state: icon
     - type: MeleeWeapon
       wideAnimationRotation: -135
+      soundHit:
+        collection: SponsorSmokingIsHarmful
     - type: Item
       size: Small
       sprite: SS220/Objects/Sponsor/toy/smoking_fish.rsi
+    - type: EmitSoundOnUse
+      sound:
+        collection: SponsorSmokingFish
+    - type: EmitSoundOnActivate
+      sound:
+        collection: SponsorSmokingFish
+    - type: EmitSoundOnCollide
+      sound:
+        collection: SponsorSmokingFish
+    - type: EmitSoundOnTrigger
+      sound:
+        collection: SponsorSmokingFish
 
 - type: entity
   parent: BasePlushie
-  id: PlushFloppa #TODO: Обязательно обсудить с Адучем
+  id: PlushFloppa
   name: плюшевый шлёпа
   description: Очаровательная мягкая игрушка, напоминающая большого шлёпу
   suffix: Шлёпа
@@ -430,6 +477,18 @@
     - type: Item
       size: Small
       sprite: SS220/Objects/Sponsor/toy/plushshlepa.rsi
+    - type: EmitSoundOnUse
+      sound:
+        collection: SponsorFloppaHissing
+    - type: EmitSoundOnActivate
+      sound:
+        collection: SponsorFloppaHissing
+    - type: EmitSoundOnCollide
+      sound:
+        collection: SponsorFloppaHissing
+    - type: EmitSoundOnTrigger
+      sound:
+        collection: SponsorFloppaHissing
 
 # Наборы
 - type: entity
