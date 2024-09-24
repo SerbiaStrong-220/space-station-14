@@ -380,7 +380,7 @@
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
-    - state: icon-hell
+    - state: hell-icon
       map: ["foldedLayer"]
       visible: false
   - type: Foldable
@@ -425,7 +425,7 @@
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
-    - state: icon-hell
+    - state: hell-icon
       map: ["foldedLayer"]
       visible: false
   - type: Clothing

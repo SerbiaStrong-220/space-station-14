@@ -12,7 +12,7 @@
   id: MapperNeck
   effects:
   - !type:GroupLoadoutEffect
-    proto: DeveloperSponsorTier #Нет тира для мапперов
+    proto: MapperSponsorTier
   equipment:
     neck: ClothingSponsorNeckMapper
 

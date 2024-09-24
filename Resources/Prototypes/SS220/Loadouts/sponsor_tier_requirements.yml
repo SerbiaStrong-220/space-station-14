@@ -45,6 +45,13 @@
     isExact: true
 
 - type: loadoutEffectGroup
+  id: MapperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Mapper
+    isExact: true
+
+- type: loadoutEffectGroup
   id: HeadLorovedSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect

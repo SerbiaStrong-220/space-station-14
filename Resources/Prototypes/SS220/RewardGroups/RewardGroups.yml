@@ -88,6 +88,13 @@
   isHiddenOnInsufficient: true
 
 - type: ShlepaRewardGroup
+  id: Mapper
+  name: Маппер
+  requiredRole: Mapper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
   id: Developer
   name: Разработчик
   requiredRole: Developer
