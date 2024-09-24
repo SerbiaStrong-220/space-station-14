@@ -95,7 +95,7 @@
     id: RDIDCard
     state: pda-rd-alt
   - type: PdaBorderColor
-    borderColor: "#565853"
+    borderColor: "#98afb8"
     accentHColor: "#542a6c"
     sprite: Objects/Devices/pda.rsi
     layers:
