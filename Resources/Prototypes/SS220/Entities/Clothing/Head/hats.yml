@@ -592,7 +592,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/devils_horns-alt.rsi
 
-# WMT Ebent
+# WMT Ebent begin
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadKiver
@@ -607,3 +607,4 @@
     - type: Tag
       tags:
       - ClothMade
+# WMT Ebent end
