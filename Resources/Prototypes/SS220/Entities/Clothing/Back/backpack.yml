@@ -9,6 +9,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/whitecapbackpack.rsi
 
+# WMT Ebent begin
 - type: entity
   parent: ClothingBackpack
   id: ClothingBackpackArmy
@@ -18,3 +19,4 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/armybackpack.rsi
+# WMT Ebent end
