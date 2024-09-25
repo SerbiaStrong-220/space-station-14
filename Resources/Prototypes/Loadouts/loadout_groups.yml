@@ -1023,6 +1023,16 @@
   loadouts:
   - ResearchDirectorJumpsuit
   - ResearchDirectorJumpskirt
+#SS220-RD-New-Loadout-begin
+  - ClothingUniformJumpsuitRDAlt
+
+- type: loadoutGroup
+  id: ResearchDirectorPDA
+  name: loadout-group-research-director-pda
+  loadouts:
+  - RnDPDA
+  - AltRnDDirPDA
+#SS220-RD-New-Loadout-end
 
 - type: loadoutGroup
   id: ResearchDirectorOuterClothing

@@ -627,9 +627,11 @@
         Stamina: 0.1
   - type: Item
     size: Huge
-  - type: ClothingSpeedModifier
-    walkModifier: 0.9 #ss-220 armReb
-    sprintModifier: 0.9 #ss-220 armReb
+  #ss220 elite-suitReb begin
+  #- type: ClothingSpeedModifier
+  #  walkModifier: 0.9 #ss-220 armReb
+  #  sprintModifier: 0.9 #ss-220 armReb
+  #ss220 elite-suitReb end
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieElite

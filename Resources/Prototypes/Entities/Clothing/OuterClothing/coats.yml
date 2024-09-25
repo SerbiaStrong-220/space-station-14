@@ -359,6 +359,16 @@
     sprite: Clothing/OuterClothing/Coats/warden.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/warden.rsi
+# SS220 new hood start
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWardenArmored
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+# SS220 new hood end
 
 - type: entity
   parent: ClothingOuterStorageBase

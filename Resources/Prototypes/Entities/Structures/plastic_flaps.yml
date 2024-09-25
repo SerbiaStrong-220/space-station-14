@@ -23,7 +23,10 @@
         mask:
         - Impassable
         layer:
-        - MidImpassable
+        # SS220 Plastic Flaps Collision Fix begin
+        #- MidImpassable
+        - HighImpassable
+        # SS220 Plastic Flaps Collision Fix end
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
@@ -70,7 +73,10 @@
         - Impassable
         layer:
         - Opaque
-        - MidImpassable
+        # SS220 Plastic Flaps Collision Fix begin
+        #- MidImpassable
+        - HighImpassable
+        # SS220 Plastic Flaps Collision Fix end
   - type: Occluder
   - type: Construction
     graph: PlasticFlapsGraph
