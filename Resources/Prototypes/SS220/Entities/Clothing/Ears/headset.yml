@@ -1,0 +1,33 @@
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltLaw
+  name: full-size headset of the Law Department
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetLaw
+  name: headset of the Law Department
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi

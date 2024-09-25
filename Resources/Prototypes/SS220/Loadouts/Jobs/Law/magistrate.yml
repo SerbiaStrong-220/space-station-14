@@ -1,0 +1,11 @@
+#Head
+- type: loadout
+  id: MagistratePwig
+  equipment:
+    head: ClothingHeadHatPwig
+
+# Outerclothing
+- type: loadout
+  id: MagistrateRobesJudge
+  equipment:
+    outerClothing: ClothingOuterRobesJudge

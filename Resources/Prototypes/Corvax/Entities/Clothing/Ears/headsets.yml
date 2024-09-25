@@ -8,5 +8,6 @@
       containers:
         key_slots:
         - EncryptionKeyIAA
+        - EncryptionKeyLaw #SS220-Law Department
     - type: Sprite
       sprite: Clothing/Ears/Headsets/servicesecurity.rsi

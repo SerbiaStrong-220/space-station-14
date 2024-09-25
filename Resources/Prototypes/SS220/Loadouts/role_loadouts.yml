@@ -1,6 +1,18 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-#! Внутренние дела (Начало)
+#! Юридический (Начало)
+
+  # Магистрат
+- type: roleLoadout
+  id: JobMagistrate
+  groups:
+  - MagistrateHead
+  - LawyerNeck
+  - MagistrateJumpsuit
+  - MagistrateOuterClothing
+  - IAABackpacks
+  - Trinkets
+  - Survival
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -22,7 +34,7 @@
   - SecurityBelt
   - CommonBackpack
   - Trinkets
-#! Внутренние дела (Конец)
+#! Юридический (Конец)
 
 #! Служба безопасности (Начало)
 

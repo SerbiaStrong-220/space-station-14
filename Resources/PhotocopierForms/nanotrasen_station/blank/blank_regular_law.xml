@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>blank_law</FormId>
+  <PrototypeId>PaperNtFormLaw</PrototypeId>
+  <EntityName>бумага</EntityName>
+  <PhotocopierTitle>Свободный бланк юридического отдела</PhotocopierTitle>
+  <Content></Content>
+</Form>

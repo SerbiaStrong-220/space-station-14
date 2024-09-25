@@ -59,7 +59,7 @@
   parent: BasePDA
   id: MagistratePDA
   name: magistrate PDA
-  description: ###
+  description: Concentration of justice. Don't drown!
   components:
   - type: Pda
     id: MagistrateIDCard

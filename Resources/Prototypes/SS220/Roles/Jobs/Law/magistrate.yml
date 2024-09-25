@@ -1,12 +1,15 @@
 - type: job
   id: Magistrate
-  name: job-name-magistrate #todo добавить при добавлении ДВД
-  description: job-description-magistrate #todo добавить при добавлении ДВД
+  name: job-name-magistrate
+  description: job-description-magistrate
   playTimeTracker: JobMagistrate
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 288000 # SS220-RoleTime 2
+      time: 432000 # Заглушка - 120 часов
+    - !type:RoleTimeRequirement
+      role: JobIAA
+      time: 43200 # Заглушка - 12 часов
     - !type:AgeRequirement
       requiredAge: 32
     - !type:SpeciesRequirement #SS220-jobbans begin
@@ -42,7 +45,7 @@
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesCommand
     id: MagistratePDA
-    ears: ClothingHeadsetIAA
+    ears: ClothingHeadsetAltLaw
   storage:
     back:
     - Flash
