@@ -571,7 +571,6 @@ entities:
           occludes: True
           ents:
           - 56
-          - 55
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
