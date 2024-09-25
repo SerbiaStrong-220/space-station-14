@@ -1,0 +1,26 @@
+# Новые прототипы пишите выше
+# Death Squad
+- type: entity
+  name: пульсовая винтовака
+  parent: WeaponPulseRifle
+  id: WeaponPulseRifle2
+  description: Энергетическая винтовка тяжелого типа, способна разрушать структуры.
+  suffix: Винтовка, Death Squad, Эскадрон Смерти
+  components:
+  - type: Gun
+    fireRate: 2.5
+  - type: HitscanBatteryAmmoProvider
+    proto: Pulse2
+    fireCost: 100
+  - type: Battery
+    maxCharge: 400
+    startingCharge: 400
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: Pulsekill
+      name: режия для убийства
+      fireCost: 1
+    - proto: PulseDESTROY
+      name: режим для УНИЧТОЖЕНИЯ
+      fireCost: 5
+      soundGunshot:  /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg

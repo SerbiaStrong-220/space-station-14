@@ -1,0 +1,29 @@
+- type: entity
+  parent: ChemicalMedipen
+  id: EmergencyMedipenDQ
+  name: божественный медипен
+  description: Экстренный медипен, который в кратчайшие сроки ставит на ноги даже при самых тяжелых травмах. Из-за дороговизны и трудности производства применяется элитными отрядами.
+  suffix: Shitspawn, Death Squad, Эскадрон Смерти
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 20
+        reagents:
+        - ReagentId: HolyMolyWater
+          Quantity: 20
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: holypen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 95
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi
+    netsync: false
+    layers:
+    - state: holypen
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Tag
+    tags: []

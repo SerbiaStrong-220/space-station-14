@@ -159,3 +159,22 @@
         damage:
           types:
             Poison: 0.5
+
+- type: reagent
+  id: HolyMolyWater
+  name: эссенция святой воды
+  group: Medicine
+  desc: Концентрированная святая вода, лечащая все болезни и даже смерть.
+  physicalDesc: невозможное
+  flavor: HolyMoly
+  color: "#e8e8e8"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -10
+            Burn: -10
+            Airloss: -10
+            Toxin: -10

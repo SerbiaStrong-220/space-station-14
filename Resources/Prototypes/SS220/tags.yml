@@ -111,6 +111,10 @@
 - type: Tag
   id: EscapePod
 
+# SP-91-RC
+- type: Tag
+  id: MagazineMagnumSubMachineGunSP-91-RC
+
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter

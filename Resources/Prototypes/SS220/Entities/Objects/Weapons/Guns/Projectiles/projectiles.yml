@@ -157,3 +157,35 @@
     radius: 3.5
     color: blue
     energy: 0.5
+
+- type: hitscan
+  id: Pulsekill
+  damage:
+    types:
+      Heat: 20
+      Structural: 200
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_blue
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_blue
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_blue
+
+- type: hitscan
+  id: PulseDESTROY
+  damage:
+    types:
+      Heat: 50
+      Structural: 600
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_blue
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_blue
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_blue

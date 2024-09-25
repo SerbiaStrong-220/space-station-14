@@ -4,8 +4,8 @@
   description: job-description-deathsquad
   playTimeTracker: JobDeathSquad
   setPreference: false
-  startingGear: DeathSquadGear
-  icon: "JobIconNanotrasen"
+  startingGear: DeathSquadOperativeGear #SS220-DeathSquad Update
+  icon: "JobIconDeathsquadOperative" #SS220-DeathSquad Update
   supervisors: job-supervisors-centcom
   canBeAntag: false
   accessGroups:

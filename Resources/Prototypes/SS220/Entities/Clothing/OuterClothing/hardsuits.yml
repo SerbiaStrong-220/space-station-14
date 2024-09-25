@@ -63,3 +63,103 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityPilot
+
+# Death Squad Commander Hardsuit
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitDeathsquadCommander
+  name: скафандр командира ЭС
+  description: Высокотехнологичный скафандр, предназначенный для командира отряда.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_hardsuit_commander.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_hardsuit_commander.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    coefficient: 0.001
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Radiation: 0.1
+        Stamina: 0.1
+        Caustic: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1.1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitDeathsquadCommander
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      volume: 20
+      moles:
+        - 10.451303391 # 22% oxygen
+        - 11.600075659 # 78% nitrogen
+        # 32.051379050 total = ~60 min
+      temperature: 293.15
+    tankLowPressure: 30.0
+  - type: PointLight
+    color: SkyBlue
+    radius: 1.5
+    energy: 0.3
+    netsync: false
+
+# Death Squad Alpha Hardsuit
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitDeathsquadAlpha
+  name: скафандр специалиста ЭС
+  description: Высокотехнологичный скафандр предназначенный для специалистов отряда.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_alpha_hardsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_alpha_hardsuit.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    coefficient: 0.001
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.1
+        Stamina: 0.1
+        Caustic: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1.4
+  - type: HeldSpeedModifier
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      volume: 20
+      moles:
+        - 10.451303391 # 22% oxygen
+        - 11.600075659 # 78% nitrogen
+        # 32.051379050 total = ~60 min
+      temperature: 293.15
+    tankLowPressure: 30.0
+  - type: PointLight
+    color: SkyBlue
+    radius: 1.5
+    energy: 0.3
+    netsync: false
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitDeathsquadAlpha
