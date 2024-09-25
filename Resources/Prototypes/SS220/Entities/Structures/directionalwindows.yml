@@ -53,7 +53,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -471,7 +471,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -881,7 +881,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -1308,7 +1308,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
