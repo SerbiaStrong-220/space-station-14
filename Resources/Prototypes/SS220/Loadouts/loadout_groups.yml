@@ -400,7 +400,6 @@
 - type: loadoutGroup
   id: BotanistBelt
   name: loadout-group-botanist-belt
-  minLimit: 0
   loadouts:
   - BotanistBeltDefoult
   - BotanistDruidBelt #SS220 druid loadout
@@ -408,7 +407,6 @@
 - type: loadoutGroup
   id: BotanistShoes
   name: loadout-group-botanist-shoes
-  minLimit: 0
   loadouts:
   - BotanistShoesBrown
   - BotanistDruidShoes #SS220 druid loadout
