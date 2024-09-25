@@ -97,7 +97,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
@@ -173,7 +173,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
@@ -516,7 +516,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
@@ -592,7 +592,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
@@ -925,7 +925,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
@@ -1001,7 +1001,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
@@ -1354,7 +1354,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
@@ -1430,7 +1430,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
