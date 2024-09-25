@@ -265,13 +265,14 @@ public sealed class RadioSystem : EntitySystem
 
     private void OnEncryptionChannelsChangeReceiver(Entity<IntrinsicRadioReceiverComponent> entity, ref EncryptionChannelsChangedEvent args)
     {
-        if (!TryComp<ActiveRadioComponent>(entity.Owner, out var activeRadio))
-            return;
-
-        HashSet<string> channels = entity.Comp.Channels;
+        HashSet<string> channels = new();
         channels.UnionWith(args.Component.Channels);
+        channels.UnionWith(entity.Comp.Channels);
 
-        activeRadio.Channels = new(channels);
+        if (channels.Count > 0)
+            EnsureComp<ActiveRadioComponent>(entity.Owner).Channels = channels;
+        else
+            RemComp<ActiveRadioComponent>(entity.Owner);
     }
     //SS220 PAI with encryption keys end
 }

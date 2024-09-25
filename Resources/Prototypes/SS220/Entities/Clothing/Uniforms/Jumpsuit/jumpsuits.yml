@@ -457,4 +457,15 @@
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/bard.rsi
+    sprite: SS220/Clothing/Uniforms/bard.rs
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitRDAlt
+  name: shirt of a desperate scientist
+  description: neat blue shirt with suspenders. It gives you faith in peace through nuclear deterrence.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/RD.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/RD.rsi

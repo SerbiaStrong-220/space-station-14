@@ -53,7 +53,11 @@ public enum CollisionGroup
     ConveyorMask = Impassable | MidImpassable | LowImpassable | DoorPassable,
 
     // Crates
-    CrateMask = Impassable | HighImpassable | LowImpassable,
+    // SS220 Plastic Flaps Collision Fix begin
+    //CrateMask = Impassable | HighImpassable | LowImpassable,
+    // Why: not deleted for compatibility with wizards changes 
+    CrateMask = MachineMask,
+    // SS220 Plastic Flaps Collision Fix end
 
     // Tables that SmallMobs can go under
     TableMask = Impassable | MidImpassable,
@@ -73,7 +77,11 @@ public enum CollisionGroup
 
     // Soap, spills
     SlipLayer = MidImpassable | LowImpassable,
-    ItemMask = Impassable | HighImpassable,
+    // SS220 Plastic Flaps Collision Fix begin
+    //ItemMask = Impassable | HighImpassable,
+    // Why: plastic flaps moved to HighImpassible layer, and items should be able to pass
+    ItemMask = Impassable,
+    // SS220 Plastic Flaps Collision Fix end
     ThrownItem = Impassable | HighImpassable | BulletImpassable,
     WallLayer = Opaque | Impassable | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
     GlassLayer = Impassable | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
