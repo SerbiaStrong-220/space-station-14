@@ -1,0 +1,19 @@
+- type: soundCollection
+  id: SponsorFloppaHissing
+  files:
+  - /Audio/SS220/Sponsor/floppa1.ogg
+  - /Audio/SS220/Sponsor/floppa2.ogg
+  - /Audio/SS220/Sponsor/floppa3.ogg
+
+- type: soundCollection
+  id: SponsorSmokingFish
+  files:
+  - /Audio/SS220/Sponsor/smokingfish1.ogg
+  - /Audio/SS220/Sponsor/smokingfish2.ogg
+
+- type: soundCollection
+  id: SponsorSmokingIsHarmful
+  files:
+  - /Audio/SS220/Sponsor/doctorlivesey1.ogg
+  - /Audio/SS220/Sponsor/doctorlivesey2.ogg
+  - /Audio/SS220/Sponsor/doctorlivesey3.ogg

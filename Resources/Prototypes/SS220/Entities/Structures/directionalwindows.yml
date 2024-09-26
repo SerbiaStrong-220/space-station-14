@@ -53,7 +53,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -97,7 +97,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
@@ -173,7 +173,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
@@ -471,7 +471,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -516,7 +516,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
@@ -592,7 +592,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
@@ -881,7 +881,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -925,7 +925,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
@@ -1001,7 +1001,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
@@ -1308,7 +1308,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -1354,7 +1354,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
@@ -1430,7 +1430,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
