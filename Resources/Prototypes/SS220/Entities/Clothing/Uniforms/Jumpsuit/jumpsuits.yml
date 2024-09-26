@@ -469,3 +469,14 @@
     sprite: SS220/Clothing/Uniforms/RD.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/RD.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitVaas
+  name: vaas suit
+  description: A red T-shirt with the badge of an security officer. Do you know the definition of Insanity?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi
