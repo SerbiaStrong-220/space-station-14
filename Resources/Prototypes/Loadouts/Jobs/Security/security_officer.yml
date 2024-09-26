@@ -23,6 +23,16 @@
         department: Security
         time: 360000 #100 hrs
 
+#Vaas T-Shirt
+- type: loadoutEffectGroup
+  id: SecuritySecVaas
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 180000 #50hrs
+
 # Head
 - type: loadout
   id: SecurityHelmet

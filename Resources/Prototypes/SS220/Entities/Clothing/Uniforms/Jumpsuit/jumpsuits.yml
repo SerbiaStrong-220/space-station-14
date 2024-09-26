@@ -125,6 +125,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitClownPennywise
+  name: uniform dance clown
+  description: A uniform for a comedy master who feeds on emotions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
+
   # Ботаник
 - type: entity
   parent: ClothingUniformBase
@@ -446,29 +457,18 @@
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/bard.rsi
+    sprite: SS220/Clothing/Uniforms/bard.rs
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitYsatyu
-  name: ysatyu suit
-  description: It smells like moonshine.
+  id: ClothingUniformJumpsuitRDAlt
+  name: shirt of a desperate scientist
+  description: neat blue shirt with suspenders. It gives you faith in peace through nuclear deterrence.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
+    sprite: SS220/Clothing/Uniforms/RD.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitMoryak
-  name: moryak suit
-  description: Sailor suit for mime.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
+    sprite: SS220/Clothing/Uniforms/RD.rsi
 
 - type: entity
   parent: ClothingUniformBase
