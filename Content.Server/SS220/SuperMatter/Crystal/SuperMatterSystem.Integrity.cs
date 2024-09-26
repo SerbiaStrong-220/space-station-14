@@ -43,21 +43,26 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private const float MaxRegenerationPerSecond = 1.2f;
     /// <summary> Based lie, negative damage = heal, no exception will thrown </summary>
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
-    private bool TryImplementIntegrityDamage(SuperMatterComponent smComp)
+    private bool TryImplementIntegrityDamage(Entity<SuperMatterComponent> entity)
     {
+        var (uid, smComp) = entity;
         var resultIntegrityDamage = Math.Clamp(smComp.IntegrityDamageAccumulator, -MaxRegenerationPerSecond,
                                             MaxDamagePerSecond * GetIntegrityDamageCoefficient(smComp.Integrity));
+
         if (smComp.Integrity - resultIntegrityDamage < 0f)
             return false;
+
         if (smComp.Integrity - resultIntegrityDamage < 100f)
-        {
             smComp.Integrity -= resultIntegrityDamage;
+        if (smComp.Integrity == 100f)
             return true;
-        }
-        if (smComp.Integrity != 100f)
-            smComp.Integrity = 100f;
+        // SM_TODO: check if it works correct /\ \/
+        smComp.Integrity = 100f;
+        var ev = new SuperMatterIntegrityChanged(smComp.Integrity);
+        RaiseLocalEvent(uid, ev);
         return true;
     }
+
     private const float TemperatureDamageFactorCoeff = 3f;
     private const float TemperatureDamageFactorSlowerOffset = 20f;
     private float TemperatureDamageFactorFunction(float normalizedTemperature)
@@ -69,6 +74,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         return TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
                 (normalizedTemperature - TemperatureDamageFactorSlowerOffset)) / maxFuncValue;
     }
+    /// <summary>
+    /// Just slowes down destroying the crystal to make effect of "last seconds"
+    /// </summary>
     private float GetIntegrityDamageCoefficient(float integrity)
     {
         var coeff = 1f;

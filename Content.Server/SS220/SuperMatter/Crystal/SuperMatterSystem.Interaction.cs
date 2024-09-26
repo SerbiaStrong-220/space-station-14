@@ -2,14 +2,13 @@
 using Content.Server.Popups;
 using Content.Server.SS220.SuperMatter.Emitter;
 using Content.Server.SS220.SuperMatterCrystal.Components;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
 public sealed partial class SuperMatterSystem : EntitySystem
 {
     [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+
     public void ConsumeObject(EntityUid targetUid, Entity<SuperMatterComponent> crystal, bool spawnEntity = true)
     {
         if (HasComp<MetaDataComponent>(targetUid)
@@ -30,7 +29,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         if (TryComp<SuperMatterExtraConsumableComponent>(targetUid, out var consumableComponent))
         {
-            // well, uh, kinda need to hide it in component getter....
+            // SM_TODO:
+            // well, uh, kinda need to hide it in component getter...
             RaiseLocalEvent(targetUid, new SyncSuperMatterBoltStats());
             smComp.Matter += consumableComponent.AdditionalMatterOnConsumption;
             smComp.InternalEnergy += consumableComponent.AdditionalEnergyOnConsumption;

@@ -43,8 +43,12 @@
   - type: NameIdentifier
     group: GenericNumber
   - type: TTS
-    voicePrototypeId:
-  - type: SuperMatter # all things like radiation source etc will be added through SMSystem
+    voicePrototypeId: SuperMatterVoices
+  - type: AmbientSound
+    range: 5
+    volume: 0
+    sound:
+      path: /Audio/SS220/Ambience/Supermatter/calm.ogg
   - type: HallucinationSource
     hallucination:
         randomEntities: HallucinationSupermatterCrystal
@@ -56,6 +60,9 @@
         itemSlot: EYES
         checkPockets: false
     range: 7
+  - type: SuperMatter
+    consumeSound:
+      collection: SupermatterConsume
   - type: RadiationSource
     enabled: true
     intensity: 2

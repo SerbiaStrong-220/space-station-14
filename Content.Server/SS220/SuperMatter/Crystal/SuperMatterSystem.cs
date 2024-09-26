@@ -39,10 +39,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var query = EntityQueryEnumerator<SuperMatterComponent>();
         while (query.MoveNext(out var uid, out var smComp))
         {
+            // SM_TODO: Delete
             if (smComp.DisabledByAdmin)
                 continue;
             if (!HasComp<MetaDataComponent>(uid)
                 || MetaData(uid).Initialized == false)
+                continue;
+            // SM_TODO: Check if it needed
+            // add here to give admins change to freeze all logic
+            if (MetaData(uid).EntityPaused)
                 continue;
 
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
@@ -107,7 +112,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
                 UpdateDelamination(crystal);
                 return;
             }
-            if (!TryImplementIntegrityDamage(crystal.Comp))
+            if (!TryImplementIntegrityDamage(crystal))
             {
                 crystal.Comp.Integrity = 0.01f;
                 MarkAsLaminated(crystal);

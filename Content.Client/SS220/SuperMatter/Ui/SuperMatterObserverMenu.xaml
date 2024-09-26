@@ -42,7 +42,8 @@
                 <!-- Here go numberic Data -->
                 </BoxContainer>
             <BoxContainer Name="LowerDataContainer" MinHeight="256" HorizontalExpand="True" Orientation="Horizontal" Margin="4 4">
-                <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MaxSize="512 256" MinSize="384 256" MouseFilter="Stop"  Margin="4 4"/>
+                <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MaxSize="512 256" MinSize="384 256"
+                    MouseFilter="Stop"  Margin="4 4" Offsets="1 1" Sizes="100 100" Steps="25 100"/>
                 <BoxContainer Name="GasScrollContainer" HorizontalExpand="True" Orientation="Vertical" MouseFilter="Pass">
                     <RichTextLabel Name="MolesAmount" HorizontalExpand="True" HorizontalAlignment="Center"/>
                     <ScrollContainer Name="GasScroll" HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True"

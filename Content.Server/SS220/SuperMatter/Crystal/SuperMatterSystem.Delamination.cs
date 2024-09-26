@@ -21,28 +21,34 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     public void MarkAsLaminated(Entity<SuperMatterComponent> crystal, float? secondsToBlow = null)
     {
-        crystal.Comp.TimeOfDelamination = _gameTiming.CurTime
-                        + TimeSpan.FromSeconds(secondsToBlow.HasValue ? secondsToBlow.Value : SECONDS_BEFORE_EXPLOSION);
-        crystal.Comp.AccumulatedRegenerationDelamination = 0f;
-        crystal.Comp.NextRegenerationThreshold = IntegrityRegenerationStep;
-        crystal.Comp.IsDelaminate = true;
+        var (crystalUid, comp) = crystal;
 
-        var stationUid = _station.GetStationInMap(Transform(crystal.Owner).MapID);
-        if (!stationUid.HasValue)
-            return;
-        crystal.Comp.PreviousAlertLevel = _alertLevel.GetLevel(stationUid.Value);
-        _alertLevel.SetLevel(stationUid.Value, "yellow", true, true, true, true);
+        comp.TimeOfDelamination = _gameTiming.CurTime
+                        + TimeSpan.FromSeconds(secondsToBlow.HasValue ? secondsToBlow.Value : SECONDS_BEFORE_EXPLOSION);
+        comp.AccumulatedRegenerationDelamination = 0f;
+        comp.NextRegenerationThreshold = IntegrityRegenerationStep;
+        comp.IsDelaminate = true;
+
+        var ev = new SuperMatterDelaminateStarted(comp.TimeOfDelamination);
+        RaiseLocalEvent(crystalUid, ev);
+
+        TryChangeStationAlertLevel(crystalUid, comp.DelaminateAlertLevel, out comp.PreviousAlertLevel);
     }
     public void StopDelamination(Entity<SuperMatterComponent> crystal)
     {
-        crystal.Comp.IsDelaminate = false;
-        crystal.Comp.Integrity = 20f;
-        crystal.Comp.AccumulatedRegenerationDelamination = 0f;
-        crystal.Comp.NextRegenerationThreshold = IntegrityRegenerationStep;
+        var (crystalUid, comp) = crystal;
 
-        var stationUid = _station.GetStationInMap(Transform(crystal.Owner).MapID);
-        if (stationUid.HasValue && crystal.Comp.PreviousAlertLevel != null)
-            _alertLevel.SetLevel(stationUid.Value, crystal.Comp.PreviousAlertLevel, true, true, true, true);
+        comp.IsDelaminate = false;
+        comp.Integrity = 20f;
+        comp.AccumulatedRegenerationDelamination = 0f;
+        comp.NextRegenerationThreshold = IntegrityRegenerationStep;
+
+        var ev = new SuperMatterDelaminateStopped();
+        RaiseLocalEvent(crystalUid, ev);
+
+        var stationUid = _station.GetStationInMap(Transform(crystalUid).MapID);
+        if (stationUid.HasValue && comp.PreviousAlertLevel != null)
+            _alertLevel.SetLevel(stationUid.Value, comp.PreviousAlertLevel, true, true, true, true);
         StationAnnounceIntegrity(crystal, AnnounceIntegrityTypeEnum.DelaminationStopped);
     }
 
@@ -58,6 +64,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         {
             crystal.Comp.TimeOfDelamination += TimeSpan.FromSeconds(1f);
             crystal.Comp.NextRegenerationThreshold += IntegrityRegenerationStep;
+
+            var ev = new SuperMatterDelaminateTimeChanged(crystal.Comp.TimeOfDelamination);
+            RaiseLocalEvent(crystal, ev);
         }
         if (crystal.Comp.IntegrityDamageAccumulator > IntegrityRegenerationEnd)
             StopDelamination(crystal);

@@ -13,16 +13,21 @@ public sealed partial class SuperMatterSystem : EntitySystem
 {
     public void InitializeEventHandler()
     {
+        SubscribeLocalEvent<SuperMatterComponent, MapInitEvent>(OnInit);
+
         SubscribeLocalEvent<SuperMatterComponent, InteractHandEvent>(OnHandInteract);
         SubscribeLocalEvent<SuperMatterComponent, InteractUsingEvent>(OnItemInteract);
-        SubscribeLocalEvent<SuperMatterComponent, StartCollideEvent>(OnCollideEvent);
-        SubscribeLocalEvent<SuperMatterComponent, SuperMatterActivationEvent>(OnActivationEvent);
-        SubscribeLocalEvent<SuperMatterComponent, SuperMatterSetAdminDisableEvent>(OnAdminDisableEvent);
-        SubscribeLocalEvent<SuperMatterComponent, MapInitEvent>(OnComponentInit);
+        SubscribeLocalEvent<SuperMatterComponent, StartCollideEvent>(OnCollide);
+        SubscribeLocalEvent<SuperMatterComponent, SuperMatterActivationEvent>(OnActivation);
+
+        // SubscribeLocalEvent<SuperMatterComponent, EntityPausedEvent>(OnPause);
+        // SubscribeLocalEvent<SuperMatterComponent, EntityUnpausedEvent>(OnUnpause);
 
     }
-    private void OnComponentInit(Entity<SuperMatterComponent> entity, ref MapInitEvent args)
+    private void OnInit(Entity<SuperMatterComponent> entity, ref MapInitEvent args)
     {
+        _ambientSoundSystem.SetAmbience(entity.Owner, true);
+
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
         InitGasMolesAccumulator(entity.Comp);
     }
@@ -36,7 +41,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         entity.Comp.Matter += MatterNondimensionalization / 8f;
         ConsumeObject(args.User, entity);
     }
-    private void OnCollideEvent(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
+    private void OnCollide(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
     {
         if (args.OtherBody.BodyType == BodyType.Static)
             return;
@@ -54,10 +59,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         ConsumeObject(args.OtherEntity, entity);
     }
-    private void OnActivationEvent(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
+    private void OnActivation(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
     {
-        if (entity.Comp.DisabledByAdmin)
+        if (args.Handled)
             return;
+
         if (!entity.Comp.Activated)
         {
             SendAdminChatAlert(entity, "supermatter-activated", $"{EntityManager.ToPrettyString(args.Target)}");
@@ -65,15 +71,37 @@ public sealed partial class SuperMatterSystem : EntitySystem
         }
         args.Handled = true;
     }
-    private void OnAdminDisableEvent(Entity<SuperMatterComponent> entity, ref SuperMatterSetAdminDisableEvent args)
-    {
-        if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
-        {
-            Log.Error($"Tried to AdminDisable SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
-            return;
-        }
-        _adminLog.Add(LogType.Verb, LogImpact.Extreme, $"{EntityManager.ToPrettyString(args.Performer):player} has set AdminDisable to {args.AdminDisableValue}");
-        smComp.DisabledByAdmin = args.AdminDisableValue;
-        // TODO other logic like freezing Delamination and etc etc
-    }
+    // private void OnAdminDisableEvent(Entity<SuperMatterComponent> entity, ref SuperMatterSetAdminDisableEvent args)
+    // {
+    //     if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
+    //     {
+    //         Log.Error($"Tried to AdminDisable SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
+    //         return;
+    //     }
+    //     _adminLog.Add(LogType.Verb, LogImpact.Extreme, $"{EntityManager.ToPrettyString(args.Performer):player} has set AdminDisable to {args.AdminDisableValue}");
+    //     smComp.DisabledByAdmin = args.AdminDisableValue;
+    //     // TODO other logic like freezing Delamination and etc etc
+    // }
+    // private void OnPause(Entity<SuperMatterComponent> entity, ref EntityPausedEvent args)
+    // {
+    //     if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
+    //     {
+    //         Log.Error($"Tried to AdminDisable SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
+    //         return;
+    //     }
+    //     _adminLog.Add(LogType.Verb, LogImpact.Extreme, $"{EntityManager.ToPrettyString(args.Performer):player} has set AdminDisable to {args.AdminDisableValue}");
+    //     smComp.DisabledByAdmin = args.AdminDisableValue;
+    //     // TODO other logic like freezing Delamination and etc etc
+    // }
+    //     private void OnUnpause(Entity<SuperMatterComponent> entity, ref EntityUnpausedEvent args)
+    // {
+    //     if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
+    //     {
+    //         Log.Error($"Tried to AdminDisable SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
+    //         return;
+    //     }
+    //     _adminLog.Add(LogType.Verb, LogImpact.Extreme, $"{EntityManager.ToPrettyString(args.Performer):player} has set AdminDisable to {args.AdminDisableValue}");
+    //     smComp.DisabledByAdmin = args.AdminDisableValue;
+    //     // TODO other logic like freezing Delamination and etc etc
+    // }
 }

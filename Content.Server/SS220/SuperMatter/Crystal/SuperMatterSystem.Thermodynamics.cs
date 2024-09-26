@@ -4,6 +4,7 @@ using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.SS220.SuperMatter.Functions;
 using Content.Shared.Atmos;
+using Robust.Shared.Random;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -16,6 +17,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     */
 
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private readonly IRobustRandom _robustRandom = default!;
 
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
@@ -30,9 +32,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     public const float MatterNondimensionalization = SuperMatterFunctions.MatterNondimensionalization; // like C mass in Mendeleev table
     public const float CHEMISTRY_POTENTIAL_BASE = 12f; // parrots now, but need to concrete in future
-    private const float MATTER_DECAY_BASE_RATE = 85f; // parrots now, but need to concrete in future
+    public const float MATTER_DECAY_BASE_RATE = 85f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
-    private const float SM_HEAT_TRANSFER_RATIO = 0.07f;
+    public const float SM_HEAT_TRANSFER_RATIO = 0.07f;
 
     private void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
     {
@@ -56,16 +58,17 @@ public sealed partial class SuperMatterSystem : EntitySystem
         smComp.InternalEnergy += deltaInternalEnergy * frameTime;
         if (smComp.InternalEnergy < 0)
         {
-            // TODO loc it
+            // SM_TODO loc it
             Log.Error($"Internal Energy of SuperMatter {crystal} became negative, forced to truthish value.");
-            // TODO remove before release
+            // SM_TODO remove before release
             SendAdminChatAlert(crystal, "Physics law breaking! If it possible ask how they do it and convey it to developer");
             smComp.Matter += 20 * MatterNondimensionalization;
-            smComp.InternalEnergy = EvaluateTruthishInternalEnergy(crystal);
+            smComp.InternalEnergy = EvaluateTruthishInternalEnergy(crystal) * _robustRandom.GetRandom().NextFloat(0.7f, 1.3f);
             _popupSystem.PopupEntity(Loc.GetString("supermatter-crystal-restructure"), crystalUid);
             // SM_TODO: add variable like min Integrity or add it to comp
-            smComp.Integrity = MathF.Max(smComp.Integrity * 0.9f, 0.1f) ;
+            smComp.Integrity = MathF.Max(smComp.Integrity * 0.9f, 0.1f);
         }
+
         smComp.Matter = MathF.Max(smComp.Matter + deltaMatter * frameTime, 4 * MatterNondimensionalization); // actually should go boom at this low, but...
         smComp.Temperature = Math.Clamp(smComp.Temperature + smDeltaT * frameTime, Atmospherics.TCMB, Atmospherics.Tmax); // weird but okay
         _atmosphere.AddHeat(gasMixture, -crystalHeatFromGas * frameTime);
@@ -88,19 +91,22 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// We dont apply it to Matter field of SMComp because we need this value in internal energy evaluation </summary>
     private float SynthesizeMatterFromGas(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime, bool deleteUsedGases = false)
     {
-        var (crystalUid, smComp) = crystal;
+        var (_, smComp) = crystal;
         var resultAdditionalMatter = 0f;
         var gasesToMatterConvertRatio = SuperMatterGasInteraction.GasesToMatterConvertRatio;
+
         if (gasesToMatterConvertRatio == null)
             return resultAdditionalMatter;
+
         foreach (var gasId in gasesToMatterConvertRatio.Keys)
         {
             var gasMolesInReact = gasMixture.GetMoles(gasId)
                                     * GetMolesReactionEfficiency(smComp.Temperature, gasMixture.Pressure);
+            // SM_TODO: thought of time going here
+            resultAdditionalMatter += gasMolesInReact * gasesToMatterConvertRatio[gasId];
 
             if (deleteUsedGases)
                 gasMixture.AdjustMoles(gasId, gasMolesInReact * frameTime);
-            resultAdditionalMatter += gasMolesInReact * gasesToMatterConvertRatio[gasId];
         }
 
         return resultAdditionalMatter;
@@ -115,11 +121,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return false;
         return true;
     }
-
+    // SM_TODO change it into shared stable energy or just delete
     private float EvaluateTruthishInternalEnergy(Entity<SuperMatterComponent> crystal)
     {
         var (_, smComp) = crystal;
-        return smComp.Matter * (CHEMISTRY_POTENTIAL_BASE) + GetHeatCapacity(smComp.Temperature, smComp.Matter) * smComp.Temperature;
+        return smComp.Matter * CHEMISTRY_POTENTIAL_BASE + GetHeatCapacity(smComp.Temperature, smComp.Matter) * smComp.Temperature;
     }
 
 }

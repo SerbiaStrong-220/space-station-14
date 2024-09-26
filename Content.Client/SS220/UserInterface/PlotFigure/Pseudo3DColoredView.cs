@@ -6,9 +6,43 @@ using System.Linq;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
 
-internal sealed class Pseudo3DColoredView : Plot
+public sealed class Pseudo3DColoredView : Plot
 {
     public PlotColormap Colormap = Colormaps.GoodBad;
+
+    // SM_TODO: after building divide to public/private zones
+    public Vector2? Offsets
+    {
+        get => _offsets;
+        set
+        {
+            _offsets = value;
+            MakeMeshgrid();
+        }
+    }
+    private Vector2? _offsets;
+
+    public Vector2? Sizes
+    {
+        get => _sizes;
+        set
+        {
+            _sizes = value;
+            MakeMeshgrid();
+        }
+    }
+    private Vector2? _sizes;
+
+    public Vector2? Steps
+    {
+        get => _steps;
+        set
+        {
+            _offsets = value;
+            MakeMeshgrid();
+        }
+    }
+    private Vector2? _steps;
 
     private Color2DPointView? _color2DPoint;
     private MovingPoint? _movingPoint;
@@ -45,6 +79,26 @@ internal sealed class Pseudo3DColoredView : Plot
 
         _color2DPoint = new Color2DPointView(xParams, yParams, _color2DPoint);
     }
+    public void MakeMeshgrid()
+    {
+        if (!(Sizes.HasValue && Offsets.HasValue && Steps.HasValue))
+            return;
+
+        var paramX = (Offsets.Value.X, Sizes.Value.X, Steps.Value.X);
+        var paramY = (Offsets.Value.Y, Sizes.Value.Y, Steps.Value.Y);
+
+
+        if (_color2DPoint == null)
+        {
+            //(XMeshgrid.Value.X, XMeshgrid.Value.Y, XMeshgrid.Value.Z)
+            _initCachedParams.x = paramX;
+            _initCachedParams.y = paramY;
+        }
+        _cachedParams.x = paramX;
+        _cachedParams.y = paramY;
+
+        _color2DPoint = new Color2DPointView(paramX, paramY, _color2DPoint);
+    }
     public void EvalFunctionOnMeshgrid(Func<float, float, float> func)
     {
         _cachedFunction = func;
@@ -52,9 +106,8 @@ internal sealed class Pseudo3DColoredView : Plot
     }
     public void LoadMovingPoint(Vector2 position, Vector2 moveDirection)
     {
-        // SM_TODO hide borders calc
-        if (position.X > _cachedParams.x.Offset + (_cachedParams.x.Size - 1) * _cachedParams.x.Step
-                || position.Y > _cachedParams.y.Offset + (_cachedParams.y.Size - 1) * _cachedParams.y.Step
+        if (position.X > GetFarestPossiblePlotPoint(_cachedParams.x)
+                || position.Y > GetFarestPossiblePlotPoint(_cachedParams.y)
                 || position.X < _cachedParams.x.Offset || position.Y < _cachedParams.x.Offset)
         {
             MakeMeshgrid((MakeOffsetFromCoord(position.X, _initCachedParams.x), _initCachedParams.x.Size, _initCachedParams.x.Step),
@@ -76,10 +129,10 @@ internal sealed class Pseudo3DColoredView : Plot
     {
         if (_color2DPoint == null)
             return;
-        // SM_TODO: make it more obvious
-        // to differ min from max
-        _maxZ = _color2DPoint.MaxZ + 0.01f;
+
         _minZ = _color2DPoint.MinZ;
+        // to differ min from max, without that correct working of Colormap isnt possible. Number should be positive and that's all
+        _maxZ = _minZ == _color2DPoint.MaxZ ? _color2DPoint.MaxZ + 0.001f : _color2DPoint.MaxZ;
         _meshgridBorders = (_color2DPoint.X.Max(), _color2DPoint.X.Min(), _color2DPoint.Y.Max(), _color2DPoint.Y.Min());
 
         for (var i = 0; i < _color2DPoint.X.Count; i++)
@@ -110,6 +163,10 @@ internal sealed class Pseudo3DColoredView : Plot
         }
     }
 
+    private float GetFarestPossiblePlotPoint((float Offset, float Size, float Step) param)
+    {
+        return param.Offset + (param.Size - 1) * param.Step;
+    }
     /// <summary> Make sure that we wont get into wrong position by changing Meshgrid </summary>
     private float MakeOffsetFromCoord(float coord, (float Min, float Size, float Step) parameters)
     {

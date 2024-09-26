@@ -13,7 +13,7 @@ namespace Content.Client.SS220.UserInterface.PlotFigure;
 /// </list>
 /// good luck if you want to change it
 /// </summary>
-internal sealed class PlotSequencedView : Plot
+public sealed class PlotSequencedView : Plot
 {
     public Color FirstGraphicColor = Color.LightGreen;
     public Color SecondGraphicColor = Color.Red;

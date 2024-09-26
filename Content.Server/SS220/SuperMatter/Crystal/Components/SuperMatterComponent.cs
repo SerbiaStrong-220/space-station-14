@@ -79,10 +79,19 @@ public sealed partial class SuperMatterComponent : Component
     public EntProtoId SingularitySpawnPrototype = "Singularity";
     [DataField]
     public EntProtoId TeslaSpawnPrototype = "TeslaEnergyBall";
+    [DataField]
+    public string DelaminateAlertLevel = "yellow";
+    [DataField]
+    public string CrystalDestroyAlertLevel = "delta";
+
     public string? PreviousAlertLevel;
 
     // Audio Sector
 
+    [DataField(required: true)]
+    public SoundCollectionSpecifier ConsumeSound;
     [DataField]
-    public SoundSpecifier ConsumeSound = new SoundPathSpecifier("/Audio/SS220/Effects/shield/eshild_hit.ogg");
+    public SoundSpecifier CalmSound = new SoundPathSpecifier("/Audio/SS220/Ambience/Supermatter/calm.ogg");
+    [DataField]
+    public SoundSpecifier DelamSound = new SoundPathSpecifier("/Audio/SS220/Ambience/Supermatter/delamming.ogg");
 }

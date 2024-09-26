@@ -11,9 +11,7 @@ using System.Numerics;
 using System.Linq;
 using Robust.Client.Graphics;
 using Content.Shared.Atmos;
-using Robust.Shared.Prototypes;
-using Content.Shared.Atmos.Prototypes;
-using System.Text;
+using Vector3 = Robust.Shared.Maths.Vector3;
 
 namespace Content.Client.SS220.SuperMatter.Ui;
 
@@ -24,19 +22,19 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
 
     public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;
+
     public SuperMatterObserverComponent? Observer;
     public int? CrystalKey;
     // Defines how much data point about the past we will show
     public const int MAX_DATA_LENGTH = 180;
 
-    private Dictionary<Gas, string> _gasLocalizedNames = new();
-
     public SuperMatterObserverMenu()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
         PlotValueOverTime.SetLabels(_localization.GetString("smObserver-plotXLabel-integrity"), _localization.GetString("smObserver-plotYLabel-integrity"), _localization.GetString("smObserver-plotTitle-integrity"));
-        // SM_TODO hide it in xaml
+        // weird stuff to help xaml understand
         ColorState.MakeMeshgrid((1, 100, 25), (1, 100, 100));
         ColorState.EvalFunctionOnMeshgrid(GetIntegrityDamageMap);
         ColorState.SetLabels(_localization.GetString("smObserver-plotXLabel-colorState"), _localization.GetString("smObserver-plotYLabel-colorState"), _localization.GetString("smObserver-plotTitle-colorState"));

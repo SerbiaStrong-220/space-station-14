@@ -11,10 +11,9 @@ public sealed class SuperMatterEmitterSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SuperMatterEmitterBoltComponent, SyncSuperMatterBoltStats>(OnSync);
-        //SM_TODO: SubscribeLocalEvent<SuperMatterEmitterBoltComponent, MapInitEvent>();
-    }
 
+        SubscribeLocalEvent<SuperMatterEmitterBoltComponent, SyncSuperMatterBoltStats>(OnSync);
+    }
     private void OnSync(Entity<SuperMatterEmitterBoltComponent> entity, ref SyncSuperMatterBoltStats _)
     {
         if (!TryComp<ProjectileComponent>(entity.Owner, out var projectileComponent))

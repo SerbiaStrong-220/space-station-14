@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Content.Client.SS220.UserInterface.PlotFigure;
 
-internal abstract class Plot : Control
+public abstract class Plot : Control
 {
     [Dependency] internal readonly IResourceCache ResourceCache = default!;
 
