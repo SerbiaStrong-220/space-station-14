@@ -1,0 +1,138 @@
+# Шлёпы
+- type: loadoutEffectGroup
+  id: ShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
+
+- type: loadoutEffectGroup
+  id: BigShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: BigShlopa
+
+- type: loadoutEffectGroup
+  id: HugeShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HugeShlopa
+
+- type: loadoutEffectGroup
+  id: GoldenShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: GoldenShlopa
+
+- type: loadoutEffectGroup
+  id: CriticalMassShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: CriticalMassShlopa
+
+# Разработка
+- type: loadoutEffectGroup
+  id: MiniDeveloperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: MiniDeveloper
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: DeveloperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Developer
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: MapperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Mapper
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: HeadLorovedSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HeadLoroved
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: WikiHeadSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: WikiHead
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: SeniorDeveloperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: SeniorDeveloper
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: HeadDeveloperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HeadDeveloper
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: ProjectManagerSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: ProjectManager
+    isExact: true
+
+# Администрация
+- type: loadoutEffectGroup
+  id: MentorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Mentor
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: AdministratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Administrator
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: SeniorAdministratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: SeniorAdministrator
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: SubHeadAdministratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: SubHeadAdministrator
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: HeadAdministratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HeadAdministrator
+    isExact: true
+
+# Модерация
+- type: loadoutEffectGroup
+  id: ModeratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Moderator
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: HeadModeratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HeadModerator
+    isExact: true

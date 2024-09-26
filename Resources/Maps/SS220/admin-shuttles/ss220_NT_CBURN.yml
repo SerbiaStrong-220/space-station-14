@@ -751,6 +751,18 @@ entities:
     - type: Transform
       pos: -1.5,9.5
       parent: 1
+- proto: BoxBeaker
+  entities:
+  - uid: 774
+    components:
+    - type: Transform
+      pos: -0.06524539,-3.2504516
+      parent: 1
+  - uid: 786
+    components:
+    - type: Transform
+      pos: -0.009690762,-3.542118
+      parent: 1
 - proto: BoxBodyBag
   entities:
   - uid: 36
@@ -2131,9 +2143,6 @@ entities:
     - type: Transform
       pos: 0.5,9.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 476
 - proto: ClosetEmergency
   entities:
   - uid: 295
@@ -3911,9 +3920,6 @@ entities:
     - type: Transform
       pos: 2.5,8.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 476
 - proto: MedkitAdvancedFilled
   entities:
   - uid: 540

@@ -17,7 +17,7 @@ public sealed partial class DockingSystem
 
     private const int DockRoundingDigits = 2;
 
-    public Angle GetAngle(EntityUid uid, TransformComponent xform, EntityUid targetUid, TransformComponent targetXform, EntityQuery<TransformComponent> xformQuery)
+    public Angle GetAngle(EntityUid uid, TransformComponent xform, EntityUid targetUid, TransformComponent targetXform)
     {
         var (shuttlePos, shuttleRot) = _transform.GetWorldPositionRotation(xform);
         var (targetPos, targetRot) = _transform.GetWorldPositionRotation(targetXform);
@@ -288,9 +288,7 @@ public sealed partial class DockingSystem
 
         // Prioritise by priority docks, then by maximum connected ports, then by most similar angle.
         validDockConfigs = validDockConfigs
-           .OrderByDescending(x => x.Docks.Any(docks =>
-               TryComp<PriorityDockComponent>(docks.DockBUid, out var priority) &&
-               priority.Tag?.Equals(priorityTag) == true))
+           .OrderByDescending(x => IsConfigPriority(x, priorityTag))
            .ThenByDescending(x => x.Docks.Count)
            .ThenBy(x => Math.Abs(Angle.ShortestDistance(x.Angle.Reduced(), targetGridAngle).Theta)).ToList();
 
@@ -299,6 +297,13 @@ public sealed partial class DockingSystem
         // TODO: Ideally do a hyperspace warpin, just have it run on like a 10 second timer.
 
         return location;
+    }
+
+    public bool IsConfigPriority(DockingConfig config, string? priorityTag)
+    {
+        return config.Docks.Any(docks =>
+            TryComp<PriorityDockComponent>(docks.DockBUid, out var priority)
+            && priority.Tag?.Equals(priorityTag) == true);
     }
 
     /// <summary>
@@ -353,4 +358,33 @@ public sealed partial class DockingSystem
 
         return _dockingSet.ToList();
     }
+
+    //SS220 EscapePod dockind to CentComm begin
+    /// <summary>
+    /// Gets list of all docking configs between the 2 grids and sort them by priority docks,
+    /// by maximum connected ports and by most similar angle.
+    /// </summary>
+    public List<DockingConfig>? GetSortedDockingConfigs(EntityUid shuttleUid, EntityUid targetGrid, string? priorityTag = null)
+    {
+        var gridDocks = GetDocks(targetGrid);
+        var shuttleDocks = GetDocks(shuttleUid);
+
+        var sortedDockConfigs = GetDockingConfigs(shuttleUid, targetGrid, shuttleDocks, gridDocks);
+
+        if (sortedDockConfigs.Count <= 0)
+            return null;
+
+        var targetGridAngle = _transform.GetWorldRotation(targetGrid).Reduced();
+
+        // Prioritise by priority docks, then by maximum connected ports, then by most similar angle.
+        sortedDockConfigs = sortedDockConfigs
+           .OrderByDescending(x => x.Docks.Any(docks =>
+               TryComp<PriorityDockComponent>(docks.DockBUid, out var priority) &&
+               priority.Tag?.Equals(priorityTag) == true))
+           .ThenByDescending(x => x.Docks.Count)
+           .ThenBy(x => Math.Abs(Angle.ShortestDistance(x.Angle.Reduced(), targetGridAngle).Theta)).ToList();
+
+        return sortedDockConfigs;
+    }
+    //SS220 EscapePod dockind to CentCom end
 }

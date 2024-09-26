@@ -36,6 +36,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SharedRoleCodewordSystem _roleCodewordSystem = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     public override void Initialize()
     {
@@ -59,7 +60,21 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
     private void SetCodewords(TraitorRuleComponent component)
     {
-        component.Codewords = GenerateTraitorCodewords(component);
+        //ss220 same codewords for all traitors start
+        if (!_gameTicker.IsGameRuleAdded<TraitorRuleComponent>())
+        {
+            return;
+        }
+
+        var ruleEnts = _gameTicker.GetAddedGameRules();
+        foreach (var ruleEnt in ruleEnts)
+        {
+            if (TryComp<TraitorRuleComponent>(ruleEnt, out var traitorComp))
+            {
+                component.Codewords = traitorComp.Codewords.Contains(null) ? GenerateTraitorCodewords(component) : traitorComp.Codewords;
+            }
+        }
+        //ss220 same codewords for all traitors end
     }
 
     public string[] GenerateTraitorCodewords(TraitorRuleComponent component)
@@ -96,15 +111,18 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             // creadth: we need to create uplink for the antag.
             // PDA should be in place already
             var pda = _uplink.FindUplinkTarget(traitor);
-            if (pda == null || !_uplink.AddUplink(traitor, startingBalance))
-                return false;
 
-            // Give traitors their codewords and uplink code to keep in their character info menu
-            code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
+            //ss220 fix no codewords for traitor w/o pda start
+            if (pda != null && _uplink.AddUplink(traitor, startingBalance, giveDiscounts: true))
+            {
+                // Give traitors their codewords and uplink code to keep in their character info menu
+                code = EnsureComp<RingerUplinkComponent>(pda.Value).Code;
 
-            // If giveUplink is false the uplink code part is omitted
-            briefing = string.Format("{0}\n{1}", briefing,
-                Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+                // If giveUplink is false the uplink code part is omitted
+                briefing = string.Format("{0}\n{1}", briefing,
+                    Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+            }
+            //ss220 fix no codewords for traitor w/o pda end
         }
 
         _antag.SendBriefing(traitor, GenerateBriefing(component.Codewords, code, issuer), null, component.GreetSoundNotification);

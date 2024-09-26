@@ -109,8 +109,9 @@
       - RoboticsConsole
   - type: WiresPanel
   - type: ActivatableUIRequiresPanel
-  - type: NameIdentifier
-    group: Silicon
+# SS220 Fix AI Dataset
+#  - type: NameIdentifier
+#    group: Silicon
   - type: ContainerContainer
     containers:
       borg_brain: !type:ContainerSlot { }
@@ -238,9 +239,9 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: StepTriggerImmune
   - type: TTS
     randomVoicesList: Borg
+  - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:

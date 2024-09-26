@@ -64,8 +64,8 @@
     lastSignals:
       DoorStatus: false
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Glass # SS220 Fix Hand Broke Windoor
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
   - type: RCDDeconstructable
@@ -149,6 +149,11 @@
   - type: StaticPrice
     price: 150
   - type: PryUnpowered
+  #ss220 windows dmg fix begin
+  - type: Tag
+    tags:
+      - Window
+  #ss220 windows dmg fix end
 
 - type: entity
   id: BaseSecureWindoor
@@ -205,6 +210,14 @@
     node: windoorSecure
   - type: StaticPrice
     price: 350
+  - type: Tag
+    tags:
+      - SecureWindoor
+      # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
+      #ss220 windows dmg fix begin
+      - Window
+      #ss220 windows dmg fix end      
+
 
 #Plasma Windoors
 - type: entity
@@ -315,6 +328,11 @@
     price: 500
   - type: RadiationBlocker
     resistance: 4
+  - type: Tag
+    tags:
+      - SecurePlasmaWindoor
+      # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
+
 
 #Uranium Windoors
 - type: entity
@@ -425,3 +443,7 @@
     price: 750
   - type: RadiationBlocker
     resistance: 5
+  - type: Tag
+    tags:
+      - SecureUraniumWindoor
+      # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor

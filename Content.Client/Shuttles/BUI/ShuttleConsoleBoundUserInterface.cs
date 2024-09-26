@@ -1,6 +1,7 @@
 using Content.Client.Shuttles.UI;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Events;
+using Content.Shared.SS220.CruiseControl;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Map;
@@ -26,7 +27,20 @@ public sealed class ShuttleConsoleBoundUserInterface : BoundUserInterface
         _window.RequestBeaconFTL += OnFTLBeaconRequest;
         _window.DockRequest += OnDockRequest;
         _window.UndockRequest += OnUndockRequest;
+
+        _window.SetCruiseControl += OnCruiseControlChanged; // SS220 Cruise-Control
     }
+
+    // SS220 Cruise-Control begin
+    private void OnCruiseControlChanged(bool enabled, float throttle)
+    {
+        SendMessage(new CruiseControlMessage()
+        {
+            Enabled = enabled,
+            Throttle = throttle
+        });
+    }
+    // SS220 Cruise-Control end
 
     private void OnUndockRequest(NetEntity entity)
     {

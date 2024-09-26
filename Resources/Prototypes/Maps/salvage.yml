@@ -9,12 +9,12 @@
 
 - type: salvageMap
   id: Small2
-  mapPath: /Maps/Salvage/small-2.yml
+  mapPath: /Maps/SS220/Salvage/Small2_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
   id: SmallShip1
-  mapPath: /Maps/Salvage/small-ship-1.yml
+  mapPath: /Maps/SS220/Salvage/SmallRuinedPod_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
@@ -29,22 +29,22 @@
 
 - type: salvageMap
   id: Small4
-  mapPath: /Maps/Salvage/small-4.yml
+  mapPath: /Maps/SS220/Salvage/Small4_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
   id: SmallCargo
-  mapPath: /Maps/Salvage/small-cargo.yml
+  mapPath: /Maps/SS220/Salvage/SmallCargoShuttleCrash_SS220.yml  # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
   id: SmallChapel
-  mapPath: /Maps/Salvage/small-chapel.yml
+  mapPath: /Maps/SS220/Salvage/SmallChapel_SS220.yml  # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
   id: SmallChef
-  mapPath: /Maps/Salvage/small-chef.yml
+  mapPath: /Maps/SS220/Salvage/MediumChef_SS220.yml  # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
@@ -54,12 +54,12 @@
 
 - type: salvageMap
   id: SmallSyndicate
-  mapPath: /Maps/Salvage/small-syndicate.yml
+  mapPath: /Maps/SS220/Salvage/SmallBrokenSyndicate_SS220.yml  # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 - type: salvageMap
   id: SmallTesla
-  mapPath: /Maps/Salvage/small-tesla.yml
+  mapPath: /Maps/SS220/Salvage/SmallTesla_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-small
 
 # Small - Asteroids
@@ -93,7 +93,7 @@
 
 - type: salvageMap
   id: MediumCargoWreck
-  mapPath: /Maps/Salvage/cargo-1.yml
+  mapPath: /Maps/SS220/Salvage/SmallCargoWreck_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-medium
 
 - type: salvageMap
@@ -108,13 +108,13 @@
 
 - type: salvageMap
   id: CargoDock
-  mapPath: /Maps/Salvage/medium-dock.yml
+  mapPath: /Maps/SS220/Salvage/SmallCargoDock_SS220.yml  # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-medium
 
 - type: salvageMap
   id: SpaceWaffleHome
   sizeString: salvage-map-wreck-size-medium
-  mapPath: /Maps/Salvage/wh-salvage.yml
+  mapPath: /Maps/SS220/Salvage/MediumCafeteria_SS220.yml  # SS220 Salvage mapping update
 
 - type: salvageMap
   id: MediumShuttleWreck
@@ -123,7 +123,7 @@
 
 - type: salvageMap
   id: MediumPetHospital
-  mapPath: /Maps/Salvage/medium-pet-hospital.yml
+  mapPath: /Maps/SS220/Salvage/MediumPetHospital_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-medium
 
 - type: salvageMap
@@ -155,12 +155,12 @@
 
 - type: salvageMap
   id: AsteroidBase
-  mapPath: /Maps/Salvage/asteroid-base.yml
+  mapPath: /Maps/SS220/Salvage/AsteroidBase_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-large
 
 - type: salvageMap
   id: RuinCargoBase
-  mapPath: /Maps/Salvage/ruin-cargo-salvage.yml
+  mapPath: /Maps/SS220/Salvage/RuinCargoBase_SS220.yml # SS220 Salvage mapping update
   sizeString: salvage-map-wreck-size-large
 
 - type: salvageMap

@@ -192,8 +192,8 @@ ClothingHeadHatHoodRad: null
 RadioHandheld: HandheldRadio
 
 # 2024-01-20 - ss220 engineering rebalance
-TegCenter: null
-TegCirculator: null
+# TegCenter: null # - ss220 ER by 06.09.24
+# TegCirculator: null # - ss220 ER by 06.09.24
 
 # 2024-01-12
 SpaceMedipen: null
@@ -406,6 +406,13 @@ DoorRemoteFirefight: null
 # 2024-06-03
 AirlockServiceCaptainLocked: AirlockCaptainLocked
 
+#2024-06-05
+DisasterVictimSpawner: CommandVisitorSpawner
+LostCargoTechnicianSpawner: VisitorCargoTechnicianSpawner
+ClownTroupeSpawner: VisitorClownSpawner
+TravelingChefSpawner: VisitorChefSpawner
+SyndieDisasterVictimSpawner: SyndieVisitorSpawner
+
 # 2024-06-15
 ClothingOuterCoatInspector: ClothingOuterCoatJensen
 
@@ -471,3 +478,33 @@ ClothingBeltSuspenders: ClothingBeltSuspendersRed
 
 # 2024-08-19
 ClothingNeckShockCollar: ClothingBackpackElectropack
+
+# 2024-08-22
+# ComputerShuttleSalvage: null # SS220 Revert SalvageShuttle
+# SalvageShuttleConsoleCircuitboard: null # SS220 Revert SalvageShuttle
+# SalvageShuttleCircuitboardStealObjective: null # SS220 Revert SalvageShuttle
+
+# 2024-08-28
+ClothingBackpackDuffelSyndicateCostumeCentcom: null
+ClothingHeadsetAltCentComFake: null
+CentcomPDAFake: null
+CentcomIDCardSyndie: null
+
+# 2024-09-06
+AntimovCircuitBoard: null
+OverlordCircuitBoard: null
+
+# 2024-09-07 SS220-upstream-merge
+Wristwatch: null
+
+# 2024-09-08
+HatBase: null
+
+# 2024-09-11 SS220-upstream-merge
+ClothingBeltChefFilled: null
+
+# 2024-09-17 SS220 PAI with encryption keys
+PersonalAI: EncryptionKeysPersonalAI
+
+# 2024-09-19
+BlueprintFlare: null

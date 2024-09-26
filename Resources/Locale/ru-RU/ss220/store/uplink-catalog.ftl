@@ -2,6 +2,11 @@
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }
 
+#Misc
+
+uplink-clothing-eyes-hud-syndicate-agent-name = Визор агента Синдиката
+uplink-clothing-eyes-hud-syndicate-agent-desc = Продвинутый визор Синдиката с индикатором на стекле, предназначенный для более точного обнаружения гуманоидов с их последующим уничтожением. Способен опеределять уровень здоровья гуманоидов и киборгов.
+
 # Disruption
 
 uplink-syndicate-pen-signaller = Ручка-передатчик

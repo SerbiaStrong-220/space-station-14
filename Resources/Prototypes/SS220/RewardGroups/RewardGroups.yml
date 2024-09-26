@@ -1,8 +1,9 @@
+# Шлёпы
 - type: ShlepaRewardGroup
   id: Shlopa
   name: Шлёпстер
   roundstartTokens: 5
-  requiredRole: enum.SponsorTier.Shlopa
+  requiredRole: Shlopa
   rewards:
     SponsorCigPack: 1
     ClothingSponsorMothBoots: 1
@@ -13,24 +14,36 @@
     ClothingSponsorNeckWreath: 1
     ClothingSponsorWreath: 1
     ClothingSponsorScarfTube: 1
+  # Вторая итерация
+    ClothingSponsorPivozavr: 1
+    FloppaCigarCase: 2
+    SmokingPipeFilledTobaccoSponsor: 1
+    ExpensiveLighterSponsor: 1
+    DrinkChampagneSponsorBottleFull: 2
+    DrinkBeerCanSponsor: 1
 
 - type: ShlepaRewardGroup
   id: BigShlopa
   name: Большой Шлёпа
   roundstartTokens: 6
-  requiredRole: enum.SponsorTier.BigShlopa
+  requiredRole: BigShlopa
   rewards:
     ClothingSponsorWhiteCoat: 1
     ClothingSponsorBlackCoat: 1
     SponsorBoxMaid: 3
     ClothingSponsorStudentSuit: 1
     ClothingSponsorStudentSuitBlack: 1
+  # Вторая итерация
+    DrinkCanPackBeerSponsorBox: 2
+    PlushFloppa: 1
+    ClothingHeadHatDevilHornsAlt: 1
+    ClothingHeadHatHaloAlt: 1
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
   name: Огромный Шлёпа
   roundstartTokens: 7
-  requiredRole: enum.SponsorTier.HugeShlopa
+  requiredRole: HugeShlopa
   rewards:
     SponsorBoxWaltuh: 3
     SponsorBoxTyler: 3
@@ -38,19 +51,145 @@
     SponsorBoxBlackMafia: 3
     SponsorCigCarton: 2
     ClothingWristWatchUssp: 2
+  # Вторая итерация
+    SponsorBoxJujutsuShlepa: 4
+    ClothingSponsorSamuraiJacket: 1
+    ClothingSponsorNeckSS220: 1
+    ClothingHeadHatDevilHorns: 1
+    ClothingHeadHatHalo: 1
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa
   name: Золотой Шлёпа
   roundstartTokens: 8
-  requiredRole: enum.SponsorTier.GoldenShlopa
+  requiredRole: GoldenShlopa
   rewards:
     SponsorBoxGoldClown: 3
+  # Вторая итерация
+    ClothingHeadVipCrocks: 1
+    ClothingSponsor1984: 1
 
 - type: ShlepaRewardGroup
   id: CriticalMassShlopa
   name: Шлёпа Критической Массы
   roundstartTokens: 9
-  requiredRole: enum.SponsorTier.CriticalMassShlopa
+  requiredRole: CriticalMassShlopa
   rewards:
-    SponsorElWycco: 1
+    SponsorElWycc: 1
+  # Вторая итерация
+    SmokingFish: 1
+
+# Разработка
+- type: ShlepaRewardGroup
+  id: MiniDeveloper
+  name: Начинающий Разработчик
+  requiredRole: MiniDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Mapper
+  name: Маппер
+  requiredRole: Mapper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Developer
+  name: Разработчик
+  requiredRole: Developer
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: HeadLoroved
+  name: Ведущий Лоровед
+  requiredRole: HeadLoroved
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: WikiHead
+  name: Ведущий Редактор Вики
+  requiredRole: WikiHead
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id:  HeadDeveloper
+  name: Ведущий Разработчик
+  requiredRole:  HeadDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: SubHeadDeveloper
+  name: Заместитель Ведущего Разработчика
+  requiredRole: SubHeadDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: ProjectManager
+  name: Проект Менеджер
+  requiredRole: ProjectManager
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: SeniorDeveloper
+  name: Старший Разработчик
+  requiredRole: SeniorDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+# Администрация
+- type: ShlepaRewardGroup
+  id: Mentor
+  name: Ментор
+  requiredRole: Mentor
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Administrator
+  name: Администратор
+  requiredRole: Administrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: HeadAdministrator
+  name: Главный Администратор
+  requiredRole: HeadAdministrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: SeniorAdministrator
+  name: Старший Администратор
+  requiredRole: SeniorAdministrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id:  SubHeadAdministrator
+  name: Заместитель Главного Администратора
+  requiredRole:  SubHeadAdministrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+# Модерация
+- type: ShlepaRewardGroup
+  id: Moderator
+  name: Модератор
+  requiredRole: Moderator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: HeadModerator
+  name: Старший Модератор
+  requiredRole: HeadModerator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true

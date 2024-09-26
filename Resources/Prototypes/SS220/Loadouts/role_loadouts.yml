@@ -1,12 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 #! Внутренние дела (Начало)
 
   # Агент внутренних дел
 - type: roleLoadout
   id: JobIAA
   groups:
-  - LawyerNeck
+  - IAAHead
+  - IAAGlasses
+  - IAANeck
   - IAAJumpsuit
+  - IAAOuterclothing
   - IAABackpacks #ss220 iaa loadout fix
+  - Survival
   - Trinkets
   - Gloves
 
@@ -14,11 +20,12 @@
 - type: roleLoadout
   id: JobBlueShield
   groups:
-  - SecurityNeck
+  - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - SecurityBelt
   - CommonBackpack
+  - Survival
   - Trinkets
 #! Внутренние дела (Конец)
 
@@ -33,6 +40,7 @@
   - SeniorSecJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SurvivalSecurity
   - SecurityShoes
   - SecurityBelt
   - Trinkets
@@ -46,6 +54,7 @@
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SurvivalSecurity
   - SecurityShoes
   - SecurityPDA
   - Trinkets
@@ -64,6 +73,7 @@
   - MedicalsBackpack
   - MedicalsMask
   - SeniorMedicalOuterClothing
+  - SurvivalMedical
   - SeniorShoes
   - Glasses
   - Trinkets
@@ -79,6 +89,7 @@
   - SeniorsEngineerJumpsuit
   - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
+  - SurvivalExtended
   - StationEngineerShoes
   - Trinkets
 #! Инженерный отдел (Конец)
@@ -96,6 +107,7 @@
   - SeniorSciensistOuterClothing
   - ScientistGloves
   - ScientistShoes
+  - Survival
   - Glasses
   - Trinkets
 #! Исследовательский отдел (Конец)
@@ -109,6 +121,7 @@
   - HatSeniorService
   - SeniorServiceJumpsuit
   - CommonBackpack
+  - Survival
   - Glasses
   - Trinkets
 #! Сервис (Конец)

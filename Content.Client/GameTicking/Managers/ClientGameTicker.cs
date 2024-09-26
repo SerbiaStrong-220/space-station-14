@@ -148,7 +148,10 @@ namespace Content.Client.GameTicking.Managers
             // Force an update in the event of this song being the same as the last.
             RestartSound = message.RestartSound;
 
-            _userInterfaceManager.GetUIController<RoundEndSummaryUIController>().OpenRoundEndSummaryWindow(message);
+            // SS220 Round End Titles begin
+            //_userInterfaceManager.GetUIController<RoundEndSummaryUIController>().OpenRoundEndSummaryWindow(message);
+            _userInterfaceManager.GetUIController<Content.Client.SS220.RoundEnd.RoundEndSummaryUIController>().OpenRoundEndSummaryWindow(message);
+            // SS220 Round End Titles end
         }
     }
 }

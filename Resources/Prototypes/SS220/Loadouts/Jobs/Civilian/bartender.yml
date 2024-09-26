@@ -55,3 +55,11 @@
     proto: BartenderSenior
   equipment:
     jumpsuit: ClothingUniformJumpskirtBartenderNanotrasen
+
+- type: loadout
+  id: BartenderPivozavr
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingSponsorPivozavr

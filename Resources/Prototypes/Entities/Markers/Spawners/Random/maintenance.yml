@@ -120,6 +120,7 @@
       - id: BalloonNT
       - id: BalloonCorgi
       - id: MysteryFigureBox
+      - id: RubberChicken
       # Cult
       - !type:AllSelector
         children:
@@ -177,7 +178,7 @@
       - id: CigarGold
       - id: ClothingUniformJumpsuitFamilyGuy
       # - id: WristwatchGold
-      - id: ClothingWristWatchGold # SS220 Wristwatch
+      - id: ClothingWristWatch # SS220 Wristwatch
       - id: RubberStampGreytide
 
 - type: entity

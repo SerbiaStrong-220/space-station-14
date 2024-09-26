@@ -449,7 +449,7 @@ namespace Content.Shared.Examine
         /// <seealso cref="PushMessage"/>
         public void PushMarkup(string markup, int priority=0)
         {
-            PushMessage(FormattedMessage.FromMarkup(markup), priority);
+            PushMessage(FormattedMessage.FromMarkupOrThrow(markup), priority);
         }
 
         /// <summary>
@@ -497,7 +497,7 @@ namespace Content.Shared.Examine
         /// <seealso cref="AddMessage"/>
         public void AddMarkup(string markup, int priority=0)
         {
-            AddMessage(FormattedMessage.FromMarkup(markup), priority);
+            AddMessage(FormattedMessage.FromMarkupOrThrow(markup), priority);
         }
 
         /// <summary>

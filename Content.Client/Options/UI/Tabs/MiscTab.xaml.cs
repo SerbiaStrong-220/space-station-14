@@ -36,12 +36,21 @@ public sealed partial class MiscTab : Control
             layoutEntries.Add(new OptionDropDownCVar<string>.ValueOption(layout.ToString()!, Loc.GetString($"ui-options-hud-layout-{layout.ToString()!.ToLower()}")));
         }
 
+        // SS220 Round End Titles begin
+        var roundEndTitlesModeEntries = new List<OptionDropDownCVar<Shared.SS220.CCVars.RoundEndTitlesMode>.ValueOption>();
+        foreach (var mode in Enum.GetValues<Shared.SS220.CCVars.RoundEndTitlesMode>())
+        {
+            roundEndTitlesModeEntries.Add(new(mode, Loc.GetString($"round-end-titles-options-mode-{(int)mode}")));
+        }
+        // SS220 Round End Titles end
+
         // Channel can be null in replays so.
         // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
         ShowOocPatronColor.Visible = _playerManager.LocalSession?.Channel?.UserData.PatronTier is { };
 
         Control.AddOptionDropDown(CVars.InterfaceTheme, DropDownHudTheme, themeEntries);
         Control.AddOptionDropDown(CCVars.UILayout, DropDownHudLayout, layoutEntries);
+        Control.AddOptionDropDown(Shared.SS220.CCVars.CCVars220.RoundEndTitlesOpenMode, DropDownRoundEndTitlesMode, roundEndTitlesModeEntries); // SS220 Round End Titles 
 
         Control.AddOptionCheckBox(CVars.DiscordEnabled, DiscordRich);
         Control.AddOptionCheckBox(CCVars.ShowOocPatronColor, ShowOocPatronColor);

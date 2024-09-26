@@ -1,0 +1,101 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by NightmareStalker(GitHub) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "JR_bw1"
+        },
+        {
+            "name": "JR_bw2"
+        },
+        {
+            "name": "JR_bw3"
+        },
+        {
+            "name": "JR_bw4"
+        },
+        {
+            "name": "JR_bw5"
+        },
+        {
+            "name": "JR_bw6"
+        },
+        {
+            "name": "JR_bwC1"
+        },
+        {
+            "name": "JR_bwC2"
+        },
+        {
+            "name": "JR_bwC3"
+        },
+        {
+            "name": "JR_bwC4"
+        },
+        {
+            "name": "JR_bwC5"
+        },
+        {
+            "name": "JR_bwC6"
+        },
+        {
+            "name": "JR_bwC7"
+        },
+        {
+            "name": "JR_bwC8"
+        },
+        {
+            "name": "JR_bwC9"
+        },
+        {
+            "name": "JR_col1"
+        },
+        {
+            "name": "JR_col2"
+        },
+        {
+            "name": "JR_col3"
+        },
+        {
+            "name": "JR_col4"
+        },
+        {
+            "name": "JR_col5"
+        },
+        {
+            "name": "JR_col6"
+        },
+        {
+            "name": "JR_colC1"
+        },
+        {
+            "name": "JR_colC2"
+        },
+        {
+            "name": "JR_colC3"
+        },
+        {
+            "name": "JR_colC4"
+        },
+        {
+            "name": "JR_colC5"
+        },
+        {
+            "name": "JR_colC6"
+        },
+        {
+            "name": "JR_colC7"
+        },
+        {
+            "name": "JR_colC8"
+        },
+        {
+            "name": "JR_colC9"
+        }
+    ]
+}

@@ -51,4 +51,47 @@ namespace Content.Shared.Weapons.Melee.Events
         public bool Cancelled = false;
         // SS220 hook attack event end
     }
+    //ss220 extended weapon logic start
+    public enum AttackType
+    {
+        NONE = 0,
+        LIGHT = 1 << 0,
+        HEAVY = 1 << 1,
+
+        All = ~NONE
+    }
+
+    /// <summary>
+    ///     SS220 Event raised on user for extended melee weapon logic.
+    /// </summary>
+    [Serializable]
+    public sealed class WeaponAttackEvent : EntityEventArgs
+    {
+        /// <summary>
+        ///     Entity that triggered the attack.
+        /// </summary>
+        public EntityUid User { get; }
+
+        /// <summary>
+        ///     Entity that was attacked.
+        /// </summary>
+        public EntityUid Target { get; }
+
+        /// <summary>
+        ///     Type of the attack that been used.
+        /// </summary>
+        public AttackType Type { get; }
+
+        /// <summary>
+        ///     The original location that was clicked by the user.
+        /// </summary>
+
+        public WeaponAttackEvent(EntityUid user, EntityUid target, AttackType type)
+        {
+            User = user;
+            Target = target;
+            Type = type;
+        }
+    }
+    //ss220 extended weapon logic end
 }

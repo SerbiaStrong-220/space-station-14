@@ -1,0 +1,30 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Экзокостюм утилизаторов
+- type: entity
+  parent: ClothingOuterStorageToggleableBase
+  id: ClothingOuterExosuitSalvage
+  name: экзокостюм утилизатора
+  description: Специальный костюм с капюшоном, почти не стесняющий движений и предоставляющий защиту.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/salvage_exosuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/salvage_exosuit.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
+        Caustic: 0.85
+        Radiation: 0.85
+        Stamina: 0.9
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.90
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodExosuitSalvage

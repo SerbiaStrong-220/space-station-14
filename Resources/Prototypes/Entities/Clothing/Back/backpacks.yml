@@ -197,7 +197,7 @@
 
 #ERT
 - type: entity
-  parent: ClothingBackpack
+  parent: [ ClothingBackpack, BaseCentcommContraband ]
   id: ClothingBackpackERTLeader
   name: ERT leader backpack
   description: A spacious backpack with lots of pockets, worn by the Commander of an Emergency Response Team.
@@ -274,7 +274,7 @@
 
 #SS220 RETURNED FOR CENTCOMM MAP
 - type: entity
-  noSpawn: false
+  
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadFilled
   name: death squad backpack
@@ -301,6 +301,7 @@
         - id: Hypospray
         - id: DeathAcidifierImplanter # crew will try to steal their amazing hardsuits
         - id: FreedomImplanter
+        - id: PinpointerNuclear # Centcomm map update v0.5
 #SS220 RETURNED FOR CENTCOMM MAP
 
 #Syndicate

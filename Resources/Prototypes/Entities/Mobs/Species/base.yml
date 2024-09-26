@@ -136,6 +136,7 @@
     - RadiationProtection
     - Drowsiness
     - TemporaryWaddle  #SS220 Temporary waddle status effect
+    - Adrenaline
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -214,6 +215,7 @@
     - FootstepSound
     - DoorBumpOpener
     - ZombifyableByMelee
+    - AnomalyHost
 
 - type: entity
   save: false
