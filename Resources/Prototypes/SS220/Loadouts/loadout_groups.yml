@@ -35,12 +35,6 @@
   loadouts:
   - LawyerNeck
   - CloakJujutsuShlepa
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: IAAJumpsuit
@@ -102,12 +96,6 @@
   - Headphones
   - ProtectGear
   - BlueShieldNeckCloak
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -148,6 +136,7 @@
 - type: loadoutGroup
   id: SecurityGlasses
   name: loadout-group-security-glasses
+  minLimit: 0
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
@@ -225,6 +214,7 @@
   - SeniorMedicalLabCoat
   - MedicalDoctorWintercoat
   - ChemistWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: MedicalsBackpack
@@ -296,6 +286,7 @@
   - BrigmedicVestSecurity
   - BrigmedicCoatLab
   - BrigmedicVestArmorMedSec
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: BrigmedicBackpack
@@ -326,6 +317,7 @@
 - type: loadoutGroup
   id: MedicalGlasses
   name: loadout-group-medical-glasses
+  minLimit: 0
   loadouts:
   - Glasses
   - CyberMedVisor
@@ -367,12 +359,14 @@
   - StationEngineerOuterVest
   - StationEngineerWintercoat
   - AtmosphericTechnicianWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
   # Ведущий инженер (Конец)
 
   # Инженер (Начало)
 - type: loadoutGroup
   id: EngineerGlasses
   name: loadout-group-engineer-glasses
+  minLimit: 0
   loadouts:
   - GlassesEngineer
   - CyberGlassesEngineer
@@ -404,12 +398,14 @@
   - SeniorSciensistLabCoat
   - ScienceWintercoat
   - RoboticistWintercoat
+  - CyberJacketRnD #SS220-TwoOne-Floppa-Iteration
   # Ведущий учёный (Конец)
 
   # Учёный (Начало)
 - type: loadoutGroup
   id: ScientistGlasses
   name: loadout-group-scientist-glasses
+  minLimit: 0
   loadouts:
   - Glasses
   - CyberRnDVisor
@@ -557,15 +553,3 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
-
-  # Плащи
-- type: loadoutGroup
-  id: SponsorNeck # Не используется
-  name: loadout-group-neck
-  loadouts:
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck

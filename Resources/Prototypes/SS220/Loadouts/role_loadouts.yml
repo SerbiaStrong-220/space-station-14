@@ -38,6 +38,7 @@
   id: JobSeniorOfficer
   groups:
   - SecurityHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck  #holster loadout
   - SeniorSecJumpsuit
   - SecurityBackpack
@@ -53,6 +54,7 @@
   id: JobSecurityPilot
   groups:
   - SecurityPilotHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
@@ -72,6 +74,7 @@
   groups:
   - HatSeniorMedical
   - MedicalNeck
+  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
@@ -79,7 +82,7 @@
   - SeniorMedicalOuterClothing
   - SurvivalMedical
   - SeniorShoes
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Медицинский отдел (Конец)
@@ -91,6 +94,7 @@
   id: JobSeniorEngineer
   groups:
   - HatSeniorEngineer
+  - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorsEngineerJumpsuit
   - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
@@ -107,6 +111,7 @@
   id: JobSeniorResearcher
   groups:
   - HatSeniorSciensist
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistNeck
   - SeniorSciensistJumpsuit
   - ScientistBackpack
@@ -114,7 +119,7 @@
   - ScientistGloves
   - ScientistShoes
   - Survival
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Исследовательский отдел (Конец)

@@ -842,6 +842,7 @@
   minLimit: 0
   loadouts:
   - ChiefEngineerWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChiefEngineerShoes
@@ -931,6 +932,7 @@
   minLimit: 0
   loadouts:
   - AtmosphericTechnicianWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: AtmosphericTechnicianBackpack
@@ -997,6 +999,7 @@
   loadouts:
   - ResearchDirectorLabCoat
   - ResearchDirectorWintercoat
+  - CyberJacketRnD #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ResearchDirectorShoes
@@ -1136,6 +1139,7 @@
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
   - Outer1984 #SS220-Two Floppa Iteration
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: WardenHead
@@ -1159,6 +1163,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: SecurityHead
@@ -1334,6 +1339,7 @@
   loadouts:
   - ChiefMedicalOfficerLabCoat
   - ChiefMedicalOfficerWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
@@ -1454,6 +1460,7 @@
   - RegularLabCoat
   - ChemistLabCoat
   - ChemistWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChemistBackpack
@@ -1487,6 +1494,7 @@
   loadouts:
   - ParamedicWindbreaker
   - ParamedicWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ParamedicShoes

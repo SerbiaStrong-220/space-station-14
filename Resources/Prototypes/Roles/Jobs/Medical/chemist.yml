@@ -22,7 +22,7 @@
     ears: ClothingHeadsetMedical
     belt: ChemBag
     pocket1: HandLabeler
-    eyes: ClothingEyesGlassesChemical
+#    eyes: ClothingEyesGlassesChemical #SS220-TwoOne-Floppa-Iterations
   #storage:
     #back:
     #- Stuff

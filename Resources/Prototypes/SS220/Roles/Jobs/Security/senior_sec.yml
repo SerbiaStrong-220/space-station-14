@@ -33,7 +33,7 @@
 - type: startingGear
   id: SeniorOfficerGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
+#    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     id: SeniorOfficerPDA
     ears: ClothingHeadsetSecurity
     pocket1: WeaponPistolMk58Nonlethal

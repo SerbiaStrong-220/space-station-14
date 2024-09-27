@@ -33,7 +33,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup #SS220-IAA-Loadout
     id: IAAPDA
-    eyes: ClothingEyesGlassesSunglasses
+#    eyes: ClothingEyesGlassesSunglasses #SS220-TwoOne-Floppa-Iteration
     ears: ClothingHeadsetIAA
     # back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout #SS220 - FIX loadout IAA
   inhand:
