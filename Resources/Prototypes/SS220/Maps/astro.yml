@@ -10,7 +10,7 @@
       stationProto: AstroNanotrasenStation
       components:
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_eclipse.yml
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_astro.yml
         - type: StationNameSetup
           mapNameTemplate: '{0} Astro {1}'
           nameGenerator:
@@ -22,6 +22,7 @@
             #Command
             Captain: [ 1, 1 ]
             IAA: [ 1, 1 ]
+            Magistrate: [1, 1]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             #Security
@@ -56,6 +57,7 @@
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
             Borg: [ 2, 2 ]
+            StationAi: [ 1, 1 ]
             SeniorResearcher: [ 1, 1 ]
             #Service
             Bartender: [ 2, 2 ]
@@ -92,6 +94,8 @@
           - Robotisation
           - Homekeepers
           - ComplexPVO
+          #Station special
+          - XenobiologyRepair
 
 - type: entity
   id: AstroNanotrasenStation
@@ -100,6 +104,6 @@
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData
-        mapTexture: SS220/ViewableMaps/eclipse.png
-        originOffset: -56, -91
+        mapTexture: SS220/ViewableMaps/Astro.png
+        originOffset: 103, -109
         mapScale: 6.4
