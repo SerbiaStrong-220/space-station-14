@@ -1,0 +1,49 @@
+# Плащи
+
+- type: loadout
+  id: CoderNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DeveloperSponsorTier
+  equipment:
+    neck: ClothingSponsorNeckCoder
+
+- type: loadout
+  id: MapperNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MapperSponsorTier
+  equipment:
+    neck: ClothingSponsorNeckMapper
+
+- type: loadout
+  id: SpriterNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DeveloperSponsorTier #Нет тира для спрайтеров
+  equipment:
+    neck: ClothingSponsorNeckSpriter
+
+- type: loadout
+  id: TrackerExpertNeck #Трекероведы
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DeveloperSponsorTier #Нет тира для трекероведов
+  equipment:
+    neck: ClothingSponsorNeckTrackerExpert
+
+- type: loadout
+  id: AdministratorNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+  equipment:
+    neck: ClothingSponsorNeckAdministrator
+
+- type: loadout
+  id: HeadDeveloperNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HeadDeveloperSponsorTier
+  equipment:
+    neck: ClothingSponsorNeckHeadDevelopment

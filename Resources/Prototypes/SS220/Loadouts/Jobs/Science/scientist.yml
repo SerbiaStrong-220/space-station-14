@@ -8,6 +8,15 @@
       role: JobScientist
       time: 108000 # 30 hrs
 
+# Glasses
+- type: loadout
+  id: CyberRnDVisor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorCyberChemVisor
+
 # Jumpsuit
 - type: loadout
   id: ScientistJumpsuitTurtleneck
@@ -40,3 +49,12 @@
     proto: ScientistTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorPurple
+
+# Outerclothing
+- type: loadout
+  id: CyberJacketRnD
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCyberJacketRnD

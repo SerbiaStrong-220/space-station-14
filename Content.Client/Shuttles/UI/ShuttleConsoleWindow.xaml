@@ -2,8 +2,8 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
                       Title="{Loc 'shuttle-console-window-title'}"
-                      SetSize="960 762"
-                      MinSize="960 762">
+                      SetSize="960 812"
+                      MinSize="960 812">
     <BoxContainer Orientation="Vertical">
         <!-- Top row mode buttons -->
         <BoxContainer Name="ModeButtons"
@@ -39,5 +39,22 @@
             <ui:MapScreen Name="MapContainer" Visible="False"/>
             <ui:DockingScreen Name="DockContainer" Visible="False"/>
         </BoxContainer>
+        <!-- SS220 Cruise-control begin -->
+        <BoxContainer Orientation="Vertical" Margin="5">
+            <BoxContainer Orientation="Horizontal" Align="Center">
+                <Label Text="{Loc 'shuttle-console-cruise-control'}" VerticalAlignment="Center" Align="Center"/>
+                <Button Name="EnableCruiseButton"
+                    ToggleMode="True"
+                    Text="Выкл"
+                    VerticalAlignment="Center"
+                    Margin="5"/>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="Назад" Margin="5"/>
+                <Slider Name="CruiseControlSlider" HorizontalExpand="True" MinValue="-1" MaxValue="1"/>
+                <Label Text="Вперёд" Margin="5"/>
+            </BoxContainer>
+        </BoxContainer>
+        <!-- SS220 Cruise-control end -->
     </BoxContainer>
 </controls:FancyWindow>

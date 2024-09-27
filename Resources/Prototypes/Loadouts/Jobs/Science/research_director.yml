@@ -53,3 +53,10 @@
   id: ResearchDirectorWintercoat
   equipment:
     outerClothing: ClothingOuterWinterRD
+
+#SS220-RD-New-Loadout-begin
+- type: loadout
+  id: RnDPDA
+  equipment:
+    id: RnDPDA
+#SS220-RD-New-Loadout-end

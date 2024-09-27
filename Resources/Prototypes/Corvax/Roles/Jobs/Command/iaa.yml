@@ -41,7 +41,7 @@
 #SS220-IAA-Loadout-Begin
   storage:
     back:
-    - BoxSurvival
+#    - BoxSurvival SS220-Two Floppa Iteration
     - Telescopichka
     - Flash
     - ExpensiveLighterNanotrasen

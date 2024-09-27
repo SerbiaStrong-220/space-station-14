@@ -21,6 +21,9 @@
     sprite: SS220/Clothing/Sponsor/blackcoat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/blackcoat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
 
 - type: entity
   parent: ClothingSponsorOuterStorageBase
@@ -340,7 +343,433 @@
   - type: Item
     storedRotation: -90
 
-# Плащи
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatDevilHorns
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatDevilHornsAlt
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/devils_horns-alt.rsi
+
+- type: entity
+  parent: [ ClothingSponsorHeadBase, BaseFoldable ]
+  id: ClothingHeadHatHalo
+  name: ангельский нимб с крыльями
+  description: Двойная ангельская красота!
+  suffix: Шлёпа
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: halo-verb
+    foldVerbText: halo-hell-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: hell
+    foldedHeldPrefix: hell
+
+- type: entity
+  parent: ClothingHeadHatHalo
+  id: ClothingHeadHatHaloHell
+  name: нимб падшего ангела с крыльями
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo.rsi
+    equippedPrefix: hell
+  - type: Item
+    heldPrefix: hell
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  parent: [ ClothingSponsorHeadBase, BaseFoldable ]
+  id: ClothingHeadHatHaloAlt
+  name: ангельский нимб
+  description: Покажите свою ангельскую красоту!
+  suffix: Шлёпа
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo-alt.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo-alt.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: halo-verb
+    foldVerbText: halo-hell-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: hell
+    foldedHeldPrefix: hell
+
+- type: entity
+  parent: ClothingHeadHatHaloAlt
+  id: ClothingHeadHatHaloAltHell
+  name: нимб падшего ангела
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Afterlife/halo-alt.rsi
+    equippedPrefix: hell
+  - type: Item
+    heldPrefix: hell
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadVipCrocks
+  name: випкрок
+  description: Золотые кроксы, но одеваются.. На голову?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/crocs.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/crocs.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -150
+    damage:
+      types:
+        Blunt: 0
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorPivozavr
+  name: футболка "Пивовазавр"
+  description: Пиво начинает свой путь с эпохи динозавров, вы не знали?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/pivozavr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/pivozavr.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingUniformJumpsuitMuzhik
+  name: униформа мужика
+  description: Пахнет самогоном.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Jumpsuit/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Jumpsuit/muzhik.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatMuzhik
+  name: фуражка мужика
+  description: Фуражка самогонных дел мастера.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite:  SS220/Clothing/Sponsor/Fools/Head/Hats/muzhik.rsi
+  - type: Clothing
+    sprite:  SS220/Clothing/Sponsor/Fools/Head/Hats/muzhik.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorScarfMuzhik
+  name: шарф мужика
+  description: Длинный и узкий для удобного распития самогона.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Neck/Scarfs/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Neck/Scarfs/muzhik.rsi
+  - type: Item
+    storedRotation: -90
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorMaskMuzhik
+  name: маска мужика
+  description: Нет лучше времяпрепровождения, чем распивать самогон с товарищами.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Mask/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Mask/muzhik.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorBootsMuzhik
+  name: ботинки мужика
+  description: Проложит путь к ближайшим самогонным месторождениям.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Shoes/Boots/laceups_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Shoes/Boots/laceups_red.rsi
+
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesMuzhik
+  name: перчатки мужика
+  description: Ни один стакан самогона не выскользнет из ваших рук.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Hands/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Hands/muzhik.rsi
+  - type: Fiber
+    fiberColor: fibers-red
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingUniformJumpsuitMoryak
+  name: костюм морячка
+  description: Мимская матроска для покорения необъятного океана (самогона).
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Jumpsuit/moryachok.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Jumpsuit/moryachok.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatMoryak
+  name: беретка морячка
+  description: Берет матроса с рыжим помпончиком.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite:  SS220/Clothing/Sponsor/Fools/Head/Hats/moryachok.rsi
+  - type: Clothing
+    sprite:  SS220/Clothing/Sponsor/Fools/Head/Hats/moryachok.rsi
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingMaskMoryak
+  name: маска морячка
+  description: Есть легенда, что при виде самогона маска улыбается.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Mask/moryachok.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Mask/moryachok.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingShoesMoryak
+  name: башмаки морячка
+  description: Тесные матроские башмаки, но хотя бы водонепроницаемые.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Fools/Shoes/Boots/moryachok_flops.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Fools/Shoes/Boots/moryachok_flops.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingUniformJumpsuitJujutsuShlepa
+  name: рубашка офисного работника
+  description: Рубашка, пропитанная запахом Малазии. От неё веет усталостью, может возьмёте отдых?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijumpsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijumpsuit.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorCoatJujutsuShlepa
+  name: пиджак офисного работника.
+  description: Вы не чувствуете себя по-настоящему ценным? Бюрократия поможет вам решить эту проблема!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijacket.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamijacket.rsi
+
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorGlassesJujutsuShlepa
+  name: очки офисного работника
+  description: Семь к трём - идеальное соотношение
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamigoggles.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamigoggles.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorTieJujutsuShlepa
+  name: галстук офисного работника
+  description: U r my SPECIAL.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamitie.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/JujutsuShlepa/nanamitie.rsi
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsor1984
+  name: куртка "1984"
+  description: Большой брат следит за тобой.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/1984.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/1984.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
+
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorSamuraiJacket
+  name: самурайская куртка
+  description: Дешёвый эпатаж, консюмеризм и бунт против серости.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/vbomberjacket.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/vbomberjacket.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - state: equipped-OUTERCLOTHING-unshaded
+        shader: unshaded
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckSS220
+  name: накидка причастия
+  description: Вручается избранным, удостоенных уникального места в этом мире.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/ss220.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/ss220.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckCoder
+  name: плащ созидания
+  description: Особый плащ, носителям оного дозволено вмешиваться и менять правила мира.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/coder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/coder.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckMapper
+  name: плащ сотворения
+  description: Особый плащ, чьим обладателям выпала честь участвовать в сотворении мира.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/mapper.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/mapper.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckSpriter
+  name: плащ начертания
+  description: Особый плащ, чьи хозяева привнесли краски и наполнили изяществом мир.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/spriter.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/spriter.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckTrackerExpert #Трекероведы
+  name: плащ равновесия
+  description: Особый плащ для тех, кто посвятил себя защите внешнему миру.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/pivocloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/pivocloak.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckAdministrator
+  name: плащ порядка
+  description: Вручается избранным, удостоенных уникального места в этом мире.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/administrator.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cloak/administrator.rsi
+
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckHeadDevelopment
+  name: плащ ведающего созидания
+  description: Особый плащ, принадлежащий сущности, которой предписывают власть над самим мирозданием.
+  suffix: Sponsor # Награда ведущих разработчиков
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cloak/vedicloak.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -361,11 +790,105 @@
       toggleable-clothing: !type:ContainerSlot {}
 
 - type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCloakHeadDevelopment
-  name: плащ ведающего созидания
-  description: Особый плащ, принадлежащий сущности, которой предписывают власть над самим мирозданием.
-  suffix: Sponsor # Награда ведущих разработчиков
+  parent: [ ClothingSponsorSamuraiJacket, ClothingOuterVestArmorSec ]
+  id: ClothingSponsorCyberVestSecurity
+  name: кибербронежилет охраны
+  description: Светящиеся элементы не дают вам никакого тактического преимущества... но зато какой стиль!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/neck/vedicloak.rsi
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cybersecarmor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cybersecarmor.rsi
+
+- type: entity
+  parent: ClothingSponsorSamuraiJacket
+  id: ClothingSponsorCyberJacketMed
+  name: пиджак врача с кардиоутройством
+  description: Синий пиджак с исключительно косметическим устройством. Сразите стилем своих пациентов наповал!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cybermedsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cybermedsuit.rsi
+
+- type: entity
+  parent: ClothingSponsorSamuraiJacket
+  id: ClothingSponsorCyberJacketRnD
+  name: киберхуди учёного
+  description: В нём уютно и тепло, главное не заснуть перед аномалией. Полное удобство для сыча.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cyberrndsweater.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cyberrndsweater.rsi
+
+- type: entity
+  parent: ClothingSponsorSamuraiJacket
+  id: ClothingSponsorCyberJacketEng
+  name: киберкуртка инженера
+  description: Гладкий и прочный материал, светящиеся элементы в темноте, что ещё нужно для счастья инженеру?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cyberengijacket.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Coats/cyberengijacket.rsi
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesSecurity ]
+  id: ClothingSponsorCyberSecVisor
+  name: кибервизор охраны
+  description: Несмотря на свой грозный вид не защищает от вспышек и папарацций.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/secvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/secvisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesMeson ]
+  id: ClothingSponsorCyberEngVisor
+  name: киберсварочные очки
+  description: Комически большим размером удалось добиться увеличения эффективности очков на целых 0,42%!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/engivisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/engivisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesHudMedical ]
+  id: ClothingSponsorCyberMedVisor
+  name: медицинский кибервизор
+  description: За свою цену он обязан показывать гораздо больше, чем просто состояние пациента, но это лишь мечты...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/medvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/medvisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesChemical ]
+  id: ClothingSponsorCyberChemVisor
+  name: кибервизор химического анализа
+  description: Для гарантии точности анализа были установлены дополнительные датчики, что повысило её габариты. Теперь никто по вашим глазам не узнает спите ли вы или нет.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/chemvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/chemvisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: ClothingSponsorEyesBaseUnshaded
+  id: ClothingSponsorCyberCevVisor
+  name: белый визор
+  description: Визор гражданского типа. Используя продвинутые материалы удалось добиться свечению в темноте без надобности в электроэнергии.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/civvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Cyberpunk/Visors/civvisor.rsi
+  - type: VisionCorrection

@@ -1,4 +1,52 @@
 #SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Clown Time
+- type: loadoutEffectGroup
+  id: ClownPennywise
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 180000
+
+# Head
+- type: loadout
+  id: HeadMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    head: ClothingHeadHatMuzhik
+
+# Mask
+- type: loadout
+  id: MaskClown
+  equipment:
+    mask: ClothingMaskClown
+
+- type: loadout
+  id: ClownPennywiseMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownPennywise
+  equipment:
+    mask: ClothingMaskClownPennywise
+
+- type: loadout
+  id: MaskMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    mask: ClothingSponsorMaskMuzhik
+
+- type: loadout
+  id: MaskGold
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    mask: ClothingSponsorGoldClownMask
 
 # Jumpsuit
 - type: loadout
@@ -11,17 +59,22 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtClowns
 
-# Clown Time
-- type: loadoutEffectGroup
-  id: ClownPennywise
+- type: loadout
+  id: JumpsuitMuzhik
   effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobClown
-      time: 180000
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMuzhik
 
-# Jumpsuit
+- type: loadout
+  id: JumpsuitGold
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingSponsorGoldClownSuit
+
 - type: loadout
   id: ClownPennywiseJumpsuit
   effects:
@@ -39,16 +92,40 @@
   equipment:
     neck: ClothingNeckRuffClownPennywise
 
-# Mask
 - type: loadout
-  id: ClownPennywiseMask
+  id: CloakMuzhik
   effects:
   - !type:GroupLoadoutEffect
-    proto: ClownPennywise
+    proto: BigShlopaSponsorTier
   equipment:
-    mask: ClothingMaskClownPennywise
+    neck: ClothingSponsorScarfMuzhik
+
+# Gloves
+- type: loadout
+  id: GlovesMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    gloves: ClothingHandsGlovesMuzhik
 
 # Shoes
+- type: loadout
+  id: ShoesMuzhik
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    shoes: ClothingSponsorBootsMuzhik
+
+- type: loadout
+  id: ShoesGold
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GoldenShlopaSponsorTier
+  equipment:
+    shoes: ClothingSponsorGoldClownShoes
+
 - type: loadout
   id: ClownPennywiseShoes
   effects:

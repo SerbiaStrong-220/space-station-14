@@ -40,6 +40,3 @@
     belt: BoxFolderClipboard
     ears: ClothingHeadsetService
     gloves: ClothingHandsGlovesColorWhite
-  storage:
-    back:
-    - BoxSurvival

@@ -1331,7 +1331,7 @@
   - type: Machine
     board: OreProcessorIndustrialMachineCircuitboard
   - type: Lathe
-    materialUseMultiplier: 0.75
+    materialUseMultiplier: 0.5 #ss220 oreprocessor balance
     timeMultiplier: 0.5
     staticRecipes:
       - SheetSteel

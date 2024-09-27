@@ -1,0 +1,49 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Fill sprites are made by TheArturZh for SS220. inhand sprites are modified cev-eris sprites. Case sprites are taken from tgstation at commit https://github.com/tgstation/tgstation/tree/ed71735fb3d60e834abf5771525c98809a0bb6f5. resprited by vimenant2(discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cigar1"
+    },
+    {
+      "name": "cigar2"
+    },
+    {
+      "name": "cigar3"
+    },
+    {
+      "name": "cigar4"
+    },
+    {
+      "name": "cigar5"
+    },
+    {
+      "name": "cigar6"
+    },
+    {
+      "name": "cigar7"
+    },
+    {
+      "name": "cigar8"
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

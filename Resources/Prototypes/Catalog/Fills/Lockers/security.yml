@@ -128,6 +128,8 @@
         prob: 0.5
       - id: ClothingOuterCoatLabSecurityMedic # Corvax-Resprite
         prob: 0.5
+      - id: OxygenTankFilled   #SS220 add-tanks-brigmed
+      - id: NitrogenTankFilled #SS220 add-tanks-brigmed
 
 - type: entity
   id: LockerDetectiveFilled

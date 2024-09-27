@@ -34,7 +34,7 @@
 - type: startingGear
   id: ResearchDirectorGear
   equipment:
-    id: RnDPDA
+    #id: RnDPDA #SS220-RD-New-Loadout
     ears: ClothingHeadsetRD
   storage:
     back:

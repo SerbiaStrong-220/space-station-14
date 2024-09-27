@@ -571,7 +571,6 @@ entities:
           occludes: True
           ents:
           - 56
-          - 55
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -601,15 +600,6 @@ entities:
         - 0
         - 0
         - 0
-- proto: ClothingMaskYsatyu
-  entities:
-  - uid: 55
-    components:
-    - type: Transform
-      parent: 54
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: ComfyChair
   entities:
   - uid: 58

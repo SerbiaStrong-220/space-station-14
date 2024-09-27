@@ -1,0 +1,7 @@
+- type: loadout
+  id: CloakJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    neck: ClothingSponsorTieJujutsuShlepa

@@ -1,5 +1,6 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+# Курение
 - type: entity
   parent: BaseCigarette # SS220 Cigarettes questions
   id: SponsorCig
@@ -38,7 +39,10 @@
   - type: StorageFill
     contents:
     - id: SponsorCig
-      amount: 10
+      amount: 12
+  - type: Storage
+    grid:
+    - 0,0,5,1
   - type: Sprite
     sprite: SS220/Objects/Sponsor/cigs/pack.rsi
     layers:
@@ -70,6 +74,30 @@
       map: ["cig6"]
       sprite: SS220/Objects/Sponsor/cigs/pack.rsi
       visible: false
+    - state: cig7
+      map: ["cig7"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      sprite: SS220/Objects/Sponsor/cigs/pack.rsi
+      visible: false
   - type: ItemCounter
     count:
       tags: [Cigarette]
@@ -81,6 +109,12 @@
     - cig4
     - cig5
     - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
   - type: Item
     sprite: SS220/Objects/Sponsor/cigs/pack.rsi
 
@@ -107,11 +141,94 @@
     contents:
       - id: SponsorCigPack
         amount: 5
-      - id: Lighter
+      - id: ExpensiveLighterSponsor
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
 
+- type: entity
+  id: FloppaCigar
+  parent: Cigar
+  name: элитная сигара
+  description: Сигара, предназначенная для элиты.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/cigar-floppa.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Sponsor/cigs/cigar-floppa.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/cigar-floppa.rsi
+
+- type: entity
+  id: FloppaCigarCase
+  parent: [ CigarCase ]
+  name: элитный портсигар
+  description: Футляр элитных эдемских сигар прямиком из Марса!
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/floppa-case.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/floppa-case.rsi
+  - type: StorageFill
+    contents:
+    - id: FloppaCigar
+      amount: 8
+
+- type: entity
+  parent: FlippoLighter
+  id: ExpensiveLighterSponsor
+  name: элитная зажигалка
+  description: Элитная зажигалка элитных людей для не менее элитных сигар!
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/floppa-zippo.rsi
+    layers:
+    - state: zippo_shlepa_icon_base
+      map: ["base"]
+    - state: zippo_shlepa_open
+      map: ["open"]
+      visible: false
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+  - type: Item
+    size: Tiny
+    sprite: SS220/Objects/Sponsor/cigs/floppa-zippo.rsi
+    heldPrefix: zippo
+
+- type: entity
+  id: SmokingPipeSponsor
+  parent: SmokingPipe
+  name: элитная курительная трубка
+  description: Прямо как курил дедуля.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+
+- type: entity
+  id: SmokingPipeFilledTobaccoSponsor
+  parent: SmokingPipeFilledTobacco
+  name: элитная курительная трубка
+  description: Прямо как курил дедуля.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/cigs/floppa-pipe.rsi
+
+# Еда/Напитки
 - type: entity
   parent: FoodSnackBase
   id: SponsorFoodCandy
@@ -151,8 +268,229 @@
     sound:
       path: /Audio/Effects/unwrap.ogg
 
-# Наборы
+- type: entity
+  parent: DrinkChampagneBottleFull
+  id: DrinkChampagneSponsorBottleFull
+  name: бутылка элитного шампанского
+  description: Элитное шампанское, сделанная таярочками, специально для самых важных людей!
+  suffix: Шлёпа
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: ChampagneSponsor
+          Quantity: 100
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/drinks/champagnebottle_floppa.rsi
 
+- type: reagent
+  id: ChampagneSponsor
+  name: reagent-name-champagnesponsor
+  parent: BaseAlcohol
+  desc: reagent-desc-champagnesponsor
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: champagne
+  color: "#e8e4d6"
+  recognizable: true
+  metamorphicSprite:
+    sprite: SS220/Objects/Sponsor/drinks/champagneglass_floppa.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+  fizziness: 0.8
+
+- type: entity
+  parent: DrinkBeerCan
+  id: DrinkBeerCanSponsor
+  name: банка пива "Tracker"
+  description: Банка пива "Tracker", особенный напиток для дворфов "Трекероведов".
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Beer
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/drinks/beer_can.rsi
+  - type: Item
+    sprite: SS220/Objects/Sponsor/drinks/beer_can.rsi
+  - type: Tag
+    tags:
+    - SponsorBeer
+
+- type: Tag
+  id: SponsorBeer
+
+- type: entity
+  id: DrinkCanPackBeerSponsor
+  parent: DrinkCanPack
+  name: упаковка пива "Tracker"
+  description: Прогресс не возможен без пива!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/drinks/6pack.rsi
+  - type: Storage
+    whitelist:
+      tags:
+        - SponsorBeer
+    hideStackVisualsWhenClosed: false
+  - type: StorageFill
+    contents:
+      - id: DrinkBeerCanSponsor
+        amount: 6
+  - type: ItemCounter
+    count:
+      tags: [SponsorBeer]
+
+# Игрушки
+
+- type: entity
+  parent: BasePlushie
+  id: SponsorElWycc
+  suffix: Шлёпа
+  name: Максон
+  description: КРИЧИ! КРИЧИ КАК СУЧЕЧКА!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+  - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: Wycco-Axe
+        whitelist:
+          tags:
+          - WyccoAxe
+  - type: ItemMapper
+    mapLayers:
+      wycc_axe:
+        whitelist:
+          tags:
+          - WyccoAxe
+    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
+  - type: ContainerFill
+    containers:
+      item:
+      - SponsorElWyccAxe
+  - type: Appearance
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAAAT_wycc.ogg
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
+  - type: UseDelay
+    delay: 5.0
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 100
+  - type: StaticPrice
+    price: 5
+
+- type: entity
+  parent: BaseKnife
+  id: SponsorElWyccAxe
+  suffix: Шлёпа
+  name: мини топорик
+  description: Мини топор для мини игрушки.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/wyccaxe.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Stamina: 1
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - WyccoAxe
+
+- type: entity
+  parent: BasePlushie
+  id: SmokingFish
+  name: курящая рыба
+  description: Рыба тоже курит!
+  suffix: Шлёпа
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Sponsor/toy/smoking_fish.rsi
+      state: icon
+    - type: MeleeWeapon
+      wideAnimationRotation: -135
+      soundHit:
+        collection: SponsorSmokingIsHarmful
+    - type: Item
+      size: Small
+      sprite: SS220/Objects/Sponsor/toy/smoking_fish.rsi
+    - type: EmitSoundOnUse
+      sound:
+        collection: SponsorSmokingFish
+    - type: EmitSoundOnActivate
+      sound:
+        collection: SponsorSmokingFish
+    - type: EmitSoundOnCollide
+      sound:
+        collection: SponsorSmokingFish
+    - type: EmitSoundOnTrigger
+      sound:
+        collection: SponsorSmokingFish
+
+- type: entity
+  parent: BasePlushie
+  id: PlushFloppa
+  name: плюшевый шлёпа
+  description: Очаровательная мягкая игрушка, напоминающая большого шлёпу
+  suffix: Шлёпа
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Sponsor/toy/plushshlepa.rsi
+      state: icon
+    - type: MeleeWeapon
+      wideAnimationRotation: -135
+    - type: Item
+      size: Small
+      sprite: SS220/Objects/Sponsor/toy/plushshlepa.rsi
+    - type: EmitSoundOnUse
+      sound:
+        collection: SponsorFloppaHissing
+    - type: EmitSoundOnActivate
+      sound:
+        collection: SponsorFloppaHissing
+    - type: EmitSoundOnCollide
+      sound:
+        collection: SponsorFloppaHissing
+    - type: EmitSoundOnTrigger
+      sound:
+        collection: SponsorFloppaHissing
+
+# Наборы
 - type: entity
   parent: BaseItem
   id: SponsorBoxBase
@@ -292,79 +630,157 @@
     sound:
       path: /Audio/Effects/unwrap.ogg
 
-# ss220-fix-WYCC!!!
+- type: entity
+  parent: SponsorBoxBase
+  id: SponsorBoxJujutsuShlepa
+  name: костюм офисного работника
+  description: Содержит в себе костюм офисного работника. Осторожно! Набор предметов не поместится в ваших руках!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingUniformJumpsuitJujutsuShlepa
+    - id: ClothingSponsorCoatJujutsuShlepa
+    - id: ClothingSponsorGlassesJujutsuShlepa
+    - id: ClothingSponsorTieJujutsuShlepa
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  parent: BasePlushie
-  id: SponsorElWycc
-  suffix: Шлёпа
-  name: Максон
-  description: КРИЧИ! КРИЧИ КАК СУЧЕЧКА!
+  parent: SponsorBoxBase
+  id: DrinkCanPackBeerSponsorBox
+  name: упаковка пива "Tracker"
+  description: Содержит в себе шесть банок пива!
   components:
-  - type: Sprite
-    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
-    state: icon
-  - type: Item
-    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
-  - type: Matchbox
-  - type: ContainerContainer
-    containers:
-      item: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      item:
-        name: Wycco-Axe
-        whitelist:
-          tags:
-          - WyccoAxe
-  - type: ItemMapper
-    mapLayers:
-      wycc_axe:
-        whitelist:
-          tags:
-          - WyccoAxe
-    sprite: SS220/Objects/Sponsor/wycc_overlay.rsi
-  - type: ContainerFill
-    containers:
-      item:
-      - SponsorElWyccAxe
-  - type: Appearance
-  - type: EmitSoundOnCollide
+  - type: SpawnItemsOnUse
+    items:
+    - id: DrinkCanPackBeerSponsor
     sound:
-      path: /Audio/SS220/Items/Toys/BUHAAAT_wycc.ogg
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
-  - type: EmitSoundOnActivate
-    sound:
-      path: /Audio/SS220/Items/Toys/BUHAT_wycc.ogg
-  - type: UseDelay
-    delay: 5.0
-  - type: PhysicalComposition
-    materialComposition:
-      Cloth: 100
-  - type: StaticPrice
-    price: 5
+      path: /Audio/Effects/unwrap.ogg
+
+# Аварийные запасы
 
 - type: entity
-  parent: BaseKnife
-  id: SponsorElWyccAxe
-  suffix: Шлёпа
-  name: мини топорик
-  description: Мини топор для мини игрушки.
+  parent: BoxSurvival
+  id: BoxSurvivalSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Стандартный, Шлёпа
   components:
   - type: Sprite
-    sprite: SS220/Objects/Sponsor/wyccaxe.rsi
-    state: icon
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Stamina: 1
-    soundHit:
-      path: /Audio/Items/Toys/mousesqueek.ogg
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
   - type: Item
-    size: Tiny
-  - type: Tag
-    tags:
-    - WyccoAxe
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxSurvivalNitrogen
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  id: BoxSurvivalNitrogenSponsor
+  suffix: Стандартный Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalEngineering
+  id: BoxSurvivalEngineeringSponsor
+  name: расширенный элитный аварийный запас
+  description: Коробка с базовым набором для выживания. Согласно этикетке, содержит более ёмкий баллон.
+  suffix: Расширенный, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalEngineeringNitrogen
+  id: BoxSurvivalEngineeringNitrogenSponsor
+  name: расширенный элитный аварийный запас
+  description: Коробка с базовым набором для выживания. Согласно этикетке, содержит более ёмкий баллон.
+  suffix: Расширенный Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalSecurity
+  id: BoxSurvivalSecuritySponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: СБ, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalBrigmedic
+  id: BoxSurvivalBrigmedicSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Мед-СБ, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalSecurityNitrogen
+  id: BoxSurvivalSecurityNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Охранный Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalMedical
+  id: BoxSurvivalMedicalSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Медицинский, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs
+
+- type: entity
+  parent: BoxSurvivalMedicalNitrogen
+  id: BoxSurvivalMedicalNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Медицинский Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rs

@@ -6,6 +6,7 @@
 - type: loadoutGroup
   id: CaptainGloves
   name: loadout-group-captain-gloves
+  minLimit: 0
   loadouts:
   - CaptainGloves
   - CaptainWhiteGloves
@@ -23,6 +24,25 @@
 
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
+  id: IAAHead
+  name: loadout-group-iaa-head
+  loadouts:
+  - DevilHorns
+
+- type: loadoutGroup
+  id: IAANeck
+  name: loadout-group-iaa-neck
+  loadouts:
+  - LawyerNeck
+  - CloakJujutsuShlepa
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+  - TrackerExpertNeck
+  - AdministratorNeck
+  - HeadDeveloperNeck
+
+- type: loadoutGroup
   id: IAAJumpsuit
   name: loadout-group-iaa-jumpsuit
   loadouts:
@@ -38,6 +58,24 @@
   - LawyerJumpskirtGood
   - JumpsuitNTR
   - JumpsuitTrustedLawyer
+  - JumpsuitJujutsuShlepa
+
+- type: loadoutGroup
+  id: IAAOuterclothing
+  name: loadout-group-iaa-outerclothing
+  loadouts:
+  - OuterClothingJujutsuShlepa
+  - Outer1984
+
+- type: loadoutGroup
+  id: IAAGlasses
+  minLimit: 0
+  name: loadout-group-iaa-glasses
+  loadouts:
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+  - GlassesujutsuShlepa
 
 - type: loadoutGroup
   id: IAABackpacks
@@ -45,6 +83,14 @@
   loadouts:
     - IAABackpackLeather
   # Агент Внутренних Дел (Конец)
+
+  # Адвокат (Начало)
+- type: loadoutGroup
+  id: LawyerOuterclothing
+  name: loadout-group-lawyer-outerclothing
+  loadouts:
+  - OuterClothingJujutsuShlepa
+  # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
 - type: loadoutGroup
@@ -56,6 +102,12 @@
   - Headphones
   - ProtectGear
   - BlueShieldNeckCloak
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+  - TrackerExpertNeck
+  - AdministratorNeck
+  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -94,6 +146,13 @@
   - MaskTacSec
 
 - type: loadoutGroup
+  id: SecurityGlasses
+  name: loadout-group-security-glasses
+  loadouts:
+  - GlassesSecurity
+  - CyberGlassesSecurity
+
+- type: loadoutGroup
   id: DetectiveSecBackpack
   name: loadout-group-security-backpack
   loadouts:
@@ -126,6 +185,21 @@
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
+
+  # Главный врач (Начало)
+- type: loadoutGroup
+  id: ChefMedicalNeck
+  minLimit: 0
+  name: loadout-group-chef-medical-neck
+  loadouts:
+  - WhiteScarf
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+  - TrackerExpertNeck
+  - AdministratorNeck
+  - HeadDeveloperNeck
+  # Главный врач (Конец)
 
   # Ведущий врач (Начало)
 - type: loadoutGroup
@@ -248,6 +322,13 @@
   name: loadout-group-medical-neck
   loadouts:
   - WhiteScarf
+
+- type: loadoutGroup
+  id: MedicalGlasses
+  name: loadout-group-medical-glasses
+  loadouts:
+  - Glasses
+  - CyberMedVisor
   # Врач (Конец)
 #! Медицинский отдел (Конец)
 
@@ -287,6 +368,15 @@
   - StationEngineerWintercoat
   - AtmosphericTechnicianWintercoat
   # Ведущий инженер (Конец)
+
+  # Инженер (Начало)
+- type: loadoutGroup
+  id: EngineerGlasses
+  name: loadout-group-engineer-glasses
+  loadouts:
+  - GlassesEngineer
+  - CyberGlassesEngineer
+  # Инженер (Конец)
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -314,7 +404,16 @@
   - SeniorSciensistLabCoat
   - ScienceWintercoat
   - RoboticistWintercoat
-    # Ведущий учёный (Начало)
+  # Ведущий учёный (Конец)
+
+  # Учёный (Начало)
+- type: loadoutGroup
+  id: ScientistGlasses
+  name: loadout-group-scientist-glasses
+  loadouts:
+  - Glasses
+  - CyberRnDVisor
+    # Учёный (Конец)
 #! Исследовательский отдел (Конец)
 
 #! Отдел снабжения (Начало)
@@ -389,7 +488,7 @@
   - BardShoes
   # Музыкант (конец)
 
-  #Ботаник (начало)
+  # Ботаник (начало)
 - type: loadoutGroup
   id: BotanistNeck
   name: loadout-group-botanist-neck
@@ -400,7 +499,6 @@
 - type: loadoutGroup
   id: BotanistBelt
   name: loadout-group-botanist-belt
-  minLimit: 0
   loadouts:
   - BotanistBeltDefoult
   - BotanistDruidBelt #SS220 druid loadout
@@ -408,12 +506,32 @@
 - type: loadoutGroup
   id: BotanistShoes
   name: loadout-group-botanist-shoes
-  minLimit: 0
   loadouts:
   - BotanistShoesBrown
   - BotanistDruidShoes #SS220 druid loadout
+  # Ботаник (конец)
 
-  #Ботаник (конец)
+  # Клоун (Начало)
+- type: loadoutGroup
+  id: ClownGloves
+  name: loadout-group-clown-gloves
+  loadouts:
+  - GlovesWhite
+  - GlovesGray
+  - GlovesBlack
+  - GlovesRed
+  - GlovesBlue
+  - GlovesMuzhik
+  # Клоун (Конец)
+
+  # Мим (Начало)
+- type: loadoutGroup
+  id: MimeShoes
+  name: loadout-group-mime-shoes
+  loadouts:
+  - MimeWhiteShoes
+  - MoryakShoes
+  # Мим (Конец)
 
  # Уборщик (Начало)
 - type: loadoutGroup
@@ -439,3 +557,15 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+  # Плащи
+- type: loadoutGroup
+  id: SponsorNeck # Не используется
+  name: loadout-group-neck
+  loadouts:
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+  - TrackerExpertNeck
+  - AdministratorNeck
+  - HeadDeveloperNeck
