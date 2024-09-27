@@ -194,7 +194,8 @@
           mask:
           - FullTileMask
           layer:
-          - WallLayer
+          # - WallLayer #ss220 diagonal grille fix
+          - GlassLayer #ss220 diagonal grille fix
     - type: Construction
       graph: GrilleDiagonal
       node: grilleDiagonal
@@ -229,7 +230,8 @@
           mask:
           - FullTileMask
           layer:
-          - WallLayer
+          # - WallLayer #ss220 diagonal grille fix
+          - GlassLayer #ss220 diagonal grille fix
     - type: Construction
       graph: GrilleDiagonal
       node: clockworkGrilleDiagonal
