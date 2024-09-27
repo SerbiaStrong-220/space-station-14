@@ -1,0 +1,70 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Bad Beard
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorWaltuhBeard
+  name: накладная бородка
+  description: ...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Mask/beard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Mask/beard.rsi
+  - type: Item
+    storedRotation: -90
+
+# Gold Clown
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorGoldClownMask
+  name: золотая маска клоуна
+  description: Выглядит очень тяжёлой.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Mask/goldclownmask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Mask/goldclownmask.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+# Dallas
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorDallas
+  name: демократическая маска
+  description: Вошли и вышли, дело пяти минут.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Mask/dallas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Mask/dallasrsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+# Fools
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingSponsorMaskMuzhik
+  name: маска мужика
+  description: Нет лучше времяпрепровождения, чем распивать самогон с товарищами.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Mask/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Mask/muzhik.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingSponsorMaskBase
+  id: ClothingMaskMoryak
+  name: маска морячка
+  description: Есть легенда, что при виде самогона маска улыбается.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Mask/moryachok.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Mask/moryachok.rsi
+  - type: BreathMask
+  - type: IdentityBlocker

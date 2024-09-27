@@ -1,0 +1,36 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Мейдочка
+- type: entity
+  parent: ClothingSponsorUniformSkirtBase
+  id: ClothingSponsorMaidSuit
+  name: чёрный костюм горничной
+  description: Почти не пачкается.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/maidsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/maidsuit.rsi
+
+# Студентки
+- type: entity
+  parent: ClothingSponsorUniformSkirtBase
+  id: ClothingSponsorStudentSuit
+  name: форма студентки
+  description: Чисто.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/student_suit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/student_suit.rsi
+
+- type: entity
+  parent: ClothingSponsorUniformSkirtBase
+  id: ClothingSponsorStudentSuitBlack
+  name: чёрная форма студентки
+  description: Чисто.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/student_suit_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/student_suit_black.rsi

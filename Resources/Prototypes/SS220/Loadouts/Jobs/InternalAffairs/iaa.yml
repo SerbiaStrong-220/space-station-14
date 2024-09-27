@@ -25,7 +25,7 @@
   - !type:GroupLoadoutEffect
     proto: BigShlopaSponsorTier
   equipment:
-    jumpsuit: ClothingHeadHatDevilHornsAlt
+    head: ClothingHeadHatDevilHornsAlt
 
 # Jumpsuit
 - type: loadout

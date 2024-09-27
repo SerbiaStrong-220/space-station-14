@@ -178,6 +178,15 @@
 
 - type: entity
   abstract: true
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorUniformSkirtBase
+  components:
+  - type: Clothing
+    slots: [innerclothing]
+    femaleMask: UniformTop
+
+- type: entity
+  abstract: true
   parent: [ClothingSponsorShoesBase, ClothingSlotBase]
   id: ClothingSponsorShoesMilitaryBase
   components:

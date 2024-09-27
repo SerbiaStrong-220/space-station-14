@@ -11,7 +11,7 @@ public class UserInfoController : Controller
     {
         return new()
         {
-            Tiers = [SponsorTier.GoldenShlopa]
+            Tiers = [SponsorTier.Developer, SponsorTier.CriticalMassShlopa]
         };
     }
 
@@ -45,7 +45,8 @@ public enum SponsorTier
     BigShlopa,
     HugeShlopa,
     GoldenShlopa,
-    CriticalMassShlopa
+    CriticalMassShlopa,
+    Developer
 }
 
 public class SponsorUsers
