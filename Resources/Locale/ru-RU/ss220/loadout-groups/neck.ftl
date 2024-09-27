@@ -1,1 +1,1 @@
-loadout-group-neck = Шея
+loadout-group-sponsor-cloak = Спонсорские плащи

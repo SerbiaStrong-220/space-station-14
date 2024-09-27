@@ -12,6 +12,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - CAPSiutstorage #SS220-Cutlass-Update
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -26,6 +27,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Silicons
 - type: roleLoadout
@@ -65,6 +67,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -91,6 +94,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobLibrarian
@@ -102,6 +106,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobLawyer
@@ -210,6 +215,7 @@
   - Trinkets
   - Instruments
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Cargo
 - type: roleLoadout
@@ -226,6 +232,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -254,6 +261,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Engineering
 - type: roleLoadout
@@ -270,6 +278,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -295,6 +304,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -307,6 +317,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Science
 - type: roleLoadout
@@ -325,6 +336,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobScientist
@@ -343,6 +355,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -371,6 +384,7 @@
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobWarden
@@ -386,6 +400,7 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -404,6 +419,7 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobDetective
@@ -419,6 +435,7 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -435,7 +452,6 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - ChefMedicalNeck #SS220-Two Floppa Iteration
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -447,6 +463,7 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -466,6 +483,7 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -493,6 +511,7 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobParamedic
@@ -510,6 +529,7 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 #SS220-brigmedic-loadout-begin
 - type: roleLoadout
@@ -526,6 +546,7 @@
   - BrigmedicShoes
   - Glasses
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #SS220-brigmedic-loadout-end
 
 # Wildcards
@@ -562,6 +583,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobBoxer

@@ -15,6 +15,7 @@
   - Survival
   - Trinkets
   - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -27,6 +28,7 @@
   - CommonBackpack
   - Survival
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Внутренние дела (Конец)
 
 #! Служба безопасности (Начало)
@@ -44,6 +46,7 @@
   - SecurityShoes
   - SecurityBelt
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Пилот
 - type: roleLoadout
@@ -58,6 +61,7 @@
   - SecurityShoes
   - SecurityPDA
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -77,6 +81,7 @@
   - SeniorShoes
   - Glasses
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -92,6 +97,7 @@
   - SurvivalExtended
   - StationEngineerShoes
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -110,6 +116,7 @@
   - Survival
   - Glasses
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -124,4 +131,5 @@
   - Survival
   - Glasses
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Сервис (Конец)

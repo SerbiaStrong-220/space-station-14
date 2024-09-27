@@ -5,7 +5,7 @@
   # Парадизовский
 - type: entity
   parent: ClothingSponsorNeckBase
-  id: ClothingSponsorNeckSS220
+  id: ClothingSponsorNeckParadise
   name: накидка причастия
   description: Вручается избранным, удостоенных уникального места в этом мире.
   suffix: Sponsor Neck
