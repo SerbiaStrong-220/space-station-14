@@ -2,7 +2,7 @@
   id: Law
   name: department-law
   sort: 0
-  description: department-law-description
+  description: department-Law-description
   color: "#323ba9"
   roles:
   - Magistrate

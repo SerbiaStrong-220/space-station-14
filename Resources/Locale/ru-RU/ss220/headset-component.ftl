@@ -8,4 +8,4 @@ chat-radio-honk = Хонк-сквад
 
 chat-radio-hive = Улей
 
-chat-radio-law = Внутренние дела
+chat-radio-law = Юридический
