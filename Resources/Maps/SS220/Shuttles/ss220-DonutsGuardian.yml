@@ -588,6 +588,16 @@ entities:
     - type: Transform
       pos: -3.5,0.5
       parent: 30141
+  - uid: 4
+    components:
+    - type: Transform
+      pos: -3.5,2.5
+      parent: 30141
+  - uid: 5
+    components:
+    - type: Transform
+      pos: -3.5,-1.5
+      parent: 30141
   - uid: 30148
     components:
     - type: Transform
@@ -1438,12 +1448,9 @@ entities:
   - uid: 30230
     components:
     - type: Transform
-      anchored: False
       rot: -1.5707963267948966 rad
       pos: -3.5,-1.5
       parent: 30141
-    - type: Physics
-      bodyType: Dynamic
 - proto: Poweredlight
   entities:
   - uid: 30231
@@ -2028,20 +2035,16 @@ entities:
       parent: 30141
 - proto: WeaponCapacitorRecharger
   entities:
-  - uid: 30310
+  - uid: 3
     components:
     - type: Transform
-      anchored: False
-      rot: -1.5707963267948966 rad
       pos: -3.5,2.5
       parent: 30141
-    - type: Physics
-      bodyType: Dynamic
 - proto: Wrench
   entities:
   - uid: 30312
     components:
     - type: Transform
-      pos: 1.906971,3.9605823
+      pos: 2.1518326,3.6407714
       parent: 30141
 ...

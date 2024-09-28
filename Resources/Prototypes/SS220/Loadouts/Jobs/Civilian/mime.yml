@@ -1,0 +1,40 @@
+# Head
+- type: loadout
+  id: MoryakHead
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    head: ClothingHeadHatMoryak
+
+# Mask
+- type: loadout
+  id: MoryakMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    mask: ClothingMaskMoryak
+
+# Jumpsuit
+- type: loadout
+  id: MoryakJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMoryak
+
+# Shoes
+- type: loadout
+  id: MimeWhiteShoes
+  equipment:
+    shoes: ClothingShoesColorWhite
+
+- type: loadout
+  id: MoryakShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    shoes: ClothingShoesMoryak

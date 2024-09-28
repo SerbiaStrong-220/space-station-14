@@ -41,28 +41,6 @@
       - CombatKnife
 
 - type: entity
-  parent: ClothingShoesBase
-  id: ClothingShoesMoryak
-  name: moryak shoes
-  description: Tight sailor shoes, but at least they're waterproof.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Shoes/Specific/moryak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Shoes/Specific/moryak.rsi
-
-- type: entity
-  parent: ClothingShoesBaseButcherable
-  id: ClothingShoesYsatyu
-  name: ysatyu boots
-  description: Will pave the way to the nearest moonshine deposits.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Shoes/Specific/ysatyu.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Shoes/Specific/ysatyu.rsi
-
-- type: entity
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesBootsBard #SS220 bard loadout
   name: bard shoes

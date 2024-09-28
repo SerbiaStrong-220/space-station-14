@@ -476,17 +476,6 @@
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadHatMoryak
-  name: moryak beret
-  description: Beret with a orange tampon.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/moryak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/moryak.rsi
-
-- type: entity
-  parent: ClothingHeadBase
   id: ClothingHeadHatMagicianHat
   name: шляпа магички
   description: Головной убор настоящего клептомана.
@@ -549,45 +538,3 @@
     sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadYsatyu
-  name: ysatyu cap
-  description: Moonshine craftsman's cap.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/ysatyu.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/ysatyu.rsi
-
-
-# SPONSOR (возможно, в душе не ебу)
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatDevilHorns
-  name: devil's horns
-  description: Now you look like hell.
-  suffix: DO NOT MAP
-  components:
-  - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/devils_horns.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/devils_horns.rsi
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatDevilHornsAlt
-  name: devil's horns
-  description: Now you look like hell.
-  suffix: DO NOT MAP, without a tail
-  components:
-  - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/devils_horns-alt.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/devils_horns-alt.rsi

@@ -457,29 +457,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/bard.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitYsatyu
-  name: ysatyu suit
-  description: It smells like moonshine.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitMoryak
-  name: moryak suit
-  description: Sailor suit for mime.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
+    sprite: SS220/Clothing/Uniforms/bard.rs
 
 - type: entity
   parent: ClothingUniformBase
@@ -491,3 +469,14 @@
     sprite: SS220/Clothing/Uniforms/RD.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/RD.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitVaas
+  name: vaas suit
+  description: A red T-shirt with the badge of an security officer. Do you know the definition of Insanity?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi

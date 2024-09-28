@@ -2,13 +2,13 @@
 
 - type: gameMap
   id: Donuts
-  mapName: 'NSS Donuts'
+  mapName: 'SCT Donuts'
   mapPath: /Maps/SS220/Donuts.yml
   minPlayers: 0
   maxPlayers: 60
   stations:
     Donuts:
-      stationProto: StandardNanotrasenStation
+      stationProto: DonutsNanotrasenStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_donuts.yml
@@ -22,6 +22,7 @@
             Passenger: [ -1, -1 ]
             #Command
             Captain: [ 1, 1 ]
+            Magistrate: [ 1, 1 ]
             IAA: [ 1, 1 ]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
@@ -92,3 +93,14 @@
           - Robotisation
           - Homekeepers
           - ComplexPVO
+
+- type: entity
+  id: DonutsNanotrasenStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: StationMinimap
+      minimapData: !type:StationMinimapData
+        mapTexture: SS220/ViewableMaps/Donuts.png
+        originOffset: 32, 79
+        mapScale: 6.4
