@@ -10,3 +10,16 @@
   - type: ConditionalSpawner
     prototypes:
       - MobSecDogRoxi
+
+- type: entity
+  name: спавнер альбион крокодайла
+  id: SpawnMobAlbinoCrocodile
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+      - MobAlbinoCrocodile

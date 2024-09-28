@@ -197,3 +197,16 @@
     description: ghost-role-information-pet-spacecat-description
   - type: GhostTakeoverAvailable
 # SS220 AVD pet end
+
+- type: entity
+  parent: MobAlbinoCrocodile
+  id: MobAlbinoCrocodileGhostRole
+  suffix: Роль
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-pet-spacecat-name
+    description: ghost-role-information-pet-spacecat-description
+  - type: GhostTakeoverAvailable
