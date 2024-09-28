@@ -102,13 +102,13 @@
   description: Дешёвый эпатаж, консюмеризм и бунт против серости.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/vbomberjacket.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/vbomberjacket.rsi
     layers:
     - state: icon
     - state: icon-unshaded
       shader: unshaded
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/vbomberjacket.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/vbomberjacket.rsi
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING
@@ -125,9 +125,9 @@
   description: Светящиеся элементы не дают вам никакого тактического преимущества... но зато какой стиль!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cybersecarmor.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybersecarmor.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cybersecarmor.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybersecarmor.rsi
 
 - type: entity
   parent: ClothingSponsorSamuraiJacket
@@ -136,9 +136,9 @@
   description: Синий пиджак с исключительно косметическим устройством. Сразите стилем своих пациентов наповал!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cybermedsuit.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybermedsuit.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cybermedsuit.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybermedsuit.rsi
 
 - type: entity
   parent: ClothingSponsorSamuraiJacket
@@ -147,9 +147,9 @@
   description: В нём уютно и тепло, главное не заснуть перед аномалией. Полное удобство для сыча.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cyberrndsweater.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberrndsweater.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cyberrndsweater.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberrndsweater.rsi
 
 - type: entity
   parent: ClothingSponsorSamuraiJacket
@@ -158,6 +158,6 @@
   description: Гладкий и прочный материал, светящиеся элементы в темноте, что ещё нужно для счастья инженеру?
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cyberengijacket.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberengijacket.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/OuterClothing/CyberPunk/cyberengijacket.rsi
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberengijacket.rsi
