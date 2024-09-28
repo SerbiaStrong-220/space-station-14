@@ -26,6 +26,7 @@
 - type: loadoutGroup
   id: IAAHead
   name: loadout-group-iaa-head
+  minLimit: 0
   loadouts:
   - DevilHorns
 
@@ -57,6 +58,7 @@
 - type: loadoutGroup
   id: IAAOuterclothing
   name: loadout-group-iaa-outerclothing
+  minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
   - Outer1984
@@ -69,6 +71,7 @@
   - Glasses
   - GlassesJamjar
   - GlassesJensen
+  - Sunglasses
   - GlassesujutsuShlepa
 
 - type: loadoutGroup
@@ -258,6 +261,14 @@
   - SecurityMedicHelmet
 
 - type: loadoutGroup
+  id: BrigmedicGlasses
+  name: loadout-group-brigmedic-glasses
+  minLimit: 0
+  loadouts:
+  - HudMedical
+  - CyberMedVisor
+
+- type: loadoutGroup
   id: BrigmedicMask
   name: loadout-group-brigmedic-mask
   minLimit: 0
@@ -322,6 +333,16 @@
   - Glasses
   - CyberMedVisor
   # Врач (Конец)
+
+  # Химик (Начало)
+- type: loadoutGroup
+  id: ChemicalGlasses
+  name: loadout-group-chemical-glasses
+  minLimit: 0
+  loadouts:
+  - GlassesChemical
+  - CyberRnDVisor
+  # Химик (Конец)
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -409,7 +430,7 @@
   loadouts:
   - Glasses
   - CyberRnDVisor
-    # Учёный (Конец)
+  # Учёный (Конец)
 #! Исследовательский отдел (Конец)
 
 #! Отдел снабжения (Начало)

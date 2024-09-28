@@ -21,9 +21,9 @@
   description: Простые дешёвые очки с корректирующими линзами.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi.rsi
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi.rsi
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
   - type: VisionCorrection
 
 # Джужутсу

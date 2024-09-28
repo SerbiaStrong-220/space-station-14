@@ -75,7 +75,7 @@
   id: ClothingSponsorNeckHeadDevelopment
   name: плащ ведающего созидания
   description: Особый плащ, принадлежащий сущности, которой предписывают власть над самим мирозданием.
-  suffix: Sponsor
+  suffix: Sponsor Neck, HeadDeveloper
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/vedicloak.rsi

@@ -63,6 +63,11 @@
 
 # Glasses
 - type: loadout
+  id: Sunglasses
+  equipment:
+    eyes: ClothingEyesGlassesSunglasses
+
+- type: loadout
   id: GlassesujutsuShlepa
   effects:
   - !type:GroupLoadoutEffect

@@ -67,7 +67,6 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -94,7 +93,6 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobLibrarian
@@ -185,6 +183,7 @@
   - Glasses
   - SurvivalClown
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMime
@@ -200,6 +199,7 @@
   - Glasses
   - SurvivalMime
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMusician
@@ -507,7 +507,7 @@
   id: JobChemist
   groups:
   - GroupTankHarness
-  - ScientistGlasses #SS220-TwoOne-Floppa-Iteration
+  - ChemicalGlasses #SS220-TwoOne-Floppa-Iteration
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
@@ -545,8 +545,8 @@
   groups:
   - BrigmedicHead
   - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
   - BrigmedicMask
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - BrigmedicJumpsuit
   - MedicalGloves
   - BrigmedicBackpack
@@ -587,7 +587,6 @@
   - PsychologistJumpsuit
   - MedicalNeck #SS220-WhiteScarf
   - MedicalBackpack
-  - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses
   - Survival
   - Trinkets
