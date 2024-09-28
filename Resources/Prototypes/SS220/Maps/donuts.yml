@@ -8,7 +8,7 @@
   maxPlayers: 60
   stations:
     Donuts:
-      stationProto: StandardNanotrasenStation
+      stationProto: DonutsNanotrasenStation
       components:
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_donuts.yml
@@ -93,3 +93,14 @@
           - Robotisation
           - Homekeepers
           - ComplexPVO
+
+- type: entity
+  id: DonutsNanotrasenStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: StationMinimap
+      minimapData: !type:StationMinimapData
+        mapTexture: SS220/ViewableMaps/Donuts.png
+        originOffset: 32, 79
+        mapScale: 6.4
