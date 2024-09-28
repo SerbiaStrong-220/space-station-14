@@ -112,6 +112,7 @@ loadout-group-research-director-jumpsuit = Научный руководител
 loadout-group-research-director-backpack = Научный руководитель, рюкзак
 loadout-group-research-director-outerclothing = Научный руководитель, верхняя одежда
 loadout-group-research-director-shoes = Научный руководитель, обувь
+loadout-group-research-director-pda = Научный руководитель, ID
 loadout-group-scientist-head = Учёный, голова
 loadout-group-scientist-neck = Учёный, шея
 loadout-group-scientist-jumpsuit = Учёный, комбинезон

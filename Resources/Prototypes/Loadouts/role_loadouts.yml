@@ -106,11 +106,13 @@
 - type: roleLoadout
   id: JobLawyer
   groups:
+  - IAAGlasses #SS220-Two Floppa Iteration
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit
+  - LawyerOuterclothing #SS220-Two Floppa Iteration
   - CommonBackpack
-  - Glasses
+  - IAAGlasses #SS220-IAA-Loadouts
   - Survival
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
@@ -171,6 +173,7 @@
   - ClownMask #SS220 clown pennywise loadout
   - ClownNeck #SS220 clown pennywise loadout
   - ClownJumpsuit
+  - ClownGloves #SS220-Two Floppa Iteration
   - ClownBackpack
   - ClownOuterClothing
   - ClownShoes
@@ -188,6 +191,7 @@
   - MimeBackpack
   - MimeOuterClothing
   - MimeBelt
+  - MimeShoes #SS220-Two Floppa Iterarion
   - Glasses
   - SurvivalMime
   - Trinkets
@@ -282,6 +286,7 @@
   groups:
   - GroupTankHarness
   - StationEngineerHead
+  - EngineerGlasses #SS220-Two Floppa Iteration
   - StationEngineerJumpsuit
   - StationEngineerBackpack
   - StationEngineerOuterClothing
@@ -315,6 +320,7 @@
   - ResearchDirectorOuterClothing
   - ScientistGloves
   - ResearchDirectorShoes
+  - ResearchDirectorPDA #SS220-RD-New-Loadout
   - Glasses
   - Survival
   - Trinkets
@@ -324,6 +330,7 @@
   id: JobScientist
   groups:
   - GroupTankHarness
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistHead
   - ScientistNeck
   - ScientistJumpsuit
@@ -332,7 +339,7 @@
   - ScientistGloves
   - ScientistShoes
   - ScientistPDA
-  - Glasses
+#  - Glasses #SS220-Two Floppa Iteration
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
@@ -384,6 +391,7 @@
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityGlasses #SS220-Two Floppa Iteration
   - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
@@ -427,7 +435,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - MedicalNeck #SS220-WhiteScarf
+  - ChefMedicalNeck #SS220-Two Floppa Iteration
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -445,6 +453,7 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
+  - MedicalGlasses #SS220-Two Floppa Iteration
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
@@ -453,7 +462,7 @@
   - MedicalDoctorOuterClothing
   - MedicalShoes
   - MedicalDoctorPDA
-  - Glasses
+#  - Glasses #SS220-Two Floppa Iteration
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
@@ -512,6 +521,7 @@
   - BrigmedicJumpsuit
   - MedicalGloves
   - BrigmedicBackpack
+  - SurvivalMedical
   - BrigmedicOuterClothing
   - BrigmedicShoes
   - Glasses

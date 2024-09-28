@@ -628,9 +628,9 @@
   - type: Item
     size: Huge
   #ss220 elite-suitReb begin
-  #- type: ClothingSpeedModifier
-  #  walkModifier: 0.9 #ss-220 armReb
-  #  sprintModifier: 0.9 #ss-220 armReb
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0 #ss-220 armReb
+    sprintModifier: 1.0 #ss-220 armReb
   #ss220 elite-suitReb end
   - type: HeldSpeedModifier
   - type: ToggleableClothing

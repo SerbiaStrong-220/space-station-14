@@ -60,6 +60,28 @@
 
 - type: entity
   abstract: true
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorEyesBaseUnshaded
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+    state: icon
+  - type: Clothing
+    slots: [eyes]
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+  - type: Item
+    size: Small
+    storedRotation: -90
+
+- type: entity
+  abstract: true
   parent: ClothingSponsor
   id: ClothingSponsorShoesBase
   components:

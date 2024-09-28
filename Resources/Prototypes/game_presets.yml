@@ -180,7 +180,7 @@
   showInVote: false
   rules:
     - Nukeops
-    - SubGamemodesRule
+    # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles

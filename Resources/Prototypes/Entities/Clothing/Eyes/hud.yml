@@ -210,6 +210,12 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/synd.rsi
   - type: ShowSyndicateIcons
+  #SS220 Syndie visor buff start
+  - type: EyeProtection
+  - type: FlashImmunity
+  - type: IdentityBlocker
+    coverage: EYES
+  #SS220 Syndie visor buff end
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSyndicateContraband]
@@ -225,6 +231,14 @@
   - type: ShowHealthBars
     damageContainers:
     - Biological
+  #SS220 Syndie visor buff start
+    - Silicon #to destroy borgs or heal syndie assault borg
+  - type: EyeProtection
+  - type: FlashImmunity
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: SolutionScanner #because nukie medic should make chems
+  #SS220 Syndie visor buff end
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]
