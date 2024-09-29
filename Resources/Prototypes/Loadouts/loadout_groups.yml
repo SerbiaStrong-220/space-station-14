@@ -65,12 +65,10 @@
   id: Survival
   name: loadout-group-survival-basic
   minLimit: 3
-  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
+  hidden: true
   loadouts:
   - EmergencyNitrogen
   - EmergencyOxygen
-  - EmergencyNitrogenSponsor #SS220-Two Floppa Iteration
-  - EmergencyOxygenSponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -125,14 +123,6 @@
   - CaptainCloakFormal
   - CaptainMantle
   - CaptainFormalWhiteCloak #ss220-loadout-captain
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -180,14 +170,6 @@
   loadouts:
   - HoPCloak
   - HoPMantle
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: HoPBackpack
@@ -729,14 +711,6 @@
   loadouts:
   - QuartermasterCloak
   - QuartermasterMantle
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: QuartermasterOuterClothing
@@ -851,14 +825,6 @@
   - DarkChiefEngineerCloak
   - DarkChiefEngineerMantle
 #ss220-loadout-chief-engineer-end
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 #ss220-loadout-ce-backpack-begin
 - type: loadoutGroup
@@ -876,6 +842,7 @@
   minLimit: 0
   loadouts:
   - ChiefEngineerWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChiefEngineerShoes
@@ -965,6 +932,7 @@
   minLimit: 0
   loadouts:
   - AtmosphericTechnicianWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: AtmosphericTechnicianBackpack
@@ -985,12 +953,10 @@
   id: SurvivalExtended
   name: loadout-group-survival-extended
   minLimit: 2
-  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
+  hidden: true
   loadouts:
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
-  - EmergencyNitrogenExtendedSponsor #SS220-Two Floppa Iteration
-  - EmergencyOxygenExtendedSponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 # Science
@@ -1008,14 +974,6 @@
   loadouts:
   - ResearchDirectorMantle
   - ResearchDirectorCloak
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: ResearchDirectorJumpsuit
@@ -1041,6 +999,7 @@
   loadouts:
   - ResearchDirectorLabCoat
   - ResearchDirectorWintercoat
+  - CyberJacketRnD #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ResearchDirectorShoes
@@ -1171,14 +1130,6 @@
   - HeadofSecurityMantle
   - SecurityHolster #SS220-HoS-Holster
   - MantleHOSShoulder #ss220 sec loadout update
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -1188,6 +1139,7 @@
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
   - Outer1984 #SS220-Two Floppa Iteration
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: WardenHead
@@ -1211,6 +1163,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: SecurityHead
@@ -1348,12 +1301,10 @@
   id: SurvivalSecurity
   name: loadout-group-survival-security
   minLimit: 2
-  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
+  hidden: true
   loadouts:
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
-  - EmergencyNitrogenSecuritySponsor #SS220-Two Floppa Iteration
-  - EmergencyOxygenSecuritySponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1388,6 +1339,7 @@
   loadouts:
   - ChiefMedicalOfficerLabCoat
   - ChiefMedicalOfficerWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
@@ -1396,14 +1348,6 @@
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
-  #SS220-Two Floppa Iteration-Begin
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  #SS220-Two Floppa Iteration-End
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes
@@ -1516,6 +1460,7 @@
   - RegularLabCoat
   - ChemistLabCoat
   - ChemistWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChemistBackpack
@@ -1549,6 +1494,7 @@
   loadouts:
   - ParamedicWindbreaker
   - ParamedicWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ParamedicShoes
@@ -1561,12 +1507,10 @@
   id: SurvivalMedical
   name: loadout-group-survival-medical
   minLimit: 2
-  #  hidden: true #SS220-Two Floppa Iteration | Убрана, дабы игрок мог выбирать шлёпскую версию аварийного запаса
+  hidden: true
   loadouts:
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
-  - EmergencyNitrogenMedicalSponsor #SS220-Two Floppa Iteration
-  - EmergencyOxygenMedicalSponsor #SS220-Two Floppa Iteration
   - LoadoutSpeciesVoxNitrogen
 
 # Wildcards

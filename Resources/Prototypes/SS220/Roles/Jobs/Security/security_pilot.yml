@@ -28,7 +28,7 @@
 - type: startingGear
   id: SecurityPilotGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
+#    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves

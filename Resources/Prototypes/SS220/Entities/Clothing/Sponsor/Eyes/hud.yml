@@ -1,0 +1,62 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# CyberPunk
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesSecurity ]
+  id: ClothingSponsorCyberSecVisor
+  name: кибервизор охраны
+  description: Несмотря на свой грозный вид не защищает от вспышек и папарацций.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesMeson ]
+  id: ClothingSponsorCyberEngVisor
+  name: киберсварочные очки
+  description: Комически большим размером удалось добиться увеличения эффективности очков на целых 0,42%!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesHudMedical ]
+  id: ClothingSponsorCyberMedVisor
+  name: медицинский кибервизор
+  description: За свою цену он обязан показывать гораздо больше, чем просто состояние пациента, но это лишь мечты...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesChemical ]
+  id: ClothingSponsorCyberChemVisor
+  name: кибервизор химического анализа
+  description: Для гарантии точности анализа были установлены дополнительные датчики, что повысило её габариты. Теперь никто по вашим глазам не узнает спите ли вы или нет.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
+  - type: VisionCorrection
+
+- type: entity
+  parent: ClothingSponsorEyesBaseUnshaded
+  id: ClothingSponsorCyberCevVisor
+  name: белый визор
+  description: Визор гражданского типа. Используя продвинутые материалы удалось добиться свечению в темноте без надобности в электроэнергии.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi
+  - type: VisionCorrection

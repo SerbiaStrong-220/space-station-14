@@ -25,7 +25,7 @@
   - !type:GroupLoadoutEffect
     proto: BigShlopaSponsorTier
   equipment:
-    jumpsuit: ClothingHeadHatDevilHornsAlt
+    head: ClothingHeadHatDevilHornsAlt
 
 # Jumpsuit
 - type: loadout
@@ -62,6 +62,11 @@
     outerClothing: ClothingSponsorCoatJujutsuShlepa
 
 # Glasses
+- type: loadout
+  id: Sunglasses
+  equipment:
+    eyes: ClothingEyesGlassesSunglasses
+
 - type: loadout
   id: GlassesujutsuShlepa
   effects:

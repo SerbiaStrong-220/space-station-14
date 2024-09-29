@@ -1,0 +1,55 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Венец
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckWreath
+  name: розовый венец
+  description: Длинный нашейный венец, сплетённый из прекрасных цветов.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Misc/neck-wreath.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Misc/neck-wreath.rsi
+
+# Шарф трубой
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorScarfTube
+  name: шарф трубой
+  description: Тепло внутри, холодно снаружи.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/scarf-tube.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/scarf-tube.rsi
+  - type: Item
+    storedRotation: -90
+
+# Деревня дураков
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorScarfMuzhik
+  name: шарф мужика
+  description: Длинный и узкий для удобного распития самогона.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Scarfs/muzhik.rsi
+  - type: Item
+    storedRotation: -90
+
+# Джужутсу
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorTieJujutsuShlepa
+  name: галстук офисного работника
+  description: U r my SPECIAL.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Misc/nanamitie.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Misc/nanamitie.rsi
