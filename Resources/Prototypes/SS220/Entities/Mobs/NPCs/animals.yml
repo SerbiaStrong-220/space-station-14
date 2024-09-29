@@ -378,8 +378,8 @@
 - type: entity
   parent: MobCrocodile
   id: MobAlbinoCrocodile
-  name: альбион крокодил
-  description: Он не кусается, наверное.
+  name: альбино
+  description: Добрейшей души крокодил.
   components:
   - type: Sprite
     drawdepth: Mobs

@@ -10,6 +10,7 @@
       - EncryptionKeyLaw
       - EncryptionKeySecurity
       - EncryptionKeyCommon
+      - EncryptionKeyCommand
   - type: Sprite
     sprite: SS220/Clothing/Ears/Headsets/law.rsi
   - type: Clothing

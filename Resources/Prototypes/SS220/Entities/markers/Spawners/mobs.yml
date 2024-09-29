@@ -12,8 +12,8 @@
       - MobSecDogRoxi
 
 - type: entity
-  name: спавнер альбион крокодайла
-  id: SpawnMobAlbinoCrocodile
+  name: the spawner Steven
+  id: SpawnMobStevenCrocodile
   parent: MarkerBase
   components:
   - type: Sprite
