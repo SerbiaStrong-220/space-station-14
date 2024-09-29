@@ -315,6 +315,16 @@
   - BlueShoes
   - MedicalWinterBoots
   - SecMedWinterBoots
+
+- type: loadoutGroup
+  id: SurvivalBrigMedic
+  name: loadout-group-survival-brigmedic
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyOxygenBrigmedic
+  - EmergencyNitrogenBrigmedic
+  - LoadoutSpeciesVoxNitrogen
   # Бригмедик (Конец)
 
   # Врач (Начало)
