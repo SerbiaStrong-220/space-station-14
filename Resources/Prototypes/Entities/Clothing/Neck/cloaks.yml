@@ -169,6 +169,17 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+  #ss220-goliath-cloak-upgrade begin
+  - type: Construction
+    graph: GoliathCloak
+    node: goliath-cloak
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+  #ss220-goliath-cloak-upgrade end
 
 - type: entity
   parent: ClothingNeckBase
