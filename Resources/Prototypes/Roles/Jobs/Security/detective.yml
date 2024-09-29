@@ -14,14 +14,15 @@
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos #SS220-Transfer Detective To Security
-  canBeAntag: true
+  canBeAntag: false #SS220-Transfer Detective To Security
   access:
   - Brig
   - Maintenance
-#  - Service #SS220-Transfer Detective To Security
+  - Service
   - Detective
 #  extendedAccess: #SS220-Transfer Detective To Security
   - Security
+  - Cryogenics 
   special: #SS220-Transfer Detective To Security begin
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ] #SS220-Transfer Detective To Security end
