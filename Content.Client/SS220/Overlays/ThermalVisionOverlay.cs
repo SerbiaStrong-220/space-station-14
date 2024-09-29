@@ -3,7 +3,6 @@
 using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
-using Content.Client.Humanoid;
 
 namespace Content.Client.SS220.Overlays;
 

@@ -1,17 +1,5 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-# Snout
-
-# - type: marking
-#   id: TajaranSnout
-#   bodyPart: Snout
-#   markingCategory: Snout
-#   speciesRestriction: [Tajaran]
-#   forcedColoring: true
-#   sprites:
-#   - sprite: SS220/Mobs/Species/Tajaran/parts.rsi
-#     state: nose
-
 # Ears section
 
 - type: marking
