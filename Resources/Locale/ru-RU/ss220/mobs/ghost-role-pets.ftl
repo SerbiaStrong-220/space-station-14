@@ -91,4 +91,4 @@ ent-MobENGhostRole = { ent-MobEN }
 ent-SpawnMobENGhostRole = Спавнер { ent-MobEN }
 
 ghost-role-information-taxibot-name = { ent-MobTaxiBot }
-ghost-role-information-taxibot-description = {ent-MobTaxiBot.desc }
+ghost-role-information-taxibot-description = { ent-MobTaxiBot.desc }
