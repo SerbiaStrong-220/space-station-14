@@ -233,6 +233,12 @@
     - Biological
   #SS220 Syndie visor buff start
     - Silicon #to destroy borgs or heal syndie assault borg
+    - Inorganic
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+    - Inorganic
+    - Silicon
   - type: EyeProtection
   - type: FlashImmunity
   - type: IdentityBlocker
