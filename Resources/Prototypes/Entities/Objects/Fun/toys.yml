@@ -1374,6 +1374,7 @@
     - type: DisarmMalus
       malus: 0
     - type: MeleeWeapon
+      wideAnimationRotation: -135 #SS220-Fix ClownHammer wideAnimation
       soundHit:
         collection: RubberHammer
         params:
