@@ -9,14 +9,14 @@
       time: 72000 # SS220-RoleTime
   startingGear: DetectiveGear
   icon: "JobIconDetective"
-  supervisors: job-supervisors-hop
+  supervisors: job-supervisors-hos #SS220-Transfer Detective To Security
   canBeAntag: true
   access:
   - Brig
   - Maintenance
-  - Service
+#  - Service #SS220-Transfer Detective To Security
   - Detective
-  extendedAccess:
+#  extendedAccess: #SS220-Transfer Detective To Security
   - Security
 
 - type: startingGear
