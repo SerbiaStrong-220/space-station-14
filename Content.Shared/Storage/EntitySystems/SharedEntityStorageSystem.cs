@@ -367,16 +367,18 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             return false;
         }
 
-        if (_container.IsEntityInContainer(target))
-        {
-            if (_container.TryGetOuterContainer(target,Transform(target) ,out var container) &&
-                !HasComp<HandsComponent>(container.Owner))
-            {
-                Popup.PopupClient(Loc.GetString("entity-storage-component-already-contains-user-message"), user, user);
+        // SS220 Fix #1397 begin
+        // if (_container.IsEntityInContainer(target))
+        // {
+        //     if (_container.TryGetOuterContainer(target,Transform(target) ,out var container) &&
+        //         !HasComp<HandsComponent>(container.Owner))
+        //     {
+        //         Popup.PopupClient(Loc.GetString("entity-storage-component-already-contains-user-message"), user, user);
 
-                return false;
-            }
-        }
+        //         return false;
+        //     }
+        // }
+        // SS220 Fix #1397 end
 
         //Checks to see if the opening position, if offset, is inside of a wall.
         if (component.EnteringOffset != new Vector2(0, 0) && !HasComp<WallMountComponent>(target)) //if the entering position is offset

@@ -60,6 +60,28 @@
 
 - type: entity
   abstract: true
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorEyesBaseUnshaded
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+    state: icon
+  - type: Clothing
+    slots: [eyes]
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded
+  - type: Item
+    size: Small
+    storedRotation: -90
+
+- type: entity
+  abstract: true
   parent: ClothingSponsor
   id: ClothingSponsorShoesBase
   components:
@@ -153,6 +175,15 @@
   - type: Tag #SS220-pr: FIX CLOTHING TAGS
     tags: #SS220-pr: FIX CLOTHING TAGS
       - ClothMade #SS220-pr: FIX CLOTHING TAGS
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsorUniformBase
+  id: ClothingSponsorUniformSkirtBase
+  components:
+  - type: Clothing
+    slots: [innerclothing]
+    femaleMask: UniformTop
 
 - type: entity
   abstract: true

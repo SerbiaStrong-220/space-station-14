@@ -36,6 +36,21 @@
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/Blueshield.rsi
 
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingCloak1984
+  name: плащ 1984
+  description: Литерали 1984.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
+      scale: 0.125, 0.125
+    - type: Clothing
+      clothingVisuals: 
+        neck:
+          - scale: 0.125, 0.125
+            sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
+            state: equipped-NECK
 
 - type: entity
   parent: ClothingNeckBase
