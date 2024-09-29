@@ -132,6 +132,17 @@
   id: MobCatRuntime
   description: Professional mouse hunter. Escape artist.
   components:
+  #SS220 Add lying action begin
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Pets/cat.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: cat
+    - map: ["enum.LyingVisuals.Lying"]
+      state: cat_rest
+      visible: false
+   #SS220 Add lying action end
   - type: NpcFactionMember
     factions:
       - PetsNT
@@ -148,6 +159,18 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalNamedCat
+  #SS220 Add lying action begin
+  - type: LyingDown
+  - type: GenericVisualizer
+    visuals:
+      enum.LyingVisuals.State:
+        enum.LyingVisuals.Lying:
+          True: { visible: true }
+          False: { visible: false }
+        enum.DamageStateVisualLayers.Base:
+          True: { visible: false }
+          False: { visible: true }
+  #SS220 Add lying action end
 
 - type: entity
   name: Exception

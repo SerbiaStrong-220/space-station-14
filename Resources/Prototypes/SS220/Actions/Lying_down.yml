@@ -1,0 +1,23 @@
+- type: entity
+  id: ActionLieDown
+  name: lie down
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: Mobs/Pets/cat.rsi
+      state: cat_rest
+    event: !type:LieDownActionEvent
+
+- type: entity
+  name: stand up
+  id: ActionStandUp
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: Mobs/Pets/cat.rsi
+      state: cat
+    event: !type:StandUpActionEvent
