@@ -1,0 +1,56 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "tajaran states made by gabova (Discrod) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "tajaran0",
+            "delays": [
+                [
+                    0.3,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "tajaran1"
+        },
+        {
+            "name": "tajaran2"
+        },
+        {
+            "name": "tajaran3",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.05,
+                    0.05,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        }
+    ]
+}

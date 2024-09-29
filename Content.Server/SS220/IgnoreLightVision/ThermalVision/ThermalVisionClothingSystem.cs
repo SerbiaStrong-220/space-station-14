@@ -1,6 +1,6 @@
 // EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Inventory.Events;
-using Content.Shared.SS220.Thermals;
+using Content.Shared.SS220.IgnoreLightVision;
 
 
 namespace Content.Server.SS220.Thermals;
@@ -24,7 +24,7 @@ public sealed class ThermalVisionClothingSystem : EntitySystem
 
         if (!TryComp<ThermalVisionComponent>(args.Equipee, out var thermalVisionComp))
         {
-            AddComp(args.Equipee, new ThermalVisionComponent(ent.Comp.ThermalVisionRadius));
+            AddComp(args.Equipee, new ThermalVisionComponent(ent.Comp.VisionRadius, ent.Comp.CloseVisionRadius) { State = IgnoreLightVisionOverlayState.Half } );
             return;
         }
     }

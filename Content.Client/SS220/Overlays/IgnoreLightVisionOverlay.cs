@@ -1,6 +1,6 @@
 // Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
-using Content.Shared.SS220.Thermals;
+using Content.Shared.SS220.IgnoreLightVision;
 using Content.Shared.Mobs.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -33,7 +33,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     private const float STEALTH_VISION_TRESHHOLD = 0;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
-    public IgnoreLightVisionOverlay(float showRadius)
+    public IgnoreLightVisionOverlay(float showRadius, float closeShowRadius)
     {
         IoCManager.InjectDependencies(this);
 
@@ -42,8 +42,9 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         _stealthSystem = Entity.System<StealthSystem>();
 
         ShowRadius = showRadius < MIN_CLOSE_RANGE ? MIN_CLOSE_RANGE : showRadius;
-        ShowCloseRadius = ShowRadius / 4 < MIN_CLOSE_RANGE ? MIN_CLOSE_RANGE : ShowRadius / 4;
+        ShowCloseRadius = closeShowRadius < MIN_CLOSE_RANGE ? MIN_CLOSE_RANGE : closeShowRadius;
     }
+
     protected override void Draw(in OverlayDrawArgs args)
     {
         if (PlayerManager.LocalEntity == null)
@@ -52,13 +53,8 @@ public abstract class IgnoreLightVisionOverlay : Overlay
             return;
         if (mobstateComp.CurrentState != MobState.Alive)
             return;
-        if (!Entity.TryGetComponent(PlayerManager.LocalEntity, out ThermalVisionComponent? thermalVision) ||
-            thermalVision.State == ThermalVisionState.Off)
+        if (!Entity.TryGetComponent<TransformComponent>(PlayerManager.LocalEntity, out var playerTransform))
             return;
-
-        if (!Entity.TryGetComponent<TransformComponent>(PlayerManager.LocalEntity,
-                                                out var playerTransform))
-            return; // maybe need to log it
 
         var handle = args.WorldHandle;
         var eye = args.Viewport.Eye;
@@ -148,7 +144,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         {
             currentEntUid = container.Owner;
 
-            if (currentEntUid == PlayerManager.LocalEntity )
+            if (currentEntUid == PlayerManager.LocalEntity)
                 return true;
             if (HasComponentFromList(currentEntUid, blacklistComponentNames))
                 return true;

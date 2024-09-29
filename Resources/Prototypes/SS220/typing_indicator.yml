@@ -1,0 +1,7 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: typingIndicator
+  id: tajaran
+  spritePath: /Textures/SS220/Effects/speech.rsi
+  typingState: tajaran0
+  idleState: tajaran3
