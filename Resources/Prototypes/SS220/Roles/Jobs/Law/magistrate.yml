@@ -6,10 +6,10 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 432000 # Заглушка - 120 часов
+      time: 360000 # Заглушка - 100 часов
     - !type:RoleTimeRequirement
       role: JobIAA
-      time: 43200 # Заглушка - 12 часов
+      time: 180000 # Заглушка - 50 часов
     - !type:AgeRequirement
       requiredAge: 32
     - !type:SpeciesRequirement #SS220-jobbans begin
