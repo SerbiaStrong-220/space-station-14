@@ -219,7 +219,7 @@
   parent: SmokingPipeFilledTobacco
   name: элитная курительная трубка
   description: Прямо как курил дедуля.
-  suffix: Шлёпа
+  suffix: Шлёпа, Табак
   components:
   - type: Sprite
     sprite: SS220/Objects/Sponsor/Cigs/floppa-pipe.rsi
