@@ -115,6 +115,11 @@
   productEntity: EnergySwordDouble
   cost:
     Telecrystal: 16
+  #ss220-uplink-minor-fixes-and-discounts-begin #Discount added for the reason that on the official build d-esword is only in the nukies uplink, but nukies don't have discounts
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 9
+  #ss220-uplink-minor-fixes-and-discounts-end
   categories:
   - UplinkWeaponry
   conditions:
