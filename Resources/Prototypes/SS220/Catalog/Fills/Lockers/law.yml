@@ -4,7 +4,7 @@
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltLaw
-#    - id: DoorRemoteLawyer До появления ДВД
+    - id: DoorRemoteLaw
     - id: RubberStampMagistrate
     - id: ClothingOuterRobesJudge
     - id: ClothingHeadHatPwig

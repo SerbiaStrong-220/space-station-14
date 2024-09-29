@@ -2,9 +2,3 @@
   id: Magistrate
   name: id-card-access-level-magistrate
   canBeSwitchableInReader: false
-
-- type: accessGroup
-  id: Lawyer
-  tags:
-  - Magistrate
-  - Lawyer
