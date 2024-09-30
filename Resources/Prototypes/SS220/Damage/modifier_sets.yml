@@ -8,6 +8,12 @@
     Poison: 1.1
 
 - type: damageModifierSet
+  id: Tajaran # Ну вроде так мяу.
+  coefficients:
+    Cold: 0.8
+    Heat: 1.2 # so about heat, we make them receive more heat cause tajaran Secs > any normal secs
+
+- type: damageModifierSet
   id: TomatoKiller
   coefficients:
     Blunt: 1

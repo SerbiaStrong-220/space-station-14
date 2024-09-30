@@ -24,11 +24,12 @@
     prototype: Tajaran
     requiredLegs: 2
     #акцент, эмоуты, хвост и маски
-  - type: TajaranAccent #tajaran_TODO
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Tajaran
+  - type: TajaranAccent
   - type: TypingIndicator
     proto: tajaran
-  #todo - type: Inventory
-  #todo
   - type: Wagging
   - type: Vocal
     sounds:
@@ -37,7 +38,8 @@
       Unsexed: MaleFelinid
   - type: Speech
     speechSounds: Alto
-    allowedEmotes: ['Meow','Mew','Growl','Purr','Hiss']
+    speechVerb: Tajaran
+    allowedEmotes: ['Growl','Purr','Hiss']
   - type: DamageOnHighSpeedImpact
     damage:
       types:

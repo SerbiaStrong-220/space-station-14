@@ -5,7 +5,6 @@
   name: species-name-tajaran
   roundStart: true
   prototype: MobTajaran
-  maxAge: 60 #ss220-maxage-lore
   sprites: MobTajaranSprites
   defaultSkinTone: "#222626"
   markingLimits: MobTajaranMarkingLimits
@@ -16,6 +15,9 @@
   maleLastNames: tajaran_second_unisex
   femaleLastNames: tajaran_second_unisex
   buttScanTexture: /Textures/SS220/Interface/Butts/tajaran.png
+  youngAge: 25
+  oldAge: 55
+  maxAge: 70 #some lore moments
 
 - type: speciesBaseSprites
   id: MobTajaranSprites
