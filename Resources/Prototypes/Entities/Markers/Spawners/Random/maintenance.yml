@@ -105,7 +105,7 @@
         - id: ClothingNeckCloakAdmin
         - id: ClothingNeckCloakMoth
         - id: ClothingNeckCloakVoid
-        - id: ClothingNeckCloakGoliathCloak
+      #  - id: ClothingNeckCloakGoliathCloak #ss220 goliath-cloak-upgrade
         - id: ClothingNeckCloakAce
         - id: ClothingNeckCloakAro
         - id: ClothingNeckCloakBi
