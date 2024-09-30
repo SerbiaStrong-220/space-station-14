@@ -1,0 +1,314 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Damage;
+using Content.Shared.DoAfter;
+using Content.Shared.Humanoid;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
+using Content.Shared.SS220.LyingDownOnBuckledEntity.Components;
+using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
+
+namespace Content.Shared.SS220.LyingDownOnBuckledEntity.Systems;
+
+public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
+{
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    private string StandUpAction = "ActionStandUp";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, StandUpActionEvent>(OnStandUpAction);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, EndCollideEvent>(OnEndCollide);
+
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, UpdateCanMoveEvent>(OnCanMoveUpdate);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, RaisePetDoAfterEvent>(OnRaiseDoAfter);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, LieDownDoAfterEvent>(OnLieDownDoAfter);
+
+        SubscribeLocalEvent<LyingPetComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
+        SubscribeLocalEvent<LyingPetComponent, UnstrapAttemptEvent>(OnUnstrapAttempt);
+        SubscribeLocalEvent<HumanoidAppearanceComponent, GetVerbsEvent<AlternativeVerb>>(OnHumanoidAlternativeVerb);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<LyingPetComponent>();
+        while (query.MoveNext(out var uid, out var lyingPet))
+        {
+            if (_timing.CurTime < lyingPet.NextSecond)
+                continue;
+
+            lyingPet.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
+
+            if (lyingPet.Damage != null && !_mobState.IsDead(uid))
+                _damageable.TryChangeDamage(uid, lyingPet.Damage, interruptsDoAfters: false);
+        }
+    }
+
+    private void OnShutdown(Entity<LyingDownOnBuckledEntityComponent> entity, ref ComponentShutdown args)
+    {
+        if (entity.Comp.IsLying)
+            StandUp(entity);
+
+        Dirty(entity);
+    }
+
+    private void OnStandUpAction(Entity<LyingDownOnBuckledEntityComponent> entity, ref StandUpActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        StandUp(entity);
+        args.Handled = true;
+    }
+
+    private void OnMobStateChanged(Entity<LyingDownOnBuckledEntityComponent> entity, ref MobStateChangedEvent args)
+    {
+        if (entity.Comp.IsLying &&
+            args.NewMobState is not MobState.Alive)
+            StandUp(entity);
+    }
+
+    private void OnEndCollide(Entity<LyingDownOnBuckledEntityComponent> entity, ref EndCollideEvent args)
+    {
+        if (entity.Comp.LyingOn == args.OtherEntity)
+            StandUp(entity);
+    }
+    private void OnCanMoveUpdate(Entity<LyingDownOnBuckledEntityComponent> entity, ref UpdateCanMoveEvent args)
+    {
+        if (entity.Comp.IsLying)
+            args.Cancel();
+    }
+
+    private void OnAlternativeVerb(EntityUid uid, LyingDownOnBuckledEntityComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess ||
+            args.User == uid ||
+            component.LyingOn is null)
+            return;
+
+        var raiseVerb = new AlternativeVerb
+        {
+            Text = Loc.GetString("raise-pet-verb", ("target", component.LyingOn.Value)),
+            Act = () =>
+            {
+                var doAfterEventArgs = new DoAfterArgs(EntityManager,
+                    args.User,
+                    component.RaiseDoAfter,
+                    new RaisePetDoAfterEvent(),
+                    uid,
+                    uid)
+                {
+                    Broadcast = false,
+                    BreakOnDamage = false,
+                    BreakOnMove = true,
+                    NeedHand = false,
+                    BlockDuplicate = true,
+                    CancelDuplicate = true,
+                    DuplicateCondition = DuplicateConditions.SameEvent
+                };
+                _doAfter.TryStartDoAfter(doAfterEventArgs);
+            }
+        };
+
+        args.Verbs.Add(raiseVerb);
+    }
+
+    private void OnHumanoidAlternativeVerb(EntityUid uid, HumanoidAppearanceComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        var pet = args.User;
+
+        if (!args.CanAccess ||
+            !TryComp<LyingDownOnBuckledEntityComponent>(pet, out var petLyingDown) ||
+            petLyingDown.IsLying ||
+            !CheckBuckledEntity(pet, uid) ||
+            !CheckOtherLyingPets(pet, uid))
+            return;
+
+        var lieDownVerb = new AlternativeVerb
+        {
+            Text = Loc.GetString("pet-lie-down-werb"),
+            Act = () =>
+            {
+                var doAfterEventArgs = new DoAfterArgs(EntityManager,
+                    pet,
+                    petLyingDown.LyingDoAfter,
+                    new LieDownDoAfterEvent(),
+                    pet,
+                    uid)
+                {
+                    Broadcast = false,
+                    BreakOnDamage = false,
+                    BreakOnMove = true,
+                    NeedHand = false,
+                    BlockDuplicate = true,
+                    CancelDuplicate = true,
+                    DuplicateCondition = DuplicateConditions.SameEvent
+                };
+                _doAfter.TryStartDoAfter(doAfterEventArgs);
+            }
+        };
+
+        args.Verbs.Add(lieDownVerb);
+    }
+
+    private void OnLieDownDoAfter(Entity<LyingDownOnBuckledEntityComponent> entity, ref LieDownDoAfterEvent args)
+    {
+        if (args.Cancelled ||
+            args.Target is not { } target ||
+            !CheckBuckledEntity(entity, target) ||
+            !CheckOtherLyingPets(entity, target))
+            return;
+
+        LieDownOnEntity(entity, target);
+    }
+
+    private void OnRaiseDoAfter(Entity<LyingDownOnBuckledEntityComponent> entity, ref RaisePetDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        StandUp(entity);
+    }
+
+    private void OnUnbuckleAttempt(Entity<LyingPetComponent> entity, ref UnbuckleAttemptEvent args)
+    {
+        if (!entity.Comp.BlockUnbuckle)
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void OnUnstrapAttempt(Entity<LyingPetComponent> entity, ref UnstrapAttemptEvent args)
+    {
+        if (!entity.Comp.BlockUnbuckle)
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void LieDownOnEntity(EntityUid uid, EntityUid target, LyingDownOnBuckledEntityComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        var targetCords = _transform.GetMoverCoordinates(target);
+        _transform.SetCoordinates(uid, targetCords.Offset(component.Offset));
+
+        component.LyingOn = target;
+        component.IsLying = true;
+        component.ActionUid = _actions.AddAction(uid, StandUpAction);
+        Dirty(uid, component);
+
+        if (TryComp<AppearanceComponent>(uid, out var appearance))
+            _appearance.SetData(uid, LyingVisuals.State, true, appearance);
+
+        var lyingPetComp = EnsureComp<LyingPetComponent>(target);
+        lyingPetComp.PetUid = uid;
+        lyingPetComp.BlockUnbuckle = component.BlockUnbuckle;
+        if (component.DamageOnLying is { } damageOnLying &&
+            _entityWhitelist.IsWhitelistPass(damageOnLying.Whitelist, target))
+        {
+            lyingPetComp.Damage = damageOnLying.Damage;
+        }
+
+        _actionBlocker.UpdateCanMove(uid);
+        Dirty(target, lyingPetComp);
+    }
+
+    private void StandUp(EntityUid uid, LyingDownOnBuckledEntityComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        _actions.RemoveAction(component.ActionUid);
+        component.ActionUid = null;
+        component.IsLying = false;
+
+        if (TryComp<AppearanceComponent>(uid, out var appearance))
+            _appearance.SetData(uid, LyingVisuals.State, false, appearance);
+
+        if (component.LyingOn is { } lyingOnEnt)
+            RemComp<LyingPetComponent>(lyingOnEnt);
+
+        _actionBlocker.UpdateCanMove(uid);
+        Dirty(uid, component);
+    }
+
+    /// <summary>
+    /// Checks if the target is buckled to a whitelisted entity
+    /// </summary>
+    private bool CheckBuckledEntity(EntityUid uid, EntityUid target, LyingDownOnBuckledEntityComponent? component = null)
+    {
+        return Resolve(uid, ref component) &&
+            TryComp<BuckleComponent>(target, out var buckle) &&
+            buckle.BuckledTo is { } strapEnt &&
+            _entityWhitelist.IsWhitelistPass(component.StrapWhitelist, strapEnt);
+    }
+
+    /// <summary>
+    /// Checks if there aren't other pets lying down on the entity
+    /// </summary>
+    private bool CheckOtherLyingPets(EntityUid pet, EntityUid target, LyingPetComponent? component = null)
+    {
+        if (!Resolve(target, ref component))
+            return true;
+
+        if (component.PetUid != null)
+            _popup.PopupEntity(Loc.GetString("other-pet-is-lying-on", ("pet", component.PetUid.Value), ("target", target)), pet, pet);
+
+        return false;
+    }
+}
+
+[Serializable, NetSerializable]
+public enum LyingVisuals : byte
+{
+    State,
+    LyingDown
+}
+
+[Serializable, NetSerializable]
+public enum LyingState : byte
+{
+    LyingDown,
+    StandUp
+}
+
+public sealed partial class StandUpActionEvent : InstantActionEvent
+{
+}
+
+[Serializable, NetSerializable]
+public sealed partial class RaisePetDoAfterEvent : SimpleDoAfterEvent
+{
+}
+
+[Serializable, NetSerializable]
+public sealed partial class LieDownDoAfterEvent : SimpleDoAfterEvent
+{
+}

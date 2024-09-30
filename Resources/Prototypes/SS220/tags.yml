@@ -114,3 +114,7 @@
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter
+
+#SS220 Add lying action
+- type: Tag
+  id: Bed

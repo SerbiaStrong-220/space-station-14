@@ -139,7 +139,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cat
-    - map: ["enum.LyingVisuals.Lying"]
+    - map: ["enum.LyingVisuals.LyingDown"]
       state: cat_rest
       visible: false
    #SS220 Add lying action end
@@ -160,11 +160,23 @@
   - type: StealTarget
     stealGroup: AnimalNamedCat
   #SS220 Add lying action begin
-  - type: LyingDown
+  - type: LyingDownOnBuckledEntity
+    strapWhitelist:
+        tags:
+          - Bed
+    blockUnbuckle: true
+    damageOnLying:
+      damage:
+        types:
+          Piercing: 5
+      whitelist:
+        components:
+          - HumanoidAppearance
+    offset: -0.2, 0.1
   - type: GenericVisualizer
     visuals:
       enum.LyingVisuals.State:
-        enum.LyingVisuals.Lying:
+        enum.LyingVisuals.LyingDown:
           True: { visible: true }
           False: { visible: false }
         enum.DamageStateVisualLayers.Base:
