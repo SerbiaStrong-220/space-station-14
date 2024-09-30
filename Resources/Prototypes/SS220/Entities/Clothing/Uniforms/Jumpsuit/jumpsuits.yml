@@ -457,7 +457,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/bard.rs
+    sprite: SS220/Clothing/Uniforms/bard.rsi
 
 - type: entity
   parent: ClothingUniformBase
