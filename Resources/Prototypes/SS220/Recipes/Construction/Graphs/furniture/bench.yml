@@ -24,7 +24,7 @@
               doAfter: 1
         - to: BenchMiddle
           completed:
-            - !type:SnapToGrid { }s
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 1
