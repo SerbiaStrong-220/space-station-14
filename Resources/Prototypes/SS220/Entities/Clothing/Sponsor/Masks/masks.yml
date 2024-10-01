@@ -38,7 +38,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Mask/dallas.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Sponsor/Mask/dallasrsi
+    sprite: SS220/Clothing/Sponsor/Mask/dallas.rsi
   - type: BreathMask
   - type: IdentityBlocker
 
