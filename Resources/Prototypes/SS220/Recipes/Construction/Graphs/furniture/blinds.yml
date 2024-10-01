@@ -10,28 +10,32 @@
       edges:
         - to: BlindsSolo
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
         - to: BlindsLeft
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
         - to: BlindsRight
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
         - to: BlindsMiddle
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: Steel
               amount: 2
