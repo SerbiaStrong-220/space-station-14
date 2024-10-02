@@ -160,11 +160,12 @@ public partial class ChatSystem
     /// </summary>
     /// <param name="uid"></param>
     /// <param name="textInput"></param>
-    private void TryEmoteChatInput(EntityUid uid, string textInput, out bool consumed)
+    private void TryEmoteChatInput(EntityUid uid, string textInput, out bool consumed /* SS220 Chat-Emote-Cooldown */)
     {
-        consumed = false;
-        var actionLower = textInput.ToLower();
-        if (!_wordEmoteDict.TryGetValue(actionLower, out var emote))
+        consumed = false; // SS220 Chat-Emote-Cooldown
+
+        var actionTrimmedLower = TrimPunctuation(textInput.ToLower());
+        if (!_wordEmoteDict.TryGetValue(actionTrimmedLower, out var emote))
             return;
 
         // SS220 Chat-Emote-Cooldown begin
@@ -185,6 +186,24 @@ public partial class ChatSystem
             return;
 
         InvokeEmoteEvent(uid, emote);
+        return;
+
+        static string TrimPunctuation(string textInput)
+        {
+            var trimEnd = textInput.Length;
+            while (trimEnd > 0 && char.IsPunctuation(textInput[trimEnd - 1]))
+            {
+                trimEnd--;
+            }
+
+            var trimStart = 0;
+            while (trimStart < trimEnd && char.IsPunctuation(textInput[trimStart]))
+            {
+                trimStart++;
+            }
+
+            return textInput[trimStart..trimEnd];
+        }
     }
     /// <summary>
     /// Checks if we can use this emote based on the emotes whitelist, blacklist, and availibility to the entity.
@@ -199,7 +218,8 @@ public partial class ChatSystem
 
         if (!emote.Available &&
             TryComp<SpeechComponent>(source, out var speech) &&
-            !speech.AllowedEmotes.Contains(emote.ID))
+            !speech.AllowedEmotes.Contains(emote.ID) &&
+            !speech.ClothingEmotes.Contains(emote.ID)) //SS220 Clothing special emotes
             return false;
 
         return true;

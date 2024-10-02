@@ -8,8 +8,10 @@
       sprite: Corvax/Clothing/Hands/Gloves/kim.rsi
     - type: Clothing
       sprite: Corvax/Clothing/Hands/Gloves/kim.rsi
-    - type: GloveHeatResistance
-      heatResistance: 1400
+    - type: DamageOnInteractProtection
+      damageProtection:
+        flatReductions:
+          Heat: 10
     - type: Insulated
 
 - type: entity
@@ -23,6 +25,8 @@
       sprite: Corvax/Clothing/Hands/Gloves/centcom_naval.rsi
     - type: Clothing
       sprite: Corvax/Clothing/Hands/Gloves/centcom_naval.rsi
-    - type: GloveHeatResistance
-      heatResistance: 1400
+    - type: DamageOnInteractProtection
+      damageProtection:
+        flatReductions:
+          Heat: 10
     - type: Insulated

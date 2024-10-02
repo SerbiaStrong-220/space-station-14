@@ -216,6 +216,48 @@
   id: threedog_radio
 
 - type: ttsVoice
+  name: Мистер Помощник
+  description: Голос персонажа Мистер Помощник из Fallout 3
+  sex: Male
+  speaker: mister_handy_fl3
+  id: mister_handy_fl3
+
+- type: ttsVoice
+  name: Мистер Храбрец
+  description: Голос персонажа Мистер Храбрец из Fallout 3
+  sex: Male
+  speaker: mister_gutsy_fl3
+  id: mister_gutsy_fl3
+
+- type: ttsVoice
+  name: Джерико
+  description: Голос персонажа Джерико из Fallout 3
+  sex: Male
+  speaker: jericho_fl3
+  id: jericho_fl3
+
+- type: ttsVoice
+  name: Старейшина Лайонс
+  description: Голос персонажа Старейшина Лайонс из Fallout 3
+  sex: Male
+  speaker: elder_lyons_fl3
+  id: elder_lyons_fl3
+
+- type: ttsVoice
+  name: Сара Лайонс
+  description: Голос персонажа Сара Лайонс из Fallout 3
+  sex: Female
+  speaker: sarah_lyons_fl3
+  id: sarah_lyons_fl3
+
+- type: ttsVoice
+  name: Колин Мориарти
+  description: Голос персонажа Колин Мориарти из Fallout 3
+  sex: Male
+  speaker: colin_moriarty_fl3
+  id: colin_moriarty_fl3
+
+- type: ttsVoice
   name: Полина Морозова
   description: Голос персонажа Полина Морозова из игры Tiny Bunny
   sex: Female
@@ -454,6 +496,20 @@
   id: triss
 
 - type: ttsVoice
+  name: Ковир Ноблеман
+  description: Голос персонажа Ковир Ноблеман из игры The Witcher 3
+  sex: Male
+  speaker: kovir_nobleman
+  id: kovir_nobleman
+
+- type: ttsVoice
+  name: Золтан Хивай
+  description: Голос персонажа Золтан Хивай из игры The Witcher 3
+  sex: Male
+  speaker: zoltan_chivay
+  id: zoltan_chivay
+
+- type: ttsVoice
   name: Азир
   description: Голос персонажа Азир из игры League of Legends
   sex: Male
@@ -655,6 +711,41 @@
   sex: Male
   speaker: jackie
   id: jackie
+
+- type: ttsVoice
+  name: Майко Маэда
+  description: Голос персонажа Майко Маэда из игры Cyberpunk 2077
+  sex: Female
+  speaker: maiko
+  id: maiko
+
+- type: ttsVoice
+  name: Брендан
+  description: Голос персонажа Брендан из игры Cyberpunk 2077
+  sex: Male
+  speaker: brendan
+  id: brendan
+
+- type: ttsVoice
+  name: Нэнси Хартли
+  description: Голос персонажа Нэнси Хартли из игры Cyberpunk 2077
+  sex: Female
+  speaker: nancy_hartley
+  id: nancy_hartley
+
+- type: ttsVoice
+  name: Освальд Форрест
+  description: Голос персонажа Освальд Форрест из игры Cyberpunk 2077
+  sex: Male
+  speaker: oswald_forrest
+  id: oswald_forrest
+
+- type: ttsVoice
+  name: Стив Санчес
+  description: Голос персонажа Стив Санчес из игры Cyberpunk 2077
+  sex: Male
+  speaker: steve
+  id: steve
 
 - type: ttsVoice
   name: Сержант Дорнан
@@ -907,3 +998,52 @@
   sex: Female
   speaker: poppysweeting
   id: poppysweeting
+
+- type: ttsVoice
+  name: Гоблин В
+  description: Голос персонажа Гоблин В из игры Hogwarts Legacy
+  sex: Male
+  speaker: generic_goblin_c
+  id: generic_goblin_c
+
+- type: ttsVoice
+  name: Дина Гекат
+  description: Голос персонажа Дина Гекат из игры Hogwarts Legacy
+  sex: Female
+  speaker: dinah_hecat
+  id: dinah_hecat
+
+- type: ttsVoice
+  name: Эзоп Шарп
+  description: Голос персонажа Эзоп Шарп из игры Hogwarts Legacy
+  sex: Male
+  speaker: aesop_sharp
+  id: aesop_sharp
+
+- type: ttsVoice
+  name: Абрахам Ронен
+  description: Голос персонажа Абрахам Ронен из игры Hogwarts Legacy
+  sex: Male
+  speaker: abraham_ronen
+  id: abraham_ronen
+
+- type: ttsVoice
+  name: Саманта Дейл
+  description: Голос персонажа Саманта Дейл из игры Hogwarts Legacy
+  sex: Female
+  speaker: samantha_dale
+  id: samantha_dale
+
+- type: ttsVoice
+  name: Сирона Райан
+  description: Голос персонажа Сирона Райан из игры Hogwarts Legacy
+  sex: Female
+  speaker: sirona_ryan
+  id: sirona_ryan
+
+- type: ttsVoice
+  name: Софрония Франклин
+  description: Голос персонажа Софрония Франклин из игры Hogwarts Legacy
+  sex: Female
+  speaker: sophronia_franklin
+  id: sophronia_franklin

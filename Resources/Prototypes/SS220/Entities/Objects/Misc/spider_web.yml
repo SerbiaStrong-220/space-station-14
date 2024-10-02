@@ -1,4 +1,4 @@
-#Spider queen webs 
+#Spider queen webs
 
 #Base
 - type: entity
@@ -6,7 +6,7 @@
   name: web
   description: Sticky web.. I wonder where it comes from?
   abstract: true
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -38,12 +38,12 @@
       fixtures:
         fix1:
           hard: false
-          density: 7
+          density: 1000
           shape:
             !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
-          layer:
-          - MidImpassable
+          mask:
+          - ItemMask
     - type: Damageable
       damageModifierSet: Wood
     - type: Destructible
@@ -85,7 +85,7 @@
           damage: 30
         behaviors:
         - !type:DoActsBehavior
-          acts: [ "Destruction" ]  
+          acts: [ "Destruction" ]
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.25
       sprintSpeedModifier: 0.25
@@ -99,6 +99,7 @@
     snap:
       - Wall
   components:
+
     - type: Destructible
       thresholds:
       - trigger:
@@ -106,7 +107,7 @@
           damage: 50
         behaviors:
         - !type:DoActsBehavior
-          acts: [ "Destruction" ]  
+          acts: [ "Destruction" ]
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.15
       sprintSpeedModifier: 0.15
@@ -115,7 +116,7 @@
   parent: BaseSpiderWeb
   id: SpiderWebDespawned
   name: web
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:

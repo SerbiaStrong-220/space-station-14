@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   id: LockerBlueshieldFilled
   suffix: Filled
@@ -8,9 +10,9 @@
     - id: WeaponDisabler
     - id: MedkitAdvancedFilled
     - id: ClothingUniformJumpsuitBlueShield2 #SS220 new jumpsuit
-    - id: ClothingCloakBlueShield #SS220 new cloak
+#   - id: ClothingCloakBlueShield #SS220 new cloak
     - id: ExpensiveLighterShield #SS220-Zippo
-    #- id: HandheldCrewMonitor #ss220-fix-blueshield
+#   - id: HandheldCrewMonitor #ss220-fix-blueshield
     - id: ClothingOuterSRTCoat #SS220-CentComm
 
 - type: entity

@@ -1,0 +1,92 @@
+# Returned for centcomm map
+- type: entity
+  parent: ClothingBackpackERTLeader
+  id: ClothingBackpackERTLeaderFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponDisabler
+      - id: MedicatedSuture
+      - id: RegenerativeMesh
+      - id: BoxZiptie
+      - id: CrowbarRed
+      - id: MagazineMagnum
+
+- type: entity
+  parent: ClothingBackpackERTChaplain
+  id: ClothingBackpackERTChaplainFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxCandle
+      - id: BoxBodyBag
+      - id: DrinkWaterMelonJuiceJug
+      - id: Lantern
+        amount: 2
+      - id: Bible
+      - id: CrowbarRed
+      - id: FoodBakedBunHotX
+        amount: 4
+      - id: Lighter
+
+- type: entity
+  parent: ClothingBackpackERTEngineer
+  id: ClothingBackpackERTEngineerFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: trayScanner
+      - id: RCD
+      - id: RCDAmmo
+        amount: 2
+      - id: CableMVStack
+      - id: CableHVStack
+      - id: CableApcStack
+      - id: SheetPlasteel
+      - id: SheetSteel
+      - id: SheetGlass
+
+- type: entity
+  parent: ClothingBackpackERTSecurity
+  id: ClothingBackpackERTSecurityFilled
+  suffix: Filled
+  components:
+   - type: StorageFill
+     contents:
+      - id: WeaponDisabler
+      - id: MedicatedSuture
+      - id: RegenerativeMesh
+      - id: BoxZiptie
+      - id: CrowbarRed
+      - id: MagazinePistol
+
+- type: entity
+  parent: ClothingBackpackERTMedical
+  id: ClothingBackpackERTMedicalFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: Hypospray
+      - id: MedkitAdvancedFilled
+      - id: CrowbarRed
+      - id: OmnizineChemistryBottle
+      - id: EpinephrineChemistryBottle
+      - id: EpinephrineChemistryBottle
+
+- type: entity
+  parent: ClothingBackpackERTJanitor
+  id: ClothingBackpackERTJanitorFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: LightReplacer
+      - id: BoxLightMixed
+        amount: 2
+      - id: Soap
+      - id: CrowbarRed
+      - id: AdvMopItem

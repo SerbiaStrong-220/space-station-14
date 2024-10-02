@@ -1,3 +1,13 @@
+# druid time
+- type: loadoutEffectGroup
+  id: BotanistDruid
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBotanist
+      time: 180000 #50 часов
+
 # Head
 - type: loadout
   id: BotanistHeadBlue
@@ -18,6 +28,14 @@
   id: BotanistBandanaBlue
   equipment:
     head: ClothingHeadBandBlueBotany
+
+- type: loadout
+  id: BotanistDruidHead #SS220 druid loadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BotanistDruid
+  equipment:
+    head: ClothingHeadTiaraDruid
 
 # Jumpsuit
 - type: loadout
@@ -55,6 +73,15 @@
   equipment:
     jumpsuit: ClothingUniformOverallsWhite
 
+- type: loadout
+  id: BotanistDruidJumpsuit #SS220 druid loadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BotanistDruid
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDruid
+
+
 # Outer clothing
 - type: loadout
   id: BotanistApronBrown
@@ -65,3 +92,40 @@
   id: BotanistApronGreen
   equipment:
     outerClothing: ClothingOuterApronBotanistGreen
+
+# belt
+- type: loadout
+  id: BotanistBeltDefoult
+  equipment:
+    belt: ClothingBeltPlantFilled
+
+- type: loadout
+  id: BotanistDruidBelt #SS220 druid loadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BotanistDruid
+  equipment:
+    belt: ClothingBeltPlantDruid
+
+#neck
+- type: loadout
+  id: BotanistDruidAmulet #SS220 druid loadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BotanistDruid
+  equipment:
+    neck: ClothingNeckAmuletDruid
+
+#shoes
+- type: loadout
+  id: BotanistShoesBrown
+  equipment:
+    shoes: ClothingShoesColorBrown
+
+- type: loadout
+  id: BotanistDruidShoes #SS220 druid loadout
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BotanistDruid
+  equipment:
+    shoes: ClothingShoesBootsDruid

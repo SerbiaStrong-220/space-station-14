@@ -1,4 +1,4 @@
-# Turtleneck Time
+# Job Time
 - type: loadoutEffectGroup
   id: SecurityCadetTurtleneck
   effects:
@@ -9,6 +9,16 @@
       time: 108000 # 30 hrs
 
 # Jumpsuit
+- type: loadout
+  id: SecurityGrayJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSecGrey
+
+- type: loadout
+  id: SecurityGrayJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtSecGrey
+
 - type: loadout
   id: SecurityCadetJumpsuitTurtleneck
   effects:

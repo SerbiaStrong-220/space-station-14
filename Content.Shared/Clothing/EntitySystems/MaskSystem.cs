@@ -35,7 +35,7 @@ public sealed class MaskSystem : EntitySystem
     private void OnToggleMask(Entity<MaskComponent> ent, ref ToggleMaskEvent args)
     {
         var (uid, mask) = ent;
-        // ss220 bandana fix
+
         if (mask.ToggleActionEntity == null || !_timing.IsFirstTimePredicted || !mask.IsEnabled)
             return;
 
@@ -59,7 +59,6 @@ public sealed class MaskSystem : EntitySystem
     // set to untoggled when unequipped, so it isn't left in a 'pulled down' state
     private void OnGotUnequipped(EntityUid uid, MaskComponent mask, GotUnequippedEvent args)
     {
-        // ss220 bandana fix
         if (!mask.IsToggled || !mask.IsEnabled)
             return;
 
@@ -85,10 +84,8 @@ public sealed class MaskSystem : EntitySystem
 
     private void OnFolded(Entity<MaskComponent> ent, ref FoldedEvent args)
     {
-        // ss220 bandana fix begin
         if (ent.Comp.DisableOnFolded)
             ent.Comp.IsEnabled = !args.IsFolded;
-        // ss220 bandana fix end
         ent.Comp.IsToggled = args.IsFolded;
 
         ToggleMaskComponents(ent.Owner, ent.Comp, ent.Owner);

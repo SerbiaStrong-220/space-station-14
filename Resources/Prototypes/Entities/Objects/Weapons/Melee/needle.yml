@@ -4,6 +4,11 @@
   name: official security anti-inflatable armament
   description: A specialty weapon used in the destruction of unique syndicate morale-boosting equipment.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/needle.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Melee/needle.rsi
     state: icon

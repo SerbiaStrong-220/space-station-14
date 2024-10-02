@@ -5,6 +5,11 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/lsmg.ogg
+      params:
+        volume: 2
   - type: Sprite
     layers:
     - state: base
@@ -66,7 +71,7 @@
 
 - type: entity
   name: musket
-  parent: [BaseWeaponSniper, BaseGunWieldable]
+  parent: [ BaseWeaponSniper, BaseGunWieldable]
   id: Musket
   description: This should've been in a museum long before you were born. Uses .60 anti-materiel ammo.
   components:
@@ -104,7 +109,7 @@
 
 - type: entity
   name: flintlock pistol
-  parent: BaseWeaponSniper
+  parent: [BaseWeaponSniper]
   id: WeaponPistolFlintlock
   description: A pirate's companion. Yarrr! Uses .60 anti-materiel ammo.
   components:

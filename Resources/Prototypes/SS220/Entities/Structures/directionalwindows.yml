@@ -53,7 +53,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -97,12 +97,12 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
   - type: StaticPrice
-    price: 20
+    price: 30
 
 - type: entity
   id: PlasmaWindowDirectionalAng
@@ -147,7 +147,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 100
   - type: RadiationBlocker
     resistance: 1
 
@@ -173,7 +173,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_ang.rsi
@@ -182,7 +182,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -313,7 +313,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 140
+    price: 215
 
 - type: entity
   id: UraniumWindowDirectionalAng
@@ -358,7 +358,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 80
+    price: 200
 
 - type: entity
   id: WindowClockworkDirectionalAng
@@ -471,7 +471,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -516,12 +516,12 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
   - type: StaticPrice
-    price: 30
+    price: 45
 
 - type: entity
   id: PlasmaWindowDirectionalU
@@ -566,7 +566,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 100
+    price: 150
   - type: RadiationBlocker
     resistance: 1
 
@@ -592,7 +592,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_u.rsi
@@ -601,7 +601,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -732,7 +732,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 230
+    price: 322.5
 
 - type: entity
   id: UraniumWindowDirectionalU
@@ -777,7 +777,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 130
+    price: 300
 
 - type: entity
   id: WindowClockworkDirectionalU
@@ -881,7 +881,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -925,7 +925,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
@@ -975,7 +975,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70
+    price: 100
   - type: RadiationBlocker
     resistance: 1
 
@@ -1001,7 +1001,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_doub.rsi
@@ -1010,7 +1010,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -1141,7 +1141,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 150
+    price: 215
 
 - type: entity
   id: UraniumWindowDirectionalDoub
@@ -1186,7 +1186,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 85
+    price: 200
 
 - type: entity
   id: WindowClockworkDirectionalDoub
@@ -1308,7 +1308,7 @@
         - GlassLayer
   - type: Repairable
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #ss220 windows dmg fix
     damageModifierSet: Glass
   - type: ExaminableDamage
     messages: WindowMessages
@@ -1354,12 +1354,12 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 3.333
+    damageDivisor: 1.5 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
   - type: StaticPrice
-    price: 50
+    price: 60
 
 - type: entity
   id: PlasmaWindowDirectionalO
@@ -1404,7 +1404,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 130
+    price: 200
   - type: RadiationBlocker
     resistance: 1
 
@@ -1430,7 +1430,7 @@
   - type: Appearance
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 10
+    damageDivisor: 3.333 #ss220 windows dmg fix
     trackAllDamage: true
     damageOverlay:
       sprite: SS220/Structures/Windows/directionals/cracks_directional_o.rsi
@@ -1439,7 +1439,7 @@
   - type: RCDDeconstructable
     cost: 4
     delay: 4
-    fx: EffectRCDDeconstruct4  
+    fx: EffectRCDDeconstruct4
   - type: Destructible
     thresholds:
     - trigger:
@@ -1570,7 +1570,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 300
+    price: 430
 
 - type: entity
   id: UraniumWindowDirectionalO
@@ -1615,7 +1615,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 170
+    price: 400
 
 - type: entity
   id: WindowClockworkDirectionalO

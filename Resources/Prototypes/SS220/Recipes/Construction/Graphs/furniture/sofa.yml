@@ -10,32 +10,28 @@
       edges:
         - to: SofaLeft
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 3
               doAfter: 1
         - to: SofaRight
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 3
               doAfter: 1
         - to: SofaMiddle
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 3
               doAfter: 1
         - to: SofaCorner
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 3

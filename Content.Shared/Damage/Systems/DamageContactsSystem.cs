@@ -44,11 +44,12 @@ public sealed class DamageContactsSystem : EntitySystem
     {
         var otherUid = args.OtherEntity;
 
-        if (!TryComp<PhysicsComponent>(uid, out var body))
+        if (!TryComp<PhysicsComponent>(otherUid, out var body))
             return;
 
         var damageQuery = GetEntityQuery<DamageContactsComponent>();
-        foreach (var ent in _physics.GetContactingEntities(uid, body))
+        foreach (var ent in _physics.GetContactingEntities(otherUid, body))
+
         {
             if (ent == uid)
                 continue;
@@ -90,7 +91,7 @@ public sealed class DamageContactsSystem : EntitySystem
         if (HasComp<DamagedByContactComponent>(otherUid))
             return;
 
-        if (_whitelistSystem.IsWhitelistFail(component.IgnoreWhitelist, otherUid))
+        if (_whitelistSystem.IsWhitelistPass(component.IgnoreWhitelist, otherUid))
             return;
 
         var damagedByContact = EnsureComp<DamagedByContactComponent>(otherUid);

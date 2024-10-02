@@ -3,6 +3,11 @@
   id: ClothingHeadHatHardhatBase
   abstract: true
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: Sprite
     layers:
     - state: icon

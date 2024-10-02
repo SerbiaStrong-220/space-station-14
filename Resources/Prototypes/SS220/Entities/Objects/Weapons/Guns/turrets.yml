@@ -1,0 +1,121 @@
+- type: entity
+  parent: BaseStructure
+  id: LaserWeaponTurret
+  name: лазерная турель
+  abstract: true
+  components:
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Actions
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.45,-0.45,0.45,0.45"
+          density: 60
+          mask:
+            - MachineMask
+          layer:
+            - MachineLayer
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+      drawdepth: Mobs
+      layers:
+        - state: syndie_lethal
+    - type: InteractionPopup
+      interactDelay: 0.2
+      successChance: 0.8
+      interactSuccessString: petting-success-generic
+      interactFailureString: petting-failure-generic
+      interactSuccessSound:
+        path: /Audio/Effects/double_beep.ogg
+    - type: CombatMode
+      toggleMouseRotator: false
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 600
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 300
+          # TODO: Construction graph
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetSteel1:
+                  min: 2
+                  max: 4
+    - type: Gun
+      fireRate: 2.5
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+    - type: HitscanBatteryAmmoProvider
+      proto: RedLaser
+      fireCost: 1
+    - type: Battery
+      maxCharge: 500
+      startingCharge: 500
+    - type: HTN
+      rootTask:
+        task: LaserTurretCompound
+      blackboard:
+        RotateSpeed: !type:Single
+          5
+        SoundTargetInLOS: !type:SoundPathSpecifier
+          path: /Audio/Effects/double_beep.ogg
+    - type: MouseRotator
+      angleTolerance: 5
+      rotationSpeed: 180
+      simple4DirMode: false
+    - type: NoRotateOnInteract
+    - type: NoRotateOnMove
+    - type: StaticPrice
+      price: 1000
+    - type: Input
+      context: "human"
+
+- type: entity
+  parent: LaserWeaponTurret
+  name: одноразовая лазерная турель
+  id: LaserTurretSyndicate
+  suffix: Syndicate
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Syndicate
+
+- type: entity
+  parent: LaserWeaponTurret
+  id: LaserTurretNanoTrasen
+  suffix: NanoTrasen
+  components:
+  - type: NpcFactionMember
+    factions:
+      - NanoTrasen
+
+- type: entity
+  parent: LaserWeaponTurret
+  id: LaserTurretHostile
+  suffix: Hostile
+  components:
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile

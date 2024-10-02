@@ -1,0 +1,7 @@
+- type: entity
+  parent: SurveillanceCameraRouterBase
+  id: SurveillanceBodyCameraRouterSecurity
+  suffix: Security (Bodycamera)
+  components:
+    - type: SurveillanceCameraRouter
+      subnetFrequency: SurveillanceBodyCameraSecurity

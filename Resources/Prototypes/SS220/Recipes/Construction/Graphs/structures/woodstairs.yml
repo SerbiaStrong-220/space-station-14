@@ -6,32 +6,28 @@
       edges:
         - to: WoodStairsSolo
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 2
               doAfter: 1
         - to: WoodStairsLeft
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 2
               doAfter: 1
         - to: WoodStairsRight
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 2
               doAfter: 1
         - to: WoodStairsMiddle
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: WoodPlank
               amount: 2

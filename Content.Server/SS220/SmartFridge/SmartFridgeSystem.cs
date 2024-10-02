@@ -1,12 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.SmartFridge;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.UserInterface;
 using Content.Shared.Destructible;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Content.Shared.Power;
 
 namespace Content.Server.SS220.SmartFridge
 {

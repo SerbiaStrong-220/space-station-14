@@ -1,4 +1,4 @@
-# Turtleneck Time
+# Job Time
 - type: loadoutEffectGroup
   id: MedicalDoctorTurtleneck
   effects:
@@ -7,6 +7,15 @@
       !type:RoleTimeRequirement
       role: JobMedicalDoctor
       time: 108000 # 30 hrs
+
+# Glasses
+- type: loadout
+  id: CyberMedVisor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorCyberMedVisor
 
 # Jumpsuit
 - type: loadout
@@ -40,3 +49,18 @@
     proto: MedicalDoctorTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlue
+
+# Neck
+- type: loadout
+  id: WhiteScarf
+  equipment:
+    neck: ClothingNeckScarfStripedWhite
+
+# Outerclothing
+- type: loadout
+  id: CyberJacketMed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCyberJacketMed

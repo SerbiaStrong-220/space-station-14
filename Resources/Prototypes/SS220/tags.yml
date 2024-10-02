@@ -32,6 +32,9 @@
   id: ElWyccoAxe
 
 - type: Tag
+  id: WyccoAxe
+
+- type: Tag
   id: Meatwheat
 
 # ss220 detective-camera
@@ -99,3 +102,15 @@
 # Офицерский кортик
 - type: Tag
   id: OfficerCutlass
+
+# corgi E-N
+- type: Tag
+  id: E-N
+
+# EscapePod
+- type: Tag
+  id: EscapePod
+
+# SS220 to put lighter in a cigarette pack
+- type: Tag
+  id: Lighter

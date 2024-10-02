@@ -17,8 +17,6 @@
   - type: Tag
     tags:
     - Figurine
-  - type: StealTarget
-    stealGroup: Figurines
   - type: UseDelay
     delay: 10
   - type: Speech
@@ -109,7 +107,6 @@
   components:
   - type: Sprite
     state: boxer
-  # SS220 Add locale for all figurines
   - type: SpeakOnUse
     pack: FigurinesBoxer
 

@@ -34,7 +34,7 @@
         sound:
           collection: MetalBreak
   - type: StaticPrice
-    price: 25
+    price: 75
 
 - type: entity
   abstract: true
@@ -160,6 +160,11 @@
     slots:
       charger_slot:
         ejectOnInteract: true
+        # SS220 E-N
+        blacklist:
+          tags:
+          - E-N
+        # SS220 E-N
         whitelist:
           components:
           - HitscanBatteryAmmoProvider

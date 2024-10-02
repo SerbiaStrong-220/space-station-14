@@ -8,6 +8,7 @@
     sprite: Objects/Consumable/Smokeables/Cigars/case.rsi
     layers:
     - state: closed
+      map: ["closeLayer"]
     - state: open
       map: ["openLayer"]
     - state: cigar1
@@ -35,6 +36,11 @@
       map: ["cigar8"]
       visible: false
   - type: Storage
+    whitelist: # SS220 cigarette pack fix beginning
+      tags:
+        - Cigarette
+        - Lighter
+        - Cigar # SS220 cigarette pack fix end
     grid:
     - 0,0,3,1
   - type: Item

@@ -149,9 +149,13 @@
     sprite: Clothing/Head/Misc/cone.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/cone.rsi
+  - type: Item
+    storedRotation: 0
   - type: PhysicalComposition #you can't just pass up some free plastic!
     materialComposition:
       Plastic: 100
+  - type: StaticPrice
+    price: 25
 
 - type: entity
   parent: ClothingHeadBase
@@ -169,7 +173,7 @@
     accent: MobsterAccent
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ ClothingHeadBase]
   id: ClothingHeadHatCatEars
   name: cat ears
   description: "NYAH!"
@@ -192,6 +196,11 @@
       Female: FemaleFelinid
       Unsexed: MaleFelinid
   #ss220 special_sounds end
+  #SS220 clothing special emotes begin
+  - type: ClothingSpecialEmotes
+    emotes: ['Meow', 'Mew', 'Growl', 'Purr', 'Hiss']
+  #SS220 clothing special emotes end
+
 
 - type: entity
   parent: [ClothingHeadHatCatEars, BaseToggleClothing]

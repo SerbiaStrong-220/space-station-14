@@ -5,9 +5,13 @@
   setPreference: true
   objective: roles-antag-initial-infected-objective
   guides: [ Zombies ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagInitialInfected
+  antagColor: Plum
+  #SS220 Add antags playtime trackers end
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 108000 # 30h SS220 time
+    time: 180000 # 50h SS220 time
 
 - type: antag
   id: Zombie

@@ -7,6 +7,7 @@
     - PetsNT
     - Zombie
     - Revolutionary
+    - SpiderQueen #ss220 spider queen
 
 - type: npcFaction
   id: NanoTrasen
@@ -16,6 +17,7 @@
   - Xeno
   - Zombie
   - Revolutionary
+  - SpiderQueen #ss220 spider queen
 
 - type: npcFaction
   id: Mouse
@@ -32,6 +34,7 @@
   - SimpleHostile
   - Zombie
   - Xeno
+  - SpiderQueen #ss220 spider queen
 
 - type: npcFaction
   id: SimpleHostile
@@ -42,6 +45,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - SpiderQueen #ss220 spider queen
 
 - type: npcFaction
   id: SimpleNeutral
@@ -54,6 +58,7 @@
   - Xeno
   - PetsNT
   - Zombie
+  - SpiderQueen #ss220 spider queen
 
 - type: npcFaction
   id: Xeno
@@ -64,6 +69,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - SpiderQueen #ss220 spider queen
 
 - type: npcFaction
   id: Zombie
@@ -75,32 +81,4 @@
   - Passive
   - PetsNT
   - Revolutionary
-
-# SS220 AI Mapping Update Begin
-
-- type: npcFaction
-  id: BloodCult
-  hostile:
-  - NanoTrasen
-  - Syndicate
-  - Passive
-  - PetsNT
-  - Zombie
-  - Revolutionary
-
-# SS220 AI Mapping Update End
-
-- type: npcFaction
-  id: Revolutionary
-  hostile:
-  - NanoTrasen
-  - Zombie
-  - SimpleHostile
-  - Dragon
-
-# ss220 reaper passive start
-
-- type: npcFaction
-  id: DarkReaperPassive
-
-# ss220 reaper passive end
+  - SpiderQueen #ss220 spider queen

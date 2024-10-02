@@ -1,0 +1,215 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# blackwhite circle
+- type: decal
+  id: JR_SignC_bw1
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC1
+
+- type: decal
+  id: JR_SignC_bw2
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC2
+
+- type: decal
+  id: JR_SignC_bw3
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC3
+
+- type: decal
+  id: JR_SignC_bw4
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC4
+
+- type: decal
+  id: JR_SignC_bw5
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC5
+
+- type: decal
+  id: JR_SignC_bw6
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC6
+
+- type: decal
+  id: JR_SignC_bw7
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC7
+
+- type: decal
+  id: JR_SignC_bw8
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC8
+
+- type: decal
+  id: JR_SignC_bw9
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bwC9
+
+# color circle
+- type: decal
+  id: JR_SignC_col1
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC1
+
+- type: decal
+  id: JR_SignC_col2
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC2
+
+- type: decal
+  id: JR_SignC_col3
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC3
+
+- type: decal
+  id: JR_SignC_col4
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC4
+
+- type: decal
+  id: JR_SignC_col5
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC5
+
+- type: decal
+  id: JR_SignC_col6
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC6
+
+- type: decal
+  id: JR_SignC_col7
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC7
+
+- type: decal
+  id: JR_SignC_col8
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC8
+
+- type: decal
+  id: JR_SignC_col9
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_colC9
+
+# blackwhite classic
+- type: decal
+  id: JR_Sign_bw1
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bw1
+
+- type: decal
+  id: JR_Sign_bw2
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bw2
+
+- type: decal
+  id: JR_Sign_bw3
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bw3
+
+- type: decal
+  id: JR_Sign_bw4
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bw4
+
+- type: decal
+  id: JR_Sign_bw5
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bw5
+
+- type: decal
+  id: JR_Sign_bw6
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_bw6
+
+# color classic
+- type: decal
+  id: JR_Sign_col1
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_col1
+
+- type: decal
+  id: JR_Sign_col2
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_col2
+
+- type: decal
+  id: JR_Sign_col3
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_col3
+
+- type: decal
+  id: JR_Sign_col4
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_col4
+
+- type: decal
+  id: JR_Sign_col5
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_col5
+
+- type: decal
+  id: JR_Sign_col6
+  tags: ["station"]
+  sprite:
+    sprite: SS220/Decals/JRSigns.rsi
+    state: JR_col6

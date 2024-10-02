@@ -17,13 +17,12 @@
   weight: -10
   roles:
   - Bartender
-  - Borg
   - Botanist
   - Boxer
   - Chaplain
   - Chef
   - Clown
-  - Detective
+#  - Detective #SS220-Transfer Detective To Security
   - HeadOfPersonnel
   - SeniorService #ss220-SEniorService
   - Janitor
@@ -36,6 +35,25 @@
   - Visitor
   - Zookeeper
   - ServiceWorker
+
+- type: department
+  id: CentralCommand
+  name: department-CentralCommand
+  description: department-CentralCommand-description
+  color: "#0c344d"
+  roles:
+  - CentralCommandOfficial
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  - ERTMedical
+  - ERTSecurity
+  - ERTEngineer
+  - DeathSquad
+  editorHidden: true
+  weight: 120
+  lightColor: "#387195" # SS220 Round End Titles
 
 - type: department
   id: Command
@@ -54,8 +72,17 @@
   - ResearchDirector
   - Quartermaster
   - BlueShield
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  - ERTMedical
+  - ERTSecurity
+  - ERTEngineer
+  - DeathSquad
   primary: false
   weight: 100
+  lightColor: "#2c60f8" # SS220 Round End Titles
 
 - type: department
   id: Engineering
@@ -100,6 +127,7 @@
   - SecurityOfficer
   - Warden
   - SecurityPilot
+  - Detective #SS220-Transfer Detective To Security
 
 - type: department
   id: Science
@@ -123,6 +151,14 @@
   primary: false
   weight: -50
 
+- type: department
+  id: Silicon
+  name: department-Silicon
+  description: department-Silicon-description
+  color: "#D381C9"
+  roles:
+  - Borg
+  - StationAi
 
 - type: department
   id: Specific
@@ -137,6 +173,7 @@
   - Zookeeper
 #  - Psychologist SS220-psychologist-chat-color-fix
   primary: false
+  roundEndTitlesHidden: true # SS220 Round End Titles
 
 - type: department
   id: GhostRoles

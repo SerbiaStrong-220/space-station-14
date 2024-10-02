@@ -55,3 +55,29 @@
         damage:
           types:
             Radiation: -0.5
+
+#French75
+
+- type: reagent
+  id: French75
+  name: reagent-name-french-75
+  parent: BaseAlcohol
+  desc: reagent-desc-french-75
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: french75
+  color: "#b4b59f"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/french75.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.12
+  fizziness: 0.15

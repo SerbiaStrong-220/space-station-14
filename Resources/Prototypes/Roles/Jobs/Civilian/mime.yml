@@ -24,9 +24,8 @@
 - type: startingGear
   id: MimeGear
   equipment:
-    belt: ClothingBeltSuspenders
     gloves: ClothingHandsGlovesColorWhite
-    shoes: ClothingShoesColorWhite
+#    shoes: ClothingShoesColorWhite #SS220-Two Floppa Iterarion
     pocket1: CrayonMime
     pocket2: Paper
     id: MimePDA

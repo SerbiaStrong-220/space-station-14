@@ -3,10 +3,17 @@
   id: BaseKnife
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/blade.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Tag
     tags:
     - Knife
   - type: Sharp
+  - type: Execution
+    doAfterDuration: 4.0
   - type: Utensil
     types:
       - Knife
@@ -75,7 +82,7 @@
 
 - type: entity
   name: combat knife
-  parent: BaseKnife
+  parent: [BaseKnife]
   id: CombatKnife
   description: A deadly knife intended for melee confrontations.
   components:
@@ -108,7 +115,7 @@
 
 - type: entity
   name: survival knife
-  parent: CombatKnife
+  parent: [CombatKnife]
   id: SurvivalKnife
   description: Weapon of first and last resort for combatting space carp.
   components:
@@ -120,7 +127,7 @@
 
 - type: entity
   name: kukri knife
-  parent: CombatKnife
+  parent: [CombatKnife]
   id: KukriKnife
   description: Professionals have standards. Be polite. Be efficient. Have a plan to kill everyone you meet.
   components:
@@ -176,10 +183,15 @@
 
 - type: entity
   name: shiv
-  parent: BaseKnife
+  parent: [BaseKnife]
   id: Shiv
   description: A crude weapon fashioned from a piece of cloth and a glass shard.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/shiv.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Tag
     tags:
     - CombatKnife
@@ -261,11 +273,16 @@
 
 - type: entity
   name: throwing knife
-  parent: BaseKnife
+  parent: [BaseKnife]
   id: ThrowingKnife
   description: This bloodred knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
   components:
 # SS220 BetterKnifes Update begin
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/shiv.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: ThrowingAngle
     angle: 0
   - type: SolutionContainerManager

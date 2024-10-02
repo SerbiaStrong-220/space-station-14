@@ -1,0 +1,21 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakCEDark
+  name: chief engineer's dark cloak
+  description: The dark cloak of the chief engineer for years of service as the head of the engineering department.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/CE_dark/ce_dark.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleCEDark
+  name: chief engineer's dark mantle
+  description: The dark mantle of the chief engineer for years of service as head of the engineering department.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi

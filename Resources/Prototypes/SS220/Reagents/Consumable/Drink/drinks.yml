@@ -65,7 +65,7 @@
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 5
+  metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
@@ -84,3 +84,23 @@
         type: Local
         messages: [ "capsaicin-effect-light-burn" ]
         probability: 0.2
+
+- type: reagent
+  id: Eggnog
+  name: reagent-name-eggnog
+  parent: BaseDrink
+  desc: reagent-desc-eggnog
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: milk
+  color: "#ffb51c"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
