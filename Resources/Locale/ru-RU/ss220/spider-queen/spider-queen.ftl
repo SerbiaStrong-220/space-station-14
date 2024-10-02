@@ -3,7 +3,6 @@ spider-queen-not-enough-blood-points = Недостаточно крови
 spider-queen-warning = Замечена аномальная биологическая активность в { $location }. Служба Безопасности должна ликвидировать угрозу до того как активу будет нанесен непоправимый ущерб! 
 
 spider-queen-role-greeting = Ваша задача — построить максимально большой улей. Не позволяйте причинить вред потомству. Экипаж - ваша пища, устройте большой пир!
-spider-queen-role-blood-points-information = У вас { $current } крови. Ваш максимум — { $max } крови.
 
 spider-cocoon-blood-points-amount = В коконе содержится [color=#800000]{ $amount } крови[/color].
 spider-cocoon-extract-blood-points-verb = Извлечь ману

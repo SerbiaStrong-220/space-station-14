@@ -11,7 +11,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.Verbs;
-using FastAccessors;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -129,7 +128,8 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         _hunger.ModifyHunger(args.User, extractedValue * spiderQueen.HungerExtractCoefficient);
 
         Dirty(args.User, spiderQueen);
-        Dirty(entity.Owner, entity.Comp);
+        Dirty(entity);
+        _spiderQueen.UpdateAlert((args.User, spiderQueen));
     }
 
     /// <summary>

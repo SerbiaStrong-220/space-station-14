@@ -15,7 +15,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -73,7 +72,11 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             (args.Cost > FixedPoint2.Zero && !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp)))
             return;
 
-        if (!TryStartSpiderSpawnDoAfter(spider, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.Cost))
+        if (TryStartSpiderSpawnDoAfter(spider, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.Cost))
+        {
+            args.Handled = true;
+        }
+        else
         {
             Log.Error($"Failed to start DoAfter by {spider}");
             return;
@@ -89,7 +92,11 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             (args.Cost > FixedPoint2.Zero && !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp)))
             return;
 
-        if (!TryStartSpiderSpawnDoAfter(spider, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.Cost))
+        if (TryStartSpiderSpawnDoAfter(spider, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.Cost))
+        {
+            args.Handled = true;
+        }
+        else
         {
             Log.Error($"Failed to start DoAfter by {spider}");
             return;
@@ -108,6 +115,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 return;
 
             entity.Comp.CurrentBloodPoints -= args.Cost;
+            Dirty(entity);
+            UpdateAlert(entity);
         }
 
         var getProtos = EntitySpawnCollection.GetSpawns(args.Prototypes, _random);
@@ -141,7 +150,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         _container.Insert(target, container);
         entity.Comp.CocoonsList.Add(cocoonUid);
         entity.Comp.MaxBloodPoints += spiderCocoon.BloodPointsBonus;
-        Dirty(entity.Owner, entity.Comp);
+        Dirty(entity);
+        UpdateAlert(entity);
 
         spiderCocoon.CocoonOwner = entity.Owner;
         Dirty(cocoonUid, spiderCocoon);
@@ -187,6 +197,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         _hunger.ModifyHunger(uid, hungerDecreaseValue, hunger);
         component.CurrentBloodPoints += value;
         Dirty(uid, component);
+        UpdateAlert((uid, component));
     }
 
     private bool TryStartSpiderSpawnDoAfter(EntityUid spider,

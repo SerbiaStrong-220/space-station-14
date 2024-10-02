@@ -1,29 +1,40 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Alert;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Rounding;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.SpiderQueen.Systems;
 
 public abstract class SharedSpiderQueenSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; 
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<SpiderQueenComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
+    }
+
+    private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
+    {
+        UpdateAlert(entity);
     }
 
     private void OnExamine(Entity<SpiderQueenComponent> entity, ref ExaminedEvent args)
@@ -116,5 +127,23 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         }
         else
             return true;
+    }
+
+    /// <summary>
+    /// Updates the alert that displays the current amount of blood points
+    /// </summary>
+    public void UpdateAlert(Entity<SpiderQueenComponent> entity)
+    {
+        var (uid, comp) = entity;
+        if (comp.Deleted ||
+            comp.MaxBloodPoints <= FixedPoint2.Zero)
+        {
+            _alerts.ClearAlert(uid, comp.BloodPointsAlert);
+            return;
+        }
+
+        var alertProto = _prototypeManager.Index(comp.BloodPointsAlert);
+        var severity = ContentHelpers.RoundToLevels(comp.CurrentBloodPoints.Double(), comp.MaxBloodPoints.Double(), alertProto.MaxSeverity);
+        _alerts.ShowAlert(uid, alertProto, (short)severity);
     }
 }

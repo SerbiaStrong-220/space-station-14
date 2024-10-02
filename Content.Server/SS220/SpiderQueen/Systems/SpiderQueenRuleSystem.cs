@@ -9,8 +9,6 @@ using Content.Server.SS220.Roles;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
-using Content.Shared.Mind;
-using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 
@@ -91,22 +89,7 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
 
     private void OnGetBriefing(Entity<SpiderQueenRoleComponent> ent, ref GetBriefingEvent args)
     {
-        if (!TryComp<MindComponent>(ent.Owner, out var mind))
-            return;
-
         var briefing = Loc.GetString("spider-queen-role-greeting");
-
-        if (mind.OwnedEntity is { } spider &&
-            TryComp<SpiderQueenComponent>(spider, out var spiderQueen))
-        {
-            var current = spiderQueen.CurrentBloodPoints;
-            var max = spiderQueen.MaxBloodPoints;
-
-            briefing = string.Format("{0}\n{1}", briefing,
-                Loc.GetString("spider-queen-role-blood-points-information", ("current", current), ("max", max)));
-        }
-
         args.Append(briefing);
     }
 }
-
