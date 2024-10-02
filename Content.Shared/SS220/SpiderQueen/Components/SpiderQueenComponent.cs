@@ -21,7 +21,7 @@ public sealed partial class SpiderQueenComponent : Component
     /// Maximum amount of blood points
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 MaxBloodPoints = FixedPoint2.Zero;
+    public FixedPoint2 MaxBloodPoints = FixedPoint2.New(200);
 
     /// <summary>
     /// How much hunger converts into blood points per second

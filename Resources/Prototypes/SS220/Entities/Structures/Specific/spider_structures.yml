@@ -35,7 +35,7 @@
       - SpiderCocoon
   - type: SpiderCocoon
     container: cocoon
-    bloodPointsBonus: 10
+    bloodPointsBonus: 20
     damage:
       types:
         Caustic: 0.5

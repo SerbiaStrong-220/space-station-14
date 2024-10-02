@@ -150,7 +150,6 @@
   components:
   - type: SpiderQueen
     currentBloodPoints: 100
-    maxBloodPoints: 100
     cocoonsCountToAnnouncement: 10
     cocoonPrototypes:
     - SpiderCocoonHorizontal
@@ -166,6 +165,13 @@
     - ActionSpawnSingleSpiderWebDurableBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
+  - type: Hunger
+    thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
+      Overfed: 150
+      Okay: 75
+      Peckish: 35
+      Starving: 15
+      Dead: 0
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider
