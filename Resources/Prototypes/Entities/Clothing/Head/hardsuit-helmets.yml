@@ -119,28 +119,10 @@
   - type: Sprite
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/Head/Hardsuits/salvage.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   #SS220-Salvage Hardsuit Resprite-End
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/Head/Hardsuits/salvage.rsi
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET
-      - state: equipped-HELMET-unshaded
-        shader: unshaded
-  - type: ToggleableLightVisuals
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET-light
-        shader: unshaded
   #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.525
@@ -368,28 +350,10 @@
   - type: Sprite
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/Head/Hardsuits/luxury.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   #SS220-Salvage Hardsuit Resprite-End
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
-    # sprite: SS220/Clothing/Head/Hardsuits/luxury.rsi
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET
-      - state: equipped-HELMET-unshaded
-        shader: unshaded
-  - type: ToggleableLightVisuals
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET-light
-        shader: unshaded
+    sprite: SS220/Clothing/Head/Hardsuits/luxury.rsi
   #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.525
@@ -408,27 +372,32 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hardsuits/spatio.rsi #SS220-Salvage Hardsuit Resprite
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
-  - type: HandheldLight
-    addPrefix: false
-  - type: ToggleableLightVisuals
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-        shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-Begin
+    # layers:
+    # - state: icon
+    # - state: icon-unshaded
+    #   shader: unshaded
+    # - state: light-overlay
+    #   visible: false
+    #   shader: unshaded
+    #   map: [ "light" ]
+  # - type: HandheldLight
+  #   addPrefix: false
+  # - type: ToggleableLightVisuals
+  #   clothingVisuals:
+  #     head:
+  #     - state: equipped-head-light
+  #       shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
+    sprite: SS220/Clothing/Head/Hardsuits/spatio.rsi #SS220-Salvage Hardsuit Resprite
+  #SS220-Salvage Hardsuit Resprite-Begin
+    # clothingVisuals:
+    #   head:
+    #   - state: equipped-head
+    #   - state: equipped-head-unshaded
+    #     shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.72
     lowPressureMultiplier: 10000

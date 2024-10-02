@@ -120,11 +120,11 @@
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/OuterClothing/Hardsuits/spatio.rsi
-    clothingVisuals:
-      outerClothing:
-      - state: equipped-OUTERCLOTHING
-      - state: equipped-OUTERCLOTHING-unshaded
-        shader: unshaded
+    # clothingVisuals:
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
   #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.7
@@ -157,11 +157,11 @@
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/OuterClothing/Hardsuits/salvage.rsi
-    clothingVisuals:
-      outerClothing:
-      - state: equipped-OUTERCLOTHING
-      - state: equipped-OUTERCLOTHING-unshaded
-        shader: unshaded
+    # clothingVisuals:
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
   #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.5
@@ -504,11 +504,11 @@
   - type: Clothing
   #SS220-Salvage Hardsuit Resprite-Begin
     sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi
-    clothingVisuals:
-      outerClothing:
-      - state: equipped-OUTERCLOTHING
-      - state: equipped-OUTERCLOTHING-unshaded
-        shader: unshaded
+    # clothingVisuals:
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
   #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.5
