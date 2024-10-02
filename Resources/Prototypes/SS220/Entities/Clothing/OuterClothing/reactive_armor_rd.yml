@@ -31,7 +31,7 @@
   - type: ToggleClothing
     action: ActionToggleReactiveArmor
   - type: ToggleVerb
-    text: toggle-magboots-verb-get-data-text  
+    text: toggle-reactivearmor-verb-get-data-text  
   - type: GroupExamine
   - type: ReactiveTeleportArmor   
   - type: Explosive 
@@ -43,7 +43,6 @@
     deleteAfterExplosion: false
     repeatable: true
 
-
 - type: entity
   id: ActionToggleReactiveArmor
   name: Toggle Reactive armor 
@@ -53,4 +52,4 @@
     useDelay: 5
     priority: -9
     itemIconStyle: BigItem
-    event: !type:ToggleActionEvent   
+    event: !type:ToggleActionEvent
