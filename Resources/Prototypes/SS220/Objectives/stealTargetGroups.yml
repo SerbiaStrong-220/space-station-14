@@ -21,7 +21,7 @@
 
 - type: stealTargetGroup
   id: ClothingOuterReactiveArmor
-  name: experimental reactive armor
+  name: steal-target-groups-reactive-armor
   sprite:
     sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
     state: icon

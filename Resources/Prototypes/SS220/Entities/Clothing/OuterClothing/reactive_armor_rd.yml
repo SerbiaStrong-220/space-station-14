@@ -27,7 +27,6 @@
         Heat: 0.5
         Caustic: 0.9
   - type: HeldSpeedModifier
-    damageCoefficient: 0.65
   - type: ToggleClothing
     action: ActionToggleReactiveArmor
   - type: ToggleVerb
