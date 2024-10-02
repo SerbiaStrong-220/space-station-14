@@ -1,0 +1,180 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: CigPackBaseSS220
+  parent: [ BaseStorageItem, BaseBagOpenClose ]
+  name: cigarette pack
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: ["closeLayer"]
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: 1
+      map: ["1"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 2
+      map: ["2"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 3
+      map: ["3"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 4
+      map: ["4"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 5
+      map: ["5"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 6
+      map: ["6"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 7
+      map: ["7"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 8
+      map: ["8"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 9
+      map: ["9"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 10
+      map: ["10"]
+      sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
+      visible: false
+  - type: Tag
+    tags:
+    - CigPack
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+  - type: SpaceGarbage
+  - type: Item
+    size: Tiny
+    shape:
+    - 0,0,0,1
+  - type: Storage
+    grid:
+    - 0,0,4,1
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 10
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  - type: Appearance
+
+- type: entity
+  id: CigPackENG
+  parent: CigPackBaseSS220
+  name: Friendly singularity's packet
+  description: A label on the packaging reads, Face the singularity with no fear.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/ENG.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/ENG.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteENG
+      amount: 10
+
+- type: entity
+  id: CigPackMED
+  parent: CigPackBaseSS220
+  name: Benefactor's packet
+  description: A label on the packaging reads, Smoking is somewhat good for your health!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/MED.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/MED.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteMED
+      amount: 10
+
+- type: entity
+  id: CigPackSEC
+  parent: CigPackBaseSS220
+  name: Officer's reserve's packet
+  description: A label on the packaging reads, When dark times come, ember will lighten your path.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/SEC.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/SEC.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteSEC
+      amount: 10
+
+- type: entity
+  id: CigPackRnD
+  parent: CigPackBaseSS220
+  name: Anomalous war's packet
+  description: A label on the packaging reads, No anomaly can withstand science.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/RnD.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/RnD.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteRnD
+      amount: 10
+
+- type: entity
+  id: CigPackWEH
+  parent: CigPackBaseSS220
+  name: Dreams of Castles's packet
+  description: A label on the packaging reads, Dream and you will become.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/WEH.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/WEH.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteWeh
+      amount: 10
+
+- type: entity
+  id: CigPackAVD
+  parent: CigPackBaseSS220
+  name: Ocean of inc's packet
+  description: A label on the packaging reads, Manuscripts never burn.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/AVD.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/AVD.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteAVD
+      amount: 10

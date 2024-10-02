@@ -24,10 +24,10 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 140
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 40
+          - ReagentId: NeoNicotinoid
+            Quantity: 140
 
 - type: entity
   parent: CigPackBase

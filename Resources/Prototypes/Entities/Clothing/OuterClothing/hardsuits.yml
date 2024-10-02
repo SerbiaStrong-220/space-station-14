@@ -116,9 +116,16 @@
   description: A lightweight hardsuit designed for industrial EVA in zero gravity.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/spatio.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/spatio.rsi #SS220-Salvage Hardsuit Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/spatio.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/spatio.rsi
+    # clothingVisuals:
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.7
     lowPressureMultiplier: 1000
@@ -146,9 +153,16 @@
   description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/salvage.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/salvage.rsi #SS220-Salvage Hardsuit Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/salvage.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/salvage.rsi
+    # clothingVisuals:
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -486,9 +500,16 @@
   description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/luxury.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi #SS220-Salvage Hardsuit Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/luxury.rsi
+  #SS220-Salvage Hardsuit Resprite-Begin
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi
+    # clothingVisuals:
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
+  #SS220-Salvage Hardsuit Resprite-End
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000

@@ -179,6 +179,7 @@
       - id: ClothingUniformJumpsuitFamilyGuy
       # - id: WristwatchGold
       - id: ClothingWristWatch # SS220 Wristwatch
+      - id: CigPackWEH #SS220 Cigarettes
       - id: RubberStampGreytide
 
 - type: entity

@@ -10,24 +10,21 @@
       edges:
         - to: BenchLeft
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 1
               doAfter: 1
         - to: BenchRight
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 1
               doAfter: 1
         - to: BenchMiddle
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 1
