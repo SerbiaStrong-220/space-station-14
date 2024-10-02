@@ -570,6 +570,15 @@
   - JanitorOrangeShoes
   # Уборщик (Конец)
 
+ # Сервисный работник (Начало)
+- type: loadoutGroup
+  id: ServiceWorkerJumpsuit
+  name: loadout-group-service-worker-jumpsuit
+  hidden: true
+  loadouts:
+  - ServiceWorkerWaiter
+  # Сервисный работник (Конец)
+
 #! Сервис (Конец)
 
 #! Разное

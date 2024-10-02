@@ -72,7 +72,7 @@
   id: JobServiceWorker
   groups:
   - GroupTankHarness
-  - BartenderJumpsuit
+  - ServiceWorkerJumpsuit #SS220-Service Worker Loadout Fix
   - CommonBackpack
   - Glasses
   - Survival

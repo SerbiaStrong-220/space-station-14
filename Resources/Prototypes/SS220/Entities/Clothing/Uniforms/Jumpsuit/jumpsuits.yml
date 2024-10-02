@@ -320,6 +320,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_nt.rsi
 
+  # Бармен
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWaiter
+  name: waiter's uniform
+  description: The uniform of an errand boy.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/waiter.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/waiter.rsi
+
 # Medical
 
   # Парамед
