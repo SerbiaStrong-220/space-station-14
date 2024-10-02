@@ -25,7 +25,8 @@
   sprite:
     sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
     state: icon
-    
+
+- type: stealTargetGroup   
   id: WristWatchGold
   name: steal-target-groups-wrist-watch-gold
   sprite:
