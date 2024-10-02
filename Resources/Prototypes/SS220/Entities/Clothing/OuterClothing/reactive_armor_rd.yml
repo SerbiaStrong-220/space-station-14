@@ -1,13 +1,23 @@
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
   id: ClothingOuterReactiveArmor
-  name: "name1" # да-да, сделаю #.ftl
-  description: "Desc2." # да............ точно сделаю, кстати всем ревьюевирам дарова #.ftl
+  name: experimental reactive armor 
+  description: The latest armor prototype based on the anomaly core. There are rumors that NT scientists are developing a more stable and multitasking version.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi #спрайтеры будут ныть как бляди если это будут спрайты с 13
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi 
+    layers:
+    - state: icon
+      map: [ "enum.ToggleVisuals.Layer" ]
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi #инфа по борщу не БУДЕТ
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
+  - type: Appearance      
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}   
   - type: Armor
     modifiers:
       coefficients:
@@ -20,8 +30,10 @@
     damageCoefficient: 0.65
   - type: ToggleClothing
     action: ActionToggleReactiveArmor
+  - type: ToggleVerb
+    text: toggle-magboots-verb-get-data-text  
   - type: GroupExamine
-  - type: ReactiveTeleportArmor
+  - type: ReactiveTeleportArmor   
   - type: Explosive 
     explosionType: Default
     maxIntensity: 2
@@ -34,9 +46,11 @@
 
 - type: entity
   id: ActionToggleReactiveArmor
-  name: Переключение реактивной брони #.ftl
-  description: Включает или выключает реактивную броню. #.ftl
+  name: Toggle Reactive armor 
+  description: Toggles the armor on and off. 
   components:
   - type: InstantAction
+    useDelay: 5
+    priority: -9
     itemIconStyle: BigItem
     event: !type:ToggleActionEvent   

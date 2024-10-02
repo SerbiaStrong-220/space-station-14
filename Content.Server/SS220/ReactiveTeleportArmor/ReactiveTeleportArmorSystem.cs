@@ -17,6 +17,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Timing;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.ReactiveTeleportArmor
@@ -65,6 +66,7 @@ namespace Content.Server.SS220.ReactiveTeleportArmor
             _item.SetHeldPrefix(ent, prefix);
             _clothing.SetEquippedPrefix(ent, prefix);
         }
+
 
         private void TeleporWhenDamaged(Entity<TeleportOnDamageComponent> ent, ref DamageChangedEvent args)
         {

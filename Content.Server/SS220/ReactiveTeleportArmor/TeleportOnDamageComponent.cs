@@ -15,7 +15,7 @@ public sealed partial class TeleportOnDamageComponent : Component
     /// Up to how far to teleport the user
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float TeleportRadius = 30f;
+    public float TeleportRadius = 50f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
@@ -29,6 +29,9 @@ public sealed partial class TeleportOnDamageComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float TeleportChance = .9f;
 
+    /// <summary>
+    /// Need if you want to interact with the entity that provided the TeleportOnDamageComponent.
+    /// </summary>
     [ViewVariables]
     public EntityUid SavedUid;
 

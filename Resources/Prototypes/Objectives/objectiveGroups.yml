@@ -21,6 +21,7 @@
     EngravedKnuckledusterStealObjective: 1  #SS220 New Qm highrisk
     CaptainGunStealObjective: 0.5
     CaptainJetpackStealObjective: 0.5
+    ClothingOuterReactiveArmorObjective: 0.5 #SS220 New RD highrisk
     HandTeleporterStealObjective: 0.5
     SecretDocumentsStealObjective: 0.5
     MultiPhaseEnergyGunStealObjective: 0.5 #SS220 MultiPhaze Energy Gun

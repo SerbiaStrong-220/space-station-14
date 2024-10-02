@@ -23,5 +23,5 @@
   id: ClothingOuterReactiveArmor
   name: experimental reactive armor
   sprite:
-    sprite: Clothing/OuterClothing/Hardsuits/rd.rsi #да-да
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
     state: icon
