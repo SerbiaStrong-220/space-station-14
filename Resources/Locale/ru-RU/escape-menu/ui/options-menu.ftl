@@ -1,14 +1,16 @@
 ## General stuff
 
 ui-options-title = Игровые настройки
+ui-options-tab-accessibility = Доступность
 ui-options-tab-graphics = Графика
 ui-options-tab-controls = Управление
 ui-options-tab-audio = Аудио
 ui-options-tab-network = Сеть
 ui-options-tab-misc = Основные
-ui-options-apply = Применить
-ui-options-reset-all = Сбросить всё
-ui-options-default = По-умолчанию
+ui-options-apply = Сохранить и применить
+ui-options-reset-all = Сброс изменений
+ui-options-default = Сброс к настройкам по умолчанию
+ui-options-value-percent = { TOSTRING($value, "P0") }
 
 # Misc/General menu
 
@@ -36,8 +38,11 @@ ui-options-event-music = Музыка событий
 ui-options-admin-sounds = Музыка админов
 ui-options-ahelp-sounds = Звуки АХелпа
 ui-options-volume-label = Громкость
-# 220 loc fix
-ui-options-value-percent = { TOSTRING($value, "P0") }
+ui-options-volume-percent = { TOSTRING($volume, "P0") }
+ui-options-display-label = Дисплей
+ui-options-quality-label = Качество
+ui-options-misc-label = Разное
+ui-options-interface-label = Интерфейс
 
 ## Graphics menu
 
@@ -48,13 +53,6 @@ ui-options-show-ooc-patron-color = Цветной ник в OOC для патр�
 ui-options-show-looc-on-head = Показывать LOOC-чат над головами персонажей
 ui-options-fancy-speech = Показывать имена в облачках с текстом
 ui-options-fancy-name-background = Добавить фон облачкам с текстом
-ui-options-enable-color-name = Цветные имена персонажей
-ui-options-colorblind-friendly = Режим для дальтоников
-ui-options-reduced-motion = Снижение интенсивности визуальных эффектов
-ui-options-chat-window-opacity = Прозрачность окна чата
-ui-options-chat-window-opacity-percent = { TOSTRING($opacity, "P0") }
-ui-options-screen-shake-intensity = Интенсивность дрожания экрана
-ui-options-screen-shake-percent = { TOSTRING($intensity, "P0") }
 ui-options-vsync = Вертикальная синхронизация
 ui-options-fullscreen = Полный экран
 ui-options-lighting-label = Качество освещения:
@@ -99,18 +97,26 @@ ui-options-hud-theme-retro = Ретро
 ui-options-hud-theme-minimalist = Минимализм
 ui-options-hud-theme-eris = Эрис
 ui-options-hud-theme-ashen = Пепел
+ui-options-hud-layout-default = Стандартный
+ui-options-hud-layout-separated = Разделённый
 ui-options-vp-stretch = Растянуть изображение для соответствия окну игры
-ui-options-vp-scale = Фиксированный масштаб окна игры: x{ $scale }
+ui-options-vp-scale = Фиксированный масштаб окна игры:
+ui-options-vp-scale-value = x{ $scale }
 ui-options-vp-integer-scaling = Использовать целочисленное масштабирование (может вызывать появление чёрных полос/обрезания)
 ui-options-vp-integer-scaling-tooltip =
     Если эта опция включена, область просмотра будет масштабироваться,
     используя целочисленное значение при определённых разрешениях. Хотя это и
     приводит к чётким текстурам, это часто означает, что сверху/снизу экрана будут
     чёрные полосы или что часть окна не будет видна.
+ui-options-vp-vertical-fit = Подгон окна просмотра по вертикали
+ui-options-vp-vertical-fit-tooltip =
+    Когда функция включена, основное окно просмотра не будет учитывать горизонтальную ось
+    при подгонке под ваш экран. Если ваш экран меньше, чем окно просмотра,
+    то это приведёт к его обрезанию по горизонтальной оси.
 ui-options-vp-low-res = Изображение низкого разрешения
 ui-options-parallax-low-quality = Низкокачественный параллакс (фон)
 ui-options-fps-counter = Показать счётчик FPS
-ui-options-vp-width = Ширина окна игры: { $width }
+ui-options-vp-width = Ширина окна игры:
 ui-options-hud-layout = Тип HUD:
 
 ## Controls menu
@@ -168,6 +174,9 @@ ui-options-function-try-pull-object = Тянуть объект
 ui-options-function-move-pulled-object = Тянуть объект в сторону
 ui-options-function-release-pulled-object = Перестать тянуть объект
 ui-options-function-point = Указать на что-либо
+ui-options-function-rotate-object-clockwise = Повернуть по часовой стрелке
+ui-options-function-rotate-object-counterclockwise = Повернуть против часовой стрелки
+ui-options-function-flip-object = Перевернуть
 ui-options-function-focus-chat-input-window = Писать в чат
 ui-options-function-focus-local-chat-window = Писать в чат (IC)
 ui-options-function-focus-emote = Писать в чат (Emote)
@@ -186,6 +195,7 @@ ui-options-function-open-crafting-menu = Открыть меню строите�
 ui-options-function-open-inventory-menu = Открыть снаряжение
 ui-options-function-open-a-help = Открыть админ помощь
 ui-options-function-open-abilities-menu = Открыть меню действий
+ui-options-function-open-emotes-menu = Открыть меню эмоций
 ui-options-function-toggle-round-end-summary-window = Переключить окно итогов раунда
 ui-options-function-open-entity-spawn-window = Открыть меню спавна сущностей
 ui-options-function-open-sandbox-window = Открыть меню песочницы
@@ -269,3 +279,10 @@ ui-options-net-pvs-leave-tooltip =
     привести к неправильным предугадываниям и другим проблемам.
 cmd-options-desc = Открывает меню опций, опционально с конкретно выбранной вкладкой.
 cmd-options-help = Использование: options [tab]
+ui-options-enable-color-name = Цветные имена персонажей
+ui-options-colorblind-friendly = Режим для дальтоников
+ui-options-reduced-motion = Снижение интенсивности визуальных эффектов
+ui-options-chat-window-opacity = Прозрачность окна чата
+ui-options-chat-window-opacity-percent = { TOSTRING($opacity, "P0") }
+ui-options-screen-shake-intensity = Интенсивность дрожания экрана
+ui-options-screen-shake-percent = { TOSTRING($intensity, "P0") }

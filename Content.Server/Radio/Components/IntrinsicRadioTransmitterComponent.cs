@@ -14,4 +14,12 @@ public sealed partial class IntrinsicRadioTransmitterComponent : Component
 {
     [DataField("channels", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<RadioChannelPrototype>))]
     public HashSet<string> Channels = new() { SharedChatSystem.CommonChannel };
+
+    //SS220 PAI with encryption keys begin
+    /// <summary>
+    ///     Channels that an entity can use by encryption keys
+    /// </summary>
+    [ViewVariables]
+    public HashSet<string> EncryptionKeyChannels = new();
+    //SS220 PAI with encryption keys end
 }

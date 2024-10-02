@@ -86,6 +86,19 @@ public sealed partial class EmergencyShuttleSystem
     /// </summary>
     private bool _announced;
 
+    //SS220 EscapePod dockind to CentComm begin
+    /// <summary>
+    /// Priority dock tag
+    /// </summary>
+    private const string EscapePodPriorityTag = "EscapePod";
+
+    /// <summary>
+    /// Index that increases when sending escape pod to the Central Command station.
+    /// This is necessary for the use of various docking configurations.
+    /// </summary>
+    private int _escapePodIndex = 0;
+    //SS220 EscapePod dockind to CentComm end
+
     private void InitializeEmergencyConsole()
     {
         Subs.CVar(_configManager, CCVars.EmergencyShuttleMinTransitTime, SetMinTransitTime, true);
@@ -221,7 +234,11 @@ public sealed partial class EmergencyShuttleSystem
             }
 
             // Don't dock them. If you do end up doing this then stagger launch.
-            _shuttle.FTLToDock(uid, shuttle, centcomm.Entity.Value, hyperspaceTime: TransitTime);
+            //SS220 EscapePod dockind to CentComm begin
+            //_shuttle.FTLToDock(uid, shuttle, centcomm.Entity.Value, hyperspaceTime: TransitTime);
+            _shuttle.FTLToDockByIndex(uid, shuttle, centcomm.Entity.Value, _escapePodIndex, hyperspaceTime: TransitTime, priorityTag: EscapePodPriorityTag);
+            _escapePodIndex++;
+            //SS220 EscapePod dockind to CentComm end
             RemCompDeferred<EscapePodComponent>(uid);
             EnsureComp<TravelingEscapePodComponent>(uid); // SS220 Objective on escape pod
         }
@@ -232,7 +249,7 @@ public sealed partial class EmergencyShuttleSystem
             ShuttlesLeft = true;
             _chatSystem.DispatchGlobalAnnouncement(Loc.GetString("emergency-shuttle-left", ("transitTime", $"{TransitTime:0}")));
 
-            Timer.Spawn((int) (TransitTime * 1000) + _bufferTime.Milliseconds, () => _roundEnd.EndRound(), _roundEndCancelToken?.Token ?? default);
+            Timer.Spawn((int)(TransitTime * 1000) + _bufferTime.Milliseconds, () => _roundEnd.EndRound(), _roundEndCancelToken?.Token ?? default);
         }
 
         // All the others.

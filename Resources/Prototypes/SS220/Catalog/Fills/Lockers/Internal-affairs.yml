@@ -1,0 +1,23 @@
+# Magistrate
+- type: entityTable
+  id: LockerFillMagistrate
+  table: !type:AllSelector
+    children:
+#    - id: ClothingHeadsetLawyer До появления ДВД
+#    - id: DoorRemoteLawyer До появления ДВД
+    - id: ClothingOuterRobesJudge
+    - id: ClothingHeadHatPwig
+    - id: WeaponDisabler
+    - id: ClothingWristWatchGold
+    - id: ClothingEyesGlassesCommand
+    - id: Telescopichka
+
+- type: entity
+  id: LockerMagistrateFilled
+  suffix: Filled
+  parent: LockerMagistrate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillMagistrate

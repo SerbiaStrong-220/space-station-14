@@ -9,15 +9,3 @@
       stampState: "paper_stamp-iaa"
     - type: Sprite
       state: stamp-iaa
-
-- type: entity
-  name: psychologist's rubber stamp
-  parent: RubberStampMime
-  id: RubberStampPsychologist
-  suffix: DO NOT MAP
-  components:
-  - type: Stamp
-    stampedName: stamp-component-stamped-name-psychologist
-    stampState: "paper_stamp-psychologist"
-  - type: Sprite
-    state: stamp-psychologist

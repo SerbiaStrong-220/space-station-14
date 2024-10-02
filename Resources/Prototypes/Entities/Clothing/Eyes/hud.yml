@@ -16,7 +16,7 @@
     damageContainers:
     - Biological
   - type: ShowHealthIcons
-    damageContainers: 
+    damageContainers:
     - Biological
 
 - type: entity
@@ -61,6 +61,18 @@
   - type: Tag
     tags:
     - HudSecurity
+
+- type: entity
+  parent: [ClothingEyesBase]
+  id: ClothingEyesHudCommand
+  name: administration hud
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Hud/command.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Hud/command.rsi
+  - type: ShowJobIcons
 
 - type: entity
   parent: ClothingEyesBase
@@ -198,6 +210,12 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/synd.rsi
   - type: ShowSyndicateIcons
+  #SS220 Syndie visor buff start
+  - type: EyeProtection
+  - type: FlashImmunity
+  - type: IdentityBlocker
+    coverage: EYES
+  #SS220 Syndie visor buff end
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
@@ -213,6 +231,20 @@
   - type: ShowHealthBars
     damageContainers:
     - Biological
+  #SS220 Syndie visor buff start
+    - Silicon #to destroy borgs or heal syndie assault borg
+    - Inorganic
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+    - Inorganic
+    - Silicon
+  - type: EyeProtection
+  - type: FlashImmunity
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: SolutionScanner #because nukie medic should make chems
+  #SS220 Syndie visor buff end
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]

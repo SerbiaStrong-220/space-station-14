@@ -13,8 +13,6 @@
     layers:
     - state: ussp
   - type: AgentIDCard
-    icons:
-    - JobIconPassenger
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
@@ -99,7 +97,7 @@
       job: SecurityOfficer
       name: Рокси
 
-      
+
 - type: entity
   parent: PassengerIDCard
   id: SeniorServiceIDCard
@@ -125,3 +123,16 @@
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+
+- type: entity
+  parent: IDCardStandard
+  id: MagistrateIDCard
+  name: magistrate ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: Magistrate
+

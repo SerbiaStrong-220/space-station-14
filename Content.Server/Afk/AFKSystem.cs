@@ -88,7 +88,7 @@ public sealed class AFKSystem : EntitySystem
 
             if (_afkManager.IsAfkKick(pSession) && !_adminManager.IsAdmin(pSession))
             {
-                pSession.ConnectedClient.Disconnect(Loc.GetString("kick-afk"), true);
+                pSession.Channel.Disconnect(Loc.GetString("kick-afk"), true);
                 continue;
             }
             if (isAfk && _afkPlayers.Add(pSession))

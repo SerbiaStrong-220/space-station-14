@@ -30,7 +30,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -50,7 +51,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -58,6 +60,30 @@
         Slash: 0.60
         Piercing: 0.50
         Heat: 0.80
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterSRTCoat
+  name: пальто ГСН
+  description: Пальто тёмно-синего цвета. Отличная защита от большинства видов урона.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.7
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Caustic: 0.75
 
 # Command
 - type: entity
@@ -81,6 +107,17 @@
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPPurpleDress
+  name: purple dress
+  description: The robe of a real smug snake.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
 
 # Cargo
 - type: entity
@@ -161,3 +198,41 @@
       coefficients:
         Caustic: 0.75
         Radiation: 0.9
+
+# Сервис
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatDanger
+  name: опасная куртка
+  description: Опасный лук, опасного человека.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+
+# WMT Ebent begin
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatBluetunic
+  name: blue army jacket
+  description: The jacket of the line infantry of the great army of the Kingdom.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRedtunic
+  name: red army jaket
+  description: The scarlet infantry jacket of the River Republic.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+# WMT Ebent end

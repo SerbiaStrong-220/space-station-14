@@ -6,6 +6,11 @@
   id: Telescopichka
   description: Very loud and very dangerous energy sword that can reflect shots. Can be stored in pockets when turned off.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/stunprod.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/telescopichka.rsi
     layers:

@@ -1,0 +1,18 @@
+- type: entity
+  name: survival box
+  parent: BoxSurvivalBrigmedic
+  id: BoxSurvivalBrigmedicNitrogen
+  description: It's a box with basic internals inside.
+  suffix: MedSec N2
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreathMedicalSecurity
+    - id: EmergencyNitrogenTankFilled
+    - id: EmergencyMedipen
+    - id: SpaceMedipen # SS220 Revert deleted Medipen
+    - id: Flare
+    - id: FoodSnackNutribrick
+    - id: DrinkWaterBottleFull
+  - type: Label
+    currentLabel: reagent-name-nitrogen

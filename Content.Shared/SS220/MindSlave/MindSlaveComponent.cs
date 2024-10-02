@@ -13,5 +13,5 @@ namespace Content.Shared.SS220.MindSlave;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class MindSlaveComponent : Component
 {
-    public ProtoId<StatusIconPrototype> StatusIcon { get; set; } = "MindSlaveIcon";
+    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "MindSlaveIcon";
 }

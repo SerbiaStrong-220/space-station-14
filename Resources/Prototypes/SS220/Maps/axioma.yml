@@ -4,7 +4,8 @@
   id: Axioma
   mapName: 'NSS Axioma'
   mapPath: /Maps/SS220/axioma.yml
-  minPlayers: 0
+  minPlayers: 30
+  maxPlayers: 85
   stations:
     Axioma:
       stationProto: AxiomaNanotrasenStation
@@ -24,6 +25,7 @@
             IAA: [ 1, 1 ]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
+            Magistrate: [ 1, 1 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]

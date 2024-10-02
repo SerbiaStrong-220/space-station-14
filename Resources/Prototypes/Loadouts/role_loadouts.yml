@@ -11,6 +11,8 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - CAPSiutstorage #SS220-Cutlass-Update
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -25,6 +27,16 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
+# Silicons
+- type: roleLoadout
+  id: JobStationAi
+  nameDataset: ai_names # SS220 Fix II Dataset
+
+- type: roleLoadout
+  id: JobStationBorg
+  nameDataset: borg_names # SS220 Fix II Dataset
 
 # Civilian
 - type: roleLoadout
@@ -33,6 +45,7 @@
   - GroupTankHarness
   - PassengerJumpsuit
   - CommonBackpack
+  - PassengerNeck
   - PassengerFace
   - PassengerGloves
   - PassengerOuterClothing
@@ -91,15 +104,18 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobLawyer
   groups:
+  - IAAGlasses #SS220-Two Floppa Iteration
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit
+  - LawyerOuterclothing #SS220-Two Floppa Iteration
   - CommonBackpack
-  - Glasses
+  - IAAGlasses #SS220-IAA-Loadouts
   - Survival
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
@@ -129,6 +145,7 @@
   - JanitorGloves
   - CommonBackpack
   - JanitorOuterClothing
+  - JanitorShoes #SS220-OrangeJanitor
   - Glasses
   - Survival
   - Trinkets
@@ -147,19 +164,26 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - BotanistBelt #SS220 druid loadout
+  - BotanistNeck #SS220 druid loadout
+  - BotanistShoes #SS220 druid loadout
 
 - type: roleLoadout
   id: JobClown
   groups:
   - GroupTankHarness
   - ClownHead
+  - ClownMask #SS220 clown pennywise loadout
+  - ClownNeck #SS220 clown pennywise loadout
   - ClownJumpsuit
+  - ClownGloves #SS220-Two Floppa Iteration
   - ClownBackpack
   - ClownOuterClothing
   - ClownShoes
   - Glasses
   - SurvivalClown
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMime
@@ -170,22 +194,28 @@
   - MimeJumpsuit
   - MimeBackpack
   - MimeOuterClothing
+  - MimeBelt
+  - MimeShoes #SS220-Two Floppa Iterarion
   - Glasses
-  - Survival
+  - SurvivalMime
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMusician
   groups:
   - GroupTankHarness
+  - MusicianHead #SS220 bard loadout
   - MusicianJumpsuit
   - CommonBackpack
   - MusicianOuterClothing
+  - MusicianShoes #SS220 bard loadout
   - Glasses
   - Survival
   - Trinkets
   - Instruments
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Cargo
 - type: roleLoadout
@@ -202,6 +232,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -230,6 +261,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Engineering
 - type: roleLoadout
@@ -237,6 +269,7 @@
   groups:
   - GroupTankHarness
   - ChiefEngineerHead
+  - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - ChiefEngineerJumpsuit
   - ChiefEngineerBack #ss220-ce-fix
   - ChiefEngineerNeck
@@ -246,6 +279,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -262,6 +296,7 @@
   groups:
   - GroupTankHarness
   - StationEngineerHead
+  - EngineerGlasses #SS220-Two Floppa Iteration
   - StationEngineerJumpsuit
   - StationEngineerBackpack
   - StationEngineerOuterClothing
@@ -270,11 +305,13 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
   groups:
   - GroupTankHarness
+  - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - AtmosphericTechnicianJumpsuit
   - AtmosphericTechnicianBackpack
   - AtmosphericTechnicianOuterClothing
@@ -282,6 +319,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Science
 - type: roleLoadout
@@ -289,21 +327,25 @@
   groups:
   - GroupTankHarness
   - ResearchDirectorHead
+  - ScientistGlasses #SS220-TwoOne-Floppa-Iteration
   - ResearchDirectorNeck
   - ResearchDirectorJumpsuit
   - ScientistBackpack
   - ResearchDirectorOuterClothing
   - ScientistGloves
   - ResearchDirectorShoes
-  - Glasses
+  - ResearchDirectorPDA #SS220-RD-New-Loadout
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobScientist
   groups:
   - GroupTankHarness
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistHead
   - ScientistNeck
   - ScientistJumpsuit
@@ -312,10 +354,11 @@
   - ScientistGloves
   - ScientistShoes
   - ScientistPDA
-  - Glasses
+#  - Glasses #SS220-Two Floppa Iteration
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -333,6 +376,7 @@
   id: JobHeadOfSecurity
   groups:
   - HeadofSecurityHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - HeadofSecurityNeck
   - HeadofSecurityJumpsuit
   - SecurityBackpack
@@ -341,14 +385,17 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobWarden
   groups:
   - WardenHead
   - SecurityNeck #SS220 holster loadout
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - WardenJumpsuit
   - SecurityBackpack
   - SecurityBelt
@@ -356,12 +403,16 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobSecurityOfficer
   groups:
   - SecurityHead
+  - SecurityGlasses #SS220-Two Floppa Iteration
+  - SecurityMask #SS220 mask loadout
   - SecurityNeck #SS220 holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
@@ -371,7 +422,9 @@
   - SecurityBelt
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobDetective
@@ -380,12 +433,14 @@
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
-  - SecurityBackpack
+  - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -402,6 +457,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
+  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -409,16 +465,19 @@
   - ChiefMedicalOfficerOuterClothing
   - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMedicalDoctor
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
+  - MedicalGlasses #SS220-Two Floppa Iteration
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
   - MedicalGloves
@@ -426,15 +485,17 @@
   - MedicalDoctorOuterClothing
   - MedicalShoes
   - MedicalDoctorPDA
-  - Glasses
+#  - Glasses #SS220-Two Floppa Iteration
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobMedicalIntern
   groups:
   - GroupTankHarness
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
   - MedicalBackpack
   - Glasses
@@ -446,6 +507,8 @@
   id: JobChemist
   groups:
   - GroupTankHarness
+  - ChemicalGlasses #SS220-TwoOne-Floppa-Iteration
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
   - MedicalGloves
@@ -455,36 +518,44 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobParamedic
   groups:
   - GroupTankHarness
   - ParamedicHead
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
+  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - ParamedicJumpsuit
   - MedicalGloves
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 #SS220-brigmedic-loadout-begin
 - type: roleLoadout
   id: JobBrigmedic
   groups:
   - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
   - BrigmedicMask
   - BrigmedicJumpsuit
   - MedicalGloves
   - BrigmedicBackpack
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
   - BrigmedicOuterClothing
   - BrigmedicShoes
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #SS220-brigmedic-loadout-end
 
 # Wildcards
@@ -513,12 +584,14 @@
   id: JobPsychologist
   groups:
   - GroupTankHarness
+  - PsychologistJumpsuit
+  - MedicalNeck #SS220-WhiteScarf
   - MedicalBackpack
-  - PsychologistJumpsuit #SS220-MoreTurtleneck
   - Glasses
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 - type: roleLoadout
   id: JobBoxer
@@ -534,6 +607,12 @@
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
+
+- type: roleLoadout
+  id: RoleSurvivalVoxSupport
+  groups:
+  - GroupSpeciesBreathTool
+  - GroupTankHarness
 
 - type: roleLoadout
   id: RoleSurvivalStandard
@@ -575,3 +654,16 @@
   - SurvivalSyndicate
   - GroupSpeciesBreathTool
   - GroupTankHarness
+
+- type: roleLoadout
+  id: RoleSurvivalNukie
+  groups:
+  - SurvivalSyndicate
+  - GroupSpeciesBreathTool
+  - GroupPocketTankDouble
+
+- type: roleLoadout
+  id: RoleSurvivalEVA
+  groups:
+  - GroupEVATank
+  - SurvivalExtended

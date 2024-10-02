@@ -47,6 +47,8 @@
           - FaxableObject
           - Paper
           - ButtScan
+        tags: 
+          - Folder
     tonerSlot:
       insertSound: /Audio/Machines/screwdriveropen.ogg
       ejectSound: /Audio/Machines/screwdriverclose.ogg

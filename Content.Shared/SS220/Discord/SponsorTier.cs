@@ -9,21 +9,16 @@ public enum SponsorTier
 {
     None,
 
-    Mentor,
-    MiniDeveloper,
     Developer,
+    Spriter,
+    QA,
+    Mapper,
+    WikiEdit,
+    LoreEdit,
     Moderator,
     Administrator,
-    HeadAdministrator,
-    SeniorAdministrator,
-    SubHeadAdministrator,
-    HeadLoroved,
-    WikiHead,
-    HeadModerator,
+    Mentor,
     HeadDeveloper,
-    SubHeadDeveloper,
-    ProjectManager,
-    SeniorDeveloper,
 
     // Тиры подписок должны идти в конце, для упрощения вычисления лучшего уровня поддержки.
     Shlopa,

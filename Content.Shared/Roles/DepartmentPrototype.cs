@@ -52,6 +52,20 @@ public sealed partial class DepartmentPrototype : IPrototype
     /// </summary>
     [DataField]
     public bool EditorHidden;
+
+    // SS220 Round End Titles begin
+    /// <summary>
+    /// Toggles the display of the department in the round end titles.
+    /// </summary>
+    [DataField]
+    public bool RoundEndTitlesHidden;
+
+    /// <summary>
+    /// Optional color that UI may use to make role label readable on dark background.
+    /// </summary>
+    [DataField]
+    public Color? LightColor;
+    // SS220 Round End Titles end
 }
 
 /// <summary>

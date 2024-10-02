@@ -8,12 +8,12 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.NameIdentifier;
 using Content.Shared.PDA;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StationRecords;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Content.Shared.GameTicking;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.IdentityManagement;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -27,7 +27,6 @@ public sealed class AccessReaderSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedStationRecordsSystem _recordsSystem = default!;
 
@@ -411,9 +410,12 @@ public sealed class AccessReaderSystem : EntitySystem
         }
         // ss220 borg edit end
 
-        if (_idCardSystem.TryFindIdCard(accessor, out var idCard)
-            && idCard.Comp is { BypassLogging: false, FullName: not null })
-            name = idCard.Comp.FullName;
+        var getIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(ent, accessor, true);
+        RaiseLocalEvent(getIdentityShortInfoEvent);
+        if (getIdentityShortInfoEvent.Title != null)
+        {
+            name = getIdentityShortInfoEvent.Title;
+        }
 
         LogAccess(ent, name ?? Loc.GetString("access-reader-unknown-id"));
     }

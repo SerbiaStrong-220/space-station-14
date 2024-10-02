@@ -1,4 +1,4 @@
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
@@ -35,13 +35,13 @@ public sealed partial class CleanTileReaction : ITileReaction
     FixedPoint2 ITileReaction.TileReact(TileRef tile,
         ReagentPrototype reagent,
         FixedPoint2 reactVolume,
-        IEntityManager entityManager)
+        IEntityManager entityManager
+        , List<ReagentData>? data)
     {
         var entities = entityManager.System<EntityLookupSystem>().GetLocalEntitiesIntersecting(tile, 0f).ToArray();
         var puddleQuery = entityManager.GetEntityQuery<PuddleComponent>();
-        var solutionContainerSystem = entityManager.System<SolutionContainerSystem>();
         var tags = entityManager.System<TagSystem>(); // SS220 Remove Entities By Cleaning Reaction
-
+        var solutionContainerSystem = entityManager.System<SharedSolutionContainerSystem>();
         // Multiply as the amount we can actually purge is higher than the react amount.
         var purgeAmount = reactVolume / CleanAmountMultiplier;
 

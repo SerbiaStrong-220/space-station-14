@@ -25,6 +25,7 @@
     HandTeleporterStealObjective: 0.5
     SecretDocumentsStealObjective: 0.5
     MultiPhaseEnergyGunStealObjective: 0.5 #SS220 MultiPhaze Energy Gun
+    EnergyShotgunStealObjective: 0.5
 
 - type: weightedRandom
   id: TraitorObjectiveGroupKill
@@ -55,7 +56,7 @@
 - type: weightedRandom
   id: ThiefBigObjectiveGroups
   weights:
-    ThiefObjectiveGroupStructure: 0 #Temporarily disabled until obvious ways to steal structures are added
+    ThiefObjectiveGroupStructure: 1 #Temporarily disabled until obvious ways to steal structures are added
 #    ThiefObjectiveGroupAnimal: 2 # SS220 Delete thief objective animals
 
 - type: weightedRandom
@@ -66,7 +67,6 @@
     StampStealCollectionObjective: 1
     DoorRemoteStealCollectionObjective: 1
     TechnologyDiskStealCollectionObjective: 1        #rnd
-    FigurineStealCollectionObjective: 0.3          #service
     IDCardsStealCollectionObjective: 1
     LAMPStealCollectionObjective: 2 #only for moth
 
@@ -76,6 +76,7 @@
     ForensicScannerStealObjective: 1                    #sec
     ExpensiveLighterDetectiveStealObjective: 0.5 #SS220 Zippo-Steal-Detective
     ClothingHeadHatWardenStealObjective: 1
+    WantedListCartridgeStealObjective: 1
     ClothingOuterHardsuitVoidParamedStealObjective: 1   #med
     MedicalTechFabCircuitboardStealObjective: 1
     ClothingHeadsetAltMedicalStealObjective: 1
@@ -98,7 +99,6 @@
   weights:
     NuclearBombStealObjective: 0.5
     FaxMachineCaptainStealObjective: 1
-    VehicleSecwayStealObjective: 1
     ChemDispenserStealObjective: 1
     XenoArtifactStealObjective: 1
     FreezerHeaterStealObjective: 1
@@ -106,6 +106,7 @@
     BoozeDispenserStealObjective: 1
     AltarNanotrasenStealObjective: 1
     PlantRDStealObjective: 1
+    ToiletGoldenStealObjective: 1
 
 # SS220 Delete thief objective animals begin
 # - type: weightedRandom

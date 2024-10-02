@@ -47,6 +47,7 @@
       - Service
       - SyndicateAgent
       - Theatre
+      - Magistrate
       #New centcomm accesses begin
       - CentralCommand
       - CentralCommandCBURN

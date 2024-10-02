@@ -1,8 +1,13 @@
-﻿- type: entity
+- type: entity
   id: WeaponWandBase
   abstract: true
   parent: BaseItem
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/wands.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/wands.rsi
   - type: Item

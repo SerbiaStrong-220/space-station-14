@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazinePistol
   name: pistol magazine (.35 auto)
-  parent: BaseItem
+  parent: [ BaseItem]
   abstract: true
   components:
   - type: Tag
@@ -67,7 +67,7 @@
 - type: entity
   id: BaseMagazinePistolSubMachineGun  # Yeah it's weird but it's pistol caliber
   name: SMG magazine (.35 auto)
-  parent: BaseItem
+  parent: [ BaseItem]
   abstract: true
   components:
   - type: Tag
@@ -100,7 +100,7 @@
 - type: entity
   id: MagazinePistolSubMachineGunTopMounted
   name: WT550 magazine (.35 auto top-mounted)
-  parent: BaseItem
+  parent: [ BaseItem]
   components:
   - type: Tag
     tags:
@@ -162,6 +162,10 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+#SS220-FixAmmoSprite-Begin
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+#SS220-FixAmmoSprite-End
 
 
 - type: entity
@@ -212,6 +216,10 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+#SS220-FixAmmoSprite-Begin
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+#SS220-FixAmmoSprite-End
 
 - type: entity
   id: MagazinePistolHighCapacity
@@ -282,11 +290,15 @@
   parent: BaseMagazinePistolSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: null 
+    proto: null
   - type: Sprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+#SS220-FixAmmoSprite-Begin
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+#SS220-FixAmmoSprite-End
 
 - type: entity
   id: MagazinePistolSubMachineGunPractice
@@ -304,7 +316,7 @@
 
 - type: entity
   id: MagazinePistolSubMachineGunUranium
-  name: SMG magazine (.35 auto rubber)
+  name: SMG magazine (.35 auto uranium)
   parent: BaseMagazinePistolSubMachineGun
   components:
   - type: BallisticAmmoProvider

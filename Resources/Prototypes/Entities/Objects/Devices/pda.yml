@@ -70,6 +70,7 @@
     deviceNetId: Wireless
     receiveFrequencyId: Pda
     prefix: device-address-prefix-console
+    savableAddress: false
   - type: WirelessNetworkConnection
     range: 500
   - type: CartridgeLoader
@@ -107,6 +108,27 @@
     - DoorBumpOpener
   - type: Input
     context: "human"
+  - type: SentienceTarget # sentient PDA = pAI lite
+    flavorKind: station-event-random-sentience-flavor-mechanical
+    weight: 0.001 # 1,000 PDAs = as likely to be picked as 1 regular animal
+  - type: BlockMovement
+    blockInteraction: false # lets the PDA toggle its own flashlight
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+
+- type: entity
+  parent: BasePDA
+  id: BaseSecurityPDA
+  abstract: true
+  components:
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
 
 - type: entity
   parent: BasePDA
@@ -114,7 +136,6 @@
   abstract: true
   components:
   - type: ItemToggle
-    toggleLight: false
     onUse: false
   - type: HealthAnalyzer
     scanDelay: 1
@@ -222,7 +243,7 @@
     - Medical Doctor
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityCadetPDA
   name: security cadet PDA
   description: Why isn't it red?
@@ -331,6 +352,8 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cook
+  - type: ReplacementAccent # for random sentience event
+    accent: italian
 
 - type: entity
   parent: BasePDA
@@ -372,6 +395,7 @@
     penSlot:
       startingItem: CrayonOrange # no pink crayon?!?
       # ^ Still unacceptable.
+      # ^ I would have to concur.
       ejectSound: /Audio/Items/bikehorn.ogg
       priority: -1
       whitelist:
@@ -418,6 +442,15 @@
         - ItemMask
 
 - type: entity
+  parent: ClownPDA
+  id: VisitorClownPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-clown
+
+- type: entity
   parent: BasePDA
   id: MimePDA
   name: mime PDA
@@ -449,6 +482,7 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-mime
+  - type: Muted # for random sentience event
 
 - type: entity
   name: chaplain PDA
@@ -475,6 +509,15 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
+    state: pda-chaplain
+
+- type: entity
+  parent: ChaplainPDA
+  id: VisitorChaplainPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
     state: pda-chaplain
 
 - type: entity
@@ -559,6 +602,13 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-miner
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NewsReaderCartridge
+      - AstroNavCartridge
 
 - type: entity
   parent: BasePDA
@@ -622,7 +672,16 @@
     state: pda-library
 
 - type: entity
-  parent: BasePDA
+  parent: LibrarianPDA
+  id: VisitorLibrarianPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-library
+
+- type: entity
+  parent: BaseSecurityPDA
   id: LawyerPDA
   name: lawyer PDA
   description: For lawyers to poach dubious clients.
@@ -656,6 +715,15 @@
     state: pda-lawyer
 
 - type: entity
+  parent: LawyerPDA
+  id: VisitorLawyerPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-lawyer
+
+- type: entity
   parent: BasePDA
   id: JanitorPDA
   name: janitor PDA
@@ -684,7 +752,7 @@
     state: pda-janitor
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: CaptainPDA
   name: captain PDA
   description: Surprisingly no different from your PDA.
@@ -867,6 +935,15 @@
     - Medical Doctor
 
 - type: entity
+  parent: MedicalPDA
+  id: VisitorMedicalPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-medical
+
+- type: entity
   parent: BaseMedicalPDA
   id: ParamedicPDA
   name: paramedic PDA
@@ -981,7 +1058,7 @@
     state: pda-science
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: HoSPDA
   name: head of security PDA
   description: Whosoever bears this PDA is the law.
@@ -1009,7 +1086,7 @@
     state: pda-hos
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: WardenPDA
   name: warden PDA
   description: The OS appears to have been jailbroken.
@@ -1037,7 +1114,7 @@
     state: pda-warden
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityPDA
   name: security PDA
   description: Red to hide the stains of passenger blood.
@@ -1091,9 +1168,9 @@
     state: pda-security #SS220-PDA-End
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: CentcomPDA
-  name: CentCom PDA
+  name: CentComm PDA
   description: Light green sign of walking bureaucracy.
   categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
@@ -1140,6 +1217,7 @@
         - Write #SS220 PDA-Resprite-End
   - type: HealthAnalyzer
     scanDelay: 0
+    silent: true
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
@@ -1163,6 +1241,7 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - LogProbeCartridge
+      - WantedListCartridge
 
 - type: entity
   parent: CentcomPDA
@@ -1235,6 +1314,15 @@
     program: 2
 
 - type: entity
+  parent: MusicianPDA
+  id: VisitorMusicianPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-musician
+
+- type: entity
   parent: BasePDA
   id: AtmosPDA
   name: atmos PDA
@@ -1288,6 +1376,14 @@
     state: pda-clear
 
 - type: entity
+  parent: ClearPDA
+  id: VisitorPDA
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda
+
+- type: entity
   parent: BasePDA
   id: SyndiPDA
   name: syndicate PDA
@@ -1328,7 +1424,7 @@
           - Cartridge
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: ERTLeaderPDA
   name: ERT Leader PDA
   suffix: Leader
@@ -1583,7 +1679,7 @@
     state: pda-boxer
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: DetectivePDA
   name: detective PDA
   description: Smells like rain... pouring down the rooftops...
@@ -1762,7 +1858,7 @@
     state: pda-seniorphysician
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SeniorOfficerPDA
   name: senior officer PDA
   description: Beaten, battered and broken, but just barely useable.

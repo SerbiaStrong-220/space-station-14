@@ -1,0 +1,220 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Say my name
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorWaltuhHat
+  name: глубокая шляпа-котелок
+  description: Синий или голубой?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/waltuh.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/waltuh.rsi
+
+# Мафиозник
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorMafiaHat
+  name: розовая шляпа
+  description: Я - Мафиозник!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/mafiahat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/mafiahat.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorMafiaBlackHat
+  name: чёрная шляпа
+  description: Меня зовут...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/mafiablackhat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/mafiablackhat.rsi
+
+# Мейдочка
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorMaidHat
+  name: гребень горничной
+  description: Самое мужественное одеяние.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/maid.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/maid.rsi
+
+# Венец
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingSponsorWreath
+  name: розовый венец
+  description: Прекрасные цветы, сплетённые в головной убор.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/wreath.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/wreath.rsi
+
+# Потсустороннее
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatDevilHorns
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/devils_horns.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/devils_horns.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatDevilHornsAlt
+  name: devil's horns
+  description: Now you look like hell.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/devils_horns-alt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/devils_horns-alt.rsi
+
+- type: entity
+  parent: [ ClothingSponsorHeadBase, BaseFoldable ]
+  id: ClothingHeadHatHalo
+  name: ангельский нимб с крыльями
+  description: Двойная ангельская красота!
+  suffix: Шлёпа
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/halo.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: halo-verb
+    foldVerbText: halo-hell-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: hell
+    foldedHeldPrefix: hell
+
+- type: entity
+  parent: ClothingHeadHatHalo
+  id: ClothingHeadHatHaloHell
+  name: нимб падшего ангела с крыльями
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/halo.rsi
+    equippedPrefix: hell
+  - type: Item
+    heldPrefix: hell
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  parent: [ ClothingSponsorHeadBase, BaseFoldable ]
+  id: ClothingHeadHatHaloAlt
+  name: ангельский нимб
+  description: Покажите свою ангельскую красоту!
+  suffix: Шлёпа
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/halo-alt.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/halo-alt.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: halo-verb
+    foldVerbText: halo-hell-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: hell
+    foldedHeldPrefix: hell
+
+- type: entity
+  parent: ClothingHeadHatHaloAlt
+  id: ClothingHeadHatHaloAltHell
+  name: нимб падшего ангела
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/halo-alt.rsi
+    equippedPrefix: hell
+  - type: Item
+    heldPrefix: hell
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: hell-icon
+      map: ["foldedLayer"]
+      visible: true
+
+# Випкрокс
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadVipCrocks
+  name: випкрок
+  description: Золотые кроксы, но одеваются.. На голову?
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hats/crocs.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hats/crocs.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -150
+    damage:
+      types:
+        Blunt: 0
+
+# Деревня дурачков
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatMuzhik
+  name: фуражка мужика
+  description: Фуражка самогонных дел мастера.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite:  SS220/Clothing/Sponsor/Head/Hats/muzhik.rsi
+  - type: Clothing
+    sprite:  SS220/Clothing/Sponsor/Head/Hats/muzhik.rsi
+
+- type: entity
+  parent: ClothingSponsorHeadBase
+  id: ClothingHeadHatMoryak
+  name: беретка морячка
+  description: Берет матроса с рыжим помпончиком.
+  suffix: Шлёпа
+  components:
+  - type: Sprite
+    sprite:  SS220/Clothing/Sponsor/Head/Hats/moryachok.rsi
+  - type: Clothing
+    sprite:  SS220/Clothing/Sponsor/Head/Hats/moryachok.rsi

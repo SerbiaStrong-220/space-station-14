@@ -46,7 +46,7 @@
 #      energy: 3
 #      color: "#39ff14" #SS220-Crystal-fix-End
     - type: Damageable
-      damageContainer: Inorganic
+      damageContainer: StructuralInorganic
       damageModifierSet: Glass
 #    - type: Destructible #SS220-Crystal-fix-Start
 #      thresholds:

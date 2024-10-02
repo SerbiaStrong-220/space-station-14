@@ -1,0 +1,12 @@
+- type: construction
+  name: Плащ Голиафа
+  id: GoliathCloak
+  graph: GoliathCloak
+  startNode: start
+  targetNode: goliath-cloak
+  category: construction-category-misc
+  description: "Плащ, сделанный из шкуры голиафа, достаточно прочный."
+  icon: 
+    sprite: Clothing/Neck/Cloaks/goliathcloak.rsi
+    state: icon
+  objectType: Item

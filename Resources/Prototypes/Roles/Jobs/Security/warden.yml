@@ -13,6 +13,7 @@
       - Felinid #SS220-jobbans end
   startingGear: WardenGear
   icon: "JobIconWarden"
+  requireAdminNotify: true
   supervisors: job-supervisors-hos
   canBeAntag: false
   access:
@@ -31,7 +32,7 @@
 - type: startingGear
   id: WardenGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
+#    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     id: WardenPDA
     ears: ClothingHeadsetSecurity
 #    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap

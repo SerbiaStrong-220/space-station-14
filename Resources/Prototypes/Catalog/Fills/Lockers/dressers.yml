@@ -7,8 +7,10 @@
     contents:
       - id: ClothingHeadHatCaptain
       - id: ClothingHeadBeretCap #SS220 CapBeret
-      - id: ClothingNeckCloakCap
-      - id: ClothingNeckCloakCapFormal
+#SS220-cloak-dress-tweak-begin
+#     - id: ClothingNeckCloakCap
+#     - id: ClothingNeckCloakCapFormal
+#SS220-cloak-dress-tweak-end
       - id: ClothingUniformJumpsuitCapFormal
       - id: ClothingUniformJumpskirtCapFormalDress
       - id: ClothingHandsGlovesCaptain
@@ -18,7 +20,9 @@
       - id: ClothingHeadCaptainCap #SS220 Captain's Cap tweak
       # Corvax-Resprite-End
       - id: ClothingNeckMantleCap
+      #- id: ClothingHeadHatCapcap #SS220 Duplicate??
       - id: ClothingOuterWinterCap
+      - id: ClothingNeckCloakCap
 
 - type: entity
   id: DresserChiefEngineerFilled
@@ -27,14 +31,13 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckMantleCE
       - id: ClothingUniformJumpsuitChiefEngineerTurtle
       - id: ClothingUniformJumpskirtChiefEngineerTurtle
-      - id: ClothingNeckCloakCe
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingOuterWinterCE
       - id: ClothingOuterCoatCEFormalDress #SS220-FormalDress
       - id: ClothingHeadHatBeretCE #SS220-CEBeret
+#     - id: ClothingNeckCloakCe #SS220-cloak-dress-tweak
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
@@ -43,8 +46,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckMantleCMO
-      - id: ClothingCloakCmo
       - id: ClothingOuterCoatLabCmo
       - id: ClothingUniformJumpsuitCMOTurtle
       - id: ClothingUniformJumpskirtCMOTurtle
@@ -53,6 +54,7 @@
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
       - id: ClothingOuterCoatCMOFormalDress #SS220-FormalDress
+#     - id: ClothingCloakCmo #SS220-cloak-dress-tweak
 
 - type: entity
   id: DresserHeadOfPersonnelFilled
@@ -61,12 +63,11 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckMantleHOP
-      - id: ClothingNeckCloakHop
       - id: ClothingHeadHatHopcap
       - id: ClothingOuterWinterHoP
       - id: ClothingEyesGlasses
       - id: ClothingOuterCoatHoPFormalDress #SS220-FormalDress
+#     - id: ClothingNeckCloakHop #SS220-cloak-dress-tweak
 
 - type: entity
   id: DresserHeadOfSecurityFilled
@@ -75,10 +76,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckMantleHOS
       - id: ClothingHeadHatBeretHoS
       - id: ClothingHeadHatHoshat
-      - id: ClothingNeckCloakHos
       - id: ClothingUniformJumpskirtHoSAlt
       - id: ClothingUniformJumpsuitHoSAlt
       - id: ClothingUniformJumpskirtHosFormal
@@ -88,6 +87,7 @@
       - id: ClothingMaskNeckGaiter
       - id: ClothingOuterWinterHoS
       - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
+#     - id: ClothingNeckCloakHos #SS220-cloak-dress-tweak
 
 - type: entity
   id: DresserQuarterMasterFilled
@@ -96,15 +96,14 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckCloakQm
       - id: ClothingHeadHatBeretQM
 #      - id: ClothingUniformJumpsuitQMFormal #SS220-Fashion
       - id: ClothingUniformJumpsuitQMTurtleneck
       - id: ClothingUniformJumpskirtQMTurtleneck
       - id: ClothingHandsGlovesColorBrown
-      - id: ClothingNeckMantleQM
       - id: ClothingOuterWinterQM
       - id: ClothingOuterCoatQM #SS220-Fashion
+#     - id: ClothingNeckCloakQm #SS220-cloak-dress-tweak
 
 - type: entity
   id: DresserResearchDirectorFilled
@@ -113,13 +112,13 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingNeckMantleRD
-      - id: ClothingNeckCloakRd
       - id: ClothingHeadHatBeretRND
       - id: ClothingHandsGlovesColorPurple
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterRD
       - id: ClothingOuterCoatRDFormalDress #SS220-FormalDress
+      - id: ClothingOuterCoatRD
+#     - id: ClothingNeckCloakRd #SS220-cloak-dress-tweak
 
 - type: entity
   id: DresserWardenFilled

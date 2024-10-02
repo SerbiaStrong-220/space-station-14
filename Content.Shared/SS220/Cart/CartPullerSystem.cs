@@ -125,12 +125,12 @@ public sealed partial class CartPullerSystem : EntitySystem
     private void OnDeattachCart(EntityUid uid, CartPullerComponent component, ref CartDeattachEvent args)
     {
         component.AttachedCart = null;
-        Dirty(component);
+        Dirty(uid, component);
     }
 
     private void OnAttachCart(EntityUid uid, CartPullerComponent component, ref CartAttachEvent args)
     {
         component.AttachedCart = args.Attaching;
-        Dirty(component);
+        Dirty(uid, component);
     }
 }

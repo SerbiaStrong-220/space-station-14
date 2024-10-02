@@ -6,3 +6,10 @@
     Steel: 200
     Glass: 50
     Plastic: 50
+
+- type: latheRecipe
+  id: FauxTileAstroSand
+  result: FloorTileItemSand
+  completetime: 1
+  materials:
+    Plastic: 100

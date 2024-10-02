@@ -1,0 +1,48 @@
+- type: job
+  id: Magistrate
+  name: job-name-magistrate #todo добавить при добавлении ДВД
+  description: job-description-magistrate #todo добавить при добавлении ДВД
+  playTimeTracker: JobMagistrate
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 288000 # SS220-RoleTime 2
+    - !type:AgeRequirement
+      requiredAge: 32
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
+  weight: 20
+  startingGear: MagistrateGear
+  icon: "JobIconMagistrate"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  access:
+  - Command
+  - Lawyer
+  - Magistrate
+  - Service
+  - Brig
+  - Maintenance
+  - External
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: MagistrateGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    eyes: ClothingEyesGlassesCommand
+    id: MagistratePDA
+    ears: ClothingHeadsetIAA
+  storage:
+    back:
+    - Flash

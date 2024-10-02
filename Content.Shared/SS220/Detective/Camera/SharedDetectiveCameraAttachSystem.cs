@@ -42,7 +42,7 @@ public abstract class SharedDetectiveCameraAttachSystem : EntitySystem
             cameraEntity.Comp.DetachTime,
             new DetectiveCameraDetachDoAfterEvent(target),
             cameraEntity,
-            target: cameraEntity)
+            target: target)
         {
             BreakOnMove = true,
             BreakOnDamage = true,

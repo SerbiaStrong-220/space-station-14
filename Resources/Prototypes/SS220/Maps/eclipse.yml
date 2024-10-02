@@ -4,7 +4,8 @@
   id: Eclipse
   mapName: 'NSS Eclipse'
   mapPath: /Maps/SS220/eclipse.yml
-  minPlayers: 0
+  minPlayers: 40
+  maxPlayers: 85
   stations:
     Eclipse:
       stationProto: EclipseNanotrasenStation
@@ -24,6 +25,7 @@
             IAA: [ 1, 1 ]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
+            Magistrate: [ 1, 1 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
@@ -55,6 +57,7 @@
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
+            StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]
             SeniorResearcher: [ 1, 1 ]
             #Service

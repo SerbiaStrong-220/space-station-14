@@ -25,3 +25,7 @@
 - type: lobbyBackground
   id: RatKing
   background: /Textures/SS220/LobbyScreens/RatKing.png
+
+- type: lobbyBackground
+  id: SecGraduating
+  background: /Textures/SS220/LobbyScreens/secgraduating.png
