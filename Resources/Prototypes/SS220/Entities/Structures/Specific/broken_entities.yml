@@ -55,6 +55,9 @@
   - type: InteractionOutline
   - type: Transform
     noRot: true
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
