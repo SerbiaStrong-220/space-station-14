@@ -284,7 +284,9 @@
     - id: RubberStampRd
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: Telescopichka # SS220 Telescopic Baton
+    - id: CigPackRnD #SS220 Cigarettes
     - id: ClothingOuterReactiveArmor # SS220        
+
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
