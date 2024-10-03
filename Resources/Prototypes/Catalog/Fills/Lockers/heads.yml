@@ -305,7 +305,6 @@
     - id: Telescopichka # SS220 Telescopic Baton
     - id: CigPackRnD #SS220 Cigarettes
 
-
 # Hardsuit table, used for suit storage as well
 - type: entityTable
   id: FillResearchDirectorHardsuit
