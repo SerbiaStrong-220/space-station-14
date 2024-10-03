@@ -25,7 +25,7 @@
         Slash: 0.5
         Piercing: 0.6
         Heat: 0.5
-        Caustic: 0.9
+        Caustic: 0.9    
   - type: HeldSpeedModifier
   - type: ToggleClothing
     action: ActionToggleReactiveArmor
@@ -41,6 +41,9 @@
     canCreateVacuum: false
     deleteAfterExplosion: false
     repeatable: true
+  - type: Tag
+    tags:
+    - HighRiskItem      
 
 - type: entity
   id: ActionToggleReactiveArmor

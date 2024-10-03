@@ -38,7 +38,7 @@ public sealed partial class TeleportOnDamageComponent : Component
     public bool OnCoolDown = false;
 
     [DataField]
-    public TimeSpan CoolDownTime = TimeSpan.FromSeconds(5);
+    public TimeSpan CoolDownTime = TimeSpan.FromSeconds(10);
 }
 
 
