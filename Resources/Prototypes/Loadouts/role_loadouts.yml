@@ -8,6 +8,7 @@
   - CaptainBackpack
   - CaptainGloves #SS220-whiteCaptainGloves
   - CaptainOuterClothing
+  - CaptainHeadset #SS220-Headset-Update
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
@@ -23,6 +24,7 @@
   - HoPJumpsuit
   - HoPBackpack
   - HoPOuterClothing
+  - HoPHeadset #SS220-Headset-Update
   - Glasses
   - Survival
   - Trinkets
@@ -72,7 +74,7 @@
   id: JobServiceWorker
   groups:
   - GroupTankHarness
-  - ServiceWorkerJumpsuit #SS220-Service Worker Loadout Fix
+  - BartenderJumpsuit
   - CommonBackpack
   - Glasses
   - Survival
@@ -228,6 +230,7 @@
   - CargoTechnicianBackpack
   - QuartermasterOuterClothing
   - QuartermasterShoes
+  - QuartermasterHeadset #SS220-Headset-Update
   - Glasses
   - Survival
   - Trinkets
@@ -276,6 +279,7 @@
   - ChiefEngineerOuterClothing
   - ChiefEngineerShoes
   - ChiefEngineerPDA #SS220-dark-chief-engineer-pda
+  - ChiefEngineerHeadset #SS220-Headset-Update
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
@@ -335,6 +339,7 @@
   - ScientistGloves
   - ResearchDirectorShoes
   - ResearchDirectorPDA #SS220-RD-New-Loadout
+  - ResearchDirectorHeadset #SS220-Headset-Update
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Survival
   - Trinkets
@@ -382,6 +387,7 @@
   - SecurityBackpack
   - SecurityBelt
   - HeadofSecurityOuterClothing
+  - HeadofSecurityHeadset #SS220-Headset-Update
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
@@ -465,6 +471,7 @@
   - ChiefMedicalOfficerOuterClothing
   - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
+  - ChiefMedicalOfficerHeadset  #SS220-Headset-Update
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets

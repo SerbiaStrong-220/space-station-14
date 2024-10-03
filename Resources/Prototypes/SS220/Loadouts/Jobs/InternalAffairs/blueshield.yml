@@ -37,3 +37,14 @@
   id: BlueShieldSRTCoat
   equipment:
     outerClothing: ClothingOuterSRTCoat
+
+# Headset
+- type: loadout
+  id: BlueShieldHeadset
+  equipment:
+    ears: ClothingHeadsetCommand
+
+- type: loadout
+  id: BlueShieldHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCommand

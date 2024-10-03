@@ -17,7 +17,28 @@
   minLimit: 0
   loadouts:
   - CapOfficerCutlass
+
+- type: loadoutGroup
+  id: CaptainHeadset
+  name: loadout-group-captain-headset
+  minLimit: 1
+  loadouts:
+  - CaptainHeadset
+  - CaptainHeadsetAlt
+
   # Капитан (Конец)
+
+  # Глава Персонала (Начало)
+- type: loadoutGroup
+  id: HoPHeadset
+  name: loadout-group-hop-headset
+  minLimit: 1
+  loadouts:
+  - HeadOfPersonalHeadset
+  - HeadOfPersonalHeadsetAlt
+
+  # Глава Персонала (Конец)
+
 #! Командование (Конец)
 
 #! Внутренние дела (Начало)
@@ -79,6 +100,13 @@
   name: loadout-group-iaa-backpack
   loadouts:
     - IAABackpackLeather
+
+- type: loadoutGroup
+  id: IAAHeadset
+  name: loadout-group-iaa-headset
+  loadouts:
+    - IAAHeadset
+
   # Агент Внутренних Дел (Конец)
 
   # Адвокат (Начало)
@@ -114,6 +142,14 @@
   loadouts:
   - BlueShieldArmorBulletproof
   - BlueShieldSRTCoat
+
+- type: loadoutGroup
+  id: BlueShieldHeadset
+  name: loadout-group-blueshield-headset
+  loadouts:
+  - BlueShieldHeadset
+  - BlueShieldHeadsetAlt
+
   # Офицер "Синий Щит" (Конец)
 #! Внутренние дела (Конец)
 
@@ -569,15 +605,6 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   # Уборщик (Конец)
-
- # Сервисный работник (Начало)
-- type: loadoutGroup
-  id: ServiceWorkerJumpsuit
-  name: loadout-group-service-worker-jumpsuit
-  hidden: true
-  loadouts:
-  - ServiceWorkerWaiter
-  # Сервисный работник (Конец)
 
 #! Сервис (Конец)
 

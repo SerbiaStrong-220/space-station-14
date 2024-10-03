@@ -52,3 +52,14 @@
     proto: Warehouseman
   equipment:
     outerClothing: ClothingOuterCoatQMWarehouseman
+
+# Headset
+- type: loadout
+  id: QMHeadset
+  equipment:
+    ears: ClothingHeadsetQM
+
+- type: loadout
+  id: QMHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCargo

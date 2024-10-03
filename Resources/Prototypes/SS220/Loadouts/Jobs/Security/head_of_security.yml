@@ -68,3 +68,10 @@
     proto: OfficerCutlass
   equipment:
     suitstorage: ClothingBeltCutlassSheathFilled
+
+# Headset
+
+- type: loadout
+  id: HeadofSecurityHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltSecurity

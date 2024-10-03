@@ -25,3 +25,14 @@
     proto: HoPPurpleDress
   equipment:
     outerClothing: ClothingOuterCoatHoPPurpleDress
+
+# Headset
+- type: loadout
+  id: HeadOfPersonalHeadset
+  equipment:
+    ears: ClothingHeadsetCommand
+
+- type: loadout
+  id: HeadOfPersonalHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCommand

@@ -667,7 +667,7 @@
   - Banjo
   - Violin
   - Viola
-  - Cello
+  - Cello`
   - Trumpet
   - Trombone
   - FrenchHorn
@@ -726,6 +726,14 @@
   loadouts:
   - BrownShoes
   - CargoWinterBoots
+
+- type: loadoutGroup
+  id: QuartermasterHeadset
+  name: loadout-group-quartermaster-headset
+  minLimit: 1
+  loadouts:
+  - QMHeadset
+  - QMHeadsetAlt
 
 - type: loadoutGroup
   id: CargoTechnicianHead
@@ -850,6 +858,14 @@
   loadouts:
   - BrownShoes
   - EngineeringWinterBoots
+
+- type: loadoutGroup
+  id: ChiefEngineerHeadset
+  name: loadout-group-chief-engineer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefEngineerHeadset
+  - ChiefEngineerHeadsetAlt
 
 - type: loadoutGroup
   id: TechnicalAssistantJumpsuit
@@ -990,7 +1006,17 @@
   loadouts:
   - RnDPDA
   - AltRnDDirPDA
+
+- type: loadoutGroup
+  id: ResearchDirectorHeadset
+  name: loadout-group-research-director-headset
+  minLimit: 1
+  loadouts:
+  - ResearchDirectorHeadset
+  - ResearchDirectorHeadsetAlt
+
 #SS220-RD-New-Loadout-end
+
 
 - type: loadoutGroup
   id: ResearchDirectorOuterClothing
@@ -1140,6 +1166,13 @@
   - WinterHoSUnarmored #ss220 sec loadout update
   - Outer1984 #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: HeadofSecurityHeadset
+  name: loadout-group-head-of-security-headset
+  minLimit: 1
+  loadouts:
+  - HeadofSecurityHeadsetAlt
 
 - type: loadoutGroup
   id: WardenHead
@@ -1356,6 +1389,14 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHeadset
+  name: loadout-group-chief-medical-officer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefMedicalOfficerHeadset
+  - ChiefMedicalOfficerHeadsetAlt
 
 - type: loadoutGroup
   id: MedicalDoctorHead
