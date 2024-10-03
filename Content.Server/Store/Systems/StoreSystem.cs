@@ -10,6 +10,8 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.DoAfter;
+using Content.Shared.SS220.Store;
 
 namespace Content.Server.Store.Systems;
 
@@ -21,6 +23,7 @@ public sealed partial class StoreSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
 
     public override void Initialize()
     {
@@ -34,6 +37,7 @@ public sealed partial class StoreSystem : EntitySystem
         SubscribeLocalEvent<StoreComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<StoreComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<StoreComponent, OpenUplinkImplantEvent>(OnImplantActivate);
+        SubscribeLocalEvent<StoreComponent, InsertCurrencyDoAfterEvent>(OnInsertCurrencyDoAfter); //SS220-insert-currency-doafter
 
         InitializeUi();
         InitializeCommand();
@@ -92,6 +96,23 @@ public sealed partial class StoreSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
+        //SS220-insert-currency-doafter begin
+        if (store.CurrencyInsertTime != null)
+        {
+            var doAfter = new DoAfterArgs(EntityManager, args.User, store.CurrencyInsertTime.Value,
+                new InsertCurrencyDoAfterEvent(uid, (args.Target.Value, store)),
+                args.Target.Value)
+            {
+                NeedHand = true,
+                BreakOnDamage = true
+            };
+
+            _doAfter.TryStartDoAfter(doAfter);
+            args.Handled = true;
+            return;
+        }
+        //SS220-insert-currency-doafter end
+
         if (!TryAddCurrency((uid, component), (args.Target.Value, store)))
             return;
 
@@ -99,6 +120,27 @@ public sealed partial class StoreSystem : EntitySystem
         var msg = Loc.GetString("store-currency-inserted", ("used", args.Used), ("target", args.Target));
         _popup.PopupEntity(msg, args.Target.Value, args.User);
     }
+
+    //SS220-insert-currency-doafter begin
+    private void OnInsertCurrencyDoAfter(Entity<StoreComponent> entity, ref InsertCurrencyDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        if (!Resolve(entity, ref args.Store.Comp))
+            return;
+
+        if (!TryComp<CurrencyComponent>(args.Currency, out var currencyComp))
+            return;
+
+        if (!TryAddCurrency((args.Currency, currencyComp), args.Store))
+            return;
+
+        args.Handled = true;
+        var msg = Loc.GetString("store-currency-inserted", ("used", args.Currency), ("target", args.Store.Owner));
+        _popup.PopupEntity(msg, args.Store.Owner, args.User);
+    }
+    //SS220-insert-currency-doafter end
 
     private void OnImplantActivate(EntityUid uid, StoreComponent component, OpenUplinkImplantEvent args)
     {
