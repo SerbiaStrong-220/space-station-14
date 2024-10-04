@@ -968,6 +968,7 @@
   name: cap gun
   description: Looks almost like the real thing! Ages 8 and up.
   components:
+  - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
     layers:
@@ -1374,6 +1375,7 @@
     - type: DisarmMalus
       malus: 0
     - type: MeleeWeapon
+      wideAnimationRotation: -135 #SS220-Fix ClownHammer wideAnimation
       soundHit:
         collection: RubberHammer
         params:

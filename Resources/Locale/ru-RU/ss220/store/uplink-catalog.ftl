@@ -30,3 +30,7 @@ uplink-special-delivery-desc = Содержит случайную маску ж
 
 uplink-criminal-delivery-name = криминальная посылка
 uplink-criminal-delivery-desc = Содержит случайную маску, замешанную в самых громких ограблениях прошлого.
+
+# Wearables
+uplink-helmet-swat-syndicate-name = Шлем пехотинца Синдиката
+uplink-helmet-swat-syndicate-desc = Очень прочный шлем, обычно используемый военизированными формированиями Синдиката. Он украшен зловещим узором из красных и черных полос.

@@ -21,6 +21,8 @@
   - type: Tag
     tags:
     - HudMedical
+  - type: EyeProtection
+  - type: FlashImmunity
 
 - type: entity
   parent: [ClothingEyesBase, ClothingEyesGlassesSecurity]

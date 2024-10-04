@@ -26,6 +26,7 @@
 - type: loadoutGroup
   id: IAAHead
   name: loadout-group-iaa-head
+  minLimit: 0
   loadouts:
   - DevilHorns
 
@@ -35,12 +36,6 @@
   loadouts:
   - LawyerNeck
   - CloakJujutsuShlepa
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: IAAJumpsuit
@@ -63,6 +58,7 @@
 - type: loadoutGroup
   id: IAAOuterclothing
   name: loadout-group-iaa-outerclothing
+  minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
   - Outer1984
@@ -75,6 +71,7 @@
   - Glasses
   - GlassesJamjar
   - GlassesJensen
+  - Sunglasses
   - GlassesujutsuShlepa
 
 - type: loadoutGroup
@@ -102,12 +99,6 @@
   - Headphones
   - ProtectGear
   - BlueShieldNeckCloak
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -148,6 +139,7 @@
 - type: loadoutGroup
   id: SecurityGlasses
   name: loadout-group-security-glasses
+  minLimit: 0
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
@@ -225,6 +217,7 @@
   - SeniorMedicalLabCoat
   - MedicalDoctorWintercoat
   - ChemistWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: MedicalsBackpack
@@ -268,6 +261,14 @@
   - SecurityMedicHelmet
 
 - type: loadoutGroup
+  id: BrigmedicGlasses
+  name: loadout-group-brigmedic-glasses
+  minLimit: 0
+  loadouts:
+  - HudMedical
+  - CyberMedVisor
+
+- type: loadoutGroup
   id: BrigmedicMask
   name: loadout-group-brigmedic-mask
   minLimit: 0
@@ -296,6 +297,7 @@
   - BrigmedicVestSecurity
   - BrigmedicCoatLab
   - BrigmedicVestArmorMedSec
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: BrigmedicBackpack
@@ -313,6 +315,16 @@
   - BlueShoes
   - MedicalWinterBoots
   - SecMedWinterBoots
+
+- type: loadoutGroup
+  id: SurvivalBrigMedic
+  name: loadout-group-survival-brigmedic
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyOxygenBrigmedic
+  - EmergencyNitrogenBrigmedic
+  - LoadoutSpeciesVoxNitrogen
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -326,10 +338,21 @@
 - type: loadoutGroup
   id: MedicalGlasses
   name: loadout-group-medical-glasses
+  minLimit: 0
   loadouts:
   - Glasses
   - CyberMedVisor
   # Врач (Конец)
+
+  # Химик (Начало)
+- type: loadoutGroup
+  id: ChemicalGlasses
+  name: loadout-group-chemical-glasses
+  minLimit: 0
+  loadouts:
+  - GlassesChemical
+  - CyberRnDVisor
+  # Химик (Конец)
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -367,12 +390,14 @@
   - StationEngineerOuterVest
   - StationEngineerWintercoat
   - AtmosphericTechnicianWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
   # Ведущий инженер (Конец)
 
   # Инженер (Начало)
 - type: loadoutGroup
   id: EngineerGlasses
   name: loadout-group-engineer-glasses
+  minLimit: 0
   loadouts:
   - GlassesEngineer
   - CyberGlassesEngineer
@@ -404,16 +429,18 @@
   - SeniorSciensistLabCoat
   - ScienceWintercoat
   - RoboticistWintercoat
+  - CyberJacketRnD #SS220-TwoOne-Floppa-Iteration
   # Ведущий учёный (Конец)
 
   # Учёный (Начало)
 - type: loadoutGroup
   id: ScientistGlasses
   name: loadout-group-scientist-glasses
+  minLimit: 0
   loadouts:
   - Glasses
   - CyberRnDVisor
-    # Учёный (Конец)
+  # Учёный (Конец)
 #! Исследовательский отдел (Конец)
 
 #! Отдел снабжения (Начало)
@@ -543,6 +570,15 @@
   - JanitorOrangeShoes
   # Уборщик (Конец)
 
+ # Сервисный работник (Начало)
+- type: loadoutGroup
+  id: ServiceWorkerJumpsuit
+  name: loadout-group-service-worker-jumpsuit
+  hidden: true
+  loadouts:
+  - ServiceWorkerWaiter
+  # Сервисный работник (Конец)
+
 #! Сервис (Конец)
 
 #! Разное
@@ -557,15 +593,3 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
-
-  # Плащи
-- type: loadoutGroup
-  id: SponsorNeck # Не используется
-  name: loadout-group-neck
-  loadouts:
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck

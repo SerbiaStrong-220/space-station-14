@@ -22,7 +22,7 @@
   - Chaplain
   - Chef
   - Clown
-  - Detective
+#  - Detective #SS220-Transfer Detective To Security
   - HeadOfPersonnel
   - SeniorService #ss220-SEniorService
   - Janitor
@@ -127,6 +127,7 @@
   - SecurityOfficer
   - Warden
   - SecurityPilot
+  - Detective #SS220-Transfer Detective To Security
 
 - type: department
   id: Science

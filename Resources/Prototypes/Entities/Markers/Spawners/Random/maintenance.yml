@@ -105,7 +105,7 @@
         - id: ClothingNeckCloakAdmin
         - id: ClothingNeckCloakMoth
         - id: ClothingNeckCloakVoid
-        - id: ClothingNeckCloakGoliathCloak
+      #  - id: ClothingNeckCloakGoliathCloak #ss220 goliath-cloak-upgrade
         - id: ClothingNeckCloakAce
         - id: ClothingNeckCloakAro
         - id: ClothingNeckCloakBi
@@ -179,6 +179,7 @@
       - id: ClothingUniformJumpsuitFamilyGuy
       # - id: WristwatchGold
       - id: ClothingWristWatch # SS220 Wristwatch
+      - id: CigPackWEH #SS220 Cigarettes
       - id: RubberStampGreytide
 
 - type: entity

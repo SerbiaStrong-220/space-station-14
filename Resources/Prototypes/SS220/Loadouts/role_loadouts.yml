@@ -15,6 +15,7 @@
   - Survival
   - Trinkets
   - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -27,6 +28,7 @@
   - CommonBackpack
   - Survival
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Внутренние дела (Конец)
 
 #! Служба безопасности (Начало)
@@ -36,6 +38,7 @@
   id: JobSeniorOfficer
   groups:
   - SecurityHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck  #holster loadout
   - SeniorSecJumpsuit
   - SecurityBackpack
@@ -44,12 +47,14 @@
   - SecurityShoes
   - SecurityBelt
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Пилот
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
   - SecurityPilotHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
@@ -58,6 +63,7 @@
   - SecurityShoes
   - SecurityPDA
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -68,6 +74,7 @@
   groups:
   - HatSeniorMedical
   - MedicalNeck
+  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
@@ -75,8 +82,9 @@
   - SeniorMedicalOuterClothing
   - SurvivalMedical
   - SeniorShoes
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -86,12 +94,14 @@
   id: JobSeniorEngineer
   groups:
   - HatSeniorEngineer
+  - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorsEngineerJumpsuit
   - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
   - SurvivalExtended
   - StationEngineerShoes
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -101,6 +111,7 @@
   id: JobSeniorResearcher
   groups:
   - HatSeniorSciensist
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistNeck
   - SeniorSciensistJumpsuit
   - ScientistBackpack
@@ -108,8 +119,9 @@
   - ScientistGloves
   - ScientistShoes
   - Survival
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -124,4 +136,5 @@
   - Survival
   - Glasses
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Сервис (Конец)
