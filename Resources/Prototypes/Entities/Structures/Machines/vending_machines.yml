@@ -154,6 +154,7 @@
   description: An overwhelming amount of ancient patriotism washes over you just by looking at the machine.
   components:
   - type: VendingMachine
+    initialStockQuality: 0.33 # SS220 AmmoVend Nerf quantitiy spawn ammo
     pack: AmmoVendInventory
     offState: off
     brokenState: broken
