@@ -140,6 +140,20 @@
   categories:
   - UplinkImplants
 
+- type: listing
+  id: ClothingHeadHelmetSwatSyndicate
+  name: uplink-helmet-swat-syndicate-name
+  description: uplink-helmet-swat-syndicate-desc
+  icon: {sprite: Clothing/Head/Helmets/swat_syndicate.rsi, state: icon}
+  productEntity: ClothingHeadHelmetSwatSyndicate
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkWearables
+
 # READD-VEHICLES
 - type: listing
   id: UplinkSyndicateSegwayCrate

@@ -22,6 +22,7 @@
     RiotLaserShield: 2
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
+    CigPackSEC: 2 #SS220 Cigarettes
   # security officers need to follow a diet regimen!
   contrabandInventory:
     FoodDonutHomer: 12

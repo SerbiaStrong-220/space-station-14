@@ -1283,6 +1283,7 @@
   - DetectiveArmorVest
   - DetectiveCoat
   - DetectiveCoatDark # Corvax-Resprite-Detective
+  - DetectiveCoatGrey
 
 - type: loadoutGroup
   id: SecurityCadetJumpsuit

@@ -14,6 +14,7 @@
     - id: ExpensiveLighterShield #SS220-Zippo
 #   - id: HandheldCrewMonitor #ss220-fix-blueshield
     - id: ClothingOuterSRTCoat #SS220-CentComm
+    - id: RubberStampBlueShield #SS220-additional paperwork
 
 - type: entity
   parent: GunSafe

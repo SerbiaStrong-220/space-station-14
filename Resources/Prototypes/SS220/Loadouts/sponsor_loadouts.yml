@@ -30,7 +30,7 @@
   id: SpriterNeck
   effects:
   - !type:GroupLoadoutEffect
-    proto: DeveloperSponsorTier #Нет тира для спрайтеров
+    proto: SpriterSponsorTier
   storage:
     back:
     - ClothingSponsorNeckSpriter
@@ -39,7 +39,7 @@
   id: TrackerExpertNeck #Трекероведы
   effects:
   - !type:GroupLoadoutEffect
-    proto: DeveloperSponsorTier #Нет тира для трекероведов
+    proto: QASponsorTier
   storage:
     back:
     - ClothingSponsorNeckTrackerExpert
