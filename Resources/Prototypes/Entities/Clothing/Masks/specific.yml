@@ -76,6 +76,8 @@
 # Corvax-HiddenDesc-End
     - type: UserInterface
       interfaces:
+        enum.ChameleonUiKey.Key: #SS220 Fix #2010 Fix-Chameleon-Mask-Interface start
+          type: ChameleonBoundUserInterface #SS220 Fix #2010 Fix-Chameleon-Mask-Interface end
         enum.VoiceMaskUIKey.Key:
           type: VoiceMaskBoundUserInterface
 
