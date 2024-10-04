@@ -167,7 +167,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     private void DoStationAnnouncement(EntityUid uid, SpiderQueenComponent? component = null)
     {
         if (!Resolve(uid, ref component) ||
-            component.IsAnnounced ||
+            component.IsAnnouncedOnce ||
             !TryComp<TransformComponent>(uid, out var xform))
             return;
 
@@ -175,7 +175,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, xform)))));
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
         _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
-        component.IsAnnounced = true;
+        component.IsAnnouncedOnce = true;
     }
 
     /// <summary>
@@ -232,9 +232,6 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         };
 
         var started = _doAfter.TryStartDoAfter(doAfterArgs);
-        if (started)
-            return true;
-        else
-            return false;
+        return started;
     }
 }

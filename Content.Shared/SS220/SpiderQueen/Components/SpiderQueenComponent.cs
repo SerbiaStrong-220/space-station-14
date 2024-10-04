@@ -9,8 +9,11 @@ namespace Content.Shared.SS220.SpiderQueen.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SpiderQueenComponent : Component
 {
+    /// <summary>
+    /// The time at which the next every-second action will occur (for example <see cref="HungerConversionPerSecond"/>
+    /// </summary>
     [ViewVariables]
-    public bool IsAnnounced = false;
+    public TimeSpan NextSecond = TimeSpan.Zero;
 
     /// <summary>
     /// Current amount of blood points
@@ -42,9 +45,6 @@ public sealed partial class SpiderQueenComponent : Component
     [DataField]
     public float HungerExtractCoefficient = 0.2f;
 
-    [ViewVariables]
-    public TimeSpan NextSecond = TimeSpan.Zero;
-
     /// <summary>
     /// Id of the cocoon prototype
     /// </summary>
@@ -74,6 +74,12 @@ public sealed partial class SpiderQueenComponent : Component
     /// </summary>
     [DataField]
     public int? CocoonsCountToAnnouncement;
+
+    /// <summary>
+    /// Has there been a special announcement about this entity yet
+    /// </summary>
+    [ViewVariables]
+    public bool IsAnnouncedOnce = false;
 
     /// <summary>
     /// The prototype of alert that displays the current amount of blood points

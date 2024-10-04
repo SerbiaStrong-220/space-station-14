@@ -8,6 +8,9 @@ namespace Content.Shared.SS220.SpiderQueen.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SpiderCocoonComponent : Component
 {
+    /// <summary>
+    /// The time at which the next every-second action will occur (for example <see cref="DamagePerSecond"/>).
+    /// </summary>
     [ViewVariables]
     public TimeSpan NextSecond = TimeSpan.Zero;
 
