@@ -75,13 +75,6 @@
 
 # Разработка
 - type: ShlepaRewardGroup
-  id: MiniDeveloper
-  name: Начинающий Разработчик
-  requiredRole: MiniDeveloper
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
   id: Mapper
   name: Маппер
   requiredRole: Mapper
@@ -96,16 +89,30 @@
   isHiddenOnInsufficient: true
 
 - type: ShlepaRewardGroup
-  id: HeadLoroved
-  name: Ведущий Лоровед
-  requiredRole: HeadLoroved
+  id: Spriter
+  name: Спрайтер
+  requiredRole: Spriter
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+  
+- type: ShlepaRewardGroup
+  id: QA
+  name: Обеспечение качества
+  requiredRole: QA
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
 - type: ShlepaRewardGroup
-  id: WikiHead
-  name: Ведущий Редактор Вики
-  requiredRole: WikiHead
+  id: LoreEdit
+  name: Лоровед
+  requiredRole: LoreEdit
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: WikiEdit
+  name: Редактор Вики
+  requiredRole: WikiEdit
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
@@ -113,27 +120,6 @@
   id:  HeadDeveloper
   name: Ведущий Разработчик
   requiredRole:  HeadDeveloper
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: SubHeadDeveloper
-  name: Заместитель Ведущего Разработчика
-  requiredRole: SubHeadDeveloper
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: ProjectManager
-  name: Проект Менеджер
-  requiredRole: ProjectManager
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: SeniorDeveloper
-  name: Старший Разработчик
-  requiredRole: SeniorDeveloper
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
@@ -152,38 +138,10 @@
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
-- type: ShlepaRewardGroup
-  id: HeadAdministrator
-  name: Главный Администратор
-  requiredRole: HeadAdministrator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: SeniorAdministrator
-  name: Старший Администратор
-  requiredRole: SeniorAdministrator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id:  SubHeadAdministrator
-  name: Заместитель Главного Администратора
-  requiredRole:  SubHeadAdministrator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
 # Модерация
 - type: ShlepaRewardGroup
   id: Moderator
   name: Модератор
   requiredRole: Moderator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: HeadModerator
-  name: Старший Модератор
-  requiredRole: HeadModerator
   isExactRoleRequired: true
   isHiddenOnInsufficient: true

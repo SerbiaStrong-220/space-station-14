@@ -363,6 +363,16 @@
   - BlueShoes
   - MedicalWinterBoots
   - SecMedWinterBoots
+
+- type: loadoutGroup
+  id: SurvivalBrigMedic
+  name: loadout-group-survival-brigmedic
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyOxygenBrigmedic
+  - EmergencyNitrogenBrigmedic
+  - LoadoutSpeciesVoxNitrogen
   # Бригмедик (Конец)
 
   # Врач (Начало)
@@ -607,6 +617,15 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   # Уборщик (Конец)
+
+ # Сервисный работник (Начало)
+- type: loadoutGroup
+  id: ServiceWorkerJumpsuit
+  name: loadout-group-service-worker-jumpsuit
+  hidden: true
+  loadouts:
+  - ServiceWorkerWaiter
+  # Сервисный работник (Конец)
 
 #! Сервис (Конец)
 

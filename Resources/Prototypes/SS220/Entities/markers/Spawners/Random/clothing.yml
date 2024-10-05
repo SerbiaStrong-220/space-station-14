@@ -27,7 +27,7 @@
       - ClothingNeckCloakMiner
       - ClothingNeckCloakIntersex
       - ClothingNeckCloakPan
-      - ClothingNeckCloakGoliathCloak
+    #  - ClothingNeckCloakGoliathCloak #ss220 goliath-cloak-upgrade
     chance: 0.8
     offset: 0.0
     #rare

@@ -497,7 +497,7 @@
   id: Cabbage
   name: food-sequence-content-cabbage
   sprites:
-  - sprite: Objects/Specific/Hydroponics/carrot.rsi
+  - sprite: Objects/Specific/Hydroponics/cabbage.rsi # SS220 Fix #1975
     state: produce
   tags:
   - Vegetable
@@ -1176,3 +1176,20 @@
   sprites:
   - sprite: Objects/Consumable/Food/Baked/cake.rsi
     state: suppermatter-shard
+
+
+# Anomaly berries
+
+- type: foodSequenceElement
+  id: AnomalyBerry
+  name: food-sequence-content-anomaly-berry
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/anomaly_berry.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: AnomalyBerryBurger
+  name: food-sequence-burger-content-anomaly-berry
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/anomaly_berry.rsi
+    state: produce

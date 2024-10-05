@@ -28,6 +28,7 @@
     BookSpaceLaw: 3
     LuxuryPen: 2
     ClothingWristWatchGold: 1 # SS220 Wrist Watch
+    CigPackAVD: 2 #SS220 Cigaretts
     HandLabeler: 2
   contrabandInventory:
     ClothingOuterRobesJudge: 1

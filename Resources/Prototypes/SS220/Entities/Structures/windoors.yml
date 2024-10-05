@@ -3,5 +3,6 @@
   id: WindoorSecureCaptainLocked
   suffix: Капитан, Закрыто
   components:
-  - type: AccessReader
-    access: [["Captain"]]
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCaptain ]

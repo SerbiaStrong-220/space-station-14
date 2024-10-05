@@ -73,7 +73,7 @@
   id: JobServiceWorker
   groups:
   - GroupTankHarness
-  - BartenderJumpsuit
+  - ServiceWorkerJumpsuit #SS220-Service Worker Loadout Fix
   - CommonBackpack
   - Glasses
   - Survival
@@ -552,7 +552,7 @@
   - BrigmedicJumpsuit
   - MedicalGloves
   - BrigmedicBackpack
-  - SurvivalMedical
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
   - BrigmedicOuterClothing
   - BrigmedicShoes
 #  - Glasses #SS220-TwoOne-Floppa-Iteration

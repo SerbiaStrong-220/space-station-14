@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
@@ -86,7 +86,7 @@ public sealed class TelepathySystem : EntitySystem
     {
         var nameEv = new TransformSpeakerNameEvent(senderUid!.Value, Name(senderUid.Value));
         RaiseLocalEvent(senderUid.Value, nameEv);
-        var name = nameEv.Name;
+        var name = Name(nameEv.Sender);
         return name;
     }
 }

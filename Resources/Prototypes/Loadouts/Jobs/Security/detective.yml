@@ -48,3 +48,8 @@
   id: DetectiveCoat
   equipment:
     outerClothing: ClothingOuterCoatDetectiveLoadout
+
+- type: loadout
+  id: DetectiveCoatGrey
+  equipment:
+    outerClothing: ClothingOuterCoatDetectiveLoadoutGrey

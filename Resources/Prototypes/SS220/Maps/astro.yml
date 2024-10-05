@@ -2,7 +2,7 @@
 
 - type: gameMap
   id: Astro
-  mapName: 'NSS Astro'
+  mapName: 'NTJRSS Astro'
   mapPath: /Maps/SS220/astro.yml
   minPlayers: 0
   stations:
@@ -57,7 +57,6 @@
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
             Borg: [ 2, 2 ]
-            StationAi: [ 1, 1 ]
             SeniorResearcher: [ 1, 1 ]
             #Service
             Bartender: [ 2, 2 ]
@@ -74,6 +73,7 @@
             Lawyer: [ 2, 2 ]
             Zookeeper: [ 1, 1 ]
             SeniorService: [ 1, 1 ]
+            Boxer: [ 2, 2]
 
         - type: StationGoal
           goals:

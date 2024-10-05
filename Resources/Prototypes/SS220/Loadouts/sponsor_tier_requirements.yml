@@ -31,13 +31,6 @@
 
 # Разработка
 - type: loadoutEffectGroup
-  id: MiniDeveloperSponsorTier
-  effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: MiniDeveloper
-    isExact: true
-
-- type: loadoutEffectGroup
   id: DeveloperSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
@@ -52,24 +45,31 @@
     isExact: true
 
 - type: loadoutEffectGroup
-  id: HeadLorovedSponsorTier
+  id: SpriterSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
-    requirement: HeadLoroved
+    requirement: Spriter
     isExact: true
 
 - type: loadoutEffectGroup
-  id: WikiHeadSponsorTier
+  id: QASponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
-    requirement: WikiHead
+    requirement: QA
     isExact: true
 
 - type: loadoutEffectGroup
-  id: SeniorDeveloperSponsorTier
+  id: LoreEditSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
-    requirement: SeniorDeveloper
+    requirement: LoreEdit
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: WikiEditSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: WikiEdit
     isExact: true
 
 - type: loadoutEffectGroup
@@ -77,13 +77,6 @@
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
     requirement: HeadDeveloper
-    isExact: true
-
-- type: loadoutEffectGroup
-  id: ProjectManagerSponsorTier
-  effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: ProjectManager
     isExact: true
 
 # Администрация
@@ -101,38 +94,10 @@
     requirement: Administrator
     isExact: true
 
-- type: loadoutEffectGroup
-  id: SeniorAdministratorSponsorTier
-  effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: SeniorAdministrator
-    isExact: true
-
-- type: loadoutEffectGroup
-  id: SubHeadAdministratorSponsorTier
-  effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: SubHeadAdministrator
-    isExact: true
-
-- type: loadoutEffectGroup
-  id: HeadAdministratorSponsorTier
-  effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: HeadAdministrator
-    isExact: true
-
 # Модерация
 - type: loadoutEffectGroup
   id: ModeratorSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect
     requirement: Moderator
-    isExact: true
-
-- type: loadoutEffectGroup
-  id: HeadModeratorSponsorTier
-  effects:
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: HeadModerator
     isExact: true

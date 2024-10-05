@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  
+
   parent: ClothingBeltStorageBase
   id: ClothingBeltWebbingSRT
   name: пояс ГСН
@@ -158,6 +158,7 @@
   id: ClothingBeltPlantDruid #SS220 druid loadout
   name: druid belt
   description: A belt that helps researchers unlock the mysteries of alien flora.
+  suffix: DO NOT MAP, Filled
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/druid_belt.rsi
@@ -209,6 +210,12 @@
           - Bottle
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+  - type: StorageFill
+    contents:
+    - id: HydroponicsToolMiniHoe
+    - id: HydroponicsToolSpade
+    - id: HydroponicsToolClippers
+    - id: RobustHarvestChemistryBottle
 
 #chief 220
 

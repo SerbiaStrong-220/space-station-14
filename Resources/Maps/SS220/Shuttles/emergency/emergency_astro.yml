@@ -28,7 +28,7 @@ entities:
       name: NT-JR-CV "Triumph"
     - type: Transform
       pos: -0.44496232,-0.45410392
-      parent: invalid
+      parent: 884
     - type: MapGrid
       chunks:
         0,0:
@@ -76,11 +76,16 @@ entities:
         version: 2
         nodes:
         - node:
+            zIndex: -1
+            color: '#FFFFFFFF'
+            id: Bot
+          decals:
+            600: 3,2
+        - node:
             color: '#FFFFFFFF'
             id: Bot
           decals:
             175: -3,4
-            176: 3,2
             183: 3,-7
         - node:
             color: '#334E6DFF'
@@ -260,6 +265,66 @@ entities:
             464: 5,5
             465: 5,4
         - node:
+            zIndex: -1
+            color: '#9FED58A5'
+            id: CheckerNESW
+          decals:
+            513: 2,0
+            514: 1,0
+            515: 2,-1
+            516: 0,0
+            517: -1,0
+            518: -2,0
+            519: -3,0
+            520: -3,1
+            521: -3,2
+            522: -4,2
+            523: -4,1
+            524: -5,1
+            525: -6,1
+            526: -5,0
+            527: -4,0
+            528: -5,-1
+            529: -5,-2
+            530: -4,-1
+            531: -4,-2
+            532: -3,-1
+            533: -3,-2
+            534: -3,-3
+            535: -2,-3
+            536: -2,-2
+            537: -2,-1
+            538: -3,-4
+            539: -3,-5
+            540: -2,-5
+            541: -2,-4
+            542: -2,-6
+            543: 2,-5
+            544: 2,-4
+            545: 2,-3
+            546: 2,-2
+        - node:
+            color: '#9FED58A5'
+            id: CheckerNESW
+          decals:
+            495: 6,1
+            496: 6,0
+            497: 6,-1
+            498: 5,-5
+            499: 5,-4
+            500: 5,-3
+            501: 5,-2
+            502: 5,-1
+            503: 5,0
+            504: 5,1
+            505: 4,1
+            506: 4,2
+            508: 3,1
+            509: 3,0
+            510: 4,0
+            511: 4,-1
+            512: 3,-1
+        - node:
             color: '#FFA64719'
             id: CheckerNESW
           decals:
@@ -340,6 +405,62 @@ entities:
             458: 3,4
             459: 4,4
         - node:
+            zIndex: -1
+            color: '#C6FF91BF'
+            id: CheckerNWSE
+          decals:
+            547: -4,2
+            548: -3,2
+            549: -6,1
+            550: -5,1
+            551: -4,1
+            552: -3,1
+            553: -3,0
+            554: -4,0
+            555: -5,0
+            556: -5,-1
+            557: -4,-1
+            558: -3,-1
+            559: -5,-2
+            560: -4,-2
+            561: -3,-2
+            562: -3,-3
+            563: -2,-3
+            564: -2,-2
+            565: -2,-1
+            566: -2,0
+            567: -3,-5
+            568: -3,-4
+            569: -2,-4
+            570: -2,-5
+            571: -2,-6
+            572: -1,0
+            573: 0,0
+            574: 1,0
+            575: 2,0
+            576: 3,0
+            577: 3,1
+            578: 4,1
+            579: 4,2
+            580: 5,1
+            581: 6,1
+            582: 6,0
+            583: 5,0
+            584: 4,0
+            585: 4,-1
+            586: 5,-1
+            587: 6,-1
+            588: 5,-2
+            589: 5,-3
+            590: 5,-4
+            591: 5,-5
+            592: 3,-1
+            593: 2,-1
+            594: 2,-2
+            595: 2,-3
+            596: 2,-4
+            597: 2,-5
+        - node:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinCornerNe
           decals:
@@ -385,8 +506,8 @@ entities:
             color: '#FFFFFFFF'
             id: DarkWoodTrimThinLineW
           decals:
-            46: 3,2
-            47: 3,1
+            598: 3,1
+            599: 3,2
         - node:
             color: '#37789BFF'
             id: DeliveryGreyscale
@@ -632,6 +753,18 @@ entities:
     - type: RadiationGridResistance
     - type: IFF
       color: '#50C878FF'
+  - uid: 884
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
+    - type: Broadphase
+    - type: OccluderTree
 - proto: AirAlarm
   entities:
   - uid: 641
@@ -4713,14 +4846,12 @@ entities:
   - uid: 749
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,13.5
+      pos: -2.5,15.5
       parent: 2
   - uid: 750
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,13.5
+      pos: 3.5,15.5
       parent: 2
   - uid: 752
     components:
@@ -6261,7 +6392,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,-9.5
       parent: 2
-- proto: WindoorSecureServiceLocked
+- proto: WindoorServiceLocked
   entities:
   - uid: 24
     components:

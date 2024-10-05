@@ -49,7 +49,7 @@
     - HudMedical
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseRestrictedContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesHudSecurity
   name: security hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records.
@@ -63,7 +63,7 @@
     - HudSecurity
 
 - type: entity
-  parent: [ClothingEyesBase, BaseCommandContraband]
+  parent: [ClothingEyesBase]
   id: ClothingEyesHudCommand
   name: administration hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status.
@@ -152,7 +152,7 @@
   - type: ShowThirstIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, BaseSecurityCommandContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
   id: ClothingEyesHudMedSec
   name: medsec hud
   description: An eye display that looks like a mixture of medical and security huds.
@@ -200,7 +200,7 @@
   - type: ShowSyndicateIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSyndicateContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesHudSyndicate
   name: syndicate visor
   description: The syndicate's professional head-up display, designed for better detection of humanoids and their subsequent elimination.
@@ -218,7 +218,7 @@
   #SS220 Syndie visor buff end
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSyndicateContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesHudSyndicateAgent
   name: syndicate agent visor
   description: The Syndicate Agent's professional heads-up display, designed for quick diagnosis of their team's status.
@@ -233,6 +233,12 @@
     - Biological
   #SS220 Syndie visor buff start
     - Silicon #to destroy borgs or heal syndie assault borg
+    - Inorganic
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+    - Inorganic
+    - Silicon
   - type: EyeProtection
   - type: FlashImmunity
   - type: IdentityBlocker

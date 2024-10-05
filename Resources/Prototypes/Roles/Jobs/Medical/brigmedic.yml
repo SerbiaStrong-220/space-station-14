@@ -27,6 +27,6 @@
     belt: ClothingBeltSecurityMedicalFilled #SS220-Brigmedic-Fashion
   storage:
     back:
-    - BoxSurvivalBrigmedic
+#    - BoxSurvivalBrigmedic #SS220-Brigmedic SurvivalBox Fix
     - Flash
 #SS220-brigmedic-loadout-end

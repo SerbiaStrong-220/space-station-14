@@ -7,17 +7,25 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 72000 # SS220-RoleTime
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: DetectiveGear
   icon: "JobIconDetective"
-  supervisors: job-supervisors-hos #SS220-Law Department
-  canBeAntag: true
+  supervisors: job-supervisors-hos #SS220-Transfer Detective To Security
+  canBeAntag: false #SS220-Transfer Detective To Security
   access:
   - Brig
   - Maintenance
-#  - Service #SS220-Law Department
+  - Service
   - Detective
-  - Lawyer #SS220-Law Department
-  - Security #SS220-Law Department
+#  extendedAccess: #SS220-Transfer Detective To Security
+  - Security
+  - Cryogenics 
+  special: #SS220-Transfer Detective To Security begin
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ] #SS220-Transfer Detective To Security end
 
 - type: startingGear
   id: DetectiveGear
