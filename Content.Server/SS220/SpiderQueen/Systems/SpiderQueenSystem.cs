@@ -69,7 +69,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var spider = entity.Owner;
         if (args.Handled ||
             spider != args.Performer ||
-            (args.Cost > FixedPoint2.Zero && !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp)))
+            !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp))
             return;
 
         if (TryStartSpiderSpawnDoAfter(spider, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.Cost))
@@ -89,7 +89,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (args.Handled ||
             spider != args.Performer ||
             !TryComp<TransformComponent>(entity.Owner, out var transform) ||
-            (args.Cost > FixedPoint2.Zero && !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp)))
+            !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp))
             return;
 
         if (TryStartSpiderSpawnDoAfter(spider, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.Cost))
@@ -105,19 +105,13 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
     private void OnSpawnDoAfter(Entity<SpiderQueenComponent> entity, ref SpiderSpawnDoAfterEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled ||
+            !CheckEnoughBloodPoints(entity, args.Cost, entity.Comp))
             return;
 
-        var performer = entity.Owner;
-        if (args.Cost > FixedPoint2.Zero)
-        {
-            if (!CheckEnoughBloodPoints(performer, args.Cost, entity.Comp))
-                return;
-
-            entity.Comp.CurrentBloodPoints -= args.Cost;
-            Dirty(entity);
-            UpdateAlert(entity);
-        }
+        entity.Comp.CurrentBloodPoints -= args.Cost;
+        Dirty(entity);
+        UpdateAlert(entity);
 
         var getProtos = EntitySpawnCollection.GetSpawns(args.Prototypes, _random);
         var targetMapCords = GetCoordinates(args.TargetCoordinates);
