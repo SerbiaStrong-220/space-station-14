@@ -1,5 +1,5 @@
 - type: entity
-  parent: [DoorRemoteDefault, BaseCommandContraband]
+  parent: DoorRemoteDefault
   id: DoorRemoteLaw
   name: law door remote
   components:
