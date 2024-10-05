@@ -3,6 +3,7 @@
   id: JobCaptain
   groups:
   - CaptainHead
+  - CAPHeadset #SS220-Law Department
   - CaptainNeck
   - CaptainJumpsuit
   - CaptainBackpack
@@ -110,6 +111,7 @@
   id: JobLawyer
   groups:
   - IAAGlasses #SS220-Two Floppa Iteration
+  - IAAHeadset #SS220-Law Department
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit

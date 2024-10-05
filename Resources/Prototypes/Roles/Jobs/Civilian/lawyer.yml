@@ -12,7 +12,7 @@
   icon: "JobIconLawyer"
   supervisors: job-supervisors-magistrate #SS220-Law Department
   access:
-#  - Service #SS220-Law Department
+  - Service
   - Lawyer
   - Brig
   - Maintenance
@@ -22,7 +22,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
-    ears: ClothingHeadsetLaw #SS220-Law Department
+#    ears: ClothingHeadsetLaw #SS220-Law Department
   inhand:
     - BriefcaseBrownFilled
   storage:

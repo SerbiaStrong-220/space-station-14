@@ -32,6 +32,22 @@
   - Brig
   - Maintenance
   - External
+  # Расширенный доступ
+  - Bar
+  - Janitor
+  - Theatre
+  - Kitchen
+  - Chapel
+  - Hydroponics
+  - Cryogenics
+  - Chemistry
+  - Engineering
+  - Research
+  - Detective
+  - Salvage
+  - Cargo
+  - Atmospherics
+  - Medical
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -45,7 +61,8 @@
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesCommand
     id: MagistratePDA
-    ears: ClothingHeadsetAltLaw
+  inhand:
+    - BriefcaseBrownFilled
   storage:
     back:
     - Flash

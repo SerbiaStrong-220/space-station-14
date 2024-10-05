@@ -17,6 +17,14 @@
   minLimit: 0
   loadouts:
   - CapOfficerCutlass
+
+- type: loadoutGroup
+  id: CAPHeadset
+  name: loadout-group-cap-headset
+  minLimit: 1
+  loadouts:
+  - CaptainHeadset
+  - CaptainHeadsetAlt
   # Капитан (Конец)
 #! Командование (Конец)
 
@@ -47,6 +55,13 @@
   loadouts:
   - MagistrateRobesJudge
 
+- type: loadoutGroup
+  id: MagistrateHeadset
+  name: loadout-group-magistrate-headset
+  minLimit: 1
+  loadouts:
+  - MagistrateHeadset
+  - MagistrateHeadsetAlt
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
   id: IAAHead
@@ -104,6 +119,14 @@
   name: loadout-group-iaa-backpack
   loadouts:
     - IAABackpackLeather
+
+- type: loadoutGroup
+  id: IAAHeadset
+  name: loadout-group-iaa-headset
+  minLimit: 1
+  loadouts:
+  - LawHeadset
+  - LawHeadsetAlt
   # Агент Внутренних Дел (Конец)
 
   # Адвокат (Начало)

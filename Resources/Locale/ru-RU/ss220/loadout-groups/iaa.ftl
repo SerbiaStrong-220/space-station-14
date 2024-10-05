@@ -4,3 +4,4 @@ loadout-group-iaa-outerclothing = АВД, верхняя одежда
 loadout-group-iaa-glasses = АВД, очки
 loadout-group-iaa-neck = АВД, шея
 loadout-group-iaa-head = АВД, голова
+loadout-group-iaa-headset = АВД, гарнитура
