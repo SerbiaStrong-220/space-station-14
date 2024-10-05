@@ -66,7 +66,7 @@
     state: pda-magistrate
   - type: PdaBorderColor
     borderColor: "#414452"
-    accentVColor: "#731611"
+    accentVColor: "#262c8a"
     accentHColor: "#dfac5c"
   - type: Sprite
     sprite: Objects/Devices/pda.rsi

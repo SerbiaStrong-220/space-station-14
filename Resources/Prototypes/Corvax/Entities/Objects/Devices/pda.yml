@@ -9,13 +9,13 @@
       state: pda-iaa #SS220 PDA-Resprite
     - type: PdaBorderColor
       borderColor: "#414452" #SS220 PDA-Resprite
-      accentVColor: "#731611" #SS220 PDA-Resprite
+      accentVColor: "#262c8a" #SS220-Law Department
       accentHColor: "#dfac5c" #SS220 PDA-Resprite
     - type: Sprite #SS220 PDA-Resprite-Start
       sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
-      - state: "screen-security"
+      - state: "screen-law" #SS220-Law Department
         shader: "unshaded"
       - state: "light_overlay"
         map: [ "enum.PdaVisualLayers.Flashlight" ]
