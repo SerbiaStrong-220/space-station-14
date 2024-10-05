@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 360000 # Заглушка - 100 часов
+      time: 288000 # Заглушка - 80 часов
     - !type:RoleTimeRequirement
       role: JobIAA
       time: 180000 # Заглушка - 50 часов
