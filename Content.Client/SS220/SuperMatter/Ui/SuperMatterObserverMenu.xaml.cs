@@ -34,8 +34,7 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         RobustXamlLoader.Load(this);
 
         PlotValueOverTime.SetLabels(_localization.GetString("smObserver-plotXLabel-integrity"), _localization.GetString("smObserver-plotYLabel-integrity"), _localization.GetString("smObserver-plotTitle-integrity"));
-        // weird stuff to help xaml understand
-        ColorState.MakeMeshgrid((1, 100, 25), (1, 100, 100));
+
         ColorState.EvalFunctionOnMeshgrid(GetIntegrityDamageMap);
         ColorState.SetLabels(_localization.GetString("smObserver-plotXLabel-colorState"), _localization.GetString("smObserver-plotYLabel-colorState"), _localization.GetString("smObserver-plotTitle-colorState"));
         InitGasRatioBars();

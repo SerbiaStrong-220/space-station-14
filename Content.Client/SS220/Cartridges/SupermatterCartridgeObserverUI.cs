@@ -7,8 +7,9 @@ namespace Content.Client.SS220.Cartridges;
 
 public sealed partial class SupermatterObserverUi : UIFragment
 {
-    private SupermatterObserverUiFragment? _fragment;
     public bool IsInitd => _isInitd;
+
+    private SupermatterObserverUiFragment? _fragment;
     private bool _isInitd = true;
 
     public override Control GetUIFragmentRoot()

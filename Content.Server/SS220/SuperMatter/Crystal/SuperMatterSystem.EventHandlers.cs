@@ -26,15 +26,16 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void OnInit(Entity<SuperMatterComponent> entity, ref MapInitEvent args)
     {
-        _ambientSoundSystem.SetAmbience(entity.Owner, true);
+        _ambientSound.SetAmbience(entity.Owner, true);
 
+        entity.Comp.Matter = entity.Comp.InitMatter * MatterNondimensionalization;
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
         InitGasMolesAccumulator(entity.Comp);
     }
     private void OnHandInteract(Entity<SuperMatterComponent> entity, ref InteractHandEvent args)
     {
         entity.Comp.Matter += MatterNondimensionalization;
-        ConsumeObject(args.User, entity);
+        ConsumeObject(args.User, entity, true);
     }
     private void OnItemInteract(Entity<SuperMatterComponent> entity, ref InteractUsingEvent args)
     {
@@ -66,22 +67,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         if (!entity.Comp.Activated)
         {
-            SendAdminChatAlert(entity, "supermatter-activated", $"{EntityManager.ToPrettyString(args.Target)}");
+            SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{EntityManager.ToPrettyString(args.Target)}");
             entity.Comp.Activated = true;
         }
         args.Handled = true;
     }
-    // private void OnAdminDisableEvent(Entity<SuperMatterComponent> entity, ref SuperMatterSetAdminDisableEvent args)
-    // {
-    //     if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
-    //     {
-    //         Log.Error($"Tried to AdminDisable SM entity {EntityManager.ToPrettyString(args.Target)} without SuperMatterComponent, activationEvent performer {EntityManager.ToPrettyString(args.Performer)}");
-    //         return;
-    //     }
-    //     _adminLog.Add(LogType.Verb, LogImpact.Extreme, $"{EntityManager.ToPrettyString(args.Performer):player} has set AdminDisable to {args.AdminDisableValue}");
-    //     smComp.DisabledByAdmin = args.AdminDisableValue;
-    //     // TODO other logic like freezing Delamination and etc etc
-    // }
+
     // private void OnPause(Entity<SuperMatterComponent> entity, ref EntityPausedEvent args)
     // {
     //     if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
@@ -93,7 +84,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     //     smComp.DisabledByAdmin = args.AdminDisableValue;
     //     // TODO other logic like freezing Delamination and etc etc
     // }
-    //     private void OnUnpause(Entity<SuperMatterComponent> entity, ref EntityUnpausedEvent args)
+    // private void OnUnpause(Entity<SuperMatterComponent> entity, ref EntityUnpausedEvent args)
     // {
     //     if (!TryComp<SuperMatterComponent>(args.Target, out var smComp))
     //     {

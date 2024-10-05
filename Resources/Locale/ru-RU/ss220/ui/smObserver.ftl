@@ -1,6 +1,6 @@
 supermatter-observer-title = Консоль мониторинга состояния кристала суперматерии
 # Plots
-smObserver-plotXLabel-integrity = Секунд прошло
+smObserver-plotXLabel-integrity = Секунд
 smObserver-plotYLabel-integrity = Состояние, %
 smObserver-plotTitle-integrity = Целостность кристала
 smObserver-plotXLabel-colorState = Материя, у.е.

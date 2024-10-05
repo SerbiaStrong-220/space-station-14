@@ -13,16 +13,17 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private const float ZapPerEnergy = 55f;
     private const float ZapThreshold = 70f;
-    private const float RadiationPerEnergy = 70f;
     private const float MaxTimeBetweenArcs = 8f;
     private const float MaxTimeDecreaseBetweenArcs = 4f;
     private const int MaxAmountOfArcs = 7;
     private const float ArcsToTimeDecreaseEfficiency = 0.3f;
-    private const float IntegrityDamageICAnnounceDelay = 12f;
-    private const float IntegrityDamageStationAnnouncementDelay = 4f;
-    private const float InternalEnergyMinValue = 1220f;
 
-    public float InternalEnergyTreshhold { get; private set; }
+    private const float RadiationPerEnergy = 70f;
+
+    private const float IntegrityDamageICAnnounceDelay = 12f;
+    private const float IntegrityDamageStationAnnouncementDelay = 6f;
+
+    private const float ReleasedEnergyToGasHeat = 60f;
 
     public override void Initialize()
     {
@@ -30,6 +31,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         InitializeAnnouncement();
         InitializeEventHandler();
+        InitializeDatabase();
     }
     public override void Update(float frameTime)
     {
@@ -39,14 +41,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var query = EntityQueryEnumerator<SuperMatterComponent>();
         while (query.MoveNext(out var uid, out var smComp))
         {
-            // SM_TODO: Delete
-            if (smComp.DisabledByAdmin)
-                continue;
             if (!HasComp<MetaDataComponent>(uid)
                 || MetaData(uid).Initialized == false)
                 continue;
-            // SM_TODO: Check if it needed
-            // add here to give admins change to freeze all logic
+
+            // add here to give admins a way to freeze all logic
             if (MetaData(uid).EntityPaused)
                 continue;
 
@@ -79,16 +78,17 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
-        var releasedEnergyPerFrame = 0.1f * crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
-                        * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(crystal.Comp, gasMixture) + 1);
+        var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
+                        * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(gasMixture) + 1);
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
-        if (crystal.Comp.InternalEnergy - releasedEnergyPerFrame > InternalEnergyMinValue)
-            crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
+
+        crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
-        _atmosphere.AddHeat(gasMixture, 50f * releasedEnergyPerFrame);
+
+        _atmosphere.AddHeat(gasMixture, ReleasedEnergyToGasHeat * releasedEnergyPerFrame);
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
 
         // Update Accumulators for Broadcasting to Clients
@@ -114,11 +114,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
             }
             if (!TryImplementIntegrityDamage(crystal))
             {
-                crystal.Comp.Integrity = 0.01f;
+                crystal.Comp.Integrity = 0f;
                 MarkAsLaminated(crystal);
             }
             crystal.Comp.IntegrityDamageAccumulator = 0f;
-            crystal.Comp.NextDamageImplementTime = _gameTiming.CurTime + TimeSpan.FromSeconds(1);
+
+            crystal.Comp.NextDamageImplementTime = _gameTiming.CurTime + TimeSpan.FromSeconds(_broadcastDelay);
             BroadcastData(crystal);
         }
         if (_gameTiming.CurTime > crystal.Comp.NextDamageStationAnnouncement)

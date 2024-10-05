@@ -27,17 +27,17 @@
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
             <BoxContainer Name="UpperDataContainer" MinHeight="256" HorizontalExpand="True" Orientation="Horizontal" Margin="4 4">
-                <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MaxWidth="512"  MouseFilter="Stop" MinWidth ="384"/>
-                <BoxContainer HorizontalExpand="True" Orientation="Vertical" MaxWidth="256" MinWidth ="192">
-                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
-                    <RichTextLabel Name="NameLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
-                    <RichTextLabel Name="IntegrityLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
-                    <RichTextLabel Name="PressureLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
-                    <RichTextLabel Name="TemperatureLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
-                    <RichTextLabel Name="MatterLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192"/>
-                    <RichTextLabel Name="InternalEnergyLabel" HorizontalExpand="True" MaxWidth="256" MinWidth ="192" />
-                    <RichTextLabel Name="DelamStatus" HorizontalExpand="True" MaxWidth="256" MinWidth ="192" />
-                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="256" MinWidth ="192" />
+                <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MaxWidth="512"  MouseFilter="Stop" MinWidth ="320"/>
+                <BoxContainer HorizontalExpand="True" HorizontalAlignment="Center" Orientation="Vertical" MaxWidth="320" MinWidth ="192">
+                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="NameLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="IntegrityLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="PressureLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="TemperatureLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="MatterLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="InternalEnergyLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192" />
+                    <RichTextLabel Name="DelamStatus" HorizontalExpand="True" MaxWidth="320" MinWidth ="192" />
+                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="320" MinWidth ="192" />
                 </BoxContainer>
                 <!-- Here go numberic Data -->
                 </BoxContainer>

@@ -4,7 +4,9 @@ using Content.Server.SS220.SuperMatter;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Atmos;
 using Content.Shared.CartridgeLoader;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.SuperMatter.Ui;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 // TODO: cache here data about SM in dictionary of uid
@@ -12,10 +14,14 @@ namespace Content.Server.SS220.SuperMatterCrystal;
 // TODO: added: Fun!
 public sealed partial class SuperMatterSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
+
+    private float _broadcastDelay;
+
     // TODO add shifts counter for not delaminate
     private void InitializeDatabase()
     {
-        SubscribeLocalEvent<SuperMatterObserverReceiverComponent, CartridgeUiReadyEvent>(OnCartridgeReceiverUIOpened);
+        Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, OnBroadcastDelayChanged, true);
     }
     public void BroadcastData(Entity<SuperMatterComponent> crystal)
     {
@@ -52,12 +58,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
         comp.PressureAccumulator = 0;
         ZeroGasMolesAccumulator(comp);
     }
-    private void OnCartridgeReceiverUIOpened(Entity<SuperMatterObserverReceiverComponent> entity, ref CartridgeUiReadyEvent args)
-    {
-        // if (!_userInterface.HasUi(entity, args.UiKey))
-        //     return;
-
-    }
 
     private void AddGasesToAccumulator(SuperMatterComponent smComp, GasMixture gasMixture)
     {
@@ -79,5 +79,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         {
             smComp.AccumulatedGasesMoles[gas] = 0;
         }
+    }
+    private void OnBroadcastDelayChanged(float delay)
+    {
+        _broadcastDelay = delay;
     }
 }

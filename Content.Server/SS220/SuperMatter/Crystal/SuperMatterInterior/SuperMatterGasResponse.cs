@@ -36,9 +36,12 @@ public static class SuperMatterGasResponse
         }
         return resultFlatInfluence;
     }
-    /// <summary> </summary>
+    /// <summary>
+    /// Checks all entrees in <see cref="SuperMatterGasInteraction.EnergyEfficiencyChangerGases"/>
+    /// looks if we have it Mixture and calculate their efficiency
+    /// </summary>
     /// <returns> Value from -0.5 to 1 </returns>
-    public static float GetGasInfluenceReleaseEnergyEfficiency(SuperMatterComponent smComp, GasMixture gasMixture)
+    public static float GetGasInfluenceReleaseEnergyEfficiency(GasMixture gasMixture)
     {
         var resultEfficiency = 0f;
         var affectGases = SuperMatterGasInteraction.EnergyEfficiencyChangerGases;
@@ -53,16 +56,19 @@ public static class SuperMatterGasResponse
         return MathF.Max(Math.Min(resultEfficiency, 1f), -0.5f);
     }
 
-    /// <summary> Standalone method for easier  </summary>
+    /// <summary> Standalone method for getting molar part  </summary>
     private static float GetGasInfluenceEfficiency(Gas gasId, GasMixture gasMixture)
     {
-        return gasMixture.GetMoles(gasId) / (gasMixture.TotalMoles + 0.01f);
+        if (gasMixture.TotalMoles == 0)
+            return 0;
+        return gasMixture.GetMoles(gasId) / gasMixture.TotalMoles;
     }
     private static float GetNonLinierGasInfluenceEfficiencyFunction(Gas gasId, GasMixture gasMixture, float optimalRatio)
     {
         var maxValue = MathF.Pow(optimalRatio, 2) * MathF.Exp(-2);
         var optParam = 2 / optimalRatio;
-        var normalizedMoles = gasMixture.GetMoles(gasId) / (gasMixture.TotalMoles + 0.01f);
+        // same function soo its okay
+        var normalizedMoles = GetGasInfluenceEfficiency(gasId, gasMixture);
 
         return MathF.Pow(normalizedMoles, 2) * MathF.Exp(-optParam * normalizedMoles) / maxValue;
     }

@@ -10,7 +10,6 @@ public sealed class Pseudo3DColoredView : Plot
 {
     public PlotColormap Colormap = Colormaps.GoodBad;
 
-    // SM_TODO: after building divide to public/private zones
     public Vector2? Offsets
     {
         get => _offsets;
@@ -20,8 +19,6 @@ public sealed class Pseudo3DColoredView : Plot
             MakeMeshgrid();
         }
     }
-    private Vector2? _offsets;
-
     public Vector2? Sizes
     {
         get => _sizes;
@@ -31,17 +28,18 @@ public sealed class Pseudo3DColoredView : Plot
             MakeMeshgrid();
         }
     }
-    private Vector2? _sizes;
-
     public Vector2? Steps
     {
         get => _steps;
         set
         {
-            _offsets = value;
+            _steps = value;
             MakeMeshgrid();
         }
     }
+
+    private Vector2? _offsets;
+    private Vector2? _sizes;
     private Vector2? _steps;
 
     private Color2DPointView? _color2DPoint;

@@ -41,7 +41,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private const float MaxDamagePerSecond = 0.5f;
     private const float MaxRegenerationPerSecond = 1.2f;
-    /// <summary> Based lie, negative damage = heal, no exception will thrown </summary>
+    /// <summary> Based lie: negative damage = heal, no exception will thrown </summary>
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
     private bool TryImplementIntegrityDamage(Entity<SuperMatterComponent> entity)
     {
@@ -49,15 +49,16 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var resultIntegrityDamage = Math.Clamp(smComp.IntegrityDamageAccumulator, -MaxRegenerationPerSecond,
                                             MaxDamagePerSecond * GetIntegrityDamageCoefficient(smComp.Integrity));
 
-        if (smComp.Integrity - resultIntegrityDamage < 0f)
+        if (smComp.Integrity - resultIntegrityDamage >= SuperMatterComponent.MaximumIntegrity
+            && smComp.Integrity == SuperMatterComponent.MaximumIntegrity)
+            return true;
+
+        if (smComp.Integrity - resultIntegrityDamage < SuperMatterComponent.MinimumIntegrity)
             return false;
 
         if (smComp.Integrity - resultIntegrityDamage < 100f)
             smComp.Integrity -= resultIntegrityDamage;
-        if (smComp.Integrity == 100f)
-            return true;
         // SM_TODO: check if it works correct /\ \/
-        smComp.Integrity = 100f;
         var ev = new SuperMatterIntegrityChanged(smComp.Integrity);
         RaiseLocalEvent(uid, ev);
         return true;
@@ -77,12 +78,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// <summary>
     /// Just slowes down destroying the crystal to make effect of "last seconds"
     /// </summary>
+    private const float StartIntegrityDecrease = 50f;
+    private const float DepthOfCoefficient = 0.75f;
     private float GetIntegrityDamageCoefficient(float integrity)
     {
         var coeff = 1f;
-        if (integrity > 50f)
-            return coeff;
-        coeff = 0.25f + 0.75f * integrity / 50f;
+        if (integrity < StartIntegrityDecrease)
+            coeff -= DepthOfCoefficient * (1 - integrity / StartIntegrityDecrease);
         return coeff;
     }
 }

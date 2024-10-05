@@ -66,7 +66,7 @@
   - type: RadiationSource
     enabled: true
     intensity: 2
-    slope: 1.5
+    slope: 2
   - type: LightningArcShooter
     enabled: false
     shootRange: 3

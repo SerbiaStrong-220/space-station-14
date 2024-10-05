@@ -2,18 +2,22 @@
 using Robust.Shared.Audio;
 using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 
 namespace Content.Server.SS220.SuperMatterCrystal.Components;
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class SuperMatterComponent : Component
 {
+    // SM constants
+    public const float MaximumIntegrity = 100f;
+    public const float MinimumIntegrity = 0.01f;
+    public const float MinimumMatter = 100f;
+    public const float MinimumInternalEnergy = 2120f;
+
+    // State flags
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Activated = false;
-    /// <summary> Super flag for freezing all SM interaction.
-    /// Only changing it to true will invoke base SM logic </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public bool DisabledByAdmin = false;
     [ViewVariables(VVAccess.ReadOnly)]
     public bool IsDelaminate = false;
 
@@ -35,7 +39,10 @@ public sealed partial class SuperMatterComponent : Component
     public float AccumulatedZapEnergy = 0f;
     [ViewVariables(VVAccess.ReadOnly)]
     public float AccumulatedRadiationEnergy = 0f;
-    [ViewVariables(VVAccess.ReadOnly)]
+    /// <summary>
+    /// Admins, you can use this to stop delamination just make it like 100 or more.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
     public float AccumulatedRegenerationDelamination = 0f;
     [ViewVariables(VVAccess.ReadOnly)]
     public float NextRegenerationThreshold = 0f;
@@ -55,21 +62,77 @@ public sealed partial class SuperMatterComponent : Component
     [AutoPausedField]
     public TimeSpan TimeOfDelamination = default!;
 
-
     // SM params
+    /// <summary>
+    /// This used to init roundstart value in dimension less units
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public float InitMatter = 200f;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public float Integrity = 100f;
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float Temperature = Atmospherics.T20C;
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public float Matter = 200 * SuperMatterSystem.MatterNondimensionalization; // To wrap it in own VAR
-    /// <summary> Will be set in CompInit by system</summary>
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float InternalEnergy = 0f;
+    public float Integrity
+    {
+        get => _integrity;
+        set
+        {
+            _integrity = value switch
+            {
+                < MinimumIntegrity => MinimumIntegrity,
+                > MaximumIntegrity => MaximumIntegrity,
+                _ => value
+            };
+        }
+    }
+    [DataField]
+    public float Temperature
+    {
+        get => _temperature;
+        set
+        {
+            DebugTools.Assert(float.IsFinite(value));
+            _temperature = value switch
+            {
+                < Atmospherics.TCMB => Atmospherics.TCMB,
+                > Atmospherics.Tmax => Atmospherics.Tmax,
+                _ => value
+            };
+        }
+    }
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float Matter
+    {
+        get => _matter;
+        set
+        {
+            DebugTools.Assert(float.IsFinite(value));
+            _matter = value switch
+            {
+                < MinimumMatter => MinimumMatter,
+                _ => value
+            };
+        }
+    }
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float InternalEnergy
+    {
+        get => _internalEnergy;
+        set
+        {
+            DebugTools.Assert(float.IsFinite(value));
+            _internalEnergy = value switch
+            {
+                < MinimumInternalEnergy => MinimumInternalEnergy,
+                _ => value
+            };
+        }
+    }
+
+    private float _integrity = 100f;
+    private float _temperature = Atmospherics.T20C;
+    private float _matter;
+    private float _internalEnergy;
 
     // ProtoId Sector
-
     [DataField]
     public EntProtoId ConsumeResultEntityPrototype = "Ash";
     /// <summary> For future realization </summary>
@@ -83,11 +146,12 @@ public sealed partial class SuperMatterComponent : Component
     public string DelaminateAlertLevel = "yellow";
     [DataField]
     public string CrystalDestroyAlertLevel = "delta";
+    [DataField]
+    public List<string> UnchangeableAlertLevelList = ["delta", "gamma", "epsilon"];
 
     public string? PreviousAlertLevel;
 
     // Audio Sector
-
     [DataField(required: true)]
     public SoundCollectionSpecifier ConsumeSound;
     [DataField]

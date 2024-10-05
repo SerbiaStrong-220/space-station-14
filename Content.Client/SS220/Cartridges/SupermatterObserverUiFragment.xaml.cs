@@ -17,30 +17,35 @@ namespace Content.Client.SS220.Cartridges;
 public sealed partial class SupermatterObserverUiFragment : BoxContainer
 {
     [Dependency] private readonly ILocalizationManager _localization = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
+
     public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
     public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;
     public event Action<BaseButton.ButtonEventArgs>? OnRefreshButton;
+
     public SuperMatterObserverComponent? Observer;
     public int? CrystalKey;
+
     public const int MAX_DATA_LENGTH = 120;
+
     public SupermatterObserverUiFragment()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
         RefreshButton.IconTexture = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/refresh.svg.192dpi.png"));
         RefreshButton.IconScale = new Vector2(0.3f); //convert 192px to 32px... but weird
         RefreshButton.OnPressed += args =>
             OnRefreshButton?.Invoke(args);
+
         PlotValueOverTime.SetLabels(_localization.GetString("smObserver-plotXLabel-integrity"), _localization.GetString("smObserver-plotYLabel-integrity"), _localization.GetString("smObserver-plotTitle-integrity"));
-        ColorState.MakeMeshgrid((1, 100, 25), (1, 100, 100));
+
         ColorState.EvalFunctionOnMeshgrid(GetIntegrityDamageMap);
         ColorState.SetLabels(_localization.GetString("smObserver-plotXLabel-colorState"), _localization.GetString("smObserver-plotYLabel-colorState"), _localization.GetString("smObserver-plotTitle-colorState"));
     }
 
     private float GetIntegrityDamageMap(float matter, float internalEnergy)
     {
-        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction( internalEnergy
+        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(internalEnergy
                 - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
             matter / SuperMatterFunctions.MatterNondimensionalization);
     }

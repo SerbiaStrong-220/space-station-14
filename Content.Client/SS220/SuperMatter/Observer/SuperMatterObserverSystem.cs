@@ -24,6 +24,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     // 120 like 2 minutes with update rate 1 sec
     public const int MAX_CACHED_AMOUNT = 120;
+
     private const float RandomEventChance = 0.02f;
 
     private float _updateDelay = 1f;
@@ -181,27 +182,28 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     }
     private bool TrySendToUIState(EntityUid uid, BoundUserInterfaceState state)
     {
-        if (_userInterface.TryGetOpenUi(uid, SuperMatterObserverUiKey.Key, out var bui))
+        if (_userInterface.TryGetOpenUi(uid, SuperMatterObserverUiKey.Key, out var bui)
+            && bui is SuperMatterObserverBUI smBui)
         {
-            ((SuperMatterObserverBUI)bui)?.DirectUpdateState(state);
+            smBui?.DirectUpdateState(state);
             return true;
         }
+
         if (TryComp<UIFragmentComponent>(uid, out var uiFragment)
-            && uiFragment.Ui != null
-            && uiFragment.Ui.GetType() == typeof(SupermatterObserverUi))
+            && uiFragment.Ui is SupermatterObserverUi smOUi)
         {
             switch (state)
             {
                 case SuperMatterObserverInitState:
-                    ((SupermatterObserverUi)uiFragment.Ui)?.UpdateState(state);
+                    smOUi?.UpdateState(state);
                     return true;
                 case SuperMatterObserverUpdateState:
-                    if (!((SupermatterObserverUi)uiFragment.Ui).IsInitd)
+                    if (!smOUi.IsInitd)
                     {
                         _smReceiverUIOwnersToInit.Add(uid);
                         return false;
                     }
-                    ((SupermatterObserverUi)uiFragment.Ui)?.UpdateState(state);
+                    smOUi?.UpdateState(state);
                     return true;
             }
         }

@@ -50,8 +50,8 @@ public sealed partial class SuperMatterObserverGasBar : Control
     {
         FillingBar.SetAsRatio(ratio);
 
-        var builder = new StringBuilder(LocalizedGasName);
-        builder.AppendJoin(" ", [ratio.ToString("N2"), "%"]);
+        var builder = new StringBuilder();
+        builder.AppendJoin(" ", [LocalizedGasName, (ratio * 100f).ToString("N2"), "%"]);
         BarLabel.Text = builder.ToString();
     }
 

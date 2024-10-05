@@ -25,7 +25,9 @@ public sealed class SuperMatterStateUpdate(
                                             (bool Delaminates, TimeSpan ETOfDelamination) delaminate
                                             ) : EntityEventArgs
 {
-    // Id of SM crystal, uses for handling many SMs
+    /// <summary>
+    /// Id of SM crystal, uses for handling many SMs. Its server id, for client it false.
+    /// </summary>
     public int Id { get; } = id;
     public string Name { get; } = name;
     public NetEntity? SMGridId { get; } = smGridId;

@@ -8,15 +8,5 @@ namespace Content.Server.SS220.SuperMatterCrystal;
 public sealed partial class SuperMatterSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSoundSystem = default!;
-
-    private void InitializeVisualizer()
-    {
-        // SM_TODO add sound specific here.
-    }
-
-    private void UpdateSprite(Entity<SuperMatterComponent> entity)
-    {
-
-    }
+    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
 }

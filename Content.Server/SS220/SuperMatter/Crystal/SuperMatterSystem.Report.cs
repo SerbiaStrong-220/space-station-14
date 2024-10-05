@@ -17,6 +17,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+
     private ProtoId<RadioChannelPrototype> _engineerRadio = "Engineering";
     private ProtoId<RadioChannelPrototype> _commonRadio = "Common";
     private char _engineerRadioKey = '\0';
@@ -37,7 +38,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var localePath = GetLocalePath(announceType);
         var message = Loc.GetString(localePath, ("integrity", integrity.ToString("n2")));
         if (TryGetChannelKey(announceType, out var channelKey))
-            message = channelKey?.ToString() + " " + message;
+            message = $"{channelKey} {message}";
         RadioAnnouncement(crystal.Owner, message);
     }
     public void StationAnnounceIntegrity(Entity<SuperMatterComponent> crystal, AnnounceIntegrityTypeEnum announceType)
@@ -62,8 +63,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private void SendAdminChatAlert(Entity<SuperMatterComponent> crystal, string msg, string? whom = null)
     {
         var stringBuilder = new StringBuilder($"SuperMatter {EntityManager.ToPrettyString(crystal)} Alert! ");
+        stringBuilder.Append(msg);
         if (whom != null)
-            string.Join($" caused by {whom}.");
+            stringBuilder.Append($" caused by {whom}.");
         _chatManager.SendAdminAlert(stringBuilder.ToString());
     }
     private void SendStationAnnouncement(EntityUid uid, string message, string? sender = null)
@@ -73,14 +75,18 @@ public sealed partial class SuperMatterSystem : EntitySystem
         _chatSystem.DispatchStationAnnouncement(uid, message, localizedSender, colorOverride: Color.FromHex("#deb63d"));
         return;
     }
-    private bool TryChangeStationAlertLevel(EntityUid crystalUid, string alertLevel, [NotNullWhen(true)] out string? previousAlertLevel, bool force = true, bool locked = true)
+    private bool TryChangeStationAlertLevel(Entity<SuperMatterComponent> crystal, string alertLevel, [NotNullWhen(true)] out string? previousAlertLevel, bool force = true, bool locked = true)
     {
         previousAlertLevel = null;
-        var stationUid = _station.GetStationInMap(Transform(crystalUid).MapID);
+        var stationUid = _station.GetStationInMap(Transform(crystal.Owner).MapID);
         if (!stationUid.HasValue)
             return false;
 
         previousAlertLevel = _alertLevel.GetLevel(stationUid.Value);
+
+        if (crystal.Comp.UnchangeableAlertLevelList.Contains(previousAlertLevel))
+            return false;
+
         _alertLevel.SetLevel(stationUid.Value, alertLevel, true, true, force, locked);
         return true;
     }
