@@ -51,10 +51,9 @@ public sealed class KeenHearingOverlay : IgnoreLightVisionOverlay
         if (gridUid.HasValue)
             rotation = _transformSystem.GetWorldRotation(gridUid.Value);
 
-        // we need to offset it because it give us center center position, but we need bottom lefts
-        // Tajaran_TODO check if it works okay
-        // kinda kringe bu as soon as it round we dont differ it rotation
+
         handle.SetTransform(position, rotation);
+        // we need to offset it because it give us center center position, but we need bottom lefts
         handle.DrawTexture(_texture, new System.Numerics.Vector2(-0.5f));
     }
 }

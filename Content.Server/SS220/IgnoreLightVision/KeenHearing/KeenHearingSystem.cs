@@ -10,7 +10,6 @@ namespace Content.Server.SS220.IgnoreLightVision.KeenHearing;
 /// <summary>
 /// Handles enabling of KeenHearing by action
 /// </summary>
-/// //Tajaran_TODO: make it work
 public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<KeenHearingComponent>
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
