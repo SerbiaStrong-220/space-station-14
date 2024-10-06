@@ -180,7 +180,7 @@
 - type: randomHumanoidSettings
   id: EbentSpaceWarsOperative
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, , Tajaran ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Tajaran ]
   components:
   - type: Loadout
     prototypes: [ EbentSpaceWarsOperativeGear ]

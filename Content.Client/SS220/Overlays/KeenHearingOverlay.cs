@@ -3,11 +3,8 @@
 using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
-using Content.Client.Humanoid;
 using Robust.Shared.Utility;
-using Robust.Client.Animations;
 using Robust.Shared.Timing;
-using Microsoft.Build.Framework;
 
 namespace Content.Client.SS220.Overlays;
 

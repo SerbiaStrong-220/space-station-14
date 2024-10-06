@@ -13,7 +13,7 @@
   - chat-speech-verb-vulpin-2
   - chat-speech-verb-vulpin-3
 
-  - type: speechVerb
+- type: speechVerb
   id: Tajaran
   name: chat-speech-verb-name-tajaran
   speechVerbStrings:
