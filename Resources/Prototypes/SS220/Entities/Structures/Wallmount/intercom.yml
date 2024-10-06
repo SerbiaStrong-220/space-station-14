@@ -1,0 +1,13 @@
+- type: entity
+  id: IntercomLaw
+  parent: BaseIntercomSecure
+  suffix: Law
+  description: An intercom. It's been reinforced with metal.
+  components:
+  - type: ContainerFill
+    containers:
+      board:
+      - IntercomElectronics
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyLaw

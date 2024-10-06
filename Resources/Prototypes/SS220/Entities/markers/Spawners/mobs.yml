@@ -22,4 +22,4 @@
       - state: ai
   - type: ConditionalSpawner
     prototypes:
-      - MobAlbinoCrocodile
+      - MobStevenCrocodileGhostRole

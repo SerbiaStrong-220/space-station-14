@@ -3,7 +3,7 @@
   id: LockerFillMagistrate
   table: !type:AllSelector
     children:
-    - id: ClothingHeadsetAltLaw
+    - id: ClothingHeadsetAltMagistrate
     - id: DoorRemoteLaw
     - id: RubberStampMagistrate
     - id: ClothingOuterRobesJudge

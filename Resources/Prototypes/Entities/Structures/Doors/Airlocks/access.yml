@@ -11,7 +11,7 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: AirlockServiceLocked
+  parent: AirlockLawyerLocked #SS220-Law Department
   id: AirlockLawyerLocked
   suffix: Lawyer, Locked
   components:
@@ -423,7 +423,7 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: AirlockServiceGlassLocked
+  parent: AirlockLawyerGlassLocked #SS220 Law Department
   id: AirlockLawyerGlassLocked
   suffix: Lawyer, Locked
   components:
