@@ -50,7 +50,7 @@
   - type: Butcherable
     butcheringType: Spike
     spawned:
-      - id: FoodMeat #tajaran_TODO
+      - id: FoodMeat
         amount: 5
   - type: Emoting
     chatEmoteCooldown: 5.0
