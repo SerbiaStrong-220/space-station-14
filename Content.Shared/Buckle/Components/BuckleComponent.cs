@@ -86,6 +86,11 @@ public sealed partial class BuckleComponent : Component
     /// Used for client rendering
     /// </summary>
     [ViewVariables] public int? OriginalDrawDepth;
+
+    //SS220 Change DrawDepth on buckle begin
+    [ViewVariables]
+    public int? DrawDepthBeforeBuckle;
+    //SS220 Change DrawDepth on buckle end
 }
 
 public sealed partial class UnbuckleAlertEvent : BaseAlertEvent;
@@ -169,5 +174,6 @@ public readonly record struct UnbuckledEvent(Entity<StrapComponent> Strap, Entit
 [Serializable, NetSerializable]
 public enum BuckleVisuals
 {
-    Buckled
+    Buckled,
+    DrawDepth //SS220 Change DrawDepth on buckle
 }

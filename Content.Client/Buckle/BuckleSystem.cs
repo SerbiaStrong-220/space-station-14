@@ -67,6 +67,22 @@ internal sealed class BuckleSystem : SharedBuckleSystem
         if (!TryComp<RotationVisualsComponent>(uid, out var rotVisuals))
             return;
 
+        //SS220 Change DrawDepth on buckle begin
+        if (args.Sprite != null)
+        {
+            if (Appearance.TryGetData<int>(uid, BuckleVisuals.DrawDepth, out var drawDepth, args.Component))
+            {
+                component.DrawDepthBeforeBuckle ??= args.Sprite.DrawDepth;
+                args.Sprite.DrawDepth = drawDepth;
+            }
+            else if (component.DrawDepthBeforeBuckle is { } drawDepthBeforeBuckle)
+            {
+                args.Sprite.DrawDepth = drawDepthBeforeBuckle;
+                component.DrawDepthBeforeBuckle = null;
+            }
+        }
+        //SS220 Change DrawDepth on buckle end
+
         if (!Appearance.TryGetData<bool>(uid, BuckleVisuals.Buckled, out var buckled, args.Component) ||
             !buckled ||
             args.Sprite == null)
