@@ -14,33 +14,37 @@
   - CigPackBlack
   - CigarCase
   - CigarGold
-  - ClothingNeckLGBTPin
-  - ClothingNeckAromanticPin
-  - ClothingNeckAsexualPin
-  - ClothingNeckBisexualPin
-  - ClothingNeckIntersexPin
-  - ClothingNeckLesbianPin
-  - ClothingNeckNonBinaryPin
-  - ClothingNeckPansexualPin
-  - ClothingNeckTransPin
-  - ClothingNeckAutismPin
-  - ClothingNeckGoldAutismPin
+
+  # Cleaning-trinkets-220-begin
+  #- ClothingNeckLGBTPin
+  #- ClothingNeckAromanticPin
+  #- ClothingNeckAsexualPin
+  #- ClothingNeckBisexualPin
+  #- ClothingNeckIntersexPin
+  #- ClothingNeckLesbianPin
+  #- ClothingNeckNonBinaryPin
+  #- ClothingNeckPansexualPin
+  #- ClothingNeckTransPin
+  #- ClothingNeckAutismPin
+  #- ClothingNeckGoldAutismPin
+  # Cleaning-trinkets-220-end
+
+  - ClothingNeckUSSSPPin # SS220 passenger pin
+
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
   - ClothingFootWraps
-  # SS220 Hand/FootWraps end
-  # SS220-Hand/FootWraps-More-Color-Begin
-  - ClothingHandWrapsYellow
-  - ClothingFootWrapsYellow
-  - ClothingHandWrapsGreen
-  - ClothingFootWrapsGreen
-  - ClothingHandWrapsRed
-  - ClothingFootWrapsRed
-  - ClothingHandWrapsBlue
-  - ClothingFootWrapsBlue
+  #- ClothingHandWrapsYellow
+  #- ClothingFootWrapsYellow
+  #- ClothingHandWrapsGreen
+  #- ClothingFootWrapsGreen
+  #- ClothingHandWrapsRed
+  #- ClothingFootWrapsRed
+  #- ClothingHandWrapsBlue
+  #- ClothingFootWrapsBlue
   - ClothingHandWrapsBlack
   - ClothingFootWrapsBlack
-  # SS220-Hand/FootWraps-More-Color-End
+  # SS220-Hand/FootWraps-End
 
 
 - type: loadoutGroup

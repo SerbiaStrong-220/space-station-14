@@ -8,7 +8,17 @@
       role: JobPassenger
       time: 108000 # 30 hrs
 
+- type: loadoutEffectGroup
+  id: PassengerNeckPin
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 720000 # 200 hrs
+
 # Jumpsuit
+
 - type: loadout
   id: PassengerJumpsuitTurtleneck
   effects:
@@ -40,3 +50,14 @@
     proto: PassengerTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorGrey
+
+# Neck
+
+- type: loadout
+  id: ClothingNeckUSSSPPin
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PassengerNeckPin
+  storage:
+    back:
+    - ClothingNeckUSSPPin
