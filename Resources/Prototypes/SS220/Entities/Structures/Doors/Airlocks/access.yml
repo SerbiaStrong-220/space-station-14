@@ -41,25 +41,3 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsMagistrate ]
-
-- type: entity
-  parent: AirlockGlass
-  id: AirlockLawyerGlassLocked
-  suffix: Lawyer, Locked
-  components:
-  - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsLawyer ]
-
-- type: entity
-  parent: Airlock
-  id: AirlockLawyerLocked
-  suffix: Lawyer, Locked
-  components:
-  - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/law.rsi
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsLawyer ]

@@ -11,10 +11,12 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: AirlockLawyerLocked #SS220-Law Department
+  parent: Airlock #SS220-Law Department
   id: AirlockLawyerLocked
   suffix: Lawyer, Locked
   components:
+  - type: Sprite #SS220-Law Department
+    sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi #SS220-Law Department
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsLawyer ]
@@ -423,10 +425,12 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: AirlockLawyerGlassLocked #SS220 Law Department
+  parent: Airlock #SS220 Law Department
   id: AirlockLawyerGlassLocked
   suffix: Lawyer, Locked
   components:
+  - type: Sprite #SS220 Law Department
+    sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi #SS220 Law Department
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsLawyer ]
