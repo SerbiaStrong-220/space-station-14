@@ -27,6 +27,8 @@ loadout-group-hop-jumpsuit = Глава персонала, комбинезон
 loadout-group-hop-neck = Глава персонала, шея
 loadout-group-hop-backpack = Глава персонала, рюкзак
 loadout-group-hop-outerclothing = Глава персонала, верхняя одежда
+loadout-group-hop-headset = Глава персонала, гарнитура
+
 # Civilian
 loadout-group-passenger-jumpsuit = Пассажир, комбинезон
 loadout-group-passenger-mask = Пассажир, маска
@@ -79,6 +81,7 @@ loadout-group-quartermaster-backpack = Квартирмейстер, рюкза�
 loadout-group-quartermaster-neck = Квартирмейстер, шея
 loadout-group-quartermaster-outerclothing = Квартирмейстер, верхняя одежда
 loadout-group-quartermaster-shoes = Квартирмейстер, обувь
+loadout-group-quartermaster-headset = Квартирмейстер, гарнитура
 loadout-group-cargo-technician-head = Грузчик, голова
 loadout-group-cargo-technician-jumpsuit = Грузчик, комбинезон
 loadout-group-cargo-technician-backpack = Грузчик, рюкзак
@@ -113,6 +116,7 @@ loadout-group-research-director-backpack = Научный руководител
 loadout-group-research-director-outerclothing = Научный руководитель, верхняя одежда
 loadout-group-research-director-shoes = Научный руководитель, обувь
 loadout-group-research-director-pda = Научный руководитель, ID
+loadout-group-research-director-headset = Научный руководитель, гарнитура
 loadout-group-scientist-head = Учёный, голова
 loadout-group-scientist-neck = Учёный, шея
 loadout-group-scientist-jumpsuit = Учёный, комбинезон

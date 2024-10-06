@@ -78,3 +78,15 @@
   equipment:
     head: ClothingHeadHatBeretCE
 
+# Headset
+- type: loadout
+  id: ChiefEngineerHeadset
+  equipment:
+    ears: ClothingHeadsetCE
+
+- type: loadout
+  id: ChiefEngineerHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltEngineering
+
+

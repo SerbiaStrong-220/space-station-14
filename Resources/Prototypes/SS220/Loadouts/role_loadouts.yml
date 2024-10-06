@@ -11,7 +11,8 @@
   - IAANeck
   - IAAJumpsuit
   - IAAOuterclothing
-  - IAABackpacks #ss220 iaa loadout fix
+  - IAABackpacks #ss220 iaa loadout fix\
+  - IAAHeadset
   - Survival
   - Trinkets
   - Gloves
@@ -24,6 +25,7 @@
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
+  - BlueShieldHeadset
   - SecurityBelt
   - CommonBackpack
   - Survival
