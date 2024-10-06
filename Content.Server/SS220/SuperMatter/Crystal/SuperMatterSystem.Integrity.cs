@@ -58,7 +58,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         if (smComp.Integrity - resultIntegrityDamage < 100f)
             smComp.Integrity -= resultIntegrityDamage;
-        // SM_TODO: check if it works correct /\ \/
+
         var ev = new SuperMatterIntegrityChanged(smComp.Integrity);
         RaiseLocalEvent(uid, ev);
         return true;

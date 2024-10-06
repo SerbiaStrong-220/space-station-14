@@ -103,9 +103,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
         {
             var gasMolesInReact = gasMixture.GetMoles(gasId)
                                     * GetMolesReactionEfficiency(smComp.Temperature, gasMixture.Pressure);
-            // SM_TODO: thought of time going here
+
             resultAdditionalMatter += gasMolesInReact * gasesToMatterConvertRatio[gasId];
-            // SM_TODO: check the sign
+
             if (deleteUsedGases)
                 gasMixture.AdjustMoles(gasId, -gasMolesInReact * frameTime);
         }

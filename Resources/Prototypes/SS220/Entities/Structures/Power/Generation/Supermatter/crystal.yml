@@ -116,6 +116,8 @@
   - type: WarpPoint
     follow: true
     location: SuperMatterCrystal
+  - type: GuideHelp
+    guides: [ Supermatter, Power ]
 
 - type: randomVoicesList
   id: SuperMatterVoices
