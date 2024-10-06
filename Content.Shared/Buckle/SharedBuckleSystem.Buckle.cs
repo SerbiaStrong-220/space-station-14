@@ -416,6 +416,13 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(strap, StrapVisuals.State, true);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, true);
 
+        //SS220 Change DrawDepth on buckle begin
+        if (strap.Comp.DrawDepth is { } drawDepth)
+            Appearance.SetData(buckle, BuckleVisuals.DrawDepth, drawDepth);
+        else
+            Appearance.RemoveData(buckle, BuckleVisuals.DrawDepth);
+        //SS220 Change DrawDepth on buckle end
+
         _rotationVisuals.SetHorizontalAngle(buckle.Owner, strap.Comp.Rotation);
 
         var xform = Transform(buckle);
@@ -552,6 +559,7 @@ public abstract partial class SharedBuckleSystem
         _rotationVisuals.ResetHorizontalAngle(buckle.Owner);
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
+        Appearance.RemoveData(buckle, BuckleVisuals.DrawDepth); //SS220 Change DrawDepth on buckle
 
         if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
             _standing.Down(buckle, playSound: false);

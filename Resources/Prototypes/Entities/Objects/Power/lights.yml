@@ -129,7 +129,7 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash #ss220 light-bulbs-trash-fix
+    - Trash
 
 - type: entity
   parent: BaseLightbulb
@@ -148,7 +148,7 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash #ss220 light-bulbs-trash-fix
+    - Trash
 
 - type: entity
   parent: LightBulb
@@ -193,7 +193,7 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash #ss220 light-bulbs-trash-fix
+    - Trash
 
 - type: entity
   parent: BaseLightTube
