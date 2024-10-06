@@ -15,7 +15,7 @@
 - type: entity
   parent: BalloonCommander
   id: BalloonCommanderUnfolded
-  hideSpawnMenu: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Foldable
     folded: false

@@ -43,7 +43,7 @@
   - type: NameIdentifier
     group: GenericNumber
   - type: TTS
-    voicePrototypeId: SuperMatterVoices
+    randomVoicesList: SuperMatterVoices
   - type: AmbientSound
     range: 5
     volume: 0
