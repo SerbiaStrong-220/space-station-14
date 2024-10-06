@@ -57,7 +57,7 @@
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 6, 6 ]
             ResearchAssistant: [ 4, 4 ]
-            Borg: [ 2, 2 ]
+            Borg: [ 3, 3 ]
             SeniorResearcher: [ 1, 1 ]
             #Service
             Bartender: [ 2, 2 ]
