@@ -18,7 +18,10 @@ reagent-desc-bananadine = A mild psychedelic that is found in small traces in ba
 
 reagent-name-nicotine = nicotine
 reagent-desc-nicotine = Dangerous and highly addictive, but that's what the propaganda says.
-
+#SS220 Cigarettes begin
+reagent-name-neonicotinoid = neonicotinoid
+reagent-desc-neonicotinoid = Less dangerous form of nicotine, still kills plants.
+#SS220 Cigarettes end
 reagent-name-impedrezene = impedrezene
 reagent-desc-impedrezene = A narcotic that impedes one's ability by slowing down the higher brain cell functions.
 

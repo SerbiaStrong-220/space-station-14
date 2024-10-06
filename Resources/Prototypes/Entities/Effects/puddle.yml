@@ -126,13 +126,6 @@
     bodyType: Static
   - type: Fixtures
     fixtures:
-      #ss220 puddle is anchorable start
-      ## Context / examine fixture
-      #fix1:
-        #shape:
-          #!type:PhysShapeCircle
-          #radius: 0.25
-      #ss220 puddle is anchorable end
       slipFixture:
         shape:
           !type:PhysShapeAabb

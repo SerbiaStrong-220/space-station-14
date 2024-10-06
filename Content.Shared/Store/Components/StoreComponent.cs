@@ -86,6 +86,15 @@ public sealed partial class StoreComponent : Component
     [DataField]
     public EntityUid? StartingMap;
 
+    //SS220-insert-currency-doafter begin
+    /// <summary>
+    /// How much time needed for inserting currency.
+    /// If null, then the insertion is instant.
+    /// </summary>
+    [ViewVariables, DataField]
+    public TimeSpan? CurrencyInsertTime;
+    //SS220-insert-currency-doafter end
+
     #region audio
     /// <summary>
     /// The sound played to the buyer when a purchase is succesfully made.

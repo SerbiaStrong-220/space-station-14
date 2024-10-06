@@ -23,7 +23,6 @@
   id: ClothingBackpackCentCommFilled
   name: кожаная сумка
   description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
-#  noSpawn: True #Зачем?..
   components:
     - type: StorageFill
       contents:
@@ -51,7 +50,7 @@
     - 0,0,6,3
 
 - type: entity
-  noSpawn: false
+
   parent: ClothingBackSatchelSRT
   id: ClothingBackSatchelSRTFilled
   suffix: Заполненный

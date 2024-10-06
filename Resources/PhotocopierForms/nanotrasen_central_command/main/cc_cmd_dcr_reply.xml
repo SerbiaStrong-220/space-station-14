@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>cc_cmd_dcr_reply</FormId>
+  <PrototypeId>PaperNtFormCc</PrototypeId>
+  <EntityName>Форма НТ-ЦК-КОМ-ОТВ</EntityName>
+  <PhotocopierTitle>Ответ на запрос</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-ОТВ[/bold]
+[head=2]Ответ на запрос[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Уважаемый (Должность) станции номер №XXX, (ФИО)!
+В связи с полученным нами запросом, предоставляем следующий ответ:
+
+Офицер Центрального Командования: (ПОЛНОЕ ИМЯ)
+[italic]Место для печати[/italic]]]></Content>
+</Form>

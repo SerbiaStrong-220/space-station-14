@@ -846,8 +846,8 @@
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
   description: uplink-binary-translator-key-desc
-  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: rd_label }
-  productEntity: EncryptionKeyBinary
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: borg_label }
+  productEntity: EncryptionKeyBinarySyndicate
   cost:
     Telecrystal: 1
   categories:
@@ -1078,10 +1078,48 @@
   categories:
   - UplinkDisruption
   conditions:
-    - !type:BuyerWhitelistCondition
+  - !type:BuyerWhitelistCondition
       blacklist:
         components:
           - SurplusBundle
+
+#   SS 220 -  Antimov Laws hided from uplink - begin
+# - type: listing
+#   id: UplinkAntimovCircuitBoard
+#   name: uplink-antimov-law-name
+#   description: uplink-antimov-law-desc
+#   productEntity: AntimovCircuitBoard
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 10
+#   cost:
+#     Telecrystal: 14
+#   categories:
+#   - UplinkDisruption
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#      blacklist:
+#        tags:
+#        - NukeOpsUplink
+#   SS 220 -  Antimov Laws hided from uplink - end
+
+- type: listing
+  id: UplinkNukieAntimovCircuitBoard
+  name: uplink-antimov-law-name
+  description: uplink-antimov-law-desc
+  productEntity: AntimovCircuitBoard
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 36 # 20 default | SS220 Antimov Laws hide changes
+  cost:
+    Telecrystal: 40 # 24 default | SS220 Antimov Laws hide changes
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkSurplusBundle
@@ -1711,21 +1749,33 @@
       - LoneOpsUplink
 # ss220-fix-uplink-end
 
+#SS220 Syndie visor buff begin
+#- type: listing
+#  id: UplinkClothingEyesHudSyndicate
+#  name: uplink-clothing-eyes-hud-syndicate-name
+#  description: uplink-clothing-eyes-hud-syndicate-desc
+#  productEntity: ClothingEyesHudSyndicate
+#  cost:
+#    Telecrystal: 2
+#  categories:
+#    - UplinkWearables
+#  conditions:
+#   - !type:StoreWhitelistCondition
+#      blacklist:
+#        tags:
+#        - NukeOpsUplink
+#        - LoneOpsUplink
+
 - type: listing
-  id: UplinkClothingEyesHudSyndicate
-  name: uplink-clothing-eyes-hud-syndicate-name
-  description: uplink-clothing-eyes-hud-syndicate-desc
-  productEntity: ClothingEyesHudSyndicate
+  id: UplinkClothingEyesHudSyndicateAgent
+  name: uplink-clothing-eyes-hud-syndicate-agent-name
+  description: uplink-clothing-eyes-hud-syndicate-agent-desc
+  productEntity: ClothingEyesHudSyndicateAgent
   cost:
     Telecrystal: 2
   categories:
     - UplinkWearables
-  conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
+#SS220 Syndie visor buff end
 
 - type: listing
   id: UplinkClothingConductingGloves

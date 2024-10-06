@@ -32,12 +32,8 @@
     factions:
     - SimpleNeutral
   - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Binary
   - type: ActiveRadio
     channels:
-    - Binary
     - Common
   - type: HealthExaminable
     examinableTypes:
@@ -108,7 +104,7 @@
   - type: TypingIndicator
     proto: robot
   - type: ZombieImmune
-  - type: StepTriggerImmune
+  - type: ProtectedFromStepTriggers
   - type: NoSlip
   - type: Insulated
 
@@ -396,6 +392,5 @@
     - Bot
   - type: ActiveRadio
     channels:
-    - Binary
     - Common
     - Supply

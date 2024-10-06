@@ -136,7 +136,7 @@
     tags:
     - Hardsuit
     - WhitelistChameleon
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: DamageOnInteractProtection
     damageProtection:
@@ -162,7 +162,7 @@
   - type: HeldSpeedModifier
   - type: Item
     size: Huge
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: DamageOnInteractProtection
     damageProtection:

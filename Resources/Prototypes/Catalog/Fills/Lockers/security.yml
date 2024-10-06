@@ -128,6 +128,8 @@
         prob: 0.5
       - id: ClothingOuterCoatLabSecurityMedic # Corvax-Resprite
         prob: 0.5
+      - id: OxygenTankFilled   #SS220 add-tanks-brigmed
+      - id: NitrogenTankFilled #SS220 add-tanks-brigmed
 
 - type: entity
   id: LockerDetectiveFilled
@@ -178,7 +180,7 @@
         prob: 0.5
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   id: GunSafeDisabler
   name: disabler safe
   components:
@@ -188,7 +190,7 @@
       amount: 5
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   id: GunSafePistolMk58
   name: mk58 safe
   components:
@@ -200,7 +202,7 @@
       amount: 8
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   id: GunSafeRifleLecter
   name: lecter safe
   components:
@@ -212,7 +214,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   id: GunSafeSubMachineGunDrozd
   name: drozd safe
   components:
@@ -224,7 +226,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   id: GunSafeShotgunEnforcer
   name: enforcer safe
   components:
@@ -236,7 +238,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   id: GunSafeShotgunKammerer
   name: kammerer safe
   components:
@@ -250,7 +252,7 @@
 - type: entity
   id: GunSafeSubMachineGunWt550
   suffix: Wt550
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafe]
   name: wt550 safe
   components:
   - type: StorageFill

@@ -41,53 +41,54 @@
     path: /Audio/Jukebox/sunset.ogg
 
 # SS220 music start
+# WARNING: Put here music ONLY with mono channel!
 
 - type: jukebox
-  id: requem
-  name: Quantum (Feat Z.W.E.I) - Reqiuem
+  id: requiem
+  name: Quantum (Feat Z.W.E.I) - Requiem
   path:
-    path: /Audio/SS220/Music/Requiem.ogg
+    path: /Audio/SS220/Jukebox/Requiem.ogg
 
 - type: jukebox
   id: life_at_station
   name: Quantum (Feat Z.W.E.I) - Life at the station
   path:
-    path: /Audio/SS220/Music/Life_At_The_Station.ogg
+    path: /Audio/SS220/Jukebox/Life_At_The_Station.ogg
 
 - type: jukebox
   id: junk_recyclers
   name: Quantum (Feat Z.W.E.I) - Junk recyclers
   path:
-    path: /Audio/SS220/Music/Junk_Recyclers.ogg
+    path: /Audio/SS220/Jukebox/Junk_Recyclers.ogg
 
 - type: jukebox
   id: your_green_eyes
   name: Quantum (Feat Z.W.E.I) - Your green eyes
   path:
-    path: /Audio/SS220/Music/Your_Green_Eyes.ogg
+    path: /Audio/SS220/Jukebox/Your_Green_Eyes.ogg
 
 - type: jukebox
   id: neon
   name: Quantum (Feat Z.W.E.I) - Neon
   path:
-    path: /Audio/SS220/Lobby/neon.ogg
+    path: /Audio/SS220/Jukebox/neon.ogg
 
 - type: jukebox
   id: doubleu
   name: Quantum (Feat Z.W.E.I) - double u
   path:
-    path: /Audio/SS220/Lobby/double-u.ogg
+    path: /Audio/SS220/Jukebox/double-u.ogg
 
 - type: jukebox
   id: vincent_helman
   name: Quantum (Feat Z.W.E.I) - Vincent Helman
   path:
-    path: /Audio/SS220/Music/Vincent_Helman.ogg
+    path: /Audio/SS220/Jukebox/Vincent_Helman.ogg
 
 - type: jukebox
   id: the_bar_counter
   name: Quantum (Feat Z.W.E.I) - The bar counter
   path:
-    path: /Audio/SS220/Music/The_Bar_Counter.ogg
+    path: /Audio/SS220/Jukebox/The_Bar_Counter.ogg
 
 # SS220 music begin

@@ -25,6 +25,7 @@
             IAA: [ 1, 1 ]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
+            Magistrate: [ 1, 1 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]

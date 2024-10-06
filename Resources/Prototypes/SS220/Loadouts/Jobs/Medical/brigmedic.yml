@@ -33,6 +33,12 @@
   equipment:
     head: ClothingHeadHelmetSecurityMedic
 
+# Glasses
+- type: loadout
+  id: HudMedical
+  equipment:
+    eyes: ClothingEyesHudMedical
+
 # Mask
 - type: loadout
   id: BrigmedicMask
