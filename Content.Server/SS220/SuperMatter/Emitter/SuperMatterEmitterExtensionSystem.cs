@@ -25,7 +25,7 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
         emitterComponent.PowerUseActive = entity.Comp.PowerConsumption;
         var boltProto = _prototypeManager.Index<EntityPrototype>(emitterComponent.BoltType);
         if (!boltProto.Components.ContainsKey("SuperMatterEmitterBolt"))
-            Log.Error($"Added SM Emitter Extension to entity, but its EmitterComponent.BoltType dont have {nameof(SuperMatterEmitterBoltComponent)}");
+            Log.Debug($"Added SM Emitter Extension to entity, but its EmitterComponent.BoltType dont have {nameof(SuperMatterEmitterBoltComponent)}");
     }
     private void OnApplyMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionValueMessage args)
     {
@@ -39,7 +39,7 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
     {
         if (!TryComp<EmitterComponent>(uid, out var emitterComponent))
         {
-            Log.Error($"SM Emitter Extension exist in entity, but it doesnt have {nameof(EmitterComponent)}");
+            Log.Debug($"SM Emitter Extension exist in entity, but it doesnt have {nameof(EmitterComponent)}");
             return;
         }
         emitterComponent.PowerUseActive = comp.PowerConsumption;

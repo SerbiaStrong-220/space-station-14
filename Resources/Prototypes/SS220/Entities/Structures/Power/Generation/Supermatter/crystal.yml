@@ -43,7 +43,8 @@
   - type: NameIdentifier
     group: GenericNumber
   - type: TTS
-    randomVoicesList: SuperMatterVoices
+    voice: glados
+    # randomVoicesList: SuperMatterVoices uncomment when map load/save test fixed
   - type: AmbientSound
     range: 5
     volume: 0
@@ -119,6 +120,7 @@
   - type: GuideHelp
     guides: [ Supermatter, Power ]
 
+# Not in use cause of errors in map load/save test
 - type: randomVoicesList
   id: SuperMatterVoices
   voices:
