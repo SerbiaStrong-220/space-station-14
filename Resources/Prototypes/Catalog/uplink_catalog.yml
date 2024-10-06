@@ -88,7 +88,7 @@
   productEntity: ThrowingKnivesKit
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2 #ss220-uplink-minor-fixes-and-discounts
   cost:
     Telecrystal: 4 #SS220-underused-uplinks-stuff
   categories:
@@ -115,6 +115,11 @@
   productEntity: EnergySwordDouble
   cost:
     Telecrystal: 16
+  #ss220-uplink-minor-fixes-and-discounts-begin #Discount added for the reason that on the official build d-esword is only in the nukies uplink, but nukies don't have discounts
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 9
+  #ss220-uplink-minor-fixes-and-discounts-end
   categories:
   - UplinkWeaponry
   conditions:
@@ -846,7 +851,7 @@
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
   description: uplink-binary-translator-key-desc
-  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: borg_label }
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: ai_label }
   productEntity: EncryptionKeyBinarySyndicate
   cost:
     Telecrystal: 1
@@ -1176,6 +1181,16 @@
 #    - UplinkDisruption
 #ss220-uplink-fix-end
 
+- type: listing
+  id: UplinkCameraBug
+  name: uplink-cameraBug-name
+  description: uplink-cameraBug-desc
+  productEntity: CameraBug
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkDisruption
+
 # Allies
 
 - type: listing
@@ -1368,7 +1383,7 @@
   productEntity: FreedomImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 1 #ss220-uplink-minor-fixes-and-discounts
   cost:
     Telecrystal: 3 #SS220-underused-uplinks-stuff
   categories:
@@ -1954,6 +1969,17 @@
     Telecrystal: 1
   categories:
     - UplinkPointless
+
+- type: listing
+  id: UplinkSyndicateBusinessCard
+  name: uplink-business-card-name
+  description: uplink-business-card-desc
+  productEntity: SyndicateBusinessCard
+  categories:
+    - UplinkPointless
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 3
 
 # Job Specific
 

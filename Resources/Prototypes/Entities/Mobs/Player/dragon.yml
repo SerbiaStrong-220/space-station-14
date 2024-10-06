@@ -152,6 +152,8 @@
     - DoorBumpOpener
   - type: ReplacementAccent #SS220 No talking dragons
     accent: genericAggressive
+  - type: Puller
+    needsHands: false
 
 - type: entity
   parent: BaseMobDragon

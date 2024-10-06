@@ -511,3 +511,6 @@ BlueprintFlare: null
 
 # 2024-10-01 SS220 - Magic Lamp removed
 MagicalLamp: null
+
+# 2024-10-04
+BaseAdvancedPen: Pen
