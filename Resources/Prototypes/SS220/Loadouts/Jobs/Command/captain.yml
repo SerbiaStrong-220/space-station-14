@@ -127,3 +127,14 @@
     proto: CapOfficerCutlass
   equipment:
     suitstorage: ClothingBeltCutlassSheathFilled
+
+# Headset
+- type: loadout
+  id: CaptainHeadset
+  equipment:
+    ears: ClothingHeadsetCaptain
+
+- type: loadout
+  id: CaptainHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCaptain

@@ -338,3 +338,4 @@
       key_slots:
       - EncryptionKeyCommon
       - EncryptionKeyStationMaster
+      - EncryptionKeyLaw #SS220-Law Department

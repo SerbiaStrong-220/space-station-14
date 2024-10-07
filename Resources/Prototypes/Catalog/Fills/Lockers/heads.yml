@@ -44,7 +44,7 @@
     - id: CigarGoldCase
       prob: 0.25
     - id: ClothingBeltSheathFilled
-    - id: ClothingHeadsetAltCommand
+    - id: ClothingHeadsetAltCaptain #SS220-Law Department
     - id: ClothingOuterArmorCaptainCarapace
     - id: CommsComputerCircuitboard
     - id: DoorRemoteCommand

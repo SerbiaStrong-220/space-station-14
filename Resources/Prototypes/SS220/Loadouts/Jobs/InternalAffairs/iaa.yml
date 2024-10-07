@@ -80,3 +80,14 @@
   id: IAABackpackLeather
   equipment:
     back: ClothingBackpackSatchelLeather
+
+# Headset
+- type: loadout
+  id: LawHeadset
+  equipment:
+    ears: ClothingHeadsetLaw
+
+- type: loadout
+  id: LawHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltLaw
