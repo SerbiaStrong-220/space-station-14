@@ -63,7 +63,7 @@
     eyes: ClothingEyesGlassesCommand
     id: MagistratePDA
   inhand:
-    - BriefcaseBrownFilled
+    - BriefcaseMagistrateFilled
   storage:
     back:
     - Flash
