@@ -17,11 +17,51 @@
   minLimit: 0
   loadouts:
   - CapOfficerCutlass
+
+- type: loadoutGroup
+  id: CAPHeadset
+  name: loadout-group-cap-headset
+  minLimit: 1
+  loadouts:
+  - CaptainHeadset
+  - CaptainHeadsetAlt
   # Капитан (Конец)
 #! Командование (Конец)
 
-#! Внутренние дела (Начало)
+#! Юридический (Начало)
+  # Магистрат
+- type: loadoutGroup
+  id: MagistrateHead
+  name: loadout-group-magistrate-head
+  hidden: true
+  loadouts:
+  - MagistratePwig
 
+- type: loadoutGroup
+  id: MagistrateJumpsuit
+  name: loadout-group-magistrate-jumpsuit
+  loadouts:
+  - LawyerJumpsuit
+  - LawyerJumpskirt
+  - LawyerJumpsuitBlue
+  - LawyerJumpskirtBlue
+  - LawyerJumpsuitGood
+  - LawyerJumpskirtGood
+
+- type: loadoutGroup
+  id: MagistrateOuterClothing
+  name: loadout-group-magistrate-outerclothing
+  hidden: true
+  loadouts:
+  - MagistrateRobesJudge
+
+- type: loadoutGroup
+  id: MagistrateHeadset
+  name: loadout-group-magistrate-headset
+  minLimit: 1
+  loadouts:
+  - MagistrateHeadset
+  - MagistrateHeadsetAlt
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
   id: IAAHead
@@ -79,6 +119,14 @@
   name: loadout-group-iaa-backpack
   loadouts:
     - IAABackpackLeather
+
+- type: loadoutGroup
+  id: IAAHeadset
+  name: loadout-group-iaa-headset
+  minLimit: 1
+  loadouts:
+  - LawHeadset
+  - LawHeadsetAlt
   # Агент Внутренних Дел (Конец)
 
   # Адвокат (Начало)
@@ -115,7 +163,7 @@
   - BlueShieldArmorBulletproof
   - BlueShieldSRTCoat
   # Офицер "Синий Щит" (Конец)
-#! Внутренние дела (Конец)
+#! Юридический (Конец)
 
 #! Служба безопасности (Начало)
 

@@ -3,14 +3,16 @@
   id: LockerFillMagistrate
   table: !type:AllSelector
     children:
-#    - id: ClothingHeadsetLawyer До появления ДВД
-#    - id: DoorRemoteLawyer До появления ДВД
+    - id: ClothingHeadsetAltMagistrate
+    - id: DoorRemoteLaw
+    - id: RubberStampMagistrate
     - id: ClothingOuterRobesJudge
     - id: ClothingHeadHatPwig
     - id: WeaponDisabler
     - id: ClothingWristWatchGold
     - id: ClothingEyesGlassesCommand
     - id: Telescopichka
+    - id: BoxEncryptionKeyLaw
 
 - type: entity
   id: LockerMagistrateFilled
