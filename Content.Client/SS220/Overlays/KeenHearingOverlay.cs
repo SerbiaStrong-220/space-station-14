@@ -17,6 +17,8 @@ public sealed class KeenHearingOverlay : IgnoreLightVisionOverlay
     private SpriteSpecifier _sprite;
     private Texture _texture;
 
+    private List<string> _blacklistComponentNames = new List<string> {"DarkReaper"};
+
     public KeenHearingOverlay(float showRadius, float closeShowRadius) : base(showRadius, closeShowRadius)
     {
         _transformSystem = Entity.System<TransformSystem>();
@@ -43,6 +45,9 @@ public sealed class KeenHearingOverlay : IgnoreLightVisionOverlay
             return;
 
         if (xform.MapID != map)
+            return;
+
+        if (HasComponentFromList(uid, _blacklistComponentNames))
             return;
 
         var position = _transformSystem.GetWorldPosition(xform);

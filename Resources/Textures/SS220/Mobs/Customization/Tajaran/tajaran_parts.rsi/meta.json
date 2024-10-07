@@ -44,6 +44,10 @@
         "directions": 4
     },
     {
+        "name": "tajaran_tail_icon",
+        "directions": 1
+    },
+    {
       "name": "tajaran_tail_wagging",
       "directions": 4,
       "delays": [

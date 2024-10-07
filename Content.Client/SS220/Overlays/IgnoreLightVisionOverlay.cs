@@ -30,7 +30,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     /// <summary> If use lesser value wierd thing happens with admin spawn menu and GetEntitiesInRange. </summary>
     private const float MIN_CLOSE_RANGE = 1.5f;
     /// <summary>Useless const due to how stealth work, but if they change it...</summary>
-    private const float STEALTH_VISION_TRESHHOLD = 0;
+    private const float STEALTH_VISION_TRESHHOLD = -0.3f;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     public IgnoreLightVisionOverlay(float showRadius, float closeShowRadius)
@@ -125,7 +125,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
             return false;
 
         if (!isCloseToOwner &&
-                _stealthSystem.GetVisibility(target, component) < STEALTH_VISION_TRESHHOLD)
+                _stealthSystem.GetVisibility(target, component) > STEALTH_VISION_TRESHHOLD)
             return true;
 
         return false;
@@ -155,7 +155,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
     /// <summary> Checks if entity has a components from list </summary>
     /// <returns> True if entity has any of the listed components </returns>
     /// <exception cref="Exception"> Throw exception if List contains false comp name</exception>
-    private bool HasComponentFromList(EntityUid target, List<string> blacklistComponentNames)
+    protected bool HasComponentFromList(EntityUid target, List<string> blacklistComponentNames)
     {
         foreach (var compName in blacklistComponentNames)
         {
