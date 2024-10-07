@@ -9,7 +9,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -58,7 +58,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -108,7 +108,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -139,7 +139,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -189,7 +189,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -246,8 +246,8 @@
     - state: heart
   - type: Item
     size: Large # SS220 Bigger-survival-box begin
-    shape:
-    - 0,0,2,3 # SS220 Bigger-survival-box end
+    shape: #SS220 Bigger-survival-box end
+    - 0,0,2,1 #SS220-decrease-survival-box
     heldPrefix: hug
   - type: StorageFill
     contents:
@@ -320,7 +320,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:

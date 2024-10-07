@@ -51,6 +51,13 @@ public sealed partial class AntagPrototype : IPrototype
     [DataField]
     public Color AntagColor = Color.Red;
     //SS220 Add antags playtime trackers end
+    // SS220 Round End Titles begin
+    /// <summary>
+    /// Optional color that UI may use to make role label readable on dark background.
+    /// </summary>
+    [DataField]
+    public Color? LightAntagColor;
+    // SS220 Round End Titles end
 
     /// <summary>
     ///     Requirements that must be met to opt in to this antag role.

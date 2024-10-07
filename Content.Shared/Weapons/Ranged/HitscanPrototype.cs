@@ -54,4 +54,21 @@ public sealed partial class HitscanPrototype : IPrototype, IShootable
     /// </summary>
     [DataField("maxLength")]
     public float MaxLength = 20f;
+
+    //SS220 Add hitscan spread begin
+    [DataField]
+    public HitscanSpread? HitscanSpread;
+    //SS220 Add hitscan spread end
 }
+
+//SS220 Add hitscan spread begin
+[DataDefinition]
+public sealed partial class HitscanSpread
+{
+    [DataField]
+    public Angle Spread = Angle.FromDegrees(5);
+
+    [DataField]
+    public int Count = 1;
+}
+//SS220 Add hitscan spread end

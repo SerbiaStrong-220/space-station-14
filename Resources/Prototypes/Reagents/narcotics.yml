@@ -223,6 +223,15 @@
   plantMetabolism:
   - !type:PlantAdjustHealth
     amount: -5
+  # SS220 Cigarettes rework begin
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 0.05 # Smoking causes cancer.
+  # SS220 Cigarettes rework end
 
 # TODO: Replace these nonstandardized effects with generic brain damage
 - type: reagent

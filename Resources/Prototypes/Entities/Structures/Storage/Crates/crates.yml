@@ -73,6 +73,11 @@
   - type: AntiRottingContainer
   - type: ExplosionResistance
     damageCoefficient: 0.50
+  - type: Construction
+    graph: CrateFreezer
+    node: done
+    containers:
+    - entity_storage
 
 - type: entity
   parent: CratePlastic
@@ -259,7 +264,7 @@
 # Secure Crates
 
 - type: entity
-  parent: [ CrateBaseSecure, BaseRestrictedContraband ]
+  parent: [ CrateBaseSecure]
   id: CrateSecgear
   name: secgear crate
   components:
@@ -375,7 +380,7 @@
     access: [["Armory"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, BaseRestrictedContraband ]
+  parent: [ CrateBaseSecure]
   suffix: Armory, Secure
   id: CrateContrabandStorageSecure
   name: contraband storage crate

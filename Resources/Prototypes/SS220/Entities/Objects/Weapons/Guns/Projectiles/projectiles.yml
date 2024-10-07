@@ -37,8 +37,8 @@
       collection: WeakHit
     forceSound: true
   - type: StunOnCollide
-    stunAmount: 4 #weaponBalance
-    knockdownAmount: 4 #weaponBalance
+    stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
+    knockdownAmount: 2 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
@@ -116,7 +116,7 @@
   id: PoisonousAcid 
   name: poisonous Spit
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Projectile
       damage:
@@ -135,7 +135,7 @@
   parent: BaseBullet
   id: BulletEMP
   name: EMP Bolt
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TriggerOnCollide
     fixtureID: projectile

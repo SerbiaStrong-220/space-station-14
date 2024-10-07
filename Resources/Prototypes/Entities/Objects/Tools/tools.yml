@@ -285,7 +285,7 @@
 
 - type: entity
   id: RCD
-  parent: [ BaseItem, BaseEngineeringContraband ]
+  parent: [ BaseItem]
   name: RCD
   description: The rapid construction device can be used to quickly place and remove various station structures and fixtures. Requires compressed matter to function.
   components:
@@ -516,3 +516,6 @@
   - type: Tag
     tags:
     - RollingPin
+  - type: Construction
+    graph: WoodenRollingPin
+    node: rollingpin

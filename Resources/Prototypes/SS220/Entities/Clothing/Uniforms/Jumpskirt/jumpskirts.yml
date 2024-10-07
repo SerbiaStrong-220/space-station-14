@@ -2,6 +2,19 @@
 
 # Сервис
 
+  # Ведущий сервис
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtSeniorService
+  name: юбка-комбинезон ведущего сервисного отдела
+  description: Знак мастерства и мастерства сервисной службы.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_service.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_service.rsi
+
   # Клоун
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -72,6 +85,54 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
 
+  # Шеф повар
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefWhite
+  name: белая униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_white.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefGreen
+  name: зелёная униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_green.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefBlack
+  name: чёрная униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefNanotrasen
+  name: униформа заслуженного шеф-повара NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+
+
 # Medical
 
   # Парамед
@@ -97,6 +158,32 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
+
+# Инженерия
+
+  # Старший инженер
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChiefEngineerDark
+  name: dark uniform chief engineer
+  description: Dark uniform for years of service as head of the engineering department.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChiefEngineerTurtleDark
+  name: dark chief engineer's turtleneck
+  description: Dark turtleneck designed specifically for work in conditions of the engineering department.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
 
 # Синдикат
 

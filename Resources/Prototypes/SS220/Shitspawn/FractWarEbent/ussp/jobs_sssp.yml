@@ -56,7 +56,7 @@
 - type: randomHumanoidSettings
   id: EbentUSSPLeader
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
     - type: Loadout
       prototypes: [ EbentUSSPLeaderGear ]
@@ -143,7 +143,7 @@
 - type: randomHumanoidSettings
   id: EbentUSSPEngineer
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
     - type: Loadout
       prototypes: [ EbentUSSPEngineerGear ]
@@ -226,7 +226,7 @@
 - type: randomHumanoidSettings
   id: EbentUSSPCorpsman
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
     - type: Loadout
       prototypes: [ EbentUSSPCorpsmanGear ]
@@ -314,7 +314,7 @@
 - type: randomHumanoidSettings
   id: EbentUSSPCMO
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
     - type: Loadout
       prototypes: [ EbentUSSPCMOGear ]
@@ -391,7 +391,7 @@
 - type: randomHumanoidSettings
   id: EbentUSSPTrooper
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
     - type: Loadout
       prototypes: [ EbentUSSPTrooperGear ]

@@ -1,0 +1,47 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<roundend:RoundEndTitlesWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:roundend="clr-namespace:Content.Client.SS220.RoundEnd.UI"
+                      MouseFilter="Stop"
+                      MinSize="700 700"
+                      SetSize="1000 800">
+
+    <PanelContainer Name="BackgroundPanel" StyleClasses="RoundEndTitlesBackground" />
+    <roundend:RoundEndTitlesWindowScrollContainer Name="TitlesScroll" HorizontalExpand="True" VerticalExpand="True" VScrollEnabled="True">
+        <BoxContainer Orientation="Vertical" Margin="5 5">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 300 0 400">
+                <TextureRect
+                    TexturePath="/Textures/Logo/icon-ru/icon-256x256.png"
+                    VerticalAlignment="Center"
+                    Stretch="KeepAspectCentered"
+                    VerticalExpand="True"
+                    Margin="0 16 0 32" />
+                <Label Name="RoundNumberLabel" HorizontalAlignment="Center" Margin="0 8" StyleClasses="RoundEndTitlesEpisode" />
+                <Label Name="RoundGamemodeLabel" HorizontalAlignment="Center" Margin="0 8" StyleClasses="RoundEndTitlesGamemode" />
+            </BoxContainer>
+
+            <Label Text="{Loc 'round-end-titles-roles-header'}" StyleClasses="RoundEndTitlesHeader1" HorizontalAlignment="Center" Margin="0 8 0 8" />
+            <BoxContainer Name="DepartmentsContainer" Orientation="Vertical" HorizontalExpand="True">
+
+            </BoxContainer>
+
+            <Label Text="{Loc 'round-end-titles-sponsors-header'}" StyleClasses="RoundEndTitlesHeader1" HorizontalAlignment="Center" Margin="0 8 0 8" />
+            <BoxContainer Name="SponsorsContainer" Orientation="Vertical" HorizontalExpand="True">
+
+            </BoxContainer>
+
+            <Label Text="{Loc 'round-end-titles-thanks-for-playing'}" StyleClasses="RoundEndTitlesHeader1" HorizontalAlignment="Center" Margin="0 64 0 128" />
+        </BoxContainer>
+    </roundend:RoundEndTitlesWindowScrollContainer>
+    <BoxContainer Margin="8 8 24 0" Orientation="Horizontal" VerticalAlignment="Top">
+        <Control HorizontalExpand="True" />
+        <TextureButton Name="CloseButton" StyleClasses="windowCloseButton" VerticalAlignment="Center" />
+    </BoxContainer>
+
+    <BoxContainer HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="24 18" SeparationOverride="12">
+        <Button Name="ToggleFullscreenButton" Text="{Loc 'round-end-titles-set-fullscreen-on'}" ToggleMode="True" SetWidth="120" />
+        <CheckBox Name="AutoScrollCheckBox" Text="{Loc 'round-end-titles-auto-scroll'}" />
+    </BoxContainer>
+
+</roundend:RoundEndTitlesWindow>

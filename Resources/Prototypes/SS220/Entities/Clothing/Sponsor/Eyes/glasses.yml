@@ -1,0 +1,40 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Биполярочка
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorTylerRedGlasses
+  name: очки Tyler.Co
+  description: Серебряные очки авиаторы с встроенным светофильтром.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/redglasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/redglasses.rsi
+  - type: VisionCorrection
+
+# На 96% прозрачные линзы
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorWaltuhGlasses
+  name: прозрачные авиаторы
+  description: Простые дешёвые очки с корректирующими линзами.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/waltuh.rsi
+  - type: VisionCorrection
+
+# Джужутсу
+- type: entity
+  parent: ClothingSponsorEyesBase
+  id: ClothingSponsorGlassesJujutsuShlepa
+  name: очки офисного работника
+  description: Семь к трём - идеальное соотношение
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+  - type: VisionCorrection

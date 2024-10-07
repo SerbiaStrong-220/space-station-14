@@ -1,4 +1,5 @@
 using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.SS220.DarkReaper;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.GameStates;
 
@@ -21,6 +22,7 @@ public sealed partial class ExplosionResistanceComponent : Component
     ///     The explosive resistance coefficient, This fraction is multiplied into the total resistance.
     /// </summary>
     [DataField("damageCoefficient")]
+    [Access(typeof(SharedExplosionSystem), typeof(SharedDarkReaperSystem))] //ss220 access for DarkReaper
     public float DamageCoefficient = 1;
 
     /// <summary>

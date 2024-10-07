@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>blank_registered_letter_cc</FormId>
+  <PrototypeId>PaperNtFormCc</PrototypeId>
+  <EntityName>Заказное письмо</EntityName>
+  <PhotocopierTitle>Заказное письмо НТ</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-ЦК-ЗКП[/bold]
+[head=2]Заказное письмо НТ[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Получатель:
+
+
+[bold]Снятие копий воспрещается![/bold]
+Офицер Центрального Командования: (ПОЛНОЕ ИМЯ)
+[italic]Место для печати[/italic]]]></Content>
+</Form>

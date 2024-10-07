@@ -1,0 +1,156 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: species
+  id: Tajaran
+  name: species-name-tajaran
+  roundStart: true
+  prototype: MobTajaran
+  sprites: MobTajaranSprites
+  defaultSkinTone: "#222626"
+  markingLimits: MobTajaranMarkingLimits
+  dollPrototype: MobTajaranDummy
+  skinColoration: Hues
+  maleFirstNames: tajaran_first_male
+  femaleFirstNames: tajaran_first_female
+  maleLastNames: tajaran_second_unisex
+  femaleLastNames: tajaran_second_unisex
+  buttScanTexture: /Textures/SS220/Interface/Butts/tajaran.png
+  youngAge: 25
+  oldAge: 55
+  maxAge: 70 #some lore moments
+
+- type: speciesBaseSprites
+  id: MobTajaranSprites
+  sprites:
+    Head: MobTajaranHead
+    Snout: MobTajaranSnout
+    Chest: MobTajaranTorso
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobTajaranLArm
+    RArm: MobTajaranRArm
+    LHand: MobTajaranLHand
+    RHand: MobTajaranRHand
+    LLeg: MobTajaranLLeg
+    RLeg: MobTajaranRLeg
+    LFoot: MobTajaranLFoot
+    RFoot: MobTajaranRFoot
+
+- type: markingPoints
+  id: MobTajaranMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ TajaranTail ]
+    Snout:
+      points: 0
+      required: false
+    HeadTop:
+      points: 1
+      required: true
+      defaultMarkings: [ TajaranEars ]
+    HeadSide:
+      points: 0
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobTajaranHead
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobTajaranHeadMale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobTajaranHeadFemale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobTajaranSnout
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: nose
+
+- type: humanoidBaseSprite
+  id: MobTajaranTorso
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobTajaranTorsoMale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobTajaranTorsoFemale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobTajaranLLeg
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobTajaranLHand
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobTajaranLArm
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobTajaranLFoot
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobTajaranRLeg
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobTajaranRHand
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobTajaranRArm
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobTajaranRFoot
+  baseSprite:
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: r_foot

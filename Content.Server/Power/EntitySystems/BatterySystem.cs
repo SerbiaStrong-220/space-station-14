@@ -91,7 +91,6 @@ namespace Content.Server.Power.EntitySystems
             while (query.MoveNext(out var uid, out var comp, out var batt))
             {
                 if (!comp.AutoRecharge) continue;
-                if (batt.IsFullyCharged) continue;
                 SetCharge(uid, batt.CurrentCharge + comp.AutoRechargeRate * frameTime, batt);
             }
         }
@@ -181,7 +180,8 @@ namespace Content.Server.Power.EntitySystems
             }
             //SS220-smes-overcharge end
 
-            if (MathHelper.CloseTo(battery.CurrentCharge, old))
+            if (MathHelper.CloseTo(battery.CurrentCharge, old) &&
+                !(old != battery.CurrentCharge && battery.CurrentCharge == battery.MaxCharge))
                 return;
 
             var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);

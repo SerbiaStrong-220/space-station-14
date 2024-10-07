@@ -1,0 +1,57 @@
+- type: entity
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
+  id: ClothingOuterReactiveArmor
+  name: experimental reactive armor 
+  description: The latest armor prototype based on the anomaly core. There are rumors that NT scientists are developing a more stable and multitasking version.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi 
+    layers:
+    - state: icon
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
+  - type: Appearance      
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}   
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.5
+        Caustic: 0.9    
+  - type: HeldSpeedModifier
+  - type: ToggleClothing
+    action: ActionToggleReactiveArmor
+  - type: ToggleVerb
+    text: toggle-reactivearmor-verb-get-data-text  
+  - type: GroupExamine
+  - type: ReactiveTeleportArmor   
+  - type: Explosive 
+    explosionType: Default
+    maxIntensity: 2
+    totalIntensity: 1.5
+    intensitySlope: 1
+    canCreateVacuum: false
+    deleteAfterExplosion: false
+    repeatable: true
+  - type: Tag
+    tags:
+    - HighRiskItem      
+
+- type: entity
+  id: ActionToggleReactiveArmor
+  name: Toggle Reactive armor 
+  description: Toggles the armor on and off. 
+  components:
+  - type: InstantAction
+    useDelay: 5
+    priority: -9
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent

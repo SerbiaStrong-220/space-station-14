@@ -126,6 +126,7 @@
     damageContainer: Biological
     damageModifierSet: RatKing
     # ss220 lowTTKUpdate
+  - type: Sharp
 
 - type: entity
   id: MobRatKingBuff

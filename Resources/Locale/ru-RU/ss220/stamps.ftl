@@ -31,3 +31,7 @@ stamp-component-stamped-name-fake-ce = Сраный инженер
 stamp-component-stamped-name-fake-hos = Глава сраной безопасности
 stamp-component-stamped-name-fake-approved = Доверие
 stamp-component-stamped-name-fake-cmo = Главсрач
+
+# Clown Fake Stamped End
+
+stamp-component-stamped-name-blue-shield = Синий Щит

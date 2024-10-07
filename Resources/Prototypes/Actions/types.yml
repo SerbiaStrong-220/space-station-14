@@ -137,7 +137,7 @@
   name: SCRAM!
   #SS220-underused-uplinks-stuff begin
   description: Randomly teleports you within a medium distance.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   #SS220-underused-uplinks-stuff end
   components:
   - type: InstantAction

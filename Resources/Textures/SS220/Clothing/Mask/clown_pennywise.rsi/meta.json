@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by MadSkaven, closed state resprited for SS220 by awnexxxx (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-hamster",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-monkey",
+      "directions": 4
+    }
+  ]
+}

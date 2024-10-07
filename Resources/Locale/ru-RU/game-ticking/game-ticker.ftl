@@ -39,6 +39,13 @@ latejoin-arrival-announcement =
         [epicene] прибыли
        *[neuter] прибыл
     } на станцию!
+#SS220-upstream-merge
+latejoin-arrival-announcement-special = { $job } { $character } { $gender ->
+        [male] ступил
+        [female] ступила
+        [epicene] ступили
+       *[neuter] ступил
+    } на мостик!
 latejoin-arrival-sender = Станции
 latejoin-arrivals-direction = Вскоре прибудет шаттл, который доставит вас на станцию.
 latejoin-arrivals-direction-time = Шаттл, который доставит вас на станцию, прибудет через { $time }.
