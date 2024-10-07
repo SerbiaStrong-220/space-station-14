@@ -1,0 +1,12 @@
+- type: department
+  id: Law
+  name: department-Law
+  sort: 0
+  description: department-law-description
+  color: "#323ba9"
+  roles:
+  - Magistrate
+  - IAA
+  - Lawyer
+  primary: false
+  weight: 80

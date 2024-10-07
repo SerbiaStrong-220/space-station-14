@@ -1,0 +1,15 @@
+- type: entity
+  id: ActionToggleKeenHearing
+  name: Activate Keen Hearing
+  description:  Your hearing is sharp, but not for long.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    useDelay: 120 # [2 minutes * 60 seconds]
+    priority: -2
+    icon:
+      sprite: SS220/Actions/keen_hearing.rsi
+      state: icon-human
+    event:
+      !type:UseKeenHearingEvent
+        duration: 5

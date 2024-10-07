@@ -15,7 +15,7 @@
       - Felinid #SS220-jobbans end
   startingGear: IAAGear
   icon: "JobIconIAA"
-  supervisors: job-supervisors-centcom
+  supervisors: job-supervisors-magistrate #SS220-Law Department
   canBeAntag: false
   access:
   - Service
@@ -34,7 +34,7 @@
     shoes: ClothingShoesBootsLaceup #SS220-IAA-Loadout
     id: IAAPDA
 #    eyes: ClothingEyesGlassesSunglasses #SS220-TwoOne-Floppa-Iteration
-    ears: ClothingHeadsetIAA
+#    ears: ClothingHeadsetIAA #SS220-Law Department
     # back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout #SS220 - FIX loadout IAA
   inhand:
     - BriefcaseIAAFilled

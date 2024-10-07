@@ -6,6 +6,9 @@
   description: uplink-ecrossbow-desc
   icon: { sprite: /Textures/SS220/Objects/Weapons/Guns/Crossbow/minicrossbow.rsi, state: icon }
   productEntity: WeaponMiniEnergyCrossbow
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 6
   cost:
     Telecrystal: 10
   categories:
@@ -25,6 +28,9 @@
   description: uplink-mindslave-implanter-desc
   icon: { sprite: /Textures/SS220/Alerts/MindSlave.rsi, state: icon }
   productEntity: MindSlaveImplanter
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 4
   cost:
     Telecrystal: 8
   categories:
@@ -44,6 +50,9 @@
   description: uplink-mime-relic-desc
   icon: { sprite: SS220/Objects/Specific/SacredRelics/SacredRelicMime.rsi, state: icon }
   productEntity: SacredRelicMime
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
   cost:
     Telecrystal: 4
   categories:
@@ -124,6 +133,9 @@
   description: uplink-thermal-glasses-desc
   icon: {sprite: Clothing/Eyes/Glasses/thermal.rsi, state: icon }
   productEntity: ThermalVisorChameleon
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
   cost:
     Telecrystal: 4
   categories:
@@ -135,6 +147,9 @@
   description: uplink-thermal-visor-implanter-desc
   icon: {sprite: /Textures/SS220/Misc/ThermalEye.rsi, state: EyeON}
   productEntity: ThermalVisorImplanter
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 3
   cost:
     Telecrystal: 6
   categories:
@@ -161,6 +176,9 @@
   description: uplink-syndicate-segway-crate-desc
   icon: { sprite: /Textures/Objects/Vehicles/syndicatesegway.rsi, state: icon }
   productEntity: CrateFunSyndicateSegway
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
   cost:
     Telecrystal: 5
   categories:

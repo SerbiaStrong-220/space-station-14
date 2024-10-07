@@ -22,7 +22,7 @@
             Passenger: [ -1, -1 ]
             #Command
             Captain: [ 1, 1 ]
-            IAA: [ 1, 1 ]
+            IAA: [ 2, 2 ]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             Magistrate: [ 1, 1 ]
@@ -58,7 +58,7 @@
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
             StationAi: [ 1, 1 ]
-            Borg: [ 2, 2 ]
+            Borg: [ 3, 3 ]
             SeniorResearcher: [ 1, 1 ]
             #Service
             Bartender: [ 2, 2 ]
@@ -72,7 +72,7 @@
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
             ServiceWorker: [ 2, 2 ]
-            Lawyer: [ 2, 2 ]
+            Lawyer: [ 3, 3 ]
             Zookeeper: [ 1, 1 ]
             SeniorService: [ 1, 1 ]
 

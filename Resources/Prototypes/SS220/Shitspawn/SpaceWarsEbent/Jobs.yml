@@ -47,7 +47,7 @@
 - type: randomHumanoidSettings
   id: EbentSpaceWarsAgent
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
   - type: Loadout
     prototypes: [ EbentSpaceWarsAgentGear ]
@@ -114,7 +114,7 @@
 - type: randomHumanoidSettings
   id: EbentSpaceWarsLeader
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
   - type: Loadout
     prototypes: [ EbentSpaceWarsLeaderGear ]
@@ -180,7 +180,7 @@
 - type: randomHumanoidSettings
   id: EbentSpaceWarsOperative
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Tajaran ]
   components:
   - type: Loadout
     prototypes: [ EbentSpaceWarsOperativeGear ]
@@ -264,7 +264,7 @@
 - type: randomHumanoidSettings
   id: EbentSpaceWarsEngineer
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
   - type: Loadout
     prototypes: [ EbentSpaceWarsEngineerGear ]
@@ -327,7 +327,7 @@
 - type: randomHumanoidSettings
   id: EbentSpaceWarsMedic
   randomizeName: true
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
   - type: Loadout
     prototypes: [ EbentSpaceWarsMedicGear ]

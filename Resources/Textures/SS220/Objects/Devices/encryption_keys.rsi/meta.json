@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by DSC@300074782328750080 for Space Station 14, modaifed by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {"name": "crypt_silver"},
+    {"name": "lawyer_label"}
+  ]
+}

@@ -6,6 +6,8 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using DrawDepthTag = Robust.Shared.GameObjects.DrawDepth;
 
 namespace Content.Shared.Buckle.Components;
 
@@ -49,6 +51,11 @@ public sealed partial class StrapComponent : Component
     /// </summary>
     [DataField]
     public Angle Rotation;
+
+    //SS220 Change DrawDepth on buckle begin
+    [DataField(customTypeSerializer: typeof(ConstantSerializer<DrawDepthTag>))]
+    public int? DrawDepth;
+    //SS220 Change DrawDepth on buckle end
 
     /// <summary>
     /// The size of the strap which is compared against when buckling entities
