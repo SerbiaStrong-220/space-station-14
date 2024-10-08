@@ -1,5 +1,5 @@
-﻿using Content.Client.SS220.UserInterface.System.Chat.Controls;
-using Content.Client.Stylesheets;
+﻿﻿using Content.Client.Stylesheets;
+using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.UserInterface.Controls;
@@ -44,7 +44,7 @@ public class ChatInputBox : PanelContainer
         FilterButton = new ChannelFilterButton
         {
             Name = "FilterButton",
-            StyleClasses = {"chatFilterOptionButton"},
+            StyleClasses = {"chatFilterOptionButton"}
         };
         //ss220 highlight words start
         HighlightButton = new HighlightButton()
