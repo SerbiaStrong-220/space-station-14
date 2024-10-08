@@ -46,3 +46,12 @@
     - Belt
   - type: UseDelay
     delay: 1
+  - type: ItemSlots
+    slots:
+      core_slot:
+        name: anomaly-gorilla-core-slot-name
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        whitelist:
+          components:
+          - AnomalyCore  
