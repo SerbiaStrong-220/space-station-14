@@ -42,6 +42,6 @@
   - type: Sprite
     sprite: SS220/Structures/Doors/Airlocks/Glass/law_sec.rsi
   - type: PaintableAirlock
-    department: Security
+    department: Law
   - type: Wires
     layoutId: AirlockSecurity
