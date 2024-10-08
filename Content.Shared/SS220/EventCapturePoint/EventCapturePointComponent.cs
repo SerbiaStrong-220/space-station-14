@@ -18,6 +18,15 @@ public sealed partial class EventCapturePointComponent : Component
 
     [ViewVariables, DataField]
     public float FlagRemovalImpulse = 35;
+
+    [DataField]
+    public float WinPoints = 0.1f;
+
+    [DataField]
+    public TimeSpan RetentionTimeForWP = TimeSpan.FromMinutes(1);
+
+    [ViewVariables]
+    public Dictionary<string, TimeSpan> PointRetentionTime = new();
 }
 
 [Serializable, NetSerializable]

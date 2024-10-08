@@ -12,6 +12,9 @@ public sealed partial class EventCapturePointFlagComponent : Component
 {
     [ViewVariables, DataField, AutoNetworkedField]
     public bool Planted;
+
+    [DataField]
+    public string? Fraction;
 }
 
 [Serializable, NetSerializable]
