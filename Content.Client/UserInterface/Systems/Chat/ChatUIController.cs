@@ -11,8 +11,10 @@ using Content.Client.Gameplay;
 using Content.Client.Ghost;
 using Content.Client.Mind;
 using Content.Client.Roles;
+using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
+using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Administration;
@@ -58,6 +60,7 @@ public sealed class ChatUIController : UIController
     [Dependency] private readonly IStateManager _state = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IReplayRecordingManager _replayRecording = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiMan = default!;
 
     [UISystemDependency] private readonly ExamineSystem? _examine = default;
     [UISystemDependency] private readonly GhostSystem? _ghost = default;
@@ -841,6 +844,17 @@ public sealed class ChatUIController : UIController
                 }
             }
         }
+        //ss220 highlight words start
+        var popupHighlight = _uiMan.ActiveScreen?.GetWidget<ChatBox>()?.ChatInput.HighlightButton.Popup;
+
+        if (popupHighlight?.Words != null)
+        {
+            foreach (var word in popupHighlight.Words)
+            {
+                msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, word, "color", popupHighlight.ColorWords.ToHex());
+            }
+        }
+        //ss220 highlight end
 
         // Log all incoming chat to repopulate when filter is un-toggled
         if (!msg.HideChat)
