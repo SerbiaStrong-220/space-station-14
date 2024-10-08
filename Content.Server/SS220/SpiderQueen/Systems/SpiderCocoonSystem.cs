@@ -101,10 +101,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
                     Broadcast = false,
                     BreakOnDamage = false,
                     BreakOnMove = true,
-                    NeedHand = false,
-                    BlockDuplicate = true,
-                    CancelDuplicate = true,
-                    DuplicateCondition = DuplicateConditions.SameEvent
+                    NeedHand = false
                 };
 
                 _doAfter.TryStartDoAfter(doAfterEventArgs);

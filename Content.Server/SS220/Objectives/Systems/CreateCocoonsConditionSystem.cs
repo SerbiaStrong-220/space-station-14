@@ -37,14 +37,13 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
             !TryComp<SpiderQueenComponent>(mobUid, out var spiderQueen))
             return 0f;
 
-        if (spiderQueen.CocoonsList.Count >= target)
-        {
+        var progress = spiderQueen.CocoonsList.Count >= target
+            ? 1f
+            : (float)spiderQueen.CocoonsList.Count / (float)target;
+
+        if (progress == 1f)
             spiderQueenRole.IsCreateCocoonsCompletedOnce = true;
-            return 1f;
-        }
-        else
-        {
-            return 0f;
-        }
+
+        return progress;
     }
 }

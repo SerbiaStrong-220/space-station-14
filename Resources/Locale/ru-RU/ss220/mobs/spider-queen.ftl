@@ -21,21 +21,21 @@ ent-MobSpiderQueen = королева пауков
     .suffix = Улей пауков
 
 ent-MobSpiderDrone = трутень королевы пауков
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
 ent-MobSpiderHunter = паучий охотник
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
 ent-MobSpiderGhost = паучий призрак
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
 ent-MobSpiderShooter = паучий стрелок
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
 ent-MobSpiderLittle = маленький паучок
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueenn.suffix }

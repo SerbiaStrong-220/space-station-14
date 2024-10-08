@@ -12,7 +12,7 @@ objective-create-cocoons-title =
        *[other] коконов
     }.
 objective-create-cocoons-description =
-    Используйте действие «Окукливание» чтобы создать { $count } { $count ->
+    Используйте действие «Сплести кокон» чтобы создать { $count } { $count ->
         [one] кокон
         [few] кокона
        *[other] коконов
