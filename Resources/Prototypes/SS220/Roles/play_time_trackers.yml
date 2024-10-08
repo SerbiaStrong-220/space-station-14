@@ -31,6 +31,9 @@
 - type: playTimeTracker
   id: JobSeniorService
 
+- type: playTimeTracker
+  id: Prisoner
+
 # Antags
 - type: playTimeTracker
   id: AntagNukeops
