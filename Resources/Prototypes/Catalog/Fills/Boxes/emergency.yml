@@ -289,6 +289,7 @@
     - id: ClothingMaskBreath
     - id: EmergencyOxygenTankFilled
     - id: EmergencyMedipen
+    - id: SpaceMedipen # SS220 Revert deleted Medipen
     - id: Flare
     - id: FoodBreadBaguette
     - id: DrinkWaterBottleFull
@@ -303,6 +304,7 @@
     - id: ClothingMaskBreath
     - id: EmergencyNitrogenTankFilled
     - id: EmergencyMedipen
+    - id: SpaceMedipen # SS220 Revert deleted Medipen
     - id: Flare
     - id: FoodBreadBaguette
     - id: DrinkWaterBottleFull

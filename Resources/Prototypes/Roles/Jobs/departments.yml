@@ -22,11 +22,11 @@
   - Chaplain
   - Chef
   - Clown
-  - Detective
+#  - Detective #SS220-Transfer Detective To Security
   - HeadOfPersonnel
   - SeniorService #ss220-SEniorService
   - Janitor
-  - Lawyer
+#  - Lawyer #SS220-Law Department
   - Librarian
   - Mime
   - Musician
@@ -63,7 +63,8 @@
   color: "#052EED"
   roles:
   - Captain
-  - IAA # Corvax-IAA
+#  - IAA #SS220-Law Department
+  - Magistrate #SS220-Law Department
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -127,6 +128,8 @@
   - SecurityOfficer
   - Warden
   - SecurityPilot
+  - Detective #SS220-Transfer Detective To Security
+
 
 - type: department
   id: Science

@@ -210,3 +210,29 @@
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+
+# WMT Ebent begin
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatBluetunic
+  name: blue army jacket
+  description: The jacket of the line infantry of the great army of the Kingdom.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRedtunic
+  name: red army jaket
+  description: The scarlet infantry jacket of the River Republic.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+# WMT Ebent end

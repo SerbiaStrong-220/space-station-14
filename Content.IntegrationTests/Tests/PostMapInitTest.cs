@@ -73,6 +73,7 @@ namespace Content.IntegrationTests.Tests
             // SS220 Maps
             "Frankenstein",
             //"Nox",
+            "Astro",
             "Axioma",
 			"Donuts",
             "Eclipse",

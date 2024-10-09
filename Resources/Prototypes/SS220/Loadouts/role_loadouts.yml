@@ -1,12 +1,26 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-#! Внутренние дела (Начало)
+#! Юридический (Начало)
+
+  # Магистрат
+- type: roleLoadout
+  id: JobMagistrate
+  groups:
+  - MagistrateHead
+  - MagistrateHeadset
+  - MagistrateJumpsuit
+  - MagistrateOuterClothing
+  - IAABackpacks
+  - Trinkets
+  - Survival
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Агент внутренних дел
 - type: roleLoadout
   id: JobIAA
   groups:
   - IAAHead
+  - IAAHeadset
   - IAAGlasses
   - IAANeck
   - IAAJumpsuit
@@ -15,6 +29,7 @@
   - Survival
   - Trinkets
   - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -27,7 +42,7 @@
   - CommonBackpack
   - Survival
   - Trinkets
-#! Внутренние дела (Конец)
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 #! Служба безопасности (Начало)
 
@@ -36,6 +51,7 @@
   id: JobSeniorOfficer
   groups:
   - SecurityHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck  #holster loadout
   - SeniorSecJumpsuit
   - SecurityBackpack
@@ -44,12 +60,14 @@
   - SecurityShoes
   - SecurityBelt
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
   # Пилот
 - type: roleLoadout
   id: JobSecurityPilot
   groups:
   - SecurityPilotHead
+  - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
@@ -58,6 +76,7 @@
   - SecurityShoes
   - SecurityPDA
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -68,6 +87,7 @@
   groups:
   - HatSeniorMedical
   - MedicalNeck
+  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
@@ -75,8 +95,9 @@
   - SeniorMedicalOuterClothing
   - SurvivalMedical
   - SeniorShoes
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -86,12 +107,14 @@
   id: JobSeniorEngineer
   groups:
   - HatSeniorEngineer
+  - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorsEngineerJumpsuit
   - StationEngineerBackpack
   - SeniorsEngineerOuterClothing
   - SurvivalExtended
   - StationEngineerShoes
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -101,6 +124,7 @@
   id: JobSeniorResearcher
   groups:
   - HatSeniorSciensist
+  - ScientistGlasses #SS220-Two Floppa Iteration
   - ScientistNeck
   - SeniorSciensistJumpsuit
   - ScientistBackpack
@@ -108,8 +132,9 @@
   - ScientistGloves
   - ScientistShoes
   - Survival
-  - Glasses
+#  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -124,4 +149,5 @@
   - Survival
   - Glasses
   - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Сервис (Конец)

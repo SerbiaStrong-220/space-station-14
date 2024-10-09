@@ -5,22 +5,21 @@
   roundstartTokens: 5
   requiredRole: Shlopa
   rewards:
-    SponsorCigPack: 1
     ClothingSponsorMothBoots: 1
     ClothingSponsorDante: 1
     ClothingSponsorTylerRedGlasses: 1
     ClothingSponsorDallas: 1
-    SponsorBoxStorageCandy: 1
+    ClothingSponsorPivozavr: 1 # Вторая итерация
     ClothingSponsorNeckWreath: 1
     ClothingSponsorWreath: 1
     ClothingSponsorScarfTube: 1
-  # Вторая итерация
-    ClothingSponsorPivozavr: 1
-    FloppaCigarCase: 2
-    SmokingPipeFilledTobaccoSponsor: 1
-    ExpensiveLighterSponsor: 1
-    DrinkChampagneSponsorBottleFull: 2
-    DrinkBeerCanSponsor: 1
+    SponsorBoxStorageCandy: 1
+    SponsorCigPack: 1
+    FloppaCigarCase: 2 # Вторая итерация
+    SmokingPipeFilledTobaccoSponsor: 1 # Вторая итерация
+    ExpensiveLighterSponsor: 1 # Вторая итерация
+    DrinkChampagneSponsorBottleFull: 2 # Вторая итерация
+    DrinkBeerCanSponsor: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: BigShlopa
@@ -28,16 +27,15 @@
   roundstartTokens: 6
   requiredRole: BigShlopa
   rewards:
+    SponsorBoxMaid: 3
+    DrinkCanPackBeerSponsorBox: 2 # Вторая итерация
     ClothingSponsorWhiteCoat: 1
     ClothingSponsorBlackCoat: 1
-    SponsorBoxMaid: 3
+    PlushFloppa: 1 # Вторая итерация
     ClothingSponsorStudentSuit: 1
     ClothingSponsorStudentSuitBlack: 1
-  # Вторая итерация
-    DrinkCanPackBeerSponsorBox: 2
-    PlushFloppa: 1
-    ClothingHeadHatDevilHornsAlt: 1
-    ClothingHeadHatHaloAlt: 1
+    ClothingHeadHatDevilHornsAlt: 1 # Вторая итерация
+    ClothingHeadHatHaloAlt: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
@@ -49,14 +47,12 @@
     SponsorBoxTyler: 3
     SponsorBoxMafia: 3
     SponsorBoxBlackMafia: 3
+    SponsorBoxJujutsuShlepa: 4 # Вторая итерация
     SponsorCigCarton: 2
     ClothingWristWatchUssp: 2
-  # Вторая итерация
-    SponsorBoxJujutsuShlepa: 4
-    ClothingSponsorSamuraiJacket: 1
-    ClothingSponsorNeckSS220: 1
-    ClothingHeadHatDevilHorns: 1
-    ClothingHeadHatHalo: 1
+    ClothingSponsorSamuraiJacket: 1 # Вторая итерация
+    ClothingHeadHatDevilHorns: 1 # Вторая итерация
+    ClothingHeadHatHalo: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa
@@ -65,9 +61,8 @@
   requiredRole: GoldenShlopa
   rewards:
     SponsorBoxGoldClown: 3
-  # Вторая итерация
-    ClothingHeadVipCrocks: 1
-    ClothingSponsor1984: 1
+    ClothingHeadVipCrocks: 1 # Вторая итерация
+    ClothingSponsor1984: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: CriticalMassShlopa
@@ -76,17 +71,9 @@
   requiredRole: CriticalMassShlopa
   rewards:
     SponsorElWycc: 1
-  # Вторая итерация
-    SmokingFish: 1
+    SmokingFish: 1 # Вторая итерация
 
 # Разработка
-- type: ShlepaRewardGroup
-  id: MiniDeveloper
-  name: Начинающий Разработчик
-  requiredRole: MiniDeveloper
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
 - type: ShlepaRewardGroup
   id: Mapper
   name: Маппер
@@ -102,16 +89,30 @@
   isHiddenOnInsufficient: true
 
 - type: ShlepaRewardGroup
-  id: HeadLoroved
-  name: Ведущий Лоровед
-  requiredRole: HeadLoroved
+  id: Spriter
+  name: Спрайтер
+  requiredRole: Spriter
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+  
+- type: ShlepaRewardGroup
+  id: QA
+  name: Обеспечение качества
+  requiredRole: QA
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
 - type: ShlepaRewardGroup
-  id: WikiHead
-  name: Ведущий Редактор Вики
-  requiredRole: WikiHead
+  id: LoreEdit
+  name: Лоровед
+  requiredRole: LoreEdit
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: WikiEdit
+  name: Редактор Вики
+  requiredRole: WikiEdit
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
@@ -119,27 +120,6 @@
   id:  HeadDeveloper
   name: Ведущий Разработчик
   requiredRole:  HeadDeveloper
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: SubHeadDeveloper
-  name: Заместитель Ведущего Разработчика
-  requiredRole: SubHeadDeveloper
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: ProjectManager
-  name: Проект Менеджер
-  requiredRole: ProjectManager
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: SeniorDeveloper
-  name: Старший Разработчик
-  requiredRole: SeniorDeveloper
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
@@ -158,38 +138,10 @@
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
 
-- type: ShlepaRewardGroup
-  id: HeadAdministrator
-  name: Главный Администратор
-  requiredRole: HeadAdministrator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: SeniorAdministrator
-  name: Старший Администратор
-  requiredRole: SeniorAdministrator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id:  SubHeadAdministrator
-  name: Заместитель Главного Администратора
-  requiredRole:  SubHeadAdministrator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
 # Модерация
 - type: ShlepaRewardGroup
   id: Moderator
   name: Модератор
   requiredRole: Moderator
-  isExactRoleRequired: true
-  isHiddenOnInsufficient: true
-
-- type: ShlepaRewardGroup
-  id: HeadModerator
-  name: Старший Модератор
-  requiredRole: HeadModerator
   isExactRoleRequired: true
   isHiddenOnInsufficient: true

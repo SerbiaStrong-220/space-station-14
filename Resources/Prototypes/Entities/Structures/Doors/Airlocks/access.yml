@@ -11,10 +11,12 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: AirlockServiceLocked
+  parent: Airlock #SS220-Law Department
   id: AirlockLawyerLocked
   suffix: Lawyer, Locked
   components:
+  - type: Sprite #SS220-Law Department
+    sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi #SS220-Law Department
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsLawyer ]
@@ -65,7 +67,7 @@
       board: [ DoorElectronicsBar ]
 
 - type: entity
-  parent: AirlockServiceLocked
+  parent: AirlockHydroponics
   id: AirlockHydroponicsLocked
   suffix: Hydroponics, Locked
   components:
@@ -373,7 +375,7 @@
       board: [ DoorElectronicsBrig ]
 
 - type: entity
-  parent: AirlockSecurity
+  parent: AirlockLawSecurity #SS220 Law&Sec Door Resprite
   id: AirlockSecurityLawyerLocked
   suffix: Security/Lawyer, Locked
   components:
@@ -423,10 +425,12 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: AirlockServiceGlassLocked
+  parent: Airlock #SS220 Law Department
   id: AirlockLawyerGlassLocked
   suffix: Lawyer, Locked
   components:
+  - type: Sprite #SS220 Law Department
+    sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi #SS220 Law Department
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsLawyer ]
@@ -532,7 +536,7 @@
       board: [ DoorElectronicsJanitor ]
 
 - type: entity
-  parent: AirlockServiceGlassLocked
+  parent: AirlockHydroponicsGlass
   id: AirlockHydroGlassLocked
   suffix: Hydroponics, Locked
   components:
@@ -758,7 +762,7 @@
       board: [ DoorElectronicsBrig ]
 
 - type: entity
-  parent: AirlockSecurityGlass
+  parent: AirlockLawSecurityGlass #SS220 Law&Sec Door Resprite
   id: AirlockSecurityLawyerGlassLocked
   suffix: Security/Lawyer, Locked
   components:

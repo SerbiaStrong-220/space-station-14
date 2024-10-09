@@ -1,0 +1,15 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Fools
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesMuzhik
+  name: перчатки мужика
+  description: Ни один стакан самогона не выскользнет из ваших рук.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Hand/muzhik.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Hand/muzhik.rsi
+  - type: Fiber
+    fiberColor: fibers-red

@@ -8,6 +8,12 @@
     Poison: 1.1
 
 - type: damageModifierSet
+  id: Tajaran
+  coefficients:
+    Cold: 0.8
+    Heat: 1.3 # so about heat, we make them receive more heat cause tajaran Secs > any other species secs
+
+- type: damageModifierSet
   id: TomatoKiller
   coefficients:
     Blunt: 1

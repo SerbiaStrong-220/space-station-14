@@ -1,0 +1,167 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: SoakedHealCigarette
+  parent: BaseHealCigarette 
+  name: cigarette
+  suffix: Soaked
+  description: A roll of tobacco and nicotine soaked in some chemical.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigarettes/cigarette.rsi
+    state: unlit-icon
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+  - type: SpaceGarbage
+  - type: Clothing
+    sprite: Objects/Consumable/Smokeables/Cigarettes/cigarette.rsi
+    slots: [ mask ]
+    equippedPrefix: unlit
+  - type: Item
+    size: Tiny
+  - type: Construction
+    graph: smokeableCigarette
+    node: cigarette
+
+- type: entity
+  id: CigaretteSEC
+  parent: SoakedCigarette
+  name: Officer's reserve
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Epinephrine
+            Quantity: 55
+
+- type: entity
+  id: CigaretteENG
+  parent: SoakedCigarette
+  name: Friendly singularity
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: PotassiumIodide
+            Quantity: 55
+
+- type: entity
+  id: CigaretteMED
+  parent: SoakedHealCigarette
+  name: Benefactor
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 20
+          - ReagentId: Dylovene
+            Quantity: 20
+
+- type: entity
+  id: CigaretteRnD
+  parent: SoakedHealCigarette
+  name: Anomalous war
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 20
+          - ReagentId: Bruizine
+            Quantity: 20
+
+- type: entity
+  id: CigaretteWeh
+  parent: SoakedCigarette
+  name: Dreams of Castles
+  components:
+  - type: Smokable
+    inhaleAmount: 0.15
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 70
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 35
+          - ReagentId: JuiceThatMakesYouWeh
+            Quantity: 35
+
+- type: entity
+  id: CigaretteAVD
+  parent: SoakedCigarette
+  name: Ocean of inc 
+  components:
+  - type: Smokable
+    inhaleAmount: 0.35
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Pax
+            Quantity: 55
+
+- type: entity
+  id: CigaretteNomads
+  parent: SoakedCigarette
+  name: Nomads's extra strong
+  components:
+  - type: Smokable
+    inhaleAmount: 0.45
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Barozine
+            Quantity: 35
+
+- type: entity
+  id: CigaretteAcmeCo
+  parent: SoakedCigarette
+  name: AcmeCo
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 55
+
+- type: entity
+  id: CigaretteDromedaryCo
+  parent: SoakedHealCigarette
+  name: DromedaryCo
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 20
+          - ReagentId: DexalinPlus
+            Quantity: 20

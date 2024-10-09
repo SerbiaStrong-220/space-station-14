@@ -201,6 +201,7 @@
       - ClothingHeadHatWelding
       - WetFloorSign
       - ClothingHeadHatCone
+      - FreezerElectronics
       - Flare
   - type: EmagLatheRecipes
     emagStaticRecipes:
@@ -455,7 +456,10 @@
     - TilePurpleCircuit
     - TileYellowCircuit
     - TileOrangeCircuit
-    - TileRedCircuit #SS220-sheetifier-rework-end
+    - TileRedCircuit
+    # - FloorGreenCircuit
+    # - FloorBlueCircuit
+    # - FloorRedCircuit SS220-sheetifier-rework-end
     - MicrowaveMachineCircuitboard
     - ReagentGrinderMachineCircuitboard
     - ElectricGrillMachineCircuitboard

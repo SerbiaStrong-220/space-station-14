@@ -59,14 +59,14 @@
   parent: BasePDA
   id: MagistratePDA
   name: magistrate PDA
-  description: ###
+  description: Concentration of justice. Don't drown!
   components:
   - type: Pda
     id: MagistrateIDCard
     state: pda-magistrate
   - type: PdaBorderColor
     borderColor: "#414452"
-    accentVColor: "#731611"
+    accentVColor: "#262c8a"
     accentHColor: "#dfac5c"
   - type: Sprite
     sprite: Objects/Devices/pda.rsi

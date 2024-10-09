@@ -350,7 +350,7 @@
     sprite: Clothing/OuterClothing/Coats/pirate.rsi
 
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseRestrictedContraband]
+  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase]
   id: ClothingOuterCoatWarden
   name: warden's armored jacket
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
@@ -421,7 +421,7 @@
     sprite: Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase]
   id: ClothingOuterCoatSyndieCap
   name: syndicate's coat
   description: The syndicate's coat is made of durable fabric, with gilded patterns.
@@ -432,7 +432,7 @@
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi
 
 - type: entity
-  parent: ClothingOuterCoatHoSTrench
+  parent: [ClothingOuterCoatHoSTrench] # BaseSyndicateContraband as first parent so contraband system takes that as priority, yeah I know
   id: ClothingOuterCoatSyndieCapArmored
   name: syndicate's armored coat
   description: The syndicate's armored coat is made of durable fabric, with gilded patterns.

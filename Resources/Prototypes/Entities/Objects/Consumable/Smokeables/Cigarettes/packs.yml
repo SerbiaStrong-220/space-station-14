@@ -162,6 +162,12 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
+    #SS220 Cigarettes rework start
+  - type: StorageFill 
+    contents:
+    - id: CigaretteDromedaryCo
+      amount: 10
+    #SS220 Cigarettes rework end
 
 - type: entity
   id: CigPackBlue
@@ -173,6 +179,12 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
+    #SS220 Cigarettes rework start
+  - type: StorageFill
+    contents:
+    - id: CigaretteAcmeCo
+      amount: 10
+    #SS220 Cigarettes rework end
 
 - type: entity
   id: CigPackBlack
@@ -184,10 +196,16 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
+    #SS220 Cigarettes rework start
+  - type: StorageFill
+    contents:
+    - id: CigaretteNomads
+      amount: 10
+    #SS220 Cigarettes rework end
 
 - type: entity
   id: CigPackSyndicate
-  parent: [CigPackBase, BaseSyndicateContraband]
+  parent: [CigPackBase]
   name: Interdyne herbals packet
   description: Elite cigarettes for elite syndicate agents. Infused with medicine for when you need to do more than calm your nerves.
   components:

@@ -538,3 +538,32 @@
     sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
+
+# WMT Ebent begin
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadKiver
+  name: kiver
+  description: The headdress of a soldier of the Kingdom's great army.
+  suffix: HOCebent
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/kiver.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/kiver.rsi
+    - type: Tag
+      tags:
+      - ClothMade
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadPithHelmet
+  name: pith helmet
+  description: Army helmet of the army of the River Republic.
+  suffix: HOCebent
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/pith_helmet.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/pith_helmet.rsi
+# WMT Ebent end

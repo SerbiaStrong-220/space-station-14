@@ -28,6 +28,8 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
+using Content.Shared.DoAfter;
+using Content.Shared.SS220.Store;
 
 namespace Content.Server.Implants;
 
@@ -47,6 +49,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -104,15 +107,30 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!TryComp<CurrencyComponent>(args.Used, out var currency))
             return;
 
-        // same as store code, but message is only shown to yourself
-        args.Handled = _store.TryAddCurrency(_store.GetCurrencyValue(args.Used, currency), uid, store);
+        //SS220-insert-currency-doafter begin
+        if (store.CurrencyInsertTime != null)
+        {
+            var doAfter = new DoAfterArgs(EntityManager, args.User, store.CurrencyInsertTime.Value,
+                new InsertCurrencyDoAfterEvent(args.Used, (uid, store)),
+                uid)
+            {
+                NeedHand = true,
+                BreakOnDamage = true
+            };
 
-        if (!args.Handled)
+            _doAfter.TryStartDoAfter(doAfter);
+            args.Handled = true;
+            return;
+        }
+        //SS220-insert-currency-doafter end
+
+        // same as store code, but message is only shown to yourself
+        if (!_store.TryAddCurrency((args.Used, currency), (uid, store)))
             return;
 
+        args.Handled = true;
         var msg = Loc.GetString("store-currency-inserted-implant", ("used", args.Used));
         _popup.PopupEntity(msg, args.User, args.User);
-        QueueDel(args.Used);
     }
 
     private void OnFreedomImplant(EntityUid uid, SubdermalImplantComponent component, UseFreedomImplantEvent args)

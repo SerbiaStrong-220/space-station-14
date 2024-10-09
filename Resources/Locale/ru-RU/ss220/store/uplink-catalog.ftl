@@ -25,8 +25,12 @@ uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
 uplink-expensive-lighter-desc = { ent-ExpensiveLighterSyndicate.desc }
 
  #Masks-Boxes
-uplink-special-delivery-name = особая посылка
+uplink-special-delivery-name = Особая посылка
 uplink-special-delivery-desc = Содержит случайную маску животного, что некогда носили майамские психи.
 
-uplink-criminal-delivery-name = криминальная посылка
+uplink-criminal-delivery-name = Криминальная посылка
 uplink-criminal-delivery-desc = Содержит случайную маску, замешанную в самых громких ограблениях прошлого.
+
+# Wearables
+uplink-helmet-swat-syndicate-name = Шлем пехотинца Синдиката
+uplink-helmet-swat-syndicate-desc = Очень прочный шлем, обычно используемый военизированными формированиями Синдиката. Он украшен зловещим узором из красных и черных полос.

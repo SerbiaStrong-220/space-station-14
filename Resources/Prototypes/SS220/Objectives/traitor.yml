@@ -21,3 +21,13 @@
   - type: StealCondition
     stealGroup: WeaponMultiPhaseEnergyGun
     owner: job-name-hos
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: ClothingOuterReactiveArmorObjective
+  components:
+  - type: NotJobRequirement
+    job: ResearchDirector
+  - type: StealCondition
+    stealGroup: ClothingOuterReactiveArmor
+    owner: job-name-rd

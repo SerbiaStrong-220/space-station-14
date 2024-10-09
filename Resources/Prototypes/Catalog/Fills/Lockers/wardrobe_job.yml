@@ -10,7 +10,7 @@
          amount: 2
        - id: ClothingUniformJumpskirtPrisoner
          amount: 2
-       - id: ClothingShoesColorBlack
+       - id: ClothingShoesColorOrange # SS220 black to orange prison shoes
          amount: 2
        - id: ClothingMaskMuzzle
 

@@ -182,6 +182,14 @@
   - type: HideLayerClothing
     slots:
     - Hair
+  #ss220-goliath-cloak-upgrade begin
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+  #ss220-goliath-cloak-upgrade end
 
 - type: entity
   parent: ClothingHeadBase

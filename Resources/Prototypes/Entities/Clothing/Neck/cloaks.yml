@@ -11,7 +11,7 @@
     stealGroup: HeadCloak # leaving this here because I suppose it might be interesting?
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakCap
   name: captain's cloak
   description: A pompous and comfy blue cloak with a nice gold trim, while not particularly valuable as your other possessions, it sure is fancy.
@@ -22,7 +22,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakHos
   name: head of security's cloak
   description: An exquisite dark and red cloak fitting for those who can assert dominance over wrongdoers. Take a stab at being civil in prosecution!
@@ -33,7 +33,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakCe
   name: chief engineer's cloak
   description: A dark green cloak with light blue ornaments, given to those who proved themselves to master the precise art of engineering.
@@ -44,7 +44,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingCloakCmo
   name: chief medical officer's cloak
   description: A sterile blue cloak with a green cross, radiating with a sense of duty and willingness to help others.
@@ -55,7 +55,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakRd
   name: research director's cloak
   description: A white cloak with violet stripes, showing your status as the arbiter of cutting-edge technology.
@@ -74,7 +74,7 @@
   #ss220 special_sounds end
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakQm
   name: quartermaster's cloak
   description: A strong brown cloak with a reflective stripe, while not as fancy as others, it does show your managing skills.
@@ -85,7 +85,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakHop
   name: head of personnel's cloak
   description: A blue cloak with red shoulders and gold buttons, proving you are the gatekeeper to any airlock on the station.
@@ -114,7 +114,7 @@
     sprite: Clothing/Neck/Cloaks/nanotrasen.rsi
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase]
   id: ClothingNeckCloakCapFormal
   name: captain's formal cloak
   description: A lavish and decorated cloak for special occasions.
@@ -169,6 +169,17 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+  #ss220-goliath-cloak-upgrade begin
+  - type: Construction
+    graph: GoliathCloak
+    node: goliath-cloak
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+  #ss220-goliath-cloak-upgrade end
 
 - type: entity
   parent: ClothingNeckBase
