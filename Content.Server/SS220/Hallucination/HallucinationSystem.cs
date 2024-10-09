@@ -92,7 +92,11 @@ public sealed class HallucinationSystem : EntitySystem
     /// </summary>
     public bool Remove(Entity<HallucinationComponent> target, int index)
     {
-        var (uid, comp) = target;
+        var (_, comp) = target;
+
+        if (comp.Deleted)
+            return false;
+
         if (comp.Hallucinations.Count <= index
             && comp.TotalDurationTimeSpans.Count <= index)
         {
@@ -148,6 +152,9 @@ public sealed class HallucinationSystem : EntitySystem
     {
         var (_, comp) = target;
 
+        if (comp.Deleted)
+            return;
+
         comp.Hallucinations.Add(hallucination);
 
         if (hallucination.TimeParams.TotalDuration == float.NaN)
@@ -187,7 +194,7 @@ public sealed class HallucinationSystem : EntitySystem
                 if (!TryGetComponentType(hallucination.Protection.ComponentName, out var protectionComponentType))
                     continue;
 
-                if (Protects(args.Equipment, args.SlotFlags, protectionComponentType, hallucination.Protection.CheckPockets))
+                if (ItemProtects(args.Equipment, args.SlotFlags, protectionComponentType, hallucination.Protection.CheckPockets))
                     Remove(args.Equipee, hallucination);
             }
         }
@@ -207,15 +214,14 @@ public sealed class HallucinationSystem : EntitySystem
         if (!TryGetComponentType(protection.ComponentName, out var protectionComponentType))
             return false;
 
-        InventorySystem.InventorySlotEnumerator? inventorySlot = null;
-        if (protection.ItemSlot.HasValue)
-            inventorySlot = _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value);
-        else
-            inventorySlot = _inventory.GetSlotEnumerator(mobUid);
+        var inventorySlot = protection.ItemSlot.HasValue ?
+                        _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value) :
+                        _inventory.GetSlotEnumerator(mobUid);
 
-        while (inventorySlot.Value.NextItem(out var itemUid, out var slot))
+        // //SM_TODO this \/ break SpawnAndDeleteAllEntitiesInTheSameSpot test.
+        while (inventorySlot.NextItem(out var itemUid, out var slot))
         {
-            if (Protects(itemUid, slot.SlotFlags, protectionComponentType, protection.CheckPockets))
+            if (ItemProtects(itemUid, slot.SlotFlags, protectionComponentType, protection.CheckPockets))
                 return true;
         }
 
@@ -224,7 +230,7 @@ public sealed class HallucinationSystem : EntitySystem
     /// <summary>
     /// Use to check if item is able to protect from hallucination
     /// </summary>
-    private bool Protects(EntityUid itemUid, SlotFlags slotFlag, Type protectionComponent, bool checkPockets)
+    private bool ItemProtects(EntityUid itemUid, SlotFlags slotFlag, Type protectionComponent, bool checkPockets)
     {
         if (!checkPockets
             && slotFlag == SlotFlags.POCKET)
