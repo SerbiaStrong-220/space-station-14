@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using System.Numerics;
@@ -20,6 +21,12 @@ public sealed partial class LyingDownOnBuckledEntityComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public EntityUid? ActionUid;
+
+    /// <summary>
+    /// Whether damage will cause StandUp of lyed entity
+    /// </summary>
+    [DataField]
+    public FixedPoint2 DamagetThreshold = 1;
 
     /// <summary>
     /// Uid of the entity on which the pet is lying

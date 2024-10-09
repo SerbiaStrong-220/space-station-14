@@ -1,0 +1,26 @@
+- type: entity
+  id: MobLyingDownOnEntity
+  components:
+  - type: LyingDownOnBuckledEntity
+    strapWhitelist:
+        tags:
+          - Bed
+    blockUnbuckle: true
+    damageOnLying:
+      damage:
+        types:
+          Poison: -0.2
+          Cold: -0.4
+          Blunt: -0.2
+      whitelist:
+        components:
+          - HumanoidAppearance
+  - type: GenericVisualizer
+    visuals:
+      enum.LyingVisuals.State:
+        enum.LyingVisuals.LyingDown:
+          True: { visible: true }
+          False: { visible: false }
+        enum.DamageStateVisualLayers.Base:
+          True: { visible: false }
+          False: { visible: true }

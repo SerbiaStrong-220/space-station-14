@@ -41,6 +41,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, StandUpActionEvent>(OnStandUpAction);
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, EndCollideEvent>(OnEndCollide);
+        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, DamageChangedEvent>(OnDamageChanged);
 
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, UpdateCanMoveEvent>(OnCanMoveUpdate);
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
@@ -90,6 +91,13 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
     {
         if (entity.Comp.IsLying &&
             args.NewMobState is not MobState.Alive)
+            StandUp(entity);
+    }
+
+    private void OnDamageChanged(Entity<LyingDownOnBuckledEntityComponent> entity, ref DamageChangedEvent args)
+    {
+        if (args.DamageDelta is { } damageDelta &&
+            damageDelta.GetTotal() >= entity.Comp.DamagetThreshold)
             StandUp(entity);
     }
 
@@ -273,13 +281,13 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
     /// <summary>
     /// Checks if there aren't other pets lying down on the entity
     /// </summary>
-    private bool CheckOtherLyingPets(EntityUid pet, EntityUid target, LyingPetComponent? component = null)
+    private bool CheckOtherLyingPets(EntityUid pet, EntityUid target)
     {
-        if (!Resolve(target, ref component))
+        if (!TryComp<LyingPetComponent>(target, out var comp))
             return true;
 
-        if (component.PetUid != null)
-            _popup.PopupEntity(Loc.GetString("other-pet-is-lying-on", ("pet", component.PetUid.Value), ("target", target)), pet, pet);
+        if (comp.PetUid != null)
+            _popup.PopupEntity(Loc.GetString("other-pet-is-lying-on", ("pet", comp.PetUid.Value), ("target", target)), pet, pet);
 
         return false;
     }
