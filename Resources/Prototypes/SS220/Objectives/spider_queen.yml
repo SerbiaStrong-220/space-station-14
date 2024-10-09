@@ -20,7 +20,6 @@
       sprite: SS220/Structures/Specific/cocoon.rsi
       state: cocoon2
   - type: NumberObjective
-    # dragon can only spawn 3 rifts so keep objective the same
     min: 10
     max: 10
     title: objective-create-cocoons-title
