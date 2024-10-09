@@ -1,0 +1,37 @@
+- type: entity
+  name: Хранилище
+  id: CultYoggPod
+  parent: BaseStructure
+  description: Капсула, способная излечивать раны или даже воскрешать членов культа. Один её вид вызывает у вас тревогу.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/yoggpod.rsi
+    state: yoggpod
+    map: ["base"]
+  - type: Icon
+    sprite: SS220/Structures/yoggpod.rsi
+    state: yoggpod
+  - type: Appearance
+  - type: PointLight
+    color: Green
+    radius: 1.5
+    energy: 0.3
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 325
+      behaviors:
+      - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+      - !type:EmptyAllContainersBehaviour
+  - type: CultYoggPod
+  - type: Physics
+  - type: GenericVisualizer
+    visuals:
+      enum.CultPodVisuals.Inserted:
+        base:
+          True: { state: yoggpod-in }
+          False: { state: yoggpod }

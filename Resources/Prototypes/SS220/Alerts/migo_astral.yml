@@ -1,0 +1,23 @@
+- type: alert
+  id: MiGoAstral
+  category: Health #it's like ghostie health
+  icons:
+  - sprite: /Textures/Interface/Alerts/essence_counter.rsi
+    state: essence0
+  alertViewEntity: AlertAstralTimer
+  name: alerts-revenant-essence-name
+  description: alerts-revenant-essence-desc
+
+- type: entity
+  id: AlertAstralTimer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/Interface/Alerts/essence_counter.rsi
+    layers:
+    - map: [ "enum.AlertVisualLayers.Base" ]
+    - map: [ "enum.MiGoTimerVisualLayers.Digit1" ]
+    - map: [ "enum.MiGoTimerVisualLayers.Digit2" ]
+      offset: 0.125, 0
+    - map: [ "enum.MiGoTimerVisualLayers.Digit3" ]
+      offset: 0.25, 0

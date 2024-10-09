@@ -232,7 +232,7 @@
     - /Audio/SS220/Voice/MedicTF2/medic_scream_2.ogg
     - /Audio/SS220/Voice/MedicTF2/medic_scream_3.ogg
     - /Audio/SS220/Voice/MedicTF2/medic_scream_4.ogg
-    
+
 - type: soundCollection
   id: MaleGiggle
   files:
@@ -295,3 +295,20 @@
   id: FelinidPurrs
   files:
   - /Audio/Voice/Felinid/cat_purr1.ogg
+
+- type: soundCollection
+  id: NyarlathotepSounds
+  files:
+    - /Audio/SS220/CultYogg/nyarlathotep_step1.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_step2.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice1.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice2.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice3.ogg
+
+- type: soundCollection
+  id: RaveSounds
+  files:
+    - /Audio/SS220/CultYogg/nyarlathotep_voice1.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice2.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice3.ogg
+

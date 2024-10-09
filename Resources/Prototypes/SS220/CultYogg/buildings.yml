@@ -1,0 +1,53 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: cultYoggBuilding
+  id: CultYoggPod
+  order: 0
+  frame: CultYoggBuildingFrame
+  result: CultYoggPod
+  materials:
+  - stack: Tokl
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl }
+  - stack: MetalRod
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: metal_rod }
+
+- type: cultYoggBuilding
+  id: FungusHydroponic
+  order: 1
+  frame: CultYoggBuildingFrame
+  result: fungusHydroponic #ToDo wierd bug  with "green" sprite before placement
+  materials:
+  - stack: Steel
+    count: 10
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: steel }
+  - stack: Tokl
+    count: 5
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl }
+
+- type: cultYoggBuilding
+  id: CultYoggAltarBuilding
+  order: 2
+  frame: CultYoggBuildingFrame
+  result: CultYoggAltar
+  materials:
+  - stack: Steel
+    count: 15
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: steel }
+  - stack: Tokl
+    count: 8
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl }
+
+- type: cultYoggBuilding
+  id: CultYoggPondBuilding
+  order: 3
+  frame: CultYoggBuildingFrame
+  result: CultYoggPond
+  materials:
+  - stack: Steel
+    count: 15
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: steel }
+  - stack: Tokl
+    count: 8
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl }

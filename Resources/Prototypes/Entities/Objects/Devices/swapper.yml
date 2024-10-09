@@ -20,8 +20,8 @@
     visuals:
       enum.SwapTeleporterVisuals.Linked:
         base:
-          True: { state: linked }
-          False: { state: icon }
+          True: { state: alive }
+          False: { state: alive }
   - type: Tag
     tags:
     - QuantumSpinInverter
