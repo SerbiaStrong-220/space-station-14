@@ -40,6 +40,32 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
 
+- type: entity
+  parent: ClothingHeadHatCaptain
+  id: ClothingHeadWhiteCapHardhat
+  name: captain's white hardhat
+  description: It's good being the white king.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/whitecaptainhat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/whitecaptainhat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadWhiteCapHat
+  name: captain's white hat
+  description: A special white hat made to order for the captain.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/whitecaphat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/whitecaphat.rsi
+  - type: Tag
+    tags:
+    - Ian
+    - HamsterWearable
+
   # Глава Персонала
 - type: entity
   parent: ClothingHeadBase

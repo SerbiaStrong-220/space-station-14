@@ -19,3 +19,14 @@
     sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckWhiteMantleCap
+  name: captain's white mantle
+  description: A formal white mantle to drape around the shoulders. Others stand on the shoulders of giants. You're the giant they stand on.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/whitecapmantle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/whitecapmantle.rsi

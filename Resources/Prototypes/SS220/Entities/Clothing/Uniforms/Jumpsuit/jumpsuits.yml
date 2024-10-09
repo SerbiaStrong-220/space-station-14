@@ -55,6 +55,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWhiteCapFormal
+  name: captain's white formal suit
+  description: A white suit for really special occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/whitecapformal.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/whitecapformal.rsi
+
   # Синий щит
 
 - type: entity
