@@ -1,0 +1,69 @@
+- type: material
+  id: BrassPlasteel
+  stackEntity: SheetBrassPlasteel1R
+  name: materials-plasteel
+  icon: { sprite: Objects/Materials/Sheets/metal.rsi, state: brass }
+  color: "#696969"
+  price: 0.28
+
+- type: stack
+  id: BrassPlasteel
+  name: Латунь
+  icon: { sprite: Objects/Materials/Sheets/metal.rsi, state: brass }
+  spawn: SheetBrassPlasteel1R
+  maxCount: 30
+
+- type: entity
+  parent: SheetMetalBase
+  id: SheetBrassPlasteel
+  name: Латунь
+  suffix: Full
+  components:
+  - type: Material
+  - type: UserInterface
+    interfaces:
+      enum.RatvarMidasTouchUIKey.Key:
+        type: RatvarMidasTouchBUI
+  - type: MidasMaterial
+    targets:
+    - MidasTouchClockworkSlab
+    - MidasTouchBrassPlasteel
+  - type: PhysicalComposition
+    materialComposition:
+      BrassPlasteel: 100
+  - type: Stack
+    stackType: BrassPlasteel
+    baseLayer: base
+    layerStates:
+    - brass
+    - brass_2
+    - brass_3
+  - type: Sprite
+    state: brass_3
+    layers:
+    - state: brass_3
+      map: [ "base" ]
+  - type: Item
+    heldPrefix: Латунь
+  - type: Appearance
+
+- type: entity
+  parent: SheetBrassPlasteel
+  id: SheetBrassPlasteel1R
+  name: Латунь
+  suffix: Single
+  components:
+  - type: Sprite
+    state: brass
+  - type: Stack
+    stackType: BrassPlasteel
+    count: 1
+
+- type: entity
+  parent: SheetBrassPlasteel
+  id: SheetBrassPlasteelLingering
+  suffix: Lingering, 10
+  components:
+  - type: Stack
+    lingering: true
+    count: 0

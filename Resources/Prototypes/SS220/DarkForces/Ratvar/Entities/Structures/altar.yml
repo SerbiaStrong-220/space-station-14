@@ -1,0 +1,79 @@
+﻿- type: entity
+  id: RatvarAltar
+  parent: BaseRatvarStructure
+  name: "Алтарь из шестереней"
+  description: "Странная латунная платформа из вращающихся шестерней. Она требует что-то в обмен на…"
+  suffix: Ratvar
+  components:
+  - type: Anchorable
+    tool: RatvarAnchoring
+  - type: PlaceableSurface
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Structures/altar.rsi
+    noRot: true
+    layers:
+    - state: altar
+      map: [ "base" ]
+  - type: Icon
+    sprite: SS220/DarkForces/Ratvar/Structures/altar.rsi
+    state: altar
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarAltarVisuals.State:
+        base:
+          UnAnchored: { state: altar-off }
+          AnchoredIdle: { state: altar }
+          Working: { state: altar-fast }
+  - type: Appearance
+  - type: Strap
+    position: Down
+    rotation: -90
+  - type: PointLight
+    radius: 4
+    energy: 4
+    color: "#dfc477"
+  - type: RatvarAltar
+  - type: RatvarStructure
+  - type: Construction
+    graph: RatvarAltarGraph
+    node: altar
+
+#Construction
+- type: constructionGraph
+  id: RatvarAltarGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: altar
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: BrassPlasteel
+        amount: 10
+        doAfter: 10
+
+  - node: altar
+    entity: RatvarAltar
+
+- type: construction
+  name: "Алтарь Ратвара"
+  id: RatvarAltarConstruction
+  graph: RatvarAltarGraph
+  startNode: start
+  targetNode: altar
+  category: "Культ Ратвара"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - RatvarRighteous
+  description: Алтарь необходим для провеления ритуалов
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Structures/altar.rsi
+    state: altar
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false

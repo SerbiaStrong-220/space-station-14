@@ -572,6 +572,32 @@ public abstract class SharedMindSystem : EntitySystem
 
         return allHumans;
     }
+
+    // SS220 Dark-Forces begin
+    /// <summary>
+    /// Returns a list of every living humanoid player's minds.
+    /// </summary>
+    public List<EntityUid> GetAliveHumans()
+    {
+        var mindQuery = EntityQuery<MindComponent>();
+
+        var allHumans = new List<EntityUid>();
+        // HumanoidAppearanceComponent is used to prevent mice, pAIs, etc from being chosen
+        var query = EntityQueryEnumerator<MindContainerComponent, MobStateComponent, HumanoidAppearanceComponent>();
+        while (query.MoveNext(out var uid, out var mc, out var mobState, out _))
+        {
+            // the player needs to have a mind and not be the excluded one
+            if (mc.Mind == null)
+                continue;
+
+            // the player has to be alive
+            if (_mobState.IsAlive(uid, mobState))
+                allHumans.Add(mc.Mind.Value);
+        }
+
+        return allHumans;
+    }
+    // SS220 Dark-Forces end
 }
 
 /// <summary>

@@ -1,0 +1,185 @@
+﻿#weapons
+- type: ratvarCraftCategory
+  id: Weapon
+  name: "Оружие"
+  receipts:
+  - RatvarSlab
+  - RatvarSpear
+  - RatvarHammer
+  - RatvarSword
+
+- type: ratvarCraft
+  id: RatvarSlab
+  name: "Заводная плита"
+  brassCost: 500
+  powerCost: 0
+  craftingTime: 3
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+    state: clock_slab
+  entityProduce: RatvarSlab
+
+- type: ratvarCraft
+  id: RatvarSpear
+  name: "Копьё Ратвара"
+  brassCost: 1500
+  powerCost: 400
+  craftingTime: 10
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Weapons/ratvar_spear.rsi
+    state: spear
+  entityProduce: RatvarSpear
+
+- type: ratvarCraft
+  id: RatvarHammer
+  name: "Заводной молот"
+  brassCost: 1500
+  powerCost: 400
+  craftingTime: 10
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Weapons/clock_hammer.rsi
+    state: icon
+  entityProduce: RatvarHammer
+
+- type: ratvarCraft
+  id: RatvarSword
+  name: "Нержавеющий меч"
+  brassCost: 1500
+  powerCost: 200
+  craftingTime: 4
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Weapons/clock_sword.rsi
+    state: icon
+  entityProduce: RatvarSword
+
+#armor
+- type: ratvarCraftCategory
+  id: Armor
+  name: "Броня"
+  receipts:
+  - RatvarClockRobe
+  - RatvarShield
+  - RatvarCuirass
+  - RatvarGauntlets
+  - RatvarTreads
+  - RatvarHelmet
+
+- type: ratvarCraft
+  id: RatvarShield
+  name: "Латунный щит"
+  brassCost: 1500
+  powerCost: 200
+  craftingTime: 4
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Weapons/brass_buckler.rsi
+    state: brass-buckler
+  entityProduce: RatvarShield
+
+- type: ratvarCraft
+  id: RatvarClockRobe
+  name: "Одеяние праведников"
+  brassCost: 800
+  powerCost: 80
+  craftingTime: 10
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Clothing/robe.rsi
+    state: icon
+  entityProduce: ClothingOuterRobesRatvar
+
+- type: ratvarCraft
+  id: RatvarCuirass
+  name: "Кираса"
+  brassCost: 1500
+  powerCost: 400
+  craftingTime: 20
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Clothing/cuirass.rsi
+    state: icon
+  entityProduce: ClothingOuterCuirassRatvar
+
+- type: ratvarCraft
+  id: RatvarGauntlets
+  name: "Рукавицы"
+  brassCost: 500
+  powerCost: 200
+  craftingTime: 5
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Clothing/gloves.rsi
+    state: icon
+  entityProduce: ClothingHandsRatvar
+
+- type: ratvarCraft
+  id: RatvarTreads
+  name: "Гусеницы"
+  brassCost: 250
+  powerCost: 50
+  craftingTime: 5
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Clothing/treads.rsi
+    state: icon
+  entityProduce: ClothingShoesRatvar
+
+- type: ratvarCraft
+  id: RatvarHelmet
+  name: "Шлем"
+  brassCost: 500
+  powerCost: 100
+  craftingTime: 5
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Clothing/helmet.rsi
+    state: icon
+  entityProduce: ClothingHeadHelmetRatvar
+
+#Others
+- type: ratvarCraftCategory
+  id: Others
+  name: "Расходники"
+  receipts:
+  - RatvarSoulVessel
+  - RatvarMarauder
+  - RatvarStrangeShard
+  - RatvarIntegrationCog
+
+- type: ratvarCraft
+  id: RatvarIntegrationCog
+  name: "Шестерня интеграции"
+  brassCost: 250
+  powerCost: 0
+  craftingTime: 3
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Items/integration_cog.rsi
+    state: gear
+  entityProduce: RatvarIntegrationCog
+
+- type: ratvarCraft
+  id: RatvarSoulVessel
+  name: "Вместилище души"
+  brassCost: 250
+  powerCost: 100
+  craftingTime: 5
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Items/soul_vessel.rsi
+    state: soul_vessel
+  entityProduce: RatvarSoulVesselGhost
+
+- type: ratvarCraft
+  id: RatvarMarauder
+  name: "Оболочка заводного мародёра"
+  brassCost: 3000
+  powerCost: 300
+  craftingTime: 20
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Mobs/marauder.rsi
+    state: marauder_shell
+  entityProduce: MobRatvarMarauder
+
+- type: ratvarCraft
+  id: RatvarStrangeShard
+  name: "Странный осколок"
+  brassCost: 400
+  powerCost: 600
+  craftingTime: 15
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Items/shard.rsi
+    state: shard
+  entityProduce: RatvarShard

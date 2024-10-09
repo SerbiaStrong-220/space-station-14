@@ -1,0 +1,29 @@
+- type: narsiRitualCategory
+  id: NarsiHealRituals
+  name: Лечение
+  rituals:
+  - NarsiGreatHealRitual
+
+- type: narsiRitual
+  id: NarsiGreatHealRitual
+  name: Великое исцеление
+  description: Великое исцеление лечит и воскрешает всех культистов
+  requirementsDesc: Требуется 2 культиста, а также необходимо закрепить живого человека (в сознании) на алтаре. Вокруг алтаря должно быть 4 лужи крови и 2 пилона.
+  duration: 60
+  requirements:
+    cultistsCount: 2
+    buckledEntityWhitelist:
+      components:
+      - HumanoidAppearance
+    bloodPuddleRequirements:
+      count: 4
+      reagentsWhitelist:
+      - Blood
+      - SpiderBlood
+    entitiesRequirements:
+    - name: NarsiCultPilon
+      count: 2
+      whitelist:
+        components:
+        - NarsiCultPilon
+  effect: !type:NarsiHealRitualEffect

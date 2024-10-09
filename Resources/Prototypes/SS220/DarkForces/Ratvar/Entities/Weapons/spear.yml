@@ -1,0 +1,67 @@
+﻿- type: entity
+  id: RatvarSpear
+  parent: Spear
+  name: "Копьё Ратвара"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Weapons/ratvar_spear.rsi
+    state: spear
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 12
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 18
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarEnchantmentableVisuals.State:
+        overlay:
+          ElectricalTouch: {
+            state: icon-blue,
+            visible: true
+          }
+          None: { visible: false }
+  - type: RatvarSpear
+  - type: RatvarEnchantmentable
+    enchantments:
+    - action: RatvarSpearElectricalTouch
+      name: "Электрошок"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/ratvar_spear.rsi
+        state: icon-blue
+      visuals: ElectricalTouch
+  - type: RatvarItem
+  - type: UserInterface
+    interfaces:
+      enum.RatvarEnchantmentUIKey.Key:
+        type: RatvarEnchantmentBUI
+  - type: SolutionContainerVisuals
+    maxFillLevels: 0
+    inHandsMaxFillLevels: 0
+
+- type: entity
+  id: RatvarSpearElectricalTouch
+  categories: [ HideSpawnMenu ]
+  name: "Электрошок"
+  description: "При ударе (нужно держать в двух руках) испускает слабый ЭМИ гуманоидам и сильный ЭМИ боргам и мехам."
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarSpearElectricalTouchEvent
+
+- type: entity
+  id: RatvarSpearConfusion
+  categories: [ HideSpawnMenu ]
+  name: "Смятение"
+  description: "После удара (нужно держать в двух руках) ваша цель не сможет ходить по прямой 15 секунд"
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarSpearConfusionEvent

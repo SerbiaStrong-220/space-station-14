@@ -1,0 +1,6 @@
+﻿#Ratvar
+- type: Tag
+  id: RatvarBorgModule
+
+- type: Tag
+  id: RatvarDroneUsable

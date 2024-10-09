@@ -1,0 +1,55 @@
+- type: secretListingCategory
+  id: NarsiRuneListing
+  windowName: "Руны крови"
+  windowDescription: "Выберите руну, которую хотите начертить. На данный момент руны не стираются, рисуйте их в скрытых местах"
+  listings:
+    - NarsiOfferingRune
+    - NarsiTeleportRune
+    - NarsiReviveRune
+    - NarsiSummoningRune
+    - NarsiRitualRune
+
+- type: secretListing
+  id: NarsiOfferingRune
+  title: "Руна предложения"
+  description: "Основная руна культистов. Именно на этой руне нужно приносить жертвы, указанные в целях.\nНа этой же руне нужно приносить трупы в жертву, чтобы была доступна руна Воскрешения"
+  subDescription: "Для жертвы (включая цель) нужен труп"
+  buttonText: "Начертить"
+  buttonState: enum.ButtonState.Enabled
+  icon: SS220/DarkForces/Cult/Entities/Runes/rune.rsi/offering.png
+
+- type: secretListing
+  id: NarsiTeleportRune
+  title: "Руна телепорта"
+  description: "На эту руну можно телепортироваться с помощью способности 'Телепорт'. Также две руны можно связать между собой одинаковым тегом и телепортироваться между ними"
+  subDescription: "Чтобы установить тег руны, нажмите ПКМ по нарисованной руне"
+  buttonText: "Начертить"
+  buttonState: enum.ButtonState.Enabled
+  icon: SS220/DarkForces/Cult/Entities/Runes/rune.rsi/teleport.png
+
+- type: secretListing
+  id: NarsiReviveRune
+  title: "Руна возрождения"
+  description: "На данной руне можно воскрешать павших культистов"
+  subDescription: "Требуется заряд, который можно получить, пожертвовав труп на руне Предложения"
+  buttonText: "Начертить"
+  buttonState: enum.ButtonState.Enabled
+  icon: SS220/DarkForces/Cult/Entities/Runes/revive_rune.rsi/idle.png
+
+- type: secretListing
+  id: NarsiSummoningRune
+  title: "Руна призыва"
+  description: "С помощью данной руны можно призвать любого культиста на руну"
+  subDescription: "Требуется 2 культиста у руны\nЦель призыва может быть связана, но ее не должны держать"
+  buttonText: "Начертить"
+  buttonState: enum.ButtonState.Enabled
+  icon: SS220/DarkForces/Cult/Entities/Runes/summon_rune.rsi/idle.png
+
+- type: secretListing
+  id: NarsiRitualRune
+  title: "Руна ритуала разрыва измерений"
+  description: "Именно эта руна призывает Нар'Си"
+  subDescription: "Требуется 7 культистов у руны\nВсе цели должны быть выполнены"
+  buttonText: "Начертить"
+  buttonState: enum.ButtonState.Enabled
+  icon: SS220/DarkForces/Cult/Entities/Runes/narsi_summon_rune.rsi/idle.png

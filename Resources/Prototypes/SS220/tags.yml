@@ -111,6 +111,25 @@
 - type: Tag
   id: EscapePod
 
+# Required for DarkForces port
+- type: Tag
+  id: LLeg
+
+- type: Tag
+  id: RLeg
+
+- type: Tag
+  id: LArm
+
+- type: Tag
+  id: RArm
+
+- type: Tag
+  id: Heart
+
+- type: Tag
+  id: Dog
+
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter

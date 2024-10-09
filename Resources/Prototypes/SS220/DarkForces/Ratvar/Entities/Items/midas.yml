@@ -1,0 +1,23 @@
+﻿- type: ratvarMidasTouch
+  id: MidasTouchSteel
+  item: SheetBrassPlasteel
+
+- type: ratvarMidasTouch
+  id: MidasTouchPlasteel
+  item: SheetBrassPlasteel
+
+- type: ratvarMidasTouch
+  id: MidasTouchClockworkSlab
+  item: RatvarSlab
+  name: "Заводная плита"
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+    state: clock_slab
+
+- type: ratvarMidasTouch
+  id: MidasTouchBrassPlasteel
+  item: RatvarIntegrationCog
+  name: "Шестерня интеграции"
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Items/integration_cog.rsi
+    state: gear

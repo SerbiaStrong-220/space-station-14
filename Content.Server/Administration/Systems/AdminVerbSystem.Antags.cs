@@ -1,6 +1,8 @@
 using Content.Server.Administration.Commands;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.SS220.DarkForces.Narsi;
+using Content.Server.SS220.DarkForces.Ratvar;
 using Content.Server.Zombies;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -35,6 +37,14 @@ public sealed partial class AdminVerbSystem
 
     [ValidatePrototypeId<StartingGearPrototype>]
     private const string PirateGearId = "PirateGear";
+
+    // SS220 DarkForces begin
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string DefaultRatvarRule = "Ratvar";
+
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string DefaultNarsieRule = "NarsiCult";
+    // SS220 DarkForces end
 
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)
@@ -151,5 +161,35 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-thief"),
         };
         args.Verbs.Add(thief);
+
+        // SS220 DarkForces begin
+        Verb narsi = new()
+        {
+            Text = Loc.GetString("Сделать культистом Нар'Си"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Objects/Weapons/Melee/cult_dagger.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<NarsiRuleComponent>(targetPlayer, DefaultNarsieRule);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("Сделать культистом Нар'Си"),
+        };
+        args.Verbs.Add(narsi);
+
+        Verb ratvar = new()
+        {
+            Text = Loc.GetString("Сделать культистом Ратвара"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/SS220/DarkForces/Ratvar/Items/integration_cog.rsi"), "gear"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<RatvarRuleComponent>(targetPlayer, DefaultRatvarRule);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("Сделать культистом Ратвара"),
+        };
+        args.Verbs.Add(ratvar);
+        // SS220 DarkForces end
     }
 }

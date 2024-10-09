@@ -1,0 +1,73 @@
+﻿- type: entity
+  id: RatvarSword
+  parent: BaseItem
+  name: "Нержавеющий меч"
+  suffix: Ratvar
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Weapons/clock_sword.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 20
+  - type: Item
+    size: Large
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarEnchantmentableVisuals.State:
+        overlay:
+          Swordsman: {
+            state: icon-blue,
+            visible: true
+          }
+          Bloodshed: {
+            state: icon-red,
+            visible: true
+          }
+          None: { visible: false }
+  - type: RatvarSword
+  - type: RatvarEnchantmentable
+    enchantments:
+    - action: RatvarSwordsSwordsman
+      name: "Мечник"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clock_sword.rsi
+        state: icon-blue
+      visuals: Swordsman
+    - action: RatvarSwordBloodshed
+      name: "Кровопролитие"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clock_sword.rsi
+        state: icon-red
+      visuals: Bloodshed
+  - type: RatvarItem
+  - type: UserInterface
+    interfaces:
+      enum.RatvarEnchantmentUIKey.Key:
+        type: RatvarEnchantmentBUI
+
+- type: entity
+  id: RatvarSwordsSwordsman
+  categories: [ HideSpawnMenu ]
+  name: "Мечник"
+  description: "Ускоряет ваши удары этим мечом на 9 секунд, но меняет урон на 7."
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarSwordSwordsmanEvent
+
+- type: entity
+  id: RatvarSwordBloodshed
+  categories: [ HideSpawnMenu ]
+  name: "Кровопролитие"
+  description: "Увеличивает кровопотерю на 100 единиц после удара мечом."
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarSwordBloodshedEvent

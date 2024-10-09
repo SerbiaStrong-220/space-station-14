@@ -1,0 +1,124 @@
+﻿- type: construction
+  name: Пилон
+  id: NarsiCultPilonConstruction
+  graph: NarsiCultPilonGraph
+  startNode: start
+  targetNode: pilon
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: Лечит культистов в радиусе 4 тайлов. Если в радиусе 10 тайлов больше двух пилонов, все пилоны отключаются и не работают.
+  icon:
+    sprite: SS220/DarkForces/Cult/Structures/pilon.rsi
+    state: pilon
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: Рунический шлюз
+  id: NarsiCultAirlockConstruction
+  graph: NarsiCultAirlockGraph
+  startNode: start
+  targetNode: airlock
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: Рунический шлюз. Только культисты имеют доступ к нему. Также только культисты видят его истинный вид. Для простых членов экипажа выглядит как шлюз технических помещений.
+  icon:
+    sprite: SS220/DarkForces/Cult/Structures/door.rsi
+    state: assembly
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: Темная кузня
+  id: NarsiCultDarkForgeConstruction
+  graph: NarsiCultDarkForgeGraph
+  startNode: start
+  targetNode: forge
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: Кузня необходима для создания брони, оружия и рунического металла.
+  icon:
+    sprite: SS220/DarkForces/Cult/Structures/forge.rsi
+    state: forge
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: "Яйцо сущности"
+  id: NarsiCreatureEggConstriction
+  graph: NarsiCreatureEggGraph
+  startNode: start
+  targetNode: egg
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: "Яйцо необходимо для выращивания различных сущностей"
+  icon:
+    sprite: SS220/DarkForces/Cult/Structures/creature_egg.rsi
+    state: stage-1
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: Алтарь Нар'Си
+  id: NarsiCultAltarConstruction
+  graph: NarsiCultAltarGraph
+  startNode: start
+  targetNode: altar
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  description: Алтарь необходим для провеления ритуалов
+  icon:
+    sprite: SS220/DarkForces/Cult/Structures/altar.rsi
+    state: narsi
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  name: Стена культа
+  id: NarsiCultWallConstruction
+  graph: NarsiCultWallGraph
+  startNode: start
+  targetNode: wall
+  category: "Культ Нар'Си"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - NarsiCultist
+  icon:
+    sprite: Structures/Walls/cult.rsi
+    state: full
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false

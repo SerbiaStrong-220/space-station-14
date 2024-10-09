@@ -1,0 +1,72 @@
+﻿- type: entity
+  id: RatvarWorkshop
+  parent: BaseRatvarStructure
+  name: "Мастерская Ратвара"
+  suffix: Ratvar
+  components:
+  - type: Anchorable
+    tool: RatvarAnchoring
+  - type: UserInterface
+    interfaces:
+      enum.RatvarWorkshopKey.Key:
+        type: RatvarWorkshopBUI
+  - type: ActivatableUI
+    singleUser: true
+    key: enum.RatvarWorkshopKey.Key
+  - type: RatvarworkShop
+  - type: PlaceableSurface
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Structures/workshop.rsi
+    state: workshop
+  - type: Icon
+    sprite: SS220/DarkForces/Ratvar/Structures/workshop.rsi
+    state: workshop
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+    materialWhiteList:
+    - BrassPlasteel
+  - type: Construction
+    graph: RatvarWorkshopGraph
+    node: workshop
+
+#Construction
+- type: constructionGraph
+  id: RatvarWorkshopGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: workshop
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: BrassPlasteel
+        amount: 4
+        doAfter: 10
+
+  - node: workshop
+    entity: RatvarWorkshop
+
+- type: construction
+  name: "Мастерская Ратвара"
+  id: RatvarWorkshopConstruction
+  graph: RatvarWorkshopGraph
+  startNode: start
+  targetNode: workshop
+  category: "Культ Ратвара"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - RatvarRighteous
+  description: "В мастерской праведники благословленными латунными инструментами создают оружие и снаряжение, что поможет им нести просветления Ратвара заблудшим душам."
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Structures/workshop.rsi
+    state: workshop
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false

@@ -1,0 +1,37 @@
+﻿- type: entity
+  id: RatvarMidasTouch
+  name: "Рука Мидаса"
+  description: "Рука Мидаса — первое и основное заклинание, дарованное Светочем праведникам."
+  components:
+  - type: EntityTargetAction
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    icon:
+      sprite: SS220/DarkForces/Ratvar/actions.rsi
+      state: clocked_hand
+    useDelay: 10
+    range: 6
+    itemIconStyle: NoItem
+    event: !type:MidasTouchEvent
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+
+- type: entity
+  id: RatvarClockMagic
+  name: "Зачаровать предмет"
+  description: "Позволяет выбрать зачарование для предмета"
+  components:
+  - type: EntityTargetAction
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    icon:
+      sprite: SS220/DarkForces/Ratvar/actions.rsi
+      state: carve
+    useDelay: 10
+    range: 6
+    itemIconStyle: NoItem
+    event: !type:RatvarMagicEvent
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg

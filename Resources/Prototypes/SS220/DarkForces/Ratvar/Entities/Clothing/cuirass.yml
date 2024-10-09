@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: ClothingOuterCuirassRatvar
+  parent: ClothingOuterBase
+  name: "Кираса"
+  description: "Броня, что защищает от огня. (нет)"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Clothing/cuirass.rsi
+  - type: Clothing
+    sprite: SS220/DarkForces/Ratvar/Clothing/cuirass.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.8
+        Piercing: 0.6
+        Heat: 0.9
+      # TODO: redo it whenever separate body part protection is implemented
+      # securePartTypes:
+      #   Leg: 0.6
+      #   Arm: 0.7
+  - type: RatvarItem

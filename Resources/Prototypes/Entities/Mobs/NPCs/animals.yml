@@ -2748,6 +2748,7 @@
   - type: Tag
     tags:
     - VimPilot
+    - Dog
 
 - type: entity
   name: corrupted corgi

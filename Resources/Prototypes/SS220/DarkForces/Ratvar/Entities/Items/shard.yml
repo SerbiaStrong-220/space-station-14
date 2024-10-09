@@ -1,0 +1,62 @@
+﻿- type: entity
+  id: RatvarShard
+  parent: BaseItem
+  name: "Странный осколок"
+  description: "Одноразовый кристалл"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Items/shard.rsi
+    layers:
+    - state: shard
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarEnchantmentableVisuals.State:
+        overlay:
+          Reconstruct: { state: shard_overlay_1 }
+          Emp: { state: shard_overlay_2 }
+  - type: UserInterface
+    interfaces:
+      enum.RatvarEnchantmentUIKey.Key:
+        type: RatvarEnchantmentBUI
+  - type: RatvarEnchantmentable
+    enchantments:
+    - action: RatvarShardReconstruct
+      name: "Реконструкция"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Items/shard.rsi
+        state: shard_overlay_1
+      visuals: Reconstruct
+    - action: RatvarShardEmp
+      name: "Электромагнитный импульс"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Items/shard.rsi
+        state: shard_overlay_2
+      visuals: Emp
+  - type: Appearance
+  - type: Item
+    size: Small
+  - type: RatvarShard
+  - type: RatvarItem
+
+- type: entity
+  id: RatvarShardReconstruct
+  categories: [ HideSpawnMenu ]
+  name: "Реконструкция"
+  description: "В радиусе 4 плиток превращает всех киборгов в латунников, меняя стены и полы на латунные версии."
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarShardReconstructEvent
+
+- type: entity
+  id: RatvarShardEmp
+  categories: [ HideSpawnMenu ]
+  name: "Электромагнитный импульс"
+  description: "В радиусе 4 плиток испускает сильный ЭМИ. В радиусе 6 плиток — слабый ЭМИ."
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarShardEmpEvent

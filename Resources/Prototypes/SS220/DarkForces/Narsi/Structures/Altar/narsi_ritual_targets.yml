@@ -1,0 +1,48 @@
+- type: narsiRitualCategory
+  id: NarsiTargetsRituals
+  name: Ритуалы над целями
+  rituals:
+  - NarsiSummonTargetRitual
+  - NarsiVomitTargetRitual
+  - NarsiCoordinatesRitual
+
+- type: narsiRitual
+  id: NarsiSummonTargetRitual
+  name: Призыв
+  description: Используя темную магию, вы можете попробовать призвать вашу цель прямо на алтарь
+  requirementsDesc: Требуется 2 культиста, а также 3 лужи крови рядом с алтарем (в пределах двух тайлов)
+  duration: 60
+  requirements:
+    cultistsCount: 2
+    bloodPuddleRequirements:
+      count: 3
+      reagentsWhitelist:
+      - Blood
+      - SpiderBlood
+  effect: !type:NarsiSummonTargetRitualEffect
+
+- type: narsiRitual
+  id: NarsiVomitTargetRitual
+  name: Отравление
+  description: У одной из ваших целей начинается рвота... Скорее всего такое странное обстоятельство, заставит ее обраться в медицинский отдел.
+  requirementsDesc: Требуется 2 культиста, а также любая еда на алтаре, которая в ходе риатуала будет испорчена и отправлена жертве прямо в желудок
+  duration: 45
+  requirements:
+    cultistsCount: 2
+    entitiesRequirements:
+    - name: Food
+      count: 1
+      whitelist:
+        components:
+        - Food
+  effect: !type:NarsiVomitRitualEffect
+
+- type: narsiRitual
+  id: NarsiCoordinatesRitual
+  name: Вычисление местоположения
+  description: Узнайте текущие координаты одной из жертв, требуемых для призыва Нар'Си
+  requirementsDesc: Требуется 1 культист
+  duration: 30
+  requirements:
+    cultistsCount: 1
+  effect: !type:NarsiCoordinatesRitualEffect

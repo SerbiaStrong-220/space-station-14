@@ -1,0 +1,56 @@
+﻿# Fel damage is unused in our build
+# - type: entity
+#   id: ActionChaplainGreatPrayer
+#   name: "Великая молитва"
+#   description: "Uses hunger to lay an egg."
+#   components:
+#   - type: InstantAction
+#     icon: { sprite: Objects/Specific/Chapel/bible.rsi, state: icon }
+#     useDelay: 120
+#     event: !type:ChaplainGreatPrayerEvent
+
+- type: entity
+  id: ActionChaplainDefenceBarrier
+  name: "Барьер от темных сил"
+  description: "Создайте временный барьер от тёмных сил. Это даст вам время для перегруппировки или побега"
+  components:
+  - type: InstantAction
+    icon: { sprite: SS220/DarkForces/Chaplain/barrier.rsi, state: barrier }
+    useDelay: 180
+    event: !type:ChaplainDefenceBarrierEvent
+
+- type: entity
+  id: ActionChaplainExorcism
+  name: "Экзорцизм"
+  description: "Возвращает человека в свое настоящее тело, если он заколдован темной магией"
+  components:
+  - type: EntityTargetAction
+    useDelay: 60
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    whitelist:
+      components:
+      - MobState
+    itemIconStyle: BigAction
+    icon: { sprite: Objects/Specific/Chapel/bible.rsi, state: icon }
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    event: !type:ChaplainStartExorcismEvent
+
+#Narsi
+- type: entity
+  id: ActionChaplainNarsiExile
+  name: "Начать ритуал изгнания Нар'Си"
+  description: "Когда начнется ритуал, вокруг священника появится защитное поле от Нар'Си. Культисты и люди смогу пройти через него"
+  components:
+  - type: InstantAction
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: shield
+    useDelay: 10
+    itemIconStyle: BigAction
+    charges: 1
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    event: !type:ChaplainNarsiExileEvent

@@ -102,6 +102,12 @@ namespace Content.Client.Entry
             _componentFactory.RegisterClass<SharedAmeControllerComponent>();
             // Do not add to the above, they are legacy
 
+            // SS220 Dark-Forces begin
+            // Server-only prototypes at home:
+            _prototypeManager.RegisterIgnore("narsiRitualCategory");
+            _prototypeManager.RegisterIgnore("narsiAbilityPrototype");
+            _prototypeManager.RegisterIgnore("narsiRitual");
+            // SS220 Dark-Forces end
             _prototypeManager.RegisterIgnore("utilityQuery");
             _prototypeManager.RegisterIgnore("utilityCurvePreset");
             _prototypeManager.RegisterIgnore("accent");

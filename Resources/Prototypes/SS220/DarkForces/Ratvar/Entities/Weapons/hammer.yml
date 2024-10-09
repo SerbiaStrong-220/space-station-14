@@ -1,0 +1,54 @@
+﻿- type: entity
+  id: RatvarHammer
+  parent: Sledgehammer
+  name: "Заводной молот"
+  suffix: Ratvar
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Weapons/clock_hammer.rsi
+    state: icon
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarEnchantmentableVisuals.State:
+        overlay:
+          KnockOff: {
+            state: icon-yellow,
+            visible: true
+          }
+          None: { visible: false }
+  - type: UserInterface
+    interfaces:
+      enum.RatvarEnchantmentUIKey.Key:
+        type: RatvarEnchantmentBUI
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 15
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Piercing: 10
+  - type: RatvarHammer
+  - type: RatvarEnchantmentable
+    enchantments:
+    - action: RatvarHammmerKnockOff
+      name: "Отбрасывание"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clock_hammer.rsi
+        state: icon-yellow
+      visuals: KnockOff
+  - type: RatvarItem
+
+- type: entity
+  id: RatvarHammmerKnockOff
+  categories: [ HideSpawnMenu ]
+  name: "Отбрасывание"
+  description: "После удара (необходимо держать молот в обеих руках) отбросит противника на очень большое расстояние."
+  components:
+  - type: InstantAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    event: !type:RatvarHammerKnockOffEvent

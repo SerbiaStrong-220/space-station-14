@@ -1,0 +1,42 @@
+﻿- type: entity
+  id: RatvarPortal
+  name: "Портал Ратвара"
+  description: "До прихода Ратвара осталось совсем чуть-чуть..."
+  suffix: Ratvar
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    sprite: SS220/DarkForces/Ratvar/Structures/portal.rsi
+    layers:
+    - state: spatial_gateway
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - TableMask
+  - type: MovedByPressure
+  - type: InteractionOutline
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RatvarPortal
+  - type: AmbientSound
+    volume: 5
+    range: 12
+    sound:
+      path: /Audio/SS220/DarkForces/Ratvar/clockcult_gateway_charging.ogg

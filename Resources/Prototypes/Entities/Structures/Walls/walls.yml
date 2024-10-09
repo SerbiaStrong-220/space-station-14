@@ -216,6 +216,11 @@
   - type: IconSmooth
     key: walls
     base: cult
+  #SS220 DarkForces begin
+  - type: Construction
+    graph: NarsiCultWallGraph
+    node: wall
+  #SS220 DarkForces end
 
 - type: entity
   parent: BaseWall

@@ -1,0 +1,101 @@
+﻿- type: constructionGraph
+  id: NarsiCultPilonGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: pilon
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: RunicPlasteel
+        amount: 7
+        doAfter: 3
+  - node: pilon
+    entity: NarsiCultPilon
+
+- type: constructionGraph
+  id: NarsiCultAirlockGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: airlock
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: RunicPlasteel
+        amount: 5
+        doAfter: 3
+  - node: airlock
+    entity: AirlockNarsiCultLocked
+
+- type: constructionGraph
+  id: NarsiCultDarkForgeGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: forge
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: RunicPlasteel
+        amount: 7
+        doAfter: 3
+  - node: forge
+    entity: NarsiCultDarkForge
+
+- type: constructionGraph
+  id: NarsiCreatureEggGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: egg
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: RunicPlasteel
+        amount: 7
+        doAfter: 3
+  - node: egg
+    entity: NarsiCreatureEgg
+
+- type: constructionGraph
+  id: NarsiCultAltarGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: altar
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: RunicPlasteel
+        amount: 7
+        doAfter: 3
+  - node: altar
+    entity: NarsiAltarHeaven
+
+- type: constructionGraph
+  id: NarsiCultWallGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: wall
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: RunicPlasteel
+        amount: 2
+        doAfter: 3
+  - node: wall
+    entity: WallCult

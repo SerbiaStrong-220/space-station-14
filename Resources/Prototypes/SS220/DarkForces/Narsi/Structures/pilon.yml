@@ -1,0 +1,21 @@
+- type: entity
+  id: NarsiCultPilon
+  parent: [ BaseStructure, BaseNarsiStructure ]
+  name: Пилон
+  suffix: Narsi
+  components:
+  - type: PlaceableSurface
+  - type: PointLight
+    radius: 1.5
+    energy: 1
+    color: "#f08080"
+  - type: NarsiCultStructure
+    building: Pilon
+  - type: SpriteFade
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Structures/pilon.rsi
+    state: pilon
+  - type: NarsiCultPilon
+  - type: Construction
+    graph: NarsiCultPilonGraph
+    node: pilon

@@ -1,0 +1,60 @@
+- type: entity
+  name: Нар'Си
+  parent: MobXeno
+  id: Narsie
+  suffix: Narsi
+  components:
+    - type: Sprite
+      drawdepth: Mobs
+      sprite: SS220/DarkForces/Cult/Mobs/narsi.rsi
+      offset: 0,0
+      layers:
+        - map: ["enum.DamageStateVisualLayers.Base"]
+          state: narsie
+    - type: MobState
+      allowedStates:
+        - Alive
+        - Dead
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        8000000: Dead
+    - type: Stamina
+      critThreshold: 8000000 # Basically no stamina crit
+    - type: Physics
+      bodyType: KinematicController
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 1.3
+          density: 400
+          mask:
+          - GhostImpassable
+    - type: MeleeWeapon
+      hidden: true
+      angle: 0
+      soundHit:
+        collection: AlienClaw
+      animation: WeaponArcBite
+      damage:
+        groups:
+          Brute: 1000
+      range: 8
+    - type: MovementIgnoreGravity
+    - type: GhostRole
+      allowMovement: true
+      allowSpeech: true
+      makeSentient: true
+      name: Нар'Си
+      description: Зловещий бог, чья задача уничтожить все живое
+      rules: Убейте всех, кроме культистов
+    - type: GhostTakeoverAvailable
+    - type: Narsi
+    - type: PointLight
+      enabled: true
+      radius: 7
+      energy: 15
+      color: OrangeRed
+    - type: ChaplainBarrierTarget

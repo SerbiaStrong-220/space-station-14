@@ -1,0 +1,12 @@
+﻿- type: entity
+  id: ClothingShoesRatvar
+  parent: ClothingShoesBase
+  name: "Гусеницы"
+  description: "Тяжёлые сапоги"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Clothing/treads.rsi
+  - type: Clothing
+    sprite: SS220/DarkForces/Ratvar/Clothing/treads.rsi
+  - type: RatvarItem

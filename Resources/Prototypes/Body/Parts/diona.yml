@@ -30,6 +30,9 @@
   components:
   - type: Sprite
     state: "l_arm"
+  - type: Tag
+    tags:
+    - LArm
 
 - type: entity
   id: RightArmDiona
@@ -38,6 +41,9 @@
   components:
   - type: Sprite
     state: "r_arm"
+  - type: Tag
+    tags:
+    - RArm
 
 - type: entity
   id: LeftHandDiona
@@ -62,6 +68,9 @@
   components:
   - type: Sprite
     state: "l_leg"
+  - type: Tag
+    tags:
+    - LLeg
 
 - type: entity
   id: RightLegDiona
@@ -73,6 +82,9 @@
   - type: BodyPart
     partType: Leg
     symmetry: Right
+  - type: Tag
+    tags:
+    - RLeg
 
 - type: entity
   id: LeftFootDiona

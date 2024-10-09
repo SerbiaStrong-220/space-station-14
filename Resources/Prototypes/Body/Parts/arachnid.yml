@@ -54,6 +54,9 @@
   - type: Sprite
     sprite: Mobs/Species/Arachnid/parts.rsi
     state: "l_arm"
+  - type: Tag
+    tags:
+    - LArm
 
 - type: entity
   id: RightArmArachnid
@@ -63,6 +66,9 @@
   - type: Sprite
     sprite: Mobs/Species/Arachnid/parts.rsi
     state: "r_arm"
+  - type: Tag
+    tags:
+    - RArm
 
 - type: entity
   id: LeftHandArachnid
@@ -91,6 +97,9 @@
     sprite: Mobs/Species/Arachnid/parts.rsi
     state: "l_leg"
   - type: MovementBodyPart
+  - type: Tag
+    tags:
+    - LLeg
 
 - type: entity
   id: RightLegArachnid
@@ -101,6 +110,9 @@
     sprite: Mobs/Species/Arachnid/parts.rsi
     state: "r_leg"
   - type: MovementBodyPart
+  - type: Tag
+    tags:
+    - RLeg
 
 - type: entity
   id: LeftFootArachnid

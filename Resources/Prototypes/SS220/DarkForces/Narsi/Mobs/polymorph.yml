@@ -1,0 +1,322 @@
+- type: entity
+  id: BaseNarsiMob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - NarsiCult
+  - type: ActiveRadio
+    channels:
+    - NarsiCult
+  - type: NpcFactionMember
+    factions:
+    - NarsiCult
+  - type: HTN
+    rootTask:
+      task: XenoCompound
+    blackboard:
+      NavInteract: !type:Bool true
+      NavPry: !type:Bool true
+      NavSmash: !type:Bool true
+  - type: Access
+    tags:
+    - NarsiCultAccess
+  - type: NarsiCultCreature
+
+- type: entity
+  name: Наблюдатель
+  id: MobNarsiObserverEye
+  description: Культисты используют эту оболочку, для проведения разведки
+  suffix: "Ghost"
+  parent: BaseNarsiMob
+  components:
+  - type: Insulated
+  - type: CombatMode
+  - type: InputMover
+  - type: Clickable
+  - type: InteractionOutline
+  - type: MobMover
+  - type: Input
+    context: "ghost"
+  - type: Examiner
+    skipChecks: true
+  - type: Physics
+    bodyType: KinematicController
+    bodyStatus: InAir
+  - type: CanMoveInAir
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/DarkForces/Cult/Mobs/eye.rsi
+    layers:
+    - state: eye
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 15
+        mask:
+        - GhostImpassable
+  - type: Eye
+    drawFov: false
+  - type: Visibility
+    layer: 2 #ghost vis
+  - type: MovementIgnoreGravity
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 6
+    baseSprintSpeed: 6
+
+- type: entity
+  name: corrupted corgi
+  parent:
+  - BaseNarsiMob
+  - MobCorgi
+  id: MobCorgiNarsiRitual
+  description: Ian! No!
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Pets/corgi.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: narsian
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Critical
+      300: Dead
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: narsian
+      Dead:
+        Base: narsian_dead
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 15
+        Slash: 15
+  - type: InputMover
+  - type: MobMover
+  - type: Grammar
+    attributes:
+      gender: epicene
+  - type: Bloodstream
+    bloodReagent: DemonsBlood
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Infernal
+  - type: Temperature
+    heatDamageThreshold: 4000 #They come from hell, so..
+    coldDamageThreshold: 260
+    currentTemperature: 310.15
+    coldDamage:
+      types:
+        Cold: 1 #per second, scales with temperature & other constants
+    specificHeat: 42
+    heatDamage:
+      types:
+        Heat: 1 #per second, scales with temperature & other constants
+
+- type: entity
+  id: MobNarsiSkeleton
+  parent:
+  - BaseNarsiMob
+  - BaseSimpleMob
+  - MobCombat
+  - MobFlammable
+  name: Скелет
+  description: Мечта собак
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/DarkForces/Cult/Mobs/skeleton.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: skeleton
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: skeleton
+      Dead:
+        Base: skeleton_dead
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MovementAlwaysTouching
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.0
+    baseSprintSpeed: 5.0
+  - type: CombatMode
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 15
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: Скелет
+    description: Вас вырастил культ Нар'Cи, слушайте указания культистов
+    rules: Слушайтесь культистов!
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  id: MobNarsiFlesh
+  parent:
+  - BaseNarsiMob
+  - SimpleMobBase
+  name: Гниющая плоть
+  description: Как же она воняет!
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/DarkForces/Cult/Mobs/flesh.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: base
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: base
+      Dead:
+        Base: dead
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MovementAlwaysTouching
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.0
+    baseSprintSpeed: 4.0
+  - type: CombatMode
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 15
+  - type: Tool
+    speedModifier: 1.5
+    qualities:
+    - Prying
+  - type: Prying
+    pryPowered: !type:Bool
+      true
+    force: !type:Bool
+      false
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: Гниющая плоть
+    description: Вас вырастил культ Нар'Cи, слушайте указания культистов
+    rules: Слушайтесь культистов!
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  id: MobNarsiCharger
+  parent:
+  - BaseNarsiMob
+  - SimpleMobBase
+  name: Мясной громила
+  description: Кажется мне нужно бежать...
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/DarkForces/Cult/Mobs/charger.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: base
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: base
+      Dead:
+        Base: dead
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MovementAlwaysTouching
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.0
+    baseSprintSpeed: 6.0
+  - type: CombatMode
+  - type: MeleeWeapon
+    range: 2.5
+    hidden: true
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 25
+  - type: Tool
+    speedModifier: 1.5
+    qualities:
+    - Prying
+  - type: Prying
+    pryPowered: !type:Bool
+      true
+    force: !type:Bool
+      true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: Мясной громила
+    description: Вас вырастил культ Нар'Cи, слушайте указания культистов
+    rules: Слушайтесь культистов!
+  - type: GhostTakeoverAvailable

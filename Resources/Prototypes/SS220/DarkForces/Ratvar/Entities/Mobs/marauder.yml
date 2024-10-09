@@ -1,0 +1,131 @@
+﻿- type: entity
+  id: MobRatvarMarauder
+  name: "Заводной мародёр"
+  description: "Пахнет латунью"
+  suffix: Ratvar
+  components:
+  - type: Actions
+  - type: Input
+    context: "human"
+  - type: InputMover
+  - type: CombatMode
+    canDisarm: false
+  - type: Internals
+  - type: Examiner
+  - type: ZombieImmune
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: KinematicController
+  - type: NpcFactionMember
+    factions:
+    - Ratvar
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/DarkForces/Ratvar/Mobs/marauder.rsi
+    noRot: true
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: marauder_shell
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarSoulVesselVisualState.State:
+        enum.DamageStateVisualLayers.Base:
+          True: {
+            state: "marauder"
+          }
+          False: {
+            state: "marauder_shell"
+          }
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.35
+        density: 300
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: MeleeWeapon
+    range: 2.0
+    hidden: true
+    angle: 0
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcPunch
+    damage:
+      groups:
+        Brute: 18
+  - type: DamageStateVisuals
+    rotate: true
+    states:
+      Alive:
+        Base: marauder
+      Dead:
+        Base: marauder_dead
+  - type: Puller
+    needsHands: false
+  - type: NoSlip
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      80: 0.9
+      140: 0.8
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: RatvarMarauderModifierSet
+  - type: RatvarMarauderShell
+    soulVesselSlot:
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - RatvarSoulVessel
+  - type: ContainerContainer
+    containers:
+      SoulVessel: !type:ContainerSlot
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+    - FootstepSound
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Ratvar
+    - Common
+    - Binary
+  - type: ActiveRadio
+    channels:
+    - Ratvar
+    - Common
+    - Binary
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: Reflect
+    reflectProb: 0.40
+  - type: Pullable
+  # - type: LanguageSpeaker
+  #   understands:
+  #   - GalacticCommon
+  #   - Ratvar
+  #   - RobotTalk
+
+- type: damageModifierSet
+  id: RatvarMarauderModifierSet
+  coefficients:
+    Blunt: 0.6
+    Slash: 0.6
+    Piercing: 0.6
+    Caustic: 0.7

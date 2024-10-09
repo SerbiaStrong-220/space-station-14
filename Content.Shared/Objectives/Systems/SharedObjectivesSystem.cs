@@ -164,4 +164,33 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         comp.Icon = icon;
     }
+
+    // SS220 Group-Objectives beign
+    public EntityUid? TryCreateGroupObjective(string proto)
+    {
+        var uid = Spawn(proto);
+        if (!TryComp<ObjectiveComponent>(uid, out var comp))
+        {
+            Del(uid);
+            Log.Error($"Invalid objective prototype {proto}, missing ObjectiveComponent (Group)");
+            return null;
+        }
+
+        var ev = new GroupObjectiveAssignedEvent();
+        RaiseLocalEvent(uid, ref ev);
+
+        if (ev.Cancelled)
+        {
+            Log.Warning($"Could not assign objective {proto} for someone. Reason: {ev.Reason}");
+            Del(uid);
+            return null;
+        }
+
+        var afterEv = new GroupObjectiveAfterAssignEvent(comp, MetaData(uid));
+        RaiseLocalEvent(uid, ref afterEv);
+
+        Log.Debug($"Created objective {ToPrettyString(uid):objective}");
+        return uid;
+    }
+    // SS220 Group-Objectives end
 }

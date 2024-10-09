@@ -1,0 +1,149 @@
+- type: entity
+  id: RatvarSlab
+  parent: BaseItem
+  name: "Заводная плита"
+  description: "Инструмент праведников Ратвара."
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+    layers:
+    - state: clock_slab
+  - type: Item
+    size: Small
+  - type: UserInterface
+    interfaces:
+      enum.RatvarEnchantmentUIKey.Key:
+        type: RatvarEnchantmentBUI
+  - type: GenericVisualizer
+    visuals:
+      enum.RatvarEnchantmentableVisuals.State:
+        overlay:
+          Stun: { state: clock_slab_overlay_1 }
+          Doors: { state: clock_slab_overlay_2 }
+          Walls: { state: clock_slab_overlay_3 }
+          Teleport: { state: clock_slab_overlay_4 }
+          Heal: { state: clock_slab_overlay_5 }
+          Hidings: { state: clock_slab_overlay_6 }
+  - type: RatvarSlab
+  - type: RatvarEnchantmentable
+    enchantments:
+    - action: ActionRatvarSlabStun
+      name: "Оглушение"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+        state: clock_slab_overlay_1
+      visuals: Stun
+    - action: ActionRatvarSlabDoors
+      name: "Создание прохода"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+        state: clock_slab_overlay_2
+      visuals: Doors
+    - action: ActionRatvarSlabWalls
+      name: "Терраформ"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+        state: clock_slab_overlay_3
+      visuals: Walls
+    - action: ActionRatvarSlabTeleport
+      name: "Телепортация"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+        state: clock_slab_overlay_4
+      visuals: Teleport
+    - action: ActionRatvarSlabHidings
+      name: "Сокрытие шестерней"
+      icon:
+        sprite: SS220/DarkForces/Ratvar/Weapons/clockwork_slab.rsi
+        state: clock_slab_overlay_6
+      visuals: Hidings
+  - type: Appearance
+  - type: UseDelay
+    delay: 10.0
+  - type: RatvarItem
+  - type: Tool
+    qualities:
+    - RatvarScrewing
+    - RatvarAnchoring
+
+- type: entity
+  id: ActionRatvarSlabStun
+  categories: [ HideSpawnMenu ]
+  name: "Оглушение"
+  description: "Оглушает цель"
+  components:
+  - type: EntityTargetAction
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    whitelist:
+      components:
+      - Body
+    useDelay: 10
+    range: 6
+    itemIconStyle: BigItem
+    event: !type:RatvarSlabStun
+
+- type: entity
+  id: ActionRatvarSlabDoors
+  categories: [ HideSpawnMenu ]
+  name: "Создание прохода"
+  description: "Открывает двери и шкафы"
+  components:
+  - type: EntityTargetAction
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    whitelist:
+      components:
+      - Door
+    useDelay: 10
+    range: 6
+    itemIconStyle: BigItem
+    event: !type:RatvarSlabDoors
+
+- type: entity
+  id: ActionRatvarSlabWalls
+  categories: [ HideSpawnMenu ]
+  name: "Терраформ"
+  description: "При использовании на ОБЫЧНОЙ стене, делает из неё фальшивую стену"
+  components:
+  - type: EntityTargetAction
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    whitelist:
+      tags:
+      - Wall
+    useDelay: 10
+    range: 6
+    itemIconStyle: BigItem
+    event: !type:RatvarSlabWalls
+
+- type: entity
+  id: ActionRatvarSlabTeleport
+  categories: [ HideSpawnMenu ]
+  name: "Телепортация"
+  description: "Телепортация к алтарю или видимой области"
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+    itemIconStyle: BigItem
+    range: 16
+    event: !type:RatvarSlabTeleport
+
+- type: entity
+  id: ActionRatvarSlabHidings
+  categories: [ HideSpawnMenu ]
+  name: "Сокрытие шестерней"
+  description: "Маскирует постройки праведников под кусты и шкафы"
+  components:
+  - type: EntityTargetAction
+    canTargetSelf: false
+    checkCanInteract: true
+    interactOnMiss: false
+    useDelay: 10
+    range: 6
+    itemIconStyle: BigItem
+    event: !type:RatvarSlabHidings

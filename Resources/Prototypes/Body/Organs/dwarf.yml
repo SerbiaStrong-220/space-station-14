@@ -36,3 +36,6 @@
     # mm very yummy
     maxReagents: 5
     metabolizerTypes: [Dwarf]
+  - type: Tag
+    tags:
+    - Heart

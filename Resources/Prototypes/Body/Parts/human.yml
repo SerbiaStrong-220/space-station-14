@@ -54,6 +54,9 @@
   - type: Sprite
     sprite: Mobs/Species/Human/parts.rsi
     state: "l_arm"
+  - type: Tag
+    tags:
+    - LArm
 
 - type: entity
   id: RightArmHuman
@@ -63,6 +66,9 @@
   - type: Sprite
     sprite: Mobs/Species/Human/parts.rsi
     state: "r_arm"
+  - type: Tag
+    tags:
+    - RArm
 
 - type: entity
   id: LeftHandHuman
@@ -90,6 +96,9 @@
   - type: Sprite
     sprite: Mobs/Species/Human/parts.rsi
     state: "l_leg"
+  - type: Tag
+    tags:
+    - LLeg
 
 - type: entity
   id: RightLegHuman
@@ -99,6 +108,9 @@
   - type: Sprite
     sprite: Mobs/Species/Human/parts.rsi
     state: "r_leg"
+  - type: Tag
+    tags:
+    - RLeg
 
 - type: entity
   id: LeftFootHuman

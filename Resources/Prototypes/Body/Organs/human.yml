@@ -71,7 +71,7 @@
     entries:
       Burger: Brain
       Taco: Brain
-  
+
 - type: entity
   id: OrganHumanEyes
   parent: BaseHumanOrgan
@@ -164,6 +164,9 @@
     - id: Medicine
     - id: Poison
     - id: Narcotic
+  - type: Tag
+    tags:
+    - Heart
 
 - type: entity
   id: OrganHumanStomach

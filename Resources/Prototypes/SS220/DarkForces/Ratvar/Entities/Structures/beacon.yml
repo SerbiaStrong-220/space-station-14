@@ -1,0 +1,66 @@
+﻿- type: entity
+  id: RatvarBeacon
+  parent: BaseRatvarStructure
+  name: "Маяк Вестника"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Structures/heralds_beacon.rsi
+    layers:
+    - state: beacon
+      map: [ "base" ]
+  - type: Icon
+    sprite: SS220/DarkForces/Ratvar/Structures/heralds_beacon.rsi
+    state: beacon
+  - type: GenericVisualizer
+    visuals:
+      enum.BeaconVisuals.State:
+        base:
+          True: { state: beacon }
+          False: { state: beacon-off }
+  - type: Appearance
+  - type: RatvarBeacon
+  - type: RatvarStructure
+  - type: Construction
+    graph: RatvarBeaconGraph
+    node: beacon
+
+#Construction
+- type: constructionGraph
+  id: RatvarBeaconGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: beacon
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: BrassPlasteel
+        amount: 6
+        doAfter: 10
+
+  - node: beacon
+    entity: RatvarBeacon
+
+- type: construction
+  name: "Маяк Вестника"
+  id: RatvarBeaconConstruction
+  graph: RatvarBeaconGraph
+  startNode: start
+  targetNode: beacon
+  category: "Культ Ратвара"
+  objectType: Structure
+  entityWhitelist:
+    components:
+    - RatvarRighteous
+  description: "Маяк — часть задания и малый добытчик энергий и восстановления здоровья вокруг."
+  icon:
+    sprite: SS220/DarkForces/Ratvar/Structures/heralds_beacon.rsi
+    state: beacon
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  placementMode: SnapgridCenter
+  canRotate: false

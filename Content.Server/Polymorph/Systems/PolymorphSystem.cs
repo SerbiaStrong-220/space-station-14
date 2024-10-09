@@ -20,6 +20,7 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -337,6 +338,7 @@ public sealed partial class PolymorphSystem : EntitySystem
                 ("parent", Identity.Entity(uid, EntityManager)),
                 ("child", Identity.Entity(parent, EntityManager))),
             parent);
+        RaiseLocalEvent(uid, new PolymorphRevertedEvent(parent)); // SS220 Dark-Forces
         QueueDel(uid);
 
         return parent;
@@ -385,3 +387,15 @@ public sealed partial class PolymorphSystem : EntitySystem
             _actions.RemoveAction(target, val);
     }
 }
+
+// SS220-Dark-Forces begin
+public sealed class PolymorphRevertedEvent : EntityEventArgs
+{
+    public EntityUid Original;
+
+    public PolymorphRevertedEvent(EntityUid original)
+    {
+        Original = original;
+    }
+}
+// SS220-Dark-Forces end

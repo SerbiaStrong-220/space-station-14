@@ -146,6 +146,7 @@
     price: 500
   - type: NameIdentifier #SS220 PowerId
     group: PowerId
+  - type: RatvarGearTarget #SS220 Dark-Forces
 
 # APC under construction
 - type: entity

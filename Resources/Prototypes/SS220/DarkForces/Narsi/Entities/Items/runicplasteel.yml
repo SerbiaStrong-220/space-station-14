@@ -1,0 +1,76 @@
+- type: material
+  id: RunicPlasteel
+  stackEntity: SheetRunicPlasteel1R
+  name: materials-plasteel
+  icon: { sprite: Objects/Materials/Sheets/metal.rsi, state: runic }
+  color: "#696969" #Okay, this is epic
+  price: 0.28 # 1-1 mix of plasma and steel.
+
+- type: stack
+  id: RunicPlasteel
+  name: Рунический металл
+  icon: { sprite: /Textures/Objects/Materials/Sheets/metal.rsi, state: runic }
+  spawn: SheetRunicPlasteel1R
+  maxCount: 50
+
+- type: entity
+  parent: SheetMetalBase
+  id: SheetRunicPlasteel
+  name: Рунический металл
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RunicPlasteel: 100
+  - type: Stack
+    stackType: RunicPlasteel
+    baseLayer: base
+    layerStates:
+    - runic
+    - runic_2
+    - runic_3
+  - type: Sprite
+    state: runic_3
+    layers:
+    - state: runic_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: Рунический металл
+  - type: Appearance
+
+- type: entity
+  parent: SheetRunicPlasteel
+  id: SheetRunicPlasteel1R
+  name: Рунический металл
+  suffix: Single
+  components:
+  - type: Sprite
+    state: runicplasteel
+  - type: Stack
+    stackType: RunicPlasteel
+    count: 1
+
+- type: entity
+  parent: SheetRunicPlasteel
+  id: SheetRunicPlasteelHalf
+  name: Рунический металл
+  suffix: Half
+  components:
+  - type: Sprite
+    state: runicplasteel
+  - type: Stack
+    stackType: RunicPlasteel
+    count: 25
+
+- type: entity
+  parent: SheetRunicPlasteel
+  id: SheetRunicPlasteelTen
+  name: Рунический металл
+  suffix: Half
+  components:
+  - type: Sprite
+    state: runicplasteel
+  - type: Stack
+    stackType: RunicPlasteel
+    count: 10

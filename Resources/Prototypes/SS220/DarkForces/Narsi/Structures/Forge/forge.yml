@@ -1,0 +1,40 @@
+- type: entity
+  id: NarsiCultDarkForge
+  parent: [BaseStructure, BaseNarsiStructure]
+  name: Темная кузня
+  suffix: Narsi
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Structures/forge.rsi
+    layers:
+    - state: icon
+      map: [ "NarsiForgeState" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.NarsiForgeVisuals.State:
+        NarsiForgeState:
+          Idle: { state: icon }
+          Delay: { state: icon }
+          Working: { state: forge }
+  - type: Appearance
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+    materialWhiteList:
+    - RunicPlasteel
+    - Steel
+    - Plasteel
+  - type: NarsiCultForge
+  - type: NarsiCultStructure
+    building: Forge
+  - type: ActivatableUI
+    verbText: forge-verb-text
+    key: enum.SharedNarsiForgeInterfaceKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SharedNarsiForgeInterfaceKey.Key:
+        type: NarsiForgeBoundInterface
+  - type: Construction
+    graph: NarsiCultDarkForgeGraph
+    node: forge

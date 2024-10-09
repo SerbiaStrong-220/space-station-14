@@ -684,8 +684,11 @@ namespace Content.Shared.Cuffs
                 if (cuff.BreakOnRemove)
                 {
                     QueueDel(cuffsToRemove);
-                    var trash = Spawn(cuff.BrokenPrototype, Transform(cuffsToRemove).Coordinates);
-                    _hands.PickupOrDrop(user, trash);
+                    if (cuff.BrokenPrototype != null) // SS220 safe-no-handcuff-proto
+                    {
+                        var trash = Spawn(cuff.BrokenPrototype, Transform(cuffsToRemove).Coordinates);
+                        _hands.PickupOrDrop(user, trash);
+                    }
                 }
                 else
                 {

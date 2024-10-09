@@ -99,6 +99,9 @@
     - id: Medicine
     - id: Poison
     - id: Narcotic
+  - type: Tag
+    tags:
+    - Heart
 
 - type: entity
   id: OrganArachnidLiver

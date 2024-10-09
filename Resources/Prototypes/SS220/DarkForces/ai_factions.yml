@@ -1,0 +1,24 @@
+# NTPets shouldn't be here so cult AI mobs don't sabotage rituals
+- type: npcFaction
+  id: NarsiCult
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - Zombie
+  - Revolutionary
+  - SpiderQueen
+  - Dragon
+  - Ratvar # Lore-wise they are enemies
+
+- type: npcFaction
+  id: Ratvar
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - Zombie
+  - Revolutionary
+  - SpiderQueen
+  - Dragon
+  - NarsiCult # Lore-wise they are enemies

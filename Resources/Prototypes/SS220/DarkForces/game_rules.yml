@@ -1,0 +1,40 @@
+- type: entity
+  id: NarsiCult
+  parent: BaseGameRule
+  components:
+  - type: NarsiRule
+  - type: AntagSelection
+    agentName: narsi-agent-name
+    definitions:
+    - max: 8
+      #playerRatio: 10
+      prefRoles: [ NarsiCultist ]
+      blacklist:
+        components:
+        - AntagImmune
+      components:
+        - type: NarsiCultist
+      startingGear: NarsiCultistGear
+      mindComponents:
+      - type: NarsiCultRole
+        prototype: NarsiCultist
+
+- type: entity
+  id: Ratvar
+  parent: BaseGameRule
+  components:
+  - type: RatvarRule
+  - type: AntagSelection
+    agentName: ratvar-agent-name
+    definitions:
+    - max: 8
+      #playerRatio: 10
+      prefRoles: [ RatvarRighteous ]
+      blacklist:
+        components:
+        - AntagImmune
+      components:
+      - type: RatvarRighteous
+      mindComponents:
+      - type: RatvarRole
+        prototype: RatvarRighteous

@@ -1,0 +1,25 @@
+﻿<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2007/xaml"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                MinSize="512 512"
+                SetSize="512 512" Title="Ритуалы">
+    <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
+
+        <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
+            <PanelContainer Margin="2 0 6 0" StyleClasses="Inset" VerticalAlignment="Center"
+                            VerticalExpand="True">
+                <TextureRect
+                    Name="VampireTexture"
+                    TexturePath="/Textures/Structures/Furniture/Altars/Cults/fangs.rsi/full.png"
+                    Margin="8 8 8 8"
+                    MinSize="96 96"
+                    Stretch="KeepAspectCentered" />
+            </PanelContainer>
+
+            <Label Name="AltarStatus" Align="Center" Text="Алтарь готов к ритуалу" />
+        </BoxContainer>
+
+        <TabContainer Name="TabContainer" VerticalExpand="True" />
+    </BoxContainer>
+</ui:FancyWindow>
