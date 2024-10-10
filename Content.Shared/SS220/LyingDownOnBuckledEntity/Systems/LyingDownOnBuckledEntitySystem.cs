@@ -4,6 +4,7 @@ using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Gibbing.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -44,20 +45,21 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, DamageChangedEvent>(OnDamageChanged);
 
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, UpdateCanMoveEvent>(OnCanMoveUpdate);
-        SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, RaisePetDoAfterEvent>(OnRaiseDoAfter);
         SubscribeLocalEvent<LyingDownOnBuckledEntityComponent, LieDownDoAfterEvent>(OnLieDownDoAfter);
 
-        SubscribeLocalEvent<LyingPetComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
-        SubscribeLocalEvent<LyingPetComponent, UnstrapAttemptEvent>(OnUnstrapAttempt);
-        SubscribeLocalEvent<HumanoidAppearanceComponent, GetVerbsEvent<AlternativeVerb>>(OnHumanoidAlternativeVerb);
+        SubscribeLocalEvent<UnderLyingPetComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
+        SubscribeLocalEvent<UnderLyingPetComponent, UnstrapAttemptEvent>(OnUnstrapAttempt);
+        SubscribeLocalEvent<UnderLyingPetComponent, EntityGibbedEvent>(OnEntityGibbed);
+
+        SubscribeLocalEvent<GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<LyingPetComponent>();
+        var query = EntityQueryEnumerator<UnderLyingPetComponent>();
         while (query.MoveNext(out var uid, out var lyingPet))
         {
             if (_timing.CurTime < lyingPet.NextSecond)
@@ -106,82 +108,84 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         if (entity.Comp.LyingOn == args.OtherEntity)
             StandUp(entity);
     }
+
     private void OnCanMoveUpdate(Entity<LyingDownOnBuckledEntityComponent> entity, ref UpdateCanMoveEvent args)
     {
         if (entity.Comp.IsLying)
             args.Cancel();
     }
 
-    private void OnAlternativeVerb(EntityUid uid, LyingDownOnBuckledEntityComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void OnAlternativeVerb(GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess ||
-            args.User == uid ||
-            component.LyingOn is null)
-            return;
-
-        var raiseVerb = new AlternativeVerb
-        {
-            Text = Loc.GetString("raise-pet-verb", ("target", component.LyingOn.Value)),
-            Act = () =>
-            {
-                var doAfterEventArgs = new DoAfterArgs(EntityManager,
-                    args.User,
-                    component.RaiseDoAfter,
-                    new RaisePetDoAfterEvent(),
-                    uid,
-                    uid)
-                {
-                    Broadcast = false,
-                    BreakOnDamage = false,
-                    BreakOnMove = true,
-                    NeedHand = false,
-                    BlockDuplicate = true,
-                    CancelDuplicate = true,
-                    DuplicateCondition = DuplicateConditions.SameEvent
-                };
-                _doAfter.TryStartDoAfter(doAfterEventArgs);
-            }
-        };
-
-        args.Verbs.Add(raiseVerb);
-    }
-
-    private void OnHumanoidAlternativeVerb(EntityUid uid, HumanoidAppearanceComponent component, GetVerbsEvent<AlternativeVerb> args)
-    {
-        var pet = args.User;
+        var user = args.User;
+        var target = args.Target;
 
         if (!args.CanAccess ||
-            !TryComp<LyingDownOnBuckledEntityComponent>(pet, out var petLyingDown) ||
-            petLyingDown.IsLying ||
-            !CheckBuckledEntity(pet, uid) ||
-            !CheckOtherLyingPets(pet, uid))
+            user == target)
             return;
 
-        var lieDownVerb = new AlternativeVerb
+        if (TryComp<LyingDownOnBuckledEntityComponent>(target, out var targetLyingDownComp) &&
+            targetLyingDownComp.LyingOn is not null)
         {
-            Text = Loc.GetString("pet-lie-down-werb"),
-            Act = () =>
+            var raiseVerb = new AlternativeVerb
             {
-                var doAfterEventArgs = new DoAfterArgs(EntityManager,
-                    pet,
-                    petLyingDown.LyingDoAfter,
-                    new LieDownDoAfterEvent(),
-                    pet,
-                    uid)
+                Text = Loc.GetString("raise-pet-verb", ("target", targetLyingDownComp.LyingOn.Value)),
+                Act = () =>
                 {
-                    Broadcast = false,
-                    BreakOnDamage = false,
-                    BreakOnMove = true,
-                    NeedHand = false,
-                    BlockDuplicate = true,
-                    CancelDuplicate = true,
-                    DuplicateCondition = DuplicateConditions.SameEvent
-                };
-                _doAfter.TryStartDoAfter(doAfterEventArgs);
-            }
-        };
+                    var doAfterEventArgs = new DoAfterArgs(EntityManager,
+                        user,
+                        targetLyingDownComp.RaiseDoAfter,
+                        new RaisePetDoAfterEvent(),
+                        target,
+                        target)
+                    {
+                        Broadcast = false,
+                        BreakOnDamage = false,
+                        BreakOnMove = true,
+                        NeedHand = false,
+                        BlockDuplicate = true,
+                        CancelDuplicate = true,
+                        DuplicateCondition = DuplicateConditions.SameEvent
+                    };
+                    _doAfter.TryStartDoAfter(doAfterEventArgs);
+                }
+            };
 
-        args.Verbs.Add(lieDownVerb);
+            args.Verbs.Add(raiseVerb);
+        }
+
+        if (TryComp<LyingDownOnBuckledEntityComponent>(user, out var userLyingDownComp) &&
+            HasComp<HumanoidAppearanceComponent>(target) &&
+            !userLyingDownComp.IsLying &&
+            CheckBuckledEntity(user, target) &&
+            CheckOtherLyingPets(user, target))
+        {
+            var lieDownVerb = new AlternativeVerb
+            {
+                Text = Loc.GetString("pet-lie-down-werb"),
+                Act = () =>
+                {
+                    var doAfterEventArgs = new DoAfterArgs(EntityManager,
+                        user,
+                        userLyingDownComp.LyingDoAfter,
+                        new LieDownDoAfterEvent(),
+                        user,
+                        target)
+                    {
+                        Broadcast = false,
+                        BreakOnDamage = false,
+                        BreakOnMove = true,
+                        NeedHand = false,
+                        BlockDuplicate = true,
+                        CancelDuplicate = true,
+                        DuplicateCondition = DuplicateConditions.SameEvent
+                    };
+                    _doAfter.TryStartDoAfter(doAfterEventArgs);
+                }
+            };
+
+            args.Verbs.Add(lieDownVerb);
+        }
     }
 
     private void OnLieDownDoAfter(Entity<LyingDownOnBuckledEntityComponent> entity, ref LieDownDoAfterEvent args)
@@ -203,7 +207,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         StandUp(entity);
     }
 
-    private void OnUnbuckleAttempt(Entity<LyingPetComponent> entity, ref UnbuckleAttemptEvent args)
+    private void OnUnbuckleAttempt(Entity<UnderLyingPetComponent> entity, ref UnbuckleAttemptEvent args)
     {
         if (!entity.Comp.BlockUnbuckle)
             return;
@@ -211,12 +215,18 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnUnstrapAttempt(Entity<LyingPetComponent> entity, ref UnstrapAttemptEvent args)
+    private void OnUnstrapAttempt(Entity<UnderLyingPetComponent> entity, ref UnstrapAttemptEvent args)
     {
         if (!entity.Comp.BlockUnbuckle)
             return;
 
         args.Cancelled = true;
+    }
+
+    private void OnEntityGibbed(Entity<UnderLyingPetComponent> entity, ref EntityGibbedEvent args)
+    {
+        if (entity.Comp.PetUid is { } pet)
+            StandUp(pet);
     }
 
     private void LieDownOnEntity(EntityUid uid, EntityUid target, LyingDownOnBuckledEntityComponent? component = null)
@@ -235,7 +245,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         if (TryComp<AppearanceComponent>(uid, out var appearance))
             _appearance.SetData(uid, LyingVisuals.State, true, appearance);
 
-        var lyingPetComp = EnsureComp<LyingPetComponent>(target);
+        var lyingPetComp = EnsureComp<UnderLyingPetComponent>(target);
         lyingPetComp.PetUid = uid;
         lyingPetComp.BlockUnbuckle = component.BlockUnbuckle;
         if (component.DamageOnLying is { } damageOnLying &&
@@ -261,7 +271,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
             _appearance.SetData(uid, LyingVisuals.State, false, appearance);
 
         if (component.LyingOn is { } lyingOnEnt)
-            RemComp<LyingPetComponent>(lyingOnEnt);
+            RemComp<UnderLyingPetComponent>(lyingOnEnt);
 
         _actionBlocker.UpdateCanMove(uid);
         Dirty(uid, component);
@@ -283,7 +293,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
     /// </summary>
     private bool CheckOtherLyingPets(EntityUid pet, EntityUid target)
     {
-        if (!TryComp<LyingPetComponent>(target, out var comp))
+        if (!TryComp<UnderLyingPetComponent>(target, out var comp))
             return true;
 
         if (comp.PetUid != null)

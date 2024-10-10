@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.LyingDownOnBuckledEntity.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class LyingPetComponent : Component
+public sealed partial class UnderLyingPetComponent : Component
 {
     /// <summary>
     /// The uid of the pet which lies on the entity

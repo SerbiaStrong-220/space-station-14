@@ -70,7 +70,7 @@ public sealed partial class LyingDownOnBuckledEntityComponent : Component
 public sealed partial class DamageOnLying
 {
     /// <summary>
-    /// The damage that the entity gain in second
+    /// The damage that the entity gain per second
     /// </summary>
     [DataField(required: true)]
     public DamageSpecifier Damage = new();
