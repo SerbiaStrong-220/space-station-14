@@ -2918,13 +2918,20 @@
 - type: entity
   name: calico cat
   id: MobCatCalico
-  parent: MobCat
+  parent: [ MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   description: Feline pet, very funny.
   components:
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cat2
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: cat2_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+    #SS220 Add lying down on entity end
   - type: DamageStateVisuals
     states:
       Alive:
@@ -2984,13 +2991,20 @@
 - type: entity
   name: space cat
   id: MobCatSpace
-  parent: MobCat
+  parent: [MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   description: Feline pet, prepared for the worst.
   components:
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: spacecat
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: spacecat_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+    #SS220 Add lying down on entity end
   - type: DamageStateVisuals
     states:
       Alive:
@@ -3041,7 +3055,7 @@
 
 - type: entity
   name: kitten
-  parent: MobCat
+  parent: [ MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   id: MobCatKitten
   description: Small and fluffy.
   components:
@@ -3049,6 +3063,11 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: kitten
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: kitten_rest
+      visible: false
+    #SS220 Add lying down on entity end
   - type: DamageStateVisuals
     states:
       Alive:

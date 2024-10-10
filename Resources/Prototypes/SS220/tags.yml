@@ -130,3 +130,7 @@
 
 - type: Tag
   id: SpiderLittle
+
+# SS220 Add lying action
+- type: Tag
+  id: Bed

@@ -6,7 +6,7 @@
     "y": 32
   },
   "license": "CC-BY-SA-3.0",
-  "copyright": "Made by Emisse in aseprite for SS14",
+  "copyright": "Made by Emisse in aseprite for SS14, bingus_rest made by ci24v3n (Discord)",
   "states":
   [
     {
@@ -17,6 +17,18 @@
     {
       "name": "bingus_dead",
       "directions": 1
+    },
+
+    {
+      "name": "bingus_rest",
+      "delays": [
+        [
+          60,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
     }
   ]
 }

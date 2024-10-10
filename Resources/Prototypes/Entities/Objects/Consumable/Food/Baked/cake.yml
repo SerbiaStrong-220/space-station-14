@@ -661,7 +661,7 @@
 - type: entity
   name: cak
   id: MobCatCake
-  parent: FoodCakeBase
+  parent: [ FoodCakeBase, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   description: It's a cake. It's a cat. It's a cak.
   components:
   - type: Sprite
@@ -671,6 +671,13 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cak
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: cak_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+    #SS220 Add lying down on entity end
   - type: Fixtures
     fixtures:
       fix1:
