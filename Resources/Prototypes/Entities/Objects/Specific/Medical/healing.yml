@@ -238,6 +238,7 @@
   components:
     - type: Tag
       tags:
+        - Tourniquet #SS220 FIX
         - SecBeltEquip
     - type: Sprite
       state: tourniquet
