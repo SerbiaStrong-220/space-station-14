@@ -1351,6 +1351,11 @@
 - type: Tag
   id: ToySidearm
 
+#SS220 FIX Start
+- type: Tag
+  id: Tourniquet 
+#SS220 FIX End
+
 - type: Tag
   id: Trash
 
