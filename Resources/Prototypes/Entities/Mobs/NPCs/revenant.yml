@@ -83,3 +83,20 @@
       - Alive
       - Dead
   #ss220 spec fix end
+  #ss220 revenant buff start
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Cold: 10
+    ignoreResistances: true
+  - type: DamageContacts
+    damage:
+      types:
+        Cold: 5 #may be painful if spammed, but doesnt ignores protection.
+  - type: Electrified #idk this seems lame but it works fine
+    shockTime: 8 #4 seconds of stun
+    shockDamage: 2
+    requirePower: false
+    ignoreInsulation: true
+  #ss220 revenant buff end
+          

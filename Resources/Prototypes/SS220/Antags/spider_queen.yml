@@ -1,0 +1,5 @@
+- type: antag
+  id: SpiderQueen
+  name: roles-antag-spider-queen-name
+  antagonist: true
+  objective: roles-antag-spider-queen-objective
