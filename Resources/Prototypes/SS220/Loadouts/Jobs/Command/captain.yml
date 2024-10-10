@@ -26,6 +26,22 @@
   equipment:
     jumpsuit: ClothingUniformWhiteJumpsuitCaptain
 
+- type: loadout
+  id: CaptainWhiteJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformWhiteJumpskirtCaptain
+
+- type: loadout
+  id: CaptainWhiteFormalSuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWhiteCapFormal
+
 # Head
 - type: loadout
   id: CaptainHeadHat
@@ -53,6 +69,22 @@
   equipment:
     head: ClothingHeadWhiteBeretCap
 
+- type: loadout
+  id: CaptainWhiteHat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCapHat
+
+- type: loadout
+  id: CaptainWhiteHardhat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCapHardhat
+
 # Neck
 - type: loadout
   id: CaptainFormalWhiteCloak
@@ -61,6 +93,14 @@
     proto: CaptainSenior
   equipment:
     neck: ClothingNeckCloakWhiteCapFormal
+
+- type: loadout
+  id: CaptainWhiteMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    neck: ClothingNeckWhiteMantleCap
 
 # Back
 - type: loadout
@@ -103,6 +143,14 @@
     proto: CaptainSenior
   equipment:
     outerClothing: ClothingOuterWhiteCoatCaptain
+
+- type: loadout
+  id: CaptainWhiteWintercoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    outerClothing: ClothingOuterWhiteWinterCap
 
 # Gloves
 

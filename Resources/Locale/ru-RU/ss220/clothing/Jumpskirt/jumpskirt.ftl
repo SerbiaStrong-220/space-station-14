@@ -12,3 +12,5 @@ ent-ClothingUniformJumpskirtFeldsher = униформа фельдшера
     .desc = Только не обижайтесь, вы фельдшер или настоящий врач?
 ent-ClothingUniformJumpskirtMilitaryFeldsher = униформа военного фельдшера
     .desc = Это отнюдь не красная окраска..
+ent-ClothingUniformWhiteJumpskirtCaptain = белая юбка-комбинезон капитана
+    .desc = Это белый костюм с золотыми украшениями, на погонах одна золотая звезда - "Майор".

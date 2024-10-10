@@ -197,3 +197,16 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
+
+  # Капитан
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWhiteJumpskirtCaptain
+  name: captain's white jumpskirt
+  description: It's a white jumpskirt with some gold markings denoting the rank of "Captain".
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
