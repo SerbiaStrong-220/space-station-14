@@ -86,21 +86,40 @@
   flavor: bitter
   color: "#9e9886"
   physicalDesc: reagent-physical-desc-bubbling
+  # SS220 That gives PestKiller to be killer of people and tomat-killer if they in spay area. begin
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+  # SS220 That gives PestKiller to be killer of people and tomat-killer if they in spay area. end
   plantMetabolism:
     - !type:PlantAdjustToxins
       amount: 4
     - !type:PlantAdjustPests
       amount: -6
   metabolisms:
-    Medicine:
+  # SS220 Change place medicine and add toxin damage to humans. begin
+    Poison:
       effects:
       - !type:HealthChange
         damage:
           types:
+            Poison: 0.5
+    Medicine:
+      effects:
+        - !type:HealthChange
+          damage:
             Poison: 3
-        conditions:
-        - !type:OrganType
-          type: Plant
+          conditions:
+          - !type:OrganType
+            type: Plant
+  # SS220 Change place medicine and add toxin damage to humans. end
+
+
 
 - type: reagent
   id: PlantBGone
@@ -224,15 +243,17 @@
     - !type:PlantAdjustWeeds
       amount: -6
   metabolisms:
-    Poison:
+  # SS220 Change place medicine and add toxin damage to humans. begin
+    Acidic:
+      methods: [ Touch ]
       effects:
       - !type:HealthChange
         damage:
           types:
-            Poison: 4
-        conditions:
-        - !type:OrganType
-          type: Plant
+            Poison: 1
+  # SS220 Change place medicine and add toxin damage to humans. end
+
+
 
 - type: reagent
   id: Ammonia

@@ -76,6 +76,7 @@
   - MobBloodstream
   - MobFlammable
   - MobCombat
+  - SimpleMobBase # SS220 This way we give TomatoKiller chance to die in depressurization
   name: tomato killer
   description: Looks like it's not you eating tomatoes today, it's the tomatoes eating you.
   components:
