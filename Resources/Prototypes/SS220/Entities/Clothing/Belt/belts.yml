@@ -12,6 +12,10 @@
   - type: Clothing
     sprite: Clothing/Belt/assault.rsi
   - type: Storage
+    blacklist: # SS220 Fix #2009 begin
+      tags:
+        - HolofanProjector
+    # SS220 Fix #2009 end
 
 - type: entity
   parent: ClothingBeltWebbingSRT
