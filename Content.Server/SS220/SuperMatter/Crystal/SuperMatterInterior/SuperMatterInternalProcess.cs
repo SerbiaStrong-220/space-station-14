@@ -73,6 +73,7 @@ public static class SuperMatterInternalProcess
 
         return resultZapToRadiationRatio;
     }
+
     private const float O2ToPlasmaBaseRatio = 0.9f;
     private const float O2ToPlasmaFloatRatio = 1.7f;
     private const float RatioValueOffset = 0.44f;
@@ -89,6 +90,7 @@ public static class SuperMatterInternalProcess
         return DecayMatterCombinedFactorFunction(temperature, pressure)
                 + DecayMatterTemperatureFactorFunction(temperature);
     }
+
     private const float TemperatureFactorCoeff = 2f;
     private const float TemperatureFactorNormalizedTemperatureOffset = 20f;
     private static float DecayMatterTemperatureFactorFunction(float temperature)
@@ -97,6 +99,7 @@ public static class SuperMatterInternalProcess
 
         return TemperatureFactorCoeff * normalizedTemperature / (normalizedTemperature + TemperatureFactorNormalizedTemperatureOffset);
     }
+
     private const float CombinedFactorCoeff = 0.5f;
     private const float CombinedFactorSlowerNormalizedTemperatureOffset = 10f;
     private const float CombinedFactorSlowerNormalizedPressureOffset = 10f;

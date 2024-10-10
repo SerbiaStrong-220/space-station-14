@@ -218,7 +218,6 @@ public sealed class HallucinationSystem : EntitySystem
                         _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value) :
                         _inventory.GetSlotEnumerator(mobUid);
 
-        // //SM_TODO this \/ break SpawnAndDeleteAllEntitiesInTheSameSpot test.
         while (inventorySlot.NextItem(out var itemUid, out var slot))
         {
             if (ItemProtects(itemUid, slot.SlotFlags, protectionComponentType, protection.CheckPockets))

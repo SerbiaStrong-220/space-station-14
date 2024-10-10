@@ -1,5 +1,6 @@
-supermatter-consume =  Материя кристалла частично поглощает тело { $target }
-supermatter-consume-preposition = , среди которого виднеются остатки
+supermatter-consume = Материя кристалла частично поглощает тело { $target }
+supermatter-consume-preposition =, среди которого виднеются остатки
+supermatter-crystal-restructure = Материя кристала вскипает и перестраивается!
 
 guide-entry-sm = Кристалл суперматерии
 

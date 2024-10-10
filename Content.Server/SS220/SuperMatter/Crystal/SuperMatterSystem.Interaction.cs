@@ -3,6 +3,7 @@ using System.Text;
 using Content.Server.Popups;
 using Content.Server.SS220.SuperMatter.Emitter;
 using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Shared.Administration;
 using Content.Shared.Singularity.Components;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
@@ -24,7 +25,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
            && MetaData(targetUid).EntityDeleted)
             return;
 
-        if (MetaData(targetUid).EntityPaused)
+        if (HasComp<AdminFrozenComponent>(crystal.Owner))
             return;
 
         var (crystalUid, smComp) = crystal;

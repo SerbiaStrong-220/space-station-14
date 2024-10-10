@@ -12,7 +12,7 @@ public sealed partial class SuperMatterComponent : Component
     // SM constants
     public const float MaximumIntegrity = 100f;
     public const float MinimumIntegrity = 0.01f;
-    public const float MinimumMatter = 100f;
+    public const float MinimumMatter = 280f;
     public const float MinimumInternalEnergy = 2120f;
 
     // State flags
@@ -57,9 +57,9 @@ public sealed partial class SuperMatterComponent : Component
     public TimeSpan NextOutputEnergySourceUpdate = default!;
     [AutoPausedField]
     public TimeSpan NextDamageImplementTime = default!;
-    [AutoPausedField]
+    [AutoPausedField, ViewVariables(VVAccess.ReadOnly)]
     public TimeSpan NextDamageStationAnnouncement = default!;
-    [AutoPausedField]
+    [AutoPausedField, ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan TimeOfDelamination = default!;
 
     // SM params
@@ -69,7 +69,7 @@ public sealed partial class SuperMatterComponent : Component
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public float InitMatter = 200f;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [ViewVariables(VVAccess.ReadWrite)]
     public float Integrity
     {
         get => _integrity;
@@ -83,7 +83,7 @@ public sealed partial class SuperMatterComponent : Component
             };
         }
     }
-    [DataField]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float Temperature
     {
         get => _temperature;

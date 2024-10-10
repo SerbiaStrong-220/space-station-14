@@ -69,7 +69,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (crystal.Comp.IntegrityDamageAccumulator < 0)
             crystal.Comp.AccumulatedRegenerationDelamination -= crystal.Comp.IntegrityDamageAccumulator;
 
-        if (crystal.Comp.IntegrityDamageAccumulator > crystal.Comp.NextRegenerationThreshold)
+        if (crystal.Comp.AccumulatedRegenerationDelamination > crystal.Comp.NextRegenerationThreshold)
         {
             crystal.Comp.TimeOfDelamination += TimeSpan.FromSeconds(1f);
             crystal.Comp.NextRegenerationThreshold += IntegrityRegenerationStep;
@@ -77,7 +77,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             var ev = new SuperMatterDelaminateTimeChanged(crystal.Comp.TimeOfDelamination);
             RaiseLocalEvent(crystal, ev);
         }
-        if (crystal.Comp.IntegrityDamageAccumulator > IntegrityRegenerationEnd)
+        if (crystal.Comp.AccumulatedRegenerationDelamination > IntegrityRegenerationEnd)
             StopDelamination(crystal);
         if (_gameTiming.CurTime > crystal.Comp.TimeOfDelamination)
         {
@@ -116,6 +116,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             && TryComp<TeslaEnergyBallComponent>(spawnedUid.Value, out var teslaComp))
             _teslaEnergyBall.AdjustEnergy(spawnedUid.Value, teslaComp, 1000f);
 
+        TryChangeStationAlertLevel(crystal, crystal.Comp.CrystalDestroyAlertLevel, out _);
         StationAnnounceIntegrity(crystal, AnnounceIntegrityTypeEnum.Explosion, smState);
     }
 }

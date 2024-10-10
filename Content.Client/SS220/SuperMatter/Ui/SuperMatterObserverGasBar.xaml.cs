@@ -60,11 +60,11 @@ public sealed partial class SuperMatterObserverGasBar : Control
         var stringBuilder = new StringBuilder(LocalizedGasName);
         stringBuilder.AppendLine();
         if (SuperMatterGasInteraction.DecayInfluenceGases.TryGetValue(GasId, out var decayInfluence))
-            stringBuilder.AppendLine(_localization.GetString("smObserver-decay", ("flat", decayInfluence.flatInfluence.ToString("N0")), ("relative", decayInfluence.RelativeInfluence.ToString("N2"))));
+            stringBuilder.AppendLine(_localization.GetString("smObserver-decay", ("flat", decayInfluence.flatInfluence.ToString("N0")), ("relative", (decayInfluence.RelativeInfluence * 100f).ToString("N2"))));
         if (SuperMatterGasInteraction.GasesToMatterConvertRatio.TryGetValue(GasId, out var gassesToMatter))
             stringBuilder.AppendLine(_localization.GetString("smObserver-gasToMatter", ("value", gassesToMatter.ToString("N0"))));
         if (SuperMatterGasInteraction.EnergyEfficiencyChangerGases.TryGetValue(GasId, out var energyInfluence))
-            stringBuilder.AppendLine(_localization.GetString("smObserver-energyInfluence", ("optimalRatio", (energyInfluence.OptimalRatio * 100).ToString("N0")), ("relative", ((energyInfluence.RelativeInfluence + 1) * 100).ToString("N0"))));
+            stringBuilder.AppendLine(_localization.GetString("smObserver-energyInfluence", ("optimalRatio", (energyInfluence.OptimalRatio * 100f).ToString("N0")), ("relative", ((energyInfluence.RelativeInfluence + 1) * 100).ToString("N0"))));
 
         return stringBuilder.ToString();
     }

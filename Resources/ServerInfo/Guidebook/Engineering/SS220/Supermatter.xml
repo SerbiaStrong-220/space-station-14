@@ -36,7 +36,17 @@
 
   1. При работе с инертным кристаллом достаточно наличие инженерных очков (для защиты от галлюцинаций) и костюма радиационной защиты.
 
+  <Box>
+    <GuideEntityEmbed Entity="ClothingEyesGlassesMeson" Caption="" Margin="4"/>
+    <GuideEntityEmbed Entity="ClothingOuterSuitRad" Caption="" Margin="4"/>
+  </Box>
+
   2. Проверьте работоспособность консоли мониторинга состояния кристалла суперматерии, она отвечает за распространение информации о текущем состояния кристалла.
+
+  <Box>
+    <GuideEntityEmbed Entity="SuperMatterObserverConsole" Caption="" Margin="4"/>
+    <GuideEntityEmbed Entity="SuperMatterObserverCircuitboard" Caption="" Margin="4"/>
+  </Box>
 
   3. Вставьте в свой КПК картридж отслеживания кристалла, установите приложение, достаньте картридж из КПК и верните его обратно, чтобы Ваши коллеги тоже могли воспользоваться этим приложением.
 

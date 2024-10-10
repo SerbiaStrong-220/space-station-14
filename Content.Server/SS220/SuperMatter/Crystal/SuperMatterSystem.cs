@@ -5,6 +5,7 @@ using Content.Shared.Radiation.Components;
 using Content.Shared.Atmos;
 using Content.Shared.SS220.SuperMatter.Functions;
 using Robust.Shared.Timing;
+using Content.Shared.Administration;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 public sealed partial class SuperMatterSystem : EntitySystem
@@ -46,7 +47,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
                 continue;
 
             // add here to give admins a way to freeze all logic
-            if (MetaData(uid).EntityPaused)
+            if (HasComp<AdminFrozenComponent>(uid))
                 continue;
 
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
@@ -78,8 +79,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
+        Log.Info($"--- ConversionEfficiency: {GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)}");
+
         var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
                         * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(gasMixture) + 1);
+        Log.Info($"--- Released energy per frame: {releasedEnergyPerFrame}");
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
 

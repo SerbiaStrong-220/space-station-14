@@ -36,8 +36,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
     public const float SM_HEAT_TRANSFER_RATIO = 0.07f;
 
-    private const float RestructureProbability = 0.15f;
-    private const float RestructureAdditionalMatterDimensionLess = 25f;
+    private const float RestructureProbability = 0.0002f; // remember that we have about 30 times trying it in a second. 2e-4 is like one chance in 3 minutes.
+    private const float RestructureAdditionalMatterDimensionLess = 42f;
 
     private void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
     {
@@ -55,9 +55,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var matterToTemperatureRatio = normalizedMatter / smComp.Temperature;
         var newMatterToTemperatureRatio = (normalizedMatter + normalizedDeltaMatter) / (smComp.Temperature + smDeltaT);
         // here we connect chemistry potential with internal energy, so thought of their units adequate, maybe even calculate it
-        var deltaInternalEnergy = (smDeltaT * (matterToTemperatureRatio - newMatterToTemperatureRatio) * smComp.InternalEnergy
+        var deltaInternalEnergy = (smDeltaT * (matterToTemperatureRatio - newMatterToTemperatureRatio) * smComp.Temperature / Atmospherics.T0C
                                     - chemistryPotential * normalizedDeltaMatter)
                                     / (1 + newMatterToTemperatureRatio * smDeltaT);
+        deltaInternalEnergy = Math.Clamp(deltaInternalEnergy, -SuperMatterComponent.MinimumInternalEnergy / 5f, SuperMatterComponent.MinimumInternalEnergy / 5f);
         smComp.InternalEnergy += deltaInternalEnergy * frameTime;
 
         if (smComp.InternalEnergy == SuperMatterComponent.MinimumInternalEnergy
@@ -68,6 +69,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("supermatter-crystal-restructure"), crystalUid);
 
             smComp.Integrity = MathF.Max(smComp.Integrity * 0.8f, 0.1f);
+            smComp.Temperature *= 0.6f;
         }
 
         smComp.Matter = smComp.Matter + deltaMatter * frameTime;

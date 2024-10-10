@@ -3,14 +3,15 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Interaction;
-using Content.Shared.Database;
 using Content.Shared.Projectiles;
-using Content.Shared.Administration;
+using Content.Shared.Tools.Components;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
 public sealed partial class SuperMatterSystem : EntitySystem
 {
+    private readonly string _anchoringTagName = "Anchoring";
+
     public void InitializeEventHandler()
     {
         SubscribeLocalEvent<SuperMatterComponent, MapInitEvent>(OnInit);
@@ -39,8 +40,15 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
     private void OnItemInteract(Entity<SuperMatterComponent> entity, ref InteractUsingEvent args)
     {
+        if (TryComp<ToolComponent>(args.Used, out var toolComponent))
+        {
+            var qualities = toolComponent.Qualities;
+            if (qualities.Contains(_anchoringTagName))
+                return;
+        }
+
         entity.Comp.Matter += MatterNondimensionalization / 8f;
-        ConsumeObject(args.User, entity);
+        ConsumeObject(args.Used, entity);
     }
     private void OnCollide(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
     {

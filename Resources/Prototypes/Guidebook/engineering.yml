@@ -66,8 +66,7 @@
   - Singularity
   - TEG
   - RTG
-  - Supermatter
-  # SM_TODO: SM guide
+  - Supermatter # SS220-superMatter-crystal
 
 - type: guideEntry
   id: AME

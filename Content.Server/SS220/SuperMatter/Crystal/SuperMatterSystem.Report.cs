@@ -56,7 +56,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (!(announceType == AnnounceIntegrityTypeEnum.Explosion))
             Log.Warning("Used unexpecting announce type to announce Integrity with SuperMatterPhaseState ");
 
-        var message = GetLocalePath(announceType, smState);
+        var message = Loc.GetString(GetLocalePath(announceType, smState));
         SendStationAnnouncement(crystal.Owner, message);
     }
 
@@ -146,7 +146,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         stringBuilder.AppendJoin("-", ["supermatter", announceType.ToString().ToLower()]);
 
         if (smState.HasValue)
-            stringBuilder.AppendJoin("-", smState.Value.ToString().ToLower());
+            stringBuilder.AppendJoin("-", ["", smState.Value.ToString().ToLower()]);
 
         return stringBuilder.ToString();
     }
