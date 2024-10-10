@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
 using Content.Shared.SS220.EventCapturePoint;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -11,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.EventCapturePoint;
 
@@ -22,6 +24,7 @@ public sealed class EventCapturePointSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -34,6 +37,23 @@ public sealed class EventCapturePointSystem : EntitySystem
         SubscribeLocalEvent<EventCapturePointFlagComponent, GettingPickedUpAttemptEvent>(OnFlagPickupAttempt);
         SubscribeLocalEvent<EventCapturePointComponent, FlagInstallationFinshedEvent>(OnFlagInstalled);
         SubscribeLocalEvent<EventCapturePointComponent, FlagRemovalFinshedEvent>(OnFlagRemoved);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<EventCapturePointComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (component.FlagEntity is not { } flagUid ||
+                !TryComp<EventCapturePointFlagComponent>(flagUid, out var flagComp) ||
+                flagComp.Fraction is not { } flagFraction)
+                continue;
+
+            if (!component.PointRetentionTime.TryAdd(flagFraction, TimeSpan.Zero))
+                component.PointRetentionTime[flagFraction] += _timing.TickPeriod;
+        }
     }
 
     #region Listeners
