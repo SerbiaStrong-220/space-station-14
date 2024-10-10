@@ -295,3 +295,13 @@
   id: FelinidPurrs
   files:
   - /Audio/Voice/Felinid/cat_purr1.ogg
+
+- type: soundCollection
+  id: TajaranMeows
+  files:
+  - /Audio/SS220/Emotes/Tajaran/tajaran_meow.ogg
+
+- type: soundCollection
+  id: TajaranAnnoyedMeows
+  files:
+  - /Audio/SS220/Emotes/Tajaran/annoyed_tajaran_meow.ogg
