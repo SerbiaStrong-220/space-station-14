@@ -78,6 +78,7 @@ namespace Content.Server.Entry
 
             prototypes.RegisterIgnore("parallax");
             prototypes.RegisterIgnore("wristWatchStyle"); // SS220 Wrist Watch
+            prototypes.RegisterIgnore("spriteFont"); // SS220 Calculator
 
             ServerContentIoC.Register();
 

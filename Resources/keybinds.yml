@@ -588,3 +588,56 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+# SS220 Calculator begin
+- function: CalculatorType0
+  type: State
+  key: NumpadNum0
+- function: CalculatorType1
+  type: State
+  key: NumpadNum1
+- function: CalculatorType2
+  type: State
+  key: NumpadNum2
+- function: CalculatorType3
+  type: State
+  key: NumpadNum3
+- function: CalculatorType4
+  type: State
+  key: NumpadNum4
+- function: CalculatorType5
+  type: State
+  key: NumpadNum5
+- function: CalculatorType6
+  type: State
+  key: NumpadNum6
+- function: CalculatorType7
+  type: State
+  key: NumpadNum7
+- function: CalculatorType8
+  type: State
+  key: NumpadNum8
+- function: CalculatorType9
+  type: State
+  key: NumpadNum9
+- function: CalculatorTypeDot
+  type: State
+  key: NumpadDecimal
+- function: CalculatorTypeAdd
+  type: State
+  key: NumpadAdd
+- function: CalculatorTypeSubtract
+  type: State
+  key: NumpadSubtract
+- function: CalculatorTypeMultiply
+  type: State
+  key: NumpadMultiply
+- function: CalculatorTypeDivide
+  type: State
+  key: NumpadDivide
+- function: CalculatorEnter
+  type: State
+  key: NumpadEnter
+- function: CalculatorClear
+  type: State
+  key: Delete
+# SS220 Calculator end
