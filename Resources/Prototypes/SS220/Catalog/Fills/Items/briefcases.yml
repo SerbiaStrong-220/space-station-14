@@ -1,0 +1,10 @@
+- type: entity
+  id: BriefcaseMagistrateFilled
+  parent: BriefcaseBrown
+  suffix: IAA
+  components:
+    - type: StorageFill
+      contents:
+        - id: Paper
+          amount: 3
+#        - id: CentCommNewPen #SS220-BriefcaseMagistrate

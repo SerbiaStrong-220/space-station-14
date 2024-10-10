@@ -126,6 +126,16 @@ public sealed partial class ElectrifiedComponent : Component
     [DataField, AutoNetworkedField]
     public float Probability = 1f;
 
+
+    //SS220 Add ignore insulation begin
+
+    /// <summary>
+    /// When true - ignores insulated gloves/etc and applies shock to the entity
+    /// </summary>
+    [DataField]
+    public bool IgnoreInsulation = false;
+    //SS220 Add ignore insulation end
+
     [DataField, AutoNetworkedField]
     public bool IsWireCut = false;
 }
