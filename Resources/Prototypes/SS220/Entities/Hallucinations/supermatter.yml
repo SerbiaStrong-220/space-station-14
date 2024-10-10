@@ -1,0 +1,33 @@
+- type: weightedRandomEntity
+  id: HallucinationSupermatterCrystal
+  weights:
+    JawsOfLife: 2
+    WelderExperimental: 1
+    Multitool: 5
+    HolofanProjector: 2
+    GasAnalyzer: 8
+    trayScanner: 5
+    CrowbarYellow: 10
+    Wrench: 10
+    Screwdriver: 10
+    Wirecutter: 12
+    Welder: 14
+    PowerDrill: 2
+    Lightning: 8
+    JetpackEffect: 15
+    EffectEmpPulse: 6
+    EffectRCDDeconstruct2: 7
+    EffectSparks: 5
+    EffectTeslaSparks: 10
+    MobSpiderSpace: 1
+    BalloonCommanderUnfolded: 0.2
+    DarkReaperPortalEffect: 0.1
+    MeteorUrist: 0.1
+
+- type: entity
+  parent: BalloonCommander
+  id: BalloonCommanderUnfolded
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Foldable
+    folded: false

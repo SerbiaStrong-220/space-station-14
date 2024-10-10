@@ -1,0 +1,14 @@
+- type: gameMap
+  id: TestSM
+  mapName: 'Test SM'
+  mapPath: /Maps/SS220/Test/SM_Test.yml
+  minPlayers: 0
+  stations:
+    TestSM:
+      stationProto: TestStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: "SM"
+        - type: StationJobs
+          availableJobs:
+            Captain: [ -1, -1 ]

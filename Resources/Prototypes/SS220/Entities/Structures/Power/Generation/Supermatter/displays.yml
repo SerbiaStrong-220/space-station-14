@@ -1,0 +1,83 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: SuperMatterCrystalBaseScreen
+  name: base SM Screen
+  abstract: true
+  description: Display small SM info
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: true
+  - type: WallMount
+    arc: 360
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Appearance
+  - type: SuperMatterObserverVisualReceiver
+    unActiveState:
+      shaded: off
+    onState:
+      shaded: off
+      unshaded: on
+    warningState:
+      shaded: off
+      unshaded: warn
+    dangerState:
+      shaded: shame
+      unshaded: warn
+    delaminateState:
+      shaded: shame
+      unshaded: broken
+  - type: Sprite
+    drawdepth: AboveFovOverlay #SS220 FoV
+    sprite: SS220/Structures/Power/Generation/Supermatter/moth_stat_display.rsi
+    state: screen
+    noRot: true
+  - type: ApcPowerReceiver
+    powerLoad: 100
+  - type: ExtensionCableReceiver
+
+- type: entity
+  id: SuperMatterCrystalMothScreen
+  parent: SuperMatterCrystalBaseScreen
+  name: Moth SM Screen
+  description: Display small SM info
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Power/Generation/Supermatter/moth_stat_display.rsi
+    state: icon
+  - type: Sprite
+    drawdepth: AboveFovOverlay
+    sprite: SS220/Structures/Power/Generation/Supermatter/moth_stat_display.rsi
+    state: icon
+    noRot: true
+    layers:
+    - state: !!str off
+      map: ["enum.SuperMatterVisualLayers.Shaded"]
+    - state: on
+      shader: unshaded
+      map: ["enum.SuperMatterVisualLayers.Unshaded"]
+
+- type: entity
+  id: SuperMatterCrystalScreen
+  parent: SuperMatterCrystalBaseScreen
+  name: SM Screen
+  description: Display small SM info
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Power/Generation/Supermatter/stat_display.rsi
+    state: icon
+  - type: Sprite
+    drawdepth: AboveFovOverlay
+    sprite: SS220/Structures/Power/Generation/Supermatter/stat_display.rsi
+    state: screen
+    noRot: true
+    layers:
+    - state: !!str off
+      map: ["enum.SuperMatterVisualLayers.Shaded"]
+    - state: on
+      shader: unshaded
+      map: ["enum.SuperMatterVisualLayers.Unshaded"]

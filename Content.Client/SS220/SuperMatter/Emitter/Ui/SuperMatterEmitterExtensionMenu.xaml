@@ -1,0 +1,39 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'supermatter-emitter-extension-title'}"
+    Resizable="True"
+    MinSize="360 180"
+    RectClipContent="False">
+    <Control>
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Name="ContentHolderContainer" HorizontalExpand="True" Orientation="Vertical">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
+                <Label Text="{Loc 'supermatter-emitter-extension-power-consumption'}" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                <SpinBox Name="PowerConsumptionSpinBox" HorizontalAlignment="Center" HorizontalExpand="True"/>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 4 2 0"/>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
+                <Label Text="{Loc 'supermatter-emitter-extension-ratio'}" HorizontalAlignment="Center" HorizontalExpand="True" />
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Text="{Loc 'supermatter-emitter-extension-matter-none'}" Name="MatterRatioResult" HorizontalAlignment="Left" HorizontalExpand="True" Margin="4 0 0 1" />
+                    <Label Text="{Loc 'supermatter-emitter-extension-energy-none'}" Name="EnergyRatioResult" HorizontalAlignment="Right" HorizontalExpand="True" Margin="4 0 0 1" />
+                </BoxContainer>
+                <SliderIntInput Name="MatterToEnergyRatioSlider" HorizontalAlignment="Stretch" HorizontalExpand="True"
+                    MaxValue="100" MinValue="0" Value="50"/>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="4 4 4 2"/>
+            <BoxContainer MaxHeight="30">
+                <Label Name="SubmitDescription" Margin="4 0 0 1" HorizontalExpand="True" HorizontalAlignment="Left"/>
+                <Button Name="SubmitButton" Text="{Loc 'supermatter-emitter-extension-submit'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</controls:FancyWindow>

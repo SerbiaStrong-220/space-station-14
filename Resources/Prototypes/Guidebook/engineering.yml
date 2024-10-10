@@ -13,9 +13,9 @@
   id: Construction
   name: guide-entry-construction
   text: "/ServerInfo/Guidebook/Engineering/Construction.xml"
-  children: 
+  children:
   - AirlockSecurity
-  
+
 - type: guideEntry
   id: AirlockSecurity
   name: guide-entry-airlock-security
@@ -66,6 +66,7 @@
   - Singularity
   - TEG
   - RTG
+  - Supermatter # SS220-superMatter-crystal
 
 - type: guideEntry
   id: AME
