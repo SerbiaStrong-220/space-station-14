@@ -79,11 +79,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
-        Log.Info($"--- ConversionEfficiency: {GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)}");
-
         var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
                         * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(gasMixture) + 1);
-        Log.Info($"--- Released energy per frame: {releasedEnergyPerFrame}");
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
 

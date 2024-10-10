@@ -105,8 +105,9 @@ public sealed class Pseudo3DColoredView : Plot
     public void LoadMovingPoint(Vector2 position, Vector2 moveDirection)
     {
         if (position.X > GetFarestPossiblePlotPoint(_cachedParams.x)
-                || position.Y > GetFarestPossiblePlotPoint(_cachedParams.y)
-                || position.X < _cachedParams.x.Offset || position.Y < _cachedParams.x.Offset)
+            || position.Y > GetFarestPossiblePlotPoint(_cachedParams.y)
+            || position.X < GetClosetPossiblePlotPoint(_cachedParams.x)
+            || position.Y < GetClosetPossiblePlotPoint(_cachedParams.y))
         {
             MakeMeshgrid((MakeOffsetFromCoord(position.X, _initCachedParams.x), _initCachedParams.x.Size, _initCachedParams.x.Step),
                             (MakeOffsetFromCoord(position.Y, _initCachedParams.y), _initCachedParams.y.Size, _initCachedParams.y.Step));
@@ -161,6 +162,10 @@ public sealed class Pseudo3DColoredView : Plot
         }
     }
 
+    private float GetClosetPossiblePlotPoint((float Offset, float Size, float Step) param)
+    {
+        return param.Offset + param.Step;
+    }
     private float GetFarestPossiblePlotPoint((float Offset, float Size, float Step) param)
     {
         return param.Offset + (param.Size - 1) * param.Step;
