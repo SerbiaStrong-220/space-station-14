@@ -89,6 +89,20 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.25
       sprintSpeedModifier: 0.25
+    - type: DamageContacts
+      standStillTime: 3
+      damage:
+        types:
+          Bloodloss: -1
+        groups:
+          Brute: -0.5
+          Toxin: -0.5
+          Burn: -0.5
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
+        - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb
@@ -99,7 +113,7 @@
     snap:
       - Wall
   components:
-
+    - type: Sprite
     - type: Destructible
       thresholds:
       - trigger:
@@ -111,6 +125,21 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.15
       sprintSpeedModifier: 0.15
+    - type: DamageContacts
+      standStillTime: 3
+      damage:
+        types:
+          Bloodloss: -1.5
+        groups:
+          Brute: -1
+          Toxin: -0.5
+          Airloss: -1
+          Burn: -1
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
+        - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb

@@ -564,7 +564,8 @@ public sealed partial class ShuttleSystem
         }
 
         comp.State = FTLState.Cooldown;
-        comp.StateTime = StartEndTime.FromCurTime(_gameTiming, FTLCooldown);
+        //comp.StateTime = StartEndTime.FromCurTime(_gameTiming, FTLCooldown); // SS220 FTLCooldown outside CVar begin
+        comp.StateTime = StartEndTime.FromCurTime(_gameTiming, entity.Comp2.FTLCooldown); // SS220 FTLCooldown outside CVar end
         _console.RefreshShuttleConsoles(uid);
         _mapManager.SetMapPaused(mapId, false);
         Smimsh(uid, xform: xform);
