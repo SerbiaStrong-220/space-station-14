@@ -181,10 +181,6 @@
       collection: FelinidGrowls
     Purr:
       collection: FelinidPurrs
-    Mrow:
-      collection: TajaranMeows
-    AnnoyedMrow:
-      collection: TajaranAnnoyedMeows
 # Cat emotes end
 
 - type: emoteSounds
