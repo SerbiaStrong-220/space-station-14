@@ -56,6 +56,20 @@
     knockdownAmount: 1 #weaponBalance
 
 
+- type: entity
+  id: SMEmitterBolt
+  parent: EmitterBolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Power/Generation/Supermatter/smemitter.rsi
+    layers:
+      - state: projectile
+        shader: unshaded
+  - type: SuperMatterEmitterBolt
+  - type: SuperMatterExtraConsumable
+    additionalMatterOnConsumption: 4
+    additionalEnergyOnConsumption: 20
 
 
 ##Made by MIXnikita for SS220
@@ -113,14 +127,14 @@
 
 #Spider queen
 - type: entity
-  id: PoisonousAcid 
+  id: PoisonousAcid
   name: poisonous Spit
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
     - type: Projectile
       damage:
-        types: 
+        types:
           Poison: 6
           Structural: 2
     - type: Sprite

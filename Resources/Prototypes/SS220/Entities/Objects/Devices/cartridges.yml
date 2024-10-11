@@ -1,0 +1,22 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseItem
+  id: SupermatterObserverCartridge
+  name: Supermatter observer cartridge
+  description: A compact program which provides essential info about SM crystal
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Devices/cartridge.rsi
+      state: cart-smobserver
+    - type: Icon
+      sprite: SS220/Objects/Devices/cartridge.rsi
+      state: cart-smobserver
+    - type: UIFragment
+      ui: !type:SupermatterObserverUi
+    - type: Cartridge
+      programName: log-supermatter-observer-program-name
+      icon:
+        sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
+        state: icon
+    - type: SuperMatterObserverReceiver
+

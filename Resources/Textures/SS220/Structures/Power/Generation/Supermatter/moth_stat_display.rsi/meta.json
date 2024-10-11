@@ -1,0 +1,80 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation",
+    "size": {
+      "x": 64,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "icon"
+      },
+      {
+        "name": "broken",
+        "delays": [
+            [
+              1,
+              1,
+              1,
+              67,
+              20,
+              10,
+              10,
+              30
+            ]
+        ]
+      },
+      {
+        "name": "off"
+      },
+      {
+        "name": "on"
+      },
+      {
+        "name": "warn"
+      },
+      {
+        "name": "event"
+      },
+      {
+        "name": "shame"
+      },
+      {
+        "name": "num_0"
+      },
+      {
+        "name": "num_1"
+      },
+      {
+        "name": "num_2"
+      },
+      {
+        "name": "num_3"
+      },
+      {
+        "name": "num_4"
+      },
+      {
+        "name": "num_5"
+      },
+      {
+        "name": "num_6"
+      },
+      {
+        "name": "num_7"
+      },
+      {
+        "name": "num_8"
+      },
+      {
+        "name": "num_9"
+      },
+      {
+        "name": "rising"
+      },
+      {
+        "name": "falling"
+      }
+    ]
+  }

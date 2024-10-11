@@ -86,6 +86,7 @@
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
   - PowerComputerCircuitboard #the actual solar panel itself should be in here
+  - SuperMatterObserverCircuitboard # SS220 superMatter-crystal
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - EmitterCircuitboard

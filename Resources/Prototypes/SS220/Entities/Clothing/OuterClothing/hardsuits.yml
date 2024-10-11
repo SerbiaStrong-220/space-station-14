@@ -63,3 +63,46 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityPilot
+
+#SuperMatter operator's Hardsuit
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitSuperMatterOperator
+  name: superMatter operator's hardsuit
+  description: A special hardsuit that protects against hazardous, low pressure environments, designed to support the operator in the supermatter crystal chamber.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sm.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sm.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.001
+    lowPressureMultiplier: 1000
+  - type: FireProtection
+    reduction: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+        Heat: 0.4
+        Radiation: 0.025
+        Caustic: 0.7
+        Stamina: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitSuperMatterOperator
+  - type: SpecialSounds
+    mode: 0
+  - type: Insulated
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer

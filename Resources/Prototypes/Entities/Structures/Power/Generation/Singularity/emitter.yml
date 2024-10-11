@@ -102,3 +102,9 @@
       - On
       - Off
       - Toggle
+  # SS220 SuperMatter-begin
+  - type: Construction
+    graph: SuperMatterEmitterBoard
+    deconstructionTarget: null
+    node: emitter
+  # SS220 SuperMatter-end
