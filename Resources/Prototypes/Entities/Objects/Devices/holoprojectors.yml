@@ -24,6 +24,7 @@
   - type: Tag
     tags:
       - HolosignProjector
+      - HolofanProjector # SS220 Fix #2009
 
 - type: entity
   parent: Holoprojector
@@ -121,6 +122,7 @@
     - type: Tag
       tags:
         - HolofanProjector
+        - HolofanProjectorSecurity # SS220 Fix #2009
     - type: StaticPrice
       price: 50
 

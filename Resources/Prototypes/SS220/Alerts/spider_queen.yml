@@ -1,0 +1,55 @@
+- type: alert
+  id: BloodPoints
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood0
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood1
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood2
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood3
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood4
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood5
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood6
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood7
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood8
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood9
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood10
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood11
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood12
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood13
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood14
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood15
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood16
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood17
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood18
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood19
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood20
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood21
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood22
+  - sprite: /Textures/SS220/Interface/Alerts/blood_counter.rsi
+    state: blood23
+  name: alerts-spider-blood-points-name
+  description: alerts-spider-blood-points-desc
+  minSeverity: 0
+  maxSeverity: 24
