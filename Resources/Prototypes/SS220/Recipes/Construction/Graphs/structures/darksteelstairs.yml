@@ -6,32 +6,28 @@
       edges:
         - to: DarkSteelStairsSolo
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
         - to: DarkSteelStairsLeft
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
         - to: DarkSteelStairsRight
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 2
               doAfter: 1
         - to: DarkSteelStairsMiddle
           completed:
-            - !type:SnapToGrid
-              southRotation: true
+            - !type:SnapToGrid { }
           steps:
             - material: Steel
               amount: 2

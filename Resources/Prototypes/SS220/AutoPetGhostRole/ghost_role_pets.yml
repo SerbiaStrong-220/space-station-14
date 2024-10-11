@@ -197,3 +197,22 @@
     description: ghost-role-information-pet-spacecat-description
   - type: GhostTakeoverAvailable
 # SS220 AVD pet end
+
+- type: entity
+  parent: MobAlbinoCrocodile
+  id: MobStevenCrocodileGhostRole
+  name: steven
+  description: A snow-white crocodile with a golden collar, the personification of luxury and justice, the judge's favorite pet, who loves to chew on case protocols and crunch evidence.
+  suffix: Роль
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-pet-steven-name
+    description: ghost-role-information-pet-steven-description
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 14400 # SS220 - 4 hours
+  - type: GhostTakeoverAvailable

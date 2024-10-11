@@ -107,3 +107,30 @@
     sprite: SS220/Objects/Misc/stamps.rsi
     state: stamp-centcom
 
+- type: entity
+  parent: RubberStampBase
+  id: RubberStampMagistrate
+  name: magistrate rubber stamp
+  suffix: DO NOT MAP
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-magistrate
+    stampedColor: "#eebe35"
+    stampState: "paper_stamp-magistrate"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-magistrate
+
+- type: entity
+  name: Blue Shield rubber stamp
+  parent: RubberStampCaptain
+  id: RubberStampBlueShield
+  description: Blue Shield's rubber stamp.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-blue-shield
+    stampedColor: "#124773"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-blue-shield
+

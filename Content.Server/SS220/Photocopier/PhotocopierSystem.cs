@@ -37,6 +37,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
     private FormManager? _specificFormManager;
     private readonly ISawmill _sawmill = Logger.GetSawmill("photocopier");
@@ -233,7 +234,8 @@ public sealed partial class PhotocopierSystem : EntitySystem
             return;
 
         FormToDataToCopy(formToCopy, out var dataToCopy, out var metaDataToCopy);
-        StartPrinting(uid, component, metaDataToCopy, dataToCopy, PhotocopierState.Copying, args.Amount);
+        QueueDocument(component, new(dataToCopy, metaDataToCopy));
+        StartPrinting(uid, component, PhotocopierState.Copying, args.Amount);
     }
 
     private void OnStopButtonPressed(EntityUid uid, PhotocopierComponent component, PhotocopierStopMessage args)
@@ -347,7 +349,8 @@ public sealed partial class PhotocopierSystem : EntitySystem
         var buttScanData = new ButtScanPhotocopiedData() { ButtTexturePath = speciesPrototype.ButtScanTexture };
         dataToCopy.Add(typeof(ButtScanComponent), buttScanData);
 
-        if (StartPrinting(uid, component, metaDataToCopy, dataToCopy, PhotocopierState.Copying, amount))
+        QueueDocument(component, new(dataToCopy, metaDataToCopy));
+        if (StartPrinting(uid, component, PhotocopierState.Copying, amount))
         {
             component.IsCopyingPhysicalButt = true;
             component.ButtSpecies = humanoidAppearance.Species;
@@ -362,15 +365,38 @@ public sealed partial class PhotocopierSystem : EntitySystem
         if (component.PaperSlot.Item is not { } copyEntity)
             return false;
 
+        if ((!TryComp<ContainerManagerComponent>(copyEntity, out var containerManager) ||
+            !TryQueueCopyContainer(component, containerManager, copyEntity)) &&
+            !TryQueueSingleDocumentEntity(component, copyEntity))
+        {
+            return false;
+        }
+
+        StartPrinting(uid, component, PhotocopierState.Copying, amount);
+        return true;
+    }
+
+    private bool TryQueueCopyContainer(PhotocopierComponent photocopier, ContainerManagerComponent containerManager, EntityUid copyEntity)
+    {
+        var isAny = false;
+        foreach (var container in _containerSystem.GetAllContainers(copyEntity, containerManager))
+        {
+            foreach (var entity in container.ContainedEntities)
+            {
+                isAny |= TryQueueSingleDocumentEntity(photocopier, entity);
+            }
+        }
+        return isAny;
+    }
+
+    private bool TryQueueSingleDocumentEntity(PhotocopierComponent photocopier, EntityUid copyEntity)
+    {
         if (!TryGetPhotocopyableMetaData(copyEntity, out var metaData))
             return false;
-
         var dataToCopy = GetDataToCopyFromEntity(copyEntity);
         if (dataToCopy.Count == 0)
             return false;
-
-        StartPrinting(uid, component, metaData, dataToCopy, PhotocopierState.Copying, amount);
-
+        QueueDocument(photocopier, new(dataToCopy, metaData));
         return true;
     }
 
@@ -390,19 +416,22 @@ public sealed partial class PhotocopierSystem : EntitySystem
         }
     }
 
+    private void QueueDocument(PhotocopierComponent component, PrintableDocumentData document)
+    {
+        component.DocumentsToCopy.Add(document);
+    }
+
     private bool StartPrinting(
         EntityUid uid,
         PhotocopierComponent component,
-        PhotocopyableMetaData? metaData,
-        Dictionary<Type, IPhotocopiedComponentData>? dataToCopy,
         PhotocopierState state,
         int amount)
     {
         if (amount <= 0)
             return false;
+        if (component.DocumentsToCopy.Count == 0)
+            return false;
 
-        component.DataToCopy = dataToCopy;
-        component.MetaDataToCopy = metaData;
         component.State = state;
         component.CopiesQueued = Math.Clamp(amount, 0, component.MaxQueueLength);
 
@@ -419,8 +448,9 @@ public sealed partial class PhotocopierSystem : EntitySystem
     {
         component.CopiesQueued = 0;
         component.PrintingTimeRemaining = 0;
-        component.DataToCopy = null;
-        component.MetaDataToCopy = null;
+        component.CurrentDocumentIndex = 0;
+        component.CurrentDocumentCopyIndex = 0;
+        component.DocumentsToCopy.Clear();
         component.ButtSpecies = null;
         component.State = PhotocopierState.Idle;
         component.IsCopyingPhysicalButt = false;
@@ -466,13 +496,18 @@ public sealed partial class PhotocopierSystem : EntitySystem
             if (!isPrinted)
                 return;
 
-            SpawnCopyFromPhotocopier(uid, component);
+            SpawnCopyFromPhotocopier(uid, component.CurrentDocumentIndex, component);
 
             tonerCartridge.Charges--;
-            component.CopiesQueued--;
+            component.CurrentDocumentCopyIndex++;
 
-            if (component.CopiesQueued <= 0)
-                ResetState(uid, component); //Reset the rest of the fields
+            if (component.CurrentDocumentCopyIndex >= component.CopiesQueued)
+            {
+                component.CurrentDocumentIndex++;
+                component.CurrentDocumentCopyIndex = 0;
+                if (component.CurrentDocumentIndex >= component.DocumentsToCopy.Count)
+                    ResetState(uid, component); //Reset the rest of the fields
+            }
 
             UpdateUserInterface(uid, component);
             TryUpdateVisualState(uid, component);
@@ -558,10 +593,13 @@ public sealed partial class PhotocopierSystem : EntitySystem
         var isPaperInserted = component.PaperSlot.Item is not null;
         var assIsOnScanner = IsHumanoidOnTop(component);
 
+        var totalCount = component.CopiesQueued * component.DocumentsToCopy.Count;
+        var printedCount = component.CurrentDocumentIndex * component.CopiesQueued + component.CurrentDocumentCopyIndex;
+        var remainingCount = totalCount - printedCount;
         var state = new PhotocopierUiState(
             component.PaperSlot.Locked,
             isPaperInserted,
-            component.CopiesQueued,
+            remainingCount,
             component.FormCollections,
             tonerAvailable,
             tonerCapacity,

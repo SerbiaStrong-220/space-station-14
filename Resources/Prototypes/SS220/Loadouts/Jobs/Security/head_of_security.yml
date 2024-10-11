@@ -52,6 +52,14 @@
   equipment:
     outerClothing: ClothingOuterWinterHoSUnarmored
 
+- type: loadout
+  id: Outer1984
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CriticalMassShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsor1984
+
 # SUITSTORAGE
 - type: loadout
   id: OfficerCutlass

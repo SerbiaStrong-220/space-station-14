@@ -77,3 +77,6 @@
 
 - files: ["Donuts.yml"]
   authors: spo9k, Persia
+
+- files: ["astro.yml]
+  authors: VictorBoum, UrPrice, AliceValestray, NightmareStalker, RtmFool, Heidem, Nozychek_, evgen_killred, vatzob

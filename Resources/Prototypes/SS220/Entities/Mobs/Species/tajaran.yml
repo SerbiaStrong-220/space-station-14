@@ -1,0 +1,103 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  save: false
+  name: Urist McTajaran
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobTajaran
+  abstract: true
+  components:
+  - type: Inventory
+    speciesId: tajaran
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+  - type: HumanoidAppearance
+    species: Tajaran
+  - type: Icon
+    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: full
+  - type: Body
+    prototype: Tajaran
+    requiredLegs: 2
+    #акцент, эмоуты, хвост и маски
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Tajaran
+  - type: TajaranAccent
+  - type: TypingIndicator
+    proto: tajaran
+  - type: Wagging
+    action: ActionToggleWaggingTajaran
+  - type: Vocal
+    sounds:
+      Male: MaleFelinid
+      Female: FemaleFelinid
+      Unsexed: MaleFelinid
+  - type: Speech
+    speechSounds: Alto
+    speechVerb: Tajaran
+    allowedEmotes: ['Growl','Purr','Hiss']
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 0.9
+    soundHit:
+      path: /Audio/Effects/hit_kick.ogg
+  - type: Perishable
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+      - id: FoodMeat
+        amount: 5
+  - type: Emoting
+    chatEmoteCooldown: 5.0
+  - type: Thirst
+  - type: Hunger
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    angle: 30
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 5
+  - type: Temperature
+    heatDamageThreshold: 320
+    coldDamageThreshold: 230
+    currentTemperature: 310.15
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold : 0.05 #per second, scales with temperature & other constants
+    heatDamage:
+      types:
+        Heat : 2 #per second, scales with temperature & other constants
+  - type: TemperatureSpeed
+    thresholds:
+      289: 0.8
+      275: 0.6
+      250: 0.4
+  - type: KeenHearing
+    visionRadius: 5
+    highSensitiveVisionRadius: 2
+    addAction: true
+
+- type: entity
+  id: MobTajaranDummy
+  parent: MobHumanDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy Tajaran meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: Tajaran
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female

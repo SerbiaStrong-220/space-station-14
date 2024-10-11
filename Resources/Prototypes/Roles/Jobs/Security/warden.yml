@@ -32,7 +32,7 @@
 - type: startingGear
   id: WardenGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
+#    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     id: WardenPDA
     ears: ClothingHeadsetSecurity
 #    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap

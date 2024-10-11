@@ -1,0 +1,93 @@
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltLaw
+  name: full-size headset of the Law Department
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetLaw
+  name: headset of the Law Department
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/law.rsi
+
+- type: entity
+  parent:  ClothingHeadsetAltLaw
+  id: ClothingHeadsetAltMagistrate
+  name: full-size headset of the Magistrate
+  description: It is used by representatives of the magistrate.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+      - EncryptionKeyCommand
+
+- type: entity
+  parent: ClothingHeadsetLaw
+  id: ClothingHeadsetMagistrate
+  name: headset of the Magistrate
+  description: It is used by representatives of the magistrate.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+      - EncryptionKeyCommand
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltCaptain
+  name: full-size headset of the Captain
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeyStationMaster
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/captain.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/captain.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetCaptain
+  name: headset of the Captain
+  description: The captain's headset, which has the encryption keys of the command and the legal department.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeyStationMaster
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/captain.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/captain.rsi

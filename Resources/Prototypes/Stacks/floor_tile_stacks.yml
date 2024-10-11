@@ -547,6 +547,12 @@
   spawn: FloorTileItemBCircuit
   maxCount: 30
 
+# - type: stack SS220-floor-tiles begin
+#   id: FloorTileRCircuit
+#   name: red-circuit floor
+#   spawn: FloorTileItemRCircuit
+#   maxCount: 30
+
 - type: stack
   id: FloorTileGrass
   name: grass floor tile

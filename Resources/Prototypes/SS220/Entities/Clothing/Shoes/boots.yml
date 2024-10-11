@@ -20,6 +20,16 @@
     sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -100
+    attackRate: 1
+    range: 1
+    angle: 90
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      path: "/Audio/Items/snap.ogg"
 
 - type: entity
   parent: ClothingShoesBootsJackSec
@@ -29,28 +39,6 @@
     containers:
      item:
       - CombatKnife
-
-- type: entity
-  parent: ClothingShoesBase
-  id: ClothingShoesMoryak
-  name: moryak shoes
-  description: Tight sailor shoes, but at least they're waterproof.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Shoes/Specific/moryak.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Shoes/Specific/moryak.rsi
-
-- type: entity
-  parent: ClothingShoesBaseButcherable
-  id: ClothingShoesYsatyu
-  name: ysatyu boots
-  description: Will pave the way to the nearest moonshine deposits.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Shoes/Specific/ysatyu.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Shoes/Specific/ysatyu.rsi
 
 - type: entity
   parent: ClothingShoesBaseButcherable

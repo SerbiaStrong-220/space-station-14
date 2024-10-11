@@ -233,24 +233,24 @@
             - tool: Anchoring
               doAfter: 3
 
-    - node: uraniumWindowDirectional
-      entity: UraniumWindowDirectional
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetUGlass1
-              amount: 1
-            - !type:DeleteEntity {}
-          steps:
-            - tool: Screwing
-              doAfter: 2
-            - tool: Prying
-              doAfter: 3
-            - tool: Screwing
-              doAfter: 2
-            - tool: Anchoring
-              doAfter: 3
+    # - node: uraniumWindowDirectional
+    #   entity: UraniumWindowDirectional
+    #   edges:
+    #     - to: start
+    #       completed:
+    #         - !type:SpawnPrototype
+    #           prototype: SheetUGlass1
+    #           amount: 1
+    #         - !type:DeleteEntity {}
+    #       steps:
+    #         - tool: Screwing
+    #           doAfter: 2
+    #         - tool: Prying
+    #           doAfter: 3
+    #         - tool: Screwing
+    #           doAfter: 2
+    #         - tool: Anchoring
+    #           doAfter: 3
 
     - node: uraniumReinforcedWindowDirectional
       entity: UraniumReinforcedWindowDirectional

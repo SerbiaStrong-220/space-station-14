@@ -182,6 +182,14 @@
   - type: HideLayerClothing
     slots:
     - Hair
+  #ss220-goliath-cloak-upgrade begin
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+  #ss220-goliath-cloak-upgrade end
 
 - type: entity
   parent: ClothingHeadBase
@@ -514,9 +522,9 @@
   name: warden's coat hood
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hoods/Coat/hoodsec.rsi
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodwardenarmored.rsi # SS220 new hood
   - type: Clothing
-    sprite: Clothing/Head/Hoods/Coat/hoodsec.rsi
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodwardenarmored.rsi # SS220 new hood
 
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
@@ -748,3 +756,20 @@
       - state: coatybits-equipped-HELMET
         color: "#EBE216"
       - state: winterbits-equipped-HELMET
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodVoidCloak
+  name: void cloak hood
+  description: The hood of a void cloak. For those who have gone to the dark side of the force.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hoods/voidcloak.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hoods/voidcloak.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair

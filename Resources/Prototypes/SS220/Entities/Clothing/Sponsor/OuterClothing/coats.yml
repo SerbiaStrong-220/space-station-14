@@ -1,0 +1,163 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Райан Гуслинг
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorWhiteCoat
+  name: фирменная белая куртка
+  description: Молотки больше не используются на станциях NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/whitecoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/whitecoat.rsi
+
+# Чёрное пальто
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorBlackCoat
+  name: чёрное пальто
+  description: Тепло.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/blackcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/blackcoat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
+
+# Тайно Дёрден
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorTylerRedCoat
+  name: плотная красная куртка
+  description: Отдаёт химией.
+  components:
+  - type: StorageFill
+    contents:
+    - id: SponsorCigPack
+      amount: 1
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/redcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/redcoat.rsi
+
+# Плохой хлеб
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorWaltuhOuterShirt
+  name: плотная чёрная рубашка
+  description: Отдаёт химией.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/waltuh.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/waltuh.rsi
+
+# Данте
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorDante
+  name: вишнёвый плащ
+  description: Але?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/dante.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/dante.rsi
+
+# Джужутсу
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorCoatJujutsuShlepa
+  name: пиджак офисного работника.
+  description: Вы не чувствуете себя по-настоящему ценным? Бюрократия поможет вам решить эту проблема!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/nanamijacket.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/nanamijacket.rsi
+
+# 1984
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsor1984
+  name: куртка "1984"
+  description: Большой брат следит за тобой.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/1984.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/1984.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
+
+# CyberPunk
+- type: entity
+  parent: ClothingSponsorOuterStorageBase
+  id: ClothingSponsorSamuraiJacket
+  name: самурайская куртка
+  description: Дешёвый эпатаж, консюмеризм и бунт против серости.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/vbomberjacket.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/vbomberjacket.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - state: equipped-OUTERCLOTHING-unshaded
+        shader: unshaded
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
+
+- type: entity
+  parent: [ ClothingSponsorSamuraiJacket, ClothingOuterVestArmorSec ]
+  id: ClothingSponsorCyberVestSecurity
+  name: кибербронежилет охраны
+  description: Светящиеся элементы не дают вам никакого тактического преимущества... но зато какой стиль!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybersecarmor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybersecarmor.rsi
+
+- type: entity
+  parent: ClothingSponsorSamuraiJacket
+  id: ClothingSponsorCyberJacketMed
+  name: пиджак врача с кардиоутройством
+  description: Синий пиджак с исключительно косметическим устройством. Сразите стилем своих пациентов наповал!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybermedsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybermedsuit.rsi
+
+- type: entity
+  parent: ClothingSponsorSamuraiJacket
+  id: ClothingSponsorCyberJacketRnD
+  name: киберхуди учёного
+  description: В нём уютно и тепло, главное не заснуть перед аномалией. Полное удобство для сыча.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberrndsweater.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberrndsweater.rsi
+
+- type: entity
+  parent: ClothingSponsorSamuraiJacket
+  id: ClothingSponsorCyberJacketEng
+  name: киберкуртка инженера
+  description: Гладкий и прочный материал, светящиеся элементы в темноте, что ещё нужно для счастья инженеру?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberengijacket.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberengijacket.rsi

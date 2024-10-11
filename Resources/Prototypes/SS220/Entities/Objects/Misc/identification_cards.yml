@@ -123,3 +123,29 @@
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+
+- type: entity
+  parent: IDCardStandard
+  id: MagistrateIDCard
+  name: magistrate ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: Magistrate
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  components:
+    - type: IdCard
+      jobTitle: Заключённый
+    - type: Sprite
+      layers:
+        - state: orange
+        - state: idprisoner
+    - type: PresetIdCard
+      job: Prisoner

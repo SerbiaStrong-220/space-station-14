@@ -1,0 +1,94 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Ears section
+
+- type: marking
+  id: TajaranEars [2]
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_piercing_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_piercing_inner
+
+- type: marking
+  id: TajaranEars
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_common_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_common_inner
+
+- type: marking
+  id: TajaranEars [4]
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_nyshka_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_nyshka_inner
+
+# Tail section
+
+- type: marking
+  id: TajaranTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  # Animated
+- type: marking
+  id: TajaranTailAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+      state: tajaran_tail_wagging
+
+

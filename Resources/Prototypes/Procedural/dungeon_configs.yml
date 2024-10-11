@@ -114,6 +114,10 @@
 - type: dungeonConfig
   id: LavaBrig
   data:
+    #ss220 lava exp fix start
+    tiles:
+      FallbackTile: FloorSteel
+    #ss220 lava exp fix end
     colors:
       Decals: "#DE3A3A96"
     entities:

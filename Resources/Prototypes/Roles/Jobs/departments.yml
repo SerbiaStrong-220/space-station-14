@@ -22,11 +22,11 @@
   - Chaplain
   - Chef
   - Clown
-  - Detective
+#  - Detective #SS220-Transfer Detective To Security
   - HeadOfPersonnel
   - SeniorService #ss220-SEniorService
   - Janitor
-  - Lawyer
+#  - Lawyer #SS220-Law Department
   - Librarian
   - Mime
   - Musician
@@ -53,6 +53,7 @@
   - DeathSquad
   editorHidden: true
   weight: 120
+  lightColor: "#387195" # SS220 Round End Titles
 
 - type: department
   id: Command
@@ -62,7 +63,8 @@
   color: "#052EED"
   roles:
   - Captain
-  - IAA # Corvax-IAA
+#  - IAA #SS220-Law Department
+  - Magistrate #SS220-Law Department
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -81,6 +83,7 @@
   - DeathSquad
   primary: false
   weight: 100
+  lightColor: "#2c60f8" # SS220 Round End Titles
 
 - type: department
   id: Engineering
@@ -125,6 +128,8 @@
   - SecurityOfficer
   - Warden
   - SecurityPilot
+  - Detective #SS220-Transfer Detective To Security
+
 
 - type: department
   id: Science
@@ -170,6 +175,7 @@
   - Zookeeper
 #  - Psychologist SS220-psychologist-chat-color-fix
   primary: false
+  roundEndTitlesHidden: true # SS220 Round End Titles
 
 - type: department
   id: GhostRoles
