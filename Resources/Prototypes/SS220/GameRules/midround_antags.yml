@@ -37,3 +37,35 @@
       - type: DarkReaperRole
         prototype: DarkReaper
   - type: DarkReaperMajorRule
+
+  # Spider queen
+- type: entity
+  parent: BaseGameRule
+  id: SpiderQueenSpawn
+  categories: [ GameRules ]
+  components:
+  - type: StationEvent
+    weight: 5.5
+    duration: 1
+    earliestStart: 30
+    minimumPlayers: 40
+  - type: AntagSpawner
+    prototype: MobSpiderQueen
+  - type: AntagObjectives
+    objectives:
+    - CreateCocoonsObjective
+    - SpiderQueenSurviveObjective
+  - type: AntagSelection
+    agentName: spider-queen-round-end-agent-name
+    definitions:
+    - prefRoles: [ SpiderQueen ]
+      spawnerPrototype: SpawnPointGhostSpaceQueen
+      max: 1
+      playerRatio: 10
+      mindComponents:
+      - type: SpiderQueenRole
+        prototype: SpiderQueen
+  - type: SpiderQueenRule
+    markersWhitelist:
+      tags:
+         - SpiderQueenSpawnMarker

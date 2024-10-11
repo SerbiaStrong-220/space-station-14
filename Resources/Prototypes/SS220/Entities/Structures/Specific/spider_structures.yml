@@ -1,135 +1,126 @@
 # AT THE BOTTOM IS A TILE MADE OF COBWEBS.
 
-#TODO: Сделать нормальную анимацию спавна стены без использования костыля в виде спавна тайлов и столов
 #Base
 - type: entity
-  parent: BaseItemSpider
-  id: BaseFloorTileItemSpiders
-  description: These could work as a pretty decent throwing weapon.
+  id: BaseSpiderCocoon
+  name: spider cocoon
+  description: description
+  suffix: Spider hive
   abstract: true
   components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
   - type: Sprite
-    sprite: Objects/Tiles/web.rsi
-    state: icon
-  - type: FloorTile
-    outputs:
-      - FloorWebTile
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    drawdepth: Items
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Clickable
   - type: Damageable
     damageContainer: Inorganic
-  - type: Construction
-    graph: WebObjects
-    node: tile
-  - type: TimedDespawn
-  - type: SpawnOnDespawn
+    damageModifierSet: Wood
+  - type: Destructible
+  - type: ContainerContainer
+    containers:
+      cocoon: !type:Container
+  - type: Tag
+    tags:
+      - SpiderCocoon
+  - type: SpiderCocoon
+    container: cocoon
+    bloodPointsBonus: 20
+    damage:
+      types:
+        Caustic: 0.5
+        Blunt: 1
+    damageCap:
+      Caustic: 40
+      Blunt: 80
+
+- type: entity
+  id: BaseSpiderCocoonDestroyed
+  name: spider cocoon destroyed
+  description: description
+  suffix: Spider hive
+  abstract: true
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    drawdepth: Items
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
+        damage: 75
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          collection: MetalBreak
-          params:
-            volume: -8
+          path: /Audio/Effects/poster_broken.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 5
 
-#Tile (used to spawn walls)
-# - type: entity
-#   parent: BaseFloorTileItemSpiders
-#   id: FloorTileItemWebSpiders
-#   name: web construction
-#   description: Very smooth and surprisingly durable.
-#   categories: [ HideSpawnMenu ]
-#   components:
-#   - type: TimedDespawn
-#     lifetime: 5
-#   - type: SpawnOnDespawn
-#     prototype: TableWebSpiders
-
-# - type: entity
-#   name: web
-#   description: Web
-#   parent: BaseFloorTileItemSpiders
-#   id: FloorTileItemWebSpidersDurable
-#   categories: [ HideSpawnMenu ]
-#   components:
-#   - type: TimedDespawn
-#     lifetime: 6
-#   - type: SpawnOnDespawn
-#     prototype: TableWebSpidersDurable
-#   - type: Sprite
-#     shader: unshaded
-#     color: gray
-
-#Table (заглушка типо как анимация)
+#WallSpawnWeb
 - type: entity
-  parent: TableBase
-  id: TableWebSpiders
-  name: web
-  description: web
+  id: WallWebSpawn
   categories: [ HideSpawnMenu ]
   components:
-  - type: Damageable
-    damageModifierSet: Web
+  - type: Transform
+    anchored: True
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
   - type: Sprite
-    sprite: Structures/Furniture/Tables/web.rsi
-  - type: Icon
-    sprite: Structures/Furniture/Tables/web.rsi
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path:
-          "/Audio/Weapons/slash.ogg"
-  - type: Construction
-    graph: WebStructures
-    node: table
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepCarpet
+    sprite: SS220/Effects/wallwebspawn.rsi
+    state: webwall
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
   - type: TimedDespawn
-    lifetime: 5
+    lifetime: 2.4
   - type: SpawnOnDespawn
     prototype: WallWeb
 
 - type: entity
-  parent: TableWebSpiders
-  id: TableWebSpidersDurable
-  name: web
-  description: web
+  parent: WallWebSpawn
+  id: WallWebDurableSpawn
   categories: [ HideSpawnMenu ]
   components:
-  - type: TimedDespawn
-    lifetime: 8
+  - type: Sprite
+    sprite: SS220/Effects/wallwebspawn.rsi
+    state: webwall
+    color: gray
   - type: SpawnOnDespawn
     prototype: WallWebDurable
-  - type: Sprite
-    sprite: Structures/Furniture/Tables/web.rsi
-    shader: unshaded
-    color: gray
 
 #Wall
 - type: entity
@@ -177,3 +168,95 @@
   - type: Construction
     graph: WebStructures
     node: wall
+
+# Cocoon
+- type: entity
+  parent: BaseSpiderCocoon
+  id: SpiderCocoonHorizontal
+  suffix: Spider hive
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    state: cocoon1
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    layers:
+      - state: cocoon1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonHorizontalDestroyed
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontal
+
+- type: entity
+  parent: BaseSpiderCocoon
+  id: SpiderCocoonVertical
+  suffix: Spider hive
+  components:
+  - type: Icon
+    state: cocoon2
+  - type: Sprite
+    layers:
+      - state: cocoon2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonVerticalDestroyed
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonVertical
+
+# Destroyed cocoon
+- type: entity
+  parent: BaseSpiderCocoonDestroyed
+  id: SpiderCocoonHorizontalDestroyed
+  suffix: Spider hive
+  components:
+  - type: Icon
+    state: destroyed_cocoon1
+  - type: Sprite
+    layers:
+      - state: destroyed_cocoon1
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontalDestroyed
+
+- type: entity
+  parent: BaseSpiderCocoonDestroyed
+  id: SpiderCocoonVerticalDestroyed
+  suffix: Spider hive
+  components:
+  - type: Icon
+    state: destroyed_cocoon2
+  - type: Sprite
+    layers:
+      - state: destroyed_cocoon2
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonVerticalDestroyed
