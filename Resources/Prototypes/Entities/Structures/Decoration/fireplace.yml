@@ -46,3 +46,8 @@
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
   - type: AlwaysHot
+  #SS220-fireplaceCrafting-Start
+  - type: Construction
+    graph: FirePlace
+    node: FirePlaceNode
+  #SS220-fireplaceCrafting-End

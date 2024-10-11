@@ -375,7 +375,7 @@
       board: [ DoorElectronicsBrig ]
 
 - type: entity
-  parent: AirlockLaw #SS220 Law Department
+  parent: AirlockLawSecurity #SS220 Law&Sec Door Resprite
   id: AirlockSecurityLawyerLocked
   suffix: Security/Lawyer, Locked
   components:
@@ -762,7 +762,7 @@
       board: [ DoorElectronicsBrig ]
 
 - type: entity
-  parent: AirlockLawGlass #SS220 Law Department
+  parent: AirlockLawSecurityGlass #SS220 Law&Sec Door Resprite
   id: AirlockSecurityLawyerGlassLocked
   suffix: Security/Lawyer, Locked
   components:

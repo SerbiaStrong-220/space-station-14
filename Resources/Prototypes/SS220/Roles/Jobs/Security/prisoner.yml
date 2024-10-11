@@ -1,0 +1,7 @@
+- type: job
+  id: Prisoner
+  name: job-name-prisoner
+  description: job-description-prisoner
+  playTimeTracker: Prisoner
+  icon: "JobIconPrisoner"
+  canBeAntag: true
