@@ -21,6 +21,9 @@ public sealed class DamageContactsSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<DamageContactsComponent, StartCollideEvent>(OnEntityEnter);
         SubscribeLocalEvent<DamageContactsComponent, EndCollideEvent>(OnEntityExit);
+
+        //SS220 Add stand still time
+        SubscribeLocalEvent<DamagedByContactComponent, MoveEvent>(OnMove);
     }
 
     public override void Update(float frameTime)
@@ -31,7 +34,8 @@ public sealed class DamageContactsSystem : EntitySystem
 
         while (query.MoveNext(out var ent, out var damaged))
         {
-            if (_timing.CurTime < damaged.NextSecond)
+            if (_timing.CurTime < damaged.NextSecond ||
+                _timing.CurTime < damaged.LastMovement + damaged.StandStillTime) //SS220 Add stand still time
                 continue;
             damaged.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
 
@@ -91,10 +95,25 @@ public sealed class DamageContactsSystem : EntitySystem
         if (HasComp<DamagedByContactComponent>(otherUid))
             return;
 
-        if (_whitelistSystem.IsWhitelistPass(component.IgnoreWhitelist, otherUid))
+        if (_whitelistSystem.IsWhitelistPass(component.IgnoreWhitelist, otherUid) ||
+            _whitelistSystem.IsBlacklistFail(component.IgnoreBlacklist, otherUid)) //SS220 Add ignore blacklist
             return;
 
         var damagedByContact = EnsureComp<DamagedByContactComponent>(otherUid);
         damagedByContact.Damage = component.Damage;
+
+        //SS220 Add stand still time begin
+        damagedByContact.StandStillTime = component.StandStillTime;
+        Dirty(otherUid, damagedByContact);
+        //SS220 Add stand still time end
     }
+
+    //SS220 Add stand still time begin
+    private void OnMove(Entity<DamagedByContactComponent> ent, ref MoveEvent args)
+    {
+        var (uid, component) = ent;
+        component.LastMovement = _timing.CurTime;
+        Dirty(uid, component);
+    }
+    //SS220 Add stand still time end
 }
