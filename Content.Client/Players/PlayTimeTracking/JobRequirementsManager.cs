@@ -190,4 +190,18 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
         return _roles;
     }
+
+    // SS220 Add role-ban check begin
+    public bool IsRoleBaned(string role, [NotNullWhen(true)] out FormattedMessage? reason)
+    {
+        if (_roleBans.Contains($"Job:{role}"))
+        {
+            reason = FormattedMessage.FromUnformatted(Loc.GetString("role-ban"));
+            return true;
+        }
+
+        reason = null;
+        return false;
+    }
+    // SS220 Add role-ban check end
 }
