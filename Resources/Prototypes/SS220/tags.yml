@@ -114,3 +114,8 @@
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter
+
+ #SS220 #SS220 Add Tourniquet to medic's belt START
+- type: Tag
+  id: Tourniquet 
+ #SS220 Add Tourniquet to medic's belt END
