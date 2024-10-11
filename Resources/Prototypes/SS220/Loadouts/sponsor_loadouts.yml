@@ -54,6 +54,15 @@
     - ClothingSponsorNeckAdministrator
 
 - type: loadout
+  id: ModeratorNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ModeratorSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckModerator
+
+- type: loadout
   id: HeadDeveloperNeck
   effects:
   - !type:GroupLoadoutEffect
