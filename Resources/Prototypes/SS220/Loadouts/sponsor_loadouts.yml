@@ -1,0 +1,63 @@
+# Плащи
+- type: loadout
+  id: ParadiseNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HugeShlopaSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckParadise
+
+- type: loadout
+  id: CoderNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DeveloperSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckCoder
+
+- type: loadout
+  id: MapperNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MapperSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckMapper
+
+- type: loadout
+  id: SpriterNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SpriterSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckSpriter
+
+- type: loadout
+  id: TrackerExpertNeck #Трекероведы
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: QASponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckTrackerExpert
+
+- type: loadout
+  id: AdministratorNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckAdministrator
+
+- type: loadout
+  id: HeadDeveloperNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HeadDeveloperSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckHeadDevelopment

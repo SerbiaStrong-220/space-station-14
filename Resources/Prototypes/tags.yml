@@ -626,6 +626,12 @@
   id: FirelockElectronics
 
 - type: Tag
+  id: FireExtinguisher
+
+- type: Tag
+  id: FireHelmet
+
+- type: Tag
   id: Flare
 
 - type: Tag
@@ -654,6 +660,9 @@
 
 - type: Tag
   id: ForceNoFixRotations # fixrotations command WON'T target this
+
+- type: Tag
+  id: FreezerElectronics
 
 - type: Tag
   id: Fruit
@@ -1183,7 +1192,7 @@
 - type: Tag
   id: SecureWindoor
 
-- type: Tag  
+- type: Tag
   id: SecurityHelmet
 
 - type: Tag
@@ -1518,5 +1527,10 @@
 - type: Tag
   id: ShrineMaidenWig
 # SS220-TohaUpdate-End
+
+# SS220 Fix #2009 begin
+- type: Tag
+  id: HolofanProjectorSecurity
+# SS220 Fix #2009 end
 
 # ALPHABETICAL

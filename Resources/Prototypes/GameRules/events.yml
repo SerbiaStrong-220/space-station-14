@@ -36,6 +36,7 @@
     - id: SleeperAgents
     - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
+    # - id: SpiderQueenSpawn #SS220 spider queen midround event
 
 - type: entity
   id: BaseStationEvent
@@ -223,6 +224,12 @@
         sound: /Audio/Misc/ninja_greeting.ogg
       components:
       - type: SpaceNinja
+      # SS220 Ninja Keen-Hearing-begins
+      - type: KeenHearing
+        visionRadius: 9
+        highSensitiveVisionRadius: 4
+        state: half
+      # SS220 Ninja Keen-Hearing-end
       - type: NpcFactionMember
         factions:
         - Syndicate

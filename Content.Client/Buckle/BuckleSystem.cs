@@ -16,7 +16,6 @@ internal sealed class BuckleSystem : SharedBuckleSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BuckleComponent, ComponentHandleState>(OnHandleState);
         SubscribeLocalEvent<BuckleComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<StrapComponent, MoveEvent>(OnStrapMoveEvent);
     }
@@ -63,25 +62,26 @@ internal sealed class BuckleSystem : SharedBuckleSystem
         }
     }
 
-    private void OnHandleState(Entity<BuckleComponent> ent, ref ComponentHandleState args)
-    {
-        if (args.Current is not BuckleState state)
-            return;
-
-        ent.Comp.DontCollide = state.DontCollide;
-        ent.Comp.BuckleTime = state.BuckleTime;
-        var strapUid = EnsureEntity<BuckleComponent>(state.BuckledTo, ent);
-
-        SetBuckledTo(ent, strapUid == null ? null : new (strapUid.Value, null));
-
-        var (uid, component) = ent;
-
-    }
-
     private void OnAppearanceChange(EntityUid uid, BuckleComponent component, ref AppearanceChangeEvent args)
     {
         if (!TryComp<RotationVisualsComponent>(uid, out var rotVisuals))
             return;
+
+        //SS220 Change DrawDepth on buckle begin
+        if (args.Sprite != null)
+        {
+            if (Appearance.TryGetData<int>(uid, BuckleVisuals.DrawDepth, out var drawDepth, args.Component))
+            {
+                component.DrawDepthBeforeBuckle ??= args.Sprite.DrawDepth;
+                args.Sprite.DrawDepth = drawDepth;
+            }
+            else if (component.DrawDepthBeforeBuckle is { } drawDepthBeforeBuckle)
+            {
+                args.Sprite.DrawDepth = drawDepthBeforeBuckle;
+                component.DrawDepthBeforeBuckle = null;
+            }
+        }
+        //SS220 Change DrawDepth on buckle end
 
         if (!Appearance.TryGetData<bool>(uid, BuckleVisuals.Buckled, out var buckled, args.Component) ||
             !buckled ||

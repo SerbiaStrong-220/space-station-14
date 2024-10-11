@@ -37,7 +37,8 @@
   suffix: RND
   components:
     - type: ThermalVisionClothing
-      thermalVisionRadius: 5
+      visionRadius: 5
+      closeVisionRadius: 2.5
     - type: Sprite
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
@@ -52,7 +53,8 @@
   suffix: SecRND
   components:
   - type: ThermalVisionClothing
-    thermalVisionRadius: 5
+    visionRadius: 5
+    closeVisionRadius: 2.5
   - type: Sprite
     sprite: SS220/Clothing/Eyes/secthermalglasses.rsi
   - type: Clothing

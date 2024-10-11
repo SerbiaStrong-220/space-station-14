@@ -220,7 +220,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         _appearance.SetData(uid, ElectrifiedVisuals.IsPowered, true);
 
         siemens *= electrified.SiemensCoefficient;
-        if (!DoCommonElectrocutionAttempt(targetUid, uid, ref siemens) || siemens <= 0)
+        if (!DoCommonElectrocutionAttempt(targetUid, uid, ref siemens, electrified.IgnoreInsulation) || siemens <= 0) //SS220 Add ignore insulation
             return false; // If electrocution would fail, do nothing.
 
         var targets = new List<(EntityUid entity, int depth)>();
@@ -237,7 +237,8 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
                     (int) (electrified.ShockDamage * MathF.Pow(RecursiveDamageMultiplier, depth)),
                     TimeSpan.FromSeconds(electrified.ShockTime * MathF.Pow(RecursiveTimeMultiplier, depth)),
                     true,
-                    electrified.SiemensCoefficient
+                    electrified.SiemensCoefficient,
+                    ignoreInsulation: electrified.IgnoreInsulation //SS220 Add ignore insulation
                 );
             }
             return lastRet;
@@ -266,7 +267,8 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
                     (int) (electrified.ShockDamage * MathF.Pow(RecursiveDamageMultiplier, depth) * damageScalar),
                     TimeSpan.FromSeconds(electrified.ShockTime * MathF.Pow(RecursiveTimeMultiplier, depth) * timeScalar),
                     true,
-                    electrified.SiemensCoefficient);
+                    electrified.SiemensCoefficient,
+                    ignoreInsulation: electrified.IgnoreInsulation); //SS220 Add ignore insulation
             }
             return lastRet;
         }
@@ -313,9 +315,10 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         bool refresh,
         float siemensCoefficient = 1f,
         StatusEffectsComponent? statusEffects = null,
-        TransformComponent? sourceTransform = null)
+        TransformComponent? sourceTransform = null,
+        bool ignoreInsulation = false) //SS220 Add ignore insulation
     {
-        if (!DoCommonElectrocutionAttempt(uid, sourceUid, ref siemensCoefficient))
+        if (!DoCommonElectrocutionAttempt(uid, sourceUid, ref siemensCoefficient, ignoreInsulation)) //SS220 Add ignore insulation
             return false;
 
         if (!DoCommonElectrocution(uid, sourceUid, shockDamage, time, refresh, siemensCoefficient, statusEffects))
@@ -487,5 +490,16 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
             return;
         }
         _audio.PlayPvs(electrified.ShockNoises, targetUid, AudioParams.Default.WithVolume(electrified.ShockVolume));
+    }
+
+    public void SetElectrifiedWireCut(Entity<ElectrifiedComponent> ent, bool value)
+    {
+        if (ent.Comp.IsWireCut == value)
+        {
+            return;
+        }
+
+        ent.Comp.IsWireCut = value;
+        Dirty(ent);
     }
 }

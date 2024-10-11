@@ -24,17 +24,6 @@
 
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingNeckScarfYsatyu
-  name: ysatyu scarf
-  description: Long and narrow for convenient drinking of moonshine.
-  components:
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Scarfs/ysatyu.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Neck/Scarfs/ysatyu.rsi
-
-- type: entity
-  parent: ClothingNeckBase
   id: ClothingNeckScarfCentcomm
   name: шарф Центрального Командования
   description: Не каждый сможет носить эту безвкусицу, правда? Кому-то нравится, а кто-то будет расстрелян.

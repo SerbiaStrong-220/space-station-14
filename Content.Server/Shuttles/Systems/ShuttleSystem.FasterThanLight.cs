@@ -226,6 +226,7 @@ public sealed partial class ShuttleSystem
     /// </summary>
     public bool CanFTL(EntityUid shuttleUid, [NotNullWhen(false)] out string? reason)
     {
+        // Currently in FTL already
         if (HasComp<FTLComponent>(shuttleUid))
         {
             reason = Loc.GetString("shuttle-console-in-ftl");
@@ -237,8 +238,19 @@ public sealed partial class ShuttleSystem
             shuttlePhysics.Mass > FTLMassLimit &&
             !HasComp<IgnoreFTLMassLimitComponent>(shuttleUid)) //SS220 Add IgnoreFTLMassLimitComponent
         {
-            reason = Loc.GetString("shuttle-console-mass");
-            return false;
+            // Static physics type is set when station anchor is enabled
+            if (shuttlePhysics.BodyType == BodyType.Static)
+            {
+                reason = Loc.GetString("shuttle-console-static");
+                return false;
+            }
+
+            // Too large to FTL
+            if (FTLMassLimit > 0 &&  shuttlePhysics.Mass > FTLMassLimit)
+            {
+                reason = Loc.GetString("shuttle-console-mass");
+                return false;
+            }
         }
 
         if (HasComp<PreventPilotComponent>(shuttleUid))
@@ -552,7 +564,8 @@ public sealed partial class ShuttleSystem
         }
 
         comp.State = FTLState.Cooldown;
-        comp.StateTime = StartEndTime.FromCurTime(_gameTiming, FTLCooldown);
+        //comp.StateTime = StartEndTime.FromCurTime(_gameTiming, FTLCooldown); // SS220 FTLCooldown outside CVar begin
+        comp.StateTime = StartEndTime.FromCurTime(_gameTiming, entity.Comp2.FTLCooldown); // SS220 FTLCooldown outside CVar end
         _console.RefreshShuttleConsoles(uid);
         _mapManager.SetMapPaused(mapId, false);
         Smimsh(uid, xform: xform);

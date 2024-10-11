@@ -320,6 +320,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_nt.rsi
 
+  # Бармен
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWaiter
+  name: waiter's uniform
+  description: The uniform of an errand boy.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/waiter.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/waiter.rsi
+
 # Medical
 
   # Парамед
@@ -461,22 +473,48 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitYsatyu
-  name: ysatyu suit
-  description: It smells like moonshine.
+  id: ClothingUniformJumpsuitRDAlt
+  name: shirt of a desperate scientist
+  description: neat blue shirt with suspenders. It gives you faith in peace through nuclear deterrence.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
+    sprite: SS220/Clothing/Uniforms/RD.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/ysatyu.rsi
+    sprite: SS220/Clothing/Uniforms/RD.rsi
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitMoryak
-  name: moryak suit
-  description: Sailor suit for mime.
+  id: ClothingUniformJumpsuitVaas
+  name: vaas suit
+  description: A red T-shirt with the badge of an security officer. Do you know the definition of Insanity?
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/moryak.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi
+
+# WMT Ebent start
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformBluesoldier
+  name: kingdom army shirt
+  description: The clothing of a soldier of the great army of the kingdom.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bluesoldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/bluesoldier.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformRedsoldier
+  name: republican army shirt
+  description: The clothing of a soldier of the army of the River Republic.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/redsoldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/redsoldier.rsi
+# WMT Ebent end

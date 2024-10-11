@@ -3,7 +3,6 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
-using Content.Server.VoiceMask;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -94,23 +93,18 @@ public sealed class RadioSystem : EntitySystem
         if (!_messages.Add(message))
             return;
 
-        var name = TryComp(messageSource, out VoiceMaskComponent? mask) && mask.Enabled
-            ? mask.VoiceName
-            : MetaData(messageSource).EntityName;
+        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
+        RaiseLocalEvent(messageSource, evt);
 
+        var name = evt.VoiceName;
         name = FormattedMessage.EscapeText(name);
 
         // SS220 department-radio-color
         var formattedName = $"[color={GetIdCardColor(messageSource)}]{GetIdCardName(messageSource)}{name}[/color]";
 
         SpeechVerbPrototype speech;
-        if (mask != null
-            && mask.Enabled
-            && mask.SpeechVerb != null
-            && _prototype.TryIndex<SpeechVerbPrototype>(mask.SpeechVerb, out var proto))
-        {
-            speech = proto;
-        }
+        if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
+            speech = evntProto;
         else
             speech = _chat.GetSpeechVerb(messageSource, message);
 
@@ -265,13 +259,14 @@ public sealed class RadioSystem : EntitySystem
 
     private void OnEncryptionChannelsChangeReceiver(Entity<IntrinsicRadioReceiverComponent> entity, ref EncryptionChannelsChangedEvent args)
     {
-        if (!TryComp<ActiveRadioComponent>(entity.Owner, out var activeRadio))
-            return;
-
-        HashSet<string> channels = entity.Comp.Channels;
+        HashSet<string> channels = new();
         channels.UnionWith(args.Component.Channels);
+        channels.UnionWith(entity.Comp.Channels);
 
-        activeRadio.Channels = new(channels);
+        if (channels.Count > 0)
+            EnsureComp<ActiveRadioComponent>(entity.Owner).Channels = channels;
+        else
+            RemComp<ActiveRadioComponent>(entity.Owner);
     }
     //SS220 PAI with encryption keys end
 }

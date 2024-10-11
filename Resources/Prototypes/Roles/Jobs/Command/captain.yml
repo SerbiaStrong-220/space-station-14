@@ -36,7 +36,7 @@
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesSunglasses
     id: CaptainPDA
-    ears: ClothingHeadsetAltCommand
+#    ears: ClothingHeadsetAltCommand #SS220-Law Department
   storage:
     back:
     - Flash

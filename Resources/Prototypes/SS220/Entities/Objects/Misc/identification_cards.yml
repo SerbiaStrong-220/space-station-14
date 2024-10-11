@@ -136,3 +136,16 @@
     - type: PresetIdCard
       job: Magistrate
 
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  components:
+    - type: IdCard
+      jobTitle: Заключённый
+    - type: Sprite
+      layers:
+        - state: orange
+        - state: idprisoner
+    - type: PresetIdCard
+      job: Prisoner

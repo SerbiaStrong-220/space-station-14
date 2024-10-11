@@ -238,6 +238,7 @@
   components:
     - type: Tag
       tags:
+        - Tourniquet #SS220 Add Tourniquet to medic's belt
         - SecBeltEquip
     - type: Sprite
       state: tourniquet

@@ -1,0 +1,22 @@
+#Head
+- type: loadout
+  id: MagistratePwig
+  equipment:
+    head: ClothingHeadHatPwig
+
+# Outerclothing
+- type: loadout
+  id: MagistrateRobesJudge
+  equipment:
+    outerClothing: ClothingOuterRobesJudge
+
+# Headset
+- type: loadout
+  id: MagistrateHeadset
+  equipment:
+    ears: ClothingHeadsetMagistrate
+
+- type: loadout
+  id: MagistrateHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltMagistrate

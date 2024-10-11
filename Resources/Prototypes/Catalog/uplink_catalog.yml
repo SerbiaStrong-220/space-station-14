@@ -88,7 +88,7 @@
   productEntity: ThrowingKnivesKit
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2 #ss220-uplink-minor-fixes-and-discounts
   cost:
     Telecrystal: 4 #SS220-underused-uplinks-stuff
   categories:
@@ -115,6 +115,11 @@
   productEntity: EnergySwordDouble
   cost:
     Telecrystal: 16
+  #ss220-uplink-minor-fixes-and-discounts-begin #Discount added for the reason that on the official build d-esword is only in the nukies uplink, but nukies don't have discounts
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 9
+  #ss220-uplink-minor-fixes-and-discounts-end
   categories:
   - UplinkWeaponry
   conditions:
@@ -846,7 +851,7 @@
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
   description: uplink-binary-translator-key-desc
-  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: borg_label }
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: ai_label }
   productEntity: EncryptionKeyBinarySyndicate
   cost:
     Telecrystal: 1
@@ -1078,10 +1083,48 @@
   categories:
   - UplinkDisruption
   conditions:
-    - !type:BuyerWhitelistCondition
+  - !type:BuyerWhitelistCondition
       blacklist:
         components:
           - SurplusBundle
+
+#   SS 220 -  Antimov Laws hided from uplink - begin
+# - type: listing
+#   id: UplinkAntimovCircuitBoard
+#   name: uplink-antimov-law-name
+#   description: uplink-antimov-law-desc
+#   productEntity: AntimovCircuitBoard
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 10
+#   cost:
+#     Telecrystal: 14
+#   categories:
+#   - UplinkDisruption
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#      blacklist:
+#        tags:
+#        - NukeOpsUplink
+#   SS 220 -  Antimov Laws hided from uplink - end
+
+- type: listing
+  id: UplinkNukieAntimovCircuitBoard
+  name: uplink-antimov-law-name
+  description: uplink-antimov-law-desc
+  productEntity: AntimovCircuitBoard
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 36 # 20 default | SS220 Antimov Laws hide changes
+  cost:
+    Telecrystal: 40 # 24 default | SS220 Antimov Laws hide changes
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkSurplusBundle
@@ -1137,6 +1180,16 @@
 #  categories:
 #    - UplinkDisruption
 #ss220-uplink-fix-end
+
+- type: listing
+  id: UplinkCameraBug
+  name: uplink-cameraBug-name
+  description: uplink-cameraBug-desc
+  productEntity: CameraBug
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkDisruption
 
 # Allies
 
@@ -1330,7 +1383,7 @@
   productEntity: FreedomImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 1 #ss220-uplink-minor-fixes-and-discounts
   cost:
     Telecrystal: 3 #SS220-underused-uplinks-stuff
   categories:
@@ -1711,21 +1764,33 @@
       - LoneOpsUplink
 # ss220-fix-uplink-end
 
+#SS220 Syndie visor buff begin
+#- type: listing
+#  id: UplinkClothingEyesHudSyndicate
+#  name: uplink-clothing-eyes-hud-syndicate-name
+#  description: uplink-clothing-eyes-hud-syndicate-desc
+#  productEntity: ClothingEyesHudSyndicate
+#  cost:
+#    Telecrystal: 2
+#  categories:
+#    - UplinkWearables
+#  conditions:
+#   - !type:StoreWhitelistCondition
+#      blacklist:
+#        tags:
+#        - NukeOpsUplink
+#        - LoneOpsUplink
+
 - type: listing
-  id: UplinkClothingEyesHudSyndicate
-  name: uplink-clothing-eyes-hud-syndicate-name
-  description: uplink-clothing-eyes-hud-syndicate-desc
-  productEntity: ClothingEyesHudSyndicate
+  id: UplinkClothingEyesHudSyndicateAgent
+  name: uplink-clothing-eyes-hud-syndicate-agent-name
+  description: uplink-clothing-eyes-hud-syndicate-agent-desc
+  productEntity: ClothingEyesHudSyndicateAgent
   cost:
     Telecrystal: 2
   categories:
     - UplinkWearables
-  conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
+#SS220 Syndie visor buff end
 
 - type: listing
   id: UplinkClothingConductingGloves
@@ -1904,6 +1969,17 @@
     Telecrystal: 1
   categories:
     - UplinkPointless
+
+- type: listing
+  id: UplinkSyndicateBusinessCard
+  name: uplink-business-card-name
+  description: uplink-business-card-desc
+  productEntity: SyndicateBusinessCard
+  categories:
+    - UplinkPointless
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 3
 
 # Job Specific
 

@@ -1,0 +1,183 @@
+- type: entity
+  name: soap
+  id: SS220Soap
+  categories: [ HideSpawnMenu ]
+  parent: BaseItem
+  description: base soap for SS220 sprites.
+  components:
+  - type: Tag
+    tags:
+    - Soap
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    layers:
+    - state: snot-4
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: snot-
+    changeColor: false
+  - type: Appearance
+  - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    storedRotation: -90
+  - type: Slippery
+  - type: StepTrigger
+    intersectRatio: 0.2
+  - type: CollisionWake
+    enabled: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.2,0.3,0.2"
+        layer:
+        - SlipLayer
+        hard: false
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.2,0.3,0.2"
+        density: 10
+        mask:
+        - ItemMask
+  - type: SolutionContainerManager
+    solutions:
+      soap:
+        maxVol: 50
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 50
+  - type: SolutionTransfer
+    transferAmount: 10
+    minTransferAmount: 1
+    maxTransferAmount: 25
+    canReceive: false
+    canChangeTransferAmount: true
+  - type: DrainableSolution
+    solution: soap
+  - type: DeleteOnSolutionEmpty
+    solution: soap
+  - type: FlavorProfile
+    flavors:
+      - clean
+  - type: Food
+    solution: soap
+  - type: BadFood
+  - type: CleansForensics
+  - type: Residue
+    residueAdjective: residue-slippery
+    residueColor: residue-green
+
+- type: entity
+  parent: SS220Soap
+  id: SnotSoap
+  name: snotoap
+  description: Eww...slimey...u can try to clean something with it...feels fragile.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    layers:
+    - state: snot-4
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: snot-
+    changeColor: false
+  - type: Appearance
+  - type: ClusterGrenade
+    fillPrototype: snotlet
+    maxGrenadesCount: 30
+    grenadeTriggerIntervalMax: 0
+    grenadeTriggerIntervalMin: 0
+    baseTriggerDelay: 60
+    randomSpread: true
+    velocity: 3
+  - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    storedRotation: -90
+    heldPrefix: snot
+  - type: FlavorProfile
+    flavors:
+      - horrible
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 10
+  - type: LandAtCursor
+  - type: EmitSoundOnTrigger
+    sound:
+      path: "/Audio/Effects/flash_bang.ogg"
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+
+- type: entity
+  name: snotlet
+  id: snotlet
+  categories: [ HideSpawnMenu ]
+  parent: SS220Soap
+  description: A tiny piece of snots.
+  components:
+  - type: Sprite
+    layers:
+    - state: snotlet
+  - type: Slippery
+    paralyzeTime: 1.5
+    launchForwardsMultiplier: 1.5
+  - type: SolutionContainerManager
+    solutions:
+      soap:
+        maxVol: 5
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 5
+  - type: StepTrigger
+    intersectRatio: 0.04
+  - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    heldPrefix: snot
+  - type: FlavorProfile
+    flavors:
+      - horrible
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.08,-0.06,0.08,0.06"
+        layer:
+        - SlipLayer
+        hard: false
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.08,-0.06,0.08,0.06"
+        density: 1
+        mask:
+        - ItemMask
+  - type: DeleteOnTrigger
+  - type: EmitSoundOnTrigger
+    sound:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+      params:
+        volume: -20

@@ -1,7 +1,7 @@
 
 - type: entity
   name: telecrystal
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem]
   id: Telecrystal
   suffix: 20 TC
   description: It seems to be pulsing with suspiciously enticing energies.
@@ -40,7 +40,7 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
-        
+
 - type: entity
   parent: Telecrystal
   id: Telecrystal1
@@ -67,7 +67,7 @@
 
 # Uplinks
 - type: entity
-  parent: [BaseItem, StorePresetUplink, BaseSyndicateContraband]
+  parent: [BaseItem, StorePresetUplink]
   id: BaseUplinkRadio
   name: syndicate uplink
   description: Suspiciously looking old radio...

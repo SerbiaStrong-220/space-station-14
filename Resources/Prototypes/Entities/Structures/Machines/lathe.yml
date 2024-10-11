@@ -201,6 +201,7 @@
       - ClothingHeadHatWelding
       - WetFloorSign
       - ClothingHeadHatCone
+      - FreezerElectronics
       - Flare
   - type: EmagLatheRecipes
     emagStaticRecipes:
@@ -455,7 +456,10 @@
     - TilePurpleCircuit
     - TileYellowCircuit
     - TileOrangeCircuit
-    - TileRedCircuit #SS220-sheetifier-rework-end
+    - TileRedCircuit
+    # - FloorGreenCircuit
+    # - FloorBlueCircuit
+    # - FloorRedCircuit SS220-sheetifier-rework-end
     - MicrowaveMachineCircuitboard
     - ReagentGrinderMachineCircuitboard
     - ElectricGrillMachineCircuitboard
@@ -776,6 +780,7 @@
       - MagazinePistolEmpty
       - MagazinePistolRubber #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
       - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGunRubber #SS220 missing rubber fix
       - MagazinePistolSubMachineGunEmpty
       - MagazinePistolSubMachineGunTopMounted
       - MagazinePistolSubMachineGunTopMountedEmpty
@@ -888,20 +893,35 @@
         - BoxShotgunSlug
        #  - BoxShellTranquilizer
         - MagazineBoxLightRifle
+        - MagazineBoxLightRifleRubber #SS220 missing rubber fix
         - MagazineBoxMagnum
+        - MagazineBoxMagnumRubber #SS220 missing rubber fix
         - MagazineBoxPistol
+        - MagazineBoxPistolRubber #SS220 missing rubber fix
         - MagazineBoxRifle
+        - MagazineBoxRifleRubber #SS220 missing rubber fix
         - MagazineLightRifle
+        - MagazineLightRifleRubber #SS220 missing rubber fix
         - MagazineLightRifleEmpty
         - MagazinePistol
+        - MagazinePistolRubber #SS220 missing rubber fix
         - MagazinePistolEmpty
+        #SS220 forgotten mags add begin
+        - MagazinePistolSubMachineGun
+        - MagazinePistolSubMachineGunRubber #SS220 missing rubber fix
+        - MagazinePistolSubMachineGunEmpty
+        - MagazinePistolSubMachineGunTopMounted
+        - MagazinePistolSubMachineGunTopMountedEmpty
+        #SS220 forgotten mags add end
         - MagazineRifle
+        - MagazineRifleRubber #SS220 missing rubber fix
         - MagazineRifleEmpty
         - MagazineShotgun
         - MagazineShotgunEmpty
         - MagazineShotgunSlug
         # - ShellTranquilizer # SS220 No-Tranquilizer
         - SpeedLoaderMagnum
+        - SpeedLoaderMagnumRubber #SS220 missing rubber fix
         - SpeedLoaderMagnumEmpty
     - type: MaterialStorage
       whitelist:
@@ -1315,7 +1335,7 @@
   - type: Machine
     board: OreProcessorIndustrialMachineCircuitboard
   - type: Lathe
-    materialUseMultiplier: 0.75
+    materialUseMultiplier: 0.5 #ss220 oreprocessor balance
     timeMultiplier: 0.5
     staticRecipes:
       - SheetSteel

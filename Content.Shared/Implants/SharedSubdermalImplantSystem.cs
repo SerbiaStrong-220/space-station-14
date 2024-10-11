@@ -5,7 +5,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
-using Content.Shared.SS220.Thermals;
+using Content.Shared.SS220.IgnoreLightVision;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;

@@ -1,0 +1,69 @@
+- type: job
+  id: Magistrate
+  name: job-name-magistrate
+  description: job-description-magistrate
+  playTimeTracker: JobMagistrate
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 288000 # Заглушка - 80 часов
+    - !type:RoleTimeRequirement
+      role: JobIAA
+      time: 180000 # Заглушка - 50 часов
+    - !type:AgeRequirement
+      requiredAge: 32
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
+  weight: 20
+  startingGear: MagistrateGear
+  icon: "JobIconMagistrate"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  access:
+  - Command
+  - Lawyer
+  - Magistrate
+  - Service
+  - Brig
+  - Security
+  - Maintenance
+  - External
+  # Расширенный доступ
+  - Bar
+  - Janitor
+  - Theatre
+  - Kitchen
+  - Chapel
+  - Hydroponics
+  - Cryogenics
+  - Chemistry
+  - Engineering
+  - Research
+  - Detective
+  - Salvage
+  - Cargo
+  - Atmospherics
+  - Medical
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: MagistrateGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    eyes: ClothingEyesGlassesCommand
+    id: MagistratePDA
+  inhand:
+    - BriefcaseMagistrateFilled
+  storage:
+    back:
+    - Flash

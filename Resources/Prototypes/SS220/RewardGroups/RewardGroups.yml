@@ -1,18 +1,25 @@
+# Шлёпы
 - type: ShlepaRewardGroup
   id: Shlopa
   name: Шлёпстер
   roundstartTokens: 5
   requiredRole: Shlopa
   rewards:
-    SponsorCigPack: 1
     ClothingSponsorMothBoots: 1
     ClothingSponsorDante: 1
     ClothingSponsorTylerRedGlasses: 1
     ClothingSponsorDallas: 1
-    SponsorBoxStorageCandy: 1
+    ClothingSponsorPivozavr: 1 # Вторая итерация
     ClothingSponsorNeckWreath: 1
     ClothingSponsorWreath: 1
     ClothingSponsorScarfTube: 1
+    SponsorBoxStorageCandy: 1
+    SponsorCigPack: 1
+    FloppaCigarCase: 2 # Вторая итерация
+    SmokingPipeFilledTobaccoSponsor: 1 # Вторая итерация
+    ExpensiveLighterSponsor: 1 # Вторая итерация
+    DrinkChampagneSponsorBottleFull: 2 # Вторая итерация
+    DrinkBeerCanSponsor: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: BigShlopa
@@ -20,11 +27,15 @@
   roundstartTokens: 6
   requiredRole: BigShlopa
   rewards:
+    SponsorBoxMaid: 3
+    DrinkCanPackBeerSponsorBox: 2 # Вторая итерация
     ClothingSponsorWhiteCoat: 1
     ClothingSponsorBlackCoat: 1
-    SponsorBoxMaid: 3
+    PlushFloppa: 1 # Вторая итерация
     ClothingSponsorStudentSuit: 1
     ClothingSponsorStudentSuitBlack: 1
+    ClothingHeadHatDevilHornsAlt: 1 # Вторая итерация
+    ClothingHeadHatHaloAlt: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: HugeShlopa
@@ -36,8 +47,12 @@
     SponsorBoxTyler: 3
     SponsorBoxMafia: 3
     SponsorBoxBlackMafia: 3
+    SponsorBoxJujutsuShlepa: 4 # Вторая итерация
     SponsorCigCarton: 2
     ClothingWristWatchUssp: 2
+    ClothingSponsorSamuraiJacket: 1 # Вторая итерация
+    ClothingHeadHatDevilHorns: 1 # Вторая итерация
+    ClothingHeadHatHalo: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: GoldenShlopa
@@ -46,6 +61,8 @@
   requiredRole: GoldenShlopa
   rewards:
     SponsorBoxGoldClown: 3
+    ClothingHeadVipCrocks: 1 # Вторая итерация
+    ClothingSponsor1984: 1 # Вторая итерация
 
 - type: ShlepaRewardGroup
   id: CriticalMassShlopa
@@ -54,4 +71,77 @@
   requiredRole: CriticalMassShlopa
   rewards:
     SponsorElWycc: 1
-#   SponsorElWycco: 1 пока закомментил, на всякий случай
+    SmokingFish: 1 # Вторая итерация
+
+# Разработка
+- type: ShlepaRewardGroup
+  id: Mapper
+  name: Маппер
+  requiredRole: Mapper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Developer
+  name: Разработчик
+  requiredRole: Developer
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Spriter
+  name: Спрайтер
+  requiredRole: Spriter
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+  
+- type: ShlepaRewardGroup
+  id: QA
+  name: Обеспечение качества
+  requiredRole: QA
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: LoreEdit
+  name: Лоровед
+  requiredRole: LoreEdit
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: WikiEdit
+  name: Редактор Вики
+  requiredRole: WikiEdit
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id:  HeadDeveloper
+  name: Ведущий Разработчик
+  requiredRole:  HeadDeveloper
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+# Администрация
+- type: ShlepaRewardGroup
+  id: Mentor
+  name: Ментор
+  requiredRole: Mentor
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
+  id: Administrator
+  name: Администратор
+  requiredRole: Administrator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+# Модерация
+- type: ShlepaRewardGroup
+  id: Moderator
+  name: Модератор
+  requiredRole: Moderator
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true

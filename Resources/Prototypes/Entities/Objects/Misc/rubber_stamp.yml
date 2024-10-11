@@ -39,7 +39,7 @@
 
 - type: entity
   name: captain's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampCaptain
   suffix: DO NOT MAP
   components:
@@ -108,7 +108,7 @@
 
 - type: entity
   name: chief engineer's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampCE
   suffix: DO NOT MAP
   components:
@@ -121,7 +121,7 @@
 
 - type: entity
   name: chief medical officer's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampCMO
   suffix: DO NOT MAP
   components:
@@ -134,7 +134,7 @@
 
 - type: entity
   name: head of personnel's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampHop
   suffix: DO NOT MAP
   components:
@@ -147,7 +147,7 @@
 
 - type: entity
   name: head of security's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampHos
   suffix: DO NOT MAP
   components:
@@ -174,7 +174,7 @@
 
 - type: entity
   name: quartermaster's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampQm
   suffix: DO NOT MAP
   components:
@@ -187,7 +187,7 @@
 
 - type: entity
   name: research director's rubber stamp
-  parent: [RubberStampBase, BaseCommandContraband]
+  parent: [RubberStampBase]
   id: RubberStampRd
   suffix: DO NOT MAP
   components:
@@ -212,7 +212,7 @@
 
 - type: entity
   name: syndicate rubber stamp
-  parent: [RubberStampBase, BaseSyndicateContraband]
+  parent: [RubberStampBase]
   id: RubberStampSyndicate
   suffix: DO NOT MAP
   components:
@@ -225,7 +225,7 @@
 
 - type: entity
   name: warden's rubber stamp
-  parent: [RubberStampBase, BaseRestrictedContraband]
+  parent: [RubberStampBase]
   id: RubberStampWarden
   suffix: DO NOT MAP
   components:
@@ -262,7 +262,7 @@
 
 - type: entity
   name: detective's rubber stamp
-  parent: [RubberStampBase, BaseRestrictedContraband]
+  parent: [RubberStampBase]
   id: RubberStampDetective
   suffix: DO NOT MAP
   components:
@@ -285,3 +285,17 @@
     stampState: "paper_stamp-greytide"
   - type: Sprite
     state: stamp-greytide
+
+- type: entity
+  name: psychologist's rubber stamp
+  parent: RubberStampBase
+  id: RubberStampPsychologist
+  suffix: DO NOT MAP
+  description: A rubber stamp for stamping important documents. Prescribe those treatments!
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-psychologist 
+    stampedColor: "#5B97BC"
+    stampState: "paper_stamp-psychologist"
+  - type: Sprite
+    state: stamp-psychologist

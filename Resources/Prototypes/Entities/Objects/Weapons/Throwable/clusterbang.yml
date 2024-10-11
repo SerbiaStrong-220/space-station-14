@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, BaseRestrictedContraband]
+  parent: [BaseItem]
   id: ClusterBang
   name: clusterbang
   description: Can be used only with flashbangs. Explodes several times.
@@ -60,7 +60,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase]
   id: ClusterGrenade
   name: clustergrenade
   description: Why use one grenade when you can use three at once!
@@ -94,7 +94,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem]
   id: ClusterBananaPeel
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
@@ -136,7 +136,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase]
   id: GrenadeStinger
   name: stinger grenade
   description: Nothing to see here, please disperse.
@@ -165,7 +165,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase]
   id: GrenadeIncendiary
   name: incendiary grenade
   description: Guaranteed to light up the mood.
@@ -194,7 +194,7 @@
       cluster-payload: !type:Container
 
 - type: entity
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase]
   id: GrenadeShrapnel
   name: shrapnel grenade
   description: Releases a deadly spray of shrapnel that causes severe bleeding.

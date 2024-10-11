@@ -63,13 +63,6 @@ public abstract partial class SharedBuckleSystem
         {
             BuckleDoafterEarly((uid, comp), ev.Event, ev);
         });
-
-        SubscribeLocalEvent<BuckleComponent, ComponentGetState>(OnGetState);
-    }
-
-    private void OnGetState(Entity<BuckleComponent> ent, ref ComponentGetState args)
-    {
-        args.State = new BuckleState(GetNetEntity(ent.Comp.BuckledTo), ent.Comp.DontCollide, ent.Comp.BuckleTime);
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
@@ -233,12 +226,16 @@ public abstract partial class SharedBuckleSystem
     protected void SetBuckledTo(Entity<BuckleComponent> buckle, Entity<StrapComponent?>? strap)
     {
         if (TryComp(buckle.Comp.BuckledTo, out StrapComponent? old))
+        {
             old.BuckledEntities.Remove(buckle);
+            Dirty(buckle.Comp.BuckledTo.Value, old);
+        }
 
         if (strap is {} strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
         {
             strapEnt.Comp.BuckledEntities.Add(buckle);
             buckle.Comp.FastenedSeatbelt = strapEnt.Comp.HasSeatbelt;
+            Dirty(strapEnt);
             _alerts.ShowAlert(buckle, strapEnt.Comp.BuckledAlertType);
         }
         else
@@ -419,6 +416,13 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(strap, StrapVisuals.State, true);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, true);
 
+        //SS220 Change DrawDepth on buckle begin
+        if (strap.Comp.DrawDepth is { } drawDepth)
+            Appearance.SetData(buckle, BuckleVisuals.DrawDepth, drawDepth);
+        else
+            Appearance.RemoveData(buckle, BuckleVisuals.DrawDepth);
+        //SS220 Change DrawDepth on buckle end
+
         _rotationVisuals.SetHorizontalAngle(buckle.Owner, strap.Comp.Rotation);
 
         var xform = Transform(buckle);
@@ -539,18 +543,23 @@ public abstract partial class SharedBuckleSystem
 
         if (buckleXform.ParentUid == strap.Owner && !Terminating(buckleXform.ParentUid))
         {
-            _container.AttachParentToContainerOrGrid((buckle, buckleXform));
+            _transform.PlaceNextTo((buckle, buckleXform), (strap.Owner, oldBuckledXform));
+            buckleXform.ActivelyLerping = false;
 
             var oldBuckledToWorldRot = _transform.GetWorldRotation(strap);
-            _transform.SetWorldRotation(buckleXform, oldBuckledToWorldRot);
+            _transform.SetWorldRotationNoLerp((buckle, buckleXform), oldBuckledToWorldRot);
 
-            if (strap.Comp.UnbuckleOffset != Vector2.Zero)
-                buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(strap.Comp.UnbuckleOffset);
+            // TODO: This is doing 4 moveevents this is why I left the warning in, if you're going to remove it make it only do 1 moveevent.
+            if (strap.Comp.BuckleOffset != Vector2.Zero)
+            {
+                buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(strap.Comp.BuckleOffset);
+            }
         }
 
         _rotationVisuals.ResetHorizontalAngle(buckle.Owner);
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
+        Appearance.RemoveData(buckle, BuckleVisuals.DrawDepth); //SS220 Change DrawDepth on buckle
 
         if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
             _standing.Down(buckle, playSound: false);

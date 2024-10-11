@@ -374,3 +374,19 @@
   - type: NpcFactionMember
     factions:
     - SimpleHostile
+
+- type: entity
+  parent: MobCrocodile
+  id: MobAlbinoCrocodile
+  name: альбино
+  description: Добрейшей души крокодил.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Pets/albino_crocodile.rsi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Critical
+      200: Dead
+
