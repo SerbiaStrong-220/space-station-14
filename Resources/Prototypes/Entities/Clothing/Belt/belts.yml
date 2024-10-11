@@ -266,6 +266,7 @@
         - Ointment
         - CigPack
         - PillCanister
+        - Tourniquet #SS220 Add Tourniquet to medic's belt
         - Radio
         - DiscreteHealthAnalyzer
         - SurgeryTool
@@ -483,6 +484,7 @@
         - MagazineMagnum
         - CombatKnife
         - Truncheon
+        - HolofanProjectorSecurity # SS220 Fix #2009
       components:
         - Stunbaton
         - FlashOnTrigger
@@ -493,7 +495,7 @@
         - CartridgeAmmo
         - DoorRemote
         - Whistle
-        - HolosignProjector
+        # - HolosignProjector SS220 Fix #2009
         - BalloonPopper
   - type: ItemMapper
     mapLayers:

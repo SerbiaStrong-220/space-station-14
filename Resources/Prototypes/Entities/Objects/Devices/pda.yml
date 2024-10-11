@@ -129,6 +129,7 @@
     - NotekeeperCartridge
     - NewsReaderCartridge
     - WantedListCartridge
+    - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -142,6 +143,7 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -610,6 +612,7 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - AstroNavCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -1243,6 +1246,7 @@
       - NewsReaderCartridge
       - LogProbeCartridge
       - WantedListCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: CentcomPDA
@@ -1415,6 +1419,7 @@
     uiKey: enum.PdaUiKey.Key
     preinstalled:
       - NotekeeperCartridge
+      - MessengerCartridgeClient # SS220 Messenger
     cartridgeSlot:
       priority: -1
       name: Cartridge
@@ -1553,6 +1558,7 @@
       - NewsReaderCartridge
       - MedTekCartridge
       - WantedListCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: ERTLeaderPDA
@@ -1950,6 +1956,7 @@
     preinstalled:
       - NotekeeperCartridge
       - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
     cartridgeSlot:
       priority: -1
       name: Cartridge
