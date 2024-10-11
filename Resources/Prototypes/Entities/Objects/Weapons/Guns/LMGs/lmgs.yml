@@ -88,6 +88,12 @@
     steps: 4
     zeroVisible: true
   - type: Appearance
+    #ss220lowTTKUpdate btw lmg too OP ^^^^
+  - type: HeldSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+    mirrorClothingModifier: false
+    #ss220lowTTKUpdate
 
 - type: entity
   name: L6C ROW
