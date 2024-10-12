@@ -273,6 +273,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         if (component.LyingOn is { } lyingOnEnt)
             RemComp<UnderLyingPetComponent>(lyingOnEnt);
 
+        component.LyingOn = null;
         _actionBlocker.UpdateCanMove(uid);
         Dirty(uid, component);
     }
