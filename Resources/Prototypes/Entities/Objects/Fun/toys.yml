@@ -1292,9 +1292,6 @@
         path: /Audio/Weapons/eblademiss.ogg
         params:
           variation: 0.125
-    - type: Construction
-      graph: DoubleToySword
-      node: start
 
   #ss220 toy desword begin
 - type: entity
@@ -1360,9 +1357,6 @@
         right:
           - state: inhand-right-blade
             shader: unshaded
-    - type: Construction
-      graph: DoubleToySword
-      node: double-toysword
   #ss220 toy desword end
 
 - type: entity
