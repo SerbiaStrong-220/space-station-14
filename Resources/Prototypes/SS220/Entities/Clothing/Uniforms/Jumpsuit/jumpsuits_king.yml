@@ -1,0 +1,16 @@
+- type: entity
+  parent: ClothingUniformJumpsuitClown
+  id: ClothingUniformJumpsuitClownKing
+  name: children's pajamas of the king
+  suffix: Unremoveable
+  description: She is already 50 years old. She reeks of greatness.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/cluwne.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/cluwne.rsi
+  - type: Unremoveable
+    lockToHands: false
+  - type: Tag
+    tags:
+    - ClothMade 

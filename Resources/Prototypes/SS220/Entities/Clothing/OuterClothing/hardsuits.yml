@@ -1,3 +1,22 @@
+#KingClown Hardsuit
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitKingClown
+  name: the body of the king of kings
+  description: He is older than the universe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/king_clown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/king_clown.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: Unremoveable
+    lockToHands: false
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+=======
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
@@ -53,6 +72,29 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Heat: 0.6
+        Caustic: 0.6
+        Stamina: 0.4
+        Radiation: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitKingClown
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - Hardsuit
+    - WhitelistChameleon
         Heat: 0.7
         Caustic: 0.7
         Radiation: 0.50
