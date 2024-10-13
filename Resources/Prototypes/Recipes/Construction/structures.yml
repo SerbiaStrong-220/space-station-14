@@ -1716,7 +1716,7 @@
 - type: construction
   name: solid secret door
   id: SolidSecretDoor
-  graph: SecretDoor
+  graph: Girder # SS220 Graph changed (SecretSolidDoor Recipe Update)
   startNode: start
   targetNode: solidSecretDoor
   category: construction-category-structures
