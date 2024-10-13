@@ -33,6 +33,11 @@
 
 - type: randomHumanoidSettings
   id: DeathSquad
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -70,6 +75,11 @@
 
 - type: randomHumanoidSettings
   id: ERTLeader
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -105,6 +115,11 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -128,6 +143,11 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeaderEVA
   components:
     - type: GhostRole
@@ -161,6 +181,11 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplain
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeader
   components:
     - type: BibleUser
@@ -193,6 +218,11 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplainEVA
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTChaplain
   components:
     - type: GhostRole
@@ -227,6 +257,11 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitor
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -261,6 +296,11 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitorEVA
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTJanitor
   components:
     - type: GhostRole
@@ -294,6 +334,11 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineer
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -328,6 +373,11 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineerEVA
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTEngineer
   components:
     - type: GhostRole
@@ -361,6 +411,11 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurity
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -395,6 +450,11 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVA
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTSecurity
   components:
     - type: GhostRole
@@ -418,6 +478,11 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVALecter
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTSecurityEVA
   components:
     - type: GhostRole
@@ -451,6 +516,11 @@
 
 - type: randomHumanoidSettings
   id: ERTMedical
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -485,6 +555,11 @@
 
 - type: randomHumanoidSettings
   id: ERTMedicalEVA
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: ERTMedical
   components:
     - type: GhostRole
@@ -513,6 +588,11 @@
 
 - type: randomHumanoidSettings
   id: CBURNAgent
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: EventHumanoidMindShielded
   components:
     - type: Loadout
@@ -547,6 +627,11 @@
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: EventHumanoidMindShielded
   components:
     - type: GhostRole
@@ -594,6 +679,11 @@
 
 - type: randomHumanoidSettings
   id: NukeOp
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   components:
     - type: RandomHumanoidAppearance
       randomizeName: false
