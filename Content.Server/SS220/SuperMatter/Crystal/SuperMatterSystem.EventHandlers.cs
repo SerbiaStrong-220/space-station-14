@@ -5,6 +5,11 @@ using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Projectiles;
 using Content.Shared.Tools.Components;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Content.Server.Construction.Completions;
+using Content.Shared.Destructible;
+using Content.Shared.SS220.SuperMatter.Ui;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -15,6 +20,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     public void InitializeEventHandler()
     {
         SubscribeLocalEvent<SuperMatterComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<SuperMatterComponent, ComponentRemove>(OnRemove);
 
         SubscribeLocalEvent<SuperMatterComponent, InteractHandEvent>(OnHandInteract);
         SubscribeLocalEvent<SuperMatterComponent, InteractUsingEvent>(OnItemInteract);
@@ -32,6 +38,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
         entity.Comp.Matter = entity.Comp.InitMatter * MatterNondimensionalization;
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
         InitGasMolesAccumulator(entity.Comp);
+    }
+    private void OnRemove(Entity<SuperMatterComponent> entity, ref ComponentRemove args)
+    {
+        var ev = new SuperMatterStateDeleted(entity.Owner.Id);
+        RaiseNetworkEvent(ev);
     }
     private void OnHandInteract(Entity<SuperMatterComponent> entity, ref InteractHandEvent args)
     {

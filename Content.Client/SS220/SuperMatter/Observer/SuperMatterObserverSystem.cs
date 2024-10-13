@@ -174,11 +174,13 @@ public sealed class SuperMatterObserverSystem : EntitySystem
     }
     private void TryDeleteData(int id, SuperMatterObserverComponent comp)
     {
+        comp.Names.Remove(id);
         comp.Integrities.Remove(id);
         comp.Pressures.Remove(id);
         comp.Temperatures.Remove(id);
         comp.Matters.Remove(id);
         comp.InternalEnergy.Remove(id);
+        comp.DelaminationStatuses.Remove(id);
     }
     private bool TrySendToUIState(EntityUid uid, BoundUserInterfaceState state)
     {

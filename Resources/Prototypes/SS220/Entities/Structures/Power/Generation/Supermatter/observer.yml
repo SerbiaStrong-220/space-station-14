@@ -25,7 +25,7 @@
   - type: SuperMatterObserverReceiver
   - type: ActivatableUIRequiresPower
   - type: ActivatableUI
-    singleUser: true
+    singleUser: false
     key: enum.SuperMatterObserverUiKey.Key
   - type: UserInterface
     interfaces:

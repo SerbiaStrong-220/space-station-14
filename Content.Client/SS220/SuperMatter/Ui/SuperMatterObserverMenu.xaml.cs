@@ -90,6 +90,10 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         if (Observer == null
             || CrystalKey == null)
             return;
+
+        if (!Observer.Names.ContainsKey(CrystalKey.Value))
+            return;
+
         PlotValueOverTime.LoadPlot2DTimePoints(new PlotPoints2D(MAX_DATA_LENGTH, Observer.Integrities[CrystalKey.Value],
                                                         -1f, Observer.Integrities[CrystalKey.Value].Count));
         ColorState.LoadMovingPoint(new Vector2(Observer.Matters[CrystalKey.Value].Last().Value, Observer.InternalEnergy[CrystalKey.Value].Last().Value),

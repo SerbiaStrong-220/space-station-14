@@ -43,7 +43,7 @@ public sealed class SuperMatterStateUpdate(
 }
 
 [Serializable, NetSerializable]
-public sealed class SuperMatterStateDeleted(int id)
+public sealed class SuperMatterStateDeleted(int id) : EntityEventArgs
 {
     public int ID = id;
 }
