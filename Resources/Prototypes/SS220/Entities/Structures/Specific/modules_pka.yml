@@ -1,0 +1,48 @@
+- type: entity
+  parent: BaseItem
+  id: BaseModulePka
+  name: name
+  description: desc.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/mech_figurines.rsi
+  - type: StaticPrice
+    price: 200
+  - type: PkaModule
+
+- type: entity
+  parent: BaseModulePka
+  id: ModuleOfDamage
+  name: nameDamage
+  description: descDamage.
+  components:
+  - type: Sprite
+    state: odysseus
+  - type: Tag
+    tags:
+    - ModuleDamage   
+
+- type: entity
+  parent: BaseModulePka
+  id: ModuleOfRange
+  name: nameRange
+  description: descRange.
+  components:
+  - type: Sprite
+    state: odysseus
+  - type: Tag
+    tags:
+    - ModuleRange           
+
+- type: entity
+  parent: BaseModulePka
+  id: ModuleOfCooldown
+  name: nameCooldown
+  description: descCoolDown.
+  components:
+  - type: Sprite
+    state: odysseus
+  - type: Tag
+    tags:
+    - ModuleCooldown                    

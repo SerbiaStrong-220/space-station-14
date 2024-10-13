@@ -377,7 +377,7 @@
     heat: 50000
 
 - type: entity
-  id: BulletKinetic
+  id: BulletKinetic_00 #ss220
   name: kinetic bolt
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
@@ -396,11 +396,11 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 25
-        Structural: 30
+        Blunt: 15 #ss220
+        Structural: 20 ##ss220
   # Short lifespan
   - type: TimedDespawn
-    lifetime: 0.4
+    lifetime: 0.2 #ss220
   - type: GatheringProjectile
 
 - type: entity

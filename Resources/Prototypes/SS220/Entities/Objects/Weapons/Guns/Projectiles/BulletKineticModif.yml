@@ -1,0 +1,237 @@
+- type: entity
+  id: BulletKinetic_01
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 25
+        Structural: 30
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.2
+
+- type: entity
+  id: BulletKinetic_02
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 35
+        Structural: 40
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.2
+
+- type: entity
+  id: BulletKinetic_03 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 45
+        Structural: 50
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.2    
+
+- type: entity
+  id: BulletKinetic_04
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 55
+        Structural: 60
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.2
+
+- type: entity
+  id: BulletKinetic_10
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 15
+        Structural: 20
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.3
+
+- type: entity
+  id: BulletKinetic_20
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 15
+        Structural: 20
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.4
+
+- type: entity
+  id: BulletKinetic_30 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 15
+        Structural: 20
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.5             
+
+- type: entity
+  id: BulletKinetic_40 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 15
+        Structural: 20
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.6          
+
+- type: entity
+  id: BulletKinetic_11 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 25
+        Structural: 30
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.3
+
+- type: entity
+  id: BulletKinetic_21
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 25
+        Structural: 30
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.4
+
+- type: entity
+  id: BulletKinetic_31 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 25
+        Structural: 30
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.5             
+
+- type: entity
+  id: BulletKinetic_12 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 35
+        Structural: 40
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.3          
+
+- type: entity
+  id: BulletKinetic_13 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 45
+        Structural: 50
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.3
+
+- type: entity
+  id: BulletKinetic_22 
+  name: kinetic bolt
+  parent: BulletKinetic_00
+  categories: [ HideSpawnMenu ]
+  description: Not too bad, but you still don't want to get hit by it.
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 35
+        Structural: 40
+  # Short lifespan
+  - type: TimedDespawn
+    lifetime: 0.4    

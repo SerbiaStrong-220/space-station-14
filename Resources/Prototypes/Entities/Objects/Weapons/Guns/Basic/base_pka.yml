@@ -31,11 +31,11 @@
           False: { visible: True }
         #todo: add other 'empty' animations
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 0.75
+    rechargeCooldown: 1.75 #ss220
     rechargeSound:
       path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
   - type: BasicEntityAmmoProvider
-    proto: BulletKinetic
+    proto: BulletKinetic_00
     capacity: 1
     count: 1
   - type: Clothing
@@ -46,12 +46,19 @@
     - Belt
   - type: UseDelay
     delay: 1
+  - type: PkaModification
+    modificationSlot1: &slotDef
+      whitelist:
+        components:
+        - PkaModule
+      swap: false
+    modificationSlot2: *slotDef  
+    modificationSlot3: *slotDef  
+    modificationSlot4: *slotDef  
   - type: ItemSlots
-    slots:
-      core_slot:
-        name: anomaly-gorilla-core-slot-name
-        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        whitelist:
-          components:
-          - AnomalyCore  
+  - type: ContainerContainer
+    containers:
+      modificationSlot1: !type:ContainerSlot
+      modificationSlot2: !type:ContainerSlot
+      modificationSlot3: !type:ContainerSlot
+      modificationSlot4: !type:ContainerSlot

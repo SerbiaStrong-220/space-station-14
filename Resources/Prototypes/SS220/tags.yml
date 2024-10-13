@@ -114,3 +114,12 @@
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter
+
+- type: Tag
+  id: ModuleDamage
+
+- type: Tag
+  id: ModuleRange
+
+- type: Tag
+  id: ModuleCooldown
