@@ -3206,7 +3206,10 @@ entities:
     - type: MetaData
     - type: Transform
     - type: Map
+      mapPaused: True
     - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
     - type: FTLDestination
       whitelist:
         tags:
@@ -3219,6 +3222,7 @@ entities:
       space: False
       mixture:
         volume: 2500
+        immutable: True
         temperature: 248.15
         moles:
         - 21.824879
@@ -3234,8 +3238,6 @@ entities:
         - 0
         - 0
     - type: LoadedMap
-    - type: GridTree
-    - type: MovedGrids
 - proto: ActionToggleBlock
   entities:
   - uid: 2070
@@ -3244,6 +3246,30 @@ entities:
       parent: 2069
     - type: InstantAction
       container: 2069
+- proto: Airlock
+  entities:
+  - uid: 446
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 20.5,4.5
+      parent: 104
+  - uid: 456
+    components:
+    - type: Transform
+      pos: 14.5,4.5
+      parent: 104
+  - uid: 496
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 104
+  - uid: 510
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,2.5
+      parent: 104
 - proto: AirlockAssembly
   entities:
   - uid: 1490
@@ -3251,16 +3277,14 @@ entities:
     - type: Transform
       pos: -9.5,22.5
       parent: 104
-- proto: AirlockEngineeringLocked
+- proto: AirlockEngineering
   entities:
-  - uid: 253
+  - uid: 129
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 16.5,-14.5
       parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
 - proto: AirlockExternalGlassShuttleNukeopLocked
   entities:
   - uid: 921
@@ -3284,16 +3308,21 @@ entities:
     - type: AccessReader
       access:
       - - NuclearOperative
-- proto: AirlockMedicalGlassLocked
+- proto: AirlockGlass
   entities:
-  - uid: 143
+  - uid: 338
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,-5.5
+      parent: 104
+- proto: AirlockMedicalGlass
+  entities:
+  - uid: 930
     components:
     - type: Transform
       pos: 10.5,-7.5
       parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
 - proto: AirlockMedicalLocked
   entities:
   - uid: 87
@@ -3305,16 +3334,13 @@ entities:
     - type: AccessReader
       access:
       - - NuclearOperative
-- proto: AirlockScienceGlassLocked
+- proto: AirlockScienceGlass
   entities:
-  - uid: 129
+  - uid: 943
     components:
     - type: Transform
       pos: 9.5,-16.5
       parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
 - proto: AirlockScienceLocked
   entities:
   - uid: 121
@@ -3331,60 +3357,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 1.5,-20.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
-- proto: AirlockServiceGlassLocked
-  entities:
-  - uid: 929
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,-5.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
-- proto: AirlockServiceLocked
-  entities:
-  - uid: 927
-    components:
-    - type: Transform
-      pos: 14.5,4.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
-    - type: DeviceLinkSink
-      links:
-      - 958
-  - uid: 930
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 20.5,4.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
-    - type: DeviceLinkSink
-      links:
-      - 4
-  - uid: 943
-    components:
-    - type: Transform
-      pos: 15.5,-0.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
-      - - SyndicateAgent
-  - uid: 945
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 13.5,2.5
       parent: 104
     - type: AccessReader
       access:
@@ -3527,14 +3499,6 @@ entities:
     - type: AccessReader
       access:
       - - NuclearOperative
-  - uid: 955
-    components:
-    - type: Transform
-      pos: 10.5,-16.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
   - uid: 959
     components:
     - type: Transform
@@ -3548,6 +3512,11 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 20.5,-7.5
+      parent: 104
+  - uid: 3337
+    components:
+    - type: Transform
+      pos: 11.5,-16.5
       parent: 104
 - proto: Ashtray
   entities:
@@ -3746,8 +3715,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 6.5,-11.5
       parent: 104
-    - type: AtmosDevice
-      joinedGrid: 104
 - proto: Bed
   entities:
   - uid: 1
@@ -4663,11 +4630,6 @@ entities:
     - type: Transform
       pos: -4.5,-20.5
       parent: 104
-  - uid: 446
-    components:
-    - type: Transform
-      pos: 10.5,-16.5
-      parent: 104
   - uid: 447
     components:
     - type: Transform
@@ -4697,11 +4659,6 @@ entities:
     components:
     - type: Transform
       pos: -5.5,-20.5
-      parent: 104
-  - uid: 456
-    components:
-    - type: Transform
-      pos: 10.5,-17.5
       parent: 104
   - uid: 457
     components:
@@ -4983,6 +4940,16 @@ entities:
     - type: Transform
       pos: 27.5,-2.5
       parent: 104
+  - uid: 927
+    components:
+    - type: Transform
+      pos: 11.5,-17.5
+      parent: 104
+  - uid: 945
+    components:
+    - type: Transform
+      pos: 10.5,-17.5
+      parent: 104
   - uid: 1000
     components:
     - type: Transform
@@ -5047,6 +5014,11 @@ entities:
     components:
     - type: Transform
       pos: 2.5,2.5
+      parent: 104
+  - uid: 3336
+    components:
+    - type: Transform
+      pos: 11.5,-16.5
       parent: 104
   - uid: 3433
     components:
@@ -6031,6 +6003,11 @@ entities:
     - type: Transform
       pos: 10.5,-6.5
       parent: 104
+  - uid: 253
+    components:
+    - type: Transform
+      pos: 11.5,-16.5
+      parent: 104
   - uid: 438
     components:
     - type: Transform
@@ -6055,11 +6032,6 @@ entities:
     components:
     - type: Transform
       pos: 9.5,-13.5
-      parent: 104
-  - uid: 496
-    components:
-    - type: Transform
-      pos: 10.5,-16.5
       parent: 104
   - uid: 547
     components:
@@ -6265,6 +6237,11 @@ entities:
     components:
     - type: Transform
       pos: 26.5,-1.5
+      parent: 104
+  - uid: 955
+    components:
+    - type: Transform
+      pos: 11.5,-17.5
       parent: 104
   - uid: 986
     components:
@@ -7951,13 +7928,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,-0.5
       parent: 104
-- proto: chem_master
-  entities:
-  - uid: 978
-    components:
-    - type: Transform
-      pos: 6.5,-8.5
-      parent: 104
 - proto: ChemicalPayload
   entities:
   - uid: 503
@@ -7977,6 +7947,13 @@ entities:
     components:
     - type: Transform
       pos: 5.5,-10.5
+      parent: 104
+- proto: ChemMaster
+  entities:
+  - uid: 978
+    components:
+    - type: Transform
+      pos: 6.5,-8.5
       parent: 104
 - proto: ChessBoard
   entities:
@@ -8644,8 +8621,6 @@ entities:
     - type: Transform
       pos: 26.412903,7.969076
       parent: 104
-    - type: Reflect
-      enabled: False
     - type: Forensics
       residues: []
       dnas: []
@@ -8659,14 +8634,13 @@ entities:
           ents:
           - 2070
     missingComponents:
-    - EnergySword
     - ItemToggle
     - ItemToggleMeleeWeapon
     - ItemToggleActiveSound
     - MeleeWeapon
-    - Blocking
-    - UseDelay
+    - EnergySword
     - ItemToggleSize
+    - UseDelay
 - proto: ExpensiveLighterSyndicate
   entities:
   - uid: 1175
@@ -9163,8 +9137,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 7.5,-11.5
       parent: 104
-    - type: AtmosDevice
-      joinedGrid: 104
 - proto: GeneratorBasic15kW
   entities:
   - uid: 849
@@ -9364,7 +9336,7 @@ entities:
     - type: AccessReader
       access:
       - - NuclearOperative
-- proto: IntercomAssesmbly
+- proto: IntercomAssembly
   entities:
   - uid: 3157
     components:
@@ -9383,13 +9355,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 16.5,-1.5
-      parent: 104
-- proto: SyndicateMicrowave
-  entities:
-  - uid: 1189
-    components:
-    - type: Transform
-      pos: 17.5,-4.5
       parent: 104
 - proto: KitchenReagentGrinder
   entities:
@@ -11553,18 +11518,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -18.5,24.5
       parent: 104
-    - type: DeviceLinkSink
-      links:
-      - 3191
   - uid: 1504
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -18.5,23.5
       parent: 104
-    - type: DeviceLinkSink
-      links:
-      - 3191
 - proto: ShuttleGunDusterCircuitboard
   entities:
   - uid: 1511
@@ -11586,20 +11545,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 19.5,5.5
       parent: 104
-    - type: DeviceLinkSource
-      linkedPorts:
-        930:
-        - Pressed: DoorBolt
   - uid: 958
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 15.5,5.5
       parent: 104
-    - type: DeviceLinkSource
-      linkedPorts:
-        927:
-        - Pressed: DoorBolt
   - uid: 3191
     components:
     - type: Transform
@@ -11756,7 +11707,7 @@ entities:
     - type: Transform
       pos: -17.540918,-17.193115
       parent: 104
-- proto: soda_dispenser
+- proto: SodaDispenser
   entities:
   - uid: 135
     components:
@@ -12073,6 +12024,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 12.5,-6.5
+      parent: 104
+- proto: SyndicateMicrowave
+  entities:
+  - uid: 1189
+    components:
+    - type: Transform
+      pos: 17.5,-4.5
       parent: 104
 - proto: SyndicatePersonalAI
   entities:
@@ -12623,9 +12581,9 @@ entities:
       energy: 2
       color: '#B22222FF'
       radius: 9
-    - type: ActivatedElectrified
     - type: Physics
       canCollide: False
+    - type: ActivatedElectrified
     missingComponents:
     - Item
 - proto: TimerTrigger
@@ -12945,6 +12903,11 @@ entities:
     - type: Transform
       pos: 1.5,-4.5
       parent: 104
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 10.5,-16.5
+      parent: 104
   - uid: 288
     components:
     - type: Transform
@@ -12974,11 +12937,6 @@ entities:
     components:
     - type: Transform
       pos: 22.5,-15.5
-      parent: 104
-  - uid: 338
-    components:
-    - type: Transform
-      pos: 10.5,-16.5
       parent: 104
   - uid: 340
     components:
@@ -13177,11 +13135,6 @@ entities:
     components:
     - type: Transform
       pos: 12.5,-15.5
-      parent: 104
-  - uid: 510
-    components:
-    - type: Transform
-      pos: 11.5,-16.5
       parent: 104
   - uid: 511
     components:
@@ -14170,6 +14123,11 @@ entities:
     components:
     - type: Transform
       pos: 3.5,-18.5
+      parent: 104
+  - uid: 929
+    components:
+    - type: Transform
+      pos: 11.5,-16.5
       parent: 104
   - uid: 1012
     components:
