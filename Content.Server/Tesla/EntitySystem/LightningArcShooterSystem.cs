@@ -41,7 +41,10 @@ public sealed class LightningArcShooterSystem : EntitySystem
 
             ArcShoot(uid, arcShooter);
             var delay = TimeSpan.FromSeconds(_random.NextFloat(arcShooter.ShootMinInterval, arcShooter.ShootMaxInterval));
-            arcShooter.NextShootTime = _gameTiming.CurTime + delay; // SS220-SM-Arc-Fix
+            // SS220-SM-Arc-Fix begin
+            // arcShooter.NextShootTime += delay;
+            arcShooter.NextShootTime = _gameTiming.CurTime + delay;
+            // SS220-SM-Arc-Fix end
         }
     }
 

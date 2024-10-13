@@ -53,10 +53,6 @@
     skipChecks: true
   - type: Ghost
   - type: GhostHearing
-  - type: MovementSpeedModifier
-    baseSprintSpeed: 12
-    baseWalkSpeed: 8
-  - type: MovementIgnoreGravity
   - type: HallucinationImmune # SS220 - hallucinationSystem
   - type: SuperMatterImmune # SS220 - SuperMatterCrystal
   # SS220 ADD GHOST HUD'S START

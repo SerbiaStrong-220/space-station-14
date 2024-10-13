@@ -8,7 +8,7 @@ namespace Content.Server.Tesla.Components;
 /// <summary>
 /// Periodically fires electric arcs at surrounding objects.
 /// </summary>
-[RegisterComponent, Access(typeof(LightningArcShooterSystem), typeof(SuperMatterSystem)), AutoGenerateComponentPause]
+[RegisterComponent, Access(typeof(LightningArcShooterSystem), typeof(SuperMatterSystem)), AutoGenerateComponentPause] // SS220-Add-SM
 public sealed partial class LightningArcShooterComponent : Component
 {
     // SS220-SM-begin
