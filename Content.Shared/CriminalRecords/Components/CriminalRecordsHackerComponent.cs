@@ -1,6 +1,6 @@
 using Content.Shared.CriminalRecords.Systems;
 using Content.Shared.Dataset;
-using Content.Shared.SS220.CriminalRecords;
+using Content.Shared.SS220.CriminalRecords; // SS220-criminal-console-fix
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
