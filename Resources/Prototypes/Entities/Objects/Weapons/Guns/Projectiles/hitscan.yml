@@ -50,7 +50,7 @@
   id: RedMediumLaser
   damage:
     types:
-      Heat: 17
+      Heat: 24 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_laser
@@ -65,7 +65,7 @@
   id: RedLightLaser
   damage:
     types:
-      Heat: 7
+      Heat: 13 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_laser
