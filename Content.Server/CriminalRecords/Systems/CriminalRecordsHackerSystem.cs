@@ -4,7 +4,7 @@ using Content.Server.StationRecords.Systems;
 using Content.Shared.CriminalRecords;
 using Content.Shared.CriminalRecords.Components;
 using Content.Shared.CriminalRecords.Systems;
-using CriminalRecordSystem220 = Content.Server.SS220.CriminalRecords.CriminalRecordSystem;
+using CriminalRecordSystem220 = Content.Server.SS220.CriminalRecords.CriminalRecordSystem; // SS220-criminal-console-fix
 using Content.Shared.Dataset;
 using Content.Shared.Security;
 using Content.Shared.StationRecords;
