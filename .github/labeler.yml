@@ -1,28 +1,26 @@
-﻿"Изменения: спрайты":
+﻿"Changes: Sprites":
 - changed-files:
   - any-glob-to-any-file: '**/*.rsi/*.png'
 
-"Изменения: Карты":
+"Changes: Map":
 - changed-files:
   - any-glob-to-any-file:
     - 'Resources/Maps/**/*.yml'
     - 'Resources/Prototypes/Maps/**/*.yml'
 
-"Изменения: Интерфейсы":
+"Changes: UI":
 - changed-files:
   - any-glob-to-any-file: '**/*.xaml*'
 
-"Изменения: Локализация":
+"Changes: Localization":
 - changed-files:
   - any-glob-to-any-file: 'Resources/Locale/**/*.ftl'
 
-"Изменения: Шейдеры":
+"Changes: Shaders":
 - changed-files:
   - any-glob-to-any-file: '**/*.swsl'
 
-"Изменения: Прототипы":
+"No C#":
 - changed-files:
   # Equiv to any-glob-to-all as long as this has one matcher. If ALL changed files are not C# files, then apply label.
-  - all-globs-to-all-files:
-    - "Resources/Prototypes/**/*.yml"
-    - '!Resources/Prototypes/Maps/**/*.yml'
+  - all-globs-to-all-files: "!**/*.cs"
