@@ -107,14 +107,21 @@
   description: A somewhat flexible and well-armored suit with a powerful shoulder mounted flashlight manufactured in the Gorlex Marauder's iconic blood-red color scheme, it does not protect its wearer from space.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
+    # sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi #ss220 raid suit resprite
     layers:
     - state: icon
+    #ss220 raid suit resprite begin
+    - state: icon-flash
+      visible: false
+      map: [ "light" ]
+    #ss220 raid suit resprite end
     - state: light-overlay
       visible: false
       shader: unshaded
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
+    # sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi #ss220 raid suit resprite
+    sprite: SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi #ss220 raid suit resprite
   - type: Armor
     modifiers:
       coefficients:
