@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions-ecosystem/action-add-labels@v1
       with:
-        labels: "Статус: Ожидание ревью"
+        labels: "Status: Needs Review"
     - uses: actions-ecosystem/action-remove-labels@v1
       with:
-        labels: "Статус: Ожидание изменений"
+        labels: "Status: Awaiting Changes"
