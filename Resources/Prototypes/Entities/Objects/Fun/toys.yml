@@ -1005,6 +1005,11 @@
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
+  #ss220 recyclable-plastic-pistols begin
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 150
+  #ss220 recyclable-plastic-pistols end
 
 - type: entity
   parent: RevolverCapGun
