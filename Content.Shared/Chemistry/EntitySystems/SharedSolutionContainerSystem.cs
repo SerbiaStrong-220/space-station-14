@@ -1224,12 +1224,15 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     }
 
     // SS220 Refactor nuzzle begin
-    private void OnGetSolution(Entity<SolutionProviderComponent> entity, ref TakeSolutionEvent takeSolutionEvent)
+    private void OnGetSolution(Entity<ClothingSlotSolutionProviderComponent> entity, ref TakeSolutionEvent takeSolutionEvent)
     {
-        if (!TryGetSolution(entity, ClothingSlotSolutionProviderComponent.ContainmentSolutionName, out var entsoln, out var solution))
+        if (!TryGetSolution(entity.Owner, ClothingSlotSolutionProviderComponent.ContainmentSolutionName, out var entsoln, out var solution))
             return;
 
-        var splitSolution = SplitSolution(entsoln, new FixedPoint2(10f));
+        if(entsoln != null)
+        {
+            var splitSolution = SplitSolution(entsoln.Value, 10f);
+        }
     }
     // SS220 Refactor nuzzle end
 }

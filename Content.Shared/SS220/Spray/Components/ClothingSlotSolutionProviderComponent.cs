@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Spray.Components;
 /// to an entity in the user's clothing slot.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSpraySystem))]
-public sealed partial class ClothingSlotSolutionProviderComponent : SolutionProviderComponent
+public sealed partial class ClothingSlotSolutionProviderComponent : Component
 {
     public const string ContainmentSolutionName = "containmentsolution";
     /// <summary>

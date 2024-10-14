@@ -24,7 +24,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
   - type: Appearance
-  - type: ClothingSlotAmmoProvider
+  - type: ClothingSlotSolutionProvider
     targetSlot: BACK
     providerWhitelist:
       tags:
