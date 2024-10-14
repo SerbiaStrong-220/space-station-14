@@ -81,7 +81,7 @@
       amount: 1
     Sulfur:
       amount: 1
-    Oxygen: 
+    Oxygen:
       amount: 2
   products:
     SulfuricAcid: 3
@@ -293,6 +293,7 @@
      amount: 1
   products:
     Desoxyephedrine: 4 #I kinda remember having to heat this up, and if you heated it up too much, it went boom, I can't remember the specific values tho.
+    Oxygen: 4 # SS220 add oxygen for reaction Desoxyephedrine
 
 - type: reaction
   id: Stimulants
