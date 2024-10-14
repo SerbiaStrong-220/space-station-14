@@ -7,7 +7,7 @@
         - to: girder
           completed:
             - !type:SnapToGrid
-              southRotation: true
+#              southRotation: true # SS220 Graph changed (SecretSolidDoor Recipe Update)
           steps:
             - material: Steel
               amount: 2
@@ -176,7 +176,7 @@
 
     # SS220 SercretSolidDoor node add begin (SecretSolidDoor Recipe Update)
     - node: secretWall
-      entity: BaseSecretDoorAssembly
+      entity: Girder
       actions:
       - !type:SnapToGrid {}
       - !type:SetAnchor {}
@@ -207,7 +207,7 @@
         - !type:EntityAnchored { }
         steps:
         - tool: Screwing
-          doAfter: 2
+          doAfter: 1
 
     - node: solidSecretDoor
       entity: SolidSecretDoor
