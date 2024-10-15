@@ -12,8 +12,11 @@
 
 - type: randomHumanoidSettings
   id: CentCommOfficer
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
   components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
+      hair: HairBald
     - type: RandomMetadata
       nameSegments:
         - NamesFirstCentcomAgent
