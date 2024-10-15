@@ -29,6 +29,7 @@
     spawned:
     - id: FoodMeatChicken
       amount: 5
+  - type: VoxAccent #SS220-Vox Accent
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Vox
