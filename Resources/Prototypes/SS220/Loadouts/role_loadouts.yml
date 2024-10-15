@@ -139,7 +139,7 @@
 
 #! Сервис (Начало)
 
-  # Ведущий сервисный работник
+  # Сервисный администратор
 - type: roleLoadout
   id: JobSeniorService
   groups:

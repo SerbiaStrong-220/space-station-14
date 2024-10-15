@@ -115,7 +115,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitSeniorService
-  name: комбинезон ведущего сервисного отдела
+  name: комбинезон сервисного администратора #SS220 rename
   description: Знак мастерства и мастерства сервисной службы.
   components:
   - type: Sprite
