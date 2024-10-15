@@ -294,13 +294,13 @@
   products:
     Desoxyephedrine: 4 #I kinda remember having to heat this up, and if you heated it up too much, it went boom, I can't remember the specific values tho.
   # SS220 add oxygen gas for reaction Desoxyephedrine begin
-    effects:
-    - !type:CreateGas
-      gas: Oxygen
-    - !type:PopupMessage
-      visualType: Medium
-      messages: [ "oxygen-created" ]
-      type: Pvs
+  effects:
+  - !type:CreateGas
+    gas: Oxygen
+  - !type:PopupMessage
+    visualType: Medium
+    messages: [ "haloperidol-nitrousoxide-created " ]
+    type: Pvs
   # SS220 add oxygen gas for reaction Desoxyephedrine end
 
 - type: reaction
