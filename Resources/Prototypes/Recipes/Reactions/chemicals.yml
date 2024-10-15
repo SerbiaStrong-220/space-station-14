@@ -293,7 +293,13 @@
      amount: 1
   products:
     Desoxyephedrine: 4 #I kinda remember having to heat this up, and if you heated it up too much, it went boom, I can't remember the specific values tho.
-    Oxygen: 4 # SS220 add oxygen for reaction Desoxyephedrine
+  effects:
+    - !type:CreateGas
+      gas: Oxygen
+    - !type:PopupMessage
+      visualType: Medium
+      messages: [ "oxygen-created" ]
+      type: Pvs
 
 - type: reaction
   id: Stimulants
