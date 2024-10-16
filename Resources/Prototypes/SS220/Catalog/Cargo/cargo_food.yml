@@ -24,7 +24,7 @@
     sprite: Objects/Consumable/Food/meat.rsi
     state: plain
   product: CrateMeat
-  cost: 2000
+  cost: 1200
   category: cargoproduct-category-name-food
   group: market
 
@@ -34,6 +34,6 @@
     sprite: Objects/Consumable/Food/meat.rsi
     state: xeno
   product: CrateExoticMeat
-  cost: 4000
+  cost: 2500
   category: cargoproduct-category-name-food
   group: market
