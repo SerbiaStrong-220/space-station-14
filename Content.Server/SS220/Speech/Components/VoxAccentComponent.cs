@@ -3,7 +3,7 @@
 namespace Content.Server.SS220.Speech.Components;
 
 /// <summary>
-/// vox
+/// The vox accent component. Changes "k" to "kk" or "kek", and "ch" to "ch" or "chech"
 /// </summary>
 [RegisterComponent]
 public sealed partial class VoxAccentComponent : Component
