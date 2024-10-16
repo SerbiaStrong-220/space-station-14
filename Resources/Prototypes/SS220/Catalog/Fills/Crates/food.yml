@@ -79,7 +79,35 @@
     - id: FoodMeatClown
       amount: 3
       prob: 0.01
+    - id: FoodMeatRouny
+      amount: 1
+      prob: 0.01
     # funny
     - id: FoodMeatCorgi
       amount: 1
       prob: 0.0001 # never. 0.01%
+
+
+- type: entity
+  id: CrateMeat
+  parent: CrateFreezer
+  name: meat crate
+  description: Contains 10 pieces of meat from NanoTrasen colonial farms!
+  components:
+  - type: StorageFill
+    contents:
+    # basic boring meat
+    - id: FoodMeat
+      amount: 5
+    # bird meat
+    - id: FoodMeatChicken
+      amount: 4
+      prob: 0.3
+      orGroup: BirdMeat
+    - id: FoodMeatDuck
+      amount: 4
+      prob: 0.3
+      orGroup: BirdMeat
+    # some bacon
+    - id: FoodMeatBacon
+      amount: 2
