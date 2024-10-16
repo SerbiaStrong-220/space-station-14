@@ -57,7 +57,8 @@
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesJanitorJR
   name: rubberized Work Boots Junk Recycles
-  description: Comfortable boots with a special treatment of the sole. They inspire confidence. 
+  description: Comfortable boots with a special treatment of the sole. They inspire confidence.
+  suffix: JR
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi

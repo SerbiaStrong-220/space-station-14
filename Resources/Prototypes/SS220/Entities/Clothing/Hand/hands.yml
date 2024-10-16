@@ -60,6 +60,7 @@
   id: ClothingHandsGlovesJanitorJR
   name: black rubber gloves Junk Recycles
   description: Cleaning gloves with an additional protective coating. They've seen so much...
+  suffix: JR
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi

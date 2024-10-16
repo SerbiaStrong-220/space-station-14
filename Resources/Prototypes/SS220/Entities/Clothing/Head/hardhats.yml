@@ -18,6 +18,7 @@
   id: ClothingHeadHatHardhatJanitorJR
   name: marked green work helmet
   description: A helmet supplied for Junk Recyclers field workers in the colors of the corporation. It has a built-in flashlight.
+  suffix: JR
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hardhats/janitor_jk.rsi
