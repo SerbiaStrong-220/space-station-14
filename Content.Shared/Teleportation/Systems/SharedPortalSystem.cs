@@ -210,6 +210,7 @@ public abstract class SharedPortalSystem : EntitySystem
         }
 
         // SS220 RnD Balance revert, AnomalyComp cannot teleport via portal begin
+        if (HasComp<AnomalyComponent>(subject))
         {
             _popup.PopupCoordinates(Loc.GetString("portal-component-anomaly-reaction"),
                 ourCoords, Filter.Pvs(ourCoords, entityMan: EntityManager), true);
