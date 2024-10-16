@@ -166,7 +166,7 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatSeniorService
-  name: фуражка ведущего сервисного отдела
+  name: фуражка сервисного администратора #SS220 rename
   description: Большая, стильная голова
   components:
   - type: Sprite
