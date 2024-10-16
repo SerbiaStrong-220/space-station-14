@@ -15,7 +15,7 @@
   id: CrateExoticMeat
   parent: CrateFreezer
   name: exotic meat crate
-  description: Contains over 10 of unusual meat from all corners of the galaxy.
+  description: Contains over 10 pieces of unusual meat from all corners of the galaxy.
   components:
   - type: StorageFill
     contents:
