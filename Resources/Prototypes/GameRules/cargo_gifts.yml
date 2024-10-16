@@ -235,7 +235,7 @@
       ArmoryShotgun: 3
 #ss220-gammaend
 
-#ss220-chef supplies begin
+#ss220 cooking supplies begin
 - type: entity
   id: GiftsKitchen
   parent: CargoGiftsBase
@@ -254,4 +254,4 @@
       CrateFoodDinnerware: 1
       CrateFoodCooking: 1
       CrateVendingMachineRestockChefvendFilled: 1
-#ss220-chef supplies end
+#ss220 cooking supplies end
