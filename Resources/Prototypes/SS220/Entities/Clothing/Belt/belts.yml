@@ -376,7 +376,7 @@
   id: ClothingBeltJanitorJR
   name: the janitor Junk Recycles RPS
   description: A belt-and-shoulder tactical belt system made of recycled leather worn by Junk Recyclers.
-  suffix: JR
+  suffix: JR, For playing time
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/janitor_jr_webbing.rsi
