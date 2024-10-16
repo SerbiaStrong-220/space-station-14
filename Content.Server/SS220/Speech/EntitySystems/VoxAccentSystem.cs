@@ -19,6 +19,7 @@ public sealed class VoxAccentSystem : EntitySystem
     private static readonly Regex RegexUpperCH = new("CH+");
     private static readonly Regex RegexRuLowerCH = new("ч+");
     private static readonly Regex RegexRuUpperCH = new("Ч+");
+    
     public override void Initialize()
     {
         base.Initialize();
