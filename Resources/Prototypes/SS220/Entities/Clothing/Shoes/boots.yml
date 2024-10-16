@@ -50,3 +50,16 @@
     sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+
+# Уборщик
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingShoesJanitorJR
+  name: rubberized Work Boots Junk Recycles
+  description: Comfortable boots with a special treatment of the sole. They inspire confidence. 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi

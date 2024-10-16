@@ -36,4 +36,5 @@ ent-ClothingUniformJumpsuitBard = костюм барда
     .desc = Комфортная одежда для длительных концертов.
 ent-ClothingUniformJumpsuitWhiteCapFormal = белый торжественный костюм капитана
     .desc = Белый костюм для реально особых случаев.
-
+ent-ClothingUniformJumpsuitJanitorJR = комбинезон уборщика Junk Recyclers
+    .desc = Одежда настоящего ликвидатора беспорядка. Пахнет чистотой. Всегда.

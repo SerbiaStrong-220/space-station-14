@@ -284,6 +284,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/orangejanitor.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitJanitorJR
+  name: junk recyclers cleaner's jumpsuit
+  description: The clothes of a real disorder liquidator. It smells clean. Always.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/janitor_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/janitor_jr.rsi
+
+
   # Шеф-повар
 
 - type: entity

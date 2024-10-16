@@ -40,3 +40,7 @@ ent-ClothingHeadWhiteCapHardhat = белая капитанская каска
     .desc = Хорошо быть белым королём.
 ent-ClothingHeadWhiteCapHat = белая капитанская шляпа
     .desc = Специальная белая шляпа для капитана.
+ent-ClothingHeadHatJanitorJR = зелёная рабочая кепка
+    .desc = Стильная бейсболка компании JR экологично-зелёного цвета. Выглядит профессионально.
+ent-ClothingHeadHatJanitorJRFlipped = зелёная рабочая кепка
+    .desc = { ent-ClothingHeadHatJanitorJRFlipped.desc }

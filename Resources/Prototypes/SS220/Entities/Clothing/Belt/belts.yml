@@ -368,3 +368,50 @@
     contents:
     - id: FoodShakerSalt
     - id: FoodShakerPepper
+
+# Уборщик
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltJanitorJR
+  name: the janitor Junk Recycles RPS
+  description: A belt-and-shoulder tactical belt system made of recycled leather worn by Junk Recyclers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/janitor_jr_webbing.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/janitor_jr_webbing.rsi
+  - type: Storage
+    whitelist:
+      tags:
+        - Wrench
+        - Bottle
+        - Spray
+        - Soap
+        - Flashlight
+        - CigPack
+        - TrashBag
+        - WetFloorSign
+        - HolosignProjector
+        - Plunger
+        - JanicartKeys # SS220 Readd-Vehicles
+      components:
+        - LightReplacer
+        - SmokeOnTrigger
+    maxItemSize: Large
+  - type: ItemMapper
+    mapLayers:
+      bottle:
+        whitelist:
+          tags:
+          - Bottle
+      bottle_spray:
+        whitelist:
+          tags:
+          - Spray
+      wrench:
+        whitelist:
+          tags:
+          - Wrench
+    sprite: Clothing/Belt/belt_overlay.rsi
+  - type: Appearance

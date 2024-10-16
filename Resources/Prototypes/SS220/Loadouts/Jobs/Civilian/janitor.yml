@@ -18,6 +18,17 @@
       role: JobJanitor
       time: 180000 # 50 hrs
 
+ # Janitor Time3
+- type: loadoutEffectGroup
+  id: JanitorJR
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobJanitor
+      time: 252000 # 70 hrs
+
+
 # Jumpsuit
 - type: loadout
   id: JanitorBlueJumpsuit
@@ -34,6 +45,14 @@
     proto: JanitorOrange
   equipment:
     jumpsuit: ClothingUniformJumpsuitOrangeJanitor
+
+- type: loadout
+  id: JanitorJRJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJanitorJR
 
 #Shoes
 - type: loadout
@@ -54,6 +73,14 @@
   equipment:
     shoes: ClothingShoesColorPurple
 
+- type: loadout
+  id: JanitorJRShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    shoes: ClothingShoesJanitorJR
+
 #Head
 - type: loadout
   id: JanitorOrangeHat
@@ -63,6 +90,22 @@
   equipment:
     head: ClothingHeadHatOrangeJanitor
 
+- type: loadout
+  id: JanitorJRHat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    head: ClothingHeadHatHardhatJanitorJR
+
+- type: loadout
+  id: JanitorJRSoft
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    head: ClothingHeadHatJanitorJR
+
 #gloves
 - type: loadout
   id: JanitorOrangeGloves
@@ -71,3 +114,25 @@
     proto: JanitorOrange
   equipment:
     gloves: ClothingHandsGlovesOrangeJanitor
+
+- type: loadout
+  id: JanitorJRGloves
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorOrange
+  equipment:
+    gloves: ClothingHandsGlovesJanitorJR
+
+#belt
+- type: loadout
+  id: JanitorBaseBelt
+  equipment:
+    belt: ClothingBeltJanitor
+
+- type: loadout
+  id: JanitorJRBelt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    belt: ClothingBeltJanitorJR
