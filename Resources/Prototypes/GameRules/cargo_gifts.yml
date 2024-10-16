@@ -16,7 +16,7 @@
     - id: GiftsVendingRestock
 
 # Game Rules
-    
+
 - type: entity
   id: CargoGiftsBase
   parent: BaseGameRule
@@ -249,9 +249,9 @@
     description: cargo-gift-kitchen
     dest: cargo-gift-dest-kitchen
     gifts:
-      CrateMeat: 1
-      CrateExoticMeat: 1
-      CrateFoodDinnerware: 1
-      CrateFoodCooking: 1
-      CrateVendingMachineRestockChefvendFilled: 1
+      MeatCrate: 1
+      ExoticMeatCrate: 1
+      FoodDinnerware: 1
+      FoodCook: 1
+      CrateVendingMachineRestockChefvend: 1
 #ss220 cooking supplies end
