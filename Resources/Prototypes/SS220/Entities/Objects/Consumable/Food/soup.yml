@@ -68,13 +68,13 @@
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Vitamin
-          Quantity: 5          
+          Quantity: 5
 
 - type: entity
   name: винегрет
   parent: FoodBowlBase
   id: FoodSaladVinaigrette
-  description: Кладезь витаминов и микроэлементов. А почему тут нет вина? 
+  description: Кладезь витаминов и микроэлементов. А почему тут нет вина?
   components:
   - type: FlavorProfile
     flavors:
@@ -92,4 +92,28 @@
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Vitamin
-          Quantity: 5          
+          Quantity: 5
+
+- type: entity
+  name: Суп космического отца
+  id: FoodFatherSoup
+  parent: FoodBowlBase
+  description: Суп придает настолько много сил, что его пришлось поместить в чан. Наверное мне стоит его съесть?
+  components:
+    - type: FlavorProfile
+      flavors:
+        - fatherSoup
+    - type: Sprite
+      sprite: SS220/Objects/Consumable/Food/cauldron.rsi
+      layers:
+      - state: cauldron
+      - state: fathersoup
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 25
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 15
+          - ReagentId: Protein
+            Quantity: 10
