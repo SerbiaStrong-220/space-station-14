@@ -3315,6 +3315,14 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,-5.5
       parent: 104
+- proto: AirlockMedical
+  entities:
+  - uid: 87
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,-12.5
+      parent: 104
 - proto: AirlockMedicalGlass
   entities:
   - uid: 930
@@ -3322,17 +3330,20 @@ entities:
     - type: Transform
       pos: 10.5,-7.5
       parent: 104
-- proto: AirlockMedicalLocked
+- proto: AirlockScience
   entities:
-  - uid: 87
+  - uid: 121
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 4.5,-12.5
+      pos: 1.5,-20.5
       parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
+  - uid: 378
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,-20.5
+      parent: 104
 - proto: AirlockScienceGlass
   entities:
   - uid: 943
@@ -3340,26 +3351,6 @@ entities:
     - type: Transform
       pos: 9.5,-16.5
       parent: 104
-- proto: AirlockScienceLocked
-  entities:
-  - uid: 121
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,-20.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
-  - uid: 378
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 1.5,-20.5
-      parent: 104
-    - type: AccessReader
-      access:
-      - - NuclearOperative
 - proto: AirlockSyndicateGlassLocked
   entities:
   - uid: 933
