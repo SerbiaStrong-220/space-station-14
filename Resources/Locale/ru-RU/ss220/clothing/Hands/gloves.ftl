@@ -3,5 +3,5 @@ ent-ClothingHandsGlovesCentcom = перчатки Центком
 ent-ClothingHandsGlovesNanotrasenDiplomat = белые перчатки Центком
     .desc = Пара высококачественных белых плотных перчаток, украшенных золотым шитьём, которые выдаются дипломату Nanotrasen.
 ent-ClothingHandsGlovesJanitorJR = черные резиновые перчатки
-    .desc = JR, За время в игре
+    .suffix = JR, За время в игре
     .desc = Уборочные перчатки с дополнительным защитным покрытием. Они видели столь много... 
