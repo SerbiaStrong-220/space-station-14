@@ -1,0 +1,59 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: Nyarlathotep
+  name: ньярлатотеп
+  description: Воплощение предстоящего хаоса, посланник Богов. Не имеет четкой формы. Со слов самого Ньярлатхотепа, он имеет тысячи обличий.
+  components:
+  - type: Clickable
+  - type: CargoSellBlacklist
+  - type: InteractionOutline
+  - type: StandingState
+  - type: CanMoveInAir
+  - type: MovementIgnoreGravity
+  - type: Appearance
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+    sleepingAllowed: false
+  - type: PointLight
+    enabled: true
+    radius: 25
+    color: "#FF0000"
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
+    shader: unshaded
+    layers:
+    - state: nyarlatoteph
+  - type: ChasingWalk
+    impulseInterval: 1
+    minSpeed: 3
+    maxSpeed: 5
+    changeVectorMinInterval: 120
+    changeVectorMaxInterval: 600
+    chasingComponent:
+    - type: NyarlathotepTarget
+  - type: Fixtures
+    fixtures:
+      NyarlathotepHorizonCollider: #ToDo make it at leaslt close to entity
+        shape:
+          !type:PolygonShape
+            vertices:
+            - -2.5,-2
+            - 2.5,-2
+            - 2,1
+            - -2,1
+            - 1,4
+            - -1,4
+            - 0,4.5
+            - 0,-4.5
+        mask:
+        - AllMask
+        layer:
+        - AllMask
+  - type: NyarlathotepHorizon
+    colliderFixtureId: NyarlathotepHorizonCollider
+  - type: NyarlathotepSearchTargets
+    searchRange: 100
+

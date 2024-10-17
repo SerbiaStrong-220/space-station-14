@@ -1,0 +1,47 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: cult claw
+  parent: BaseItem
+  id: ClawCultYogg
+  description: description
+  components:
+  - type: Irremovable
+    inHandItem: true
+  - type: Tag
+    tags:
+    - PlantSampleTaker
+    - Wirecutter
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/cult_yogg_claw.rsi
+    state: icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: MeleeWeapon
+    wideAnimationRotation: -100
+    attackRate: 1
+    range: 2
+    angle: 100
+    damage:
+      types:
+#        Poison: 15
+        Blunt: 30
+        Structural: 20
+    soundHit:
+      path: "/Audio/Items/wirecutter.ogg" # звук удара, заменить
+  - type: Tool
+    qualities:
+      - Cutting
+    useSound:
+      path: /Audio/Items/wirecutter.ogg # звук перерезания проводов, оставить так или заменить
+  - type: Prying
+    speedModifier: 3
+    pryPowered: true
+    useSound: /Audio/Items/jaws_pry.ogg # звук открытия шлюза, оставить так или заменить
+  - type: RoleItem
+    roleId: CultYogg
+  - type: Insulated # заглушка на будущее, защищает только от перерезания решеток под напряжением

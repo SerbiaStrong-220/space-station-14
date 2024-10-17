@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by MIXnikita, MadSkaven, Kit0vras  for SS220",
+  "size":
+  {
+    "x": 32,
+    "y": 32
+  },
+  "states":
+  [
+    {
+      "name": "migopuke"
+    },
+    {
+      "name": "migoastral"
+    },
+    {
+        "name": "enslavement"
+    },
+    {
+        "name": "heal"
+    },
+    {
+        "name": "turn"
+    },
+    {
+        "name": "corrupt"
+    },
+    {
+        "name": "build"
+    },
+    {
+        "name": "summon"
+    },
+    {
+        "name": "touch"
+    },
+    {
+        "name": "qwert2"
+    },
+    {
+        "name": "IconMycosis"
+    }
+  ]
+}

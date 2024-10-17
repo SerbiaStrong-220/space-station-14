@@ -1,0 +1,19 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackCultYogg
+  name: cult backpack
+  description: description
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/cultYogg_backpack.rsi # спрайта нет
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,5
+  - type: RoleStorage
+    roleId: CultYogg
+  - type: Irremovable
+  - type: RoleItem
+    roleId: CultYogg

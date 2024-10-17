@@ -1,0 +1,72 @@
+- type: entity
+  name: spikegun cult yogg
+  parent: BaseItem
+  id: SpikegunCultYogg
+  components:
+    - type: AmmoCounter
+    - type: Gun
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
+      soundEmpty: null
+      fireRate: 20
+      selectedMode: SemiAuto
+      availableModes:
+      - SemiAuto
+    - type: BasicEntityAmmoProvider
+      proto: Spike
+      capacity: 15
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/cult_yogg_spikegun.rsi
+      layers:
+        - state: icon_noammo
+          map: ["sprite"]
+    - type: Item
+      size: Normal
+    - type: Appearance
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 1.5
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_noammo"}
+            True: {state: "icon_fullammo"}
+    - type: GunByHasAmmoVisuals
+      spriteLayer: null
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+    - type: Irremovable
+      inHandItem: true
+
+- type: entity
+  id: Spike
+  name: spike
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  description: description
+  components:
+  - type: Reflective
+    reflective:
+      - NonEnergy
+  - type: Sprite
+    noRot: false
+    sprite: SS220/Objects/Weapons/Guns/cult_yogg_spikegun.rsi
+    layers:
+    - state: spike_projectile
+      shader: unshaded
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0.3
+    angularDamping: 0
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 10
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: GatheringProjectile
