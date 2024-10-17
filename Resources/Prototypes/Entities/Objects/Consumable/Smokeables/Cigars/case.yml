@@ -3,6 +3,7 @@
   parent: [ BaseStorageItem, BaseBagOpenClose ]
   name: cigar case
   description: A case for holding your cigars when you are not smoking them.
+  suffix: За время в игре #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigars/case.rsi
