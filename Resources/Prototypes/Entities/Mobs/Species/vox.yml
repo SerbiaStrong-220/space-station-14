@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseMobSpeciesOrganic
+  parent: BaseMobSpeciesOrganicNotPerishable #SS220-Vox not rotting
   id: BaseMobVox
   abstract: true
   components:
