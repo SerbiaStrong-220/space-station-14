@@ -396,6 +396,19 @@
         Slash: 0.85
         Piercing: 0.85
         Heat: 0.85
+  #ss220 raid suit rework begin
+        Radiation: 0.85
+        Caustic: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+  #suit offers best protection against cold and flames with this helmet
+  #if you pair with SWAT helmet, it will defend a bit better, but less fire/cold protected
+  - type: FireProtection
+    reduction: 0.15
+  - type: TemperatureProtection
+    heatingCoefficient: 0.2
+    coolingCoefficient: 0.2
+  #ss220 raid suit rework end
 
 #Bone Helmet
 - type: entity
