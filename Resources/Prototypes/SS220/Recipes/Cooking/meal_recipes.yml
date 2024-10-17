@@ -4,7 +4,7 @@
   result: FoodCheburek
   time: 15
   reagents:
-    TableSalt: 5  
+    TableSalt: 5
   solids:
     FoodDough: 1
     FoodMeatCutlet: 1
@@ -16,7 +16,7 @@
   result: FoodShawarma
   time: 15
   reagents:
-    Mayo: 5  
+    Mayo: 5
   solids:
     FoodDough: 1
     FoodMeatChicken: 1
@@ -70,7 +70,7 @@
   result: FoodSoupOkroshkaKvass
   time: 10
   reagents:
-    Kvass: 10  
+    Kvass: 10
   solids:
     FoodBowlBig: 1
     FoodMeatChicken: 1
@@ -154,3 +154,20 @@
     FoodChiliPepper: 1
     FoodCheeseSlice: 1
 #SS220 Nachos-recipe end
+
+- type: microwaveMealRecipe
+  id: RecipeFatherSoup
+  name: father soup recipe
+  result: FoodFatherSoup
+  time: 30
+  reagents:
+    Blackpepper: 5
+    Flour: 10
+  solids:
+    FoodSoupTomato: 1
+    FoodGarlic: 1
+    FoodOnion: 1
+    FoodTomato: 1
+#   GhostChiliPepper: 2
+#   Сauldron: 1
+
