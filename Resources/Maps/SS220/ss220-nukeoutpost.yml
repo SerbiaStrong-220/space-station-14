@@ -8631,6 +8631,8 @@ entities:
     - EnergySword
     - ItemToggleSize
     - UseDelay
+    - Blocking
+    - Reflect
 - proto: ExpensiveLighterSyndicate
   entities:
   - uid: 1175
