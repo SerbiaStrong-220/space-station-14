@@ -54,7 +54,7 @@
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
-    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+#    - map: [ "enum.HumanoidVisualLayers.Snout" ] #SS220-Vox Beak
     - map: [ "enum.HumanoidVisualLayers.Eyes" ]
     - map: [ "enum.HumanoidVisualLayers.RArm" ]
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
@@ -69,6 +69,7 @@
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ] #SS220-Vox Beak
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]
