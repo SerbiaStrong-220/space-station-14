@@ -44,5 +44,5 @@ ent-ClothingHeadHatJanitorJR = зелёная рабочая кепка
     .suffix = JR, За время в игре
     .desc = Стильная бейсболка компании JR экологично-зелёного цвета. Выглядит профессионально.
 ent-ClothingHeadHatJanitorJRFlipped = зелёная рабочая кепка
-    .desc = JR, За время в игре
+    .suffix = JR, За время в игре
     .desc = { ent-ClothingHeadHatJanitorJRFlipped.desc }
