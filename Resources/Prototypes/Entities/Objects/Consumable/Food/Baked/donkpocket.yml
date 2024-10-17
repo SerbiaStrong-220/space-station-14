@@ -8,6 +8,8 @@
   - type: Food
   - type: Sprite
     sprite: Objects/Consumable/Food/Baked/donkpocket.rsi
+  - type: Extractable #ss220
+    grindableSolutionName: food #ss220  
   - type: SolutionContainerManager
     solutions:
       food:
