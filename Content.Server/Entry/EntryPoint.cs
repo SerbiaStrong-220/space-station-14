@@ -39,6 +39,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
+using Content.Shared.SS220.SupaKitchen;
+
 
 namespace Content.Server.Entry
 {
@@ -152,6 +154,7 @@ namespace Content.Server.Entry
             else
             {
                 IoCManager.Resolve<RecipeManager>().Initialize();
+                IoCManager.Resolve<SupaRecipeManager>().Initialize(); //SS220 Supa Kitchen
                 IoCManager.Resolve<IAdminManager>().Initialize();
                 IoCManager.Resolve<IAfkManager>().Initialize();
                 IoCManager.Resolve<RulesManager>().Initialize();
