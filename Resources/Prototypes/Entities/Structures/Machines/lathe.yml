@@ -643,6 +643,7 @@
     - BorgModuleAdvancedTool
     - BorgModuleGPS
     - BorgModuleRCD
+    - BorgModuleFireAxe #SS220 Borg Modules
     - BorgModuleArtifact
     - BorgModuleAnomaly
     - BorgModuleGardening

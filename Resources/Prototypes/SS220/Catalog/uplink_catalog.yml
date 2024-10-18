@@ -169,6 +169,19 @@
   categories:
   - UplinkWearables
 
+- type: listing
+  id: UplinkBorgModuleFlamingAxe
+  name: uplink-borg-module-axe-name
+  description: uplink-borg-module-axe-desc
+  productEntity: BorgModuleFlamingAxe
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkDisruption
+
 # READD-VEHICLES
 - type: listing
   id: UplinkSyndicateSegwayCrate
