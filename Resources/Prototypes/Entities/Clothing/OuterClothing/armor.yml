@@ -131,11 +131,12 @@
         Heat: 0.35
         Caustic: 0.5
         Stamina: 0.3 #SS220 stamina resist fix
+        Radiation: 0.85 #ss220 raid suit rework
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1 #ss220 raid suit rework
+    sprintModifier: 0.95 #ss220 raid suit rework
   #Shoulder mounted flashlight
   - type: ToggleableLightVisuals
     spriteLayer: light
@@ -179,6 +180,24 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2
+  #ss220 raid suit rework begin
+  - type: TemperatureProtection
+    heatingCoefficient: 0.15
+    coolingCoefficient: 0.15
+  - type: FireProtection
+    reduction: 0.4
+  - type: NeedleProtection # ss220 needleprotection
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  #ss220 raid suit rework end
 
 - type: entity
   parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
