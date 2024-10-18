@@ -130,6 +130,7 @@
     - id: BoxFolderYellow
     - id: NewtonCradle
     - id: BoxEnvelope
+    - id: DeviceCalculator # SS220 Calculator
 
 - type: entity
   id: CrateServiceFaxMachine

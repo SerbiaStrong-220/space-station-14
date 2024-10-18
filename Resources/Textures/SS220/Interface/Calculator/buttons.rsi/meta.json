@@ -1,0 +1,113 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by stalengd for SS220",
+    "size": {
+        "x": 34,
+        "y": 33
+    },
+    "states": [
+        {
+            "name": "1"
+        },
+        {
+            "name": "1_pressed"
+        },
+        {
+            "name": "2"
+        },
+        {
+            "name": "2_pressed"
+        },
+        {
+            "name": "3"
+        },
+        {
+            "name": "3_pressed"
+        },
+        {
+            "name": "4"
+        },
+        {
+            "name": "4_pressed"
+        },
+        {
+            "name": "5"
+        },
+        {
+            "name": "5_pressed"
+        },
+        {
+            "name": "6"
+        },
+        {
+            "name": "6_pressed"
+        },
+        {
+            "name": "7"
+        },
+        {
+            "name": "7_pressed"
+        },
+        {
+            "name": "8"
+        },
+        {
+            "name": "8_pressed"
+        },
+        {
+            "name": "9"
+        },
+        {
+            "name": "9_pressed"
+        },
+        {
+            "name": "c"
+        },
+        {
+            "name": "c_pressed"
+        },
+        {
+            "name": "ce"
+        },
+        {
+            "name": "ce_pressed"
+        },
+        {
+            "name": "divide"
+        },
+        {
+            "name": "divide_pressed"
+        },
+        {
+            "name": "dot"
+        },
+        {
+            "name": "dot_pressed"
+        },
+        {
+            "name": "minus"
+        },
+        {
+            "name": "minus_pressed"
+        },
+        {
+            "name": "multiply"
+        },
+        {
+            "name": "multiply_pressed"
+        },
+        {
+            "name": "plus"
+        },
+        {
+            "name": "plus_pressed"
+        },
+        {
+            "name": "power"
+        },
+        {
+            "name": "power_pressed"
+        }
+    ]
+}
