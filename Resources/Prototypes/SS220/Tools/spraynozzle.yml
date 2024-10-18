@@ -1,5 +1,5 @@
 - type: entity
-  id: WeaponSprayNozzle
+  id: SprayNozzle
   parent: BaseItem
   name: spray nozzle
   description: A high-powered spray nozzle used in conjunction with a backpack-mounted water tank.
@@ -24,7 +24,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
   - type: Appearance
-  - type: ClothingSlotAmmoProvider
+  - type: ClothingSlotSolutionProvider
     targetSlot: BACK
     providerWhitelist:
       tags:

@@ -15170,7 +15170,7 @@ entities:
       parent: 104
     - type: BallisticAmmoProvider
       unspawnedCount: 2
-- proto: WeaponSprayNozzle
+- proto: SprayNozzle
   entities:
   - uid: 152
     components:
