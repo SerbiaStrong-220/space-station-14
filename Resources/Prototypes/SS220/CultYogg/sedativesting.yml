@@ -1,0 +1,20 @@
+- type: entity
+  name: sedative sting
+  parent: BaseItem
+  id: SedativestingCultYogg
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/cult_yogg_sedativesting.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 10
+  - type: RefillableSolution
+    solution: hypospray
+  - type: UseDelay
+    delay: 2
+  - type: SedativeSting
+    transferAmount: 10
+  - type: RoleItem
+    roleId: CultYogg

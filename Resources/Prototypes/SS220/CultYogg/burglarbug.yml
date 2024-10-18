@@ -1,0 +1,35 @@
+- type: entity
+  name: burglar bug cult yogg
+  parent: BaseItem
+  id: BurglarBugCultYogg
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/burglarbug.rsi
+      state: icon
+    - type: Icon
+      sprite: SS220/Objects/CultYogg/burglarbug.rsi
+      state: icon
+    - type: Item
+      size: Small
+    - type: Appearance
+    - type: Sticky
+      stickDelay: 3
+      unstickDelay: 3
+      stickPopupSuccess: cult-yogg-burglar-bug-stick-success
+      unstickPopupStart: cult-yogg-burglar-bug-unstick-started
+      unstickPopupSuccess: cult-yogg-burglar-bug-unstick-success
+      whitelist:
+        components:
+        - Door
+    - type: OnUseTimerTrigger
+      delay: 10
+      examinable: false
+    - type: StickyVisualizer
+    - type: BurglarBug
+      timeToOpen: 10
+      notActivatedStickPopupCancellation: "Жук должен быть активирован до прикрепления"
+      openedDoorStickPopupCancellation: "Жук не может прикрепиться к открытой двери"
+      ignoreResistances: true
+      damage:
+        types:
+          Piercing: 40.5
