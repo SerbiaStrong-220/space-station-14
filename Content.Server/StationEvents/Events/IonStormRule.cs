@@ -61,6 +61,10 @@ public sealed class IonStormRule : StationEventSystem<IonStormRuleComponent>
     private const string Drinks = "IonStormDrinks";
     [ValidatePrototypeId<DatasetPrototype>]
     private const string Foods = "IonStormFoods";
+    // SS220 IonStrom Laws rework start
+    [ValidatePrototypeId<DatasetPrototype>]
+    private const string BrickedLaw = "IonStormBrickedLaws";
+    // SS220 IonStrom Laws rework start
 
     protected override void Started(EntityUid uid, IonStormRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -124,7 +128,10 @@ public sealed class IonStormRule : StationEventSystem<IonStormRuleComponent>
             }
 
             // generate a new law...
-            var newLaw = GenerateLaw();
+            // SS220 IonStrom Laws rework start
+            // var newLaw = GenerateLaw();
+            var newLaw = PickLaw();
+            // SS220 IonStrom Laws rework end
 
             // see if the law we add will replace a random existing law or be a new glitched order one
             if (laws.Laws.Count > 0 && RobustRandom.Prob(target.ReplaceChance))
@@ -282,6 +289,13 @@ public sealed class IonStormRule : StationEventSystem<IonStormRuleComponent>
             _ => Loc.GetString("ion-storm-law-concept-verb", ("concept", concept), ("verb", verb), ("subjects", triple))
         };
     }
+    // SS220 IonStorm Rework start
+    private string PickLaw()
+    {
+        var brickedLaw = Pick(BrickedLaw);
+        return brickedLaw;
+    }
+    // SS220 IonStorm Rework end
 
     /// <summary>
     /// Picks a random value from an ion storm dataset.
