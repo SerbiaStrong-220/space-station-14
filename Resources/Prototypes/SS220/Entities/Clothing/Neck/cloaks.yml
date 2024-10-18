@@ -14,6 +14,7 @@
   id: ClothingNeckCloakWhiteCapFormal
   name: белый формальный плащ капитана
   description: Роскошный плащ почётного ветерана за выслугу лет.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/whitecapcloakformal.rsi
