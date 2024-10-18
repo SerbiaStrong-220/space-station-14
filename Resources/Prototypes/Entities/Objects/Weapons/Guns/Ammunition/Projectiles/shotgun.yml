@@ -63,8 +63,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 11 #ss220weaponBalance
-        Heat: 5 #ss220weaponBalance
+        Piercing: 10 #ss220weaponBalance #Incendary rebalance
+        Heat: 3 #ss220weaponBalance
   - type: IgnitionSource
     ignited: true
 
