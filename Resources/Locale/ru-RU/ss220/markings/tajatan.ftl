@@ -1,10 +1,12 @@
 # Ears Section
-marking-TajaranEars [2] = Таяран, уши (Большие)
+marking-TajaranEarsPiercing = Таяран, уши (Проколотые)
 marking-TajaranEars = Таяран, уши (Стандартные)
-marking-TajaranEars [4] = Таяран, уши (Высячие)
+marking-TajaranEarsNyshka = Таяран, уши (Висячие)
+marking-TajaranEarsPointy = Таяран, уши (Заострённые)
+marking-TajaranEarsSiberia = Таяран, уши (Сибирские)
 
 # Tail Section
-marking-TajaranTail = Таяран, хвост (Стандартные)
+marking-TajaranTail = Таяран, хвост (Стандартный)
 
 # Spots section
 marking-TajaranChestLeo = Таяран, грудь (Леопард)
