@@ -137,7 +137,7 @@
     - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
       state: tajaran_tail_wagging
 
-# Spots section
+# Color section
 
   # Leo
 - type: marking
@@ -146,7 +146,7 @@
   markingCategory: Chest
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_body
 
 - type: marking
@@ -155,7 +155,7 @@
   markingCategory: Head
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_head
 
 - type: marking
@@ -164,7 +164,7 @@
   markingCategory: Arms
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_hand_l
 
 - type: marking
@@ -173,7 +173,7 @@
   markingCategory: Arms
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_hand_r
 
 - type: marking
@@ -182,7 +182,7 @@
   markingCategory: Legs
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_leg_l
 
 - type: marking
@@ -191,7 +191,7 @@
   markingCategory: Legs
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_leg_r
 
   # Lines
@@ -201,7 +201,7 @@
   markingCategory: Chest
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_body
 
 - type: marking
@@ -210,7 +210,7 @@
   markingCategory: Head
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_head
 
 - type: marking
@@ -219,8 +219,8 @@
   markingCategory: Arms
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: lines_hand_l
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_arm_l
 
 - type: marking
   id: TajaranRArmLines
@@ -228,8 +228,8 @@
   markingCategory: Arms
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: lines_hand_r
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_arm_r
 
 - type: marking
   id: TajaranLLegLines
@@ -237,7 +237,7 @@
   markingCategory: Legs
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_leg_l
 
 - type: marking
@@ -246,63 +246,105 @@
   markingCategory: Legs
   speciesRestriction: [Tajaran]
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_leg_r
 
-#   # Common
-# - type: marking
-#   id: TajaranChestCommon
-#   bodyPart: Chest
-#   markingCategory: Chest
-#   speciesRestriction: [Tajaran]
-#   sprites:
-#   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-#     state: lines_body
+  # Two - tone
+- type: marking
+  id: TajaranChestTwoTone
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_body
 
-# - type: marking
-#   id: TajaranHeadCommon
-#   bodyPart: Head
-#   markingCategory: Head
-#   speciesRestriction: [Tajaran]
-#   sprites:
-#   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-#     state: lines_head
+- type: marking
+  id: TajaranHeadTwoTone
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      taj_mouth:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_face
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_mouth
 
-# - type: marking
-#   id: TajaranLArmCommon
-#   bodyPart: LArm
-#   markingCategory: Arms
-#   speciesRestriction: [Tajaran]
-#   sprites:
-#   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-#     state: lines_hand_l
+- type: marking
+  id: TajaranLArmTwoTone
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_arms_l
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_hands_l
 
-# - type: marking
-#   id: TajaranRArmCommon
-#   bodyPart: RArm
-#   markingCategory: Arms
-#   speciesRestriction: [Tajaran]
-#   sprites:
-#   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-#     state: lines_hand_r
+- type: marking
+  id: TajaranRArmTwoTone
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      taj_hands:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_arms_r
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_hands_r
 
-# - type: marking
-#   id: TajaranLLegCommon
-#   bodyPart: LLeg
-#   markingCategory: Legs
-#   speciesRestriction: [Tajaran]
-#   sprites:
-#   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-#     state: lines_leg_l
+- type: marking
+  id: TajaranLLegCommon
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_legs_l
 
-# - type: marking
-#   id: TajaranRLegCommon
-#   bodyPart: RLeg
-#   markingCategory: Legs
-#   speciesRestriction: [Tajaran]
-#   sprites:
-#   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-#     state: lines_leg_r
+- type: marking
+  id: TajaranRLegCommon
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_legs_r
 
   # Points
 - type: marking
@@ -310,106 +352,135 @@
   bodyPart: Chest
   markingCategory: Chest
   speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_back_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_back_2
 
 - type: marking
   id: TajaranHeadPoints
   bodyPart: Head
   markingCategory: Head
   speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_head_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_head_2
 
 - type: marking
   id: TajaranLArmPoints
   bodyPart: LArm
   markingCategory: Arms
   speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_arm_l_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_arm_l_2
 
 - type: marking
   id: TajaranRArmPoints
   bodyPart: RArm
   markingCategory: Arms
   speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_arm_r_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_arm_r_2
 
 - type: marking
   id: TajaranLLegPoints
   bodyPart: LLeg
   markingCategory: Legs
   speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_leg_l_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_leg_l_2
 
 - type: marking
   id: TajaranRLegPoints
   bodyPart: RLeg
   markingCategory: Legs
   speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_leg_r_1
-
-  # Points 2
-- type: marking
-  id: TajaranChestPointsAlt
-  bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
-  sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: points_back_2
-
-- type: marking
-  id: TajaranHeadPointsAlt
-  bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
-  sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: points_head_2
-
-- type: marking
-  id: TajaranLArmPointsAlt
-  bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
-  sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: points_arm_l_2
-
-- type: marking
-  id: TajaranRArmPoints2
-  bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
-  sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: points_arm_r_2
-
-- type: marking
-  id: TajaranLLegPointsAlt
-  bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
-  sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
-    state: points_leg_l_2
-
-- type: marking
-  id: TajaranRLegPointsAlt
-  bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
-  sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_spots.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_leg_r_2

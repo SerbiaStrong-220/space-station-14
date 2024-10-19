@@ -104,7 +104,11 @@
       "directions": 4
     },
     {
-      "name": "taj_arms",
+      "name": "taj_arms_l",
+      "directions": 4
+    },
+    {
+      "name": "taj_arms_r",
       "directions": 4
     },
     {
@@ -116,11 +120,19 @@
       "directions": 4
     },
     {
-      "name": "taj_hands",
+      "name": "taj_hands_l",
       "directions": 4
     },
     {
-      "name": "taj_legs",
+      "name": "taj_hands_r",
+      "directions": 4
+    },
+    {
+      "name": "taj_legs_l",
+      "directions": 4
+    },
+    {
+      "name": "taj_legs_r",
       "directions": 4
     },
     {
