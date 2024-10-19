@@ -1104,7 +1104,6 @@
     head: ClothingHeadHatHoodBioJanitor
     id: VisitorPDA
     back: ClothingBackpack
-    belt: ClothingBeltJanitorFilled
     ears: ClothingHeadsetService
     outerClothing: ClothingOuterBioJanitor
   inhand:

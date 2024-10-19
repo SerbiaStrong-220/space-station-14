@@ -54,7 +54,7 @@
 # Уборщик
 
 - type: entity
-  parent: ClothingShoesBaseButcherable
+  parent: ClothingShoesGaloshes
   id: ClothingShoesJanitorJR
   name: rubberized Work Boots Junk Recycles
   description: Comfortable boots with a special treatment of the sole. They inspire confidence.

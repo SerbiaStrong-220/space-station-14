@@ -12,6 +12,7 @@
     sprite: SS220/Clothing/Head/Soft/janitor_jr_soft.rsi
 
 - type: entity
-  parent: [ClothingHeadHatGreensoftFlipped, ClothingHeadHeadHatBaseFlippable]
+  parent: [ClothingHeadHeadHatBaseFlipped, ClothingHeadHatJanitorJR]
+  suffix: Flipped
   id: ClothingHeadHatJanitorJRFlipped
   name: Green work cap
