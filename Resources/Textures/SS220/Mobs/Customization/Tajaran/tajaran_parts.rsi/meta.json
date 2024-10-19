@@ -32,6 +32,14 @@
       "directions": 4
     },
     {
+      "name": "ears_short_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_short_outer",
+      "directions": 4
+    },
+    {
         "name": "tajaran_tail",
         "directions": 4
     },

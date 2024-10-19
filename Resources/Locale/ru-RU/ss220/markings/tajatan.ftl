@@ -4,6 +4,7 @@ marking-TajaranEars = Таяран, уши (Стандартные)
 marking-TajaranEarsNyshka = Таяран, уши (Висячие)
 marking-TajaranEarsPointy = Таяран, уши (Заострённые)
 marking-TajaranEarsSiberia = Таяран, уши (Сибирские)
+marking-TajaranEarsShort = Таяран, уши (Короткие)
 
 # Tail Section
 marking-TajaranTail = Таяран, хвост (Стандартный)

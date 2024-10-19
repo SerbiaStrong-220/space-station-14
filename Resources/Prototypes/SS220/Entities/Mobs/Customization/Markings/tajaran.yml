@@ -117,6 +117,29 @@
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: ears_siberia_inner
 
+- type: marking
+  id: TajaranEarsShort
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+    state: ears_short_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+    state: ears_short_inner
+
 # Tail section
 
 - type: marking
