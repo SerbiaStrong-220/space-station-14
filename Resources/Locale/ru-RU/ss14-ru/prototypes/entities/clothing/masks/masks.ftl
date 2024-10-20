@@ -66,7 +66,9 @@ ent-ClothingMaskBat = маска летучей мыши
     .desc = Кровопийца ночью, и милый, слепой зверёк днём..
 ent-ClothingMaskNeckGaiter = шейный гетр
     .desc = Стильный гетр, способный защитить от космического ветра?...
+#SS220-add-time-suffix-loadout begin
     .suffix = За время в игре
+#SS220-add-time-suffix-loadout end
 ent-ClothingMaskNeckGaiterRed = красный шейный гетр
     .desc = { ent-ClothingMaskNeckGaiter.desc }
 ent-ClothingMaskSexyClown = сексуальная маска клоуна

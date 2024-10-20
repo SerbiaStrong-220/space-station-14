@@ -591,17 +591,17 @@
     tags:
     - WhitelistChameleon
 
-#SS220-add-time-suffix-loadout-begin
 - type: entity
-  parent: ClothingMaskBase
+  parent: ClothingMaskBase #SS220-add-time-suffix-loadout
   id: ClothingMaskNeckGaiterRed
   name: red neck gaiter
-  description: Stylish neck gaiter for your neck, can protect from the cosmic wind?...
+  description: Stylish neck gaiter for your neck, can protect from the cosmic wind?... #SS220-add-time-suffix-loadout
   components:
   - type: Sprite
     sprite: Clothing/Mask/neckgaiterred.rsi
   - type: Clothing
     sprite: Clothing/Mask/neckgaiterred.rsi
+#SS220-add-time-suffix-loadout-begin
   - type: IdentityBlocker
     coverage: MOUTH
   - type: Tag

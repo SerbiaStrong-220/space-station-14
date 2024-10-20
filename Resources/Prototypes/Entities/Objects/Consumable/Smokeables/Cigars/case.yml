@@ -69,13 +69,13 @@
     - cigar8
   - type: Appearance
 
-#SS220-add-time-suffix-loadout-begin
 - type: entity
   id: CigarGoldCase
-  parent: [ BaseStorageItem, BaseBagOpenClose ]
+  parent: [ BaseStorageItem, BaseBagOpenClose ] #SS220-add-time-loadout-suffix
   name: premium cigar case
   description: "A case of premium Havanian cigars. You'll only see heads with these."
   components:
+#SS220-add-time-suffix-loadout-begin
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigars/premium-case.rsi #SS220 cigar resprite
     layers:
@@ -121,10 +121,12 @@
     shape:
     - 0,0,2,1
     storedRotation: 90
+#SS220-add-time-suffix-loadout-end
   - type: StorageFill
     contents:
     - id: CigarGold
       amount: 8
+#SS220-add-time-suffix-loadout-begin
   - type: ItemCounter
     count:
       tags: [Cigar]
