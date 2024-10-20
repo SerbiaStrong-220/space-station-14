@@ -33,4 +33,4 @@
     gloves: ClothingHandsGlovesJanitor
     head: ClothingHeadHatCatEars
     ears: ClothingHeadsetService
-    belt: ClothingBeltJanitorFilled
+#    belt: ClothingBeltJanitorFilled #SS220-JRJanitor
