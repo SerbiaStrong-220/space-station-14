@@ -2,11 +2,11 @@ job-name-magistrate = магистрат
 
 job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
-job-name-cc-oficier = офицер ЦК
-job-name-cc-operational-oficier = полевой офицер ЦК
+job-name-cc-oficier = офицер Центрального Командования
+job-name-cc-operational-oficier = полевой Офицер Центрального Комадования
 
 job-name-cburn-agent = агент РХБЗ
-job-name-cc-srt-operative = оперативник ГСН
+job-name-cc-srt-operative = оперативник Группы Специального Назначения
 job-name-ert-commander = лидер отряда ОБР
 job-name-ert-chaplain = священник ОБР
 
