@@ -517,7 +517,7 @@
 
 #! Сервис (Начало)
 
-  # Ведущий сервисный работник (Начало)
+  # Сервисный администратор (Начало)
 - type: loadoutGroup
   id: HatSeniorService
   name: loadout-group-senior-service-head
@@ -531,7 +531,7 @@
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
-  # Ведущий сервисный работник (Конец)
+  # Сервисный администратор (Конец)
 
   # Шеф-повар (Начало)
 - type: loadoutGroup
@@ -616,6 +616,14 @@
   - ShoesColorPurple
   - JanitorGaloshes
   - JanitorOrangeShoes
+  - JanitorJRShoes
+
+- type: loadoutGroup
+  id: JanitorBelt
+  name: loadout-group-janitor-belt
+  loadouts:
+  - JanitorBaseBelt
+  - JanitorJRBelt #SS220-JRBelt
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)

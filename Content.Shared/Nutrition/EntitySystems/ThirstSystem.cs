@@ -9,6 +9,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis; // SS220 Thirst hud and hunger hud fix
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -39,9 +40,16 @@ public sealed class ThirstSystem : EntitySystem
     {
         base.Initialize();
 
-        DebugTools.Assert(_prototype.TryIndex(ThirstIconOverhydratedId, out _thirstIconOverhydrated) &&
+        // SS220 Thirst hud and hunger hud fix begin
+        //DebugTools.Assert(_prototype.TryIndex(ThirstIconOverhydratedId, out _thirstIconOverhydrated) &&
+        //                  _prototype.TryIndex(ThirstIconThirstyId, out _thirstIconThirsty) &&
+        //                  _prototype.TryIndex(ThirstIconParchedId, out _thirstIconParched));
+
+        var trySetPrototypes = _prototype.TryIndex(ThirstIconOverhydratedId, out _thirstIconOverhydrated) &&
                           _prototype.TryIndex(ThirstIconThirstyId, out _thirstIconThirsty) &&
-                          _prototype.TryIndex(ThirstIconParchedId, out _thirstIconParched));
+                          _prototype.TryIndex(ThirstIconParchedId, out _thirstIconParched);
+        DebugTools.Assert(trySetPrototypes);
+        // SS220 Thirst hud and hunger hud fix end
 
         SubscribeLocalEvent<ThirstComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<ThirstComponent, MapInitEvent>(OnMapInit);
@@ -128,26 +136,32 @@ public sealed class ThirstSystem : EntitySystem
         }
     }
 
-    public bool TryGetStatusIconPrototype(ThirstComponent component, out SatiationIconPrototype? prototype)
+    public bool TryGetStatusIconPrototype(ThirstComponent component, [NotNullWhen(true)] out SatiationIconPrototype? prototype) // SS220 Added attribute [NotNullWhen(true)]
     {
         switch (component.CurrentThirstThreshold)
         {
             case ThirstThreshold.OverHydrated:
                 prototype = _thirstIconOverhydrated;
-                return true;
+                //return true; // SS220 Thirst hud and hunger hud fix begin
+                break; // SS220 Thirst hud and hunger hud fix end
 
             case ThirstThreshold.Thirsty:
                 prototype = _thirstIconThirsty;
-                return true;
+                //return true; // SS220 Thirst hud and hunger hud fix begin
+                break; // SS220 Thirst hud and hunger hud fix end
 
             case ThirstThreshold.Parched:
                 prototype = _thirstIconParched;
-                return true;
+                //return true; // SS220 Thirst hud and hunger hud fix begin
+                break; // SS220 Thirst hud and hunger hud fix end
 
             default:
                 prototype = null;
-                return false;
+                //return false; // SS220 Thirst hud and hunger hud fix begin
+                break; // SS220 Thirst hud and hunger hud fix end
         }
+
+        return prototype != null; // SS220 Thirst hud and hunger hud fix fix
     }
 
     private void UpdateEffects(EntityUid uid, ThirstComponent component)

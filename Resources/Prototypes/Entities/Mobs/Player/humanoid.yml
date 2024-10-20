@@ -33,6 +33,11 @@
 
 - type: randomHumanoidSettings
   id: DeathSquad
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -70,6 +75,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeader
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -105,6 +111,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -128,6 +135,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeaderEVA
   components:
     - type: GhostRole
@@ -161,6 +169,7 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplain
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
     - type: BibleUser
@@ -193,6 +202,7 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplainEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTChaplain
   components:
     - type: GhostRole
@@ -227,6 +237,7 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitor
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -261,6 +272,7 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitorEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTJanitor
   components:
     - type: GhostRole
@@ -294,6 +306,7 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineer
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -328,6 +341,7 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineerEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTEngineer
   components:
     - type: GhostRole
@@ -361,6 +375,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurity
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -395,6 +410,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTSecurity
   components:
     - type: GhostRole
@@ -418,6 +434,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVALecter
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTSecurityEVA
   components:
     - type: GhostRole
@@ -451,6 +468,7 @@
 
 - type: randomHumanoidSettings
   id: ERTMedical
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -485,6 +503,7 @@
 
 - type: randomHumanoidSettings
   id: ERTMedicalEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTMedical
   components:
     - type: GhostRole
@@ -513,6 +532,7 @@
 
 - type: randomHumanoidSettings
   id: CBURNAgent
+  speciesBlacklist: [ Diona, Skeleton, Vox,  Moth, Felinid] #SS220-centcom-human-preset-fix
   parent: EventHumanoidMindShielded
   components:
     - type: Loadout
@@ -547,6 +567,11 @@
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   parent: EventHumanoidMindShielded
   components:
     - type: GhostRole
@@ -594,6 +619,11 @@
 
 - type: randomHumanoidSettings
   id: NukeOp
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   components:
     - type: RandomHumanoidAppearance
       randomizeName: false

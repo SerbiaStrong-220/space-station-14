@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 16
+        Piercing: 20 #ss220lowTTKUpdate
 
 - type: entity
   id: BulletPistolPractice
@@ -29,8 +29,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 14 #weaponBalance
-        Heat: 2 #weaponBalance
+        Blunt: 16 #ss220weaponBalance
+        Heat: 2 #ss220weaponBalance
 
 - type: entity
   id: BulletPistolUranium
@@ -42,4 +42,4 @@
     damage:
       types:
         Radiation: 6
-        Piercing: 10
+        Piercing: 14 #ss220lowTTKUpdate

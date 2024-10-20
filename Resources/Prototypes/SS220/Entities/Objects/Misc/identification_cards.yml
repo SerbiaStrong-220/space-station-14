@@ -8,7 +8,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
   - type: IdCard
-    jobTitle: СССП
+    jobTitle: job-name-ussp #SS220 (upstream 65 localization)
   - type: Sprite
     layers:
     - state: ussp
@@ -37,7 +37,7 @@
     - state: silver
     - state: idcentcom
     - type: IdCard
-      jobTitle: Дипломат NanoTrasen
+      jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
@@ -50,7 +50,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Полевой Офицер ЦК
+      jobTitle: job-name-cc-operational-oficier #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
@@ -63,7 +63,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Офицер ЦК
+      jobTitle: job-name-cc-oficier #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
@@ -76,7 +76,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Оперативник ГСН
+      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
@@ -118,7 +118,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Адмирал NanoTrasen
+      jobTitle: job-name-nt-admiral #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
@@ -142,7 +142,7 @@
   name: prisoner ID card
   components:
     - type: IdCard
-      jobTitle: Заключённый
+      jobTitle: job-name-prisoner #SS220 (upstream 65 localization)
     - type: Sprite
       layers:
         - state: orange

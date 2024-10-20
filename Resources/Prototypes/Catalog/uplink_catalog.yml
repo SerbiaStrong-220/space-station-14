@@ -977,7 +977,7 @@
   discountDownTo:
     Telecrystal: 2
   cost:
-    Telecrystal: 4
+    Telecrystal: 3
   categories:
   - UplinkDisruption
 
@@ -1704,7 +1704,8 @@
   id: UplinkClothingOuterArmorRaid
   name: uplink-syndie-raid-name
   description: uplink-syndie-raid-desc
-  icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
+  # icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon } #ss220 raid suit resprite
   productEntity: ClothingBackpackDuffelSyndicateRaidBundle
   cost:
     Telecrystal: 8

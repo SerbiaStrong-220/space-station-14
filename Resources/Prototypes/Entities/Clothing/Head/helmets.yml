@@ -384,9 +384,11 @@
   description: An armored helmet for use with the syndicate raid suit. Very stylish.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/syndie-raid.rsi
+    # sprite: Clothing/Head/Helmets/syndie-raid.rsi #ss220 raid suit resprite
+    sprite: SS220/Clothing/Head/Helmets/syndie-raid-helmet.rsi #ss220 raid suit resprite
   - type: Clothing
-    sprite: Clothing/Head/Helmets/syndie-raid.rsi
+    # sprite: Clothing/Head/Helmets/syndie-raid.rsi #ss220 raid suit resprite
+    sprite: SS220/Clothing/Head/Helmets/syndie-raid-helmet.rsi #ss220 raid suit resprite
   - type: Armor
     modifiers: #There's gotta be SOME reason to use this over other helmets.
       coefficients:

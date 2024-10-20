@@ -108,6 +108,16 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
+    #ss220lowTTKUpdate
+  - type: Reflect
+    reflectProb: 0.75
+    reflects:
+      - NonEnergy
+      - Energy #SS220-FixReflects
+    spread: 80
+    reflectProbProjectile: 0.60
+    spreadProjectile: 180
+    #ss220lowTTKUpdate
 
 - type: entity
   name: energy dagger
@@ -384,7 +394,7 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
-    reflectProbProjectile: 0.5
+    reflectProbProjectile: 0.8 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
 

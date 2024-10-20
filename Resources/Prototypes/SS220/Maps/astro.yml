@@ -2,7 +2,7 @@
 
 - type: gameMap
   id: Astro
-  mapName: 'NTJRSS Astro'
+  mapName: 'JSS Astro'
   mapPath: /Maps/SS220/astro.yml
   minPlayers: 0
   stations:
@@ -21,10 +21,12 @@
             Passenger: [ -1, -1 ]
             #Command
             Captain: [ 1, 1 ]
-            IAA: [ 1, 1 ]
-            Magistrate: [1, 1]
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
+            #Law
+            IAA: [ 1, 1 ]
+            Magistrate: [1, 1]
+            Lawyer: [ 3, 3 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
@@ -70,7 +72,6 @@
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
             ServiceWorker: [ 2, 2 ]
-            Lawyer: [ 3, 3 ]
             Zookeeper: [ 1, 1 ]
             SeniorService: [ 1, 1 ]
             Boxer: [ 2, 2]

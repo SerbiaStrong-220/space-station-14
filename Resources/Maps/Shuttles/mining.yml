@@ -524,6 +524,7 @@ entities:
       type: GridAtmosphere
     - type: OccluderTree
     - type: Shuttle
+      fTLCooldown: 180 # SS220 FTL COOLDOWN UPDATE
     - type: RadiationGridResistance
     - type: SpreaderGrid
     - shakeTimes: 10

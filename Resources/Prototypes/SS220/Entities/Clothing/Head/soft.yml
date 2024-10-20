@@ -1,0 +1,17 @@
+# Уборщик
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatJanitorJR
+  name: Green work cap 
+  description: Stylish JR baseball cap in eco-friendly green color. It looks professional.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Soft/janitor_jr_soft.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Soft/janitor_jr_soft.rsi
+
+- type: entity
+  parent: [ClothingHeadHatGreensoftFlipped, ClothingHeadHeadHatBaseFlippable]
+  id: ClothingHeadHatJanitorJRFlipped
+  name: Green work cap

@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 35
+        Piercing: 40 #ss220lowTTKUpdate
 
 - type: entity
   id: BulletMagnumPractice
@@ -29,8 +29,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 32 #weaponBalance
-        Heat: 3 #weaponBalance
+        Blunt: 38 #ss220weaponBalance
+        Heat: 3 #ss220weaponBalance
 
 - type: entity
   id: BulletMagnumAP
@@ -41,7 +41,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 26 # 20% decrease
+        Piercing: 32 # 20% decrease #ss220lowTTKUpdate
     ignoreResistances: true
 
 - type: entity
@@ -54,4 +54,4 @@
     damage:
       types:
         Radiation: 15
-        Piercing: 20
+        Piercing: 26 #ss220lowTTKUpdate
