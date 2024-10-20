@@ -21,6 +21,7 @@
 #    shoes: ClothingShoesGaloshes #SS220-OrangeJanitor
     id: JanitorPDA
     ears: ClothingHeadsetService
+#    belt: ClothingBeltJanitorFilled #SS220-JRJanitor
   #storage:
     #back:
     #- Stuff
