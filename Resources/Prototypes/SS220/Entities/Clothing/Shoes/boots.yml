@@ -15,7 +15,7 @@
   id: ClothingShoesBootsDruid #SS220 druid loadout
   name: druid spanks
   description: Druid spanks made from natural materials.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
@@ -46,7 +46,7 @@
   id: ClothingShoesBootsBard #SS220 bard loadout
   name: bard shoes
   description: Shoes for true music lovers!
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi

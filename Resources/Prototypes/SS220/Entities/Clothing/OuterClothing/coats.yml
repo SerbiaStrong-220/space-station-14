@@ -114,7 +114,7 @@
   id: ClothingOuterCoatHoPPurpleDress
   name: purple dress
   description: The robe of a real smug snake.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
@@ -145,7 +145,7 @@
   id: ClothingOuterCoatQMWarehouseman
   name: the warehouse manager's coat
   description: A coat that perfectly combines a mature style and a working purpose. In fact, it is your old work coat, which is still intact only thanks to the use of durotan and cigarette ash, which has already eaten into the fabric. You've never understood people putting on layers of clothes over coats.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi

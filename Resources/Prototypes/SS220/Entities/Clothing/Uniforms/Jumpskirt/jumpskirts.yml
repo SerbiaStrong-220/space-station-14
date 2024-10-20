@@ -141,7 +141,7 @@
   id: ClothingUniformJumpskirtFeldsher
   name: uniform feldsher
   description: Just don't be offended, are you a feldsher or a real doctor?
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
@@ -154,7 +154,7 @@
   id: ClothingUniformJumpskirtMilitaryFeldsher
   name: uniform military feldsher
   description: This is not a red color at all..
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
@@ -170,7 +170,7 @@
   id: ClothingUniformJumpskirtChiefEngineerDark
   name: dark uniform chief engineer
   description: Dark uniform for years of service as head of the engineering department.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
@@ -182,7 +182,7 @@
   id: ClothingUniformJumpskirtChiefEngineerTurtleDark
   name: dark chief engineer's turtleneck
   description: Dark turtleneck designed specifically for work in conditions of the engineering department.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi

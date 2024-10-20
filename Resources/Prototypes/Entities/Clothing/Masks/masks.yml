@@ -579,7 +579,7 @@
   id: ClothingMaskNeckGaiter
   name: neck gaiter
   description: Stylish neck gaiter for your neck, can protect from the cosmic wind?...
-  suffix: За время в игре #SS220-add-time-loadout-suffix
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Mask/neckgaiter.rsi
@@ -591,15 +591,23 @@
     tags:
     - WhitelistChameleon
 
+#SS220-add-time-suffix-loadout-begin
 - type: entity
-  parent: ClothingMaskNeckGaiter
+  parent: ClothingMaskBase
   id: ClothingMaskNeckGaiterRed
   name: red neck gaiter
+  description: Stylish neck gaiter for your neck, can protect from the cosmic wind?...
   components:
   - type: Sprite
     sprite: Clothing/Mask/neckgaiterred.rsi
   - type: Clothing
     sprite: Clothing/Mask/neckgaiterred.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+#SS220-add-time-suffix-loadout-end
 
 - type: entity
   parent: ClothingMaskClownBase

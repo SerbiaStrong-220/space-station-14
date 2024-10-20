@@ -129,7 +129,7 @@
   id: ClothingBeltCutlassSheath
   name: officer's cutlass sheath
   description: The sheath of an officer's cutlass. Protects the cutlass from you, and you from the sea.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/cutlass_sheath.rsi
@@ -163,7 +163,7 @@
   id: ClothingBeltPlantDruid #SS220 druid loadout
   name: druid belt
   description: A belt that helps researchers unlock the mysteries of alien flora.
-  suffix: Заполненный, За время в игре
+  suffix: Filled, For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/druid_belt.rsi
