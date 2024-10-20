@@ -2,8 +2,8 @@ job-name-magistrate = магистрат
 
 job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
-job-name-cc-oficier = офицер Центрального Командования
-job-name-cc-operational-oficier = полевой Офицер Центрального Комадования
+job-name-cc-oficier = офицер ЦК
+job-name-cc-operational-oficier = полевой Офицер ЦК
 
 job-name-cburn-agent = агент РХБЗ
 job-name-cc-srt-operative = оперативник Группы Специального Назначения
