@@ -399,6 +399,7 @@
       components:
         - LightReplacer
         - SmokeOnTrigger
+    maxItemSize: Large
   - type: Appearance  
 
 - type: entity
