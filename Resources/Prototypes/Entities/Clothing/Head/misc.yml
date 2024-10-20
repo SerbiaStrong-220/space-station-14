@@ -91,6 +91,7 @@
   id: ClothingHeadMirror
   name: head mirror
   description: I doubt even the CMO knows how to use this thing.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Head/Misc/head_mirror.rsi

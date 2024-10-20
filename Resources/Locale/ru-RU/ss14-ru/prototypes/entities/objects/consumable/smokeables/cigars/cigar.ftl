@@ -5,6 +5,7 @@ ent-CigarSpent = { ent-Cigar }
     .desc = { ent-Cigar.desc }
 ent-CigarGold = премиум Гаванская сигара
     .desc = Сигара, предназначенная только для лучших из лучших.
+    .suffix = За время в игре
 ent-CigarGoldSpent = { ent-CigarGold }
     .suffix = Окурок
     .desc = { ent-CigarGold.desc }

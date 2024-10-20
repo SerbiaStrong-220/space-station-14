@@ -647,6 +647,7 @@
   id: ClothingUniformJumpskirtOfLife
   name: skirt of life
   description: A skirt that symbolizes the joy and positivity of our life.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
     - type: Sprite
       sprite: Clothing/Uniforms/Jumpskirt/skirtoflife.rsi
@@ -691,6 +692,7 @@
   id: ClothingUniformJumpskirtSeniorOfficer
   name: senior officer jumpskirt
   description: A sign of skill and prestige within the security department.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/senior_officer.rsi

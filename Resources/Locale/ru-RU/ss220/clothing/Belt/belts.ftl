@@ -1,4 +1,5 @@
 ent-ClothingBeltPlantDruid = пояс друида
+    .suffix = Заполненный, За время в игре
     .desc = Пояс, который помогает исследователям раскрывать тайны инопланетной флоры.
 ent-ClothingBeltJanitorJR = РПС уборщика
     .suffix = JR, За время в игре

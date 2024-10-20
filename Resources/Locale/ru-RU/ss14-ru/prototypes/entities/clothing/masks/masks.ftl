@@ -66,6 +66,7 @@ ent-ClothingMaskBat = маска летучей мыши
     .desc = Кровопийца ночью, и милый, слепой зверёк днём..
 ent-ClothingMaskNeckGaiter = шейный гетр
     .desc = Стильный гетр, способный защитить от космического ветра?...
+    .suffix = За время в игре
 ent-ClothingMaskNeckGaiterRed = красный шейный гетр
     .desc = { ent-ClothingMaskNeckGaiter.desc }
 ent-ClothingMaskSexyClown = сексуальная маска клоуна

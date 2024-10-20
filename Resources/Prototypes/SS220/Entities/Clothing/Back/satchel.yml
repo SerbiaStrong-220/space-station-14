@@ -5,6 +5,7 @@
   id: ClothingBackpackWhiteSatchelCaptain
   name: белая сумка капитана
   description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi

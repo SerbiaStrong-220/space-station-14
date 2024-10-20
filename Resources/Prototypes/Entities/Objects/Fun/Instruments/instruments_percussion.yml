@@ -133,6 +133,7 @@
   id: SuperSynthesizerInstrument
   name: super synthesizer
   description: Blasting the ghetto with Touhou MIDIs since 2020.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Instrument
     allowPercussion: true

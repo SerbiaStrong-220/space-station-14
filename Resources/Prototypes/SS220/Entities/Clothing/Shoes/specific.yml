@@ -17,7 +17,7 @@
   id: ClothingShoesOrangeGaloshes
   name: оранжевые галоши
   description: Оранжевые резиновые ботинки.
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
@@ -244,6 +244,7 @@
   id: ClothingShoesClownPennywise
   name: dance clown shoes
   description: "Their elegance can cause genuine laughter."
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi

@@ -53,6 +53,7 @@
   id: ClothingBackpackIan
   name: Ian's backpack
   description: Sometimes he wears it.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Back/Backpacks/ian.rsi

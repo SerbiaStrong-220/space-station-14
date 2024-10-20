@@ -3,6 +3,7 @@
   id: ClothingNeckMantleCap
   name: captain's mantle
   description: A formal mantle to drape around the shoulders. Others stand on the shoulders of giants. You're the giant they stand on.  # Corvax-Resprite
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/capmantle.rsi
@@ -14,6 +15,7 @@
   id: ClothingNeckMantleCE
   name: chief engineer's mantle
   description: A bright white and yellow striped mantle. Do not wear around active machinery.  # Corvax-Resprite
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/cemantle.rsi
@@ -25,6 +27,7 @@
   id: ClothingNeckMantleCMO
   name: chief medical officer's mantle
   description: A light blue shoulder draping for THE medical professional. Contrasts well with blood.  # Corvax-Resprite
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/cmomantle.rsi
@@ -36,6 +39,7 @@
   id: ClothingNeckMantleHOP
   name: head of personnel's mantle
   description: A decorative draping of blue and red over your shoulders, signifying your stamping prowess.  # Corvax-Resprite
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/hopmantle.rsi
@@ -47,6 +51,7 @@
   id: ClothingNeckMantleHOS
   name: head of security's mantle
   description: A plated mantle that one might wrap around the upper torso. The 'scales' of the garment signify the members of security and how you're carrying them on your shoulders.  # Corvax-Resprite
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/hosmantle.rsi
@@ -69,6 +74,7 @@
   id: ClothingNeckMantleRD
   name: research director's mantle
   description: A terribly comfortable shoulder draping for the discerning scientist of fashion.  # Corvax-Resprite
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/rdmantle.rsi
@@ -80,6 +86,7 @@
   id: ClothingNeckMantleQM
   name: quartermaster's mantle
   description: For the master of goods and materials to rule over the department, a befitting mantle to show off superiority!
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/qmmantle.rsi
@@ -91,6 +98,7 @@
   id: ClothingNeckMantle
   name: mantle
   description: A soft mantle, made with the same 'synthetic' animal furs of the iconic winter coat.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/mantle.rsi
