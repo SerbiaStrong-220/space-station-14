@@ -34,7 +34,7 @@
 
 - type: job
   id: CentCommNanoTrasenDiplomat
-  name: job-name-centcomoff
+  name: job-name-nt-politician
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentCommNanoTrasenDiplomatGear

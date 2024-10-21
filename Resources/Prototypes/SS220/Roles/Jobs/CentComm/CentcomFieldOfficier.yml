@@ -34,7 +34,7 @@
 
 - type: job
   id: CentcomFieldOfficer
-  name: job-name-centcomoff
+  name: job-name-cc-operational-oficier
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomFieldOfficerGear
