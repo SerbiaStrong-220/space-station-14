@@ -695,7 +695,7 @@
   - type: CommunicationsConsole
     title: comms-console-announcement-title-nukie
     color: "#ff0000"
-    canShuttle: false
+    canShuttle: true # ss220 nukies recall fix. # DO NOT ESCAPE, BEFORE WE ARRIVE, COWARDS!!
     global: true #announce to everyone they're about to fuck shit up
     sound: /Audio/Announcements/war.ogg
   - type: Computer
