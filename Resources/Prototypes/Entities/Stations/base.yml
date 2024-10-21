@@ -66,15 +66,17 @@
           maxCount: 2
           stationGrid: false
           paths:
-          - /Maps/Ruins/chunked_tcomms.yml
+          # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/biodome_satellite.yml
           - /Maps/Ruins/derelict.yml
           - /Maps/Ruins/djstation.yml
-          - /Maps/Ruins/empty_flagship.yml
+          # - /Maps/Ruins/empty_flagship.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/old_ai_sat.yml
           - /Maps/Ruins/syndicate_dropship.yml
-          - /Maps/Ruins/whiteship_ancient.yml
-          - /Maps/Ruins/whiteship_bluespacejumper.yml
+          # - /Maps/Ruins/whiteship_ancient.yml # SS220 Removed with Ruins Update (balance Tweak)
+          # - /Maps/Ruins/whiteship_bluespacejumper.yml # SS220 Removed with Ruins Update (balance Tweak)
+          - /Maps/SS220/Ruins/Arena_SS220.yml # SS220 Ruins Update
+          - /Maps/SS220/Ruins/Broadaxe_SS220.yml # SS220 Ruins Update
         vgroid: !type:DungeonSpawnGroup
           minimumDistance: 300
           maximumDistance: 350
