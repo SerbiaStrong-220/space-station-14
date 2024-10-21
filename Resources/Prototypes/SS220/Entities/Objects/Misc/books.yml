@@ -1,0 +1,12 @@
+- type: entity
+  id: BookSpaceLaws
+  parent: BaseGuidebook
+  name: космический закон
+  description: Единственное законодательство, которое использует NanoTrasen на территориях станций.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/books.rsi
+    state: space_law
+  - type: GuideHelp
+    guides:
+    - SS220SpaceLaw
