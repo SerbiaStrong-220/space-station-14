@@ -29,8 +29,9 @@
   id: ClothingEyesHudOmniversal
   name: omniversal hud
   description: A secret development for very secretive individuals.
-  suffix: Sec-med-chem
+  suffix: Shitspawn, Sec-med-chem-termal
   components:
+  - type: ThermalVisionClothing
   - type: Sprite
     sprite: SS220/Clothing/Eyes/omni_hud.rsi
   - type: Clothing

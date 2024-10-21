@@ -55,3 +55,18 @@
   - Revolutionary
 
 # ss220 spider queen end
+
+# Death Squad
+- type: npcFaction
+  id: DeathSquad
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Xeno
+  - Passive
+  - PetsNT
+  - Mouse
+  - Zombie
+  - Revolutionary
+  - SpiderQueen
+  - SimpleHostile

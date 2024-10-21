@@ -47,7 +47,7 @@
   description: A graceful and elegant weapon that is the perfect choice for those who prefer a sophisticated style during combat.
   suffix: 27 piercing
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/cane_blade.ogg
       params:
@@ -106,3 +106,48 @@
   - type: Tag
     tags:
     - OfficerCutlass
+
+# Цепная меч-пила
+- type: entity
+  parent: BaseItem
+  id: Chainsword #todo Хуйня, переделать.
+  name: chainsword
+  description: Technology and ultra-violence in one bottle!
+  suffix: Death Squad
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/chainsaw.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
+  - type: Sharp
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/chainsword.rsi
+    state: icon
+  - type: MeleeWeapon
+    autoAttack: true
+    wideAnimationRotation: -135
+    attackRate: 4
+    damage:
+      types:
+          Slash: 30
+          Blunt: 20
+          Structural: 170
+    soundHit:
+      path: /Audio/Weapons/chainsaw.ogg
+      params:
+        volume: -3
+  - type: Item
+    size: Small
+    sprite: SS220/Objects/Weapons/Melee/chainsword.rsi
+  - type: Appearance
+  - type: DisarmMalus
+    malus: 0
+  - type: Reflect
+  #todo
+  # - type: Clothing
+  #   sprite: SS220/Objects/Weapons/Melee/chainsword.rsi
+  #   quickEquip: false
+  #   slots:
+  #   - Back
+  #   - suitStorage

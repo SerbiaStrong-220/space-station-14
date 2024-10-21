@@ -272,6 +272,12 @@
       "name": "deathsquad_door"
     },
     {
+      "name": "deathsquadcommander_door"
+    },
+    {
+      "name": "deathsquadspecialist_door"
+    },
+    {
       "name": "detective_wardrobe_door"
     },
     {

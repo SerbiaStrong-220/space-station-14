@@ -994,16 +994,35 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.1 #best armor in the game
-        Slash: 0.1
-        Piercing: 0.1
-        Heat: 0.1
+  #SS220-Deathsquad-Update-Begin
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.2
+        Heat: 0.3
         Radiation: 0.1
         Stamina: 0.1
         Caustic: 0.1
+  #SS220-Deathsquad-Update-End
   - type: ClothingSpeedModifier
     walkModifier: 1.0
-    sprintModifier: 1.0
+    sprintModifier: 1.2 #SS220-Deathsquad-Update
+  #SS220-Deathsquad-Update-Begin
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      volume: 20
+      moles:
+        - 10.451303391 # 22% oxygen
+        - 11.600075659 # 78% nitrogen
+        # 32.051379050 total = ~60 min
+      temperature: 293.15
+    tankLowPressure: 30.0
+  - type: PointLight
+    color: SkyBlue
+    radius: 1.5
+    energy: 0.3
+    netsync: false
+  #SS220-Deathsquad-Update-End
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitDeathsquad
