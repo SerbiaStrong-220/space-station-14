@@ -13,6 +13,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.SS220.Irremovable;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -447,6 +448,13 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
             button.Blocked = false;
             button.StorageButton.Visible = showStorage;
         }
+        //ss220 irremovable begin
+        if (_entities.TryGetComponent(entity, out IrremovableComponent? _))
+        {
+            button.SetEntity(entity);
+            button.Irremovable = true;
+        }
+        //ss220 irremovable end
     }
 
     public bool RegisterSlotGroupContainer(ItemSlotButtonContainer slotContainer)

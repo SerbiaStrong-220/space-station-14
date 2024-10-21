@@ -1,0 +1,31 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                     Title="{Loc 'cult-yogg-migo-erect-menu-title'}"
+                     MinSize="200 300"
+                     SetSize="340 515">
+    <BoxContainer Orientation="Vertical" Margin="10 10 10 10">
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Button Name="EraseButton" ToggleMode="True" Text="{Loc 'cult-yogg-migo-erect-menu-erase-button'}" />
+        </BoxContainer>
+        <Control Margin="0 10 0 0" HorizontalExpand="True" VerticalExpand="True" >
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+            <ScrollContainer
+                Name="ItemsScrollContainer"
+                MinSize="130 130"
+                HScrollEnabled="False"
+                HorizontalExpand="True"
+                VerticalExpand="True">
+                <GridContainer Name="ItemsContainer" Margin="10 10 10 10" HorizontalAlignment="Center">
+
+                </GridContainer>
+            </ScrollContainer>
+        </Control>
+    </BoxContainer>
+</controls:FancyWindow>

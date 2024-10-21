@@ -1,0 +1,126 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Cultists actions
+- type: entity
+  id: ActionCultYoggCorruptItem
+  name: Преобразовать предмет через прикосновение
+  description: Исказить предмет даровав ему форму заложенную создателем.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    event: !type:CultYoggCorruptItemEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: touch}
+    useDelay: 15
+
+- type: entity
+  id: ActionCultYoggCorruptItemInHand
+  name: Преобразовать предмет в руках
+  description: Исказить предмет даровав ему форму заложенную создателем.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 15
+    event: !type:CultYoggCorruptItemInHandEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: corrupt}
+
+- type: entity
+  id: ActionCultYoggPukeShroom
+  name: Извергнуть
+  description: Извергнуть выращенный в желудке гриб.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 60
+    event: !type:CultYoggPukeShroomEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migopuke}
+    checkCanInteract: false
+
+- type: entity
+  id: ActionCultYoggDigest
+  name: Микоз
+  description: Отдать часть калорий, чтобы переварить новый гриб
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 600
+    event: !type:CultYoggDigestEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: IconMycosis}
+    checkCanInteract: false
+
+- type: entity
+  id: ActionCultYoggAscending
+  name: Возвышение
+  description: Проявить свою истинную сущность.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 30
+    event: !type:CultYoggAscendingEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: qwert2}
+
+#Mi'Go actions
+- type: entity
+  id: ActionMiGoEnslavement
+  name: Порабощение
+  description: Ввергни плоть в реки ваших мыслей и чувств.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    useDelay: 15
+    event: !type:MiGoEnslavementEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: enslavement }
+
+- type: entity
+  id: ActionMiGoHeal
+  name: Исцеление
+  description: Ускорьте процессы восстановления прислужника.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    useDelay: 15
+    event: !type:MiGoHealEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: heal}
+
+- type: entity
+  id: ActionMiGoAstral
+  name: Выход в астрал
+  description: Войдите в междумирье.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 15
+    event: !type:MiGoAstralEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migoastral}
+
+
+- type: entity
+  id: ActionMiGoErect
+  name: Воздвигнуть
+  description: Воплотите основание великих алтарей.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 15
+    event: !type:MiGoErectEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: build}
+
+- type: entity
+  id: ActionMiGoSacrifice
+  name: Призыв
+  description: Принестите жертву и призовите своего хозяина.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 15
+    event: !type:MiGoSacrificeEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}

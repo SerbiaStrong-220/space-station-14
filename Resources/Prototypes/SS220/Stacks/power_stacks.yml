@@ -1,0 +1,20 @@
+﻿- type: stack
+  id: Cablelive
+  name: живые корни (ЛВ)
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coillv-30 }
+  spawn: CableApcStack1Live
+  maxCount: 30
+
+- type: stack
+  id: CableMVlive
+  name: живые корни (СВ)
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coilmv-30 }
+  spawn: CableMVStack1Live
+  maxCount: 30
+
+- type: stack
+  id: CableHVlive
+  name: живые корни (ВВ)
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coilhv-30 }
+  spawn: CableHVStack1Live
+  maxCount: 30

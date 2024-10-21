@@ -1,0 +1,115 @@
+- type: entity
+  name: horn cult yogg
+  parent: BaseItem
+  id: HornCultYogg
+  components:
+    - type: Irremovable
+      inHandItem: true
+    - type: Gun
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
+      soundEmpty: null
+      fireRate: 20
+      projectileSpeed: 5
+    - type: BasicEntityAmmoProvider
+      proto: HornGunBullet
+      capacity: 1
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/cult_yogg_horn.rsi
+      layers:
+        - state: icon
+    - type: Appearance
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 10
+    - type: Wieldable
+    - type: IncreaseDamageOnWield
+      damage:
+       types:
+          Brute: 30
+          Stamina: 80
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_empty"}
+            True: {state: "icon"}
+    - type: GunByHasAmmoVisuals
+      spriteLayer: null
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+
+- type: entity
+  name: tesla gun lightning
+  id: HornGunBullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Sprite
+    sprite: Structures/Power/Generation/Tesla/energy_miniball.rsi
+    layers:
+    - state: tesla_projectile
+      shader: unshaded
+  - type: EmbeddableProjectile
+  - type: Projectile
+    deleteOnCollide: false
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: SpawnOnDespawn
+    prototype: HornExplotionPart
+
+- type: entity
+  parent: CollideRune
+  id: HornExplotionPart
+  name: HornExplotionPart
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Explosive
+      explosionType: Default
+      maxIntensity: 3.4
+      intensitySlope: 3
+      totalIntensity: 20
+      canCreateVacuum: false
+    - type: TriggerOnSpawn
+    - type: FlashOnTrigger
+      range: 7
+    - type: Sprite
+      sprite: Structures/Magic/Cult/trap.rsi
+      layers:
+        - state: trap
+          color: '#FF770055'
+    - type: TwoStageTrigger
+      triggerDelay: 0.5
+      components:
+        - type: AmbientSound
+          enabled: true
+          volume: -5
+          range: 14
+          sound:
+            path: /Audio/Effects/Grenades/Supermatter/whitehole_loop.ogg
+        - type: GravityWell
+          maxRange: 7
+          baseRadialAcceleration: -10
+          baseTangentialAcceleration: -5
+          gravPulsePeriod: 0.1
+        - type: SingularityDistortion
+          intensity: -10
+          falloffPower: 1.5
+        - type: PointLight
+          enabled: true
+          color: "#ffffff"
+          energy: 8
+          radius: 6
+          softness: 1
+          offset: "0, 0"
+        - type: ExplodeOnTrigger
+        - type: SoundOnTrigger
+          sound:
+            path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
+            params:
+              volume: 15

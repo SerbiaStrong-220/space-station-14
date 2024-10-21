@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -18,7 +18,7 @@ public sealed partial class TelepathyComponent : Component
     public string TelepathyChannelPrototype;
 }
 
-public sealed partial class TelepathySendEvent : InstantActionEvent
+public sealed partial class TelepathySendEvent : InstantActionEvent //ToDo consult with somebody about "InstantActionEvent" - part
 {
     public string Message { get; init; }
 

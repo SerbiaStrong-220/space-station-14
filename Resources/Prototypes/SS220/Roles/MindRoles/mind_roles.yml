@@ -25,3 +25,12 @@
   - type: MindRole
     antagPrototype: MindSlave
   - type: MindSlaveRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleCultYogg
+  name: Cult Yogg Role
+  components:
+  - type: MindRole
+    antagPrototype: CultYogg
+  - type: MindSlaveRole

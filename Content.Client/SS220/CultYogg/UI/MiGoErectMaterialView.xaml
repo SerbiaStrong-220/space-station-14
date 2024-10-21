@@ -1,0 +1,6 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<mycontrols:MiGoErectMaterialView xmlns="https://spacestation14.io"
+             xmlns:mycontrols="clr-namespace:Content.Client.SS220.CultYogg.UI">
+    <AnimatedTextureRect Name="ItemView" />
+    <Label Name="CountLabel" VerticalAlignment="Stretch" Align="Right" VAlign="Bottom" Margin="0 0 -4 -4" />
+</mycontrols:MiGoErectMaterialView>

@@ -1,0 +1,84 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: Ми-Го
+  parent: SimpleSpaceMobBase
+  description: Дитя темного бога
+  id: MiGoCultYogg
+  components:
+  #cultists comps
+  - type: MiGo
+  - type: Hands #For UI opening only
+  - type: ComplexInteraction #For UI opening only
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+  - type: RandomMetadata
+    nameSegments: [ cult_yogg_migo ]
+  - type: UserInterface
+    interfaces:
+      enum.MiGoErectUiKey.Key:
+        type: MiGoErectBoundUserInterface
+  - type: ShowCultYoggIcons
+  - type: NpcFactionMember
+    factions:
+    - CultYogg
+  - type: AntagObjectives
+    objectives:
+    - CultYoggAcsendObjective
+    - CultYoggSacraficeObjective
+  #situational for logic
+  - type: NoSlip
+  - type: Insulated
+  #visual
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/CultYogg/MiGo.rsi
+    layers:
+      - map: [ "enum.MiGoVisual.Base", "enum.DamageStateVisualLayers.Base"]
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Visibility
+    layer: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 6
+    baseSprintSpeed : 6
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+          - FlyingMobMask
+        layer:
+          - FlyingMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      250: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 800
+      behaviors:
+      - !type:GibBehavior { }
+  - type: Stamina
+    critThreshold: 200
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
