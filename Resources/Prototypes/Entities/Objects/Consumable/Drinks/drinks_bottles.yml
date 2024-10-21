@@ -631,7 +631,7 @@
         visible: false
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 5
+    maxFillLevels: 7 #SS220-WaterBottle Resprite
     fillBaseName: icon-
     inHandsMaxFillLevels: 2
     inHandsFillBaseName: -fill-
