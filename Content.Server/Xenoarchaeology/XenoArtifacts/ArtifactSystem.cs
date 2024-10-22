@@ -16,6 +16,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
+using Content.Shared.Throwing; ///ss220-BonusForFullyDiscovered
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts;
 
@@ -27,6 +28,7 @@ public sealed partial class ArtifactSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!; ///ss220-BonusForFullyDiscovered 
 
     public override void Initialize()
     {
@@ -193,6 +195,36 @@ public sealed partial class ArtifactSystem : EntitySystem
             return;
 
         EnterNode(uid, ref newNode, component);
+
+        /// SS220-BonusForFullyDiscovered - start
+
+        var countPassedNode = 0;
+        foreach (var node in component.NodeTree)
+        {
+            if (node.Discovered && node.Triggered)
+                countPassedNode++;
+        }
+
+        if (countPassedNode == component.NodeTree.Count && component.IsBonusNotIssued)
+        {
+            component.IsBonusNotIssued = false;
+
+            if (component.BonusProtype == null)
+                return;
+
+            TrySpawnNextTo(component.BonusProtype[_random.Next(component.BonusProtype.Count - 1)], uid, out var protoEnt);
+
+            if (protoEnt == null)
+                return;
+
+            var xform = Transform((EntityUid)protoEnt);
+            var throwing = xform.LocalRotation.ToWorldVec() * 5f;
+            var direction = xform.Coordinates.Offset(throwing);
+
+            _throwing.TryThrow((EntityUid)protoEnt, direction);
+
+        }
+        /// SS220-BonusForFullyDiscovered - end
     }
 
     private ArtifactNode? GetNewNode(EntityUid uid, ArtifactComponent component)
@@ -296,4 +328,12 @@ public sealed partial class ArtifactSystem : EntitySystem
     {
         return allNodes.First(n => n.Depth == 0);
     }
+
+    /// SS220-BonusForFullyDiscovered - start
+    private void SpawnBonus(EntityUid ent, ArtifactComponent? comp)
+    {
+        Spawn("ClothingBeltChiefEngineer", Transform(ent).Coordinates);
+    }
+
+    /// SS220-BonusForFullyDiscovered - end
 }

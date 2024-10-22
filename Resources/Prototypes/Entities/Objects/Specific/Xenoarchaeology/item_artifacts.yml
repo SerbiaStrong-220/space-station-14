@@ -36,6 +36,9 @@
         restitution: 0.3  # fite me
         friction: 0.2
   - type: Artifact
+    bonusProtype:  # SS220-BonusForFullyDiscovered - start
+    - BlueprintBeltChiefEngineer  
+    - BlueprintSeismicCharge # SS220-BonusForFullyDiscovered - end
   - type: RandomArtifactSprite
     maxSprite: 11
     activationTime: 2.4
