@@ -9,6 +9,15 @@
       role: JobClown
       time: 180000
 
+- type: loadoutEffectGroup
+  id: ClownClassic
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 18000
+
 # Head
 - type: loadout
   id: HeadMuzhik
@@ -82,6 +91,14 @@
     proto: ClownPennywise
   equipment:
     jumpsuit: ClothingUniformJumpsuitClownPennywise
+
+- type: loadout
+  id: ClownJumpsuitClassic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownClassic
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClassicClowns
 
 # Neck
 - type: loadout

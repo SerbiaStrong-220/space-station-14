@@ -531,6 +531,7 @@
   - ClownPennywiseJumpsuit #SS220-Clown-Pennywise
   - JumpsuitMuzhik #SS220-Two Floppa Iteration
   - JumpsuitGold #SS220-Two Floppa Iteration
+  - ClownJumpsuitClassic #SS220-ClassicJumpsuit
 
 - type: loadoutGroup
   id: ClownBackpack
