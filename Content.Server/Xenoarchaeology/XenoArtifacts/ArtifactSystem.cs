@@ -208,21 +208,7 @@ public sealed partial class ArtifactSystem : EntitySystem
         if (countPassedNode == component.NodeTree.Count && component.IsBonusNotIssued)
         {
             component.IsBonusNotIssued = false;
-
-            if (component.BonusProtype == null)
-                return;
-
-            TrySpawnNextTo(component.BonusProtype[_random.Next(component.BonusProtype.Count - 1)], uid, out var protoEnt);
-
-            if (protoEnt == null)
-                return;
-
-            var xform = Transform((EntityUid)protoEnt);
-            var throwing = xform.LocalRotation.ToWorldVec() * 5f;
-            var direction = xform.Coordinates.Offset(throwing);
-
-            _throwing.TryThrow((EntityUid)protoEnt, direction);
-
+            SpawnBonus(uid, component);
         }
         /// SS220-BonusForFullyDiscovered - end
     }
@@ -330,9 +316,23 @@ public sealed partial class ArtifactSystem : EntitySystem
     }
 
     /// SS220-BonusForFullyDiscovered - start
-    private void SpawnBonus(EntityUid ent, ArtifactComponent? comp)
+    private void SpawnBonus(EntityUid uid, ArtifactComponent component)
     {
-        Spawn("ClothingBeltChiefEngineer", Transform(ent).Coordinates);
+        if (component.BonusProtype == null)
+            return;
+
+        TrySpawnNextTo(component.BonusProtype[_random.Next(component.BonusProtype.Count - 1)], uid, out var protoEnt);
+
+        if (protoEnt == null)
+            return;
+
+        var protoUid = (EntityUid)protoEnt;
+
+        var xform = Transform(protoUid);
+        var throwing = xform.LocalRotation.ToWorldVec() * 5f; /// magic number throwing force
+        var direction = xform.Coordinates.Offset(throwing);
+
+        _throwing.TryThrow(protoUid, direction);
     }
 
     /// SS220-BonusForFullyDiscovered - end
