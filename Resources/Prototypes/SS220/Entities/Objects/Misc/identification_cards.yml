@@ -36,14 +36,14 @@
     layers:
     - state: silver
     - state: idcentcom
-    - type: IdCard
-      jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
-    - type: PresetIdCard
-      job: CentCommNanoTrasenDiplomat
+  - type: IdCard
+    jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  - type: PresetIdCard
+    job: CentCommNanoTrasenDiplomat
 
 - type: entity
   parent: CentcomIDCard
