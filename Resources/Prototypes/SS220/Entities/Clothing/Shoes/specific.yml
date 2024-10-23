@@ -252,3 +252,33 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingSilentShoes
+  name: black shoes #actual name and description in uplink_catalog.yml
+  suffix: Silent
+  description: Stylish black shoes.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/mboots.rsi #todo change
+  - type: Clothing
+    sprite: Clothing/Shoes/Specific/mboots.rsi #todo change
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: SilentShoes
+  # HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-SilentShoes-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: hidden-desc-SilentShoes-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# HiddenDesc-End
