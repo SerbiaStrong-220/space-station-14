@@ -204,15 +204,54 @@ ghost-role-information-syndicate-monkey-reinforcement-rules = Вы [color=red][b
 ghost-role-information-syndicate-kobold-reinforcement-name = Агент Синдиката-кобольд
 ghost-role-information-syndicate-kobold-reinforcement-description = Кому-то нужно подкрепление. Вы, специально обученный кобольд, поможете им.
 ghost-role-information-syndicate-kobold-reinforcement-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с агентом, который вас призвал.
-ghost-role-information-lost-cargo-technical-name = Пропавший грузчик
-ghost-role-information-lost-cargo-technical-description = Что-то пошло не так, и ваш грузовой шаттл с грузом был телепортирован на другую станцию в секторе.
-ghost-role-information-lost-cargo-technical-rules = Вы - обычный грузчик с другой станции. Делайте то, что делают обычные грузчики.
-ghost-role-information-clown-troupe-name = Космический клоун
-ghost-role-information-clown-troupe-description = Вы и ваша труппа прибыли, чтобы развеселить эту станцию своими лучшими шутками. Хонк!
-ghost-role-information-clown-troupe-rules = Действуют обычные правила для экипажа станции.
-ghost-role-information-traveling-chef-name = Путешествующий шеф-повар
-ghost-role-information-traveling-chef-description = Вы - шеф-повар на странствующем шаттле экзотической кухни. Порадуйте станцию вкусными блюдами!
-ghost-role-information-traveling-chef-rules = Действуют обычные правила для экипажа станции.
+ghost-role-information-syndicate-cyborg-assault-name = Штурмовой киборг Синдиката
+ghost-role-information-syndicate-cyborg-saboteur-name = Саботажный киборг Синдиката
+ghost-role-information-syndicate-cyborg-description = Синдикату нужно подкрепление. Вы, холодная кремниевая машина для убийства, поможете им.
+ghost-role-information-security-name = Служба безопасности
+ghost-role-information-security-description = Вы входите в состав оперативной группы службы безопасности, но, похоже, попали в странную ситуацию...
+ghost-role-information-medical-name = Медицинский
+ghost-role-information-medical-virologist-name = Вирусолог
+ghost-role-information-medical-geneticist-name = Генетик
+ghost-role-information-medical-dentist-name = Стоматолог
+ghost-role-information-medical-description = Вы медицинский работник, но, похоже, попали в странную ситуацию...
+ghost-role-information-cargo-name = Снабжение
+ghost-role-information-cargo-description = Вы являетесь частью логистической миссии, но, похоже, попали в странную ситуацию...
+ghost-role-information-engineering-name = Инженерный
+ghost-role-information-engineering-description = Вы работаете инженером, но, похоже, попали в странную ситуацию...
+ghost-role-information-science-name = Научный
+ghost-role-information-science-description = Вы являетесь частью научной команды, но, похоже, попали в странную ситуацию...
+ghost-role-information-civilian-name = Гражданский
+ghost-role-information-civilian-description = Вы просто гуляли, но, похоже, попали в странную ситуацию...
+ghost-role-information-civilian-centcom-lawyer-name = Адвокат Центкома
+ghost-role-information-civilian-centcom-lawyer-description = Адвокат, прямо из Центрального юридического отдела.
+ghost-role-information-command-name = Коммандир
+ghost-role-information-command-description = Вы являетесь членом командования, но, похоже, попали в странную ситуацию...
+ghost-role-information-lost-challenge-commander-name = Командир в отпуске
+ghost-role-information-lost-challenge-commander-description = Вы - член команды с другого корабля, которому предоставили отпуск вместе с одним из ваших грузовых техников.
+ghost-role-information-lost-challenge-commander-rules =
+    Вы не враждебны к станции и делаете то, что должны, чтобы обеспечить собственное выживание.
+    Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
+    Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
+    Вам [color=red]НЕ[/color] разрешается помнить, имя, внешность и т.д. вашего предыдущего персонажа.
+ghost-role-information-lost-challenge-cargo-technican-name = Грузовой шофер
+ghost-role-information-lost-challenge-cargo-technican-description = Вы - грузовой техник, получивший отпуск на берег вместе с одним из своих командиров.
+ghost-role-information-lost-challenge-cargo-technican-rules =
+    Вы не враждебны станции и делаете то, что должны, чтобы обеспечить собственное выживание.
+    Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
+    Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
+    Вам [color=red]НЕ[/color] разрешается помнить, имя, внешность и т.д. вашего предыдущего персонажа.
+ghost-role-information-syndie-soldier-name = Солдат Синдиката
+ghost-role-information-syndie-soldier-description = Вы солдат Синдиката
+ghost-role-information-syndie-soldier-teamlead-name = Командир команды Синдиката
+ghost-role-information-syndie-soldier-teamlead-description = Вы - командир огневой группы в оперативном отряде Синдиката.
+ghost-role-information-blackmarketeer-name = Торговец чёрного рынка
+ghost-role-information-blackmarketeer-description = Заключайте сделки или беритесь за непосильную работу, чтобы к концу смены собрать самые интересные предметы.
+ghost-role-information-cossack-name = Древний путешественник
+ghost-role-information-cossack-description = Из истории, потерянной во времени, вы попадаете в наш век.
+ghost-role-information-pirate-name = Космический пират
+ghost-role-information-pirate-description = Агх, дружище! Собирайте крутые трофеи, но старайтесь избегать службы безопасности и утилизаторов!
+ghost-role-information-pirate-captain-name = Капитан космических пиратов
+ghost-role-information-pirate-captain-description = Агх, дружище! Ты здесь главный, и тебе нужно разработать план, как заполучить эту сочную добычу с помощью крючка или мошенничества. Только постарайтесь избегать службы безопасности и утилизаторов!
 ghost-role-information-disaster-victim-name = Жертва катастрофы
 ghost-role-information-disaster-victim-description = Вы спаслись на спасательной капсуле с другой станции, которую постигла ужасная участь. Возможно, вас найдут и спасут.
 ghost-role-information-disaster-victim-rules = Действуют обычные правила для экипажа станции.
