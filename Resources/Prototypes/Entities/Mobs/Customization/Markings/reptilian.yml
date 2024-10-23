@@ -401,7 +401,7 @@
   speciesRestriction: []
 # ss220-twocolored-tails-start
   sprites:
-  - sprite: SS220/Mobs/Customization/reptilian_parts.rsi
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
     state: tail_dtiger_wagging_primary
   - sprite: SS220/Mobs/Customization/reptilian.rsi
     state: tail_dtiger_wagging_secondary
