@@ -107,6 +107,7 @@
   - type: ProtectedFromStepTriggers
   - type: NoSlip
   - type: Insulated
+  - type: DoAfter # SS220 Cryostorage ghost role fix
 
 - type: entity
   parent: MobSiliconBase

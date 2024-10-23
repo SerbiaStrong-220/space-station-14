@@ -69,8 +69,8 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - EncryptionKeyLaw
       - EncryptionKeyStationMaster
+      - EncryptionKeyLaw
   - type: Sprite
     sprite: SS220/Clothing/Ears/Headsets/captain.rsi
   - type: Clothing
@@ -85,8 +85,8 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - EncryptionKeyLaw
       - EncryptionKeyStationMaster
+      - EncryptionKeyLaw
   - type: Sprite
     sprite: SS220/Clothing/Ears/Headsets/captain.rsi
   - type: Clothing

@@ -147,6 +147,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitClassicClowns
+  name: classic clown trousers
+  description: An older jumpsuit design, loved by many Honks. Unisex!
+  suffix: Classic, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clownypants.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clownypants.rsi
+
   # Ботаник
 - type: entity
   parent: ClothingUniformBase

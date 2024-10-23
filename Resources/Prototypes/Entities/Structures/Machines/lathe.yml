@@ -120,6 +120,7 @@
     staticRecipes:
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
       - ClothingWristWatch #SS220 Wrist Watch
+      - DeviceCalculator #SS220 Calculator
       - Wirecutter
       - Igniter
       - Signaller
