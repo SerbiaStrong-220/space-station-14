@@ -28,6 +28,8 @@
   - type: PointLight
     radius: 1.5
     energy: 1.6
+    color: "#f71713"
+
 - type: entity
   parent: SyndicateComputerComms
   id: LoneOpsComputerComms
@@ -68,6 +70,7 @@
       board: SalvageShuttleConsoleCircuitboard
     - type: StealTarget
       stealGroup: SalvageShuttleConsoleCircuitboard
+
 - type: entity
   parent: BaseComputer
   id: ComputerCluwneComms
