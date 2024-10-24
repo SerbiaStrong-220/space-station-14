@@ -36,12 +36,14 @@
     layers:
     - state: silver
     - state: idcentcom
-    - type: IdCard
-      jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
+  - type: IdCard
+    jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  - type: PresetIdCard
+    job: CentCommNanoTrasenDiplomat
 
 - type: entity
   parent: CentcomIDCard
@@ -55,6 +57,8 @@
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+    - type: PresetIdCard
+      job: CentcomFieldOfficer
 
 - type: entity
   parent: CentcomIDCard
@@ -68,6 +72,8 @@
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+    - type: PresetIdCard
+      job: CentcommOfficer
 
 - type: entity
   parent: CentcomIDCard
@@ -83,6 +89,8 @@
       tags:
       - CentralCommandGSN
       - CentralCommand
+    - type: PresetIdCard
+      job: CentcomOperativeSRT
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
@@ -123,6 +131,8 @@
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+    - type: PresetIdCard
+      job: CentComNanoTrasenAdmiral
 
 - type: entity
   parent: IDCardStandard

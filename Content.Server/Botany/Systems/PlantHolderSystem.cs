@@ -77,7 +77,7 @@ public sealed class PlantHolderSystem : EntitySystem
         if (component.Seed == null)
             return 0;
 
-        var result = Math.Max(1, (int)(component.Age * component.Seed.GrowthStages / component.Seed.Maturation));
+        var result = Math.Clamp((int)(component.Age * component.Seed.GrowthStages / component.Seed.Maturation), 1, component.Seed.GrowthStages); // SS220 Fix grwoth stages
         return result;
     }
 

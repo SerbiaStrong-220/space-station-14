@@ -60,7 +60,6 @@ public sealed class ChatUIController : UIController
     [Dependency] private readonly IStateManager _state = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IReplayRecordingManager _replayRecording = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiMan = default!;
 
     [UISystemDependency] private readonly ExamineSystem? _examine = default;
     [UISystemDependency] private readonly GhostSystem? _ghost = default;
@@ -845,7 +844,7 @@ public sealed class ChatUIController : UIController
             }
         }
         //ss220 highlight words start
-        var popupHighlight = _uiMan.ActiveScreen?.GetWidget<ChatBox>()?.ChatInput.HighlightButton.Popup;
+        var popupHighlight = UIManager.ActiveScreen?.GetWidget<ChatBox>()?.ChatInput.HighlightButton.Popup;
 
         if (popupHighlight?.Words != null)
         {

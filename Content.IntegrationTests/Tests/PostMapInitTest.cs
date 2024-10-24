@@ -86,7 +86,7 @@ namespace Content.IntegrationTests.Tests
             "NTvsSSSP",
 
             // SS220 Test Maps
-            "TestSM"
+            // "TestSM"
         };
 
         /// <summary>

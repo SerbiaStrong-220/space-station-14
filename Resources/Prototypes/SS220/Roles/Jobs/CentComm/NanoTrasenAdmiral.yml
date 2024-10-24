@@ -34,7 +34,7 @@
 
 - type: job
   id: CentComNanoTrasenAdmiral
-  name: job-name-centcomoff
+  name: job-name-nt-admiral
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentComNanoTrasenAdmiralGear
