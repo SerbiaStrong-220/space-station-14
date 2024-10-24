@@ -26,13 +26,6 @@ public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 
     private void OnHandleState(Entity<ChameleonDisguiseComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        //ss220 cham fix start
-        CopyComp<EntityStorageVisualsComponent>(ent);
-        CopyComp<LockVisualsComponent>(ent);
-        CopyComp<WiresVisualsComponent>(ent);
-        CopyComp<VendingMachineComponent>(ent);
-        //ss220 cham fix end
-
         CopyComp<SpriteComponent>(ent);
         CopyComp<GenericVisualizerComponent>(ent);
         CopyComp<SolutionContainerVisualsComponent>(ent);
