@@ -192,6 +192,15 @@
     - Snout
     - HeadTop
     - HeadSide
+    #SS220 Antag balance start
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.8
+        Piercing: 0.8
+        Heat: 0.8
+    #SS220 Antag balance end
 
 #Templar Helmet
 - type: entity
