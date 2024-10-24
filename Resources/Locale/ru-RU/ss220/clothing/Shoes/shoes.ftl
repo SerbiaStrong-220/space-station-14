@@ -4,6 +4,6 @@ ent-ClothingShoesBootsBard = ботинки барда
 ent-ClothingShoesBootsDruid = экологически чистые шлёпанцы
         .desc = Эко-друидские шлёпанцы, выполненные из натуральных материалов.
         .suffix = За время в игре
-ent-ClothingShoesJanitorJR = прорезиненовые рабочие ботинки
+ent-ClothingShoesJanitorJR = прорезиненные рабочие ботинки
         .suffix = JR, За время в игре
         .desc = Удобные ботинки с специальной обработкой подошвы. Внушают доверие.

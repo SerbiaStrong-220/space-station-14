@@ -12,14 +12,8 @@ ent-ClothingEyesGlasses = очки
     .desc = Пара неприглядных очков с линзами по рецепту.
 ent-ClothingEyesGlassesJensen = очки Дженсена
     .desc = Пара складных очков жёлтого оттенка. Вы никогда не просили о них.
-#SS220-add-time-suffix-loadout begin
-    .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
 ent-ClothingEyesGlassesJamjar = толстые очки
-    .desc = Также известны как "Защитники девственности".
-#SS220-add-time-suffix-loadout begin
-    .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
+    .desc = Эти ретро-очки напоминают вам о более простых временах.
 ent-ClothingEyesGlassesOutlawGlasses = очки негодяя
     .desc = Обязательны для каждого уважающего себя агента под прикрытием.
 ent-ClothingEyesGlassesCheapSunglasses = дешёвые солнцезащитные очки
@@ -28,6 +22,8 @@ ent-ClothingEyesGlassesSunglasses = солнцезащитные очки
     .desc = Пара чёрных солнцезащитных очков.
 ent-ClothingEyesGlassesSecurity = очки охраны
     .desc = Модернизированные солнцезащитные очки с функцией защиты от вспышек и визором СБ.
+ent-ClothingEyesGlassesCommand = административные очки
+    .desc = Модернизированные солнцезащитные очки, обеспечивающие защиту от вспышек и отображающие статус ID-карты.
 ent-ClothingEyesGlassesMercenary = очки наёмника
     .desc = Очки, созданные для ведения боя, для защиты глаз от ярких ослепляющих вспышек.
 ent-ClothingEyesGlassesThermal = оптический термальный сканер
@@ -38,3 +34,11 @@ ent-ClothingEyesGlassesChemical = очки химического анализа
     .desc = Очки, позволяющие сканировать химический состав раствора.
 ent-ClothingEyesVisorNinja = очки ниндзя
     .desc = Усовершенствованные очки, защищающие глаза ниндзя от вспышек света.
+#SS220-add-time-suffix-loadout begin
+    .suffix = За время в игре
+#SS220-add-time-suffix-loadout end
+ent-ClothingEyesGlassesJamjar = толстые очки
+    .desc = Также известны как "Защитники девственности".
+#SS220-add-time-suffix-loadout begin
+    .suffix = За время в игре
+#SS220-add-time-suffix-loadout end
