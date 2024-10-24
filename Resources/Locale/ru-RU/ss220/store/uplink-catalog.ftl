@@ -34,3 +34,6 @@ uplink-criminal-delivery-desc = Содержит случайную маску, 
 # Wearables
 uplink-helmet-swat-syndicate-name = Шлем пехотинца Синдиката
 uplink-helmet-swat-syndicate-desc = Очень прочный шлем, обычно используемый военизированными формированиями Синдиката. Он украшен зловещим узором из красных и черных полос.
+
+uplink-silent-shoes-name = Бесшумные ботинки
+uplink-silent-shoes-desc = Совершенно бесшумные ботинки, используемые на шпионских миссиях Синдиката.
