@@ -16,6 +16,11 @@
     shoes: ClothingShoesColorWhite
     id: ReporterPDA
     ears: ClothingHeadsetService
+    pocket1: PhotoCamera
+    pocket2: PhotoCameraFilm
+  innerClothingSkirt: ClothingUniformJumpsuitJournalist
+  satchel: ClothingBackpackSatchelFilled
+  duffelbag: ClothingBackpackDuffelFilled
   #storage:
     #back:
     #- Stuff

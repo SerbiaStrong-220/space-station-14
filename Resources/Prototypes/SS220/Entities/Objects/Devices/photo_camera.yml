@@ -1,0 +1,52 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseItem
+  id: Photo
+  name: фотография
+  description: Сделана фотоаппаратом с мгновенной печатью.
+  components:
+  - type: Photo
+  - type: ActivatableUI
+    key: enum.PhotoUiKey.Key
+    closeOnHandDeselect: false
+  - type: UserInterface
+    interfaces:
+      enum.PhotoUiKey.Key:
+        type: PhotoBoundUserInterface
+  - type: Sprite
+    sprite: SS220/Objects/Devices/photography.rsi
+    state: photo
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: PhotoCameraFilm
+  name: плёнка для фотоаппарата
+  description: Новейшая разработка в области фототехники. Вы просто не знаете нюансов.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/photography.rsi
+    state: film
+  - type: PhotoFilm
+    charges: 5
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: BaseItem
+  id: PhotoCamera
+  name: фотоаппарат
+  description: Для того, чтобы запечатлеть те самые яркие моменты вашей жизни. Имеет функцию мгновенной печати.
+  components:
+  - type: PhotoCamera
+  - type: Sprite
+    sprite: SS220/Objects/Devices/photography.rsi
+    state: camera_base
+  - type: LimitedCharges
+    maxCharges: 5
+    charges: 5
+  - type: Item
+    size: Normal
+  - type: UseDelay
+    delay: 2

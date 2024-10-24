@@ -1,2 +1,2 @@
-ent-CargoPhotocopier = { ent-CratePhotocopier } 
+ent-CargoPhotocopier = { ent-CratePhotocopier }
     .desc = { ent-CratePhotocopier.desc }
