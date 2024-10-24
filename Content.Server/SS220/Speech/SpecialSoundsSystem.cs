@@ -2,6 +2,7 @@
 using Content.Shared.SS220.Speech;
 using Content.Shared.Verbs;
 using Content.Server.Popups;
+using Content.Shared.Inventory;
 
 namespace Content.Server.SS220.Speech;
 
@@ -9,6 +10,7 @@ public sealed class SpecialSoundsSystem : EntitySystem
 {
 
     [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -20,6 +22,9 @@ public sealed class SpecialSoundsSystem : EntitySystem
     {
         // standard interaction checks
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
+            return;
+
+        if (!_inventorySystem.TryGetContainingSlot(uid, out _))
             return;
 
         args.Verbs.UnionWith(new[]

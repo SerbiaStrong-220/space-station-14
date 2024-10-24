@@ -1,0 +1,13 @@
+- type: entity
+  id: ActionActivateThermalVision
+  name: Переключить термальные сенсоры
+  description: Переключает термальные сенсоры в импланте владельца, что позволяет видеть живых существ сквозь преграды в ограниченном радиусе.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Misc/ThermalEye.rsi
+      state: EyeON
+    event: !type:UseThermalVisionEvent
+    useDelay: 1

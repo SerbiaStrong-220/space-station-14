@@ -1,0 +1,60 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesHudSyndChem
+  name: syndie chem med hud
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/syndchem.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/syndchem.rsi
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: ShowSyndicateIcons
+  - type: SolutionScanner
+  - type: Tag
+    tags:
+    - HudMedical
+  - type: EyeProtection
+  - type: FlashImmunity
+
+- type: entity
+  parent: [ClothingEyesBase, ClothingEyesGlassesSecurity]
+  id: ClothingEyesHudOmniversal
+  name: omniversal hud
+  description: A secret development for very secretive individuals.
+  suffix: Sec-med-chem
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/omni_hud.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/omni_hud.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+    - Inorganic
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: SolutionScanner
+
+- type: entity
+  parent: [ClothingEyesBase]
+  id: ClothingEyesHudSupply
+  name: supply hud
+  description: A heads-up display that scans the worth's of the items.
+  components:
+  - type: ShowSupplyPrice
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/supply.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/supply.rsi

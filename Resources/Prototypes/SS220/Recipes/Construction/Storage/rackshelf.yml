@@ -1,0 +1,17 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: construction
+  id: RackShelf
+  name: rack
+  description: The boxes' best friend, who will provide them with a home.
+  graph: Rackshelf
+  startNode: start
+  targetNode: Rackshelf
+  category: construction-category-storage
+  icon:
+    sprite: SS220/Structures/Storage/rack_shelf.rsi
+    state: icon
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

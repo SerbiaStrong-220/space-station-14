@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
@@ -26,6 +26,7 @@ public sealed class RoleBanCommand : IConsoleCommand
         string job;
         string reason;
         uint minutes;
+        var postBanInfo = true;
         if (!Enum.TryParse(_cfg.GetCVar(CCVars.RoleBanDefaultSeverity), out NoteSeverity severity))
         {
             Logger.WarningS("admin.role_ban", "Role ban severity could not be parsed from config! Defaulting to medium.");
@@ -70,6 +71,33 @@ public sealed class RoleBanCommand : IConsoleCommand
                 }
 
                 break;
+            // SS220 post ban with post info start
+            case 6:
+                target = args[0];
+                job = args[1];
+                reason = args[2];
+
+                if (!uint.TryParse(args[3], out minutes))
+                {
+                    shell.WriteError(Loc.GetString("cmd-roleban-minutes-parse", ("time", args[3]), ("help", Help)));
+                    return;
+                }
+
+                if (!Enum.TryParse(args[4], ignoreCase: true, out severity))
+                {
+                    shell.WriteLine(Loc.GetString("cmd-roleban-severity-parse", ("severity", args[4]), ("help", Help)));
+                    return;
+                }
+
+                if (!bool.TryParse(args[5], out postBanInfo))
+                {
+                    shell.WriteLine(Loc.GetString("cmd-ban-invalid-post-ban", ("postBan", args[5])));
+                    shell.WriteLine(Help);
+                    return;
+                }
+
+                break;
+            // SS220 post ban with post info end
             default:
                 shell.WriteError(Loc.GetString("cmd-roleban-arg-count"));
                 shell.WriteLine(Help);
@@ -86,7 +114,7 @@ public sealed class RoleBanCommand : IConsoleCommand
         var targetUid = located.UserId;
         var targetHWid = located.LastHWId;
 
-        _bans.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, DateTimeOffset.UtcNow);
+        _bans.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, DateTimeOffset.UtcNow, postBanInfo);
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
@@ -109,6 +137,12 @@ public sealed class RoleBanCommand : IConsoleCommand
             new("high", Loc.GetString("admin-note-editor-severity-high")),
         };
 
+        var postInfo = new CompletionOption[]
+        {
+            new("true", Loc.GetString("cmd-ban-hint-post-ban-true")),
+            new("false", Loc.GetString("cmd-ban-hint-post-ban-false"))
+        };
+
         return args.Length switch
         {
             1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(),
@@ -118,6 +152,7 @@ public sealed class RoleBanCommand : IConsoleCommand
             3 => CompletionResult.FromHint(Loc.GetString("cmd-roleban-hint-3")),
             4 => CompletionResult.FromHintOptions(durOpts, Loc.GetString("cmd-roleban-hint-4")),
             5 => CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-roleban-hint-5")),
+            6 => CompletionResult.FromHintOptions(postInfo, Loc.GetString("cmd-ban-hint-post-ban")),
             _ => CompletionResult.Empty
         };
     }

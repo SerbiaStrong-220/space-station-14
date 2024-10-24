@@ -1,0 +1,8 @@
+- type: reagent
+  id: JuiceBeet
+  name: reagent-name-juice-beet
+  parent: BaseJuice
+  desc: reagent-desc-juice-beet
+  physicalDesc: reagent-physical-desc-thick
+  flavor: beets
+  color: "#300010"

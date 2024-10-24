@@ -1,0 +1,59 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+
+- type: entity
+  name: ручка Центрального Командования
+  description: Утонченный стиль, неповторимая эргономичность, цвет чернил, - всё это - достоинства этой ручки. Она предназначена для лучших и создана лучшими.
+  parent: Pen
+  id: CentCommNewPen
+  components:
+  - type: Tag
+    tags:
+    - Write
+    - WriteIgnoreStamps
+    - Pickaxe
+  - type: Sprite
+    sprite: SS220/Objects/Misc/pen.rsi
+    state: pen_centcom
+  - type: MeleeWeapon
+    wideAnimationRotation: -45
+    damage:
+      types:
+        Piercing: 15
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Tool
+    qualities:
+      - Screwing
+    useSound:
+      collection: Screwdriver
+  - type: Item
+    sprite: SS220/Objects/Misc/pen.rsi
+    size: Tiny
+
+- type: entity
+  name: ручка
+  description: Ручка с чёрными чернилами.
+  parent: BaseItem
+  id: PenSignaller
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/pens.rsi
+      state: pen
+    - type: Item
+      sprite: Objects/Misc/pens.rsi
+      heldPrefix: pen
+      size: Tiny
+    - type: Signaller
+    - type: DeviceLinkSource
+      ports:
+        - Pressed
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      receiveFrequencyId: BasicDevice
+    - type: WirelessNetworkConnection
+      range: 15
+    - type: Tag
+      tags:
+        - Write
+        - Pen

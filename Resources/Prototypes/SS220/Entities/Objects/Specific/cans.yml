@@ -1,0 +1,255 @@
+- type: entity
+  name: канистра
+  parent: BaseItem
+  id: JerrycanEmpty
+  suffix: Пустой
+  description: Металлический контейнер, который предназначен для хранения жидкостей. Она всегда оказывается тяжелее, чем того можно ожидать.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/jerrycan.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Specific/jerrycan.rsi
+  - type: Openable
+    sound:
+      collection: bottleOpenSounds
+    closeable: true
+    closeSound:
+      collection: bottleCloseSounds
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+  - type: Spillable
+    solution: tank
+  - type: RefillableSolution
+    solution: tank
+  - type: DrainableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: SolutionTransfer
+    maxTransferAmount: 50
+    canChangeTransferAmount: true
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: HeldSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 10
+  - type: StaticPrice
+    price: 300
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 4
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 2
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 300
+
+- type: entity
+  id: JerrycanWeldingFuelFull
+  parent: JerrycanEmpty
+  suffix: Заполненный, Сварочное топливо
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 500
+
+- type: entity
+  id: JerrycanWaterFull
+  parent: JerrycanEmpty
+  suffix: Заполненный, Вода
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+        reagents:
+        - ReagentId: Water
+          Quantity: 500
+
+- type: entity
+  id: JerrycanPlasmaFull
+  parent: JerrycanEmpty
+  suffix: Заполненный, Жидкая плазма
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 500
+
+- type: entity
+  name: пластиковая канистра
+  parent: BaseItem
+  id: PlasticCanEmpty
+  suffix: Пустой
+  description: Пластиковый контейнер, который предназначен для хранения жидкостей.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/plastic_can.rsi
+    layers:
+      - state: icon
+      - state: overlay
+      - state: solution-1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: solution-
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Specific/plastic_can.rsi
+  - type: Openable
+    sound:
+      collection: bottleOpenSounds
+    closeable: true
+    closeSound:
+      collection: bottleCloseSounds
+  - type: Spillable
+    solution: spray
+  - type: RefillableSolution
+    solution: spray
+  - type: DrainableSolution
+    solution: spray
+  - type: ExaminableSolution
+    solution: spray
+  - type: DrawableSolution
+    solution: spray
+  - type: SolutionTransfer
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  id: PlasticCanWaterFull
+  parent: PlasticCanEmpty
+  suffix: Заполненный, Вода
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: Water
+          Quantity: 100
+
+- type: entity
+  id: PlasticCanBleachFull
+  parent: PlasticCanEmpty
+  suffix: Заполненный, Отбеливатель
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: Bleach
+          Quantity: 100
+
+- type: entity
+  id: PlasticCanSpaceCleanerFull
+  parent: PlasticCanEmpty
+  suffix: Заполненный, Космический очиститель
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SpaceCleaner
+          Quantity: 100
+
+- type: entity
+  id: PlasticCanSoapReagentFull
+  parent: PlasticCanEmpty
+  suffix: Заполненный, Мыло
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 100
+
+- type: entity
+  id: PlasticCanSpaceLubeFull
+  parent: PlasticCanEmpty
+  suffix: Заполненный, Космическая смазка
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SpaceLube
+          Quantity: 100
+
+- type: entity
+  id: PlasticCanSpaceGlueFull
+  parent: PlasticCanEmpty
+  suffix: Заполненный, Космический клей
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SpaceGlue
+          Quantity: 100

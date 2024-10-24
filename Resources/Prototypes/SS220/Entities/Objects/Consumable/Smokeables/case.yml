@@ -1,0 +1,55 @@
+- type: entity
+  id: SnuffBox
+  parent: [ BaseStorageItem, BaseBagOpenClose ]
+  name: snuff box
+  description: A case for holding your cigars when you are not smoking them.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Snuff/snuff-box.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+    - state: snuff1
+      map: ["snuff1"]
+      visible: false
+    - state: snuff2
+      map: ["snuff2"]
+      visible: false
+    - state: snuff3
+      map: ["snuff3"]
+      visible: false
+    - state: snuff4
+      map: ["snuff4"]
+      visible: false
+    - state: snuff5
+      map: ["snuff5"]
+      visible: false
+    - state: snuff6
+      map: ["snuff6"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,2,1
+  - type: Item
+    sprite: SS220/Objects/Consumable/Smokeables/Snuff/snuff-box.rsi
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedRotation: 90
+  - type: StorageFill
+    contents:
+    - id: GroundTobacco
+      amount: 6
+  - type: ItemCounter
+    count:
+      tags: [Smokable]
+    composite: true
+    layerStates:
+    - snuff1
+    - snuff2
+    - snuff3
+    - snuff4
+    - snuff5
+    - snuff6
+  - type: Appearance

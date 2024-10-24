@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseItem
+  id: FlowersBouquet
+  name: букет космических цветов
+  description: Прекрасный благоухающий цветочный букет.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/flowersbouquet.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/Fun/flowersbouquet.rsi
+  - type: Construction
+    graph: flowersbouqlet
+    node: Flowersbouqlet

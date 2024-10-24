@@ -1,0 +1,52 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: SecurityCadetTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSecurityCadet
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: SecurityGrayJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSecGrey
+
+- type: loadout
+  id: SecurityGrayJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtSecGrey
+
+- type: loadout
+  id: SecurityCadetJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecurityCadetTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorRed
+
+- type: loadout
+  id: SecurityCadetJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecurityCadetTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorRed
+
+- type: loadout
+  id: SecurityCadetJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecurityCadetTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorRed
+
+- type: loadout
+  id: SecurityCadetJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecurityCadetTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorRed

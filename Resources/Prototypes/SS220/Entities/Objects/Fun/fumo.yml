@@ -1,0 +1,59 @@
+- type: entity
+  parent: BasePlushie
+  id: PlushieFumoMaiden
+  name: shrine maiden fumo
+  description: Not a single youkai will pass by the lazy gaze of this plush.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/fumo.rsi
+    state: fumo-maiden
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/SS220/Effects/fumo/fumo2.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/fumo/fumocollide.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/SS220/Effects/fumo/fumocollide.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/SS220/Effects/fumo/fumo2.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/SS220/Effects/fumo/fumo2.ogg
+  - type: Food
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/SS220/Effects/fumo/fumocollide.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
+      collection: ToySqueak
+  - type: Construction
+    graph: FumoMaiden
+    node: fumoMaiden
+
+- type: entity
+  parent: PlushieFumoMaiden
+  id: PlushieFumoMagician
+  name: magician fumo
+  description: A stuffed toy dressed in black and white definitely won't steal your books-ze!
+  components:
+  - type: Sprite
+    state: fumo-magician
+  - type: Construction
+    graph: FumoMagician
+    node: fumoMagician
+
+- type: entity
+  parent: PlushieFumoMaiden
+  id: PlushieFumoMaid
+  name: maid fumo
+  description: The presence of a knife inside this soft plush raises some questions.
+  components:
+  - type: Sprite
+    state: fumo-maid
+  - type: Construction
+    graph: FumoMaid
+    node: fumoMaid

@@ -1,0 +1,77 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by Team SS220 Gabka, Surani",
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "Icon-front"
+        },
+        {
+            "name": "fill1"
+        },
+        {
+            "name": "fill2"
+        },
+        {
+            "name": "fill3"
+        },
+        {
+            "name": "fill4"
+        },
+        {
+            "name": "fill5"
+        },
+        {
+            "name": "fill6"
+        },
+        {
+            "name": "fill7"
+        },
+        {
+            "name": "fill8"
+        },
+        {
+            "name": "fill9"
+        },
+        {
+            "name": "white_tulip"
+        },
+        {
+            "name": "pink_tulip"
+        },
+        {
+            "name": "yellow_tulip"
+        },
+        {
+            "name": "red_clove"
+        },
+        {
+            "name": "white_clove"
+        },
+        {
+            "name": "s_chamomile"
+        },
+        {
+            "name": "ws_chamomile"
+        },
+        {
+            "name": "s_flower"
+        },
+        {
+            "name": "l_flower"
+        },
+        {
+            "name": "r_rose"
+        },
+        {
+            "name": "w_rose"
+        }
+    ]
+}

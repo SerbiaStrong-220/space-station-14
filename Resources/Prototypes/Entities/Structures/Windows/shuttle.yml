@@ -1,13 +1,13 @@
 - type: entity
   id: ShuttleWindow
   name: shuttle window
-  parent: Window
+  parent: WindowRCDResistant
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/shuttle_window.rsi
+    sprite: SS220/Structures/Windows/shuttle_window.rsi #ss220-walls-update
   - type: Icon
-    sprite: Structures/Windows/shuttle_window.rsi
+    sprite: SS220/Structures/Windows/shuttle_window.rsi #ss220-walls-update
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -46,13 +46,13 @@
     node: shuttleWindow
   - type: Appearance
   - type: DamageVisuals
-    thresholds: [4, 8, 12]
-    damageDivisor: 28
+    thresholds: [5, 10, 20]
+    damageDivisor: 20
     trackAllDamage: true
     damageOverlay:
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
-    price: 100
+    price: 150
 
 - type: entity
   parent: ShuttleWindow
@@ -65,14 +65,14 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/shuttle_window_diagonal.rsi
+    sprite: SS220/Structures/Windows/shuttle_window_diagonal.rsi #ss220-walls-update
     state: state0
   - type: IconSmooth
     mode: Diagonal
     key: walls  # Corvax-Resprite
     base: state
   - type: Icon
-    sprite: Structures/Windows/shuttle_window_diagonal.rsi
+    sprite: SS220/Structures/Windows/shuttle_window_diagonal.rsi #ss220-walls-update
     state: state0
   - type: Fixtures
     fixtures:
@@ -87,6 +87,11 @@
         - FullTileMask
         layer:
         - GlassLayer
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
   - type: DamageVisuals
     damageOverlay:
       sprite: Structures/Windows/cracks_diagonal.rsi

@@ -5,9 +5,10 @@ using Content.Shared.DragDrop;
 using Content.Shared.Foldable;
 using Content.Shared.Friction;
 using Content.Shared.Item;
-using Content.Shared.Physics.Pull;
-using Content.Shared.Pulling;
-using Content.Shared.Pulling.Components;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;
@@ -16,7 +17,7 @@ namespace Content.Shared.SS220.Cart;
 
 public sealed class CartSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPullingSystem _pulling = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TileFrictionController _tileFriction = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -28,7 +29,7 @@ public sealed class CartSystem : EntitySystem
         SubscribeLocalEvent<CartComponent, GetVerbsEvent<InteractionVerb>>(AddCartVerbs);
         SubscribeLocalEvent<CartComponent, CartAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<CartComponent, CartDeattachDoAfterEvent>(OnDeattachDoAfter);
-        SubscribeLocalEvent<CartComponent, StopPullingEvent>(OnStopPull);
+        SubscribeLocalEvent<CartComponent, AttemptStopPullingEvent>(OnStopPull);
         SubscribeLocalEvent<CartComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<CartComponent, FoldAttemptEvent>(OnFoldAttempt);
         SubscribeLocalEvent<CartComponent, ComponentShutdown>(OnShutdown);
@@ -41,7 +42,7 @@ public sealed class CartSystem : EntitySystem
         if (!component.IsAttached)
             return;
 
-        TryDeattachCart(component, null);
+        TryDeattachCart((uid, component), null);
     }
 
     private void OnFoldAttempt(EntityUid uid, CartComponent component, ref FoldAttemptEvent args)
@@ -73,7 +74,7 @@ public sealed class CartSystem : EntitySystem
         // Here I'm trying to make that you possibly could make a
         // infinite "snake" of cart pullers if the entity has
         // both a CartComponent and a CartPullerComponent.
-        if (args.Puller.Owner == uid)
+        if (args.PullerUid == uid)
             return;
 
         if (!component.IsAttached)
@@ -82,12 +83,12 @@ public sealed class CartSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnStopPull(EntityUid uid, CartComponent component, StopPullingEvent args)
+    private void OnStopPull(EntityUid uid, CartComponent component, AttemptStopPullingEvent args)
     {
         // Cancel pull stop if the cart is attached,
         // so you have to properly deattach it first.
         if (component.IsAttached)
-            args.Cancel();
+            args.Cancelled = true;
     }
 
     private void OnAttachDoAfter(EntityUid uid, CartComponent component, CartAttachDoAfterEvent args)
@@ -98,15 +99,15 @@ public sealed class CartSystem : EntitySystem
         if (!HasComp<CartPullerComponent>(args.AttachTarget))
             return;
 
-        if (!TryComp<SharedPullableComponent>(uid, out var pullable))
+        if (!TryComp<PullableComponent>(uid, out var pullable))
             return;
 
         // So here we are adding the puller component to the cart puller
         // in order to pull the cart with it.
         // We are later removing this component from the cart puller.
         // This was made just because I wanted to reuse pulling system for this task.
-        EnsureComp<SharedPullerComponent>(args.AttachTarget);
-        _pulling.TryStopPull(pullable);
+        EnsureComp<PullerComponent>(args.AttachTarget);
+        _pulling.TryStopPull(uid, pullable);
         if (!_pulling.TryStartPull(args.AttachTarget, uid))
             return;
 
@@ -137,11 +138,11 @@ public sealed class CartSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-        if (!TryComp<SharedPullableComponent>(uid, out var pullable))
+        if (!TryComp<PullableComponent>(uid, out var pullable))
             return;
 
-        _pulling.TryStopPull(pullable);
-        RemComp<SharedPullerComponent>(args.DeattachTarget);
+        _pulling.TryStopPull(uid, pullable);
+        RemComp<PullerComponent>(args.DeattachTarget);
         RemComp<TileFrictionModifierComponent>(uid);
 
         var ev = new CartDeattachEvent(args.DeattachTarget, uid);
@@ -164,7 +165,7 @@ public sealed class CartSystem : EntitySystem
         InteractionVerb verb = new()
         {
             Text = Name(uid),
-            Act = () => TryDeattachCart(component, args.User),
+            Act = () => TryDeattachCart((uid, component), args.User),
             Category = VerbCategory.DeattachCart,
             // Prioritize deattaching itself
             Priority = 1
@@ -180,8 +181,7 @@ public sealed class CartSystem : EntitySystem
         var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cartComp.AttachToggleTime, new CartAttachDoAfterEvent(target),
             cartComp.Owner, target: cartComp.Owner)
         {
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             BreakOnDamage = true,
             NeedHand = true
         };
@@ -189,44 +189,43 @@ public sealed class CartSystem : EntitySystem
         return true;
     }
 
-    public bool TryDeattachCart(CartComponent cartComp, EntityUid? user)
+    public bool TryDeattachCart(Entity<CartComponent> cart, EntityUid? user)
     {
-        if (!cartComp.IsAttached)
+        if (!cart.Comp.IsAttached)
             return false;
 
-        var target = cartComp.Puller;
-        if (target == null)
+        var target = cart.Comp.Puller;
+        if (!target.HasValue)
             return false;
 
-        return TryDeattachCart((EntityUid) target, cartComp, user);
+        return TryDeattachCart(target.Value, cart, user);
     }
 
-    public bool TryDeattachCart(EntityUid target, CartComponent cartComp, EntityUid? user)
+    public bool TryDeattachCart(EntityUid target, Entity<CartComponent> cart, EntityUid? user)
     {
-        if (!cartComp.IsAttached)
+        if (!cart.Comp.IsAttached)
             return false;
 
         if (!HasComp<CartPullerComponent>(target))
             return false;
 
-        if (!HasComp<SharedPullerComponent>(target))
+        if (!HasComp<PullerComponent>(target))
             return false;
 
-        if (!HasComp<SharedPullableComponent>(cartComp.Owner))
+        if (!HasComp<PullableComponent>(cart))
             return false;
 
         if (user == null)
         {
             // Disconnect the cart by force
-            ForceDeattach(target, cartComp);
+            ForceDeattach(target, cart);
             return true;
         }
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, (EntityUid) user, cartComp.AttachToggleTime, new CartDeattachDoAfterEvent(target),
-            cartComp.Owner, target: cartComp.Owner)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, (EntityUid) user, cart.Comp.AttachToggleTime, new CartDeattachDoAfterEvent(target),
+            cart, target: cart)
         {
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             BreakOnDamage = true,
             NeedHand = true
         };
@@ -234,23 +233,23 @@ public sealed class CartSystem : EntitySystem
         return true;
     }
 
-    private void ForceDeattach(EntityUid target, CartComponent cartComp)
+    private void ForceDeattach(EntityUid target, Entity<CartComponent> cart)
     {
         if (!HasComp<CartPullerComponent>(target))
             return;
 
-        if (!TryComp<SharedPullableComponent>(cartComp.Owner, out var pullable))
+        if (!TryComp<PullableComponent>(cart, out var pullable))
             return;
 
-        _pulling.TryStopPull(pullable);
-        RemComp<SharedPullerComponent>(target);
+        _pulling.TryStopPull(cart, pullable);
+        RemComp<PullerComponent>(target);
 
-        var ev = new CartDeattachEvent(target, cartComp.Owner);
+        var ev = new CartDeattachEvent(target, cart);
         RaiseLocalEvent(target, ref ev);
 
-        cartComp.Puller = null;
-        cartComp.IsAttached = false;
-        Dirty(cartComp);
+        cart.Comp.Puller = null;
+        cart.Comp.IsAttached = false;
+        Dirty(cart);
     }
 
     /// <summary>
@@ -275,7 +274,7 @@ public sealed class CartSystem : EntitySystem
         if (cartPullerComp.AttachedCart.HasValue)
             return false;
 
-        if (!HasComp<SharedPullableComponent>(cart))
+        if (!HasComp<PullableComponent>(cart))
             return false;
 
         // Prevent folded entities from attaching

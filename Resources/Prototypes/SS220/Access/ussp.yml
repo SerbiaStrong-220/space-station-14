@@ -1,0 +1,30 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: accessLevel
+  id: Ussp
+  name: id-card-access-level-ussp
+  canBeSwitchableInReader: false
+
+- type: accessLevel
+  id: UsspCommand
+  name: id-card-access-level-ussp-command
+  canBeSwitchableInReader: false
+
+- type: accessLevel
+  id: UsspMedical
+  name: id-card-access-level-ussp-medical
+  canBeSwitchableInReader: false
+
+- type: accessLevel
+  id: UsspEngineering
+  name: id-card-access-level-ussp-Engineering
+  canBeSwitchableInReader: false
+
+# full ussp access group
+- type: accessGroup
+  id: UsspAllAccess
+  tags:
+  - Ussp
+  - UsspCommand
+  - UsspMedical
+  - UsspEngineering

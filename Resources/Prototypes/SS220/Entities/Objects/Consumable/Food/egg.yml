@@ -1,0 +1,25 @@
+# Spiders eggs
+- type: entity
+  parent: Eggshells
+  id: EggshellsSpider
+  categories: [ HideSpawnMenu ]
+  name: eggshells
+  description: You're walkin' on 'em bud.
+  suffix: FraG 
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/egg.rsi
+    state: eggshells
+    shader: unshaded
+    color: gray     
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2
+        reagents:
+        - ReagentId: PoisonWine
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Egg
+    - Trash

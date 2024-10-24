@@ -1,18 +1,22 @@
 - type: accessLevel
   id: Command
   name: id-card-access-level-command
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Captain
   name: id-card-access-level-captain
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: HeadOfPersonnel
   name: id-card-access-level-head-of-personnel
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Blueshield
   name: id-card-access-level-blueshield
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessGroup
   id: Command
@@ -22,6 +26,7 @@
   - HeadOfPersonnel
   - Blueshield
   - Cryogenics
+  - Magistrate #SS220 Law Department
 
 - type: accessLevel
   id: EmergencyShuttleRepealAll

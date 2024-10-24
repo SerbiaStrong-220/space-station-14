@@ -1,2 +1,3 @@
 "alternate-sync.png", "minus.png", "plus.png": Font Awesome Icons, CC BY 4.0
 "eject-cropped.png": Modified. Original file is from Space Station 14, made by juliangiebel. Is distributed under MIT license. Copyright (c) 2017-2023 Space Wizards Federation
+"sponsor_cash.png": Made by Meower / Whitly for SS220, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt

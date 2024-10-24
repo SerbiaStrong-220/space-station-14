@@ -1,0 +1,93 @@
+# NTR time
+- type: loadoutEffectGroup
+  id: NanoTrasenRepresentativeTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 720000 # 200 hrs Ахуеть, да?
+
+# TrustedLawyer time
+- type: loadoutEffectGroup
+  id: TrustedLawyerTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 180000 # 50 hrs
+
+# Head
+- type: loadout
+  id: DevilHorns
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    head: ClothingHeadHatDevilHornsAlt
+
+# Jumpsuit
+- type: loadout
+  id: JumpsuitNTR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeTime
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNTR
+
+- type: loadout
+  id: JumpsuitTrustedLawyer
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TrustedLawyerTime
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTrustedLawyer
+
+- type: loadout
+  id: JumpsuitJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJujutsuShlepa
+
+# Outer clothing
+- type: loadout
+  id: OuterClothingJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCoatJujutsuShlepa
+
+# Glasses
+- type: loadout
+  id: Sunglasses
+  equipment:
+    eyes: ClothingEyesGlassesSunglasses
+
+- type: loadout
+  id: GlassesujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorGlassesJujutsuShlepa
+
+# Back
+- type: loadout
+  id: IAABackpackLeather
+  equipment:
+    back: ClothingBackpackSatchelLeather
+
+# Headset
+- type: loadout
+  id: LawHeadset
+  equipment:
+    ears: ClothingHeadsetLaw
+
+- type: loadout
+  id: LawHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltLaw

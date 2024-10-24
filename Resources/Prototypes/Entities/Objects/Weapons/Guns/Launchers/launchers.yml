@@ -5,6 +5,11 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/havy.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
@@ -22,10 +27,15 @@
 
 - type: entity
   name: china lake
-  parent: BaseWeaponLauncher
+  parent: [BaseWeaponLauncher, BaseGunWieldable]
   id: WeaponLauncherChinaLake
-  description: PLOOP
+  description: PLOOP.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/rifles.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
     layers:
@@ -33,6 +43,9 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    slots:
+    - Back
+    - suitStorage
   - type: AmmoCounter
   - type: Gun
     fireRate: 1
@@ -52,7 +65,7 @@
 
 - type: entity
   name: RPG-7
-  parent: BaseWeaponLauncher
+  parent: [ BaseWeaponLauncher]
   id: WeaponLauncherRocket
   description: A modified ancient rocket-propelled grenade launcher.
   components:
@@ -82,6 +95,15 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+  #ss220-start fix https://github.com/SerbiaStrong-220/space-station-14/issues/1192
+  - type: GunByHasAmmoVisuals
+    inhandVisuals:
+      left:
+      - state: rocket0-inhand-left
+      right:
+      - state: rocket0-inhand-right
+  ##ss220-end
+
 
 - type: entity
   name: multiple rocket launcher
@@ -163,7 +185,10 @@
     - type: TetherGun
       frequency: 5
       dampingRatio: 4
+    - type: ItemToggle
+      onUse: false
     - type: PowerCellDraw
+    - type: ToggleCellDraw
     - type: Sprite
       sprite: Objects/Weapons/Guns/Launchers/tether_gun.rsi
       layers:
@@ -197,6 +222,11 @@
   id: WeaponForceGun
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/smg.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: Item
       storedRotation: -90
     - type: ForceGun
@@ -208,7 +238,10 @@
         path: /Audio/Weapons/soup.ogg
         params:
           volume: 2
+    - type: ItemToggle
+      onUse: false
     - type: PowerCellDraw
+    - type: ToggleCellDraw
     - type: Sprite
       sprite: Objects/Weapons/Guns/Launchers/force_gun.rsi
       layers:
@@ -239,11 +272,17 @@
   parent: BaseItem
   id: WeaponGrapplingGun
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: AmmoCounter
     - type: GrapplingGun
     - type: Gun
       soundGunshot: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
       fireRate: 0.5
+      clumsyProof: true
     - type: BasicEntityAmmoProvider
       proto: GrapplingHook
       capacity: 1
@@ -253,7 +292,6 @@
         - state: base
         - state: base-unshaded
           map: [ "unshaded" ]
-          shader: unshaded
           visible: true
     - type: UseDelay
       delay: 1.5
@@ -264,6 +302,7 @@
           unshaded:
             True: { state: base-unshaded }
             False: { state: base-unshaded-off }
+    - type: PacifismAllowedGun
 
 # Admeme
 - type: entity
@@ -312,6 +351,11 @@
   suffix: Admeme
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/revolver.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: ForceGun
       canTetherAlive: true
       canUnanchor: true
@@ -352,13 +396,13 @@
   parent: WeaponLauncherMultipleRocket
   id: WeaponLauncherAdmemeMeteorLarge
   suffix: Admeme
-  description: It fires large meteors
+  description: It fires large meteors.
   components:
   - type: BallisticAmmoProvider
     whitelist:
       tags:
         - CartridgeRocket
-    proto: MeteorLarge
+    proto: MeteorMedium
 
 - type: entity
   name: immovable rod launcher

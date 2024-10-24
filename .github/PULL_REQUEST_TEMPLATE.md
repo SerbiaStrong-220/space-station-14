@@ -10,6 +10,7 @@
 **Проверки**
 <!-- Выполнение всех следующих действий, если это приемлемо для вида изменений сильно ускорит разбор вашего PR -->
 - [ ] PR полностью завершён и мне не нужна помощь чтобы его закончить.
+- [ ] Я **ознакомился** с [наставлениями по работе с репозиторием](https://serbiastrong-220.github.io/ss220-docs/development/ss220-guidelines/) и следовал им при создании PR'а.
 - [ ] Я внимательно просмотрел все свои изменения и багов в них не нашёл.
 - [ ] Я запускал локальный сервер со своими изменениями и всё протестировал.
 - [ ] Я добавил скриншот/видео демонстрации PR в игре, **или** этот PR этого не требует.
@@ -30,7 +31,7 @@
 -->
 
 <!--
-Make sure to take this Changelog template out of the comment block in order for it to show up.
+Make sure to take this Changelog template out of the comment block in order for it to show up. Changelog must have a :cl: symbol, so the bot recognizes the changes and adds them to the game's changelog.
 :cl:
 - add: Добавлено веселье!
 - remove: Убрано веселье!

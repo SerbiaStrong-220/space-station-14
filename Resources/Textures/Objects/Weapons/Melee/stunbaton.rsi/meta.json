@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from vgstation at https://github.com/vgstation-coders/vgstation13/commit/1cdfb0230cc96d0ba751fa002d04f8aa2f25ad7d",
+  "copyright": "Taken from vgstation at https://github.com/vgstation-coders/vgstation13/commit/1cdfb0230cc96d0ba751fa002d04f8aa2f25ad7d, stunbaton_off, stunbaton_on taken from goonstation at https://github.com/goonstation/goonstation/pull/7163/commits/5429349ac82b1cadc401f5b0f00dc868cbaed177, modified by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32

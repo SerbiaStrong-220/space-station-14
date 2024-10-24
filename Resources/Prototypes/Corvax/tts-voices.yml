@@ -188,11 +188,123 @@
   id: sentrybot
 
 - type: ttsVoice
-  name: Полина
-  description: Голос персонажа Полина из игры Tiny Bunny
+  name: Мойра Браун
+  description: Голос персонажа Мойра Браун из Fallout 3
+  sex: Female
+  speaker: moira_brown
+  id: moira_brown
+
+- type: ttsVoice
+  name: Робер МакКриди
+  description: Голос персонажа Робер МакКриди из Fallout 3
+  sex: Male
+  speaker: robert_maccready
+  id: robert_maccready
+
+- type: ttsVoice
+  name: Тридогнайт
+  description: Голос персонажа Тридогнайт из Fallout 3
+  sex: Male
+  speaker: threedog
+  id: threedog
+
+- type: ttsVoice
+  name: Тридогнайт Радио
+  description: Голос персонажа Тридогнайт версия по радио из Fallout 3
+  sex: Male
+  speaker: threedog_radio
+  id: threedog_radio
+
+- type: ttsVoice
+  name: Мистер Помощник
+  description: Голос персонажа Мистер Помощник из Fallout 3
+  sex: Male
+  speaker: mister_handy_fl3
+  id: mister_handy_fl3
+
+- type: ttsVoice
+  name: Мистер Храбрец
+  description: Голос персонажа Мистер Храбрец из Fallout 3
+  sex: Male
+  speaker: mister_gutsy_fl3
+  id: mister_gutsy_fl3
+
+- type: ttsVoice
+  name: Джерико
+  description: Голос персонажа Джерико из Fallout 3
+  sex: Male
+  speaker: jericho_fl3
+  id: jericho_fl3
+
+- type: ttsVoice
+  name: Старейшина Лайонс
+  description: Голос персонажа Старейшина Лайонс из Fallout 3
+  sex: Male
+  speaker: elder_lyons_fl3
+  id: elder_lyons_fl3
+
+- type: ttsVoice
+  name: Сара Лайонс
+  description: Голос персонажа Сара Лайонс из Fallout 3
+  sex: Female
+  speaker: sarah_lyons_fl3
+  id: sarah_lyons_fl3
+
+- type: ttsVoice
+  name: Колин Мориарти
+  description: Голос персонажа Колин Мориарти из Fallout 3
+  sex: Male
+  speaker: colin_moriarty_fl3
+  id: colin_moriarty_fl3
+
+- type: ttsVoice
+  name: Полина Морозова
+  description: Голос персонажа Полина Морозова из игры Tiny Bunny
   sex: Female
   speaker: polina
   id: polina
+
+- type: ttsVoice
+  name: Рома Пятифанов
+  description: Голос персонажа Рома Пятифанов из игры Tiny Bunny
+  sex: Unsexed
+  speaker: romka
+  id: romka
+
+- type: ttsVoice
+  name: Борис Петров
+  description: Голос персонажа Борис Петров из игры Tiny Bunny
+  sex: Male
+  speaker: boris_petrov_father_tb
+  id: boris_petrov_father_tb
+
+- type: ttsVoice
+  name: Карина Петрова
+  description: Голос персонажа Карина Петрова из игры Tiny Bunny
+  sex: Female
+  speaker: karina_petrova_tb
+  id: karina_petrova_tb
+
+- type: ttsVoice
+  name: Катя Смирнова
+  description: Голос персонажа Катя Смирнова из игры Tiny Bunny
+  sex: Female
+  speaker: kate_smirnova_tb
+  id: kate_smirnova_tb
+
+- type: ttsVoice
+  name: Семён Бабурин
+  description: Голос персонажа Семён Бабурин из игры Tiny Bunny
+  sex: Male
+  speaker: semen_baburin_tb
+  id: semen_baburin_tb
+
+- type: ttsVoice
+  name: Лейтенант Тихонов
+  description: Голос персонажа Лейтенант Тихонов из игры Tiny Bunny
+  sex: Male
+  speaker: tihonov_tb
+  id: tihonov_tb
 
 - type: ttsVoice
   name: Цицерон
@@ -293,6 +405,27 @@
   id: nazir
 
 - type: ttsVoice
+  name: Женщина командир
+  description: Голос женских персонажей командиров из игры TES 5 Skyrim
+  sex: Female
+  speaker: female_commander
+  id: female_commander
+
+- type: ttsVoice
+  name: Лорд Харкон
+  description: Голос персонажа Лорд Харкон из игры TES 5 Skyrim
+  sex: Male
+  speaker: lord_harkon
+  id: lord_harkon
+
+- type: ttsVoice
+  name: Серана
+  description: Голос персонажа Серана из игры TES 5 Skyrim
+  sex: Female
+  speaker: serana
+  id: serana
+
+- type: ttsVoice
   name: GLaDOS
   description: Голос персонажа GLaDOS из игры Portal 2
   sex: Female
@@ -361,6 +494,20 @@
   sex: Female
   speaker: triss
   id: triss
+
+- type: ttsVoice
+  name: Ковир Ноблеман
+  description: Голос персонажа Ковир Ноблеман из игры The Witcher 3
+  sex: Male
+  speaker: kovir_nobleman
+  id: kovir_nobleman
+
+- type: ttsVoice
+  name: Золтан Хивай
+  description: Голос персонажа Золтан Хивай из игры The Witcher 3
+  sex: Male
+  speaker: zoltan_chivay
+  id: zoltan_chivay
 
 - type: ttsVoice
   name: Азир
@@ -566,6 +713,41 @@
   id: jackie
 
 - type: ttsVoice
+  name: Майко Маэда
+  description: Голос персонажа Майко Маэда из игры Cyberpunk 2077
+  sex: Female
+  speaker: maiko
+  id: maiko
+
+- type: ttsVoice
+  name: Брендан
+  description: Голос персонажа Брендан из игры Cyberpunk 2077
+  sex: Male
+  speaker: brendan
+  id: brendan
+
+- type: ttsVoice
+  name: Нэнси Хартли
+  description: Голос персонажа Нэнси Хартли из игры Cyberpunk 2077
+  sex: Female
+  speaker: nancy_hartley
+  id: nancy_hartley
+
+- type: ttsVoice
+  name: Освальд Форрест
+  description: Голос персонажа Освальд Форрест из игры Cyberpunk 2077
+  sex: Male
+  speaker: oswald_forrest
+  id: oswald_forrest
+
+- type: ttsVoice
+  name: Стив Санчес
+  description: Голос персонажа Стив Санчес из игры Cyberpunk 2077
+  sex: Male
+  speaker: steve
+  id: steve
+
+- type: ttsVoice
   name: Сержант Дорнан
   description: Голос персонажа Сержант Дорнан из игры Fallout 2
   sex: Male
@@ -608,6 +790,13 @@
   id: sulik
 
 - type: ttsVoice
+  name: Майрон
+  description: Голос персонажа Майрон из игры Fallout 2
+  sex: Male
+  speaker: myron
+  id: myron
+
+- type: ttsVoice
   name: Добрая Талия
   description: Голос персонажа Добрая Талия из игры Dungeons 3
   sex: Female
@@ -620,6 +809,13 @@
   sex: Female
   speaker: evil_thalya
   id: evil_thalya
+
+- type: ttsVoice
+  name: Рассказчик
+  description: Голос персонажа Рассказчик из игры Dungeons 3
+  sex: Male
+  speaker: narrator_d3
+  id: narrator_d3
 
 - type: ttsVoice
   name: Чувак
@@ -657,6 +853,13 @@
   id: jaina
 
 - type: ttsVoice
+  name: Утер Светоносный
+  description: Голос персонажа Утер Светоносный из игры Hearthstone
+  sex: Male
+  speaker: uther_hs
+  id: uther_hs
+
+- type: ttsVoice
   name: Адъютант
   description: Голос персонажа Адъютант из игры StarCraft 2
   sex: Female
@@ -683,6 +886,20 @@
   sex: Male
   speaker: horner
   id: horner
+
+- type: ttsVoice
+  name: Габриэль Тош
+  description: Голос персонажа Габриэль Тош из игры StarCraft 2
+  sex: Male
+  speaker: tosh
+  id: tosh
+
+- type: ttsVoice
+  name: Тайкус Финдли
+  description: Голос персонажа Тайкус Финдли из игры StarCraft 2
+  sex: Male
+  speaker: tychus
+  id: tychus
 
 - type: ttsVoice
   name: Амит Таккар
@@ -760,3 +977,73 @@
   sex: Female
   speaker: matildaweasley
   id: matildaweasley
+
+- type: ttsVoice
+  name: Натсай Онай
+  description: Голос персонажа Натсай Онай из игры Hogwarts Legacy
+  sex: Female
+  speaker: natsaionai
+  id: natsaionai
+
+- type: ttsVoice
+  name: Оминис Мракс
+  description: Голос персонажа Оминис Мракс из игры Hogwarts Legacy
+  sex: Male
+  speaker: ominisgaunt
+  id: ominisgaunt
+
+- type: ttsVoice
+  name: Поппи Добринг
+  description: Голос персонажа Поппи Добринг из игры Hogwarts Legacy
+  sex: Female
+  speaker: poppysweeting
+  id: poppysweeting
+
+- type: ttsVoice
+  name: Гоблин В
+  description: Голос персонажа Гоблин В из игры Hogwarts Legacy
+  sex: Male
+  speaker: generic_goblin_c
+  id: generic_goblin_c
+
+- type: ttsVoice
+  name: Дина Гекат
+  description: Голос персонажа Дина Гекат из игры Hogwarts Legacy
+  sex: Female
+  speaker: dinah_hecat
+  id: dinah_hecat
+
+- type: ttsVoice
+  name: Эзоп Шарп
+  description: Голос персонажа Эзоп Шарп из игры Hogwarts Legacy
+  sex: Male
+  speaker: aesop_sharp
+  id: aesop_sharp
+
+- type: ttsVoice
+  name: Абрахам Ронен
+  description: Голос персонажа Абрахам Ронен из игры Hogwarts Legacy
+  sex: Male
+  speaker: abraham_ronen
+  id: abraham_ronen
+
+- type: ttsVoice
+  name: Саманта Дейл
+  description: Голос персонажа Саманта Дейл из игры Hogwarts Legacy
+  sex: Female
+  speaker: samantha_dale
+  id: samantha_dale
+
+- type: ttsVoice
+  name: Сирона Райан
+  description: Голос персонажа Сирона Райан из игры Hogwarts Legacy
+  sex: Female
+  speaker: sirona_ryan
+  id: sirona_ryan
+
+- type: ttsVoice
+  name: Софрония Франклин
+  description: Голос персонажа Софрония Франклин из игры Hogwarts Legacy
+  sex: Female
+  speaker: sophronia_franklin
+  id: sophronia_franklin

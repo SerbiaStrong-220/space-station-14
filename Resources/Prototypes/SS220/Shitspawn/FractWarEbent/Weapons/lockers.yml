@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#USSP
+- type: entity
+  parent: GunSafe
+  id: GunSafeXrayCannon
+  name: оружейный сейф рентгеновских винтовок
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: AccessReader
+    access: [["Ussp"]]
+  - type: StorageFill
+    contents:
+    - id: WeaponXrayCannon
+      amount: 4
+
+- type: entity
+  parent: GunSafe
+  id: GunSafeRifleAk
+  name: оружейный сейф АКМС
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: AccessReader
+    access: [["Ussp"]]
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleAk
+      amount: 8
+    - id: BoxMagazineLightRifle
+      amount: 8
+
+#ERT
+- type: entity
+  parent: GunSafe
+  id: GunSafePulseCarbine
+  name: оружейный сейф импульсных карабинов
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPulseCarbine
+      amount: 8
+
+#Iron squad
+- type: entity
+  parent: GunSafe
+  id: GunSafeShotgunBulldog
+  name: оружейный сейф бульдогов
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: AccessReader
+    access: [["SyndicateAgent"]]
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunBulldog
+      amount: 4
+    - id: MagazineShotgun
+      amount: 8

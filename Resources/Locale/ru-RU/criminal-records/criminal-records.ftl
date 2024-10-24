@@ -10,7 +10,11 @@ criminal-records-console-status = Статус
 criminal-records-status-none = Нет
 criminal-records-status-wanted = Разыскивается
 criminal-records-status-detained = Под арестом
+criminal-records-status-suspected = Подозревается
+criminal-records-status-discharged = Освобождён
+criminal-records-status-paroled = Освобождён по УДО
 criminal-records-console-wanted-reason = [color=gray]Причина розыска[/color]
+criminal-records-console-suspected-reason = [color=gray]Причина подозрения[/color]
 criminal-records-console-reason = Причина
 criminal-records-console-reason-placeholder = Пример: { $placeholder }
 
@@ -25,10 +29,15 @@ criminal-records-permission-denied = Отказано в доступе
 
 ## Security channel notifications
 
-criminal-records-console-wanted = { $name } разыскивается по решению { $officer }, причина: { $reason }.
-criminal-records-console-detained = { $name } арестовали, арестовал: { $officer }.
-criminal-records-console-released = { $name } отпустили, отпустил: { $officer }.
-criminal-records-console-not-wanted = { $name } больше не разыскивается.
+criminal-records-console-wanted = { $name } теперь находится в розыске, причина: { $reason }, ответственный: { $officer }.
+criminal-records-console-suspected = { $name } теперь является подозреваемым, причина: { $reason }, ответственный: { $officer }.
+criminal-records-console-not-suspected = { $name } больше не является подозреваемым, ответственный: { $officer }.
+criminal-records-console-detained = { $name } арестовали, ответственный: { $officer }.
+criminal-records-console-released = { $name } отпустили, ответственный: { $officer }.
+criminal-records-console-not-wanted = { $name } больше не находится в розыске, ответственный: { $officer }.
+criminal-records-console-paroled = { $name } освободили по УДО, ответственный: { $officer }.
+criminal-records-console-not-parole = { $name } лишили права на УДО, ответственный: { $officer }.
+criminal-records-console-unknown-officer = <неизвестный>
 
 ## Filters
 

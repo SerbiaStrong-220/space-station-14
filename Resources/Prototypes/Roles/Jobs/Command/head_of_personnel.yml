@@ -6,6 +6,15 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 180000 # SS220-RoleTime
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 72000 # SS220-RoleTime 2
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
@@ -24,6 +33,7 @@
   - Chapel
   - Hydroponics
   - External
+  - Cryogenics
   # I mean they'll give themselves the rest of the access levels *anyways*.
   # As of 15/03/23 they can't do that so here's MOST of the rest of the access levels.
   # Head level access that isn't their own was deliberately left out, get AA from the captain instead.
@@ -34,7 +44,7 @@
   - Salvage
   - Security
   - Brig
-  - Lawyer
+#  - Lawyer #SS220-Law Department
   - Cargo
   - Atmospherics
   - Medical
@@ -46,14 +56,11 @@
 - type: startingGear
   id: HoPGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitHoP
-    back: ClothingBackpackHOPFilled
     shoes: ClothingShoesColorBrown
-    head: ClothingHeadHatHopcap
     id: HoPPDA
     gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
     belt: BoxFolderClipboard
-  innerClothingSkirt: ClothingUniformJumpskirtHoP
-  satchel: ClothingBackpackSatchelHOPFilled
-  duffelbag: ClothingBackpackDuffelHOPFilled
+  storage:
+    back:
+    - Flash

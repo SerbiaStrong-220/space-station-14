@@ -1,0 +1,333 @@
+- type: seed
+  id: beet
+  name: пакет семян (свёкла)
+  noun: seeds-noun-seeds
+  displayName: свёкла
+  plantRsi: SS220/Objects/Specific/Hydroponics/beet.rsi
+  packetPrototype: BeetSeeds
+  productPrototypes:
+    - Foodbeet
+  lifespan: 30
+  maturation: 10
+  production: 3
+  yield: 3
+  potency: 10
+  growthStages: 4
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: wtulip
+  name: пакет семян (белый тюльпан)
+  noun: seeds-noun-seeds
+  displayName: белый тюльпан
+  plantRsi: SS220/Objects/Specific/Hydroponics/wtulip.rsi
+  packetPrototype: WtulipSeeds
+  productPrototypes:
+    - wtulip
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: ytulip
+  name: пакет семян (желтый тюльпан)
+  noun: seeds-noun-seeds
+  displayName: желтый тюльпан
+  plantRsi: SS220/Objects/Specific/Hydroponics/ytulip.rsi
+  packetPrototype: YtulipSeeds
+  productPrototypes:
+    - ytulip
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: ptulip
+  name: пакет семян (розовый тюльпан)
+  noun: seeds-noun-seeds
+  displayName: розовый тюльпан
+  plantRsi: SS220/Objects/Specific/Hydroponics/ptulip.rsi
+  packetPrototype: PtulipSeeds
+  productPrototypes:
+    - ptulip
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: rclove
+  name: пакет семян (красная гвоздика)
+  noun: seeds-noun-seeds
+  displayName: красная гвоздика
+  plantRsi: SS220/Objects/Specific/Hydroponics/rclove.rsi
+  packetPrototype: RcloveSeeds
+  productPrototypes:
+    - rclove
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: wclove
+  name: пакет семян (белая гвоздика)
+  noun: seeds-noun-seeds
+  displayName: белая гвоздика
+  plantRsi: SS220/Objects/Specific/Hydroponics/wclove.rsi
+  packetPrototype: WcloveSeeds
+  productPrototypes:
+    - wclove
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: schamomile
+  name: пакет семян (космическая ромашка)
+  noun: seeds-noun-seeds
+  displayName: космическая ромашка
+  plantRsi: SS220/Objects/Specific/Hydroponics/schamomile.rsi
+  packetPrototype: SchamomileSeeds
+  productPrototypes:
+    - schamomile
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: wschamomile
+  name: пакет семян (белая космическая ромашка)
+  noun: seeds-noun-seeds
+  displayName: белая космическая ромашка
+  plantRsi: SS220/Objects/Specific/Hydroponics/wschamomile.rsi
+  packetPrototype: WschamomileSeeds
+  productPrototypes:
+    - wschamomile
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: sflower
+  name: пакет семян (Алоцвет)
+  noun: seeds-noun-seeds
+  displayName: Алоцвет
+  plantRsi: SS220/Objects/Specific/Hydroponics/sflower.rsi
+  packetPrototype: SflowerSeeds
+  productPrototypes:
+    - sflower
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: lflower
+  name: пакет семян (Лампоцвет)
+  noun: seeds-noun-seeds
+  displayName: Лампоцвет
+  plantRsi: SS220/Objects/Specific/Hydroponics/lflower.rsi
+  packetPrototype: LflowerSeeds
+  productPrototypes:
+    - lflower
+  lifespan: 30
+  maturation: 10
+  production: 2
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: rrose
+  name: пакет семян (Красная роза)
+  noun: seeds-noun-seeds
+  displayName: Красная роза
+  plantRsi: SS220/Objects/Specific/Hydroponics/rrose.rsi
+  packetPrototype: RroseSeeds
+  productPrototypes:
+    - rrose
+  lifespan: 30
+  maturation: 10
+  production: 1
+  yield: 1
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: wrose
+  name: пакет семян (Белая роза)
+  noun: seeds-noun-seeds
+  displayName: Белая роза
+  plantRsi: SS220/Objects/Specific/Hydroponics/wrose.rsi
+  packetPrototype: WroseSeeds
+  productPrototypes:
+    - wrose
+  lifespan: 30
+  maturation: 10
+  production: 1
+  yield: 1
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 4
+      PotencyDivisor: 25
+
+- type: seed
+  id: meatwheat
+  name: пакет семян (мясопшеница)
+  noun: seeds-noun-seeds
+  displayName: стебли мясопшеницы
+  plantRsi: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
+  packetPrototype: MeatwheatSeeds
+  productPrototypes:
+    - MeatwheatBushel
+  lifespan: 25
+  maturation: 6
+  production: 3
+  yield: 2
+  potency: 5
+  idealLight: 8
+  nutrientConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 20
+      PotencyDivisor: 20

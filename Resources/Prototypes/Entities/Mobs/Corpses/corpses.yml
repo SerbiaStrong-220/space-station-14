@@ -5,16 +5,21 @@
   components:
   - type: Loadout
     prototypes:
-      - HoPGear
-      - ClownGear
-      - MimeGear
-      - JanitorGear
-      - ServiceWorkerGear
-      - MusicianGear
-      - BotanistGear
-      - ChefGear
-      - ChaplainGear
-      - PassengerGear
+    #SS220 corpses equipment fix begin
+    - HoPStandartGear
+    - ClownStandartGear
+    - MimeStandartGear
+    - JanitorStandartGear
+    - ServiceWorkerStandartGear
+    - MusicianStandartGear
+    - BotanistStandartGear
+    - ChefStandartGear
+    - ChaplainStandartGear
+    - PassengerStandartGear
+    - ReporterStandartGear #SS220 new roles corpses
+    - ZookeeperStandartGear #SS220 new roles corpses
+    - DetectiveStandartGear #SS220 Detective in service
+    #SS220 corpses equipment fix end
 
 - type: entity
   parent: SalvageHumanCorpse
@@ -23,9 +28,11 @@
   components:
   - type: Loadout
     prototypes:
-    - TechnicalAssistantGear
-    - AtmosphericTechnicianGear
-    - StationEngineerGear
+    #SS220 corpses equipment fix begin
+    - TechnicalAssistantStandartGear
+    - AtmosphericTechnicianStandartGear
+    - StationEngineerStandartGear
+    #SS220 corpses equipment fix end
 
 - type: entity
   parent: SalvageHumanCorpse
@@ -34,8 +41,10 @@
   components:
   - type: Loadout
     prototypes:
-    - CargoTechGear
-    - SalvageSpecialistGear
+    #SS220 corpses equipment fix begin
+    - CargoTechStandartGear
+    - SalvageSpecialistStandartGear
+    #SS220 corpses equipment fix end
 
 - type: entity
   parent: SalvageHumanCorpse
@@ -44,10 +53,14 @@
   components:
   - type: Loadout
     prototypes:
-    - MedicalInternGear
-    - PsychologistGear
-    - ChemistGear
-    - DoctorGear
+    #SS220 corpses equipment fix begin
+    - MedicalInternStandartGear
+    - PsychologistStandartGear
+    - ChemistStandartGear
+    - DoctorStandartGear
+    - ParamedicStandartGear #SS220 new roles corpses
+    - BrigmedicStandartGear #SS220 new roles corpses
+    #SS220 corpses equipment fix end
 
 - type: entity
   parent: SalvageHumanCorpse
@@ -56,8 +69,10 @@
   components:
   - type: Loadout
     prototypes:
-    - ResearchAssistantGear
-    - ScientistGear
+    #SS220 corpses equipment fix begin
+    - ResearchAssistantStandartGear
+    - ScientistStandartGear
+    #SS220 corpses equipment fix end
 
 - type: entity
   parent: SalvageHumanCorpse
@@ -66,10 +81,13 @@
   components:
   - type: Loadout
     prototypes:
-    - SecurityCadetGear
-    - SecurityOfficerGear
-    - DetectiveGear
-    - WardenGear
+    #SS220 corpses equipment fix begin
+    - SecurityCadetStandartGear
+    - SecurityPilotStandartGear #SS220 new roles corpses
+    - SecurityOfficerStandartGear
+    # - DetectiveStandartGear
+    - WardenStandartGear
+    #SS220 corpses equipment fix end
 
 - type: entity
   parent: SalvageHumanCorpse
@@ -78,11 +96,13 @@
   components:
   - type: Loadout
     prototypes:
-    - HoPGear
-    - CentcomGear
-    - CaptainGear
-    - HoSGear
-    - ResearchDirectorGear
-    - CMOGear
-    - ChiefEngineerGear
-    - QuartermasterGear
+    #SS220 corpses equipment fix begin
+    - HoPStandartGear
+    - CentCommOfficerGear #SS220 New centcomm roles
+    - CaptainStandartGear
+    - HoSStandartGear
+    - ResearchDirectorStandartGear
+    - CMOStandartGear
+    - ChiefEngineerStandartGear
+    - QuartermasterStandartGear
+    #SS220 corpses equipment fix end

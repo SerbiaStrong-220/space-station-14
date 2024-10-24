@@ -60,7 +60,7 @@
     job: BlueShield
   - type: Sprite
     layers:
-    - state: default
+    - state: silver #SS220 Id Repsrite
     - state: idblueshield
 
 - type: entity
@@ -112,7 +112,7 @@
     - state: idintern-service
 
 - type: entity
-  parent: IDCardStandard
+  parent: [IDCardStandard]
   id: CaptainIDCard
   name: captain ID card
   components:
@@ -152,7 +152,7 @@
   - type: Sprite
     layers:
     - state: default
-    - state: idsecurityofficer
+    - state: idpilot
   - type: PresetIdCard
     job: SecurityPilot
 
@@ -459,6 +459,21 @@
 
 - type: entity
   parent: IDCardStandard
+  id: VisitorIDCard
+  name: visitor ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idvisitor
+  - type: IdCard
+    jobTitle: job-title-visitor
+    jobIcon: JobIconVisitor
+  - type: PresetIdCard
+    job: Visitor
+
+- type: entity
+  parent: IDCardStandard
   id: BrigmedicIDCard
   name: brigmedic ID card
   components:
@@ -473,6 +488,7 @@
   parent: IDCardStandard
   id: CentcomIDCard
   name: command officer ID card
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     layers:
@@ -481,16 +497,19 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Central Commander
+    jobTitle: job-name-cc-default #SS220 (upstream 65 localization)
     jobIcon: JobIconNanotrasen
   - type: Access
     groups:
-    - AllAccess
+    - AllAccess # SS220 Fast fix access
     tags:
     - CentralCommand
+    - CentralCommandERT # SS220 New CentComm
+  - type: PresetIdCard
+    job: CentralCommandOfficial
 
 - type: entity
-  parent: CentcomIDCard
+  parent: IDCardStandard
   id: ERTLeaderIDCard
   name: ERT leader ID card
   components:
@@ -499,12 +518,20 @@
     - state: gold
     - state: ert_commander
   - type: IdCard
-    jobTitle: ERT Company Commander
+    jobTitle: job-name-ert-commander # SS220 new CentComm #SS220 (upstream 65 localization)
+  - type: PresetIdCard
+    job: ERTLeader
   - type: Item
     heldPrefix: gold
+  # SS220 new CentComm begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
-  parent: ERTLeaderIDCard
+  parent: CentcomIDCard # SS220 new CentComm begin
   id: ERTChaplainIDCard
   name: ERT chaplain ID card
   components:
@@ -512,13 +539,16 @@
     layers:
     - state: gold
     - state: ert_chaplain # we have the sprite for the id but dont have chaplain ERT equipment for now.
-  - type: IdCard
-    jobTitle: ERT Soul Officer
+  - type: PresetIdCard
+    job: ERTChaplain
   - type: Item
     heldPrefix: blue
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
 
 - type: entity
-  parent: ERTChaplainIDCard
+  parent: IDCardStandard
   id: ERTEngineerIDCard
   name: ERT engineer ID card
   components:
@@ -526,11 +556,11 @@
     layers:
     - state: gold
     - state: ert_engineer
-  - type: IdCard
-    jobTitle: ERT Field Engineer
+  - type: PresetIdCard
+    job: ERTEngineer
 
 - type: entity
-  parent: ERTChaplainIDCard
+  parent: IDCardStandard
   id: ERTJanitorIDCard
   name: ERT janitor ID card
   components:
@@ -538,11 +568,11 @@
     layers:
     - state: gold
     - state: ert_janitor
-  - type: IdCard
-    jobTitle: ERT Custodian
+  - type: PresetIdCard
+    job: ERTJanitor
 
 - type: entity
-  parent: ERTChaplainIDCard
+  parent: IDCardStandard
   id: ERTMedicIDCard
   name: ERT medic ID card
   components:
@@ -550,11 +580,11 @@
     layers:
     - state: gold
     - state: ert_medic
-  - type: IdCard
-    jobTitle: ERT Medical Doctor
+  - type: PresetIdCard
+    job: ERTMedical
 
 - type: entity
-  parent: ERTChaplainIDCard
+  parent: IDCardStandard
   id: ERTSecurityIDCard
   name: ERT security ID card
   components:
@@ -562,13 +592,14 @@
     layers:
     - state: gold
     - state: ert_security
-  - type: IdCard
-    jobTitle: ERT Field Officer
+  - type: PresetIdCard
+    job: ERTSecurity
 
 - type: entity
   parent: IDCardStandard
   id: CentcomIDCardSyndie
   name: command officer ID card
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: Fake
   components:
   - type: Sprite
@@ -578,7 +609,7 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Central Commander
+    jobTitle: job-name-cc-default # #SS220 (upstream 65 localization)
   - type: Access
     groups:
     - AllAccess
@@ -596,9 +627,10 @@
       job: Musician
 
 - type: entity
-  parent: CentcomIDCard
+  parent: IDCardStandard
   id: CentcomIDCardDeathsquad
   name: death squad ID card
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
     layers:
@@ -606,7 +638,17 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Centcom Agent
+    jobTitle: job-name-cc-agent #SS220 (upstream 65 localization)
+  # SS220 new CentComm begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommandDeathSquad
+    - CentralCommand
+  # SS220 new CentComm end
+  - type: PresetIdCard
+    job: DeathSquad
 
 - type: entity
   name: passenger ID card
@@ -614,8 +656,8 @@
   id: AgentIDCard
   suffix: Agent
   components:
-  - type: IdCard
-    jobTitle: Passenger
+  - type: PresetIdCard
+    job: Passenger
   - type: Access
     tags:
     - Maintenance
@@ -625,54 +667,6 @@
     - state: default
     - state: idpassenger
   - type: AgentIDCard
-    icons:
-    # TODO figure out a better way of doing this.
-    # Probably by adding a bool or icon-category data-field to the icon prototype?
-    - JobIconDetective
-    - JobIconQuarterMaster
-    - JobIconBotanist
-    - JobIconBoxer
-    - JobIconAtmosphericTechnician
-    - JobIconNanotrasen
-    - JobIconPrisoner
-    - JobIconJanitor
-    - JobIconChemist
-    - JobIconStationEngineer
-    - JobIconSecurityOfficer
-    - JobIconChiefMedicalOfficer
-    - JobIconRoboticist
-    - JobIconChaplain
-    - JobIconLawyer
-    - JobIconUnknown
-    - JobIconLibrarian
-    - JobIconCargoTechnician
-    - JobIconScientist
-    - JobIconResearchAssistant
-    - JobIconGeneticist
-    - JobIconClown
-    - JobIconCaptain
-    - JobIconHeadOfPersonnel
-    - JobIconVirologist
-    - JobIconShaftMiner
-    - JobIconPassenger
-    - JobIconChiefEngineer
-    - JobIconBartender
-    - JobIconHeadOfSecurity
-    - JobIconMedicalDoctor
-    - JobIconParamedic
-    - JobIconChef
-    - JobIconWarden
-    - JobIconResearchDirector
-    - JobIconMime
-    - JobIconMusician
-    - JobIconReporter
-    - JobIconPsychologist
-    - JobIconMedicalIntern
-    - JobIconTechnicalAssistant
-    - JobIconServiceWorker
-    - JobIconSecurityCadet
-    - JobIconZookeeper
-    - JobIconVisitor
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
     inHandsOnly: true
@@ -684,10 +678,25 @@
     default: PassengerIDCard
   - type: UserInterface
     interfaces:
-      - key: enum.AgentIDCardUiKey.Key
+      enum.AgentIDCardUiKey.Key:
         type: AgentIDCardBoundUserInterface
-      - key: enum.ChameleonUiKey.Key
+      enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-AgentIDCard-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-AgentIDCard-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
 
 - type: entity
   name: passenger ID card
@@ -803,6 +812,7 @@
   parent: CentcomIDCard
   id: CBURNIDcard
   name: CBURN ID card
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   suffix: CBURN
   components:
   - type: Sprite
@@ -811,7 +821,18 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Centcom Quarantine Officer
+  # SS220 new CentComm begin
+  # SS220 CBURN questions changes name 05.07.2024
+    jobTitle: job-name-cburn-agent #SS220 (upstream 65 localization)
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommandCBURN
+    - CentralCommand
+  # SS220 new CentComm end
+  - type: PresetIdCard
+    job: CBURN
 
 - type: entity
   parent: IDCardStandard
@@ -824,10 +845,10 @@
     - state: default
     - state: idcluwne
   - type: IdCard
-    jobTitle: Cluwne
+    jobTitle: job-title-cluwne
   - type: Unremoveable
 
-- type: entity
+- type: entity #ss220
   parent: IDCardStandard
   id: SeniorEngineerIDCard
   name: senior engineer ID card
@@ -836,8 +857,10 @@
     layers:
     - state: default
     - state: idseniorengineer
+  - type: PresetIdCard
+    job: SeniorEngineer
 
-- type: entity
+- type: entity #ss220
   parent: IDCardStandard
   id: SeniorResearcherIDCard
   name: senior researcher ID card
@@ -846,8 +869,10 @@
     layers:
     - state: default
     - state: idseniorresearcher
+  - type: PresetIdCard
+    job: SeniorResearcher
 
-- type: entity
+- type: entity #ss220
   parent: IDCardStandard
   id: SeniorPhysicianIDCard
   name: senior physician ID card
@@ -856,8 +881,10 @@
     layers:
     - state: default
     - state: idseniorphysician
+  - type: PresetIdCard
+    job: SeniorPhysician
 
-- type: entity
+- type: entity # SS220
   parent: IDCardStandard
   id: SeniorOfficerIDCard
   name: senior officer ID card
@@ -866,3 +893,32 @@
     layers:
     - state: default
     - state: idseniorofficer
+  - type: PresetIdCard
+    job: SeniorOfficer
+
+- type: entity
+  parent: IDCardStandard
+  id: UniversalIDCard
+  name: universal ID card
+  suffix: Admin
+  description: An ID card that gives you access beyond your wildest dreams.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: admin
+    - state: idadmin
+  - type: Clothing
+    sprite: Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: green
+  - type: IdCard
+    jobTitle: job-title-universal
+    jobIcon: JobIconAdmin
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - CentralCommand
+    - NuclearOperative
+    - SyndicateAgent

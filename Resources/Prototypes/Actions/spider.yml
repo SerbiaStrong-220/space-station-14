@@ -2,10 +2,9 @@
   id: ActionSpiderWeb
   name: Spider Web
   description: Spawns a web that slows your prey down.
-  noSpawn: true
   components:
   - type: InstantAction
-    icon: Interface/Actions/web.png
+    icon: SS220/Interface/Actions/web.png #SS220 new web action sprite
     event: !type:SpiderWebActionEvent
     useDelay: 25
 
@@ -13,9 +12,8 @@
   id: ActionSericulture
   name: Weave silk
   description: Weave a bit of silk for use in arts and crafts.
-  noSpawn: true
   components:
   - type: InstantAction
-    icon: Interface/Actions/web.png
+    icon: SS220/Interface/Actions/web.png #SS220 new web action sprite
     event: !type:SericultureActionEvent
     useDelay: 1

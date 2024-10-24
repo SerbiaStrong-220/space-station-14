@@ -7,10 +7,11 @@
     contents:
       - id: FlashlightSeclite
       - id: WeaponDisabler
-        prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
+      - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -21,6 +22,11 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
+      - id: BookSpaceLaw
+      - id: ClothingBackpackElectropack
+        amount: 2
+      - id: RemoteSignaller
+        amount: 2
 
 - type: entity
   id: LockerWardenFilled
@@ -31,10 +37,11 @@
     contents:
       - id: FlashlightSeclite
       - id: WeaponDisabler
-        prob: 0.3
       - id: ClothingBeltSecurityFilled
       - id: Flash
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
+      - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -45,30 +52,11 @@
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
-#SS220-Pilot
-- type: entity
-  id: LockerPilotFilled
-  suffix: Filled
-  parent: LockerPilot
-  components:
-  - type: StorageFill
-    contents:
-      - id: FlashlightSeclite
-      - id: WeaponDisabler
-        prob: 0.3
-      - id: ClothingOuterArmorBobmer
-      - id: ClothingHeadHatPilotBeret
-      - id: ClothingBeltSecurityFilled
-      - id: Flash
-      - id: ClothingEyesGlassesSecurity
-      - id: ClothingHandsGlovesCombat
-      - id: ClothingShoesBootsJack
-      - id: ClothingEyesHudSecurity
-      - id: ClothingOuterHardsuitSecurity
-      - id: HandheldGPSBasic
-      - id: PilotBriefing
-      - id: OxygenTankFilled
-      - id: NitrogenTankFilled
+      - id: BookSpaceLaw
+      - id: ClothingBackpackElectropack
+        amount: 2
+      - id: RemoteSignaller
+        amount: 2
 
 - type: entity
   id: LockerSecurityFilled
@@ -78,7 +66,9 @@
   - type: StorageFill
     contents:
       - id: FlashlightSeclite
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.8
+      - id: WeaponDisabler
       - id: ClothingUniformJumpsuitSecGrey
         prob: 0.3
       - id: ClothingHeadHelmetBasic
@@ -86,7 +76,7 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
         prob: 0.5
-      - id: ClothingEyesGlassesSunglasses
+      - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetSecurity
       - id: ClothingHandsGlovesColorBlack
       - id: ClothingShoesBootsJack
@@ -94,9 +84,10 @@
         prob: 0.2
       - id: WeaponMeleeNeedle
         prob: 0.1
-      - id: ClothingEyesHudSecurity
       - id: HoloprojectorSecurity
         #prob: 0.6 # SS220 guranteed-holo-projector
+      - id: BookSpaceLaw
+        prob: 0.5
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -105,8 +96,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingEyesHudSecurity
-      - id: WeaponDisabler
+      - id: ClothingEyesHudMedical #ss220-brigmed
       - id: TrackingImplanter
         amount: 2
       - id: ClothingOuterHardsuitBrigmedic
@@ -116,6 +106,7 @@
       - id: ClothingUniformJumpsuitBrigmedic
       - id: ClothingUniformJumpskirtBrigmedic
       - id: ClothingUniformJumpskirtOfLife
+      - id: BodySecurityCamera #SS220-Bodycam
         prob: 0.1
       - id: MedkitFilled
       - id: MedkitCombatFilled
@@ -137,6 +128,8 @@
         prob: 0.5
       - id: ClothingOuterCoatLabSecurityMedic # Corvax-Resprite
         prob: 0.5
+      - id: OxygenTankFilled   #SS220 add-tanks-brigmed
+      - id: NitrogenTankFilled #SS220 add-tanks-brigmed
 
 - type: entity
   id: LockerDetectiveFilled
@@ -145,6 +138,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BodySecurityCamera #SS220-Bodycam
       - id: Telescopichka
       - id: ClothingEyesHudSecurity
         prob: 0.3
@@ -162,6 +156,11 @@
       - id: BookBusido # Corvax-Books
       - id: HoloprojectorSecurity
       - id: BoxEvidenceMarkers
+      - id: SpeedLoaderMagnum
+        amount: 2
+      - id: DetectiveHiddenCamera # SS220 add-detective-camera
+        amount: 3
+      - id: HandLabeler
 
 - type: entity
   id: ClosetBombFilled
@@ -181,7 +180,7 @@
         prob: 0.5
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe]
   id: GunSafeDisabler
   name: disabler safe
   components:
@@ -191,7 +190,7 @@
       amount: 5
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe]
   id: GunSafePistolMk58
   name: mk58 safe
   components:
@@ -203,7 +202,7 @@
       amount: 8
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe]
   id: GunSafeRifleLecter
   name: lecter safe
   components:
@@ -215,7 +214,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe]
   id: GunSafeSubMachineGunDrozd
   name: drozd safe
   components:
@@ -227,7 +226,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe]
   id: GunSafeShotgunEnforcer
   name: enforcer safe
   components:
@@ -239,7 +238,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: [GunSafe]
   id: GunSafeShotgunKammerer
   name: kammerer safe
   components:
@@ -253,14 +252,14 @@
 - type: entity
   id: GunSafeSubMachineGunWt550
   suffix: Wt550
-  parent: GunSafe
+  parent: [GunSafe]
   name: wt550 safe
   components:
   - type: StorageFill
     contents:
     - id: WeaponSubMachineGunWt550
       amount: 2
-    - id: MagazinePistolSubMachineGun
+    - id: MagazinePistolSubMachineGunTopMounted
       amount: 4
 
 - type: entity

@@ -1,0 +1,19 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BulletImpactEffectBlaster
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+      - shader: unshaded
+        map: ["enum.EffectLayers.Unshaded"]
+        sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+        state: impact_laser_red
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+      - HideContextMenu

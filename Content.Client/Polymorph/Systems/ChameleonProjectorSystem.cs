@@ -1,0 +1,44 @@
+using Content.Client.Lock.Visualizers;
+using Content.Client.Storage.Visualizers;
+using Content.Client.Wires;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Polymorph.Components;
+using Content.Shared.Polymorph.Systems;
+using Content.Shared.VendingMachines;
+using Robust.Client.GameObjects;
+
+namespace Content.Client.Polymorph.Systems;
+
+public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
+{
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+
+    private EntityQuery<AppearanceComponent> _appearanceQuery;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _appearanceQuery = GetEntityQuery<AppearanceComponent>();
+
+        SubscribeLocalEvent<ChameleonDisguiseComponent, AfterAutoHandleStateEvent>(OnHandleState);
+    }
+
+    private void OnHandleState(Entity<ChameleonDisguiseComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        //ss220 cham fix start
+        CopyComp<EntityStorageVisualsComponent>(ent);
+        CopyComp<LockVisualsComponent>(ent);
+        CopyComp<WiresVisualsComponent>(ent);
+        CopyComp<VendingMachineComponent>(ent);
+        //ss220 cham fix end
+
+        CopyComp<SpriteComponent>(ent);
+        CopyComp<GenericVisualizerComponent>(ent);
+        CopyComp<SolutionContainerVisualsComponent>(ent);
+
+        // reload appearance to hopefully prevent any invisible layers
+        if (_appearanceQuery.TryComp(ent, out var appearance))
+            _appearance.QueueUpdate(ent, appearance);
+    }
+}

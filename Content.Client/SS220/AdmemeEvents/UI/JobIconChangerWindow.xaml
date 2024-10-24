@@ -1,0 +1,16 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{Loc 'job-icon-changer-window-title'}"
+    MinSize="240 150"
+    Resizable="False"
+    >
+    <BoxContainer Orientation="Vertical">
+        <Label Text="{Loc 'job-icon-changer-window-header'}"/>
+        <GridContainer Name="IconGrid" Columns="5">
+            <!-- Job icon buttons are generated in the code -->
+        </GridContainer>
+    </BoxContainer>
+</DefaultWindow>

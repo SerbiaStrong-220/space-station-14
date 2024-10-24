@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Content.Shared.Ghost;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Pulling;
-using Content.Shared.Pulling.Components;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
@@ -30,7 +30,7 @@ public abstract class SharedPortalSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPullingSystem _pulling = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     [Dependency] private readonly SharedAnomalySystem _anomalySystem = default!;
@@ -97,15 +97,15 @@ public abstract class SharedPortalSystem : EntitySystem
             return;
 
         // break pulls before portal enter so we dont break shit
-        if (TryComp<SharedPullableComponent>(subject, out var pullable) && pullable.BeingPulled)
+        if (TryComp<PullableComponent>(subject, out var pullable) && pullable.BeingPulled)
         {
-            _pulling.TryStopPull(pullable);
+            _pulling.TryStopPull(subject, pullable);
         }
 
-        if (TryComp<SharedPullerComponent>(subject, out var pulling)
-            && pulling.Pulling != null && TryComp<SharedPullableComponent>(pulling.Pulling.Value, out var subjectPulling))
+        if (TryComp<PullerComponent>(subject, out var pullerComp)
+            && TryComp<PullableComponent>(pullerComp.Pulling, out var subjectPulling))
         {
-            _pulling.TryStopPull(subjectPulling);
+            _pulling.TryStopPull(pullerComp.Pulling.Value, subjectPulling);
         }
 
         // if they came from another portal, just return and wait for them to exit the portal
@@ -209,13 +209,19 @@ public abstract class SharedPortalSystem : EntitySystem
             projectile.IgnoreShooter = false;
         }
 
+        // SS220 RnD Balance revert, AnomalyComp cannot teleport via portal begin
+        if (HasComp<AnomalyComponent>(subject))
+        {
+            _popup.PopupCoordinates(Loc.GetString("portal-component-anomaly-reaction"),
+                ourCoords, Filter.Pvs(ourCoords, entityMan: EntityManager), true);
+            return;
+        }
+        // SS220 RnD Balance revert, AnomalyComp cannot teleport via portal end
+
         LogTeleport(portal, subject, Transform(subject).Coordinates, target);
 
         _transform.SetCoordinates(subject, target);
 
-        //SS220-rnd-reb
-        if (HasComp<AnomalyComponent>(subject))
-           _anomalySystem.DoAnomalySupercriticalEvent(subject);
 
         if (!playSound)
             return;

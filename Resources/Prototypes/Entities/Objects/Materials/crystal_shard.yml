@@ -6,19 +6,20 @@
   description:  A small piece of crystal.
   components:
   - type: Sharp
+  - type: Execution
+    doAfterDuration: 4.0
   - type: Sprite
-    layers:
-      - sprite: Objects/Materials/Shards/crystal.rsi
-        state: shard1
-        map: [ "enum.DamageStateVisualLayers.Base" ]
-  - type: RandomSprite
-    available:
-      - enum.DamageStateVisualLayers.Base:
-          shard1: ""
-          shard2: ""
-          shard3: ""
+    sprite: Objects/Materials/Shards/crystal.rsi #SS220-Crystal-Resprite-Start
+    state: shard
+#  - type: RandomSprite
+#    available:
+#      - enum.DamageStateVisualLayers.Base:
+#          shard1: ""
+#          shard2: ""
+#          shard3: "" #SS220-Crystal-Resprite-End
   - type: SpaceGarbage
   - type: MeleeWeapon
+    wideAnimationRotation: -22.5
     attackRate: 1.5
     damage:
       types:
@@ -133,3 +134,67 @@
     tags:
       - Trash
       - CrystalRed
+
+#SS220-New-Crystals-start
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalYellow
+  name: yellow crystal shard
+  components:
+  - type: Sprite
+    color: "#ffea19" #Неоновый жёлтый
+  - type: PointLight
+    radius: 2
+    energy: 2.5
+    color: "#ffea19" #Неоновый жёлтый
+  - type: Tag
+    tags:
+      - Trash
+      - CrystalYellow
+
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalPurple
+  name: purple crystal shard
+  components:
+  - type: Sprite
+    color: "#bc13fe" #Неоновый фиолетовый
+  - type: PointLight
+    radius: 2
+    energy: 2.5
+    color: "#bc13fe" #Неоновый фиолетовый
+  - type: Tag
+    tags:
+      - Trash
+      - CrystalPurple
+
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalWhite
+  name: white crystal shard
+  components:
+  - type: Sprite
+    color: "#ffffff" #Белый
+  - type: PointLight
+    radius: 2
+    energy: 2.5
+    color: "#ffffff" #Белый
+  - type: Tag
+    tags:
+      - Trash
+#SS220-New-Crystals-end
+
+- type: entity
+  parent: ShardCrystalBase
+  id: ShardCrystalRandom
+  name: random crystal shard
+  components:
+  - type: RandomSpawner
+    prototypes:
+      - ShardCrystalGreen
+      - ShardCrystalPink
+      - ShardCrystalOrange
+      - ShardCrystalBlue
+      - ShardCrystalCyan
+      - ShardCrystalRed
+    chance: 1

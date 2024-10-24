@@ -1,0 +1,27 @@
+- type: latheRecipe
+  id: ThermalVisorRND
+  result: ThermalVisorRND
+  completetime: 4
+  materials:
+    Steel: 500
+    Glass: 300
+    Plasma: 600
+    Plastic: 400
+
+- type: latheRecipe
+  id: ClothingEyesThermalGlassesSecurity
+  result: ClothingEyesThermalGlassesSecurity
+  completetime: 4
+  materials:
+    Steel: 800
+    Glass: 400
+    Plasma: 600
+    Plastic: 400
+
+- type: latheRecipe
+  id: DeviceCalculator
+  result: DeviceCalculator
+  completetime: 4
+  materials:
+    Steel: 200
+    Plastic: 200

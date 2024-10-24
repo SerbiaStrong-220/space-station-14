@@ -1,5 +1,5 @@
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: ClothingBackpackSatchel
   id: ClothingBackpackSatchelIAAFilled
   components:
@@ -8,9 +8,9 @@
         - id: BoxSurvival
         - id: Telescopichka
         - id: ExpensiveLighterNanotrasen #SS220-Zippo
-        
+
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: ClothingBackpackSatchelMedical
   id: ClothingBackpackSatchelPsychologistFilled
   components:

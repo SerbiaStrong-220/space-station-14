@@ -1,0 +1,562 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/dd190ff418ab64d60c9c975dcb01c3de350007d1/icons/obj/storage/closet.dmi and resprited by Kit0vras (Github) for SS220",
+  "license": "CC-BY-SA-3.0",
+  "states": [
+    {
+      "name": "armory"
+    },
+    {
+      "name": "armory_steel_locker"
+    },
+    {
+      "name": "atmos"
+    },
+    {
+      "name": "blueshield"
+    },
+    {
+      "name": "botanist"
+    },
+    {
+      "name": "brown_steel_locker"
+    },
+    {
+      "name": "captain"
+    },
+    {
+      "name": "cargotechnician"
+    },
+    {
+      "name": "ce"
+    },
+    {
+      "name": "clown"
+    },
+    {
+      "name": "cmo"
+    },
+    {
+      "name": "deathsquad"
+    },
+    {
+      "name": "emergency"
+    },
+    {
+      "name": "engineer"
+    },
+    {
+      "name": "ert"
+    },
+    {
+      "name": "fire"
+    },
+    {
+      "name": "freezer"
+    },
+    {
+      "name": "green_steel_locker"
+    },
+    {
+      "name": "hop"
+    },
+    {
+      "name": "hos"
+    },
+    {
+      "name": "mime"
+    },
+    {
+      "name": "miner"
+    },
+    {
+      "name": "nt"
+    },
+    {
+      "name": "orange_steel_locker"
+    },
+    {
+      "name": "qm"
+    },
+    {
+      "name": "rd"
+    },
+    {
+      "name": "red_steel_locker"
+    },
+    {
+      "name": "roboticist"
+    },
+    {
+      "name": "scientist"
+    },
+    {
+      "name": "security"
+    },
+    {
+      "name": "storage_black"
+    },
+    {
+      "name": "storage_eng"
+    },
+    {
+      "name": "storage_red"
+    },
+    {
+      "name": "storage_white"
+    },
+    {
+      "name": "syndicate"
+    },
+    {
+      "name": "wardrobe"
+    },
+    {
+      "name": "wardrobe_dark"
+    },
+    {
+      "name": "wardrobe_steel_dark"
+    },
+    {
+      "name": "white_steel_locker"
+    },
+    {
+      "name": "yellow_steel_locker"
+    },
+    {
+      "name": "generic_icon"
+    },
+    {
+      "name": "secured_icon"
+    },
+    {
+      "name": "freezer_open"
+    },
+    {
+      "name": "generic"
+    },
+    {
+      "name": "generic_open"
+    },
+    {
+      "name": "meddarksteel_open"
+    },
+    {
+      "name": "medsteel_open"
+    },
+    {
+      "name": "secdarksteel_open"
+    },
+    {
+      "name": "secsteel_open"
+    },
+    {
+      "name": "steeldarklocker_open"
+    },
+    {
+      "name": "steellocker_open"
+    },
+    {
+      "name": "steellocker_storage_open"
+    },
+    {
+      "name": "steeldarklocker_storage_open"
+    },
+    {
+      "name": "wardrobe_open"
+    },
+    {
+      "name": "armory_armor_door"
+    },
+    {
+      "name": "armory_door"
+    },
+    {
+      "name": "armory_energy_gun_door"
+    },
+    {
+      "name": "armory_gun_door"
+    },
+    {
+      "name": "atmos_door"
+    },
+    {
+      "name": "atmos_wardrobe_door"
+    },
+    {
+      "name": "bartender_wardrobe_door"
+    },
+    {
+      "name": "bio_door"
+    },
+    {
+      "name": "bio_janitor_door"
+    },
+    {
+      "name": "bio_security_door"
+    },
+    {
+      "name": "bio_virologist_door"
+    },
+    {
+      "name": "black_wardrobe_door"
+    },
+    {
+      "name": "blue_wardrobe_door"
+    },
+    {
+      "name": "blueshield_door"
+    },
+    {
+      "name": "blueshield_wardrobe_door"
+    },
+    {
+      "name": "bomb_door"
+    },
+    {
+      "name": "bomb_janitor_door"
+    },
+    {
+      "name": "botanist_door"
+    },
+    {
+      "name": "botanist_wardrobe_door"
+    },
+    {
+      "name": "brigmedic_door"
+    },
+    {
+      "name": "brigmedic_storage_door"
+    },
+    {
+      "name": "brown_door"
+    },
+    {
+      "name": "captain_door"
+    },
+    {
+      "name": "cargotechnician_door"
+    },
+    {
+      "name": "cargotechnician_wardrobe_door"
+    },
+    {
+      "name": "ce_door"
+    },
+    {
+      "name": "chaplain_wardrobe_door"
+    },
+    {
+      "name": "chef_wardrobe_door"
+    },
+    {
+      "name": "chemist_door"
+    },
+    {
+      "name": "chemist_wardrobe_door"
+    },
+    {
+      "name": "chemist_storage_door"
+    },
+    {
+      "name": "clown_door"
+    },
+    {
+      "name": "cmo_door"
+    },
+    {
+      "name": "deathsquad_door"
+    },
+    {
+      "name": "detective_wardrobe_door"
+    },
+    {
+      "name": "emergency_door"
+    },
+    {
+      "name": "eng_elec_door"
+    },
+    {
+      "name": "eng_rad_door"
+    },
+    {
+      "name": "eng_tool_door"
+    },
+    {
+      "name": "eng_weld_door"
+    },
+    {
+      "name": "engineer_door"
+    },
+    {
+      "name": "engineer_wardrobe_door"
+    },
+    {
+      "name": "ert_chap_door"
+    },
+    {
+      "name": "ert_com_door"
+    },
+    {
+      "name": "ert_eng_door"
+    },
+    {
+      "name": "ert_jan_door"
+    },
+    {
+      "name": "ert_med_door"
+    },
+    {
+      "name": "ert_sec_door"
+    },
+    {
+      "name": "fire_door"
+    },
+    {
+      "name": "freezer_door"
+    },
+    {
+      "name": "generic_army_door"
+    },
+    {
+      "name": "generic_black_door"
+    },
+    {
+      "name": "generic_blue_door"
+    },
+    {
+      "name": "generic_brown_door"
+    },
+    {
+      "name": "generic_door"
+    },
+    {
+      "name": "generic_green_door"
+    },
+    {
+      "name": "generic_orange_door"
+    },
+    {
+      "name": "generic_pink_door"
+    },
+    {
+      "name": "generic_purple_door"
+    },
+    {
+      "name": "generic_red_door"
+    },
+    {
+      "name": "generic_white_door"
+    },
+    {
+      "name": "generic_yellow_door"
+    },
+    {
+      "name": "geneticist_door"
+    },
+    {
+      "name": "geneticist_wardrobe_door"
+    },
+    {
+      "name": "green_wardrobe_door"
+    },
+    {
+      "name": "grey_wardrobe_door"
+    },
+    {
+      "name": "hop_door"
+    },
+    {
+      "name": "hos_door"
+    },
+    {
+      "name": "iaa_wardrobe_door"
+    },
+    {
+      "name": "janitor_wardrobe_door"
+    },
+    {
+      "name": "lawyer_wardrobe_door"
+    },
+    {
+      "name": "magistrate_door"
+    },
+    {
+      "name": "med_storage_door"
+    },
+    {
+      "name": "medic_door"
+    },
+    {
+      "name": "medic_wardrobe_door"
+    },
+    {
+      "name": "mime_door"
+    },
+    {
+      "name": "miner_door"
+    },
+    {
+      "name": "miner_wardrobe_door"
+    },
+    {
+      "name": "mixed_wardrobe_door"
+    },
+    {
+      "name": "musician_wardrobe_door"
+    },
+    {
+      "name": "n2_door"
+    },
+    {
+      "name": "n2o_door"
+    },
+    {
+      "name": "nt_door"
+    },
+    {
+      "name": "nt_wardrobe_door"
+    },
+    {
+      "name": "orange_wardrobe_door"
+    },
+    {
+      "name": "paramedic_door"
+    },
+    {
+      "name": "paramedic_storage_door"
+    },
+    {
+      "name": "pink_wardrobe_door"
+    },
+    {
+      "name": "prisoner_door"
+    },
+    {
+      "name": "prisoner_wardrobe_door"
+    },
+    {
+      "name": "psychologist_door"
+    },
+    {
+      "name": "psychologist_storage_door"
+    },
+    {
+      "name": "qm_door"
+    },
+    {
+      "name": "rd_door"
+    },
+    {
+      "name": "red_wardrobe_door"
+    },
+    {
+      "name": "reporter_wardrobe_door"
+    },
+    {
+      "name": "roboticist_door"
+    },
+    {
+      "name": "roboticist_wardrobe_door"
+    },
+    {
+      "name": "scientist_door"
+    },
+    {
+      "name": "scientist_wardrobe_door"
+    },
+    {
+      "name": "secure_door"
+    },
+    {
+      "name": "securityofficer_door"
+    },
+    {
+      "name": "securityofficer_wardrobe_door"
+    },
+    {
+      "name": "securitypilot_door"
+    },
+    {
+      "name": "securitywarden_door"
+    },
+    {
+      "name": "syndicate_door"
+    },
+    {
+      "name": "syndicate_medic_door"
+    },
+    {
+      "name": "syndicate_medic_storage_door"
+    },
+    {
+      "name": "virologist_door"
+    },
+    {
+      "name": "virologist_storage_door"
+    },
+    {
+      "name": "virologist_wardrobe_door"
+    },
+    {
+      "name": "white_wardrobe_door"
+    },
+    {
+      "name": "yellow_wardrobe_door"
+    },
+    {
+      "name": "agentbox"
+    },
+    {
+      "name": "cardboard"
+    },
+    {
+      "name": "cardboard_open"
+    },
+    {
+      "name": "cabinet"
+    },
+    {
+      "name": "cabinet_door"
+    },
+    {
+      "name": "cabinet_open"
+    },
+    {
+      "name": "locked"
+    },
+    {
+      "name": "unlocked"
+    },
+    {
+      "name": "welded"
+    },
+    {
+      "name": "sparking",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bounty"
+    },
+    {
+      "name": "captains_paper"
+    },
+    {
+      "name": "invoice"
+    },
+    {
+      "name": "paper"
+    }
+  ]
+}

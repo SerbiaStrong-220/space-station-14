@@ -1,0 +1,8 @@
+- type: antagGroup
+  id: Nukeops
+  name: antag-group-nukeops
+  color: crimson
+  roles:
+  - Nukeops
+  - NukeopsMedic
+  - NukeopsCommander

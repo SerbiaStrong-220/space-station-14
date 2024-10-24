@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Connection;
 using Content.Server.Corvax.DiscordAuth;
 using Content.Shared.CCVar;
@@ -69,7 +69,7 @@ public sealed class JoinQueueManager
         {
             foreach (var session in _queue)
             {
-                session.ConnectedClient.Disconnect("Queue was disabled");
+                session.Channel.Disconnect("Queue was disabled");
             }
         }
     }
@@ -149,7 +149,7 @@ public sealed class JoinQueueManager
     {
         for (var i = 0; i < _queue.Count; i++)
         {
-            _queue[i].ConnectedClient.SendMessage(new MsgQueueUpdate
+            _queue[i].Channel.SendMessage(new MsgQueueUpdate
             {
                 Total = _queue.Count,
                 Position = i + 1,

@@ -40,7 +40,7 @@
       powerLoad: 1500
     - type: ExtensionCableReceiver
     - type: Damageable
-      damageContainer: Inorganic
+      damageContainer: StructuralInorganic
       damageModifierSet: Electronic
     - type: Destructible
       thresholds:
@@ -85,7 +85,7 @@
         - !type:ChangeConstructionNodeBehavior
           node: machineFrame
   - type: Sprite
-    sprite: Structures/Shuttles/thruster.rsi
+    sprite: SS220/Structures/Shuttles/thruster.rsi #SS220-RespriteThruster
     layers:
     - state: base
       map: ["enum.ThrusterVisualLayers.Base"]
@@ -120,7 +120,7 @@
     needsPower: false
     powerLoad: 0
   - type: Sprite
-    sprite: Structures/Shuttles/thruster.rsi
+    sprite: SS220/Structures/Shuttles/thruster.rsi #SS220-RespriteThruster
     layers:
     - state: base
       map: ["enum.ThrusterVisualLayers.Base"]
@@ -193,7 +193,7 @@
         - !type:ChangeConstructionNodeBehavior
           node: machineFrame
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic
     damageModifierSet: Electronic
   - type: StaticPrice
     price: 2000

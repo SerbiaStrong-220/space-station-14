@@ -1,8 +1,10 @@
 using Content.Client.Shuttles.UI;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Events;
+using Content.Shared.SS220.CruiseControl;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
+using Robust.Shared.Map;
 
 namespace Content.Client.Shuttles.BUI;
 
@@ -19,26 +21,60 @@ public sealed class ShuttleConsoleBoundUserInterface : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        _window = new ShuttleConsoleWindow();
-        _window.UndockPressed += OnUndockPressed;
-        _window.StartAutodockPressed += OnAutodockPressed;
-        _window.StopAutodockPressed += OnStopAutodockPressed;
-        _window.DestinationPressed += OnDestinationPressed;
-        _window.OpenCentered();
-        _window.OnClose += OnClose;
+        _window = this.CreateWindow<ShuttleConsoleWindow>();
+
+        _window.RequestFTL += OnFTLRequest;
+        _window.RequestBeaconFTL += OnFTLBeaconRequest;
+        _window.DockRequest += OnDockRequest;
+        _window.UndockRequest += OnUndockRequest;
+
+        _window.SetCruiseControl += OnCruiseControlChanged; // SS220 Cruise-Control
     }
 
-    private void OnDestinationPressed(NetEntity obj)
+    // SS220 Cruise-Control begin
+    private void OnCruiseControlChanged(bool enabled, float throttle)
     {
-        SendMessage(new ShuttleConsoleFTLRequestMessage()
+        SendMessage(new CruiseControlMessage()
         {
-            Destination = obj,
+            Enabled = enabled,
+            Throttle = throttle
+        });
+    }
+    // SS220 Cruise-Control end
+
+    private void OnUndockRequest(NetEntity entity)
+    {
+        SendMessage(new UndockRequestMessage()
+        {
+            DockEntity = entity,
         });
     }
 
-    private void OnClose()
+    private void OnDockRequest(NetEntity entity, NetEntity target)
     {
-        Close();
+        SendMessage(new DockRequestMessage()
+        {
+            DockEntity = entity,
+            TargetDockEntity = target,
+        });
+    }
+
+    private void OnFTLBeaconRequest(NetEntity ent, Angle angle)
+    {
+        SendMessage(new ShuttleConsoleFTLBeaconMessage()
+        {
+            Beacon = ent,
+            Angle = angle,
+        });
+    }
+
+    private void OnFTLRequest(MapCoordinates obj, Angle angle)
+    {
+        SendMessage(new ShuttleConsoleFTLPositionMessage()
+        {
+            Coordinates = obj,
+            Angle = angle,
+        });
     }
 
     protected override void Dispose(bool disposing)
@@ -51,27 +87,12 @@ public sealed class ShuttleConsoleBoundUserInterface : BoundUserInterface
         }
     }
 
-    private void OnStopAutodockPressed(NetEntity obj)
-    {
-        SendMessage(new StopAutodockRequestMessage() { DockEntity = obj });
-    }
-
-    private void OnAutodockPressed(NetEntity obj)
-    {
-        SendMessage(new AutodockRequestMessage() { DockEntity = obj });
-    }
-
-    private void OnUndockPressed(NetEntity obj)
-    {
-        SendMessage(new UndockRequestMessage() { DockEntity = obj });
-    }
-
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
-        if (state is not ShuttleConsoleBoundInterfaceState cState) return;
+        if (state is not ShuttleBoundUserInterfaceState cState)
+            return;
 
-        _window?.SetMatrix(EntMan.GetCoordinates(cState.Coordinates), cState.Angle);
-        _window?.UpdateState(cState);
+        _window?.UpdateState(Owner, cState);
     }
 }

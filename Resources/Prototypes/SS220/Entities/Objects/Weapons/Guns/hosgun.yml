@@ -1,0 +1,80 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseWeaponRevolver
+  id: WeaponRevolverMatebaSouvenir
+  name: unika
+  description: A souvenir version of the Mateb auto revolver with a gold coating. Due to other materials, it has a structurally reduced rate of fire. Uses caliber cartridges .45 magnum.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/hosgun.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/hosgun.rsi
+  - type: RevolverAmmoProvider
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+  - type: Gun
+    fireRate: 2.1
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
+      params:
+        volume: 0.8
+  - type: StaticPrice
+    price: 5000
+
+- type: entity
+  parent: BaseStorageItem
+  id: LockedUnicaBox
+  name: a protected revolver case
+  description: A shockproof case with a lock for storing a revolver. It is an accessory to the souvenir revolver "Unica".
+  components:
+  - type: Storage
+    grid:
+    - 0,0,4,1
+    maxItemSize: Small
+  - type: Item
+    size: Large
+  - type: StorageFill
+    contents:
+      - id: WeaponRevolverMatebaSouvenir
+      - id: SpeedLoaderMagnum
+        amount: 2
+  - type: AccessReader
+    access: [["HeadOfSecurity"]]
+  - type: Lock
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/hosgun_box.rsi
+    layers:
+    - state: icon
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: open-lock-overlay
+      map: ["openIndicator"]
+      visible: false
+      shader: unshaded
+    - state: lock-closed
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+  - type: Appearance
+  - type: EngraveNameOnOpen
+    autoEngraveLocKey: mateba-name-engraving
+    toEngrave:
+    - WeaponRevolverMatebaSouvenir
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+        openIndicator:
+          Open: { visible: true }
+          Closed: { visible: false }
+        enum.LockVisualLayers.Lock:
+          Open: { visible: false }
+          Closed: { visible: true }
+  - type: EntityStorageVisuals
+    stateLocked: lock-closed
+    stateUnlocked: lock-open

@@ -2,56 +2,44 @@
   id: BulletPistol
   name: bullet (.35 auto)
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 16
+        Piercing: 20 #ss220lowTTKUpdate
 
 - type: entity
   id: BulletPistolPractice
   name: bullet (.35 auto practice)
   parent: BaseBulletPractice
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
         Blunt: 2
-
-- type: entity
-  id: BulletPistolRubber
-  name: bullet (.35 auto rubber)
-  parent: BaseBulletRubber
-  noSpawn: true
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-        Stamina: 22
 
 - type: entity
   id: BulletPistolIncendiary
   parent: BaseBulletIncendiary
   name: bullet (.35 auto incendiary)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Blunt: 2
-        Heat: 14
+        Blunt: 16 #ss220weaponBalance
+        Heat: 2 #ss220weaponBalance
 
 - type: entity
   id: BulletPistolUranium
   parent: BaseBulletUranium
   name: bullet (.35 auto uranium)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
         Radiation: 6
-        Piercing: 10
+        Piercing: 14 #ss220lowTTKUpdate

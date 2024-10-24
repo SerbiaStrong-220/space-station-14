@@ -69,9 +69,12 @@
       - FoodSoupOnion
       - FoodSoupBisque
       - FoodSoupBungo
-      - FoodMealSoftTaco
       - FoodMealCornInButter
       - FoodSoupStew
+      - FoodSoupShchi #ss220 cooking
+      - FoodSoupOkroshka #ss220 cooking
+      - FoodSoupOkroshkaKvass #ss220 cooking
+      - FoodSaladVinaigrette #ss220 cooking
     chance: 0.8
     offset: 0.0
     #rare

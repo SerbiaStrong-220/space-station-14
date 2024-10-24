@@ -20,12 +20,14 @@ namespace Content.Server.Administration.Commands
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             var _containerSystem = _entMan.System<SharedContainerSystem>();
+            var _tag = _entMan.System<TagSystem>();
+
             int processed = 0;
             foreach (var ent in _entMan.GetEntities())
             {
                 if (!_entMan.TryGetComponent<TagComponent>(ent, out var component))
                     continue;
-                if (!component.Tags.Contains("Trash") || _containerSystem.IsEntityOrParentInContainer(ent))
+                if (!_tag.HasTag(ent, "Trash") || _containerSystem.IsEntityOrParentInContainer(ent))
                     continue;
 
                 _entMan.DeleteEntity(ent);

@@ -1,4 +1,18 @@
-# Random humanoids
+## Random humanoids
+
+- type: randomHumanoidSettings
+  id: EventHumanoid
+  components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
+    - type: GhostTakeoverAvailable
+
+- type: randomHumanoidSettings
+  id: EventHumanoidMindShielded
+  parent: EventHumanoid
+  components:
+    - type: MindShield
+    - type: AntagImmune
 
 ## Death Squad
 
@@ -16,24 +30,30 @@
         - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: DeathSquad
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: DeathSquad
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-Death-Squad-name
       description: ghost-role-information-Death-Squad-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-Death-Squad-rules
+      raffle:
+        settings: short
     - type: Loadout
       prototypes: [ DeathSquadGear ]
+      roleLoadout: [ RoleSurvivalEVA ]
     - type: RandomMetadata
       nameSegments:
         - NamesFirstMilitaryLeader
         - NamesLastMilitary
-    - type: InitialInfectedExempt
 
 
 ## ERT Leader
@@ -52,27 +72,30 @@
       - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTLeader
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeader
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
-    - type: GhostTakeoverAvailable
+      raffle:
+        settings: short
+      job: ERTLeader
     - type: Loadout
       prototypes: [ ERTLeaderGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitaryLeader
       - NamesLastMilitary
-    - type: InitialInfectedExempt
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVA
@@ -85,20 +108,22 @@
       state: ertleadereva
     - type: RandomHumanoidSpawner
       settings: ERTLeaderEVA
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTLeader
     - type: Loadout
       prototypes: [ ERTLeaderGearEVA ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVALecter
@@ -107,20 +132,90 @@
   components:
     - type: RandomHumanoidSpawner
       settings: ERTLeaderEVALecter
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeaderEVA
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTLeader
     - type: Loadout
       prototypes: [ ERTLeaderGearEVALecter ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
+
+## ERT Chaplain
+
+- type: entity
+  id: RandomHumanoidSpawnerERTChaplain
+  parent: RandomHumanoidSpawnerERTLeader
+  name: ERT chaplain
+  suffix: ERTRole, Basic
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: chaplain #needs an ERT variant once a good suit it made.
+    - type: RandomMetadata
+      nameSegments:
+      - NamesFirstMilitary
+      - NamesLastMilitary
+    - type: RandomHumanoidSpawner
+      settings: ERTChaplain
+
+- type: randomHumanoidSettings
+  id: ERTChaplain
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  parent: ERTLeader
+  components:
+    - type: BibleUser
+    - type: GhostRole
+      name: ghost-role-information-ert-chaplain-name
+      description: ghost-role-information-ert-chaplain-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTChaplain
+    - type: RandomMetadata
+      nameSegments:
+      - NamesFirstMilitary
+      - NamesLastMilitary
+    - type: Loadout
+      prototypes: [ ERTChaplainGear ]
+      roleLoadout: [ RoleSurvivalExtended ]
+
+- type: entity
+  id: RandomHumanoidSpawnerERTChaplainEVA
+  parent: RandomHumanoidSpawnerERTChaplain
+  name: ERT chaplain
+  suffix: ERTRole, Enviro EVA
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: chaplain #needs an ERT variant once a good suit it made.
+    - type: RandomHumanoidSpawner
+      settings: ERTChaplainEVA
+
+- type: randomHumanoidSettings
+  id: ERTChaplainEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  parent: ERTChaplain
+  components:
+    - type: GhostRole
+      name: ghost-role-information-ert-chaplain-name
+      description: ghost-role-information-ert-chaplain-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTChaplain
+    - type: Loadout
+      prototypes: [ ERTChaplainGearEVA ]
+      roleLoadout: [ RoleSurvivalEVA ]
+    - type: BibleUser
 
 ## ERT Janitor
 
@@ -142,23 +237,26 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitor
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
-    - type: GhostTakeoverAvailable
+      raffle:
+        settings: short
+      job: ERTJanitor
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTJanitorEVA
@@ -174,16 +272,19 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitorEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTJanitor
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTJanitor
     - type: Loadout
       prototypes: [ ERTJanitorGearEVA ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Engineer
 
@@ -205,23 +306,26 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineer
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
-    - type: GhostTakeoverAvailable
+      raffle:
+        settings: short
+      job: ERTEngineer
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTEngineerEVA
@@ -237,16 +341,19 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineerEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTEngineer
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTEngineer
     - type: Loadout
       prototypes: [ ERTEngineerGearEVA ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Security
 
@@ -268,23 +375,26 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurity
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
-    - type: GhostTakeoverAvailable
+      raffle:
+        settings: short
+      job: ERTSecurity
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVA
@@ -300,16 +410,19 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTSecurity
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTSecurity
     - type: Loadout
       prototypes: [ ERTSecurityGearEVA ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVALecter
@@ -321,16 +434,19 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVALecter
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTSecurityEVA
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTSecurity
     - type: Loadout
       prototypes: [ ERTSecurityGearEVALecter ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## ERT Medic
 
@@ -352,23 +468,26 @@
 
 - type: randomHumanoidSettings
   id: ERTMedical
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTLeader
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
-    - type: GhostTakeoverAvailable
+      raffle:
+        settings: short
+      job: ERTMedical
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
       - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTMedicalEVA
@@ -384,16 +503,19 @@
 
 - type: randomHumanoidSettings
   id: ERTMedicalEVA
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
   parent: ERTMedical
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTMedical
     - type: Loadout
       prototypes: [ ERTMedicalGearEVA ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalEVA ]
 
 ## CBURN
 
@@ -407,50 +529,60 @@
       state: cburn
     - type: RandomHumanoidSpawner
       settings: CBURNAgent
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: CBURNAgent
+  speciesBlacklist: [ Diona, Skeleton, Vox,  Moth, Felinid] #SS220-centcom-human-preset-fix
+  parent: EventHumanoidMindShielded
   components:
-    - type: MindShield
     - type: Loadout
       prototypes: [CBURNGear]
+      roleLoadout: [ RoleSurvivalEVA ]
     - type: GhostRole
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description
+      rules: ghost-role-information-nonantagonist-rules
       requirements:
       - !type:OverallPlaytimeRequirement
         time: 144000 #SS220 ghostrole-times (40h overall)
-    - type: GhostTakeoverAvailable
+      raffle:
+        settings: short
     - type: RandomMetadata
       nameSegments:
       - NamesFirstMilitary
       - NamesLastMilitary
-    - type: InitialInfectedExempt
+
 ## Central Command
 
 - type: entity
-  name: CentCom official
+  name: CentComm official
   id: RandomHumanoidSpawnerCentcomOfficial
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Markers/jobs.rsi
       state: centcom
     - type: RandomHumanoidSpawner
       settings: CentcomOfficial
-    - type: InitialInfectedExempt
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
+  parent: EventHumanoidMindShielded
   components:
-    - type: MindShield
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
       description: ghost-role-information-centcom-official-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: default
     - type: Loadout
       prototypes: [ CentcomGear ]
-    - type: InitialInfectedExempt
+      roleLoadout: [ RoleSurvivalStandard ]
 
 ## Syndicate
 
@@ -469,8 +601,11 @@
 - type: randomHumanoidSettings
   id: SyndicateAgent
   components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
     - type: Loadout
       prototypes: [SyndicateOperativeGearExtremelyBasic]
+      roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
   id: RandomHumanoidSpawnerNukeOp
@@ -484,7 +619,14 @@
 
 - type: randomHumanoidSettings
   id: NukeOp
+#SS220 Vox Update V1 Begin
+  speciesBlacklist:
+    - Felinid
+    - Vox # Спрайт скафандра оффский
+#SS220 Vox Update V1 End
   components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
     - type: NukeOperative
 
 - type: entity
@@ -504,10 +646,13 @@
 
 - type: randomHumanoidSettings
   id: Cluwne
+  parent: EventHumanoid
   randomizeName: false
   components:
     - type: GhostRole
       name: ghost-role-information-cluwne-name
       description: ghost-role-information-cluwne-description
-    - type: GhostTakeoverAvailable
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: default
     - type: Cluwne

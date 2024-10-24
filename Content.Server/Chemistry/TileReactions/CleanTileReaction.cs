@@ -1,4 +1,4 @@
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
@@ -32,13 +32,16 @@ public sealed partial class CleanTileReaction : ITileReaction
     [DataField("reagent", customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
     public string ReplacementReagent = "Water";
 
-    FixedPoint2 ITileReaction.TileReact(TileRef tile, ReagentPrototype reagent, FixedPoint2 reactVolume)
+    FixedPoint2 ITileReaction.TileReact(TileRef tile,
+        ReagentPrototype reagent,
+        FixedPoint2 reactVolume,
+        IEntityManager entityManager
+        , List<ReagentData>? data)
     {
-        var entMan = IoCManager.Resolve<IEntityManager>();
-        var entities = entMan.System<EntityLookupSystem>().GetLocalEntitiesIntersecting(tile, 0f).ToArray();
-        var tags = entMan.System<TagSystem>();
-        var puddleQuery = entMan.GetEntityQuery<PuddleComponent>();
-        var solutionContainerSystem = entMan.System<SolutionContainerSystem>();
+        var entities = entityManager.System<EntityLookupSystem>().GetLocalEntitiesIntersecting(tile, 0f).ToArray();
+        var puddleQuery = entityManager.GetEntityQuery<PuddleComponent>();
+        var tags = entityManager.System<TagSystem>(); // SS220 Remove Entities By Cleaning Reaction
+        var solutionContainerSystem = entityManager.System<SharedSolutionContainerSystem>();
         // Multiply as the amount we can actually purge is higher than the react amount.
         var purgeAmount = reactVolume / CleanAmountMultiplier;
 
@@ -46,7 +49,7 @@ public sealed partial class CleanTileReaction : ITileReaction
         {
             if (tags.HasTag(entity, "ReactionCleanable"))
             {
-                entMan.QueueDeleteEntity(entity);
+                entityManager.QueueDeleteEntity(entity);
                 continue;
             }
 

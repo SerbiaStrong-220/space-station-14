@@ -15,5 +15,5 @@
   - type: ActivatableUIRequiresVision
   - type: UserInterface
     interfaces:
-    - key: enum.ViewableStationMapUiKey.Key
-      type: StationViewableMapBoundUserInterface
+      enum.ViewableStationMapUiKey.Key:
+        type: StationViewableMapBoundUserInterface

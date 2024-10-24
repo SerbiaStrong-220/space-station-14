@@ -59,6 +59,8 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/bench.rsi
     noRot: false
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: bench
@@ -110,7 +112,7 @@
     sprite: SS220/Structures/Furniture/sofa.rsi
     noRot: false
   - type: StaticPrice
-    price: 15
+    price: 30
 
 - type: entity
   name: sofa
@@ -173,7 +175,7 @@
     sprite: SS220/Structures/Furniture/dinner_sofa.rsi
     noRot: false
   - type: StaticPrice
-    price: 15
+    price: 30
 
 - type: entity
   name: sofa
@@ -224,6 +226,8 @@
   - type: Sprite
     sprite: SS220/Structures/Furniture/pew.rsi
     noRot: false
+  - type: StaticPrice
+    price: 20
 
 - type: entity
   name: pew
@@ -257,3 +261,116 @@
     node: PewMiddle
   - type: Sprite
     state: middle
+
+#SS220 Plastic chair
+- type: entity
+  name: plastic chair
+  id: ChairPlastic
+  description: You're sitting on it. Either by your will, or by compulsion, or for the sake of motivation and power
+  parent: UnanchoredChairBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/plasticchair.rsi
+    state: plastic
+  - type: Construction
+    graph: SeatPlastic
+    node: chairPlastic
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlastic:
+            min: 1
+            max: 1
+  - type: Tag
+    tags:
+    - Plastic
+  - type: StaticPrice
+    price: 75
+
+#SS220 Pouffe. NOT FOR ERP
+
+- type: entity
+  name: red pouffe
+  id: ChairPouffeRed
+  description: Surprisingly soft, just what you need after a hard day at work.
+  parent: OfficeChairBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Furniture/pouffe.rsi
+    state: pouffe-red
+  - type: Construction
+    graph: SeatPouffeRed
+    node: chairPouffeRed
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel:
+            min: 1
+            max: 1
+  - type: StaticPrice
+    price: 75
+
+- type: entity
+  name: cyan pouffe
+  id: ChairPouffeCyan
+  description: Surprisingly soft, just what you need after a hard day at work.
+  parent: OfficeChairBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Furniture/pouffe.rsi
+    state: pouffe-cyan
+  - type: Construction
+    graph: SeatPouffeCyan
+    node: chairPouffeCyan
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel:
+            min: 1
+            max: 1
+  - type: StaticPrice
+    price: 75

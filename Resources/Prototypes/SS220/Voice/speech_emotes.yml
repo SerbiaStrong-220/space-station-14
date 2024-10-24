@@ -1,8 +1,16 @@
 #SS220 Bubbles for slimes
 - type: emote
   id: Bubbles
+  name: chat-emote-name-bubbles
   category: Vocal
-  chatMessages: [бурлит]
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-bubbles]
   chatTriggers:
     - bubbles
     - bubbles.
@@ -12,3 +20,169 @@
     - бурлит
     - бурлит.
     - бурлит!
+#SS220 Howls for vulps
+- type: emote
+  id: Howl
+  name: chat-emote-name-howl
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-howl"]
+  chatTriggers:
+  - howl
+  - howl.
+  - howl!
+  - howls
+  - howls.
+  - howls!
+  - выть
+  - выть.
+  - выть!
+  - выть?
+  - воет
+  - воет.
+  - воет!
+  - воет?
+  - завыл
+  - завыл.
+  - завыл!
+  - завыл?
+  - завывает
+  - завывает.
+  - завывает!
+  - завывает? 
+
+- type: emote
+  id: Growl
+  name: chat-emote-name-growl
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-growl"]
+  chatTriggers:
+  - growl
+  - growl.
+  - growl!
+  - growls
+  - growls.
+  - growls!
+  - рычать
+  - рычать.
+  - рычать?
+  - рычать!
+  - рычит
+  - рычит.
+  - рычит!
+  - рычит?
+  - ррр
+
+- type: emote
+  id: Bark
+  name: chat-emote-name-bark
+  category: Vocal
+  available: false
+  icon: Interface/Actions/scream.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-bark"]
+  chatTriggers:
+  - bars
+  - bark.
+  - bark!
+  - barks
+  - barks.
+  - barks!
+  - лает
+  - лает.
+  - лает?
+  - лает!
+  - гавкнул
+  - гавкнул.
+  - гавкнул?
+  - гавкнул!
+  - гавкает
+  - гавкает.
+  - гавкает!
+  - гавкает? 
+
+## spo9k vocal emotes start
+- type: emote
+  id: Meow
+  name: chat-emote-name-meow
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-meow]
+  chatTriggers:
+    - мяу
+    - мяукнул
+    - мяукнул.
+    - мяукнул!
+    - мяукнула
+    - мяукнула.
+    - мяукнула!
+    - мяукает
+    - мяукает.
+    - мяукает!
+
+- type: emote
+  id: Mew
+  name: chat-emote-name-mew
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-mew]
+  chatTriggers:
+    - мя
+    - мякает
+    - мякает.
+    - мякает!
+    - ня
+    - мякает?
+    - mews.
+    - mews!
+    - mewing
+    - mewed
+
+- type: emote
+  id: Purr
+  name: chat-emote-name-purr
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-purr]
+  chatTriggers:
+    - мур
+    - мурчит
+    - мурчит.
+    - мурчит!
+
+  ## spo9k vocal emotes end

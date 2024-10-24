@@ -1,0 +1,6 @@
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSecurityPilot
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
+    state: SecurityPilot

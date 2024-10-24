@@ -1,0 +1,312 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: BaseBrokenEntity
+  parent: BaseStructure
+  abstract: true
+  suffix: Хлам
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Specific/broken_entities.rsi
+    noRot: true
+  - type: Physics
+  - type: Anchorable
+  - type: Transform
+    noRot: true
+  - type: Pullable
+  - type: InteractionOutline
+   #ss220 fix start
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+    #ss220 fix end
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Construction
+    graph: BrokenEntity
+    node: weld
+
+- type: entity
+  id: BaseBrokenEntityDynamic
+  parent: BaseStructureDynamic
+  abstract: true
+  suffix: Хлам
+  components:
+  - type: Physics
+    bodyType: Dynamic
+  - type: Sprite
+    sprite: SS220/Structures/Specific/broken_entities.rsi
+    noRot: true
+  - type: InteractionOutline
+  - type: Transform
+    noRot: true
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Construction
+    graph: BrokenEntity
+    node: weld
+
+- type: entity
+  id: KitchenMicrowaveBroken
+  parent: BaseBrokenEntity
+  name: разрушенная микроволновка
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/microwave.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    noRot: true
+    state: mwb
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.16,0.3,0.16"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+
+- type: entity
+  id: VendingMachineBroken
+  parent: BaseBrokenEntity
+  name: разрушенный торговый автомат
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 4
+            max: 5
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Sprite
+    snapCardinals: true
+    state: vending
+
+- type: entity
+  id: WaterTankBroken
+  parent: BaseBrokenEntityDynamic
+  name: разрушенный водяной резервуар
+  components:
+  - type: Sprite
+    state: watertank
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+
+- type: entity
+  id: WeldingFuelTankBroken
+  parent: WaterTankBroken
+  name: разрушенный топливный резервуар
+  components:
+  - type: Sprite
+    state: fueltank
+
+- type: entity
+  id: PortableGeneratorSuperPacmanBroken
+  parent: BaseBrokenEntity
+  name: разрушенный портативный генератор П.А.К.М.А.Н.
+  components:
+  - type: Sprite
+    state: portgen0
+
+- type: entity
+  id: PortableGeneratorJrPacmanBroken
+  parent: BaseBrokenEntity
+  name: разрушенный портативный генератор М.И.Н.И.П.А.К.М.А.Н.
+  components:
+  - type: Sprite
+    state: portgen1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.30,-0.30,0.30,0.30"
+        density: 30
+        mask:
+          - MachineMask
+        layer:
+          - MachineLayer
+
+- type: entity
+  id: KitchenReagentGrinderBroken
+  parent: BaseBrokenEntity
+  name: разрушенный измельчитель реагентов
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    snapCardinals: true
+    offset: "0.0,0.4"
+    state: grinder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.17,0,0.20,0.4"
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+
+- type: entity
+  id: KitchenElectricGrillBroken
+  parent: BaseBrokenEntity
+  name: разрушенный электрогриль
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: grill
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.16,0.3,0.16"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: PlaceableSurface
+
+- type: entity
+  id: PhotocopierBroken
+  parent: BaseBrokenEntity
+  name: разрушенный копировальный аппарат
+  components:
+  - type: Sprite
+    state: copy
+
+- type: entity
+  id: SubstationBroken
+  parent: BaseBrokenEntity
+  name: разрушенная подстанция
+  components:
+  - type: Sprite
+    state: substation
+
+- type: entity
+  id: SmesBroken
+  parent: BaseBrokenEntity
+  name: разрушенный СМЭС
+  components:
+  - type: Sprite
+    state: smes
+
+- type: entity
+  id: PortableScrubberBroken
+  parent: BaseBrokenEntityDynamic
+  name: разрушенный портативный скруббер
+  components:
+  - type: Sprite
+    state: portscrubber
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  id: TvBroken
+  parent: BaseBrokenEntity
+  name: разрушенный телевизор
+  components:
+  - type: Sprite
+    state: tv
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+
+- type: entity
+  id: CryopodBroken
+  parent: BaseBrokenEntity
+  name: разрушенный криопод
+  components:
+  - type: Sprite
+    noRot: false
+    state: cryopod
+  - type: Transform
+    noRot: false

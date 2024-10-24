@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleDarkReaper
+  name: Dark Reaper Role
+  components:
+  - type: MindRole
+    antagPrototype: DarkReaper
+  - type: DarkReaperRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleSpiderQueen
+  name: Spider Queen Role
+  components:
+  - type: MindRole
+    antagPrototype: SpiderQueen
+    exclusiveAntag: true
+  - type: SpiderQueenRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleMindSlave
+  name: Mind Slave Role
+  components:
+  - type: MindRole
+    antagPrototype: MindSlave
+  - type: MindSlaveRole

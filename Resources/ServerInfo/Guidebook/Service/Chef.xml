@@ -2,6 +2,9 @@
 # Шеф-повар
 Каждый человек должен есть, и работа шеф-повара заключается в том, чтобы убедиться, что у людей есть что-то, кроме мусора.
 
+
+[textlink="Click here to see a list of food recipes." link="FoodRecipes"]
+
 Прежде всего, вам необходимо ознакомиться с кухней и имеющимися в вашем распоряжении инструментами.
 
 <Box>
@@ -51,7 +54,6 @@
 <GuideEntityEmbed Entity="SignHydro1" Caption=" "/>
 <GuideEntityEmbed Entity="hydroponicsTray"/>
 <GuideEntityEmbed Entity="WheatBushel"/>
-<GuideEntityEmbed Entity="SignHydro2" Caption=" "/>
 </Box>
 ## Сбор молока:
 Alt+ЛКМ на корове с контейнером в руке. (мензурка, ведро, кувшин для молока и т.д.).

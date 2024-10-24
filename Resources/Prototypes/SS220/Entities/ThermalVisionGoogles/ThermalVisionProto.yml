@@ -1,0 +1,74 @@
+- type: entity
+  parent: ClothingEyesChameleon
+  id: ThermalVisorChameleon
+  name: optical thermal chameleon scanner
+  description: Useful both for security and cargonia.
+  suffix: Syndicate
+  components:
+    - type: ThermalVisionClothing
+    - type: Sprite
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+    - type: Clothing
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+    - type: ChameleonClothing
+      slot: [eyes]
+      default: ClothingEyesGlassesThermal
+    - type: HiddenDescription
+      entries:
+      - label: hidden-desc-ThermalGoogles-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: hidden-desc-ThermalGoogles-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+
+
+# Proto for future if we want to add this to RND
+- type: entity
+  parent: ClothingEyesBase
+  id: ThermalVisorRND
+  name: Advanced Thermal Glasses
+  description: This glasses alows you to see persons through the walls in finate radius
+  suffix: RND
+  components:
+    - type: ThermalVisionClothing
+      visionRadius: 5
+      closeVisionRadius: 2.5
+    - type: Sprite
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+    - type: Clothing
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
+  id: ClothingEyesThermalGlassesSecurity
+  name: Advanced Security Glasses with SecHUD and Thermal Visor
+  description: This glasses provided with SecHUD and Thermal Visor, which alows you to see persons through the walls in finate radius
+  suffix: SecRND
+  components:
+  - type: ThermalVisionClothing
+    visionRadius: 5
+    closeVisionRadius: 2.5
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/secthermalglasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/secthermalglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
+  - type: GuideHelp
+    guides:
+    - Security
+  - type: IdentityBlocker
+    coverage: EYES

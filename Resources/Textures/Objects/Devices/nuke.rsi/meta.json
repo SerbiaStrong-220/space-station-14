@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/commit/5d5f83d79198b98e02fe0a778e1c4f59fcd80223, nukefestive by Alekshhh (Github)",
+  "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/commit/5d5f83d79198b98e02fe0a778e1c4f59fcd80223, nukefestive by Alekshhh (Github), nuclearbomb_gay by PJB3005",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "nuclearbomb_deployed_unlit"
+    },
+    {
+      "name": "nuclearbomb_gay"
     },
     {
       "name": "nukefestive",

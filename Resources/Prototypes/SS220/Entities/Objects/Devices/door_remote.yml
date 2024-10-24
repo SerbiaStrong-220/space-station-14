@@ -1,0 +1,15 @@
+- type: entity
+  parent: DoorRemoteDefault
+  id: DoorRemoteLaw
+  name: law door remote
+  components:
+  - type: Sprite
+    layers:
+    - state: door_remotebase
+    - state: door_remotelightscolour
+      color: "#616bbe"
+    - state: door_remotescreencolour
+      color: "#394aa9"
+  - type: Access
+    groups:
+    - Lawyer

@@ -44,6 +44,6 @@
     layers:
       - state: capbase
         map: ["enum.GunVisualLayers.Base"]
-      - state: mag-1
+      - state: mag-2 #SS220-FixAmmoSprite
         map: ["enum.GunVisualLayers.Mag"]
       - state: cap

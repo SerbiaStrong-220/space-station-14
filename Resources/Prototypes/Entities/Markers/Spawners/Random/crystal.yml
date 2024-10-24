@@ -8,7 +8,7 @@
       layers:
         - state: red
         - sprite: Structures/Decoration/crystal.rsi
-          state: crystal_grey
+          state: crystal1 #SS220-Crystal-Resprite
     - type: RandomSpawner
       prototypes:
         - CrystalGreen
@@ -17,4 +17,7 @@
         - CrystalBlue
         - CrystalCyan
         - CrystalGrey
+        - CrystalYellow #SS220-New-Crystals-start
+        - CrystalPurple
+        - CrystalWhite #SS220-New-Crystals-end
       chance: 0.7

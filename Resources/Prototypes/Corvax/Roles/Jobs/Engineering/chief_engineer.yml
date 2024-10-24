@@ -7,6 +7,12 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 180000 # SS220-RoleTime
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
@@ -20,6 +26,7 @@
   - ChiefEngineer
   - Atmospherics
   - Brig
+  - Cryogenics
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,14 +35,10 @@
 - type: startingGear
   id: ChiefEngineerGear
   equipment:
-    head: ClothingHeadHatHardhatWhite
-    jumpsuit: ClothingUniformJumpsuitChiefEngineer
-    back: ClothingBackpackChiefEngineerFilled
-    shoes: ClothingShoesColorBrown
-    id: CEPDA
-    eyes: ClothingEyesGlassesMeson
+#    id: CEPDA SS220-dark-chief-engineer-pda
+#    eyes: ClothingEyesGlassesMeson #SS220-TwoOne-Floppa-Iteration
     ears: ClothingHeadsetCE
     belt: ClothingBeltUtilityEngineering
-  innerClothingSkirt: ClothingUniformJumpskirtChiefEngineer
-  satchel: ClothingBackpackSatchelChiefEngineerFilled
-  duffelbag: ClothingBackpackDuffelChiefEngineerFilled
+  storage:
+    back:
+    - Flash

@@ -1,6 +1,7 @@
 - type: accessLevel
   id: ChiefMedicalOfficer
   name: id-card-access-level-chief-medical-officer
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Medical
@@ -9,6 +10,7 @@
 - type: accessLevel
   id: Chemistry
   name: id-card-access-level-chemistry
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
   
 - type: accessLevel
   id: Paramedic

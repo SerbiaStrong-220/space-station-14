@@ -1,0 +1,105 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Admiral
+- type: entity
+  parent: ClothingOuterHardsuitBaseAdmiral
+  id: ClothingOuterHardsuitIronAdmiral
+  name: боевой скафандр Lucifer
+  description: Лучшие материалы и новейшие технологии воплотили в жизнь самую передовую броню CryTech technology.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_admiral.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronAdmiral
+
+# CE
+- type: entity
+  parent: ClothingOuterHardsuitBaseCE
+  id: ClothingOuterHardsuitIronCE
+  name: боевой скафандр Cerberus
+  description: Лёгкий и прочный скафандр, обеспечивающий радиационную защиту и высокую мобильность.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_ce.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronCE
+
+# CMO
+- type: entity
+  parent: ClothingOuterHardsuitBaseCMO
+  id: ClothingOuterHardsuitIronCMO
+  name: боевой скафандр Cyanide-X
+  description: Улучшенная версия скафандра Cyanide. Обеспечивает ещё больше защиты и манёвренности.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_cmo.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronCMO
+
+# Soldier
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitIronSoldier
+  name: боевой скафандр Zeros
+  description: Боевой скафандр, соблюдающий баланс между мобильностью и защитой носителя.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_soldier.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronSoldier
+
+# Med
+- type: entity
+  parent: ClothingOuterHardsuitBaseMed
+  id: ClothingOuterHardsuitIronMed
+  name: боевой скафандр Cyanide
+  description: Скафандр, изготовленный из полимерных титановых нанотрубок с встроенными ускорителями. Обеспечивает приличную защиту и ускоренное перемещение.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_med.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_med.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronMed
+
+# Heavy
+- type: entity
+  parent: ClothingOuterHardsuitBaseHeavy
+  id: ClothingOuterHardsuitIronHeavy
+  name: тяжёлый боевой скафандр Aid
+  description: Тяжёлый боевой костюм, обеспечивающий большую защиту ценой пониженной мобильности.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy
+
+# Heavy2
+- type: entity
+  parent: ClothingOuterHardsuitBaseHeavy2
+  id: ClothingOuterHardsuitIronHeavy2
+  name: тяжёлый сонариумовый скафандр Aid-2
+  description: Тяжёлый боевой костюм, обшитый сонариумовым сплавом. Используется железным отрядом в самых тяжёлых схватках.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy2

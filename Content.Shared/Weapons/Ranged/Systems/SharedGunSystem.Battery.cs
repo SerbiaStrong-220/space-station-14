@@ -35,15 +35,32 @@ public abstract partial class SharedGunSystem
         component.Shots = state.Shots;
         component.Capacity = state.MaxShots;
         component.FireCost = state.FireCost;
+
+        //SS220 Add Multifaze gun begin
+        if (component is ProjectileBatteryAmmoProviderComponent projectileComp)
+            projectileComp.Prototype = state.Prototype;
+        else if (component is HitscanBatteryAmmoProviderComponent hitscanComp)
+            hitscanComp.Prototype = state.Prototype;
+        //SS220 Add Multifaze gun end
     }
 
     private void OnBatteryGetState(EntityUid uid, BatteryAmmoProviderComponent component, ref ComponentGetState args)
     {
+        //SS220 Add Multifaze gun begin
+        string prototype = string.Empty;
+
+        if (component is ProjectileBatteryAmmoProviderComponent projectileComp)
+            prototype = projectileComp.Prototype;
+        else if (component is HitscanBatteryAmmoProviderComponent hitscanComp)
+            prototype = hitscanComp.Prototype;
+        //SS220 Add Multifaze gun end
+
         args.State = new BatteryAmmoProviderComponentState()
         {
             Shots = component.Shots,
             MaxShots = component.Capacity,
             FireCost = component.FireCost,
+            Prototype = prototype, //SS220 Add Multifaze gun
         };
     }
 
@@ -112,5 +129,6 @@ public abstract partial class SharedGunSystem
         public int Shots;
         public int MaxShots;
         public float FireCost;
+        public string Prototype = string.Empty; //SS220 Add Multifaze gun
     }
 }

@@ -1,0 +1,20 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: WallmountTelescreen
+  id: WallmountTelescreenWireless
+  suffix: wirless camera monitor
+  name: телеэкран
+  components:
+  - type: Construction
+    graph: WallmountTelescreen
+    node: Telescreen
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SurveillanceCamera
+    transmitFrequencyId: SurveillanceCamera
+  - type: ViewableStationMap # SS220 Camera-Map

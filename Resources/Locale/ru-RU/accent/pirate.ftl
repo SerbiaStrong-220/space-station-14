@@ -1,6 +1,7 @@
 accent-pirate-prefix-1 = Арргх
 accent-pirate-prefix-2 = Гарр
 accent-pirate-prefix-3 = Йарр
+accent-pirate-prefix-4 = Йарргх
 accent-pirate-replaced-1 = my
 accent-pirate-replacement-1 = me
 accent-pirate-replaced-2 = you
@@ -11,9 +12,7 @@ accent-pirate-replaced-4 = yes
 accent-pirate-replacement-4 = aye
 accent-pirate-replaced-5 = yea
 accent-pirate-replaced-6 = hi
-accent-pirate-replaced-7 = is
 accent-pirate-replacement-5 = be
-accent-pirate-replaced-8 = there
 accent-pirate-replacement-6 = thar
 
 accent-pirate-replaced-7 = блять
@@ -233,7 +232,7 @@ accent-pirate-replaced-78 = казнить
 accent-pirate-replacement-78 = вздернуть на рее
 
 accent-pirate-replaced-79 = казнен
-accent-pirate-replaced-79 = вздернут на рее
+accent-pirate-replacement-79 = вздернут на рее
 
 accent-pirate-replaced-80 = зарплата
 accent-pirate-replacement-80 = доля

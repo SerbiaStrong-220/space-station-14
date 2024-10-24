@@ -13,6 +13,7 @@ public sealed partial class GasLeakRuleComponent : Component
         Gas.Plasma,
         Gas.Tritium,
         Gas.Frezon,
+        Gas.WaterVapor, // the fog
     };
 
     /// <summary>
@@ -33,16 +34,14 @@ public sealed partial class GasLeakRuleComponent : Component
     public bool FoundTile;
     public Gas LeakGas;
     public float MolesPerSecond;
-    //SS220-AirAlarm
-    public readonly int MinimumMolesPerSecond = 50;
+    public readonly int MinimumMolesPerSecond = 80;
 
     /// <summary>
     ///     Don't want to make it too fast to give people time to flee.
     /// </summary>
-    public int MaximumMolesPerSecond = 100;
+    public int MaximumMolesPerSecond = 200;
 
-    public int MinimumGas = 500;
-    public int MaximumGas = 5000;
-    //SS220-AirAlarm end
+    public int MinimumGas = 1000;
+    public int MaximumGas = 4000;
     public float SparkChance = 0.05f;
 }

@@ -1,0 +1,276 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingShoesBootsMag
+  id: ClothingShoesBootsMagUssp
+  name: магнитные ботинки СССП
+  description: Созданные по технологии реверс-инжиниринга магнитные ботинки. Собственность СССП.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
+  - type: Magboots
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: NoSlip
+  - type: ToggleClothing
+    action: ActionToggleMagUSSSPEbent
+
+- type: entity
+  id: ActionToggleMagUSSSPEbent
+  parent: ActionToggleMagboots
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon: { sprite: /Textures/SS220/Clothing/Shoes/Boots/magboots-ussp.rsi, state: icon }
+    iconOn: /Textures/SS220/Clothing/Shoes/Boots/magboots-ussp.rsi/icon-on.png
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackUSSP
+  name: USSP backpack
+  description: A standard backpack for USSP Red Army.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/ussp.rsi
+  - type: Storage
+    grid:
+    - 0,0,12,3
+  - type: ExplosionResistance
+    damageCoefficient: 0.0
+
+- type: entity
+  parent: ClothingMaskGasExplorer
+  id: ClothingMaskGasUssp
+  name: противогаз
+  description: Стандартный противогаз СССП с защитой от вспышек.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformMundir
+  name: солдатский мундир
+  description: Отражение силы, дисциплины и патриотизма в статной форме.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Mundir.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Mundir.rsi
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformOfficerMundir
+  name: офицерский мундир
+  description: Строгий и авторитетный наряд военного.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatUssp
+  name: пальто НКВД
+  description: Качественное и дорогое пальто. Защитит от самых суровых морозов в самых дальних уголках Сибири.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Cold: 0.1
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionKeyUSSP
+  name: ussp encryption key
+  description: Inserted into it...A perforated card?!
+  components:
+  - type: EncryptionKey
+    channels:
+    - USSPChannel
+    defaultChannel: USSPChannel
+  - type: Item
+    sprite: SS220/Objects/Devices/ussp_encrypt_keys.rsi
+  - type: Sprite
+    sprite: SS220/Objects/Devices/ussp_encrypt_keys.rsi
+    layers:
+    - state: crypt_ussp
+    - state: ussp_label
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetUSSP
+  name: ussp headset
+  suffix: Shitspawn, Ebent, FractWar
+  description: You can hear the spirit of communism in them.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyUSSP
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/ussp_headset.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/ussp_headset.rsi
+
+- type: entity
+  name: гипоспрей СССП
+  parent: BaseItem
+  description: С помощью реверс-инжиниринга технологии NT, СССП выпускает их в ограниченном количестве для нужд армии.
+  id: UsspHypo
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/USSRhypo.rsi
+    state: hypo
+  - type: Item
+    sprite: SS220/Objects/Specific/Medical/USSRhypo.rsi
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 20
+  - type: RefillableSolution
+    solution: hypospray
+  - type: ExaminableSolution
+    solution: hypospray
+  - type: Hypospray
+    onlyAffectsMobs: false
+  - type: UseDelay
+    delay: 0.5
+
+- type: entity
+  parent: BasePDA
+  id: UsspPDA
+  name: ПДА СССП
+  description: Стандартный ПДА СССП.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Pda
+    id: UsspIDCard
+    state: pda-ussp
+  - type: PdaBorderColor
+    borderColor: "#A91417"
+  - type: Icon
+    state: pda-ussp
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - NotekeeperCartridge
+    cartridgeSlot:
+      priority: -1
+      name: Cartridge
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      whitelist:
+        components:
+          - Cartridge
+
+- type: entity
+  parent: MedicalPDA
+  id: UsspMedicalPDA
+  name: ПДА врача СССП
+  description: Стандартный ПДА врача СССП. Имеет встроенный анализатор здоровья.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Pda
+    id: UsspIDCard
+    state: pda-ussp-medical
+  - type: PdaBorderColor
+    borderColor: "#A91417"
+    accentVColor: "#447987"
+  - type: Icon
+    state: pda-ussp-medical
+  - type: HealthAnalyzer
+    scanDelay: 1.2
+    scanningEndSound:
+      path: "/Audio/Items/Medical/healthscanner.ogg"
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformJumpsuitUssp
+  name: униформа СССП
+  description: Форма, пропитанная кровью, потом и ненавистью к капитализму.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
+
+- type: entity
+  parent: ClothingBeltUsspWebbing
+  id: ClothingBeltUsspWebbingFilled
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: StorageFill
+    contents:
+    - id: MagazinePistolSubMachineGunUssp_PPSh
+      amount: 2
+    - id: CombatMedipen
+    - id: Stimpack
+    - id: DnaScramblerImplanter
+    - id: ExGrenade
+
+- type: entity
+  name: рюкзак СССП
+  description: Стандартный рюкзак Красной Армии СССП.
+  parent: ClothingBackpackUSSP
+  id: ClothingBackpackUSSPFilled
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+    - type: StorageFill
+      contents:
+      - id: Crowbar
+      - id: CigPackRed
+      - id: Lighter
+      - id: FlashlightSecliteUssp
+      - id: PowerCellHyper
+      - id: WeaponSubMachineGunUssp_PPSh
+      - id: EnergyHammer
+      - id: EnergySickle
+
+- type: entity
+  id: BedsheetUSSP
+  parent: BedsheetBase
+  suffix: Shitspawn, Ebent, FractWar
+  name: коммунистическое одеяло
+  description: С коммуниста по нитке и будет всем одеяло...
+  components:
+  - type: Sprite
+    state: sheetUSSP
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Bedsheets/USSP.rsi

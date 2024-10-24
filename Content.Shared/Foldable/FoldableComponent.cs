@@ -23,4 +23,12 @@ public sealed partial class FoldableComponent : Component
 
     [DataField]
     public LocId FoldVerbText = "fold-verb";
+
+    //SS220-fold-doafter begin
+    /// <summary>
+    /// Time needed to fold/unfold an item. Raises DoAfter if only this value is not null.
+    /// </summary>
+    [DataField]
+    public TimeSpan? FoldTime;
+    //SS220-fold-doafter end
 }

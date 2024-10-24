@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by MIXnikita (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "muzzle_bullet",
+      "delays": [
+        [
+          0.050000002,
+          0.050000002,
+          0.060000002,
+          0.060000002,
+          0.050000002,
+          0.040000002
+        ]
+      ]
+    }
+  ]
+}

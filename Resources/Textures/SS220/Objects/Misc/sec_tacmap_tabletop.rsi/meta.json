@@ -8,7 +8,16 @@
   },
   "states": [
 	{
-	  "name": "tabletop"
-	}
+	  "name": "tabletop_frank"
+    },
+    {
+      "name": "tabletop_nox"
+    },
+	{
+      "name": "tabletop_axioma"
+    },
+    {
+      "name": "tabletop_eclipse"
+    }
   ]
 }

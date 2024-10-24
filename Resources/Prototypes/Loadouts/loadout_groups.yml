@@ -1,0 +1,1605 @@
+# Miscellaneous
+- type: loadoutGroup
+  id: Trinkets
+  name: loadout-group-trinkets
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - FlowerWreath
+  - Hairflower
+  - PlushieLizard
+  - PlushieSpaceLizard
+  - Lighter
+  - CigPackGreen
+  - CigPackRed
+  - CigPackBlue
+  - CigPackBlack
+  - CigarCase
+  - CigarGold
+  - ClothingNeckLGBTPin
+  - ClothingNeckAromanticPin
+  - ClothingNeckAsexualPin
+  - ClothingNeckBisexualPin
+  - ClothingNeckGayPin
+  - ClothingNeckIntersexPin
+  - ClothingNeckLesbianPin
+  - ClothingNeckNonBinaryPin
+  - ClothingNeckPansexualPin
+  - ClothingNeckTransPin
+  - ClothingNeckAutismPin
+  - ClothingNeckGoldAutismPin
+  # SS220 Hand/FootWraps begin
+  - ClothingHandWraps
+  - ClothingFootWraps
+  # SS220 Hand/FootWraps end
+  # SS220-Hand/FootWraps-More-Color-Begin
+  - ClothingHandWrapsYellow
+  - ClothingFootWrapsYellow
+  - ClothingHandWrapsGreen
+  - ClothingFootWrapsGreen
+  - ClothingHandWrapsRed
+  - ClothingFootWrapsRed
+  - ClothingHandWrapsBlue
+  - ClothingFootWrapsBlue
+  - ClothingHandWrapsBlack
+  - ClothingFootWrapsBlack
+  # SS220-Hand/FootWraps-More-Color-End
+
+
+- type: loadoutGroup
+  id: Glasses
+  name: loadout-group-glasses
+  minLimit: 0
+  loadouts:
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+  - GlassesCyber #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: GroupTankHarness
+  name: loadout-group-tank-harness
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutTankHarness
+
+- type: loadoutGroup
+  id: Survival
+  name: loadout-group-survival-basic
+  minLimit: 3
+  hidden: true
+  loadouts:
+  - EmergencyNitrogen
+  - EmergencyOxygen
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: GroupEVATank
+  name: loadout-group-EVA-tank
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesEVANitrogen
+  - LoadoutSpeciesEVAOxygen
+
+- type: loadoutGroup
+  id: GroupPocketTankDouble
+  name: loadout-group-pocket-tank-double
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesPocketDoubleNitrogen
+  - LoadoutSpeciesPocketDoubleOxygen
+
+# Command
+- type: loadoutGroup
+  id: CaptainHead
+  name: loadout-group-captain-head
+  minLimit: 0
+  loadouts:
+  - CaptainHead
+  - CaptainCap
+  #SS220-CapHeadLoadoutsChanges-Begin
+  - CaptainBeret
+  - CaptainHeadHat
+  #SS220-CapHeadLoadoutsChanges-End
+  #ss220-loadout-captain-begin
+  - CaptainWhiteHead
+  - CaptainWhiteBeret
+  #ss220-loadout-captain-end
+  #ss220-loadout-fullwhitecap-Begin
+  - CaptainWhiteHardhat
+  - CaptainWhiteHat
+  #ss220-loadout-fullwhitecap-End
+
+- type: loadoutGroup
+  id: CaptainJumpsuit
+  name: loadout-group-captain-jumpsuit
+  loadouts:
+  - CaptainJumpsuit
+  - CaptainJumpskirt
+  - CaptainFormalSuit
+  - CaptainWhiteJumpsuit #ss220-loadout-captain
+#ss220-loadout-fullwhitecap-Begin
+  - CaptainWhiteJumpskirt
+  - CaptainWhiteFormalSuit
+#ss220-loadout-fullwhitecap-End
+#  - CaptainFormalSkirt SS220-RemoveFormalSkirtLoadouts
+
+- type: loadoutGroup
+  id: CaptainNeck
+  name: loadout-group-captain-neck
+  minLimit: 0
+  loadouts:
+  - CaptainCloak
+  - CaptainCloakFormal
+  - CaptainMantle
+  - CaptainFormalWhiteCloak #ss220-loadout-captain
+  - CaptainWhiteMantle #ss220-loadout-fullwhitecap
+
+- type: loadoutGroup
+  id: CaptainBackpack
+  name: loadout-group-captain-backpack
+  loadouts:
+  - CaptainBackpack
+  - CaptainSatchel
+  - CaptainDuffel
+#ss220-loadout-captain-begin
+  - CaptainWhiteBackpack
+  - CaptainWhiteSatchel
+  - CaptainWhiteDuffel
+#ss220-loadout-captain-end
+
+- type: loadoutGroup
+  id: CaptainOuterClothing
+  name: loadout-group-captain-outerclothing
+  loadouts:
+  - CaptainOuterClothing
+  - CaptainWintercoat
+#ss220-loadout-captain-begin
+  - CaptainWhiteOuterClothing
+  - CaptainWhiteCoat
+#ss220-loadout-captain-end
+  - CaptainWhiteWintercoat #ss220-loadout-fullwhitecap
+
+- type: loadoutGroup
+  id: HoPHead
+  name: loadout-group-hop-head
+  minLimit: 0
+  loadouts:
+  - HoPHead
+  - HoPSilverHeadBand #SS220-Purple HoP
+
+- type: loadoutGroup
+  id: HoPJumpsuit
+  name: loadout-group-hop-jumpsuit
+  loadouts:
+  - HoPJumpsuit
+  - HoPJumpskirt
+
+- type: loadoutGroup
+  id: HoPNeck
+  name: loadout-group-hop-neck
+  minLimit: 0
+  loadouts:
+  - HoPCloak
+  - HoPMantle
+
+- type: loadoutGroup
+  id: HoPBackpack
+  name: loadout-group-hop-backpack
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+  - HoPBackpackIan
+
+- type: loadoutGroup
+  id: HoPOuterClothing
+  name: loadout-group-hop-outerclothing
+  minLimit: 0
+  loadouts:
+  - HoPWintercoat
+  - HoPPurpleDress #SS220-Purple HoP
+
+# Civilian
+- type: loadoutGroup
+  id: PassengerJumpsuit
+  name: loadout-group-passenger-jumpsuit
+  loadouts:
+  - GreyJumpsuit
+  - GreyJumpskirt
+  - AncientJumpsuit
+  - PassengerJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - PassengerJumpsuitTurtleneckAlt
+  - PassengerJumpskirtTurtleneck
+  - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - RainbowJumpsuit
+
+- type: loadoutGroup
+  id: PassengerFace
+  name: loadout-group-passenger-mask
+  minLimit: 0
+  loadouts:
+  - PassengerFace
+
+- type: loadoutGroup
+  id: PassengerGloves
+  name: loadout-group-passenger-gloves
+  minLimit: 0
+  loadouts:
+  - PassengerGloves
+
+- type: loadoutGroup
+  id: CommonBackpack
+  name: loadout-group-backpack
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+
+- type: loadoutGroup
+  id: PassengerNeck
+  name: loadout-group-passenger-neck
+  minLimit: 0
+  loadouts:
+  - Mantle
+
+- type: loadoutGroup
+  id: PassengerOuterClothing
+  name: loadout-group-passenger-outerclothing
+  minLimit: 0
+  loadouts:
+  - PassengerWintercoat
+
+- type: loadoutGroup
+  id: PassengerShoes
+  name: loadout-group-passenger-shoes
+  loadouts:
+  - BlackShoes
+  - WinterBoots
+
+- type: loadoutGroup
+  id: BartenderHead
+  name: loadout-group-bartender-head
+  minLimit: 0
+  loadouts:
+  - BartenderHead
+  - BartenderHeadWhite  #SS220-BartenderResprited-Begin
+  - BartenderHeadRed #SS220-BartenderResprited-End
+  - BartenderBowler
+
+- type: loadoutGroup
+  id: BartenderJumpsuit
+  name: loadout-group-bartender-jumpsuit
+  loadouts:
+  - BartenderJumpsuit
+  - BartenderJumpsuitPurple
+  - BartenderJumpsuitRed #SS220-BartenderResprited-Begin
+  - BartenderJumpsuitGreen
+  - BartenderJumpsuitNanotrasen
+  - BartenderJumpskirt
+  - BartenderJumpskirtRed
+  - BartenderJumpskirtGreen
+  - BartenderJumpskirtNanotrasen #SS220-BartenderResprited-End
+  - BartenderPivozavr #SS220-Two Floppa Iterarion
+
+- type: loadoutGroup
+  id: BartenderOuterClothing
+  name: loadout-group-bartender-outerclothing
+  minLimit: 0
+  loadouts:
+  - BartenderVest
+  - BartenderApron
+  - BartenderWintercoat
+
+- type: loadoutGroup
+  id: ChefHead
+  name: loadout-group-chef-head
+  minLimit: 0
+  loadouts:
+  - ChefHead
+  - ChefHeadWhite #SS220 Chef Resprite start
+  - ChefHeadGreen
+  - ChefHeadBlack
+  - ChefHeadSenior #SS220 Chef Resprite end
+
+- type: loadoutGroup
+  id: ChefMask
+  name: loadout-group-chef-mask
+  minLimit: 0
+  loadouts:
+  - ChefMask
+
+- type: loadoutGroup
+  id: ChefJumpsuit
+  name: loadout-group-chef-jumpsuit
+  loadouts:
+  - ChefJumpsuit
+  - ChefJumpsuitWhite #SS220 Chef Resprite start
+  - ChefJumpsuitGreen
+  - ChefJumpsuitBlack
+  - ChefJumpsuitSenior #SS220 Chef Resprite end
+  - ChefJumpskirt
+  - ChefJumpskirtWhite #SS220 Chef Resprite start
+  - ChefJumpskirtGreen
+  - ChefJumpskirtBlack
+  - ChefJumpskirtSenior #SS220 Chef Resprite end
+
+- type: loadoutGroup
+  id: ChefOuterClothing
+  name: loadout-group-chef-outerclothing
+  minLimit: 0
+  loadouts:
+  - ChefApron
+  - ChefJacket
+  - ChefJacketWhite #SS220 Chef Resprite start
+  - ChefJacketGreen
+  - ChefJacketBlack
+  - ChefJacketSenior #SS220 Chef Resprite end
+  - ChefWintercoat
+
+- type: loadoutGroup
+  id: LibrarianJumpsuit
+  name: loadout-group-librarian-jumpsuit
+  loadouts:
+  - LibrarianJumpsuit
+  - LibrarianJumpskirt
+  - CuratorJumpsuit
+  - CuratorJumpskirt
+
+- type: loadoutGroup
+  id: LawyerJumpsuit
+  name: loadout-group-lawyer-jumpsuit
+  loadouts:
+  - LawyerJumpsuit
+  - LawyerJumpskirt
+  - LawyerJumpsuitBlue
+  - LawyerJumpskirtBlue
+  - LawyerJumpsuitPurple
+  - LawyerJumpskirtPurple
+  - LawyerJumpsuitRed
+  - LawyerJumpskirtRed
+  - LawyerJumpsuitGood
+  - LawyerJumpskirtGood
+  - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: LawyerNeck
+  name: loadout-group-lawyer-neck
+  minLimit: 0
+  loadouts:
+  - LawyerNeck
+  - CloakJujutsuShlepa #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: ChaplainHead
+  name: loadout-group-chaplain-head
+  minLimit: 0
+  loadouts:
+  - ChaplainHead
+  - ChaplainNunHood
+  - ChaplainPlagueHat
+  - ChaplainWitchHat
+  - ChaplainWitchHatAlt
+
+- type: loadoutGroup
+  id: ChaplainMask
+  name: loadout-group-chaplain-mask
+  minLimit: 0
+  loadouts:
+  - ChaplainMask
+
+- type: loadoutGroup
+  id: ChaplainJumpsuit
+  name: loadout-group-chaplain-jumpsuit
+  loadouts:
+  - ChaplainJumpsuit
+  - ChaplainJumpskirt
+  - ChaplainRobesLight
+  - ChaplainRobesDark
+
+- type: loadoutGroup
+  id: ChaplainOuterClothing
+  name: loadout-group-chaplain-outerclothing
+  minLimit: 0
+  loadouts:
+  - ChaplainPlagueSuit
+  - ChaplainNunRobe
+  - ChaplainBlackHoodie
+  - ChaplainHoodie
+  - HoodieChaplainWhite #SS220-Clothes
+
+- type: loadoutGroup
+  id: ChaplainNeck
+  name: loadout-group-chaplain-neck
+  minLimit: 0
+  loadouts:
+  - ChaplainNeck
+  - ChaplainNeckCloak #ss220-dress-cloak-tweak
+
+- type: loadoutGroup
+  id: JanitorHead
+  name: loadout-group-janitor-head
+  minLimit: 0
+  loadouts:
+  - JanitorHead
+  - JanitorOrangeHat #SS220-OrangeJanitor
+  - JanitorJRHat #SS220-JRHat
+  - JanitorJRSoft #SS220-JRSoft
+
+- type: loadoutGroup
+  id: JanitorJumpsuit
+  name: loadout-group-janitor-jumpsuit
+  loadouts:
+  - JanitorJumpsuit
+  - JanitorJumpskirt
+  - JanitorBlueJumpsuit #SS220-Janitor-Control
+  - JanitorOrangeJumpsuit #SS220-OrangeJanitor
+  - JanitorJRJumpsuit #SS220-JanitorJR
+
+- type: loadoutGroup
+  id: JanitorGloves
+  name: loadout-group-janitor-gloves
+  minLimit: 0
+  loadouts:
+  - JanitorRubberGloves
+  - JanitorOrangeGloves #SS220-OrangeJanitor
+  - OrangeGloves
+  - PurpleGloves
+  - JanitorJRGloves #SS220-JRGloves
+
+- type: loadoutGroup
+  id: JanitorOuterClothing
+  name: loadout-group-janitor-outerclothing
+  minLimit: 0
+  loadouts:
+  - JanitorWintercoat
+
+- type: loadoutGroup
+  id: JanitorPlunger
+  name: loadout-group-janitor-plunger
+  minLimit: 0
+  loadouts:
+  - JanitorGoldenPlunger
+
+- type: loadoutGroup
+  id: BotanistHead
+  name: loadout-group-botanist-head
+  minLimit: 0
+  loadouts:
+  - BotanistHead
+  - BotanistHeadBlue #SS220-BotanyResprite-Begin
+  - BotanistHeadBrown
+  - BotanistHeadWhite #SS220-BotanyResprite-End
+  - BotanistBandana
+  - BotanistBandanaBlue #SS220-BotanyResprite
+  - BotanistDruidHead #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistJumpsuit
+  name: loadout-group-botanist-jumpsuit
+  loadouts:
+  - BotanistJumpsuit
+  - BotanistJumpsuitBlue #SS220-BotanyResprite-Begin
+  - BotanistJumpsuitWhite #SS220-BotanyResprite-End
+  - BotanistJumpskirt
+  - BotanistJumpskirtBlue #SS220-BotanyResprite-Begin
+  - BotanistJumpskirtWhite #SS220-BotanyResprite-End
+  - BotanistOveralls
+  - BotanistOverallsBlue #SS220-BotanyResprite-Begin
+  - BotanistOverallsGreen
+  - BotanistOverallsWhite #SS220-BotanyResprite-End
+  - BotanistDruidJumpsuit #SS220 druid loadout
+
+- type: loadoutGroup
+  id: BotanistBackpack
+  name: loadout-group-botanist-backpack
+  loadouts:
+  - BotanistBackpack
+  - BotanistSatchel
+  - BotanistDuffel
+
+- type: loadoutGroup
+  id: BotanistOuterClothing
+  name: loadout-group-botanist-outerclothing
+  minLimit: 0
+  loadouts:
+  - BotanistApron
+  - BotanistApronBrown #SS220-BotanyResprite-Begin
+  - BotanistApronGreen #SS220-BotanyResprite-End
+  - BotanistWintercoat
+
+- type: loadoutGroup
+  id: ClownHead
+  name: loadout-group-clown-head
+  minLimit: 0
+  loadouts:
+  - JesterHat
+  - JesterAltHat
+  - HeadMuzhik #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: ClownJumpsuit
+  name: loadout-group-clown-jumpsuit
+  loadouts:
+  - ClownSuit
+  - ClownSkirt
+  - JesterSuit
+  - ClownJumpsuit #SS220-Clown-reSprite-Begin
+  - ClownJumpskirt #SS220-Clown-reSprite-End
+  - JesterAltSuit
+  - ClownPennywiseJumpsuit #SS220-Clown-Pennywise
+  - JumpsuitMuzhik #SS220-Two Floppa Iteration
+  - JumpsuitGold #SS220-Two Floppa Iteration
+  - ClownJumpsuitClassic #SS220-ClassicJumpsuit
+
+- type: loadoutGroup
+  id: ClownBackpack
+  name: loadout-group-clown-backpack
+  loadouts:
+  - ClownBackpack
+  - ClownSatchel
+  - ClownDuffel
+
+- type: loadoutGroup
+  id: ClownOuterClothing
+  name: loadout-group-clown-outerclothing
+  minLimit: 0
+  loadouts:
+  - ClownRobes
+  - ClownWintercoat
+
+- type: loadoutGroup
+  id: ClownShoes
+  name: loadout-group-clown-shoes
+  loadouts:
+  - ClownShoes
+  - JesterShoes
+  - ClownPennywiseShoes #SS220-Clown-Pennywise
+  - ShoesMuzhik #SS220-Two Floppa Iteration
+  - ShoesGold #SS220-Two Floppa Iteration
+
+#ss220-loadout-clown-mask-begin
+- type: loadoutGroup
+  id: ClownMask
+  name: loadout-group-clown-mask
+  loadouts:
+  - MaskClown #SS220-Two Floppa Iteration
+  - ClownPennywiseMask
+  - MaskMuzhik #SS220-Two Floppa Iteration
+  - MaskGold #SS220-Two Floppa Iteration
+#ss220-loadout-clown-mask-end
+
+#ss220-loadout-clown-neck-begin
+- type: loadoutGroup
+  id: ClownNeck
+  name: loadout-group-clown-neck
+  loadouts:
+  - ClownPennywiseRuff
+#ss220-loadout-clown-neck-end
+
+- type: loadoutGroup
+  id: SurvivalClown
+  name: loadout-group-survival-clown
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenClown
+  - EmergencyOxygenClown
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: MimeHead
+  name: loadout-group-mime-head
+  minLimit: 0
+  loadouts:
+  - MimeHead
+  - MimeFrenchBeret
+  - MimeCap
+  - MoryakHead #SS220-Two Floppa Iterarion
+
+- type: loadoutGroup
+  id: MimeMask
+  name: loadout-group-mime-mask
+  loadouts:
+  - MimeMask
+  - MimeMaskSad
+  - MimeMaskScared
+  - MoryakMask #SS220-Two Floppa Iterarion
+
+- type: loadoutGroup
+  id: MimeJumpsuit
+  name: loadout-group-mime-jumpsuit
+  loadouts:
+  - MimeJumpsuit
+  - MimeJumpskirt
+  - MoryakJumpsuit #SS220-Two Floppa Iterarion
+
+- type: loadoutGroup
+  id: MimeBackpack
+  name: loadout-group-mime-backpack
+  loadouts:
+  - MimeBackpack
+  - MimeSatchel
+  - MimeDuffel
+
+- type: loadoutGroup
+  id: MimeOuterClothing
+  name: loadout-group-mime-outerclothing
+  minLimit: 0
+  loadouts:
+  - MimeWintercoat
+
+- type: loadoutGroup
+  id: MimeBelt
+  name: loadout-group-mime-belt
+  loadouts:
+  - MimeSuspendersRed
+  - MimeSuspendersBlack
+
+- type: loadoutGroup
+  id: SurvivalMime
+  name: loadout-group-survival-mime
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenMime
+  - EmergencyOxygenMime
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: MusicianJumpsuit
+  name: loadout-group-musician-jumpsuit
+  loadouts:
+  - MusicianJumpsuit
+  - MusicianJumpskirt
+  - BardUniform #SS220 bard loadout
+
+- type: loadoutGroup
+  id: MusicianOuterClothing
+  name: loadout-group-musician-outerclothing
+  minLimit: 0
+  loadouts:
+  - MusicianWintercoat
+  - BardApron #SS220 bard loadout
+  - DangerCoat #SS220 danger coat
+
+- type: loadoutGroup
+  id: Instruments
+  name: loadout-group-instruments
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - SuperSynthesizer # ss220 super loadout
+  - Glockenspiel
+  - MusicBox
+  - Xylophone
+  - Microphone
+  - Synthesizer
+  - Kalimba
+  - Woodblock
+  - ElectricGuitar
+  - BassGuitar
+  - RockGuitar
+  - AcousticGuitar
+  - Banjo
+  - Violin
+  - Viola
+  - Cello
+  - Trumpet
+  - Trombone
+  - FrenchHorn
+  - Euphonium
+  - Saxophone
+  - Accordion
+  - Harmonica
+  - Clarinet
+  - Flute
+  - Recorder
+  - PanFlute
+  - Ocarina
+  - Bagpipe
+
+# Cargo
+- type: loadoutGroup
+  id: QuartermasterHead
+  name: loadout-group-quartermaster-head
+  minLimit: 0
+  loadouts:
+  - QuartermasterHead
+  - QuartermasterBeret
+  - QuartermasterHeadWarehouseman #SS220-QM-Trip
+
+- type: loadoutGroup
+  id: QuartermasterJumpsuit
+  name: loadout-group-quartermaster-jumpsuit
+  loadouts:
+  - QuartermasterJumpsuit
+  - QuartermasterJumpskirt
+  - QuartermasterTurtleneck
+  - QuartermasterTurtleneckSkirt
+  - QuartermasterFormalSuit
+  - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
+  - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
+
+- type: loadoutGroup
+  id: QuartermasterNeck
+  name: loadout-group-quartermaster-neck
+  minLimit: 0
+  loadouts:
+  - QuartermasterCloak
+  - QuartermasterMantle
+
+- type: loadoutGroup
+  id: QuartermasterOuterClothing
+  name: loadout-group-quartermaster-outerclothing
+  minLimit: 0
+  loadouts:
+  - QuartermasterWintercoat
+  - QuartermasterOuterCoatQMWarehouseman #SS220-QM-Trip
+
+- type: loadoutGroup
+  id: QuartermasterShoes
+  name: loadout-group-quartermaster-shoes
+  loadouts:
+  - BrownShoes
+  - CargoWinterBoots
+
+- type: loadoutGroup
+  id: CargoTechnicianHead
+  name: loadout-group-cargo-technician-head
+  minLimit: 0
+  loadouts:
+  - CargoTechnicianHead
+
+- type: loadoutGroup
+  id: CargoTechnicianJumpsuit
+  name: loadout-group-cargo-technician-jumpsuit
+  loadouts:
+  - CargoTechnicianJumpsuit
+  - CargoTechnicianJumpskirt
+  - CargoTechnicianJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - CargoTechnicianJumpsuitTurtleneckAlt
+  - CargoTechnicianJumpskirtTurtleneck
+  - CargoTechnicianJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: CargoTechnicianBackpack
+  name: loadout-group-cargo-technician-backpack
+  loadouts:
+  - CargoTechnicianBackpack
+  - CargoTechnicianSatchel
+  - CargoTechnicianDuffel
+
+- type: loadoutGroup
+  id: CargoTechnicianOuterClothing
+  name: loadout-group-cargo-technician-outerclothing
+  minLimit: 0
+  loadouts:
+  - CargoTechnicianWintercoat
+
+- type: loadoutGroup
+  id: CargoTechnicianShoes
+  name: loadout-group-cargo-technician-shoes
+  loadouts:
+  - BlackShoes
+  - CargoWinterBoots
+
+- type: loadoutGroup
+  id: SalvageSpecialistBackpack
+  name: loadout-group-salvage-specialist-backpack
+  loadouts:
+  - SalvageSpecialistBackpack
+  - SalvageSpecialistSatchel
+  - SalvageSpecialistDuffel
+
+- type: loadoutGroup
+  id: SalvageSpecialistOuterClothing
+  name: loadout-group-salvage-specialist-outerclothing
+  minLimit: 0
+  loadouts:
+  - SalvageSpecialistWintercoat
+
+- type: loadoutGroup
+  id: SalvageSpecialistShoes
+  name: loadout-group-salvage-specialist-shoes
+  loadouts:
+  - SalvageBoots
+  - CargoWinterBoots
+
+# Engineering
+- type: loadoutGroup
+  id: ChiefEngineerHead
+  name: loadout-group-chief-engineer-head
+  minLimit: 0
+  loadouts:
+  - ChiefEngineerHead
+  - ChiefEngineerBeret
+  - BeretCE #SS220-CEBeret
+
+- type: loadoutGroup
+  id: ChiefEngineerJumpsuit
+  name: loadout-group-chief-engineer-jumpsuit
+  loadouts:
+  - ChiefEngineerJumpsuit
+  - ChiefEngineerJumpskirt
+  - ChiefEngineerTurtleneck
+  - ChiefEngineerTurtleneckSkirt
+#ss220-loadout-chief-engineer-begin
+  - DarkChiefEngineerJumpsuit
+  - DarkChiefEngineerJumpskirt
+  - DarkChiefEngineerTurtleneck
+  - DarkChiefEngineerTurtleneckSkirt
+#ss220-loadout-chief-engineer-end
+
+- type: loadoutGroup
+  id: ChiefEngineerNeck
+  name: loadout-group-chief-engineer-neck
+  minLimit: 0
+  loadouts:
+  - ChiefEngineerCloak
+  - ChiefEngineerMantle
+#ss220-loadout-chief-engineer-begin
+  - DarkChiefEngineerCloak
+  - DarkChiefEngineerMantle
+#ss220-loadout-chief-engineer-end
+
+#ss220-loadout-ce-backpack-begin
+- type: loadoutGroup
+  id: ChiefEngineerBack
+  name: loadout-group-chief-engineer-backpack
+  loadouts:
+    - ChiefEngineerBackpack
+    - ChiefEngineerSatchel
+    - ChiefEngineerDuffel
+#ss220-loadout-ce-backpack-end
+
+- type: loadoutGroup
+  id: ChiefEngineerOuterClothing
+  name: loadout-group-chief-engineer-outerclothing
+  minLimit: 0
+  loadouts:
+  - ChiefEngineerWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
+
+- type: loadoutGroup
+  id: ChiefEngineerShoes
+  name: loadout-group-chief-engineer-shoes
+  loadouts:
+  - BrownShoes
+  - EngineeringWinterBoots
+
+- type: loadoutGroup
+  id: TechnicalAssistantJumpsuit
+  name: loadout-group-technical-assistant-jumpsuit
+  loadouts:
+  - YellowJumpsuit
+  - YellowJumpskirt
+  - TechnicalAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - TechnicalAssistantJumpsuitTurtleneckAlt
+  - TechnicalAssistantJumpskirtTurtleneck
+  - TechnicalAssistantJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: StationEngineerHead
+  name: loadout-group-station-engineer-head
+  loadouts:
+  - StationEngineerHardhatYellow
+  - StationEngineerHardhatOrange
+  - StationEngineerHardhatRed
+  # - SeniorEngineerBeret  #SS220 Seniors roles
+
+- type: loadoutGroup
+  id: StationEngineerJumpsuit
+  name: loadout-group-station-engineer-jumpsuit
+  loadouts:
+  - StationEngineerJumpsuit
+  - StationEngineerJumpskirt
+  - StationEngineerHazardsuit
+  # - SeniorEngineerJumpsuit  #SS220 Seniors roles
+  # - SeniorEngineerJumpskirt  #SS220 Seniors roles
+  - StationEngineerJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - StationEngineerJumpsuitTurtleneckAlt
+  - StationEngineerJumpskirtTurtleneck
+  - StationEngineerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: StationEngineerBackpack
+  name: loadout-group-station-engineer-backpack
+  loadouts:
+  - StationEngineerBackpack
+  - StationEngineerSatchel
+  - StationEngineerDuffel
+
+- type: loadoutGroup
+  id: StationEngineerOuterClothing
+  name: loadout-group-station-engineer-outerclothing
+  minLimit: 0
+  loadouts:
+  - StationEngineerOuterVest
+  - StationEngineerWintercoat
+  - CyberJacketEngineer #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: StationEngineerShoes
+  name: loadout-group-station-engineer-shoes
+  loadouts:
+  - WorkBoots
+  - EngineeringWinterBoots
+
+- type: loadoutGroup
+  id: StationEngineerID
+  name: loadout-group-station-engineer-id
+  loadouts:
+  - StationEngineerPDA
+  # - SeniorEngineerPDA  #SS220 Seniors roles
+
+- type: loadoutGroup
+  id: AtmosphericTechnicianJumpsuit
+  name: loadout-group-atmospheric-technician-jumpsuit
+  loadouts:
+  - AtmosphericTechnicianJumpsuit
+  - AtmosphericTechnicianJumpskirt
+  - AtmosphericTechnicianJumpsuitCasual
+  - AtmosphericTechnicianJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - AtmosphericTechnicianJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: AtmosphericTechnicianOuterClothing
+  name: loadout-group-atmospheric-technician-outerclothing
+  minLimit: 0
+  loadouts:
+  - AtmosphericTechnicianWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
+
+- type: loadoutGroup
+  id: AtmosphericTechnicianBackpack
+  name: loadout-group-atmospheric-technician-backpack
+  loadouts:
+  - AtmosphericTechnicianBackpack
+  - AtmosphericTechnicianSatchel
+  - AtmosphericTechnicianDuffel
+
+- type: loadoutGroup
+  id: AtmosphericTechnicianShoes
+  name: loadout-group-atmospheric-technician-shoes
+  loadouts:
+  - WhiteShoes
+  - EngineeringWinterBoots
+
+- type: loadoutGroup
+  id: SurvivalExtended
+  name: loadout-group-survival-extended
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenExtended
+  - EmergencyOxygenExtended
+  - LoadoutSpeciesVoxNitrogen
+
+# Science
+- type: loadoutGroup
+  id: ResearchDirectorHead
+  name: loadout-group-research-director-head
+  minLimit: 0
+  loadouts:
+  - ResearchDirectorBeret
+
+- type: loadoutGroup
+  id: ResearchDirectorNeck
+  name: loadout-group-research-director-neck
+  minLimit: 0
+  loadouts:
+  - ResearchDirectorMantle
+  - ResearchDirectorCloak
+
+- type: loadoutGroup
+  id: ResearchDirectorJumpsuit
+  name: loadout-group-research-director-jumpsuit
+  loadouts:
+  - ResearchDirectorJumpsuit
+  - ResearchDirectorJumpskirt
+#SS220-RD-New-Loadout-begin
+  - ClothingUniformJumpsuitRDAlt
+
+- type: loadoutGroup
+  id: ResearchDirectorPDA
+  name: loadout-group-research-director-pda
+  loadouts:
+  - RnDPDA
+  - AltRnDDirPDA
+#SS220-RD-New-Loadout-end
+
+- type: loadoutGroup
+  id: ResearchDirectorOuterClothing
+  name: loadout-group-research-director-outerclothing
+  minLimit: 0
+  loadouts:
+  - ResearchDirectorLabCoat
+  - ResearchDirectorWintercoat
+  - CyberJacketRnD #SS220-TwoOne-Floppa-Iteration
+
+- type: loadoutGroup
+  id: ResearchDirectorShoes
+  name: loadout-group-research-director-shoes
+  loadouts:
+  - BrownShoes
+  - ScienceWinterBoots
+
+- type: loadoutGroup
+  id: ScientistHead
+  name: loadout-group-scientist-head
+  minLimit: 0
+  loadouts:
+  - RoboticistCap
+  - SkullBandana
+  # - ScientificBeret  #SS220 Seniors roles
+
+- type: loadoutGroup
+  id: ScientistNeck
+  name: loadout-group-scientist-neck
+  minLimit: 0
+  loadouts:
+  - ScientistTie
+
+- type: loadoutGroup
+  id: ScientistJumpsuit
+  name: loadout-group-scientist-jumpsuit
+  loadouts:
+  - ScientistJumpsuit
+  - ScientistJumpskirt
+  - RoboticistJumpsuit
+  - RoboticistJumpskirt
+  # - SeniorResearcherJumpsuit  #SS220 Seniors roles
+  # - SeniorResearcherJumpskirt  #SS220 Seniors roles
+  - ScientistJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - ScientistJumpsuitTurtleneckAlt
+  - ScientistJumpskirtTurtleneck
+  - ScientistJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: ScientistBackpack
+  name: loadout-group-scientist-backpack
+  loadouts:
+  - ScientistBackpack
+  - ScientistSatchel
+  - ScientistDuffel
+
+- type: loadoutGroup
+  id: ScientistOuterClothing
+  name: loadout-group-scientist-outerclothing
+  minLimit: 0
+  loadouts:
+  - RegularLabCoat
+  - ScienceLabCoat
+  - ScienceWintercoat
+  - RoboticistLabCoat
+  - RoboticistWintercoat
+  # - SeniorResearcherLabCoat  #SS220 Seniors roles
+  - CyberJacketRnD #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: ScientistShoes
+  name: loadout-group-scientist-shoes
+  loadouts:
+  - WhiteShoes
+  - BlackShoes
+  - ScienceWinterBoots
+
+- type: loadoutGroup
+  id: ScientistGloves
+  name: loadout-group-scientist-gloves
+  minLimit: 0
+  loadouts:
+  - LatexGloves
+  - PurpleGloves
+  - RobohandsGloves
+
+- type: loadoutGroup
+  id: ScientistPDA
+  name: loadout-group-scientist-id
+  loadouts:
+  - ScientistPDA
+  # - SeniorResearcherPDA  #SS220 Seniors roles
+
+- type: loadoutGroup
+  id: ResearchAssistantJumpsuit
+  name: loadout-group-research-assistant-jumpsuit
+  loadouts:
+  - WhiteJumpsuit
+  - WhiteJumpskirt
+  - ResearchAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - ResearchAssistantJumpsuitTurtleneckAlt
+  - ResearchAssistantJumpskirtTurtleneck
+  - ResearchAssistantJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+# Security
+- type: loadoutGroup
+  id: HeadofSecurityHead
+  name: loadout-group-head-of-security-head
+  minLimit: 0
+  loadouts:
+  - HeadofSecurityHead
+  - HeadofSecurityBeret
+  - HeadofSecurityBigCap #SS220-FreedomHoSCap
+  - HatCapHoS #ss220 sec loadout update
+
+- type: loadoutGroup
+  id: HeadofSecurityJumpsuit
+  name: loadout-group-head-of-security-jumpsuit
+  loadouts:
+  - HeadofSecurityJumpsuit
+  - HeadofSecurityJumpskirt
+  - HeadofSecurityTurtleneck
+  - HeadofSecurityTurtleneckSkirt
+  - HeadofSecurityFormalSuit
+  - JumpsuitHoSGrey #ss220 sec loadout update
+  - JumpsuitHoSBlue #ss220 sec loadout update
+  - JumpskirtHoSParadeMale #ss220 sec loadout update
+  - JumpsuitHoSParadeMale #ss220 sec loadout update
+#  - HeadofSecurityFormalSkirt SS220-RemoveFormalSkirtLoadouts
+
+- type: loadoutGroup
+  id: HeadofSecurityNeck
+  name: loadout-group-head-of-security-neck
+  minLimit: 0
+  loadouts:
+  - HeadofSecurityCloak
+  - HeadofSecurityMantle
+  - SecurityHolster #SS220-HoS-Holster
+  - MantleHOSShoulder #ss220 sec loadout update
+
+- type: loadoutGroup
+  id: HeadofSecurityOuterClothing
+  name: loadout-group-head-of-security-outerclothing
+  loadouts:
+  - HeadofSecurityCoat
+  - HeadofSecurityWinterCoat
+  - WinterHoSUnarmored #ss220 sec loadout update
+  - Outer1984 #SS220-Two Floppa Iteration
+  - CyberVestSecurity #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: WardenHead
+  name: loadout-group-warden-head
+  minLimit: 0
+  loadouts:
+  - WardenHead
+  - WardenBeret
+
+- type: loadoutGroup
+  id: WardenJumpsuit
+  name: loadout-group-warden-jumpsuit
+  loadouts:
+  - WardenJumpsuit
+  - WardenJumpskirt
+  - WardenJumpsuitTurtleneck #SS220-MoreTurtleneck
+
+- type: loadoutGroup
+  id: WardenOuterClothing
+  name: loadout-group-warden-outerclothing
+  loadouts:
+  - WardenCoat
+  - WardenArmoredWinterCoat
+  - CyberVestSecurity #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: SecurityHead
+  name: loadout-group-security-head
+  minLimit: 0
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - HatCowboyBlack #ss220 sec loadout update
+  - HelmetTacSec #ss220 tacsec update
+  - TrooperHat # SS220 TrooperHat neck-to-head loadout transfer
+
+#SS220 neck loadout begin
+- type: loadoutGroup
+  id: SecurityNeck
+  name: loadout-group-security-neck
+  minLimit: 0
+  loadouts:
+  - SecurityHolster #SS220 holster loadout
+  - Headphones #SS220 sec loadout update
+  - ProtectGear #ss220 tacsec update
+#SS220 neck loadout end
+#- TrooperHat # SS220 TrooperHat neck-to-head loadout transfer
+
+- type: loadoutGroup
+  id: SecurityJumpsuit
+  name: loadout-group-security-jumpsuit
+  loadouts:
+  - SecurityJumpsuit
+  - SecurityJumpskirt
+  - SecurityJumpsuitGrey
+  - SecurityJumpskirtGrey
+  # - SeniorOfficerJumpsuit  #SS220 Seniors roles
+  # - SeniorOfficerJumpskirt  #SS220 Seniors roles
+  - SecurityJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - JumpsuitSecBlue #ss220 sec loadout update
+  - JumpsuitTacSec #ss220 tacsec update
+  - SeniorOfficerJumpsuit
+  - SeniorOfficerJumpskirt
+  - TrooperUniform
+  - JumpsuitSecVaas #ss220 security loadout
+
+- type: loadoutGroup
+  id: SecurityBackpack
+  name: loadout-group-security-backpack
+  loadouts:
+  - SecurityBackpack
+  - SecuritySatchel
+  - SecurityDuffel
+
+- type: loadoutGroup
+  id: SecurityBelt
+  name: loadout-group-security-belt
+  loadouts:
+  - SecurityBelt
+  - SecurityWebbing
+
+- type: loadoutGroup
+  id: SecurityOuterClothing
+  name: loadout-group-security-outerclothing
+  loadouts:
+  - ArmorVest
+  - ArmorVestSlim
+  - SecurityOfficerWintercoat
+  - CoatSecurityOvercoat #ss220 sec loadout update
+  - VestArmorSec #ss220 sec loadout update
+  - CyberVestSecurity #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: SecurityShoes
+  name: loadout-group-security-shoes
+  loadouts:
+  - JackBoots
+  - SecurityWinterBoots
+  - BootsJackSec #ss220 sec loadout update
+
+- type: loadoutGroup
+  id: SecurityPDA
+  name: loadout-group-security-id
+  loadouts:
+  - SecurityPDA
+  # - SeniorOfficerPDA  #SS220 Seniors roles
+
+- type: loadoutGroup
+  id: DetectiveHead
+  name: loadout-group-detective-head
+  minLimit: 0
+  loadouts:
+  - DetectiveFedora
+  - DetectiveFedoraGrey
+
+#SS220 holster to neck begin
+#- type: loadoutGroup
+#  id: DetectiveNeck
+#  name: loadout-group-detective-neck
+#  minLimit: 0
+#  loadouts:
+#  - DetectiveTie
+#SS220 holster to neck end
+
+- type: loadoutGroup
+  id: DetectiveJumpsuit
+  name: loadout-group-detective-jumpsuit
+  loadouts:
+  - DetectiveJumpsuit
+  - DetectiveJumpskirt
+  - NoirJumpsuit
+  - NoirJumpskirt
+
+- type: loadoutGroup
+  id: DetectiveOuterClothing
+  name: loadout-group-detective-outerclothing
+  minLimit: 0
+  loadouts:
+  - DetectiveArmorVest
+  - DetectiveCoat
+  - DetectiveCoatDark # Corvax-Resprite-Detective
+  - DetectiveCoatGrey
+
+- type: loadoutGroup
+  id: SecurityCadetJumpsuit
+  name: loadout-group-security-cadet-jumpsuit
+  loadouts:
+  - RedJumpsuit
+  - RedJumpskirt
+  - SecurityCadetJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - SecurityCadetJumpsuitTurtleneckAlt
+  - SecurityCadetJumpskirtTurtleneck
+  - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - SecurityGrayJumpsuit #ss220-grey-jumpsit-add
+  - SecurityGrayJumpskirt #ss220-grey-jumpsit-add
+
+- type: loadoutGroup
+  id: SurvivalSecurity
+  name: loadout-group-survival-security
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenSecurity
+  - EmergencyOxygenSecurity
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: SecurityStar
+  name: loadout-group-security-star
+  minLimit: 0
+  loadouts:
+  - SecStar
+
+# Medical
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHead
+  name: loadout-group-chief-medical-officer-head
+  minLimit: 0
+  loadouts:
+  - ChiefMedicalOfficerBeret
+  - CMOMedicalHeadMirror
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerJumpsuit
+  name: loadout-group-chief-medical-officer-jumpsuit
+  loadouts:
+  - ChiefMedicalOfficerJumpsuit
+  - ChiefMedicalOfficerJumpskirt
+  - ChiefMedicalOfficerTurtleneckJumpsuit
+  - ChiefMedicalOfficerTurtleneckJumpskirt
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerOuterClothing
+  name: loadout-group-chief-medical-officer-outerclothing
+  minLimit: 0
+  loadouts:
+  - ChiefMedicalOfficerLabCoat
+  - ChiefMedicalOfficerWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerNeck
+  name: loadout-group-chief-medical-officer-neck
+  minLimit: 0
+  loadouts:
+  - ChiefMedicalOfficerCloak
+  - ChiefMedicalOfficerMantle
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerShoes
+  name: loadout-group-chief-medical-officer-shoes
+  loadouts:
+  - BrownShoes
+  - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: MedicalDoctorHead
+  name: loadout-group-medical-doctor-head
+  minLimit: 0
+  loadouts:
+  - MedicalBeret
+  # - SeniorPhysicianBeret  #SS220 Seniors roles
+  - MedicalHeadMirror
+  - BlueSurgeryCap
+  - GreenSurgeryCap
+  - PurpleSurgeryCap
+  - NurseHat
+
+- type: loadoutGroup
+  id: MedicalDoctorJumpsuit
+  name: loadout-group-medical-doctor-jumpsuit
+  loadouts:
+  - MedicalDoctorJumpsuit
+  - MedicalDoctorJumpskirt
+  # - SeniorPhysicianJumpsuit  #SS220 Seniors roles
+  # - SeniorPhysicianJumpskirt  #SS220 Seniors roles
+  - MedicalBlueScrubs
+  - MedicalGreenScrubs
+  - MedicalPurpleScrubs
+  - MedicalDoctorJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - MedicalDoctorJumpsuitTurtleneckAlt
+  - MedicalDoctorJumpskirtTurtleneck
+  - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: MedicalDoctorOuterClothing
+  name: loadout-group-medical-doctor-outerclothing
+  minLimit: 0
+  loadouts:
+  - RegularLabCoat
+  - MedicalDoctorWintercoat
+  # - SeniorPhysicianLabCoat  #SS220 Seniors roles
+  - CyberJacketMed #SS220-Two Floppa Iteration
+
+- type: loadoutGroup
+  id: MedicalBackpack
+  name: loadout-group-medical-doctor-backpack
+  loadouts:
+  - MedicalDoctorBackpack
+  - MedicalDoctorSatchel
+  - MedicalDoctorDuffel
+
+- type: loadoutGroup
+  id: MedicalShoes
+  name: loadout-group-medical-doctor-shoes
+  loadouts:
+  - WhiteShoes
+  - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: MedicalDoctorPDA
+  name: loadout-group-medical-doctor-id
+  loadouts:
+  - MedicalDoctorPDA
+  # - SeniorPhysicianPDA  #SS220 Seniors roles
+
+- type: loadoutGroup
+  id: MedicalGloves
+  name: loadout-group-medical-gloves
+  minLimit: 0
+  loadouts:
+  - LatexGloves
+  - NitrileGloves
+
+- type: loadoutGroup
+  id: MedicalMask
+  name: loadout-group-medical-mask
+  minLimit: 0
+  loadouts:
+  - SterileMask
+
+- type: loadoutGroup
+  id: MedicalInternJumpsuit
+  name: loadout-group-medical-intern-jumpsuit
+  loadouts:
+  - WhiteJumpsuit
+  - WhiteJumpskirt
+  - MedicalInternJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - MedicalInternJumpsuitTurtleneckAlt
+  - MedicalInternJumpskirtTurtleneck
+  - MedicalInternJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: ChemistJumpsuit
+  name: loadout-group-chemist-jumpsuit
+  loadouts:
+  - ChemistJumpsuit
+  - ChemistJumpskirt
+  - ChemistJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - ChemistJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+
+- type: loadoutGroup
+  id: ChemistOuterClothing
+  name: loadout-group-chemist-outerclothing
+  minLimit: 0
+  loadouts:
+  - RegularLabCoat
+  - ChemistLabCoat
+  - ChemistWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
+
+- type: loadoutGroup
+  id: ChemistBackpack
+  name: loadout-group-chemist-backpack
+  loadouts:
+  - ChemistBackpack
+  - ChemistSatchel
+  - ChemistDuffel
+
+- type: loadoutGroup
+  id: ParamedicHead
+  name: loadout-group-paramedic-head
+  minLimit: 0
+  loadouts:
+  - ParamedicHead
+
+- type: loadoutGroup
+  id: ParamedicJumpsuit
+  name: loadout-group-paramedic-jumpsuit
+  loadouts:
+  - ParamedicJumpsuit
+  - ParamedicJumpskirt
+  - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
+  - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
+  - ParamedicFeldsher #SS220-ParamedFashion
+
+- type: loadoutGroup
+  id: ParamedicOuterClothing
+  name: loadout-group-paramedic-outerclothing
+  minLimit: 0
+  loadouts:
+  - ParamedicWindbreaker
+  - ParamedicWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
+
+- type: loadoutGroup
+  id: ParamedicShoes
+  name: loadout-group-paramedic-shoes
+  loadouts:
+  - BlueShoes
+  - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: SurvivalMedical
+  name: loadout-group-survival-medical
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenMedical
+  - EmergencyOxygenMedical
+  - LoadoutSpeciesVoxNitrogen
+
+# Wildcards
+- type: loadoutGroup
+  id: ReporterJumpsuit
+  name: loadout-group-reporter-jumpsuit
+  loadouts:
+  - ReporterJumpsuit
+  - JournalistJumpsuit
+  - JumpsuitJournalistRed #SS220-Clothes
+
+- type: loadoutGroup
+  id: PsychologistJumpsuit
+  name: loadout-group-psychologist-jumpsuit
+  loadouts:
+  - PsychologistJumpsuit
+  - PsychologistJumpskirt
+  - PsychologistJumpsuitTurtleneck #SS220-MoreTurtleneck
+  - PsychologistJumpskirtTurtleneck #SS220-MoreTurtleneck
+
+- type: loadoutGroup
+  id: BoxerJumpsuit
+  name: loadout-group-boxer-jumpsuit
+  loadouts:
+  - BoxerShorts
+  - BoxerShortsWithTop
+
+- type: loadoutGroup
+  id: BoxerGloves
+  name: loadout-group-boxer-gloves
+  loadouts:
+  - RedBoxingGloves
+  - BlueBoxingGloves
+  - GreenBoxingGloves
+  - YellowBoxingGloves
+
+# Other
+- type: loadoutGroup
+  id: SurvivalSyndicate
+  name: loadout-group-survival-syndicate
+  minLimit: 2
+  hidden: true
+  loadouts:
+  - EmergencyNitrogenSyndicate
+  - EmergencyOxygenSyndicate
+  - LoadoutSpeciesVoxNitrogen
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathTool
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathTool
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathToolMedical
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathToolMedical
+
+- type: loadoutGroup
+  id: GroupSpeciesBreathToolSecurity
+  name: loadout-group-breath-tool
+  minLimit: 1
+  maxLimit: 1
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesBreathToolSecurity

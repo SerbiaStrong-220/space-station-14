@@ -1,0 +1,80 @@
+# ChiefEngineer Time
+- type: loadoutEffectGroup
+  id: DarkChiefEngineer
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChiefEngineer
+      time: 720000 #200 часов, форма для положивших уйму времени на работу
+
+# Jumpsuit
+- type: loadout
+  id: DarkChiefEngineerJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerDark
+
+- type: loadout
+  id: DarkChiefEngineerJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChiefEngineerDark
+
+- type: loadout
+  id: DarkChiefEngineerTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerTurtleDark
+
+- type: loadout
+  id: DarkChiefEngineerTurtleneckSkirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChiefEngineerTurtleDark
+
+# Neck
+- type: loadout
+  id: DarkChiefEngineerCloak
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    neck: ClothingNeckCloakCEDark
+
+- type: loadout
+  id: DarkChiefEngineerMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    neck: ClothingNeckMantleCEDark
+
+# PDA
+- type: loadout
+  id: DarkChiefEngineerPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DarkChiefEngineer
+  equipment:
+    id: DarkCEPDA
+
+- type: loadout
+  id: ChiefEngineerPDA
+  equipment:
+    id: CEPDA
+
+# Head
+- type: loadout
+  id: BeretCE
+  equipment:
+    head: ClothingHeadHatBeretCE
+

@@ -2,7 +2,6 @@
   id: ActionDarkReaperRofl
   name: Запугивание
   description: Чем больше страха, тем слаще добыча.
-  noSpawn: true
   components:
   - type: InstantAction
     event: !type:ReaperRoflEvent
@@ -14,7 +13,6 @@
   id: ActionDarkReaperStun
   name: Крик
   description: Громкий вопль, оглушающий добычу.
-  noSpawn: true
   components:
   - type: InstantAction
     event: !type:ReaperStunEvent
@@ -24,7 +22,6 @@
 
 - type: entity
   id: ActionDarkReaperConsume
-  noSpawn: true
   name: Жатва
   description: Растерзать и поглотить добычу.
   components:
@@ -38,7 +35,6 @@
   id: ActionDarkReaperMaterialize
   name: Врата
   description: Проход между материальным миром и не материальным.
-  noSpawn: true
   components:
   - type: InstantAction
     event: !type:ReaperMaterializeEvent
@@ -50,7 +46,6 @@
   id: ActionDarkReaperSpawn
   name: Явить себя
   description: Смертные не будут вас дожидаться.
-  noSpawn: true
   components:
   - type: InstantAction
     event: !type:ReaperSpawnEvent

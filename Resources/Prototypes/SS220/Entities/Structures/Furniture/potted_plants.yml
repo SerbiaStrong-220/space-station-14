@@ -1,0 +1,389 @@
+- type: entity
+  id: PottedPlantBioluminscentSS220_1
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-01
+  - type: PointLight
+    radius: 1.5
+    color: "#7d44c9"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_2
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-02
+  - type: PointLight
+    radius: 2
+    color: "#b46edc"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_3
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-03
+  - type: PointLight
+    radius: 2.2
+    color: "#e6aaff"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_4
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-04
+  - type: PointLight
+    radius: 1.5
+    color: "#004ae2"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_5
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-05
+  - type: PointLight
+    radius: 2
+    color: "#007dff"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_6
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-06
+  - type: PointLight
+    radius: 2.2
+    color: "#0021b7"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_7
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-07
+  - type: PointLight
+    radius: 1.5
+    color: "#38bfdc"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_8
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-08
+  - type: PointLight
+    radius: 2
+    color: "#a3ffff"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_9
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-09
+  - type: PointLight
+    radius: 2.2
+    color: "#bfffff"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_10
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-10
+  - type: PointLight
+    radius: 1.5
+    color: "#a3c3e3"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_11
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-11
+  - type: PointLight
+    radius: 2
+    color: "#cbdbfc"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_12
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-12
+  - type: PointLight
+    radius: 2.2
+    color: "#cbdbfc"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_13
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-13
+  - type: PointLight
+    radius: 1.5
+    color: "#00d4ad"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_14
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-14
+  - type: PointLight
+    radius: 2
+    color: "#00ffd1"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_15
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-15
+  - type: PointLight
+    radius: 2.2
+    color: "#06bab4"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_16
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-16
+  - type: PointLight
+    radius: 1.5
+    color: "#5ae85b"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_17
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-17
+  - type: PointLight
+    radius: 2
+    color: "#c9f9de"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_18
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-18
+  - type: PointLight
+    radius: 2.2
+    color: "#c9f9de"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_19
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-19
+  - type: PointLight
+    radius: 1.5
+    color: "#ffad2c"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_20
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-20
+  - type: PointLight
+    radius: 2
+    color: "#ffd90d"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_21
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-21
+  - type: PointLight
+    radius: 2.2
+    color: "#ffff00"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_22
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-22
+  - type: PointLight
+    radius: 1.5
+    color: "#f47e00"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_23
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-23
+  - type: PointLight
+    radius: 2
+    color: "#ff9300"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_24
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-24
+  - type: PointLight
+    radius: 2.2
+    color: "#ff9300"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_25
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-25
+  - type: PointLight
+    radius: 1.5
+    color: "#940dac"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_26
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-26
+  - type: PointLight
+    radius: 2
+    color: "#b536cd"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_27
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-27
+  - type: PointLight
+    radius: 2.2
+    color: "#e584d5"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_28
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-28
+  - type: PointLight
+    radius: 1.5
+    color: "#f29b50"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_29
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-29
+  - type: PointLight
+    radius: 2
+    color: "#f2d250"
+
+- type: entity
+  id: PottedPlantBioluminscentSS220_30
+  parent: PottedPlantBase
+  name: "bioluminescent potted plant"
+  description: "It produces light!"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    state: plant-30
+  - type: PointLight
+    radius: 2.2
+    color: "#db6a5c"

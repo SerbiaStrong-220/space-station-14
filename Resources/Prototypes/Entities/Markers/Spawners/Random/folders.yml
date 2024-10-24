@@ -22,3 +22,6 @@
       - BoxFolderGrey
       - BoxFolderBlack
       - BoxFolderGreen
+      - BoxFolderOrange #SS220-NewFolders-Begin
+      - BoxFolderPurple
+      - BoxFolderBrown #SS220-NewFolders-End

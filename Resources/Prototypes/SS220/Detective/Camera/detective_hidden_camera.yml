@@ -1,0 +1,50 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: DetectiveCameraBase
+  name: Detective camera base
+  description: Simple detective camera
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Objects/Tools/dec_cam.rsi
+    state: icon
+  - type: Eye
+  - type: WirelessNetworkConnection
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraSetupUiKey.Camera:
+        type: SurveillanceCameraSetupBoundUi
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: SurveillanceCameraSecurity
+    transmitFrequencyId: SurveillanceCamera
+  - type: SurveillanceCamera
+    setupAvailableNetworks:
+      - SurveillanceCameraSecurity
+    isOffable: true
+    isOffableVisuals: true
+  - type: SurveillanceCameraMicrophone
+    blacklist:
+      components:
+        - SurveillanceCamera
+        - SurveillanceCameraMonitor
+        - RadioSpeaker
+  - type: ActiveListener
+    range: 10
+  - type: DetectiveCameraAttach
+  - type: StationAiVision
+  - type: Tag
+    tags:
+    - DetectiveCamera
+
+- type: entity
+  id: DetectiveHiddenCamera
+  parent: DetectiveCameraBase
+  name: Hidden detective camera
+  description: Used for covert surveillance
+  components:
+  - type: SurveillanceCamera
+    networkSet: true
+    id: "Detective camera"

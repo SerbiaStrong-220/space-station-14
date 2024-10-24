@@ -4,11 +4,14 @@ using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
@@ -49,6 +52,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
 
     public override void Initialize()
     {
@@ -99,6 +103,15 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             return;
         }
 
+        //Dark Reaper consume fix begin
+        if (HasComp<CannotBeConsumedComponent>(args.Target))
+        {
+            if (_net.IsClient)
+                _popup.PopupEntity("Невозможно поглотить", uid, PopupType.MediumCaution);
+            return;
+        }
+        //Dark Reaper consume fix end
+
         var doafterArgs = new DoAfterArgs(
             EntityManager,
             uid,
@@ -110,8 +123,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         {
             Broadcast = false,
             BreakOnDamage = false,
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             NeedHand = false,
             BlockDuplicate = true,
             CancelDuplicate = true,
@@ -173,8 +185,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             {
                 Broadcast = false,
                 BreakOnDamage = false,
-                BreakOnTargetMove = false,
-                BreakOnUserMove = false,
+                BreakOnMove = false,
                 NeedHand = false,
                 BlockDuplicate = true,
                 CancelDuplicate = false
@@ -199,8 +210,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             {
                 Broadcast = false,
                 BreakOnDamage = false,
-                BreakOnTargetMove = false,
-                BreakOnUserMove = false,
+                BreakOnMove = false,
                 NeedHand = false,
                 BlockDuplicate = true,
                 CancelDuplicate = false
@@ -361,12 +371,34 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         if (isMaterial)
         {
             _tag.AddTag(uid, "DoorBumpOpener");
+
+            if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
+            {
+                explosionResistanceComponent.DamageCoefficient = 1f; //full damage
+            }
+
+            if (HasComp<NpcFactionMemberComponent>(uid))
+            {
+                _npcFaction.ClearFactions(uid);
+                _npcFaction.AddFaction(uid, "SimpleHostile");
+            }
         }
         else
         {
             _tag.RemoveTag(uid, "DoorBumpOpener");
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
+
+            if (TryComp<ExplosionResistanceComponent>(uid, out var explodeComponent))
+            {
+                explodeComponent.DamageCoefficient = 0f; // full resistance
+            }
+
+            if (HasComp<NpcFactionMemberComponent>(uid))
+            {
+                _npcFaction.ClearFactions(uid);
+                _npcFaction.AddFaction(uid, "DarkReaperPassive");
+            }
             _appearance.SetData(uid, DarkReaperVisual.StunEffect, false);
         }
 

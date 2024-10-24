@@ -1,20 +1,22 @@
 using System.Linq;
+using Content.Server.Actions;
 using Content.Server.Body.Systems;
 using Content.Server.Chat;
 using Content.Server.Chat.Systems;
-using Content.Server.Cloning;
 using Content.Server.Emoting.Systems;
-using Content.Server.Inventory;
 using Content.Server.Speech.EntitySystems;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NameModifier.Components;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
@@ -32,14 +34,14 @@ namespace Content.Server.Zombies
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
         [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly ServerInventorySystem _inv = default!;
         [Dependency] private readonly ChatSystem _chat = default!;
+        [Dependency] private readonly ActionsSystem _actions = default!;
         [Dependency] private readonly AutoEmoteSystem _autoEmote = default!;
         [Dependency] private readonly EmoteOnDamageSystem _emoteOnDamage = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly TagSystem _tag = default!;
+        [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
         private const string ZombifyableTag = "ZombifyableByMelee";
 
@@ -59,7 +61,7 @@ namespace Content.Server.Zombies
 
             SubscribeLocalEvent<ZombieComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<ZombieComponent, EmoteEvent>(OnEmote, before:
-                new []{typeof(VocalSystem), typeof(BodyEmotesSystem)});
+                new[] { typeof(VocalSystem), typeof(BodyEmotesSystem) });
 
             SubscribeLocalEvent<ZombieComponent, MeleeHitEvent>(OnMeleeHit);
             SubscribeLocalEvent<ZombieComponent, MobStateChangedEvent>(OnMobState);
@@ -69,12 +71,26 @@ namespace Content.Server.Zombies
 
             SubscribeLocalEvent<PendingZombieComponent, MapInitEvent>(OnPendingMapInit);
 
+            SubscribeLocalEvent<IncurableZombieComponent, MapInitEvent>(OnPendingMapInit);
+
             SubscribeLocalEvent<ZombifyOnDeathComponent, MobStateChangedEvent>(OnDamageChanged);
+        }
+
+        private void OnPendingMapInit(EntityUid uid, IncurableZombieComponent component, MapInitEvent args)
+        {
+            _actions.AddAction(uid, ref component.Action, component.ZombifySelfActionPrototype);
         }
 
         private void OnPendingMapInit(EntityUid uid, PendingZombieComponent component, MapInitEvent args)
         {
+            if (_mobState.IsDead(uid))
+            {
+                ZombifyEntity(uid);
+                return;
+            }
+
             component.NextTick = _timing.CurTime + TimeSpan.FromSeconds(1f);
+            component.GracePeriod = _random.Next(component.MinInitialInfectedGrace, component.MaxInitialInfectedGrace);
         }
 
         public override void Update(float frameTime)
@@ -250,10 +266,29 @@ namespace Content.Server.Zombies
                 }
                 else if (mobState.CurrentState == MobState.Alive) //heals when zombies bite live entities
                 {
+                    //SS220 no_heal_from_zombies start
+                    if (HasComp<ZombieComponent>(entity))
+                        continue;
+                    //SS220 no_heal_from_zombies end
+
                     _damageable.TryChangeDamage(uid, component.HealingOnBite, true, false);
                 }
             }
         }
+
+        // ss220 - zombie - edit start
+        private void SetMarkingColors(MarkingCategories category, Color color, HumanoidAppearanceComponent huApComp)
+        {
+            if (!huApComp.MarkingSet.TryGetCategory(category, out var markings))
+                return;
+
+            var index = markings.Count - 1;
+            for (var i = 0; i < markings[index].MarkingColors.Count; i++)
+            {
+                markings[index].SetColor(i, color);
+            }
+        }
+        // ss220 - zombie - edit end
 
         /// <summary>
         ///     This is the function to call if you want to unzombify an entity.
@@ -275,14 +310,31 @@ namespace Content.Server.Zombies
                 _humanoidAppearance.SetBaseLayerColor(target, layer, info.Color);
                 _humanoidAppearance.SetBaseLayerId(target, layer, info.Id);
             }
-            if(TryComp<HumanoidAppearanceComponent>(target, out var appcomp))
+            if (TryComp<HumanoidAppearanceComponent>(target, out var appcomp))
             {
                 appcomp.EyeColor = zombiecomp.BeforeZombifiedEyeColor;
+
+                //ss220 edit start
+                SetMarkingColors(MarkingCategories.Tail, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                SetMarkingColors(MarkingCategories.HeadSide, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                SetMarkingColors(MarkingCategories.HeadTop, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                SetMarkingColors(MarkingCategories.Snout, zombiecomp.BeforeZombifiedSkinColor, appcomp);
+                //ss220 edit end
+
             }
             _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor, false);
             _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
 
-            _metaData.SetEntityName(target, zombiecomp.BeforeZombifiedEntityName);
+            //SS220 ZOMBIE NAME FIX START (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1651 && https://github.com/SerbiaStrong-220/space-station-14/issues/1567)
+            var targetModifierComponent = AddComp<NameModifierComponent>(target);
+
+            if (TryComp<NameModifierComponent>(source, out var sourceModifierComponent))
+            {
+                targetModifierComponent.BaseName = sourceModifierComponent.BaseName;
+            }
+            //SS220 ZOMBIE NAME FIX END
+
+            _nameMod.RefreshNameModifiers(target);
             return true;
         }
 

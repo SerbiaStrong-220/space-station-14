@@ -27,6 +27,7 @@ public sealed class BanCommand : LocalizedCommands
         string target;
         string reason;
         uint minutes;
+        var postBanInfo = true;
         if (!Enum.TryParse(_cfg.GetCVar(CCVars.ServerBanDefaultSeverity), out NoteSeverity severity))
         {
             _logManager.GetSawmill("admin.server_ban")
@@ -100,6 +101,41 @@ public sealed class BanCommand : LocalizedCommands
                 }
 
                 break;
+            // SS220 post ban with post info start
+            case 6:
+                target = args[0];
+                reason = args[1];
+
+                if (!uint.TryParse(args[2], out minutes))
+                {
+                    shell.WriteLine(Loc.GetString("cmd-ban-invalid-minutes", ("minutes", args[2])));
+                    shell.WriteLine(Help);
+                    return;
+                }
+
+                if (!Enum.TryParse(args[3], ignoreCase: true, out severity))
+                {
+                    shell.WriteLine(Loc.GetString("cmd-ban-invalid-severity", ("severity", args[3])));
+                    shell.WriteLine(Help);
+                    return;
+                }
+
+                if (!int.TryParse(args[4], out round))
+                {
+                    shell.WriteLine(Loc.GetString("cmd-ban-invalid-stated-round", ("statedround", args[4])));
+                    shell.WriteLine(Help);
+                    return;
+                }
+
+                if (!bool.TryParse(args[5], out postBanInfo))
+                {
+                    shell.WriteLine(Loc.GetString("cmd-ban-invalid-post-ban", ("postBan", args[5])));
+                    shell.WriteLine(Help);
+                    return;
+                }
+
+                break;
+            // SS220 post ban with post info end
             default:
                 shell.WriteLine(Loc.GetString("cmd-ban-invalid-arguments"));
                 shell.WriteLine(Help);
@@ -118,7 +154,7 @@ public sealed class BanCommand : LocalizedCommands
         var targetUid = located.UserId;
         var targetHWid = located.LastHWId;
 
-        _bans.CreateServerBan(targetUid, target, player?.UserId, null, targetHWid, minutes, severity, player?.Name, round, reason);
+        _bans.CreateServerBan(targetUid, target, player?.UserId, null, targetHWid, minutes, severity, player?.Name, round, reason, postBanInfo);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
@@ -163,6 +199,17 @@ public sealed class BanCommand : LocalizedCommands
         if (args.Length == 5)
         {
             return CompletionResult.FromHint(LocalizationManager.GetString("cmd-ban-hint-stated-round"));
+        }
+
+        if (args.Length == 6)
+        {
+            var postInfo = new CompletionOption[]
+            {
+                new("true", Loc.GetString("cmd-ban-hint-post-ban-true")),
+                new("false", Loc.GetString("cmd-ban-hint-post-ban-false"))
+            };
+
+            return CompletionResult.FromHintOptions(postInfo, Loc.GetString("cmd-ban-hint-post-ban"));
         }
 
         return CompletionResult.Empty;

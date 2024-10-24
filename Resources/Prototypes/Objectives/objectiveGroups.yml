@@ -12,15 +12,20 @@
   weights:
     CaptainIDStealObjective: 1
     CMOHyposprayStealObjective: 1
+    CMOCrewMonitorStealObjective: 1
     RDHardsuitStealObjective: 1
     NukeDiskStealObjective: 1
     MagbootsStealObjective: 1
     CorgiMeatStealObjective: 1
     ClipboardStealObjective: 1
+    EngravedKnuckledusterStealObjective: 1  #SS220 New Qm highrisk
     CaptainGunStealObjective: 0.5
     CaptainJetpackStealObjective: 0.5
+    ClothingOuterReactiveArmorObjective: 0.5 #SS220 New RD highrisk
     HandTeleporterStealObjective: 0.5
     SecretDocumentsStealObjective: 0.5
+    MultiPhaseEnergyGunStealObjective: 0.5 #SS220 MultiPhaze Energy Gun
+    EnergyShotgunStealObjective: 0.5
 
 - type: weightedRandom
   id: TraitorObjectiveGroupKill
@@ -33,7 +38,7 @@
   weights:
     EscapeShuttleObjective: 1
     DieObjective: 0.05
-    #HijackShuttleObjective: 0.02
+    HijackShuttleObjective: 0.02  #SS220 Return hijack objective
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSocial
@@ -51,15 +56,8 @@
 - type: weightedRandom
   id: ThiefBigObjectiveGroups
   weights:
-    ThiefObjectiveGroupStructure: 0 #Temporarily disabled until obvious ways to steal structures are added
-    ThiefObjectiveGroupAnimal: 2
-
-- type: weightedRandom
-  id: ThiefEscapeObjectiveGroups
-  weights:
-    ThiefObjectiveGroupEscape: 1
-
-
+    ThiefObjectiveGroupStructure: 1 #Temporarily disabled until obvious ways to steal structures are added
+#    ThiefObjectiveGroupAnimal: 2 # SS220 Delete thief objective animals
 
 - type: weightedRandom
   id: ThiefObjectiveGroupCollection
@@ -69,9 +67,7 @@
     StampStealCollectionObjective: 1
     DoorRemoteStealCollectionObjective: 1
     TechnologyDiskStealCollectionObjective: 1        #rnd
-    FigurineStealCollectionObjective: 0.3          #service
     IDCardsStealCollectionObjective: 1
-    CannabisStealCollectionObjective: 1
     LAMPStealCollectionObjective: 2 #only for moth
 
 - type: weightedRandom
@@ -80,6 +76,7 @@
     ForensicScannerStealObjective: 1                    #sec
     ExpensiveLighterDetectiveStealObjective: 0.5 #SS220 Zippo-Steal-Detective
     ClothingHeadHatWardenStealObjective: 1
+    WantedListCartridgeStealObjective: 1
     ClothingOuterHardsuitVoidParamedStealObjective: 1   #med
     MedicalTechFabCircuitboardStealObjective: 1
     ClothingHeadsetAltMedicalStealObjective: 1
@@ -95,13 +92,13 @@
     ExpensiveLighterNanotrasenStealObjective: 0.5 #SS220 Zippo-Steal-Begin
     ExpensiveLighterShieldStealObjective: 0.5
     ExpensiveLighterSyndicateStealObjective: 0.5 #SS220 Zippo-Steal-End
+    WristWatchGoldStealObjective: 1 # SS2250 Wrist Watch
 
 - type: weightedRandom
   id: ThiefObjectiveGroupStructure
   weights:
     NuclearBombStealObjective: 0.5
     FaxMachineCaptainStealObjective: 1
-    VehicleSecwayStealObjective: 1
     ChemDispenserStealObjective: 1
     XenoArtifactStealObjective: 1
     FreezerHeaterStealObjective: 1
@@ -109,21 +106,21 @@
     BoozeDispenserStealObjective: 1
     AltarNanotrasenStealObjective: 1
     PlantRDStealObjective: 1
+    ToiletGoldenStealObjective: 1
 
-- type: weightedRandom
-  id: ThiefObjectiveGroupAnimal
-  weights:
-    IanStealObjective: 1
-    BingusStealObjective: 1
-    McGriffStealObjective: 1
-    WalterStealObjective: 1
-    MortyStealObjective: 1
-    RenaultStealObjective: 1
-    HamletStealObjective: 1
-    ShivaStealObjective: 1
-    SmileStealObjective: 1
-    PunPunStealObjective: 1
-    TropicoStealObjective: 1
+# SS220 Delete thief objective animals begin
+# - type: weightedRandom
+#   id: ThiefObjectiveGroupAnimal
+#   weights:
+#     IanStealObjective: 1
+#     BingusStealObjective: 1
+#     McGriffStealObjective: 1
+#     WalterStealObjective: 1
+#     MortyStealObjective: 1
+#     RenaultStealObjective: 1
+#     ShivaStealObjective: 1
+#     TropicoStealObjective: 1
+# SS220 Delete thief objective animals end
 
 - type: weightedRandom
   id: ThiefObjectiveGroupEscape

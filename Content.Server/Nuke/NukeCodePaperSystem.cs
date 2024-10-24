@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Chat.Systems;
 using Content.Server.Fax;
-using Content.Server.Paper;
+using Content.Shared.Fax.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Paper;
@@ -38,7 +38,8 @@ namespace Content.Server.Nuke
 
             if (TryGetRelativeNukeCode(uid, out var paperContent, station, onlyCurrentStation: component.AllNukesAvailable))
             {
-                _paper.SetContent(uid, paperContent);
+                if (TryComp<PaperComponent>(uid, out var paperComp))
+                    _paper.SetContent((uid, paperComp), paperContent);
             }
         }
 
@@ -69,7 +70,7 @@ namespace Content.Server.Nuke
                     StampState = "paper_stamp-centcom",
                     StampedBy = new List<StampDisplayInfo>
                     {
-                        new StampDisplayInfo { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#006600") },
+                        new StampDisplayInfo { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#dca019") }, //SS220-CentcomFashion-Changed the stamp color
                     }
                 };
                 dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);
@@ -132,7 +133,7 @@ namespace Content.Server.Nuke
                 }
 
                 codesMessage.PushNewline();
-                codesMessage.AddMarkup(Loc.GetString("nuke-codes-list", ("name", MetaData(nukeUid).EntityName), ("code", nuke.Code)));
+                codesMessage.AddMarkupOrThrow(Loc.GetString("nuke-codes-list", ("name", MetaData(nukeUid).EntityName), ("code", nuke.Code)));
                 break;
             }
 

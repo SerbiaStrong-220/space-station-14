@@ -1,0 +1,91 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Admiral
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTAdmiral
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Панцирь-Ω
+  description: Защищает самую ценную голову в этом секторе. Выглядит дорого.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_admiral.rsi
+
+# CE
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTCE
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра ТЭК-670
+  description: Шлем с поверхностью, устойчивой к радиации, коррозии и агрессивным веществам.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_ce.rsi
+
+# CMO
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTCMO
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра АЩ-690
+  description: Царапины и капли крови явно указывают на то, что клятва Гиппократа не является такой уж обязательной в исполнении.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
+
+# Soldier
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTSoldier
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Х-27
+  description: Тонкий металла с мягкой обшивкой из шерсти неизвестного происхождения.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
+
+# Med
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTMed
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра АМ-500
+  description: Серебро известно своими антибактериальными свойствами, это точно не коррупционная схема.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
+
+# Heavy
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTHeavy
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра NT-3000
+  description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
+
+# Heavy2
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseERT
+  id: ClothingHeadHelmetHardsuitERTHeavy2
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Gladiator
+  description: Настощий мир в розовых очках.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi

@@ -52,10 +52,14 @@
       - id: PlantBGoneSpray
       - id: WeedSpray
       - id: PestSpray
+      - id: HydroponicsToolClippers
       - id: HydroponicsToolScythe
+      - id: HydroponicsToolSpade
       - id: HydroponicsToolHatchet
       - id: ClothingOuterApronBotanist
       - id: ClothingHandsGlovesLeather
+      - id: EZNutrientChemistryBottle
+        amount: 2
 
 - type: entity
   id: CrateHydroponicsSeeds
@@ -87,3 +91,26 @@
       - id: GrapeSeeds
       - id: WatermelonSeeds
       - id: PeaSeeds
+      - id: CherrySeeds
+      - id: BeetSeeds #ss220 seeds
+#ss220-flowerupdate-begin
+- type: entity
+  id: CrateHydroponicsFlowerSeeds
+  parent: CrateHydroponics
+  name: flower seeds crate
+  description: Big cute things have small beginnings. Contains twelve different flower seeds.
+  components:
+  - type: StorageFill
+    contents:
+      - id: WtulipSeeds
+      - id: YtulipSeeds
+      - id: PtulipSeeds
+      - id: RcloveSeeds
+      - id: WcloveSeeds
+      - id: SchamomileSeeds
+      - id: WschamomileSeeds
+      - id: LflowerSeeds
+      - id: SflowerSeeds
+      - id: RroseSeeds
+      - id: WroseSeeds
+#ss220-flowerupdate-end

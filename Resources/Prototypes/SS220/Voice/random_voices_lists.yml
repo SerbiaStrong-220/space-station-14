@@ -1,0 +1,8 @@
+- type: randomVoicesList
+  id: Borg
+  voices:
+  - glados
+  - space_core
+  - adventure_core
+  - sentrybot
+  - fact_core

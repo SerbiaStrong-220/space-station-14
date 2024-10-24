@@ -9,9 +9,13 @@
   - !type:DepartmentTimeRequirement
     department: Security
     time: 72000 # SS220-RoleTime
+  - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   startingGear: IAAGear
   icon: "JobIconIAA"
-  supervisors: job-supervisors-centcom
+  supervisors: job-supervisors-magistrate #SS220-Law Department
   canBeAntag: false
   access:
   - Service
@@ -27,15 +31,18 @@
 - type: startingGear
   id: IAAGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitLawyerBlack  # TODO change jumpsuit to randomiser of the 4 variants
-    back: ClothingBackpackIAAFilled
-    shoes: ClothingShoesColorBlack
+    shoes: ClothingShoesBootsLaceup #SS220-IAA-Loadout
     id: IAAPDA
-    eyes: ClothingEyesGlassesSunglasses
-    ears: ClothingHeadsetIAA
-    neck: ClothingNeckLawyerbadge
-  innerClothingSkirt: ClothingUniformJumpskirtLawyerBlack
+#    eyes: ClothingEyesGlassesSunglasses #SS220-TwoOne-Floppa-Iteration
+#    ears: ClothingHeadsetIAA #SS220-Law Department
+    # back: ClothingBackpackSatchelLeather #SS220-IAA-Loadout #SS220 - FIX loadout IAA
   inhand:
     - BriefcaseIAAFilled
-  satchel: ClothingBackpackSatchelIAAFilled
-  duffelbag: ClothingBackpackDuffelIAAFilled
+#SS220-IAA-Loadout-Begin
+  storage:
+    back:
+#    - BoxSurvival SS220-Two Floppa Iteration
+    - Telescopichka
+    - Flash
+    - ExpensiveLighterNanotrasen
+#SS220-IAA-Loadout-End

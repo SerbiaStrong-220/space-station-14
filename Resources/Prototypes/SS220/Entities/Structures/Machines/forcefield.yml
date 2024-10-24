@@ -3,7 +3,7 @@
   id: forcefield220
   name: силовое поле
   description: Продвинутая технология в действии. Способно спасти вас от баллистического снаряда, но абсолютно бесполезно против лазерного оружия.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   save: false
   components:
   - type: Damageable
@@ -110,7 +110,7 @@
     voltage: Medium
     node: input
   - type: PowerNetworkBattery
-    canSupply: false
+    canDischarge: false
     maxSupply: 0
     maxChargeRate: 100
     supplyRampTolerance: 5000

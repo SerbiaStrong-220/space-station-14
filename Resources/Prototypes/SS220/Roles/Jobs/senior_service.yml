@@ -1,0 +1,42 @@
+- type: job
+  id: SeniorService
+  name: сервисный администратор #SS220 Rename
+  description: job-description-senior-service
+  playTimeTracker: JobSeniorService
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobJanitor
+      time: 18000 # SS220-RoleTime 2
+    - !type:RoleTimeRequirement
+      role: JobChef
+      time: 18000 # SS220-RoleTime 2
+    - !type:RoleTimeRequirement
+      role: JobBotanist
+      time: 18000 # SS220-RoleTime 2
+    - !type:RoleTimeRequirement
+      role: JobBartender
+      time: 18000 # SS220-RoleTime 2
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 216000 # 60 ч
+  startingGear: SeniorAssistantGear
+  icon: "JobIconSeniorService"
+  supervisors: job-supervisors-hop
+  access:
+  - Bar
+  - Service
+  - Janitor
+  - External
+  - Theatre
+  - Kitchen
+  - Hydroponics
+  - Maintenance
+
+- type: startingGear
+  id: SeniorAssistantGear
+  equipment:
+    shoes: ClothingShoesColorBrown
+    id: SeniorServicePDA
+    belt: BoxFolderClipboard
+    ears: ClothingHeadsetService
+    gloves: ClothingHandsGlovesColorWhite

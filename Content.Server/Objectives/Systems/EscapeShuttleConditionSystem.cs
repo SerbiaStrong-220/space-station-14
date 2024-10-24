@@ -34,6 +34,7 @@ public sealed class EscapeShuttleConditionSystem : EntitySystem
             return 0f;
 
         // Any emergency shuttle counts for this objective, but not pods.
+        // SS220 Pods counts for this objective.
         return _emergencyShuttle.IsTargetEscaping(mind.OwnedEntity.Value) ? 1f : 0f;
     }
 }

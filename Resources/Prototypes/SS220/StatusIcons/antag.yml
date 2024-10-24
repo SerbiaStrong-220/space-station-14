@@ -1,105 +1,129 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-- type: statusIcon
-  id: IOTCommand
+- type: factionIcon
+  id: FractWarIcon
+  abstract: true
   priority: 11
+  locationPreference: Right
+
+- type: factionIcon
+  parent: FractWarIcon
+  id: IOTCommand
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: IOTCommand
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: IOTEngineerOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: IOTEngineerOfficer
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: IOTMedic
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: IOTMedic
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: IOTMedicalOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: IOTMedicalOfficer
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: IOTCombatant
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: IOTCombatant
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: NTCombatant
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: NTCombatant
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: NTEngineerOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: NTEngineerOfficer
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: NTMedic
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: NTMedic
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: NTMedicalOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: NTMedicalOfficer
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: NTSpecOpsOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: NTSpecOpsOfficer
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: USSPCombatant
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: USSPCombatant
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: USSPEngineerOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: USSPEngineerOfficer
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: USSPMarshal
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: USSPMarshal
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: USSPMedic
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: USSPMedic
 
-- type: statusIcon
+- type: factionIcon
+  parent: FractWarIcon
   id: USSPMedicalOfficer
-  priority: 11
   icon:
-    sprite: SS220/Interface/Misc/event-job-icons.rsi
+    sprite: /Textures/SS220/Interface/Misc/event-job-icons.rsi
     state: USSPMedicalOfficer
+
+- type: factionIcon
+  id: MindSlaveIcon
+  priority: 11
+  locationPreference: Right
+  visibleToGhosts: false
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
+    state: slave
+
+- type: factionIcon
+  id: MindSlaveMasterIcon
+  priority: 11
+  locationPreference: Right
+  visibleToGhosts: false
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
+    state: master

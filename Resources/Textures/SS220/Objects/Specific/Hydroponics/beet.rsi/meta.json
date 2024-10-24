@@ -1,0 +1,38 @@
+{
+  "version": 1.0, 
+  "size": {"x": 32, "y": 32}, 
+  "license":"EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt", 
+  "copyright": "SuBL for SS220", 
+  "states": [
+        {
+            "name": "dead"
+          },
+          {
+            "name": "harvest"
+          },
+          {
+            "name": "produce"
+          },
+          {
+            "name": "seed"
+          },
+          {
+            "name": "stage-1"
+          },
+          {
+            "name": "stage-2"
+          },
+          {
+            "name": "stage-3"
+          },
+          {
+            "name": "stage-4"
+          },
+          {
+            "name": "stage-5"
+          },
+          {
+            "name": "stage-6"
+          }
+        ]
+      }

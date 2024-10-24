@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Client.Antag;
 using Content.Shared.Antag;
 using Content.Shared.Ghost;
 using Content.Shared.SS220.AdmemeEvents;
@@ -15,29 +14,26 @@ namespace Content.Client.SS220.AdmemeEvents;
 /// </summary>
 public sealed class EventRoleIconsSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EventRoleComponent, CanDisplayStatusIconsEvent>(OnCanShowRevIcon);
+        SubscribeLocalEvent<EventRoleComponent, GetStatusIconsEvent>(OnGetStatusIcons);
     }
 
-    private void OnCanShowRevIcon(EntityUid uid, IAntagStatusIconComponent component, ref CanDisplayStatusIconsEvent args)
+    private void OnGetStatusIcons(Entity<EventRoleComponent> entity, ref GetStatusIconsEvent args)
     {
-        args.Cancelled = !CanDisplayIcon(args.User, component.IconVisibleToGhost);
-    }
+        var viewer = _player.LocalSession?.AttachedEntity;
 
-    private bool CanDisplayIcon(EntityUid? ent, bool visibleToGhost)
-    {
-        if (HasComp<GhostComponent>(ent) && visibleToGhost)
-            return true;
+        if (viewer != entity &&
+            (!TryComp<EventRoleComponent>(viewer, out var viewerComp) ||
+            viewerComp.RoleGroupKey != entity.Comp.RoleGroupKey))
+            return;
 
-        if (!HasComp<EventRoleComponent>(ent))
-            return false;
-
-        return true;
+        var iconPrototype = _prototype.Index(entity.Comp.StatusIcon);
+        args.StatusIcons.Add(iconPrototype);
     }
 }

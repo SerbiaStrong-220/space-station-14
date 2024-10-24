@@ -3,3 +3,17 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     id: SecDogIDCard
+
+#Cult outfit startingGear definitions.
+- type: startingGear
+  id: BloodCultBroter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    head: ClothingHeadHatHoodCulthood
+    outerClothing: ClothingOuterRobesCult
+    shoes: ClothingShoesColorRed
+    id: PassengerPDA
+    ears: ClothingHeadsetService
+  storage:
+    back:
+    - BoxSurvivalSecurity

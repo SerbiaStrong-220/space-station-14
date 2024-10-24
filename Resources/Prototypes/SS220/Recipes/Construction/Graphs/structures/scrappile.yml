@@ -1,0 +1,52 @@
+﻿- type: constructionGraph
+  id: ScrapPile
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 5
+        - !type:SpawnPrototype
+          prototype: SheetPlastic1
+          amount: 3
+        - !type:SpawnPrototype
+          prototype: PartRodMetal1
+          amount: 2
+        - !type:SpawnPrototype
+          prototype: CableApcStack1
+          amount: 2
+        - !type:SpawnPrototype
+          prototype: CableMVStack1
+          amount: 2
+        - !type:SpawnPrototype
+          prototype: CableHVStack1
+          amount: 2
+        - !type:DeleteEntity
+
+    - node: ScrapPile
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 5
+            - !type:SpawnPrototype
+              prototype: SheetPlastic1
+              amount: 3
+            - !type:SpawnPrototype
+              prototype: PartRodMetal1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableApcStack1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableMVStack1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableHVStack1
+              amount: 2
+            - !type:DeleteEntity {}

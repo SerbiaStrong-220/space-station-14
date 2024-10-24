@@ -1,0 +1,47 @@
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodShawarmaBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+      - shawarma
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/shawarma.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/shawarma.rsi
+  - type: Tag
+    tags:
+      - Meat
+
+- type: entity
+  name: шаурма
+  parent: FoodShawarmaBase
+  id: FoodShawarma
+  description: Аппетитная начинка, завернутая в лаваш - блюдо, которое всегда поднимает настроение.
+  components:
+  - type: Food
+  - type: Sprite
+    state: shawarma
+
+- type: entity
+  name: шаурма на гриле
+  parent: FoodShawarmaBase
+  id: FoodShawarmaOnGrill
+  description: То же блюдо, поднимающее вам настроение, но только круче!
+  components:
+  - type: Food
+  - type: Sprite
+    state: shawarmaGrill
+  

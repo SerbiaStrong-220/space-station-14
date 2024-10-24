@@ -117,3 +117,82 @@
         key: ForcedSleep
         component: ForcedSleeping
         refresh: false
+
+- type: reagent
+  id: Harai
+  name: reagent-name-harai
+  group: Medicine
+  desc: reagent-desc-harai
+  physicalDesc: reagent-physical-desc-thick
+  flavor: soothing
+  color: "#9400D3"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:GenericStatusEffect
+        key: Pacified
+        component: Pacified
+        time: 6.0
+        refresh: false
+        type: Add
+        conditions:
+        - !type:OrganType
+          type: Arachnid
+          shouldHave: true
+    Narcotic:
+      effects:
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 8
+        refresh: false
+        conditions:
+        - !type:OrganType
+          type: Arachnid
+          shouldHave: false
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Arachnid
+          shouldHave: false
+        damage:
+          types:
+            Poison: 0.5
+
+- type: reagent
+  id: Nicotizine
+  name: reagent-name-nicotizine
+  group: Medicine
+  desc: reagent-desc-nicotizine
+  physicalDesc: reagent-physical-desc-viscous
+  flavor: medicine
+  color: "#ff867d"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        probability: 0.3
+        damage:
+          types:
+            Heat: 0.2
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          max: 293.15
+        amount: 100000
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 30
+        damage:
+          types:
+            Poison: 3
+      - !type:ChemVomit
+        probability: 0.15
+        conditions:
+          - !type:ReagentThreshold
+            min: 30
+      - !type:GenericStatusEffect
+        key: PressureImmunity
+        component: PressureImmunity

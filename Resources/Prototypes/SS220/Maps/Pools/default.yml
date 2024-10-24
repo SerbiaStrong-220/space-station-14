@@ -4,13 +4,8 @@
   id: SS220MapPool
   maps:
   - Frankenstein
-  - Nox
+# - Nox # Removed until rework
   - Axioma
-#  - 220Gate
-#  - 220Delta
-#  - 220Bagel
-#  - 220Fland
-#  - 220Ishimura
-#  - 220Avrite
-#  - 220Marathon
-#  - 220Hive
+  - Eclipse
+  - Donuts
+  - Astro

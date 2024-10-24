@@ -7,9 +7,35 @@
   id: Debug2
   name: store-category-debug2
 
+#WIZARD
+- type: storeCategory
+  id: SpellbookOffensive
+  name: store-caregory-spellbook-offensive
+  priority: 0
+
+- type: storeCategory
+  id: SpellbookDefensive
+  name: store-caregory-spellbook-defensive
+  priority: 1
+
+- type: storeCategory
+  id: SpellbookUtility
+  name: store-caregory-spellbook-utility
+  priority: 2
+
+- type: storeCategory
+  id: SpellbookEquipment
+  name: store-caregory-spellbook-equipment
+  priority: 3
+
+- type: storeCategory
+  id: SpellbookEvents
+  name: store-caregory-spellbook-events
+  priority: 4
+
 #uplink categoires
 - type: storeCategory
-  id: UplinkWeapons
+  id: UplinkWeaponry
   name: store-category-weapons
   priority: 0
 
@@ -24,23 +50,23 @@
   priority: 2
 
 - type: storeCategory
-  id: UplinkMisc
-  name: store-category-misc
+  id: UplinkWearables
+  name: store-category-wearables
   priority: 3
 
 - type: storeCategory
-  id: UplinkBundles
-  name: store-category-bundles
+  id: UplinkChemicals
+  name: store-category-chemicals
   priority: 4
 
 - type: storeCategory
-  id: UplinkTools
-  name: store-category-tools
+  id: UplinkDeception
+  name: store-category-deception
   priority: 5
 
 - type: storeCategory
-  id: UplinkUtility
-  name: store-category-utility
+  id: UplinkDisruption
+  name: store-category-disruption
   priority: 6
 
 - type: storeCategory
@@ -54,6 +80,11 @@
   name: store-category-chemical-implants
   priority: 8
 # SS220 - chemical-implants end
+
+- type: storeCategory
+  id: UplinkAllies
+  name: store-category-allies
+  priority: 8
 
 - type: storeCategory
   id: UplinkJob
@@ -75,3 +106,7 @@
   id: RevenantAbilities
   name: store-category-abilities
 
+- type: storeCategory
+  id: DiscountedItems
+  name: store-discounted-items
+  priority: 200

@@ -1,0 +1,160 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Admiral
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseAdmiral
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.14
+        Slash: 0.14
+        Piercing: 0.14
+        Heat: 0.14
+        Radiation: 0.2
+        Caustic: 0.2
+        Stamina: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+
+# CE
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseCE
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Radiation: 0
+        Caustic: 0.5
+        Stamina: 0
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+
+# CMO
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseCMO
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Radiation: 0.5
+        Caustic: 0
+        Stamina: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+
+# Soldier
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitBaseSoldier
+  abstract: true
+  components:
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.5
+        Caustic: 0.5
+        Stamina: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+
+# Med
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseMed
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.5
+        Caustic: 0.5
+        Stamina: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+
+# Heavy
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseHeavy
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.2
+        Stamina: 0
+        Radiation: 0.25
+        Caustic: 0.35
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+
+# Heavy2
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseHeavy2
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.65
+    sprintModifier: 0.65
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.17
+        Slash: 0.17
+        Piercing: 0.17
+        Heat: 0.17
+        Stamina: 0
+        Radiation: 0.2
+        Caustic: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.15

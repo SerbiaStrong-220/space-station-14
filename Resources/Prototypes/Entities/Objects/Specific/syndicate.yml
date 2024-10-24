@@ -1,6 +1,7 @@
+
 - type: entity
   name: telecrystal
-  parent: BaseItem
+  parent: [BaseItem]
   id: Telecrystal
   suffix: 20 TC
   description: It seems to be pulsing with suspiciously enticing energies.
@@ -21,6 +22,24 @@
   - type: Currency
     price:
       Telecrystal: 1
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-Telecrystal-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-Telecrystal-cargo
+      jobRequired:
+        - SalvageSpecialist
+    - label: corvax-hidden-desc-Telecrystal-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
 
 - type: entity
   parent: Telecrystal
@@ -48,7 +67,7 @@
 
 # Uplinks
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, StorePresetUplink]
   id: BaseUplinkRadio
   name: syndicate uplink
   description: Suspiciously looking old radio...
@@ -63,12 +82,11 @@
     heldPrefix: old-radio
   - type: UserInterface
     interfaces:
-    - key: enum.StoreUiKey.Key
-      type: StoreBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
   - type: ActivatableUI
     key: enum.StoreUiKey.Key
   - type: Store
-    preset: StorePresetUplink
     balance:
       Telecrystal: 0
 
@@ -78,7 +96,6 @@
   suffix: 20 TC
   components:
   - type: Store
-    preset: StorePresetUplink
     balance:
       Telecrystal: 20
 
@@ -88,7 +105,6 @@
   suffix: 25 TC
   components:
   - type: Store
-    preset: StorePresetUplink
     balance:
       Telecrystal: 25
 
@@ -99,7 +115,6 @@
   suffix: 40 TC, NukeOps
   components:
   - type: Store
-    preset: StorePresetUplink
     balance:
       Telecrystal: 40
   - type: Tag
@@ -108,16 +123,15 @@
 
 - type: entity
   parent: BaseUplinkRadio
-  id: LoneOpsUplinkRadio40TC
-  suffix: 40 TC, LoneOps
+  id: LoneOpsUplinkRadio40TC # SS220 Lone-Ops-Uplink
+  suffix: 40 TC, LoneOps # SS220 Lone-Ops-Uplink
   components:
   - type: Store
-    preset: StorePresetUplink
     balance:
-      Telecrystal: 40
+      Telecrystal: 40 # SS220 Lone-Ops-Uplink
   - type: Tag
     tags:
-    - LoneOpsUplink
+    - LoneOpsUplink # SS220 Lone-Ops-Uplink
 
 - type: entity
   parent: BaseUplinkRadio
@@ -125,6 +139,5 @@
   suffix: DEBUG
   components:
   - type: Store
-    preset: StorePresetUplink
     balance:
       Telecrystal: 99999

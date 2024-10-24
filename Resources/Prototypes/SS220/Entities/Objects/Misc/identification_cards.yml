@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: IDCardStandard
   id: UsspIDCard
@@ -6,7 +8,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
   - type: IdCard
-    jobTitle: СССП
+    jobTitle: job-name-ussp #SS220 (upstream 65 localization)
   - type: Sprite
     layers:
     - state: ussp
@@ -16,10 +18,79 @@
     inHandsOnly: true
   - type: UserInterface
     interfaces:
-      - key: enum.AgentIDCardUiKey.Key
+      enum.AgentIDCardUiKey.Key:
         type: AgentIDCardBoundUserInterface
   - type: PresetIdCard
     job: null
+  - type: Access
+    groups:
+    - UsspAllAccess
+
+- type: entity
+  parent: CentcomIDCard
+  id: CentcomDiplomatIDCard
+  name: ID карта Дипломата NanoTrasen
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+  - type: Sprite
+    layers:
+    - state: silver
+    - state: idcentcom
+  - type: IdCard
+    jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  - type: PresetIdCard
+    job: CentCommNanoTrasenDiplomat
+
+- type: entity
+  parent: CentcomIDCard
+  id: FieldOfficerIDCard
+  name: ID карта Полевого Офицера ЦК
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-operational-oficier #SS220 (upstream 65 localization)
+    - type: Access
+      groups:
+      - AllAccess # SS220 Fast fix access
+      - CentralCommand
+    - type: PresetIdCard
+      job: CentcomFieldOfficer
+
+- type: entity
+  parent: CentcomIDCard
+  id: OfficerCentCommIDCard
+  name: ID карта Офицера ЦК
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-oficier #SS220 (upstream 65 localization)
+    - type: Access
+      groups:
+      - AllAccess # SS220 Fast fix access
+      - CentralCommand
+    - type: PresetIdCard
+      job: CentcommOfficer
+
+- type: entity
+  parent: CentcomIDCard
+  id: OperativeSRTIDCard
+  name: ID карта Оперативника ГСН
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
+    - type: Access
+      groups:
+      - AllAccess # SS220 Fast fix access
+      tags:
+      - CentralCommandGSN
+      - CentralCommand
+    - type: PresetIdCard
+      job: CentcomOperativeSRT
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
@@ -33,3 +104,58 @@
     - type: PresetIdCard
       job: SecurityOfficer
       name: Рокси
+
+
+- type: entity
+  parent: PassengerIDCard
+  id: SeniorServiceIDCard
+  name: senior service ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idseniorservice
+  - type: PresetIdCard
+    job: SeniorService
+
+
+- type: entity
+  parent: CentcomIDCard
+  id: NanoTrasenAdmiralIDCard
+  name: ID карта Адмирала NanoTrasen
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: job-name-nt-admiral #SS220 (upstream 65 localization)
+    - type: Access
+      groups:
+      - AllAccess # SS220 Fast fix access
+      - CentralCommand
+    - type: PresetIdCard
+      job: CentComNanoTrasenAdmiral
+
+- type: entity
+  parent: IDCardStandard
+  id: MagistrateIDCard
+  name: magistrate ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: Magistrate
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-prisoner #SS220 (upstream 65 localization)
+    - type: Sprite
+      layers:
+        - state: orange
+        - state: idprisoner
+    - type: PresetIdCard
+      job: Prisoner

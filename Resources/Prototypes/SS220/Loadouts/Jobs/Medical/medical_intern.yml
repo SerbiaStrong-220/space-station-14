@@ -1,0 +1,42 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: MedicalInternTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMedicalIntern
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: MedicalInternJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalInternTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorWhite
+
+- type: loadout
+  id: MedicalInternJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalInternTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorWhite
+
+- type: loadout
+  id: MedicalInternJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalInternTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorWhite
+
+- type: loadout
+  id: MedicalInternJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalInternTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite

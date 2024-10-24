@@ -1,0 +1,507 @@
+#angular directional window
+- type: construction
+  name: directional window angular
+  id: WindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: windowDirectionalAng
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced window angular
+  id: WindowReinforcedDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: windowReinforcedDirectionalAng
+  category: construction-category-structures
+  description: Clear but tough.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional clockwork window angular
+  id: WindowClockworkDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: windowClockworkDirectionalAng
+  category: construction-category-structures
+  description: Clear and tough, with a golden tint.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: clock_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional plasma window angular
+  id: PlasmaWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: plasmaWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Clear and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: plasma_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced plasma window angular
+  id: PlasmaReinforcedWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: plasma_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional uranium window angular
+  id: UraniumWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: uraniumWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: uranium_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced uranium window angular
+  id: UraniumReinforcedWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/angular.rsi
+    state: uranium_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#U-shaped directional window
+- type: construction
+  name: directional window u-shaped
+  id: WindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: windowDirectionalU
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced window u-shaped
+  id: WindowReinforcedDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: windowReinforcedDirectionalU
+  category: construction-category-structures
+  description: Clear but tough.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional clockwork window u-shaped
+  id: WindowClockworkDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: windowClockworkDirectionalU
+  category: construction-category-structures
+  description: Clear and tough, with a golden tint.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: clock_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional plasma window u-shaped
+  id: PlasmaWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: plasmaWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Clear and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: plasma_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced plasma window u-shaped
+  id: PlasmaReinforcedWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: plasma_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional uranium window u-shaped
+  id: UraniumWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: uraniumWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: uranium_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced uranium window u-shaped
+  id: UraniumReinforcedWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
+    state: uranium_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#double directional window
+- type: construction
+  name: directional window double
+  id: WindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: windowDirectionalDoub
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced window double
+  id: WindowReinforcedDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: windowReinforcedDirectionalDoub
+  category: construction-category-structures
+  description: Clear but tough.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional clockwork window double
+  id: WindowClockworkDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: windowClockworkDirectionalDoub
+  category: construction-category-structures
+  description: Clear and tough, with a golden tint.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: clock_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional plasma window double
+  id: PlasmaWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: plasmaWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Clear and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: plasma_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced plasma window double
+  id: PlasmaReinforcedWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: plasma_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional uranium window double
+  id: UraniumWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: uraniumWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: uranium_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced uranium window double
+  id: UraniumReinforcedWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/double.rsi
+    state: uranium_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#O-shaped window
+- type: construction
+  name: directional window o-shaped
+  id: WindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: windowDirectionalO
+  category: construction-category-structures
+  description: Clear.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced window o-shaped
+  id: WindowReinforcedDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: windowReinforcedDirectionalO
+  category: construction-category-structures
+  description: Clear but tough.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional clockwork window o-shaped
+  id: WindowClockworkDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: windowClockworkDirectionalO
+  category: construction-category-structures
+  description: Clear and tough, with a golden tint.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: clock_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional plasma window o-shaped
+  id: PlasmaWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: plasmaWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Clear and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: plasma_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced plasma window o-shaped
+  id: PlasmaReinforcedWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a purple tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: plasma_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional uranium window o-shaped
+  id: UraniumWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: uraniumWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: uranium_window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  name: directional reinforced uranium window o-shaped
+  id: UraniumReinforcedWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  description: Fire resistant and even tougher, with a green tint.
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
+    state: uranium_reinforced_window
+  objectType: Structure
+  placementMode: SnapgridCenter

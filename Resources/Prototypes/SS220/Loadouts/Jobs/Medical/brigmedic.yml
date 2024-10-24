@@ -1,0 +1,146 @@
+# Brigmedic Time
+- type: loadoutEffectGroup
+  id: BrigmedicTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBrigmedic
+      time: 108000 # 30 hrs
+
+- type: loadoutEffectGroup
+  id: MilitaryFeldsher
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBrigmedic
+      time: 162000 # 45 hrs
+
+# Head
+- type: loadout
+  id: BrigmedicHead
+  equipment:
+    head: ClothingHeadHatBeretBrigmedic
+
+- type: loadout
+  id: SecurityMedicHead
+  equipment:
+    head: ClothingHeadHatBeretSecurityMedic
+
+- type: loadout
+  id: SecurityMedicHelmet
+  equipment:
+    head: ClothingHeadHelmetSecurityMedic
+
+# Glasses
+- type: loadout
+  id: HudMedical
+  equipment:
+    eyes: ClothingEyesHudMedical
+
+# Mask
+- type: loadout
+  id: BrigmedicMask
+  equipment:
+    mask: ClothingMaskBreathMedicalSecurity
+
+# Jumpsuit
+- type: loadout
+  id: BrigmedicJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBrigmedic
+
+- type: loadout
+  id: BrigmedicJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtBrigmedic
+
+- type: loadout
+  id: BrigmedicJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BrigmedicTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBrigmedicTurtleneck
+
+- type: loadout
+  id: BrigmedicJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BrigmedicTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtBrigmedicTurtleneck
+
+- type: loadout
+  id: BrigmedicJumpskirtOfLife
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BrigmedicTurtleneck #Увы
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtOfLife
+
+- type: loadout
+  id: BrigmedicJumpsuitMilitaryFeldsher
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MilitaryFeldsher
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
+
+- type: loadout
+  id: BrigmedicJumpskirtMilitaryFeldsher
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MilitaryFeldsher
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtMilitaryFeldsher
+
+
+# Back
+- type: loadout
+  id: BrigmedicBackpack
+  equipment:
+    back: ClothingBackpackBrigmedic
+
+- type: loadout
+  id: BrigmedicSatchel
+  equipment:
+    back: ClothingBackpackSatchelBrigmedic
+
+- type: loadout
+  id: BrigmedicDuffel
+  equipment:
+    back: ClothingBackpackDuffelBrigmedic
+
+# Outer clothing
+- type: loadout
+  id: BrigmedicWindAMG
+  equipment:
+    outerClothing: ClothingOuterCoatAMG
+
+- type: loadout
+  id: BrigmedicVestSecurity
+  equipment:
+    outerClothing: ClothingOuterVestSecurityMedic
+
+- type: loadout
+  id: BrigmedicCoatLab
+  equipment:
+    outerClothing: ClothingOuterCoatLabSecurityMedic
+
+- type: loadout
+  id: BrigmedicVestArmorMedSec
+  equipment:
+    outerClothing: ClothingOuterVestArmorMedSec
+
+# Shoes
+- type: loadout
+  id: RedShoes
+  equipment:
+    shoes: ClothingShoesColorRed
+
+- type: loadout
+  id: SecMedWinterBoots
+  equipment:
+    shoes: ClothingShoesBootsWinterSecMed

@@ -1,0 +1,51 @@
+- type: entity
+  id: BaseGrenadeArta
+  name: base grenade
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/arta_shell.ogg
+      params:
+        volume: 2
+  - type: Tag
+    tags:
+    - GrenadeDusterArta
+  - type: Item
+    size: Small
+  - type: Sprite
+
+- type: entity
+  id: GrenadeSuperArta
+  name: снаряд артиллерии
+  parent: BaseGrenadeArta
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeSuperArta
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    layers:
+    - state: pent
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: frag
+    suffix: false
+    
+- type: entity
+  id: GrenadeEMPArta
+  name: ЭМИ снаряд артиллерии
+  parent: BaseGrenadeArta
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeEMPArta
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    layers:
+    - state: emp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: frag
+    suffix: false

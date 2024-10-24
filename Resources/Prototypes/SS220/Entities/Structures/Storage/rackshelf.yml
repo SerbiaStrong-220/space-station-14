@@ -1,0 +1,194 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: RackShelf
+  parent: BaseStructure
+  name: стеллаж
+  description: Лучший друг коробок, который обеспечит их домом.
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/Storage/rack_shelf.rsi
+    snapCardinals: true
+    layers:
+      - state: icon
+      - state: box-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Appearance
+  - type: StorageFillVisualizer
+    maxFillLevels: 7
+    fillBaseName: box
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Pullable
+  - type: Storage
+    grid:
+    - 0,0,9,8
+    maxItemSize: Normal
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: Construction
+    graph: Rackshelf
+    node: Rackshelf
+
+- type: entity
+  id: RackShelfFilled
+  parent: RackShelf
+  suffix: Заполненный, Случайный
+  components:
+    - type: StorageFill
+      contents:
+        - id: Lantern
+          prob: 0.33
+        - id: FlashlightLantern
+          prob: 0.33
+        - id: Wirecutter
+          prob: 0.33
+        - id: Screwdriver
+          prob: 0.33
+        - id: Wrench
+          prob: 0.33
+        - id: Crowbar
+          prob: 0.50
+        - id: Welder
+          prob: 0.33
+        - id: trayScanner
+          prob: 0.2
+        - id: GasAnalyzer
+          prob: 0.2
+        - id: GeigerCounter
+          prob: 0.2
+        - id: Multitool
+          prob: 0.10
+        - id: ClothingHandsGlovesColorYellow
+          prob: 0.05
+        - id: ClothingHandsGlovesFingerlessInsulated
+          prob: 0.07
+        - id: ClothingHeadHatCone
+          prob: 0.2
+        - id: WeaponFlareGun
+          prob: 0.1
+        - id: ClothingHandsGlovesColorYellowBudget
+          prob: 0.25
+        - id: ClothingHeadHatWelding
+          prob: 0.2
+        - id: ModularReceiver
+          prob: 0.1
+        - id: DrinkSpaceGlue
+          prob: 0.20
+        - id: DrinkSpaceLube
+          prob: 0.20
+        - id: CableApcStack10
+          prob: 0.2
+        - id: CableMVStack10
+          prob: 0.2
+        - id: CableHVStack10
+          prob: 0.2
+        - id: ClothingWristWatch
+          prob: 0.05
+        # hardhat loot
+        - id: null
+          prob: 0.3
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatWhite
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatYellow
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatRed
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatOrange
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatBlue
+          prob: 0.1
+          orGroup: hardhat
+        # battery loot
+        - id: PowerCellSmall
+          prob: 0.33
+          orGroup: battery
+        - id: PowerCellMedium
+          prob: 0.2
+          orGroup: battery
+        - id: PowerCellHigh
+          prob: 0.05
+          orGroup: battery
+        # plushie loot
+        - id: null
+          prob: 0.80
+          orGroup: shark
+        - id: PlushieSharkPink
+          prob: 0.05
+          orGroup: shark
+        - id: PlushieSharkGrey
+          prob: 0.05
+          orGroup: shark
+        - id: PlushieSharkBlue
+          prob: 0.05
+          orGroup: shark
+        # part loot
+        - id: null
+          prob: 0.60
+          orGroup: part
+        - id: CapacitorStockPart
+          prob: 0.2
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        - id: MatterBinStockPart
+          prob: 0.2
+          orGroup: part
+        # Syndicate loot
+        - id: null
+          prob: 0.95
+          orGroup: syndiemaintloot
+        - id: ClothingUniformJumpskirtOperative
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingUniformJumpsuitOperative
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: CyberPen
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: CigPackSyndicate
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingShoesBootsCombatFilled
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: BalloonSyn
+          prob: 0.005
+          orGroup: syndiemaintloot

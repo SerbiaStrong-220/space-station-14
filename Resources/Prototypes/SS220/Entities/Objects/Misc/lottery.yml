@@ -1,0 +1,40 @@
+- type: entity
+  id: LotteryBase
+  name: лотерея V&L
+  description: Лотерея, исполняющая мечты! Стань миллионером прямо сейчас!
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Lottery.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+
+- type: entity
+  id: LotteryCash
+  parent: [LotteryBase, BaseItem]
+  components:
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpaceCash1000
+        orGroup: CashPool
+      - id: SpaceCash5000
+        prob: .11
+        orGroup: CashPool
+      - id: SpaceCash10000
+        prob: .055
+        orGroup: CashPool
+      - id: SpaceCash20000
+        prob: .0275
+        orGroup: CashPool
+      - id: SpaceCash50000
+        prob: .011
+        orGroup: CashPool
+      - id: SpaceCash100000
+        prob: .0055
+        orGroup: CashPool
+      - id: SpaceCash1000000
+        prob: .00055
+        orGroup: CashPool
+    sound:
+      path: /Audio/Effects/unwrap.ogg

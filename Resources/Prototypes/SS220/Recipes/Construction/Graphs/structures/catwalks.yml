@@ -28,6 +28,62 @@
             - material: MetalRod
               amount: 2
               doAfter: 1
+        - to: CatwalkRed
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: CatwalkPurple
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: CatwalkCyan
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: CatwalkBrown
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: CatwalkOrange
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: CatwalkGreen
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+        - to: CatwalkBlue
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
 
     - node: SteelCatwalk
       entity: CatwalkSteel
@@ -55,6 +111,90 @@
               doAfter: 1.5
     - node: DarkCatwalk
       entity: CatwalkBlackSteel
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkRed
+      entity: CatwalkRed
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkPurple
+      entity: CatwalkPurple
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkCyan
+      entity: CatwalkCyan
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkBrown
+      entity: CatwalkBrown
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkOrange
+      entity: CatwalkOrange
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkGreen
+      entity: CatwalkGreen
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: PartRodMetal1
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Cutting
+              doAfter: 1.5
+    - node: CatwalkBlue
+      entity: CatwalkBlue
       edges:
         - to: start
           completed:

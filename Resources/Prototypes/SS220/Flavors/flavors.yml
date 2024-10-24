@@ -1,0 +1,44 @@
+- type: flavor
+  id: shawarma
+  flavorType: Complex
+  description: мясо со свежими овощами в лаваше
+
+- type: flavor
+  id: borsch
+  flavorType: Complex
+  description: мясной бульон с овощами
+
+- type: flavor
+  id: shchi
+  flavorType: Complex
+  description: кислый бульон с овощами
+
+- type: flavor
+  id: okroshka
+  flavorType: Complex
+  description: освежающие овощи и мясо
+
+- type: flavor
+  id: okroshkaKvass
+  flavorType: Complex
+  description: освежающие овощи и мясо с кислинкой
+
+- type: flavor
+  id: vinaigrette
+  flavorType: Complex
+  description: соленые вареные овощи
+
+- type: flavor
+  id: beets
+  flavorType: Complex
+  description: сладко и как земля
+
+- type: flavor
+  id: soothing
+  flavorType: Base
+  description: успокаивающе
+
+- type: flavor
+  id: french75
+  flavorType: Complex
+  description: терпко-сладко

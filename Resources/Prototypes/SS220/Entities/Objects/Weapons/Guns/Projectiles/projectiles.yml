@@ -2,7 +2,7 @@
   name: mini energy crossbow bolt
   id: BulletMiniEnergyCrossbow
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: FlyBySound
     sound:
@@ -26,30 +26,148 @@
         hard: false
         mask:
         - Opaque
-  - type: StaminaDamageOnCollide
-    damage: 25
   - type: Ammo
   - type: Projectile
     impactEffect: BulletImpactEffectGreenLaser
     damage:
       types:
         Poison: 15
+        Stamina: 25 #weaponBalance
     soundHit:
       collection: WeakHit
     forceSound: true
   - type: StunOnCollide
-    stunAmount: 1
-    knockdownAmount: 1
+    stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
+    knockdownAmount: 2 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
   id: BulletEnergyCrossbow
   parent: BulletMiniEnergyCrossbow
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
-  - type: StaminaDamageOnCollide
-    damage: 20
   - type: Projectile
     damage:
       types:
         Poison: 10
+        Stamina: 55 #weaponBalance
+  - type: StunOnCollide
+    stunAmount: 1 #weaponBalance
+    knockdownAmount: 1 #weaponBalance
+
+
+- type: entity
+  id: SMEmitterBolt
+  parent: EmitterBolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Power/Generation/Supermatter/smemitter.rsi
+    layers:
+      - state: projectile
+        shader: unshaded
+  - type: SuperMatterEmitterBolt
+  - type: SuperMatterExtraConsumable
+    additionalMatterOnConsumption: 4
+    additionalEnergyOnConsumption: 20
+
+
+##Made by MIXnikita for SS220
+
+- type: entity
+  id: BaseBulletTriggerArta
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 20
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 12
+
+
+- type: entity
+  id: BulletGrenadeSuperArta
+  name: пробивной снаряд
+  parent: BaseBulletTriggerArta
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 400
+    intensitySlope: 8
+    maxIntensity: 20
+
+- type: entity
+  id: BulletGrenadeEMPArta
+  name: снаряд ЭМИ
+  parent: BaseBulletTriggerArta
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: frag
+  - type: EmpOnTrigger
+    range: 10
+    energyConsumption: 50000
+    disableDuration: 20
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 5.5
+    color: blue
+    energy: 0.9
+
+#Spider queen
+- type: entity
+  id: PoisonousAcid
+  name: poisonous Spit
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Poison: 6
+          Structural: 2
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
+      layers:
+        - state: xeno_toxic
+    - type: Ammo
+      muzzleFlash: null
+
+#MultiPhaze Energy Gun
+- type: entity
+  parent: BaseBullet
+  id: BulletEMP
+  name: EMP Bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/bullet_EMP.rsi
+    layers:
+      - state: emp
+  - type: EmpOnTrigger
+    range: 0.5
+    energyConsumption: 500
+    disableDuration: 25
+  - type: Projectile
+    damage:
+      types:
+        Heat: 4
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 3.5
+    color: blue
+    energy: 0.5

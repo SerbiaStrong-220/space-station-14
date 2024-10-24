@@ -1,0 +1,129 @@
+- type: entity
+  parent: SeedBase
+  name: пакет семян (свёкла)
+  id: BeetSeeds
+  components:
+    - type: Seed
+      seedId: beet
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/beet.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (белый тюльпан)
+  id: WtulipSeeds
+  components:
+    - type: Seed
+      seedId: wtulip
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/wtulip.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (розовый тюльпан)
+  id: PtulipSeeds
+  components:
+    - type: Seed
+      seedId: ptulip
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/ptulip.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (желтый тюльпан)
+  id: YtulipSeeds
+  components:
+    - type: Seed
+      seedId: ytulip
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/ytulip.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (белая гвоздика)
+  id: WcloveSeeds
+  components:
+    - type: Seed
+      seedId: wclove
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/wclove.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (красная гвоздика)
+  id: RcloveSeeds
+  components:
+    - type: Seed
+      seedId: rclove
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/rclove.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (космическая ромашка)
+  id: SchamomileSeeds
+  components:
+    - type: Seed
+      seedId: schamomile
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/schamomile.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (белая космическая ромашка)
+  id: WschamomileSeeds
+  components:
+    - type: Seed
+      seedId: wschamomile
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/wschamomile.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (Алоцвет)
+  id: SflowerSeeds
+  components:
+    - type: Seed
+      seedId: sflower
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/sflower.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (Лампоцвет)
+  id: LflowerSeeds
+  components:
+    - type: Seed
+      seedId: lflower
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/lflower.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (Красная роза)
+  id: RroseSeeds
+  components:
+    - type: Seed
+      seedId: rrose
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/rrose.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (Белая роза)
+  id: WroseSeeds
+  components:
+    - type: Seed
+      seedId: wrose
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/wrose.rsi
+
+- type: entity
+  parent: SeedBase
+  name: пакет семян (мясопшеница)
+  id: MeatwheatSeeds
+  components:
+    - type: Seed
+      seedId: meatwheat
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/meatwheat.rsi

@@ -67,9 +67,6 @@
       color: "#c9c042"
       castShadows: false
     - type: WiresPanel
-    - type: Wires
-      boardName: wires-board-name-smes
-      layoutId: SMES
     - type: Machine
       board: SMESMachineCircuitboard
     - type: StationInfiniteBatteryTarget
@@ -81,8 +78,8 @@
       highVoltageNode: input
       mediumVoltageNode: output
     - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: StrongMetallic
+      damageContainer: StructuralInorganic
+      damageModifierSet: StructuralMetallicStrong
     - type: BatterySensor
     - type: DeviceNetwork
       deviceNetId: AtmosDevices
@@ -98,7 +95,7 @@
       key: enum.SmesUiKey.Key
     - type: UserInterface #SS220 smes-ui-fix
       interfaces:
-        - key: enum.SmesUiKey.Key
+        enum.SmesUiKey.Key:
           type: SmesBoundUserInterface
 
 # SMES' in use
@@ -106,7 +103,7 @@
 - type: entity
   parent: BaseSMES
   id: SMESBasic
-  suffix: Basic, 8MW
+  suffix: Basic, 8MJ
   components:
   - type: Battery
     maxCharge: 8000000

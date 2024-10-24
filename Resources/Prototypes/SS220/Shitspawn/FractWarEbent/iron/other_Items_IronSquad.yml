@@ -1,0 +1,136 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: AgentIDCard
+  id: AgentIDCardCmdLeader
+  categories: [ HideSpawnMenu ]
+  name: ID карта пассажира
+  components:
+  - type: PresetIdCard
+    job: IronSquadLeader
+
+- type: entity
+  parent: SyndiPDAAgent
+  id: SyndiPDAAgentLeader
+  categories: [ HideSpawnMenu ]
+  description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Pda
+    id: AgentIDCardCmdLeader
+
+- type: entity
+  parent: AgentIDCard
+  id: AgentIDCardCmdEngineer
+  categories: [ HideSpawnMenu ]
+  name: ID карта пассажира
+  components:
+  - type: PresetIdCard
+    job: IronSquadEngineer
+
+- type: entity
+  parent: SyndiPDAAgent
+  id: SyndiPDAAgentEngineer
+  name: "КПК синдиката"
+  description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: AgentIDCardCmdEngineer
+
+- type: entity
+  parent: AgentIDCard
+  id: AgentIDCardCmdCorpsman
+  categories: [ HideSpawnMenu ]
+  name: ID карта пассажира
+  components:
+  - type: PresetIdCard
+    job: IronSquadCorpsman
+
+- type: entity
+  parent: MedicalPDAAgent
+  id: SyndiPDAAgentCorpsman
+  name: "КПК синдиката"
+  description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: AgentIDCardCmdCorpsman
+
+- type: entity
+  parent: AgentIDCard
+  id: AgentIDCardCmdCMO
+  categories: [ HideSpawnMenu ]
+  name: ID карта пассажира
+  components:
+  - type: PresetIdCard
+    job: IronSquadCMO
+
+- type: entity
+  parent: MedicalPDAAgent
+  id: SyndiPDAAgentCMO
+  name: "КПК синдиката"
+  description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: AgentIDCardCmdCMO
+
+- type: entity
+  parent: AgentIDCard
+  id: AgentIDCardCmd
+  categories: [ HideSpawnMenu ]
+  name: ID карта пассажира
+  components:
+  - type: PresetIdCard
+    job: IronSquadFighter
+
+- type: entity
+  parent: SyndiPDA
+  id: SyndiPDAAgent
+  name: "КПК синдиката"
+  description: "Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!"
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: AgentIDCardCmd
+
+- type: entity
+  parent: MedicalPDA
+  id: MedicalPDAAgent
+  name: "КПК врача синдиката"
+  description: Окей, пора стать продуктивным членом... о, круто, я плохой парень, пора убивать людей!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: AgentIDCardCmd
+
+- type: entity
+  name: "фонарик синдиката"
+  description: "Надежный фонарь, используемый синдикатом."
+  parent: FlashlightSeclite
+  id: FlashlightSecliteSyndicate
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: ClothingHeadsetAltSyndicate
+  id: ClothingHeadsetAltSyndicateEbent
+  categories: [ HideSpawnMenu ]
+  name: полноразмерная кроваво-красная гарнитура
+  description: Модифицированный модульный интерком синдиката, надеваемый на голову и содержащий ключ шифрования. Имеет 5 ячеек для ключей шифрования.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeySyndie
+      - EncryptionKeyCommon
+
+- type: entity
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltMilitaryWebbingEbent_IronSquad
+  suffix: Shitspawn, Ebent, FractWar
+  name: армейская РПС
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRevolverPythonAP

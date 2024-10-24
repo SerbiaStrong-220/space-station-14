@@ -9,6 +9,15 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 180000 # SS220-RoleTime
+    - !type:RoleTimeRequirement
+      role: JobChemist
+      time: 18000 # SS220-RoleTime 2
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
@@ -23,6 +32,7 @@
   - ChiefMedicalOfficer
   - Paramedic
   - Brig
+  - Cryogenics
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,13 +41,9 @@
 - type: startingGear
   id: CMOGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCMO
-    back: ClothingBackpackCMOFilled
-    shoes: ClothingShoesColorBrown
-    outerClothing: ClothingOuterCoatLabCmo
     id: CMOPDA
     ears: ClothingHeadsetCMO
     belt: ClothingBeltMedicalFilled
-  innerClothingSkirt: ClothingUniformJumpskirtCMO
-  satchel: ClothingBackpackSatchelCMOFilled
-  duffelbag: ClothingBackpackDuffelCMOFilled
+  storage:
+    back:
+    - Flash

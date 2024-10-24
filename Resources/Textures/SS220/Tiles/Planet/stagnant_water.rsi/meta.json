@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at https://github.com/shiptest-ss13/Shiptest/blob/5c297839a311a630af630ffcf920d0fa8adc3ae6/icons/turf/floors.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "stagnant_water"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+- type: entity
+  id: MindSlaveImplanter
+  name: mind-slave implanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+    - type: Implanter
+      implant: MindSlaveImplant

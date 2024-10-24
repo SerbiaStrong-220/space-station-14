@@ -3,6 +3,7 @@
   id: ClothingHeadCapCentcomBlack
   name: special operations officer cap
   description: The NanoTrasen gold-engraved special cap of the higher ranks, which has long gone through more than one blitzkrieg...
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Head/Hats/centcom_officer_black.rsi
@@ -14,6 +15,7 @@
   id: ClothingHeadCapCentcomNaval
   name: naval cap
   description: A cap worn by those in the Nanotrasen Navy.
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Head/Hats/centcom_naval_cap.rsi
@@ -25,6 +27,7 @@
   id: ClothingHeadHatBeretCentcomNaval
   name: naval beret
   description: A beret worn by those in the Nanotrasen Navy.
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Head/Hats/centcom_naval_beret.rsi

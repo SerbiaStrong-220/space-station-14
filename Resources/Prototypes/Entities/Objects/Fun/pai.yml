@@ -3,6 +3,7 @@
 - type: entity
   parent: BaseItem
   id: PersonalAI
+  categories: [ HideSpawnMenu ] #SS220 PAI with encryption keys
   name: personal ai device
   description: Your electronic pal who's fun to be with!
   components:
@@ -13,10 +14,12 @@
     program: 2
   - type: UserInterface
     interfaces:
-    - key: enum.InstrumentUiKey.Key
-      type: InstrumentBoundUserInterface
-    - key: enum.StationMapUiKey.Key
-      type: UntrackedStationMapBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+        requireInputValidation: false
   - type: Sprite
     sprite: Objects/Fun/pai.rsi
     layers:
@@ -35,18 +38,15 @@
     beginSearchingText: pai-system-searching
     roleName: pai-system-role-name
     roleDescription: pai-system-role-description
+    roleRules: ghost-role-information-familiar-rules
     wipeVerbText: pai-system-wipe-device-verb-text
     wipeVerbPopup: pai-system-wiped-device
     stopSearchVerbText: pai-system-stop-searching-verb-text
     stopSearchVerbPopup: pai-system-stopped-searching
   - type: Examiner
   - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Binary
   - type: ActiveRadio
     channels:
-    - Binary
     - Common
   - type: DoAfter
   - type: Actions
@@ -72,9 +72,16 @@
           Searching: { state: pai-searching-overlay }
           On: { state: pai-on-overlay }
   - type: StationMap
+  - type: Vocal # SS220 borg emotes to PAI start
+    sounds:
+      Unsexed: UnisexSilicon # SS220 borg emotes to PAI end
+  - type: ChangeVoiceInContainer
+    whitelist:
+      components:
+        - SecretStash
 
 - type: entity
-  parent: PersonalAI
+  parent: [ PersonalAI]
   id: SyndicatePersonalAI
   name: syndicate personal ai device
   description: Your Syndicate pal who's fun to be with!
@@ -89,12 +96,23 @@
   - type: ToggleableGhostRole
     roleName: pai-system-role-name-syndicate
     roleDescription: pai-system-role-description-syndicate
+    roleRules: ghost-role-information-familiar-rules
   - type: IntrinsicRadioTransmitter
     channels:
     - Syndicate
   - type: ActiveRadio
     channels:
     - Syndicate
+  #SS220 PAI with encryption keys begin
+  - type: IntrinsicRadioReceiver
+    channels:
+    - Syndicate
+  - type: ContainerContainer
+    containers:
+      key_slots: !type:Container
+  - type: EncryptionKeyHolder
+    keySlots: 2
+  #SS220 PAI with encryption keys end
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -120,6 +138,7 @@
   - type: ToggleableGhostRole
     roleName: pai-system-role-name-potato
     roleDescription: pai-system-role-description-potato
+    roleRules: ghost-role-information-familiar-rules
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -136,10 +155,10 @@
   id: ActionPAIPlayMidi
   name: Play MIDI
   description: Open your portable MIDI interface to soothe your owner.
-  noSpawn: true
   components:
   - type: InstantAction
     checkCanInteract: false
+    checkConsciousness: false
     icon: Interface/Actions/pai-midi.png
     event: !type:OpenUiActionEvent
       key: enum.InstrumentUiKey.Key
@@ -148,10 +167,10 @@
   id: ActionPAIOpenMap
   name: Open Map
   description: Open your map interface and guide your owner.
-  noSpawn: true
   components:
     - type: InstantAction
       checkCanInteract: false
-      icon: Interface/home.png
+      checkConsciousness: false
+      icon: { sprite: Interface/Actions/pai-map.rsi, state: icon }
       event: !type:OpenUiActionEvent
         key: enum.StationMapUiKey.Key

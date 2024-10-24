@@ -1,0 +1,72 @@
+- type: entity
+  parent: PresentRandom
+  id: SpecialDeliveryBox
+  name: особая посылка
+  description: Старая помятая коробка. Пахнет диско и ретро. Интересно, что внутри?
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/specialdelivery.rsi
+    layers:
+      - state: specialdelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: ClothingHeadHatAlex
+        orGroup: HotMask
+      - id: ClothingHeadHatJake
+        orGroup: HotMask
+      - id: ClothingHeadHatRasmus
+        orGroup: HotMask
+      - id: ClothingHeadHatRichter
+        orGroup: HotMask
+      - id: ClothingHeadHatRichard
+        orGroup: HotMask
+      - id: ClothingHeadHatTony
+        orGroup: HotMask
+    sound:
+      path: /Audio/SS220/Effects/specialdelivery/specialdelivery_unwrap.ogg
+
+- type: entity
+  parent: PresentRandom
+  id: CriminalDeliveryBox
+  name: криминальная посылка
+  description: Изрядно поношенная коробка, напоминает о былых авантюрах.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: ClothingHeadHatPDDallas
+        orGroup: PDMask
+      - id: ClothingHeadHatPDChains
+        orGroup: PDMask
+      - id: ClothingHeadHatPDWolf
+        orGroup: PDMask
+      - id: ClothingHeadHatPDHoxton
+        orGroup: PDMask
+    sound:
+      path: /Audio/SS220/Effects/criminaldelivery/criminaldelivery_unwrap.ogg
+
+- type: entity
+  id: SpecialDeliveryBoxTrash
+  parent: BaseItem
+  name: обертка от посылки
+  description: Пыльная обертка от посылки из картона и скотча.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Cardboard: 50
+  - type: Sprite
+    sprite: SS220/Objects/Storage/specialdelivery.rsi
+    state: specialdelivery_unfolded
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage

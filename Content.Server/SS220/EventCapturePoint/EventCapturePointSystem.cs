@@ -145,8 +145,7 @@ public sealed class EventCapturePointSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, user, entity.Comp.FlagManipulationDuration, flagEvent, entity, target: entity, used: newFlag)
         {
             BreakOnDamage = true,
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             NeedHand = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
@@ -161,8 +160,7 @@ public sealed class EventCapturePointSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, user, entity.Comp.FlagManipulationDuration, flagEvent, entity, target: entity)
         {
             BreakOnDamage = true,
-            BreakOnTargetMove = true,
-            BreakOnUserMove = true,
+            BreakOnMove = true,
             NeedHand = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };

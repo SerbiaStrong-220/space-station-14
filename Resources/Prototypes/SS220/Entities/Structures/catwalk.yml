@@ -9,9 +9,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: SS220/Structures/catwalk.rsi
+    sprite: SS220/Structures/Catwalks/catwalksolid.rsi
     drawdepth: FloorTiles
-    noRot: true
+    noRot: false
   - type: Transform
     anchored: true
   - type: FootstepModifier
@@ -74,3 +74,122 @@
   - type: Construction
     graph: SteelCatwalk
     node: DarkCatwalk
+
+- type: entity
+  id: CatwalkRed
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: красный
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkred.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkred.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkRed
+
+- type: entity
+  id: CatwalkPurple
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: фиолетовый
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkpurple.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkpurple.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkPurple
+
+- type: entity
+  id: CatwalkCyan
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: голубой
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkcyan.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkcyan.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkCyan
+
+- type: entity
+  id: CatwalkBrown
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: коричневый
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkbrown.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkbrown.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkBrown
+
+- type: entity
+  id: CatwalkOrange
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: оранжевый
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkorange.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkorange.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkOrange
+
+- type: entity
+  id: CatwalkGreen
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: зелёный
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkgreen.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkgreen.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkGreen
+
+- type: entity
+  id: CatwalkBlue
+  parent: Catwalk
+  name: мостик
+  description: Мостик, облегчающий маневрирование в открытом космосе и прокладку кабеля.
+  suffix: синий
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Catwalks/catwalkblue.rsi
+    drawdepth: FloorTiles
+  - type: Icon
+    sprite: SS220/Structures/Catwalks/catwalkblue.rsi
+    state: catwalk_preview
+  - type: Construction
+    graph: SteelCatwalk
+    node: CatwalkBlue

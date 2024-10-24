@@ -1,0 +1,40 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WeaponTurretFractWarUssp
+  suffix: Shitspawn, Ebent, FractWar, Ussp
+  name: Баллистическая турель СССП
+  description: Автоматическая турель с баллистическим пулемётом.
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 250
+  - type: NpcFactionMember
+    factions:
+    - EbentUssp
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WeaponTurretFractWarNanoTrasen
+  suffix: Shitspawn, Ebent, FractWar, NanoTrasen
+  name: Баллистическая турель ССО
+  description: Автоматическая турель с баллистическим пулемётом.
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 250
+  - type: NpcFactionMember
+    factions:
+    - EbentNanoTrasen
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WeaponTurretFractWarIronSquad
+  suffix: Shitspawn, Ebent, FractWar, IronSquad
+  name: Баллистическая турель Железного отряда
+  description: Автоматическая турель с баллистическим пулемётом.
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 250
+  - type: NpcFactionMember
+    factions:
+    - EbentIronSquad

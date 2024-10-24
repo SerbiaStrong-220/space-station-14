@@ -1,26 +1,24 @@
 ﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: gameMap
   id: NTvsSSSP
   mapName: 'NT vs SSSP war map'
-  mapPath: /Maps/EventMaps/NTvsSSSP.yml
+  mapPath: /Maps/SS220/EventMaps/NTvsSSSP.yml
   minPlayers: 0
   stations:
-    Delta:
-      stationProto: ExtendedDeltaNanotrasenStation
+    Axioma:
+      stationProto: NTvsSSSPStation
       components:
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
         - type: StationNameSetup
-          mapNameTemplate: '{0} Дельта {1}'
+          mapNameTemplate: '{0} Axioma {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '-SS220'
-        - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_delta220.yml
         - type: StationJobs
-          overflowJobs:
-            - Passenger
           availableJobs:
             Passenger: [ -1, -1 ]
-            Boxer: [ 2, 2 ]
             #Command
             Captain: [ 1, 1 ]
             IAA: [ 1, 1 ]
@@ -30,19 +28,18 @@
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
             Detective: [ 1, 1 ]
-            SecurityPilot: [ 1, 1 ]
             SecurityOfficer: [ 6, 6 ]
             SecurityCadet: [ 3, 3 ]
             Brigmedic: [ 1, 1 ]
             #Engineering
             ChiefEngineer: [ 1, 1 ]
             StationEngineer: [ 8, 8 ]
-            AtmosphericTechnician: [ 2, 3 ]
+            AtmosphericTechnician: [ 3, 3 ]
             TechnicalAssistant: [ 3, 3 ]
             #Cargo
             Quartermaster: [ 1, 1 ]
-            CargoTechnician: [ 5, 5 ]
-            SalvageSpecialist: [ 4, 4 ]
+            CargoTechnician: [ 6, 6 ]
+            SalvageSpecialist: [ 3, 3 ]
             #Medical
             ChiefMedicalOfficer: [ 1, 1 ]
             MedicalDoctor: [ 7, 7 ]
@@ -60,39 +57,22 @@
             Botanist: [ 3, 3 ]
             Chef: [ 2, 2 ]
             Clown: [ 1, 1 ]
-            Janitor: [ 1, 2 ]
+            Janitor: [ 3, 3 ]
             Mime: [ 1, 1 ]
             Chaplain: [ 1, 1 ]
             Librarian: [ 1, 1 ]
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
-            ServiceWorker: [ 3, 3 ]
-            Zookeeper: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
             Lawyer: [ 2, 2 ]
 
 - type: entity
-  id: ExtendedDeltaNanotrasenStation
-  parent:
-    - BaseStation
-    - BaseStationCargo
-    - BaseStationJobsSpawning
-    - BaseStationRecords
-    - BaseStationArrivals
-    - BaseStationShuttles
-    - BaseStationCentcomm
-    - BaseStationEvacuation
-    - BaseStationAlertLevels
-    - BaseStationExpeditions
-    - BaseStationAllEventsEligible
-    - BaseStationNanotrasen
-  noSpawn: true
+  id: NTvsSSSPStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
   components:
-    - type: Transform
-    - type: GridSpawn
-      paths:
-        - /Maps/Shuttles/cargo.yml
     - type: StationMinimap
       minimapData: !type:StationMinimapData
-        mapTexture: SS220/ViewableMaps/220Delta.png
-        originOffset: -80, -35
+        mapTexture: SS220/ViewableMaps/Axioma.png
+        originOffset: -85, 110
         mapScale: 6.4

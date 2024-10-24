@@ -11,18 +11,26 @@
           sprite: Structures/Piping/Atmospherics/pipe.rsi
           state: pipeStraight
         name: pipe
-      - tag: ModularReceiver
-        icon:
-          sprite: Objects/Misc/modular_receiver.rsi
-          state: icon
-        name: modular receiver
+      #ss220 handmade gun buff
+      #- tag: ModularReceiver
+      #  icon:
+      #    sprite: Objects/Misc/modular_receiver.rsi
+      #    state: icon
+      #  name: modular receiver
       - tag: RifleStock
         icon:
           sprite: Objects/Misc/rifle_stock.rsi
           state: icon
         name: rifle stock
+      #ss220 handmade gun buff begin
+      - tag: Igniter
+        icon:
+          sprite: Objects/Devices/igniter.rsi
+          state: icon
+        name: Igniter
       - material: Cloth
         amount: 3
-        doAfter: 10
+        doAfter: 25
+      #ss200 handmade gun buff end
   - node: shotgun
     entity: WeaponShotgunImprovised

@@ -1,0 +1,68 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingShoesBaseWinterBoots
+  id: ClothingShoesBootsWinterSecMed
+  name: зимние ботинки бригмедика
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesBootsDruid #SS220 druid loadout
+  name: druid spanks
+  description: Druid spanks made from natural materials.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -100
+    attackRate: 1
+    range: 1
+    angle: 90
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      path: "/Audio/Items/snap.ogg"
+
+- type: entity
+  parent: ClothingShoesBootsJackSec
+  id: ClothingShoesBootsJackSecFilled
+  components:
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingShoesBootsBard #SS220 bard loadout
+  name: bard shoes
+  description: Shoes for true music lovers!
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+
+# Уборщик
+
+- type: entity
+  parent: ClothingShoesGaloshes
+  id: ClothingShoesJanitorJR
+  name: rubberized Work Boots Junk Recycles
+  description: Comfortable boots with a special treatment of the sole. They inspire confidence.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi

@@ -66,8 +66,7 @@ public sealed class UseableBookSystem : EntitySystem
             var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(comp.ReadTime), new UseableBookReadDoAfterEvent(),
             entity, target: entity)
             {
-                BreakOnTargetMove = true,
-                BreakOnUserMove = true,
+                BreakOnMove = true,
                 BreakOnDamage = true,
             };
             _doAfter.TryStartDoAfter(doAfterEventArgs);
@@ -84,7 +83,7 @@ public sealed class UseableBookSystem : EntitySystem
             return;
         if (args.Target is not { } target)
             return;
-        
+
         comp.Used = true;
         comp.LeftUses -= 1;
 
@@ -95,7 +94,7 @@ public sealed class UseableBookSystem : EntitySystem
             _entManager.AddComponent(args.User, copiedComp, true);
         }
 
-        Dirty(comp);
+        Dirty(uid, comp);
         var useableArgs = new UseableBookOnReadEvent();
         useableArgs.Interactor = args.User;
         useableArgs.BookComp = comp;

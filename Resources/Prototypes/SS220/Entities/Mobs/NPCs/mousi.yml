@@ -4,7 +4,7 @@
   id: LeftHandMousi
   name: animal hands
   parent: [PartAnimal, BaseLeftHand]
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Mobs/Species/Reptilian/parts.rsi
@@ -17,7 +17,7 @@
   id: RightHandMousi
   name: animal hands
   parent: [PartAnimal, BaseRightHand]
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Mobs/Species/Reptilian/parts.rsi
@@ -126,8 +126,8 @@
         - MobLayer
   - type: UserInterface
     interfaces:
-    - key: enum.StrippingUiKey.Key
-      type: StrippableBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
   - type: InteractionPopup
     successChance: 0.8
     interactSuccessString: hugging-success-generic-mousi

@@ -6,8 +6,23 @@
   components:
     - type: Pda
       id: IAAIDCard
-      state: pda-lawyer
+      state: pda-iaa #SS220 PDA-Resprite
     - type: PdaBorderColor
-      borderColor: "#6f6192"
+      borderColor: "#414452" #SS220 PDA-Resprite
+      accentVColor: "#262c8a" #SS220-Law Department
+      accentHColor: "#dfac5c" #SS220 PDA-Resprite
+    - type: Sprite #SS220 PDA-Resprite-Start
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+      - state: "screen-law" #SS220-Law Department
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false #SS220 PDA-Resprite-End
     - type: Icon
-      state: pda-lawyer
+      state: pda-iaa #SS220 PDA-Resprite

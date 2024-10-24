@@ -2,7 +2,7 @@
   name: Knife Debug
   parent: CombatKnife
   id: KnifeDebug
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -16,7 +16,7 @@
   name: heat 100
   parent: KnifeDebug
   id: KnifeHeat
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -27,7 +27,7 @@
   name: Asphyxiation 100
   parent: KnifeDebug
   id: KnifeAsphyxiation
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -38,7 +38,7 @@
   name: Bloodloss 100
   parent: KnifeDebug
   id: KnifeBloodloss
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -49,7 +49,7 @@
   name: Blunt 100
   parent: KnifeDebug
   id: KnifeBlunt
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -60,7 +60,7 @@
   name: Cellular 100
   parent: KnifeDebug
   id: KnifeCellular
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -71,7 +71,7 @@
   name: Caustic 100
   parent: KnifeDebug
   id: KnifeCaustic
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -82,7 +82,7 @@
   name: Cold 100
   parent: KnifeDebug
   id: KnifeCold
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -93,7 +93,7 @@
   name: Piercing 100
   parent: KnifeDebug
   id: KnifePiercing
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -104,7 +104,7 @@
   name: Poison 100
   parent: KnifeDebug
   id: KnifePoison
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -115,7 +115,7 @@
   name: Radiation 100
   parent: KnifeDebug
   id: KnifeRadiation
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -126,7 +126,7 @@
   name: Shock 100
   parent: KnifeDebug
   id: KnifeShock
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -137,7 +137,7 @@
   name: Slash 100
   parent: KnifeDebug
   id: KnifeSlash
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -148,7 +148,7 @@
   name: Structural 100
   parent: KnifeDebug
   id: KnifeStructural
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:
@@ -159,7 +159,7 @@
   name: Stamina 100
   parent: KnifeDebug
   id: KnifeStamina
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: MeleeWeapon
     damage:

@@ -1,0 +1,91 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Admiral
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronAdmiral
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Lucifer
+  description: Яркий дизайн и смертоносное исполнение - в лучших традициях CryTech technology.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_admiral.rsi
+
+# CE
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronCE
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Cerberus
+  description: Шлем с поверхностью, устойчивой к радиации, коррозии и агрессивным веществам.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_ce.rsi
+
+# CMO
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronCMO
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Cyanide-X
+  description: Стильная подсветка и дизайн прекрасно отражает вашу натуру психопата, любящего мучать пациентов горькими лекарствами.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_cmo.rsi
+
+# Soldier
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronSoldier
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Zeros
+  description: Тонкий металла с мягкой обшивкой из шерсти неизвестного происхождения.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_soldier.rsi
+
+# Med
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronMed
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Cyanide
+  description: Стильная подсветка и простой дизайн, выполненный в лучших традициях красных торговцев смертью.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_med.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_med.rsi
+
+# Heavy
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronHeavy
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Aid
+  description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров, но не от пота.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_heavy.rsi
+
+# Heavy
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseIron
+  id: ClothingHeadHelmetHardsuitIronHeavy2
+  categories: [ HideSpawnMenu ]
+  name: шлем скафандра Aid-2
+  description: Огромная защита, стиль и капелька радиации!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/iron_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/iron_heavy_2.rsi

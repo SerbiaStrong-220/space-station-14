@@ -149,15 +149,6 @@ public sealed partial class BlockingSystem : EntitySystem
         if (component.IsBlocking)
             return false;
 
-        //ss220-revorkblock
-        //A temporary crutch, I'll fix it after the New Year's.
-        if (TryComp(item, out ReflectComponent? useDelay))
-        {
-            if (!useDelay.Enabled)
-                return false;
-        }
-        //ss220-revorkblock end
-
         var xform = Transform(user);
 
         var shieldName = Name(item);
@@ -330,8 +321,7 @@ public sealed partial class BlockingSystem : EntitySystem
         var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
 
         var msg = new FormattedMessage();
-
-        msg.AddMarkup(Loc.GetString("blocking-fraction", ("value", MathF.Round(fraction * 100, 1))));
+        msg.AddMarkupOrThrow(Loc.GetString("blocking-fraction", ("value", MathF.Round(fraction * 100, 1))));
 
         AppendCoefficients(modifier, msg);
 
@@ -347,7 +337,7 @@ public sealed partial class BlockingSystem : EntitySystem
         foreach (var coefficient in modifiers.Coefficients)
         {
             msg.PushNewline();
-            msg.AddMarkup(Robust.Shared.Localization.Loc.GetString("blocking-coefficient-value",
+            msg.AddMarkupOrThrow(Robust.Shared.Localization.Loc.GetString("blocking-coefficient-value",
                 ("type", coefficient.Key),
                 ("value", MathF.Round(coefficient.Value * 100, 1))
             ));
@@ -356,7 +346,7 @@ public sealed partial class BlockingSystem : EntitySystem
         foreach (var flat in modifiers.FlatReduction)
         {
             msg.PushNewline();
-            msg.AddMarkup(Robust.Shared.Localization.Loc.GetString("blocking-reduction-value",
+            msg.AddMarkupOrThrow(Robust.Shared.Localization.Loc.GetString("blocking-reduction-value",
                 ("type", flat.Key),
                 ("value", flat.Value)
             ));

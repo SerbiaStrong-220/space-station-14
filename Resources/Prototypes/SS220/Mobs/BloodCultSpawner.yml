@@ -1,0 +1,42 @@
+- type: entity
+  name: cult blood spawner
+  id: SpawnMobBloodCultBrother
+  parent: MarkerBase
+  components:
+#God forgive me for what I'm about to do
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+    - sprite: Clothing/Shoes/Specific/cult.rsi
+      state: equipped-FEET
+    - sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+      state: equipped-INNERCLOTHING
+    - sprite: Clothing/OuterClothing/Armor/cult_armour.rsi
+      state: equipped-OUTERCLOTHING
+    - sprite: Clothing/Hands/Gloves/Color/black.rsi
+      state: equipped-HAND
+    - sprite: Clothing/Mask/gas.rsi
+      state: equipped-MASK
+    - sprite: Clothing/Head/Helmets/cult.rsi
+      state: equipped-HELMET
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBloodCultBrother
+
+- type: entity
+  name: Blood Cult Brother
+  parent: BaseMobHuman
+  id: MobBloodCultBrother
+  components:
+    - type: NpcFactionMember
+      factions:
+        - BloodCult
+    - type: Loadout
+      prototypes:
+        - BloodCultBroter
+    - type: HTN
+      rootTask:
+        task: SimpleHumanoidHostileCompound
+    - type: CannotBeConsumed #Dark Reaper consume fix

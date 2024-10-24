@@ -6,7 +6,9 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 18000 # SS220-RoleTime
+      time: 36000 # SS220-RoleTime 2
+    - !type:OverallPlaytimeRequirement
+       time: 72000 # SS220-RoleTime 2  
   startingGear: MimeGear
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
@@ -22,29 +24,25 @@
 - type: startingGear
   id: MimeGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitMime
-    back: ClothingBackpackMimeFilled
-    head: ClothingHeadHatBeret
-    belt: ClothingBeltSuspenders
-    gloves: ClothingHandsGlovesLatex
-    shoes: ClothingShoesColorWhite
+    gloves: ClothingHandsGlovesColorWhite
+#    shoes: ClothingShoesColorWhite #SS220-Two Floppa Iterarion
     pocket1: CrayonMime
     pocket2: Paper
-    mask: ClothingMaskMime
     id: MimePDA
     ears: ClothingHeadsetService
-  innerClothingSkirt: ClothingUniformJumpskirtMime
-  satchel: ClothingBackpackSatchelMimeFilled
-  duffelbag: ClothingBackpackDuffelMimeFilled
+  storage:
+    back:
+    - RubberStampMime
 
 - type: entity
   id: ActionMimeInvisibleWall
   name: Create Invisible Wall
   description: Create an invisible wall in front of you, if placeable there.
-  noSpawn: true
   components:
   - type: InstantAction
     priority: -1
     useDelay: 30
-    icon: Structures/Walls/solid.rsi/full.png
+    icon:
+      sprite: Structures/Walls/solid.rsi
+      state: full
     event: !type:InvisibleWallActionEvent

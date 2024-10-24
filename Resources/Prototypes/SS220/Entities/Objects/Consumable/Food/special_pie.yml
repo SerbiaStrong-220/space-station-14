@@ -1,0 +1,43 @@
+- type: entity
+  name: Банановая лепеха
+  parent: FoodInjectableBase
+  id: FoodFlapjackBananaCreamSS220
+  description: слепленное на скорую руку нечто едва способное насытить, но обильно мажущее.
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - banana
+      - creamy
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/special_pie.rsi
+    layers:
+      - state: pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents: #Most of these are this with slight variations, not worth changing until we have the rest of the reagents
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: CreamPie
+  - type: ItemSlots
+    slots:
+      payloadSlot:
+        whitelist:
+          components:
+          - OnUseTimerTrigger
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        swap: false
+        disableEject: true
+  - type: ContainerContainer
+    containers:
+      payloadSlot: !type:ContainerSlot
+  - type: Food

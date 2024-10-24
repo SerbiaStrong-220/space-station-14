@@ -1,0 +1,68 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+
+
+
+
+
+
+
+# Admiral
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseSSSP
+  id: ClothingHeadHelmetHardsuitUSSPAdmiral
+  categories: [ HideSpawnMenu ]
+  name: шлем тяжёлого боевого скафандра Маршала СССП
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
+
+# CE
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseSSSP
+  id: ClothingHeadHelmetHardsuitUSSPCE
+  categories: [ HideSpawnMenu ]
+  name: шлем инженерного скафандра СССП
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_ce.rsi
+
+# CMO
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseSSSP
+  id: ClothingHeadHelmetHardsuitUSSPCMO
+  categories: [ HideSpawnMenu ]
+  name: шлем медицинского скафандра СССП
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/ussp_cmo.rsi
+
+# Soldier
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseSSSP
+  id: ClothingHeadHelmetHardsuitUSSPSoldier
+  categories: [ HideSpawnMenu ]
+  name: шлем красноармейского скафандра СССП
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/sssp_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/sssp_soldier.rsi
+
+# Heavy2
+- type: entity
+  parent: ClothingHeadHelmetHardsuitBaseSSSP
+  id: ClothingHeadHelmetHardsuitUSSPHeavy2
+  categories: [ HideSpawnMenu ]
+  name: шлем тяжёлого боевого скафандра СССП 2.0
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/sssp_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/sssp_heavy_2.rsi

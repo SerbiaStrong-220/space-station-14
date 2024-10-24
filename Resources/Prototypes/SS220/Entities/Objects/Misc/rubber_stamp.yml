@@ -1,0 +1,136 @@
+- type: entity
+  name: cockptain rubber stamp
+  parent: RubberStampCaptain
+  id: RubberStampFakeCaptain
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-captain
+
+- type: entity
+  name: CentCum rubber stamp
+  parent: RubberStampCentcom
+  id: RubberStampFakeCentcom
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-centcom
+
+- type: entity
+  name: fucking engineer's rubber stamp
+  parent: RubberStampCE
+  id: RubberStampFakeCE
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-ce
+
+- type: entity
+  name: fucking medical officer's rubber stamp
+  parent: RubberStampCMO
+  id: RubberStampFakeCMO
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-cmo
+
+- type: entity
+  name: head of suckurity's rubber stamp
+  parent: RubberStampHos
+  id: RubberStampFakeHos
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-hos
+
+- type: entity
+  name: syndiekek rubber stamp
+  parent: RubberStampSyndicate
+  id: RubberStampFakeSyndicate
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-syndicate
+
+- type: entity
+  name: no blag rubber stamp
+  parent: RubberStampApproved
+  id: RubberStampFakeApproved
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-fake-approved
+
+- type: entity
+  parent: PresentRandom
+  id: ClownStampBox
+  name: коробка с печатью
+  description: Поношенная коробка с чем-то, напоминает бомбу клоуна.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/clownstampbox.rsi
+    layers:
+      - state: clownstampbox
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: RubberStampFakeCaptain
+        orGroup: FakeStump
+      - id: RubberStampFakeCentcom
+        orGroup: FakeStump
+      - id: RubberStampFakeSyndicate
+        orGroup: FakeStump
+      - id: RubberStampFakeApproved
+        orGroup: FakeStump
+      - id: RubberStampFakeHos
+        orGroup: FakeStump
+      - id: RubberStampFakeCMO
+        orGroup: FakeStump
+      - id: RubberStampFakeCE
+        orGroup: FakeStump
+    sound:
+      path: /Audio/Items/bikehorn.ogg
+
+- type: entity
+  name: CentCom rubber stamp
+  parent: RubberStampBaseAlt
+  id: RubberStampCentcomm
+  suffix: DO NOT MAP
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-centcom
+    stampedColor: "#dca019"
+    stampState: "paper_stamp-centcom"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-centcom
+
+- type: entity
+  parent: RubberStampBase
+  id: RubberStampMagistrate
+  name: magistrate rubber stamp
+  suffix: DO NOT MAP
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-magistrate
+    stampedColor: "#eebe35"
+    stampState: "paper_stamp-magistrate"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-magistrate
+
+- type: entity
+  name: Blue Shield rubber stamp
+  parent: RubberStampCaptain
+  id: RubberStampBlueShield
+  description: Blue Shield's rubber stamp.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-blue-shield
+    stampedColor: "#124773"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-blue-shield
+

@@ -1,0 +1,35 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Сервис
+
+- type: entity
+  parent: ClothingMaskBandanaBase
+  id: ClothingMaskBandBlueBotany
+  name: blue botany bandana
+  description: A botany bandana to make you look cool, made from natural fibers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Bandanas/botanyblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Bandanas/botanyblue.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon
+
+# Карго
+
+- type: entity
+  parent: ClothingMaskBandanaBase
+  id: ClothingMaskBandSalvage
+  name: salvage bandana
+  description: A bandana that helps protect you from mine dust.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Bandanas/salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Bandanas/salvage.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon

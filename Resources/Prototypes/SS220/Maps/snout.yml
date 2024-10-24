@@ -11,8 +11,6 @@
         - type: StationNameSetup
           mapNameTemplate: 'Снаут'
         - type: StationJobs
-          overflowJobs:
-            - Passenger
           availableJobs:
             #civilian
             Passenger: [ -1, -1 ]

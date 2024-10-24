@@ -32,7 +32,7 @@ namespace Content.Server.Access.Systems
 
         private void OnAfterInteract(EntityUid uid, AgentIDCardComponent component, AfterInteractEvent args)
         {
-            if (!TryComp<AccessComponent>(args.Target, out var targetAccess) || !HasComp<IdCardComponent>(args.Target) || args.Target == null)
+            if (args.Target == null || !args.CanReach || !TryComp<AccessComponent>(args.Target, out var targetAccess) || !HasComp<IdCardComponent>(args.Target))
                 return;
 
             if (!TryComp<AccessComponent>(uid, out var access) || !HasComp<IdCardComponent>(uid))
@@ -61,14 +61,14 @@ namespace Content.Server.Access.Systems
 
         private void AfterUIOpen(EntityUid uid, AgentIDCardComponent component, AfterActivatableUIOpenEvent args)
         {
-            if (!_uiSystem.TryGetUi(uid, AgentIDCardUiKey.Key, out var ui))
+            if (!_uiSystem.HasUi(uid, AgentIDCardUiKey.Key))
                 return;
 
             if (!TryComp<IdCardComponent>(uid, out var idCard))
                 return;
 
-            var state = new AgentIDCardBoundUserInterfaceState(idCard.FullName ?? "", idCard.JobTitle ?? "", component.Icons);
-            _uiSystem.SetUiState(ui, state, args.Session);
+            var state = new AgentIDCardBoundUserInterfaceState(idCard.FullName ?? "", idCard.LocalizedJobTitle ?? "", idCard.JobIcon);
+            _uiSystem.SetUiState(uid, AgentIDCardUiKey.Key, state);
         }
 
         private void OnJobChanged(EntityUid uid, AgentIDCardComponent comp, AgentIDCardJobChangedMessage args)
@@ -77,6 +77,11 @@ namespace Content.Server.Access.Systems
                 return;
 
             _cardSystem.TryChangeJobTitle(uid, args.Job, idCard);
+
+            // SS220 Radio-Job-Color-start
+            if (TryFindJobProtoFromJobName(args.Job.ToLowerInvariant(), out var job))
+                _cardSystem.TryChangeJobColor(uid, PresetIdCardSystem.GetJobColor(_prototypeManager, job), job.RadioIsBold);
+            // SS220 Radio-Job-Color-end
         }
 
         private void OnNameChanged(EntityUid uid, AgentIDCardComponent comp, AgentIDCardNameChangedMessage args)
@@ -90,14 +95,10 @@ namespace Content.Server.Access.Systems
         private void OnJobIconChanged(EntityUid uid, AgentIDCardComponent comp, AgentIDCardJobIconChangedMessage args)
         {
             if (!TryComp<IdCardComponent>(uid, out var idCard))
-            {
                 return;
-            }
 
-            if (!_prototypeManager.TryIndex<StatusIconPrototype>(args.JobIcon, out var jobIcon))
-            {
+            if (!_prototypeManager.TryIndex(args.JobIconId, out var jobIcon))
                 return;
-            }
 
             _cardSystem.TryChangeJobIcon(uid, jobIcon, idCard);
 
@@ -105,13 +106,38 @@ namespace Content.Server.Access.Systems
                 _cardSystem.TryChangeJobDepartment(uid, job, idCard);
         }
 
-        private bool TryFindJobProtoFromIcon(StatusIconPrototype jobIcon, [NotNullWhen(true)] out JobPrototype? job)
+        private bool TryFindJobProtoFromIcon(JobIconPrototype jobIcon, [NotNullWhen(true)] out JobPrototype? job)
+        {
+          foreach (var jobPrototype in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+          {
+              if (jobPrototype.Icon == jobIcon.ID)
+              {
+                  job = jobPrototype;
+                  return true;
+              }
+          }
+
+          job = null;
+          return false;
+        }
+
+        // SS220 Radio-Job-Color-start
+        private bool TryFindJobProtoFromJobName(string jobName, [NotNullWhen(true)] out JobPrototype? job)
         {
             foreach (var jobPrototype in _prototypeManager.EnumeratePrototypes<JobPrototype>())
             {
-                if(jobPrototype.Icon == jobIcon.ID)
+                if (jobPrototype.LocalizedName == jobName)
                 {
                     job = jobPrototype;
+                    return true;
+                }
+            }
+
+            foreach (var jobPrototypePassenger in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                if (jobPrototypePassenger.LocalizedName == "пассажир")
+                {
+                    job = jobPrototypePassenger;
                     return true;
                 }
             }
@@ -119,5 +145,6 @@ namespace Content.Server.Access.Systems
             job = null;
             return false;
         }
-    }
+      // SS220 Radio-Job-Color-end
+      }
 }

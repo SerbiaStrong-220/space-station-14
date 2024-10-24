@@ -1,6 +1,7 @@
 - type: accessLevel
   id: Quartermaster
   name: id-card-access-level-quartermaster
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Cargo

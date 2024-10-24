@@ -1,6 +1,7 @@
 - type: accessLevel
   id: ResearchDirector
   name: id-card-access-level-research-director
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Research

@@ -1,0 +1,137 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: Clothing
+  id: ClothingWristWatch
+  name: наручные часы
+  description: Показывают точное время. Произведено Нанотрейзен.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/WristWatch/nt-watch.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/WristWatch/nt-watch.rsi
+    slots: [gloves]
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: WristWatch
+    style: NTDigital
+  - type: UserInterface
+    interfaces:
+      enum.WristWatchUiKey.Key:
+        type: WristWatchBoundUserInterface
+  - type: ActivatableUI
+    key: enum.WristWatchUiKey.Key
+    singleUser: true
+  - type: StaticPrice
+    price: 25
+
+- type: wristWatchStyle
+  id: NTDigital
+  panelTexture: /Textures/SS220/Interface/WristWatch/WristWatchPanel.png
+  panelSize: 256, 214
+  hoursLabel:
+    font:
+      path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-22.ttf
+      size: 33 # Should be 32, but 33 gives wanted result
+    color: "#75E6FF"
+    position: 38, 92
+    size: 64, 44
+  minutesLabel:
+    color: "#75E6FF"
+    position: 116, 92
+    size: 64, 44
+  firstSeparator:
+    color: "#75E6FF"
+    position: 100, 92
+    size: 20, 44
+  secondsLabel:
+    font:
+      path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-16.ttf
+      size: 24 # Should be 20, but 24 gives wanted result
+    color: "#75E6FF"
+    position: 180, 104
+    size: 40, 32
+
+- type: entity
+  parent: ClothingWristWatch
+  id: ClothingWristWatchGold
+  name: наручные часы командования
+  description: Показывают точное время. Произведено Нанотрейзен специально для командного состава.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/WristWatch/nt-watch-gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/WristWatch/nt-watch-gold.rsi
+  - type: WristWatch
+    style: NTDigitalGold
+  - type: StaticPrice
+    price: 2000
+  - type: StealTarget
+    stealGroup: WristWatchGold
+
+- type: wristWatchStyle
+  id: NTDigitalGold
+  panelTexture: /Textures/SS220/Interface/WristWatch/WristWatchPanelGold.png
+  panelSize: 256, 214
+  hoursLabel:
+    font:
+      path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-22.ttf
+      size: 33 # Should be 32, but 33 gives wanted result
+    color: "#DBD6BB"
+    position: 38, 92
+    size: 64, 44
+  minutesLabel:
+    color: "#DBD6BB"
+    position: 116, 92
+    size: 64, 44
+  firstSeparator:
+    color: "#DBD6BB"
+    position: 100, 92
+    size: 20, 44
+  secondsLabel:
+    font:
+      path: /Fonts/SS220/WristWatch/SS220-Watch-Digits-16.ttf
+      size: 24 # Should be 20, but 24 gives wanted result
+    color: "#DBD6BB"
+    position: 180, 104
+    size: 40, 32
+
+- type: entity
+  parent: ClothingWristWatch
+  id: ClothingWristWatchUssp
+  name: наручные часы "электроника"
+  description: Показывают точное время. Произведено в СССП.
+  components:
+  - type: WristWatch
+    style: UsspElectronika
+
+- type: wristWatchStyle
+  id: UsspElectronika
+  panelTexture: /Textures/SS220/Interface/WristWatch/WristWatchPanelElectronika.png
+  panelSize: 256, 214
+  hoursLabel:
+    font:
+      path: /Fonts/SS220/WristWatch/SS220-Electronika-Watch-Digits-20.ttf
+      size: 30 # Should be 28, but 30 gives wanted result
+    color: "#0E201C"
+    position: 48, 96
+    size: 64, 44
+  minutesLabel:
+    color: "#0E201C"
+    position: 116, 96
+    size: 64, 44
+  firstSeparator:
+    color: "#0E201C"
+    position: 102, 96
+    size: 20, 44
+  secondsLabel:
+    font:
+      path: /Fonts/SS220/WristWatch/SS220-Electronika-Watch-Digits-16.ttf
+      size: 24 # Should be 20, but 24 gives wanted result
+    color: "#0E201C"
+    position: 178, 104
+    size: 40, 32

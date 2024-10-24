@@ -1,0 +1,135 @@
+﻿- type: decal
+  id: TrimlineBoxOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_box
+
+- type: decal
+  id: TrimlineCornerNeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_corner_ne
+
+- type: decal
+  id: TrimlineCornerNwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_corner_nw
+
+- type: decal
+  id: TrimlineCornerSeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_corner_se
+
+- type: decal
+  id: TrimlineCornerSwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_corner_sw
+
+- type: decal
+  id: TrimlineEndEOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_end_e
+
+- type: decal
+  id: TrimlineEndNOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_end_n
+
+- type: decal
+  id: TrimlineEndSOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_end_s
+
+- type: decal
+  id: TrimlineEndWOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_end_w
+
+- type: decal
+  id: TrimlineInnerNeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_inner_ne
+
+- type: decal
+  id: TrimlineInnerNwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_inner_nw
+
+- type: decal
+  id: TrimlineInnerSeOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_inner_se
+
+- type: decal
+  id: TrimlineInnerSwOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_inner_sw
+
+- type: decal
+  id: TrimlineLineEOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_line_e
+
+- type: decal
+  id: TrimlineLineNOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_line_n
+
+- type: decal
+  id: TrimlineLineSOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_line_s
+
+- type: decal
+  id: TrimlineLineWOverlayGreyscale
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/trimline.rsi
+    state: trimline_line_w

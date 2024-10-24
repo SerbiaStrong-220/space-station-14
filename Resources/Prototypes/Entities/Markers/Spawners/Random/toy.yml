@@ -101,7 +101,7 @@
       - ToyFigurineLawyer
       - ToyFigurineCargoTech
       - ToyFigurineSalvage
-      - ToyFigurineQuartermaster   
+      - ToyFigurineQuartermaster
       - ToyFigurineChiefEngineer
       - ToyFigurineAtmosTech
       - ToyFigurineEngineer
@@ -134,5 +134,12 @@
       - ToyFigurineMouse
       - ToyFigurineHamlet
       - ToyFigurineThief
+      - ToyFigurineBlueShield #SS220-FigurineBlueShield
+      - ToyFigurineAdmiral #SS220-MewFigurine-Begin
+      - ToyFigurinediplomat
+      - ToyFigurineField0fficerCentcom
+      - ToyFigurine0fficerCentcom
+      - ToyFigurineSeniorScientist
+      - ToyFigurineZombie #SS220-MewFigurine-End
       chance: 0.90
       offset: 0.2

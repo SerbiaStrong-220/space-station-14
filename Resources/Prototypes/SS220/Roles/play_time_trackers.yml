@@ -12,3 +12,46 @@
 
 - type: playTimeTracker
   id: EventRole
+
+- type: playTimeTracker
+  id: JobMagistrate
+
+- type: playTimeTracker
+  id: JobSeniorEngineer
+
+- type: playTimeTracker
+  id: JobSeniorOfficer
+
+- type: playTimeTracker
+  id: JobSeniorPhysician
+
+- type: playTimeTracker
+  id: JobSeniorResearcher
+
+- type: playTimeTracker
+  id: JobSeniorService
+
+- type: playTimeTracker
+  id: Prisoner
+
+# Antags
+- type: playTimeTracker
+  id: AntagNukeops
+
+- type: playTimeTracker
+  id: AntagNukeopsMedic
+
+- type: playTimeTracker
+  id: AntagNukeopsCommander
+
+- type: playTimeTracker
+  id: AntagHeadRev
+
+- type: playTimeTracker
+  id: AntagTraitor
+
+- type: playTimeTracker
+  id: AntagThief
+
+- type: playTimeTracker
+  id: AntagInitialInfected

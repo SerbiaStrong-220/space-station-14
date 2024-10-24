@@ -1,12 +1,16 @@
 - type: vendingMachineInventory
   id: CigaretteMachineInventory
   startingInventory:
-    CigPackGreen: 2
-    CigPackRed: 2
-    CigPackBlue: 2
-    CigPackBlack: 2
-    CigPackMixed: 2
+#SS220 Cigarettes begin
+    CigPackGreen: 3
+    CigPackRed: 3
+    CigPackBlue: 3
+    CigPackBlack: 3
+    CigPackMixed: 3
+#SS220 Cigarettes end
     CigarCase: 1
+    SnuffBox: 2 #SS220-Snuff-box
+    Ashtray: 7 #SS220-Snuff-box
     SmokingPipeFilledTobacco: 1
     Vape: 1
     Matchbox: 5

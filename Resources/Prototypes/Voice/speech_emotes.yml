@@ -1,322 +1,306 @@
 # vocal emotes
 - type: emote
   id: Scream
+  name: chat-emote-name-scream
   category: Vocal
-  chatMessages: [кричит!] # Corvax-Localization
+  icon: Interface/Emotes/scream.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-scream"]
   chatTriggers:
     - scream
     - screams
-    - screams.
-    - screams!
     - screaming
     - screamed
     - shriek
     - shrieks
-    - shrieks.
-    - shrieks!
     - shrieking
     - shrieked
     - screech
     - screeches
-    - screeches.
-    - screeches!
     - screeching
     - screeched
     - yell
     - yells
-    - yells.
-    - yells!
     - yelled
     - yelling
     # Corvax-Localization-Start
     - крик
     - кричит
-    - кричит.
-    - кричит!
     - ор
     - орёт
-    - орёт.
-    - орёт!
     - визг
     - визжит
-    - визжит.
-    - визжит!
     # Corvax-Localization-End
 
 - type: emote
   id: Laugh
+  name: chat-emote-name-laugh
   category: Vocal
-  chatMessages: [смеётся] # Corvax-Localization
+  icon: Interface/Emotes/laugh.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-laugh"]
   chatTriggers:
     - laugh
     - laughs
-    - laughs.
-    - laughs!
     - laughing
     - laughed
-    - chuckle
-    - chuckles
-    - chuckles.
-    - chuckles!
-    - chuckled
-    - chuckling
     - chortle
-    - chortle.
-    - chortle!
     - chortles
-    - chortles.
-    - chortles!
     - chortling
-    - chortling.
-    - chortling!
     # Corvax-Localization-Start
     - смех
     - смеется
-    - смеется.
-    - смеется!
     - смеётся
-    - смеётся.
-    - смеётся!
     - хохот
     - хохочет
-    - хохочет.
-    - хохочет!
     - ржёт
     # Corvax-Localization-End
 
 - type: emote
   id: Honk
+  name: chat-emote-name-honk
   category: Vocal
-  chatMessages: [хонкает] # Corvax-Localization
+  icon: Interface/Emotes/honk.png
+  whitelist:
+    requireAll: true
+    components:
+    - Vocal
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-honk"]
+  chatTriggers:
+    - honk
+    - honks
+    - honked
+    - honking
+    # Corvax-Localization-Start
+    - хонк
+    # Corvax-Localization-End
 
 - type: emote
   id: Sigh
+  name: chat-emote-name-sigh
   category: Vocal
-  chatMessages: [вздыхает] # Corvax-Localization
+  icon: Interface/Emotes/sigh.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-sigh"]
   chatTriggers:
     - sigh
     - sighs
     - sighed
-    - sigh.
-    - sighs.
-    - sighed.
     # Corvax-Localization-Start
     - вздох
-    - вздох.
     - вздыхает
-    - вздыхает.
     - вздохнул
     - вздохнула
-    - вздохнул.
-    - вздохнула.
     # Corvax-Localization-End
 
 - type: emote
   id: Whistle
+  name: chat-emote-name-whistle
   category: Vocal
-  chatMessages: [whistle]
+  icon: Interface/Emotes/whistle.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-whistle"]
   chatTriggers:
     - whistle
-    - whistle.
-    - whistle!
     - whistles
-    - whistles.
-    - whistles!
     - whistleblowing
-    - whistleblowing.
-    - whistleblowing!
     #220-Localization-Start
     - свист
-    - свист.
-    - свист!
     - свистит
-    - свистит.
-    - свистит!
     - свистнул
-    - свистнул.
-    - свистнул.
     - свистнула
-    - свистнула.
-    - свистнула!
     - присвистнул
-    - присвистнул.
-    - присвистнул!
     - присвистнула
-    - присвистнула.
-    - присвистнула!
     #220-Localization-End
 
 - type: emote
   id: Crying
+  name: chat-emote-name-crying
   category: Vocal
-  chatMessages: [crying]
+  icon: Interface/Emotes/cry.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-crying"]
   chatTriggers:
     - cry
-    - cry.
-    - cry!
     - crying
-    - crying.
-    - crying!
     - cries
-    - cries.
-    - cries!
     - sob
-    - sob.
     - sobs
-    - sobs.
-    - sobs!
     - sobbing
-    - sobbing.
-    - sobbing!
     #220-Localization-Start
     - плач
-    - плач.
-    - плач!
     - плачет
-    - плачет.
-    - плачет!
     - рыдает
-    - рыдает.
-    - рыдает!
     - заплакал
-    - заплакал.
-    - заплакал!
     - заплакала
-    - заплакала.
-    - заплакала!
     - хныкает
-    - хныкает.
-    - хныкает!
     - хнычет
-    - хнычет.
-    - хнычет!
     #220-Localization-End
 
 - type: emote
   id: Squish
+  name: chat-emote-name-squish
   category: Vocal
-  chatMessages: [squishing]
+  available: false
+  icon: Interface/Emotes/squish.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-squish"]
   chatTriggers:
     - squish
-    - squish.
-    - squish!
     - squishing
-    - squishing.
-    - squishing!
     - squishes
-    - squishes.
-    - squishes!
     #220-Localization-Start
     - хлюп
-    - хлюп.
-    - хлюп!
     - хлюпает
-    - хлюпает.
-    - хлюпает!
     - хлюпнул
-    - хлюпнул.
-    - хлюпнул!
     - хлюпнула
-    - хлюпнула.
-    - хлюпнула!
     - хлюпнуло
-    - хлюпнуло.
-    - хлюпнуло!
     - хлюпнули
-    - хлюпнули.
-    - хлюпнули!
     #220-Localization-End
 
 - type: emote
   id: Chitter
+  name: chat-emote-name-chitter
   category: Vocal
-  chatMessages: [chitters.]
+  available: false
+  icon: Interface/Emotes/chitter.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-chitter"]
   chatTriggers:
    - chitter
-   - chitter.
-   - chitter!
    - chitters
-   - chitters.
-   - chitters!
    - chittered
-   - chittered.
-   - chittered!
    #220-Localization-Start
    - жужжание
-   - жужжание.
-   - жужжание!
    - жужжит
-   - жужжит.
-   - жужжит!
    #220-Localization-End
 
 - type: emote
   id: Squeak
+  name: chat-emote-name-squeak
   category: Vocal
-  chatMessages: [squeaks.]
+  available: false
+  icon: Interface/Emotes/squeak.png
+  whitelist:
+    components:
+      - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-squeak"]
   chatTriggers:
    - squeak
-   - squeak.
-   - squeak!
    - squeaks
-   - squeaks.
-   - squeaks!
    - squeaked
-   - squeaked.
-   - squeaked!
    #220-Localization-Start
    - скрип
-   - скрип.
-   - скрип!
    - скрипит
-   - скрипит.
-   - скрипит!
    #220-Localization-End
 
 - type: emote
   id: Click
+  name: chat-emote-name-click
   category: Vocal
-  chatMessages: [click.]
+  available: false
+  icon: Interface/Emotes/click.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-click"]
   chatTriggers:
    - click
-   - click.
-   - click!
    - clicks
-   - clicks.
-   - clicks!
 
 # hand emotes
 - type: emote
   id: Clap
+  name: chat-emote-name-clap
   category: Hands
-  chatMessages: [хлопает!] # Corvax-Localization
+  icon: Interface/Emotes/clap.png
+  whitelist:
+    components:
+    - Hands
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-clap"]
   chatTriggers:
     - clap
     - claps
-    - claps.
-    - claps!
     - clapping
     - clapped
     # Corvax-Localization-Start
     - хлопает
-    - хлопает.
-    - хлопает!
     - хлопнул
     - хлопнула
     - хлопает в ладоши
-    - хлопает в ладоши.
-    - хлопает в ладоши!
     - хлопнул в ладоши
     - хлопнула в ладоши
     - апплодирует
-    - апплодирует.
-    - апплодирует!
     # Corvax-Localization-End
 
 - type: emote
   id: Snap
+  name: chat-emote-name-snap
   category: Hands
-  chatMessages: [щёлкает пальцами] # Corvax-Localization
+  icon: Interface/Emotes/snap.png
+  whitelist:
+    components:
+    - Hands
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
   chatTriggers:
     - snap
     - snaps
@@ -324,141 +308,141 @@
     - snapped
     - snap fingers
     - snaps fingers
-    - snaps fingers.
-    - snaps fingers!
     - snaps their fingers
-    - snaps their fingers.
-    - snaps their fingers!
     - snapping fingers
     - snapped fingers
     # Corvax-Localization-Start
     - щелкает
-    - щелкает.
-    - щелкает!
     - щелкнул
     - щелкнула
     - щёлкает
-    - щёлкает.
-    - щёлкает!
     - щёлкнул
     - щёлкнула
     - щелкает пальцами
-    - щелкает пальцами.
-    - щелкает пальцами!
     - щелкнул пальцами
     - щелкнула пальцами
     - щёлкает пальцами
-    - щёлкает пальцами.
-    - щёлкает пальцами!
     - щёлкнул пальцами
     - щёлкнула пальцами
     # Corvax-Localization-End
 
 - type: emote
   id: Salute
+  name: chat-emote-name-salute
   category: Hands
-  chatMessages: [Salute]
+  icon: Interface/Emotes/salute.png
+  whitelist:
+    components:
+    - Hands
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-salute"]
   chatTriggers:
     - salute
-    - salute.
-    - salute!
     - salutes
-    - salutes.
-    - salutes!
     # Corvax-Localization-Start
     - салютует
-    - салютует.
-    - салютует!
     - отдаёт честь
-    - отдаёт честь.
-    - отдаёт честь!
     - отдал честь
-    - отдал честь.
-    - отдал честь!
     - отдала честь
-    - отдала честь.
-    - отдала честь!
     # Corvax-Localization-End
+
+#- type: emote SS220-gasp-emote begin
+#  id: Gasp
+#  name: chat-emote-name-gasp
+#  whitelist:
+#    components:
+#    - Respirator
+#  chatMessages: ["chat-emote-msg-gasp"]
+#  chatTriggers:
+#   - gasp
+#   - gasps
+#   - gasped
+# SS220-gasp-emote end
 
 - type: emote
   id: DefaultDeathgasp
-  chatMessages: ["emote-deathgasp"]
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  whitelist:
+    components:
+    - MobState
+  chatMessages: ["chat-emote-msg-deathgasp"]
   chatTriggers:
   - deathgasp
 
 # SS220 Fard emote :DD
 - type: emote
   id: Fart
-  chatMessages: ["пердит!"]
+  name: chat-emote-name-fart
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-fart"]
   chatTriggers:
   - fart
   - farted
   - пук
   - пукнул
-  - пукнул.
-  - пукнул!
   - пукнула
-  - пукнула.
-  - пукнула!
   - пердит
-  - пердит.
-  - пердит!
   - пернул
-  - пернул.
-  - пернул!
   - пёрнул
-  - пернул.
-  - пёрнул!
   - пернула
-  - пернула.
-  - пернула!
   - пёрнула
-  - пернула.
-  - пёрнула!
   - перданул
-  - перданул.
-  - перданул!
   - перданула
-  - перданула.
-  - перданула!
   - бздит
-  - бздит.
-  - бздит!
   - бзданул
-  - бзданул.
-  - бзданул!
   - бзданула
-  - бзданула.
-  - бзданула!
 
 #SS220 giggle
 - type: emote
   id: Giggle
-  chatMessages: ["хихикает"]
+  name: chat-emote-name-giggle
+  icon: Interface/Emotes/laugh.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-giggle"]
   chatTriggers:
   - хихикает
-  - хихикает.
-  - хихикает!
   - хихикнул
   - хихикнула
   - giggle
   - giggles
-  - giggles.
-  - giggles!
   - giggling
   - giggled
+  - chuckle
+  - chuckles
+  - chuckled
+  - chuckling
 
 #SS220 Hiss for felinids and lizards
 - type: emote
   id: Hiss
+  name: chat-emote-name-hiss
   category: Vocal
-  chatMessages: ["шипит!"]
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+  chatMessages: ["chat-emote-msg-hiss"]
   chatTriggers:
   - шипение
   - шипят
   - шипит
-  - шипит.
-  - шипит!
   - прошипела
   - прошипел
   - прошипели
@@ -467,42 +451,148 @@
   - зашипел
   - зашипела
   - hiss
-  - hiss!
-  - hiss.
   - hissing
 
 - type: emote
+  id: MonkeyDeathgasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: ["chat-emote-msg-deathgasp-monkey"]
+
+- type: emote
   id: Buzz
+  name: chat-emote-name-buzz
   category: Vocal
-  chatMessages: [buzz!]
+  icon: Interface/Emotes/buzz.png
+  whitelist:
+    requireAll: true
+    components:
+    - BorgChassis
+    - Vocal
+  chatMessages: ["chat-emote-msg-buzz"]
   chatTriggers:
     - buzzing
-    - buzzing!
-    - buzzing.
     - buzz
-    - buzz.
-    - buzz!
     - buzzed
-    - buzzed.
-    - buzzed!
     - buzzes
-    - buzzes.
-    - buzzes!
+
+- type: emote
+  id: Weh
+  name: chat-emote-name-weh
+  category: Vocal
+  icon: Interface/Emotes/weh.png
+  chatMessages: [издаёт вех!]
 
 - type: emote
   id: Chirp
+  name: chat-emote-name-chirp
   category: Vocal
-  chatMessages: [chirps!]
+  icon: Interface/Emotes/chirp.png
+  whitelist:
+    requireAll: true
+    components:
+    - Nymph
+  chatMessages: ["chat-emote-msg-chirp"]
   chatTriggers:
     - chirp
-    - chirp!
-    - chirp.
     - chirps
-    - churps.
-    - chirps!
     - chirped
-    - chirped.
-    - chirped!
     - chirping
-    - chirping.
-    - chirping!
+    # Corvax-Localization-Start
+    - чирикает
+    # Corvax-Localization-End
+
+- type: emote
+  id: Beep
+  name: chat-emote-name-beep
+  category: Vocal
+  icon: Interface/Emotes/beep.png
+  whitelist:
+    requireAll: false # SS220 false TODO borg emotes to PAI
+    components:
+    - BorgChassis
+    - PAI # SS220 TODO borg emotes to PAI
+#    - Vocal # SS220 TODO borg emotes to PAI
+  chatMessages: ["chat-emote-msg-beep"]
+  chatTriggers:
+    - beep
+    - beeps
+    - beeped
+    - beeping
+    # Corvax-Localization-Start
+    - бип
+    # Corvax-Localization-End
+
+- type: emote
+  id: Chime
+  name: chat-emote-name-chime
+  category: Vocal
+  icon: Interface/Emotes/chime.png
+  whitelist:
+    requireAll: false # SS220 false TODO borg emotes to PAI
+    components:
+    - BorgChassis
+    - PAI # SS220 TODO borg emotes to PAI
+#    - Vocal # SS220 TODO borg emotes to PAI
+  chatMessages: ["chat-emote-msg-chime"]
+  chatTriggers:
+    - chime
+    - chimes
+    - chimed
+    - chiming
+    # Corvax-Localization-Start
+    - дзынь
+    # Corvax-Localization-End
+
+- type: emote
+  id: Buzz-Two
+  name: chat-emote-name-buzztwo
+  category: Vocal
+  icon: Interface/Emotes/buzztwo.png
+  whitelist:
+    requireAll: false # SS220 false TODO borg emotes to PAI
+    components:
+    - BorgChassis
+    - PAI # SS220 TODO borg emotes to PAI
+#    - Vocal # SS220 TODO borg emotes to PAI
+  chatMessages: ["chat-emote-msg-buzzestwo"]
+  chatTriggers:
+    - buzztwice
+    - buzzstwice
+    - buzzestwice
+    - buzzingtwice
+    - buzzedtwice
+    - buzz twice
+    - buzzs twice
+    - buzzes twice
+    - buzzing twice
+    - buzzed twice
+    # Corvax-Localization-Start
+    - бипбуп
+    - бип буп
+    - бип-буп
+    - бипбип
+    - бип бип
+    - бип-бип
+    # Corvax-Localization-End
+
+- type: emote
+  id: Ping
+  name: chat-emote-name-ping
+  category: Vocal
+  icon: Interface/Emotes/ping.png
+  whitelist:
+    requireAll: false # SS220 false TODO borg emotes to PAI
+    components:
+    - BorgChassis
+    - PAI # SS220 TODO borg emotes to PAI
+#    - Vocal # SS220 TODO borg emotes to PAI
+  chatMessages: ["chat-emote-msg-ping"]
+  chatTriggers:
+    - ping
+    - pings
+    - pinged
+    - pinging
+    # Corvax-Localization-Start
+    - пинг
+    # Corvax-Localization-End

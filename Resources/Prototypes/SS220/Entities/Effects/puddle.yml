@@ -1,0 +1,103 @@
+- type: entity
+  id: PuddleSpaceUp
+  parent: PuddleTemporary
+  suffix: SpaceUp
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: SpaceUp
+          Quantity: 15
+
+- type: entity
+  id: PuddlePowerGame
+  parent: PuddleTemporary
+  suffix: PowerGame
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: PwrGame
+          Quantity: 15
+
+- type: entity
+  id: PuddleFourteenLoko
+  parent: PuddleTemporary
+  suffix: FourteenLoko
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: FourteenLoko
+          Quantity: 15
+
+- type: entity
+  id: PuddleLemonLime
+  parent: PuddleTemporary
+  suffix: LemonLime
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: LemonLime
+          Quantity: 15
+
+- type: entity
+  id: PuddleSolDry
+  parent: PuddleTemporary
+  suffix: SolDry
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: SolDry
+          Quantity: 15
+
+- type: entity
+  id: PuddleIcedTea
+  parent: PuddleTemporary
+  suffix: IcedTea
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: IcedTea
+          Quantity: 15
+
+- type: entity
+  id: PuddleRootBeer
+  parent: PuddleTemporary
+  suffix: RootBeer
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: RootBeer
+          Quantity: 15
+
+- type: entity
+  id: PuddleCola
+  parent: PuddleTemporary
+  suffix: Cola
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: Cola
+          Quantity: 15

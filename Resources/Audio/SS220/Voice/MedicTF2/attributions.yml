@@ -1,0 +1,15 @@
+- files:
+  - medic_giggle_1.ogg
+  - medic_giggle_2.ogg
+  - medic_laugh_1.ogg
+  - medic_laugh_2.ogg
+  - medic_laugh_3.ogg
+  - medic_laugh_4.ogg
+  - medic_laugh_5.ogg
+  - medic_scream_1.ogg
+  - medic_scream_2.ogg
+  - medic_scream_3.ogg
+  - medic_scream_4.ogg
+  license: "CC-BY-4.0"
+  copyright: "Modified by SkaldetSkaeg (Github), shortened, converted to OGG."
+  source: "https://wiki.teamfortress.com/wiki/Medic_responses"

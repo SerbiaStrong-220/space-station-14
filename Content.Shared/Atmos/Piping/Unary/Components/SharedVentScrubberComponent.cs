@@ -49,6 +49,25 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         };
         //SS220-AirAlarm end
 
+        //SS220-scrubber-mode begin
+        [NetSerializable]
+        public enum ScrubberFilter
+        {
+            Default,
+            Basa,
+            Full,
+            Panic
+        }
+
+        public static readonly Dictionary<ScrubberFilter, HashSet<Gas>> ScrubberFilters = new()
+        {
+            { ScrubberFilter.Default, DefaultFilterGases },
+            { ScrubberFilter.Basa, DefaultBasaFilterGases },
+            { ScrubberFilter.Full, DefaultFullFilterGases },
+            { ScrubberFilter.Panic, DefaultPanicFilterGases }
+        };
+        //SS220-scrubber-mode end
+
         // Presets for 'dumb' air alarm modes
 
         public static GasVentScrubberData FilterModePreset = new GasVentScrubberData

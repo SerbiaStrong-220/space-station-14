@@ -1,0 +1,107 @@
+- type: entity
+  name: спавнер случайный поддон
+  id: PalletSpawnerRandomSheet
+  parent: MarkerBase
+  suffix: Сталь, пласталь, пластик, плазма, стекло
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/Sheets/metal.rsi
+          state: steel_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - Pallet
+      rareChance: 0.03
+      prototypes:
+        - PalletBoxSteel
+        - PalletBoxPlasteel
+        - PalletBoxPlastic
+        - PalletBoxPlasma
+        - PalletBoxGlass
+      chance: 0.97
+      offset: 0
+
+- type: entity
+  name: спавнер случайный поддон
+  id: PalletSpawnerRandomGlass
+  parent: MarkerBase
+  suffix: Стекло
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/Sheets/glass.rsi
+          state: glass_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - Pallet
+        - PalletBoxRGlass
+        - PalletBoxRPGlass
+        - PalletBoxRUGlass
+      rareChance: 0.4
+      prototypes:
+        - PalletBoxGlass
+        - PalletBoxPGlass
+        - PalletBoxUGlass
+      chance: 0.6
+      offset: 0
+
+- type: entity
+  name: спавнер случайный поддон
+  id: PalletSpawnerRandomOrganic
+  parent: MarkerBase
+  suffix: Органика
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/materials.rsi
+          state: wood_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - Pallet
+        - PalletBoxBiomass
+      rareChance: 0.03
+      prototypes:
+        - PalletBoxCloth
+        - PalletBoxDurathread
+        - PalletBoxWoodPlank
+        - PalletBoxCardboard
+      chance: 0.97
+      offset: 0
+
+- type: entity
+  name: спавнер случайный поддон
+  id: PalletSpawnerRandom
+  parent: MarkerBase
+  suffix: Любой
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/Sheets/metal.rsi
+          state: plasteel_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - Pallet
+        - PalletBoxBiomass
+        - PalletBoxRGlass
+        - PalletBoxRPGlass
+        - PalletBoxRUGlass
+      rareChance: 0.03
+      prototypes:
+        - PalletBoxSteel
+        - PalletBoxPlasteel
+        - PalletBoxPlastic
+        - PalletBoxPlasma
+        - PalletBoxGlass
+        - PalletBoxPGlass
+        - PalletBoxUGlass
+        - PalletBoxUranium
+        - PalletBoxCloth
+        - PalletBoxDurathread
+        - PalletBoxWoodPlank
+        - PalletBoxCardboard
+      chance: 0.97
+      offset: 0

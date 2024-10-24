@@ -3,6 +3,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Content.Shared.SS220.Radio;
 using Content.Shared.Radio;
+
 namespace Content.Shared.SS220.Radio.Components;
 
 /// <summary>
@@ -22,4 +23,13 @@ public sealed partial class HandheldRadioComponent : Component
     /// </summary>
     [DataField("supportedChannels", customTypeSerializer: typeof(PrototypeIdListSerializer<RadioChannelPrototype>))]
     public List<string> SupportedChannels = new();
+
+    /// <summary>
+    /// Bordering radio channel
+    /// </summary>
+    [DataField("lowerBorder"), ViewVariables(VVAccess.ReadWrite)]
+    public int LowerFrequencyBorder = 1390;
+
+    [DataField("upperBorder"), ViewVariables(VVAccess.ReadWrite)]
+    public int UpperFrequencyBorder = 1399;
 }

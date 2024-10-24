@@ -18,7 +18,6 @@
 Технологии распределены по 5 различным дисциплинам:
 <Box>
   <GuideEntityEmbed Entity="Wrench" Caption="Промышленность"/>
-  <GuideEntityEmbed Entity="Syringe" Caption="Биохимия"/>
   <GuideEntityEmbed Entity="WeaponTetherGun" Caption="Экспериментальное"/>
   <GuideEntityEmbed Entity="ComputerTelevision" Caption="Обслуживание персонала"/>
   <GuideEntityEmbed Entity="WeaponXrayCannon" Caption="Арсенал"/>

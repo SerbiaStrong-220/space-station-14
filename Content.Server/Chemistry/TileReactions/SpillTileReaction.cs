@@ -8,6 +8,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Slippery;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Whitelist; //SS220 Flying mobs slowdown fix
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 
@@ -26,15 +27,27 @@ namespace Content.Server.Chemistry.TileReactions
         /// </summary>
         [DataField("superSlippery")] private bool _superSlippery;
 
-        public FixedPoint2 TileReact(TileRef tile, ReagentPrototype reagent, FixedPoint2 reactVolume)
+        //SS220 Flying mobs slowdown fix begin
+        private readonly EntityWhitelist _ignoreWhitelist = new()
+        {
+            Components = new[]
+            {
+                "IgnoreOnfloorSlowers"
+            }
+        };
+        //SS220 Flying mobs slowdown fix end
+
+        public FixedPoint2 TileReact(TileRef tile,
+            ReagentPrototype reagent,
+            FixedPoint2 reactVolume,
+            IEntityManager entityManager,
+            List<ReagentData>? data)
         {
             if (reactVolume < 5)
                 return FixedPoint2.Zero;
 
-            var entityManager = IoCManager.Resolve<IEntityManager>();
-
             if (entityManager.EntitySysManager.GetEntitySystem<PuddleSystem>()
-                .TrySpillAt(tile, new Solution(reagent.ID, reactVolume), out var puddleUid, false, false))
+                .TrySpillAt(tile, new Solution(reagent.ID, reactVolume, data), out var puddleUid, false, false))
             {
                 var slippery = entityManager.EnsureComponent<SlipperyComponent>(puddleUid);
                 slippery.LaunchForwardsMultiplier = _launchForwardsMultiplier;
@@ -45,9 +58,10 @@ namespace Content.Server.Chemistry.TileReactions
                 var step = entityManager.EnsureComponent<StepTriggerComponent>(puddleUid);
                 entityManager.EntitySysManager.GetEntitySystem<StepTriggerSystem>().SetRequiredTriggerSpeed(puddleUid, _requiredSlipSpeed, step);
 
-                var slow = entityManager.EnsureComponent<SlowContactsComponent>(puddleUid);
+                var slow = entityManager.EnsureComponent<SpeedModifierContactsComponent>(puddleUid);
                 var speedModifier = 1 - reagent.Viscosity;
-                entityManager.EntitySysManager.GetEntitySystem<SlowContactsSystem>().ChangeModifiers(puddleUid, speedModifier, slow);
+                entityManager.EntitySysManager.GetEntitySystem<SpeedModifierContactsSystem>().ChangeModifiers(puddleUid, speedModifier, slow);
+                entityManager.EntitySysManager.GetEntitySystem<SpeedModifierContactsSystem>().SetWhitelist(puddleUid, _ignoreWhitelist, slow); //SS220 Flying mobs slowdown fix
 
                 return reactVolume;
             }

@@ -34,8 +34,9 @@ public static class BanPanelEuiStateMsg
         public bool UseLastHwid { get; set; }
         public int StatedRound { get; set; }
         public bool Erase { get; set; }
+        public bool PostBanInfo { get; set; } // SS220 Post ban info option
 
-        public CreateBanRequest(string? player, (IPAddress, int)? ipAddress, bool useLastIp, byte[]? hwid, bool useLastHwid, uint minutes, string reason, NoteSeverity severity, int statedRound, string[]? roles, bool erase)
+        public CreateBanRequest(string? player, (IPAddress, int)? ipAddress, bool useLastIp, byte[]? hwid, bool useLastHwid, uint minutes, string reason, NoteSeverity severity, int statedRound, string[]? roles, bool erase, bool postBanInfo)
         {
             Player = player;
             IpAddress = ipAddress == null ? null : $"{ipAddress.Value.Item1}/{ipAddress.Value.Item2}";
@@ -48,6 +49,7 @@ public static class BanPanelEuiStateMsg
             Roles = roles;
             StatedRound = statedRound;
             Erase = erase;
+            PostBanInfo = postBanInfo;
         }
     }
 

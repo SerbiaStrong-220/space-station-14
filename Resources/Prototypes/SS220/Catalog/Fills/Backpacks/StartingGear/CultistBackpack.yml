@@ -1,0 +1,8 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: ClothingBackpack
+  id: ClothingCultistBackpack
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity

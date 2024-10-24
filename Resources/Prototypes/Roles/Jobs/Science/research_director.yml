@@ -7,6 +7,12 @@
     - !type:DepartmentTimeRequirement
       department: Science
       time: 180000 # SS220-RoleTime
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
@@ -19,6 +25,7 @@
   - Maintenance
   - ResearchDirector
   - Brig
+  - Cryogenics
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,12 +34,8 @@
 - type: startingGear
   id: ResearchDirectorGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitResearchDirector
-    back: ClothingBackpackResearchDirectorFilled
-    shoes: ClothingShoesColorBrown
-    outerClothing: ClothingOuterCoatRD
-    id: RnDPDA
+    #id: RnDPDA #SS220-RD-New-Loadout
     ears: ClothingHeadsetRD
-  innerClothingSkirt: ClothingUniformJumpskirtResearchDirector
-  satchel: ClothingBackpackSatchelResearchDirectorFilled
-  duffelbag: ClothingBackpackDuffelResearchDirectorFilled
+  storage:
+    back:
+    - Flash

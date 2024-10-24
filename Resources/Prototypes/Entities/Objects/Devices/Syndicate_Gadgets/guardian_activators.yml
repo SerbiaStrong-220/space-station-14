@@ -1,7 +1,7 @@
 - type: entity
   name: holoparasite injector
   id: HoloparasiteInjector
-  parent: BaseItem
+  parent: [BaseItem]
   description: A complex artwork of handheld machinery allowing the user to host a holoparasite guardian.
   components:
   - type: Sprite
@@ -9,6 +9,27 @@
     state: combat_hypo
   - type: GuardianCreator
     guardianProto: MobHoloparasiteGuardian
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-HoloparasiteInjector-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-HoloparasiteInjector-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: corvax-hidden-desc-IllegalImplants-medical
+      jobRequired:
+        - Paramedic
+        - MedicalDoctor
+        - ChiefMedicalOfficer
+        - Brigmedic #SS220 brigmedic implanters fix
+# Corvax-HiddenDesc-End
 
 - type: entity
   name: holoclown injector
@@ -18,6 +39,27 @@
   components:
   - type: GuardianCreator
     guardianProto: MobHoloClownGuardian
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-HoloClownInjector-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-HoloClownInjector-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: corvax-hidden-desc-IllegalImplants-medical
+      jobRequired:
+        - Paramedic
+        - MedicalDoctor
+        - ChiefMedicalOfficer
+        - Brigmedic #SS220 brigmedic implanters fix
+# Corvax-HiddenDesc-End
 
 - type: entity
   name: magical lamp
@@ -34,9 +76,9 @@
 
 - type: entity
   name: holoparasite box
-  parent: BoxCardboard
+  parent: [BoxCardboard]
   id: BoxHoloparasite
-  description: A box containing a holoparasite injector
+  description: A box containing a holoparasite injector.
   components:
   - type: StorageFill
     contents:
@@ -50,9 +92,9 @@
 
 - type: entity
   name: holoclown box
-  parent: BoxCardboard
+  parent: [BoxCardboard]
   id: BoxHoloclown
-  description: A box containing a holoclown injector
+  description: A box containing a holoclown injector.
   components:
   - type: StorageFill
     contents:

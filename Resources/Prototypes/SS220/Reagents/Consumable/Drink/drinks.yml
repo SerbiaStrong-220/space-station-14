@@ -1,0 +1,106 @@
+- type: reagent
+  id: AppleCompote
+  name: reagent-name-apple-compote
+  parent: BaseDrink
+  desc: reagent-desc-apple-compote
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: juice
+  color: "#ffb51c"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
+    state: icon
+
+- type: reagent
+  id: BerryСompote
+  name: reagent-name-berry-compote
+  parent: BaseDrink
+  desc: reagent-desc-berry-compote
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: juice
+  color: "#f04737"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
+    state: icon   
+
+#Bankate
+- type: reagent
+  id: BankateDrink
+  name: reagent-name-bankate
+  parent: BaseDrink
+  desc: reagent-desc-bankate
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: horrible
+  color: "#dfe15f"
+  recognizable: true
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_bankate.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Caustic: 0.3
+      - !type:PopupMessage
+        messages: [ "жидкость жжётся!" ]
+        visualType: MediumCaution
+        probability: 0.3
+        type: Local
+
+- type: reagent
+  id: HotArachne
+  name: reagent-name-hot-arachne
+  parent: BaseDrink
+  desc: reagent-desc-hot-arachne
+  physicalDesc: reagent-physical-desc-murky
+  flavor: alcohol
+  color: "#f04737"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.07
+    Poison:
+      effects:
+      - !type:AdjustTemperature
+        amount: 250 # thermal energy, not temp
+      - !type:PopupMessage
+        type: Local
+        messages: [ "capsaicin-effect-light-burn" ]
+        probability: 0.2
+
+- type: reagent
+  id: Eggnog
+  name: reagent-name-eggnog
+  parent: BaseDrink
+  desc: reagent-desc-eggnog
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: milk
+  color: "#ffb51c"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1

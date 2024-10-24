@@ -1,0 +1,42 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: TechnicalAssistantTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobTechnicalAssistant
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: TechnicalAssistantJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TechnicalAssistantTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorYellow
+
+- type: loadout
+  id: TechnicalAssistantJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TechnicalAssistantTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorYellow
+
+- type: loadout
+  id: TechnicalAssistantJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TechnicalAssistantTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorYellow
+
+- type: loadout
+  id: TechnicalAssistantJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TechnicalAssistantTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorYellow

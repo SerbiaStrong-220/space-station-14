@@ -1,0 +1,491 @@
+# White Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorWhite
+  name: white jumpskirt
+  description: A generic white jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+    - state: trinkets-alt-icon #SS220-reSpriteColorUniforms
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: trinkets-alt-inhand-left #SS220reSpriteColorUniforms
+      right:
+      - state: inhand-right
+      - state: trinkets-alt-inhand-right #SS220reSpriteColorUniforms
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+      - state: trinkets-alt-equipped-INNERCLOTHING #SS220reSpriteColorUniforms
+
+# Grey Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorGrey
+  name: grey jumpskirt
+  description: A tasteful grey jumpskirt that reminds you of the good old days.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#b1b1b1" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#b1b1b1" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#b1b1b1" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#b1b1b1" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Black Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorBlack
+  name: black jumpskirt
+  description: A generic black jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#39393f" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#39393f" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#39393f" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#39393f" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Blue Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorBlue
+  name: blue jumpskirt
+  description: A generic blue jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#1d79bf" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1d79bf" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1d79bf" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1d79bf" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Dark Blue Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorDarkBlue
+  name: dark blue jumpskirt
+  description: A generic dark blue jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#1d32bf" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1d32bf" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1d32bf" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1d32bf" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Teal Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorTeal
+  name: teal jumpskirt
+  description: A generic teal jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#1bc185" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1bc185" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1bc185" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1bc185" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Green Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorGreen
+  name: green jumpskirt
+  description: A generic green jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#7cbf7c" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#7cbf7c" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#7cbf7c" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#7cbf7c" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+ # Dark Green Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorDarkGreen
+  name: dark green jumpskirt
+  description: A generic dark green jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#1dbf1d" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1dbf1d" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#1dbf1d" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#1dbf1d" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Orange Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorOrange
+  name: orange jumpskirt
+  description: Don't wear this near paranoid security officers.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#c14d1b" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c14d1b" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c14d1b" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c14d1b" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Pink Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorPink
+  name: pink jumpskirt
+  description: Just looking at this makes you feel <i>fabulous</i>.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#cc5c90" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#cc5c90" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#cc5c90" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#cc5c90" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Red Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorRed
+  name: red jumpskirt
+  description: A generic red jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#c11b1b" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c11b1b" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c11b1b" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c11b1b" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Yellow Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorYellow
+  name: yellow jumpskirt
+  description: A generic yellow jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#c1bd1b" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c1bd1b" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c1bd1b" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c1bd1b" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Purple Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorPurple
+  name: purple jumpskirt
+  description: A generic light purple jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#841dbf" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#841dbf" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#841dbf" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#841dbf" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Light Brown Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorLightBrown
+  name: light brown jumpskirt
+  description: A generic light brown jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#bf7442" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#bf7442" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#bf7442" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#bf7442" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Brown Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorBrown
+  name: brown jumpskirt
+  description: A generic brown jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#bf977c" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#bf977c" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#bf977c" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#bf977c" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING
+
+# Maroon Jumpskirt
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtColorMaroon
+  name: maroon jumpskirt
+  description: A generic maroon jumpskirt with no rank markings.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    layers:
+    - state: icon
+      color: "#bf1d58" #SS220reSpriteColorUniforms
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#bf1d58" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#bf1d58" #SS220reSpriteColorUniforms
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#bf1d58" #SS220reSpriteColorUniforms
+      - state: trinkets-equipped-INNERCLOTHING

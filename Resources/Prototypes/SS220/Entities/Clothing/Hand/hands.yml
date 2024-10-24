@@ -1,0 +1,69 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingHandsGlovesCaptain
+  id: ClothingHandsWhiteGlovesCaptain
+  name: белые перчатки капитана
+  description: Дорогие перчатки ветерана флотской службы NT.
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/whitecapgloves.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/whitecapgloves.rsi
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesCentcom
+  name: centcom gloves
+  description: A pair of high-quality thick centcom gloves decorated with gold embroidery.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/centcom_officer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/centcom_officer.rsi
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+  - type: Insulated
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesNanotrasenDiplomat
+  name: nanotrasen diplomat gloves
+  description: A pair of high-quality white thick gloves decorated with gold embroidery, which are issued to a Nanotrasen diplomat.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/nanotrasen_diplomat.rsi
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+  - type: Insulated
+
+- type: entity
+  parent: ClothingHandsGlovesJanitor
+  id: ClothingHandsGlovesOrangeJanitor
+  name: оранжевые резиновые перчатки
+  description: Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
+
+- type: entity
+  parent: ClothingHandsGlovesJanitor
+  id: ClothingHandsGlovesJanitorJR
+  name: black rubber gloves Junk Recycles
+  description: Cleaning gloves with an additional protective coating. They've seen so much...
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi

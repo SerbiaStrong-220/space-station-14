@@ -1,0 +1,156 @@
+- type: microwaveMealRecipe
+  id: RecipeCheburek
+  name: Cheburek recipe
+  result: FoodCheburek
+  time: 15
+  reagents:
+    TableSalt: 5  
+  solids:
+    FoodDough: 1
+    FoodMeatCutlet: 1
+    FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeShawarma
+  name: Shawarma recipe
+  result: FoodShawarma
+  time: 15
+  reagents:
+    Mayo: 5  
+  solids:
+    FoodDough: 1
+    FoodMeatChicken: 1
+    FoodCabbage: 1
+    FoodTomato: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBorsch
+  name: Borsch recipe
+  result: FoodSoupBeet
+  time: 10
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatCutlet: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    Foodbeet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeShchi
+  name: Shchi recipe
+  result: FoodSoupShchi
+  time: 10
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatCutlet: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOkroshka
+  name: Okroshka recipe
+  result: FoodSoupOkroshka
+  time: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChicken: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodEggBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOkroshkaKvass
+  name: Okroshka witch kvass recipe
+  result: FoodSoupOkroshkaKvass
+  time: 10
+  reagents:
+    Kvass: 10  
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChicken: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodEggBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeVinaigrette
+  name: Vinaigrette recipe
+  result: FoodSaladVinaigrette
+  time: 10
+  solids:
+    FoodBowlBig: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    Foodbeet: 1
+    FoodPeaPod: 1
+    FoodCarrot: 1
+
+# SS220-Salami-update begin
+- type: microwaveMealRecipe
+  id: RecipeMeatSalami
+  name: Salami recipe
+  result: FoodMeatSalami
+  time: 30
+  reagents:
+    SodiumHydroxide: 10
+  solids:
+    FoodMeat: 3
+    FoodEgg: 2
+# SS220 Salami-update end
+
+# SS220 Slimesoup-recipe begin
+- type: microwaveMealRecipe
+  id: RecipeSlimeSoup
+  name: slime soup recipe
+  result: FoodSoupSlime
+  time: 10
+  reagents:
+    Water: 5
+    Slime: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatSlime: 1
+# SS220 Slimesoup-recipe end
+
+#SS220 Nachos-recipe begin
+- type: microwaveMealRecipe
+  id: RecipeNachos
+  name: nachos recipe
+  result: FoodMealNachos
+  time: 10
+  reagents:
+    Blackpepper: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+
+- type: microwaveMealRecipe
+  id: RecipeNachosCheesy
+  name: nachos cheesy recipe
+  result: FoodMealNachosCheesy
+  time: 15
+  reagents:
+    Blackpepper: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+    FoodCheeseSlice: 2
+
+- type: microwaveMealRecipe
+  id: RecipeNachosCuban
+  name: nachos cuban recipe
+  result: FoodMealNachosCuban
+  time: 15
+  reagents:
+    Hotsauce: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+    FoodCheeseSlice: 1
+#SS220 Nachos-recipe end

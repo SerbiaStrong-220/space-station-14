@@ -117,19 +117,16 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (TryGetConsoleActiveRecordKey((uid, component)) is not { } key)
             return;
 
-        if (args.Session.AttachedEntity is not { } user)
-            return;
-
-        if (!_accessReader.IsAllowed(user, uid))
+        if (!_accessReader.IsAllowed(args.Actor, uid))
         {
-            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: user);
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: args.Actor);
             return;
         }
 
         var currentTime = _gameTicker.RoundDuration();
         if (component.LastEditTime != null && component.LastEditTime + component.EditCooldown - CooldownLagTolerance > currentTime)
         {
-            _popup.PopupEntity(Loc.GetString("criminal-status-cooldown-popup"), uid, args.Session);
+            _popup.PopupEntity(Loc.GetString("criminal-status-cooldown-popup"), uid, args.Actor);
             return;
         }
 
@@ -140,7 +137,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         // get previous record so we can compare criminal status later
         _criminalRecord.TryGetLastRecord(key, out var generalRecord, out var prevRecord);
 
-        if (!_criminalRecord.AddCriminalRecordStatus(key, messageCut, args.StatusTypeId, args.Session))
+        if (!_criminalRecord.AddCriminalRecordStatus(key, messageCut, args.StatusTypeId, args.Actor))
             return;
 
         // compare criminal state and report on radio that it was changed
@@ -173,16 +170,13 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (TryGetConsoleActiveRecordKey(entity) is not { } key)
             return;
 
-        if (args.Session.AttachedEntity is not { } user)
-            return;
-
-        if (!_accessReader.IsAllowed(user, entity))
+        if (!_accessReader.IsAllowed(args.Actor, entity))
         {
-            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), entity.Owner, recipient: user);
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), entity.Owner, recipient: args.Actor);
             return;
         }
 
-        if (!_criminalRecord.RemoveCriminalRecordStatus(key, args.Time, args.Session))
+        if (!_criminalRecord.RemoveCriminalRecordStatus(key, args.Time, args.Actor))
             return;
 
         _audio.PlayPvs(entity.Comp.DatabaseActionSound, entity);
@@ -209,41 +203,14 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         var listing = new Dictionary<uint, CriminalRecordShort>();
 
-        var testRecordsAdded = true;
         foreach (var (key, record) in consoleRecords)
         {
             var shortRecord = new CriminalRecordShort(record, console.IsSecurity);
             listing.Add(key, shortRecord);
-
-            //Add test trash records
-            if (!testRecordsAdded)
-            {
-                testRecordsAdded = true;
-                var prototypeMan = IoCManager.Resolve<IPrototypeManager>();
-                var jobs = prototypeMan.EnumeratePrototypes<JobPrototype>().ToList();
-                var rand = new Random();
-                for (var i = 0; i < 100; i++)
-                {
-                    var altkey = (uint) (key + 100 + i);
-                    var altRecord = new CriminalRecordShort(record);
-                    var jobIndex = rand.Next(jobs.Count);
-                    altRecord.JobPrototype = jobs[jobIndex].ID;
-                    altRecord.DNA = Guid.NewGuid().ToString();
-                    altRecord.Fingerprints = Guid.NewGuid().ToString();
-                    listing.Add(altkey, altRecord);
-                }
-            }
         }
 
         if (listing.Count == 0)
-        {
             console.ActiveKey = null;
-            Logger.DebugS("TEST","EMPTY LISTING!");
-        }
-        else
-        {
-            Logger.DebugS("TEST","LISTING: " + listing.Count.ToString());
-        }
 
         GeneralStationRecord? selectedRecord = null;
         if (TryGetConsoleActiveRecordKey((uid, console)) is { } activeKey)
@@ -260,7 +227,6 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
     private void SetStateForInterface(EntityUid uid, CriminalRecordConsoleState newState)
     {
-        Logger.DebugS("TEST","STATE UPDATE!");
-        _userInterface.TrySetUiState(uid, CriminalRecordsUiKey.Key, newState);
+        _userInterface.SetUiState(uid, CriminalRecordsUiKey.Key, newState);
     }
 }

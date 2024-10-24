@@ -11,9 +11,26 @@
   cost: 7500
   recipeUnlocks:
   - MiningDrill
+  - MineralScannerEmpty
   - BorgModuleMining
+  - BorgModuleGrapplingGun
   - OreProcessorIndustrialMachineCircuitboard
-  - OreBagOfHolding
+  - ClothingMaskWeldingGas
+  - ClothingEyesHudSupply #ss220 HUD CARGO ADD
+
+- type: technology
+  id: SpaceScanning
+  name: research-technology-space-scanning
+  icon:
+    sprite: Objects/Tools/handheld_mass_scanner.rsi
+    state: icon
+  discipline: Industrial
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - RadarConsoleCircuitboard
+  - HandHeldMassScanner
+  - BorgModuleGPS
 
 - type: technology
   id: AdvancedPowercells
@@ -52,6 +69,7 @@
   recipeUnlocks:
   - AutolatheHyperConvectionMachineCircuitboard
   - ProtolatheHyperConvectionMachineCircuitboard
+  - CircuitImprinterHyperConvectionMachineCircuitboard
   - SheetifierMachineCircuitboard
 
 - type: technology
@@ -68,6 +86,7 @@
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
   - PowerComputerCircuitboard #the actual solar panel itself should be in here
+  - SuperMatterObserverCircuitboard # SS220 superMatter-crystal
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - EmitterCircuitboard
@@ -107,19 +126,6 @@
 # Tier 2
 
 - type: technology
-  id: Grappling
-  name: research-technology-grappling
-  icon:
-    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
-    state: base
-  discipline: Industrial
-  tier: 2
-  cost: 5000
-  recipeUnlocks:
-  - WeaponGrapplingGun
-  - BorgModuleGrapplingGun
-
-- type: technology
   id: Shuttlecraft
   name: research-technology-shuttlecraft
   icon:
@@ -130,7 +136,6 @@
   cost: 10000
   recipeUnlocks:
   - ShuttleConsoleCircuitboard
-  - RadarConsoleCircuitboard
   - ThrusterMachineCircuitboard
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
@@ -148,6 +153,8 @@
   - HellfireFreezerMachineCircuitBoard
   - PortableScrubberMachineCircuitBoard
   - HolofanProjector
+  technologyPrerequisites:
+  - AtmosphericTech
 
 - type: technology
   id: AdvancedToolsTechnology
@@ -164,7 +171,8 @@
     - JawsOfLife
     - BorgModuleAdvancedTool
     - BorgModuleRCD
-# ss220 start thermoelectric generator 
+    - BorgModuleProtoKineticAccelerator # ss220
+# ss220 start thermoelectric generator
 
 - type: technology
   id: RenewablePower
@@ -180,7 +188,21 @@
   - ThermoelectricgeneratorTurbine
   technologyPrerequisites:
   - PowerGeneration
-# ss220 end thermoelectric generator 
+# ss220 end thermoelectric generator
+
+- type: technology
+  id: MassExcavation
+  name: research-technology-excavation
+  icon:
+    sprite: Objects/Tools/handdrilldiamond.rsi
+    state: handdrill
+  discipline: Industrial
+  tier: 2
+  cost: 12500
+  recipeUnlocks:
+    - OreBagOfHolding
+    - MiningDrillDiamond
+    - AdvancedMineralScannerEmpty
 
 # Tier 3
 

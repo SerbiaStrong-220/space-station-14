@@ -2,6 +2,8 @@ using Content.Shared.Movement.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Content.Shared.SS220.Vehicle.Components;
+using Content.Shared.SS220.Movement;
 
 namespace Content.Shared.Movement.Systems;
 
@@ -10,7 +12,7 @@ public sealed class FrictionContactsSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifierSystem = default!;
 
-    // Comment copied from "original" SlowContactsSystem.cs
+    // Comment copied from "original" SlowContactsSystem.cs (now SpeedModifierContactsSystem.cs)
     // TODO full-game-save 
     // Either these need to be processed before a map is saved, or slowed/slowing entities need to update on init.
     private HashSet<EntityUid> _toUpdate = new();
@@ -77,6 +79,14 @@ public sealed class FrictionContactsSystem : EntitySystem
 
         if (frictionComponent == null)
         {
+            //SS220 vehicle_friсtion_fix start
+            if (HasComp(uid, typeof(VehicleComponent)))
+            {
+                _speedModifierSystem.ChangeFriction(uid, VehicleMovementSpeedModifierComponent.DefaultFriction, VehicleMovementSpeedModifierComponent.DefaultFrictionNoInput, VehicleMovementSpeedModifierComponent.DefaultAcceleration, speedModifier);
+                return;
+            }
+            //SS220 vehicle_friсtion_fix end
+
             _speedModifierSystem.ChangeFriction(uid, MovementSpeedModifierComponent.DefaultFriction, null, MovementSpeedModifierComponent.DefaultAcceleration, speedModifier);
         }
         else

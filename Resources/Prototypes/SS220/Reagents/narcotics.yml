@@ -1,0 +1,18 @@
+- type: reagent
+  id: NeoNicotinoid
+  name: reagent-name-neonicotinoid
+  group: Narcotics
+  desc: reagent-desc-neonicotinoid
+  flavor: bitter
+  color: "#C0C0C0"
+  physicalDesc: reagent-physical-desc-strong-smelling
+  plantMetabolism:
+  - !type:PlantAdjustHealth
+    amount: -5
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 0.02 # Smoking causes less cancer.

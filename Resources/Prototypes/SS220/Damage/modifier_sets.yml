@@ -1,12 +1,17 @@
 - type: damageModifierSet
   id: Felinid # Ну вроде так мяу.
   coefficients:
-    Blunt: 1.0
-    Piercing: 1.15
-    Slash: 1.30
-    Cold: 1.5
-    Heat: 2.0
+    Piercing: 1.1
+    Slash: 1.2
+    Cold: 0.8
+    Heat: 1.2
     Poison: 1.1
+
+- type: damageModifierSet
+  id: Tajaran
+  coefficients:
+    Cold: 0.8
+    Heat: 1.3 # so about heat, we make them receive more heat cause tajaran Secs > any other species secs
 
 - type: damageModifierSet
   id: TomatoKiller
@@ -19,3 +24,82 @@
     Poison: 0.6
     Cellular: 1
     Radiation: 0.5
+
+# Spider queen antag
+- type: damageModifierSet
+  id: SpiderQueen
+  coefficients:
+    Piercing: 0.6
+    Blunt: 0.5
+    Slash: 0.6
+    Heat: 0.6
+    Poison: 0.2
+
+- type: damageModifierSet
+  id: SpiderDrone
+  coefficients:
+    Piercing: 0.6
+    Blunt: 0.7
+    Slash: 0.7
+    Heat: 0.6
+    Poison: 0.2
+
+- type: damageModifierSet
+  id: SpiderHunter
+  coefficients:
+    Piercing: 0.6
+    Blunt: 0.4
+    Slash: 0.4
+    Heat: 0.6
+    Poison: 0.2
+
+- type: damageModifierSet
+  id: SpiderGhost
+  coefficients:
+    Piercing: 0.7
+    Blunt: 0.5
+    Slash: 0.6
+    Heat: 0.7
+    Poison: 0.2
+
+- type: damageModifierSet
+  id: SpiderShooter
+  coefficients:
+    Piercing: 0.5
+    Blunt: 0.7
+    Slash: 0.7
+    Heat: 0.5
+    Poison: 0.2
+
+- type: damageModifierSet
+  id: SpiderLittle
+  coefficients:
+    Piercing: 0.8
+    Blunt: 0.8
+    Slash: 0.8
+    Heat: 0.8
+    Poison: 0.2
+
+- type: damageModifierSet
+  id: Dragon
+  coefficients:
+    Blunt: 1
+    Slash: 1.2
+    Piercing: 0.6
+    Shock: 1
+    Cold: 1
+    Poison: 1
+    Cellular: 1
+    Radiation: 0.5
+
+- type: damageModifierSet
+  id: RatKing
+  coefficients:
+    Blunt: 1
+    Slash: 1
+    Piercing: 0.7
+    Shock: 1.0
+    Cold: 1
+    Poison: 1
+    Cellular: 1
+    Radiation: 1

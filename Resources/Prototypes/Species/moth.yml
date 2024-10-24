@@ -10,8 +10,10 @@
   skinColoration: Hues
   maleFirstNames: names_moth_first_male
   femaleFirstNames: names_moth_first_female
-  maleLastNames: names_moth_last_male
-  femaleLastNames: names_moth_last_female
+#SS220-new-species-naming begin
+  maleLastNames: names_moth_last
+  femaleLastNames: names_moth_last
+#SS220-new-species-naming end
 
 - type: speciesBaseSprites
   id: MobMothSprites

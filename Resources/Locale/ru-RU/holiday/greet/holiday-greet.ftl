@@ -49,7 +49,7 @@ holiday-name-bisexual-pride-day = Дня празднования бисексу
 holiday-name-stupid-questions-day = Дня глупых вопросов
 holiday-name-animals-day = Дня защиты животных
 holiday-name-smiling-day = Дня улыбки
-holiday-name-lesbian-day = Дня осведомленности о лесбиянках
+holiday-name-lesbian-day = Дня осведомлённости о лесбиянках
 holiday-name-canadian-thanksgiving = Дня благодарения в Канаде
 holiday-name-spirit-day = Дня сильных духом
 holiday-name-halloween = Хэллоуина
@@ -70,12 +70,13 @@ holiday-name-festive-season = наступающего Нового года
 holiday-name-boxing-day = Дня подарков
 holiday-name-friday-thirteenth = Дня неприятностей
 holiday-name-national-coming-out-day = Национального дня каминг-аута
+holiday-name-pride-month = Месяца гордости
 
 ## Custom congrats
 
 holiday-custom-cosmonautics-day = В этот день более 600 лет назад товарищ Юрий Гагарин первым полетел в космос!
-holiday-custom-mothers-day = С Днем матери в большинстве стран Северной и Южной Америки, Азии и Океании!
-holiday-custom-bastille-day = Вы слышите, как поет народ?
+holiday-custom-mothers-day = С Днём матери в большинстве стран Северной и Южной Америки, Азии и Океании!
+holiday-custom-bastille-day = Вы слышите, как поёт народ?
 holiday-custom-friendship-day = Волшебного Дня дружбы!
 holiday-custom-talk-like-a-pirate-day = Разрази тебя Дэви Джонс! Говори как пират, иначе прогуляешься по доске, сухопутная крыса!
 holiday-custom-halloween = Ужасного Хэллоуина!

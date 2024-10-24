@@ -1,4 +1,4 @@
-﻿using Content.Server.Objectives.Components;
+using Content.Server.Objectives.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Cuffs.Components;
@@ -82,7 +82,7 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
             if (!isHumanoid) // Only humanoids count as enemies
                 continue;
 
-            var isAntagonist = _role.MindIsAntagonist(mindId);
+            var isAntagonist = _role.MindIsAntagonist(crewMindId); //SS220 Return hijack objective
             if (isAntagonist) // Allow antagonist
                 continue;
 

@@ -1,0 +1,188 @@
+#play-time-loadout
+- type: loadoutEffectGroup
+  id: CaptainSenior
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobCaptain
+      time: 540000 #250 часов, форма для самых лучших
+
+- type: loadoutEffectGroup
+  id: CapOfficerCutlass
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobCaptain
+      time: 363600 # 101 hrs
+
+# Jumpsuit
+- type: loadout
+  id: CaptainWhiteJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformWhiteJumpsuitCaptain
+
+- type: loadout
+  id: CaptainWhiteJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformWhiteJumpskirtCaptain
+
+- type: loadout
+  id: CaptainWhiteFormalSuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWhiteCapFormal
+
+# Head
+- type: loadout
+  id: CaptainHeadHat
+  equipment:
+    head: ClothingHeadCaptainHat
+
+- type: loadout
+  id: CaptainBeret
+  equipment:
+    head: ClothingHeadBeretCap
+
+- type: loadout
+  id: CaptainWhiteHead
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCaptainHat
+
+- type: loadout
+  id: CaptainWhiteBeret
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteBeretCap
+
+- type: loadout
+  id: CaptainWhiteHat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCapHat
+
+- type: loadout
+  id: CaptainWhiteHardhat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCapHardhat
+
+# Neck
+- type: loadout
+  id: CaptainFormalWhiteCloak
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    neck: ClothingNeckCloakWhiteCapFormal
+
+- type: loadout
+  id: CaptainWhiteMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    neck: ClothingNeckWhiteMantleCap
+
+# Back
+- type: loadout
+  id: CaptainWhiteBackpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    back: ClothingBackpackWhiteCaptain
+
+- type: loadout
+  id: CaptainWhiteSatchel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    back: ClothingBackpackWhiteSatchelCaptain
+
+- type: loadout
+  id: CaptainWhiteDuffel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    back: ClothingBackpackWhiteDuffelCaptain
+
+# Outer clothing
+- type: loadout
+  id: CaptainWhiteOuterClothing
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    outerClothing: ClothingOuterWhiteArmorCaptainCarapace
+
+- type: loadout
+  id: CaptainWhiteCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    outerClothing: ClothingOuterWhiteCoatCaptain
+
+- type: loadout
+  id: CaptainWhiteWintercoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    outerClothing: ClothingOuterWhiteWinterCap
+
+# Gloves
+
+- type: loadout
+  id: CaptainWhiteGloves
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    gloves: ClothingHandsWhiteGlovesCaptain
+
+- type: loadout
+  id: CaptainGloves
+  equipment:
+    gloves: ClothingHandsGlovesCaptain
+
+# SUITSTORAGE
+- type: loadout
+  id: CapOfficerCutlass
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CapOfficerCutlass
+  equipment:
+    suitstorage: ClothingBeltCutlassSheathFilled
+
+# Headset
+- type: loadout
+  id: CaptainHeadset
+  equipment:
+    ears: ClothingHeadsetCaptain
+
+- type: loadout
+  id: CaptainHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCaptain

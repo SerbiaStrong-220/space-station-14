@@ -30,6 +30,19 @@ public sealed class TargetObjectiveSystem : EntitySystem
         _metaData.SetEntityName(uid, GetTitle(target.Value, comp.Title), args.Meta);
     }
 
+    //SS220-mindslave begin
+    public void ResetEntityName(EntityUid uid, TargetObjectiveComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        if (!GetTarget(uid, out var target, comp))
+            return;
+
+        _metaData.SetEntityName(uid, GetTitle(target.Value, comp.Title), MetaData(uid));
+    }
+    //SS220-mindslave end
+
     /// <summary>
     /// Sets the Target field for the title and other components to use.
     /// </summary>

@@ -5,4 +5,4 @@
   description: Utility job for correct work job ban.
   setPreference: false
   canBeAntag: true
-  canBeZombie: true
+  dontUseNameForTitles: true

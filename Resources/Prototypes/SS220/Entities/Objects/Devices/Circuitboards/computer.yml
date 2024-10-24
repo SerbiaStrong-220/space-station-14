@@ -1,5 +1,26 @@
 - type: entity
   parent: BaseComputerCircuitboard
+  id: CentcomCommsComputerCircuitboard
+  name: centcom communications computer board
+  description: A computer printed circuit board for a centcom communications console.
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: CentcomComputerComms
+
+#SALVAGE SHUTTLE RETURN
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: SalvageShuttleConsoleCircuitboard
+  name: salvage shuttle console board
+  description: A computer printed circuit board for a salvage shuttle console.
+  components:
+    - type: ComputerBoard
+      prototype: ComputerShuttleSalvage
+    - type: StealTarget
+      stealGroup: SalvageShuttleConsoleCircuitboard
+  parent: BaseComputerCircuitboard
   id: CluwneCommsComputerCircuitboard
   name: cluwne communications computer board
   description: A computer printed circuit board for a communications console.

@@ -1,0 +1,14 @@
+- type: gameMap
+  id: SS220_CentComm
+  mapName: 'Центральное Командование'
+  mapPath: /Maps/SS220/ss220-centcomm.yml
+  minPlayers: 10
+  stations:
+    centcomm:
+      stationProto: NanotrasenCentralCommand
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Центральное Командование {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'SS220'

@@ -1,0 +1,99 @@
+- type: entity
+  name: Glass Vase
+  description: strangely shaped glass vase, what is it for?
+  parent: DrinkGlassBase
+  id: GlassVase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+    layers:
+      - state: icon
+        map: [ "enum.SolutionContainerLayers.Base" ]
+      - state: fill1
+        map: [ "enum.SolutionContainerLayers.Fill" ]
+        visible: false
+      - state: Icon-front
+        map: [ "enum.SolutionContainerLayers.Overlay" ]
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+  - type: SolutionContainerVisuals
+    maxFillLevels: 9
+    fillBaseName: fill
+    metamorphicDefaultSprite:
+      sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+      state: icon
+  - type: Construction
+    graph: craftvase
+    node: CraftVase
+  - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: vase-flower
+        whitelist:
+          tags:
+          - wtulip
+          - ptulip
+          - ytulip
+          - rclove
+          - wclove
+          - schamomile
+          - wschamomile
+          - sflower
+          - lflower
+          - rrose
+          - wrose
+
+  - type: ItemMapper
+    mapLayers:
+      white_tulip:
+        whitelist:
+          tags:
+          - wtulip
+      pink_tulip:
+        whitelist:
+          tags:
+          - ptulip
+      yellow_tulip:
+        whitelist:
+          tags:
+          - ytulip
+      red_clove:
+        whitelist:
+          tags:
+          - rclove
+      white_clove:
+        whitelist:
+          tags:
+          - wclove
+      s_chamomile:
+        whitelist:
+          tags:
+          - schamomile
+      ws_chamomile:
+        whitelist:
+          tags:
+          - wschamomile
+      s_flower:
+        whitelist:
+          tags:
+          - sflower
+      l_flower:
+        whitelist:
+          tags:
+          - lflower
+      r_rose:
+        whitelist:
+          tags:
+          - rrose
+      w_rose:
+        whitelist:
+          tags:
+          - wrose
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi

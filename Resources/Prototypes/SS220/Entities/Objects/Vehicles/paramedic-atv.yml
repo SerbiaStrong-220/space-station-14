@@ -23,7 +23,6 @@
     baseSprintSpeed: 7
   - type: Strap
     buckleOffset: "0.1, -0.05"
-    maxBuckleDistance: 1
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false

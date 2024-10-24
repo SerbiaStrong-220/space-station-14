@@ -1,0 +1,81 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Ussp
+- type: entity
+  parent: MagazinePistolSubMachineGun
+  id: MagazinePistolSubMachineGunUssp_PPSh
+  suffix: Shitspawn, Ebent, FractWar
+  name: магазин пистолета-пулемёта Шпагина
+  description: Ратата-та-та-та!
+  components:
+  - type: Tag
+    tags:
+      - MagazinePistolSubMachineGunUssp_PPSh
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/ussp_magppsh.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+
+- type: entity
+  id: MagazineUssp_RPK
+  name: магазин ручного пулемёта Калашникова
+  description: Большой магазин для больших коммунистических нужд.
+  parent: BaseMagazineLightRifle
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Tag
+    tags:
+      - MagazineUssp_RPK
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifle
+    capacity: 75
+  - type: Item
+  - type: Sprite
+    scale: 0.5, 0.5
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/MagazineUssp_RPK.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+#Iron squad
+- type: entity
+  parent: BaseItem
+  id: MagazineIron_MG34
+  name: барабанный магазин калибра 7.92X57mm
+  description: Вмещает в себя достаточно, чтобы расстреливать корпоратов и не думать о перезарядке!
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Tag
+    tags:
+      - MagazineIron_MG34
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeIron_MG34
+    proto: CartridgeIron_MG34
+    capacity: 100
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/iron_MagazineMG34.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]

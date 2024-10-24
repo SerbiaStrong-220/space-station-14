@@ -18,13 +18,13 @@
         visible: false
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
-    closeOnHandDeselect: false
+    requireActiveHand: false
   - type: UserInterface
     interfaces:
-    - key: enum.PaperUiKey.Key
-      type: ButtScanBoundUserInterface
+      enum.PaperUiKey.Key:
+        type: ButtScanBoundUserInterface
   - type: Paper
-    writable: false
+    editingDisabled: true
   - type: Appearance
   - type: PaperVisuals
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
@@ -37,6 +37,7 @@
     tags:
     - Document
     - Trash
+  - type: FaxableObject
 
 - type: entity
   name: strange butt scan

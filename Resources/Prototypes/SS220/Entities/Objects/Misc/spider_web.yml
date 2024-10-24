@@ -1,0 +1,158 @@
+#Spider queen webs
+
+#Base
+- type: entity
+  id: BaseSpiderWeb
+  name: web
+  description: Sticky web.. I wonder where it comes from?
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: MeleeSound
+      soundGroups:
+        Brute:
+          path:
+            "/Audio/Weapons/slash.ogg"
+    - type: Sprite
+      sprite: Objects/Misc/spiderweb.rsi
+      layers:
+        - state: spider_web_1
+          map: ["spiderWebLayer"]
+      drawdepth: WallMountedItems
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.SpiderWebVisuals.Variant:
+          spiderWebLayer:
+            1:  {state: spider_web_1}
+            2:  {state: spider_web_2}
+    - type: Clickable
+    - type: Transform
+      anchored: true
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        fix1:
+          hard: false
+          density: 1000
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          mask:
+          - ItemMask
+    - type: Damageable
+      damageModifierSet: Wood
+    - type: Destructible
+    - type: Temperature
+      heatDamage:
+        types:
+          Heat: 5
+      coldDamage: {}
+      coldDamageThreshold: 0
+    - type: Flammable
+      fireSpread: true
+      damage:
+        types:
+          Heat: 5
+    - type: Reactive
+      groups:
+        Flammable: [Touch]
+        Extinguish: [Touch]
+    - type: SpiderWebObject
+    - type: SpeedModifierContacts
+      ignoreWhitelist:
+        components:
+            - IgnoreSpiderWeb
+
+#Web
+- type: entity
+  parent: BaseSpiderWeb
+  id: SpiderWebFragile
+  name: web
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 30
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.25
+      sprintSpeedModifier: 0.25
+    - type: DamageContacts
+      standStillTime: 3
+      damage:
+        types:
+          Bloodloss: -1
+        groups:
+          Brute: -0.5
+          Toxin: -0.5
+          Burn: -0.5
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
+        - SpiderLittle
+
+- type: entity
+  parent: BaseSpiderWeb
+  id: SpiderWebDurable
+  name: durable web
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: Sprite
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.15
+      sprintSpeedModifier: 0.15
+    - type: DamageContacts
+      standStillTime: 3
+      damage:
+        types:
+          Bloodloss: -1.5
+        groups:
+          Brute: -1
+          Toxin: -0.5
+          Airloss: -1
+          Burn: -1
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
+        - SpiderLittle
+
+- type: entity
+  parent: BaseSpiderWeb
+  id: SpiderWebDespawned
+  name: web
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: TimedDespawn
+      lifetime: 13
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.1
+      sprintSpeedModifier: 0.1

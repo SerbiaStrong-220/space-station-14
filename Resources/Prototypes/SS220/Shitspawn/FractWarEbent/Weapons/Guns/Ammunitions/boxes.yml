@@ -1,0 +1,53 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Ussp
+- type: entity
+  name: коробка магазинов пистолета-пулемёта Шпагина
+  parent: BoxMagazine
+  id: BoxMagazinePistolSubMachineGunUssp_PPSh
+  suffix: Shitspawn, Ebent, FractWar
+  description: Коробка, заполненая магазинами пистолета-пулемёта Шпагина
+  components:
+  - type: StorageFill
+    contents:
+      - id: MagazinePistolSubMachineGunUssp_PPSh
+        amount: 4
+
+#ERT
+- type: entity
+  name: коробка бластерных энергоячеек
+  parent: BoxMagazine
+  id: BoxBlasterPowerCell
+  suffix: Shitspawn, Ebent, FractWar
+  description: Коробка, заполнения бластерными энергоячейками
+  components:
+  - type: StorageFill
+    contents:
+      - id: BlasterPowerCell
+        amount: 4
+
+#Iron squad
+- type: entity
+  parent: BaseMagazineBoxLightRifle
+  id: MagazineBoxIron_MG34
+  name: коробка с патронами (7.92X57mm)
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeIron_MG34
+    capacity: 100
+    proto: CartridgeIron_MG34
+  - type: Sprite
+    layers:
+    - state: base-b
+      map: ["enum.GunVisualLayers.Base"]
+    - state: magb-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: magb
+    steps: 2
+    zeroVisible: false
+  - type: Appearance

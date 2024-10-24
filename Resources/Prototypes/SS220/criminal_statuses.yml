@@ -23,3 +23,35 @@
   color: "#CC0000FF"
   statusIcon: SecExecuteIcon
   radioReportMessage: criminal-status-execute-report
+
+- type: criminalStatus
+  id: demote
+  name: criminal-status-demote
+  color: "#FF0000FF"
+  statusIcon: SecDemoteIcon
+  radioReportMessage: criminal-status-demote-report
+
+- type: criminalStatus
+  id: paroled
+  name: criminal-status-paroled
+  color: "#7fb717FF"
+  statusIcon: SecParoledIcon
+
+- type: criminalStatus
+  id: incarcerated
+  name: criminal-status-incarcerated
+  color: "#b18644FF"
+  statusIcon: SecIncarceratedIcon
+
+- type: criminalStatus
+  id: discharged
+  name: criminal-status-discharged
+  color: "#288effFF"
+  statusIcon:  SecDischargedIcon
+
+- type: criminalStatus
+  id: suspected
+  name: criminal-status-suspected
+  color: "#33ccccFF"
+  statusIcon: SecSuspectedIcon
+  radioReportMessage: criminal-status-suspected-report

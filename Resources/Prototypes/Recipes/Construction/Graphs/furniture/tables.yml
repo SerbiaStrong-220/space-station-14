@@ -1,4 +1,4 @@
-﻿- type: constructionGraph
+- type: constructionGraph
   id: Table
   start: start
   graph:
@@ -71,6 +71,30 @@
         - to: TablePlasmaGlass
           steps:
             - material: PlasmaGlass
+              amount: 1
+              doAfter: 1
+        #ss220-tables-update-start
+        - to: TableUraniumGlass
+          steps:
+            - material: UraniumGlass
+              amount: 1
+              doAfter: 1
+
+        - to: TableReinforcedPlasmaGlass
+          steps:
+            - material: ReinforcedPlasmaGlass
+              amount: 1
+              doAfter: 1
+
+        - to: TableReinforcedUraniumGlass
+          steps:
+            - material: ReinforcedUraniumGlass
+              amount: 1
+              doAfter: 1
+        #ss220-tables-update-end
+        - to: TableBrass
+          steps:
+            - material: Brass
               amount: 1
               doAfter: 1
 
@@ -174,6 +198,54 @@
           steps:
             - tool: Anchoring
               doAfter: 1
+    #ss220-tables-update-start
+    - node: TableUraniumGlass
+      entity: TableUraniumGlass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetUGlass1
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: TableReinforcedUraniumGlass
+      entity: TableReinforcedUraniumGlass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+    - node: TableReinforcedPlasmaGlass
+      entity: TableReinforcedPlasmaGlass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+    #ss220-tables-update-end
+    - node: TableBrass
+      entity: TableBrass
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetBrass1
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
 
     - node: TableWood
       entity: TableWood
@@ -192,13 +264,13 @@
             - material: Cloth
               amount: 1
               doAfter: 1
-        
+
         - to: DeskWood
           steps:
             - material: WoodPlank
               amount: 1
               doAfter: 1
-    
+
     - node: DeskWood
       entity: DeskWood
       edges:
@@ -211,6 +283,105 @@
             - tool: Prying
               doAfter: 1
 
+        - to: TableFancyBlack
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetBlack
+              amount: 1
+              #name: black carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-black
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyBlue
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetBlue
+              amount: 1
+              #name: blue carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-blue
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyCyan
+          steps:
+           #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetCyan
+              amount: 1
+              #name: cyan carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-cyan
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyGreen
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetGreen
+              amount: 1
+              #name: green carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-green
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyOrange
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetOrange
+              amount: 1
+              #name: orange carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-orange
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyPurple
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetPurple
+              amount: 1
+              #name: purple carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-purple
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyPink
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetPink
+              amount: 1
+              #name: pink carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-pink
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyRed
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetRed
+              amount: 1
+              #name: red carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-red
+            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancyWhite
+          steps:
+            #SS220 Curtains and fancy tables recepie fix begin
+            - material: FloorCarpetWhite
+              amount: 1
+              #name: white carpet
+              #icon:
+                #sprite: Objects/Tiles/tile.rsi
+                #state: carpet-white
+            #SS220 Curtains and fancy tables recepie fix end
+
     - node: TableCarpet
       entity: TableCarpet
       edges:
@@ -218,6 +389,114 @@
           completed:
             - !type:SpawnPrototype
               prototype: MaterialCloth1
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyBlack
+      entity: TableFancyBlack
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemBlack
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyBlue
+      entity: TableFancyBlue
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemBlue
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyCyan
+      entity: TableFancyCyan
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemCyan
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyGreen
+      entity: TableFancyGreen
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemGreen
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyOrange
+      entity: TableFancyOrange
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemOrange
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyPurple
+      entity: TableFancyPurple
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemPurple
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyPink
+      entity: TableFancyPink
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemPink
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyRed
+      entity: TableFancyRed
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemRed
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 1
+
+    - node: TableFancyWhite
+      entity: TableFancyWhite
+      edges:
+        - to: DeskWood #SS220 Curtains and fancy tables recepie fix
+          completed:
+            - !type:SpawnPrototype
+              prototype: FloorCarpetItemWhite
               amount: 1
           steps:
             - tool: Prying

@@ -8,3 +8,32 @@
   category: Food
   group: market
 
+- type: cargoProduct
+  id: FoodBeerCan
+  icon:
+    sprite: Objects/Consumable/Drinks/beer_can.rsi
+    state: icon
+  product: CrateDrinkBeerCan
+  cost: 3200
+  category: cargoproduct-category-name-food
+  group: market
+
+- type: cargoProduct
+  id: MeatCrate
+  icon:
+    sprite: Objects/Consumable/Food/meat.rsi
+    state: plain
+  product: CrateMeat
+  cost: 1200
+  category: cargoproduct-category-name-food
+  group: market
+
+- type: cargoProduct
+  id: ExoticMeatCrate
+  icon:
+    sprite: Objects/Consumable/Food/meat.rsi
+    state: xeno
+  product: CrateExoticMeat
+  cost: 2500
+  category: cargoproduct-category-name-food
+  group: market

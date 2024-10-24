@@ -1,0 +1,301 @@
+#Base
+- type: entity
+  id: BaseActionSpawnSpiderEgg
+  abstract: true
+  components:
+  - type: InstantAction
+    useDelay: 2
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: guard_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggDrone
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  id: BaseActionSpawnSingleSpiderWeb
+  name: spin a web
+  description: Creates a web that slows down your prey.
+  abstract: true
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: web_spawn
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebFragile
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Egg
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggDroneBloodPoints
+  name: guard spider egg
+  description: He is also a drone and can build crystals and walls.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggDrone
+        amount: 1
+      offset: 0, 1
+      cost: 40
+      doAfter: 5
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggHunterBloodPoints
+  name: hunter spider egg
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: hunter_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggHunter
+        amount: 1
+      offset: 0, 1
+      cost: 60
+      doAfter: 5
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggGhostBloodPoints
+  name: ghost spider egg
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: nurse_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggGhost
+        amount: 1
+      offset: 0, 1
+      cost: 60
+      doAfter: 5
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggShooterBloodPoints
+  name: shooter  spider egg
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: viper_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggShooter
+        amount: 1
+      offset: 0, 1
+      cost: 50
+      doAfter: 5
+
+#Spider
+- type: entity
+  id: ActionSpawnSpiderLittleBloodPoints
+  name: release the spiderlings
+  description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 40
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: little_spider_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: MobSpiderLittle
+        amount: 3
+      offset: 0, 0.5
+      cost: 20
+
+#Cryctal
+- type: entity
+  id: ActionSpawnSpiderCrystal
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 30
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: crystal_spawn
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: ShardCrystalBlueXeno
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  id: ActionSpawnSpiderCrystalBloodPoints
+  name: create a crystal shard
+  description: A shard that serves as a backlight for spiders.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 5
+    range: 1
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: crystal_spawn
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: ShardCrystalBlueXeno
+        amount: 1
+      offset: 0, 1
+      cost: 5
+
+#Wall
+- type: entity
+  id: ActionSpawnSpiderWallWeb
+  name: create a wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 12
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
+      state: wall_spawn
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: WallWebSpawn
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: ActionSpawnSpiderWallWeb
+  id: ActionSpawnSpiderWallWebDurable
+  name: create a durable wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 16
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: WallWebDurableSpawn
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: ActionSpawnSpiderWallWeb
+  id: ActionSpawnSpiderWallWebDurableBloodPoints
+  name: create a durable wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 6
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: WallWebDurableSpawn
+        amount: 1
+      offset: 0, 1
+      cost: 10
+
+#Web
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebShortDelay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 2
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebLongDelay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 6
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebDurable
+  name: spin a durable web
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebDurable
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebDurableBloodPoints
+  name: spin a durable web
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 2
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: SpiderWebDurable
+        amount: 1
+      offset: 0, 1
+      cost: 2
+
+#Clown web
+- type: entity
+  id: ActionSpawnSingleSpiderWebClown
+  name: spin a clown web
+  description: Creates a web that slows down your prey.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 30 #КД
+    range: 1.3
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: clown_web_spawn
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: SpiderWebClown
+        amount: 1
+      offset: 0, 1
+      speech: action-speech-spell-spider
+
+#Cocooning
+- type: entity
+  id: ActionSpiderCoconning
+  name: weave a cocoon
+  description: Wraps the victim in a web! After fully clothed in silk, you can drink blood from it.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    event: !type:SpiderCocooningActionEvent
+      cocooningTime: 15
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/action_spider.rsi, state: cocoon }
+    useDelay: 10

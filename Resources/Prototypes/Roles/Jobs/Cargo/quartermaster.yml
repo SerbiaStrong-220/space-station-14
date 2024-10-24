@@ -7,8 +7,17 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 108000 # SS220-RoleTime
+    - !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 18000 # SS220-RoleTime 2
     - !type:OverallPlaytimeRequirement
       time: 180000 # SS220-RoleTime
+    - !type:AgeRequirement
+      requiredAge: 20
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
@@ -18,8 +27,10 @@
   - Salvage
   - Quartermaster
   - Maintenance
+  - External
   - Command
   - Brig
+  - Cryogenics
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,14 +39,10 @@
 - type: startingGear
   id: QuartermasterGear
   equipment:
-    head: ClothingHeadHatQMsoft
-    jumpsuit: ClothingUniformJumpsuitQM
-    back: ClothingBackpackQuartermasterFilled
-    shoes: ClothingShoesColorBrown
     id: QuartermasterPDA
     ears: ClothingHeadsetQM
     belt: BoxFolderClipboard
     pocket1: AppraisalTool
-  innerClothingSkirt: ClothingUniformJumpskirtQM
-  satchel: ClothingBackpackSatchelQuartermasterFilled
-  duffelbag: ClothingBackpackDuffelQuartermasterFilled
+  storage:
+    back:
+    - Flash

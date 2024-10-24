@@ -1,0 +1,129 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Для игроков
+
+  # Парадизовский
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckParadise
+  name: накидка причастия
+  description: Вручается избранным, удостоенных уникального места в этом мире.
+  suffix: Sponsor Neck
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/ss220.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/ss220.rsi
+
+# Developer
+
+  # Для разработчиков (Кодеры)
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckCoder
+  name: плащ созидания
+  description: Особый плащ, носителям оного дозволено вмешиваться и менять правила мира.
+  suffix: Sponsor Neck, Developer
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/coder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/coder.rsi
+
+  # Для разработчиков (Мапперы)
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckMapper
+  name: плащ сотворения
+  description: Особый плащ, чьим обладателям выпала честь участвовать в сотворении мира.
+  suffix: Sponsor Neck, Mapper
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/mapper.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/mapper.rsi
+
+  # Для разработчиков (Спрайтеры)
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckSpriter
+  name: плащ начертания
+  description: Особый плащ, чьи хозяева привнесли краски и наполнили изяществом мир.
+  suffix: Sponsor Neck, Spriter
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/spriter.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/spriter.rsi
+
+  # Для разработчиков (Трекероведы)
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckTrackerExpert
+  name: плащ равновесия
+  description: Особый плащ для тех, кто посвятил себя защите внешнему миру.
+  suffix: Sponsor Neck, Tracker
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/pivocloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/pivocloak.rsi
+
+  # Награда ведущих разработчиков
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckHeadDevelopment
+  name: плащ ведающего созидания
+  description: Особый плащ, принадлежащий сущности, которой предписывают власть над самим мирозданием.
+  suffix: Sponsor Neck, HeadDeveloper
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/vedicloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/vedicloak.rsi
+
+# Administrator
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckAdministrator
+  name: плащ порядка
+  description: Изящная мантия, врученная вечным стражам, что следят за порядком мира.
+  suffix: Sponsor Neck, Administrator
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
+
+# Moderator
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckModerator
+  name: плащ министерства любви
+  description: Плащ министерства, где нет тьмы. Такие плащи часто носят сотрудники полиции мысли. Глаза на рисунке определённо следят за вами.
+  suffix: Sponsor Neck, Moderator
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
+
+# Разное
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakFloppa
+  name: шкура Шлёпы
+  description: Это - не то, что вы думаете
+  suffix: Sponsor # А точно ли он спонсор?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatFloppa
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+

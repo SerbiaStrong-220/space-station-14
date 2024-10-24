@@ -1,0 +1,132 @@
+- type: entity
+  parent: IDCardStandard
+  id: EmagFake
+  suffix: Фальшивый
+  name: модифицированная ID карта
+  description: Зачем кому-то портить ID карту? Она вообще работает? Еще и провода из нее торчат... лучше её не трогать.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/emag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/emag.rsi
+    storedRotation: -90
+
+- type: entity
+  id: PresentBaseID
+  name: кейс со случайной id картой
+  description: В нём может находится очень редкая карта! Испытай свою удачу!
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Misc/idcase.rsi
+    state: idcase
+
+- type: entity
+  id: PresentID
+  parent: [PresentBaseID, BaseStorageItem]
+  abstract: true
+  suffix: Empty
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,10,10
+  - type: Item
+    size: Small
+
+- type: entity
+  id: RandomID
+  parent: [PresentBaseID, BaseItem]
+  name: кейс со случайной id картой
+  description: В нём может находится очень редкая карта! Испытай свою удачу!
+  components:
+  - type: SpawnItemsOnUse
+    items:
+      - id: ArmoryIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: AtmosphericsIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: BarIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: BrigIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: BlueshieldIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: CaptainIDCardEmagFake
+        orGroup: IDPool
+        prob: 0.25
+      - id: CargoIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: ChapelIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: ChemistryIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: ChiefEngineerIDCardEmagFake
+        orGroup: IDPool
+        prob: 0.5
+      - id: ChiefMedicalOfficerIDCardEmagFake
+        orGroup: IDPool
+        prob: 0.5
+      - id: DetectiveIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: EngineeringIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: ExternalIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: HeadOfPersonnelIDCardEmagFake
+        orGroup: IDPool
+        prob: 0.5
+      - id: HeadOfSecurityIDCardEmagFake
+        orGroup: IDPool
+        prob: 0.5
+      - id: HydroponicsIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: JanitorIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: KitchenIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: MaintenanceIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: MedicalIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: ParamedicIDCardEmagFake
+        orGroup: IDPool
+        prob: 1
+      - id: QuartermasterIDCardEmagFake
+        prob: 0.5
+        orGroup: IDPool
+      - id: ResearchIDCardEmagFake
+        prob: 1
+        orGroup: IDPool
+      - id: ResearchDirectorIDCardEmagFake
+        prob: 0.5
+        orGroup: IDPool
+      - id: SalvageIDCardEmagFake
+        prob: 1
+        orGroup: IDPool
+      - id: SecurityIDCardEmagFake
+        prob: 1
+        orGroup: IDPool
+      - id: ServiceIDCardEmagFake
+        prob: 1
+        orGroup: IDPool
+      - id: TheatreIDCardEmagFake
+        prob: 1
+        orGroup: IDPool

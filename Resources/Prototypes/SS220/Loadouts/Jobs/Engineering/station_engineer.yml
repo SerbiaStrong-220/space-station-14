@@ -1,0 +1,65 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: StationEngineerTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobStationEngineer
+      time: 108000 # 30 hrs
+
+# Glasses
+- type: loadout
+  id: GlassesEngineer
+  equipment:
+    eyes: ClothingEyesGlassesMeson
+
+- type: loadout
+  id: CyberGlassesEngineer
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorCyberEngVisor
+
+# Jumpsuit
+- type: loadout
+  id: StationEngineerJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorOrange
+
+- type: loadout
+  id: StationEngineerJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorOrange
+
+- type: loadout
+  id: StationEngineerJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorOrange
+
+- type: loadout
+  id: StationEngineerJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StationEngineerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorOrange
+
+# Outerclothing
+- type: loadout
+  id: CyberJacketEngineer
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCyberJacketEng

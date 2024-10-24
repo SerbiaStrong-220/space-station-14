@@ -14,7 +14,7 @@
     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
         <Label Text="subscription level placeholder" Name="SubscriptionLabel" VerticalAlignment="Top" HorizontalExpand="True"/>
         <TextureRect
-            TexturePath="/Textures/SS220/Interface/Misc/sponsor_cash.rsi/icon.png"
+            TexturePath="/Textures/SS220/Interface/Misc/sponsor_cash.png"
             VerticalAlignment="Center"
             Stretch="KeepAspectCentered"
             VerticalExpand="True"/>

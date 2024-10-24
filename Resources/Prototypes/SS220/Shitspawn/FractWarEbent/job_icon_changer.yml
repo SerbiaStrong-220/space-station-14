@@ -1,0 +1,49 @@
+- type: entity
+  parent: BaseItem
+  id: JobIconChanger
+  name: job icons changer
+  suffix: Shitspawn, Ebent, FractWar
+  description: Used to change job icons.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/access_configurator.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: ActivatableUI
+    key: enum.JobIconChangerKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.JobIconChangerKey.Key:
+        type: JobIconChangerBoundUserInterface
+  - type: JobIconChanger
+  
+- type: entity
+  parent: JobIconChanger
+  id: JobIconChangerIOT
+  name: iron squad job icons changer
+  suffix: Shitspawn, Ebent, FractWar, IOT
+  components:
+  - type: JobIconChanger
+    checkReach: true
+    iconFilterGroup: IOT
+    
+- type: entity
+  parent: JobIconChanger
+  id: JobIconChangerNT
+  name: nanotransen icons changer
+  suffix: Shitspawn, Ebent, FractWar, NT
+  components:
+  - type: JobIconChanger
+    checkReach: true
+    iconFilterGroup: NT
+    
+- type: entity
+  parent: JobIconChanger
+  id: JobIconChangerUSSP
+  name: ussp job icons changer
+  suffix: Shitspawn, Ebent, FractWar, USSP
+  components:
+  - type: JobIconChanger
+    checkReach: true
+    iconFilterGroup: USSP

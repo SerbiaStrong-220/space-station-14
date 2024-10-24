@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ComputerComms
   id: CentcomComputerComms
   name: centcom communications computer
@@ -12,3 +12,5 @@
         path: /Audio/Corvax/Announcements/centcomm.ogg
         params:
           volume: -4
+    - type: Computer # SS220 Centcom comms circuitboard
+      board: CentcomCommsComputerCircuitboard # SS220 Centcom comms circuitboard

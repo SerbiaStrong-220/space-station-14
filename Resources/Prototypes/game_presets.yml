@@ -6,11 +6,32 @@
   showInVote: false # secret
   description: survival-description
   rules:
+    - SurvivalRule #SS220 survival rule
+    - MeteorSwarmScheduler
     - RampingStationEventScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - BasicRoundstartVariation
+
+- type: gamePreset
+  id: KesslerSyndrome
+  alias:
+    - kessler
+    - junk
+    - meteorhell
+  name: kessler-syndrome-title
+  showInVote: false # secret
+  description: kessler-syndrome-description
+  rules:
+    - KesslerSyndromeScheduler
+    - RampingStationEventScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - BasicRoundstartVariation
 
 - type: gamePreset
   id: AllAtOnce
+  alias:
+  - all
   name: all-at-once-title
   description: all-at-once-description
   showInVote: false
@@ -19,7 +40,34 @@
     - Traitor
     # - Revolutionary
     - Zombie
+    - KesslerSyndromeScheduler
     - RampingStationEventScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - BasicRoundstartVariation
+
+- type: gamePreset
+  id: AllerAtOnce
+  alias:
+  - allall
+  - aller
+  - badidea
+  - punishment
+  name: aller-at-once-title
+  description: aller-at-once-description
+  showInVote: false #Please god dont do this
+  rules:
+    - Nukeops
+    - Traitor
+    - Revolutionary
+    - Zombie
+    - BasicStationEventScheduler
+    - KesslerSyndromeScheduler
+    - MeteorSwarmMildScheduler
+    - MeteorSwarmScheduler
+    - RampingStationEventScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - BasicRoundstartVariation
 
 - type: gamePreset
   id: Extended
@@ -32,6 +80,8 @@
   description: extended-description
   rules:
   - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -43,6 +93,7 @@
   showInVote: false #4boring4vote
   description: greenshift-description
   rules:
+  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -65,6 +116,9 @@
   description: secret-description
   rules:
     - BasicStationEventScheduler
+    - MeteorSwarmScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - BasicRoundstartVariation
 
 - type: gamePreset
   id: SecretGreenshift #For Admin Use: Runs Greenshift but shows "Secret" in lobby.
@@ -73,6 +127,9 @@
   name: secret-title
   showInVote: false #Admin Use
   description: secret-description
+  rules:
+  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+  - BasicRoundstartVariation
 
 # - type: gamePreset
 #   id: Sandbox
@@ -89,12 +146,16 @@
   id: Traitor
   alias:
     - traitor
+    - tator
   name: traitor-title
   description: traitor-description
   showInVote: false
   rules:
     - Traitor
+    - SubGamemodesRule
     - BasicStationEventScheduler
+    - MeteorSwarmScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -119,22 +180,28 @@
   showInVote: false
   rules:
     - Nukeops
+    # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
     - BasicStationEventScheduler
+    - MeteorSwarmScheduler
+    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - BasicRoundstartVariation
 
-#- type: gamePreset
-#  id: Revolutionary
-#  alias:
-#    - rev
-#    - revs
-#    - revolutionaries
-#  name: rev-title
-#  description: rev-description
-#  showInVote: false
-#  rules:
-#    - Revolutionary
-#    - BasicStationEventScheduler
-#    - BasicRoundstartVariation
+# - type: gamePreset
+#   id: Revolutionary
+#   alias:
+#     - rev
+#     - revs
+#     - revolutionaries
+#   name: rev-title
+#   description: rev-description
+#   showInVote: false
+#   rules:
+#     - Revolutionary
+#     - SubGamemodesRule
+#     - BasicStationEventScheduler
+#     - MeteorSwarmScheduler
+#     - SpaceTrafficControlEventScheduler
+#     - BasicRoundstartVariation
 
 - type: gamePreset
   id: Zombie
@@ -150,16 +217,22 @@
   rules:
   - Zombie
   - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - BasicRoundstartVariation
 
 - type: gamePreset
-  id: Pirates
+  id: Zombieteors
   alias:
-    - pirates
-  name: pirates-title
-  description: pirates-description
+  - zombieteors
+  - zombombies
+  - meteombies
+  name: zombieteors-title
+  description: zombieteors-description
   showInVote: false
   rules:
-    - Pirates
-    - BasicStationEventScheduler
-    - BasicRoundstartVariation
+  - Zombie
+  - BasicStationEventScheduler
+  - KesslerSyndromeScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - BasicRoundstartVariation

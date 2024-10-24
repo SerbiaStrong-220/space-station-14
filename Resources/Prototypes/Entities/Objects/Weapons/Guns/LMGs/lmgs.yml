@@ -5,15 +5,24 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/lsmg.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
   - type: Item
     size: Huge
+    shape:
+    - 0,0,4,3
   - type: Clothing
     sprite: Objects/Weapons/Guns/LMGs/l6.rsi
     quickEquip: false
     slots:
     - Back
+    - suitStorage
   - type: Wieldable
+    unwieldOnUse: false
   - type: GunWieldBonus
     minAngle: -20
     maxAngle: -20
@@ -64,7 +73,7 @@
 - type: entity
   name: L6 SAW
   id: WeaponLightMachineGunL6
-  parent: BaseWeaponLightMachineGun
+  parent: [BaseWeaponLightMachineGun]
   description: A rather traditionally made LMG with a pleasantly lacquered wooden pistol grip. Uses .30 rifle ammo.
   components:
   - type: Sprite
@@ -79,6 +88,12 @@
     steps: 4
     zeroVisible: true
   - type: Appearance
+    #ss220lowTTKUpdate btw lmg too OP ^^^^
+  - type: HeldSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+    mirrorClothingModifier: false
+    #ss220lowTTKUpdate
 
 - type: entity
   name: L6C ROW
@@ -86,6 +101,11 @@
   parent: BaseItem
   description: A L6 SAW for use by cyborgs. Creates .30 rifle ammo on the fly from an internal ammo fabricator, which slowly self-charges.
   components:
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/SS220/Effects/Drop/lsmg.ogg ##new sound_drop effect, add MIXnikita
+        params:
+          volume: 2
     - type: Gun
       minAngle: 4
       maxAngle: 25

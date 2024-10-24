@@ -1,0 +1,74 @@
+- type: entity
+  parent: DrinkBottlePlasticBaseFull
+  id: DrinkBankateBaseFull
+  abstract: true
+  components:
+  - type: Sprite
+    state: icon
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 4
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BrokenJar:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tool
+    qualities:
+    - Rolling
+    speedModifier: 0.75 # not as good as a rolling pin but does the job
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 100
+
+- type: entity
+  parent: [DrinkBottleVisualsAll, DrinkBankateBaseFull]
+  id: DrinkBankateJarFull
+  name: банка банкате
+  description: Вы же не собираетесь это пить, да?
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: BankateDrink
+          Quantity: 100
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/bankatejar.rsi
+  - type: Sealable
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkBankateGlass
+  name: стакан банкате
+  description: Выглядит как то, что не стоит пить...
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        drink:
+          maxVol: 30
+          reagents:
+          - ReagentId: BankateDrink
+            Quantity: 30
+    - type: Icon
+      sprite: SS220/Objects/Consumable/Drinks/glass_bankate.rsi
+      state: icon

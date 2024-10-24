@@ -1,0 +1,42 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: PassengerTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: PassengerJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PassengerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorGrey
+
+- type: loadout
+  id: PassengerJumpsuitTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PassengerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleAltColorGrey
+
+- type: loadout
+  id: PassengerJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PassengerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorGrey
+
+- type: loadout
+  id: PassengerJumpskirtTurtleneckAlt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PassengerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleAltColorGrey

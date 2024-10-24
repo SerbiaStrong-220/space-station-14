@@ -69,9 +69,9 @@ namespace Content.Server.Power.EntitySystems
             var enumerator = AllEntityQuery<PowerNetworkBatteryComponent, BatteryComponent>();
             while (enumerator.MoveNext(out var netBat, out var bat))
             {
-                DebugTools.Assert(bat.Charge <= bat.MaxCharge && bat.Charge >= 0);
+                DebugTools.Assert((bat.CurrentCharge <= bat.MaxCharge || bat.IsOvercharged) && bat.CurrentCharge >= 0); //SS220-smes-overcharge
                 netBat.NetworkBattery.Capacity = bat.MaxCharge;
-                netBat.NetworkBattery.CurrentStorage = bat.Charge;
+                netBat.NetworkBattery.CurrentStorage = bat.CurrentCharge;
             }
         }
 
@@ -91,7 +91,6 @@ namespace Content.Server.Power.EntitySystems
             while (query.MoveNext(out var uid, out var comp, out var batt))
             {
                 if (!comp.AutoRecharge) continue;
-                if (batt.IsFullyCharged) continue;
                 SetCharge(uid, batt.CurrentCharge + comp.AutoRechargeRate * frameTime, batt);
             }
         }
@@ -115,10 +114,26 @@ namespace Content.Server.Power.EntitySystems
             if (value <= 0 ||  !Resolve(uid, ref battery) || battery.CurrentCharge == 0)
                 return 0;
 
-            var newValue = Math.Clamp(0, battery.CurrentCharge - value, battery._maxCharge);
-            var delta = newValue - battery.Charge;
-            battery.Charge = newValue;
-            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery._maxCharge);
+            //SS220-smes-overcharge begin
+            var newValue = float.NaN;
+            if (!battery.IsOvercharged)
+            {
+                newValue = Math.Clamp(0, battery.CurrentCharge - value, battery.MaxCharge);
+                //delta = newValue - battery.CurrentCharge;
+                //battery.CurrentCharge = newValue;
+            }
+            else
+            {
+                newValue = battery.CurrentCharge - value < 0 ? 0 : battery.CurrentCharge - value;
+
+                if (newValue <= battery.MaxCharge)
+                    battery.IsOvercharged = false;
+            }
+            var delta = newValue - battery.CurrentCharge;
+            battery.CurrentCharge = newValue;
+            //SS220-smes-overcharge end
+
+            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);
             RaiseLocalEvent(uid, ref ev);
             return delta;
         }
@@ -128,13 +143,18 @@ namespace Content.Server.Power.EntitySystems
             if (!Resolve(uid, ref battery))
                 return;
 
-            var old = battery._maxCharge;
-            battery._maxCharge = Math.Max(value, 0);
-            battery.Charge = Math.Min(battery.Charge, battery._maxCharge);
-            if (MathHelper.CloseTo(battery._maxCharge, old))
+            var old = battery.MaxCharge;
+            battery.MaxCharge = Math.Max(value, 0);
+            //SS220-smes-overcharge begin
+            if (!battery.IsOvercharged)
+                battery.CurrentCharge = Math.Min(battery.CurrentCharge, battery.MaxCharge);
+            else if (battery.IsOvercharged && battery.CurrentCharge <= battery.MaxCharge)
+                battery.IsOvercharged = false;
+            //SS220-smes-overcharge end
+            if (MathHelper.CloseTo(battery.MaxCharge, old))
                 return;
 
-            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery._maxCharge);
+            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);
             RaiseLocalEvent(uid, ref ev);
         }
 
@@ -143,12 +163,28 @@ namespace Content.Server.Power.EntitySystems
             if (!Resolve(uid, ref battery))
                 return;
 
-            var old = battery.Charge;
-            battery.Charge = MathHelper.Clamp(value, 0, battery._maxCharge);
-            if (MathHelper.CloseTo(battery.Charge, old))
+            var old = battery.CurrentCharge;
+
+            //SS220-smes-overcharge begin
+            if (!battery.IsOvercharged)
+                battery.CurrentCharge = MathHelper.Clamp(value, 0, battery.MaxCharge);
+            else
+            {
+                if (value >= old)
+                    return;
+
+                if (value <= battery.MaxCharge)
+                    battery.IsOvercharged = false;
+
+                battery.CurrentCharge = value < 0 ? 0 : value;
+            }
+            //SS220-smes-overcharge end
+
+            if (MathHelper.CloseTo(battery.CurrentCharge, old) &&
+                !(old != battery.CurrentCharge && battery.CurrentCharge == battery.MaxCharge))
                 return;
 
-            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery._maxCharge);
+            var ev = new ChargeChangedEvent(battery.CurrentCharge, battery.MaxCharge);
             RaiseLocalEvent(uid, ref ev);
         }
 
@@ -157,7 +193,7 @@ namespace Content.Server.Power.EntitySystems
         /// </summary>
         public bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
-            if (!Resolve(uid, ref battery, false) || value > battery.Charge)
+            if (!Resolve(uid, ref battery, false) || value > battery.CurrentCharge)
                 return false;
 
             UseCharge(uid, value, battery);

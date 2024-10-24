@@ -1,0 +1,66 @@
+- type: localizedDataset
+  id: FigurinesAdmiral
+  values:
+    prefix: figurines-admiral-
+    count: 3
+
+
+- type: localizedDataset
+  id: FigurinesBlueshield
+  values:
+    prefix: figurines-blueshield-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesDiplomat
+  values:
+    prefix: figurines-diplomat-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesFieldOfficerCentcom
+  values:
+    prefix: figurines-fieldofficercentcom-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesOfficerCentcom
+  values:
+    prefix: figurines-officercentcom-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesSeniorScientist
+  values:
+    prefix: figurines-seniorscientist-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesZombie
+  values:
+    prefix: figurines-zombie-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesGriffin
+  values:
+    prefix: figurines-griffin-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesOwl
+  values:
+    prefix: figurines-owl-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesSceleton
+  values:
+    prefix: figurines-sceleton-
+    count: 3
+
+- type: localizedDataset
+  id: FigurinesTheif
+  values:
+    prefix: figurines-thief-
+    count: 3

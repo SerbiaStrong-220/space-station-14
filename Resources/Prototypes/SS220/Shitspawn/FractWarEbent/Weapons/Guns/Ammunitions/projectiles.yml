@@ -1,0 +1,50 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#ERT
+- type: hitscan
+  id: PulseErt_Lmg
+  damage:
+    types:
+      Heat: 22
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_beam_heavy
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_heavy
+  impactFlash:
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_beam_heavymagic
+
+- type: entity
+  name : Blaster bolt
+  id: BulletBlaster
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+    - state: redlaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 13
+        Piercing: 5
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
+#Iron squad
+- type: entity
+  id: BulletIron_MG34
+  name: пуля (7.92X57mm)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 17

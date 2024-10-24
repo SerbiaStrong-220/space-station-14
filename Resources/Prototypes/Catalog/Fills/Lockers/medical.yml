@@ -45,10 +45,11 @@
     contents:
       - id: HandheldHealthAnalyzer
         prob: 0.6
+      - id: ClothingHeadMirror
+        prob: 0.1
       - id: ClothingHandsGlovesLatex
       - id: ClothingHeadsetMedical
       - id: ClothingEyesHudMedical
-      - id: ClothingBeltMedical
       - id: ClothingHeadHatSurgcapGreen
         prob: 0.1
         orGroup: Surgcaps
@@ -82,7 +83,6 @@
       - id: ClothingHandsGlovesLatex
       - id: ClothingHeadsetMedical
       - id: ClothingEyesHudMedical
-      - id: ClothingBeltMedical
       - id: ClothingHeadHatSurgcapGreen
         prob: 0.1
         orGroup: Surgcaps
@@ -123,6 +123,8 @@
       - id: ClothingMaskSterile
       - id: HandLabeler
         prob: 0.5
+      - id: ClothingOuterBioChemistry #SS220-Chemistry-Bio-Coat
+      - id: ClothingHeadHatHoodBioChemistry #SS220-Chemistry-Bio-Coat
 
 - type: entity
   id: LockerParamedicFilled
@@ -144,3 +146,6 @@
       - id: HandheldGPSBasic
       - id: MedkitFilled
         prob: 0.3
+      - id: OxygenTankFilled # SS220 - Changing the contents of the paramedic closet
+      - id: NitrogenTankFilled # SS220 - Changing the contents of the paramedic closet
+#    - id: HandheldCrewMonitor # SS220 - RemoveParamedicCrewMonitor

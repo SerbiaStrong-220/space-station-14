@@ -1,39 +1,60 @@
 ﻿<Document>
-  # Criminal Records
-  The criminal records console is accessible in every station's security department, it serves the purpose of tracking and managing the criminal history and status of anybody part of the crew manifest.
+  # Криминальные записи
+  Консоль криминальных записей доступна в отделе безопасности каждой станции, она служит для отслеживания и управления криминальной историей и статусом любого члена экипажа.
 
   <Box>
   <GuideEntityEmbed Entity="ComputerCriminalRecords"/>
   </Box>
 
-  Anyone can open the console's UI, but only those with Security access can modify anything.
+  Любой может открыть интерфейс консоли, но только те, кто имеет доступ "Служба безопасности", могут ей пользоваться.
 
-  The UI is composed by the following elements:
-  - A search bar that has a filter next to it that lets you filter the crewmembers by their names, fingerprints or DNA.
+  Интерфейс консоли состоит из следующих элементов:
+  - Строка поиска, рядом с которой находится фильтр, позволяющий отфильтровать членов экипажа по именам, отпечаткам пальцев или ДНК.
 
-  - A list of all the crewmembers in the manifest, selecting one of the entries will make the criminal records of a crewmember appear. The list is filtered by the search bar so make sure it's empty if you want an overall overview!
+  - Список всех членов экипажа в манифесте. При выборе одной из записей отображается уголовная запись члена экипажа. Список фильтруется строкой поиска, поэтому убедитесь, что она пуста, если вам нужен полный список!
 
-  - The criminal records themselves
+  - Само уголовное дело.
 
-  In the record section you can:
-    - See security-related information about a crewmember like their name, fingerprints and DNA.
+ В разделе записей вы можете:
+    - Посмотреть информацию о членах экипажа, например их имя, отпечатки пальцев и ДНК.
 
-    - Change the security status between [color=gray]None[/color], [color=yellow]Wanted[/color] and [color=red]Detained[/color]. When setting it to Wanted you will be asked to write a reason.
+    - Изменить статус между [color=gray]"Без статуса"[/color], [color=red]"В розыске"[/color], [color=#a4885c]"Заключённый"[/color] и т.д. При установке статуса "В розыске", "Увольнение", "Подозреваемый" и "Казнить" будет предложено указать причину.
 
-    - If they are wanted, you can see the reason given below the status dropdown.
+    - Если они находятся в розыске, вы можете увидеть причину, указанную под выпадающим списком статусов.
 
-    - Once someone has been arrested, update their status on the console so everyone knows they no longer need to be captured.
+    - Как только кто-то будет арестован, обновите его статус на консоли, чтобы все знали, что он больше не нуждается в задержании.
 
-    - After they've done their time, release them and update their status to None so nobody thinks they are an escaped convict.
+    - После того, как они отсидят свой срок, освободите их и обновите их статус на "Без статуса" или "Вышел из заключения", чтобы никто не подумал, что они сбежавшие преступники.
 
-    - Open the Crime History window to check or modify it.
+    - Открыть окно "Криминальные записи", чтобы проверить или изменить их.
 
-  The Crime History window lists someone's crimes and can be modified in multiple ways:
-    - Automatically, just by setting someone's status to arrested. The reason will be added to "ARRESTED:" so it's easy to see the automated entries.
+  Криминальные записи содержат список преступлений, совершенных экипажем, и могут быть изменены различными способами:
+    - Автоматически, просто установив для кого-то статус "Заключённый". В причинах будет указано "Заключённый:", чтобы было легко увидеть автоматические записи.
 
-    - Adding a new line by clicking "Add" and writing something in the input box. When adding a record, remember to mention their crime and sentence, the console will automatically insert the shift's time so you don't need to!
+    - Добавление новой строки, нажав "Сменить статус" и написав что-нибудь в поле ввода. При добавлении записи не забудьте указать ПРЕСТУПЛЕНИЕ и НАКАЗАНИЕ члена экипажа. Консоль автоматически укажет время после начала смены, так что вам не придётся этого делать!
 
-    - Select a line of unwanted history and click "Delete" to remove it. Excellent for keeping records clean from the clown's stolen ID antics.
+    - Выберите строку нежелательной записи и нажмите "Удалить", чтобы удалить ее. Это отличный способ сохранить записи в чистоте после выходок клоуна с украденными ID картами.
 
-  Now you can be the desk jockey you've always wanted to be.
+  В консоли криминалистических записей 10 статусов:
+    - [color=gray]Без статуса[/color]: Член экипажа чист, как белый лист.
+
+    - [color=#6699ff]Следить[/color]: Члену экипажа с этом статусом стоит относиться с особой осторожностью и следить за каждым его шагом.
+
+    - [color=green]Патруль[/color]: Статус для службы безопасности. Устанавливает отряды для патрулирования.
+
+    - [color=#d5aa00]Обыскать[/color]: Члена экипажа с этим статусом стоит найти и обыскать. После обыска сообщите об этом в частоту СБ. Не забывайте об ордере на обыск!
+
+    - [color=cyan]Подозреваемый[/color]: Член экипажа с этим статусом подозревается в каком-то правонарушении. Статус отобразится в частоте СБ.
+
+    - [color=#a4885c]Заключенный[/color]: Член экипажа в данный момент находится под заключением. Не забывайте указывать способ и срок наказания!
+
+    - [color=#288eff]Вышел из заключения[/color]: Член экипажа отсидел заключение за какое-то правонарушение. Не забывайте указать, какое это было нарушение!
+
+    - [color=red]Увольнение[/color]: Члена экипажа с данным статусом необходимо в добровольно-принудительном порядке уволить. Не забывайте про бюрократию!
+
+    - [color=red]В розыске[/color]: Член экипажа с данным статусом находится в розыске. Службе безопасности необходимо задержать данного гуманоида. Не забывайте про ордер!
+
+    - [color=red]Казнить[/color]: Член экипажа с данным статусом приговорен к казни. Арестуйте его и инициируйте казнь! Не забывайте про ОПРС и СРП!
+
+  Теперь вы можете стать тем самым офисным клерком, которым всегда мечтали быть.
 </Document>

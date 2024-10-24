@@ -1,0 +1,242 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Centcom
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCentcomFormalDress
+  name: central command formal dress
+  description: A dress for special occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.5
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCentcomJacket
+  name: central command jacket
+  description: The jacket of the central command, emphasizing your status.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.70
+        Slash: 0.70
+        Piercing: 0.60
+        Heat: 0.90
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatOfficerFieldUniform
+  name: полевая форма Офицера Флота NanoTrasen
+  description: Парадный плащ, разработанный в качестве массового варианта формы Верховного Главнокомандующего. У этой униформы нет тех же защитных свойств, что и у оригинала, но она все ещё является довольно удобным и стильным предметом гардероба.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.70
+        Slash: 0.60
+        Piercing: 0.50
+        Heat: 0.80
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterSRTCoat
+  name: пальто ГСН
+  description: Пальто тёмно-синего цвета. Отличная защита от большинства видов урона.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.7
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Caustic: 0.75
+
+# Command
+- type: entity
+  parent: ClothingUniformJumpskirtCapFormalDress
+  id: ClothingOuterWhiteCoatCaptain
+  name: белое пальто капитана
+  description: Белый цвет - символ власти на флоте.
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPFormalDress
+  name: торжественное платье главы персонала
+  description: Только для настоящих машин бюрократии.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPPurpleDress
+  name: purple dress
+  description: The robe of a real smug snake.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+
+# Cargo
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatQM
+  name: торжественная куртка квартирмейстера
+  description: Торжественная куртка квартирмейстера, инкрустированная золотом.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatQMWarehouseman
+  name: the warehouse manager's coat
+  description: A coat that perfectly combines a mature style and a working purpose. In fact, it is your old work coat, which is still intact only thanks to the use of durotan and cigarette ash, which has already eaten into the fabric. You've never understood people putting on layers of clothes over coats.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
+
+# Engineering
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCEFormalDress
+  name: торжественное платье старшего инженера
+  description: Сделано из самых лучших огнеупорных тканей, а золото поможет вам маршировать от Сингулярности, не боясь излучения.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/ce_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/ce_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.75
+        Radiation: 0.9
+
+# Medical
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatCMOFormalDress
+  name: торжественное платье главного врача
+  description: Встречайте - Главный Врач!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.75
+
+# Science
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRDFormalDress
+  name: торжественное платье научного руководителя
+  description: Специально для самых величайших открытий! Устройте в свою честь марш киборгов и салют из взрывающихся артефактов.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/rd_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/rd_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.75
+        Radiation: 0.9
+
+# Сервис
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatDanger
+  name: опасная куртка
+  description: Опасный лук, опасного человека.
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+
+# WMT Ebent begin
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatBluetunic
+  name: blue army jacket
+  description: The jacket of the line infantry of the great army of the Kingdom.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRedtunic
+  name: red army jaket
+  description: The scarlet infantry jacket of the River Republic.
+  suffix: HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+# WMT Ebent end

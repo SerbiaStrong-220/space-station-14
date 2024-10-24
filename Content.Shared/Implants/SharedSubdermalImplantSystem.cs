@@ -3,7 +3,9 @@ using Content.Shared.Actions;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
+using Content.Shared.SS220.IgnoreLightVision;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
@@ -19,6 +21,19 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
 
     public const string BaseStorageId = "storagebase";
+
+    //SS220-mindslave begin
+    [ValidatePrototypeId<TagPrototype>]
+    private const string MindSlaveTag = "MindSlave";
+    //SS220-mindslave end
+
+    //SS220-removable-mindshield begin
+    [ValidatePrototypeId<TagPrototype>]
+    public const string MindShieldTag = "MindShield";
+    //SS220-removable-mindshield end
+    //SS220 thermalvision begin
+    public const string ThermalImplantTag = "ThermalImplant";
+    //SS220 thermalvision end
 
     public override void Initialize()
     {
@@ -72,6 +87,22 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
         if (component.ImplantAction != null)
             _actionsSystem.RemoveProvidedActions(component.ImplantedEntity.Value, uid);
 
+        //SS220-mindslave start
+        if (_tag.HasTag(uid, MindSlaveTag))
+        {
+            var mindSlaveRemoved = new MindSlaveRemoved(uid, component.ImplantedEntity);
+            RaiseLocalEvent(uid, ref mindSlaveRemoved);
+        }
+        //SS220-mindslave end
+
+        //SS220-removable-mindshield begin
+        if (_tag.HasTag(uid, MindShieldTag) && TryComp<MindShieldComponent>(component.ImplantedEntity.Value, out var mindShield))
+            RemComp(component.ImplantedEntity.Value, mindShield);
+        //SS220-removable-mindshield end
+        //SS220 thermalvision begin
+        if (_tag.HasTag(uid, ThermalImplantTag) && TryComp<ThermalVisionComponent>(component.ImplantedEntity.Value, out var thermalVision))
+            RemComp(component.ImplantedEntity.Value, thermalVision);
+        //SS220 thermalvision end
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;
 
@@ -205,3 +236,22 @@ public readonly struct ImplantImplantedEvent
         Implanted = implanted;
     }
 }
+
+//SS220-mindslave start
+/// <summary>
+/// Event raised whenever MindSlave implant is removed.
+/// Raied on the implant itself.
+/// </summary>
+[ByRefEvent]
+public readonly struct MindSlaveRemoved
+{
+    public readonly EntityUid Implant;
+    public readonly EntityUid? Slave;
+
+    public MindSlaveRemoved(EntityUid implant, EntityUid? slave)
+    {
+        Implant = implant;
+        Slave = slave;
+    }
+}
+//SS220-mindslave end

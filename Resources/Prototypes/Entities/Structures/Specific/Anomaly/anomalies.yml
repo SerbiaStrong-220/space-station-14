@@ -5,13 +5,11 @@
   description: An impossible object. Should you be standing this close to it?
   components:
   - type: Anomaly
+    offset: 0, 0.15
     pulseSound:
       collection: RadiationPulse
       params:
         volume: 5
-    anomalyContactDamage:
-      types:
-        Radiation: 10
     pulseRun: True
   - type: AmbientSound
     range: 5
@@ -21,7 +19,8 @@
   - type: Transform
     anchored: false
   - type: Physics
-    bodyType: KinematicController
+    bodyType: KinematicController ## SS220 Anomaly-movement
+    bodyStatus: InAir
   - type: Fixtures
     fixtures:
       fix1:
@@ -48,12 +47,27 @@
   - type: EmitSoundOnSpawn
     sound:
       path: /Audio/Effects/teleport_arrival.ogg
-  - type: RadiationSource
+  - type: RadiationSource # SS220 Radioractive-Anomalies
     intensity: 4
     slope: 0.7
-  - type: RandomWalk
+  - type: RandomWalk # SS220 Anomaly-movement
     minSpeed: 0
     maxSpeed: 0
+  - type: SecretDataAnomaly
+    randomStartSecretMin: 0
+    randomStartSecretMax: 2
+  - type: WarpPoint #ss-220 addAdminTools
+    follow: true
+    location: anomaly
+  - type: DamageOnInteract
+    damage:
+      types:
+        Radiation: 10
+    popupText: anomaly-component-contact-damage
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Radiation: 10
 
 - type: entity
   id: AnomalyPyroclastic
@@ -93,7 +107,6 @@
     tempChange: 420
   - type: ProjectileAnomaly
     projectilePrototype: ProjectileAnomalyFireball
-    targetNonSentientChance: 0.6
     projectileSpeed: 0.5
     minProjectiles: 3
     maxProjectiles: 6
@@ -103,6 +116,15 @@
   - type: IgniteOnCollide
     fixtureId: fix1
     fireStacks: 1
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 10
+    popupText: anomaly-component-contact-damage
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Heat: 10
 
 - type: entity
   id: AnomalyGravity
@@ -167,6 +189,8 @@
   - type: Anomaly
     corePrototype: AnomalyCoreFlesh
     coreInertPrototype: AnomalyCoreFleshInert
+    minPulseLength: 180
+    maxPulseLength: 300
   - type: Sprite
     layers:
     - state: anom5
@@ -296,9 +320,6 @@
       collection: RadiationPulse
       params:
         volume: 5
-    anomalyContactDamage:
-      types:
-        Radiation: 10
 
 - type: entity
   id: AnomalyIce
@@ -321,9 +342,6 @@
   - type: Anomaly
     corePrototype: AnomalyCoreIce
     coreInertPrototype: AnomalyCoreIceInert
-    anomalyContactDamage:
-      types:
-        Cold: 10
   - type: ExplosionAnomaly
     supercriticalExplosion: Cryo
     explosionTotalIntensity: 300
@@ -331,7 +349,6 @@
     explosionMaxTileIntensity: 20
   - type: ProjectileAnomaly
     projectilePrototype: ProjectileIcicle
-    targetNonSentientChance: 0.1
   - type: EntitySpawnAnomaly
     entries:
     - settings:
@@ -348,6 +365,15 @@
     releasedGas: 8 # Frezon. Please replace if there is a better way to specify this
     releaseOnMaxSeverity: true
     spawnRadius: 0
+  - type: DamageOnInteract
+    damage:
+      types:
+        Cold: 10
+    popupText: anomaly-component-contact-damage
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Cold: 10
 
 - type: entity
   id: AnomalyRockBase
@@ -358,6 +384,8 @@
   - type: Anomaly
     corePrototype: AnomalyCoreRock
     coreInertPrototype: AnomalyCoreRockInert
+    minPulseLength: 180
+    maxPulseLength: 300
   - type: Sprite
     layers:
     - state: anom6
@@ -605,12 +633,11 @@
     color: "#6270bb"
   - type: Anomaly
     animationTime: 6
-    offset: 0.05, 0
+    offset: 0, 0
     corePrototype: AnomalyCoreFlora
     coreInertPrototype: AnomalyCoreFloraInert
-    anomalyContactDamage:
-      types:
-        Slash: 0
+    minPulseLength: 60
+    maxPulseLength: 120
   - type: TileSpawnAnomaly
     entries:
     - settings:
@@ -712,9 +739,8 @@
   - type: Anomaly
     corePrototype: AnomalyCoreLiquid
     coreInertPrototype: AnomalyCoreLiquidInert
-    anomalyContactDamage:
-      types:
-        Slash: 1
+    minPulseLength: 60
+    maxPulseLength: 120
   - type: EntitySpawnAnomaly
     entries:
     - settings:
@@ -772,7 +798,6 @@
     - Desoxyephedrine
     - Ephedrine
     - THC
-    - THCOil
     - SpaceDrugs
     - Nocturine
     - MuteToxin
@@ -786,6 +811,7 @@
     - CogChamp
     - Honk
     - Carpetium
+    - JuiceThatMakesYouWeh
   - type: Drink
     solution: anomaly
   - type: DrainableSolution
@@ -803,7 +829,7 @@
   id: AnomalyShadow
   parent: BaseAnomaly
   suffix: Shadow
-  components:  
+  components:
   - type: Sprite
     sprite: Structures/Specific/Anomalies/shadow_anom.rsi
     layers:
@@ -824,9 +850,8 @@
   - type: Anomaly
     corePrototype: AnomalyCoreShadow
     coreInertPrototype: AnomalyCoreShadowInert
-    anomalyContactDamage:
-      types:
-        Cold: 10
+    minPulseLength: 60
+    maxPulseLength: 120
     animationTime: 4
     offset: "-0.1,0.1"
   - type: EntitySpawnAnomaly
@@ -837,14 +862,14 @@
         minAmount: 10
         maxAmount: 20
         maxRange: 4
-      spawns: 
+      spawns:
       - ShadowKudzuWeak
     - settings:
         spawnOnSuperCritical: true
         minAmount: 30
         maxAmount: 40
         maxRange: 50
-      spawns: 
+      spawns:
       - ShadowKudzu
   - type: Portal
     arrivalSound: /Audio/Items/hiss.ogg
@@ -852,3 +877,72 @@
   - type: Tag
     tags:
       - SpookyFog
+  - type: DamageOnInteract
+    damage:
+      types:
+        Cold: 10
+    popupText: anomaly-component-contact-damage
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Cold: 10
+
+- type: entity
+  id: AnomalyTech
+  parent: BaseAnomaly
+  suffix: Tech
+  components:
+  - type: Sprite
+    sprite: Structures/Specific/Anomalies/tech_anom.rsi
+    layers:
+    - state: bg
+      map: ["enum.AnomalyVisualLayers.Base"]
+    - state: bg_powered
+      map: ["enum.AnomalyVisualLayers.Animated"]
+      visible: false
+      shader: unshaded
+    - state: part1
+    - state: part2
+    - state: part3
+    - state: part4
+  - type: PointLight
+    radius: 6.5
+    energy: 3.5
+    color: "#56c1e8"
+  - type: Anomaly
+    corePrototype: AnomalyCoreTech
+    coreInertPrototype: AnomalyCoreTechInert
+    minPulseLength: 60
+    maxPulseLength: 120
+  - type: TechAnomaly
+  - type: DeviceLinkSource
+    ports:
+      - Pulse
+      - Timer
+
+- type: entity
+  id: AnomalyTechBeam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/Effects/techanom_beam.rsi
+    drawdepth: Effects
+    layers:
+    - state: beam
+      shader: unshaded
+      color: "#21c4ff"
+  - type: Physics
+    canCollide: false
+  - type: PointLight
+    enabled: true
+    color: "#4080FF"
+    radius: 3.5
+    softness: 1
+    autoRot: true
+    castShadows: false
+  - type: Beam
+  - type: TimedDespawn
+    lifetime: 2.3
+  - type: Tag
+    tags:
+      - HideContextMenu

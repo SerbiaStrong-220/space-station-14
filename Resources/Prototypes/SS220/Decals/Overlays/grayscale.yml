@@ -1,0 +1,31 @@
+﻿- type: decal
+  id: BrickInnerOverlayNE
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: brick_inner_ne
+
+- type: decal
+  id: BrickInnerOverlaySE
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: brick_inner_se
+
+- type: decal
+  id: BrickInnerOverlayNW
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: brick_inner_nw
+
+- type: decal
+  id: BrickInnerOverlaySW
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: brick_inner_sw

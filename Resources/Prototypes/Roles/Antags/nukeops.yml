@@ -6,7 +6,12 @@
   objective: roles-antag-nuclear-operative-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 216000 # 60h SS220 time
+  guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeops
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: NukeopsMedic
@@ -16,10 +21,18 @@
   objective: roles-antag-nuclear-operative-agent-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 216000 # 60h SS220 time (temporarily, in the future it will be changed on AntagGroupTimeRequirement)
+  - !type:RoleTimeRequirement
+    role: JobChemist
+    time: 36000 # 10h SS220 time
   - !type:DepartmentTimeRequirement
     department: Medical
-    time: 18000 # 5h
+    time: 36000 # 10h SS220 time
+  guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeopsMedic
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
 
 - type: antag
   id: NukeopsCommander
@@ -29,8 +42,81 @@
   objective: roles-antag-nuclear-operative-commander-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 216000 # 60h SS220 time (temporarily, in the future it will be changed on AntagGroupTimeRequirement)
   - !type:DepartmentTimeRequirement
     department: Security
     time: 18000 # 5h
   # should be changed to nukie playtime when thats tracked (wyci)
+  guides: [ NuclearOperatives ]
+  #SS220 Add antags playtime trackers begin
+  playTimeTracker: AntagNukeopsCommander
+  antagColor: Crimson
+  #SS220 Add antags playtime trackers end
+
+- type: startingGear
+  id: SyndicateOperativeGearFullNoUplink
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    back: ClothingBackpackDuffelSyndicate
+    mask: ClothingMaskGasSyndicate
+    eyes: ClothingEyesHudSyndicate
+    ears: ClothingHeadsetAltSyndicate
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitSyndie
+    shoes: ClothingShoesBootsCombatFilled
+    id: SyndiPDA
+    pocket2: PlushieCarp
+    belt: ClothingBeltMilitaryWebbing
+  storage:
+    back:
+    - WeaponPistolViper
+    - PinpointerSyndicateNuclear
+    - DeathAcidifierImplanter
+
+#Nuclear Operative Gear
+- type: startingGear
+  id: SyndicateOperativeGearFull
+  parent: SyndicateOperativeGearFullNoUplink
+  equipment:
+    pocket2: BaseUplinkRadio40TC
+
+#Nuclear Operative Commander Gear
+- type: startingGear
+  id: SyndicateCommanderGearFull
+  parent: SyndicateOperativeGearFull
+  equipment:
+    neck: SyndicateWhistle
+    outerClothing: ClothingOuterHardsuitSyndieCommander
+  inhand:
+  - NukeOpsDeclarationOfWar
+
+#Nuclear Operative Medic Gear
+- type: startingGear
+  id: SyndicateOperativeMedicFull
+  parent: SyndicateOperativeGearFull
+  equipment:
+    eyes: ClothingEyesHudSyndicateAgent
+    outerClothing: ClothingOuterHardsuitSyndieMedic
+    shoes: ClothingShoesBootsMagSyndie
+    id: SyndiAgentPDA
+    belt: ClothingBeltMilitaryWebbingMedFilled
+  storage:
+    back:
+    - SyndiHypo
+    - SawAdvanced
+    - Cautery
+    - CombatKnife
+    - WeaponPistolViper
+    - PinpointerSyndicateNuclear
+    - HandheldHealthAnalyzer
+    - CombatMedipen
+    - DeathAcidifierImplanter
+
+#Lone Operative Gear
+- type: startingGear
+  id: SyndicateLoneOperativeGearFull
+  parent: SyndicateOperativeGearFull
+  equipment:
+    pocket2: LoneOpsUplinkRadio40TC # SS220 Lone-Ops-Uplink
+  inhand:                         # SS220 Lone-Ops-War
+    - NukeLoneOpsDeclarationOfWar # SS220 Lone-Ops-War

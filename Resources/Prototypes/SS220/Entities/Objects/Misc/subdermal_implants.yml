@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseSubdermalImplant
+  id: MindSlaveImplant
+  name: mind-slave implant
+  description: lmaoooo
+  categories: [ HideSpawnMenu ]
+  components:
+   - type: Tag
+     tags:
+       - MindSlave

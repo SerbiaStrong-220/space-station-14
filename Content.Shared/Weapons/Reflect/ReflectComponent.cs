@@ -5,16 +5,11 @@ namespace Content.Shared.Weapons.Reflect;
 
 /// <summary>
 /// Entities with this component have a chance to reflect projectiles and hitscan shots
+/// Uses <c>ItemToggleComponent</c> to control reflection.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ReflectComponent : Component
 {
-    /// <summary>
-    /// Can only reflect when enabled
-    /// </summary>
-    [DataField("enabled"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public bool Enabled = true;
-
     /// <summary>
     /// What we reflect.
     /// </summary>
@@ -26,6 +21,14 @@ public sealed partial class ReflectComponent : Component
     /// </summary>
     [DataField("reflectProb"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float ReflectProb = 0.25f;
+
+    // ss220 FixESword
+    [DataField("reflectProbProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float ReflectProbProjectile = 0.25f;
+
+    [DataField("spreadProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public Angle SpreadProjectile = Angle.FromDegrees(45);
+    // ss220 FixESword end
 
     [DataField("spread"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public Angle Spread = Angle.FromDegrees(45);

@@ -1,0 +1,617 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: latheRecipe
+  id: TileSteel
+  result: FloorTileItemSteel
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileMetalDiamond
+  result: FloorTileItemMetalDiamond
+  category: TileTech
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileWood
+  result: FloorTileItemWood
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWhite
+  result: FloorTileItemWhite
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileDark
+  result: FloorTileItemDark
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileTechmaint
+  result: FloorTileItemTechmaint
+  category: TileTech
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileMono
+  result: FloorTileItemMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileLino
+  result: FloorTileItemLino
+  category: Carpet
+  completetime: 1
+  materials:
+    Plastic: 25
+    Cloth: 25
+
+- type: latheRecipe
+  id: TileElevatorShaft
+  result: FloorTileItemElevatorShaft
+  category: TileTech
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileRockVault
+  result: FloorTileItemRockVault
+  category: TileTech
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileBlue
+  result: FloorTileItemBlue
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileLime
+  result: FloorTileItemLime
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileMining
+  result: FloorTileItemMining
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileMiningDark
+  result: FloorTileItemMiningDark
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileMiningLight
+  result: FloorTileItemMiningLight
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFreezer
+  result: FloorTileItemFreezer
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileShowroom
+  result: FloorTileItemShowroom
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileHydro
+  result: FloorTileItemHydro
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileBar
+  result: FloorTileItemBar
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileClown
+  result: FloorTileItemClown
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileMime
+  result: FloorTileItemMime
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileKitchen
+  result: FloorTileItemKitchen
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileLaundry
+  result: FloorTileItemLaundry
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  id: TileConcrete
+  result: FloorTileItemConcrete
+  category: Concrete
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileGrayConcrete
+  result: FloorTileItemGrayConcrete
+  category: Concrete
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileOldConcrete
+  result: FloorTileItemOldConcrete
+  category: Concrete
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileArcadeBlue
+  result: FloorTileItemArcadeBlue
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileArcadeBlue2
+  result: FloorTileItemArcadeBlue2
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileArcadeRed
+  result: FloorTileItemArcadeRed
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileEighties
+  result: FloorTileItemEighties
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileCarpetClown
+  result: FloorTileItemCarpetClown
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileCarpetOffice
+  result: FloorTileItemCarpetOffice
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileBoxing
+  result: FloorTileItemBoxing
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileGym
+  result: FloorTileItemGym
+  category: Carpet
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: TileShuttleWhite
+  result: FloorTileItemShuttleWhite
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileShuttleBlue
+  result: FloorTileItemShuttleBlue
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileShuttleOrange
+  result: FloorTileItemShuttleOrange
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileShuttlePurple
+  result: FloorTileItemShuttlePurple
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileShuttleRed
+  result: FloorTileItemShuttleRed
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileShuttleGrey
+  result: FloorTileItemShuttleGrey
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileShuttleBlack
+  result: FloorTileItemShuttleBlack
+  category: Shuttle
+  completetime: 1
+  materials:
+    Plasteel: 50
+
+- type: latheRecipe
+  id: TileGold
+  result: FloorTileItemGold
+  completetime: 1
+  materials:
+    Gold: 50
+
+- type: latheRecipe
+  id: TileSilver
+  result: FloorTileItemSilver
+  completetime: 1
+  materials:
+    Silver: 50
+
+- type: latheRecipe
+  id: TileWoodPattern
+  result: FloorTileItemWoodPattern
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileFlesh
+  result: FloorTileItemFlesh
+  completetime: 1
+  materials:
+    Meaterial: 50
+
+- type: latheRecipe
+  id: TileSteelMaint
+  result: FloorTileItemSteelMaint
+  category: TileTech
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileGratingMaint
+  result: FloorTileItemGratingMaint
+  category: TileTech
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileWoodLarge
+  result: FloorTileItemWoodLarge
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileSteelReinforced
+  result: FloorTileItemSteelReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileWhiteReinforced
+  result: FloorTileItemWhiteReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileDarkReinforced
+  result: FloorTileItemDarkReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileDutch
+  result: FloorTileItemDutch
+  category: Plastic
+  completetime: 1
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: TileDutchMini
+  result: FloorTileItemDutchMini
+  category: Plastic
+  completetime: 1
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: TilePurpleCircuit
+  result: FloorTileItemPCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: TileYellowCircuit
+  result: FloorTileItemYCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: TileOrangeCircuit
+  result: FloorTileItemOCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
+  id: TileRedCircuit
+  result: FloorTileItemRCircuit
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe #SS220 new kithen tile
+  id: TileKitchenRed
+  result: FloorTileItemKitchenRed
+  category: Plastic
+  completetime: 1
+  materials:
+    Steel: 25
+    Plastic: 25
+
+#WoodTiles-begin
+- type: latheRecipe
+  id: TileWoodParquet
+  result: FloorTileItemWoodParquet
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodBlack
+  result: FloorTileItemWoodBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodDark
+  result: FloorTileItemWoodDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLight
+  result: FloorTileItemWoodLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodRed
+  result: FloorTileItemWoodRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeBlack
+  result: FloorTileItemWoodLargeBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeDark
+  result: FloorTileItemWoodLargeDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeLight
+  result: FloorTileItemWoodLargeLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodLargeRed
+  result: FloorTileItemWoodLargeRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetBlack
+  result: FloorTileItemWoodParquetBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetDark
+  result: FloorTileItemWoodParquetDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetLight
+  result: FloorTileItemWoodParquetLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodParquetRed
+  result: FloorTileItemWoodParquetRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileBlack
+  result: FloorTileItemWoodTileBlack
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileDark
+  result: FloorTileItemWoodTileDark
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileLight
+  result: FloorTileItemWoodTileLight
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+
+- type: latheRecipe
+  id: TileWoodTileRed
+  result: FloorTileItemWoodTileRed
+  category: Wood
+  completetime: 1
+  materials:
+    Wood: 50
+#WoodTiles-end

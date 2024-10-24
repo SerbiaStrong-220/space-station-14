@@ -12,6 +12,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.GameTicking;
 using Content.Shared.Messenger;
 using Content.Shared.PDA;
 using Robust.Shared.Containers;
@@ -27,6 +28,7 @@ public sealed class MessengerServerSystem : EntitySystem
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly AccessReaderSystem _accessSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
 
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
@@ -228,7 +230,10 @@ public sealed class MessengerServerSystem : EntitySystem
                 }
 
                 // create new message
-                var message = new MessengerMessage(chatKey.Id, contactKey.Id, _gameTiming.CurTime, messageText);
+                // ss220 messenger time fix start
+                var message = new MessengerMessage(chatKey.Id, contactKey.Id,
+                    _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan), messageText);
+                // ss220 messenger time fix end
                 var messageKey =
                     component.AddMessage(message);
                 message.Id = messageKey.Id;
@@ -312,11 +317,16 @@ public sealed class MessengerServerSystem : EntitySystem
     {
         idCardUid = null;
         idCardComponent = null;
+        
+        //SS220-messenger-fix begin
+        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
+            return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);
 
-        if (!payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
-            return false;
+        if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out EntityUid? loader))
+            return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
 
-        return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
+        return false;
+        //SS220-messenger-fix end
     }
 
     private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)

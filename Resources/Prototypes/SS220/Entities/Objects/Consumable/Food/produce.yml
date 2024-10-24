@@ -1,0 +1,54 @@
+- type: entity
+  name: свёкла
+  parent: FoodProduceBase
+  id: Foodbeet
+  description: Сочная и полезная - отличный выбор для салатов и гарниров.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - beets
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 14
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/beet.rsi
+  - type: Produce
+    seedId: beet
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceBeet
+        Quantity: 10
+        
+- type: entity
+  name: сноп мясопшеницы
+  description: Эх... мясопшеница... стоп, что?
+  id: MeatwheatBushel
+  parent: ProduceBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Produce
+    seedId: meatwheat
+  - type: SpawnItemsOnUse
+    items:
+      - id: FoodMeatWheat
+    sound:
+      path: /Audio/Effects/Footsteps/slime1.ogg
+  - type: Tag
+    tags:
+    - Meatwheat

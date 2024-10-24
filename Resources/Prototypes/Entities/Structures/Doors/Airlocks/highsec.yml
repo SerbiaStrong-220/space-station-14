@@ -7,6 +7,7 @@
     mode: SnapgridCenter
   components:
   - type: FoVOverlay # SS220 perspective-wall-fov
+  - type: StationAiWhitelist
   - type: InteractionOutline
   - type: Sprite
     sprite: Structures/Doors/Airlocks/highsec/highsec.rsi
@@ -56,11 +57,14 @@
     denySound:
       path: /Audio/Machines/airlock_deny.ogg
   - type: Weldable
+    fuel: 10
     time: 10
   - type: Airlock
+    openUnlitVisible: true # Corvax-Resprite-Airlocks
   - type: NavMapDoor
   - type: DoorBolt
   - type: AccessReader
+    containerAccessProvider: board
   - type: Appearance
   - type: WiresVisuals
   - type: ApcPowerReceiver
@@ -78,10 +82,11 @@
     alwaysRandomize: true
   - type: UserInterface
     interfaces:
-    - key: enum.WiresUiKey.Key
-      type: WiresBoundUserInterface
+      enum.AiUi.Key:
+        type: StationAiBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
   - type: Airtight
-    fixVacuum: true
   - type: Occluder
   - type: Damageable
     damageContainer: StructuralInorganic

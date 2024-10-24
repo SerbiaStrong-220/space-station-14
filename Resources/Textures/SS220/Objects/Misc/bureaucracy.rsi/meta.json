@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "made by cana5887 (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+},
+  "states": [
+    {
+      "name": "folder-colormap"
+    },
+    {
+      "name": "folder-captain"
+    },
+    {
+      "name": "folder-hop"
+    },
+    {
+      "name": "folder-centcomm"
+    },
+    {
+      "name": "folder-cmo"
+    },
+    {
+      "name": "folder-hos"
+    },
+    {
+      "name": "folder-ce"
+    },
+    {
+      "name": "folder-qm"
+    },
+    {
+      "name": "folder-rd"
+    },
+    {
+      "name": "folder-syndicate"
+    },
+    {
+      "name": "folder-security"
+    },
+    {
+      "name": "folder-engineer"
+    },
+    {
+      "name": "folder-cargo"
+    },
+    {
+      "name": "folder-rnd"
+    },
+    {
+      "name": "rainbow-folder"
+    },
+    {
+      "name": "folder-overlay-paper"
+	},
+    {
+      "name": "folder-base"
+	},
+    {
+      "name": "folder-medical"
+	}
+  ]
+}

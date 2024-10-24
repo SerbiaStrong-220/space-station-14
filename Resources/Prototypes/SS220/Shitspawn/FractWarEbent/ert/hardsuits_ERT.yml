@@ -1,0 +1,105 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Admiral
+- type: entity
+  parent: ClothingOuterHardsuitBaseAdmiral
+  id: ClothingOuterHardsuitERTAdmiral
+  name: боевой скафандр Панцирь-Ω
+  description: Лёгкий и прочный скафандр, обеспечивает огромную защиту не теряя в мобильности. Хотят слухи, что цена такого сравнима с небольшой исследовательской станцией.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTAdmiral
+
+# CE
+- type: entity
+  parent: ClothingOuterHardsuitBaseCE
+  id: ClothingOuterHardsuitERTCE
+  name: боевой скафандр ТЭК-670
+  description: Адаптированный скафандр для выживания во враждебной среде космоса, обеспечивает электрозащиту и полный иммунитет от радиации.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTCE
+
+# CMO
+- type: entity
+  parent: ClothingOuterHardsuitBaseCMO
+  id: ClothingOuterHardsuitERTCMO
+  name: боевой скафандр АЩ-690
+  description: Лёгкий и прочный, обеспечивает достойную защиту от лазерных выстрелов и пуль.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTCMO
+    
+# Soldier
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitERTSoldier
+  name: имритовый скафандр Х-27
+  description: Лёгкий и маневренный скафандр, обеспечивающий свободу движения в условиях невесомости.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTSoldier
+
+# Med
+- type: entity
+  parent: ClothingOuterHardsuitBaseMed
+  id: ClothingOuterHardsuitERTMed
+  name: боевой скафандр АМ-500
+  description: Серебристый скафандр с модулем повышающим скорость.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_med.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_med.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTMed
+
+# Heavy
+- type: entity
+  parent: ClothingOuterHardsuitBaseHeavy
+  id: ClothingOuterHardsuitERTHeavy
+  name: тяжёлый боевой скафандр NT-3000
+  description: Непроницаемая броня, созданная для защиты от самого современного оружия.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy
+
+# Heavy2
+- type: entity
+  parent: ClothingOuterHardsuitBaseHeavy2
+  id: ClothingOuterHardsuitERTHeavy2
+  name: тяжёлый скафандр Gladiator
+  description: Тяжёлый боевой костюм, обшитый полимерным кремниевым покрытием.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy2

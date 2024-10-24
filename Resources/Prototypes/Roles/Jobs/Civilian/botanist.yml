@@ -21,13 +21,10 @@
 - type: startingGear
   id: BotanistGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitHydroponics
-    back: ClothingBackpackHydroponicsFilled
-    shoes: ClothingShoesColorBrown
+    #shoes: ClothingShoesColorBrown #SS220 to do druid loadout
     id: BotanistPDA
     ears: ClothingHeadsetService
-    outerClothing: ClothingOuterApronBotanist
-    belt: ClothingBeltPlantFilled
-  innerClothingSkirt: ClothingUniformJumpskirtHydroponics
-  satchel: ClothingBackpackSatchelHydroponicsFilled
-  duffelbag: ClothingBackpackDuffelHydroponicsFilled
+    #belt: ClothingBeltPlantFilled #SS220 to do druid loadout
+  #storage:
+    #back:
+    #- Stuff

@@ -1,0 +1,6 @@
+- type: antag
+  id: MindSlave
+  name: roles-antag-syndicate-mindslave-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-syndicate-mindslave-objective

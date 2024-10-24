@@ -1,0 +1,95 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: CrateGeneric
+  id: TrashCan
+  name: мусорный бак
+  description: Место, куда отправляется всё, что никому не нужно и никогда не пригодится.
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Storage/trash_can.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Storage/trash_can.rsi
+    offset: 0, 0
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: Construction
+    graph: TrashCan
+    node: TrashCan
+
+- type: entity
+  parent: TrashCan
+  id: TrashCanFilled
+  suffix: Заполненный
+  components:
+    - type: StorageFill
+      contents:
+          # Creatures
+        - id: MobCockroach
+          prob: 0.05
+        - id: MobMothroach
+          prob: 0.03
+        - id: MobMouse
+          prob: 0.05
+          # Food Packaging
+        - id: FoodPacketBoritosTrash
+          prob: 0.1
+        - id: FoodPacketCheesieTrash
+          prob: 0.1
+        - id: FoodPacketChipsTrash
+          prob: 0.1
+        - id: FoodPacketSusTrash
+          prob: 0.1
+        - id: FoodPacketSyndiTrash
+          prob: 0.1
+        - id: FoodPacketChowMeinTrash
+          prob: 0.1
+        - id: FoodPacketDanDanTrash
+          prob: 0.1
+        - id: FoodPacketMRETrash
+          prob: 0.1
+        - id: FoodPacketPistachioTrash
+          prob: 0.1
+        - id: FoodPacketSemkiTrash
+          prob: 0.1
+        - id: FoodPacketRaisinsTrash
+          prob: 0.1
+          # Cans
+        - id: FoodTinBeansTrash
+          prob: 0.15
+        - id: FoodTinPeachesTrash
+          prob: 0.15
+        - id: FoodTinMRETrash
+          prob: 0.15
+          # Cigarette Stuff
+        - id: Ash
+          prob: 0.15
+        - id: CigaretteSpent
+          prob: 0.15
+          # Bacteria
+        - id: FoodBreadMoldySlice
+          prob: 0.15
+        - id: FoodPizzaMoldySlice
+          prob: 0.15
+          # Botanical Waste
+        - id: TrashBananaPeel
+          prob: 0.15
+        - id: FoodCornTrash
+          prob: 0.15
+          # Misc
+        - id: DrinkGlass
+          prob: 0.15
+        - id: BrokenBottle
+          prob: 0.15
+        - id: LightTubeBroken
+          prob: 0.15
+        - id: LightBulbBroken
+          prob: 0.15
+        - id: MobMouseDead
+          prob: 0.1
+        - id: Syringe
+          prob: 0.1
+        - id: ShardGlassPlasma
+          prob: 0.1

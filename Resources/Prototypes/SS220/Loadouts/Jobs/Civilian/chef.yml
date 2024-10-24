@@ -1,0 +1,136 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Chef Time
+- type: loadoutEffectGroup
+  id: ChefSenior
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChef
+      time: 900000 #250 часов, форма для самых лучших
+
+# Head
+- type: loadout
+  id: ChefHeadWhite
+  equipment:
+    head: ClothingHeadHatChefWhite
+
+- type: loadout
+  id: ChefHeadGreen
+  equipment:
+    head: ClothingHeadHatChefGreen
+
+- type: loadout
+  id: ChefHeadBlack
+  equipment:
+    head: ClothingHeadHatChefBlack
+
+- type: loadout
+  id: ChefHeadSenior
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChefSenior
+  equipment:
+    head: ClothingHeadHatChefNanotrasen
+
+# Jumpsuit
+- type: loadout
+  id: ChefJumpsuitWhite
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChefWhite
+
+- type: loadout
+  id: ChefJumpsuitGreen
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChefGreen
+
+- type: loadout
+  id: ChefJumpsuitBlack
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChefBlack
+
+- type: loadout
+  id: ChefJumpsuitSenior
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChefSenior
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChefNanotrasen
+
+# Jumpskirt
+- type: loadout
+  id: ChefJumpskirtWhite
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChefWhite
+
+- type: loadout
+  id: ChefJumpskirtGreen
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChefGreen
+
+- type: loadout
+  id: ChefJumpskirtBlack
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChefBlack
+
+- type: loadout
+  id: ChefJumpskirtSenior
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChefSenior
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChefNanotrasen
+
+# Outer clothing
+- type: loadout
+  id: ChefJacketWhite
+  equipment:
+    outerClothing: ClothingOuterJacketChefWhite
+
+- type: loadout
+  id: ChefJacketGreen
+  equipment:
+    outerClothing: ClothingOuterJacketChefGreen
+
+- type: loadout
+  id: ChefJacketBlack
+  equipment:
+    outerClothing: ClothingOuterJacketChefBlack
+
+- type: loadout
+  id: ChefJacketSenior
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChefSenior
+  equipment:
+    outerClothing: ClothingOuterJacketChefNanotrasen
+
+# Belt
+- type: loadout
+  id: ChefBeltApronWhite
+  equipment:
+    belt: ClothingBeltChefApronWhiteFilled
+
+- type: loadout
+  id: ChefBeltApronGreen
+  equipment:
+    belt: ClothingBeltChefApronGreenFilled
+
+- type: loadout
+  id: ChefBeltApronBlack
+  equipment:
+    belt: ClothingBeltChefApronBlackFilled
+
+- type: loadout
+  id: ChefBeltApronRed
+  equipment:
+    belt: ClothingBeltChefApronRedFilled
+
+- type: loadout
+  id: ChefBeltApronSenior
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChefSenior
+  equipment:
+    belt: ClothingBeltChefApronNanotrasenFilled

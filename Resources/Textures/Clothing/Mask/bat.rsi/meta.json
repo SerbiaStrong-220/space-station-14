@@ -6,17 +6,21 @@
     "x": 32,
     "y": 32
   },
-  "states": [
-    {
-      "name": "icon"
-    },
-    {
-      "name": "equipped-MASK",
-      "directions": 4
-    },
-    {
-      "name": "equipped-MASK-reptilian",
-      "directions": 4
-    }
-  ]
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "equipped-MASK",
+            "directions": 4
+        },
+        {
+            "name": "equipped-MASK-reptilian",
+            "directions": 4
+        },
+        {
+            "name": "equipped-MASK-Vulpkanin",
+            "directions": 4
+        }
+    ]
 }

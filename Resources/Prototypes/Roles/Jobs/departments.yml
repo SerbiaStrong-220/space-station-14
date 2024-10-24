@@ -1,5 +1,6 @@
 - type: department
   id: Cargo
+  name: department-Cargo
   description: department-Cargo-description
   color: "#A46106"
   sort: 0
@@ -10,20 +11,22 @@
 
 - type: department
   id: Civilian
+  name: department-Civilian
   description: department-Civilian-description
   color: "#9FED58"
   weight: -10
   roles:
   - Bartender
-  - Borg
   - Botanist
   - Boxer
   - Chaplain
   - Chef
   - Clown
+#  - Detective #SS220-Transfer Detective To Security
   - HeadOfPersonnel
+  - SeniorService #ss220-SEniorService
   - Janitor
-  - Lawyer
+#  - Lawyer #SS220-Law Department
   - Librarian
   - Mime
   - Musician
@@ -34,13 +37,34 @@
   - ServiceWorker
 
 - type: department
+  id: CentralCommand
+  name: department-CentralCommand
+  description: department-CentralCommand-description
+  color: "#18689a" #ss220-chatcolor
+  roles:
+  - CentralCommandOfficial
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  - ERTMedical
+  - ERTSecurity
+  - ERTEngineer
+  - DeathSquad
+  editorHidden: true
+  weight: 120
+  lightColor: "#387195" # SS220 Round End Titles
+
+- type: department
   id: Command
+  name: department-Command
   sort: 1
   description: department-Command-description
   color: "#052EED"
   roles:
   - Captain
-  - IAA # Corvax-IAA
+#  - IAA #SS220-Law Department
+  - Magistrate #SS220-Law Department
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -49,60 +73,100 @@
   - ResearchDirector
   - Quartermaster
   - BlueShield
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  - ERTMedical
+  - ERTSecurity
+  - ERTEngineer
+  - DeathSquad
   primary: false
   weight: 100
+  lightColor: "#2c60f8" # SS220 Round End Titles
 
 - type: department
   id: Engineering
+  name: department-Engineering
   sort: 0
   description: department-Engineering-description
   color: "#EFB341"
   roles:
   - AtmosphericTechnician
   - ChiefEngineer
+  - SeniorEngineer #ss220
   - StationEngineer
   - TechnicalAssistant
 
 - type: department
   id: Medical
+  name: department-Medical
   sort: 0
   description: department-Medical-description
   color: "#52B4E9"
   roles:
   - Chemist
   - ChiefMedicalOfficer
+  - SeniorPhysician #ss220
   - MedicalDoctor
   - MedicalIntern
   - Psychologist
   - Paramedic
+  - Brigmedic #ss220-brigmed
 
 - type: department
   id: Security
+  name: department-Security
   sort: 0
   description: department-Security-description
   color: "#DE3A3A"
   weight: 20
   roles:
   - HeadOfSecurity
+  - SeniorOfficer #ss220
   - SecurityCadet
   - SecurityOfficer
-  - Detective
   - Warden
-  - Brigmedic
   - SecurityPilot
+  - Detective #SS220-Transfer Detective To Security
+
 
 - type: department
   id: Science
+  name: department-Science
   sort: 0
   description: department-Science-description
   color: "#D381C9"
   roles:
   - ResearchDirector
+  - SeniorResearcher #ss220
   - Scientist
   - ResearchAssistant
 
 - type: department
+  id: Cryo
+  name: department-Cryo
+  sort: 0
+  description: department-Cryo
+  color: "#88FF88"
+  roles: []
+  primary: false
+  editorHidden: true # ss220-departments-hidden
+  weight: -50
+
+- type: department
+  id: Silicon
+  name: department-Silicon
+  sort: 0 # ss220-departments-fix
+  description: department-Silicon-description
+  color: "#D381C9"
+  roles:
+  - Borg
+  - StationAi
+
+- type: department
   id: Specific
+  name: department-Specific
   sort: 0
   description: department-Specific-description
   color: "#9FED58"
@@ -111,15 +175,18 @@
   - Boxer
   - Reporter
   - Zookeeper
-  - Psychologist
+#  - Psychologist SS220-psychologist-chat-color-fix
   primary: false
+  roundEndTitlesHidden: true # SS220 Round End Titles
 
 - type: department
   id: GhostRoles
+  name: ghost-roles
   sort: 0
-  description: Ghost roles
+  description: ghost-roles
   color: "#A9A9A9"
   roles:
   - GhostRole
   primary: false
+  editorHidden: true # ss220-departments-hidden
   weight: -100

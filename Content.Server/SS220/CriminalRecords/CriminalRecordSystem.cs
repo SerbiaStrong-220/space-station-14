@@ -7,10 +7,12 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Database;
 using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Inventory;
 using Content.Shared.Overlays;
 using Content.Shared.PDA;
 using Content.Shared.SS220.CriminalRecords;
+using Content.Shared.SS220.Ghost;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Player;
@@ -42,9 +44,20 @@ public sealed class CriminalRecordSystem : EntitySystem
     private void OnStatusExamine(EntityUid uid, StatusIconComponent comp, ExaminedEvent args)
     {
         var scannerOn = false;
+
+        // SS220 ADD GHOST HUD'S START
+        if (HasComp<GhostComponent>(args.Examiner) && HasComp<GhostHudOnOtherComponent>(args.Examiner))
+        {
+            if (HasComp<ShowCriminalRecordIconsComponent>(args.Examiner))
+            {
+                scannerOn = true;
+            }
+        }
+        // SS220 ADD GHOST HUD'S END
+
         if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out var ent))
         {
-            if (HasComp<ShowSecurityIconsComponent>(ent))
+            if (HasComp<ShowCriminalRecordIconsComponent>(ent))
             {
                 scannerOn = true;
             }
@@ -157,7 +170,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
     }
 
-    public bool RemoveCriminalRecordStatus(StationRecordKey key, int time, ICommonSession? sender = null)
+    public bool RemoveCriminalRecordStatus(StationRecordKey key, int time, EntityUid? sender = null)
     {
         if (!_stationRecords.TryGetRecord(key, out GeneralStationRecord? selectedRecord))
         {
@@ -179,7 +192,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             _logManager.Add(
                 LogType.SecutiyRecords,
                 LogImpact.High,
-                $"{ToPrettyString(sender.AttachedEntity):user} DELETED a criminal record for {selectedRecord.Name} with ID {time}"
+                $"{ToPrettyString(sender):user} DELETED a criminal record for {selectedRecord.Name} with ID {time}"
             );
         }
 
@@ -203,7 +216,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         return criminalRecord != null;
     }
 
-    public bool AddCriminalRecordStatus(StationRecordKey key, string message, string? statusPrototypeId, ICommonSession? sender = null)
+    public bool AddCriminalRecordStatus(StationRecordKey key, string message, string? statusPrototypeId, EntityUid? sender = null)
     {
         if (!_stationRecords.TryGetRecord(key, out GeneralStationRecord? selectedRecord))
         {
@@ -250,7 +263,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             _logManager.Add(
                 LogType.SecutiyRecords,
                 statusPrototypeId == "execute" ? LogImpact.Extreme : LogImpact.High,
-                $"{ToPrettyString(sender.AttachedEntity):user} sent a new criminal record for {selectedRecord.Name} with ID {currentRoundTime} with type '{statusPrototypeId ?? "none"}' with message: {message}"
+                $"{ToPrettyString(sender):user} sent a new criminal record for {selectedRecord.Name} with ID {currentRoundTime} with type '{statusPrototypeId ?? "none"}' with message: {message}"
             );
         }
 

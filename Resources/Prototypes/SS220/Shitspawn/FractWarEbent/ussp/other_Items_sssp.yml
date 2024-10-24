@@ -1,0 +1,126 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: "фонарик СССП"
+  description: "Надежный фонарь, используемый СССП."
+  categories: [ HideSpawnMenu ]
+  parent: FlashlightSeclite
+  id: FlashlightSecliteUssp
+
+- type: entity
+  parent: WeaponRevolverInspector
+  id: WeaponRevolverInspectorUssp
+  categories: [ HideSpawnMenu ]
+  name: табельный револьвер СССП
+  description: Стандартый револьвер армии СССП. Его предком является наган, но за годы он был доработан настолько, что от оригинала мало что осталось.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+  - type: RevolverAmmoProvider
+    proto: CartridgeMagnumAP
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+
+- type: entity
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltUsspWebbing
+  name: РПС СССП
+  categories: [ HideSpawnMenu ]
+  description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/mercwebbing.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/mercwebbing.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.0
+
+- type: entity
+  parent: UsspIDCard
+  id: UsspIDCardCmdLeader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PresetIdCard
+    job: USSPLeader
+
+- type: entity
+  parent: UsspPDA
+  id: UsspPDALeader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: UsspIDCardCmdLeader
+
+- type: entity
+  parent: UsspIDCard
+  id: UsspIDCardCmdEngineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PresetIdCard
+    job: USSPEngineer
+
+- type: entity
+  parent: UsspPDA
+  id: UsspPDAEngineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: UsspIDCardCmdEngineer
+
+- type: entity
+  parent: UsspIDCard
+  id: UsspIDCardCorpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PresetIdCard
+    job: USSPCorpsman
+  - type: Sprite
+    layers:
+    - state: ussp_med
+
+- type: entity
+  parent: UsspMedicalPDA
+  id: UsspPDACorpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: UsspIDCardCorpsman
+
+- type: entity
+  parent: UsspIDCard
+  id: UsspIDCardCmdCMO
+  suffix: Shitspawn, Ebent, FractWar
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PresetIdCard
+    job: USSPCMO
+  - type: Sprite
+    layers:
+    - state: ussp_med
+
+- type: entity
+  parent: UsspMedicalPDA
+  id: UsspPDACMO
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: UsspIDCardCmdCMO
+
+- type: entity
+  parent: UsspIDCard
+  id: UsspIDCardFighter
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PresetIdCard
+    job: USSPFighter
+
+- type: entity
+  parent: UsspPDA
+  id: UsspPDAFighter
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Pda
+    id: UsspIDCardFighter

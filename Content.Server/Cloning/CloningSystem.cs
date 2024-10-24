@@ -9,6 +9,7 @@ using Content.Server.Jobs;
 using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Roles;
 using Content.Shared.Atmos;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry.Components;
@@ -60,6 +61,7 @@ namespace Content.Server.Cloning
         [Dependency] private readonly SharedMindSystem _mindSystem = default!;
         [Dependency] private readonly MetaDataSystem _metaSystem = default!;
         [Dependency] private readonly SharedJobSystem _jobs = default!;
+        [Dependency] private readonly RoleSystem _role = default!; //SS220 Add antags playtime trackers
 
         public readonly Dictionary<MindComponent, EntityUid> ClonesWaitingForMind = new();
         public const float EasyModeCloningCost = 0.7f;
@@ -93,6 +95,11 @@ namespace Content.Server.Cloning
 
             _mindSystem.TransferTo(mindId, entity, ghostCheckOverride: true, mind: mind);
             _mindSystem.UnVisit(mindId, mind);
+
+            //SS220 Add antags playtime trackers begin
+            if (HasComp<ZombieRoleComponent>(mindId)) _role.MindRemoveRole<ZombieRoleComponent>(mindId);
+            //SS220 Add antags playtime trackers end
+
             ClonesWaitingForMind.Remove(mind);
         }
 
@@ -210,7 +217,7 @@ namespace Content.Server.Cloning
             }
             // end of genetic damage checks
 
-            var mob = Spawn(speciesPrototype.Prototype, Transform(uid).MapPosition);
+            var mob = Spawn(speciesPrototype.Prototype, _transformSystem.GetMapCoordinates(uid));
             _humanoidSystem.CloneAppearance(bodyToClone, mob);
 
             var ev = new CloningEvent(bodyToClone, mob);
@@ -231,7 +238,7 @@ namespace Content.Server.Cloning
 
             // TODO: Ideally, components like this should be components on the mind entity so this isn't necessary.
             // Add on special job components to the mob.
-            if (_jobs.MindTryGetJob(mindEnt, out _, out var prototype))
+            if (_jobs.MindTryGetJob(mindEnt, out var prototype))
             {
                 foreach (var special in prototype.Special)
                 {

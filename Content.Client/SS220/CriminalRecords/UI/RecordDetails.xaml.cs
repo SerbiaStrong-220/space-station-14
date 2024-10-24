@@ -37,8 +37,15 @@ public sealed partial class RecordDetails : Control
         else if (input.Length == 1)
             return char.ToUpper(input[0]).ToString();
         else
-            return char.ToUpper(input[0]) + input.Substring(1);
+            return ConcatNoReadOnlySpan(char.ToUpper(input[0]).ToString(), input.Substring(1));
     }
+	
+	// fixes roslyn being too smart and trolling the sandbox
+	// probably will be fixed later and will need to be cleaned up
+	private string ConcatNoReadOnlySpan(string a, string b)
+	{
+		return a + b;
+	}
 
     public void LoadRecordDetails(GeneralStationRecord record, bool loadSecurity = true)
     {
@@ -51,7 +58,7 @@ public sealed partial class RecordDetails : Control
             jobTitle = jobPrototype.LocalizedName;
             jobColor = GetJobColor(record.JobPrototype);
 
-            var iconPrototype = _prototype.Index<StatusIconPrototype>(jobPrototype.Icon);
+            var iconPrototype = _prototype.Index(jobPrototype.Icon);
             JobIcon.Texture = _sprite.Frame0(iconPrototype.Icon);
         }
 
@@ -108,7 +115,7 @@ public sealed partial class RecordDetails : Control
                 CriminalStatusIcon.Visible = recordType.StatusIcon.HasValue;
                 if (recordType.StatusIcon.HasValue)
                 {
-                    var iconProto = _prototype.Index<StatusIconPrototype>(recordType.StatusIcon);
+                    var iconProto = _prototype.Index(recordType.StatusIcon.Value);
                     CriminalStatusIcon.Texture = _sprite.Frame0(iconProto.Icon);
                 }
             }

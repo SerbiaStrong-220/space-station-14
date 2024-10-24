@@ -13,6 +13,12 @@
 - type: Tag
   id: ReactionCleanable
 
+- type: Tag
+  id: GrenadeDusterArta
+
+- type: Tag
+  id: MagazineGrenadeArta
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys
@@ -24,3 +30,111 @@
 # ss220 shlepi
 - type: Tag
   id: ElWyccoAxe
+
+- type: Tag
+  id: WyccoAxe
+
+- type: Tag
+  id: Meatwheat
+
+# ss220 detective-camera
+- type: Tag
+  id: DetectiveCamera
+
+- type: Tag
+  id: MindSlave
+
+# SS220-JianSword
+- type: Tag
+  id: JianSword
+
+- type: Tag
+  id: ThermalImplant
+
+# SS220 Hand/Foot Wraps begin
+- type: Tag
+  id: Handwraps
+
+- type: Tag
+  id: Footwraps
+# SS220 Hand/Foot Wraps end
+
+# SS220-Cards
+- type: Tag
+  id: GameCard
+
+# FractWarEbent
+- type: Tag
+  id: CartridgeIron_MG34
+
+- type: Tag
+  id: MagazineIron_MG34
+
+- type: Tag
+  id: BlasterPowerCell
+
+- type: Tag
+  id: MagazinePistolSubMachineGunUssp_PPSh
+
+# SS220-CentcomFashion
+
+- type: Tag
+  id: MinamotoNoYorimitsu
+
+- type: Tag
+  id: Rapier
+
+# handmade gun buff
+- type: Tag
+  id: PowerCellHigh
+
+- type: Tag
+  id: WeaponFlareGun
+
+# New Qm highrisk
+- type: Tag
+  id: EngravedKnuckleduster
+
+#MultiPhaze Energy Gun
+- type: Tag
+  id: WeaponMultiPhaseEnergyGun
+
+# Офицерский кортик
+- type: Tag
+  id: OfficerCutlass
+
+# corgi E-N
+- type: Tag
+  id: E-N
+
+# EscapePod
+- type: Tag
+  id: EscapePod
+
+# SS220 to put lighter in a cigarette pack
+- type: Tag
+  id: Lighter
+
+# Spider queen antag
+- type: Tag
+  id: SpiderQueen
+
+- type: Tag
+  id: SpiderServant
+
+- type: Tag
+  id: SpiderCocoon
+
+- type: Tag
+  id: SpiderQueenSpawnMarker
+
+- type: Tag
+  id: SpiderLittle
+
+ #Add Tourniquet to medic's belt 
+- type: Tag
+  id: Tourniquet
+
+# SS220 Add lying action
+- type: Tag
+  id: Bed

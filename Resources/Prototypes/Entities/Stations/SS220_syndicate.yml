@@ -1,0 +1,16 @@
+- type: entity
+  id: StandardSS220_syndicate
+  parent:
+   - BaseStation
+   - BaseStationSS220Syndicate
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+
+- type: entity
+  abstract: true
+  id: BaseStationSS220Syndicate
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Syndicate

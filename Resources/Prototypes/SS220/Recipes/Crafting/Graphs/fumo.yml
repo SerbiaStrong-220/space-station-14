@@ -1,0 +1,71 @@
+﻿- type: constructionGraph
+  id: FumoMaiden
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: fumoMaiden
+          steps:
+            - tag: ShrineMaiden
+              name: shrine maiden outfit
+              icon:
+                sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
+                state: icon
+            - tag: ShrineMaidenWig
+              name: shrine maiden's wig
+              icon:
+                sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+                state: icon
+            - material: Cloth
+              amount: 5
+              doAfter: 10
+    - node: fumoMaiden
+      entity: PlushieFumoMaiden
+
+- type: constructionGraph
+  id: FumoMagician
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: fumoMagician
+          steps:
+            - tag: MagicianDress
+              name: magician's dress
+              icon:
+                sprite: SS220/Clothing/Uniforms/magiciansdress.rsi
+                state: icon
+            - tag: MagicianHat
+              name: magician's hat
+              icon:
+                sprite: SS220/Clothing/Head/Hats/magicianshat.rsi
+                state: icon
+            - material: Cloth
+              amount: 5
+              doAfter: 10
+    - node: fumoMagician
+      entity: PlushieFumoMagician
+
+- type: constructionGraph
+  id: FumoMaid
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: fumoMaid
+          steps:
+            - tag: Janimaid
+              name: janitorial maid uniform
+              icon:
+                sprite: Clothing/Uniforms/Jumpskirt/janimaid.rsi
+                state: icon
+            - tag: Knife
+              name: kitchen knife
+              icon:
+                sprite: Objects/Weapons/Melee/kitchen_knife.rsi
+                state: icon
+            - material: Cloth
+              amount: 5
+              doAfter: 10
+    - node: fumoMaid
+      entity: PlushieFumoMaid

@@ -1,0 +1,113 @@
+- type: entity
+  id: CrateDrinkBeerCan
+  parent: CratePlastic
+  name: ящик пива
+  description: Ящик пива - это источник настоящего удовольствия и отличного настроения. В нем спрятаны лучшие сорта пива, которые обещают золотистый цвет, искрящийся вкус и неповторимый аромат. Будьте уверены, что открыв этот ящик, вы откроете дверь в мир качественного и насыщенного вкуса. Содержит 18 банок пива.
+  components:
+  - type: StorageFill
+    contents:
+    - id: DrinkCanPackBeer
+      amount: 3
+    - id: FoodMeatSalami
+      prob: 0.04
+
+- type: entity
+  id: CrateExoticMeat
+  parent: CrateFreezer
+  name: exotic meat crate
+  description: Contains over 10 pieces of unusual meat from all corners of the galaxy.
+  components:
+  - type: StorageFill
+    contents:
+    #base
+    - id: FoodMeatFish
+      amount: 4
+    - id: FoodMeatXeno
+      amount: 4
+    #random common one
+    - id: FoodMeatCrab
+      amount: 3
+      prob: 0.1
+      orGroup: commonMeat
+    - id: FoodMeatSnail
+      amount: 3
+      prob: 0.1
+      orGroup: commonMeat
+    - id: FoodMeatSpider
+      amount: 3
+      prob: 0.1
+      orGroup: commonMeat
+    - id: FoodMeatRat
+      amount: 3
+      prob: 0.1
+      orGroup: commonMeat
+    - id: FoodMeatSnake
+      amount: 3
+      prob: 0.1
+      orGroup: commonMeat
+    # rare ones. Small chance to get some
+    - id: FoodMeatGoliath
+      amount: 3
+      prob: 0.25
+    - id: FoodMeatTomato
+      amount: 3
+      prob: 0.25
+    - id: FoodMeatPenguin
+      amount: 3
+      prob: 0.25
+    - id: FoodMeatBear
+      amount: 3
+      prob: 0.25
+    # flesh
+    - id: FoodMeatHuman
+      amount: 2
+      prob: 0.1
+      orGroup: flesh
+    - id: FoodMeatSlime
+      amount: 2
+      prob: 0.1
+      orGroup: flesh
+    - id: FoodMeatLizard
+      amount: 2
+      prob: 0.1
+      orGroup: flesh
+    - id: FoodMeatPlant
+      amount: 2
+      prob: 0.1
+      orGroup: flesh
+    # very rare
+    - id: FoodMeatClown
+      amount: 3
+      prob: 0.01
+    - id: FoodMeatRouny
+      amount: 1
+      prob: 0.01
+    # funny
+    - id: FoodMeatCorgi
+      amount: 1
+      prob: 0.0001 # never. 0.01%
+
+
+- type: entity
+  id: CrateMeat
+  parent: CrateFreezer
+  name: meat crate
+  description: Contains 10 pieces of meat from NanoTrasen colonial farms!
+  components:
+  - type: StorageFill
+    contents:
+    # basic boring meat
+    - id: FoodMeat
+      amount: 5
+    # bird meat
+    - id: FoodMeatChicken
+      amount: 4
+      prob: 0.3
+      orGroup: BirdMeat
+    - id: FoodMeatDuck
+      amount: 4
+      prob: 0.3
+      orGroup: BirdMeat
+    # some bacon
+    - id: FoodMeatBacon
+      amount: 2

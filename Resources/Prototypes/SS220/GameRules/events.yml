@@ -1,0 +1,38 @@
+- type: entity
+  id: BananaRain
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-banana-rain-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    reoccurrenceDelay: 10
+    earliestStart: 20
+    minimumPlayers: 15
+    weight: 0
+    duration: 60
+  - type: CableRandomSpawnRule
+    entries:
+    - id: TrashBananaPeel
+      prob: 0.07
+    specialEntries:
+    - id: TrashBananaPeelExplosive
+      prob: 0.005
+
+#Spider queen WIP
+#- type: entity
+#  id: SpiderMigration
+#  parent: BaseGameRule
+#  categories: [ HideSpawnMenu ]
+#  components:
+#  - type: StationEvent
+#    startDelay: 5
+#    earliestStart: 15
+#    minimumPlayers: 35
+#    weight: 5
+#    duration: 50
+#  - type: VentCrittersRule
+#    specialEntries:
+#    - id: SpawnPointGhostSpaceQueen
+#      prob: 0.005

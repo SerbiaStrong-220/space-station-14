@@ -2,136 +2,107 @@
 
 - type: entity
   parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitUSSP
-  name: Battle USSP hardsuit
-  description: This hardsuit is famous for its simplicity, lightness, reliability and decent life support system.
-  suffix: Ebent
+  id: ClothingOuterHardsuitBlueshield
+  name: blueshield's hardsuit
+  description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp.rsi
-  - type: TemperatureProtection
-    coefficient: 0.001
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield.rsi
   - type: PressureProtection
-    highPressureMultiplier: 0.02
-    lowPressureMultiplier: 1000
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 10000
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
+        Blunt: 0.6
         Slash: 0.5
-        Piercing: 0.4
-        Heat: 0.2
-        Radiation: 0.5
-        Caustic: 0.5
-        Stamina: 0.3
+        Piercing: 0.5
+        Heat: 0.8
+        Radiation: 0.25
+        Caustic: 0.6
+        Stamina: 0.35 #SS220-syndifix
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.6
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitUSSP
+    clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
 
+#Security Pilot Hardsuit
 - type: entity
   parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitUSSPEng
-  name: тяжёлый боевой скафандр Заслуженного Инженера СССП
-  description: Отечественный инженерный скафандр - это настоящий металлургический чудо-труд. Классический советский дизайн, в котором каждая ручка, каждый шов и каждая кнопочка задуманы для максимального удобства и эффективности. 
-  suffix: Ebent
+  id: ClothingOuterHardsuitSecurityPilot
+  name: security pilot hardsuit
+  description: A special suit that protects against hazardous low-pressure environments. Has an additional layer of armor for space battles.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_eng.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security_pilot.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_eng.rsi
-  - type: TemperatureProtection
-    coefficient: 0.001
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security_pilot.rsi
   - type: PressureProtection
-    highPressureMultiplier: 0.02
+    highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
-  - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.2
-        Slash: 0.25
-        Piercing: 0.3
-        Heat: 0.2
-        Radiation: 0
-        Caustic: 0.5
-        Stamina: 0.2
-  - type: ExplosionResistance
-    damageCoefficient: 0.1
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.7
+        Caustic: 0.7
+        Radiation: 0.50
+        Stamina: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 0.80
+    sprintModifier: 0.80
+  - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitUSSPEng
+    clothingPrototype: ClothingHeadHelmetHardsuitSecurityPilot
 
+#SuperMatter operator's Hardsuit
 - type: entity
   parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitUSSPMed
-  name: тяжёлый боевой скафандр Народного Врача СССП
-  description: В нём врач будет выглядеть так элегантно, что пациенты будут лечиться сами от одного его вида. Защищает от экстремального давления, температур, а так же капиталистических идей.
-  suffix: Ebent
+  id: ClothingOuterHardsuitSuperMatterOperator
+  name: superMatter operator's hardsuit
+  description: A special hardsuit that protects against hazardous, low pressure environments, designed to support the operator in the supermatter crystal chamber.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_med.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sm.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_med.rsi
-  - type: TemperatureProtection
-    coefficient: 0.001
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sm.rsi
   - type: PressureProtection
-    highPressureMultiplier: 0.02
+    highPressureMultiplier: 0.001
     lowPressureMultiplier: 1000
-  - type: ClothingSpeedModifier
-    walkModifier: 1.1
-    sprintModifier: 1.1
+  - type: FireProtection
+    reduction: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.35
-        Piercing: 0.3
-        Heat: 0.15
-        Radiation: 0.3
-        Caustic: 0.2
-        Stamina: 0.2
-  - type: ExplosionResistance
-    damageCoefficient: 0.25
-  - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitUSSPMed
-
-- type: entity
-  parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitUSSPCmd
-  name: тяжёлый боевой скафандр Маршала СССП
-  description: Прекрасный космический скафандр - идеальная защита от всякого рода космических крыс, инопланетных пауков и недоброжелательных идеологий.
-  suffix: Ebent
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_admiral.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_admiral.rsi
-  - type: TemperatureProtection
-    coefficient: 0.001
-  - type: PressureProtection
-    highPressureMultiplier: 0.02
-    lowPressureMultiplier: 1000
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+        Heat: 0.4
+        Radiation: 0.025
+        Caustic: 0.7
+        Stamina: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 1
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.15
-        Slash: 0.15
-        Piercing: 0.2
-        Heat: 0.15
-        Radiation: 0
-        Caustic: 0.5
-        Stamina: 0.1
-  - type: ExplosionResistance
-    damageCoefficient: 0.1
+    walkModifier: 0.7
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitUSSPCmd
+    clothingPrototype: ClothingHeadHelmetHardsuitSuperMatterOperator
+  - type: SpecialSounds
+    mode: 0
+  - type: Insulated
+  - type: Vocal
+    sounds:
+      Male: MaleEngineer
+      Female: FemaleEngineer
+      Unsexed: MaleEngineer

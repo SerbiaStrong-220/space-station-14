@@ -1,45 +1,27 @@
 - type: entity
   id: MobRevenant
+  parent:
+  - Incorporeal
+  - BaseMob
   name: revenant
   description: A spooky ghostie.
   components:
-  - type: MindContainer
-  - type: InputMover
-  - type: MobMover
   - type: Input
     context: "ghost"
   - type: MovementSpeedModifier
     baseWalkSpeed: 6
     baseSprintSpeed: 6
   - type: Sprite
-    noRot: true
-    drawdepth: Ghosts
     sprite: Mobs/Ghosts/revenant.rsi
     layers:
     - state: active
-  - type: Clickable
   - type: StatusEffects
     allowed:
     - Stun
     - Corporeal
-  - type: InteractionOutline
-  - type: Physics
-    bodyType: KinematicController
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.40
-        density: 80
-        mask:
-        - GhostImpassable
-  - type: MovementIgnoreGravity
   - type: Damageable
     damageContainer: Biological
-  - type: Examiner
   - type: NoSlip
-  - type: Actions
   - type: TTS # Corvax-TTS
     voice: twitch
   - type: Eye
@@ -49,15 +31,15 @@
       - Ghost
   - type: ContentEye
     maxZoom: 1.2, 1.2
-  - type: DoAfter
-  - type: Alerts
   - type: NameIdentifier
     group: GenericNumber
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-revenant-name
     description: ghost-role-information-revenant-description
-    rules: ghost-role-information-revenant-rules
+    rules: ghost-role-information-antagonist-rules
+    raffle:
+      settings: default
   - type: GhostTakeoverAvailable
   - type: Revenant
     malfunctionWhitelist:
@@ -77,8 +59,8 @@
     softness: 1
   - type: UserInterface
     interfaces:
-    - key: enum.StoreUiKey.Key
-      type: StoreBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
   - type: Visibility
     layer: 2 #ghost vis layer
   - type: Store
@@ -95,3 +77,26 @@
     - RevenantTheme
   - type: Speech
     speechVerb: Ghost
+  #ss220 spec fix start
+  - type: MobState
+    allowedStates:
+      - Alive
+      - Dead
+  #ss220 spec fix end
+  #ss220 revenant buff start
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Cold: 10
+    ignoreResistances: true
+  - type: DamageContacts
+    damage:
+      types:
+        Cold: 5 #may be painful if spammed, but doesnt ignores protection.
+  - type: Electrified #idk this seems lame but it works fine
+    shockTime: 8 #4 seconds of stun
+    shockDamage: 2
+    requirePower: false
+    ignoreInsulation: true
+  #ss220 revenant buff end
+          

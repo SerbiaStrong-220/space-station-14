@@ -13,3 +13,5 @@
     id: CentcomPDA
     ears: ClothingHeadsetCentCom
     pocket1: RubberStampCentcom
+  inhand:
+    - TelescopicShield #SS220-new-centcomm

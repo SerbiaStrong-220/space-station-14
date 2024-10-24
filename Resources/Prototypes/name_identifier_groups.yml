@@ -1,33 +1,34 @@
 ﻿# Non-fungible apes, anyone?
 - type: nameIdentifierGroup
   id: Monkey
-  prefix: MK
+  prefix: ОБ # Corvax-Localization
 
 - type: nameIdentifierGroup
   id: Kobold
-  prefix: KB
+  prefix: КБ # Corvax-Localization
 
 - type: nameIdentifierGroup
   id: Holoparasite
-  prefix: HOLO
+  prefix: ГОЛО # Corvax-Localization
 
 - type: nameIdentifierGroup
   id: MMI
-  prefix: MMI
+  prefix: ЧМИ # Corvax-Localization
   minValue: 100
   maxValue: 999
 
 - type: nameIdentifierGroup
   id: PositronicBrain
-  prefix: PB
+  prefix: ПМ # Corvax-Localization
   minValue: 10
   maxValue: 99
 
-- type: nameIdentifierGroup
-  id: Silicon
-  prefix: Si
-  minValue: 1000
-  maxValue: 9999
+# SS20 Fix AI Dataset
+#- type: nameIdentifierGroup
+#  id: Silicon
+#  prefix: Кр # Corvax-Localization
+#  minValue: 1000
+#  maxValue: 9999
 
 # Used to suffix a number to any mob to identify player controlled mob griefing.
 - type: nameIdentifierGroup
@@ -35,5 +36,11 @@
 
 - type: nameIdentifierGroup
   id: Bounty
+  minValue: 0
+  maxValue: 999
+
+- type: nameIdentifierGroup
+  id: CargoTelepads
+  prefix: TELE
   minValue: 0
   maxValue: 999

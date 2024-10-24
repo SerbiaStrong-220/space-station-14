@@ -1,0 +1,27 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: CryoStoragePortal
+  categories: [ HideSpawnMenu ]
+  name: портал в крио
+  components:
+    - type: Sprite
+      sprite: /Textures/Effects/portal.rsi
+      state: portal-blue
+    - type: PointLight
+      netsync: false
+      color: SkyBlue
+      radius: 3
+      energy: 3
+    - type: AmbientSound
+      enabled: false
+      sound: /Audio/Effects/teleport_departure.ogg
+
+- type: entity
+  id: ActionCryoGhost
+  name: action-name-cryo-ghost
+  description: action-desc-cryo-ghost
+  components:
+    - type: InstantAction
+      checkCanInteract: false
+      event: !type:CryopodGhostActionEvent

@@ -1,0 +1,48 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseItem
+  id: NTbaton
+  name: telescopic bat NT
+  description: Did you know that Central Committee officers like to play baseball with the heads of the incompetent management of their assets?
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi
+    layers:
+    - state: telescope_off
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: SwitchableWeapon
+    openSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
+    closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
+    damageOpen:
+      types:
+        Blunt: 120
+        Stamina: 0
+    damageFolded:
+      types:
+        Blunt: 28
+        Stamina: 120
+    sizeOpened: Large
+    sizeClosed: Small
+  - type: StaminaDamageOnHit
+    damage: 0
+  - type: MeleeWeapon
+    soundHit: !type:SoundCollectionSpecifier
+      collection: BatonHit
+    damage:
+      types:
+        Blunt: 0
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi
+  - type: UseDelay
+    delay: 1.0
+  - type: DisarmMalus
+    malus: 0
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+     enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: telescope_on}
+          False: {state: telescope_off}

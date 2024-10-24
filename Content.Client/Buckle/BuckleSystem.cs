@@ -4,6 +4,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Rotation;
 using Content.Shared.SS220.Vehicle.Components;
 using Robust.Client.GameObjects;
+using Robust.Shared.GameStates;
 
 namespace Content.Client.Buckle;
 
@@ -15,42 +16,49 @@ internal sealed class BuckleSystem : SharedBuckleSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BuckleComponent, AfterAutoHandleStateEvent>(OnBuckleAfterAutoHandleState);
         SubscribeLocalEvent<BuckleComponent, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<StrapComponent, MoveEvent>(OnStrapMoveEvent);
     }
 
-    private void OnBuckleAfterAutoHandleState(EntityUid uid, BuckleComponent component, ref AfterAutoHandleStateEvent args)
+    private void OnStrapMoveEvent(EntityUid uid, StrapComponent component, ref MoveEvent args)
     {
-        ActionBlocker.UpdateCanMove(uid);
+        // I'm moving this to the client-side system, but for the sake of posterity let's keep this comment:
+        // > This is mega cursed. Please somebody save me from Mr Buckle's wild ride
 
-        if (!TryComp<SpriteComponent>(uid, out var ownerSprite))
+        // The nice thing is its still true, this is quite cursed, though maybe not omega cursed anymore.
+        // This code is garbage, it doesn't work with rotated viewports. I need to finally get around to reworking
+        // sprite rendering for entity layers & direction dependent sorting.
+
+        if (args.NewRotation == args.OldRotation)
             return;
 
-        // SS220 Readd-Vehicles begin
-        if (HasComp<VehicleComponent>(component.LastEntityBuckledTo))
+        if (!TryComp<SpriteComponent>(uid, out var strapSprite))
             return;
-        // SS220 Readd-Vehicles end
 
-        // Adjust draw depth when the chair faces north so that the seat back is drawn over the player.
-        // Reset the draw depth when rotated in any other direction.
-        // TODO when ECSing, make this a visualizer
-        // This code was written before rotatable viewports were introduced, so hard-coding Direction.North
-        // and comparing it against LocalRotation now breaks this in other rotations. This is a FIXME, but
-        // better to get it working for most people before we look at a more permanent solution.
-        if (component is { Buckled: true, LastEntityBuckledTo: { } } &&
-            Transform(component.LastEntityBuckledTo.Value).LocalRotation.GetCardinalDir() == Direction.North &&
-            TryComp<SpriteComponent>(component.LastEntityBuckledTo, out var buckledSprite))
+        var isNorth = Transform(uid).LocalRotation.GetCardinalDir() == Direction.North;
+        foreach (var buckledEntity in component.BuckledEntities)
         {
-            component.OriginalDrawDepth ??= ownerSprite.DrawDepth;
-            ownerSprite.DrawDepth = buckledSprite.DrawDepth - 1;
-            return;
-        }
+            if (!TryComp<BuckleComponent>(buckledEntity, out var buckle))
+                continue;
 
-        // If here, we're not turning north and should restore the saved draw depth.
-        if (component.OriginalDrawDepth.HasValue)
-        {
-            ownerSprite.DrawDepth = component.OriginalDrawDepth.Value;
-            component.OriginalDrawDepth = null;
+            if (!TryComp<SpriteComponent>(buckledEntity, out var buckledSprite))
+                continue;
+
+            // SS220 Readd-Vehicles begin
+            if (HasComp<VehicleComponent>(uid))
+                continue;
+            // SS220 Readd-Vehicles end
+
+            if (isNorth)
+            {
+                buckle.OriginalDrawDepth ??= buckledSprite.DrawDepth;
+                buckledSprite.DrawDepth = strapSprite.DrawDepth - 1;
+            }
+            else if (buckle.OriginalDrawDepth.HasValue)
+            {
+                buckledSprite.DrawDepth = buckle.OriginalDrawDepth.Value;
+                buckle.OriginalDrawDepth = null;
+            }
         }
     }
 
@@ -58,6 +66,22 @@ internal sealed class BuckleSystem : SharedBuckleSystem
     {
         if (!TryComp<RotationVisualsComponent>(uid, out var rotVisuals))
             return;
+
+        //SS220 Change DrawDepth on buckle begin
+        if (args.Sprite != null)
+        {
+            if (Appearance.TryGetData<int>(uid, BuckleVisuals.DrawDepth, out var drawDepth, args.Component))
+            {
+                component.DrawDepthBeforeBuckle ??= args.Sprite.DrawDepth;
+                args.Sprite.DrawDepth = drawDepth;
+            }
+            else if (component.DrawDepthBeforeBuckle is { } drawDepthBeforeBuckle)
+            {
+                args.Sprite.DrawDepth = drawDepthBeforeBuckle;
+                component.DrawDepthBeforeBuckle = null;
+            }
+        }
+        //SS220 Change DrawDepth on buckle end
 
         if (!Appearance.TryGetData<bool>(uid, BuckleVisuals.Buckled, out var buckled, args.Component) ||
             !buckled ||

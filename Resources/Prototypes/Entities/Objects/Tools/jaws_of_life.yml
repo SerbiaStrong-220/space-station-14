@@ -18,16 +18,16 @@
     slots:
       - Belt
   - type: ToolTileCompatible
+    delay: 0.5
   - type: Tool
     qualities:
       - Prying
       - PlatingCutting #SS220 JOL TilePrying
-    speed: 3 #SS220 JOL TilePrying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
+    speedModifier: 1 #SS220 even speed for both jaws
     pryPowered: true
     useSound: /Audio/Items/jaws_pry.ogg
-  - type: ToolForcePowered
   - type: MultipleTool
     statusShowBehavior: true
     entries:
@@ -44,13 +44,16 @@
         useSound: /Audio/Items/jaws_cut.ogg
         changeSound: /Audio/Items/change_jaws.ogg
   - type: MeleeWeapon
+    wideAnimationRotation: 90
     damage:
       types:
         Blunt: 10
+    soundHit:
+      collection: MetalThud
 
 - type: entity
   name: syndicate jaws of life
-  parent: JawsOfLife
+  parent: [JawsOfLife]
   id: SyndicateJawsOfLife
   description: Useful for entering the station or its departments.
   components:
@@ -68,7 +71,8 @@
     qualities:
       - Prying
       - PlatingCutting #SS220 JOL TilePryingng
-    speed: 1 #SS220 JOL TilePrying
+  - type: Prying
+    speedModifier: 1 #SS220 even speed for both jaws
   - type: MultipleTool
     entries:
       - behavior: [Prying, PlatingCutting] #SS220 JOL TilePryingng

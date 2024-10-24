@@ -1,0 +1,119 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by TTTomaTTT for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "black_corner_ne"
+        },
+        {
+            "name": "black_corner_nw"
+        },
+        {
+            "name": "black_corner_se"
+        },
+        {
+            "name": "black_corner_sw"
+        },
+        {
+            "name": "black_diagonal_left"
+        },
+        {
+            "name": "black_diagonal_right"
+        },
+        {
+            "name": "black_inner_ne"
+        },
+        {
+            "name": "black_inner_nw"
+        },
+        {
+            "name": "black_inner_se"
+        },
+        {
+            "name": "black_inner_sw"
+        },
+        {
+            "name": "black_line_e"
+        },
+        {
+            "name": "black_line_n"
+        },
+        {
+            "name": "black_line_s"
+        },
+        {
+            "name": "black_line_w"
+        },
+        {
+            "name": "white_corner_ne"
+        },
+        {
+            "name": "white_corner_nw"
+        },
+        {
+            "name": "white_corner_se"
+        },
+        {
+            "name": "white_corner_sw"
+        },
+        {
+            "name": "white_diagonal_left"
+        },
+        {
+            "name": "white_diagonal_right"
+        },
+        {
+            "name": "white_inner_ne"
+        },
+        {
+            "name": "white_inner_nw"
+        },
+        {
+            "name": "white_inner_se"
+        },
+        {
+            "name": "white_inner_sw"
+        },
+        {
+            "name": "white_line_e"
+        },
+        {
+            "name": "white_line_n"
+        },
+        {
+            "name": "white_line_s"
+        },
+        {
+            "name": "white_line_w"
+        },
+        {
+            "name": "bw_corner_ne"
+        },
+        {
+            "name": "bw_corner_nw"
+        },
+        {
+            "name": "bw_corner_se"
+        },
+        {
+            "name": "bw_corner_sw"
+        },
+        {
+            "name": "wb_corner_ne"
+        },
+        {
+            "name": "wb_corner_nw"
+        },
+        {
+            "name": "wb_corner_se"
+        },
+        {
+            "name": "wb_corner_sw"
+        }
+    ]
+}

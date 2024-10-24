@@ -11,7 +11,7 @@
   - type: Matchbox
 
 - type: entity
-  parent: ClothingShoesMilitaryBase
+  parent: [ClothingShoesMilitaryBase]
   id: ClothingShoesBootsJack
   name: jackboots
   description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
@@ -23,6 +23,8 @@
   - type: FootstepModifier # Corvax-Sounds
     footstepSoundCollection:
       collection: FootstepBoots
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -48,7 +50,7 @@
     sprite: Clothing/Shoes/Boots/performer.rsi
 
 - type: entity
-  parent: ClothingShoesMilitaryBase
+  parent: [ClothingShoesMilitaryBase]
   id: ClothingShoesBootsCombat
   name: combat boots
   description: Robust combat boots for combat scenarios or combat situations. All combat, all the time.
@@ -74,7 +76,7 @@
     sprite: Clothing/Shoes/Boots/highheelboots.rsi
 
 - type: entity
-  parent: ClothingShoesMilitaryBase
+  parent: [ ClothingShoesMilitaryBase]
   id: ClothingShoesBootsMerc
   name: mercenary boots
   description: Boots that have gone through many conflicts and that have proven their combat reliability.
@@ -101,9 +103,9 @@
   name: winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterboots.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterboots.rsi #SS220-wboots-resprite
 
 - type: entity
   parent: ClothingShoesBaseWinterBoots
@@ -111,9 +113,9 @@
   name: cargo winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootscargo.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootscargo.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootscargo.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootscargo.rsi #SS220-wboots-resprite
 
 - type: entity
   parent: ClothingShoesBaseWinterBoots
@@ -121,9 +123,9 @@
   name: engineering winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootsengi.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsengi.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootsengi.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsengi.rsi #SS220-wboots-resprite
 
 - type: entity
   parent: ClothingShoesBaseWinterBoots
@@ -131,9 +133,9 @@
   name: medical winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootsmed.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsmed.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootsmed.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsmed.rsi #SS220-wboots-resprite
 
 - type: entity
   parent: ClothingShoesBaseWinterBoots
@@ -141,30 +143,30 @@
   name: science winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootssci.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssci.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootssci.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssci.rsi #SS220-wboots-resprite
 
 - type: entity
-  parent: ClothingShoesBaseWinterBoots
+  parent: [ClothingShoesBaseWinterBoots, ClothingShoesMilitaryBase]
   id: ClothingShoesBootsWinterSec
   name: security winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootssec.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssec.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootssec.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssec.rsi #SS220-wboots-resprite
 
 - type: entity
-  parent: ClothingShoesBaseWinterBoots
+  parent: [ClothingShoesBaseWinterBoots]
   id: ClothingShoesBootsWinterSyndicate
   name: syndicate's winter boots
-  description: Durable heavy boots, looks like merch from "Syndieland"
+  description: Durable heavy boots, looks like merch from "Syndieland".
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootssyndicate.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssyndicate.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootssyndicate.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootssyndicate.rsi #SS220-wboots-resprite
 
 - type: entity
   parent: ClothingShoesBaseWinterBoots
@@ -173,9 +175,9 @@
   description: Boots made out of dense webbing to help survive even the coldest of winters.
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootsweb.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsweb.rsi #SS220-wboots-resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootsweb.rsi
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsweb.rsi #SS220-wboots-resprite
   - type: FlavorProfile
     flavors:
       - cobwebs
@@ -205,7 +207,7 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepSpurs
-      
+
 - type: entity
   parent: ClothingShoesBootsCowboyBrown
   id: ClothingShoesBootsCowboyBlack
@@ -215,7 +217,7 @@
     sprite: Clothing/Shoes/Boots/cowboybootsblack.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/cowboybootsblack.rsi
-    
+
 - type: entity
   parent: ClothingShoesBootsCowboyBrown
   id: ClothingShoesBootsCowboyWhite
@@ -225,7 +227,7 @@
     sprite: Clothing/Shoes/Boots/cowboybootswhite.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/cowboybootswhite.rsi
-    
+
 - type: entity
   parent: ClothingShoesBootsCowboyBrown
   id: ClothingShoesBootsCowboyFancy

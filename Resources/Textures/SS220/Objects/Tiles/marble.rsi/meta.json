@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Kit0vras (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blackmarble"
+    },
+    {
+      "name": "bordermarblebw"
+    },
+    {
+      "name": "bordermarblewb"
+    },
+    {
+      "name": "diagonalmarblebw"
+    },
+    {
+      "name": "diagonalmarblewb"
+    },
+    {
+      "name": "verticalmarblebw"
+    },
+    {
+      "name": "verticalmarblewb"
+    },
+    {
+      "name": "whitemarble"
+    },
+    {
+      "name": "cornermarblene"
+    },
+    {
+      "name": "cornermarblenw"
+    },
+    {
+      "name": "cornermarblese"
+    },
+    {
+      "name": "cornermarblesw"
+    },
+    {
+      "name": "innermarblene"
+    },
+    {
+      "name": "innermarblenw"
+    },
+    {
+      "name": "innermarblese"
+    },
+    {
+      "name": "innermarblesw"
+    },
+    {
+      "name": "bordermarble-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "bordermarble-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "diagonalmarble-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "diagonalmarble-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "marbleblack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "marbleblack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "marblewhite-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "marblewhite-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "verticalmarble-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "verticalmarble-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "cornermarble-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "cornermarble-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "innermarble-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "innermarble-inhand-right",
+      "directions": 4
+    }
+  ]
+}

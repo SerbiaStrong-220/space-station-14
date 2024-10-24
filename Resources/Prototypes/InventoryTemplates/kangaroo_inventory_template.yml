@@ -45,6 +45,7 @@
 
   - name: belt
     slotTexture: belt
+    fullTextureName: template_small
     slotFlags: BELT
     slotGroup: SecondHotbar
     stripTime: 6
@@ -57,6 +58,7 @@
 
   - name: pocket1
     slotTexture: pocket
+    fullTextureName: template_small
     slotFlags: POCKET
     slotGroup: MainHotbar
     stripTime: 3
@@ -70,6 +72,7 @@
   slots:
   - name: pocket1
     slotTexture: pocket
+    fullTextureName: template_small
     slotFlags: POCKET
     slotGroup: MainHotbar
     stripTime: 3

@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Verbs;
-using Content.Shared.Pulling.Components;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Pulling.Components;
 
 namespace Content.Shared.SS220.Cart;
 
@@ -25,15 +25,15 @@ public sealed partial class CartPullerSystem : EntitySystem
         SubscribeLocalEvent<CartPullerComponent, CartDeattachEvent>(OnDeattachCart);
     }
 
-    private void OnShutdown(EntityUid uid, CartPullerComponent component, ComponentShutdown args)
+    private void OnShutdown(Entity<CartPullerComponent> entity, ref ComponentShutdown args)
     {
-        if (!component.AttachedCart.HasValue)
+        if (entity.Comp.AttachedCart is not { } attachedCart)
             return;
 
-        if (!TryComp<CartComponent>(component.AttachedCart, out var cartComp))
+        if (!TryComp<CartComponent>(attachedCart, out var cartComp))
             return;
 
-        _cart.TryDeattachCart(uid, cartComp, null);
+        _cart.TryDeattachCart(entity, (attachedCart, cartComp), null);
     }
 
     //private void OnCanDrop(EntityUid uid, CartPullerComponent component, ref CanDropTargetEvent args)
@@ -76,41 +76,47 @@ public sealed partial class CartPullerSystem : EntitySystem
     //    return _interaction.InRangeUnobstructed(target, cart, cartComp.AttachRange, predicate: Ignored);
     //}
 
-    private void AddCartVerbs(EntityUid uid, CartPullerComponent component, GetVerbsEvent<InteractionVerb> args)
+    private void AddCartVerbs(Entity<CartPullerComponent> entity, ref GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        if (component.AttachedCart.HasValue)
+        var argsInner = args;
+
+        if (entity.Comp.AttachedCart.HasValue)
         {
+            var attachedCart = entity.Comp.AttachedCart;
+            if (!attachedCart.HasValue)
+                return;
+
             // If cart puller already have an attached cart - add verb to deattach it
-            if (!TryComp<CartComponent>(component.AttachedCart, out var attachedCart))
+            if (!TryComp<CartComponent>(entity.Comp.AttachedCart, out var attachedCartComp))
                 return;
 
             InteractionVerb deattachVerb = new()
             {
-                Text = Name(attachedCart.Owner),
-                Act = () => _cart.TryDeattachCart(attachedCart, args.User),
+                Text = Name(attachedCart.Value),
+                Act = () => _cart.TryDeattachCart((attachedCart.Value, attachedCartComp), argsInner.User),
                 Category = VerbCategory.DeattachCart
             };
             args.Verbs.Add(deattachVerb);
             return;
         }
 
-        if (!TryComp<SharedPullerComponent>(args.User, out var userPullerComp))
+        if (!TryComp<PullerComponent>(args.User, out var userPullerComp))
             return;
 
         var cart = userPullerComp.Pulling;
         if (!TryComp<CartComponent>(cart, out var cartComp))
             return;
 
-        if (!_cart.IsAttachable(uid, cart.Value))
+        if (!_cart.IsAttachable(entity, cart.Value))
             return;
 
         InteractionVerb verb = new()
         {
             Text = Name(cart.Value),
-            Act = () => _cart.TryAttachCart(uid, cartComp, args.User),
+            Act = () => _cart.TryAttachCart(entity, cartComp, argsInner.User),
             Category = VerbCategory.AttachCart
         };
         args.Verbs.Add(verb);
@@ -119,12 +125,12 @@ public sealed partial class CartPullerSystem : EntitySystem
     private void OnDeattachCart(EntityUid uid, CartPullerComponent component, ref CartDeattachEvent args)
     {
         component.AttachedCart = null;
-        Dirty(component);
+        Dirty(uid, component);
     }
 
     private void OnAttachCart(EntityUid uid, CartPullerComponent component, ref CartAttachEvent args)
     {
         component.AttachedCart = args.Attaching;
-        Dirty(component);
+        Dirty(uid, component);
     }
 }

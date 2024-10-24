@@ -167,9 +167,13 @@ binds:
   type: State
   key: MouseLeft
   canFocus: true
+  priority: 10
 - function: RotateStoredItem
   type: State
   key: MouseRight
+- function: SaveItemLocation
+  type: State
+  key: MouseMiddle
 - function: Drop
   type: State
   key: Q
@@ -183,6 +187,9 @@ binds:
 - function: OpenCharacterMenu
   type: State
   key: C
+- function: OpenEmotesMenu
+  type: State
+  key: Y
 - function: TextCursorSelect
   # TextCursorSelect HAS to be above ExamineEntity
   # So that LineEdit receives it correctly.
@@ -244,6 +251,10 @@ binds:
   type: State
   key: E
   mod1: Shift
+- function: SmartEquipNeck #SS220-SmartEquipNeck begin
+  type: State
+  key: H
+  mod1: Shift #SS220-SmartEquipNeck end
 - function: OpenBackpack
   type: State
   key: V
@@ -262,6 +273,16 @@ binds:
   type: State
   key: MouseMiddle
   canFocus: true
+- function: RotateObjectClockwise
+  type: State
+  key: R
+- function: RotateObjectCounterclockwise
+  type: State
+  key: R
+  mod1: Shift
+- function: FlipObject
+  type: State
+  key: F
 - function: TextCursorLeft
   type: State
   key: Left
@@ -372,18 +393,24 @@ binds:
   type: State
   key: Return
   canRepeat: true
-  mod1: Shift
 - function: TextNewline
   type: State
   key: NumpadEnter
   canRepeat: true
-  mod1: Shift
 - function: TextSubmit
   type: State
   key: Return
 - function: TextSubmit
   type: State
   key: NumpadEnter
+- function: MultilineTextSubmit
+  type: State
+  key: Return
+  mod1: Control
+- function: MultilineTextSubmit
+  type: State
+  key: NumpadEnter
+  mod1: Control
 - function: TextSelectAll
   type: State
   key: A
@@ -442,6 +469,9 @@ binds:
 - function: OpenDecalSpawnWindow
   type: State
   key: F8
+- function: ToggleRoundEndSummaryWindow
+  type: Toggle
+  key: F9
 - function: OpenSandboxWindow
   type: State
   key: B
@@ -473,15 +503,19 @@ binds:
 - function: ArcadeUp
   type: State
   key: Up
+  priority: -1
 - function: ArcadeDown
   type: State
   key: Down
+  priority: -1
 - function: ArcadeLeft
   type: State
   key: Left
+  priority: -1
 - function: ArcadeRight
   type: State
   key: Right
+  priority: -1
 - function: Arcade1
   type: State
   key: Space
@@ -524,3 +558,86 @@ binds:
 - function: Hotbar9
   type: State
   key: Num9
+- function: MappingUnselect
+  type: State
+  key: MouseRight
+  canFocus: true
+- function: SaveMap
+  type: State
+  key: S
+  mod1: Control
+- function: MappingEnablePick
+  type: State
+  key: Num5
+- function: MappingEnableDelete
+  type: State
+  key: Num6
+- function: MappingPick
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: MappingRemoveDecal
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: MappingCancelEraseDecal
+  type: State
+  key: MouseRight
+  canFocus: true
+- function: MappingOpenContextMenu
+  type: State
+  key: MouseRight
+  canFocus: true
+# SS220 Calculator begin
+- function: CalculatorType0
+  type: State
+  key: NumpadNum0
+- function: CalculatorType1
+  type: State
+  key: NumpadNum1
+- function: CalculatorType2
+  type: State
+  key: NumpadNum2
+- function: CalculatorType3
+  type: State
+  key: NumpadNum3
+- function: CalculatorType4
+  type: State
+  key: NumpadNum4
+- function: CalculatorType5
+  type: State
+  key: NumpadNum5
+- function: CalculatorType6
+  type: State
+  key: NumpadNum6
+- function: CalculatorType7
+  type: State
+  key: NumpadNum7
+- function: CalculatorType8
+  type: State
+  key: NumpadNum8
+- function: CalculatorType9
+  type: State
+  key: NumpadNum9
+- function: CalculatorTypeDot
+  type: State
+  key: NumpadDecimal
+- function: CalculatorTypeAdd
+  type: State
+  key: NumpadAdd
+- function: CalculatorTypeSubtract
+  type: State
+  key: NumpadSubtract
+- function: CalculatorTypeMultiply
+  type: State
+  key: NumpadMultiply
+- function: CalculatorTypeDivide
+  type: State
+  key: NumpadDivide
+- function: CalculatorEnter
+  type: State
+  key: NumpadEnter
+- function: CalculatorClear
+  type: State
+  key: Delete
+# SS220 Calculator end

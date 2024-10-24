@@ -1,6 +1,70 @@
 - type: stealTargetGroup
   id: VehicleSecway
-  name: secway
+  name: steal-target-groups-secway
   sprite:
     sprite: Objects/Vehicles/secway.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: EngravedKnuckleduster
+  name: steal-target-groups-engraved-knuckleduster
+  sprite:
+    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: WeaponMultiPhaseEnergyGun
+  name: steal-target-groups-multiphase-energy-gun
+  sprite:
+    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: ClothingOuterReactiveArmor
+  name: steal-target-groups-reactive-armor
+  sprite:
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
+    state: icon
+
+- type: stealTargetGroup   
+  id: WristWatchGold
+  name: steal-target-groups-wrist-watch-gold
+  sprite:
+    sprite: SS220/Clothing/Hands/WristWatch/nt-watch-gold.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: ExpensiveLighterSyndicate
+  name: steal-target-groups-expensive-lighter-syndicate
+  sprite:
+    sprite: SS220/Objects/Tools/lighters.rsi
+    state: zippo_syndi_icon_base
+
+- type: stealTargetGroup
+  id: ExpensiveLighterNanotrasen
+  name: steal-target-groups-expensive-lighter-nanotrasen
+  sprite:
+    sprite: SS220/Objects/Tools/lighters.rsi
+    state: zippo_nt_icon_base
+
+- type: stealTargetGroup
+  id: ExpensiveLighterShield
+  name: steal-target-groups-expensive-lighter-shield
+  sprite:
+    sprite: SS220/Objects/Tools/lighters.rsi
+    state: zippo_shield_icon_base
+
+- type: stealTargetGroup
+  id: ExpensiveLighterDetective
+  name: steal-target-groups-expensive-lighter-detective
+  sprite:
+    sprite: SS220/Objects/Tools/lighters.rsi
+    state: zippo_detective_icon_base
+
+#SALVAGE SHUTTLE RETURN
+- type: stealTargetGroup
+  id: SalvageShuttleConsoleCircuitboard
+  name: steal-target-groups-salvage-shuttle-console-board
+  sprite:
+    sprite: Objects/Misc/module.rsi
+    state: cpuboard

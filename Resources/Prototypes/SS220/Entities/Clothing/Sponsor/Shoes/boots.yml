@@ -1,0 +1,77 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Моль
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorMothBoots
+  name: твёрдые моле-ботинки
+  description: Сэр, чистка прошла успешно, сэр!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/mothboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/mothboots.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBoots
+
+# Клоун, золотой
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorGoldClownShoes
+  name: золотые клоунские туфли
+  description: Шааааайни!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/goldclownboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/goldclownboots.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
+
+# Мафиози
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorMafiaBoots
+  name: ботинки прекрасного человека
+  description: Цок-цок.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/mafia.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/mafia.rsi
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorMafiaBlackBoots
+  name: тёмные ботинки прекрасного человека
+  description: Цок-цок.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/mafia_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/mafia_black.rsi
+
+# Деревня дурачка
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingSponsorBootsMuzhik
+  name: ботинки мужика
+  description: Проложит путь к ближайшим самогонным месторождениям.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/laceups_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/laceups_red.rsi
+
+- type: entity
+  parent: ClothingSponsorShoesBase
+  id: ClothingShoesMoryak
+  name: башмаки морячка
+  description: Тесные матроские башмаки, но хотя бы водонепроницаемые.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/moryachok_flops.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Shoes/Boots/moryachok_flops.rsi

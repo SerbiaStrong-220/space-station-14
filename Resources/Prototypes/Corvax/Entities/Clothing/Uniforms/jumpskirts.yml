@@ -4,6 +4,7 @@
   id: ClothingUniformJumpskirtCentcomOfficial
   name: CentCom officer's suitskirt
   description: It's a suitskirt worn by CentCom's highest-tier Commanders.
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/centcom_official.rsi
@@ -15,6 +16,7 @@
   id: ClothingUniformJumpskirtCentcomOfficer
   name: CentCom turtleneck skirt
   description: A skirt version of the CentCom turtleneck, rarer and more sought after than the original.
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/centcom_officer.rsi
@@ -33,12 +35,12 @@
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/rainbow.rsi
 
 - type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpskirtPsychologist
-  name: psychologist suitskirt
-  description: I don't lose things. I place things in locations which later elude me.
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtSchool
+  name: school skirt
+  description: Stylish and comfortable school skirt.
   components:
-    - type: Sprite
-      sprite: Corvax/Clothing/Uniforms/Jumpskirt/psychologist.rsi
-    - type: Clothing
-      sprite: Corvax/Clothing/Uniforms/Jumpskirt/psychologist.rsi
+  - type: Sprite
+    sprite: Corvax/Clothing/Uniforms/Jumpskirt/schoolskirt.rsi
+  - type: Clothing
+    sprite: Corvax/Clothing/Uniforms/Jumpskirt/schoolskirt.rsi

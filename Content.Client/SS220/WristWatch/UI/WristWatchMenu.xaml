@@ -1,0 +1,17 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<watch:WristWatchMenu xmlns="https://spacestation14.io"
+                    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                    xmlns:watch="clr-namespace:Content.Client.SS220.WristWatch.UI"
+                    MouseFilter="Stop"
+                    Resizable="False"
+                    MinSize="256 214"
+                    SetSize="256 214">
+    <PanelContainer Name="BackgroundPanel" StyleClasses="WatchPanel" />
+    <Control>
+        <Label Name="HoursLabel" StyleClasses="WatchFaceText" SetSize="64 44" />
+        <Label Name="FirstSeparatorLabel" StyleClasses="WatchFaceText" Text=":" SetSize="32 44" />
+        <Label Name="MinutesLabel" StyleClasses="WatchFaceText" SetSize="64 44" />
+        <Label Name="SecondsLabel" StyleClasses="WatchSecondaryText" SetSize="40 32" />
+        <Label Name="SecondSeparatorLabel" StyleClasses="WatchFaceText" Text=":" SetSize="32 44" />
+    </Control>
+</watch:WristWatchMenu>

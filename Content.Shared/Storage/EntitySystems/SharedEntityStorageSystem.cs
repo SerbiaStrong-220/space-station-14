@@ -15,16 +15,15 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Wall;
-using Robust.Shared.Audio;
+using Content.Shared.Whitelist;
+using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -45,6 +44,8 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly WeldableSystem _weldable = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     public const string ContainerName = "entity_storage";
 
@@ -89,7 +90,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
 
     protected void OnInteract(EntityUid uid, SharedEntityStorageComponent component, ActivateInWorldEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !args.Complex)
             return;
 
         args.Handled = true;
@@ -130,6 +131,9 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (!HasComp<HandsComponent>(args.Entity))
             return;
 
+        if (!_actionBlocker.CanMove(args.Entity))
+            return;
+
         if (_timing.CurTime < component.NextInternalOpenAttempt)
             return;
 
@@ -137,9 +141,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         Dirty(uid, component);
 
         if (component.OpenOnMove)
-        {
             TryOpenStorage(args.Entity, uid);
-        }
     }
 
     protected void OnFoldAttempt(EntityUid uid, SharedEntityStorageComponent component, ref FoldAttemptEvent args)
@@ -319,6 +321,13 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (component.Contents.ContainedEntities.Count >= component.Capacity)
             return false;
 
+        // SS220 fix #1121 begin
+        SharedEntityStorageComponent? insertedComp = null;
+
+        if (ResolveStorage(toInsert,  ref insertedComp))
+            return false;
+        // SS220 fix #1121 end
+
         return CanFit(toInsert, container, component);
     }
 
@@ -358,16 +367,18 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             return false;
         }
 
-        if (_container.IsEntityInContainer(target))
-        {
-            if (_container.TryGetOuterContainer(target,Transform(target) ,out var container) &&
-                !HasComp<HandsComponent>(container.Owner))
-            {
-                Popup.PopupClient(Loc.GetString("entity-storage-component-already-contains-user-message"), user, user);
+        // SS220 Fix #1397 begin
+        // if (_container.IsEntityInContainer(target))
+        // {
+        //     if (_container.TryGetOuterContainer(target,Transform(target) ,out var container) &&
+        //         !HasComp<HandsComponent>(container.Owner))
+        //     {
+        //         Popup.PopupClient(Loc.GetString("entity-storage-component-already-contains-user-message"), user, user);
 
-                return false;
-            }
-        }
+        //         return false;
+        //     }
+        // }
+        // SS220 Fix #1397 end
 
         //Checks to see if the opening position, if offset, is inside of a wall.
         if (component.EnteringOffset != new Vector2(0, 0) && !HasComp<WallMountComponent>(target)) //if the entering position is offset
@@ -432,7 +443,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
 
         var targetIsMob = HasComp<BodyComponent>(toInsert);
         var storageIsItem = HasComp<ItemComponent>(container);
-        var allowedToEat = component.Whitelist?.IsValid(toInsert) ?? HasComp<ItemComponent>(toInsert);
+        var allowedToEat = component.Whitelist == null ? HasComp<ItemComponent>(toInsert) : _whitelistSystem.IsValid(component.Whitelist, toInsert);
 
         // BEFORE REPLACING THIS WITH, I.E. A PROPERTY:
         // Make absolutely 100% sure you have worked out how to stop people ending up in backpacks.
@@ -484,9 +495,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
                 component.RemovedMasks = 0;
             }
         }
-
-        if (TryComp<PlaceableSurfaceComponent>(uid, out var surface))
-            _placeableSurface.SetPlaceable(uid, component.Open, surface);
 
         _appearance.SetData(uid, StorageVisuals.Open, component.Open);
         _appearance.SetData(uid, StorageVisuals.HasContents, component.Contents.ContainedEntities.Count > 0);

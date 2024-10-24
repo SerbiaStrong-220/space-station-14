@@ -1,0 +1,33 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: EngravedKnuckledusterStealObjective
+  components:
+  - type: NotJobRequirement
+    job: Quartermaster
+  - type: StealCondition
+    stealGroup: EngravedKnuckleduster
+    owner: job-name-qm
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: MultiPhaseEnergyGunStealObjective
+  components:
+  - type: Objective
+    difficulty: 3
+  - type: NotJobRequirement
+    job: HeadOfSecurity
+  - type: StealCondition
+    stealGroup: WeaponMultiPhaseEnergyGun
+    owner: job-name-hos
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: ClothingOuterReactiveArmorObjective
+  components:
+  - type: NotJobRequirement
+    job: ResearchDirector
+  - type: StealCondition
+    stealGroup: ClothingOuterReactiveArmor
+    owner: job-name-rd

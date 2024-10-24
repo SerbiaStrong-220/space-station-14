@@ -9,6 +9,12 @@
   dollPrototype: MobSlimePersonDummy
   skinColoration: Hues
   buttScanTexture: /Textures/SS220/Interface/Butts/slime.png
+#SS220-new-species-naming begin
+  maleFirstNames: names_slime_first_male
+  femaleFirstNames: names_slime_first_female
+  maleLastNames: names_slime_last
+  femaleLastNames: names_slime_last
+#SS220-new-species-naming end
 
 - type: speciesBaseSprites
   id: MobSlimeSprites

@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/commit/5d5f83d79198b98e02fe0a778e1c4f59fcd80223, nukefestive by Alekshhh (Github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon",
+      "delays": [
+        [
+          1,
+          0.3,
+          0.3,
+		  0.3
+        ]
+      ]
+    },
+	{
+      "name": "equipped-HELMET",
+      "delays": [
+        [
+          1,
+          0.3,
+          0.3,
+		  0.3
+        ]
+      ]
+    },
+	{
+      "name": "inhand-left",
+      "delays": [
+        [
+          1,
+          0.3,
+          0.3,
+		  0.3
+        ]
+      ]
+    },
+	{
+      "name": "inhand-right",
+      "delays": [
+        [
+          1,
+          0.3,
+          0.3,
+		  0.3
+        ]
+      ]
+    }
+  ]
+}

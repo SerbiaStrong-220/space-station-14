@@ -1,6 +1,6 @@
 - type: entity
   id: ElectricalDisruptionKit
-  parent: BoxCardboard
+  parent: [BoxCardboard]
   name: electrical disruption kit
   suffix: Filled
   components:
@@ -12,7 +12,7 @@
           amount: 1
 
 - type: entity
-  parent: BoxVial
+  parent: [BoxVial]
   id: ChemicalSynthesisKit
   name: chemical synthesis kit
   description: A starter kit for the aspiring chemist, includes toxin and vestine for all your criminal needs!
@@ -21,13 +21,69 @@
     grid:
     - 0,0,3,2
   - type: StorageFill
+# ss220 new syndie chemistry update begin
     contents:
       - id: Beaker
-        amount: 2
       - id: Dropper
-      # It would be cool to have special "syndicate" chemical analysis goggles
-      - id: ClothingEyesGlassesChemical
+      - id: ClothingEyesHudSyndChem
+      - id: SyringeStimulants
+      - id: SyringeStimulants
       - id: VestineChemistryVial
         amount: 2
-      - id: BaseChemistryEmptyVial
-      - id: SyringeStimulants
+      - id: LeadChemistryVial
+      - id: UraniumChemistryVial
+# ss220 new syndie chemistry update end
+
+- type: entity
+  parent: [BoxCardboard]
+  id: ThrowingKnivesKit
+  name: throwing knives kit
+  description: A set of 4 syndicate branded throwing knives, perfect for embedding into the body of your victims.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,3,1
+  - type: StorageFill
+    contents:
+      - id: ThrowingKnife
+        amount: 4
+  - type: Sprite
+    layers:
+      - state: box_of_doom
+      - state: throwing_knives
+
+- type: entity
+  name: deathrattle implant box
+  parent: [BoxCardboard]
+  id: BoxDeathRattleImplants
+  description: Six deathrattle implants for the whole squad.
+  components:
+  - type: Sprite
+    layers:
+      - state: box_of_doom
+      - state: syringe
+  - type: Storage
+    grid:
+    - 0,0,5,3
+  - type: StorageFill
+    contents:
+      - id: DeathRattleImplanter
+        amount: 6
+
+- type: entity
+  parent: [BoxCardboard]
+  id: CombatBakeryKit
+  name: combat bakery kit
+  description: A kit of clandestine baked weapons.
+  components:
+  - type: Sprite
+    layers:
+      - state: box_of_doom
+      - state: france
+  - type: StorageFill
+    contents:
+      - id: WeaponCroissant
+        amount: 2
+      - id: WeaponBaguette
+      - id: SyndicateMicrowaveMachineCircuitboard
+      - id: PaperWrittenCombatBakeryKit

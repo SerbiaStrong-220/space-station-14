@@ -41,7 +41,7 @@
         - FullTileMask
         layer:
         - WallLayer
-        hard: false
+        #hard: false #ss220 gateway examinable
   - type: Appearance
 
 - type: entity
@@ -52,6 +52,6 @@
     key: enum.GatewayUiKey.Key
   - type: UserInterface
     interfaces:
-    - key: enum.GatewayUiKey.Key
-      type: GatewayBoundUserInterface
+      enum.GatewayUiKey.Key:
+        type: GatewayBoundUserInterface
   - type: Gateway

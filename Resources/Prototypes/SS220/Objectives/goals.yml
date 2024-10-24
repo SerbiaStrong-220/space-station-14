@@ -1,27 +1,27 @@
 - type: stationGoal
-  id: StationGoalSaveplanet
+  id: Saveplanet
   text: station-goal-saveplanet
 
 - type: stationGoal
-  id: StationGoalExpedition
+  id: Expedition
   text: station-goal-expedition
 
 - type: stationGoal
-  id: StationGoalGuests
+  id: Guests
   text: station-goal-guests
 
 - type: stationGoal
-  id: StationGoalPneumaticTubes
+  id: PneumaticTubes
   text: station-goal-pneumatictubes
 
 - type: stationGoal
-  id: StationGoalRobotisation
+  id: Robotisation
   text: station-goal-robotisation
 
 - type: stationGoal
-  id: StationGoalHomekeepers
+  id: Homekeepers
   text: station-goal-homekeepers
 
 - type: stationGoal
-  id: StationGoalComplexPVO
+  id: ComplexPVO
   text: station-goal-complexPVO

@@ -50,7 +50,6 @@
   id: ActionUseChemicalImplant
   name: chemical-implant-action-name
   description: chemical-implant-action-desc
-  noSpawn: true
   components:
   - type: InstantAction
     charges: 1

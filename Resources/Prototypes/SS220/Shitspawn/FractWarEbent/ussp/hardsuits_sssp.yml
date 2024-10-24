@@ -1,0 +1,91 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Admiral
+- type: entity
+  parent: ClothingOuterHardsuitBaseAdmiral
+  id: ClothingOuterHardsuitUSSPAdmiral
+  name: тяжёлый боевой скафандр Маршала СССП
+  description: Прекрасный космический скафандр - идеальная защита от всякого рода космических крыс, инопланетных пауков и недоброжелательных идеологий.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_admiral.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_admiral.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPAdmiral
+
+# CE
+- type: entity
+  parent: ClothingOuterHardsuitBaseCE
+  id: ClothingOuterHardsuitUSSPCE
+  name: тяжёлый боевой скафандр Заслуженного Инженера СССП
+  description: Отечественный инженерный скафандр - это настоящий металлургический чудо-труд. Классический советский дизайн, в котором каждая ручка, каждый шов и каждая кнопочка задуманы для максимального удобства и эффективности.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_ce.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_ce.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPCE
+
+# CMO
+- type: entity
+  parent: ClothingOuterHardsuitBaseCMO
+  id: ClothingOuterHardsuitUSSPCMO
+  name: тяжёлый боевой скафандр Народного Врача СССП
+  description: В нём врач будет выглядеть так элегантно, что пациенты будут лечиться сами от одного его вида. Защищает от экстремального давления, температур, а так же капиталистических идей.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_cmo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ussp_cmo.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPCMO
+
+# Soldier
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitUSSPSoldier
+  name: боевой скафандр красноармейца СССП
+  description: Этот костюм славится своей простотой, легкостью, надежностью и достойной системой жизнеобеспечения.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp_soldier.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp_soldier.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPSoldier
+
+# Heavy
+- type: entity
+  parent: ClothingOuterHardsuitBaseHeavy
+  id: ClothingOuterHardsuitUSSPHeavy
+  name: тяжёлый боевой скафандр СССП
+  description: Этот тяжёлый костюм выполнен по всем стандартам ГОСТа советского производства. Обеспечивает отличную защиту и путь в светлое будущее.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp_heavy.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp_heavy.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPSoldier
+
+# Heavy2
+- type: entity
+  parent: ClothingOuterHardsuitBaseHeavy2
+  id: ClothingOuterHardsuitUSSPHeavy2
+  name: тяжёлый боевой скафандр СССП 2.0
+  description: Этот тяжёлый костюм выполнен по всем стандартам ГОСТа советского производства. Обеспечивает отличную защиту и путь в светлое будущее
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp_heavy_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/sssp_heavy_2.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPHeavy2

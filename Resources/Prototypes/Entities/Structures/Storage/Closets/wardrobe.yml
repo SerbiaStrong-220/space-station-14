@@ -16,9 +16,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: blue_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: blue_wardrobe_door #SS220-Closet-Resprite-end
 
 # Pink wardrobe
 - type: entity
@@ -29,9 +29,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: pink_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: pink_wardrobe_door #SS220-Closet-Resprite-end
 
 # Black wardrobe
 - type: entity
@@ -42,9 +42,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: black_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: black_wardrobe_door #SS220-Closet-Resprite-end
 
 # Green wardrobe
 - type: entity
@@ -55,9 +55,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: green_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: green_wardrobe_door #SS220-Closet-Resprite-end
 
 # Prison wardrobe
 - type: entity
@@ -67,9 +67,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: orange_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: prisoner_wardrobe_door #SS220-Closet-Resprite-end
 
 # Yellow wardrobe
 - type: entity
@@ -80,9 +80,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: yellow_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: yellow_wardrobe_door #SS220-Closet-Resprite-end
 
 # White wardrobe
 - type: entity
@@ -93,9 +93,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: white_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: white_wardrobe_door #SS220-Closet-Resprite-end
 
 # Grey wardrobe
 - type: entity
@@ -106,9 +106,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: grey_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: grey_wardrobe_door #SS220-Closet-Resprite-end
 
 # Mixed wardrobe
 - type: entity
@@ -119,9 +119,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: mixed_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: mixed_wardrobe_door #SS220-Closet-Resprite-end
 
 # Jobs
 
@@ -132,9 +132,9 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
-    stateDoorClosed: red_door
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: securityofficer_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeAtmospherics
@@ -143,15 +143,21 @@
   components:
   - type: Appearance
   - type: EntityStorageVisuals
-    stateBaseClosed: generic
-    stateDoorOpen: generic_open
+    stateBaseClosed: wardrobe #SS220-Closet-Resprite-start
+    stateDoorOpen: wardrobe_open #SS220-Closet-Resprite-end
     stateDoorClosed: atmos_wardrobe_door
 
 - type: entity
   id: ClosetJanitor
-  parent: WardrobeMixed
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: custodial closet
   description: It's a storage unit for janitorial clothes and gear.
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: janitor_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeFormal
@@ -161,69 +167,147 @@
 
 - type: entity
   id: ClosetChef
-  parent: WardrobeBlack
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: chef's closet
   description: It's a storage unit for foodservice garments and mouse traps.
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: chef_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeChapel
-  parent: WardrobeBlack
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: chaplain's wardrobe
   description: It's a storage unit for Nanotrasen-approved religious attire.
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: chaplain_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: ClosetLegal
-  parent: WardrobeBlue
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: legal closet
   description: It's a storage unit for courtroom apparel and items.
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: lawyer_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeCargo
-  parent: WardrobePrison
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: cargo wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: cargotechnician_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeSalvage
-  parent: WardrobeMixed
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: salvage wardrobe
   description: Notably not salvaged.
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: miner_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeEngineering
-  parent: WardrobeYellow
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: engineering wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: engineer_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeMedicalDoctor
-  parent: WardrobeWhite
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: medical doctor's wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: medic_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeRobotics
-  parent: WardrobeBlack
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: robotics wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: roboticist_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeChemistry
-  parent: WardrobeWhite
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: chemistry wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: chemist_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeGenetics
-  parent: WardrobeWhite
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: genetics wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: geneticist_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeVirology
-  parent: WardrobeWhite
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: virology wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: virologist_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeScience
-  parent: WardrobeWhite
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: science wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: scientist_wardrobe_door #SS220-Closet-Resprite-end
 
 - type: entity
   id: WardrobeBotanist
-  parent: WardrobeGreen
+  parent: WardrobeBase #SS220-Closet-Resprite
   name: botanist wardrobe
+  components: #SS220-Closet-Resprite-start
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: wardrobe
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: botanist_wardrobe_door #SS220-Closet-Resprite-end

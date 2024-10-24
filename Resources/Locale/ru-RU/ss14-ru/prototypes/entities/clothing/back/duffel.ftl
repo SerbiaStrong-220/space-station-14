@@ -32,7 +32,8 @@ ent-ClothingBackpackDuffelCargo = вещмешок грузчика
     .desc = Большой вещмешок для для воровства драгоценной добычи.
 ent-ClothingBackpackDuffelSalvage = вещмешок утилизатора
     .desc = Большой вещмешок для хранения дополнительных экзотических сокровищ.
-ent-ClothingBackpackDuffelSyndicate = черно-красный вещмешок
+# Corvax-HiddenDesc-Start
+ent-ClothingBackpackDuffelSyndicate = чёрно-красный вещмешок
     .suffix = вещмешок Синдиката
     .desc = Вместительный и удобный вещмешок цвета эбонита и крови, в который влезут «игрушки» для любых возрастов.
 ent-ClothingBackpackDuffelSyndicateBundle = { ent-ClothingBackpackDuffelSyndicate }
@@ -41,13 +42,16 @@ ent-ClothingBackpackDuffelSyndicateAmmo = { ent-ClothingBackpackDuffelSyndicate 
     .suffix = вещмешок Синдиката амуниции
     .desc = Вместительный и удобный вещмешок цвета эбонита и крови с эмблемой огнестрельного орудия.
 ent-ClothingBackpackDuffelSyndicateAmmoBundle = { ent-ClothingBackpackDuffelSyndicateAmmo }
+    .suffix = набор аммуниции Синдиката
     .desc = { ent-ClothingBackpackDuffelSyndicateAmmo.desc }
 ent-ClothingBackpackDuffelSyndicateMedical = медицинский { ent-ClothingBackpackDuffelSyndicate }
-    .suffix =  медицинский вещмешок Синдиката
+    .suffix = медицинский вещмешок Синдиката
     .desc = Вместительный и удобный вещмешок с красной эмблемой "Звезды жизни" цвета эбонита и крови. Интересно, его хозяин соблюдает клятву Гиппократа?
+# Corvax-HiddenDesc-End
 ent-ClothingBackpackDuffelSyndicateMedicalBundle = { ent-ClothingBackpackDuffelSyndicateMedical }
     .desc = { ent-ClothingBackpackDuffelSyndicateMedical.desc }
 ent-ClothingBackpackDuffelHolding = бездонный вещмешок
     .desc = Вещмешок, открывающийся в локальный карман блюспейса.
-ent-ClothingBackpackDuffelCBURN = вещмешок отряда РХБЗЗ
+# SS220 CBURN questions
+ent-ClothingBackpackDuffelCBURN = вещмешок отряда РХБЗ
     .desc = Вещмешок, содержащий различное оборудование для сдерживания биологической угрозы.

@@ -1,0 +1,36 @@
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodCheburekBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/cheburek.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/cheburek.rsi
+  - type: Tag
+    tags:
+      - Meat
+
+- type: entity
+  name: чебурек
+  parent: FoodCheburekBase
+  id: FoodCheburek
+  description: Хрустящее и сочное мясо в тонком тесте - настоящий восточный вкус.
+  components:
+  - type: Food
+  - type: Sprite
+    state: cheburek

@@ -1,0 +1,196 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: CrateMedical
+  id: LockerEbentMedical
+  name: "ящик медицинских принадлежностей"
+  description: Стандартный ящик.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: StorageFill
+    contents:
+    - id: Multitool
+    - id: SheetPlasma
+    - id: Screwdriver
+    - id: MaterialBiomass
+      amount: 4
+    - id: BluespaceBeaker
+      amount: 10
+    - id: Defibrillator
+      amount: 5
+    - id: BoxBottle
+      amount: 5
+    - id: ChemBag
+      amount: 3
+    - id: BoxPillCanister
+      amount: 5
+    - id: BoxSyringe
+      amount: 5
+    - id: HandLabeler
+      amount: 3
+    - id: EmergencyRollerBedSpawnFolded
+      amount: 10
+    - id: Stimpack
+      amount: 30
+    - id: MedicatedSuture
+      amount: 50
+    - id: RegenerativeMesh
+      amount: 50
+    - id: SyringeEphedrine
+      amount: 20
+  - type: EntityStorage
+    capacity: 250
+
+- type: entity
+  parent: CrateMedical
+  id: LockerEbentMedical2
+  name: "ящик медицинских принадлежностей-2"
+  description: Стандартный ящик.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: EntityStorage
+    capacity: 250
+  - type: StorageFill
+    contents:
+    - id: DnaScramblerImplanter
+      amount: 100
+    - id: BoxBodyBag
+      amount: 10
+    - id: SyringeTranexamicAcid
+      amount: 20
+    - id: BloodSalveEbent
+      amount: 50
+
+- type: entity
+  parent: CrateEngineering
+  id: LockerEbentEngineering
+  name: "ящик инженерный принадлежностей"
+  description: Стандартный ящик.
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: StorageFill
+    contents:
+    - id: Multitool
+      amount: 3
+    - id: MaterialDurathread
+      amount: 3
+    - id: trayScanner
+      amount: 5
+    - id: HolofanProjector
+      amount: 5
+    - id: JetpackBlackFilled
+      amount: 10
+    - id: JawsOfLife
+      amount: 10
+    - id: GasAnalyzer
+      amount: 3
+    - id: SheetPlasteel
+      amount: 20
+    - id: SheetSteel
+      amount: 20
+    - id: SheetUranium
+      amount: 5
+    - id: SheetGlass
+      amount: 20
+    - id: SheetRGlass
+      amount: 20
+    - id: SheetPlastic
+      amount: 20
+    - id: SheetPlasma
+      amount: 5
+    - id: CableHVStack
+      amount: 10
+    - id: CableMVStack
+      amount: 20
+    - id: CableApcStack
+      amount: 20
+    - id: ClothingBackpackDuffelEngineering
+      amount: 3
+    - id: ClothingBackpackCloningSet
+  - type: EntityStorage
+    capacity: 300
+
+- type: entity
+  name: кровоостанавливающая мазь
+  description: Способствует быстрому восстановлению крови. Выглядит как что-то из детства.
+  parent: Bloodpack
+  id: BloodSalveEbent
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Healing
+    damageContainers:
+      - Biological
+    damage:
+      types:
+        Bloodloss: -10
+    ModifyBloodLevel: 15
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/BloodSalveEbent.rsi
+    state: BloodSalve
+  - type: Stack
+    stackType: BloodSalveEbent
+    count: 10
+
+- type: stack
+  id: BloodSalveEbent
+  name: кровоостанавливающая мазь
+  icon: { sprite: "/Textures/SS220/Objects/Specific/Medical/BloodSalveEbent.rsi", state: BloodSalve }
+  spawn: BloodSalveEbent
+  maxCount: 10
+
+- type: entity
+  parent: ClothingBackpackDuffelEngineering
+  id: ClothingBackpackCloningSet
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор для сборки клонирующего оборудования
+  description: Набор, содержащий все ресурсы и материалы, необходимые для сборки клонирующего и вспомогательного оборудования.
+  components:
+   - type: StorageFill
+     contents:
+      - id: SheetSteel
+      - id: SheetGlass
+      - id: CableApcStack10
+      - id: CloningPodMachineCircuitboard
+      - id: MedicalScannerMachineCircuitboard
+      - id: CloningConsoleComputerCircuitboard
+      - id: BiomassReclaimerMachineCircuitboard
+      - id: CapacitorStockPart
+      - id: MatterBinStockPart
+        amount: 4
+      - id: MicroManipulatorStockPart
+        amount: 3
+      - id: Scalpel
+        amount: 2
+      - id: NetworkConfigurator
+      - id: Screwdriver
+      - id: Wrench
+
+- type: entity
+  parent: ClothingBackpackDuffelMilitary
+  id: ClothingBackpackFractWarC4Set
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор взрывчатки C4
+  description: Набор взрывчатки для прорыва укреплений противника.
+  components:
+   - type: StorageFill
+     contents:
+      - id: C4
+        amount: 8
+
+- type: entity
+  parent: ClothingBackpackDuffelMilitary
+  id: ClothingBackpackFractWarExGrenadeSet
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор смешанных гранат
+  description: Большой вещмешок для хранения любого армейского снаряжения.
+  components:
+   - type: StorageFill
+     contents:
+      - id: ExGrenade
+        amount: 8
+      - id: SmokeGrenade
+        amount: 10

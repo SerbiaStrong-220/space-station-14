@@ -1,0 +1,29 @@
+- type: entity
+  id: LeadChemistryVial
+  name: lead vial
+  parent: BaseChemistryEmptyVial
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          reagents:
+            - ReagentId: Lead
+              Quantity: 30
+    - type: Tag
+      tags: []
+
+- type: entity
+  id: UraniumChemistryVial
+  name: uranium vial
+  parent: BaseChemistryEmptyVial
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        beaker:
+          maxVol: 30
+          reagents:
+            - ReagentId: Uranium
+              Quantity: 30
+    - type: Tag
+      tags: []

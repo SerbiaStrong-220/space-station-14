@@ -3,7 +3,7 @@
   suffix: AdminV
   parent: BaseItem
   id: PieShooter
-  description: Страшннйшее орудие возмездия
+  description: Страшннйшее орудие возмездия.
   components:
   - type: Item
     size: Large
@@ -23,11 +23,12 @@
       ballistic-ammo: !type:Container
         ents: []
   - type: BallisticAmmoProvider
-    capacity: 1000
+    cycleable: false
+    capacity: 9999
     whitelist:
        components:
        - CreamPie
-    proto: FoodPieBananaCream
+    proto: FoodFlapjackBananaCreamSS220
   - type: Gun
     fireRate: 1.5
     selectedMode: SemiAuto
@@ -35,3 +36,18 @@
      - SemiAuto
     soundGunshot:
       path: /Audio/Effects/thunk.ogg
+
+- type: entity
+  name: мыломёт
+  suffix: AdminV
+  parent: PieShooter
+  id: SoapShooter
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 9999
+    whitelist:
+      tags:
+        - Soap
+    proto: Soap
+  - type: Gun
+    fireRate: 3

@@ -4,10 +4,12 @@ using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
+using Content.Shared.Actions;
 
 namespace Content.Shared.Bed.Cryostorage;
 
@@ -22,6 +24,8 @@ public abstract class SharedCryostorageSystem : EntitySystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] protected readonly SharedMindSystem Mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
 
     protected EntityUid? PausedMap { get; private set; }
 
@@ -37,7 +41,6 @@ public abstract class SharedCryostorageSystem : EntitySystem
         SubscribeLocalEvent<CryostorageComponent, CanDropTargetEvent>(OnCanDropTarget);
 
         SubscribeLocalEvent<CryostorageContainedComponent, EntGotRemovedFromContainerMessage>(OnRemovedContained);
-        SubscribeLocalEvent<CryostorageContainedComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<CryostorageContainedComponent, ComponentShutdown>(OnShutdownContained);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
@@ -52,7 +55,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
 
     protected virtual void OnInsertedContainer(Entity<CryostorageComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        var (_, comp) = ent;
+        var (uid, comp) = ent;
         if (args.Container.ID != comp.ContainerId)
             return;
 
@@ -61,6 +64,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
             return;
 
         var containedComp = EnsureComp<CryostorageContainedComponent>(args.Entity);
+        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionID, uid); // 220 cryo action
         var delay = Mind.TryGetMind(args.Entity, out _, out _) ? comp.GracePeriod : comp.NoMindGracePeriod;
         containedComp.GracePeriodEndTime = Timing.CurTime + delay;
         containedComp.Cryostorage = ent;
@@ -72,7 +76,10 @@ public abstract class SharedCryostorageSystem : EntitySystem
         var (_, comp) = ent;
         if (args.Container.ID != comp.ContainerId)
             return;
-
+        // start 220 cryo action
+        if (comp.LeaveActionUid != null)
+            _actionsSystem.RemoveAction(args.Entity, comp.LeaveActionUid.Value);
+        // end 220 cryo action
         _appearance.SetData(ent, CryostorageVisuals.Full, args.Container.ContainedEntities.Count > 0);
     }
 
@@ -82,7 +89,13 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (args.Container.ID != comp.ContainerId)
             return;
 
-        if (!TryComp<MindContainerComponent>(args.EntityUid, out var mindContainer))
+        if (_mobState.IsIncapacitated(args.EntityUid))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (!HasComp<CanEnterCryostorageComponent>(args.EntityUid) || !TryComp<MindContainerComponent>(args.EntityUid, out var mindContainer))
         {
             args.Cancel();
             return;
@@ -130,13 +143,6 @@ public abstract class SharedCryostorageSystem : EntitySystem
             RemCompDeferred(ent, comp);
     }
 
-    private void OnUnpaused(Entity<CryostorageContainedComponent> ent, ref EntityUnpausedEvent args)
-    {
-        var comp = ent.Comp;
-        if (comp.GracePeriodEndTime != null)
-            comp.GracePeriodEndTime = comp.GracePeriodEndTime.Value + args.PausedTime;
-    }
-
     private void OnShutdownContained(Entity<CryostorageContainedComponent> ent, ref ComponentShutdown args)
     {
         var comp = ent.Comp;
@@ -178,3 +184,5 @@ public abstract class SharedCryostorageSystem : EntitySystem
         return comp.MapUid != null && comp.MapUid == PausedMap;
     }
 }
+
+

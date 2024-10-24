@@ -8,8 +8,10 @@
       sprite: Corvax/Clothing/Hands/Gloves/kim.rsi
     - type: Clothing
       sprite: Corvax/Clothing/Hands/Gloves/kim.rsi
-    - type: GloveHeatResistance
-      heatResistance: 1400
+    - type: DamageOnInteractProtection
+      damageProtection:
+        flatReductions:
+          Heat: 10
     - type: Insulated
 
 - type: entity
@@ -17,11 +19,14 @@
   id: ClothingHandsGlovesCentcomNaval
   name: nanotrasen naval gloves
   description: A high quality pair of thick gloves covered in gold stitching, given to Nanotrasen's Naval Commanders.
+  categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Hands/Gloves/centcom_naval.rsi
     - type: Clothing
       sprite: Corvax/Clothing/Hands/Gloves/centcom_naval.rsi
-    - type: GloveHeatResistance
-      heatResistance: 1400
+    - type: DamageOnInteractProtection
+      damageProtection:
+        flatReductions:
+          Heat: 10
     - type: Insulated

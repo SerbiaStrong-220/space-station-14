@@ -15,7 +15,28 @@
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
+    #акцент, эмоуты, хвост и маски
+  - type: VulpkaninAccent
+  - type: Speech
+    allowedEmotes: ['Howl', 'Growl', 'Bark']
+  - type: Inventory
+    speciesId: Vulpkanin
+  - type: Wagging
+    action: ActionToggleWaggingVulp
+  - type: Vocal
+    sounds:
+      Male: MaleVulpkanin
+      Female: FemaleVulpkanin
+      Unsexed: MaleVulpkanin
+    # голодает быстрее на ~30%, но вмещает на 30% больше еды
   - type: Hunger
+    thresholds:
+     Overfed: 300
+     Okay: 250
+     Peckish: 200
+     Starving: 100
+     Dead: 0
+    baseDecayRate: 0.021
   - type: Thirst
   - type: Perishable
   - type: Butcherable
@@ -40,7 +61,7 @@
   name: Urist McVulp
   id: MobVulpkaninDummy
   parent: BaseSpeciesDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: A dummy vulpkanin meant to be used in character setup.
   components:
     - type: HumanoidAppearance

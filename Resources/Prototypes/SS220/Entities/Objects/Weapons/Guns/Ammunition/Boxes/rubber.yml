@@ -1,0 +1,116 @@
+- type: entity
+  parent: BaseMagazineBoxRifle
+  id: MagazineBoxRifleBigRubber
+  name: ammunition box (.20 rifle rubber)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 200
+    proto: CartridgeRiflePractice
+  - type: Sprite
+    layers:
+    - state: base-b
+      map: ["enum.GunVisualLayers.Base"]
+    - state: magb-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: practice-b
+  - type: MagazineVisuals
+    magState: magb
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineBoxPistol
+  id: MagazineBoxPistolRubber
+  name: ammunition box (.35 auto rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
+
+- type: entity
+  parent: BaseMagazineBoxMagnum
+  id: MagazineBoxMagnumRubber
+  name: ammunition box (.45 magnum rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
+
+- type: entity
+  parent: BaseMagazineBoxLightRifle
+  id: MagazineBoxLightRifleRubber
+  name: ammunition box (.30 rifle rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
+
+- type: entity
+  parent: BaseMagazineBoxCaselessRifle
+  id: MagazineBoxCaselessRifleBigRubber
+  name: ammunition box (.25 caseless rubber)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 200
+    proto: CartridgeCaselessRifleRubber
+  - type: Sprite
+    layers:
+    - state: base-b
+      map: ["enum.GunVisualLayers.Base"]
+    - state: magb-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber-b
+  - type: MagazineVisuals
+    magState: magb
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineBoxRifle
+  id: MagazineBoxRifleRubber
+  name: ammunition box (.20 rifle rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber
+
+- type: entity
+  parent: BaseMagazineBoxCaselessRifle
+  id: MagazineBoxCaselessRifleRubber
+  name: ammunition box (.25 caseless rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeCaselessRifleRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: rubber

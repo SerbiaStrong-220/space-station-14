@@ -1,156 +1,70 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+#Security Pilot Hardsuit
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitUSSP
-  noSpawn: true
-  name: Battle USSP hardsuit helmet
-  description: Heavy, small viewing angle, but really reliable and sturdy.
+  id: ClothingHeadHelmetHardsuitSecurityPilot
+  name: security pilot hardsuit helmet
+  description: Armored spacesuit helmet with a modified flashlight for exploring voids.
   components:
+  - type: BreathMask
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/sssp.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security_pilot.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/sssp.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security_pilot.rsi
   - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: orange
+    color: "#ffeead"
+    radius: 4.5
+    energy: 3
   - type: PressureProtection
-    highPressureMultiplier: 0.08
+    highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    coefficient: 0.005
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitUSSPMed
-  noSpawn: true
-  name: шлем медицинского скафандра СССП
-  description: Тяжёлый, с маленьким углом обзора, но очень надёжный и прочный.
+  id: ClothingHeadHelmetHardsuitBlueshield
+  categories: [ HideSpawnMenu ]
+  name: blueshield's hardsuit helmet
+  description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the Blue Shield.
   components:
+  - type: BreathMask
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_med.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/blueshield.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_med.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/blueshield.rsi
   - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: orange
+    color: "#adeeff"
   - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    coefficient: 0.005
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 10000
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
 
+#SuperMatter operator's Hardsuit
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitUSSPEng
-  noSpawn: true
-  name: шлем инженерного скафандра СССП
-  description: Тяжёлый, с маленьким углом обзора, но очень надёжный и прочный.
+  id: ClothingHeadHelmetHardsuitSuperMatterOperator
+  name: superMatter operator's hardsuit helmet
+  description: Special hardsuit helmet, designed to support the operator in the supermatter crystal chamber.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_eng.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/sm.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_eng.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/sm.rsi
+  - type: EyeProtection
   - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: orange
+    color: "#daffad"
+    radius: 6
   - type: PressureProtection
-    highPressureMultiplier: 0.08
+    highPressureMultiplier: 0.32
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitUSSPCmd
-  noSpawn: true
-  name: шлем тяжёлого боевого скафандра Маршала СССП
-  description: Тяжёлый, с маленьким углом обзора, но очень надёжный и прочный.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: orange
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1
-
-- type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitUSSPHeavyTwo
-  noSpawn: true
-  name: Battle USSP hardsuit helmet
-  description: Heavy, small viewing angle, but really reliable and sturdy.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/sssp_heavy_2.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/sssp_heavy_2.rsi
-  - type: PointLight
-    radius: 5
-    energy: 3.5
-    color: orange
-  - type: PressureProtection
-    highPressureMultiplier: 0.08
-    lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
-        Radiation: 1
-        Caustic: 1
-        Stamina: 1

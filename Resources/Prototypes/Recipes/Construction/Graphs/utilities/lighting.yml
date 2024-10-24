@@ -13,7 +13,7 @@
               name: cyan crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
                 color: #52ff39
               doAfter: 1
     - node: icon
@@ -34,7 +34,7 @@
               name: blue crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalBlue
@@ -54,7 +54,7 @@
               name: pink crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalPink
@@ -74,7 +74,7 @@
               name: orange crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalOrange
@@ -94,7 +94,7 @@
               name: red crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalRed
@@ -114,7 +114,49 @@
               name: green crystal shard
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
-                state: shard1
+                state: shard #SS220-Crystal-resprite
               doAfter: 1
     - node: icon
       entity: LightTubeCrystalGreen
+
+#SS220-New-Crystals-start
+- type: constructionGraph
+  id: YellowLight
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: icon
+          steps:
+            - material: Glass
+              amount: 2
+              doAfter: 1
+            - tag: CrystalYellow
+              name: yellow crystal shard
+              icon:
+                sprite: Objects/Materials/Shards/crystal.rsi
+                state: shard #SS220-Crystal-resprite
+              doAfter: 1
+    - node: icon
+      entity: LightTubeCrystalYellow
+
+- type: constructionGraph
+  id: PurpleLight
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: icon
+          steps:
+            - material: Glass
+              amount: 2
+              doAfter: 1
+            - tag: CrystalPurple
+              name: purple crystal shard
+              icon:
+                sprite: Objects/Materials/Shards/crystal.rsi
+                state: shard #SS220-Crystal-resprite
+              doAfter: 1
+    - node: icon
+      entity: LightTubeCrystalPurple
+#SS220-New-Crystals-end

@@ -31,6 +31,7 @@
         - AppraisalTool
         - JawsOfLife
         - GPS
+        - WeldingMask
       components:
         - SprayPainter
         - NetworkConfigurator
@@ -41,6 +42,7 @@
         - Geiger
         - TrayScanner
         - GasAnalyzer
+        - HandLabeler
   - type: ItemMapper
     mapLayers:
       drill:
@@ -224,6 +226,7 @@
         - JanicartKeys # SS220 Readd-Vehicles
       components:
         - LightReplacer
+        - SmokeOnTrigger
     maxItemSize: Large
   - type: ItemMapper
     mapLayers:
@@ -255,7 +258,6 @@
   - type: Storage
     whitelist:
       tags:
-        - Wrench
         - Bottle
         - Spray
         - Brutepack
@@ -264,12 +266,16 @@
         - Ointment
         - CigPack
         - PillCanister
+        - Tourniquet #SS220 Add Tourniquet to medic's belt
         - Radio
         - DiscreteHealthAnalyzer
+        - SurgeryTool
+        - Dropper
       components:
         - Hypospray
         - Injector
         - Pill
+        - HandLabeler
   - type: ItemMapper
     mapLayers:
       bottle:
@@ -339,9 +345,11 @@
         - Bottle
         - Syringe
         - CigPack
+        - Dropper
       components:
         - Seed
         - Smokable
+        - HandLabeler
   - type: ItemMapper
     mapLayers:
       hatchet:
@@ -371,91 +379,91 @@
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
 
-- type: entity
-  parent: ClothingBeltStorageBase
-  id: ClothingBeltChef
-  name: chef belt
-  description: A belt used to hold kitchen knives and condiments for quick access.
-  components:
-  - type: Sprite
-    sprite: Clothing/Belt/chef.rsi
-  - type: Clothing
-    sprite: Clothing/Belt/chef.rsi
-  - type: Storage
-    whitelist:
-      tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
-      components:
-        - Mousetrap
-        - Smokable
-        - Utensil
-  - type: ItemMapper
-    mapLayers:
-      kitchenknife:
-        whitelist:
-          tags:
-          - KitchenKnife
-      cleaver:
-        whitelist:
-          tags:
-          - Cleaver
-      rollingpin:
-        whitelist:
-          tags:
-          - RollingPin
-      coldsauce:
-        whitelist:
-          tags:
-          - Coldsauce
-      enzyme:
-        whitelist:
-          tags:
-          - Enzyme
-      hotsauce:
-        whitelist:
-          tags:
-          - Hotsauce
-      ketchup:
-        whitelist:
-          tags:
-          - Ketchup
-      bbqsauce:
-        whitelist:
-          tags:
-          - BBQsauce
-      saltshaker:
-        whitelist:
-          tags:
-          - SaltShaker
-      peppershaker:
-        whitelist:
-          tags:
-          - PepperShaker
-    sprite: Clothing/Belt/belt_overlay.rsi
-  - type: Appearance
+#- type: entity #SS220 Chef Resprite
+#  parent: ClothingBeltStorageBase
+#  id: ClothingBeltChef
+#  name: chef belt
+#  description: A belt used to hold kitchen knives and condiments for quick access.
+#  components:
+#  - type: Sprite
+#    sprite: Clothing/Belt/chef.rsi
+#  - type: Clothing
+#    sprite: Clothing/Belt/chef.rsi
+#  - type: Storage
+#    whitelist:
+#      tags:
+#        - KitchenKnife
+#        - Cleaver
+#        - RollingPin
+#        - Coldsauce
+#        - Enzyme
+#        - Hotsauce
+#        - Ketchup
+#        - BBQsauce
+#        - SaltShaker
+#        - PepperShaker
+#        - CigPack
+#        - Packet
+#        - Skewer
+#        - MonkeyCube
+#        #ss220 chiefs belt start
+#        - WaterBottle
+#        - Vinegar
+#        - OilOlive
+#        - GlassBeaker
+#        #ss220 chiefs belt end
+#        - Mayo
+#      components:
+#        - Mousetrap
+#        - Smokable
+#        - Utensil
+#  - type: ItemMapper
+#    mapLayers:
+#      kitchenknife:
+#        whitelist:
+#          tags:
+#          - KitchenKnife
+#      cleaver:
+#        whitelist:
+#          tags:
+#          - Cleaver
+#      rollingpin:
+#        whitelist:
+#          tags:
+#          - RollingPin
+#      coldsauce:
+#        whitelist:
+#          tags:
+#          - Coldsauce
+#      enzyme:
+#        whitelist:
+#          tags:
+#          - Enzyme
+#      hotsauce:
+#        whitelist:
+#          tags:
+#          - Hotsauce
+#      ketchup:
+#        whitelist:
+#          tags:
+#          - Ketchup
+#      bbqsauce:
+#        whitelist:
+#          tags:
+#          - BBQsauce
+#      saltshaker:
+#        whitelist:
+#          tags:
+#          - SaltShaker
+#      peppershaker:
+#        whitelist:
+#          tags:
+#          - PepperShaker
+#    sprite: Clothing/Belt/belt_overlay.rsi
+#  - type: Appearance
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: [ClothingBeltStorageBase]
   id: ClothingBeltSecurity
   name: security belt
   description: Can hold security gear like handcuffs and flashes.
@@ -474,12 +482,21 @@
         - Sidearm
         - MagazinePistol
         - MagazineMagnum
+        - CombatKnife
+        - Truncheon
+        - HolofanProjectorSecurity # SS220 Fix #2009
       components:
         - Stunbaton
         - FlashOnTrigger
         - SmokeOnTrigger
         - Flash
         - Handcuff
+        - BallisticAmmoProvider
+        - CartridgeAmmo
+        - DoorRemote
+        - Whistle
+        # - HolosignProjector SS220 Fix #2009
+        - BalloonPopper
   - type: ItemMapper
     mapLayers:
       flashbang:
@@ -516,6 +533,8 @@
         name: Sabre
         insertVerbText: sheath-insert-verb
         ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
         whitelist:
           tags:
           - CaptainSabre
@@ -530,7 +549,7 @@
 # Belts without visualizers
 
 - type: entity
-  parent: ClothingBeltAmmoProviderBase
+  parent: [ClothingBeltAmmoProviderBase]
   id: ClothingBeltBandolier
   name: bandolier
   description: A bandolier for holding shotgun ammunition.
@@ -571,13 +590,20 @@
   - type: Sprite
     sprite: Clothing/Belt/holster.rsi
   - type: Clothing
+    slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/holster.rsi
   - type: Storage
+    maxItemSize: Huge #SS220 holster maximum item size
     grid:
     - 0,0,3,1
+    whitelist: #SS220 holster whitelist
+      components:
+        - Gun
+        - BallisticAmmoProvider
+        - CartridgeAmmo
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: [ClothingBeltStorageBase]
   id: ClothingBeltSyndieHolster
   name: syndicate shoulder holster
   description: A deep shoulder holster capable of holding many types of ballistics.
@@ -585,6 +611,7 @@
   - type: Sprite
     sprite: Clothing/Belt/syndieholster.rsi
   - type: Clothing
+    slots: [neck]  #SS220 holster to neck
     sprite: Clothing/Belt/syndieholster.rsi
   - type: Item
     size: Ginormous
@@ -599,9 +626,9 @@
         - CartridgeAmmo
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltSecurity
   id: ClothingBeltSecurityWebbing
-  name: security webbing
+  name: security carrier
   description: Unique and versatile chest rig, can hold security gear.
   components:
   - type: Sprite
@@ -610,9 +637,9 @@
     sprite: Clothing/Belt/securitywebbing.rsi
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: [ ClothingBeltStorageBase]
   id: ClothingBeltMercWebbing
-  name: mercenarie webbing
+  name: mercenary webbing
   description: Ideal for storing everything from ammo to weapons and combat essentials.
   components:
   - type: Sprite
@@ -661,19 +688,29 @@
 
 - type: entity
   parent: ClothingBeltBase
-  id: ClothingBeltSuspenders
-  name: suspenders
+  id: ClothingBeltSuspendersRed
+  name: red suspenders
   description: For holding your pants up.
   components:
   - type: Tag
     tags:
     - MimeBelt
   - type: Sprite
-    sprite: Clothing/Belt/suspenders.rsi
+    sprite: Clothing/Belt/suspenders_red.rsi
     state: icon
   - type: Clothing
-    sprite: Clothing/Belt/suspenders.rsi
+    sprite: Clothing/Belt/suspenders_red.rsi
     quickEquip: true
+
+- type: entity
+  parent: ClothingBeltSuspendersRed
+  id: ClothingBeltSuspendersBlack
+  name: black suspenders
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/suspenders_black.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/suspenders_black.rsi
 
 - type: entity
   parent: ClothingBeltStorageBase

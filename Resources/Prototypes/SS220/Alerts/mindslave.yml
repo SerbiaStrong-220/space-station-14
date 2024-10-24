@@ -1,0 +1,7 @@
+- type: alert
+  id: MindSlaved
+  icons:
+  - sprite: /Textures/SS220/Alerts/MindSlave.rsi
+    state: alert
+  name: alerts-mindslave-name
+  description: alerts-mindslave-desc

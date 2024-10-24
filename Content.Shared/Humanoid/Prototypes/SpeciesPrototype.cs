@@ -1,6 +1,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 using Content.Shared.Roles;
 
 namespace Content.Shared.Humanoid.Prototypes;
@@ -17,7 +18,7 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// <summary>
     /// User visible name of the species.
     /// </summary>
-    [DataField("name", required: true)]
+    [DataField(required: true)]
     public string Name { get; private set; } = default!;
 
     /// <summary>
@@ -25,13 +26,13 @@ public sealed partial class SpeciesPrototype : IPrototype
     ///     for an eventual integration into IdentitySystem
     ///     (i.e., young human person, young lizard person, etc.)
     /// </summary>
-    [DataField("descriptor")]
+    [DataField]
     public string Descriptor { get; private set; } = "humanoid";
 
     /// <summary>
     /// Whether the species is available "at round start" (In the character editor)
     /// </summary>
-    [DataField("roundStart", required: true)]
+    [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
 
     // The below two are to avoid fetching information about the species from the entity
@@ -49,14 +50,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// <summary>
     ///     Default skin tone for this species. This applies for non-human skin tones.
     /// </summary>
-    [DataField("defaultSkinTone")]
+    [DataField]
     public Color DefaultSkinTone { get; private set; } = Color.White;
 
     /// <summary>
     ///     Default human skin tone for this species. This applies for human skin tones.
     ///     See <see cref="SkinColor.HumanSkinTone"/> for the valid range of skin tones.
     /// </summary>
-    [DataField("defaultHumanSkinTone")]
+    [DataField]
     public int DefaultHumanSkinTone { get; private set; } = 20;
 
     /// <summary>
@@ -68,66 +69,67 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// <summary>
     ///     Humanoid species variant used by this entity.
     /// </summary>
-    [DataField("prototype", required: true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string Prototype { get; private set; } = default!;
+    [DataField(required: true)]
+    public EntProtoId Prototype { get; private set; } = default!;
 
     /// <summary>
     /// Prototype used by the species for the dress-up doll in various menus.
     /// </summary>
-    [DataField("dollPrototype", required: true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string DollPrototype { get; private set; } = default!;
+    [DataField(required: true)]
+    public EntProtoId DollPrototype { get; private set; } = default!;
 
     /// <summary>
     /// Method of skin coloration used by the species.
     /// </summary>
-    [DataField("skinColoration", required: true)]
+    [DataField(required: true)]
     public HumanoidSkinColor SkinColoration { get; private set; }
 
-    [DataField("maleFirstNames")]
+    [DataField]
     public string MaleFirstNames { get; private set; } = "names_first_male";
 
-    [DataField("femaleFirstNames")]
+    [DataField]
     public string FemaleFirstNames { get; private set; } = "names_first_female";
 
     // Corvax-LastnameGender-Start: Split lastname field by gender
-    [DataField("maleLastNames")]
+    [DataField]
     public string MaleLastNames { get; private set; } = "names_last_male";
 
-    [DataField("femaleLastNames")]
+    [DataField]
     public string FemaleLastNames { get; private set; } = "names_last_female";
     // Corvax-LastnameGender-End
 
-    [DataField("naming")]
+    [DataField]
     public SpeciesNaming Naming { get; private set; } = SpeciesNaming.FirstLast;
 
-    [DataField("sexes")]
+    [DataField]
     public List<Sex> Sexes { get; private set; } = new() { Sex.Male, Sex.Female };
 
     /// <summary>
     ///     Characters younger than this are too young to be hired by Nanotrasen.
     /// </summary>
-    [DataField("minAge")]
+    [DataField]
     public int MinAge = 18;
 
     /// <summary>
     ///     Characters younger than this appear young.
     /// </summary>
-    [DataField("youngAge")]
+    [DataField]
     public int YoungAge = 30;
 
     /// <summary>
     ///     Characters older than this appear old. Characters in between young and old age appear middle aged.
     /// </summary>
-    [DataField("oldAge")]
+    [DataField]
     public int OldAge = 60;
 
     /// <summary>
     ///     Characters cannot be older than this. Only used for restrictions...
     ///     although imagine if ghosts could age people WYCI...
     /// </summary>
-    [DataField("maxAge")]
+    [DataField]
     public int MaxAge = 120;
 
+    // SS220-Photocopier
     /// <summary>
     ///     Texture of a butt copy made with photocopier
     /// </summary>
@@ -135,8 +137,8 @@ public sealed partial class SpeciesPrototype : IPrototype
     public string ButtScanTexture = "/Textures/SS220/Interface/Butts/human.png";
 
     //SS220 Species-Job-Requirement
-    [DataField("blockedJobs", required: false, customTypeSerializer: typeof(PrototypeIdListSerializer<JobPrototype>))]
-    public List<string> BlockedJobs { get; } = new();
+    [DataField(customTypeSerializer: typeof(DictionarySerializer<string, string[]>))]
+    public Dictionary<string, string[]> BlockedJobsByAccessor { get; } = new();
 }
 
 public enum SpeciesNaming : byte

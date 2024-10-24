@@ -1,0 +1,279 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_hell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/hellspawn_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/hellspawn_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_revenant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/mobsGhostsrevenant_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/mobsGhostsrevenant_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_mothroach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/mothroach_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/mothroach_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_carpsuit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/carpsuit_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/carpsuit_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_buffrat
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Ghosts
+    sprite: SS220/Clothing/Head/admin_head/buffrat_a.rsi
+    layers:
+    - state: equipped-HELMET
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/buffrat_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_behonker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/behonker_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/behonker_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_jensencoat
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/jensencoat_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/jensencoat_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_ghostsheet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/ghostsheet_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/ghostsheet_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_terminator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/terminator_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/terminator_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_mimebot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/mimebot_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/mimebot_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_tech_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/tech_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/tech_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_miner_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/miner_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/miner_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_holoclown_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/holoclown_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/holoclown_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_magic_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/magic_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/magic_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_judge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/judge_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/judge_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_rainbow_slime
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/rainbow_slime_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/rainbow_slime_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_nuke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/nuke_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/nuke_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_plushie_lizard
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/plushie_lizard_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/plushie_lizard_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_singularitytoy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/singularitytoy_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/singularitytoy_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_db_shotgun
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/db_shotgun_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/db_shotgun_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_watermelon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/watermelon_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/watermelon_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_whiskeybottle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/whiskeybottle_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/whiskeybottle_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_parrot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/parrot_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/parrot_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_blue_slime
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/blue_slime_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/blue_slime_a.rsi
+
+- type: entity
+  parent: ClothingBackpackHolding
+  id: ClothingBackpack_admin_Head
+  suffix: Shitspawn, AdminV
+  name: Админ шляпы
+  description: Все шляпы специально для админов
+  components:
+    - type: StorageFill
+      contents:
+      - id: admin_Head_hell
+      - id: admin_Head_db_shotgun
+      - id: admin_Head_magic_guardians
+      - id: admin_Head_singularitytoy
+      - id: admin_Head_buffrat
+      - id: admin_Head_jensencoat
+      - id: admin_Head_holoclown_guardians
+      - id: admin_Head_parrot
+      - id: admin_Head_ghostsheet
+      - id: admin_Head_mimebot
+      - id: admin_Head_terminator
+      - id: admin_Head_tech_guardians
+      - id: admin_Head_carpsuit
+      - id: admin_Head_rainbow_slime
+      - id: admin_Head_miner_guardians
+      - id: admin_Head_mothroach
+      - id: admin_Head_plushie_lizard
+      - id: admin_Head_judge
+      - id: admin_Head_whiskeybottle
+      - id: admin_Head_revenant
+      - id: admin_Head_nuke
+      - id: admin_Head_watermelon
+      - id: admin_Head_blue_slime
+      - id: admin_Head_behonker

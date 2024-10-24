@@ -124,6 +124,11 @@ ent-AirlockExternalGlassCargoLocked = { ent-AirlockExternalGlass }
 ent-AirlockExternalGlassEngineeringLocked = { ent-AirlockExternalGlass }
     .suffix = External, Glass, Engineering, Locked
     .desc = { ent-AirlockExternalGlass.desc }
+# SS220 Science External Airlock begin
+ent-AirlockExternalGlassScienceLocked = { ent-AirlockExternalGlass }
+    .suffix = External, Glass, Science, Locked
+    .desc = { ent-AirlockExternalGlass.desc }
+# SS220 Science External Airlock end
 ent-AirlockExternalGlassAtmosphericsLocked = { ent-AirlockExternalGlass }
     .suffix = External, Glass, Atmospherics, Locked
     .desc = { ent-AirlockExternalGlass.desc }

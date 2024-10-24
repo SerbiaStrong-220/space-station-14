@@ -19,3 +19,27 @@
     contents:
     - id: VehicleSyndicateSegway
     - id: VehicleKeySyndicateSegway
+
+- type: entity
+  id: CrateCargoLottery5
+  parent: CratePrivateSecure
+  name: ящик лотерейных билетов
+  description: Больше билетов - больше выигрыш! Стань миллионером уже сегодня!
+  suffix: 5 штук
+  components:
+  - type: StorageFill
+    contents:
+    - id: LotteryCash
+      amount: 5
+
+- type: entity
+  id: CrateCargoLottery10
+  parent: CrateCargoLottery5
+  name: большой ящик лотерейных билетов
+  suffix: 10 штук
+  components:
+  - type: StorageFill
+    contents:
+    - id: LotteryCash
+      amount: 10
+  

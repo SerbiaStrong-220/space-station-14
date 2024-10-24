@@ -59,11 +59,9 @@
         types:
           Heat: 5
       coldDamage: {}
-      ColdDamageThreshold: 0
+      coldDamageThreshold: 0
     - type: Flammable
       fireSpread: true
-      cold:
-        types: {}
       damage:
         types:
           Heat: 5
@@ -72,12 +70,13 @@
         Flammable: [Touch]
         Extinguish: [Touch]
     - type: SpiderWebObject
-    - type: SlowContacts
+    - type: SpeedModifierContacts
       walkSpeedModifier: 0.5
       sprintSpeedModifier: 0.5
       ignoreWhitelist:
         components:
             - IgnoreSpiderWeb
+            - IgnoreOnfloorSlowers #SS220 Flying mobs slowdown fix
 
 - type: entity
   id: SpiderWebClown
@@ -110,8 +109,6 @@
     - type: Transform
       anchored: true
     - type: Slippery
-      paralyzeTime: 2
-      launchForwardsMultiplier: 1.5
     - type: StepTrigger
       intersectRatio: 0.2
     - type: Physics
@@ -146,11 +143,9 @@
         types:
           Heat: 5
       coldDamage: {}
-      ColdDamageThreshold: 0
+      coldDamageThreshold: 0
     - type: Flammable
       fireSpread: true
-      cold:
-        types: {}
       damage:
         types:
           Heat: 5

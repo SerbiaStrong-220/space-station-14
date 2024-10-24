@@ -48,3 +48,17 @@
       - Service
       - SyndicateAgent
       - Theatre
+      - Magistrate
+      #New centcomm accesses begin
+      - CentralCommand
+      - CentralCommandCBURN
+      - CentralCommandERT
+      - CentralCommandGSN
+      - CentralCommandDeathSquad
+      #New centcomm accesses end
+      #Ussp accesses begin
+      - Ussp
+      - UsspCommand
+      - UsspMedical
+      - UsspEngineering
+      #Ussp accesses end

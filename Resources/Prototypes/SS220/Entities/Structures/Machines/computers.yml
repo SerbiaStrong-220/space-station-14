@@ -28,8 +28,46 @@
   - type: PointLight
     radius: 1.5
     energy: 1.6
-    color: "#f71713"
+- type: entity
+  parent: SyndicateComputerComms
+  id: LoneOpsComputerComms
+  name: консоль связи Одиночного оперативника
+  description: Консоль, позволяющая удаленно вмешиваться в систему связи станции. Использование этой консоли для подачи объявления предупредит станцию о вашем присутствии.
+  suffix: LoneOps
+  components:
+  - type: CommunicationsConsole
+    title: comms-console-announcement-title-solo-nukie
 
+#SALVAGE SHUTTLE RETURN
+- type: entity
+  parent: BaseComputerShuttle
+  id: ComputerShuttleSalvage
+  name: salvage shuttle console
+  description: Used to pilot the salvage shuttle.
+  components:
+    - type: Sprite
+      layers:
+        - map: ["computerLayerBody"]
+          state: computer
+        - map: ["computerLayerKeyboard"]
+          state: generic_keyboard
+        - map: ["computerLayerScreen"]
+          state: shuttle
+        - map: ["computerLayerKeys"]
+          state: generic_keys
+    - type: DroneConsole
+      components:
+        - type: SalvageShuttle
+    - type: RadarConsole
+      maxRange: 256
+    - type: PointLight
+      radius: 1.5
+      energy: 1.6
+      color: "#43ccb5"
+    - type: Computer
+      board: SalvageShuttleConsoleCircuitboard
+    - type: StealTarget
+      stealGroup: SalvageShuttleConsoleCircuitboard
 - type: entity
   parent: BaseComputer
   id: ComputerCluwneComms

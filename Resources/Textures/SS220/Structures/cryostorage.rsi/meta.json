@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/e9f937f52b9f63acb49ffd6ab5e6de68e7b13e73",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sleeper_0",
+      "directions": 4
+    },
+    {
+      "name": "sleeper_1",
+      "directions": 4
+    }
+  ]
+}

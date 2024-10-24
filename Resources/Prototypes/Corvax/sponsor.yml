@@ -5,7 +5,7 @@
   name: atmosian bomber jacket
   description: A thick, well-worn atmosian leather bomber jacket.
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/Clothing/OuterClothing/Coats/atmosian.rsi
@@ -18,7 +18,7 @@
   name: atmosian gas mask
   description: Improved gas mask utilized by atmospheric technicians. It's flameproof!
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/Clothing/Mask/atmosian.rsi
@@ -35,7 +35,7 @@
   name: atmosian's cloak
   description: The cloak of a legendary Atmosian.
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/Clothing/Neck/Cloaks/atmosian.rsi
@@ -47,7 +47,7 @@
   name: skull mask
   description: Spooky skull mask.
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/Clothing/Mask/death.rsi
@@ -61,7 +61,7 @@
   name: legendary gamer's cloak
   description: Worn by the most skilled professional gamers.
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/Clothing/Neck/Cloaks/gamer.rsi
@@ -72,7 +72,7 @@
   name: skeleton jumpsuit
   description: A black jumpsuit with a white bone pattern printed on it. Spooky!
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/Clothing/Uniforms/Jumpsuit/skeleton.rsi
@@ -86,7 +86,7 @@
   name: head of security's satchel
   description: Stylish, leather black satchel
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/NEKISH/Clothing/Back/Satchels/hos.rsi
@@ -97,7 +97,7 @@
   name: leather security belt
   description: Stylish, leather black belt
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/NEKISH/Clothing/Belt/hos.rsi
@@ -134,7 +134,7 @@
   name: leather gloves
   description: Stylish, black leather gloves
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/NEKISH/Clothing/Hands/Gloves/hos.rsi
@@ -147,7 +147,7 @@
   name: leather head of security's cap
   description: Pretty old stuff for these times, bringing back old memories...
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/NEKISH/Clothing/Head/Hats/hoscap.rsi
@@ -160,7 +160,7 @@
   name: armored overcoat
   description: Pretty old stuff for these times, bringing back old memories...
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/NEKISH/Clothing/OuterClothing/Coats/hos_overcoat.rsi
@@ -180,7 +180,7 @@
   name: old head of security's jumpsuit
   description: Pretty old stuff for these times, bringing back old memories...
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/NEKISH/Clothing/Uniforms/Jumpsuit/hos.rsi
@@ -193,7 +193,7 @@
   id: ClothingHandsWatchDivine
   name: divine watches
   description: This watch can only be worn by a divine person
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Clothing/Hands/Accessories/watch.rsi
@@ -225,7 +225,7 @@
   name: old ussp leather gloves
   description: Black leather gloves from USSP
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Insulated
     - type: Sprite
@@ -239,7 +239,7 @@
   name: old ussp leather cap
   description: Pretty old stuff from USSP
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/jesuisunfou/Clothing/Head/Hats/ussp.rsi
@@ -252,7 +252,7 @@
   name: old ussp armored overcoat
   description: Pretty old stuff from USSP
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/jesuisunfou/Clothing/OuterClothing/Coats/ussp.rsi
@@ -272,7 +272,7 @@
   name: old ussp jumpsuit
   description: Pretty old stuff from USSP
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/jesuisunfou/Clothing/Uniforms/Jumpsuit/ussp.rsi
@@ -285,7 +285,7 @@
   name: old ussp boots
   description: Pretty old stuff from USSP
   suffix: Sponsor
-  noSpawn: true # SS220 Shlepi
+  categories: [ HideSpawnMenu ] # SS220 Shlepi
   components:
     - type: Sprite
       sprite: Corvax/Sponsor/jesuisunfou/Clothing/Shoes/ussp.rsi

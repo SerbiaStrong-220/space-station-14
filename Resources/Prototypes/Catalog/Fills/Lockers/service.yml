@@ -105,6 +105,7 @@
       - id: ClothingBeltPlant
       - id: PlantBag ##Some maps don't have nutrivend
       - id: BoxMouthSwab
+      - id: Dropper
       - id: HandLabeler
       - id: ClothingUniformOveralls
       - id: ClothingHeadHatTrucker
@@ -130,7 +131,7 @@
 - type: entity
   id: ClosetJanitorBombFilled
   parent: ClosetJanitorBomb
-  suffix: Filled
+  suffix: DO NOT MAP, Filled
   components:
   - type: StorageFill
     contents:

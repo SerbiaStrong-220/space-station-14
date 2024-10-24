@@ -10,9 +10,13 @@
          amount: 2
        - id: ClothingUniformJumpskirtPrisoner
          amount: 2
-       - id: ClothingShoesColorBlack
+       - id: ClothingShoesColorOrange # SS220 black to orange prison shoes
          amount: 2
        - id: ClothingMaskMuzzle
+       # SS220 PrisonerIDCard Begin
+       - id: PrisonerIDCard
+         amount: 2
+       # SS220 PrisonerIDCard End
 
 #- type: entity
 #  id: WardrobePajamaFilled
@@ -178,6 +182,7 @@
        - id: ClothingUniformJumpskirtCargo
        - id: ClothingHandsGlovesFingerless
        - id: AppraisalTool
+       - id: ClothingEyesHudSupply # SS220 ADD CARGO HUD
 
  - type: entity
    id: WardrobeSalvageFilled
@@ -186,11 +191,16 @@
    components:
    - type: StorageFill
      contents:
-       - id: ClothingBackpack
+       - id: ClothingBackpackSalvage #SS220-Salvage-Loadouts-Update-Begin
+       - id: ClothingBackpackSatchelSalvage
+       - id: ClothingBackpackDuffelSalvage #SS220-Salvage-Loadouts-Update-End
        - id: ClothingShoesBootsSalvage
          amount: 2
        - id: ClothingUniformJumpsuitSalvageSpecialist
          amount: 2
+       - id: ClothingHeadBandSalvage #SS220-Salvage-Loadouts-Update-Begin
+       - id: ClothingHeadHatSalvage
+       - id: ClothingHeadHatHardhatViolet #SS220-Salvage-Loadouts-Update-End
 
  - type: entity
    id: WardrobeAtmosphericsFilled

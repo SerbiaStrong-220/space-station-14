@@ -73,8 +73,6 @@ ghost-role-information-shiva-description = { ent-MobSpiderShiva.desc }
 ent-MobKangarooWillowGhostRole = { ent-MobKangarooWillow }
     .desc = { ent-MobKangarooWillow.desc }
 ent-SpawnMobKangarooWillowGhostRole = Спавнер { ent-MobKangarooWillow }
-ghost-role-information-willow-name = { ent-MobKangarooWillow }
-ghost-role-information-willow-description = { ent-MobKangarooWillow.desc }
 
 ent-MobSlimesPetGhostRole = { ent-MobSlimesPet }
     .desc = { ent-MobSlimesPet.desc }
@@ -87,3 +85,16 @@ ent-MobSpaceCatPetGhostRole = { ent-MobSpaceCatPet }
 ent-SpawnMobSpaceCatPetGhostRole = Спавнер { ent-MobSpaceCatPet }
 ghost-role-information-pet-spacecat-name = { ent-MobSpaceCatPet }
 ghost-role-information-pet-spacecat-description = { ent-MobSpaceCatPet.desc }
+
+ent-MobENGhostRole = { ent-MobEN }
+    .desc = { ent-MobEN.desc }
+ent-SpawnMobENGhostRole = Спавнер { ent-MobEN }
+
+ent-MobStevenCrocodileGhostRole = стивен
+    .desc = Белоснежный крокодил с золотым ошейником, олицетворение роскоши и правосудия, любимый питомец судьи, который  обожает пожевать протоколы дел и похрустеть доказательствами.
+ent-SpawnMobStevenCrocodile = Спавнер Стивена
+ghost-role-information-pet-steven-name = Стивен
+ghost-role-information-pet-steven-description = Питомец Магистрата. Символ статуса и силы, преданный друг своего хозяина, который не прочь прикусить деловые бумаги и поиграть с финансовыми документами.
+
+ghost-role-information-taxibot-name = { ent-MobTaxiBot }
+ghost-role-information-taxibot-description = { ent-MobTaxiBot.desc }

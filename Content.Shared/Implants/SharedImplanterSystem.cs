@@ -22,6 +22,7 @@ public abstract class SharedImplanterSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -61,6 +62,9 @@ public abstract class SharedImplanterSystem : EntitySystem
         if (!CanImplant(user, target, implanter, component, out var implant, out var implantComp))
             return;
 
+        //SS220-mindslave
+        implantComp.user = user;
+
         //If the target doesn't have the implanted component, add it.
         var implantedComp = EnsureComp<ImplantedComponent>(target);
         var implantContainer = implantedComp.ImplantContainer;
@@ -79,7 +83,7 @@ public abstract class SharedImplanterSystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = implanter };
         RaiseLocalEvent(target, ref ev);
 
-        Dirty(component);
+        Dirty(implanter, component);
     }
 
     public bool CanImplant(
@@ -107,8 +111,8 @@ public abstract class SharedImplanterSystem : EntitySystem
 
     protected bool CheckTarget(EntityUid target, EntityWhitelist? whitelist, EntityWhitelist? blacklist)
     {
-        return whitelist?.IsValid(target, EntityManager) != false &&
-            blacklist?.IsValid(target, EntityManager) != true;
+        return _whitelistSystem.IsWhitelistPassOrNull(whitelist, target) &&
+            _whitelistSystem.IsBlacklistFailOrNull(blacklist, target);
     }
 
     //Draw the implant out of the target
@@ -158,7 +162,7 @@ public abstract class SharedImplanterSystem : EntitySystem
             if (component.CurrentMode == ImplanterToggleMode.Draw && !component.ImplantOnly && !permanentFound)
                 ImplantMode(implanter, component);
 
-            Dirty(component);
+            Dirty(implanter, component);
         }
     }
 
@@ -194,9 +198,9 @@ public abstract class SharedImplanterSystem : EntitySystem
         {
             if (!TryComp<MetaDataComponent>(uid, out var metadata))
                 return;
-            _metaData.SetEntityName(uid, Loc.GetString("ent-BaseImplanter")); // Замена на стандартное имя
-            _metaData.SetEntityDescription(uid, Loc.GetString("ent-BaseImplanter.desc")); // Замена на стандартное описание
-            _appearance.SetData(uid, ImplanterVisuals.Full, implantFound, appearance); // Ставим спрайт пустого имплантера
+            _metaData.SetEntityName(uid, Loc.GetString("ent-BaseImplanter")); // ������ �� ����������� ���
+            _metaData.SetEntityDescription(uid, Loc.GetString("ent-BaseImplanter.desc")); // ������ �� ����������� ��������
+            _appearance.SetData(uid, ImplanterVisuals.Full, implantFound, appearance); // ������ ������ ������� ����������
         }
         else
             _appearance.SetData(uid, ImplanterVisuals.Full, implantFound, appearance);

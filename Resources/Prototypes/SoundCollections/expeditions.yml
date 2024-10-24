@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: ExpeditionEnd
+  files:
+  # SS22o-Expedition-Music
+  #- /Audio/Expedition/tension_session.ogg
+  - /Audio/Expedition/deadline.ogg
+  - /Audio/SS220/Misc/Extraction.ogg

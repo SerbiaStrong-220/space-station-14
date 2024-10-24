@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/e9f937f52b9f63acb49ffd6ab5e6de68e7b13e73 with some modifications by TheArturZh for SS220, ussp is made by MIXnikita for SS220",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Kit0vras (Github) for SS220, idmagistrate state sprited by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "centcom"
+    },
+    {
+      "name": "admin"
     },
     {
       "name": "ert_chaplain"
@@ -30,6 +33,9 @@
     },
     {
       "name": "ert_security"
+    },
+    {
+      "name": "deathsquad"
     },
     {
       "name": "gold"
@@ -104,6 +110,9 @@
       "name": "idiaa"
     },
     {
+      "name": "idmagistrate"
+    },
+    {
       "name": "idmedicaldoctor"
     },
     {
@@ -149,6 +158,9 @@
       "name": "idvirologist"
     },
     {
+      "name": "idvisitor"
+    },
+    {
       "name": "idwarden"
     },
     {
@@ -174,6 +186,9 @@
     },
     {
       "name": "idblueshield"
+    },
+    {
+      "name": "idadmin"
     },
     {
       "name": "orange"
@@ -224,6 +239,9 @@
       "name": "idseniorofficer"
     },
     {
+      "name": "idpilot"
+    },
+    {
       "name": "gold-inhand-left",
       "directions": 4
     },
@@ -266,8 +284,19 @@
     {
       "name": "ussp"
     },
-	{
+    {
       "name": "ussp_med"
-    }
+    },
+    {
+      "name": "green-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "green-inhand-right",
+      "directions": 4
+    },
+	{
+	  "name": "idseniorservice"
+	}
   ]
 }
