@@ -32,10 +32,10 @@ namespace Content.Client.SS220.CluwneComms.UI
                 var metadata = AlertLevelButton.GetItemMetadata(args.Id);
                 if (metadata != null && metadata is string cast)
                 {
-                    Owner.AlertLevelSelected(cast);
+                    //Owner.AlertLevelSelected(cast);
                 }
             };
-            AlertLevelButton.Disabled = !owner.AlertLevelSelectable;
+            //AlertLevelButton.Disabled = !owner.AlertLevelSelectable;
 
             UpdateCountdown();
             Timer.SpawnRepeating(1000, UpdateCountdown, _timerCancelTokenSource.Token);

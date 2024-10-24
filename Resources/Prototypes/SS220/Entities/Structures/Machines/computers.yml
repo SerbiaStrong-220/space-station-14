@@ -72,7 +72,7 @@
       stealGroup: SalvageShuttleConsoleCircuitboard
 
 - type: entity
-  parent: BaseComputer
+  parent: BaseComputerAiAccess
   id: ComputerCluwneComms
   name: cluwne communications computer
   description: Used to create memed announces
@@ -88,6 +88,8 @@
       state: cluwne_screen
     - map: ["computerLayerKeys"]
       state: cluwne_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
   - type: AccessReader
     access: [[ "Theatre" ]]
   - type: ActivatableUI
@@ -100,8 +102,10 @@
         volume: -4
   - type: UserInterface
     interfaces:
-    - key: enum.CluwneCommsConsoleUiKey.Key
-      type: CluwneCommsConsoleBoundUserInterface
+      enum.CluwneCommsConsoleUiKey.Key:
+        type: CluwneCommsConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
   - type: Computer
     board: CluwneCommsComputerCircuitboard
   - type: PointLight
@@ -109,5 +113,5 @@
     energy: 1.6
     color: "#3c5eb5"
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: StrongMetallic
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
