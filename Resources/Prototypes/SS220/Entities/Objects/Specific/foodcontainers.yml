@@ -1,0 +1,13 @@
+- type: entity
+  parent: FoodBowlBig
+  id: FoodCauldron
+  name: Чан
+  description: Большой чан для готовки. Поместится много еды, осталось только приготовить.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Consumable/Food/cauldron.rsi
+      layers:
+      - state: cauldron
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: fill-1
+        visible: false

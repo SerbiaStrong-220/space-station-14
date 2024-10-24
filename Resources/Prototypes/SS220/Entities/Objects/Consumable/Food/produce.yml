@@ -25,7 +25,7 @@
       reagents:
       - ReagentId: JuiceBeet
         Quantity: 10
-        
+
 - type: entity
   name: сноп мясопшеницы
   description: Эх... мясопшеница... стоп, что?
@@ -52,3 +52,16 @@
   - type: Tag
     tags:
     - Meatwheat
+
+- type: entity
+  name: Призрачный чили перец
+  description: Призрачный чили перец? А как мне из него готовить, если я его не вижу?
+  id: GhostChiliPepper
+  parent: ProduceBase
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/ghostchilipepper.rsi
+    - type: SolutionContainerManager
+      solutions:
+        - ReagentId: Nutriment
+          Quantity: 5
