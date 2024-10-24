@@ -12,8 +12,10 @@ ent-ClothingEyesGlasses = очки
     .desc = Пара неприглядных очков с линзами по рецепту.
 ent-ClothingEyesGlassesJensen = очки Дженсена
     .desc = Пара складных очков жёлтого оттенка. Вы никогда не просили о них.
+    .suffix = За время в игре
 ent-ClothingEyesGlassesJamjar = толстые очки
     .desc = Эти ретро-очки напоминают вам о более простых временах.
+    .suffix = За время в игре
 ent-ClothingEyesGlassesOutlawGlasses = очки негодяя
     .desc = Обязательны для каждого уважающего себя агента под прикрытием.
 ent-ClothingEyesGlassesCheapSunglasses = дешёвые солнцезащитные очки
@@ -34,11 +36,3 @@ ent-ClothingEyesGlassesChemical = очки химического анализа
     .desc = Очки, позволяющие сканировать химический состав раствора.
 ent-ClothingEyesVisorNinja = очки ниндзя
     .desc = Усовершенствованные очки, защищающие глаза ниндзя от вспышек света.
-#SS220-add-time-suffix-loadout begin
-    .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
-ent-ClothingEyesGlassesJamjar = толстые очки
-    .desc = Также известны как "Защитники девственности".
-#SS220-add-time-suffix-loadout begin
-    .suffix = За время в игре
-#SS220-add-time-suffix-loadout end

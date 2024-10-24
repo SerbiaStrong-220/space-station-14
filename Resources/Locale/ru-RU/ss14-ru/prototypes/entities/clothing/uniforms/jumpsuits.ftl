@@ -2,9 +2,7 @@ ent-ClothingUniformJumpsuitDeathSquad = униформа Эскадрона см
     .desc = Усовершенствованный бронированный комбинезон, используемый спецподразделениями при проведении специальных операций.
 ent-ClothingUniformJumpsuitAncient = старинный комбинезон
     .desc = Ужасно поношенный и потрёпанный серый комбинезон. Он выглядит так, будто его не стирали более десяти лет.
-#SS220-add-time-suffix-loadout begin
     .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
 ent-ClothingUniformJumpsuitBartender = униформа бармена
     .desc = Красивая и опрятная форма. Жаль только, что про бар этого не скажешь.
 ent-ClothingUniformJumpsuitJacketMonkey = обезьянья жилетка бармена
@@ -141,9 +139,7 @@ ent-ClothingUniformJumpsuitColorMaroon = бордовый комбинезон
     .desc = Обычный бордовый комбинезон без знаков различия.
 ent-ClothingUniformColorRainbow = радужный комбинезон
     .desc = Разноцветный комбинезон!
-#SS220-add-time-suffix-loadout begin
     .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
 ent-ClothingUniformOveralls = комбинезон на лямках
     .desc = Отлично подходит для работы на открытом воздухе.
 ent-ClothingUniformJumpsuitLibrarian = костюм библиотекаря
@@ -249,9 +245,7 @@ ent-ClothingUniformJumpsuitSeniorPhysician = комбинезон ведущег
     .desc = Признак мастерства и престижа медицинского отдела.
 ent-ClothingUniformJumpsuitSeniorOfficer = комбинезон инструктора службы безопасности
     .desc = Признак мастерства и престижа отдела службы безопасности.
-#SS220-add-time-suffix-loadout begin
     .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
 ent-ClothingUniformJumpsuitWeb = паутинный комбинезон
     .desc = Даёт понять, что вы едины с паутиной.
 ent-ClothingUniformJumpsuitLoungewear = домашняя одежда

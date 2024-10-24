@@ -19,7 +19,6 @@ ent-ClothingUniformJumpsuitCargonovich = каргонович
     .suffix = За время в игре
 ent-ClothingUniformJumpsuitSyndicateDiplomatist = костюм дипломата Syndicate
     .desc = Костюм дипломата преступного синдиката, ничего необычного.
-    .suffix = За время в игре
 ent-ClothingUniformJumpsuitNTR = униформа НТР
     .desc = Униформа представителя NanoTrasen. Несите истину корпорации своими руками.
     .suffix = За время в игре

@@ -14,6 +14,4 @@ ent-ReverseCymbalsInstrument = реверс-цимбалы
     .desc = Вы уверены, что держите их правильно?
 ent-SuperSynthesizerInstrument = суперсинтезатор
     .desc = Разрываем гетто с помощью Touhou MIDIs с 2020 года.
-#SS220-add-time-suffix-loadout begin
     .suffix = За время в игре
-#SS220-add-time-suffix-loadout end

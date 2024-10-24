@@ -4,9 +4,7 @@ ent-ClothingBackpackClown = хихишкин фон хонкертон
     .desc = Это рюкзак, изготовленный компанией «Honk! Co».
 ent-ClothingBackpackIan = рюкзак Иана
     .desc = Иногда он носит его.
-#SS220-add-time-suffix-loadout begin
     .suffix = За время в игре
-#SS220-add-time-suffix-loadout end
 ent-ClothingBackpackSecurity = рюкзак охраны
     .desc = Это очень робастный рюкзак.
 ent-ClothingBackpackSecurityPilotFilled = рюкзак пилота
