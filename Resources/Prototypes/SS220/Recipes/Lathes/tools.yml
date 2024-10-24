@@ -1,0 +1,8 @@
+- type: latheRecipe
+  id: ClothingBeltChiefEngineer 
+  result: ClothingBeltChiefEngineer 
+  category: Tools
+  completetime: 1
+  materials:
+    Steel: 200
+    Cloth: 500    

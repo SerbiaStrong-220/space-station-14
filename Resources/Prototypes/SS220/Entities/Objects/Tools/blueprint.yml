@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintBeltChiefEngineer
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ClothingBeltChiefEngineer   
