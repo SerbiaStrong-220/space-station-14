@@ -1,0 +1,72 @@
+# Новые прототипы пишите выше
+# Death Squad
+- type: entity
+  name: pulse rifle
+  parent: BaseWeaponBattery
+  id: WeaponPulseRifle2
+  description: A heavy-duty energy rifle capable of annihilating any structures.
+  suffix: Винтовка, Death Squad
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+  - type: Gun
+    fireRate: 2.5
+  - type: Battery
+    maxCharge: 400
+    startingCharge: 400
+  - type: HitscanBatteryAmmoProvider
+    proto: Pulsekill
+    fireCost: 1
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: Pulsekill
+      name: firemode-name-kill
+      fireCost: 1
+    - proto: PulseDESTROY
+      name: firemode-name-destroy
+      fireCost: 5
+      soundGunshot:  /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+
+- type: entity
+  name: pulse shotgun
+  parent: BaseWeaponBattery
+  id: WeaponPulseShotgun
+  description: An energy shotgun with the latest treatment technology.
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/pulse_shotgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/pulse_shotgun.rsi
+  - type: Battery
+    maxCharge: 400
+    startingCharge: 400
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletLaserDestroy
+    fireCost: 10
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: BulletLaserDestroy
+      name: firemode-name-kill
+      fireCost: 10
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      magState: mag
+    - proto: BulletLaserHeal
+      name: firemode-name-heal
+      fireCost: 17.5
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      magState: heal-mag

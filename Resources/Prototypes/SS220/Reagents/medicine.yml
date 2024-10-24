@@ -161,6 +161,25 @@
             Poison: 0.5
 
 - type: reagent
+  id: HolyMolyWater
+  name: reagent-name-holymolywater
+  group: Medicine
+  desc: reagent-desc-holymolywater
+  physicalDesc: reagent-physical-desc-holymoly
+  flavor: HolyMoly
+  color: "#e8e8e8"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -10
+            Burn: -10
+            Airloss: -10
+            Toxin: -10
+
+- type: reagent
   id: Nicotizine
   name: reagent-name-nicotizine
   group: Medicine

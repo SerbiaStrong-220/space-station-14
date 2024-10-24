@@ -118,6 +118,26 @@
   - type: AccessReader
     access: [ [ "CentralCommandDeathSquad" ] ]
 
+- type: entity
+  id: LockerDeathsquadCommander
+  parent: LockerDeathsquad
+  name: шкаф командира Эскадрона Смерти
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: deathsquad
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: deathsquadcommander_door
+
+- type: entity
+  id: LockerDeathsquadSpecialist
+  parent: LockerDeathsquad
+  name: шкаф специалиста Эскадрона Смерти
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: deathsquad
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: deathsquadspecialist_door
+
 #Командование
 - type: entity
   id: LockerBlueshield
