@@ -52,3 +52,14 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: jnecexit }
     useDelay: 1
+
+- type: entity
+  id: ActionDarkReaperBloodMist
+  name: Кровавый туман
+  description: Выпустить кровавый туман.
+  components:
+  - type: InstantAction
+    event: !type:ReaperBloodMistEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_bloodmist }
+    useDelay: 60
