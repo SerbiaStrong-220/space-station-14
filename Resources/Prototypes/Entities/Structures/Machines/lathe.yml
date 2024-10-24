@@ -356,7 +356,7 @@
       - FauxTileAstroSnow
       - FauxTileAstroSand #SS220-beachCraftng
       - OreBagOfHolding
-      - DeviceQuantumSpinInverter
+      #- DeviceQuantumSpinInverter #SS220 - Until better times
       - ThermalVisorRND # SS220 Thermals
       - ClothingEyesHudSupply #ss220 hud cargo add
   - type: EmagLatheRecipes

@@ -193,14 +193,16 @@
     Glass: 400
     Silver: 200
 
-- type: latheRecipe
-  id: DeviceQuantumSpinInverter
-  result: DeviceQuantumSpinInverter
-  completetime: 5
-  materials:
-    Steel: 700
-    Glass: 100
-    Uranium: 100
+#SS220 - Until better times start
+# - type: latheRecipe
+#   id: DeviceQuantumSpinInverter
+#   result: DeviceQuantumSpinInverter
+#   completetime: 5
+#   materials:
+#     Steel: 700
+#     Glass: 100
+#     Uranium: 100
+#SS220 - Until better times end
 
 - type: latheRecipe
   id: WeaponProtoKineticAccelerator

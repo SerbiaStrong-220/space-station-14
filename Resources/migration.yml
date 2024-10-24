@@ -514,3 +514,6 @@ MagicalLamp: null
 
 # 2024-10-04
 BaseAdvancedPen: Pen
+
+# 2024-10-24 - SS220 InverterGoodBye
+DeviceQuantumSpinInverter: null
