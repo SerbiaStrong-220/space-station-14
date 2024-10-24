@@ -330,6 +330,7 @@
   - type: AddAccentClothing
     accent: ReplacementAccent
     replacement: mumble
+  - type: AddMutedClothing #SS220 no-vocal-when-muzzled
   - type: Construction
     graph: Muzzle
     node: muzzle
