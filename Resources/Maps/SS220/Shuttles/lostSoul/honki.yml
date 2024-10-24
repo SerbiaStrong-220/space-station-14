@@ -1160,22 +1160,26 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: DeviceQuantumSpinInverter
-  entities:
-  - uid: 25
-    components:
-    - type: Transform
-      parent: 21
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 30
-    components:
-    - type: Transform
-      parent: 26
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+  
+  #SS220 - Until betters times start
+# - proto: DeviceQuantumSpinInverter
+#   entities:
+#   - uid: 25
+#     components:
+#     - type: Transform
+#       parent: 21
+#     - type: Physics
+#       canCollide: False
+#     - type: InsideEntityStorage
+#   - uid: 30
+#     components:
+#     - type: Transform
+#       parent: 26
+#     - type: Physics
+#       canCollide: False
+#     - type: InsideEntityStorage
+ #SS220 - Until betters times end
+
 - proto: DisposalBend
   entities:
   - uid: 405
