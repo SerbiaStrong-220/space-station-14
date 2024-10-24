@@ -8,7 +8,7 @@ namespace Content.Server.SS220.Objectives.Components;
 public sealed partial class FramePersonConditionComponent : Component
 {
     [DataField(required: true)]
-    public CriminalStatusTrackerSpecifier CriminalStatusSpecifier;
+    public CriminalStatusTrackerSpecifier CriminalStatusSpecifier = new();
 
     public bool ObjectiveIsDone = false;
 }

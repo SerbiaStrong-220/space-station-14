@@ -15,7 +15,7 @@ public sealed partial class CriminalStatusTrackerComponent : Component
     public EntityUid TrackedByMind;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public CriminalStatusTrackerSpecifier CriminalStatusSpecifier;
+    public CriminalStatusTrackerSpecifier CriminalStatusSpecifier = new();
 
     [ViewVariables(VVAccess.ReadWrite)]
     private int _currentNode = 0;
@@ -68,17 +68,17 @@ public sealed partial class CriminalStatusTrackerComponent : Component
 }
 
 [DataDefinition]
-public struct CriminalStatusTrackerSpecifier
+public sealed partial class CriminalStatusTrackerSpecifier
 {
     [DataField(required: true)]
-    public List<CriminalStatusTrackerSpecifierNode> CriminalStatusNodes;
+    public List<CriminalStatusTrackerSpecifierNode> CriminalStatusNodes = new();
 }
 
 [DataDefinition]
-public struct CriminalStatusTrackerSpecifierNode
+public sealed partial class CriminalStatusTrackerSpecifierNode
 {
     [DataField(required: true)]
-    public List<ProtoId<CriminalStatusPrototype>> AllowedStatuses;
+    public List<ProtoId<CriminalStatusPrototype>> AllowedStatuses = new();
 
     [DataField]
     public bool CanBeSetByTracker;

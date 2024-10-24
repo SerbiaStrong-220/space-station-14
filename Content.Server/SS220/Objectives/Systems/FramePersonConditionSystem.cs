@@ -8,6 +8,7 @@ using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
+using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
@@ -21,6 +22,7 @@ public sealed class FramePersonConditionSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
 
     /// <summary>
@@ -34,7 +36,7 @@ public sealed class FramePersonConditionSystem : EntitySystem
 
         SubscribeLocalEvent<FramePersonConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
 
-        SubscribeLocalEvent<PickRandomPersonComponent, ObjectiveAssignedEvent>(OnPersonAssigned);
+        SubscribeLocalEvent<FramePersonConditionComponent, ObjectiveAssignedEvent>(OnPersonAssigned);
     }
 
     private void OnGetProgress(Entity<FramePersonConditionComponent> entity, ref ObjectiveGetProgressEvent args)
@@ -53,13 +55,12 @@ public sealed class FramePersonConditionSystem : EntitySystem
             entity.Comp.ObjectiveIsDone = true;
     }
 
-    private void OnPersonAssigned(Entity<PickRandomPersonComponent> entity, ref ObjectiveAssignedEvent args)
+    private void OnPersonAssigned(Entity<FramePersonConditionComponent> entity, ref ObjectiveAssignedEvent args)
     {
-        if (!TryComp<FramePersonConditionComponent>(entity.Owner, out var framePersonCondition))
-            return;
-
         args.Cancelled = !(TryPickRandomPerson(entity.Owner, args.MindId, out var target)
-                        && TryTrackIdCardOwner(target.Value, args.MindId, framePersonCondition));
+                        && TryComp<MindComponent>(target, out var mindComponent)
+                        && mindComponent.OriginalOwnedEntity != null
+                        && TryTrackIdCardOwner(GetEntity(mindComponent.OriginalOwnedEntity.Value), args.MindId, entity.Comp));
     }
 
     private bool TryTrackIdCardOwner(EntityUid idCardOwner, EntityUid trackedByMind, FramePersonConditionComponent objective)
@@ -107,16 +108,17 @@ public sealed class FramePersonConditionSystem : EntitySystem
     /// <summary>
     /// Checks if that job can be framed. Relays on supervisor cause... no RP in code sry.
     /// </summary>
-    private bool CorrectJob(EntityUid uid)
+    private bool CorrectJob(EntityUid mindUid)
     {
-        if (!(TryComp<MindRoleComponent>(uid, out var mindRoleComponent)
-            && mindRoleComponent.JobPrototype.HasValue))
+
+        if (!_roleSystem.MindHasRole<MindRoleComponent>(mindUid, out var role)
+            || !role.Value.Comp1.JobPrototype.HasValue)
             return false;
 
-        if (_prototype.Index(mindRoleComponent.JobPrototype.Value).Supervisors == _legalImmunitySupervisors)
-            return true;
+        if (_prototype.Index(role!.Value.Comp1.JobPrototype!.Value).Supervisors == _legalImmunitySupervisors)
+            return false;
 
-        return false;
+        return true;
     }
 
     private float GetProgress(EntityUid target)

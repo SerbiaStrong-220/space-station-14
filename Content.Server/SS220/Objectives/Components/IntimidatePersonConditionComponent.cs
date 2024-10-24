@@ -8,7 +8,11 @@ namespace Content.Server.SS220.Objectives.Components;
 public sealed partial class IntimidatePersonConditionComponent : Component
 {
     [DataField(required: true)]
-    public DamageTrackerSpecifier DamageTrackerSpecifier;
+    public DamageTrackerSpecifier DamageTrackerSpecifier = new();
 
+    [ViewVariables(VVAccess.ReadWrite)]
+    public EntityUid TargetMob;
+
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool ObjectiveIsDone = false;
 }

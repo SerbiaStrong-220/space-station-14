@@ -17,7 +17,8 @@ public sealed partial class DamageReceivedTrackerComponent : Component
     public FixedPoint2 CurrentAmount = 0;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public DamageTrackerSpecifier DamageTracker;
+    [DataField(required: true)]
+    public DamageTrackerSpecifier DamageTracker = new ();
 
     public float GetProgress()
     {
@@ -30,11 +31,11 @@ public sealed partial class DamageReceivedTrackerComponent : Component
 }
 
 [DataDefinition]
-public struct DamageTrackerSpecifier(string damageGroup, FixedPoint2 amount)
+public sealed partial class DamageTrackerSpecifier
 {
-    [DataField]
+    [DataField(required: true)]
     [ViewVariables(VVAccess.ReadWrite)]
-    public ProtoId<DamageGroupPrototype> DamageGroup = damageGroup;
+    public ProtoId<DamageGroupPrototype> DamageGroup;
 
     /// <summary>
     /// if null will count damage in all owner's mob state.
@@ -43,7 +44,7 @@ public struct DamageTrackerSpecifier(string damageGroup, FixedPoint2 amount)
     [ViewVariables(VVAccess.ReadWrite)]
     public List<MobState>? AllowedState;
 
-    [DataField]
+    [DataField(required: true)]
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 TargetAmount = amount;
+    public FixedPoint2 TargetAmount;
 }

@@ -1,0 +1,73 @@
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaFrameTargetObjective
+  description: Your gloves can be used to hack a research server and steal its precious data. If science has been slacking you'll have to get to work.
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Misc/handcuffs.rsi
+      state: handcuff
+  - type: TargetObjective
+    title: objective-condition-frame-target # SS220_TODO
+  - type: FramePersonCondition
+    criminalStatusSpecifier:
+      criminalStatusNodes:
+      - !type:CriminalStatusTrackerSpecifierNode
+        allowedStatuses: [wanted, search, execute, suspected]
+        canBeSetByTracker: true
+      - !type:CriminalStatusTrackerSpecifierNode
+        allowedStatuses: [incarcerated]
+        canBeSetByTracker: false # it will be very sad if ninja can just hack its target
+      - !type:CriminalStatusTrackerSpecifierNode
+        allowedStatuses: [discharged]
+        canBeSetByTracker: true
+
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaIntimidateBruteTargetObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: Structures/Wallmounts/signs.rsi # SS220_TODO
+      state: fire
+  - type: TargetObjective
+    title: objective-condition-intimidate-target-brute # SS220_TODO
+  - type: IntimidatePersonCondition
+    damageTrackerSpecifier:
+      damageGroup: Brute
+      allowedState: [Alive]
+      targetAmount: 280
+
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaIntimidateBurnTargetObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: Structures/Wallmounts/signs.rsi # SS220_TODO
+      state: fire
+  - type: TargetObjective
+    title: objective-condition-intimidate-target-burn # SS220_TODO
+  - type: IntimidatePersonCondition
+    damageTrackerSpecifier:
+      damageGroup: Burn
+      allowedState: [Alive]
+      targetAmount: 160
+
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaIntimidateToxinTargetObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: Structures/Wallmounts/signs.rsi # SS220_TODO
+      state: fire
+  - type: TargetObjective
+    title: objective-condition-intimidate-target-toxic # SS220_TODO
+  - type: IntimidatePersonCondition
+    damageTrackerSpecifier:
+      damageGroup: Toxin
+      allowedState: [Alive]
+      targetAmount: 120
+
+
