@@ -218,6 +218,34 @@
       offset: 0, 1
       cost: 10
 
+#Tile
+- type: entity
+  id: ActionSpawnWebTile
+  name: create a web tile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 16
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
+      state: wall_spawn
+    event: !type:SpiderTileSpawnActionEvent
+      prototype: FloorSteel
+
+- type: entity
+  parent: ActionSpawnWebTile
+  id: ActionSpawnWebTileBloodPoints
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 6
+    range: 1.5
+    event: !type:SpiderTileSpawnActionEvent
+      prototype: FloorSteel
+      cost: 10
+
 #Web
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb

@@ -159,6 +159,7 @@
     - ActionSpawnSpiderLittleBloodPoints
     - ActionSpawnSpiderCrystalBloodPoints
     - ActionSpawnSingleSpiderWebDurableBloodPoints
+    - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
   - type: Hunger
@@ -280,6 +281,7 @@
     damageModifierSet: SpiderDrone
   - type: ActionGrant
     actions:
+    - ActionSpawnWebTile
     - ActionSpawnSpiderWallWebDurable
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebShortDelay

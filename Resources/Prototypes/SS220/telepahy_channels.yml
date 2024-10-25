@@ -5,5 +5,5 @@
 
 - type: telepathyChannel
   id: TelepathyChannelHive
-  name: chat-radio-hive
+  name: chat-telepathy-hive
   color: "#cc80ff"

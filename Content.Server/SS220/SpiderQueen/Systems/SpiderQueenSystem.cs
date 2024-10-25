@@ -7,6 +7,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.RCD.Systems;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
@@ -27,6 +28,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -36,6 +38,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private readonly RCDSystem _rCDSystem = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     public override void Initialize()
     {
@@ -43,8 +47,10 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderTargetSpawnEvent>(OnTargetSpawn);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderSpawnDoAfterEvent>(OnSpawnDoAfter);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderNearbySpawnEvent>(OnNearbySpawn);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderSpawnDoAfterEvent>(OnSpawnDoAfter);
+
+        SubscribeLocalEvent<SpiderTileSpawnActionEvent>(OnTileSpawnAction);
     }
 
     public override void Update(float frameTime)
@@ -109,9 +115,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(entity, args.Cost, entity.Comp))
             return;
 
-        entity.Comp.CurrentBloodPoints -= args.Cost;
-        Dirty(entity);
-        UpdateAlert(entity);
+        ChangeBloodPointsAmount(entity.Owner, entity.Comp, -args.Cost);
 
         var getProtos = EntitySpawnCollection.GetSpawns(args.Prototypes, _random);
         var targetMapCords = GetCoordinates(args.TargetCoordinates);
@@ -155,6 +159,26 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             DoStationAnnouncement(entity);
     }
 
+    private void OnTileSpawnAction(SpiderTileSpawnActionEvent args)
+    {
+        var performer = args.Performer;
+        if (args.Handled ||
+            !CheckEnoughBloodPoints(performer, args.Cost) ||
+            _rCDSystem.TryGetMapGridData(args.Target, out var mapGridData) ||
+            mapGridData is null)
+            return;
+
+        _mapSystem.SetTile(mapGridData.Value.GridUid,
+            mapGridData.Value.Component,
+            mapGridData.Value.Position,
+            new Tile(_tileDefinitionManager[args.Prototype].TileId));
+
+        if (TryComp<SpiderQueenComponent>(performer, out var spiderQueen))
+            ChangeBloodPointsAmount(performer, spiderQueen, -args.Cost);
+
+        args.Handled = true;
+    }
+
     /// <summary>
     /// Do a station announcement if all conditions are met
     /// </summary>
@@ -189,9 +213,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         var hungerDecreaseValue = -(value / component.HungerConvertCoefficient);
         _hunger.ModifyHunger(uid, hungerDecreaseValue, hunger);
-        component.CurrentBloodPoints += value;
-        Dirty(uid, component);
-        UpdateAlert((uid, component));
+        ChangeBloodPointsAmount(uid, component, value);
     }
 
     private bool TryStartSpiderSpawnDoAfter(EntityUid spider,

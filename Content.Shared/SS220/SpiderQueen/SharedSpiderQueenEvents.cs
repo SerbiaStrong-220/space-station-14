@@ -37,6 +37,15 @@ public sealed partial class SpiderTargetSpawnEvent : WorldTargetActionEvent
     public TimeSpan DoAfter = TimeSpan.Zero;
 }
 
+public sealed partial class SpiderTileSpawnActionEvent : WorldTargetActionEvent
+{
+    [DataField(required: true)]
+    public string Prototype;
+
+    [DataField]
+    public FixedPoint2 Cost = FixedPoint2.Zero;
+}
+
 public sealed partial class SpiderCocooningActionEvent : EntityTargetActionEvent
 {
     /// <summary>
