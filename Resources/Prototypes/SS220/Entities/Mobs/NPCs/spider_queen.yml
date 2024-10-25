@@ -118,13 +118,9 @@
     energy: 0
     color: "#ff4242"
     castShadows: false
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - HiveRadio
-  - type: ActiveRadio
-    channels:
-    - HiveRadio
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelHive
 
 - type: entity
   parent: BaseMobSpiderQueen
