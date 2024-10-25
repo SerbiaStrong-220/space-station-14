@@ -162,6 +162,13 @@
   loadouts:
   - BlueShieldArmorBulletproof
   - BlueShieldSRTCoat
+
+- type: loadoutGroup
+  id: BlueShieldBelt
+  name: loadout-group-blueshield-belt
+  loadouts:
+  - BlueshieldBelt
+  - BlueshieldWebbing
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 

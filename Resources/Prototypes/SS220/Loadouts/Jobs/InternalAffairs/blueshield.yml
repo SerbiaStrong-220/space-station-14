@@ -37,3 +37,14 @@
   id: BlueShieldSRTCoat
   equipment:
     outerClothing: ClothingOuterSRTCoat
+
+# Belt
+- type: loadout
+  id: BlueshieldBelt
+  equipment:
+    belt: ClothingBeltBlueShieldFilled
+
+- type: loadout
+  id: BlueshieldWebbing
+  equipment:
+    belt: ClothingBeltWebbingBlueShieldFilled
