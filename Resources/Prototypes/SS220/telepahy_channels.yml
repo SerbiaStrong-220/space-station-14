@@ -5,5 +5,5 @@
 
 - type: telepathyChannel
   id: TelepathyChannelSpaceDragon
-  name: chat-telepathy-dragon
+  name: chat-telepathy-space-dragon
   color: "#7567b6"

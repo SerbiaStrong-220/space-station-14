@@ -1,2 +1,2 @@
 chat-telepathy-yogsothothcult = Культ Йогг
-chat-telepathy-dragon = Космический дракон
+chat-telepathy-space-dragon = Космический дракон
