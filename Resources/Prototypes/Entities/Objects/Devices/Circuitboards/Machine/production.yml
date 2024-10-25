@@ -1080,6 +1080,12 @@
         Capacitor: 2
         CableHV: 5
         Glass: 2
+    # SS220 SuperMatter-begin
+    - type: Construction
+      graph: SuperMatterEmitterBoard
+      deconstructionTarget: null
+      node: emitter
+    # SS220 SuperMatter-end
 
 - type: entity
   id: SurveillanceCameraRouterCircuitboard
