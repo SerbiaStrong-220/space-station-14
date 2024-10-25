@@ -5,6 +5,7 @@
   id: ClothingHandsWhiteGlovesCaptain
   name: белые перчатки капитана
   description: Дорогие перчатки ветерана флотской службы NT.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/whitecapgloves.rsi
@@ -48,7 +49,7 @@
   id: ClothingHandsGlovesOrangeJanitor
   name: оранжевые резиновые перчатки
   description: Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi

@@ -78,7 +78,7 @@
   id: ClothingUniformJumpskirtBartenderNanotrasen
   name: униформа заслуженного бармена NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
@@ -125,7 +125,7 @@
   id: ClothingUniformJumpskirtChefNanotrasen
   name: униформа заслуженного шеф-повара NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
-  suffix: Не маппить, Сеньор
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
@@ -141,6 +141,7 @@
   id: ClothingUniformJumpskirtFeldsher
   name: uniform feldsher
   description: Just don't be offended, are you a feldsher or a real doctor?
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
@@ -153,6 +154,7 @@
   id: ClothingUniformJumpskirtMilitaryFeldsher
   name: uniform military feldsher
   description: This is not a red color at all..
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
@@ -168,6 +170,7 @@
   id: ClothingUniformJumpskirtChiefEngineerDark
   name: dark uniform chief engineer
   description: Dark uniform for years of service as head of the engineering department.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
@@ -179,6 +182,7 @@
   id: ClothingUniformJumpskirtChiefEngineerTurtleDark
   name: dark chief engineer's turtleneck
   description: Dark turtleneck designed specifically for work in conditions of the engineering department.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi

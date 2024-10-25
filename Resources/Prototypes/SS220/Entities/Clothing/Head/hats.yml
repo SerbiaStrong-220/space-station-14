@@ -23,6 +23,7 @@
   id: ClothingHeadWhiteBeretCap
   name: белый берет капитана
   description: Белый берет ветерана.
+  suffix: За время в игре
   components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/whiteberetcap.rsi
@@ -34,6 +35,7 @@
   id: ClothingHeadWhiteCaptainHat
   name: белая фуражка капитана
   description: Символ власти на флоте.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
@@ -72,6 +74,7 @@
   id: ClothingHeadHoPSilverHeadBand
   name: silver headband and earrings
   description: They are as bright as your future.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
@@ -115,10 +118,15 @@
 
   # Фуражка
 - type: entity
-  parent: ClothingHeadWhiteCaptainHat
+  parent: ClothingHeadBase
   id: ClothingHeadNavyCap
   name: navy cap
   description: A mandatory element of the uniform for all officers and crew members, emphasizing their belonging to a powerful corporation.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
 
 - type: entity
   parent: ClothingHeadBigCapHoS
@@ -265,7 +273,7 @@
   id: ClothingHeadHatChefNanotrasen
   name: синий поварской колпак
   description: Владелец этого колпака точно не допустит, чтобы его волосы попали в чужую еду. Судя по еде, так и есть.
-  suffix: Не маппить, Сеньор
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/Chef/chef_nt.rsi
@@ -363,7 +371,7 @@
   id: ClothingHeadHatOrangeJanitor
   name: оранжевая каска
   description: Окрашенная в оранжевый цвет каска.
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/orangejanitor.rsi
@@ -426,6 +434,7 @@
   id: ClothingHeadWarehouseman
   name: the cap of the warehouse manager
   description: Not the most ordinary cap of the main distributor of the station. Embroidered by personal order, you have never been concerned about the corporation's policy regarding a specific color of the uniform.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/qm_warehouseman.rsi
@@ -454,6 +463,7 @@
   id: ClothingHeadBeretSalvageSpecialist
   name: salvage beret
   description: Salvage beret, because, well, why not?
+  suffix: For playtime
   components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
@@ -465,6 +475,7 @@
   id: ClothingHeadTiaraDruid #SS220 druid loadout
   name: druid tiara
   description: A symbol of harmony with nature, even among the stars and planets.
+  suffix: For playtime
   components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
@@ -548,6 +559,7 @@
   id: ClothingHeadHatBeretBard #SS220 bard loadout
   name: beret with feather
   description: Will add atmosphere!
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
