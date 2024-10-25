@@ -1,0 +1,7 @@
+- type: marking
+  id: CultStage-Halo
+  bodyPart: Special
+  markingCategory: Special
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: halo

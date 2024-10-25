@@ -15,6 +15,7 @@ namespace Content.Client.UserInterface.Controls
         public TextureRect ButtonRect { get; }
         public TextureRect BlockedRect { get; }
         public TextureRect HighlightRect { get; }
+        public TextureRect IrremovableRect { get; } //ss220 irremovable
         public SpriteView HoverSpriteView { get; }
         public TextureButton StorageButton { get; }
         public CooldownGraphic CooldownDisplay { get; }
@@ -51,6 +52,8 @@ namespace Content.Client.UserInterface.Controls
 
         public bool Blocked { get => BlockedRect.Visible; set => BlockedRect.Visible = value;}
 
+        public bool Irremovable { get => IrremovableRect.Visible; set => IrremovableRect.Visible = value;} //ss220 irremovable
+
         private string? _blockedTexturePath;
         public string? BlockedTexturePath
         {
@@ -61,6 +64,19 @@ namespace Content.Client.UserInterface.Controls
                 BlockedRect.Texture = Theme.ResolveTextureOrNull(_blockedTexturePath)?.Texture;
             }
         }
+
+        //ss220 irremovable begin
+        private string? _irremovableTexturePath;
+        public string? IrremovableTexturePath
+        {
+            get => _irremovableTexturePath;
+            set
+            {
+                _irremovableTexturePath = value;
+                IrremovableRect.Texture = Theme.ResolveTextureOrNull(_irremovableTexturePath)?.Texture;
+            }
+        }
+        //ss220 irremovable end
 
         private string? _buttonTexturePath;
         public string? ButtonTexturePath
@@ -190,6 +206,15 @@ namespace Content.Client.UserInterface.Controls
                 MouseFilter = MouseFilterMode.Stop,
                 Visible = false
             });
+
+            //ss220 Irremovable begin
+            AddChild(IrremovableRect = new TextureRect
+            {
+                TextureScale = new Vector2(2, 2),
+                Visible = false
+            });
+            IrremovableTexturePath = "irremovable";
+            //ss220 irremovable end
 
             HighlightTexturePath = "slot_highlight";
             BlockedTexturePath = "blocked";

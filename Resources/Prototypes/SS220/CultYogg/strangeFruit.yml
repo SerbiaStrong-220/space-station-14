@@ -1,0 +1,80 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  name: strange fruit
+  parent: BaseItem
+  id: ProductStrangeFruitCultYogg
+  components:
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/strangefruit.rsi
+    state: icon
+  - type: Produce
+    seedId: StrangeFruit
+  - type: Extractable
+    grindableSolutionName: food
+  - type: DesiredFood
+    desireLevel: 1
+  - type: Tag
+    tags:
+    - Omnivorous
+  - type: OnUseTimerTrigger
+    delay: 5
+  - type: TileSpawnInRangeOnTrigger
+    kudzuProtoId: StrangeKudzu
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: StrangeKudzu
+  name: strange kudzu
+  parent: BaseKudzu
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/strangefruit.rsi
+      state: kudzu_11
+    - type: Kudzu
+      growthTickChance: 0.2
+      spreadChance: 0.2
+
+- type: entity
+  parent: SeedBase
+  name: packet of strange fruit seed
+  description: "The iconic, extremely deadly mushroom to be used for purely ornamental purposes."
+  id: CultStrangeFruitSeed
+  components:
+    - type: Seed
+      seedId: StrangeFruit
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/strangefruit.rsi
+
+- type: seed
+  id: StrangeFruit
+  name: seeds-strange-fruit-name
+  noun: seeds-noun-spores
+  displayName: seeds-flyamanita-display-name
+  plantRsi: SS220/Objects/CultYogg/strangefruit.rsi
+  packetPrototype: CultStrangeFruitSeed
+  productPrototypes:
+    - ProductStrangeFruitCultYogg
+  lifespan: 25
+  maturation: 12
+  production: 3
+  yield: 1
+  potency: 10
+  growthStages: 7
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  chemicals:
+    Amatoxin:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 4
+    Nutriment: ## yumby :)
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20

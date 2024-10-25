@@ -138,3 +138,7 @@
 # SS220 Add lying action
 - type: Tag
   id: Bed
+
+# SS220 Cult
+- type: Tag
+  id: Omnivorous
