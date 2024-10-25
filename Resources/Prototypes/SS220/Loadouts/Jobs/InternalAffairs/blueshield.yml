@@ -8,6 +8,15 @@
       role: JobBlueShield
       time: 108000 # 30 hrs
 
+- type: loadoutEffectGroup
+  id: BlueShieldFive
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 18000 # 5 hrs
+
 # Jumpsuit
 - type: loadout
   id: BlueShieldJumpsuit
@@ -34,9 +43,12 @@
     outerClothing: ClothingOuterArmorBulletproof
 
 - type: loadout
-  id: BlueShieldSRTCoat
+  id: BlueShieldOperativeCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
   equipment:
-    outerClothing: ClothingOuterSRTCoat
+    outerClothing: ClothingOuterBlueShieldOperativeCoat
 
 # Belt
 - type: loadout

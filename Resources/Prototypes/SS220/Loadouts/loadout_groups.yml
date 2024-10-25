@@ -161,7 +161,7 @@
   name: loadout-group-blueshield-outerclothing
   loadouts:
   - BlueShieldArmorBulletproof
-  - BlueShieldSRTCoat
+  - BlueShieldOperativeCoat
 
 - type: loadoutGroup
   id: BlueShieldBelt

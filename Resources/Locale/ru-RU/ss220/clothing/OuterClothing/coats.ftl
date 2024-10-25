@@ -12,3 +12,7 @@ ent-ClothingOuterCoatBluetunic = синий армейский китель
     .desc = Китель линейной пехоты великой армии Королевства.
 ent-ClothingOuterCoatRedtunic = красный армейский мундир
     .desc = Алый пехотный мундир Речной Республики.
+
+ent-ClothingOuterBlueShieldOperativeCoat = пальто оперативника "Синий Щит"
+    .desc = Пальто синего цвета. Отличная защита от большинства видов урона.
+    .suffix = За время в игре
