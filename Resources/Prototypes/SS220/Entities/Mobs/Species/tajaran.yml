@@ -8,13 +8,18 @@
   abstract: true
   components:
   - type: Inventory
-    speciesId: tajaran
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Human/displacement.rsi
+            sprite: SS220/Mobs/Species/Tajaran/displacement.rsi
             state: jumpsuit-female
+    maleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Tajaran/displacement.rsi
+            state: jumpsuit-male
   - type: HumanoidAppearance
     species: Tajaran
   - type: Icon
@@ -99,5 +104,11 @@
       jumpsuit:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Human/displacement.rsi
+            sprite: SS220/Mobs/Species/Tajaran/displacement.rsi
             state: jumpsuit-female
+    maleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Tajaran/displacement.rsi
+            state: jumpsuit-male
