@@ -4,6 +4,11 @@
   color: Brown
 
 - type: telepathyChannel
+  id: TelepathyChannelSpaceDragon
+  name: chat-telepathy-space-dragon
+  color: "#7567b6"
+
+- type: telepathyChannel
   id: TelepathyChannelHive
   name: chat-telepathy-hive
   color: "#cc80ff"
