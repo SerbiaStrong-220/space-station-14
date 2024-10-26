@@ -15,4 +15,18 @@ public sealed partial class IntimidatePersonConditionComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public bool ObjectiveIsDone = false;
+
+    // Two descriptions comes to help player differ done object from one which isn't.
+
+    /// <summary>
+    /// Description will be applied at start. No params in it
+    /// </summary>
+    [DataField(required: true)]
+    public string? StartDescription;
+
+    /// <summary>
+    /// Description will be applied when objective is done. No params in it
+    /// </summary>
+    [DataField(required: true)]
+    public string? SuccessDescription;
 }

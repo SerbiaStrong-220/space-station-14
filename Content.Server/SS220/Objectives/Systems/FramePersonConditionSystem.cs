@@ -50,7 +50,15 @@ public sealed class FramePersonConditionSystem : EntitySystem
             return;
         }
 
-        args.Progress = GetProgress(target.Value);
+        if (!TryComp<MindComponent>(target, out var mindComponent)
+            || mindComponent.OriginalOwnedEntity == null)
+        {
+            Log.Error("while getting progress: target dont have a mindComponent or originalEntity is null");
+            args.Progress = 1f;
+            return;
+        }
+
+        args.Progress = GetProgress(GetEntity(mindComponent.OriginalOwnedEntity.Value));
         if (args.Progress >= 1f)
             entity.Comp.ObjectiveIsDone = true;
     }

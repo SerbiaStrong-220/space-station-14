@@ -202,6 +202,7 @@
   - type: AntagObjectives
     objectives:
     - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
+    - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
     - StealResearchObjective
     - DoorjackObjective
     # - SpiderChargeObjective # SS220 Ninja-target-update
@@ -212,7 +213,7 @@
   - type: AntagRandomObjectives
     sets:
     - groups: NinjaObjectiveGroups
-    maxDifficulty: 3 # be careful 3.5 here is 2 x cost of ninja target is 3
+    maxDifficulty: 1.5 # be careful 1.5 is here because one ninjaTarget cost 1.5 and we need only one
     maxPicks: 10
     # SS220 Ninja-target-update end
   - type: AntagSelection

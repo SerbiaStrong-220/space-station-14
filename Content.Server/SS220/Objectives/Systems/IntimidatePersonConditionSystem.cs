@@ -8,12 +8,14 @@ using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Content.Shared.SSDIndicator;
 using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
 public sealed class IntimidatePersonConditionSystem : EntitySystem
 {
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TargetObjectiveSystem _target = default!;
@@ -25,6 +27,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
         SubscribeLocalEvent<IntimidatePersonConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
 
         SubscribeLocalEvent<IntimidatePersonConditionComponent, ObjectiveAssignedEvent>(OnPersonAssigned);
+        SubscribeLocalEvent<IntimidatePersonConditionComponent, ObjectiveAfterAssignEvent>(OnAfterAssign);
     }
 
     private void OnGetProgress(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveGetProgressEvent args)
@@ -38,9 +41,21 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
             return;
         }
 
+        //HandleSSDMoment
+        if (!TryComp<SSDIndicatorComponent>(entity.Comp.TargetMob, out var ssdIndicator)
+            || ssdIndicator.IsSSD)
+        {
+            args.Progress = 1f;
+            return;
+        }
+
         args.Progress = GetProgress(entity.Comp.TargetMob);
         if (args.Progress >= 1f)
+        {
             entity.Comp.ObjectiveIsDone = true;
+            if (entity.Comp.SuccessDescription != null)
+                _metaData.SetEntityDescription(entity.Owner, entity.Comp.SuccessDescription);
+        }
     }
 
     private void OnPersonAssigned(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveAssignedEvent args)
@@ -53,22 +68,21 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
             return;
         }
 
-        // target already assigned
         if (targetObjectiveComponent.Target != null)
             return;
 
-        // no other humans to kill
-        var allHumans = _mind.GetAliveHumansExcept(args.MindId)
+        var targetableMinds = _mind.GetAliveHumansExcept(args.MindId)
                     .Where(x => TryComp<MindComponent>(x, out var mindComponent)
                                 && !HasComp<DamageReceivedTrackerComponent>(GetEntity(mindComponent.OriginalOwnedEntity)))
                     .ToList();
-        if (allHumans.Count == 0)
+
+        if (targetableMinds.Count == 0)
         {
             args.Cancelled = true;
             return;
         }
 
-        var targetMindUid = _random.Pick(allHumans);
+        var targetMindUid = _random.Pick(targetableMinds);
         var target = GetMindsOriginalEntity(targetMindUid);
 
         if (args.Mind.CurrentEntity == null
@@ -83,6 +97,12 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
         entity.Comp.TargetMob = target.Value;
         damageReceivedTracker.WhomDamageTrack = args.Mind.CurrentEntity.Value;
         damageReceivedTracker.DamageTracker = entity.Comp.DamageTrackerSpecifier;
+    }
+
+    private void OnAfterAssign(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveAfterAssignEvent args)
+    {
+        if (entity.Comp.StartDescription != null)
+            _metaData.SetEntityDescription(entity.Owner, entity.Comp.StartDescription);
     }
 
     private float GetProgress(EntityUid target, DamageReceivedTrackerComponent? tracker = null)

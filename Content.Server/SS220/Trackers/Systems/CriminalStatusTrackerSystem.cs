@@ -9,8 +9,6 @@ using Content.Shared.Mind.Components;
 
 public sealed class CriminalStatusTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
 
     public override void Initialize()
     {

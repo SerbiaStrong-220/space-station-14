@@ -26,7 +26,7 @@ public sealed class DamageReceivedTrackerSystem : EntitySystem
             || args.Origin != entity.Comp.WhomDamageTrack)
             return;
 
-        if (entity.Comp.DamageTracker.AllowedState != null
+        if (entity.Comp.DamageTracker.AllowedState == null
             || !TryComp<MobStateComponent>(entity.Owner, out var mobState)
             || !entity.Comp.DamageTracker.AllowedState!.Contains(mobState.CurrentState))
             return;
