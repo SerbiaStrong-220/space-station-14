@@ -18,19 +18,6 @@ namespace Content.Shared.Chemistry
         public const uint LabelMaxLength = 50;
     }
 
-    //ss220 tweak sort start
-    [Serializable, NetSerializable]
-    public sealed class ChemMasterSortReagentsMessage : BoundUserInterfaceMessage
-    {
-        public readonly string BufferSolution;
-
-        public ChemMasterSortReagentsMessage(string bufferSolution)
-        {
-            BufferSolution = bufferSolution;
-        }
-    }
-    //ss220 tweak sort end
-
     [Serializable, NetSerializable]
     public sealed class ChemMasterSetModeMessage : BoundUserInterfaceMessage
     {
@@ -169,7 +156,7 @@ namespace Content.Shared.Chemistry
         /// <summary>
         /// A list of the reagents and their amounts within the buffer, if applicable.
         /// </summary>
-        public readonly IReadOnlyList<ReagentQuantity> BufferReagents;
+        public List<ReagentQuantity> BufferReagents;
 
         public readonly ChemMasterMode Mode;
 
@@ -182,7 +169,7 @@ namespace Content.Shared.Chemistry
 
         public ChemMasterBoundUserInterfaceState(
             ChemMasterMode mode, ContainerInfo? inputContainerInfo, ContainerInfo? outputContainerInfo,
-            IReadOnlyList<ReagentQuantity> bufferReagents, FixedPoint2 bufferCurrentVolume,
+            List<ReagentQuantity> bufferReagents, FixedPoint2 bufferCurrentVolume,
             uint selectedPillType, uint pillDosageLimit, bool updateLabel)
         {
             InputContainerInfo = inputContainerInfo;
