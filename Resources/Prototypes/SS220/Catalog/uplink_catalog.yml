@@ -208,7 +208,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Mime
-    - Chief
+    - Chef
     
 #- type: listing
 #  id: UplinkCQC
