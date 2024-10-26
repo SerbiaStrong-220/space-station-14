@@ -189,6 +189,27 @@
       components:
       - SurplusBundle
 
+#SPICYPIZZA
+- type: listing
+  id: UplinkPizza
+  name: uplink-spicypizza-name
+  description: uplink-spicypizza-desc
+  icon: { sprite: /Textures/Objects/Consumable/Food/Baked/pizza.rsi, state: meat }
+  productEntity: ClusterPizza
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 3
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWeaponry
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Mime
+    - Chief
+    
 #- type: listing
 #  id: UplinkCQC
 #  name: ent-cqc-name

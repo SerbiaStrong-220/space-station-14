@@ -54,6 +54,7 @@
     offset: 0.0
     #rare
     rarePrototypes:
+      - ClusterPizza #clusterpizza upd ss220
       - FoodBurgerAppendix
       - FoodBurgerRobot
       - FoodBurgerBaseball

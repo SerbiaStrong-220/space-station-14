@@ -273,6 +273,11 @@
     - id: FoodPizzaCotton
       prob: 0.10
       orGroup: Pizza
+#ss220 clusterpizza upd begin
+    - id: ClusterPizza
+      prob: 0.03
+      orGroup: Pizza
+#ss220 clusterpizza upd end
     - id: KnifePlastic
 
 # Nugget
