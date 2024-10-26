@@ -27,7 +27,7 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Objects\Consumable\Food\Baked\pizza.rsi
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
     layers:
     - state: meat
   - type: Appearance
@@ -121,7 +121,7 @@
     - CombatKnife
     - Knife
   - type: Sprite
-    sprite: Objects\Consumable\Food\Baked\pizza.rsi
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
     state: meat-slice-spicy
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
@@ -132,5 +132,5 @@
       types:
         Piercing: 9
   - type: Item
-    sprite: Objects\Consumable\Food\Baked\pizza.rsi
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
     state: pineapple-slice
