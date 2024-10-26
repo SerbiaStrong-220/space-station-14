@@ -51,6 +51,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         SubscribeLocalEvent<SpiderQueenComponent, SpiderSpawnDoAfterEvent>(OnSpawnDoAfter);
 
         SubscribeLocalEvent<SpiderTileSpawnActionEvent>(OnTileSpawnAction);
+        SubscribeLocalEvent<SpiderTileSpawnDoAfterEvent>(OnTileSpawnDoAfter);
     }
 
     public override void Update(float frameTime)
@@ -163,8 +164,45 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     {
         var performer = args.Performer;
         if (args.Handled ||
-            !CheckEnoughBloodPoints(performer, args.Cost) ||
-            _rCDSystem.TryGetMapGridData(args.Target, out var mapGridData) ||
+            !CheckEnoughBloodPoints(performer, args.Cost))
+            return;
+
+        var netCoordinates = GetNetCoordinates(args.Target);
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            performer,
+            args.DoAfter,
+            new SpiderTileSpawnDoAfterEvent()
+            {
+                Prototype = args.Prototype,
+                TargetCoordinates = netCoordinates,
+                Cost = args.Cost,
+            },
+            null
+        )
+        {
+            Broadcast = true,
+            BreakOnDamage = false,
+            BreakOnMove = true,
+            NeedHand = false,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
+            args.Handled = true;
+    }
+
+    private void OnTileSpawnDoAfter(SpiderTileSpawnDoAfterEvent args)
+    {
+        var user = args.User;
+        if (args.Cancelled ||
+            !CheckEnoughBloodPoints(user, args.Cost))
+            return;
+
+        var coordinates = GetCoordinates(args.TargetCoordinates);
+        if (!_rCDSystem.TryGetMapGridData(coordinates, out var mapGridData) ||
             mapGridData is null)
             return;
 
@@ -173,10 +211,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             mapGridData.Value.Position,
             new Tile(_tileDefinitionManager[args.Prototype].TileId));
 
-        if (TryComp<SpiderQueenComponent>(performer, out var spiderQueen))
-            ChangeBloodPointsAmount(performer, spiderQueen, -args.Cost);
-
-        args.Handled = true;
+        if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))
+            ChangeBloodPointsAmount(user, spiderQueen, -args.Cost);
     }
 
     /// <summary>

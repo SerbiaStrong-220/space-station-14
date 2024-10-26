@@ -232,7 +232,8 @@
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
       state: wall_spawn
     event: !type:SpiderTileSpawnActionEvent
-      prototype: FloorSteel
+      prototype: FloorWebTile
+      doAfter: 6
 
 - type: entity
   parent: ActionSpawnWebTile
@@ -243,8 +244,9 @@
     useDelay: 6
     range: 1.5
     event: !type:SpiderTileSpawnActionEvent
-      prototype: FloorSteel
+      prototype: FloorWebTile
       cost: 10
+      doAfter: 3
 
 #Web
 - type: entity
