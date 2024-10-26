@@ -20,6 +20,10 @@
   - type: Icon
     sprite: SS220/Mobs/Species/Tajaran/parts.rsi
     state: full
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.9, 0.9
   - type: Body
     prototype: Tajaran
     requiredLegs: 2
@@ -53,6 +57,18 @@
     spawned:
       - id: FoodMeat
         amount: 5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
   - type: Emoting
     chatEmoteCooldown: 5.0
   - type: Thirst
@@ -92,6 +108,8 @@
   categories: [ HideSpawnMenu ]
   description: A dummy Tajaran meant to be used in character setup.
   components:
+  - type: Sprite
+    scale: 0.9, 0.9
   - type: HumanoidAppearance
     species: Tajaran
   - type: Inventory

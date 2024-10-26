@@ -46,7 +46,7 @@
           !type:PhysShapeCircle
           radius: 0.35
         # they r smaller
-        density: 120
+        density: 185 #SS220-change-races-height
         restitution: 0.0
         mask:
         - MobMask

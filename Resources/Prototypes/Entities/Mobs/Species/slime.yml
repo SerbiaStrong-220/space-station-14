@@ -9,6 +9,12 @@
   - type: Icon
     sprite: Mobs/Species/Slime/parts.rsi
     state: full
+# SS220-change-races-height begin
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.8, 0.8
+# SS220-change-races-height end
   - type: Body
     prototype: Slime
     requiredLegs: 2
@@ -112,6 +118,20 @@
     spawned:
     - id: FoodMeatSlime
       amount: 5
+# SS220-change-races-height begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+# SS220-change-races-height end
   - type: Respirator
     damage:
       types:
@@ -137,6 +157,10 @@
   id: MobSlimePersonDummy
   categories: [ HideSpawnMenu ]
   components:
+# SS220-change-races-height begin
+  - type: Sprite
+    scale: 0.8, 0.8
+# SS220-change-races-height end
   - type: HumanoidAppearance
     species: SlimePerson
   - type: Inventory

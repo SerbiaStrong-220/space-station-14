@@ -29,6 +29,20 @@
     spawned:
     - id: FoodMeatChicken
       amount: 5
+# SS220-change-races-height begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 160
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+# SS220-change-races-height end
   - type: VoxAccent #SS220-Vox Accent
   - type: Damageable
     damageContainer: Biological
@@ -51,6 +65,11 @@
       types:
         Slash: 5 # Reduce?
   - type: Sprite # Need to redefine the whole order to draw the tail over their gas tank
+#   SS220-change-races-height begin
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.7, 0.7
+#   SS220-change-races-height end 
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
@@ -154,6 +173,10 @@
   id: MobVoxDummy
   categories: [ HideSpawnMenu ]
   components:
+# SS220-change-races-height begin
+  - type: Sprite
+    scale: 0.7, 0.7
+# SS220-change-races-height end
   - type: HumanoidAppearance
     species: Vox
   - type: Body

@@ -12,6 +12,10 @@
   - type: Icon
     sprite: SS220/Mobs/Species/Vulpkanin/parts.rsi
     state: full
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.9, 0.9
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
@@ -44,6 +48,18 @@
     spawned:
     - id: FoodMeatHuman
       amount: 5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -64,6 +80,8 @@
   categories: [ HideSpawnMenu ]
   description: A dummy vulpkanin meant to be used in character setup.
   components:
+    - type: Sprite
+      scale: 0.9, 0.9
     - type: HumanoidAppearance
       species: Vulpkanin
 
