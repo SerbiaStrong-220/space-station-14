@@ -198,9 +198,9 @@
   productEntity: ClusterPizza
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2
   cost:
-    Telecrystal: 4
+    Telecrystal: 3
   categories:
   - UplinkWeaponry
   - UplinkJob
