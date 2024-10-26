@@ -93,17 +93,17 @@
   - type: AccessReader
     access: [[ "Theatre" ]]
   - type: ActivatableUI
-    key: enum.CluwneCommsConsoleUiKey.Key
-  - type: CommunicationsConsole
+    key: enum.CluwneCommunicationsConsoleUiKey.Key
+  - type: CluwneCommunicationsConsole
     title: cluwne-comms-console-announcement-title-station
-    sound: # Corvax-Announcements
-      path: /Audio/Corvax/Announcements/announce.ogg
+    sound:
+      path: /Audio/SS220/Announcements/cluwne_comm_announce.ogg
       params:
         volume: -4
   - type: UserInterface
     interfaces:
-      enum.CluwneCommsConsoleUiKey.Key:
-        type: CluwneCommsConsoleBoundUserInterface
+      enum.CluwneCommunicationsConsoleUiKey.Key:
+        type: CluwneCommunicationsConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Computer
