@@ -182,46 +182,39 @@ namespace Content.Client.Chemistry.UI
             };
             bufferHBox.AddChild(bufferVol);
 
-            //ss220 sorted chem buffer start
-            var sortedReagents = state.BufferReagents
-                .Select(reagent =>
-                {
-                    _prototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
-                    var localizedName = proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
-                    return (Reagent: reagent, LocalizedName: localizedName);
-                })
-                .OrderBy(r => r.LocalizedName)
-                .ToList();
-            //ss220 sorted chem buffer end
-
-            foreach (var (reagent, localizedName) in sortedReagents) //ss220 sorted chem buffer ((reagent, quantity) -> (reagent, localizedName))
+            foreach (var (reagent, quantity) in state.BufferReagents)
             {
-                BufferInfo.Children.Add(new BoxContainer
+                // Try to get the prototype for the given reagent. This gives us its name.
+                _prototypeManager.TryIndex(reagent.Prototype, out ReagentPrototype? proto);
+                var name = proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
+
+                if (proto != null)
                 {
-                    Orientation = LayoutOrientation.Horizontal,
-                    Children =
+                    BufferInfo.Children.Add(new BoxContainer
                     {
-                        new Label {Text = $"{localizedName}: "}, //ss220 sorted chem buffer (name -> localizedName)
-                        new Label
+                        Orientation = LayoutOrientation.Horizontal,
+                        Children =
                         {
-                            Text = $"{reagent.Quantity}u", //ss220 sorted chem buffer (quantity -> reagent.Quantity)
-                            StyleClasses = {StyleNano.StyleClassLabelSecondaryColor}
-                        },
+                            new Label {Text = $"{name}: "},
+                            new Label
+                            {
+                                Text = $"{quantity}u",
+                                StyleClasses = {StyleNano.StyleClassLabelSecondaryColor}
+                            },
 
-                        // Padding
-                        new Control {HorizontalExpand = true},
+                            // Padding
+                            new Control {HorizontalExpand = true},
 
-                        //ss220 sorted chem buffer start (reagent -> reagent.Reagent)
-                        MakeReagentButton("1", ChemMasterReagentAmount.U1, reagent.Reagent, true, StyleBase.ButtonOpenRight),
-                        MakeReagentButton("5", ChemMasterReagentAmount.U5, reagent.Reagent, true, StyleBase.ButtonOpenBoth),
-                        MakeReagentButton("10", ChemMasterReagentAmount.U10, reagent.Reagent, true, StyleBase.ButtonOpenBoth),
-                        MakeReagentButton("25", ChemMasterReagentAmount.U25, reagent.Reagent, true, StyleBase.ButtonOpenBoth),
-                        MakeReagentButton("50", ChemMasterReagentAmount.U50, reagent.Reagent, true, StyleBase.ButtonOpenBoth),
-                        MakeReagentButton("100", ChemMasterReagentAmount.U100, reagent.Reagent, true, StyleBase.ButtonOpenBoth),
-                        MakeReagentButton(Loc.GetString("chem-master-window-buffer-all-amount"), ChemMasterReagentAmount.All, reagent.Reagent, true, StyleBase.ButtonOpenLeft),
-                        //ss220 sorted chem buffer end
-                    }
-                });
+                            MakeReagentButton("1", ChemMasterReagentAmount.U1, reagent, true, StyleBase.ButtonOpenRight),
+                            MakeReagentButton("5", ChemMasterReagentAmount.U5, reagent, true, StyleBase.ButtonOpenBoth),
+                            MakeReagentButton("10", ChemMasterReagentAmount.U10, reagent, true, StyleBase.ButtonOpenBoth),
+                            MakeReagentButton("25", ChemMasterReagentAmount.U25, reagent, true, StyleBase.ButtonOpenBoth),
+                            MakeReagentButton("50", ChemMasterReagentAmount.U50, reagent, true, StyleBase.ButtonOpenBoth),
+                            MakeReagentButton("100", ChemMasterReagentAmount.U100, reagent, true, StyleBase.ButtonOpenBoth),
+                            MakeReagentButton(Loc.GetString("chem-master-window-buffer-all-amount"), ChemMasterReagentAmount.All, reagent, true, StyleBase.ButtonOpenLeft),
+                        }
+                    });
+                }
             }
         }
 

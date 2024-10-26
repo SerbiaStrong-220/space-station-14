@@ -38,6 +38,7 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly StorageSystem _storageSystem = default!;
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         private const string PillPrototypeId = "Pill";
@@ -57,7 +58,30 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterReagentAmountButtonMessage>(OnReagentButtonMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterCreatePillsMessage>(OnCreatePillsMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterOutputToBottleMessage>(OnOutputToBottleMessage);
+
+            SubscribeLocalEvent<ChemMasterComponent, ChemMasterSortReagentsMessage>(OnSortReagents); //ss220 tweak sort
         }
+
+        //ss220 tweak sort start
+        private void OnSortReagents(Entity<ChemMasterComponent> ent, ref ChemMasterSortReagentsMessage args)
+        {
+            if (!_solutionContainerSystem.TryGetSolution(ent.Owner, SharedChemMaster.BufferSolutionName, out _, out var bufferSolution))
+                return;
+
+            bufferSolution.Contents = bufferSolution.Contents
+                .Select(reagent =>
+                {
+                    _prototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
+                    var localizedName = proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
+                    return (Reagent: reagent, LocalizedName: localizedName);
+                })
+                .OrderBy(r => r.LocalizedName)
+                .Select(r => r.Reagent)
+                .ToList();
+
+            UpdateUiState(ent);
+        }
+        //ss220 tweak sort end
 
         private void SubscribeUpdateUiState<T>(Entity<ChemMasterComponent> ent, ref T ev)
         {

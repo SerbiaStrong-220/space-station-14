@@ -18,6 +18,19 @@ namespace Content.Shared.Chemistry
         public const uint LabelMaxLength = 50;
     }
 
+    //ss220 tweak sort start
+    [Serializable, NetSerializable]
+    public sealed class ChemMasterSortReagentsMessage : BoundUserInterfaceMessage
+    {
+        public readonly string BufferSolution;
+
+        public ChemMasterSortReagentsMessage(string bufferSolution)
+        {
+            BufferSolution = bufferSolution;
+        }
+    }
+    //ss220 tweak sort end
+
     [Serializable, NetSerializable]
     public sealed class ChemMasterSetModeMessage : BoundUserInterfaceMessage
     {
