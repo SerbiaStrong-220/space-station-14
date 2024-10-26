@@ -133,4 +133,3 @@
         Piercing: 9
   - type: Item
     sprite: Objects/Consumable/Food/Baked/pizza.rsi
-    state: pineapple-slice
