@@ -169,6 +169,7 @@
   name: loadout-group-blueshield-outerclothing
   loadouts:
   - BlueShieldArmorBulletproof
+  - BlueShieldArmorScale
   - BlueShieldOperativeCoat
 
 - type: loadoutGroup
