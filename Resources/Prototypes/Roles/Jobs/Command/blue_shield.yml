@@ -62,7 +62,7 @@
 #    jumpsuit: ClothingUniformJumpsuitBlueShield #SS220-blueshield-loadouts
     shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesBlueShield
-    head: ClothingHeadHatBeretNavyBlue
+#    head: ClothingHeadHatBeretNavyBlue #SS220 BlueShield Rework
 #    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
     id: BlueShieldPDA
     ears: ClothingHeadsetAltCommand

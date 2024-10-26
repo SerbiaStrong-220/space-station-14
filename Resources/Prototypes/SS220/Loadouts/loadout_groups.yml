@@ -139,6 +139,14 @@
 
   # Офицер "Синий Щит" (Начало)
 - type: loadoutGroup
+  id: BlueShieldHead
+  name: loadout-group-blueshield-head
+  minLimit: 0
+  loadouts:
+  - BlueshieldBeret
+  - BlueshieldBlueBeret
+
+- type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0

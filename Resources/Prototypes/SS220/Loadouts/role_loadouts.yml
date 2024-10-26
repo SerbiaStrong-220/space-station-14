@@ -35,6 +35,7 @@
 - type: roleLoadout
   id: JobBlueShield
   groups:
+  - BlueShieldHead
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
