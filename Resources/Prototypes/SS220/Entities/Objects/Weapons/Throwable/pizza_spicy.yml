@@ -53,9 +53,9 @@
     - trigger:
         !type:DamageTrigger
         damage: 10
-     - behaviors:
-        !type:TriggerBehavior
-        !type:DoActsBehavior
+      behaviors:
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: ContainerContainer
     containers:
