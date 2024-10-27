@@ -202,15 +202,12 @@ namespace Content.Client.Chemistry.UI
             //ss220 tweak sort chem start
             var newBuffer = _isSortingEnabled
                 ? state.BufferReagents
-                .Select(reagent =>
-                {
-                    _prototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
-                    var localizedName = proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
-                    return (Reagent: reagent, LocalizedName: localizedName);
-                })
-                .OrderBy(r => r.LocalizedName)
-                .Select(r => r.Reagent)
-                .ToList()
+                    .OrderBy(reagent =>
+                    {
+                        _prototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
+                        return proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
+                    })
+                    .ToList()
                 : state.BufferReagents;
             //ss220 tweak sort chem end
 
