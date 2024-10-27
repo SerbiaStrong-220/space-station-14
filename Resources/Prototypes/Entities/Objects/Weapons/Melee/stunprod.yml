@@ -41,10 +41,16 @@
     angle: 60
     animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 35
+    damage: 0 #ss220 stunprod stamina damage fix
     sound: /Audio/Weapons/egloves.ogg
+  #ss220 stunprod stamina damage fix start
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Stamina: 35
+  #ss220 stunprod stamina damage fix end
   - type: StaminaDamageOnCollide
-    damage: 35
+    damage: 0 #ss220 stunprod stamina damage fix
     sound: /Audio/Weapons/egloves.ogg
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery

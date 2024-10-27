@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Damage.Components;
+using Content.Server.Stunnable.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Camera;
@@ -15,6 +16,7 @@ using Content.Shared.Wires;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Item.ItemToggle;
 
 namespace Content.Server.Damage.Systems
 {
@@ -26,6 +28,7 @@ namespace Content.Server.Damage.Systems
         [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
         [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
         [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+        [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
 
         public override void Initialize()
         {
@@ -44,10 +47,24 @@ namespace Content.Server.Damage.Systems
                 return;
             // SS220-Stunbaton-rework end
 
+            // ss220 stunbaton stamina damage fix start
+            var adjustedDamage = new DamageSpecifier();
+
+            foreach (var (damageType, value) in component.Damage.DamageDict)
+            {
+                if (damageType == "Stamina" && HasComp<StunbatonComponent>(uid) && !_itemToggle.IsActivated(uid))
+                {
+                    continue;
+                }
+
+                adjustedDamage.DamageDict[damageType] = value;
+            }
+            // ss220 stunbaton stamina damage fix end
+
             if (TerminatingOrDeleted(args.Target))
                 return;
 
-            var dmg = _damageable.TryChangeDamage(args.Target, component.Damage, component.IgnoreResistances, origin: args.Component.Thrower);
+            var dmg = _damageable.TryChangeDamage(args.Target, adjustedDamage, component.IgnoreResistances, origin: args.Component.Thrower); // ss220 stunbaton stamina damage fix
 
             // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
             if (dmg != null && HasComp<MobStateComponent>(args.Target))
