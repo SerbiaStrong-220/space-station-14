@@ -50,6 +50,7 @@
     interfaces:
       enum.TapeRecorderUIKey.Key:
         type: TapeRecorderBoundUserInterface
+  - type: TTS # SS220 Tape recorder TTS
 
 - type: entity
   parent: BaseItem

@@ -5,6 +5,7 @@ using Content.Server.Speech.Components;
 using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Shared.Speech;
+using Content.Shared.SS220.TTS; // SS220 Tape recorder TTS
 using Content.Shared.TapeRecorder;
 using Content.Shared.TapeRecorder.Components;
 using Content.Shared.TapeRecorder.Events;
@@ -38,6 +39,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     {
         var voice = EnsureComp<VoiceOverrideComponent>(ent);
         var speech = EnsureComp<SpeechComponent>(ent);
+        TryComp<TTSComponent>(ent, out var tts); // SS220 Tape recorder TTS
 
         foreach (var message in tape.RecordedData)
         {
@@ -49,6 +51,12 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             // TODO: mimic the exact string chosen when the message was recorded
             var verb = message.Verb ?? SharedChatSystem.DefaultSpeechVerb;
             speech.SpeechVerb = _proto.Index<SpeechVerbPrototype>(verb);
+            // SS220 Tape recorder TTS begin
+            if (tts is { })
+            {
+                tts.VoicePrototypeId = message.TtsVoice;
+            }
+            // SS220 Tape recorder TTS end
             //Play the message
             _chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false);
         }
@@ -79,7 +87,11 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
         //Add a new entry to the tape
         var verb = _chat.GetSpeechVerb(args.Source, args.Message);
         var name = nameEv.VoiceName;
-        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message));
+        // SS220 Tape recorder TTS begin
+        //cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message));
+        TryComp<TTSComponent>(args.Source, out var tts); 
+        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message, tts?.VoicePrototypeId));
+        // SS220 Tape recorder TTS end
     }
 
     private void OnPrintMessage(Entity<TapeRecorderComponent> ent, ref PrintTapeRecorderMessage args)

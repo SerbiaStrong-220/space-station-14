@@ -1,4 +1,5 @@
 using Content.Shared.Speech;
+using Content.Shared.SS220.TTS; // SS220 Tape recorder TTS
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.TapeRecorder;
@@ -33,12 +34,24 @@ public sealed partial class TapeCassetteRecordedMessage : IComparable<TapeCasset
     [DataField]
     public string Message = string.Empty;
 
-    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message)
+    // SS220 Tape recorder TTS begin
+    /// <summary>
+    /// TTS Voice used for this message.
+    /// </summary>
+    [DataField]
+    public ProtoId<TTSVoicePrototype>? TtsVoice;
+    // SS220 Tape recorder TTS end
+
+    // SS220 Tape recorder TTS begin
+    //public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message)
+    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message, ProtoId<TTSVoicePrototype>? ttsVoice)
+    // SS220 Tape recorder TTS end
     {
         Timestamp = timestamp;
         Name = name;
         Verb = verb;
         Message = message;
+        TtsVoice = ttsVoice; // SS220 Tape recorder TTS
     }
 
     public int CompareTo(TapeCassetteRecordedMessage? other)
