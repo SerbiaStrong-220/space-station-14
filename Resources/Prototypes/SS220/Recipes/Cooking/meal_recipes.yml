@@ -154,3 +154,18 @@
     FoodChiliPepper: 1
     FoodCheeseSlice: 1
 #SS220 Nachos-recipe end
+
+#SS220 Spicy UPD start
+- type: microwaveMealRecipe
+  id: RecipeSpicyPizza
+  name: spicy pizza recipe
+  result: SpicyPizzaFood
+  time: 30
+  reagents:
+    ReaperSauce: 40
+  solids:
+    FoodDoughFlat: 1
+    FoodMeat: 3
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+#SS220 Spicy UPD end
