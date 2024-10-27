@@ -180,6 +180,13 @@
   loadouts:
   - BlueshieldBelt
   - BlueshieldWebbing
+
+- type: loadoutGroup
+  id: BlueShieldBackpack
+  name: loadout-group-blueshield-backpack
+  hidden: true
+  loadouts:
+  - BlueShieldBackpack
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 
