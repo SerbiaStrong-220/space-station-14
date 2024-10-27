@@ -156,7 +156,7 @@ namespace Content.Shared.Chemistry
         /// <summary>
         /// A list of the reagents and their amounts within the buffer, if applicable.
         /// </summary>
-        public List<ReagentQuantity> BufferReagents; //ss220 tweak sort
+        public readonly IReadOnlyList<ReagentQuantity> BufferReagents;
 
         public readonly ChemMasterMode Mode;
 
@@ -169,7 +169,7 @@ namespace Content.Shared.Chemistry
 
         public ChemMasterBoundUserInterfaceState(
             ChemMasterMode mode, ContainerInfo? inputContainerInfo, ContainerInfo? outputContainerInfo,
-            List<ReagentQuantity> bufferReagents, FixedPoint2 bufferCurrentVolume, //ss220 tweak sort
+            IReadOnlyList<ReagentQuantity> bufferReagents, FixedPoint2 bufferCurrentVolume, //ss220 tweak sort
             uint selectedPillType, uint pillDosageLimit, bool updateLabel)
         {
             InputContainerInfo = inputContainerInfo;
