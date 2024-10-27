@@ -195,7 +195,7 @@
   name: uplink-spicypizza-name
   description: uplink-spicypizza-desc
   icon: { sprite: /Textures/Objects/Consumable/Food/Baked/pizza.rsi, state: spicy }
-  productEntity: ClusterPizza
+  productEntity: FoodBoxPizzaFilledSpicy
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 2
