@@ -17,3 +17,16 @@ ent-ClothingUniformRedsoldier = рубашка армии Республики
     .desc = Одежда солдата армии Речной Республики.
 ent-ClothingUniformJumpsuitWaiter = униформа официанта
     .desc = Униформа мальчика на побегушках.
+
+
+ent-ClothingUniformJumpsuitBlueShieldCombez = комбинезон "Синий Щит"
+    .desc = Стандартный комбинезон для синего щита.
+ent-ClothingUniformJumpsuitBlueShieldOperative = комбинезон оперативника "Синий Щит"
+    .desc = Модная форма оперативника Синего Щита - как же она хороша!
+    .suffix = За время в игре
+ent-ClothingUniformJumpsuitBlueShieldShirt = рубашка "Синий Щит"
+    .desc = Рубашка, использующая высокопоставленными людьми синего щита при официальных встречах.
+    .suffix = За время в игре
+ent-ClothingUniformJumpsuitBlueShieldTShirt = футболка "Синий Щит"
+    .desc = Черная футболка с короткими рукавами, в паре с черными брюками из прочного материала. Прекрасно подходит для отдыха на безопасном секторе NanoTrasen.
+    .suffix = За время в игре

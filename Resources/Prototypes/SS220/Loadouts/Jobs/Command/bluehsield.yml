@@ -19,6 +19,24 @@
       role: JobBlueShield
       time: 18000 # 5 hrs
 
+- type: loadoutEffectGroup
+  id: BlueShieldTwenty
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 72000 # 20 hrs
+
+- type: loadoutEffectGroup
+  id: BlueShieldFifty
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 180000 # 50 hrs
+
 # Head
 - type: loadout
   id: BlueshieldBeret
@@ -35,14 +53,38 @@
 
 # Jumpsuit
 - type: loadout
+  id: BlueShieldCombez
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldCombez
+
+- type: loadout
   id: BlueShieldJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShield
 
 - type: loadout
-  id: BlueShieldJumpsuit2
+  id: BlueShieldJumpsuitOperative
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShield2
+    jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
+
+- type: loadout
+  id: BlueShieldJumpsuitShirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldTwenty
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldShirt
+
+- type: loadout
+  id: BlueShieldJumpsuitTShirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFifty
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldTShirt
 
 - type: loadout
   id: BlueShieldJumpsuitTurtle

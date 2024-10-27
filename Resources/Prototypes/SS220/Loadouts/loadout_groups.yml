@@ -160,9 +160,11 @@
   id: BlueShieldJumpsuit
   name: loadout-group-blueshield-jumpsuit
   loadouts:
-  - BlueShieldJumpsuit
-  - BlueShieldJumpsuit2
+  - BlueShieldCombez
+  - BlueShieldJumpsuitOperative
+  - BlueShieldJumpsuitShirt
   - BlueShieldJumpsuitTurtle
+  - BlueShieldJumpsuitTShirt
 
 - type: loadoutGroup
   id: BlueShieldOuterclothing
