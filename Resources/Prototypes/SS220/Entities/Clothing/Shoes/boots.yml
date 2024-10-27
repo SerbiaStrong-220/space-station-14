@@ -42,6 +42,27 @@
       - CombatKnife
 
 - type: entity
+  parent: ClothingShoesBootsJack
+  id: ClothingShoesBootsBlueShieldJack
+  name: blueshield jackboots
+  description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
+  suffix: Blue Shield
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+
+- type: entity
+  parent: ClothingShoesBootsBlueShieldJack
+  id: ClothingShoesBootsBlueShieldJackFilled
+  components:
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife
+
+- type: entity
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesBootsBard #SS220 bard loadout
   name: bard shoes

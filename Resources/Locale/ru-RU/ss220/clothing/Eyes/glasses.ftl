@@ -9,3 +9,6 @@ ent-ThermalVisorRND = термальный визор
 
 ent-ClothingEyesThermalGlassesSecurity = термальные очки охраны
     .desc = Модернизированные солнцезащитные очки с функцией защиты от вспышек, визором СБ и термальными визорами.
+
+ent-ClothingEyesBlueShieldGlasses = очки "Синий Щит"
+    .desc = Модернизированные солнцезащитные очки для синий щитов.

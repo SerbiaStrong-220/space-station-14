@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/b9c06b16579dc828ac4d6f603995e083075725b2, modofied by Estkemran (Github) for SS220",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/5a73e8f825ff279e82949b9329783a9e3070e2da, resprited by EstKemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,7 @@
       "name": "icon"
     },
     {
-      "name": "equipped-HAND",
-      "directions": 4
-    },
-	{
-      "name": "equipped-HAND-kangaroo",
+      "name": "equipped-EYES",
       "directions": 4
     },
     {
