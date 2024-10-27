@@ -11,7 +11,7 @@
         - id: JetpackSecurityFilled
         - id: ClothingOuterHardsuitBlueshield
         - id: ClothingMaskBreath
-        - id: BlueShieldSWAT #ss220 respriting mask
+#        - id: BlueShieldSWAT #SS220 BlueShield Rework
   - type: AccessReader
     access: [["Blueshield"]]
 
