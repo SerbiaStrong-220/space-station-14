@@ -8,7 +8,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
   - type: IdCard
-    jobTitle: СССП
+    jobTitle: job-name-ussp #SS220 (upstream 65 localization)
   - type: Sprite
     layers:
     - state: ussp
@@ -36,12 +36,14 @@
     layers:
     - state: silver
     - state: idcentcom
-    - type: IdCard
-      jobTitle: Дипломат NanoTrasen
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
+  - type: IdCard
+    jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  - type: PresetIdCard
+    job: CentCommNanoTrasenDiplomat
 
 - type: entity
   parent: CentcomIDCard
@@ -50,11 +52,13 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Полевой Офицер ЦК
+      jobTitle: job-name-cc-operational-oficier #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+    - type: PresetIdCard
+      job: CentcomFieldOfficer
 
 - type: entity
   parent: CentcomIDCard
@@ -63,11 +67,13 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Офицер ЦК
+      jobTitle: job-name-cc-oficier #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+    - type: PresetIdCard
+      job: CentcommOfficer
 
 - type: entity
   parent: CentcomIDCard
@@ -76,13 +82,15 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Оперативник ГСН
+      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
       tags:
       - CentralCommandGSN
       - CentralCommand
+    - type: PresetIdCard
+      job: CentcomOperativeSRT
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
@@ -118,11 +126,13 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Адмирал NanoTrasen
+      jobTitle: job-name-nt-admiral #SS220 (upstream 65 localization)
     - type: Access
       groups:
       - AllAccess # SS220 Fast fix access
       - CentralCommand
+    - type: PresetIdCard
+      job: CentComNanoTrasenAdmiral
 
 - type: entity
   parent: IDCardStandard
@@ -136,3 +146,16 @@
     - type: PresetIdCard
       job: Magistrate
 
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-prisoner #SS220 (upstream 65 localization)
+    - type: Sprite
+      layers:
+        - state: orange
+        - state: idprisoner
+    - type: PresetIdCard
+      job: Prisoner

@@ -1,0 +1,55 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseComputer
+  id: SuperMatterObserverConsole
+  name: Super Matter Observer
+  description: Allows to monitor super matter crystal status
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: engine
+    - map: ["computerLayerKeys"]
+      state: power_key
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#ffe000" # check it
+  - type: Computer
+    board: SuperMatterObserverCircuitboard
+  - type: SuperMatterObserver
+  - type: SuperMatterObserverReceiver
+  - type: ActivatableUIRequiresPower
+  - type: ActivatableUI
+    singleUser: false
+    key: enum.SuperMatterObserverUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SuperMatterObserverUiKey.Key:
+        type: SuperMatterObserverBUI
+
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: SuperMatterObserverCircuitboard
+  name: power monitoring computer board
+  description: A computer printed circuit board for a supermatter crystal status monitoring.
+  components:
+    - type: Sprite
+      state: cpu_engineering
+    - type: ComputerBoard
+      prototype: SuperMatterObserverConsole
+
+
+- type: latheRecipe
+  id: SuperMatterObserverCircuitboard
+  result: SuperMatterObserverCircuitboard
+  category: Circuitry
+  completetime: 4
+  materials:
+     Steel: 100
+     Glass: 500

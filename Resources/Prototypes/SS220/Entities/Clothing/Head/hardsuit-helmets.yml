@@ -49,3 +49,22 @@
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.8
+
+#SuperMatter operator's Hardsuit
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitSuperMatterOperator
+  name: superMatter operator's hardsuit helmet
+  description: Special hardsuit helmet, designed to support the operator in the supermatter crystal chamber.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/sm.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/sm.rsi
+  - type: EyeProtection
+  - type: PointLight
+    color: "#daffad"
+    radius: 6
+  - type: PressureProtection
+    highPressureMultiplier: 0.32
+    lowPressureMultiplier: 1000

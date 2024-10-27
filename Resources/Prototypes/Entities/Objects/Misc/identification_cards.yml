@@ -467,7 +467,7 @@
     - state: default
     - state: idvisitor
   - type: IdCard
-    jobTitle: Visitor
+    jobTitle: job-title-visitor
     jobIcon: JobIconVisitor
   - type: PresetIdCard
     job: Visitor
@@ -497,7 +497,7 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Central Commander
+    jobTitle: job-name-cc-default #SS220 (upstream 65 localization)
     jobIcon: JobIconNanotrasen
   - type: Access
     groups:
@@ -518,7 +518,7 @@
     - state: gold
     - state: ert_commander
   - type: IdCard
-    jobTitle: Лидер отряда ОБР # SS220 new CentComm
+    jobTitle: job-name-ert-commander # SS220 new CentComm #SS220 (upstream 65 localization)
   - type: PresetIdCard
     job: ERTLeader
   - type: Item
@@ -609,7 +609,7 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Central Commander
+    jobTitle: job-name-cc-default # #SS220 (upstream 65 localization)
   - type: Access
     groups:
     - AllAccess
@@ -638,7 +638,7 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: Centcomm Agent
+    jobTitle: job-name-cc-agent #SS220 (upstream 65 localization)
   # SS220 new CentComm begin
   - type: Access
     groups:
@@ -823,7 +823,7 @@
   - type: IdCard
   # SS220 new CentComm begin
   # SS220 CBURN questions changes name 05.07.2024
-    jobTitle: Агент РХБЗ
+    jobTitle: job-name-cburn-agent #SS220 (upstream 65 localization)
   - type: Access
     groups:
     - AllAccess # SS220 Fast fix access
@@ -845,7 +845,7 @@
     - state: default
     - state: idcluwne
   - type: IdCard
-    jobTitle: Cluwne
+    jobTitle: job-title-cluwne
   - type: Unremoveable
 
 - type: entity #ss220
@@ -913,7 +913,7 @@
   - type: Item
     heldPrefix: green
   - type: IdCard
-    jobTitle: Universal
+    jobTitle: job-title-universal
     jobIcon: JobIconAdmin
   - type: Access
     groups:

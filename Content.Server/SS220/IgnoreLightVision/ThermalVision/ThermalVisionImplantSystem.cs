@@ -26,7 +26,7 @@ public sealed class SharedThermalVisionImplantSystem : EntitySystem
         }
 
         if (!TryComp<ThermalVisionComponent>(args.Performer, out var thermalVision))
-            AddComp(args.Performer, new ThermalVisionComponent(ent.Comp.VisionRadius, ent.Comp.CloseVisionRadius));
+            AddComp(args.Performer, new ThermalVisionComponent(ent.Comp.VisionRadius, ent.Comp.CloseVisionRadius) { State = IgnoreLightVisionOverlayState.Half });
         else
         {
             thermalVision.VisionRadius = ent.Comp.VisionRadius;

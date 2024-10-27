@@ -683,6 +683,7 @@ entities:
       flags: Hide
     - type: OccluderTree
     - type: Shuttle
+      fTLCooldown: 150
     - type: RadiationGridResistance
     - type: GravityShake
       shakeTimes: 10

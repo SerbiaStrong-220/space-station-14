@@ -22,6 +22,8 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.SS220.TeleportAFKtoCryoSystem;
 using Content.Shared.Administration.Logs;
+using Content.Server.Ghost;
+using Content.Server.Mind;
 
 namespace Content.Server.SS220.TeleportAFKtoCryoSystem;
 
@@ -36,6 +38,8 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly GhostSystem _ghostSystem = default!;
+    [Dependency] private readonly MindSystem _mindSystem = default!;
 
     private float _afkTeleportTocryo;
 
@@ -140,6 +144,16 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     {
         if (station != _station.GetOwningStation(cryopodUid))
             return false;
+
+        // Kicks the mind out of the entity if it cannot enter the cryostorage
+        if (!HasComp<CanEnterCryostorageComponent>(target))
+        {
+            if (_mindSystem.GetMind(target) is { } mind)
+            {
+                _ghostSystem.OnGhostAttempt(mind, false);
+            }
+            return true;
+        }
 
         var portal = Spawn(teleportPortralID, Transform(target).Coordinates);
 

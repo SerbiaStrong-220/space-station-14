@@ -75,6 +75,10 @@
   - type: Vocal # SS220 borg emotes to PAI start
     sounds:
       Unsexed: UnisexSilicon # SS220 borg emotes to PAI end
+  - type: ChangeVoiceInContainer
+    whitelist:
+      components:
+        - SecretStash
 
 - type: entity
   parent: [ PersonalAI]

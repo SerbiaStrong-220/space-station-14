@@ -12,6 +12,10 @@
   - type: Clothing
     sprite: Clothing/Belt/assault.rsi
   - type: Storage
+    blacklist: # SS220 Fix #2009 begin
+      tags:
+        - HolofanProjector
+    # SS220 Fix #2009 end
 
 - type: entity
   parent: ClothingBeltWebbingSRT
@@ -125,6 +129,7 @@
   id: ClothingBeltCutlassSheath
   name: officer's cutlass sheath
   description: The sheath of an officer's cutlass. Protects the cutlass from you, and you from the sea.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/cutlass_sheath.rsi
@@ -158,7 +163,7 @@
   id: ClothingBeltPlantDruid #SS220 druid loadout
   name: druid belt
   description: A belt that helps researchers unlock the mysteries of alien flora.
-  suffix: DO NOT MAP, Filled
+  suffix: Filled, For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/druid_belt.rsi
@@ -308,7 +313,7 @@
   id: ClothingBeltChefApronNanotrasen
   name: синий фартук
   description: Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
-  suffix: Не маппить, Сеньор
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
@@ -358,9 +363,56 @@
 - type: entity
   id: ClothingBeltChefApronNanotrasenFilled
   parent: ClothingBeltChefApronNanotrasen
-  suffix: Заполненный, Не маппить, Сеньор
+  suffix: Заполненный, За время в игре, Сеньор
   components:
   - type: StorageFill
     contents:
     - id: FoodShakerSalt
     - id: FoodShakerPepper
+
+# Уборщик
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltJanitorJR
+  name: the janitor Junk Recycles RPS
+  description: A belt-and-shoulder tactical belt system made of recycled leather worn by Junk Recyclers.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/janitor_jr_webbing.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/janitor_jr_webbing.rsi
+  - type: Storage
+    whitelist:
+      tags:
+        - Wrench
+        - Bottle
+        - Spray
+        - Soap
+        - Flashlight
+        - CigPack
+        - TrashBag
+        - WetFloorSign
+        - HolosignProjector
+        - Plunger
+        - JanicartKeys # SS220 Readd-Vehicles
+      components:
+        - LightReplacer
+        - SmokeOnTrigger
+    maxItemSize: Large
+  - type: Appearance  
+
+- type: entity
+  id: ClothingBeltJanitorJRFilled
+  parent: ClothingBeltJanitorJR
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: Soap #Make a soap group and pick between when i'm not lazy
+      - id: SprayBottleSpaceCleaner
+      - id: CleanerGrenade
+        amount: 2
+      - id: FlashlightLantern
+      - id: LightReplacer

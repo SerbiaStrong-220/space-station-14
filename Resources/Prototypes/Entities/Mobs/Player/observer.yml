@@ -53,6 +53,8 @@
     skipChecks: true
   - type: Ghost
   - type: GhostHearing
+  - type: HallucinationImmune # SS220 - hallucinationSystem
+  - type: SuperMatterImmune # SS220 - SuperMatterCrystal
   # SS220 ADD GHOST HUD'S START
   - type: ShowHealthBars
     damageContainers:

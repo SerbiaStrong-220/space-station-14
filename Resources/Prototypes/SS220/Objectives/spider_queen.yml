@@ -1,0 +1,38 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseSpiderQueenObjective
+  components:
+  - type: Objective
+    difficulty: 1.5
+    issuer: objective-issuer-spider-queen
+  - type: RoleRequirement
+    roles:
+      mindRoles:
+      - SpiderQueenRole
+
+- type: entity
+  parent: BaseSpiderQueenObjective
+  id: CreateCocoonsObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Structures/Specific/cocoon.rsi
+      state: cocoon2
+  - type: NumberObjective
+    min: 10
+    max: 10
+    title: objective-create-cocoons-title
+    description: objective-create-cocoons-description
+  - type: CreateCocoonsCondition
+
+- type: entity
+  parent: [BaseSpiderQueenObjective, BaseSurviveObjective]
+  id: SpiderQueenSurviveObjective
+  name: Survive
+  description: You have to stay alive to maintain control.
+  components:
+  - type: Objective
+    icon:
+      sprite: Mobs/Animals/spider.rsi
+      state: midwife

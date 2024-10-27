@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  name: fireplace
+  id: FirePlaceCraft
+  graph: FirePlace
+  startNode: start
+  targetNode: FirePlaceNode
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  description: A place that has fire. Cozy!
+  objectType: Structure
+  canBuildInImpassable: false
+  icon:
+    sprite: Structures/Decoration/fireplace.rsi
+    state: fireplace
+  conditions:
+    - !type:TileNotBlocked

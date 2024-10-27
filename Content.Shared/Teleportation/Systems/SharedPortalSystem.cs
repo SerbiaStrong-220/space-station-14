@@ -209,13 +209,19 @@ public abstract class SharedPortalSystem : EntitySystem
             projectile.IgnoreShooter = false;
         }
 
+        // SS220 RnD Balance revert, AnomalyComp cannot teleport via portal begin
+        if (HasComp<AnomalyComponent>(subject))
+        {
+            _popup.PopupCoordinates(Loc.GetString("portal-component-anomaly-reaction"),
+                ourCoords, Filter.Pvs(ourCoords, entityMan: EntityManager), true);
+            return;
+        }
+        // SS220 RnD Balance revert, AnomalyComp cannot teleport via portal end
+
         LogTeleport(portal, subject, Transform(subject).Coordinates, target);
 
         _transform.SetCoordinates(subject, target);
 
-        //SS220-rnd-reb
-        if (HasComp<AnomalyComponent>(subject))
-           _anomalySystem.DoAnomalySupercriticalEvent(subject);
 
         if (!playSound)
             return;
