@@ -10,6 +10,7 @@ ent-ThrowingSliceFood = кусок острой мясной пиццы
     .desc = Кусок пиццы, покрытый острым соусом. 
 ent-FoodBoxPizzaFilledSpicy = коробка пиццы
     .suffix = СиндиЛут
+    .desc = { ent-FoodBoxPizza.desc }
 
 uplink-spicypizza-name = Острая осколочная пицца
 uplink-spicypizza-desc = Эта пицца настолько острая, что при падении разлетается на слайсы, калечащие любого, кому не повезло попасть под линию огня. Даже не вздумайте употреблять её в пищу.
