@@ -161,6 +161,7 @@
       - id: DetectiveHiddenCamera # SS220 add-detective-camera
         amount: 3
       - id: HandLabeler
+      - id: BoxTapeRecorder
 
 - type: entity
   id: ClosetBombFilled
