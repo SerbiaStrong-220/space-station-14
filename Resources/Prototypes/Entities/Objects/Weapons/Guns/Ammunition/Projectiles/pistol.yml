@@ -29,7 +29,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 16 #ss220weaponBalance
+        Piercing: 16 #ss220weaponBalance #Incendary rebalance
         Heat: 2 #ss220weaponBalance
 
 - type: entity

@@ -28,6 +28,25 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  - TowelColorBlack
+  - TowelColorWhite
+  # SS220 Too many towels begin
+#  - TowelColorDarkBlue
+#  - TowelColorDarkGreen
+#  - TowelColorGold
+#  - TowelColorGray
+#  - TowelColorGreen
+#  - TowelColorLightBlue
+#  - TowelColorLightBrown
+#  - TowelColorMaroon
+#  - TowelColorMime
+#  - TowelColorOrange
+#  - TowelColorPurple
+#  - TowelColorRed
+#  - TowelColorSilver
+#  - TowelColorLightBlue
+#  - TowelColorYellow
+  # SS220 Too many towels begin end
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
   - ClothingFootWraps

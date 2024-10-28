@@ -1439,8 +1439,6 @@ namespace Content.Shared.Interaction
             if (uidB == null || args?.Handled == false)
                 return;
 
-            // Temporary changes for queen tests
-            //DebugTools.AssertNotEqual(uidA, uidB.Value);
             if (uidA == uidB.Value)
                 return;
 
