@@ -234,6 +234,8 @@
       - MagazinePistolCaselessRifle
       - MagazineMagnumEmpty
       - MagazineMagnum
+      - MagazinePistolHighCapacityEmpty
+      - MagazinePistolHighCapacity
       #ss220 more recipies end
   - type: BlueprintReceiver
     whitelist:

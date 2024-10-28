@@ -757,4 +757,18 @@
   materials:
     Steel: 180
     Plastic: 150
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolHighCapacityEmpty
+  result: MagazinePistolHighCapacityEmpty
+  materials:
+    Steel: 30
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolHighCapacity
+  result: MagazinePistolHighCapacity
+  materials:
+    Steel: 240
 #ss220 more recipies end
