@@ -192,3 +192,19 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
+
+#ss220 more recipies begin
+- type: entity
+  id: MagazineMagnumIncendiary
+  name: pistol magazine (.45 magnum incendiary)
+  parent: BaseMagazineMagnum
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumIncendiary
+  - type: Sprite
+    layers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+#ss220 more recipies begin
