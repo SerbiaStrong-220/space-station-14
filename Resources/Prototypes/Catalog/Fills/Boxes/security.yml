@@ -82,6 +82,7 @@
       - state: box_security
       - state: forensic
 
+# SS220 Tape Recorder #32234 early merge begin
 - type: entity
   name: tape recorder box
   parent: BoxCardboard
@@ -104,3 +105,4 @@
     layers:
       - state: box_security
       - state: recorder
+# SS220 Tape Recorder #32234 early merge end

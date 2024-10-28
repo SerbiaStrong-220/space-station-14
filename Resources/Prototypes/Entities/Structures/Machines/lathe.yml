@@ -203,8 +203,8 @@
       - WetFloorSign
       - ClothingHeadHatCone
       - FreezerElectronics
-      - CassetteTape
-      - TapeRecorder
+      - CassetteTape # SS220 Tape Recorder #32234 early merge
+      - TapeRecorder # SS220 Tape Recorder #32234 early merge
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - BoxLethalshot
