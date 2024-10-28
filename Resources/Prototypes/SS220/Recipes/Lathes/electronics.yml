@@ -18,3 +18,14 @@
      Glass: 900
      Silver: 100
      Gold: 100    
+
+- type: latheRecipe
+  id: WallmountGeneratorAPUElectronics 
+  result: WallmountGeneratorAPUElectronics 
+  category: Circuitry
+  completetime: 6
+  materials:
+     Steel: 100
+     Glass: 900
+     Silver: 100
+     Gold: 100        

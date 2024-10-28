@@ -38,7 +38,14 @@
   - type: Artifact
     bonusProtype:  # SS220-BonusForFullyDiscovered - start
     - BlueprintBeltChiefEngineer  
-    - BlueprintSeismicCharge # SS220-BonusForFullyDiscovered - end
+    - BlueprintSeismicCharge 
+    - BlueprintFulton
+    - ClothingOuterCoatExpensive 
+    - TeslaToy 
+    - BorgModuleSyndicateWeapon 
+    - ClothingHeadHatCatEarsValid 
+    - DnaScramblerImplanter 
+    - PresentRandomUnsafe # SS220-BonusForFullyDiscovered - end
   - type: RandomArtifactSprite
     maxSprite: 11
     activationTime: 2.4

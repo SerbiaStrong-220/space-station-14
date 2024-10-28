@@ -6,4 +6,94 @@
   components:
   - type: Blueprint
     providedRecipes:
-    - ClothingBeltChiefEngineer   
+    - ClothingBeltChiefEngineer
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintSuperSynthesizerInstrument
+  name: seismic charge blueprint
+  description: A blueprint with a schematic of a seismic charge. It can be inserted into an autolathe.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - SuperSynthesizerInstrument
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintFultonBeacon
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - FultonBeacon
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintClothingBeltMilitaryWebbing
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ClothingBeltMilitaryWebbing 
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintWallmountGeneratorAPUElectronics
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WallmountGeneratorAPUElectronics
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintWeaponCrusher
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WeaponCrusher
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintWeaponCrusherGlaive
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WeaponCrusherGlaive
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintJetpackVoid
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - JetpackVoid
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintToySword
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - ToySword
+  
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintDoubleToySword
+  name: name
+  description: desc
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - DoubleToySword
