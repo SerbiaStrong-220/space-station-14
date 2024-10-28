@@ -21,6 +21,7 @@ tape-recorder-menu-rewinding-button = Rewind
 tape-recorder-menu-print-button = Print record transcript
 tape-recorder-menu-cassette-label = Cassette tape: {$cassetteName}
 tape-recorder-menu-no-cassette-label = Cassette tape is not inserted
+tape-recorder-menu-cassette-unnamed = Unnamed
 
 tape-recorder-print-start-text = [bold]Start of recorded transcript[/bold]
 tape-recorder-print-message-text = [bold][{$time}] {$source}: [/bold] {$message}

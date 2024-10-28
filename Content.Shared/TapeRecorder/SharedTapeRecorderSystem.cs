@@ -395,7 +395,10 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         var hasData = false;
         var currentTime = 0f;
         var maxTime = 0f;
-        var cassetteName = "Unnamed";
+        // SS220 Tape Recorder Ru begin
+        //var cassetteName = "Unnamed";
+        var cassetteName = Loc.GetString("tape-recorder-menu-cassette-unnamed");
+        // SS220 Tape Recorder Ru end
         var cooldown = comp.PrintCooldown;
 
         if (hasCassette)
