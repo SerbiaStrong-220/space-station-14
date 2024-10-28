@@ -946,8 +946,11 @@
         - SpeedLoaderMagnum
         - SpeedLoaderMagnumRubber #SS220 missing rubber fix
         - SpeedLoaderMagnumEmpty
-        - MagazinePistolCaselessRifle #ss220 more recipies
-        - MagazineBoxCaselessRifle #ss220 more recipies
+        #ss220 more recipies begin
+        - MagazinePistolCaselessRifle
+        - MagazineBoxCaselessRifle
+        - SpeedLoaderLightRifle
+        #ss220 more recipies end
     - type: MaterialStorage
       whitelist:
         tags:
