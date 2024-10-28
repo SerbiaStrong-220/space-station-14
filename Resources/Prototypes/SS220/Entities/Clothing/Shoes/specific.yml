@@ -254,16 +254,12 @@
       collection: FootstepClown
 
 - type: entity
-  parent: ClothingShoesBaseButcherable
+  parent: ClothingShoesChameleon
   id: ClothingSilentShoes
   name: black shoes #actual name and description in uplink_catalog.yml
-  suffix: Silent
+  suffix: Silent, Chameleon
   description: Stylish black shoes.
   components:
-  - type: Sprite
-    sprite: Clothing/Shoes/Specific/mboots.rsi #todo change
-  - type: Clothing
-    sprite: Clothing/Shoes/Specific/mboots.rsi #todo change
   - type: FootstepModifier
     footstepSoundCollection:
       collection: SilentShoes
