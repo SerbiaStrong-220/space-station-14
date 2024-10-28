@@ -1928,8 +1928,11 @@
   name: uplink-operative-suit-name
   description: uplink-operative-suit-desc
   productEntity: ClothingUniformJumpsuitOperative
-  cost:
-    Telecrystal: 1
+  #ss220 free-operative-jumpsuit begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-operative-jumpsuit end
   categories:
   - UplinkPointless
 
@@ -1938,8 +1941,11 @@
   name: uplink-operative-skirt-name
   description: uplink-operative-skirt-desc
   productEntity: ClothingUniformJumpskirtOperative
-  cost:
-    Telecrystal: 1
+  #ss220 free-operative-jumpsuit begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-operative-jumpsuit end
   categories:
   - UplinkPointless
 
