@@ -91,6 +91,7 @@
   id: ClothingOuterWhiteCoatCaptain
   name: белое пальто капитана
   description: Белый цвет - символ власти на флоте.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
@@ -113,6 +114,7 @@
   id: ClothingOuterCoatHoPPurpleDress
   name: purple dress
   description: The robe of a real smug snake.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
@@ -143,6 +145,7 @@
   id: ClothingOuterCoatQMWarehouseman
   name: the warehouse manager's coat
   description: A coat that perfectly combines a mature style and a working purpose. In fact, it is your old work coat, which is still intact only thanks to the use of durotan and cigarette ash, which has already eaten into the fabric. You've never understood people putting on layers of clothes over coats.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
@@ -205,6 +208,7 @@
   id: ClothingOuterCoatDanger
   name: опасная куртка
   description: Опасный лук, опасного человека.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi

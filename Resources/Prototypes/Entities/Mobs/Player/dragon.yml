@@ -159,6 +159,12 @@
     ## ss220 lowTTKUpdate
   - type: Puller
     needsHands: false
+  # SS220 Telepathy begin
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelSpaceDragon
+  # SS220 Telepathy end
+
 
 - type: entity
   parent: BaseMobDragon

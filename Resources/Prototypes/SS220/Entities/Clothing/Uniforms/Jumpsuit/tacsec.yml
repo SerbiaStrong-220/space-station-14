@@ -5,6 +5,7 @@
   id: ClothingUniformTacticalSecurity
   name: тактическая униформа СБ
   description: Боевая рубаха для самых элитных офицеров СБ. Индивидуальный пошив!
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/tacuniform.rsi

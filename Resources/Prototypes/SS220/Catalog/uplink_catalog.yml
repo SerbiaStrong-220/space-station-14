@@ -30,9 +30,9 @@
   productEntity: MindSlaveImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 4
-  cost:
     Telecrystal: 8
+  cost:
+    Telecrystal: 14
   categories:
     - UplinkImplants
   conditions:
