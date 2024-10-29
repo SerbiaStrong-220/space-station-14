@@ -54,7 +54,7 @@
     damage:
       types:
         Blunt: 4
-  - type: ItemToggleOnHit
+  - type: ItemToggleDamageOtherOnHit
     activatedDamage:
       types:
         Stamina: 35
