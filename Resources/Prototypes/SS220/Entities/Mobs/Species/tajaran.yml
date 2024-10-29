@@ -8,6 +8,7 @@
   abstract: true
   components:
   - type: Inventory
+    speciesId: tajaran
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
@@ -100,6 +101,7 @@
   - type: HumanoidAppearance
     species: Tajaran
   - type: Inventory
+    speciesId: tajaran
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
