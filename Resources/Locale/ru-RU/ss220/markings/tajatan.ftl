@@ -16,7 +16,15 @@ marking-TajaranTailLinesAnimated = Таяран, хвост (Полосатый)
 marking-TajaranTailLeoAnimated = Таяран, хвост (Леопард)
 marking-TajaranTailPointsAnimated = Таяран, хвост (Пятнистый)
 
-# Spots section
+# Nose section
+marking-TajaranSnoutBluish = Таяран, нос (Розово-синеватый)
+marking-TajaranSnoutBlack = Таяран, нос (Чёрный)
+marking-TajaranSnoutOrange = Таяран, нос (Оранжевый)
+marking-TajaranSnoutDark = Таяран, нос (Тёмный)
+marking-TajaranSnoutPinkBright = Таяран, нос (Розовый)
+marking-TajaranSnoutPinkLight = Таяран, нос (Розовый светлый)
+
+# Color section
 marking-TajaranChestLeo = Таяран, грудь (Леопард)
 marking-TajaranHeadLeo = Таяран, голова (Леопард)
 marking-TajaranLArmLeo = Таяран, левая рука (Леопард)

@@ -255,6 +255,78 @@
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: points_tail_down_wagging
 
+# Nose
+
+- type: marking
+  id: TajaranSnout
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: nose
+
+- type: marking
+  id: TajaranSnoutBluish
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_bluish
+
+- type: marking
+  id: TajaranSnoutBlack
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_black
+
+- type: marking
+  id: TajaranSnoutOrange
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_orange
+
+- type: marking
+  id: TajaranSnoutDark
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_dark
+
+- type: marking
+  id: TajaranSnoutPinkBright
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_pink_light
+
+- type: marking
+  id: TajaranSnoutPinkLight
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_pink_bright
+
 # Color section
 
   # Leo

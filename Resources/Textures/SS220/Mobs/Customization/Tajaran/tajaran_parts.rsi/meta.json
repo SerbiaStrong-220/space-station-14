@@ -56,6 +56,30 @@
                 [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1],
                 [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1]
             ]
+    },
+    {
+      "name": "nose_bluish",
+      "directions": 4
+    },
+    {
+      "name": "nose_dark",
+      "directions": 4
+    },
+    {
+      "name": "nose_orange",
+      "directions": 4
+    },
+    {
+      "name": "nose_pink_bright",
+      "directions": 4
+    },
+    {
+      "name": "nose_pink_light",
+      "directions": 4
+    },
+    {
+      "name": "nose_black",
+      "directions": 4
     }
   ]
 }
