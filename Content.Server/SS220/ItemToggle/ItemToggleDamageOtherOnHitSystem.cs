@@ -3,14 +3,14 @@ using Content.Shared.Item.ItemToggle.Components;
 
 namespace Content.Server.SS220.ItemToggle;
 
-public sealed class ItemToggleOnHitSystem : EntitySystem
+public sealed class ItemToggleDamageOtherOnHitSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<ItemToggleOnHitComponent, ItemToggledEvent>(OnToggleItem);
+        SubscribeLocalEvent<ItemToggleDamageOtherOnHitComponent, ItemToggledEvent>(OnToggleItem);
     }
 
-    private void OnToggleItem(EntityUid uid, ItemToggleOnHitComponent component, ItemToggledEvent args)
+    private void OnToggleItem(EntityUid uid, ItemToggleDamageOtherOnHitComponent component, ItemToggledEvent args)
     {
         if (!TryComp<DamageOtherOnHitComponent>(uid, out var damageOtherOnHit))
             return;

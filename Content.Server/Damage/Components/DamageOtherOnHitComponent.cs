@@ -4,7 +4,7 @@ using Content.Shared.Damage;
 
 namespace Content.Server.Damage.Components
 {
-    [Access(typeof(DamageOtherOnHitSystem), typeof(ItemToggleOnHitSystem))]
+    [Access(typeof(DamageOtherOnHitSystem), typeof(ItemToggleDamageOtherOnHitSystem))] //ss220 fix stunbaton
     [RegisterComponent]
     public sealed partial class DamageOtherOnHitComponent : Component
     {

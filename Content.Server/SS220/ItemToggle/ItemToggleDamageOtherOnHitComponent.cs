@@ -7,7 +7,7 @@ namespace Content.Server.SS220.ItemToggle;
 /// This is used for change damage for activating weapon
 /// </summary>
 [RegisterComponent]
-public sealed partial class ItemToggleOnHitComponent : Component
+public sealed partial class ItemToggleDamageOtherOnHitComponent : Component
 {
     /// <summary>
     ///     Damage done by this item when activated.

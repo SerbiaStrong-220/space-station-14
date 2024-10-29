@@ -1,6 +1,5 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Damage.Components;
-using Content.Server.Stunnable.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Camera;
@@ -16,7 +15,6 @@ using Content.Shared.Wires;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
-using Content.Shared.Item.ItemToggle;
 
 namespace Content.Server.Damage.Systems
 {
