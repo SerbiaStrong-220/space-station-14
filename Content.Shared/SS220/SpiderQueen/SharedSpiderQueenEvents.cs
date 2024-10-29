@@ -25,6 +25,12 @@ public sealed partial class SpiderTargetSpawnEvent : WorldTargetActionEvent
     public Vector2 Offset;
 
     /// <summary>
+    /// Is need to snap to grid
+    /// </summary>
+    [DataField]
+    public bool SnapToGrid = false;
+
+    /// <summary>
     /// The cost of blood points to use this action
     /// </summary>
     [DataField]
@@ -83,6 +89,12 @@ public sealed partial class SpiderNearbySpawnEvent : InstantActionEvent
     public Vector2 Offset;
 
     /// <summary>
+    /// Is need to snap to grid
+    /// </summary>
+    [DataField]
+    public bool SnapToGrid = true;
+
+    /// <summary>
     /// The cost of blood points to use this action
     /// </summary>
     [DataField]
@@ -118,6 +130,11 @@ public sealed partial class SpiderSpawnDoAfterEvent : SimpleDoAfterEvent
     /// Set to 0,0 to have them spawn on the same tile.
     /// </summary>
     public Vector2 Offset;
+
+    /// <summary>
+    /// Is need to snap to grid
+    /// </summary>
+    public bool SnapToGrid;
 
     /// <summary>
     /// The cost of blood points to use this action
