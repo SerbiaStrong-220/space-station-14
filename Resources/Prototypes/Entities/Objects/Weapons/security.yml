@@ -81,7 +81,7 @@
         Blunt: 7
         # Stamina: 55 #ss220 stunbaton fix
   #ss220 stunbaton fix start
-  - type: ItemToggleOnHit
+  - type: ItemToggleDamageOtherOnHit
     activatedDamage:
       types:
         Stamina: 55
