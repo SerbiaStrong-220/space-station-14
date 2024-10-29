@@ -135,9 +135,9 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   sprites:
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: ears_short_outer
-  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: ears_short_inner
 
 # Tail section
