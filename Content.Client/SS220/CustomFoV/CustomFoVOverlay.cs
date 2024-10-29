@@ -57,7 +57,7 @@ public sealed class CustomFoVOverlay : Overlay
             if (!occluderQuery.TryGetComponent(entity, out var occluder) || !occluder.Enabled)
                 continue;
 
-            if (!xformQuery.TryGetComponent(entity, out var xform) || !xform.Anchored || !xform.GridUid.HasValue)
+            if (!xformQuery.TryGetComponent(entity, out var xform) || xform.MapID != args.MapId || !xform.Anchored || !xform.GridUid.HasValue)
                 continue;
 
             var gridComp = _entMan.GetComponent<MapGridComponent>(xform.GridUid.Value);

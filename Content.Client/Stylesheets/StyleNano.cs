@@ -528,6 +528,16 @@ namespace Content.Client.Stylesheets
             };
             paperBackground.SetPatchMargin(StyleBox.Margin.All, 16.0f);
 
+            // Default photo background:
+            var photoBorder = new StyleBoxTexture(paperBackground)
+            {
+                Modulate = Color.FromHex("#ffffff")
+            };
+            var photoBackground = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#000000")
+            };
+
             var contextMenuExpansionTexture = resCache.GetTexture("/Textures/Interface/VerbIcons/group.svg.192dpi.png");
             var verbMenuConfirmationTexture = resCache.GetTexture("/Textures/Interface/VerbIcons/group.svg.192dpi.png");
 
@@ -1471,6 +1481,13 @@ namespace Content.Client.Stylesheets
                 Element<RichTextLabel>().Class("PaperWrittenText")
                     .Prop(Label.StylePropertyFont, notoSans12)
                     .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#111111")),
+
+                // Photo
+                Element<PanelContainer>().Class("PhotoBorder")
+                    .Prop(PanelContainer.StylePropertyPanel, photoBorder),
+
+                Element<PanelContainer>().Class("PhotoBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, photoBackground),
 
                 Element<RichTextLabel>().Class("LabelSubText")
                     .Prop(Label.StylePropertyFont, notoSans10)
