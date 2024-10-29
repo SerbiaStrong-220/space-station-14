@@ -150,6 +150,54 @@
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail
+
+- type: marking
+  id: TajaranTailLines
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_tail
+
+- type: marking
+  id: TajaranTailLeo
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_tail
+
+- type: marking
+  id: TajaranTailPoints
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_up
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_down
+
   # Animated
 - type: marking
   id: TajaranTailAnimated
@@ -157,8 +205,55 @@
   markingCategory: Tail
   speciesRestriction: []
   sprites:
-    - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
-      state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+
+- type: marking
+  id: TajaranTailLinesAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_tail_wagging
+
+- type: marking
+  id: TajaranTailLeoAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_tail_wagging
+
+- type: marking
+  id: TajaranTailPointsAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_up_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_down_wagging
 
 # Color section
 

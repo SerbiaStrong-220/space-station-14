@@ -8,6 +8,13 @@ marking-TajaranEarsShort = Таяран, уши (Короткие)
 
 # Tail Section
 marking-TajaranTail = Таяран, хвост (Стандартный)
+marking-TajaranTailLines = Таяран, хвост (Полосатый)
+marking-TajaranTailLeo = Таяран, хвост (Леопард)
+marking-TajaranTailPoints = Таяран, хвост (Пятнистый)
+
+marking-TajaranTailLinesAnimated = Таяран, хвост (Полосатый)
+marking-TajaranTailLeoAnimated = Таяран, хвост (Леопард)
+marking-TajaranTailPointsAnimated = Таяран, хвост (Пятнистый)
 
 # Spots section
 marking-TajaranChestLeo = Таяран, грудь (Леопард)
