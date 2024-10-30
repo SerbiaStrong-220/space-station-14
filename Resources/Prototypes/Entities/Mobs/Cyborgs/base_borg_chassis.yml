@@ -283,7 +283,7 @@
   parent: [BaseBorgChassis, BaseBorgTransponder]
   abstract: true
   components:
-  - type: StationAiVision
+  - type: StationAiVision #SS220 AI Borg vision
   - type: NpcFactionMember
     factions:
     - NanoTrasen
