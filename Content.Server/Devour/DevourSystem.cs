@@ -56,7 +56,7 @@ public sealed class DevourSystem : SharedDevourSystem
             _audioSystem.PlayPvs(component.SoundDevour, uid);
         // SS220 dragon devour fix end
     }
-
+    
     private void OnGibContents(EntityUid uid, DevourerComponent component, ref BeingGibbedEvent args)
     {
         if (!component.ShouldStoreDevoured)
