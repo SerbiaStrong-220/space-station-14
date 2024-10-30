@@ -6,7 +6,7 @@ using Content.Shared.Devour.Components;
 using Content.Shared.Humanoid;
 using Content.Server.Body.Components;
 using Robust.Server.Containers;
-using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Components; // SS220 dragon devour fix
 
 namespace Content.Server.Devour;
 
