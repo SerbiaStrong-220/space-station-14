@@ -43,7 +43,8 @@ public abstract class SharedDevourSystem : EntitySystem
     /// </summary>
     protected void OnDevourAction(EntityUid uid, DevourerComponent component, DevourActionEvent args)
     {
-        if (args.Handled || _whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Target))
+        if (args.Handled || _whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Target) ||
+            _whitelistSystem.IsBlacklistPass(component.Blacklist, args.Target)) // SS220 dragon devour fix
             return;
 
         args.Handled = true;

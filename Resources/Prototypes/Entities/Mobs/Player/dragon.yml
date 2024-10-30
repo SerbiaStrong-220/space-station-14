@@ -146,6 +146,9 @@
       - Door
       tags:
       - Wall
+    blacklist:
+      components:
+      - BorgChassis
   - type: Tag
     tags:
     - CannotSuicide
