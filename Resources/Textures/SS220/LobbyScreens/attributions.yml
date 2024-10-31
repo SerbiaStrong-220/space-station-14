@@ -44,7 +44,7 @@
   copyright: "Created by NORKA for SS220"
   source: "https://github.com/SerbiaStrong-220"
   
-  - files: ["Card-showdown.png"]
+- files: ["Card-showdown.png"]
   license: "CC-BY-3.0"
   copyright: "Created by Gabka for SS220"
   source: "https://github.com/SerbiaStrong-220"
