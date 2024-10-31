@@ -41,9 +41,16 @@ public sealed class HungerSystem : EntitySystem
     {
         base.Initialize();
 
-        DebugTools.Assert(_prototype.TryIndex(HungerIconOverfedId, out _hungerIconOverfed) &&
+        // SS220 Thirst hud and hunger hud fix begin
+        //DebugTools.Assert(_prototype.TryIndex(HungerIconOverfedId, out _hungerIconOverfed) &&
+        //                  _prototype.TryIndex(HungerIconPeckishId, out _hungerIconPeckish) &&
+        //                  _prototype.TryIndex(HungerIconStarvingId, out _hungerIconStarving));
+
+        var trySetPrototypes = _prototype.TryIndex(HungerIconOverfedId, out _hungerIconOverfed) &&
                           _prototype.TryIndex(HungerIconPeckishId, out _hungerIconPeckish) &&
-                          _prototype.TryIndex(HungerIconStarvingId, out _hungerIconStarving));
+                          _prototype.TryIndex(HungerIconStarvingId, out _hungerIconStarving);
+        DebugTools.Assert(trySetPrototypes);
+        // SS220 Thirst hud and hunger hud fix end
 
         SubscribeLocalEvent<HungerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HungerComponent, ComponentShutdown>(OnShutdown);

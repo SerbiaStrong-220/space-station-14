@@ -28,11 +28,13 @@
         layer:
         - GhostImpassable
 
+# shared parent between aghosts, replay spectators and normal observers
 - type: entity
   parent:
   - Incorporeal
   - BaseMob
-  id: MobObserver
+  id: MobObserverBase
+  abstract: true
   name: observer
   description: Boo!
   categories: [ HideSpawnMenu ]
@@ -53,6 +55,8 @@
     skipChecks: true
   - type: Ghost
   - type: GhostHearing
+  - type: HallucinationImmune # SS220 - hallucinationSystem
+  - type: SuperMatterImmune # SS220 - SuperMatterCrystal
   # SS220 ADD GHOST HUD'S START
   - type: ShowHealthBars
     damageContainers:
@@ -68,6 +72,13 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+
+# proto for player ghosts specifically
+- type: entity
+  parent: MobObserverBase
+  id: MobObserver
+  components:
+  - type: Spectral
 
 - type: entity
   id: ActionGhostBoo

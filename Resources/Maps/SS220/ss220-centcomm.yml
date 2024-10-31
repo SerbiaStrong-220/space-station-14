@@ -8103,7 +8103,7 @@ entities:
       parent: 1
     - type: GridFill
       addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_OBR.yml
+      path: /Maps/SS220/Shuttles/centCom/ss220_NT_OBR.yml
   - uid: 182
     components:
     - type: Transform
@@ -8112,7 +8112,7 @@ entities:
       parent: 1
     - type: GridFill
       addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_CBURN.yml
+      path: /Maps/SS220/Shuttles/centCom/ss220_NT_CBURN.yml
   - uid: 3845
     components:
     - type: Transform
@@ -8127,7 +8127,7 @@ entities:
       parent: 1
     - type: GridFill
       addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_CENT.yml
+      path: /Maps/SS220/Shuttles/centCom/ss220_NT_CENT.yml
   - uid: 6116
     components:
     - type: Transform
@@ -8157,7 +8157,7 @@ entities:
       parent: 1
     - type: GridFill
       addComponents: []
-      path: /Maps/SS220/admin-shuttles/ss220_NT_DS.yml
+      path: /Maps/SS220/Shuttles/centCom/ss220_NT_DS.yml
   - uid: 8596
     components:
     - type: Transform

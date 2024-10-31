@@ -372,6 +372,7 @@
   - type: Matchbox
   - type: ContainerContainer
     containers:
+      stash: !type:ContainerSlot
       item: !type:ContainerSlot
   - type: ItemSlots
     slots:

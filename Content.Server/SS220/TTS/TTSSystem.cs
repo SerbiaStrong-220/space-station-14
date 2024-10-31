@@ -1,7 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
+using Content.Server.VoiceMask;
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.AnnounceTTS;
@@ -20,6 +22,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -38,12 +41,12 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-        SubscribeLocalEvent<TTSComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
 
         SubscribeNetworkEvent<RequestGlobalTTSEvent>(OnRequestGlobalTTS);
     }
 
-    private void OnInit(Entity<TTSComponent> ent, ref ComponentInit args)
+    private void OnInit(Entity<TTSComponent> ent, ref MapInitEvent args)
     {
         // Set random voice from RandomVoicesList
         // If RandomVoicesList is null - doesn`t set new voice
@@ -62,9 +65,12 @@ public sealed partial class TTSSystem : EntitySystem
         if (voiceId == null)
             return;
 
-        var voiceEv = new TransformSpeakerVoiceEvent(args.Source, voiceId);
-        RaiseLocalEvent(args.Source, voiceEv);
-        voiceId = voiceEv.VoiceId;
+        if (TryGetVoiceMaskUid(args.Source, out var maskUid))
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
+            RaiseLocalEvent(maskUid.Value, voiceEv);
+            voiceId = voiceEv.VoiceId;
+        }
 
         if (!GetVoicePrototype(voiceId, out var protoVoice))
         {
@@ -116,6 +122,23 @@ public sealed partial class TTSSystem : EntitySystem
         _ttsManager.ResetCache();
     }
 
+    public bool TryGetVoiceMaskUid(EntityUid maskCarrier, [NotNullWhen(true)] out EntityUid? maskUid)
+    {
+        maskUid = null;
+        if (!_inventory.TryGetContainerSlotEnumerator(maskCarrier, out var carrierSlot, SlotFlags.MASK))
+            return false;
+
+        while (carrierSlot.NextItem(out var itemUid, out var itemSlot))
+        {
+            if (HasComp<VoiceMaskComponent>(itemUid))
+            {
+                maskUid = itemUid;
+                return true;
+            }
+        }
+        return false;
+    }
+
     private async void OnRequestGlobalTTS(RequestGlobalTTSEvent ev, EntitySessionEventArgs args)
     {
         if (!_isEnabled ||
@@ -138,9 +161,12 @@ public sealed partial class TTSSystem : EntitySystem
             voiceId == null)
             return;
 
-        var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
-        RaiseLocalEvent(uid, voiceEv);
-        voiceId = voiceEv.VoiceId;
+        if (TryGetVoiceMaskUid(uid, out var maskUid))
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
+            RaiseLocalEvent(maskUid.Value, voiceEv);
+            voiceId = voiceEv.VoiceId;
+        }
 
         if (!GetVoicePrototype(voiceId, out var protoVoice))
         {

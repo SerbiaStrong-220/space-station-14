@@ -1,0 +1,6 @@
+# temp lodaut, del after hallowenn 2024
+- type: loadout
+  id: HalloweenPumpkinHat
+  storage:
+    back:
+    - ClothingHeadHatPumpkin

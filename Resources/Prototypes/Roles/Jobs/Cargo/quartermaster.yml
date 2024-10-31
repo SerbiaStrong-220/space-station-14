@@ -21,12 +21,14 @@
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
+  requireAdminNotify: true
   supervisors: job-supervisors-captain
   access:
   - Cargo
   - Salvage
   - Quartermaster
   - Maintenance
+  - External
   - Command
   - Brig
   - Cryogenics

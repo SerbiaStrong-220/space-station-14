@@ -1405,8 +1405,7 @@
   components:
     # make the player a traitor once its taken
   - type: AutoTraitor
-    giveUplink: false
-    giveObjectives: false
+    profile: TraitorReinforcement
 
 - type: entity
   id: MobMonkeySyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
@@ -1430,11 +1429,14 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
+    allowedEmotes: ['Thump']
   - type: Vocal
     sounds:
       Male: MaleReptilian
       Female: FemaleReptilian
       Unsexed: MaleReptilian
+  - type: BodyEmotes
+    soundsId: ReptilianBodyEmotes
   - type: TypingIndicator
     proto: lizard
   - type: InteractionPopup
@@ -1564,8 +1566,7 @@
   components:
     # make the player a traitor once its taken
   - type: AutoTraitor
-    giveUplink: false
-    giveObjectives: false
+    profile: TraitorReinforcement
 
 - type: entity
   id: MobKoboldSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
@@ -2918,13 +2919,20 @@
 - type: entity
   name: calico cat
   id: MobCatCalico
-  parent: MobCat
+  parent: [ MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   description: Feline pet, very funny.
   components:
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cat2
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: cat2_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+    #SS220 Add lying down on entity end
   - type: DamageStateVisuals
     states:
       Alive:
@@ -2984,13 +2992,20 @@
 - type: entity
   name: space cat
   id: MobCatSpace
-  parent: MobCat
+  parent: [MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   description: Feline pet, prepared for the worst.
   components:
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: spacecat
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: spacecat_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+    #SS220 Add lying down on entity end
   - type: DamageStateVisuals
     states:
       Alive:
@@ -3041,7 +3056,7 @@
 
 - type: entity
   name: kitten
-  parent: MobCat
+  parent: [ MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   id: MobCatKitten
   description: Small and fluffy.
   components:
@@ -3049,6 +3064,11 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: kitten
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: kitten_rest
+      visible: false
+    #SS220 Add lying down on entity end
   - type: DamageStateVisuals
     states:
       Alive:

@@ -1,7 +1,7 @@
 - type: species
   id: Vox
   name: species-name-vox
-  roundStart: false #SS220 Temporarily Remove Roundstart Vox
+  roundStart: true #SS220 Vox Update V1
   prototype: MobVox
   sprites: MobVoxSprites
   markingLimits: MobVoxMarkingLimits
@@ -19,7 +19,7 @@
   id: MobVoxSprites
   sprites:
     Head: MobVoxHead
-    Snout: MobHumanoidAnyMarking
+    Snout: MobVoxSnout #SS220-Vox Beak
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Chest: MobVoxTorso
@@ -84,6 +84,14 @@
   baseSprite:
     sprite: Mobs/Species/Vox/parts.rsi
     state: head
+
+#SS220-Vox Beak Begin
+- type: humanoidBaseSprite
+  id: MobVoxSnout
+  baseSprite:
+    sprite: Mobs/Species/Vox/parts.rsi
+    state: beak
+#SS220-Vox Beak End
 
 - type: humanoidBaseSprite
   id: MobVoxHeadFemale

@@ -30,6 +30,20 @@
     spawned:
       - id: FoodMeatSpider
         amount: 5
+# SS220-change-races-height begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+# SS220-change-races-height end
   - type: Reactive
     reactions:
     - reagents: [Water]
@@ -74,6 +88,11 @@
   - type: TypingIndicator
     proto: spider
   - type: Sprite # I'd prefer if these maps were better. Insert map pun here.
+#   SS220-change-races-height begin
+    noRot: true
+    drawdepth: Mobs
+    scale: 1.16, 1.16
+#   SS220-change-races-height end
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
@@ -128,6 +147,10 @@
   id: MobArachnidDummy
   categories: [ HideSpawnMenu ]
   components:
+# SS220-change-races-height begin
+  - type: Sprite
+    scale: 1.16, 1.16
+# SS220-change-races-height end
   - type: HumanoidAppearance
     species: Arachnid
 

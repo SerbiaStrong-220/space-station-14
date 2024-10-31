@@ -133,4 +133,8 @@
 
  #Add Tourniquet to medic's belt 
 - type: Tag
-  id: Tourniquet 
+  id: Tourniquet
+
+# SS220 Add lying action
+- type: Tag
+  id: Bed

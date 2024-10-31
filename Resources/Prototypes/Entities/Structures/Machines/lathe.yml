@@ -120,6 +120,7 @@
     staticRecipes:
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
       - ClothingWristWatch #SS220 Wrist Watch
+      - DeviceCalculator #SS220 Calculator
       - Wirecutter
       - Igniter
       - Signaller
@@ -202,11 +203,11 @@
       - WetFloorSign
       - ClothingHeadHatCone
       - FreezerElectronics
-      - Flare
+      - CassetteTape # SS220 Tape Recorder #32234 early merge
+      - TapeRecorder # SS220 Tape Recorder #32234 early merge
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - BoxLethalshot
-      - BoxShotgunFlare
       - BoxShotgunSlug
       - CombatKnife
       - MagazineBoxLightRifle
@@ -355,7 +356,7 @@
       - FauxTileAstroSnow
       - FauxTileAstroSand #SS220-beachCraftng
       - OreBagOfHolding
-      - DeviceQuantumSpinInverter
+      #- DeviceQuantumSpinInverter #SS220 - Until better times
       - ThermalVisorRND # SS220 Thermals
       - ClothingEyesHudSupply #ss220 hud cargo add
   - type: EmagLatheRecipes
@@ -492,6 +493,7 @@
       - SolarTrackerElectronics
       - TurboItemRechargerCircuitboard
       - PowerComputerCircuitboard
+      - SuperMatterObserverCircuitboard  # SS220 superMatter-crystal
       - AutolatheHyperConvectionMachineCircuitboard
       - ProtolatheHyperConvectionMachineCircuitboard
       - CircuitImprinterHyperConvectionMachineCircuitboard
@@ -753,7 +755,6 @@
     runningState: icon
     staticRecipes:
       - BoxLethalshot
-      - BoxShotgunFlare
       - BoxShotgunPractice
       - BoxShotgunSlug
       - ClothingEyesHudSecurity
@@ -889,7 +890,6 @@
       runningState: icon
       staticRecipes:
         - BoxLethalshot
-        - BoxShotgunFlare
         - BoxShotgunSlug
        #  - BoxShellTranquilizer
         - MagazineBoxLightRifle
@@ -1240,8 +1240,6 @@
   - type: Machine
     board: BiogeneratorMachineCircuitboard
   - type: MaterialStorage
-    insertOnInteract: false
-    canEjectStoredMaterials: false
   - type: ProduceMaterialExtractor
   - type: ItemSlots
     slots:

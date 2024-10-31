@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Piercing: 60 #ss220lowTTKUpdate
         Structural: 30
-        Stamina: 35
+        Stamina: 50 #ss220lowTTKUpdate
     ignoreResistances: true

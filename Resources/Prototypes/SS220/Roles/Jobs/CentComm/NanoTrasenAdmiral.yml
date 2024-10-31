@@ -12,8 +12,11 @@
 
 - type: randomHumanoidSettings
   id: CentComNanoTrasenAdmiral
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
   components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
+      hair: HairBald
     - type: RandomMetadata
       nameSegments:
         - NamesFirstCentcomAgent
@@ -31,7 +34,7 @@
 
 - type: job
   id: CentComNanoTrasenAdmiral
-  name: job-name-centcomoff
+  name: job-name-nt-admiral
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentComNanoTrasenAdmiralGear

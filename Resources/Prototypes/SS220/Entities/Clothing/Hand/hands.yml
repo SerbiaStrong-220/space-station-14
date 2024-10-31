@@ -5,6 +5,7 @@
   id: ClothingHandsWhiteGlovesCaptain
   name: белые перчатки капитана
   description: Дорогие перчатки ветерана флотской службы NT.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/whitecapgloves.rsi
@@ -48,9 +49,21 @@
   id: ClothingHandsGlovesOrangeJanitor
   name: оранжевые резиновые перчатки
   description: Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
+
+- type: entity
+  parent: ClothingHandsGlovesJanitor
+  id: ClothingHandsGlovesJanitorJR
+  name: black rubber gloves Junk Recycles
+  description: Cleaning gloves with an additional protective coating. They've seen so much...
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi

@@ -3,6 +3,7 @@
   id: DarkCEPDA
   name: dark chief engineer PDA
   description: A prestigious dark-colored PDA for a Chef Engineer that has put a lot of time into his work.
+  suffix: For playtime
   components:
   - type: Pda
     id: CEIDCard
@@ -90,6 +91,7 @@
   id: AltRnDDirPDA
   name: alternative research director PDA
   description: He looks a little different than his copy
+  suffix: For playtime
   components:
   - type: Pda
     id: RDIDCard

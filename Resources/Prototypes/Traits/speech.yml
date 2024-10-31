@@ -14,6 +14,10 @@
     - type: OwOAccent #SS220
     - type: ReplacementAccent
       accent: dwarf
+  #SS220-Vox accent Begin
+    - type: TajaranAccent
+    - type: VoxAccent
+  #SS220-Vox accent End
 
 # 1 Cost
 

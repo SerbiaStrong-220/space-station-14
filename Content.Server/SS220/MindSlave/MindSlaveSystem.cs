@@ -48,8 +48,8 @@ public sealed class MindSlaveSystem : EntitySystem
     [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
-    [ValidatePrototypeId<AntagPrototype>]
-    private const string MindSlaveAntagId = "MindSlave";
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string MindSlaveAntagId = "MindRoleMindSlave";
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string MindSlaveObjectiveId = "MindSlaveObeyObjective";
@@ -162,12 +162,12 @@ public sealed class MindSlaveSystem : EntitySystem
         }
 
         var objective = _objectives.TryCreateObjective(mindId, mindComp, MindSlaveObjectiveId);
-        _role.MindAddRole(mindId, new MindSlaveRoleComponent
+        _role.MindAddRole(mindId, MindSlaveAntagId, mindComp, true);
+        if (_role.MindHasRole<MindSlaveRoleComponent>(mindId, out var slaveRole))
         {
-            PrototypeId = MindSlaveAntagId,
-            masterEntity = master,
-            objectiveEntity = objective
-        }, mindComp, true);
+            slaveRole.Value.Comp2.masterEntity = master;
+            slaveRole.Value.Comp2.objectiveEntity = objective;
+        }
 
         var masterName = masterMindComp.CharacterName ?? Loc.GetString("mindslave-unknown-master");
         var briefing = Loc.GetString("mindslave-briefing-slave", ("master", masterName));
@@ -188,12 +188,9 @@ public sealed class MindSlaveSystem : EntitySystem
             _targetObjective.ResetEntityName(objective.Value, targetObjective);
             _mind.AddObjective(mindId, mindComp, objective.Value);
         }
-        else
+        else if (slaveRole is { } slaveRoleVal)
         {
-            _role.MindAddRole(mindId, new RoleBriefingComponent
-            {
-                Briefing = briefing.ToString()
-            }, mindComp, true);
+            EnsureComp<RoleBriefingComponent>(slaveRoleVal).Briefing = briefing;
         }
 
         EnsureComp<MindSlaveComponent>(slave);
@@ -231,14 +228,14 @@ public sealed class MindSlaveSystem : EntitySystem
         if (!_mind.TryGetMind(slave, out var mindId, out var mindComp))
             return false;
 
-        if (!TryComp<MindSlaveRoleComponent>(mindId, out var mindSlave))
+        if (!_role.MindHasRole<MindSlaveRoleComponent>(mindId, out var mindSlave))
             return false;
 
         var briefing = Loc.GetString("mindslave-removed-slave");
         _antagSelection.SendBriefing(slave, briefing, Color.Red, null);
         _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
-        var master = mindSlave.masterEntity;
+        var master = mindSlave.Value.Comp2.masterEntity;
         if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
         {
             var briefingMaster = mindComp.CharacterName != null ? Loc.GetString("mindslave-removed-slave-master", ("name", mindComp.CharacterName), ("ent", slave)) :
@@ -255,7 +252,7 @@ public sealed class MindSlaveSystem : EntitySystem
         _role.MindRemoveRole<MindSlaveRoleComponent>(mindId);
 
         //If slave had a valid objective - remove it, otherwise - remove briefing
-        var objective = mindSlave.objectiveEntity;
+        var objective = mindSlave.Value.Comp2.objectiveEntity;
         if (objective != null)
             _mind.TryRemoveObjective(mindId, mindComp, objective.Value);
         else
@@ -313,6 +310,6 @@ public sealed class MindSlaveSystem : EntitySystem
         if (!_mind.TryGetMind(entity, out var mindId, out var mindComp))
             return false;
 
-        return HasComp<MindSlaveRoleComponent>(mindId);
+        return _role.MindHasRole<MindSlaveRoleComponent>(mindId);
     }
 }
