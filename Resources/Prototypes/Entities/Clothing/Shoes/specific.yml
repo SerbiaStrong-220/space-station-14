@@ -142,7 +142,7 @@
 #ss220 silent shoes begin #ninja should be kinda sneaky, doesn't him?
   - type: FootstepModifier
     footstepSoundCollection:
-      collection: SilentShoes
+      collection: null
 #ss220 silent shoes end
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription

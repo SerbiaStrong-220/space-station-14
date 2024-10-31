@@ -263,7 +263,7 @@
   components:
   - type: FootstepModifier
     footstepSoundCollection:
-      collection: SilentShoes
+      collection: null
   # HiddenDesc-Start
   - type: HiddenDescription
     entries:
