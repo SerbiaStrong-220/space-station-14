@@ -31,6 +31,7 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  - type: Surgable #SS220 Surgery
 
 - type: entity
   parent: BaseSpeciesDummy

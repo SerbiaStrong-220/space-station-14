@@ -1,0 +1,70 @@
+- type: surgeryGraph
+  id: MindSlaveFix
+  start: start
+  end: seal the wound
+  graph:
+  - node: start
+    popup: surgery-mind-slave-fix
+    edges:
+    - to: incision
+      delay: 8
+      conditions:
+      - !type:SurgeryToolTypeCondition
+        surgeryTool: scalpel
+      actions:
+      - !type:ApplyBleedingSurgeryAction
+        bleedAmount: 10
+  - node: incision
+    popup: surgery-incision
+    edges:
+    - to: retract skin
+      delay: 4
+      conditions:
+      - !type:SurgeryToolTypeCondition
+        surgeryTool: retractor
+      actions:
+      - !type:ApplyBleedingSurgeryAction
+        bleedAmount: 0
+  - node: retract skin
+    popup: surgery-retract-skin
+    edges:
+    - to: cut the bone
+      delay: 18
+      conditions:
+      - !type:SurgeryToolTypeCondition
+        surgeryTool: saw
+      actions:
+      - !type:ApplyBleedingSurgeryAction
+        bleedAmount: 10
+  - node: cut the bone
+    popup: surgery-cut-the-bone
+    edges:
+    - to: clamp bleeders
+      delay: 4
+      conditions:
+      - !type:SurgeryToolTypeCondition
+        surgeryTool: hemostat
+      actions:
+      - !type:ApplyBleedingSurgeryAction
+        bleedAmount: 0
+  - node: clamp bleeders
+    popup: surgery-clamp-bleeders
+    edges:
+    - to: fix mind slave disfunction
+      delay: 6
+      conditions:
+      - !type:SurgeryHaveComponentCondition
+        component: MindSlaveDisfunctionFixer
+      actions:
+      - !type:ApplyBleedingSurgeryAction
+        bleedAmount: 0
+  - node: fix mind slave disfunction
+    popup: surgery-fix-mind-slave-disfunction
+    edges:
+    - to: seal the wound
+      delay: 6
+      conditions:
+      - !type:SurgeryToolTypeCondition
+        surgeryTool: cautery
+  - node: seal the wound
+    popup: surgery-seal-the-wound

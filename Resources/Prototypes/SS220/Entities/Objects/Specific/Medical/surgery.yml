@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseToolSurgery
+  id: SurgeryDrapes
+  name: surgery drapes
+  description: drapes which used in surgery
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medical.rsi
+    state: cast
+  - type: StaticPrice
+    price: 20
+  - type: Tag
+    tags:
+    - SurgeryTool
+  - type: SurgeryDrape

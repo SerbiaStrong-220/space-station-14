@@ -8,6 +8,7 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
+using Content.Shared.Tag; // SS220-mindslave
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -19,10 +20,13 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MindSlaveSystem _mindslave = default!;
+    [Dependency] private readonly TagSystem _tag = default!; // SS220-mindslave
 
     //SS220-mindslave begin
     [ValidatePrototypeId<EntityPrototype>]
     private const string MindSlaveImplantProto = "MindSlaveImplant";
+    [ValidatePrototypeId<TagPrototype>]
+    private const string MindShieldImplantTag = "MindShield";
     //SS220-mindslave end
 
     public override void Initialize()
@@ -46,6 +50,15 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
             return;
 
         //SS220-mindslave begin
+        if (component.ImplanterSlot.ContainerSlot != null
+            && component.ImplanterSlot.ContainerSlot.ContainedEntity != null
+            && _tag.HasTag(component.ImplanterSlot.ContainerSlot.ContainedEntity.Value, MindShieldImplantTag)
+            && _mindslave.IsEnslaved(target))
+        {
+            _popup.PopupEntity(Loc.GetString("mindshield-target-mindslaved"), target, args.User);
+            return;
+        }
+
         if (component.Implant == MindSlaveImplantProto)
         {
             if (args.User == target)

@@ -5,6 +5,20 @@
   description: lmaoooo
   categories: [ HideSpawnMenu ]
   components:
-   - type: Tag
-     tags:
-       - MindSlave
+    - type: Tag
+      tags:
+      - MindSlave
+    - type: MindSlaveDisfunctionProvider
+      disfunction:
+        disfunction:
+          initial:
+            - MindSlaveDisfunctionAccent
+          progressive:
+            - WieldUnability
+          terminal:
+            - LegsParalyzed
+        deadlyStageDamage:
+          types:
+              Poison: 4
+              Blunt: 6
+              Airloss: 4

@@ -13,5 +13,8 @@ namespace Content.Shared.SS220.MindSlave;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class MindSlaveComponent : Component
 {
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string StopWord = string.Empty;
+
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "MindSlaveIcon";
 }
