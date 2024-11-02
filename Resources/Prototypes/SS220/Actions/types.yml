@@ -13,7 +13,7 @@
 - type: entity
   id: ActionGol
   name: Gooool!
-  description: Gooooooooooooooooooool!
+  description: Goooooooool!
   components:
   - type: InstantAction
     useDelay: 20
