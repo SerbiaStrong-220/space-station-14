@@ -110,6 +110,7 @@
     interactFailureString: petting-failure-bear
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
+  - type: Gol #SS220 Gol
 
 - type: entity
   id: MobBearSpaceSalvage

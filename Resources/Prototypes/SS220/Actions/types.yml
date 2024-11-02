@@ -11,12 +11,12 @@
       event: !type:ToggleActionEvent
 
 - type: entity
-  id: ActionGool
+  id: ActionGol
   name: Gooool!
   description: Gooooooooooooooooooool!
   components:
   - type: InstantAction
-    useDelay: 10
+    useDelay: 20
     icon: Interface/Actions/scream.png
-    event: !type:ScreamActionEvent
+    event: !type:GolActionEvent
     checkCanInteract: false
