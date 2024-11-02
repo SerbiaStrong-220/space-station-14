@@ -9,3 +9,14 @@
       itemIconStyle: NoItem
       useDelay: 1 # emote spam
       event: !type:ToggleActionEvent
+
+- type: entity
+  id: ActionGool
+  name: Gooool!
+  description: Gooooooooooooooooooool!
+  components:
+  - type: InstantAction
+    useDelay: 10
+    icon: Interface/Actions/scream.png
+    event: !type:ScreamActionEvent
+    checkCanInteract: false
