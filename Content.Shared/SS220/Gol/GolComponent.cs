@@ -4,6 +4,7 @@ using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Audio;
+using Content.Shared.Dataset;
 
 namespace Content.Shared.SS220.Gol;
 /// <summary>
@@ -26,6 +27,9 @@ public sealed partial class GolComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier GolSound = new SoundPathSpecifier("/Audio/SS220/Voice/Gol/gooool.ogg");
+
+    [DataField]
+    public ProtoId<DatasetPrototype> GolPhrases = "golPhrases";
 }
 public sealed partial class GolActionEvent : InstantActionEvent
 {
