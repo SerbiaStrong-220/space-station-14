@@ -17,6 +17,6 @@
   components:
   - type: InstantAction
     useDelay: 20
-    icon: Interface/Actions/scream.png
+    icon: SS220/Interface/Actions/goal.png
     event: !type:GoalActionEvent
     checkCanInteract: false
