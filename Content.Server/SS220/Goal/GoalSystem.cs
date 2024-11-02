@@ -3,13 +3,13 @@ using Content.Shared.Actions;
 using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Content.Server.Chat.Systems;
-using Content.Shared.SS220.Gol;
+using Content.Shared.SS220.Goal;
 using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 
 
-namespace Content.Server.SS220.Gol;
+namespace Content.Server.SS220.Goal;
 
 public sealed class GolSystem : EntitySystem
 {
@@ -25,15 +25,15 @@ public sealed class GolSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GolComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<GolComponent, GolActionEvent>(OnGolAction);
+        SubscribeLocalEvent<GoalComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GoalComponent, GoalActionEvent>(OnGolAction);
     }
 
-    private void OnMapInit(Entity<GolComponent> uid, ref MapInitEvent args)
+    private void OnMapInit(Entity<GoalComponent> uid, ref MapInitEvent args)
     {
-        _actions.AddAction(uid, ref uid.Comp.GolActionEntity, uid.Comp.GolAction);
+        _actions.AddAction(uid, ref uid.Comp.GoalActionEntity, uid.Comp.GoalAction);
     }
-    private void OnGolAction(Entity<GolComponent> uid, ref GolActionEvent args)
+    private void OnGolAction(Entity<GoalComponent> uid, ref GoalActionEvent args)
     {
         if (args.Handled)
             return;
@@ -41,11 +41,11 @@ public sealed class GolSystem : EntitySystem
         if (!_actionBlocker.CanEmote(uid))
             return;
 
-        var placeholder = _proto.Index<DatasetPrototype>(uid.Comp.GolPhrases);
+        var placeholder = _proto.Index<DatasetPrototype>(uid.Comp.GoalPhrases);
 
         var emoteType = _random.Pick(placeholder.Values);
 
-        _audio.PlayEntity(uid.Comp.GolSound, uid, uid);
+        _audio.PlayEntity(uid.Comp.GoalSound, uid, uid);
         _chat.TrySendInGameICMessage(uid, emoteType, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
 
         args.Handled = true;

@@ -6,31 +6,31 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 using Robust.Shared.Audio;
 using Content.Shared.Dataset;
 
-namespace Content.Shared.SS220.Gol;
+namespace Content.Shared.SS220.Goal;
 /// <summary>
 ///     Component required for entities to be able to do vocal emotions.
 /// </summary>
 [RegisterComponent]
 [AutoGenerateComponentState]
-public sealed partial class GolComponent : Component
+public sealed partial class GoalComponent : Component
 {
-    [DataField("golAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("goalAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     [AutoNetworkedField]
-    public string GolAction = "ActionGol";
+    public string GoalAction = "ActionGoal";
 
     [DataField("golActionEntity")]
     [AutoNetworkedField]
-    public EntityUid? GolActionEntity;
+    public EntityUid? GoalActionEntity;
 
     /// <summary>
     /// Sound played when toggling the <see cref="SelectedMode"/> for this gun.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier GolSound = new SoundPathSpecifier("/Audio/SS220/Voice/Gol/gooool.ogg");
+    public SoundSpecifier GoalSound = new SoundPathSpecifier("/Audio/SS220/Voice/Goal/gooool.ogg");
 
     [DataField]
-    public ProtoId<DatasetPrototype> GolPhrases = "golPhrases";
+    public ProtoId<DatasetPrototype> GoalPhrases = "goalPhrases";
 }
-public sealed partial class GolActionEvent : InstantActionEvent
+public sealed partial class GoalActionEvent : InstantActionEvent
 {
 }

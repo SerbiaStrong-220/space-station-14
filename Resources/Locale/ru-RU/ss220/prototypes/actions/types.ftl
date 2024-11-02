@@ -1,2 +1,2 @@
-ent-ActionGol = Гол
+ent-ActionGoal = Гол
     .desc = ГОООООООООООООООООООЛ!
