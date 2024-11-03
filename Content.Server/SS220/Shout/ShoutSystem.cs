@@ -1,20 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Actions;
+
 using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Content.Server.Chat.Systems;
-using Content.Shared.SS220.Goal;
+using Content.Shared.SS220.Shout;
 using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 
+namespace Content.Server.SS220.Shout;
 
-namespace Content.Server.SS220.Goal;
-
-public sealed class GolSystem : EntitySystem
+public sealed class ShoutSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -24,16 +22,9 @@ public sealed class GolSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<GoalComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<GoalComponent, GoalActionEvent>(OnGolAction);
+        SubscribeLocalEvent<ShoutActionEvent>(OnGolAction);
     }
-
-    private void OnMapInit(Entity<GoalComponent> uid, ref MapInitEvent args)
-    {
-        _actions.AddAction(uid, ref uid.Comp.GoalActionEntity, uid.Comp.GoalAction);
-    }
-    private void OnGolAction(Entity<GoalComponent> uid, ref GoalActionEvent args)
+    private void OnGolAction(ShoutActionEvent args)
     {
         if (args.Handled)
             return;
@@ -43,16 +34,18 @@ public sealed class GolSystem : EntitySystem
         if (!_actionBlocker.CanEmote(args.Performer))
             return;
 
-        if (args.GoalSound != null)
+        if (args.ShoutSound != null)
         {
-            _audio.PlayEntity(uid.Comp.GoalSound, uid, uid);
+            _audio.PlayEntity(args.ShoutSound, args.Performer, args.Performer);
         }
 
-        if (args.GoalPhrases != null)
+        if (args.ShoutPhrases != null)
         {
-            var placeholder = _proto.Index<DatasetPrototype>(args.GoalPhrases);
+            if (!_proto.TryIndex<DatasetPrototype>(args.ShoutPhrases, out var placeholder))//i dont like nested ifs, but idk how to make it more pretty
+                return;
+
             var emoteType = _random.Pick(placeholder.Values);
-            _chat.TrySendInGameICMessage(uid, emoteType, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
+            _chat.TrySendInGameICMessage(args.Performer, emoteType, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
         }
     }
 }

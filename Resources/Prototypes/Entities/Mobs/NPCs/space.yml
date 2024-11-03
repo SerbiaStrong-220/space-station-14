@@ -110,10 +110,11 @@
     interactFailureString: petting-failure-bear
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
-  - type: Goal #SS220 Goal
+  #SS220 Goal start
   - type: ActionGrant
     actions:
     - ActionGoal
+  #SS220 Goal end
 
 - type: entity
   id: MobBearSpaceSalvage
