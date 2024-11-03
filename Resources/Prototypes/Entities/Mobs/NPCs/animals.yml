@@ -3493,6 +3493,7 @@
     reformTime: 10
     popupText: diona-reform-attempt
     reformPrototype: MobDionaReformed
+  - type: IgnoreKudzu #ss220 kudzu nymph fix
 
 - type: entity
   parent: MobDionaNymph
