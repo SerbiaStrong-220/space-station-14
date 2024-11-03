@@ -26,9 +26,10 @@ public sealed class ShoutSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ShoutActionEvent>(OnGolAction);
+        SubscribeLocalEvent<ShoutActionEvent>(OnShoutAction);
     }
-    private void OnGolAction(ShoutActionEvent args)
+
+    private void OnShoutAction(ShoutActionEvent args)
     {
         if (args.Handled)
             return;
