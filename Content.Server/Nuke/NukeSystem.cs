@@ -167,6 +167,7 @@ public sealed class NukeSystem : EntitySystem
         if (component.Status == NukeStatus.ARMED)
             return;
 
+        /* ss220 nuke anchor fix start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/2194)
         // Nuke has to have the disk in it to be moved
         if (!component.DiskSlot.HasItem)
         {
@@ -174,6 +175,7 @@ public sealed class NukeSystem : EntitySystem
             _popups.PopupEntity(msg, uid, args.Actor, PopupType.MediumCaution);
             return;
         }
+           ss220 nuke anchor fix end */
 
         // manually set transform anchor (bypassing anchorable)
         // todo: it will break pullable system
