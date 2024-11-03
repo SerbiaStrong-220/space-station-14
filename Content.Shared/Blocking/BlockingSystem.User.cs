@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Item.ItemToggle.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -43,6 +44,11 @@ public sealed partial class BlockingSystem
     {
         if (TryComp<BlockingComponent>(component.BlockingItem, out var blocking))
         {
+            //ss220 shield damage fix start
+            if (TryComp<ItemToggleComponent>(component.BlockingItem, out var itemToggleComponent) && !itemToggleComponent.Activated)
+                return;
+            //ss220 shield damage fix end
+
             if (args.Damage.GetTotal() <= 0)
                 return;
 
