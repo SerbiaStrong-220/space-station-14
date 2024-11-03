@@ -6,7 +6,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Random;
 
-namespace Content.Shared.SS220.Weapons.Melee..Systems;
+namespace Content.Shared.SS220.Weapons.Melee.Systems;
 
 public sealed class SharedDisarmOnAttackSystem : EntitySystem
 {
@@ -17,38 +17,35 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<DisarmOnAttackComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<DisarmOnAttackComponent, WeaponAttackEvent>(OnAttackEvent);
-    }
 
-    private void OnAttackEvent(Entity<DisarmOnAttackComponent> ent, ref ComponentInit> args)
-    {
-        if(ent.Comp.HeavyAttackChance is null)
-            ent.Comp.HeavyAttackChance = ent.Comp.Chance;
+        SubscribeLocalEvent<DisarmOnAttackComponent, WeaponAttackEvent>(OnAttackEvent);
     }
 
     private void OnAttackEvent(Entity<DisarmOnAttackComponent> ent, ref WeaponAttackEvent args)
     {
+        bool chance;
+
         switch (args.Type)
         {
             case AttackType.HEAVY:
-                if (ent.Comp.DisarmOnHeavyAtack)
-                    DisarmOnHeavyAtack(ent, args.Target);
+                chance = _random.Prob(ent.Comp.HeavyAttackChance);
                 break;
+
             case AttackType.LIGHT:
-                if (entity.Comp.DisarmOnLightAtack)
-                    DisarmOnAtack(ent, args.Target);
+                chance = _random.Prob(ent.Comp.Chance);
+                break;
+
+            default:
+                chance = false;
                 break;
         }
-    }
 
-    private void DisarmOnAtack(Entity<DisarmOnAttackComponent> ent, EntityUid target)
-    {
-        foreach (var handOrInventoryEntity in _inventory.GetHandOrInventoryEntities(target, SlotFlags.POCKET))
+        if (!chance)
+            return;
+
+        foreach (var handOrInventoryEntity in _inventory.GetHandOrInventoryEntities(args.Target, SlotFlags.POCKET))
         {
-            if (!_random.Prob(ent.Comp.Chance))
-                continue;
-            _handsSystem.TryDisarm(target, handOrInventoryEntity);
+            _handsSystem.TryDrop(args.Target, handOrInventoryEntity);
         }
     }
 }
