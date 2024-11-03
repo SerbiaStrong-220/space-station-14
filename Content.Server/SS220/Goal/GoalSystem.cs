@@ -38,16 +38,21 @@ public sealed class GolSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_actionBlocker.CanEmote(uid))
+        args.Handled = true;
+
+        if (!_actionBlocker.CanEmote(args.Performer))
             return;
 
-        var placeholder = _proto.Index<DatasetPrototype>(uid.Comp.GoalPhrases);
+        if (args.GoalSound != null)
+        {
+            _audio.PlayEntity(uid.Comp.GoalSound, uid, uid);
+        }
 
-        var emoteType = _random.Pick(placeholder.Values);
-
-        _audio.PlayEntity(uid.Comp.GoalSound, uid, uid);
-        _chat.TrySendInGameICMessage(uid, emoteType, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
-
-        args.Handled = true;
+        if (args.GoalPhrases != null)
+        {
+            var placeholder = _proto.Index<DatasetPrototype>(args.GoalPhrases);
+            var emoteType = _random.Pick(placeholder.Values);
+            _chat.TrySendInGameICMessage(uid, emoteType, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
+        }
     }
 }

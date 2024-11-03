@@ -8,7 +8,7 @@ using Content.Shared.Dataset;
 
 namespace Content.Shared.SS220.Goal;
 /// <summary>
-///     Component required for entities to be able to do vocal emotions.
+/// Action raised to scream smth
 /// </summary>
 [RegisterComponent]
 [AutoGenerateComponentState]
@@ -22,9 +22,6 @@ public sealed partial class GoalComponent : Component
     [AutoNetworkedField]
     public EntityUid? GoalActionEntity;
 
-    /// <summary>
-    /// Sound played when toggling the <see cref="SelectedMode"/> for this gun.
-    /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SoundSpecifier GoalSound = new SoundPathSpecifier("/Audio/SS220/Voice/Goal/gooool.ogg");
 
@@ -33,4 +30,12 @@ public sealed partial class GoalComponent : Component
 }
 public sealed partial class GoalActionEvent : InstantActionEvent
 {
+    /// <summary>
+    /// Sound played when toggling
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public SoundSpecifier? GoalSound = new SoundPathSpecifier("/Audio/SS220/Voice/Goal/gooool.ogg");
+
+    [DataField]
+    public ProtoId<DatasetPrototype>? GoalPhrases;
 }

@@ -111,6 +111,9 @@
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
   - type: Goal #SS220 Goal
+  - type: ActionGrant
+    actions:
+    - ActionGoal
 
 - type: entity
   id: MobBearSpaceSalvage
