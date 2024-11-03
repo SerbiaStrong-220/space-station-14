@@ -18,7 +18,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: Body
     prototype: Diona
@@ -94,7 +94,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.325
         density: 300 #weighs more than humans because wood
         restitution: 0.0
         mask:
@@ -138,7 +138,7 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Diona
