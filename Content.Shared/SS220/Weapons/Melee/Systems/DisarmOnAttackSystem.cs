@@ -23,7 +23,7 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
 
     private void OnAttackEvent(Entity<DisarmOnAttackComponent> ent, ref WeaponAttackEvent args)
     {
-        bool chance;
+        bool chance = false; ;
 
         switch (args.Type)
         {
@@ -33,10 +33,6 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
 
             case AttackType.LIGHT:
                 chance = _random.Prob(ent.Comp.Chance);
-                break;
-
-            default:
-                chance = false;
                 break;
         }
 
