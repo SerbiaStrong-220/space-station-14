@@ -4,6 +4,7 @@ using Content.Shared.SS220.Weapons.Melee.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.CombatMode;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Weapons.Melee.Systems;
@@ -39,9 +40,7 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
         if (!chance)
             return;
 
-        foreach (var handOrInventoryEntity in _inventory.GetHandOrInventoryEntities(args.Target, SlotFlags.POCKET))
-        {
-            _handsSystem.TryDrop(args.Target, handOrInventoryEntity);
-        }
+        var ev = new DisarmedEvent { Target = args.Target, Source = args.User };
+        RaiseLocalEvent(args.Target, ev);
     }
 }
