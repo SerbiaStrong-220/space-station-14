@@ -69,11 +69,18 @@
 
 # Эскадрон Смерти
 - type: entity
-  parent: [ClothingShoesBootsMagBase, BaseJetpack]
+  parent: ClothingShoesBootsMagBase
   id: ClothingShoesBootsMagDQ
   name: Death Squad Magnetic Boots
   description: The most modern magnetic shoes in recognizable colors.
   components:
+  - type: InputMover
+    toParent: true
+  - type: MovementSpeedModifier
+    weightlessAcceleration: 1.2
+    weightlessFriction: 0.5
+    weightlessModifier: 1.5
+  - type: CanMoveInAir
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
     state: icon
@@ -90,3 +97,9 @@
       moles:
         - 1.153853429 # oxygen
         - 1.153853429 # nitrogen
+  - type: UserInterface
+    interfaces:
+      enum.SharedGasTankUiKey.Key:
+        type: GasTankBoundUserInterface
+  - type: Jetpack
+    moleUsage: 0.00085

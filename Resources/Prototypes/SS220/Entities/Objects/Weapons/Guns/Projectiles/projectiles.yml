@@ -173,38 +173,6 @@
     energy: 0.5
 
 # Death Squad
-- type: hitscan
-  id: Pulsekill
-  damage:
-    types:
-      Heat: 30
-      Structural: 200
-  muzzleFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: muzzle_blue
-  travelFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: beam_blue
-  impactFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: impact_blue
-
-- type: hitscan
-  id: PulseDESTROY
-  damage:
-    types:
-      Heat: 60
-      Structural: 600
-  muzzleFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: muzzle_blue
-  travelFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: beam_blue
-  impactFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-    state: impact_blue
-
 - type: entity
   name: laser bolt
   id: BulletLaserDestroy
@@ -215,7 +183,8 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 22
+        Heat: 44
+        Structural: 800
   - type: ProjectileSpread
     proto: BulletLaser
     count: 5
@@ -232,7 +201,7 @@
     layers:
       - state: greenlaser
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
+    impactEffect: BulletImpactEffectGreenDisabler
     damage:
       types:
         Blunt: -10
@@ -246,3 +215,22 @@
     proto: BulletLaserHeal
     count: 3
     spread: 10
+
+- type: entity
+  id: BulletImpactEffectGreenDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: green
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
