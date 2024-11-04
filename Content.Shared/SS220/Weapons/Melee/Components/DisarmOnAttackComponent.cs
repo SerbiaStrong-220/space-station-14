@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Weapons.Melee.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class DisarmOnAttackComponent : Component
 {
-    //Should be etween 0 and 1
+    //Should be between 0 and 1
     [DataField(required: true)]
     public float Chance = 0;
 
