@@ -24,7 +24,7 @@
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             #Law
-            IAA: [ 1, 1 ]
+            IAA: [ 2, 2 ]
             Magistrate: [1, 1]
             Lawyer: [ 3, 3 ]
             #Security
