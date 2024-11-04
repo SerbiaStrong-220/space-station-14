@@ -122,7 +122,7 @@
           department: Security
           time: 54000
       name: Оперативник Эскадрона Смерти
-      description: "Офицер элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+      description: "Оперативник элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
     - type: Loadout
       prototypes: [ DeathSquadOperativeGear ]
     - type: PassiveDamage
@@ -195,16 +195,21 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadCommanderPDA
-    pocket1: DoorRemoteCommand
+    pocket1: EnergySword
+    pocket2: EnergyShield
 
 - type: startingGear
   id: DeathSquadHealerGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadHealerPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield
 
 - type: startingGear
   id: DeathSquadOperativeGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield

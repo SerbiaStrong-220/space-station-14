@@ -30,6 +30,8 @@
     - id: Chainsword
     - id: ClothingOuterHardsuitDeathsquadCommander
     - id: ClothingBackpackDeathSquadOperativeFilled
+    - id: MagazineMagnumSubMachineGunSP-91-RC
+      amount: 2
 
 - type: entity
   id: LockerDeathsquadSpecialistFilled
