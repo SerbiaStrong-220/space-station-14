@@ -168,6 +168,7 @@
   id: ClothingMaskClownPennywise
   name: dance clown mask
   description: We assure you, the owner of this mask feeds only on positive emotions!
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Mask/clown_pennywise.rsi

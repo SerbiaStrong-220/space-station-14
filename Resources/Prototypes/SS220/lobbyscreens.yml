@@ -29,3 +29,11 @@
 - type: lobbyBackground
   id: SecGraduating
   background: /Textures/SS220/LobbyScreens/secgraduating.png
+
+- type: lobbyBackground
+  id: Sevastopol
+  background: /Textures/SS220/LobbyScreens/Sevastopol.png
+  
+- type: lobbyBackground
+  id: CardShowdown
+  background: /Textures/SS220/LobbyScreens/Card-showdown.png

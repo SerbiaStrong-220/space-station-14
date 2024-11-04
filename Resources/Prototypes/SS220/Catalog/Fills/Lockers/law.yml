@@ -13,6 +13,7 @@
     - id: ClothingEyesGlassesCommand
     - id: Telescopichka
     - id: BoxEncryptionKeyLaw
+    - id: BoxTapeRecorder
 
 - type: entity
   id: LockerMagistrateFilled

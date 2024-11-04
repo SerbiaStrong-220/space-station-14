@@ -210,6 +210,9 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (!comp.MaterializeActionEntity.HasValue)
             _actions.AddAction(uid, ref comp.MaterializeActionEntity, comp.MaterializeAction);
 
+        if (!comp.BloodMistActionEntity.HasValue)
+            _actions.AddAction(uid, ref comp.BloodMistActionEntity, comp.BloodMistAction);
+
         UpdateAlert(uid, comp);
     }
 
@@ -221,6 +224,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         _actions.RemoveAction(uid, comp.StunActionEntity);
         _actions.RemoveAction(uid, comp.ConsumeActionEntity);
         _actions.RemoveAction(uid, comp.MaterializeActionEntity);
+        _actions.RemoveAction(uid, comp.BloodMistActionEntity);
     }
 
     protected override void DoStunAbility(EntityUid uid, DarkReaperComponent comp)

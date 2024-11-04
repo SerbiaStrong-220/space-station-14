@@ -98,6 +98,11 @@
         weight: 98
       - id: SprayBottleWater #It's just budget cut after budget cut man
         weight: 2
+    #ss220 InflatableWall-for-fire-lockers begin
+    - id: InflatableWallStack1
+    - id: InflatableWallStack1
+      prob: 0.30
+    #ss220 InflatableWall-for-fire-lockers end
 
 - type: entity
   id: ClosetFireFilled

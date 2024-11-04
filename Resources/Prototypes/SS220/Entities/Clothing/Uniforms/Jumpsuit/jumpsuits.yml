@@ -49,6 +49,7 @@
   id: ClothingUniformWhiteJumpsuitCaptain
   name: белая униформа офицера
   description: Это белый костюм с золотыми украшениями, на погонах одна золотая звезда - "Майор".
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
@@ -91,6 +92,7 @@
   id: ClothingUniformJumpsuitNTR
   name: nanotrasen representative uniform
   description: The uniform of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr_uniform.rsi
@@ -102,6 +104,7 @@
   id: ClothingUniformJumpsuitTrustedLawyer
   name: uniform trusted lawyer NanoTrasen
   description: A chic suit for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/trusted_lawyer.rsi
@@ -141,11 +144,24 @@
   id: ClothingUniformJumpsuitClownPennywise
   name: uniform dance clown
   description: A uniform for a comedy master who feeds on emotions.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown_pennywise.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitClassicClowns
+  name: classic clown trousers
+  description: An older jumpsuit design, loved by many Honks. Unisex!
+  suffix: Classic, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clownypants.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/clownypants.rsi
 
   # Ботаник
 - type: entity
@@ -208,6 +224,7 @@
   id: ClothingUniformJumpsuitDruid #SS220 druid loadout
   name: druid jupmsuit
   description: Convenient and functional, it helps researchers unlock the mysteries of nature.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/druid_jumpsuit.rsi
@@ -254,7 +271,7 @@
   id: ClothingUniformJumpsuitBartenderNanotrasen
   name: униформа заслуженного бармена NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
@@ -267,6 +284,7 @@
   id: ClothingUniformJumpsuitJanitorBlue
   name: blue janitor's suit
   description: The costume of the mysterious cleaner.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
@@ -278,6 +296,7 @@
   id: ClothingUniformJumpsuitOrangeJanitor
   name: фиолетовая униформа
   description: Фиолетовая униформа, но с оранжевыми штанами на подтяжках.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/orangejanitor.rsi
@@ -337,7 +356,7 @@
   id: ClothingUniformJumpsuitChefNanotrasen
   name: униформа заслуженного шеф-повара NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
-  suffix: Не маппить, Сеньор
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Chef/jumpsuit/chef_nt.rsi
@@ -364,6 +383,7 @@
   id: ClothingUniformJumpsuitFeldsher
   name: uniform feldsher
   description: Just don't be offended, are you a feldsher or a real doctor?
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
@@ -376,6 +396,7 @@
   id: ClothingUniformJumpsuitMilitaryFeldsher
   name: uniform military feldsher
   description: This is not a red color at all..
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_military_feldsher.rsi
@@ -391,6 +412,7 @@
   id: ClothingUniformJumpsuitCargonovich
   name: cargonovich
   description: You should also bring a burst gas barrel...
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/cargonovich.rsi
@@ -402,6 +424,7 @@
   id: ClothingUniformJumpsuitWarehouseman
   name: the overalls of the warehouse manager
   description: Practical, comfortable, movement-free and, most importantly, stylish jumpsuit. You have bad memories of your former boss with him.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/qm_warehouseman.rsi
@@ -414,6 +437,7 @@
   id: ClothingUniformJumpsuitFlannelSalvage
   name: void salvage clothes
   description: A country-style shirt worn by an experienced supply department worker. It is actually a violation of the uniform rules, but the corporation turns a blind eye to it because of the benefit it brings to the wearer.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/flannel_salvage.rsi
@@ -425,6 +449,7 @@
   id: ClothingUniformJumpsuitExpeditor
   name: expeditor uniform
   description: Comfortable, practical and loose expeditor's uniform. Feel the space breeze, or rather the lack thereof, with every tip of your left and right hand.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
@@ -440,6 +465,7 @@
   id: ClothingUniformJumpsuitChiefEngineerDark
   name: dark uniform chief engineer
   description: Dark uniform for years of service as head of the engineering department.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/CE_dark/jumpsuit/ce_dark.rsi
@@ -451,6 +477,7 @@
   id: ClothingUniformJumpsuitChiefEngineerTurtleDark
   name: dark chief engineer's turtleneck
   description: Dark turtleneck designed specifically for work in conditions of the engineering department.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpsuit/ce_dark_turtle.rsi
@@ -489,6 +516,7 @@
   id: ClothingUniformJumpsuitBard #SS220 bard loadout
   name: bard jumpsuit
   description: Comfortable clothes for long concerts.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/bard.rsi
@@ -500,6 +528,7 @@
   id: ClothingUniformJumpsuitRDAlt
   name: shirt of a desperate scientist
   description: neat blue shirt with suspenders. It gives you faith in peace through nuclear deterrence.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/RD.rsi
@@ -511,6 +540,7 @@
   id: ClothingUniformJumpsuitVaas
   name: vaas suit
   description: A red T-shirt with the badge of an security officer. Do you know the definition of Insanity?
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/vaas.rsi

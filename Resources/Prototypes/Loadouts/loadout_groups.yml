@@ -28,6 +28,25 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  - TowelColorBlack
+  - TowelColorWhite
+  # SS220 Too many towels begin
+#  - TowelColorDarkBlue
+#  - TowelColorDarkGreen
+#  - TowelColorGold
+#  - TowelColorGray
+#  - TowelColorGreen
+#  - TowelColorLightBlue
+#  - TowelColorLightBrown
+#  - TowelColorMaroon
+#  - TowelColorMime
+#  - TowelColorOrange
+#  - TowelColorPurple
+#  - TowelColorRed
+#  - TowelColorSilver
+#  - TowelColorLightBlue
+#  - TowelColorYellow
+  # SS220 Too many towels begin end
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
   - ClothingFootWraps
@@ -531,6 +550,7 @@
   - ClownPennywiseJumpsuit #SS220-Clown-Pennywise
   - JumpsuitMuzhik #SS220-Two Floppa Iteration
   - JumpsuitGold #SS220-Two Floppa Iteration
+  - ClownJumpsuitClassic #SS220-ClassicJumpsuit
 
 - type: loadoutGroup
   id: ClownBackpack
