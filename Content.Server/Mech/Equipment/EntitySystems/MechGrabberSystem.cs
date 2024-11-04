@@ -127,7 +127,6 @@ public sealed class MechGrabberSystem : EntitySystem
     {
         if (args.Handled)
             return;
-
         var target = args.Target;
 
         //ss220 mech grabb fix start
