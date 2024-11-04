@@ -131,7 +131,7 @@ public sealed class MechGrabberSystem : EntitySystem
         var target = args.Target;
 
         //ss220 mech grabb fix start
-        if(MetaData(args.User).EntityName == MetaData(target).EntityName)
+        if (HasComp<MechComponent>(target))
             return;
         //ss220 mech grabb fix end
 
