@@ -85,7 +85,7 @@
         type: DisposalUnitBoundUserInterface
   - type: RatKingRummageable
   - type: RequireProjectileTarget
-  - type: StationAiWhitelist
+  - type: StationAiWhitelist #SS220 Disposal Unit AI interaction fix
 
 # SS220 rnd-transport
 - type: entity
