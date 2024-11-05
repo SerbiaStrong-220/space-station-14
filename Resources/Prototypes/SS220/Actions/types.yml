@@ -17,7 +17,7 @@
   components:
   - type: InstantAction
     useDelay: 20
-    icon: SS220/Interface/Actions/goal.png
+    icon: { sprite: SS220/Interface/Actions/actions_meme.rsi.rsi, state: goal }
     event: !type:ShoutActionEvent
       shoutSound:
         path: /Audio/SS220/Voice/Goal/gooool.ogg
