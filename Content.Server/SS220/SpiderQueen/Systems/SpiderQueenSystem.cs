@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
+using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -123,8 +124,11 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         foreach (var proto in getProtos)
         {
-            Spawn(proto, targetMapCords);
+            var ent = Spawn(proto, targetMapCords);
             targetMapCords = targetMapCords.Offset(args.Offset);
+
+            if (TryComp<SpiderEggComponent>(ent, out var spiderEgg))
+                spiderEgg.EggOwner = user;
         }
 
         if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))

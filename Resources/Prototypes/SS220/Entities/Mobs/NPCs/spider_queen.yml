@@ -127,6 +127,9 @@
   id: BaseMobSpiderServant
   abstract: true
   components:
+  - type: HTN
+    rootTask:
+      task: SpiderServantCompound
   - type: Tag
     tags:
       - CannotSuicide
