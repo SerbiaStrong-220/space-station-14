@@ -11,7 +11,6 @@
                 sprite: Objects/Misc/bureaucracy.rsi
                 state: paper
               name: Лист бумаги
-              amount: 1
               doAfter: 2
     - node: envelope
       entity: Envelope
