@@ -4,6 +4,10 @@
   id: BaseDice
   components:
   - type: Dice
+    sound:
+      collection: Dice
+      params:
+          variation: 0.050
   - type: UseDelay
   - type: Sprite
     sprite: Objects/Fun/dice.rsi
