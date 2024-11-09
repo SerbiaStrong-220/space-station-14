@@ -529,6 +529,22 @@
     - RandomHumanoidVisitorHOP
     rareChance: 0.03
 
+#SS220 LostSoulsRevive begin
+- type: entity
+  name: visiting tourits
+  id: VisitorTouristSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+  - type: RandomSpawner
+    prototypes:
+    - RandomHumanoidVisitorTourist
+#SS220 LostSoulsRevive end
+
 - type: entity
   name: visiting bartender spawner
   id: VisitorBartenderSpawner

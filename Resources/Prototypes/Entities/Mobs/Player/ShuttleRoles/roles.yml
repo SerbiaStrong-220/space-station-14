@@ -319,6 +319,18 @@
     - type: RandomHumanoidSpawner
       settings: VisitorBartender
 
+#SS220 LostSoulsRevive begin
+- type: entity
+  id: RandomHumanoidVisitorTourist
+  name: visiting tourist ghost role
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: passenger
+    - type: RandomHumanoidSpawner
+      settings: VisitorTourist
+#SS220 LostSoulsRevive end
+
 - type: entity
   id: RandomHumanoidVisitorBotanist
   name: visiting botanist ghost role
