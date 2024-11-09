@@ -1,4 +1,5 @@
 job-name-magistrate = магистрат
+job-name-tourist = Турист
 
 job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
