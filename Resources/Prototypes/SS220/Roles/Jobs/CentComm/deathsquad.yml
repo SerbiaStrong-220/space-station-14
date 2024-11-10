@@ -10,7 +10,7 @@
   canBeAntag: false
   accessGroups:
   - AllAccess
-  access:
+#  access: #SS220-DeathSquad Update
   - CentralCommand
 
 - type: job
@@ -25,5 +25,5 @@
   canBeAntag: false
   accessGroups:
   - AllAccess
-  access:
+#  access: #SS220-DeathSquad Update
   - CentralCommand

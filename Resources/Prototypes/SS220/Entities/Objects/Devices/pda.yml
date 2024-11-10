@@ -86,7 +86,7 @@
     state: pda-magistrate
 
 - type: entity
-  parent:  DeathsquadPDA
+  parent: DeathsquadPDA
   id: DeathsquadCommanderPDA
   suffix: Death Squad Commander
   components:
@@ -95,7 +95,7 @@
     state: pda-deathsquad
 
 - type: entity
-  parent:  DeathsquadPDA
+  parent: DeathsquadPDA
   id: DeathsquadHealerPDA
   suffix: Death Squad Healer
   components:

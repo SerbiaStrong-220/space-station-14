@@ -165,6 +165,7 @@
   parent: IDCardStandard
   id: CentcomIDCardDeathsquadOperative
   name: ID карта оперативника Эскадрона Смерти
+  description: Карта, необходимая для доступа в различные области станции.
   components:
   - type: Sprite
     layers:
