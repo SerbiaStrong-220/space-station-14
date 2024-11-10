@@ -94,14 +94,14 @@
       ignoreResistances: true
       damage:
         types:
-          Piercing: -2
-          Blunt: -1
-          Slash: -1
-          Heat: -2
-          Cold: -1
+          Piercing: -1.5
+          Blunt: -0.75
+          Slash: -0.75
+          Heat: -1.5
+          Cold: -0.75
         groups:
-          Toxin: -6
-          Airloss: -3
+          Toxin: -5
+          Airloss: -2.5
       ignoreBlacklist:
         tags:
         - SpiderQueen
@@ -134,14 +134,14 @@
       ignoreResistances: true
       damage:
         types:
-          Piercing: -4
-          Blunt: -2
-          Slash: -2
-          Heat: -4
-          Cold: -2
+          Piercing: -3
+          Blunt: -1.5
+          Slash: -1.5
+          Heat: -3
+          Cold: -1.5
         groups:
-          Toxin: -10
-          Airloss: -6
+          Toxin: -8
+          Airloss: -4
       ignoreBlacklist:
         tags:
         - SpiderQueen

@@ -228,7 +228,7 @@
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
-      state: wall_spawn
+      state: tile_spawn
     event: !type:SpiderTileSpawnActionEvent
       prototype: FloorWebTile
       doAfter: 6
