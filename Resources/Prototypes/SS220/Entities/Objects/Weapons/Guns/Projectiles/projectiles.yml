@@ -171,3 +171,58 @@
     radius: 3.5
     color: blue
     energy: 0.5
+
+#Svarshik's toy guns!
+- type: entity
+  id: BulletGrenadeBlastToy
+  name: blast grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # a ~2 tile radius
+    intensitySlope: 0.5
+    maxIntensity: 0.01
+    canCreateVacuum: false #extra safety y'know?
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeFragToy
+  name: frag grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # about a ~6 tile radius
+    intensitySlope: 0.3
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeFlashToy
+  name: flash grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: SpawnOnTrigger
+    proto: GrenadeFlashEffect
+  - type: ActiveTimerTrigger
+    timeRemaining: 0.3
+  - type: DeleteOnTrigger

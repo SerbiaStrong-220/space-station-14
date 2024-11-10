@@ -1,0 +1,113 @@
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledShotgunToy
+  name: Bulldog bundle
+  description: "Lean and mean: Contains the popular Bulldog Shotgun, a 12g beanbag drum and 3 12g buckshot drums." #, and a pair of Thermal Imaging Goggles.
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponShotgunBulldogToy
+      - id: MagazineShotgunCaps
+        amount: 6
+      - id: MagazineShotgunBeanbagCaps
+        amount: 3 #triple the fun
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledSMGToy
+  name: C-20r bundle
+  description: "Old faithful: The classic C-20r Submachine Gun, bundled with six magazines for best pranks!"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponSubMachineGunC20rToy
+      - id: MagazinePistolSubMachineGunCaps
+        amount: 6 #more fun :p
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledRevolverToy
+  name: Python bundle
+  description: "Go loud and proud with a fully loaded Magnum Python, bundled with two speed loaders."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRevolverPythonToy
+      - id: SpeedLoaderCap
+        amount: 2
+      - id: SpeedLoaderFoam
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledLMGToy
+  name: L6 Saw bundle
+  description: "More dakka: The iconic L6 lightmachinegun, bundled with 2 box magazines."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponLightMachineGunL6Toy
+      - id: MagazineLightRifleBoxCaps
+        amount: 2
+      - id: MagazineFoamBox
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+  name: China-Lake bundle
+  description: "An old China-Lake grenade launcher bundled with 19 rounds of various honking capability."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponLauncherChinaLakeToy
+      - id: GrenadeBlastToy
+        amount: 6 #more fun >:D
+      - id: GrenadeFragToy
+        amount: 6
+      - id: GrenadeFlashToy
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateAmmo
+  id: ClothingBackpackDuffelSyndicateAmmoFilledToy
+  name: ammo bundle
+  description: "Reloading! Contains 4 magazines for the C-20r, 4 drums for the Bulldog, and 2 ammo boxes for the L6 SAW."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: MagazinePistolSubMachineGunCaps
+        amount: 4
+      - id: MagazineShotgunCaps
+        amount: 4
+      - id: MagazineLightRifleBoxCaps
+        amount: 2
+      - id: GrenadeBlastToy
+        amount: 3
+      - id: GrenadeFragToy
+        amount: 3
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateDecoyKitFilledToy
+  name: decoy bundle
+  description: "Contains distractions, both auditory and visual. Smell coming soon."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: BalloonOperative
+      - id: BalloonAgent
+      - id: BalloonElite
+      - id: BalloonJuggernaut
+      - id: BalloonCommander
+      - id: SnapPopBox
+      - id: GrenadeDummy
+        amount: 2
+      - id: SyndieTrickyBomb
+        amount: 2
