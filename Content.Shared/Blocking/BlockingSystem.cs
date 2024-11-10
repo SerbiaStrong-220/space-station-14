@@ -7,6 +7,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -188,6 +189,11 @@ public sealed partial class BlockingSystem : EntitySystem
                     }
                 }
             }
+
+            //ss220 fix raise shield fix start
+            if (TryComp<ItemToggleComponent>(item, out var itemToggleComponent) && !itemToggleComponent.Activated)
+                return false;
+            //ss220 fix raise shield fix end
 
             //Don't allow someone to block if they're somehow not anchored.
             _transformSystem.AnchorEntity(user, xform);
