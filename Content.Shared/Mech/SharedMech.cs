@@ -60,3 +60,11 @@ public sealed partial class MechOpenUiEvent : InstantActionEvent
 public sealed partial class MechEjectPilotEvent : InstantActionEvent
 {
 }
+
+public sealed partial class MechClothingOpenUiEvent : InstantActionEvent
+{
+}
+
+public sealed partial class MechClothingGrabEvent : EntityTargetActionEvent
+{
+}

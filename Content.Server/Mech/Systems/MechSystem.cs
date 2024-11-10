@@ -50,6 +50,7 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<MechComponent, MechOpenUiEvent>(OnOpenUi);
+        SubscribeLocalEvent<MechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi);
         SubscribeLocalEvent<MechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<MechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<MechComponent, MechExitEvent>(OnMechExit);
@@ -161,6 +162,11 @@ public sealed partial class MechSystem : SharedMechSystem
     {
         args.Handled = true;
         ToggleMechUi(uid, component);
+    }
+    private void OnOpenClothingUi(Entity<MechComponent> ent, ref MechClothingOpenUiEvent args)
+    {
+        args.Handled = true;
+        ToggleMechClothingUi(ent.Owner, args.Performer, ent.Comp);
     }
 
     private void OnToolUseAttempt(EntityUid uid, MechPilotComponent component, ref ToolUserAttemptUseEvent args)
@@ -279,6 +285,18 @@ public sealed partial class MechSystem : SharedMechSystem
         _ui.TryToggleUi(uid, MechUiKey.Key, actor.PlayerSession);
         UpdateUserInterface(uid, component);
     }
+
+    private void ToggleMechClothingUi(EntityUid entOwner, EntityUid argsPerformer, MechComponent? entComp = null)
+    {
+        if (!Resolve(entOwner, ref entComp))
+            return;
+        if (!TryComp<ActorComponent>(argsPerformer, out var actor))
+            return;
+
+        _ui.TryToggleUi(entOwner, MechUiKey.Key, actor.PlayerSession);
+        UpdateUserInterface(entOwner, entComp);
+    }
+
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, MechComponent component, T args) where T : MechEquipmentUiMessage
     {

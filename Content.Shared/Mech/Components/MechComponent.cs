@@ -144,6 +144,10 @@ public sealed partial class MechComponent : Component
     public EntProtoId MechUiAction = "ActionMechOpenUI";
     [DataField]
     public EntProtoId MechEjectAction = "ActionMechEject";
+    [DataField]
+    public EntProtoId MechClothingUiAction= "ActionMechClothingOpenUI";
+    [DataField]
+    public EntProtoId MechClothingGrabAction= "ActionMechClothingGrab";
     #endregion
 
     #region Visualizer States
@@ -158,4 +162,7 @@ public sealed partial class MechComponent : Component
     [DataField] public EntityUid? MechCycleActionEntity;
     [DataField] public EntityUid? MechUiActionEntity;
     [DataField] public EntityUid? MechEjectActionEntity;
+    [DataField] public EntityUid? MechClothingUiActionEntity;
+    [DataField] public EntityUid? MechClothingGrabActionEntity;
+
 }

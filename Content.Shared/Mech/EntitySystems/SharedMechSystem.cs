@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Clothing;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -20,6 +21,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.MechClothing;
+
 
 namespace Content.Shared.Mech.EntitySystems;
 
@@ -43,6 +46,8 @@ public abstract class SharedMechSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
+        SubscribeLocalEvent<MechComponent, ClothingGotEquippedEvent>(OnEquip);
+        SubscribeLocalEvent<MechComponent, ClothingGotUnequippedEvent>(OnUnequip);
         SubscribeLocalEvent<MechComponent, MechToggleEquipmentEvent>(OnToggleEquipmentAction);
         SubscribeLocalEvent<MechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
         SubscribeLocalEvent<MechComponent, UserActivateInWorldEvent>(RelayInteractionEvent);
@@ -55,6 +60,26 @@ public abstract class SharedMechSystem : EntitySystem
         SubscribeLocalEvent<MechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
         SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
         SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
+    }
+
+    private void OnEquip(Entity<MechComponent> ent, ref ClothingGotEquippedEvent args)
+    {
+        EnsureComp<MechPilotComponent>(args.Wearer);
+        EnsureComp<MechClothingComponent>(args.Wearer);
+
+        _actions.AddAction(args.Wearer, ref ent.Comp.MechCycleActionEntity, ent.Comp.MechCycleAction, ent.Owner);
+        _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingUiActionEntity, ent.Comp.MechClothingUiAction, ent.Owner);
+        _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingGrabActionEntity, ent.Comp.MechClothingGrabAction);
+    }
+
+    private void OnUnequip(Entity<MechComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        RemComp<MechPilotComponent>(args.Wearer);
+
+        _actions.RemoveProvidedActions(args.Wearer, ent.Owner);
     }
 
     private void OnToggleEquipmentAction(EntityUid uid, MechComponent component, MechToggleEquipmentEvent args)

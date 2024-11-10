@@ -284,6 +284,15 @@
   - type: ExplosionResistance
     damageCoefficient: 0.65
   - type: GroupExamine
+  - type: ContainerContainer
+    containers:
+      mech-equipment-container: !type:Container
+      mech-battery-slot: !type:ContainerSlot
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: MechBoundUserInterface
+  - type: DoAfter
 
 - type: entity
   parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
