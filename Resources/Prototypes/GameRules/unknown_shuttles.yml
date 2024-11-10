@@ -2,13 +2,13 @@
 
 #SS220-LostSoulsRevive begin
 - type: entityTable
-- id: UnknownShuttlesFriendlyTable
-- table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-   children:
-   - id: UnknownShuttleCargoLost
-   - id: UnknownShuttleTravelingCuisine
-   - id: UnknownShuttleDisasterEvacPod
-   - id: UnknownShuttleHonki
+  id: UnknownShuttlesFriendlyTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - id: UnknownShuttleCargoLost
+    - id: UnknownShuttleTravelingCuisine
+    - id: UnknownShuttleDisasterEvac  Pod
+    - id: UnknownShuttleHonki
 #SS220-LostSoulsRevive end
 #    - id: UnknownShuttleNTQuark
 #    - id: UnknownShuttleCruiser
