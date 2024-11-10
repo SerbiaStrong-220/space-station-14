@@ -91,13 +91,17 @@
       sprintSpeedModifier: 0.25
     - type: DamageContacts
       standStillTime: 3
+      ignoreResistances: true
       damage:
         types:
-          Bloodloss: -1
+          Piercing: -2
+          Blunt: -1
+          Slash: -1
+          Heat: -2
+          Cold: -1
         groups:
-          Brute: -0.5
-          Toxin: -0.5
-          Burn: -0.5
+          Toxin: -6
+          Airloss: -3
       ignoreBlacklist:
         tags:
         - SpiderQueen
@@ -127,14 +131,17 @@
       sprintSpeedModifier: 0.15
     - type: DamageContacts
       standStillTime: 3
+      ignoreResistances: true
       damage:
         types:
-          Bloodloss: -1.5
+          Piercing: -4
+          Blunt: -2
+          Slash: -2
+          Heat: -4
+          Cold: -2
         groups:
-          Brute: -1
-          Toxin: -0.5
-          Airloss: -1
-          Burn: -1
+          Toxin: -10
+          Airloss: -6
       ignoreBlacklist:
         tags:
         - SpiderQueen
