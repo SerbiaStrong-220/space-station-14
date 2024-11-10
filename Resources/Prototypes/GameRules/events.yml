@@ -37,6 +37,7 @@
     - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     # - id: SpiderQueenSpawn #SS220 spider queen midround event
+    - id: LoneOpsSpawn
 
 - type: entity
   id: BaseStationEvent
@@ -483,7 +484,7 @@
     duration: 1
   - type: RuleGrids
   - type: LoadMapRule
-    preloadedGrid: ShuttleStriker
+    mapPath: /Maps/Shuttles/ShuttleEvent/striker.yml
   - type: NukeopsRule
     roundEndBehavior: Nothing
     warTcAmountPerNukie: 100 # SS220 Lone-Ops-War

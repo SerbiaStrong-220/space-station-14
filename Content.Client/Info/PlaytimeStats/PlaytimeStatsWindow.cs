@@ -104,7 +104,7 @@ public sealed partial class PlaytimeStatsWindow : FancyWindow
     {
         var overallPlaytime = _jobRequirementsManager.FetchOverallPlaytime();
 
-        OverallPlaytimeLabel.Text = Loc.GetString("ui-playtime-overall", ("time", overallPlaytime)); // SS220 Playtime Format Fix
+        OverallPlaytimeLabel.Text = Loc.GetString("ui-playtime-overall", ("time", overallPlaytime));
 
         var rolePlaytimes = _jobRequirementsManager.FetchPlaytimeByRoles();
 

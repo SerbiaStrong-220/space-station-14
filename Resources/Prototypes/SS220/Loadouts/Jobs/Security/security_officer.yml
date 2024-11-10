@@ -103,11 +103,6 @@
 
 # Neck
 - type: loadout
-  id: Headphones
-  equipment:
-    neck: ClothingNeckHeadphones
-
-- type: loadout
   id: ProtectGear
   equipment:
     neck: ClothingNeckProtectBundle

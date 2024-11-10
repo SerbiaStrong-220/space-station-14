@@ -40,7 +40,7 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(culture, "LOC", FormatLoc);
             _loc.AddFunction(culture, "NATURALFIXED", FormatNaturalFixed);
             _loc.AddFunction(culture, "NATURALPERCENT", FormatNaturalPercent);
-            _loc.AddFunction(culture, "PLAYTIME", FormatPlaytime); // SS220 Playtime Format Fix
+            _loc.AddFunction(culture, "PLAYTIME", FormatPlaytime);
 
 
             /*
@@ -192,7 +192,6 @@ namespace Content.Shared.Localizations
             return Loc.GetString($"zzzz-fmt-direction-{dir.ToString()}");
         }
 
-        // SS220 Playtime Format Fix begin
         /// <summary>
         /// Formats playtime as hours and minutes.
         /// </summary>
@@ -202,7 +201,6 @@ namespace Content.Shared.Localizations
             var minutes = time.Minutes;
             return Loc.GetString($"zzzz-fmt-playtime", ("hours", hours), ("minutes", minutes));
         }
-        // SS220 Playtime Format Fix end
 
         private static ILocValue FormatLoc(LocArgs args)
         {
@@ -293,7 +291,6 @@ namespace Content.Shared.Localizations
             return new LocValueString(res);
         }
 
-        // SS220 Playtime Format Fix begin
         private static ILocValue FormatPlaytime(LocArgs args)
         {
             var time = TimeSpan.Zero;
@@ -303,6 +300,5 @@ namespace Content.Shared.Localizations
             }
             return new LocValueString(FormatPlaytime(time));
         }
-        // SS220 Playtime Format Fix end
     }
 }
