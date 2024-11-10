@@ -12,6 +12,7 @@
     - CanPilot
     - BypassInteractionRangeChecks
     - BypassDropChecks
+    - NoConsoleSound
   - type: Input
     context: "aghost"
   - type: Ghost
@@ -127,7 +128,7 @@
     icon: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -7
+    priority: -6
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
 
 - type: entity
@@ -151,7 +152,7 @@
     icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -9
+    priority: -8
     event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
 
 - type: entity
@@ -163,5 +164,5 @@
     icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -8
+    priority: -7
     event: !type:ToggleIntrinsicUIEvent { key: enum.GeneralStationRecordConsoleKey.Key }
