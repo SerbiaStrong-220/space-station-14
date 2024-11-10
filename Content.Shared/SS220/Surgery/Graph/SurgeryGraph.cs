@@ -1,4 +1,4 @@
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// Original code from construction graph all edits under © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
@@ -20,6 +20,11 @@ public sealed partial class SurgeryGraphPrototype : IPrototype
 
     [DataField("graph", priority: 0)]
     private List<SurgeryGraphNode> _graph = new();
+
+    /// <summary>
+    /// For debugging purposes
+    /// </summary>
+    public IReadOnlyList<SurgeryGraphNode> Nodes => _graph;
 
 
     public bool GetStartNode([NotNullWhen(true)] out SurgeryGraphNode? startNode)
@@ -43,18 +48,18 @@ public sealed partial class SurgeryGraphPrototype : IPrototype
 
         return true;
     }
-    public bool TryGetNode(string target, [NotNullWhen(true)] out SurgeryGraphNode? findedNode)
+    public bool TryGetNode(string target, [NotNullWhen(true)] out SurgeryGraphNode? foundNode)
     {
-        findedNode = null;
+        foundNode = null;
         foreach (var node in _graph)
         {
             if (node.Name == target)
             {
-                findedNode = node;
+                foundNode = node;
                 break;
             }
         }
 
-        return findedNode != null;
+        return foundNode != null;
     }
 }

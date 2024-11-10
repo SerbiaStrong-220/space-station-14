@@ -1,0 +1,44 @@
+- files: ["scalpel.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+
+- files: ["incision.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+  
+- files: ["seal_wound.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+  
+  - files: ["cautery.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+  
+  - files: ["organ.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+  
+  - files: ["hemostat.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+  
+  - files: ["saw.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+  
+  - files: ["retractor.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205
+
+  - files: ["retract_skin.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205

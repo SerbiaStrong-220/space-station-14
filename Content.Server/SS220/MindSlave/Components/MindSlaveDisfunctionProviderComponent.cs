@@ -19,4 +19,7 @@ public sealed partial class DisfunctionParameters
 
     [DataField(required: true)]
     public DamageSpecifier DeadlyStageDamage = new();
+
+    [DataField]
+    public string? ProgressionPopup;
 }

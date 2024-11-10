@@ -10,8 +10,8 @@ namespace Content.Server.SS220.Surgery.Systems;
 
 public sealed partial class SurgerySystem : SharedSurgerySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -22,21 +22,23 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
     private void OnSurgeryDoAfter(Entity<OnSurgeryComponent> entity, ref SurgeryDoAfterEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         ProceedToNextStep(entity, args.User, args.Used, args.TargetEdge);
     }
 
     private void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)
     {
-        foreach (var action in chosenEdge.Action)
+        foreach (var action in SurgeryGraph.GetActions(chosenEdge))
         {
             action.PerformAction(entity.Owner, user, used, EntityManager);
         }
 
-        ChangeSurgeryNode(entity, chosenEdge.Target);
+        ChangeSurgeryNode(entity, chosenEdge.Target, user);
 
-        if (chosenEdge.EndSurgerySound != null)
-            _audio.PlayPvs(chosenEdge.EndSurgerySound, entity.Owner,
-                            AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
+        _audio.PlayPvs(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner,
+                        AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
 
         if (OperationEnded(entity))
             RemComp<OnSurgeryComponent>(entity.Owner);

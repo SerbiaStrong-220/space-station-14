@@ -6,7 +6,6 @@ using Content.Shared.SS220.Telepathy;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Toolshed.Commands.Generic;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.Telepathy;
@@ -21,11 +20,10 @@ public sealed class TelepathySystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     /// <summary>
-    /// key is protoId and value is "free".
+    /// Key is a "fake" protoId. It wont indexed.
     /// </summary>
-    private Dictionary<ProtoId<TelepathyChannelPrototype>, bool> _dynamicChannels = new();
+    private SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
     private readonly Color _baseDynamicChannelColor = Color.Lime;
-    private const int NumberOfDynamicChannelsCreatedInitialization = 10;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -41,8 +39,7 @@ public sealed class TelepathySystem : EntitySystem
     {
         foreach (var channel in _dynamicChannels)
         {
-            if (!channel.Value)
-                FreeUniqueTelepathyChannel(channel.Key);
+            FreeUniqueTelepathyChannel(channel.Key);
         }
     }
 
@@ -61,19 +58,7 @@ public sealed class TelepathySystem : EntitySystem
     /// </summary>
     public ProtoId<TelepathyChannelPrototype> TakeUniqueTelepathyChannel(string? nameLocPath = null, Color? color = null)
     {
-        foreach (var channel in _dynamicChannels)
-        {
-            if (channel.Value
-                && _prototype.TryIndex(channel.Key, out var prototype)
-                && (color == null || prototype.Color == color)
-                && (nameLocPath == null || prototype.Name == nameLocPath))
-            {
-                Log.Debug($"The channel was taken from existing dynamics ones with ID {channel.Key}");
-                return channel.Key;
-            }
-        }
-
-        return InitDynamicChannels(NumberOfDynamicChannelsCreatedInitialization, nameLocPath, color);
+        return MakeNewDynamicChannel(nameLocPath, color);
     }
 
     /// <summary>
@@ -82,21 +67,14 @@ public sealed class TelepathySystem : EntitySystem
     /// </summary>
     public void FreeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> protoId, bool delete = true)
     {
-        if (_dynamicChannels.TryGetValue(protoId, out var isFree))
+        if (_dynamicChannels.TryGetValue(protoId, out var _))
         {
             Log.Error($"Tried to free unregistered channel, passed id was {protoId}");
             return;
         }
-        if (isFree)
-        {
-            Log.Warning($"Tried to free already freed channel with id {protoId}");
-        }
-        else
-        {
-            Log.Debug($"Fried channel with id {protoId}");
-        }
-        _dynamicChannels[protoId] = true;
 
+        Log.Debug($"Freed channel with id {protoId}");
+        _dynamicChannels.Remove(protoId);
         var query = EntityQueryEnumerator<TelepathyComponent>();
         while (query.MoveNext(out var uid, out var telepathyComponent))
         {
@@ -111,64 +89,45 @@ public sealed class TelepathySystem : EntitySystem
         }
     }
 
-    /// <summary>
-    /// Checks if channel freed. Will throw KeyNotFoundException if this channel wasnt found
-    /// </summary>
-    public bool IsChannelFree(ProtoId<TelepathyChannelPrototype> protoId)
-    {
-        return _dynamicChannels[protoId];
-    }
-
-    public ProtoId<TelepathyChannelPrototype> InitDynamicChannels(int count, string? nameLocPath = null, Color? color = null)
-    {
-        var lastId = "";
-        for (int i = 0; i < count; i++)
-        {
-            lastId = MakeNewDynamicChannel(nameLocPath, color);
-        }
-        _prototype.ResolveResults();
-        return lastId;
-    }
-
     private ProtoId<TelepathyChannelPrototype> MakeNewDynamicChannel(string? nameLocPath = null, Color? color = null)
     {
         var id = Loc.GetString("unique-telepathy-proto-id", ("id", _dynamicChannels.Count));
-        var channelColor = color == null ? _baseDynamicChannelColor : color;
-        var channelName = nameLocPath == null ? "unique-telepathy-proto-name" : nameLocPath;
-        _prototype.LoadString(Loc.GetString("telepathy-marking", ("id", id), ("name", channelName), ("color", channelColor.Value.ToHexNoAlpha()))
-                                            .ReplaceLineEndings(Environment.NewLine + "  "));
 
-        _dynamicChannels.Add(id, false);
+        var channelColor = color ?? _baseDynamicChannelColor;
+        var channelName = nameLocPath ?? "unique-telepathy-proto-name";
+
+        _dynamicChannels.Add(id, new ChannelParameters(channelName, channelColor));
+
         Log.Debug($"The channel with ID {id} was added to dynamics ones and used.");
         return id;
     }
 
-    /// <summary>
-    /// Used if we need only one instance of prototype. Actually better to use InitDynamicChannels with some count
-    /// </summary>
-    private ProtoId<TelepathyChannelPrototype> MakeNewDynamicChannelAndResolveResult(string? nameLocPath = null, Color? color = null)
+    private void SendMessageToEveryoneWithRightChannel(ProtoId<TelepathyChannelPrototype> rightTelepathyChannel, string message, EntityUid? senderUid)
     {
-        var id = MakeNewDynamicChannel(nameLocPath, color);
-        _prototype.ResolveResults();
-        return id;
-    }
+        ChannelParameters? channelParameters = null;
+        if (_dynamicChannels.TryGetValue(rightTelepathyChannel, out var dynamicParameters))
+            channelParameters = dynamicParameters;
+        if (_prototype.TryIndex(rightTelepathyChannel, out var prototype))
+            channelParameters = prototype.ChannelParameters;
+        if (channelParameters == null)
+        {
+            Log.Error($"Tried to send message with incorrect {nameof(TelepathyChannelPrototype)} proto id. id was: {rightTelepathyChannel}");
+            return;
+        }
 
-
-    private void SendMessageToEveryoneWithRightChannel(ProtoId<TelepathyChannelPrototype> rightTelepathyChanel, string message, EntityUid? senderUid)
-    {
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
-            if (rightTelepathyChanel == receiverTelepathy.TelepathyChannelPrototype)
-                SendMessageToChat(receiverUid, message, senderUid, _prototype.Index(rightTelepathyChanel));
+            if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype)
+                SendMessageToChat(receiverUid, message, senderUid, channelParameters);
         }
     }
 
 
-    private void SendMessageToChat(EntityUid receiverUid, string messageString, EntityUid? senderUid, TelepathyChannelPrototype telepathyChannel)
+    private void SendMessageToChat(EntityUid receiverUid, string messageString, EntityUid? senderUid, ChannelParameters telepathyChannelParameters)
     {
         var netSource = _entityManager.GetNetEntity(receiverUid);
-        var wrappedMessage = GetWrappedTelepathyMessage(messageString, senderUid, telepathyChannel);
+        var wrappedMessage = GetWrappedTelepathyMessage(messageString, senderUid, telepathyChannelParameters);
         var message = new ChatMessage(
             ChatChannel.Telepathy,
             messageString,
@@ -177,10 +136,10 @@ public sealed class TelepathySystem : EntitySystem
             null
         );
         if (TryComp(receiverUid, out ActorComponent? actor))
-            _netMan.ServerSendMessage(new MsgChatMessage() {Message = message}, actor.PlayerSession.Channel);
+            _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);
     }
 
-    private string GetWrappedTelepathyMessage(string messageString, EntityUid? senderUid, TelepathyChannelPrototype telepathyChannel)
+    private string GetWrappedTelepathyMessage(string messageString, EntityUid? senderUid, ChannelParameters telepathyChannelParameters)
     {
         if (senderUid == null)
         {
@@ -192,10 +151,10 @@ public sealed class TelepathySystem : EntitySystem
 
         return Loc.GetString(
             "chat-manager-send-telepathy-message",
-            ("channel", $"\\[{telepathyChannel.LocalizedName}\\]"),
+            ("channel", $"\\[{Loc.GetString(telepathyChannelParameters.Name)}\\]"),
             ("message", FormattedMessage.EscapeText(messageString)),
             ("senderName", GetSenderName(senderUid)),
-            ("color", telepathyChannel.Color)
+            ("color", telepathyChannelParameters.Color)
         );
     }
 

@@ -6,8 +6,6 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Text;
 
-
-
 public sealed class MarkovTextGenerator : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -22,7 +20,7 @@ public sealed class MarkovTextGenerator : EntitySystem
         _transitionMatrix.Clear();
     }
 
-    public void Initialize(List<string> locPath, int keySize)
+    public void Initialize(IReadOnlyList<string> locPath, int keySize)
     {
         CleatData();
 

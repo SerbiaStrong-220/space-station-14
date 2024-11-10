@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Mindshield.Components;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
@@ -9,11 +8,13 @@ namespace Content.Server.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
-    protected bool IsValidTarget(EntityUid uid)
+    protected bool IsValidTarget(EntityUid uid, out string? reason)
     {
+        reason = null;
         if (HasComp<OnSurgeryComponent>(uid)
             || !HasComp<MindSlaveComponent>(uid) // for now only for slaves
-            || !HasComp<SurgableComponent>(uid))
+            || !HasComp<SurgableComponent>(uid)
+            || !_buckleSystem.IsBuckled(uid))
             return false;
 
         return true;
@@ -36,19 +37,20 @@ public abstract partial class SharedSurgerySystem
         return true;
     }
 
-    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode)
+    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode, EntityUid? performer = null)
     {
         var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-        ChangeSurgeryNode(entity, targetNode, surgeryProto);
+        ChangeSurgeryNode(entity, performer, targetNode, surgeryProto);
     }
 
-    protected void StartSurgeryNode(Entity<OnSurgeryComponent> entity)
+    protected void StartSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid? performer = null)
     {
         var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-        ChangeSurgeryNode(entity, surgeryProto.Start, surgeryProto);
+        ChangeSurgeryNode(entity, performer, surgeryProto.Start, surgeryProto);
     }
 
-    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode, SurgeryGraphPrototype surgeryGraph)
+    // think of making struct which contains User and Used and etc. Pass it through ref to make locales richer.
+    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid? performer, string targetNode, SurgeryGraphPrototype surgeryGraph)
     {
         if (!surgeryGraph.TryGetNode(targetNode, out var foundNode))
         {
@@ -57,8 +59,6 @@ public abstract partial class SharedSurgerySystem
         }
         entity.Comp.CurrentNode = foundNode;
 
-        if (entity.Comp.CurrentNode.Popup != null)
-            _popup.PopupEntity(entity.Comp.CurrentNode.Popup, entity.Owner);
+        _popup.PopupPredicted(SurgeryGraph.Popup(foundNode), entity.Owner, performer);
     }
-
 }

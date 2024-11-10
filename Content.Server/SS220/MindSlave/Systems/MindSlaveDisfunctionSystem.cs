@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Popups;
 using Content.Server.SS220.MindSlave.Components;
 using Content.Shared.Damage;
 using Content.Shared.Implants;
@@ -13,6 +14,7 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _component = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
     private const float SecondsBetweenStageDamage = 4f;
@@ -89,6 +91,7 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
             comp.DisfunctionComponents.Add(disfunctionComponent);
         }
 
+        _popup.PopupEntity(comp.DisfunctionParameters.ProgressionPopup, entity, entity, Shared.Popups.PopupType.SmallCaution);
         comp.Weakened = false;
     }
 

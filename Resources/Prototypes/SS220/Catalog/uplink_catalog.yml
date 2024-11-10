@@ -29,6 +29,7 @@
   icon: { sprite: /Textures/SS220/Alerts/MindSlave.rsi, state: icon }
   productEntity: MindSlaveImplanter
   discountCategory: veryRareDiscounts
+  # TODO_SS220: Ask PMs
   discountDownTo:
     Telecrystal: 8
   cost:
@@ -40,7 +41,21 @@
       blacklist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # SS220 mindslave fix
+          - LoneOpsUplink
+
+- type: listing
+  id: UplinkMindslaveSurgeryFixBundle
+  name: uplink-mindslave-fix-surgery-bundle-name
+  description: uplink-mindslave-fix-surgery-bundle-desc
+  icon: { sprite: SS220/Objects/Specific/Medical/implants.rsi, state: mindslave_fixer }
+  productEntity: ClothingBackpackDuffelSyndicateMindslaveFixerSurgery
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkImplants
 
 # JobItems
 

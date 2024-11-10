@@ -11,7 +11,7 @@ public sealed partial class SurgeryToolComponent : Component
     public SurgeryToolType ToolType = SurgeryToolType.invalid;
 
     [DataField("sound")]
-    public SoundSpecifier? StartSurgerySound = null;
+    public SoundSpecifier? UsingSound = null;
 }
 
 // for now I need only this ones

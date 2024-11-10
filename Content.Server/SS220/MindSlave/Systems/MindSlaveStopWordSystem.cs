@@ -5,6 +5,7 @@ using Content.Server.SS220.MindSlave.Components;
 using Content.Server.SS220.Photocopier;
 using Content.Server.SS220.Photocopier.Forms;
 using Content.Server.SS220.Text;
+using Content.Shared.Dataset;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Photocopier.Forms.FormManagerShared;
@@ -15,7 +16,6 @@ namespace Content.Server.SS220.MindSlave.Systems;
 
 public sealed partial class MindSlaveStopWordSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _component = default!;
     [Dependency] private readonly MarkovTextGenerator _markovText = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -28,6 +28,8 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
     private const int StopWordMinSize = 4; // to ignore some common words
     private const string StampComponentName = "Stamp";
 
+    [ValidatePrototypeId<DatasetPrototype>]
+    private const string TextDatasetId = "MindSlaveStopWordTexts";
 
     public string StopWord
     {
@@ -65,13 +67,7 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
 
     private void OnRoundStart(RoundStartedEvent args)
     {
-        List<string> locPath = [];
-        while (Loc.HasString(GetLocPath(locPath.Count)))
-        {
-            locPath.Add(GetLocPath(locPath.Count));
-        }
-
-        _markovText.Initialize(locPath, KeySize);
+        _markovText.Initialize(_prototype.Index<DatasetPrototype>(TextDatasetId).Values, KeySize);
         _text = _markovText.GenerateText(83);
 
         _stopWord = _markovText.ReplacePunctuationInEnding(_random.Pick(_text.Split().Where(x => x.Length >= StopWordMinSize).ToArray()));
@@ -125,10 +121,5 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
             },
             stampComponent.StampState);
         }
-    }
-
-    private string GetLocPath(int index)
-    {
-        return $"stop-word-text-template-{index}";
     }
 }

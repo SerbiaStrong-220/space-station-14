@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Text.RegularExpressions;
 using Content.Server.Antag;
 using Content.Server.Body.Components;
 using Content.Server.EUI;
@@ -27,7 +26,6 @@ using Content.Shared.Mobs;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
-using Content.Shared.Roles;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Tag;
@@ -230,25 +228,21 @@ public sealed class MindSlaveSystem : EntitySystem
         {
             EnsureComp<RoleBriefingComponent>(slaveRoleVal).Briefing = briefing;
         }
-        //SS220_TODO: If one master have several slaves - he should get the same key
+
         // Also dont delete Master's telephaty if he have another slave.
         var mindSlaveComp = EnsureComp<MindSlaveComponent>(slave);
         RaiseLocalEvent(slave, new AfterEntityMindSlavedEvent(master, slave)); // uh... I wish I made it earlier...
         // we write it in comp to give more freedom to admins
         mindSlaveComp.StopWord = _mindSlaveStopWord.StopWord;
-        var telepathyChannel = _telepathy.TakeUniqueTelepathyChannel("mindslave-telepathy-channel-name", Color.DarkViolet);
-        var slaveTelepathy = EnsureComp<TelepathyComponent>(slave);
-        slaveTelepathy.CanSend = true;
-        slaveTelepathy.TelepathyChannelPrototype = telepathyChannel;
 
         _alert.ShowAlert(slave, EnslavedAlert);
 
         var masterComp = EnsureComp<MindSlaveMasterComponent>(master);
-        var masterTelepathy = EnsureComp<TelepathyComponent>(master);
-        masterTelepathy.TelepathyChannelPrototype = telepathyChannel;
-        masterTelepathy.CanSend = true;
+        RaiseLocalEvent(master, new AfterEntityMindSlavedMasterEvent(master, slave));
         masterComp.EnslavedEntities.Add(slave);
         Dirty(master, masterComp);
+
+        MakeTelepathic(master, slave);
 
         _npcFaction.RemoveFaction(slave, NanoTrasenFactionId, false);
         _npcFaction.AddFaction(slave, SyndicateFactionId);
@@ -286,6 +280,8 @@ public sealed class MindSlaveSystem : EntitySystem
         _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
         var master = mindSlave.Value.Comp2.masterEntity;
+        // goes here cause we want to have slave in masters slaved list
+        RemoveSlaveTelepathy(master, slave);
         if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
         {
             var briefingMaster = mindComp.CharacterName != null ? Loc.GetString("mindslave-removed-slave-master", ("name", mindComp.CharacterName), ("ent", slave)) :
@@ -338,14 +334,7 @@ public sealed class MindSlaveSystem : EntitySystem
                 _implant.ForceRemove(slave, mindslaveImplant.Value);
         }
 
-        if (TryComp<TelepathyComponent>(slave, out var telepathyComponent))
-        {
-            _telepathy.FreeUniqueTelepathyChannel(telepathyComponent.TelepathyChannelPrototype);
-        }
-        else
-        {
-            Log.Warning($"{ToPrettyString(slave)} was freed from mindslave but dont have a {nameof(TelepathyComponent)}");
-        }
+
 
         return true;
     }
@@ -370,5 +359,41 @@ public sealed class MindSlaveSystem : EntitySystem
             return false;
 
         return _role.MindHasRole<MindSlaveRoleComponent>(mindId);
+    }
+
+    private void MakeTelepathic(EntityUid master, EntityUid slave)
+    {
+        var telepathyChannel = TryComp<TelepathyComponent>(master, out var oldTelepathy)
+            ? oldTelepathy.TelepathyChannelPrototype
+            : _telepathy.TakeUniqueTelepathyChannel("mindslave-telepathy-channel-name", Color.DarkViolet);
+
+        EnsureTelepathy(slave, telepathyChannel);
+        EnsureTelepathy(master, telepathyChannel);
+    }
+
+    private void EnsureTelepathy(EntityUid target, ProtoId<TelepathyChannelPrototype> channelId)
+    {
+        var slaveTelepathy = EnsureComp<TelepathyComponent>(target);
+        slaveTelepathy.CanSend = true;
+        slaveTelepathy.TelepathyChannelPrototype = channelId;
+    }
+
+    private void RemoveSlaveTelepathy(EntityUid? master, EntityUid slave)
+    {
+        if (!TryComp<MindSlaveMasterComponent>(master, out var mindSlaveMaster)
+            || mindSlaveMaster.EnslavedEntities.Count == 1)
+        {
+            if (TryComp<TelepathyComponent>(slave, out var telepathyComponent))
+            {
+                _telepathy.FreeUniqueTelepathyChannel(telepathyComponent.TelepathyChannelPrototype);
+            }
+            else
+            {
+                Log.Warning($"{ToPrettyString(slave)} was freed from mindslave but dont have a {nameof(TelepathyComponent)}");
+            }
+            return;
+        }
+
+        RemComp<TelepathyComponent>(slave);
     }
 }

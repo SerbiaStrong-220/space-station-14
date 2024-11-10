@@ -21,6 +21,9 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
     public List<IComponent> DisfunctionComponents = new();
 
     [ViewVariables(VVAccess.ReadWrite)]
+    public MindSlaveDisfunctionType DisfunctionStage = MindSlaveDisfunctionType.initial;
+
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool Active = true;
 
     [ViewVariables(VVAccess.ReadWrite)]
@@ -28,9 +31,6 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Weakened = false;
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    public MindSlaveDisfunctionType DisfunctionStage = MindSlaveDisfunctionType.initial;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan NextProgressTime;
