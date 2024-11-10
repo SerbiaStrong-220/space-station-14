@@ -129,6 +129,11 @@ public sealed class MechGrabberSystem : EntitySystem
             return;
         var target = args.Target;
 
+        //ss220 mech grabb fix start
+        if (HasComp<MechComponent>(target))
+            return;
+        //ss220 mech grabb fix end
+
         if (args.Target == args.User || component.DoAfter != null)
             return;
 

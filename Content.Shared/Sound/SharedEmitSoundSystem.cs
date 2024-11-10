@@ -59,12 +59,10 @@ public abstract class SharedEmitSoundSystem : EntitySystem
 
     private void HandleEmitSoundOnUIOpen(EntityUid uid, EmitSoundOnUIOpenComponent component, AfterActivatableUIOpenEvent args)
     {
-        // Ghost-UI-Activation-On-Use begin
-        if (HasComp<GhostComponent>(args.User))
-            return;
-        // Ghost-UI-Activation-On-Use end
-
-        TryEmitSound(uid, component, args.User);
+        if (_whitelistSystem.IsBlacklistFail(component.Blacklist, args.User))
+        {
+            TryEmitSound(uid, component, args.User);
+        }
     }
 
     private void OnMobState(Entity<SoundWhileAliveComponent> entity, ref MobStateChangedEvent args)

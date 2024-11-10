@@ -209,12 +209,17 @@
 
 - type: entity
   id: TraitorReinforcement
-  parent: Traitor
+  parent: BaseTraitorRule
   components:
   - type: TraitorRule
     giveUplink: false
     giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
     giveBriefing: false
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Traitor ]
+      mindRoles:
+      - MindRoleTraitor
   #ss220 reinforcement objective fix begin
   - type: AntagRandomObjectives
     enabled: false
@@ -308,7 +313,6 @@
         tableId: CalmPestEventsTable
       - !type:NestedSelector
         tableId: SpicyPestEventsTable
-
 
 # SS220-NoUnknownShuttles begin
 # - type: entityTable

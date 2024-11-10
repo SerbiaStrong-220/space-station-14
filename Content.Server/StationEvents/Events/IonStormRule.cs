@@ -61,6 +61,10 @@ public sealed class IonStormRule : StationEventSystem<IonStormRuleComponent>
     private const string Drinks = "IonStormDrinks";
     [ValidatePrototypeId<DatasetPrototype>]
     private const string Foods = "IonStormFoods";
+    // SS220 IonStrom Laws rework start
+    [ValidatePrototypeId<DatasetPrototype>]
+    private const string BrickedLaw = "IonStormBrickedLaws";
+    // SS220 IonStrom Laws rework end
 
     protected override void Started(EntityUid uid, IonStormRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -124,7 +128,10 @@ public sealed class IonStormRule : StationEventSystem<IonStormRuleComponent>
             }
 
             // generate a new law...
-            var newLaw = GenerateLaw();
+            // SS220 IonStrom Laws rework start
+            // var newLaw = GenerateLaw();
+            var newLaw = Pick(BrickedLaw);
+            // SS220 IonStrom Laws rework end
 
             // see if the law we add will replace a random existing law or be a new glitched order one
             if (laws.Laws.Count > 0 && RobustRandom.Prob(target.ReplaceChance))

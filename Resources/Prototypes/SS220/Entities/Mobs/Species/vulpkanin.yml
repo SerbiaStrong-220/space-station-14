@@ -15,7 +15,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    scale: 0.9, 0.9
+    scale: 0.95, 0.95
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
@@ -81,7 +81,7 @@
   description: A dummy vulpkanin meant to be used in character setup.
   components:
     - type: Sprite
-      scale: 0.9, 0.9
+      scale: 0.95, 0.95
     - type: HumanoidAppearance
       species: Vulpkanin
 

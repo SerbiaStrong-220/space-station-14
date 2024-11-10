@@ -5,9 +5,9 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
-  - HalloweenPumpkinHat # SS220 temp Halloween update
   - FlowerWreath
   - Hairflower
+  - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
   - Lighter
