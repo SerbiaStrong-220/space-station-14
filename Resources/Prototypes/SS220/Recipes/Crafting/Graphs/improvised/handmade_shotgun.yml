@@ -19,7 +19,7 @@
       - tag: WeaponFlareGun
         icon:
           sprite: Objects/Weapons/Guns/Shotguns/flaregun.rsi
-          state: icon
+          state: base
         name: Flare Gun
         doAfter: 25
   - node: HDpistol

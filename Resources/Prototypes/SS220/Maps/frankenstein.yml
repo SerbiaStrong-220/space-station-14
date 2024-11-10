@@ -5,6 +5,7 @@
   mapName: 'NSS Frankenstein'
   mapPath: /Maps/SS220/ss220-box.yml
   minPlayers: 0
+  maxPlayers: 65
   stations:
     Boxstation:
       stationProto: FrankensteinStation
@@ -48,6 +49,7 @@
             SeniorResearcher: [ 1, 1]
             Scientist: [ 5, 5 ]
             ResearchAssistant: [ 8, 8 ]
+            StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
             #security
             HeadOfSecurity: [ 1, 1 ]

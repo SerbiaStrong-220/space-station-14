@@ -6,8 +6,11 @@
       edges:
         - to: envelope
           steps:
-            - material: Paper
-              amount: 1
+            - tag: Paper
+              icon:
+                sprite: Objects/Misc/bureaucracy.rsi
+                state: paper
+              name: Лист бумаги
               doAfter: 2
     - node: envelope
       entity: Envelope

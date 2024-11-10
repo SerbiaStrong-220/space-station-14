@@ -4,7 +4,7 @@
   id: Astro
   mapName: 'JSS Astro'
   mapPath: /Maps/SS220/astro.yml
-  minPlayers: 0
+  minPlayers: 30
   stations:
     Astro:
       stationProto: AstroNanotrasenStation
@@ -24,7 +24,7 @@
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             #Law
-            IAA: [ 1, 1 ]
+            IAA: [ 2, 2 ]
             Magistrate: [1, 1]
             Lawyer: [ 3, 3 ]
             #Security
@@ -58,6 +58,7 @@
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
+            StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
             SeniorResearcher: [ 1, 1 ]
             #Service
