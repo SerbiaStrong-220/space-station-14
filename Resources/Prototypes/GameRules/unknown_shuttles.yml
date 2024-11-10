@@ -7,7 +7,7 @@
     children:
     - id: UnknownShuttleCargoLost
     - id: UnknownShuttleTravelingCuisine
-    - id: UnknownShuttleDisasterEvac  Pod
+    - id: UnknownShuttleDisasterEvadPod
     - id: UnknownShuttleHonki
 #SS220-LostSoulsRevive end
 #    - id: UnknownShuttleNTQuark
