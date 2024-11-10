@@ -7,7 +7,7 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<ItemToggleBlockingDamageComponent, ComponentInit>(OnComponentStartup);
+        SubscribeLocalEvent<ItemToggleBlockingDamageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, ItemToggledEvent>(OnToggleItem);
     }
 
@@ -22,7 +22,7 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
         blockingComponent.PassiveBlockFraction = 0;
     }
 
-    private void OnComponentStartup(Entity<ItemToggleBlockingDamageComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<ItemToggleBlockingDamageComponent> ent, ref MapInitEvent args)
     {
         if (!TryComp<BlockingComponent>(ent.Owner, out var blockingComponent))
         {
