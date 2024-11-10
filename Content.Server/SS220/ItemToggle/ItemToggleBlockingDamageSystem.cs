@@ -18,8 +18,8 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
         if (ent.Comp.DeactivatedActiveModifier != null)
             blockingComponent.ActiveBlockDamageModifier = ent.Comp.DeactivatedActiveModifier;
 
-        blockingComponent.ActiveBlockFraction = 0;
-        blockingComponent.PassiveBlockFraction = 0;
+        blockingComponent.ActiveBlockFraction = ent.Comp.DeactivatedActiveFraction;
+        blockingComponent.PassiveBlockFraction = ent.Comp.DeactivatedPassiveFraction;
     }
 
     private void OnMapInit(Entity<ItemToggleBlockingDamageComponent> ent, ref MapInitEvent args)

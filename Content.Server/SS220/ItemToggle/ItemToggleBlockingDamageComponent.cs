@@ -27,8 +27,8 @@ public sealed partial class ItemToggleBlockingDamageComponent : Component
     public float OriginalDeactivatedFraction;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float ActivatedFraction;
+    public float DeactivatedActiveFraction;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float DeactivatedFraction;
+    public float DeactivatedPassiveFraction;
 }
