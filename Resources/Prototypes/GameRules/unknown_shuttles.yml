@@ -1,4 +1,5 @@
 # Shuttle Game Rule Tables -- If you dont add your rules to these they wont be used by the games schedulers.
+#SS220 LostSoulsRevive begin
 - type: entityTable
   id: UnknownShuttlesFriendlyTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
@@ -7,6 +8,7 @@
     - id: UnknownShuttleTravelingCuisine
     - id: UnknownShuttleDisasterEvacPod
     - id: UnknownShuttleHonki
+#SS220 LostSoulsRevive end
 #     - id: UnknownShuttleNTQuark
 #     - id: UnknownShuttleCruiser
 #     - id: UnknownShuttleCryptid
@@ -35,6 +37,7 @@
 
 # # Shuttle Game Rules
 
+#SS220 LostSoulsRevive begin
 - type: entity
   abstract: true
   parent: BaseGameRule
@@ -100,6 +103,7 @@
     weight: 2
   - type: LoadMapRule
     preloadedGrid: Civil
+#SS220 LostSoulsRevive end
 
 # - type: entity
 #   parent: BaseUnknownShuttleRule
