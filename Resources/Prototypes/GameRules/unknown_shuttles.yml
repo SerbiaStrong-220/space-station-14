@@ -2,7 +2,7 @@
 
 #SS220-LostSoulsRevive begin
 - type: entityTable
-id: UnknownShuttlesFriendlyTable
+- id: UnknownShuttlesFriendlyTable
  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
    children:
    - id: UnknownShuttleCargoLost
