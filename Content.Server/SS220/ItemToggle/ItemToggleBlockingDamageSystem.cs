@@ -36,6 +36,7 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
 
         OnDecreaseBlock(ent, blockingComponent);
     }
+
     private void OnToggleItem(Entity<ItemToggleBlockingDamageComponent> ent, ref ItemToggledEvent args)
     {
         if (!TryComp<BlockingComponent>(ent.Owner, out var blockingComponent))
