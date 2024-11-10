@@ -8,27 +8,27 @@ namespace Content.Server.SS220.ItemToggle;
 [RegisterComponent]
 public sealed partial class ItemToggleBlockingDamageComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public DamageModifierSet? OriginalActiveModifier;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public DamageModifierSet? OriginalPassiveModifier;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public DamageModifierSet? DeactivatedActiveModifier;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public DamageModifierSet? DeactivatedPassiveModifier;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float OriginalActivatedFraction;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float OriginalDeactivatedFraction;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float DeactivatedActiveFraction;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float DeactivatedPassiveFraction;
 }
