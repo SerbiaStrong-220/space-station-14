@@ -22,7 +22,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.MechClothing;
-
+using Content.Shared.SS220.MechFilter;
 
 namespace Content.Shared.Mech.EntitySystems;
 
@@ -61,17 +61,25 @@ public abstract class SharedMechSystem : EntitySystem
         SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
         SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
     }
-
+    /// <summary>
+    /// Is responsible for logic if fur is clothing
+    /// </summary>
     private void OnEquip(Entity<MechComponent> ent, ref ClothingGotEquippedEvent args)
     {
         EnsureComp<MechPilotComponent>(args.Wearer);
-        EnsureComp<MechClothingComponent>(args.Wearer);
+        EnsureComp<MechClothingComponent>(args.Wearer, out var compMechClothing);
+
+        compMechClothing.MechUid = ent.Owner;
+
 
         _actions.AddAction(args.Wearer, ref ent.Comp.MechCycleActionEntity, ent.Comp.MechCycleAction, ent.Owner);
         _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingUiActionEntity, ent.Comp.MechClothingUiAction, ent.Owner);
         _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingGrabActionEntity, ent.Comp.MechClothingGrabAction);
     }
 
+    /// <summary>
+    /// Is responsible for logic if fur is clothing
+    /// </summary>
     private void OnUnequip(Entity<MechComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         if (_net.IsClient)
@@ -80,6 +88,7 @@ public abstract class SharedMechSystem : EntitySystem
         RemComp<MechPilotComponent>(args.Wearer);
 
         _actions.RemoveProvidedActions(args.Wearer, ent.Owner);
+        _actions.RemoveAction(args.Wearer, ent.Comp.MechClothingGrabActionEntity);
     }
 
     private void OnToggleEquipmentAction(EntityUid uid, MechComponent component, MechToggleEquipmentEvent args)
@@ -87,7 +96,7 @@ public abstract class SharedMechSystem : EntitySystem
         if (args.Handled)
             return;
         args.Handled = true;
-        CycleEquipment(uid);
+        CycleEquipment(uid, pilotCloth: args.Performer);
     }
 
     private void OnEjectPilotEvent(EntityUid uid, MechComponent component, MechEjectPilotEvent args)
@@ -113,12 +122,17 @@ public abstract class SharedMechSystem : EntitySystem
             RaiseLocalEvent(component.CurrentSelectedEquipment.Value, args);
         }
     }
-
+    /// <summary>
+    /// separates mech-robot and mech-clothing
+    /// </summary>
     private void OnStartup(EntityUid uid, MechComponent component, ComponentStartup args)
     {
-        component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
         component.EquipmentContainer = _container.EnsureContainer<Container>(uid, component.EquipmentContainerId);
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
+
+        if (!TryComp<MechFilterComponent>(uid, out var _))
+            component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
+
         UpdateAppearance(uid, component);
     }
 
@@ -195,7 +209,8 @@ public abstract class SharedMechSystem : EntitySystem
     /// </summary>
     /// <param name="uid"></param>
     /// <param name="component"></param>
-    public void CycleEquipment(EntityUid uid, MechComponent? component = null)
+    /// <param name="pilotCloth"></param>
+    public void CycleEquipment(EntityUid uid, MechComponent? component = null, EntityUid? pilotCloth = null)
     {
         if (!Resolve(uid, ref component))
             return;
@@ -220,6 +235,14 @@ public abstract class SharedMechSystem : EntitySystem
 
         if (_net.IsServer)
             _popup.PopupEntity(popupString, uid);
+
+        if (pilotCloth.HasValue)
+        {
+            if (!TryComp<MechClothingComponent>(pilotCloth.Value, out var mechPilotComp))
+                return;
+            mechPilotComp.CurrentEquipmentUid = component.CurrentSelectedEquipment;
+        }
+
 
         Dirty(uid, component);
     }

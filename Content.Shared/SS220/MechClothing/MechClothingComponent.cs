@@ -6,9 +6,9 @@ using Robust.Shared.Containers;
 namespace Content.Shared.SS220.MechClothing;
 
 /// <summary>
-/// This is used for...
+/// This handles placing containers in claw when the player uses an action, copies part of the logic MechGrabberComponent
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentState]
 public sealed partial class MechClothingComponent : Component
 {
     /// <summary>
@@ -49,4 +49,11 @@ public sealed partial class MechClothingComponent : Component
 
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public DoAfterId? DoAfter;
+
+    [ViewVariables]
+    public EntityUid MechUid;
+
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid? CurrentEquipmentUid;
+
 }

@@ -5,6 +5,7 @@
   components:
   - type: MobMover
   - type: Mech
+  - type: MechFilter
   - type: MechAir
   - type: AirFilter
     # everything except oxygen and nitrogen
