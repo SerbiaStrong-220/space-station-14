@@ -110,6 +110,10 @@
   - type: WarpPoint
     follow: true
     location: nuclear bomb
+  - type: Tag
+    tags:
+      - Structure
+      - CanLockPick
 
 - type: entity
   parent: NuclearBomb

@@ -1524,6 +1524,11 @@
 - type: Tag
   id: Janimaid
 
+#ss220 lockpick start
+- type: Tag
+  id: CanLockPick
+#ss220 lockpick end
+
 - type: Tag
   id: MagicianDress
 
