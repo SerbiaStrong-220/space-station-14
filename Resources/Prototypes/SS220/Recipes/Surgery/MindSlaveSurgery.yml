@@ -40,9 +40,9 @@
         bleedAmount: 0
   - node: fix disfunction
     nodeText:
-      examineDescription: mind-slave-disfunction-examine-description
-      popup: mind-slave-disfunction-skin-popup
-      description: mind-slave-disfunction-skin-description
+      examineDescription: mind-slave-disfunction-fix-surgery-examine-description
+      popup: mind-slave-disfunction-fix-surgery-popup
+      description: mind-slave-disfunction-fix-surgery-description
     edges:
     - to: seal wound
       baseEdge: seal wound

@@ -76,10 +76,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         //SS220_Surgery: here must open UI and from it you should get protoId of surgery
 
-        args.Handled = TryStartSurgery(args.Target.Value, "MindSlaveFix", args.User);
+        args.Handled = TryStartSurgery(args.Target.Value, "MindSlaveFix", args.User, args.Used);
     }
 
-    public bool TryStartSurgery(EntityUid target, ProtoId<SurgeryGraphPrototype> surgery, EntityUid? performer = null)
+    public bool TryStartSurgery(EntityUid target, ProtoId<SurgeryGraphPrototype> surgery, EntityUid performer, EntityUid used)
     {
         if (HasComp<OnSurgeryComponent>(target))
         {
@@ -90,7 +90,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         var onSurgery = AddComp<OnSurgeryComponent>(target);
         onSurgery.SurgeryGraphProtoId = surgery;
 
-        StartSurgeryNode((target, onSurgery), performer);
+        StartSurgeryNode((target, onSurgery), performer, used);
 
         return true;
     }

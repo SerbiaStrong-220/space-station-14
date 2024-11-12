@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Surgery.Conditions;
 public sealed partial class SurgeryToolTypeCondition : ISurgeryGraphCondition
 {
     [DataField(required: true)]
-    public SurgeryToolType SurgeryTool = SurgeryToolType.invalid;
+    public SurgeryToolType SurgeryTool = SurgeryToolType.Invalid;
 
     public bool Condition(EntityUid uid, IEntityManager entityManager)
     {

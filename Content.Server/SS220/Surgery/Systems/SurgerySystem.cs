@@ -35,12 +35,14 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
             action.PerformAction(entity.Owner, user, used, EntityManager);
         }
 
-        ChangeSurgeryNode(entity, chosenEdge.Target, user);
+        ChangeSurgeryNode(entity, chosenEdge.Target, user, used);
 
         _audio.PlayPvs(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner,
                         AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
 
         if (OperationEnded(entity))
             RemComp<OnSurgeryComponent>(entity.Owner);
+
+        Dirty(entity);
     }
 }

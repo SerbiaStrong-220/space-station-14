@@ -26,6 +26,8 @@
     sprite: SS220/Objects/Specific/Medical/implants.rsi
     state: mindslave_fixer
   - type: MindSlaveDisfunctionFixer
+  - type: SurgeryTool
+    toolType: Specific
   - type: HiddenDescription
     entries:
     - label: hidden-desc-implant-manipulator-medical

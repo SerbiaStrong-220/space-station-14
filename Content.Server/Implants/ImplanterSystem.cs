@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Construction.Conditions;
 using Content.Server.Popups;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.DoAfter;
@@ -27,6 +28,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     private const string MindSlaveImplantProto = "MindSlaveImplant";
     [ValidatePrototypeId<TagPrototype>]
     private const string MindShieldImplantTag = "MindShield";
+    private const float MindShieldRemoveTime = 40;
     //SS220-mindslave end
 
     public override void Initialize()
@@ -168,7 +170,26 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     //TODO: Remove when surgery is in
     public void TryDraw(ImplanterComponent component, EntityUid user, EntityUid target, EntityUid implanter)
     {
-        var args = new DoAfterArgs(EntityManager, user, component.DrawTime, new DrawEvent(), implanter, target: target, used: implanter)
+        //SS220-Mindshield-remove-time begin
+        var isMindShield = false;
+
+        if (_container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer))
+        {
+            foreach (var implant in implantContainer.ContainedEntities)
+            {
+                if (HasComp<SubdermalImplantComponent>(implant) && _container.CanRemove(implant, implantContainer))
+                {
+                    if (_tag.HasTag(implant, MindShieldImplantTag))
+                        isMindShield = true;
+                    break;
+                }
+            }
+        }
+        var delay = isMindShield ? MindShieldRemoveTime : component.DrawTime;
+        var popupPath = isMindShield ? "injector-component-drawing-mind-shield" : "injector-component-drawing-user";
+        var args = new DoAfterArgs(EntityManager, user, delay, new DrawEvent(), implanter, target: target, used: implanter)
+        // var args = new DoAfterArgs(EntityManager, user, component.DrawTime, new DrawEvent(), implanter, target: target, used: implanter)
+        //SS220-Mindshield-remove-time end
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -176,7 +197,9 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         };
 
         if (_doAfter.TryStartDoAfter(args))
-            _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
+            // _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user); //SS220-Mindshield-remove-time
+            _popup.PopupEntity(Loc.GetString(popupPath), target, user);
+
 
     }
 

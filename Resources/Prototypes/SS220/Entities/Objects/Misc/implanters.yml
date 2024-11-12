@@ -8,4 +8,4 @@
     - type: Implanter
       implant: MindSlaveImplant
       # TODO_SS220: Ask PMs
-      implantTime: 40
+      implantTime: 10

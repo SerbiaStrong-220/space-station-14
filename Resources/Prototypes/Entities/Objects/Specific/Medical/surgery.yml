@@ -34,7 +34,7 @@
       path: /Audio/Effects/lightburn.ogg
   # SS220 Surgery begin
   - type: SurgeryTool
-    toolType: cautery
+    toolType: Cautery
     sound: /Audio/SS220/Surgery/cautery.ogg
   # SS220 Surgery end
 
@@ -102,7 +102,7 @@
   # SS220 Edit biomass craft end
   # SS220 Surgery begin
   - type: SurgeryTool
-    toolType: scalpel
+    toolType: Scalpel
     sound: /Audio/SS220/Surgery/scalpel.ogg
   # SS220 Surgery end
 
@@ -159,7 +159,7 @@
     storedRotation: 90
   # SS220 Surgery begin
   - type: SurgeryTool
-    toolType: retractor
+    toolType: Retractor
     sound: /Audio/SS220/Surgery/retractor.ogg
   # SS220 Surgery end
 
@@ -176,7 +176,7 @@
     storedRotation: 90
   # SS220 Surgery begin
   - type: SurgeryTool
-    toolType: hemostat
+    toolType: Hemostat
     sound: /Audio/SS220/Surgery/hemostat.ogg
   # SS220 Surgery end
 
@@ -250,7 +250,7 @@
     speedModifier: 1.5
   # SS220 Surgery begin
   - type: SurgeryTool
-    toolType: saw
+    toolType: Saw
     sound: /Audio/SS220/Surgery/saw.ogg
   # SS220 Surgery end
 

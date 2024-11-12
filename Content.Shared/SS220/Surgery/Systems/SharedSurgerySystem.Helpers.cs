@@ -37,20 +37,20 @@ public abstract partial class SharedSurgerySystem
         return true;
     }
 
-    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode, EntityUid? performer = null)
+    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode, EntityUid performer, EntityUid? used)
     {
         var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-        ChangeSurgeryNode(entity, performer, targetNode, surgeryProto);
+        ChangeSurgeryNode(entity, performer, used, targetNode, surgeryProto);
     }
 
-    protected void StartSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid? performer = null)
+    protected void StartSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid performer, EntityUid? used)
     {
         var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-        ChangeSurgeryNode(entity, performer, surgeryProto.Start, surgeryProto);
+        ChangeSurgeryNode(entity, performer, used, surgeryProto.Start, surgeryProto);
     }
 
-    // think of making struct which contains User and Used and etc. Pass it through ref to make locales richer.
-    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid? performer, string targetNode, SurgeryGraphPrototype surgeryGraph)
+    // Think of way of the bulling the used parameter.
+    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid performer, EntityUid? used, string targetNode, SurgeryGraphPrototype surgeryGraph)
     {
         if (!surgeryGraph.TryGetNode(targetNode, out var foundNode))
         {
@@ -58,7 +58,9 @@ public abstract partial class SharedSurgerySystem
             return;
         }
         entity.Comp.CurrentNode = foundNode;
-
-        _popup.PopupPredicted(SurgeryGraph.Popup(foundNode), entity.Owner, performer);
+        if (SurgeryGraph.Popup(foundNode) != null)
+            _popup.PopupPredicted(Loc.GetString(SurgeryGraph.Popup(foundNode)!, ("target", entity.Owner),
+                ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
+        // hands/pawns uh...
     }
 }

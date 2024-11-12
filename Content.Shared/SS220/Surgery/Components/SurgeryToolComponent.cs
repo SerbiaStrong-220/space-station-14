@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.Surgery.Components;
 public sealed partial class SurgeryToolComponent : Component
 {
     [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
-    public SurgeryToolType ToolType = SurgeryToolType.invalid;
+    public SurgeryToolType ToolType = SurgeryToolType.Invalid;
 
     [DataField("sound")]
     public SoundSpecifier? UsingSound = null;
@@ -17,10 +17,11 @@ public sealed partial class SurgeryToolComponent : Component
 // for now I need only this ones
 public enum SurgeryToolType
 {
-    invalid = 0,
-    scalpel,
-    retractor,
-    hemostat,
-    saw,
-    cautery
+    Invalid = -1,
+    Specific,
+    Scalpel,
+    Retractor,
+    Hemostat,
+    Saw,
+    Cautery
 }
