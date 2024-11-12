@@ -75,6 +75,23 @@
 
 #funny kaboom. Totally harmless!
 - type: entity
+  id: GrenadeBlastToy
+  name: blast grenade
+  parent: [ BaseGrenadeToy, BaseGrenade ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeBlastToy
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: blast
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
+
+- type: entity
   id: GrenadeFragToy
   name: frag grenade
   parent: [ BaseGrenadeToy, BaseGrenade ]
@@ -89,23 +106,6 @@
   - type: Appearance
   - type: SpentAmmoVisuals
     state: frag
-    suffix: false
-
-- type: entity
-  id: GrenadeBlastToy
-  name: blast grenade
-  parent: [ BaseGrenadeToy, GrenadeBlastToy ]
-  components:
-  - type: CartridgeAmmo
-    proto: BulletGrenadeBlastToy
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
-    layers:
-    - state: blast
-      map: ["enum.AmmoVisualLayers.Base"]
-  - type: Appearance
-  - type: SpentAmmoVisuals
-    state: blast
     suffix: false
 
 #doesn't really flash anybody
