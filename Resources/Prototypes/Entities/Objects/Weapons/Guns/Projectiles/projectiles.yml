@@ -786,7 +786,7 @@
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 0
+        Piercing: 0.01 #ss220 toys #harmless, no bleeding
 
 - type: entity
   id: BulletAcid

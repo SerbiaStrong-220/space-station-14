@@ -45,7 +45,6 @@
     proto: BulletFoam
     deleteOnSpawn: true
 
-
 - type: entity
   id: ShellShotgunFoam
   parent: BaseShellShotgunToy

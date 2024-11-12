@@ -1,0 +1,39 @@
+# Svarshik's toy guns
+# .35 pistol mags
+ent-MagazinePistolCaps = пистолетный магазин (.35 авто)
+    .desc = { ent-BaseMagazinePistol.desc }
+    .suffix = Пистоны
+ent-MagazinePistolHighCapacityCaps = автопистолетный магазин (.35 авто)
+    .desc = { ent-BaseMagazinePistolHighCapacity.desc }
+    .suffix = Пистоны
+ent-MagazinePistolSubMachineGunCaps = магазин ПП (.35 авто)
+    .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
+    .suffix = Пистоны
+ent-MagazinePistolFoam = пистолетный магазин (.35 авто)
+    .desc = { ent-BaseMagazinePistol.desc }
+    .suffix = Поролон
+ent-MagazinePistolHighCapacityFoam = автопистолетный магазин (.35 авто)
+    .desc = { ent-BaseMagazinePistolHighCapacity.desc }
+    .suffix = Поролон
+ent-MagazinePistolSubMachineGunFoam = магазин ПП (.35 авто)
+    .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
+    .suffix = Поролон
+
+# shotgun mags
+ent-MagazineShotgunCaps = барабан (.50 дробь)
+    .desc = { ent-BaseMagazineShotgun.desc }
+    .suffix = Пистоны
+ent-MagazineShotgunBeanbagCaps = барабан (.50 травматические)
+    .desc = { ent-BaseMagazineShotgun.desc }
+    .suffix = Пистоны
+ent-MagazineShotgunFoam = барабан (.50 дробь)
+    .desc = { ent-BaseMagazineShotgun.desc }
+    .suffix = Поролон
+ent-MagazineShotgunBeanbagFoam = барабан (.50 травматические)
+    .desc = { ent-BaseMagazineShotgun.desc }
+    .suffix = Поролон
+
+# SAW mag
+ent-MagazineLightRifleBoxCaps = короб патронов L6 SAW (.30 винтовочные)
+    .desc = { ent-BaseMagazineLightRifle.desc }
+    .suffix = Пистоны

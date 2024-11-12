@@ -7,6 +7,6 @@ ent-BulletGrenadeFlashToy = светошумовая граната
 ent-BulletGrenadeFragToy = осколочная граната
     .desc = { ent-BaseBulletTrigger.desc }
     .suffix = Игрушечная
-ent-BulletGrenadeFragToy = КАБУМ граната
+ent-BulletGrenadeKaboomToy = КАБУМ граната
     .desc = РП ядерка
     .suffix = Игрушечная, Адмемы
