@@ -1296,7 +1296,7 @@
   suffix: Death Squad
   components:
   - type: Pda
-    id: CentcomIDCardDeathsquad
+    id: CentcomIDCardDeathsquadOperative #SS220-DeathSquad Update
     state: pda-deathsquad #SS220 PDA-Resprite
   - type: PdaBorderColor #SS220 PDA-Resprite
     borderColor: "#212129" #SS220 PDA-Resprite

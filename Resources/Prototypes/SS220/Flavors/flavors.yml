@@ -42,3 +42,8 @@
   id: french75
   flavorType: Complex
   description: терпко-сладко
+
+- type: flavor
+  id: HolyMoly
+  flavorType: Base
+  description: божественно

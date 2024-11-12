@@ -66,3 +66,40 @@
     sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
+
+# Эскадрон Смерти
+- type: entity
+  parent: ClothingShoesBootsMagBase
+  id: ClothingShoesBootsMagDQ
+  name: Death Squad Magnetic Boots
+  description: The most modern magnetic shoes in recognizable colors.
+  components:
+  - type: InputMover
+    toParent: true
+  - type: MovementSpeedModifier
+    weightlessAcceleration: 1.2
+    weightlessFriction: 0.5
+    weightlessModifier: 1.5
+  - type: CanMoveInAir
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: GasTank
+    outputPressure: 42.6
+    air:
+      volume: 5
+      temperature: 293.15
+      moles:
+        - 1.153853429 # oxygen
+        - 1.153853429 # nitrogen
+  - type: UserInterface
+    interfaces:
+      enum.SharedGasTankUiKey.Key:
+        type: GasTankBoundUserInterface
+  - type: Jetpack
+    moleUsage: 0.00085
