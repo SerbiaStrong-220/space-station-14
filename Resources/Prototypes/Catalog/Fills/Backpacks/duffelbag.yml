@@ -399,7 +399,24 @@
       - id: BalloonElite
       - id: BalloonJuggernaut
       - id: BalloonCommander
-      - id: SnapPopBox
+      #ss220 toys begin
+      #- id: SnapPopBox
+      - id: BoxDonkSoftBox
+      - id: BoxCartridgeCap
+      - id: ClothingNeckSyndicakePin
+      - id: WeaponShotgunBulldogToy
+        orGroup: PrimaryWeapon
+      - id: WeaponSubMachineGunC20rToy
+        orGroup: PrimaryWeapon
+      - id: WeaponPistolViperToy
+        orGroup: Secondary
+      - id: FoamCrossbow
+        orGroup: Secondary
+      - id: DoubleToySword
+        orGroup: Sword
+      - id: ToySword
+        orGroup: Sword
+      #ss220 toys end
       - id: GrenadeDummy
         amount: 2
       - id: SyndieTrickyBomb

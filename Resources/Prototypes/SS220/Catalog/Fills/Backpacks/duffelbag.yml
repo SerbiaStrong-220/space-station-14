@@ -76,7 +76,7 @@
   parent: ClothingBackpackDuffelSyndicateAmmo
   id: ClothingBackpackDuffelSyndicateAmmoFilledToy
   name: ammo bundle
-  description: "Reloading! Contains 4 magazines for the C-20r, 4 drums for the Bulldog, and 2 ammo boxes for the L6 SAW."
+  description: "Reloading! Contains 4 magazines for the C-20r, 4 drums for the Bulldog, 2 ammo boxes for the L6 SAW and spare grenades for China Lake."
   suffix: Toy
   components:
   - type: StorageFill
@@ -91,23 +91,3 @@
         amount: 3
       - id: GrenadeFragToy
         amount: 3
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateDecoyKitFilledToy
-  name: decoy bundle
-  description: "Contains distractions, both auditory and visual. Smell coming soon."
-  suffix: Toy
-  components:
-  - type: StorageFill
-    contents:
-      - id: BalloonOperative
-      - id: BalloonAgent
-      - id: BalloonElite
-      - id: BalloonJuggernaut
-      - id: BalloonCommander
-      - id: SnapPopBox
-      - id: GrenadeDummy
-        amount: 2
-      - id: SyndieTrickyBomb
-        amount: 2

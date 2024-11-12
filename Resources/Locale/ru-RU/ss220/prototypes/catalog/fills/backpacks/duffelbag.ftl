@@ -16,6 +16,3 @@ ent-ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy = { ent-ClothingBack
 ent-ClothingBackpackDuffelSyndicateAmmoFilledToy = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор боеприпасов, Синдикат, Игрушечный
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
-ent-ClothingBackpackDuffelSyndicateDecoyKitFilledToy = { ent-ClothingBackpackDuffelSyndicate }
-    .suffix = набор обманок, Игрушечный
-    .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
