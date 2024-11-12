@@ -2,6 +2,7 @@
 #caps
 - type: entity
   id: PelletShotgunCaps
+  categories: [ HideSpawnMenu ]
   parent: PelletShotgun
   components:
   - type: Projectile
