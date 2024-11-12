@@ -48,6 +48,15 @@
       tags:
       - MagazinePistolSubMachineGunToy
 
+- type: entity
+  id: BaseMagazinePistolCaselessRifleToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolCaselessRifle ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolCaselessRifleToy
+
 #shotgun
 - type: entity
   id: BaseMagazineShotgunToy
@@ -106,14 +115,23 @@
   id: MagazinePistolSubMachineGunCaps
   parent: [ BaseMagazineToyCaps, BaseMagazinePistolSubMachineGunToy ]
   components:
-    - type: BallisticAmmoProvider
-      proto: CartridgeCap
     - type: Sprite
       layers:
         - state: red
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolCaselessRifleCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolCaselessRifleToy ]
+  components:
+  - type: Sprite
+    slayers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 #LMG
 - type: entity
@@ -194,6 +212,17 @@
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolCaselessRifleFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolCaselessRifleToy ]
+  components:
+  - type: Sprite
+    slayers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 #shotgun
 - type: entity

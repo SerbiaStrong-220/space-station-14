@@ -9,6 +9,9 @@ ent-MagazinePistolHighCapacityCaps = автопистолетный магази
 ent-MagazinePistolSubMachineGunCaps = магазин ПП (.35 авто)
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
     .suffix = Пистоны
+ent-MagazinePistolCaselessRifleCaps = пистолетный магазин (.25 безгильзовые)
+    .desc = { ent-BaseMagazinePistolCaselessRifle.desc }
+    .suffix = Пистоны
 ent-MagazinePistolFoam = пистолетный магазин (.35 авто)
     .desc = { ent-BaseMagazinePistol.desc }
     .suffix = Поролон
@@ -17,6 +20,9 @@ ent-MagazinePistolHighCapacityFoam = автопистолетный магази
     .suffix = Поролон
 ent-MagazinePistolSubMachineGunFoam = магазин ПП (.35 авто)
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
+    .suffix = Поролон
+ent-MagazinePistolCaselessRifleFoam = пистолетный магазин (.25 безгильзовые)
+    .desc = { ent-BaseMagazinePistolCaselessRifle.desc }
     .suffix = Поролон
 
 # shotgun mags

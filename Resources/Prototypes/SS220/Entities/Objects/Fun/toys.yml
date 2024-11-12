@@ -234,3 +234,30 @@
     tags:
     - Sidearm
     - ToySidearm
+
+- type: entity
+  name: cobra
+  parent: [ BaseGunToy, WeaponPistolCobra ]
+  id: WeaponPistolCobraToy
+  description: A rugged, robust operator handgun with inbuilt silencer. Where does casings come from?!
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolCaselessRifleCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolCaselessRifleToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam

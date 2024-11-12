@@ -511,7 +511,18 @@
     maxIntensity: 0.01
     canCreateVacuum: false #extra safety y'know?
     maxTileBreak: 0
-  #ss220 toys end 
+  - type: HiddenDescription
+    entries:
+      - label: hidden-desc-toy-weapons-explosive-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: hidden-desc-toy-weapons-explosive-clown
+        jobRequired:
+          - Clown
+          - Mime
+  #ss220 toys end
 
 - type: entity
   name: syndicate trickybomb
