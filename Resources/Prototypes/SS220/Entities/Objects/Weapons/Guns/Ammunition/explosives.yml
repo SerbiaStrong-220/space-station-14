@@ -71,7 +71,6 @@
         jobRequired:
           - Clown
           - Mime
-          - ERTClown
 
 #funny kaboom. Totally harmless!
 - type: entity

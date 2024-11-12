@@ -19,7 +19,6 @@
         jobRequired:
           - Clown
           - Mime
-          - ERTClown
 
 #pistol
 - type: entity

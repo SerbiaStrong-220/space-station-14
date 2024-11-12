@@ -94,7 +94,6 @@
       jobRequired:
         - Clown
         - Mime
-        - ERTClown
 
 - type: entity
   parent: [ BaseGunToy, WeaponLauncherChinaLake ]
@@ -110,16 +109,12 @@
     proto: GrenadeFragToy
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-  - type: Gun
-    clumsyProof: true
 
 - type: entity
   parent: [ BaseGunToy, WeaponSubMachineGunC20r ]
   id: WeaponSubMachineGunC20rToy
   description: A firearm that is often used by the infamous nuclear operatives. Uses ...uhh, foam ammo?
   components:
-  - type: Gun
-    clumsyProof: true
   - type: ItemSlots
     slots:
       gun_magazine:
