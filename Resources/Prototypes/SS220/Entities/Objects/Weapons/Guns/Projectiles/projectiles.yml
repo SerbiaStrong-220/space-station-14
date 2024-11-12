@@ -289,3 +289,22 @@
   - type: ActiveTimerTrigger
     timeRemaining: 0.3
   - type: DeleteOnTrigger
+
+- type: entity
+  id: BulletGrenadeKaboomToy
+  name: kaboom grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 50 # about a station size
+    intensitySlope: 0.3
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
