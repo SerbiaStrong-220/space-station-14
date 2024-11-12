@@ -158,3 +158,6 @@
 
 - type: Tag
   id: MagazineShotgunToy
+
+- type: Tag
+  id: CartridgeMagnumFoam
