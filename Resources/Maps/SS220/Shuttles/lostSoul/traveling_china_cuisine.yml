@@ -23,6 +23,7 @@ entities:
       name: UC-CV "Kebab-Roll"
     - type: Transform
       pos: -0.421875,-0.6875
+      parent: 294
     - type: MapGrid
       chunks:
         0,0:
@@ -309,6 +310,18 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+  - uid: 294
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
+    - type: Broadphase
+    - type: OccluderTree
 - proto: AirCanister
   entities:
   - uid: 260
@@ -389,36 +402,24 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -3.5,-2.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 259
   - uid: 255
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,-1.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 258
   - uid: 256
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,-2.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 258
   - uid: 257
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,-3.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 258
 - proto: BoxBeaker
   entities:
   - uid: 38
@@ -1510,6 +1511,18 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: LuxuryPen
+  entities:
+  - uid: 296
+    components:
+    - type: Transform
+      pos: 0.32010442,6.4053273
+      parent: 2
+  - uid: 297
+    components:
+    - type: Transform
+      pos: 0.6996487,6.3802633
+      parent: 2
 - proto: MeatwheatBushel
   entities:
   - uid: 285
@@ -1603,6 +1616,21 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: PaperNtForm
+  entities:
+  - uid: 295
+    components:
+    - type: Transform
+      pos: 0.76003516,6.437197
+      parent: 2
+    - type: Paper
+      content: >
+        [head=2]ИТАК....[/head]
+
+        Так как у нас прошлый зелёный был ОГУЗОК, у нас ВСЁ мясо теперь - просрок, и нам срочно надо его хоть кому-то впихнуть.
+
+
+        Я тут подумал... у нас есть недалеко прямой коридор до станции НТ, может им впихнём все остатки, а там уже и на месте новое получим.
 - proto: PotatoSeeds
   entities:
   - uid: 223
@@ -1875,6 +1903,8 @@ entities:
     - type: Transform
       pos: 2.5,5.5
       parent: 2
+    - type: Thruster
+      enabled: False
   - uid: 77
     components:
     - type: Transform
@@ -1932,18 +1962,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: TravelingChefSpawner
-  entities:
-  - uid: 275
-    components:
-    - type: Transform
-      pos: 0.5,5.5
-      parent: 2
-  - uid: 276
-    components:
-    - type: Transform
-      pos: 2.5,-2.5
-      parent: 2
 - proto: VariantCubeBox
   entities:
   - uid: 112
@@ -1981,6 +1999,18 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,-3.5
+      parent: 2
+- proto: VisitorChefSpawner
+  entities:
+  - uid: 275
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 2
+  - uid: 276
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
       parent: 2
 - proto: WallShuttle
   entities:
