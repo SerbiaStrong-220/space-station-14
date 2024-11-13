@@ -7,12 +7,13 @@ namespace Content.Server.SS220.MindSlave.Components;
 [RegisterComponent]
 public sealed partial class MindSlaveStopWordContainerComponent : Component
 {
+    // to pass tests add values
     [DataField]
-    public string Collection = "";
+    public string Collection = "nanotrasen_central_command";
     [DataField]
-    public string Group = "";
+    public string Group = "roundstart";
     [DataField]
-    public string Form = "";
+    public string Form = "hos_mindslave_briefing";
 
     /// <summary>
     /// This stamp will be applied to list
