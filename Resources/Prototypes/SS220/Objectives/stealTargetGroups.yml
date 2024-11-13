@@ -21,7 +21,7 @@
 
 - type: stealTargetGroup
   id: BookSecretDocuments
-  name: "emergency security orders"
+  name: steal-target-groups-secret-documents
   sprite:
     sprite: Objects/Misc/bureaucracy.rsi
     state: folder-sec-doc
