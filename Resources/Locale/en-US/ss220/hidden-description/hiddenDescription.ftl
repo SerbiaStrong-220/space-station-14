@@ -32,3 +32,9 @@ hidden-desc-toy-weapons-ammo-clown = [color=#c10ec4]Donk Co. approved standard m
 
 hidden-desc-toy-weapons-explosive-syndicate = [color=#e31735]Creates a very realistic but completely harmless explosion for making a mess.[/color]
 hidden-desc-toy-weapons-explosive-clown = [color=#c10ec4]Explosive packed with bananium and confetti. Explodes in a very realistic way, but doesn't hurt anyone![/color]
+
+hidden-desc-toy-shield-syndicate = [color=#e31735]It's plastic with absolutely no defence in combat.[/color]
+hidden-desc-toy-shield-clown = [color=#c10ec4]Have a toy sword battle with this shield! HONK![/color]
+
+hidden-desc-toy-armour-syndicate = [color=#e31735]It's a cloth replica of real armour, offering no protection whatsoever.[/color]
+hidden-desc-toy-armour-clown = [color=#c10ec4]Looks 1 in 1 like the real thing! But it's really just a rag![/color]
