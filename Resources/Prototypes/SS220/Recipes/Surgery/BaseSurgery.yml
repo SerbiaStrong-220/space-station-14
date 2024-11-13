@@ -19,13 +19,13 @@
       description: retract-skin-description
 
 - type: abstractSurgeryNode
-  id: cut bone
+  id: saw bone
   node:
     node: abstract
     nodeText:
-      examineDescription: cut-bone-examine-description
-      popup: cut-bone-popup
-      description: cut-bone-description
+      examineDescription: saw-bone-examine-description
+      popup: saw-bone-popup
+      description: saw-bone-description
 
 - type: abstractSurgeryNode
   id: clamp bleeders

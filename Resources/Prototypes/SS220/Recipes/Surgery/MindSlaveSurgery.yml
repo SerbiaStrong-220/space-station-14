@@ -1,7 +1,7 @@
 - type: surgeryGraph
   id: MindSlaveFix
   start: start
-  end: seal the wound
+  end: seal wound
   graph:
   - node: start
     nodeText:

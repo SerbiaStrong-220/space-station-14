@@ -21,7 +21,7 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
     public List<IComponent> DisfunctionComponents = new();
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public MindSlaveDisfunctionType DisfunctionStage = MindSlaveDisfunctionType.initial;
+    public MindSlaveDisfunctionType DisfunctionStage = MindSlaveDisfunctionType.Initial;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Active = true;
@@ -42,17 +42,17 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
     public TimeSpan PausedTime;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float ConstMinutesBetweenStages = 35;
+    public float ConstMinutesBetweenStages = 2;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float MaxRandomMinutesBetweenStages = 7;
+    public float MaxRandomMinutesBetweenStages = 1;
 
 }
 
 public enum MindSlaveDisfunctionType
 {
-    initial = 1,
-    progressive,
-    terminal,
-    deadly
+    Initial = 1,
+    Progressive,
+    Terminal,
+    Deadly
 }

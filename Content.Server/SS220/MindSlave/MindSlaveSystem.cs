@@ -101,8 +101,6 @@ public sealed class MindSlaveSystem : EntitySystem
             _mindSlaveDisfunction.UnpauseDisfunction((entity.Owner, mindSlaveDisfunction));
             return;
         }
-
-        AddComp<MindSlaveDisfunctionComponent>(entity.Owner);
     }
 
     private void OnAccent(Entity<MindSlaveComponent> entity, ref BeforeAccentGetEvent args)

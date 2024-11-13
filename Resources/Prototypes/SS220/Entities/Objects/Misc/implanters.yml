@@ -7,5 +7,4 @@
   components:
     - type: Implanter
       implant: MindSlaveImplant
-      # TODO_SS220: Ask PMs
       implantTime: 10

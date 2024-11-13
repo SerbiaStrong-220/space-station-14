@@ -4,6 +4,8 @@ using Content.Server.Popups;
 using Content.Server.SS220.MindSlave.Components;
 using Content.Shared.Damage;
 using Content.Shared.Implants;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -29,9 +31,9 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
         SubscribeLocalEvent<MindSlaveDisfunctionProviderComponent, ImplantImplantedEvent>(OnProviderImplanted);
     }
 
-    public override void FrameUpdate(float frameTime)
+    public override void Update(float frameTime)
     {
-        base.FrameUpdate(frameTime);
+        base.Update(frameTime);
 
         var query = EntityQueryEnumerator<MindSlaveDisfunctionComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -39,8 +41,10 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
             if (!comp.Active)
                 return;
 
-            if (comp.DisfunctionStage == MindSlaveDisfunctionType.deadly
-                && _gameTiming.CurTime > comp.NextDeadlyDamageTime)
+            if (comp.DisfunctionStage == MindSlaveDisfunctionType.Deadly
+                && _gameTiming.CurTime > comp.NextDeadlyDamageTime
+                && TryComp<MobStateComponent>(uid, out var stateComponent)
+                && stateComponent.CurrentState != MobState.Dead)
             {
                 _damageable.TryChangeDamage(uid, comp.DeadlyStageDamage, true);
                 comp.NextDeadlyDamageTime = _gameTiming.CurTime + TimeSpan.FromSeconds(SecondsBetweenStageDamage);
@@ -70,7 +74,7 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
         if (args.Implanted == null)
             return;
 
-        var disfunctionComponent = EnsureComp<MindSlaveDisfunctionComponent>(entity);
+        var disfunctionComponent = EnsureComp<MindSlaveDisfunctionComponent>(args.Implanted.Value);
         disfunctionComponent.DisfunctionParameters = entity.Comp.Disfunction;
     }
 
@@ -80,8 +84,8 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
         if (!Resolve(uid, ref comp))
             return;
 
-        if (comp.DisfunctionStage == MindSlaveDisfunctionType.terminal
-            && (!comp.Deadly || comp.DisfunctionStage == MindSlaveDisfunctionType.terminal))
+        if (comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal
+            && (!comp.Deadly || comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal))
             return;
 
         foreach (var compName in comp.Disfunction[++comp.DisfunctionStage])
@@ -109,7 +113,7 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
             RemComp(uid, disfunctionComponent);
         }
 
-        if (comp.DisfunctionStage == MindSlaveDisfunctionType.terminal)
+        if (comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal)
             comp.Deadly = true;
     }
 

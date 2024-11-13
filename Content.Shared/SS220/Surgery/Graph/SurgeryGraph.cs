@@ -1,12 +1,14 @@
 // Original code from construction graph all edits under © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
 [Prototype("surgeryGraph")]
-public sealed partial class SurgeryGraphPrototype : IPrototype
+public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHooks
 {
     [ViewVariables]
     [IdDataField]
@@ -27,18 +29,16 @@ public sealed partial class SurgeryGraphPrototype : IPrototype
     public IReadOnlyList<SurgeryGraphNode> Nodes => _graph;
 
 
-    public bool GetStartNode([NotNullWhen(true)] out SurgeryGraphNode? startNode)
+    public SurgeryGraphNode? GetStartNode()
     {
-        if (!TryGetNode(Start, out startNode))
-            return false;
-
-        return true;
+        TryGetNode(Start, out var startNode);
+        return startNode!;
     }
 
-    public SurgeryGraphNode? GetEndNode()
+    public SurgeryGraphNode GetEndNode()
     {
         TryGetNode(End, out var endNode);
-        return endNode;
+        return endNode!;
     }
 
     public bool GetEndNode([NotNullWhen(true)] out SurgeryGraphNode? endNode)
@@ -61,5 +61,14 @@ public sealed partial class SurgeryGraphPrototype : IPrototype
         }
 
         return foundNode != null;
+    }
+
+    void ISerializationHooks.AfterDeserialization()
+    {
+        if (!TryGetNode(Start, out var _))
+            throw new Exception($"No start node in surgery graph {ID}");
+
+        if (!TryGetNode(End, out var _))
+            throw new Exception($"No end node in surgery graph {ID}");
     }
 }

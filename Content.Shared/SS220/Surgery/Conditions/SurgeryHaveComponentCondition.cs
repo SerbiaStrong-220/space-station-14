@@ -1,7 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.ComponentModel.DataAnnotations;
 using Content.Shared.SS220.Surgery.Graph;
 using JetBrains.Annotations;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Surgery.Conditions;
 
@@ -9,14 +11,12 @@ namespace Content.Shared.SS220.Surgery.Conditions;
 [DataDefinition]
 public sealed partial class SurgeryHaveComponentCondition : ISurgeryGraphCondition
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-
     [DataField(required: true)]
     public string Component = "";
 
     public bool Condition(EntityUid uid, IEntityManager entityManager)
     {
-        var compReg = _componentFactory.GetRegistration(Component);
+        var compReg = entityManager.ComponentFactory.GetRegistration(Component);
         if (entityManager.HasComponent(uid, compReg.Type))
             return true;
 

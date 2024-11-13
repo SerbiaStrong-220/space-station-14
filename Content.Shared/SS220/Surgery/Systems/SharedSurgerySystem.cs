@@ -38,6 +38,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             BuckleDoAfterEarly((uid, comp), ev.Event, ev);
         });
+        SubscribeLocalEvent<OnSurgeryComponent, SurgeryDoAfterEvent>(OnSurgeryDoAfter);
 
         SubscribeLocalEvent<SurgeryDrapeComponent, AfterInteractEvent>(OnDrapeInteract);
     }
@@ -55,9 +56,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnExamined(Entity<OnSurgeryComponent> entity, ref ExaminedEvent args)
     {
+        if (entity.Comp.CurrentNode == null)
+            return;
+
+        var graphProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
+        if (!graphProto.TryGetNode(entity.Comp.CurrentNode, out var currentNode))
+            return;
+
         if (entity.Comp.CurrentNode != null
-            && SurgeryGraph.ExamineDescription(entity.Comp.CurrentNode) != null)
-            args.PushMarkup(Loc.GetString(SurgeryGraph.ExamineDescription(entity.Comp.CurrentNode)!), SurgeryExaminePushPriority);
+            && SurgeryGraph.ExamineDescription(currentNode) != null)
+            args.PushMarkup(Loc.GetString(SurgeryGraph.ExamineDescription(currentNode)!), SurgeryExaminePushPriority);
     }
 
     private void BuckleDoAfterEarly(Entity<OnSurgeryComponent> entity, SurgeryDoAfterEvent args, CancellableEntityEventArgs ev)
@@ -67,6 +75,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (!_buckleSystem.IsBuckled(args.Target.Value))
             ev.Cancel();
+    }
+
+    private void OnSurgeryDoAfter(Entity<OnSurgeryComponent> entity, ref SurgeryDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        ProceedToNextStep(entity, args.User, args.Used, args.TargetEdge);
     }
 
     private void OnDrapeInteract(Entity<SurgeryDrapeComponent> entity, ref AfterInteractEvent args)
@@ -104,9 +120,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return false;
         }
 
+        var graphProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
+        if (!graphProto.TryGetNode(entity.Comp.CurrentNode, out var currentNode))
+        {
+            Log.Fatal($"Current node of {ToPrettyString(entity)} has incorrect value {entity.Comp.CurrentNode} for graph proto {entity.Comp.SurgeryGraphProtoId}");
+            return false;
+        }
+
         SurgeryGraphEdge? chosenEdge = null;
         bool isAbleToPerform = false;
-        foreach (var edge in entity.Comp.CurrentNode.Edges)
+        foreach (var edge in currentNode.Edges)
         {
             // id any edges exist make it true
             isAbleToPerform = true;
@@ -145,11 +168,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             };
 
         if (_doAfter.TryStartDoAfter(performerDoAfterEventArgs))
-        {
-            Log.Debug($"Started playing sound time");
             _audio.PlayPredicted(used.Comp.UsingSound, entity.Owner, user,
-                            AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
-        }
+                                        AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
+
         return true;
     }
 }

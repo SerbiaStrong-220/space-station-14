@@ -10,11 +10,14 @@ namespace Content.Shared.SS220.Surgery.Components;
 /// This component applies to entities on which operation is started.
 /// </summary>
 [RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class OnSurgeryComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
+    [AutoNetworkedField]
     public ProtoId<SurgeryGraphPrototype> SurgeryGraphProtoId;
 
     [ViewVariables]
-    public SurgeryGraphNode? CurrentNode;
+    [AutoNetworkedField]
+    public string? CurrentNode;
 }
