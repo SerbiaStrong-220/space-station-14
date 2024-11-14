@@ -21,6 +21,7 @@ using Content.Server.Antag.Components;
 using Robust.Shared.Utility;
 using Robust.Server.GameObjects;
 using Content.Shared.Mind;
+using Content.Shared.Mindshield.Components;
 
 namespace Content.Server.SS220.Commands
 {
@@ -55,7 +56,7 @@ namespace Content.Server.SS220.Commands
                 shell.WriteLine($"{Identity.Name(isSuccessEntityUid.Value, _entityManager)} успешно стал {args[0]}");
             }
             else
-                shell.WriteLine($"Никто не стал антагонистом, потому что все итак антагонисты! Ну или в джоббане..");
+                shell.WriteLine($"Никто не стал антагонистом, потому что все итак антагонисты! Ну или в джоббане.. Ну или с МЩ.. Ну или сами разбирайтесь, как оно работает!");
         }
 
         private EntityUid? AdminMakeRandomAntagCommand(string defaultRule)
@@ -84,7 +85,6 @@ namespace Content.Server.SS220.Commands
             if (mindId == null)
                 return null;
 
-            var banRole = banSystem.GetRoleBans(session.UserId);
             if (banSystem.GetRoleBans(session.UserId) is { } roleBans)
             {
                 if (roleBans.Contains("Job:" + defaultRule))
@@ -94,7 +94,8 @@ namespace Content.Server.SS220.Commands
             if (roleSystem.MindHasRole<TraitorRoleComponent>(mindId.Value) ||
            roleSystem.MindHasRole<ThiefRoleComponent>(mindId.Value) ||
             roleSystem.MindHasRole<ZombieRoleComponent>(mindId.Value) ||
-            _entityManager.TryGetComponent<GhostComponent>(session.AttachedEntity, out var Ghostcomp))
+            _entityManager.HasComponent<GhostComponent>(session.AttachedEntity)
+            || _entityManager.HasComponent<MindShieldComponent>(session.AttachedEntity))
                 return null;
 
             switch (defaultRule) // TODO: When will add a cult add a cultist there too. U can add more for fun if u want.
