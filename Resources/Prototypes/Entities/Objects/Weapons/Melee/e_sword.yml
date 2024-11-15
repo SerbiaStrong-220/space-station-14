@@ -115,7 +115,7 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 80
-    reflectProbProjectile: 0.40
+    reflectProbProjectile: 0.30
     spreadProjectile: 180
     #ss220lowTTKUpdate
 

@@ -43,7 +43,7 @@
     state: icon
   discipline: Arsenal
   tier: 1
-  cost: 7500
+  cost: 10000 # ss220ttkUpdate
   recipeUnlocks:
   - WeaponLaserCarbine
 
