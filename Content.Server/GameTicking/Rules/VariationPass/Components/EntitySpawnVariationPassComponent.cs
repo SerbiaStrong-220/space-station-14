@@ -28,7 +28,7 @@ public sealed partial class EntitySpawnVariationPassComponent : Component
 
     // SS220 Fix SM begin
     /// <summary>
-    ///     The selected components block the spawn of garbage next to or in the vicinity of the specified entity with chosen component
+    ///     A blacklis of entities that will block spawn of garbage in their vicinity
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist = new();
