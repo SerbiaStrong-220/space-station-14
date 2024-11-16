@@ -2,7 +2,6 @@
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
   "copyright": "Sprited by enmer_ (Discord) for SS220",
-
   "size": {
     "x": 32,
     "y": 32
@@ -17,7 +16,7 @@
     },
 	{
       "name": "equipped-OUTERCLOTHING-vox",
-      "directions": 4
+	  "directions": 4
     },
     {
       "name": "inhand-left",
