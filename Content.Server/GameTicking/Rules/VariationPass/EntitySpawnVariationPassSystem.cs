@@ -11,7 +11,7 @@ public sealed class EntitySpawnVariationPassSystem : VariationPassSystem<EntityS
     // SS220 SM garbage fix begin
     [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    private const float Range = 3f;
+    private const float Range = 3f; // Range to check SM nearby
     // SS220 SM garbage fix end
     protected override void ApplyVariation(Entity<EntitySpawnVariationPassComponent> ent, ref StationVariationPassEvent args)
     {
