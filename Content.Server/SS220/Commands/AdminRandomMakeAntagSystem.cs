@@ -13,25 +13,21 @@ using Robust.Shared.Random;
 using Content.Shared.Ghost;
 using Content.Server.Administration.Managers;
 using Content.Server.Roles;
-using Content.Server.Roles.Jobs;
-using Content.Server.Preferences.Managers;
-using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Content.Server.Antag.Components;
-using Robust.Shared.Utility;
-using Robust.Server.GameObjects;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Preferences;
+using Content.Server.Preferences.Managers;
 
 namespace Content.Server.SS220.Commands
 {
-    [AdminCommand(AdminFlags.Ban)] // Only for admins
+    [AdminCommand(AdminFlags.VarEdit)] // Only for admins
     public sealed class MakeAntagCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private readonly IServerPreferencesManager _pref = default!;
 
         public string Command => "makerandomantag";
-        public string Description => "Делает случайного игрока антагонистом из предложенного списка с учетом джобок.";
+        public string Description => Loc.GetString("command-makerandomantag-description");
         public string Help => $"Usage: {Command}";
 
         private readonly List<string> _antagTypes = new() // TODO: When will add a cult add a cultist there
@@ -45,18 +41,19 @@ namespace Content.Server.SS220.Commands
         {
             if (args.Length == 0 || !_antagTypes.Contains(args[0]))
             {
-                shell.WriteLine("Необходимо указать тип антагониста: Traitor, Thief, или InitialInfected.");
+                shell.WriteLine(Loc.GetString("command-makerandomantag-objective"));
                 return;
             }
 
-            var isSuccessEntityUid = AdminMakeRandomAntagCommand(args[0]);
+            var successEntityUid = AdminMakeRandomAntagCommand(args[0]);
 
-            if (isSuccessEntityUid != null)
+            if (successEntityUid != null)
             {
-                shell.WriteLine($"{Identity.Name(isSuccessEntityUid.Value, _entityManager)} успешно стал {args[0]}");
+                shell.WriteLine(Loc.GetString("command-makerandomantag-sucess",
+                    ("Entityname", Identity.Name(successEntityUid.Value, _entityManager)), ("antag", args[0])));
             }
             else
-                shell.WriteLine($"Никто не стал антагонистом, потому что все итак антагонисты! Ну или в джоббане.. Ну или с МЩ.. Ну или сами разбирайтесь, как оно работает!");
+                shell.WriteLine(Loc.GetString("command-makerandomantag-negative"));
         }
 
         private EntityUid? AdminMakeRandomAntagCommand(string defaultRule)
@@ -64,7 +61,7 @@ namespace Content.Server.SS220.Commands
             var antag = _entityManager.System<AntagSelectionSystem>();
             var playerManager = IoCManager.Resolve<IPlayerManager>();
             var gameTicker = _entityManager.System<GameTicker>();
-            var robust = IoCManager.Resolve<IRobustRandom>();
+            var random = IoCManager.Resolve<IRobustRandom>();
             var mindSystem = _entityManager.System<SharedMindSystem>();
             var roleSystem = _entityManager.System<RoleSystem>();
             var banSystem = IoCManager.Resolve<IBanManager>();
@@ -73,46 +70,46 @@ namespace Content.Server.SS220.Commands
                 .Where(x => gameTicker.PlayerGameStatuses[x.UserId] == PlayerGameStatus.JoinedGame)
                 .ToList();
 
-            var playersPool = new AntagSelectionPlayerPool([players]);
+            random.Shuffle(players); // Shuffle player list to be more randomly
 
-            playersPool.TryPickAndTake(robust, out var session);
-
-            if (session == null)
-                return null;
-
-            mindSystem.TryGetMind(session.UserId, out var mindId);
-
-            if (mindId == null)
-                return null;
-
-            if (banSystem.GetRoleBans(session.UserId) is { } roleBans)
+            foreach (var player in players)
             {
-                if (roleBans.Contains("Job:" + defaultRule))
-                    return null;
+
+                var pref = (HumanoidCharacterProfile)_pref.GetPreferences(player.UserId).SelectedCharacter;
+
+                if (!mindSystem.TryGetMind(player.UserId, out var mindId)) // Is it player or a cow?
+                    continue;
+
+                if (banSystem.GetRoleBans(player.UserId) is { } roleBans &&
+                    roleBans.Contains("Job:" + defaultRule)) // Do he have a roleban on THIS antag?
+                    continue;
+
+                if (roleSystem.MindIsAntagonist(mindId) ||
+                _entityManager.HasComponent<GhostComponent>(player.AttachedEntity) ||
+                _entityManager.HasComponent<MindShieldComponent>(player.AttachedEntity)) // Is he already lucky boy or he is ghost or he is CAPTIAN?
+                    continue;
+
+                if (!pref.AntagPreferences.Contains(defaultRule)) // Do he want to be a chosen antag or no?
+                    continue;
+
+                switch (defaultRule) // TODO: When will add a cult add a cultist there too. U can add more for fun if u want.
+                {
+                    case "Traitor":
+                        antag.ForceMakeAntag<TraitorRuleComponent>(player, defaultRule);
+                        break;
+                    case "Thief":
+                        antag.ForceMakeAntag<ThiefRuleComponent>(player, defaultRule);
+                        break;
+                    case "InitialInfected":
+                        antag.ForceMakeAntag<ZombieRuleComponent>(player, defaultRule);
+                        break;
+                }
+                if (roleSystem.MindIsAntagonist(mindId)) // If he sucessfuly passed all checks and get his antag?
+                    return player.AttachedEntity;
             }
-
-            if (roleSystem.MindHasRole<TraitorRoleComponent>(mindId.Value) ||
-           roleSystem.MindHasRole<ThiefRoleComponent>(mindId.Value) ||
-            roleSystem.MindHasRole<ZombieRoleComponent>(mindId.Value) ||
-            _entityManager.HasComponent<GhostComponent>(session.AttachedEntity)
-            || _entityManager.HasComponent<MindShieldComponent>(session.AttachedEntity))
-                return null;
-
-            switch (defaultRule) // TODO: When will add a cult add a cultist there too. U can add more for fun if u want.
-            {
-                case "Traitor":
-                    antag.ForceMakeAntag<TraitorRuleComponent>(session, defaultRule);
-                    break;
-                case "Thief":
-                    antag.ForceMakeAntag<ThiefRuleComponent>(session, defaultRule);
-                    break;
-                case "InitialInfected":
-                    antag.ForceMakeAntag<ZombieRuleComponent>(session, defaultRule);
-                    break;
-            }
-
-            return session.AttachedEntity;
+            return null;
         }
+
 
         public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
         {
