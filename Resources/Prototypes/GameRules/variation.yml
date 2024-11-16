@@ -49,7 +49,7 @@
   # SS220 Fix SM garbage begin
     blacklist:
       components:
-        - SuperMatterComponent
+        - SuperMatter
   # SS220 Fix SM garbage end
 
 - type: weightedRandomFillSolution
