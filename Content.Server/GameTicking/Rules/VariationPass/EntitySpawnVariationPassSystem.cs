@@ -11,6 +11,7 @@ public sealed class EntitySpawnVariationPassSystem : VariationPassSystem<EntityS
     // SS220 SM garbage fix begin
     [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    private const float Range = 3f;
     // SS220 SM garbage fix end
     protected override void ApplyVariation(Entity<EntitySpawnVariationPassComponent> ent, ref StationVariationPassEvent args)
     {
@@ -25,11 +26,11 @@ public sealed class EntitySpawnVariationPassSystem : VariationPassSystem<EntityS
                 continue;
 
             // SS220 SM garbage fix begin
-            var listTakedEntites = _lookupSystem.GetEntitiesInRange(coords, range: 3f);
+            var listTakedEntites = _lookupSystem.GetEntitiesInRange(coords, Range);
 
             foreach (var checkedTakedEntities in listTakedEntites)
             {
-                if (_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, checkedTakedEntities))
+                if (!_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, checkedTakedEntities))
                     return;
             }
             // SS220 SM garbage fix end
