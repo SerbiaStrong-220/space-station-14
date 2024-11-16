@@ -1,4 +1,4 @@
-﻿using Content.Server.GameTicking.Rules.VariationPass.Components;
+using Content.Server.GameTicking.Rules.VariationPass.Components;
 using Content.Shared.Storage;
 using Robust.Shared.Random;
 using Content.Shared.Whitelist;
@@ -27,12 +27,15 @@ public sealed class EntitySpawnVariationPassSystem : VariationPassSystem<EntityS
 
             // SS220 SM garbage fix begin
             var listTakedEntites = _lookupSystem.GetEntitiesInRange(coords, Range);
+            bool isCanSpawn = true;
 
             foreach (var checkedTakedEntities in listTakedEntites)
             {
-                if (!_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, checkedTakedEntities))
-                    return;
+                if (_whitelistSystem.IsBlacklistPass(ent.Comp.Blacklist, checkedTakedEntities))
+                    isCanSpawn = false;
             }
+            if (!isCanSpawn)
+                continue;
             // SS220 SM garbage fix end
 
             var ents = EntitySpawnCollection.GetSpawns(ent.Comp.Entities, Random);
