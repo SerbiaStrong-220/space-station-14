@@ -5,7 +5,7 @@
         "y": 32
     },
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/9a7ceec10b463ca05ca29cbc418ea767b2ab2995, and modifed by EstKemran (Github) for SS220",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/9a7ceec10b463ca05ca29cbc418ea767b2ab2995, and modifed by EstKemran (Github) for SS220, pinpointer-nuclear state sprited by Estkemran (Github) for SS220",
     "states": [
         {
             "name": "pinonalert",
@@ -155,6 +155,9 @@
         },
         {
             "name": "pinpointer-station"
+        },
+        {
+            "name": "pinpointer-nuclear"
         },
         {
             "name": "inhand-left",
