@@ -16,5 +16,5 @@
   - type: Icon
     state: pinpointer-nuclear
   - type: Pinpointer
-    component: NuclearBomb
+    component: Nuke
     targetName: ядерная боеголовка
