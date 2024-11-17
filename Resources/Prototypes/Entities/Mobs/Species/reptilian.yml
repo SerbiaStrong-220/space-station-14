@@ -18,6 +18,12 @@
   - type: Icon
     sprite: Mobs/Species/Reptilian/parts.rsi
     state: full
+# SS220-change-races-height begin
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 1.1, 1.1
+# SS220-change-races-height end
   - type: Body
     prototype: Reptilian
     requiredLegs: 2
@@ -26,6 +32,20 @@
     spawned:
     - id: FoodMeatLizard
       amount: 5
+# SS220-change-races-height begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.375
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+# SS220-change-races-height end
   - type: LizardAccent
   - type: Speech
     speechSounds: Lizard
@@ -87,6 +107,10 @@
   categories: [ HideSpawnMenu ]
   description: A dummy reptilian meant to be used in character setup.
   components:
+# SS220-change-races-height begin
+  - type: Sprite
+    scale: 1.1, 1.1
+# SS220-change-races-height end
   - type: HumanoidAppearance
     species: Reptilian
     hideLayersOnEquip:

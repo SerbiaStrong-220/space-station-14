@@ -169,6 +169,17 @@
   categories:
   - UplinkWearables
 
+- type: listing
+  id: ClothingSilentShoes
+  name: uplink-silent-shoes-name
+  description: uplink-silent-shoes-desc
+  icon: {sprite: Clothing/Shoes/Specific/mboots.rsi, state: icon} #todo change
+  productEntity: ClothingSilentShoes
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkWearables
+
 # READD-VEHICLES
 - type: listing
   id: UplinkSyndicateSegwayCrate
@@ -188,6 +199,27 @@
     blacklist:
       components:
       - SurplusBundle
+
+#SS220 SpicyUPD begin
+- type: listing
+  id: UplinkSpicyPizza
+  name: uplink-spicypizza-name
+  description: uplink-spicypizza-desc
+  icon: { sprite: /Textures/Objects/Consumable/Food/Baked/pizza.rsi, state: spicy }
+  productEntity: FoodBoxPizzaFilledSpicy
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkWeaponry
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Chef
+#SS220 SpicyUPD end
 
 #- type: listing
 #  id: UplinkCQC

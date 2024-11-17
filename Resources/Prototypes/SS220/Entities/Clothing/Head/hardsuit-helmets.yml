@@ -50,6 +50,60 @@
         Slash: 0.8
         Piercing: 0.8
 
+# Death Squad Commander Hardsuit
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitDeathsquadCommander
+  name: the helmet of the commander of the DQ
+  description: The helmet from the Death Squad commander's costume.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/dq_helmet_commander.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/dq_helmet_commander.rsi
+  - type: PointLight
+    color: cyan
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.80
+        Heat: 0.80
+        Radiation: 0.80
+        Caustic: 0.95
+
+# Death Squad Alpha Hardsuit
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitDeathsquadAlpha
+  name: the helmet of the specialist of the DQ
+  description: The helmet from the Death Squad specialist's costume.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/dq_alpha_helmet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/dq_alpha_helmet.rsi
+  - type: PointLight
+    color: cyan
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.80
+        Heat: 0.80
+        Radiation: 0.80
+        Caustic: 0.95
+
 #SuperMatter operator's Hardsuit
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase

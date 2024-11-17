@@ -7,6 +7,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -55,7 +56,22 @@ public sealed partial class BlockingSystem : EntitySystem
 
         SubscribeLocalEvent<BlockingComponent, GetVerbsEvent<ExamineVerb>>(OnVerbExamine);
         SubscribeLocalEvent<BlockingComponent, MapInitEvent>(OnMapInit);
+
+        SubscribeLocalEvent<BlockingComponent, ItemToggledEvent>(OnToggleItem);
     }
+
+    //ss220 raise shield activated fix start
+    private void OnToggleItem(Entity<BlockingComponent> ent, ref ItemToggledEvent args)
+    {
+        if (ent.Comp.User == null)
+            return;
+
+        if (!args.Activated)
+        {
+            StopBlocking(ent.Owner, ent.Comp, ent.Comp.User.Value);
+        }
+    }
+    //ss220 raise shield activated fix end
 
     private void OnMapInit(EntityUid uid, BlockingComponent component, MapInitEvent args)
     {

@@ -14,6 +14,12 @@
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
     state: full
+# SS220-change-races-height begin
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.9, 0.9
+# SS220-change-races-height end
   - type: Body
     prototype: Diona
     requiredLegs: 2
@@ -88,7 +94,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.325
         density: 300 #weighs more than humans because wood
         restitution: 0.0
         mask:
@@ -130,6 +136,10 @@
   id: MobDionaDummy
   categories: [ HideSpawnMenu ]
   components:
+# SS220-change-races-height begin
+  - type: Sprite
+    scale: 0.9, 0.9
+# SS220-change-races-height end
   - type: HumanoidAppearance
     species: Diona
   - type: Inventory

@@ -253,3 +253,40 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
+
+- type: entity
+  parent: ClothingShoesChameleon
+  id: ClothingSilentShoes
+  name: black shoes #actual name and description in uplink_catalog.yml
+  suffix: Silent, Chameleon
+  description: Stylish black shoes.
+  components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: null
+  # HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-SilentShoes-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: hidden-desc-SilentShoes-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: corvax-hidden-desc-Chameleon-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: corvax-hidden-desc-Chameleon-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# HiddenDesc-End

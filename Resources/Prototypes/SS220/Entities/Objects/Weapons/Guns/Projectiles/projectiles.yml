@@ -171,3 +171,66 @@
     radius: 3.5
     color: blue
     energy: 0.5
+
+# Death Squad
+- type: entity
+  name: laser bolt
+  id: BulletLaserDestroy
+  parent: BulletLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 44
+        Structural: 800
+  - type: ProjectileSpread
+    proto: BulletLaser
+    count: 5
+    spread: 15
+
+- type: entity
+  name: laser bolt
+  id: BulletLaserHeal
+  parent: BulletLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+      - state: greenlaser
+  - type: Projectile
+    impactEffect: BulletImpactEffectGreenDisabler
+    damage:
+      types:
+        Blunt: -10
+        Slash: -12
+        Piercing: -20
+        Heat: -14
+        Radiation: 4
+        Poison: -8
+        Asphyxiation: -50
+  - type: ProjectileSpread
+    proto: BulletLaserHeal
+    count: 3
+    spread: 10
+
+- type: entity
+  id: BulletImpactEffectGreenDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: green
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
