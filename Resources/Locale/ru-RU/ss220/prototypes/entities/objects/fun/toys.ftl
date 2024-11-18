@@ -22,3 +22,6 @@ ent-WeaponPistolCobraToy = Кобра
 ent-EnergyShieldToy = Энергетический щит
     .desc = Новая игрушка от Sandy-Cat! Станьте победителем в каждом мечевом поединке!
     .suffix = Игрушечный
+ent-WeaponSniperHristovToy = Христов
+    .desc = Портативная крупнокалиберная снайперская винтовка.
+    .suffix = Винтовка, Игрушечный

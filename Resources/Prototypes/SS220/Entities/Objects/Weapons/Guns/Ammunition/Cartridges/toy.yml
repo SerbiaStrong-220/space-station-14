@@ -4,6 +4,10 @@
   parent: BaseShellShotgun
   suffix: Toy
   abstract: true
+  components:
+  - type: Tag
+    tags:
+    - CartridgeShotgunToy
 
 - type: entity
   id: ShellShotgunBeanbagCaps
@@ -68,3 +72,38 @@
   - type: CartridgeAmmo
     proto: BulletFoam
     deleteOnSpawn: true
+
+#for hristov
+#BASE
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: BaseCartridgeAntiMaterielToy
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMaterielToy
+
+#stunning
+- type: entity
+  parent: BaseCartridgeAntiMaterielToy
+  id: CartridgeAntiMaterielToyStun
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielToyStun
+
+#explosive
+- type: entity
+  parent: BaseCartridgeAntiMaterielToy
+  id: CartridgeAntiMaterielToyExplosive
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielToyExplosive
+
+#funny
+- type: entity
+  parent: BaseCartridgeAntiMaterielToy
+  id: CartridgeAntiMaterielToyFun
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielToyFun

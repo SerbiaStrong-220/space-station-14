@@ -144,3 +144,20 @@
   - type: SpentAmmoVisuals
     state: frag
     suffix: false
+
+- type: entity
+  id: GrenadeLubeToy
+  name: lube grenade
+  parent: [ BaseGrenadeToy, BaseGrenade ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeLubeToy
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: flash
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: flash
+    suffix: false

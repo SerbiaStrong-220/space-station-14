@@ -16,3 +16,16 @@ ent-ShellShotgunBeanbagFoam = ружейный патрон (.50 травмат�
 ent-CartridgeMagnumFoam = патрон (.45 магнум)
     .desc = { ent-BaseCartridgeMagnum.desc }
     .suffix = Поролон
+# HRISTOV
+ent-CartridgeGrenadeLubeToy = смазочная граната
+    .desc = { ent-BaseCartridge.desc }
+    .suffix = Игрушечная, Смазка
+ent-CartridgeAntiMaterielToyStun = патрон (.60 крупнокалиберный)
+    .desc = { ent-BaseCartridge.desc }
+    .suffix = Игрушечный
+ent-CartridgeAntiMaterielToyExplosive = патрон (.60 крупнокалиберный разрывной)
+    .desc = { ent-BaseCartridge.desc }
+    .suffix = Игрушечный, Разрывной
+ent-CartridgeAntiMaterielToyFun = патрон (.60 крупнокалиберный)
+    .desc = { ent-BaseCartridge.desc }
+    .suffix = Игрушечный, Счастье
