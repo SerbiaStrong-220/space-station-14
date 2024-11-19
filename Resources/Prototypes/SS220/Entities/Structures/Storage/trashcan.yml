@@ -15,10 +15,6 @@
       map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
-    - state: paper
-      sprite: Structures/Storage/Crates/labels.rsi
-      map: ["enum.PaperLabelVisuals.Layer"]
-      offset: "-0.350, 0.230"
   - type: Construction
     graph: TrashCan
     node: TrashCan
