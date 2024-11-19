@@ -11,6 +11,7 @@
     - state: red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineMagnumSubMachineGunSP-91-RC
