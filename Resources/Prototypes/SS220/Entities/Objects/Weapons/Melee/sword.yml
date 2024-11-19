@@ -158,7 +158,7 @@
   id: Broadsword
   name: broadsword
   description: Echoes of the past in the service of a new war.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: EmitSoundOnLand
     sound:
