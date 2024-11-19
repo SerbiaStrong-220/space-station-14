@@ -147,7 +147,7 @@
 
 # Gloves
 - type: loadout
-  id: GlassesBallistic
+  id: GlovesSecTactical
   effects:
   - !type:GroupLoadoutEffect
     proto: TacSec

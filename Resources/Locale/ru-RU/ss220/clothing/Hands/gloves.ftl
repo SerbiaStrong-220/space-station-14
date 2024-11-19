@@ -2,5 +2,5 @@ ent-ClothingHandsGlovesCentcom = перчатки Центком
     .desc = Пара высококачественных плотных перчаток Центком, украшенных золотым шитьём.
 ent-ClothingHandsGlovesNanotrasenDiplomat = белые перчатки Центком
     .desc = Пара высококачественных белых плотных перчаток, украшенных золотым шитьём, которые выдаются дипломату Nanotrasen.
-ent-ClothingHandsGlovesNanotrasenDiplomat = тактические перчатки охраны
+ent-ClothingHandsGlovesSecTactical = тактические перчатки охраны
     .desc = Пара чёрных перчаток с красными элементами, что дополнят ваш тактический образ. Не путать с боевыми.

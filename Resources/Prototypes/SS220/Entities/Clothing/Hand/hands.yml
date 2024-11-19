@@ -62,6 +62,6 @@
   description: tactical security element
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/sectactical.rsi
+    sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/sectactical.rsi
+    sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
