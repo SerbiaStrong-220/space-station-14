@@ -31,9 +31,9 @@
   description: A slim Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]

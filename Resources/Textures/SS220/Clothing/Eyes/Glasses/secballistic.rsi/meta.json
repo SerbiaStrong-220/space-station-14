@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by vimenant2 (discord) for SS220",
+  "copyright": "Drawn by vimenant2(discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,15 @@
       "name": "icon"
     },
     {
-      "name": "equipped-NECK",
+      "name": "equipped-EYES",
+      "directions": 4
+    },
+	{
+      "name": "equipped-EYES-secdog",
       "directions": 4
     },
     {
-      "name": "equipped-NECK-vox",
+      "name": "equipped-EYES-hamster",
       "directions": 4
     },
     {

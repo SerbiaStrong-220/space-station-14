@@ -191,6 +191,7 @@
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
+  - GlassesBallistic
 
 - type: loadoutGroup
   id: DetectiveSecBackpack
@@ -200,6 +201,13 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
+  
+- type: loadoutGroup
+  id: SecurityGloves
+  name: loadout-group-security-gloves
+  minLimit: 0
+  loadouts:
+  - GlovesSecTactical
   # Офицер СБ (Конец)
 
   # Инструктор СБ (Начало)
