@@ -1,4 +1,9 @@
-﻿- type: telepathyChannel
+- type: telepathyChannel
   id: TelepathyChannelYogSothothCult
   name: chat-telepathy-yogsothothcult
   color: Brown
+
+- type: telepathyChannel
+  id: TelepathyChannelSpaceDragon
+  name: chat-telepathy-space-dragon
+  color: "#7567b6"

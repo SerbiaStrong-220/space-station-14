@@ -68,6 +68,12 @@
       - CartridgeAntiMateriel
     capacity: 5
     proto: CartridgeAntiMateriel
+    #ss220lowTTKUpdate
+  - type: HeldSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+    mirrorClothingModifier: false
+    #ss220lowTTKUpdate
 
 - type: entity
   name: musket

@@ -67,3 +67,24 @@
     sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi
   - type: Clothing
     sprite: SS220/Clothing/Hands/Gloves/janitor_jr.rsi
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesDQ
+  name: DQ combat gloves
+  description: Power gloves that multiply the mechanical force of impact.
+  components:
+  - type: Insulated
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/dq_gloves.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/dq_gloves.rsi
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Blunt: 45
+    animation: WeaponArcFist
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+  - type: FingerprintMask

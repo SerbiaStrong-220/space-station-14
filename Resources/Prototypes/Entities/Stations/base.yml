@@ -60,21 +60,28 @@
           - /Maps/Shuttles/mining.yml # SS220 shuttle upd
         # Spawn last
         ruins: !type:GridSpawnGroup
-          hide: true
-          nameGrid: true
+          hide: false #SS2200 IFF and Name Hide Reveal
+          nameGrid: false #SS2200 IFF and Name Hide Reveal
           minCount: 2
-          maxCount: 2
+          maxCount: 3 # SS2200 Counter Ruins Update
           stationGrid: false
           paths:
-          - /Maps/Ruins/chunked_tcomms.yml
+          # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/biodome_satellite.yml
           - /Maps/Ruins/derelict.yml
-          - /Maps/Ruins/djstation.yml
-          - /Maps/Ruins/empty_flagship.yml
+          # - /Maps/Ruins/djstation.yml # SS220 Removed with Ruins Update (balance Tweak)
+          # - /Maps/Ruins/empty_flagship.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/old_ai_sat.yml
           - /Maps/Ruins/syndicate_dropship.yml
-          - /Maps/Ruins/whiteship_ancient.yml
-          - /Maps/Ruins/whiteship_bluespacejumper.yml
+          # - /Maps/Ruins/whiteship_ancient.yml # SS220 Removed with Ruins Update (balance Tweak)
+          # - /Maps/Ruins/whiteship_bluespacejumper.yml # SS220 Removed with Ruins Update (balance Tweak)
+          # SS220 Ruins Update Map begin
+          - /Maps/SS220/Ruins/Arena_SS220.yml
+          - /Maps/SS220/Ruins/Broadaxe_SS220.yml
+          - /Maps/SS220/Ruins/CargoOutpost_SS220.yml
+          - /Maps/SS220/Ruins/Prison_SS220.yml
+          - /Maps/SS220/Ruins/WarshuttleWreck_SS220.yml
+          # SS220 Ruins Update Map End
         vgroid: !type:DungeonSpawnGroup
           minimumDistance: 300
           maximumDistance: 350

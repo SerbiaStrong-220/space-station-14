@@ -439,12 +439,14 @@
   name: librarian jumpskirt
   description: A cosy green jumper fit for a curator of books.
   components:
-  # Corvax-Resprite begin
+#SS220 librarian resprite start
   - type: Sprite
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+#    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/librarian.rsi
   - type: Clothing
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
-  # Corvax-Resprite end
+#    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/librarian.rsi
+#SS220 librarian resprite end
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -830,6 +832,36 @@
       - state: equipped-INNERCLOTHING-jumpskirt
       - state: equipped-INNERCLOTHING-shirt
         color: "#b30000"
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtCasualGreen
+  name: casual green jumpskirt
+  description: A loose worn green shirt with a grey skirt, perfect for someone looking to relax.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/casual.rsi
+    layers:
+    - state: icon-jumpskirt
+    - state: icon-shirt
+      color: "#00661D"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-jumpskirt
+      - state: inhand-left-shirt
+        color: "#00661D"
+      right:
+      - state: inhand-right-jumpskirt
+      - state: inhand-right-shirt
+        color: "#00661D"
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/casual.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING-jumpskirt
+      - state: equipped-INNERCLOTHING-shirt
+        color: "#00661D"
 
 - type: entity
   parent: ClothingUniformSkirtBase

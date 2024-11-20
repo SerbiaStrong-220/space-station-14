@@ -713,3 +713,11 @@
     graph: envelope
     node: envelope
   # SS220 EnvelopeCraft end
+
+# SS220 Tape Recorder #32234 early merge begin
+- type: entity
+  parent: Paper
+  id: TapeRecorderTranscript
+  name: record transcript
+  # TODO: could have a unique sprite in the future
+# SS220 Tape Recorder #32234 early merge end
