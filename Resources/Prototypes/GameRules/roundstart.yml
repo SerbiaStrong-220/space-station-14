@@ -208,6 +208,24 @@
 #  - type: SandboxRule
 
 - type: entity
+  id: TraitorReinforcement
+  parent: BaseTraitorRule
+  components:
+  - type: TraitorRule
+    giveUplink: false
+    giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
+    giveBriefing: false
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Traitor ]
+      mindRoles:
+      - MindRoleTraitor
+  #ss220 reinforcement objective fix begin
+  - type: AntagRandomObjectives
+    enabled: false
+  #ss220 reinforcement objective fix end
+
+- type: entity
   id: Revolutionary
   parent: BaseGameRule
   components:
@@ -264,6 +282,11 @@
       - type: ZombifyOnDeath
       - type: IncurableZombie
       - type: InitialInfected
+      # Corvax-MRP
+      - type: NpcFactionMember
+        addFriendlyFactions:
+        - Zombie
+      # Corvax
       mindRoles:
       - MindRoleInitialInfected
 
@@ -290,7 +313,6 @@
         tableId: CalmPestEventsTable
       - !type:NestedSelector
         tableId: SpicyPestEventsTable
-
 
 # SS220-NoUnknownShuttles begin
 # - type: entityTable

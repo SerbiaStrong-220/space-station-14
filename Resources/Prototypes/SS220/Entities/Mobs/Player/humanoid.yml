@@ -1,0 +1,215 @@
+## Death Squad
+
+- type: randomHumanoidSettings
+  id: DeathSquadLeaderRandom
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Dwarf, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran]
+  parent: EventHumanoidMindShielded
+  randomizeName: false
+  components:
+    - type: GhostRole
+      allowMovement: true
+      allowSpeech: true
+      makeSentient: true
+      requirements:
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000
+        - !type:DepartmentTimeRequirement
+          department: Command
+          time: 36000
+      name: Командир Эскадрона Смерти
+      description: "Командир элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+    - type: GhostTakeoverAvailable
+    - type: ZombieImmune
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        170: Critical
+        220: Dead
+    - type: Stamina
+      critThreshold: 200
+      decay: 6
+      cooldown: 1
+    - type: SlowOnDamage
+      speedModifierThresholds:
+        80: 0.9
+        140: 0.7
+        160: 0.5
+    - type: Loadout
+      prototypes: [ DeathSquadLeaderGear ]
+    - type: AutoImplant
+      implants:
+      - DeathAcidifierImplant
+      - FreedomImplant
+      - MindShieldImplant
+    - type: NpcFactionMember
+      factions:
+      - DeathSquad
+    - type: StatusEffects
+      allowed:
+      - Stun
+      - KnockedDown
+      - SlowedDown
+      - Stutter
+      - Electrocution
+      - SlurredSpeech
+      - RatvarianLanguage
+      - PressureImmunity
+      - StaminaModifier
+    - type: Thirst
+      startingThirst: 2500  # spawn with Okay thirst state
+      thresholds:
+        OverHydrated: 3500
+        Okay: 2500
+        Thirsty: 1500
+        Parched: 1000
+        Dead: 0
+      baseDecayRate: 0.0001
+    - type: Hunger
+      currentHunger: 2500   # spawn with Okay hunger state
+      thresholds:
+        Overfed: 3500
+        Okay: 2500
+        Peckish: 1500
+        Starving: 1000
+        Dead: 0
+      baseDecayRate: 0.0001
+    - type: PassiveDamage
+      allowedStates:
+      - Alive
+      damageCap: 170
+      damage:
+        groups:
+          Brute: -1
+          Burn: -1
+          Toxin: -1
+          Airloss: -0.5
+
+- type: randomHumanoidSettings
+  id: DeathSquadHealerRandom
+  parent: DeathSquadLeaderRandom
+  components:
+    - type: GhostRole
+      requirements:
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 54000
+        - !type:DepartmentTimeRequirement
+          department: Medical
+          time: 36000
+      name: Специалист Эскадрона Смерти
+      description: "Специалист элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+    - type: Loadout
+      prototypes: [ DeathSquadHealerGear ]
+    - type: PassiveDamage
+      allowedStates:
+      - Alive
+      damageCap: 170
+      damage:
+        groups:
+          Brute: -0.8
+          Burn: -0.8
+          Toxin: -0.8
+          Airloss: -0.4
+
+- type: randomHumanoidSettings
+  id: DeathSquadOperativeRandom
+  parent: DeathSquadLeaderRandom
+  components:
+    - type: GhostRole
+      requirements:
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 54000
+      name: Оперативник Эскадрона Смерти
+      description: "Оперативник элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+    - type: Loadout
+      prototypes: [ DeathSquadOperativeGear ]
+    - type: PassiveDamage
+      allowedStates:
+      - Alive
+      damageCap: 150
+      damage:
+        groups:
+          Brute: -0.6
+          Burn: -0.6
+          Toxin: -0.6
+          Airloss: -0.3
+
+- type: entity
+  name: commander of the Death Squadron
+  parent: RandomHumanoidSpawnerERTLeader
+  id: MobHumanDeathSquadLeader
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_hardsuit_commander.rsi
+    state: icon
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstMilitaryLeader
+    - NamesLastMilitary
+  - type: RandomHumanoidSpawner
+    settings: DeathSquadLeaderRandom
+
+- type: entity
+  name: specialist of the Death Squadron
+  parent: RandomHumanoidSpawnerERTLeader
+  id: MobHumanDeathSquadHealer
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_alpha_hardsuit.rsi
+    state: icon
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstMilitaryLeader
+    - NamesLastMilitary
+  - type: RandomHumanoidSpawner
+    settings: DeathSquadHealerRandom
+
+- type: entity
+  parent: RandomHumanoidSpawnerERTLeader
+  id: MobHumanDeathSquadOperative
+  name: operative of the Death Squadron
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+    state: icon
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstMilitaryLeader
+    - NamesLastMilitary
+  - type: RandomHumanoidSpawner
+    settings: DeathSquadOperativeRandom
+
+- type: startingGear
+  id: DeathSquadLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    id: DeathsquadCommanderPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield
+
+- type: startingGear
+  id: DeathSquadHealerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    id: DeathsquadHealerPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield
+
+- type: startingGear
+  id: DeathSquadOperativeGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    id: DeathsquadPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield

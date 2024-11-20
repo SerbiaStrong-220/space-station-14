@@ -19,7 +19,9 @@ comms-console-announcement-sent-by = Отправитель
 comms-console-announcement-unknown-sender = Неизвестный
 # Comms console variant titles
 comms-console-announcement-title-station = Консоль связи
-comms-console-announcement-title-centcom = Центральное командование
+# SS220 SevastopolChange
+comms-console-announcement-title-centcom = АСН "Севастополь"
+# SS220 SevastopolChange
 comms-console-announcement-title-nukie = Ядерные оперативники Синдиката
 comms-console-announcement-title-station-ai = Станционный ИИ
 comms-console-announcement-title-ussp = Союз Советских Социалистических Планет

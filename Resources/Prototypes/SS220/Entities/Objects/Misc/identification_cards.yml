@@ -159,3 +159,52 @@
         - state: idprisoner
     - type: PresetIdCard
       job: Prisoner
+
+# Deathsquad
+- type: entity
+  parent: IDCardStandard
+  id: CentcomIDCardDeathsquadOperative
+  name: ID карта оперативника Эскадрона Смерти
+  description: Карта, необходимая для доступа в различные области станции.
+  components:
+  - type: Sprite
+    layers:
+    - state: deathsquad
+  - type: Item
+    heldPrefix: blue
+  - type: IdCard
+    jobTitle: job-name-dq-operative
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - CentralCommandDeathSquad
+    - CentralCommand
+  - type: PresetIdCard
+    job: DeathSquad
+
+- type: entity
+  parent: CentcomIDCardDeathsquadOperative
+  id: CentcomIDCardDeathsquadCommander
+  name: ID карта командира Эскадрона Смерти
+  components:
+  - type: Sprite
+    layers:
+    - state: deathsquad
+  - type: IdCard
+    jobTitle: job-name-dq-commander
+  - type: PresetIdCard
+    job: DeathsquadCommander
+
+- type: entity
+  parent: CentcomIDCardDeathsquadOperative
+  id: CentcomIDCardDeathsquadHealer
+  name: ID карта специалиста Эскадрона Смерти
+  components:
+  - type: Sprite
+    layers:
+    - state: deathsquad
+  - type: IdCard
+    jobTitle: job-name-dq-specialist
+  - type: PresetIdCard
+    job:  DeathsquadHealer

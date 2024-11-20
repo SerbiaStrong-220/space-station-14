@@ -22,6 +22,9 @@
       - id: SprayBottleWater #It's just budget cut after budget cut man
         prob: 0.02
         orGroup: FireExtinguisher
+      - id: InflatableWallStack1
+      - id: InflatableWallStack1
+        prob: 0.30
 
 - type: entity
   id: ClosetEmergencyDoubleFilledRandom
