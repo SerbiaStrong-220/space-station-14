@@ -1,23 +1,19 @@
-using System.Linq;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.tx
 using Content.Server.Interaction;
 using Content.Server.Mech.Equipment.Components;
 using Content.Server.Mech.Systems;
+using Content.Server.Popups;
 using Content.Shared.DoAfter;
-using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Wall;
-using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Content.Shared.SS220.MechClothing;
-
 
 namespace Content.Server.SS220.MechClothing;
 
@@ -31,10 +27,10 @@ public sealed class MechClothingSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MechSystem _mech = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
-
         SubscribeLocalEvent<MechClothingComponent, MechClothingGrabEvent>(OnInteract);
         SubscribeLocalEvent<MechClothingComponent, ComponentStartup>(OnStartUp);
         SubscribeLocalEvent<MechClothingComponent, GrabberDoAfterEvent>(OnMechGrab);
@@ -45,55 +41,65 @@ public sealed class MechClothingSystem : EntitySystem
         ent.Comp.ItemContainer = _container.EnsureContainer<Container>(ent.Owner, "item-container");
     }
 
-
     private void OnInteract(Entity<MechClothingComponent> ent, ref MechClothingGrabEvent args)
     {
+        if (!ent.Comp.CurrentEquipmentUid.HasValue)
+        {
+            _popup.PopupEntity(Loc.GetString("mech-no-equipment-selected"),ent.Owner,ent.Owner);
+            return;
+        }
 
         if (args.Handled)
             return;
 
-        var target = args.Target;
-
         if (args.Target == args.Performer || ent.Comp.DoAfter != null)
             return;
 
-        if (TryComp<PhysicsComponent>(target, out var physics) && physics.BodyType == BodyType.Static ||
-            HasComp<WallMountComponent>(target) ||
-            HasComp<MobStateComponent>(target) || HasComp<MechComponent>(target))
-        {
+        if (TryComp<PhysicsComponent>(args.Target, out var physics) && physics.BodyType == BodyType.Static ||
+            HasComp<WallMountComponent>(args.Target) ||
+            HasComp<MobStateComponent>(args.Target) ||
+            HasComp<MechComponent>(args.Target))
             return;
-        }
 
-        if (Transform(target).Anchored)
+        if (Transform(args.Target).Anchored)
             return;
 
         if (ent.Comp.ItemContainer.ContainedEntities.Count >= ent.Comp.MaxContents)
             return;
 
-        if (!TryComp<MechComponent>(ent.Comp.MechUid, out var mech) || mech.PilotSlot.ContainedEntity == target)
+        if (!TryComp<MechComponent>(ent.Comp.MechUid, out var mech))
             return;
 
         if (mech.Energy + ent.Comp.GrabEnergyDelta < 0)
+        {
+            _popup.PopupEntity(Loc.GetString("mech-not-enough-energy"), ent.Owner, ent.Owner);
             return;
+        }
 
-        if (!_interaction.InRangeUnobstructed(args.Performer, target))
+        if (!_interaction.InRangeUnobstructed(args.Performer, args.Target))
             return;
 
         args.Handled = true;
         ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.GrabSound, ent.Owner)?.Entity;
-        var doAfterArgs = new DoAfterArgs(EntityManager, args.Performer, ent.Comp.GrabDelay, new GrabberDoAfterEvent(), ent.Owner, target: target, used: ent.Owner)
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            args.Performer,
+            ent.Comp.GrabDelay,
+            new GrabberDoAfterEvent(),
+            ent.Owner,
+            target: args.Target,
+            used: ent.Owner)
         {
             BreakOnMove = true
         };
 
         _doAfter.TryStartDoAfter(doAfterArgs, out ent.Comp.DoAfter);
-
-
     }
 
     private void OnMechGrab(Entity<MechClothingComponent> ent, ref GrabberDoAfterEvent args)
      {
-         if (!TryComp<MechEquipmentComponent>(ent.Comp.CurrentEquipmentUid, out var equipmentComponent) || equipmentComponent.EquipmentOwner == null)
+         if (!TryComp<MechEquipmentComponent>(ent.Comp.CurrentEquipmentUid, out var equipmentComponent) ||
+             equipmentComponent.EquipmentOwner == null)
              return;
 
          ent.Comp.DoAfter = null;

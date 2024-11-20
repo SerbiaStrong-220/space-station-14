@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.tx
 using Content.Server.Popups;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -36,8 +37,11 @@ public sealed class MechEquipmentSystem : EntitySystem
         if (mechComp.Broken)
             return;
 
-        if (args.User == mechComp.PilotSlot.ContainedEntity)
-            return;
+        //SS220-AddMechToClothing-start
+        //Why does this check exist if it cannot be called?
+        // if (args.User == mechComp.PilotSlot.ContainedEntity)
+        //     return;
+        //SS220-AddMechToClothing-end
 
         if (mechComp.EquipmentContainer.ContainedEntities.Count >= mechComp.MaxEquipmentAmount)
             return;

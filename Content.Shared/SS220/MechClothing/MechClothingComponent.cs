@@ -24,13 +24,6 @@ public sealed partial class MechClothingComponent : Component
     public float GrabDelay = 2.5f;
 
     /// <summary>
-    /// The offset from the mech when an item is dropped.
-    /// This is here for things like lockers and vendors
-    /// </summary>
-    [DataField("depositOffset")]
-    public Vector2 DepositOffset = new(0, -1);
-
-    /// <summary>
     /// The maximum amount of items that can be fit in this grabber
     /// </summary>
     [DataField("maxContents")]

@@ -42,54 +42,7 @@ public sealed class MechGrabberSystem : EntitySystem
 
         SubscribeLocalEvent<MechGrabberComponent, UserActivateInWorldEvent>(OnInteract);
         SubscribeLocalEvent<MechGrabberComponent, GrabberDoAfterEvent>(OnMechGrab);
-        SubscribeLocalEvent<MechGrabberComponent, MechClothingGrabEvent>(OnLalalal);
-
     }
-
-    private void OnLalalal(Entity<MechGrabberComponent> ent, ref MechClothingGrabEvent args)
-    {
-        {
-
-            if (args.Handled)
-                return;
-            var target = args.Target;
-
-            if (args.Target == args.Performer || ent.Comp.DoAfter != null)
-                return;
-
-            if (TryComp<PhysicsComponent>(target, out var physics) && physics.BodyType == BodyType.Static ||
-                HasComp<WallMountComponent>(target) ||
-                HasComp<MobStateComponent>(target) || HasComp<MechComponent>(target))
-            {
-                return;
-            }
-
-            if (Transform(target).Anchored)
-                return;
-
-            if (ent.Comp.ItemContainer.ContainedEntities.Count >= ent.Comp.MaxContents)
-                return;
-
-            if (!TryComp<MechComponent>(args.Performer, out var mech) || mech.PilotSlot.ContainedEntity == target)
-                return;
-
-            if (mech.Energy + ent.Comp.GrabEnergyDelta < 0)
-                return;
-
-            if (!_interaction.InRangeUnobstructed(args.Performer, target))
-                return;
-
-            args.Handled = true;
-            ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.GrabSound, ent.Owner)?.Entity;
-            var doAfterArgs = new DoAfterArgs(EntityManager, args.Performer, ent.Comp.GrabDelay, new GrabberDoAfterEvent(), ent.Owner, target: target, used: ent.Owner)
-            {
-                BreakOnMove = true
-            };
-
-            _doAfter.TryStartDoAfter(doAfterArgs, out ent.Comp.DoAfter);
-        }
-    }
-
     private void OnGrabberMessage(EntityUid uid, MechGrabberComponent component, MechEquipmentUiMessageRelayEvent args)
     {
         if (args.Message is not MechGrabberEjectMessage msg)
@@ -180,7 +133,8 @@ public sealed class MechGrabberSystem : EntitySystem
 
         if (TryComp<PhysicsComponent>(target, out var physics) && physics.BodyType == BodyType.Static ||
             HasComp<WallMountComponent>(target) ||
-            HasComp<MobStateComponent>(target) || HasComp<MechComponent>(target))
+            HasComp<MobStateComponent>(target) ||
+            HasComp<MechComponent>(target)) //SS220 Ripley in ripley fix (AddMechToClothing)
         {
             return;
         }

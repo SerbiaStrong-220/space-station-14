@@ -13,15 +13,15 @@
 
 - type: entity
   id: ActionMechClothingGrab
-  name: lalalal
-  description: lalalal
+  name: Lift cargo
+  description: Load the cargo into the mech
   noSpawn: true
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
-      sprite: Interface/Actions/actions_mecha.rsi
-      state: mech_view_stats
+      sprite: SS220/Interface/Actions/actions_mecha.rsi
+      state: mech_grab
     event: !type:MechClothingGrabEvent
     useDelay: 1
     checkCanInteract: false

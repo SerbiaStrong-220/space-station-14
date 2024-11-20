@@ -5,7 +5,7 @@
   components:
   - type: MobMover
   - type: Mech
-  - type: MechFilter
+  - type: MechRobot #SS220-AddMechToClothing
   - type: MechAir
   - type: AirFilter
     # everything except oxygen and nitrogen

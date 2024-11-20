@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
-using Content.Shared.Clothing;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -21,8 +20,9 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Content.Shared.SS220.MechClothing;
-using Content.Shared.SS220.MechFilter;
+using Content.Shared.Clothing; //SS220-AddMechToClothing
+using Content.Shared.SS220.MechClothing; //SS220-AddMechToClothing
+using Content.Shared.SS220.MechRobot; //SS220-AddMechToClothing
 
 namespace Content.Shared.Mech.EntitySystems;
 
@@ -46,8 +46,8 @@ public abstract class SharedMechSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<MechComponent, ClothingGotEquippedEvent>(OnEquip);
-        SubscribeLocalEvent<MechComponent, ClothingGotUnequippedEvent>(OnUnequip);
+        SubscribeLocalEvent<MechComponent, ClothingGotEquippedEvent>(OnEquip); //SS220 AddMechToClothing
+        SubscribeLocalEvent<MechComponent, ClothingGotUnequippedEvent>(OnUnequip); //SS220 AddMechToClothing
         SubscribeLocalEvent<MechComponent, MechToggleEquipmentEvent>(OnToggleEquipmentAction);
         SubscribeLocalEvent<MechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
         SubscribeLocalEvent<MechComponent, UserActivateInWorldEvent>(RelayInteractionEvent);
@@ -61,42 +61,40 @@ public abstract class SharedMechSystem : EntitySystem
         SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
         SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
     }
+    //SS220-AddMechToClothing-start
     /// <summary>
-    /// Is responsible for logic if fur is clothing
+    /// Responsible for logic if mech is clothing
     /// </summary>
     private void OnEquip(Entity<MechComponent> ent, ref ClothingGotEquippedEvent args)
     {
-        EnsureComp<MechPilotComponent>(args.Wearer);
         EnsureComp<MechClothingComponent>(args.Wearer, out var compMechClothing);
 
         compMechClothing.MechUid = ent.Owner;
-
 
         _actions.AddAction(args.Wearer, ref ent.Comp.MechCycleActionEntity, ent.Comp.MechCycleAction, ent.Owner);
         _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingUiActionEntity, ent.Comp.MechClothingUiAction, ent.Owner);
         _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingGrabActionEntity, ent.Comp.MechClothingGrabAction);
     }
-
     /// <summary>
-    /// Is responsible for logic if fur is clothing
+    /// Responsible for logic if mech is clothing
     /// </summary>
     private void OnUnequip(Entity<MechComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         if (_net.IsClient)
             return;
 
-        RemComp<MechPilotComponent>(args.Wearer);
+        RemComp<MechClothingComponent>(args.Wearer);
 
         _actions.RemoveProvidedActions(args.Wearer, ent.Owner);
         _actions.RemoveAction(args.Wearer, ent.Comp.MechClothingGrabActionEntity);
     }
-
+    //SS220-AddMechToClothing-end
     private void OnToggleEquipmentAction(EntityUid uid, MechComponent component, MechToggleEquipmentEvent args)
     {
         if (args.Handled)
             return;
         args.Handled = true;
-        CycleEquipment(uid, pilotCloth: args.Performer);
+        CycleEquipment(uid, pilotCloth: args.Performer); //SS220-AddMechToClothing
     }
 
     private void OnEjectPilotEvent(EntityUid uid, MechComponent component, MechEjectPilotEvent args)
@@ -122,20 +120,21 @@ public abstract class SharedMechSystem : EntitySystem
             RaiseLocalEvent(component.CurrentSelectedEquipment.Value, args);
         }
     }
+    //SS220-AddMechToClothing-start
     /// <summary>
-    /// separates mech-robot and mech-clothing
+    /// Separates mech-robot and mech-clothing
     /// </summary>
     private void OnStartup(EntityUid uid, MechComponent component, ComponentStartup args)
     {
         component.EquipmentContainer = _container.EnsureContainer<Container>(uid, component.EquipmentContainerId);
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
 
-        if (!TryComp<MechFilterComponent>(uid, out var _))
+        if (TryComp<MechRobotComponent>(uid, out var _))
             component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
 
         UpdateAppearance(uid, component);
     }
-
+    //SS220-AddMechToClothing-end
     private void OnDestruction(EntityUid uid, MechComponent component, DestructionEventArgs args)
     {
         BreakMech(uid, component);
@@ -209,8 +208,8 @@ public abstract class SharedMechSystem : EntitySystem
     /// </summary>
     /// <param name="uid"></param>
     /// <param name="component"></param>
-    /// <param name="pilotCloth"></param>
-    public void CycleEquipment(EntityUid uid, MechComponent? component = null, EntityUid? pilotCloth = null)
+    /// <param name="pilotCloth">If you are using mech clothing, then the required parameter is the uid of the person wearing this mech.</param>
+    public void CycleEquipment(EntityUid uid, MechComponent? component = null, EntityUid? pilotCloth = null) //SS220-AddMechToClothing
     {
         if (!Resolve(uid, ref component))
             return;
@@ -236,13 +235,10 @@ public abstract class SharedMechSystem : EntitySystem
         if (_net.IsServer)
             _popup.PopupEntity(popupString, uid);
 
-        if (pilotCloth.HasValue)
-        {
-            if (!TryComp<MechClothingComponent>(pilotCloth.Value, out var mechPilotComp))
-                return;
+        //SS220-AddMechToClothing-start
+        if (pilotCloth.HasValue && TryComp<MechClothingComponent>(pilotCloth.Value, out var mechPilotComp))
             mechPilotComp.CurrentEquipmentUid = component.CurrentSelectedEquipment;
-        }
-
+        //SS220-AddMechToClothing-end
 
         Dirty(uid, component);
     }

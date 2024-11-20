@@ -50,7 +50,7 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<MechComponent, MechOpenUiEvent>(OnOpenUi);
-        SubscribeLocalEvent<MechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi);
+        SubscribeLocalEvent<MechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi); //SS220-AddMechToClothing-start
         SubscribeLocalEvent<MechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<MechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<MechComponent, MechExitEvent>(OnMechExit);
@@ -290,6 +290,7 @@ public sealed partial class MechSystem : SharedMechSystem
     {
         if (!Resolve(entOwner, ref entComp))
             return;
+
         if (!TryComp<ActorComponent>(argsPerformer, out var actor))
             return;
 

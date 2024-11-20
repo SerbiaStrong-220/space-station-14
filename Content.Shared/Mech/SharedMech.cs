@@ -60,7 +60,7 @@ public sealed partial class MechOpenUiEvent : InstantActionEvent
 public sealed partial class MechEjectPilotEvent : InstantActionEvent
 {
 }
-
+//SS220-AddMechToClothing-start
 public sealed partial class MechClothingOpenUiEvent : InstantActionEvent
 {
 }
@@ -68,3 +68,4 @@ public sealed partial class MechClothingOpenUiEvent : InstantActionEvent
 public sealed partial class MechClothingGrabEvent : EntityTargetActionEvent
 {
 }
+//SS220-AddMechToClothing-end
