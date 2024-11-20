@@ -46,7 +46,7 @@
   - !type:GroupLoadoutEffect
     proto: TacSec
   equipment:
-    head: ClothingEyesBallisticGlasses
+    eyes: ClothingEyesGlassesBallistic
 
 # Jumpsuit
 - type: loadout
@@ -152,4 +152,4 @@
   - !type:GroupLoadoutEffect
     proto: TacSec
   equipment:
-    head: ClothingHandsGlovesSecTactical
+    gloves: ClothingHandsGlovesSecTactical
