@@ -15,9 +15,9 @@ public partial class VoiceMaskSystem
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeVoiceMessage>(OnChangeVoice);
     }
 
-    private void OnSpeakerVoiceTransform(EntityUid uid, VoiceMaskComponent component, TransformSpeakerVoiceEvent args)
+    private void OnSpeakerVoiceTransform(Entity<VoiceMaskComponent> entity, ref TransformSpeakerVoiceEvent args)
     {
-        args.VoiceId = component.VoiceId;
+        args.VoiceId = entity.Comp.VoiceId;
     }
 
     private void OnChangeVoice(Entity<VoiceMaskComponent> ent, ref VoiceMaskChangeVoiceMessage message)

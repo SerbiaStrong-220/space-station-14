@@ -29,7 +29,6 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
-  - type: WaddleWhenWorn
 
 # Мафиози
 - type: entity

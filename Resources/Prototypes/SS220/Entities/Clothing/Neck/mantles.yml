@@ -5,6 +5,7 @@
   id: ClothingNeckCloakCEDark
   name: chief engineer's dark cloak
   description: The dark cloak of the chief engineer for years of service as the head of the engineering department.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/CE_dark/ce_dark.rsi
@@ -14,6 +15,7 @@
   id: ClothingNeckMantleCEDark
   name: chief engineer's dark mantle
   description: The dark mantle of the chief engineer for years of service as head of the engineering department.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi

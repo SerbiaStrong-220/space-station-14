@@ -14,3 +14,17 @@
         - id: BlueShieldSWAT #ss220 respriting mask
   - type: AccessReader
     access: [["Blueshield"]]
+
+#SuperMatter operator's hardsuit
+- type: entity
+  id: SuitStorageSuperMatterOperator
+  parent: SuitStorageBase
+  suffix: SuperMatter operator
+  components:
+  - type: StorageFill
+    contents:
+        - id: OxygenTankFilled
+        - id: ClothingShoesBootsMag
+        - id: ClothingOuterHardsuitSuperMatterOperator
+  - type: AccessReader
+    access: [["Atmospherics"]]

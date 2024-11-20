@@ -12,8 +12,11 @@
 
 - type: randomHumanoidSettings
   id: CentCommOperativeSRT
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
   components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
+      hair: HairBald
     - type: RandomMetadata
       nameSegments:
         - NamesFirstGSNMember
@@ -31,7 +34,7 @@
 
 - type: job
   id: CentcomOperativeSRT
-  name: job-name-centcomoff
+  name: job-name-cc-srt-operative
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomOperativeSRTGear

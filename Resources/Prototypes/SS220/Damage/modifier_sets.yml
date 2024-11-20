@@ -79,3 +79,27 @@
     Slash: 0.8
     Heat: 0.8
     Poison: 0.2
+
+- type: damageModifierSet
+  id: Dragon
+  coefficients:
+    Blunt: 1
+    Slash: 1.2
+    Piercing: 0.6
+    Shock: 1
+    Cold: 1
+    Poison: 1
+    Cellular: 1
+    Radiation: 0.5
+
+- type: damageModifierSet
+  id: RatKing
+  coefficients:
+    Blunt: 1
+    Slash: 1
+    Piercing: 0.7
+    Shock: 1.0
+    Cold: 1
+    Poison: 1
+    Cellular: 1
+    Radiation: 1

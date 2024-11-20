@@ -30,7 +30,7 @@
     - id: MedkitOxygenFilled
       prob: 0.2
     - id: WeaponFlareGun
-      prob: 0.05
+      prob: 0.1
     - id: BoxMRE
       prob: 0.1
     #SS220 Emergency_Nitrogen_Tank_return start
@@ -98,6 +98,11 @@
         weight: 98
       - id: SprayBottleWater #It's just budget cut after budget cut man
         weight: 2
+    #ss220 InflatableWall-for-fire-lockers begin
+    - id: InflatableWallStack1
+    - id: InflatableWallStack1
+      prob: 0.30
+    #ss220 InflatableWall-for-fire-lockers end
 
 - type: entity
   id: ClosetFireFilled

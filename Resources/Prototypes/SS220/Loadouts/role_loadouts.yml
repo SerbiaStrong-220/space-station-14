@@ -71,7 +71,7 @@
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
-  - SecurityOuterClothing
+  - SecurityPilotOuterClothing
   - SurvivalSecurity
   - SecurityShoes
   - SecurityPDA
@@ -139,7 +139,7 @@
 
 #! Сервис (Начало)
 
-  # Ведущий сервисный работник
+  # Сервисный администратор
 - type: roleLoadout
   id: JobSeniorService
   groups:
