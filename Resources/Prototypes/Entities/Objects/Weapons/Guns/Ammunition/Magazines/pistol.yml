@@ -27,7 +27,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 5
+    steps: 6 #ss220 sprite fix
     zeroVisible: false
   - type: Appearance
 

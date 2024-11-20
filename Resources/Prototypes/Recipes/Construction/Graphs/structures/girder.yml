@@ -7,7 +7,7 @@
         - to: girder
           completed:
             - !type:SnapToGrid
-              southRotation: true
+#              southRotation: true # SS220 Graph changed (SecretSolidDoor Recipe Update)
           steps:
             - material: Steel
               amount: 2
@@ -160,6 +160,70 @@
             - material: Steel
               amount: 2
               doAfter: 1
+
+        # SS220 Girder node add begin (SecretSolidDoor Recipe Update)
+        - to: secretWall
+          conditions:
+          - !type:EntityAnchored {}
+          completed:
+          - !type:SetAnchor
+            value: false
+          steps:
+          - material: Cable
+            amount: 4
+            doAfter: 1.5
+        # SS220 Girder node add end (SecretSolidDoor Recipe Update)
+
+    # SS220 SercretSolidDoor node add begin (SecretSolidDoor Recipe Update)
+    - node: secretWall
+      entity: Girder
+      actions:
+      - !type:SnapToGrid {}
+      - !type:SetAnchor {}
+      edges:
+      - to: electronics
+        steps:
+        - component: PowerCell
+          name: power cell
+          store: battery-container
+          icon:
+            sprite: Objects/Power/power_cells.rsi
+            state: small
+          doAfter: 1
+      - to: girder
+        completed:
+        - !type:GivePrototype
+          prototype: CableApcStack1
+          amount: 4
+        steps:
+        - tool: Cutting
+          doAfter: 2
+
+    - node: electronics
+      entity: BaseSecretDoorAssembly
+      edges:
+      - to: solidSecretDoor
+        conditions:
+        - !type:EntityAnchored { }
+        steps:
+        - tool: Screwing
+          doAfter: 1
+
+    - node: solidSecretDoor
+      entity: SolidSecretDoor
+      edges:
+      - to: secretWall
+        conditions:
+        - !type:EntityAnchored {}
+        - !type:DoorWelded {}
+        completed:
+        - !type:EmptyAllContainers
+          pickup: true
+          emptyAtUser: true
+        steps:
+        - tool: Prying
+          doAfter: 5
+    # SS220 SercretSolidDoor node add end (SecretSolidDoor Recipe Update)
 
     - node: wall
       entity: WallSolid

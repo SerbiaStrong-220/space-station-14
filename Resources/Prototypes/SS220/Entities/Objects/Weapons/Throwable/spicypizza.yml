@@ -1,0 +1,284 @@
+- type: entity
+  parent: [BaseItem]
+  id: SpicyPizzaSynd
+  name: spicy meat pizza
+  description: It seems that a whole bottle was poured on this one. Nevertheless, it looks very appetizing.
+  suffix: SyndieLoot
+  components:
+  - type: FlavorProfile
+    flavors:
+      - punishment
+      - savory
+  - type: Food
+  - type: SliceableFood
+    count: 10
+    slice: ThrowingSliceSynd
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: ReaperSauce
+          Quantity: 5
+        - ReagentId: Razorium
+          Quantity: 20
+        - ReagentId: Phlogiston
+          Quantity: 25
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg 
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+    layers: 
+    - state: spicy
+  - type: Appearance
+  - type: ClusterGrenade
+    fillPrototype: ThrowingSliceSynd
+    maxGrenadesCount: 10
+    baseTriggerDelay: 10
+    distance: 8
+    velocity: 7
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 10
+  - type: LandAtCursor
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Pizza
+    - ReptilianFood
+    - Grenade
+
+- type: entity
+  id: ThrowingSliceSynd
+  name: a piece of spicy meat pizza
+  description: A slice of pizza covered with hot sauce.
+  suffix: SyndieLoot
+  parent: [BaseKnife]
+  components:
+  - type: FlavorProfile
+    flavors:
+      - punishment
+      - savory
+  - type: Food
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/shiv.ogg
+      params:
+        volume: 2
+  - type: ThrowingAngle
+    angle: 270
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Razorium
+          Quantity: 2.5
+        - ReagentId: Phlogiston
+          Quantity: 2.5
+      melee:
+        maxVol: 3
+        reagents:
+        - ReagentId: Phlogiston
+          Quantity: 3
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 3
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    transferAmount: 3
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 3
+  - type: UseDelay
+  - type: Appearance
+  - type: SolutionContainerVisuals
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    attackRate: 2
+    damage:
+      types:
+        Piercing: 2
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+  - type: Sprite
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+    state: spicy-slice
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    ignoreResistances: true
+    damage:
+      types:
+        Piercing: 9
+  - type: Item
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+
+- type: entity
+  parent: [BaseItem]
+  id: SpicyPizzaFood
+  name: spicy meat pizza
+  description: It seems that a whole bottle was poured on this one. Nevertheless, it looks very appetizing.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - spicy
+      - truenature
+  - type: Food
+  - type: SliceableFood
+    count: 10
+    slice: ThrowingSliceFood
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 25
+        - ReagentId: ReaperSauce
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Sprite
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+    layers:
+    - state: spicy
+  - type: Appearance
+  - type: ClusterGrenade
+    fillPrototype: ThrowingSliceFood
+    maxGrenadesCount: 10
+    baseTriggerDelay: 10
+    distance: 4
+    velocity: 3
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: LandAtCursor
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Pizza
+    - ReptilianFood
+    - Grenade
+
+- type: entity
+  id: ThrowingSliceFood
+  name: a piece of spicy meat pizza
+  description: A slice of pizza covered with hot sauce.
+  parent: [BaseKnife]
+  components:
+  - type: FlavorProfile
+    flavors:
+      - spicy
+      - truenature
+  - type: Food
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/shiv.ogg
+      params:
+        volume: 2
+  - type: ThrowingAngle
+    angle: 270
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2.5
+        - ReagentId: ReaperSauce
+          Quantity: 2
+        - ReagentId: Vitamin
+          Quantity: 0.5
+      melee:
+        maxVol: 10
+        reagents:
+        - ReagentId: CapsaicinOil
+          Quantity: 5
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 5
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    transferAmount: 5
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 5
+  - type: UseDelay
+  - type: Appearance
+  - type: SolutionContainerVisuals
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Slice
+    - Pizza
+    - ReptilianFood
+  - type: Sprite
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+    state: spicy-slice
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+  - type: LandAtCursor
+  - type: Item
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+
+- type: entity
+  id: FoodBoxPizzaFilledSpicy
+  name: pizza box
+  suffix: SyndieLoot
+  parent: FoodBoxPizza
+  components:
+  - type: Sprite
+    layers:
+    - state: box
+    - state: box-open
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: StorageFill
+    contents:
+    - id: SpicyPizzaSynd
+    - id: KnifePlastic

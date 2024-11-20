@@ -495,7 +495,6 @@
         - CartridgeAmmo
         - DoorRemote
         - Whistle
-        # - HolosignProjector SS220 Fix #2009
         - BalloonPopper
   - type: ItemMapper
     mapLayers:

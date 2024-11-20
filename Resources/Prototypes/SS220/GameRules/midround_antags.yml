@@ -14,9 +14,8 @@
     - spawnerPrototype: SpawnPointGhostDarkReaperRune
       max: 1
       playerRatio: 10
-      mindComponents:
-      - type: DarkReaperRole
-        prototype: DarkReaper
+      mindRoles:
+      - MindRoleDarkReaper
   - type: DarkReaperMajorRule
 
 - type: entity
@@ -33,9 +32,8 @@
       max: 1
       playerRatio: 10
       spawnerPrototype: SpawnPointGhostDarkReaperRune
-      mindComponents:
-      - type: DarkReaperRole
-        prototype: DarkReaper
+      mindRoles:
+      - MindRoleDarkReaper
   - type: DarkReaperMajorRule
 
   # Spider queen
@@ -64,9 +62,8 @@
       max: 1
       playerRatio: 10
       pickPlayer: false
-      mindComponents:
-      - type: SpiderQueenRole
-        prototype: SpiderQueen
+      mindRoles:
+      - MindRoleSpiderQueen
   - type: SpiderQueenRule
     markersWhitelist:
       tags:

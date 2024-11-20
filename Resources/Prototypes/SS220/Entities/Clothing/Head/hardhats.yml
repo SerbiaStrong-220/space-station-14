@@ -10,3 +10,17 @@
     sprite: SS220/Clothing/Head/Hardhats/violet.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardhats/violet.rsi
+
+# Уборщик
+ 
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatJanitorJR
+  name: marked green work helmet
+  description: A helmet supplied for Junk Recyclers field workers in the colors of the corporation. It has a built-in flashlight.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/janitor_jk.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/janitor_jk.rsi

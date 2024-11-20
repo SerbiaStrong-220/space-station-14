@@ -18879,6 +18879,8 @@ entities:
     - linkedPorts:
         722:
         - CloningPodSender: CloningPodReceiver
+        723:
+        - MedicalScannerSender: MedicalScannerReceiver
       type: DeviceLinkSource
 - proto: ComputerComms
   entities:
