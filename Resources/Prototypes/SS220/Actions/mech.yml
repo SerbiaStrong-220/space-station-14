@@ -15,7 +15,6 @@
   id: ActionMechClothingGrab
   name: Lift cargo
   description: Load the cargo into the mech
-  noSpawn: true
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
