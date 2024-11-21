@@ -23,6 +23,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Content.Shared.Whitelist;
+using Content.Shared.SS220.MechRobot; ////SS220-AddMechToClothing
 
 namespace Content.Server.Mech.Systems;
 
@@ -180,6 +181,11 @@ public sealed partial class MechSystem : SharedMechSystem
         if (!args.CanAccess || !args.CanInteract || component.Broken)
             return;
 
+        //SS220-AddMechToClothing-start
+        if (!TryComp<MechRobotComponent>(uid, out var _))
+            return;
+        //SS220-AddMechToClothing-end
+
         if (CanInsert(uid, args.User, component))
         {
             var enterVerb = new AlternativeVerb
@@ -203,8 +209,13 @@ public sealed partial class MechSystem : SharedMechSystem
             args.Verbs.Add(enterVerb);
             args.Verbs.Add(openUiVerb);
         }
-        else if (!IsEmpty(component))
+        else if (!IsEmpty(component, uid)) //SS220-AddMechToClothing
         {
+            //SS220-AddMechToClothing-start
+            if (!TryComp<MechRobotComponent>(uid, out var _))
+                return;
+            //SS220-AddMechToClothing-end
+
             var ejectVerb = new AlternativeVerb
             {
                 Text = Loc.GetString("mech-verb-exit"),
@@ -234,6 +245,11 @@ public sealed partial class MechSystem : SharedMechSystem
     {
         if (args.Cancelled || args.Handled)
             return;
+
+        //SS220-AddMechToClothing-start
+        if (!TryComp<MechRobotComponent>(uid, out var _))
+            return;
+        //SS220-AddMechToClothing-end
 
         if (_whitelistSystem.IsWhitelistFail(component.PilotWhitelist, args.User))
         {

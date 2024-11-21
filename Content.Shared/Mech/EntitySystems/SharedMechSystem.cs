@@ -360,11 +360,18 @@ public abstract class SharedMechSystem : EntitySystem
     /// Checks if the pilot is present
     /// </summary>
     /// <param name="component"></param>
+    /// <param name="uid"></param>
     /// <returns>Whether or not the pilot is present</returns>
-    public bool IsEmpty(MechComponent component)
+
+    //SS220-AddMechToClothing-start
+    public bool IsEmpty(MechComponent component, EntityUid uid)
     {
-        return component.PilotSlot.ContainedEntity == null;
+        if (TryComp<MechRobotComponent>(uid, out var _))
+            return component.PilotSlot.ContainedEntity == null;
+
+        return true;
     }
+    //SS220-AddMechToClothing-end
 
     /// <summary>
     /// Checks if an entity can be inserted into the mech.
@@ -378,7 +385,7 @@ public abstract class SharedMechSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return false;
 
-        return IsEmpty(component) && _actionBlocker.CanMove(toInsert);
+        return IsEmpty(component, uid) && _actionBlocker.CanMove(toInsert); //SS220-AddMechToClothing
     }
 
     /// <summary>
@@ -467,7 +474,7 @@ public abstract class SharedMechSystem : EntitySystem
         if (!Resolve(uid, ref component, ref appearance, false))
             return;
 
-        _appearance.SetData(uid, MechVisuals.Open, IsEmpty(component), appearance);
+        _appearance.SetData(uid, MechVisuals.Open, IsEmpty(component, uid), appearance); //SS220-AddMechToClothing
         _appearance.SetData(uid, MechVisuals.Broken, component.Broken, appearance);
     }
 
@@ -489,6 +496,11 @@ public abstract class SharedMechSystem : EntitySystem
     private void OnCanDragDrop(EntityUid uid, MechComponent component, ref CanDropTargetEvent args)
     {
         args.Handled = true;
+
+        //SS220-AddMechToClothing-start
+        if (!TryComp<MechRobotComponent>(uid, out var _))
+            return;
+        //SS220-AddMechToClothing-end
 
         args.CanDrop |= !component.Broken && CanInsert(uid, args.Dragged, component);
     }
