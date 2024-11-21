@@ -8,6 +8,6 @@
       sprite: SS220/Objects/Consumable/Food/cauldron.rsi
       layers:
       - state: cauldron
-      - map: ["enum.SolutionContainerLayers.Fill"]
-        state: fill-1
-        visible: false
+#      - map: ["enum.SolutionContainerLayers.Fill"]
+#        state: fill-1
+#        visible: false

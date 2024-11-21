@@ -107,7 +107,7 @@
       sprite: SS220/Objects/Consumable/Food/cauldron.rsi
       layers:
       - state: cauldron
-      - state: fathersoup
+      - state: father_soup
     - type: SolutionContainerManager
       solutions:
         food:
