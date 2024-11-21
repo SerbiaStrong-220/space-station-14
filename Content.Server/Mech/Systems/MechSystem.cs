@@ -164,11 +164,14 @@ public sealed partial class MechSystem : SharedMechSystem
         args.Handled = true;
         ToggleMechUi(uid, component);
     }
+
+    //SS220-AddMechToClothing-start
     private void OnOpenClothingUi(Entity<MechComponent> ent, ref MechClothingOpenUiEvent args)
     {
         args.Handled = true;
         ToggleMechClothingUi(ent.Owner, args.Performer, ent.Comp);
     }
+    //SS220-AddMechToClothing-end
 
     private void OnToolUseAttempt(EntityUid uid, MechPilotComponent component, ref ToolUserAttemptUseEvent args)
     {
@@ -302,6 +305,7 @@ public sealed partial class MechSystem : SharedMechSystem
         UpdateUserInterface(uid, component);
     }
 
+    //SS220-AddMechToClothing-start
     private void ToggleMechClothingUi(EntityUid entOwner, EntityUid argsPerformer, MechComponent? entComp = null)
     {
         if (!Resolve(entOwner, ref entComp))
@@ -313,7 +317,7 @@ public sealed partial class MechSystem : SharedMechSystem
         _ui.TryToggleUi(entOwner, MechUiKey.Key, actor.PlayerSession);
         UpdateUserInterface(entOwner, entComp);
     }
-
+    //SS220-AddMechToClothing-end
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, MechComponent component, T args) where T : MechEquipmentUiMessage
     {
