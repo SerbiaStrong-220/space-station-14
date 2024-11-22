@@ -66,7 +66,7 @@
 #    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
     id: BlueShieldPDA
     ears: ClothingHeadsetAltCommand
-    pocket1: WeaponAdvancedRevolver
+    pocket1: WeaponSynergisticEnergyGun #SS220 BlueShield Rework
 #    belt: ClothingBeltSecurityFilled #SS220-blueshield-loadouts
     gloves: ClothingHandsGlovesCombat
 # SS220-Blueshield-Storage-Fix-Begin
