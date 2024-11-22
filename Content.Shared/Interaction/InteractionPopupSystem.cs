@@ -71,7 +71,7 @@ public sealed class InteractionPopupSystem : EntitySystem
         }
 
         //ss220 interact w/o hands fix start
-        if (!HasComp<HandsComponent>(user))
+        if (component.NeedHands && !HasComp<HandsComponent>(user))
             return;
         //ss220 interact w/o hands fix end
 
