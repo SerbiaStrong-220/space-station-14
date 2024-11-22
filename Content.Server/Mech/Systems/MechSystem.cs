@@ -23,7 +23,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Content.Shared.Whitelist;
-using Content.Shared.SS220.MechRobot; ////SS220-AddMechToClothing
+using Content.Shared.SS220.MechRobot; //SS220-AddMechToClothing
 
 namespace Content.Server.Mech.Systems;
 
@@ -51,7 +51,7 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<MechComponent, MechOpenUiEvent>(OnOpenUi);
-        SubscribeLocalEvent<MechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi); //SS220-AddMechToClothing-start
+        SubscribeLocalEvent<MechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi); //SS220-AddMechToClothing
         SubscribeLocalEvent<MechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<MechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<MechComponent, MechExitEvent>(OnMechExit);
