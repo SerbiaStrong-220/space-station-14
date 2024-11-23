@@ -8,6 +8,7 @@
   name: Spider queen
   description: spider dance
   components:
+  - type: Emoting
   - type: AutoImplant
     implants:
     - ThermalVisionImplant
