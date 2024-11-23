@@ -29,7 +29,5 @@
 #    - id: WeaponDisabler #SS220-MinorTweaks
 #      amount: 1 #SS220-MinorTweaks
     - id: WeaponBlasterKRS #SS220-BlueShield Rework
-    - id: BlasterPowerCellCombat
-      amount: 2
-    - id: BlasterPowerCellDisabler #SS220-BlueShield Rework
-      amount: 2
+    - id: BlasterPowerCellAlt
+      amount: 4

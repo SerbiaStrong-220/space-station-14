@@ -2,10 +2,10 @@
 
 - type: entity
   parent: BlasterPowerCell
-  id: BlasterPowerCellCombat
+  id: BlasterPowerCellAlt
   name: blaster power cell
   description: It contains a lot more pain than you ever dreamed of.
-  suffix: Combat
+  suffix: Dual-mode
   components:
   - type: Battery
     pricePerJoule: 0.15
@@ -14,31 +14,22 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi
     layers:
-    - map: [ "enum.PowerCellVisualLayers.Base" ]
-      state: red
-    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: r2
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: disabler-mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
-
-- type: entity
-  parent: BlasterPowerCell
-  id: BlasterPowerCellDisabler
-  name: blaster power cell
-  description: It contains a lot more pain than you ever dreamed of.
-  suffix: Disabler
-  components:
-  - type: Battery
-    pricePerJoule: 0.15
-    maxCharge: 2000
-    startingCharge: 2000
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletDisablerSmg
-    fireCost: 65
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi
-    layers:
-    - map: [ "enum.PowerCellVisualLayers.Base" ]
-      state: disabler
-    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: d2
-      shader: unshaded
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: BulletDisablerSmg
+      name: firemode-name-disabler-alt
+      fireCost: 65
+      magState: disabler-mag
+    - proto: BulletBlaster
+      name: firemode-name-laser-alt
+      fireCost: 100
+      magState: laser-mag
+  - type: MagazineVisuals
+    magState: disabler-mag
+    steps: 2
+    zeroVisible: true

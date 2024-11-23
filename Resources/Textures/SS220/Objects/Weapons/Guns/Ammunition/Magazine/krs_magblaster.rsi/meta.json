@@ -11,22 +11,16 @@
             "name": "base"
         },
         {
-            "name": "disabler"
+            "name": "disabler-mag-unshaded-0"
         },
         {
-            "name": "red"
+            "name": "disabler-mag-unshaded-1"
         },
         {
-            "name": "d1"
+            "name": "laser-mag-unshaded-0"
         },
         {
-            "name": "d2"
-        },
-        {
-            "name": "r1"
-        },
-        {
-            "name": "r2"
+            "name": "laser-mag-unshaded-1"
         }
     ]
 }

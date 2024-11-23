@@ -13,10 +13,10 @@ ent-WeaponBlasterKRS = krs-59v
     .desc = Старая надёжная бластерная винтовка. Имеет только полуавтоматический тип стрельбы.
     .suffix = Бластер
 
-ent-BlasterPowerCellCombat = бластерная энергоячейка
+ent-BlasterPowerCellAlt= бластерная энергоячейка
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-    .suffix = Боевой
+    .suffix = Двухрежимный
 
-ent-BlasterPowerCellDisabler = бластерная энергоячейка
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-    .suffix = Оглушающий
+
+firemode-name-laser-alt = Лазер
+firemode-name-disabler-alt = Оглушение

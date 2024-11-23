@@ -147,10 +147,8 @@
     contents:
       - id: BoxSurvivalSecurity
       - id: WeaponBlasterKRS
-      - id: BlasterPowerCellCombat
-        amount: 3
-      - id: BlasterPowerCellDisabler
-        amount: 3
+      - id: BlasterPowerCellAlt
+        amount: 5
       - id: WeaponSynergisticEnergyGun
       - id: FlashlightSeclite
       - id: MedkitCombatFilled
