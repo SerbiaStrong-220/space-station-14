@@ -138,3 +138,19 @@
         - id: PinpointerNuclear
         - id: EmergencyMedipenDQ
           amount: 6
+
+- type: entity
+  parent: ClothingBackpackBlueShieldHight
+  id: ClothingBackSatchelOperativeBSFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: WeaponBlasterKRS
+      - id: BlasterPowerCellCombat
+        amount: 3
+      - id: BlasterPowerCellDisabler
+        amount: 3
+      - id: WeaponSynergisticEnergyGun
+      - id: FlashlightSeclite
+      - id: MedkitCombatFilled

@@ -19,6 +19,8 @@
   name: blueshield bulletproof vest
   description: A heavy Type III bulletproof vest capable of protecting the wearer from bullets, explosives and sunburn.
   components:
+  - type: Item
+    size: Normal
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Armor/blueshield_bulletproof.rsi
   - type: Clothing
@@ -39,6 +41,8 @@
   name: blueshield scaly vest
   description: A body armor of a strange shape, resembling the scales of a dragon. Manufacturers say that the body armor material is able to withstand the dragon's breath.
   components:
+  - type: Item
+    size: Normal
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflec.rsi
   - type: Clothing

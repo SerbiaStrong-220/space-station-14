@@ -1,4 +1,4 @@
-ent-ClothingOuterHardsuitLightBlueshield = шлем лёгкого скафандра "Синий Щит"
+ent-ClothingHeadHelmetHardsuitLightBlueshield = шлем лёгкого скафандра "Синий Щит"
     .desc = Шлем скафандра, разработанного для "Синий щит".
 ent-ClothingHeadHelmetHardsuitDeathsquadCommander = шлем командира Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq

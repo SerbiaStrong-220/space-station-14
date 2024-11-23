@@ -27,6 +27,15 @@
     requiredSlot: back
     clothingPrototype: ClothingOuterHardsuitLightBlueshield
 
+- type: entity
+  parent: ClothingBackpackBlueShield
+  id: ClothingBackpackBlueShieldHight
+  name: blueshield backpack
+  description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
+  components:
+  - type: ToggleableClothing
+    clothingPrototype: ClothingOuterHardsuitHightBlueshield
+
 # WMT Ebent begin
 - type: entity
   parent: ClothingBackpack
