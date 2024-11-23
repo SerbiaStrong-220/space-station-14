@@ -1,5 +1,5 @@
 - type: entity
-  parent: MagazineLightRifleBox # It goes in a saw, its funny.
+  parent: BaseMagazineLightRifleBoxToy #ss220 toys
   id: MagazineFoamBox
   name: L6 SAW magazine box #ss220 toys
   suffix: Foam #ss220 toys

@@ -7,21 +7,21 @@
   components:
   - type: Tag
     tags:
-    - CartridgeShotgunToy
+    - ShellShotgunToy
 
 - type: entity
-  id: ShellShotgunBeanbagCaps
+  id: ShellShotgunSlugCaps
   parent: BaseShellShotgunToy
   suffix: Caps
   components:
   - type: Sprite
     layers:
-      - state: beanbag
+      - state: slug
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: BulletCap
   - type: SpentAmmoVisuals
-    state: "beanbag"
+    state: "slug"
 
 - type: entity
   id: ShellShotgunCaps
@@ -37,13 +37,13 @@
 
 #shotgun foam
 - type: entity
-  id: ShellShotgunBeanbagFoam
+  id: ShellShotgunSlugFoam
   parent: BaseShellShotgunToy
   suffix: Foam
   components:
   - type: Sprite
     layers:
-      - state: beanbag
+      - state: slug
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: BulletFoam

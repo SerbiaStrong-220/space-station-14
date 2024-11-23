@@ -33,8 +33,11 @@ hidden-desc-toy-weapons-ammo-clown = [color=#c10ec4]Одобренный Donk Co
 hidden-desc-toy-weapons-explosive-syndicate = [color=#e31735]Создает весьма реалистичный, но абсолютно безобидный взрыв для создания суматохи.[/color]
 hidden-desc-toy-weapons-explosive-clown = [color=#c10ec4]Взрывчатка, набитая бананиумом и конфетти, очень реалистично взрывается, но никому не вредит![/color]
 
+hidden-desc-toy-weapons-lubebomb-syndicate = [color=#e31735]Особая граната, начинённая смазкой, изготовленная специально для подлых диверсий.[/color]
+hidden-desc-toy-weapons-lubebomb-clown = [color=#c10ec4]Граната, до отказа заполненная смазкой! Веселье для всей станции![/color]
+
 hidden-desc-toy-shield-syndicate = [color=#e31735]Это пластик, совершенно не защищающий в бою.[/color]
-hidden-desc-toy-shield-clown = [color=#c10ec4]Устройте баталию на игрушечных мечам с этиим щитом! ХОНК![/color]
+hidden-desc-toy-shield-clown = [color=#c10ec4]Устройте баталию на игрушечных мечах с этиим щитом! ХОНК![/color]
 
 hidden-desc-toy-armour-syndicate = [color=#e31735]Это тканевая реплика настоящей брони, не предоставляющая никакой защиты.[/color]
 hidden-desc-toy-armour-clown = [color=#c10ec4]Выглядит 1 в 1 как настоящий! Но на самом деле - просто тряпка![/color]

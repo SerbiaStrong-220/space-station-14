@@ -10,3 +10,6 @@ ent-GrenadeFragToy = осколочная граната
 ent-GrenadeKaboomToy = КАБУМ граната
     .desc = РП ядерка
     .suffix = Игрушечная, Адмемы
+ent-GrenadeLubeToy = смазочная граната
+    .desc = { ent-BaseCartridge.desc }
+    .suffix = Игрушечная, Смазка

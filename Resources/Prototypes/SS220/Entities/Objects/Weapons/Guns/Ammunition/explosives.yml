@@ -148,16 +148,32 @@
 - type: entity
   id: GrenadeLubeToy
   name: lube grenade
-  parent: [ BaseGrenadeToy, BaseGrenade ]
+  parent: BaseGrenade
+  suffix: Lube
   components:
   - type: CartridgeAmmo
     proto: BulletGrenadeLubeToy
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
-    - state: flash
+    - state: baton
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
-    state: flash
+    state: baton
     suffix: false
+  - type: Tag
+    tags:
+    - ToyGrenade
+    - Grenade #will fit into normal China Lake.
+  - type: HiddenDescription
+    entries:
+      - label: hidden-desc-toy-weapons-lubebomb-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: hidden-desc-toy-weapons-lubebomb-clown
+        jobRequired:
+          - Clown
+          - Mime

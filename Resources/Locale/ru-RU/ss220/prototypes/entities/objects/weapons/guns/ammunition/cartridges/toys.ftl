@@ -3,13 +3,13 @@
 ent-ShellShotgunCaps = ружейный патрон (.50 дробь)
     .desc = { ent-BaseShellShotgun.desc }
     .suffix = Пистон
-ent-ShellShotgunBeanbagCaps = ружейный патрон (.50 травматический)
+ent-ShellShotgunSlugCaps = ружейный патрон (.50 картечь)
     .desc = { ent-BaseShellShotgun.desc }
     .suffix = Пистон
 ent-ShellShotgunFoam = ружейный патрон (.50 дробь)
     .desc = { ent-BaseShellShotgun.desc }
     .suffix = Поролон
-ent-ShellShotgunBeanbagFoam = ружейный патрон (.50 травматический)
+ent-ShellShotgunSlugFoam = ружейный патрон (.50 картечь)
     .desc = { ent-BaseShellShotgun.desc }
     .suffix = Поролон
 # REVOLVER
@@ -17,9 +17,6 @@ ent-CartridgeMagnumFoam = патрон (.45 магнум)
     .desc = { ent-BaseCartridgeMagnum.desc }
     .suffix = Поролон
 # HRISTOV
-ent-CartridgeGrenadeLubeToy = смазочная граната
-    .desc = { ent-BaseCartridge.desc }
-    .suffix = Игрушечная, Смазка
 ent-CartridgeAntiMaterielToyStun = патрон (.60 крупнокалиберный)
     .desc = { ent-BaseCartridge.desc }
     .suffix = Игрушечный

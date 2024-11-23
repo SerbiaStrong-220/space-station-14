@@ -1,0 +1,72 @@
+#Svarshik's toy guns
+#shotgun toy shells dispensers
+- type: entity
+  parent: BaseAmmoProvider
+  id: AmmoProviderShotgunShellToy
+  abstract: true
+  components:
+    - type: BallisticAmmoProvider
+      mayTransfer: true
+      whitelist:
+        tags:
+        - ShellShotgunToy
+      capacity: 32
+
+# Shotgun Shells
+#caps
+- type: entity
+  name: shotgun toy cartridges dispenser
+  parent: AmmoProviderShotgunShellToy
+  id: BoxShotgunCaps
+  description: A dispenser box full of lethal pellet shots, designed for riot shotguns.
+  suffix: Caps
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunCaps
+    - type: Sprite
+      layers:
+        - state: boxwidetoy
+        - state: shelllethal
+
+- type: entity
+  name: shotgun toy slug cartridges dispenser
+  parent: AmmoProviderShotgunShellToy
+  id: BoxShotgunSlugCaps
+  description: A dispenser box full of slugs, designed for riot shotguns.
+  suffix: Caps
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunSlugCaps
+    - type: Sprite
+      layers:
+        - state: boxwidetoy
+        - state: shellslug
+
+#foam
+- type: entity
+  name: shotgun toy cartridges dispenser
+  parent: AmmoProviderShotgunShellToy
+  id: BoxShotgunFoam
+  description: A dispenser box full of lethal pellet shots, designed for riot shotguns.
+  suffix: Foam
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunFoam
+    - type: Sprite
+      layers:
+        - state: boxwidetoy
+        - state: shelllethal
+
+- type: entity
+  name: shotgun toy slug cartridges dispenser
+  parent: AmmoProviderShotgunShellToy
+  id: BoxShotgunSlugFoam
+  description: A dispenser box full of slugs, designed for riot shotguns.
+  suffix: Foam
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunSlugFoam
+    - type: Sprite
+      layers:
+        - state: boxwidetoy
+        - state: shellslug

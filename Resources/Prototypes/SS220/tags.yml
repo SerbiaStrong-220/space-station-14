@@ -164,3 +164,6 @@
 
 - type: Tag
   id: CartridgeMagnumFoam
+
+- type: Tag
+  id: ShellShotgunToy

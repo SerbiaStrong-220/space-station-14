@@ -155,12 +155,12 @@
           map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: MagazineShotgunBeanbagCaps
+  id: MagazineShotgunSlugCaps
   parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyCaps cuz shotgun uses unique ones
   suffix: Caps
   components:
   - type: BallisticAmmoProvider
-    proto: ShellShotgunBeanbagCaps
+    proto: ShellShotgunSlugCaps
   - type: Sprite
     layers:
     - state: beanbag
@@ -245,10 +245,10 @@
   suffix: Foam
   components:
   - type: BallisticAmmoProvider
-    proto: ShellShotgunBeanbagFoam
+    proto: ShellShotgunSlugFoam
   - type: Sprite
     layers:
-    - state: beanbag
+    - state: slug
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]

@@ -323,30 +323,20 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 0.5 # a ~1 tile
+    totalIntensity: 1.5 # a ~2 tiles
     intensitySlope: 0.5
     maxIntensity: 0.01
     canCreateVacuum: false
     maxTileBreak: 0
-  - type: SolutionContainerManager
-    solutions:
-      lube:
-        maxVol: 500
-        reagents:
-        - ReagentId: SpaceLube
-          Quantity: 500
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 2
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 1
-      behaviors:
-      - !type:SpillBehavior { }
-      - !type:ExplodeBehavior
+  - type: SmokeOnTrigger
+    duration: 0.01
+    spreadAmount: 5
+    smokePrototype: Foam
+    solution:
+      reagents:
+      - ReagentId: SpaceLube
+        Quantity: 1500 #not really 1500. Due to short time its about ~800u
+
 
 #special ammo for hristov
 - type: entity
@@ -377,8 +367,7 @@
       types:
         Piercing: 0.01
         Structural: 10
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.2
+  - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Minibomb
     totalIntensity: 0.1

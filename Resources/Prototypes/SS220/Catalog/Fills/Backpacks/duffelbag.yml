@@ -10,7 +10,7 @@
       - id: WeaponShotgunBulldogToy
       - id: MagazineShotgunCaps
         amount: 6
-      - id: MagazineShotgunBeanbagCaps
+      - id: MagazineShotgunSlugCaps
         amount: 3 #triple the fun
 
 - type: entity
@@ -24,7 +24,9 @@
     contents:
       - id: WeaponSubMachineGunC20rToy
       - id: MagazinePistolSubMachineGunCaps
-        amount: 6 #more fun :p
+        amount: 4 #more fun :p
+      - id: MagazinePistolSubMachineGunFoam
+        amount: 4
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
@@ -54,6 +56,7 @@
       - id: MagazineLightRifleBoxCaps
         amount: 2
       - id: MagazineFoamBox
+        amount: 2
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
@@ -66,10 +69,12 @@
     contents:
       - id: WeaponLauncherChinaLakeToy
       - id: GrenadeBlastToy
-        amount: 6 #more fun >:D
+        amount: 5 #more fun >:D
       - id: GrenadeFragToy
-        amount: 6
+        amount: 5
       - id: GrenadeFlashToy
+        amount: 2
+      - id: GrenadeLubeToy
         amount: 2
 
 - type: entity
@@ -91,3 +96,5 @@
         amount: 3
       - id: GrenadeFragToy
         amount: 3
+      - id: GrenadeLubeToy
+        amount: 1

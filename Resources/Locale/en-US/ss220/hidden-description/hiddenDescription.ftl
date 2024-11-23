@@ -33,6 +33,9 @@ hidden-desc-toy-weapons-ammo-clown = [color=#c10ec4]Donk Co. approved standard m
 hidden-desc-toy-weapons-explosive-syndicate = [color=#e31735]Creates a very realistic but completely harmless explosion for making a mess.[/color]
 hidden-desc-toy-weapons-explosive-clown = [color=#c10ec4]Explosive packed with bananium and confetti. Explodes in a very realistic way, but doesn't hurt anyone![/color]
 
+hidden-desc-toy-weapons-lubebomb-syndicate = [color=#e31735]A special lube-filled grenade made especially for nefarious acts of diversion.[/color]
+hidden-desc-toy-weapons-lubebomb-clown = [color=#c10ec4]A grenade filled to the brim with lube! Fun for the whole station![/color]
+
 hidden-desc-toy-shield-syndicate = [color=#e31735]It's plastic with absolutely no defence in combat.[/color]
 hidden-desc-toy-shield-clown = [color=#c10ec4]Have a toy sword battle with this shield! HONK![/color]
 
