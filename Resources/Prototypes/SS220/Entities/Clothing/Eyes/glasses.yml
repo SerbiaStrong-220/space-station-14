@@ -49,3 +49,14 @@
   - type: IdentityBlocker
     coverage: EYES
   - type: ShowJobIcons
+
+- type: entity
+  parent: ClothingEyesBlueShieldGlasses
+  id: ClothingEyesBlueShieldTacticGlasses
+  name: blueshield tactic glasses
+  description: Tactical glasses for combat situations.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi

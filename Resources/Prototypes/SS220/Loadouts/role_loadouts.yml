@@ -36,6 +36,7 @@
   id: JobBlueShield
   groups:
   - BlueShieldHead
+  - BlueShieldGlasses
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing

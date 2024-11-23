@@ -147,6 +147,14 @@
   - BlueshieldBlueBeret
 
 - type: loadoutGroup
+  id: BlueShieldGlasses
+  name: loadout-group-blueshield-glasses
+  minLimit: 0
+  loadouts:
+  - BlueshieldGlasses
+  - BlueshieldTacticGlasses
+
+- type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0

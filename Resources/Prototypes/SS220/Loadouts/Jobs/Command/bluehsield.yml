@@ -51,6 +51,20 @@
   equipment:
     head: ClothingHeadHatBeretNavyBlue
 
+# Eyes
+- type: loadout
+  id: BlueshieldGlasses
+  equipment:
+    eyes: ClothingEyesBlueShieldGlasses
+
+- type: loadout
+  id: BlueshieldTacticGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    eyes: ClothingEyesBlueShieldTacticGlasses
+
 # Jumpsuit
 - type: loadout
   id: BlueShieldCombez
