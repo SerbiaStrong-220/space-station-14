@@ -10,12 +10,12 @@
           - BulletFoam
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-toy-weapons-ammo-syndicate
+      - label: hidden-desc-toy-weapons-magazine-syndicate
         whitelistMind:
           components:
             - TraitorRole
             - NukeOperative
-      - label: hidden-desc-toy-weapons-ammo-clown
+      - label: hidden-desc-toy-weapons-magazine-clown
         jobRequired:
           - Clown
           - Mime
@@ -66,6 +66,12 @@
     - type: Tag
       tags:
       - MagazineShotgunToy
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+          - CartridgeCap
+          - BulletFoam
+          - ShellShotgunToy
 
 #LMG
 - type: entity
@@ -163,7 +169,7 @@
     proto: ShellShotgunSlugCaps
   - type: Sprite
     layers:
-    - state: beanbag
+    - state: slug
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
@@ -240,7 +246,7 @@
           map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: MagazineShotgunBeanbagFoam
+  id: MagazineShotgunSlugFoam
   parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyFoam cuz shotgun uses unique ones
   suffix: Foam
   components:

@@ -29,17 +29,17 @@ ent-MagazinePistolCaselessRifleFoam = пистолетный магазин (.25
 ent-MagazineShotgunCaps = барабан (.50 дробь)
     .desc = { ent-BaseMagazineShotgun.desc }
     .suffix = Пистоны
-ent-MagazineShotgunSlugCaps = барабан (.50 травматические)
+ent-MagazineShotgunSlugCaps = барабан (.50 пулевые)
     .desc = { ent-BaseMagazineShotgun.desc }
     .suffix = Пистоны
 ent-MagazineShotgunFoam = барабан (.50 дробь)
     .desc = { ent-BaseMagazineShotgun.desc }
     .suffix = Поролон
-ent-MagazineShotgunBeanbagFoam = барабан (.50 травматические)
+ent-MagazineShotgunSlugFoam = барабан (.50 пулевые)
     .desc = { ent-BaseMagazineShotgun.desc }
     .suffix = Поролон
 
 # SAW mag
-ent-MagazineLightRifleBoxCaps = короб патронов L6 SAW (.30 винтовочные)
+ent-MagazineLightRifleBoxCaps = короб патронов L6 SAW
     .desc = { ent-BaseMagazineLightRifle.desc }
     .suffix = Пистоны

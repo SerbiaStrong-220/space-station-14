@@ -263,10 +263,24 @@
             - BulletFoam
 
 - type: entity
+  name: Kardashev-Mosin
+  parent: [ BaseGunToy, WeaponSniperMosin ]
+  id: WeaponSniperMosinToy
+  description: A weapon for hunting, or the clown's endless maints warfare against security.
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeCap
+    whitelist:
+      tags:
+        - CartridgeCap
+        - BulletFoam
+
+- type: entity
   name: Hristov
   parent: [ BaseGunToy, WeaponSniperHristov ]
   id: WeaponSniperHristovToy
-  description: A portable anti-materiel rifle. Fires armor piercing 14.5mm shells. Uses .60 anti-materiel ammo.
+  description: A portable anti-materiel rifle. The scope is made from a glass bottle bottom. Go and do Boom! HEADSHOT!
   components:
   - type: BallisticAmmoProvider
     whitelist:

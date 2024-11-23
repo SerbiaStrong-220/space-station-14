@@ -27,8 +27,11 @@ hidden-desc-SilentShoes-research = [color=#D381C9]Вы можете различ
 hidden-desc-toy-weapons-syndicate = [color=#e31735]Оно сделано из бананиума.[/color]
 hidden-desc-toy-weapons-clown = [color=#c10ec4]Устройте самый смешной штурм станции с этим оружием, заряженным безобидными пистонами! ХОНК![/color]
 
-hidden-desc-toy-weapons-ammo-syndicate = [color=#e31735]Очень хорошая реплика магазина. Скорее всего, он заряжен пистонами или поролоном и не может быть заряжен в настоящее оружие.[/color]
-hidden-desc-toy-weapons-ammo-clown = [color=#c10ec4]Одобренный Donk Co. стандартный магазин. Мультикалиберный! Может быть заряжен поролоном и пистонами одновременно![/color]
+hidden-desc-toy-weapons-magazine-syndicate = [color=#e31735]Очень хорошая реплика магазина. Скорее всего, он заряжен пистонами или поролоном и не может быть заряжен в настоящее оружие.[/color]
+hidden-desc-toy-weapons-magazine-clown = [color=#c10ec4]Одобренный Donk Co. стандартный магазин. Мультикалиберный! Может быть заряжен поролоном и пистонами одновременно![/color]
+
+hidden-desc-toy-weapons-ammo-syndicate = [color=#e31735]Это безобидный нелетальный патрон с бумажной пулей.[/color]
+hidden-desc-toy-weapons-ammo-clown = [color=#c10ec4]Почти как настоящий, но на деле заряжен солью.[/color]
 
 hidden-desc-toy-weapons-explosive-syndicate = [color=#e31735]Создает весьма реалистичный, но абсолютно безобидный взрыв для создания суматохи.[/color]
 hidden-desc-toy-weapons-explosive-clown = [color=#c10ec4]Взрывчатка, набитая бананиумом и конфетти, очень реалистично взрывается, но никому не вредит![/color]

@@ -359,20 +359,20 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBulletTrigger
-  id: BulletAntiMaterielToyExplosive
+  id: BulletAntiMaterielToyMeme
   name: bullet (.60 anti-materiel)
+  suffix: Shitspawn
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 0.01
         Structural: 10
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Minibomb
-    totalIntensity: 0.1
-    intensitySlope: 0.01
-    maxIntensity: 1
+    soundHit:
+      path: /Audio/SS220/Weapons/Guns/Hits/headshot.ogg
+    forceSound: true
+  - type: StunOnCollide
+    knockdownAmount: 1
 
 - type: entity
   categories: [ HideSpawnMenu ]

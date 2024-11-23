@@ -8,6 +8,17 @@
   - type: Tag
     tags:
     - ShellShotgunToy
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-toy-weapons-ammo-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: hidden-desc-toy-weapons-ammo-clown
+      jobRequired:
+        - Clown
+        - Mime
 
 - type: entity
   id: ShellShotgunSlugCaps
@@ -83,6 +94,17 @@
   - type: Tag
     tags:
     - CartridgeAntiMaterielToy
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-toy-weapons-ammo-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+    - label: hidden-desc-toy-weapons-ammo-clown
+      jobRequired:
+        - Clown
+        - Mime
 
 #stunning
 - type: entity
@@ -95,10 +117,10 @@
 #explosive
 - type: entity
   parent: BaseCartridgeAntiMaterielToy
-  id: CartridgeAntiMaterielToyExplosive
+  id: CartridgeAntiMaterielToyMeme
   components:
   - type: CartridgeAmmo
-    proto: BulletAntiMaterielToyExplosive
+    proto: BulletAntiMaterielToyMeme
 
 #funny
 - type: entity
