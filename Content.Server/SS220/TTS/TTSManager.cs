@@ -90,10 +90,10 @@ public sealed class TTSManager
     /// <param name="speaker">Identifier of speaker</param>
     /// <param name="text">SSML formatted text</param>
     /// <returns>WAV audio bytes or null if failed</returns>
-    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text)
+    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text, bool isRadio , bool isAnnounce)
     {
         WantedCount.Inc();
-        var cacheKey = GenerateCacheKey(speaker, text);
+        var cacheKey = GenerateCacheKey(speaker, text, isRadio);
 
         return await ExecuteWithNamedLockAsync(cacheKey, async () =>
         {
@@ -114,6 +114,16 @@ public sealed class TTSManager
                     { "speaker", speaker },
                     { "text", text },
                     { "ext", "wav" }});
+
+                if (isRadio)
+                {
+                    requestUrl += "&effect=radio";
+                }
+
+                if (isAnnounce)
+                {
+                    requestUrl += "&effect=announce";
+                }
 
                 var response = await _httpClient.GetAsync(requestUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
@@ -176,7 +186,7 @@ public sealed class TTSManager
     {
         WantedRadioCount.Inc();
 
-        var cacheKey = GenerateCacheKey($"radio-{speaker}", text);
+        var cacheKey = GenerateCacheKey($"radio-{speaker}", text, isRadio: true);
         return await ExecuteWithNamedLockAsync(cacheKey, async () =>
         {
             if (_cacheRadio.TryGetValue(cacheKey, out var cachedSoundData))
@@ -186,7 +196,7 @@ public sealed class TTSManager
                 return cachedSoundData;
             }
 
-            var soundData = await ConvertTextToSpeech(speaker, text);
+            var soundData = await ConvertTextToSpeech(speaker, text, isRadio: true, isAnnounce: false);
             if (soundData == null)
                 return null;
 
@@ -263,12 +273,11 @@ public sealed class TTSManager
         _cacheRadioKeysSeq.Clear();
     }
 
-    private string GenerateCacheKey(string speaker, string text)
+    private static string GenerateCacheKey(string speaker, string text, bool isRadio)
     {
-        var key = $"{speaker}/{text}";
-        byte[] keyData = Encoding.UTF8.GetBytes(key);
-        var sha256 = System.Security.Cryptography.SHA256.Create();
-        var bytes = sha256.ComputeHash(keyData);
+        var key = $"{speaker}/{text}/{isRadio}";
+        var keyData = Encoding.UTF8.GetBytes(key);
+        var bytes = System.Security.Cryptography.SHA256.HashData(keyData);
         return Convert.ToHexString(bytes);
     }
 
