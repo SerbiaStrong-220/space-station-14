@@ -28,9 +28,8 @@
     contents:
 #    - id: WeaponDisabler #SS220-MinorTweaks
 #      amount: 1 #SS220-MinorTweaks
-    - id: WeaponSubMachineGunDrozdRubber #SS220-MinorTweaks(#Rubber)
-      amount: 1
-    - id: MagazinePistolSubMachineGun
+    - id: WeaponBlasterKRS #SS220-BlueShield Rework
+    - id: BlasterPowerCellCombat
       amount: 2
-    - id: MagazinePistolSubMachineGunRubber #SS220-MinorTweaks
+    - id: BlasterPowerCellDisabler #SS220-BlueShield Rework
       amount: 2

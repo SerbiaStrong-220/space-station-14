@@ -8,3 +8,15 @@ ent-WeaponPulseShotgun = пульсовый дробовик
 firemode-name-kill = режия для убийства
 firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
 firemode-name-heal = режим для лечения
+
+ent-WeaponBlasterKRS = krs-59v
+    .desc = Старая надёжная бластерная винтовка. Имеет только полуавтоматический тип стрельбы.
+    .suffix = Бластер
+
+ent-BlasterPowerCellCombat = бластерная энергоячейка
+    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
+    .suffix = Боевой
+
+ent-BlasterPowerCellDisabler = бластерная энергоячейка
+    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
+    .suffix = Оглушающий

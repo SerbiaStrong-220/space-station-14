@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: BaseWeaponBatterySmall
   id: WeaponSynergisticEnergyGun
@@ -41,6 +43,32 @@
   - type: Appearance
   - type: StaticPrice
     price: 750
+
+- type: entity
+  id: WeaponBlasterKRS
+  parent: WeaponBlaster
+  name: krs-59v
+  description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
+  suffix: Blaster
+  components:
+  - type: Item
+    size: Large
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: BlasterPowerCellDisabler
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - BlasterPowerCell
 
 # Новые прототипы пишите выше
 # Death Squad
