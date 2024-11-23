@@ -13,3 +13,6 @@ ent-ClothingOuterHardsuitSyndieCommanderFake = скафандр командир
 ent-ClothingOuterHardsuitJuggernautFake = костюм джаггернаута Cybersun
     .suffix = Поддельный
     .desc = Костюм, созданный отделом передовых исследований и разработок компании Cybersun, обладает повышенной устойчивостью к внешнему воздействию. Этот - всего лишь тканевая реплика.
+ent-ClothingOuterSuitSpaceNinjaFake = костюм космического ниндзя
+    .suffix = Поддельный
+    .desc = Костюм ниндзя из аниме сериала “Самурай Вамплу”, выглядит очень футуристично.

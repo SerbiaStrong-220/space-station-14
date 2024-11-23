@@ -147,3 +147,28 @@
     sprite: Clothing/Head/Hardsuits/cybersun.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/cybersun.rsi
+
+#ninja
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHelmetSpaceNinjaFake
+  name: space ninja helmet
+  description: The helmet from the Samurai Vamplu costume, an essential part of cosplay.
+  components:
+  - type: BreathMask
+  - type: Item
+    size: Normal
+  - type: IngestionBlocker
+  - type: Clothing
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+    sprite: Clothing/Head/Helmets/spaceninja.rsi
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/spaceninja.rsi

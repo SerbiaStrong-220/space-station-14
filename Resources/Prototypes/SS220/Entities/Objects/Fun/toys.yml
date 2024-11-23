@@ -349,7 +349,30 @@
           components:
             - TraitorRole
             - NukeOperative
-      - label: hidden-desc-toy-weapons-clown
-        jobRequired:
-          - Clown
-          - Mime
+
+#katana for some reason
+- type: entity
+  name: energy katana
+  parent: Katana
+  id: EnergyKatanaToy
+  description: Cool katana! Just like in anime!
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/energykatana.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -60
+    damage:
+      types:
+        Slash: 0.01
+  - type: Item
+    sprite: Objects/Weapons/Melee/energykatana.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/energykatana.rsi
+    slots:
+    - Back
+    - Belt
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Magic/blink.ogg
+  - type: UseDelay
+    delay: 5

@@ -97,3 +97,17 @@
       sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitCybersunFake
+
+#ninja suit
+- type: entity
+  parent: BaseClothingOuterFake
+  id: ClothingOuterSuitSpaceNinjaFake
+  name: space ninja suit
+  description: Ninja costume from the anime series "Samurai Vamplu", looks very futuristic.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetSpaceNinjaFake
