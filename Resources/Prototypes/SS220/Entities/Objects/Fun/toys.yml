@@ -286,6 +286,8 @@
     whitelist:
       tags:
       - CartridgeAntiMaterielToy
+      - CartridgeCap
+      - BulletFoam
     capacity: 5
     proto: CartridgeAntiMaterielToyStun
 

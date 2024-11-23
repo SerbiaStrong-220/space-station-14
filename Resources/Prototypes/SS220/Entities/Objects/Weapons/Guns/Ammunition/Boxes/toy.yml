@@ -70,3 +70,45 @@
       layers:
         - state: boxwidetoy
         - state: shellslug
+
+#hristov
+- type: entity
+  parent: MagazineBoxAntiMateriel
+  id: BaseMagazineBoxAntiMaterielToy
+  name: ammunition box (.60 anti-materiel)
+  suffix: Caps
+  abstract: true
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeAntiMaterielToy
+    capacity: 20
+
+- type: entity
+  parent: BaseMagazineBoxAntiMaterielToy
+  id: MagazineBoxAntiMaterielToyStun
+  name: ammunition box (.60 anti-materiel stunning)
+  suffix: Stun
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielToyStun
+
+- type: entity
+  parent: BaseMagazineBoxAntiMaterielToy
+  id: MagazineBoxAntiMaterielToyHappiness
+  name: ammunition box (.60 anti-materiel)
+  suffix: Happiness
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielToyHappiness
+
+- type: entity
+  parent: BaseMagazineBoxAntiMaterielToy
+  id: MagazineBoxAntiMaterielToyMeme
+  name: ammunition box (.60 anti-materiel)
+  suffix: Shitspawn
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielToyMeme

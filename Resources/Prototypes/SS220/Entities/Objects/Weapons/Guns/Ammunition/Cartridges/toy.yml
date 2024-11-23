@@ -89,6 +89,7 @@
 - type: entity
   parent: CartridgeAntiMateriel
   id: BaseCartridgeAntiMaterielToy
+  suffix: Caps
   abstract: true
   components:
   - type: Tag
@@ -114,7 +115,7 @@
   - type: CartridgeAmmo
     proto: BulletAntiMaterielToyStun
 
-#explosive
+#meme headshot
 - type: entity
   parent: BaseCartridgeAntiMaterielToy
   id: CartridgeAntiMaterielToyMeme
@@ -125,7 +126,7 @@
 #funny
 - type: entity
   parent: BaseCartridgeAntiMaterielToy
-  id: CartridgeAntiMaterielToyFun
+  id: CartridgeAntiMaterielToyHappiness
   components:
   - type: CartridgeAmmo
-    proto: BulletAntiMaterielToyFun
+    proto: BulletAntiMaterielToyHappiness

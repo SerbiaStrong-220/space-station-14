@@ -2,7 +2,7 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledShotgunToy
   name: Bulldog bundle
-  description: "Lean and mean: Contains the popular Bulldog Shotgun, a 12g beanbag drum and 3 12g buckshot drums." #, and a pair of Thermal Imaging Goggles.
+  description: "Lean and mean: Contains the popular Bulldog Shotgun, 3 12g slug drum and 6 12g buckshot drums for best airsoft match."
   suffix: Toy
   components:
   - type: StorageFill
@@ -17,7 +17,7 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledSMGToy
   name: C-20r bundle
-  description: "Old faithful: The classic C-20r Submachine Gun, bundled with six magazines for best pranks!"
+  description: "Old faithful: The classic C-20r Submachine Gun, bundled with eight magazines for best pranks!"
   suffix: Toy
   components:
   - type: StorageFill
@@ -32,7 +32,7 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledRevolverToy
   name: Python bundle
-  description: "Go loud and proud with a fully loaded Magnum Python, bundled with two speed loaders."
+  description: "Go loud and proud with a fully loaded capgun Python, bundled with four speed loaders."
   suffix: Toy
   components:
   - type: StorageFill
@@ -47,7 +47,7 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledLMGToy
   name: L6 Saw bundle
-  description: "More dakka: The iconic L6 lightmachinegun, bundled with 2 box magazines."
+  description: "More dakka: The iconic L6 lightmachinegun, bundled with 4 box magazines. Of course, it's a plastic!"
   suffix: Toy
   components:
   - type: StorageFill
@@ -62,7 +62,7 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
   name: China-Lake bundle
-  description: "An old China-Lake grenade launcher bundled with 19 rounds of various honking capability."
+  description: "An old China-Lake grenade launcher bundled with 14 rounds of various honking capability."
   suffix: Toy
   components:
   - type: StorageFill

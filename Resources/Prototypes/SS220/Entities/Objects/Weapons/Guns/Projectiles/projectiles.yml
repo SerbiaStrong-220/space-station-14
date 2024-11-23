@@ -377,7 +377,7 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBullet
-  id: BulletAntiMaterielToyFun
+  id: BulletAntiMaterielToyHappiness
   name: bullet (.60 anti-materiel)
   components:
   - type: Projectile
