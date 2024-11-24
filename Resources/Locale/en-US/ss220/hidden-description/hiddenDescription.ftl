@@ -25,19 +25,22 @@ hidden-desc-SilentShoes-research = [color=#D381C9]You can discern a hidden layer
 
 # Svarshik's toy guns!
 hidden-desc-toy-weapons-syndicate = [color=#e31735]It's made out of bananium.[/color]
-hidden-desc-toy-weapons-clown = [color=#c10ec4]Have the funniest assault on the station with this weapon loaded with harmless caps! HONK![/color]
+hidden-desc-toy-weapons-clown = [color=#cc0099]Have the funniest assault on the station with this weapon loaded with harmless caps! HONK![/color]
 
 hidden-desc-toy-weapons-magazine-syndicate = [color=#e31735]Very good replica. Probably, loaded with caps or foam and cant't be fitted in real gun.[/color]
-hidden-desc-toy-weapons-magazine-clown = [color=#c10ec4]Donk Co. approved standard magazine. Multi-calibre! Can be loaded with foam and caps at the same time![/color]
+hidden-desc-toy-weapons-magazine-clown = [color=#cc0099]Donk Co. approved standard magazine. Multi-calibre! Can be loaded with foam and caps at the same time![/color]
+
+hidden-desc-toy-weapons-ammo-syndicate = [color=#e31735]It's a harmless non-lethal cartridge with a paper bullet.[/color]
+hidden-desc-toy-weapons-ammo-clown = [color=#cc0099]Almost like the real thing, but actually loaded with table salt.[/color]
 
 hidden-desc-toy-weapons-explosive-syndicate = [color=#e31735]Creates a very realistic but completely harmless explosion for making a mess.[/color]
-hidden-desc-toy-weapons-explosive-clown = [color=#c10ec4]Explosive packed with bananium and confetti. Explodes in a very realistic way, but doesn't hurt anyone![/color]
+hidden-desc-toy-weapons-explosive-clown = [color=#cc0099]Explosive packed with bananium and confetti. Explodes in a very realistic way, but doesn't hurt anyone![/color]
 
 hidden-desc-toy-weapons-lubebomb-syndicate = [color=#e31735]A special lube-filled grenade made especially for nefarious acts of diversion.[/color]
-hidden-desc-toy-weapons-lubebomb-clown = [color=#c10ec4]A grenade filled to the brim with lube! Fun for the whole station![/color]
+hidden-desc-toy-weapons-lubebomb-clown = [color=#cc0099]A grenade filled to the brim with lube! Fun for the whole station![/color]
 
 hidden-desc-toy-shield-syndicate = [color=#e31735]It's plastic with absolutely no defence in combat.[/color]
-hidden-desc-toy-shield-clown = [color=#c10ec4]Have a toy sword battle with this shield! HONK![/color]
+hidden-desc-toy-shield-clown = [color=#cc0099]Have a toy sword battle with this shield! HONK![/color]
 
 hidden-desc-toy-armour-syndicate = [color=#e31735]It's a cloth replica of real armour, offering no protection whatsoever.[/color]
-hidden-desc-toy-armour-clown = [color=#c10ec4]Looks 1 in 1 like the real thing! But it's really just a rag![/color]
+hidden-desc-toy-armour-clown = [color=#cc0099]Looks 1 in 1 like the real thing! But it's really just a rag![/color]

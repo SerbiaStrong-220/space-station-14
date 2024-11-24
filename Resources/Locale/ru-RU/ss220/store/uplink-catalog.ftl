@@ -20,6 +20,9 @@ uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }
 uplink-mime-relic-name = { ent-SacredRelicMime }
 uplink-mime-relic-desc = Ценная реликвия Ордена Тишины, Вашего ордена. Зажав в руке, позволяет мимам поставить сразу три невидимые стены, закрывающие широкий проход, раз в 90 секунд.
 
+uplink-fake-ops-name = Набор "Фейк-Опс"
+uplink-fake-ops-desc = Набор высококачественных реплик скафандров и оружия Ядерных Оперативников, специально для создания паники на станции. Оружие подходит для использования клоунами.
+
 # Pointless
 uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
 uplink-expensive-lighter-desc = { ent-ExpensiveLighterSyndicate.desc }

@@ -13,7 +13,7 @@
     sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi
 
 #Svarshik's toys
-#BASE for differnet hardsuits/etc.
+#BASE for differenet outwear
 - type: entity
   parent: ClothingOuterBase
   id: BaseClothingOuterFake
@@ -32,9 +32,21 @@
         - Clown
         - Mime
 
-#syndie hardsuits
 - type: entity
   parent: BaseClothingOuterFake
+  id: BaseClothingOuterHardsuitFake #basically an emergency EVA, nothing special
+  abstract: true
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 0.6
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.75
+    coolingCoefficient: 0.5
+
+#syndie hardsuits
+- type: entity
+  parent: BaseClothingOuterHardsuitFake
   name: blood-red hardsuit
   description: A heavily armored hardsuit designed for work in special operations. This one is just a cloth replica.
   id: ClothingOuterHardsuitSyndieFake
@@ -45,9 +57,15 @@
       sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieFake
+    - type: SpecialSounds
+    - type: Vocal
+      sounds:
+        Male: MaleEvil
+        Female: FemaleEvil
+        Unsexed: MaleEvil
 
 - type: entity
-  parent: BaseClothingOuterFake
+  parent: BaseClothingOuterHardsuitFake
   id: ClothingOuterHardsuitSyndieEliteFake
   name: syndicate elite hardsuit
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. This one is just a cloth replica.
@@ -58,9 +76,15 @@
       sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieEliteFake
+    - type: SpecialSounds
+    - type: Vocal
+      sounds:
+        Male: MaleEvil
+        Female: FemaleEvil
+        Unsexed: MaleEvil
 
 - type: entity
-  parent: BaseClothingOuterFake
+  parent: BaseClothingOuterHardsuitFake
   id: ClothingOuterHardsuitSyndieMedicFake
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations. This one is just a cloth replica.
@@ -71,9 +95,15 @@
       sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieMedicFake
+    - type: SpecialSounds
+    - type: Vocal
+      sounds:
+        Male: MaleEvil
+        Female: FemaleEvil
+        Unsexed: MaleEvil
 
 - type: entity
-  parent: BaseClothingOuterFake
+  parent: BaseClothingOuterHardsuitFake
   id: ClothingOuterHardsuitSyndieCommanderFake
   name: syndicate commander hardsuit
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. This one is just a cloth replica.
@@ -84,9 +114,15 @@
       sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommanderFake
+    - type: SpecialSounds
+    - type: Vocal
+      sounds:
+        Male: MaleEvil
+        Female: FemaleEvil
+        Unsexed: MaleEvil
 
 - type: entity
-  parent: BaseClothingOuterFake
+  parent: BaseClothingOuterHardsuitFake
   id: ClothingOuterHardsuitJuggernautFake
   name: cybersun juggernaut suit
   description: A suit made by the cutting edge R&D department at cybersun to be hyper resilient. This one is just a cloth replica.
@@ -97,10 +133,16 @@
       sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitCybersunFake
+    - type: SpecialSounds
+    - type: Vocal
+      sounds:
+        Male: MaleEvil
+        Female: FemaleEvil
+        Unsexed: MaleEvil
 
 #ninja suit
 - type: entity
-  parent: BaseClothingOuterFake
+  parent: BaseClothingOuterHardsuitFake
   id: ClothingOuterSuitSpaceNinjaFake
   name: space ninja suit
   description: Ninja costume from the anime series "Samurai Vamplu", looks very futuristic.
