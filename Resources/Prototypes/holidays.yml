@@ -299,7 +299,7 @@
 #  id: NationalComingOutDay
 #  name: holiday-name-national-coming-out-day
 #  beginDay: 11
-#  beginMonth: October #ss220 remove things begin
+#  beginMonth: October #ss220 remove things end
 
 - type: holiday
   id: CanadianThanksgiving
