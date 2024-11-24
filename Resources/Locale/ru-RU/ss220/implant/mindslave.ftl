@@ -58,7 +58,7 @@ mindslave-telepathy-channel-name = подчинённый разум
 
 #disfunction
 mindslave-disfunction-progress-popup = Вы чувствуете как ваш позвоночник вскипает!
-unable-to-wield = Вы не можете удержать двумя руками!
+unable-to-wield = { $user } не может удержать двумя руками!
 
 #guides
 mindslave-fixer-surgery-guide = Поздравляем Вас с приобретением продукции "Interdyne Pharmaceutics"!

@@ -11,6 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Buckle;
 using Content.Shared.Examine;
+using Robust.Shared.Network;
 
 namespace Content.Server.SS220.Surgery.Systems;
 
@@ -20,6 +21,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBuckleSystem _buckleSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -79,10 +81,33 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnSurgeryDoAfter(Entity<OnSurgeryComponent> entity, ref SurgeryDoAfterEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || entity.Comp.CurrentNode == null)
             return;
 
-        ProceedToNextStep(entity, args.User, args.Used, args.TargetEdge);
+        var operationProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
+        if (!operationProto.TryGetNode(entity.Comp.CurrentNode, out var node))
+            return;
+
+        SurgeryGraphEdge? targetEdge = null;
+        foreach (var edge in node.Edges)
+        {
+            if (edge.Target == args.TargetEdge)
+            {
+                targetEdge = edge;
+                break;
+            }
+        }
+
+        if (targetEdge == null)
+        {
+            if (_netManager.IsServer)
+            {
+                Log.Error("Got wrong target edge in surgery do after!");
+            }
+            return;
+        }
+
+        ProceedToNextStep(entity, args.User, args.Used, targetEdge);
     }
 
     private void OnDrapeInteract(Entity<SurgeryDrapeComponent> entity, ref AfterInteractEvent args)
@@ -159,7 +184,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         var performerDoAfterEventArgs =
             new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delay.Value),
-                            new SurgeryDoAfterEvent(chosenEdge), entity.Owner, target: entity.Owner, used: used.Owner)
+                            new SurgeryDoAfterEvent(chosenEdge.Target), entity.Owner, target: entity.Owner, used: used.Owner)
             {
                 NeedHand = true,
                 BreakOnMove = true,

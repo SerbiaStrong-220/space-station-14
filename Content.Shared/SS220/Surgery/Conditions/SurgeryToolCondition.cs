@@ -3,10 +3,12 @@
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using JetBrains.Annotations;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Surgery.Conditions;
 
 [UsedImplicitly]
+[Serializable, NetSerializable]
 [DataDefinition]
 public sealed partial class SurgeryToolTypeCondition : ISurgeryGraphCondition
 {

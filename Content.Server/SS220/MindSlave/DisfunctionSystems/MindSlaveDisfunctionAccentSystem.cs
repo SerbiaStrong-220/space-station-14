@@ -29,9 +29,9 @@ public sealed class MindSlaveDisfunctionAccentSystem : EntitySystem
 
     private string TryChangeInString(string value, string key, string keyAddition, float prob)
     {
-        var result = string.Empty;
+        var result = value;
         var index = value.IndexOf(key);
-        while (index != -1)
+        if (index != -1)
         {
             if (_random.Prob(prob))
             {

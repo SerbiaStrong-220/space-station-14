@@ -36,8 +36,7 @@
       - !type:SurgeryHaveComponentCondition
         component: MindSlaveDisfunctionFixer
       actions:
-      - !type:ApplyBleedingSurgeryAction
-        bleedAmount: 0
+      - !type:SurgeryFixMindSlaveDisfunctionAction
   - node: fix disfunction
     nodeText:
       examineDescription: mind-slave-disfunction-fix-surgery-examine-description

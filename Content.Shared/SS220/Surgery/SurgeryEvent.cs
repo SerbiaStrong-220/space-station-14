@@ -7,9 +7,9 @@ using Robust.Shared.Serialization;
 [Serializable, NetSerializable]
 public sealed partial class SurgeryDoAfterEvent : SimpleDoAfterEvent
 {
-    public SurgeryGraphEdge TargetEdge;
+    public string TargetEdge;
 
-    public SurgeryDoAfterEvent(SurgeryGraphEdge targetEdge) : base()
+    public SurgeryDoAfterEvent(string targetEdge) : base()
     {
         TargetEdge = targetEdge;
     }

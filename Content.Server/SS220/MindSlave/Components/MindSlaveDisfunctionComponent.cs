@@ -21,7 +21,7 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
     public List<IComponent> DisfunctionComponents = new();
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public MindSlaveDisfunctionType DisfunctionStage = MindSlaveDisfunctionType.Initial;
+    public MindSlaveDisfunctionType DisfunctionStage = MindSlaveDisfunctionType.None;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Active = true;
@@ -51,7 +51,8 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
 
 public enum MindSlaveDisfunctionType
 {
-    Initial = 1,
+    None = 0,
+    Initial,
     Progressive,
     Terminal,
     Deadly

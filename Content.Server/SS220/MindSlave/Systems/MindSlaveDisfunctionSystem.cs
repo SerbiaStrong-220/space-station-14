@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Chat.Managers;
+using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.SS220.MindSlave.Components;
 using Content.Shared.Damage;
@@ -14,8 +16,10 @@ namespace Content.Server.SS220.MindSlave.Systems;
 public sealed class MindSlaveDisfunctionSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _component = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
@@ -51,7 +55,10 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
             }
 
             if (_gameTiming.CurTime > comp.NextProgressTime)
+            {
                 ProgressDisfunction((uid, comp));
+                comp.NextProgressTime = EvaluateNextProgressTime((uid, comp));
+            }
         }
     }
 
@@ -84,19 +91,31 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
         if (!Resolve(uid, ref comp))
             return;
 
-        if (comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal
-            && (!comp.Deadly || comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal))
+        if (comp.DisfunctionStage == MindSlaveDisfunctionType.Deadly
+            || (!comp.Deadly && comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal))
             return;
 
-        foreach (var compName in comp.Disfunction[++comp.DisfunctionStage])
+        if (comp.Disfunction.TryGetValue(++comp.DisfunctionStage, out var disfunctionList))
         {
-            var disfunctionComponent = _component.GetComponent(_component.GetRegistration(compName).Type);
-            AddComp(uid, disfunctionComponent);
-            comp.DisfunctionComponents.Add(disfunctionComponent);
+            foreach (var compName in disfunctionList)
+            {
+                var disfunctionComponent = _component.GetComponent(_component.GetRegistration(compName).Type);
+                AddComp(uid, disfunctionComponent);
+                comp.DisfunctionComponents.Add(disfunctionComponent);
+            }
         }
-
-        _popup.PopupEntity(comp.DisfunctionParameters.ProgressionPopup, entity, entity, Shared.Popups.PopupType.SmallCaution);
+        var progressMessage = Loc.GetString(comp.DisfunctionParameters.ProgressionPopup);
+        _popup.PopupEntity(progressMessage, entity, entity, Shared.Popups.PopupType.SmallCaution);
         comp.Weakened = false;
+
+        if (!_mind.TryGetMind(entity, out _, out var mindComponent))
+            return;
+
+        if (mindComponent.Session == null)
+            return;
+
+        _chat.ChatMessageToOne(Shared.Chat.ChatChannel.Emotes, progressMessage, progressMessage,
+                                default, false, mindComponent.Session.Channel, colorOverride: Color.Red);
     }
 
     public void WeakDisfunction(Entity<MindSlaveDisfunctionComponent?> entity, float delayMinutes, int removeAmount)

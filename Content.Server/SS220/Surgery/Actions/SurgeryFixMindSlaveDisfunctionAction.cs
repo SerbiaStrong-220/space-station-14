@@ -1,13 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-namespace Content.Server.SS220.Surgery.Conditions;
-
 using Content.Server.SS220.MindSlave.Systems;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Surgery.Graph;
-using JetBrains.Annotations;
 
-[UsedImplicitly]
+namespace Content.Server.SS220.Surgery.Action;
+
 [DataDefinition]
 public sealed partial class SurgeryFixMindSlaveDisfunctionAction : ISurgeryGraphAction
 {

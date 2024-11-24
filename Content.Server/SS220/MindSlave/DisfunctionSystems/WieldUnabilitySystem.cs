@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Popups;
+using Content.Server.SS220.MindSlave.DisfunctionComponents;
 using Content.Shared.Wieldable;
-using Content.Shared.Wieldable.Components;
 
 namespace Content.Server.SS220.MindSlave.DisfunctionSystem;
 
@@ -14,12 +14,15 @@ public sealed class WieldUnabilitySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<WieldableComponent, BeforeWieldEvent>(OnWieldAttempt);
+        SubscribeLocalEvent<WieldUnabilityComponent, BeforeWieldEvent>(OnWieldAttempt);
     }
 
-    private void OnWieldAttempt(Entity<WieldableComponent> entity, ref BeforeWieldEvent args)
+    private void OnWieldAttempt(Entity<WieldUnabilityComponent> entity, ref BeforeWieldEvent args)
     {
-        _popup.PopupClient(Loc.GetString("unable-to-wield"), entity, type: Shared.Popups.PopupType.MediumCaution);
+        if (args.Cancelled)
+            return;
+
+        _popup.PopupCursor(Loc.GetString("unable-to-wield", ("user", entity.Owner)), entity);
         args.Cancel();
     }
 }
