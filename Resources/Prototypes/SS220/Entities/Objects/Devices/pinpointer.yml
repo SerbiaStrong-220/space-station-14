@@ -6,6 +6,7 @@
   suffix: Nuclear Bomb, dq, Death Squad
   components:
   - type: Sprite
+    sprite: SS220/Objects/Devices/pinpointer.rsi
     layers:
     - state: pinpointer-nuclear
       map: ["enum.PinpointerLayers.Base"]
@@ -14,6 +15,7 @@
       shader: unshaded
       visible: false
   - type: Icon
+    sprite: SS220/Objects/Devices/pinpointer.rsi
     state: pinpointer-nuclear
   - type: Pinpointer
     component: Nuke
