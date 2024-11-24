@@ -392,6 +392,11 @@
   name: decoy bundle
   description: "Contains distractions, both auditory and visual. Smell coming soon."
   components:
+  #ss220 toys begin
+  - type: Storage
+    grid:
+    - 0,0,9,4
+  #ss220 toys end
   - type: StorageFill
     contents:
       - id: BalloonOperative
@@ -409,6 +414,8 @@
       - id: WeaponSubMachineGunC20rToy
         orGroup: PrimaryWeapon
       - id: WeaponPistolViperToy
+        orGroup: Secondary
+      - id: WeaponPistolCobraToy
         orGroup: Secondary
       - id: FoamCrossbow
         orGroup: Secondary

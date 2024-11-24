@@ -14,5 +14,5 @@ ent-ClothingHeadHelmetHardsuitCybersunFake = шлем джаггернаута C
     .desc = Изготовленный из спрессованной красной материи, этот шлем был разработан в хромосферном комплексе Тау. Этот - всего лишь тканевая реплика.
     .suffix = Поддельный
 ent-ClothingHeadHelmetSpaceNinjaFake = шлем космического ниндзя
-    .desc = The helmet from the Samurai Vamplu costume, an essential part of cosplay.
+    .desc = Шлем от костюма Самурая Вамплу, неотъемлемая часть косплея.
     .suffix = Поддельный

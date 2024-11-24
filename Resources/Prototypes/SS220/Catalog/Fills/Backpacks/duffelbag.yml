@@ -98,3 +98,46 @@
         amount: 3
       - id: GrenadeLubeToy
         amount: 1
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+  name: Cobra bundle
+  description: "All you need for covert pranking operations in maints"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolCobraToy
+    - id: MagazinePistolCaselessRifleCaps
+      amount: 2
+    - id: MagazinePistolCaselessRifleFoam
+      amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+  name: Viper bundle
+  description: "Everything you need for John Week cosplay in this bundle"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolViperToy
+    - id: MagazinePistolHighCapacityCaps
+      amount: 2
+    - id: MagazinePistolHighCapacityFoam
+      amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+  name: Mosin bundle
+  description: "Prepare for maints warfare."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSniperMosinToy
+    - id: BoxCartridgeCap
+    - id: BoxDonkSoftBox
