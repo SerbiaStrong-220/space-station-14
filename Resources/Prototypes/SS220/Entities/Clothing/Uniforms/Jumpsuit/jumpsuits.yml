@@ -553,7 +553,7 @@
   id: ClothingUniformBluesoldier
   name: kingdom army shirt
   description: The clothing of a soldier of the great army of the kingdom.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bluesoldier.rsi
@@ -565,7 +565,7 @@
   id: ClothingUniformRedsoldier
   name: republican army shirt
   description: The clothing of a soldier of the army of the River Republic.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/redsoldier.rsi

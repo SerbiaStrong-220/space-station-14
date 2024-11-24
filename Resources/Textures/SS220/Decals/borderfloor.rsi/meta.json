@@ -1,0 +1,203 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by NightmareStalker(GitHub) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "borderfloor_dark_corner_end_ne"
+        },
+        {
+            "name": "borderfloor_dark_corner_end_nw"
+        },
+        {
+            "name": "borderfloor_dark_corner_end_se"
+        },
+        {
+            "name": "borderfloor_dark_corner_end_sw"
+        },
+        {
+            "name": "borderfloor_dark_corner_ne"
+        },
+        {
+            "name": "borderfloor_dark_corner_nw"
+        },
+        {
+            "name": "borderfloor_dark_corner_se"
+        },
+        {
+            "name": "borderfloor_dark_corner_sw"
+        },
+        {
+            "name": "borderfloor_dark_e"
+        },
+        {
+            "name": "borderfloor_dark_inner_ne"
+        },
+        {
+            "name": "borderfloor_dark_inner_nw"
+        },
+        {
+            "name": "borderfloor_dark_inner_se"
+        },
+        {
+            "name": "borderfloor_dark_inner_sw"
+        },
+        {
+            "name": "borderfloor_dark_n"
+        },
+        {
+            "name": "borderfloor_dark_s"
+        },
+        {
+            "name": "borderfloor_dark_w"
+        },
+        {
+            "name": "borderfloor_light_corner_end_ne"
+        },
+        {
+            "name": "borderfloor_light_corner_end_nw"
+        },
+        {
+            "name": "borderfloor_light_corner_end_se"
+        },
+        {
+            "name": "borderfloor_light_corner_end_sw"
+        },
+        {
+            "name": "borderfloor_light_corner_ne"
+        },
+        {
+            "name": "borderfloor_light_corner_nw"
+        },
+        {
+            "name": "borderfloor_light_corner_se"
+        },
+        {
+            "name": "borderfloor_light_corner_sw"
+        },
+        {
+            "name": "borderfloor_light_e"
+        },
+        {
+            "name": "borderfloor_light_inner_ne"
+        },
+        {
+            "name": "borderfloor_light_inner_nw"
+        },
+        {
+            "name": "borderfloor_light_inner_se"
+        },
+        {
+            "name": "borderfloor_light_inner_sw"
+        },
+        {
+            "name": "borderfloor_light_n"
+        },
+        {
+            "name": "borderfloor_light_s"
+        },
+        {
+            "name": "borderfloor_light_w"
+        },
+        {
+            "name": "borderfloor_normal_corner_end_ne"
+        },
+        {
+            "name": "borderfloor_normal_corner_end_nw"
+        },
+        {
+            "name": "borderfloor_normal_corner_end_se"
+        },
+        {
+            "name": "borderfloor_normal_corner_end_sw"
+        },
+        {
+            "name": "borderfloor_normal_corner_ne"
+        },
+        {
+            "name": "borderfloor_normal_corner_nw"
+        },
+        {
+            "name": "borderfloor_normal_corner_se"
+        },
+        {
+            "name": "borderfloor_normal_corner_sw"
+        },
+        {
+            "name": "borderfloor_normal_e"
+        },
+        {
+            "name": "borderfloor_normal_inner_ne"
+        },
+        {
+            "name": "borderfloor_normal_inner_nw"
+        },
+        {
+            "name": "borderfloor_normal_inner_se"
+        },
+        {
+            "name": "borderfloor_normal_inner_sw"
+        },
+        {
+            "name": "borderfloor_normal_n"
+        },
+        {
+            "name": "borderfloor_normal_s"
+        },
+        {
+            "name": "borderfloor_normal_w"
+        },
+        {
+            "name": "borderfloor_overlay_corner_end_ne"
+        },
+        {
+            "name": "borderfloor_overlay_corner_end_nw"
+        },
+        {
+            "name": "borderfloor_overlay_corner_end_se"
+        },
+        {
+            "name": "borderfloor_overlay_corner_end_sw"
+        },
+        {
+            "name": "borderfloor_overlay_corner_ne"
+        },
+        {
+            "name": "borderfloor_overlay_corner_nw"
+        },
+        {
+            "name": "borderfloor_overlay_corner_se"
+        },
+        {
+            "name": "borderfloor_overlay_corner_sw"
+        },
+        {
+            "name": "borderfloor_overlay_e"
+        },
+        {
+            "name": "borderfloor_overlay_inner_ne"
+        },
+        {
+            "name": "borderfloor_overlay_inner_nw"
+        },
+        {
+            "name": "borderfloor_overlay_inner_se"
+        },
+        {
+            "name": "borderfloor_overlay_inner_sw"
+        },
+        {
+            "name": "borderfloor_overlay_n"
+        },
+        {
+            "name": "borderfloor_overlay_s"
+        },
+        {
+            "name": "borderfloor_overlay_w"
+        }
+    ]
+}
