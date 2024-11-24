@@ -153,8 +153,8 @@
       selectedMode: Burst
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-#      availableModes: #ss220 gunmodes
-#        - Burst       #ss220 gunmodes
+      availableModes:
+        - Burst
       shotsPerBurst: 3
       burstCooldown: 0.25
     - type: ItemSlots
