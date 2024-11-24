@@ -6,3 +6,6 @@ ent-Rapier = рапира
 ent-RapierAlt = рапира
     .desc = { ent-Rapier.desc }
     .suffix = 15 проникающего урона
+ent-EnergyKatanaToy = { ent-EnergyKatana }
+    .desc = Крутая катана! Прямо как в аниме!
+    .suffix = Игрушечная

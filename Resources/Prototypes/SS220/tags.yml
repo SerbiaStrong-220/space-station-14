@@ -170,3 +170,6 @@
 
 - type: Tag
   id: CartridgeAntiMaterielToy
+
+- type: Tag
+  id: MagazinePistolCaselessRifleToy
