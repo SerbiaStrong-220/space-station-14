@@ -221,7 +221,7 @@
   id: ClothingOuterCoatBluetunic
   name: blue army jacket
   description: The jacket of the line infantry of the great army of the Kingdom.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
@@ -233,7 +233,7 @@
   id: ClothingOuterCoatRedtunic
   name: red army jaket
   description: The scarlet infantry jacket of the River Republic.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi

@@ -231,6 +231,15 @@
       - RiotShield
       - SpeedLoaderMagnum
       - SpeedLoaderMagnumEmpty
+      #ss220 more recipies begin
+      - SpeedLoaderLightRifle
+      - MagazineBoxCaselessRifle
+      - MagazinePistolCaselessRifle
+      - MagazineMagnumEmpty
+      - MagazineMagnum
+      - MagazinePistolHighCapacityEmpty
+      - MagazinePistolHighCapacity
+      #ss220 more recipies end
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -405,6 +414,12 @@
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
       - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+      #ss220 more recipies begin
+      - MagazineMagnumIncendiary
+      - MagazineMagnumUranium
+      - MagazinePistolSubMachineGunIncendiary
+      - MagazinePistolSubMachineGunUranium
+      #ss220 more recipies end
 
 - type: entity
   id: ProtolatheHyperConvection
@@ -803,6 +818,12 @@
       - WeaponDisablerPractice
       - WeaponLaserCarbinePractice
       - Zipties
+      #ss220 more recipies begin
+      - SpeedLoaderLightRifle
+      - MagazineMagnumEmpty
+      - MagazineMagnum
+      - MagazineMagnumRubber
+      #ss220 more recipies end
     dynamicRecipes:
       - BoxBeanbag
       - BoxShotgunIncendiary
@@ -858,6 +879,12 @@
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
       - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+      #ss220 more recipies begin
+      - MagazineMagnumUranium
+      - MagazineMagnumIncendiary
+      - MagazinePistolSubMachineGunUranium
+      - MagazinePistolSubMachineGunIncendiary
+      #ss220 more recipies end
   - type: MaterialStorage
     whitelist:
       tags:
@@ -924,6 +951,11 @@
         - SpeedLoaderMagnum
         - SpeedLoaderMagnumRubber #SS220 missing rubber fix
         - SpeedLoaderMagnumEmpty
+        #ss220 more recipies begin
+        - MagazinePistolCaselessRifle
+        - MagazineBoxCaselessRifle
+        - SpeedLoaderLightRifle
+        #ss220 more recipies end
     - type: MaterialStorage
       whitelist:
         tags:

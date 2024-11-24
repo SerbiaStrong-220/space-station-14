@@ -110,12 +110,12 @@
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
     #ss220lowTTKUpdate
   - type: Reflect
-    reflectProb: 0.75
+    reflectProb: 0.45 #ss220 ttkTweaks
     reflects:
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 80
-    reflectProbProjectile: 0.60
+    reflectProbProjectile: 0.40 #ss220 ttkTweaks
     spreadProjectile: 180
     #ss220lowTTKUpdate
 
@@ -389,12 +389,12 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
   - type: Reflect
-    reflectProb: 0.95
+    reflectProb: 0.80 #ss220 ttkTweaks
     reflects:
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
-    reflectProbProjectile: 0.8 #ss220lowTTKUpdate
+    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
 

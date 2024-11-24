@@ -24,6 +24,7 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: GlassCaseEngravedKnuckledusterFilled # SS220 New Qm highrisk
     - id: AstroNavCartridge
+    - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
     - id: DeviceCalculator # SS220 Calculator
 
 - type: entity
