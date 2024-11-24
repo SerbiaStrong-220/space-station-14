@@ -42,10 +42,10 @@ public sealed partial class MindSlaveDisfunctionComponent : Component
     public TimeSpan PausedTime;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float ConstMinutesBetweenStages = 2;
+    public float ConstMinutesBetweenStages = 35;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float MaxRandomMinutesBetweenStages = 1;
+    public float MaxRandomMinutesBetweenStages = 7;
 
 }
 
