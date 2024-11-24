@@ -104,7 +104,6 @@
     whitelist:
       tags:
         - ToyGrenade
-    whitelistFailPopup: gun-magazine-whitelist-fail
     capacity: 3
     proto: GrenadeFragToy
     soundInsert:
