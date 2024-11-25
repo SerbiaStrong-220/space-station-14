@@ -741,6 +741,7 @@
   - QuartermasterFormalSuit
   - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
   - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
+  - QuartermasterJumpskirtWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterNeck
