@@ -30,10 +30,11 @@
     - proto: Pulsekill
       name: firemode-name-kill
       fireCost: 1
+      soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
     - proto: PulseDESTROY
       name: firemode-name-destroy
       fireCost: 5
-      soundGunshot:  /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
 
 - type: entity
   name: pulse shotgun
@@ -47,7 +48,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
+    - state: pulse-mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
@@ -63,10 +64,10 @@
     - proto: BulletLaserDestroy
       name: firemode-name-kill
       fireCost: 10
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-      magState: mag
+      soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
+      magState: pulse-mag
     - proto: BulletLaserHeal
       name: firemode-name-heal
       fireCost: 17.5
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
