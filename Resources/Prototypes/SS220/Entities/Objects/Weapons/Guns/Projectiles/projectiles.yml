@@ -180,13 +180,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
+    impactEffect: BulletImpactEffectBlue
     damage:
       types:
         Heat: 44
         Structural: 800
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: pulseheavylaser
+      shader: unshaded
   - type: ProjectileSpread
-    proto: BulletLaser
+    proto: BulletLaserDestroy
     count: 5
     spread: 15
 
@@ -201,7 +206,7 @@
     layers:
       - state: greenlaser
   - type: Projectile
-    impactEffect: BulletImpactEffectGreenDisabler
+    impactEffect: BulletImpactEffectGreen
     damage:
       types:
         Blunt: -10
@@ -217,7 +222,7 @@
     spread: 10
 
 - type: entity
-  id: BulletImpactEffectGreenDisabler
+  id: BulletImpactEffectGreen
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
@@ -230,6 +235,25 @@
       sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
       state: impact_laser_greyscale
       color: green
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: BulletImpactEffectBlue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: blue
   - type: EffectVisuals
   - type: Tag
     tags:
