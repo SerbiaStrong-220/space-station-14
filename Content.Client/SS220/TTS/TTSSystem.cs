@@ -13,7 +13,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using YamlDotNet.Core.Tokens;
 
 namespace Content.Client.SS220.TTS;
 

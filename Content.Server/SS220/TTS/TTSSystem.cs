@@ -229,7 +229,7 @@ public sealed partial class TTSSystem : EntitySystem
             var xform = xformQuery.GetComponent(session.AttachedEntity.Value);
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
-            if (distance > ChatSystem.VoiceRange * ChatSystem.VoiceRange)
+            if (distance > ChatSystem.WhisperMuffledRange)
                 continue;
 
             var fullTtsEvent = new PlayTTSEvent(
