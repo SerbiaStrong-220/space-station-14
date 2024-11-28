@@ -28,3 +28,6 @@ ent-ClothingUniformJumpskirtAssociateProfessor = форма доцента
 ent-ClothingUniformJumpskirtProfessor = форма профессора
     .desc = А теперь рубрика "эксперимент"!
     .suffix = За время в игре
+ent-ClothingUniformJumpskirtWarehouseman = рабочий комбинезон-юбка заведующего складом
+    .desc = Практичный, удобный, не стесняющий движения и главное стильный юбка-комбинезон. У вас с ним связаны плохие воспоминания о прошлом начальнике
+    .suffix = За время в игре
