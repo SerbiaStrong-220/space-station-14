@@ -1,33 +1,26 @@
 #Base
-#TODO: Когда будет анимация для спавна стен - переделать BaseItemSpider на наследование от BaseItem
 - type: entity
-  name: "item"
-  id: BaseItemSpider 
+  id: BaseSpiderEgg
   abstract: true
+  name: the-egg-of-the-spider-guard
+  description: Is it a gemstone? Is it an egg? It looks expensive.
   components:
+  - type: Icon
+    sprite: Objects/Misc/eggspider.rsi
+    state: icon
+  - type: Sprite
+    sprite: Objects/Misc/eggspider.rsi
+    state: icon
+  - type: Transform
   - type: Clickable
   - type: InteractionOutline
-  - type: MovedByPressure
-  - type: EmitSoundOnCollide
-    sound:
-      collection: WeakHit
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Effects/drop.ogg
-      params:
-        volume: 2
-  - type: DamageOnHighSpeedImpact
-    damage:
-      types:
-        Blunt: 5
-    soundHit:
-      path: /Audio/Effects/hit_kick.ogg
-  - type: CollisionWake
-  - type: TileFrictionModifier
-    modifier: 0.5
+  - type: PointLight
+    radius: 1.5
+    energy: 3
+    color: "#4faffb"
   - type: Physics
-    bodyType: Dynamic
-    fixedRotation: false
+    bodyType: Static
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -37,46 +30,13 @@
         density: 20
         mask:
         - ItemMask
-        restitution: 0.3  # fite me
+        restitution: 0.3
         friction: 0.2
-  - type: Pullable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 1
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: StaticPrice
-    price: 100
-
-- type: entity
-  parent: BaseItemSpider
-  id: BaseSpiderEgg
-  abstract: true
-  name: the-egg-of-the-spider-guard
-  description: Is it a gemstone? Is it an egg? It looks expensive.
-  components:
-  - type: Sprite
-    sprite: Objects/Misc/eggspider.rsi
-    state: icon
-  - type: PointLight
-    radius: 1.5
-    energy: 3
-    color: "#4faffb"
-  - type: StaticPrice
-    price: 500 
-  - type: Barotrauma #Урон от разгермы
+  - type: Barotrauma
     damage:
       types:
         Blunt: 0.1
         Heat: 0.1 
-  - type: DamageOnHighSpeedImpact
-    minimumSpeed: 0.1
-    damage:
-      types:
-        Blunt: 1
   - type: Damageable
     damageContainer: Biological        
   - type: Destructible
@@ -95,18 +55,11 @@
           EggshellsSpider:
             min: 1
             max: 1
-          # Wow double-yolk you're so lucky!
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: PoisonWine
-          Quantity: 10      
-  - type: TimedDespawn #Система цикла
-  - type: SpawnOnDespawn
+        acts: [ "Destruction" ]     
+  - type: SpiderEgg
+  - type: StaticPrice
+    price: 500 
 
 #Spiders
 - type: entity 
@@ -116,10 +69,11 @@
   name: spider hive egg
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
-  - type: TimedDespawn 
-    lifetime: 55
-  - type: SpawnOnDespawn
-    prototype: MobSpiderDrone   
+  - type: SpiderEgg
+    incubationTime: 55
+    spawnProtos:
+      - id: MobSpiderDrone
+        amount: 1
 
 - type: entity
   parent: BaseSpiderEgg
@@ -127,11 +81,12 @@
   categories: [ HideSpawnMenu ]
   name: the-egg-of-the-spider-guard
   description: Is it a gemstone? Is it an egg? It looks expensive.
-  components: 
-  - type: TimedDespawn #Система цикла
-    lifetime: 80        
-  - type: SpawnOnDespawn
-    prototype: MobSpiderHunter   #Система цикла  
+  components:
+  - type: SpiderEgg
+    incubationTime: 80 
+    spawnProtos:
+      - id: MobSpiderHunter
+        amount: 1
 
 - type: entity 
   parent: BaseSpiderEgg
@@ -140,10 +95,11 @@
   name: spider hive egg
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
-  - type: TimedDespawn 
-    lifetime: 80
-  - type: SpawnOnDespawn
-    prototype: MobSpiderGhost   
+  - type: SpiderEgg
+    incubationTime: 80 
+    spawnProtos:
+      - id: MobSpiderGhost  
+        amount: 1 
 
 - type: entity 
   parent: BaseSpiderEgg
@@ -152,7 +108,8 @@
   name: spider hive egg
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
-  - type: TimedDespawn 
-    lifetime: 80
-  - type: SpawnOnDespawn
-    prototype: MobSpiderShooter  
+  - type: SpiderEgg
+    incubationTime: 80 
+    spawnProtos:
+      - id: MobSpiderShooter
+        amount: 1

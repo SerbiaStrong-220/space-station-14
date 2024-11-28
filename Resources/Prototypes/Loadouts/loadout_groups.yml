@@ -1021,6 +1021,8 @@
   - ResearchDirectorJumpsuit
   - ResearchDirectorJumpskirt
 #SS220-RD-New-Loadout-begin
+  - ResearchDirectorJumpsuitProfessor #SS220-loadout-academy
+  - ResearchDirectorJumpskirtProfessor #SS220-loadout-academy
   - ClothingUniformJumpsuitRDAlt
 
 - type: loadoutGroup
@@ -1077,6 +1079,8 @@
   - ScientistJumpsuitTurtleneckAlt
   - ScientistJumpskirtTurtleneck
   - ScientistJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - ScientistJumpsuitPhdCandidate #SS220-loadout-academy
+  - ScientistJumpskirtPhdCandidate #SS220-loadout-academy
 
 - type: loadoutGroup
   id: ScientistBackpack
@@ -1129,6 +1133,8 @@
   loadouts:
   - WhiteJumpsuit
   - WhiteJumpskirt
+  - ResearchAssistantBachelor #SS220-loadout-academy
+  - ResearchAssistantBachelorSkirt #SS220-loadout-academy
   - ResearchAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ResearchAssistantJumpsuitTurtleneckAlt
   - ResearchAssistantJumpskirtTurtleneck

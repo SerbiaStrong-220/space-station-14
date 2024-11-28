@@ -36,10 +36,10 @@
   id: SyndiHypo
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/syndihypo.rsi
+    sprite: SS220/Objects/Specific/Medical/syndihypo.rsi #SS220-resprite-syndihypo
     state: hypo
   - type: Item
-    sprite: Objects/Specific/Medical/syndihypo.rsi
+    sprite: SS220/Objects/Specific/Medical/syndihypo.rsi #SS220-resprite-syndihypo
   - type: SolutionContainerManager
     solutions:
       hypospray:
