@@ -151,3 +151,36 @@
   #   slots:
   #   - Back
   #   - suitStorage
+
+# WMT ebent start
+- type: entity
+  parent: BaseItem
+  id: Broadsword
+  name: broadsword
+  description: Echoes of the past in the service of a new war.
+  suffix: Ebent, HOCebent
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/sword.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/broadsword.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Slash: 40
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/broadsword.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Melee/broadsword.rsi
+    quickEquip: true
+    slots:
+    - Belt
+# WMT ebent end

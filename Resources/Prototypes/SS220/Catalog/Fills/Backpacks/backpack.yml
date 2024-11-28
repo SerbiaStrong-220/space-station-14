@@ -112,6 +112,7 @@
         - id: ToolDebug
         - id: WelderExperimental
         - id: PinpointerNuclear
+        - id: PinpointerNuclearBomb
         - id: EmergencyMedipenDQ
           amount: 2
 
@@ -136,5 +137,6 @@
         - id: ToolDebug
         - id: WelderExperimental
         - id: PinpointerNuclear
+        - id: PinpointerNuclearBomb
         - id: EmergencyMedipenDQ
           amount: 6

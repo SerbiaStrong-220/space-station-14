@@ -112,6 +112,9 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     /// </summary>
     public bool CheckEnoughBloodPoints(EntityUid uid, FixedPoint2 cost, SpiderQueenComponent? component = null)
     {
+        if (cost <= 0)
+            return true;
+
         if (!Resolve(uid, ref component))
         {
             if (_net.IsServer)
@@ -127,6 +130,17 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         }
         else
             return true;
+    }
+
+    public void ChangeBloodPointsAmount(EntityUid uid, SpiderQueenComponent component, FixedPoint2 amount)
+    {
+        var newValue = component.CurrentBloodPoints + amount;
+        component.CurrentBloodPoints = newValue > 0
+            ? MathF.Min((float)newValue, (float)component.MaxBloodPoints)
+            : 0;
+
+        Dirty(uid, component);
+        UpdateAlert((uid, component));
     }
 
     /// <summary>

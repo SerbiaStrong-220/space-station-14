@@ -30,6 +30,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Utility;
 using Robust.Shared.Map.Components;
 using Content.Shared.Whitelist;
+using Content.Server.NPC.HTN;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -73,7 +74,8 @@ public sealed partial class RevenantSystem
             return;
         }
 
-        if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidAppearanceComponent>(target) || HasComp<RevenantComponent>(target))
+        if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidAppearanceComponent>(target) || HasComp<RevenantComponent>(target)
+            || HasComp<HTNComponent>(target)) // ss220 rev cant harvest NPC
             return;
 
         args.Handled = true;

@@ -71,6 +71,7 @@
     damage:
       types:
         Piercing: 6
+    angle: 0 #SS220-piercing screwdriver
     soundHit:
       path: "/Audio/Weapons/bladeslice.ogg"
   - type: Tool
