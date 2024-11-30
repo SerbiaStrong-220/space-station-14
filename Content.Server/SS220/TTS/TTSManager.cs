@@ -104,7 +104,11 @@ public sealed class TTSManager
                 return data;
             }
 
-            _sawmill.Info($"Generate new audio for '{text}' speech by '{speaker}' speaker");
+            if (isRadio)
+                _sawmill.Info($"Generate new radio sound for '{text}' speech by '{speaker}' speaker");
+            else
+                _sawmill.Info($"Generate new audio for '{text}' speech by '{speaker}' speaker");
+
             var reqTime = DateTime.UtcNow;
             try
             {
