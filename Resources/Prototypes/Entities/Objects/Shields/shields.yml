@@ -437,6 +437,23 @@
         flatReductions:
           Heat: 1
           Piercing: 1
+    #ss220 shield blocking damage fix start
+    - type: ItemToggleBlockingDamage
+      deactivatedActiveModifier:
+        coefficients:
+          Blunt: 0.0
+          Slash: 0.0
+          Piercing: 0.0
+          Heat: 0.0
+      deactivatedPassiveModifier:
+        coefficients:
+          Blunt: 0.0
+          Slash: 0.0
+          Piercing: 0.0
+          Heat: 0.0
+      deactivatedActiveFraction: 0
+      deactivatedPassiveFraction: 0
+    #ss220 shield blocking damage fix end
     - type: Appearance
     - type: Damageable
       damageContainer: Shield

@@ -1,4 +1,5 @@
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
@@ -68,6 +69,11 @@ public sealed class InteractionPopupSystem : EntitySystem
         {
             return;
         }
+
+        //ss220 interact w/o hands fix start
+        if (component.NeedHands && !HasComp<HandsComponent>(user))
+            return;
+        //ss220 interact w/o hands fix end
 
         args.Handled = true;
 

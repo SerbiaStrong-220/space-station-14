@@ -221,6 +221,18 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+
+- type: loadoutGroup
+  id: SecurityPilotOuterClothing
+  name: loadout-group-security-pilot-outerclothing
+  loadouts:
+  - ArmorVest
+  - ArmorVestSlim
+  - SecurityOfficerWintercoat
+  - CoatSecurityOvercoat
+  - SecBomber
+  - VestArmorSec
+  - CyberVestSecurity
   # Пилот (Конец)
 #! Служба безопасности (Конец)
 
@@ -468,6 +480,8 @@
   loadouts:
   - SeniorSciensistJumpsuit
   - SeniorSciensistJumpskirt
+  - SeniorSciensistJumpsuitAssociateProfessor #SS220-loadout-academy
+  - SeniorSciensistJumpskirtAssociateProfessor #SS220-loadout-academy
 
 - type: loadoutGroup
   id: SeniorSciensistOuterClothing

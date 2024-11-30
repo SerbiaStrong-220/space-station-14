@@ -90,8 +90,8 @@
   - type: Appearance
     #ss220lowTTKUpdate btw lmg too OP ^^^^
   - type: HeldSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.7
+    sprintModifier: 0.7
     mirrorClothingModifier: false
     #ss220lowTTKUpdate
 

@@ -146,6 +146,11 @@
       - Door
       tags:
       - Wall
+    # SS220 dragon devour fix begin
+    blacklist:
+      components:
+      - BorgChassis
+    # SS220 dragon devour fix end
   - type: Tag
     tags:
     - CannotSuicide

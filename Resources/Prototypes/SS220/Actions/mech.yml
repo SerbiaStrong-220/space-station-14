@@ -1,0 +1,27 @@
+- type: entity
+  id: ActionMechClothingOpenUI
+  name: Control Panel
+  description: Opens the control panel for the mech
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: mech_view_stats
+    event: !type:MechClothingOpenUiEvent
+    useDelay: 1
+
+- type: entity
+  id: ActionMechClothingGrab
+  name: Lift cargo
+  description: Load the cargo into the mech
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: SS220/Interface/Actions/actions_mecha.rsi
+      state: mech_grab
+    event: !type:MechClothingGrabEvent
+    useDelay: 1
+    checkCanInteract: false
+    priority: -10

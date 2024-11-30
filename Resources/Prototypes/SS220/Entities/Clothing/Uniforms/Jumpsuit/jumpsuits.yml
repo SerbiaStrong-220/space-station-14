@@ -553,7 +553,7 @@
   id: ClothingUniformBluesoldier
   name: kingdom army shirt
   description: The clothing of a soldier of the great army of the kingdom.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bluesoldier.rsi
@@ -565,10 +565,64 @@
   id: ClothingUniformRedsoldier
   name: republican army shirt
   description: The clothing of a soldier of the army of the River Republic.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/redsoldier.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/redsoldier.rsi
 # WMT Ebent end
+
+  #RND / РНД
+
+# Ассистент
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBachelor
+  name: bachelor's graduation uniform
+  description: In vain students wait for a friend in the pub, Science is not without sacrifice.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/assistant_bachelor_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/assistant_bachelor_uniform.rsi
+
+# Ученый
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitPhdCandidate
+  name: phd candidate uniform
+  description: Students, prepare for a lecture.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/phd_candidate.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/phd_candidate.rsi
+
+# Ведущий учёный
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitAssociateProfessor
+  name: assistant professor's uniform
+  description:
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/associate_professor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/associate_professor.rsi
+
+# Научрук
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitProfessor
+  name: professor's uniform
+  description:
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/professor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/professor.rsi
