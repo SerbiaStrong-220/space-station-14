@@ -104,7 +104,11 @@ public sealed class TTSManager
                 return data;
             }
 
-            _sawmill.Debug($"Generate new audio for '{text}' speech by '{speaker}' speaker");
+            if (isRadio)
+                _sawmill.Info($"Generate new radio sound for '{text}' speech by '{speaker}' speaker");
+            else
+                _sawmill.Info($"Generate new audio for '{text}' speech by '{speaker}' speaker");
+
             var reqTime = DateTime.UtcNow;
             try
             {
@@ -149,8 +153,10 @@ public sealed class TTSManager
                     _cacheKeysSeq.Remove(firstKey);
                 }
 
-                _sawmill.Debug(
-                    $"Generated new sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
+                if (isRadio)
+                    _sawmill.Info($"Generated new radio sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
+                else
+                    _sawmill.Info($"Generated new sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
                 RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
 
                 return soundData;
@@ -236,10 +242,6 @@ public sealed class TTSManager
                     _cacheRadio.TryRemove(firstKey, out _);
                     _cacheRadioKeysSeq.Remove(firstKey);
                 }
-
-                _sawmill.Debug(
-                    $"Generated new radio sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
-                RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
 
                 return soundData;
             }

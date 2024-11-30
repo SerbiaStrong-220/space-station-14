@@ -215,6 +215,21 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
 
+# Карго
+
+  #Квартирмейстер
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtWarehouseman
+  name: the overalls of the warehouse manager
+  description: Practical, comfortable, movement-free and, most importantly, stylish jumpskirt. You have bad memories of your former boss with him.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
+
   #RND / РНД
 
 # Ассистент

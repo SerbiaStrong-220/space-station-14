@@ -65,6 +65,8 @@
           minCount: 2
           maxCount: 3 # SS2200 Counter Ruins Update
           stationGrid: false
+          minimumDistance: 400 # SS220 Ruins distance
+          maximumDistance: 650 # SS220 Ruins distance
           paths:
           # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/biodome_satellite.yml
@@ -83,8 +85,8 @@
           - /Maps/SS220/Ruins/WarshuttleWreck_SS220.yml
           # SS220 Ruins Update Map End
         vgroid: !type:DungeonSpawnGroup
-          minimumDistance: 300
-          maximumDistance: 350
+          minimumDistance: 900 # SS220 VGroid distance
+          maximumDistance: 1350 # SS220 VGroid distance
           nameDataset: names_borer
           stationGrid: false
           addComponents:
