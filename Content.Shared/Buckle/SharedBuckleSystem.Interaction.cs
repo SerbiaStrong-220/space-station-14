@@ -4,7 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.Revenant.Components;
+using Content.Shared.SS220.BlockBuckleVerbsInteraction;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
@@ -127,6 +127,9 @@ public abstract partial class SharedBuckleSystem
         if (args.Hands == null || !args.CanAccess || !args.CanInteract || !component.Enabled)
             return;
 
+        if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
+            return;
+
         // Note that for whatever bloody reason, buckle component has its own interaction range. Additionally, this
         // range can be set per-component, so we have to check a modified InRangeUnobstructed for every verb.
 
@@ -202,11 +205,8 @@ public abstract partial class SharedBuckleSystem
         if (!args.CanAccess || !args.CanInteract || !component.Buckled)
             return;
 
-        //ss220 revenant can unbuckle fix start
-        // (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1901)
-        if (HasComp<RevenantComponent>(args.User))
+        if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
             return;
-        //ss220 revenant can unbuckle fix end
 
         InteractionVerb verb = new()
         {
