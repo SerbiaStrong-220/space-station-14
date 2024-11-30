@@ -1,5 +1,6 @@
 # руки = лапы. Пока так сойдёт, душиться не буду.
 surgery-null-used = руками
+surgery-invalid-target-buckle = Цель должна быть пристёгнута!
 
 incision-examine-description = На теле заметен хирургический разрез.
 incision-popup = {THE($user)} делает надрез на теле {THE($target)}, используя {$used}

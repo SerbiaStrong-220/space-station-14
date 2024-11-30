@@ -9,14 +9,19 @@ namespace Content.Server.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
-    protected bool IsValidTarget(EntityUid uid, out string? reason)
+    protected bool IsValidTarget(EntityUid uid, out string? reasonLocPath)
     {
-        reason = null;
+        reasonLocPath = null;
         if (HasComp<OnSurgeryComponent>(uid)
             || !HasComp<MindSlaveComponent>(uid) // for now only for slaves
-            || !HasComp<SurgableComponent>(uid)
-            || !_buckleSystem.IsBuckled(uid))
+            || !HasComp<SurgableComponent>(uid))
             return false;
+
+        if (!_buckleSystem.IsBuckled(uid))
+        {
+            reasonLocPath = "surgery-invalid-target-buckle";
+            return false;
+        }
 
         return true;
     }

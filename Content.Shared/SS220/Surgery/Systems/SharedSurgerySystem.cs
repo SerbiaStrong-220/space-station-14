@@ -112,9 +112,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnDrapeInteract(Entity<SurgeryDrapeComponent> entity, ref AfterInteractEvent args)
     {
-        if (args.Handled || args.Target == null || !IsValidTarget(args.Target.Value, out _) || !IsValidPerformer(args.User))
+        if (args.Handled || args.Target == null)
             return;
 
+        if (!IsValidTarget(args.Target.Value, out var reasonLocPath) || !IsValidPerformer(args.User))
+        {
+            _popup.PopupCursor(reasonLocPath != null ? Loc.GetString(reasonLocPath) : null);
+            return;
+        }
         //SS220_Surgery: here must open UI and from it you should get protoId of surgery
 
         args.Handled = TryStartSurgery(args.Target.Value, "MindSlaveFix", args.User, args.Used);
