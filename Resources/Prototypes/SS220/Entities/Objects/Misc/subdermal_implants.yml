@@ -5,6 +5,60 @@
   description: lmaoooo
   categories: [ HideSpawnMenu ]
   components:
-   - type: Tag
-     tags:
-       - MindSlave
+  - type: Tag
+    tags:
+    - MindSlave
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-MindSlaveImplant-medical
+      jobRequired:
+        - Paramedic
+        - MedicalDoctor
+        - SeniorPhysician
+        - ChiefMedicalOfficer
+        - Brigmedic
+    - label: hidden-desc-MindSlaveImplant-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: hidden-desc-MindSlaveImplant-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: ThermalVisionImplant
+  name: thermal-vision implant
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionActivateThermalVision
+    - type: TriggerImplantAction
+    - type: ThermalVisionImplant
+    - type: Tag
+      tags:
+        - ThermalImplant
+    - type: HiddenDescription
+      entries:
+      - label: corvax-hidden-desc-IllegalImplants-medical
+        jobRequired:
+          - Paramedic
+          - MedicalDoctor
+          - SeniorPhysician
+          - ChiefMedicalOfficer
+          - Brigmedic
+      - label: hidden-desc-ThermalVisorImplanter-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+      - label: hidden-desc-ThermalGoogles-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
