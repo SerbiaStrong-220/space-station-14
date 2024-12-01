@@ -167,7 +167,6 @@ public sealed class NukeSystem : EntitySystem
         if (component.Status == NukeStatus.ARMED)
             return;
 
-        // Nuke has to have the disk in it to be moved
         if (!component.DiskSlot.HasItem)
         {
             var msg = Loc.GetString("nuke-component-cant-anchor-toggle");
