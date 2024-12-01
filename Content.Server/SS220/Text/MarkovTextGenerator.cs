@@ -37,7 +37,7 @@ public sealed class MarkovTextGenerator : EntitySystem
 
             for (int i = 0; i < words.Length - keySize; i++)
             {
-                var key = words.Skip(i).Take(keySize).Aggregate(Join);
+                var key = string.Join(' ', words, i, keySize);
                 var value = words[i + keySize];
                 AddToTransitionMatrix(key, value);
             }

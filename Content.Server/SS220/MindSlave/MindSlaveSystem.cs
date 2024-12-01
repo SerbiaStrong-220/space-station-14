@@ -108,7 +108,7 @@ public sealed class MindSlaveSystem : EntitySystem
         var stopWord = entity.Comp.StopWord.ToLower();
         var message = args.Message;
         var index = message.ToLower().IndexOf(stopWord);
-        while (index != -1)
+        while (index != -1 && !string.IsNullOrEmpty(message))
         {
             message = message.Remove(index, stopWord.Length).Insert(index, Loc.GetString("mindslave-stop-word-replacement"));
             index = message.ToLower().IndexOf(stopWord);
@@ -331,9 +331,6 @@ public sealed class MindSlaveSystem : EntitySystem
             if (mindslaveImplant != null)
                 _implant.ForceRemove(slave, mindslaveImplant.Value);
         }
-
-
-
         return true;
     }
 
