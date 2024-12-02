@@ -5,27 +5,42 @@
   description: lmaoooo
   categories: [ HideSpawnMenu ]
   components:
-  - type: Tag
-    tags:
-    - MindSlave
-  - type: HiddenDescription
-    entries:
-    - label: hidden-desc-MindSlaveImplant-medical
-      jobRequired:
+    - type: Tag
+      tags:
+      - MindSlave
+    - type: MindSlaveDisfunctionProvider
+      disfunction:
+        disfunction:
+          Initial:
+            - MindSlaveDisfunctionAccent
+          Progressive:
+            - WieldUnability
+          Terminal:
+            - LegsParalyzed
+        deadlyStageDamage:
+          types:
+              Poison: 4
+              Blunt: 6
+              Airloss: 4
+        progressionPopup: "mindslave-disfunction-progress-popup"
+    - type: HiddenDescription
+      entries:
+      - label: hidden-desc-MindSlaveImplant-medical
+        jobRequired:
         - Paramedic
         - MedicalDoctor
         - SeniorPhysician
         - ChiefMedicalOfficer
         - Brigmedic
-    - label: hidden-desc-MindSlaveImplant-research
-      jobRequired:
+      - label: hidden-desc-MindSlaveImplant-research
+        jobRequired:
         - ResearchAssistant
         - ResearchDirector
         - Scientist
         - Borg
-    - label: hidden-desc-MindSlaveImplant-syndicate
-      whitelistMind:
-        components:
+      - label: hidden-desc-MindSlaveImplant-syndicate
+        whitelistMind:
+          components:
           - TraitorRole
           - NukeOperative
 
@@ -62,3 +77,4 @@
           components:
             - TraitorRole
             - NukeOperative
+

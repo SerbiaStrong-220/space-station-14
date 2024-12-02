@@ -65,6 +65,7 @@
     damageContainers:
       - Biological
   # SS220 ADD GHOST HUD'S END
+  - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
     receiveAllChannels: true

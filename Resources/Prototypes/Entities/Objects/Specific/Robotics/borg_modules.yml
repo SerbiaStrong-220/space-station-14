@@ -569,7 +569,7 @@
 
 - type: entity
   id: BorgModuleOperative
-  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ]
+  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ] # SS220 Remove BaseSyndicateContraband
   name: operative cyborg module
   description: A module that comes with a crowbar, an Emag and a syndicate pinpointer.
   components:
@@ -587,7 +587,7 @@
 
 - type: entity
   id: BorgModuleEsword
-  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ]
+  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ] # SS220 Remove BaseSyndicateContraband
   name: energy sword cyborg module
   description: A module that comes with a double energy sword.
   components:
@@ -604,7 +604,7 @@
 
 - type: entity
   id: BorgModuleL6C
-  parent: [ BaseBorgModuleSyndicateAssault, BaseProviderBorgModule ]
+  parent: [ BaseBorgModuleSyndicateAssault, BaseProviderBorgModule ] # SS220 Remove BaseSyndicateContraband
   name: L6C ROW cyborg module
   description: A module that comes with a L6C.
   components:

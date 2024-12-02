@@ -39,6 +39,18 @@ public sealed class CCVars220
         CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVERONLY);
 
     /// <summary>
+    /// (SS220) AHelp sound volume.
+    /// </summary>
+    public static readonly CVarDef<float> AHelpVolume =
+        CVarDef.Create("ahelp.volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    /// <summary>
+    /// (SS220) AHelp Sound on/off.
+    /// </summary>
+    public static readonly CVarDef<bool> AHelpSoundsEnabled =
+        CVarDef.Create("audio.ahelp_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    /// <summary>
     /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.
     /// </summary>
     public static readonly CVarDef<float> SuperMatterUpdateNetworkDelay =
@@ -55,4 +67,28 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<float> DiscordSponsorsCacheRefreshIntervalSeconds =
         CVarDef.Create("discord_sponsors_cache.refresh_interval_seconds", 60f * 60f * 4f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> DelayEnabled =
+        CVarDef.Create("delay.enabled", false, CVar.NOTIFY | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> AfkTimeKickEnabled =
+        CVarDef.Create("afk.time_kick_enabled", true, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> AfkTimeKick =
+        CVarDef.Create("afk.time_kick", 600f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> AfkTeleportToCryo =
+        CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Controls whether the server will deny any players that are not whitelisted in the Prime DB.
+    /// </summary>
+    public static readonly CVarDef<bool> PrimelistEnabled =
+        CVarDef.Create("primelist.enabled", false, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Automatically start a map vote after each round restart
+    /// </summary>
+    public static readonly CVarDef<bool> AutoMapVote =
+        CVarDef.Create("vote.auto_map_vote", false, CVar.SERVERONLY);
 }

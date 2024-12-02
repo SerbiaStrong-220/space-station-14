@@ -218,6 +218,7 @@ public sealed class WieldableSystem : EntitySystem
 
         var ev = new BeforeWieldEvent();
         RaiseLocalEvent(used, ev);
+        RaiseLocalEvent(user, ev); // SS220-wield-unability
 
         if (ev.Cancelled)
             return false;

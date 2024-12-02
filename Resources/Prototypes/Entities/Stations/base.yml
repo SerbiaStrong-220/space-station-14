@@ -69,6 +69,7 @@
           maximumDistance: 650 # SS220 Ruins distance
           paths:
           # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
+          - /Maps/Ruins/abandoned_outpost.yml
           - /Maps/Ruins/biodome_satellite.yml
           - /Maps/Ruins/derelict.yml
           # - /Maps/Ruins/djstation.yml # SS220 Removed with Ruins Update (balance Tweak)
@@ -87,7 +88,7 @@
         vgroid: !type:DungeonSpawnGroup
           minimumDistance: 900 # SS220 VGroid distance
           maximumDistance: 1350 # SS220 VGroid distance
-          nameDataset: names_borer
+          nameDataset: NamesBorer
           stationGrid: false
           addComponents:
           - type: Gravity

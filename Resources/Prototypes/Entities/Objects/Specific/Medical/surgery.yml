@@ -32,6 +32,11 @@
         Heat: 5
     soundHit:
       path: /Audio/Effects/lightburn.ogg
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Cautery
+    sound: /Audio/SS220/Surgery/cautery.ogg
+  # SS220 Surgery end
 
 # Drill
 
@@ -95,6 +100,11 @@
     tags:
     - Scalpel
   # SS220 Edit biomass craft end
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Scalpel
+    sound: /Audio/SS220/Surgery/scalpel.ogg
+  # SS220 Surgery end
 
 - type: entity
   name: shiv
@@ -147,6 +157,11 @@
   - type: Item
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
     storedRotation: 90
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Retractor
+    sound: /Audio/SS220/Surgery/retractor.ogg
+  # SS220 Surgery end
 
 - type: entity
   name: hemostat
@@ -159,6 +174,11 @@
   - type: Item
     heldPrefix: hemostat
     storedRotation: 90
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Hemostat
+    sound: /Audio/SS220/Surgery/hemostat.ogg
+  # SS220 Surgery end
 
   # - type: entity
   #   name: bone setter
@@ -228,6 +248,11 @@
       path: /Audio/Items/drill_hit.ogg
   - type: Tool
     speedModifier: 1.5
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Saw
+    sound: /Audio/SS220/Surgery/saw.ogg
+  # SS220 Surgery end
 
 - type: entity
   name: advanced circular saw

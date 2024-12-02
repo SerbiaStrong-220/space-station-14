@@ -3,11 +3,13 @@ mindslave-removed-slave = Ваш разум вновь помутнен... Вы 
 mindslave-briefing-slave-master = Вы получили контроль над { $name }! Теперь {SUBJECT($ent)} подчиняется вашей воле.
 mindslave-removed-slave-master = Вы потеряли контроль над { $name }! {CAPITALIZE(SUBJECT($ent))} забывает всё, что произошло после потери контроля.
 mindslave-removed-slave-master-unknown = Вы потеряли контроль над одним из своих подчиненных разумов!
-# хз че еще тут написать можно было
+# хз че еще тут написать можно было <- Ну попробуй не писать =ъ
 mindslave-unknown-master = ЛИЧНОСТЬ СКРЫТА
 mindslave-enslaving-yourself-attempt = Нельзя подчинить разум самому себе!
 mindslave-target-already-enslaved = Цель уже подчинена!
 mindslave-target-mindshielded = Разум цели сопротивляется!
+mindshield-target-mindslaved = Разум цели сопротивляется!
+mindslave-stop-word-replacement = .
 mindslave-master-dead = Ваш подчинитель погиб! Вам необходимо как можно быстрее вернуть его к жизни!
 mindslave-master-crit = Ваш подчинитель находится в критическом состоянии! Вам необходимо срочно помочь ему!
 
@@ -32,6 +34,11 @@ ent-MindSlaveImplanter = { ent-Implanter }
 ent-MindSlaveImplant = Подчинитель разума
     .desc = { ent-BaseSubdermalImplant.desc }
 
+ent-MindslaveFixerCerebralImplant = конфигуратор имплантов
+    .desc = Небольшое устройство, позволяющее произвести более тонкую настройку имплантов. На корпусе расположилось лого "Interdyne pharmaceutics".
+ent-MindslaveFixSurgeryGuide = инструкция
+    .desc = А у кого-то есть инструкция "Как читать"?..
+
 #alert
 alerts-mindslave-name = Подчиненный разум
 alerts-mindslave-desc = Ваш разум был подчинен
@@ -42,3 +49,34 @@ roles-antag-syndicate-mindslave-objective = Ваш разум подчинен! 
 objective-condition-mindslave-obey-master = Подчиняться воле { $targetName }, { $job }.
 ent-MindSlaveObeyObjective = Подчиняться воле другого.
     .desc = Ваш разум теперь находится под контролем другого, следуйте его воле и сохраните его жизнь.
+
+#telepathy
+mindslave-telepathy-channel-name = подчинённый разум
+
+#disfunction
+mindslave-disfunction-progress-popup = Вы чувствуете как ваш позвоночник вскипает!
+unable-to-wield = { $user } не может удержать двумя руками!
+
+#guides
+mindslave-fixer-surgery-guide = Поздравляем Вас с приобретением продукции "Interdyne Pharmaceutics"!
+    Данная инструкция поможет провести операцию по манипуляции с вживлёнными мозговыми имплантами.
+    Для проведения операции понадобится
+        Место, к которому можно надёжно зафиксировать пациента;
+        Хирургические простыни,
+        Скальпель,
+        Ретрактор,
+        Дисковая пила,
+        Гемостат,
+        Прибор для прижигания,
+        Устроиство для манипуляции
+    Сама операция происходит в несколько этапов:
+        1. Надёжно зафиксируйте пациента
+        2. Наложите хирургические простыни
+        3. Сделайте скальпелем надрез в затылочной части головы
+        4. Увеличьте ретрактором рабочую область
+        5. При помощи дисковой пилы доберитесь до мозгового импланта
+        6. Гемостатом зажмите кровоточащие места
+        7. Произведите манипуляции с имплантам
+        8. Закройте разрезы прибором для прижигания
+    Поздравляем! Вы закончили свою первую операцию!
+
