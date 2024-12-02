@@ -21,15 +21,15 @@ public sealed class CriminalStatusTrackerSystem : EntitySystem
     {
         var (_, comp) = entity;
 
-        // we check if sender is able to move the progress
-        if (comp.NeedToCheckMind() && TryComp<MindContainerComponent>(args.Sender, out var mindContainer)
-            && mindContainer.HasMind && comp.CanBeChangedByMind(mindContainer.Mind.Value))
-            return;
-
         if (args.CurrentCriminalRecord.RecordType == null)
             return;
 
-        comp.TryMove(args.CurrentCriminalRecord.RecordType.Value);
+        EntityUid? mindUid = null;
+        // we check if sender is able to move the progress
+        if (TryComp<MindContainerComponent>(args.Sender, out var mindContainer))
+            mindUid = mindContainer.Mind;
+
+        comp.TryMove(args.CurrentCriminalRecord.RecordType.Value, mindUid);
     }
 }
 

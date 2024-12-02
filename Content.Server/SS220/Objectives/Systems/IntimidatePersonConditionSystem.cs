@@ -46,15 +46,16 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
             || ssdIndicator.IsSSD)
         {
             args.Progress = 1f;
+            SetDescription(entity, IntimidatePersonDescriptionType.SSD);
             return;
         }
 
+        SetDescription(entity, IntimidatePersonDescriptionType.Start);
         args.Progress = GetProgress(entity.Comp.TargetMob);
         if (args.Progress >= 1f)
         {
             entity.Comp.ObjectiveIsDone = true;
-            if (entity.Comp.SuccessDescription != null)
-                _metaData.SetEntityDescription(entity.Owner, entity.Comp.SuccessDescription);
+            SetDescription(entity, IntimidatePersonDescriptionType.Success);
         }
     }
 
@@ -102,7 +103,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
     private void OnAfterAssign(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveAfterAssignEvent args)
     {
         if (entity.Comp.StartDescription != null)
-            _metaData.SetEntityDescription(entity.Owner, entity.Comp.StartDescription);
+            _metaData.SetEntityDescription(entity.Owner, Loc.GetString(entity.Comp.StartDescription));
     }
 
     private float GetProgress(EntityUid target, DamageReceivedTrackerComponent? tracker = null)
@@ -116,5 +117,28 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
     private EntityUid? GetMindsOriginalEntity(EntityUid mindUid)
     {
         return GetEntity(Comp<MindComponent>(mindUid).OriginalOwnedEntity);
+    }
+
+    /// <summary>
+    /// A way to change description mindlessly
+    /// </summary>
+    private void SetDescription(Entity<IntimidatePersonConditionComponent> entity, IntimidatePersonDescriptionType type)
+    {
+        var (uid, component) = entity;
+        if (component.DescriptionType == type)
+            return;
+
+        var newDescription = type switch
+        {
+            IntimidatePersonDescriptionType.Start => component.StartDescription,
+            IntimidatePersonDescriptionType.Success => component.SuccessDescription,
+            IntimidatePersonDescriptionType.SSD => component.SSDDescription,
+            _ => null
+        };
+
+        if (newDescription == null)
+            return;
+
+        _metaData.SetEntityDescription(uid, Loc.GetString(newDescription));
     }
 }

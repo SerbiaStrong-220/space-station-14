@@ -16,6 +16,7 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public bool ObjectiveIsDone = false;
 
+    public IntimidatePersonDescriptionType DescriptionType;
     // Two descriptions comes to help player differ done object from one which isn't.
 
     /// <summary>
@@ -29,4 +30,17 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     /// </summary>
     [DataField(required: true)]
     public string? SuccessDescription;
+
+    /// <summary>
+    /// Description will be applied when objective is done. No params in it
+    /// </summary>
+    [DataField(required: true)]
+    public string? SSDDescription;
+}
+
+public enum IntimidatePersonDescriptionType
+{
+    Start = 0,
+    Success,
+    SSD
 }

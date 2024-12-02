@@ -15,7 +15,6 @@ using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.SS220.Ghost;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -191,7 +190,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         _stationRecords.Synchronize(key.OriginStation);
         var cardId = UpdateIdCards(key, selectedRecord);
         if (cardId.HasValue && TryGetLastRecord(key, out _, out var currentCriminalRecord))
-            RaiseLocalEvent(cardId.Value, new CriminalStatusDeleted(sender, key, ref currentCriminalRecord));
+            RaiseLocalEvent<CriminalStatusEvent>(cardId.Value, new CriminalStatusDeleted(sender, key, ref currentCriminalRecord));
 
         if (sender != null)
         {
@@ -263,7 +262,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         _stationRecords.Synchronize(key.OriginStation);
         var cardId = UpdateIdCards(key, selectedRecord);
         if (cardId.HasValue)
-            RaiseLocalEvent(cardId.Value, new CriminalStatusAdded(sender, key, ref criminalRecord));
+            RaiseLocalEvent<CriminalStatusEvent>(cardId.Value, new CriminalStatusAdded(sender, key, ref criminalRecord));
 
         _sawmill.Debug("Added new criminal record, synchonizing");
 
