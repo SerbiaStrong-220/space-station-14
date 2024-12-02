@@ -16,7 +16,6 @@
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
-  requireAdminNotify: true
   supervisors: job-supervisors-captain
   radioBold: true
   access:

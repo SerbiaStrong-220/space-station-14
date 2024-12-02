@@ -1,6 +1,7 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.SS220.Telepathy;
@@ -14,8 +15,8 @@ public sealed partial class TelepathyComponent : Component
     [DataField("canSend", required: true)]
     public bool CanSend;
 
-    [DataField("telepathyChannelPrototype", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<TelepathyChannelPrototype>))]
-    public string TelepathyChannelPrototype;
+    [DataField("telepathyChannelPrototype", required: true)]
+    public ProtoId<TelepathyChannelPrototype> TelepathyChannelPrototype;
 }
 
 public sealed partial class TelepathySendEvent : InstantActionEvent

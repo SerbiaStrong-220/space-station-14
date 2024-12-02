@@ -131,6 +131,7 @@
     - id: NewtonCradle
     - id: BoxEnvelope
     - id: DeviceCalculator # SS220 Calculator
+    - id: BrbSign
 
 - type: entity
   id: CrateServiceFaxMachine
