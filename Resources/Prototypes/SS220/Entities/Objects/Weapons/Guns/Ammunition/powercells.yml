@@ -25,7 +25,7 @@
       name: firemode-name-disabler-alt
       fireCost: 65
       magState: disabler-mag
-    - proto: BulletBlaster
+    - proto: BulletBlasterAlt
       name: firemode-name-laser-alt
       fireCost: 100
       magState: laser-mag

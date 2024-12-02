@@ -14,7 +14,7 @@
     maxItemSize: Normal
     defaultStorageOrientation: Vertical
     grid:
-    - 0,0,5,2
+    - 0,0,4,2
 
 - type: entity
   parent: ClothingBeltBlueShield
@@ -23,7 +23,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: Telescopichka #todo: Вайтлист не работает, исправить
       - id: Handcuffs
       - id: Handcuffs
       - id: GrenadeFlashBang
@@ -64,7 +63,6 @@
       - id: Handcuffs
       - id: FlashlightSeclite
       - id: Handcuffs
-      - id: Telescopichka
       - id: GrenadeFlashBang
       - id: GrenadeFlashBang
 

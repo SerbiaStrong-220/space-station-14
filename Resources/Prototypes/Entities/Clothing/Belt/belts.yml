@@ -486,7 +486,6 @@
         - Truncheon
         - HolofanProjectorSecurity # SS220 Fix #2009
       components:
-        - Telescopichka #SS220 BlueShieldReworks
         - Stunbaton
         - FlashOnTrigger
         - SmokeOnTrigger

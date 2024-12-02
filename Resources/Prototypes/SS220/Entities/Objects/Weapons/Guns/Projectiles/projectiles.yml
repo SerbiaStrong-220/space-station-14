@@ -234,3 +234,24 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  name : Blaster bolt
+  id: BulletBlasterAlt
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+    - state: redlaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 24
+        Piercing: 8
+    soundHit:
+      collection: WeakHit
+    forceSound: true
