@@ -40,7 +40,7 @@
         - Borg
       - label: hidden-desc-MindSlaveImplant-syndicate
         whitelistMind:
-          components:
+          mindRoles:
           - TraitorRole
           - NukeOperative
 
@@ -74,7 +74,7 @@
           - Borg
       - label: hidden-desc-ThermalGoogles-syndicate
         whitelistMind:
-          components:
+          mindRoles:
             - TraitorRole
             - NukeOperative
 
