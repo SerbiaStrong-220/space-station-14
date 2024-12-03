@@ -53,7 +53,7 @@
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitLightBlueshield
-  name: helmet of the light suit "Blue Shield"
+  name: helmet of the suit "Blue Shield"
   description: The helmet of a spacesuit designed for the Blue Shield.
   components:
   - type: BreathMask
@@ -62,7 +62,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardsuits/blueshield_light.rsi
   - type: PointLight
-    color: "#496eff"
+    color: "#faf9cc"
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 10000
