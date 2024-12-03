@@ -100,4 +100,4 @@
     requirePower: false
     ignoreInsulation: true
   #ss220 revenant buff end
-          
+  - type: BlockBuckleVerbsInteraction #ss220 revenant unbuckle verbs interaction fix

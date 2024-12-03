@@ -32,6 +32,7 @@
   - type: IgnoreUIRange
   - type: StationAiHeld
   - type: StationAiOverlay
+  - type: ShowElectrocutionHUD
   - type: ActionGrant
     actions:
     - ActionJumpToCore
@@ -253,7 +254,7 @@
 
 - type: entity
   id: AntimovCircuitBoard
-  parent: BaseElectronics
+  parent: BaseElectronics # SS220 Remove BaseSyndicateContraband
   name: law board (Antimov)
   description: An electronics board containing the Antimov lawset.
   components:
@@ -303,6 +304,7 @@
         unshaded:
           Empty: { state: empty }
           Occupied: { state: full }
+  - type: Intellicard
 
 - type: entity
   id: PlayerStationAiEmpty
@@ -431,27 +433,8 @@
 
 # Borgs
 - type: entity
-  id: PlayerBorgGeneric
-  parent: BorgChassisGeneric
-  suffix: Battery, Tools
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-        - PositronicBrain
-      borg_module:
-        - BorgModuleTool
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium
-  - type: RandomMetadata
-    nameSegments: [borg_names] # SS220 AI Dataset rework
-
-- type: entity
   id: PlayerBorgBattery
-  parent: BorgChassisGeneric
+  parent: BorgChassisSelectable
   suffix: Battery
   components:
   - type: ContainerFill

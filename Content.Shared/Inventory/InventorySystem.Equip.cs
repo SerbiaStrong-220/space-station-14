@@ -10,6 +10,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Strip;
 using Content.Shared.Strip.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -34,6 +35,7 @@ public abstract partial class InventorySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;// SS220 Chat-Special-Emote
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedStrippableSystem _strippable = default!;
 
     [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";

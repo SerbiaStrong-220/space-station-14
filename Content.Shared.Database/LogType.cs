@@ -126,4 +126,8 @@ public enum LogType
     /// </summary>
     ExplosionHit = 98,
 
+    /// <summary>
+    /// A ghost warped to an entity through the ghost warp menu.
+    /// </summary>
+    GhostWarp = 99,
 }

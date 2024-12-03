@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.SS220.BlockBuckleVerbsInteraction;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
@@ -126,6 +127,11 @@ public abstract partial class SharedBuckleSystem
         if (args.Hands == null || !args.CanAccess || !args.CanInteract || !component.Enabled)
             return;
 
+        //ss220 fix revenant verbs start
+        if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
+            return;
+        //ss220 fix revenant verbs end
+
         // Note that for whatever bloody reason, buckle component has its own interaction range. Additionally, this
         // range can be set per-component, so we have to check a modified InRangeUnobstructed for every verb.
 
@@ -200,6 +206,11 @@ public abstract partial class SharedBuckleSystem
     {
         if (!args.CanAccess || !args.CanInteract || !component.Buckled)
             return;
+
+        //ss220 fix revenant verbs start
+        if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
+            return;
+        //ss220 fix revenant verbs end
 
         InteractionVerb verb = new()
         {

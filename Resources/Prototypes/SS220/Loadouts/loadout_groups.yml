@@ -513,6 +513,8 @@
   loadouts:
   - SeniorSciensistJumpsuit
   - SeniorSciensistJumpskirt
+  - SeniorSciensistJumpsuitAssociateProfessor #SS220-loadout-academy
+  - SeniorSciensistJumpskirtAssociateProfessor #SS220-loadout-academy
 
 - type: loadoutGroup
   id: SeniorSciensistOuterClothing

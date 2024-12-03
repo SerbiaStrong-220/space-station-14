@@ -214,3 +214,72 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
+
+# Карго
+
+  #Квартирмейстер
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtWarehouseman
+  name: the overalls of the warehouse manager
+  description: Practical, comfortable, movement-free and, most importantly, stylish jumpskirt. You have bad memories of your former boss with him.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
+
+  #RND / РНД
+
+# Ассистент
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtBachelor
+  name: bachelor's graduation uniform
+  description: In vain students wait for a friend in the pub, Science is not without sacrifice.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+
+# Ученый
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtPhdCandidate
+  name: phd candidate uniform
+  description: Students, prepare for a lecture.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/phd_candidate.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/phd_candidate.rsi
+
+# Ведущий учёный
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtAssociateProfessor
+  name: assistant professor's uniform
+  description:
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/associate_professor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/associate_professor.rsi
+
+# Научрук
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtProfessor
+  name: professor's uniform
+  description:
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
