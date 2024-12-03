@@ -178,7 +178,7 @@
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
   loadouts:
-  - BlueShieldArmorBulletproof
+  - BlueShieldArmorAssault
   - BlueShieldArmorScale
   - BlueShieldOperativeCoat
 

@@ -15,9 +15,9 @@
 
 - type: entity
   parent: ClothingOuterArmorBasic
-  id: ClothingOuterArmorBlueShieldBulletproof
-  name: blueshield bulletproof vest
-  description: A heavy Type III bulletproof vest capable of protecting the wearer from bullets, explosives and sunburn.
+  id: ClothingOuterArmorBlueShieldAssault
+  name: assault vest "Blue Shield"
+  description: Designed for those who value their life and health above all else.
   components:
   - type: Item
     size: Normal

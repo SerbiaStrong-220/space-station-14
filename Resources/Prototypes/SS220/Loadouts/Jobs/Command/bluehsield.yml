@@ -116,9 +116,9 @@
 
 # Outer clothing
 - type: loadout
-  id: BlueShieldArmorBulletproof
+  id: BlueShieldArmorAssault
   equipment:
-    outerClothing: ClothingOuterArmorBlueShieldBulletproof
+    outerClothing: ClothingOuterArmorBlueShieldAssault
 
 - type: loadout
   id: BlueShieldArmorScale
