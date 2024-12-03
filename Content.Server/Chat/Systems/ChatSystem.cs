@@ -381,7 +381,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
             announcementSound ??= new SoundPathSpecifier(DefaultAnnouncementSound);
             var announcementFilename = _audio.GetSound(announcementSound);
-            var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), announcementFilename ?? DefaultAnnouncementSound, announcementSound.Params, message);
+            var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), announcementFilename ?? DefaultAnnouncementSound, announcementSound.Params, message, string.Empty);
             RaiseLocalEvent(announcementEv);
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
@@ -431,7 +431,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         string message,
         string? sender = null,
         bool playSound = true,
-        Color? colorOverride = null)
+        Color? colorOverride = null,
+        string? voiceId = null)
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -451,7 +452,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 
         if (playSound)
-            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message));
+            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message, voiceId));
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
@@ -1068,13 +1069,15 @@ public sealed class AnnouncementSpokeEvent : EntityEventArgs
     public readonly string AnnouncementSound;
     public readonly AudioParams AnnouncementSoundParams;
     public readonly string Message;
+    public readonly string? SpokeVoiceId;
 
-    public AnnouncementSpokeEvent(Filter source, string announcementSound, AudioParams announcementSoundParams, string message)
+    public AnnouncementSpokeEvent(Filter source, string announcementSound, AudioParams announcementSoundParams, string message, string? spokeVoiceId)
     {
         Source = source;
         Message = message;
         AnnouncementSound = announcementSound;
         AnnouncementSoundParams = announcementSoundParams;
+        SpokeVoiceId = spokeVoiceId;
     }
 }
 

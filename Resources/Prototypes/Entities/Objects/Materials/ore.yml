@@ -46,6 +46,8 @@
         reagents:
         - ReagentId: Gold
           Quantity: 10
+  - type: Item
+    heldPrefix: gold
 
 - type: entity
   parent: GoldOre
@@ -77,6 +79,8 @@
         reagents:
         - ReagentId: Carbon
           Quantity: 20
+  - type: Item
+    heldPrefix: diamond
 
 - type: entity
   parent: DiamondOre
@@ -112,6 +116,8 @@
         - ReagentId: Lead
           Quantity: 0.4
         #SS220 tweak produce lead end
+  - type: Item
+    heldPrefix: iron
 
 - type: entity
   id: SteelOre1
@@ -148,6 +154,8 @@
         reagents:
         - ReagentId: Plasma
           Quantity: 10
+  - type: Item
+    heldPrefix: plasma
 
 - type: entity
   parent: PlasmaOre
@@ -179,6 +187,8 @@
         reagents:
         - ReagentId: Silver
           Quantity: 10
+  - type: Item
+    heldPrefix: silver
 
 - type: entity
   parent: SilverOre
@@ -210,6 +220,8 @@
         reagents:
         - ReagentId: Silicon
           Quantity: 10
+  - type: Item
+    heldPrefix: spacequartz
 
 - type: entity
   parent: SpaceQuartz
@@ -249,6 +261,8 @@
         - ReagentId: Radium
           Quantity: 2
         canReact: false
+  - type: Item
+    heldPrefix: uranium
 
 - type: entity
   parent: UraniumOre
@@ -289,6 +303,8 @@
           Quantity: 2
         - ReagentId: Honk
           Quantity: 5
+  - type: Item
+    heldPrefix: bananium
 
 - type: entity
   parent: BananiumOre
@@ -328,6 +344,8 @@
   - type: PhysicalComposition
     materialComposition:
       Coal: 100
+  - type: Item
+    heldPrefix: coal
 
 - type: entity
   parent: Coal
@@ -336,6 +354,30 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: Coal
+  id: Coal5
+  suffix: Five
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: Coal
+  id: Coal10
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: Coal
+  id: Coal15
+  suffix: Fifteen
+  components:
+  - type: Stack
+    count: 15
 
 - type: entity
   parent: OreBase
@@ -361,6 +403,8 @@
           Quantity: 10
         - ReagentId: Iodine
           Quantity: 5
+  - type: Item
+    heldPrefix: salt
 
 - type: entity
   parent: SaltOre
