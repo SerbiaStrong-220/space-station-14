@@ -114,6 +114,11 @@
   equipment:
     neck: ClothingCloakBlueShield
 
+- type: loadout
+  id: ProtectGearBlue
+  equipment:
+    neck: ClothingNeckProtectBundleBlue
+
 # Outer clothing
 - type: loadout
   id: BlueShieldArmorAssault
