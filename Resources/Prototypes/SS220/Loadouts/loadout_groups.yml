@@ -571,7 +571,7 @@
 - type: loadoutGroup
   id: MusicianShoes
   name: loadout-group-musician-shoes
-  minLimit: 0
+  # minLimit: 0
   loadouts:
   - MusicianBootsLaceup
   - BardShoes
