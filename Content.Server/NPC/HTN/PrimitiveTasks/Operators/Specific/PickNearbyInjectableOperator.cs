@@ -70,7 +70,7 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 !recentlyInjected.HasComponent(entity))
             {
                 //ss220 medibot inject in stealth entity fix start
-                if (_container.IsEntityInContainer(entity) || _container.IsEntityInContainer(owner))
+                if (_container.IsEntityInContainer(entity))
                 {
                     continue;
                 }
