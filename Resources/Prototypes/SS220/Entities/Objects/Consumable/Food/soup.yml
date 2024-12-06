@@ -142,6 +142,8 @@
           reagents:
             - ReagentId: Nutriment
               Quantity: 5
+    - type: Produce
+      seedId: chili
     - type: StaticPrice
       price: 500 #It has so much Omnizin in it
 
