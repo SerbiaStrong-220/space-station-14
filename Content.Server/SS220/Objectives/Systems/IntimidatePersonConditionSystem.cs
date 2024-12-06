@@ -72,7 +72,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
         if (targetObjectiveComponent.Target != null)
             return;
 
-        var targetableMinds = _mind.GetAliveHumansExcept(args.MindId)
+        var targetableMinds = _mind.GetAliveHumans(args.MindId)
                     .Where(x => TryComp<MindComponent>(x, out var mindComponent)
                                 && !HasComp<DamageReceivedTrackerComponent>(GetEntity(mindComponent.OriginalOwnedEntity)))
                     .ToList();

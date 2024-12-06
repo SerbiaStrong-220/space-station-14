@@ -91,7 +91,7 @@ public sealed class FramePersonConditionSystem : EntitySystem
         if (targetObjective.Target != null)
             return false;
 
-        var whitelistedPlayers = _mind.GetAliveHumansExcept(objectiveOwnerMind)
+        var whitelistedPlayers = _mind.GetAliveHumans(objectiveOwnerMind)
                                     .Where(x => CorrectJob(x) && (blacklist == null || !EntityHasAnyComponent(x, blacklist)))
                                     .ToList();
 
