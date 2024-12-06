@@ -14,7 +14,7 @@ public sealed class DamageReceivedTrackerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private const float ResetDamageOwnerDelaySeconds = 3f;
+    private const float ResetDamageOwnerDelaySeconds = 0.5f;
 
     public override void Initialize()
     {
@@ -41,6 +41,8 @@ public sealed class DamageReceivedTrackerSystem : EntitySystem
         var damageGroup = _prototype.Index(entity.Comp.DamageTracker.DamageGroup);
         args.DamageDelta.TryGetDamageInGroup(damageGroup, out var trackableDamage);
         entity.Comp.CurrentAmount += trackableDamage;
-        entity.Comp.ResetTimeDamageOwnerTracked = _gameTiming.CurTime + TimeSpan.FromSeconds(ResetDamageOwnerDelaySeconds);
+
+        if (trackableDamage > 0)
+            entity.Comp.ResetTimeDamageOwnerTracked = _gameTiming.CurTime + TimeSpan.FromSeconds(ResetDamageOwnerDelaySeconds);
     }
 }

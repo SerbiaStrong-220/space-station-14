@@ -202,7 +202,6 @@
   - type: AntagObjectives
     objectives:
     - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
-    - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
     - StealResearchObjective
     - DoorjackObjective
     # - SpiderChargeObjective # SS220 Ninja-target-update

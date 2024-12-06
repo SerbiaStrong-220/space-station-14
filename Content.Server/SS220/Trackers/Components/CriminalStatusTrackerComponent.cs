@@ -25,7 +25,7 @@ public sealed partial class CriminalStatusTrackerComponent : Component
 
     public void ForceFirstNode() => _currentNode = InitCurrentNode;
     public void ForceLastNode() => _currentNode = CriminalStatusSpecifier.CriminalStatusNodes.Count;
-    public float GetProgress() => (float)(_currentNode + 1) / (CriminalStatusSpecifier.CriminalStatusNodes.Count + 1);
+    public float GetProgress() => (float)(_currentNode + 1) / CriminalStatusSpecifier.CriminalStatusNodes.Count;
 
 
     /// <summary>
