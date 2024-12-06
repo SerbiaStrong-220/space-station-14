@@ -95,7 +95,7 @@
           Quantity: 5
 
 - type: entity
-  name: Суп космического отца
+  name: cуп Космического Отца
   id: FoodFatherSoup
   parent: FoodBowlBase
   description: Суп придает настолько много сил, что его пришлось поместить в чан. Наверное мне стоит его съесть?
@@ -107,7 +107,7 @@
       sprite: SS220/Objects/Consumable/Food/cauldron.rsi
       layers:
       - state: cauldron
-      - state: father_soup
+      - state: father
     - type: SolutionContainerManager
       solutions:
         food:
@@ -117,3 +117,31 @@
             Quantity: 15
           - ReagentId: Protein
             Quantity: 10
+    - type: Food
+      trash:
+      - FoodCauldron
+    - type: Tag
+      tags:
+      - Meat
+
+- type: entity
+  name: Призрачный чили перец
+  description: Призрачный чили перец? А как мне из него готовить, если я его не вижу?
+  id: GhostChiliPepper
+  parent: FoodProduceBase
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/ghost_peppers.rsi
+      state: produce
+    - type: FlavorProfile
+      flavors:
+        - ghostChili
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          reagents:
+            - ReagentId: Nutriment
+              Quantity: 5
+    - type: StaticPrice
+      price: 500 #It has so much Omnizin in it
+

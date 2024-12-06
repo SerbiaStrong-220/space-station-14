@@ -46,4 +46,9 @@
 - type: flavor
   id: fatherSoup
   flavorType: Complex
-  description:
+  description: умопомрачительно, ослепительно, бурно, мощно
+
+- type: flavor
+  id: ghostChili
+  flavorType: Complex
+  description: призрачно остро

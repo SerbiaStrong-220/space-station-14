@@ -1,25 +1,17 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Sprited by ",
-    "size": {
-      "x": 32,
-      "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "pot taken from Aurora Station at //github.com/Aurorastation/Aurora.3/blob/HEAD/icons/obj/item/reagent_containers/cooking_container.dmi, father states sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cauldron"
     },
-    "states": [
-        {
-            "name": "cauldron"
-        },
-        {
-            "name": "father_soup",
-            "delays": [
-        [
-          0.3,
-          0.3,
-          0.3,
-          0.3
-        ]
-        ]
-        }
-    ]
+    {
+      "name": "father"
+    }
+  ]
 }
