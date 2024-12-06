@@ -1,3 +1,5 @@
 ent-ClothingShoesBootsMagDQ = магнитные ботинки Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq
     .desc = Самые современные магнитные ботинки в незабываемых цветах.
+
+clothing-outer-radio-handheld = Рация
