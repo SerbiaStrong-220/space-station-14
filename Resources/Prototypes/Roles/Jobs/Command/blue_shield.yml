@@ -60,7 +60,7 @@
   id: BlueShieldGear
   equipment:
 #    jumpsuit: ClothingUniformJumpsuitBlueShield #SS220-blueshield-loadouts
-    shoes: ClothingShoesBootsBlueShieldJack
+    shoes: ClothingShoesBootsBlueShieldJackFilled #SS220 BlueShield Rework
 #    eyes: ClothingEyesBlueShieldGlasses #SS220 BlueShield Rework
 #    head: ClothingHeadHatBeretNavyBlue #SS220 BlueShield Rework
 #    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
