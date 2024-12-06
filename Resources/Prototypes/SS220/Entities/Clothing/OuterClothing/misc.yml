@@ -61,7 +61,7 @@
   id: ClothingOuterJacketChefNanotrasen
   name: жакет заслуженного шеф-повара NanoTrasen
   description: Фартук-жакет, используемый шеф-поваром высочайшего класса - его мастерство неоспоримо.
-  suffix: Не маппить, Сеньор
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi

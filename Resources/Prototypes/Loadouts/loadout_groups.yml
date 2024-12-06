@@ -7,6 +7,7 @@
   loadouts:
   - FlowerWreath
   - Hairflower
+  - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
   - Lighter
@@ -28,6 +29,25 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  - TowelColorBlack
+  - TowelColorWhite
+  # SS220 Too many towels begin
+#  - TowelColorDarkBlue
+#  - TowelColorDarkGreen
+#  - TowelColorGold
+#  - TowelColorGray
+#  - TowelColorGreen
+#  - TowelColorLightBlue
+#  - TowelColorLightBrown
+#  - TowelColorMaroon
+#  - TowelColorMime
+#  - TowelColorOrange
+#  - TowelColorPurple
+#  - TowelColorRed
+#  - TowelColorSilver
+#  - TowelColorLightBlue
+#  - TowelColorYellow
+  # SS220 Too many towels begin end
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
   - ClothingFootWraps
@@ -531,6 +551,7 @@
   - ClownPennywiseJumpsuit #SS220-Clown-Pennywise
   - JumpsuitMuzhik #SS220-Two Floppa Iteration
   - JumpsuitGold #SS220-Two Floppa Iteration
+  - ClownJumpsuitClassic #SS220-ClassicJumpsuit
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -720,6 +741,7 @@
   - QuartermasterFormalSuit
   - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
   - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
+  - QuartermasterJumpskirtWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterNeck
@@ -999,6 +1021,8 @@
   - ResearchDirectorJumpsuit
   - ResearchDirectorJumpskirt
 #SS220-RD-New-Loadout-begin
+  - ResearchDirectorJumpsuitProfessor #SS220-loadout-academy
+  - ResearchDirectorJumpskirtProfessor #SS220-loadout-academy
   - ClothingUniformJumpsuitRDAlt
 
 - type: loadoutGroup
@@ -1055,6 +1079,8 @@
   - ScientistJumpsuitTurtleneckAlt
   - ScientistJumpskirtTurtleneck
   - ScientistJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - ScientistJumpsuitPhdCandidate #SS220-loadout-academy
+  - ScientistJumpskirtPhdCandidate #SS220-loadout-academy
 
 - type: loadoutGroup
   id: ScientistBackpack
@@ -1107,6 +1133,8 @@
   loadouts:
   - WhiteJumpsuit
   - WhiteJumpskirt
+  - ResearchAssistantBachelor #SS220-loadout-academy
+  - ResearchAssistantBachelorSkirt #SS220-loadout-academy
   - ResearchAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ResearchAssistantJumpsuitTurtleneckAlt
   - ResearchAssistantJumpskirtTurtleneck

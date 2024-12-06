@@ -34,7 +34,7 @@
 
 - type: job
   id: CentcomOperativeSRT
-  name: job-name-centcomoff
+  name: job-name-cc-srt-operative
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomOperativeSRTGear

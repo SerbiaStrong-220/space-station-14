@@ -162,5 +162,7 @@ ent-JukeboxCircuitBoard = музыкальный автомат (машинна�
     .desc = Печатная плата для музыкального автомата.
 ent-ReagentGrinderIndustrialMachineCircuitboard = промышленный измельчитель реагентов (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
-ent-CutterMachineCircuitboard = лазерный станок (машинная плата) #SS220 Loc-Change
+#SS220 Loc-Change
+ent-CutterMachineCircuitboard = лазерный станок (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
+#SS220 Loc-Change

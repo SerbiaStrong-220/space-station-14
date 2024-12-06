@@ -1960,6 +1960,13 @@
   components:
   - type: Item
     size: Small
+    # SS220 WatermelonInHands begin
+    inhandVisuals:
+      left:
+      - state: produce-inhand-left
+      right:
+      - state: produce-inhand-right
+    # SS220 WatermelonInHands end
   - type: FlavorProfile
     flavors:
       - watermelon

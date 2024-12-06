@@ -40,6 +40,24 @@
               amount: 2
               doAfter: 2
 
+        #SS220-walls-sprite-update-v5-begin
+        - to: betonWall
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          conditions:
+            - !type:EntityAnchored {}
+          steps:
+            - material: MetalRod
+              amount: 2
+              doAfter: 1
+            - tool: Screwing
+              doAfter: 1
+            - material: Steel
+              amount: 1
+              doAfter: 1
+        #SS220-walls-sprite-update-v5-end
+
         - to: reinforcedGirder
           completed:
             - !type:SnapToGrid
@@ -359,6 +377,25 @@
               doAfter: 10
             - tool: Screwing
               doAfter: 1
+
+    #SS220-walls-sprite-update-v5-begin
+    - node: betonWall
+      entity: WallBeton
+      edges:
+        - to: girder
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:SpawnPrototype
+              prototype: PartRodMetal1
+              amount: 2
+          steps:
+            - tool: Welding
+              doAfter: 7
+            - tool: Screwing
+              doAfter: 2
+    #SS220-walls-sprite-update-v5-end
 
     - node: reinforcedGirder
       entity: ReinforcedGirder

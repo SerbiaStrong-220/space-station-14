@@ -14,7 +14,6 @@
       - id: SpiderEggDrone
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
 
 - type: entity
   id: BaseActionSpawnSingleSpiderWeb
@@ -29,12 +28,11 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: web_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebFragile
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
 
 #Egg
 - type: entity
@@ -141,12 +139,12 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: crystal_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: ShardCrystalBlueXeno
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      snapToGrid: false
 
 - type: entity
   id: ActionSpawnSpiderCrystalBloodPoints
@@ -166,6 +164,7 @@
       - id: ShardCrystalBlueXeno
         amount: 1
       offset: 0, 1
+      snapToGrid: false
       cost: 5
 
 #Wall
@@ -181,12 +180,11 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
       state: wall_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: WallWebSpawn
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
 
 - type: entity
   parent: ActionSpawnSpiderWallWeb
@@ -196,12 +194,12 @@
   components:
   - type: WorldTargetAction
     useDelay: 16
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: WallWebDurableSpawn
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
+      snapToGrid: true
 
 - type: entity
   parent: ActionSpawnSpiderWallWeb
@@ -217,6 +215,36 @@
         amount: 1
       offset: 0, 1
       cost: 10
+
+#Tile
+- type: entity
+  id: ActionSpawnWebTile
+  name: create a web tile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 16
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
+      state: tile_spawn
+    event: !type:SpiderTileSpawnActionEvent
+      prototype: FloorWebTile
+      doAfter: 6
+
+- type: entity
+  parent: ActionSpawnWebTile
+  id: ActionSpawnWebTileBloodPoints
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 6
+    range: 1.5
+    event: !type:SpiderTileSpawnActionEvent
+      prototype: FloorWebTile
+      cost: 10
+      doAfter: 3
 
 #Web
 - type: entity
@@ -243,12 +271,11 @@
   components:
   - type: WorldTargetAction
     useDelay: 4
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebDurable
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
 
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
@@ -279,12 +306,11 @@
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: clown_web_spawn
-    event: !type:WorldSpawnSpellEvent
+    event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebClown
         amount: 1
       offset: 0, 1
-      speech: action-speech-spell-spider
 
 #Cocooning
 - type: entity

@@ -26,6 +26,9 @@ namespace Content.Client.Chemistry.UI
         public event Action<BaseButton.ButtonEventArgs, ReagentButton>? OnReagentButtonPressed;
         public readonly Button[] PillTypeButtons;
 
+        private ChemMasterBoundUserInterfaceState? _chemState; //ss220 tweak sort chem
+        private bool _isSortingEnabled; //ss220 tweak sort chem
+
         private const string PillsRsiPath = "/Textures/Objects/Specific/Chemistry/pills.rsi";
 
         /// <summary>
@@ -36,6 +39,17 @@ namespace Content.Client.Chemistry.UI
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
+
+            //ss220 tweak sort chem start
+            BufferSortButton.OnPressed += _ =>
+            {
+                _isSortingEnabled = !_isSortingEnabled;
+                if (_chemState != null)
+                {
+                    UpdatePanelInfo(_chemState);
+                }
+            };
+            //ss220 tweak sort chem end
 
             // Pill type selection buttons, in total there are 20 pills.
             // Pill rsi file should have states named as pill1, pill2, and so on.
@@ -105,6 +119,9 @@ namespace Content.Client.Chemistry.UI
             var castState = (ChemMasterBoundUserInterfaceState) state;
             if (castState.UpdateLabel)
                 LabelLine = GenerateLabel(castState);
+
+            _chemState = castState; //ss220 tweak sort chem
+
             UpdatePanelInfo(castState);
 
             var output = castState.OutputContainerInfo;
@@ -182,7 +199,19 @@ namespace Content.Client.Chemistry.UI
             };
             bufferHBox.AddChild(bufferVol);
 
-            foreach (var (reagent, quantity) in state.BufferReagents)
+            //ss220 tweak sort chem start
+            var newBuffer = _isSortingEnabled
+                ? state.BufferReagents
+                    .OrderBy(reagent =>
+                    {
+                        _prototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
+                        return proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
+                    })
+                    .ToList()
+                : state.BufferReagents;
+            //ss220 tweak sort chem end
+
+            foreach (var (reagent, quantity) in newBuffer) //ss220 tweak sort chem
             {
                 // Try to get the prototype for the given reagent. This gives us its name.
                 _prototypeManager.TryIndex(reagent.Prototype, out ReagentPrototype? proto);

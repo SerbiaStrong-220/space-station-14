@@ -146,6 +146,11 @@
       - Door
       tags:
       - Wall
+    # SS220 dragon devour fix begin
+    blacklist:
+      components:
+      - BorgChassis
+    # SS220 dragon devour fix end
   - type: Tag
     tags:
     - CannotSuicide
@@ -159,6 +164,12 @@
     ## ss220 lowTTKUpdate
   - type: Puller
     needsHands: false
+  # SS220 Telepathy begin
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelSpaceDragon
+  # SS220 Telepathy end
+
 
 - type: entity
   parent: BaseMobDragon

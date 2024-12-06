@@ -37,7 +37,7 @@
   - type: Sprite
     state: mecha_clamp_small
   - type: MechGrabber
-    maxContents: 4
+    maxContents: 2 #SS220-AddMechToClothing
     grabDelay: 3
     grabEnergyDelta: -20
   - type: Tag

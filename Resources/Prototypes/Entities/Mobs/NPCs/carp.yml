@@ -178,6 +178,11 @@
     - type: HTN
       rootTask:
         task: DragonCarpCompound
+    # SS220 Telepathy begin
+    - type: Telepathy
+      canSend: true
+      telepathyChannelPrototype: TelepathyChannelSpaceDragon
+    # SS220 Telepathy end
 
 - type: entity
   id: MobCarpDungeon

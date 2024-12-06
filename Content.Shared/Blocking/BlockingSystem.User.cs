@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Inventory;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -10,6 +11,7 @@ public sealed partial class BlockingSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!; // SS220 equip shield on back
     private void InitializeUser()
     {
         SubscribeLocalEvent<BlockingUserComponent, DamageModifyEvent>(OnUserDamageModified);
@@ -51,6 +53,13 @@ public sealed partial class BlockingSystem
             // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
             if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
                 return;
+
+            // SS220 equip shield on back begin
+            if (_inventory.TryGetContainingSlot(component.BlockingItem.Value, out var slotDefinition) && blocking.AvaliableSlots.TryGetValue(slotDefinition.SlotFlags, out var coef))
+            {
+                blockFraction *= coef;
+            }
+            // SS220 equip shield on back end
 
             blockFraction = Math.Clamp(blockFraction, 0, 1);
             _damageable.TryChangeDamage(component.BlockingItem, blockFraction * args.OriginalDamage);
