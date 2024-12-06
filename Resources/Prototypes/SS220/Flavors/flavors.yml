@@ -52,3 +52,8 @@
   id: ghostChili
   flavorType: Complex
   description: призрачно остро
+
+- type: flavor
+  id: HolyMoly
+  flavorType: Base
+  description: божественно

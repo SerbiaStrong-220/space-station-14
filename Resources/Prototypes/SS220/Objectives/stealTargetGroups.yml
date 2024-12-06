@@ -20,13 +20,20 @@
     state: icon
 
 - type: stealTargetGroup
+  id: BookSecretDocuments
+  name: steal-target-groups-secret-documents
+  sprite:
+    sprite: Objects/Misc/bureaucracy.rsi
+    state: folder-sec-doc
+
+- type: stealTargetGroup
   id: ClothingOuterReactiveArmor
   name: steal-target-groups-reactive-armor
   sprite:
     sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
     state: icon
 
-- type: stealTargetGroup   
+- type: stealTargetGroup
   id: WristWatchGold
   name: steal-target-groups-wrist-watch-gold
   sprite:

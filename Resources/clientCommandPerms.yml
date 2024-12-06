@@ -19,7 +19,6 @@
     - net_watchent
     - devwindow
     - fill
-    - dumpentities
     - ">"
     - gcf
     - gc
@@ -73,6 +72,7 @@
     - localdelete
     - fullstatereset
     - exec # macro moment #SS220 exec-command-perms-change
+    - dumpentities
 
 - Flags: MAPPING
   Commands:

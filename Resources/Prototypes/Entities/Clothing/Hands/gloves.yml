@@ -227,6 +227,7 @@
     stealthy: true
   - type: ToggleClothing
     action: ActionToggleNinjaGloves
+    disableOnUnequip: true
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:

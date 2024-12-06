@@ -3,8 +3,8 @@ using Content.Shared.Roles;
 
 namespace Content.Server.SS220.Roles;
 
-[RegisterComponent, ExclusiveAntagonist]
-public sealed partial class SpiderQueenRoleComponent : AntagonistRoleComponent
+[RegisterComponent]
+public sealed partial class SpiderQueenRoleComponent : BaseMindRoleComponent
 {
     [ViewVariables]
     public bool IsCreateCocoonsCompletedOnce = false;

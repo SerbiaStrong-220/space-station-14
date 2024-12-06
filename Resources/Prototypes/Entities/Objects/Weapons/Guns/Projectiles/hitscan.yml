@@ -20,7 +20,7 @@
   id: RedLaser
   damage:
     types:
-      Heat: 14
+      Heat: 28 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_laser
@@ -50,7 +50,7 @@
   id: RedMediumLaser
   damage:
     types:
-      Heat: 17
+      Heat: 24 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_laser
@@ -65,7 +65,7 @@
   id: RedLightLaser
   damage:
     types:
-      Heat: 7
+      Heat: 13 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_laser
@@ -80,8 +80,8 @@
   id: XrayLaser
   damage:
     types:
-      Heat: 10
-      Radiation: 10
+      Heat: 15 #ss220lowTTKUpdate
+      Radiation: 15 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_xray
@@ -96,7 +96,7 @@
   id: RedHeavyLaser
   damage:
     types:
-      Heat: 28
+      Heat: 35 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_beam_heavy
@@ -111,7 +111,7 @@
   id: Pulse
   damage:
     types:
-      Heat: 35
+      Heat: 40 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_blue
@@ -127,8 +127,8 @@
   maxLength: 60
   damage:
     types:
-      Heat: 45
-      Structural: 10
+      Heat: 50 #ss220lowTTKUpdate
+      Structural: 20 #ss220lowTTKUpdate
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_beam_heavy2

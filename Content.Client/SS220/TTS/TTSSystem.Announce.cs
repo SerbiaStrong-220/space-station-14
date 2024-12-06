@@ -1,7 +1,8 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.AnnounceTTS;
+using Robust.Shared.Audio;
 using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.TTS;
@@ -29,14 +30,16 @@ public sealed partial class TTSSystem : EntitySystem
         if (AnnouncementUid == EntityUid.Invalid)
             AnnouncementUid = Spawn(null);
 
-        var finalParams = ev.AnnouncementParams.WithVolume(VolumeAnnounce);
+        var volume = AdjustVolume(isRadio: false, isAnounce: true, isWhisper: false);
+
+        var audioParams = AudioParams.Default.WithVolume(volume);
 
         // Play announcement sound
         var announcementSoundPath = new ResPath(ev.AnnouncementSound);
-        PlaySoundQueued(AnnouncementUid, announcementSoundPath, finalParams, true);
+        PlaySoundQueued(AnnouncementUid, announcementSoundPath, audioParams, true);
 
         // Play announcement itself
-        PlayTTSBytes(ev.Data, AnnouncementUid, finalParams, true);
+        PlayTTSBytes(ev.Data, AnnouncementUid, audioParams, true);
     }
 
     private void OnTtsAnnounceVolumeChanged(float volume)

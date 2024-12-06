@@ -79,7 +79,13 @@
     damage:
       types:
         Blunt: 7
+        # Stamina: 55 #ss220 stunbaton fix
+  #ss220 stunbaton fix start
+  - type: ItemToggleDamageOtherOnHit
+    activatedDamage:
+      types:
         Stamina: 55
+  #ss220 stunbaton fix end
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 1000

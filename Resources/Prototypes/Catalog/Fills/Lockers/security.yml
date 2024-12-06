@@ -12,7 +12,6 @@
       - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
 #      - id: ClothingOuterCoatWarden #SS220-MinorTweaks
@@ -42,7 +41,6 @@
       - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
 #      - id: ClothingOuterCoatWarden SS220-MinorTweaks start
@@ -161,6 +159,7 @@
       - id: DetectiveHiddenCamera # SS220 add-detective-camera
         amount: 3
       - id: HandLabeler
+      - id: BoxTapeRecorder # SS220 Tape Recorder #32234 early merge
 
 - type: entity
   id: ClosetBombFilled

@@ -6,3 +6,5 @@ ent-Rapier = рапира
 ent-RapierAlt = рапира
     .desc = { ent-Rapier.desc }
     .suffix = 15 проникающего урона
+ent-Broadsword = палаш
+    .desc = Эхо прошлого на службе новой войны.
