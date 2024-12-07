@@ -67,7 +67,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
     
- - type: entity
+- type: entity
   parent: ClothingHandsGlovesJanitor
   id: ClothingHandsGlovesJanitorJR
   name: black rubber gloves Junk Recycles
