@@ -141,6 +141,21 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_operative.rsi
 
 - type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShieldCombat
+  name: blue shield combat jumpsuit
+  description: Special clothing designed for combat operations. It is made of high-tech materials, taking into account the requirements for protection from external influences.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Piercing: 0.85
+
+- type: entity
   parent: ClothingUniformBaseFoldable
   id: ClothingUniformJumpsuitBlueShieldShirt
   name: the "Blue Shield" shirt

@@ -37,6 +37,15 @@
       role: JobBlueShield
       time: 180000 # 50 hrs
 
+- type: loadoutEffectGroup
+  id: BlueShieldHundred
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 360000 # 100 hrs
+
 # Head
 - type: loadout
   id: BlueshieldBeret
@@ -99,6 +108,14 @@
     proto: BlueShieldFifty
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldTShirt
+
+- type: loadout
+  id: BlueShieldJumpsuitCombat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldHundred
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldCombat
 
 - type: loadout
   id: BlueShieldJumpsuitTurtle

@@ -173,6 +173,7 @@
   - BlueShieldJumpsuitShirt
   - BlueShieldJumpsuitTurtle
   - BlueShieldJumpsuitTShirt
+  - BlueShieldJumpsuitCombat
 
 - type: loadoutGroup
   id: BlueShieldOuterclothing
