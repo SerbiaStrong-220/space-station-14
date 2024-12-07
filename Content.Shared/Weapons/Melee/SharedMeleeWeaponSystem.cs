@@ -435,7 +435,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     throw new NotImplementedException();
             }
 
-            DoLungeAnimation(user, weaponUid, weapon.Angle, GetCoordinates(attack.Coordinates).ToMap(EntityManager, TransformSystem), weapon.Range, animation);
+            DoLungeAnimation(user, weaponUid, weapon.Angle, TransformSystem.ToMapCoordinates(GetCoordinates(attack.Coordinates)), weapon.Range, animation);
         }
 
         var attackEv = new MeleeAttackEvent(weaponUid);
@@ -558,7 +558,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (!TryComp(user, out TransformComponent? userXform))
             return false;
 
-        var targetMap = GetCoordinates(ev.Coordinates).ToMap(EntityManager, TransformSystem);
+        var targetMap = TransformSystem.ToMapCoordinates(GetCoordinates(ev.Coordinates));
 
         if (targetMap.MapId != userXform.MapID)
             return false;
@@ -600,8 +600,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Validate client
         for (var i = entities.Count - 1; i >= 0; i--)
         {
-            if (ArcRaySuccessful(entities[i], userPos, direction.ToWorldAngle(), component.Angle, distance,
-                    userXform.MapID, user, session))
+            if (ArcRaySuccessful(entities[i],
+                    userPos,
+                    direction.ToWorldAngle(),
+                    component.Angle,
+                    distance,
+                    userXform.MapID,
+                    user,
+                    session))
             {
                 continue;
             }
@@ -679,6 +685,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (damageResult != null && damageResult.GetTotal() > FixedPoint2.Zero)
             {
+                // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
+                if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
+                {
+                    _stamina.TakeStaminaDamage(entity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
+                }
+
                 appliedDamage += damageResult;
 
                 if (meleeUid == user)
@@ -722,8 +734,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             var castAngle = new Angle(baseAngle + increment * i);
             var res = _physics.IntersectRay(mapId,
-                new CollisionRay(position, castAngle.ToWorldVec(),
-                    AttackMask), range, ignore, false).ToList();
+                new CollisionRay(position,
+                    castAngle.ToWorldVec(),
+                    AttackMask),
+                range,
+                ignore,
+                false)
+                .ToList();
 
             if (res.Count != 0)
             {
@@ -734,8 +751,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return resSet;
     }
 
-    protected virtual bool ArcRaySuccessful(EntityUid targetUid, Vector2 position, Angle angle, Angle arcWidth, float range,
-        MapId mapId, EntityUid ignore, ICommonSession? session)
+    protected virtual bool ArcRaySuccessful(EntityUid targetUid,
+        Vector2 position,
+        Angle angle,
+        Angle arcWidth,
+        float range,
+        MapId mapId,
+        EntityUid ignore,
+        ICommonSession? session)
     {
         // Only matters for server.
         return true;

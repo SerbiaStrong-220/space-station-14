@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Skyrat-tg at https://github.com/Skyrat-SS13/Skyrat-tg/commit/f9e3b58ecd64fa061f83420689bd90bfa3a4c185 & modified by github:Morb0 & recolored for SS220 by Alwayswannahunt (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "beam",
+      "directions": 4
+    },
+    {
+      "name": "underpowered",
+      "directions": 4
+    },
+    {
+      "name": "locked",
+      "directions": 4
+    },
+    {
+      "name": "unlock",
+      "directions": 4
+    },
+    {
+      "name": "emitter",
+      "directions": 4
+    },
+    {
+      "name": "projectile",
+      "delays": [
+          [
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05,
+            0.05
+          ]
+      ]
+    }
+  ]
+}

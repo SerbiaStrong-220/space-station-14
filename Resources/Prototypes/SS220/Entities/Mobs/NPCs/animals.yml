@@ -109,7 +109,7 @@
 
 - type: entity
   name: E-N
-  parent: [BorgChassisGeneric, StripableInventoryBase]
+  parent: [BorgChassisSelectable, StripableInventoryBase]
   id: MobEN
   description: Corgi made of metal with a heart of gold, because a heart of gold is a great guide
   components:

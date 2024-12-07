@@ -120,6 +120,7 @@
     staticRecipes:
       - ClothingEyesGlassesMeson #SS220 Craftable-Welding-Mask
       - ClothingWristWatch #SS220 Wrist Watch
+      - DeviceCalculator #SS220 Calculator
       - Wirecutter
       - Igniter
       - Signaller
@@ -152,6 +153,7 @@
       - ExteriorLightTube
       - LightBulb
       - LedLightBulb
+      - DimLightBulb
       - Bucket
       - DrinkMug
       - DrinkMugMetal
@@ -165,6 +167,7 @@
       - FoodPlateSmallPlastic
       - FoodBowlBig
       - FoodPlateTin
+      - FoodPlateMuffinTin
       - FoodKebabSkewer
       - SprayBottle
       - MopItem
@@ -202,11 +205,11 @@
       - WetFloorSign
       - ClothingHeadHatCone
       - FreezerElectronics
-      - Flare
+      - CassetteTape # SS220 Tape Recorder #32234 early merge
+      - TapeRecorder # SS220 Tape Recorder #32234 early merge
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - BoxLethalshot
-      - BoxShotgunFlare
       - BoxShotgunSlug
       - CombatKnife
       - MagazineBoxLightRifle
@@ -229,6 +232,15 @@
       - RiotShield
       - SpeedLoaderMagnum
       - SpeedLoaderMagnumEmpty
+      #ss220 more recipies begin
+      - SpeedLoaderLightRifle
+      - MagazineBoxCaselessRifle
+      - MagazinePistolCaselessRifle
+      - MagazineMagnumEmpty
+      - MagazineMagnum
+      - MagazinePistolHighCapacityEmpty
+      - MagazinePistolHighCapacity
+      #ss220 more recipies end
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -355,7 +367,7 @@
       - FauxTileAstroSnow
       - FauxTileAstroSand #SS220-beachCraftng
       - OreBagOfHolding
-      - DeviceQuantumSpinInverter
+      #- DeviceQuantumSpinInverter #SS220 - Until better times
       - ThermalVisorRND # SS220 Thermals
       - ClothingEyesHudSupply #ss220 hud cargo add
   - type: EmagLatheRecipes
@@ -403,6 +415,12 @@
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
       - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+      #ss220 more recipies begin
+      - MagazineMagnumIncendiary
+      - MagazineMagnumUranium
+      - MagazinePistolSubMachineGunIncendiary
+      - MagazinePistolSubMachineGunUranium
+      #ss220 more recipies end
 
 - type: entity
   id: ProtolatheHyperConvection
@@ -492,6 +510,7 @@
       - SolarTrackerElectronics
       - TurboItemRechargerCircuitboard
       - PowerComputerCircuitboard
+      - SuperMatterObserverCircuitboard  # SS220 superMatter-crystal
       - AutolatheHyperConvectionMachineCircuitboard
       - ProtolatheHyperConvectionMachineCircuitboard
       - CircuitImprinterHyperConvectionMachineCircuitboard
@@ -592,11 +611,6 @@
     - BorgModuleFireExtinguisher
     - BorgModuleRadiationDetection
     - BorgModuleTool
-    - BorgModuleAppraisal
-    - BorgModuleConstruction
-    - BorgModuleService
-    - BorgModuleTreatment
-    - BorgModuleCleaning
     - CyborgEndoskeleton
     - LeftArmBorg
     - RightArmBorg
@@ -604,51 +618,16 @@
     - RightLegBorg
     - LightHeadBorg
     - TorsoBorg
-    - LeftArmBorgEngineer
-    - RightArmBorgEngineer
-    - LeftLegBorgEngineer
-    - RightLegBorgEngineer
-    - HeadBorgEngineer
-    - TorsoBorgEngineer
-    - LeftLegBorgJanitor
-    - RightLegBorgJanitor
-    - HeadBorgJanitor
-    - TorsoBorgJanitor
-    - LeftArmBorgMedical
-    - RightArmBorgMedical
-    - LeftLegBorgMedical
-    - RightLegBorgMedical
-    - HeadBorgMedical
-    - TorsoBorgMedical
-    - LeftArmBorgMining
-    - RightArmBorgMining
-    - LeftLegBorgMining
-    - RightLegBorgMining
-    - HeadBorgMining
-    - TorsoBorgMining
-    - LeftArmBorgService
-    - RightArmBorgService
-    - LeftLegBorgService
-    - RightLegBorgService
-    - HeadBorgService
-    - TorsoBorgService
     dynamicRecipes:
     - ProximitySensor
-    - BorgModuleLightReplacer
     - BorgModuleAdvancedCleaning
-    - BorgModuleMining
-    - BorgModuleGrapplingGun
     - BorgModuleProtoKineticAccelerator #SS220 Borg Modules
     - BorgModuleAdvancedTool
     - BorgModuleGPS
-    - BorgModuleRCD
     - BorgModuleArtifact
     - BorgModuleAnomaly
     - BorgModuleGardening
     - BorgModuleHarvesting
-    - BorgModuleMusique
-    - BorgModuleClowning
-    - BorgModuleDiagnosis
     - BorgModuleDefibrillator
     - BorgModuleAdvancedTreatment
     - RipleyHarness
@@ -753,7 +732,6 @@
     runningState: icon
     staticRecipes:
       - BoxLethalshot
-      - BoxShotgunFlare
       - BoxShotgunPractice
       - BoxShotgunSlug
       - ClothingEyesHudSecurity
@@ -799,8 +777,15 @@
       - TargetHuman
       - TargetSyndicate
       - WeaponDisablerPractice
+      - WeaponFlareGunSecurity
       - WeaponLaserCarbinePractice
       - Zipties
+      #ss220 more recipies begin
+      - SpeedLoaderLightRifle
+      - MagazineMagnumEmpty
+      - MagazineMagnum
+      - MagazineMagnumRubber
+      #ss220 more recipies end
     dynamicRecipes:
       - BoxBeanbag
       - BoxShotgunIncendiary
@@ -856,6 +841,12 @@
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
       - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+      #ss220 more recipies begin
+      - MagazineMagnumUranium
+      - MagazineMagnumIncendiary
+      - MagazinePistolSubMachineGunUranium
+      - MagazinePistolSubMachineGunIncendiary
+      #ss220 more recipies end
   - type: MaterialStorage
     whitelist:
       tags:
@@ -889,7 +880,6 @@
       runningState: icon
       staticRecipes:
         - BoxLethalshot
-        - BoxShotgunFlare
         - BoxShotgunSlug
        #  - BoxShellTranquilizer
         - MagazineBoxLightRifle
@@ -923,6 +913,11 @@
         - SpeedLoaderMagnum
         - SpeedLoaderMagnumRubber #SS220 missing rubber fix
         - SpeedLoaderMagnumEmpty
+        #ss220 more recipies begin
+        - MagazinePistolCaselessRifle
+        - MagazineBoxCaselessRifle
+        - SpeedLoaderLightRifle
+        #ss220 more recipies end
     - type: MaterialStorage
       whitelist:
         tags:
@@ -1240,8 +1235,6 @@
   - type: Machine
     board: BiogeneratorMachineCircuitboard
   - type: MaterialStorage
-    insertOnInteract: false
-    canEjectStoredMaterials: false
   - type: ProduceMaterialExtractor
   - type: ItemSlots
     slots:

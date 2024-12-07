@@ -35,7 +35,7 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         ///     In releasing mode, do not pump when environment pressure is below this limit.
         /// </summary>
         [DataField]
-        public float UnderPressureLockoutThreshold = 80; // this must be tuned in conjunction with atmos.mmos_spacing_speed
+        public float UnderPressureLockoutThreshold = 40; // SS220 Atmos Threshold configued // this must be tuned in conjunction with atmos.mmos_spacing_speed
 
         /// <summary>
         ///     Pressure locked vents still leak a little (leading to eventual pressurization of sealed sections)

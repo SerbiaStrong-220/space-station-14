@@ -5,6 +5,7 @@ using Robust.Shared.Random;
 using Content.Shared.Tag;
 using Content.Server.Storage.Components;
 using Content.Server.Light.Components;
+using Content.Server.Light.EntitySystems;
 using Content.Server.Ghost;
 using Robust.Shared.Physics;
 using Content.Shared.Throwing;
@@ -29,6 +30,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Utility;
 using Robust.Shared.Map.Components;
 using Content.Shared.Whitelist;
+using Content.Server.NPC.HTN;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -43,6 +45,7 @@ public sealed partial class RevenantSystem
     [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly PoweredLightSystem _poweredLight = default!; //ss220 revenant buff
 
     private void InitializeAbilities()
     {
@@ -71,7 +74,8 @@ public sealed partial class RevenantSystem
             return;
         }
 
-        if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidAppearanceComponent>(target) || HasComp<RevenantComponent>(target))
+        if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidAppearanceComponent>(target) || HasComp<RevenantComponent>(target)
+            || HasComp<HTNComponent>(target)) // ss220 rev cant harvest NPC
             return;
 
         args.Handled = true;
@@ -241,6 +245,7 @@ public sealed partial class RevenantSystem
         }
 
         var lookup = _lookup.GetEntitiesInRange(uid, component.DefileRadius, LookupFlags.Approximate | LookupFlags.Static);
+        var entities = _lookup.GetEntitiesInRange(uid, component.DefileRadius); //ss220 revenant buff //new one for lights breaking
         var tags = GetEntityQuery<TagComponent>();
         var entityStorage = GetEntityQuery<EntityStorageComponent>();
         var items = GetEntityQuery<ItemComponent>();
@@ -253,7 +258,7 @@ public sealed partial class RevenantSystem
             {
                 //hardcoded damage specifiers til i die.
                 var dspec = new DamageSpecifier();
-                dspec.DamageDict.Add("Structural", 60);
+                dspec.DamageDict.Add("Structural", 55); //ss220 Revenant buff //that isn't buff, but.. Uhh, balance?
                 _damage.TryChangeDamage(ent, dspec, origin: uid);
             }
 
@@ -269,10 +274,23 @@ public sealed partial class RevenantSystem
                 TryComp<PhysicsComponent>(ent, out var phys) && phys.BodyType != BodyType.Static)
                 _throwing.TryThrow(ent, _random.NextAngle().ToWorldVec());
 
+        //ss220 Revenant buff start
             //flicker lights
-            if (lights.HasComponent(ent))
-                _ghost.DoGhostBooEvent(ent);
+            //if (lights.HasComponent(ent))
+            //    _ghost.DoGhostBooEvent(ent);
         }
+        //break lights in defile radius
+        foreach (var entity in entities)
+        {
+            if (!_random.Prob(component.DefileEffectChance + 0.3f)) //slightly bigger chance to destroy a light, 80%
+                continue;
+
+            if (!lights.TryGetComponent(entity, out var lightComp))
+                continue;
+
+            _poweredLight.TryDestroyBulb(entity, lightComp);
+        }
+        //ss220 Revenant buff end
     }
 
     private void OnOverloadLightsAction(EntityUid uid, RevenantComponent component, RevenantOverloadLightsActionEvent args)

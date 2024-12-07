@@ -1,0 +1,10 @@
+supermatter-emitter-extension-title = Конфигурация эмиттера суперматерии
+supermatter-emitter-extension-power-consumption = Потребляемая мощность, Вт
+supermatter-emitter-extension-ratio = Материя/энергия
+supermatter-emitter-extension-matter = { $value } ед. м.
+supermatter-emitter-extension-energy = { $value } эрг.
+supermatter-emitter-extension-matter-none = Н/Д ед. м.
+supermatter-emitter-extension-energy-none = Н/Д эрг.
+supermatter-emitter-extension-changes-saved = Конфигурация загружена
+supermatter-emitter-extension-changes-unsaved = Конфигурация изменена
+supermatter-emitter-extension-submit = Применить

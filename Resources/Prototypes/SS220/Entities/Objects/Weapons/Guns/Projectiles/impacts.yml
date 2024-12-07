@@ -16,3 +16,39 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+# Death Squad
+- type: hitscan
+  id: Pulsekill
+  damage:
+    types:
+      Heat: 30
+      Structural: 200
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_blue
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_blue
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_blue
+  hitscanSpread:
+    spread: 20
+    count: 5
+
+- type: hitscan
+  id: PulseDESTROY
+  damage:
+    types:
+      Heat: 100
+      Structural: 2000
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_u_laser
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: u_laser
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_u_laser

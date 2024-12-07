@@ -29,8 +29,9 @@
   - type: HeldSpeedModifier
   - type: ToggleClothing
     action: ActionToggleReactiveArmor
-  - type: ToggleVerb
-    text: toggle-reactivearmor-verb-get-data-text  
+  - type: ItemToggle
+    verbToggleOn: toggle-reactivearmor-verb-get-data-text
+    verbToggleOff: toggle-reactivearmor-verb-get-data-text
   - type: GroupExamine
   - type: ReactiveTeleportArmor   
   - type: Explosive 

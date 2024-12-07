@@ -4,10 +4,14 @@
   name: bomber jacket
   description: A thick, well-worn WW2 leather bomber jacket.
   components:
+# SS220 resprite begin
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
+# SS220 resprite end
 
 - type: entity
   parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBasic]

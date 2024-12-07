@@ -21,6 +21,7 @@
   id: ClothingNeckAmuletDruid #SS220 druid loadout
   name: druid amulet
   description: A beautiful amulet that emphasizes harmony with nature and most likely endows its wearer with the power of the earth.
+  suffix: For playtime
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/druid_amulet.rsi
@@ -32,6 +33,7 @@
   id: ClothingNeckRuffClownPennywise
   name: white ruff
   description: An item of clothing of the high society.
+  suffix: For playtime
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi

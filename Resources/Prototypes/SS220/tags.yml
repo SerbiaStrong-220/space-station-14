@@ -111,6 +111,34 @@
 - type: Tag
   id: EscapePod
 
+# SP-91-RC
+- type: Tag
+  id: MagazineMagnumSubMachineGunSP-91-RC
+
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter
+
+# Spider queen antag
+- type: Tag
+  id: SpiderQueen
+
+- type: Tag
+  id: SpiderServant
+
+- type: Tag
+  id: SpiderCocoon
+
+- type: Tag
+  id: SpiderQueenSpawnMarker
+
+- type: Tag
+  id: SpiderLittle
+
+ #Add Tourniquet to medic's belt 
+- type: Tag
+  id: Tourniquet
+
+# SS220 Add lying action
+- type: Tag
+  id: Bed

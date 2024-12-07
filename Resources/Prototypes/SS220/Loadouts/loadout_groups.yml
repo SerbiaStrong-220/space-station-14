@@ -229,6 +229,18 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+
+- type: loadoutGroup
+  id: SecurityPilotOuterClothing
+  name: loadout-group-security-pilot-outerclothing
+  loadouts:
+  - ArmorVest
+  - ArmorVestSlim
+  - SecurityOfficerWintercoat
+  - CoatSecurityOvercoat
+  - SecBomber
+  - VestArmorSec
+  - CyberVestSecurity
   # Пилот (Конец)
 #! Служба безопасности (Конец)
 
@@ -476,6 +488,8 @@
   loadouts:
   - SeniorSciensistJumpsuit
   - SeniorSciensistJumpskirt
+  - SeniorSciensistJumpsuitAssociateProfessor #SS220-loadout-academy
+  - SeniorSciensistJumpskirtAssociateProfessor #SS220-loadout-academy
 
 - type: loadoutGroup
   id: SeniorSciensistOuterClothing
@@ -525,7 +539,7 @@
 
 #! Сервис (Начало)
 
-  # Ведущий сервисный работник (Начало)
+  # Сервисный администратор (Начало)
 - type: loadoutGroup
   id: HatSeniorService
   name: loadout-group-senior-service-head
@@ -539,7 +553,7 @@
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
-  # Ведущий сервисный работник (Конец)
+  # Сервисный администратор (Конец)
 
   # Шеф-повар (Начало)
 - type: loadoutGroup
@@ -565,7 +579,7 @@
 - type: loadoutGroup
   id: MusicianShoes
   name: loadout-group-musician-shoes
-  minLimit: 0
+  # minLimit: 0
   loadouts:
   - MusicianBootsLaceup
   - BardShoes
@@ -624,6 +638,14 @@
   - ShoesColorPurple
   - JanitorGaloshes
   - JanitorOrangeShoes
+  - JanitorJRShoes
+
+- type: loadoutGroup
+  id: JanitorBelt
+  name: loadout-group-janitor-belt
+  loadouts:
+  - JanitorBaseBelt
+  - JanitorJRBelt #SS220-JRBelt
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)

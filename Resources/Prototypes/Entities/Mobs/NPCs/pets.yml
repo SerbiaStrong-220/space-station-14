@@ -128,10 +128,23 @@
 
 - type: entity
   name: Runtime
-  parent: MobCat
+  parent: [ MobCat, MobLyingDownOnEntity ] #SS220 Add lying down on entity
   id: MobCatRuntime
   description: Professional mouse hunter. Escape artist.
   components:
+  #SS220 Add lying down on entity begin
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Pets/cat.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: cat
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: cat_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+  #SS220 Add lying down on entity end
   - type: NpcFactionMember
     factions:
       - PetsNT
@@ -213,7 +226,7 @@
 
 - type: entity
   name: Bingus
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [SimpleMobBase, StripableInventoryBase, MobLyingDownOnEntity] #SS220 Add lying down on entity
   id: MobBingus
   description: Bingus my beloved...
   components:
@@ -223,6 +236,13 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: bingus
+    #SS220 Add lying down on entity begin
+    - map: ["enum.LyingVisuals.LyingDown"]
+      state: bingus_rest
+      visible: false
+  - type: LyingDownOnBuckledEntity
+    offset: -0.1, 0
+    #SS220 Add lying down on entity end
   - type: Physics
   # 220 cat-emotes start
   - type: Speech
@@ -791,6 +811,7 @@
     name: ghost-role-information-smile-name
     description: ghost-role-information-smile-description
     rules: ghost-role-information-nonantagonist-rules
+    raffle: null
   - type: Grammar
     attributes:
       proper: true

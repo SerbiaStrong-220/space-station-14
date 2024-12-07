@@ -6,6 +6,7 @@
   id: ClothingOuterWhiteArmorCaptainCarapace
   name: белый панцирь капитана
   description: Белый панцирь, обеспечивающий хорошую защиту носителя и подчёркивающий его статус ветерана.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Armor/whitecapcarapace.rsi

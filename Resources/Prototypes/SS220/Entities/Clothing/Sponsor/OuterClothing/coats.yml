@@ -119,15 +119,25 @@
     coolingCoefficient: 0.1
 
 - type: entity
-  parent: [ ClothingSponsorSamuraiJacket, ClothingOuterVestArmorSec ]
+  parent: [ ClothingOuterArmorBasic ]
   id: ClothingSponsorCyberVestSecurity
   name: кибербронежилет охраны
   description: Светящиеся элементы не дают вам никакого тактического преимущества... но зато какой стиль!
+  suffix: Шлёпа
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybersecarmor.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybersecarmor.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - state: equipped-OUTERCLOTHING-unshaded
+        shader: unshaded
 
 - type: entity
   parent: ClothingSponsorSamuraiJacket

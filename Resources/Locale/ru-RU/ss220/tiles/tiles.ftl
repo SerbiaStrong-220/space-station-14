@@ -41,3 +41,6 @@ border-marble-floor = горизонтальная мраморная плитк
 vertical-marble-floor = вертикальная мраморная плитка
 corner-marble-floor = угловая мраморная плитка
 inner-marble-floor = мраморная плитка с внутренним углом
+cp14-tiles-grass = луговая трава
+cp14-tiles-grass-light = светлая трава
+cp14-tiles-grass-tall = высокая трава
