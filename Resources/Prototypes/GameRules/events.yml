@@ -215,7 +215,6 @@
     sets:
     - groups: NinjaObjectiveGroups
     maxDifficulty: 1.5 # be careful 1.5 is here because one ninjaTarget cost 1.5 and we need only one
-    maxPicks: 10
     # SS220 Ninja-target-update end
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
