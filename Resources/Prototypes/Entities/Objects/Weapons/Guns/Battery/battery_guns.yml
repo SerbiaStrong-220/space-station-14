@@ -666,12 +666,14 @@
     - proto: RedMediumLaser
       name: firemode-name-laser
       fireCost: 100
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
       magState: laser-mag
     - proto: BulletDisabler
       name: firemode-name-disabler
       fireCost: 100
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
       magState: disabler-mag
     #ss220 add stun mode end
   - type: MagazineVisuals
