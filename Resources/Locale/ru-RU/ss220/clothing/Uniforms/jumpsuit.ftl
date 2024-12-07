@@ -1,3 +1,6 @@
+fold-tie-verb = завязать
+fold-untie-verb = развязать
+
 ent-ClothingUniformJumpsuitCentcomOfficerTurtleneck = водолазка Центком
     .desc = Повседневная, но элегантная водолазка тёмного цвета, используемая офицерами Центком. От неё веет черникой.
 ent-ClothingUniformJumpsuitNanotrasenAdmiral = униформа адмирала
@@ -27,6 +30,9 @@ ent-ClothingUniformJumpsuitBlueShieldOperative = комбинезон опера
 ent-ClothingUniformJumpsuitBlueShieldShirt = рубашка "Синий Щит"
     .desc = Рубашка, использующая высокопоставленными людьми синего щита при официальных встречах.
     .suffix = За время в игре
+ent-ClothingUniformJumpsuitBlueShieldShirtTie = рубашка "Синий Щит"
+    .desc = Рубашка, использующая высокопоставленными людьми синего щита при официальных встречах.
+    .suffix = Завязанный, За время в игре
 ent-ClothingUniformJumpsuitBlueShieldTShirt = футболка "Синий Щит"
     .desc = Черная футболка с короткими рукавами, в паре с черными брюками из прочного материала. Прекрасно подходит для отдыха на безопасном секторе NanoTrasen.
     .suffix = За время в игре

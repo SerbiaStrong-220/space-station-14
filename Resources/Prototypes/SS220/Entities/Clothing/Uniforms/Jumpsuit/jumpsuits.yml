@@ -1,5 +1,48 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+# Base
+# Flipped
+- type: entity
+  parent: [UnsensoredClothingUniformBase, BaseFoldable]
+  id: ClothingUniformBaseFoldable
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-tie-verb
+    foldVerbText: fold-untie-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: tie
+    foldedHeldPrefix: tie
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_tie
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  id: ClothingUniformBaseFoldableTie
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: tie
+  - type: Item
+    heldPrefix: tie
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_tie
+      map: ["foldedLayer"]
+      visible: true
+
 # ЦК
 
 - type: entity
@@ -98,7 +141,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_operative.rsi
 
 - type: entity
-  parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
+  parent: ClothingUniformBaseFoldable
   id: ClothingUniformJumpsuitBlueShieldShirt
   name: the "Blue Shield" shirt
   description: A shirt used by high-ranking people of the blue shield during official meetings.
@@ -108,6 +151,15 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableTie, ClothingUniformJumpsuitBlueShieldShirt]
+  id: ClothingUniformJumpsuitBlueShieldShirtTie
 
 - type: entity
   parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
