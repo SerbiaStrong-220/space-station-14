@@ -64,7 +64,10 @@ public sealed class MechClothingSystem : EntitySystem
         if (Transform(args.Target).Anchored)
             return;
 
-        if (ent.Comp.ItemContainer.ContainedEntities.Count >= ent.Comp.MaxContents)
+        if(!TryComp<MechGrabberComponent>(ent.Comp.CurrentEquipmentUid, out var grabberComp))
+            return;
+
+        if (grabberComp.ItemContainer.ContainedEntities.Count >= grabberComp.MaxContents)
             return;
 
         if (!TryComp<MechComponent>(ent.Comp.MechUid, out var mech))

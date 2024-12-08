@@ -197,4 +197,5 @@
       - ShardCrystalBlue
       - ShardCrystalCyan
       - ShardCrystalRed
+      - ShardCrystalWhite #ss220 random white crystal fix
     chance: 1

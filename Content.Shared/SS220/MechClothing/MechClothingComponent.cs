@@ -24,12 +24,6 @@ public sealed partial class MechClothingComponent : Component
     public float GrabDelay = 2.5f;
 
     /// <summary>
-    /// The maximum amount of items that can be fit in this grabber
-    /// </summary>
-    [DataField("maxContents")]
-    public int MaxContents = 10;
-
-    /// <summary>
     /// The sound played when a mech is grabbing something
     /// </summary>
     [DataField("grabSound")]

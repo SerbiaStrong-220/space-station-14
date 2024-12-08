@@ -36,7 +36,9 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
         get
         {
             if (_stopWord == string.Empty)
-                Log.Error("Asked for mind slave stop word but it is empty");
+                Log.Error("Asked for mind slave stop word but it is empty!");
+            if (!_textGeneratedThisRound)
+                Log.Error("Asked for mind slave stop word but it wasnt generated!");
             return _stopWord;
         }
     }
@@ -46,13 +48,16 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
         get
         {
             if (_text == string.Empty)
-                Log.Error("Asked for mind slave stop word but it is empty");
+                Log.Error("Asked for mind slave text but it is empty");
+            if (!_textGeneratedThisRound)
+                Log.Error("Asked for mind slave text but it wasnt generated!");
             return _text;
         }
     }
 
     private string _stopWord = string.Empty;
     private string _text = string.Empty;
+    private bool _textGeneratedThisRound = false;
 
     public override void Initialize()
     {
@@ -65,11 +70,17 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
         SubscribeLocalEvent<MindSlaveStopWordContainerComponent, MapInitEvent>(OnInit);
     }
 
-    private void OnRoundStart(RoundStartedEvent args)
+    private void OnRoundStart(RoundStartedEvent _)
+    {
+        if (!_textGeneratedThisRound)
+            MakeTextAndStopWord();
+    }
+
+    private void MakeTextAndStopWord()
     {
         _markovText.Initialize(_prototype.Index<DatasetPrototype>(TextDatasetId).Values, KeySize);
         _text = _markovText.GenerateText(83);
-
+        _textGeneratedThisRound = true;
         _stopWord = _markovText.ReplacePunctuationInEnding(_random.Pick(_text.Split().Where(x => x.Length >= StopWordMinSize).ToArray()));
         RaiseLocalEvent(new StopWordGeneratedEvent(_stopWord));
     }
@@ -79,10 +90,14 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
         _markovText.CleatData();
         _stopWord = string.Empty;
         _text = string.Empty;
+        _textGeneratedThisRound = false;
     }
 
     private void OnInit(Entity<MindSlaveStopWordContainerComponent> entity, ref MapInitEvent args)
     {
+        if (!_textGeneratedThisRound)
+            MakeTextAndStopWord();
+
         if (_specificFormManager is null)
             return;
 
@@ -100,7 +115,7 @@ public sealed partial class MindSlaveStopWordSystem : EntitySystem
             || !TryComp<PaperComponent>(entity, out var entityPaperComponent))
             return;
         // idea was that hos documents is container of this information
-        _paper.SetContent((entity.Owner, entityPaperComponent), paperComponent.Content.Replace("mindslave-stop-word-text", _text));
+        _paper.SetContent((entity.Owner, entityPaperComponent), paperComponent.Content.Replace("mindslave-stop-word-text", Text));
         QueueDel(spawnedForm);
 
         foreach (var stampProtoId in entity.Comp.StampList)

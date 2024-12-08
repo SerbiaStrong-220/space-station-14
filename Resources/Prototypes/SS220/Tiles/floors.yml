@@ -1082,3 +1082,14 @@
   footstepSounds:
     collection: FootstepAsteroid
   itemDrop: FloorTileItemSand
+
+- type: tile
+  id: Floor220Curse
+  name: проклятье 220
+  sprite: /Textures/SS220/Tiles/curse220.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepAsteroid
+  itemDrop: FloorTileItemSand
