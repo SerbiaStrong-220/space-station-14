@@ -594,6 +594,7 @@
 - type: loadoutGroup
   id: ClownNeck
   name: loadout-group-clown-neck
+  minLimit: 0 #ss220 clown neck fix
   loadouts:
   - ClownPennywiseRuff
 #ss220-loadout-clown-neck-end
