@@ -15,7 +15,7 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [SlimePerson]
-  sponsorOnly: false # Corvax-Sponsors 
+  sponsorOnly: false # Corvax-Sponsors
   sprites:
   - sprite: Corvax/Mobs/Customization/slime_cat_parts.rsi
     state: slime_tail_cat_wag # Corvax-Sponsors
