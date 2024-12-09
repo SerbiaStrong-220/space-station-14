@@ -1,0 +1,35 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BlasterPowerCell
+  id: BlasterPowerCellAlt
+  name: blaster power cell
+  description: It contains a lot more pain than you ever dreamed of.
+  suffix: Dual-mode
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 2000
+    startingCharge: 2000
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: disabler-mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: BulletDisablerSmg
+      name: firemode-name-disabler-alt
+      fireCost: 65
+      magState: disabler-mag
+    - proto: BulletBlasterAlt
+      name: firemode-name-laser-alt
+      fireCost: 100
+      magState: laser-mag
+  - type: MagazineVisuals
+    magState: disabler-mag
+    steps: 2
+    zeroVisible: true

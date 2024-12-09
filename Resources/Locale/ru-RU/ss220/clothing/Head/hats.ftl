@@ -51,3 +51,5 @@ ent-ClothingHeadHatJanitorJR = зелёная рабочая кепка
 ent-ClothingHeadHatJanitorJRFlipped = зелёная рабочая кепка
     .suffix = JR, За время в игре, Flipped
     .desc = { ent-ClothingHeadHatJanitorJRFlipped.desc }
+ent-ClothingHeadBeretBlueshield = берет "Синий Щит"
+    .desc = Недорогой берет, излюбленный офицерами "Синий Щит". Виднеется эмблема синего щита.

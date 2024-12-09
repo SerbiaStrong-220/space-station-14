@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise Station at https://github.com/ParadiseSS13/Paradise/blob/master/icons/obj/radio.dmi, modified and equipped states sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-EARS",
+      "directions": 4
+    },
+    {
+      "name": "equipped-EARS-secdog",
+      "directions": 4
+    }
+  ]
+}
