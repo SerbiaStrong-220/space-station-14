@@ -1,0 +1,4 @@
+- type: ninjaHackingThreat
+  id: SpiderQueen
+  announcement: terror-spider-queen
+  rule: SpiderQueenSpawn
