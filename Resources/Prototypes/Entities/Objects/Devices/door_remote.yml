@@ -142,6 +142,7 @@
     groups:
     - Engineering
 
+# SS220 revert "remove fire remote controller" begin
 - type: entity
   parent: DoorRemoteDefault
   id: DoorRemoteFirefight
@@ -159,6 +160,7 @@
     - type: Access
       groups:
         - FireFight
+# SS220 revert "remove fire remote controller" end
 
 - type: entity
   parent: [DoorRemoteDefault]
