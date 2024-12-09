@@ -983,8 +983,15 @@
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
     state: foamcrossbow
+  #ss220 toys begin
   - type: Item
-    size: Normal
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  #- type: Item
+  #  size: Normal
+  #ss220 toys end
     sprite: Objects/Fun/toys.rsi
     heldPrefix: foamcrossbow
   - type: Gun

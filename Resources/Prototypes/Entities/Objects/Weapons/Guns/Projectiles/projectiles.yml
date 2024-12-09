@@ -779,14 +779,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi #ss220 toys
     layers:
-      - state: capbullet
+      - state: bullet #ss220 toys
   - type: Projectile
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 0
+        Piercing: 0.01 #ss220 toys #harmless, no bleeding
 
 - type: entity
   id: BulletAcid
