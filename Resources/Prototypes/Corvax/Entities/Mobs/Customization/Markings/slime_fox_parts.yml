@@ -4,7 +4,6 @@
   markingCategory: HeadTop
   speciesRestriction: [SlimePerson]
   sponsorOnly: false # Corvax-Sponsors
-  abstract: true #ss220 no cat tail n ears
   sprites:
   - sprite: Corvax/Mobs/Customization/slime_fox_parts.rsi
     state: ears_slime_fox_outer
