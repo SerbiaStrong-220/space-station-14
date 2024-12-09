@@ -202,7 +202,7 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
-
+ 
 - type: loadoutGroup
   id: SecurityGloves
   name: loadout-group-security-gloves
