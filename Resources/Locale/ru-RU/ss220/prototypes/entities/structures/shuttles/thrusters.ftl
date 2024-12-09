@@ -1,0 +1,10 @@
+ent-ThrusterShunting = маневровый ракетный двигатель
+    .desc = { ent-BaseThruster.desc }
+ent-ThrusterShuntingFrame = каркас маневрового ракетного двигателя
+    .desc = { ent-BaseThruster.desc }
+ent-ThrusterBigLeft = большой ракетный двигатель (левый)
+    .desc = { ent-BaseThruster.desc }
+ent-ThrusterBigRight = большой ракетный двигатель (правый)
+    .desc = { ent-BaseThruster.desc }
+ent-ThrusterBigCenter = большой ракетный двигатель (середина)
+    .desc = { ent-BaseThruster.desc }
