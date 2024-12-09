@@ -135,6 +135,12 @@
   recipeUnlocks:
   - ShuttleConsoleCircuitboard
   - ThrusterMachineCircuitboard
+  # SS220 new thrusters begin
+  - ThrusterShuntingMachineCircuitboard
+  - ThrusterBigLeftMachineCircuitboard
+  - ThrusterBigRightMachineCircuitboard
+  - ThrusterBigLeftMachineCircuitboard
+  # SS220 new thrusters end
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
 
