@@ -255,8 +255,8 @@
     id: SecurityCadetIDCard
     state: pda-interncadet
   - type: PdaBorderColor
-    borderColor: "#a4a3a6" #SS220 PDA-Resprite
-    accentVColor: "#4977a6" #SS220 PDA-Resprite
+    borderColor: "#717059" #SS220 PDA-Resprite
+    accentVColor: "#A32D26" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
