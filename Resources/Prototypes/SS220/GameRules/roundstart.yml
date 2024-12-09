@@ -1,0 +1,7 @@
+- type: entity
+  parent: BaseGameRule
+  id: FractWar
+  components:
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/EventShuttles/FractWarEbent/NT.yml
+  - type: FractWarRule
