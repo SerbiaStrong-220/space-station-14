@@ -4,10 +4,18 @@ hidden-desc-ThermalGoogles-research = [color=#D381C9]Неожиданно для
 
 hidden-desc-ThermalVisorImplanter-research = [color=#D381C9]Сверив номера на имплантере, вы замечаете знакомый шаблон. Когда-то НаноТрейзен исследовала возможность ксеноморфов видеть людей сквозь преграды, открытые испытания тех чипов имели такой же шаблон серийных номеров, видимо доработка была успешна, но должна ли была Вам в руки попасть уже засекреченная разработка?[/color]
 
+hidden-desc-MindShieldImplanter-security = [color=#009ae1]Внутри имплантера находится имплант защиты разума.[/color]
+hidden-desc-TrackingImplanter-security = [color=#009ae1]Внутри имплантера нахоится имплант-трекер.[/color]
+
+hidden-desc-MindSlaveImplant-medical =  [color=#52B4E9]Сверив номера импланта внутри, вы понимаете, что это несертифицированный имплант. При внимательном осмотре вы понимаете что этот имплант обладает ИИ, подавляющим разум имплантированного.[/color]
+hidden-desc-MindSlaveImplant-research = [color=#D381C9]Внимательно осмотрев имплант, вы понимаете, что это внутри имплант, губительно влияющий на нервную систему.[/color]
+hidden-desc-MindSlaveImplant-syndicate = [color=#e31735]Этот имплант подчиняет разум владельца тому, кто установил имлпант. При извлечении импланта контроль над разумом теряется.[/color]
+
 # Regular decriptions below
 
-ent-ThermalVisorImplanter = имплантер Термального Зрения
-    .desc = Одноразовый имплантер, содержащий извлекаемым имплант, позволяющий видеть тела существ сквозь преграды.
+ent-ThermalVisorImplanter = { ent-Implanter }
+    .desc = { ent-Implanter.desc }
+    .suffix = Термальное зрение
 ent-ThermalVisionImplant = имплант Термального Зрения
     .desc = Микрочип, который вживляют под кожу.
 
