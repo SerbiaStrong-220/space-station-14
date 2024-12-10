@@ -52,6 +52,7 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly SpeakOnUIClosedSystem _speakOnUIClosed = default!;
         [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
         [Dependency] private readonly SharedPointLightSystem _light = default!;
+        [Dependency] private readonly SharedTransformSystem _transform = default!;
 
         private const float WallVendEjectDistanceFromWall = 1f;
 
@@ -490,6 +491,23 @@ namespace Content.Server.VendingMachines
 
             EntityUid ent;
 
+            // Default spawn coordinates
+            var spawnCoordinates = Transform(uid).Coordinates;
+
+            //Make sure the wallvends spawn outside of the wall.
+
+            //ss220 nanomed eject entities fix start
+            if (HasComp<WallMountComponent>(uid))
+            {
+                var rotation = _transform.GetWorldRotation(uid);
+                var directionVector = new Vector2((float)-Math.Cos(rotation.Theta), (float)-Math.Sin(rotation.Theta));
+
+                var offset = directionVector * WallVendEjectDistanceFromWall;
+
+                spawnCoordinates = spawnCoordinates.Offset(offset);
+            }
+            //ss220 nanomed eject entities fix end
+
             // SS220 vending-machine-inv begin
             if (vendComponent.NextEntityToEject is { } entityUid)
             {
@@ -498,22 +516,9 @@ namespace Content.Server.VendingMachines
             }
             else
             {
-                ent = Spawn(vendComponent.NextItemToEject, Transform(uid).Coordinates);
+                ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
             }
             // SS220 vending-machine-inv end
-
-
-            // Default spawn coordinates
-            var spawnCoordinates = Transform(uid).Coordinates;
-
-            //Make sure the wallvends spawn outside of the wall.
-
-            if (TryComp<WallMountComponent>(uid, out var wallMountComponent))
-            {
-
-                var offset = wallMountComponent.Direction.ToWorldVec() * WallVendEjectDistanceFromWall;
-                spawnCoordinates = spawnCoordinates.Offset(offset);
-            }
 
             if (vendComponent.ThrowNextItem)
             {
