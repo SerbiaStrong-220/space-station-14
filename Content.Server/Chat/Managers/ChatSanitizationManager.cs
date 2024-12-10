@@ -175,16 +175,16 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         }
 
         // SS220 no English begin
-        var ntAllowed = sanitized.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
-        ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
+        //var ntAllowed = sanitized.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
+        //ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
 
-        // Remember, no English
-        if (Regex.Matches(ntAllowed, @"[a-zA-Z]").Any())
-        {
-            sanitized = string.Empty;
-            emote = "кашляет";
-            return true;
-        }
+        //// Remember, no English
+        //if (Regex.Matches(ntAllowed, @"[a-zA-Z]").Any())
+        //{
+        //    sanitized = string.Empty;
+        //    emote = "кашляет";
+        //    return true;
+        //}
         // SS220 no English end
 
         sanitized = message.Trim();
