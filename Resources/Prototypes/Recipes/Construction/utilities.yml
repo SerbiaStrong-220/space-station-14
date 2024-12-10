@@ -71,7 +71,7 @@
   category: construction-category-utilities
   description: "Input of devices such as the SMES. The red cables needs to face the device."
   icon:
-    sprite: Structures/Power/cable_terminal.rsi
+    sprite: SS220/Structures/Power/cable_terminal.rsi #ss220-engineering-update-power
     state: term
   objectType: Structure
   placementMode: SnapgridCenter
@@ -373,7 +373,7 @@
   startNode: start
   targetNode: sensor
   category: construction-category-structures
-  description: Reports on the status of the gas within the attached pipe network. 
+  description: Reports on the status of the gas within the attached pipe network.
   icon:
     sprite: Structures/Piping/Atmospherics/gas_pipe_sensor.rsi
     state: icon
