@@ -22,6 +22,7 @@
   - type: Computer
     board: SuperMatterObserverCircuitboard
   - type: SuperMatterObserver
+  - type: StationAiWhitelist #SS220 AI Access
   - type: SuperMatterObserverReceiver
   - type: ActivatableUIRequiresPower
   - type: ActivatableUI
