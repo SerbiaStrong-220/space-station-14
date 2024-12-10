@@ -268,7 +268,8 @@ public sealed partial class DarkReaperComponent : Component
             Coefficients = new()
             {
                 {"Radiation", 0},
-                {"Piercing", 0.8f}
+                {"Piercing", 0.7f},
+                {"Heat", 0.7f}
             }
         },
 
@@ -278,7 +279,8 @@ public sealed partial class DarkReaperComponent : Component
             Coefficients = new()
             {
                 {"Radiation", 0},
-                {"Piercing", 0.6f}
+                {"Piercing", 0.6f},
+                {"Heat", 0.6f}
             }
         },
 
