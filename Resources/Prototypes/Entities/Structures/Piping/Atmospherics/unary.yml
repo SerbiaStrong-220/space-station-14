@@ -38,9 +38,9 @@
         - Unstackable
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/vent.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_off
@@ -79,9 +79,9 @@
   components:
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/vent.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_passive
@@ -111,9 +111,9 @@
         - Unstackable
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/scrubber.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/scrubber.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: scrub_off
@@ -152,10 +152,10 @@
   components:
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/outletinjector.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/ #ss220 engineering-update-atmos
       layers:
         - state: pipeHalf
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: injector
           map: [ "enum.SubfloorLayers.FirstLayer" ]
