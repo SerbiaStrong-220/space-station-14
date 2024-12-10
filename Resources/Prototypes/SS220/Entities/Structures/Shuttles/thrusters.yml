@@ -2,6 +2,8 @@
   id: ThrusterShunting
   name: shunting thruster
   parent: [ BaseThruster, ConstructibleMachine ]
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Thruster
     thrust: 33
@@ -12,6 +14,11 @@
   - type: Construction
     graph: ThrusterShunting
     node: thrusterShunting
+  - type: Rotatable #The component responsible for rotating the pinned object until
+    rotateWhileAnchored: true #the bug with it flipping 180 degrees during construction is fixed.
+  - type: Physics
+    bodyType: Static
+    canCollide: false
   - type: Machine
     board: ThrusterShuntingMachineCircuitboard
   - type: ApcPowerReceiver
@@ -97,6 +104,17 @@
         acts: [ "Destruction" ]
 
 - type: entity
+  id: DebugThrusterShunting
+  parent: ThrusterShunting
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+
+- type: entity
   id: ThrusterBigLeft
   name: big thruster (left)
   parent: [ BaseThruster, ConstructibleMachine ]
@@ -106,6 +124,17 @@
     damage:
       types:
         Heat: 20
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.05,0.45"
+        density: 20
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Machine
     board: ThrusterBigLeftMachineCircuitboard
   - type: ApcPowerReceiver
@@ -145,14 +174,67 @@
       offset: 0, 1
 
 - type: entity
+  id: ThrusterBigLeftUnanchored
+  parent: ThrusterBigLeft
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
+  id: DebugThrusterBigLeft
+  parent: ThrusterBigLeft
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+
+- type: entity
   id: ThrusterBigRight
   name: big thruster (right)
   parent: [ ThrusterBigLeft ]
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.05,-0.45,0.45,0.45"
+        density: 20
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Machine
     board: ThrusterBigRightMachineCircuitboard
   - type: Sprite
     sprite: SS220/Structures/Shuttles/thruster_big_right.rsi
+
+- type: entity
+  id: ThrusterBigRightUnanchored
+  parent: ThrusterBigRight
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
+  id: DebugThrusterBigRight
+  parent: ThrusterBigRight
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
 
 - type: entity
   id: ThrusterBigCenter
@@ -201,3 +283,24 @@
       shader: unshaded
       visible: false
       offset: 0, 1
+
+- type: entity
+  id: ThrusterBigCenterUnanchored
+  parent: ThrusterBigCenter
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
+  id: DebugThrusterBigCenter
+  parent: ThrusterBigCenter
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0

@@ -143,6 +143,6 @@
 - type: Tag
   id: Bed
 
-# Add new thrusters
+# engineering-update-thruster
 - type: Tag
   id: ThrusterShuntingMachineCircuitboard
