@@ -10,6 +10,7 @@ using Content.Shared.Item;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
@@ -202,6 +203,14 @@ public sealed class WieldableSystem : EntitySystem
         if (TryComp<PullerComponent>(user, out var puller) && _pull.IsPulling(user, puller) && puller.NeedsHands)
             return false;
         //ss220 weild fix end
+
+        //ss220 StuckOnEquip begin
+        foreach (var handEnt in _handsSystem.EnumerateHeld(user, hands))
+        {
+            if (TryComp<StuckOnEquipComponent>(handEnt, out var stuckOnEquipComp) && stuckOnEquipComp.InHandItem)
+                return false;
+        }
+        //ss220 StuckOnEquip end
 
         // Seems legit.
         return true;
