@@ -68,13 +68,13 @@
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Vitamin
-          Quantity: 5          
+          Quantity: 5
 
 - type: entity
   name: винегрет
   parent: FoodBowlBase
   id: FoodSaladVinaigrette
-  description: Кладезь витаминов и микроэлементов. А почему тут нет вина? 
+  description: Кладезь витаминов и микроэлементов. А почему тут нет вина?
   components:
   - type: FlavorProfile
     flavors:
@@ -92,4 +92,58 @@
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Vitamin
-          Quantity: 5          
+          Quantity: 5
+
+- type: entity
+  name: cуп Космического Отца
+  id: FoodFatherSoup
+  parent: FoodBowlBase
+  description: Суп придает настолько много сил, что его пришлось поместить в чан. Наверное мне стоит его съесть?
+  components:
+    - type: FlavorProfile
+      flavors:
+        - fatherSoup
+    - type: Sprite
+      sprite: SS220/Objects/Consumable/Food/cauldron.rsi
+      layers:
+      - state: cauldron
+      - state: father
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 25
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 15
+          - ReagentId: Protein
+            Quantity: 10
+    - type: Food
+      trash:
+      - FoodCauldron
+    - type: Tag
+      tags:
+      - Meat
+
+- type: entity
+  name: Призрачный чили перец
+  description: Призрачный чили перец? А как мне из него готовить, если я его не вижу?
+  id: GhostChiliPepper
+  parent: FoodProduceBase
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/ghost_peppers.rsi
+      state: produce
+    - type: FlavorProfile
+      flavors:
+        - ghostChili
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          reagents:
+            - ReagentId: Nutriment
+              Quantity: 5
+    - type: Produce
+      seedId: chili
+    - type: StaticPrice
+      price: 500 #It has so much Omnizin in it
+
