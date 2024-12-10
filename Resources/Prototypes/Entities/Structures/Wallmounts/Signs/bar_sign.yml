@@ -10,6 +10,7 @@
         collection: GlassSmash
   - type: WallMount
     arc: 360
+  - type: StationAiWhitelist #SS220 AI Access
   - type: Sprite
     drawdepth: AboveFovOverlay #SS220 Perpective-wall-fov
     sprite: Structures/Wallmounts/barsign.rsi

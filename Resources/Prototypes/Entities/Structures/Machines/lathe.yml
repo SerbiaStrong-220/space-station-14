@@ -18,6 +18,7 @@
         layer:
           - MachineLayer
   - type: Lathe
+  - type: StationAiWhitelist #SS220 AI Access
   - type: MaterialStorage
   - type: Destructible
     thresholds:

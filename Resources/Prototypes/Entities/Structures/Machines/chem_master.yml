@@ -21,6 +21,7 @@
     pillDosageLimit: 20
   - type: Physics
     bodyType: Static
+  - type: StationAiWhitelist #SS220 AI Access
   - type: Fixtures
     fixtures:
       fix1:
