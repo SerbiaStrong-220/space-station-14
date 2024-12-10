@@ -71,8 +71,8 @@
     anchored: true
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: Structures/Power/apc.rsi
-    state: frame
+    sprite: SS220/Structures/Shuttles/thruster_shunting.rsi
+    state: frame-base
   - type: Construction
     graph: ThrusterShunting
     node: thrusterShuntingFrame

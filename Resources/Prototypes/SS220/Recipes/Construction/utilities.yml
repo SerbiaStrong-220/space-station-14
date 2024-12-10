@@ -7,8 +7,8 @@
   category: construction-category-utilities
   description: "A thruster that allows a shuttle to move."
   icon:
-    sprite: Structures/Power/apc.rsi
-    state: base
+    sprite: SS220/Structures/Shuttles/thruster_shunting.rsi
+    state: frame-base
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
