@@ -1,4 +1,4 @@
-﻿using Content.Shared.Whitelist;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
@@ -73,5 +73,10 @@ namespace Content.Shared.UserInterface
         /// </summary>
         [DataField, AutoNetworkedField]
         public EntityUid? CurrentSingleUser;
+
+        // SS220 Alternative-open-verb
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
+        public bool AltentativeOnly = false;
     }
 }
