@@ -41,7 +41,7 @@
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi 
+    sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -59,3 +59,32 @@
     - Antagonists
   - type: IdentityBlocker
     coverage: EYES
+
+- type: entity
+  parent: ClothingEyesGlassesBlueShield
+  id: ClothingEyesBlueShieldGlasses
+  name: blueshield glasses
+  description: Upgraded sunglasses for blue shields.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/blueshield_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/blueshield_glasses.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: ShowJobIcons
+
+- type: entity
+  parent: ClothingEyesBlueShieldGlasses
+  id: ClothingEyesBlueShieldTacticGlasses
+  name: blueshield tactic glasses
+  description: Tactical glasses for combat situations.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi
