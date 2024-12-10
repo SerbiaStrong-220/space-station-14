@@ -240,6 +240,171 @@
     tags:
     - HideContextMenu
 
+#Svarshik's toy guns!
+#grenades for china lake
+- type: entity
+  id: BulletGrenadeBlastToy
+  name: blast grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # a ~2 tile radius
+    intensitySlope: 0.5
+    maxIntensity: 0.01
+    canCreateVacuum: false #extra safety y'know?
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeFragToy
+  name: frag grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # about a ~6 tile radius
+    intensitySlope: 0.3
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeFlashToy
+  name: flash grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: SpawnOnTrigger
+    proto: GrenadeFlashEffect
+  - type: ActiveTimerTrigger
+    timeRemaining: 0.3
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: BulletGrenadeKaboomToy
+  name: kaboom grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 50 # about a station size
+    intensitySlope: 0.3
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeLubeToy
+  name: lube grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 1.5 # a ~2 tiles
+    intensitySlope: 0.5
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+  - type: SmokeOnTrigger
+    duration: 0.01
+    spreadAmount: 5
+    smokePrototype: Foam
+    solution:
+      reagents:
+      - ReagentId: SpaceLube
+        Quantity: 1500 #not really 1500. Due to short time its about ~800u
+
+#special ammo for hristov
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletAntiMaterielToyStun
+  name: bullet (.60 anti-materiel)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+        Structural: 10
+        Stamina: 20 #for fun. Cannot really staminacrit someone with this
+    ignoreResistances: true
+  - type: StunOnCollide
+    stunAmount: 1
+    knockdownAmount: 1
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: BulletAntiMaterielToyMeme
+  name: bullet (.60 anti-materiel)
+  suffix: Shitspawn
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+        Structural: 10
+    soundHit:
+      path: /Audio/SS220/Weapons/Guns/Hits/headshot.ogg
+    forceSound: true
+  - type: StunOnCollide
+    knockdownAmount: 1
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletAntiMaterielToyHappiness
+  name: bullet (.60 anti-materiel)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+        Structural: 10
+  - type: EmbeddableProjectile
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        maxVol: 20
+        reagents:
+        - ReagentId: Happiness
+          Quantity: 20
+  - type: InjectableSolution
+    solution: ammo
+  - type: SolutionInjectOnEmbed
+    transferAmount: 20
+    solution: ammo
+  - type: SolutionTransfer
+    maxTransferAmount: 20
+
 - type: entity
   id: BulletImpactEffectBlue
   categories: [ HideSpawnMenu ]

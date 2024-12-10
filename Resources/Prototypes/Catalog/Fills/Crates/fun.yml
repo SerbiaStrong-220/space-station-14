@@ -335,6 +335,10 @@
       - id: BeachBall
       - id: ClothingShoesSkates
       - id: RubberChicken
+      #ss220 toys begin
+      - id: BoxCartridgeCap
+      - id: BoxDonkSoftBox
+      #ss220 toys end
 
 - type: entity
   id: CrateFunBikeHornImplants

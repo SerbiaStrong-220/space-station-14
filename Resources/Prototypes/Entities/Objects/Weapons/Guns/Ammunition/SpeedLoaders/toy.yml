@@ -12,6 +12,7 @@
     whitelist:
       tags:
         - CartridgeCap
+        - BulletFoam #ss220 toys
     capacity: 6
   - type: Sprite
     layers:
