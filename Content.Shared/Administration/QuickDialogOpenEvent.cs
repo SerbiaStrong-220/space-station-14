@@ -37,6 +37,46 @@ public sealed class QuickDialogOpenEvent : EntityEventArgs
     }
 }
 
+//SS220-RenameStart - start
+[Serializable, NetSerializable]
+public sealed class QuickDialogDescOpenEvent : EntityEventArgs
+{
+    /// <summary>
+    /// The title of the dialog.
+    /// </summary>
+    public string Title;
+
+    /// <summary>
+    /// The title of the dialog.
+    /// </summary>
+    public string Description;
+
+    /// <summary>
+    /// The internal dialog ID.
+    /// </summary>
+    public int DialogId;
+
+    /// <summary>
+    /// The prompts to show the user.
+    /// </summary>
+    public List<QuickDialogEntry> Prompts;
+
+    /// <summary>
+    /// The buttons presented for the user.
+    /// </summary>
+    public QuickDialogButtonFlag Buttons = QuickDialogButtonFlag.OkButton | QuickDialogButtonFlag.CancelButton;
+
+    public QuickDialogDescOpenEvent(string title, string description, List<QuickDialogEntry> prompts, int dialogId, QuickDialogButtonFlag buttons)
+    {
+        Title = title;
+        Description = description;
+        Prompts = prompts;
+        Buttons = buttons;
+        DialogId = dialogId;
+    }
+}
+//SS220-RenameStart - end
+
 /// <summary>
 /// A networked event raised when the client replies to a quick dialog.
 /// </summary>

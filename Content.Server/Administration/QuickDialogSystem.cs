@@ -103,6 +103,28 @@ public sealed partial class QuickDialogSystem : EntitySystem
         _openDialogsByUser[session.UserId].Add(did);
     }
 
+    //SS220-RenameStart - start
+    private void OpenDialogInternal(ICommonSession session, string title, string description, List<QuickDialogEntry> entries, QuickDialogButtonFlag buttons, Action<QuickDialogResponseEvent> okAction, Action cancelAction)
+    {
+        var did = GetDialogId();
+        RaiseNetworkEvent(
+            new QuickDialogDescOpenEvent(
+                title,
+                description,
+                entries,
+                did,
+                buttons),
+            session
+        );
+
+        _openDialogs.Add(did, (okAction, cancelAction));
+        if (!_openDialogsByUser.ContainsKey(session.UserId))
+            _openDialogsByUser.Add(session.UserId, new List<int>());
+
+        _openDialogsByUser[session.UserId].Add(did);
+    }
+    //SS220-RenameStart - end
+
     private bool TryParseQuickDialog<T>(QuickDialogEntryType entryType, string input, [NotNullWhen(true)] out T? output)
     {
         switch (entryType)
