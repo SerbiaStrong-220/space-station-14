@@ -10,6 +10,16 @@
 
 # Jumpsuit
 - type: loadout
+  id: InternJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitIntern
+
+- type: loadout
+  id: InternJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtIntern
+
+- type: loadout
   id: MedicalInternJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
