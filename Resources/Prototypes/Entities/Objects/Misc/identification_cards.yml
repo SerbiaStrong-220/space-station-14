@@ -527,7 +527,11 @@
   - type: Access
     groups:
     - AllAccess # SS220 Fast fix access
+    # SS220 centcomm access fix begin
+    tags:
     - CentralCommand
+    - CentralCommandERT
+    # SS220 centcomm access fix end
   # SS220 new CentComm end
 
 - type: entity
@@ -546,6 +550,11 @@
   - type: Access
     groups:
     - AllAccess # SS220 Fast fix access
+  # SS220 centcomm access fix begin
+    tags:
+    - CentralCommand
+    - CentralCommandERT
+  # SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
@@ -558,6 +567,14 @@
     - state: ert_engineer
   - type: PresetIdCard
     job: ERTEngineer
+  # SS220 centcomm access fix begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommand
+    - CentralCommandERT
+  # SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
@@ -570,6 +587,14 @@
     - state: ert_janitor
   - type: PresetIdCard
     job: ERTJanitor
+  # SS220 centcomm access fix begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommand
+    - CentralCommandERT
+  # SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
@@ -582,6 +607,14 @@
     - state: ert_medic
   - type: PresetIdCard
     job: ERTMedical
+  # SS220 centcomm access fix begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommand
+    - CentralCommandERT
+  # SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
@@ -594,6 +627,14 @@
     - state: ert_security
   - type: PresetIdCard
     job: ERTSecurity
+  # SS220 centcomm access fix begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommand
+    - CentralCommandERT
+  # SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
