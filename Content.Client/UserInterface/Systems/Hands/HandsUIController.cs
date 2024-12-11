@@ -6,6 +6,7 @@ using Content.Client.UserInterface.Systems.Hotbar.Widgets;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Timing;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -194,6 +195,14 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
             hand.SetEntity(entity);
             hand.Blocked = false;
         }
+
+        //ss220 StuckOnEquip begin
+        if (_entities.TryGetComponent(entity, out StuckOnEquipComponent? stuckOnEquipComponent) && stuckOnEquipComponent.InHandItem)
+        {
+            hand.SetEntity(entity);
+            hand.StuckOnEquip = true;
+        }
+        //ss220 StuckOnEquip end
 
         UpdateHandStatus(hand, entity);
     }

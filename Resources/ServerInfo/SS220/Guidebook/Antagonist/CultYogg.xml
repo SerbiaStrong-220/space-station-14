@@ -1,0 +1,304 @@
+<Document>
+  # Культ Йог-Сотот
+
+  - Культист - это антагонист, завербованый в свои ряды. Они способны [color=#a4885c]преобразовывать[/color] предметы станции, получая новые с особенными свойствами.
+  - Культисты могут использовать телепатию для кооперации и донесению важной информации соратникам. А так же имеют отличительные знаки (как для себя, так и для жертв), видимые только членам культа.
+  - В раунде культистом может стать любой игрок, кроме капитана и сотрудников службы безопасности.
+  - Культисты способны [color=#a4885c]вознестись[/color] потеряв свою оболочку и став Ми-Го - ключевым орудием победы, обладающий новыми способностями, пусть и с утратой боевой составляющей.
+  - Культисты должны в первую очередь сосредоточиться на том, чтобы завербовать новых членов и принести необходимое число [color=#a4885c]жертв[/color] для победы.
+
+  ## Способности культистов
+  <Box>
+    <GuideEntityEmbed Entity="ActionCultYoggCorruptItem" Caption="Преобразование по прикосновению"/>
+    <GuideEntityEmbed Entity="ActionCultYoggCorruptItemInHand" Caption="Преобразование в руках"/>
+  </Box>
+  Способности по преобразованию предметов рядом или в руках.
+  <Box>
+    <GuideEntityEmbed Entity="ActionCultYoggPukeShroom" Caption="Извергнуть"/>
+    <GuideEntityEmbed Entity="ActionCultYoggDigest" Caption="Микоз"/>
+  </Box>
+  Способности связанные с начальной экономикой грибов [color=#a4885c]Ми-Гомицелия[/color], необходимых для [color=#a4885c]вознесения[/color] первого культиста в Ми-Го.
+  Извергнуть - культист извергает из своего тела гриб [color=#a4885c]Ми-Гомицелия[/color], заменив данную способность на способность Микоз.
+  Микоз - действие по выделению питательных веществ организма культиста с целью произвести новый гриб.
+
+  ## Возвышение
+  Возвышение хотя бы одного культиста это один из первых шагов по расширению и приближению к победе культистов. Следует вдумчиво выбирать того, кто вознесется,
+  чтобы не потерять в возможностях и доступах, а так же не привлеч внимание из-за потери человека с датчиков.
+  Для возвышения культисту необходимо съесть 3 гриба Ми-Гомицелия, которые через некоторое время прорастут внутри культиста, разрушив его изначальную оболочку
+  и даровав новое тело МиГо.
+
+  ## Искаженные предметы
+  <Table Columns="3">
+   <ColorBox>
+      <Box>
+        Оригинальный предметы
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Результат преобразования
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Применение
+        полученного предмета
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="SheetSteel" Caption="Сталь"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="SheetTokl" Caption="ток'л"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Искаженный металл.
+        Ресурс необходимый для построек культа.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box VerticalAlignment="Center">
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CableHVStack" Caption="ВВ"/>
+        </Box>
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CableMVStack" Caption="СВ"/>
+        </Box>
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CableApcStack" Caption="ЛВ"/>
+        </Box>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box VerticalAlignment="Center">
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CableHVStack1Live" Caption="Живые корни"/>
+        </Box>
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CableMVStack1Live" Caption="Живые корни"/>
+         </Box>
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CableApcStack1Live" Caption="Живые корни"/>
+        </Box>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Искаженные провода.
+        Ресурс необходимый для построек культа.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="WeaponPistolMk58" Caption="Пистолеты"/>
+        </Box>
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="WeaponSubMachineGunWt550" Caption="Автоматическое оружие"/>
+        </Box>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="CultYoggCocoonSpikegun" Caption="Кокон шипомета"/>
+        </Box>
+        <Box HorizontalAlignment="Center">
+          <GuideEntityEmbed Entity="SpikegunCultYogg" Caption="Шипомет"/>
+        </Box>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Самопополняющееся автоматическое оружие, заменяющее руку.
+        Изначально появляется в виде кокона, который можно развернуть в оружие.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="WeaponShotgunDoubleBarreled" Caption="Любые дробовики"/>
+        <GuideEntityEmbed Entity="WeaponSprayNozzle" Caption="Распылитель"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="CultYoggCocoonSpitballer" Caption="Кокон плевателя"/>
+        <GuideEntityEmbed Entity="Spitballer" Caption="Плеватель"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Самопополняющееся химическое оружие, заменяющее руку. Изначально появляется в виде кокона, который можно развернуть в оружие.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="WeaponLaserCarbine" Caption="Любое лазерное оружие"/>
+        <GuideEntityEmbed Entity="WeaponImprovisedPneumaticCannon" Caption="Самодельное оружие"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="CultYoggCocoonHorn" Caption="Кокон горна"/>
+        <GuideEntityEmbed Entity="HornCultYogg" Caption="Горн"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Самопополняющееся тяжелое оружие, заменяющее руку.
+        Изначально появляется в виде кокона, который можно развернуть в оружие.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="Wirecutter" Caption="Кусачки"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="CultYoggCocoonClaw" Caption="Кокон клешни"/>
+        <GuideEntityEmbed Entity="ClawCultYogg" Caption="Клешня"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Оружие ближего боя, заменяющее руку. Может так же служить в качестве клешни жизни и кусачек. Изначально появляется в виде кокона, который можно развернуть в оружие.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="CrowbarRed" Caption="Монтировки"/>
+        <GuideEntityEmbed Entity="BaseBallBat" Caption="Биты"/>
+        <GuideEntityEmbed Entity="Stunbaton" Caption="Дубинки"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="CultYoggCocoonBeach" Caption="Кокон бича"/>
+        <GuideEntityEmbed Entity="BeachCultYogg" Caption="Бич"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Оружие ближего боя, заменяющее руку. Имеет шанс выбить предметы из рук противника. Изначально появляется в виде кокона, который можно развернуть в оружие.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="PenCentcom" Caption="Ручки"/>
+        <GuideEntityEmbed Entity="Syringe" Caption="Шприцы"/>
+        <GuideEntityEmbed Entity="Screwdriver" Caption="Отвертки"/>
+        <GuideEntityEmbed Entity="KitchenKnife" Caption="Ножи и столовые приборы"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="SedativestingCultYogg" Caption="Усыпляющее жало"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Аналог гипоспрея культистов.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="ClothingOuterHardsuitAtmos" Caption="Любой скафандр с шлемом"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="ClothingOuterHardsuitCultYogg" Caption="Живая броня"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Укрепленный скафандр культистов, приростающий к телу при надевании.ы
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="ClothingBackpackCargo" Caption="Любая сумка"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="ClothingBackpackCultYogg" Caption="Живая сумка"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Увеличенный вариант рюкзака, прирастающий к спине при надевании.
+      </Box>
+    </ColorBox>
+
+    <ColorBox Color="#698f43">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="Multitool" Caption="Мультитул"/>
+        <GuideEntityEmbed Entity="NetworkConfigurator" Caption="Конфигуратор сети"/>
+        <GuideEntityEmbed Entity="RemoteSignaller" Caption="Передатчик сигналов"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#a69b38">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        <GuideEntityEmbed Entity="BurglarBug" Caption="Живая сумка"/>
+      </Box>
+    </ColorBox>
+    <ColorBox Color="#b0653a">
+      <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+        Увеличенный вариант рюкзака, прирастающий к спине при надевании.
+      </Box>
+    </ColorBox>
+
+  </Table>
+
+  ## Ми-Го
+  <Box>
+    <GuideEntityEmbed Entity="MiGo" Caption="МиГо"/>
+  </Box>
+  Важнейшая единица команды культа, который не имеет рук, но имеет ряд способностей для поддержки других членов культа,
+  единственный член культа способный строить здания культа, выращивать особенные растения культа, порабощать новых культистов, а так же приносить жертвы.
+
+  Ми-Го имеет способность исцеления других культистов.
+  Ми-Го имеют способность [color=#a4885c]Астрал[/color], позволяющая на время приобрести бестелесную и невидимую формую.
+
+  ## Здания культа
+  <Box>
+    <GuideEntityEmbed Entity="CultYoggPond" Caption="пруд"/>
+    <GuideEntityEmbed Entity="CultYoggFungusHydroponic" Caption="грибница"/>
+    <GuideEntityEmbed Entity="CultYoggPod" Caption="хранилище"/>
+    <GuideEntityEmbed Entity="CultYoggAltar" Caption="алтарь жертвоприношений"/>
+  </Box>
+  - пруд
+  Здание, являющееся самопополнящимся контейнером ноктюрина, необходимое для пополнения [color=#a4885c]усыпляющего жала[/color].
+  - грибница
+  Особенная гидропоника культа, не требующая никакого ухода, с помощью которой [color=#a4885c]Ми-Го[/color] способен выращивать специальные растения культа.
+  - хранилище
+  Капсула способная ьыстро ицелить любые раны культистов.
+  - алтарь жертвоприношений
+  Место, где нужно принести жертвы
+
+  ## Цели
+  - Став культистом, вы получите список целей на принесение в жертву определенных членов экипажа (жертвы).
+  ## Жертвы
+  Жертвы делятся на 3 тира:
+  - Капитан
+  - Один случайный глава
+  - Случайный член экипажа
+  В случае отсутствия жертвы на выбраннодном из тиров выбирается жертва тира ниже.
+</Document>
