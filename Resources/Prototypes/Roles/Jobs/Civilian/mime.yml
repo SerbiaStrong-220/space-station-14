@@ -20,6 +20,7 @@
     components:
     - type: MimePowers
     - type: FrenchAccent
+    - type: RenameStart #SS220-RenameStart
 
 - type: startingGear
   id: MimeGear
