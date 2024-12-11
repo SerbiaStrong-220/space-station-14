@@ -1,0 +1,34 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTechAssistant
+  name: technical assistant's jumpsuit
+  description: Suit for technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/tech_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/tech_assist.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitResearchAssistant
+  name: research assistant's jumpsuit
+  description: Suit for research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/science_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/science_assist.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitIntern
+  name: intern's jumpsuit
+  description: Suit for medical interns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/intern.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/intern.rsi
