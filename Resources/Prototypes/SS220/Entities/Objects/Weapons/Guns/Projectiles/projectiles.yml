@@ -273,13 +273,3 @@
     damage:
       types:
         Piercing: 120
-
-- type: entity
-  id: BulletUnitarySlugSpread #spread on gun works unconsistent, so...
-  categories: [ HideSpawnMenu ]
-  parent: BulletUnitarySlug
-  components:
-  - type: ProjectileSpread
-    proto: BulletUnitarySlug
-    count: 1
-    spread: 22
