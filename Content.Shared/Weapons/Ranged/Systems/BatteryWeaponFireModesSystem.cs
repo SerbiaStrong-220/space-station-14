@@ -216,8 +216,18 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     {
         var firemode = GetMode(ent.Comp);
 
-        if (firemode.SoundGunshot is not null)
-            args.SoundGunshot = new SoundPathSpecifier(firemode.SoundGunshot);
+        if (firemode.GunModifiers is not { } modifiers ||
+            !TryComp<GunComponent>(ent.Owner, out var gunComponent))
+            return;
+
+        args.SoundGunshot = modifiers.SoundGunshot ?? gunComponent.SoundGunshot;
+        args.AngleIncrease = modifiers.AngleIncrease ?? gunComponent.AngleIncrease;
+        args.AngleDecay = modifiers.AngleDecay ?? gunComponent.AngleDecay;
+        args.MaxAngle = modifiers.MaxAngle ?? gunComponent.MaxAngle;
+        args.MinAngle = modifiers.MinAngle ?? gunComponent.MinAngle;
+        args.ShotsPerBurst = modifiers.ShotsPerBurst ?? gunComponent.ShotsPerBurst;
+        args.FireRate = modifiers.FireRate ?? gunComponent.FireRate;
+        args.ProjectileSpeed = modifiers.ProjectileSpeed ?? gunComponent.ProjectileSpeed;
     }
     //SS220 Add Multifaze gun end
 }

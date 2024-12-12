@@ -34,6 +34,7 @@
     Slash: 0.5
     Heat: 0.5
     Poison: 0.2
+    Stamina: 0.5
 
 - type: damageModifierSet
   id: SpiderDrone
@@ -43,6 +44,7 @@
     Slash: 0.5
     Heat: 0.6
     Poison: 0.2
+    Stamina: 0.7
 
 - type: damageModifierSet
   id: SpiderHunter
@@ -52,6 +54,7 @@
     Slash: 0.35
     Heat: 0.45
     Poison: 0.2
+    Stamina: 0.7
 
 - type: damageModifierSet
   id: SpiderGhost
@@ -61,6 +64,7 @@
     Slash: 0.6
     Heat: 0.55
     Poison: 0.2
+    Stamina: 0.7
 
 - type: damageModifierSet
   id: SpiderShooter
@@ -70,6 +74,7 @@
     Slash: 0.6
     Heat: 0.4
     Poison: 0.2
+    Stamina: 0.7
 
 - type: damageModifierSet
   id: SpiderLittle

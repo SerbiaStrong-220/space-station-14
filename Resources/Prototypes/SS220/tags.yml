@@ -173,3 +173,7 @@
 
 - type: Tag
   id: MagazinePistolCaselessRifleToy
+
+#HOCebent
+- type: Tag
+  id: CartridgeUnitary

@@ -133,6 +133,7 @@
 - type: loadoutGroup
   id: LawyerOuterclothing
   name: loadout-group-lawyer-outerclothing
+  minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
   # Адвокат (Конец)
@@ -191,6 +192,7 @@
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
+  - GlassesBallistic
 
 - type: loadoutGroup
   id: DetectiveSecBackpack
@@ -200,6 +202,13 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
+  
+- type: loadoutGroup
+  id: SecurityGloves
+  name: loadout-group-security-gloves
+  minLimit: 0
+  loadouts:
+  - GlovesSecTactical
   # Офицер СБ (Конец)
 
   # Инструктор СБ (Начало)
@@ -571,7 +580,7 @@
 - type: loadoutGroup
   id: MusicianShoes
   name: loadout-group-musician-shoes
-  minLimit: 0
+  # minLimit: 0
   loadouts:
   - MusicianBootsLaceup
   - BardShoes

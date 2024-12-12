@@ -57,6 +57,17 @@
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
 
 - type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesSecTactical
+  name: security tactical gloves
+  description: tactical security element
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
+    
+- type: entity
   parent: ClothingHandsGlovesJanitor
   id: ClothingHandsGlovesJanitorJR
   name: black rubber gloves Junk Recycles
@@ -88,3 +99,4 @@
   - type: Fiber
     fiberMaterial: fibers-insulative
   - type: FingerprintMask
+

@@ -5,6 +5,7 @@ using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Medical;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Events;
@@ -24,6 +25,7 @@ public sealed class ClumsySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
 
     public override void Initialize()
     {
@@ -82,6 +84,11 @@ public sealed class ClumsySystem : EntitySystem
 
     private void OnBeforeClimbEvent(Entity<ClumsyComponent> ent, ref SelfBeforeClimbEvent args)
     {
+        //ss220 don't clumsy if entity is dead start
+        if (_mobStateSystem.IsDead(ent.Owner))
+            return;
+        //ss220 don't clumsy if entity is dead end
+
         // This event is called in shared, thats why it has all the extra prediction stuff.
         var rand = new System.Random((int)_timing.CurTick.Value);
 

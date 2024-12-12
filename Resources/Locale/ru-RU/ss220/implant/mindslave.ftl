@@ -28,10 +28,12 @@ mindslave-notification-window-text-freed =
 mindslave-notification-window-accept = Понятно
 
 #entities
-ent-MindSlaveImplanter = имплантер Подчинитель разума
-    .desc = Одноразовый имплантер, содержащий имплант, который подчиняет разум владельца тому, кто установил имплант.
+ent-MindSlaveImplanter = { ent-Implanter }
+    .desc = { ent-Implanter.desc }
+    .suffix = Подчинитель
 ent-MindSlaveImplant = Подчинитель разума
-    .desc = Этот имплант подчиняет разум владельца тому, кто установил имлпант. При извлечении импланта контроль над разумом теряется.
+    .desc = { ent-BaseSubdermalImplant.desc }
+
 ent-MindslaveFixerCerebralImplant = конфигуратор имплантов
     .desc = Небольшое устройство, позволяющее произвести более тонкую настройку имплантов. На корпусе расположилось лого "Interdyne pharmaceutics".
 ent-MindslaveFixSurgeryGuide = инструкция
