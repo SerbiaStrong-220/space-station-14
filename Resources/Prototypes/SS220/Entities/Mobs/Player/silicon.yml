@@ -51,8 +51,8 @@
   description: View a Station Map
   components:
   - type: InstantAction
-    icon: SS220/Interface/Actions/actions_ai.rsi/Station_map..png # SS220-Resprite
-    iconOn: SS220/Interface/Actions/actions_ai.rsi/Station_map..png # SS220-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/Station_map.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/Station_map.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -17
     event: !type:ToggleIntrinsicUIEvent { key: enum.StationMapUiKey.Key }
