@@ -4,8 +4,8 @@
   description: View a Crew Monitoring Interface.
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
+    icon: Interface/Actions/actions_ai.rsi/crew_monitor.png #Off sprite
+    iconOn: Interface/Actions/actions_ai.rsi/crew_monitor.png #Off sprite
     keywords: [ "AI", "console", "interface" ]
     priority: -21
     event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
@@ -16,8 +16,8 @@
   description: View a Communications Interface.
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/communications.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/communications.png # Corvax-Resprite
+    icon: Interface/Actions/actions_ai.rsi/comms_console.png #Off sprite
+    iconOn: Corvax/Interface/AdminActions/comms_console.png # Off-sprite
     keywords: [ "AI", "console", "interface" ]
     priority: -20
     event: !type:ToggleIntrinsicUIEvent { key: enum.CommunicationsConsoleUiKey.Key }
@@ -27,8 +27,8 @@
   description: View a Station Criminal Record
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/criminal_records.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/criminal_records.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -19
     event: !type:ToggleIntrinsicUIEvent { key: enum.CriminalRecordsUiKey.Key }
@@ -39,8 +39,8 @@
   description: View a Borg info
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/robotics_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/robotics_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -18
     event: !type:ToggleIntrinsicUIEvent { key: enum.RoboticsConsoleUiKey.Key }
@@ -51,8 +51,8 @@
   description: View a Station Map
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/Station_map..png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/Station_map..png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -17
     event: !type:ToggleIntrinsicUIEvent { key: enum.StationMapUiKey.Key }
@@ -63,8 +63,8 @@
   description: View a Power of Station
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/Power_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/Power_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -16
     event: !type:ToggleIntrinsicUIEvent { key: enum.PowerMonitoringConsoleUiKey.Key }
@@ -75,8 +75,8 @@
   description: View a Alerts on Station
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/Alert_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/Alert_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -15
     event: !type:ToggleIntrinsicUIEvent { key: enum.AtmosAlertsComputerUiKey.Key }
@@ -87,8 +87,8 @@
   description: View a Mass Scanner Interface.
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
+    icon: Interface/Actions/actions_ai.rsi/mass_scanner.png # Off-sprite
+    iconOn: Interface/Actions/actions_ai.rsi/mass_scanner.png # Off-sprite
     keywords: [ "AI", "console", "interface" ]
     priority: -14
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
@@ -99,8 +99,8 @@
   description: View a Cargo Ordering Interface.
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/cargo.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/cargo.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/cargo_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/cargo_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -13
     event: !type:ToggleIntrinsicUIEvent { key: enum.CargoConsoleUiKey.Orders }
@@ -111,8 +111,8 @@
   description: View a RaD interface
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/RaD_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/RaD_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -12
     event: !type:ToggleIntrinsicUIEvent { key: enum.ResearchConsoleUiKey.Key }
@@ -123,8 +123,8 @@
   description: View a Solar Control Interface.
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/solar.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/solar.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/solar_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/solar_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -11
     event: !type:ToggleIntrinsicUIEvent { key: enum.SolarControlConsoleUiKey.Key }
@@ -135,8 +135,8 @@
   description: View a SM interface
   components:
   - type: InstantAction
-    icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
+    icon: SS220/Interface/Actions/actions_ai.rsi/SM_console.png # SS220-Resprite
+    iconOn: SS220/Interface/Actions/actions_ai.rsi/SM_console.png # SS220-Resprite
     keywords: [ "AI", "console", "interface" ]
     priority: -10
     event: !type:ToggleIntrinsicUIEvent { key: enum.SuperMatterObserverUiKey.Key }    

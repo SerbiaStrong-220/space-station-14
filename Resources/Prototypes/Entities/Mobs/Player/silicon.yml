@@ -87,10 +87,12 @@
         toggleAction: ActionAiShowSolar
       enum.CargoConsoleUiKey.Orders:
         toggleAction: ActionAiShowCargo
+#SS220 Station Ai Actions end
 #SS220 Station Ai Actions start
       # enum.GeneralStationRecordConsoleKey.Key:
       #  toggleAction: ActionAiShowStationRecords
 #SS220 Station Ai Actions end
+#SS220 Station Ai Actions start
       enum.CriminalRecordsUiKey.Key:
         toggleAction: ActionAiShowCriminalRecords
       enum.PowerMonitoringConsoleUiKey.Key:
@@ -117,18 +119,17 @@
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
-  - type: SuperMatterObserver
+  - type: SuperMatterObserver #SS220_TODO: Добавить отоброжение СМа Для ИИ
   - type: SuperMatterObserverReceiver
   - type: ApcPowerReceiver
     needsPower: false
     powerLoad: 0
-  # - type: RoboticsConsole # TODO:Добавить множественный приём DeviceNetwork
+  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor 
     transmitFrequencyId: ShuttleTimer
-  #SS220 Station Ai Actions start
   - type: StationMap #SS220 Station Ai Actions end
   - type: RadarConsole
     followEntity: false
