@@ -17,7 +17,7 @@
   components:
   - type: InstantAction
     icon: Interface/Actions/actions_ai.rsi/comms_console.png #Off sprite
-    iconOn: Corvax/Interface/AdminActions/comms_console.png # Off-sprite
+    iconOn: Interface/Actions/actions_ai.rsi/comms_console.png # Off-sprite
     keywords: [ "AI", "console", "interface" ]
     priority: -20
     event: !type:ToggleIntrinsicUIEvent { key: enum.CommunicationsConsoleUiKey.Key }

@@ -8,22 +8,22 @@
   },
   "states": [
     {
-      "name": "Alert_console"
+      "name": "alert_console"
     },
     {
-      "name": "Power_console"
+      "name": "power_console"
     },
     {
-      "name": "RaD_console"
+      "name": "rad_console"
     },
     {
-      "name": "Robotics_console"
+      "name": "robotics_console"
     },
     {
-      "name": "SM_console"
+      "name": "sm_console"
     },
     {
-      "name": "Station_map"
+      "name": "station_map"
     },
     {
       "name": "cargo_console"
