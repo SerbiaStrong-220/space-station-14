@@ -25,7 +25,7 @@
   result: ThrusterShuntingMachineCircuitboard
   materials:
     Steel: 50
-    Glass: 50
+    Glass: 500
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
@@ -33,7 +33,7 @@
   result: ThrusterBigLeftMachineCircuitboard
   materials:
     Steel: 50
-    Glass: 150
+    Glass: 500
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
@@ -41,7 +41,7 @@
   result: ThrusterBigRightMachineCircuitboard
   materials:
     Steel: 50
-    Glass: 150
+    Glass: 500
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
