@@ -1279,6 +1279,14 @@
     heldPrefix: orb
   - type: TileFrictionModifier
     modifier: 0.001
+  # ss220 PonderingOrb speak on use begin
+  - type: SpeakOnUse
+    pack: PonderingOrbPhrases
+  - type: UseDelay
+    delay: 10
+  - type: Speech
+    speechSounds: Pai
+  # ss220 PonderingOrb speak on use end
 
 - type: entity
   parent: BaseItem
