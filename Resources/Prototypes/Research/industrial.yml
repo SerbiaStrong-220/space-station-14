@@ -139,7 +139,7 @@
   - ThrusterShuntingMachineCircuitboard
   - ThrusterBigLeftMachineCircuitboard
   - ThrusterBigRightMachineCircuitboard
-  - ThrusterBigLeftMachineCircuitboard
+  - ThrusterBigCenterMachineCircuitboard
   # SS220 engineering-update-thruster end
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
