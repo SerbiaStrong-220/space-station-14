@@ -113,6 +113,8 @@
   id: MobEN
   description: Corgi made of metal with a heart of gold, because a heart of gold is a great guide
   components:
+  - type: BorgSwitchableType
+    isNeedToSwitch: false
   - type: ContainerFill
     containers:
       borg_brain:

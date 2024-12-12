@@ -258,3 +258,18 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+#HOCebent
+- type: entity
+  id: BulletUnitarySlug
+  name: unitary slug
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 120
