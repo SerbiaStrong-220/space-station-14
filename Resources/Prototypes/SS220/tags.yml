@@ -135,10 +135,14 @@
 - type: Tag
   id: SpiderLittle
 
- #Add Tourniquet to medic's belt 
+ #Add Tourniquet to medic's belt
 - type: Tag
   id: Tourniquet
 
 # SS220 Add lying action
 - type: Tag
   id: Bed
+
+#HOCebent
+- type: Tag
+  id: CartridgeUnitary
