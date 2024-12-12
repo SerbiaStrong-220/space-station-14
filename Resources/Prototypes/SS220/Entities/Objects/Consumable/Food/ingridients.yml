@@ -1,0 +1,31 @@
+- type: entity
+  name: карамелька
+  parent: FoodBakingBase
+  id: CaramelFood
+  description: Съешь меня
+  components:
+  - type: Sprite
+    state: caramel
+
+- type: entity
+  name: Заготовка карамельной трости
+  parent: FoodBakingBase
+  id: caramel_based
+  description: Залей меня
+  components:
+  - type: Sprite
+    state: caramel_base
+
+- type: constructionGraph
+  id: caramel_base
+  start: start
+  graph:
+  - node: start
+    entity: Caramel
+    edges:
+    - to: flat
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: flat
+    entity: caramel_based

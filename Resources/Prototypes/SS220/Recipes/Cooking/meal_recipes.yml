@@ -169,3 +169,13 @@
     FoodCheeseSlice: 1
     FoodTomato: 1
 #SS220 Spicy UPD end
+
+#SS220 caramel candy start
+- type: microwaveMealRecipe
+  id: Caramel
+  name: карамелька
+  result: CaramelFood
+  time: 15
+  reagents:
+    Sugar: 10
+    Water: 10
