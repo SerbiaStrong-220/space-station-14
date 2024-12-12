@@ -73,7 +73,7 @@
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief physician. He emphasizes the nature of a person and his beauty of charisma...» There is nothing further on the unopened label.
-  suffix: For playing time
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/cmo_corp.rsi
