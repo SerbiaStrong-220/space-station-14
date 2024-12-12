@@ -1378,6 +1378,8 @@
   - ChiefMedicalOfficerJumpskirt
   - ChiefMedicalOfficerTurtleneckJumpsuit
   - ChiefMedicalOfficerTurtleneckJumpskirt
+  - CMOCorpJumpsuit #ss220
+  - CMOCorpJumpskirt #ss220
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing

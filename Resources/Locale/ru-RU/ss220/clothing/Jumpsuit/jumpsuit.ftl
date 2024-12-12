@@ -63,3 +63,6 @@ ent-ClothingUniformJumpsuitAssociateProfessor = форма доцента
 ent-ClothingUniformJumpsuitProfessor = форма профессора
     .desc = А теперь рубрика "эксперимент"!
     .suffix = За время в игре
+ent-ClothingUniformJumpsuitCMOCorporate = корпоративный комбинезон главного врача
+    .desc = "Красивый, стильный костюм настоящего главврача. Он подчёркивает натуру человека и его красоту харизмы..." Дальше на неоткрываемой этикетке ничего нет.
+    .suffix = За время в игре

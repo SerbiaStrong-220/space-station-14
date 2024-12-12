@@ -8,6 +8,17 @@
       role: JobChiefMedicalOfficer
       time: 72000 #20 hrs
 
+#ss220 start
+- type: loadoutEffectGroup
+  id: CMOCorporate
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChiefMedicalOfficer
+      time: 36000 # 10 hrs
+#ss220 end
+
 # Jumpsuit
 - type: loadout
   id: ChiefMedicalOfficerJumpsuit
@@ -28,6 +39,24 @@
   id: ChiefMedicalOfficerTurtleneckJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtCMOTurtle
+
+#ss220 CMOCorporate start
+- type: loadout
+  id: CMOCorpJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+      jumpsuit: ClothingUniformJumpsuitCMOCorporate
+
+- type: loadout
+  id: CMOCorpJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtCMOCorporate
+#ss220 CMOCorporate end
 
 # Head
 - type: loadout
