@@ -71,7 +71,6 @@ entities:
       name: АСН "Севастополь"
     - type: Transform
       pos: -0.07078934,-0.6836653
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -31002,8 +31001,6 @@ entities:
       pos: -8.5,16.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 119
   - uid: 3992
