@@ -757,26 +757,24 @@ entities:
   - uid: 774
     components:
     - type: Transform
-      pos: -0.06524539,-3.2504516
+      pos: 1.1016265,-3.1910849
       parent: 1
   - uid: 786
     components:
     - type: Transform
-      pos: -0.009690762,-3.542118
+      pos: 1.1163843,-3.574566
       parent: 1
 - proto: BoxBodyBag
   entities:
   - uid: 36
     components:
     - type: Transform
-      rot: -6.283185307179586 rad
-      pos: -0.36455703,3.520905
+      pos: -0.3265519,3.549932
       parent: 1
   - uid: 37
     components:
     - type: Transform
-      rot: -6.283185307179586 rad
-      pos: -0.66745687,3.833405
+      pos: -0.48888516,3.8154192
       parent: 1
 - proto: BoxInflatable
   entities:
@@ -798,14 +796,14 @@ entities:
   - uid: 40
     components:
     - type: Transform
-      pos: -1.2894565,3.4458716
+      pos: -1.5344081,3.4466872
       parent: 1
 - proto: BoxSyringe
   entities:
   - uid: 41
     components:
     - type: Transform
-      pos: -0.5625,-3.2887948
+      pos: -1.1802262,3.771171
       parent: 1
 - proto: CableApcExtension
   entities:
@@ -2129,6 +2127,13 @@ entities:
     components:
     - type: Transform
       pos: -0.5,-1.5
+      parent: 1
+- proto: ChemistryHotplate
+  entities:
+  - uid: 787
+    components:
+    - type: Transform
+      pos: -0.5,-3.5
       parent: 1
 - proto: ChemMaster
   entities:
@@ -3707,7 +3712,7 @@ entities:
   - uid: 516
     components:
     - type: Transform
-      pos: -0.5706657,-3.4914906
+      pos: -0.91458976,3.4319377
       parent: 1
 - proto: HighSecCentralCommandLocked
   entities:

@@ -110,7 +110,7 @@
     layoutId: AirlockCommand
 
 - type: entity
-  parent: Airlock
+  parent: AirlockCentcomm
   id: AirlockCentcommLocked
   suffix: ЦК, Закрыто, Общий
   components:
@@ -299,3 +299,15 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLocked ]
+
+# Maintenance
+- type: entity
+  parent: AirlockMaint
+  id: AirlockMaintCentcommLocked
+  suffix: Centcomm, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
+  - type: Wires
+    layoutId: AirlockCommand
