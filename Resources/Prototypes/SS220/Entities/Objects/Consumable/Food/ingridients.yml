@@ -11,6 +11,15 @@
     graph: CandyBased
     node: start
     defaultTarget: caramel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
 
 - type: entity
   name: заготовка карамельной трости
@@ -38,12 +47,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 5
+        maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4
+          Quantity: 8
         - ReagentId: Vitamin
-          Quantity: 1
+          Quantity: 2
   - type: MeleeWeapon
     wideAnimationRotation: 0
     damage:
@@ -66,12 +75,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 5
+        maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4
+          Quantity: 8
         - ReagentId: Vitamin
-          Quantity: 1
+          Quantity: 2
   - type: MeleeWeapon
     wideAnimationRotation: 0
     damage:
@@ -94,12 +103,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 5
+        maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4
+          Quantity: 8
         - ReagentId: Vitamin
-          Quantity: 1
+          Quantity: 2
   - type: MeleeWeapon
     wideAnimationRotation: 0
     damage:
@@ -122,9 +131,9 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 10
+        maxVol: 20
         reagents:
         - ReagentId: Nutriment
-          Quantity: 8
+          Quantity: 16
         - ReagentId: Vitamin
-          Quantity: 2
+          Quantity: 4
