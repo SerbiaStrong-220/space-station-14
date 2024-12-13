@@ -2,30 +2,129 @@
   name: карамелька
   parent: FoodBakingBase
   id: CaramelFood
-  description: Съешь меня
+  description: Сладкая, хрустящая, вкусная, ломающая зубы
   components:
   - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
     state: caramel
+  - type: Construction
+    graph: CandyBased
+    node: start
+    defaultTarget: caramel
 
 - type: entity
-  name: Заготовка карамельной трости
+  name: заготовка карамельной трости
   parent: FoodBakingBase
-  id: caramel_based
-  description: Залей меня
+  id: CaramelBasedFood
+  description: Всё будет, но не сразу
   components:
   - type: Sprite
-    state: caramel_base
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-base
+  - type: Construction
+    graph: CandyBased
+    node: caramel
+  - type: SolutionContainerManager
 
-- type: constructionGraph
-  id: caramel_base
-  start: start
-  graph:
-  - node: start
-    entity: Caramel
-    edges:
-    - to: flat
-      steps:
-      - tool: Rolling
-        doAfter: 1
-  - node: flat
-    entity: caramel_based
+- type: entity
+  name: красная карамельная трость
+  parent: FoodBakingBase
+  id: RedCaramelCaneFood
+  description: Точно не выдержит ваш вес
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-red
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Piercing: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  name: зелёная карамельная трость
+  parent: FoodBakingBase
+  id: GreenCaramelCaneFood
+  description: Даже не пытайте опереться на неё
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-green
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Piercing: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  name: красно-зелёная карамельная трость
+  parent: FoodBakingBase
+  id: CaramelCaneGreenRedFood
+  description: Трость, украшенная цветными полосками и узорами.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-green-red
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Piercing: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  name: двойная карамельная трость
+  parent: FoodBakingBase
+  id: DoubleCaramelCaneFood
+  description: Устройте дуель на тростях!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: double-caramel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
