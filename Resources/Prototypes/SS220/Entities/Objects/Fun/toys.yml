@@ -292,7 +292,7 @@
 
 - type: entity
   name: energy shield
-  parent: [ BaseItem ]
+  parent: BaseItem
   id: EnergyShieldToy
   description: New Sandy-Cat toy! Become a winner in every sword fight!
   suffix: Toy
