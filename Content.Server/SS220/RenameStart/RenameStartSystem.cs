@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 using Content.Server.Administration;
 using Content.Server.Administration.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Robust.Shared.Player;
 
 namespace Content.Server.SS220.RenameStart;
@@ -20,6 +22,7 @@ public sealed class RenameStartSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RenameStartComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<RenameStartComponent, ComponentShutdown>(OnRemoveComponent);
     }
 
     private void OnPlayerAttached(Entity<RenameStartComponent> ent, ref PlayerAttachedEvent args)
@@ -32,10 +35,16 @@ public sealed class RenameStartSystem : EntitySystem
     private void ChangeName(EntityUid entOwner)
     {
         if(!TryComp<ActorComponent>(entOwner, out var actorComp))
+        {
+            RemComp<RenameStartComponent>(entOwner);
             return;
+        }
 
         if(!TryComp<RenameStartComponent>(entOwner, out var renameComp))
+        {
+            RemComp<RenameStartComponent>(entOwner);
             return;
+        }
 
         _quickDialog.OpenDialog(actorComp.PlayerSession,
             Loc.GetString("rename-window-title"),
@@ -43,25 +52,39 @@ public sealed class RenameStartSystem : EntitySystem
             Loc.GetString("rename-window-promt"),
             (LongString newName) =>
             {
-                if (newName.String.Length <= renameComp.MinChar ||
-                    newName.String.Length >= renameComp.MaxChar ||
+                if (newName.String.Length < renameComp.MinChar ||
+                    newName.String.Length > renameComp.MaxChar ||
                     Expressions.IsMatch(newName.String))
                 {
                     ChangeName(entOwner);
                     return;
                 }
 
+                if(!TryComp<MindContainerComponent>(entOwner, out var mindContComp))
+                {
+                    RemComp<RenameStartComponent>(entOwner);
+                    return;
+                }
+
+                if (!TryComp<MindComponent>(mindContComp.Mind, out var mindComp))
+                {
+                    RemComp<RenameStartComponent>(entOwner);
+                    return;
+                }
+
+                mindComp.CharacterName = newName.String;
+
                 _meta.SetEntityName(entOwner, newName);
 
-                RemComp<AdminFrozenComponent>(entOwner);
-
                 RemComp<RenameStartComponent>(entOwner);
-
             }, () =>
             {
-                RemComp<AdminFrozenComponent>(entOwner);
-
                 RemComp<RenameStartComponent>(entOwner);
             });
+    }
+
+    private void OnRemoveComponent(Entity<RenameStartComponent> ent, ref ComponentShutdown args)
+    {
+        RemComp<AdminFrozenComponent>(ent.Owner);
     }
 }

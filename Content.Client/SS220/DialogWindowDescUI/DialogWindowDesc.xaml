@@ -1,6 +1,8 @@
 <!--© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt-->
-<DefaultWindow xmlns="https://spacestation14.io"
-               MinSize="200 200">
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    MinSize="200 200">
     <BoxContainer Orientation="Vertical" Margin="8">
         <BoxContainer Name="Prompts" Orientation="Vertical"/>
         <BoxContainer Orientation="Vertical"
@@ -17,4 +19,4 @@
             </Button>
         </BoxContainer>
     </BoxContainer>
-</DefaultWindow>
+</controls:FancyWindow>
