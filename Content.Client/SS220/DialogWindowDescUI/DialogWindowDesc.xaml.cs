@@ -63,6 +63,8 @@ public sealed partial class DialogWindowDesc : FancyWindow
                 OnCancelled?.Invoke();
         };
 
+        _promptLines[0].Item2.GrabKeyboardFocus();
+
         OpenCentered();
     }
 
