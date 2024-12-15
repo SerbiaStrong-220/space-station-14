@@ -46,6 +46,7 @@
   accessGroups:
   - AllAccess
   access:
+  - CentralCommand
   - CentralCommandERT
   - CentralCommandGSN
   - CentralCommandCBURN
