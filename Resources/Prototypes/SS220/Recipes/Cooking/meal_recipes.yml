@@ -173,7 +173,7 @@
 #SS220 caramel cane start
 - type: microwaveMealRecipe
   id: Caramel
-  name: карамелька
+  name: caramelka
   result: CaramelFood
   time: 15
   reagents:
@@ -182,7 +182,7 @@
 
 - type: microwaveMealRecipe
   id: CaramelRed
-  name: карамелька красная
+  name: red caramelka
   result: RedCaramelCaneFood
   time: 15
   reagents:
@@ -192,7 +192,7 @@
 
 - type: microwaveMealRecipe
   id: CaramelGreen
-  name: карамелька зелёная
+  name: green caramelka
   result: GreenCaramelCaneFood
   time: 15
   reagents:
@@ -202,7 +202,7 @@
 
 - type: microwaveMealRecipe
   id: CaramelGreenRed
-  name: карамелька зелёная
+  name: greenred caramelka
   result: CaramelCaneGreenRedFood
   time: 15
   reagents:
@@ -213,7 +213,7 @@
 
 - type: microwaveMealRecipe
   id: double Caramel
-  name: двойная карамелька
+  name: double caramelka
   result: DoubleCaramelCaneFood
   time: 20
   reagents:

@@ -1,8 +1,8 @@
 - type: entity
-  name: карамелька
+  name: caramel
   parent: FoodBakingBase
   id: CaramelFood
-  description: Сладкая, хрустящая, вкусная, ломающая зубы
+  description: Mmm... yummy!
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel.rsi/
@@ -22,10 +22,10 @@
           Quantity: 1
 
 - type: entity
-  name: заготовка карамельной трости
+  name: preparation of a caramel cane
   parent: FoodBakingBase
   id: CaramelBasedFood
-  description: Всё будет, но не сразу
+  description: Everything will happen, but not immediately
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel.rsi/
@@ -36,10 +36,10 @@
   - type: SolutionContainerManager
 
 - type: entity
-  name: красная карамельная трость
+  name: red caramel cane
   parent: FoodBakingBase
   id: RedCaramelCaneFood
-  description: Точно не выдержит ваш вес
+  description: It definitely won't hold your weight
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel.rsi/
@@ -64,10 +64,10 @@
       path: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
-  name: зелёная карамельная трость
+  name: green caramel cane
   parent: FoodBakingBase
   id: GreenCaramelCaneFood
-  description: Даже не пытайте опереться на неё
+  description: Don't even try to lean on it
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel.rsi/
@@ -92,10 +92,10 @@
       path: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
-  name: красно-зелёная карамельная трость
+  name: red and green caramel cane
   parent: FoodBakingBase
   id: CaramelCaneGreenRedFood
-  description: Трость, украшенная цветными полосками и узорами.
+  description: A cane decorated with colored stripes and patterns.
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel.rsi/
@@ -120,10 +120,10 @@
       path: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
-  name: двойная карамельная трость
+  name: double caramel cane
   parent: FoodBakingBase
   id: DoubleCaramelCaneFood
-  description: Устройте дуель на тростях!
+  description: Arrange a duel!
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel.rsi/
