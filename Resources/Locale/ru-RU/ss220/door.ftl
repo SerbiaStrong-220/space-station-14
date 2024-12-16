@@ -69,3 +69,7 @@ ent-AirlockShuttleUssp = стыковочный шлюз СССП
 ent-AirlockShuttleUsspLocked = { ent-AirlockShuttleUssp }
     .desc = { ent-AirlockShuttle.desc }
     .suffix = СССП, Стыковочный, Закрыто
+
+ent-AirlockMaintCentcommLocked = { ent-AirlockMaint }
+    .desc = { ent-AirlockMaint.desc }
+    .suffix = ЦК, Закрыто
