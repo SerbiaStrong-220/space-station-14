@@ -118,7 +118,7 @@ public sealed class TelepathySystem : EntitySystem
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
-            if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype)
+            if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
                 SendMessageToChat(receiverUid, message, senderUid, channelParameters);
         }
     }
