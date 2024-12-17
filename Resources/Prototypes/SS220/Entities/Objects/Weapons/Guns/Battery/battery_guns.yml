@@ -24,14 +24,16 @@
     - proto: RedLightLaser
       name: firemode-name-laser
       fireCost: 24.5
-      fireRate: 5
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+        fireRate: 5
       magState: laser-mag
     - proto: PulseEnhanced
       name: firemode-name-enhanced
       fireCost: 62.5
-      fireRate: 1.5
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+        fireRate: 1.5
       magState: enhanced-mag
   - type: ProjectileBatteryAmmoProvider
     proto: RedLightLaser
