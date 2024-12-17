@@ -133,6 +133,7 @@
 - type: loadoutGroup
   id: LawyerOuterclothing
   name: loadout-group-lawyer-outerclothing
+  minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
   # Адвокат (Конец)

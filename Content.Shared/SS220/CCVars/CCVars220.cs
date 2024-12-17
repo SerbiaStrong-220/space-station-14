@@ -91,4 +91,22 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<bool> AutoMapVote =
         CVarDef.Create("vote.auto_map_vote", false, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Is discord account link requiere.
+    /// </summary>
+    public static readonly CVarDef<bool> DiscordLinkRequired =
+        CVarDef.Create("discord_auth.link_requierd", false, CVar.SERVERONLY);
+
+    /// <summary>
+    /// URL for check account link.
+    /// </summary>
+    public static readonly CVarDef<string> DiscordLinkApiUrl =
+        CVarDef.Create("discord_auth.link_url", "", CVar.SERVERONLY);
+
+    /// <summary>
+    /// Key of account check service.
+    /// </summary>
+    public static readonly CVarDef<string> DiscordLinkApiKey =
+        CVarDef.Create("discord_auth.link_key", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 }

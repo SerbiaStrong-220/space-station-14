@@ -15,7 +15,7 @@ jobs:
             const issueBody = context.payload.issue.body;
             const options = {
               'Frankenstein': {label: 'MI: Frankenstein', assignee: 'UrPrice' },
-              'Axioma': {label: 'MI: Axioma', assignee: 'UrPrice'},
+              'Axioma': {label: 'MI: Axioma', assignee: 'NightmareStalker'},
               'Donuts': {label: 'MI: Donuts', assignee: 'spo9k'},
               'Eclipse': {label: 'MI: Eclipse', assignee: 'AliceValestray'},
               'Astro': {label: 'MI: Astro', assignee: 'UrPrice'},
@@ -41,8 +41,11 @@ jobs:
                 issue_number: context.issue.number,
                 assignees: [selectedOption.assignee]
               }); // added assignee
+            } else {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: ["Status: Needs Labels"]
+              }); // add "Status: Needs Labels"
             }
-      - name: Remove "need label" label
-        uses: actions-ecosystem/action-remove-labels@v1
-        with:
-          labels: "Status: Needs Labels"
