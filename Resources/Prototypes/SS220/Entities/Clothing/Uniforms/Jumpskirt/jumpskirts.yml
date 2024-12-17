@@ -138,7 +138,7 @@
   # Интерн
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtIntern
   name: intern's jumpskirt
   description: Suit for female medical interns.
@@ -205,7 +205,7 @@
   # Ассистент
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtTechAssistant
   name: technical assistant's jumpskirt
   description: Suit for female technical assistants.
@@ -245,7 +245,7 @@
 
   #Квартирмейстер
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtWarehouseman
   name: the overalls of the warehouse manager
   description: Practical, comfortable, movement-free and, most importantly, stylish jumpskirt. You have bad memories of your former boss with him.
@@ -260,7 +260,7 @@
 
 # Ассистент
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBachelor
   name: bachelor's graduation uniform
   description: In vain students wait for a friend in the pub, Science is not without sacrifice.
@@ -272,7 +272,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtResearchAssistant
   name: research assistant's jumpskirt
   description: Suit for female research assistants.
@@ -284,7 +284,7 @@
 
 # Ученый
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtPhdCandidate
   name: phd candidate uniform
   description: Students, prepare for a lecture.
@@ -297,7 +297,7 @@
 
 # Ведущий учёный
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtAssociateProfessor
   name: assistant professor's uniform
   description:
@@ -310,7 +310,7 @@
 
 # Научрук
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtProfessor
   name: professor's uniform
   description:
