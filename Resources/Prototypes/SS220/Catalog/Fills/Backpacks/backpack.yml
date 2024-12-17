@@ -151,9 +151,9 @@
       - id: WeaponBlasterKRS
       - id: BlasterPowerCellAlt
         amount: 5
-      - id: WeaponSynergisticEnergyGun
       - id: FlashlightSeclite
       - id: MedkitCombatFilled
+      - id: BlueShieldGasMask
 
 # Svarshik's toys
 - type: entity

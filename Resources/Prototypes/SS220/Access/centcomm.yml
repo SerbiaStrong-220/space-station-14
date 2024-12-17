@@ -10,7 +10,7 @@
 
 - type: accessLevel
   id: CentralCommandGSN
-  name: id-card-access-level-central-command-gsn
+  name: id-card-access-level-central-command-bs-operative
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel

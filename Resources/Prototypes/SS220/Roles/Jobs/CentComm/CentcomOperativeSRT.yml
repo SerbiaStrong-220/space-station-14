@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Оперативник Группы Специального Назначения
+  name: Оперативник "Синий Щит"
   id: CentCommOperativeSRT
   components:
     - type: Sprite
@@ -34,7 +34,7 @@
 
 - type: job
   id: CentcomOperativeSRT
-  name: job-name-cc-srt-operative
+  name: job-name-cc-bs-operative
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomOperativeSRTGear
@@ -53,14 +53,14 @@
   id: CentcomOperativeSRTGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
-    shoes: ClothingShoesSwat
-    head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesBlueShield
+    shoes: ClothingShoesBootsBlueShieldJackFilled
+    head: ClothingHeadBeretBlueshield
+    eyes: ClothingEyesBlueShieldGlasses
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterSRTCoat
     id: CentcomOperativeSRTPDA
     ears: ClothingHeadsetAltCentComm
-    pocket1: MagazinePistolSubMachineGun
-    pocket2: MagazinePistolSubMachineGun
+    pocket1: WeaponSynergisticEnergyGun
+    pocket2: TelescopicShield
     belt: ClothingBeltWebbingSRTFilled
     back: ClothingBackSatchelOperativeBSFilled
