@@ -39,7 +39,6 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
 
     private string _apiUrl = string.Empty;
     private bool _isDiscordAuthEnabled = false;
-    private string _apiKey = string.Empty;
 
     private string _linkApiUrl = string.Empty;
     private bool _isDiscordLinkRequired = false;
@@ -59,19 +58,15 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
 
         _cfg.OnValueChanged(CCCVars.DiscordAuthApiUrl, v => _apiUrl = v, true);
         _cfg.OnValueChanged(CCCVars.DiscordAuthEnabled, v => _isDiscordAuthEnabled = v, true);
-        _cfg.OnValueChanged(CCCVars.DiscordAuthApiKey, v => _apiKey = v,
-        //{
-        //    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", v);
-        //},
+        _cfg.OnValueChanged(CCCVars.DiscordAuthApiKey, v =>
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", v);
+        },
         true);
 
         _cfg.OnValueChanged(CCVars220.DiscordLinkApiUrl, v => _linkApiUrl = v, true);
         _cfg.OnValueChanged(CCVars220.DiscordLinkRequired, v => _isDiscordLinkRequired = v, true);
-        _cfg.OnValueChanged(CCVars220.DiscordLinkApiKey, v => _linkApiKey = v,
-        //{
-        //    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", v);
-        //},
-        true);
+        _cfg.OnValueChanged(CCVars220.DiscordLinkApiKey, v => _linkApiKey = v, true);
 
         _statusRefreshTimer = new Timer(async _ =>
             {
