@@ -135,6 +135,19 @@
 
 # Medical
 
+  # Интерн
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtIntern
+  name: intern's jumpskirt
+  description: Suit for female medical interns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
+
   # Парамед
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -188,6 +201,19 @@
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
+
+  # Ассистент
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtTechAssistant
+  name: technical assistant's jumpskirt
+  description: Suit for female technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
 
 # Синдикат
 
@@ -244,6 +270,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtResearchAssistant
+  name: research assistant's jumpskirt
+  description: Suit for female research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
 
 # Ученый
 - type: entity
