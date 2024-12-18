@@ -30,3 +30,25 @@ uplink-thermal-visor-implanter-desc = Новейшая разработка си
 # silent shoes
 hidden-desc-SilentShoes-syndicate = [color=#e31735]Разработанные специально для шпионских миссий Синдиката, эти ботинки совершенно бесшумны на любых поверхностях[/color]
 hidden-desc-SilentShoes-research = [color=#D381C9]Вы можете различить скрытый слой поглощающего материала, полностью глушащий любые звуки шагов[/color]
+
+# Svarshik's toy guns!
+hidden-desc-toy-weapons-syndicate = [color=#e31735]Оно сделано из бананиума.[/color]
+hidden-desc-toy-weapons-clown = [color=#cc0099]Устройте самый смешной штурм станции с этим оружием, заряженным безобидными пистонами! ХОНК![/color]
+
+hidden-desc-toy-weapons-magazine-syndicate = [color=#e31735]Очень хорошая реплика магазина. Скорее всего, он заряжен пистонами или поролоном и не может быть заряжен в настоящее оружие.[/color]
+hidden-desc-toy-weapons-magazine-clown = [color=#cc0099]Одобренный Donk Co. стандартный магазин. Мультикалиберный! Может быть заряжен поролоном и пистонами одновременно![/color]
+
+hidden-desc-toy-weapons-ammo-syndicate = [color=#e31735]Это безобидный нелетальный патрон с бумажной пулей.[/color]
+hidden-desc-toy-weapons-ammo-clown = [color=#cc0099]Почти как настоящий, но на деле заряжен солью.[/color]
+
+hidden-desc-toy-weapons-explosive-syndicate = [color=#e31735]Создает весьма реалистичный, но абсолютно безобидный взрыв для создания суматохи.[/color]
+hidden-desc-toy-weapons-explosive-clown = [color=#cc0099]Взрывчатка, набитая бананиумом и конфетти, очень реалистично взрывается, но никому не вредит![/color]
+
+hidden-desc-toy-weapons-lubebomb-syndicate = [color=#e31735]Особая граната, начинённая смазкой, изготовленная специально для подлых диверсий.[/color]
+hidden-desc-toy-weapons-lubebomb-clown = [color=#cc0099]Граната, до отказа заполненная смазкой! Веселье для всей станции![/color]
+
+hidden-desc-toy-shield-syndicate = [color=#e31735]Это пластик, совершенно не защищающий в бою.[/color]
+hidden-desc-toy-shield-clown = [color=#cc0099]Устройте баталию на игрушечных мечах с этиим щитом! ХОНК![/color]
+
+hidden-desc-toy-armour-syndicate = [color=#e31735]Это тканевая реплика настоящей брони, не предоставляющая никакой защиты.[/color]
+hidden-desc-toy-armour-clown = [color=#cc0099]Выглядит 1 в 1 как настоящий! Но на самом деле - просто тряпка![/color]

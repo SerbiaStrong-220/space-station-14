@@ -539,6 +539,12 @@
       - PowerCageRechargerCircuitboard
       - EmitterCircuitboard
       - ThrusterMachineCircuitboard
+      # SS220 engineering-update-thruster begin
+      - ThrusterShuntingMachineCircuitboard
+      - ThrusterBigLeftMachineCircuitboard
+      - ThrusterBigRightMachineCircuitboard
+      - ThrusterBigCenterMachineCircuitboard
+      # SS220 engineering-update-thruster end
       - GyroscopeMachineCircuitboard
       - MiniGravityGeneratorCircuitboard
       - Thermoelectricgenerator #ss220 thermoelectric generator board
