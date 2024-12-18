@@ -9,6 +9,15 @@
   - type: Sprite
     state: icon
   - type: AllowSuitStorage #220 OuterClothing fix
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+            - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true
