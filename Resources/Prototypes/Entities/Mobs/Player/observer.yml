@@ -72,7 +72,6 @@
     globalReceive: true
   # SS220 telepathy begin
   - type: Telepathy
-    telepathyChannelPrototype: TelepathyChannelSpaceDragon
     canSend: false
     receiveAllChannels: true
   # SS220 telepathy end
