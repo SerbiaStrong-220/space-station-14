@@ -141,6 +141,20 @@
         - id: EmergencyMedipenDQ
           amount: 6
 
+- type: entity
+  parent: ClothingBackpackBlueShieldHight
+  id: ClothingBackSatchelOperativeBSFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: WeaponBlasterKRS
+      - id: BlasterPowerCellAlt
+        amount: 5
+      - id: FlashlightSeclite
+      - id: MedkitCombatFilled
+      - id: BlueShieldGasMask
+
 # Svarshik's toys
 - type: entity
   parent: ClothingBackpackSatchel

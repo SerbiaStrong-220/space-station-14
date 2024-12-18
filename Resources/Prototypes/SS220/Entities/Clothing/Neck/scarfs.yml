@@ -14,7 +14,7 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckScarfCentcomGSN
-  name: шарф ГСН
+  name: шарф перативника "Синий Щит"
   description: Черные тона позволяют заглянуть в самые дальние уголки души обладателя данного шарфа. Не стоит засматриваться, лучше уйти.
   components:
     - type: Sprite
