@@ -44,28 +44,93 @@
         type: RadarConsoleBoundUserInterface
       enum.CrewMonitoringUIKey.Key:
         type: CrewMonitoringBoundUserInterface
-      enum.GeneralStationRecordConsoleKey.Key:
-        type: GeneralStationRecordConsoleBoundUserInterface
+#SS220 Station Ai Actions start
+#      enum.GeneralStationRecordConsoleKey.Key:
+#        type: GeneralStationRecordConsoleBoundUserInterface
+#SS220 Station Ai Actions end
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
       enum.CommunicationsConsoleUiKey.Key:
         type: CommunicationsConsoleBoundUserInterface
+      #SS220 Station Ai Actions start
+      enum.SolarControlConsoleUiKey.Key:
+        type: SolarControlConsoleBoundUserInterface
+      enum.CargoConsoleUiKey.Orders:
+        type: CargoOrderConsoleBoundUserInterface
+      enum.CriminalRecordsUiKey.Key:
+        type: CriminalRecordsBoundUserInterface
+      enum.PowerMonitoringConsoleUiKey.Key:
+        type: PowerMonitoringConsoleBoundUserInterface
+      enum.AtmosAlertsComputerUiKey.Key:
+        type: AtmosAlertsComputerBoundUserInterface
+      enum.ResearchConsoleUiKey.Key:
+        type: ResearchConsoleBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+      enum.SuperMatterObserverUiKey.Key:
+        type: SuperMatterObserverBUI
+      enum.RoboticsConsoleUiKey.Key:
+        type: RoboticsConsoleBoundUserInterface
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+      #SS220 Station Ai Actions end
   - type: IntrinsicUI
     uis:
+    #SS220 Station Ai Actions start
       enum.RadarConsoleUiKey.Key:
-        toggleAction: ActionAGhostShowRadar
+        toggleAction: ActionAiShowRadar
       enum.CrewMonitoringUIKey.Key:
-        toggleAction: ActionAGhostShowCrewMonitoring
-      enum.GeneralStationRecordConsoleKey.Key:
-        toggleAction: ActionAGhostShowStationRecords
+        toggleAction: ActionAiShowCrewMonitoring
       enum.CommunicationsConsoleUiKey.Key:
-        toggleAction: ActionAGhostShowCommunications
+        toggleAction: ActionAiShowCommunications
+      enum.SolarControlConsoleUiKey.Key:
+        toggleAction: ActionAiShowSolar
+      enum.CargoConsoleUiKey.Orders:
+        toggleAction: ActionAiShowCargo
+#SS220 Station Ai Actions end
+#SS220 Station Ai Actions start
+      # enum.GeneralStationRecordConsoleKey.Key:
+      #  toggleAction: ActionAiShowStationRecords
+#SS220 Station Ai Actions end
+#SS220 Station Ai Actions start
+      enum.CriminalRecordsUiKey.Key:
+        toggleAction: ActionAiShowCriminalRecords
+      enum.PowerMonitoringConsoleUiKey.Key:
+        toggleAction: ActionAiShowPowerMonitoring
+      enum.AtmosAlertsComputerUiKey.Key:
+        toggleAction: ActionAiShowAlertInterface
+      enum.ResearchConsoleUiKey.Key:
+        toggleAction: ActionAiShowResearchAndDevelopmentInterface
+      enum.SuperMatterObserverUiKey.Key:
+        toggleAction: ActionAiShowSMInterface
+      enum.RoboticsConsoleUiKey.Key:
+        toggleAction: ActionAiShowRoboticsConsole
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionAiStationMapConsole
+  #SS220 Station Ai Actions end
   - type: CrewMonitoringConsole
-  - type: GeneralStationRecordConsole
+  #- type: GeneralStationRecordConsole #SS220 Station Ai Actions
+  #SS220 Station Ai Actions start
+  - type: SolarControlConsole
+  - type: CargoOrderConsole
+  - type: CriminalRecordsConsole220
+  - type: PowerMonitoringConsole
+  - type: AtmosAlertsComputer
+  - type: ResearchConsole
+  - type: ResearchClient
+  - type: TechnologyDatabase
+  - type: SuperMatterObserver #SS220_TODO: Добавить отоброжение СМа Для ИИ
+  - type: SuperMatterObserverReceiver
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
+  #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
+    receiveFrequencyId: CrewMonitor 
     transmitFrequencyId: ShuttleTimer
+  - type: StationMap #SS220 Station Ai Actions end
   - type: RadarConsole
     followEntity: false
   - type: CommunicationsConsole

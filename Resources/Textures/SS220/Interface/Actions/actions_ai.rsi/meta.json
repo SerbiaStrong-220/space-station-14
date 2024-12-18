@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by burenka._. (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "alert_console"
+    },
+    {
+      "name": "power_console"
+    },
+    {
+      "name": "rad_console"
+    },
+    {
+      "name": "robotics_console"
+    },
+    {
+      "name": "sm_console"
+    },
+    {
+      "name": "station_map"
+    },
+    {
+      "name": "cargo_console"
+    },
+    {
+      "name": "criminal_records"
+    },
+    {
+      "name": "solar_console"
+    }
+  ]
+}
