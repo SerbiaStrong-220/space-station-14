@@ -1,0 +1,53 @@
+#Svarshik's toy guns
+- type: entityTable
+  id: AllToyWeaponsBundleTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingBackpackDuffelSyndicateFilledShotgunToy
+    - id: ClothingBackpackDuffelSyndicateFilledSMGToy
+    - id: ClothingBackpackDuffelSyndicateFilledRevolverToy
+    - id: ClothingBackpackDuffelSyndicateFilledLMGToy
+    - id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+    - id: ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+    - id: ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+    - id: ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+    - id: BriefcaseSyndieSniperToyBundleFilled
+
+- type: entityTable
+  id: AllFakeSyndieHardsuitsTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingOuterHardsuitSyndieFake
+    - id: ClothingOuterHardsuitSyndieMedicFake
+    - id: ClothingOuterHardsuitSyndieEliteFake
+    - id: ClothingOuterHardsuitSyndieCommanderFake
+    - id: ClothingOuterHardsuitJuggernautFake
+
+- type: entityTable
+  id: CrateFunToyBoxFakeOpsLoot
+  table: !type:AllSelector
+    children:
+    # Ammo
+    - id: ClothingBackpackDuffelSyndicateAmmoFilledToy
+      prob: 0.20
+    # Guns
+    - !type:NestedSelector
+      tableId: AllToyWeaponsBundleTable
+      rolls: !type:ConstantNumberSelector
+        value: 3
+    # Armor
+    - !type:NestedSelector
+      tableId: AllFakeSyndieHardsuitsTable
+      rolls: !type:ConstantNumberSelector
+        value: 3
+
+- type: entity
+  id: CrateFunToyBoxFakeOps
+  parent: CrateToyBox
+  suffix: Filled, SyndiLoot
+  description: A box filled with, uh... Firearms and combat spacesuits...?
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: CrateFunToyBoxFakeOpsLoot
