@@ -153,7 +153,7 @@
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCMOCorporate
   name: corporate CMO Jumpskirt
-  description: "A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma..." Nothing further on the unopened label.
+  description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
   suffix: For playtime
   components:
   - type: Sprite
