@@ -1,4 +1,5 @@
 using Content.Server.Explosion.EntitySystems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -106,6 +107,11 @@ namespace Content.Server.Explosion.Components
         ///     This is the end.
         /// </summary>
         public bool CountDown;
+
+        //ss220 cluster grenade whitelist start
+        [DataField]
+        public EntityWhitelist? Whitelist;
+        //ss220 cluster grenade whitelist end
     }
 
     public enum GrenadeType

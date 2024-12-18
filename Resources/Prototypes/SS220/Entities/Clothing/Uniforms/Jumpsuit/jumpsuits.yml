@@ -377,6 +377,19 @@
 
 # Medical
 
+  # Интерн
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitIntern
+  name: intern's jumpsuit
+  description: Suit for medical interns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/intern.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/intern.rsi
+
   # Парамед
 - type: entity
   parent: ClothingUniformBase
@@ -457,6 +470,19 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
 
 # Инженерия
+
+  #Ассистент
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitTechAssistant
+  name: technical assistant's jumpsuit
+  description: Suit for technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/tech_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/tech_assist.rsi
 
   # Старший инженер
 
@@ -587,6 +613,17 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/assistant_bachelor_uniform.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/assistant_bachelor_uniform.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitResearchAssistant
+  name: research assistant's jumpsuit
+  description: Suit for research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/science_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/science_assist.rsi
 
 # Ученый
 - type: entity

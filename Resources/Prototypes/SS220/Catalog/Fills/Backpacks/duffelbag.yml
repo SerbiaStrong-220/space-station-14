@@ -1,0 +1,143 @@
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledShotgunToy
+  name: Bulldog bundle
+  description: "Lean and mean: Contains the popular Bulldog Shotgun, 3 12g slug drum and 6 12g buckshot drums for best airsoft match."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponShotgunBulldogToy
+      - id: MagazineShotgunCaps
+        amount: 6
+      - id: MagazineShotgunSlugCaps
+        amount: 3 #triple the fun
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledSMGToy
+  name: C-20r bundle
+  description: "Old faithful: The classic C-20r Submachine Gun, bundled with eight magazines for best pranks!"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponSubMachineGunC20rToy
+      - id: MagazinePistolSubMachineGunCaps
+        amount: 4 #more fun :p
+      - id: MagazinePistolSubMachineGunFoam
+        amount: 4
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledRevolverToy
+  name: Python bundle
+  description: "Go loud and proud with a fully loaded capgun Python, bundled with four speed loaders."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRevolverPythonToy
+      - id: SpeedLoaderCap
+        amount: 2
+      - id: SpeedLoaderFoam
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledLMGToy
+  name: L6 Saw bundle
+  description: "More dakka: The iconic L6 lightmachinegun, bundled with 4 box magazines. Of course, it's a plastic!"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponLightMachineGunL6Toy
+      - id: MagazineLightRifleBoxCaps
+        amount: 2
+      - id: MagazineFoamBox
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+  name: China-Lake bundle
+  description: "An old China-Lake grenade launcher bundled with 14 rounds of various honking capability."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponLauncherChinaLakeToy
+      - id: GrenadeBlastToy
+        amount: 5 #more fun >:D
+      - id: GrenadeFragToy
+        amount: 5
+      - id: GrenadeFlashToy
+        amount: 2
+      - id: GrenadeLubeToy
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateAmmo
+  id: ClothingBackpackDuffelSyndicateAmmoFilledToy
+  name: ammo bundle
+  description: "Reloading! Contains 4 magazines for the C-20r, 4 drums for the Bulldog, 2 ammo boxes for the L6 SAW and spare grenades for China Lake."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+      - id: MagazinePistolSubMachineGunCaps
+        amount: 4
+      - id: MagazineShotgunCaps
+        amount: 4
+      - id: MagazineLightRifleBoxCaps
+        amount: 2
+      - id: GrenadeBlastToy
+        amount: 3
+      - id: GrenadeFragToy
+        amount: 3
+      - id: GrenadeLubeToy
+        amount: 1
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+  name: Cobra bundle
+  description: "All you need for covert pranking operations in maints"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolCobraToy
+    - id: MagazinePistolCaselessRifleCaps
+      amount: 2
+    - id: MagazinePistolCaselessRifleFoam
+      amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+  name: Viper bundle
+  description: "Everything you need for John Week cosplay in this bundle"
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolViperToy
+    - id: MagazinePistolHighCapacityCaps
+      amount: 2
+    - id: MagazinePistolHighCapacityFoam
+      amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+  name: Mosin bundle
+  description: "Prepare for maints warfare."
+  suffix: Toy
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSniperMosinToy
+    - id: BoxCartridgeCap
+    - id: BoxDonkSoftBox

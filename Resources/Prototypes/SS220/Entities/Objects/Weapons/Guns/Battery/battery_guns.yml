@@ -30,11 +30,13 @@
     - proto: Pulsekill
       name: firemode-name-kill
       fireCost: 1
-      soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
+      gunModifiers:
+        soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
     - proto: PulseDESTROY
       name: firemode-name-destroy
       fireCost: 5
-      soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
+      gunModifiers:
+        soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
 
 - type: entity
   name: pulse shotgun
@@ -64,10 +66,12 @@
     - proto: BulletLaserDestroy
       name: firemode-name-kill
       fireCost: 10
-      soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
+      gunModifiers:
+        soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: pulse-mag
     - proto: BulletLaserHeal
       name: firemode-name-heal
       fireCost: 17.5
-      soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
+      gunModifiers:
+        soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag

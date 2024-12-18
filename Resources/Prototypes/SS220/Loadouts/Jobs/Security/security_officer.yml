@@ -40,6 +40,14 @@
   equipment:
     eyes: ClothingSponsorCyberSecVisor
 
+- type: loadout
+  id: GlassesBallistic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    eyes: ClothingEyesGlassesBallistic
+
 # Jumpsuit
 - type: loadout
   id: SecurityJumpsuitTurtleneck
@@ -132,4 +140,11 @@
   equipment:
     shoes: ClothingShoesBootsJackSecFilled
 
-
+# Gloves
+- type: loadout
+  id: GlovesSecTactical
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    gloves: ClothingHandsGlovesSecTactical

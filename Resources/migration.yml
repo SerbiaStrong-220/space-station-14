@@ -401,7 +401,7 @@ chem_master: ChemMaster
 CrateJanitorExplosive: ClosetJanitorBombFilled
 
 # 2024-05-27
-DoorRemoteFirefight: null
+# DoorRemoteFirefight: null # SS220 revert "remove fire remote controller"
 
 # 2024-06-03
 AirlockServiceCaptainLocked: AirlockCaptainLocked
@@ -517,3 +517,47 @@ BaseAdvancedPen: Pen
 
 # 2024-10-24 - SS220 InverterGoodBye
 DeviceQuantumSpinInverter: null
+
+# 2024-10-09
+# Removal of separate borg chassis parts, replace them with generic borg parts.
+LeftArmBorgEngineer: LeftArmBorg
+RightArmBorgEngineer: RightArmBorg
+LeftLegBorgEngineer: LeftLegBorg
+RightLegBorgEngineer: RightLegBorg
+HeadBorgEngineer: LightHeadBorg
+TorsoBorgEngineer: TorsoBorg
+
+LeftArmBorgMedical: LeftArmBorg
+RightArmBorgMedical: RightArmBorg
+LeftLegBorgMedical: LeftLegBorg
+RightLegBorgMedical: RightLegBorg
+HeadBorgMedical: LightHeadBorg
+TorsoBorgMedical: TorsoBorg
+
+LeftArmBorgMining: LeftArmBorg
+RightArmBorgMining: RightArmBorg
+LeftLegBorgMining: LeftLegBorg
+RightLegBorgMining: RightLegBorg
+HeadBorgMining: LightHeadBorg
+TorsoBorgMining: TorsoBorg
+
+LeftArmBorgService: LeftArmBorg
+RightArmBorgService: RightArmBorg
+LeftLegBorgService: LeftLegBorg
+RightLegBorgService: RightLegBorg
+HeadBorgService: LightHeadBorg
+TorsoBorgService: TorsoBorg
+
+LeftLegBorgJanitor: LeftLegBorg
+RightLegBorgJanitor: RightLegBorg
+HeadBorgJanitor: LightHeadBorg
+TorsoBorgJanitor: TorsoBorg
+
+# 2024-11-17
+PresentRandomAsh: PresentRandomCoal
+
+# 2024-11-19
+CrateCrewMonitoringBoards: CrateCrewMonitoring
+
+# 2024-11-25
+CrateSlimepersonLifeSupport: CrateNitrogenInternals

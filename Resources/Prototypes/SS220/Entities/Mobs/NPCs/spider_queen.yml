@@ -626,7 +626,7 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -644,7 +644,7 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -662,7 +662,7 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -680,7 +680,7 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -698,5 +698,5 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # 1h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role

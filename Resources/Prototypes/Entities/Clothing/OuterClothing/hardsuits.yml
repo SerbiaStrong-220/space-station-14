@@ -397,9 +397,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for easier movement.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/medical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/medical.rsi #ss220 cmo hardsuit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/medical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/medical.rsi #ss220 cmo hardsuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000

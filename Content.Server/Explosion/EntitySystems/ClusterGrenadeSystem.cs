@@ -7,6 +7,7 @@ using Robust.Shared.Random;
 using Content.Server.Weapons.Ranged.Systems;
 using System.Numerics;
 using Content.Shared.Explosion.Components;
+using Content.Shared.Whitelist;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 
@@ -21,6 +22,7 @@ public sealed class ClusterGrenadeSystem : EntitySystem
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -53,10 +55,13 @@ public sealed class ClusterGrenadeSystem : EntitySystem
 
         var component = clug.Comp;
 
-        // TODO: Should use whitelist.
-        if (component.GrenadesContainer.ContainedEntities.Count >= component.MaxGrenades ||
-            !HasComp<FlashOnTriggerComponent>(args.Used))
+        //ss220 cluster grenade whitelist start
+        if (component.GrenadesContainer.ContainedEntities.Count >= component.MaxGrenades)
             return;
+
+        if (_whitelist.IsWhitelistFailOrNull(clug.Comp.Whitelist, args.Used))
+            return;
+        //ss220 cluster grenade whitelist end
 
         _containerSystem.Insert(args.Used, component.GrenadesContainer);
         UpdateAppearance(clug);

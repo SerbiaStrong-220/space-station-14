@@ -498,11 +498,21 @@
   - type: Sprite
     sprite: Objects/Fun/sharkplush.rsi
     state: blue
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnActivate
     sound:
+      path: /Audio/Items/Toys/rawr.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
       path: /Audio/Items/Toys/rawr.ogg
   - type: Item
     heldPrefix: blue
@@ -973,8 +983,15 @@
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
     state: foamcrossbow
+  #ss220 toys begin
   - type: Item
-    size: Normal
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  #- type: Item
+  #  size: Normal
+  #ss220 toys end
     sprite: Objects/Fun/toys.rsi
     heldPrefix: foamcrossbow
   - type: Gun
@@ -1269,6 +1286,14 @@
     heldPrefix: orb
   - type: TileFrictionModifier
     modifier: 0.001
+  # ss220 PonderingOrb speak on use begin
+  - type: SpeakOnUse
+    pack: PonderingOrbPhrases
+  - type: UseDelay
+    delay: 10
+  - type: Speech
+    speechSounds: Pai
+  # ss220 PonderingOrb speak on use end
 
 - type: entity
   parent: BaseItem

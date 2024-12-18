@@ -594,6 +594,7 @@
 - type: loadoutGroup
   id: ClownNeck
   name: loadout-group-clown-neck
+  minLimit: 0 #ss220 clown neck fix
   loadouts:
   - ClownPennywiseRuff
 #ss220-loadout-clown-neck-end
@@ -894,6 +895,8 @@
   id: TechnicalAssistantJumpsuit
   name: loadout-group-technical-assistant-jumpsuit
   loadouts:
+  - TechAssistantJumpsuit #SS220 new assistant uniforms
+  - TechAssistantJumpskirt #SS220 new assistant uniforms
   - YellowJumpsuit
   - YellowJumpskirt
   - TechnicalAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
@@ -1131,6 +1134,8 @@
   id: ResearchAssistantJumpsuit
   name: loadout-group-research-assistant-jumpsuit
   loadouts:
+  - ResearchAssistantJumpsuit #SS220 new assistant uniforms
+  - ResearchAssistantJumpskirt #SS220 new assistant uniforms
   - WhiteJumpsuit
   - WhiteJumpskirt
   - ResearchAssistantBachelor #SS220-loadout-academy
@@ -1482,6 +1487,8 @@
   id: MedicalInternJumpsuit
   name: loadout-group-medical-intern-jumpsuit
   loadouts:
+  - InternJumpsuit #SS220 new assistant uniforms
+  - InternJumpskirt #SS220 new assistant uniforms
   - WhiteJumpsuit
   - WhiteJumpskirt
   - MedicalInternJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin

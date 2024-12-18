@@ -1,0 +1,29 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: Paper
+  id: MindslaveFixSurgeryGuide
+  name: Mindslave fixer surgery guide
+  description: Anyone has "How to read guide"?..
+  components:
+  - type: Paper
+    content: mindslave-fixer-surgery-guide
+    writable: false
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateMedicalBundle
+  id: ClothingBackpackDuffelSyndicateMindslaveFixerSurgery
+  name: syndicate surgical duffel bag with surgery
+  description: A large duffel bag containing a full suite of surgical tools and mindslave fixer.
+  components:
+  - type: StorageFill
+    contents:
+      - id: Hemostat
+      - id: SawElectric
+      - id: Cautery
+      - id: Retractor
+      - id: Scalpel
+      - id: ClothingHandsGlovesNitrile
+      - id: SurgeryDrapes
+      - id: MindslaveFixerCerebralImplant
+      - id: MindslaveFixSurgeryGuide

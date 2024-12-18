@@ -337,6 +337,7 @@
   table: !type:AllSelector
     children:
     #- id: WeaponEnergyShotgun #SS220 Energy shotgun removal
+    - id: BookSecretDocuments # SS220 mindslave-stop-word
     - id: BookSpaceLaw
     - id: BoxEncryptionKeySecurity
     - id: CigarGoldCase
