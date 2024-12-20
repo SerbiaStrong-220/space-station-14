@@ -101,6 +101,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - EncryptionKeyStationMaster
   - type: Sprite
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
   - type: Clothing
