@@ -91,3 +91,18 @@
     sprite: SS220/Clothing/Ears/Headsets/captain.rsi
   - type: Clothing
     sprite: SS220/Clothing/Ears/Headsets/captain.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetBlueShield
+  name: full-size headset of the blueshield
+  description: An impeccable headset for the blue shield.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyStationMaster
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
