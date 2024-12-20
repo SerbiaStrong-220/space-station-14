@@ -1,0 +1,17 @@
+- type: entity
+  id: ContractorPortal
+  parent: BasePortal
+  description: This one looks more like a stranger portal.
+  components:
+    - type: Sprite
+      layers:
+        - state: portal-red
+    - type: PointLight
+      color: OrangeRed
+      radius: 3
+      energy: 1
+      netsync: false
+    - type: Portal
+      canTeleportToOtherMaps: true
+      randomTeleport: false
+    - type: ContractorPortalOnTrigger

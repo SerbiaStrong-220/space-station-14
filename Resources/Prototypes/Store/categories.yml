@@ -101,6 +101,11 @@
   name: store-category-pointless
   priority: 11
 
+- type: storeCategory
+  id: ContractorKit
+  name: "Контрактор"
+  priority: 13
+
 #revenant
 - type: storeCategory
   id: RevenantAbilities

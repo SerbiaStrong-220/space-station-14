@@ -17,6 +17,7 @@
     - UplinkWearables
     - UplinkJob
     - UplinkPointless
+    - ContractorKit
     currencyWhitelist:
     - Telecrystal
     balance:
