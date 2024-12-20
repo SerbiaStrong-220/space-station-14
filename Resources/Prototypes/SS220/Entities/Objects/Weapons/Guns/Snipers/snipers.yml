@@ -50,3 +50,15 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: StaticPrice
     price: 50
+  - type: GunRequiresWield
+  - type: HeldSpeedModifier
+    sprintModifier: 0.7
+    mirrorClothingModifier: false
+  - type: Blocking # not the best option, but blocking hardcoded to shields sadly
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 1.0
+    activeBlockModifier:
+      coefficients:
+        Blunt: 1.0
+
