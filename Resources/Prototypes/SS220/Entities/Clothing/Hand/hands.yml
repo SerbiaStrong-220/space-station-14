@@ -57,7 +57,7 @@
     sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
 
 - type: entity
-  parent: ClothingHandsBase
+  parent: ClothingHandsGlovesSyntheticBase
   id: ClothingHandsGlovesSecTactical
   name: security tactical gloves
   description: tactical security element
@@ -66,6 +66,8 @@
     sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
   - type: Clothing
     sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
+  - type: Fiber
+    fiberColor: fibers-black
     
 - type: entity
   parent: ClothingHandsGlovesJanitor
