@@ -36,6 +36,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.Language; // SS220-Add-Languages-begin
+using Content.Server.SS220.Language; // SS220-Add-Languages-end
 
 namespace Content.Server.Chat.Systems;
 
@@ -63,6 +65,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -162,9 +165,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         IConsoleShell? shell = null,
         ICommonSession? player = null, string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false)
+        bool ignoreActionBlocker = false,
+        LanguagesPrototype? languageProto = null) // SS220-Add-Languages
     {
-        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker);
+        TrySendInGameICMessage(source, message, desiredType,
+            hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal,
+            hideLog, shell, player, nameOverride, checkRadioPrefix,
+            ignoreActionBlocker, languageProto: languageProto); // SS220-Add-Languages
     }
 
     /// <summary>
@@ -188,8 +195,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false
-        )
+        bool ignoreActionBlocker = false,
+        LanguagesPrototype? languageProto = null) // SS220-Add-Languages
     {
         if (HasComp<GhostComponent>(source))
         {
@@ -285,7 +292,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntitySpeak(source, message, range, nameOverride, hideLog, ignoreActionBlocker);
                 break;
             case InGameICChatType.Whisper:
-                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, ignoreActionBlocker);
+                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, ignoreActionBlocker, languageProto); // SS220-Add-Languages
                 break;
             case InGameICChatType.Emote:
                 SendEntityEmote(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
@@ -497,16 +504,37 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         name = FormattedMessage.EscapeText(name);
+        // SS220-Add-Languages begin
+        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        {
+            if (session.AttachedEntity is not { Valid: true } playerEntity)
+                continue;
 
-        var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-            ("entityName", name),
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-            ("fontType", speech.FontId),
-            ("fontSize", speech.FontSize),
-            ("message", FormattedMessage.EscapeText(message)));
+            var listener = session.AttachedEntity.Value;
+            var languageProto = _languageSystem.GetProto(source);
 
-        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+            if (languageProto == null)
+                return;
 
+            var canUnderstand = _languageSystem.CheckLanguage(listener, languageProto);
+
+            var currentMessage = canUnderstand ? message : _languageSystem.ScrambleText(source, originalMessage, languageProto);
+            if (languageProto?.Color != null)
+            {
+                currentMessage = _languageSystem.SetColor(currentMessage, languageProto);
+            }
+        // SS220-Add-Languages end
+
+            var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
+                ("entityName", name),
+                ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                ("fontType", speech.FontId),
+                ("fontSize", speech.FontSize),
+                ("message", currentMessage /*SS220-Add-Languages*/));
+
+            _chatManager.ChatMessageToOne(ChatChannel.Local, currentMessage, wrappedMessage, source, false, session.Channel); //SS220-Add-Languages
+        }
+        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range); //SS220-Add-Languages
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null);
         RaiseLocalEvent(source, ev, true);
 
@@ -540,8 +568,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         RadioChannelPrototype? channel,
         string? nameOverride,
         bool hideLog = false,
-        bool ignoreActionBlocker = false
-        )
+        bool ignoreActionBlocker = false,
+        LanguagesPrototype? languageProto = null) // SS220-Add-Languages
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
@@ -567,9 +595,18 @@ public sealed partial class ChatSystem : SharedChatSystem
             name = nameEv.VoiceName;
         }
         name = FormattedMessage.EscapeText(name);
+        // SS220-Add-Languages begin
+        if (languageProto == null)
+            languageProto = _languageSystem.GetProto(source);
+
+        if (languageProto?.Color != null)
+        {
+            message = _languageSystem.SetColor(message, languageProto);
+        }
+        // SS220-Add-Languages end
 
         var wrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
-            ("entityName", name), ("message", FormattedMessage.EscapeText(message)));
+            ("entityName", name), ("message", message /*SS220-Add-Languages*/));
 
         var wrappedobfuscatedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
             ("entityName", nameIdentity), ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
@@ -586,17 +623,43 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue;
             listener = session.AttachedEntity.Value;
 
+            // SS220-Add-Languages begin
+            var scrambledMessage = message;
+            var obfuscatedScrambledMessage = obfuscatedMessage;
+            var wrappedScrambledMessage = wrappedMessage;
+            var wrappedObfuscatedScrambledMessage = wrappedobfuscatedMessage;
+            var wrappedUnknownScrambledMessage = wrappedUnknownMessage;
+
+            if (!_languageSystem.CheckLanguage(listener, languageProto) && languageProto != null)
+            {
+                scrambledMessage = _languageSystem.ScrambleText(source, message, languageProto);
+                obfuscatedScrambledMessage = ObfuscateMessageReadability(scrambledMessage, 0.2f);
+
+                if (languageProto.Color != null)
+                {
+                    scrambledMessage = _languageSystem.SetColor(scrambledMessage, languageProto);
+                }
+
+                wrappedScrambledMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
+                    ("entityName", name), ("message", scrambledMessage));
+                wrappedObfuscatedScrambledMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
+                    ("entityName", nameIdentity), ("message", FormattedMessage.EscapeText(obfuscatedScrambledMessage)));
+                wrappedUnknownScrambledMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
+                    ("message", FormattedMessage.EscapeText(obfuscatedScrambledMessage)));
+            }
+            // SS220-Add-Languages end
+
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
             if (data.Range <= WhisperClearRange || data.Observer /* SS220 Observer-Hearing */)
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, scrambledMessage, wrappedScrambledMessage /*SS220-Add-Languages*/, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedScrambledMessage, wrappedObfuscatedScrambledMessage /*SS220-Add-Languages*/, source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedUnknownMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedScrambledMessage, wrappedUnknownScrambledMessage /*SS220-Add-Languages*/, source, false, session.Channel);
         }
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));

@@ -140,6 +140,12 @@
       types:
         Asphyxiation: -1.0
     maxSaturation: 15
+  # SS220-Add-Languages begin
+  - type: Language
+    learnedLanguages:
+    - Galactic
+    - Bubblish
+  # SS220-Add-Languages end
   - type: Inventory
     femaleDisplacements:
       jumpsuit:
