@@ -1,0 +1,25 @@
+- type: loadoutEffectGroup
+  id: CMOCorporate
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChiefMedicalOfficer
+      time: 36000 # 10 hrs
+
+# Jumpsuit
+- type: loadout
+  id: CMOCorpJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCMOCorporate
+
+- type: loadout
+  id: CMOCorpJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtCMOCorporate
