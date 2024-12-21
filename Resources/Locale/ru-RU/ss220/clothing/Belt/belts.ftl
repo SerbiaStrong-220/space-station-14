@@ -13,9 +13,6 @@ ent-ClothingBeltBlueShield = пояс "Синий Щит"
 ent-ClothingBeltBlueShieldFilled = { ent-ClothingBeltBlueShield }
     .desc = { ent-ClothingBeltBlueShield.desc }
     .suffix = Заполненный
-ent-ClothingBeltWebbingSRTFilled = { ent-ClothingBeltBlueShield }
-    .desc = { ent-ClothingBeltBlueShield.desc }
-    .suffix = Заполненный
 
 ent-ClothingBeltWebbingBlueShield = РПС "Синий Щит"
     .desc = Универсальный разгрузочный жилет с ремнями и поясом. Может вмещать всё что угодно... всё что угодно небольшого размера.

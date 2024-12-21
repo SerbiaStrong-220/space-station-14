@@ -63,7 +63,7 @@
 
 - type: entity
   parent: ClothingOuterStorageBase
-  id: ClothingOuterSRTCoat
+  id: ClothingOuterBSOCoat
   name: the Blue Shield operative's coat
   description: The coat is blue. Excellent protection against most types of damage.
   suffix: For playtime

@@ -30,11 +30,6 @@
       - id: FlashlightSeclite
 
 - type: entity
-  parent: ClothingBeltBlueShieldFilled
-  id: ClothingBeltWebbingSRTFilled
-  suffix: Filled
-
-- type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltWebbingBlueShield
   name: the Blue Shield RPS

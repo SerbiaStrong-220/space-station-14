@@ -13,7 +13,7 @@
 
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingNeckScarfCentcomGSN
+  id: ClothingNeckScarfBSO
   name: шарф оперативника "Синий Щит"
   description: Черные тона позволяют заглянуть в самые дальние уголки души обладателя данного шарфа. Не стоит засматриваться, лучше уйти.
   components:
