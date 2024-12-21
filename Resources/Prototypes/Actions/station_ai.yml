@@ -11,8 +11,8 @@
       # SS220-resprite start
       #sprite: Interface/Actions/actions_ai.rsi
       sprite: SS220/Interface/Actions/actions_ai.rsi
-      # SS220-resprite end
       state: ai_core
+      # SS220-resprite end
     event: !type:JumpToCoreEvent
 
 - type: entity
@@ -26,8 +26,8 @@
       # SS220-resprite start
       #sprite: Interface/Actions/actions_ai.rsi
       sprite: SS220/Interface/Actions/actions_ai.rsi
-      # SS220-resprite end
       state: camera_light
+      # SS220-resprite end
     event: !type:RelayedActionComponentChangeEvent
       components:
       - type: LightOnCollideCollider
@@ -55,7 +55,7 @@
       # SS220-resprite start
       #sprite: SS220/Interface/Actions/actions_ai.rsi
       sprite: SS220/Interface/Actions/actions_ai.rsi
-      # SS220-resprite end
       state: state_laws
+      # SS220-resprite end
     event: !type:ToggleLawsScreenEvent
     useDelay: 0.5
