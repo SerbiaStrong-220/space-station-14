@@ -35,9 +35,6 @@
         soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
         fireRate: 1.5
       magState: enhanced-mag
-  - type: ProjectileBatteryAmmoProvider
-    proto: PulseEnhanced
-    fireCost: 24.5
   - type: MagazineVisuals
     magState: laser-mag
     steps: 4
