@@ -8,12 +8,11 @@
     priority: -9
     itemIconStyle: BigAction
     icon:
-#      sprite: Interface/Actions/actions_ai.rsi
-#      state: ai_core
-    ##SS220-resprite start
+# SS220-resprite start
+#sprite: Interface/Actions/actions_ai.rsi
       sprite: SS220/Interface/Actions/actions_ai.rsi
       state: ai_core
-    ##SS220-resprite end
+# SS220-resprite end
     event: !type:JumpToCoreEvent
 
 - type: entity
@@ -24,12 +23,11 @@
   - type: InstantAction
     priority: -5
     icon:
-#      sprite: SS220/Interface/Actions/actions_ai.rsi
-#      state: camera_light
-    ##SS220-resprite start
+# SS220-resprite start
+#sprite: Interface/Actions/actions_ai.rsi
       sprite: SS220/Interface/Actions/actions_ai.rsi
       state: camera_light
-    ##SS220-resprite end
+# SS220-resprite end
     event: !type:RelayedActionComponentChangeEvent
       components:
       - type: LightOnCollideCollider
@@ -54,11 +52,10 @@
     priority: -3
     itemIconStyle: NoItem
     icon:
-#      sprite: SS220/Interface/Actions/actions_ai.rsi
-#      state: camera_light
-    ##SS220-resprite start
+# SS220-resprite start
+#sprite: SS220/Interface/Actions/actions_ai.rsi
       sprite: SS220/Interface/Actions/actions_ai.rsi
       state: state_laws
-    ##SS220-resprite end
+# SS220-resprite end
     event: !type:ToggleLawsScreenEvent
     useDelay: 0.5
