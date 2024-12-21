@@ -317,6 +317,7 @@ public sealed partial class ArtifactSystem : EntitySystem
     }
 
     // SS220-BonusForFullyDiscovered - start
+    
     private void SpawnBonus(EntityUid uid, ArtifactComponent component)
     {
         if (component.BonusProtype == null)
