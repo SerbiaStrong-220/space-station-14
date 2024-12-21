@@ -50,3 +50,36 @@
      Steel: 1200
      Silver: 100
      Gold: 500
+     Gold: 100
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ThrusterShuntingMachineCircuitboard
+  result: ThrusterShuntingMachineCircuitboard
+  materials:
+    Steel: 50
+    Glass: 500
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ThrusterBigLeftMachineCircuitboard
+  result: ThrusterBigLeftMachineCircuitboard
+  materials:
+    Steel: 50
+    Glass: 500
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ThrusterBigRightMachineCircuitboard
+  result: ThrusterBigRightMachineCircuitboard
+  materials:
+    Steel: 50
+    Glass: 500
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ThrusterBigCenterMachineCircuitboard
+  result: ThrusterBigCenterMachineCircuitboard
+  materials:
+    Steel: 200
+    Glass: 1000

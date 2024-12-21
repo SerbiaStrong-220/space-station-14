@@ -1,4 +1,3 @@
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
@@ -6,9 +5,7 @@ using Content.Server.Radio.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
-using Content.Shared.SS220.Radio;
 using Content.Shared.Radio.Components;
-using Content.Shared.SS220.Radio.Components;
 using Content.Shared.Speech;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -210,7 +207,7 @@ public sealed class RadioSystem : EntitySystem
     private string GetIdCardName(EntityUid senderUid)
     {
         var idCardTitle = Loc.GetString("chat-radio-no-id");
-        idCardTitle = GetIdCard(senderUid)?.JobTitle ?? idCardTitle;
+        idCardTitle = GetIdCard(senderUid)?.LocalizedJobTitle ?? idCardTitle;
 
         var textInfo = CultureInfo.CurrentCulture.TextInfo;
         idCardTitle = textInfo.ToTitleCase(idCardTitle);

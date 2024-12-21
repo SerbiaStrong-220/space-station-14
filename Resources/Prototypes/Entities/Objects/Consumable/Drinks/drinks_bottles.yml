@@ -622,7 +622,7 @@
           Quantity: 30
   - type: Drink
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/waterbottle.rsi
+    sprite: SS220/Objects/Consumable/Drinks/waterbottle.rsi #SS220-WaterBottle Resprite
     layers:
       - state: icon
         map: ["enum.OpenableVisuals.Layer"]
@@ -631,7 +631,7 @@
         visible: false
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 5
+    maxFillLevels: 7 #SS220-WaterBottle Resprite
     fillBaseName: icon-
     inHandsMaxFillLevels: 2
     inHandsFillBaseName: -fill-

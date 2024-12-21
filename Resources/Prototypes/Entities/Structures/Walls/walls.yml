@@ -61,9 +61,9 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: Structures/Walls/brick.rsi
+    sprite: SS220/Structures/Walls/brick.rsi #SS220-walls-sprite-update-v5
   - type: Icon
-    sprite: Structures/Walls/brick.rsi
+    sprite: SS220/Structures/Walls/brick.rsi #SS220-walls-sprite-update-v5
   - type: RCDDeconstructable
     cost: 6
     delay: 8

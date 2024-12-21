@@ -184,7 +184,7 @@ public sealed class AmeNodeGroup : BaseNodeGroup
     public float CalculatePower(int fuel, int cores)
     {
         // Balanced around a single core AME with injection level 2 producing 120KW.
-        // Overclocking yields diminishing returns until it evens out at around 360KW.
+        // Two core with four injection is 150kW. Two core with two injection is 90kW.
 
         // The adjustment for cores make it so that a 1 core AME at 2 injections is better than a 2 core AME at 2 injections.
         // However, for the relative amounts for each (1 core at 2 and 2 core at 4), more cores has more output.

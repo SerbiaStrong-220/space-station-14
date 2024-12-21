@@ -120,13 +120,10 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         var amountToMax = spiderQueen.MaxBloodPoints - spiderQueen.CurrentBloodPoints;
         var extractedValue = MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
         entity.Comp.BloodPointsAmount -= extractedValue;
-        spiderQueen.CurrentBloodPoints += extractedValue;
+        _spiderQueen.ChangeBloodPointsAmount(args.User, spiderQueen, extractedValue);
 
         _hunger.ModifyHunger(args.User, extractedValue * spiderQueen.HungerExtractCoefficient);
-
-        Dirty(args.User, spiderQueen);
         Dirty(entity);
-        _spiderQueen.UpdateAlert((args.User, spiderQueen));
     }
 
     /// <summary>
