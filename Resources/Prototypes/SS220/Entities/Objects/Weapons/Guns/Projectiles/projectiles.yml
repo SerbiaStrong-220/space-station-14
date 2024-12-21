@@ -427,6 +427,27 @@
     forceSound: true
 
 - type: entity
+  name : Blaster bolt
+  id: BulletBlasterPulse
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: pulseheavylaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlue
+    damage:
+      types:
+        Heat: 48
+        Piercing: 14
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
+- type: entity
   id: BulletImpactEffectBlue
   categories: [ HideSpawnMenu ]
   components:

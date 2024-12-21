@@ -5,33 +5,41 @@
   id: BlasterPowerCellAlt
   name: blaster power cell
   description: It contains a lot more pain than you ever dreamed of.
-  suffix: Dual-mode
+  suffix:  Laser
   components:
   - type: Battery
     pricePerJoule: 0.15
     maxCharge: 2000
     startingCharge: 2000
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disabler-mag-unshaded-1
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletDisablerSmg
-      name: firemode-name-disabler-alt
-      gunModifiers:
-        fireCost: 65
-      magState: disabler-mag
-    - proto: BulletBlasterAlt
-      name: firemode-name-laser-alt
-      gunModifiers:
-        fireCost: 100
-      magState: laser-mag
-  - type: MagazineVisuals
-    magState: disabler-mag
-    steps: 2
-    zeroVisible: true
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterAlt
+    fireCost: 100
+
+- type: entity
+  parent: BlasterPowerCell
+  id: BlasterPowerCellDisabler
+  name: blaster power cell
+  description: It contains a lot more pain than you ever dreamed of.
+  suffix: Disabler
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 2000
+    startingCharge: 2000
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletDisablerSmg
+    fireCost: 65
+
+- type: entity
+  parent: BlasterPowerCell
+  id: BlasterPowerCellPulse
+  name: blaster power cell
+  description: It contains a lot more pain than you ever dreamed of.
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 3000
+    startingCharge: 3000
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterPulse
+    fireCost: 120

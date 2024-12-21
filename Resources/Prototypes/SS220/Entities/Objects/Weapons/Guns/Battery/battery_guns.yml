@@ -69,6 +69,26 @@
           tags:
             - BlasterPowerCell
 
+- type: entity
+  id: WeaponBlasterKRV
+  parent: WeaponBlaster
+  name: KRV
+  description: An advanced blaster rifle. Used by special operatives.
+  suffix: Blaster
+  components:
+  - type: Item
+    size: Large
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: BlasterPowerCellPulse
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - BlasterPowerCell
+
 # Новые прототипы пишите выше
 # Death Squad
 - type: entity
