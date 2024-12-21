@@ -37,15 +37,45 @@
         friction: 0.2
   - type: Artifact
     bonusProtype:  # SS220-BonusForFullyDiscovered - start
-    - BlueprintBeltChiefEngineer  
-    - BlueprintSeismicCharge 
+    - BlueprintBeltChiefEngineer
+    - BlueprintSeismicCharge
     - BlueprintFulton
-    - ClothingOuterCoatExpensive 
-    - TeslaToy 
-    - BorgModuleSyndicateWeapon 
-    - ClothingHeadHatCatEarsValid 
-    - DnaScramblerImplanter 
-    - PresentRandomUnsafe # SS220-BonusForFullyDiscovered - end
+    - BlueprintSuperSynthesizerInstrument
+    - BlueprintFultonBeacon
+    - BlueprintClothingBeltMilitaryWebbing
+    - BlueprintWallmountGeneratorAPUElectronics
+    - BlueprintWeaponCrusher
+    - BlueprintWeaponCrusherGlaive
+    - BlueprintJetpackVoid
+    - BlueprintToySword
+    - BlueprintDoubleToySword
+    - BlueprintWelderIndustrial
+    - BlueprintWelderIndustrialAdvanced
+    - BlueprintSawAdvanced
+    - BlueprintGlowstickBlue
+    - BlueprintSyndicateMicrowaveMachineCircuitboard 
+    - BlueprintPowerCellHyperPrinted
+    - ClothingOuterCoatExpensive
+    - PowerCellAntiqueProto
+    - MetalFoamGrenade
+    - WeaponLaserGun
+    - FireAxe
+    - ClothingHeadHatChameleon
+    - UsspPDA
+    - SyndiPDA
+    - SoapOmega
+    - ClothingOuterCoatExpensive
+    - ClothingBackpackERTSecurity
+    - WeaponTeslaGun
+    - Chainsaw
+    - EnergyDaggerLoud
+    - BorgModuleSyndicateWeapon
+    - ClothingBackpackNuclear
+    - WeaponMeleeToolboxRobust
+    - PresentRandomUnsafe
+    - TeslaToy
+    - ClothingHeadHatCatEars
+    - DnaScramblerImplanter  # SS220-BonusForFullyDiscovered - end
   - type: RandomArtifactSprite
     maxSprite: 11
     activationTime: 2.4

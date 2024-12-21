@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintBeltChiefEngineer
-  name: name
-  description: desc
+  name: blueprint belt chief
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -11,8 +11,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintSuperSynthesizerInstrument
-  name: seismic charge blueprint
-  description: A blueprint with a schematic of a seismic charge. It can be inserted into an autolathe.
+  name: blueprint super synthesizer
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -21,8 +21,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintFultonBeacon
-  name: name
-  description: desc
+  name: blueprint fulton beacon
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -31,8 +31,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintClothingBeltMilitaryWebbing
-  name: name
-  description: desc
+  name: blueprint belt military Webbing
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -41,8 +41,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintWallmountGeneratorAPUElectronics
-  name: name
-  description: desc
+  name: blueprint wallmount generator APU electronics
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -51,8 +51,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintWeaponCrusher
-  name: name
-  description: desc
+  name: blueprint weapon crusher
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -61,8 +61,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintWeaponCrusherGlaive
-  name: name
-  description: desc
+  name: blueprint weapon crusher glaive
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -71,8 +71,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintJetpackVoid
-  name: name
-  description: desc
+  name: blueprint jetpackVoid
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -81,8 +81,8 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintToySword
-  name: name
-  description: desc
+  name: blueprint toy sword
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
@@ -91,9 +91,69 @@
 - type: entity
   parent: BaseBlueprint
   id: BlueprintDoubleToySword
-  name: name
-  description: desc
+  name: blueprint double toy Sword
+  description: A blueprint of some device. It can be placed in an autolat.
   components:
   - type: Blueprint
     providedRecipes:
     - DoubleToySword
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintWelderIndustrial
+  name: blueprint welder industrial
+  description: A blueprint of some device. It can be placed in an autolat.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WelderIndustrial
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintWelderIndustrialAdvanced
+  name: blueprint welder industrial advanced
+  description: A blueprint of some device. It can be placed in an autolat.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WelderIndustrialAdvanced
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintSawAdvanced
+  name: blueprint saw advanced
+  description: A blueprint of some device. It can be placed in an autolat.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - SawAdvanced
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintGlowstickBlue
+  name: blueprint glowstick blue
+  description: A blueprint of some device. It can be placed in an autolat.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - GlowstickBlue
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintSyndicateMicrowaveMachineCircuitboard 
+  name: blueprint microwave Co. machine circuitboard
+  description: A blueprint of some device. It can be placed in an autolat.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - SyndicateMicrowaveMachineCircuitboard
+
+- type: entity
+  parent: BaseBlueprint
+  id: BlueprintPowerCellHyperPrinted
+  name: blueprint power cell hyperPrinted
+  description: A blueprint of some device. It can be placed in an autolat.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - PowerCellHyperPrinted
