@@ -85,7 +85,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadBeretBlueshield
   name: beret the "Blue Shield"
-  description: The inexpensive beret favored by officers is the "Blue Shield". The blue shield emblem is visible.
+  description: An inexpensive beret favored by the "Blue Shield" officers. It has the shield emblem in blue color on it.
   components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
