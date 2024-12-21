@@ -34,10 +34,10 @@
     layers: 
     - state: spicy
   - type: Appearance
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
     fillPrototype: ThrowingSliceSynd
-    maxGrenadesCount: 10
-    baseTriggerDelay: 10
+    capacity: 10
+    delayBeforeTriggerContents: 10
     distance: 8
     velocity: 7
   - type: Item
@@ -169,10 +169,10 @@
     layers:
     - state: spicy
   - type: Appearance
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
     fillPrototype: ThrowingSliceFood
-    maxGrenadesCount: 10
-    baseTriggerDelay: 10
+    capacity: 10
+    delayBeforeTriggerContents: 10
     distance: 4
     velocity: 3
   - type: Item

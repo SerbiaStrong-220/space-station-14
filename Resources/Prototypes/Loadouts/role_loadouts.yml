@@ -433,7 +433,6 @@
 - type: roleLoadout
   id: JobDetective
   groups:
-  - GroupTankHarness
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit

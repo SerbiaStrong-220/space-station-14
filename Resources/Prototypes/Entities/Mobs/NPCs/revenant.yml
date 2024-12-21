@@ -21,7 +21,8 @@
     - Stun
     - Corporeal
   - type: Damageable
-    damageContainer: Biological
+    damageContainer: ManifestedSpirit
+    damageModifierSet: ManifestedSpirit
   - type: NoSlip
   - type: TTS # Corvax-TTS
     voice: twitch
@@ -101,3 +102,6 @@
     ignoreInsulation: true
   #ss220 revenant buff end
   - type: BlockBuckleVerbsInteraction #ss220 revenant unbuckle verbs interaction fix
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
