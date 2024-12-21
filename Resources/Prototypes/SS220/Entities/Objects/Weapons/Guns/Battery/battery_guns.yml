@@ -4,7 +4,7 @@
   parent: BaseWeaponBatterySmall
   id: WeaponSynergisticEnergyGun
   name: synergistic energy gun
-  description: "An innovative weapon that combines advanced technology and a unique design. It has two shooting modes: normal and enhanced."
+  description: An innovative weapon that combines advanced technology and a unique design. It has two shooting modes: normal and enhanced.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/synergistic_enetgy_gun.rsi

@@ -13,5 +13,5 @@ ent-ClothingHeadsetAltCaptain = полноразмерная гарнитура 
 ent-ClothingHeadsetCaptain = гарнитура капитана
     .desc = Гарнитура капитана, имеющая ключи шифрования командования и юридического отдела.
 
-ent-ClothingHeadsetBlueShield = полноразмерная гарнитура капитана
+ent-ClothingHeadsetBlueShield = полноразмерная гарнитура "Синий Щит"
     .desc = Безупречная гарнитура для синего щита.
