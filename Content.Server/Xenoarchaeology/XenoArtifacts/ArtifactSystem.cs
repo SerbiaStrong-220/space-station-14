@@ -28,7 +28,7 @@ public sealed partial class ArtifactSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!; ///ss220-BonusForFullyDiscovered 
+    [Dependency] private readonly ThrowingSystem _throwing = default!; ///ss220-BonusForFullyDiscovered
 
     public override void Initialize()
     {
@@ -196,7 +196,7 @@ public sealed partial class ArtifactSystem : EntitySystem
 
         EnterNode(uid, ref newNode, component);
 
-        /// SS220-BonusForFullyDiscovered - start
+        // SS220-BonusForFullyDiscovered - start
 
         var countPassedNode = 0;
         foreach (var node in component.NodeTree)
@@ -205,12 +205,13 @@ public sealed partial class ArtifactSystem : EntitySystem
                 countPassedNode++;
         }
 
-        if (countPassedNode == component.NodeTree.Count && component.IsBonusNotIssued)
+        if (countPassedNode == component.NodeTree.Count && !component.IsBonusIssued)
         {
-            component.IsBonusNotIssued = false;
+            component.IsBonusIssued = false;
             SpawnBonus(uid, component);
         }
-        /// SS220-BonusForFullyDiscovered - end
+
+        // SS220-BonusForFullyDiscovered - end
     }
 
     private ArtifactNode? GetNewNode(EntityUid uid, ArtifactComponent component)
@@ -315,7 +316,7 @@ public sealed partial class ArtifactSystem : EntitySystem
         return allNodes.First(n => n.Depth == 0);
     }
 
-    /// SS220-BonusForFullyDiscovered - start
+    // SS220-BonusForFullyDiscovered - start
     private void SpawnBonus(EntityUid uid, ArtifactComponent component)
     {
         if (component.BonusProtype == null)
@@ -329,11 +330,11 @@ public sealed partial class ArtifactSystem : EntitySystem
         var protoUid = (EntityUid)protoEnt;
 
         var xform = Transform(protoUid);
-        var throwing = xform.LocalRotation.ToWorldVec() * 5f; /// magic number throwing force
+        var throwing = xform.LocalRotation.ToWorldVec() * 5f; // magic number throwing force
         var direction = xform.Coordinates.Offset(throwing);
 
         _throwing.TryThrow(protoUid, direction);
     }
 
-    /// SS220-BonusForFullyDiscovered - end
+    // SS220-BonusForFullyDiscovered - end
 }

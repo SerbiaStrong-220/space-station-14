@@ -96,13 +96,15 @@ public sealed partial class ArtifactComponent : Component
 
     [DataField("activateActionEntity")] public EntityUid? ActivateActionEntity;
 
-    /// SS220-BonusForFullyDiscovered - start
-    [ViewVariables]
-    public bool IsBonusNotIssued = true;
+    // SS220-BonusForFullyDiscovered - start
 
-    [DataField("bonusProtype", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+    [ViewVariables]
+    public bool IsBonusIssued = false;
+
+    [DataField, ViewVariables]
     public List<string>? BonusProtype;
-    /// SS220-BonusForFullyDiscovered - end
+
+    // SS220-BonusForFullyDiscovered - end
 
 }
 
