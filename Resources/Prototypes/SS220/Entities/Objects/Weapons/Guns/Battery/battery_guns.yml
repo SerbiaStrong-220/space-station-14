@@ -19,6 +19,9 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/synergistic_enetgy_gun.rsi
   - type: Gun
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 24.5
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: RedLightLaser
