@@ -1,4 +1,4 @@
-ent-BlueprintBeltChiefEngineer = чертёж пояса СИ
+ent-BlueprintBeltChiefEngineer = чертёж пояса Старшего Инженера
     .desc = Чертёж какого-то устройства. Его можно поместить в автолат.
 
 ent-BlueprintSuperSynthesizerInstrument = чертёж супер синтезатора
