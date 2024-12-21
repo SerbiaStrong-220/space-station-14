@@ -23,11 +23,13 @@
     fireModes:
     - proto: BulletDisablerSmg
       name: firemode-name-disabler-alt
-      fireCost: 65
+      gunModifiers:
+        fireCost: 65
       magState: disabler-mag
     - proto: BulletBlasterAlt
       name: firemode-name-laser-alt
-      fireCost: 100
+      gunModifiers:
+        fireCost: 100
       magState: laser-mag
   - type: MagazineVisuals
     magState: disabler-mag
