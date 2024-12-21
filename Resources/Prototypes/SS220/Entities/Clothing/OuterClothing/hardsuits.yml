@@ -65,8 +65,8 @@
 - type: entity
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitHightBlueshield
-  name: blueshield's hight hardsuit
-  description: hight higt hight
+  name: hight hardsuit "Blue Shield"
+  description: A special spacesuit designed for Blue Shield operatives. It will even protect you from a nuclear explosion!
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_hight.rsi
