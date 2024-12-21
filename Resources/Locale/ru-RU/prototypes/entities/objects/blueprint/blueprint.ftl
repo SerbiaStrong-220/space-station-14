@@ -40,7 +40,7 @@ ent-BlueprintSawAdvanced = чертёж улучшенной циркулярн�
 ent-BlueprintGlowstickBlue = чертёж синего химсвета
     .desc = Чертёж какого-то устройства. Его можно поместить в автолат.
 
-ent-BlueprintSyndicateMicrowaveMachineCircuitboard = чертёж микроволновки Donk co
+ent-BlueprintSyndicateMicrowaveMachineCircuitboard = чертёж платы микроволновки Donk co.
     .desc = Чертёж какого-то устройства. Его можно поместить в автолат.
 
 ent-BlueprintPowerCellHyperPrinted = чертёж батареи гипер ёмкости
