@@ -150,7 +150,7 @@
 - type: loadoutGroup
   id: BlueShieldGlasses
   name: loadout-group-blueshield-glasses
-  minLimit: 0
+  minLimit: 1
   loadouts:
   - BlueshieldGlasses
   - BlueshieldTacticGlasses
