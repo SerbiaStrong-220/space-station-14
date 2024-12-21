@@ -12,4 +12,4 @@ ent-ClothingShoesBootsBlueShieldJack = подкованные сапоги
         .desc = Защитные боевые ботинки для боевых сценариев или боевых ситуаций. Все время в бою.
 ent-ClothingShoesBootsBlueShieldJackFilled = { ent-ClothingShoesBootsBlueShieldJack }
         .suffix = Синий Щит, Заполненный
-        .desc = Защитные боевые ботинки для боевых сценариев или боевых ситуаций. Все время в бою.
+        .desc = { ent-ClothingShoesBootsBlueShieldJack.desc }
