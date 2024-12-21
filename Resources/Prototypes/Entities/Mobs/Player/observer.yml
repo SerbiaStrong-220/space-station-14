@@ -70,6 +70,11 @@
   - type: ActiveRadio
     receiveAllChannels: true
     globalReceive: true
+  # SS220 telepathy begin
+  - type: Telepathy
+    canSend: false
+    receiveAllChannels: true
+  # SS220 telepathy end
   - type: Tag
     tags:
     - BypassInteractionRangeChecks

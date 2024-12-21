@@ -45,6 +45,9 @@
   radioBold: true
   accessGroups:
   - AllAccess
+  access:
+  - CentralCommandGSN
+  - CentralCommand
 
 - type: startingGear
   id: CentcomOperativeSRTGear

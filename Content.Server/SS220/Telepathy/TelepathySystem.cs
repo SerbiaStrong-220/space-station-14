@@ -50,7 +50,8 @@ public sealed class TelepathySystem : EntitySystem
 
     private void OnTelepathySend(Entity<TelepathyComponent> ent, ref TelepathySendEvent args)
     {
-        SendMessageToEveryoneWithRightChannel(ent.Comp.TelepathyChannelPrototype, args.Message, ent);
+        if (ent.Comp.TelepathyChannelPrototype is { } telepathyChannel)
+            SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
     }
 
     /// <summary>
@@ -118,7 +119,7 @@ public sealed class TelepathySystem : EntitySystem
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
-            if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype)
+            if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
                 SendMessageToChat(receiverUid, message, senderUid, channelParameters);
         }
     }

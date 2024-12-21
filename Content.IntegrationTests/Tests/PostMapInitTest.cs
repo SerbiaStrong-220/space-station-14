@@ -69,6 +69,9 @@ namespace Content.IntegrationTests.Tests
             "Train",
             "Oasis",
             "Cog",
+            "Gate",
+            "Amber",
+            "Loop",
 
             // SS220 Maps
             "Frankenstein",

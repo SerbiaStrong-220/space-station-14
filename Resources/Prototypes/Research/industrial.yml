@@ -42,6 +42,7 @@
   recipeUnlocks:
   - PowerCellHigh
   - TurboItemRechargerCircuitboard
+  - SMESAdvancedMachineCircuitboard
 
 - type: technology
   id: MechanicalCompression
@@ -135,6 +136,12 @@
   recipeUnlocks:
   - ShuttleConsoleCircuitboard
   - ThrusterMachineCircuitboard
+  # SS220 engineering-update-thruster begin
+  - ThrusterShuntingMachineCircuitboard
+  - ThrusterBigLeftMachineCircuitboard
+  - ThrusterBigRightMachineCircuitboard
+  - ThrusterBigCenterMachineCircuitboard
+  # SS220 engineering-update-thruster end
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
 

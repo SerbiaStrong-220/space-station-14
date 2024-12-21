@@ -540,6 +540,12 @@
       - PowerCageRechargerCircuitboard
       - EmitterCircuitboard
       - ThrusterMachineCircuitboard
+      # SS220 engineering-update-thruster begin
+      - ThrusterShuntingMachineCircuitboard
+      - ThrusterBigLeftMachineCircuitboard
+      - ThrusterBigRightMachineCircuitboard
+      - ThrusterBigCenterMachineCircuitboard
+      # SS220 engineering-update-thruster end
       - GyroscopeMachineCircuitboard
       - MiniGravityGeneratorCircuitboard
       - Thermoelectricgenerator #ss220 thermoelectric generator board
@@ -559,6 +565,7 @@
       - MassMediaCircuitboard
       - ReagentGrinderIndustrialMachineCircuitboard
       - JukeboxCircuitBoard
+      - SMESAdvancedMachineCircuitboard
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - ShuttleGunDusterCircuitboard
@@ -1308,7 +1315,7 @@
       staticRecipes:
         - SheetSteel
         - SheetGlass1
-        - SheetRGlass
+        - SheetRGlassRaw
         - SheetPlasma1
         - SheetPGlass1
         - SheetRPGlass1
@@ -1334,7 +1341,7 @@
     staticRecipes:
       - SheetSteel
       - SheetGlass1
-      - SheetRGlass
+      - SheetRGlassRaw
       - SheetPlasma1
       - SheetPGlass1
       - SheetRPGlass1
