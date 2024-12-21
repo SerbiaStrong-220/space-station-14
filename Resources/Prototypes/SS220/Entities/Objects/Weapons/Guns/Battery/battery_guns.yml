@@ -26,7 +26,7 @@
       fireCost: 24.5
       gunModifiers:
         soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-        fireRate: 5
+        fireRate: 4
       magState: laser-mag
     - proto: PulseEnhanced
       name: firemode-name-enhanced
@@ -36,7 +36,7 @@
         fireRate: 1.5
       magState: enhanced-mag
   - type: ProjectileBatteryAmmoProvider
-    proto: RedLightLaser
+    proto: PulseEnhanced
     fireCost: 24.5
   - type: MagazineVisuals
     magState: laser-mag
